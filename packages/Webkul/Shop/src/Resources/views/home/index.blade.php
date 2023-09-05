@@ -1,5 +1,3 @@
-@extends('shop::layouts.master')
-
 @php
     $channel = core()->getCurrentChannel();
 
@@ -16,38 +14,69 @@
     }
 @endphp
 
-@section('page_title')
-    {{ isset($metaTitle) ? $metaTitle : "" }}
-@endsection
 
-@section('head')
+{{-- SEO Meta Content --}}
+@push ('meta')
+    <meta name="title" content="{{ $metaTitle }}" />
 
-    @if (isset($homeSEO))
-        @isset($metaTitle)
-            <meta name="title" content="{{ $metaTitle }}" />
-        @endisset
+    <meta name="description" content="{{ $metaDescription }}" />
 
-        @isset($metaDescription)
-            <meta name="description" content="{{ $metaDescription }}" />
-        @endisset
+    <meta name="keywords" content="{{ $metaKeywords }}" />
+@endPush
 
-        @isset($metaKeywords)
-            <meta name="keywords" content="{{ $metaKeywords }}" />
-        @endisset
-    @endif
-@endsection
+<x-shop::layouts>
+    {{-- Page Title --}}
+    <x-slot:title>
+        {{ $metaTitle ?? "" }}
+    </x-slot>
+    
+    {{-- Loop over the theme customization --}}
+    @foreach ($customizations as $customization)
+        @php ($data = $customization->options)
 
-@section('content-wrapper')
-    {!! view_render_event('bagisto.shop.home.content.before') !!}
+        {{-- Static content --}}
+        @switch ($customization->type)
+            {{-- Image Carousel --}}
+            @case ($customization::IMAGE_CAROUSEL)
+                <x-shop::carousel :options="$data"></x-shop::carousel>
 
-    @if (! is_null($channel->home_page_content))
-        {!! Blade::render($channel->home_page_content) !!}
-    @else
-        @include('shop::home.slider', ['sliderData' => $sliderData])
-        @include('shop::home.featured-products')
-        @include('shop::home.new-products')
-    @endif
+                @break
 
-    {{ view_render_event('bagisto.shop.home.content.after') }}
+            @case ($customization::STATIC_CONTENT)
+                {{-- push style --}}
+                @push ('styles')
+                    <style>
+                        {{ $data['css'] }}
+                    </style>
+                @endpush
 
-@endsection
+                {{-- render html --}}
+                {!! $data['html'] !!}
+
+                @break
+
+            @case ($customization::CATEGORY_CAROUSEL)
+                {{-- Categories carousel --}}
+                <x-shop::categories.carousel
+                    :title="$data['title'] ?? ''"
+                    :src="route('shop.api.categories.index', $data['filters'] ?? [])"
+                    :navigation-link="route('shop.home.index')"
+                >
+                </x-shop::categories.carousel>
+
+                @break
+
+            @case ($customization::PRODUCT_CAROUSEL)
+                {{-- Product Carousel --}}
+                <x-shop::products.carousel
+                    {{-- title="Men's Collections" --}}
+                    :title="$data['title'] ?? ''"
+                    :src="route('shop.api.products.index', $data['filters'] ?? [])"
+                    :navigation-link="route('shop.home.index')"
+                >
+                </x-shop::products.carousel>
+
+                @break
+        @endswitch
+    @endforeach
+</x-shop::layouts>

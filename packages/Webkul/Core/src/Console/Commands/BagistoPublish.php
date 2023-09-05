@@ -50,10 +50,6 @@ class BagistoPublish extends Command
             'provider' => \Webkul\Product\Providers\ProductServiceProvider::class,
         ],
         [
-            'name'     => 'Velocity',
-            'provider' => \Webkul\Velocity\Providers\VelocityServiceProvider::class,
-        ],
-        [
             'name'     => 'Booking Product',
             'provider' => \Webkul\BookingProduct\Providers\BookingProductServiceProvider::class,
         ],

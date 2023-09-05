@@ -1,45 +1,24 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    <x-slot:title>
+        @lang('admin::app.marketing.promotions.cart-rules.index.title')
+    </x-slot:title>
 
-@section('page_title')
-    {{ __('admin::app.promotions.cart-rules.title') }}
-@stop
+    <div class="flex gap-[16px] justify-between items-center mt-3 max-sm:flex-wrap">
+        <p class="text-[20px] text-gray-800 font-bold">
+            @lang('admin::app.marketing.promotions.cart-rules.index.title')
+        </p>
 
-@section('content')
-    <div class="content">
-        @php
-            $customer_group = core()->getRequestedCustomerGroupCode();
-
-            $channel = core()->getRequestedChannelCode(false);
-        @endphp
-
-        <div class="page-header">
-            <div class="page-title">
-                <h1>{{ __('admin::app.promotions.cart-rules.title') }}</h1>
-            </div>
-
-            <div class="page-action">
-                @if (bouncer()->hasPermission('marketing.promotions.cart-rules.create'))
-                    <a href="{{ route('admin.cart_rules.create') }}" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.promotions.cart-rules.add-title') }}
-                    </a>
-                @endif
-            </div>
-        </div>
-
-        <div class="page-content">
-            <datagrid-plus src="{{ route('admin.cart_rules.index') }}"></datagrid-plus>
+        <div class="flex gap-x-[10px] items-center">
+            @if (bouncer()->hasPermission('marketing.promotions.cart-rules.create'))
+                <a 
+                    href="{{ route('admin.marketing.promotions.cart_rules.create') }}"
+                    class="primary-button"
+                >
+                    @lang('admin::app.marketing.promotions.cart-rules.index.create-btn')
+                </a>
+            @endif
         </div>
     </div>
-@endsection
-
-@push('scripts')
-    <script>
-        function reloadPage(getVar, getVal) {
-            let url = new URL(window.location.href);
-            
-            url.searchParams.set(getVar, getVal);
-
-            window.location.href = url.href;
-        }
-    </script>
-@endpush
+    
+    <x-admin::datagrid src="{{ route('admin.marketing.promotions.cart_rules.index') }}"></x-admin::datagrid>
+</x-admin::layouts>

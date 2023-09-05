@@ -3,8 +3,8 @@
 namespace Webkul\Checkout\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Webkul\Core\Contracts\Validations\AlphaNumericSpace;
-use Webkul\Core\Contracts\Validations\PhoneNumber;
+use Webkul\Core\Rules\AlphaNumericSpace;
+use Webkul\Core\Rules\PhoneNumber;
 
 class CustomerAddressForm extends FormRequest
 {
@@ -85,7 +85,8 @@ class CustomerAddressForm extends FormRequest
             "{$addressType}.first_name" => ['required', new AlphaNumericSpace],
             "{$addressType}.last_name"  => ['required', new AlphaNumericSpace],
             "{$addressType}.email"      => ['required'],
-            "{$addressType}.address1"   => ['required'],
+            "{$addressType}.address1"   => ['required', 'array', 'min:1'],
+            "{$addressType}.address1.*" => ['string'],
             "{$addressType}.city"       => ['required'],
             "{$addressType}.country"    => [new AlphaNumericSpace],
             "{$addressType}.state"      => [new AlphaNumericSpace],

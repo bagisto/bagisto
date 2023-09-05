@@ -13,12 +13,8 @@ class Payment
      */
     public function getSupportedPaymentMethods()
     {
-        $paymentMethods = $this->getPaymentMethods();
-
         return [
-            'jump_to_section' => 'payment',
-            'paymentMethods'  => $paymentMethods,
-            'html'            => view('shop::checkout.onepage.payment', compact('paymentMethods'))->render(),
+            'paymentMethods'  => $this->getPaymentMethods()
         ];
     }
 

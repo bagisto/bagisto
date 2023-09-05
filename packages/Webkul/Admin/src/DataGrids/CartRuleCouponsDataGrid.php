@@ -3,36 +3,28 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class CartRuleCouponsDataGrid extends DataGrid
 {
     /**
-     * Index.
-     *
-     * @var string
-     */
-    protected $index = 'id';
-
-    /**
-     * Sort order.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
-
-    /**
      * Prepare query builder.
      *
-     * @return void
+     * @return \Illuminate\Database\Query\Builder
      */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('cart_rules')
             ->select('id')
-            ->addSelect('id', 'code', 'limit', 'usage_per_customer', 'usage_throttle');
+            ->addSelect(
+                'id',
+                'code',
+                'limit',
+                'usage_per_customer',
+                'usage_throttle'
+            );
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
     /**
@@ -40,15 +32,15 @@ class CartRuleCouponsDataGrid extends DataGrid
      *
      * @return void
      */
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'id',
             'label'      => trans('admin::app.datagrid.id'),
-            'type'       => 'number',
+            'type'       => 'integer',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -56,8 +48,8 @@ class CartRuleCouponsDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.code'),
             'type'       => 'string',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -65,8 +57,8 @@ class CartRuleCouponsDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.limit'),
             'type'       => 'string',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -74,8 +66,8 @@ class CartRuleCouponsDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.limit'),
             'type'       => 'string',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -83,13 +75,13 @@ class CartRuleCouponsDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.usage-per-customer'),
             'type'       => 'boolean',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
             'closure'    => function ($value) {
                 if ($value->end_other_rules) {
                     return trans('admin::app.datagrid.true');
                 }
-                
+
                 return trans('admin::app.datagrid.false');
             },
         ]);

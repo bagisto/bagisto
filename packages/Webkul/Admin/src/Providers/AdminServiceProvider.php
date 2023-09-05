@@ -3,9 +3,9 @@
 namespace Webkul\Admin\Providers;
 
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Webkul\Admin\Http\Middleware\Locale;
 use Webkul\Core\Tree;
 
 class AdminServiceProvider extends ServiceProvider
@@ -23,7 +23,7 @@ class AdminServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'admin');
 
-        $this->loadPublishers();
+        Blade::anonymousComponentPath(__DIR__ . '/../Resources/views/components', 'admin');
 
         $this->composeView();
 
@@ -66,25 +66,17 @@ class AdminServiceProvider extends ServiceProvider
     }
 
     /**
-     * Load publishers.
-     *
-     * @return void
-     */
-    protected function loadPublishers(): void
-    {
-        $this->publishes([__DIR__ . '/../Resources/lang' => lang_path('vendor/admin')]);
-
-        $this->publishes([__DIR__ . '/../../publishable/assets' => public_path('vendor/webkul/admin/assets')], 'public');
-    }
-
-    /**
      * Bind the data to the views.
      *
      * @return void
      */
     protected function composeView()
     {
-        view()->composer(['admin::layouts.nav-left','admin::layouts.tabs','admin::layouts.mobile-nav'], function ($view) {
+        view()->composer([
+            'admin::components.layouts.header.index',
+            'admin::components.layouts.sidebar.index',
+            'admin::components.layouts.tabs',
+        ], function ($view) {
             $tree = Tree::create();
 
             $permissionType = auth()->guard('admin')->user()->role->permission_type;
@@ -129,22 +121,8 @@ class AdminServiceProvider extends ServiceProvider
             $view->with('menu', $tree);
         });
 
-        view()->composer(['admin::users.roles.create', 'admin::users.roles.edit'], function ($view) {
+        view()->composer(['admin::settings.roles.create', 'admin::settings.roles.edit'], function ($view) {
             $view->with('acl', $this->createACL());
-        });
-
-        view()->composer(['admin::catalog.products.create'], function ($view) {
-            $items = array();
-
-            foreach (config('product_types') as $item) {
-                $item['children'] = [];
-
-                array_push($items, $item);
-            }
-
-            $types = core()->sortItems($items);
-
-            $view->with('productTypes', $types);
         });
     }
 

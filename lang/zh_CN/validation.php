@@ -23,12 +23,14 @@ return [
     'array'                => '这个 :attribute 必须是一个数组.',
     'before'               => '这个 :attribute 必须是 :date 之前的日期.',
     'before_or_equal'      => '这个 :attribute 必须是早于或等于 :date 的日期.',
+
     'between'              => [
         'numeric' => '这个 :attribute 必须介于 :min 和 :max.',
         'file'    => '这个 :attribute 必须介于 :min 和 :max 千字节.',
         'string'  => '这个 :attribute 必须介于 :min 和 :max 字符.',
         'array'   => '这个 :attribute 必须介于 :min 和 :max 项目.',
     ],
+
     'boolean'              => '这个 :attribute 字段必须为真或假.',
     'confirmed'            => '这个 :attribute 确认不匹配.',
     'date'                 => '这个 :attribute 不是有效日期.',
@@ -42,18 +44,21 @@ return [
     'exists'               => '这个 已选择的 :attribute 是无效的.',
     'file'                 => '这个 :attribute 必须是文件.',
     'filled'               => '这个 :attribute 字段必须有值.',
+
     'gt'                   => [
         'numeric' => '这个 :attribute 必须大于 :value.',
         'file'    => '这个 :attribute 必须大于 :value 千字节.',
         'string'  => '这个 :attribute 必须大于 :value 字符.',
         'array'   => '这个 :attribute 必须有超过 :value 项目.',
     ],
+
     'gte'                  => [
         'numeric' => '这个 :attribute 必须大于或等于 :value.',
         'file'    => '这个 :attribute 必须大于或等于 :value 千字节.',
         'string'  => '这个 :attribute 必须大于或等于 :value 字符.',
         'array'   => '这个 :attribute 必须有 :value 项目或者更多.',
     ],
+
     'image'                => '这个 :attribute 必须是一张图片.',
     'in'                   => '这个 已选择的 :attribute 是无效的.',
     'in_array'             => '这个 :attribute 字段不存在于 :other.',
@@ -62,18 +67,21 @@ return [
     'ipv4'                 => '这个 :attribute 必须是有效的IPv4地址.',
     'ipv6'                 => '这个 :attribute 必须是有效的IPv6地址.',
     'json'                 => '这个 :attribute 必须是有效的JSON字符串.',
+
     'lt'                   => [
         'numeric' => '这个 :attribute 必须小于 :value.',
         'file'    => '这个 :attribute 必须小于 :value 千字节.',
         'string'  => '这个 :attribute 必须小于 :value 字符.',
         'array'   => '这个 :attribute 必须有少于 :value 项目.',
     ],
+
     'lte'                  => [
         'numeric' => '这个 :attribute 必须小于或等于 :value.',
         'file'    => '这个 :attribute 必须小于或等于 :value 千字节.',
         'string'  => '这个 :attribute 必须小于或等于 :value 字符.',
         'array'   => '这个 :attribute 不得超过 :value 项目.',
     ],
+
     'max'                  => [
         'numeric' => '这个 :attribute 不得大于 :max.',
         'file'    => '这个 :attribute 不得大于 :max 千字节.',
@@ -82,12 +90,14 @@ return [
     ],
     'mimes'                => '这个 :attribute 必须是文件类型: :values.',
     'mimetypes'            => '这个 :attribute 必须是文件类型: :values.',
+
     'min'                  => [
         'numeric' => '这个 :attribute 必须至少 :min.',
         'file'    => '这个 :attribute 必须至少 :min 千字节.',
         'string'  => '这个 :attribute 必须至少 :min 字符.',
         'array'   => '这个 :attribute 必须有至少 :min 项目.',
     ],
+
     'not_in'               => '这个 已选择的 :attribute 是无效的.',
     'not_regex'            => '这个 :attribute 格式是无效的.',
     'numeric'              => '这个 :attribute 必须是数字.',
@@ -101,12 +111,14 @@ return [
     'required_without'     => '这个 :attribute 字段是必需的当 :values 是不存在的.',
     'required_without_all' => '这个 :attribute 字段是必需的当 没有 :values 是存在的.',
     'same'                 => '这个 :attribute 和 :other 必须匹配.',
+
     'size'                 => [
         'numeric' => '这个 :attribute 必须是 :size.',
         'file'    => '这个 :attribute 必须是 :size 千字节.',
         'string'  => '这个 :attribute 必须是 :size 字符.',
         'array'   => '这个 :attribute 必须包含 :size 项目.',
     ],
+
     'string'               => '这个 :attribute 必须是 一个字符串.',
     'timezone'             => '这个 :attribute 必须是 有效区域.',
     'unique'               => '这个 :attribute 已有人带走了.',

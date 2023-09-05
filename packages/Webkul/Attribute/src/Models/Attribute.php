@@ -25,6 +25,7 @@ class Attribute extends TranslatableModel implements AttributeContract
         'is_required',
         'is_unique',
         'validation',
+        'regex',
         'value_per_locale',
         'value_per_channel',
         'is_filterable',
@@ -93,5 +94,45 @@ class Attribute extends TranslatableModel implements AttributeContract
     protected function getColumnNameAttribute()
     {
         return $this->attributeTypeFields[$this->type];
+    }
+
+    /**
+     * Returns attribute validation rules
+     *
+     * @return string
+     */
+    protected function getValidationsAttribute()
+    {
+        $validations = [];
+        
+        if ($this->is_required) {
+            $validations[] = 'required: true';
+        }
+
+        if ($this->type == 'price') {
+            $validations[] = 'decimal: true';
+        }
+
+        if ($this->type == 'file') {
+            $retVal = core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') ?? '2048';
+
+            $validations[] = 'size:' . $retVal;
+        }
+
+        if ($this->type == 'image') {
+            $retVal = core()->getConfigData('catalog.products.attribute.image_attribute_upload_size') ?? '2048';
+
+            $validations[] = 'size:' . $retVal . '|mimes:bmp,jpeg,jpg,png,webp';
+        }
+
+        if ($this->validation == 'regex') {
+            $validations[] = 'regex: ' . $this->regex;
+        } elseif ($this->validation) {
+            $validations[] = $this->validation . ': true';
+        }
+
+        $validations = '{ '. implode(', ', array_filter($validations)) . ' }';
+
+        return $validations;
     }
 }

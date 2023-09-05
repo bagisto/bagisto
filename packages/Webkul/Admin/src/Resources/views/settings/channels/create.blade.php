@@ -1,260 +1,555 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    {{-- Page Title --}}
+    <x-slot:title>
+        @lang('admin::app.settings.channels.create.title')
+    </x-slot:title>
 
-@section('page_title')
-    {{ __('admin::app.settings.channels.add-title') }}
-@stop
+    <x-admin::form  action="{{ route('admin.settings.channels.store') }}" enctype="multipart/form-data">
+        <div class="flex justify-between items-center">
+            <p class="text-[20px] text-gray-800 font-bold">
+                @lang('admin::app.settings.channels.create.title')
+            </p>
 
-@section('content')
-    <div class="content">
+            <div class="flex gap-x-[10px] items-center">
+                {{-- Cancel Button --}}
+                <a
+                    href="{{ route('admin.settings.channels.index') }}"
+                    class="transparent-button hover:bg-gray-200"
+                >
+                    @lang('admin::app.settings.channels.create.cancel')
+                </a>
 
-        <form method="POST" action="{{ route('admin.channels.store') }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
-            <div class="page-header">
-                <div class="page-title">
-                    <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.channels.index') }}'"></i>
+                {{-- Save Button --}}
+                <button 
+                    type="submit" 
+                    class="primary-button"
+                >
+                    @lang('admin::app.settings.channels.create.save-btn')
+                </button>
+            </div>
+        </div>
+        {{-- body content --}}
+        <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+            {{-- Left sub-component --}}
+            <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                {{-- General Information --}}
+                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                        @lang('admin::app.settings.channels.create.general')
+                    </p>
+                    <div class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label class="required">
+                                @lang('admin::app.settings.channels.create.code')
+                            </x-admin::form.control-group.label>
 
-                        {{ __('admin::app.settings.channels.add-title') }}
-                    </h1>
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="code"
+                                :value="old('code')"
+                                id="code"
+                                rules="required"
+                                :label="trans('admin::app.settings.channels.create.code')"
+                                :placeholder="trans('admin::app.settings.channels.create.code')"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="code"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label class="required">
+                                @lang('admin::app.settings.channels.create.name')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="name"
+                                :value="old('name')"
+                                id="name"
+                                rules="required"
+                                :label="trans('admin::app.settings.channels.create.name')"
+                                :placeholder="trans('admin::app.settings.channels.create.name')"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="name"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.settings.channels.create.description')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="textarea"
+                                name="description"
+                                :value="old('description')"
+                                id="description"
+                                :label="trans('admin::app.settings.channels.create.description')"
+                                :placeholder="trans('admin::app.settings.channels.create.description')"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="description"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <div class="mb-[10px]">
+                            <p class="required block leading-[24px] text-[12px] text-gray-800 font-medium">
+                                @lang('admin::app.settings.channels.create.inventory-sources')
+                            </p>
+
+                            @foreach (app('Webkul\Inventory\Repositories\InventorySourceRepository')->findWhere(['status' => 1]) as $inventorySource)
+                                <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        name="inventory_sources[]"
+                                        :value="$inventorySource->id "
+                                        :id="'inventory_sources_' . $inventorySource->id"
+                                        :for="'inventory_sources_' . $inventorySource->id"
+                                        rules="required"
+                                        :label="trans('admin::app.settings.channels.create.inventory-sources')"
+                                    >
+                                    </x-admin::form.control-group.control>
+                                        
+                                    <x-admin::form.control-group.label 
+                                        :for="'inventory_sources_' . $inventorySource->id"
+                                        class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
+                                    >
+                                        {{ $inventorySource->name }}
+                                    </x-admin::form.control-group.label>
+
+                                </x-admin::form.control-group>
+                            @endforeach 
+
+                            <x-admin::form.control-group.error
+                                control-name="inventory_sources[]"
+                            >
+                            </x-admin::form.control-group.error>
+                        </div>
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label class="required">
+                                @lang('admin::app.settings.channels.create.root-category')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="select"
+                                name="root_category_id"
+                                :value="old('root_category_id')"
+                                id="root_category_id"
+                                rules="required"
+                                :label="trans('admin::app.settings.channels.create.root-category')"
+                            >
+                                @foreach (app('Webkul\Category\Repositories\CategoryRepository')->getRootCategories() as $category)
+                                    <option value="{{ $category->id }}" {{ old('root_category_id') == $category->id ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="root_category_id"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.settings.channels.create.hostname')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="hostname"
+                                :value="old('hostname')"
+                                id="hostname"
+                                :label="trans('admin::app.settings.channels.create.hostname')"
+                                :placeholder="trans('admin::app.settings.channels.create.hostname-placeholder')"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="hostname"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+                    </div>
                 </div>
 
-                <div class="page-action">
-                    <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.settings.channels.save-btn-title') }}
-                    </button>
+                {{-- Logo and Design --}}
+                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                        @lang('admin::app.settings.channels.create.design')
+                    </p>
+
+                    <div class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.settings.channels.create.theme')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="select"
+                                name="theme"
+                                :value="old('theme')"
+                                id="theme"
+                                :label="trans('admin::app.settings.channels.create.theme')"
+                            >
+                                @foreach (config('themes.themes') as $themeCode => $theme)
+                                    <option value="{{ $themeCode }}" {{ old('theme') == $themeCode ? 'selected' : '' }}>
+                                        {{ $theme['name'] }}
+                                    </option>
+                                @endforeach
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="theme"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <div class="flex justify-between">
+                            <div class="flex flex-col w-[40%]">
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.channels.create.logo')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::media.images
+                                        name="logo"
+                                        width="220px"
+                                    >
+                                    </x-admin::media.images>
+                                </x-admin::form.control-group>
+                                <p class="text-[12px] text-gray-600">
+                                    @lang('admin::app.settings.channels.create.logo-size')
+                                </p>
+                            </div>
+
+                            <div class="flex flex-col w-[40%]">
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.channels.create.favicon')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::media.images
+                                        name="favicon"
+                                        width="220px"
+                                    >
+                                    </x-admin::media.images>
+                                </x-admin::form.control-group>
+                                <p class="text-[12px] text-gray-600">
+                                    @lang('admin::app.settings.channels.create.favicon-size')
+                                </p>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+
+                {{-- Home Page SEO --}} 
+                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                        @lang('admin::app.settings.channels.create.seo')
+                    </p>
+
+                    {{-- SEO Title & Description Blade Componnet --}}
+                    <x-admin::seo/>
+
+                    <div class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label class="required">
+                                @lang('admin::app.settings.channels.create.seo-title')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="seo_title" 
+                                :value="old('seo_title')"
+                                id="meta_title"
+                                rules="required"
+                                :label="trans('admin::app.settings.channels.create.seo-title')"
+                                :placeholder="trans('admin::app.settings.channels.create.seo-title')"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="seo_title"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label class="required">
+                                @lang('admin::app.settings.channels.create.seo-keywords')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="textarea"
+                                name="seo_keywords"
+                                :value="old('seo_keywords') "
+                                id="seo_keywords"
+                                rules="required"
+                                :label="trans('admin::app.settings.channels.create.seo-keywords')"
+                                :placeholder="trans('admin::app.settings.channels.create.seo-keywords')"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="seo_keywords"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label class="required">
+                                @lang('admin::app.settings.channels.create.seo-description')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="textarea"
+                                name="seo_description"
+                                :value="old('seo_description')"
+                                id="meta_description"
+                                rules="required"
+                                :label="trans('admin::app.settings.channels.create.seo-description')"
+                                :placeholder="trans('admin::app.settings.channels.create.seo-description')"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="seo_description"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+                    </div>
                 </div>
             </div>
-
-            <div class="page-content">
-                <div class="form-container">
-                    @csrf()
-
-                    {!! view_render_event('bagisto.admin.settings.channel.create.before') !!}
-
-                    {{-- general --}}
-                    <accordian title="{{ __('admin::app.settings.channels.general') }}" :active="true">
-                        <div slot="body">
-
-                            <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
-                                <label for="code" class="required">{{ __('admin::app.settings.channels.code') }}</label>
-                                <input v-validate="'required'" class="control" id="code" name="code" value="{{ old('code') }}" data-vv-as="&quot;{{ __('admin::app.settings.channels.code') }}&quot;" v-code/>
-                                <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
-                            </div>
-
-                            <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
-                                <label for="name" class="required">{{ __('admin::app.settings.channels.name') }}</label>
-                                <input v-validate="'required'" class="control" id="name" name="name" data-vv-as="&quot;{{ __('admin::app.settings.channels.name') }}&quot;" value="{{ old('name') }}"/>
-                                <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
-                            </div>
-
-                            <div class="control-group">
-                                <label for="description">{{ __('admin::app.settings.channels.description') }}</label>
-                                <textarea class="control" id="description" name="description">{{ old('description') }}</textarea>
-                            </div>
-
-                            <div class="control-group" :class="[errors.has('inventory_sources[]') ? 'has-error' : '']">
-                                <label for="inventory_sources" class="required">{{ __('admin::app.settings.channels.inventory_sources') }}</label>
-                                <select v-validate="'required'" class="control" id="inventory_sources" name="inventory_sources[]" data-vv-as="&quot;{{ __('admin::app.settings.channels.inventory_sources') }}&quot;" multiple>
-                                    @foreach (app('Webkul\Inventory\Repositories\InventorySourceRepository')->findWhere(['status' => 1]) as $inventorySource)
-                                        <option value="{{ $inventorySource->id }}" {{ old('inventory_sources') && in_array($inventorySource->id, old('inventory_sources')) ? 'selected' : '' }}>
-                                            {{ $inventorySource->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                <span class="control-error" v-if="errors.has('inventory_sources[]')">@{{ errors.first('inventory_sources[]') }}</span>
-                            </div>
-
-                            <div class="control-group" :class="[errors.has('root_category_id') ? 'has-error' : '']">
-                                <label for="root_category_id" class="required">{{ __('admin::app.settings.channels.root-category') }}</label>
-                                <select v-validate="'required'" class="control" id="root_category_id" name="root_category_id" data-vv-as="&quot;{{ __('admin::app.settings.channels.root-category') }}&quot;">
-                                    @foreach (app('Webkul\Category\Repositories\CategoryRepository')->getRootCategories() as $category)
-                                        <option value="{{ $category->id }}" {{ old('root_category_id') == $category->id ? 'selected' : '' }}>
-                                            {{ $category->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                <span class="control-error" v-if="errors.has('root_category_id')">@{{ errors.first('root_category_id') }}</span>
-                            </div>
-
-                            <div class="control-group"  :class="[errors.has('hostname') ? 'has-error' : '']">
-                                <label for="hostname">{{ __('admin::app.settings.channels.hostname') }}</label>
-                                <input class="control" v-validate="''" id="hostname" name="hostname" value="{{ old('hostname') }}" placeholder="{{ __('admin::app.settings.channels.hostname-placeholder') }}"/>
-
-                                <span class="control-error" v-if="errors.has('hostname')">@{{ errors.first('hostname') }}</span>
-                            </div>
-
+            {{-- Right sub-component --}}
+            <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+                {{-- component 1 --}}
+                <x-admin::accordion>
+                    <x-slot:header>
+                        <div class="flex items-center justify-between">
+                            <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                @lang('admin::app.settings.channels.create.currencies-and-locales')
+                            </p>
                         </div>
-                    </accordian>
+                    </x-slot:header>
+            
+                    <x-slot:content>
+                        {{-- Locale  --}}
+                        <div class="mb-[10px]">
+                            <div class="mb-[10px]">
+                                <p class="required block leading-[24px] text-gray-800 font-medium">
+                                    @lang('admin::app.settings.channels.create.locales')
+                                </p>
+                            
+                                @foreach (core()->getAllLocales() as $locale)
+                                    <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
+                                        <x-admin::form.control-group.control
+                                            type="checkbox"
+                                            name="locales[]"
+                                            :value="$locale->id"
+                                            :id="'locales_' . $locale->id"
+                                            :for="'locales_' . $locale->id"
+                                            rules="required"
+                                            :label="trans('admin::app.settings.channels.create.locales')"
+                                        >
+                                        </x-admin::form.control-group.control>
+                                            
+                                        <x-admin::form.control-group.label 
+                                            :for="'locales_' . $locale->id"
+                                            class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
+                                        >
+                                            {{ $locale->name }} 
+                                        </x-admin::form.control-group.label>
+                                
+                                    </x-admin::form.control-group>
+                                @endforeach
 
-                    {{-- currencies and locales --}}
-                    <accordian title="{{ __('admin::app.settings.channels.currencies-and-locales') }}" :active="true">
-                        <div slot="body">
-
-                            <div class="control-group" :class="[errors.has('locales[]') ? 'has-error' : '']">
-                                <label for="locales" class="required">{{ __('admin::app.settings.channels.locales') }}</label>
-                                <select v-validate="'required'" class="control" id="locales" name="locales[]" data-vv-as="&quot;{{ __('admin::app.settings.channels.locales') }}&quot;" multiple>
-                                    @foreach (core()->getAllLocales() as $locale)
-                                        <option value="{{ $locale->id }}" {{ old('locales') && in_array($locale->id, old('locales')) ? 'selected' : '' }}>
-                                            {{ $locale->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                <span class="control-error" v-if="errors.has('locales[]')">@{{ errors.first('locales[]') }}</span>
+                                <x-admin::form.control-group.error
+                                    control-name="locales[]"
+                                >
+                                </x-admin::form.control-group.error> 
                             </div>
 
-                            <div class="control-group" :class="[errors.has('default_locale_id') ? 'has-error' : '']">
-                                <label for="default_locale_id" class="required">{{ __('admin::app.settings.channels.default-locale') }}</label>
-                                <select v-validate="'required'" class="control" id="default_locale_id" name="default_locale_id" data-vv-as="&quot;{{ __('admin::app.settings.channels.default-locale') }}&quot;">
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.channels.create.default-locale')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="select"
+                                    name="default_locale_id"
+                                    :value="old('default_locale_id')"
+                                    id="default_locale_id"
+                                    rules="required"
+                                    :label="trans('admin::app.settings.channels.create.default-locale')"
+                                >
                                     @foreach (core()->getAllLocales() as $locale)
                                         <option value="{{ $locale->id }}" {{ old('default_locale_id') == $locale->id ? 'selected' : '' }}>
                                             {{ $locale->name }}
                                         </option>
                                     @endforeach
-                                </select>
-                                <span class="control-error" v-if="errors.has('default_locale_id')">@{{ errors.first('default_locale_id') }}</span>
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error
+                                    control-name="default_locale_id"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+
+                            <div class="mb-[10px]">
+                                <p class="required block leading-[24px] text-gray-800 font-medium">
+                                    @lang('admin::app.settings.channels.create.currencies')
+                                </p>
+                            
+                                @foreach (core()->getAllCurrencies() as $currency)
+                                    <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
+                                        <x-admin::form.control-group.control
+                                            type="checkbox"
+                                            name="currencies[]" 
+                                            :value="$currency->id"
+                                            :id="'currencies_' . $currency->id"
+                                            :for="'currencies_' . $currency->id"
+                                            rules="required"
+                                            :label="trans('admin::app.settings.channels.create.currencies')"
+                                        >
+                                        </x-admin::form.control-group.control>
+                                            
+                                        <x-admin::form.control-group.label 
+                                            :for="'currencies_' . $currency->id"
+                                            class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
+                                        >
+                                            {{ $currency->name }}  
+                                        </x-admin::form.control-group.label>
+
+                                        
+                                    </x-admin::form.control-group>
+                                @endforeach 
+                                
+                                <x-admin::form.control-group.error
+                                    control-name="currencies[]"
+                                >
+                                </x-admin::form.control-group.error>
                             </div>
 
-                            <div class="control-group" :class="[errors.has('currencies[]') ? 'has-error' : '']">
-                                <label for="currencies" class="required">{{ __('admin::app.settings.channels.currencies') }}</label>
-                                <select v-validate="'required'" class="control" id="currencies" name="currencies[]" data-vv-as="&quot;{{ __('admin::app.settings.channels.currencies') }}&quot;" multiple>
-                                    @foreach (core()->getAllCurrencies() as $currency)
-                                        <option value="{{ $currency->id }}" {{ old('currencies') && in_array($currency->id, old('currencies')) ? 'selected' : '' }}>
-                                            {{ $currency->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                <span class="control-error" v-if="errors.has('currencies[]')">@{{ errors.first('currencies[]') }}</span>
-                            </div>
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.channels.create.default-currency')
+                                </x-admin::form.control-group.label>
 
-                            <div class="control-group" :class="[errors.has('base_currency_id') ? 'has-error' : '']">
-                                <label for="base_currbase_currency_idency" class="required">{{ __('admin::app.settings.channels.base-currency') }}</label>
-                                <select v-validate="'required'" class="control" id="base_currency_id" name="base_currency_id" data-vv-as="&quot;{{ __('admin::app.settings.channels.base-currency') }}&quot;">
+                                <x-admin::form.control-group.control
+                                    type="select"
+                                    name="base_currency_id"
+                                    :value="old('base_currency_id')"
+                                    id="base_currency_id"
+                                    rules="required"
+                                    :label="trans('admin::app.settings.channels.create.default-currency')"
+                                >
                                     @foreach (core()->getAllCurrencies() as $currency)
                                         <option value="{{ $currency->id }}" {{ old('base_currency_id') == $currency->id ? 'selected' : '' }}>
                                             {{ $currency->name }}
                                         </option>
                                     @endforeach
-                                </select>
-                                <span class="control-error" v-if="errors.has('base_currency_id')">@{{ errors.first('base_currency_id') }}</span>
-                            </div>
+                                </x-admin::form.control-group.control>
 
+                                <x-admin::form.control-group.error
+                                    control-name="base_currency_id"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
                         </div>
-                    </accordian>
+                    </x-slot:content>
+                </x-admin::accordion>
 
-                    {{-- design --}}
-                    <accordian title="{{ __('admin::app.settings.channels.design') }}" :active="true">
-                        <div slot="body">
-                            <div class="control-group">
-                                <label for="theme">{{ __('admin::app.settings.channels.theme') }}</label>
-                                <select class="control" id="theme" name="theme">
-                                    @foreach (config('themes.themes') as $themeCode => $theme)
-                                        <option value="{{ $themeCode }}" {{ old('theme') == $themeCode ? 'selected' : '' }}>
-                                            {{ $theme['name'] }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="control-group">
-                                <label for="home_page_content">{{ __('admin::app.settings.channels.home_page_content') }}</label>
-                                <textarea class="control" id="home_page_content" name="home_page_content">{{ old('home_page_content') }}</textarea>
-                            </div>
-
-                            <div class="control-group">
-                                <label for="footer_content">{{ __('admin::app.settings.channels.footer_content') }}</label>
-                                <textarea class="control" id="footer_content" name="footer_content">{{ old('footer_content') }}</textarea>
-                            </div>
-
-                            <div class="control-group">
-                                <label>{{ __('admin::app.settings.channels.logo') }}</label>
-
-                                <image-wrapper button-label="{{ __('admin::app.catalog.products.add-image-btn-title') }}" input-name="logo" :multiple="false"></image-wrapper>
+                {{-- component 2 --}}
+                <x-admin::accordion>
+                    <x-slot:header>
+                        <div class="flex items-center justify-between">
+                            <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                @lang('admin::app.settings.channels.create.settings')
+                            </p>
+                        </div>
+                    </x-slot:header>
+            
+                    <x-slot:content>
+                        {{-- Maintenance Mode  --}}
+                        <div class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.channels.create.maintenance-mode-text')
+                                </x-admin::form.control-group.label>
                                 
-                                <span class="control-info mt-10">{{ __('admin::app.settings.channels.logo-size') }}</span>  
-                            </div>
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="maintenance_mode_text"
+                                    :value="old('maintenance_mode_text')"
+                                    id="maintenance-mode-text"
+                                    :label="trans('admin::app.settings.channels.create.maintenance-mode-text')"
+                                    :placeholder="trans('admin::app.settings.channels.create.maintenance-mode-text')"
+                                >
+                                </x-admin::form.control-group.control>
+                            
+                                <x-admin::form.control-group.error
+                                    control-name="maintenance_mode_text"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+                    
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label class="!text-gray-800">
+                                    @lang('admin::app.settings.channels.create.allowed-ips')
+                                </x-admin::form.control-group.label>
+                                
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="allowed_ips"
+                                    :value="old('allowed_ips')"
+                                    id="allowed-ips"
+                                    :label="trans('admin::app.settings.channels.create.allowed-ips')"
+                                    :placeholder="trans('admin::app.settings.channels.create.allowed-ips')"
+                                >
+                                </x-admin::form.control-group.control>
+                                
+                                <x-admin::form.control-group.error
+                                    control-name="allowed_ips"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
-                            <div class="control-group">
-                                <label>{{ __('admin::app.settings.channels.favicon') }}</label>
-
-                                <image-wrapper button-label="{{ __('admin::app.catalog.products.add-image-btn-title') }}" input-name="logo" :multiple="false"></image-wrapper>
-
-                                <span class="control-info mt-10">{{ __('admin::app.settings.channels.favicon-size') }}</span>     
-                            </div>
-
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.channels.create.status')
+                                </x-admin::form.control-group.label>
+                                <x-admin::form.control-group.control
+                                    type="switch"
+                                    name="is_maintenance_on"
+                                    :value="1"
+                                    id="maintenance-mode-status"
+                                    :checked="false"
+                                >
+                                </x-admin::form.control-group.control>
+    
+                                <x-admin::form.control-group.error
+                                    control-name="is_maintenance_on"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
                         </div>
-                    </accordian>
-
-                    {{-- home page seo --}}
-                    <accordian title="{{ __('admin::app.settings.channels.seo') }}" :active="true">
-                        <div slot="body">
-                            <div class="control-group" :class="[errors.has('seo_title') ? 'has-error' : '']">
-                                <label for="seo_title" class="required">{{ __('admin::app.settings.channels.seo-title') }}</label>
-                                <input v-validate="'required'" class="control" id="seo_title" name="seo_title" data-vv-as="&quot;{{ __('admin::app.settings.channels.seo-title') }}&quot;" value="{{ old('seo_title') }}"/>
-                                <span class="control-error" v-if="errors.has('seo_title')">@{{ errors.first('seo_title') }}</span>
-                            </div>
-
-                            <div class="control-group" :class="[errors.has('seo_description') ? 'has-error' : '']">
-                                <label for="seo_description" class="required">{{ __('admin::app.settings.channels.seo-description') }}</label>
-
-                                <textarea v-validate="'required'" class="control" id="seo_description" name="seo_description" data-vv-as="&quot;{{ __('admin::app.settings.channels.seo-description') }}&quot;" value="{{ old('seo_description') }}"></textarea>
-
-                                <span class="control-error" v-if="errors.has('seo_description')">@{{ errors.first('seo_description') }}</span>
-                            </div>
-
-                            <div class="control-group" :class="[errors.has('seo_keywords') ? 'has-error' : '']">
-                                <label for="seo_keywords" class="required">{{ __('admin::app.settings.channels.seo-keywords') }}</label>
-
-                                <textarea v-validate="'required'" class="control" id="seo_keywords" name="seo_keywords" data-vv-as="&quot;{{ __('admin::app.settings.channels.seo-keywords') }}&quot;" value="{{ old('seo_keywords') }}"></textarea>
-
-                                <span class="control-error" v-if="errors.has('seo_keywords')">@{{ errors.first('seo_keywords') }}</span>
-                            </div>
-                        </div>
-                    </accordian>
-
-                    {{-- maintenance mode --}}
-                    <accordian title="{{ __('admin::app.settings.channels.maintenance-mode') }}" :active="true">
-                        <div slot="body">
-                            <div class="control-group">
-                                <label for="maintenance-mode-status">{{ __('admin::app.status') }}</label>
-                                <label class="switch">
-                                    <input type="hidden" name="is_maintenance_on" value="0" />
-                                    <input type="checkbox" id="maintenance-mode-status" name="is_maintenance_on" value="1">
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-
-                            <div class="control-group">
-                                <label for="maintenance-mode-text">{{ __('admin::app.settings.channels.maintenance-mode-text') }}</label>
-                                <input class="control" id="maintenance-mode-text" name="maintenance_mode_text" value=""/>
-                            </div>
-
-                            <div class="control-group">
-                                <label for="allowed-ips">{{ __('admin::app.settings.channels.allowed-ips') }}</label>
-                                <input class="control" id="allowed-ips" name="allowed_ips" value=""/>
-                            </div>
-                        </div>
-                    </accordian>
-
-                    {!! view_render_event('bagisto.admin.settings.channel.create.after') !!}
-                </div>
+                    </x-slot:content>
+                </x-admin::accordion>
             </div>
-        </form>
-    </div>
-@stop
-
-@push('scripts')
-    @include('admin::layouts.tinymce')
-
-    <script>
-        $(document).ready(function () {
-            tinyMCEHelper.initTinyMCE({
-                selector: 'textarea#home_page_content,textarea#footer_content',
-                height: 200,
-                width: "100%",
-                plugins: 'image imagetools media wordcount save fullscreen code table lists link hr',
-                toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor link hr | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | code | table',
-                image_advtab: true,
-                valid_elements : '*[*]',
-            });
-        });
-    </script>
-@endpush
+        </div>
+    </x-admin::form> 
+</x-admin::layouts>

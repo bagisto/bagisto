@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('product_bundle_options', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('product_id')->unsigned();
             $table->string('type');
             $table->boolean('is_required')->default(1);
             $table->integer('sort_order')->default(0);
 
-            $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->increments('id');
             $table->string('name')->nullable();
             $table->string('description')->nullable();
-            $table->date('starts_from')->nullable();
-            $table->date('ends_till')->nullable();
+            $table->dateTime('starts_from')->nullable();
+            $table->dateTime('ends_till')->nullable();
             $table->boolean('status')->default(0);
             $table->integer('coupon_type')->default(1);
             $table->boolean('use_auto_generation')->default(0);

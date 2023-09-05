@@ -1,0 +1,461 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "bagisto-admin";
+    src: url("../fonts/bagisto-admin.woff?jwnnow") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+@layer components {
+    body {
+        @apply bg-gray-50;
+    }
+
+    .direction-ltr {
+        direction: ltr;
+    }
+
+    .direction-rtl {
+        direction: rtl;
+    }
+
+    .draggable-ghost {
+        opacity: 0.5;
+        background: #e0e7ff;
+    }
+
+    [class^="icon-"],
+    [class*=" icon-"] {
+        /* use !important to prevent issues with browser extensions that change fonts */
+        font-family: "bagisto-admin" !important;
+        speak: never;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+        color: #6b7280;
+
+        /* Better Font Rendering =========== */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .box-shadow {
+        @apply shadow-[0px_0px_0px_0px_rgba(0,0,0,0.03),0px_1px_1px_0px_rgba(0,0,0,0.03),0px_3px_3px_0px_rgba(0,0,0,0.03),0px_6px_4px_0px_rgba(0,0,0,0.02),0px_11px_4px_0px_rgba(0,0,0,0.00),0px_17px_5px_0px_rgba(0,0,0,0.00)] border-[1px] border-gray-300;
+    }
+
+    .icon-checkbox-partial:before {
+        content: "\e900";
+    }
+
+    .icon-uncheckbox:before {
+        content: "\e901";
+    }
+
+    .icon-add-customer:before {
+        content: "\e902";
+    }
+
+    .icon-arrow-down:before {
+        content: "\e903";
+    }
+
+    .icon-arrow-left:before {
+        content: "\e904";
+    }
+
+    .icon-arrow-right:before {
+        content: "\e905";
+    }
+
+    .icon-arrow-up:before {
+        content: "\e906";
+    }
+
+    .icon-attribute-block:before {
+        content: "\e907";
+    }
+
+    .icon-attribute:before {
+        content: "\e908";
+    }
+
+    .icon-calendar:before {
+        content: "\e909";
+    }
+
+    .icon-cancel-1:before {
+        content: "\e90a";
+    }
+
+    .icon-cancel:before {
+        content: "\e90b";
+    }
+
+    .icon-cart:before {
+        content: "\e90c";
+    }
+
+    .icon-checked:before {
+        content: "\e90d";
+    }
+
+    .icon-cms:before {
+        content: "\e90e";
+    }
+
+    .icon-configuration:before {
+        content: "\e90f";
+    }
+
+    .icon-cross:before {
+        content: "\e910";
+    }
+
+    .icon-customer-2:before {
+        content: "\e911";
+    }
+
+    .icon-customer:before {
+        content: "\e912";
+    }
+
+    .icon-dashboard:before {
+        content: "\e913";
+    }
+
+    .icon-delete:before {
+        content: "\e914";
+    }
+
+    .icon-done:before {
+        content: "\e915";
+    }
+
+    .icon-dot:before {
+        content: "\e916";
+    }
+
+    .icon-dots:before {
+        content: "\e917";
+    }
+
+    .icon-down-stat:before {
+        content: "\e918";
+    }
+
+    .icon-drag:before {
+        content: "\e919";
+    }
+
+    .icon-edit-save:before {
+        content: "\e91a";
+    }
+
+    .icon-edit:before {
+        content: "\e91b";
+    }
+
+    .icon-filter:before {
+        content: "\e91c";
+    }
+
+    .icon-folder-block:before {
+        content: "\e91d";
+    }
+
+    .icon-folder:before {
+        content: "\e91e";
+    }
+
+    .icon-image:before {
+        content: "\e91f";
+    }
+
+    .icon-information:before {
+        content: "\e920";
+    }
+
+    .icon-language:before {
+        content: "\e921";
+    }
+
+    .icon-location:before {
+        content: "\e922";
+    }
+
+    .icon-mail:before {
+        content: "\e923";
+    }
+
+    .icon-menu:before {
+        content: "\e924";
+    }
+
+    .icon-notification:before {
+        content: "\e925";
+    }
+
+    .icon-order-back:before {
+        content: "\e926";
+    }
+
+    .icon-printer:before {
+        content: "\e927";
+    }
+
+    .icon-processing:before {
+        content: "\e928";
+    }
+
+    .icon-product-1:before {
+        content: "\e929";
+    }
+
+    .icon-product:before {
+        content: "\e92a";
+    }
+
+    .icon-promotion:before {
+        content: "\e92b";
+    }
+
+    .icon-radio-normal:before {
+        content: "\e92c";
+    }
+
+    .icon-radio-selected:before {
+        content: "\e92d";
+    }
+
+    .icon-repeat:before {
+        content: "\e92e";
+    }
+
+    .icon-sales:before {
+        content: "\e92f";
+    }
+
+    .icon-search:before {
+        content: "\e930";
+    }
+
+    .icon-setting:before {
+        content: "\e931";
+    }
+
+    .icon-settings:before {
+        content: "\e932";
+    }
+
+    .icon-ship:before {
+        content: "\e933";
+    }
+
+    .icon-sort-down:before {
+        content: "\e934";
+    }
+
+    .icon-sort-left:before {
+        content: "\e935";
+    }
+
+    .icon-sort-right:before {
+        content: "\e936";
+    }
+
+    .icon-sort-up-down:before {
+        content: "\e937";
+    }
+
+    .icon-sort-up:before {
+        content: "\e938";
+    }
+
+    .icon-star:before {
+        content: "\e939";
+    }
+
+    .icon-store:before {
+        content: "\e93a";
+    }
+
+    .icon-tick:before {
+        content: "\e93b";
+    }
+
+    .icon-up-stat:before {
+        content: "\e93c";
+    }
+
+    .icon-view:before {
+        content: "\e93d";
+    }
+
+    .icon-copy:before {
+        content: "\e93e";
+    }
+
+    .icon-exit:before {
+        content: "\e93f";
+    }
+
+    .icon-clip:before {
+        content: "\e940";
+    }
+
+    .icon-collapse:before {
+        content: "\e941";
+    }
+
+    .icon-login-2:before {
+        content: "\e942";
+    }
+
+    .icon-login:before {
+        content: "\e943";
+    }
+
+    .icon-pause:before {
+        content: "\e944";
+    }
+
+    .icon-play:before {
+        content: "\e945";
+    }
+
+
+    p {
+        @apply text-[14px] leading-[17px];
+    }
+
+    input,
+    textarea,
+    select {
+        @apply outline-none;
+    }
+
+    .primary-button {
+        @apply px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold  cursor-pointer transition-all hover:opacity-[0.9];
+    }
+
+    .secondary-button {
+        @apply px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer transition-all hover:bg-[#eff6ff61];
+    }
+
+    .transparent-button {
+        @apply px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap cursor-pointer transition-all hover:bg-gray-100;
+    }
+
+    .journal-scroll::-webkit-scrollbar {
+        width: 14px;
+        cursor: pointer;
+        display: none;
+    }
+
+    .journal-scroll::-webkit-scrollbar-track {
+        background-color: #fff;
+        cursor: pointer;
+        border-radius: 12px;
+        border: 1px solid #e9e9e9;
+    }
+
+    .journal-scroll::-webkit-scrollbar-thumb {
+        cursor: pointer;
+        background-color: #e9e9e9;
+        border-radius: 12px;
+        border: 3px solid transparent;
+        background-clip: content-box;
+    }
+
+    .custom-select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background: transparent;
+        background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+        background-repeat: no-repeat;
+        background-position-x: calc(100% - 10px);
+        background-position-y: 50%;
+    }
+
+    [dir="rtl"] .custom-select {
+        background-position-x: calc(100% - (100% - 10px));
+    }
+
+    .label-pending,
+    .label-processing,
+    .label-closed,
+    .label-cancelled,
+    .label-info,
+    .label-active {
+        @apply text-[12px] text-white font-semibold py-[1px] px-[6px] max-w-max rounded-[35px];
+    }
+
+	.label-pending {
+		@apply bg-yellow-500;
+	}
+
+	.label-processing,  .label-active {
+		@apply bg-darkGreen;
+	}
+
+	.label-closed {
+		@apply bg-darkBlue;
+	}
+
+    .label-cancelled {
+        @apply bg-darkPink;
+    }
+
+    .label-info {
+        @apply bg-slate-400;
+    }
+
+    /* status */
+    .status-enable {
+        @apply text-green-600;
+    }
+
+    .status-disable {
+        @apply text-red-600;
+    }
+
+	.icon-star-fill:before {
+        content: "\e938";
+        color: #ffb600;
+    }
+
+    .shimmer {
+        animation-duration: 2.2s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-name: skeleton;
+        animation-timing-function: linear;
+        background: linear-gradient(
+            to right,
+            #f6f6f6 8%,
+            #f0f0f0 18%,
+            #f6f6f6 33%
+        );
+        background-size: 1250px 100%;
+    }
+
+    @keyframes skeleton {
+        0% {
+            background-position: -1250px 0;
+        }
+
+        100% {
+            background-position: 1250px 0;
+        }
+    }
+
+    .required:after {
+        content: "*";
+    }
+}

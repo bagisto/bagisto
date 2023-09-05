@@ -19,17 +19,14 @@ return new class extends Migration
             $table->date('rule_date');
             $table->datetime('starts_from')->nullable();
             $table->datetime('ends_till')->nullable();
-
             $table->integer('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-
             $table->integer('customer_group_id')->unsigned();
-            $table->foreign('customer_group_id')->references('id')->on('customer_groups')->onDelete('cascade');
-
             $table->integer('catalog_rule_id')->unsigned();
-            $table->foreign('catalog_rule_id')->references('id')->on('catalog_rules')->onDelete('cascade');
-
             $table->integer('channel_id')->unsigned();
+
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('customer_group_id')->references('id')->on('customer_groups')->onDelete('cascade');
+            $table->foreign('catalog_rule_id')->references('id')->on('catalog_rules')->onDelete('cascade');
             $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
         });
     }

@@ -1,44 +1,71 @@
-@extends('admin::layouts.anonymous-master')
+<x-admin::layouts.anonymous>
+    {{-- Page Title --}}
+    <x-slot:title>
+        @lang('admin::app.users.forget-password.create.page-title')
+    </x-slot:title>
 
-@section('page_title')
-    {{ __('admin::app.users.forget-password.title') }}
-@stop
+    <div class="flex justify-center items-center h-[100vh]">
+        <div class="flex flex-col gap-[20px] items-center">
+            {{-- Logo --}}
+            <img 
+                class="w-max" 
+                src="{{ bagisto_asset('images/logo.png') }}" 
+                alt="Bagisto Logo"
+            >
 
-@push('css')
-    <style>
-        .button-group {
-            margin-bottom: 25px;
-        }
-    </style>
-@endpush
-
-@section('content')
-    <div class="panel">
-        <div class="panel-content">
-            <div class="form-container" style="text-align: left">
-                <h1>{{ __('admin::app.users.forget-password.header-title') }}</h1>
-
-                <form method="POST" action="{{ route('admin.forget_password.store') }}" @submit.prevent="onSubmit">
-                    @csrf
-
-                    <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
-                        <label for="email" class="required">{{ __('admin::app.users.forget-password.email') }}</label>
-                        <input type="text" v-validate="'required'" class="control" id="email" name="email" data-vv-as="&quot;{{ __('admin::app.users.forget-password.email') }}&quot;" value="{{ old('email') }}"/>
-                        <span class="control-error" v-if="errors.has('email')">@{{ errors.first('email') }}</span>
+            <div class="flex flex-colflex flex-col bg-white rounded-[6px] box-shadow box-shadow">
+                {{-- Forget Password Form --}}
+                <x-admin::form :action="route('admin.forget_password.store')">
+                    <div class="p-[16px]  ">
+                        <p class="text-[20px] text-gray-800 font-bold ">
+                            @lang('admin::app.users.forget-password.create.title')
+                        </p>
                     </div>
 
-                    <div class="button-group">
-                        <button class="btn btn-xl btn-primary">{{ __('admin::app.users.forget-password.submit-btn-title') }}</button>
-                    </div>
+                    <div class="p-[16px] border-t-[1px] border-b-[1px] border-gray-300">
+                        <div class="mb-[10px]">
+                            {{-- Registered Email --}}
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.users.forget-password.create.email')
+                                </x-admin::form.control-group.label>
 
-                    <div class="control-group" style="margin-bottom: 0">
-                        <a href="{{ route('admin.session.create') }}">
-                            <i class="icon primary-back-icon" style="vertical-align: bottom"></i>
-                            {{ __('admin::app.users.forget-password.back-link-title') }}
+                                <x-admin::form.control-group.control
+                                    type="email"
+                                    name="email" 
+                                    :value="old('email')"
+                                    id="email"
+                                    class="w-[254px] max-w-full" 
+                                    rules="required|email" 
+                                    :label="trans('admin::app.users.forget-password.create.email')"
+                                    :placeholder="trans('admin::app.users.forget-password.create.email')"
+                                >
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error
+                                    control-name="email"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center p-[16px]">
+                        {{-- Back to Sign In link --}}
+                        <a 
+                            class="text-[12px] text-blue-600 font-semibold leading-[24px] cursor-pointer"
+                            href="{{ route('admin.session.create') }}"
+                        >
+                            @lang('admin::app.users.forget-password.create.sign-in-link')
                         </a>
+
+                        {{-- Form Submit Button --}}
+                        <button 
+                            class="px-[14px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
+                            @lang('admin::app.users.forget-password.create.submit-btn')
+                        </button>
                     </div>
-                </form>
+                </x-admin::form>
             </div>
         </div>
     </div>
-@stop
+</x-admin::layouts.anonymous>

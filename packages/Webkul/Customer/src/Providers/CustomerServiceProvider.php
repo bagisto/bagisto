@@ -2,11 +2,8 @@
 
 namespace Webkul\Customer\Providers;
 
-use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Customer\Captcha;
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Webkul\Customer\Http\Middleware\RedirectIfNotCustomer;
 
 class CustomerServiceProvider extends ServiceProvider
 {
@@ -16,10 +13,8 @@ class CustomerServiceProvider extends ServiceProvider
      * @param  \Illuminate\Routing\Router  $router
      * @return void
      */
-    public function boot(Router $router): void
+    public function boot(): void
     {
-        $router->aliasMiddleware('customer', RedirectIfNotCustomer::class);
-
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'customer');

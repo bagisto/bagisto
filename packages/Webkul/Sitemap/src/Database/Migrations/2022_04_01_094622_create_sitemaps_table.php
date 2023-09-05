@@ -17,7 +17,6 @@ return new class extends Migration
             $table->increments('id');
             $table->string('file_name');
             $table->string('path');
-
             $table->datetime('generated_at')->nullable();
             $table->timestamps();
         });

@@ -1,34 +1,22 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    <x-slot:title>
+        @lang('admin::app.catalog.attributes.index.title')
+    </x-slot:title>
 
-@section('page_title')
-    {{ __('admin::app.catalog.attributes.title') }}
-@stop
+    <div class="flex items-center justify-between gap-[16px] max-sm:flex-wrap">
+        {{-- Title --}}
+        <p class="text-[20px] font-bold text-gray-800">
+            @lang('admin::app.catalog.attributes.index.title')
+        </p>
 
-@section('content')
-    <div class="content">
-        <div class="page-header">
-            <div class="page-title">
-                <h1>{{ __('admin::app.catalog.attributes.title') }}</h1>
-            </div>
-
-            <div class="page-action">
-                @if (bouncer()->hasPermission('catalog.attributes.create'))
-                    <a
-                        href="{{ route('admin.catalog.attributes.create') }}"
-                        class="btn btn-lg btn-primary"
-                    >
-                        {{ __('admin::app.catalog.attributes.add-title') }}
-                    </a>
-                @endif
-            </div>
+        <div class="flex items-center gap-x-[10px]">
+            <a href="{{ route('admin.catalog.attributes.create') }}">
+                <div class="cursor-pointer rounded-[6px] border border-blue-700 bg-blue-600 px-[12px] py-[6px] font-semibold text-gray-50">
+                    @lang('admin::app.catalog.attributes.index.create-btn')
+                </div>
+            </a>
         </div>
-
-        {!! view_render_event('bagisto.admin.catalog.attributes.list.before') !!}
-
-        <div class="page-content">
-            <datagrid-plus src="{{ route('admin.catalog.attributes.index') }}"></datagrid-plus>
-        </div>
-
-        {!! view_render_event('bagisto.admin.catalog.attributes.list.after') !!}
     </div>
-@stop
+
+    <x-admin::datagrid :src="route('admin.catalog.attributes.index')"></x-admin::datagrid>
+</x-admin::layouts>

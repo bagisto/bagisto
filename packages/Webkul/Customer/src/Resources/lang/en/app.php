@@ -2,13 +2,13 @@
 
 return [
     'wishlist' => [
-        'success' => 'Item Successfully Added To Wishlist',
-        'failure' => 'Item Cannot Be Added To Wishlist',
-        'already' => 'Item Already Present In Your Wishlist',
-        'removed' => 'Item Successfully Removed From Wishlist',
-        'remove-fail' => 'Item Cannot Be Removed From Wishlist',
-        'empty' => 'You Don\'t Have Any Items In Your Wishlist',
-        'select-options' => 'Need To Select Options Before Adding To Wishlist',
+        'success'            => 'Item Successfully Added To Wishlist',
+        'failure'            => 'Item Cannot Be Added To Wishlist',
+        'already'            => 'Item Already Present In Your Wishlist',
+        'removed'            => 'Item Successfully Removed From Wishlist',
+        'remove-fail'        => 'Item Cannot Be Removed From Wishlist',
+        'empty'              => 'You Don\'t Have Any Items In Your Wishlist',
+        'select-options'     => 'Need To Select Options Before Adding To Wishlist',
         'remove-all-success' => 'All The Items From Your Wishlist Have Been Removed',
     ],
 
@@ -26,15 +26,17 @@ return [
     'admin' => [
         'system' => [
             'captcha' => [
-                'title' => 'Captcha',
-                'credentials' => 'Credentials',
-                'site-key' => 'Site Key',
-                'secret-key' => 'Secret Key',
-                'status' => 'Status',
+                'title'            => 'Captcha',
+                'info'             => 'Set site key, secret key and status.',
+                'credentials'      => 'Credentials',
+                'credentials-info' => '"Sitemap: Website layout map for search engines. Secret key: Secure code for data encryption, authentication, or API access protection."',
+                'site-key'         => 'Site Key',
+                'secret-key'       => 'Secret Key',
+                'status'           => 'Status',
 
                 'validations' => [
                     'required' => 'Please select CAPTCHA',
-                    'captcha' => 'Something went wrong! Please try again.',
+                    'captcha'  => 'Something went wrong! Please try again.',
                 ]
             ],
         ],

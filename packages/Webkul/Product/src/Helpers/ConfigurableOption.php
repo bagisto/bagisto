@@ -2,7 +2,8 @@
 
 namespace Webkul\Product\Helpers;
 
-use Webkul\Product\Facades\{ProductImage, ProductVideo};
+use Webkul\Product\Facades\ProductImage;
+use Webkul\Product\Facades\ProductVideo;
 
 class ConfigurableOption
 {
@@ -56,7 +57,6 @@ class ConfigurableOption
             'variant_prices' => $this->getVariantPrices($product),
             'variant_images' => $this->getVariantImages($product),
             'variant_videos' => $this->getVariantVideos($product),
-            'chooseText'     => trans('shop::app.products.choose-option'),
         ];
 
         return array_merge($config, $product->getTypeInstance()->getProductPrices());
@@ -113,7 +113,6 @@ class ConfigurableOption
      * Get product attributes.
      *
      * @param  \Webkul\Product\Contracts\Product  $product
-     * @param  array  $options
      * @return array
      */
     public function getAttributesData($product, array $options = [])
@@ -152,7 +151,7 @@ class ConfigurableOption
             if (! isset($options[$attribute->id][$optionId])) {
                 continue;
             }
-            
+
             $attributeOptionsData[] = [
                 'id'           => $optionId,
                 'label'        => $attributeOption->label ? $attributeOption->label : $attributeOption->admin_name,

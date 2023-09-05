@@ -13,8 +13,6 @@ Breadcrumbs::for('shop.customer.profile.index', function (BreadcrumbTrail $trail
 
 Breadcrumbs::for('shop.customer.profile.edit', function (BreadcrumbTrail $trail) {
     $trail->parent('shop.customer.profile.index');
-
-    $trail->push(trans('velocity::app.shop.general.update'), route('shop.customer.profile.edit'));
 });
 
 /**
@@ -28,8 +26,6 @@ Breadcrumbs::for('shop.customer.orders.index', function (BreadcrumbTrail $trail)
 
 Breadcrumbs::for('shop.customer.orders.view', function (BreadcrumbTrail $trail, $id) {
     $trail->parent('shop.customer.orders.index');
-
-    $trail->push(trans('velocity::app.shop.general.view'), route('shop.customer.orders.view', $id));
 });
 
 /**
@@ -48,15 +44,6 @@ Breadcrumbs::for('shop.customer.wishlist.index', function (BreadcrumbTrail $trai
     $trail->parent('shop.customer.profile.index');
 
     $trail->push(trans('shop::app.customer.account.wishlist.page-title'), route('shop.customer.wishlist.index'));
-});
-
-/**
- * Compare.
- */
-Breadcrumbs::for('velocity.customer.product.compare', function (BreadcrumbTrail $trail) {
-    $trail->parent('shop.customer.profile.index');
-
-    $trail->push(trans('velocity::app.customer.compare.compare_similar_items'), route('velocity.customer.product.compare'));
 });
 
 /**

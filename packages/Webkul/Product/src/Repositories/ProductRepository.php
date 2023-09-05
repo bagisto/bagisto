@@ -10,18 +10,12 @@ use Illuminate\Support\Facades\DB;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\Product\Helpers\Toolbar;
 
 class ProductRepository extends Repository
 {
     /**
      * Create a new repository instance.
      *
-     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
-     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $productAttributeValueRepository
-     * @param  \Webkul\Product\Repositories\ElasticSearchRepository  $elasticSearchRepository
-     * @param  \Illuminate\Container\Container  $container
      * @return void
      */
     public function __construct(
@@ -36,8 +30,6 @@ class ProductRepository extends Repository
 
     /**
      * Specify model class name.
-     *
-     * @return string
      */
     public function model(): string
     {
@@ -47,7 +39,6 @@ class ProductRepository extends Repository
     /**
      * Create product.
      *
-     * @param  array  $data
      * @return \Webkul\Product\Contracts\Product
      */
     public function create(array $data)
@@ -62,7 +53,6 @@ class ProductRepository extends Repository
     /**
      * Update product.
      *
-     * @param  array  $data
      * @param  int  $id
      * @param  string  $attribute
      * @return \Webkul\Product\Contracts\Product
@@ -187,25 +177,31 @@ class ProductRepository extends Repository
     /**
      * Get all products.
      *
-     * @param  string  $categoryId
+     * To Do (@devansh-webkul): Need to reduce all the request query from this repo and provide
+     * good request parameter with an array type as an argument. Make a clean pull request for
+     * this to have track record.
+     *
      * @return \Illuminate\Support\Collection
      */
-    public function getAll($categoryId = null)
+    public function getAll()
     {
         if (core()->getConfigData('catalog.products.storefront.search_mode') == 'elastic') {
-            return $this->searchFromElastic($categoryId);
+            return $this->searchFromElastic();
         } else {
-            return $this->searchFromDatabase($categoryId);
+            return $this->searchFromDatabase();
         }
     }
 
     /**
      * Search product from database.
      *
-     * @param  string  $categoryId
+     * To Do (@devansh-webkul): Need to reduce all the request query from this repo and provide
+     * good request parameter with an array type as an argument. Make a clean pull request for
+     * this to have track record.
+     *
      * @return \Illuminate\Support\Collection
      */
-    public function searchFromDatabase($categoryId)
+    public function searchFromDatabase()
     {
         $params = array_merge([
             'status'               => 1,
@@ -224,7 +220,7 @@ class ProductRepository extends Repository
             'price_indices',
             'inventory_indices',
             'reviews',
-        ])->scopeQuery(function ($query) use ($params, $categoryId) {
+        ])->scopeQuery(function ($query) use ($params) {
             $prefix = DB::getTablePrefix();
 
             $qb = $query->distinct()
@@ -237,9 +233,9 @@ class ProductRepository extends Repository
                         ->where('product_price_indices.customer_group_id', $customerGroup->id);
                 });
 
-            if ($categoryId) {
+            if (! empty($params['category_id'])) {
                 $qb->leftJoin('product_categories', 'product_categories.product_id', '=', 'products.id')
-                    ->whereIn('product_categories.category_id', explode(',', $categoryId));
+                    ->whereIn('product_categories.category_id', explode(',', $params['category_id']));
             }
 
             if (! empty($params['type'])) {
@@ -383,7 +379,7 @@ class ProductRepository extends Repository
 
         $count = collect(
             DB::select("select count(id) as aggregate from ({$countQuery->select('products.id')->reorder('products.id')->toSql()}) c",
-            $countQuery->getBindings())
+                $countQuery->getBindings())
         )->pluck('aggregate')->first();
 
         $items = [];
@@ -407,12 +403,15 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Search product from elastic search
+     * Search product from elastic search.
      *
-     * @param  string  $categoryId
+     * To Do (@devansh-webkul): Need to reduce all the request query from this repo and provide
+     * good request parameter with an array type as an argument. Make a clean pull request for
+     * this to have track record.
+     *
      * @return \Illuminate\Support\Collection
      */
-    public function searchFromElastic($categoryId)
+    public function searchFromElastic()
     {
         $params = request()->input();
 
@@ -422,7 +421,7 @@ class ProductRepository extends Repository
 
         $sortOptions = $this->getSortOptions($params);
 
-        $indices = $this->elasticSearchRepository->search($categoryId, [
+        $indices = $this->elasticSearchRepository->search($params['category_id'] ?? null, [
             'type'  => $params['type'] ?? '',
             'from'  => ($currentPage * $limit) - $limit,
             'limit' => $limit,
@@ -459,56 +458,19 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Products to show per page
-     *
-     * @param  array  $params
-     * @return int
+     * Fetch per page limit from toolbar helper. Adapter for this repository.
      */
-    public function getPerPageLimit($params)
+    public function getPerPageLimit(array $params): int
     {
-        /**
-         * Currently container binding not injecting in constructor.
-         *
-         * To Do (@devansh): Need a global helper or static helper
-         * or a one place constant array to handle this.
-         */
-        $availableLimits = app(Toolbar::class)->getAvailableLimits();
-
-        /**
-         * Set a default value of 12 for the 'limit' parameter,
-         * in case it is not provided or is not a valid integer.
-         */
-        $limit = (int) ($params['limit'] ?? 12);
-
-        /**
-         * If the 'limit' parameter is present but value not present
-         * in available limits, use the default value of 12 instead.
-         */
-        $limit = in_array($limit, $availableLimits) ? $limit : 12;
-
-        if ($productsPerPage = core()->getConfigData('catalog.products.storefront.products_per_page')) {
-            $pages = explode(',', $productsPerPage);
-
-            $limit = $params['limit'] ?? current($pages);
-        }
-
-        return $limit;
+        return product_toolbar()->getLimit($params);
     }
 
     /**
-     * Products to show per page
-     *
-     * @param  array  $params
-     * @return array
+     * Fetch sort option from toolbar helper. Adapter for this repository.
      */
-    public function getSortOptions($params)
+    public function getSortOptions(array $params): array
     {
-        $sortOptions = explode('-', core()->getConfigData('catalog.products.storefront.sort_by') ?: 'name-desc');
-
-        return [
-            'sort'  => $params['sort'] ?? current($sortOptions),
-            'order' => $params['order'] ?? end($sortOptions),
-        ];
+        return product_toolbar()->getOrder($params);
     }
 
     /**
@@ -543,15 +505,19 @@ class ProductRepository extends Repository
      * @param  int  $categoryId
      * @return float
      */
-    public function getCategoryProductMaximumPrice($categoryId)
+    public function getMaxPrice($params = [])
     {
         $customerGroup = $this->customerRepository->getCurrentGroup();
 
-        return $this->model
+        $query = $this->model
             ->leftJoin('product_price_indices', 'products.id', 'product_price_indices.product_id')
             ->leftJoin('product_categories', 'products.id', 'product_categories.product_id')
-            ->where('product_price_indices.customer_group_id', $customerGroup->id)
-            ->where('product_categories.category_id', $categoryId)
-            ->max('min_price');
+            ->where('product_price_indices.customer_group_id', $customerGroup->id);
+
+        if (! empty($params['category_id'])) {
+            $query->where('product_categories.category_id', $params['category_id']);
+        }
+
+        return $query->max('min_price') ?? 0;
     }
 }

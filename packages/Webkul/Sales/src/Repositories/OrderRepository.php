@@ -2,7 +2,9 @@
 
 namespace Webkul\Sales\Repositories;
 
+use Carbon\Carbon;
 use Illuminate\Container\Container;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
@@ -384,6 +386,145 @@ class OrderRepository extends Repository
         $order->save();
 
         return $order;
+    }
+
+    /**
+     * Get orders count by date.
+     */
+    public function getOrdersCountByDate(?Carbon $from = null, Carbon $to = null): ?int
+    {
+        if ($from && $to) {
+            return $this->count([['created_at', '>=', $from], ['created_at', '<=', $to]]);
+        }
+
+        if ($from) {
+            return $this->count([['created_at', '>=', $from]]);
+        }
+
+        if ($to) {
+            return $this->count([['created_at', '<=', $to]]);
+        }
+
+        return $this->count();
+    }
+
+    /**
+     * Get orders by Today date
+     */
+    public function getOrdersByDate(?Carbon $from = null, Carbon $to = null)
+    {
+        if ($from && $to) {
+            return app(OrderRepository::class)
+                ->with(['addresses', 'payment', 'items'])
+                ->whereBetween('orders.created_at', [$from, $to])
+                ->get();
+        }
+
+        if ($from) {
+            return app(OrderRepository::class)
+                ->with(['addresses', 'payment', 'items'])
+                ->where('created_at', '>=', $from)
+                ->get();
+        }
+
+        if ($to) {
+            return app(OrderRepository::class)
+                ->with(['addresses', 'payment', 'items'])
+                ->where('created_at', '<=', $to)
+                ->sum(DB::raw('base_grand_total_invoiced - base_grand_total_refunded'))
+                ->get();
+        }
+    }
+
+    /**
+     * Calculate sale amount by date.
+     */
+    public function calculateSaleAmountByDate(?Carbon $from = null, ?Carbon $to = null): ?float
+    {
+        if ($from && $to) {
+            return $this->getModel()
+                ->whereBetween('created_at', [$from, $to])
+                ->sum(DB::raw('base_grand_total_invoiced - base_grand_total_refunded'));
+        }
+
+        if ($from) {
+            return $this->getModel()
+                ->where('created_at', '>=', $from)
+                ->sum(DB::raw('base_grand_total_invoiced - base_grand_total_refunded'));
+        }
+
+        if ($to) {
+            return $this->getModel()
+                ->where('created_at', '<=', $to)
+                ->sum(DB::raw('base_grand_total_invoiced - base_grand_total_refunded'));
+        }
+
+        return $this->model->sum(DB::raw('base_grand_total_invoiced - base_grand_total_refunded'));
+    }
+
+    /**
+     * Calculate average sale amount by date.
+     */
+    public function calculateAvgSaleAmountByDate(?Carbon $from = null, ?Carbon $to = null): ?float
+    {
+        if ($from && $to) {
+            return $this->getModel()
+                ->whereBetween('created_at', [$from, $to])
+                ->avg(DB::raw('base_grand_total_invoiced - base_grand_total_refunded'));
+        }
+
+        if ($from) {
+            return $this->getModel()
+                ->where('created_at', '>=', $from)
+                ->avg(DB::raw('base_grand_total_invoiced - base_grand_total_refunded'));
+        }
+
+        if ($to) {
+            return $this->getModel()
+                ->where('created_at', '<=', $to)
+                ->avg(DB::raw('base_grand_total_invoiced - base_grand_total_refunded'));
+        }
+
+        return $this->getModel()->avg(DB::raw('base_grand_total_invoiced - base_grand_total_refunded'));
+    }
+
+    /**
+     * Get customer with most sales by date.
+     */
+    public function getCustomerWithMostSalesByDate(?Carbon $from = null, ?Carbon $to = null): Collection
+    {
+        $dbPrefix = DB::getTablePrefix();
+
+        $query = $this->getModel()
+            ->leftJoin(DB::raw("(SELECT order_id, MAX(first_name) as first_name, MAX(last_name) as last_name, MAX(email) as email
+                           FROM addresses
+                           GROUP BY order_id) as addr"), 'orders.id', '=', 'addr.order_id')
+            ->whereNotIn("orders.status", ['closed', 'canceled'])
+            ->select(
+                'orders.customer_id',
+                'customer_email',
+                'customer_first_name',
+                'customer_last_name',
+                DB::raw("(
+                SUM(base_grand_total) -
+                SUM(
+                    IFNULL(
+                        (SELECT SUM(base_grand_total) FROM {$dbPrefix}refunds WHERE {$dbPrefix}refunds.order_id = {$dbPrefix}orders.id),
+                        0)
+                    )
+                ) as total_base_grand_total"),
+                DB::raw('COUNT(DISTINCT orders.id) as order_count')
+            );
+
+        if ($from && $to) {
+            $query->whereBetween("orders.created_at", [$from, $to]);
+        } elseif ($from) {
+            $query->where("orders.created_at", '>=', $from);
+        } elseif ($to) {
+            $query->where("orders.created_at", '<=', $to);
+        }
+
+        return $query->groupBy('customer_email')->orderBy('total_base_grand_total', 'DESC')->limit(5)->get();
     }
 
     /**

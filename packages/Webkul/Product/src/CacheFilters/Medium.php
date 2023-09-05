@@ -17,16 +17,12 @@ class Medium implements FilterInterface
     {
         $width = core()->getConfigData('catalog.products.cache-medium-image.width') != ''
             ? core()->getConfigData('catalog.products.cache-medium-image.width')
-            : 225;
+            : 350;
 
         $height = core()->getConfigData('catalog.products.cache-medium-image.height') != ''
             ? core()->getConfigData('catalog.products.cache-medium-image.height')
-            : null;
+            : 360;
 
-        $image->resize($width, $height, function ($constraint) {
-            $constraint->aspectRatio();
-        });
-
-        return $image->resizeCanvas($width, $height, 'center', false, '#fff');
+        return $image->fit($width, $height);
     }
 }

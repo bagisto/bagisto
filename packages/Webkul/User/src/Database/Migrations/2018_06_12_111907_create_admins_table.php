@@ -18,8 +18,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password')->nullable();
+            $table->string('api_token', 80)->unique()->nullable()->default(null);
             $table->boolean('status')->default(0);
             $table->integer('role_id')->unsigned();
+            $table->string('image')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

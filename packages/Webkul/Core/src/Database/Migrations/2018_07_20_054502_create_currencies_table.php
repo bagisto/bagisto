@@ -17,6 +17,8 @@ return new class extends Migration
             $table->increments('id');
             $table->string('code');
             $table->string('name');
+            $table->string('symbol')->nullable();
+            $table->integer('decimal')->unsigned()->default(2);
             $table->timestamps();
         });
     }

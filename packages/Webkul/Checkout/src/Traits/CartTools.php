@@ -200,7 +200,7 @@ trait CartTools
         if (! $wishlistItem->additional) {
             $wishlistItem->additional = [
                 'product_id' => $wishlistItem->product_id,
-                'quantity'   => 1,
+                'quantity'   => request()->input('quantity'),
             ];
         }
 
@@ -248,7 +248,7 @@ trait CartTools
                 $options = ['product_id' => $wishlistItem->product_id];
             }
 
-            if ($cartItem->product->getTypeInstance()->compareOptions($cartItem->additional, $options)) {
+            if ($cartItem->getTypeInstance()->compareOptions($cartItem->additional, $options)) {
                 $found = true;
             }
         }

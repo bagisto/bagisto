@@ -2,8 +2,10 @@
 .env.testing
 .idea
 .php_cs.cache
+.phpunit.result.cache
 .vscode
 .vagrant
+*.hot
 /stubs
 /data
 /docker-compose-collection
@@ -18,7 +20,6 @@ package-lock.json
 /public/js
 /public/hot
 /public/storage
-/public/themes
 /public/vendor
 /lang/vendor
 /storage/*.key

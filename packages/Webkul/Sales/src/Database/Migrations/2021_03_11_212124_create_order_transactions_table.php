@@ -18,12 +18,14 @@ return new class extends Migration
             $table->string('transaction_id');
             $table->string('status')->nullable();
             $table->string('type')->nullable();
+            $table->decimal('amount', 12, 4)->default(0)->nullable();
             $table->string('payment_method')->nullable();
             $table->json('data')->nullable();
             $table->integer('invoice_id')->unsigned();
             $table->integer('order_id')->unsigned();
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->timestamps();
+
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
     }
 

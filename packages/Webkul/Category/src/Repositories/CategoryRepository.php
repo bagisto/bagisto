@@ -2,9 +2,9 @@
 
 namespace Webkul\Category\Repositories;
 
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Category\Contracts\Category;
 use Webkul\Category\Models\CategoryTranslationProxy;
 use Webkul\Core\Eloquent\Repository;
 
@@ -12,18 +12,57 @@ class CategoryRepository extends Repository
 {
     /**
      * Specify model class name.
-     *
-     * @return string
      */
     public function model(): string
     {
-        return 'Webkul\Category\Contracts\Category';
+        return Category::class;
+    }
+
+    /**
+     * Get categories.
+     *
+     * @return void
+     */
+    public function getAll(array $params = [])
+    {
+        $queryBuilder = $this->query()
+            ->leftJoin('category_translations', 'category_translations.category_id', '=', 'categories.id');
+
+        foreach ($params as $key => $value) {
+            switch ($key) {
+                case 'name':
+                    $queryBuilder->where('category_translations.name', 'like', '%' . urldecode($value) . '%');
+
+                    break;
+                case 'description':
+                    $queryBuilder->where('category_translations.description', 'like', '%' . urldecode($value) . '%');
+
+                    break;
+                case 'status':
+                    $queryBuilder->where('categories.status', $value);
+
+                    break;
+                case 'only_children':
+                    $queryBuilder->whereNotNull('categories.parent_id');
+
+                    break;
+                case 'parent_id':
+                    $queryBuilder->where('categories.parent_id', $value);
+
+                    break;
+                case 'locale':
+                    $queryBuilder->where('category_translations.locale', $value);
+
+                    break;
+            }
+        }
+
+        return $queryBuilder->paginate($params['limit'] ?? 10);
     }
 
     /**
      * Create category.
      *
-     * @param  array  $data
      * @return \Webkul\Category\Contracts\Category
      */
     public function create(array $data)
@@ -48,8 +87,9 @@ class CategoryRepository extends Repository
         $category = $this->model->create($data);
 
         $this->uploadImages($data, $category);
-        $this->uploadImages($data, $category, 'category_banner');
-         
+        
+        $this->uploadImages($data, $category, 'banner_path');
+
         if (isset($data['attributes'])) {
             $category->filterableAttributes()->sync($data['attributes']);
         }
@@ -60,7 +100,6 @@ class CategoryRepository extends Repository
     /**
      * Update category.
      *
-     * @param  array  $data
      * @param  int  $id
      * @param  string  $attribute
      * @return \Webkul\Category\Contracts\Category
@@ -74,7 +113,8 @@ class CategoryRepository extends Repository
         $category->update($data);
 
         $this->uploadImages($data, $category);
-        $this->uploadImages($data, $category, 'category_banner');
+
+        $this->uploadImages($data, $category, 'banner_path');
 
         if (isset($data['attributes'])) {
             $category->filterableAttributes()->sync($data['attributes']);
@@ -169,14 +209,12 @@ class CategoryRepository extends Repository
     /**
      * Retrieve category from slug.
      *
-     * @param string $slug
+     * @param  string  $slug
      * @return \Webkul\Category\Contracts\Category
      */
     public function findBySlug($slug)
     {
-        $category = $this->model->whereTranslation('slug', $slug)->first();
-
-        if ($category) {
+        if ($category = $this->model->whereTranslation('slug', $slug)->first()) {
             return $category;
         }
     }
@@ -184,26 +222,17 @@ class CategoryRepository extends Repository
     /**
      * Retrieve category from slug.
      *
-     * @param string $slug
+     * @param  string  $slug
      * @return \Webkul\Category\Contracts\Category
      */
     public function findBySlugOrFail($slug)
     {
-        $category = $this->model->whereTranslation('slug', $slug)->first();
-
-        if ($category) {
-            return $category;
-        }
-
-        throw (new ModelNotFoundException)->setModel(
-            get_class($this->model), $slug
-        );
+        return $this->model->whereTranslation('slug', $slug)->firstOrFail();
     }
 
     /**
      * Find by path.
      *
-     * @param  string  $urlPath
      * @return \Webkul\Category\Contracts\Category
      */
     public function findByPath(string $urlPath)
@@ -216,25 +245,22 @@ class CategoryRepository extends Repository
      *
      * @param  array  $data
      * @param  \Webkul\Category\Contracts\Category  $category
-     * @param  string $type
+     * @param  string  $type
      * @return void
      */
-    public function uploadImages($data, $category, $type = 'image')
+    public function uploadImages($data, $category, $type = 'logo_path')
     {
-        
         if (isset($data[$type])) {
-            $request = request();
-           
             foreach ($data[$type] as $imageId => $image) {
                 $file = $type . '.' . $imageId;
                 $dir = 'category/' . $category->id;
 
-                if ($request->hasFile($file)) {
+                if (request()->hasFile($file)) {
                     if ($category->{$type}) {
                         Storage::delete($category->{$type});
                     }
 
-                    $category->{$type} = $request->file($file)->store($dir);
+                    $category->{$type} = request()->file($file)->store($dir);
 
                     $category->save();
                 }
@@ -245,11 +271,10 @@ class CategoryRepository extends Repository
             }
 
             $category->{$type} = null;
-            
+
             $category->save();
         }
     }
-    
 
     /**
      * Get partials.
@@ -264,10 +289,7 @@ class CategoryRepository extends Repository
         $trimmed = [];
 
         foreach ($categories as $key => $category) {
-            if (
-                $category->name != null
-                || $category->name != ''
-            ) {
+            if (! empty($category->name)) {
                 $trimmed[$key] = [
                     'id'   => $category->id,
                     'name' => $category->name,
@@ -285,8 +307,7 @@ class CategoryRepository extends Repository
      * To Do: Move column from the `category_translations` to `category` table. And remove
      * this created method.
      *
-     * @param  array  $data
-     * @param  string $attributeNames
+     * @param  string  $attributeNames
      * @return array
      */
     private function setSameAttributeValueToAllLocale(array $data, ...$attributeNames)
@@ -297,12 +318,10 @@ class CategoryRepository extends Repository
 
         foreach ($attributeNames as $attributeName) {
             foreach (core()->getAllLocales() as $locale) {
-                if ($requestedLocale == $locale->code) { 
+                if ($requestedLocale == $locale->code) {
                     foreach ($model->translatedAttributes as $attribute) {
                         if ($attribute === $attributeName) {
-                            $data[$locale->code][$attribute] = isset($data[$requestedLocale][$attribute])
-                                ? $data[$requestedLocale][$attribute]
-                                : $data[$data['locale']][$attribute];
+                            $data[$locale->code][$attribute] = $data[$requestedLocale][$attribute] ?? $data[$data['locale']][$attribute];
                         }
                     }
                 }

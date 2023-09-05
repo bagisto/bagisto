@@ -4,37 +4,28 @@ namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Illuminate\Http\Request;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Admin\DataGrids\OrderInvoicesDataGrid;
-use Webkul\Admin\DataGrids\InvoicesTransactionsDatagrid;
-use Webkul\Admin\Traits\Mails;
+use Webkul\Sales\Repositories\InvoiceRepository;
+use Webkul\Admin\DataGrids\Sales\OrderInvoicesDataGrid;
+use Webkul\Admin\DataGrids\Sales\InvoicesTransactionsDatagrid;
+use Webkul\Admin\Listeners\Invoice as InvoiceListener;
 use Webkul\Core\Traits\PDFHandler;
 
 class InvoiceController extends Controller
 {
-    use Mails, PDFHandler;
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return array
-     */
-    protected $_config;
+    use PDFHandler;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
-     * @param  \Webkul\Sales\Repositories\InvoiceRepository  $invoiceRepository
      * @return void
      */
     public function __construct(
         protected OrderRepository $orderRepository,
-        protected InvoiceRepository $invoiceRepository
+        protected InvoiceRepository $invoiceRepository,
+        protected InvoiceListener $invoiceListener
     )
     {
-        $this->_config = request('_config');
     }
 
     /**
@@ -48,7 +39,7 @@ class InvoiceController extends Controller
             return app(OrderInvoicesDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::sales.invoices.index');
     }
 
     /**
@@ -76,7 +67,7 @@ class InvoiceController extends Controller
             abort(404);
         }
 
-        return view($this->_config['view'], compact('order'));
+        return view('admin::sales.invoices.create', compact('order'));
     }
 
     /**
@@ -90,7 +81,7 @@ class InvoiceController extends Controller
         $order = $this->orderRepository->findOrFail($orderId);
 
         if (! $order->canInvoice()) {
-            session()->flash('error', trans('admin::app.sales.invoices.creation-error'));
+            session()->flash('error', trans('admin::app.sales.invoices.create.creation-error'));
 
             return redirect()->back();
         }
@@ -100,13 +91,13 @@ class InvoiceController extends Controller
         ]);
 
         if (! $this->invoiceRepository->haveProductToInvoice(request()->all())) {
-            session()->flash('error', trans('admin::app.sales.invoices.product-error'));
+            session()->flash('error', trans('admin::app.sales.invoices.create.product-error'));
 
             return redirect()->back();
         }
 
         if (! $this->invoiceRepository->isValidQuantity(request()->all())) {
-            session()->flash('error', trans('admin::app.sales.invoices.invalid-qty'));
+            session()->flash('error', trans('admin::app.sales.invoices.create.invalid-qty'));
 
             return redirect()->back();
         }
@@ -115,9 +106,9 @@ class InvoiceController extends Controller
             'order_id' => $orderId,
         ]));
 
-        session()->flash('success', trans('admin::app.sales.invoices.create-success'));
+        session()->flash('success', trans('admin::app.sales.invoices.create.create-success'));
 
-        return redirect()->route($this->_config['redirect'], $orderId);
+        return redirect()->route('admin.sales.orders.view', $orderId);
     }
 
     /**
@@ -130,17 +121,16 @@ class InvoiceController extends Controller
     {
         $invoice = $this->invoiceRepository->findOrFail($id);
 
-        return view($this->_config['view'], compact('invoice'));
+        return view('admin::sales.invoices.view', compact('invoice'));
     }
 
     /**
      * Send duplicate invoice.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function sendDuplicateInvoice(Request $request, $id)
+    public function sendDuplicate(Request $request, $id)
     {
         $request->validate([
             'email' => 'required|email',
@@ -148,9 +138,11 @@ class InvoiceController extends Controller
 
         $invoice = $this->invoiceRepository->findOrFail($id);
 
-        $this->sendDuplicateInvoiceMail($invoice, $request->email);
+        $invoice->email = request()->input('email');
 
-        session()->flash('success', trans('admin::app.sales.invoices.invoice-sent'));
+        $this->invoiceListener->afterCreated($invoice);
+
+        session()->flash('success', trans('admin::app.sales.invoices.view.invoice-sent'));
 
         return redirect()->back();
     }

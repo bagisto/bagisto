@@ -1,222 +1,129 @@
-@inject ('wishListHelper', 'Webkul\Customer\Helpers\Wishlist')
+<v-product-gallery ref="gallery">
+    <x-shop::shimmer.products.gallery/>
+</v-product-gallery>
 
-@php
-    $images = product_image()->getGalleryImages($product);
+@pushOnce('scripts')
+    <script type="text/x-template" id="v-product-gallery-template">
+        <div class="flex gap-[30px] h-max sticky top-[30px] max-1180:hidden">
+            <!-- Product Image Slider -->
+            <div class="flex-24 place-content-start h-509 overflow-x-hidden overflow-y-auto flex gap-[30px] max-w-[100px] flex-wrap">
+                <img 
+                    :class="`min-w-[100px] max-h-[100px] rounded-[12px] ${ hover ? 'cursor-pointer' : '' }`" 
+                    v-for="image in media.images"
+                    :src="image.small_image_url"
+                    @mouseover="change(image)"
+                />
 
-    $videos = product_video()->getVideos($product);
-
-    $images = array_merge($images, $videos);
-@endphp
-
-{!! view_render_event('bagisto.shop.products.view.gallery.before', ['product' => $product]) !!}
-
-<div class="product-image-group">
-    <div class="cp-spinner cp-round" id="loader"></div>
-
-    <product-gallery></product-gallery>
-
-    @include ('shop::products.view.product-add')
-</div>
-
-{!! view_render_event('bagisto.shop.products.view.gallery.after', ['product' => $product]) !!}
-
-@push('scripts')
-    <script type="text/x-template" id="product-gallery-template">
-        <div>
-            <ul class="thumb-list">
-                <li class="gallery-control top" @click="moveThumbs('top')" v-if="(thumbs.length > 4) && this.is_move.up">
-                    <span class="overlay"></span>
-                    
-                    <i class="icon arrow-up-white-icon"></i>
-                </li>
-
-                <li class="thumb-frame" v-for='(thumb, index) in thumbs' @mouseover="changeImage(thumb)" :class="[thumb.large_image_url == currentLargeImageUrl ? 'active' : '']" id="thumb-frame">
-                    <video v-if="thumb.type == 'video'" width="100%" height="100%" onclick="this.paused ? this.play() : this.pause();">
-                        <source :src="thumb.video_url" type="video/mp4">
-                        {{ __('admin::app.catalog.products.not-support-video') }}
-                    </video>
-
-                    <img v-else  :src="thumb.small_image_url" alt=""/>
-                </li>
-
-                <li class="gallery-control bottom" @click="moveThumbs('bottom')" v-if="(thumbs.length > 4) && this.is_move.down">
-                    <span class="overlay"></span>
-
-                    <i class="icon arrow-down-white-icon"></i>
-                </li>
-            </ul>
-
-            <div class="product-hero-image" id="product-hero-image">
-                <video :key="currentVideoUrl" v-if="currentType == 'video'" width="100%" height="420" controls>
-                    <source :src="currentVideoUrl" :data-image="currentOriginalImageUrl"  type="video/mp4">
-
-                    {{ __('admin::app.catalog.products.not-support-video') }}
+                <!-- Need to Set Play Button  -->
+                <video 
+                    class="min-w-[100px] rounded-[12px]"
+                    v-for="video in media.videos"
+                    @mouseover="change(video)"
+                >
+                    <source 
+                        :src="video.video_url" 
+                        type="video/mp4"
+                    />
                 </video>
-
-                <img v-else :src="currentLargeImageUrl" id="pro-img" :data-image="currentOriginalImageUrl" alt=""/>
-
-                @auth('customer')
-                    @if ((bool) core()->getConfigData('general.content.shop.wishlist_option'))
-                        <form id="wishlist-{{ $product->id }}" action="{{ route('shop.customer.wishlist.add', $product->id) }}" method="POST">
-                            @csrf
-                        </form>
-
-                        <a
-                            @if ($wishListHelper->getWishlistProduct($product))
-                                class="add-to-wishlist already"
-                            @else
-                                class="add-to-wishlist"
-                            @endif
-                            href="javascript:void(0);"
-                            onclick="document.getElementById('wishlist-{{ $product->id }}').submit();">
-                        </a>
-                    @endif
-                @endauth
             </div>
+            
+            <!-- Media shimmer Effect -->
+            <div
+                class="max-h-[609px] max-w-[560px]"
+                v-show="isMediaLoading"
+            >
+                <div class="min-w-[560px] min-h-[607px] bg-[#E9E9E9] rounded-[12px] shimmer"></div>
+            </div>
+
+            <div
+                class="max-h-[609px] max-w-[560px]"
+                v-show="! isMediaLoading"
+            >
+                <img 
+                    class="min-w-[450px] rounded-[12px]" 
+                    :src="baseFile.path" 
+                    v-if='baseFile.type == "image"'
+                    @load="onMediaLoad()"
+                />
+
+                <div class="min-w-[450px] rounded-[12px]" v-if='baseFile.type == "video"'>
+                    <video  
+                        controls                             
+                        width='475'
+                        @load="onMediaLoad()"
+                    >
+                        <source 
+                            :src="baseFile.path" 
+                            type="video/mp4"
+                        />
+                    </video>    
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- Product slider Image with shimmer -->
+        <div class="flex gap-[30px] 1180:hidden overflow-auto scrollbar-hide">
+            <x-shop::shimmer.image
+                ::src="image.large_image_url"
+                class="min-w-[450px] max-sm:min-w-full w-[490px]" 
+                v-for="image in media.images"
+            >
+            </x-shop::shimmer.image>
         </div>
     </script>
 
-    <script>
-        let galleryImages = @json($images);
+    <script type="module">
+        app.component('v-product-gallery', {
+            template: '#v-product-gallery-template',
 
-        Vue.component('product-gallery', {
-
-            template: '#product-gallery-template',
-
-            data: function() {
+            data() {
                 return {
-                    images: galleryImages,
+                    isMediaLoading: true,
 
-                    thumbs: [],
+                    media: {
+                        images: @json(product_image()->getGalleryImages($product)),
 
-                    currentLargeImageUrl: '',
-
-                    currentOriginalImageUrl: '',
-
-                    currentVideoUrl: '',
-
-                    currentType: '',
-
-                    counter: {
-                        up: 0,
-                        down: 0,
+                        videos: @json(product_video()->getVideos($product)),
                     },
 
-                    is_move: {
-                        up: true,
-                        down: true,
-                    }
+                    baseFile: {
+                        type: '',
+
+                        path: ''
+                    },
+
+                    hover: false,
                 }
             },
 
-            watch: {
-                'images': function(newVal, oldVal) {
-                    this.changeImage(this.images[0]);
-
-                    this.prepareThumbs();
+            mounted() {
+                if (this.media.images.length) {
+                    this.baseFile.type = 'image';
+                    this.baseFile.path = this.media.images[0].large_image_url;
+                } else {
+                    this.baseFile.type = this.media.videos[0].type;
+                    this.baseFile.path = this.media.videos[0].video_url;
                 }
-            },
-
-            created: function() {
-                this.changeImage(this.images[0]);
-
-                this.prepareThumbs();
             },
 
             methods: {
-                prepareThumbs: function() {
-                    let self = this;
-
-                    self.thumbs = [];
-
-                    this.images.forEach(function(image) {
-                        self.thumbs.push(image);
-                    });
+                onMediaLoad() {
+                    this.isMediaLoading = false;
                 },
 
-                changeImage: function(image) {
-                    this.currentType = image.type;
-
-                    if (image.type == 'video') {
-                        this.currentVideoUrl = image.video_url;
-
-                        this.currentLargeImageUrl = image.large_image_url = image.video_url;
+                change(file) {
+                    if (file.type == 'video') {
+                        this.baseFile.type = file.type;
+                        this.baseFile.path = file.video_url;
                     } else {
-                        this.currentLargeImageUrl = image.large_image_url;
-
-                        this.currentOriginalImageUrl = image.original_image_url;
+                        this.baseFile.type = 'image';
+                        this.baseFile.path = file.large_image_url;
                     }
-
-                    if ($(window).width() > 580 && image.original_image_url) {
-                        $('img#pro-img').data('zoom-image', image.original_image_url).ezPlus();
-                    }
-                },
-
-                moveThumbs: function(direction) {
-                    let len = this.thumbs.length;
-
-                    if (direction === "top") {
-                        const moveThumb = this.thumbs.splice(len - 1, 1);
-
-                        this.thumbs = [moveThumb[0]].concat((this.thumbs));
-
-                        this.counter.up = this.counter.up+1;
-
-                        this.counter.down = this.counter.down-1;
-
-                    } else {
-                        const moveThumb = this.thumbs.splice(0, 1);
-
-                        this.thumbs = [].concat((this.thumbs), [moveThumb[0]]);
-
-                        this.counter.down = this.counter.down+1;
-
-                        this.counter.up = this.counter.up-1;
-                    }
-
-                    if ((len-4) == this.counter.down) {
-                        this.is_move.down = false;
-                    } else {
-                        this.is_move.down = true;
-                    }
-
-                    if ((len-4) == this.counter.up) {
-                        this.is_move.up = false;
-                    } else {
-                        this.is_move.up = true;
-                    }
-                },
+                    
+                    this.hover = true;
+                }
             }
-        });
+        })
     </script>
-
-    <script>
-        $(document).ready(function() {
-            if ($(window).width() > 580) {
-                $('img#pro-img').data('zoom-image', $('img#pro-img').data('image')).ezPlus();
-            }
-
-            @if (auth()->guard('customer')->user())
-                let wishlist = "{{ $wishListHelper->getWishlistProduct($product) ? 'true' : 'false' }}";
-
-                $(document).mousemove(function(event) {
-                    if ($('.add-to-wishlist').length || wishlist != 0) {
-                        if (event.pageX > $('.add-to-wishlist').offset().left && event.pageX < $('.add-to-wishlist').offset().left+32 && event.pageY > $('.add-to-wishlist').offset().top && event.pageY < $('.add-to-wishlist').offset().top+32) {
-
-                            $(".zoomContainer").addClass("show-wishlist");
-
-                        } else {
-                            $(".zoomContainer").removeClass("show-wishlist");
-                        }
-                    };
-
-                    if ($("body").hasClass("rtl")) {
-                        $(".zoomWindow").addClass("zoom-image-direction");
-                    } else {
-                        $(".zoomWindow").removeClass("zoom-image-direction");
-                    }
-                });
-            @endif
-        });
-    </script>
-@endpush
+@endpushOnce

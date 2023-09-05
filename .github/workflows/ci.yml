@@ -7,16 +7,18 @@ permissions:
 
 jobs:
   tests:
-    runs-on: ${{ matrix.operating-system }}
+    runs-on: ${{ matrix.operating-systems }}
+
     strategy:
       matrix:
-        operating-system: [ubuntu-latest]
+        operating-systems: [ubuntu-latest]
         php-versions: ['8.1']
-    name: PHP ${{ matrix.php-versions }} test on ${{ matrix.operating-system }}
+
+    name: PHP ${{ matrix.php-versions }} test on ${{ matrix.operating-systems }}
 
     services:
       mysql:
-        image: mysql:5.7
+        image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: bagisto
@@ -32,17 +34,14 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          extensions: curl, gd, intl, mbstring, openssl, pdo, pdo_mysql, tokenizer, zip
+          extensions: curl, fileinfo, gd, intl, mbstring, openssl, pdo, pdo_mysql, tokenizer, zip
 
       - name: Composer Install
-        run: |
-          set -e
-          composer install --no-cache
+        run: composer install
 
       - name: Set Testing Environment
         run: |
           cp .env.example .env.testing
-          set -e
           sed -i "s|^\(APP_ENV=\s*\).*$|\1testing|" .env.testing
           sed -i "s|^\(DB_HOST=\s*\).*$|\1127.0.0.1|" .env.testing
           sed -i "s|^\(DB_PORT=\s*\).*$|\1${{ job.services.mysql.ports['3306'] }}|" .env.testing
@@ -51,34 +50,16 @@ jobs:
           sed -i "s|^\(DB_PASSWORD=\s*\).*$|\1root|" .env.testing
 
       - name: Key Generate
-        run: set -e && php artisan key:generate --env=testing
-
-      - name: Comlplete Testing Env File
-        run: |
-          printf "The complete `.env.testing` ... \n\n"
-          cat .env.testing
+        run: php artisan key:generate --env=testing
 
       - name: Optimize Stuffs
-        run: set -e && php artisan optimize:clear --env=testing
+        run: php artisan optimize --env=testing
 
-      - name: Migrate Database
-        run: set -e && php artisan migrate --env=testing
-
-      - name: Seed Database
-        run: set -e && php artisan db:seed --env=testing
+      - name: Migrate And Seed Database
+        run: php artisan migrate:fresh --seed --env=testing
 
       - name: Vendor Publish
-        run: set -e && php artisan bagisto:publish --force --env=testing
+        run: php artisan bagisto:publish --force
 
-      - name: Execute Unit Tests
-        run: set -e && vendor/bin/codecept run unit
-
-      - name: Execute Functional Tests
-        run: set -e && vendor/bin/codecept run functional
-
-      - name: Persist Test Artifacts
-        uses: actions/upload-artifact@v1
-        if: always()
-        with:
-          name: test_artifacts
-          path: tests/_output
+      - name: Running Test
+        run: vendor/bin/pest --colors=always

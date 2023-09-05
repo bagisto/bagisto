@@ -1,122 +1,63 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    {{-- Title of the page. --}}
+    <x-slot:title>
+        @lang('admin::app.configuration.index.title')
+    </x-slot:title>
 
-@section('page_title')
-    {{ __('admin::app.configuration.title') }}
-@stop
+    {{-- Heading of the page --}}
+    <div class="flex justify-between items-center mb-[26px]">
+        <p class="text-[20px] text-gray-800 font-bold">
+            @lang('admin::app.configuration.index.title')
+        </p>
 
-@push('css')
-
-    <style>
-
-        @media only screen and (max-width: 768px){
-            .content-container .content .page-header .page-title .control-group .control{
-                width: 100% !important;
-                margin-top:-25px !important;
-            }
-        }
-
-    </style>
-
-@endpush
-
-@section('content')
-    <div class="content">
-        @php
-            $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
-            $channel = core()->getRequestedChannelCode();
-            $channelLocales = core()->getAllLocalesByRequestedChannel()['locales'];
-        @endphp
-
-        <div class="configuration">
-            <form method="POST" action="" @submit.prevent="onSubmit" enctype="multipart/form-data">
-
-                <div class="page-header">
-
-                    <div class="page-title">
-                        <h1>
-                            {{ __('admin::app.configuration.title') }}
-                        </h1>
-
-                        <div class="control-group">
-                            <select class="control" id="channel-switcher" name="channel">
-                                @foreach (core()->getAllChannels() as $channelModel)
-
-                                    <option value="{{ $channelModel->code }}" {{ ($channelModel->code) == $channel ? 'selected' : '' }}>
-                                        {{ core()->getChannelName($channelModel) }}
-                                    </option>
-
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="control-group">
-                            <select class="control" id="locale-switcher" name="locale">
-                                @foreach ($channelLocales as $localeModel)
-
-                                    <option value="{{ $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
-                                        {{ $localeModel->name }}
-                                    </option>
-
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="page-action">
-                        <button type="submit" class="btn btn-lg btn-primary">
-                            {{ __('admin::app.configuration.save-btn-title') }}
-                        </button>
-                    </div>
-                </div>
-
-                <div class="page-content">
-                    <div class="form-container">
-                        @csrf()
-
-                        @if ($groups = \Illuminate\Support\Arr::get($config->items, request()->route('slug') . '.children.' . request()->route('slug2') . '.children'))
-
-                            @foreach ($groups as $key => $item)
-
-                                <accordian title="{{ __($item['name']) }}" :active="true">
-                                    <div slot="body">
-
-                                        @foreach ($item['fields'] as $field)
-
-                                            @include ('admin::configuration.field-type')
-
-                                            @php ($hint = $field['title'] . '-hint')
-                                            @if ($hint !== __($hint))
-                                                {{ __($hint) }}
-                                            @endif
-
-                                        @endforeach
-
-                                    </div>
-                                </accordian>
-
-                            @endforeach
-
-                        @endif
-
-                    </div>
-                </div>
-
-            </form>
-
-        </div>   
-
+        <div class="flex gap-x-[10px] items-center">
+            <span class="icon-settings p-[6px] rounded-[6px] text-[24px]  cursor-pointer transition-all hover:bg-gray-200"></span>
+        </div>
     </div>
-@stop
 
-@push('scripts')
-    <script>
-        $(document).ready(function () {
-            $('#channel-switcher, #locale-switcher').on('change', function (e) {
-                $('#channel-switcher').val()
-                var query = '?channel=' + $('#channel-switcher').val() + '&locale=' + $('#locale-switcher').val();
+    {{-- Page Content --}}
+    <div class="grid gap-y-[30px]">
+        @foreach ($config->items as $itemKey => $item)
+            <div>
+                <div class="grid gap-[4px]">
+                    {{-- Title of the Main Card --}}
+                    <p class="text-gray-600 font-semibold">
+                        {{ trans($item['name'] ?? '')  }}
+                    </p>
 
-                window.location.href = "{{ route('admin.configuration.index', [request()->route('slug'), request()->route('slug2')]) }}" + query;
-            })
-        });
-    </script>
-@endpush
+                    {{-- Info of the Main Card --}}
+                    <p class="text-gray-600">
+                        {{ trans($item['info'] ?? '')  }}
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-4 gap-[48px] flex-wrap justify-between p-[16px] mt-[8px] bg-white rounded-[4px] box-shadow max-1580:grid-cols-3 max-xl:grid-cols-2 max-sm:grid-cols-1">
+                    {{-- Menus cards --}}
+                    @foreach ($item['children'] as $childKey =>  $child)
+                        <a 
+                            class="flex items-center gap-[8px] max-w-[360px] p-[8px] rounded-[8px] transition-all hover:bg-gray-100"
+                            href="{{ route('admin.configuration.index', ($itemKey . '/' . $childKey)) }}"
+                        >
+                            @if (isset($child['icon']))
+                                <img
+                                    class="w-[60px] h-[60px]"
+                                    src="{{ bagisto_asset('images/' . $child['icon'] ?? '') }}"
+                                >
+                            @endif
+
+                            <div class="grid">
+                                <p class="mb-[5px] text-[16px] text-gray-800 font-semibold">
+                                    @lang($child['name'])
+                                </p>
+                                
+                                <p class="text-[12px] text-gray-600">
+                                    @lang($child['info'] ?? '')
+                                </p>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        @endforeach
+    </div>
+</x-admin::layouts>

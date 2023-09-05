@@ -2,11 +2,11 @@
 
 namespace Webkul\SocialLogin\Http\Controllers;
 
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Event;
 use Laravel\Socialite\Facades\Socialite;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Webkul\SocialLogin\Repositories\CustomerSocialAccountRepository;
 
 class LoginController extends Controller
@@ -19,11 +19,10 @@ class LoginController extends Controller
      * @var array
      */
     protected $_config;
-    
+
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\SocialLogin\Repositories\CustomerSocialAccountRepository  $customerSocialAccountRepository
      * @return void
      */
     public function __construct(protected CustomerSocialAccountRepository $customerSocialAccountRepository)
@@ -40,7 +39,7 @@ class LoginController extends Controller
     public function redirectToProvider($provider)
     {
         try {
-            return Socialite::driver($provider)->redirect();
+            return Socialite::driver($provider)->redirect('shop.customers.account.profile.index');
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
 
@@ -69,6 +68,6 @@ class LoginController extends Controller
         // Event passed to prepare cart after login
         Event::dispatch('customer.after.login', $customer->email);
 
-        return redirect()->intended(route($this->_config['redirect']));
+        return redirect()->intended('shop.customers.account.profile.index');
     }
 }

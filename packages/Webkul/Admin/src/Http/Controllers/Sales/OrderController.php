@@ -3,25 +3,17 @@
 namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\DB;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sales\Repositories\OrderRepository;
-use \Webkul\Sales\Repositories\OrderCommentRepository;
-use Webkul\Admin\DataGrids\OrderDataGrid;
+use Webkul\Sales\Repositories\OrderCommentRepository;
+use Webkul\Admin\DataGrids\Sales\OrderDataGrid;
 
 class OrderController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
-     * @param  \Webkul\Sales\Repositories\OrderCommentRepository  $orderCommentRepository
      * @return void
      */
     public function __construct(
@@ -29,7 +21,6 @@ class OrderController extends Controller
         protected OrderCommentRepository $orderCommentRepository
     )
     {
-        $this->_config = request('_config');
     }
 
     /**
@@ -43,7 +34,7 @@ class OrderController extends Controller
             return app(OrderDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::sales.orders.index');
     }
 
     /**
@@ -56,7 +47,7 @@ class OrderController extends Controller
     {
         $order = $this->orderRepository->findOrFail($id);
 
-        return view($this->_config['view'], compact('order'));
+        return view('admin::sales.orders.view', compact('order'));
     }
 
     /**
@@ -70,9 +61,9 @@ class OrderController extends Controller
         $result = $this->orderRepository->cancel($id);
 
         if ($result) {
-            session()->flash('success', trans('admin::app.sales.orders.cancel-error'));
+            session()->flash('success', trans('admin::app.sales.orders.view.cancel-error'));
         } else {
-            session()->flash('error', trans('admin::app.sales.orders.create-success'));
+            session()->flash('error', trans('admin::app.sales.orders.view.create-success'));
         }
 
         return redirect()->back();
@@ -88,15 +79,48 @@ class OrderController extends Controller
     {
         Event::dispatch('sales.order.comment.create.before');
 
-        $comment = $this->orderCommentRepository->create(array_merge(request()->all(), [
+        $data = array_merge(request()->only([
+            'comment',
+            'customer_notified'
+        ]), [
             'order_id'          => $id,
             'customer_notified' => request()->has('customer_notified'),
-        ]));
+        ]);
+
+        $comment = $this->orderCommentRepository->create($data);
 
         Event::dispatch('sales.order.comment.create.after', $comment);
 
-        session()->flash('success', trans('admin::app.sales.orders.comment-added-success'));
+        session()->flash('success', trans('admin::app.sales.orders.view.comment-success'));
 
         return redirect()->back();
+    }
+
+    /**
+     * Result of search product.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function search()
+    {
+        $results = [];
+
+        $orders = $this->orderRepository->scopeQuery(function($query) {
+            return $query->where('customer_email', 'like', '%' . urldecode(request()->input('query')) . '%')
+                ->orWhere('status', 'like', '%' . urldecode(request()->input('query')) . '%')
+                ->orWhere(DB::raw('CONCAT(' . DB::getTablePrefix() . 'customer_first_name, " ", ' . DB::getTablePrefix() . 'customer_last_name)'), 'like', '%' . urldecode(request()->input('query')) . '%')
+                ->orWhere('increment_id', request()->input('query'))
+                ->orderBy('created_at', 'desc');
+        })->paginate(10);
+
+        foreach ($orders as $key => $order) {
+            $orders[$key]['formatted_created_at'] = core()->formatDate($order->created_at, 'd M Y');
+
+            $orders[$key]['status_label'] = $order->status_label;
+
+            $orders[$key]['customer_full_name'] = $order->customer_full_name;
+        }
+
+        return response()->json($orders);
     }
 }

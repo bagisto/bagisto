@@ -2,20 +2,20 @@
 
 namespace Webkul\Theme;
 
-use Illuminate\Support\Facades\Config;
-use Webkul\Theme\Facades\Themes as Themes;
+use Illuminate\Support\Facades\Vite;
+use Webkul\Theme\Exceptions\ViterNotFound;
 
 class Theme
 {
     /**
-     * Contains theme parent
+     * Contains theme parent.
      *
-     * @var Theme
+     * @var \Webkul\Theme\Theme
      */
     public $parent;
 
     /**
-     * Create a new Theme instance.
+     * Create a new theme instance.
      *
      * @param  string  $code
      * @param  string  $name
@@ -27,16 +27,16 @@ class Theme
         public $code,
         public $name = null,
         public $assetsPath = null,
-        public $viewsPath = null
-    )
-    {
+        public $viewsPath = null,
+        public $vite = []
+    ) {
         $this->assetsPath = $assetsPath === null ? $code : $assetsPath;
 
         $this->viewsPath = $viewsPath === null ? $code : $viewsPath;
     }
 
     /**
-     * Sets the parent
+     * Sets the parent.
      *
      * @param  \Webkul\Theme\Theme
      * @return void
@@ -47,7 +47,7 @@ class Theme
     }
 
     /**
-     * Return the parent
+     * Return the parent.
      *
      * @return \Webkul\Theme\Theme
      */
@@ -55,9 +55,9 @@ class Theme
     {
         return $this->parent;
     }
-    
+
     /**
-     * Return all the possible view paths
+     * Return all the possible view paths.
      *
      * @return array
      */
@@ -83,34 +83,53 @@ class Theme
     }
 
     /**
-     * Convert to asset url based on current theme
+     * Convert to asset url based on current theme.
      *
-     * @param  string  $url
-     * @param  bool|null  $secure
      * @return string
      */
-    public function url($url, $secure = null)
+    public function url(string $url, ?string $namespace)
     {
-        $url = ltrim($url, '/');
+        $url = trim($url, '/');
 
-        if (preg_match('/^((http(s?):)?\/\/)/i', $url)) {
-            return $url;
-        }
-        
-        if (preg_match('/^((http(s?):)?\/\/)/i', $this->assetsPath)) {
-            return $this->assetsPath . '/' . $url;
-        }
+        /**
+         * If the namespace is null, it means the theming system is activated. We use the request URI to
+         * detect the theme and provide Vite assets based on the current theme.
+         */
+        if (empty($namespace)) {
+            $viteUrl = trim($this->vite['package_assets_directory'], '/') . '/' . $url;
 
-        $fullUrl = str_replace("public/", "", $this->assetsPath) . '/' . $url;
-
-        if (file_exists(public_path($fullUrl))) {
-            return asset($fullUrl, $secure);
+            return Vite::useHotFile($this->vite['hot_file'])
+                ->useBuildDirectory($this->vite['build_directory'])
+                ->asset($viteUrl);
         }
 
-        if ($parentTheme = $this->getParent()) {
-            return $parentTheme->url($url);
+        /**
+         * If a namespace is provided, it means the developer knows what they are doing and must create the
+         * registry in the provided configuration. We will analyze based on that.
+         */
+        $viters = config('bagisto-vite.viters');
+
+        if (empty($viters[$namespace])) {
+            throw new ViterNotFound($namespace);
         }
 
-        return asset($url, $secure);
+        $viteUrl = trim($viters[$namespace]['package_assets_directory'], '/') . '/' . $url;
+
+        return Vite::useHotFile($viters[$namespace]['hot_file'])
+            ->useBuildDirectory($viters[$namespace]['build_directory'])
+            ->asset($viteUrl);
+    }
+
+    /**
+     * Set bagisto vite.
+     *
+     * @param  array  $entryPoints
+     * @return \Illuminate\Foundation\Vite
+     */
+    public function setBagistoVite($entryPoints)
+    {
+        return Vite::useHotFile($this->vite['hot_file'])
+            ->useBuildDirectory($this->vite['build_directory'])
+            ->withEntryPoints($entryPoints);
     }
 }

@@ -46,7 +46,7 @@ class ProductReview extends Model implements ProductReviewContract
      */
     public function images(): HasMany
     {
-        return $this->hasMany(ProductReviewImageProxy::modelClass(), 'review_id');
+        return $this->hasMany(ProductReviewAttachmentProxy::modelClass(), 'review_id');
     }
 
     /**

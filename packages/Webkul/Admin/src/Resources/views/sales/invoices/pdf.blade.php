@@ -171,7 +171,7 @@
                             </div>
                         @endif
                         <div class="invoice-text">
-                            <span>{{ strtoupper(__('admin::app.sales.invoices.invoice')) }}</span>
+                            <span>{{ strtoupper(__('admin::app.sales.invoices.invoice-pdf.invoice')) }}</span>
                         </div>
                     </div>
                 </div>
@@ -181,12 +181,12 @@
                         <div class="col-6">
                             <div class="merchant-details">
                                 <div class="row">
-                                    <span class="label">{{ __('admin::app.sales.invoices.invoice-id') }}: </span>
+                                    <span class="label">@lang('admin::app.sales.invoices.invoice-pdf.invoice-id'): </span>
                                     <span class="value">#{{ $invoice->increment_id ?? $invoice->id }}</span>
                                 </div>
 
                                 <div class="row">
-                                    <span class="label">{{ __('admin::app.sales.invoices.date') }}: </span>
+                                    <span class="label">@lang('admin::app.sales.invoices.invoice-pdf.date'): </span>
                                     <span class="value">{{ core()->formatDate($invoice->created_at, 'd-m-Y') }}</span>
                                 </div>
 
@@ -207,29 +207,29 @@
                             </div>
                             <div class="merchant-details">
                                 @if (core()->getConfigData('sales.shipping.origin.contact'))
-                                    <div><span class="merchant-details-title">{{ __('admin::app.admin.system.contact-number') }}: </span> {{ core()->getConfigData('sales.shipping.origin.contact') }}</div>
+                                    <div><span class="merchant-details-title">@lang('admin::app.sales.invoices.invoice-pdf.contact-number'): </span> {{ core()->getConfigData('sales.shipping.origin.contact') }}</div>
                                 @endif
 
                                 @if (core()->getConfigData('sales.shipping.origin.vat_number'))
-                                    <div><span class="merchant-details-title">{{ __('admin::app.admin.system.vat-number') }}: </span> {{ core()->getConfigData('sales.shipping.origin.vat_number') }}</div>
+                                    <div><span class="merchant-details-title">@lang('admin::app.sales.invoices.invoice-pdf.vat-number'): </span> {{ core()->getConfigData('sales.shipping.origin.vat_number') }}</div>
                                 @endif
                             </div>
                         </div>
 
                         <div class="col-6" style="padding-left: 80px">
                             <div class="row">
-                                <span class="label">{{ __('admin::app.sales.invoices.order-id') }}: </span>
+                                <span class="label">@lang('admin::app.sales.invoices.invoice-pdf.order-id'): </span>
                                 <span class="value">#{{ $invoice->order->increment_id }}</span>
                             </div>
                            
                             <div class="row">
-                                <span class="label">{{ __('admin::app.sales.invoices.order-date') }}: </span>
+                                <span class="label">@lang('admin::app.sales.invoices.invoice-pdf.order-date'): </span>
                                 <span class="value">{{ core()->formatDate($invoice->order->created_at, 'd-m-Y') }}</span>
                             </div>
 
                             @if ($invoice->hasPaymentTerm())
                                 <div class="row">
-                                    <span class="label">{{ __('admin::app.customer.account.order.view.payment-terms') }} -</span>
+                                    <span class="label">@lang('admin::app.sales.invoices.invoice-pdf.payment-terms') -</span>
                                     <span class="value">{{ $invoice->getFormattedPaymentTerm() }}</span>
                                 </div>
                             @endif
@@ -237,7 +237,7 @@
                             @if (core()->getConfigData('sales.shipping.origin.bank_details'))
                                 <div class="row" style="padding-top: 20px">
                                     <span class="merchant-details-title">
-                                        {{ __('admin::app.admin.system.bank-details') }}:
+                                        @lang('admin::app.sales.invoices.invoice-pdf.bank-details'):
                                     </span> 
                                     <div>{{ core()->getConfigData('sales.shipping.origin.bank_details') }}</div>
                                 </div>
@@ -252,9 +252,9 @@
                     <table>
                         <thead>
                             <tr>
-                                <th class="table-header align-left" style="width: 50%;">{{ ucwords(trans('admin::app.sales.invoices.bill-to')) }}</th>
+                                <th class="table-header align-left" style="width: 50%;">{{ ucwords(trans('admin::app.sales.invoices.invoice-pdf.bill-to')) }}</th>
                                 @if ($invoice->order->shipping_address)
-                                    <th class="table-header align-left">{{ ucwords(trans('admin::app.sales.invoices.ship-to')) }}</th>
+                                    <th class="table-header align-left">{{ ucwords(trans('admin::app.sales.invoices.invoice-pdf.ship-to')) }}</th>
                                 @endif
                             </tr>
                         </thead>
@@ -269,7 +269,7 @@
                                         <p>{{ $invoice->order->billing_address->postcode . ' ' .$invoice->order->billing_address->city }} </p>
                                         <p>{{ $invoice->order->billing_address->state }}</p>
                                         <p>{{ core()->country_name($invoice->order->billing_address->country) }}</p>
-                                        {{ __('shop::app.checkout.onepage.contact') }} : {{ $invoice->order->billing_address->phone }}
+                                        @lang('admin::app.sales.invoices.invoice-pdf.contact') : {{ $invoice->order->billing_address->phone }}
                                     </td>
                                 @endif
 
@@ -281,7 +281,7 @@
                                         <p>{{ $invoice->order->shipping_address->postcode . ' ' . $invoice->order->shipping_address->city }}</p>
                                         <p>{{ $invoice->order->shipping_address->state }}</p>
                                         <p>{{ core()->country_name($invoice->order->shipping_address->country) }}</p>
-                                        {{ __('shop::app.checkout.onepage.contact') }} : {{ $invoice->order->shipping_address->phone }}
+                                        @lang('admin::app.sales.invoices.invoice-pdf.contact') }} : {{ $invoice->order->shipping_address->phone }}
                                     </td>
                                 @endif
                             </tr>
@@ -293,10 +293,10 @@
                     <table>
                         <thead>
                             <tr>
-                                <th class="table-header align-left" style="width: 50%;">{{ __('admin::app.sales.orders.payment-method') }}</th>
+                                <th class="table-header align-left" style="width: 50%;">@lang('admin::app.sales.invoices.invoice-pdf.payment-method')</th>
 
                                 @if ($invoice->order->shipping_address)
-                                    <th class="table-header align-left">{{ __('admin::app.sales.orders.shipping-method') }}</th>
+                                    <th class="table-header align-left">@lang('admin::app.sales.invoices.invoice-pdf.shipping-method')</th>
                                 @endif
                             </tr>
                         </thead>
@@ -330,13 +330,13 @@
                     <table>
                         <thead>
                             <tr>
-                                <th class="text-center table-header">{{ __('admin::app.sales.orders.SKU') }}</th>
-                                <th class="text-center table-header">{{ __('admin::app.sales.orders.product-name') }}</th>
-                                <th class="text-center table-header">{{ __('admin::app.sales.orders.price') }}</th>
-                                <th class="text-center table-header">{{ __('admin::app.sales.orders.qty') }}</th>
-                                <th class="text-center table-header">{{ __('admin::app.sales.orders.subtotal') }}</th>
-                                <th class="text-center table-header">{{ __('admin::app.sales.orders.tax-amount') }}</th>
-                                <th class="text-center table-header">{{ __('admin::app.sales.orders.grand-total') }}</th>
+                                <th class="text-center table-header">@lang('admin::app.sales.invoices.invoice-pdf.sku')</th>
+                                <th class="text-center table-header">@lang('admin::app.sales.invoices.invoice-pdf.product-name')</th>
+                                <th class="text-center table-header">@lang('admin::app.sales.invoices.invoice-pdf.price')</th>
+                                <th class="text-center table-header">@lang('admin::app.sales.invoices.invoice-pdf.qty')</th>
+                                <th class="text-center table-header">@lang('admin::app.sales.invoices.invoice-pdf.subtotal')</th>
+                                <th class="text-center table-header">@lang('admin::app.sales.invoices.invoice-pdf.tax-amount')</th>
+                                <th class="text-center table-header">@lang('admin::app.sales.invoices.invoice-pdf.grand-total')</th>
                             </tr>
                         </thead>
 
@@ -376,25 +376,25 @@
 
                 <table class="sale-summary">
                     <tr>
-                        <td>{{ __('admin::app.sales.orders.subtotal') }}</td>
+                        <td>@lang('admin::app.sales.invoices.invoice-pdf.subtotal')</td>
                         <td>-</td>
                         <td>{!! core()->formatBasePrice($invoice->base_sub_total, true) !!}</td>
                     </tr>
 
                     <tr>
-                        <td>{{ __('admin::app.sales.orders.shipping-handling') }}</td>
+                        <td>@lang('admin::app.sales.invoices.invoice-pdf.shipping-handling')</td>
                         <td>-</td>
                         <td>{!! core()->formatBasePrice($invoice->base_shipping_amount, true) !!}</td>
                     </tr>
 
                     <tr>
-                        <td>{{ __('admin::app.sales.orders.tax') }}</td>
+                        <td>@lang('admin::app.sales.invoices.invoice-pdf.tax')</td>
                         <td>-</td>
                         <td>{!! core()->formatBasePrice($invoice->base_tax_amount, true) !!}</td>
                     </tr>
 
                     <tr>
-                        <td>{{ __('admin::app.sales.orders.discount') }}</td>
+                        <td>@lang('admin::app.sales.invoices.invoice-pdf.discount')</td>
                         <td>-</td>
                         <td>{!! core()->formatBasePrice($invoice->base_discount_amount, true) !!}</td>
                     </tr>
@@ -406,7 +406,7 @@
                     </tr>
 
                     <tr>
-                        <td>{{ __('admin::app.sales.orders.grand-total') }}</td>
+                        <td>@lang('admin::app.sales.invoices.invoice-pdf.grand-total')</td>
                         <td>-</td>
                         <td>{!! core()->formatBasePrice($invoice->base_grand_total, true) !!}</td>
                     </tr>

@@ -18,7 +18,6 @@ return new class extends Migration
             $table->integer('customer_group_id')->unsigned();
 
             $table->primary(['cart_rule_id', 'customer_group_id']);
-
             $table->foreign('cart_rule_id')->references('id')->on('cart_rules')->onDelete('cascade');
             $table->foreign('customer_group_id')->references('id')->on('customer_groups')->onDelete('cascade');
         });

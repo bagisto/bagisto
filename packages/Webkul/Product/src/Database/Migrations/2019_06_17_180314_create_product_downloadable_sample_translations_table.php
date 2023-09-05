@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('product_downloadable_sample_translations', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('product_downloadable_sample_id')->unsigned();
             $table->string('locale');
             $table->text('title')->nullable();
 
-            $table->integer('product_downloadable_sample_id')->unsigned();
             $table->foreign('product_downloadable_sample_id', 'sample_translations_sample_id_foreign')->references('id')->on('product_downloadable_samples')->onDelete('cascade');
         });
     }

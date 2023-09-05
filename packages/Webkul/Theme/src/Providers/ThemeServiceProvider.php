@@ -2,9 +2,9 @@
 
 namespace Webkul\Theme\Providers;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Theme\Themes;
-use Webkul\Theme\Facades\Themes as ThemeFacade;
 
 class ThemeServiceProvider extends ServiceProvider
 {
@@ -16,6 +16,10 @@ class ThemeServiceProvider extends ServiceProvider
     public function boot()
     {
         include __DIR__ . '/../Http/helpers.php';
+
+        Blade::directive('bagistoVite', function ($expression) {
+            return "<?php echo themes()->setBagistoVite({$expression})->toHtml(); ?>";
+        });
     }
 
     /**

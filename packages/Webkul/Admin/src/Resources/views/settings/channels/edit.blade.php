@@ -1,328 +1,583 @@
-@extends('admin::layouts.content')
+@php
+    $locale = core()->getRequestedLocaleCode();
 
-@section('page_title')
-    {{ __('admin::app.settings.channels.edit-title') }}
-@stop
+    $seo = json_decode($channel->translate($locale)['home_seo'] ?? $channel->home_seo);
+@endphp
 
-@section('content')
-    <div class="content">
-        @php $locale = core()->getRequestedLocaleCode(); @endphp
+<x-admin::layouts>
+    {{-- Page Title --}}
+    <x-slot:title>
+        @lang('admin::app.settings.channels.edit.title')
+    </x-slot:title>
 
-        <form method="POST" action="{{ route('admin.channels.update', ['id' => $channel->id, 'locale' => $locale]) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
-            <div class="page-header">
-                <div class="page-title">
-                    <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.channels.index') }}'"></i>
+    {{-- Channeld Edit Form --}}
+    <x-admin::form  
+        :action="route('admin.settings.channels.update', ['id' => $channel->id, 'locale' => $locale])"
+        enctype="multipart/form-data"
+    >
+        @method('PUT')
 
-                        {{ __('admin::app.settings.channels.edit-title') }}
-                    </h1>
+        <div class="flex justify-between items-center">
+            <p class="text-[20px] text-gray-800 font-bold">
+                @lang('admin::app.settings.channels.edit.title')
+            </p>
 
-                    <div class="control-group">
-                        <select class="control" id="locale-switcher" onChange="window.location.href = this.value">
-                            @foreach (core()->getAllLocales() as $localeModel)
+            <div class="flex gap-x-[10px] items-center">
+                <a
+                    href="{{ route('admin.settings.channels.index') }}"
+                    class="transparent-button hover:bg-gray-200"
+                >
+                    @lang('admin::app.settings.channels.edit.back-btn')
+                </a>
 
-                                <option value="{{ route('admin.channels.edit', $channel->id) . '?locale=' . $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
-                                    {{ $localeModel->name }}
-                                </option>
+                <button 
+                    type="submit" 
+                    class="primary-button"
+                >
+                    @lang('admin::app.settings.channels.edit.save-btn')
+                </button>
+            </div>
+        </div>
+
+        {{-- Content --}}
+        <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+            <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                {{-- General Information --}}
+                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                        @lang('admin::app.settings.channels.edit.general')
+                    </p>
+                    
+                    <div class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label class="required">
+                                @lang('admin::app.settings.channels.edit.code')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="code"
+                                :value="old('code') ?? $channel->code"
+                                id="code"
+                                rules="required"
+                                :label="trans('admin::app.settings.channels.edit.code')"
+                                :placeholder="trans('admin::app.settings.channels.edit.code')"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="code"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label class="required">
+                                @lang('admin::app.settings.channels.edit.name')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="text"
+                                :name="$locale . '[name]'"
+                                :value="old('name') ?? $channel->name"
+                                :id="$locale . '[name]'"
+                                rules="required"
+                                :label="trans('admin::app.settings.channels.edit.name')"
+                                :placeholder="trans('admin::app.settings.channels.edit.name')"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                :control-name="$locale . '[name]'"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.settings.channels.edit.description')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="textarea"
+                                name="description"
+                                :value="old('description') ?? $channel->description"
+                                id="description"
+                                :label="trans('admin::app.settings.channels.edit.description')"
+                                :placeholder="trans('admin::app.settings.channels.edit.description')"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="description"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <div class="mb-[10px]">
+                            <p class="required block leading-[24px] text-[12px] text-gray-800 font-medium">
+                                @lang('admin::app.settings.channels.edit.inventory-sources')
+                            </p>
+                    
+                            @foreach (app('Webkul\Inventory\Repositories\InventorySourceRepository')->findWhere(['status' => 1]) as $inventorySource)
+                                <x-admin::form.control-group class="flex gap-[10px] mb-[10px]">
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        name="inventory_sources[]"
+                                        :value="$inventorySource->id" 
+                                        :id="'inventory_sources_' . $inventorySource->id"
+                                        :for="'inventory_sources_' . $inventorySource->id"
+                                        rules="required"
+                                        :label="trans('admin::app.settings.channels.edit.inventory-sources')"
+                                        :checked="in_array($inventorySource->id, old('inventory_sources') ?? $channel->inventory_sources->pluck('id')->toArray())"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.label
+                                        :for="'inventory_sources_' . $inventorySource->id"
+                                        class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
+                                    >
+                                        <span class="text-gray-600 font-semibold cursor-pointer">
+                                            {{ $inventorySource->name }}
+                                        </span>
+                                    </x-admin::form.control-group.label>
+                                </x-admin::form.control-group>
 
                             @endforeach
-                        </select>
+
+                            <x-admin::form.control-group.error
+                                control-name="inventory_sources[]"
+                            >
+                            </x-admin::form.control-group.error>
+                        </div>
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.settings.channels.edit.root-category')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="select"
+                                name="root_category_id"
+                                :value="old('root_category_id') ?? $channel->root_category_id"
+                                id="root_category_id"
+                                rules="required"
+                                :label="trans('admin::app.settings.channels.edit.root-category')"
+                            >
+                                @foreach (app('Webkul\Category\Repositories\CategoryRepository')->getRootCategories() as $category)
+                                    <option value="{{ $category->id }}" {{ old('root_category_id') == $category->id ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="root_category_id"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.settings.channels.edit.hostname')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="hostname"
+                                :value="old('hostname') ?? $channel->hostname"
+                                id="hostname"
+                                :label="trans('admin::app.settings.channels.edit.hostname')"
+                                :placeholder="trans('admin::app.settings.channels.edit.hostname-placeholder')"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="hostname"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
                     </div>
                 </div>
 
-                <div class="page-action">
-                    <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.settings.channels.save-btn-title') }}
-                    </button>
+                {{-- Logo and Design --}}
+                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                        @lang('admin::app.settings.channels.edit.design')
+                    </p>
+
+                    <div class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.settings.channels.edit.theme')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="select"
+                                name="theme"
+                                :value="old('theme') ?? $channel->theme"
+                                id="theme"
+                                :label="trans('admin::app.settings.channels.edit.theme')"
+                            >
+                                @foreach (config('themes.themes') as $themeCode => $theme)
+                                    <option value="{{ $themeCode }}" {{ old('theme') == $themeCode ? 'selected' : '' }}>
+                                        {{ $theme['name'] }}
+                                    </option>
+                                @endforeach
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="theme"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <div class="flex justify-between">
+                            <div class="flex flex-col w-[40%]">
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.channels.edit.logo')
+                                    </x-admin::form.control-group.label>
+
+                                    @php
+                                        $logoImages = $channel->logo ? [['id' => 'logo_path', 'url' => $channel->logo_url]] : [];
+                                    @endphp
+
+                                    <x-admin::media.images
+                                        name="logo"
+                                        ::uploaded-images='{{ json_encode($logoImages) }}'
+                                    >
+                                    </x-admin::media.images>
+                                </x-admin::form.control-group>
+
+                                <p class="text-[12px] text-gray-600">
+                                    @lang('admin::app.settings.channels.edit.logo-size')
+                                </p>
+                            </div>
+
+                            <div class="flex flex-col w-[40%]">
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.channels.edit.favicon')
+                                    </x-admin::form.control-group.label>
+
+                                    @php
+                                        $faviconImages = $channel->favicon ? [['id' => 'logo_path', 'url' => $channel->favicon_url]] : [];
+                                    @endphp
+
+                                    <x-admin::media.images
+                                        name="favicon"
+                                        ::uploaded-images='{{ json_encode($faviconImages) }}'
+                                    >
+                                    </x-admin::media.images>
+                                </x-admin::form.control-group>
+
+                                <p class="text-[12px] text-gray-600">
+                                    @lang('admin::app.settings.channels.edit.favicon-size')
+                                </p>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+
+                {{-- Home Page SEO --}} 
+                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                        @lang('admin::app.settings.channels.edit.seo')
+                    </p>
+
+                    {{-- SEO Title & Description Blade Componnet --}}
+                    <x-admin::seo/>
+
+                    <div class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label class="required">
+                                @lang('admin::app.settings.channels.edit.seo-title')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="text"
+                                :name="$locale . '[seo_title]'"
+                                :value="$seo->meta_title ?? (old($locale)['seo_title'] ?? '')"
+                                id="meta_title"
+                                rules="required"
+                                :label="trans('admin::app.settings.channels.edit.seo-title')"
+                                :placeholder="trans('admin::app.settings.channels.edit.seo-title')"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="seo_title"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label class="required">
+                                @lang('admin::app.settings.channels.edit.seo-keywords')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="textarea"
+                                :name="$locale . '[seo_keywords]'"
+                                :value="old($locale)['seo_keywords'] ?? $seo->meta_keywords"
+                                id="seo_keywords"
+                                :label="trans('admin::app.settings.channels.edit.seo-keywords')"
+                                :placeholder="trans('admin::app.settings.channels.edit.seo-keywords')"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="seo_keywords"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label class="required">
+                                @lang('admin::app.settings.channels.edit.seo-description')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="textarea"
+                                :name="$locale . '[seo_description]'"
+                                :value="$seo->meta_description ?? (old($locale)['seo_description'] ?? '')"
+                                id="meta_description"
+                                rules="required"
+                                :label="trans('admin::app.settings.channels.edit.seo-description')"
+                                :placeholder="trans('admin::app.settings.channels.edit.seo-description')"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="seo_description"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+                    </div>
                 </div>
             </div>
 
-            <div class="page-content">
-
-                <div class="form-container">
-                    @csrf()
-                    <input name="_method" type="hidden" value="PUT">
-
-                    {!! view_render_event('bagisto.admin.settings.channel.edit.before') !!}
-
-                    {{-- general --}}
-                    <accordian title="{{ __('admin::app.settings.channels.general') }}" :active="true">
-                        <div slot="body">
-
-                            <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
-                                <label for="code" class="required">{{ __('admin::app.settings.channels.code') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="code" name="code" data-vv-as="&quot;{{ __('admin::app.settings.channels.code') }}&quot;" value="{{ $channel->code }}" disabled="disabled"/>
-                                <input type="hidden" name="code" value="{{ $channel->code }}"/>
-                                <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
-                            </div>
-
-                            <div class="control-group" :class="[errors.has('{{$locale}}[name]') ? 'has-error' : '']">
-                                <label for="name" class="required">
-                                    {{ __('admin::app.settings.channels.name') }}
-                                    <span class="locale">[{{ $locale }}]</span>
-                                </label>
-                                <input v-validate="'required'" class="control" id="name" name="{{$locale}}[name]" data-vv-as="&quot;{{ __('admin::app.settings.channels.name') }}&quot;" value="{{ old($locale)['name'] ?? ($channel->translate($locale)['name'] ?? $channel->name) }}"/>
-                                <span class="control-error" v-if="errors.has('{{$locale}}[name]')">@{{ errors.first('{!!$locale!!}[page_title]') }}</span>
-                            </div>
-
-                            <div class="control-group">
-                                <label for="description">
-                                    {{ __('admin::app.settings.channels.description') }}
-                                    <span class="locale">[{{ $locale }}]</span>
-                                </label>
-                                <textarea class="control" id="description" name="{{$locale}}[description]">{{ old($locale)['description'] ?? ($channel->translate($locale)['description'] ?? $channel->description) }}</textarea>
-                            </div>
-
-                            <div class="control-group" :class="[errors.has('inventory_sources[]') ? 'has-error' : '']">
-                                <label for="inventory_sources" class="required">{{ __('admin::app.settings.channels.inventory_sources') }}</label>
-
-                                @php $selectedOptionIds = old('inventory_sources') ?: $channel->inventory_sources->pluck('id')->toArray() @endphp
-
-                                <select v-validate="'required'" class="control" id="inventory_sources" name="inventory_sources[]" data-vv-as="&quot;{{ __('admin::app.settings.channels.inventory_sources') }}&quot;" multiple>
-                                    @foreach (app('Webkul\Inventory\Repositories\InventorySourceRepository')->findWhere(['status' => 1]) as $inventorySource)
-                                        <option value="{{ $inventorySource->id }}" {{ in_array($inventorySource->id, $selectedOptionIds) ? 'selected' : '' }}>
-                                            {{ $inventorySource->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                <span class="control-error" v-if="errors.has('inventory_sources[]')">@{{ errors.first('inventory_sources[]') }}</span>
-                            </div>
-
-                            <div class="control-group" :class="[errors.has('root_category_id') ? 'has-error' : '']">
-                                <label for="root_category_id" class="required">{{ __('admin::app.settings.channels.root-category') }}</label>
-
-                                @php $selectedOption = old('root_category_id') ?: $channel->root_category_id @endphp
-
-                                <select v-validate="'required'" class="control" id="root_category_id" name="root_category_id" data-vv-as="&quot;{{ __('admin::app.settings.channels.root-category') }}&quot;">
-                                    @foreach (app('Webkul\Category\Repositories\CategoryRepository')->getRootCategories() as $category)
-                                        <option value="{{ $category->id }}" {{ $selectedOption == $category->id ? 'selected' : '' }}>
-                                            {{ $category->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                <span class="control-error" v-if="errors.has('root_category_id')">@{{ errors.first('root_category_id') }}</span>
-                            </div>
-
-                            <div class="control-group" :class="[errors.has('hostname') ? 'has-error' : '']">
-                                <label for="hostname">{{ __('admin::app.settings.channels.hostname') }}</label>
-                                <input type="text" v-validate="''" class="control" id="hostname" name="hostname" value="{{ $channel->hostname }}" placeholder="{{ __('admin::app.settings.channels.hostname-placeholder') }}"/>
-
-                                <span class="control-error" v-if="errors.has('hostname')">@{{ errors.first('hostname') }}</span>
-                            </div>
-
+            {{-- Currencies and Locale --}}
+            <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+                <x-admin::accordion>
+                    <x-slot:header>
+                        <div class="flex items-center justify-between">
+                            <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                @lang('admin::app.settings.channels.edit.currencies-and-locales')
+                            </p>
                         </div>
-                    </accordian>
+                    </x-slot:header>
+            
+                    <x-slot:content>
+                        <div class="mb-[10px]">
+                            <p class="required block leading-[24px] text-gray-800 font-medium">
+                                @lang('admin::app.settings.channels.edit.locales') 
+                            </p>
 
-                    {{-- currencies and locales --}}
-                    <accordian title="{{ __('admin::app.settings.channels.currencies-and-locales') }}" :active="true">
-                        <div slot="body">
-
-                            <div class="control-group" :class="[errors.has('locales[]') ? 'has-error' : '']">
-                                <label for="locales" class="required">{{ __('admin::app.settings.channels.locales') }}</label>
-
-                                @php $selectedOptionIds = old('locales') ?: $channel->locales->pluck('id')->toArray() @endphp
-
-                                <select v-validate="'required'" class="control" id="locales" name="locales[]" data-vv-as="&quot;{{ __('admin::app.settings.channels.locales') }}&quot;" multiple>
-                                    @foreach (core()->getAllLocales() as $localeModel)
-                                        <option value="{{ $localeModel->id }}" {{ in_array($localeModel->id, $selectedOptionIds) ? 'selected' : '' }}>
-                                            {{ $localeModel->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                <span class="control-error" v-if="errors.has('locales[]')">@{{ errors.first('locales[]') }}</span>
-                            </div>
-
-                            <div class="control-group" :class="[errors.has('default_locale_id') ? 'has-error' : '']">
-                                <label for="default_locale_id" class="required">{{ __('admin::app.settings.channels.default-locale') }}</label>
-                                
-                                @php $selectedOption = old('default_locale_id') ?: $channel->default_locale_id @endphp
-
-                                <select v-validate="'required'" class="control" id="default_locale_id" name="default_locale_id" data-vv-as="&quot;{{ __('admin::app.settings.channels.default-locale') }}&quot;">
-                                    @foreach (core()->getAllLocales() as $localeModel)
-                                        <option value="{{ $localeModel->id }}" {{ $selectedOption == $localeModel->id ? 'selected' : '' }}>
-                                            {{ $localeModel->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                <span class="control-error" v-if="errors.has('default_locale_id')">@{{ errors.first('default_locale_id') }}</span>
-                            </div>
-
-                            <div class="control-group" :class="[errors.has('currencies[]') ? 'has-error' : '']">
-                                <label for="currencies" class="required">{{ __('admin::app.settings.channels.currencies') }}</label>
-
-                                @php $selectedOptionIds = old('currencies') ?: $channel->currencies->pluck('id')->toArray() @endphp
-
-                                <select v-validate="'required'" class="control" id="currencies" name="currencies[]" data-vv-as="&quot;{{ __('admin::app.settings.channels.currencies') }}&quot;" multiple>
-                                    @foreach (core()->getAllCurrencies() as $currency)
-                                        <option value="{{ $currency->id }}" {{ in_array($currency->id, $selectedOptionIds) ? 'selected' : '' }}>
-                                            {{ $currency->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                <span class="control-error" v-if="errors.has('currencies[]')">@{{ errors.first('currencies[]') }}</span>
-                            </div>
-
-                            <div class="control-group" :class="[errors.has('base_currency_id') ? 'has-error' : '']">
-                                <label for="base_currency_id" class="required">{{ __('admin::app.settings.channels.base-currency') }}</label>
-
-                                @php $selectedOption = old('base_currency_id') ?: $channel->base_currency_id @endphp
-
-                                <select v-validate="'required'" class="control" id="base_currency_id" name="base_currency_id" data-vv-as="&quot;{{ __('admin::app.settings.channels.base-currency') }}&quot;">
-                                    @foreach (core()->getAllCurrencies() as $currency)
-                                        <option value="{{ $currency->id }}" {{ $selectedOption == $currency->id ? 'selected' : '' }}>
-                                            {{ $currency->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                <span class="control-error" v-if="errors.has('base_currency_id')">@{{ errors.first('base_currency_id') }}</span>
-                            </div>
-
-                        </div>
-                    </accordian>
-
-                    {{-- design --}}
-                    <accordian title="{{ __('admin::app.settings.channels.design') }}" :active="true">
-                        <div slot="body">
-                            <div class="control-group">
-                                <label for="theme">{{ __('admin::app.settings.channels.theme') }}</label>
-
-                                @php $selectedOption = old('theme') ?: $channel->theme @endphp
-
-                                <select class="control" id="theme" name="theme">
-                                    @foreach (config('themes.themes') as $themeCode => $theme)
-                                        <option value="{{ $themeCode }}" {{ $selectedOption == $themeCode ? 'selected' : '' }}>
-                                            {{ $theme['name'] }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="control-group">
-                                <label for="home_page_content">
-                                    {{ __('admin::app.settings.channels.home_page_content') }}
-                                    <span class="locale">[{{ $locale }}]</span>
-                                </label>
-                                <textarea class="control" id="home_page_content" name="{{$locale}}[home_page_content]">{{ old($locale)['home_page_content'] ?? ($channel->translate($locale)['home_page_content'] ?? $channel->home_page_content) }}</textarea>
-                            </div>
-
-                            <div class="control-group">
-                                <label for="footer_content">
-                                    {{ __('admin::app.settings.channels.footer_content') }}
-                                    <span class="locale">[{{ $locale }}]</span>
-                                </label>
-                                <textarea class="control" id="footer_content" name="{{$locale}}[footer_content]">{{ old($locale)['footer_content'] ?? ($channel->translate($locale)['footer_content'] ?? $channel->footer_content) }}</textarea>
-                            </div>
-
-                            <div class="control-group">
-                                <label>{{ __('admin::app.settings.channels.logo') }}</label>
-
-                                <image-wrapper button-label="{{ __('admin::app.catalog.products.add-image-btn-title') }}" input-name="logo" :multiple="false" :images='"{{ $channel->logo_url }}"'></image-wrapper>
+                            @php $selectedLocalesId = old('locales') ?? $channel->locales->pluck('id')->toArray() @endphp
                             
-                                <span class="control-info mt-10">{{ __('admin::app.settings.channels.logo-size') }}</span>
-                            </div>
+                            @foreach (core()->getAllLocales() as $locale)
+                                <x-admin::form.control-group class="flex gap-[10px] mb-[10px]">
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        name="locales[]"
+                                        :value="$locale->id"
+                                        :id="'locales_' . $locale->id" 
+                                        :for="'locales_' . $locale->id" 
+                                        :checked="in_array($locale->id, $selectedLocalesId)"
+                                        rules="required"
+                                        :label="trans('admin::app.settings.channels.edit.locales')"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                            <div class="control-group">
-                                <label>{{ __('admin::app.settings.channels.favicon') }}</label>
+                                    <x-admin::form.control-group.label
+                                        :for="'locales_' . $locale->id"
+                                        class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
+                                    >
+                                        <span class="text-gray-600 font-semibold cursor-pointer">
+                                            {{ $locale->name }} 
+                                        </span>
+                                    </x-admin::form.control-group.label>
+                                </x-admin::form.control-group>
+                            @endforeach
 
-                                <image-wrapper button-label="{{ __('admin::app.catalog.products.add-image-btn-title') }}" input-name="favicon" :multiple="false" :images='"{{ $channel->favicon_url }}"'></image-wrapper>
+                            <x-admin::form.control-group.error
+                                control-name="locales[]" 
+                            >
+                            </x-admin::form.control-group.error>
+                        </div>
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label class="required">
+                                @lang('admin::app.settings.channels.edit.default-locale')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="select"
+                                name="default_locale_id"
+                                :value="old('default_locale_id') ?? $channel->default_locale_id"
+                                id="default_locale_id"
+                                rules="required"
+                                :label="trans('admin::app.settings.channels.edit.default-locale')"
+                            >
+                                @foreach (core()->getAllLocales() as $locale)
+                                    <option value="{{ $locale->id }}">
+                                        {{ $locale->name }}
+                                    </option>
+                                @endforeach
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="default_locale_id"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <div class="mb-[10px]">
+                            <p class="required block leading-[24px] text-gray-800 font-medium">
+                                @lang('admin::app.settings.channels.edit.currencies')
+                            </p>
+                        
+                            @php $selectedCurrenciesId = old('currencies') ?: $channel->currencies->pluck('id')->toArray() @endphp
+
+                            @foreach (core()->getAllCurrencies() as $currency)
+                                <x-admin::form.control-group class="flex gap-[10px] mb-[10px]">
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        name="currencies[]"
+                                        :value="$currency->id" 
+                                        :id="'currencies_' . $currency->id"
+                                        :for="'currencies_' . $currency->id"
+                                        rules="required"
+                                        :label="trans('admin::app.settings.channels.edit.currencies')"
+                                        :checked="in_array($currency->id, $selectedCurrenciesId)"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.label
+                                        :for="'currencies_' . $currency->id"
+                                        class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
+                                    >
+                                        <span class="text-gray-600 font-semibold cursor-pointer">
+                                            {{ $currency->name }} 
+                                        </span>
+                                    </x-admin::form.control-group.label>
+                                </x-admin::form.control-group>
+                            @endforeach
+
+                            <x-admin::form.control-group.error
+                                control-name="currencies[]"
+                            >
+                            </x-admin::form.control-group.error>
+                        </div>
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label class="required"> 
+                                @lang('admin::app.settings.channels.edit.default-currency')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="select"
+                                name="base_currency_id"
+                                :value="old('base_currency_id') ?? $channel->base_currency_id"
+                                id="base_currency_id"
+                                rules="required"
+                                :label="trans('admin::app.settings.channels.edit.default-currency')"
+                            >
+                                @foreach (core()->getAllCurrencies() as $currency)
+                                    <option value="{{ $currency->id }}">
+                                        {{ $currency->name }}
+                                    </option>
+                                @endforeach
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="base_currency_id"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+                    </x-slot:content>
+                </x-admin::accordion>
+
+                {{-- Settings --}}
+                <x-admin::accordion>
+                    <x-slot:header>
+                        <div class="flex items-center justify-between">
+                            <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                @lang('admin::app.settings.channels.edit.settings')
+                            </p>
+                        </div>
+                    </x-slot:header>
+            
+                    <x-slot:content>
+                        {{-- Maintenance Mode  --}}
+                        <div class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.channels.edit.maintenance-mode-text')
+                                </x-admin::form.control-group.label>
                                 
-                                <span class="control-info mt-10">{{ __('admin::app.settings.channels.favicon-size') }}</span> 
-                            </div>
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="maintenance_mode_text"
+                                    :value="old('maintenance_mode_text') ?? ($channel->translate($locale)['maintenance_mode_text'] ?? $channel->maintenance_mode_text)"
+                                    id="maintenance-mode-text"
+                                    :label="trans('admin::app.settings.channels.edit.maintenance-mode-text')"
+                                    :placeholder="trans('admin::app.settings.channels.edit.maintenance-mode-text')"
+                                >
+                                </x-admin::form.control-group.control>
+                            
+                                <x-admin::form.control-group.error
+                                    control-name="maintenance_mode_text"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+                    
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label class="!text-gray-800">
+                                    @lang('admin::app.settings.channels.edit.allowed-ips')
+                                </x-admin::form.control-group.label>
+                                
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="allowed_ips"
+                                    :value="old('allowed_ips') ?? $channel->allowed_ips"
+                                    id="allowed-ips"
+                                    :label="trans('admin::app.settings.channels.edit.allowed-ips')"
+                                    :placeholder="trans('admin::app.settings.channels.edit.allowed-ips')"
+                                >
+                                </x-admin::form.control-group.control>
+                                
+                                <x-admin::form.control-group.error
+                                    control-name="allowed_ips"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.channels.edit.status')
+                                </x-admin::form.control-group.label>
+    
+                                <x-admin::form.control-group.control
+                                    type="switch"
+                                    name="is_maintenance_on"
+                                    :value="1"
+                                    :label="trans('admin::app.settings.channels.edit.status')"
+                                    :checked="(boolean) $channel->is_maintenance_on"
+                                >
+                                </x-admin::form.control-group.control>
+    
+                                <x-admin::form.control-group.error
+                                    control-name="is_maintenance_on"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
                         </div>
-                    </accordian>
-
-                    @php
-                        $home_seo = $channel->translate($locale)['home_seo'] ?? $channel->home_seo;
-                        $seo = json_decode($home_seo);
-                    @endphp
-
-                    {{-- home page seo --}}
-                    <accordian title="{{ __('admin::app.settings.channels.seo') }}" :active="true">
-                        <div slot="body">
-                            <div class="control-group" :class="[errors.has('{{$locale}}[seo_title]') ? 'has-error' : '']">
-                                <label for="seo_title" class="required">
-                                    {{ __('admin::app.settings.channels.seo-title') }}
-                                    <span class="locale">[{{ $locale }}]</span>
-                                </label>
-
-                                <input v-validate="'required'" class="control" id="seo_title" name="{{$locale}}[seo_title]" data-vv-as="&quot;{{ __('admin::app.settings.channels.seo-title') }}&quot;" value="{{ $seo->meta_title ?? (old($locale)['seo_title'] ?? '') }}"/>
-
-                                <span class="control-error" v-if="errors.has('{{$locale}}[seo_title]')">@{{ errors.first('{!!$locale!!}[page_title]') }}</span>
-                            </div>
-
-                            <div class="control-group" :class="[errors.has('{{$locale}}[seo_description]') ? 'has-error' : '']">
-                                <label for="seo_description" class="required">
-                                    {{ __('admin::app.settings.channels.seo-description') }}
-                                    <span class="locale">[{{ $locale }}]</span>
-                                </label>
-
-                                <textarea v-validate="'required'" class="control" id="seo_description" name="{{$locale}}[seo_description]" data-vv-as="&quot;{{ __('admin::app.settings.channels.seo-description') }}&quot;">{{ $seo->meta_description ?? (old($locale)['seo_description'] ?? '') }}</textarea>
-
-                                <span class="control-error" v-if="errors.has('{{$locale}}[seo_description]')">@{{ errors.first('{!!$locale!!}[page_title]') }}</span>
-                            </div>
-
-                            <div class="control-group" :class="[errors.has('{{$locale}}[seo_keywords]') ? 'has-error' : '']">
-                                <label for="seo_keywords" class="required">
-                                    {{ __('admin::app.settings.channels.seo-keywords') }}
-                                    <span class="locale">[{{ $locale }}]</span>
-                                </label>
-
-                                <textarea v-validate="'required'" class="control" id="seo_keywords" name="{{$locale}}[seo_keywords]" data-vv-as="&quot;{{ __('admin::app.settings.channels.seo-keywords') }}&quot;">{{ $seo->meta_keywords ?? (old($locale)['seo_keywords'] ?? '') }}</textarea>
-
-                                <span class="control-error" v-if="errors.has('{{$locale}}[seo_keywords]')">@{{ errors.first('{!!$locale!!}[page_title]') }}</span>
-                            </div>
-                        </div>
-                    </accordian>
-
-                    {{-- maintenance mode --}}
-                    <accordian title="{{ __('admin::app.settings.channels.maintenance-mode') }}" :active="true">
-                        <div slot="body">
-                            <div class="control-group">
-                                <label for="maintenance-mode-status">{{ __('admin::app.status') }}</label>
-                                <label class="switch">
-                                    <input type="hidden" name="is_maintenance_on" value="0" />
-                                    <input type="checkbox" id="maintenance-mode-status" name="is_maintenance_on" value="1" {{ $channel->is_maintenance_on ? 'checked' : '' }}>
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-
-                            <div class="control-group">
-                                <label for="maintenance-mode-text">
-                                    {{ __('admin::app.settings.channels.maintenance-mode-text') }}
-                                    <span class="locale">[{{ $locale }}]</span>
-                                </label>
-                                <input class="control" id="maintenance-mode-text" name="{{$locale}}[maintenance_mode_text]" value="{{ old('maintenance_mode_text') ?? ($channel->translate($locale)['maintenance_mode_text'] ?? $channel->maintenance_mode_text) }}"/>
-                            </div>
-
-                            <div class="control-group">
-                                <label for="allowed-ips">{{ __('admin::app.settings.channels.allowed-ips') }}</label>
-                                <input class="control" id="allowed-ips" name="allowed_ips" value="{{ old('allowed_ips') ?: $channel->allowed_ips }}"/>
-                            </div>
-                        </div>
-                    </accordian>
-
-                    {!! view_render_event('bagisto.admin.settings.channel.edit.after') !!}
-                </div>
+                    </x-slot:content>
+                </x-admin::accordion>
             </div>
-        </form>
-    </div>
-@stop
-
-@push('scripts')
-    @include('admin::layouts.tinymce')
-
-    <script>
-        $(document).ready(function () {
-            tinyMCEHelper.initTinyMCE({
-                selector: 'textarea#home_page_content,textarea#footer_content',
-                height: 200,
-                width: "100%",
-                plugins: 'image imagetools media wordcount save fullscreen code table lists link hr',
-                toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor link hr | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | code | table',
-                image_advtab: true,
-                valid_elements : '*[*]',
-            });
-        });
-    </script>
-@endpush
+        </div>
+    </x-admin::form> 
+</x-admin::layouts>

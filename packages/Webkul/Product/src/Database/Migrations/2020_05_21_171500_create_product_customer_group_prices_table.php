@@ -18,13 +18,12 @@ return new class extends Migration
             $table->integer('qty')->default(0);
             $table->string('value_type');
             $table->decimal('value', 12, 4)->default(0);
-
             $table->integer('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-
             $table->integer('customer_group_id')->unsigned()->nullable();
-            $table->foreign('customer_group_id')->references('id')->on('customer_groups')->onDelete('cascade');
             $table->timestamps();
+
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('customer_group_id')->references('id')->on('customer_groups')->onDelete('cascade');
         });
     }
 

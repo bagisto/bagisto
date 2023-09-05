@@ -15,11 +15,13 @@ return new class extends Migration
     {
         Schema::create('order_payment', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('order_id')->nullable()->unsigned();
             $table->string('method');
             $table->string('method_title')->nullable();
-            $table->integer('order_id')->nullable()->unsigned();
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->json('additional')->nullable();
             $table->timestamps();
+
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
     }
 

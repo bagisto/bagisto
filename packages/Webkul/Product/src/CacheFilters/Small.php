@@ -17,16 +17,12 @@ class Small implements FilterInterface
     {
         $width = core()->getConfigData('catalog.products.cache-small-image.width')
             ? core()->getConfigData('catalog.products.cache-small-image.width')
-            : 120;
+            : 100;
 
         $height = core()->getConfigData('catalog.products.cache-small-image.height')
             ? core()->getConfigData('catalog.products.cache-small-image.height')
-            : null;
+            : 100;
 
-        $image->resize($width, $height, function ($constraint) {
-            $constraint->aspectRatio();
-        });
-
-        return $image->resizeCanvas($width, $height, 'center', false, '#fff');
+        return $image->fit($width, $height);
     }
 }

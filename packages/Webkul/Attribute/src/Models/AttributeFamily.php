@@ -33,7 +33,6 @@ class AttributeFamily extends Model implements AttributeFamilyContract
             ->select('attributes.*');
     }
 
-
     /**
      * Get all the comparable attributes which belongs to attribute family.
      */

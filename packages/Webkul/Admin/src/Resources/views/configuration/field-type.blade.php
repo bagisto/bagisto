@@ -9,61 +9,123 @@
 
     $validations = $coreConfigRepository->getValidations($field);
 
-    $channelLocaleInfo = $coreConfigRepository->getChannelLocaleInfo($field, $channel, $locale);
+    $channelLocaleInfo = $coreConfigRepository->getChannelLocaleInfo($field, $currentChannel->code, $currentLocale->code);
 @endphp
 
-@if ($field['type'] == 'depends')
-
-    @include('admin::configuration.dependent-field-type')
-
-@else
-    <div class="control-group {{ $field['type'] }}" @if ($field['type'] == 'multiselect') :class="[errors.has('{{ $name }}[]') ? 'has-error' : '']" @else :class="[errors.has('{{ $name }}') ? 'has-error' : '']" @endif>
-
-        <label for="{{ $name }}" {{ !isset($field['validation']) || preg_match('/\brequired\b/', $field['validation']) == false ? '' : 'class=required' }}>
-
+<x-admin::form.control-group>
+    {{-- Title of the input field --}}
+    <div class="flex justify-between">
+        <x-admin::form.control-group.label
+            :for="$name"
+        >
             {{ trans($field['title']) }}
+        </x-admin::form.control-group.label>
+        
+        <x-admin::form.control-group.label
+            :for="$name"
+        >
+            <span class="flex">{{ $channelLocaleInfo }}</span>
+        </x-admin::form.control-group.label>
+    </div>
 
-            <span class="locale">{{ $channelLocaleInfo }}</span>
-
-        </label>
-
+    @if ($field['type'] == 'depends')
+        @include('admin::configuration.dependent-field-type')
+    @else
+        {{-- Text input --}}
         @if ($field['type'] == 'text')
+            <x-admin::form.control-group.control
+                type="text"
+                :name="$name"
+                :value="old($nameKey) ?? (core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ? core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) : ($field['default_value'] ?? ''))"
+                :id="$name"
+                :rules="$validations"
+                :label="trans($field['title'])"
+            >
+            </x-admin::form.control-group.control>
 
-            <input type="text" v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $name }}" value="{{ old($nameKey) ?: (core()->getConfigData($nameKey, $channel, $locale) ? core()->getConfigData($nameKey, $channel, $locale) : ($field['default_value'] ?? '')) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">
-
+        {{-- Password input --}}
         @elseif ($field['type'] == 'password')
+            <x-admin::form.control-group.control
+                type="password"
+                :name="$name"
+                :value="old($nameKey) ?? core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)"
+                :id="$name"
+                :rules="$validations"
+                :label="trans($field['title'])"
+            >
+            </x-admin::form.control-group.control>
 
-            <input type="password" v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $name }}" value="{{ old($nameKey) ?: core()->getConfigData($nameKey, $channel, $locale) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">
-
+        {{-- Number input --}}
         @elseif ($field['type'] == 'number')
+            <x-admin::form.control-group.control
+                type="number"
+                :name="$name"
+                :value="old($nameKey) ?? core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)"
+                :id="$name"
+                :rules="$validations"
+                :label="trans($field['title'])"
+                :min="$field['name'] == 'minimum_order_amount'"
+            >
+            </x-admin::form.control-group.control>
 
-            <input type="number" min="{{ $field['name'] == 'minimum_order_amount' ? 1 : 0 }}" v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $name }}" value="{{ old($nameKey) ?: core()->getConfigData($nameKey, $channel, $locale) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">
-
+        {{-- Color Input --}}
         @elseif ($field['type'] == 'color')
+            <x-admin::form.control-group.control
+                type="color"
+                :name="$name"
+                :value="old($nameKey) ?? core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)"
+                :id="$name"
+                :rules="$validations"
+                :label="trans($field['title'])"
+            >
+            </x-admin::form.control-group.control>
 
-            <input type="color" v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $name }}" value="{{ old($nameKey) ?: core()->getConfigData($nameKey, $channel, $locale) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">
-
+        {{-- Textarea Input --}}
         @elseif ($field['type'] == 'textarea')
+            <x-admin::form.control-group.control
+                type="textarea"
+                :name="$name"
+                :value="old($nameKey) ?: core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?: (isset($field['default_value']) ? $field['default_value'] : '')"
+                class="text-gray-600"
+                :id="$name"
+                :rules="$validations"
+                :label="trans($field['title'])"
+            >
+            </x-admin::form.control-group.control>
 
-            <textarea v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $name }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">{{ old($nameKey) ?: core()->getConfigData($nameKey, $channel, $locale) ?: (isset($field['default_value']) ? $field['default_value'] : '') }}</textarea>
-
+        {{-- Textarea Input --}}
         @elseif ($field['type'] == 'editor')
+            {{-- (@suraj-webkul) TODO Change textarea to tiny mce --}}
+            <x-admin::form.control-group.control
+                type="textarea"
+                :name="$name"
+                :value="old($nameKey) ?: core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?: (isset($field['default_value']) ? $field['default_value'] : '')"
+                :id="$name"
+                :rules="$validations"
+                :label="trans($field['title'])"
+            >
+            </x-admin::form.control-group.control>
 
-            <textarea v-validate="'{{ $validations }}'" class="editor control" id="{{ $name }}" name="{{ $name }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">{{ old($nameKey) ?: core()->getConfigData($nameKey, $channel, $locale) ?: (isset($field['default_value']) ? $field['default_value'] : '') }}</textarea>
-
+        {{-- Select input --}}
         @elseif ($field['type'] == 'select')
+            @php $selectedOption = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? ''; @endphp
 
-            <select v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $name }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;" >
-
-                @php $selectedOption = core()->getConfigData($nameKey, $channel, $locale) ?? ''; @endphp
-
+            <x-admin::form.control-group.control
+                type="select"
+                :name="$name"
+                :value="$selectedOption"
+                :id="$name"
+                :rules="$validations"
+                :label="trans($field['title'])"
+            >
                 @if (isset($field['repository']))
                     @foreach ($value as $key => $option)
-
-                        <option value="{{ $key }}" {{ $key == $selectedOption ? 'selected' : ''}}>
-                        {{ trans($option) }}
+                        <option 
+                            value="{{ $key }}"
+                            {{ $key == $selectedOption ? 'selected' : ''}}
+                        >
+                            {{ trans($option) }}
                         </option>
-
                     @endforeach
                 @else
                     @foreach ($field['options'] as $option)
@@ -71,20 +133,28 @@
                             $value = ! isset($option['value']) ? null : ( $value = ! $option['value'] ? 0 : $option['value'] );
                         @endphp
 
-                        <option value="{{ $value }}" {{ $value == $selectedOption ? 'selected' : ''}}>
+                        <option
+                            value="{{ $value }}"
+                            {{ $value == $selectedOption ? 'selected' : ''}}
+                        >
                             {{ trans($option['title']) }}
                         </option>
                     @endforeach
                 @endif
+            </x-admin::form.control-group.control>
 
-            </select>
-
+        {{-- Multiselect Input --}}
         @elseif ($field['type'] == 'multiselect')
+            @php $selectedOption = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? ''; @endphp
 
-            <select v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $name }}[]" data-vv-as="&quot;{{ trans($field['title']) }}&quot;"  multiple>
-
-                @php $selectedOption = core()->getConfigData($nameKey, $channel, $locale) ?? ''; @endphp
-
+            <x-admin::form.control-group.control
+                type="select"
+                :name="$name"
+                :id="$name"
+                :rules="$validations"
+                :label="trans($field['title'])"
+                multiple
+            >
                 @if (isset($field['repository']))
                     @foreach ($value as $key => $option)
 
@@ -104,226 +174,277 @@
                         </option>
                     @endforeach
                 @endif
+            </x-admin::form.control-group.control>
 
-            </select>
-
-        @elseif ($field['type'] == 'country')
-
-            @php $countryCode = core()->getConfigData($nameKey, $channel, $locale) ?? ''; @endphp
-
-            <country
-                :country_code = "'{{ $countryCode }}'"
-                :validations = "'{{ $validations }}'"
-                :name = "'{{ $name }}'"
-            ></country>
-
-        @elseif ($field['type'] == 'state')
-
-            @php $stateCode = core()->getConfigData($nameKey, $channel, $locale) ?? ''; @endphp
-
-            <state
-                :state_code = "'{{ $stateCode }}'"
-                :validations = "'{{ $validations }}'"
-                :name = "'{{ $name }}'"
-            ></state>
-
+        {{-- Boolean/Switch input --}}
         @elseif ($field['type'] == 'boolean')
+            @php $selectedOption = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? ($field['default_value'] ?? ''); @endphp
 
-            @php $selectedOption = core()->getConfigData($nameKey, $channel, $locale) ?? ($field['default_value'] ?? ''); @endphp
-
-            <label class="switch">
-                <input type="hidden" name="{{ $name }}" value="0" />
-                <input type="checkbox" id="{{ $name }}" name="{{ $name }}" value="1" {{ $selectedOption ? 'checked' : '' }}>
-                <span class="slider round"></span>
-            </label>
+            <x-admin::form.control-group.control
+                type="switch"
+                :name="$name"
+                :value="(bool) $selectedOption"
+                :id="$name"
+                :rules="$validations"
+                :label="trans($field['title'])"
+                :checked="(bool) $selectedOption"
+            >
+            </x-admin::form.control-group.control>
 
         @elseif ($field['type'] == 'image')
 
             @php
-                $src = Storage::url(core()->getConfigData($nameKey, $channel, $locale));
-                $result = core()->getConfigData($nameKey, $channel, $locale);
+                $src = Storage::url(core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code));
+                $result = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code);
             @endphp
 
+            <div class="flex justify-center items-center">
+                @if ($result)
+                    <a 
+                        href="{{ $src }}"
+                        target="_blank"
+                    >
+                        <img 
+                            src="{{ $src }}"
+                            class="relative mr-5 h-[33px] w-[33px] top-15 rounded-3 border-3 border-gray-500"
+                        />
+                    </a>
+                @endif
+
+                <x-admin::form.control-group.control
+                    type="file"
+                    :name="$name"
+                    :id="$name"
+                    :rules="$validations"
+                    :label="trans($field['title'])"
+                >
+                </x-admin::form.control-group.control>
+            </div>
+
             @if ($result)
-                <a href="{{ $src }}" target="_blank">
-                    <img src="{{ $src }}" class="configuration-image"/>
-                </a>
-            @endif
+                <div class="flex gap-[10px] cursor-pointer">
+                    <x-admin::form.control-group.control
+                        type="checkbox"
+                        :name="$name.'[delete]'"
+                        :id="$name.'[delete]'"
+                        value="1"
+                        class="hidden peer"
+                    >
+                    </x-admin::form.control-group.control>
 
-            <input type="file" v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $name }}" value="{{ old($nameKey) ?: core()->getConfigData($nameKey, $channel, $locale) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;" style="padding-top: 5px;">
-
-            @if ($result)
-                <div class="control-group" style="margin-top: 5px;">
-                    <span class="checkbox">
-                        <input type="checkbox" id="{{ $name }}[delete]"  name="{{ $name }}[delete]" value="1">
-
-                        <label class="checkbox-view" for="delete"></label>
-                            {{ __('admin::app.configuration.delete') }}
-                    </span>
+                    <x-admin::form.control-group.label
+                        class="cursor-pointer"
+                        :for="$name.'[delete]'"
+                    >
+                        @lang('admin::app.configuration.index.delete')
+                    </x-admin::form.control-group.label>
                 </div>
             @endif
 
         @elseif ($field['type'] == 'file')
-
             @php
-                $result = core()->getConfigData($nameKey, $channel, $locale);
+                $result = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code);
                 $src = explode("/", $result);
                 $path = end($src);
             @endphp
 
             @if ($result)
-                <a href="{{ route('admin.configuration.download', [request()->route('slug'), request()->route('slug2'), $path]) }}">
+                <a 
+                    href="{{ route('admin.configuration.download', [request()->route('slug'), request()->route('slug2'), $path]) }}"
+                >
                     <i class="icon sort-down-icon download"></i>
                 </a>
             @endif
 
-            <input type="file" v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $name }}" value="{{ old($nameKey) ?: core()->getConfigData($nameKey, $channel, $locale) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;" style="padding-top: 5px;">
+            <x-admin::form.control-group.control
+                type="file"
+                :name="$name"
+                :id="$name"
+                :rules="$validations"
+                :label="trans($field['title'])"
+            >
+            </x-admin::form.control-group.control>
 
             @if ($result)
-                <div class="control-group" style="margin-top: 5px;">
-                    <span class="checkbox">
-                        <input type="checkbox" id="{{ $name }}[delete]"  name="{{ $name }}[delete]" value="1">
+                <div class="flex gap-[10px] cursor-pointer">
+                    <x-admin::form.control-group.control
+                        type="checkbox"
+                        :name="$name.'[delete]'"
+                        :id="$name.'[delete]'"
+                        value="1"
+                        class="hidden peer"
+                    >
+                    </x-admin::form.control-group.control>
 
-                        <label class="checkbox-view" for="delete"></label>
-                            {{ __('admin::app.configuration.delete') }}
-                    </span>
+                    <x-admin::form.control-group.label
+                        class="cursor-pointer"
+                        :for="$name.'[delete]'"
+                    >
+                        @lang('admin::app.configuration.index.delete')
+                    </x-admin::form.control-group.label>
                 </div>
             @endif
 
+        {{-- Country select Vue component --}}
+        @elseif ($field['type'] == 'country')
+            <v-country ref="countryRef">
+                <template v-slot:default="{ changeCountry }">
+                    <x-admin::form.control-group class="flex">
+                        <x-admin::form.control-group.control
+                            type="select"
+                            :name="$name"
+                            :value="core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)"
+                            :id="$name"
+                            :rules="$validations"
+                            :label="trans($field['title'])"
+                            @change="changeCountry($event.target.value)"
+                        >
+                            @foreach (core()->countries() as $country)
+                                <option value="{{ $country->code }}">{{ $country->name }}</option>
+                            @endforeach
+                        </x-admin::form.control-group.control>
+                    </x-admin::form.control-group>
+                </template>
+            </v-country>
+
+        {{-- State select Vue component --}}
+        @elseif ($field['type'] == 'state')
+            <v-state ref="stateRef">
+                <template 
+                    v-slot:default="{ countryStates, country, haveStates, isStateComponenetLoaded }"
+                >
+                    <div v-if="isStateComponenetLoaded">
+                        <template v-if="haveStates()">
+                            <x-admin::form.control-group class="flex">
+                                <x-admin::form.control-group.control
+                                    type="select"
+                                    :name="$name"
+                                    :value="core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)"
+                                    :id="$name"
+                                    :rules="$validations"
+                                    :label="trans($field['title'])"
+                                >
+                                    <option 
+                                        v-for='(state, index) in countryStates[country]'
+                                        :value="state.code"
+                                        v-text="state.default_name"
+                                    >
+                                    </option>
+                                </x-admin::form.control-group.control>
+                            </x-admin::form.control-group>
+                        </template>
+
+                        <template v-else>
+                            <x-admin::form.control-group class="flex">
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    :name="$name"
+                                    :value="core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)"
+                                    :id="$name"
+                                    :rules="$validations"
+                                    :label="trans($field['title'])"
+                                >
+                                </x-admin::form.control-group.control>
+                            </x-admin::form.control-group>
+                        </template>
+                    </div>
+                </template>
+            </v-state>
         @endif
 
-        @if (isset($field['info']))
-            <span class="control-info mt-10">{{!! trans($field['info']) !!}}</span>
-        @endif
+    @endif
 
-        <span class="control-error" @if ($field['type'] == 'multiselect')  v-if="errors.has('{{ $name }}[]')" @else  v-if="errors.has('{{ $name }}')" @endif>
-            @if ($field['type'] == 'multiselect')
-                @{{ errors.first('{!! $name !!}[]') }}
-            @else
-                @{{ errors.first('{!! $name !!}') }}
-            @endif
-        </span>
+    @if (isset($field['info']))
+        <label 
+            class="block leading-[20px] text-[12px] text-gray-600 font-medium"
+        >
+            {{!! trans($field['info']) !!}}
+        </label>
+    @endif
 
-    </div>
+    {{-- Input field validaitons error message --}}
+    <x-admin::form.control-group.error 
+        :control-name="$name"
+    >
+    </x-admin::form.control-group.error>
+</x-admin::form.control-group>
 
-@endif
-
-@push('scripts')
-    @if ($field['type'] == 'country')
-        <script type="text/x-template" id="country-template">
+@if ($field['type'] == 'country')
+    @pushOnce('scripts')
+        <script type="text/x-template" id="v-country-template">
             <div>
-                <select type="text" v-validate="validations" class="control" :id="name" :name="name" v-model="country" data-vv-as="&quot;{{ __('admin::app.customers.customers.country') }}&quot;" @change="sendCountryCode">
-                    <option value=""></option>
-
-                    @foreach (core()->countries() as $country)
-
-                        <option value="{{ $country->code }}">{{ $country->name }}</option>
-
-                    @endforeach
-                </select>
+                <slot 
+                    :changeCountry="changeCountry"
+                >
+                </slot>
             </div>
         </script>
 
-        <script>
-            Vue.component('country', {
+        <script type="module">
+            app.component('v-country', {
+                template: '#v-country-template',
 
-                template: '#country-template',
-
-                inject: ['$validator'],
-
-                props: ['country_code', 'name', 'validations'],
-
-                data: function () {
+                data() {
                     return {
-                        country: "",
+                        country: "{{ core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? '' }}",
                     }
                 },
 
-                mounted: function () {
-                    this.country = this.country_code;
-                    this.sendCountryCode()
+                mounted() {
+                    this.$root.$refs.stateRef.country = this.country;
                 },
 
                 methods: {
-                    sendCountryCode: function () {
-                        this.$root.$emit('countryCode', this.country)
+                    changeCountry(selectedCountryCode) {
+                        this.$root.$refs.stateRef.country = selectedCountryCode;
                     },
-                }
+                },
             });
         </script>
 
-        <script type="text/x-template" id="state-template">
+        <script type="text/x-template" id="v-state-template">
             <div>
-                <input type="text" v-validate="validations" v-if="!haveStates()" class="control" v-model="state" :id="name" :name="name" data-vv-as="&quot;{{ __('admin::app.customers.customers.state') }}&quot;"/>
-
-                <select v-validate="validations" v-if="haveStates()" class="control" v-model="state" :id="name" :name="name" data-vv-as="&quot;{{ __('admin::app.customers.customers.state') }}&quot;" >
-
-                    <option value="">{{ __('admin::app.customers.customers.select-state') }}</option>
-
-                    <option v-for='(state, index) in countryStates[country]' :value="state.code">
-                        @{{ state.default_name }}
-                    </option>
-
-                </select>
+                <slot 
+                    :country="country"
+                    :country-states="countryStates"
+                    :have-states="haveStates"
+                    :is-state-componenet-loaded="isStateComponenetLoaded"
+                >
+                </slot>
             </div>
         </script>
 
-        <script>
-            Vue.component('state', {
+        <script type="module">
+            app.component('v-state', {
+                template: '#v-state-template',
 
-                template: '#state-template',
-
-                inject: ['$validator'],
-
-                props: ['state_code', 'name', 'validations'],
-
-                data: function () {
+                data() {
                     return {
-                        state: "",
-
                         country: "",
+
+                        isStateComponenetLoaded: false,
 
                         countryStates: @json(core()->groupedStatesByCountries())
                     }
                 },
 
-                mounted: function () {
-                    this.state = this.state_code
+                created() {
+                    setTimeout(() => {
+                        this.isStateComponenetLoaded = true;
+                    }, 0);
                 },
-
+                
                 methods: {
-                    haveStates: function () {
-                        let self = this;
-
-                        self.$root.$on('countryCode', function (country) {
-                            self.country = country;
-                        });
-
-                        if (this.countryStates[this.country] && this.countryStates[this.country].length)
-                            return true;
-
-                        return false;
+                    haveStates() {
+                        /*
+                         * The double negation operator is used to convert the value to a boolean.
+                         * It ensures that the final result is a boolean value,
+                         * true if the array has a length greater than 0, and otherwise false.
+                         */
+                        return !!this.countryStates[this.country]?.length;
                     },
-                }
+                },
             });
         </script>
-    @endif
-@endpush
-
-
-@pushonce('scripts')
-    @include('admin::layouts.tinymce')
-
-    <script>
-        $(document).ready(function () {
-            tinyMCEHelper.initTinyMCE({
-                selector: 'textarea.editor',
-                height: 200,
-                width: "100%",
-                plugins: 'image imagetools media wordcount save fullscreen code table lists link hr',
-                toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor link hr | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent  | removeformat | code | table',
-                image_advtab: true,
-            });
-        });
-    </script>
-@endpushonce
+    @endPushOnce
+@endif

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('locale');
             $table->text('label')->nullable();
             $table->integer('cart_rule_id')->unsigned();
+
             $table->unique(['cart_rule_id', 'locale']);
             $table->foreign('cart_rule_id')->references('id')->on('cart_rules')->onDelete('cascade');
         });

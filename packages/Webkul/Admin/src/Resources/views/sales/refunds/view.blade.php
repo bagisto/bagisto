@@ -1,333 +1,353 @@
-@extends('admin::layouts.master')
-
-@section('page_title')
-    {{ __('admin::app.sales.refunds.view-title', ['refund_id' => $refund->id]) }}
-@stop
-
-@section('content-wrapper')
-
-    @php $order = $refund->order; @endphp
-
-    <div class="content full-page">
-        <div class="page-header">
-            <div class="page-title">
-                <h1>
-                    <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.sales.refunds.index') }}'"></i>
-
-                    {{ __('admin::app.sales.refunds.view-title', ['refund_id' => $refund->id]) }}
-                </h1>
-            </div>
-
-            <div class="page-action">
-            </div>
-        </div>
-
-        <div class="page-content">
-            <div class="sale-container">
-
-                <accordian title="{{ __('admin::app.sales.orders.order-and-account') }}" :active="true">
-                    <div slot="body">
-                        <div class="sale">
-                            <div class="sale-section">
-                                <div class="secton-title">
-                                    <span>{{ __('admin::app.sales.orders.order-info') }}</span>
-                                </div>
-
-                                <div class="section-content">
-                                    <div class="row">
-                                        <span class="title">
-                                            {{ __('admin::app.sales.refunds.order-id') }}
-                                        </span>
-
-                                        <span class="value">
-                                            <a href="{{ route('admin.sales.orders.view', $order->id) }}">#{{ $order->increment_id }}</a>
-                                        </span>
-                                    </div>
-
-                                    <div class="row">
-                                        <span class="title">
-                                            {{ __('admin::app.sales.orders.order-date') }}
-                                        </span>
-
-                                        <span class="value">
-                                            {{ core()->formatDate($order->created_at, 'Y-m-d H:i:s') }}
-                                        </span>
-                                    </div>
-
-                                    <div class="row">
-                                        <span class="title">
-                                            {{ __('admin::app.sales.orders.order-status') }}
-                                        </span>
-
-                                        <span class="value">
-                                            {{ $order->status_label }}
-                                        </span>
-                                    </div>
-
-                                    <div class="row">
-                                        <span class="title">
-                                            {{ __('admin::app.sales.orders.channel') }}
-                                        </span>
-
-                                        <span class="value">
-                                            {{ $order->channel_name }}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="sale-section">
-                                <div class="secton-title">
-                                    <span>{{ __('admin::app.sales.orders.account-info') }}</span>
-                                </div>
-
-                                <div class="section-content">
-                                    <div class="row">
-                                        <span class="title">
-                                            {{ __('admin::app.sales.orders.customer-name') }}
-                                        </span>
-
-                                        <span class="value">
-                                            {{ $refund->order->customer_full_name }}
-                                        </span>
-                                    </div>
-
-                                    <div class="row">
-                                        <span class="title">
-                                            {{ __('admin::app.sales.orders.email') }}
-                                        </span>
-
-                                        <span class="value">
-                                            {{ $refund->order->customer_email }}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </accordian>
-
-                @if (
-                    $order->billing_address
-                    || $order->shipping_address
-                )
-                    <accordian title="{{ __('admin::app.sales.orders.address') }}" :active="true">
-                        <div slot="body">
-                            <div class="sale">
-                                @if ($order->billing_address)
-                                    <div class="sale-section">
-                                        <div class="secton-title">
-                                            <span>{{ __('admin::app.sales.orders.billing-address') }}</span>
-                                        </div>
-
-                                        <div class="section-content">
-
-                                            @include ('admin::sales.address', ['address' => $order->billing_address])
-
-                                        </div>
-                                    </div>
-                                @endif
-
-                                @if ($order->shipping_address)
-                                    <div class="sale-section">
-                                        <div class="secton-title">
-                                            <span>{{ __('admin::app.sales.orders.shipping-address') }}</span>
-                                        </div>
-
-                                        <div class="section-content">
-
-                                            @include ('admin::sales.address', ['address' => $order->shipping_address])
-
-                                        </div>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                    </accordian>
-                @endif
-
-                <accordian title="{{ __('admin::app.sales.orders.payment-and-shipping') }}" :active="true">
-                    <div slot="body">
-                        <div class="sale">
-                            <div class="sale-section">
-                                <div class="secton-title">
-                                    <span>{{ __('admin::app.sales.orders.payment-info') }}</span>
-                                </div>
-
-                                <div class="section-content">
-                                    <div class="row">
-                                        <span class="title">
-                                            {{ __('admin::app.sales.orders.payment-method') }}
-                                        </span>
-
-                                        <span class="value">
-                                            {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
-                                        </span>
-                                    </div>
-
-                                    <div class="row">
-                                        <span class="title">
-                                            {{ __('admin::app.sales.orders.currency') }}
-                                        </span>
-
-                                        <span class="value">
-                                            {{ $order->order_currency_code }}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="sale-section">
-                                <div class="secton-title">
-                                    <span>{{ __('admin::app.sales.orders.shipping-info') }}</span>
-                                </div>
-
-                                <div class="section-content">
-                                    <div class="row">
-                                        <span class="title">
-                                            {{ __('admin::app.sales.orders.shipping-method') }}
-                                        </span>
-
-                                        <span class="value">
-                                            {{ $order->shipping_title }}
-                                        </span>
-                                    </div>
-
-                                    <div class="row">
-                                        <span class="title">
-                                            {{ __('admin::app.sales.orders.shipping-price') }}
-                                        </span>
-
-                                        <span class="value">
-                                            {{ core()->formatBasePrice($order->base_shipping_amount) }}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </accordian>
-
-                <accordian title="{{ __('admin::app.sales.orders.products-ordered') }}" :active="true">
-                    <div slot="body">
-
-                        <div class="table">
-                            <div class="table-responsive">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>{{ __('admin::app.sales.orders.SKU') }}</th>
-                                            <th>{{ __('admin::app.sales.orders.product-name') }}</th>
-                                            <th>{{ __('admin::app.sales.orders.price') }}</th>
-                                            <th>{{ __('admin::app.sales.orders.qty') }}</th>
-                                            <th>{{ __('admin::app.sales.orders.subtotal') }}</th>
-                                            <th>{{ __('admin::app.sales.orders.tax-amount') }}</th>
-                                            <th>{{ __('admin::app.sales.orders.discount-amount') }}</th>
-                                            <th>{{ __('admin::app.sales.orders.grand-total') }}</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-
-                                        @foreach ($refund->items as $item)
-                                            <tr>
-                                                <td>{{ $item->child ? $item->child->sku : $item->sku }}</td>
-
-                                                <td>
-                                                    {{ $item->name }}
-
-                                                    @if (isset($item->additional['attributes']))
-                                                        <div class="item-options">
-
-                                                            @foreach ($item->additional['attributes'] as $attribute)
-                                                                <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
-                                                            @endforeach
-
-                                                        </div>
-                                                    @endif
-                                                </td>
-
-                                                <td>{{ core()->formatBasePrice($item->base_price) }}</td>
-
-                                                <td>{{ $item->qty }}</td>
-
-                                                <td>{{ core()->formatBasePrice($item->base_total) }}</td>
-
-                                                <td>{{ core()->formatBasePrice($item->base_tax_amount) }}</td>
-
-                                                <td>{{ core()->formatBasePrice($item->base_discount_amount) }}</td>
-
-                                                <td>{{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }}</td>
-                                            </tr>
-                                        @endforeach
-
-                                        @if (! $refund->items->count())
-                                            <tr>
-                                                <td class="empty" colspan="7">{{ __('admin::app.common.no-result-found') }}</td>
-                                            <tr>
-                                        @endif
-
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-
-                        <table class="sale-summary">
-                            <tr>
-                                <td>{{ __('admin::app.sales.orders.subtotal') }}</td>
-                                <td>-</td>
-                                <td>{{ core()->formatBasePrice($refund->base_sub_total) }}</td>
-                            </tr>
-
-                            @if ($refund->base_shipping_amount > 0)
-                                <tr>
-                                    <td>{{ __('admin::app.sales.orders.shipping-handling') }}</td>
-                                    <td>-</td>
-                                    <td>{{ core()->formatBasePrice($refund->base_shipping_amount) }}</td>
-                                </tr>
-                            @endif
-
-                            @if ($refund->base_tax_amount > 0)
-                                <tr>
-                                    <td>{{ __('admin::app.sales.orders.tax') }}</td>
-                                    <td>-</td>
-                                    <td>{{ core()->formatBasePrice($refund->base_tax_amount) }}</td>
-                                </tr>
-                            @endif
-
-                            @if ($refund->base_discount_amount > 0)
-                                <tr>
-                                    <td>{{ __('admin::app.sales.orders.discount') }}</td>
-                                    <td>-</td>
-                                    <td>-{{ core()->formatBasePrice($refund->base_discount_amount) }}</td>
-                                </tr>
-                            @endif
-
-                            <tr>
-                                <td>{{ __('admin::app.sales.refunds.adjustment-refund') }}</td>
-                                <td>-</td>
-                                <td>{{ core()->formatBasePrice($refund->base_adjustment_refund) }}</td>
-                            </tr>
-
-                            <tr>
-                                <td>{{ __('admin::app.sales.refunds.adjustment-fee') }}</td>
-                                <td>-</td>
-                                <td>{{ core()->formatBasePrice($refund->base_adjustment_fee) }}</td>
-                            </tr>
-
-                            <tr class="bold">
-                                <td>{{ __('admin::app.sales.orders.grand-total') }}</td>
-                                <td>-</td>
-                                <td>{{ core()->formatBasePrice($refund->base_grand_total) }}</td>
-                            </tr>
-                        </table>
-
-                    </div>
-                </accordian>
-
+@php $order = $refund->order; @endphp
+
+<x-admin::layouts>
+    {{-- Page Title --}}
+    <x-slot:title>
+        @lang('admin::app.sales.refunds.view.title', ['refund_id' => $refund->id])
+    </x-slot:title>
+
+    {{-- Page Header --}}
+    <div class="grid pt-[11px]">
+        <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
+            <p class="text-[20px] text-gray-800 font-bold leading-[24px]">
+                @lang('admin::app.sales.refunds.view.title', ['refund_id' => $refund->id])
+            </p>
+
+            {{-- Cancel Button --}}
+            <div class="flex gap-x-[10px] items-center">
+                <a
+                    href="{{ route('admin.sales.refunds.index') }}"
+                    class="transparent-button hover:bg-gray-200"
+                >
+                    @lang('admin::app.account.edit.back-btn')
+                </a>
             </div>
         </div>
-
     </div>
-@stop
+
+    <!-- Body Content -->
+    <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+        <!-- Left sub-component -->
+        <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+            <!-- General -->
+            <div class=" bg-white rounded-[4px] box-shadow">
+                <p class="text-[16px] text-gray-800 font-semibold mb-[16px] p-[16px]">
+                    @lang('admin::app.sales.refunds.view.product-ordered') ({{ $refund->items->count() ?? 0 }})
+                </p>
+
+                {{-- Products List --}}
+                <div class="grid">
+                    @foreach ($refund->items as $item)
+                        <div class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300">
+                            <div class="flex gap-[10px]">
+                                @if ($item->product->base_image_url)
+                                    <img
+                                        class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
+                                        src="{{ $item->product->base_image_url }}"
+                                    >
+                                @else
+                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px]">
+                                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                                        
+                                        <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
+                                            @lang('admin::app.sales.invoices.view.product-image') 
+                                        </p>
+                                    </div>
+                                @endif
+
+                                {{-- Product Name --}}
+                                <div class="grid gap-[6px] place-content-start">
+                                    <p class="text-[16x] text-gray-800 font-semibold">
+                                        {{ $item->name }}
+                                    </p>
+
+                                    {{-- Product Attribute Detailes --}}
+                                    <div class="flex flex-col gap-[6px] place-items-start">
+                                        @if (isset($item->additional['attributes']))
+                                            @foreach ($item->additional['attributes'] as $attribute)
+                                                <p class="text-gray-600">
+                                                    {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
+                                                </p>
+                                            @endforeach
+                                        @endif
+                                    </div>
+
+                                    {{-- Product SKU --}}
+                                    <p class="text-gray-600">
+                                        @lang('admin::app.sales.refunds.view.sku', ['sku' => $item->child ? $item->child->sku : $item->sku])
+                                    </p>
+
+                                    {{-- Product QTY --}}
+                                    <p class="text-gray-600">
+                                        @lang('admin::app.sales.refunds.view.qty', ['qty' => $item->qty])
+                                    </p>
+                                </div>
+                            </div>
+
+                            {{-- Product Price Section --}}
+                            <div class="grid gap-[4px] place-content-start">
+                                <div class="">
+                                    <p class="flex items-center gap-x-[4px] justify-end text-[16px] text-gray-800 font-semibold">
+                                        {{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }}
+                                    </p>
+                                </div>
+
+                                <div class="flex flex-col gap-[6px] items-end place-items-start">
+                                    {{-- Base Total --}}
+                                    <p class="text-gray-600">
+                                        @lang('admin::app.sales.refunds.view.price', ['price' => core()->formatBasePrice($item->base_total)])
+                                    </p>
+
+                                    {{-- Base Tax Amount --}}
+                                    <p class="text-gray-600">
+                                        @lang('admin::app.sales.refunds.view.tax-amount', ['tax_amount' => core()->formatBasePrice($item->base_tax_amount)])
+                                    </p>
+
+                                    {{-- Base Discount Amount --}}
+                                    <p class="text-gray-600">
+                                        @lang('admin::app.sales.refunds.view.base-discounted-amount', ['base_discounted_amount' => core()->formatBasePrice($item->base_discount_amount)])
+                                    </p>
+
+                                    {{-- Base Discount Amount --}}
+                                    <p class="text-gray-600">
+                                        @lang('admin::app.sales.refunds.view.discounted-amount', ['discounted_amount' => core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount)])
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+                {{-- Subtotal / Grand Total od the page --}}
+                <div class="flex w-full gap-[10px] justify-end mt-[16px] p-[16px]">
+                    <div class="flex flex-col gap-y-[6px]">
+                        <p class="text-gray-600 font-semibold">
+                            @lang('admin::app.sales.refunds.view.sub-total')
+                        </p>
+
+                        @if ($refund->base_shipping_amount > 0)
+                            <p class="text-gray-600">
+                                @lang('admin::app.sales.refunds.view.shipping-handling')
+                            </p>
+                        @endif
+
+                        @if ($refund->base_tax_amount > 0)
+                            <p class="text-gray-600">
+                                @lang('admin::app.sales.refunds.view.tax')
+                            </p>
+                        @endif
+
+                        @if ($refund->base_discount_amount > 0)
+                            <p class="text-gray-600">
+                                @lang('admin::app.sales.refunds.view.discounted-amount')
+                            </p>
+                        @endif
+
+                        <p class="text-gray-600">
+                            @lang('admin::app.sales.refunds.view.adjustment-refund')
+                        </p>
+
+                        <p class="text-gray-600">
+                            @lang('admin::app.sales.refunds.view.adjustment-fee')
+                        </p>
+
+                        <p class="text-[16px] text-gray-800 font-semibold">
+                            @lang('admin::app.sales.refunds.view.grand-total')
+                        </p>
+                    </div>
+
+                    <div class="flex  flex-col gap-y-[6px]">
+                        {{-- Base Sub Total --}}
+                        <p class="text-gray-600 font-semibold">
+                            {{ core()->formatBasePrice($refund->base_sub_total) }}
+                        </p>
+
+                        {{-- Base Shipping Amount --}}
+                        @if ($refund->base_shipping_amount > 0)
+                            <p class="text-gray-600">
+                                {{ core()->formatBasePrice($refund->base_shipping_amount) }}
+                            </p>
+                        @endif
+
+                        {{-- Base Tax Amount --}}
+                        @if ($refund->base_tax_amount > 0)
+                            <p class="text-gray-600">
+                                {{ core()->formatBasePrice($refund->base_tax_amount) }}
+                            </p>
+                        @endif
+
+                        {{-- Base Discount Amouont --}}
+                        @if ($refund->base_discount_amount > 0)
+                            <p class="text-gray-600">
+                                {{ core()->formatBasePrice($refund->base_discount_amount) }}
+                            </p>
+                        @endif
+
+                        {{-- Base Adjustment Refund --}}
+                        <p class="text-gray-600">
+                            {{ core()->formatBasePrice($refund->base_adjustment_refund) }}
+                        </p>
+
+                        {{-- Base Adjustment Fee --}}
+                        <p class="text-gray-600">
+                            {{ core()->formatBasePrice($refund->base_adjustment_fee) }}
+                        </p>
+
+                        {{-- Base Grand Total --}}
+                        <p class="text-[16px] text-gray-800 font-semibold">
+                            {{ core()->formatBasePrice($refund->base_grand_total) }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right sub-component -->
+        <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+            {{-- Account Information --}}
+            @if (
+                $order->billing_address
+                || $order->shipping_address
+            )
+                <x-admin::accordion>
+                    <x-slot:header>
+                        <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                            @lang('admin::app.sales.refunds.view.account-information')
+                        </p>
+                    </x-slot:header>
+                
+                    <x-slot:content>
+                        {{-- Account Info --}}
+                        <div class="flex flex-col pb-[16px]">
+                            {{-- Customer Full Name --}}
+                            <p class="text-gray-800 font-semibold">
+                                {{ $refund->order->customer_full_name }}
+                            </p>
+
+                            {{-- Customer Email --}}
+                            <p class="text-gray-600">
+                                {{ $refund->order->customer_email }}
+                            </p>
+                        </div>
+
+                        {{-- Billing Address --}}
+                        @if ($order->billing_address)
+                            <span class="block w-full border-b-[1px] border-gray-300"></span>
+
+                            {{-- Billing Address --}}
+                            <div class="flex items-center justify-between">
+                                <p class="text-gray-600 text-[16px] py-[16px] font-semibold">
+                                    @lang('admin::app.sales.refunds.view.billing-address')
+                                </p>
+                            </div>
+        
+                            @include ('admin::sales.address', ['address' => $order->billing_address])
+                        @endif
+
+                        {{-- Shipping Address --}}
+                        @if ($order->shipping_address)
+                            <span class="block w-full mt-[16px] border-b-[1px] border-gray-300"></span>
+
+                            <div class="flex items-center justify-between">
+                                <p class="text-gray-600 text-[16px] py-[16px] font-semibold">
+                                    @lang('admin::app.sales.refunds.view.shipping-address')
+                                </p>
+                            </div>
+
+                            @include ('admin::sales.address', ['address' => $order->shipping_address])
+                        @endif
+                    </x-slot:content>
+                </x-admin::accordion>
+            @endif
+            
+            {{-- Order Information --}}
+            <x-admin::accordion>
+                <x-slot:header>
+                    <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                        @lang('admin::app.sales.refunds.view.order-information')
+                    </p>
+                </x-slot:header>
+            
+                <x-slot:content>
+                    <div class="flex w-full gap-[10px]">
+                        {{-- Order Info Left Section  --}}
+                        <div class="flex flex-col gap-y-[6px]">
+                            @foreach (['order-id', 'order-date', 'order-status', 'order-channel'] as $item)
+                                <p class="text-gray-600 font-semibold">
+                                    @lang('admin::app.sales.refunds.view.' . $item)
+                                </p>
+                            @endforeach    
+                        </div>
+
+                        {{-- Order Info Right Section  --}}
+                        <div class="flex flex-col gap-y-[6px]">
+                            <p class="text-gray-600 font-semibold">
+                                <a
+                                    href="{{ route('admin.sales.orders.view', $order->id) }}"
+                                    class="text-blue-600"
+                                >
+                                    #{{ $order->increment_id }}
+                                </a>
+                            </p>
+
+                            <p class="text-gray-600">
+                                {{ core()->formatDate($order->created_at, 'Y-m-d H:i:s') }}
+                            </p>
+
+                            <p class="text-gray-600">
+                                {{ $order->status_label }}
+                            </p>
+
+                            <p class="text-gray-600">
+                                {{ $order->channel_name }}
+                            </p>
+                        </div>
+                    </div>
+                </x-slot:content>
+            </x-admin::accordion>
+
+             {{-- Payment Information --}}
+             <x-admin::accordion>
+                <x-slot:header>
+                    <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                        @lang('admin::app.sales.refunds.view.payment-information')
+                    </p>
+                </x-slot:header>
+            
+                <x-slot:content>
+                    <div class="flex w-full gap-[10px]">
+                        {{-- Payment Information Left Section  --}}
+                        <div class="flex flex-col gap-y-[6px]">
+                            @foreach (['payment-method', 'shipping-method', 'currency', 'shipping-price'] as $item)
+                                <p class="text-gray-600 font-semibold">
+                                    @lang('admin::app.sales.refunds.view.' . $item)
+                                </p>
+                            @endforeach
+                        </div>
+
+                        {{-- Payment Information Right Section  --}}
+                        <div class="flex flex-col gap-y-[6px]">
+                            <p class="text-gray-600">
+                                <a href="{{ route('admin.sales.orders.view', $order->id) }}">
+                                    {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
+                                </a>
+                            </p>
+
+                            <p class="text-gray-600">
+                                {{ $order->shipping_title ?? 'N/A' }}
+                            </p>
+
+                            <p class="text-gray-600">
+                                {{ $order->order_currency_code }}
+                            </p>
+
+                            <p class="text-gray-600">
+                                {{ core()->formatBasePrice($order->base_shipping_amount) }}
+                            </p>
+                        </div>
+                    </div>
+                </x-slot:content>
+            </x-admin::accordion>
+        </div>
+    </div>
+</x-admin::layouts>

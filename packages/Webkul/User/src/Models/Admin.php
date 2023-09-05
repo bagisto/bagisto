@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Webkul\User\Contracts\Admin as AdminContract;
 use Webkul\User\Database\Factories\AdminFactory;
-use Webkul\User\Notifications\AdminResetPassword;
+use Webkul\Admin\Mail\Admin\ResetPasswordNotification;
 
 class Admin extends Authenticatable implements AdminContract
 {
@@ -109,7 +109,7 @@ class Admin extends Authenticatable implements AdminContract
      */
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new AdminResetPassword($token));
+        $this->notify(new ResetPasswordNotification($token));
     }
 
     /**

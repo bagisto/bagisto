@@ -8,25 +8,14 @@ use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\ShipmentRepository;
 use Webkul\Sales\Repositories\OrderTransactionRepository;
-use Webkul\Admin\DataGrids\OrderTransactionsDataGrid;
+use Webkul\Admin\DataGrids\Sales\OrderTransactionsDataGrid;
 use Webkul\Payment\Facades\Payment;
 
 class TransactionController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
-     * @param  \Webkul\Sales\Repositories\InvoiceRepository  $invoiceRepository
-     * @param  \Webkul\Sales\Repositories\ShipmentRepository $shipmentRepository
-     * @param  \Webkul\Sales\Repositories\OrderTransactionRepository  $orderTransactionRepository
      * @return void
      */
     public function __construct(
@@ -36,7 +25,6 @@ class TransactionController extends Controller
         protected OrderTransactionRepository $orderTransactionRepository
     )
     {
-        $this->_config = request('_config');
     }
 
     /**
@@ -50,11 +38,11 @@ class TransactionController extends Controller
             return app(OrderTransactionsDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::sales.transactions.index');
     }
 
     /**
-     * Display a form to save the tranaction.
+     * Display a form to save the transaction.
      *
      * @return \Illuminate\View\View
      */
@@ -62,7 +50,7 @@ class TransactionController extends Controller
     {
         $payment_methods = Payment::getSupportedPaymentMethods();
 
-        return view($this->_config['view'], compact('payment_methods'));
+        return view('admin::sales.transactions.create', compact('payment_methods'));
     }
 
     /**
@@ -81,29 +69,29 @@ class TransactionController extends Controller
         $invoice = $this->invoiceRepository->where('increment_id', $request->invoice_id)->first();
 
         if (! $invoice) {
-            session()->flash('error', trans('admin::app.sales.transactions.response.invoice-missing'));
+            session()->flash('error', trans('admin::app.sales.transactions.edit.invoice-missing'));
 
             return redirect()->back();
         }
 
         $transactionAmtBefore = $this->orderTransactionRepository->where('invoice_id', $invoice->id)->sum('amount');
-        
+
         $transactionAmtFinal = $request->amount + $transactionAmtBefore;
 
         if ($invoice->state == 'paid') {
-            session()->flash('info', trans('admin::app.sales.transactions.response.already-paid'));
+            session()->flash('info', trans('admin::app.sales.transactions.edit.already-paid'));
 
             return redirect(route('admin.sales.transactions.index'));
         }
 
         if ($transactionAmtFinal > $invoice->base_grand_total) {
-            session()->flash('info', trans('admin::app.sales.transactions.response.transaction-amount-exceeds'));
+            session()->flash('info', trans('admin::app.sales.transactions.edit.transaction-amount-exceeds'));
 
             return redirect(route('admin.sales.transactions.create'));
         }
-        
+
         if ($request->amount <= 0) {
-            session()->flash('info', trans('admin::app.sales.transactions.response.transaction-amount-zero'));
+            session()->flash('info', trans('admin::app.sales.transactions.edit.transaction-amount-zero'));
 
             return redirect(route('admin.sales.transactions.create'));
         }
@@ -139,7 +127,7 @@ class TransactionController extends Controller
             $this->invoiceRepository->updateState($invoice, 'paid');
         }
 
-        session()->flash('success', trans('admin::app.sales.transactions.response.transaction-saved'));
+        session()->flash('success', trans('admin::app.sales.transactions.edit.transaction-saved'));
 
         return redirect(route('admin.sales.transactions.index'));
     }
@@ -158,13 +146,13 @@ class TransactionController extends Controller
 
         $transactionDetailsData = $this->convertIntoSingleDimArray($transData);
 
-        return view($this->_config['view'], compact('transaction', 'transactionDetailsData'));
+        return view('admin::sales.transactions.view', compact('transaction', 'transactionDetailsData'));
     }
 
     /**
      * Convert transaction details data into single dim array.
      *
-     * @param array $data
+     * @param  array  $data
      * @return array
      */
     public function convertIntoSingleDimArray($transData)

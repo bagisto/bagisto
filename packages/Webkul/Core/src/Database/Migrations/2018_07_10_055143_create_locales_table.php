@@ -17,6 +17,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('code')->unique();
             $table->string('name');
+            $table->enum('direction', ['ltr', 'rtl'])->default('ltr');
             $table->timestamps();
         });
     }

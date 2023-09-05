@@ -5,13 +5,10 @@ namespace Webkul\Core\Providers;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Core\Core;
 use Webkul\Core\Exceptions\Handler;
 use Webkul\Core\Facades\Core as CoreFacade;
-use Webkul\Core\Models\SliderProxy;
-use Webkul\Core\Observers\SliderObserver;
 use Webkul\Core\View\Compilers\BladeCompiler;
 use Webkul\Theme\ViewRenderEventManager;
 
@@ -30,20 +27,12 @@ class CoreServiceProvider extends ServiceProvider
 
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'core');
 
-        Validator::extend('slug', 'Webkul\Core\Contracts\Validations\Slug@passes');
-
-        Validator::extend('code', 'Webkul\Core\Contracts\Validations\Code@passes');
-
-        Validator::extend('decimal', 'Webkul\Core\Contracts\Validations\Decimal@passes');
-
         $this->publishes([
             dirname(__DIR__) . '/Config/concord.php' => config_path('concord.php'),
             dirname(__DIR__) . '/Config/scout.php'   => config_path('scout.php'),
         ]);
 
         $this->app->bind(ExceptionHandler::class, Handler::class);
-
-        SliderProxy::observe(SliderObserver::class);
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'core');
 

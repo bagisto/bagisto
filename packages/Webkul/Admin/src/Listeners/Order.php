@@ -2,34 +2,46 @@
 
 namespace Webkul\Admin\Listeners;
 
-use Webkul\Admin\Traits\Mails;
-use Webkul\Paypal\Payment\SmartButton;
+use Webkul\Admin\Mail\Order\CreatedNotification;
+use Webkul\Admin\Mail\Order\CanceledNotification;
 
-class Order
+class Order extends Base
 {
-    use Mails;
-
-    public function refundOrder($refund)
+    /**
+     * After order is created
+     *
+     * @param  \Webkul\Sale\Contracts\Order  $order
+     * @return void
+     */
+    public function afterCreated($order)
     {
-        $order = $refund->order;
+        try {
+            if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.new-order')) {
+                return;
+            }
 
-        if ($order->payment->method === 'paypal_smart_button') {
-            /* getting smart button instance */
-            $smartButton = new SmartButton;
+            $this->prepareMail($order, new CreatedNotification($order));
+        } catch (\Exception $e) {
+            report($e);
+        }
+    }
 
-            /* getting paypal oder id */
-            $paypalOrderID = $order->payment->additional['orderID'];
+    /**
+     * Send cancel order mail.
+     *
+     * @param  \Webkul\Sales\Contracts\Order  $order
+     * @return void
+     */
+    public function afterCanceled($order)
+    {
+        try {
+            if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.cancel-order')) {
+                return;
+            }
 
-            /* getting capture id by paypal order id */
-            $captureID = $smartButton->getCaptureId($paypalOrderID);
-
-            /* now refunding order on the basis of capture id and refund data */
-            $smartButton->refundOrder($captureID, [
-                'amount' => [
-                    'value'         => round($refund->grand_total, 2),
-                    'currency_code' => $refund->order_currency_code,
-                ],
-            ]);
+            $this->prepareMail($order, new CanceledNotification($order));
+        } catch (\Exception $e) {
+            report($e);
         }
     }
 }

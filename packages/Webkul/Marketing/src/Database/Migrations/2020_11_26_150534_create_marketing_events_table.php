@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -21,8 +22,13 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        /**
+         * To Do (@devansh-webkul)
+         *
+         * - Should be in the seeder.
+         */
         DB::table('marketing_events')->insert([
-            'name' => 'Birthday',
+            'name'        => 'Birthday',
             'description' => 'Birthday',
         ]);
     }

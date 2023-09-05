@@ -18,8 +18,9 @@ return new class extends Migration
             $table->string('type');
             $table->boolean('read')->default(0);
             $table->integer('order_id')->unsigned();
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->timestamps();
+
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
     }
 

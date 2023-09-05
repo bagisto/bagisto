@@ -195,6 +195,14 @@ class Product extends Model implements ProductContract
     }
 
     /**
+     * Get the approved product reviews.
+     */
+    public function approvedReviews(): HasMany
+    {
+        return $this->reviews()->where('status', 'approved');
+    }
+
+    /**
      * The inventory sources that belong to the product.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

@@ -1,2 +1,4 @@
 *
+!locales/
+!theme/
 !.gitignore

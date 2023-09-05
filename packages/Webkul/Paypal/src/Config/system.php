@@ -3,12 +3,13 @@
 return [
     [
         'key'    => 'sales.paymentmethods.paypal_standard',
-        'name'   => 'admin::app.admin.system.paypal-standard',
+        'name'   => 'admin::app.configuration.index.sales.payment-methods.paypal-standard',
+        'info'   => 'admin::app.configuration.index.sales.payment-methods.paypal-standard-info',
         'sort'   => 3,
         'fields' => [
             [
                 'name'          => 'title',
-                'title'         => 'admin::app.admin.system.title',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.title',
                 'type'          => 'depends',
                 'depend'        => 'active:1',
                 'validation'    => 'required_if:active,1',
@@ -16,13 +17,13 @@ return [
                 'locale_based'  => true,
             ], [
                 'name'          => 'description',
-                'title'         => 'admin::app.admin.system.description',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.description',
                 'type'          => 'textarea',
                 'channel_based' => true,
                 'locale_based'  => true,
             ],  [
                 'name'          => 'business_account',
-                'title'         => 'admin::app.admin.system.business-account',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.business-account',
                 'type'          => 'depends',
                 'depend'        => 'active:1',
                 'validation'    => 'required_if:active,1',
@@ -30,20 +31,20 @@ return [
                 'locale_based'  => false,
             ],  [
                 'name'          => 'active',
-                'title'         => 'admin::app.admin.system.status',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.status',
                 'type'          => 'boolean',
                 'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
                 'name'          => 'sandbox',
-                'title'         => 'admin::app.admin.system.sandbox',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.sandbox',
                 'type'          => 'boolean',
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
                 'name'    => 'sort',
-                'title'   => 'admin::app.admin.system.sort_order',
+                'title'   => 'admin::app.configuration.index.sales.payment-methods.sort-order',
                 'type'    => 'select',
                 'options' => [
                     [
@@ -64,12 +65,13 @@ return [
         ]
     ], [
         'key'    => 'sales.paymentmethods.paypal_smart_button',
-        'name'   => 'admin::app.admin.system.paypal-smart-button',
+        'name'   => 'admin::app.configuration.index.sales.payment-methods.paypal-smart-button',
+        'info'   => 'admin::app.configuration.index.sales.payment-methods.paypal-smart-button-info',
         'sort'   => 0,
         'fields' => [
             [
                 'name'          => 'title',
-                'title'         => 'admin::app.admin.system.title',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.title',
                 'type'          => 'depends',
                 'depend'        => 'active:1',
                 'validation'    => 'required_if:active,1',
@@ -77,14 +79,14 @@ return [
                 'locale_based'  => true,
             ], [
                 'name'          => 'description',
-                'title'         => 'admin::app.admin.system.description',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.description',
                 'type'          => 'textarea',
                 'channel_based' => true,
                 'locale_based'  => true,
             ],  [
                 'name'          => 'client_id',
-                'title'         => 'admin::app.admin.system.client-id',
-                'info'          => 'admin::app.admin.system.client-id-info',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.client-id',
+                'info'          => 'admin::app.configuration.index.sales.payment-methods.client-id-info',
                 'type'          => 'depends',
                 'depend'        => 'active:1',
                 'validation'    => 'required_if:active,1',
@@ -92,8 +94,8 @@ return [
                 'locale_based'  => false,
             ],  [
                 'name'          => 'client_secret',
-                'title'         => 'admin::app.admin.system.client-secret',
-                'info'          => 'admin::app.admin.system.client-secret-info',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.client-secret',
+                'info'          => 'admin::app.configuration.index.sales.payment-methods.client-secret-info',
                 'type'          => 'depends',
                 'depend'        => 'active:1',
                 'validation'    => 'required_if:active,1',
@@ -101,8 +103,8 @@ return [
                 'locale_based'  => false,
             ],  [
                 'name'          => 'accepted_currencies',
-                'title'         => 'admin::app.admin.system.accepted-currencies',
-                'info'          => 'admin::app.admin.system.accepted-currencies-info',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.accepted-currencies',
+                'info'          => 'admin::app.configuration.index.sales.payment-methods.accepted-currencies-info',
                 'type'          => 'depends',
                 'depend'        => 'active:1',
                 'validation'    => 'required_if:active,1',
@@ -110,20 +112,20 @@ return [
                 'locale_based'  => false,
             ],  [
                 'name'          => 'active',
-                'title'         => 'admin::app.admin.system.status',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.status',
                 'type'          => 'boolean',
                 'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => false,
             ],  [
                 'name'          => 'sandbox',
-                'title'         => 'admin::app.admin.system.sandbox',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.sandbox',
                 'type'          => 'boolean',
                 'channel_based' => true,
                 'locale_based'  => false,
             ],  [
                 'name'    => 'sort',
-                'title'   => 'admin::app.admin.system.sort_order',
+                'title'   => 'admin::app.configuration.index.sales.payment-methods.sort-order',
                 'type'    => 'select',
                 'options' => [
                     [

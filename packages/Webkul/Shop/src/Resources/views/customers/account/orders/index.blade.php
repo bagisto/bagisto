@@ -1,31 +1,21 @@
-@extends('shop::customers.account.index')
+<x-shop::layouts.account>
+    {{-- Page Title --}}
+    <x-slot:title>
+        @lang('shop::app.customers.account.orders.title')
+    </x-slot>
 
-@section('page_title')
-    {{ __('shop::app.customer.account.order.index.page-title') }}
-@endsection
+    {{-- Breadcrumbs --}}
+    @section('breadcrumbs')
+        <x-shop::breadcrumbs name="orders"></x-shop::breadcrumbs>
+    @endSection
 
-@section('account-content')
-    <div class="account-layout">
-        <div class="account-head mb-10">
-            <span class="back-icon"><a href="{{ route('shop.customer.profile.index') }}"><i class="icon icon-menu-back"></i></a></span>
-
-            <span class="account-heading">
-                {{ __('shop::app.customer.account.order.index.title') }}
-            </span>
-
-            <div class="horizontal-rule"></div>
+    <div class="flex justify-between items-center">
+        <div class="">
+            <h2 class="text-[26px] font-medium">
+                @lang('shop::app.customers.account.orders.title')
+            </h2>
         </div>
-
-        {!! view_render_event('bagisto.shop.customers.account.orders.list.before') !!}
-
-        <div class="account-items-list">
-            <div class="account-table-content">
-                
-                <datagrid-plus src="{{ route('shop.customer.orders.index') }}"></datagrid-plus>
-                
-            </div>
-        </div>
-
-        {!! view_render_event('bagisto.shop.customers.account.orders.list.after') !!}
     </div>
-@endsection
+
+    <x-shop::datagrid :src="route('shop.customers.account.orders.index')"></x-shop::datagrid>
+</x-shop::layouts.account>

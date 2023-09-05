@@ -4,16 +4,14 @@ namespace Webkul\Product;
 
 use Illuminate\Support\Facades\Storage;
 use League\Flysystem\Local\LocalFilesystemAdapter;
-use Webkul\Product\Helpers\AbstractProduct;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Customer\Contracts\Wishlist;
+use Webkul\Product\Repositories\ProductRepository;
 
 class ProductImage
 {
     /**
      * Create a new helper instance.
      *
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @return void
      */
     public function __construct(protected ProductRepository $productRepository)
@@ -51,7 +49,7 @@ class ProductImage
         if (
             ! $product->parent_id
             && ! count($images)
-            && ! count($product->videos)
+            && ! count($product->videos ?? [])
         ) {
             $images[] = $this->getFallbackImageUrls();
         }
@@ -83,7 +81,6 @@ class ProductImage
                 $product = $item->product;
             }
         } else {
-            
             $product = $item->product;
         }
 
@@ -134,7 +131,6 @@ class ProductImage
      * Get cached urls configured for intervention package.
      *
      * @param  string  $path
-     * @return array
      */
     private function getCachedImageUrls($path): array
     {
@@ -157,23 +153,19 @@ class ProductImage
 
     /**
      * Get fallback urls.
-     *
-     * @return array
      */
     private function getFallbackImageUrls(): array
     {
         return [
-            'small_image_url'    => bagisto_asset('images/product/small-product-placeholder.webp'),
-            'medium_image_url'   => bagisto_asset('images/product/medium-product-placeholder.webp'),
-            'large_image_url'    => bagisto_asset('images/product/large-product-placeholder.webp'),
-            'original_image_url' => bagisto_asset('images/product/large-product-placeholder.webp'),
+            'small_image_url'    => bagisto_asset('images/small-product-placeholder.png'),
+            'medium_image_url'   => bagisto_asset('images/medium-product-placeholder.png'),
+            'large_image_url'    => bagisto_asset('images/large-product-placeholder.png'),
+            'original_image_url' => bagisto_asset('images/large-product-placeholder.png'),
         ];
     }
 
     /**
      * Is driver local.
-     *
-     * @return bool
      */
     private function isDriverLocal(): bool
     {

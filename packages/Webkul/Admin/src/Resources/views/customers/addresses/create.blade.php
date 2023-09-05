@@ -1,118 +1,414 @@
-@extends('admin::layouts.content')
+<v-create-customer-address>
+    <div class="inline-flex gap-x-[8px] mr-[4px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
+        <span class="icon-location text-[24px]"></span>
 
-@section('page_title')
-    {{ __('admin::app.customers.addresses.create-title') }}
-@stop
+        @lang('admin::app.customers.addresses.create.create-address-btn')
+    </div>
+</v-create-customer-address>
 
+{{-- Customer Address Modal --}}
+@pushOnce('scripts')
+    <!-- Customer Address Form -->
+    <script
+        type="text/x-template"
+        id="v-create-customer-address-template"
+    >
+        <!-- Address Create Button -->
+        @if (bouncer()->hasPermission('customers.addresses.create'))
+            <div 
+                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
+                @click="$refs.CustomerAddress.toggle()"
+            >
+                <span class="icon-location text-[24px]"></span>
 
-@section('content')
-
-    <div class="content">
-        {!! view_render_event('admin.customer.addresses.create.before') !!}
-
-        <form method="POST" action="{{ route('admin.customer.addresses.store', ['id' => $customer->id]) }}" @submit.prevent="onSubmit">
-            <div class="page-header">
-                <div class="page-title">
-                    <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.customer.addresses.index', ['id' => $customer->id]) }}'"></i>
-
-                        {{ __('admin::app.customers.addresses.create-title') }}
-                    </h1>
-                </div>
-
-                <div class="page-action">
-                    <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.customers.addresses.save-btn-title') }}
-                    </button>
-                </div>
+                @lang('admin::app.customers.addresses.create.create-address-btn')
             </div>
+        @endif
 
-            <div class="page-content">
-                <div class="form-container">
-                    @csrf()
+        <x-admin::form
+            v-slot="{ meta, errors, handleSubmit }"
+            as="div"
+        >
+            <form @submit="handleSubmit($event, create)">
+                <!-- Address Create Modal -->
+                <x-admin::modal ref="CustomerAddress">
+                    <x-slot:header>
+                        <!-- Modal Header -->
+                        <p class="text-[18px] text-gray-800 font-bold">
+                            @lang('admin::app.customers.addresses.create.title')
+                        </p>    
+                    </x-slot:header>
+    
+                    <x-slot:content>
+                        <!-- Modal Content -->
+                        {!! view_render_event('admin.customer.addresses.create.before') !!}
 
-                    <input type="hidden" name="customer_id" value="{{ $customer->id }}">
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.control
+                                type="hidden"
+                                name="customer_id"
+                                :value="$customer->id"
+                            >
+                            </x-admin::form.control-group.control>
+                        </x-admin::form.control-group>
 
-                    <accordian title="{{ __('admin::app.customers.addresses.general') }}" :active="true">
-                        <div slot="body">
+                        <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                            <div class="flex gap-[16px] max-sm:flex-wrap">
+                                <!-- Company Name -->
+                                <x-admin::form.control-group class="w-full mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.customers.addresses.create.company-name')
+                                    </x-admin::form.control-group.label>
 
-                            <div class="control-group" :class="[errors.has('company_name') ? 'has-error' : '']">
-                                <label for="company_name">{{ __('shop::app.customer.account.address.create.company_name') }}</label>
-                                <input type="text" class="control" name="company_name" value="{{ old('company_name') }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.company_name') }}&quot;">
-                                <span class="control-error" v-if="errors.has('company_name')">@{{ errors.first('company_name') }}</span>
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="company_name"
+                                        :label="trans('admin::app.customers.addresses.create.company-name')"
+                                        :placeholder="trans('admin::app.customers.addresses.create.company-name')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="company_name"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <!-- Vat Id -->
+                                <x-admin::form.control-group class="w-full mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.customers.addresses.create.vat-id')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="vat_id"
+                                        :label="trans('admin::app.customers.addresses.create.vat-id')"
+                                        :placeholder="trans('admin::app.customers.addresses.create.vat-id')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="vat_id"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
                             </div>
 
-                            <div class="control-group" :class="[errors.has('vat_id') ? 'has-error' : '']">
-                                <label for="vat_id">{{ __('shop::app.customer.account.address.create.vat_id') }}</label>
-                                <input type="text" class="control" name="vat_id" v-validate="" value="{{ old('vat_id') }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.vat_id') }}&quot;">
-                                <span class="control-error" v-if="errors.has('vat_id')">@{{ errors.first('vat_id') }}</span>
+                            <div class="flex gap-[16px] max-sm:flex-wrap">
+                                <!-- First Name -->
+                                <x-admin::form.control-group class="w-full mb-[10px]">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.customers.addresses.create.first-name')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="first_name"
+                                        rules="required"
+                                        :label="trans('admin::app.customers.addresses.create.first-name')"
+                                        :placeholder="trans('admin::app.customers.addresses.create.first-name')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="first_name"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <!-- Last Name -->
+                                <x-admin::form.control-group class="w-full mb-[10px]">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.customers.addresses.create.last-name')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="last_name"
+                                        rules="required"
+                                        :label="trans('admin::app.customers.addresses.create.last-name')"
+                                        :placeholder="trans('admin::app.customers.addresses.create.last-name')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="last_name"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
                             </div>
 
-                            <div class="control-group" :class="[errors.has('first_name') ? 'has-error' : '']">
-                                <label for="first_name" class="required">{{ __('shop::app.customer.account.address.create.first_name') }}</label>
-                                <input type="text" class="control" name="first_name" v-validate="'required'" value="{{ $customer->first_name }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.first_name') }}&quot;">
-                                <span class="control-error" v-if="errors.has('first_name')">@{{ errors.first('first_name') }}</span>
+                            <!-- Street Address -->
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.customers.addresses.create.street-address')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="address1[]"
+                                    id="address_0"
+                                    rules="required"
+                                    :label="trans('admin::app.customers.addresses.create.street-address')"
+                                    :placeholder="trans('admin::app.customers.addresses.create.street-address')"
+                                >
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error
+                                    control-name="address1[]"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+
+                            <!--need to check this -->
+                            <div v-if="streetLineCount && streetLineCount > 1" v-for="index in streetLineCount">
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        ::name="'address1[' + index + ']'"
+                                        ::id="'address_' + index"
+                                        :label="trans('admin::app.customers.addresses.create.street-address')"
+                                        :placeholder="trans('admin::app.customers.addresses.create.street-address')"
+                                    >
+                                    </x-admin::form.control-group.control>
+                            
+                                    <x-admin::form.control-group.error
+                                        ::control-name="'address1[' + index + ']'"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
                             </div>
 
-                            <div class="control-group" :class="[errors.has('last_name') ? 'has-error' : '']">
-                                <label for="last_name" class="required">{{ __('shop::app.customer.account.address.create.last_name') }}</label>
-                                <input type="text" class="control" name="last_name" v-validate="'required'" value="{{ $customer->last_name }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.last_name') }}&quot;">
-                                <span class="control-error" v-if="errors.has('last_name')">@{{ errors.first('last_name') }}</span>
+                            <div class="flex gap-[16px] max-sm:flex-wrap">
+                                <!-- City -->
+                                <x-admin::form.control-group class="w-full mb-[10px]">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.customers.addresses.create.city')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="city"
+                                        rules="required"
+                                        :label="trans('admin::app.customers.addresses.create.city')"
+                                        :placeholder="trans('admin::app.customers.addresses.create.city')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="city"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <!-- PostCode -->
+                                <x-admin::form.control-group class="w-full mb-[10px]">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.customers.addresses.create.post-code')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="postcode"
+                                        rules="required|integer"
+                                        :label="trans('admin::app.customers.addresses.create.post-code')"
+                                        :placeholder="trans('admin::app.customers.addresses.create.post-code')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="postcode"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
                             </div>
 
-                            <div class="control-group" :class="[errors.has('address1[]') ? 'has-error' : '']">
-                                <label for="address_0" class="required">{{ __('shop::app.customer.account.address.edit.street-address') }}</label>
-                                <input type="text" class="control" name="address1[]" id="address_0" v-validate="'required'" value="{{ old('address1') }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.street-address') }}&quot;">
-                                <span class="control-error" v-if="errors.has('address1[]')">@{{ errors.first('address1[]') }}</span>
+                            <div class="flex gap-[16px] max-sm:flex-wrap">
+                                <!-- Country Name -->
+                                <x-admin::form.control-group class="w-full mb-[10px]">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.customers.addresses.create.country')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="country"
+                                        rules="required"
+                                        :label="trans('admin::app.customers.addresses.create.country')"
+                                        v-model="country"
+                                    >
+                                        @foreach (core()->countries() as $country)
+                                            <option value="{{ $country->code }}">{{ $country->name }}</option>
+                                        @endforeach
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="country"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <!-- State Name -->
+                                <x-admin::form.control-group class="w-full mb-[10px]">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.customers.addresses.create.state')
+                                    </x-admin::form.control-group.label>
+
+                                    <template v-if="haveStates()">
+                                        <x-admin::form.control-group.control
+                                            type="select"
+                                            name="state"
+                                            id="state"
+                                            rules="required"
+                                            :label="trans('admin::app.customers.addresses.create.state')"
+                                            :placeholder="trans('admin::app.customers.addresses.create.state')"
+                                            v-model="state"
+                                        >
+                                            <option 
+                                                v-for='(state, index) in countryStates[country]'
+                                                :value="state.code"
+                                                v-text="state.default_name"
+                                            >
+                                            </option>
+                                        </x-admin::form.control-group.control>
+                                    </template>
+
+                                    <template v-else>
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="state"
+                                            rules="required"
+                                            :label="trans('admin::app.customers.addresses.create.state')"
+                                            :placeholder="trans('admin::app.customers.addresses.create.state')"
+                                        >
+                                        </x-admin::form.control-group.control>
+                                    </template>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="state"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
                             </div>
 
-                            @if (
-                                core()->getConfigData('customer.address.information.street_lines')
-                                && core()->getConfigData('customer.address.information.street_lines') > 1
-                            )
-                                <div class="control-group" style="margin-top: -10px;">
-                                    @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
-                                        <input type="text" class="control" name="address1[{{ $i }}]" id="address_{{ $i }}">
-                                    @endfor
-                                </div>
-                            @endif
+                            <div class="flex gap-[16px] max-sm:flex-wrap items-center">
+                                <!--Phone number -->
+                                <x-admin::form.control-group class="w-full mb-[10px]">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.customers.addresses.create.phone')
+                                    </x-admin::form.control-group.label>
 
-                            <div class="control-group" :class="[errors.has('city') ? 'has-error' : '']">
-                                <label for="city" class="required">{{ __('shop::app.customer.account.address.create.city') }}</label>
-                                <input type="text" class="control" name="city" v-validate="'required|regex:^[a-zA-Z \-]*$'" value="{{ old('city') }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.city') }}&quot;">
-                                <span class="control-error" v-if="errors.has('city')">@{{ errors.first('city') }}</span>
-                            </div>
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="phone"
+                                        rules="required|integer"
+                                        :label="trans('admin::app.customers.addresses.create.phone')"
+                                        :placeholder="trans('admin::app.customers.addresses.create.phone')"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                            @include ('admin::customers.country-state', ['countryCode' => old('country') ?? config('app.default_country'), 'stateCode' => old('state') ?? ''])
+                                    <x-admin::form.control-group.error
+                                        control-name="phone"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+                                
+                                <!-- Default Address -->
+                                <x-admin::form.control-group class="flex gap-[10px] w-full mt-[20px]">
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        name="default_address"
+                                        :value="1"
+                                        id="default_address"
+                                        for="default_address"
+                                        :label="trans('admin::app.customers.addresses.create.default-address')"
+                                        :checked="false"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                            <div class="control-group" :class="[errors.has('postcode') ? 'has-error' : '']">
-                                <label for="postcode" class="required">{{ __('shop::app.customer.account.address.create.postcode') }}</label>
-                                <input type="text" class="control" name="postcode" v-validate="'required'" value="{{ old('postcode') }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.postcode') }}&quot;">
-                                <span class="control-error" v-if="errors.has('postcode')">@{{ errors.first('postcode') }}</span>
-                            </div>
+                                    <x-admin::form.control-group.label 
+                                        for="default_address"
+                                        class="text-gray-600 font-semibold cursor-pointer" 
+                                    >
+                                        @lang('admin::app.customers.addresses.create.default-address')
+                                    </x-admin::form.control-group.label>
 
-                            <div class="control-group" :class="[errors.has('phone') ? 'has-error' : '']">
-                                <label for="phone" class="required">{{ __('shop::app.customer.account.address.create.phone') }}</label>
-                                <input type="text" class="control" name="phone" v-validate="'required|numeric'" value="{{ old('phone') }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.phone') }}&quot;">
-                                <span class="control-error" v-if="errors.has('phone')">@{{ errors.first('phone') }}</span>
-                            </div>
-
-                            <div class="control-group">
-                                <span class="checkbox">
-                                    <input type="checkbox" class="control" id="default_address" name="default_address" {{ old('default_address') ? 'checked' : '' }} >
-
-                                    <label class="checkbox-view" for="default_address"></label>
-                                    {{ __('admin::app.customers.addresses.default-address') }}
-                                </span>
+                                    <x-admin::form.control-group.error
+                                        control-name="default_address"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
                             </div>
                         </div>
-                    </div>
-                </accordian>
 
-                </div>
-            </div>
-        </form>
+                        {!! view_render_event('bagisto.admin.customers.create.after') !!}
+                    </x-slot:content>
+    
+                    <x-slot:footer>
+                        <!-- Modal Submission -->
+                        <div class="flex gap-x-[10px] items-center">
+                            <button 
+                                type="submit"
+                                class="primary-button"
+                            >
+                                @lang('admin::app.customers.addresses.create.save-btn-title') 
+                            </button>
+                        </div>
+                    </x-slot:footer>
+                </x-admin::modal>
+            </form>
+        </x-admin::form>
+    </script>
 
-        {!! view_render_event('admin.customer.addresses.create.after') !!}
-    </div>
-@stop
+    <script type="module">
+        app.component('v-create-customer-address', {
+            template: '#v-create-customer-address-template',
+
+            data: function () {
+                return {
+                    country: "",
+
+                    state: "",
+
+                    countryStates: @json(core()->groupedStatesByCountries()),
+                    
+                    streetLineCount: 0,
+                }
+            },
+
+            methods: {
+                create(params, { resetForm, setErrors }) {
+                    this.$axios.post('{{ route("admin.customers.customers.addresses.store", $customer->id) }}', params,
+                        {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        })
+                    
+                        .then((response) => {
+                            this.$refs.CustomerAddress.toggle();
+                            
+                            window.location.reload();
+
+                            resetForm();
+                        })
+                        .catch(error => {
+                            if (error.response.status ==422) {
+                                setErrors(error.response.data.errors);
+                            }
+                        });
+                },
+
+                haveStates: function () {
+                    /*
+                    * The double negation operator is used to convert the value to a boolean.
+                    * It ensures that the final result is a boolean value,
+                    * true if the array has a length greater than 0, and otherwise false.
+                    */
+                    return !!this.countryStates[this.country]?.length;
+                },
+            }
+        })
+    </script>
+@endPushOnce

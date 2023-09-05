@@ -20,6 +20,6 @@ class Category extends BaseCategory implements Sitemapable
             return [];
         }
 
-        return route('shop.productOrCategory.index', $this->slug);
+        return route('shop.product_or_category.index', $this->slug);
     }
 }

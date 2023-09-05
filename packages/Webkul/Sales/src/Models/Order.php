@@ -17,20 +17,50 @@ class Order extends Model implements OrderContract
 {
     use HasFactory;
 
+    protected $dates = ['created_at'];
+
+    protected $appends = ['datetime'];
+
+    /**
+     * Pending Order
+     */
     public const STATUS_PENDING = 'pending';
 
+    /**
+     * Payment is in pending
+     */
     public const STATUS_PENDING_PAYMENT = 'pending_payment';
 
+    /**
+     * Order in processing
+     */
     public const STATUS_PROCESSING = 'processing';
 
+    /**
+     * Complete Order
+     */
     public const STATUS_COMPLETED = 'completed';
 
+    /**
+     * Canceled Order
+     */
     public const STATUS_CANCELED = 'canceled';
 
+    /**
+     * Closed Order
+     */
     public const STATUS_CLOSED = 'closed';
 
+    /**
+     * Fraud Order
+     */
     public const STATUS_FRAUD = 'fraud';
 
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
     protected $guarded = [
         'id',
         'items',
@@ -83,6 +113,14 @@ class Order extends Model implements OrderContract
     public function getTotalDueAttribute()
     {
         return $this->grand_total - $this->grand_total_invoiced;
+    }
+
+    /**
+     * Return Human Friendly Date
+     */
+    public function getDatetimeAttribute()
+    {
+        return $this->created_at?->diffForHumans();
     }
 
     /**
@@ -185,9 +223,9 @@ class Order extends Model implements OrderContract
     /**
      * Get the billing address for the order.
      */
-    public function billing_address(): HasMany
+    public function billing_address()
     {
-        return $this->addresses()
+        return $this->addresses
             ->where('address_type', OrderAddress::ADDRESS_TYPE_BILLING);
     }
 
@@ -203,9 +241,9 @@ class Order extends Model implements OrderContract
     /**
      * Get the shipping address for the order.
      */
-    public function shipping_address(): HasMany
+    public function shipping_address()
     {
-        return $this->addresses()
+        return $this->addresses
             ->where('address_type', OrderAddress::ADDRESS_TYPE_SHIPPING);
     }
 
@@ -391,6 +429,6 @@ class Order extends Model implements OrderContract
      */
     protected static function newFactory(): Factory
     {
-        return OrderFactory::new ();
+        return OrderFactory::new();
     }
 }

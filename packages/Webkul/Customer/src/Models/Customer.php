@@ -11,9 +11,11 @@ use Webkul\Checkout\Models\CartProxy;
 use Webkul\Core\Models\SubscribersListProxy;
 use Webkul\Customer\Contracts\Customer as CustomerContract;
 use Webkul\Customer\Database\Factories\CustomerFactory;
-use Webkul\Customer\Notifications\CustomerResetPassword;
+use Webkul\Shop\Mail\Customer\ResetPasswordNotification;
 use Webkul\Product\Models\ProductReviewProxy;
 use Webkul\Sales\Models\OrderProxy;
+use Webkul\Customer\Models\CustomerNoteProxy;
+use Webkul\Sales\Models\InvoiceProxy;
 
 class Customer extends Authenticatable implements CustomerContract
 {
@@ -25,6 +27,15 @@ class Customer extends Authenticatable implements CustomerContract
      * @var string
      */
     protected $table = 'customers';
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'subscribed_to_news_letter' => 'boolean',
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -46,7 +57,6 @@ class Customer extends Authenticatable implements CustomerContract
         'status',
         'is_verified',
         'is_suspended',
-        'notes',
     ];
 
     /**
@@ -59,6 +69,13 @@ class Customer extends Authenticatable implements CustomerContract
         'api_token',
         'remember_token',
     ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['image_url'];
 
     /**
      * Create a new factory instance for the model.
@@ -78,7 +95,7 @@ class Customer extends Authenticatable implements CustomerContract
      */
     public function sendPasswordResetNotification($token): void
     {
-        $this->notify(new CustomerResetPassword($token));
+        $this->notify(new ResetPasswordNotification($token));
     }
 
     /**
@@ -163,6 +180,15 @@ class Customer extends Authenticatable implements CustomerContract
             ->where('default_address', 1);
     }
 
+     /**
+     * Customer's relation with invoice .
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasManyThrough
+     */
+    public function invoices() {
+        return $this->hasManyThrough(InvoiceProxy::modelClass(), OrderProxy::modelClass());
+    }
+
     /**
      * Customer's relation with wishlist items.
      *
@@ -232,7 +258,7 @@ class Customer extends Authenticatable implements CustomerContract
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function all_orders()
+    public function orders()
     {
         return $this->hasMany(OrderProxy::modelClass(), 'customer_id');
     }
@@ -242,9 +268,19 @@ class Customer extends Authenticatable implements CustomerContract
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function all_reviews()
+    public function reviews()
     {
         return $this->hasMany(ProductReviewProxy::modelClass(), 'customer_id');
+    }
+
+    /**
+     * Get all notes of a customer.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function notes()
+    {
+        return $this->hasMany(CustomerNoteProxy::modelClass(), 'customer_id');
     }
 
     /**

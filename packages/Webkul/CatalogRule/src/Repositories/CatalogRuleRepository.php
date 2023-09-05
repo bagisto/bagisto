@@ -103,17 +103,17 @@ class CatalogRuleRepository extends Repository
         $attributes = [
             [
                 'key'      => 'product',
-                'label'    => trans('admin::app.promotions.catalog-rules.product-attribute'),
+                'label'    => trans('admin::app.marketing.promotions.catalog-rules.create.product-attribute'),
                 'children' => [
                     [
                         'key'     => 'product|category_ids',
                         'type'    => 'multiselect',
-                        'label'   => trans('admin::app.promotions.catalog-rules.categories'),
+                        'label'   => trans('admin::app.marketing.promotions.catalog-rules.create.categories'),
                         'options' => $this->categoryRepository->getCategoryTree(),
                     ], [
                         'key'     => 'product|attribute_family_id',
                         'type'    => 'select',
-                        'label'   => trans('admin::app.promotions.catalog-rules.attribute_family'),
+                        'label'   => trans('admin::app.marketing.promotions.catalog-rules.create.attribute-family'),
                         'options' => $this->getAttributeFamilies(),
                     ],
                 ],

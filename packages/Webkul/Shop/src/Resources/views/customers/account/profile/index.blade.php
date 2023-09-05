@@ -1,98 +1,125 @@
-@extends('shop::customers.account.index')
+<x-shop::layouts.account>
+    {{-- Page Title --}}
+    <x-slot:title>
+        @lang('shop::app.customers.account.profile.title')
+    </x-slot>
 
-@section('page_title')
-    {{ __('shop::app.customer.account.profile.index.title') }}
-@endsection
+    {{-- Breadcrumbs --}}
+    @section('breadcrumbs')
+        <x-shop::breadcrumbs name="profile"></x-shop::breadcrumbs>
+    @endSection
 
-@section('account-content')
-    <div class="account-layout">
-        <div class="account-head">
-            <span class="back-icon"><a href="{{ route('shop.customer.profile.index') }}"><i class="icon icon-menu-back"></i></a></span>
+    <div class="flex justify-between items-center">
+        <h2 class="text-[26px] font-medium">
+            @lang('shop::app.customers.account.profile.title')
+        </h2>
 
-            <span class="account-heading">{{ __('shop::app.customer.account.profile.index.title') }}</span>
-
-            <span class="account-action">
-                <a href="{{ route('shop.customer.profile.edit') }}">{{ __('shop::app.customer.account.profile.index.edit') }}</a>
-            </span>
-
-            <div class="horizontal-rule"></div>
-        </div>
-
-        {!! view_render_event('bagisto.shop.customers.account.profile.view.before', ['customer' => $customer]) !!}
-
-        <div class="account-table-content" style="width: 50%;">
-            <table style="color: #5E5E5E;">
-                <tbody>
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.before', ['customer' => $customer]) !!}
-
-                    <tr>
-                        <td>{{ __('shop::app.customer.account.profile.fname') }}</td>
-                        <td>{{ $customer->first_name }}</td>
-                    </tr>
-
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.first_name.after', ['customer' => $customer]) !!}
-
-                    <tr>
-                        <td>{{ __('shop::app.customer.account.profile.lname') }}</td>
-                        <td>{{ $customer->last_name }}</td>
-                    </tr>
-
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.last_name.after', ['customer' => $customer]) !!}
-
-                    <tr>
-                        <td>{{ __('shop::app.customer.account.profile.gender') }}</td>
-                        <td>{{ __($customer->gender) }}</td>
-                    </tr>
-
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.gender.after', ['customer' => $customer]) !!}
-
-                    <tr>
-                        <td>{{ __('shop::app.customer.account.profile.dob') }}</td>
-                        <td>{{ $customer->date_of_birth }}</td>
-                    </tr>
-
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.date_of_birth.after', ['customer' => $customer]) !!}
-
-                    <tr>
-                        <td>{{ __('shop::app.customer.account.profile.email') }}</td>
-                        <td>{{ $customer->email }}</td>
-                    </tr>
-
-                    <tr>
-                        <td> 
-                            <button type="submit" @click="showModal('deleteProfile')" class="btn btn-lg btn-primary mt-10">
-                                {{ __('shop::app.customer.account.address.index.delete') }}
-                            </button>
-                        </td>                        
-                    </tr>
-
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.after', ['customer' => $customer]) !!}
-                </tbody>
-            </table>           
-
-            <form method="POST" action="{{ route('shop.customer.profile.destroy') }}" @submit.prevent="onSubmit">
-                @csrf
-
-                <modal id="deleteProfile" :is-open="modalIds.deleteProfile">
-                    <h3 slot="header">{{ __('shop::app.customer.account.address.index.enter-password') }}</h3>
-
-                    <div slot="body">
-                        <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
-                            <label for="password" class="required">{{ __('admin::app.users.users.password') }}</label>
-                            <input type="password" v-validate="'required|min:6|max:18'" class="control" id="password" name="password" data-vv-as="&quot;{{ __('admin::app.users.users.password') }}&quot;"/>
-                            <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
-                        </div>
-
-                        <div class="page-action">
-                            <button type="submit"  class="btn btn-lg btn-primary mt-10">
-                            {{ __('shop::app.customer.account.address.index.delete') }}
-                            </button>
-                        </div>
-                    </div>
-                </modal>
-            </form>
-        </div>
-
-        {!! view_render_event('bagisto.shop.customers.account.profile.view.after', ['customer' => $customer]) !!}
+        <a
+            href="{{ route('shop.customers.account.profile.edit') }}"
+            class="bs-secondary-button py-[12px] px-[20px] border-[#E9E9E9] font-normal"
+        >
+            @lang('shop::app.customers.account.profile.edit')
+        </a>
     </div>
-@endsection
+
+    {{-- Profile Information --}}
+    <div class="grid grid-cols-1 gap-y-[25px] mt-[30px]">
+        <div class="grid grid-cols-[2fr_3fr] w-full px-[30px] py-[12px] border-b-[1px] border-[#E9E9E9]">
+            <p class="text-[14px] font-medium">
+                @lang('shop::app.customers.account.profile.first-name')
+            </p>
+
+            <p class="text-[14px] text-[#7D7D7D] font-medium">
+                {{ $customer->first_name }}
+            </p>
+        </div>
+
+        <div class="grid grid-cols-[2fr_3fr] w-full px-[30px] py-[12px] border-b-[1px] border-[#E9E9E9]">
+            <p class="text-[14px] font-medium">
+                @lang('shop::app.customers.account.profile.last-name')
+            </p>
+
+            <p class="text-[14px] font-medium text-[#7D7D7D]">
+                {{ $customer->last_name }}
+            </p>
+        </div>
+
+        <div class="grid grid-cols-[2fr_3fr] w-full px-[30px] py-[12px] border-b-[1px] border-[#E9E9E9]">
+            <p class="text-[14px] font-medium">
+                @lang('shop::app.customers.account.profile.gender')
+            </p>
+
+            <p class="text-[14px] text-[#7D7D7D] font-medium">
+                {{ $customer->gender }}
+            </p>
+        </div>
+
+        <div class="grid grid-cols-[2fr_3fr] w-full px-[30px] py-[12px] border-b-[1px] border-[#E9E9E9]">
+            <p class="text-[14px] font-medium">
+                @lang('shop::app.customers.account.profile.dob')
+            </p>
+
+            <p class="text-[14px] text-[#7D7D7D] font-medium">
+                {{ $customer->date_of_birth }}
+            </p>
+        </div>
+
+        <div class="grid grid-cols-[2fr_3fr] w-full px-[30px] py-[12px] border-b-[1px] border-[#E9E9E9]">
+            <p class="text-[14px] font-medium">
+                @lang('shop::app.customers.account.profile.email')
+            </p>
+
+            <p class="text-[14px] text-[#7D7D7D] font-medium">
+                {{ $customer->email }}
+            </p>
+        </div>
+
+        {{-- Profile Delete modal --}}
+        <x-shop::modal>
+            <x-slot:toggle>
+                <div
+                    class="bs-primary-button py-[11px] px-[43px] rounded-[18px]"
+                >
+                    @lang('shop::app.customers.account.profile.delete-profile')
+                </div>
+            </x-slot:toggle>
+
+            <x-slot:header>
+                <h2 class="text-[25px] font-medium max-sm:text-[22px]">
+                    @lang('shop::app.customers.account.profile.enter-password')
+                </h2>
+            </x-slot:header>
+
+            <x-slot:content>
+                <x-shop::form
+                    action="{{ route('shop.customers.account.profile.destroy') }}"
+                >
+                    <x-shop::form.control-group>
+                        <div class="p-[30px] bg-white">
+                            <x-shop::form.control-group.control
+                                type="password"
+                                name="password"
+                                class="py-[20px] px-[25px]"
+                                placeholder="Enter your password"
+                            />
+
+                            <x-shop::form.control-group.error
+                                control-name="password"
+                            >
+                            </x-shop::form.control-group.error>
+                        </div>
+                    </x-shop::form.control-group>
+
+                    <div class="p-[30px] bg-white mt-[20px]">
+                        <button
+                            type="submit"
+                            class="bs-primary-button flex py-[11px] px-[43px] rounded-[18px] max-sm:text-[14px] max-sm:px-[25px]"
+                        >
+                            @lang('shop::app.customers.account.profile.delete')
+                        </button>
+                    </div>
+                </x-shop::form>
+            </x-slot:content>
+        </x-shop::modal>
+    </div>
+</x-shop::layouts.account>

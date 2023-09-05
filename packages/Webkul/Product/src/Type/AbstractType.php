@@ -52,13 +52,6 @@ abstract class AbstractType
     protected $showQuantityBox = false;
 
     /**
-     * Allow multiple qty.
-     *
-     * @var bool
-     */
-    protected $allowMultipleQty = true;
-
-    /**
      * Is product have sufficient quantity.
      *
      * @var bool
@@ -277,9 +270,9 @@ abstract class AbstractType
 
         $product->categories()->sync($data['categories']);
 
-        $product->up_sells()->sync($data['up_sell'] ?? []);
+        $product->up_sells()->sync($data['up_sells'] ?? []);
 
-        $product->cross_sells()->sync($data['cross_sell'] ?? []);
+        $product->cross_sells()->sync($data['cross_sells'] ?? []);
 
         $product->related_products()->sync($data['related_products'] ?? []);
 
@@ -347,14 +340,14 @@ abstract class AbstractType
             $value = null;
 
             if ($attribute->code == 'name') {
-                $value = trans('admin::app.copy-of', ['value' => $this->product->name]);
+                $value = trans('admin::app.catalog.products.index.datagrid.copy-of', ['value' => $this->product->name]);
             } elseif ($attribute->code == 'url_key') {
-                $value = trans('admin::app.copy-of-slug', ['value' => $this->product->url_key]);
+                $value = trans('admin::app.catalog.products.index.datagrid.copy-of-slug', ['value' => $this->product->url_key]);
             } elseif ($attribute->code == 'sku') {
                 $value = $product->sku;
             } elseif ($attribute->code === 'product_number') {
-                if (! empty($this->product->product_number)) {
-                    $value = trans('admin::app.copy-of-slug', ['value' => $this->product->product_number]);
+                if (!empty($this->product->product_number)) {
+                    $value = trans('admin::app.catalog.products.index.datagrid.copy-of-slug', ['value' => $this->product->product_number]);
                 }
             } elseif ($attribute->code == 'status') {
                 $value = 0;
@@ -597,16 +590,6 @@ abstract class AbstractType
     }
 
     /**
-     * Return true if more than one qty can be added to cart.
-     *
-     * @return bool
-     */
-    public function isMultipleQtyAllowed()
-    {
-        return $this->allowMultipleQty;
-    }
-
-    /**
      * Is item have quantity.
      *
      * @param  \Webkul\Checkout\Contracts\CartItem  $cartItem
@@ -614,7 +597,7 @@ abstract class AbstractType
      */
     public function isItemHaveQuantity($cartItem)
     {
-        return $cartItem->product->getTypeInstance()->haveSufficientQuantity($cartItem->quantity);
+        return $cartItem->getTypeInstance()->haveSufficientQuantity($cartItem->quantity);
     }
 
     /**
@@ -836,11 +819,12 @@ abstract class AbstractType
     public function getProductPrices()
     {
         return [
-            'regular_price' => [
+            'regular' => [
                 'price'           => core()->convertPrice($this->evaluatePrice($regularPrice = $this->product->price)),
                 'formatted_price' => core()->currency($this->evaluatePrice($regularPrice)),
             ],
-            'final_price'   => [
+
+            'final'   => [
                 'price'           => core()->convertPrice($this->evaluatePrice($minimalPrice = $this->getMinimalPrice())),
                 'formatted_price' => core()->currency($this->evaluatePrice($minimalPrice)),
             ],
@@ -854,17 +838,10 @@ abstract class AbstractType
      */
     public function getPriceHtml()
     {
-        $minPrice = $this->getMinimalPrice();
-
-        if ($minPrice < $this->product->price) {
-            $html = '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
-            . '<span class="regular-price">' . core()->currency($this->evaluatePrice($this->product->price)) . '</span>'
-            . '<span class="special-price">' . core()->currency($this->evaluatePrice($minPrice)) . '</span>';
-        } else {
-            $html = '<span>' . core()->currency($this->evaluatePrice($this->product->price)) . '</span>';
-        }
-
-        return $html;
+        return view('shop::products.prices.index', [
+            'product' => $this->product,
+            'prices'  => $this->getProductPrices(),
+        ])->render();
     }
 
     /**
@@ -939,7 +916,7 @@ abstract class AbstractType
         $data = $this->getQtyRequest($data);
 
         if (! $this->haveSufficientQuantity($data['quantity'])) {
-            return trans('shop::app.checkout.cart.quantity.inventory_warning');
+            return trans('shop::app.checkout.cart.inventory-warning');
         }
 
         $price = $this->getFinalPrice();
@@ -1073,7 +1050,7 @@ abstract class AbstractType
             return $result;
         }
 
-        $price = round($item->product->getTypeInstance()->getFinalPrice($item->quantity), 4);
+        $price = round($this->getFinalPrice($item->quantity), 4);
 
         if ($price == $item->base_price) {
             return $result;
@@ -1109,6 +1086,7 @@ abstract class AbstractType
                         return true;
                     }
                 }
+
                 break;
 
             case 'configurable':
@@ -1118,6 +1096,7 @@ abstract class AbstractType
                 ) {
                     return true;
                 }
+
                 break;
         }
 

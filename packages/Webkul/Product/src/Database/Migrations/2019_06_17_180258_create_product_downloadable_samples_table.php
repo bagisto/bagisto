@@ -15,16 +15,15 @@ return new class extends Migration
     {
         Schema::create('product_downloadable_samples', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('product_id')->unsigned();
             $table->string('url')->nullable();
             $table->string('file')->nullable();
             $table->string('file_name')->nullable();
             $table->string('type');
             $table->integer('sort_order')->nullable();
-
-            $table->integer('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-
             $table->timestamps();
+
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 

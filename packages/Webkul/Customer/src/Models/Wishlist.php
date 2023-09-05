@@ -18,7 +18,7 @@ class Wishlist extends Model implements WishlistContract
      *
      * @var string
      */
-    protected $table = 'wishlist';
+    protected $table = 'wishlist_items';
 
     /**
      * The attributes that should be cast.

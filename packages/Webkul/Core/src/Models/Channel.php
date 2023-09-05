@@ -22,8 +22,6 @@ class Channel extends TranslatableModel implements ChannelContract
         'name',
         'description',
         'theme',
-        'home_page_content',
-        'footer_content',
         'hostname',
         'default_locale_id',
         'base_currency_id',
@@ -37,8 +35,6 @@ class Channel extends TranslatableModel implements ChannelContract
     public $translatedAttributes = [
         'name',
         'description',
-        'home_page_content',
-        'footer_content',
         'maintenance_mode_text',
         'home_seo',
     ];

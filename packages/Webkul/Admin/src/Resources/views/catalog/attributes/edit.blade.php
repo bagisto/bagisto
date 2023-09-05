@@ -2,812 +2,962 @@
     $allLocales = app('Webkul\Core\Repositories\LocaleRepository')->all();
 @endphp
 
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    {{-- Title of the page --}}
+    <x-slot:title>
+        @lang('admin::app.catalog.attributes.edit.title')
+    </x-slot:title>
 
-@section('page_title')
-    {{ __('admin::app.catalog.attributes.edit-title') }}
-@stop
+    {{-- Edit Attributes Vue Components --}}
+    <v-edit-attributes :all-locales="{{ $allLocales->toJson() }}"></v-edit-attributes>
 
-@section('content')
-    <div class="content">
-        <form
-            method="POST"
-            action="{{ route('admin.catalog.attributes.update', $attribute->id) }}"
-            @submit.prevent="onSubmit"
-            enctype="multipart/form-data"
+    @pushOnce('scripts')
+        <script
+            type="text/x-template"
+            id="v-edit-attributes-template"
         >
-            <div class="page-header">
-                <div class="page-title">
-                    <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.catalog.attributes.index') }}'"></i>
+            <!-- Input Form -->
+            <x-admin::form
+                :action="route('admin.catalog.attributes.update', $attribute->id)"
+                enctype="multipart/form-data"
+                method="PUT"
+            >
+                <div class="flex justify-between items-center">
+                    <p class="text-[20px] text-gray-800 font-bold">
+                        @lang('admin::app.catalog.attributes.edit.title')
+                    </p>
+        
+                    <div class="flex gap-x-[10px] items-center">
+                        <!-- Cancel Button -->
+                        <a
+                            href="{{ route('admin.catalog.attributes.index') }}"
+                            class="transparent-button hover:bg-gray-200"
+                        >
+                            @lang('admin::app.catalog.attributes.edit.back-btn')
+                        </a>
 
-                        {{ __('admin::app.catalog.attributes.edit-title') }}
-                    </h1>
+                        <!-- Save Button -->
+                        <button
+                            type="submit"
+                            class="primary-button"
+                        >
+                            @lang('admin::app.catalog.attributes.edit.save-btn')
+                        </button>
+                    </div>
                 </div>
 
-                <div class="page-action">
-                    <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.catalog.attributes.save-btn-title') }}
-                    </button>
-                </div>
-            </div>
+                <!-- body content -->
+                <div class="flex gap-[10px] mt-[14px]">
+                    <!-- Left sub Component -->
+                    <div class="flex flex-col gap-[8px] flex-1">
 
-            <div class="page-content">
-                <div class="form-container">
-                    @csrf()
+                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.attributes.before', ['attribute' => $attribute]) !!}
 
-                    <input name="_method" type="hidden" value="PUT">
+                        <!-- Label -->
+                        <div class="p-[16px] bg-white box-shadow rounded-[4px]">
+                            <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                                @lang('admin::app.catalog.attributes.edit.label')
+                            </p>
 
-                    {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.general.before', ['attribute' => $attribute]) !!}
+                            <!-- Admin name -->
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.catalog.attributes.edit.admin')
+                                </x-admin::form.control-group.label>
 
-                    <accordian title="{{ __('admin::app.catalog.attributes.general') }}" :active="true">
-                        <div slot="body">
-                            {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.general.controls.before', ['attribute' => $attribute]) !!}
-
-                            <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
-                                <label for="code" class="required">
-                                    {{ __('admin::app.catalog.attributes.code') }}
-                                </label>
-
-                                <input
-                                    type="text"
-                                    name="code"
-                                    class="control"
-                                    id="code"
-                                    value="{{ old('code') ?: $attribute->code }}"
-                                    disabled="disabled"
-                                    v-code
-                                    v-validate="'required'"
-                                    data-vv-as="&quot;{{ __('admin::app.catalog.attributes.code') }}&quot;"
-                                />
-
-                                <input type="hidden" name="code" value="{{ $attribute->code }}"/>
-
-                                <span class="control-error" v-if="errors.has('code')" v-text="errors.first('code')"></span>
-                            </div>
-
-                            <div class="control-group">
-                                @php
-                                    $selectedOption = old('type') ?: $attribute->type;
-                                @endphp
-
-                                <label for="type">{{ __('admin::app.catalog.attributes.type') }}</label>
-
-                                <select class="control" id="type" disabled="disabled">
-                                    <option value="text" {{ $selectedOption == 'text' ? 'selected' : '' }}>
-                                        {{ __('admin::app.catalog.attributes.text') }}
-                                    </option>
-
-                                    <option value="textarea" {{ $selectedOption == 'textarea' ? 'selected' : '' }}>
-                                        {{ __('admin::app.catalog.attributes.textarea') }}
-                                    </option>
-
-                                    <option value="price" {{ $selectedOption == 'price' ? 'selected' : '' }}>
-                                        {{ __('admin::app.catalog.attributes.price') }}
-                                    </option>
-
-                                    <option value="boolean" {{ $selectedOption == 'boolean' ? 'selected' : '' }}>
-                                        {{ __('admin::app.catalog.attributes.boolean') }}
-                                    </option>
-
-                                    <option value="select" {{ $selectedOption == 'select' ? 'selected' : '' }}>
-                                        {{ __('admin::app.catalog.attributes.select') }}
-                                    </option>
-
-                                    <option value="multiselect" {{ $selectedOption == 'multiselect' ? 'selected' : '' }}>
-                                        {{ __('admin::app.catalog.attributes.multiselect') }}
-                                    </option>
-
-                                    <option value="datetime" {{ $selectedOption == 'datetime' ? 'selected' : '' }}>
-                                        {{ __('admin::app.catalog.attributes.datetime') }}
-                                    </option>
-
-                                    <option value="date" {{ $selectedOption == 'date' ? 'selected' : '' }}>
-                                        {{ __('admin::app.catalog.attributes.date') }}
-                                    </option>
-
-                                    <option value="image" {{ $selectedOption == 'image' ? 'selected' : '' }}>
-                                        {{ __('admin::app.catalog.attributes.image') }}
-                                    </option>
-
-                                    <option value="file" {{ $selectedOption == 'file' ? 'selected' : '' }}>
-                                        {{ __('admin::app.catalog.attributes.file') }}
-                                    </option>
-
-                                    <option value="checkbox" {{ $selectedOption == 'checkbox' ? 'selected' : '' }}>
-                                        {{ __('admin::app.catalog.attributes.checkbox') }}
-                                    </option>
-                                </select>
-
-                                <input type="hidden" name="type" value="{{ $attribute->type }}"/>
-                            </div>
-
-                            
-                            @if ($attribute->type == 'textarea')
-                                <div class="control-group">
-                                    <label for="enable_wysiwyg">
-                                        {{ __('admin::app.catalog.attributes.enable-wysiwyg') }}
-                                    </label>
-
-                                    <label class="switch">
-                                        <input
-                                            type="checkbox"
-                                            name="enable_wysiwyg"
-                                            id="enable_wysiwyg"
-                                            value="1"
-                                            {{ (old('enable_wysiwyg') ?: $attribute->enable_wysiwyg) ? 'checked' : '' }}
-                                        />
-
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-                            @endif
-
-                            {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.general.controls.after', ['attribute' => $attribute]) !!}
-                        </div>
-                    </accordian>
-
-                    {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.general.after', ['attribute' => $attribute]) !!}
-
-                    {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.attributes.before', ['attribute' => $attribute]) !!}
-
-                    <accordian title="{{ __('admin::app.catalog.attributes.label') }}" :active="true">
-                        <div slot="body">
-                            {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.attributes.controls.before', ['attribute' => $attribute]) !!}
-
-                            <div class="control-group" :class="[errors.has('admin_name') ? 'has-error' : '']">
-                                <label for="admin_name" class="required">
-                                    {{ __('admin::app.catalog.attributes.admin') }}
-                                </label>
-
-                                <input
+                                <x-admin::form.control-group.control
                                     type="text"
                                     name="admin_name"
-                                    class="control"
-                                    id="admin_name"
-                                    value="{{ old('admin_name') ?: $attribute->admin_name }}"
-                                    v-validate="'required'"
-                                    data-vv-as="&quot;{{ __('admin::app.catalog.attributes.admin_name') }}&quot;"
-                                />
+                                    :value="old('admin_name') ?: $attribute->admin_name"
+                                    rules="required"
+                                    :label="trans('admin::app.catalog.attributes.edit.admin')"
+                                    :placeholder="trans('admin::app.catalog.attributes.edit.admin')"
+                                >
+                                </x-admin::form.control-group.control>
 
-                                <span
-                                    class="control-error"
-                                    v-if="errors.has('admin_name')"
-                                    v-text="errors.first('admin_name')"
-                                ></span>
-                            </div>
+                                <x-admin::form.control-group.error
+                                    control-name="admin_name"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
+                            <!-- Locales Inputs -->
                             @foreach ($allLocales as $locale)
-                                <div class="control-group">
-                                    <label for="locale-{{ $locale->code }}">
-                                        {{ $locale->name . ' (' . $locale->code . ')' }}
-                                    </label>
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        {{ $locale->name . ' (' . strtoupper($locale->code) . ')' }}
+                                    </x-admin::form.control-group.label>
 
-                                    <input
+                                    <x-admin::form.control-group.control
                                         type="text"
-                                        name="<?php echo $locale->code; ?>[name]"
-                                        class="control"
-                                        id="locale-{{ $locale->code }}"
-                                        value="{{ old($locale->code)['name'] ?? ($attribute->translate($locale->code)->name ?? '') }}"
-                                    />
-                                </div>
+                                        :name="$locale->code . '[name]'"
+                                        :value="old($locale->code)['name'] ?? ($attribute->translate($locale->code)->name ?? '')"
+                                        :placeholder="$locale->name"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        :control-name="$locale->code . '[name]'"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>    
                             @endforeach
-
-                            {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.attributes.controls.after', ['attribute' => $attribute]) !!}
                         </div>
-                    </accordian>
 
-                    {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.attributes.after', ['attribute' => $attribute]) !!}
+                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.attributes.after', ['attribute' => $attribute]) !!}
 
-                    <div class="{{ in_array($attribute->type, ['select', 'multiselect', 'checkbox']) ?: 'hide' }}">
-                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.options.before', ['attribute' => $attribute]) !!}
+                        <!-- Options -->
+                        <div
+                            class="p-[16px] bg-white box-shadow rounded-[4px] {{ in_array($attribute->type, ['select', 'multiselect', 'checkbox']) ?: 'hidden' }}"
+                            v-if="showSwatch"
+                        >
+                            <div class="flex justify-between items-center mb-3">
+                                <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                                    @lang('admin::app.catalog.attributes.edit.title')
+                                </p>
 
-                        <accordian title="{{ __('admin::app.catalog.attributes.options') }}" :active="true" :id="'options'">
-                            <div slot="body">
-
-                                {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.options.controls.before', ['attribute' => $attribute]) !!}
-
-                                <option-wrapper
-                                    src="{{ route('admin.catalog.attributes.options', $attribute->id) }}"
-                                    :all-locales="{{ $allLocales->toJson() }}"
-                                ></option-wrapper>
-
-                                {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.options.controls.after', ['attribute' => $attribute]) !!}
-
+                                <!-- Add Row Button -->
+                                <div
+                                    class="secondary-button text-[14px]"
+                                    @click="$refs.addOptionsRow.toggle()"
+                                >
+                                    @lang('admin::app.catalog.attributes.edit.add-row')
+                                </div>
                             </div>
-                        </accordian>
 
-                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.options.after', ['attribute' => $attribute]) !!}
+                            <!-- For Attribute Options If Data Exist -->
+                            @if (
+                                $attribute->type == 'select'
+                                || $attribute->type == 'multiselect'
+                                || $attribute->type == 'checkbox'
+                                || $attribute->type == 'price'
+                            )
+                                <div class="flex gap-[16px] max-sm:flex-wrap">
+                                    <!-- Input Options -->
+                                    <x-admin::form.control-group
+                                        class="w-full mb-[10px]"
+                                        v-if="this.showSwatch"
+                                    >
+                                        <x-admin::form.control-group.label for="swatchType">
+                                            @lang('admin::app.catalog.attributes.edit.input-options')
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="select"
+                                            name="swatch_type"
+                                            id="swatchType"
+                                            v-model="swatchType"
+                                            @change="showSwatch=true"
+                                        >
+                                            @foreach (['dropdown', 'color', 'image', 'text'] as $type)
+                                                <option value="{{ $type }}">
+                                                    @lang('admin::app.catalog.attributes.edit.option.' . $type)
+                                                </option>
+                                            @endforeach
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error
+                                            control-name="admin"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+
+                                    <div class="w-full mb-[10px]">
+                                        <!-- checkbox -->
+                                        <x-admin::form.control-group.label class="invisible">
+                                            @lang('admin::app.catalog.attributes.edit.input-options')
+                                        </x-admin::form.control-group.label>
+
+                                        <div class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                            <input 
+                                                type="checkbox"
+                                                name="empty_option"
+                                                id="empty_option"
+                                                for="empty_option"
+                                                class="hidden peer"
+                                                v-model="isNullOptionChecked"
+                                                @click="$refs.addOptionsRow.toggle()"
+                                            >
+
+                                            <label
+                                                for="empty_option"
+                                                class="icon-uncheckbox text-[24px] rounded-[6px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                                            >
+                                            </label>
+
+                                            <label
+                                                for="empty_option"
+                                                class="text-[14px] text-gray-600 font-semibold cursor-pointer"
+                                            >
+                                                @lang('admin::app.catalog.attributes.edit.create-empty-option')
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Table Information -->
+                                <div class="mt-[15px] overflow-auto">
+                                    <x-admin::table class="w-full text-left">
+                                        <x-admin::table.thead class="text-[14px] font-medium">
+                                            <x-admin::table.thead.tr>
+                                                <x-admin::table.th class="!p-0"></x-admin::table.th>
+
+                                                <!-- Swatch Select -->
+                                                <x-admin::table.th v-if="showSwatch && (swatchType == 'color' || swatchType == 'image')">
+                                                    @lang('admin::app.catalog.attributes.edit.swatch')
+                                                </x-admin::table.th>
+
+                                                <!-- Admin tables heading -->
+                                                <x-admin::table.th>
+                                                    @lang('admin::app.catalog.attributes.edit.admin-name')
+                                                </x-admin::table.th>
+
+                                                <!-- Loacles tables heading -->
+                                                @foreach ($allLocales as $locale)
+                                                    <x-admin::table.th>
+                                                        {{ $locale->name . ' (' . $locale->code . ')' }}
+                                                    </x-admin::table.th>
+                                                @endforeach
+
+                                                <!-- Positions tables heading -->
+                                                <x-admin::table.th>
+                                                    @lang('admin::app.catalog.attributes.edit.position')
+                                                </x-admin::table.th>
+
+                                                <!-- Action tables heading -->
+                                                <x-admin::table.th></x-admin::table.th>
+                                            </x-admin::table.thead.tr>
+                                        </x-admin::table.thead>
+
+                                        <!-- Draggable Component -->
+                                        <draggable
+                                            tag="tbody"
+                                            ghost-class="draggable-ghost"
+                                            v-bind="{animation: 200}"
+                                            :list="optionsData"
+                                            item-key="id"
+                                        >
+                                            <template #item="{ element, index }" v-show="! element.isDelete">
+                                                <x-admin::table.thead.tr>
+                                                    <input
+                                                        type="hidden"
+                                                        :name="'options[' + element.id + '][isNew]'"
+                                                        :value="element.isNew"
+                                                    >
+
+                                                    <input
+                                                        type="hidden"
+                                                        :name="'options[' + element.id + '][isDelete]'"
+                                                        :value="element.isDelete"
+                                                    >
+
+                                                    <!-- Draggable Icon -->
+                                                    <x-admin::table.td class="!px-0">
+                                                        <i class="icon-drag text-[20px] transition-all group-hover:text-gray-700"></i>
+
+                                                        <input
+                                                            type="hidden"
+                                                            :name="'options[' + element.id + '][position]'"
+                                                            :value="index"
+                                                        />
+                                                    </x-admin::table.td>
+ 
+                                                    <!-- Swatch Type Image / Color -->
+                                                    <x-admin::table.td v-if="showSwatch && (swatchType == 'color' || swatchType == 'image')">
+                                                        <!-- Swatch Image -->
+                                                        <div v-if="swatchType == 'image'">
+                                                            <img 
+                                                                :src="element.swatch_value_url"
+                                                                :ref="'image_' + element.id"
+                                                                class="h-[50px] w-[50px]"
+                                                            >
+
+                                                            <input
+                                                                type="file"
+                                                                :name="'options[' + element.id + '][swatch_value]'"
+                                                                class="hidden"
+                                                                :ref="'imageInput_' + element.id"
+                                                            /> 
+                                                        </div>
+
+                                                        <!-- Swatch Color -->
+                                                        <div v-if="swatchType == 'color'">
+                                                            <div
+                                                                class="w-[25px] h-[25px] mx-auto rounded-[5px]"
+                                                                :style="{ background: element.swatch_value }"
+                                                            >
+                                                            </div>
+                    
+                                                            <input
+                                                                type="hidden"
+                                                                :name="'options[' + element.id + '][swatch_value]'"
+                                                                v-model="element.swatch_value"
+                                                            />
+                                                        </div>
+                                                    </x-admin::table.td>
+
+                                                    <!-- Admin-->
+                                                    <x-admin::table.td>
+                                                        <p v-text="element.admin_name"></p>
+
+                                                        <input
+                                                            type="hidden"
+                                                            :name="'options[' + element.id + '][admin_name]'"
+                                                            v-model="element.admin_name"
+                                                        />
+                                                    </x-admin::table.td>
+
+                                                    <!-- Loacles -->
+                                                     <x-admin::table.td v-for="locale in allLocales">
+                                                        <p v-text="element['locales'][locale.code]"></p>
+                                                        
+                                                        <input
+                                                            type="hidden"
+                                                            :name="'options[' + element.id + '][' + locale.code + '][label]'"
+                                                            v-model="element['locales'][locale.code]"
+                                                        />
+                                                    </x-admin::table.td>
+
+                                                    <!-- Position -->
+                                                    <x-admin::table.td>
+                                                        <p v-text="element.sort_order"></p>
+
+                                                        <input
+                                                            type="hidden"
+                                                            :name="'options[' + element.id + '][sort_order]'"
+                                                            v-model="element.sort_order"
+                                                        />
+                                                    </x-admin::table.td>
+
+                                                    <!-- Actions Button -->
+                                                    <x-admin::table.td class="!px-0">
+                                                        <span
+                                                            class="icon-edit p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 max-sm:place-self-center"
+                                                            @click="editOptions(element)"
+                                                        >
+                                                        </span>
+                                                        
+                                                        <span
+                                                            class="icon-delete p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 max-sm:place-self-center"
+                                                            @click="removeOption(element.id)"
+                                                        >
+                                                        </span>
+                                                    </x-admin::table.td>
+                                                </x-admin::table.thead.tr>
+                                            </template>
+                                        </draggable>
+                                    </x-admin::table>
+                                </div>
+                            @else
+                                <!-- For Empty Attribute Options -->
+                                <template>
+                                    <div class="grid gap-[14px] justify-items-center py-[40px] px-[10px]">
+                                        <!-- Attribute Option Image -->
+                                        <img 
+                                            class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]" 
+                                            src="{{ bagisto_asset('images/add-product-to-store.png') }}" 
+                                            alt="{{ trans('admin::app.catalog.attributes.edit.add-attribute-options') }}"
+                                        >
+
+                                        <!-- Add Attribute Options Information -->
+                                        <div class="flex flex-col items-center">
+                                            <p class="text-[16px] text-gray-400 font-semibold">
+                                                @lang('admin::app.catalog.attributes.edit.add-attribute-options')
+                                            </p>
+
+                                            <p class="text-gray-400">
+                                                @lang('admin::app.catalog.attributes.edit.add-options-info')
+                                            </p>
+                                        </div>
+
+                                        <!-- Add Row Button -->
+                                        <div 
+                                            class="secondary-button text-[14px]"
+                                            @click="$refs.addOptionsRow.toggle()"
+                                        >
+                                            @lang('admin::app.catalog.attributes.edit.add-row')
+                                        </div>
+                                    </div>
+                                </template>
+                            @endif
+                        </div>
                     </div>
 
-                    {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.validations.before', ['attribute' => $attribute]) !!}
+                    <!-- Right sub-component -->
+                    <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
 
-                    <accordian title="{{ __('admin::app.catalog.attributes.validations') }}" :active="true">
-                        <div slot="body">
-                            {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.validations.controls.before', ['attribute' => $attribute]) !!}
+                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.general.before', ['attribute' => $attribute]) !!}
 
-                            <div class="control-group">
-                                <label for="is_required">
-                                    {{ __('admin::app.catalog.attributes.is_required') }}
-                                </label>
-                                
-                                <select
-                                    name="is_required"
-                                    class="control"
-                                    id="is_required"
-                                    {{ ! $attribute->is_user_defined ? 'disabled' : '' }}
-                                >
-                                    <option value="0" {{ $attribute->is_required ? '' : 'selected' }}>
-                                        {{ __('admin::app.catalog.attributes.no') }}
-                                    </option>
-
-                                    <option value="1" {{ $attribute->is_required ? 'selected' : '' }}>
-                                        {{ __('admin::app.catalog.attributes.yes') }}
-                                    </option>
-                                </select>
-
-                                <input type="hidden" name="is_required" value="{{ $attribute->is_required }}"/>
+                        <!-- General -->
+                        <div class="bg-white box-shadow rounded-[4px]">
+                            <div class="flex justify-between items-center p-[6px]">
+                                <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                    @lang('admin::app.catalog.attributes.edit.general')
+                                </p>
                             </div>
 
-                            <div class="control-group">
-                                <label for="is_unique">
-                                    {{ __('admin::app.catalog.attributes.is_unique') }}
-                                </label>
+                            <div class="px-[16px] pb-[16px]">
+                                <!-- Attribute Code -->
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.catalog.attributes.edit.code')
+                                    </x-admin::form.control-group.label>
 
-                                <select name="is_unique" class="control" id="is_unique" disabled>
-                                    <option value="0" {{ $attribute->is_unique ? '' : 'selected' }}>
-                                        {{ __('admin::app.catalog.attributes.no') }}
-                                    </option>
+                                    @php
+                                        $selectedOption = old('type') ?: $attribute->code;
+                                    @endphp
 
-                                    <option value="1" {{ $attribute->is_unique ? 'selected' : '' }}>
-                                        {{ __('admin::app.catalog.attributes.yes') }}
-                                    </option>
-                                </select>
-
-                                <input type="hidden" name="is_unique" value="{{ $attribute->is_unique }}"/>
-                            </div>
-
-                            @if ($attribute->type == 'text')
-                                <div class="control-group">
-                                    @php $selectedValidation = old('validation') ?: $attribute->validation @endphp
-
-                                    <label for="validation">
-                                        {{ __('admin::app.catalog.attributes.input_validation') }}
-                                    </label>
-
-                                    <select
-                                        name="validation"
-                                        class="control"
-                                        id="validation"
-                                        {{ ! $attribute->is_user_defined ? 'disabled' : '' }}
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="code"
+                                        :value="$selectedOption"
+                                        class="cursor-not-allowed"
+                                        rules="required"
+                                        :disabled="(boolean) $selectedOption"
+                                        readonly
+                                        :label="trans('admin::app.catalog.attributes.edit.code')"
+                                        :placeholder="trans('admin::app.catalog.attributes.edit.code')"
                                     >
-                                        <option value=""></option>
-                                        
-                                        <option value="numeric" {{ $selectedValidation == 'numeric' ? 'selected' : '' }}>
-                                            {{ __('admin::app.catalog.attributes.number') }}
-                                        </option>
+                                    </x-admin::form.control-group.control>
 
-                                        <option value="decimal" {{ $selectedValidation == 'decimal' ? 'selected' : '' }}>
-                                            {{ __('admin::app.catalog.attributes.decimal') }}
-                                        </option>
+                                    <x-admin::form.control-group.control
+                                        type="hidden"
+                                        name="code"
+                                        :value="$selectedOption"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                                        <option value="email" {{ $selectedValidation == 'email' ? 'selected' : '' }}>
-                                            {{ __('admin::app.catalog.attributes.email') }}
-                                        </option>
+                                    <x-admin::form.control-group.error
+                                        control-name="code"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
-                                        <option value="url" {{ $selectedValidation == 'url' ? 'selected' : '' }}>
-                                            {{ __('admin::app.catalog.attributes.url') }}
-                                        </option>
-                                    </select>
-                                </div>
-                            @endif
+                                <!-- Attribute Type -->
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.catalog.attributes.edit.type')
+                                    </x-admin::form.control-group.label>
 
-                            {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.validations.controls.after', ['attribute' => $attribute]) !!}
+                                    @php
+                                        $selectedOption = old('type') ?: $attribute->type;
+                                    @endphp
+
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="type"
+                                        rules="required"
+                                        id="type"
+                                        class="cursor-not-allowed"
+                                        :value="$selectedOption"
+                                        :disabled="(boolean) $selectedOption"
+                                        :label="trans('admin::app.catalog.attributes.edit.type')"
+                                    >
+                                        <!-- Here! All Needed types are defined -->
+                                        @foreach(['text', 'textarea', 'price', 'boolean', 'select', 'multiselect', 'datetime', 'date', 'image', 'file', 'checkbox'] as $type)
+                                            <option
+                                                value="{{ $type }}"
+                                                {{ $selectedOption == $type ? 'selected' : '' }}
+                                            >
+                                                @lang('admin::app.catalog.attributes.edit.'. $type)
+                                            </option>
+                                        @endforeach
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.control
+                                        type="hidden"
+                                        name="type"
+                                        :value="$attribute->type"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="type"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <!-- Textarea Switcher -->
+                                @if($attribute->type == 'textarea')
+                                    <x-admin::form.control-group>
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.catalog.attributes.edit.enable-wysiwyg')
+                                        </x-admin::form.control-group.label>
+
+                                        @php $selectedOption = old('enable_wysiwyg') ?: $attribute->enable_wysiwyg; @endphp
+
+                                        <x-admin::form.control-group.control
+                                            type="switch"
+                                            name="enable_wysiwyg"
+                                            class="cursor-pointer"
+                                            value="1"
+                                            :label="trans('admin::app.catalog.attributes.edit.enable-wysiwyg')"
+                                            :checked="(boolean) $selectedOption"
+                                        >
+                                        </x-admin::form.control-group.control>
+                                    </x-admin::form.control-group>
+                                @endif
+                            </div>
                         </div>
-                    </accordian>
 
-                    {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.validations.after', ['attribute' => $attribute]) !!}
+                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.general.after', ['attribute' => $attribute]) !!}
 
-                    {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.configuration.before', ['attribute' => $attribute]) !!}
+                        <!-- Validations -->
+                        <x-admin::accordion>
+                            <x-slot:header>
+                                <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                    @lang('admin::app.catalog.attributes.edit.validations')
+                                </p>
+                            </x-slot:header>
+                        
+                            <x-slot:content>
+                                <!-- Input Validation -->
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.catalog.attributes.edit.input-validation')
+                                    </x-admin::form.control-group.label>
 
-                    <accordian title="{{ __('admin::app.catalog.attributes.configuration') }}" :active="true">
-                        <div slot="body">
-                            {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.configuration.controls.before', ['attribute' => $attribute]) !!}
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="validation"
+                                        :value="$attribute->validation"
+                                        class="cursor-pointer"
+                                        v-model="validationType"
+                                    >
+                                         <!-- Here! All Needed types are defined -->
+                                         @foreach(['number', 'email', 'decimal', 'url', 'regex'] as $type)
+                                         <option value="{{ $type }}">
+                                             @lang('admin::app.catalog.attributes.edit.' . $type)
+                                         </option>
+                                     @endforeach
+                                    </x-admin::form.control-group.control>
+                                </x-admin::form.control-group>
 
-                            <div class="control-group">
-                                <label for="value_per_locale">
-                                    {{ __('admin::app.catalog.attributes.value_per_locale') }}
-                                </label>
+                                <!-- REGEX -->
+                                <x-admin::form.control-group
+                                    class="mb-[10px]"
+                                    v-if="validationType === 'regex'"
+                                >
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.catalog.attributes.create.regex')
+                                    </x-admin::form.control-group.label>
 
-                                <select name="value_per_locale" class="control" id="value_per_locale" disabled>
-                                    <option value="0" {{ $attribute->value_per_locale ? '' : 'selected' }}>
-                                        {{ __('admin::app.catalog.attributes.no') }}
-                                    </option>
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="regex"
+                                        v-model="regexValue"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                                    <option value="1" {{ $attribute->value_per_locale ? 'selected' : '' }}>
-                                        {{ __('admin::app.catalog.attributes.yes') }}
-                                    </option>
-                                </select>
+                                    <x-admin::form.control-group.error
+                                        control-name="regex"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
-                                <input type="hidden" name="value_per_locale" value="{{ $attribute->value_per_locale }}"/>
-                            </div>
+                                <!-- Is Required -->
+                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] select-none">
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        name="is_required"
+                                        id="is_required"
+                                        for="is_required"
+                                        value="1"
+                                        :checked="(boolean) $attribute->is_user_defined"
+                                        :disabled="(boolean) !$attribute->is_user_defined"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                            <div class="control-group">
-                                <label for="value_per_channel">
-                                    {{ __('admin::app.catalog.attributes.value_per_channel') }}
-                                </label>
+                                    <x-admin::form.control-group.label
+                                        for="is_required"
+                                        class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer"
+                                    >
+                                        @lang('admin::app.catalog.attributes.edit.is-required')
+                                    </x-admin::form.control-group.label>
 
-                                <select name="value_per_channel" class="control" id="value_per_channel" disabled>
-                                    <option value="0" {{ $attribute->value_per_channel ? '' : 'selected' }}>
-                                        {{ __('admin::app.catalog.attributes.no') }}
-                                    </option>
+                                    <x-admin::form.control-group.control
+                                        type="hidden"
+                                        name="is_required"
+                                        :value="$attribute->is_required"
+                                    >
+                                    </x-admin::form.control-group.control>
+                                </x-admin::form.control-group>
 
-                                    <option value="1" {{ $attribute->value_per_channel ? 'selected' : '' }}>
-                                        {{ __('admin::app.catalog.attributes.yes') }}
-                                    </option>
-                                </select>
+                                <!-- Is Unique -->
+                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] opacity-70 select-none">
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        name="is_unique"
+                                        id="is_unique"
+                                        for="is_unique"
+                                        value="1"
+                                        :checked="(boolean) $attribute->is_unique"
+                                        :disabled="(boolean) $attribute->is_unique"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                                <input type="hidden" name="value_per_channel" value="{{ $attribute->value_per_channel }}"/>
-                            </div>
+                                    <x-admin::form.control-group.label class="!text-[14px] !font-semibold !text-gray-600 cursor-not-allowed">
+                                        @lang('admin::app.catalog.attributes.edit.is-unique')
+                                    </x-admin::form.control-group.label>
 
-                            <div class="control-group">
-                                <label for="is_filterable">
-                                    {{ __('admin::app.catalog.attributes.is_filterable') }}
-                                </label>
+                                    <x-admin::form.control-group.control
+                                        type="hidden"
+                                        :name="$type"
+                                        :value="$attribute->is_unique"
+                                    >
+                                    </x-admin::form.control-group.control>
+                                </x-admin::form.control-group>
+                            </x-slot:content>
+                        </x-admin::accordion>
 
-                                <select name="is_filterable" class="control" id="is_filterable">
-                                    <option value="0" {{ $attribute->is_filterable ? '' : 'selected' }}>
-                                        {{ __('admin::app.catalog.attributes.no') }}
-                                    </option>
+                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.validations.controls.after', ['attribute' => $attribute]) !!}
 
-                                    <option value="1" {{ $attribute->is_filterable ? 'selected' : '' }}>
-                                        {{ __('admin::app.catalog.attributes.yes') }}
-                                    </option>
-                                </select>
-                            </div>
+                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.configuration.before', ['attribute' => $attribute]) !!}
 
-                            <div class="control-group">
-                                <label for="is_configurable">
-                                    {{ __('admin::app.catalog.attributes.is_configurable') }}
-                                </label>
+                        <!-- Configurations -->
+                        <x-admin::accordion>
+                            <x-slot:header>
+                                <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                    @lang('admin::app.catalog.attributes.edit.configuration')
+                                </p>
+                            </x-slot:header>
+                        
+                            <x-slot:content>
+                                @foreach (['value-per-locale', 'value-per-channel'] as $type)
+                                    <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] opacity-70 select-none ">
+                                        <x-admin::form.control-group.control
+                                            type="checkbox"
+                                            :name="$type"
+                                            :id="$type"
+                                            :checked="(boolean) $attribute->$type"
+                                            :disabled="(boolean) $attribute->$type"
+                                        >
+                                        </x-admin::form.control-group.control>
 
-                                <select name="is_configurable" class="control" id="is_configurable">
-                                    <option value="0" {{ $attribute->is_configurable ? '' : 'selected' }}>
-                                        {{ __('admin::app.catalog.attributes.no') }}
-                                    </option>
+                                        <x-admin::form.control-group.label class="!text-[14px] !font-semibold !text-gray-600 cursor-not-allowed">
+                                            @lang('admin::app.catalog.attributes.edit.' .  $type)
+                                        </x-admin::form.control-group.label>
 
-                                    <option value="1" {{ $attribute->is_configurable ? 'selected' : '' }}>
-                                        {{ __('admin::app.catalog.attributes.yes') }}
-                                    </option>
-                                </select>
-                            </div>
+                                        <x-admin::form.control-group.control
+                                            type="hidden"
+                                            :name="$type"
+                                            :value="$attribute->$type"
+                                        >
+                                        </x-admin::form.control-group.control>
+                                    </x-admin::form.control-group>
+                                @endforeach
 
-                            <div class="control-group">
-                                <label for="is_visible_on_front">
-                                    {{ __('admin::app.catalog.attributes.is_visible_on_front') }}
-                                </label>
+                                <!-- Use in Layered -->
+                                @foreach (['is-filterable', 'is-configurable', 'is-visible-on-front', 'use-in-flat', 'is-comparable'] as $type)
+                                    <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                        <x-admin::form.control-group.control
+                                            type="checkbox"
+                                            :id="$type"
+                                            :name="$type"
+                                            :for="$type"
+                                            value="1"
+                                            :checked="(boolean) $attribute->$type"
 
-                                <select name="is_visible_on_front" class="control" id="is_visible_on_front">
-                                    <option value="0" {{ $attribute->is_visible_on_front ? '' : 'selected' }}>
-                                        {{ __('admin::app.catalog.attributes.no') }}
-                                    </option>
+                                        >
+                                        </x-admin::form.control-group.control>
 
-                                    <option value="1" {{ $attribute->is_visible_on_front ? 'selected' : '' }}>
-                                        {{ __('admin::app.catalog.attributes.yes') }}
-                                    </option>
-                                </select>
-                            </div>
+                                        <x-admin::form.control-group.label
+                                            :for="$type"
+                                            class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer" 
+                                        >
+                                            @lang('admin::app.catalog.attributes.edit.' .  $type)
+                                        </x-admin::form.control-group.label>
 
-                            <div class="control-group">
-                                <label for="is_comparable">
-                                    {{ __('admin::app.catalog.attributes.is_comparable') }}
-                                </label>
+                                        <x-admin::form.control-group.control
+                                            type="hidden"
+                                            :name="$type"
+                                            :value="$attribute->$type"
+                                        >
+                                        </x-admin::form.control-group.control>
+                                    </x-admin::form.control-group>
+                                @endforeach
+                            </x-slot:content>
+                        </x-admin::accordion>
 
-                                <select name="is_comparable" class="control" id="is_comparable">
-                                    <option value="0" {{ $attribute->is_comparable ? '' : 'selected' }}>
-                                        {{ __('admin::app.catalog.attributes.no') }}
-                                    </option>
+                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.configuration.controls.after', ['attribute' => $attribute]) !!}
 
-                                    <option value="1" {{ $attribute->is_comparable ? 'selected' : '' }}>
-                                        {{ __('admin::app.catalog.attributes.yes') }}
-                                    </option>
-                                </select>
-                            </div>
-
-                            {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.configuration.controls.after', ['attribute' => $attribute]) !!}
-                        </div>
-                    </accordian>
-
-                    {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.configuration.after', ['attribute' => $attribute]) !!}
+                    </div>
                 </div>
-            </div>
+            </x-admin::form>
 
-        </form>
-    </div>
-@stop
-
-@push('scripts')
-    <script type="text/x-template" id="options-template">
-        <div>
-            <div class="control-group" v-if="show_swatch">
-                <label for="swatch_type">
-                    {{ __('admin::app.catalog.attributes.swatch_type') }}
-                </label>
-
-                <select
-                    name="swatch_type"
-                    class="control"
-                    id="swatch_type"
-                    v-model="swatch_type"
-                >
-                    <option value="dropdown">
-                        {{ __('admin::app.catalog.attributes.dropdown') }}
-                    </option>
-
-                    <option value="color">
-                        {{ __('admin::app.catalog.attributes.color-swatch') }}
-                    </option>
-
-                    <option value="image">
-                        {{ __('admin::app.catalog.attributes.image-swatch') }}
-                    </option>
-
-                    <option value="text">
-                        {{ __('admin::app.catalog.attributes.text-swatch') }}
-                    </option>
-                </select>
-            </div>
-
-            <div class="control-group">
-                <span class="checkbox">
-                    <input
-                        type="checkbox"
-                        name="default-null-option"
-                        class="control"
-                        id="default-null-option"
-                        v-model="isNullOptionChecked"
-                    />
-
-                    <label class="checkbox-view" for="default-null-option"></label>
-
-                    {{ __('admin::app.catalog.attributes.default_null_option') }}
-                </span>
-            </div>
-
-            <div class="table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th v-if="show_swatch && (swatch_type == 'color' || swatch_type == 'image')">
-                                {{ __('admin::app.catalog.attributes.swatch') }}
-                            </th>
-
-                            <th>
-                                {{ __('admin::app.catalog.attributes.admin_name') }}
-                            </th>
-
-                            <th v-for="locale in allLocales" v-text="`${locale.name} (${locale.code})`"></th>
-
-                            <th>
-                                {{ __('admin::app.catalog.attributes.position') }}
-                            </th>
-
-                            <th></th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {{-- `v-show` used here, so that element remain inside the form. Don't use `v-if` here. --}}
-                        <tr v-for="(row, index) in optionRows" :key="row.id" v-show="! row.isDelete">
-                            <input type="hidden" :name="'options[' + row.id + '][isNew]'" :value="row.isNew">
-
-                            <input type="hidden" :name="'options[' + row.id + '][isDelete]'" :value="row.isDelete">
-
-                            <td v-if="show_swatch && swatch_type == 'color'">
-                                <swatch-picker
-                                    :input-name="'options[' + row.id + '][swatch_value]'"
-                                    :color="row.swatch_value"
-                                    colors="text-advanced"
-                                    show-fallback
-                                />
-                            </td>
-
-                            <td style="white-space: nowrap;" v-if="show_swatch && swatch_type == 'image'">
-                                <div class="control-group" :class="[errors.has('options[' + row.id + '][swatch_value]') ? 'has-error' : '']">
-                                    <img
-                                        :src="row.swatch_value_url"
-                                        style="width: 36px;height: 36px;vertical-align: middle;background: #F2F2F2;border-radius: 2px;margin-right: 10px;"
-                                        v-if="row.swatch_value_url"
-                                    />
-
-                                    <input
-                                        type="file"
-                                        :name="'options[' + row.id + '][swatch_value]'"
-                                        accept="image/*"
-                                        v-validate="'size:600'"
-                                    />
-
-                                    <span
-                                        class="control-error"
-                                        v-text="'{{ __('admin::app.catalog.attributes.validation-messages.max-size') }}'"
-                                        v-if="errors.has('options[' + row.id + '][swatch_value]')"
-                                    ></span>
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="control-group" :class="[errors.has(adminName(row)) ? 'has-error' : '']">
-                                    <input
-                                        type="text"
-                                        :name="adminName(row)"
-                                        class="control"
-                                        v-model="row['admin_name']"
-                                        v-validate="getOptionValidation(row, '')"
-                                        data-vv-as="&quot;{{ __('admin::app.catalog.attributes.admin_name') }}&quot;"
-                                    />
-
-                                    <span
-                                        class="control-error"
-                                        v-text="errors.first(adminName(row))"
-                                        v-if="errors.has(adminName(row))"
-                                    ></span>
-                                </div>
-                            </td>
-
-                            <td v-for="locale in allLocales">
-                                <div class="control-group" :class="[errors.has(localeInputName(row, locale.code)) ? 'has-error' : '']">
-                                    <input
-                                        type="text"
-                                        :name="localeInputName(row, locale.code)"
-                                        class="control"
-                                        v-model="row['locales'][locale.code]"
-                                        v-validate="getOptionValidation(row, locale.code)"
-                                        :data-vv-as="`&quot;${locale.name} (${locale.code})&quot;`"
-                                    />
-
-                                    <span
-                                        class="control-error"
-                                        v-text="errors.first(localeInputName(row, locale.code))"
-                                        v-if="errors.has(localeInputName(row, locale.code))"
-                                    ></span>
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="control-group" :class="[errors.has(sortOrderName(row)) ? 'has-error' : '']">
-                                    <input
-                                        type="text"
-                                        :name="sortOrderName(row)"
-                                        class="control"
-                                        v-model="row['sort_order']"
-                                        v-validate="getOptionValidation(row, '')"
-                                        data-vv-as="&quot;{{ __('admin::app.catalog.attributes.position') }}&quot;"
-                                    />
-
-                                    <span
-                                        class="control-error"
-                                        v-text="errors.first(sortOrderName(row))"
-                                        v-if="errors.has(sortOrderName(row))"
-                                    ></span>
-                                </div>
-                            </td>
-
-                            <td class="actions">
-                                <i class="icon trash-icon" @click="removeRow(row)"></i>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <button
-                type="button"
-                class="btn btn-lg btn-primary"
-                id="load-more-btm"
-                style="margin-top: 20px"
-                @click="loadMoreOptions()"
-                v-if="loadMore"
+            <!-- Add Options Model Form -->
+            <x-admin::form
+                v-slot="{ meta, errors, handleSubmit }"
+                as="div"
+                ref="modelForm"
             >
-                {{ __('admin::app.catalog.attributes.load-more-options-btn-title') }}
-            </button>
+                <form @submit.prevent="handleSubmit($event, storeOptions)" enctype="multipart/form-data">
+                    <x-admin::modal
+                        @toggle="listenModel"
+                        ref="addOptionsRow"
+                    >
+                        <x-slot:header>
+                            <p class="text-[18px] text-gray-800 font-bold">
+                                @lang('admin::app.catalog.attributes.edit.add-option')
+                            </p>
+                        </x-slot:header>
 
-            <button
-                type="button"
-                class="btn btn-lg btn-primary"
-                id="add-option-btn"
-                style="margin-top: 20px"
-                @click="addOptionRow()"
-            >
-                {{ __('admin::app.catalog.attributes.add-option-btn-title') }}
-            </button>
-        </div>
-    </script>
+                        <x-slot:content>
+                            <div class="grid grid-cols-3 px-[16px] py-[10px]">
+                                <!-- Image Input -->
+                                <x-admin::form.control-group
+                                    class="w-full"
+                                    v-if="swatchType == 'image'"
+                                >
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.catalog.attributes.edit.image')
+                                    </x-admin::form.control-group.label>
 
-    <script>
-        Vue.component('option-wrapper', {
-            template: '#options-template',
+                                    <x-admin::form.control-group.control
+                                        type="image"
+                                        name="swatch_value"
+                                        :placeholder="trans('admin::app.catalog.attributes.edit.image')"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-            inject: ['$validator'],
+                                    <x-admin::form.control-group.error
+                                        control-name="swatch_value"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
-            props: [
-                'src',
-                'allLocales'
-            ],
+                                <!-- Color Input -->
+                                <x-admin::form.control-group
+                                    class="w-full"
+                                    v-if="swatchType == 'color'"
+                                >
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.catalog.attributes.edit.color')
+                                    </x-admin::form.control-group.label>
 
-            data: function() {
-                return {
-                    appLocale: '{{ app()->getLocale() }}',
+                                    <x-admin::form.control-group.control
+                                        type="color"
+                                        name="swatch_value"
+                                        :placeholder="trans('admin::app.catalog.attributes.edit.color')"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                    optionPage: 1,
+                                    <x-admin::form.control-group.error
+                                        control-name="swatch_value"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+                            </div>
 
-                    optionRowCount: 0,
+                            <div class="grid grid-cols-3 gap-[16px] px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                <!-- Hidden Id Input -->
+                                <x-admin::form.control-group.control
+                                    type="hidden"
+                                    name="id"
+                                >
+                                </x-admin::form.control-group.control>
+                                
+                                <!-- Admin Input -->
+                                <x-admin::form.control-group class="w-full mb-[10px]">
+                                    <x-admin::form.control-group.label ::class="{ 'required' : ! isNullOptionChecked }">
+                                        @lang('admin::app.catalog.attributes.edit.admin')
+                                    </x-admin::form.control-group.label>
 
-                    optionRows: [],
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="admin_name"
+                                        ::rules="{ 'required' : ! isNullOptionChecked }"
+                                        ref="inputAdmin"
+                                        :label="trans('admin::app.catalog.attributes.edit.admin')"
+                                        :placeholder="trans('admin::app.catalog.attributes.edit.admin')"
+                                    >
+                                    </x-admin::form.control-group.control>
+        
+                                    <x-admin::form.control-group.error
+                                        control-name="admin_name"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
-                    loadMore: true,
+                                <!-- Locales Input -->
+                                @foreach ($allLocales as $locale)
+                                    <x-admin::form.control-group class="w-full mb-[10px]">
+                                        <x-admin::form.control-group.label ::class="{ '{{ core()->getDefaultChannelLocaleCode() == $locale->code ? 'required' : '' }}' : ! isNullOptionChecked }">
+                                            {{ $locale->name }} ({{ strtoupper($locale->code) }})
+                                        </x-admin::form.control-group.label>
 
-                    show_swatch: "{{ $attribute->type == 'select' ? true : false  }}",
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="locales.{{ $locale->code }}"
+                                            ::rules="{ '{{ core()->getDefaultChannelLocaleCode() == $locale->code ? 'required' : '' }}' : ! isNullOptionChecked }"
+                                            :label="$locale->name"
+                                            :placeholder="$locale->name"
+                                        >
+                                        </x-admin::form.control-group.control>
+            
+                                        <x-admin::form.control-group.error
+                                            control-name="locales.{{ $locale->code }}"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+                                @endforeach
 
-                    swatch_type: "{{ $attribute->swatch_type == '' ? 'dropdown' : $attribute->swatch_type }}",
+                                <!-- Position Input -->
+                                <x-admin::form.control-group class="w-full mb-[10px]">
+                                    <x-admin::form.control-group.label ::class="{ 'required' : ! isNullOptionChecked }">
+                                        @lang('admin::app.catalog.attributes.edit.position')
+                                    </x-admin::form.control-group.label>
 
-                    isNullOptionChecked: false,
+                                    <x-admin::form.control-group.control
+                                        type="number"
+                                        name="sort_order"
+                                        ::rules="{ 'required' : ! isNullOptionChecked }"
+                                        :label="trans('admin::app.catalog.attributes.edit.position')"
+                                        :placeholder="trans('admin::app.catalog.attributes.edit.position')"
+                                    >
+                                    </x-admin::form.control-group.control>
+        
+                                    <x-admin::form.control-group.error
+                                        control-name="sort_order"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+                            </div>
+                        </x-slot:content>
+                        
+                        <x-slot:footer>
+                            <!-- Save Button -->
+                            <button
+                                type="submit" 
+                                class="primary-button"
+                            >
+                                @lang('admin::app.marketing.communications.events.edit.save-btn')
+                            </button>
+                        </x-slot:footer>
+                    </x-admin::modal>
+                </form>
+            </x-admin::form>
+        </script>
 
-                    idNullOption: null
-                };
-            },
+        <script type="module">
+            app.component('v-edit-attributes', {
+                template: '#v-edit-attributes-template',
 
-            watch: {
-                isNullOptionChecked: function (val) {
-                    if (val) {
-                        if (! this.idNullOption) {
-                            this.addOptionRow(true);
-                        }
-                    } else if(this.idNullOption !== null && typeof this.idNullOption !== 'undefined') {
-                        const row = this.optionRows.find(optionRow => optionRow.id === this.idNullOption);
-                        this.removeRow(row);
+                props: ['allLocales'],
+
+                data: function() {
+                    return {
+                        optionRowCount: 1,
+
+                        showSwatch: "{{ $attribute->type == 'select' ? true : false  }}",
+
+                        swatchType: "{{ $attribute->swatch_type == '' ? 'dropdown' : $attribute->swatch_type }}",
+
+                        validationType: "{{ $attribute->validation }}",
+
+                        regexValue: '{{ $attribute->validation }}',
+
+                        isNullOptionChecked: false,
+
+                        optionsData: [],
+
+                        src: "{{ route('admin.catalog.attributes.options', $attribute->id) }}",
                     }
-                }
-            },
+                },
 
-            created: function () {
-                this.getAttributeOptions();
+                created: function () {
+                    this.getAttributesOption();
+                },
 
-                this.activateToggleSwatch();
-            },
+                methods: {
+                    storeOptions(params, { resetForm, setValues }) {
+                        let foundIndex = this.optionsData.findIndex(item => item.id === params.id);
 
-            methods: {
-                activateToggleSwatch: function () {
-                    let self = this;
-
-                    $('#type').on('change', function (e) {
-                        if (['select'].indexOf($(e.target).val()) === -1) {
-                            self.show_swatch = false;
+                        if (foundIndex !== -1) {
+                            this.optionsData.splice(foundIndex, 1, params);
                         } else {
-                            self.show_swatch = true;
-                        }
-                    });
-                },
-
-                getAttributeOptions: function () {
-                    let self = this;
-
-                    axios.get(`${this.src}?page=${this.optionPage}`).then(function (response) {
-                        let options = response.data.data;
-
-                        if (response.data.current_page === response.data.last_page) {
-                            self.loadMore = false;
+                            this.optionsData.push(params);
                         }
 
-                        options.forEach((option) => {
-                            self.optionRowCount++;
+                        this.$refs.addOptionsRow.toggle();
 
-                            let row = {
-                                'id': option.id,
-                                'admin_name': option.admin_name,
-                                'sort_order': option.sort_order,
-                                'swatch_value': option.swatch_value,
-                                'swatch_value_url': option.swatch_value_url,
-                                'notRequired': '',
-                                'locales': {},
-                                'isNew': false,
-                                'isDelete': false,
-                            };
+                        if (params.swatch_value instanceof File) {
+                            this.setFile(params);
+                        }
 
-                            if (! option.label) {
-                                self.isNullOptionChecked = true;
-                                self.idNullOption = option.id;
-                                row['notRequired'] = true;
-                            } else {
-                                row['notRequired'] = false;
-                            }
+                        resetForm();
+                    },
 
-                            option.translations.forEach((translation) => {
-                                row['locales'][translation.locale] = translation.label ?? '';
+                    editOptions(value) {
+                        this.$refs.modelForm.setValues(value);
+
+                        this.$refs.addOptionsRow.toggle();
+                    },
+
+                    removeOption(id) {
+                        let foundIndex = this.optionsData.findIndex(item => item.id === id);
+
+                        if (foundIndex !== -1) {
+                            this.optionsData.splice(foundIndex, 1);
+                        }
+                    },
+
+                    listenModel(event) {
+                        if (! event.isActive) {
+                            this.isNullOptionChecked = false;                            
+                        }
+                    },
+
+                    getAttributesOption() {
+                        this.$axios.get(`${this.src}`)
+                            .then(response => {
+                                let options = response.data.data;
+                                options.forEach((option) => {
+                                    this.optionRowCount++;
+
+                                    let row = {
+                                        'id': option.id,
+                                        'admin_name': option.admin_name,
+                                        'sort_order': option.sort_order,
+                                        'swatch_value': option.swatch_value,
+                                        'swatch_value_url': option.swatch_value_url,
+                                        'notRequired': '',
+                                        'locales': {},
+                                        'isNew': false,
+                                        'isDelete': false,
+                                    };
+
+                                    if (! option.label) {
+                                        this.isNullOptionChecked = true;
+                                        this.idNullOption = option.id;
+                                        row['notRequired'] = true;
+                                    } else {
+                                        row['notRequired'] = false;
+                                    }
+
+                                    option.translations.forEach((translation) => {
+                                        row['locales'][translation.locale] = translation.label ?? '';
+                                    });
+
+                                    this.optionsData.push(row);
+                                });
                             });
+                    },
 
-                            self.optionRows.push(row);
-                        });
-                    });
-                },
+                    setFile(event) {
+                        let dataTransfer = new DataTransfer();
 
-                loadMoreOptions: function () {
-                    this.optionPage++;
+                        dataTransfer.items.add(event.swatch_value);
 
-                    this.getAttributeOptions();
-                },
+                        // use settimeout because need to wait for render dom before set the src or get the ref value
+                        setTimeout(() => {
+                            this.$refs['image_' + event.id].src =  URL.createObjectURL(event.swatch_value);
+                        }, 0);
 
-                addOptionRow: function (isNullOptionRow) {
-                    const rowCount = this.optionRowCount++;
-                    const id = 'option_' + rowCount;
-                    let row = {'id': id, 'locales': {}, 'isNew': true, 'isDelete': false};
-
-                    this.allLocales.forEach((locale) => {
-                        row['locales'][locale.code] = '';
-                    });
-
-                    row['notRequired'] = '';
-
-                    if (isNullOptionRow) {
-                        this.idNullOption = id;
-                        row['notRequired'] = true;
-                    }
-
-                    this.optionRows.push(row);
-                },
-
-                removeRow: function (row) {
-                    if (row.id === this.idNullOption) {
-                        this.idNullOption = null;
-                        this.isNullOptionChecked = false;
-                    }
-
-                    const index = this.optionRows.indexOf(row);
-
-                    if (this.optionRows[index].isNew) {
-                        this.hardDeleteNewRow(index);
-                    } else {
-                        this.softDeleteExistingRow(index);
+                        this.$refs['imageInput_' + event.id].files = dataTransfer.files;
                     }
                 },
-
-                hardDeleteNewRow: function (rowIndex) {
-                    Vue.delete(this.optionRows, rowIndex);
-                },
-
-                softDeleteExistingRow: function (rowIndex) {
-                    let self = this;
-
-                    this.optionRows[rowIndex].isDelete = true;
-
-                    let requiredKeys = ['admin_name', 'sort_order'];
-
-                    requiredKeys.forEach((key) => {
-                        if (self.optionRows[rowIndex][key] === undefined || self.optionRows[rowIndex][key] === '') {
-                            self.optionRows[rowIndex][key] = '0';
-                        }
-                    });
-                },
-
-                adminName: function (row) {
-                    return 'options[' + row.id + '][admin_name]';
-                },
-
-                localeInputName: function (row, locale) {
-                    return 'options[' + row.id + '][' + locale + '][label]';
-                },
-
-                sortOrderName: function (row) {
-                    return 'options[' + row.id + '][sort_order]';
-                },
-
-                getOptionValidation: function (row, localeCode) {
-                    if (row.notRequired === true) {
-                        return '';
-                    }
-                    
-                    return ('{{ app()->getLocale() }}' === localeCode) || localeCode == ""  ? 'required' : '';
-                },
-            },
-        });
-    </script>
-@endpush
+            });
+        </script>
+    @endPushOnce
+</x-admin::layouts>

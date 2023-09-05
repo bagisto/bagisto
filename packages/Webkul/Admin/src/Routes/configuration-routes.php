@@ -7,15 +7,13 @@ use Webkul\Admin\Http\Controllers\ConfigurationController;
  * Configuration routes.
  */
 Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], function () {
-    Route::get('configuration/{slug?}/{slug2?}', [ConfigurationController::class, 'index'])->defaults('_config', [
-        'view' => 'admin::configuration.index',
-    ])->name('admin.configuration.index');
+    Route::controller(ConfigurationController::class)->prefix('configuration/{slug?}/{slug2?}')->group(function () {
+        Route::get('', 'index')->name('admin.configuration.index');
 
-    Route::post('configuration/{slug?}/{slug2?}', [ConfigurationController::class, 'store'])->defaults('_config', [
-        'redirect' => 'admin.configuration.index',
-    ])->name('admin.configuration.index.store');
+        Route::post('', 'store')->name('admin.configuration.store');
 
-    Route::get('configuration/{slug?}/{slug2?}/{path}', [ConfigurationController::class, 'download'])->defaults('_config', [
-        'redirect' => 'admin.configuration.index',
-    ])->name('admin.configuration.download');
+        Route::get('{path}', 'download')->defaults('_config', [
+            'redirect' => 'admin.configuration.index',
+        ])->name('admin.configuration.download');
+    });
 });

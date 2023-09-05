@@ -1,0 +1,79 @@
+{
+  "src/Resources/assets/css/app.css": {
+    "file": "assets/app-4490c440.css",
+    "isEntry": true,
+    "src": "src/Resources/assets/css/app.css"
+  },
+  "src/Resources/assets/fonts/velicon.woff": {
+    "file": "assets/velicon-2b79b97c.woff",
+    "src": "src/Resources/assets/fonts/velicon.woff"
+  },
+  "src/Resources/assets/images/empty-dwn-product.png": {
+    "file": "assets/empty-dwn-product-3c9202e1.png",
+    "src": "src/Resources/assets/images/empty-dwn-product.png"
+  },
+  "src/Resources/assets/images/hero-image.jpg": {
+    "file": "assets/hero-image-feee3420.jpg",
+    "src": "src/Resources/assets/images/hero-image.jpg"
+  },
+  "src/Resources/assets/images/hero-image.webp": {
+    "file": "assets/hero-image-3170dce6.webp",
+    "src": "src/Resources/assets/images/hero-image.webp"
+  },
+  "src/Resources/assets/images/large-product-placeholder.png": {
+    "file": "assets/large-product-placeholder-b4cf34bf.png",
+    "src": "src/Resources/assets/images/large-product-placeholder.png"
+  },
+  "src/Resources/assets/images/logo.svg": {
+    "file": "assets/logo-942157c2.svg",
+    "src": "src/Resources/assets/images/logo.svg"
+  },
+  "src/Resources/assets/images/medium-product-placeholder.png": {
+    "file": "assets/medium-product-placeholder-e6cf535d.png",
+    "src": "src/Resources/assets/images/medium-product-placeholder.png"
+  },
+  "src/Resources/assets/images/no-address.png": {
+    "file": "assets/no-address-740c7843.png",
+    "src": "src/Resources/assets/images/no-address.png"
+  },
+  "src/Resources/assets/images/paypal.png": {
+    "file": "assets/paypal-df581855.png",
+    "src": "src/Resources/assets/images/paypal.png"
+  },
+  "src/Resources/assets/images/product-hero.png": {
+    "file": "assets/product-hero-9e10fae5.png",
+    "src": "src/Resources/assets/images/product-hero.png"
+  },
+  "src/Resources/assets/images/review.png": {
+    "file": "assets/review-342fab8f.png",
+    "src": "src/Resources/assets/images/review.png"
+  },
+  "src/Resources/assets/images/small-product-placeholder.png": {
+    "file": "assets/small-product-placeholder-9140cd4a.png",
+    "src": "src/Resources/assets/images/small-product-placeholder.png"
+  },
+  "src/Resources/assets/images/thank-you.png": {
+    "file": "assets/thank-you-aa4a2b62.png",
+    "src": "src/Resources/assets/images/thank-you.png"
+  },
+  "src/Resources/assets/images/user-placeholder.png": {
+    "file": "assets/user-placeholder-4670a452.png",
+    "src": "src/Resources/assets/images/user-placeholder.png"
+  },
+  "src/Resources/assets/images/wishlist.png": {
+    "file": "assets/wishlist-8c226c7a.png",
+    "src": "src/Resources/assets/images/wishlist.png"
+  },
+  "src/Resources/assets/js/app.css": {
+    "file": "assets/app-f72387a9.css",
+    "src": "src/Resources/assets/js/app.css"
+  },
+  "src/Resources/assets/js/app.js": {
+    "css": [
+      "assets/app-f72387a9.css"
+    ],
+    "file": "assets/app-458db3b4.js",
+    "isEntry": true,
+    "src": "src/Resources/assets/js/app.js"
+  }
+}

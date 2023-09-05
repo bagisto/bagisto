@@ -1,431 +1,293 @@
-@extends('admin::layouts.master')
 
-@section('page_title')
-    {{ __('admin::app.sales.shipments.add-title') }}
-@stop
+<v-create-shipment>
+    <div
+        class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
+    >
+        <span class="icon-ship text-[24px]"></span> 
 
-@section('content-wrapper')
-    <div class="content full-page">
-        <form method="POST" action="{{ route('admin.sales.shipments.store', $order->id) }}" @submit.prevent="onSubmit">
-            @csrf()
-
-            <div class="page-header">
-                <div class="page-title">
-                    <h1>
-                        <i
-                            class="icon angle-left-icon back-link"
-                            onclick="window.location = '{{ route('admin.sales.shipments.index') }}'"
-                        >
-                        </i>
-
-                        {{ __('admin::app.sales.shipments.add-title') }}
-                    </h1>
-                </div>
-
-                <div class="page-action">
-                    <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.sales.shipments.save-btn-title') }}
-                    </button>
-                </div>
-            </div>
-
-            <div class="page-content">
-                <div class="sale-container">
-                    <accordian title="{{ __('admin::app.sales.orders.order-and-account') }}" :active="true">
-                        <div slot="body">
-                            <div class="sale">
-                                <div class="sale-section">
-                                    <div class="secton-title">
-                                        <span>{{ __('admin::app.sales.orders.order-info') }}</span>
-                                    </div>
-
-                                    <div class="section-content">
-                                        <div class="row">
-                                            <span class="title">
-                                                {{ __('admin::app.sales.shipments.order-id') }}
-                                            </span>
-
-                                            <span class="value">
-                                                <a
-                                                    href="{{ route('admin.sales.orders.view', $order->id) }}"
-                                                >
-                                                    #{{ $order->increment_id }}
-                                                </a>
-                                            </span>
-                                        </div>
-
-                                        <div class="row">
-                                            <span class="title">
-                                                {{ __('admin::app.sales.orders.order-date') }}
-                                            </span>
-
-                                            <span class="value">
-                                                {{ core()->formatDate($order->created_at, 'Y-m-d H:i:s') }}
-                                            </span>
-                                        </div>
-
-                                        <div class="row">
-                                            <span class="title">
-                                                {{ __('admin::app.sales.orders.order-status') }}
-                                            </span>
-
-                                            <span class="value">
-                                                {{ $order->status_label }}
-                                            </span>
-                                        </div>
-
-                                        <div class="row">
-                                            <span class="title">
-                                                {{ __('admin::app.sales.orders.channel') }}
-                                            </span>
-
-                                            <span class="value">
-                                                {{ $order->channel_name }}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="sale-section">
-                                    <div class="secton-title">
-                                        <span>{{ __('admin::app.sales.orders.account-info') }}</span>
-                                    </div>
-
-                                    <div class="section-content">
-                                        <div class="row">
-                                            <span class="title">
-                                                {{ __('admin::app.sales.orders.customer-name') }}
-                                            </span>
-
-                                            <span class="value">
-                                                {{ $order->customer_full_name }}
-                                            </span>
-                                        </div>
-
-                                        <div class="row">
-                                            <span class="title">
-                                                {{ __('admin::app.sales.orders.email') }}
-                                            </span>
-
-                                            <span class="value">
-                                                {{ $order->customer_email }}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </accordian>
-
-                    @if ($order->billing_address || $order->shipping_address)
-                        <accordian title="{{ __('admin::app.sales.orders.address') }}" :active="true">
-                            <div slot="body">
-                                <div class="sale">
-                                    @if ($order->billing_address)
-                                        <div class="sale-section">
-                                            <div class="secton-title">
-                                                <span>{{ __('admin::app.sales.orders.billing-address') }}</span>
-                                            </div>
-
-                                            <div class="section-content">
-                                                @include ('admin::sales.address', ['address' => $order->billing_address])
-                                            </div>
-                                        </div>
-                                    @endif
-
-                                    @if ($order->shipping_address)
-                                        <div class="sale-section">
-                                            <div class="secton-title">
-                                                <span>{{ __('admin::app.sales.orders.shipping-address') }}</span>
-                                            </div>
-
-                                            <div class="section-content">
-                                                @include ('admin::sales.address', ['address' => $order->shipping_address])
-                                            </div>
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-                        </accordian>
-                    @endif
-
-                    <accordian title="{{ __('admin::app.sales.orders.payment-and-shipping') }}" :active="true">
-                        <div slot="body">
-                            <div class="sale">
-                                <div class="sale-section">
-                                    <div class="secton-title">
-                                        <span>
-                                            {{ __('admin::app.sales.orders.payment-info') }}
-                                        </span>
-                                    </div>
-
-                                    <div class="section-content">
-                                        <div class="row">
-                                            <span class="title">
-                                                {{ __('admin::app.sales.orders.payment-method') }}
-                                            </span>
-
-                                            <span class="value">
-                                                {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
-                                            </span>
-                                        </div>
-
-                                        <div class="row">
-                                            <span class="title">
-                                                {{ __('admin::app.sales.orders.currency') }}
-                                            </span>
-
-                                            <span class="value">
-                                                {{ $order->order_currency_code }}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="sale-section">
-                                    <div class="secton-title">
-                                        <span>{{ __('admin::app.sales.orders.shipping-info') }}</span>
-                                    </div>
-
-                                    <div class="section-content">
-                                        <div class="row">
-                                            <span class="title">
-                                                {{ __('admin::app.sales.orders.shipping-method') }}
-                                            </span>
-
-                                            <span class="value">
-                                                {{ $order->shipping_title }}
-                                            </span>
-                                        </div>
-
-                                        <div class="row">
-                                            <span class="title">
-                                                {{ __('admin::app.sales.orders.shipping-price') }}
-                                            </span>
-
-                                            <span class="value">
-                                                {{ core()->formatBasePrice($order->base_shipping_amount) }}
-                                            </span>
-                                        </div>
-
-                                        <div class="control-group" style="margin-top: 40px">
-                                            <label
-                                                for="shipment[carrier_title]"
-                                            >
-                                                {{ __('admin::app.sales.shipments.carrier-title') }}
-                                            </label>
-
-                                            <input
-                                                class="control"
-                                                id="shipment[carrier_title]"
-                                                type="text"
-                                                name="shipment[carrier_title]"
-                                            />
-                                        </div>
-
-                                        <div class="control-group">
-                                            <label
-                                                for="shipment[track_number]"
-                                            >
-                                                {{ __('admin::app.sales.shipments.tracking-number') }}
-                                            </label>
-
-                                            <input
-                                                class="control"
-                                                id="shipment[track_number]"
-                                                type="text"
-                                                name="shipment[track_number]"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </accordian>
-
-                    <accordian title="{{ __('admin::app.sales.orders.products-ordered') }}" :active="true">
-                        <div slot="body">
-                            <order-item-list></order-item-list>
-                        </div>
-                    </accordian>
-                </div>
-            </div>
-        </form>
+        @lang('admin::app.sales.orders.view.ship')     
     </div>
-@stop
+</v-create-shipment>
 
-@push('scripts')
-    <script type="text/x-template" id="order-item-list-template">
-        <div>
-            <div class="control-group" :class="[errors.has('shipment[source]') ? 'has-error' : '']">
-                <label for="shipment[source]" class="required">{{ __('admin::app.sales.shipments.source') }}</label>
+@pushOnce('scripts')
+    <script type="text/x-template" id="v-create-shipment-template">
+    <div
+        class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
+        @click="$refs.shipment.open()"
+    >
+        <span class="icon-ship text-[24px]"></span> 
 
-                <select v-validate="'required'" class="control" name="shipment[source]" id="shipment[source]" data-vv-as="&quot;{{ __('admin::app.sales.shipments.source') }}&quot;" v-model="source" @change="onSourceChange">
-                    <option value="">{{ __('admin::app.sales.shipments.select-source') }}</option>
+        @lang('admin::app.sales.orders.view.ship')     
+    </div>
 
-                    @foreach ($order->channel->inventory_sources as $key => $inventorySource)
-                        <option value="{{ $inventorySource->id }}">{{ $inventorySource->name }}</option>
-                    @endforeach
-                </select>
+    <!-- Shipment Create Drawer -->
+    <x-admin::form  
+        method="POST"
+        :action="route('admin.sales.shipments.store', $order->id)"
+    >
+        <x-admin::drawer ref="shipment">
+            <!-- Drawer Header -->
+            <x-slot:header>
+                <div class="grid gap-[12px]">
+                    <div class="flex justify-between items-center">
+                        <p class="text-[20px] font-medium">
+                            @lang('admin::app.sales.shipments.create.title')
+                        </p>
 
-                <span class="control-error" v-if="errors.has('shipment[source]')">
-                    @{{ errors.first('shipment[source]') }}
-                </span>
-            </div>
-
-            <div class="table">
-                <div class="table-responsive">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>{{ __('admin::app.sales.orders.SKU') }}</th>
-
-                                <th>{{ __('admin::app.sales.orders.product-name') }}</th>
-
-                                <th>{{ __('admin::app.sales.shipments.qty-ordered') }}</th>
-
-                                <th>{{ __('admin::app.sales.shipments.qty-invoiced') }}</th>
-
-                                <th>{{ __('admin::app.sales.shipments.qty-to-ship') }}</th>
-
-                                <th>{{ __('admin::app.sales.shipments.available-sources') }}</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @foreach ($order->items as $item)
-                                @if (
-                                    $item->qty_to_ship > 0
-                                    && $item->product
-                                )
-                                    <tr>
-                                        <td>{{ $item->getTypeInstance()->getOrderedItem($item)->sku }}</td>
-
-                                        <td>
-                                            {{ $item->name }}
-
-                                            @if (isset($item->additional['attributes']))
-                                                <div class="item-options">
-
-                                                    @foreach ($item->additional['attributes'] as $attribute)
-                                                        <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
-                                                    @endforeach
-
-                                                </div>
-                                            @endif
-                                        </td>
-
-                                        <td>{{ $item->qty_ordered }}</td>
-
-                                        <td>{{ $item->qty_invoiced }}</td>
-
-                                        <td>{{ $item->qty_to_ship }}</td>
-
-                                        <td>
-                                            <table>
-                                                <thead>
-                                                    <tr>
-                                                        <th>{{ __('admin::app.sales.shipments.source') }}</th>
-
-                                                        <th>{{ __('admin::app.sales.shipments.qty-available') }}</th>
-
-                                                        <th>{{ __('admin::app.sales.shipments.qty-to-ship') }}</th>
-                                                    </tr>
-                                                </thead>
-
-                                                <tbody>
-                                                    @foreach ($order->channel->inventory_sources as $key => $inventorySource)
-                                                        <tr>
-                                                            <td>
-                                                                {{ $inventorySource->name }}
-                                                            </td>
-
-                                                            <td>
-                                                                @php
-                                                                    $product = $item->getTypeInstance()->getOrderedItem($item)->product;
-
-                                                                    $sourceQty = $product->type == 'bundle' ? $item->qty_ordered : $product->inventory_source_qty($inventorySource->id);
-                                                                @endphp
-
-                                                                {{ $sourceQty }}
-                                                            </td>
-
-                                                            <td>
-                                                                @php
-                                                                    $inputName = "shipment[items][$item->id][$inventorySource->id]";
-                                                                @endphp
-
-                                                                <div class="control-group" :class="[errors.has('{{ $inputName }}') ? 'has-error' : '']">
-                                                                    <input
-                                                                        ref="{{ $inputName }}"
-                                                                        class="control"
-                                                                        id="{{ $inputName }}"
-                                                                        type="text"
-                                                                        name="{{ $inputName }}"
-                                                                        value="{{ $item->qty_to_ship }}"
-                                                                        v-validate="'required|numeric|min_value:0|max_value:{{$item->qty_ordered}}'"
-                                                                        data-vv-as="&quot;{{ __('admin::app.sales.shipments.qty-to-ship') }}&quot;"
-                                                                        data-original-quantity="{{ $item->qty_to_ship }}"
-                                                                        :disabled="'{{ empty($sourceQty) }}' || source != '{{ $inventorySource->id }}'"
-                                                                    />
-
-                                                                    <span class="control-error" v-if="errors.has('{{ $inputName }}')" v-text="errors.first('{{ $inputName }}')"></span>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                @endif
-                            @endforeach
-                        </tbody>
-                    </table>
+                        <button
+                            type="submit"
+                            class="mr-[45px] primary-button"
+                        >
+                            @lang('admin::app.sales.shipments.create.create-btn')
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </x-slot:header>
+
+            <!-- Drawer Content -->
+            <x-slot:content class="!p-0">
+                <div class="grid">
+                    <div class="p-[16px] pt-2">
+                        <div class="grid grid-cols-2 gap-x-[20px]">
+                            <!-- Carrier Name -->
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.sales.shipments.create.carrier-name')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="shipment[carrier_title]" 
+                                    id="shipment[carrier_title]" 
+                                    :label="trans('admin::app.sales.shipments.create.carrier-name')"
+                                    :placeholder="trans('admin::app.sales.shipments.create.carrier-name')"
+                                >
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error
+                                    control-name="carrier_name"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+
+                            <!-- Tracking Number -->
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.sales.shipments.create.tracking-number')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="shipment[track_number]"
+                                    id="shipment[track_number]"
+                                    :label="trans('admin::app.sales.shipments.create.tracking-number')"
+                                    :placeholder="trans('admin::app.sales.shipments.create.tracking-number')"
+                                >
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error
+                                    control-name="shipment[track_number]"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+                        </div>
+                        
+                        <!-- Resource -->
+                        <x-admin::form.control-group>
+                            <x-admin::form.control-group.label class="required">
+                                @lang('admin::app.sales.shipments.create.source')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="select"
+                                name="shipment[source]" 
+                                id="shipment[source]" 
+                                rules="required"
+                                :label="trans('admin::app.sales.shipments.create.source')"
+                                :placeholder="trans('admin::app.sales.shipments.create.source')"
+                                v-model="source"
+                                @change="onSourceChange"
+                            >
+                                @foreach ($order->channel->inventory_sources as $inventorySource)
+                                    <option value="{{ $inventorySource->id }}">
+                                        {{ $inventorySource->name }}
+                                    </option>
+                                @endforeach
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="shipment[source]"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <div class="grid">
+                            <!-- Item Listing -->
+                            @foreach ($order->items as $item)
+                                <div class="flex gap-[10px] justify-between py-[16px]">
+                                    <div class="flex gap-[10px]">
+                                        @if ($item->product?->base_image_url)
+                                            <img
+                                                class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
+                                                src="{{ $item->product?->base_image_url }}"
+                                            >
+                                        @else
+                                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px]">
+                                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                                                
+                                                <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
+                                                    @lang('admin::app.sales.invoices.view.product-image') 
+                                                </p>
+                                            </div>
+                                        @endif
+        
+                                        <div class="grid gap-[6px] place-content-start">
+                                            <!-- Item Name -->
+                                            <p class="text-[16x] text-gray-800 font-semibold">
+                                                {{ $item->name }}
+                                            </p>
+        
+                                            <div class="flex flex-col gap-[6px] place-items-start">
+                                                <p class="text-gray-600">
+                                                    @lang('admin::app.sales.shipments.create.amount-per-unit', [
+                                                        'amount' => core()->formatBasePrice($item->base_price),
+                                                        'qty'    => $item->qty_ordered,
+                                                    ])
+                                                </p>
+        
+                                                <!--Additional Attributes -->
+                                                @if (isset($item->additional['attributes']))
+                                                    <p class="text-gray-600">
+                                                        @foreach ($item->additional['attributes'] as $attribute)
+                                                            {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
+                                                        @endforeach
+                                                    </p>
+                                                @endif
+
+                                                <!-- Item SKU -->
+                                                <p class="text-gray-600">
+                                                    @lang('admin::app.sales.shipments.create.sku', ['sku' => $item->sku])
+                                                </p>
+
+                                                <!--Item Status -->
+                                                <p class="text-gray-600">
+                                                    {{ $item->qty_ordered ? trans('admin::app.sales.shipments.create.item-ordered', ['qty_ordered' => $item->qty_ordered]) : '' }}
+
+                                                    {{ $item->qty_invoiced ? trans('admin::app.sales.shipments.create.item-invoice', ['qty_invoiced' => $item->qty_invoiced]) : '' }}
+
+                                                    {{ $item->qty_shipped ? trans('admin::app.sales.shipments.create.item-shipped', ['qty_shipped' => $item->qty_shipped]) : '' }}
+
+                                                    {{ $item->qty_refunded ? trans('admin::app.sales.shipments.create.item-refunded', ['qty_refunded' => $item->qty_refunded]) : '' }}
+
+                                                    {{ $item->qty_canceled ? trans('admin::app.sales.shipments.create.item-canceled', ['qty_canceled' => $item->qty_canceled]) : '' }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="gap-[10px] justify-between pb-[16px] border-b-[1px] border-slate-300">
+                                    <!-- Information -->
+                                    <div class="flex justify-between">
+                                        @foreach ($order->channel->inventory_sources as $inventorySource)
+                                            <div class="grid gap-[10px]">
+                                                <!--Inventory Source -->
+                                                <p class="text-[16x] text-gray-800 font-semibold">
+                                                    {{ $inventorySource->name }}
+                                                </p>
+
+                                                <!-- Available Quantity -->
+                                                <p class="text-gray-600">
+                                                    @lang('admin::app.sales.shipments.create.qty-available') :                  
+
+                                                    @php
+                                                        $product = $item->getTypeInstance()->getOrderedItem($item)->product;
+
+                                                        $sourceQty = $product?->type == 'bundle' ? $item->qty_ordered : $product?->inventory_source_qty($inventorySource->id);
+                                                    @endphp
+
+                                                    {{ $sourceQty }}
+                                                </p>
+                                            </div>
+
+                                            <div class="flex gap-[10px] items-center">
+                                                @php
+                                                    $inputName = "shipment[items][$item->id][$inventorySource->id]";
+                                                @endphp
+
+                                                <!-- Quantity  To Ship -->
+                                                <x-admin::form.control-group.label class="required">
+                                                    @lang('admin::app.sales.shipments.create.qty-to-ship')
+                                                </x-admin::form.control-group.label>
+
+                                                <x-admin::form.control-group class="!mb-0">
+                                                    <x-admin::form.control-group.control
+                                                        type="text"
+                                                        :name="$inputName" 
+                                                        :id="$inputName" 
+                                                        :value="$item->qty_to_ship"
+                                                        :rules="'required|numeric|min_value:0|max_value:' . $item->qty_ordered"
+                                                        class="!w-[100px]"
+                                                        :label="trans('admin::app.sales.shipments.create.qty-to-ship')"
+                                                        data-original-quantity="{{ $item->qty_to_ship }}"
+                                                        ::disabled="'{{ empty($sourceQty) }}' || source != '{{ $inventorySource->id }}'"
+                                                        :ref="$inputName"
+                                                    >
+                                                    </x-admin::form.control-group.control>
+                        
+                                                    <x-admin::form.control-group.error
+                                                        :control-name="$inputName"
+                                                    >
+                                                    </x-admin::form.control-group.error>
+                                                </x-admin::form.control-group>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </x-slot:content>
+        </x-admin::drawer>
+    </x-admin::form>
     </script>
 
-    <script>
-        Vue.component('order-item-list', {
-            template: '#order-item-list-template',
+    <script type="module">
+    app.component('v-create-shipment', {
+        template: '#v-create-shipment-template',
 
-            inject: ['$validator'],
+        data() {
+            return {
+                source: "",
+            };
+        },
 
-            data: function() {
-                return {
-                    source: ""
-                }
+        methods: {
+            onSourceChange() {
+                this.setOriginalQuantityToAllShipmentInputElements();
             },
 
-            methods: {
-                onSourceChange() {
-                    this.$validator.reset();
+            getAllShipmentInputElements() {
+                let allRefs = this.$refs;
 
-                    this.setOriginalQuantityToAllShipmentInputElements();
-                },
+                let allInputElements = [];
 
-                getAllShipmentInputElements() {
-                    let allRefs = this.$refs;
+                Object.keys(allRefs).forEach((key) => {
+                    if (key.startsWith('shipment')) {
+                        allInputElements.push(allRefs[key]);
+                    }
+                });
 
-                    let allInputElements = [];
-
-                    Object.keys(allRefs).forEach((key) => {
-                        if (key.startsWith('shipment')) {
-                            allInputElements.push(allRefs[key]);
-                        }
-                    });
-
-                    return allInputElements;
-                },
-
-                setOriginalQuantityToAllShipmentInputElements() {
-                    this.getAllShipmentInputElements().forEach((element) => {
-                        element.value = element.dataset.originalQuantity;
-                    });
-                }
+                return allInputElements;
             },
-        });
+
+            setOriginalQuantityToAllShipmentInputElements() {
+                this.getAllShipmentInputElements().forEach((element) => {
+                    element.value = element.dataset.originalQuantity;
+                });
+            }
+        },
+    });
     </script>
-@endpush
+@endPushOnce

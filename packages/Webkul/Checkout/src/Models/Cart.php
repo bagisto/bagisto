@@ -90,9 +90,9 @@ class Cart extends Model implements CartContract
     /**
      * Get all the attributes for the attribute groups.
      */
-    public function selected_shipping_rate(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
+    public function selected_shipping_rate()
     {
-        return $this->shipping_rates()
+        return $this->shipping_rates
             ->where('method', $this->shipping_method);
     }
 
@@ -102,7 +102,6 @@ class Cart extends Model implements CartContract
     public function getSelectedShippingRateAttribute()
     {
         return $this->selected_shipping_rate()
-            ->where('method', $this->shipping_method)
             ->first();
     }
 
@@ -137,13 +136,7 @@ class Cart extends Model implements CartContract
      */
     public function hasDownloadableItems(): bool
     {
-        foreach ($this->items as $item) {
-            if (stristr($item->type, 'downloadable') !== false) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->items->pluck('type')->contains('downloadable');
     }
 
     /**
@@ -155,7 +148,7 @@ class Cart extends Model implements CartContract
     public function hasProductsWithQuantityBox(): bool
     {
         foreach ($this->items as $item) {
-            if ($item->product->getTypeInstance()->showQuantityBox()) {
+            if ($item->getTypeInstance()->showQuantityBox()) {
                 return true;
             }
         }
@@ -192,7 +185,6 @@ class Cart extends Model implements CartContract
 
         return $cartBaseSubTotal >= $minimumOrderAmount;
     }
-
 
     /**
      * Create a new factory instance for the model

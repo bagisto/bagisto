@@ -35,20 +35,6 @@ class Grouped extends AbstractType
     ];
 
     /**
-     * These blade files will be included in product edit page.
-     *
-     * @var array
-     */
-    protected $additionalViews = [
-        'admin::catalog.products.accordians.images',
-        'admin::catalog.products.accordians.videos',
-        'admin::catalog.products.accordians.categories',
-        'admin::catalog.products.accordians.grouped-products',
-        'admin::catalog.products.accordians.channels',
-        'admin::catalog.products.accordians.product-links',
-    ];
-
-    /**
      * Is a composite product type.
      *
      * @var boolean
@@ -202,17 +188,10 @@ class Grouped extends AbstractType
      */
     public function getPriceHtml()
     {
-        $html = '';
-
-        if ($this->haveDiscount()) {
-            $html .= '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>';
-        }
-
-        $html .= '<span class="price-label">' . trans('shop::app.products.starting-at') . '</span>'
-        . ' '
-        . '<span class="final-price">' . core()->currency($this->getMinimalPrice()) . '</span>';
-
-        return $html;
+        return view('shop::products.prices.grouped', [
+            'product' => $this->product,
+            'prices'  => $this->getProductPrices(),
+        ])->render();
     }
 
     /**
@@ -227,7 +206,7 @@ class Grouped extends AbstractType
             ! isset($data['qty'])
             || ! is_array($data['qty'])
         ) {
-            return trans('shop::app.checkout.cart.integrity.missing_options');
+            return trans('shop::app.checkout.cart.missing-options');
         }
 
         $cartProductsList = [];
@@ -254,7 +233,7 @@ class Grouped extends AbstractType
         $products = array_merge(...$cartProductsList);
 
         if (! count($products)) {
-            return trans('shop::app.checkout.cart.integrity.qty_missing');
+            return trans('shop::app.checkout.cart.integrity.qty-missing');
         }
 
         return $products;

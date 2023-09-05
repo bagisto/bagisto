@@ -18,16 +18,19 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->string('admin_name');
             $table->string('type');
+            $table->string('swatch_type')->nullable();
             $table->string('validation')->nullable();
             $table->integer('position')->nullable();
             $table->boolean('is_required')->default(0);
             $table->boolean('is_unique')->default(0);
-            $table->boolean('value_per_locale')->default(0);
-            $table->boolean('value_per_channel')->default(0);
             $table->boolean('is_filterable')->default(0);
+            $table->boolean('is_comparable')->default(0);
             $table->boolean('is_configurable')->default(0);
             $table->boolean('is_user_defined')->default(1);
             $table->boolean('is_visible_on_front')->default(0);
+            $table->boolean('value_per_locale')->default(0);
+            $table->boolean('value_per_channel')->default(0);
+            $table->boolean('enable_wysiwyg')->default(0);
             $table->timestamps();
         });
     }

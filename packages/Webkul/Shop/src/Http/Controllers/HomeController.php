@@ -2,25 +2,21 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
-use Webkul\Shop\Http\Controllers\Controller;
-use Webkul\Core\Repositories\SliderRepository;
-use Webkul\Product\Repositories\SearchRepository;
+use Webkul\Shop\Repositories\ThemeCustomizationRepository;
 
 class HomeController extends Controller
 {
     /**
+     * Using const variable for status
+     */
+    const STATUS = 1;
+    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\SliderRepository  $sliderRepository
-     * @param  \Webkul\Product\Repositories\SearchRepository  $searchRepository
      * @return void
      */
-    public function __construct(
-        protected SliderRepository $sliderRepository,
-        protected SearchRepository $searchRepository
-    )
+    public function __construct(protected ThemeCustomizationRepository $themeCustomizationRepository)
     {
-        parent::__construct();
     }
 
     /**
@@ -30,9 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $sliderData = $this->sliderRepository->getActiveSliders();
+        $customizations = $this->themeCustomizationRepository->orderBy('sort_order')->findWhere([
+            'status' => self::STATUS
+        ]);
 
-        return view($this->_config['view'], compact('sliderData'));
+        return view('shop::home.index', compact('customizations'));
     }
 
     /**
@@ -43,15 +41,5 @@ class HomeController extends Controller
     public function notFound()
     {
         abort(404);
-    }
-
-    /**
-     * Upload image for product search with machine learning.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function upload()
-    {
-        return $this->searchRepository->uploadSearchImage(request()->all());
     }
 }

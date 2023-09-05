@@ -1,27 +1,304 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    {{-- Title of the page --}}
+    <x-slot:title>
+        @lang('admin::app.marketing.sitemaps.index.title')
+    </x-slot:title>
 
-@section('page_title')
-    {{ __('admin::app.marketing.sitemaps.title') }}
-@stop
+    {{-- Create Sitemap Vue Component --}}
+    <v-create-sitemaps>
+        <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
+            <p class="text-[20px] text-gray-800 font-bold">
+                @lang('admin::app.marketing.sitemaps.index.title')
+            </p>
 
-@section('content')
-    <div class="content">
-        <div class="page-header">
-            <div class="page-title">
-                <h1>{{ __('admin::app.marketing.sitemaps.title') }}</h1>
-            </div>
-
-            <div class="page-action">
-                @if (bouncer()->hasPermission('marketing.sitemaps.create'))
-                    <a href="{{ route('admin.sitemaps.create') }}" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.marketing.sitemaps.add-title') }}
-                    </a>
-                @endif
+            <!-- Create Button -->
+            <div class="primary-button">
+                @lang('admin::app.marketing.sitemaps.index.create-btn')
             </div>
         </div>
 
-        <div class="page-content">
-            <datagrid-plus src="{{ route('admin.sitemaps.index') }}"></datagrid-plus>
-        </div>
-    </div>
-@endsection
+        {{-- Added For Shimmer --}}
+        <x-admin::shimmer.datagrid/>
+    </v-create-sitemaps>
+    
+    @pushOnce('scripts')
+        <script 
+            type="text/x-template" 
+            id="v-create-sitemaps-template"
+        >
+            <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
+                <p class="text-[20px] text-gray-800 font-bold">
+                    @lang('admin::app.marketing.sitemaps.index.title')
+                </p>
+
+                <!-- Create Button -->
+                <div 
+                    class="primary-button"
+                    @click="selectedSitemap=0; $refs.sitemap.toggle()"
+                >
+                    @lang('admin::app.marketing.sitemaps.index.create-btn')
+                </div>
+            </div>
+
+            <x-admin::datagrid
+                src="{{ route('admin.marketing.promotions.sitemaps.index') }}"
+                ref="datagrid"
+            >
+                <!-- Datagrid Header -->
+                <template #header="{ columns, records, sortPage, applied }">
+                    <div class="row grid grid-cols-5 grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] border-gray-300 text-gray-600 bg-gray-50 font-semibold">
+                        <div
+                            class="flex gap-[10px] cursor-pointer"
+                            v-for="(columnGroup, index) in ['id', 'file_name', 'path', 'url']"
+                        >
+                            <p class="text-gray-600">
+                                <span class="[&>*]:after:content-['_/_']">
+                                    <span
+                                        class="after:content-['/'] last:after:content-['']"
+                                        :class="{
+                                            'text-gray-800 font-medium': applied.sort.column == columnGroup,
+                                            'cursor-pointer hover:text-gray-800': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
+                                        }"
+                                        @click="
+                                            columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === columnGroup)): {}
+                                        "
+                                    >
+                                        @{{ columns.find(columnTemp => columnTemp.index === columnGroup)?.label }}
+                                    </span>
+                                </span>
+
+                                <!-- Filter Arrow Icon -->
+                                <i
+                                    class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 align-text-bottom"
+                                    :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
+                                    v-if="columnGroup.includes(applied.sort.column)"
+                                ></i>
+                            </p>
+                        </div>
+
+                        <!-- Actions -->
+                        <p class="col-start-[none]">
+                            @lang('admin::app.components.datagrid.table.actions')
+                        </p>
+                    </div>
+                </template>
+
+                <!-- DataGrid Body -->
+                <template #body="{ columns, records }">
+                    <div
+                        v-for="record in records"
+                        class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600 transition-all hover:bg-gray-100"
+                        style="grid-template-columns: repeat(5, 1fr);"
+                    >
+                        <!-- Id -->
+                        <p v-text="record.id"></p>
+
+                        <!-- File Name -->
+                        <p v-text="record.file_name"></p>
+
+                        <!-- Path -->
+                        <p v-text="record.path"></p>
+
+                        <!-- URL -->
+                        <p>
+                            <a :href="record.url" target="_blank">
+                                @{{ record.url}}
+                            </a>
+                        </p>
+
+                        <!-- Actions -->
+                        <div class="flex justify-end">
+                            <a @click="selectedSitemap=1; editModal(record)">
+                                <span
+                                    :class="record.actions['0'].icon"
+                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-100 max-sm:place-self-center"
+                                    :title="record.actions['0'].title"
+                                >
+                                </span>
+                            </a>
+
+                            <a @click="deleteModal(record.actions['1']?.url)">
+                                <span
+                                    :class="record.actions['1'].icon"
+                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-100 max-sm:place-self-center"
+                                    :title="record.actions['1'].title"
+                                >
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </template>
+            </x-admin::datagrid>
+
+            <!-- Model Form -->
+            <x-admin::form
+                v-slot="{ meta, errors, handleSubmit }"
+                as="div"
+                ref="modalForm"
+            >
+                <!-- Create Sitemap form -->
+                <form
+                    @submit="handleSubmit($event, updateOrCreate)"
+                    ref="sitemapCreateForm"
+                >
+                    <x-admin::modal ref="sitemap">
+                        <!-- Modal Header -->
+                        <x-slot:header>
+                            <!-- Create Modal title -->
+                            <p
+                                class="text-[18px] text-gray-800 font-bold"
+                                v-if="selectedSitemap"
+                            >
+                                @lang('admin::app.marketing.sitemaps.index.edit.title')
+                            </p>
+
+                            <!-- Edit Modal title -->
+                            <p 
+                                class="text-[18px] text-gray-800 font-bold"
+                                v-else
+                            >
+                                @lang('admin::app.marketing.sitemaps.index.create.title')
+                            </p>
+                        </x-slot:header>
+
+                        <!-- Modal Content -->
+                        <x-slot:content>
+                            <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                <!-- Id -->
+                                <x-admin::form.control-group.control
+                                    type="hidden"
+                                    name="id"
+                                >
+                                </x-admin::form.control-group.control>
+
+                                <!-- File Name -->
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.marketing.sitemaps.index.create.file-name')
+                                    </x-admin::form.control-group.label>
+        
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="file_name"
+                                        :value="old('file_name')"
+                                        rules="required"
+                                        :label="trans('admin::app.marketing.sitemaps.index.create.file-name')"
+                                        :placeholder="trans('admin::app.marketing.sitemaps.index.create.file-name')"
+                                    >
+                                    </x-admin::form.control-group.control>
+        
+                                    <x-admin::form.control-group.error
+                                        control-name="file_name"
+                                    >
+                                    </x-admin::form.control-group.error>
+
+                                    <p class="mt-[8px] ltr:ml-[4px] rtl:mr-[4px] text-[12px] text-gray-600 font-medium">
+                                        @lang('admin::app.marketing.sitemaps.index.create.file-name-info')
+                                    </p>
+
+                                </x-admin::form.control-group>
+        
+                                <!-- File Path -->
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.marketing.sitemaps.index.create.path')
+                                    </x-admin::form.control-group.label>
+        
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="path"
+                                        :value="old('path')"
+                                        rules="required"
+                                        :label="trans('admin::app.marketing.sitemaps.index.create.path')"
+                                        :placeholder="trans('admin::app.marketing.sitemaps.index.create.path')"
+                                    >
+                                    </x-admin::form.control-group.control>
+        
+                                    <x-admin::form.control-group.error
+                                        control-name="path"
+                                    >
+                                    </x-admin::form.control-group.error>
+
+                                    <p class="mt-[8px] ltr:ml-[4px] rtl:mr-[4px] text-[12px] text-gray-600 font-medium">
+                                        @lang('admin::app.marketing.sitemaps.index.create.path-info')
+                                    </p>
+                                </x-admin::form.control-group>
+                            </div>
+                        </x-slot:content>
+                        
+                        <x-slot:footer>
+                            <!-- Save Button -->
+                            <button class="primary-button">
+                                @lang('admin::app.marketing.sitemaps.index.create.save-btn')
+                            </button>
+                        </x-slot:footer>
+                    </x-admin::modal>
+                </form>
+            </x-admin::form>
+        </script>
+
+        <script type="module">
+            app.component('v-create-sitemaps', {
+                template: '#v-create-sitemaps-template',
+
+                data() {
+                    return {
+                        selectedSitemap: 0,
+                    }
+                },
+
+                methods: {
+                    updateOrCreate(params, { resetForm, setErrors }) {
+                        let formData = new FormData(this.$refs.sitemapCreateForm);
+
+                        if (params.id) {
+                            formData.append('_method', 'put');
+                        }
+
+                        this.$axios.post(params.id ? "{{ route('admin.marketing.promotions.sitemaps.update') }}" : "{{ route('admin.marketing.promotions.sitemaps.store') }}", formData )
+                            .then((response) => {
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+
+                                this.$refs.sitemap.toggle();
+
+                                this.$refs.datagrid.get();
+
+                                resetForm();
+                            })
+                            .catch(error => {
+                                if (error.response.status == 422) {
+                                    setErrors(error.response.data.errors);
+                                }
+                            });
+                    },
+
+                    editModal(values) {
+                        this.$refs.sitemap.toggle();
+
+                        this.$refs.modalForm.setValues(values);
+                    },
+
+                    deleteModal(url) {
+                        if (! confirm("@lang('admin::app.marketing.sitemaps.index.create.delete-warning')")) {
+                            return;
+                        }
+
+                        this.$axios.post(url, {
+                                '_method': 'DELETE'
+                            })
+                            .then((response) => {
+                                this.$refs.datagrid.get();
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                            })
+                            .catch(error => {
+                                if (error.response.status ==422) {
+                                    setErrors(error.response.data.errors);
+                                }
+                            });
+                    }
+                },
+            })
+        </script>
+    @endPushOnce
+</x-admin::layouts>

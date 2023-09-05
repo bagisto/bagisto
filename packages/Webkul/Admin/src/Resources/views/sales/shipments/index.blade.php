@@ -1,41 +1,19 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    <x-slot:title>
+        @lang('admin::app.sales.shipments.index.title')
+    </x-slot:title>
 
-@section('page_title')
-    {{ __('admin::app.sales.shipments.title') }}
-@stop
+    <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
+        <p class="py-[11px] text-[20px] text-gray-800 font-bold">
+            @lang('admin::app.sales.shipments.index.title')
+        </p>
 
-@section('content')
-    <div class="content">
-        <div class="page-header">
-            <div class="page-title">
-                <h1>{{ __('admin::app.sales.shipments.title') }}</h1>
-            </div>
-
-            <div class="page-action">
-                <div class="export-import" @click="showModal('downloadDataGrid')">
-                    <i class="export-icon"></i>
-
-                    <span>
-                        {{ __('admin::app.export.export') }}
-                    </span>
-                </div>
-            </div>
-        </div>
-
-        <div class="page-content">
-            <datagrid-plus src="{{ route('admin.sales.shipments.index') }}"></datagrid-plus>
+        <div class="flex gap-x-[10px] items-center">
+            <!-- Export Modal -->
+            <x-admin::datagrid.export src="{{ route('admin.sales.shipments.index') }}"></x-admin::datagrid.export>
         </div>
     </div>
 
-    <modal id="downloadDataGrid" :is-open="modalIds.downloadDataGrid">
-        <h3 slot="header">{{ __('admin::app.export.download') }}</h3>
+    <x-admin::datagrid src="{{ route('admin.sales.shipments.index') }}"></x-admin::datagrid>
 
-        <div slot="body">
-            <export-form></export-form>
-        </div>
-    </modal>
-@stop
-
-@push('scripts')
-    @include('admin::export.export', ['gridName' => app('Webkul\Admin\DataGrids\OrderShipmentsDataGrid')])
-@endpush
+</x-admin::layouts>
