@@ -107,7 +107,7 @@
                                             class="pr-[40px] text-gray-400 border-gray-300"
                                             :label="trans('admin::app.marketing.promotions.catalog-rules.condition-type')"
                                             :placeholder="trans('admin::app.marketing.promotions.catalog-rules.condition-type')"
-                                            v-model="condition_type"
+                                            v-model="conditionType"
                                         >
                                             <option value="1">
                                                 @lang('admin::app.marketing.promotions.catalog-rules.create.all-conditions-true')
@@ -457,7 +457,7 @@
                 
                 data() {
                     return {
-                        condition_type: "{{ old('condition_type', 0) }}",
+                        conditionType: "{{ old('condition_type', 0) }}",
 
                         conditions: []
                     }
