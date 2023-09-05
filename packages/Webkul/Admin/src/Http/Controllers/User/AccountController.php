@@ -63,7 +63,6 @@ class AccountController extends Controller
             $data['password'] = bcrypt($data['password']);
         }
 
-
         if (request()->hasFile('image')) {
             $data['image'] = current(request()->file('image'))->store('admins/' . $user->id);
         } else {
