@@ -130,19 +130,19 @@
                                             :label="trans('admin::app.catalog.products.edit.types.bundle.update-create.type')"
                                         >
                                             <option value="select">
-                                                {{ __('admin::app.catalog.products.edit.types.bundle.update-create.select') }}
+                                                @lang('admin::app.catalog.products.edit.types.bundle.update-create.select')
                                             </option>
 
                                             <option value="radio">
-                                                {{ __('admin::app.catalog.products.edit.types.bundle.update-create.radio') }}
+                                                @lang('admin::app.catalog.products.edit.types.bundle.update-create.radio')
                                             </option>
 
                                             <option value="checkbox">
-                                                {{ __('admin::app.catalog.products.edit.types.bundle.update-create.checkbox') }}
+                                                @lang('admin::app.catalog.products.edit.types.bundle.update-create.checkbox')
                                             </option>
 
                                             <option value="multiselect">
-                                                {{ __('admin::app.catalog.products.edit.types.bundle.update-create.multiselect') }}
+                                                @lang('admin::app.catalog.products.edit.types.bundle.update-create.multiselect')
                                             </option>
                                         </x-admin::form.control-group.control>
             
@@ -162,11 +162,11 @@
                                             :label="trans('admin::app.catalog.products.edit.types.bundle.update-create.is-required')"
                                         >
                                             <option value="1">
-                                                {{ __('admin::app.catalog.products.edit.types.bundle.update-create.yes') }}
+                                                @lang('admin::app.catalog.products.edit.types.bundle.update-create.yes')
                                             </option>
 
                                             <option value="0">
-                                                {{ __('admin::app.catalog.products.edit.types.bundle.update-create.no') }}
+                                                @lang('admin::app.catalog.products.edit.types.bundle.update-create.no')
                                             </option>
                                         </x-admin::form.control-group.control>
             

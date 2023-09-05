@@ -814,7 +814,7 @@
                                     <div class="flex flex-col">
                                         <p
                                             class="text-gray-600 font-semibold"
-                                            v-text="item.customer_full_name ?? item.first_name + ' ' + item.last_name"
+                                            v-text="item.customer_full_name ?? item?.customer_first_name + ' ' + item?.customer_last_name"
                                         >
                                         </p>
 
@@ -885,7 +885,7 @@
                                 <!-- Add Variants Information -->
                                 <div class="flex flex-col items-center">
                                     <p class="text-[16px] text-gray-400 font-semibold">
-                                        @lang('admin::app.dashboard.index.add_customer')
+                                        @lang('admin::app.dashboard.index.add-customer')
                                     </p>
 
                                     <p class="text-gray-400">

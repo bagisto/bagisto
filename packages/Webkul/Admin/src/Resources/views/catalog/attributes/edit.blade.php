@@ -209,7 +209,7 @@
 
                                                 <!-- Admin tables heading -->
                                                 <x-admin::table.th>
-                                                    @lang('admin::app.catalog.attributes.edit.admin_name')
+                                                    @lang('admin::app.catalog.attributes.edit.admin-name')
                                                 </x-admin::table.th>
 
                                                 <!-- Loacles tables heading -->
@@ -572,7 +572,7 @@
                                         for="is_required"
                                         class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer"
                                     >
-                                        @lang('admin::app.catalog.attributes.edit.is_required')
+                                        @lang('admin::app.catalog.attributes.edit.is-required')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -597,7 +597,7 @@
                                     </x-admin::form.control-group.control>
 
                                     <x-admin::form.control-group.label class="!text-[14px] !font-semibold !text-gray-600 cursor-not-allowed">
-                                        @lang('admin::app.catalog.attributes.edit.is_unique')
+                                        @lang('admin::app.catalog.attributes.edit.is-unique')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -623,7 +623,7 @@
                             </x-slot:header>
                         
                             <x-slot:content>
-                                @foreach (['value_per_locale', 'value_per_channel'] as $type)
+                                @foreach (['value-per-locale', 'value-per-channel'] as $type)
                                     <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] opacity-70 select-none ">
                                         <x-admin::form.control-group.control
                                             type="checkbox"
@@ -648,7 +648,7 @@
                                 @endforeach
 
                                 <!-- Use in Layered -->
-                                @foreach (['is_filterable', 'is_configurable', 'is_visible_on_front', 'use_in_flat', 'is_comparable'] as $type)
+                                @foreach (['is-filterable', 'is-configurable', 'is-visible-on-front', 'use-in-flat', 'is-comparable'] as $type)
                                     <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
                                         <x-admin::form.control-group.control
                                             type="checkbox"

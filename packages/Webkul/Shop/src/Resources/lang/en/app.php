@@ -804,7 +804,7 @@ return [
 
             'shipping-address'  => 'Shipping Address',
             'carrier'           => 'Carrier',
-            'tracking-number'   => 'Tracking Number',
+            'tracking-number'   => 'Tracking Number : :tracking_number',
             'billing-address'   => 'Billing Address',
             'contact'           => 'Contact',
             'shipping'          => 'Shipping',

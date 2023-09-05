@@ -107,7 +107,7 @@
                                         rules="required"
                                         :label="trans('admin::app.marketing.promotions.cart-rules.create.coupon-type')"
                                         :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.coupon-type')"
-                                        v-model="coupon_type"
+                                        v-model="couponType"
                                     >
                                         <option value="0">
                                             @lang('admin::app.marketing.promotions.cart-rules.create.no-coupon')
@@ -124,7 +124,7 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
                                 
-                                <template v-if="parseInt(coupon_type)">
+                                <template v-if="parseInt(couponType)">
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.marketing.promotions.cart-rules.create.auto-generate-coupon')
@@ -137,7 +137,7 @@
                                             rules="required"
                                             :label="trans('admin::app.marketing.promotions.cart-rules.create.auto-generate-coupon')"
                                             :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.auto-generate-coupon')"
-                                            v-model="use_auto_generation"
+                                            v-model="useAutoGeneration"
                                         >
                                             <option value="0">
                                                 @lang('admin::app.marketing.promotions.cart-rules.create.no')
@@ -149,14 +149,14 @@
                                         </x-admin::form.control-group.control>
                                 
                                         <x-admin::form.control-group.error
-                                            control-name="coupon_type"
+                                            control-name="use_auto_generation"
                                         >
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
                                 
                                     <x-admin::form.control-group
                                         class="mb-[10px]"
-                                        v-if="! parseInt(use_auto_generation)"
+                                        v-if="! parseInt(useAutoGeneration)"
                                     >
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.marketing.promotions.cart-rules.create.coupon-code')
@@ -240,7 +240,7 @@
                                             class="pr-[40px]"
                                             :label="trans('admin::app.marketing.promotions.cart-rules.create.condition-type')"
                                             :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.condition-type')"
-                                            v-model="condition_type"
+                                            v-model="conditionType"
                                         >
                                             <option value="1">
                                                 @lang('admin::app.marketing.promotions.cart-rules.create.all-conditions-true')
@@ -297,7 +297,7 @@
                                                     rules="required"
                                                     :label="trans('admin::app.marketing.promotions.cart-rules.create.action-type')"
                                                     :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.action-type')"
-                                                    v-model="action_type"
+                                                    v-model="actionType"
                                                 >
                                                     <option
                                                         value="by_percent"
@@ -730,15 +730,15 @@
 
                 data() {
                     return {
-                        coupon_type: "{{ old('coupon_type', 0) }}",
+                        couponType: "{{ old('coupon_type', 0) }}",
 
-                        use_auto_generation: "{{ old('use_auto_generation', 0) }}",
+                        useAutoGeneration: "{{ old('use_auto_generation', 0) }}",
 
-                        condition_type: "{{ old('condition_type', 1) }}",
+                        conditionType: "{{ old('condition_type', 1) }}",
 
                         conditions: [],
 
-                        action_type: "{{ old('action_type') ?: 'by_percent' }}",
+                        actionType: "{{ old('action_type') ?: 'by_percent' }}",
                     }
                 },
 
@@ -978,146 +978,146 @@
                         conditionOperators: {
                             'price': [{
                                 'operator': '==',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.is-equal-to') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.is-equal-to') }}'
                             }, {
                                 'operator': '!=',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.is-not-equal-to') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.is-not-equal-to') }}'
                             }, {
                                 'operator': '>=',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.equals-or-greater-than') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.equals-or-greater-than') }}'
                             }, {
                                 'operator': '<=',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.equals-or-less-than') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.equals-or-less-than') }}'
                             }, {
                                 'operator': '>',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.greater-than') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.greater-than') }}'
                             }, {
                                 'operator': '<',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.less-than') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.less-than') }}'
                             }],
                             'decimal': [{
                                 'operator': '==',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.is-equal-to') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.is-equal-to') }}'
                             }, {
                                 'operator': '!=',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.is-not-equal-to') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.is-not-equal-to') }}'
                             }, {
                                 'operator': '>=',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.equals-or-greater-than') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.equals-or-greater-than') }}'
                             }, {
                                 'operator': '<=',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.equals-or-less-than') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.equals-or-less-than') }}'
                             }, {
                                 'operator': '>',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.greater-than') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.greater-than') }}'
                             }, {
                                 'operator': '<',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.less-than') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.less-than') }}'
                             }],
                             'integer': [{
                                 'operator': '==',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.is-equal-to') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.is-equal-to') }}'
                             }, {
                                 'operator': '!=',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.is-not-equal-to') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.is-not-equal-to') }}'
                             }, {
                                 'operator': '>=',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.equals-or-greater-than') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.equals-or-greater-than') }}'
                             }, {
                                 'operator': '<=',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.equals-or-less-than') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.equals-or-less-than') }}'
                             }, {
                                 'operator': '>',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.greater-than') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.greater-than') }}'
                             }, {
                                 'operator': '<',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.less-than') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.less-than') }}'
                             }],
                             'text': [{
                                 'operator': '==',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.is-equal-to') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.is-equal-to') }}'
                             }, {
                                 'operator': '!=',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.is-not-equal-to') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.is-not-equal-to') }}'
                             }, {
                                 'operator': '{}',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.contain') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.contain') }}'
                             }, {
                                 'operator': '!{}',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.does-not-contain') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.does-not-contain') }}'
                             }],
                             'boolean': [{
                                 'operator': '==',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.is-equal-to') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.is-equal-to') }}'
                             }, {
                                 'operator': '!=',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.is-not-equal-to') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.is-not-equal-to') }}'
                             }],
                             'date': [{
                                 'operator': '==',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.is-equal-to') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.is-equal-to') }}'
                             }, {
                                 'operator': '!=',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.is-not-equal-to') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.is-not-equal-to') }}'
                             }, {
                                 'operator': '>=',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.equals-or-greater-than') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.equals-or-greater-than') }}'
                             }, {
                                 'operator': '<=',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.equals-or-less-than') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.equals-or-less-than') }}'
                             }, {
                                 'operator': '>',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.greater-than') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.greater-than') }}'
                             }, {
                                 'operator': '<',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.less-than') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.less-than') }}'
                             }],
                             'datetime': [{
                                 'operator': '==',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.is-equal-to') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.is-equal-to') }}'
                             }, {
                                 'operator': '!=',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.is-not-equal-to') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.is-not-equal-to') }}'
                             }, {
                                 'operator': '>=',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.equals-or-greater-than') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.equals-or-greater-than') }}'
                             }, {
                                 'operator': '<=',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.equals-or-less-than') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.equals-or-less-than') }}'
                             }, {
                                 'operator': '>',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.greater-than') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.greater-than') }}'
                             }, {
                                 'operator': '<',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.less-than') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.less-than') }}'
                             }],
                             'select': [{
                                 'operator': '==',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.is-equal-to') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.is-equal-to') }}'
                             }, {
                                 'operator': '!=',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.is-not-equal-to') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.is-not-equal-to') }}'
                             }],
                             'radio': [{
                                 'operator': '==',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.is-equal-to') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.is-equal-to') }}'
                             }, {
                                 'operator': '!=',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.is-not-equal-to') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.is-not-equal-to') }}'
                             }],
                             'multiselect': [{
                                 'operator': '{}',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.contains') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.contains') }}'
                             }, {
                                 'operator': '!{}',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.does-not-contain') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.does-not-contain') }}'
                             }],
                             'checkbox': [{
                                 'operator': '{}',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.contains') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.contains') }}'
                             }, {
                                 'operator': '!{}',
-                                'label': '{{ __('admin::app.marketing.promotions.cart-rules.create.does-not-contain') }}'
+                                'label': '{{ trans('admin::app.marketing.promotions.cart-rules.create.does-not-contain') }}'
                             }]
                         }
                     }

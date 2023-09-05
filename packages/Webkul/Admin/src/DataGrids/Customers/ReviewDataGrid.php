@@ -55,7 +55,7 @@ class ReviewDataGrid extends DataGrid
         // Customer Name
         $this->addColumn([
             'index'      => 'name',
-            'label'      => trans('admin::app.customers.reviews.index.datagrid.customer_names'),
+            'label'      => trans('admin::app.customers.reviews.index.datagrid.customer-names'),
             'type'       => 'string',
             'searchable' => false,
             'filterable' => false,
