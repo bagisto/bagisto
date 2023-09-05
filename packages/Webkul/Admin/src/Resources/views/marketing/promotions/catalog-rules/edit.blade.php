@@ -106,7 +106,7 @@
                                             type="select"
                                             name="condition_type"
                                             id="condition_type"
-                                            class="ltr:pr-[40rtl llr:pr-[40px] text-gray-400 border-gray-300"
+                                            class="ltr:pr-[40] rtl:pl-[40px] text-gray-400 border-gray-300"
                                             :label="trans('admin::app.marketing.promotions.catalog-rules.condition-type')"
                                             :placeholder="trans('admin::app.marketing.promotions.catalog-rules.condition-type')"
                                             v-model="conditionType"
