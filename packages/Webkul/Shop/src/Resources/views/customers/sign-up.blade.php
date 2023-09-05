@@ -134,7 +134,7 @@
 
                     <x-shop::form.control-group class="mb-4">
                         <x-shop::form.control-group.label>
-                            @lang('shop::app.customers.signup-form.confirm_pass')
+                            @lang('shop::app.customers.signup-form.confirm-pass')
                         </x-shop::form.control-group.label>
 
                         <x-shop::form.control-group.control
@@ -144,7 +144,7 @@
                             value=""
                             rules="confirmed:@password"
                             :label="trans('shop::app.customers.signup-form.password')"
-                            :placeholder="trans('shop::app.customers.signup-form.confirm_pass')"
+                            :placeholder="trans('shop::app.customers.signup-form.confirm-pass')"
                         >
                         </x-shop::form.control-group.control>
 
@@ -194,7 +194,7 @@
                             class="bs-primary-button block w-full max-w-[374px] py-[16px] px-[43px] mx-auto m-0 ml-[0px] rounded-[18px] text-[16px] text-center"
                             type="submit"
                         >
-                            @lang('shop::app.customers.signup-form.button_title')
+                            @lang('shop::app.customers.signup-form.button-title')
                         </button>
 
                         <div class="flex gap-[15px] flex-wrap">
@@ -205,7 +205,7 @@
             </div>
 
 			<p class="mt-[20px] text-[#7D7D7D] font-medium">
-                @lang('shop::app.customers.signup-form.account_exists')
+                @lang('shop::app.customers.signup-form.account-exists')
                 
                 <a class="text-navyBlue" 
                     href="{{ route('shop.customer.session.index') }}"
