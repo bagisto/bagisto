@@ -1266,7 +1266,6 @@ return [
                     'name'       => 'Name',
                     'save-btn'   => 'Save Group',
                     'title'      => 'Create new Group',
-                    'title'      => 'Create new Group',
                 ],
 
                 'edit'  => [
