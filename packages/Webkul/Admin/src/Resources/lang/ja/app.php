@@ -587,7 +587,6 @@ return [
                     ],
                 ],
 
-
                 'videos' => [
                     'add-video-btn'     => 'ビデオを追加',
                     'allowed-types'     => 'mp4、webm、mkv',
@@ -866,7 +865,6 @@ return [
                     'text'     => 'テキストスウォッチ',
                 ],
             ],
-
 
             'edit'  => [
                 'admin'                 => '管理者',
