@@ -109,7 +109,7 @@
                                         rules="required"
                                         :label="trans('admin::app.marketing.promotions.cart-rules.edit.coupon-type')"
                                         :placeholder="trans('admin::app.marketing.promotions.cart-rules.edit.coupon-type')"
-                                        v-model="coupon_type"
+                                        v-model="couponType"
                                     >
                                         <option 
                                             value="0"
@@ -132,7 +132,7 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
                                 
-                                <template v-if="parseInt(coupon_type)">
+                                <template v-if="parseInt(couponType)">
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.auto-generate-coupon')
@@ -145,7 +145,7 @@
                                             rules="required"
                                             :label="trans('admin::app.marketing.promotions.cart-rules.edit.auto-generate-coupon')"
                                             :placeholder="trans('admin::app.marketing.promotions.cart-rules.edit.auto-generate-coupon')"
-                                            v-model="use_auto_generation"
+                                            v-model="useAutoGeneration"
                                         >
                                             <option 
                                                 value="0"
@@ -170,7 +170,7 @@
                                 
                                     <x-admin::form.control-group
                                         class="mb-[10px]"
-                                        v-if="! parseInt(use_auto_generation)"
+                                        v-if="! parseInt(useAutoGeneration)"
                                     >
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.coupon-code')
@@ -242,7 +242,7 @@
                             </div>
                 
                             <!-- component for auto generate coupon code -->
-                            <v-create-coupon-form v-if="parseInt(use_auto_generation) && parseInt(coupon_type)"></v-create-coupon-form>
+                            <v-create-coupon-form v-if="parseInt(useAutoGeneration) && parseInt(couponType)"></v-create-coupon-form>
 
                             <!-- Conditions -->
                             <div class="p-[16px] bg-white rounded-[4px] box-shadow">
@@ -263,7 +263,7 @@
                                             class="pr-[40px]"
                                             :label="trans('admin::app.marketing.promotions.cart-rules.edit.condition-type')"
                                             :placeholder="trans('admin::app.marketing.promotions.cart-rules.edit.condition-type')"
-                                            v-model="condition_type"
+                                            v-model="conditionType"
                                         >
                                             <option value="1">
                                                 @lang('admin::app.marketing.promotions.cart-rules.edit.all-conditions-true')
@@ -320,7 +320,7 @@
                                                     rules="required"
                                                     :label="trans('admin::app.marketing.promotions.cart-rules.edit.action-type')"
                                                     :placeholder="trans('admin::app.marketing.promotions.cart-rules.edit.action-type')"
-                                                    v-model="action_type"
+                                                    v-model="actionType"
                                                 >
                                                     <option
                                                         value="by_percent"
@@ -447,7 +447,7 @@
                                                     id="apply_to_shipping"
                                                     :label="trans('admin::app.marketing.promotions.cart-rules.edit.apply-to-shipping')"
                                                     :placeholder="trans('admin::app.marketing.promotions.cart-rules.edit.apply-to-shipping')"
-                                                    ::disabled="action_type == 'cart_fixed'"
+                                                    ::disabled="actionType == 'cart_fixed'"
                                                 >
                                                     <option 
                                                         value="0"
@@ -765,15 +765,15 @@
 
                 data() {
                     return {
-                        coupon_type: {{ old('coupon_type') ?? $cartRule->coupon_type }},
+                        couponType: {{ old('coupon_type') ?? $cartRule->coupon_type }},
 
-                        use_auto_generation: {{ old('use_auto_generation') ?? $cartRule->use_auto_generation }},
+                        useAutoGeneration: {{ old('use_auto_generation') ?? $cartRule->use_auto_generation }},
 
-                        condition_type: {{ old('condition_type') ?? $cartRule->condition_type }},
+                        conditionType: {{ old('condition_type') ?? $cartRule->condition_type }},
 
                         conditions: @json($cartRule->conditions ?? []),
 
-                        action_type: "{{ old('action_type') ?? $cartRule->action_type }}",
+                        actionType: "{{ old('action_type') ?? $cartRule->action_type }}",
                     }
                 },
 
