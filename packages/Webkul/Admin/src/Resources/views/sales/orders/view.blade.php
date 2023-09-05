@@ -115,7 +115,7 @@
                         </p>
 
                         <p class="text-[16px] text-gray-800 font-semibold">
-                            @lang('admin::app.sales.orders.view.grand-total', ['grand-total' => core()->formatBasePrice($order->base_grand_total)])
+                            @lang('admin::app.sales.orders.view.grand-total', ['grand_total' => core()->formatBasePrice($order->base_grand_total)])
                         </p>
                     </div>
 

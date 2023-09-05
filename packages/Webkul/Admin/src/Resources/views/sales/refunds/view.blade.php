@@ -100,17 +100,17 @@
 
                                     {{-- Base Tax Amount --}}
                                     <p class="text-gray-600">
-                                        @lang('admin::app.sales.refunds.view.tax-amount', ['tax-amount' => core()->formatBasePrice($item->base_tax_amount)])
+                                        @lang('admin::app.sales.refunds.view.tax-amount', ['tax_amount' => core()->formatBasePrice($item->base_tax_amount)])
                                     </p>
 
                                     {{-- Base Discount Amount --}}
                                     <p class="text-gray-600">
-                                        @lang('admin::app.sales.refunds.view.base-discounted-amount', ['base-discounted-amount' => core()->formatBasePrice($item->base_discount_amount)])
+                                        @lang('admin::app.sales.refunds.view.base-discounted-amount', ['base_discounted_amount' => core()->formatBasePrice($item->base_discount_amount)])
                                     </p>
 
                                     {{-- Base Discount Amount --}}
                                     <p class="text-gray-600">
-                                        @lang('admin::app.sales.refunds.view.discounted-amount', ['discounted-amount' => core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount)])
+                                        @lang('admin::app.sales.refunds.view.discounted-amount', ['discounted_amount' => core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount)])
                                     </p>
                                 </div>
                             </div>
