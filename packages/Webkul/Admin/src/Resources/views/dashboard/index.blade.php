@@ -885,7 +885,7 @@
                                 <!-- Add Variants Information -->
                                 <div class="flex flex-col items-center">
                                     <p class="text-[16px] text-gray-400 font-semibold">
-                                        @lang('admin::app.dashboard.index.add_customer')
+                                        @lang('admin::app.dashboard.index.add-customer')
                                     </p>
 
                                     <p class="text-gray-400">

@@ -288,7 +288,7 @@
                                 rules="required"
                                 :label="trans('admin::app.catalog.categories.create.display-mode')"
                             >
-                                @foreach (['products_and_description', 'products_only', 'description_only'] as $item)
+                                @foreach (['products-and-description', 'products-only', 'description-only'] as $item)
                                     <option value="{{ $item }}">
                                         @lang('admin::app.catalog.categories.create.' . $item)
                                     </option>
