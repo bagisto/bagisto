@@ -496,7 +496,9 @@ class OrderRepository extends Repository
         $dbPrefix = DB::getTablePrefix();
 
         $query = $this->getModel()
-            ->join('addresses', 'orders.id', '=', 'addresses.order_id')
+            ->leftJoin(DB::raw("(SELECT order_id, MAX(first_name) as first_name, MAX(last_name) as last_name, MAX(email) as email
+                           FROM addresses
+                           GROUP BY order_id) as addr"), 'orders.id', '=', 'addr.order_id')
             ->whereNotIn("orders.status", ['closed', 'canceled'])
             ->select(
                 'orders.customer_id',
@@ -504,19 +506,15 @@ class OrderRepository extends Repository
                 'customer_first_name',
                 'customer_last_name',
                 DB::raw("(
-            SUM(base_grand_total) -
-            SUM(
-                IFNULL(
-                    (SELECT SUM(base_grand_total) FROM {$dbPrefix}refunds WHERE {$dbPrefix}refunds.order_id = {$dbPrefix}orders.id),
-                    0)
-                )
-            ) as total_base_grand_total"),
-                'addresses.first_name',
-                'addresses.last_name',
-                'addresses.email as customer_address_email'
-
-            )
-            ->addSelect(DB::raw('COUNT(DISTINCT orders.id) as order_count'));
+                SUM(base_grand_total) -
+                SUM(
+                    IFNULL(
+                        (SELECT SUM(base_grand_total) FROM {$dbPrefix}refunds WHERE {$dbPrefix}refunds.order_id = {$dbPrefix}orders.id),
+                        0)
+                    )
+                ) as total_base_grand_total"),
+                DB::raw('COUNT(DISTINCT orders.id) as order_count')
+            );
 
         if ($from && $to) {
             $query->whereBetween("orders.created_at", [$from, $to]);
