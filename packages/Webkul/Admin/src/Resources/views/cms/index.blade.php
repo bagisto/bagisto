@@ -31,57 +31,17 @@
                                 Language - {{ core()->getCurrentLocale()->name }}
                             </p>
                         </div>
-
-                        <div class="p-[6px] items-center cursor-pointer transition-all hover:bg-gray-100 hover:rounded-[6px]">
-                            <!-- Export Modal -->
-                            <x-admin::modal ref="exportModal">
-                                <x-slot:toggle>
-                                    <p class="text-gray-600 font-semibold leading-[24px]">
-                                        Export                                            
-                                    </p>
-                                </x-slot:toggle>
-
-                                <x-slot:header>
-                                    <p class="text-[18px] text-gray-800 font-bold">
-                                        @lang('Download')
-                                    </p>
-                                </x-slot:header>
-
-                                <x-slot:content>
-                                    <div class="p-[16px]">
-                                        <x-admin::form action="">
-                                            <x-admin::form.control-group>
-                                                <x-admin::form.control-group.control
-                                                    type="select"
-                                                    name="format"
-                                                    id="format"
-                                                >
-                                                    <option value="xls">XLS</option>
-                                                    <option value="csv">CLS</option>
-                                                </x-admin::form.control-group.control>
-                                            </x-admin::form.control-group>
-                                        </x-admin::form>
-                                    </div>
-                                </x-slot:content>
-                                <x-slot:footer>
-                                    <!-- Save Button -->
-                                    <button
-                                        type="submit" 
-                                        class="primary-button"
-                                    >
-                                        @lang('Export')
-                                    </button>
-                                </x-slot:footer>
-                            </x-admin::modal>
-                        </div>
                     </div>
                 </x-slot:content>
             </x-admin::dropdown>
 
+            <!-- Export Modal -->
+            <x-admin::datagrid.export src="{{ route('admin.cms.index') }}"></x-admin::datagrid.export>
+
             {{-- Create New Pages Button --}}
             @if (bouncer()->hasPermission('cms.pages.create'))
-                <a 
-                    href="{{ route('admin.cms.create') }}" 
+                <a
+                    href="{{ route('admin.cms.create') }}"
                     class="primary-button"
                 >
                     @lang('admin::app.cms.index.create-btn')

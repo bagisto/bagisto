@@ -35,8 +35,8 @@ return [
             'title'               => 'Sign In',
             'email'               => 'Email',
             'password'            => 'Password',
-            'forgot_pass'         => 'Forgot Password?',
-            'button_title'        => 'Sign In',
+            'forgot-pass'         => 'Forgot Password?',
+            'button-title'        => 'Sign In',
             'new-customer'        => 'New customer?',
             'create-your-account' => 'Create your account',
             'footer'              => '© Copyright 2010 - 2022, Webkul Software (Registered in India). All rights reserved.',
@@ -53,10 +53,10 @@ return [
             'last-name'                   => 'Last Name',
             'email'                       => 'Email',
             'password'                    => 'Password',
-            'confirm_pass'                => 'Confirm Password',
+            'confirm-pass'                => 'Confirm Password',
             'subscribe-to-newsletter'     => 'Subscribe to newsletter',
-            'button_title'                => 'Register',
-            'account_exists'              => 'Already have an account ?',
+            'button-title'                => 'Register',
+            'account-exists'              => 'Already have an account ?',
             'footer'                      => '© Copyright 2010 - 2022, Webkul Software (Registered in India). All rights reserved.',
             'success-verify'              => 'Account created successfully, an e-mail has been sent for verification.',
             'success-verify-email-unsent' => 'Account created successfully, but verification e-mail unsent.',
@@ -127,11 +127,11 @@ return [
             ],
 
             'orders' => [
-                'title'         => 'Orders',
-                'order_id'      => 'Order ID',
-                'order'         => 'Order',
-                'order_date'    => 'Order Date',
-                'total'         => 'Total',
+                'title'      => 'Orders',
+                'order-id'   => 'Order ID',
+                'order'      => 'Order',
+                'order-date' => 'Order Date',
+                'total'      => 'Total',
 
                 'status'        => [
                     'title' => 'Status',
@@ -147,8 +147,8 @@ return [
                     ],
                 ],
 
-                'action'        => 'Action',
-                'empty-order'   => 'You have not ordered any product yet',
+                'action'      => 'Action',
+                'empty-order' => 'You have not ordered any product yet',
 
                 'view' => [
                     'title'              => 'View',
@@ -188,20 +188,20 @@ return [
                     ],
 
                     'invoices'  => [
-                        'invoices'            => 'Invoices',
-                        'individual-invoice'  => 'Invoice #:invoice_id',
-                        'sku'                 => 'SKU',
-                        'product-name'        => 'Name',
-                        'price'               => 'Price',
-                        'products-ordered'    => 'Products Ordered',
-                        'qty'                 => 'Qty',
-                        'subtotal'            => 'Subtotal',
-                        'tax-amount'          => 'Tax Amount',
-                        'grand-total'         => 'Grand Total',
-                        'shipping-handling'   => 'Shipping & Handling',
-                        'discount'            => 'Discount',
-                        'tax'                 => 'Tax',
-                        'print'               => 'Print',
+                        'invoices'           => 'Invoices',
+                        'individual-invoice' => 'Invoice #:invoice_id',
+                        'sku'                => 'SKU',
+                        'product-name'       => 'Name',
+                        'price'              => 'Price',
+                        'products-ordered'   => 'Products Ordered',
+                        'qty'                => 'Qty',
+                        'subtotal'           => 'Subtotal',
+                        'tax-amount'         => 'Tax Amount',
+                        'grand-total'        => 'Grand Total',
+                        'shipping-handling'  => 'Shipping & Handling',
+                        'discount'           => 'Discount',
+                        'tax'                => 'Tax',
+                        'print'              => 'Print',
                     ],
 
                     'shipments' => [
@@ -215,28 +215,28 @@ return [
                     ],
 
                     'refunds'  => [
-                        'refunds'             => 'Refunds',
-                        'individual-refund'   => 'Refund #:refund_id',
-                        'sku'                 => 'SKU',
-                        'product-name'        => 'Name',
-                        'price'               => 'Price',
-                        'qty'                 => 'Qty',
-                        'tax-amount'          => 'Tax Amount',
-                        'subtotal'            => 'Subtotal',
-                        'grand-total'         => 'Grand Total',
-                        'no-result-found'     => 'We could not find any records.',
-                        'shipping-handling'   => 'Shipping & Handling',
-                        'discount'            => 'Discount',
-                        'tax'                 => 'Tax',
-                        'adjustment-refund'   => 'Adjustment Refund',
-                        'adjustment-fee'      => 'Adjustment Fee',
+                        'refunds'           => 'Refunds',
+                        'individual-refund' => 'Refund #:refund_id',
+                        'sku'               => 'SKU',
+                        'product-name'      => 'Name',
+                        'price'             => 'Price',
+                        'qty'               => 'Qty',
+                        'tax-amount'        => 'Tax Amount',
+                        'subtotal'          => 'Subtotal',
+                        'grand-total'       => 'Grand Total',
+                        'no-result-found'   => 'We could not find any records.',
+                        'shipping-handling' => 'Shipping & Handling',
+                        'discount'          => 'Discount',
+                        'tax'               => 'Tax',
+                        'adjustment-refund' => 'Adjustment Refund',
+                        'adjustment-fee'    => 'Adjustment Fee',
                     ],
                 ],
             ],
 
             'reviews'    => [
-                'title'         => 'Reviews',
-                'empty-review'  => 'You have not reviewed any product yet',
+                'title'        => 'Reviews',
+                'empty-review' => 'You have not reviewed any product yet',
             ],
 
             'downloadable-products'  => [
@@ -264,7 +264,6 @@ return [
                 'removed'            => 'Item Successfully Removed From Wishlist',
                 'remove-fail'        => 'Item Cannot Be Removed From Wishlist',
                 'moved'              => 'Item successfully moved To cart',
-                'missing_options'    => 'Options are missing for this product.',
                 'product-removed'    => 'Product Is No More Available As Removed By Admin',
                 'remove-all-success' => 'All the items from your wishlist have been removed',
                 'see-details'        => 'See Details',
@@ -452,8 +451,8 @@ return [
         ],
 
         'configurations' => [
-            'compare_options'     => 'Compare options',
-            'wishlist-options'    => 'Wishlist options',
+            'compare_options'  => 'Compare options',
+            'wishlist-options' => 'Wishlist options',
         ],
     ],
 
@@ -466,7 +465,7 @@ return [
         ],
 
         'toolbar' => [
-            'show'    => 'Show',
+            'show' => 'Show',
         ],
 
         'view' => [
@@ -556,14 +555,14 @@ return [
             ],
 
             'mini-cart' => [
-                'see-details'           => 'See Details',
-                'shopping-cart'         => 'Shopping Cart',
-                'offer-on-orders'       => 'Get Up To 30% OFF on your 1st order',
-                'remove'                => 'Remove',
-                'empty-cart'            => 'Your cart is empty',
-                'subtotal'              => 'Subtotal',
-                'continue-to-checkout'  => 'Continue to Checkout',
-                'view-cart'             => 'View Cart',
+                'see-details'          => 'See Details',
+                'shopping-cart'        => 'Shopping Cart',
+                'offer-on-orders'      => 'Get Up To 30% OFF on your 1st order',
+                'remove'               => 'Remove',
+                'empty-cart'           => 'Your cart is empty',
+                'subtotal'             => 'Subtotal',
+                'continue-to-checkout' => 'Continue to Checkout',
+                'view-cart'            => 'View Cart',
             ],
 
             'summary' => [
@@ -575,30 +574,29 @@ return [
                 'grand-total'         => 'Grand Total',
                 'place-order'         => 'Place Order',
                 'proceed-to-checkout' => 'Proceed To Checkout',
-
             ],
         ],
 
         'onepage' => [
             'addresses' => [
                 'billing' => [
-                    'billing-address'       => 'Billing Address',
-                    'add-new-address'       => 'Add new address',
-                    'same-billing-address'  => 'Address is the same as my billing address',
-                    'back'                  => 'Back',
-                    'company-name'          => 'Company Name',
-                    'first-name'            => 'First Name',
-                    'last-name'             => 'Last Name',
-                    'email'                 => 'Email',
-                    'street-address'        => 'Street Address',
-                    'country'               => 'Country',
-                    'state'                 => 'State',
-                    'select-state'          => 'Select State',
-                    'city'                  => 'City',
-                    'postcode'              => 'Zip/Postcode',
-                    'telephone'             => 'Telephone',
-                    'save-address'          => 'Save this address',
-                    'confirm'               => 'Confirm',
+                    'billing-address'      => 'Billing Address',
+                    'add-new-address'      => 'Add new address',
+                    'same-billing-address' => 'Address is the same as my billing address',
+                    'back'                 => 'Back',
+                    'company-name'         => 'Company Name',
+                    'first-name'           => 'First Name',
+                    'last-name'            => 'Last Name',
+                    'email'                => 'Email',
+                    'street-address'       => 'Street Address',
+                    'country'              => 'Country',
+                    'state'                => 'State',
+                    'select-state'         => 'Select State',
+                    'city'                 => 'City',
+                    'postcode'             => 'Zip/Postcode',
+                    'telephone'            => 'Telephone',
+                    'save-address'         => 'Save this address',
+                    'confirm'              => 'Confirm',
                 ],
 
                 'index' => [
@@ -699,7 +697,7 @@ return [
         '503' => [
             'title'       => '503 Service Unavailable',
             'description' => 'Oops! Looks like we\'re temporarily down for maintenance. Please check back in a bit.',
-        ]
+        ],
     ],
 
     'layouts' => [
@@ -727,14 +725,14 @@ return [
                 'subject'     => 'New Customer Registration',
                 'greeting'    => 'Welcome and thank you for registering with us!',
                 'description' => 'Your account has now been created successfully and you can login using your email address and password credentials. Upon logging in, you will be able to access other services including reviewing past orders, wishlists and editing your account information.',
-                'sign-in'    => 'Sign in'
+                'sign-in'     => 'Sign in',
             ],
 
             'forgot-password' => [
                 'subject'        => 'Reset Password Email',
                 'greeting'       => 'Forgot Password!',
                 'description'    => 'You are receiving this email because we received a password reset request for your account.',
-                'reset-password' => 'Reset Password'
+                'reset-password' => 'Reset Password',
             ],
 
             'update-password' => [
@@ -744,23 +742,23 @@ return [
             ],
 
             'verification' => [
-                'subject'        => 'Account Verification Email',
-                'greeting'       => 'Welcome!',
-                'description'    => 'Please click the button below to verify your email address.',
-                'verify-email'   => 'Verify Email Address'
+                'subject'      => 'Account Verification Email',
+                'greeting'     => 'Welcome!',
+                'description'  => 'Please click the button below to verify your email address.',
+                'verify-email' => 'Verify Email Address',
             ],
 
             'commented' => [
-                'subject' => 'New comment Added',
-                'description' => 'Note Is - :note'
+                'subject'     => 'New comment Added',
+                'description' => 'Note Is - :note',
             ],
 
             'subscribed' => [
                 'subject'     => 'You! Subscribe to Our Newsletter',
                 'greeting'    => 'Welcome to our newsletter!',
                 'description' => 'Congratulations and welcome to our newsletter community! We\'re excited to have you on board and keep you updated with the latest news, trends, and exclusive offers.',
-                'unsubscribe' => 'Unsubscribe'
-            ]
+                'unsubscribe' => 'Unsubscribe',
+            ],
         ],
 
         'orders' => [

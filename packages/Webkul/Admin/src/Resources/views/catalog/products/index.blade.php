@@ -30,58 +30,18 @@
                                 Language - {{ core()->getCurrentLocale()->name }}
                             </p>
                         </div>
-
-                        <div class="p-[6px] items-center cursor-pointer transition-all hover:bg-gray-100 hover:rounded-[6px]">
-                            <!-- Export Modal -->
-                            <x-admin::modal ref="exportModal">
-                                <x-slot:toggle>
-                                    <p class="text-gray-600 font-semibold leading-[24px]">
-                                        Export                                            
-                                    </p>
-                                </x-slot:toggle>
-
-                                <x-slot:header>
-                                    <p class="text-[18px] text-gray-800 font-bold">
-                                        @lang('Download')
-                                    </p>
-                                </x-slot:header>
-
-                                <x-slot:content>
-                                    <div class="p-[16px]">
-                                        <x-admin::form action="">
-                                            <x-admin::form.control-group>
-                                                <x-admin::form.control-group.control
-                                                    type="select"
-                                                    name="format"
-                                                    id="format"
-                                                >
-                                                    <option value="xls">XLS</option>
-                                                    <option value="csv">CLS</option>
-                                                </x-admin::form.control-group.control>
-                                            </x-admin::form.control-group>
-                                        </x-admin::form>
-                                    </div>
-                                </x-slot:content>
-                                <x-slot:footer>
-                                    <!-- Save Button -->
-                                    <button
-                                        type="submit" 
-                                        class="primary-button"
-                                    >
-                                        @lang('Export')
-                                    </button>
-                                </x-slot:footer>
-                            </x-admin::modal>
-                        </div>
                     </div>
                 </x-slot:content>
             </x-admin::dropdown>
 
+            <!-- Export Modal -->
+            <x-admin::datagrid.export src="{{ route('admin.catalog.products.index') }}"></x-admin::datagrid.export>
+
             {!! view_render_event('bagisto.admin.catalog.products.create.before') !!}
-    
+
             @if (bouncer()->hasPermission('catalog.products.create'))
                 <v-create-product-form>
-                    <button 
+                    <button
                         type="button"
                         class="primary-button"
                     >
@@ -89,11 +49,11 @@
                     </button>
                 </v-create-product-form>
             @endif
-    
+
             {!! view_render_event('bagisto.admin.catalog.products.create.after') !!}
         </div>
     </div>
-    
+
     {!! view_render_event('bagisto.admin.catalog.products.list.before') !!}
 
     {{-- Datagrid --}}
@@ -106,20 +66,20 @@
                         class="flex gap-[10px] items-center select-none"
                         v-for="(columnGroup, index) in [['name', 'sku', 'attribute_family'], ['base_image', 'price', 'quantity', 'product_id'], ['status', 'category_name', 'type']]"
                     >
-                        <label 
+                        <label
                             class="flex gap-[4px] items-center w-max cursor-pointer select-none"
                             for="mass_action_select_all_records"
                             v-if="! index"
                         >
-                            <input 
-                                type="checkbox" 
+                            <input
+                                type="checkbox"
                                 name="mass_action_select_all_records"
                                 id="mass_action_select_all_records"
                                 class="hidden peer"
                                 :checked="['all', 'partial'].includes(applied.massActions.meta.mode)"
                                 @change="selectAllRecords"
                             >
-                
+
                             <span
                                 class="icon-uncheckbox cursor-pointer rounded-[6px] text-[24px]"
                                 :class="[
@@ -174,8 +134,8 @@
                 >
                     {{-- Name, SKU, Attribute Family Columns --}}
                     <div class="flex gap-[10px]">
-                        <input 
-                            type="checkbox" 
+                        <input
+                            type="checkbox"
                             :name="`mass_action_select_record_${record.product_id}`"
                             :id="`mass_action_select_record_${record.product_id}`"
                             :value="record.product_id"
@@ -183,8 +143,8 @@
                             v-model="applied.massActions.indices"
                             @change="setCurrentSelectionMode"
                         >
-            
-                        <label 
+
+                        <label
                             class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
                             :for="`mass_action_select_record_${record.product_id}`"
                         ></label>
@@ -234,7 +194,7 @@
                         </div>
 
                         <div class="flex flex-col gap-[6px]">
-                            <p 
+                            <p
                                 class="text-[16px] text-gray-800 font-semibold"
                                 v-text="$admin.formatPrice(record.price)"
                             >
@@ -257,7 +217,7 @@
                                     @lang('admin::app.catalog.products.index.datagrid.out-of-stock')
                                 </span>
                             </p>
-    
+
                             <p class="text-gray-600">
                                 @{{ "@lang('admin::app.catalog.products.index.datagrid.id-value')".replace(':id', record.product_id) }}
                             </p>
@@ -306,7 +266,7 @@
             <div>
                 <!-- Product Create Button -->
                 @if (bouncer()->hasPermission('catalog.products.create'))
-                    <button 
+                    <button
                         type="button"
                         class="primary-button"
                         @click="$refs.productCreateModal.toggle()"
@@ -329,16 +289,16 @@
                                     v-if="! attributes.length"
                                 >
                                     @lang('admin::app.catalog.products.index.create.title')
-                                </p>    
+                                </p>
 
                                 <p
                                     class="text-[18px] text-gray-800 font-bold"
                                     v-else
                                 >
                                     @lang('admin::app.catalog.products.index.create.configurable-attributes')
-                                </p>    
+                                </p>
                             </x-slot:header>
-            
+
                             <x-slot:content>
                                 <!-- Modal Content -->
                                 <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
@@ -349,7 +309,7 @@
                                             <x-admin::form.control-group.label class="required">
                                                 @lang('admin::app.catalog.products.index.create.type')
                                             </x-admin::form.control-group.label>
-                
+
                                             <x-admin::form.control-group.control
                                                 type="select"
                                                 name="type"
@@ -362,7 +322,7 @@
                                                     </option>
                                                 @endforeach
                                             </x-admin::form.control-group.control>
-                
+
                                             <x-admin::form.control-group.error control-name="type"></x-admin::form.control-group.error>
                                         </x-admin::form.control-group>
 
@@ -370,7 +330,7 @@
                                             <x-admin::form.control-group.label class="required">
                                                 @lang('admin::app.catalog.products.index.create.family')
                                             </x-admin::form.control-group.label>
-                
+
                                             <x-admin::form.control-group.control
                                                 type="select"
                                                 name="attribute_family_id"
@@ -383,7 +343,7 @@
                                                     </option>
                                                 @endforeach
                                             </x-admin::form.control-group.control>
-                
+
                                             <x-admin::form.control-group.error control-name="attribute_family_id"></x-admin::form.control-group.error>
                                         </x-admin::form.control-group>
 
@@ -391,7 +351,7 @@
                                             <x-admin::form.control-group.label class="required">
                                                 @lang('admin::app.catalog.products.index.create.sku')
                                             </x-admin::form.control-group.label>
-                
+
                                             <x-admin::form.control-group.control
                                                 type="text"
                                                 name="sku"
@@ -399,7 +359,7 @@
                                                 :label="trans('admin::app.catalog.products.index.create.sku')"
                                             >
                                             </x-admin::form.control-group.control>
-                
+
                                             <x-admin::form.control-group.error control-name="sku"></x-admin::form.control-group.error>
                                         </x-admin::form.control-group>
 
@@ -436,7 +396,7 @@
                                     </div>
                                 </div>
                             </x-slot:content>
-            
+
                             <x-slot:footer>
                                 <!-- Modal Submission -->
                                 <div class="flex gap-x-[10px] items-center">
@@ -449,7 +409,7 @@
                                         @lang('admin::app.catalog.products.index.create.back-btn')
                                     </button>
 
-                                    <button 
+                                    <button
                                         type="submit"
                                         class="primary-button"
                                     >

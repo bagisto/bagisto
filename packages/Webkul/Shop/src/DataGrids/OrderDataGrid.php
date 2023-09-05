@@ -37,7 +37,7 @@ class OrderDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'increment_id',
-            'label'      => trans('shop::app.customers.account.orders.order_id'),
+            'label'      => trans('shop::app.customers.account.orders.order-id'),
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
@@ -46,7 +46,7 @@ class OrderDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'created_at',
-            'label'      => trans('shop::app.customers.account.orders.order_date'),
+            'label'      => trans('shop::app.customers.account.orders.order-date'),
             'type'       => 'datetime_range',
             'searchable' => true,
             'sortable'   => true,
