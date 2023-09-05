@@ -202,7 +202,7 @@
 
                                                 <!-- Admin tables heading -->
                                                 <x-admin::table.th>
-                                                    @lang('admin::app.catalog.attributes.create.admin_name')
+                                                    @lang('admin::app.catalog.attributes.create.admin-name')
                                                 </x-admin::table.th>
 
                                                 <!-- Loacles tables heading -->
@@ -511,7 +511,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- All Types Define In The Loop -->
-                                @foreach (['is_required', 'is_unique'] as $item)
+                                @foreach (['is-required', 'is-unique'] as $item)
                                     <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
                                         <x-admin::form.control-group.control
                                             type="checkbox"
@@ -543,7 +543,7 @@
                         
                             <x-slot:content>
                                 <!-- Configuration Types Define In The Loop -->
-                                @foreach (['value_per_locale', 'value_per_channel', 'is_configurable', 'is_visible_on_front', 'use_in_flat','is_comparable'] as $item)
+                                @foreach (['value-per-locale', 'value-per-channel', 'is-configurable', 'is-visible-on-front', 'use-in-flat','is-comparable'] as $item)
                                     <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
                                         <x-admin::form.control-group.control
                                             type="checkbox"
@@ -583,7 +583,7 @@
                                     <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"></span>
 
                                     <div class="text-[14px] text-gray-600 font-semibold cursor-pointer">
-                                        @lang('admin::app.catalog.attributes.create.is_filterable')
+                                        @lang('admin::app.catalog.attributes.create.is-filterable')
                                     </div>
                                 </label>
                             </x-slot:content>

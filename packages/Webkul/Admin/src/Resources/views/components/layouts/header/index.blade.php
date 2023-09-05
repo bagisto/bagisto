@@ -628,7 +628,7 @@
                         'closed': "@lang('admin::app.notifications.order-status-messages.closed')",
                         'completed': "@lang('admin::app.notifications.order-status-messages.completed')",
                         'processing': "@lang('admin::app.notifications.order-status-messages.processing')",
-                        'pending_payment': "@lang('admin::app.notifications.order-status-messages.pending_payment')",
+                        'pending_payment': "@lang('admin::app.notifications.order-status-messages.pending-payment')",
                     }
                 }
             },

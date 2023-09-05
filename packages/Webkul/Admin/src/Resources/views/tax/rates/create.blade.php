@@ -139,7 +139,7 @@
                                 <!-- Tax Rate -->
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.taxes.rates.create.tax_rate')
+                                        @lang('admin::app.settings.taxes.rates.create.tax-rate')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -147,8 +147,8 @@
                                         name="tax_rate"
                                         :value="old('tax_rate')"
                                         rules="required"
-                                        :label="trans('admin::app.settings.taxes.rates.create.tax_rate')"
-                                        :placeholder="trans('admin::app.settings.taxes.rates.create.tax_rate')"
+                                        :label="trans('admin::app.settings.taxes.rates.create.tax-rate')"
+                                        :placeholder="trans('admin::app.settings.taxes.rates.create.tax-rate')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -174,15 +174,15 @@
                                 <!-- Enable Zip Range -->
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.taxes.rates.create.is_zip')
+                                        @lang('admin::app.settings.taxes.rates.create.is-zip')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="switch"
                                         name="is_zip"
                                         :value="1"
-                                        :label="trans('admin::app.settings.taxes.rates.create.is_zip')"
-                                        :placeholder="trans('admin::app.settings.taxes.rates.create.is_zip')"
+                                        :label="trans('admin::app.settings.taxes.rates.create.is-zip')"
+                                        :placeholder="trans('admin::app.settings.taxes.rates.create.is-zip')"
                                         v-model="is_zip"
                                     >
                                     </x-admin::form.control-group.control>
@@ -199,15 +199,15 @@
                                     class="mb-[10px]" 
                                 >
                                     <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.taxes.rates.create.zip_code')
+                                        @lang('admin::app.settings.taxes.rates.create.zip-code')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="zip_code"
                                         :value="old('zip_code')"
-                                        :label="trans('admin::app.settings.taxes.rates.create.zip_code')"
-                                        :placeholder="trans('admin::app.settings.taxes.rates.create.zip_code')"
+                                        :label="trans('admin::app.settings.taxes.rates.create.zip-code')"
+                                        :placeholder="trans('admin::app.settings.taxes.rates.create.zip-code')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -221,7 +221,7 @@
                                     <!-- Zip From -->
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.settings.taxes.rates.create.zip_from')
+                                            @lang('admin::app.settings.taxes.rates.create.zip-from')
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
@@ -229,8 +229,8 @@
                                             name="zip_from"
                                             :value="old('zip_from')"
                                             rules="required"
-                                            :label="trans('admin::app.settings.taxes.rates.create.zip_from')"
-                                            :placeholder="trans('admin::app.settings.taxes.rates.create.zip_from')"
+                                            :label="trans('admin::app.settings.taxes.rates.create.zip-from')"
+                                            :placeholder="trans('admin::app.settings.taxes.rates.create.zip-from')"
                                         >
                                         </x-admin::form.control-group.control>
 
@@ -243,7 +243,7 @@
                                     <!-- Zip To -->
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.settings.taxes.rates.create.zip_to')
+                                            @lang('admin::app.settings.taxes.rates.create.zip-to')
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
@@ -251,8 +251,8 @@
                                             name="zip_to"
                                             :value="old('zip_to')"
                                             rules="required"
-                                            :label="trans('admin::app.settings.taxes.rates.create.zip_to')"
-                                            :placeholder="trans('admin::app.settings.taxes.rates.create.zip_to')"
+                                            :label="trans('admin::app.settings.taxes.rates.create.zip-to')"
+                                            :placeholder="trans('admin::app.settings.taxes.rates.create.zip-to')"
                                         >
                                         </x-admin::form.control-group.control>
 

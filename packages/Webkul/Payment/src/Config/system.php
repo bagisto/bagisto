@@ -92,7 +92,7 @@ return [
                 'locale_based'  => false,
             ], [
                 'name'    => 'sort',
-                'title'   => 'admin::app.configuration.index.sales.payment-methods.sort_order',
+                'title'   => 'admin::app.configuration.index.sales.payment-methods.sort-order',
                 'type'    => 'select',
                 'options' => [
                     [
@@ -188,7 +188,7 @@ return [
                 'locale_based'  => false,
             ], [
                 'name'    => 'sort',
-                'title'   => 'admin::app.configuration.index.sales.payment-methods.sort_order',
+                'title'   => 'admin::app.configuration.index.sales.payment-methods.sort-order',
                 'type'    => 'select',
                 'options' => [
                     [

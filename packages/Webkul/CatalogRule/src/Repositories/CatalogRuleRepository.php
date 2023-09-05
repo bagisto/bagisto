@@ -113,7 +113,7 @@ class CatalogRuleRepository extends Repository
                     ], [
                         'key'     => 'product|attribute_family_id',
                         'type'    => 'select',
-                        'label'   => trans('admin::app.marketing.promotions.catalog-rules.create.attribute_family'),
+                        'label'   => trans('admin::app.marketing.promotions.catalog-rules.create.attribute-family'),
                         'options' => $this->getAttributeFamilies(),
                     ],
                 ],
