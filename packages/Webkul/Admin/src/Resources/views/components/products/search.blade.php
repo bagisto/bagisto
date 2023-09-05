@@ -26,13 +26,13 @@
                     <div class="relative w-full">
                         <input
                             type="text"
-                            class="bg-white border border-gray-300 rounded-lg block w-full pl-[12px] pr-[40px] py-[5px] leading-6 text-gray-600 transition-all hover:border-gray-400"
+                            class="bg-white border border-gray-300 rounded-lg block w-full ltr:pl-[12px] rtl:pr-[12px] ltr:pr-[40px] rtl:pl-[40px] py-[5px] leading-6 text-gray-600 transition-all hover:border-gray-400"
                             placeholder="Search by name"
                             v-model.lazy="searchTerm"
                             v-debounce="500"
                         />
 
-                        <span class="icon-search text-[22px] absolute right-[12px] top-[6px] flex items-center pointer-events-none"></span>
+                        <span class="icon-search text-[22px] absolute ltr:right-[12px] rtl:left-[12px] top-[6px] flex items-center pointer-events-none"></span>
                     </div>
                 </div>
             </x-slot:header>

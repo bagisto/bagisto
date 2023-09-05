@@ -84,7 +84,7 @@
                                 <span v-text="appliedColumnValue.join(' to ')"></span>
 
                                 <span
-                                    class="icon-cross ml-[5px] cursor-pointer text-[18px] text-white"
+                                    class="icon-cross ltr:ml-[5px] rtl:mr-[5px] cursor-pointer text-[18px] text-white"
                                     @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
                                 >
                                 </span>
@@ -168,7 +168,7 @@
                                 <span v-text="appliedColumnValue.join(' to ')"></span>
 
                                 <span
-                                    class="icon-cross ml-[5px] cursor-pointer text-[18px] text-white"
+                                    class="icon-cross ltr:ml-[5px] rtl:mr-[5px] cursor-pointer text-[18px] text-white"
                                     @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
                                 >
                                 </span>
@@ -217,7 +217,7 @@
                             <span v-text="appliedColumnValue"></span>
 
                             <span
-                                class="icon-cross ml-[5px] cursor-pointer text-[18px] text-white"
+                                class="icon-cross ltr:ml-[5px] rtl:mr-[5px] cursor-pointer text-[18px] text-white"
                                 @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
                             >
                             </span>

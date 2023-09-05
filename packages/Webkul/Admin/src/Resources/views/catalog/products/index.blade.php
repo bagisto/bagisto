@@ -150,7 +150,7 @@
                             </span>
 
                             <i
-                                class="ml-[5px] text-[16px] text-gray-800 align-text-bottom"
+                                class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 align-text-bottom"
                                 :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                 v-if="columnGroup.includes(applied.sort.column)"
                             ></i>
@@ -227,7 +227,7 @@
                             </div>
 
                             <span
-                                class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]"
+                                class="absolute bottom-[1px] ltr:left-[1px] rtl:right-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]"
                                 v-text="record.images_count"
                             >
                             </span>
@@ -285,7 +285,7 @@
                         </div>
 
                         <a :href=`{{ route('admin.catalog.products.edit', '') }}/${record.product_id}`>
-                            <span class="icon-sort-right text-[24px] ml-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"></span>
+                            <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"></span>
                         </a>
 
                     </div>
@@ -425,7 +425,7 @@
                                                     @{{ option.name + option.id }}
 
                                                     <span
-                                                        class="icon-cross text-white text-[18px] ml-[5px] cursor-pointer"
+                                                        class="icon-cross text-white text-[18px] ltr:ml-[5px] rtl:mr-[5px] cursor-pointer"
                                                         @click="removeOption(option)"
                                                     ></span>
                                                 </p>

@@ -71,7 +71,7 @@
                                     </span>
 
                                     <i
-                                        class="ml-[5px] text-[16px] text-gray-800 align-text-bottom"
+                                        class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 align-text-bottom"
                                         :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                         v-if="columnGroup.includes(applied.sort.column)"
                                     ></i>
@@ -167,13 +167,13 @@
                                 <!-- Review Delete Button -->
                                 <a  
                                     @click="deleteReview(record.actions['1']?.url)">
-                                    <span class="icon-delete text-[24px] ml-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"></span>
+                                    <span class="icon-delete text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"></span>
                                 </a>
 
                                 <!-- View Button -->
                                 <span 
                                     @click="edit(record.product_review_id)" 
-                                    class="icon-sort-right text-[24px] ml-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"
+                                    class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"
                                 >
                                 </span>
                             </div>
