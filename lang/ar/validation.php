@@ -23,12 +23,14 @@ return [
     'array'                => ':attribute يجب أن تكون مصفوفة/قائمة.',
     'before'               => ':attribute يجب أن يكون قبل :date.',
     'before_or_equal'      => ':attribute يجب أن تكون مساوية أو قبل تاريخ :date.',
+
     'between'              => [
         'numeric' => ':attribute يجب أن يكون من :min إلى :max.',
         'file'    => ':attribute يجب أن يكون من :min إلى :max كيلو بايت.',
         'string'  => ':attribute يجب أن يكون من :min إلى :max حرف.',
         'array'   => ':attribute يجب أن يكون من :min إلى :max عنصر.',
     ],
+
     'boolean'              => ':attribute يجب أن تكون true أو false.',
     'confirmed'            => 'تأكيد :attribute لا يتطابق.',
     'date'                 => ':attribute ليس تاريخ صالح.',
@@ -42,18 +44,21 @@ return [
     'exists'               => ':attribute المختار هذا غير صالح.',
     'file'                 => ':attribute يجب أن يكون ملف.',
     'filled'               => ':attribute يجب أن يحتوي على قيمة.',
+
     'gt'                   => [
         'numeric' => ':attribute يجب أن يكون أكبر من :value.',
         'file'    => ':attribute يجب أن يكون أكبر من :value كيلو بايت.',
         'string'  => ':attribute يجب أن يكون أكبر من :value حروف.',
         'array'   => ':attribute يجب أن يكون لديه أكبر من :value عناصر.',
     ],
+
     'gte'                  => [
         'numeric' => ':attribute يجب أن يكون أكبر من أو يساوي :value.',
         'file'    => ':attribute يجب أن يكون أكبر من أو يساوي :value كيلو بايت.',
         'string'  => ':attribute يجب أن يكون أكبر من أو يساوي :value حروف.',
         'array'   => ':attribute يجب أن يكون لدية :value عناصر أو أكثر.',
     ],
+
     'image'                => ':attribute يجب أن تكون صورة.',
     'in'                   => ':attribute المحدد هذا غير صالح.',
     'in_array'             => 'حقل :attribute ليس موجود في :other.',
@@ -62,32 +67,38 @@ return [
     'ipv4'                 => ':attribute يجب أن يكون عنوان IPv4 صالح.',
     'ipv6'                 => ':attribute يجب أن يكون عنوان IPv6 صالح.',
     'json'                 => ':attribute يجب أن يكون نص JSON صالح.',
+
     'lt'                   => [
         'numeric' => ':attribute يجب أن يكون أقل من :value.',
         'file'    => ':attribute يجب أن يكون أقل من :value كيلو بايت.',
         'string'  => ':attribute يجب أن يكون أقل من :value حروف.',
         'array'   => ':attribute يجب أن يكون لديه أقل من :value عناصر.',
     ],
+
     'lte'                  => [
         'numeric' => ':attribute يجب أن يكون أقل من أو يساوي :value.',
         'file'    => ':attribute يجب أن يكون أقل من أو يساوي :value كيلو بايت.',
         'string'  => ':attribute يجب أن يكون أقل من أو يساوي :value حروف.',
         'array'   => ':attribute يجب أن يكون لدية :value عناصر أو أقل.',
     ],
+
     'max'                  => [
         'numeric' => ':attribute يجب أن لا تكون أكبر من :max.',
         'file'    => ':attribute يجب أن لا تكون أكبر من :max كيلو بايت.',
         'string'  => ':attribute يجب أن لا تكون أكبر من :max حرووف.',
         'array'   => ':attribute يجب أن لا تحتوى على أكبر من :max عنصر.',
     ],
+
     'mimes'                => ':attribute يجب أن يكون ملف بواحد من هذه الأمتدادات :values.',
     'mimetypes'            => ':attribute يجب أن يكون ملف بواحد من هذه الأمتدادات :values.',
+
     'min'                  => [
         'numeric' => ':attribute يجب أن يكون علي الأقل :min.',
         'file'    => ':attribute يجب أن يكون علي الأقل :min كيلو بايت.',
         'string'  => ':attribute يجب أن يكون علي الأقل :min حروف.',
         'array'   => ':attribute يجب أن يكون علي الأقل :min عنصر.',
     ],
+
     'not_in'               => ':attribute المختارة غير صالحة.',
     'not_regex'            => 'تنسيق :attribute هذا غير صالح.',
     'numeric'              => ':attribute يجب أن يكون رقم.',
@@ -101,12 +112,14 @@ return [
     'required_without'     => 'حقل :attribute مطلوب في عدم وجود :values.',
     'required_without_all' => 'حقل :attribute مطلوب عند عدم وجود أياً من :values.',
     'same'                 => ':attribute و :other يجب أن يكونوا متساويين.',
+
     'size'                 => [
         'numeric' => ':attribute يجب أن يكون :size.',
         'file'    => ':attribute يجب أن يكون :size كيلو بايت.',
         'string'  => ':attribute يجب أن يكون :size حروف.',
         'array'   => ':attribute يجب أن تحتوي على :size عنصر.',
     ],
+
     'string'               => ':attribute يجب أن يكون نص.',
     'timezone'             => ':attribute يجب أن تكون منطقة صالحة.',
     'unique'               => ':attribute مسجل مسبقاً.',

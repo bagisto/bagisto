@@ -23,12 +23,14 @@ return [
     'array'                => ':attribute एक सरणी होनी चाहिए।',
     'before'               => 'द :attribute :डेट से पहले की तारीख होनी चाहिए।',
     'before_or_equal'      => 'द :attribute :डेट से पहले या उसके बराबर की तारीख होनी चाहिए।',
+
     'between'              => [
         'numeric' => ': विशेषता :min और :max के बीच होनी चाहिए।',
         'file'    => ': विशेषता :min और :max किलोबाइट्स के बीच होनी चाहिए।',
         'string'  => ': विशेषता :min और :max वर्णों के बीच होनी चाहिए।',
         'array'   => ': विशेषता :min और :max आइटम के बीच होनी चाहिए।',
     ],
+
     'boolean'              => ':attribute क्षेत्र सही या गलत होना चाहिए।',
     'confirmed'            => ':attribute पुष्टि मेल नहीं खाती।',
     'date'                 => ':attribute मान्य तिथि नहीं है।',
@@ -42,18 +44,21 @@ return [
     'exists'               => 'चयनित :attribute अमान्य है।',
     'file'                 => ':attribute एक फ़ाइल होनी चाहिए।',
     'filled'               => ':attribute फ़ील्ड में एक मान होना चाहिए।',
+
     'gt'                   => [
         'numeric' => ':attribute :value से बड़ी होनी चाहिए।',
         'file'    => 'द :attribute :value किलोबाइट्स से बड़ा होना चाहिए।',
         'string'  => 'द :attribute :value कैरेक्टर्स से बड़ा होना चाहिए।',
         'array'   => 'द :attribute में :value आइटम्स से अधिक होना चाहिए।',
     ],
+
     'gte'                  => [
         'numeric' => ':attribute :value से अधिक या बराबर होनी चाहिए।',
         'file'    => ':attribute से बड़ा या बराबर होना चाहिए:value किलोबाइट्स।',
         'string'  => ': attribute इससे बड़ा या बराबर होना चाहिए:value वर्ण।',
         'array'   => 'द :attribute में :value आइटम्स या अधिक होना चाहिए।',
     ],
+
     'image'                => ':attribute एक छवि होनी चाहिए।',
     'in'                   => 'चयनित :attribute अमान्य है।',
     'in_array'             => "द :attribute फील्ड :other' में मौजूद नहीं है।",
@@ -62,32 +67,38 @@ return [
     'ipv4'                 => ':attribute एक मान्य IPv4 पता होना चाहिए।',
     'ipv6'                 => ':attribute एक मान्य IPv6 पता होना चाहिए।',
     'json'                 => ':attribute एक वैध JSON स्ट्रिंग होनी चाहिए।',
+
     'lt'                   => [
         'numeric' => ':attribute :value से कम होनी चाहिए।',
         'file'    => ':attribute :value किलोबाइट से कम होनी चाहिए।',
         'string'  => ':attribute :value वर्णों से कम होनी चाहिए।',
         'array'   => ':attribute में :value आइटम से कम होना चाहिए।',
     ],
+
     'lte'                  => [
         'numeric' => ': attribute कम या बराबर होनी चाहिए: मान।',
         'file'    => ': attribute कम या बराबर होनी चाहिए: मान किलोबाइट्स।',
         'string'  => ': attribute कम या बराबर होनी चाहिए: मान वर्ण।',
         'array'   => ': attribute में :value आइटम्स से अधिक नहीं होना चाहिए।',
     ],
+
     'max'                  => [
         'numeric' => ":attribute :max' से अधिक नहीं हो सकती है।",
         'file'    => ':attribute :max किलोबाइट से अधिक नहीं हो सकती है।',
         'string'  => ':attribute :max वर्णों से अधिक नहीं हो सकती है।',
         'array'   => ':attribute में :max आइटम्स से अधिक नहीं हो सकते हैं।',
     ],
+
     'mimes'                => ':attribute एक प्रकार की फ़ाइल होनी चाहिए::value',
     'mimetypes'            => ':attribute एक प्रकार की फ़ाइल होनी चाहिए::value',
+
     'min'                  => [
         'numeric' => ':attribute कम से कम :min होनी चाहिए।',
         'file'    => ':attribute कम से कम :min किलोबाइट्स होनी चाहिए।',
         'string'  => ':attribute कम से कम :min कैरेक्टर का होना चाहिए।',
         'array'   => ':attribute में कम से कम :min आइटम होना चाहिए।',
     ],
+
     'not_in'               => 'चयनित :attribute अमान्य है।',
     'not_regex'            => ':attribute प्रारूप अमान्य है।',
     'numeric'              => ':attribute एक संख्या होनी चाहिए।',
@@ -101,12 +112,14 @@ return [
     'required_without'     => ':attribute फ़ील्ड आवश्यक है जब:value मौजूद नहीं है।',
     'required_without_all' => ':attribute फ़ील्ड आवश्यक है जब कोई भी: value मौजूद नहीं है।',
     'same'                 => 'द :attribute और :other मैच होना चाहिए।',
+
     'size'                 => [
         'numeric' => ':attribute होना चाहिए:size',
         'file'    => ':attribute होना चाहिए:size किलोबाइट्स।',
         'string'  => ':attribute होना चाहिए:size वर्ण।',
         'array'   => 'इस विशेषता में :size के आइटम शामिल होने चाहिए।',
     ],
+
     'string'               => ':attribute एक स्ट्रिंग होनी चाहिए।',
     'timezone'             => ':attribute एक मान्य क्षेत्र होना चाहिए।',
     'unique'               => ':attribute पहले ही ली जा चुकी है।',

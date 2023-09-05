@@ -23,12 +23,14 @@ return [
     'array'                => 'El campo :attribute debe ser un array.',
     'before'               => 'El campo :attribute debe ser una fecha anterior a :date.',
     'before_or_equal'      => 'El campo :attribute debe ser una fecha anterior o igual a :date.',
+
     'between'              => [
         'numeric' => 'El campo :attribute debe ser un valor entre :min y :max.',
         'file'    => 'El archivo :attribute debe pesar entre :min y :max kilobytes.',
         'string'  => 'El campo :attribute debe contener entre :min y :max caracteres.',
         'array'   => 'El campo :attribute debe contener entre :min y :max elementos.',
     ],
+
     'boolean'              => 'El campo :attribute debe ser verdadero o falso.',
     'confirmed'            => 'El campo confirmación de :attribute no coincide.',
     'date'                 => 'El campo :attribute no corresponde con una fecha válida.',
@@ -44,18 +46,21 @@ return [
     'exists'               => 'El campo :attribute seleccionado no existe.',
     'file'                 => 'El campo :attribute debe ser un archivo.',
     'filled'               => 'El campo :attribute debe tener un valor.',
+
     'gt'                   => [
         'numeric' => 'El campo :attribute debe ser mayor a :value.',
         'file'    => 'El archivo :attribute debe pesar más de :value kilobytes.',
         'string'  => 'El campo :attribute debe contener más de :value caracteres.',
         'array'   => 'El campo :attribute debe contener más de :value elementos.',
     ],
+
     'gte'                  => [
         'numeric' => 'El campo :attribute debe ser mayor o igual a :value.',
         'file'    => 'El archivo :attribute debe pesar :value o más kilobytes.',
         'string'  => 'El campo :attribute debe contener :value o más caracteres.',
         'array'   => 'El campo :attribute debe contener :value o más elementos.',
     ],
+
     'image'                => 'El campo :attribute debe ser una imagen.',
     'in'                   => 'El campo :attribute es inválido.',
     'in_array'             => 'El campo :attribute no existe en :other.',
@@ -64,32 +69,38 @@ return [
     'ipv4'                 => 'El campo :attribute debe ser una dirección IPv4 válida.',
     'ipv6'                 => 'El campo :attribute debe ser una dirección IPv6 válida.',
     'json'                 => 'El campo :attribute debe ser una cadena de texto JSON válida.',
+
     'lt'                   => [
         'numeric' => 'El campo :attribute debe ser menor a :value.',
         'file'    => 'El archivo :attribute debe pesar menos de :value kilobytes.',
         'string'  => 'El campo :attribute debe contener menos de :value caracteres.',
         'array'   => 'El campo :attribute debe contener menos de :value elementos.',
     ],
+
     'lte'                  => [
         'numeric' => 'El campo :attribute debe ser menor o igual a :value.',
         'file'    => 'El archivo :attribute debe pesar :value o menos kilobytes.',
         'string'  => 'El campo :attribute debe contener :value o menos caracteres.',
         'array'   => 'El campo :attribute debe contener :value o menos elementos.',
     ],
+
     'max'                  => [
         'numeric' => 'El campo :attribute no debe ser mayor a :max.',
         'file'    => 'El archivo :attribute no debe pesar más de :max kilobytes.',
         'string'  => 'El campo :attribute no debe contener más de :max caracteres.',
         'array'   => 'El campo :attribute no debe contener más de :max elementos.',
     ],
+
     'mimes'                => 'El campo :attribute debe ser un archivo de tipo: :values.',
     'mimetypes'            => 'El campo :attribute debe ser un archivo de tipo: :values.',
+
     'min'                  => [
         'numeric' => 'El campo :attribute debe ser al menos :min.',
         'file'    => 'El archivo :attribute debe pesar al menos :min kilobytes.',
         'string'  => 'El campo :attribute debe contener al menos :min caracteres.',
         'array'   => 'El campo :attribute debe contener al menos :min elementos.',
     ],
+
     'not_in'               => 'El campo :attribute seleccionado es inválido.',
     'not_regex'            => 'El formato del campo :attribute es inválido.',
     'numeric'              => 'El campo :attribute debe ser un número.',
@@ -104,12 +115,14 @@ return [
     'required_without'     => 'El campo :attribute es obligatorio cuando :values no está presente.',
     'required_without_all' => 'El campo :attribute es obligatorio cuando ninguno de los campos :values están presentes.',
     'same'                 => 'Los campos :attribute y :other deben coincidir.',
+
     'size'                 => [
         'numeric' => 'El campo :attribute debe ser :size.',
         'file'    => 'El archivo :attribute debe pesar :size kilobytes.',
         'string'  => 'El campo :attribute debe contener :size caracteres.',
         'array'   => 'El campo :attribute debe contener :size elementos.',
     ],
+
     'starts_with'          => 'El campo :attribute debe comenzar con uno de los siguientes valores: :values',
     'string'               => 'El campo :attribute debe ser una cadena de caracteres.',
     'timezone'             => 'El campo :attribute debe ser una zona horaria válida.',
