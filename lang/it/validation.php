@@ -23,14 +23,16 @@ return [
     'array'                => "L'attributo :attribute deve essere un array.",
     'before'               => "L'attributo :attribute deve essere una data precedente a :date.",
     'before_or_equal'      => "L'attributo :attribute deve essere una data precedente o uguale a :date.",
+
     'between'              => [
         'numeric' => "L'attributo :attribute deve essere una data tra :min e :max.",
         'file'    => "L'attributo :attribute deve essere una data tra :min e :max kilobytes.",
         'string'  => "L'attributo :attribute deve essere una data tra :min e :max caratteri.",
         'array'   => "L'attributo :attribute deve essere una data tra :min e :max elementi.",
     ],
-    'boolean'              => "Il campo :attribute deve essere vero o falso.",
-    'confirmed'            => "La conferma di :attribute non coincide.",
+
+    'boolean'              => 'Il campo :attribute deve essere vero o falso.',
+    'confirmed'            => 'La conferma di :attribute non coincide.',
     'date'                 => "L'attributo :attribute non è una data valida.",
     'date_format'          => "L'attributo :attribute non coincide col formato :format.",
     'different'            => ':attribute e :other devono essere diversi.',
@@ -42,18 +44,21 @@ return [
     'exists'               => "L'attributo :attribute selezionato non è valido.",
     'file'                 => "L'attributo :attribute deve essere un file.",
     'filled'               => 'Il campo :attribute deve avere un valore.',
+
     'gt'                   => [
         'numeric' => "L'attributo :attribute deve essere più grande di :value.",
         'file'    => "L'attributo :attribute deve essere più grande di :value kilobytes.",
         'string'  => "L'attributo :attribute deve essere più di :value caratteri.",
         'array'   => "L'attributo :attribute deve avere più di :value elementi.",
     ],
+
     'gte'                  => [
         'numeric' => "L'attributo :attribute deve essere più grande o uguale a :value.",
         'file'    => "L'attributo :attribute deve essere più grande o uguale a :value kilobytes.",
         'string'  => "L'attributo :attribute deve essere più grande o uguale a :value caratteri.",
         'array'   => "L'attributo :attribute deve avere :value elementi o più.",
     ],
+
     'image'                => "L'attributo :attribute deve essere un'immagine.",
     'in'                   => "L'attributo selezionato :attribute non è valido.",
     'in_array'             => 'Il campo :attribute non esiste in :other.',
@@ -62,32 +67,38 @@ return [
     'ipv4'                 => "L'attributo :attribute deve essere un indirizzo IPv4 valido.",
     'ipv6'                 => "L'attributo :attribute deve essere un indirizzo IPv6 valido.",
     'json'                 => "L'attributo :attribute deve essere una stringa JSON valida.",
+
     'lt'                   => [
         'numeric' => "L'attributo :attribute deve essere minore di :value.",
         'file'    => "L'attributo :attribute deve essere minore di :value kilobytes.",
         'string'  => "L'attributo :attribute deve essere minore di :value caratteri.",
         'array'   => "L'attributo :attribute deve avere meno di :value elementi.",
     ],
+
     'lte'                  => [
         'numeric' => "L'attributo :attribute deve essere minore o uguale a :value.",
         'file'    => "L'attributo :attribute deve essere minore o uguale a :value kilobytes.",
         'string'  => "L'attributo :attribute deve essere minore o uguale a :value caratteri.",
         'array'   => "L'attributo :attribute non deve avere più di :value elementi.",
     ],
+
     'max'                  => [
         'numeric' => "L'attributo :attribute non deve essere più grande di :max.",
         'file'    => "L'attributo :attribute non deve essere più grande di :max kilobytes.",
         'string'  => "L'attributo :attribute non deve essere più grande di :max caratteri.",
         'array'   => "L'attributo :attribute non deve avere più di :max elementi.",
     ],
+
     'mimes'                => "L'attributo :attribute deve essere un file di tipo: :values.",
     'mimetypes'            => "L'attributo :attribute deve essere un file di tipo: :values.",
+
     'min'                  => [
         'numeric' => "L'attributo :attribute deve essere almeno :min.",
         'file'    => "L'attributo :attribute deve avere almeno :min kilobytes.",
         'string'  => "L'attributo :attribute deve essere almeno di :min caratteri.",
         'array'   => "L'attributo :attribute deve avere almento :min elementi.",
     ],
+
     'not_in'               => "L'attributo selezionato :attribute non è valido.",
     'not_regex'            => "Il formato dell'attributo :attribute non è valido.",
     'numeric'              => "L'attributo :attribute deve essere un numero.",
@@ -101,12 +112,14 @@ return [
     'required_without'     => 'Il campo :attribute è richiesto se :values non è presente.',
     'required_without_all' => 'Il campo :attribute è richiesto se nessuno tra :values è presente.',
     'same'                 => 'Gli attributi :attribute e :other devono coincidere.',
+
     'size'                 => [
         'numeric' => "L'attributo :attribute deve essere :size.",
         'file'    => "L'attributo :attribute deve essere di :size kilobytes.",
         'string'  => "L'attributo :attribute deve essere di :size caratteri.",
         'array'   => "L'attributo :attribute deve contenere :size elementi.",
     ],
+
     'string'               => "L'attributo :attribute deve essere una stringa.",
     'timezone'             => "L'attributo :attribute deve essere una zona valida.",
     'unique'               => "L'attributo :attribute è già stato preso.",
