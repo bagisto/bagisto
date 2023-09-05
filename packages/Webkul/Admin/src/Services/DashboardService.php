@@ -278,7 +278,7 @@ class DashboardService
                 'total_qty_invoiced' => $orderItem->total_qty_invoiced,
                 'total_products' => $category->products->count(),
                 'category_id' => $category->id,
-                'name' => $category->translations->where('locale', app()->getLocale())->first()->name,
+                'name' => $category->translations->where('locale', app()->getLocale())->first()?->name,
             ];
         });
     }
