@@ -89,19 +89,19 @@ class ChannelRepository extends Repository
      */
     public function uploadImages($data, $channel, $type = 'logo')
     {
-        if (isset($data[$type])) {
-            foreach ($data[$type] as $imageId => $image) {
-                $file = $type . '.' . $imageId;
-                $dir = 'channel/' . $channel->id;
+        if (request()->hasFile($type)) {
+            $channel->{$type} = current(request()->file($type))->store('channel/' . $channel->id);
 
-                if (request()->hasFile($file)) {
-                    if ($channel->{$type}) {
-                        Storage::delete($channel->{$type});
-                    }
-
-                    $channel->{$type} = request()->file($file)->store($dir);
-                    $channel->save();
+            $channel->save();
+        } else {
+            if (! isset($data[$type])) {
+                if (! empty($data[$type])) {
+                    Storage::delete($channel->{$type});
                 }
+
+                $channel->{$type} = null;
+
+                $channel->save();
             }
         }
     }
