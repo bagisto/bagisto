@@ -906,7 +906,6 @@ return [
                 'select'                => 'انتخابی',
                 'select-type'           => 'نوع ویژگی انتخابی',
                 'save-btn'              => 'ذخیره ویژگی',
-                'select'                => 'انتخابی',
                 'swatch'                => 'نمونه رنگ',
                 'title'                 => 'ویرایش ویژگی',
                 'type'                  => 'نوع ویژگی',
@@ -1060,16 +1059,12 @@ return [
                 'right-column'                     => 'ستون سمت راست',
                 'unassigned-attributes'            => 'ویژگی‌های غیرمتصل',
                 'unassigned-attributes-info'       => 'این ویژگی‌ها را برای اضافه کردن به ستون‌ها یا گروه‌ها بکشید.',
-                'general'                          => 'عمومی',
                 'code'                             => 'کد',
                 'name'                             => 'نام',
                 'enter-code'                       => 'کد را وارد کنید',
                 'enter-name'                       => 'نام را وارد کنید',
                 'column'                           => 'ستون',
-                'main-column'                      => 'ستون اصلی',
-                'right-column'                     => 'ستون سمت راست',
                 'add-group-title'                  => 'افزودن گروه جدید',
-                'add-group-btn'                    => 'افزودن گروه',
                 'group-already-exists'             => 'یک نام گروه ویژگی از قبل وجود دارد.',
                 'select-group'                     => 'لطفاً یک گروه ویژگی انتخاب کنید.',
                 'group-contains-system-attributes' => 'این گروه ویژگی حاوی ویژگی‌های سیستمی است. ابتدا ویژگی‌های سیستمی را به یک گروه دیگر منتقل کرده و دوباره امتحان کنید.',
@@ -1095,10 +1090,7 @@ return [
                 'enter-code'                       => 'کد را وارد کنید',
                 'enter-name'                       => 'نام را وارد کنید',
                 'column'                           => 'ستون',
-                'main-column'                      => 'ستون اصلی',
-                'right-column'                     => 'ستون سمت راست',
                 'add-group-title'                  => 'افزودن گروه جدید',
-                'add-group-btn'                    => 'افزودن گروه',
                 'group-already-exists'             => 'یک نام گروه ویژگی از قبل وجود دارد.',
                 'select-group'                     => 'لطفاً یک گروه ویژگی انتخاب کنید.',
                 'group-contains-system-attributes' => 'این گروه ویژگی حاوی ویژگی‌های سیستمی است. ابتدا ویژگی‌های سیستمی را به یک گروه دیگر منتقل کرده و دوباره امتحان کنید.',
@@ -1751,7 +1743,6 @@ return [
                     'code-suffix'                               => 'پسوند کد',
                     'code-prefix'                               => 'پیشوند کد',
                     'generate'                                  => 'تولید',
-                    'status'                                    => 'وضعیت',
                     'customer-group'                            => 'گروه مشتریان',
                 ],
             
@@ -2148,7 +2139,6 @@ return [
                 'general'        => 'عمومی',
                 'save-btn'       => 'ذخیره منابع موجودی',
                 'back-btn'       => 'بازگشت',
-                'general'        => 'عمومی',
                 'code'           => 'کد',
                 'name'           => 'نام',
                 'description'    => 'توضیحات',
@@ -2430,7 +2420,6 @@ return [
             
             'update-success' => 'کاربر با موفقیت به‌روزرسانی شد.',
             'delete-success' => 'کاربر با موفقیت حذف شد.',            
-
         ],
 
         'roles' => [
@@ -2698,7 +2687,6 @@ return [
                     'review'                             => 'بررسی',
                     'review-info'                        => 'ارزیابی یا ارزیابی چیزی، اغلب شامل نظرات و بازخوردها است.',
                     'allow-guest-review'                 => 'اجازه دادن به بررسی مهمان',
-                    'attribute'                          => 'ویژگی',
                     'attribute-info'                     => 'ویژگی یا ویژگی که یک شیء را تعریف می‌کند و تأثیری بر رفتار، ظاهر یا عملکرد آن دارد.',
                     'image-upload-size'                  => 'اندازه مجاز بارگذاری تصویر (به کیلوبایت)',
                     'file-upload-size'                   => 'اندازه مجاز بارگذاری فایل (به کیلوبایت)',
@@ -2824,8 +2812,6 @@ return [
                     'rate'                      => 'نرخ',
                     'status'                    => 'وضعیت',
                     'type'                      => 'نوع',
-                    'flat-rate-shipping'        => 'حمل و نقل با نرخ ثابت',
-                    'flat-rate-shipping-info'   => 'اطلاعات حمل و نقل با نرخ ثابت',
                 ],
             
                 'payment-methods' => [
@@ -2860,7 +2846,6 @@ return [
                     'client-secret-info'             => 'کلید مخفی خود را اینجا وارد کنید',
                     'accepted-currencies'            => 'ارزهای پذیرفته شده',
                     'accepted-currencies-info'       => 'کدهای ارز را با کاما جدا کنید، مانند USD، INR، ...',
-                    'sandbox'                        => 'منطقه آزمایشی (Sandbox)',
                     'business-account'               => 'حساب تجاری',
                 ],
             
