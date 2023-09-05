@@ -12,13 +12,13 @@ return [
 
         'forget-password' => [
             'create'    =>  [
-                'email'            => 'Registered Email',
-                'email-not-exist'  => 'Email Not Exists',
-                'page-title'       => 'Forget Password',
-                'reset-link-sent'  => 'Reset Password link sent',
-                'sign-in-link'     => 'Back to Sign In ?',
-                'submit-btn'       => 'Reset',
-                'title'            => 'Recover Password',
+                'email'           => 'Registered Email',
+                'email-not-exist' => 'Email Not Exists',
+                'page-title'      => 'Forget Password',
+                'reset-link-sent' => 'Reset Password link sent',
+                'sign-in-link'    => 'Back to Sign In ?',
+                'submit-btn'      => 'Reset',
+                'title'           => 'Recover Password',
             ],
         ],
 
@@ -81,14 +81,11 @@ return [
         'index' => [
             'add-customer'              => 'Add Customer',
             'average-sale'              => 'Average Order Sale',
-            'average-sale'              => 'Average Order Sale',
             'add-product'               => 'Add Product',
             'attribute-code'            => 'Attribute Code',
             'color'                     => 'Color',
             'customer-with-most-sales'  => 'Customer With Most Sales',
             'customer-info'             => 'No Customer Found With Most Sales',
-            'customer-info'             => 'No Customer Found With Most Sales',
-            'date-duration'             => ':start - :end',
             'date-duration'             => ':start - :end',
             'decreased'                 => ':progress%',
             'end-date'                  => 'End Date',
@@ -365,7 +362,6 @@ return [
                 'title'                       => 'Create Refund',
                 'tax-amount'                  => 'Tax Amount',
                 'update-quantity-btn'         => 'Update Quantity',
-
             ],
         ],
 
@@ -376,7 +372,6 @@ return [
                 'datagrid' => [
                     'action'        => 'Actions',
                     'id'            => 'ID',
-                    'invoice-date'  => 'Invoice Date',
                     'invoice-date'  => 'Invoice Date',
                     'grand-total'   => 'Grand Total',
                     'order-id'      => 'Order ID',
@@ -861,6 +856,7 @@ return [
                 'value-per-locale'      => 'Value Per Locale',
                 'value-per-channel'     => 'Value Per Channel',
                 'yes'                   => 'Yes',
+
                 'option'                => [
                     'color'     => 'Color Swatch',
                     'dropdown'  => 'Dropdown',
@@ -1265,7 +1261,6 @@ return [
                     'success'    => 'Group created successfully',
                     'name'       => 'Name',
                     'save-btn'   => 'Save Group',
-                    'title'      => 'Create new Group',
                     'title'      => 'Create new Group',
                 ],
 
@@ -2065,7 +2060,6 @@ return [
                 'delete-failed'      => 'Currency Deleted Failed',
                 'last-delete-error'  => 'At least one Currency is required.',
                 'update-success'     => 'Currency updated successfully.',
-
             ],
         ],
 
@@ -2102,7 +2096,6 @@ return [
                 'update-success'  => 'Exchange Rate Updated Successfully',
                 'delete-success'  => 'Exchange Rate Deleted Successfully',
                 'delete-error'    => 'Exchange Rate Deleted Error'
-
             ],
         ],
 
@@ -2287,7 +2280,6 @@ return [
                 'delete-failed'  => 'Tax rate deleted failed',
                 'delete-success' => 'Tax rate deleted successfully',
                 'update-success' => 'Tax Rate Update Successfully',
-
             ],
         ],
 
@@ -2441,7 +2433,6 @@ return [
 
             'update-success'   => 'User updated successfully.',
             'delete-success'   => 'User deleted successfully.',
-
         ],
 
         'roles' => [
@@ -2713,7 +2704,6 @@ return [
                     'image-upload-size'                  => 'Allowed Image Upload Size (in Kb)',
                     'file-upload-size'                   => 'Allowed File Upload Size (in Kb)',
                     'comma-separated'                    => 'Comma Separated',
-
                 ],
 
                 'rich-snippets' => [
@@ -2751,7 +2741,6 @@ return [
                     'information'        => 'Information',
                     'information-info'   => '"Lines in a street address" refer to individual segments of an address, often separated by commas, providing location information such as house number, street, city, and more.',
                     'street-lines'       => 'Lines in a Street Address',
-
                 ],
 
                 'settings' => [
@@ -2822,7 +2811,6 @@ return [
                     'vat-number'      => 'Vat Number',
                     'contact-number'  => 'Contact Number',
                     'bank-details'    => 'Bank Details',
-
                 ],
 
                 'shipping-methods' => [
@@ -2875,8 +2863,6 @@ return [
                     'accepted-currencies-info'       => 'Add currency code comma separated e.g. USD,INR,...',
                     'sandbox'                        => 'Sandbox',
                     'business-account'               => 'Business Account',
-
-
                 ],
 
                 'order-settings' => [
