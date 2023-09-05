@@ -108,7 +108,7 @@
                                 class="text-[16px] cursor-pointer text-black max-sm:text-[12px]"
                             >
                                 <span>
-                                    @lang('shop::app.customers.login-form.forgot_pass')
+                                    @lang('shop::app.customers.login-form.forgot-pass')
                                 </span>
                             </a>
                         </div>
@@ -127,7 +127,7 @@
                             class="bs-primary-button block w-full max-w-[374px] py-[16px] px-[43px] m-0 ml-[0px] mx-auto rounded-[18px] text-[16px] text-center"
                             type="submit"
                         >
-                            @lang('shop::app.customers.login-form.button_title')
+                            @lang('shop::app.customers.login-form.button-title')
                         </button>
 
                         {!! view_render_event('bagisto.shop.customers.login.after') !!}

@@ -11,14 +11,14 @@ return [
         ],
 
         'forget-password' => [
-            'create'    =>  [
-                'email'            => 'Registered Email',
-                'email-not-exist'  => 'Email Not Exists',
-                'page-title'       => 'Forget Password',
-                'reset-link-sent'  => 'Reset Password link sent',
-                'sign-in-link'     => 'Back to Sign In ?',
-                'submit-btn'       => 'Reset',
-                'title'            => 'Recover Password',
+            'create'    => [
+                'email'           => 'Registered Email',
+                'email-not-exist' => 'Email Not Exists',
+                'page-title'      => 'Forget Password',
+                'reset-link-sent' => 'Reset Password link sent',
+                'sign-in-link'    => 'Back to Sign In ?',
+                'submit-btn'      => 'Reset',
+                'title'           => 'Recover Password',
             ],
         ],
 
@@ -81,14 +81,11 @@ return [
         'index' => [
             'add-customer'              => 'Add Customer',
             'average-sale'              => 'Average Order Sale',
-            'average-sale'              => 'Average Order Sale',
             'add-product'               => 'Add Product',
             'attribute-code'            => 'Attribute Code',
             'color'                     => 'Color',
             'customer-with-most-sales'  => 'Customer With Most Sales',
             'customer-info'             => 'No Customer Found With Most Sales',
-            'customer-info'             => 'No Customer Found With Most Sales',
-            'date-duration'             => ':start - :end',
             'date-duration'             => ':start - :end',
             'decreased'                 => ':progress%',
             'end-date'                  => 'End Date',
@@ -291,7 +288,7 @@ return [
                 'shipping-price'       => 'Shipping Price',
                 'title'                => 'Shipment #:shipment_id',
                 'tracking-number'      => 'Tracking Number',
-            ]
+            ],
         ],
 
         'refunds' => [
@@ -376,7 +373,6 @@ return [
                     'action'       => 'Actions',
                     'id'           => 'ID',
                     'invoice-date' => 'Invoice Date',
-                    'invoice-date' => 'Invoice Date',
                     'grand-total'  => 'Grand Total',
                     'order-id'     => 'Order ID',
                     'overdue'      => 'Overdue',
@@ -450,7 +446,7 @@ return [
             ],
         ],
 
-        'invoice-transaction'  =>  [
+        'invoice-transaction'  => [
             'view'             => 'View',
             'transaction-date' => 'Transaction Date',
             'transaction-id'   => 'Transaction ID',
@@ -459,8 +455,8 @@ return [
 
         'transactions' => [
             'index' => [
-                'create-btn'  => 'Create Transactions',
-                'title'       => 'Transactions',
+                'create-btn' => 'Create Transactions',
+                'title'      => 'Transactions',
 
                 'datagrid' => [
                     'id'                 => 'ID',
@@ -472,7 +468,7 @@ return [
                     'transaction-amount' => 'Amount',
                 ],
 
-                'edit'  =>  [
+                'edit'  => [
                     'already-paid'               => 'Already paid',
                     'invoice-missing'            => 'Invoice Missing',
                     'transaction-amount-zero'    => 'Transaction Amount zero',
@@ -490,7 +486,7 @@ return [
                 'title'         => 'Products',
                 'already-taken' => 'The :name has already been taken.',
 
-                'create'     => [
+                'create' => [
                     'back-btn'                => 'Back',
                     'bundle'                  => 'Bundle',
                     'booking'                 => 'Booking',
@@ -508,7 +504,7 @@ return [
                     'virtual'                 => 'Virtual',
                 ],
 
-                'datagrid'   => [
+                'datagrid' => [
                     'attribute-family'       => 'Attribute Family',
                     'attribute-family-value' => 'Attribute Family - :attribute_family',
                     'active'                 => 'Active',
@@ -889,7 +885,6 @@ return [
                 'decimal'               => 'Decimal',
                 'email'                 => 'Email',
                 'enable-wysiwyg'        => 'Enable Wysiwyg Editor',
-                'enable-wysiwyg'        => 'Enable Wysiwyg Editor',
                 'file'                  => 'File',
                 'general'               => 'General',
                 'is-required'           => 'Is Required',
@@ -911,7 +906,6 @@ return [
                 'select'                => 'Select',
                 'select-type'           => 'Select Attribute Type',
                 'save-btn'              => 'Save Attribute',
-                'select'                => 'Select',
                 'swatch'                => 'Swatch',
                 'title'                 => 'Edit Attribute',
                 'type'                  => 'Attribute Type',
@@ -1065,16 +1059,12 @@ return [
                 'right-column'                     => 'Right Side Column',
                 'unassigned-attributes'            => 'Unassigned Attributes',
                 'unassigned-attributes-info'       => 'Drag these attribute to add into columns or groups.',
-                'general'                          => 'General',
                 'code'                             => 'Code',
                 'name'                             => 'Name',
                 'enter-code'                       => 'Enter Code',
                 'enter-name'                       => 'Enter Name',
                 'column'                           => 'Column',
-                'main-column'                      => 'Main Column',
-                'right-column'                     => 'Right Column',
                 'add-group-title'                  => 'Add New Group',
-                'add-group-btn'                    => 'Add Group',
                 'group-already-exists'             => 'An attribute group name already exists.',
                 'select-group'                     => 'Please select an attribute group.',
                 'group-contains-system-attributes' => 'This group contains system attributes. First move system attributes to another group and try again.',
@@ -1100,10 +1090,7 @@ return [
                 'enter-code'                       => 'Enter Code',
                 'enter-name'                       => 'Enter Name',
                 'column'                           => 'Column',
-                'main-column'                      => 'Main Column',
-                'right-column'                     => 'Right Column',
                 'add-group-title'                  => 'Add New Group',
-                'add-group-btn'                    => 'Add Group',
                 'group-already-exists'             => 'An attribute group name already exists.',
                 'select-group'                     => 'Please select an attribute group.',
                 'group-contains-system-attributes' => 'This group contains system attributes. First move system attributes to another group and try again.',
@@ -1277,7 +1264,7 @@ return [
                     'group-default'  => 'Default Group Can not be Deleted',
                 ],
 
-                'datagrid'  =>  [
+                'datagrid'  => [
                     'code'   => 'Code',
                     'id'     => 'ID',
                     'name'   => 'Name',
@@ -1316,7 +1303,7 @@ return [
                     'update-success' => 'Update Successfully',
                 ],
 
-                'datagrid'   =>  [
+                'datagrid'   => [
                     'customer-names'      => 'Name',
                     'comment'             => 'Comment',
                     'date'                => 'Date',
@@ -1350,7 +1337,7 @@ return [
                 'address-2'          => 'Address 2',
                 'city'               => 'City',
                 'state'              => 'State',
-                'select-country'     => "Select Country",
+                'select-country'     => 'Select Country',
                 'country'            => 'Country',
                 'default-address'    => 'Default Address',
                 'first-name'         => 'First Name',
@@ -1358,7 +1345,6 @@ return [
                 'phone'              => 'Phone',
                 'street-address'     => 'Street Address',
                 'post-code'          => 'Post Code',
-                'default-address'    => 'Default Address',
                 'save-btn-title'     => 'Save Address',
             ],
 
@@ -1370,7 +1356,7 @@ return [
                 'address-2'        => 'Address 2',
                 'city'             => 'City',
                 'state'            => 'State',
-                'select-country'   => "Select Country",
+                'select-country'   => 'Select Country',
                 'country'          => 'Country',
                 'default-address'  => 'Default Address',
                 'first-name'       => 'First Name',
@@ -1378,7 +1364,6 @@ return [
                 'phone'            => 'Phone',
                 'street-address'   => 'Street Address',
                 'post-code'        => 'Post Code',
-                'default-address'  => 'Default Address',
                 'save-btn-title'   => 'Save Address',
             ],
 
@@ -1514,7 +1499,6 @@ return [
                         'edit'    => 'Edit',
                         'delete'  => 'Delete',
                         'actions' => 'Actions',
-
                     ],
 
                     'create'   => [
@@ -1759,7 +1743,6 @@ return [
                     'code-suffix'                               => 'Code Suffix',
                     'code-prefix'                               => 'Code Prefix',
                     'generate'                                  => 'Generate',
-                    'status'                                    => 'Status',
                     'customer-group'                            => 'Customer Group',
                 ],
 
@@ -1879,7 +1862,7 @@ return [
             'cart-rules-coupons' => [
                 'cart-rule-not-defined-error' => 'Cart rule can not be deleted',
                 'success'                     => ':name Successfully Created',
-                'mass-delete-success'         => 'Cart Rule Mass Delete Successfully'
+                'mass-delete-success'         => 'Cart Rule Mass Delete Successfully',
             ],
         ],
 
@@ -1910,10 +1893,10 @@ return [
                     'delete-warning' => 'Are you sure, you want to perform this action?',
                 ],
 
-                'edit'  =>  [
+                'edit'  => [
                     'title'          => 'Edit Sitemap',
                     'success'        => 'Sitemap Updated successfully',
-                    'delete-success' => 'Sitemap Deleted successfully'
+                    'delete-success' => 'Sitemap Deleted successfully',
                 ],
             ],
 
@@ -1944,7 +1927,7 @@ return [
                 'view'                => 'View',
                 'edit'                => 'Edit',
                 'delete'              => 'Delete',
-                'mass-delete-success' => 'Selected Data Deleted Successfully'
+                'mass-delete-success' => 'Selected Data Deleted Successfully',
             ],
         ],
 
@@ -2003,7 +1986,7 @@ return [
                     'delete'    => 'Delete',
                 ],
 
-                'create'  =>  [
+                'create'  => [
                     'code'        => 'Code',
                     'name'        => 'Name',
                     'direction'   => 'Direction',
@@ -2100,7 +2083,7 @@ return [
                 'create-success'  => 'Exchange Rate Created Successfully',
                 'update-success'  => 'Exchange Rate Updated Successfully',
                 'delete-success'  => 'Exchange Rate Deleted Successfully',
-                'delete-error'    => 'Exchange Rate Deleted Error'
+                'delete-error'    => 'Exchange Rate Deleted Error',
             ],
         ],
 
@@ -2156,7 +2139,6 @@ return [
                 'general'        => 'General',
                 'save-btn'       => 'Save Inventory Sources',
                 'back-btn'       => 'Back',
-                'general'        => 'General',
                 'code'           => 'Code',
                 'name'           => 'Name',
                 'description'    => 'Description',
@@ -2222,8 +2204,8 @@ return [
 
                     'create-success'  => 'New Tax Category Created',
                     'update-success'  => 'Tax Category Successfully Updated',
-                    'delete-success' => 'Tax Category Deleted Successfully',
-                    'delete-failed'  => 'Tax Category Deleted Failed',
+                    'delete-success'  => 'Tax Category Deleted Successfully',
+                    'delete-failed'   => 'Tax Category Deleted Failed',
                 ],
             ],
 
@@ -2392,7 +2374,7 @@ return [
                     'role'              => 'Role',
                     'status'            => 'Status',
                     'save-btn'          => 'Save User',
-                    'upload-image-info' => 'Upload a Profile Image (110px X 110px) in PNG or JPG Format'
+                    'upload-image-info' => 'Upload a Profile Image (110px X 110px) in PNG or JPG Format',
                 ],
 
                 'datagrid' => [
@@ -2420,7 +2402,7 @@ return [
                 'last-delete-error'  => 'Last User delete failed',
                 'login-error'        => 'Please check your credentials and try again.',
                 'update-success'     => 'User updated successfully.',
-                'delete-warning'     =>'Are you sure, you want to perform this action?',
+                'delete-warning'     => 'Are you sure, you want to perform this action?',
             ],
 
             'edit'  => [
@@ -2438,7 +2420,6 @@ return [
 
             'update-success' => 'User updated successfully.',
             'delete-success' => 'User deleted successfully.',
-
         ],
 
         'roles' => [
@@ -2446,7 +2427,7 @@ return [
                 'title'      => 'Roles',
                 'create-btn' => 'Create Role',
 
-                'datagrid'  =>  [
+                'datagrid'  => [
                     'delete'          => 'Delete',
                     'edit'            => 'Edit',
                     'id'              => 'Id',
@@ -2504,57 +2485,57 @@ return [
                     'id'         => 'Id',
                     'type'       => 'Type',
                     'name'       => 'Name',
-                ]
+                ],
             ],
 
             'create' => [
-                'title'                         => 'Create Theme',
+                'title'                          => 'Create Theme',
                 'sliders'                        => 'Sliders',
-                'product-carousel'              => 'Product Carousel',
-                'product-carousel-description'  => 'Showcase products elegantly with a dynamic and responsive product carousel.',
-                'category-carousel-description' => 'Display dynamic categories attractively using a responsive category carousel.',
-                'static-content-description'    => 'Improve engagement with concise, informative static content for your audience.',
-                'footer-link-description'       => 'Navigate via footer links for seamless website exploration and information.',
-                'category-carousel'             => 'Category Carousel',
-                'static-content'                => 'Static Content',
-                'footer-link'                   => 'Footer Links',
-                'footer-link-form-title'        => 'Footer Link',
-                'slider-description'            => 'Slider related theme customization.',
-                'slider-add-btn'                => 'Add Slider',
-                'general'                       => 'General',
-                'add-filter-btn'                => 'Add Filter',
-                'save-btn'                      => 'Save',
-                'filter-title'                  => 'Title',
-                'sort'                          => 'Sort',
-                'desc'                          => 'Desc',
-                'asc'                           => 'Asc',
-                'limit'                         => 'Limit',
-                'footer-title'                  => 'Title',
-                'link'                          => 'Link',
-                'add-logo'                      => 'Add Logo',
-                'key'                           => 'Key: :key',
-                'value'                         => 'Value: :value',
-                'delete'                        => 'Delete',
-                'name'                          => 'Name',
-                'sort-order'                    => 'Sort Order',
-                'status'                        => 'Status',
-                'image'                         => 'Image',
-                'create-filter'                 => 'Create Filter',
-                'key-input'                     => 'Key',
-                'value-input'                   => 'Value',
-                'html'                          => 'HTML',
-                'css'                           => 'CSS',
-                'add-footer-link-btn'           => 'Add Footer Link',
-                'filters'                       => 'Filters',
-                'edit'                          => 'Edit',
-                'url'                           => 'Url',
-                'add-link'                      => 'Add Link',
-                'create-slider'                 => 'Create Slider',
-                'slider-image'                  => 'Slider Image',
-                'column'                        => 'Column',
-                'select'                        => 'Select',
-                'back'                          => 'Back',
-             ],
+                'product-carousel'               => 'Product Carousel',
+                'product-carousel-description'   => 'Showcase products elegantly with a dynamic and responsive product carousel.',
+                'category-carousel-description'  => 'Display dynamic categories attractively using a responsive category carousel.',
+                'static-content-description'     => 'Improve engagement with concise, informative static content for your audience.',
+                'footer-link-description'        => 'Navigate via footer links for seamless website exploration and information.',
+                'category-carousel'              => 'Category Carousel',
+                'static-content'                 => 'Static Content',
+                'footer-link'                    => 'Footer Links',
+                'footer-link-form-title'         => 'Footer Link',
+                'slider-description'             => 'Slider related theme customization.',
+                'slider-add-btn'                 => 'Add Slider',
+                'general'                        => 'General',
+                'add-filter-btn'                 => 'Add Filter',
+                'save-btn'                       => 'Save',
+                'filter-title'                   => 'Title',
+                'sort'                           => 'Sort',
+                'desc'                           => 'Desc',
+                'asc'                            => 'Asc',
+                'limit'                          => 'Limit',
+                'footer-title'                   => 'Title',
+                'link'                           => 'Link',
+                'add-logo'                       => 'Add Logo',
+                'key'                            => 'Key: :key',
+                'value'                          => 'Value: :value',
+                'delete'                         => 'Delete',
+                'name'                           => 'Name',
+                'sort-order'                     => 'Sort Order',
+                'status'                         => 'Status',
+                'image'                          => 'Image',
+                'create-filter'                  => 'Create Filter',
+                'key-input'                      => 'Key',
+                'value-input'                    => 'Value',
+                'html'                           => 'HTML',
+                'css'                            => 'CSS',
+                'add-footer-link-btn'            => 'Add Footer Link',
+                'filters'                        => 'Filters',
+                'edit'                           => 'Edit',
+                'url'                            => 'Url',
+                'add-link'                       => 'Add Link',
+                'create-slider'                  => 'Create Slider',
+                'slider-image'                   => 'Slider Image',
+                'column'                         => 'Column',
+                'select'                         => 'Select',
+                'back'                           => 'Back',
+            ],
 
             'edit' => [
                 'title'                         => 'Edit Theme',
@@ -2706,12 +2687,10 @@ return [
                     'review'                             => 'Review',
                     'review-info'                        => 'Evaluation or assessment of something, often involving opinions and feedback.',
                     'allow-guest-review'                 => 'Allow Guest Review',
-                    'attribute'                          =>  'Attribute',
                     'attribute-info'                     => 'Characteristic or property that defines an object, influencing its behavior, appearance, or function.',
                     'image-upload-size'                  => 'Allowed Image Upload Size (in Kb)',
                     'file-upload-size'                   => 'Allowed File Upload Size (in Kb)',
                     'comma-separated'                    => 'Comma Separated',
-
                 ],
 
                 'rich-snippets' => [
@@ -2819,7 +2798,6 @@ return [
                     'vat-number'     => 'Vat Number',
                     'contact-number' => 'Contact Number',
                     'bank-details'   => 'Bank Details',
-
                 ],
 
                 'shipping-methods' => [
@@ -2834,8 +2812,6 @@ return [
                     'rate'                      => 'Rate',
                     'status'                    => 'Status',
                     'type'                      => 'Type',
-                    'flat-rate-shipping'        => 'Flat Rate Shipping',
-                    'flat-rate-shipping-info'   => 'Flat Rate Shipping Information',
                 ],
 
                 'payment-methods' => [
@@ -2870,7 +2846,6 @@ return [
                     'client-secret-info'             => 'Add your secret key here',
                     'accepted-currencies'            => 'Accepted currencies',
                     'accepted-currencies-info'       => 'Add currency code comma separated e.g. USD,INR,...',
-                    'sandbox'                        => 'Sandbox',
                     'business-account'               => 'Business Account',
                 ],
 
@@ -3120,7 +3095,7 @@ return [
         '503' => [
             'title'       => '503 Service Unavailable',
             'description' => 'Oops! Looks like we\'re temporarily down for maintenance. Please check back in a bit.',
-        ]
+        ],
     ],
 
     'export' => [

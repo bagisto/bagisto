@@ -57,7 +57,7 @@
 
                                     <!-- Filter Arrow Icon -->
                                     <i
-                                        class="ml-[5px] text-[16px] text-gray-800 align-text-bottom"
+                                        class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 align-text-bottom"
                                         :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                         v-if="columnGroup.includes(applied.sort.column)"
                                     ></i>

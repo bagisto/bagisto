@@ -160,7 +160,7 @@
 
                         <!-- Draggable Attribute Groups -->
                         <draggable
-                            class="h-[calc(100vh-285px)] pb-[16px] overflow-auto border-r-[1px] border-gray-200"
+                            class="h-[calc(100vh-285px)] pb-[16px] overflow-auto ltr:border-r-[1px] rtl:border-l-[1px] border-gray-200"
                             ghost-class="draggable-ghost"
                             v-bind="{animation: 200}"
                             :list="groups"
@@ -180,7 +180,7 @@
 
                                         <!-- Group Name -->
                                         <div
-                                            class="group_node flex gap-[6px] max-w-max py-[6px] pr-[6px] rounded-[4px] text-gray-600 group cursor-pointer transition-all group-hover:text-gray-800"
+                                            class="group_node flex gap-[6px] max-w-max py-[6px] ltr:pr-[6px] rtl:pl-[6px] rounded-[4px] text-gray-600 group cursor-pointer transition-all group-hover:text-gray-800"
                                             :class="{'bg-blue-600 text-white group-hover:[&>*]:text-white': selectedGroup.id == element.id}"
                                             @click="groupSelected(element)"
                                         >
@@ -223,7 +223,7 @@
 
                                     <!-- Group Attributes -->
                                     <draggable
-                                        class="ml-[43px]"
+                                        class="ltr:ml-[43px] rtl:mr-[43px]"
                                         ghost-class="draggable-ghost"
                                         v-bind="{animation: 200}"
                                         :list="getGroupAttributes(element)"
@@ -234,7 +234,7 @@
                                         v-show="! element.hide"
                                     >
                                         <template #item="{ element, index }">
-                                            <div class="flex gap-[6px] max-w-max py-[6px] pr-[6px] rounded-[4px] text-gray-600 group cursor-pointer">
+                                            <div class="flex gap-[6px] max-w-max py-[6px] ltr:pr-[6px] rtl:pl-[6px] rounded-[4px] text-gray-600 group cursor-pointer">
                                                 <i class="icon-drag text-[20px] transition-all group-hover:text-gray-700"></i>
 
                                                 <i
@@ -295,7 +295,7 @@
                             group="attributes"
                         >
                             <template #item="{ element }">
-                                <div class="flex gap-[6px] max-w-max py-[6px] pr-[6px] rounded-[4px] text-gray-600 group cursor-pointer">
+                                <div class="flex gap-[6px] max-w-max py-[6px] ltr:pr-[6px] rtl:pl-[6px] rounded-[4px] text-gray-600 group cursor-pointer">
                                     <i class="icon-drag text-[20px] transition-all group-hover:text-gray-700"></i>
 
                                     <i class="text-[20px] transition-all group-hover:text-gray-700"></i>

@@ -25,8 +25,8 @@
 
         {{-- Mega Search Bar Vue Component --}}
         <v-mega-search>
-            <div class="flex items-center relative w-[525px] max-w-[525px] ml-[10px]">
-                <i class="icon-search text-[22px] flex items-center absolute left-[12px] top-[6px]"></i>
+            <div class="flex items-center relative w-[525px] max-w-[525px] ltr:ml-[10px] rtl:mr-[10px]">
+                <i class="icon-search text-[22px] flex items-center absolute ltr:left-[12px] rtl:right-[12px] top-[6px]"></i>
 
                 <input 
                     type="text" 
@@ -154,7 +154,7 @@
                         </a>
 
                         @if (count($menuItem['children']))
-                            <div class="{{ $menu->getActive($menuItem) ? ' !grid bg-gray-100' : '' }} hidden min-w-[180px] pl-[40px] pb-[7px] rounded-b-[8px] z-[100]">
+                            <div class="{{ $menu->getActive($menuItem) ? ' !grid bg-gray-100' : '' }} hidden min-w-[180px] ltr:pl-[40px] rtl:pr-[40px] pb-[7px] rounded-b-[8px] z-[100]">
                                 @foreach ($menuItem['children'] as $subMenuItem)
                                     <a
                                         href="{{ $subMenuItem['url'] }}"
@@ -174,8 +174,8 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-mega-search-template">
-        <div class="flex items-center relative w-[525px] max-w-[525px] ml-[10px]">
-            <i class="icon-search text-[22px] flex items-center absolute left-[12px] top-[6px]"></i>
+        <div class="flex items-center relative w-[525px] max-w-[525px] ltr:ml-[10px] rtl:mr-[10px]">
+            <i class="icon-search text-[22px] flex items-center absolute ltr:left-[12px] rtl:right-[12px] top-[6px]"></i>
 
             <input 
                 type="text" 
@@ -514,7 +514,7 @@
                     </span>
                 
                     <span
-                        class="flex justify-center items-center min-w-[20px] h-[20px] absolute top-[-8px] p-[5px] left-[18px] bg-blue-600 rounded-[44px] text-[#fff] text-[10px] font-semibold leading-[9px] cursor-pointer"
+                        class="flex justify-center items-center min-w-[20px] h-[20px] absolute top-[-8px] p-[5px] ltr:left-[18px] rtl:right-[18px] bg-blue-600 rounded-[44px] text-[#fff] text-[10px] font-semibold leading-[9px] cursor-pointer"
                         v-text="totalUnRead"
                         v-if="totalUnRead"
                     >

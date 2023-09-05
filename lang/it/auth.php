@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => 'Queste credenziali non combaciano con i nostri archivi.',
+    'failed'   => 'Queste credenziali non combaciano con i nostri archivi.',
     'throttle' => 'Troppi tentativi di accesso. Ritenta tra :seconds secondi.',
 
 ];

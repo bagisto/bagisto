@@ -320,8 +320,8 @@
                 return this.$h(
                     'div', {
                         class: [
-                            'v-tree-item active inline-block w-full [&>.v-tree-item]:pl-[25px] [&>.v-tree-item]:hidden [&.active>.v-tree-item]:block',
-                            this.hasChildren ? 'has-children' : '!pl-[55px]',
+                            'v-tree-item active inline-block w-full [&>.v-tree-item]:ltr:pl-[25px] [&>.v-tree-item]:rtl:pr-[25px] [&>.v-tree-item]:hidden [&.active>.v-tree-item]:block',
+                            this.hasChildren ? 'has-children' : 'ltr:!pl-[55px] rtl:!pr-[55px]',
                         ],
                     }, [
                         this.generateIcon(),

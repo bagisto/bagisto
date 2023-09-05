@@ -28,7 +28,7 @@
                 @endif
 
                 <span
-                    class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]">
+                    class="absolute bottom-[1px] ltr:left-[1px] rtl:right-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]">
                     {{ $item->product?->images->count() }}
                 </span>
             </div> 

@@ -10,59 +10,8 @@
         </p>
 
         <div class="flex gap-x-[10px] items-center">
-            <!-- Dropdown -->
-            <x-admin::dropdown position="bottom-right">
-                <x-slot:toggle>
-                    <span class="flex icon-setting p-[6px] rounded-[6px] text-[24px]  cursor-pointer transition-all hover:bg-gray-200"></span>
-                </x-slot:toggle>
-
-                <x-slot:content class="w-[174px] max-w-full !p-[8PX] border border-gray-300 rounded-[4px] z-10 bg-white shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)]">
-                    <div class="grid gap-[2px]">
-                        <div class="p-[6px] items-center cursor-pointer transition-all hover:bg-gray-100 hover:rounded-[6px]">
-                            <!-- Export Modal -->
-                            <x-admin::modal ref="exportModal">
-                                <x-slot:toggle>
-                                    <p class="text-gray-600 font-semibold leading-[24px]">
-                                        Export                                            
-                                    </p>
-                                </x-slot:toggle>
-
-                                <x-slot:header>
-                                    <p class="text-[18px] text-gray-800 font-bold">
-                                        @lang('Download')
-                                    </p>
-                                </x-slot:header>
-
-                                <x-slot:content>
-                                    <div class="p-[16px]">
-                                        <x-admin::form action="">
-                                            <x-admin::form.control-group>
-                                                <x-admin::form.control-group.control
-                                                    type="select"
-                                                    name="format"
-                                                    id="format"
-                                                >
-                                                    <option value="xls">XLS</option>
-                                                    <option value="csv">CLS</option>
-                                                </x-admin::form.control-group.control>
-                                            </x-admin::form.control-group>
-                                        </x-admin::form>
-                                    </div>
-                                </x-slot:content>
-                                <x-slot:footer>
-                                    <!-- Save Button -->
-                                    <button
-                                        type="submit" 
-                                        class="primary-button"
-                                    >
-                                        @lang('Export')
-                                    </button>
-                                </x-slot:footer>
-                            </x-admin::modal>
-                        </div>
-                    </div>
-                </x-slot:content>
-            </x-admin::dropdown>
+            <!-- Export Modal -->
+            <x-admin::datagrid.export src="{{ route('admin.customers.customers.index') }}"></x-admin::datagrid.export>
 
             <div class="flex gap-x-[10px] items-center">
                 {{-- Customer Create Vue Component --}}
@@ -87,20 +36,20 @@
                         class="flex gap-[10px] items-center select-none"
                         v-for="(columnGroup, index) in [['full_name', 'email', 'phone'], ['status', 'gender', 'group'], ['total_base_grand_total', 'order_count', 'address_count']]"
                     >
-                        <label 
+                        <label
                             class="flex gap-[4px] items-center w-max cursor-pointer select-none"
                             for="mass_action_select_all_records"
                             v-if="! index"
                         >
-                            <input 
-                                type="checkbox" 
+                            <input
+                                type="checkbox"
                                 name="mass_action_select_all_records"
                                 id="mass_action_select_all_records"
                                 class="hidden peer"
                                 :checked="['all', 'partial'].includes(applied.massActions.meta.mode)"
                                 @change="selectAllRecords"
                             >
-                
+
                             <span
                                 class="icon-uncheckbox cursor-pointer rounded-[6px] text-[24px]"
                                 :class="[
@@ -131,7 +80,7 @@
                             </span>
 
                             <i
-                                class="ml-[5px] text-[16px] text-gray-800 align-text-bottom"
+                                class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 align-text-bottom"
                                 :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                 v-if="columnGroup.includes(applied.sort.column)"
                             ></i>
@@ -154,8 +103,8 @@
                     v-for="record in records"
                 >
                     <div class="flex gap-[10px]">
-                        <input 
-                            type="checkbox" 
+                        <input
+                            type="checkbox"
                             :name="`mass_action_select_record_${record.customer_id}`"
                             :id="`mass_action_select_record_${record.customer_id}`"
                             :value="record.customer_id"
@@ -164,25 +113,25 @@
                             @change="setCurrentSelectionMode"
                         >
 
-                        <label 
+                        <label
                             class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
                             :for="`mass_action_select_record_${record.customer_id}`"
                         >
                         </label>
                         <div class="flex flex-col gap-[6px]">
-                            <p 
-                                class="text-[16px] text-gray-800 font-semibold" 
+                            <p
+                                class="text-[16px] text-gray-800 font-semibold"
                                 v-text="record.full_name"
                             >
                             </p>
 
-                            <p 
-                                class="text-gray-600" 
+                            <p
+                                class="text-gray-600"
                                 v-text="record.email"
                             >
                             </p>
 
-                            <p 
+                            <p
                                 class="text-gray-600"
                                 v-text="record.phone ?? 'N/A'"
                             >
@@ -210,13 +159,13 @@
                             </span>
                         </div>
 
-                        <p 
+                        <p
                             class="text-gray-600"
                             v-text="record.gender ?? 'N/A'"
                         >
                         </p>
 
-                        <p 
+                        <p
                             class="text-gray-600"
                             v-text="record.group ?? 'N/A'"
                         >
@@ -225,12 +174,12 @@
 
                     <div class="flex gap-x-[16px] justify-between items-center">
                         <div class="flex flex-col gap-[6px]">
-                            <p 
-                                class="text-[16px] text-gray-800 font-semibold" 
+                            <p
+                                class="text-[16px] text-gray-800 font-semibold"
                                 v-text="$admin.formatPrice(record.total_base_grand_total)"
                             >
                             </p>
-                            
+
                             <p class="text-gray-600">
                                 @{{ "@lang('admin::app.customers.index.datagrid.order')".replace(':order', record.order_count) }}
                             </p>
@@ -239,19 +188,20 @@
                                 @{{ "@lang('admin::app.customers.index.datagrid.address')".replace(':address', record.address_count) }}
                             </p>
                         </div>
+
                         <div class="flex items-center">
-                            <a 
-                                class="icon-login text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"
+                            <a
+                                class="icon-login text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"
                                 :href=`{{ route('admin.customers.customers.login_as_customer', '') }}/${record.customer_id}`
                             >
                             </a>
 
-                            <a 
-                                class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"
+                            <a
+                                class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"
                                 :href=`{{ route('admin.customers.customers.view', '') }}/${record.customer_id}`
                             >
                             </a>
-                        </div>    
+                        </div>
                     </div>
                 </div>
             </template>
@@ -288,9 +238,9 @@
                                 <!-- Modal Header -->
                                 <p class="text-[18px] text-gray-800 font-bold">
                                     @lang('admin::app.customers.index.create.title')
-                                </p>    
+                                </p>
                             </x-slot:header>
-            
+
                             <x-slot:content>
                                 <!-- Modal Content -->
                                 {!! view_render_event('bagisto.admin.customers.create.before') !!}
@@ -302,39 +252,39 @@
                                             <x-admin::form.control-group.label class="required">
                                                 @lang('admin::app.customers.index.create.first-name')
                                             </x-admin::form.control-group.label>
-                
+
                                             <x-admin::form.control-group.control
                                                 type="text"
-                                                name="first_name" 
-                                                id="first_name" 
+                                                name="first_name"
+                                                id="first_name"
                                                 rules="required"
                                                 :label="trans('admin::app.customers.index.create.first-name')"
                                                 :placeholder="trans('admin::app.customers.index.create.first-name')"
                                             >
                                             </x-admin::form.control-group.control>
-                
+
                                             <x-admin::form.control-group.error
                                                 control-name="first_name"
                                             >
                                             </x-admin::form.control-group.error>
                                         </x-admin::form.control-group>
-        
+
                                         <!-- Last Name -->
                                         <x-admin::form.control-group class="w-full mb-[10px]">
                                             <x-admin::form.control-group.label class="required">
                                                 @lang('admin::app.customers.index.create.last-name')
                                             </x-admin::form.control-group.label>
-                
+
                                             <x-admin::form.control-group.control
                                                 type="text"
-                                                name="last_name" 
+                                                name="last_name"
                                                 id="last_name"
                                                 rules="required"
                                                 :label="trans('admin::app.customers.index.create.last-name')"
                                                 :placeholder="trans('admin::app.customers.index.create.last-name')"
                                             >
                                             </x-admin::form.control-group.control>
-                
+
                                             <x-admin::form.control-group.error
                                                 control-name="last_name"
                                             >
@@ -347,7 +297,7 @@
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.customers.index.create.email')
                                         </x-admin::form.control-group.label>
-            
+
                                         <x-admin::form.control-group.control
                                             type="email"
                                             name="email"
@@ -357,7 +307,7 @@
                                             placeholder="email@example.com"
                                         >
                                         </x-admin::form.control-group.control>
-            
+
                                         <x-admin::form.control-group.error
                                             control-name="email"
                                         >
@@ -369,7 +319,7 @@
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.customers.index.create.contact-number')
                                         </x-admin::form.control-group.label>
-            
+
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="phone"
@@ -379,40 +329,40 @@
                                             :placeholder="trans('admin::app.customers.index.create.contact-number')"
                                         >
                                         </x-admin::form.control-group.control>
-            
+
                                         <x-admin::form.control-group.error
                                             control-name="phone"
                                         >
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
-            
+
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.customers.index.create.date-of-birth')
                                         </x-admin::form.control-group.label>
-            
+
                                         <x-admin::form.control-group.control
                                             type="date"
-                                            name="date_of_birth" 
+                                            name="date_of_birth"
                                             id="dob"
                                             :label="trans('admin::app.customers.index.create.date-of-birth')"
                                             :placeholder="trans('admin::app.customers.index.create.date-of-birth')"
                                         >
                                         </x-admin::form.control-group.control>
-            
+
                                         <x-admin::form.control-group.error
                                             control-name="date_of_birth"
                                         >
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
-            
+
                                     <div class="flex gap-[16px] max-sm:flex-wrap">
                                         <!-- Gender -->
                                         <x-admin::form.control-group class="w-full">
-                                            <x-admin::form.control-group.label class="required"> 
+                                            <x-admin::form.control-group.label class="required">
                                                 @lang('admin::app.customers.index.create.gender')
                                             </x-admin::form.control-group.label>
-                
+
                                             <x-admin::form.control-group.control
                                                 type="select"
                                                 name="gender"
@@ -423,7 +373,7 @@
                                                 <option value="Male">
                                                     @lang('admin::app.customers.index.create.male')
                                                 </option>
-                                                
+
                                                 <option value="Female">
                                                     @lang('admin::app.customers.index.create.female')
                                                 </option>
@@ -432,7 +382,7 @@
                                                     @lang('admin::app.customers.index.create.other')
                                                 </option>
                                             </x-admin::form.control-group.control>
-                
+
                                             <x-admin::form.control-group.error
                                                 control-name="gender"
                                             >
@@ -444,7 +394,7 @@
                                             <x-admin::form.control-group.label>
                                                 @lang('admin::app.customers.index.create.customer-group')
                                             </x-admin::form.control-group.label>
-                
+
                                             <x-admin::form.control-group.control
                                                 type="select"
                                                 name="customer_group_id"
@@ -455,7 +405,7 @@
                                                     <option value="{{ $group->id }}"> {{ $group->name}} </option>
                                                 @endforeach
                                             </x-admin::form.control-group.control>
-                
+
                                             <x-admin::form.control-group.error
                                                 control-name="customer_group_id"
                                             >
@@ -467,12 +417,12 @@
 
                                 </div>
                             </x-slot:content>
-            
+
                             <x-slot:footer>
                                 <!-- Modal Submission -->
                                 <div class="flex gap-x-[10px] items-center">
                                     <!-- Save Button -->
-                                    <button 
+                                    <button
                                         type="submit"
                                         class="primary-button"
                                     >
@@ -492,7 +442,7 @@
 
                 methods: {
                     create(params, { resetForm, setErrors }) {
-                    
+
                         this.$axios.post("{{ route('admin.customers.customers.store') }}", params)
                             .then((response) => {
                                 this.$refs.customerCreateModal.close();

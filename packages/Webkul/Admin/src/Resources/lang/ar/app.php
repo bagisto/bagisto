@@ -81,14 +81,11 @@ return [
         'index' => [
             'add-customer'              => 'إضافة عميل',
             'average-sale'              => 'متوسط مبيعات الطلبات',
-            'average-sale'              => 'متوسط مبيعات الطلبات',
             'add-product'               => 'إضافة منتج',
             'attribute-code'            => 'رمز السمة',
             'color'                     => 'لون',
             'customer-with-most-sales'  => 'العميل الذي قام بأكبر عدد من البيع',
             'customer-info'             => 'لم يتم العثور على عملاء بأكبر مبيعات',
-            'customer-info'             => 'لم يتم العثور على عملاء بأكبر مبيعات',
-            'date-duration'             => ':start - :end',
             'date-duration'             => ':start - :end',
             'decreased'                 => ':progress%',
             'end-date'                  => 'تاريخ الانتهاء',
@@ -365,7 +362,6 @@ return [
                 'title'                       => 'إنشاء استرداد',
                 'tax-amount'                  => 'مبلغ الضريبة',
                 'update-quantity-btn'         => 'تحديث الكمية',
-
             ],
         ],
 
@@ -889,7 +885,6 @@ return [
                 'decimal'                => 'عشري',
                 'email'                  => 'بريد إلكتروني',
                 'enable-wysiwyg'         => 'تمكين محرر WYSIWYG',
-                'enable-wysiwyg'         => 'تمكين محرر WYSIWYG',
                 'file'                   => 'ملف',
                 'general'                => 'عام',
                 'is-required'            => 'مطلوب',
@@ -911,7 +906,6 @@ return [
                 'select'                 => 'اختيار',
                 'select-type'            => 'نوع السمة المختارة',
                 'save-btn'               => 'حفظ السمة',
-                'select'                 => 'اختيار',
                 'swatch'                 => 'Swatch',
                 'title'                  => 'تحرير السمة',
                 'type'                   => 'نوع السمة',
@@ -1065,16 +1059,12 @@ return [
                 'right-column'                     => 'العمود الجانبي الأيمن',
                 'unassigned-attributes'            => 'السمات غير المخصصة',
                 'unassigned-attributes-info'       => 'اسحب هذه السمات لإضافتها إلى الأعمدة أو المجموعات.',
-                'general'                          => 'عام',
                 'code'                             => 'الكود',
                 'name'                             => 'الاسم',
                 'enter-code'                       => 'أدخل الكود',
                 'enter-name'                       => 'أدخل الاسم',
                 'column'                           => 'العمود',
-                'main-column'                      => 'العمود الرئيسي',
-                'right-column'                     => 'العمود الجانبي الأيمن',
                 'add-group-title'                  => 'إضافة مجموعة جديدة',
-                'add-group-btn'                    => 'إضافة مجموعة',
                 'group-already-exists'             => 'اسم مجموعة السمات موجود بالفعل.',
                 'select-group'                     => 'الرجاء تحديد مجموعة السمات.',
                 'group-contains-system-attributes' => 'هذه المجموعة تحتوي على سمات النظام. قم أولاً بنقل سمات النظام إلى مجموعة أخرى وحاول مرة أخرى.',
@@ -1100,10 +1090,7 @@ return [
                 'enter-code'                       => 'أدخل الكود',
                 'enter-name'                       => 'أدخل الاسم',
                 'column'                           => 'العمود',
-                'main-column'                      => 'العمود الرئيسي',
-                'right-column'                     => 'العمود الجانبي الأيمن',
                 'add-group-title'                  => 'إضافة مجموعة جديدة',
-                'add-group-btn'                    => 'إضافة مجموعة',
                 'group-already-exists'             => 'اسم مجموعة السمات موجود بالفعل.',
                 'select-group'                     => 'الرجاء تحديد مجموعة السمات.',
                 'group-contains-system-attributes' => 'هذه المجموعة تحتوي على سمات النظام. قم أولاً بنقل سمات النظام إلى مجموعة أخرى وحاول مرة أخرى.',
@@ -1358,7 +1345,6 @@ return [
                 'phone'              => 'الهاتف',
                 'street-address'     => 'عنوان الشارع',
                 'post-code'          => 'الرمز البريدي',
-                'default-address'    => 'العنوان الافتراضي',
                 'save-btn-title'     => 'حفظ العنوان',
             ],
         
@@ -1378,7 +1364,6 @@ return [
                 'phone'           => 'الهاتف',
                 'street-address'  => 'عنوان الشارع',
                 'post-code'       => 'الرمز البريدي',
-                'default-address' => 'العنوان الافتراضي',
                 'save-btn-title'  => 'حفظ العنوان',
             ],
         
@@ -1514,7 +1499,6 @@ return [
                         'edit'    => 'تعديل',
                         'delete'  => 'حذف',
                         'actions' => 'إجراءات',
-            
                     ],
             
                     'create'   => [
@@ -1759,7 +1743,6 @@ return [
                     'code-suffix'                               => 'لاحقة الكود',
                     'code-prefix'                               => 'بادئة الكود',
                     'generate'                                  => 'إنشاء',
-                    'status'                                    => 'الحالة',
                     'customer-group'                            => 'مجموعة العملاء',
                 ],
         
@@ -2156,7 +2139,6 @@ return [
                 'general'           => 'عام',
                 'save-btn'          => 'حفظ مصادر المخزون',
                 'back-btn'          => 'عودة',
-                'general'           => 'عام',
                 'code'              => 'الكود',
                 'name'              => 'الاسم',
                 'description'       => 'الوصف',
@@ -2705,12 +2687,10 @@ return [
                     'review'                             => 'استعراض',
                     'review-info'                        => 'تقييم أو تقدير لشيء ما، يشمل غالبًا الآراء والملاحظات.',
                     'allow-guest-review'                 => 'السماح بالاستعراض من قبل الزوار',
-                    'attribute'                          => 'السمة',
                     'attribute-info'                     => 'صفة أو خاصية تعرف كائنًا ما، وتؤثر على سلوكه أو مظهره أو وظيفته.',
                     'image-upload-size'                  => 'حجم الصورة المسموح به للرفع (بالكيلوبايت)',
                     'file-upload-size'                   => 'حجم الملف المسموح به للرفع (بالكيلوبايت)',
                     'comma-separated'                    => 'مفصولة بالفاصلة',
-            
                 ],
             
                 'rich-snippets' => [
@@ -2818,7 +2798,6 @@ return [
                     'vat-number'      => 'رقم القيمة المضافة',
                     'contact-number'  => 'رقم الاتصال',
                     'bank-details'    => 'تفاصيل البنك',
-            
                 ],
             
                 'shipping-methods' => [
@@ -2833,8 +2812,6 @@ return [
                     'rate'                      => 'السعر',
                     'status'                    => 'الحالة',
                     'type'                      => 'النوع',
-                    'flat-rate-shipping'        => 'الشحن بسعر ثابت',
-                    'flat-rate-shipping-info'   => 'معلومات الشحن بسعر ثابت',
                 ],
             
                 'payment-methods' => [
@@ -2869,9 +2846,7 @@ return [
                     'client-secret-info'             => 'أضف مفتاحك السري هنا',
                     'accepted-currencies'            => 'العملات المقبولة',
                     'accepted-currencies-info'       => 'أضف رمز العملة مفصولًا بفاصلة مثل USD, INR، ...',
-                    'sandbox'                        => 'وضع التجربة',
                     'business-account'               => 'حساب تجاري',
-            
                 ],
             
                 'order-settings' => [

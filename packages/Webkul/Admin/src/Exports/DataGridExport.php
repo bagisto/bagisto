@@ -18,21 +18,20 @@ class DataGridExport implements FromView, ShouldAutoSize
     {
     }
 
-     /**
+    /**
      * function to create a blade view for export.
-     *
      */
     public function view(): View
     {
         $columns = [];
 
-        foreach($this->gridData as $key => $gridData) {
+        foreach ($this->gridData as $key => $gridData) {
             $columns = array_keys((array) $gridData);
 
             break;
         }
 
-        return view('admin::export.temp', [
+        return view('admin::components.datagrid.export.temp', [
             'columns' => $columns,
             'records' => $this->gridData,
         ]);

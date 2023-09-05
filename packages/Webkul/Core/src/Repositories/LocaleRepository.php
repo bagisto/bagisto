@@ -2,6 +2,7 @@
 
 namespace Webkul\Core\Repositories;
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\Repository;
@@ -90,26 +91,26 @@ class LocaleRepository extends Repository
     public function uploadImage($localeImages, $locale)
     {
         if (! isset($localeImages['logo_path'])) {
-            Storage::delete((string) $locale->logo_path);
+            if (! empty($localeImages['logo_path'])) {
+                Storage::delete((string) $locale->logo_path);
 
-            $locale->logo_path = null;
+                $locale->logo_path = null;
 
-            $locale->save();
+                $locale->save();
+            }
 
             return;
         }
         
         foreach ($localeImages['logo_path'] as $image) {
-            if (is_string($image)) {
-                continue;
+            if ($image instanceof UploadedFile) {
+                $locale->logo_path = $image->storeAs(
+                    'locales',
+                    $locale->code . '.' . $image->getClientOriginalExtension()
+                );
+    
+                $locale->save();
             }
-            
-            $locale->logo_path = $image->storeAs(
-                'locales',
-                $locale->code . '.' . $image->getClientOriginalExtension()
-            );
-
-            $locale->save();
         }
     }
 }

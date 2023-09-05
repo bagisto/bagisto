@@ -184,7 +184,7 @@
 
                                 <a 
                                     href="{{ route('admin.sales.orders.view', $order->id) }}" 
-                                    class="icon-sort-right text-[24px] ml-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"
+                                    class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"
                                 >
                                 </a>
                             </div>
@@ -369,7 +369,7 @@
                                     </p>
                                 </div>
 
-                                <span class="icon-sort-right text-[24px] ml-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"></span>
+                                <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"></span>
                             </div>
                         </div>
 

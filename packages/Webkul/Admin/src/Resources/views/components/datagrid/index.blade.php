@@ -202,6 +202,15 @@
 
                             this.updateDatagrids();
 
+                           /**
+                            * This event should be fired at the end, but only in the GET method. This allows the export feature to listen to it
+                            * and update its properties accordingly.
+                            */
+                            this.$emitter.emit('change-datagrid', {
+                                available: this.available,
+                                applied: this.applied
+                            });
+
                             this.isLoading = false;
                         });
                 },

@@ -7,7 +7,7 @@
             <div class="shimmer w-[262px] h-[38px]"></div>
 
             <!-- Information Panel -->
-            <div class="pl-[10px]">
+            <div class="ltr:pl-[10px] rtl:pr-[10px]">
                 <p class="shimmer w-[75px] h-[17px]"></p>
             </div>
         </div>

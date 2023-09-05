@@ -67,7 +67,7 @@
 
                                 <!-- Filter Arrow Icon -->
                                 <i
-                                    class="ml-[5px] text-[16px] text-gray-800 align-text-bottom"
+                                    class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 align-text-bottom"
                                     :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                     v-if="columnGroup.includes(applied.sort.column)"
                                 ></i>
@@ -308,12 +308,10 @@
 
                         this.$axios.get(`{{ route('admin.settings.locales.edit', '') }}/${id}`)
                             .then((response) => {
-                                this.locale.image = [];
-
                                 this.locale = {
                                     ...response.data.data,
                                         image: response.data.data.logo_path
-                                        ? [{ id: 'image', url: response.data.data.logo_url }]
+                                        ? [{ id: '', url: response.data.data.logo_url }]
                                         : [],
                                 };
 

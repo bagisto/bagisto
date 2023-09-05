@@ -471,7 +471,7 @@
                                                 @endif
 
 
-                                                <span class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]">
+                                                <span class="absolute bottom-[1px] ltr:left-[1px] rtl:right-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]">
                                                     {{ $orderItem->product->images->count() }}
                                                 </span>
                                             </div>
@@ -494,7 +494,7 @@
 
                                     {{-- View More Icon --}}
                                     <a href="{{ route('admin.sales.orders.view', $item->id) }}">
-                                        <span class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"></span>
+                                        <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"></span>
                                     </a>
                                 </div>
                             </div>
@@ -575,7 +575,7 @@
 
                                     {{-- View More Icon --}}
                                     <a href="{{ route('admin.catalog.products.edit', $item->product_id) }}">
-                                        <span class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"></span>
+                                        <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"></span>
                                     </a>
                                 </div>
                             </div>
@@ -814,7 +814,7 @@
                                     <div class="flex flex-col">
                                         <p
                                             class="text-gray-600 font-semibold"
-                                            v-text="item.customer_full_name ?? item?.customer_first_name + ' ' + item?.customer_last_name"
+                                            v-text="item.customer_first_name + ' ' + item.customer_last_name"
                                         >
                                         </p>
 
@@ -846,7 +846,7 @@
                                 <div class="flex flex-col">
                                     <p
                                         class="text-gray-600 font-semibold"
-                                        v-text="item.customer_full_name ?? item.first_name + ' ' + item.last_name"
+                                        v-text="item.customer_first_name + ' ' + item.customer_last_name"
                                     >
                                     </p>
 
