@@ -308,12 +308,10 @@
 
                         this.$axios.get(`{{ route('admin.settings.locales.edit', '') }}/${id}`)
                             .then((response) => {
-                                this.locale.image = [];
-
                                 this.locale = {
                                     ...response.data.data,
                                         image: response.data.data.logo_path
-                                        ? [{ id: 'image', url: response.data.data.logo_url }]
+                                        ? [{ id: '', url: response.data.data.logo_url }]
                                         : [],
                                 };
 
