@@ -1,6 +1,6 @@
 <script
-type="text/x-template"
-id="export-form-template"
+    type="text/x-template"
+    id="export-form-template"
 >
     <form method="POST" action="{{ route('admin.datagrid.export', ['locale' => core()->getRequestedLocaleCode()]) }}" @submit.prevent="onSubmit">
         <div class="page-content">
@@ -13,19 +13,24 @@ id="export-form-template"
 
                 <div class="control-group">
                     <label for="format" class="required">
-                        {{ __('admin::app.export.format') }}
+                        @lang('admin::app.export.format')
                     </label>
 
                     <select name="format" class="control" v-validate="'required'">
-                        <option value="xls">{{ __('admin::app.export.xls') }}</option>
-                        <option value="csv">{{ __('admin::app.export.csv') }}</option>
+                        <option value="xls">
+                            @lang('admin::app.export.xls')
+                        </option>
+
+                        <option value="csv">
+                            @lang('admin::app.export.csv')
+                        </option>
                     </select>
                 </div>
             </div>
         </div>
 
         <button type="submit" class="btn btn-lg btn-primary">
-            {{ __('admin::app.export.export') }}
+            @lang('admin::app.export.export')
         </button>
     </form>
 </script>

@@ -254,87 +254,114 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <!-- Password -->
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.users.index.create.password')
-                                    </x-admin::form.control-group.label>
-        
-                                    <x-admin::form.control-group.control
-                                        type="password"
-                                        name="password"
-                                        id="password" 
-                                        ref="password"
-                                        rules="required|min:6"
-                                        :label="trans('admin::app.settings.users.index.create.password')"
-                                        :placeholder="trans('admin::app.settings.users.index.create.password')"
-                                        v-model="data.user.password"
-                                    >
-                                    </x-admin::form.control-group.control>
-        
-                                    <x-admin::form.control-group.error
-                                        control-name="password"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
+                                <div class="flex gap-[16px]">
+                                    <!-- Password -->
+                                    <x-admin::form.control-group class="flex-1 mb-[10px]">
+                                        <x-admin::form.control-group.label class="required">
+                                            @lang('admin::app.settings.users.index.create.password')
+                                        </x-admin::form.control-group.label>
+            
+                                        <x-admin::form.control-group.control
+                                            type="password"
+                                            name="password"
+                                            id="password" 
+                                            ref="password"
+                                            rules="required|min:6"
+                                            :label="trans('admin::app.settings.users.index.create.password')"
+                                            :placeholder="trans('admin::app.settings.users.index.create.password')"
+                                            v-model="data.user.password"
+                                        >
+                                        </x-admin::form.control-group.control>
+            
+                                        <x-admin::form.control-group.error
+                                            control-name="password"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+    
+                                    <!-- Confirm Password -->
+                                    <x-admin::form.control-group class="flex-1 mb-[10px]">
+                                        <x-admin::form.control-group.label class="required">
+                                            @lang('admin::app.settings.users.index.create.confirm-password')
+                                        </x-admin::form.control-group.label>
+            
+                                        <x-admin::form.control-group.control
+                                            type="password"
+                                            name="password_confirmation"
+                                            id="password_confirmation" 
+                                            rules="confirmed:@password"
+                                            :label="trans('admin::app.settings.users.index.create.password')"
+                                            :placeholder="trans('admin::app.settings.users.index.create.confirm-password')"
+                                            v-model="data.user.password_confirmation"
+                                        >
+                                        </x-admin::form.control-group.control>
+            
+                                        <x-admin::form.control-group.error
+                                            control-name="password_confirmation"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+                                </div>
 
-                                <!-- Confirm Password -->
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.users.index.create.confirm-password')
-                                    </x-admin::form.control-group.label>
-        
-                                    <x-admin::form.control-group.control
-                                        type="password"
-                                        name="password_confirmation"
-                                        id="password_confirmation" 
-                                        rules="confirmed:@password"
-                                        :label="trans('admin::app.settings.users.index.create.password')"
-                                        :placeholder="trans('admin::app.settings.users.index.create.confirm-password')"
-                                        v-model="data.user.password_confirmation"
-                                    >
-                                    </x-admin::form.control-group.control>
-        
-                                    <x-admin::form.control-group.error
-                                        control-name="password_confirmation"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
+                                <div class="flex gap-[16px]">
 
-                                <!-- Role -->
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.users.index.create.role')
-                                    </x-admin::form.control-group.label>
+                                    <!-- Role -->
+                                    <x-admin::form.control-group class="flex-1 w-full mb-[10px]">
+                                        <x-admin::form.control-group.label class="required">
+                                            @lang('admin::app.settings.users.index.create.role')
+                                        </x-admin::form.control-group.label>
 
-                                    <v-field
-                                        name="role_id" 
-                                        rules="required"
-                                        label="@lang('admin::app.settings.users.index.create.role')"
-                                        v-model="data.user.role_id"
-                                    >
-                                        <select
+                                        <v-field
                                             name="role_id" 
-                                            class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
-                                            :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                            rules="required"
+                                            label="@lang('admin::app.settings.users.index.create.role')"
                                             v-model="data.user.role_id"
                                         >
-                                            <option value="" disabled>@lang('admin::app.settings.taxes.categories.index.create.select')</option>
-
-                                            <option 
-                                                v-for="role in roles"
-                                                :value="role.id"
-                                                :text="role.name"
+                                            <select
+                                                name="role_id" 
+                                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                                :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                                v-model="data.user.role_id"
                                             >
-                                            </option>
-                                        </select>
-                                    </v-field>
-        
-                                    <x-admin::form.control-group.error
-                                        control-name="role_id"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
+                                                <option value="" disabled>@lang('admin::app.settings.taxes.categories.index.create.select')</option>
+
+                                                <option 
+                                                    v-for="role in roles"
+                                                    :value="role.id"
+                                                    :text="role.name"
+                                                >
+                                                </option>
+                                            </select>
+                                        </v-field>
+            
+                                        <x-admin::form.control-group.error
+                                            control-name="role_id"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+
+                                    <!-- Status -->
+                                    <x-admin::form.control-group class="w-full flex-1 !mb-[0px]">
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.settings.users.index.create.status')
+                                        </x-admin::form.control-group.label>
+
+                                        <div class="gap-[10px] w-full mt-[10px]">    
+                                            <x-admin::form.control-group.control
+                                                type="switch"
+                                                name="status"
+                                                ::checked="data.user.status"
+                                                v-model="data.user.status"
+                                            >
+                                            </x-admin::form.control-group.control>
+            
+                                            <x-admin::form.control-group.error
+                                                control-name="status"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </div>
+                                    </x-admin::form.control-group>
+                                </div>
 
                                 <x-admin::form.control-group>
                                     <x-admin::media.images
@@ -346,25 +373,6 @@
                                     <p class="required my-3 text-[14px] text-gray-400">
                                         @lang('admin::app.settings.users.index.create.upload-image-info')
                                     </p>
-                                </x-admin::form.control-group>
-
-                                <x-admin::form.control-group class="!mb-[0px]">
-                                    <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.users.index.create.status')
-                                    </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.control
-                                        type="switch"
-                                        name="status"
-                                        ::checked="data.user.status"
-                                        v-model="data.user.status"
-                                    >
-                                    </x-admin::form.control-group.control>
-        
-                                    <x-admin::form.control-group.error
-                                        control-name="status"
-                                    >
-                                    </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
                             </div>
                         </x-slot:content>

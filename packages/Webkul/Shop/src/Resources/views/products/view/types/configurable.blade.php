@@ -171,7 +171,7 @@
                                 class="text-gray-600 text-sm max-sm:text-[12px]"
                                 v-if="! attribute.options.length"
                             >
-                                {{ __('shop::app.products.view.type.configurable.select-above-options') }}
+                                @lang('shop::app.products.view.type.configurable.select-above-options')
                             </span>
                         </div>
                     </template>
@@ -326,7 +326,7 @@
 
                         attribute.options = [{
                             'id': '',
-                            'label': "{{ __('shop::app.products.view.type.configurable.select-options') }}",
+                            'label': "{{ trans('shop::app.products.view.type.configurable.select-options') }}",
                             'products': []
                         }];
 

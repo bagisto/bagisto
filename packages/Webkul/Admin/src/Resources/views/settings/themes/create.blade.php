@@ -14,6 +14,15 @@
             </p>
             
             <div class="flex gap-x-[10px] items-center">
+                <div class="flex gap-x-[10px] items-center">
+                    <a 
+                        href="{{ route('admin.theme.index') }}"
+                        class="transparent-button hover:bg-gray-200"
+                    > 
+                        @lang('admin::app.settings.themes.create.back')
+                    </a>
+                </div>
+
                 <button 
                     type="submit"
                     class="primary-button"
@@ -195,7 +204,12 @@
                                 <input type="hidden" :name="'options['+ index +'][link]'" :value="image.link" />    
                             
                                 <!-- Details -->
-                                <div class="flex gap-[10px] justify-between  border-b-[1px] py-5 border-slate-300 cursor-pointer">
+                                <div 
+                                    class="flex gap-[10px] justify-between py-5 cursor-pointer"
+                                    :class="{
+                                        'border-b-[1px] border-slate-300': index < sliders.length - 1
+                                    }"
+                                >
                                     <div class="flex gap-[10px]">
                                         <div class="grid gap-[6px] place-content-start">
                                             <p class="text-gray-600">
@@ -233,7 +247,7 @@
                                                 class="text-red-600 cursor-pointer transition-all hover:underline"
                                                 @click="remove(image)"
                                             > 
-                                                @lang('admin::app.settings.themes.edit.delete')
+                                                @lang('admin::app.settings.themes.create.delete')
                                             </p>
                                         </div>
                                     </div>
@@ -392,7 +406,7 @@
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="link"
-                                            rules="required"
+                                            rules="required|url"
                                             :label="trans('admin::app.settings.themes.create.link')"
                                             :placeholder="trans('admin::app.settings.themes.create.link')"
                                         >
@@ -555,13 +569,18 @@
                         <div v-if="options.filters.length">
                             <div
                                 class="grid"
-                                v-for="filter in options.filters"
+                                v-for="(filter, index) in options.filters"
                             >
                                 <!-- Hidden Input -->
                                 <input type="hidden" :name="'options[filters][' + filter.key +']'" :value="filter.value"> 
                             
                                 <!-- Details -->
-                                <div class="flex gap-[10px] justify-between  border-b-[1px] py-5 border-slate-300 cursor-pointer">
+                                <div 
+                                    class="flex gap-[10px] justify-between py-5 cursor-pointer"
+                                    :class="{
+                                        'border-b-[1px] border-slate-300': index < options.filters.length - 1
+                                    }"
+                                >
                                     <div class="flex gap-[10px]">
                                         <div class="grid gap-[6px] place-content-start">
                                             <p class="text-gray-600">
@@ -583,7 +602,7 @@
                                                 class="text-red-600 cursor-pointer transition-all hover:underline"
                                                 @click="remove(filter)"
                                             > 
-                                                @lang('admin::app.settings.themes.edit.delete')
+                                                @lang('admin::app.settings.themes.create.delete')
                                             </p>
                                         </div>
                                     </div>
@@ -906,13 +925,18 @@
                         <div v-if="options.filters.length">
                             <div
                                 class="grid"
-                                v-for="filter in options.filters"
+                                v-for="(filter, index) in options.filters"
                             >
                                 <!-- Hidden Input -->
                                 <input type="hidden" :name="'options[filters][' + filter.key +']'" :value="filter.value"> 
                             
                                 <!-- Details -->
-                                <div class="flex gap-[10px] justify-between  border-b-[1px] py-5 border-slate-300 cursor-pointer">
+                                <div 
+                                    class="flex gap-[10px] justify-between py-5 cursor-pointer"
+                                    :class="{
+                                        'border-b-[1px] border-slate-300': index < options.filters.length - 1
+                                    }"
+                                >
                                     <div class="flex gap-[10px]">
                                         <div class="grid gap-[6px] place-content-start">
                                             <p class="text-gray-600">
@@ -934,7 +958,7 @@
                                                 class="text-red-600 cursor-pointer transition-all hover:underline"
                                                 @click="remove(filter)"
                                             > 
-                                                @lang('admin::app.settings.themes.edit.delete')
+                                                @lang('admin::app.settings.themes.create.delete')
                                             </p>
                                         </div>
                                     </div>
@@ -1168,7 +1192,7 @@
                                         class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                         @click="isUpdating=false;$refs.addLinksModal.toggle()"
                                     >
-                                        @lang('admin::app.settings.themes.create.add-links')
+                                        @lang('admin::app.settings.themes.create.add-link')
                                     </div>
                                 </div>
                             </div>
@@ -1194,7 +1218,7 @@
                                             <div class="grid gap-[6px] place-content-start">
                                                 <p class="text-gray-600">
                                                     <div> 
-                                                        @lang('admin::app.settings.themes.edit.column'): 
+                                                        @lang('admin::app.settings.themes.create.column'): 
 
                                                         <span class="text-gray-600 transition-all">
                                                             @{{ link.column }}
@@ -1204,7 +1228,7 @@
     
                                                 <p class="text-gray-600">
                                                     <div> 
-                                                        @lang('admin::app.settings.themes.edit.url'):
+                                                        @lang('admin::app.settings.themes.create.url'):
 
                                                         <a
                                                             :href="link.url"
@@ -1218,7 +1242,7 @@
 
                                                 <p class="text-gray-600">
                                                     <div> 
-                                                        @lang('admin::app.settings.themes.edit.filter-title'):
+                                                        @lang('admin::app.settings.themes.create.filter-title'):
 
                                                         <span
                                                             class="text-gray-600 transition-all"
@@ -1230,7 +1254,7 @@
 
                                                 <p class="text-gray-600">
                                                     <div> 
-                                                        @lang('admin::app.settings.themes.edit.sort-order'):
+                                                        @lang('admin::app.settings.themes.create.sort-order'):
 
                                                         <span
                                                             class="text-gray-600 transition-all"
@@ -1249,14 +1273,14 @@
                                                     class="text-blue-600 cursor-pointer transition-all hover:underline"
                                                     @click="edit(link)"
                                                 > 
-                                                    @lang('admin::app.settings.themes.edit.edit')
+                                                    @lang('admin::app.settings.themes.create.edit')
                                                 </p>
 
                                                 <p 
                                                     class="text-red-600 cursor-pointer transition-all hover:underline"
                                                     @click="remove(link)"
                                                 > 
-                                                    @lang('admin::app.settings.themes.edit.delete')
+                                                    @lang('admin::app.settings.themes.create.delete')
                                                 </p>
                                             </div>
                                         </div>
@@ -1288,7 +1312,7 @@
                                     class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                     @click="isUpdating=false;$refs.addLinksModal.toggle()"
                                 >
-                                    @lang('admin::app.settings.themes.create.add-links')
+                                    @lang('admin::app.settings.themes.create.add-link')
                                 </div>
                             </div>
                         </div>
@@ -1400,7 +1424,7 @@
                         <x-admin::modal ref="addLinksModal">
                             <x-slot:header>
                                 <p class="text-[18px] text-gray-800 font-bold">
-                                    @lang('admin::app.settings.themes.create.footer-link')
+                                    @lang('admin::app.settings.themes.create.footer-link-form-title')
                                 </p>
                             </x-slot:header>
         
@@ -1458,7 +1482,7 @@
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="url"
-                                            rules="required"
+                                            rules="required|url"
                                             :label="trans('admin::app.settings.themes.create.url')"
                                             :placeholder="trans('admin::app.settings.themes.create.url')"
                                             ::disabled="isUpdating"
