@@ -885,7 +885,6 @@ return [
                 'decimal'               => '小数',
                 'email'                 => '电子邮件',
                 'enable-wysiwyg'        => '启用所见即所得编辑器',
-                'enable-wysiwyg'        => '启用所见即所得编辑器',
                 'file'                  => '文件',
                 'general'               => '常规',
                 'is-required'           => '必填',
@@ -907,7 +906,6 @@ return [
                 'select'                => '选择',
                 'select-type'           => '选择属性类型',
                 'save-btn'              => '保存属性',
-                'select'                => '选择',
                 'swatch'                => '颜色样本',
                 'title'                 => '编辑属性',
                 'type'                  => '属性类型',
@@ -1066,10 +1064,7 @@ return [
                 'enter-code'                       => '输入代码',
                 'enter-name'                       => '输入名称',
                 'column'                           => '列',
-                'main-column'                      => '主列',
-                'right-column'                     => '右侧列',
                 'add-group-title'                  => '添加新分组',
-                'add-group-btn'                    => '添加分组',
                 'group-already-exists'             => '已存在属性分组名称。',
                 'select-group'                     => '请选择属性分组。',
                 'group-contains-system-attributes' => '此分组包含系统属性。请先将系统属性移至其他分组，然后重试。',
@@ -1094,10 +1089,7 @@ return [
                 'enter-code'                       => '输入代码',
                 'enter-name'                       => '输入名称',
                 'column'                           => '列',
-                'main-column'                      => '主列',
-                'right-column'                     => '右侧列',
                 'add-group-title'                  => '添加新分组',
-                'add-group-btn'                    => '添加分组',
                 'group-already-exists'             => '已存在属性分组名称。',
                 'select-group'                     => '请选择属性分组。',
                 'group-contains-system-attributes' => '此分组包含系统属性。请先将系统属性移至其他分组，然后重试。',
@@ -1352,7 +1344,6 @@ return [
                 'phone'              => '电话',
                 'street-address'     => '街道地址',
                 'post-code'          => '邮编',
-                'default-address'    => '默认地址',
                 'save-btn-title'     => '保存地址',
             ],
     
@@ -1372,7 +1363,6 @@ return [
                 'phone'            => '电话',
                 'street-address'   => '街道地址',
                 'post-code'        => '邮编',
-                'default-address'  => '默认地址',
                 'save-btn-title'   => '保存地址',
             ],
     
@@ -1753,7 +1743,6 @@ return [
                     'code-suffix'                               => '代码后缀',
                     'code-prefix'                               => '代码前缀',
                     'generate'                                  => '生成',
-                    'status'                                    => '状态',
                     'customer-group'                            => '顾客群体',
                 ],
             
@@ -2150,7 +2139,6 @@ return [
                 'general'        => '常规',
                 'save-btn'       => '保存库存来源',
                 'back-btn'       => '返回',
-                'general'        => '常规',
                 'code'           => '代码',
                 'name'           => '名称',
                 'description'    => '描述',
@@ -2699,12 +2687,10 @@ return [
                     'review'                             => '评论',
                     'review-info'                        => '对某物的评价或评估，通常涉及意见和反馈。',
                     'allow-guest-review'                 => '允许访客评论',
-                    'attribute'                          => '属性',
                     'attribute-info'                     => '定义对象特性或属性的特性或属性，影响其行为、外观或功能。',
                     'image-upload-size'                  => '允许的图像上传大小（以KB为单位）',
                     'file-upload-size'                   => '允许的文件上传大小（以KB为单位）',
                     'comma-separated'                    => '逗号分隔',
-
                 ],
 
                 'rich-snippets' => [
@@ -2812,7 +2798,6 @@ return [
                     'vat-number'     => '增值税号',
                     'contact-number' => '联系电话',
                     'bank-details'   => '银行详情',
-            
                 ],
             
                 'shipping-methods' => [
@@ -2827,8 +2812,6 @@ return [
                     'rate'                      => '费率',
                     'status'                    => '状态',
                     'type'                      => '类型',
-                    'flat-rate-shipping'        => '固定费用配送',
-                    'flat-rate-shipping-info'   => '固定费用配送信息',
                 ],
             
                 'payment-methods' => [
@@ -2863,7 +2846,6 @@ return [
                     'client-secret-info'             => '在此处添加您的密钥',
                     'accepted-currencies'            => '接受的货币',
                     'accepted-currencies-info'       => '逗号分隔的货币代码，例如 USD、INR、...',
-                    'sandbox'                        => '沙盒',
                     'business-account'               => '企业帐户',
                 ],
             
@@ -2904,7 +2886,7 @@ return [
                     'maximum-limit-of-reminders'       => '提醒的最大限制',
                     'interval-between-reminders'       => '提醒之间的间隔',
                 ],
-            ],            
+            ],
         ],
     ],
 
@@ -3083,34 +3065,37 @@ return [
         'events'                   => '事件',
         'sitemaps'                 => '站点地图',
         'newsletter-subscriptions' => '电子报订阅',
-    ],    
+    ],
 
-    'export' => [
-        'export'           => '导出',
-        'import'           => '导入',
-        'format'           => '选择格式',
-        'download'         => '下载',
-        'upload'           => '上传',
-        'csv'              => 'CSV',
-        'xls'              => 'XLS',
-        'file'             => '文件',
-        'upload-error'     => '文件必须是以下类型的文件：xls、xlsx、csv。',
-        'upload-success'   => ':name 上传成功',
-        'duplicate-error'  => '标识符必须是唯一的，行 :position 处存在重复标识符 :identifier。',
-        'enough-row-error' => '文件没有足够的行',
-        'allowed-type'     => '允许的类型：',
-        'file-type'        => 'csv、xls、xlsx。',
-        'no-records'       => '没有要导出的内容',
-        'illegal-format'   => '错误！此类型的格式不受支持，或者是非法格式',
-    ],
+    'errors' => [
+        'go-back'   => '返回', // Translated "Go Back" to "返回"
+        'dashboard' => '仪表盘',
+        'support'   => '如果问题持续存在，请通过<a href=":link" class=":class">:email</a>联系我们以寻求帮助。',
     
-    'validations' => [
-        'slug-being-used' => '此slug在类别或产品中正在使用。',
-        'slug-reserved'   => '此slug已保留。',
-    ],
+        '404' => [
+            'title'       => '404 页面未找到',
+            'description' => '哎呀！您正在寻找的页面似乎在度假。似乎我们无法找到您正在搜索的内容。',
+        ],
     
-    'footer' => [
-        'copy-right' => '由 <a href="https://bagisto.com/" target="_blank">Bagisto</a> 提供支持，一个由 <a href="https://webkul.com/" target="_blank">Webkul</a> 社区支持的项目',
+        '401' => [
+            'title'       => '401 未经授权',
+            'description' => '哎呀！看起来您无权访问此页面。似乎您缺少必要的凭证。',
+        ],
+    
+        '403' => [
+            'title'       => '403 禁止访问',
+            'description' => '哎呀！此页面受限制。似乎您没有查看此内容所需的权限。',
+        ],
+    
+        '500' => [
+            'title'       => '500 内部服务器错误',
+            'description' => '哎呀！出了些问题。似乎我们在加载您所寻找的页面时遇到了问题。',
+        ],
+    
+        '503' => [
+            'title'       => '503 服务不可用',
+            'description' => '哎呀！看起来我们暂时停机进行维护。请稍后再查看。',
+        ],
     ],    
 
     'export' => [
