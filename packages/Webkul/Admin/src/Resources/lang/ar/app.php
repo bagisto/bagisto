@@ -1499,7 +1499,6 @@ return [
                         'edit'    => 'تعديل',
                         'delete'  => 'حذف',
                         'actions' => 'إجراءات',
-            
                     ],
             
                     'create'   => [
