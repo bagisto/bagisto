@@ -210,7 +210,7 @@
 
                                     {{-- Item Sub-Total --}}
                                     <p class="text-gray-600">
-                                        @lang('admin::app.sales.invoices.view.sub-total', ['sub-total' => core()->formatBasePrice($item->base_total)])
+                                        @lang('admin::app.sales.invoices.view.sub-total', ['sub_total' => core()->formatBasePrice($item->base_total)])
                                     </p>
                                 </div>
                             </div>

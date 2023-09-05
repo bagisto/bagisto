@@ -144,7 +144,7 @@
                                 <p
                                     class="text-gray-600"
                                 >
-                                    @{{ "@lang('admin::app.customers.reviews.index.datagrid.review-id')".replace(':review-id', record.product_review_id) }}
+                                    @{{ "@lang('admin::app.customers.reviews.index.datagrid.review-id')".replace(':review_id', record.product_review_id) }}
                                 </p>
                             </div>
 
