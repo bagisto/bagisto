@@ -12,13 +12,13 @@ return [
 
         'forget-password' => [
             'create'    =>  [
-                'email'            => 'Registered Email',
-                'email-not-exist'  => 'Email Not Exists',
-                'page-title'       => 'Forget Password',
-                'reset-link-sent'  => 'Reset Password link sent',
-                'sign-in-link'     => 'Back to Sign In ?',
-                'submit-btn'       => 'Reset',
-                'title'            => 'Recover Password',
+                'email'           => 'Registered Email',
+                'email-not-exist' => 'Email Not Exists',
+                'page-title'      => 'Forget Password',
+                'reset-link-sent' => 'Reset Password link sent',
+                'sign-in-link'    => 'Back to Sign In ?',
+                'submit-btn'      => 'Reset',
+                'title'           => 'Recover Password',
             ],
         ],
 
@@ -81,14 +81,11 @@ return [
         'index' => [
             'add-customer'              => 'Add Customer',
             'average-sale'              => 'Average Order Sale',
-            'average-sale'              => 'Average Order Sale',
             'add-product'               => 'Add Product',
             'attribute-code'            => 'Attribute Code',
             'color'                     => 'Color',
             'customer-with-most-sales'  => 'Customer With Most Sales',
             'customer-info'             => 'No Customer Found With Most Sales',
-            'customer-info'             => 'No Customer Found With Most Sales',
-            'date-duration'             => ':start - :end',
             'date-duration'             => ':start - :end',
             'decreased'                 => ':progress%',
             'end-date'                  => 'End Date',
@@ -375,7 +372,6 @@ return [
                 'datagrid' => [
                     'action'       => 'Actions',
                     'id'           => 'ID',
-                    'invoice-date' => 'Invoice Date',
                     'invoice-date' => 'Invoice Date',
                     'grand-total'  => 'Grand Total',
                     'order-id'     => 'Order ID',
@@ -2438,7 +2434,6 @@ return [
 
             'update-success' => 'User updated successfully.',
             'delete-success' => 'User deleted successfully.',
-
         ],
 
         'roles' => [
@@ -2711,7 +2706,6 @@ return [
                     'image-upload-size'                  => 'Allowed Image Upload Size (in Kb)',
                     'file-upload-size'                   => 'Allowed File Upload Size (in Kb)',
                     'comma-separated'                    => 'Comma Separated',
-
                 ],
 
                 'rich-snippets' => [
@@ -2819,7 +2813,6 @@ return [
                     'vat-number'     => 'Vat Number',
                     'contact-number' => 'Contact Number',
                     'bank-details'   => 'Bank Details',
-
                 ],
 
                 'shipping-methods' => [
