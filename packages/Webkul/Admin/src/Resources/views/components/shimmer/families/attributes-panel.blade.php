@@ -31,7 +31,7 @@
                 </div>
 
                 <!-- Draggable Attribute Groups -->
-                <div class="h-[calc(100vh-285px)] pb-[16px] overflow-auto border-r-[1px] border-gray-200">
+                <div class="h-[calc(100vh-285px)] pb-[16px] overflow-auto ltr:border-r-[1px] rtl:border-l-[1px] border-gray-200">
                     @for ($j = 0; $j < 3; $j++)
                         <div>
                             <!-- Group Container -->
@@ -40,7 +40,7 @@
                                 <div class="shimmer w-[16px] h-[16px] mr-[4px]"></div>
 
                                 <!-- Group Name -->
-                                <div class="group_node flex gap-[6px] max-w-max py-[6px] pr-[6px]">
+                                <div class="group_node flex gap-[6px] max-w-max py-[6px] ltr:pr-[6px] rtl:pl-[6px]">
                                     <div class="shimmer w-[20px] h-[21px]"></div>
 
                                     <div class="shimmer w-[20px] h-[21px]"></div>
@@ -50,9 +50,9 @@
                             </div>
 
                             <!-- Group Attributes -->
-                            <div class="ml-[43px]">
+                            <div class="ltr:ml-[43px] rtl:mr-[43px]">
                                 @for ($k = 0; $k < 5; $k++)
-                                    <div class="flex gap-[6px] max-w-max py-[6px] pr-[6px]">
+                                    <div class="flex gap-[6px] max-w-max py-[6px] ltr:pr-[6px] rtl:pl-[6px]">
                                         <div class="shimmer w-[20px] h-[21px]"></div>
 
                                         <div class="shimmer w-[20px] h-[21px]"></div>
@@ -79,7 +79,7 @@
             <!-- Draggable Unassigned Attributes -->
             <div class="h-[calc(100vh-285px)] pb-[16px] overflow-auto">
                 @for ($i = 0; $i < 10; $i++)
-                    <div class="flex gap-[6px] max-w-max py-[6px] pr-[6px]">
+                    <div class="flex gap-[6px] max-w-max py-[6px] ltr:pr-[6px] rtl:pl-[6px]">
                         <div class="shimmer w-[20px] h-[21px]"></div>
 
                         <div class="shimmer w-[20px] h-[21px]"></div>

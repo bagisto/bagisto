@@ -59,7 +59,7 @@
                                     type="password" 
                                     name="password" 
                                     id="password"
-                                    class="w-[254px] max-w-full pr-10" 
+                                    class="w-[254px] max-w-full ltr:pr-10 rtl:pl-10" 
                                     rules="required|min:6" 
                                     :label="trans('admin::app.users.sessions.password')"
                                     :placeholder="trans('admin::app.users.sessions.password')"
@@ -67,7 +67,7 @@
                                 </x-admin::form.control-group.control>
                         
                                 <span 
-                                    class="icon-view text-[22px] cursor-pointer absolute top-[42px] transform -translate-y-1/2 right-2"
+                                    class="icon-view text-[22px] cursor-pointer absolute top-[42px] transform -translate-y-1/2 ltr:right-2 rtl:left-2"
                                     onclick="switchVisibility()"
                                 >
                                 </span>

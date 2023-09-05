@@ -19,7 +19,7 @@
                 <div class="relative w-full h-[4px] rounded-2xl bg-gray-200">
                     <div
                         ref="progress"
-                        class="absolute left-1/4 right-0 h-full rounded-xl bg-navyBlue"
+                        class="absolute ltr:left-1/4 rtl:right-1/4 ltr:right-0 rtl:left-0 h-full rounded-xl bg-navyBlue"
                     >
                     </div>
 

@@ -49,7 +49,7 @@
                                     <i class="icon-arrow-right text-[24px] !icon-arrow-left"></i>
                                 </a>
 
-                                <ul class="absolute left-full top-0 z-10 hidden w-max min-w-[150px] border border-gray-300 rounded-[4px] bg-white shadow-[0_5px_20px_rgba(0,0,0,0.15)] group-hover/item:block">
+                                <ul class="absolute ltr:left-full rtl:right-full top-0 z-10 hidden w-max min-w-[150px] border border-gray-300 rounded-[4px] bg-white shadow-[0_5px_20px_rgba(0,0,0,0.15)] group-hover/item:block">
                                     <li v-for="option in massAction.options">
                                         <a
                                             class="whitespace-no-wrap block rounded-t px-4 py-2 hover:bg-gray-100"
@@ -82,7 +82,7 @@
                     </x-slot:menu>
                 </x-admin::dropdown>
 
-                <div class="pl-[10px]">
+                <div class="ltr:pl-[10px] rtl:pr-[10px]">
                     <p class="text-[14px] font-light text-gray-800">
                         <!-- Need to manage this translation. -->
                         @{{ applied.massActions.indices.length }} of @{{ available.meta.total }} Selected
@@ -102,19 +102,19 @@
                             type="text"
                             name="search"
                             :value="getAppliedColumnValues('all')"
-                            class="block w-full rounded-lg border border-gray-300 bg-white py-[6px] pl-[12px] leading-6 text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                            class="block w-full rounded-lg border border-gray-300 bg-white py-[6px] ltr:pl-[12px] rtl:pr-[12px] ltr:pr-[40px] rtl:pl-[40px] leading-6 text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
                             placeholder="@lang('admin::app.components.datagrid.toolbar.search.title')"
                             autocomplete="off"
                             @keyup.enter="filterPage"
                         >
 
-                        <div class="icon-search pointer-events-none absolute right-[10px] top-[8px] flex items-center text-[22px]">
+                        <div class="icon-search pointer-events-none absolute ltr:right-[10px] rtl:left-[10px] top-[8px] flex items-center text-[22px]">
                         </div>
                     </div>
                 </div>
 
                 <!-- Information Panel -->
-                <div class="pl-[10px]">
+                <div class="ltr:pl-[10px] rtl:pr-[10px]">
                     <p class="text-[14px] font-light text-gray-800">
                         <!-- Need to manage this translation. -->
                         @{{ available.meta.total }} Results
@@ -130,7 +130,7 @@
                 <x-slot:toggle>
                     <div>
                         <div
-                            class="focus:ring-gratext-gray-600 inline-flex w-full max-w-max pl-[12px] pr-[16px] cursor-pointer select-none appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-gray-300 bg-white px-[4px] py-[6px] text-center text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2"
+                            class="focus:ring-gratext-gray-600 inline-flex w-full max-w-max ltr:pl-[12px] rtl:pr-[12px] ltr:pr-[16px] rtl:pl-[16px] cursor-pointer select-none appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-gray-300 bg-white px-[4px] py-[6px] text-center text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2"
                         >
                             <span class="icon-filter text-[22px]"></span>
 
@@ -185,7 +185,7 @@
 
                 <input
                     type="text"
-                    class="ml-[8px] inline-flex min-h-[38px] max-w-[40px] appearance-none items-center justify-center gap-x-[4px] rounded-[6px] border border-gray-300 bg-white px-[12px] py-[6px] text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-black max-sm:hidden"
+                    class="ltr:ml-[8px] rtl:mr-[8px] inline-flex min-h-[38px] max-w-[40px] appearance-none items-center justify-center gap-x-[4px] rounded-[6px] border border-gray-300 bg-white px-[12px] py-[6px] text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-black max-sm:hidden"
                     :value="available.meta.current_page"
                     @change="changePage(parseInt($event.target.value))"
                 >

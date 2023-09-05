@@ -12,13 +12,13 @@
     {{-- Panel Content --}}
     <div class="mb-[20px] text-[14px] text-gray-600">
         <div class="flex  items-center relative mb-[10px]">
-            <span class="inline-block mr-[5px] p-[5px] bg-yellow-500 rounded-full"></span>
+            <span class="inline-block ltr:mr-[5px] rtl:ml-[5px] p-[5px] bg-yellow-500 rounded-full"></span>
 
             @lang('admin::app.catalog.products.edit.inventories.pending-ordered-qty', [
                 'qty' => $product->ordered_inventories->pluck('qty')->first() ?? 0,
             ])
             
-            <i class="icon-information text-[18px] ml-[10px] font-bold text-white rounded-full bg-gray-700 transition-all hover:bg-gray-800 peer"></i>
+            <i class="icon-information text-[18px] ltr:ml-[10px] rtl:mr-[10px] font-bold text-white rounded-full bg-gray-700 transition-all hover:bg-gray-800 peer"></i>
 
             <div class="hidden absolute bottom-[25px] p-[10px] bg-black opacity-80 rounded-[8px] text-[14px] italic text-white peer-hover:block">
                 @lang('admin::app.catalog.products.edit.inventories.pending-ordered-qty-info')

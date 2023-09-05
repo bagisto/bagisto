@@ -129,6 +129,7 @@
                         toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor alignleft aligncenter alignright alignjustify | link hr |numlist bullist outdent indent  | removeformat | code | table',
                         image_advtab: true,
                         valid_elements: '*[*]',
+                        directionality : "{{ core()->getCurrentLocale()->direction }}",
 
                         setup: editor => {
                             editor.on('keyup', () => {

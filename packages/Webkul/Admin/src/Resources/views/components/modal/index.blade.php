@@ -51,7 +51,7 @@
                 leave-to-class="opacity-0"
             >
                 <div
-                    class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity z-[1000]"
+                    class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity z-[10001]"
                     v-show="isOpen"
                 ></div>
             </transition>
@@ -67,11 +67,11 @@
                 leave-to-class="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
             >
                 <div
-                    class="fixed inset-0 z-[2000] transform transition overflow-y-auto"
+                    class="fixed inset-0 z-[10002] transform transition overflow-y-auto"
                     v-if="isOpen"
                 >
                     <div class="flex min-h-full items-end justify-center p-4 sm:items-center sm:p-0">
-                        <div class="w-full max-w-[568px] z-[999] absolute left-[50%] top-[50%] rounded-lg bg-white box-shadow max-md:w-[90%] -translate-x-[50%] -translate-y-[50%]">
+                        <div class="w-full max-w-[568px] z-[999] absolute ltr:left-[50%] rtl:right-[50%] top-[50%] rounded-lg bg-white box-shadow max-md:w-[90%] ltr:-translate-x-[50%] rtl:translate-x-[50%] -translate-y-[50%]">
                             <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
                                 <slot name="header">
                                     Default Header
