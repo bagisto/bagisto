@@ -12,13 +12,13 @@ return [
 
         'forget-password' => [
             'create'    =>  [
-                'email'            => 'Registered Email',
-                'email-not-exist'  => 'Email Not Exists',
-                'page-title'       => 'Forget Password',
-                'reset-link-sent'  => 'Reset Password link sent',
-                'sign-in-link'     => 'Back to Sign In ?',
-                'submit-btn'       => 'Reset',
-                'title'            => 'Recover Password',
+                'email'           => 'Registered Email',
+                'email-not-exist' => 'Email Not Exists',
+                'page-title'      => 'Forget Password',
+                'reset-link-sent' => 'Reset Password link sent',
+                'sign-in-link'    => 'Back to Sign In ?',
+                'submit-btn'      => 'Reset',
+                'title'           => 'Recover Password',
             ],
         ],
 
@@ -81,14 +81,11 @@ return [
         'index' => [
             'add-customer'              => 'Add Customer',
             'average-sale'              => 'Average Order Sale',
-            'average-sale'              => 'Average Order Sale',
             'add-product'               => 'Add Product',
             'attribute-code'            => 'Attribute Code',
             'color'                     => 'Color',
             'customer-with-most-sales'  => 'Customer With Most Sales',
             'customer-info'             => 'No Customer Found With Most Sales',
-            'customer-info'             => 'No Customer Found With Most Sales',
-            'date-duration'             => ':start - :end',
             'date-duration'             => ':start - :end',
             'decreased'                 => ':progress%',
             'end-date'                  => 'End Date',
@@ -375,7 +372,6 @@ return [
                 'datagrid' => [
                     'action'       => 'Actions',
                     'id'           => 'ID',
-                    'invoice-date' => 'Invoice Date',
                     'invoice-date' => 'Invoice Date',
                     'grand-total'  => 'Grand Total',
                     'order-id'     => 'Order ID',
@@ -889,7 +885,6 @@ return [
                 'decimal'               => 'Decimal',
                 'email'                 => 'Email',
                 'enable-wysiwyg'        => 'Enable Wysiwyg Editor',
-                'enable-wysiwyg'        => 'Enable Wysiwyg Editor',
                 'file'                  => 'File',
                 'general'               => 'General',
                 'is-required'           => 'Is Required',
@@ -911,7 +906,6 @@ return [
                 'select'                => 'Select',
                 'select-type'           => 'Select Attribute Type',
                 'save-btn'              => 'Save Attribute',
-                'select'                => 'Select',
                 'swatch'                => 'Swatch',
                 'title'                 => 'Edit Attribute',
                 'type'                  => 'Attribute Type',
@@ -1065,16 +1059,12 @@ return [
                 'right-column'                     => 'Right Side Column',
                 'unassigned-attributes'            => 'Unassigned Attributes',
                 'unassigned-attributes-info'       => 'Drag these attribute to add into columns or groups.',
-                'general'                          => 'General',
                 'code'                             => 'Code',
                 'name'                             => 'Name',
                 'enter-code'                       => 'Enter Code',
                 'enter-name'                       => 'Enter Name',
                 'column'                           => 'Column',
-                'main-column'                      => 'Main Column',
-                'right-column'                     => 'Right Column',
                 'add-group-title'                  => 'Add New Group',
-                'add-group-btn'                    => 'Add Group',
                 'group-already-exists'             => 'An attribute group name already exists.',
                 'select-group'                     => 'Please select an attribute group.',
                 'group-contains-system-attributes' => 'This group contains system attributes. First move system attributes to another group and try again.',
@@ -1100,10 +1090,7 @@ return [
                 'enter-code'                       => 'Enter Code',
                 'enter-name'                       => 'Enter Name',
                 'column'                           => 'Column',
-                'main-column'                      => 'Main Column',
-                'right-column'                     => 'Right Column',
                 'add-group-title'                  => 'Add New Group',
-                'add-group-btn'                    => 'Add Group',
                 'group-already-exists'             => 'An attribute group name already exists.',
                 'select-group'                     => 'Please select an attribute group.',
                 'group-contains-system-attributes' => 'This group contains system attributes. First move system attributes to another group and try again.',
@@ -1358,7 +1345,6 @@ return [
                 'phone'              => 'Phone',
                 'street-address'     => 'Street Address',
                 'post-code'          => 'Post Code',
-                'default-address'    => 'Default Address',
                 'save-btn-title'     => 'Save Address',
             ],
 
@@ -1378,7 +1364,6 @@ return [
                 'phone'            => 'Phone',
                 'street-address'   => 'Street Address',
                 'post-code'        => 'Post Code',
-                'default-address'  => 'Default Address',
                 'save-btn-title'   => 'Save Address',
             ],
 
@@ -1759,7 +1744,6 @@ return [
                     'code-suffix'                               => 'Code Suffix',
                     'code-prefix'                               => 'Code Prefix',
                     'generate'                                  => 'Generate',
-                    'status'                                    => 'Status',
                     'customer-group'                            => 'Customer Group',
                 ],
 
@@ -2156,7 +2140,6 @@ return [
                 'general'        => 'General',
                 'save-btn'       => 'Save Inventory Sources',
                 'back-btn'       => 'Back',
-                'general'        => 'General',
                 'code'           => 'Code',
                 'name'           => 'Name',
                 'description'    => 'Description',
@@ -2438,7 +2421,6 @@ return [
 
             'update-success' => 'User updated successfully.',
             'delete-success' => 'User deleted successfully.',
-
         ],
 
         'roles' => [
@@ -2706,12 +2688,10 @@ return [
                     'review'                             => 'Review',
                     'review-info'                        => 'Evaluation or assessment of something, often involving opinions and feedback.',
                     'allow-guest-review'                 => 'Allow Guest Review',
-                    'attribute'                          =>  'Attribute',
                     'attribute-info'                     => 'Characteristic or property that defines an object, influencing its behavior, appearance, or function.',
                     'image-upload-size'                  => 'Allowed Image Upload Size (in Kb)',
                     'file-upload-size'                   => 'Allowed File Upload Size (in Kb)',
                     'comma-separated'                    => 'Comma Separated',
-
                 ],
 
                 'rich-snippets' => [
@@ -2819,7 +2799,6 @@ return [
                     'vat-number'     => 'Vat Number',
                     'contact-number' => 'Contact Number',
                     'bank-details'   => 'Bank Details',
-
                 ],
 
                 'shipping-methods' => [
@@ -2834,8 +2813,6 @@ return [
                     'rate'                      => 'Rate',
                     'status'                    => 'Status',
                     'type'                      => 'Type',
-                    'flat-rate-shipping'        => 'Flat Rate Shipping',
-                    'flat-rate-shipping-info'   => 'Flat Rate Shipping Information',
                 ],
 
                 'payment-methods' => [
@@ -2870,7 +2847,6 @@ return [
                     'client-secret-info'             => 'Add your secret key here',
                     'accepted-currencies'            => 'Accepted currencies',
                     'accepted-currencies-info'       => 'Add currency code comma separated e.g. USD,INR,...',
-                    'sandbox'                        => 'Sandbox',
                     'business-account'               => 'Business Account',
                 ],
 
