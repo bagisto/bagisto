@@ -11,7 +11,7 @@ return [
         ],
 
         'forget-password' => [
-            'create'    =>  [
+            'create'    => [
                 'email'           => 'Registered Email',
                 'email-not-exist' => 'Email Not Exists',
                 'page-title'      => 'Forget Password',
@@ -288,7 +288,7 @@ return [
                 'shipping-price'       => 'Shipping Price',
                 'title'                => 'Shipment #:shipment_id',
                 'tracking-number'      => 'Tracking Number',
-            ]
+            ],
         ],
 
         'refunds' => [
@@ -446,7 +446,7 @@ return [
             ],
         ],
 
-        'invoice-transaction'  =>  [
+        'invoice-transaction'  => [
             'view'             => 'View',
             'transaction-date' => 'Transaction Date',
             'transaction-id'   => 'Transaction ID',
@@ -455,8 +455,8 @@ return [
 
         'transactions' => [
             'index' => [
-                'create-btn'  => 'Create Transactions',
-                'title'       => 'Transactions',
+                'create-btn' => 'Create Transactions',
+                'title'      => 'Transactions',
 
                 'datagrid' => [
                     'id'                 => 'ID',
@@ -468,7 +468,7 @@ return [
                     'transaction-amount' => 'Amount',
                 ],
 
-                'edit'  =>  [
+                'edit'  => [
                     'already-paid'               => 'Already paid',
                     'invoice-missing'            => 'Invoice Missing',
                     'transaction-amount-zero'    => 'Transaction Amount zero',
@@ -486,7 +486,7 @@ return [
                 'title'         => 'Products',
                 'already-taken' => 'The :name has already been taken.',
 
-                'create'     => [
+                'create' => [
                     'back-btn'                => 'Back',
                     'bundle'                  => 'Bundle',
                     'booking'                 => 'Booking',
@@ -504,7 +504,7 @@ return [
                     'virtual'                 => 'Virtual',
                 ],
 
-                'datagrid'   => [
+                'datagrid' => [
                     'attribute-family'       => 'Attribute Family',
                     'attribute-family-value' => 'Attribute Family - :attribute_family',
                     'active'                 => 'Active',
@@ -1264,7 +1264,7 @@ return [
                     'group-default'  => 'Default Group Can not be Deleted',
                 ],
 
-                'datagrid'  =>  [
+                'datagrid'  => [
                     'code'   => 'Code',
                     'id'     => 'ID',
                     'name'   => 'Name',
@@ -1303,7 +1303,7 @@ return [
                     'update-success' => 'Update Successfully',
                 ],
 
-                'datagrid'   =>  [
+                'datagrid'   => [
                     'customer-names'      => 'Name',
                     'comment'             => 'Comment',
                     'date'                => 'Date',
@@ -1337,7 +1337,7 @@ return [
                 'address-2'          => 'Address 2',
                 'city'               => 'City',
                 'state'              => 'State',
-                'select-country'     => "Select Country",
+                'select-country'     => 'Select Country',
                 'country'            => 'Country',
                 'default-address'    => 'Default Address',
                 'first-name'         => 'First Name',
@@ -1356,7 +1356,7 @@ return [
                 'address-2'        => 'Address 2',
                 'city'             => 'City',
                 'state'            => 'State',
-                'select-country'   => "Select Country",
+                'select-country'   => 'Select Country',
                 'country'          => 'Country',
                 'default-address'  => 'Default Address',
                 'first-name'       => 'First Name',
@@ -1862,7 +1862,7 @@ return [
             'cart-rules-coupons' => [
                 'cart-rule-not-defined-error' => 'Cart rule can not be deleted',
                 'success'                     => ':name Successfully Created',
-                'mass-delete-success'         => 'Cart Rule Mass Delete Successfully'
+                'mass-delete-success'         => 'Cart Rule Mass Delete Successfully',
             ],
         ],
 
@@ -1893,10 +1893,10 @@ return [
                     'delete-warning' => 'Are you sure, you want to perform this action?',
                 ],
 
-                'edit'  =>  [
+                'edit'  => [
                     'title'          => 'Edit Sitemap',
                     'success'        => 'Sitemap Updated successfully',
-                    'delete-success' => 'Sitemap Deleted successfully'
+                    'delete-success' => 'Sitemap Deleted successfully',
                 ],
             ],
 
@@ -1927,7 +1927,7 @@ return [
                 'view'                => 'View',
                 'edit'                => 'Edit',
                 'delete'              => 'Delete',
-                'mass-delete-success' => 'Selected Data Deleted Successfully'
+                'mass-delete-success' => 'Selected Data Deleted Successfully',
             ],
         ],
 
@@ -1986,7 +1986,7 @@ return [
                     'delete'    => 'Delete',
                 ],
 
-                'create'  =>  [
+                'create'  => [
                     'code'        => 'Code',
                     'name'        => 'Name',
                     'direction'   => 'Direction',
@@ -2083,7 +2083,7 @@ return [
                 'create-success'  => 'Exchange Rate Created Successfully',
                 'update-success'  => 'Exchange Rate Updated Successfully',
                 'delete-success'  => 'Exchange Rate Deleted Successfully',
-                'delete-error'    => 'Exchange Rate Deleted Error'
+                'delete-error'    => 'Exchange Rate Deleted Error',
             ],
         ],
 
@@ -2204,8 +2204,8 @@ return [
 
                     'create-success'  => 'New Tax Category Created',
                     'update-success'  => 'Tax Category Successfully Updated',
-                    'delete-success' => 'Tax Category Deleted Successfully',
-                    'delete-failed'  => 'Tax Category Deleted Failed',
+                    'delete-success'  => 'Tax Category Deleted Successfully',
+                    'delete-failed'   => 'Tax Category Deleted Failed',
                 ],
             ],
 
@@ -2374,7 +2374,7 @@ return [
                     'role'              => 'Role',
                     'status'            => 'Status',
                     'save-btn'          => 'Save User',
-                    'upload-image-info' => 'Upload a Profile Image (110px X 110px) in PNG or JPG Format'
+                    'upload-image-info' => 'Upload a Profile Image (110px X 110px) in PNG or JPG Format',
                 ],
 
                 'datagrid' => [
@@ -2402,7 +2402,7 @@ return [
                 'last-delete-error'  => 'Last User delete failed',
                 'login-error'        => 'Please check your credentials and try again.',
                 'update-success'     => 'User updated successfully.',
-                'delete-warning'     =>'Are you sure, you want to perform this action?',
+                'delete-warning'     => 'Are you sure, you want to perform this action?',
             ],
 
             'edit'  => [
@@ -2427,7 +2427,7 @@ return [
                 'title'      => 'Roles',
                 'create-btn' => 'Create Role',
 
-                'datagrid'  =>  [
+                'datagrid'  => [
                     'delete'          => 'Delete',
                     'edit'            => 'Edit',
                     'id'              => 'Id',
@@ -2485,57 +2485,57 @@ return [
                     'id'         => 'Id',
                     'type'       => 'Type',
                     'name'       => 'Name',
-                ]
+                ],
             ],
 
             'create' => [
-                'title'                         => 'Create Theme',
+                'title'                          => 'Create Theme',
                 'sliders'                        => 'Sliders',
-                'product-carousel'              => 'Product Carousel',
-                'product-carousel-description'  => 'Showcase products elegantly with a dynamic and responsive product carousel.',
-                'category-carousel-description' => 'Display dynamic categories attractively using a responsive category carousel.',
-                'static-content-description'    => 'Improve engagement with concise, informative static content for your audience.',
-                'footer-link-description'       => 'Navigate via footer links for seamless website exploration and information.',
-                'category-carousel'             => 'Category Carousel',
-                'static-content'                => 'Static Content',
-                'footer-link'                   => 'Footer Links',
-                'footer-link-form-title'        => 'Footer Link',
-                'slider-description'            => 'Slider related theme customization.',
-                'slider-add-btn'                => 'Add Slider',
-                'general'                       => 'General',
-                'add-filter-btn'                => 'Add Filter',
-                'save-btn'                      => 'Save',
-                'filter-title'                  => 'Title',
-                'sort'                          => 'Sort',
-                'desc'                          => 'Desc',
-                'asc'                           => 'Asc',
-                'limit'                         => 'Limit',
-                'footer-title'                  => 'Title',
-                'link'                          => 'Link',
-                'add-logo'                      => 'Add Logo',
-                'key'                           => 'Key: :key',
-                'value'                         => 'Value: :value',
-                'delete'                        => 'Delete',
-                'name'                          => 'Name',
-                'sort-order'                    => 'Sort Order',
-                'status'                        => 'Status',
-                'image'                         => 'Image',
-                'create-filter'                 => 'Create Filter',
-                'key-input'                     => 'Key',
-                'value-input'                   => 'Value',
-                'html'                          => 'HTML',
-                'css'                           => 'CSS',
-                'add-footer-link-btn'           => 'Add Footer Link',
-                'filters'                       => 'Filters',
-                'edit'                          => 'Edit',
-                'url'                           => 'Url',
-                'add-link'                      => 'Add Link',
-                'create-slider'                 => 'Create Slider',
-                'slider-image'                  => 'Slider Image',
-                'column'                        => 'Column',
-                'select'                        => 'Select',
-                'back'                          => 'Back',
-             ],
+                'product-carousel'               => 'Product Carousel',
+                'product-carousel-description'   => 'Showcase products elegantly with a dynamic and responsive product carousel.',
+                'category-carousel-description'  => 'Display dynamic categories attractively using a responsive category carousel.',
+                'static-content-description'     => 'Improve engagement with concise, informative static content for your audience.',
+                'footer-link-description'        => 'Navigate via footer links for seamless website exploration and information.',
+                'category-carousel'              => 'Category Carousel',
+                'static-content'                 => 'Static Content',
+                'footer-link'                    => 'Footer Links',
+                'footer-link-form-title'         => 'Footer Link',
+                'slider-description'             => 'Slider related theme customization.',
+                'slider-add-btn'                 => 'Add Slider',
+                'general'                        => 'General',
+                'add-filter-btn'                 => 'Add Filter',
+                'save-btn'                       => 'Save',
+                'filter-title'                   => 'Title',
+                'sort'                           => 'Sort',
+                'desc'                           => 'Desc',
+                'asc'                            => 'Asc',
+                'limit'                          => 'Limit',
+                'footer-title'                   => 'Title',
+                'link'                           => 'Link',
+                'add-logo'                       => 'Add Logo',
+                'key'                            => 'Key: :key',
+                'value'                          => 'Value: :value',
+                'delete'                         => 'Delete',
+                'name'                           => 'Name',
+                'sort-order'                     => 'Sort Order',
+                'status'                         => 'Status',
+                'image'                          => 'Image',
+                'create-filter'                  => 'Create Filter',
+                'key-input'                      => 'Key',
+                'value-input'                    => 'Value',
+                'html'                           => 'HTML',
+                'css'                            => 'CSS',
+                'add-footer-link-btn'            => 'Add Footer Link',
+                'filters'                        => 'Filters',
+                'edit'                           => 'Edit',
+                'url'                            => 'Url',
+                'add-link'                       => 'Add Link',
+                'create-slider'                  => 'Create Slider',
+                'slider-image'                   => 'Slider Image',
+                'column'                         => 'Column',
+                'select'                         => 'Select',
+                'back'                           => 'Back',
+            ],
 
             'edit' => [
                 'title'                         => 'Edit Theme',
@@ -3095,7 +3095,7 @@ return [
         '503' => [
             'title'       => '503 Service Unavailable',
             'description' => 'Oops! Looks like we\'re temporarily down for maintenance. Please check back in a bit.',
-        ]
+        ],
     ],
 
     'export' => [
