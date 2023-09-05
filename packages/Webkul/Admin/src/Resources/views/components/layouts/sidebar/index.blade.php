@@ -50,7 +50,7 @@
                 ></span>
 
                 <p
-                    class="text-gray-600 font-semibold transition-all duration-300 select-none"
+                    class="hidden text-gray-600 font-semibold transition-all duration-300 select-none"
                     :class="{'group-[.sidebar-collapsed]/container:invisible': isCollapsed}"
                     v-show="! isCollapsed"
                 >
