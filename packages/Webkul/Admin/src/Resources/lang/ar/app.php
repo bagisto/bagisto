@@ -923,6 +923,7 @@ return [
                 'value-per-locale'       => 'القيمة لكل لغة',
                 'value-per-channel'      => 'القيمة لكل قناة',
                 'yes'                    => 'نعم',
+                
                 'option'                 => [
                     'color'     => 'عينة لون',
                     'dropdown'  => 'قائمة منسدلة',
