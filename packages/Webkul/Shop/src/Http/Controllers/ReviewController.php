@@ -3,8 +3,8 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Product\Repositories\ProductReviewImageRepository;
+use Webkul\Product\Repositories\ProductReviewRepository;
 
 class ReviewController extends Controller
 {
@@ -20,8 +20,7 @@ class ReviewController extends Controller
         protected ProductRepository $productRepository,
         protected ProductReviewRepository $productReviewRepository,
         protected ProductReviewImageRepository $productReviewImageRepository
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -62,9 +61,10 @@ class ReviewController extends Controller
     public function store($id)
     {
         $this->validate(request(), [
-            'comment' => 'required',
-            'rating'  => 'required|numeric|min:1|max:5',
-            'title'   => 'required',
+            'title'          => 'required',
+            'comment'        => 'required',
+            'rating'         => 'required|numeric|min:1|max:5',
+            'attachments.*'  => 'file|mimetypes:image/jpeg,image/png,image/gif,image/bmp,image/webp',
         ]);
 
         $product = $this->productRepository->find($id);
@@ -94,7 +94,7 @@ class ReviewController extends Controller
      *
      * @param  string  $slug
      * @return \Illuminate\View\View
-    */
+     */
     public function show($slug)
     {
         $product = $this->productRepository->findBySlugOrFail($slug);
@@ -130,7 +130,7 @@ class ReviewController extends Controller
      * Customer delete all reviews from their account
      *
      * @return \Illuminate\Http\Response
-    */
+     */
     public function deleteAll()
     {
         $reviews = auth()->guard('customer')->user()->all_reviews;

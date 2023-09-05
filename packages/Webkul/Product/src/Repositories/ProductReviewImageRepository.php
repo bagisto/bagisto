@@ -12,7 +12,7 @@ class ProductReviewImageRepository extends Repository
      *
      * @return string
      */
-    function model(): string
+    public function model(): string
     {
         return 'Webkul\Product\Contracts\ProductReviewImage';
     }
@@ -30,7 +30,6 @@ class ProductReviewImageRepository extends Repository
 
         foreach ($data['attachments'] as $imageId => $image) {
             $file = 'attachments.' . $imageId;
-            
             $dir = 'review/' . $review->id;
 
             if (
