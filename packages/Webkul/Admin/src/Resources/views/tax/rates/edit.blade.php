@@ -102,23 +102,44 @@
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.taxes.rates.edit.state')
                                     </x-admin::form.control-group.label>
-                    
-                                    <x-admin::form.control-group.control
-                                        type="select"
-                                        name="state"
-                                        value="{{ old('state') }}"
-                                        :label="trans('admin::app.settings.taxes.rates.edit.state')"
-                                        :placeholder="trans('admin::app.settings.taxes.rates.edit.state')"
-                                        v-model="state"
-                                    >
-                                        <option value="">
-                                            @lang('admin::app.settings.taxes.rates.edit.select-state')
-                                        </option>
-                    
-                                        <option v-for='(state, index) in countryStates[country]' :value="state.code">
-                                            @{{ state.default_name }}
-                                        </option>
-                                    </x-admin::form.control-group.control>
+                                    
+                                    <template v-if="haveStates()">
+                                        <x-admin::form.control-group.control
+                                            type="select"
+                                            name="state"
+                                            value="{{ old('state') }}"
+                                            :label="trans('admin::app.settings.taxes.rates.edit.state')"
+                                            :placeholder="trans('admin::app.settings.taxes.rates.edit.state')"
+                                            v-model="state"
+                                        >
+                                            <option value="">
+                                                @lang('admin::app.settings.taxes.rates.edit.select-state')
+                                            </option>
+                        
+                                            <option v-for='(state, index) in countryStates[country]' :value="state.code">
+                                                @{{ state.default_name }}
+                                            </option>
+                                        </x-admin::form.control-group.control>
+                                    </template>
+
+                                    <template v-else>
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="state"
+                                            value="{{ old('state') }}"
+                                            :label="trans('admin::app.settings.taxes.rates.edit.state')"
+                                            :placeholder="trans('admin::app.settings.taxes.rates.edit.state')"
+                                            v-model="state"
+                                        >
+                                            <option value="">
+                                                @lang('admin::app.settings.taxes.rates.edit.select-state')
+                                            </option>
+                        
+                                            <option v-for='(state, index) in countryStates[country]' :value="state.code">
+                                                @{{ state.default_name }}
+                                            </option>
+                                        </x-admin::form.control-group.control>
+                                    </template>
                                 </x-admin::form.control-group>
     
                                 <!-- Tax Rate -->
