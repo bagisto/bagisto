@@ -885,7 +885,6 @@ return [
                 'decimal'                => 'Decimal',
                 'email'                  => 'Correo Electrónico',
                 'enable-wysiwyg'         => 'Habilitar Editor WYSIWYG',
-                'enable-wysiwyg'         => 'Habilitar Editor WYSIWYG',
                 'file'                   => 'Archivo',
                 'general'                => 'General',
                 'is-required'            => 'Es Requerido',
@@ -907,7 +906,6 @@ return [
                 'select'                 => 'Seleccionar',
                 'select-type'            => 'Tipo de Atributo de Selección',
                 'save-btn'               => 'Guardar Atributo',
-                'select'                 => 'Seleccionar',
                 'swatch'                 => 'Muestra de Color',
                 'title'                  => 'Editar Atributo',
                 'type'                   => 'Tipo de Atributo',
@@ -919,6 +917,7 @@ return [
                 'value-per-locale'       => 'Valor por Localización',
                 'value-per-channel'      => 'Valor por Canal',
                 'yes'                    => 'Sí',
+
                 'option'                 => [
                     'color'     => 'Muestra de Color',
                     'dropdown'  => 'Desplegable',
@@ -1060,16 +1059,12 @@ return [
                 'right-column'                     => 'Columna de la Derecha',
                 'unassigned-attributes'            => 'Atributos no asignados',
                 'unassigned-attributes-info'       => 'Arrastra estos atributos para agregarlos a las columnas o grupos.',
-                'general'                          => 'General',
                 'code'                             => 'Código',
                 'name'                             => 'Nombre',
                 'enter-code'                       => 'Ingresar Código',
                 'enter-name'                       => 'Ingresar Nombre',
                 'column'                           => 'Columna',
-                'main-column'                      => 'Columna Principal',
-                'right-column'                     => 'Columna de la Derecha',
                 'add-group-title'                  => 'Agregar Nuevo Grupo',
-                'add-group-btn'                    => 'Agregar Grupo',
                 'group-already-exists'             => 'Ya existe un nombre de grupo de atributos.',
                 'select-group'                     => 'Por favor, selecciona un grupo de atributos.',
                 'group-contains-system-attributes' => 'Este grupo contiene atributos del sistema. Primero mueve los atributos del sistema a otro grupo y luego inténtalo de nuevo.',
@@ -1095,10 +1090,7 @@ return [
                 'enter-code'                       => 'Ingresar Código',
                 'enter-name'                       => 'Ingresar Nombre',
                 'column'                           => 'Columna',
-                'main-column'                      => 'Columna Principal',
-                'right-column'                     => 'Columna de la Derecha',
                 'add-group-title'                  => 'Agregar Nuevo Grupo',
-                'add-group-btn'                    => 'Agregar Grupo',
                 'group-already-exists'             => 'Ya existe un nombre de grupo de atributos.',
                 'select-group'                     => 'Por favor, selecciona un grupo de atributos.',
                 'group-contains-system-attributes' => 'Este grupo contiene atributos del sistema. Primero mueve los atributos del sistema a otro grupo y luego inténtalo de nuevo.',
@@ -1353,7 +1345,6 @@ return [
                 'phone'              => 'Teléfono',
                 'street-address'     => 'Dirección de la Calle',
                 'post-code'          => 'Código Postal',
-                'default-address'    => 'Dirección Predeterminada',
                 'save-btn-title'     => 'Guardar Dirección',
             ],
     
@@ -1373,7 +1364,6 @@ return [
                 'phone'            => 'Teléfono',
                 'street-address'   => 'Dirección de la Calle',
                 'post-code'        => 'Código Postal',
-                'default-address'  => 'Dirección Predeterminada',
                 'save-btn-title'   => 'Guardar Dirección',
             ],
     
@@ -1754,7 +1744,6 @@ return [
                     'code-suffix'                               => 'Sufijo del Código',
                     'code-prefix'                               => 'Prefijo del Código',
                     'generate'                                  => 'Generar',
-                    'status'                                    => 'Estado',
                     'customer-group'                            => 'Grupo de Clientes',
                 ],
             
@@ -2151,7 +2140,6 @@ return [
                 'general'           => 'General',
                 'save-btn'          => 'Guardar Fuentes de Inventario',
                 'back-btn'          => 'Volver',
-                'general'           => 'General',
                 'code'              => 'Código',
                 'name'              => 'Nombre',
                 'description'       => 'Descripción',
@@ -2487,6 +2475,7 @@ return [
             'index' => [
                 'title'      => 'Temas',
                 'create-btn' => 'Crear Tema',
+                
                 'datagrid'   => [
                     'view'       => 'Ver',
                     'delete'     => 'Eliminar',
@@ -2699,7 +2688,6 @@ return [
                     'review'                              => 'Reseña',
                     'review-info'                         => 'Evaluación o valoración de algo, a menudo con opiniones y comentarios.',
                     'allow-guest-review'                  => 'Permitir reseñas de invitados',
-                    'attribute'                           => 'Atributo',
                     'attribute-info'                      => 'Característica o propiedad que define un objeto, influenciando su comportamiento, apariencia o función.',
                     'image-upload-size'                   => 'Tamaño de Carga de Imagen Permitido (en Kb)',
                     'file-upload-size'                    => 'Tamaño de Carga de Archivo Permitido (en Kb)',
@@ -2825,8 +2813,6 @@ return [
                     'rate'                      => 'Tarifa',
                     'status'                    => 'Estado',
                     'type'                      => 'Tipo',
-                    'flat-rate-shipping'        => 'Envío de Tarifa Plana',
-                    'flat-rate-shipping-info'   => 'Información sobre el Envío de Tarifa Plana',
                 ],
             
                 'payment-methods' => [
@@ -2861,7 +2847,6 @@ return [
                     'client-secret-info'             => 'Agrega aquí tu clave secreta',
                     'accepted-currencies'            => 'Monedas Aceptadas',
                     'accepted-currencies-info'       => 'Agrega códigos de moneda separados por comas, por ejemplo, USD, INR,...',
-                    'sandbox'                        => 'Entorno de Pruebas',
                     'business-account'               => 'Cuenta de Negocio',
                 ],
             
