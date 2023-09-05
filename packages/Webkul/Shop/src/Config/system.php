@@ -9,7 +9,7 @@ return [
         'fields' => [
             [
                 'name'          => 'compare_option',
-                'title'         => 'shop::app.products.configurations.compare_options',
+                'title'         => 'shop::app.products.configurations.compare-options',
                 'type'          => 'boolean',
                 'locale_based'  => true,
                 'channel_based' => true,
@@ -27,7 +27,5 @@ return [
                 'channel_based' => true,
             ],
         ],
-    ]
+    ],
 ];
-
-?>

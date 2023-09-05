@@ -17,7 +17,7 @@ return [
             'sign-in-button'       => 'تسجيل الدخول',
             'footer'               => '© حقوق الطبع والنشر 2010 - 2022، Webkul Software (مسجلة في الهند). جميع الحقوق محفوظة.',
         ],
-    
+
         'reset-password' => [
             'title'            => 'إعادة تعيين كلمة المرور',
             'email'            => 'البريد الإلكتروني المسجل',
@@ -27,7 +27,7 @@ return [
             'submit-btn-title' => 'إعادة تعيين كلمة المرور',
             'footer'           => '© حقوق الطبع والنشر 2010 - 2022، Webkul Software (مسجلة في الهند). جميع الحقوق محفوظة.',
         ],
-    
+
         'login-form' => [
             'page-title'          => 'تسجيل الدخول للعملاء',
             'form-login-text'     => 'إذا كان لديك حساب، قم بتسجيل الدخول باستخدام عنوان البريد الإلكتروني الخاص بك.',
@@ -35,8 +35,8 @@ return [
             'title'               => 'تسجيل الدخول',
             'email'               => 'البريد الإلكتروني',
             'password'            => 'كلمة المرور',
-            'forgot_pass'         => 'هل نسيت كلمة المرور؟',
-            'button_title'        => 'تسجيل الدخول',
+            'forgot-pass'         => 'هل نسيت كلمة المرور؟',
+            'button-title'        => 'تسجيل الدخول',
             'new-customer'        => 'زبون جديد؟',
             'create-your-account' => 'إنشاء حسابك',
             'footer'              => '© حقوق الطبع والنشر 2010 - 2022، Webkul Software (مسجلة في الهند). جميع الحقوق محفوظة.',
@@ -44,7 +44,7 @@ return [
             'not-activated'       => 'يتطلب تنشيط حسابك موافقة المسؤول',
             'verify-first'        => 'الرجاء التحقق من حساب البريد الإلكتروني الخاص بك أولاً.',
         ],
-    
+
         'signup-form' => [
             'page-title'                  => 'كن مستخدمًا',
             'form-signup-text'            => 'إذا كنت جديدًا في متجرنا، فنحن سعداء بانضمامك كعضو.',
@@ -53,10 +53,10 @@ return [
             'last-name'                   => 'اسم العائلة',
             'email'                       => 'البريد الإلكتروني',
             'password'                    => 'كلمة المرور',
-            'confirm_pass'                => 'تأكيد كلمة المرور',
+            'confirm-pass'                => 'تأكيد كلمة المرور',
             'subscribe-to-newsletter'     => 'الاشتراك في النشرة الإخبارية',
-            'button_title'                => 'التسجيل',
-            'account_exists'              => 'هل لديك حساب بالفعل؟',
+            'button-title'                => 'التسجيل',
+            'account-exists'              => 'هل لديك حساب بالفعل؟',
             'footer'                      => '© حقوق الطبع والنشر 2010 - 2022، Webkul Software (مسجلة في الهند). جميع الحقوق محفوظة.',
             'success-verify'              => 'تم إنشاء الحساب بنجاح، تم إرسال رسالة بريد إلكتروني للتحقق.',
             'success-verify-email-unsent' => 'تم إنشاء الحساب بنجاح، ولكن رسالة التحقق لم تتم إرسالها.',
@@ -66,7 +66,7 @@ return [
             'verification-not-sent'       => 'خطأ! مشكلة في إرسال رسالة التحقق البريدية، يرجى المحاولة مرة أخرى لاحقًا.',
             'verification-sent'           => 'تم إرسال رسالة التحقق',
         ],
-    
+
         'account' => [
             'home'      => 'الصفحة الرئيسية',
             'profile'   => [
@@ -95,7 +95,7 @@ return [
                 'other'                   => 'آخر',
                 'save'                    => 'حفظ',
             ],
-    
+
             'addresses' => [
                 'title'            => 'العنوان',
                 'edit'             => 'تعديل',
@@ -125,17 +125,17 @@ return [
                 'save'             => 'حفظ',
                 'security-warning' => 'تم العثور على نشاط مشبوه!!!',
             ],
-    
+
             'orders' => [
-                'title'         => 'الطلبات',
-                'order_id'      => 'رقم الطلب',
-                'order'         => 'الطلب',
-                'order_date'    => 'تاريخ الطلب',
-                'total'         => 'الإجمالي',
-    
+                'title'      => 'الطلبات',
+                'order-id'   => 'رقم الطلب',
+                'order'      => 'الطلب',
+                'order-date' => 'تاريخ الطلب',
+                'total'      => 'الإجمالي',
+
                 'status'        => [
                     'title' => 'الحالة',
-    
+
                     'options' => [
                         'processing'      => 'قيد المعالجة',
                         'completed'       => 'مكتمل',
@@ -146,10 +146,10 @@ return [
                         'fraud'           => 'احتيال',
                     ],
                 ],
-    
+
                 'action'        => 'الإجراء',
                 'empty-order'   => 'لم تقم بطلب أي منتج بعد',
-    
+
                 'view' => [
                     'title'              => 'عرض',
                     'page-title'         => 'الطلب #:order_id',
@@ -162,7 +162,7 @@ return [
                     'cancel-confirm-msg' => 'هل أنت متأكد أنك تريد إلغاء هذا الطلب؟',
                     'cancel-success'     => 'تم إلغاء طلبك بنجاح',
                     'cancel-error'       => 'لا يمكن إلغاء طلبك.',
-                    
+
                     'information' => [
                         'info'              => 'معلومات',
                         'placed-on'         => 'تم الطلب في',
@@ -186,24 +186,24 @@ return [
                         'total-refunded'    => 'الإجمالي المسترد',
                         'total-due'         => 'الإجمالي المستحق',
                     ],
-                    
+
                     'invoices'  => [
-                        'invoices'            => 'الفواتير',
-                        'individual-invoice'  => 'الفاتورة #:invoice_id',
-                        'sku'                 => 'SKU',
-                        'product-name'        => 'الاسم',
-                        'price'               => 'السعر',
-                        'products-ordered'    => 'المنتجات المطلوبة',
-                        'qty'                 => 'الكمية',
-                        'subtotal'            => 'الإجمالي الفرعي',
-                        'tax-amount'          => 'مبلغ الضريبة',
-                        'grand-total'         => 'الإجمالي الكلي',
-                        'shipping-handling'   => 'الشحن والمعالجة',
-                        'discount'            => 'الخصم',
-                        'tax'                 => 'الضريبة',
-                        'print'               => 'طباعة',
+                        'invoices'           => 'الفواتير',
+                        'individual-invoice' => 'الفاتورة #:invoice_id',
+                        'sku'                => 'SKU',
+                        'product-name'       => 'الاسم',
+                        'price'              => 'السعر',
+                        'products-ordered'   => 'المنتجات المطلوبة',
+                        'qty'                => 'الكمية',
+                        'subtotal'           => 'الإجمالي الفرعي',
+                        'tax-amount'         => 'مبلغ الضريبة',
+                        'grand-total'        => 'الإجمالي الكلي',
+                        'shipping-handling'  => 'الشحن والمعالجة',
+                        'discount'           => 'الخصم',
+                        'tax'                => 'الضريبة',
+                        'print'              => 'طباعة',
                     ],
-                    
+
                     'shipments' => [
                         'shipments'           => 'الشحن',
                         'tracking-number'     => 'رقم التتبع',
@@ -213,32 +213,32 @@ return [
                         'qty'                 => 'الكمية',
                         'subtotal'            => 'الإجمالي الفرعي',
                     ],
-                    
+
                     'refunds'  => [
-                        'refunds'             => 'المستردات',
-                        'individual-refund'   => 'استرداد #:refund_id',
-                        'sku'                 => 'SKU',
-                        'product-name'        => 'الاسم',
-                        'price'               => 'السعر',
-                        'qty'                 => 'الكمية',
-                        'tax-amount'          => 'مبلغ الضريبة',
-                        'subtotal'            => 'الإجمالي الفرعي',
-                        'grand-total'         => 'الإجمالي الكلي',
-                        'no-result-found'     => 'لم نتمكن من العثور على أي سجلات.',
-                        'shipping-handling'   => 'الشحن والمعالجة',
-                        'discount'            => 'الخصم',
-                        'tax'                 => 'الضريبة',
-                        'adjustment-refund'   => 'استرداد التعديل',
-                        'adjustment-fee'      => 'رسوم التعديل',
+                        'refunds'           => 'المستردات',
+                        'individual-refund' => 'استرداد #:refund_id',
+                        'sku'               => 'SKU',
+                        'product-name'      => 'الاسم',
+                        'price'             => 'السعر',
+                        'qty'               => 'الكمية',
+                        'tax-amount'        => 'مبلغ الضريبة',
+                        'subtotal'          => 'الإجمالي الفرعي',
+                        'grand-total'       => 'الإجمالي الكلي',
+                        'no-result-found'   => 'لم نتمكن من العثور على أي سجلات.',
+                        'shipping-handling' => 'الشحن والمعالجة',
+                        'discount'          => 'الخصم',
+                        'tax'               => 'الضريبة',
+                        'adjustment-refund' => 'استرداد التعديل',
+                        'adjustment-fee'    => 'رسوم التعديل',
                     ],
                 ],
             ],
 
             'reviews'    => [
-                'title'         => 'التقييمات',
-                'empty-review'  => 'لم تقم بتقييم أي منتج حتى الآن',
+                'title'        => 'التقييمات',
+                'empty-review' => 'لم تقم بتقييم أي منتج حتى الآن',
             ],
-            
+
             'downloadable-products'  => [
                 'name'                => 'المنتجات قابلة للتنزيل',
                 'orderId'             => 'رقم الطلب',
@@ -251,7 +251,7 @@ return [
                 'download-error'      => 'تم انتهاء صلاحية رابط التنزيل',
                 'payment-error'       => 'لم يتم دفع هذا التنزيل بعد',
             ],
-            
+
             'wishlist' => [
                 'page-title'         => 'قائمة الأماني',
                 'title'              => 'قائمة الأماني',
@@ -264,7 +264,6 @@ return [
                 'removed'            => 'تم إزالة العنصر بنجاح من قائمة الأماني',
                 'remove-fail'        => 'لا يمكن إزالة العنصر من قائمة الأماني',
                 'moved'              => 'تم نقل العنصر بنجاح إلى السلة',
-                'missing_options'    => 'الخيارات مفقودة لهذا المنتج',
                 'product-removed'    => 'المنتج غير متاح بعد الإزالة بواسطة المشرف',
                 'remove-all-success' => 'تمت إزالة جميع العناصر من قائمة الأماني الخاصة بك',
                 'see-details'        => 'رؤية التفاصيل',
@@ -292,7 +291,7 @@ return [
                 'search-text'   => 'ابحث عن المنتجات هنا',
                 'search'        => 'بحث',
             ],
-    
+
             'footer' => [
                 'newsletter-text'        => 'احصل على نشرتنا الممتعة!',
                 'subscribe-stay-touch'   => 'اشترك للبقاء على اتصال.',
@@ -311,7 +310,7 @@ return [
                 'privacy-cookies-policy' => 'سياسة الخصوصية وملفات تعريف الارتباط',
             ],
         ],
-    
+
         'datagrid' => [
             'toolbar' => [
                 'mass-actions' => [
@@ -319,24 +318,24 @@ return [
                     'select-option' => 'اختر الخيار',
                     'submit'        => 'إرسال',
                 ],
-    
+
                 'filter' => [
                     'title' => 'تصفية',
                 ],
-    
+
                 'search' => [
                     'title' => 'بحث',
                 ],
             ],
-    
+
             'filters' => [
                 'title' => 'تطبيق الفلاتر',
-    
+
                 'custom-filters' => [
                     'title'     => 'تصفيات مخصصة',
                     'clear-all' => 'امسح الكل',
                 ],
-    
+
                 'date-options' => [
                     'today'             => 'اليوم',
                     'yesterday'         => 'أمس',
@@ -348,13 +347,13 @@ return [
                     'this-year'         => 'هذا العام',
                 ],
             ],
-    
+
             'table' => [
                 'actions'              => 'الإجراءات',
                 'no-records-available' => 'لا توجد سجلات متاحة.',
             ],
         ],
-    
+
         'products'   => [
             'card' => [
                 'new'                => 'جديد',
@@ -364,12 +363,12 @@ return [
                 'already-in-compare' => 'العنصر مضاف بالفعل إلى قائمة المقارنة.',
                 'add-to-cart'        => 'أضف إلى العربة',
             ],
-    
+
             'carousel' => [
                 'view-all' => 'عرض الكل',
             ],
         ],
-    
+
         'range-slider' => [
             'range' => 'النطاق:',
         ],
@@ -409,7 +408,7 @@ return [
         'name'                   => 'الاسم',
         'qty'                    => 'الكمية',
         'offers'                 => 'اشترِ :qty بسعر :price للوحدة ووفّر :discount%',
-    
+
         'sort-by'                => [
             'title'   => 'ترتيب حسب',
             'options' => [
@@ -421,39 +420,39 @@ return [
                 'expensive-first' => 'الأغلى أولاً',
             ],
         ],
-    
+
         'view' => [
             'type' => [
                 'configurable' => [
                     'select-options'       => 'الرجاء اختيار خيار',
                     'select-above-options' => 'الرجاء اختيار الخيارات أعلاه',
                 ],
-    
+
                 'bundle' => [
                     'none' => 'لا شيء',
                 ],
-    
+
                 'downloadable' => [
                     'samples' => 'عينات',
                     'links'   => 'روابط',
                     'sample'  => 'عينة',
                 ],
-    
+
                 'grouped' => [
                     'name' => 'الاسم',
                 ],
             ],
-    
+
             'reviews' => [
                 'cancel'      => 'إلغاء',
                 'success'     => 'تم إرسال التقييم بنجاح.',
                 'attachments' => 'المرفقات',
             ],
         ],
-    
+
         'configurations' => [
-            'compare_options'     => 'خيارات المقارنة',
-            'wishlist-options'    => 'خيارات القائمة المفضلة',
+            'compare_options'  => 'خيارات المقارنة',
+            'wishlist-options' => 'خيارات القائمة المفضلة',
         ],
     ],
 
@@ -464,11 +463,11 @@ return [
             'sort'      => 'ترتيب',
             'clear-all' => 'مسح الكل',
         ],
-    
+
         'toolbar' => [
-            'show'    => 'عرض',
+            'show' => 'عرض',
         ],
-    
+
         'view' => [
             'empty'     => 'لا تتوفر منتجات في هذا الفئة',
             'load-more' => 'تحميل المزيد',
@@ -481,7 +480,7 @@ return [
             'image-search-option' => 'خيار البحث بالصورة',
         ],
     ],
-    
+
     'compare' => [
         'product-compare'    => 'مقارنة المنتجات',
         'delete-all'         => 'مسح الكل',
@@ -493,7 +492,7 @@ return [
         'remove-all-success' => 'تمت إزالة جميع العناصر بنجاح.',
         'remove-error'       => 'حدث خطأ ما، يرجى المحاولة مرة أخرى لاحقًا.',
     ],
-    
+
     'checkout' => [
         'success' => [
             'title'         => 'تم تقديم الطلب بنجاح',
@@ -501,7 +500,7 @@ return [
             'order-id-info' => 'رقم طلبك هو #:order_id',
             'info'          => 'سنقوم بإرسال تفاصيل طلبك ومعلومات التتبع إلى بريدك الإلكتروني',
         ],
-    
+
         'cart' => [
             'item-add-to-cart'          => 'تمت إضافة العنصر بنجاح',
             'return-to-shop'            => 'العودة للتسوق',
@@ -518,7 +517,7 @@ return [
             'inventory-warning'         => 'الكمية المطلوبة غير متوفرة، يرجى المحاولة مرة أخرى لاحقًا.',
             'illegal'                   => 'الكمية لا يمكن أن تكون أقل من واحدة.',
             'inactive'                  => 'تم إلغاء تنشيط المنتج وبالتالي إزالته من السلة.',
-    
+
             'index' => [
                 'home'                     => 'الرئيسية',
                 'cart'                     => 'السلة',
@@ -538,7 +537,7 @@ return [
                 'see-details'              => 'رؤية التفاصيل',
                 'move-to-wishlist'         => 'نقل إلى قائمة الأماني',
             ],
-    
+
             'coupon'   => [
                 'code'            => 'كود الكوبون',
                 'applied'         => 'تم تطبيق الكوبون',
@@ -554,18 +553,18 @@ return [
                 'subtotal'        => 'المجموع الفرعي',
                 'button-title'    => 'تطبيق',
             ],
-    
+
             'mini-cart' => [
-                'see-details'           => 'رؤية التفاصيل',
-                'shopping-cart'         => 'عربة التسوق',
-                'offer-on-orders'       => 'احصل على خصم يصل إلى 30٪ على طلبك الأول',
-                'remove'                => 'إزالة',
-                'empty-cart'            => 'سلتك فارغة',
-                'subtotal'              => 'المجموع الفرعي',
-                'continue-to-checkout'  => 'المتابعة للسداد',
-                'view-cart'             => 'عرض السلة',
+                'see-details'          => 'رؤية التفاصيل',
+                'shopping-cart'        => 'عربة التسوق',
+                'offer-on-orders'      => 'احصل على خصم يصل إلى 30٪ على طلبك الأول',
+                'remove'               => 'إزالة',
+                'empty-cart'           => 'سلتك فارغة',
+                'subtotal'             => 'المجموع الفرعي',
+                'continue-to-checkout' => 'المتابعة للسداد',
+                'view-cart'            => 'عرض السلة',
             ],
-    
+
             'summary' => [
                 'cart-summary'        => 'ملخص السلة',
                 'sub-total'           => 'المجموع الفرعي',
@@ -577,33 +576,33 @@ return [
                 'proceed-to-checkout' => 'المتابعة للسداد',
             ],
         ],
-    
+
         'onepage' => [
             'addresses' => [
                 'billing' => [
-                    'billing-address'       => 'عنوان الفواتير',
-                    'add-new-address'       => 'إضافة عنوان جديد',
-                    'same-billing-address'  => 'العنوان هو نفس عنوان الفواتير',
-                    'back'                  => 'العودة',
-                    'company-name'          => 'اسم الشركة',
-                    'first-name'            => 'الاسم الأول',
-                    'last-name'             => 'اسم العائلة',
-                    'email'                 => 'البريد الإلكتروني',
-                    'street-address'        => 'عنوان الشارع',
-                    'country'               => 'البلد',
-                    'state'                 => 'الولاية',
-                    'select-state'          => 'اختر الولاية',
-                    'city'                  => 'المدينة',
-                    'postcode'              => 'الرمز البريدي',
-                    'telephone'             => 'رقم الهاتف',
-                    'save-address'          => 'حفظ هذا العنوان',
-                    'confirm'               => 'تأكيد',
+                    'billing-address'      => 'عنوان الفواتير',
+                    'add-new-address'      => 'إضافة عنوان جديد',
+                    'same-billing-address' => 'العنوان هو نفس عنوان الفواتير',
+                    'back'                 => 'العودة',
+                    'company-name'         => 'اسم الشركة',
+                    'first-name'           => 'الاسم الأول',
+                    'last-name'            => 'اسم العائلة',
+                    'email'                => 'البريد الإلكتروني',
+                    'street-address'       => 'عنوان الشارع',
+                    'country'              => 'البلد',
+                    'state'                => 'الولاية',
+                    'select-state'         => 'اختر الولاية',
+                    'city'                 => 'المدينة',
+                    'postcode'             => 'الرمز البريدي',
+                    'telephone'            => 'رقم الهاتف',
+                    'save-address'         => 'حفظ هذا العنوان',
+                    'confirm'              => 'تأكيد',
                 ],
-    
+
                 'index' => [
                     'confirm' => 'تأكيد',
                 ],
-    
+
                 'shipping' => [
                     'shipping-address' => 'عنوان الشحن',
                     'add-new-address'  => 'إضافة عنوان جديد',
@@ -624,7 +623,7 @@ return [
                     'confirm'          => 'تأكيد',
                 ],
             ],
-    
+
             'coupon' => [
                 'discount'        => 'خصم الكوبون',
                 'code'            => 'كود الكوبون',
@@ -638,20 +637,20 @@ return [
                 'enter-your-code' => 'أدخل كودك',
                 'subtotal'        => 'المجموع الفرعي',
             ],
-    
+
             'index' => [
                 'home'     => 'الرئيسية',
                 'checkout' => 'الدفع',
             ],
-    
+
             'payment' => [
                 'payment-method' => 'طريقة الدفع',
             ],
-    
+
             'shipping' => [
                 'shipping-method' => 'طريقة الشحن',
             ],
-    
+
             'summary' => [
                 'cart-summary'     => 'ملخص السلة',
                 'sub-total'        => 'المجموع الفرعي',
@@ -663,7 +662,7 @@ return [
             ],
         ],
     ],
-    
+
     'home' => [
         'index' => [
             'offer'               => 'احصل على خصم يصل إلى 40٪ على طلبك الأول اشتر الآن',
@@ -671,34 +670,34 @@ return [
             'resend-verify-email' => 'إعادة إرسال رسالة التحقق من البريد الإلكتروني',
         ],
     ],
-    
+
     'errors' => [
         'go-to-home'   => 'العودة للصفحة الرئيسية',
-    
+
         '404' => [
             'title'       => '404 الصفحة غير موجودة',
             'description' => 'عذرًا! الصفحة التي تبحث عنها في إجازة. يبدو أننا لم نتمكن من العثور على ما كنت تبحث عنه.',
         ],
-    
+
         '401' => [
             'title'       => '401 غير مصرح به',
             'description' => 'عذرًا! يبدو أنك لا تمتلك الصلاحيات الكافية للوصول إلى هذه الصفحة. يبدو أنك تفتقد الاعتمادات الضرورية.',
         ],
-    
+
         '403' => [
             'title'       => '403 ممنوع',
             'description' => 'عذرًا! هذه الصفحة محظورة. يبدو أنك ليس لديك الأذونات اللازمة لعرض هذا المحتوى.',
         ],
-    
+
         '500' => [
             'title'       => '500 خطأ داخلي في الخادم',
             'description' => 'عذرًا! حدث خطأ ما. يبدو أننا نواجه مشكلة في تحميل الصفحة التي تبحث عنها.',
         ],
-    
+
         '503' => [
             'title'       => '503 الخدمة غير متوفرة',
             'description' => 'عذرًا! يبدو أننا متوقفون مؤقتًا للصيانة. يرجى التحقق مرة أخرى في وقت لاحق.',
-        ]
+        ],
     ],
 
     'layouts' => [
@@ -710,58 +709,58 @@ return [
         'orders'                => 'الطلبات',
         'downloadable-products' => 'المنتجات القابلة للتنزيل',
     ],
-    
+
     'subscription' => [
         'already'             => 'أنت مشترك بالفعل في النشرة الإخبارية لدينا.',
         'subscribe-success'   => 'لقد اشتركت بنجاح في النشرة الإخبارية لدينا.',
         'unsubscribe-success' => 'تم إلغاء اشتراكك بنجاح في النشرة الإخبارية لدينا.',
     ],
-    
+
     'emails' => [
         'dear'   => 'عزيزي :customer_name',
         'thanks' => 'إذا كنت بحاجة إلى أي نوع من المساعدة، يرجى الاتصال بنا على <a href=":link" style=":style">:email</a>.<br/>شكرًا لك!',
-    
+
         'customers' => [
             'registration' => [
                 'subject'     => 'تسجيل عميل جديد',
                 'greeting'    => 'مرحبًا وشكرًا لك على التسجيل معنا!',
                 'description' => 'تم إنشاء حسابك بنجاح الآن، ويمكنك تسجيل الدخول باستخدام عنوان بريدك الإلكتروني وكلمة المرور. بمجرد تسجيل الدخول، ستتمكن من الوصول إلى خدمات أخرى بما في ذلك استعراض الطلبات السابقة وقائمة الأماني وتحرير معلومات حسابك.',
-                'sign-in'    => 'تسجيل الدخول'
+                'sign-in'     => 'تسجيل الدخول',
             ],
-    
+
             'forgot-password' => [
                 'subject'        => 'رسالة إعادة تعيين كلمة المرور',
                 'greeting'       => 'نسيت كلمة المرور!',
                 'description'    => 'تتلقى هذا البريد الإلكتروني لأننا تلقينا طلبًا لإعادة تعيين كلمة المرور الخاصة بحسابك.',
-                'reset-password' => 'إعادة تعيين كلمة المرور'
+                'reset-password' => 'إعادة تعيين كلمة المرور',
             ],
-    
+
             'update-password' => [
                 'subject'     => 'تم تحديث كلمة المرور',
                 'greeting'    => 'تم تحديث كلمة المرور!',
                 'description' => 'تتلقى هذا البريد الإلكتروني لأنك قمت بتحديث كلمة المرور الخاصة بك.',
             ],
-    
+
             'verification' => [
-                'subject'        => 'رسالة التحقق من الحساب',
-                'greeting'       => 'مرحبًا!',
-                'description'    => 'يرجى النقر على الزر أدناه للتحقق من عنوان بريدك الإلكتروني.',
-                'verify-email'   => 'تحقق من عنوان البريد الإلكتروني'
+                'subject'      => 'رسالة التحقق من الحساب',
+                'greeting'     => 'مرحبًا!',
+                'description'  => 'يرجى النقر على الزر أدناه للتحقق من عنوان بريدك الإلكتروني.',
+                'verify-email' => 'تحقق من عنوان البريد الإلكتروني',
             ],
-    
+
             'commented' => [
-                'subject' => 'تمت إضافة تعليق جديد',
-                'description' => 'الملاحظة هي - :note'
+                'subject'     => 'تمت إضافة تعليق جديد',
+                'description' => 'الملاحظة هي - :note',
             ],
-    
+
             'subscribed' => [
                 'subject'     => 'أنت مشترك في نشرتنا الإخبارية',
                 'greeting'    => 'مرحبًا في نشرتنا الإخبارية!',
                 'description' => 'تهانينا ومرحبًا بك في مجتمع نشرتنا الإخبارية! نحن متحمسون لوجودك معنا وللبقاء على اطلاع دائم بآخر الأخبار والاتجاهات والعروض الحصرية.',
-                'unsubscribe' => 'إلغاء الاشتراك'
-            ]
+                'unsubscribe' => 'إلغاء الاشتراك',
+            ],
         ],
-    
+
         'orders' => [
             'created' => [
                 'subject'  => 'تأكيد طلب جديد',
@@ -769,40 +768,40 @@ return [
                 'greeting' => 'شكرًا على طلبك :order_id المنجز في :created_at',
                 'summary'  => 'ملخص الطلب',
             ],
-    
+
             'invoiced' => [
                 'subject'  => 'تأكيد فاتورة جديدة',
                 'title'    => 'تأكيد الفاتورة!',
                 'greeting' => 'الفاتورة الخاصة بك #:invoice_id للطلب :order_id تم إنشاؤها في :created_at',
                 'summary'  => 'ملخص الفاتورة',
             ],
-    
+
             'shipped' => [
                 'subject'  => 'تأكيد شحن جديد',
                 'title'    => 'تم شحن الطلب!',
                 'greeting' => 'تم شحن طلبك :order_id المنجز في :created_at',
                 'summary'  => 'ملخص الشحنة',
             ],
-    
+
             'refunded' => [
                 'subject'  => 'تأكيد استرداد جديد',
                 'title'    => 'تم استرداد الطلب!',
                 'greeting' => 'تم بدء عملية استرداد للطلب :order_id المنجز في :created_at',
                 'summary'  => 'ملخص الاسترداد',
             ],
-    
+
             'canceled' => [
                 'subject'  => 'تم إلغاء طلب جديد',
                 'title'    => 'تم إلغاء الطلب!',
                 'greeting' => 'تم إلغاء طلبك :order_id المنجز في :created_at',
                 'summary'  => 'ملخص الطلب',
             ],
-    
+
             'commented' => [
                 'subject' => 'تمت إضافة تعليق جديد',
                 'title'   => 'تمت إضافة تعليق جديد إلى طلبك :order_id المنجز في :created_at',
             ],
-    
+
             'shipping-address'  => 'عنوان الشحن',
             'carrier'           => 'الناقل',
             'tracking-number'   => 'رقم التتبع: :tracking_number',

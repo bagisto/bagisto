@@ -2,10 +2,10 @@
 
 return [
     'configurations' => [
-        'settings-title' => 'הגדרות',
+        'settings-title'      => 'הגדרות',
         'settings-title-info' => 'הגדרות מתייחסות לבחירות הניתנות להגדרה שמשליטות באופן כיצד מערכת, אפליקציה או מכשיר פועלים, ומותאמות להעדפות ולדרישות של המשתמש.',
     ],
-    
+
     'customers' => [
         'forgot-password' => [
             'title'                => 'שחזור סיסמה',
@@ -17,7 +17,7 @@ return [
             'sign-in-button'       => 'התחברות',
             'footer'               => '© זכויות יוצרים 2010 - 2022, Webkul Software (רשומה בהודו). כל הזכויות שמורות.',
         ],
-    
+
         'reset-password' => [
             'title'            => 'איפוס סיסמה',
             'email'            => 'אימייל רשום',
@@ -27,7 +27,7 @@ return [
             'submit-btn-title' => 'איפוס סיסמה',
             'footer'           => '© זכויות יוצרים 2010 - 2022, Webkul Software (רשומה בהודו). כל הזכויות שמורות.',
         ],
-    
+
         'login-form' => [
             'page-title'          => 'התחברות ללקוחות',
             'form-login-text'     => 'אם יש לך חשבון, התחבר עם כתובת האימייל שלך.',
@@ -35,8 +35,8 @@ return [
             'title'               => 'התחברות',
             'email'               => 'אימייל',
             'password'            => 'סיסמה',
-            'forgot_pass'         => 'שכחת סיסמה?',
-            'button_title'        => 'התחברות',
+            'forgot-pass'         => 'שכחת סיסמה?',
+            'button-title'        => 'התחברות',
             'new-customer'        => 'לקוח חדש?',
             'create-your-account' => 'צור את החשבון שלך',
             'footer'              => '© זכויות יוצרים 2010 - 2022, Webkul Software (רשומה בהודו). כל הזכויות שמורות.',
@@ -44,7 +44,7 @@ return [
             'not-activated'       => 'הפעלת החשבון שלך מחכה לאישור מנהל',
             'verify-first'        => 'אנא אמת את חשבון האימייל שלך תחילה.',
         ],
-    
+
         'signup-form' => [
             'page-title'                  => 'הצטרף כלקוח',
             'form-signup-text'            => 'אם אתה חדש בחנות שלנו, אנחנו שמחים לראותך כחבר.',
@@ -53,10 +53,10 @@ return [
             'last-name'                   => 'שם משפחה',
             'email'                       => 'אימייל',
             'password'                    => 'סיסמה',
-            'confirm_pass'                => 'אימות סיסמה',
+            'confirm-pass'                => 'אימות סיסמה',
             'subscribe-to-newsletter'     => 'הרשם לניוזלטר',
-            'button_title'                => 'הירשם',
-            'account_exists'              => 'כבר יש לך חשבון?',
+            'button-title'                => 'הירשם',
+            'account-exists'              => 'כבר יש לך חשבון?',
             'footer'                      => '© זכויות יוצרים 2010 - 2022, Webkul Software (רשומה בהודו). כל הזכויות שמורות.',
             'success-verify'              => 'חשבון נוצר בהצלחה, הודעת אימייל נשלחה לאימות.',
             'success-verify-email-unsent' => 'חשבון נוצר בהצלחה, אך הודעת האימייל לא נשלחה.',
@@ -66,9 +66,9 @@ return [
             'verification-not-sent'       => 'שגיאה! בעיה בשליחת האימייל לאימות, אנא נסה שוב מאוחר יותר.',
             'verification-sent'           => 'האימייל לאימות נשלח',
         ],
-    
+
         'account' => [
-            'home' => 'בית',
+            'home'    => 'בית',
             'profile' => [
                 'title'                   => 'פרופיל',
                 'first-name'              => 'שם פרטי',
@@ -95,98 +95,98 @@ return [
                 'other'                   => 'אחר',
                 'save'                    => 'שמור',
             ],
-    
+
             'addresses' => [
-                'title' => 'כתובת',
-                'edit' => 'ערוך',
-                'edit-address' => 'ערוך כתובת',
-                'delete' => 'מחק',
-                'set-as-default' => 'הגדר כברירת מחדל',
-                'add-address' => 'הוסף כתובת',
-                'company-name' => 'שם החברה',
-                'vat-id' => 'מספר עוסק',
-                'address-1' => 'כתובת 1',
-                'address-2' => 'כתובת 2',
-                'city' => 'עיר',
-                'state' => 'מדינה',
-                'select-country' => 'בחר מדינה',
-                'country' => 'מדינה',
-                'default-address' => 'כתובת ברירת מחדל',
-                'first-name' => 'שם פרטי',
-                'last-name' => 'שם משפחה',
-                'phone' => 'טלפון',
-                'street-address' => 'כתובת',
-                'post-code' => 'מיקוד',
-                'empty-address' => 'לא הוספת עדיין כתובת לחשבונך.',
-                'create-success' => 'הכתובת נוספה בהצלחה.',
-                'edit-success' => 'הכתובת עודכנה בהצלחה.',
-                'default-delete' => 'לא ניתן לשנות את הכתובת הברירת מחדל.',
-                'delete-success' => 'הכתובת נמחקה בהצלחה',
-                'save' => 'שמור',
+                'title'            => 'כתובת',
+                'edit'             => 'ערוך',
+                'edit-address'     => 'ערוך כתובת',
+                'delete'           => 'מחק',
+                'set-as-default'   => 'הגדר כברירת מחדל',
+                'add-address'      => 'הוסף כתובת',
+                'company-name'     => 'שם החברה',
+                'vat-id'           => 'מספר עוסק',
+                'address-1'        => 'כתובת 1',
+                'address-2'        => 'כתובת 2',
+                'city'             => 'עיר',
+                'state'            => 'מדינה',
+                'select-country'   => 'בחר מדינה',
+                'country'          => 'מדינה',
+                'default-address'  => 'כתובת ברירת מחדל',
+                'first-name'       => 'שם פרטי',
+                'last-name'        => 'שם משפחה',
+                'phone'            => 'טלפון',
+                'street-address'   => 'כתובת',
+                'post-code'        => 'מיקוד',
+                'empty-address'    => 'לא הוספת עדיין כתובת לחשבונך.',
+                'create-success'   => 'הכתובת נוספה בהצלחה.',
+                'edit-success'     => 'הכתובת עודכנה בהצלחה.',
+                'default-delete'   => 'לא ניתן לשנות את הכתובת הברירת מחדל.',
+                'delete-success'   => 'הכתובת נמחקה בהצלחה',
+                'save'             => 'שמור',
                 'security-warning' => 'אותרה פעילות חשודה!!!',
             ],
-    
+
             'orders' => [
-                'title' => 'הזמנות',
-                'order_id' => 'מספר הזמנה',
-                'order' => 'הזמנה',
-                'order_date' => 'תאריך הזמנה',
-                'total' => 'סכום כולל',
-    
+                'title'      => 'הזמנות',
+                'order-id'   => 'מספר הזמנה',
+                'order'      => 'הזמנה',
+                'order-date' => 'תאריך הזמנה',
+                'total'      => 'סכום כולל',
+
                 'status' => [
                     'title' => 'סטטוס',
-    
+
                     'options' => [
-                        'processing' => 'בעיבוד',
-                        'completed' => 'הושלמה',
-                        'canceled' => 'בוטלה',
-                        'closed' => 'נסגרה',
-                        'pending' => 'ממתינה',
+                        'processing'      => 'בעיבוד',
+                        'completed'       => 'הושלמה',
+                        'canceled'        => 'בוטלה',
+                        'closed'          => 'נסגרה',
+                        'pending'         => 'ממתינה',
                         'pending-payment' => 'ממתינה לתשלום',
-                        'fraud' => 'הונאה',
+                        'fraud'           => 'הונאה',
                     ],
                 ],
-    
-                'action' => 'פעולה',
+
+                'action'      => 'פעולה',
                 'empty-order' => 'לא הזמנת עדיין מוצרים',
-    
+
                 'view' => [
-                    'title' => 'הצג',
-                    'page-title' => 'הזמנה #:order_id',
-                    'total' => 'סכום כולל',
-                    'shipping-address' => 'כתובת למשלוח',
-                    'billing-address' => 'כתובת לחיוב',
-                    'shipping-method' => 'שיטת משלוח',
-                    'payment-method' => 'שיטת תשלום',
-                    'cancel-btn-title' => 'בטל',
+                    'title'              => 'הצג',
+                    'page-title'         => 'הזמנה #:order_id',
+                    'total'              => 'סכום כולל',
+                    'shipping-address'   => 'כתובת למשלוח',
+                    'billing-address'    => 'כתובת לחיוב',
+                    'shipping-method'    => 'שיטת משלוח',
+                    'payment-method'     => 'שיטת תשלום',
+                    'cancel-btn-title'   => 'בטל',
                     'cancel-confirm-msg' => 'האם אתה בטוח שברצונך לבטל את ההזמנה הזו?',
-                    'cancel-success' => 'ההזמנה שלך בוטלה',
-                    'cancel-error' => 'אנחנו לא יכולים לבטל את ההזמנה שלך.',
+                    'cancel-success'     => 'ההזמנה שלך בוטלה',
+                    'cancel-error'       => 'אנחנו לא יכולים לבטל את ההזמנה שלך.',
 
                     'information' => [
-                        'info' => 'מידע',
-                        'placed-on' => 'הוזמנה בתאריך',
-                        'sku' => 'SKU',
-                        'product-name' => 'שם מוצר',
-                        'price' => 'מחיר',
-                        'item-status' => 'סטטוס פריט',
-                        'subtotal' => 'תת-סכום',
-                        'tax-percent' => 'אחוז מס',
-                        'tax-amount' => 'סכום מס',
-                        'tax' => 'מס',
-                        'grand-total' => 'סכום כולל',
-                        'item-ordered' => 'הוזמנו (:qty_ordered)',
-                        'item-invoice' => 'חשבונית (:qty_invoiced)',
-                        'item-shipped' => 'נשלח (:qty_shipped)',
-                        'item-canceled' => 'בוטל (:qty_canceled)',
-                        'item-refunded' => 'הוחזר (:qty_refunded)',
+                        'info'              => 'מידע',
+                        'placed-on'         => 'הוזמנה בתאריך',
+                        'sku'               => 'SKU',
+                        'product-name'      => 'שם מוצר',
+                        'price'             => 'מחיר',
+                        'item-status'       => 'סטטוס פריט',
+                        'subtotal'          => 'תת-סכום',
+                        'tax-percent'       => 'אחוז מס',
+                        'tax-amount'        => 'סכום מס',
+                        'tax'               => 'מס',
+                        'grand-total'       => 'סכום כולל',
+                        'item-ordered'      => 'הוזמנו (:qty_ordered)',
+                        'item-invoice'      => 'חשבונית (:qty_invoiced)',
+                        'item-shipped'      => 'נשלח (:qty_shipped)',
+                        'item-canceled'     => 'בוטל (:qty_canceled)',
+                        'item-refunded'     => 'הוחזר (:qty_refunded)',
                         'shipping-handling' => 'משלוח וטיפול',
-                        'discount' => 'הנחה',
-                        'total-paid' => 'סכום ששולם',
-                        'total-refunded' => 'סכום שהוחזר',
-                        'total-due' => 'סכום לתשלום',
+                        'discount'          => 'הנחה',
+                        'total-paid'        => 'סכום ששולם',
+                        'total-refunded'    => 'סכום שהוחזר',
+                        'total-due'         => 'סכום לתשלום',
                     ],
-    
+
                     'invoices' => [
                         'invoices'           => 'חשבוניות',
                         'individual-invoice' => 'חשבונית #:invoice_id',
@@ -203,7 +203,7 @@ return [
                         'tax'                => 'מס',
                         'print'              => 'הדפס',
                     ],
-    
+
                     'shipments' => [
                         'shipments'           => 'משלוחים',
                         'tracking-number'     => 'מספר מעקב',
@@ -213,7 +213,7 @@ return [
                         'qty'                 => 'כמות',
                         'subtotal'            => 'תת-סכום',
                     ],
-    
+
                     'refunds' => [
                         'refunds'           => 'החזרים',
                         'individual-refund' => 'החזר #:refund_id',
@@ -233,12 +233,12 @@ return [
                     ],
                 ],
             ],
-    
+
             'reviews' => [
                 'title'        => 'ביקורות',
                 'empty-review' => 'עדיין לא כתבת ביקורת על מוצר זה',
             ],
-    
+
             'downloadable-products' => [
                 'name'                => 'מוצרים הניתנים להורדה',
                 'orderId'             => 'מספר הזמנה',
@@ -251,7 +251,7 @@ return [
                 'download-error'      => 'קישור ההורדה פג תוקף.',
                 'payment-error'       => 'לא בוצע תשלום עבור ההורדה הזו.',
             ],
-    
+
             'wishlist' => [
                 'page-title'         => 'רשימת משאלות',
                 'title'              => 'רשימת משאלות',
@@ -292,7 +292,7 @@ return [
                 'search-text'   => 'חפש מוצרים כאן',
                 'search'        => 'חיפוש',
             ],
-    
+
             'footer' => [
                 'newsletter-text'        => 'הכנסו לרשימת התפוצה שלנו וקבלו עדכונים והצעות מרשימות!',
                 'subscribe-stay-touch'   => 'הירשמו לעדכונים ונשארו מעודכנים.',
@@ -311,7 +311,7 @@ return [
                 'privacy-cookies-policy' => 'מדיניות פרטיות ועוגיות',
             ],
         ],
-    
+
         'datagrid' => [
             'toolbar' => [
                 'mass-actions' => [
@@ -319,24 +319,24 @@ return [
                     'select-option' => 'בחר אפשרות',
                     'submit'        => 'שלח',
                 ],
-    
+
                 'filter' => [
                     'title' => 'סנן',
                 ],
-    
+
                 'search' => [
                     'title' => 'חפש',
                 ],
             ],
-    
+
             'filters' => [
                 'title' => 'החל מסננים',
-    
+
                 'custom-filters' => [
                     'title'     => 'סננים מותאמים אישית',
                     'clear-all' => 'נקה הכל',
                 ],
-    
+
                 'date-options' => [
                     'today'             => 'היום',
                     'yesterday'         => 'אתמול',
@@ -348,13 +348,13 @@ return [
                     'this-year'         => 'השנה',
                 ],
             ],
-    
+
             'table' => [
                 'actions'              => 'פעולות',
                 'no-records-available' => 'אין רשומות זמינות.',
             ],
         ],
-    
+
         'products'   => [
             'card' => [
                 'new'                => 'חדש',
@@ -364,17 +364,17 @@ return [
                 'already-in-compare' => 'המוצר כבר נמצא ברשימת ההשוואה.',
                 'add-to-cart'        => 'הוסף לעגלה',
             ],
-    
+
             'carousel' => [
                 'view-all' => 'צפה בהכל',
             ],
         ],
-    
+
         'range-slider' => [
             'range' => 'טווח:',
         ],
     ],
-    
+
     'products'  => [
         'reviews'                => 'ביקורות',
         'add-to-cart'            => 'הוסף לעגלה',
@@ -409,7 +409,7 @@ return [
         'name'                   => 'שם',
         'qty'                    => 'כמות',
         'offers'                 => 'קנה :qty במחיר של :price לכל יחידה וחסוך :discount%',
-    
+
         'sort-by'                => [
             'title'   => 'מיין לפי',
             'options' => [
@@ -421,42 +421,42 @@ return [
                 'expensive-first' => 'היקר ביותר ראשון',
             ],
         ],
-    
+
         'view' => [
             'type' => [
                 'configurable' => [
                     'select-options'       => 'אנא בחר אפשרות',
                     'select-above-options' => 'אנא בחר אפשרויות מעלה',
                 ],
-    
+
                 'bundle' => [
                     'none' => 'אין',
                 ],
-    
+
                 'downloadable' => [
                     'samples' => 'דוגמאות',
                     'links'   => 'קישורים',
                     'sample'  => 'דוגמה',
                 ],
-    
+
                 'grouped' => [
                     'name' => 'שם',
                 ],
             ],
-    
+
             'reviews' => [
                 'cancel'      => 'ביטול',
                 'success'     => 'ביקורת נשלחה בהצלחה.',
                 'attachments' => 'קבצים מצורפים',
             ],
         ],
-    
+
         'configurations' => [
-            'compare_options'     => 'אפשרויות השוואה',
-            'wishlist-options'    => 'אפשרויות רשימת משאלות',
+            'compare_options'  => 'אפשרויות השוואה',
+            'wishlist-options' => 'אפשרויות רשימת משאלות',
         ],
     ],
-    
+
     'categories' => [
         'filters' => [
             'filters'   => 'מסננים:',
@@ -464,24 +464,24 @@ return [
             'sort'      => 'מיון',
             'clear-all' => 'נקה הכל',
         ],
-    
+
         'toolbar' => [
-            'show'    => 'הצג',
+            'show' => 'הצג',
         ],
-    
+
         'view' => [
             'empty'     => 'אין מוצרים זמינים בקטגוריה זו',
             'load-more' => 'טען עוד',
         ],
     ],
-    
+
     'search' => [
         'title'          => 'תוצאות חיפוש עבור : :query',
         'configurations' => [
             'image-search-option' => 'אפשרות חיפוש תמונה',
         ],
     ],
-    
+
     'compare'  => [
         'product-compare'    => 'השוואת מוצרים',
         'delete-all'         => 'מחק הכל',
@@ -501,7 +501,7 @@ return [
             'order-id-info' => 'מספר הזמנתך הוא #:order_id',
             'info'          => 'נשלח אליך אימייל עם פרטי ההזמנה ומידע לגבי מעקב.',
         ],
-    
+
         'cart' => [
             'item-add-to-cart'          => 'הפריט התווסף בהצלחה',
             'return-to-shop'            => 'חזור לחנות',
@@ -518,7 +518,7 @@ return [
             'inventory-warning'         => 'הכמות שביקשת אינה זמינה, אנא נסה שוב מאוחר יותר.',
             'illegal'                   => 'הכמות לא יכולה להיות פחות מ-1.',
             'inactive'                  => 'הפריט הושבת והוסר מהעגלה.',
-    
+
             'index' => [
                 'home'                     => 'דף הבית',
                 'cart'                     => 'עגלת קניות',
@@ -538,7 +538,7 @@ return [
                 'see-details'              => 'ראה פרטים',
                 'move-to-wishlist'         => 'העבר לרשימת המשאלות',
             ],
-    
+
             'coupon'   => [
                 'code'            => 'קוד קופון',
                 'applied'         => 'הקופון הוחל',
@@ -554,18 +554,18 @@ return [
                 'subtotal'        => 'תת סך הכל',
                 'button-title'    => 'החל',
             ],
-    
+
             'mini-cart' => [
-                'see-details'           => 'ראה פרטים',
-                'shopping-cart'         => 'עגלת קניות',
-                'offer-on-orders'       => 'קבל עד 30% הנחה בזמנה הראשונה שלך',
-                'remove'                => 'הסר',
-                'empty-cart'            => 'העגלה שלך ריקה',
-                'subtotal'              => 'תת סך הכל',
-                'continue-to-checkout'  => 'המשך לתשלום',
-                'view-cart'             => 'צפה בעגלת הקניות',
+                'see-details'          => 'ראה פרטים',
+                'shopping-cart'        => 'עגלת קניות',
+                'offer-on-orders'      => 'קבל עד 30% הנחה בזמנה הראשונה שלך',
+                'remove'               => 'הסר',
+                'empty-cart'           => 'העגלה שלך ריקה',
+                'subtotal'             => 'תת סך הכל',
+                'continue-to-checkout' => 'המשך לתשלום',
+                'view-cart'            => 'צפה בעגלת הקניות',
             ],
-    
+
             'summary' => [
                 'cart-summary'        => 'סיכום עגלת הקניות',
                 'sub-total'           => 'תת סך הכל',
@@ -575,36 +575,36 @@ return [
                 'grand-total'         => 'סך הכל לתשלום',
                 'place-order'         => 'בצע הזמנה',
                 'proceed-to-checkout' => 'המשך לתשלום',
-    
+
             ],
         ],
-    
+
         'onepage' => [
             'addresses' => [
                 'billing' => [
-                    'billing-address'       => 'כתובת לחיוב',
-                    'add-new-address'       => 'הוסף כתובת חדשה',
-                    'same-billing-address'  => 'הכתובת זהה לכתובת החיוב שלי',
-                    'back'                  => 'חזור',
-                    'company-name'          => 'שם החברה',
-                    'first-name'            => 'שם פרטי',
-                    'last-name'             => 'שם משפחה',
-                    'email'                 => 'אימייל',
-                    'street-address'        => 'כתובת',
-                    'country'               => 'מדינה',
-                    'state'                 => 'מדינה',
-                    'select-state'          => 'בחר מדינה',
-                    'city'                  => 'עיר',
-                    'postcode'              => 'מיקוד',
-                    'telephone'             => 'טלפון',
-                    'save-address'          => 'שמור כתובת זו',
-                    'confirm'               => 'אשר',
+                    'billing-address'      => 'כתובת לחיוב',
+                    'add-new-address'      => 'הוסף כתובת חדשה',
+                    'same-billing-address' => 'הכתובת זהה לכתובת החיוב שלי',
+                    'back'                 => 'חזור',
+                    'company-name'         => 'שם החברה',
+                    'first-name'           => 'שם פרטי',
+                    'last-name'            => 'שם משפחה',
+                    'email'                => 'אימייל',
+                    'street-address'       => 'כתובת',
+                    'country'              => 'מדינה',
+                    'state'                => 'מדינה',
+                    'select-state'         => 'בחר מדינה',
+                    'city'                 => 'עיר',
+                    'postcode'             => 'מיקוד',
+                    'telephone'            => 'טלפון',
+                    'save-address'         => 'שמור כתובת זו',
+                    'confirm'              => 'אשר',
                 ],
-    
+
                 'index' => [
                     'confirm' => 'אשר',
                 ],
-    
+
                 'shipping' => [
                     'shipping-address' => 'כתובת למשלוח',
                     'add-new-address'  => 'הוסף כתובת חדשה',
@@ -625,7 +625,7 @@ return [
                     'confirm'          => 'אשר',
                 ],
             ],
-    
+
             'coupon' => [
                 'discount'        => 'הנחת קופון',
                 'code'            => 'קוד קופון',
@@ -639,20 +639,20 @@ return [
                 'enter-your-code' => 'הזן את קוד הקופון שלך',
                 'subtotal'        => 'תת סך הכל',
             ],
-    
+
             'index' => [
                 'home'     => 'דף הבית',
                 'checkout' => 'תשלום',
             ],
-    
+
             'payment' => [
                 'payment-method' => 'אמצעי תשלום',
             ],
-    
+
             'shipping' => [
                 'shipping-method' => 'אמצעי משלוח',
             ],
-    
+
             'summary' => [
                 'cart-summary'     => 'סיכום עגלת הקניות',
                 'sub-total'        => 'תת סך הכל',
@@ -664,7 +664,7 @@ return [
             ],
         ],
     ],
-    
+
     'home' => [
         'index' => [
             'offer'               => 'קבל עד 40% הנחה בהזמנתך הראשונה! קנה עכשיו',
@@ -672,36 +672,36 @@ return [
             'resend-verify-email' => 'שלח מחדש אימייל לאימות',
         ],
     ],
-    
+
     'errors' => [
         'go-to-home'   => 'עבור לדף הבית',
-    
+
         '404' => [
             'title'       => '404 דף לא נמצא',
             'description' => 'אופס! הדף שאתה מחפש בחופשה. נראה שלא הצלחנו למצוא את מה שחיפשת.',
         ],
-    
+
         '401' => [
             'title'       => '401 אין הרשאה',
             'description' => 'אופס! נראה שאין לך הרשאה לגשת לדף זה. נראה שיש לך חוסר בכרטיסיות הנדרשות.',
         ],
-    
+
         '403' => [
             'title'       => '403 אסור',
             'description' => 'אופס! דף זה אסור לגישה. נראה שאין לך הרשאות הנדרשות לצפייה בתוכן זה.',
         ],
-    
+
         '500' => [
             'title'       => '500 שגיאת שרת פנימית',
             'description' => 'אופס! משהו השתבש. נראה שיש לנו בעיות בטעינת הדף שאתה מחפש.',
         ],
-    
+
         '503' => [
             'title'       => '503 שירות אינו זמין',
             'description' => 'אופס! נראה שאנחנו מתחת לתחזוקה זמנית. אנא בדוק שוב מאוחר יותר.',
-        ]
+        ],
     ],
-    
+
     'layouts' => [
         'my-account'            => 'החשבון שלי',
         'profile'               => 'פרופיל',
@@ -711,50 +711,50 @@ return [
         'orders'                => 'הזמנות',
         'downloadable-products' => 'מוצרים להורדה',
     ],
-    
+
     'subscription' => [
         'already'             => 'אתה כבר רשום לניוזלטר שלנו.',
         'subscribe-success'   => 'נרשמת בהצלחה לניוזלטר שלנו.',
         'unsubscribe-success' => 'ביטלת את הרשמתך בהצלחה מהניוזלטר שלנו.',
     ],
-    
+
     'emails' => [
         'dear'   => 'יקר :customer_name',
         'thanks' => 'אם תזדקק לעזרה כלשהי, אנא צור קשר איתנו ב<a href=":link" style=":style">:email</a>.<br/>תודה!',
-    
+
         'customers' => [
             'registration' => [
                 'subject'     => 'רישום לקוח חדש',
                 'greeting'    => 'ברוך הבא ותודה שנרשמת!',
                 'description' => 'החשבון שלך נוצר בהצלחה ואתה יכול להתחבר עם הפרטים שלך: כתובת האימייל והסיסמה. לאחר התחברות, תוכל לגשת לשירותים נוספים כולל בדיקת הזמנות קודמות, רשימת המשאלות ועריכת פרטי החשבון שלך.',
-                'sign-in'    => 'התחבר'
+                'sign-in'     => 'התחבר',
             ],
-    
+
             'forgot-password' => [
                 'subject'        => 'איפוס סיסמה באמצעות אימייל',
                 'greeting'       => 'שכחת סיסמה!',
                 'description'    => 'אתה מקבל אימייל זה מכיוון שקיבלנו בקשת איפוס סיסמה עבור החשבון שלך.',
-                'reset-password' => 'איפוס סיסמה'
+                'reset-password' => 'איפוס סיסמה',
             ],
-    
+
             'update-password' => [
                 'subject'     => 'סיסמה עודכנה בהצלחה',
                 'greeting'    => 'סיסמה עודכנה בהצלחה!',
                 'description' => 'אתה מקבל אימייל זה מכיוון שעדכנת את הסיסמה שלך.',
             ],
-    
+
             'verification' => [
-                'subject'        => 'אימייל אימות לחשבון',
-                'greeting'       => 'ברוך הבא!',
-                'description'    => 'אנא לחץ על הלחצן למטה כדי לאמת את כתובת האימייל שלך.',
-                'verify-email'   => 'אמת את כתובת האימייל'
+                'subject'      => 'אימייל אימות לחשבון',
+                'greeting'     => 'ברוך הבא!',
+                'description'  => 'אנא לחץ על הלחצן למטה כדי לאמת את כתובת האימייל שלך.',
+                'verify-email' => 'אמת את כתובת האימייל',
             ],
-    
+
             'commented' => [
-                'subject' => 'תגובה חדשה נוספה',
-                'description' => 'ההודעה היא - :note'
+                'subject'     => 'תגובה חדשה נוספה',
+                'description' => 'ההודעה היא - :note',
             ],
-    
+
             'subscribed' => [
                 'subject'     => 'נרשמת! לניוזלטר שלנו',
                 'greeting'    => 'ברוך הבא לניוזלטר שלנו!',
@@ -770,40 +770,40 @@ return [
                 'greeting' => 'תודה על ההזמנה :order_id שנעשתה בתאריך :created_at',
                 'summary'  => 'סיכום ההזמנה',
             ],
-        
+
             'invoiced' => [
                 'subject'  => 'אישור חשבונית חדשה',
                 'title'    => 'אישור חשבונית!',
                 'greeting' => 'החשבונית שלך מס #:invoice_id עבור ההזמנה :order_id נוצרה בתאריך :created_at',
                 'summary'  => 'סיכום החשבונית',
             ],
-        
+
             'shipped' => [
                 'subject'  => 'אישור משלוח חדש',
                 'title'    => 'הזמנה שנשלחה!',
                 'greeting' => 'ההזמנה שלך :order_id שנעשתה בתאריך :created_at נשלחה',
                 'summary'  => 'סיכום המשלוח',
             ],
-        
+
             'refunded' => [
                 'subject'  => 'אישור החזר חדש',
                 'title'    => 'הזמנה מוחזרת!',
                 'greeting' => 'ההחזר נפתח עבור :order_id שנעשתה בתאריך :created_at',
                 'summary'  => 'סיכום ההחזר',
             ],
-        
+
             'canceled' => [
                 'subject'  => 'הזמנה מבוטלת חדשה',
                 'title'    => 'הזמנה בוטלה!',
                 'greeting' => 'ההזמנה שלך :order_id שנעשתה בתאריך :created_at בוטלה',
                 'summary'  => 'סיכום ההזמנה',
             ],
-        
+
             'commented' => [
                 'subject' => 'תגובה חדשה נוספה',
                 'title'   => 'תגובה חדשה נוספה להזמנתך :order_id שנעשתה בתאריך :created_at',
             ],
-        
+
             'shipping-address'  => 'כתובת למשלוח',
             'carrier'           => 'ספק שילוח',
             'tracking-number'   => 'מספר מעקב: :tracking_number',
@@ -820,6 +820,6 @@ return [
             'tax'               => 'מס',
             'discount'          => 'הנחה',
             'grand-total'       => 'סך הכל',
-        ],        
-    ],    
+        ],
+    ],
 ];

@@ -5,7 +5,7 @@ return [
         'settings-title'      => 'تنظیمات',
         'settings-title-info' => 'تنظیمات به انتخاب‌های قابل تنظیم اشاره دارد که کنترل می‌کنند که چگونه یک سیستم، برنامه یا دستگاه عمل می‌کند و به تنظیمات ترجیحات و نیازهای کاربران سفارش داده شده است.',
     ],
-    
+
     'customers' => [
         'forgot-password' => [
             'title'                => 'بازیابی رمز عبور',
@@ -17,7 +17,7 @@ return [
             'sign-in-button'       => 'ورود',
             'footer'               => '© حق تألیف 2010 - 2022، نرم‌افزار وب‌کول (ثبت شده در هند). تمامی حقوق محفوظ است.',
         ],
-    
+
         'reset-password' => [
             'title'            => 'بازنشانی رمز عبور',
             'email'            => 'ایمیل ثبت‌شده',
@@ -27,7 +27,7 @@ return [
             'submit-btn-title' => 'بازنشانی رمز عبور',
             'footer'           => '© حق تألیف 2010 - 2022، نرم‌افزار وب‌کول (ثبت شده در هند). تمامی حقوق محفوظ است.',
         ],
-    
+
         'login-form' => [
             'page-title'          => 'ورود مشتری',
             'form-login-text'     => 'اگر حساب کاربری دارید، با آدرس ایمیل خود وارد شوید.',
@@ -35,8 +35,8 @@ return [
             'title'               => 'ورود',
             'email'               => 'ایمیل',
             'password'            => 'رمز عبور',
-            'forgot_pass'         => 'رمز عبور را فراموش کرده‌اید؟',
-            'button_title'        => 'ورود',
+            'forgot-pass'         => 'رمز عبور را فراموش کرده‌اید؟',
+            'button-title'        => 'ورود',
             'new-customer'        => 'مشتری جدید؟',
             'create-your-account' => 'حساب کاربری خود را ایجاد کنید',
             'footer'              => '© حق تألیف 2010 - 2022، نرم‌افزار وب‌کول (ثبت شده در هند). تمامی حقوق محفوظ است.',
@@ -44,7 +44,7 @@ return [
             'not-activated'       => 'درخواست فعال‌سازی حساب شما منتظر تأیید مدیر است',
             'verify-first'        => 'ابتدا حساب ایمیل خود را تأیید کنید.',
         ],
-       
+
         'signup-form' => [
             'page-title'                  => 'تبدیل به کاربر',
             'form-signup-text'            => 'اگر تازه وارد فروشگاه ما شده‌اید، ما خوشحالیم که شما را به عنوان عضو می‌پذیریم.',
@@ -53,10 +53,10 @@ return [
             'last-name'                   => 'نام خانوادگی',
             'email'                       => 'ایمیل',
             'password'                    => 'رمز عبور',
-            'confirm_pass'                => 'تأیید رمز عبور',
+            'confirm-pass'                => 'تأیید رمز عبور',
             'subscribe-to-newsletter'     => 'اشتراک در خبرنامه',
-            'button_title'                => 'ثبت نام',
-            'account_exists'              => 'قبلاً حساب دارید؟',
+            'button-title'                => 'ثبت نام',
+            'account-exists'              => 'قبلاً حساب دارید؟',
             'footer'                      => '© حق تألیف 2010 - 2022، نرم‌افزار وب‌کول (ثبت شده در هند). تمامی حقوق محفوظ است.',
             'success-verify'              => 'حساب با موفقیت ایجاد شد، یک ایمیل برای تأیید ارسال شده است.',
             'success-verify-email-unsent' => 'حساب با موفقیت ایجاد شد، اما ایمیل تأیید ارسال نشد.',
@@ -66,7 +66,7 @@ return [
             'verification-not-sent'       => 'خطا! مشکل در ارسال ایمیل تأیید، لطفاً بعداً دوباره تلاش کنید.',
             'verification-sent'           => 'ایمیل تأیید ارسال شد',
         ],
-        
+
         'account' => [
             'home'      => 'خانه',
             'profile'   => [
@@ -95,7 +95,7 @@ return [
                 'other'                   => 'سایر',
                 'save'                    => 'ذخیره',
             ],
-        
+
             'addresses' => [
                 'title'            => 'آدرس',
                 'edit'             => 'ویرایش',
@@ -125,17 +125,17 @@ return [
                 'save'             => 'ذخیره',
                 'security-warning' => 'فعالیت مشکوک پیدا شد !!!',
             ],
-        
+
             'orders' => [
-                'title'         => 'سفارش‌ها',
-                'order_id'      => 'شناسه سفارش',
-                'order'         => 'سفارش',
-                'order_date'    => 'تاریخ سفارش',
-                'total'         => 'مجموع',
-        
+                'title'      => 'سفارش‌ها',
+                'order-id'   => 'شناسه سفارش',
+                'order'      => 'سفارش',
+                'order-date' => 'تاریخ سفارش',
+                'total'      => 'مجموع',
+
                 'status'        => [
                     'title' => 'وضعیت',
-        
+
                     'options' => [
                         'processing'      => 'در حال پردازش',
                         'completed'       => 'تکمیل شده',
@@ -146,10 +146,10 @@ return [
                         'fraud'           => 'تقلبی',
                     ],
                 ],
-        
-                'action'        => 'عملیات',
-                'empty-order'   => 'شما هنوز محصولی را سفارش نداده‌اید',
-        
+
+                'action'      => 'عملیات',
+                'empty-order' => 'شما هنوز محصولی را سفارش نداده‌اید',
+
                 'view' => [
                     'title'              => 'مشاهده',
                     'page-title'         => 'سفارش #:order_id',
@@ -162,7 +162,7 @@ return [
                     'cancel-confirm-msg' => 'آیا مطمئنید که می‌خواهید این سفارش را لغو کنید؟',
                     'cancel-success'     => 'سفارش شما لغو شده است',
                     'cancel-error'       => 'سفارش شما قابل لغو نیست.',
-        
+
                     'information' => [
                         'info'              => 'اطلاعات',
                         'placed-on'         => 'تاریخ قرار داده شده',
@@ -186,24 +186,24 @@ return [
                         'total-refunded'    => 'مجموع بازپرداختی',
                         'total-due'         => 'مجموع بدهی',
                     ],
-        
+
                     'invoices'  => [
-                        'invoices'            => 'فاکتورها',
-                        'individual-invoice'  => 'فاکتور #:invoice_id',
-                        'sku'                 => 'شناسه محصول',
-                        'product-name'        => 'نام',
-                        'price'               => 'قیمت',
-                        'products-ordered'    => 'محصولات سفارش داده شده',
-                        'qty'                 => 'تعداد',
-                        'subtotal'            => 'جمع جزئی',
-                        'tax-amount'          => 'مبلغ مالیات',
-                        'grand-total'         => 'مجموع کل',
-                        'shipping-handling'   => 'هزینه ارسال و بسته‌بندی',
-                        'discount'            => 'تخفیف',
-                        'tax'                 => 'مالیات',
-                        'print'               => 'چاپ',
+                        'invoices'           => 'فاکتورها',
+                        'individual-invoice' => 'فاکتور #:invoice_id',
+                        'sku'                => 'شناسه محصول',
+                        'product-name'       => 'نام',
+                        'price'              => 'قیمت',
+                        'products-ordered'   => 'محصولات سفارش داده شده',
+                        'qty'                => 'تعداد',
+                        'subtotal'           => 'جمع جزئی',
+                        'tax-amount'         => 'مبلغ مالیات',
+                        'grand-total'        => 'مجموع کل',
+                        'shipping-handling'  => 'هزینه ارسال و بسته‌بندی',
+                        'discount'           => 'تخفیف',
+                        'tax'                => 'مالیات',
+                        'print'              => 'چاپ',
                     ],
-        
+
                     'shipments' => [
                         'shipments'           => 'ارسال‌ها',
                         'tracking-number'     => 'شماره پیگیری',
@@ -213,32 +213,32 @@ return [
                         'qty'                 => 'تعداد',
                         'subtotal'            => 'جمع جزئی',
                     ],
-        
+
                     'refunds'  => [
-                        'refunds'             => 'بازپرداخت‌ها',
-                        'individual-refund'   => 'بازپرداخت #:refund_id',
-                        'sku'                 => 'شناسه محصول',
-                        'product-name'        => 'نام',
-                        'price'               => 'قیمت',
-                        'qty'                 => 'تعداد',
-                        'tax-amount'          => 'مبلغ مالیات',
-                        'subtotal'            => 'جمع جزئی',
-                        'grand-total'         => 'مجموع کل',
-                        'no-result-found'     => 'ما هیچ رکوردی پیدا نکردیم.',
-                        'shipping-handling'   => 'هزینه ارسال و بسته‌بندی',
-                        'discount'            => 'تخفیف',
-                        'tax'                 => 'مالیات',
-                        'adjustment-refund'   => 'بازپرداخت تنظیمی',
-                        'adjustment-fee'      => 'هزینه تنظیمی',
+                        'refunds'           => 'بازپرداخت‌ها',
+                        'individual-refund' => 'بازپرداخت #:refund_id',
+                        'sku'               => 'شناسه محصول',
+                        'product-name'      => 'نام',
+                        'price'             => 'قیمت',
+                        'qty'               => 'تعداد',
+                        'tax-amount'        => 'مبلغ مالیات',
+                        'subtotal'          => 'جمع جزئی',
+                        'grand-total'       => 'مجموع کل',
+                        'no-result-found'   => 'ما هیچ رکوردی پیدا نکردیم.',
+                        'shipping-handling' => 'هزینه ارسال و بسته‌بندی',
+                        'discount'          => 'تخفیف',
+                        'tax'               => 'مالیات',
+                        'adjustment-refund' => 'بازپرداخت تنظیمی',
+                        'adjustment-fee'    => 'هزینه تنظیمی',
                     ],
                 ],
             ],
-        
+
             'reviews'    => [
-                'title'         => 'نقد و بررسی‌ها',
-                'empty-review'  => 'شما هنوز هیچ محصول را نقد و بررسی نکرده‌اید',
+                'title'        => 'نقد و بررسی‌ها',
+                'empty-review' => 'شما هنوز هیچ محصول را نقد و بررسی نکرده‌اید',
             ],
-        
+
             'downloadable-products'  => [
                 'name'                => 'محصولات قابل دانلود',
                 'orderId'             => 'شناسه سفارش',
@@ -251,7 +251,7 @@ return [
                 'download-error'      => 'لینک دانلود منقضی شده است.',
                 'payment-error'       => 'پرداخت برای این دانلود انجام نشده است.',
             ],
-        
+
             'wishlist' => [
                 'page-title'         => 'لیست علاقه‌مندی',
                 'title'              => 'لیست علاقه‌مندی',
@@ -264,12 +264,11 @@ return [
                 'removed'            => 'مورد با موفقیت از لیست علاقه‌مندی حذف شد',
                 'remove-fail'        => 'مورد نمی‌تواند از لیست علاقه‌مندی حذف شود',
                 'moved'              => 'مورد با موفقیت به سبد خرید منتقل شد',
-                'missing_options'    => 'گزینه‌ها برای این محصول وجود ندارد.',
                 'product-removed'    => 'محصول دیگر در دسترس نیست چرا که توسط مدیر حذف شده است',
                 'remove-all-success' => 'تمام موارد از لیست علاقه‌مندی شما حذف شده است',
                 'see-details'        => 'مشاهده جزئیات',
             ],
-        ],        
+        ],
     ],
 
     'components' => [
@@ -452,8 +451,8 @@ return [
         ],
 
         'configurations' => [
-            'compare_options'     => 'گزینه‌های مقایسه',
-            'wishlist-options'    => 'گزینه‌های لیست علاقه‌مندی',
+            'compare_options'  => 'گزینه‌های مقایسه',
+            'wishlist-options' => 'گزینه‌های لیست علاقه‌مندی',
         ],
     ],
 
@@ -466,7 +465,7 @@ return [
         ],
 
         'toolbar' => [
-            'show'    => 'نمایش',
+            'show' => 'نمایش',
         ],
 
         'view' => [
@@ -556,14 +555,14 @@ return [
             ],
 
             'mini-cart' => [
-                'see-details'           => 'مشاهده جزئیات',
-                'shopping-cart'         => 'سبد خرید',
-                'offer-on-orders'       => 'تا 30% تخفیف در سفارش اول شما',
-                'remove'                => 'حذف',
-                'empty-cart'            => 'سبد خرید شما خالی است',
-                'subtotal'              => 'مجموع جزئی',
-                'continue-to-checkout'  => 'ادامه به پرداخت',
-                'view-cart'             => 'مشاهده سبد خرید',
+                'see-details'          => 'مشاهده جزئیات',
+                'shopping-cart'        => 'سبد خرید',
+                'offer-on-orders'      => 'تا 30% تخفیف در سفارش اول شما',
+                'remove'               => 'حذف',
+                'empty-cart'           => 'سبد خرید شما خالی است',
+                'subtotal'             => 'مجموع جزئی',
+                'continue-to-checkout' => 'ادامه به پرداخت',
+                'view-cart'            => 'مشاهده سبد خرید',
             ],
 
             'summary' => [
@@ -582,31 +581,31 @@ return [
         'onepage' => [
             'addresses' => [
                 'billing' => [
-                    'billing-address'       => 'آدرس صورتحساب',
-                    'add-new-address'       => 'افزودن آدرس جدید',
-                    'same-billing-address'  => 'آدرس مشابه آدرس صورتحساب',
-                    'new-address'           => 'آدرس جدید',
-                    'use-for-shipping'      => 'برای حمل و نقل استفاده شود',
-                    'remove'                => 'حذف',
-                    'select-address'        => 'انتخاب آدرس',
-                    'continue'              => 'ادامه',
-                    'cancel'                => 'انصراف',
-                    'your-address'          => 'آدرس شما',
-                    'change-address'        => 'تغییر آدرس',
+                    'billing-address'      => 'آدرس صورتحساب',
+                    'add-new-address'      => 'افزودن آدرس جدید',
+                    'same-billing-address' => 'آدرس مشابه آدرس صورتحساب',
+                    'new-address'          => 'آدرس جدید',
+                    'use-for-shipping'     => 'برای حمل و نقل استفاده شود',
+                    'remove'               => 'حذف',
+                    'select-address'       => 'انتخاب آدرس',
+                    'continue'             => 'ادامه',
+                    'cancel'               => 'انصراف',
+                    'your-address'         => 'آدرس شما',
+                    'change-address'       => 'تغییر آدرس',
                 ],
 
                 'shipping' => [
-                    'shipping-address'      => 'آدرس حمل و نقل',
-                    'select-shipping-method' => 'انتخاب متد حمل و نقل',
-                    'same-shipping-address' => 'آدرس مشابه آدرس حمل و نقل',
-                    'new-address'           => 'آدرس جدید',
-                    'use-for-billing'       => 'برای صورتحساب استفاده شود',
-                    'remove'                => 'حذف',
-                    'change-address'        => 'تغییر آدرس',
-                    'select-shipping-address'=> 'انتخاب آدرس حمل و نقل',
-                    'continue'              => 'ادامه',
-                    'cancel'                => 'انصراف',
-                    'your-address'          => 'آدرس شما',
+                    'shipping-address'        => 'آدرس حمل و نقل',
+                    'select-shipping-method'  => 'انتخاب متد حمل و نقل',
+                    'same-shipping-address'   => 'آدرس مشابه آدرس حمل و نقل',
+                    'new-address'             => 'آدرس جدید',
+                    'use-for-billing'         => 'برای صورتحساب استفاده شود',
+                    'remove'                  => 'حذف',
+                    'change-address'          => 'تغییر آدرس',
+                    'select-shipping-address' => 'انتخاب آدرس حمل و نقل',
+                    'continue'                => 'ادامه',
+                    'cancel'                  => 'انصراف',
+                    'your-address'            => 'آدرس شما',
                 ],
             ],
 
@@ -617,22 +616,22 @@ return [
             ],
 
             'shipping-methods' => [
-                'title'          => 'متدهای حمل و نقل',
-                'description'    => 'توضیحات',
-                'free-shipping'  => 'حمل و نقل رایگان',
-                'flat-rate'      => 'نرخ ثابت',
-                'fixed-rate'     => 'نرخ ثابت',
-                'shipping-amount'=> 'مقدار حمل و نقل',
-                'additional-charges' => 'هزینه‌های اضافی',
-                'applied'        => 'اعمال شده',
-                'cancel'         => 'انصراف',
-                'select'         => 'انتخاب',
-                'carrier-title'  => 'عنوان حامل',
-                'method-title'   => 'عنوان روش',
-                'shipping-handling'=> 'حمل و نقل و بسته‌بندی',
+                'title'                  => 'متدهای حمل و نقل',
+                'description'            => 'توضیحات',
+                'free-shipping'          => 'حمل و نقل رایگان',
+                'flat-rate'              => 'نرخ ثابت',
+                'fixed-rate'             => 'نرخ ثابت',
+                'shipping-amount'        => 'مقدار حمل و نقل',
+                'additional-charges'     => 'هزینه‌های اضافی',
+                'applied'                => 'اعمال شده',
+                'cancel'                 => 'انصراف',
+                'select'                 => 'انتخاب',
+                'carrier-title'          => 'عنوان حامل',
+                'method-title'           => 'عنوان روش',
+                'shipping-handling'      => 'حمل و نقل و بسته‌بندی',
                 'select-shipping-method' => 'انتخاب متد حمل و نقل',
-                'change-address' => 'تغییر آدرس',
-                'required'       => 'یک متد حمل و نقل انتخاب نشده است.',
+                'change-address'         => 'تغییر آدرس',
+                'required'               => 'یک متد حمل و نقل انتخاب نشده است.',
             ],
 
             'payment' => [
@@ -644,43 +643,44 @@ return [
                     'paypal'     => 'پی پال',
                     'cod'        => 'پرداخت در محل',
                 ],
-                'select-payment-method' => 'انتخاب متد پرداخت',
-                'order-total' => 'مجموع سفارش',
-                'billing-address' => 'آدرس صورتحساب',
-                'payment-method' => 'متد پرداخت',
-                'continue'     => 'ادامه',
-                'amount-to-pay' => 'مبلغ پرداخت',
-                'credit / debit card' => 'کارت اعتباری / دبیت',
-                'expiry'       => 'تاریخ انقضاء',
-                'cvv'          => 'کد امنیتی (CVV)',
-                'month'        => 'ماه',
-                'year'         => 'سال',
-                'card-number'  => 'شماره کارت',
-                'cardholder-name' => 'نام صاحب کارت',
-                'pay-now'      => 'پرداخت کنید',
-                'submit'       => 'ثبت',
+
+                'select-payment-method'    => 'انتخاب متد پرداخت',
+                'order-total'              => 'مجموع سفارش',
+                'billing-address'          => 'آدرس صورتحساب',
+                'payment-method'           => 'متد پرداخت',
+                'continue'                 => 'ادامه',
+                'amount-to-pay'            => 'مبلغ پرداخت',
+                'credit / debit card'      => 'کارت اعتباری / دبیت',
+                'expiry'                   => 'تاریخ انقضاء',
+                'cvv'                      => 'کد امنیتی (CVV)',
+                'month'                    => 'ماه',
+                'year'                     => 'سال',
+                'card-number'              => 'شماره کارت',
+                'cardholder-name'          => 'نام صاحب کارت',
+                'pay-now'                  => 'پرداخت کنید',
+                'submit'                   => 'ثبت',
                 'payment-redirect-message' => 'لطفاً منتظر بمانید، شما به درگاه پرداخت هدایت می‌شوید...',
-                'method'       => [
+                'method'                   => [
                     'not-available' => 'این متد پرداخت در حال حاضر موجود نیست.',
                     'available'     => 'این متد پرداخت در حال حاضر موجود است.',
                 ],
             ],
 
             'place-order' => [
-                'title'    => 'ثبت سفارش',
-                'button'   => 'ثبت سفارش',
-                'change'   => 'تغییر',
-                'back'     => 'بازگشت به سبد خرید',
+                'title'                    => 'ثبت سفارش',
+                'button'                   => 'ثبت سفارش',
+                'change'                   => 'تغییر',
+                'back'                     => 'بازگشت به سبد خرید',
                 'payment-redirect-message' => 'لطفاً منتظر بمانید، شما به درگاه پرداخت هدایت می‌شوید...',
             ],
 
             'success' => [
-                'title'       => 'سفارش با موفقیت ثبت شد',
-                'thanks'      => 'از سفارش شما متشکریم!',
-                'order-id'    => 'شماره سفارش شما #:order_id می‌باشد',
-                'info'        => 'ما جزئیات سفارش و اطلاعات پیگیری آن را به شما ایمیل خواهیم کرد',
-                'continue'    => 'ادامه خرید',
-                'print'       => 'چاپ سفارش',
+                'title'    => 'سفارش با موفقیت ثبت شد',
+                'thanks'   => 'از سفارش شما متشکریم!',
+                'order-id' => 'شماره سفارش شما #:order_id می‌باشد',
+                'info'     => 'ما جزئیات سفارش و اطلاعات پیگیری آن را به شما ایمیل خواهیم کرد',
+                'continue' => 'ادامه خرید',
+                'print'    => 'چاپ سفارش',
             ],
         ],
     ],
@@ -692,36 +692,36 @@ return [
             'resend-verify-email' => 'ارسال مجدد ایمیل تأیید',
         ],
     ],
-    
+
     'errors' => [
-        'go-to-home'   => 'به صفحه اصلی بروید',
-    
+        'go-to-home' => 'به صفحه اصلی بروید',
+
         '404' => [
             'title'       => 'صفحه 404 پیدا نشد',
             'description' => 'اوه! به نظر می رسد صفحه ای که به دنبال آن بودید در تعطیلات است. به نظر می رسد ما نتوانسته ایم آنچه را که به دنبال آن بودید پیدا کنیم.',
         ],
-    
+
         '401' => [
             'title'       => '401 غیرمجاز',
             'description' => 'اوه! به نظر می رسد شما مجاز به دسترسی به این صفحه نیستید. به نظر می رسد شما اطلاعات اعتباری لازم را ندارید.',
         ],
-    
+
         '403' => [
             'title'       => '403 ممنوع',
             'description' => 'اوه! این صفحه ممنوع است. به نظر می رسد شما دسترسی لازم برای مشاهده این محتوا را ندارید.',
         ],
-    
+
         '500' => [
             'title'       => 'خطای داخلی سرور 500',
             'description' => 'اوه! چیزی اشتباه رفته است. به نظر می رسد ما مشکلی در بارگذاری صفحه مورد نظر داریم.',
         ],
-    
+
         '503' => [
             'title'       => 'سرویس در دسترس نیست 503',
             'description' => 'اوه! به نظر می رسد ما به موقتی برای تعمیر و نگهداری در دسترس نیستیم. لطفاً بعداً بررسی کنید.',
-        ]
+        ],
     ],
-    
+
     'layouts' => [
         'my-account'            => 'حساب کاربری من',
         'profile'               => 'پروفایل',
@@ -731,58 +731,58 @@ return [
         'orders'                => 'سفارش‌ها',
         'downloadable-products' => 'محصولات قابل دانلود',
     ],
-    
+
     'subscription' => [
         'already'             => 'شما قبلاً به خبرنامه ما مشترک شده‌اید.',
         'subscribe-success'   => 'شما با موفقیت به خبرنامه ما مشترک شدید.',
         'unsubscribe-success' => 'شما با موفقیت از خبرنامه ما لغو اشتراک کردید.',
     ],
-    
+
     'emails' => [
         'dear'   => 'عزیز :customer_name',
         'thanks' => 'اگر به هر نوع کمکی نیاز دارید، لطفاً با ما تماس بگیرید به آدرس <a href=":link" style=":style">:email</a>.<br/>متشکریم!',
-    
+
         'customers' => [
             'registration' => [
                 'subject'     => 'ثبت نام مشتری جدید',
                 'greeting'    => 'خوش آمدید و از ثبت نام شما سپاسگزاریم!',
                 'description' => 'حساب شما با موفقیت ایجاد شده و شما می‌توانید با استفاده از ایمیل و اطلاعات ورودی رمز عبور خود وارد شوید. پس از ورود، شما قادر به دسترسی به خدمات دیگر از جمله مشاهده سفارشات گذشته، لیست علاقه‌مندی‌ها و ویرایش اطلاعات حساب خود خواهید بود.',
-                'sign-in'    => 'ورود'
+                'sign-in'     => 'ورود',
             ],
-    
+
             'forgot-password' => [
                 'subject'        => 'ایمیل بازیابی رمز عبور',
                 'greeting'       => 'رمز عبور را فراموش کرده‌اید!',
                 'description'    => 'شما این ایمیل را دریافت می‌کنید چرا که ما درخواست بازیابی رمز عبور برای حساب شما دریافت کرده‌ایم.',
-                'reset-password' => 'بازیابی رمز عبور'
+                'reset-password' => 'بازیابی رمز عبور',
             ],
-    
+
             'update-password' => [
                 'subject'     => 'به‌روزرسانی رمز عبور',
                 'greeting'    => 'رمز عبور به‌روزرسانی شد!',
                 'description' => 'شما این ایمیل را دریافت می‌کنید چرا که شما رمز عبور خود را به‌روز کرده‌اید.',
             ],
-    
+
             'verification' => [
                 'subject'        => 'ایمیل تأیید حساب',
                 'greeting'       => 'خوش آمدید!',
                 'description'    => 'لطفاً برای تأیید آدرس ایمیل خود دکمه زیر را فشار دهید.',
-                'verify-email'   => 'آدرس ایمیل را تأیید کنید'
+                'verify-email'   => 'آدرس ایمیل را تأیید کنید',
             ],
-    
+
             'commented' => [
-                'subject' => 'افزودن نظر جدید',
-                'description' => 'یادداشت - :note'
+                'subject'     => 'افزودن نظر جدید',
+                'description' => 'یادداشت - :note',
             ],
-    
+
             'subscribed' => [
                 'subject'     => 'شما! به خبرنامه ما مشترک شدید',
                 'greeting'    => 'به خبرنامه ما خوش آمدید!',
                 'description' => 'تبریک و خوش آمدگویی به جامعه خبرنامه ما! ما به خوش آمدگویی شما به برخورد با آخرین اخبار، روند‌ها و پیشنهادات اختصاصی خود افتخار می‌کنیم.',
-                'unsubscribe' => 'لغو اشتراک'
-            ]
+                'unsubscribe' => 'لغو اشتراک',
+            ],
         ],
-    
+
         'orders' => [
             'created' => [
                 'subject'  => 'تأیید سفارش جدید',
@@ -790,40 +790,40 @@ return [
                 'greeting' => 'با تشکر از سفارش شما :order_id که در تاریخ :created_at ثبت شده است',
                 'summary'  => 'خلاصه سفارش',
             ],
-    
+
             'invoiced' => [
                 'subject'  => 'تأیید فاکتور جدید',
                 'title'    => 'تأیید فاکتور!',
                 'greeting' => 'فاکتور شما #:invoice_id برای سفارش :order_id که در تاریخ :created_at ایجاد شده است',
                 'summary'  => 'خلاصه فاکتور',
             ],
-    
+
             'shipped' => [
                 'subject'  => 'تأیید ارسال جدید',
                 'title'    => 'ارسال سفارش!',
                 'greeting' => 'سفارش شما :order_id که در تاریخ :created_at ثبت شده است ارسال شده است',
                 'summary'  => 'خلاصه ارسال',
             ],
-    
+
             'refunded' => [
                 'subject'  => 'تأیید بازپرداخت جدید',
                 'title'    => 'بازپرداخت سفارش!',
                 'greeting' => 'بازپرداخت برای سفارش :order_id که در تاریخ :created_at ثبت شده است آغاز شده است',
                 'summary'  => 'خلاصه بازپرداخت',
             ],
-    
+
             'canceled' => [
                 'subject'  => 'لغو سفارش جدید',
                 'title'    => 'لغو سفارش!',
                 'greeting' => 'سفارش شما :order_id که در تاریخ :created_at ثبت شده است لغو شده است',
                 'summary'  => 'خلاصه سفارش',
             ],
-    
+
             'commented' => [
                 'subject' => 'افزودن نظر جدید',
                 'title'   => 'نظر جدید به سفارش شما :order_id که در تاریخ :created_at ثبت شده است افزوده شده است',
             ],
-    
+
             'shipping-address'  => 'آدرس ارسال',
             'carrier'           => 'حامل',
             'tracking-number'   => 'شماره پیگیری: :tracking_number',
