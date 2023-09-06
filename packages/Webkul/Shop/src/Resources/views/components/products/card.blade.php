@@ -229,14 +229,14 @@
 
                             localStorage.setItem('compare_items', JSON.stringify(items));
 
-                            this.$emitter.emit('add-flash', { type: 'success', message: "{{ trans('shop::app.components.products.card.add-to-compare') }}" });
+                            this.$emitter.emit('add-flash', { type: 'success', message: "@lang('shop::app.components.products.card.add-to-compare')" });
                         } else {
-                            this.$emitter.emit('add-flash', { type: 'warning', message: "{{ trans('shop::app.components.products.card.already-in-compare') }}" });
+                            this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('shop::app.components.products.card.already-in-compare')" });
                         }
                     } else {
                         localStorage.setItem('compare_items', JSON.stringify([productId]));
                             
-                        this.$emitter.emit('add-flash', { type: 'success', message: "{{ trans('shop::app.components.products.card.add-to-compare') }}" });
+                        this.$emitter.emit('add-flash', { type: 'success', message: "@lang('shop::app.components.products.card.add-to-compare')" });
 
                     }
                 },
