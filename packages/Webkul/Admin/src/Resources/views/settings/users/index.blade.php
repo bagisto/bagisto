@@ -257,7 +257,7 @@
                                 <div class="flex gap-[16px]">
                                     <!-- Password -->
                                     <x-admin::form.control-group class="flex-1 mb-[10px]">
-                                        <x-admin::form.control-group.label class="required">
+                                        <x-admin::form.control-group.label>
                                             @lang('admin::app.settings.users.index.create.password')
                                         </x-admin::form.control-group.label>
             
@@ -266,7 +266,7 @@
                                             name="password"
                                             id="password" 
                                             ref="password"
-                                            rules="required|min:6"
+                                            rules="min:6"
                                             :label="trans('admin::app.settings.users.index.create.password')"
                                             :placeholder="trans('admin::app.settings.users.index.create.password')"
                                             v-model="data.user.password"
@@ -281,7 +281,7 @@
     
                                     <!-- Confirm Password -->
                                     <x-admin::form.control-group class="flex-1 mb-[10px]">
-                                        <x-admin::form.control-group.label class="required">
+                                        <x-admin::form.control-group.label>
                                             @lang('admin::app.settings.users.index.create.confirm-password')
                                         </x-admin::form.control-group.label>
             

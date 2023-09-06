@@ -1,8 +1,14 @@
-<v-datagrid-export {{ $attributes }}></v-datagrid-export>
+<v-datagrid-export {{ $attributes }}>
+    <div class="p-[6px] items-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
+        <p class="text-gray-600 font-semibold leading-[24px]">
+            @lang('admin::app.export.export')
+        </p>
+    </div>
+</v-datagrid-export>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-datagrid-export-template">
-        <div class="p-[6px] items-center cursor-pointer transition-all hover:bg-gray-100 hover:rounded-[6px]">
+        <div class="p-[6px] items-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
             <x-admin::modal>
                 <x-slot:toggle>
                     <p class="text-gray-600 font-semibold leading-[24px]">
