@@ -162,6 +162,8 @@
                 class="sr-only peer"
                 {{ $attributes->except(['rules', 'label', ':label']) }}
             />
+
+            <v-checkbox-handler :field="field" checked="{{ $attributes->get('checked') }}"></v-checkbox-handler>
         </v-field>
 
         <label
@@ -239,3 +241,32 @@
             {{ $slot }}
         </v-field>
 @endswitch
+
+@pushOnce('scripts')
+    <script type="text/x-template" id="v-checkbox-handler-template">
+        <div></div>
+    </script>
+
+    <script type="module">
+        app.component('v-checkbox-handler', {
+            template: '#v-checkbox-handler-template',
+
+            props: ['field', 'checked'],
+
+            data() {
+                return {
+                }
+            },
+
+            mounted() {
+                if (this.checked == '') {
+                    return;
+                }
+
+                this.field.checked = true;
+
+                this.field.onChange();
+            },
+        });
+    </script>
+@endpushOnce

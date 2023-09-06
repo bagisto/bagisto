@@ -37,7 +37,7 @@
                 ></span>
             </div>
 
-            <div class="px-[16px] pb-[16px] select-none" v-if="isOpen">
+            <div class="px-[16px] pb-[16px]" v-if="isOpen">
                 <slot name="content">
                     Default Content
                 </slot>
