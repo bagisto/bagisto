@@ -620,7 +620,6 @@ return [
                     'empty-info'  => ':type නිර්මාණයන් එකතු කිරීමට.',
                     'sku'         => 'SKU - :sku',
                 ],
-                
 
                 'types' => [
                     'configurable' => [
@@ -783,7 +782,6 @@ return [
             'product-copied'           => 'නිෂ්පාදනය පිටපත් කරන ලදි',
             'saved-inventory-message'  => 'නිෂ්පාදනය සාර්ථකයි',
             'update-success'           => 'නිෂ්පාදනය යාවත්කාලීන කරන ලදි',
-            
         ],
 
         'attributes' => [
@@ -1881,7 +1879,6 @@ return [
                     'edit'            => 'සංස්කරණය',
                     'delete'          => 'මකාදමන්',
                     'actions'         => 'ක්‍රියා',
-        
                 ],
         
                 'create'  => [
@@ -2492,52 +2489,53 @@ return [
             ],
         
             'create' => [
-                'title'                         => 'තේමාකරන්න',
+                'title'                          => 'තේමාව නිර්මාණය කරන්න',
                 'sliders'                        => 'ස්ලයිඩර්',
-                'product-carousel'              => 'නිෂ්පාදන කැර෫ල්',
-                'product-carousel-description'  => 'නිෂ්පාදනයන් සමඟ ප්‍රභේදනයක් සුරැකීමට සංදර්ශකයක් සහිත ස්ලයිඩර් සැලසුම.',
-                'category-carousel-description' => 'උදාහරණ, සුරැකීම්දෙනු භවයෙන් රටුකැර෫ලයක් භාවිතා කිරීමට ස්ලයිඩර් කැර෫ල් සැලසුම.',
-                'static-content-description'    => 'ඔබේ ජලනන පුළුවට සුළු විස්තරයන් සමඟ සත්කාරක, දැන්වීමක් සම්ප්‍රාදේශයට පිටවන්ද සුරැකීමට ස්ලයිඩර් සැලසුම.',
-                'footer-link-description'       => 'පිටවන්ද සහ විස්තරයෙන් පිටවීමට පරික්ෂාකර පසුබිමක් සුරැකීමට ෆුටර් පසුබිම භාවිතා කිරීම.',
-                'category-carousel'             => 'කැර෫ල් කැර෫ල්',
-                'static-content'                => 'ස්ලයිඩර් කැර෫ල්',
-                'footer-title'                  => 'මේවාල්',
-                'footer-link'                   => 'පිටවන්ද',
-                'footer-link-form-title'        => 'පිටවන්ද ලියන්න',
-                'slider-description'            => 'ස්ලයිඩර් සම්පූර්ණකරන්නේ ප්‍රභේදන ක්‍රමාංකාරකයේ සංක්‍රමණය.',
-                'slider-add-btn'                => 'ස්ලයිඩර් එකතු කරන්න',
-                'general'                       => 'සාමාන්‍ය',
-                'add-filter-btn'                => 'පෙරහුල් කරන්න',
-                'save-btn'                      => 'තේමා සුරක්ෂා කරන්න',
-                'filter-title'                  => 'සාර්ථකය',
-                'sort'                          => 'සුරැකීම',
-                'desc'                          => 'අවිසුකිරීම',
-                'asc'                           => 'ස්ථාපනය',
-                'limit'                         => 'සීමාව',
-                'key'                           => 'යේතුව: :key',
-                'value'                         => 'අගය: :value',
-                'delete'                        => 'මකාදමා',
-                'link'                          => 'සබැඳිය',
-                'image'                         => 'රූපය',
-                'name'                          => 'නම',
-                'sort-order'                    => 'සුරාගත් ක්‍රමය',
-                'status'                        => 'ස්ථාපනය',
-                'create-filter'                 => 'පෙරහුල් කරන්න',
-                'key-input'                     => 'යේතුව',
-                'value-input'                   => 'අගය',
-                'html'                          => 'HTML',
-                'css'                           => 'CSS',
-                'add-footer-link-btn'           => 'පිටවන්ද එකතු කරන්න',
-                'filters'                       => 'පෙරහුල්',
-                'edit'                          => 'සංස්කරණය කරන්න',
-                'url'                           => 'URL',
-                'add-link'                      => 'සබැඳිය එකතු කරන්න',
-                'create-slider'                 => 'ස්ලයිඩර් එකතු කරන්න',
-                'slider-image'                  => 'ස්ලයිඩර් රූපය',
-                'column'                        => 'තීරුව',
-                'select'                        => 'තෝරන්න',
-                'back'                          => 'ආපසු',
-             ],
+                'product-carousel'               => 'නිෂ්පාදන කැරූසල්',
+                'product-carousel-description'   => 'උසස්, ප්‍රභේද්‍රයෙන් ස්නූවරයේ නිෂ්පාදන කැරූසල් හා ප්‍රගත් කරන්න.',
+                'category-carousel-description'  => 'උසස් කැටගෙන් ප්‍රගත්තේ නවීන කැරූසල් භාජනය කරන්න.',
+                'static-content-description'     => 'ඔබේ පළමු පිටුවක් සදහා කුස්සි, නිවේදනා ස්ථානගත කරන්න.',
+                'footer-link-description'        => 'පිටු මාධ්‍යවේදියෙන් මාරු කරන්නේ අනතුරු වෙබ්‌අඩවිය අභ්‍යවක්කාරවරයෙකු සදහා.',
+                'category-carousel'              => 'කැටගෙන් කැරූසල්',
+                'static-content'                 => 'නිකුත් කුස්සි',
+                'footer-link'                    => 'පිටු මාධ්‍ය',
+                'footer-link-form-title'         => 'පිටු මාධ්‍ය වර්ගය',
+                'slider-description'             => 'ස්ලයිඩර් මාධ්‍යයේ අනෙකුත් සවිකිරීම්.',
+                'slider-add-btn'                 => 'ස්ලයිඩර් එකතු කරන්න',
+                'general'                        => 'සාමාන්‍ය',
+                'add-filter-btn'                 => 'පෙරහන එකතු කරන්න',
+                'save-btn'                       => 'ගබඩා කරන්න',
+                'filter-title'                   => 'විස්තරය',
+                'sort'                           => 'අනුලකාරය',
+                'desc'                           => 'අසාර්ථක',
+                'asc'                            => 'ආසාර',
+                'limit'                          => 'සීමා',
+                'footer-title'                   => 'විස්තරය',
+                'link'                           => 'සබැඳිය',
+                'add-logo'                       => 'ලාංඡනය එකතු කරන්න',
+                'key'                            => 'යතුර: :key',
+                'value'                          => 'අගය: :value',
+                'delete'                         => 'මකන්න',
+                'name'                           => 'නම',
+                'sort-order'                     => 'අනුලකාරය',
+                'status'                         => 'තත්ත්වය',
+                'image'                          => 'පින්තූරය',
+                'create-filter'                  => 'පෙරහනය නිර්මාණය කරන්න',
+                'key-input'                      => 'යතුර',
+                'value-input'                    => 'අගය',
+                'html'                           => 'HTML',
+                'css'                            => 'CSS',
+                'add-footer-link-btn'            => 'පිටු මාධ්‍ය එකතු කරන්න',
+                'filters'                        => 'පෙරහන',
+                'edit'                           => 'සංස්කරණය කරන්න',
+                'url'                            => 'URL',
+                'add-link'                       => 'ලින්ක් එකතු කරන්න',
+                'create-slider'                  => 'ස්ලයිඩර් නිර්මාණය කරන්න',
+                'slider-image'                   => 'ස්ලයිඩර් පින්තූරය',
+                'column'                         => 'තීරු',
+                'select'                         => 'තේරීම',
+                'back'                           => 'ආපසු'
+            ],
 
              'edit' => [
                 'title'                         => 'වෙළඳ සුරැකුම්',
@@ -2693,7 +2691,6 @@ return [
                     'image-upload-size'                  => 'හෝඩ් උඩුගත කිරීම ඉඩ දෙන පිටය (සොකයිට්)',
                     'file-upload-size'                   => 'හෝඩ් උඩුගත කිරීම ඉඩ දෙන පිටය (සොකයිට්)',
                     'comma-separated'                    => 'සොකයිට් වියදම් කරන්න',
-
                 ],
 
                 'rich-snippets' => [
@@ -3130,66 +3127,66 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'Dear :customer_name',
-        'thanks' => 'If you need any kind of help please contact us at <a href=":link" style=":style">:email</a>.<br/>Thanks!',
-
+        'dear'   => 'මහේෂ් :customer_name',
+        'thanks' => 'ඔබට කුමු උපකාර අවශ්‍යයිද? කරුණාකර <a href=":link" style=":style">:email</a> අමතන්න.<br/>ස්තූති!',
+        
         'orders' => [
             'created' => [
-                'subject'  => 'New Order Confirmation',
-                'title'    => 'Order Confirmation!',
-                'greeting' => 'You have a new Order :order_id placed on :created_at',
-                'summary'  => 'Summary of Order',
+                'subject'  => 'නව ඇණවුම් තහවුරු',
+                'title'    => 'ඇණවුම තහවුරු!',
+                'greeting' => 'ඔබගේ නව ඇණවුම :order_id :created_at වෙත ඇත.',
+                'summary'  => 'ඇණවුමේ සාරාංශය',
             ],
-
+    
             'invoiced' => [
-                'subject'  => 'New Invoice Confirmation',
-                'title'    => 'Invoice Confirmation!',
-                'greeting' => 'Your invoice #:invoice_id for order :order_id created on :created_at',
-                'summary'  => 'Summary of Invoice',
+                'subject'  => 'නව වාණිව් තහවුරු',
+                'title'    => 'වාණිව් තහවුරු!',
+                'greeting' => 'ඔබගේ වාණිව් #:invoice_id, ඇණවුම :order_id :created_at වෙත ඇත.',
+                'summary'  => 'වාණිව් සාරාංශය',
             ],
-
+    
             'shipped' => [
-                'subject'  => 'New Shipment Confirmation',
-                'title'    => 'Order Shipped!',
-                'greeting' => 'You have shipped the order :order_id placed on :created_at',
-                'summary'  => 'Summary of Shipment',
+                'subject'  => 'නව නොහැකායාම තහවුරු',
+                'title'    => 'ඇණවුම නොහැකායාම!',
+                'greeting' => 'ඔබගේ ඇණවුම :order_id :created_at වෙත නොහැකායා කරන ලදි.',
+                'summary'  => 'නොහැකායාමේ සාරාංශය',
             ],
-
+    
             'inventory-source' => [
-                'subject'  => 'New Shipment Confirmation',
-                'title'    => 'Order Shipped!',
-                'greeting' => 'You have shipped the order :order_id placed on :created_at',
-                'summary'  => 'Summary of Shipment',
+                'subject'  => 'නව නොහැකායාම තහවුරු',
+                'title'    => 'ඇණවුම නොහැකායාම!',
+                'greeting' => 'ඔබගේ ඇණවුම :order_id :created_at වෙත නොහැකායා කරන ලදි.',
+                'summary'  => 'නොහැකායාමේ සාරාංශය',
             ],
-
+    
             'refunded' => [
-                'subject'  => 'New Refund Confirmation',
-                'title'    => 'Order Refunded!',
-                'greeting' => 'You have refunded for order :order_id placed on :created_at',
-                'summary'  => 'Summary of Refund',
+                'subject'  => 'නව හරිහැණීම තහවුරු',
+                'title'    => 'ඇණවුම හරිහැණීම!',
+                'greeting' => 'ඔබගේ ඇණවුම :order_id :created_at වෙත හරිහැණීමක් සිදු කරන ලදි.',
+                'summary'  => 'හරිහැණීමේ සාරාංශය',
             ],
-
+    
             'canceled' => [
-                'subject'  => 'New Order Canceled',
-                'title'    => 'Order Canceled!',
-                'greeting' => 'You have canceled the order :order_id placed on :created_at',
-                'summary'  => 'Summary of Order',
+                'subject'  => 'නව ඇණවුම අවලංගුවයි',
+                'title'    => 'ඇණවුම අවලංගුවයි!',
+                'greeting' => 'ඔබගේ ඇණවුම :order_id :created_at වෙත අවලංගු කරන ලදි.',
+                'summary'  => 'ඇණවුමේ සාරාංශය',
             ],
-
-            'shipping-address'  => 'Shipping Address',
-            'billing-address'   => 'Billing Address',
-            'contact'           => 'Contact',
-            'shipping'          => 'Shipping',
-            'payment'           => 'Payment',
+    
+            'shipping-address'  => 'නොහැකායේ ලිපිනය',
+            'billing-address'   => 'බිල්න් ලිපිනය',
+            'contact'           => 'සම්බන්ධය',
+            'shipping'          => 'නොහැකාය',
+            'payment'           => 'ගෙවීම',
             'sku'               => 'SKU',
-            'name'              => 'Name',
-            'price'             => 'Price',
-            'qty'               => 'Qty',
-            'subtotal'          => 'Subtotal',
-            'shipping-handling' => 'Shipping Handling',
-            'tax'               => 'Tax',
-            'discount'          => 'Discount',
-            'grand-total'       => 'Grand Total',
+            'name'              => 'නම',
+            'price'             => 'මිල',
+            'qty'               => 'ප්‍රමාණය',
+            'subtotal'          => 'උප එකතු',
+            'shipping-handling' => 'නොහැකාය හා සහිතවැල්ල',
+            'tax'               => 'බදු',
+            'discount'          => 'අරණය',
+            'grand-total'       => 'සාමාන්‍ය එකතු',
         ],
     ],
 ];
