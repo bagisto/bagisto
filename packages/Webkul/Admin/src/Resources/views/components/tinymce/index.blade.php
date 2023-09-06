@@ -90,21 +90,21 @@
                                 let json;
 
                                 if (xhr.status === 403) {
-                                    failure('{{ trans('admin::app.error.tinymce.http-error') }}', {
+                                    failure("@lang('admin::app.error.tinymce.http-error')", {
                                         remove: true
                                     });
                                     return;
                                 }
 
                                 if (xhr.status < 200 || xhr.status >= 300) {
-                                    failure('{{ trans('admin::app.error.tinymce.http-error') }}');
+                                    failure("@lang('admin::app.error.tinymce.http-error')");
                                     return;
                                 }
 
                                 json = JSON.parse(xhr.responseText);
 
                                 if (!json || typeof json.location != 'string') {
-                                    failure('{{ trans('admin::app.error.tinymce.invalid-json') }} ' + xhr.responseText);
+                                    failure("@lang('admin::app.error.tinymce.invalid-json')" + xhr.responseText);
                                     return;
                                 }
 
@@ -112,7 +112,7 @@
                             };
 
                             xhr.onerror = function() {
-                                failure('{{ trans('admin::app.error.tinymce.upload-failed') }}');
+                                failure("@lang('admin::app.error.tinymce.upload-failed')");
                             };
 
                             formData = new FormData();

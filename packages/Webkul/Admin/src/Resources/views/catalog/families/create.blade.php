@@ -443,7 +443,7 @@
 
                     onEnd: function(e) {
                         if (this.dropReverted) {
-                            this.$emitter.emit('add-flash', { type: 'warning', message: "{{ trans('admin::app.catalog.families.create.removal-not-possible') }}" });
+                            this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('admin::app.catalog.families.create.removal-not-possible')" });
                         }
                     },
 
@@ -470,7 +470,7 @@
 
                     addGroup(params, { resetForm, setErrors }) {
                         if (this.isGroupAlreadyExists(params.name)) {
-                            setErrors({'name': ["{{ trans('admin::app.catalog.families.create.group-already-exists') }}"]});
+                            setErrors({'name': ["@lang('admin::app.catalog.families.create.group-already-exists')"]});
 
                             return;
                         }
@@ -501,13 +501,13 @@
 
                     deleteGroup() {
                         if (! this.selectedGroup.id) {
-                            this.$emitter.emit('add-flash', { type: 'warning', message: "{{ trans('admin::app.catalog.families.create.select-group') }}" });
+                            this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('admin::app.catalog.families.create.select-group')" });
 
                             return;
                         }
 
                         if (this.isGroupContainsSystemAttributes(this.selectedGroup)) {
-                            this.$emitter.emit('add-flash', { type: 'warning', message: "{{ trans('admin::app.catalog.families.create.group-contains-system-attributes') }}" });
+                            this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('admin::app.catalog.families.create.group-contains-system-attributes')" });
 
                             return;
                         }

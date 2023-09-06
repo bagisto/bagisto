@@ -18,7 +18,7 @@
         <x-admin::form.control-group.label
             :for="$name"
         >
-            {{ trans($field['title']) }}
+            @lang$field['title'])
         </x-admin::form.control-group.label>
         
         <x-admin::form.control-group.label
@@ -124,7 +124,7 @@
                             value="{{ $key }}"
                             {{ $key == $selectedOption ? 'selected' : ''}}
                         >
-                            {{ trans($option) }}
+                            @lang($option)
                         </option>
                     @endforeach
                 @else
@@ -137,7 +137,7 @@
                             value="{{ $value }}"
                             {{ $value == $selectedOption ? 'selected' : ''}}
                         >
-                            {{ trans($option['title']) }}
+                            @lang($option['title'])
                         </option>
                     @endforeach
                 @endif
@@ -159,7 +159,7 @@
                     @foreach ($value as $key => $option)
 
                         <option value="{{ $key }}" {{ in_array($key, explode(',', $selectedOption)) ? 'selected' : ''}}>
-                            {{ trans($value[$key]) }}
+                            @lang($value[$key])
                         </option>
 
                     @endforeach
@@ -170,7 +170,7 @@
                         @endphp
 
                         <option value="{{ $value }}" {{ in_array($option['value'], explode(',', $selectedOption)) ? 'selected' : ''}}>
-                            {{ trans($option['title']) }}
+                            @lang($option['title'])
                         </option>
                     @endforeach
                 @endif

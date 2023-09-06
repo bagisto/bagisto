@@ -22,12 +22,12 @@
                 <div class="grid gap-[4px]">
                     {{-- Title of the Main Card --}}
                     <p class="text-gray-600 font-semibold">
-                        {{ trans($item['name'] ?? '')  }}
+                        @lang($item['name'] ?? '')
                     </p>
 
                     {{-- Info of the Main Card --}}
                     <p class="text-gray-600">
-                        {{ trans($item['info'] ?? '')  }}
+                        @lang($item['info'] ?? '')
                     </p>
                 </div>
 
