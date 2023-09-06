@@ -63,15 +63,6 @@ class OrderDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'created_at',
-            'label'      => trans('admin::app.sales.orders.index.datagrid.date'),
-            'type'       => 'datetime',
-            'searchable' => false,
-            'filterable' => true,
-            'sortable'   => true,
-        ]);
-
-        $this->addColumn([
             'index'      => 'status',
             'label'      => trans('admin::app.sales.orders.index.datagrid.status'),
             'type'       => 'checkbox',
@@ -182,6 +173,15 @@ class OrderDataGrid extends DataGrid
 
                 return view('admin::sales.orders.images', compact('order'))->render();
             },
+        ]);
+
+        $this->addColumn([
+            'index'      => 'created_at',
+            'label'      => trans('admin::app.sales.orders.index.datagrid.date'),
+            'type'       => 'date_range',
+            'searchable' => false,
+            'filterable' => true,
+            'sortable'   => true,
         ]);
     }
 
