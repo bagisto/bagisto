@@ -489,7 +489,6 @@ return [
                 'create' => [
                     'back-btn'                => 'Назад',
                     'bundle'                  => 'Збирається',
-                    'booking'                 => 'Бронювання',
                     'configurable'            => 'Конфігурований',
                     'configurable-attributes' => 'Атрибути конфігурованого товару',
                     'create-btn'              => 'Створити товар',

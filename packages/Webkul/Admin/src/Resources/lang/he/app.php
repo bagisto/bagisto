@@ -489,7 +489,6 @@ return [
                 'create'     => [
                     'back-btn'                => 'חזרה',
                     'bundle'                  => 'אוסף',
-                    'booking'                 => 'הזמנה',
                     'configurable'            => 'מתקנים',
                     'configurable-attributes' => 'מאפיינים מתקנים',
                     'create-btn'              => 'צור מוצר',

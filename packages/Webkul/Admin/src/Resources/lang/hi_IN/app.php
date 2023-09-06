@@ -489,7 +489,6 @@ return [
                 'create'     => [
                     'back-btn'                => 'वापस जाएं',
                     'bundle'                  => 'बंडल',
-                    'booking'                 => 'बुकिंग',
                     'configurable'            => 'कॉन्फ़िगरेबल',
                     'configurable-attributes' => 'कॉन्फ़िगरेबल गुण',
                     'create-btn'              => 'नया उत्पाद बनाएं',

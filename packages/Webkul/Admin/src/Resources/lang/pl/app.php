@@ -489,7 +489,6 @@ return [
                 'create' => [
                     'back-btn'                => 'Wróć',
                     'bundle'                  => 'Pakiet',
-                    'booking'                 => 'Rezerwacja',
                     'configurable'            => 'Konfigurowalny',
                     'configurable-attributes' => 'Atrybuty konfigurowalne',
                     'create-btn'              => 'Utwórz produkt',

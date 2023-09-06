@@ -489,7 +489,6 @@ return [
                 'create'     => [
                     'back-btn'                => 'Indietro',
                     'bundle'                  => 'Bundle',
-                    'booking'                 => 'Prenotazione',
                     'configurable'            => 'Configurabile',
                     'configurable-attributes' => 'Attributi Configurabili',
                     'create-btn'              => 'Crea Prodotto',
