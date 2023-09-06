@@ -541,6 +541,7 @@ return [
                         'create-btn'                => '新規追加',
                         'edit-btn'                  => '編集',
                         'add-group-price'           => 'グループ価格を追加',
+                        'all-groups'                => 'すべてのグループ',
                         'fixed-group-price-info'    => ':price の固定価格で :qty 個の数量に対して',
                         'discount-group-price-info' => ':price の割引価格で :qty 個の数量に対して',
                         'empty-info'                => '特定のグループに所属する顧客のための特別価格',
@@ -548,6 +549,7 @@ return [
                         'create' => [
                             'create-title'   => '顧客グループ価格を作成',
                             'customer-group' => '顧客グループ',
+                            'all-groups'     => 'すべてのグループ',
                             'discount'       => '割引',
                             'delete-btn'     => '削除',
                             'fixed'          => '固定',

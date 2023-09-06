@@ -541,6 +541,7 @@ return [
                         'create-btn'                => 'Dodaj nową',
                         'edit-btn'                  => 'Edytuj',
                         'add-group-price'           => 'Dodaj cenę dla grupy',
+                        'all-groups'                => 'Wszystkie grupy',
                         'fixed-group-price-info'    => 'Dla :qty sztuk w stałej cenie :price',
                         'discount-group-price-info' => 'Dla ilości :qty w cenie obniżonej o :price',
                         'empty-info'                => 'Specjalne ceny dla klientów należących do określonej grupy.',
@@ -548,6 +549,7 @@ return [
                         'create' => [
                             'create-title'   => 'Utwórz cenę dla grupy klientów',
                             'customer-group' => 'Grupa klientów',
+                            'all-groups'     => 'Wszystkie grupy',
                             'discount'       => 'Rabat',
                             'delete-btn'     => 'Usuń',
                             'fixed'          => 'Stała',

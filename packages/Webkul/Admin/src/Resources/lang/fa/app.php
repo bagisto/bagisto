@@ -541,6 +541,7 @@ return [
                         'create-btn'                => 'افزودن جدید',
                         'edit-btn'                  => 'ویرایش',
                         'add-group-price'           => 'افزودن قیمت گروه',
+                        'all-groups'                => 'تمام گروه‌ها',
                         'fixed-group-price-info'    => 'برای :qty تعداد با قیمت ثابت :price',
                         'discount-group-price-info' => 'برای :qty تعداد با تخفیف :price',
                         'empty-info'                => 'قیمت‌گذاری ویژه برای مشتریانی که به یک گروه خاص تعلق دارند.',
@@ -548,6 +549,7 @@ return [
                         'create' => [
                             'create-title'   => 'ایجاد قیمت گروه مشتری',
                             'customer-group' => 'گروه مشتری',
+                            'all-groups'     => 'تمام گروه‌ها',
                             'discount'       => 'تخفیف',
                             'delete-btn'     => 'حذف',
                             'fixed'          => 'ثابت',
