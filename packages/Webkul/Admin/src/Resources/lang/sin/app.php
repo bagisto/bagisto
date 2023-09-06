@@ -407,6 +407,8 @@ return [
                 'sku'                    => 'SKU - :sku',
                 'sub-total'              => 'උප මුදල - :sub_total',
                 'sub-total-summary'      => 'උප මුදල',
+                'summary-tax'            => 'ඡන්ද මුදල',
+                'summary-discount'       => 'බදු මුදල',
                 'title'                  => 'අනුවා #:invoice_id',
                 'tax'                    => 'බදු මුදල - :tax',
             ],

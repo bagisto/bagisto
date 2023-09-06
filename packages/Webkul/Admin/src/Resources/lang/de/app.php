@@ -407,6 +407,8 @@ return [
                 'sku'                    => 'Artikelnummer - :sku',
                 'sub-total'              => 'Zwischensumme - :sub_total',
                 'sub-total-summary'      => 'Zwischensumme',
+                'summary-tax'            => 'Steuerbetrag',
+                'summary-discount'       => 'Rabattbetrag',
                 'title'                  => 'Rechnung #:invoice_id',
                 'tax'                    => 'Steuerbetrag - :tax',
             ],

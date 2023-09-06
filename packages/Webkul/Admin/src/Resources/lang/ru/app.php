@@ -407,6 +407,8 @@ return [
                 'sku'                    => 'SKU - :sku',
                 'sub-total'              => 'Подытог - :sub_total',
                 'sub-total-summary'      => 'Подытог',
+                'summary-tax'            => 'Сумма налога',
+                'summary-discount'       => 'Сумма скидки',
                 'title'                  => 'Счет #:invoice_id',
                 'tax'                    => 'Сумма налога - :tax',
             ],

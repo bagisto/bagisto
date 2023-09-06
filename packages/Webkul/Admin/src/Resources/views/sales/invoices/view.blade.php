@@ -230,12 +230,12 @@
                         </p>
 
                         <p class="text-gray-600">
-                            @lang('admin::app.sales.invoices.view.tax')    
+                            @lang('admin::app.sales.invoices.view.summary-tax')    
                         </p>
 
                         @if ($invoice->base_discount_amount > 0)
                             <p class="text-gray-600">
-                                @lang('admin::app.sales.invoices.view.discount')    
+                                @lang('admin::app.sales.invoices.view.summary-discount')    
                             </p>
                         @endif
 

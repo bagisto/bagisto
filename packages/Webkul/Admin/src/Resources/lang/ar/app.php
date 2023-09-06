@@ -407,6 +407,8 @@ return [
                 'sku'                    => 'الرمز - :sku',
                 'sub-total'              => 'الإجمالي الفرعي - :sub_total',
                 'sub-total-summary'      => 'الإجمالي الفرعي',
+                'summary-tax'            => 'مبلغ الضريبة',
+                'summary-discount'       => 'مبلغ الخصم',
                 'title'                  => 'الفاتورة #:invoice_id',
                 'tax'                    => 'مبلغ الضريبة - :tax',
             ],

@@ -407,6 +407,8 @@ return [
                 'sku'                    => 'Ürün Kodu - :sku',
                 'sub-total'              => 'Ara Toplam - :sub_total',
                 'sub-total-summary'      => 'Ara Toplam',
+                'summary-tax'            => 'Vergi Tutarı',
+                'summary-discount'       => 'İndirim Tutarı',
                 'title'                  => 'Fatura #:invoice_id',
                 'tax'                    => 'Vergi Tutarı - :tax',
             ],
