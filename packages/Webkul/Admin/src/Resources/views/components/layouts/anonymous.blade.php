@@ -14,12 +14,6 @@
 
     @stack('meta')
 
-    {{-- <link
-        rel="icon"
-        sizes="16x16"
-        href="{{ core()->getCurrentChannel()->favicon_url ?? bagisto_asset('images/favicon.ico') }}"
-    /> --}}
-
     @bagistoVite(['src/Resources/assets/css/app.css', 'src/Resources/assets/js/app.js'])
 
     <link
@@ -31,6 +25,22 @@
         href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap"
         rel="stylesheet"
     />
+
+    @if ($favicon = core()->getConfigData('general.design.admin_logo.favicon', core()->getCurrentChannelCode()))
+        <link 
+            type="image/x-icon"
+            href="{{ Storage::url($favicon) }}" 
+            rel="shortcut icon"
+            sizes="16x16"
+        >
+    @else
+        <link 
+            type="image/x-icon"
+            href="{{ bagisto_asset('images/favicon.ico') }}" 
+            rel="shortcut icon"
+            sizes="16x16"
+        />
+    @endif
 
     @stack('styles')
 
