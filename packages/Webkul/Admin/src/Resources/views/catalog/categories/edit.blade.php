@@ -98,8 +98,8 @@
                             name="{{$currentLocale->code}}[name]"
                             value="{{ old($currentLocale->code)['name'] ?? ($category->translate($currentLocale->code)['name'] ?? '') }}"
                             class="w-full"
-                            label="{{ trans('admin::app.catalog.categories.edit.company-name') }}"
-                            placeholder="{{ trans('admin::app.catalog.categories.edit.company-name') }}"
+                            label="@lang('admin::app.catalog.categories.edit.company-name')"
+                            placeholder="@lang('admin::app.catalog.categories.edit.company-name')"
                         >
                         </x-admin::form.control-group.control>
                     </x-admin::form.control-group>
@@ -151,7 +151,7 @@
                             class="description"
                             :value="old($currentLocale->code)['description'] ?? ($category->translate($currentLocale->code)['description'] ?? '')"
                             rules="required"
-                            label="{{ trans('admin::app.catalog.categories.edit.description') }}"
+                            label="@lang('admin::app.catalog.categories.edit.description')"
                             :tinymce="true"
                         >
                         </x-admin::form.control-group.control>
@@ -233,8 +233,8 @@
                                 name="{{$currentLocale->code}}[meta_title]"
                                 id="meta_title"
                                 :value="old($currentLocale->code)['meta_title'] ?? ($category->translate($currentLocale->code)['meta_title'] ?? '')"
-                                label="{{ trans('admin::app.catalog.categories.edit.meta-title') }}"
-                                placeholder="{{ trans('admin::app.catalog.categories.edit.meta-title') }}"
+                                label="@lang('admin::app.catalog.categories.edit.meta-title')"
+                                placeholder="@lang('admin::app.catalog.categories.edit.meta-title')"
                             >
                             </x-admin::form.control-group.control>
                         </x-admin::form.control-group>
@@ -250,8 +250,8 @@
                                 name="{{$currentLocale->code}}[slug]"
                                 :value="old($currentLocale->code)['slug'] ?? ($category->translate($currentLocale->code)['slug'] ?? '')"
                                 rules="required"
-                                label="{{ trans('admin::app.catalog.categories.create.slug') }}"
-                                placeholder="{{ trans('admin::app.catalog.categories.create.slug') }}"
+                                label="@lang('admin::app.catalog.categories.create.slug')"
+                                placeholder="@lang('admin::app.catalog.categories.create.slug')"
                                 v-slugify
                             >
                             </x-admin::form.control-group.control>
@@ -272,8 +272,8 @@
                                 type="text"
                                 name="{{$currentLocale->code}}[meta_keywords]"
                                 :value="old($currentLocale->code)['meta_keywords'] ?? ($category->translate($currentLocale->code)['meta_keywords'] ?? '')"
-                                label="{{ trans('admin::app.catalog.categories.edit.meta-keywords') }}"
-                                placeholder="{{ trans('admin::app.catalog.categories.edit.meta-keywords') }}"
+                                label="@lang('admin::app.catalog.categories.edit.meta-keywords')"
+                                placeholder="@lang('admin::app.catalog.categories.edit.meta-keywords')"
                             >
                             </x-admin::form.control-group.control>
                         </x-admin::form.control-group>
@@ -289,8 +289,8 @@
                                 name="{{$currentLocale->code}}[meta_description]"
                                 id="meta_description"
                                 :value="old($currentLocale->code)['meta_description'] ?? ($category->translate($currentLocale->code)['meta_description'] ?? '')"
-                                label="{{ trans('admin::app.catalog.categories.edit.meta-description') }}"
-                                placeholder="{{ trans('admin::app.catalog.categories.edit.meta-description') }}"
+                                label="@lang('admin::app.catalog.categories.edit.meta-description')"
+                                placeholder="@lang('admin::app.catalog.categories.edit.meta-description')"
                             >
                             </x-admin::form.control-group.control>
                         </x-admin::form.control-group>
@@ -323,8 +323,8 @@
                                     name="position"
                                     :value="old('position') ?: $category->position"
                                     rules="required"
-                                    label="{{ trans('admin::app.catalog.categories.edit.position') }}"
-                                    placeholder="{{ trans('admin::app.catalog.categories.edit.enter-position') }}"
+                                    label="@lang('admin::app.catalog.categories.edit.position')"
+                                    placeholder="@lang('admin::app.catalog.categories.edit.enter-position')"
                                 >
                                 </x-admin::form.control-group.control>
 
@@ -349,7 +349,7 @@
                                 class="cursor-pointer"
                                 :value="$selectedValue"
                                 rules="required"
-                                label="{{ trans('admin::app.catalog.categories.edit.display-mode') }}"
+                                label="@lang('admin::app.catalog.categories.edit.display-mode')"
                             >
                                 @foreach (['products-and-description', 'products-only', 'description-only'] as $item)
                                     <option
@@ -380,7 +380,7 @@
                                 name="status"
                                 class="cursor-pointer"
                                 value="1"
-                                label="{{ trans('admin::app.catalog.categories.edit.visible-in-menu') }}"
+                                label="@lang('admin::app.catalog.categories.edit.visible-in-menu')"
                                 :checked="(boolean) $selectedValue"
                             >
                             </x-admin::form.control-group.control>

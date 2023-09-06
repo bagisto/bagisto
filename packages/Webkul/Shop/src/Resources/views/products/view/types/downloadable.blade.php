@@ -39,7 +39,7 @@
                             id="{{ $link->id }}"
                             class="hidden peer"
                             rules="required"
-                            label="{{ trans('shop::app.products.view.type.downloadable.links') }}"
+                            label="@lang('shop::app.products.view.type.downloadable.links')"
                         >
                         </v-field>
                         

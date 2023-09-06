@@ -151,7 +151,7 @@
                     if (! validFiles) {
                         this.$emitter.emit('add-flash', {
                             type: 'warning',
-                            message: "{{ trans('admin::app.catalog.products.edit.videos.not-allowed-error') }}"
+                            message: "@lang('admin::app.catalog.products.edit.videos.not-allowed-error')"
                         });
 
                         return;

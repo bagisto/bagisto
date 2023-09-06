@@ -148,7 +148,7 @@
                     if (! validFiles) {
                         this.$emitter.emit('add-flash', {
                             type: 'warning',
-                            message: "{{ trans('admin::app.catalog.products.edit.images.not-allowed-error') }}"
+                            message: "@lang('admin::app.catalog.products.edit.images.not-allowed-error')"
                         });
 
                         return;
@@ -197,7 +197,7 @@
                     if (! validFiles) {
                         this.$emitter.emit('add-flash', {
                             type: 'warning',
-                            message: "{{ trans('admin::app.catalog.products.edit.images.not-allowed-error') }}"
+                            message: "@lang('admin::app.catalog.products.edit.images.not-allowed-error')"
                         });
 
                         return;

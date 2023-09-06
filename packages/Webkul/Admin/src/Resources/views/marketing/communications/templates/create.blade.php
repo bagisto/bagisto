@@ -110,7 +110,7 @@
                                         type="select"
                                         name="status"
                                         rules="required"
-                                        label="{{ trans('admin::app.marketing.communications.templates.create.status') }}"
+                                        label="@lang('admin::app.marketing.communications.templates.create.status')"
                                     >
                                         @foreach (['active', 'inactive', 'draft'] as $state)
                                             <option

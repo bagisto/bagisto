@@ -19,9 +19,9 @@
         name = "{{ $name }}"
         :result = "'{{ $selectedOption }}'"
         :validations = "'{{ $validations }}'"
-        label = "{{ trans($field['title']) }}"
+        label = "@lang($field['title'])"
         :options = '@json($field['options'])'
-        :info = "'{{ trans($field['info'] ?? '') }}'"
+        :info = "'@lang($field['info'] ?? '')'"
         :depend = "'{{ $dependName }}'"
         :depend-result= "'{{ $dependSelectedOption }}'"
         :channel_locale = "'{{ $channelLocaleInfo }}'"
@@ -34,7 +34,7 @@
         :options = '@json($field['options'])'
         :depend = "'{{ $dependName }}'"
         :value = "'{{ $dependValue }}'"
-        :field_name = "'{{ trans($field['title']) }}'"
+        :field_name = "'@lang($field['title'])'"
         :channel_locale = "'{{ $channelLocaleInfo }}'"
         :result = "'{{ $selectedOption }}'"
         :depend-saved-value= "'{{ $dependSelectedOption }}'"

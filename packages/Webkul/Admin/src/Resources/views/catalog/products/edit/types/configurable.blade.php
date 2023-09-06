@@ -495,7 +495,7 @@
                     })
 
                     if (filteredVariants.length) {
-                        this.$emitter.emit('add-flash', { type: 'warning', message: "{{ trans('admin::app.catalog.products.edit.types.configurable.create.variant-already-exists') }}" });
+                        this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('admin::app.catalog.products.edit.types.configurable.create.variant-already-exists')" });
 
                         return;
                     }

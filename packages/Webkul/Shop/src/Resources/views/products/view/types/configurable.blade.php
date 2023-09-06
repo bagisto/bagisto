@@ -326,7 +326,7 @@
 
                         attribute.options = [{
                             'id': '',
-                            'label': "{{ trans('shop::app.products.view.type.configurable.select-options') }}",
+                            'label': "@lang('shop::app.products.view.type.configurable.select-options')",
                             'products': []
                         }];
 

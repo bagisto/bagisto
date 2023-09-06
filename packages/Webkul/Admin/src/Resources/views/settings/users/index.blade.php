@@ -242,7 +242,7 @@
                                         name="email"
                                         id="email"
                                         rules="required|email"
-                                        label="{{ trans('admin::app.settings.users.index.create.email') }}"
+                                        label="@lang('admin::app.settings.users.index.create.email')"
                                         placeholder="email@example.com"
                                         v-model="data.user.email"
                                     >

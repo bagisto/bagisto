@@ -37,7 +37,7 @@
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
                                     src="{{ bagisto_asset('images/total-sales.svg')}}"
-                                    title="{{ trans('admin::app.dashboard.index.total-sales') }}"
+                                    title="@lang('admin::app.dashboard.index.total-sales')"
                                 >
                             </div>
 
@@ -79,7 +79,7 @@
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
                                     src="{{ bagisto_asset('images/total-orders.svg')}}"
-                                    title="{{ trans('admin::app.dashboard.index.total-orders') }}"
+                                    title="@lang('admin::app.dashboard.index.total-orders')"
                                 >
                             </div>
 
@@ -121,7 +121,7 @@
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
                                     src="{{ bagisto_asset('images/customer.svg')}}"
-                                    title="{{ trans('admin::app.dashboard.index.total-customers') }}"
+                                    title="@lang('admin::app.dashboard.index.total-customers')"
                                 >
                             </div>
 
@@ -163,7 +163,7 @@
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
                                     src="{{ bagisto_asset('images/average-order.svg')}}"
-                                    title="{{ trans('admin::app.dashboard.index.average-sale') }}"
+                                    title="@lang('admin::app.dashboard.index.average-sale')"
                                 >
                             </div>
 
@@ -204,7 +204,7 @@
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
                                     src="{{ bagisto_asset('images/unpaid-invoice.svg')}}"
-                                    title="{{ trans('admin::app.dashboard.index.total-unpaid-invoices') }}"
+                                    title="@lang('admin::app.dashboard.index.total-unpaid-invoices')"
                                 >
                             </div>
 
@@ -235,7 +235,7 @@
                             <img
                                 class="w-full h-[60px] max-w-[60px] max-h-[60px]"
                                 src="{{ bagisto_asset('images/total-sales.svg')}}"
-                                title="{{ trans('admin::app.dashboard.index.today-sales') }}"
+                                title="@lang('admin::app.dashboard.index.today-sales')"
                             >
 
                             {{-- Sales Stats --}}
@@ -276,7 +276,7 @@
                             <img
                                 class="w-full h-[60px] max-w-[60px] max-h-[60px]"
                                 src="{{ bagisto_asset('images/total-orders.svg')}}"
-                                title="{{ trans('admin::app.dashboard.index.today-orders') }}"
+                                title="@lang('admin::app.dashboard.index.today-orders')"
                             >
 
                             {{-- Orders Stats --}}
@@ -317,7 +317,7 @@
                             <img
                                 class="w-full h-[60px] max-w-[60px] max-h-[60px]"
                                 src="{{ bagisto_asset('images/customer.svg')}}"
-                                title="{{ trans('admin::app.dashboard.index.today-customers') }}"
+                                title="@lang('admin::app.dashboard.index.today-customers')"
                             >
 
                             {{-- Customers Stats --}}
