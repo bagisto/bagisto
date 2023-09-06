@@ -14,12 +14,6 @@
 
     @stack('meta')
 
-    {{-- <link
-        rel="icon"
-        sizes="16x16"
-        href="{{ core()->getCurrentChannel()->favicon_url ?? bagisto_asset('images/favicon.ico') }}"
-    /> --}}
-
     @bagistoVite(['src/Resources/assets/css/app.css', 'src/Resources/assets/js/app.js'])
 
     <link
@@ -42,7 +36,7 @@
     @else
         <link 
             type="image/x-icon"
-            href="{{ asset('vendor/webkul/ui/assets/images/favicon.ico') }}" 
+            href="{{ bagisto_asset('images/favicon.ico') }}" 
             rel="shortcut icon"
             sizes="16x16"
         />

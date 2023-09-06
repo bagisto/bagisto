@@ -9,9 +9,9 @@ return [
             'submit-btn'           => 'साइन इन करें',
             'title'                => 'साइन इन करें',
         ],
-    
+
         'forget-password' => [
-            'create'    =>  [
+            'create'    => [
                 'email'            => 'रजिस्टर्ड ईमेल',
                 'email-not-exist'  => 'ईमेल मौजूद नहीं है',
                 'page-title'       => 'पासवर्ड भूल गए',
@@ -21,7 +21,7 @@ return [
                 'title'            => 'पासवर्ड बहाल करें',
             ],
         ],
-    
+
         'reset-password' => [
             'back-link-title'  => 'साइन इन पर वापस जाएं?',
             'confirm-password' => 'पासवर्ड की पुष्टि करें',
@@ -38,7 +38,7 @@ return [
         'marked-success' => 'सूचना सफलतापूर्वक मार्क की गई',
         'read-all'       => 'पढ़ा गया मार्क करें',
         'view-all'       => 'सभी देखें',
-    
+
         'order-status-messages' => [
             'completed'       => 'ऑर्डर पूरा हुआ',
             'closed'          => 'ऑर्डर बंद हो गया',
@@ -47,7 +47,7 @@ return [
             'processing'      => 'ऑर्डर प्रसंस्कृत हो रहा है',
             'pending-payment' => 'लंबित भुगतान',
         ],
-    
+
         'status'  => [
             'all'        => 'सभी',
             'pending'    => 'लंबित',
@@ -81,14 +81,11 @@ return [
         'index' => [
             'add-customer'              => 'ग्राहक जोड़ें',
             'average-sale'              => 'औसत आदेश बेची गई राशि',
-            'average-sale'              => 'औसत आदेश बेची गई राशि',
             'add-product'               => 'उत्पाद जोड़ें',
             'attribute-code'            => 'विशेषता कोड',
             'color'                     => 'रंग',
             'customer-with-most-sales'  => 'सबसे अधिक बिक्री वाले ग्राहक',
             'customer-info'             => 'सबसे अधिक बिक्री वाले ग्राहक नहीं मिला',
-            'customer-info'             => 'सबसे अधिक बिक्री वाले ग्राहक नहीं मिला',
-            'date-duration'             => ':start - :end',
             'date-duration'             => ':start - :end',
             'decreased'                 => ':progress%',
             'end-date'                  => 'समाप्ति तिथि',
@@ -129,12 +126,12 @@ return [
             'visitor'                   => 'आगंतुक',
         ],
     ],
-    
+
     'sales' => [
         'orders' => [
             'index' => [
                 'title' => 'आदेश',
-        
+
                 'datagrid' => [
                     'customer'         => 'ग्राहक',
                     'channel-name'     => 'चैनल',
@@ -159,7 +156,7 @@ return [
                     'view'             => 'देखें',
                 ],
             ],
-        
+
             'view' => [
                 'amount-per-unit'       => ':amount प्रति इकाई x :qty मात्रा',
                 'billing-address'       => 'बिलिंग पता',
@@ -228,11 +225,11 @@ return [
                 'write-your-comment'    => 'अपनी टिप्पणी लिखें',
             ],
         ],
-        
+
         'shipments' => [
             'index' => [
                 'title' => 'भेजवाने',
-        
+
                 'datagrid' => [
                     'id'               => 'आईडी',
                     'inventory-source' => 'इन्वेंटरी स्रोत',
@@ -244,7 +241,7 @@ return [
                     'view'             => 'देखें',
                 ],
             ],
-        
+
             'create' => [
                 'amount-per-unit'  => ':amount प्रति इकाई x :qty मात्रा',
                 'cancel-error'     => 'आदेश को रद्द नहीं किया जा सकता',
@@ -267,7 +264,7 @@ return [
                 'title'            => 'नया भेजवाने बनाएं',
                 'tracking-number'  => 'ट्रैकिंग नंबर',
             ],
-        
+
             'view' => [
                 'billing-address'      => 'बिलिंग पता',
                 'carrier-title'        => 'कैरियर शीर्षक',
@@ -291,13 +288,13 @@ return [
                 'shipping-price'       => 'शिपिंग मूल्य',
                 'title'                => 'भेजवाने #:shipment_id',
                 'tracking-number'      => 'ट्रैकिंग नंबर',
-            ]
+            ],
         ],
-        
 
         'refunds' => [
             'index' => [
                 'title' => 'वापसी',
+
                 'datagrid' => [
                     'billed-to'   => 'बिल किया गया',
                     'id'          => 'आईडी',
@@ -307,7 +304,7 @@ return [
                     'view'        => 'देखें',
                 ],
             ],
-        
+
             'view' => [
                 'account-information'    => 'खाता जानकारी',
                 'adjustment-refund'      => 'समायोजन वापसी',
@@ -339,7 +336,7 @@ return [
                 'title'                  => 'वापसी #:refund_id',
                 'tax'                    => 'कर',
             ],
-        
+
             'create' => [
                 'amount-per-unit'             => ':amount प्रति इकाई x :qty मात्रा',
                 'adjustment-refund'           => 'समायोजन वापसी',
@@ -367,11 +364,11 @@ return [
                 'update-quantity-btn'         => 'मात्रा अपडेट करें',
             ],
         ],
-        
 
         'invoices' => [
             'index' => [
                 'title' => 'चालान',
+
                 'datagrid' => [
                     'action'       => 'क्रिया',
                     'id'           => 'आईडी',
@@ -384,7 +381,7 @@ return [
                     'status'       => 'स्थिति',
                 ],
             ],
-        
+
             'view' => [
                 'amount-per-unit'        => ':amount प्रति इकाई x :qty मात्रा',
                 'channel'                => 'चैनल',
@@ -413,14 +410,14 @@ return [
                 'title'                  => 'चालान #:invoice_id',
                 'tax'                    => 'कर राशि - :tax',
             ],
-        
+
             'create' => [
                 'creation-error' => 'आदेश चालान निर्माण अनुमति देने के लिए उपलब्ध नहीं है।',
                 'create-success' => 'चालान सफलतापूर्वक बनाया गया',
                 'invalid-qty'    => 'हमने चालान आइटम्स के लिए एक अवैध मात्रा पाई है।',
                 'product-error'  => 'उत्पादों के बिना चालान नहीं बना सकता है।',
             ],
-        
+
             'invoice-pdf' => [
                 'invoice'           => 'चालान',
                 'date'              => 'चालान तिथि',
@@ -448,19 +445,19 @@ return [
                 'discount'          => 'डिस्काउंट',
             ],
         ],
-        
+
         'invoice-transaction' => [
             'view'             => 'देखें',
             'transaction-date' => 'लेन-देन तिथि',
             'transaction-id'   => 'लेन-देन आईडी',
             'id'               => 'आईडी',
         ],
-        
+
         'transactions' => [
             'index' => [
                 'create-btn'  => 'लेन-देन बनाएं',
                 'title'       => 'लेन-देन',
-        
+
                 'datagrid' => [
                     'id'                 => 'आईडी',
                     'invoice-id'         => 'चालान आईडी',
@@ -470,8 +467,8 @@ return [
                     'transaction-date'   => 'तिथि',
                     'transaction-amount' => 'राशि',
                 ],
-        
-                'edit'  =>  [
+
+                'edit'  => [
                     'already-paid'               => 'पहले ही भुगतान किया गया',
                     'invoice-missing'            => 'चालान गायब है',
                     'transaction-amount-zero'    => 'लेन-देन राशि शून्य है',
@@ -480,7 +477,6 @@ return [
                 ],
             ],
         ],
-        
     ],
 
     'catalog' => [
@@ -489,7 +485,7 @@ return [
                 'create-btn'    => 'नया उत्पाद बनाएं',
                 'title'         => 'उत्पाद',
                 'already-taken' => ':name पहले से ले लिया गया है।',
-            
+
                 'create'     => [
                     'back-btn'                => 'वापस जाएं',
                     'bundle'                  => 'बंडल',
@@ -507,7 +503,7 @@ return [
                     'type'                    => 'प्रकार',
                     'virtual'                 => 'आभासी',
                 ],
-            
+
                 'datagrid'   => [
                     'attribute-family'       => 'गुण परिवार',
                     'attribute-family-value' => 'गुण परिवार - :attribute_family',
@@ -535,10 +531,10 @@ return [
                     'mass-delete-success'    => 'चयनित उत्पाद सफलतापूर्वक हटाए गए',
                 ],
             ],
-            
+
             'edit' => [
                 'save-btn' => 'उत्पाद सहेजें',
-                'title' => 'उत्पाद संपादित करें',
+                'title'    => 'उत्पाद संपादित करें',
 
                 'price' => [
                     'group' => [
@@ -549,7 +545,7 @@ return [
                         'fixed-group-price-info'    => 'मूल्य :qty मात्र के लिए स्थिर मूल्य पर :price',
                         'discount-group-price-info' => 'मूल्य पर qty मात्र के लिए :price की छूट',
                         'empty-info'                => 'विशेष मूल्यवान ग्राहकों के लिए विशिष्ट मूल्यनिर्धारण।',
-                
+
                         'create' => [
                             'create-title'   => 'ग्राहक समूह मूल्य बनाएं',
                             'customer-group' => 'ग्राहक समूह',
@@ -564,13 +560,13 @@ return [
                         ],
                     ],
                 ],
-                
+
                 'inventories' => [
                     'pending-ordered-qty'      => 'बकाया आदेशित मात्रा: :qty',
                     'pending-ordered-qty-info' => 'प्रेषण के बाद संबंधित इन्वेंटरी स्रोत से बकाया आदेशित मात्रा कटेगी। रद्दीकरण के मामले में बकाया मात्रा बिक्री के लिए उपलब्ध रहेगी।',
                     'title'                    => 'इन्वेंटरी',
                 ],
-                
+
                 'categories' => [
                     'title' => 'श्रेणियाँ',
                 ],
@@ -581,7 +577,7 @@ return [
                     'info'              => 'छवि का निर्धारण 609px X 560px की तरह होना चाहिए',
                     'not-allowed-error' => 'केवल छवि फ़ाइलें (.jpeg, .jpg, .png, ..) अनुमत हैं।',
                     'title'             => 'छवियाँ',
-                
+
                     'placeholders'  => [
                         'front'     => 'सामना',
                         'next'      => 'अगला',
@@ -590,7 +586,7 @@ return [
                         'zoom'      => 'ज़ूम करें',
                     ],
                 ],
-                
+
                 'videos' => [
                     'add-video-btn'     => 'वीडियो जोड़ें',
                     'allowed-types'     => 'mp4, webm, mkv',
@@ -598,33 +594,33 @@ return [
                     'not-allowed-error' => 'केवल वीडियो फ़ाइलें (.mp4, .mov, .ogg ..) अनुमत हैं।',
                     'title'             => 'वीडियो',
                 ],
-                
+
                 'links' => [
                     'related-products' => [
                         'empty-info' => 'जुड़े उत्पादों को जोड़ने के लिए।',
                         'info'       => 'ग्राहक जिस उत्पाद को देख रहा है, उसके अलावा उन्हें जुड़े हुए उत्पाद प्रस्तुत किए जाते हैं।',
                         'title'      => 'जुड़े उत्पाद',
                     ],
-                
+
                     'up-sells' => [
                         'empty-info' => 'उप सेल्स उत्पादों को जोड़ने के लिए।',
                         'info'       => 'ग्राहक को उप-बेचने वाले उत्पाद प्रस्तुत किए जाते हैं, जो उनके द्वारा वर्तमान में देखे जाने वाले उत्पाद का एक प्रीमियम या उच्च गुणवत्ता का विकल्प के रूप में कार्य करता है।',
                         'title'      => 'उप-बेचने वाले उत्पाद',
                     ],
-                
+
                     'cross-sells' => [
                         'empty-info' => 'क्रॉस सेल्स उत्पादों को जोड़ने के लिए।',
                         'info'       => 'शॉपिंग कार्ट के पास, आपको आपके कार्ट में पहले से ही जोड़ी गई आइटम्स को पूरक करने के लिए क्रॉस-सेल्स के रूप में स्थित इन "इम्पल्स-खरीददार" उत्पादों का पता चलेगा।',
                         'title'      => 'क्रॉस-सेल्स उत्पाद',
                     ],
-                
+
                     'add-btn'     => 'उत्पाद जोड़ें',
                     'delete'      => 'हटाएं',
                     'empty-title' => 'उत्पाद जोड़ें',
                     'empty-info'  => 'क्रिया के लिए :type उत्पाद जोड़ने के लिए।',
                     'sku'         => 'SKU - :sku',
                 ],
-                
+
                 'types' => [
                     'configurable' => [
                         'add-btn'           => 'वेरिएंट जोड़ें',
@@ -637,7 +633,7 @@ return [
                         'qty'               => ':qty मात्रा',
                         'sku'               => 'SKU - :sku',
                         'title'             => 'वेरिएशन',
-                    
+
                         'create'  => [
                             'description'            => 'विवरण',
                             'name'                   => 'नाम',
@@ -645,7 +641,7 @@ return [
                             'title'                  => 'वेरिएंट जोड़ें',
                             'variant-already-exists' => 'यह वेरिएंट पहले से मौजूद है',
                         ],
-                    
+
                         'edit' => [
                             'disabled'        => 'अक्षम',
                             'edit-info'       => 'यदि आप उत्पाद जानकारी को विस्तार से अपडेट करना चाहते हैं, तो जाएं',
@@ -661,7 +657,7 @@ return [
                             'weight'          => 'वजन',
                         ],
                     ],
-                    
+
                     'grouped' => [
                         'add-btn'     => 'उत्पाद जोड़ें',
                         'delete'      => 'हटाएं',
@@ -672,7 +668,6 @@ return [
                         'sku'         => 'SKU - :sku',
                         'title'       => 'समूहित उत्पाद',
                     ],
-                    
 
                     'bundle' => [
                         'add-btn'     => 'विकल्प जोड़ें',
@@ -680,7 +675,7 @@ return [
                         'empty-info'  => 'चयन के विभिन्न विकल्प बनाने के लिए।',
                         'info'        => 'एक बंडल उत्पाद कई आइटमों या सेवाओं की एक साथ एक विशेष मूल्य पर पैकेज है, ग्राहकों को मूल्य और सुविधा प्रदान करते हैं।',
                         'title'       => 'बंडल आइटम',
-                    
+
                         'update-create' => [
                             'checkbox'    => 'चेकबॉक्स',
                             'is-required' => 'आवश्यक है',
@@ -694,7 +689,7 @@ return [
                             'type'        => 'प्रकार',
                             'yes'         => 'हाँ',
                         ],
-                    
+
                         'option' => [
                             'add-btn'     => 'उत्पाद जोड़ें',
                             'delete-btn'  => 'हटाएं',
@@ -704,23 +699,23 @@ return [
                             'empty-title' => 'उत्पाद जोड़ें',
                             'empty-info'  => 'चयन के विभिन्न संयोजन उत्पाद बनाने के लिए।',
                             'sku'         => 'SKU - :sku',
-                    
+
                             'types' => [
                                 'checkbox' => [
                                     'info'  => 'चेकबॉक्स का उपयोग करके डिफ़ॉल्ट उत्पाद सेट करें',
                                     'title' => 'चेकबॉक्स',
                                 ],
-                    
+
                                 'multiselect' => [
                                     'info'  => 'चेकबॉक्स बटन का उपयोग करके डिफ़ॉल्ट उत्पाद सेट करें',
                                     'title' => 'मल्टीसेलेक्ट',
                                 ],
-                    
+
                                 'radio' => [
                                     'info'  => 'रेडियो बटन का उपयोग करके डिफ़ॉल्ट उत्पाद सेट करें',
                                     'title' => 'रेडियो',
                                 ],
-                    
+
                                 'select' => [
                                     'info'  => 'रेडियो बटन का उपयोग करके डिफ़ॉल्ट उत्पाद सेट करें',
                                     'title' => 'सेलेक्ट',
@@ -728,7 +723,7 @@ return [
                             ],
                         ],
                     ],
-                    
+
                     'downloadable' => [
                         'links' => [
                             'add-btn'     => 'लिंक जोड़ें',
@@ -742,7 +737,7 @@ return [
                             'sample-url'  => 'नमूना URL : ',
                             'title'       => 'डाउनलोडयोग्य लिंक',
                             'url'         => 'URL : ',
-                    
+
                             'update-create' => [
                                 'downloads'   => 'डाउनलोड अनुमत',
                                 'file-type'   => 'फ़ाइल प्रकार',
@@ -756,7 +751,7 @@ return [
                                 'url'         => 'URL',
                             ],
                         ],
-                    
+
                         'samples' => [
                             'add-btn'     => 'नमूना जोड़ें',
                             'delete-btn'  => 'हटाएं',
@@ -767,7 +762,7 @@ return [
                             'info'        => 'डाउनलोडयोग्य उत्पाद प्रकार डिजिटल उत्पाद, जैसे कि ई-बुक्स, सॉफ़्टवेयर अनुप्रयोग, संगीत, खेल, आदि बेचने की अनुमति देता है।',
                             'title'       => 'डाउनलोडयोग्य नमूने',
                             'url'         => 'URL : ',
-                    
+
                             'update-create' => [
                                 'file'        => 'फ़ाइल',
                                 'file-type'   => 'फ़ाइल प्रकार',
@@ -778,7 +773,6 @@ return [
                             ],
                         ],
                     ],
-                    
                 ],
             ],
 
@@ -794,7 +788,7 @@ return [
             'index' => [
                 'title'      => 'गुण',
                 'create-btn' => 'गुण बनाएँ',
-            
+
                 'datagrid' => [
                     'id'                  => 'आईडी',
                     'name'                => 'नाम',
@@ -810,7 +804,7 @@ return [
                     'mass-delete-success' => 'चयनित गुण सफलतापूर्वक हटा दिए गए',
                 ],
             ],
-            
+
             'create' => [
                 'admin'                 => 'व्यवस्थापक',
                 'add-row'               => 'पंक्ति जोड़ें',
@@ -862,7 +856,7 @@ return [
                 'value-per-locale'      => 'स्थान के अनुसार मूल्य',
                 'value-per-channel'     => 'चैनल के अनुसार मूल्य',
                 'yes'                   => 'हाँ',
-            
+
                 'option' => [
                     'color'    => 'रंग स्वॉच',
                     'dropdown' => 'ड्रॉपडाउन',
@@ -871,7 +865,7 @@ return [
                     'text'     => 'पाठ स्वॉच',
                 ],
             ],
-            
+
             'edit' => [
                 'admin'                 => 'व्यवस्थापक',
                 'add-row'               => 'पंक्ति जोड़ें',
@@ -923,7 +917,7 @@ return [
                 'value-per-locale'      => 'स्थान के अनुसार मूल्य',
                 'value-per-channel'     => 'चैनल के अनुसार मूल्य',
                 'yes'                   => 'हाँ',
-            
+
                 'option' => [
                     'color'    => 'रंग स्वॉच',
                     'dropdown' => 'ड्रॉपडाउन',
@@ -932,20 +926,19 @@ return [
                     'text'     => 'पाठ स्वॉच',
                 ],
             ],
-            
+
             'create-success'    => 'गुण सफलतापूर्वक बनाया गया',
             'update-success'    => 'गुण सफलतापूर्वक संशोधित किया गया',
             'user-define-error' => 'सिस्टम गुण को हटा नहीं सकता',
             'delete-success'    => 'गुण सफलतापूर्वक हटाया गया',
             'delete-failed'     => 'गुण हटाने में विफल हुआ',
-            
         ],
 
         'categories' => [
             'index' => [
                 'title'   => 'श्रेणियाँ',
                 'add-btn' => 'श्रेणी बनाएं',
-        
+
                 'datagrid' => [
                     'id'             => 'आईडी',
                     'name'           => 'नाम',
@@ -960,7 +953,7 @@ return [
                     'delete-success' => 'चयनित :resource सफलतापूर्वक हटाए गए हैं',
                 ],
             ],
-        
+
             'create' => [
                 'add-logo'                 => 'लोगो जोड़ें',
                 'add-banner'               => 'बैनर जोड़ें',
@@ -992,7 +985,7 @@ return [
                 'title'                    => 'नई श्रेणी बनाएं',
                 'visible-in-menu'          => 'मेनू में दिखाएं',
             ],
-        
+
             'edit' => [
                 'add-logo'                 => 'लोगो जोड़ें',
                 'add-banner'               => 'बैनर जोड़ें',
@@ -1024,7 +1017,7 @@ return [
                 'title'                    => 'श्रेणी संपादित करें',
                 'visible-in-menu'          => 'मेनू में दिखाएं',
             ],
-        
+
             'create-success'       => 'श्रेणी सफलतापूर्वक बनाई गई।',
             'category'             => 'श्रेणी',
             'update-success'       => 'श्रेणी सफलतापूर्वक अपडेट की गई।',
@@ -1032,12 +1025,12 @@ return [
             'delete-category-root' => 'मूल :name को हटाया नहीं जा सकता है।',
             'delete-failed'        => ':name को हटाया नहीं जा सका',
         ],
-        
+
         'families' => [
             'index' => [
                 'title' => 'परिवार',
                 'add'   => 'विशेषता परिवार बनाएं',
-        
+
                 'datagrid' => [
                     'id'             => 'आईडी',
                     'code'           => 'कोड',
@@ -1051,7 +1044,7 @@ return [
                     'method-error'   => 'त्रुटि! गलत विधि पहचानी गई, कृपया सामूहिक क्रिया कॉन्फ़िगरेशन की जाँच करें',
                 ],
             ],
-        
+
             'create' => [
                 'title'                            => 'विशेषता परिवार बनाएं',
                 'save-btn'                         => 'विशेषता परिवार सहेजें',
@@ -1071,16 +1064,13 @@ return [
                 'enter-code'                       => 'कोड दर्ज करें',
                 'enter-name'                       => 'नाम दर्ज करें',
                 'column'                           => 'स्तंभ',
-                'main-column'                      => 'मुख्य स्तंभ',
-                'right-column'                     => 'दाईं ओर स्तंभ',
                 'add-group-title'                  => 'नया समूह जोड़ें',
-                'add-group-btn'                    => 'समूह जोड़ें',
                 'group-already-exists'             => 'एक विशेषता समूह नाम पहले से ही मौजूद है।',
                 'select-group'                     => 'कृपया एक विशेषता समूह का चयन करें।',
                 'group-contains-system-attributes' => 'इस समूह में सिस्टम विशेषताएं हैं। पहले सिस्टम विशेषताओं को दूसरे समूह में ले जाएं और पुन: प्रयास करें।',
                 'removal-not-possible'             => 'आप सिस्टम विशेषताओं को विशेषता परिवार से हटा नहीं सकते हैं।',
             ],
-        
+
             'edit' => [
                 'title'                            => 'विशेषता परिवार संपादित करें',
                 'save-btn'                         => 'विशेषता परिवार सहेजें',
@@ -1094,21 +1084,19 @@ return [
                 'right-column'                     => 'दाईं ओर स्तंभ',
                 'unassigned-attributes'            => 'असाइन की गई विशेषताएँ',
                 'unassigned-attributes-info'       => 'इन विशेषताओं को स्तंभ या समूह में जोड़ने के लिए इन्हें ड्रैग करें।',
+                'general'                          => 'सामान्य',
                 'code'                             => 'कोड',
                 'name'                             => 'नाम',
                 'enter-code'                       => 'कोड दर्ज करें',
                 'enter-name'                       => 'नाम दर्ज करें',
                 'column'                           => 'स्तंभ',
-                'main-column'                      => 'मुख्य स्तंभ',
-                'right-column'                     => 'दाईं ओर स्तंभ',
                 'add-group-title'                  => 'नया समूह जोड़ें',
-                'add-group-btn'                    => 'समूह जोड़ें',
                 'group-already-exists'             => 'एक विशेषता समूह नाम पहले से ही मौजूद है।',
                 'select-group'                     => 'कृपया एक विशेषता समूह का चयन करें।',
                 'group-contains-system-attributes' => 'इस समूह में सिस्टम विशेषताएं हैं। पहले सिस्टम विशेषताओं को दूसरे समूह में ले जाएं और पुन: प्रयास करें।',
                 'removal-not-possible'             => 'आप सिस्टम विशेषताओं को विशेषता परिवार से हटा नहीं सकते हैं।',
             ],
-        
+
             'family'                  => 'परिवार',
             'attribute-family'        => 'विशेषता परिवार',
             'create-success'          => 'परिवार सफलतापूर्वक बनाया गया।',
@@ -1119,14 +1107,13 @@ return [
             'last-delete-error'       => 'कम से कम एक परिवार की आवश्यकता है।',
             'attribute-product-error' => 'परिवार का उपयोग उत्पादों में होता है।',
         ],
-        
     ],
 
     'customers' => [
         'index'  => [
             'login-message' => 'आप :customer_name के रूप में लॉग इन हुए हैं',
             'title'         => 'ग्राहक',
-    
+
             'datagrid'  => [
                 'id'             => 'ग्राहक आईडी',
                 'order'          => ':order आर्डर(s)',
@@ -1152,7 +1139,7 @@ return [
                 'no-resource'    => 'क्रिया के लिए प्रदान किया गया स्रोत अपर्याप्त है',
                 'method-error'   => 'त्रुटि! गलत विधि पहचानी गई, कृपया सामूहिक क्रिया कॉन्फ़िगरेशन की जाँच करें',
             ],
-    
+
             'create' => [
                 'create-btn'            => 'ग्राहक बनाएं',
                 'contact-number'        => 'संपर्क नंबर',
@@ -1172,12 +1159,12 @@ return [
                 'title'                 => 'नए ग्राहक बनाएं',
             ],
         ],
-    
+
         'delete-success' => 'ग्राहक सफलतापूर्वक हटा दिया गया',
         'delete-failed'  => 'ग्राहक को हटाने में विफलता हो गई',
         'update-success' => 'ग्राहक सफलतापूर्वक अपडेट किया गया',
         'order-pending'  => 'आर्डर पेंडिंग है',
-    
+
         'edit' => [
             'contact-number'        => 'संपर्क नंबर',
             'customer-group'        => 'ग्राहक समूह',
@@ -1197,7 +1184,7 @@ return [
             'suspended'             => 'सस्पेंडेड',
             'title'                 => 'ग्राहक संपादन',
         ],
-    
+
         'view' => [
             'address'                => 'पता',
             'back-btn'               => 'पीछे जाएं',
@@ -1255,11 +1242,11 @@ return [
             'order-pending'          => 'कुछ आर्डर पेंडिंग या प्रोसेसिंग स्थिति में होने के कारण खाता हटा नहीं सकता है',
             'delete-confirmation'    => 'क्या आप वाकई इस खाता को हटाना चाहते हैं?',
         ],
-    
+
         'groups' => [
             'index' => [
                 'title' => 'समूह',
-    
+
                 'create' => [
                     'create-btn' => 'समूह बनाएं',
                     'code'       => 'कोड',
@@ -1268,7 +1255,7 @@ return [
                     'save-btn'   => 'समूह सहेजें',
                     'title'      => 'नया समूह बनाएं',
                 ],
-    
+
                 'edit'  => [
                     'title'          => 'समूह संपादन',
                     'success'        => 'समूह सफलतापूर्वक अपडेट किया गया',
@@ -1276,8 +1263,8 @@ return [
                     'delete-failed'  => 'समूह को हटाने में विफलता हो गई',
                     'group-default'  => 'डिफ़ॉल्ट समूह को हटाया नहीं जा सकता',
                 ],
-    
-                'datagrid'  =>  [
+
+                'datagrid'  => [
                     'code'   => 'कोड',
                     'id'     => 'आईडी',
                     'name'   => 'नाम',
@@ -1286,7 +1273,7 @@ return [
                 ],
             ],
         ],
-    
+
         'reviews' => [
             'index' => [
                 'description' => 'विवरण',
@@ -1297,7 +1284,7 @@ return [
                 'rating'      => 'रेटिंग',
                 'status'      => 'स्थिति',
                 'title'       => 'समीक्षा',
-    
+
                 'edit'  => [
                     'title'          => 'समीक्षा संपादन',
                     'save-btn'       => 'सहेजें',
@@ -1315,8 +1302,8 @@ return [
                     'images'         => 'चित्र',
                     'update-success' => 'सफलतापूर्वक अपडेट किया गया',
                 ],
-    
-                'datagrid'   =>  [
+
+                'datagrid'   => [
                     'customer-names'      => 'नाम',
                     'comment'             => 'कमेंट',
                     'date'                => 'तारीख',
@@ -1339,7 +1326,7 @@ return [
                 ],
             ],
         ],
-    
+
         'addresses' => [
             'create' => [
                 'title'              => 'ग्राहक का पता बनाएं',
@@ -1358,10 +1345,9 @@ return [
                 'phone'              => 'फ़ोन',
                 'street-address'     => 'सड़क पता',
                 'post-code'          => 'पिन कोड',
-                'default-address'    => 'डिफ़ॉल्ट पता',
                 'save-btn-title'     => 'पता सहेजें',
             ],
-    
+
             'edit' => [
                 'title'            => 'पता संपादन',
                 'company-name'     => 'कंपनी का नाम',
@@ -1378,10 +1364,9 @@ return [
                 'phone'            => 'फ़ोन',
                 'street-address'   => 'सड़क पता',
                 'post-code'        => 'पिन कोड',
-                'default-address'  => 'डिफ़ॉल्ट पता',
                 'save-btn-title'   => 'पता सहेजें',
             ],
-    
+
             'success-mass-delete' => 'पता समूह सफलतापूर्वक हटा दिया गया है',
         ],
     ],
@@ -1392,7 +1377,7 @@ return [
                 'index' => [
                     'title'      => 'ईमेल टेम्पलेट्स',
                     'create-btn' => 'टेम्पलेट बनाएं',
-        
+
                     'datagrid' => [
                         'id'       => 'आईडी',
                         'name'     => 'नाम',
@@ -1402,7 +1387,7 @@ return [
                         'draft'    => 'ड्राफ्ट',
                     ],
                 ],
-        
+
                 'create' => [
                     'title'          => 'टेम्पलेट बनाएं',
                     'active'         => 'सक्रिय',
@@ -1417,7 +1402,7 @@ return [
                     'select-status'  => 'स्थिति चुनें',
                     'create-success' => 'ईमेल टेम्पलेट सफलतापूर्वक बनाया गया।',
                 ],
-        
+
                 'edit' => [
                     'title'          => 'टेम्पलेट संपादित करें',
                     'active'         => 'सक्रिय',
@@ -1431,17 +1416,17 @@ return [
                     'status'         => 'स्थिति',
                     'update-success' => 'सफलतापूर्वक अपडेट किया गया',
                 ],
-        
+
                 'email-template' => 'ईमेल टेम्पलेट',
                 'delete-success' => 'टेम्पलेट सफलतापूर्वक हटा दिया गया',
                 'delete-failed'  => ':name हटाने में विफल रहा',
             ],
-        
+
             'campaigns' => [
                 'index' => [
                     'title'      => 'कैम्पेन्स',
                     'create-btn' => 'कैम्पेन बनाएं',
-        
+
                     'datagrid' => [
                         'id'       => 'आईडी',
                         'name'     => 'नाम',
@@ -1453,7 +1438,7 @@ return [
                         'delete'   => 'हटाएं',
                     ],
                 ],
-        
+
                 'create' => [
                     'active'          => 'सक्रिय',
                     'back-btn'        => 'वापस',
@@ -1473,7 +1458,7 @@ return [
                     'subject'         => 'विषय',
                     'title'           => 'कैम्पेन बनाएं',
                 ],
-        
+
                 'edit' => [
                     'active'          => 'सक्रिय',
                     'audience'        => 'जनसंख्या',
@@ -1493,20 +1478,20 @@ return [
                     'subject'         => 'विषय',
                     'title'           => 'कैम्पेन संपादित करें',
                 ],
-        
+
                 'email-campaign' => 'ईमेल कैम्पेन',
                 'create-success' => 'कैम्पेन सफलतापूर्वक बनाया गया।',
                 'update-success' => 'कैम्पेन सफलतापूर्वक अपडेट किया गया।',
                 'delete-success' => 'कैम्पेन सफलतापूर्वक हटा दिया गया',
                 'delete-failed'  => ':name हटाने में विफल रहा',
             ],
-        
+
             'events' => [
                 'index'  => [
                     'create-btn' => 'घटना बनाएं',
                     'title'      => 'घटनाएं',
                     'event'      => 'घटना',
-        
+
                     'datagrid' => [
                         'id'      => 'आईडी',
                         'name'    => 'नाम',
@@ -1514,9 +1499,8 @@ return [
                         'edit'    => 'संपादित करें',
                         'delete'  => 'हटाएं',
                         'actions' => 'क्रियाएं',
-        
                     ],
-        
+
                     'create'   => [
                         'description'    => 'विवरण',
                         'date'           => 'तारीख',
@@ -1527,22 +1511,22 @@ return [
                         'title'          => 'घटनाएं बनाएं',
                         'success'        => 'घटनाएं सफलतापूर्वक बनाई गईं',
                     ],
-        
+
                     'edit'  => [
                         'title'   => 'घटनाएं संपादित करें',
                         'success' => 'घटनाएं सफलतापूर्वक अपडेट की गईं',
                     ],
                 ],
-        
+
                 'edit-error'     => 'घटना संपादित नहीं की जा सकती',
                 'delete-failed'  => ':name हटाने में विफल रही',
                 'delete-success' => 'घटनाएं सफलतापूर्वक हटाई गईं',
             ],
-        
+
             'subscribers' => [
                 'index' => [
                     'title' => 'न्यूजलेटर सब्सक्रिप्शन',
-        
+
                     'datagrid' => [
                         'id'         => 'आईडी',
                         'subscribed' => 'सब्सक्राइब्ड',
@@ -1553,7 +1537,7 @@ return [
                         'email'      => 'ईमेल',
                         'actions'    => 'क्रियाएं',
                     ],
-        
+
                     'edit'  => [
                         'title'         => 'न्यूजलेटर सब्सक्राइबर संपादित करें',
                         'back-btn'      => 'वापस',
@@ -1566,24 +1550,24 @@ return [
                         'update-failed' => 'न्यूजलेटर सब्सक्रिप्शन अपडेट नहीं हुआ',
                     ],
                 ],
-        
+
                 'delete-warning' => 'क्या आप सुनिश्चित हैं, कि आप इस क्रिया को करना चाहते हैं?',
                 'delete-success' => 'सब्सक्राइबर सफलतापूर्वक हटाई गई',
                 'delete-failed'  => 'सब्सक्राइबर हटाने में विफल रहा',
             ],
         ],
-        
+
         'promotions' => [
             'index' => [
                 'catalog-rule-title' => 'कैटलॉग नियम',
                 'cart-rule-title'    => 'कार्ट नियम',
             ],
-            
+
             'cart-rules' => [
                 'index' => [
                     'title'      => 'कार्ट नियम',
                     'create-btn' => 'कार्ट नियम बनाएं',
-            
+
                     'datagrid' => [
                         'id'          => 'आईडी',
                         'name'        => 'नाम',
@@ -1603,166 +1587,165 @@ return [
                 ],
 
                 'create' => [
-                    'back-btn' => 'वापस',
-                    'title' => 'कार्ट नियम बनाएँ',
-                    'save-btn' => 'कार्ट नियम सहेजें',
-                    'general' => 'सामान्य',
-                    'name' => 'नाम',
-                    'description' => 'विवरण',
-                    'customer-groups' => 'ग्राहक समूह',
-                    'channels' => 'चैनल',
-                    'coupon-type' => 'कूपन प्रकार',
-                    'no-coupon' => 'कोई कूपन नहीं',
-                    'specific-coupon' => 'विशिष्ट कूपन',
-                    'auto-generate-coupon' => 'कूपन स्वचालित रूप से उत्पन्न करें',
-                    'no' => 'नहीं',
-                    'yes' => 'हाँ',
-                    'coupon-code' => 'कूपन कोड',
-                    'uses-per-coupon' => 'कूपन प्रति उपयोग',
-                    'uses-per-customer' => 'ग्राहक प्रति उपयोग',
-                    'uses-per-customer-control-info' => 'केवल लॉग इन किए गए ग्राहकों के लिए उपयोग होगा।',
-                    'conditions' => 'शर्तें',
-                    'condition-type' => 'शर्त प्रकार',
-                    'all-conditions-true' => 'सभी शर्तें सत्य हैं',
-                    'any-conditions-true' => 'कोई भी शर्त सत्य है',
-                    'add-condition' => 'शर्त जोड़ें',
-                    'actions' => 'क्रियाएँ',
-                    'action-type' => 'क्रिया प्रकार',
-                    'percentage-product-price' => 'प्रतिशत प्रोडक्ट मूल्य',
-                    'fixed-amount' => 'निश्चित मात्रा',
-                    'fixed-amount-whole-cart' => 'निश्चित मात्रा पूरी कार्ट',
-                    'buy-x-get-y-free' => 'X खरीदें, Y मुफ्त प्राप्त करें',
-                    'discount-amount' => 'डिस्काउंट मात्रा',
+                    'back-btn'                                  => 'वापस',
+                    'title'                                     => 'कार्ट नियम बनाएँ',
+                    'save-btn'                                  => 'कार्ट नियम सहेजें',
+                    'general'                                   => 'सामान्य',
+                    'name'                                      => 'नाम',
+                    'description'                               => 'विवरण',
+                    'customer-groups'                           => 'ग्राहक समूह',
+                    'channels'                                  => 'चैनल',
+                    'coupon-type'                               => 'कूपन प्रकार',
+                    'no-coupon'                                 => 'कोई कूपन नहीं',
+                    'specific-coupon'                           => 'विशिष्ट कूपन',
+                    'auto-generate-coupon'                      => 'कूपन स्वचालित रूप से उत्पन्न करें',
+                    'no'                                        => 'नहीं',
+                    'yes'                                       => 'हाँ',
+                    'coupon-code'                               => 'कूपन कोड',
+                    'uses-per-coupon'                           => 'कूपन प्रति उपयोग',
+                    'uses-per-customer'                         => 'ग्राहक प्रति उपयोग',
+                    'uses-per-customer-control-info'            => 'केवल लॉग इन किए गए ग्राहकों के लिए उपयोग होगा।',
+                    'conditions'                                => 'शर्तें',
+                    'condition-type'                            => 'शर्त प्रकार',
+                    'all-conditions-true'                       => 'सभी शर्तें सत्य हैं',
+                    'any-conditions-true'                       => 'कोई भी शर्त सत्य है',
+                    'add-condition'                             => 'शर्त जोड़ें',
+                    'actions'                                   => 'क्रियाएँ',
+                    'action-type'                               => 'क्रिया प्रकार',
+                    'percentage-product-price'                  => 'प्रतिशत प्रोडक्ट मूल्य',
+                    'fixed-amount'                              => 'निश्चित मात्रा',
+                    'fixed-amount-whole-cart'                   => 'निश्चित मात्रा पूरी कार्ट',
+                    'buy-x-get-y-free'                          => 'X खरीदें, Y मुफ्त प्राप्त करें',
+                    'discount-amount'                           => 'डिस्काउंट मात्रा',
                     'maximum-quantity-allowed-to-be-discounted' => 'छूट दी जाने की अधिकतम मात्रा',
-                    'buy-x-quantity' => 'X मात्रा खरीदें',
-                    'apply-to-shipping' => 'शिपिंग पर लागू करें',
-                    'free-shipping' => 'मुफ्त शिपिंग',
-                    'end-of-other-rules' => 'अन्य नियमों का अंत',
-                    'settings' => 'सेटिंग्स',
-                    'status' => 'स्थिति',
-                    'priority' => 'प्राथमिकता',
-                    'marketing-time' => 'मार्केटिंग समय',
-                    'from' => 'से',
-                    'to' => 'तक',
-                    'is-equal-to' => 'के बराबर है',
-                    'is-not-equal-to' => 'के बराबर नहीं है',
-                    'equals-or-greater-than' => 'बराबर या अधिक है',
-                    'equals-or-less-than' => 'बराबर या कम है',
-                    'greater-than' => 'अधिक है',
-                    'less-than' => 'कम है',
-                    'contain' => 'शामिल करें',
-                    'contains' => 'शामिल करता है',
-                    'does-not-contain' => 'शामिल नहीं करता है',
-                    'cart-attribute' => 'कार्ट गुण',
-                    'subtotal' => 'उप-योग',
-                    'payment-method' => 'भुगतान विधि',
-                    'total-items-qty' => 'कुल आइटम मात्रा',
-                    'shipping-method' => 'शिपिंग विधि',
-                    'shipping-postcode' => 'शिपिंग पिन कोड',
-                    'shipping-state' => 'शिपिंग राज्य',
-                    'shipping-country' => 'शिपिंग देश',
-                    'cart-item-attribute' => 'कार्ट आइटम गुण',
-                    'price-in-cart' => 'कार्ट में मूल्य',
-                    'qty-in-cart' => 'कार्ट में मात्रा',
-                    'total-weight' => 'कुल वजन',
-                    'additional' => 'अतिरिक्त',
-                    'product-attribute' => 'प्रोडक्ट गुण',
-                    'categories' => 'श्रेणियाँ',
-                    'children-categories' => 'श्रेणियाँ (केवल बच्चे)',
-                    'parent-categories' => 'श्रेणियाँ (केवल माता-पिता)',
-                    'attribute-family' => 'गुण परिवार',
-                    'attribute-name-children-only' => 'गुण का नाम केवल बच्चों के लिए',
-                    'attribute-name-parent-only' => 'गुण का नाम केवल माता-पिता के लिए',
-                    'create-success' => 'कार्ट नियम सफलतापूर्वक बनाया गया',
-                    'choose-condition-to-add' => 'जोड़ने के लिए शर्त चुनें',
+                    'buy-x-quantity'                            => 'X मात्रा खरीदें',
+                    'apply-to-shipping'                         => 'शिपिंग पर लागू करें',
+                    'free-shipping'                             => 'मुफ्त शिपिंग',
+                    'end-of-other-rules'                        => 'अन्य नियमों का अंत',
+                    'settings'                                  => 'सेटिंग्स',
+                    'status'                                    => 'स्थिति',
+                    'priority'                                  => 'प्राथमिकता',
+                    'marketing-time'                            => 'मार्केटिंग समय',
+                    'from'                                      => 'से',
+                    'to'                                        => 'तक',
+                    'is-equal-to'                               => 'के बराबर है',
+                    'is-not-equal-to'                           => 'के बराबर नहीं है',
+                    'equals-or-greater-than'                    => 'बराबर या अधिक है',
+                    'equals-or-less-than'                       => 'बराबर या कम है',
+                    'greater-than'                              => 'अधिक है',
+                    'less-than'                                 => 'कम है',
+                    'contain'                                   => 'शामिल करें',
+                    'contains'                                  => 'शामिल करता है',
+                    'does-not-contain'                          => 'शामिल नहीं करता है',
+                    'cart-attribute'                            => 'कार्ट गुण',
+                    'subtotal'                                  => 'उप-योग',
+                    'payment-method'                            => 'भुगतान विधि',
+                    'total-items-qty'                           => 'कुल आइटम मात्रा',
+                    'shipping-method'                           => 'शिपिंग विधि',
+                    'shipping-postcode'                         => 'शिपिंग पिन कोड',
+                    'shipping-state'                            => 'शिपिंग राज्य',
+                    'shipping-country'                          => 'शिपिंग देश',
+                    'cart-item-attribute'                       => 'कार्ट आइटम गुण',
+                    'price-in-cart'                             => 'कार्ट में मूल्य',
+                    'qty-in-cart'                               => 'कार्ट में मात्रा',
+                    'total-weight'                              => 'कुल वजन',
+                    'additional'                                => 'अतिरिक्त',
+                    'product-attribute'                         => 'प्रोडक्ट गुण',
+                    'categories'                                => 'श्रेणियाँ',
+                    'children-categories'                       => 'श्रेणियाँ (केवल बच्चे)',
+                    'parent-categories'                         => 'श्रेणियाँ (केवल माता-पिता)',
+                    'attribute-family'                          => 'गुण परिवार',
+                    'attribute-name-children-only'              => 'गुण का नाम केवल बच्चों के लिए',
+                    'attribute-name-parent-only'                => 'गुण का नाम केवल माता-पिता के लिए',
+                    'create-success'                            => 'कार्ट नियम सफलतापूर्वक बनाया गया',
+                    'choose-condition-to-add'                   => 'जोड़ने के लिए शर्त चुनें',
                 ],
-                
+
                 'edit' => [
-                    'back-btn' => 'पीछे जाएं',
-                    'title' => 'कार्ट नियम संपादित करें',
-                    'save-btn' => 'कार्ट नियम सहेजें',
-                    'general' => 'सामान्य',
-                    'name' => 'नाम',
-                    'description' => 'विवरण',
-                    'customer-groups' => 'ग्राहक समूह',
-                    'channels' => 'चैनल',
-                    'coupon-type' => 'कूपन प्रकार',
-                    'no-coupon' => 'कोई कूपन नहीं',
-                    'specific-coupon' => 'विशिष्ट कूपन',
-                    'auto-generate-coupon' => 'कूपन स्वचालित रूप से उत्पन्न करें',
-                    'no' => 'नहीं',
-                    'yes' => 'हाँ',
-                    'coupon-code' => 'कूपन कोड',
-                    'uses-per-coupon' => 'प्रति कूपन उपयोग',
-                    'uses-per-customer' => 'प्रति ग्राहक उपयोग',
-                    'uses-per-customer-control-info' => 'केवल लॉगइन किए गए ग्राहकों के लिए उपयोग किया जाएगा।',
-                    'conditions' => 'शर्तें',
-                    'condition-type' => 'शर्त प्रकार',
-                    'all-conditions-true' => 'सभी शर्तें सत्य हैं',
-                    'any-conditions-true' => 'कोई भी शर्त सत्य है',
-                    'add-condition' => 'शर्त जोड़ें',
-                    'actions' => 'क्रियाएँ',
-                    'action-type' => 'क्रिया प्रकार',
-                    'percentage-product-price' => 'प्रतिशत उत्पाद मूल्य',
-                    'fixed-amount' => 'स्थिर मात्रा',
-                    'fixed-amount-whole-cart' => 'स्थिर मात्रा पूरे कार्ट के लिए',
-                    'buy-x-get-y-free' => 'X खरीदें और Y फ्री पाएं',
-                    'discount-amount' => 'डिस्काउंट मात्रा',
+                    'back-btn'                                  => 'पीछे जाएं',
+                    'title'                                     => 'कार्ट नियम संपादित करें',
+                    'save-btn'                                  => 'कार्ट नियम सहेजें',
+                    'general'                                   => 'सामान्य',
+                    'name'                                      => 'नाम',
+                    'description'                               => 'विवरण',
+                    'customer-groups'                           => 'ग्राहक समूह',
+                    'channels'                                  => 'चैनल',
+                    'coupon-type'                               => 'कूपन प्रकार',
+                    'no-coupon'                                 => 'कोई कूपन नहीं',
+                    'specific-coupon'                           => 'विशिष्ट कूपन',
+                    'auto-generate-coupon'                      => 'कूपन स्वचालित रूप से उत्पन्न करें',
+                    'no'                                        => 'नहीं',
+                    'yes'                                       => 'हाँ',
+                    'coupon-code'                               => 'कूपन कोड',
+                    'uses-per-coupon'                           => 'प्रति कूपन उपयोग',
+                    'uses-per-customer'                         => 'प्रति ग्राहक उपयोग',
+                    'uses-per-customer-control-info'            => 'केवल लॉगइन किए गए ग्राहकों के लिए उपयोग किया जाएगा।',
+                    'conditions'                                => 'शर्तें',
+                    'condition-type'                            => 'शर्त प्रकार',
+                    'all-conditions-true'                       => 'सभी शर्तें सत्य हैं',
+                    'any-conditions-true'                       => 'कोई भी शर्त सत्य है',
+                    'add-condition'                             => 'शर्त जोड़ें',
+                    'actions'                                   => 'क्रियाएँ',
+                    'action-type'                               => 'क्रिया प्रकार',
+                    'percentage-product-price'                  => 'प्रतिशत उत्पाद मूल्य',
+                    'fixed-amount'                              => 'स्थिर मात्रा',
+                    'fixed-amount-whole-cart'                   => 'स्थिर मात्रा पूरे कार्ट के लिए',
+                    'buy-x-get-y-free'                          => 'X खरीदें और Y फ्री पाएं',
+                    'discount-amount'                           => 'डिस्काउंट मात्रा',
                     'maximum-quantity-allowed-to-be-discounted' => 'डिस्काउंट के लिए अनुमत मान की अधिकतम मात्रा',
-                    'buy-x-quantity' => 'X मात्रा खरीदें',
-                    'apply-to-shipping' => 'शिपिंग पर लागू करें',
-                    'free-shipping' => 'मुफ्त शिपिंग',
-                    'end-of-other-rules' => 'अन्य नियमों का समापन',
-                    'settings' => 'सेटिंग्स',
-                    'status' => 'स्थिति',
-                    'priority' => 'प्राथमिकता',
-                    'marketing-time' => 'मार्केटिंग समय',
-                    'from' => 'से',
-                    'to' => 'तक',
-                    'is-equal-to' => 'के बराबर है',
-                    'is-not-equal-to' => 'के बराबर नहीं है',
-                    'equals-or-greater-than' => 'बराबर या उससे अधिक',
-                    'equals-or-less-than' => 'बराबर या उससे कम',
-                    'greater-than' => 'अधिक',
-                    'less-than' => 'कम',
-                    'contain' => 'शामिल है',
-                    'contains' => 'शामिल है',
-                    'does-not-contain' => 'शामिल नहीं है',
-                    'cart-attribute' => 'कार्ट गुण',
-                    'subtotal' => 'उपयोगकर्ता',
-                    'payment-method' => 'भुगतान प्रक्रिया',
-                    'total-items-qty' => 'कुल आइटम संख्या',
-                    'shipping-method' => 'शिपिंग प्रक्रिया',
-                    'shipping-postcode' => 'शिपिंग पिनकोड',
-                    'shipping-state' => 'शिपिंग राज्य',
-                    'shipping-country' => 'शिपिंग देश',
-                    'cart-item-attribute' => 'कार्ट आइटम गुण',
-                    'price-in-cart' => 'कार्ट में मूल्य',
-                    'qty-in-cart' => 'कार्ट में मात्रा',
-                    'total-weight' => 'कुल वजन',
-                    'additional' => 'अतिरिक्त',
-                    'product-attribute' => 'उत्पाद गुण',
-                    'categories' => 'श्रेणियाँ',
-                    'children-categories' => 'बच्चों की श्रेणियाँ',
-                    'parent-categories' => 'माता-पिता की श्रेणियाँ',
-                    'attribute-family' => 'गुण परिवार',
-                    'attribute-name-children-only' => 'गुण नाम केवल बच्चों के लिए',
-                    'attribute-name-parent-only' => 'गुण नाम केवल माता-पिता के लिए',
-                    'update-success' => 'कार्ट नियम सफलतापूर्वक अपडेट किया गया',
-                    'choose-condition-to-add' => 'जोड़ने के लिए शर्त चुनें',
-                    'coupon-qty' => 'कूपन मात्रा',
-                    'coupon-length' => 'कूपन लंबाई',
-                    'code-format' => 'कोड प्रारूप',
-                    'alphanumeric' => 'अल्फान्यूमेरिक',
-                    'alphabetical' => 'वर्णमाला',
-                    'numeric' => 'संख्यात्मक',
-                    'code-suffix' => 'कोड सूफ़िक्स',
-                    'code-prefix' => 'कोड प्रिफिक्स',
-                    'generate' => 'उत्पन्न करें',
-                    'status' => 'स्थिति',
-                    'customer-group' => 'ग्राहक समूह',
+                    'buy-x-quantity'                            => 'X मात्रा खरीदें',
+                    'apply-to-shipping'                         => 'शिपिंग पर लागू करें',
+                    'free-shipping'                             => 'मुफ्त शिपिंग',
+                    'end-of-other-rules'                        => 'अन्य नियमों का समापन',
+                    'settings'                                  => 'सेटिंग्स',
+                    'status'                                    => 'स्थिति',
+                    'priority'                                  => 'प्राथमिकता',
+                    'marketing-time'                            => 'मार्केटिंग समय',
+                    'from'                                      => 'से',
+                    'to'                                        => 'तक',
+                    'is-equal-to'                               => 'के बराबर है',
+                    'is-not-equal-to'                           => 'के बराबर नहीं है',
+                    'equals-or-greater-than'                    => 'बराबर या उससे अधिक',
+                    'equals-or-less-than'                       => 'बराबर या उससे कम',
+                    'greater-than'                              => 'अधिक',
+                    'less-than'                                 => 'कम',
+                    'contain'                                   => 'शामिल है',
+                    'contains'                                  => 'शामिल है',
+                    'does-not-contain'                          => 'शामिल नहीं है',
+                    'cart-attribute'                            => 'कार्ट गुण',
+                    'subtotal'                                  => 'उपयोगकर्ता',
+                    'payment-method'                            => 'भुगतान प्रक्रिया',
+                    'total-items-qty'                           => 'कुल आइटम संख्या',
+                    'shipping-method'                           => 'शिपिंग प्रक्रिया',
+                    'shipping-postcode'                         => 'शिपिंग पिनकोड',
+                    'shipping-state'                            => 'शिपिंग राज्य',
+                    'shipping-country'                          => 'शिपिंग देश',
+                    'cart-item-attribute'                       => 'कार्ट आइटम गुण',
+                    'price-in-cart'                             => 'कार्ट में मूल्य',
+                    'qty-in-cart'                               => 'कार्ट में मात्रा',
+                    'total-weight'                              => 'कुल वजन',
+                    'additional'                                => 'अतिरिक्त',
+                    'product-attribute'                         => 'उत्पाद गुण',
+                    'categories'                                => 'श्रेणियाँ',
+                    'children-categories'                       => 'बच्चों की श्रेणियाँ',
+                    'parent-categories'                         => 'माता-पिता की श्रेणियाँ',
+                    'attribute-family'                          => 'गुण परिवार',
+                    'attribute-name-children-only'              => 'गुण नाम केवल बच्चों के लिए',
+                    'attribute-name-parent-only'                => 'गुण नाम केवल माता-पिता के लिए',
+                    'update-success'                            => 'कार्ट नियम सफलतापूर्वक अपडेट किया गया',
+                    'choose-condition-to-add'                   => 'जोड़ने के लिए शर्त चुनें',
+                    'coupon-qty'                                => 'कूपन मात्रा',
+                    'coupon-length'                             => 'कूपन लंबाई',
+                    'code-format'                               => 'कोड प्रारूप',
+                    'alphanumeric'                              => 'अल्फान्यूमेरिक',
+                    'alphabetical'                              => 'वर्णमाला',
+                    'numeric'                                   => 'संख्यात्मक',
+                    'code-suffix'                               => 'कोड सूफ़िक्स',
+                    'code-prefix'                               => 'कोड प्रिफिक्स',
+                    'generate'                                  => 'उत्पन्न करें',
+                    'customer-group'                            => 'ग्राहक समूह',
                 ],
-                
+
                 'delete-success' => 'कार्ट नियम सफलतापूर्वक हटा दिया गया',
                 'delete-failed'  => 'कार्ट नियम हटाने में विफल रहा',
             ],
@@ -1771,7 +1754,7 @@ return [
                 'index' => [
                     'title'      => 'कैटलॉग नियम',
                     'create-btn' => 'कैटलॉग नियम बनाएं',
-                
+
                     'datagrid' => [
                         'id'       => 'आईडी',
                         'name'     => 'नाम',
@@ -1785,7 +1768,7 @@ return [
                         'delete'   => 'हटाएं',
                     ],
                 ],
-                
+
                 'create' => [
                     'back-btn'                 => 'पीछे जाएं',
                     'title'                    => 'कैटलॉग नियम बनाएं',
@@ -1828,7 +1811,6 @@ return [
                     'product-attribute'        => 'उत्पाद गुण',
                     'action-type'              => 'क्रिया प्रकार',
                 ],
-                
 
                 'edit' => [
                     'back-btn'                 => 'पीछे जाएं',
@@ -1871,7 +1853,6 @@ return [
                     'product-attribute'        => 'उत्पाद गुण',
                     'action-type'              => 'क्रिया प्रकार',
                 ],
-                
 
                 'create-success' => 'कैटलॉग नियम सफलतापूर्वक बनाया गया',
                 'delete-success' => 'कैटलॉग नियम सफलतापूर्वक हटाया गया',
@@ -1881,9 +1862,8 @@ return [
             'cart-rules-coupons' => [
                 'cart-rule-not-defined-error' => 'कार्ट नियम को हटाया नहीं जा सकता है',
                 'success'                     => ':name सफलतापूर्वक बनाया गया',
-                'mass-delete-success'         => 'कार्ट नियम समूह सफलतापूर्वक हटाया गया'
+                'mass-delete-success'         => 'कार्ट नियम समूह सफलतापूर्वक हटाया गया',
             ],
-            
         ],
 
         'sitemaps' => [
@@ -1913,46 +1893,23 @@ return [
                     'delete-warning' => 'Are you sure, you want to perform this action?',
                 ],
 
-                'edit'  =>  [
+                'edit'  => [
                     'title'          => 'Edit Sitemap',
                     'success'        => 'Sitemap Updated successfully',
-                    'delete-success' => 'Sitemap Deleted successfully'
+                    'delete-success' => 'Sitemap Deleted successfully',
                 ],
             ],
 
-            'index' => [
-                'title'      => 'साइटमैप्स',
-                'create-btn' => 'साइटमैप बनाएं',
-                'sitemap'    => 'साइटमैप',
-            
-                'datagrid' => [
-                    'id'              => 'आईडी',
-                    'file-name'       => 'फ़ाइल का नाम',
-                    'path'            => 'पथ',
-                    'link-for-google' => 'Google के लिए लिंक',
-                    'edit'            => 'संपादित करें',
-                    'delete'          => 'हटाएं',
-                    'actions'         => 'क्रियाएँ',
-                ],
-            
-                'create'  => [
-                    'file-name'      => 'फ़ाइल का नाम',
-                    'file-name-info' => 'उदाहरण: sitemap.xml',
-                    'path'           => 'पथ',
-                    'path-info'      => 'उदाहरण: "/sitemap/" या आधार पथ के लिए "/"',
-                    'save-btn'       => 'साइटमैप सहेजें',
-                    'title'          => 'साइटमैप बनाएं',
-                    'success'        => 'साइटमैप सफलतापूर्वक बनाया गया',
-                    'delete-warning' => 'क्या आप वाकई इस क्रिया को करना चाहते हैं?',
-                ],
-            
-                'edit'  =>  [
-                    'title'          => 'साइटमैप संपादित करें',
-                    'success'        => 'साइटमैप सफलतापूर्वक अपडेट किया गया',
-                    'delete-success' => 'साइटमैप सफलतापूर्वक हटाया गया'
-                ],
+            'edit' => [
+                'back-btn'       => 'पीछे जाएँ',
+                'file-name'      => 'फ़ाइल का नाम',
+                'file-name-info' => 'उदाहरण: sitemap.xml',
+                'general'        => 'सामान्य',
+                'path'           => 'पथ',
+                'path-info'      => 'उदाहरण: "/sitemap/" या बेस पथ के लिए "/"',
+                'save-btn'       => 'साइटमैप सहेजें',
             ],
-            
+
             'delete-failed' => ':name हटाने में विफल रहा',
         ],
     ],
@@ -1962,7 +1919,7 @@ return [
             'title'             => 'पेज',
             'create-btn'        => 'पेज बनाएं',
             'already-taken'     => ':name पहले से ले लिया गया है।',
-        
+
             'datagrid' => [
                 'id'                  => 'आईडी',
                 'page-title'          => 'पेज शीर्षक',
@@ -1970,10 +1927,10 @@ return [
                 'view'                => 'देखें',
                 'edit'                => 'संपादित करें',
                 'delete'              => 'हटाएं',
-                'mass-delete-success' => 'चयनित डेटा सफलतापूर्वक हटा दिया गया'
+                'mass-delete-success' => 'चयनित डेटा सफलतापूर्वक हटा दिया गया',
             ],
         ],
-        
+
         'create' => [
             'title'            => 'पेज बनाएं',
             'save-btn'         => 'पेज सहेजें',
@@ -1987,7 +1944,7 @@ return [
             'seo'              => 'SEO',
             'url-key'          => 'URL कुंजी',
         ],
-        
+
         'edit' => [
             'title'            => 'पेज संपादित करें',
             'preview-btn'      => 'पेज पूर्वावलोकन करें',
@@ -2003,7 +1960,7 @@ return [
             'meta-title'       => 'मेटा शीर्षक',
             'url-key'          => 'URL कुंजी',
         ],
-        
+
         'create-success' => 'CMS सफलतापूर्वक बनाया गया।',
         'delete-success' => 'CMS सफलतापूर्वक हटाया गया।',
         'update-success' => 'CMS सफलतापूर्वक अपडेट किया गया।',
@@ -2016,7 +1973,7 @@ return [
                 'title'      => 'स्थान (Locales)',
                 'locale'     => 'स्थान (Locale)',
                 'create-btn' => 'स्थान बनाएं (Create Locale)',
-        
+
                 'datagrid' => [
                     'actions'   => 'क्रियाएँ',
                     'id'        => 'आईडी',
@@ -2028,8 +1985,8 @@ return [
                     'edit'      => 'संपादित करें',
                     'delete'    => 'हटाएं',
                 ],
-        
-                'create'  =>  [
+
+                'create'  => [
                     'code'        => 'कोड',
                     'name'        => 'नाम',
                     'direction'   => 'दिशा',
@@ -2037,11 +1994,11 @@ return [
                     'title'       => 'स्थान बनाएं',
                     'save-btn'    => 'स्थान सहेजें',
                 ],
-        
+
                 'edit'  => [
                     'title' => 'स्थान संपादित करें',
                 ],
-        
+
                 'create-success'    => 'स्थान सफलतापूर्वक बनाया गया।',
                 'update-success'    => 'स्थान सफलतापूर्वक अपडेट किया गया।',
                 'delete-success'    => 'स्थान सफलतापूर्वक हटाया गया।',
@@ -2050,13 +2007,13 @@ return [
                 'delete-failed'     => 'स्थान हटाने में विफल रहा',
             ],
         ],
-        
+
         'currencies' => [
             'index' => [
                 'title'      => 'मुद्राएँ',
                 'create-btn' => 'मुद्रा बनाएं',
                 'currency'   => 'मुद्रा',
-        
+
                 'datagrid' => [
                     'id'             => 'आईडी',
                     'name'           => 'नाम',
@@ -2069,7 +2026,7 @@ return [
                     'no-resource'    => 'क्रिया के लिए प्रदान किया गया संसाधन अपर्याप्त है',
                     'method-error'   => 'त्रुटि! गलत मेथड पहचाना गया, कृपया समूह क्रिया कॉन्फ़िगरेशन की जांच करें',
                 ],
-        
+
                 'create' => [
                     'create-btn'     => 'मुद्रा बनाएं',
                     'code'           => 'कोड',
@@ -2081,11 +2038,11 @@ return [
                     'symbol'         => 'प्रतीक',
                     'title'          => 'नई मुद्रा बनाएं',
                 ],
-        
+
                 'edit' => [
                     'title' => 'मुद्रा संपादित करें',
                 ],
-        
+
                 'create-success'    => 'मुद्रा सफलतापूर्वक बनाई गई।',
                 'delete-success'    => 'मुद्रा सफलतापूर्वक हटाई गई।',
                 'delete-failed'     => 'मुद्रा हटाने में विफल रही',
@@ -2093,14 +2050,14 @@ return [
                 'update-success'    => 'मुद्रा सफलतापूर्वक अपडेट की गई।',
             ],
         ],
-        
+
         'exchange-rates' => [
             'index' => [
                 'title'         => 'विनिमय दरें',
                 'create-btn'    => 'विनिमय दर बनाएं',
                 'exchange-rate' => 'विनिमय दर',
                 'update-rates'  => 'विनिमय दर अपडेट करें',
-        
+
                 'create' => [
                     'delete-warning'  => 'क्या आप वाकई इस क्रिया को करना चाहते हैं?',
                     'title'           => 'विनिमय दर बनाएं',
@@ -2109,11 +2066,11 @@ return [
                     'source-currency' => 'स्रोत मुद्रा',
                     'target-currency' => 'लक्ष्य मुद्रा',
                 ],
-        
+
                 'edit' => [
                     'title'   => 'विनिमय दर संपादित करें',
                 ],
-        
+
                 'datagrid' => [
                     'id'            => 'आईडी',
                     'currency-name' => 'मुद्रा का नाम',
@@ -2122,19 +2079,19 @@ return [
                     'delete'        => 'हटाएं',
                     'actions'       => 'क्रियाएँ',
                 ],
-        
+
                 'create-success'  => 'विनिमय दर सफलतापूर्वक बनाई गई',
                 'update-success'  => 'विनिमय दर सफलतापूर्वक अपडेट की गई',
                 'delete-success'  => 'विनिमय दर सफलतापूर्वक हटाई गई',
                 'delete-error'    => 'विनिमय दर को हटाने में त्रुटि',
             ],
         ],
-        
+
         'inventory-sources' => [
             'index'  => [
                 'title'      => 'स्टॉक स्रोत',
                 'create-btn' => 'स्टॉक स्रोत बनाएं',
-        
+
                 'datagrid' => [
                     'id'       => 'आईडी',
                     'code'     => 'कोड',
@@ -2147,7 +2104,7 @@ return [
                     'delete'   => 'हटाएं',
                 ],
             ],
-        
+
             'create' => [
                 'add-title'      => 'स्टॉक स्रोत जोड़ें',
                 'title'          => 'स्टॉक स्रोत',
@@ -2176,13 +2133,12 @@ return [
                 'postcode'       => 'पिनकोड',
                 'settings'       => 'सेटिंग्स',
             ],
-        
+
             'edit' => [
                 'title'          => 'स्टॉक स्रोत संपादित करें',
                 'general'        => 'सामान्य',
                 'save-btn'       => 'स्टॉक स्रोत सहेजें',
                 'back-btn'       => 'पीछे जाएं',
-                'general'        => 'सामान्य',
                 'code'           => 'कोड',
                 'name'           => 'नाम',
                 'description'    => 'विवरण',
@@ -2205,21 +2161,21 @@ return [
                 'postcode'       => 'पिनकोड',
                 'settings'       => 'सेटिंग्स',
             ],
-        
+
             'create-success'    => 'स्टॉक स्रोत सफलतापूर्वक बनाया गया',
             'delete-success'    => 'स्टॉक स्रोत सफलतापूर्वक हटाए गए',
             'delete-failed'     => 'स्टॉक स्रोत हटाने में विफल हुआ',
             'last-delete-error' => 'कम से कम एक स्टॉक स्रोत को हटाना आवश्यक है',
             'update-success'    => 'स्टॉक स्रोत सफलतापूर्वक अपडेट किया गया',
         ],
-        
+
         'taxes' => [
             'categories' => [
                 'index' => [
                     'title'          => 'कर श्रेणियाँ',
                     'tax-category'   => 'कर श्रेणी',
                     'delete-warning' => 'क्या आप वाकई हटाना चाहते हैं?',
-        
+
                     'datagrid' => [
                         'id'      => 'आईडी',
                         'name'    => 'नाम',
@@ -2228,7 +2184,7 @@ return [
                         'delete'  => 'हटाएं',
                         'actions' => 'क्रियाएँ',
                     ],
-        
+
                     'create' => [
                         'title'         => 'कर श्रेणी बनाएं',
                         'code'          => 'कोड',
@@ -2241,24 +2197,24 @@ return [
                         'add-tax-rates' => 'कर दरें जोड़ें',
                         'empty-text'    => 'कर दरें उपलब्ध नहीं हैं, कृपया नई कर दरें बनाएं।',
                     ],
-        
+
                     'edit'  => [
                         'title'   => 'कर श्रेणियाँ संपादित करें',
                     ],
-        
+
                     'create-success'  => 'नई कर श्रेणी बनाई गई',
                     'update-success'  => 'कर श्रेणी सफलतापूर्वक अपडेट की गई',
-                    'delete-success' => 'कर श्रेणी सफलतापूर्वक हटाई गई',
-                    'delete-failed'  => 'कर श्रेणी हटाने में विफल हुआ',
+                    'delete-success'  => 'कर श्रेणी सफलतापूर्वक हटाई गई',
+                    'delete-failed'   => 'कर श्रेणी हटाने में विफल हुआ',
                 ],
             ],
-        
+
             'rates'   => [
                 'index' => [
                     'title'        => 'कर दरें',
                     'tax-rate'     => 'कर दर',
                     'button-title' => 'कर दरें बनाएं',
-        
+
                     'datagrid' => [
                         'id'         => 'आईडी',
                         'identifier' => 'पहचानकर्ता',
@@ -2272,7 +2228,7 @@ return [
                         'delete'     => 'हटाएं',
                     ],
                 ],
-        
+
                 'create'  => [
                     'country'        => 'देश',
                     'back-btn'       => 'पीछे',
@@ -2290,7 +2246,7 @@ return [
                     'zip-from'       => 'से पिन',
                     'zip-to'         => 'तक पिन',
                 ],
-        
+
                 'edit'  => [
                     'basic-settings' => 'मूल सेटिंग्स',
                     'country'        => 'देश',
@@ -2306,14 +2262,14 @@ return [
                     'zip-from'       => 'से पिन',
                     'zip-to'         => 'तक पिन',
                 ],
-        
+
                 'create-success' => 'कर दर सफलतापूर्वक बनाई गई।',
                 'delete-failed'  => 'कर दर हटाने में विफल रहा',
                 'delete-success' => 'कर दर सफलतापूर्वक हटाई गई',
                 'update-success' => 'कर दर सफलतापूर्वक अपडेट की गई',
             ],
         ],
-        
+
         'channels' => [
             'index' => [
                 'title'             => 'चैनल',
@@ -2321,7 +2277,7 @@ return [
                 'delete-success'    => 'चैनल को सफलतापूर्वक हटा दिया गया।',
                 'delete-failed'     => ':name हटाने में विफल हुआ',
                 'last-delete-error' => 'अंतिम चैनल को हटाने में विफल हुआ।',
-        
+
                 'datagrid' => [
                     'id'        => 'आईडी',
                     'code'      => 'कोड',
@@ -2331,7 +2287,7 @@ return [
                     'delete'    => 'हटाएं',
                 ],
             ],
-        
+
             'create' => [
                 'title'                  => 'चैनल बनाएं',
                 'cancel'                 => 'पीछे जाएं',
@@ -2366,7 +2322,7 @@ return [
                 'maintenance-mode-text'  => 'संदेश',
                 'create-success'         => 'चैनल सफलतापूर्वक बनाया गया।',
             ],
-        
+
             'edit' => [
                 'title'                  => 'चैनल संपादित करें',
                 'back-btn'               => 'पीछे जाएं',
@@ -2402,14 +2358,13 @@ return [
                 'update-success'         => 'चैनल को सफलतापूर्वक अपडेट किया गया।',
             ],
         ],
-        
 
         'users' => [
             'index' => [
                 'title' => 'उपयोगकर्ता',
                 'admin' => 'व्यवस्थापक',
                 'user'  => 'उपयोगकर्ता',
-    
+
                 'create'  => [
                     'title'             => 'उपयोगकर्ता बनाएँ',
                     'name'              => 'नाम',
@@ -2419,9 +2374,9 @@ return [
                     'role'              => 'भूमिका',
                     'status'            => 'स्थिति',
                     'save-btn'          => 'उपयोगकर्ता सहेजें',
-                    'upload-image-info' => 'PNG या JPG प्रारूप में 110px X 110px के आकार का प्रोफ़ाइल चित्र अपलोड करें'
+                    'upload-image-info' => 'PNG या JPG प्रारूप में 110px X 110px के आकार का प्रोफ़ाइल चित्र अपलोड करें',
                 ],
-    
+
                 'datagrid' => [
                     'actions'  => 'क्रियाएँ',
                     'id'       => 'आईडी',
@@ -2433,11 +2388,11 @@ return [
                     'active'   => 'सक्रिय',
                     'inactive' => 'निष्क्रिय',
                 ],
-    
+
                 'edit'  => [
                     'title'    => 'उपयोगकर्ता संपादित करें',
                 ],
-    
+
                 'activate-warning'   => 'आपका खाता अभी तक सक्रिय नहीं किया गया है, कृपया व्यवस्थापक से संपर्क करें।',
                 'create-success'     => 'उपयोगकर्ता सफलतापूर्वक बनाया गया।',
                 'cannot-change'      => 'उपयोगकर्ता को नहीं बदला जा सकता',
@@ -2447,7 +2402,7 @@ return [
                 'last-delete-error'  => 'अंतिम उपयोगकर्ता हटाने में विफल',
                 'login-error'        => 'कृपया अपने क्रेडेंशियल्स की जांच करें और फिर से कोशिश करें।',
                 'update-success'     => 'उपयोगकर्ता को सफलतापूर्वक अपडेट किया गया।',
-                'delete-warning'     =>'क्या आप इस कार्य को करने के लिए सुनिश्चित हैं?',
+                'delete-warning'     => 'क्या आप इस कार्य को करने के लिए सुनिश्चित हैं?',
             ],
 
             'edit'  => [
@@ -2462,10 +2417,9 @@ return [
                 'status'           => 'स्थिति',
                 'save-btn'         => 'उपयोगकर्ता सहेजें',
             ],
-    
+
             'update-success' => 'उपयोगकर्ता को सफलतापूर्वक अपडेट किया गया।',
             'delete-success' => 'उपयोगकर्ता को सफलतापूर्वक हटा दिया गया।',
-
         ],
 
         'roles' => [
@@ -2473,7 +2427,7 @@ return [
                 'title'      => 'भूमिकाएँ',
                 'create-btn' => 'भूमिका बनाएँ',
 
-                'datagrid'  =>  [
+                'datagrid'  => [
                     'delete'          => 'हटाएं',
                     'edit'            => 'संपादित करें',
                     'id'              => 'आईडी',
@@ -2531,56 +2485,56 @@ return [
                     'id'         => 'आईडी',
                     'type'       => 'प्रकार',
                     'name'       => 'नाम',
-                ]
+                ],
             ],
 
             'create' => [
-                'title'                         => 'थीम बनाएँ',
+                'title'                          => 'थीम बनाएँ',
                 'sliders'                        => 'स्लाइडर',
-                'product-carousel'              => 'उत्पाद कैरोसेल',
-                'product-carousel-description'  => 'गतिशील और उत्तरदायी उत्पाद कैरोसेल के साथ उत्पादों को सुरुचिपूर्ण रूप से प्रदर्शित करें।',
-                'category-carousel-description' => 'उत्तरदायी श्रेणी कैरोसेल का उपयोग करके गतिशील श्रेणियों को आकर्षक रूप से प्रदर्शित करें।',
-                'static-content-description'    => 'संक्षिप्त, जानकारीपूर्ण स्थिर सामग्री के साथ अपनी श्रोताओं के साथ जुड़ाव में सुधार करें।',
-                'footer-link-description'       => 'सीमलेस वेबसाइट अन्वेषण और जानकारी के लिए फ़ुटर लिंक के माध्यम से नेविगेट करें।',
-                'category-carousel'             => 'श्रेणी कैरोसेल',
-                'static-content'                => 'स्थिर सामग्री',
-                'footer-link'                   => 'फ़ुटर लिंक',
-                'footer-link-form-title'        => 'फ़ुटर लिंक',
-                'slider-description'            => 'स्लाइडर से संबंधित थीम अनुकूलन।',
-                'slider-add-btn'                => 'स्लाइडर जोड़ें',
-                'general'                       => 'सामान्य',
-                'add-filter-btn'                => 'फ़िल्टर जोड़ें',
-                'save-btn'                      => 'सहेजें',
-                'filter-title'                  => 'शीर्षक',
-                'sort'                          => 'क्रम',
-                'desc'                          => 'उतरता हुआ',
-                'asc'                           => 'आरोही',
-                'limit'                         => 'सीमा',
-                'footer-title'                  => 'शीर्षक',
-                'link'                          => 'लिंक',
-                'add-logo'                      => 'लोगो जोड़ें',
-                'key'                           => 'कुंजी: :key',
-                'value'                         => 'मूल्य: :value',
-                'delete'                        => 'हटाएं',
-                'name'                          => 'नाम',
-                'sort-order'                    => 'क्रम',
-                'status'                        => 'स्थिति',
-                'image'                         => 'छवि',
-                'create-filter'                 => 'फ़िल्टर बनाएँ',
-                'key-input'                     => 'कुंजी',
-                'value-input'                   => 'मूल्य',
-                'html'                          => 'HTML',
-                'css'                           => 'CSS',
-                'add-footer-link-btn'           => 'फ़ुटर लिंक जोड़ें',
-                'filters'                       => 'फ़िल्टर',
-                'edit'                          => 'संपादित करें',
-                'url'                           => 'URL',
-                'add-link'                      => 'लिंक जोड़ें',
-                'create-slider'                 => 'स्लाइडर बनाएँ',
-                'slider-image'                  => 'स्लाइडर छवि',
-                'column'                        => 'स्तंभ',
-                'select'                        => 'चयन करें',
-                'back'                          => 'वापस',
+                'product-carousel'               => 'उत्पाद कैरोसेल',
+                'product-carousel-description'   => 'गतिशील और उत्तरदायी उत्पाद कैरोसेल के साथ उत्पादों को सुरुचिपूर्ण रूप से प्रदर्शित करें।',
+                'category-carousel-description'  => 'उत्तरदायी श्रेणी कैरोसेल का उपयोग करके गतिशील श्रेणियों को आकर्षक रूप से प्रदर्शित करें।',
+                'static-content-description'     => 'संक्षिप्त, जानकारीपूर्ण स्थिर सामग्री के साथ अपनी श्रोताओं के साथ जुड़ाव में सुधार करें।',
+                'footer-link-description'        => 'सीमलेस वेबसाइट अन्वेषण और जानकारी के लिए फ़ुटर लिंक के माध्यम से नेविगेट करें।',
+                'category-carousel'              => 'श्रेणी कैरोसेल',
+                'static-content'                 => 'स्थिर सामग्री',
+                'footer-link'                    => 'फ़ुटर लिंक',
+                'footer-link-form-title'         => 'फ़ुटर लिंक',
+                'slider-description'             => 'स्लाइडर से संबंधित थीम अनुकूलन।',
+                'slider-add-btn'                 => 'स्लाइडर जोड़ें',
+                'general'                        => 'सामान्य',
+                'add-filter-btn'                 => 'फ़िल्टर जोड़ें',
+                'save-btn'                       => 'सहेजें',
+                'filter-title'                   => 'शीर्षक',
+                'sort'                           => 'क्रम',
+                'desc'                           => 'उतरता हुआ',
+                'asc'                            => 'आरोही',
+                'limit'                          => 'सीमा',
+                'footer-title'                   => 'शीर्षक',
+                'link'                           => 'लिंक',
+                'add-logo'                       => 'लोगो जोड़ें',
+                'key'                            => 'कुंजी: :key',
+                'value'                          => 'मूल्य: :value',
+                'delete'                         => 'हटाएं',
+                'name'                           => 'नाम',
+                'sort-order'                     => 'क्रम',
+                'status'                         => 'स्थिति',
+                'image'                          => 'छवि',
+                'create-filter'                  => 'फ़िल्टर बनाएँ',
+                'key-input'                      => 'कुंजी',
+                'value-input'                    => 'मूल्य',
+                'html'                           => 'HTML',
+                'css'                            => 'CSS',
+                'add-footer-link-btn'            => 'फ़ुटर लिंक जोड़ें',
+                'filters'                        => 'फ़िल्टर',
+                'edit'                           => 'संपादित करें',
+                'url'                            => 'URL',
+                'add-link'                       => 'लिंक जोड़ें',
+                'create-slider'                  => 'स्लाइडर बनाएँ',
+                'slider-image'                   => 'स्लाइडर छवि',
+                'column'                         => 'स्तंभ',
+                'select'                         => 'चयन करें',
+                'back'                           => 'वापस',
             ],
 
             'edit' => [
@@ -2631,9 +2585,9 @@ return [
                 'back'                          => 'वापस',
             ],
 
-           'create-success' => 'थीम सफलतापूर्वक बनाई गई',
-           'update-success' => 'थीम सफलतापूर्वक अपडेट की गई',
-           'delete-success' => 'थीम सफलतापूर्वक हटा दी गई',
+            'create-success' => 'थीम सफलतापूर्वक बनाई गई',
+            'update-success' => 'थीम सफलतापूर्वक अपडेट की गई',
+            'delete-success' => 'थीम सफलतापूर्वक हटा दी गई',
         ],
     ],
 
@@ -2648,13 +2602,13 @@ return [
 
             'general' => [
                 'general' => [
-                'title'             => 'सामान्य',
-                'info'              => 'इकाई विकल्प सेट करें।',
-                'unit-options'      => 'इकाई विकल्प',
-                'unit-options-info' => 'आकार, रंग, सामग्री, अनुकूलन, ग्राहक संतुष्टि को बढ़ाने और खरीद को अनुकूलित करने के लिए।',
-                'weight-unit'       => 'भार इकाई',
+                    'title'             => 'सामान्य',
+                    'info'              => 'इकाई विकल्प सेट करें।',
+                    'unit-options'      => 'इकाई विकल्प',
+                    'unit-options-info' => 'आकार, रंग, सामग्री, अनुकूलन, ग्राहक संतुष्टि को बढ़ाने और खरीद को अनुकूलित करने के लिए।',
+                    'weight-unit'       => 'भार इकाई',
                 ],
-    
+
                 'content' => [
                     'title'               => 'सामग्री',
                     'info'                => 'तुलना विकल्प, wishlist विकल्प, छवि खोज विकल्प, फ़ुटर, फ़्लिप फ़ुटर और कस्टम स्क्रिप्ट सेट करें।',
@@ -2663,7 +2617,7 @@ return [
                     'custom-css'          => 'कस्टम सीएसएस',
                     'custom-javascript'   => 'कस्टम जावास्क्रिप्ट',
                 ],
-    
+
                 'design' => [
                     'title'           => 'डिजाइन',
                     'info'            => 'लोगो और फ़avicon आइकन सेट करें।',
@@ -2676,269 +2630,263 @@ return [
 
             'catalog' => [
                 'title' => 'कैटलॉग',
-                'info' => 'कैटलॉग',
-            
+                'info'  => 'कैटलॉग',
+
                 'inventory' => [
-                    'title' => 'इन्वेंटरी',
-                    'info' => 'बैक ऑर्डर्स सेट करें',
-                    'stock-options' => 'स्टॉक विकल्प',
+                    'title'              => 'इन्वेंटरी',
+                    'info'               => 'बैक ऑर्डर्स सेट करें',
+                    'stock-options'      => 'स्टॉक विकल्प',
                     'stock-options-info' => 'स्टॉक विकल्प निवेश अनुबंध होते हैं जो पूर्व-निर्धारित मूल्य पर कंपनी के शेयर खरीदने या बेचने का अधिकार प्रदान करते हैं, संभावित लाभ को प्रभावित करते हैं।',
-                    'allow-back-orders' => 'बैक ऑर्डर्स की अनुमति दें',
+                    'allow-back-orders'  => 'बैक ऑर्डर्स की अनुमति दें',
                 ],
-            
+
                 'products' => [
-                    'title' => 'उत्पाद',
-                    'info' => 'मेहमान चेकआउट, होमपेज, उत्पाद दृश्य पृष्ठ, कार्ट दृश्य पृष्ठ, स्टोर फ्रंट, समीक्षा और गुणक सोशल शेयर सेट करें।',
-                    'guest-checkout' => 'मेहमान चेकआउट',
-                    'guest-checkout-info' => 'मेहमान चेकआउट ग्राहकों को खाता बनाए बिना उत्पाद खरीदने की अनुमति देता है, खरीददारी प्रक्रिया को सुविधा और तेज़ लेन-देन के लिए संवादना और फास्ट ट्रांजैक्शन के लिए संवादना करता है।',
-                    'allow-guest-checkout' => 'मेहमान चेकआउट की अनुमति दें',
-                    'allow-guest-checkout-hint' => 'सुझाव: यदि इसे चालित किया जाता है, तो इस विकल्प को प्रत्येक उत्पाद के लिए विशिष्ट रूप से कॉन्फ़िगर किया जा सकता है।',
-                    'attribute' => 'गुण',
-                    'homepage' => 'होमपेज कॉन्फ़िगरेशन',
-                    'homepage-info' => 'होमपेज कॉन्फ़िगरेशन मुख्य पृष्ठ के लेआउट, सामग्री और डिज़ाइन को प्रभावी ढंग से प्रस्तुत करने के लिए वेबसाइट के मुख्य पृष्ठ को अनुकूलित करने का काम है।',
-                    'allow-no-of-new-products' => 'होमपेज पर नए उत्पादों की अनुमति दें',
-                    'allow-no-of-featured-products' => 'होमपेज पर प्रमुख उत्पादों की अनुमति दें',
-                    'allow-no-of-related-products' => 'होमपेज पर संबंधित उत्पादों की अनुमति दें',
-                    'allow-no-of-up-sells-products' => 'होमपेज पर ऊपर-बेचने की अनुमति दें',
+                    'title'                            => 'उत्पाद',
+                    'info'                             => 'मेहमान चेकआउट, होमपेज, उत्पाद दृश्य पृष्ठ, कार्ट दृश्य पृष्ठ, स्टोर फ्रंट, समीक्षा और गुणक सोशल शेयर सेट करें।',
+                    'guest-checkout'                   => 'मेहमान चेकआउट',
+                    'guest-checkout-info'              => 'मेहमान चेकआउट ग्राहकों को खाता बनाए बिना उत्पाद खरीदने की अनुमति देता है, खरीददारी प्रक्रिया को सुविधा और तेज़ लेन-देन के लिए संवादना और फास्ट ट्रांजैक्शन के लिए संवादना करता है।',
+                    'allow-guest-checkout'             => 'मेहमान चेकआउट की अनुमति दें',
+                    'allow-guest-checkout-hint'        => 'सुझाव: यदि इसे चालित किया जाता है, तो इस विकल्प को प्रत्येक उत्पाद के लिए विशिष्ट रूप से कॉन्फ़िगर किया जा सकता है।',
+                    'attribute'                        => 'गुण',
+                    'homepage'                         => 'होमपेज कॉन्फ़िगरेशन',
+                    'homepage-info'                    => 'होमपेज कॉन्फ़िगरेशन मुख्य पृष्ठ के लेआउट, सामग्री और डिज़ाइन को प्रभावी ढंग से प्रस्तुत करने के लिए वेबसाइट के मुख्य पृष्ठ को अनुकूलित करने का काम है।',
+                    'allow-no-of-new-products'         => 'होमपेज पर नए उत्पादों की अनुमति दें',
+                    'allow-no-of-featured-products'    => 'होमपेज पर प्रमुख उत्पादों की अनुमति दें',
+                    'allow-no-of-related-products'     => 'होमपेज पर संबंधित उत्पादों की अनुमति दें',
+                    'allow-no-of-up-sells-products'    => 'होमपेज पर ऊपर-बेचने की अनुमति दें',
                     'allow-no-of-cross-sells-products' => 'होमपेज पर क्रॉस-बेचने की अनुमति दें',
-                    'product-view-page' => 'उत्पाद दृश्य पृष्ठ कॉन्फ़िगरेशन',
-                    'product-view-page-info' => 'उत्पाद दृश्य पृष्ठ कॉन्फ़िगरेशन उत्पाद के प्रदर्शन पृष्ठ पर लेआउट और तत्वों को समायोजित करने में शामिल है, उपयोगकर्ता अनुभव और जानकारी प्रस्तुति को बेहतर बनाने के लिए।',
-                    'cart-view-page' => 'कार्ट दृश्य पृष्ठ कॉन्फ़िगरेशन',
-                    'cart-view-page-info' => 'कार्ट दृश्य पृष्ठ कॉन्फ़िगरेशन खरीददारी कार्ट पृष्ठ पर वस्त्र, विवरण और विकल्पों को व्यवस्थित करने में शामिल है, उपयोगकर्ता बातचीत और खरीददारी फ़्लो को बेहतर बनाने में मदद करता है।',
-                    'storefront' => 'स्टोरफ़्रंट',
-                    'storefront-info' => 'स्टोरफ़्रंट एक ऑनलाइन दुकान का ग्राहकों के सामने का इंटरफ़ेस है, उत्पादों, श्रेणियों, और नेविगेशन को सीमलेस खरीददारी अनुभव के लिए प्रदर्शित करता है।',
-                    'search-mode' => 'खोज मोड',
-                    'flat' => 'समतल टेबल',
-                    'elastic' => 'इलास्टिक सर्च',
-                    'default-list-mode' => 'डिफ़ॉल्ट सूची मोड',
-                    'grid' => 'ग्रिड',
-                    'list' => 'सूची',
-                    'products-per-page' => 'प्रति पृष्ठ उत्पाद',
-                    'sort-by' => 'क्रमबद्ध करें',
-                    'from-z-a' => 'जी से ए-जी',
-                    'from-a-z' => 'ए से जी',
-                    'latest-first' => 'नवीनतम पहले',
-                    'oldest-first' => 'सबसे पुराना पहले',
-                    'cheapest-first' => 'सबसे सस्ता पहले',
-                    'expensive-first' => 'सबसे महंगा पहले',
-                    'buy-now-button-display' => 'ग्राहकों को सीधे उत्पाद खरीदने की अनुमति दें',
-                    'cache-small-image' => 'छोटी छवि',
-                    'cache-small-image-info' => 'स्टोरफ़्रंट एक ऑनलाइन दुकान का ग्राहकों के सामने का इंटरफ़ेस है, उत्पादों, श्रेणियों, और नेविगेशन को सीमलेस खरीददारी अनुभव के लिए प्रदर्शित करता है।',
-                    'width' => 'चौड़ाई',
-                    'height' => 'ऊंचाई',
-                    'cache-medium-image' => 'मध्यम छवि',
-                    'cache-medium-image-info' => 'मध्यम छवि एक मामूली आकार की चित्र होती है जो विस्तार और स्क्रीन स्थान के बीच संतुलन प्रदान करती है, आमतौर पर छवियों को दिखाने के लिए उपयोग की जाती है।',
-                    'cache-large-image' => 'बड़ी छवि',
-                    'cache-large-image-info' => 'बड़ी छवि एक उच्च रिज़ॉल्यूशन चित्र को प्रदर्शित करती है जो विस्तारित विवरण और दृश्य प्रभाव प्रदान करती है, आमतौर पर उत्पादों या ग्राफ़िक्स को प्रदर्शित करने के लिए उपयोग होती है।',
-                    'review' => 'समीक्षा',
-                    'review-info' => 'कुछ का मूल्यांकन या मूल्यांकन, अक्सर राय और प्रतिक्रिया को शामिल करने के लिए होता है।',
-                    'allow-guest-review' => 'मेहमान समीक्षा की अनुमति दें',
-                    'attribute' => 'गुण',
-                    'attribute-info' => 'वस्तु को परिभाषित करने वाली विशेषता या गुण, इसके व्यवहार, उपस्थिति या कार्य को प्रभावित करता है।',
-                    'image-upload-size' => 'अनुमत छवि अपलोड का आकार (किलोबाइट में)',
-                    'file-upload-size' => 'अनुमत फ़ाइल अपलोड का आकार (किलोबाइट में)',
-                    'comma-separated' => 'कॉमा द्वारा विभाजित',
+                    'product-view-page'                => 'उत्पाद दृश्य पृष्ठ कॉन्फ़िगरेशन',
+                    'product-view-page-info'           => 'उत्पाद दृश्य पृष्ठ कॉन्फ़िगरेशन उत्पाद के प्रदर्शन पृष्ठ पर लेआउट और तत्वों को समायोजित करने में शामिल है, उपयोगकर्ता अनुभव और जानकारी प्रस्तुति को बेहतर बनाने के लिए।',
+                    'cart-view-page'                   => 'कार्ट दृश्य पृष्ठ कॉन्फ़िगरेशन',
+                    'cart-view-page-info'              => 'कार्ट दृश्य पृष्ठ कॉन्फ़िगरेशन खरीददारी कार्ट पृष्ठ पर वस्त्र, विवरण और विकल्पों को व्यवस्थित करने में शामिल है, उपयोगकर्ता बातचीत और खरीददारी फ़्लो को बेहतर बनाने में मदद करता है।',
+                    'storefront'                       => 'स्टोरफ़्रंट',
+                    'storefront-info'                  => 'स्टोरफ़्रंट एक ऑनलाइन दुकान का ग्राहकों के सामने का इंटरफ़ेस है, उत्पादों, श्रेणियों, और नेविगेशन को सीमलेस खरीददारी अनुभव के लिए प्रदर्शित करता है।',
+                    'search-mode'                      => 'खोज मोड',
+                    'flat'                             => 'समतल टेबल',
+                    'elastic'                          => 'इलास्टिक सर्च',
+                    'default-list-mode'                => 'डिफ़ॉल्ट सूची मोड',
+                    'grid'                             => 'ग्रिड',
+                    'list'                             => 'सूची',
+                    'products-per-page'                => 'प्रति पृष्ठ उत्पाद',
+                    'sort-by'                          => 'क्रमबद्ध करें',
+                    'from-z-a'                         => 'जी से ए-जी',
+                    'from-a-z'                         => 'ए से जी',
+                    'latest-first'                     => 'नवीनतम पहले',
+                    'oldest-first'                     => 'सबसे पुराना पहले',
+                    'cheapest-first'                   => 'सबसे सस्ता पहले',
+                    'expensive-first'                  => 'सबसे महंगा पहले',
+                    'buy-now-button-display'           => 'ग्राहकों को सीधे उत्पाद खरीदने की अनुमति दें',
+                    'cache-small-image'                => 'छोटी छवि',
+                    'cache-small-image-info'           => 'स्टोरफ़्रंट एक ऑनलाइन दुकान का ग्राहकों के सामने का इंटरफ़ेस है, उत्पादों, श्रेणियों, और नेविगेशन को सीमलेस खरीददारी अनुभव के लिए प्रदर्शित करता है।',
+                    'width'                            => 'चौड़ाई',
+                    'height'                           => 'ऊंचाई',
+                    'cache-medium-image'               => 'मध्यम छवि',
+                    'cache-medium-image-info'          => 'मध्यम छवि एक मामूली आकार की चित्र होती है जो विस्तार और स्क्रीन स्थान के बीच संतुलन प्रदान करती है, आमतौर पर छवियों को दिखाने के लिए उपयोग की जाती है।',
+                    'cache-large-image'                => 'बड़ी छवि',
+                    'cache-large-image-info'           => 'बड़ी छवि एक उच्च रिज़ॉल्यूशन चित्र को प्रदर्शित करती है जो विस्तारित विवरण और दृश्य प्रभाव प्रदान करती है, आमतौर पर उत्पादों या ग्राफ़िक्स को प्रदर्शित करने के लिए उपयोग होती है।',
+                    'review'                           => 'समीक्षा',
+                    'review-info'                      => 'कुछ का मूल्यांकन या मूल्यांकन, अक्सर राय और प्रतिक्रिया को शामिल करने के लिए होता है।',
+                    'allow-guest-review'               => 'मेहमान समीक्षा की अनुमति दें',
+                    'attribute-info'                   => 'वस्तु को परिभाषित करने वाली विशेषता या गुण, इसके व्यवहार, उपस्थिति या कार्य को प्रभावित करता है।',
+                    'image-upload-size'                => 'अनुमत छवि अपलोड का आकार (किलोबाइट में)',
+                    'file-upload-size'                 => 'अनुमत फ़ाइल अपलोड का आकार (किलोबाइट में)',
+                    'comma-separated'                  => 'कॉमा द्वारा विभाजित',
                 ],
-            
+
                 'rich-snippets' => [
-                    'title' => 'रिच स्निपेट्स',
-                    'info' => 'उत्पाद और श्रेणियों को सेट करें।',
-                    'products' => 'उत्पाद',
+                    'title'                     => 'रिच स्निपेट्स',
+                    'info'                      => 'उत्पाद और श्रेणियों को सेट करें।',
+                    'products'                  => 'उत्पाद',
                     'rich-snippet-product-info' => 'किसी व्यवसाय या विक्रेता द्वारा प्रदान किए जाने वाले खरीदारी या उपयोग के लिए उपलब्ध आइटम।',
-                    'enable' => 'सक्षम करें',
-                    'show-weight' => 'वजन दिखाएं',
-                    'show-categories' => 'श्रेणियां दिखाएं',
-                    'show-images' => 'छवियां दिखाएं',
-                    'show-reviews' => 'समीक्षाएँ दिखाएं',
-                    'show-ratings' => 'रेटिंग्स दिखाएं',
-                    'show-offers' => 'ऑफर्स दिखाएं',
-                    'show-sku' => 'SKU दिखाएं',
-                    'categories' => 'श्रेणियां',
-                    'categories-info' => '"श्रेणियां" वो समूह या वर्ग होते हैं जो समान उत्पादों या आइटमों को आसान ब्राउज़ और नेविगेशन के लिए आपस में ग्रुप और व्यवस्थित करने में मदद करते हैं।',
-                    'show-search-input-field' => 'खोज इनपुट फ़ील्ड दिखाएं',
+                    'enable'                    => 'सक्षम करें',
+                    'show-weight'               => 'वजन दिखाएं',
+                    'show-categories'           => 'श्रेणियां दिखाएं',
+                    'show-images'               => 'छवियां दिखाएं',
+                    'show-reviews'              => 'समीक्षाएँ दिखाएं',
+                    'show-ratings'              => 'रेटिंग्स दिखाएं',
+                    'show-offers'               => 'ऑफर्स दिखाएं',
+                    'show-sku'                  => 'SKU दिखाएं',
+                    'categories'                => 'श्रेणियां',
+                    'categories-info'           => '"श्रेणियां" वो समूह या वर्ग होते हैं जो समान उत्पादों या आइटमों को आसान ब्राउज़ और नेविगेशन के लिए आपस में ग्रुप और व्यवस्थित करने में मदद करते हैं।',
+                    'show-search-input-field'   => 'खोज इनपुट फ़ील्ड दिखाएं',
                 ],
             ],
-            
+
             'customer' => [
                 'title' => 'ग्राहक',
-                'info' => 'ग्राहक',
-            
+                'info'  => 'ग्राहक',
+
                 'address' => [
-                    'title' => 'पता',
-                    'info' => 'देश, राज्य, पिन कोड और सड़क पते की पंक्तियों को सेट करें।',
-                    'requirements' => 'आवश्यकताएँ',
+                    'title'             => 'पता',
+                    'info'              => 'देश, राज्य, पिन कोड और सड़क पते की पंक्तियों को सेट करें।',
+                    'requirements'      => 'आवश्यकताएँ',
                     'requirements-info' => 'आवश्यकताएँ वो स्थितियाँ, विशेषताएँ, या विवरण होते हैं जो किसी चीज़ को पूरा करने, प्राप्त करने, या सफलतापूर्वक पूरा किया जाने के लिए आवश्यक होते हैं।',
-                    'country' => 'देश',
-                    'state' => 'राज्य',
-                    'zip' => 'पिन कोड',
-                    'city' => 'शहर',
-                    'information' => 'जानकारी',
-                    'information-info' => '"सड़क पते की पंक्तियों में" स्थान की जानकारी जैसे कि मकान संख्या, सड़क, शहर, और अन्य कोमा से अलग-अलग सेगमेंट को सूचित करने वाले व्यक्ति अंश होते हैं।',
-                    'street-lines' => 'सड़क पते की पंक्तियाँ',
+                    'country'           => 'देश',
+                    'state'             => 'राज्य',
+                    'zip'               => 'पिन कोड',
+                    'city'              => 'शहर',
+                    'information'       => 'जानकारी',
+                    'information-info'  => '"सड़क पते की पंक्तियों में" स्थान की जानकारी जैसे कि मकान संख्या, सड़क, शहर, और अन्य कोमा से अलग-अलग सेगमेंट को सूचित करने वाले व्यक्ति अंश होते हैं।',
+                    'street-lines'      => 'सड़क पते की पंक्तियाँ',
                 ],
-            
+
                 'settings' => [
-                    'title' => 'सेटिंग्स',
-                    'settings-info' => 'विशेष ख्वाहिश, समाचार पत्रिका सदस्यता, ईमेल सत्यापन और सोशल लॉगिन सेट करें।',
-                    'wishlist' => 'ख्वाहिश सूची',
-                    'wishlist-info' => '"ख्वाहिश सूची" एक व्यक्तिगत विशेषज्ञ आइटमों का संग्रहण होता है, जिसके द्वारा उपयोगकर्ता उत्पादों को भविष्य के संदर्भ या संभावित खरीदारी के लिए सहेज सकते हैं।',
-                    'wishlist-share' => 'साझा करने की सक्षमता',
-                    'newsletter' => 'समाचार पत्रिका सदस्यता',
-                    'newsletter-info' => '"समाचार पत्रिका सदस्यता" जानकारी में सदस्यों को नियमित रूप से ईमेल के माध्यम से साझा किए जाने वाले अपडेट्स, प्रस्तावनाएँ या सामग्री शामिल होती है, जिससे उन्हें सूचित और जुड़े रहने में मदद मिलती है।',
+                    'title'                   => 'सेटिंग्स',
+                    'settings-info'           => 'विशेष ख्वाहिश, समाचार पत्रिका सदस्यता, ईमेल सत्यापन और सोशल लॉगिन सेट करें।',
+                    'wishlist'                => 'ख्वाहिश सूची',
+                    'wishlist-info'           => '"ख्वाहिश सूची" एक व्यक्तिगत विशेषज्ञ आइटमों का संग्रहण होता है, जिसके द्वारा उपयोगकर्ता उत्पादों को भविष्य के संदर्भ या संभावित खरीदारी के लिए सहेज सकते हैं।',
+                    'wishlist-share'          => 'साझा करने की सक्षमता',
+                    'newsletter'              => 'समाचार पत्रिका सदस्यता',
+                    'newsletter-info'         => '"समाचार पत्रिका सदस्यता" जानकारी में सदस्यों को नियमित रूप से ईमेल के माध्यम से साझा किए जाने वाले अपडेट्स, प्रस्तावनाएँ या सामग्री शामिल होती है, जिससे उन्हें सूचित और जुड़े रहने में मदद मिलती है।',
                     'newsletter-subscription' => 'समाचार पत्रिका सदस्यता की अनुमति दें',
-                    'email' => 'ईमेल सत्यापन',
-                    'email-info' => '"ईमेल सत्यापन" एक ईमेल पते की प्रामाणिकता की पुष्टि करता है, आमतौर पर पुष्टिकरण लिंक भेजकर, खाता सुरक्षा और संचार विश्वसनीयता को बढ़ावा देता है।',
-                    'email-verification' => 'ईमेल सत्यापन की अनुमति दें',
+                    'email'                   => 'ईमेल सत्यापन',
+                    'email-info'              => '"ईमेल सत्यापन" एक ईमेल पते की प्रामाणिकता की पुष्टि करता है, आमतौर पर पुष्टिकरण लिंक भेजकर, खाता सुरक्षा और संचार विश्वसनीयता को बढ़ावा देता है।',
+                    'email-verification'      => 'ईमेल सत्यापन की अनुमति दें',
                 ],
             ],
-            
+
             'email' => [
                 'title' => 'ईमेल',
-                'info' => 'ईमेल',
-            
+                'info'  => 'ईमेल',
+
                 'email-settings' => [
-                    'title' => 'ईमेल सेटिंग्स',
-                    'info' => 'ईमेल भेजने वाले का नाम, दुकान ईमेल पता, व्यवस्थापक का नाम और व्यवस्थापक ईमेल पता सेट करें।',
-                    'email-sender-name' => 'ईमेल भेजने वाले का नाम',
+                    'title'                 => 'ईमेल सेटिंग्स',
+                    'info'                  => 'ईमेल भेजने वाले का नाम, दुकान ईमेल पता, व्यवस्थापक का नाम और व्यवस्थापक ईमेल पता सेट करें।',
+                    'email-sender-name'     => 'ईमेल भेजने वाले का नाम',
                     'email-sender-name-tip' => 'इस नाम को ग्राहक के इनबॉक्स में प्रदर्शित किया जाएगा',
-                    'shop-email-from' => 'दुकान ईमेल पता',
-                    'shop-email-from-tip' => 'ग्राहकों को ईमेल भेजने के लिए इस चैनल का ईमेल पता',
-                    'admin-name' => 'व्यवस्थापक का नाम',
-                    'admin-name-tip' => 'इस नाम को सभी व्यवस्थापक ईमेलों में प्रदर्शित किया जाएगा',
-                    'admin-email' => 'व्यवस्थापक ईमेल',
-                    'admin-email-tip' => 'ईमेल पता इस चैनल के व्यवस्थापक का है जो ईमेल प्राप्त करने के लिए है',
-                    'admin-page-limit' => 'पृष्ठ प्रति पृष्ठ डिफ़ॉल्ट आइटम (व्यवस्थापक)',
+                    'shop-email-from'       => 'दुकान ईमेल पता',
+                    'shop-email-from-tip'   => 'ग्राहकों को ईमेल भेजने के लिए इस चैनल का ईमेल पता',
+                    'admin-name'            => 'व्यवस्थापक का नाम',
+                    'admin-name-tip'        => 'इस नाम को सभी व्यवस्थापक ईमेलों में प्रदर्शित किया जाएगा',
+                    'admin-email'           => 'व्यवस्थापक ईमेल',
+                    'admin-email-tip'       => 'ईमेल पता इस चैनल के व्यवस्थापक का है जो ईमेल प्राप्त करने के लिए है',
+                    'admin-page-limit'      => 'पृष्ठ प्रति पृष्ठ डिफ़ॉल्ट आइटम (व्यवस्थापक)',
                 ],
-            
+
                 'notifications' => [
-                    'title' => 'सूचनाएँ',
-                    'info' => '"सूचना" एक संदेश या चेतावनी होती है जो उपयोगकर्ताओं को घटनाओं, अपडेट्स, या क्रियाओं के बारे में सूचित करती है, उपयोगकर्ता बातचीत और जागरूकता को बढ़ावा देती है।',
-                    'verification' => 'ग्राहक पंजीकरण के बाद सत्यापन ईमेल भेजें',
-                    'registration' => 'ग्राहक पंजीकरण के बाद पुष्टि ईमेल भेजें',
+                    'title'                                            => 'सूचनाएँ',
+                    'info'                                             => '"सूचना" एक संदेश या चेतावनी होती है जो उपयोगकर्ताओं को घटनाओं, अपडेट्स, या क्रियाओं के बारे में सूचित करती है, उपयोगकर्ता बातचीत और जागरूकता को बढ़ावा देती है।',
+                    'verification'                                     => 'ग्राहक पंजीकरण के बाद सत्यापन ईमेल भेजें',
+                    'registration'                                     => 'ग्राहक पंजीकरण के बाद पुष्टि ईमेल भेजें',
                     'customer-registration-confirmation-mail-to-admin' => 'ग्राहक पंजीकरण के बाद प्रशासन को पुष्टि ईमेल भेजें',
-                    'customer' => 'ग्राहक खाता शीर्षक पंजीकरण के बाद भेजें',
-                    'new-order' => 'नया आदेश देने के बाद ग्राहक को पुष्टि ईमेल भेजें',
-                    'new-admin' => 'नए आदेश देने के बाद प्रशासन को पुष्टि ईमेल भेजें',
-                    'new-invoice' => 'नई चालान बनाने के बाद ग्राहक को सूचना ईमेल भेजें',
-                    'new-refund' => 'नया रिफंड बनाने के बाद ग्राहक को सूचना ईमेल भेजें',
-                    'new-shipment' => 'नई शिपमेंट बनाने के बाद ग्राहक को सूचना ईमेल भेजें',
-                    'new-inventory-source' => 'नई शिपमेंट बनाने के बाद इन्वेंटरी स्रोत को सूचना ईमेल भेजें',
-                    'cancel-order' => 'आदेश को रद्द करने के बाद सूचना भेजें',
+                    'customer'                                         => 'ग्राहक खाता शीर्षक पंजीकरण के बाद भेजें',
+                    'new-order'                                        => 'नया आदेश देने के बाद ग्राहक को पुष्टि ईमेल भेजें',
+                    'new-admin'                                        => 'नए आदेश देने के बाद प्रशासन को पुष्टि ईमेल भेजें',
+                    'new-invoice'                                      => 'नई चालान बनाने के बाद ग्राहक को सूचना ईमेल भेजें',
+                    'new-refund'                                       => 'नया रिफंड बनाने के बाद ग्राहक को सूचना ईमेल भेजें',
+                    'new-shipment'                                     => 'नई शिपमेंट बनाने के बाद ग्राहक को सूचना ईमेल भेजें',
+                    'new-inventory-source'                             => 'नई शिपमेंट बनाने के बाद इन्वेंटरी स्रोत को सूचना ईमेल भेजें',
+                    'cancel-order'                                     => 'आदेश को रद्द करने के बाद सूचना भेजें',
                 ],
             ],
-            
+
             'sales' => [
                 'title' => 'बिक्री',
-                'info' => 'बिक्री',
-            
+                'info'  => 'बिक्री',
+
                 'shipping' => [
-                    'title' => 'शिपिंग',
-                    'info' => 'शिपिंग सूचना सेट करें।',
-                    'origin' => 'मूल',
-                    'origin-info' => 'शिपिंग मूल उन स्थानों का संदर्भ करता है जहां सामान या उत्पाद उनके गंतव्य पर पहुंचने से पहले उत्पन्न होते हैं।',
-                    'country' => 'देश',
-                    'state' => 'राज्य',
-                    'zip' => 'पिन कोड',
-                    'city' => 'शहर',
+                    'title'          => 'शिपिंग',
+                    'info'           => 'शिपिंग सूचना सेट करें।',
+                    'origin'         => 'मूल',
+                    'origin-info'    => 'शिपिंग मूल उन स्थानों का संदर्भ करता है जहां सामान या उत्पाद उनके गंतव्य पर पहुंचने से पहले उत्पन्न होते हैं।',
+                    'country'        => 'देश',
+                    'state'          => 'राज्य',
+                    'zip'            => 'पिन कोड',
+                    'city'           => 'शहर',
                     'street-address' => 'सड़क पता',
-                    'store-name' => 'स्टोर का नाम',
-                    'vat-number' => 'वैट नंबर',
+                    'store-name'     => 'स्टोर का नाम',
+                    'vat-number'     => 'वैट नंबर',
                     'contact-number' => 'संपर्क नंबर',
-                    'bank-details' => 'बैंक विवरण',
-            
+                    'bank-details'   => 'बैंक विवरण',
                 ],
-            
+
                 'shipping-methods' => [
-                    'page-title' => 'शिपिंग मेथड',
-                    'info' => 'शिपिंग मेथड सूचना सेट करें',
-                    'free-shipping' => 'मुफ्त शिपिंग',
-                    'free-shipping-info' => '"मुफ्त शिपिंग" एक शिपिंग मेथड है जहां शिपिंग की लागत माफ की जाती है, और विक्रेता ग्राहकों को सामान प्राप्त कराने के लिए शिपिंग खर्चों का समर्थन करता है।',
-                    'flat-rate-shipping' => 'फ्लैट रेट शिपिंग',
+                    'page-title'              => 'शिपिंग मेथड',
+                    'info'                    => 'शिपिंग मेथड सूचना सेट करें',
+                    'free-shipping'           => 'मुफ्त शिपिंग',
+                    'free-shipping-info'      => '"मुफ्त शिपिंग" एक शिपिंग मेथड है जहां शिपिंग की लागत माफ की जाती है, और विक्रेता ग्राहकों को सामान प्राप्त कराने के लिए शिपिंग खर्चों का समर्थन करता है।',
+                    'flat-rate-shipping'      => 'फ्लैट रेट शिपिंग',
                     'flat-rate-shipping-info' => 'फ्लैट रेट शिपिंग एक ऐसी शिपिंग मेथड है जिसमें शिपिंग के लिए एक मुद्रा शुल्क लिया जाता है, चाहे पैकेज का वजन, आकार, या दूरी कुछ भी हो। इससे शिपिंग लागतों को सरलीकृत किया जाता है और खरीददार और विक्रेता दोनों के लिए लाभकारी हो सकता है।',
-                    'title' => 'शीर्षक',
-                    'description' => 'विवरण',
-                    'rate' => 'दर',
-                    'status' => 'स्थिति',
-                    'type' => 'प्रकार',
-                    'flat-rate-shipping' => 'फ्लैट रेट शिपिंग',
-                    'flat-rate-shipping-info' => 'फ्लैट रेट शिपिंग सूचना',
+                    'title'                   => 'शीर्षक',
+                    'description'             => 'विवरण',
+                    'rate'                    => 'दर',
+                    'status'                  => 'स्थिति',
+                    'type'                    => 'प्रकार',
                 ],
-            
+
                 'payment-methods' => [
-                    'page-title' => 'भुगतान मेथड्स',
-                    'info' => 'भुगतान मेथड्स सूचना सेट करें',
-                    'cash-on-delivery' => 'कैश ऑन डिलिवरी',
-                    'cash-on-delivery-info' => 'भुगतान मेथड जिसमें ग्राहक सामान या सेवाओं को प्राप्त करने पर कैश में भुगतान करते हैं।',
-                    'description' => 'विवरण',
-                    'title' => 'शीर्षक',
-                    'instructions' => 'निर्देश',
-                    'generate-invoice' => 'आदेश प्लेस करने के बाद स्वच्छंद रूप से चालान बनाएं',
-                    'set-invoice-status' => 'चालान बनाने के बाद चालान स्थिति सेट करें',
+                    'page-title'                  => 'भुगतान मेथड्स',
+                    'info'                        => 'भुगतान मेथड्स सूचना सेट करें',
+                    'cash-on-delivery'            => 'कैश ऑन डिलिवरी',
+                    'cash-on-delivery-info'       => 'भुगतान मेथड जिसमें ग्राहक सामान या सेवाओं को प्राप्त करने पर कैश में भुगतान करते हैं।',
+                    'description'                 => 'विवरण',
+                    'title'                       => 'शीर्षक',
+                    'instructions'                => 'निर्देश',
+                    'generate-invoice'            => 'आदेश प्लेस करने के बाद स्वच्छंद रूप से चालान बनाएं',
+                    'set-invoice-status'          => 'चालान बनाने के बाद चालान स्थिति सेट करें',
                     'generate-invoice-applicable' => 'स्वच्छंद रूप से चालान बनाने के लिए प्रायोगिक है',
-                    'status' => 'स्थिति',
-                    'sort-order' => 'क्रमबद्ध क्रम',
-                    'set-order-status' => 'चालान बनाने के बाद आदेश स्थिति सेट करें',
-                    'pending' => 'लंबित',
-                    'paid' => 'भुगतान हुआ',
-                    'sandbox' => 'सैंडबॉक्स',
-                    'pending-payment' => 'लंबित भुगतान',
-                    'processing' => 'प्रोसेसिंग',
-                    'money-transfer' => 'मनी ट्रांसफर',
-                    'money-transfer-info' => 'फंड्स की एक व्यक्ति या खाते से दूसरे के पास, अक्सर इलेक्ट्रॉनिक रूप में, विभिन्न उद्देश्यों के लिए, जैसे कि लेन-देन या रिमिटेंसेस, के लिए।',
-                    'mailing-address' => 'चेक भेजें को',
-                    'paypal-standard' => 'पेपाल स्टैंडर्ड',
-                    'paypal-standard-info' => 'पेपाल स्टैंडर्ड एक बेसिक पेपाल भुगतान विकल्प है जिसका उपयोग ऑनलाइन व्यवसायों के लिए किया जाता है, जिसके द्वारा ग्राहक अपने पेपाल खातों या क्रेडिट/डेबिट कार्ड का उपयोग करके भुगतान कर सकते हैं।',
-                    'paypal-smart-button' => 'पेपाल',
-                    'paypal-smart-button-info' => 'पेपाल स्मार्ट बटन: वेबसाइट और ऐप्स पर सुरक्षित, बहु-विधि लेन-देन के लिए अनुकूलन बटन के साथ ऑनलाइन भुगतान को सरल बनाता है।',
-                    'client-id' => 'क्लाइंट आईडी',
-                    'client-id-info' => 'टेस्टिंग के लिए "sb" का उपयोग करें।',
-                    'client-secret' => 'क्लाइंट सीक्रेट',
-                    'client-secret-info' => 'अपनी सीक्रेट कुंजी यहां जोड़ें',
-                    'accepted-currencies' => 'स्वीकृत मुद्राएँ',
-                    'accepted-currencies-info' => 'करेंसी कोड को कॉमा द्वारा जोड़ें, उदा. USD, INR,...',
-                    'sandbox' => 'सैंडबॉक्स',
-                    'business-account' => 'व्यापार खाता',
+                    'status'                      => 'स्थिति',
+                    'sort-order'                  => 'क्रमबद्ध क्रम',
+                    'set-order-status'            => 'चालान बनाने के बाद आदेश स्थिति सेट करें',
+                    'pending'                     => 'लंबित',
+                    'paid'                        => 'भुगतान हुआ',
+                    'sandbox'                     => 'सैंडबॉक्स',
+                    'pending-payment'             => 'लंबित भुगतान',
+                    'processing'                  => 'प्रोसेसिंग',
+                    'money-transfer'              => 'मनी ट्रांसफर',
+                    'money-transfer-info'         => 'फंड्स की एक व्यक्ति या खाते से दूसरे के पास, अक्सर इलेक्ट्रॉनिक रूप में, विभिन्न उद्देश्यों के लिए, जैसे कि लेन-देन या रिमिटेंसेस, के लिए।',
+                    'mailing-address'             => 'चेक भेजें को',
+                    'paypal-standard'             => 'पेपाल स्टैंडर्ड',
+                    'paypal-standard-info'        => 'पेपाल स्टैंडर्ड एक बेसिक पेपाल भुगतान विकल्प है जिसका उपयोग ऑनलाइन व्यवसायों के लिए किया जाता है, जिसके द्वारा ग्राहक अपने पेपाल खातों या क्रेडिट/डेबिट कार्ड का उपयोग करके भुगतान कर सकते हैं।',
+                    'paypal-smart-button'         => 'पेपाल',
+                    'paypal-smart-button-info'    => 'पेपाल स्मार्ट बटन: वेबसाइट और ऐप्स पर सुरक्षित, बहु-विधि लेन-देन के लिए अनुकूलन बटन के साथ ऑनलाइन भुगतान को सरल बनाता है।',
+                    'client-id'                   => 'क्लाइंट आईडी',
+                    'client-id-info'              => 'टेस्टिंग के लिए "sb" का उपयोग करें।',
+                    'client-secret'               => 'क्लाइंट सीक्रेट',
+                    'client-secret-info'          => 'अपनी सीक्रेट कुंजी यहां जोड़ें',
+                    'accepted-currencies'         => 'स्वीकृत मुद्राएँ',
+                    'accepted-currencies-info'    => 'करेंसी कोड को कॉमा द्वारा जोड़ें, उदा. USD, INR,...',
+                    'business-account'            => 'व्यापार खाता',
                 ],
-            
+
                 'order-settings' => [
-                    'title' => 'आदेश सेटिंग्स',
-                    'info' => 'आदेश संख्या और न्यूनतम आदेश सेट करें।',
-                    'order-number' => 'आदेश संख्या सेटिंग्स',
-                    'order-number-info' => 'एक विशिष्ट ग्राहक आदेश को पहचानने, संवाद और संदर्भ के लिए एकद्वयी पहचान सौंपा जाने वाला अनूठा पहचान संख्या, खरीदारी प्रक्रिया के दौरान सहायक करता है।',
-                    'order-number-prefix' => 'आदेश संख्या प्रिफिक्स',
-                    'order-number-length' => 'आदेश संख्या लंबाई',
-                    'order-number-suffix' => 'आदेश संख्या सफ़िक्स',
+                    'title'                        => 'आदेश सेटिंग्स',
+                    'info'                         => 'आदेश संख्या और न्यूनतम आदेश सेट करें।',
+                    'order-number'                 => 'आदेश संख्या सेटिंग्स',
+                    'order-number-info'            => 'एक विशिष्ट ग्राहक आदेश को पहचानने, संवाद और संदर्भ के लिए एकद्वयी पहचान सौंपा जाने वाला अनूठा पहचान संख्या, खरीदारी प्रक्रिया के दौरान सहायक करता है।',
+                    'order-number-prefix'          => 'आदेश संख्या प्रिफिक्स',
+                    'order-number-length'          => 'आदेश संख्या लंबाई',
+                    'order-number-suffix'          => 'आदेश संख्या सफ़िक्स',
                     'order-number-generator-class' => 'आदेश संख्या जेनरेटर',
-                    'minimum-order' => 'न्यूनतम आदेश सेटिंग्स',
-                    'minimum-order-info' => 'न्यूनतम आदेश की प्रोसेसिंग के लिए या लाभ प्राप्त करने के लिए आवश्यक योग्यता या मूल्य की घोषणा करने वाले मानों की विन्यासित मानदंड।',
-                    'minimum-order-amount' => 'न्यूनतम आदेश राशि',
+                    'minimum-order'                => 'न्यूनतम आदेश सेटिंग्स',
+                    'minimum-order-info'           => 'न्यूनतम आदेश की प्रोसेसिंग के लिए या लाभ प्राप्त करने के लिए आवश्यक योग्यता या मूल्य की घोषणा करने वाले मानों की विन्यासित मानदंड।',
+                    'minimum-order-amount'         => 'न्यूनतम आदेश राशि',
                 ],
-            
+
                 'invoice-settings' => [
-                    'title' => 'चालान सेटिंग्स',
-                    'info' => 'चालान संख्या, भुगतान शर्तें, चालान स्लिप डिज़ाइन और चालान स्मरण।',
-                    'invoice-number' => 'चालान संख्या सेटिंग्स',
-                    'invoice-number-info' => 'निर्देशों या निर्धारणों की विन्यासित कॉन्फ़िगरेशन जो चालानों को जनरेट करने और आयोजन उद्देश्यों के लिए विशेष पहचान संख्याओं को जनरेट करने और सौंपने के लिए किया जाता है।',
-                    'invoice-number-prefix' => 'चालान संख्या प्रिफिक्स',
-                    'invoice-number-length' => 'चालान संख्या लंबाई',
-                    'invoice-number-suffix' => 'चालान संख्या सफ़िक्स',
+                    'title'                          => 'चालान सेटिंग्स',
+                    'info'                           => 'चालान संख्या, भुगतान शर्तें, चालान स्लिप डिज़ाइन और चालान स्मरण।',
+                    'invoice-number'                 => 'चालान संख्या सेटिंग्स',
+                    'invoice-number-info'            => 'निर्देशों या निर्धारणों की विन्यासित कॉन्फ़िगरेशन जो चालानों को जनरेट करने और आयोजन उद्देश्यों के लिए विशेष पहचान संख्याओं को जनरेट करने और सौंपने के लिए किया जाता है।',
+                    'invoice-number-prefix'          => 'चालान संख्या प्रिफिक्स',
+                    'invoice-number-length'          => 'चालान संख्या लंबाई',
+                    'invoice-number-suffix'          => 'चालान संख्या सफ़िक्स',
                     'invoice-number-generator-class' => 'चालान संख्या जेनरेटर',
-                    'payment-terms' => 'भुगतान शर्तें',
-                    'payment-terms-info' => 'उपभोक्ता से विक्रेता को सामान या सेवाओं के लिए भुगतान कब और कैसे करना चाहिए, इसकी घोषणा करने वाले शर्तों पर मौखिक सहमति।',
-                    'due-duration' => 'द्वितीय काल',
-                    'due-duration-day' => ':due-duration दिन',
-                    'due-duration-days' => ':due-duration दिन',
-                    'invoice-slip-design' => 'चालान स्लिप डिज़ाइन',
-                    'invoice-slip-design-info' => 'एक चालान स्लिप के विजुअल लेआउट और स्वरूपण, व्यापार ब्रांडिंग, आइटमीकरण, मूल्य और भुगतान विवरण के लिए, पेशेवर प्रस्तुति के लिए।',
-                    'logo' => 'लोगो',
-                    'default' => 'डिफ़ॉल्ट',
-                    'invoice-reminders' => 'चालान स्मरण',
-                    'invoice-reminders-info' => 'ग्राहकों को आगामी या लंबित चालानों के भुगतान की याद दिलाने के लिए भेजे जाने वाले स्वच्छंद सूचना या संचालन।',
-                    'maximum-limit-of-reminders' => 'स्मरणों की अधिकतम सीमा',
-                    'interval-between-reminders' => 'स्मरणों के बीच अंतराल',
+                    'payment-terms'                  => 'भुगतान शर्तें',
+                    'payment-terms-info'             => 'उपभोक्ता से विक्रेता को सामान या सेवाओं के लिए भुगतान कब और कैसे करना चाहिए, इसकी घोषणा करने वाले शर्तों पर मौखिक सहमति।',
+                    'due-duration'                   => 'द्वितीय काल',
+                    'due-duration-day'               => ':due-duration दिन',
+                    'due-duration-days'              => ':due-duration दिन',
+                    'invoice-slip-design'            => 'चालान स्लिप डिज़ाइन',
+                    'invoice-slip-design-info'       => 'एक चालान स्लिप के विजुअल लेआउट और स्वरूपण, व्यापार ब्रांडिंग, आइटमीकरण, मूल्य और भुगतान विवरण के लिए, पेशेवर प्रस्तुति के लिए।',
+                    'logo'                           => 'लोगो',
+                    'default'                        => 'डिफ़ॉल्ट',
+                    'invoice-reminders'              => 'चालान स्मरण',
+                    'invoice-reminders-info'         => 'ग्राहकों को आगामी या लंबित चालानों के भुगतान की याद दिलाने के लिए भेजे जाने वाले स्वच्छंद सूचना या संचालन।',
+                    'maximum-limit-of-reminders'     => 'स्मरणों की अधिकतम सीमा',
+                    'interval-between-reminders'     => 'स्मरणों के बीच अंतराल',
                 ],
             ],
-            
         ],
     ],
 
@@ -2951,7 +2899,7 @@ return [
                 'my-account'    => 'मेरा खाता',
                 'logout'        => 'लॉगआउट',
                 'visit-shop'    => 'दुकान पर जाएं',
-        
+
                 'mega-search' => [
                     'title'                           => 'मेगा सर्च',
                     'products'                        => 'उत्पाद',
@@ -2969,7 +2917,7 @@ return [
                     'explore-all-customers'           => 'सभी ग्राहकों का अन्वेषण करें',
                 ],
             ],
-        
+
             'sidebar' => [
                 'collapse'                 => 'संकुचित करें',
                 'dashboard'                => 'डैशबोर्ड',
@@ -3012,7 +2960,7 @@ return [
                 'mode'                     => 'डार्क मोड',
             ],
         ],
-        
+
         'datagrid' => [
             'toolbar' => [
                 'mass-actions' => [
@@ -3020,24 +2968,24 @@ return [
                     'select-option' => 'विकल्प चुनें',
                     'submit'        => 'प्रस्तुत करें',
                 ],
-        
+
                 'filter' => [
                     'title' => 'फ़िल्टर',
                 ],
-        
+
                 'search' => [
                     'title' => 'खोजें',
                 ],
             ],
-        
+
             'filters' => [
                 'title' => 'फ़िल्टर लागू करें',
-        
+
                 'custom-filters' => [
                     'title'     => 'कस्टम फ़िल्टर',
                     'clear-all' => 'सभी को हटाएं',
                 ],
-        
+
                 'date-options' => [
                     'today'             => 'आज',
                     'yesterday'         => 'कल',
@@ -3049,13 +2997,13 @@ return [
                     'this-year'         => 'इस साल',
                 ],
             ],
-        
+
             'table' => [
                 'actions'              => 'क्रियाएँ',
                 'no-records-available' => 'कोई रिकॉर्ड उपलब्ध नहीं हैं.',
             ],
         ],
-        
+
         'products' => [
             'search' => [
                 'title'       => 'उत्पाद चुनें',
@@ -3065,7 +3013,7 @@ return [
                 'sku'         => 'SKU - :sku',
                 'qty'         => ':qty उपलब्ध हैं',
             ],
-        ],        
+        ],
     ],
 
     'acl' => [
@@ -3123,33 +3071,33 @@ return [
         'go-back'   => 'वापस जाएं',
         'dashboard' => 'डैशबोर्ड',
         'support'   => 'यदि समस्या बनी रहती है, तो हमसे संपर्क करें <a href=":link" class=":class">:email</a> सहायता के लिए।',
-    
+
         '404' => [
             'title'       => '404 पृष्ठ नहीं मिला',
             'description' => 'ओह! पृष्ठ अब अवकाश पर है। ऐसा लगता है कि हम वह नहीं ढूंढ पा रहे हैं जिसे आप खोज रहे थे।',
         ],
-    
+
         '401' => [
             'title'       => '401 अनधिकृत',
             'description' => 'ओह! लगता है कि आपको इस पृष्ठ तक पहुँचने की अनुमति नहीं है। ऐसा लगता है कि आपके पास आवश्यक प्रमाण पत्र गुम हो गए हैं।',
         ],
-    
+
         '403' => [
             'title'       => '403 प्रतिबंधित',
             'description' => 'ओह! यह पृष्ठ प्रतिबंधित है। ऐसा लगता है कि आपके पास इस सामग्री को देखने के आवश्यक अनुमतियाँ नहीं हैं।',
         ],
-    
+
         '500' => [
             'title'       => '500 आंतरिक सर्वर त्रुटि',
             'description' => 'ओह! कुछ गड़बड़ हो गई है। ऐसा लगता है कि हमें आपके द्वारा खोजे जा रहे पृष्ठ को लोड करने में कुछ समस्या हो रही है।',
         ],
-    
+
         '503' => [
             'title'       => '503 सेवा अनुपलब्ध',
             'description' => 'ओह! ऐसा लगता है कि हम अस्थायी रूप से नीचे बैठ गए हैं। कृपया थोड़ी देर में वापस आएं।',
-        ]
+        ],
     ],
-    
+
     'export' => [
         'export'           => 'निर्यात',
         'import'           => 'आयात',
@@ -3168,12 +3116,12 @@ return [
         'no-records'       => 'निर्यात के लिए कुछ नहीं है',
         'illegal-format'   => 'त्रुटि! इस प्रकार का स्वरूप समर्थित नहीं है या यह अवैध स्वरूप है।',
     ],
-    
+
     'validations' => [
         'slug-being-used' => 'इस स्लग का उपयोग या तो श्रेणियों में हो रहा है या उत्पादों में हो रहा है।',
         'slug-reserved'   => 'इस स्लग को सुरक्षित किया गया है।',
     ],
-    
+
     'footer' => [
         'copy-right' => 'प्रद्वार <a href="https://bagisto.com/" target="_blank">Bagisto</a>, एक समुदाय परियोजना <a href="https://webkul.com/" target="_blank">Webkul</a> द्वारा',
     ],
@@ -3181,7 +3129,7 @@ return [
     'emails' => [
         'dear'   => 'प्रिय :customer_name',
         'thanks' => 'यदि आपको किसी प्रकार की मदद चाहिए, तो कृपया हमसे <a href=":link" style=":style">:email</a> पर संपर्क करें।<br/>धन्यवाद!',
-    
+
         'orders' => [
             'created' => [
                 'subject'  => 'नया ऑर्डर पुष्टि',
@@ -3189,42 +3137,42 @@ return [
                 'greeting' => 'आपके पास एक नया ऑर्डर :order_id :created_at को रखा गया है',
                 'summary'  => 'ऑर्डर का संक्षेप',
             ],
-    
+
             'invoiced' => [
                 'subject'  => 'नया चालान पुष्टि',
                 'title'    => 'चालान पुष्टि!',
                 'greeting' => 'आपका चालान #:invoice_id ऑर्डर :order_id के लिए बनाया गया है :created_at को',
                 'summary'  => 'चालान का संक्षेप',
             ],
-    
+
             'shipped' => [
                 'subject'  => 'नया वितरित ऑर्डर पुष्टि',
                 'title'    => 'ऑर्डर वितरित हो गया!',
                 'greeting' => 'आपने ऑर्डर :order_id को भेज दिया है जो :created_at को रखा गया था',
                 'summary'  => 'वितरण का संक्षेप',
             ],
-    
+
             'inventory-source' => [
                 'subject'  => 'नया वितरण पुष्टि',
                 'title'    => 'ऑर्डर वितरित हो गया!',
                 'greeting' => 'आपने ऑर्डर :order_id को भेज दिया है जो :created_at को रखा गया था',
                 'summary'  => 'वितरण का संक्षेप',
             ],
-    
+
             'refunded' => [
                 'subject'  => 'नया वापसी पुष्टि',
                 'title'    => 'ऑर्डर वापसी कर दिया गया है!',
                 'greeting' => 'आपने ऑर्डर :order_id के लिए वापसी की है जो :created_at को रखा गया था',
                 'summary'  => 'वापसी का संक्षेप',
             ],
-    
+
             'canceled' => [
                 'subject'  => 'नया ऑर्डर रद्द हो गया है',
                 'title'    => 'ऑर्डर रद्द हो गया!',
                 'greeting' => 'आपने ऑर्डर :order_id को रद्द कर दिया है जो :created_at को रखा गया था',
                 'summary'  => 'ऑर्डर का संक्षेप',
             ],
-    
+
             'shipping-address'  => 'शिपिंग पता',
             'billing-address'   => 'बिलिंग पता',
             'contact'           => 'संपर्क',
