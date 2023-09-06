@@ -774,13 +774,6 @@ return [
                         ],
                     ],
                 ],
-        
-                'create-success'           => 'Produit créé avec succès',
-                'delete-success'           => 'Produit supprimé avec succès',
-                'delete-failed'            => 'Échec de la suppression du produit',
-                'product-copied'           => 'Produit copié avec succès',
-                'saved-inventory-message'  => 'Produit enregistré avec succès',
-                'update-success'           => 'Produit mis à jour avec succès',
             ],
 
             'create-success'          => 'Produit créé avec succès',
@@ -1666,7 +1659,6 @@ return [
                     'attribute-name-parent-only'                => 'Nom de l’attribut Parent Uniquement',
                     'create-success'                            => 'Règle de panier créée avec succès',
                     'choose-condition-to-add'                   => 'Choisissez la condition à ajouter',
-                    
                 ],
 
                 'edit' => [
