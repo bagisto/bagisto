@@ -337,7 +337,7 @@
                                     <img 
                                         class="w-[120px] h-[120px]" 
                                         src="{{ bagisto_asset('images/icon-add-product.svg') }}" 
-                                        alt="{{ trans('admin::app.catalog.attributes.create.add-attribute-options') }}"
+                                        alt="@lang('admin::app.catalog.attributes.create.add-attribute-options')"
                                     />
                                     
                                     <!-- Add Attribute Options Information -->
