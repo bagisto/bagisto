@@ -118,7 +118,7 @@ class OrderDataGrid extends DataGrid
             'label'      => trans('admin::app.sales.orders.index.datagrid.pay-via'),
             'type'       => 'string',
             'searchable' => false,
-            'filterable' => true,
+            'filterable' => false,
             'sortable'   => false,
             'closure'    => function ($row) {
                 return core()->getConfigData('sales.paymentmethods.' . $row->method . '.title');
@@ -157,7 +157,7 @@ class OrderDataGrid extends DataGrid
             'label'      => trans('admin::app.sales.orders.index.datagrid.location'),
             'type'       => 'string',
             'searchable' => false,
-            'filterable' => true,
+            'filterable' => false,
             'sortable'   => false,
         ]);
 
