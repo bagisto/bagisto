@@ -170,7 +170,7 @@
                                                 class="hidden peer"
                                                 v-model="isNullOptionChecked"
                                                 @click="$refs.addOptionsRow.toggle()"
-                                            >
+                                            />
 
                                             <label
                                                 for="empty_option"
@@ -189,7 +189,7 @@
                                 </div>
 
                                 <!-- Table Information -->
-                                <div class="mt-[15px] overflow-auto">    
+                                <div class="mt-[15px] overflow-auto">
                                     <x-admin::table class="w-full text-left">
                                         <x-admin::table.thead class="text-[14px] font-medium">
                                             <x-admin::table.thead.tr>
@@ -251,7 +251,7 @@
                                                                 src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
                                                                 :ref="'image_' + element.params.id"
                                                                 class="h-[50px] w-[50px]"
-                                                            >
+                                                            />
 
                                                             <input
                                                                 type="file"
@@ -337,8 +337,8 @@
                                     <img 
                                         class="w-[120px] h-[120px]" 
                                         src="{{ bagisto_asset('images/icon-add-product.svg') }}" 
-                                        alt="@lang('admin::app.catalog.attributes.create.add-attribute-options')"
-                                    >
+                                        alt="{{ trans('admin::app.catalog.attributes.create.add-attribute-options') }}"
+                                    />
                                     
                                     <!-- Add Attribute Options Information -->
                                     <div class="flex flex-col items-center">
@@ -436,7 +436,6 @@
                                     <x-admin::form.control-group.control
                                         type="switch"
                                         name="enable_wysiwyg"
-                                        class="cursor-pointer"
                                         value="1"
                                         :label="trans('admin::app.catalog.attributes.create.enable-wysiwyg')"
                                     >
@@ -484,7 +483,6 @@
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
-
 
                                 <!-- REGEX -->
                                 <x-admin::form.control-group
@@ -577,7 +575,7 @@
                                             || attributeType == 'select' || attributeType == 'multiselect' 
                                             ? false : true
                                         "
-                                    >
+                                    />
             
                                     <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"></span>
 
