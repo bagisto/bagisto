@@ -104,6 +104,10 @@
     "file": "assets/error-4179d5c7.svg",
     "src": "src/Resources/assets/images/error.svg"
   },
+  "src/Resources/assets/images/favicon.ico": {
+    "file": "assets/favicon-a4003609.ico",
+    "src": "src/Resources/assets/images/favicon.ico"
+  },
   "src/Resources/assets/images/group.png": {
     "file": "assets/group-a995d3da.png",
     "src": "src/Resources/assets/images/group.png"
