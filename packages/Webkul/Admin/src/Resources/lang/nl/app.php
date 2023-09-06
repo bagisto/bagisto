@@ -2614,6 +2614,11 @@ return [
                     'custom-scripts-info' => 'Aangepaste scripts zijn gepersonaliseerde stukjes code die zijn gemaakt om specifieke functies of kenmerken aan software toe te voegen en de mogelijkheden ervan op unieke wijze te verbeteren.',
                     'custom-css'          => 'Aangepaste CSS',
                     'custom-javascript'   => 'Aangepaste JavaScript',
+                    'compare-options'     => 'Vergelijkingsmogelijkheden',
+                    'wishlist-options'    => 'Wenslijstopties',
+                    'image-search-option' => 'Optie voor afbeeldingen zoeken',
+                    'settings-title'      => 'Instellingen',
+                    'settings-title-info' => 'Met instellingen worden configureerbare keuzes bedoeld die bepalen hoe een systeem, toepassing of apparaat zich gedraagt, afgestemd op de voorkeuren en eisen van de gebruiker.'
                 ],
 
                 'design' => [

@@ -2614,6 +2614,11 @@ return [
                     'custom-scripts-info'   => 'Gli script personalizzati sono pezzi di codice personalizzati creati per aggiungere funzioni o caratteristiche specifiche al software, migliorandone le capacità in modo unico.',
                     'custom-css'            => 'CSS Personalizzato',
                     'custom-javascript'     => 'Javascript Personalizzato',
+                    'compare-options'     => 'Opzioni di confronto',
+                    'wishlist-options'    => 'Opzioni della lista dei desideri',
+                    'image-search-option' => 'Opzione di ricerca delle immagini',
+                    'settings-title'      => 'Impostazioni',
+                    'settings-title-info' => 'Le impostazioni si riferiscono a scelte configurabili che controllano il comportamento di un sistema, di un’applicazione o di un dispositivo, personalizzate in base alle preferenze e ai requisiti dell’utente.'
                 ],
             
                 'design' => [

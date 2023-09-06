@@ -1,11 +1,6 @@
 <?php
 
 return [
-    'configurations' => [
-        'settings-title'      => 'Configuraciones',
-        'settings-title-info' => 'Las configuraciones se refieren a las opciones configurables que controlan el comportamiento de un sistema, aplicación o dispositivo, adaptadas a las preferencias y requisitos del usuario.',
-    ],
-
     'customers' => [
         'forgot-password' => [
             'title'                => 'Recuperar contraseña',
@@ -234,7 +229,7 @@ return [
                 ],
             ],
 
-            'reviews'    => [
+            'reviews' => [
                 'title'        => 'Opiniones',
                 'empty-review' => 'Todavía no ha revisado ningún producto',
             ],
@@ -286,7 +281,6 @@ return [
                 'wishlist'      => 'Wunschliste',
                 'compare'       => 'Vergleichen',
                 'orders'        => 'Bestellungen',
-                'cart'          => 'Warenkorb',
                 'logout'        => 'Abmelden',
                 'search-text'   => 'Produkte hier suchen',
                 'search'        => 'Suchen',
@@ -449,11 +443,6 @@ return [
                 'attachments' => 'Anhänge',
             ],
         ],
-
-        'configurations' => [
-            'compare_options'  => 'Vergleichsoptionen',
-            'wishlist-options' => 'Wunschlisteneinstellungen',
-        ],
     ],
 
     'categories' => [
@@ -475,13 +464,10 @@ return [
     ],
 
     'search' => [
-        'title'          => 'Suchergebnisse für : :query',
-        'configurations' => [
-            'image-search-option' => 'Bildersuche-Option',
-        ],
+        'title' => 'Suchergebnisse für : :query',
     ],
 
-    'compare'  => [
+    'compare' => [
         'product-compare'    => 'Produktvergleich',
         'delete-all'         => 'Alles löschen',
         'empty-text'         => 'Sie haben keine Artikel in Ihrer Vergleichsliste',
@@ -574,7 +560,6 @@ return [
                 'grand-total'         => 'Gesamtsumme',
                 'place-order'         => 'Bestellung aufgeben',
                 'proceed-to-checkout' => 'Zur Kasse gehen',
-
             ],
         ],
 

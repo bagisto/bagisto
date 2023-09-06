@@ -1,11 +1,6 @@
 <?php
 
 return [
-    'configurations' => [
-        'settings-title'      => 'Ayarlar',
-        'settings-title-info' => 'Ayarlar, kullanıcı tercihlerine ve gereksinimlerine uygun olarak nasıl davrandığını kontrol eden yapılandırılabilir seçenekleri ifade eder.',
-    ],
-
     'customers' => [
         'forgot-password' => [
             'title'                => 'Parolayı Kurtar',
@@ -286,7 +281,6 @@ return [
                 'wishlist'      => 'İstek Listesi',
                 'compare'       => 'Karşılaştır',
                 'orders'        => 'Siparişler',
-                'cart'          => 'Sepet',
                 'logout'        => 'Çıkış Yap',
                 'search-text'   => 'Ürünleri burada arayın',
                 'search'        => 'Ara',
@@ -449,11 +443,6 @@ return [
                 'attachments' => 'Ekler',
             ],
         ],
-
-        'configurations' => [
-            'compare_options'  => 'Karşılaştırma seçenekleri',
-            'wishlist-options' => 'İstek listesi seçenekleri',
-        ],
     ],
 
     'categories' => [
@@ -475,10 +464,7 @@ return [
     ],
 
     'search' => [
-        'title'          => ':query için arama sonuçları',
-        'configurations' => [
-            'image-search-option' => 'Resim Arama Seçeneği',
-        ],
+        'title' => ':query için arama sonuçları',
     ],
 
     'compare' => [

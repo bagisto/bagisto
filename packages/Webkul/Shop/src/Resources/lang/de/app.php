@@ -1,11 +1,6 @@
 <?php
 
 return [
-    'configurations' => [
-        'settings-title'      => 'Einstellungen',
-        'settings-title-info' => 'Einstellungen beziehen sich auf konfigurierbare Optionen, die steuern, wie sich ein System, eine Anwendung oder ein Gerät verhält, entsprechend den Benutzerpräferenzen und Anforderungen.',
-    ],
-
     'customers' => [
         'forgot-password' => [
             'title'                => 'Passwort wiederherstellen',
@@ -286,7 +281,6 @@ return [
                 'wishlist'      => 'Wunschliste',
                 'compare'       => 'Vergleichen',
                 'orders'        => 'Bestellungen',
-                'cart'          => 'Warenkorb',
                 'logout'        => 'Abmelden',
                 'search-text'   => 'Produkte hier suchen',
                 'search'        => 'Suche',
@@ -449,11 +443,6 @@ return [
                 'attachments' => 'Anhänge',
             ],
         ],
-
-        'configurations' => [
-            'compare_options'  => 'Vergleichsoptionen',
-            'wishlist-options' => 'Wunschliste-Optionen',
-        ],
     ],
 
     'categories' => [
@@ -475,10 +464,8 @@ return [
     ],
 
     'search' => [
-        'title'          => 'Suchergebnisse für : :query',
-        'configurations' => [
-            'image-search-option' => 'Bildsuche-Option',
-        ],
+        'title' => 'Suchergebnisse für : :query',
+
     ],
 
     'compare' => [

@@ -2615,6 +2615,11 @@ return [
                     'custom-scripts-info' => 'カスタムスクリプトは、ソフトウェアに特定の機能や機能を追加するために作成された個別のコードの一部で、その機能を一意に強化します。',
                     'custom-css'          => 'カスタムCSS',
                     'custom-javascript'   => 'カスタムJavascript',
+                    'compare-options'     => '比較オプション',
+                    'wishlist-options'    => 'ほしい物リストオプション',
+                    'image-search-option' => '画像検索オプション',
+                    'settings-title'      => '設定',
+                    'settings-title-info' => '設定は、システム、アプリケーション、またはデバイスの挙動を制御する構成可能な選択肢を指し、ユーザーの好みや要件に合わせて調整されます。'
                 ],
 
                 'design' => [

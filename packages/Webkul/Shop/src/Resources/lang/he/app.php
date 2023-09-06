@@ -1,11 +1,6 @@
 <?php
 
 return [
-    'configurations' => [
-        'settings-title'      => 'הגדרות',
-        'settings-title-info' => 'הגדרות מתייחסות לבחירות הניתנות להגדרה שמשליטות באופן כיצד מערכת, אפליקציה או מכשיר פועלים, ומותאמות להעדפות ולדרישות של המשתמש.',
-    ],
-
     'customers' => [
         'forgot-password' => [
             'title'                => 'שחזור סיסמה',
@@ -264,7 +259,6 @@ return [
                 'removed'            => 'הפריט הוסר בהצלחה מרשימת המשאלות',
                 'remove-fail'        => 'לא ניתן להסיר את הפריט מרשימת המשאלות, אנא נסה שוב מאוחר יותר.',
                 'moved'              => 'הפריט הועבר בהצלחה לעגלת הקניות',
-                'missing_options'    => 'אפשרויות חסרות עבור מוצר זה.',
                 'product-removed'    => 'המוצר אינו זמין יותר מאחר ונמחק על ידי המנהל',
                 'remove-all-success' => 'כל הפריטים מרשימת המשאלות שלך הוסרו בהצלחה',
                 'see-details'        => 'ראה פרטים',
@@ -287,7 +281,6 @@ return [
                 'wishlist'      => 'רשימת משאלות',
                 'compare'       => 'השוואה',
                 'orders'        => 'הזמנות',
-                'cart'          => 'עגלה',
                 'logout'        => 'התנתק',
                 'search-text'   => 'חפש מוצרים כאן',
                 'search'        => 'חיפוש',
@@ -355,7 +348,7 @@ return [
             ],
         ],
 
-        'products'   => [
+        'products' => [
             'card' => [
                 'new'                => 'חדש',
                 'sale'               => 'מבצע',
@@ -450,11 +443,6 @@ return [
                 'attachments' => 'קבצים מצורפים',
             ],
         ],
-
-        'configurations' => [
-            'compare_options'  => 'אפשרויות השוואה',
-            'wishlist-options' => 'אפשרויות רשימת משאלות',
-        ],
     ],
 
     'categories' => [
@@ -476,10 +464,7 @@ return [
     ],
 
     'search' => [
-        'title'          => 'תוצאות חיפוש עבור : :query',
-        'configurations' => [
-            'image-search-option' => 'אפשרות חיפוש תמונה',
-        ],
+        'title' => 'תוצאות חיפוש עבור : :query',
     ],
 
     'compare'  => [
@@ -575,7 +560,6 @@ return [
                 'grand-total'         => 'סך הכל לתשלום',
                 'place-order'         => 'בצע הזמנה',
                 'proceed-to-checkout' => 'המשך לתשלום',
-
             ],
         ],
 

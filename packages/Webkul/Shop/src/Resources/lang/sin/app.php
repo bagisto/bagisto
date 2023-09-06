@@ -1,11 +1,6 @@
 <?php
 
 return [
-    'configurations' => [
-        'settings-title'      => 'සැකසුම්',
-        'settings-title-info' => 'සැකසුම් යනු පද්ධතිය, යෙදුම, හෝ උපාංගය යෙදුම ක්‍රමයක්, පද්ධතියේ සංකීර්ණයට හෝ පද්ධතියේ ප්‍රවේශයට අදාළ විකල්ප පරිපාලකවරුට හෝ අවිස්සාවට පෙනු කළ හැකිය.',
-    ],
-
     'customers' => [
         'forgot-password' => [
             'title'                => 'මුර අමතකය පිළිබඳ',
@@ -286,7 +281,6 @@ return [
                 'wishlist'      => 'කැමරාට්',
                 'compare'       => 'කොම්පේයියාරය',
                 'orders'        => 'ඇණවුම්',
-                'cart'          => 'කාට්',
                 'logout'        => 'ඉවත් වන්න',
                 'search-text'   => 'මොදර උද්මාදරාත්මක ගොනුවක් සෙවීම',
                 'search'        => 'සෙවීම',
@@ -449,11 +443,6 @@ return [
                 'attachments' => 'ඇදවුම් මොතා',
             ],
         ],
-
-        'configurations' => [
-            'compare_options'     => 'සමීක්ඔණුවක්',
-            'wishlist-options'    => 'කැමරාට් විකුණුම්',
-        ],
     ],
 
     'categories' => [
@@ -475,10 +464,7 @@ return [
     ],
 
     'search' => [
-        'title'          => 'සෙවීම ප්රතිඵල : :query',
-        'configurations' => [
-            'image-search-option' => 'රූප සෙවීමේ භාවිතය',
-        ],
+        'title' => 'සෙවීම ප්රතිඵල : :query',
     ],
 
     'compare'  => [

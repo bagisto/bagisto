@@ -1,11 +1,6 @@
 <?php
 
 return [
-    'configurations' => [
-        'settings-title'      => 'الإعدادات',
-        'settings-title-info' => 'الإعدادات تشير إلى الخيارات القابلة للتكوين التي تتحكم في كيفية تصرف النظام أو التطبيق أو الجهاز، وتتماشى مع تفضيلات المستخدم ومتطلباته.',
-    ],
-
     'customers' => [
         'forgot-password' => [
             'title'                => 'استعادة كلمة المرور',
@@ -286,7 +281,6 @@ return [
                 'wishlist'      => 'قائمة المفضلة',
                 'compare'       => 'قارن',
                 'orders'        => 'الطلبات',
-                'cart'          => 'العربة',
                 'logout'        => 'تسجيل الخروج',
                 'search-text'   => 'ابحث عن المنتجات هنا',
                 'search'        => 'بحث',
@@ -449,11 +443,6 @@ return [
                 'attachments' => 'المرفقات',
             ],
         ],
-
-        'configurations' => [
-            'compare_options'  => 'خيارات المقارنة',
-            'wishlist-options' => 'خيارات القائمة المفضلة',
-        ],
     ],
 
     'categories' => [
@@ -475,10 +464,7 @@ return [
     ],
 
     'search' => [
-        'title'          => 'نتائج البحث عن: :query',
-        'configurations' => [
-            'image-search-option' => 'خيار البحث بالصورة',
-        ],
+        'title' => 'نتائج البحث عن: :query',
     ],
 
     'compare' => [
@@ -538,7 +524,7 @@ return [
                 'move-to-wishlist'         => 'نقل إلى قائمة الأماني',
             ],
 
-            'coupon'   => [
+            'coupon' => [
                 'code'            => 'كود الكوبون',
                 'applied'         => 'تم تطبيق الكوبون',
                 'apply'           => 'تطبيق الكوبون',

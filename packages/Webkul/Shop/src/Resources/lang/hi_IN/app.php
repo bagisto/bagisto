@@ -1,11 +1,6 @@
 <?php
 
 return [
-    'configurations' => [
-        'settings-title'      => 'सेटिंग्स',
-        'settings-title-info' => 'सेटिंग्स उन विन्यासनीय विकल्पों को सूचित करते हैं जो एक सिस्टम, एप्लिकेशन या डिवाइस के व्यवहार को नियंत्रित करते हैं, जो उपयोगकर्ता की पसंद और आवश्यकताओं के अनुसार तैयार किए जाते हैं।',
-    ],
-
     'customers' => [
         'forgot-password' => [
             'title'                => 'पासवर्ड बहाल करें',
@@ -286,7 +281,6 @@ return [
                 'wishlist'      => 'इच्छा सूची',
                 'compare'       => 'तुलना करें',
                 'orders'        => 'आर्डर्स',
-                'cart'          => 'कार्ट',
                 'logout'        => 'लॉगआउट',
                 'search-text'   => 'यहाँ उत्पाद खोजें',
                 'search'        => 'खोजें',
@@ -449,11 +443,6 @@ return [
                 'attachments' => 'अटैचमेंट्स',
             ],
         ],
-
-        'configurations' => [
-            'compare_options'  => 'तुलना विकल्प',
-            'wishlist-options' => 'इच्छा सूची विकल्प',
-        ],
     ],
 
     'categories' => [
@@ -475,10 +464,7 @@ return [
     ],
 
     'search' => [
-        'title'          => 'खोज परिणाम : :query',
-        'configurations' => [
-            'image-search-option' => 'छवि खोज विकल्प',
-        ],
+        'title' => 'खोज परिणाम : :query',
     ],
 
     'compare' => [

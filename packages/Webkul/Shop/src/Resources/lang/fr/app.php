@@ -1,11 +1,6 @@
 <?php
 
 return [
-    'configurations' => [
-        'settings-title'      => 'Paramètres',
-        'settings-title-info' => 'Les paramètres font référence aux choix configurables qui contrôlent le comportement d’un système, d’une application ou d’un appareil, adaptés aux préférences et aux besoins de l’utilisateur.',
-    ],
-
     'customers' => [
         'forgot-password' => [
             'title'                => 'Récupérer le mot de passe',
@@ -286,7 +281,6 @@ return [
                 'wishlist'      => 'Liste de souhaits',
                 'compare'       => 'Comparer',
                 'orders'        => 'Commandes',
-                'cart'          => 'Panier',
                 'logout'        => 'Déconnexion',
                 'search-text'   => 'Recherchez des produits ici',
                 'search'        => 'Rechercher',
@@ -449,11 +443,6 @@ return [
                 'attachments' => 'Pièces jointes',
             ],
         ],
-
-        'configurations' => [
-            'compare_options'  => 'Options de comparaison',
-            'wishlist-options' => 'Options de liste de souhaits',
-        ],
     ],
 
     'categories' => [
@@ -475,10 +464,7 @@ return [
     ],
 
     'search' => [
-        'title'          => 'Résultats de recherche pour : :query',
-        'configurations' => [
-            'image-search-option' => 'Option de recherche d\'images',
-        ],
+        'title' => 'Résultats de recherche pour : :query',
     ],
 
     'compare' => [

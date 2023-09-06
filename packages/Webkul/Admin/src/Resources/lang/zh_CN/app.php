@@ -2615,6 +2615,11 @@ return [
                     'custom-scripts-info' => '自定义脚本是用于向软件添加特定功能或特性以增强其独特能力的个性化代码块。',
                     'custom-css'          => '自定义CSS',
                     'custom-javascript'   => '自定义Javascript',
+                    'compare-options'     => '比较选项',
+                    'wishlist-options'    => '愿望清单选项',
+                    'image-search-option' => '图像搜索选项',
+                    'settings-title'      => '设置',
+                    'settings-title-info' => '设置指的是可配置的选择，用于控制系统、应用程序或设备的行为方式，根据用户的偏好和需求进行定制。'
                 ],
 
                 'design' => [

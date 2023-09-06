@@ -2616,6 +2616,11 @@ return [
                     'custom-scripts-info' => 'Benutzerdefinierte Skripte sind personalisierte Codefragmente, die erstellt wurden, um bestimmte Funktionen oder Features zur Software hinzuzufügen und ihre Fähigkeiten einzigartig zu erweitern.',
                     'custom-css'          => 'Benutzerdefiniertes CSS',
                     'custom-javascript'   => 'Benutzerdefiniertes JavaScript',
+                    'compare-options'     => 'Vergleichsoptionen',
+                    'wishlist-options'    => 'Wunschliste-Optionen',
+                    'image-search-option' => 'Bildersuche-Option',
+                    'settings-title'      => 'Einstellungen',
+                    'settings-title-info' => 'Einstellungen beziehen sich auf konfigurierbare Auswahlmöglichkeiten, die steuern, wie sich ein System, eine Anwendung oder ein Gerät verhält, angepasst an die Benutzerpräferenzen und Anforderungen.'
                 ],
 
                 'design' => [

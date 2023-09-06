@@ -1,11 +1,6 @@
 <?php
 
 return [
-    'configurations' => [
-        'settings-title'      => 'Ustawienia',
-        'settings-title-info' => 'Ustawienia odnoszą się do konfigurowalnych opcji kontrolujących zachowanie systemu, aplikacji lub urządzenia, dostosowane do preferencji i wymagań użytkownika.',
-    ],
-
     'customers' => [
         'forgot-password' => [
             'title'                => 'Odzyskaj hasło',
@@ -286,7 +281,6 @@ return [
                 'wishlist'      => 'Lista Życzeń',
                 'compare'       => 'Porównaj',
                 'orders'        => 'Zamówienia',
-                'cart'          => 'Koszyk',
                 'logout'        => 'Wyloguj się',
                 'search-text'   => 'Szukaj produktów tutaj',
                 'search'        => 'Szukaj',
@@ -449,11 +443,6 @@ return [
                 'attachments' => 'Załączniki',
             ],
         ],
-
-        'configurations' => [
-            'compare_options'  => 'Opcje porównywania',
-            'wishlist-options' => 'Opcje listy życzeń',
-        ],
     ],
 
     'categories' => [
@@ -475,10 +464,7 @@ return [
     ],
 
     'search' => [
-        'title'          => 'Wyniki wyszukiwania dla : :query',
-        'configurations' => [
-            'image-search-option' => 'Opcja wyszukiwania obrazem',
-        ],
+        'title' => 'Wyniki wyszukiwania dla : :query',
     ],
 
     'compare'  => [

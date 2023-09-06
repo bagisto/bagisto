@@ -2615,6 +2615,11 @@ return [
                     'custom-scripts-info' => 'Les scripts personnalisés sont des morceaux de code personnalisés créés pour ajouter des fonctions ou des fonctionnalités spécifiques à un logiciel, améliorant ainsi ses capacités de manière unique.',
                     'custom-css'          => 'CSS personnalisé',
                     'custom-javascript'   => 'Javascript personnalisé',
+                    'compare-options'     => 'Opções de comparação',
+                    'wishlist-options'    => 'Opções de lista de desejos',
+                    'image-search-option' => 'Opção de busca por imagens',
+                    'settings-title'      => 'Configurações',
+                    'settings-title-info' => 'Configurações referem-se a escolhas configuráveis que controlam como um sistema, aplicativo ou dispositivo se comporta, adaptadas às preferências e requisitos do usuário.'
                 ],
 
                 'design' => [
