@@ -18,7 +18,7 @@
         <x-admin::form.control-group.label
             :for="$name"
         >
-            @lang$field['title'])
+            @lang($field['title'])
         </x-admin::form.control-group.label>
         
         <x-admin::form.control-group.label
