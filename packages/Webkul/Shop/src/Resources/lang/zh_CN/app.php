@@ -476,7 +476,7 @@ return [
         'none'                     => '没有任何',
         'available-for-order'      => '可订购',
         'settings'                 => '设置',
-        'compare_options'          => '比较选项',
+        'compare-options'          => '比较选项',
         'wishlist-options'         => '愿望清单选项',
         'offers'                   => '购买 :qty 为了 :price 每个和保存 :discount%',
         'tax-inclusive'            => '包括所有税费',

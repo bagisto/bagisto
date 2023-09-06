@@ -450,7 +450,7 @@ return [
         ],
 
         'configurations' => [
-            'compare_options'  => 'তুলনা বিকল্প',
+            'compare-options'  => 'তুলনা বিকল্প',
             'wishlist-options' => 'ইচ্ছেসূচি বিকল্প',
         ],
     ],

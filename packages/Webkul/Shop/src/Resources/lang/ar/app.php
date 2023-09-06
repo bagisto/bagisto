@@ -451,7 +451,7 @@ return [
         ],
 
         'configurations' => [
-            'compare_options'  => 'خيارات المقارنة',
+            'compare-options'  => 'خيارات المقارنة',
             'wishlist-options' => 'خيارات القائمة المفضلة',
         ],
     ],

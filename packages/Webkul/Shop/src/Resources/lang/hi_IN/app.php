@@ -451,7 +451,7 @@ return [
         ],
 
         'configurations' => [
-            'compare_options'  => 'तुलना विकल्प',
+            'compare-options'  => 'तुलना विकल्प',
             'wishlist-options' => 'इच्छा सूची विकल्प',
         ],
     ],

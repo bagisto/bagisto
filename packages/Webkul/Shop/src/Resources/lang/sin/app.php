@@ -451,7 +451,7 @@ return [
         ],
 
         'configurations' => [
-            'compare_options'     => 'සමීක්ඔණුවක්',
+            'compare-options'     => 'සමීක්ඔණුවක්',
             'wishlist-options'    => 'කැමරාට් විකුණුම්',
         ],
     ],

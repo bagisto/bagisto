@@ -452,7 +452,7 @@ return [
         ],
 
         'configurations' => [
-            'compare_options'  => 'אפשרויות השוואה',
+            'compare-options'  => 'אפשרויות השוואה',
             'wishlist-options' => 'אפשרויות רשימת משאלות',
         ],
     ],
