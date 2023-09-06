@@ -121,15 +121,16 @@ class UserController extends Controller
 
         $admin = $this->adminRepository->update($data, $id);
 
-        $previousImage = $admin->image;
-
         if (request()->hasFile('image')) {
             $admin->image = current(request()->file('image'))->store('admins/' . $admin->id);
-
         } else {
-            $admin->image = null;
+            if (! request()->has('image.image')) {
+                if (! empty(request()->input('image.image'))) {
+                    Storage::delete($admin->image);    
+                }
 
-            Storage::delete((string)$previousImage);
+                $admin->image = null;
+            }
         }
 
         $admin->save();

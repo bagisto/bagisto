@@ -340,27 +340,34 @@
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
 
-                                    <!-- Status -->
-                                    <x-admin::form.control-group class="w-full flex-1 !mb-[0px]">
-                                        <x-admin::form.control-group.label>
-                                            @lang('admin::app.settings.users.index.create.status')
-                                        </x-admin::form.control-group.label>
+                                    <template v-if="currentUserId != data.user.id">
+                                        <x-admin::form.control-group class="w-full flex-1 !mb-[0px]">
+                                            <x-admin::form.control-group.label>
+                                                @lang('admin::app.settings.users.index.create.status')
+                                            </x-admin::form.control-group.label>
 
-                                        <div class="gap-[10px] w-full mt-[10px]">    
-                                            <x-admin::form.control-group.control
-                                                type="switch"
-                                                name="status"
-                                                ::checked="data.user.status"
-                                                v-model="data.user.status"
-                                            >
-                                            </x-admin::form.control-group.control>
-            
-                                            <x-admin::form.control-group.error
-                                                control-name="status"
-                                            >
-                                            </x-admin::form.control-group.error>
-                                        </div>
-                                    </x-admin::form.control-group>
+                                            <div class="gap-[10px] w-full mt-[10px]">    
+                                                <x-admin::form.control-group.control
+                                                    type="switch"
+                                                    name="status"
+                                                    :value="1"
+                                                    :label="trans('admin::app.settings.users.index.create.status')"
+                                                    ::checked="data.user.status"
+                                                    v-model="data.user.status"
+                                                >
+                                                </x-admin::form.control-group.control>
+                
+                                                <x-admin::form.control-group.error
+                                                    control-name="status"
+                                                >
+                                                </x-admin::form.control-group.error>
+                                            </div>
+                                        </x-admin::form.control-group>
+                                    </template>
+
+                                    <template v-else>
+                                        <input type="hidden" name="status" v-model="data.user.status">
+                                    </template>
                                 </div>
 
                                 <x-admin::form.control-group>
@@ -408,6 +415,8 @@
                             user: {},
                             images: [],
                         },
+
+                        currentUserId: "{{ auth()->guard('admin')->user()->id }}",
                     }
                 },
 
