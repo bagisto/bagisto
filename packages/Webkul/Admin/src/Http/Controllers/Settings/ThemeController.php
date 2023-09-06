@@ -50,6 +50,11 @@ class ThemeController extends Controller
     {
         $data = request()->only(['options', 'type', 'name', 'sort_order', 'status']);
 
+        if ($data['type'] == 'static_content') {
+            $data['options']['html'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $data['options']['html']); 
+            $data['options']['css'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $data['options']['css']); 
+        }
+
         $theme = $this->themeCustomizationRepository->create($data);
 
         if ($data['type'] == 'image_carousel') {
@@ -83,6 +88,11 @@ class ThemeController extends Controller
     public function update($id)
     {
         $data = request()->only(['options', 'type', 'name', 'sort_order']);
+
+        if ($data['type'] == 'static_content') {
+            $data['options']['html'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $data['options']['html']); 
+            $data['options']['css'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $data['options']['css']); 
+        }
 
         $data['status'] = request()->input('status') == 'on';
 

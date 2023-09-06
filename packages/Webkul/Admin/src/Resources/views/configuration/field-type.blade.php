@@ -358,7 +358,7 @@
         <label 
             class="block leading-[20px] text-[12px] text-gray-600 font-medium"
         >
-            {{!! trans($field['info']) !!}}
+            {!! trans($field['info']) !!}
         </label>
     @endif
 

@@ -1557,7 +1557,7 @@
                                 <div class="flex gap-[15px] mb-[15px] pt-[8px] border-b-[2px] max-sm:hidden">
                                     <p @click="switchEditor('v-html-editor-theme')">
                                         <div
-                                            class="mb-[-1px] border-b-[2px] transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 cursor-pointer"
+                                            class="mb-[-1px] border-b-[1px] transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 cursor-pointer"
                                             :class="{'border-blue-600': inittialEditor == 'v-html-editor-theme'}"
                                         >
                                             @lang('admin::app.settings.themes.create.html')
@@ -1566,7 +1566,7 @@
 
                                     <p @click="switchEditor('v-css-editor-theme')">
                                         <div
-                                            class="mb-[-1px] border-b-[2px] transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 cursor-pointer"
+                                            class="mb-[-1px] border-b-[1px] transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 cursor-pointer"
                                             :class="{'border-blue-600': inittialEditor == 'v-css-editor-theme'}"
                                         >
                                             @lang('admin::app.settings.themes.create.css')
@@ -1724,7 +1724,7 @@
                                 lineNumbers: true,
                                 tabSize: 2,
                                 value: this.options.html,
-                                mode: 'html',
+                                mode: 'htmlmixed',
                                 theme: 'monokai'
                             });
 
@@ -2026,18 +2026,31 @@
 
         {{-- Code mirror script CDN --}}
         <script
-            type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.js"
+           type="text/javascript"
+           src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/codemirror.js"
         >
         </script>
+
+        {{-- 
+            Html mixed and xml cnd both are dependent 
+            Used for html and css theme
+        --}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/mode/xml/xml.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/mode/htmlmixed/htmlmixed.js"></script>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/mode/css/css.js"></script>
     @endPushOnce
 
     @pushOnce('styles')
-        {{-- Code mirror style cdn --}}
+        {{-- Code mirror styles --}}
         <link 
             rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.css"
+            href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/codemirror.css"
         >
         </link>
+
+        {{-- Monokai theme css --}}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/theme/monokai.css">
     @endPushOnce
 </x-admin::layouts>
