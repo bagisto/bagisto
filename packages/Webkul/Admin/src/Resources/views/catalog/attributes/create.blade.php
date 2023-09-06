@@ -498,7 +498,6 @@
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="regex"
-                                        {{-- rules="required|regex:/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/" --}}
                                         :value="old('regex')"
                                         :placeholder="trans('admin::app.catalog.attributes.create.regex')"
                                     >

@@ -2822,7 +2822,7 @@ return [
                     'description'                 => 'Descrizione',
                     'title'                       => 'Titolo',
                     'instructions'                => 'Istruzioni',
-                    'generate-invoice'            => 'Genera automaticamente la fattura dopo l'effettuazione dell'ordine',
+                    'generate-invoice'            => 'Genera automaticamente la fattura dopo l’effettuazione dell’ordine',
                     'set-invoice-status'          => 'Imposta lo stato della fattura dopo la creazione della fattura a',
                     'generate-invoice-applicable' => 'Applicabile se è abilitata la generazione automatica delle fatture',
                     'status'                      => 'Stato',
