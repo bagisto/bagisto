@@ -1,11 +1,6 @@
 <?php
 
 return [
-    'configurations' => [
-        'settings-title'      => '設定',
-        'settings-title-info' => '設定は、システム、アプリケーション、またはデバイスの振る舞いを制御する設定可能な選択肢を指します。ユーザーの好みや要件に合わせて調整されています。',
-    ],
-
     'customers' => [
         'forgot-password' => [
             'title'                => 'パスワードの回復',
@@ -286,7 +281,6 @@ return [
                 'wishlist'      => 'ウィッシュリスト',
                 'compare'       => '比較',
                 'orders'        => '注文',
-                'cart'          => 'カート',
                 'logout'        => 'ログアウト',
                 'search-text'   => 'ここで商品を検索',
                 'search'        => '検索',
@@ -449,11 +443,6 @@ return [
                 'attachments' => '添付ファイル',
             ],
         ],
-
-        'configurations' => [
-            'compare-options'  => '比較オプション',
-            'wishlist-options' => 'ウィッシュリストオプション',
-        ],
     ],
 
     'categories' => [
@@ -475,10 +464,7 @@ return [
     ],
 
     'search' => [
-        'title'          => ':queryの検索結果',
-        'configurations' => [
-            'image-search-option' => '画像検索オプション',
-        ],
+        'title' => ':queryの検索結果',
     ],
 
     'compare' => [

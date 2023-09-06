@@ -1,11 +1,6 @@
 <?php
 
 return [
-    'configurations' => [
-        'settings-title'      => 'সেটিংস',
-        'settings-title-info' => 'সেটিংস হলো কনফিগার করা সেট যা সিস্টেম, অ্যাপ্লিকেশন, বা ডিভাইসের আচরণ নিয়ন্ত্রণ করে, ব্যবহারকারীর পছন্দ এবং প্রয়োজনীয়তা অনুসারে।',
-    ],
-
     'customers' => [
         'forgot-password' => [
             'title'                => 'পাসওয়ার্ড পুনরুদ্ধার করুন',
@@ -448,11 +443,6 @@ return [
                 'attachments' => 'সংযোগ',
             ],
         ],
-
-        'configurations' => [
-            'compare-options'  => 'তুলনা বিকল্প',
-            'wishlist-options' => 'ইচ্ছেসূচি বিকল্প',
-        ],
     ],
 
     'categories' => [
@@ -474,10 +464,7 @@ return [
     ],
 
     'search' => [
-        'title'          => ':query এর জন্য অনুসন্ধান ফলাফল',
-        'configurations' => [
-            'image-search-option' => 'চিত্র অনুসন্ধান বিকল্প',
-        ],
+        'title' => ':query এর জন্য অনুসন্ধান ফলাফল',
     ],
 
     'compare'  => [
@@ -537,7 +524,7 @@ return [
                 'move-to-wishlist'         => 'ইচ্ছেসূচি তালিকায় সরান',
             ],
 
-            'coupon'   => [
+            'coupon' => [
                 'code'            => 'কুপন কোড',
                 'applied'         => 'কুপন প্রয়োগ হয়েছে',
                 'apply'           => 'কুপন প্রয়োগ করুন',
@@ -819,5 +806,4 @@ return [
             'grand-total'       => 'মোট মূল্য',
         ],
     ],
-
 ];

@@ -2610,12 +2610,17 @@ return [
                 ],
             
                 'content' => [
-                    'title'                 => 'Contenido',
-                    'info'                  => 'Configura opciones de comparación, opciones de lista de deseos, opciones de búsqueda de imágenes, pie de página, alternar pie de página y scripts personalizados.',
-                    'custom-scripts'        => 'Scripts Personalizados',
-                    'custom-scripts-info'   => 'Los scripts personalizados son piezas de código personalizadas creadas para agregar funciones o características específicas al software, mejorando sus capacidades de manera única.',
-                    'custom-css'            => 'CSS Personalizado',
-                    'custom-javascript'     => 'Javascript Personalizado',
+                    'title'               => 'Contenido',
+                    'info'                => 'Configura opciones de comparación, opciones de lista de deseos, opciones de búsqueda de imágenes, pie de página, alternar pie de página y scripts personalizados.',
+                    'custom-scripts'      => 'Scripts Personalizados',
+                    'custom-scripts-info' => 'Los scripts personalizados son piezas de código personalizadas creadas para agregar funciones o características específicas al software, mejorando sus capacidades de manera única.',
+                    'custom-css'          => 'CSS Personalizado',
+                    'custom-javascript'   => 'Javascript Personalizado',
+                    'compare-options'     => 'Opciones de comparación',
+                    'wishlist-options'    => 'Opciones de lista de deseos',
+                    'image-search-option' => 'Opción de búsqueda de imágenes',
+                    'settings-title'      => 'Configuración',
+                    'settings-title-info' => 'Las configuraciones se refieren a opciones configurables que controlan cómo se comporta un sistema, aplicación o dispositivo, adaptadas a las preferencias y requisitos del usuario.'
                 ],
             
                 'design' => [

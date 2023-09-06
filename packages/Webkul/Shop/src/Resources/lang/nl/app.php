@@ -1,11 +1,6 @@
 <?php
 
 return [
-    'configurations' => [
-        'settings-title'      => 'Instellingen',
-        'settings-title-info' => 'Instellingen verwijzen naar configureerbare keuzes die de werking van een systeem, applicatie of apparaat regelen, afgestemd op de voorkeuren en vereisten van de gebruiker.',
-    ],
-
     'customers' => [
         'forgot-password' => [
             'title'                => 'Wachtwoord Herstellen',
@@ -286,7 +281,6 @@ return [
                 'wishlist'      => 'Wenslijst',
                 'compare'       => 'Vergelijken',
                 'orders'        => 'Bestellingen',
-                'cart'          => 'Winkelwagen',
                 'logout'        => 'Afmelden',
                 'search-text'   => 'Zoek hier naar producten',
                 'search'        => 'Zoeken',
@@ -449,11 +443,6 @@ return [
                 'attachments' => '添付ファイル',
             ],
         ],
-
-        'configurations' => [
-            'compare-options'  => '比較オプション',
-            'wishlist-options' => 'ウィッシュリストオプション',
-        ],
     ],
 
     'categories' => [
@@ -475,10 +464,7 @@ return [
     ],
 
     'search' => [
-        'title'          => '検索結果: : :query',
-        'configurations' => [
-            'image-search-option' => '画像検索オプション',
-        ],
+        'title' => '検索結果: : :query',
     ],
 
     'compare'  => [

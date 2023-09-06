@@ -2616,6 +2616,11 @@ return [
                     'custom-scripts-info' => 'Les scripts personnalisés sont des morceaux de code personnalisés créés pour ajouter des fonctions ou des fonctionnalités spécifiques à un logiciel, améliorant ainsi ses capacités de manière unique.',
                     'custom-css'          => 'CSS personnalisé',
                     'custom-javascript'   => 'JavaScript personnalisé',
+                    'compare-options'     => 'Options de comparaison',
+                    'wishlist-options'    => 'Options de liste de souhaits',
+                    'image-search-option' => 'Option de recherche d’image',
+                    'settings-title'      => 'Paramètres',
+                    'settings-title-info' => 'Les paramètres font référence aux choix configurables qui contrôlent le comportement d’un système, d’une application ou d’un appareil, adaptés aux préférences et aux besoins de l’utilisateur.'
                 ],
 
                 'design' => [

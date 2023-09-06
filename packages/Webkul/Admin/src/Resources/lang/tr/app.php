@@ -2616,6 +2616,11 @@ return [
                     'custom-scripts-info' => 'Özel komut dosyaları, yazılıma belirli işlevler veya özellikler eklemek için oluşturulan kişiselleştirilmiş kod parçalarıdır ve benzersiz şekilde yeteneklerini artırır.',
                     'custom-css'          => 'Özel CSS',
                     'custom-javascript'   => 'Özel Javascript',
+                    'compare-options'     => 'Karşılaştırma seçenekleri',
+                    'wishlist-options'    => 'Dilek listesi seçenekleri',
+                    'image-search-option' => 'Resim Arama Seçeneği',
+                    'settings-title'      => 'Ayarlar',
+                    'settings-title-info' => 'Ayarlar, bir sistem, uygulama veya cihazın nasıl davrandığını kontrol eden yapılandırılabilir seçeneklere atıfta bulunur ve kullanıcı tercihlerine ve gereksinimlerine uyarlanır.'
                 ],
 
                 'design' => [

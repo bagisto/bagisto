@@ -44,6 +44,32 @@ return [
         'icon' => 'store-information.svg',
         'sort' => 2,
     ], [
+        'key'    => 'general.content.shop',
+        'name'   => 'admin::app.configuration.index.general.content.settings-title',
+        'info'   => 'admin::app.configuration.index.general.content.settings-title-info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'compare_option',
+                'title'         => 'admin::app.configuration.index.general.content.compare-options',
+                'type'          => 'boolean',
+                'locale_based'  => true,
+                'channel_based' => true,
+            ], [
+                'name'          => 'wishlist_option',
+                'title'         => 'admin::app.configuration.index.general.content.wishlist-options',
+                'type'          => 'boolean',
+                'locale_based'  => true,
+                'channel_based' => true,
+            ], [
+                'name'          => 'image_search',
+                'title'         => 'admin::app.configuration.index.general.content.image-search-option',
+                'type'          => 'boolean',
+                'locale_based'  => true,
+                'channel_based' => true,
+            ],
+        ],
+    ], [
         'key'    => 'general.content.custom_scripts',
         'name'   => 'admin::app.configuration.index.general.content.custom-scripts',
         'info'   => 'admin::app.configuration.index.general.content.custom-scripts-info',

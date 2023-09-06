@@ -1,11 +1,6 @@
 <?php
 
 return [
-    'configurations' => [
-        'settings-title'      => 'Настройки',
-        'settings-title-info' => 'Настройки относятся к настраиваемым параметрам, которые управляют поведением системы, приложения или устройства, адаптированным к предпочтениям и требованиям пользователя.',
-    ],
-
     'customers' => [
         'forgot-password' => [
             'title'                => 'Восстановление пароля',
@@ -286,7 +281,6 @@ return [
                 'wishlist'      => 'Список Желаний',
                 'compare'       => 'Сравнение',
                 'orders'        => 'Заказы',
-                'cart'          => 'Корзина',
                 'logout'        => 'Выход',
                 'search-text'   => 'Искать товары здесь',
                 'search'        => 'Поиск',
@@ -449,11 +443,6 @@ return [
                 'attachments' => 'Вложения',
             ],
         ],
-
-        'configurations' => [
-            'compare-options'  => 'Опции сравнения',
-            'wishlist-options' => 'Опции списка желаний',
-        ],
     ],
 
     'categories' => [
@@ -475,10 +464,7 @@ return [
     ],
 
     'search' => [
-        'title'          => 'Результаты поиска для: :query',
-        'configurations' => [
-            'image-search-option' => 'Опция поиска по изображению',
-        ],
+        'title' => 'Результаты поиска для: :query',
     ],
 
     'compare'  => [

@@ -2615,6 +2615,11 @@ return [
                     'custom-scripts-info' => 'Niestandardowe skrypty to spersonalizowane fragmenty kodu stworzone w celu dodania określonych funkcji lub możliwości do oprogramowania, zwiększając jego unikalne możliwości.',
                     'custom-css'          => 'Niestandardowe CSS',
                     'custom-javascript'   => 'Niestandardowy JavaScript',
+                    'compare-options'     => 'Opcje porównywania',
+                    'wishlist-options'    => 'Opcje listy życzeń',
+                    'image-search-option' => 'Opcja wyszukiwania obrazów',
+                    'settings-title'      => 'Ustawienia',
+                    'settings-title-info' => 'Termin "ustawienia" odnosi się do konfigurowalnych wyborów kontrolujących zachowanie systemu, aplikacji lub urządzenia, dostosowanych do preferencji i wymagań użytkownika.'
                 ],
 
                 'design' => [

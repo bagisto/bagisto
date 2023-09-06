@@ -1,11 +1,6 @@
 <?php
 
 return [
-    'configurations' => [
-        'settings-title'      => 'Configurações',
-        'settings-title-info' => 'As configurações referem-se a escolhas configuráveis que controlam como um sistema, aplicativo ou dispositivo se comporta, adaptado às preferências e requisitos do usuário.',
-    ],
-
     'customers' => [
         'forgot-password' => [
             'title'                => 'Recuperar Senha',
@@ -286,7 +281,6 @@ return [
                 'wishlist'      => 'Lista de Desejos',
                 'compare'       => 'Comparar',
                 'orders'        => 'Pedidos',
-                'cart'          => 'Carrinho',
                 'logout'        => 'Sair',
                 'search-text'   => 'Pesquise produtos aqui',
                 'search'        => 'Pesquisar',
@@ -449,11 +443,6 @@ return [
                 'attachments' => 'Anexos',
             ],
         ],
-
-        'configurations' => [
-            'compare-options'  => 'Opções de Comparação',
-            'wishlist-options' => 'Opções de Lista de Desejos',
-        ],
     ],
 
     'categories' => [
@@ -475,10 +464,7 @@ return [
     ],
 
     'search' => [
-        'title'          => 'Resultados da pesquisa para : :query',
-        'configurations' => [
-            'image-search-option' => 'Opção de Pesquisa por Imagem',
-        ],
+        'title' => 'Resultados da pesquisa para : :query',
     ],
 
     'compare'  => [
