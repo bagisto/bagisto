@@ -53,7 +53,7 @@
 
                     {{-- Name --}}
                     <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label>
+                        <x-admin::form.control-group.label class="required">
                             @lang('admin::app.catalog.categories.create.company-name')
                         </x-admin::form.control-group.label>
 
@@ -62,10 +62,16 @@
                             name="name"
                             :value="old('name')"
                             class="w-full"
+                            rules="required"
                             :label="trans('admin::app.catalog.categories.create.company-name')"
                             :placeholder="trans('admin::app.catalog.categories.create.company-name')"
                         >
                         </x-admin::form.control-group.control>
+
+                        <x-admin::form.control-group.error
+                            control-name="name"
+                        >
+                        </x-admin::form.control-group.error>
                     </x-admin::form.control-group>
 
                     <div class="mb-[10px]">
@@ -194,7 +200,6 @@
                                 rules="required"
                                 :label="trans('admin::app.catalog.categories.create.slug')"
                                 :placeholder="trans('admin::app.catalog.categories.create.slug')"
-                                v-slugify
                             >
                             </x-admin::form.control-group.control>
 
@@ -277,7 +282,7 @@
 
                         {{-- Display Mode  --}}
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label class="required !text-gray-800 font-medium">
+                            <x-admin::form.control-group.label class="required !text-gray-800 font-medium required">
                                 @lang('admin::app.catalog.categories.create.display-mode')
                             </x-admin::form.control-group.label>
 
