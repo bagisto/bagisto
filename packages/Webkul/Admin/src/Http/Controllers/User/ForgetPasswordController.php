@@ -54,7 +54,7 @@ class ForgetPasswordController extends Controller
             return back()
                 ->withInput(request(['email']))
                 ->withErrors([
-                    'email' => trans('admin::app.users.forget_password.create.email-not-exist'),
+                    'email' => trans('admin::app.users.forget-password.create.email-not-exist'),
                 ]);
         } catch (\Exception $e) {
             session()->flash('error', trans($e->getMessage()));
