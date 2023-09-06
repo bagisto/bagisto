@@ -175,7 +175,7 @@ class OrderDataGrid extends DataGrid
             'label'      => trans('admin::app.sales.orders.index.datagrid.images'),
             'type'       => 'string',
             'searchable' => false,
-            'filterable' => true,
+            'filterable' => false,
             'sortable'   => false,
             'closure'    => function ($value) {
                 $order = app(OrderRepository::class)->with('items')->find($value->id);
