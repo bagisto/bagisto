@@ -36,7 +36,6 @@ class CustomerDataGrid extends DataGrid
             })
             ->addSelect('customers.id as customer_id')
             ->addSelect(DB::raw('COUNT(DISTINCT orders.id) as order_count'))
-
             ->groupBy('customers.id')
 
             ->leftJoin('customer_groups', 'customers.customer_group_id', '=', 'customer_groups.id')
@@ -76,7 +75,7 @@ class CustomerDataGrid extends DataGrid
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable'   => false,
         ]);
 
         $this->addColumn([
@@ -93,7 +92,7 @@ class CustomerDataGrid extends DataGrid
             'label'      => trans('admin::app.customers.index.datagrid.email'),
             'type'       => 'string',
             'searchable' => true,
-            'filterable' => false,
+            'filterable' => true,
             'sortable'   => true,
         ]);
 
@@ -120,7 +119,7 @@ class CustomerDataGrid extends DataGrid
             'label'      => trans('admin::app.customers.index.datagrid.gender'),
             'type'       => 'string',
             'searchable' => false,
-            'filterable' => true,
+            'filterable' => false,
             'sortable'   => true,
         ]);
 
@@ -138,7 +137,7 @@ class CustomerDataGrid extends DataGrid
             'label'       => trans('admin::app.customers.index.datagrid.suspended'),
             'type'        => 'boolean',
             'searchable'  => false,
-            'filterable'  => true,
+            'filterable'  => false,
             'visibility'  => false,
             'sortable'    => true,
         ]);

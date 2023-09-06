@@ -99,15 +99,6 @@ class ReviewDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'created_at',
-            'label'      => trans('admin::app.customers.reviews.index.datagrid.date'),
-            'type'       => 'datetime',
-            'searchable' => false,
-            'filterable' => true,
-            'sortable'   => true,
-        ]);
-
-        $this->addColumn([
             'index'      => 'product_review_id',
             'label'      => trans('admin::app.customers.reviews.index.datagrid.id'),
             'type'       => 'integer',
@@ -130,6 +121,15 @@ class ReviewDataGrid extends DataGrid
             'label'      => trans('admin::app.customers.reviews.index.datagrid.comment'),
             'type'       => 'string',
             'searchable' => true,
+            'filterable' => true,
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'created_at',
+            'label'      => trans('admin::app.customers.reviews.index.datagrid.date'),
+            'type'       => 'date_range',
+            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);

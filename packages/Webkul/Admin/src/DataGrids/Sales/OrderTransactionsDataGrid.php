@@ -61,15 +61,6 @@ class OrderTransactionsDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'created_at',
-            'label'      => trans('admin::app.sales.transactions.index.datagrid.transaction-date'),
-            'type'       => 'datetime',
-            'searchable' => true,
-            'filterable' => true,
-            'sortable'   => true,
-        ]);
-
-        $this->addColumn([
             'index'      => 'amount',
             'label'      => trans('admin::app.sales.transactions.index.datagrid.transaction-amount'),
             'type'       => 'price',
@@ -100,6 +91,15 @@ class OrderTransactionsDataGrid extends DataGrid
             'index'      => 'status',
             'label'      => trans('admin::app.sales.transactions.index.datagrid.status'),
             'type'       => 'string',
+            'searchable' => true,
+            'filterable' => true,
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'created_at',
+            'label'      => trans('admin::app.sales.transactions.index.datagrid.transaction-date'),
+            'type'       => 'date_range',
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,

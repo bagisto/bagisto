@@ -61,15 +61,6 @@ class OrderInvoicesDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'created_at',
-            'label'      => trans('admin::app.sales.invoices.index.datagrid.invoice-date'),
-            'type'       => 'datetime',
-            'searchable' => true,
-            'filterable' => true,
-            'sortable'   => true,
-        ]);
-
-        $this->addColumn([
             'index'      => 'base_grand_total',
             'label'      => trans('admin::app.sales.invoices.index.datagrid.grand-total'),
             'type'       => 'price',
@@ -99,6 +90,15 @@ class OrderInvoicesDataGrid extends DataGrid
 
                 return $value->state;
             },
+        ]);
+
+        $this->addColumn([
+            'index'      => 'created_at',
+            'label'      => trans('admin::app.sales.invoices.index.datagrid.invoice-date'),
+            'type'       => 'date_range',
+            'searchable' => true,
+            'filterable' => true,
+            'sortable'   => true,
         ]);
     }
 

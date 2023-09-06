@@ -94,9 +94,18 @@ class OrderShipmentsDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
+            'index'      => 'shipped_to',
+            'label'      => trans('admin::app.sales.shipments.index.datagrid.shipment-to'),
+            'type'       => 'string',
+            'searchable' => true,
+            'filterable' => true,
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
             'index'      => 'order_date',
             'label'      => trans('admin::app.sales.shipments.index.datagrid.order-date'),
-            'type'       => 'datetime',
+            'type'       => 'date_range',
             'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
@@ -105,17 +114,8 @@ class OrderShipmentsDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'shipment_created_at',
             'label'      => trans('admin::app.sales.shipments.index.datagrid.shipment-date'),
-            'type'       => 'datetime',
+            'type'       => 'date_range',
             'searchable' => false,
-            'filterable' => true,
-            'sortable'   => true,
-        ]);
-
-        $this->addColumn([
-            'index'      => 'shipped_to',
-            'label'      => trans('admin::app.sales.shipments.index.datagrid.shipment-to'),
-            'type'       => 'string',
-            'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
         ]);

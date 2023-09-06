@@ -86,7 +86,7 @@ class OrderRefundDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'created_at',
             'label'      => trans('admin::app.sales.refunds.index.datagrid.refund-date'),
-            'type'       => 'datetime',
+            'type'       => 'date_range',
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
