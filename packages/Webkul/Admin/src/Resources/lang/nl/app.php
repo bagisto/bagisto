@@ -489,7 +489,6 @@ return [
                 'create'     => [
                     'back-btn'                => 'Terug',
                     'bundle'                  => 'Bundel',
-                    'booking'                 => 'Reservering',
                     'configurable'            => 'Configureerbaar',
                     'configurable-attributes' => 'Configureerbare Eigenschappen',
                     'create-btn'              => 'Product aanmaken',

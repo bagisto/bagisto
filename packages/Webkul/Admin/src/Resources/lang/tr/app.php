@@ -489,7 +489,6 @@ return [
                 'create'     => [
                     'back-btn'                => 'Geri',
                     'bundle'                  => 'Paket',
-                    'booking'                 => 'Rezervasyon',
                     'configurable'            => 'Yapılandırılabilir',
                     'configurable-attributes' => 'Yapılandırılabilir Özellikler',
                     'create-btn'              => 'Ürün Oluştur',

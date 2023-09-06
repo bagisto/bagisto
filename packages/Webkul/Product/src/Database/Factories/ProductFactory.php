@@ -23,7 +23,6 @@ class ProductFactory extends Factory
         'simple',
         'virtual',
         'downloadable',
-        'booking',
     ];
 
     /**
@@ -62,15 +61,6 @@ class ProductFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'type' => 'downloadable',
-            ];
-        });
-    }
-
-    public function booking(): ProductFactory
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'type' => 'booking',
             ];
         });
     }

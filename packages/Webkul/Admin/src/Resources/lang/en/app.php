@@ -489,7 +489,6 @@ return [
                 'create' => [
                     'back-btn'                => 'Back',
                     'bundle'                  => 'Bundle',
-                    'booking'                 => 'Booking',
                     'configurable'            => 'Configurable',
                     'configurable-attributes' => 'Configurable Attributes',
                     'create-btn'              => 'Create Product',
