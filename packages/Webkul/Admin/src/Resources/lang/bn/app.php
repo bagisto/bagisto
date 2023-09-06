@@ -541,6 +541,7 @@ return [
                         'create-btn'                => 'নতুন যোগ করুন',
                         'edit-btn'                  => 'সম্পাদনা',
                         'add-group-price'           => 'গ্রুপ মূল্য যোগ করুন',
+                        'all-groups'                => 'সমস্ত গোষ্ঠী',
                         'fixed-group-price-info'    => ':qty পরিমাণে নির্ধারিত মূল্যে :price সহ',
                         'discount-group-price-info' => 'মূল্যে :price ছাড় প্রাপ্য :qty পরিমাণে',
                         'empty-info'                => 'নির্ধারিত গ্রুপে সদস্যদের জন্য বিশেষ মূল্য নির্ধারণ করুন।',
@@ -548,6 +549,7 @@ return [
                         'create' => [
                             'create-title'   => 'গ্রাহক গ্রুপ মূল্য তৈরি করুন',
                             'customer-group' => 'গ্রাহক গ্রুপ',
+                            'all-groups'     => 'সমস্ত গোষ্ঠী',
                             'discount'       => 'ছাড়',
                             'delete-btn'     => 'মুছে ফেলুন',
                             'fixed'          => 'নির্ধারিত',

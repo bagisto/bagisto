@@ -541,6 +541,7 @@ return [
                         'create-btn'                => 'הוסף חדש',
                         'edit-btn'                  => 'ערוך',
                         'add-group-price'           => 'הוסף מחיר קבוצתי',
+                        'all-groups'                => 'כל הקבוצות',
                         'fixed-group-price-info'    => 'עבור :qty יחידות במחיר קבוע של :price',
                         'discount-group-price-info' => 'עבור :qty יחידות בהנחה של :price',
                         'empty-info'                => 'הגדרת מחיר מיוחד ללקוחות שנמצאים בקבוצה מסוימת.',
@@ -548,6 +549,7 @@ return [
                         'create' => [
                             'create-title'   => 'צור מחיר קבוצתי ללקוח',
                             'customer-group' => 'קבוצת לקוח',
+                            'all-groups'     => 'כל הקבוצות',
                             'discount'       => 'הנחה',
                             'delete-btn'     => 'מחק',
                             'fixed'          => 'קבוע',

@@ -122,16 +122,19 @@
 
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label>
-                                        @lang('admin::app.catalog.products.edit.price.group.create.customer-group')*
+                                        @lang('admin::app.catalog.products.edit.price.group.create.customer-group')
                                     </x-admin::form.control-group.label>
         
                                     <x-admin::form.control-group.control
                                         type="select"
                                         name="customer_group_id"
                                         v-model="selectedPrice.customer_group_id"
-                                        rules="required"
                                         :label="trans('admin::app.catalog.products.edit.price.group.create.customer-group')"
                                     >
+                                        <option value="">
+                                            @lang('admin::app.catalog.products.edit.price.group.create.all-groups')
+                                        </option>
+
                                         <option
                                             v-for="group in groups"
                                             :value="group.id"
@@ -139,14 +142,12 @@
                                             @{{ group.name }}
                                         </option>
                                     </x-admin::form.control-group.control>
-        
-                                    <x-admin::form.control-group.error control-name="customer_group_id"></x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
                                 <div class="flex gap-[16px]">
                                     <x-admin::form.control-group class="flex-1">
-                                        <x-admin::form.control-group.label>
-                                            @lang('admin::app.catalog.products.edit.price.group.create.qty')*
+                                        <x-admin::form.control-group.label class="required">
+                                            @lang('admin::app.catalog.products.edit.price.group.create.qty')
                                         </x-admin::form.control-group.label>
             
                                         <x-admin::form.control-group.control
@@ -162,8 +163,8 @@
                                     </x-admin::form.control-group>
 
                                     <x-admin::form.control-group class="flex-1">
-                                        <x-admin::form.control-group.label>
-                                            @lang('admin::app.catalog.products.edit.price.group.create.price-type')*
+                                        <x-admin::form.control-group.label class="required">
+                                            @lang('admin::app.catalog.products.edit.price.group.create.price-type')
                                         </x-admin::form.control-group.label>
             
                                         <x-admin::form.control-group.control
@@ -186,8 +187,8 @@
                                     </x-admin::form.control-group>
 
                                     <x-admin::form.control-group class="flex-1">
-                                        <x-admin::form.control-group.label>
-                                            @lang('admin::app.catalog.products.edit.price.group.create.price')*
+                                        <x-admin::form.control-group.label class="required">
+                                            @lang('admin::app.catalog.products.edit.price.group.create.price')
                                         </x-admin::form.control-group.label>
             
                                         <x-admin::form.control-group.control
@@ -256,7 +257,7 @@
                 getGroupNameById(id) {
                     let group = this.groups.find(group => group.id == id);
 
-                    return group ? group.name : '';
+                    return group ? group.name : "@lang('admin::app.catalog.products.edit.price.group.all-groups')";
                 },
 
                 create(params) {

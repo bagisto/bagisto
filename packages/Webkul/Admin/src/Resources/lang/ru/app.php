@@ -541,6 +541,7 @@ return [
                         'create-btn'                => 'Добавить новое',
                         'edit-btn'                  => 'Редактировать',
                         'add-group-price'           => 'Добавить цену для группы',
+                        'all-groups'                => 'Все группы',
                         'fixed-group-price-info'    => 'Для :qty шт. по фиксированной цене :price',
                         'discount-group-price-info' => 'Для :qty шт. со скидкой :price',
                         'empty-info'                => 'Специальная цена для клиентов, принадлежащих к определенной группе.',
@@ -548,6 +549,7 @@ return [
                         'create' => [
                             'create-title'   => 'Создать цену для группы покупателей',
                             'customer-group' => 'Группа покупателей',
+                            'all-groups'     => 'Все группы',
                             'discount'       => 'Скидка',
                             'delete-btn'     => 'Удалить',
                             'fixed'          => 'Фиксированная',

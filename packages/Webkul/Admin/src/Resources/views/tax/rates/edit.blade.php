@@ -46,7 +46,7 @@
                                 <!-- Identifier -->
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.taxes.rates.edit.identifier')*
+                                        @lang('admin::app.settings.taxes.rates.edit.identifier')
                                     </x-admin::form.control-group.label>
     
                                     <x-admin::form.control-group.control

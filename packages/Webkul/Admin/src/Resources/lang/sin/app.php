@@ -541,6 +541,7 @@ return [
                         'create-btn'                => 'නවකරන්න',
                         'edit-btn'                  => 'සංස්කරණය කරන්න',
                         'add-group-price'           => 'පාරිභාග මිලකට එකතු කරන්න',
+                        'all-groups'                => 'සියලු සමූහ',
                         'fixed-group-price-info'    => ':qty ප්‍රමාණයට වලංගු මිල :price වලට වාරිකා කළ යුතුය',
                         'discount-group-price-info' => ':qty ප්‍රමාණයට මිල :price වාරිකා කළ යුතුය',
                         'empty-info'                => 'විශේෂ ප්‍රමාණයක් අනුගමනට හෝදන පමණක්.',
@@ -548,6 +549,7 @@ return [
                         'create' => [
                             'create-title'   => 'පාරිභාග මිලක් නිර්ණායකයක් සහිතයි',
                             'customer-group' => 'පාරිභාගය',
+                            'all-groups'     => 'සියලු සමූහ',
                             'discount'       => 'වට්ටම',
                             'delete-btn'     => 'මකන්න',
                             'fixed'          => 'ස්ථාන',

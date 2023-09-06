@@ -541,6 +541,7 @@ return [
                         'create-btn'                => '添加新的',
                         'edit-btn'                  => '编辑',
                         'add-group-price'           => '添加组价格',
+                        'all-groups'                => '所有群组',
                         'fixed-group-price-info'    => '对于 :qty 个数量，固定价格为 :price',
                         'discount-group-price-info' => '对于 :qty 个数量，折扣价格为 :price',
                         'empty-info'                => '针对属于特定组的客户的特殊定价。',
@@ -548,6 +549,7 @@ return [
                         'create' => [
                             'create-title'   => '创建客户组价格',
                             'customer-group' => '客户组',
+                            'all-groups'     => '所有群组',
                             'discount'       => '折扣',
                             'delete-btn'     => '删除',
                             'fixed'          => '固定',
