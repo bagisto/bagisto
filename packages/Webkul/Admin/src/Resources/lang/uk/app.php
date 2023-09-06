@@ -489,7 +489,6 @@ return [
                 'create' => [
                     'back-btn'                => 'Назад',
                     'bundle'                  => 'Збирається',
-                    'booking'                 => 'Бронювання',
                     'configurable'            => 'Конфігурований',
                     'configurable-attributes' => 'Атрибути конфігурованого товару',
                     'create-btn'              => 'Створити товар',
@@ -542,6 +541,7 @@ return [
                         'create-btn'                => 'Додати новий',
                         'edit-btn'                  => 'Редагувати',
                         'add-group-price'           => 'Додати ціну для групи',
+                        'all-groups'                => 'Всі групи',
                         'fixed-group-price-info'    => 'Для :qty штук за фіксованою ціною :price',
                         'discount-group-price-info' => 'Для :qty штук зі знижкою :price',
                         'empty-info'                => 'Спеціальні ціни для покупців, які належать до певної групи.',
@@ -549,6 +549,7 @@ return [
                         'create' => [
                             'create-title'   => 'Створити ціну для групи покупців',
                             'customer-group' => 'Група покупців',
+                            'all-groups'     => 'Всі групи',
                             'discount'       => 'Знижка',
                             'delete-btn'     => 'Видалити',
                             'fixed'          => 'Фіксована',

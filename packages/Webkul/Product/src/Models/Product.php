@@ -13,7 +13,6 @@ use Illuminate\Support\Collection;
 use Webkul\Attribute\Models\AttributeFamilyProxy;
 use Webkul\Attribute\Models\AttributeProxy;
 use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\BookingProduct\Models\BookingProductProxy;
 use Webkul\Category\Models\CategoryProxy;
 use Webkul\Inventory\Models\InventorySourceProxy;
 use Webkul\CatalogRule\Models\CatalogRuleProductPriceProxy;
@@ -294,16 +293,6 @@ class Product extends Model implements ProductContract
     public function bundle_options(): HasMany
     {
         return $this->hasMany(ProductBundleOptionProxy::modelClass());
-    }
-
-    /**
-     * Get the booking that owns the product.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function booking_product()
-    {
-        return $this->hasOne(BookingProductProxy::modelClass());
     }
 
     /**

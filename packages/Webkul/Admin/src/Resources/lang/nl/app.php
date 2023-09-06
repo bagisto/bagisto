@@ -489,7 +489,6 @@ return [
                 'create'     => [
                     'back-btn'                => 'Terug',
                     'bundle'                  => 'Bundel',
-                    'booking'                 => 'Reservering',
                     'configurable'            => 'Configureerbaar',
                     'configurable-attributes' => 'Configureerbare Eigenschappen',
                     'create-btn'              => 'Product aanmaken',
@@ -542,6 +541,7 @@ return [
                         'create-btn'                => 'Nieuwe toevoegen',
                         'edit-btn'                  => 'Bewerk',
                         'add-group-price'           => 'Groepsprijs toevoegen',
+                        'all-groups'                => 'Alle groepen',
                         'fixed-group-price-info'    => 'Voor :qty Hoeveelheid tegen een vaste prijs van :price',
                         'discount-group-price-info' => 'Voor :qty Hoeveelheid met een korting van :price',
                         'empty-info'                => 'Speciale prijzen voor klanten die behoren tot een specifieke groep.',
@@ -549,6 +549,7 @@ return [
                         'create' => [
                             'create-title'   => 'Klantengroep Prijs Toevoegen',
                             'customer-group' => 'Klantengroep',
+                            'all-groups'     => 'Alle groepen',
                             'discount'       => 'Korting',
                             'delete-btn'     => 'Verwijderen',
                             'fixed'          => 'Vast',

@@ -46,7 +46,7 @@ class ForgetPasswordController extends Controller
             );
 
             if ($response == Password::RESET_LINK_SENT) {
-                session()->flash('success', trans('admin::app.users.forget_password.create.reset-link-sent'));
+                session()->flash('success', trans('admin::app.users.forget-password.create.reset-link-sent'));
 
                 return back();
             }

@@ -489,7 +489,6 @@ return [
                 'create'     => [
                     'back-btn'                => 'Geri',
                     'bundle'                  => 'Paket',
-                    'booking'                 => 'Rezervasyon',
                     'configurable'            => 'Yapılandırılabilir',
                     'configurable-attributes' => 'Yapılandırılabilir Özellikler',
                     'create-btn'              => 'Ürün Oluştur',
@@ -542,6 +541,7 @@ return [
                         'create-btn'                => 'Yeni Ekle',
                         'edit-btn'                  => 'Düzenle',
                         'add-group-price'           => 'Grup Fiyatı Ekle',
+                        'all-groups'                => 'Tüm Gruplar',
                         'fixed-group-price-info'    => ':qty Miktarında sabit fiyat :price',
                         'discount-group-price-info' => ':qty Miktarında indirimli fiyat :price',
                         'empty-info'                => 'Belirli bir gruba ait müşteriler için özel fiyatlandırma.',
@@ -549,6 +549,7 @@ return [
                         'create' => [
                             'create-title'   => 'Müşteri Grubu Fiyatı Oluştur',
                             'customer-group' => 'Müşteri Grubu',
+                            'all-groups'     => 'Tüm Gruplar',
                             'discount'       => 'İndirim',
                             'delete-btn'     => 'Sil',
                             'fixed'          => 'Sabit',

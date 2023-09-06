@@ -102,7 +102,7 @@
                                                 <a
                                                     :href="element.file_url"
                                                     target="_blank"
-                                                    class="text-blue-600 transition-all hover:underline"
+                                                    class="text-blue-600 break-all transition-all hover:underline"
                                                 >
                                                     @{{ element.file_name }}
                                                 </a>
@@ -116,7 +116,7 @@
                                                 <a
                                                     :href="element.url"
                                                     target="_blank"
-                                                    class="text-blue-600 transition-all hover:underline"
+                                                    class="text-blue-600 break-all transition-all hover:underline"
                                                 >
                                                     @{{ element.url }}
                                                 </a>
@@ -132,7 +132,7 @@
                                                 <a
                                                     :href="element.sample_file_url"
                                                     target="_blank"
-                                                    class="text-blue-600 transition-all hover:underline"
+                                                    class="text-blue-600 break-all transition-all hover:underline"
                                                 >
                                                     @{{ element.sample_file_name }}
                                                 </a>
@@ -146,7 +146,7 @@
                                                 <a
                                                     :href="element.sample_url"
                                                     target="_blank"
-                                                    class="text-blue-600 transition-all hover:underline"
+                                                    class="text-blue-600 break-all transition-all hover:underline"
                                                 >
                                                     @{{ element.sample_url }}
                                                 </a>
@@ -362,7 +362,7 @@
                                             <a
                                                 :href="selectedLink.sample_file_url"
                                                 target="_blank"
-                                                class="text-blue-600 transition-all hover:underline"
+                                                class="text-blue-600 break-all transition-all hover:underline"
                                                 v-if="selectedLink.file_url"
                                             >
                                                 @{{ selectedLink.file_name }}
@@ -453,7 +453,7 @@
                                             <a
                                                 :href="selectedLink.sample_file_url"
                                                 target="_blank"
-                                                class="text-blue-600 transition-all hover:underline"
+                                                class="text-blue-600 break-all transition-all hover:underline"
                                                 v-if="selectedLink.sample_file_url"
                                             >
                                                 @{{ selectedLink.sample_file_name }}
@@ -565,7 +565,7 @@
                                                 <a
                                                     :href="element.file_url"
                                                     target="_blank"
-                                                    class="text-blue-600 transition-all hover:underline"
+                                                    class="text-blue-600 break-all transition-all hover:underline"
                                                 >
                                                     @{{ element.file_name }}
                                                 </a>
@@ -579,7 +579,7 @@
                                                 <a
                                                     :href="element.url"
                                                     target="_blank"
-                                                    class="text-blue-600 transition-all hover:underline"
+                                                    class="text-blue-600 break-all transition-all hover:underline"
                                                 >
                                                     @{{ element.url }}
                                                 </a>
@@ -755,7 +755,7 @@
                                             <a
                                                 :href="selectedSample.sample_file_url"
                                                 target="_blank"
-                                                class="text-blue-600 transition-all hover:underline"
+                                                class="text-blue-600 break-all transition-all hover:underline"
                                                 v-if="selectedSample.file_url"
                                             >
                                                 @{{ selectedSample.file_name }}

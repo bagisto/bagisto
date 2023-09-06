@@ -127,7 +127,6 @@
                 :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
                 {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400']) }}
             >
-                <option value="" selected disabled>Select</option>
                 {{ $slot }}
             </select>
         </v-field>

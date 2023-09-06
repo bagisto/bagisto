@@ -489,7 +489,6 @@ return [
                 'create'     => [
                     'back-btn'                => 'वापस जाएं',
                     'bundle'                  => 'बंडल',
-                    'booking'                 => 'बुकिंग',
                     'configurable'            => 'कॉन्फ़िगरेबल',
                     'configurable-attributes' => 'कॉन्फ़िगरेबल गुण',
                     'create-btn'              => 'नया उत्पाद बनाएं',
@@ -542,6 +541,7 @@ return [
                         'create-btn'                => 'नया जोड़ें',
                         'edit-btn'                  => 'संपादित करें',
                         'add-group-price'           => 'समूह मूल्य जोड़ें',
+                        'all-groups'                => 'सभी समूह',
                         'fixed-group-price-info'    => 'मूल्य :qty मात्र के लिए स्थिर मूल्य पर :price',
                         'discount-group-price-info' => 'मूल्य पर qty मात्र के लिए :price की छूट',
                         'empty-info'                => 'विशेष मूल्यवान ग्राहकों के लिए विशिष्ट मूल्यनिर्धारण।',
@@ -549,6 +549,7 @@ return [
                         'create' => [
                             'create-title'   => 'ग्राहक समूह मूल्य बनाएं',
                             'customer-group' => 'ग्राहक समूह',
+                            'all-groups'     => 'सभी समूह',
                             'discount'       => 'छूट',
                             'delete-btn'     => 'हटाएं',
                             'fixed'          => 'स्थिर',
