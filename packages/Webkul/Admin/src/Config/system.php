@@ -1159,7 +1159,7 @@ return [
             ],
         ],
     ], [
-        'key'    => 'sales.order_settings.minimum-order',
+        'key'    => 'sales.order_settings.minimum_order',
         'name'   => 'admin::app.configuration.index.sales.order-settings.minimum-order',
         'info'   => 'admin::app.configuration.index.sales.order-settings.minimum-order-info',
         'sort'   => 1,
@@ -1320,7 +1320,7 @@ return [
             ],
         ],
     ], [
-        'key'    => 'taxes.catalogue.default-location-calculation',
+        'key'    => 'taxes.catalogue.default_location_calculation',
         'name'   => 'tax::app.admin.system.taxes.default-location-calculation',
         'info'   => 'tax::app.admin.system.taxes.default-location-calculation-info',
         'sort'   => 1,

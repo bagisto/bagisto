@@ -100,13 +100,13 @@ class Tax
 
             function __construct()
             {
-                $this->country = core()->getConfigData('taxes.catalogue.default-location-calculation.country') != ''
-                    ? core()->getConfigData('taxes.catalogue.default-location-calculation.country')
+                $this->country = core()->getConfigData('taxes.catalogue.default_location_calculation.country') != ''
+                    ? core()->getConfigData('taxes.catalogue.default_location_calculation.country')
                     : strtoupper(config('app.default_country'));
 
-                $this->state = core()->getConfigData('taxes.catalogue.default-location-calculation.state');
+                $this->state = core()->getConfigData('taxes.catalogue.default_location_calculation.state');
 
-                $this->postcode = core()->getConfigData('taxes.catalogue.default-location-calculation.post_code');
+                $this->postcode = core()->getConfigData('taxes.catalogue.default_location_calculation.post_code');
             }
         };
     }
