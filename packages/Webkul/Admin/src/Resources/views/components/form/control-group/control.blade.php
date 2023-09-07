@@ -59,6 +59,7 @@
     @case('textarea')
         <v-field
             name="{{ $name }}"
+            value="{{ $slot }}"
             v-slot="{ field }"
             {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
@@ -70,11 +71,15 @@
                 {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400']) }}
             >
             </textarea>
-        </v-field>
 
-        @if ($attributes->get('tinymce', false) || $attributes->get(':tinymce', false))
-            <x-admin::tinymce :selector="'textarea#' . $attributes->get('id')"></x-admin::tinymce>
-        @endif
+            @if ($attributes->get('tinymce', false) || $attributes->get(':tinymce', false))
+                <x-admin::tinymce 
+                    :selector="'textarea#' . $attributes->get('id')"
+                    ::field="field"
+                >
+                </x-admin::tinymce>
+            @endif
+        </v-field>
 
         @break
 
