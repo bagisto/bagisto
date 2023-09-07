@@ -9,7 +9,7 @@
         <div class="flex gap-[20px] items-center max-w-[745px]">
             <div class="w-full">
                 <img
-                    src="{{ bagisto_asset('images/Logo.svg') }}"
+                    src="{{ bagisto_asset('images/logo.svg') }}"
                     class="mb-[25px]"
                 >
 
@@ -55,7 +55,7 @@
             </div>
 
             <div class="w-full">
-                <img src="{{ bagisto_asset('images/Error.svg') }}" />
+                <img src="{{ bagisto_asset('images/error.svg') }}" />
             </div>
         </div>
 	</div>

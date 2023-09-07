@@ -143,22 +143,22 @@
                     placeholders: [
                         {
                             label: "@lang('admin::app.catalog.products.edit.images.placeholders.front')",
-                            image: "{{ bagisto_asset('images/product-placeholders/Front.svg') }}"
+                            image: "{{ bagisto_asset('images/product-placeholders/front.svg') }}"
                         }, {
                             label: "@lang('admin::app.catalog.products.edit.images.placeholders.next')",
-                            image: "{{ bagisto_asset('images/product-placeholders/Next-1.svg') }}"
+                            image: "{{ bagisto_asset('images/product-placeholders/next-1.svg') }}"
                         }, {
                             label: "@lang('admin::app.catalog.products.edit.images.placeholders.next')",
-                            image: "{{ bagisto_asset('images/product-placeholders/Next-2.svg') }}"
+                            image: "{{ bagisto_asset('images/product-placeholders/next-2.svg') }}"
                         }, {
                             label: "@lang('admin::app.catalog.products.edit.images.placeholders.zoom')",
-                            image: "{{ bagisto_asset('images/product-placeholders/Zoom.svg') }}"
+                            image: "{{ bagisto_asset('images/product-placeholders/zoom.svg') }}"
                         }, {
                             label: "@lang('admin::app.catalog.products.edit.images.placeholders.use-cases')",
-                            image: "{{ bagisto_asset('images/product-placeholders/Use-Cases.svg') }}"
+                            image: "{{ bagisto_asset('images/product-placeholders/use-cases.svg') }}"
                         }, {
                             label: "@lang('admin::app.catalog.products.edit.images.placeholders.size')",
-                            image: "{{ bagisto_asset('images/product-placeholders/Size.svg') }}"
+                            image: "{{ bagisto_asset('images/product-placeholders/size.svg') }}"
                         }
                     ]
                 }

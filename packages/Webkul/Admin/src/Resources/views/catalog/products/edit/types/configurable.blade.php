@@ -49,7 +49,7 @@
             >
                 <!-- Placeholder Image -->
                 <img
-                    src="{{ bagisto_asset('images/Icon-Add-Product.svg') }}"
+                    src="{{ bagisto_asset('images/icon-add-product.svg') }}"
                     class="w-[80px] h-[80px]"
                 />
 
@@ -187,7 +187,7 @@
                 <!-- Image -->
                 <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
                     <template v-if="! variant.images.length">
-                        <img src="{{ bagisto_asset('images/product-placeholders/Front.svg') }}">
+                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                     </template>
 
                     <template v-else>

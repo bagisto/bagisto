@@ -5,7 +5,7 @@ return [
         'key'  => 'customer.captcha',
         'name' => 'customer::app.admin.system.captcha.title',
         'info' => 'customer::app.admin.system.captcha.info',
-        'icon' => 'settings/Captcha.svg',
+        'icon' => 'settings/captcha.svg',
         'sort' => 2,
     ], [
         'key'    => 'customer.captcha.credentials',

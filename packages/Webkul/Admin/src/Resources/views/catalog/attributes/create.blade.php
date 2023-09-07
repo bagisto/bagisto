@@ -248,7 +248,7 @@
                                                         <!-- Swatch Image -->
                                                         <div v-if="swatchType == 'image'">
                                                             <img 
-                                                                src="{{ bagisto_asset('images/product-placeholders/Front.svg') }}"
+                                                                src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
                                                                 :ref="'image_' + element.params.id"
                                                                 class="h-[50px] w-[50px]"
                                                             />
@@ -336,7 +336,7 @@
                                     <!-- Attribute Option Image -->
                                     <img 
                                         class="w-[120px] h-[120px]" 
-                                        src="{{ bagisto_asset('images/Icon-Add-Product.svg') }}" 
+                                        src="{{ bagisto_asset('images/icon-add-product.svg') }}" 
                                         alt="@lang('admin::app.catalog.attributes.create.add-attribute-options')"
                                     />
                                     

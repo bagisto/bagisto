@@ -153,7 +153,7 @@
                             >
                                 <img    
                                     class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]"
-                                    src="{{ bagisto_asset('images/product-placeholders/Front.svg') }}"
+                                    src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
                                     alt="add-product-to-store"
                                 >
                 
@@ -509,7 +509,7 @@
                         >
                             <img
                                 class="w-[120px] h-[120px] p-2 border border-dashed border-gray-300 rounded-[4px]"
-                                src="{{ bagisto_asset('images/empty-placeholders/Default-Empty.svg') }}"
+                                src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
                                 alt="add-product-to-store"
                             >
             
@@ -869,7 +869,7 @@
                         >
                             <img
                                 class="w-[120px] h-[120px] p-2 border border-dashed border-gray-300 rounded-[4px]"
-                                src="{{ bagisto_asset('images/empty-placeholders/Default-Empty.svg') }}"
+                                src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
                                 alt="add-category-to-store"
                             >
             
@@ -1359,7 +1359,7 @@
                             >
                                 <img
                                     class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]"
-                                    src="{{ bagisto_asset('images/empty-placeholders/Default-Empty.svg') }}"
+                                    src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
                                     alt="add-product-to-store"
                                 >
                 

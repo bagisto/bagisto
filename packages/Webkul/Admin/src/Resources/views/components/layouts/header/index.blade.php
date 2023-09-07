@@ -19,7 +19,7 @@
             @if (core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode()))
                 <img src="{{ Storage::url(core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode())) }}" alt="{{ config('app.name') }}" style="height: 40px; width: 110px;"/>
             @else
-                <img src="{{ bagisto_asset('images/Logo.svg') }}">
+                <img src="{{ bagisto_asset('images/logo.svg') }}">
             @endif
         </a>
 
@@ -130,7 +130,7 @@
             @if (core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode()))
                 <img src="{{ Storage::url(core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode())) }}" alt="{{ config('app.name') }}" style="height: 40px; width: 110px;"/>
             @else
-                <img src="{{ bagisto_asset('images/Logo.svg') }}">
+                <img src="{{ bagisto_asset('images/logo.svg') }}">
             @endif
         </div>
     </x-slot:header>
@@ -224,7 +224,7 @@
                                         :class="{'border border-dashed border-gray-300': ! product.images.length}"
                                     >
                                         <template v-if="! product.images.length">
-                                            <img src="{{ bagisto_asset('images/product-placeholders/Front.svg') }}">
+                                            <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                         
                                             <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">Product Image</p>
                                         </template>

@@ -9,7 +9,7 @@
             {{-- Logo --}}
             <img 
                 class="w-max" 
-                src="{{ bagisto_asset('images/Logo.svg') }}" 
+                src="{{ bagisto_asset('images/logo.svg') }}" 
                 alt="Bagisto Logo"
             >
 

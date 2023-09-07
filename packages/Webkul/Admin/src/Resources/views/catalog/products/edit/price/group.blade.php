@@ -74,7 +74,7 @@
                     v-if="! prices.length"
                 >
                     <img
-                        src="{{ bagisto_asset('images/Icon-Discount.svg') }}"
+                        src="{{ bagisto_asset('images/icon-discount.svg') }}"
                         class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
                     />
 

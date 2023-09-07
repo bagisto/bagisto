@@ -49,13 +49,13 @@
                             <img
                                 v-if="componentName == 'v-slider-theme'"
                                 class="w-[80px] h-[80px]"
-                                src="{{ bagisto_asset('images/Active-Slider.svg') }}"
+                                src="{{ bagisto_asset('images/active-slider.svg') }}"
                             >
 
                             <img
                                 v-else
                                 class="w-[80px] h-[80px]"
-                                src="{{ bagisto_asset('images/Inactive-Slider.svg') }}"
+                                src="{{ bagisto_asset('images/inactive-slider.svg') }}"
                             >
                 
                             <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold"> 
@@ -73,13 +73,13 @@
                             <img
                                 v-if="componentName == 'v-product-theme'"
                                 class="w-[80px] h-[80px]"
-                                src="{{ bagisto_asset('images/Active-Product-Carousel.svg') }}"
+                                src="{{ bagisto_asset('images/active-product-carousel.svg') }}"
                             >
 
                             <img
                                 v-else
                                 class="w-[80px] h-[80px]"
-                                src="{{ bagisto_asset('images/Inactive-Product-Carousel.svg') }}"
+                                src="{{ bagisto_asset('images/inactive-product-carousel.svg') }}"
                             >
                 
                             <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold"> 
@@ -97,13 +97,13 @@
                             <img
                                 v-if="componentName == 'v-category-theme'"
                                 class="w-[80px] h-[80px]"
-                                src="{{ bagisto_asset('images/Active-Category.svg') }}"
+                                src="{{ bagisto_asset('images/active-category.svg') }}"
                             >
 
                             <img
                                 v-else
                                 class="w-[80px] h-[80px]"
-                                src="{{ bagisto_asset('images/Inactive-Category.svg') }}"
+                                src="{{ bagisto_asset('images/inactive-category.svg') }}"
                             >
                 
                             <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold"> 
@@ -121,13 +121,13 @@
                             <img
                                 v-if="componentName == 'v-static-theme'"
                                 class="w-[80px] h-[80px]"
-                                src="{{ bagisto_asset('images/Active-Static-Content.svg') }}"
+                                src="{{ bagisto_asset('images/active-static-content.svg') }}"
                             >
 
                             <img
                                 v-else
                                 class="w-[80px] h-[80px]"
-                                src="{{ bagisto_asset('images/Inactive-Static-Content.svg') }}"
+                                src="{{ bagisto_asset('images/inactive-static-content.svg') }}"
                             >
                 
                             <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold">
@@ -145,13 +145,13 @@
                             <img
                                 v-if="componentName == 'v-footer-link-theme'"
                                 class="w-[80px] h-[80px]"
-                                src="{{ bagisto_asset('images/Active-Footer-Link.svg') }}"
+                                src="{{ bagisto_asset('images/active-footer-link.svg') }}"
                             >
 
                             <img
                                 v-else
                                 class="w-[80px] h-[80px]"
-                                src="{{ bagisto_asset('images/Inactive-Footer-Link.svg') }}"
+                                src="{{ bagisto_asset('images/inactive-footer-link.svg') }}"
                             >
                 
                             <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold">
@@ -260,7 +260,7 @@
                             >
                                 <img    
                                     class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]"
-                                    src="{{ bagisto_asset('images/empty-placeholders/Default-Empty.svg') }}"
+                                    src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
                                     alt="add-product-to-store"
                                 >
                 
@@ -617,7 +617,7 @@
                         >
                             <img
                                 class="w-[120px] h-[120px] p-2 border border-dashed border-gray-300 rounded-[4px]"
-                                src="{{ bagisto_asset('images/empty-placeholders/Default-Empty.svg') }}"
+                                src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
                                 alt="add-product-to-store"
                             >
             
@@ -973,7 +973,7 @@
                         >
                             <img
                                 class="w-[120px] h-[120px] p-2 border border-dashed border-gray-300 rounded-[4px]"
-                                src="{{ bagisto_asset('images/empty-placeholders/Default-Empty.svg') }}"
+                                src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
                                 alt="add-category-to-store"
                             >
 
@@ -1294,7 +1294,7 @@
                             >
                                 <img
                                     class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]"
-                                    src="{{ bagisto_asset('images/empty-placeholders/Default-Empty.svg') }}"
+                                    src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
                                     alt="add-product-to-store"
                                 >
                 

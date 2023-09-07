@@ -26,7 +26,7 @@ return [
         'key'  => 'sales.orderSettings',
         'name' => 'admin::app.configuration.index.sales.order-settings.title',
         'info' => 'admin::app.configuration.index.sales.order-settings.info',
-        'icon' => 'settings/Order-Setting.svg',
+        'icon' => 'settings/order.svg',
         'sort' => 4,
     ], [
         'key'    => 'sales.orderSettings.order_number',

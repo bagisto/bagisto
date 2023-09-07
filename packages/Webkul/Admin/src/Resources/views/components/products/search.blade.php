@@ -71,7 +71,7 @@
                                 :class="{'border border-dashed border-gray-300': ! product.images.length}"
                             >
                                 <template v-if="! product.images.length">
-                                    <img src="{{ bagisto_asset('images/product-placeholders/Front.svg') }}">
+                                    <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                 
                                     <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">Product Image</p>
                                 </template>
@@ -113,7 +113,7 @@
                 >
                     <!-- Placeholder Image -->
                     <img
-                        src="{{ bagisto_asset('images/Icon-Add-Product.svg') }}"
+                        src="{{ bagisto_asset('images/icon-add-product.svg') }}"
                         class="w-[80px] h-[80px]"
                     />
 

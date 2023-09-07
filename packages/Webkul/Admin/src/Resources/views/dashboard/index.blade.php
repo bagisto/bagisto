@@ -36,7 +36,7 @@
                         <div class="flex gap-[10px] flex-1 min-w-[200px]">
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
-                                    src="{{ bagisto_asset('images/Total-Sales.svg')}}"
+                                    src="{{ bagisto_asset('images/total-sales.svg')}}"
                                     title="@lang('admin::app.dashboard.index.total-sales')"
                                 >
                             </div>
@@ -78,7 +78,7 @@
                         <div class="flex gap-[10px] flex-1 min-w-[200px]">
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
-                                    src="{{ bagisto_asset('images/Total-Orders.svg')}}"
+                                    src="{{ bagisto_asset('images/total-orders.svg')}}"
                                     title="@lang('admin::app.dashboard.index.total-orders')"
                                 >
                             </div>
@@ -120,7 +120,7 @@
                         <div class="flex gap-[10px] flex-1 min-w-[200px]">
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
-                                    src="{{ bagisto_asset('images/Customer.svg')}}"
+                                    src="{{ bagisto_asset('images/customer.svg')}}"
                                     title="@lang('admin::app.dashboard.index.total-customers')"
                                 >
                             </div>
@@ -162,7 +162,7 @@
                         <div class="flex gap-[10px] flex-1 min-w-[200px]">
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
-                                    src="{{ bagisto_asset('images/Average-Order.svg')}}"
+                                    src="{{ bagisto_asset('images/average-order.svg')}}"
                                     title="@lang('admin::app.dashboard.index.average-sale')"
                                 >
                             </div>
@@ -203,7 +203,7 @@
                         <div class="flex gap-[10px] flex-1 min-w-[200px]">
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
-                                    src="{{ bagisto_asset('images/Unpaid-Invoice.svg')}}"
+                                    src="{{ bagisto_asset('images/unpaid-invoice.svg')}}"
                                     title="@lang('admin::app.dashboard.index.total-unpaid-invoices')"
                                 >
                             </div>
@@ -234,7 +234,7 @@
                         <div class="flex gap-[10px] flex-1">
                             <img
                                 class="w-full h-[60px] max-w-[60px] max-h-[60px]"
-                                src="{{ bagisto_asset('images/Total-Sales.svg')}}"
+                                src="{{ bagisto_asset('images/total-sales.svg')}}"
                                 title="@lang('admin::app.dashboard.index.today-sales')"
                             >
 
@@ -275,7 +275,7 @@
                         <div class="flex gap-[10px] flex-1">
                             <img
                                 class="w-full h-[60px] max-w-[60px] max-h-[60px]"
-                                src="{{ bagisto_asset('images/Total-Orders.svg')}}"
+                                src="{{ bagisto_asset('images/total-orders.svg')}}"
                                 title="@lang('admin::app.dashboard.index.today-orders')"
                             >
 
@@ -316,7 +316,7 @@
                         <div class="flex gap-[10px] flex-1">
                             <img
                                 class="w-full h-[60px] max-w-[60px] max-h-[60px]"
-                                src="{{ bagisto_asset('images/Customer.svg')}}"
+                                src="{{ bagisto_asset('images/customer.svg')}}"
                                 title="@lang('admin::app.dashboard.index.today-customers')"
                             >
 
@@ -462,7 +462,7 @@
                                                     />
                                                 @else
                                                     <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
-                                                        <img src="{{ bagisto_asset('images/product-placeholders/Front.svg')}}">
+                                                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
 
                                                         <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                                                             @lang('admin::app.dashboard.index.product-image')
@@ -525,7 +525,7 @@
                                         </div>
                                     @else
                                         <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
-                                            <img src="{{ bagisto_asset('images/product-placeholders/Front.svg')}}">
+                                            <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
 
                                             <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                                                 @lang('admin::app.dashboard.index.product-image')
@@ -723,7 +723,7 @@
                                         v-else
                                         class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden"
                                     >
-                                        <img src="{{ bagisto_asset('images/product-placeholders/Front.svg')}}">
+                                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
                                         
                                         <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                                             @lang('admin::app.dashboard.index.product-image')
@@ -763,7 +763,7 @@
                                 <div class="grid gap-[14px] justify-center justify-items-center py-[10px]">
                                     <!-- Placeholder Image -->
                                     <img
-                                        src="{{ bagisto_asset('images/Icon-Add-Product.svg') }}"
+                                        src="{{ bagisto_asset('images/icon-add-product.svg') }}"
                                         class="w-[80px] h-[80px]"
                                     >
     
@@ -878,7 +878,7 @@
                             <div class="grid gap-[14px] justify-center justify-items-center py-[10px]">
                                 <!-- Placeholder Image -->
                                 <img
-                                    src="{{ bagisto_asset('images/Icon-Add-Product.svg') }}"
+                                    src="{{ bagisto_asset('images/icon-add-product.svg') }}"
                                     class="w-[80px] h-[80px]"
                                 />
 

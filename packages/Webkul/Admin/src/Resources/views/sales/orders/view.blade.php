@@ -131,7 +131,7 @@
                                         >
                                     @else
                                         <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px]">
-                                            <img src="{{ bagisto_asset('images/product-placeholders/Front.svg') }}">
+                                            <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                             
                                             <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
                                                 @lang('admin::app.sales.invoices.view.product-image') 
@@ -744,7 +744,7 @@
                                                 >
                                             @else
                                                 <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px]">
-                                                    <img src="{{ bagisto_asset('images/product-placeholders/Front.svg') }}">
+                                                    <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                                     
                                                     <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
                                                         @lang('admin::app.sales.invoices.view.product-image') 
