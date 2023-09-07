@@ -9,7 +9,7 @@
         <div class="flex gap-[20px] items-center max-w-[745px]">
             <div class="w-full">
                 <img
-                    src="{{ bagisto_asset('images/logo.png') }}"
+                    src="{{ bagisto_asset('images/logo.svg') }}"
                     class="mb-[25px]"
                 >
 

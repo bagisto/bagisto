@@ -1,0 +1,18 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="180" height="180" fill="white"/>
+<ellipse cx="92" cy="149.807" rx="56" ry="2.5" fill="white"/>
+<rect x="52.2856" y="55.324" width="82" height="91.9821" rx="20.5714" fill="white" stroke="#6B7280" stroke-width="6"/>
+<path d="M117.886 85.377H68.6857" stroke="#6B7280" stroke-width="6" stroke-linecap="round"/>
+<path d="M103.308 100.859H68.6859" stroke="#6B7280" stroke-width="6" stroke-linecap="round"/>
+<path d="M114.241 118.162H68.6857" stroke="#6B7280" stroke-width="6" stroke-linecap="round"/>
+<rect x="71.0771" y="45.3057" width="43.7333" height="17.3036" rx="8.65179" fill="#E5E7EB" stroke="#6B7280" stroke-width="6"/>
+<path d="M135.195 34.1125L132.22 45.6138" stroke="#6B7280" stroke-width="6" stroke-linecap="round"/>
+<path d="M153.943 67.1677L142.495 63.9934" stroke="#6B7280" stroke-width="6" stroke-linecap="round"/>
+<path d="M149.155 47.5293L137.499 54.2585" stroke="#6B7280" stroke-width="6" stroke-linecap="round"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M44.9998 41.0005C44.9998 41.5528 45.4475 42.0005 45.9998 42.0005C46.5521 42.0005 46.9998 41.5528 46.9998 41.0005V36.0005H52C52.5523 36.0005 53 35.5528 53 35.0005C53 34.4482 52.5523 34.0005 52 34.0005L46.9998 34.0005V29.0005C46.9998 28.4482 46.5521 28.0005 45.9998 28.0005C45.4475 28.0005 44.9998 28.4482 44.9998 29.0005V34.0005L40 34.0005C39.4477 34.0005 39 34.4482 39 35.0005C39 35.5528 39.4477 36.0005 40 36.0005H44.9998V41.0005Z" fill="#E5E7EB"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M156 111C156 111.552 156.448 112 157 112C157.552 112 158 111.552 158 111V107L161 107C161.552 107 162 106.552 162 106C162 105.448 161.552 105 161 105L158 105V102C158 101.448 157.552 101 157 101C156.448 101 156 101.448 156 102V105L152 105C151.448 105 151 105.448 151 106C151 106.552 151.448 107 152 107L156 107V111Z" fill="#E5E7EB"/>
+<circle cx="36.5" cy="105.5" r="1.5" stroke="#E5E7EB" stroke-width="2"/>
+<circle cx="25.5" cy="141.5" r="2.5" stroke="#E5E7EB" stroke-width="2"/>
+<circle cx="159.5" cy="136.5" r="1.5" stroke="#E5E7EB" stroke-width="2"/>
+<circle cx="22.5" cy="72.5005" r="2.5" stroke="#E5E7EB" stroke-width="2"/>
+</svg>
