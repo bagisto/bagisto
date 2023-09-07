@@ -2971,6 +2971,13 @@ return [
         ],
 
         'datagrid' => [
+            'index' => [
+                'no-records-selected'              => 'Hiçbir kayıt seçilmedi.',
+                'must-select-a-mass-action'        => 'Toplu işlem seçmelisiniz.',
+                'must-select-a-mass-action-option' => 'Toplu işlem seçeneği seçmelisiniz.',
+                'sure-want-to-perform-this-action' => 'Bu işlemi gerçekleştirmek istediğinizden emin misiniz?',
+            ],
+            
             'toolbar' => [
                 'mass-actions' => [
                     'select-action' => 'Eylem Seç',

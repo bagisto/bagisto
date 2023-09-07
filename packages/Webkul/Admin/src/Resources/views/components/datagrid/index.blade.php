@@ -524,14 +524,14 @@
                 },
 
                 validateMassAction() {
-                    if (!this.applied.massActions.indices.length) {
-                        alert('No records have been selected.');
+                    if (! this.applied.massActions.indices.length) {
+                        alert("@lang('admin::app.components.datagrid.index.no-records-selected')");
 
                         return false;
                     }
 
-                    if (!this.applied.massActions.meta.action) {
-                        alert('You must select a mass action.');
+                    if (! this.applied.massActions.meta.action) {
+                        alert("@lang('admin::app.components.datagrid.index.must-select-a-mass-action')");
 
                         return false;
                     }
@@ -540,12 +540,12 @@
                         this.applied.massActions.meta.action?.options?.length &&
                         this.applied.massActions.value === null
                     ) {
-                        alert('You must select a mass action\'s option.');
+                        alert("@lang('admin::app.components.datagrid.index.must-select-a-mass-action-option')");
 
                         return false;
                     }
 
-                    if (!confirm('Are you sure you want to perform this action?')) {
+                    if (! confirm("@lang('admin::app.components.datagrid.index.sure-want-to-perform-this-action')")) {
                         return false;
                     }
 
@@ -608,6 +608,8 @@
 
                             break;
                     }
+
+                    this.applied.massActions.indices  = [];
                 },
 
                 //=======================================================================================
@@ -689,7 +691,7 @@
                         case 'put':
                         case 'patch':
                         case 'delete':
-                            if (!confirm('Are you sure, you want to perform this action?')) {
+                            if (! confirm("@lang('admin::app.components.datagrid.index.sure-want-to-perform-this-action')")) {
                                 return;
                             }
 
