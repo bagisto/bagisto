@@ -190,7 +190,7 @@
             >
                 <!-- Placeholder Image -->
                 <img
-                    src="{{ bagisto_asset('images/icon-add-product.svg') }}"
+                    src="{{ bagisto_asset('images/Icon-Add-Product.svg') }}"
                     class="w-[80px] h-[80px]"
                 />
 
@@ -619,7 +619,7 @@
             >
                 <!-- Placeholder Image -->
                 <img
-                    src="{{ bagisto_asset('images/icon-add-product.svg') }}"
+                    src="{{ bagisto_asset('images/Icon-Add-Product.svg') }}"
                     class="w-[80px] h-[80px]"
                 />
 

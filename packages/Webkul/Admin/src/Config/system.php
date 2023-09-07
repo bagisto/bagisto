@@ -13,7 +13,7 @@ return [
         'key'  => 'general.general',
         'name' => 'admin::app.configuration.index.general.general.title',
         'info' => 'admin::app.configuration.index.general.general.info',
-        'icon' => 'store-setting.svg',
+        'icon' => 'Store-Setting.svg',
         'sort' => 1,
     ], [
         'key'    => 'general.general.locale_options',
@@ -41,7 +41,7 @@ return [
         'key'  => 'general.content',
         'name' => 'admin::app.configuration.index.general.content.title',
         'info' => 'admin::app.configuration.index.general.content.info',
-        'icon' => 'store-setting.svg',
+        'icon' => 'Store-Setting.svg',
         'sort' => 2,
     ], [
         'key'    => 'general.content.shop',
@@ -93,7 +93,7 @@ return [
         'key'  => 'general.design',
         'name' => 'admin::app.configuration.index.general.design.title',
         'info' => 'admin::app.configuration.index.general.design.info',
-        'icon' => 'theme-setting.svg',
+        'icon' => 'Theme-Setting.svg',
         'sort' => 3,
     ], [
         'key'    => 'general.design.admin_logo',
@@ -129,7 +129,7 @@ return [
         'key'  => 'catalog.products',
         'name' => 'admin::app.configuration.index.catalog.products.title',
         'info' => 'admin::app.configuration.index.catalog.products.info',
-        'icon' => 'store-information.svg',
+        'icon' => 'Store-Information.svg',
         'sort' => 2,
     ], [
         'key'    => 'catalog.products.guest-checkout',
@@ -347,7 +347,7 @@ return [
         'key'  => 'catalog.inventory',
         'name' => 'admin::app.configuration.index.catalog.inventory.title',
         'info' => 'admin::app.configuration.index.catalog.inventory.info',
-        'icon' => 'store-setting.svg',
+        'icon' => 'Store-Setting.svg',
         'sort' => 1,
     ], [
         'key'    => 'catalog.inventory.stock_options',
@@ -366,7 +366,7 @@ return [
         'key'  => 'catalog.rich_snippets',
         'name' => 'admin::app.configuration.index.catalog.rich-snippets.title',
         'info' => 'admin::app.configuration.index.catalog.rich-snippets.info',
-        'icon' => 'settings.svg',
+        'icon' => 'Settings.svg',
         'sort' => 3,
     ], [
         'key'    => 'catalog.rich_snippets.products',
@@ -438,7 +438,7 @@ return [
         'key'  => 'customer.address',
         'name' => 'admin::app.configuration.index.customer.address.title',
         'info' => 'admin::app.configuration.index.customer.address.info',
-        'icon' => 'address-setting.svg',
+        'icon' => 'Address-Setting.svg',
         'sort' => 1,
     ], [
         'key'    => 'customer.address.requirements',
@@ -486,7 +486,7 @@ return [
         'key'  => 'customer.settings',
         'name' => 'admin::app.configuration.index.customer.settings.title',
         'info' => 'admin::app.configuration.index.customer.settings.settings-info',
-        'icon' => 'settings.svg',
+        'icon' => 'Settings.svg',
         'sort' => 3,
     ], [
         'key'    => 'customer.settings.wishlist',
@@ -538,7 +538,7 @@ return [
         'key'  => 'emails.configure',
         'name' => 'admin::app.configuration.index.email.email-settings.title',
         'info' => 'admin::app.configuration.index.email.email-settings.info',
-        'icon' => 'email.svg',
+        'icon' => 'Email.svg',
         'sort' => 1,
     ], [
         'key'    => 'emails.configure.email_settings',
@@ -584,7 +584,7 @@ return [
         'key'  => 'emails.general',
         'name' => 'admin::app.configuration.index.email.notifications.title',
         'info' => 'admin::app.configuration.index.email.notifications.info',
-        'icon' => 'store-setting.svg',
+        'icon' => 'Store-Setting.svg',
         'sort' => 1,
     ], [
         'key'    => 'emails.general.notifications',

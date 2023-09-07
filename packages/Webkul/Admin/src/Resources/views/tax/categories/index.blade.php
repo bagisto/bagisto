@@ -283,7 +283,7 @@
                                     v-else
                                 >
                                     <img 
-                                        src="{{ bagisto_asset('images/tax.svg') }}" 
+                                        src="{{ bagisto_asset('images/Tax.svg') }}" 
                                         class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
                                     >
 

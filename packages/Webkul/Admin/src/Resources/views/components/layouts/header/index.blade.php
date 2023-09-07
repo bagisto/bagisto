@@ -19,7 +19,7 @@
             @if (core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode()))
                 <img src="{{ Storage::url(core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode())) }}" alt="{{ config('app.name') }}" style="height: 40px; width: 110px;"/>
             @else
-                <img src="{{ bagisto_asset('images/logo.svg') }}">
+                <img src="{{ bagisto_asset('images/Logo.svg') }}">
             @endif
         </a>
 
@@ -130,7 +130,7 @@
             @if (core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode()))
                 <img src="{{ Storage::url(core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode())) }}" alt="{{ config('app.name') }}" style="height: 40px; width: 110px;"/>
             @else
-                <img src="{{ bagisto_asset('images/logo.svg') }}">
+                <img src="{{ bagisto_asset('images/Logo.svg') }}">
             @endif
         </div>
     </x-slot:header>

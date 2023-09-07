@@ -58,7 +58,7 @@
             >
                 <!-- Placeholder Image -->
                 <img
-                    src="{{ bagisto_asset('images/icon-options.svg') }}"
+                    src="{{ bagisto_asset('images/Icon-Options.svg') }}"
                     class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
                 />
 
@@ -362,7 +362,7 @@
             >
                 <!-- Placeholder Image -->
                 <img
-                    src="{{ bagisto_asset('images/icon-add-product.svg') }}"
+                    src="{{ bagisto_asset('images/Icon-Add-Product.svg') }}"
                     class="w-[80px] h-[80px]"
                 />
 

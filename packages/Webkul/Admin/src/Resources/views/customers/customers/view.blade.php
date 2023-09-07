@@ -205,7 +205,7 @@
                         <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
                             <!-- Placeholder Image -->
                             <img
-                                src="{{ bagisto_asset('images/orders-empty.svg') }}"
+                                src="{{ bagisto_asset('images/Orders-Empty.svg') }}"
                                 class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
                             />
 
@@ -276,7 +276,7 @@
                         <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
                             {{-- Placeholder Image --}}
                             <img
-                                src="{{ bagisto_asset('images/invoice-setting.svg') }}"
+                                src="{{ bagisto_asset('images/Invoice-Setting.svg') }}"
                                 class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
                             />
 
@@ -387,7 +387,7 @@
                         <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
                             {{-- Placeholder Image --}}
                             <img
-                                src="{{ bagisto_asset('images/reviews-empty.svg') }}"
+                                src="{{ bagisto_asset('images/Reviews-Empty.svg') }}"
                                 class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
                             />
 
@@ -622,7 +622,7 @@
                         {{-- Empty Address Container --}}
                         <div class="flex gap-[20px] items-center py-[10px]">
                             <img
-                                src="{{ bagisto_asset('images/address-setting.svg') }}"
+                                src="{{ bagisto_asset('images/Address-Setting.svg') }}"
                                 class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
                             >
 
