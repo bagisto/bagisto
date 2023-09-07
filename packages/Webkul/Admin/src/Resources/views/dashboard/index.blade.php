@@ -624,7 +624,7 @@
                                     name="startDate" 
                                     class="cursor-pointer"
                                     :placeholder="trans('admin::app.dashboard.index.start-date')"
-                                    v-model="filters.startDate"
+                                    v-model="filters.start"
                                 >
                                 </x-admin::form.control-group.control>
                             </x-admin::form.control-group>
@@ -640,7 +640,7 @@
                                     name="endDate" 
                                     class="cursor-pointer"
                                     :placeholder="trans('admin::app.dashboard.index.end-date')"
-                                    v-model="filters.endDate"
+                                    v-model="filters.end"
                                 >
                                 </x-admin::form.control-group.control>
                             </x-admin::form.control-group>
@@ -906,8 +906,8 @@
                         isLoading: true,
 
                         filters: {
-                            startDate: "{{ $startDate->format('Y-m-d') }}",
-                            endDate: "{{ $endDate->format('Y-m-d') }}",
+                            start: "{{ $startDate->format('Y-m-d') }}",
+                            end: "{{ $endDate->format('Y-m-d') }}",
                         },
 
                         statistics: {},
