@@ -9,7 +9,7 @@
                 class="flex gap-[6px] items-center justify-between px-[10px] text-blue-600 cursor-pointer transition-all hover:underline"
                 @click="$refs.customerEditModal.toggle()"
                 >
-                @lang('admin::app.customers.edit.edit-btn')
+                @lang('admin::app.customers.customers.edit.edit-btn')
             </button>
         @endif
 
@@ -27,7 +27,7 @@
                     <x-slot:header>
                         <!-- Modal Header -->
                         <p class="text-[18px] text-gray-800 font-bold">
-                            @lang('admin::app.customers.edit.title')
+                            @lang('admin::app.customers.customers.edit.title')
                         </p>    
                     </x-slot:header>
 
@@ -46,7 +46,7 @@
                                 <!--First Name -->
                                 <x-admin::form.control-group class="w-full mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.customers.edit.first-name')
+                                        @lang('admin::app.customers.customers.edit.first-name')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -55,8 +55,8 @@
                                         id="first_name" 
                                         :value="$customer->first_name"
                                         rules="required"
-                                        :label="trans('admin::app.customers.edit.first-name')"
-                                        :placeholder="trans('admin::app.customers.edit.first-name')"
+                                        :label="trans('admin::app.customers.customers.edit.first-name')"
+                                        :placeholder="trans('admin::app.customers.customers.edit.first-name')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -69,7 +69,7 @@
                                 <!--Last Name -->
                                 <x-admin::form.control-group class="w-full mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.customers.edit.last-name')
+                                        @lang('admin::app.customers.customers.edit.last-name')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -78,8 +78,8 @@
                                         :value="$customer->last_name"
                                         id="last_name"
                                         rules="required"
-                                        :label="trans('admin::app.customers.edit.last-name')"
-                                        :placeholder="trans('admin::app.customers.edit.last-name')"
+                                        :label="trans('admin::app.customers.customers.edit.last-name')"
+                                        :placeholder="trans('admin::app.customers.customers.edit.last-name')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -93,7 +93,7 @@
                             <!-- Email -->
                             <x-admin::form.control-group class="mb-[10px]">
                                 <x-admin::form.control-group.label class="required">
-                                    @lang('admin::app.customers.edit.email')
+                                    @lang('admin::app.customers.customers.edit.email')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
@@ -102,7 +102,7 @@
                                     :value="$customer->email"
                                     id="email"
                                     rules="required|email"
-                                    :label="trans('admin::app.customers.edit.email')"
+                                    :label="trans('admin::app.customers.customers.edit.email')"
                                     placeholder="email@example.com"
                                 >
                                 </x-admin::form.control-group.control>
@@ -117,7 +117,7 @@
                                 <!-- Phone -->
                                 <x-admin::form.control-group class="w-full mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.customers.edit.contact-number')
+                                        @lang('admin::app.customers.customers.edit.contact-number')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -126,8 +126,8 @@
                                         :value="$customer->phone"
                                         id="phone"
                                         rules="required|integer"
-                                        :label="trans('admin::app.customers.edit.contact-number')"
-                                        :placeholder="trans('admin::app.customers.edit.contact-number')"
+                                        :label="trans('admin::app.customers.customers.edit.contact-number')"
+                                        :placeholder="trans('admin::app.customers.customers.edit.contact-number')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -140,7 +140,7 @@
                                 <!-- Date -->
                                 <x-admin::form.control-group class="w-full mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('admin::app.customers.edit.date-of-birth')
+                                        @lang('admin::app.customers.customers.edit.date-of-birth')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -148,8 +148,8 @@
                                         name="date_of_birth" 
                                         :value="$customer->date_of_birth"
                                         id="dob"
-                                        :label="trans('admin::app.customers.edit.date-of-birth')"
-                                        :placeholder="trans('admin::app.customers.edit.date-of-birth')"
+                                        :label="trans('admin::app.customers.customers.edit.date-of-birth')"
+                                        :placeholder="trans('admin::app.customers.customers.edit.date-of-birth')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -164,7 +164,7 @@
                                 <!-- Gender -->
                                 <x-admin::form.control-group class="w-full">
                                     <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.customers.edit.gender')
+                                        @lang('admin::app.customers.customers.edit.gender')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -173,18 +173,18 @@
                                         :value="$customer->gender"
                                         id="gender"
                                         rules="required"
-                                        :label="trans('admin::app.customers.edit.gender')"
+                                        :label="trans('admin::app.customers.customers.edit.gender')"
                                     >
                                         <option value="Male">
-                                            @lang('admin::app.customers.edit.male')
+                                            @lang('admin::app.customers.customers.edit.male')
                                         </option>
 
                                         <option value="Female">
-                                            @lang('admin::app.customers.edit.female')
+                                            @lang('admin::app.customers.customers.edit.female')
                                         </option>
 
                                         <option value="Other">
-                                            @lang('admin::app.customers.edit.other')
+                                            @lang('admin::app.customers.customers.edit.other')
                                         </option>
                                     </x-admin::form.control-group.control>
 
@@ -197,7 +197,7 @@
                                 <!-- Customer Group -->
                                 <x-admin::form.control-group class="w-full">
                                     <x-admin::form.control-group.label>
-                                        @lang('admin::app.customers.edit.customer-group')
+                                        @lang('admin::app.customers.customers.edit.customer-group')
                                     </x-admin::form.control-group.label>
 
                                     @php
@@ -209,7 +209,7 @@
                                         name="customer_group_id"
                                         :value="$selectedCustomerOption"
                                         id="customerGroup" 
-                                        :label="trans('admin::app.customers.edit.customer-group')"
+                                        :label="trans('admin::app.customers.customers.edit.customer-group')"
                                     >
                                         @foreach ($groups as $group)
                                             <option value="{{ $group->id }}">
@@ -242,7 +242,7 @@
                                         for="status"
                                         class="text-gray-600 font-semibold cursor-pointer"
                                     >
-                                        @lang('admin::app.customers.edit.status')
+                                        @lang('admin::app.customers.customers.edit.status')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.error
@@ -267,7 +267,7 @@
                                         for="isSuspended"
                                         class="text-gray-600 font-semibold cursor-pointer"
                                     >
-                                        @lang('admin::app.customers.edit.suspended')
+                                        @lang('admin::app.customers.customers.edit.suspended')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.error
@@ -289,7 +289,7 @@
                                 type="submit"
                                 class="primary-button"
                             >
-                                @lang('admin::app.customers.edit.save-btn')
+                                @lang('admin::app.customers.customers.edit.save-btn')
                             </button>
                         </div>
                     </x-slot:footer>
