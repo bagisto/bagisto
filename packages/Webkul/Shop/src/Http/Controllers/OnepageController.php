@@ -61,7 +61,7 @@ class OnepageController extends Controller
         /**
          * If cart minimum order amount is not satisfied then redirect back to the cart page
          */
-        $minimumOrderAmount = (float) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?: 0;
+        $minimumOrderAmount = (float) core()->getConfigData('sales.order_settings.minimum-order.minimum_order_amount') ?: 0;
 
         if (! $cart->checkMinimumOrder()) {
             session()->flash('warning', trans('shop::app.checkout.cart.minimum-order-message', [

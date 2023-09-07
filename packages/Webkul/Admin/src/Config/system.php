@@ -866,7 +866,7 @@ return [
            ],
        ],
    ], [
-       'key'    => 'sales.carriers.flatrate',
+       'key'    => 'sales.carriers.flat_rate',
        'name'   => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping',
        'info'   => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping-info',
        'sort'   => 2,
@@ -1117,13 +1117,13 @@ return [
             ],
         ],
     ], [
-        'key'  => 'sales.orderSettings',
+        'key'  => 'sales.order_settings',
         'name' => 'admin::app.configuration.index.sales.order-settings.title',
         'info' => 'admin::app.configuration.index.sales.order-settings.info',
         'icon' => 'settings/order.svg',
         'sort' => 4,
     ], [
-        'key'    => 'sales.orderSettings.order_number',
+        'key'    => 'sales.order_settings.order_number',
         'name'   => 'admin::app.configuration.index.sales.order-settings.order-number',
         'info'   => 'admin::app.configuration.index.sales.order-settings.order-number-info',
         'sort'   => 0,
@@ -1159,7 +1159,7 @@ return [
             ],
         ],
     ], [
-        'key'    => 'sales.orderSettings.minimum-order',
+        'key'    => 'sales.order_settings.minimum-order',
         'name'   => 'admin::app.configuration.index.sales.order-settings.minimum-order',
         'info'   => 'admin::app.configuration.index.sales.order-settings.minimum-order-info',
         'sort'   => 1,
