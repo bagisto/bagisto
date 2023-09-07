@@ -2971,6 +2971,13 @@ return [
         ],
 
         'datagrid' => [
+            'index' => [
+                'no-records-selected'              => 'לא נבחרו רשומות.',
+                'must-select-a-mass-action'        => 'עליך לבחור פעולת מסה.',
+                'must-select-a-mass-action-option' => 'עליך לבחור אפשרות לפעולת מסה.',
+                'sure-want-to-perform-this-action' => 'האם אתה בטוח שברצונך לבצע פעולה זו?',
+            ],
+            
             'toolbar' => [
                 'mass-actions' => [
                     'select-action' => 'בחר פעולה',

@@ -2971,7 +2971,13 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-
+                'index' => [
+                    'no-records-selected'              => 'レコードは選択されていません。',
+                    'must-select-a-mass-action'        => '一括操作を選択する必要があります。',
+                    'must-select-a-mass-action-option' => '一括操作のオプションを選択する必要があります。',
+                    'sure-want-to-perform-this-action' => 'この操作を実行してもよろしいですか？',
+                ],
+                
                 'mass-actions' => [
                     'select-action' => 'アクションを選択',
                     'select-option' => 'オプションを選択',

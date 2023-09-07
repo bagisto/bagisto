@@ -2971,6 +2971,13 @@ return [
         ],
 
         'datagrid' => [
+            'index' => [
+                'no-records-selected'              => 'Не выбрано ни одной записи.',
+                'must-select-a-mass-action'        => 'Вы должны выбрать массовое действие.',
+                'must-select-a-mass-action-option' => 'Вы должны выбрать опцию массового действия.',
+                'sure-want-to-perform-this-action' => 'Вы уверены, что хотите выполнить это действие?',
+            ],
+
             'toolbar' => [
                 'mass-actions' => [
                     'select-action' => 'Выбрать действие',
