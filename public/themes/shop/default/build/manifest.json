@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-4490c440.css",
+    "file": "assets/app-ba163655.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -40,10 +40,6 @@
     "file": "assets/paypal-df581855.png",
     "src": "src/Resources/assets/images/paypal.png"
   },
-  "src/Resources/assets/images/product-hero.png": {
-    "file": "assets/product-hero-9e10fae5.png",
-    "src": "src/Resources/assets/images/product-hero.png"
-  },
   "src/Resources/assets/images/review.png": {
     "file": "assets/review-342fab8f.png",
     "src": "src/Resources/assets/images/review.png"
@@ -72,7 +68,7 @@
     "css": [
       "assets/app-f72387a9.css"
     ],
-    "file": "assets/app-c15271ae.js",
+    "file": "assets/app-638de521.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   }
