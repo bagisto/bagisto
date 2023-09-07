@@ -545,7 +545,7 @@ return [
                         'edit-btn'                  => 'تعديل',
                         'add-group-price'           => 'إضافة سعر المجموعة',
                         'all-groups'                => 'جميع المجموعات',
-                        'fixed-group-price-info'    => 'لـ :qty كمية بسعر ثابت قدره :price',
+                        'fixed-group-price-info'    => 'بمقدار :qty كمية بسعر :type من :price',
                         'discount-group-price-info' => 'لـ :qty كمية بخصم قدره :price',
                         'empty-info'                => 'تسعير خاص للعملاء الذين ينتمون إلى مجموعة معينة.',
 

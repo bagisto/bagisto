@@ -545,7 +545,7 @@ return [
                         'edit-btn'                  => 'සංස්කරණය කරන්න',
                         'add-group-price'           => 'පාරිභාග මිලකට එකතු කරන්න',
                         'all-groups'                => 'සියලු සමූහ',
-                        'fixed-group-price-info'    => ':qty ප්‍රමාණයට වලංගු මිල :price වලට වාරිකා කළ යුතුය',
+                        'fixed-group-price-info'    => ':qty වසරකට :type මිලට :price යටතේ',
                         'discount-group-price-info' => ':qty ප්‍රමාණයට මිල :price වාරිකා කළ යුතුය',
                         'empty-info'                => 'විශේෂ ප්‍රමාණයක් අනුගමනට හෝදන පමණක්.',
 

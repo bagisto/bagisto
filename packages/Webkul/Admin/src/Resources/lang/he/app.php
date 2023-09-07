@@ -545,7 +545,7 @@ return [
                         'edit-btn'                  => 'ערוך',
                         'add-group-price'           => 'הוסף מחיר קבוצתי',
                         'all-groups'                => 'כל הקבוצות',
-                        'fixed-group-price-info'    => 'עבור :qty יחידות במחיר קבוע של :price',
+                        'fixed-group-price-info'    => 'עבור :qty יחידות במחיר :price לכל :type',
                         'discount-group-price-info' => 'עבור :qty יחידות בהנחה של :price',
                         'empty-info'                => 'הגדרת מחיר מיוחד ללקוחות שנמצאים בקבוצה מסוימת.',
 

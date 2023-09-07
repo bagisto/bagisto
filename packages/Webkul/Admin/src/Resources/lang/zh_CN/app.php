@@ -545,7 +545,7 @@ return [
                         'edit-btn'                  => '编辑',
                         'add-group-price'           => '添加组价格',
                         'all-groups'                => '所有群组',
-                        'fixed-group-price-info'    => '对于 :qty 个数量，固定价格为 :price',
+                        'fixed-group-price-info'    => '以 :qty 个 :type 价格为 :price',
                         'discount-group-price-info' => '对于 :qty 个数量，折扣价格为 :price',
                         'empty-info'                => '针对属于特定组的客户的特殊定价。',
 

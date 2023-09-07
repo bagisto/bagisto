@@ -545,7 +545,7 @@ return [
                         'edit-btn'                  => 'Редагувати',
                         'add-group-price'           => 'Додати ціну для групи',
                         'all-groups'                => 'Всі групи',
-                        'fixed-group-price-info'    => 'Для :qty штук за фіксованою ціною :price',
+                        'fixed-group-price-info'    => 'За :qty одиниць за ціною :price за :type',
                         'discount-group-price-info' => 'Для :qty штук зі знижкою :price',
                         'empty-info'                => 'Спеціальні ціни для покупців, які належать до певної групи.',
 

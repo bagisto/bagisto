@@ -545,7 +545,7 @@ return [
                         'edit-btn'                  => 'Bewerk',
                         'add-group-price'           => 'Groepsprijs toevoegen',
                         'all-groups'                => 'Alle groepen',
-                        'fixed-group-price-info'    => 'Voor :qty Hoeveelheid tegen een vaste prijs van :price',
+                        'fixed-group-price-info'    => 'Voor :qty stuks tegen een prijs van :price per :type',
                         'discount-group-price-info' => 'Voor :qty Hoeveelheid met een korting van :price',
                         'empty-info'                => 'Speciale prijzen voor klanten die behoren tot een specifieke groep.',
 

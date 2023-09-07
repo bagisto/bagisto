@@ -545,7 +545,7 @@ return [
                         'edit-btn'                  => '編集',
                         'add-group-price'           => 'グループ価格を追加',
                         'all-groups'                => 'すべてのグループ',
-                        'fixed-group-price-info'    => ':price の固定価格で :qty 個の数量に対して',
+                        'fixed-group-price-info'    => ':qty 個の:type価格で:price',
                         'discount-group-price-info' => ':price の割引価格で :qty 個の数量に対して',
                         'empty-info'                => '特定のグループに所属する顧客のための特別価格',
 

@@ -545,7 +545,7 @@ return [
                         'edit-btn'                  => 'ویرایش',
                         'add-group-price'           => 'افزودن قیمت گروه',
                         'all-groups'                => 'تمام گروه‌ها',
-                        'fixed-group-price-info'    => 'برای :qty تعداد با قیمت ثابت :price',
+                        'fixed-group-price-info'    => 'برای تعداد :qty به قیمت :price به ازای هر :type',
                         'discount-group-price-info' => 'برای :qty تعداد با تخفیف :price',
                         'empty-info'                => 'قیمت‌گذاری ویژه برای مشتریانی که به یک گروه خاص تعلق دارند.',
 

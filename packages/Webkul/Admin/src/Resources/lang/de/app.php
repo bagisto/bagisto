@@ -545,7 +545,7 @@ return [
                         'edit-btn'                  => 'Bearbeiten',
                         'add-group-price'           => 'Kundengruppenpreis hinzufügen',
                         'all-groups'                => 'Alle Gruppen',
-                        'fixed-group-price-info'    => 'Für :qty Stück zum Festpreis von :price',
+                        'fixed-group-price-info'    => 'Für :qty Stück zum Preis von :price je :type',
                         'discount-group-price-info' => 'Für :qty Stück mit einem Rabatt von :price',
                         'empty-info'                => 'Sonderpreise für Kunden in einer bestimmten Gruppe.',
 

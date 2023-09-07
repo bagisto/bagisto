@@ -545,7 +545,7 @@ return [
                         'edit-btn'                  => 'संपादित करें',
                         'add-group-price'           => 'समूह मूल्य जोड़ें',
                         'all-groups'                => 'सभी समूह',
-                        'fixed-group-price-info'    => 'मूल्य :qty मात्र के लिए स्थिर मूल्य पर :price',
+                        'fixed-group-price-info'    => ':qty मात्रा पर :type मूल्य के :price के लिए',
                         'discount-group-price-info' => 'मूल्य पर qty मात्र के लिए :price की छूट',
                         'empty-info'                => 'विशेष मूल्यवान ग्राहकों के लिए विशिष्ट मूल्यनिर्धारण।',
 

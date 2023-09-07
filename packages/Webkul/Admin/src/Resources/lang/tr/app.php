@@ -545,7 +545,7 @@ return [
                         'edit-btn'                  => 'Düzenle',
                         'add-group-price'           => 'Grup Fiyatı Ekle',
                         'all-groups'                => 'Tüm Gruplar',
-                        'fixed-group-price-info'    => ':qty Miktarında sabit fiyat :price',
+                        'fixed-group-price-info'    => ':qty Adet için :type fiyatı :price',
                         'discount-group-price-info' => ':qty Miktarında indirimli fiyat :price',
                         'empty-info'                => 'Belirli bir gruba ait müşteriler için özel fiyatlandırma.',
 
