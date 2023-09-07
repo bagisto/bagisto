@@ -264,6 +264,7 @@
                                             type="select"
                                             name="state"
                                             id="state"
+                                            :value="old('state')"
                                             rules="required"
                                             :label="trans('admin::app.settings.inventory-sources.create.state')"
                                             :placeholder="trans('admin::app.settings.inventory-sources.create.state')"

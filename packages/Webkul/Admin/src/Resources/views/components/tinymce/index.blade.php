@@ -13,7 +13,7 @@
 
     <script type="module">
         app.component('v-tinymce', {
-            props: ['selector'],
+            props: ['selector', 'field'],
 
             mounted() {
                 this.init();
@@ -133,7 +133,7 @@
 
                         setup: editor => {
                             editor.on('keyup', () => {
-                                this.content = editor.getContent();
+                                this.field.onInput(editor.getContent());
                             });
                         },
                     });
