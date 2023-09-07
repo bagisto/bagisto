@@ -567,7 +567,7 @@
                                         || matchedAttribute.type == 'decimal' ? 'regex:^[0-9]+(\.[0-9]+)?$' : ''
                                         || matchedAttribute.type == 'integer' ? 'regex:^[0-9]+(\.[0-9]+)?$' : ''
                                         || matchedAttribute.type == 'text' ? 'regex:^([A-Za-z0-9_ \'\-]+)$' : ''"
-                                    label="@lang('admin::app.marketing.promotions.catalog-rules.edit.conditions')"
+                                    label="@lang('admin::app.marketing.promotions.catalog-rules.create.conditions')"
                                     v-model="condition.value"
                                 >
                                     <input 
