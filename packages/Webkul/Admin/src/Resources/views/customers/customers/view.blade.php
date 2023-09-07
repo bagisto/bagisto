@@ -205,7 +205,7 @@
                         <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
                             <!-- Placeholder Image -->
                             <img
-                                src="{{ bagisto_asset('images/Orders-Empty.svg') }}"
+                                src="{{ bagisto_asset('images/empty-placeholders/Orders-Empty.svg') }}"
                                 class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
                             />
 
@@ -276,7 +276,7 @@
                         <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
                             {{-- Placeholder Image --}}
                             <img
-                                src="{{ bagisto_asset('images/Invoice-Setting.svg') }}"
+                                src="{{ bagisto_asset('images/settings/Invoice-Setting.svg') }}"
                                 class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
                             />
 
@@ -387,7 +387,7 @@
                         <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
                             {{-- Placeholder Image --}}
                             <img
-                                src="{{ bagisto_asset('images/Reviews-Empty.svg') }}"
+                                src="{{ bagisto_asset('images/empty-placeholders/Reviews-Empty.svg') }}"
                                 class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
                             />
 
@@ -622,7 +622,7 @@
                         {{-- Empty Address Container --}}
                         <div class="flex gap-[20px] items-center py-[10px]">
                             <img
-                                src="{{ bagisto_asset('images/Address-Setting.svg') }}"
+                                src="{{ bagisto_asset('images/settings/Address-Setting.svg') }}"
                                 class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
                             >
 

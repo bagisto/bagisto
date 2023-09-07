@@ -12,7 +12,7 @@ return [
         'key'  => 'sales.shipping',
         'name' => 'admin::app.configuration.index.sales.shipping.title',
         'info' => 'admin::app.configuration.index.sales.shipping.info',
-        'icon' => 'Shipping.svg',
+        'icon' => 'settings/Shipping.svg',
         'sort' => 1,
     ], [
         'key'    => 'sales.shipping.origin',
@@ -86,7 +86,7 @@ return [
         'key'  => 'sales.carriers',
         'name' => 'admin::app.configuration.index.sales.shipping-methods.page-title',
         'info' => 'admin::app.configuration.index.sales.shipping-methods.info',
-        'icon' => 'Shipping-Method.svg',
+        'icon' => 'settings/Shipping-Method.svg',
         'sort' => 2,
     ], [
         'key'    => 'sales.carriers.free',

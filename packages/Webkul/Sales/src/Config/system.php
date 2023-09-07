@@ -26,7 +26,7 @@ return [
         'key'  => 'sales.orderSettings',
         'name' => 'admin::app.configuration.index.sales.order-settings.title',
         'info' => 'admin::app.configuration.index.sales.order-settings.info',
-        'icon' => 'Order-Setting.svg',
+        'icon' => 'settings/Order-Setting.svg',
         'sort' => 4,
     ], [
         'key'    => 'sales.orderSettings.order_number',
@@ -91,7 +91,7 @@ return [
         'key'  => 'sales.invoice_settings',
         'name' => 'admin::app.configuration.index.sales.invoice-settings.title',
         'info' => 'admin::app.configuration.index.sales.invoice-settings.info',
-        'icon' => 'Invoice-Setting.svg',
+        'icon' => 'settings/Invoice-Setting.svg',
         'sort' => 5,
     ], [
         'key'    => 'sales.invoice_settings.invoice_number',
