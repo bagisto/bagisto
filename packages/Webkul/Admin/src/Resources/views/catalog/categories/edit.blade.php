@@ -146,7 +146,7 @@
 
                     <!-- Description -->
                     <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label>
+                        <x-admin::form.control-group.label class="required">
                             @lang('admin::app.catalog.categories.edit.description')
                         </x-admin::form.control-group.label>
 
@@ -247,7 +247,7 @@
 
                         {{-- Slug --}}
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.catalog.categories.create.slug')
                             </x-admin::form.control-group.label>
 
@@ -319,7 +319,7 @@
                         {{-- Position --}}
                         <div class="mb-[10px]">
                             <x-admin::form.control-group class="mb-[10px]">
-                                <x-admin::form.control-group.label class="!text-gray-800">
+                                <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.catalog.categories.edit.position')
                                 </x-admin::form.control-group.label>
 
