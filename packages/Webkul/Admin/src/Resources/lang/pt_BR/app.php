@@ -387,8 +387,7 @@ return [
                 'channel'                => 'Canal',
                 'customer'               => 'Cliente',
                 'discount'               => 'Valor do Desconto - :discount',
-                'customer-email'         => 'E-mail do cliente - :email',
-                'email'                  => 'E-mail',
+                'email'                  => 'Email - :email',
                 'grand-total'            => 'Total Geral',
                 'invoice-items'          => 'Itens da Fatura',
                 'invoice-status'         => 'Status da Fatura',
@@ -408,8 +407,6 @@ return [
                 'sku'                    => 'SKU - :sku',
                 'sub-total'              => 'Subtotal - :sub_total',
                 'sub-total-summary'      => 'Subtotal',
-                'summary-tax'            => 'Valor do Imposto',
-                'summary-discount'       => 'Valor do Desconto',
                 'title'                  => 'Fatura #:invoice_id',
                 'tax'                    => 'Valor do Imposto - :tax',
             ],
@@ -492,6 +489,7 @@ return [
                 'create' => [
                     'back-btn'                => 'Voltar',
                     'bundle'                  => 'Pacote',
+                    'booking'                 => 'Reserva',
                     'configurable'            => 'Configurável',
                     'configurable-attributes' => 'Atributos Configuráveis',
                     'create-btn'              => 'Criar Produto',
@@ -544,15 +542,13 @@ return [
                         'create-btn'                => 'Adicionar Novo',
                         'edit-btn'                  => 'Editar',
                         'add-group-price'           => 'Adicionar Preço de Grupo',
-                        'all-groups'                => 'Todos os grupos',
-                        'fixed-group-price-info'    => 'Para :qty unidades a um preço de :price por :type',
+                        'fixed-group-price-info'    => 'Para :qty Quantidade a preço fixo de :price',
                         'discount-group-price-info' => 'Para :qty Quantidade com desconto de :price',
                         'empty-info'                => 'Preços especiais para clientes que pertencem a um grupo específico.',
 
                         'create' => [
                             'create-title'   => 'Criar Preço do Grupo de Clientes',
                             'customer-group' => 'Grupo de Clientes',
-                            'all-groups'     => 'Todos os grupos',
                             'discount'       => 'Desconto',
                             'delete-btn'     => 'Excluir',
                             'fixed'          => 'Fixo',
@@ -2620,11 +2616,6 @@ return [
                     'custom-scripts-info' => 'Les scripts personnalisés sont des morceaux de code personnalisés créés pour ajouter des fonctions ou des fonctionnalités spécifiques à un logiciel, améliorant ainsi ses capacités de manière unique.',
                     'custom-css'          => 'CSS personnalisé',
                     'custom-javascript'   => 'Javascript personnalisé',
-                    'compare-options'     => 'Opções de comparação',
-                    'wishlist-options'    => 'Opções de lista de desejos',
-                    'image-search-option' => 'Opção de busca por imagens',
-                    'settings-title'      => 'Configurações',
-                    'settings-title-info' => 'Configurações referem-se a escolhas configuráveis que controlam como um sistema, aplicativo ou dispositivo se comporta, adaptadas às preferências e requisitos do usuário.'
                 ],
 
                 'design' => [
@@ -2971,13 +2962,6 @@ return [
         ],
 
         'datagrid' => [
-            'index' => [
-                'no-records-selected'              => 'Nenhum registro foi selecionado.',
-                'must-select-a-mass-action'        => 'Você deve selecionar uma ação em massa.',
-                'must-select-a-mass-action-option' => 'Você deve selecionar uma opção de ação em massa.',
-                'sure-want-to-perform-this-action' => 'Tem certeza de que deseja realizar esta ação?',
-            ],
-
             'toolbar' => [
                 'mass-actions' => [
                     'select-action' => 'Sélectionner une action',

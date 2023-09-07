@@ -387,8 +387,7 @@ return [
                 'channel'                => 'Channel',
                 'customer'               => 'Customer',
                 'discount'               => 'Discount Amount - :discount',
-                'customer-email'         => 'Email - :email',
-                'email'                  => 'Email',
+                'email'                  => 'Email - :email',
                 'grand-total'            => 'Grand Total',
                 'invoice-items'          => 'Invoice Items',
                 'invoice-status'         => 'Invoice Status',
@@ -408,8 +407,6 @@ return [
                 'sku'                    => 'SKU - :sku',
                 'sub-total'              => 'Sub Total - :sub_total',
                 'sub-total-summary'      => 'Sub Total',
-                'summary-tax'            => 'Tax Amount',
-                'summary-discount'       => 'Discount Amount',
                 'title'                  => 'Invoice #:invoice_id',
                 'tax'                    => 'Tax Amount - :tax',
             ],
@@ -492,6 +489,7 @@ return [
                 'create' => [
                     'back-btn'                => 'Back',
                     'bundle'                  => 'Bundle',
+                    'booking'                 => 'Booking',
                     'configurable'            => 'Configurable',
                     'configurable-attributes' => 'Configurable Attributes',
                     'create-btn'              => 'Create Product',
@@ -544,15 +542,13 @@ return [
                         'create-btn'                => 'Add New',
                         'edit-btn'                  => 'Edit',
                         'add-group-price'           => 'Add Group Price',
-                        'all-groups'                => 'All Groups',
-                        'fixed-group-price-info'    => 'For :qty Qty at :type price of :price',
+                        'fixed-group-price-info'    => 'For :qty Qty at fixed price of :price',
                         'discount-group-price-info' => 'For qty Qty at discount of :price',
                         'empty-info'                => 'Special pricing for customers belonging to a specific group.',
 
                         'create' => [
                             'create-title'   => 'Create Customer Group Price',
                             'customer-group' => 'Customer Group',
-                            'all-groups'     => 'All Groups',
                             'discount'       => 'Discount',
                             'delete-btn'     => 'Delete',
                             'fixed'          => 'Fixed',
@@ -996,7 +992,7 @@ return [
                 'banner'                   => 'Banner',
                 'banner-size'              => 'Banner aspect ration (1320px X 300px)',
                 'back-btn'                 => 'Back',
-                'company-name'             => 'Name',
+                'company-name'             => 'Name*',
                 'description'              => 'Description',
                 'description-and-images'   => 'Description and Images',
                 'description-only'         => 'Description Only',
@@ -1009,14 +1005,14 @@ return [
                 'meta-description'         => 'Meta Description',
                 'meta-keywords'            => 'Meta Keywords',
                 'meta-title'               => 'Meta Title',
-                'position'                 => 'Position',
+                'position'                 => 'Position*',
                 'products-and-description' => 'Products and Description',
                 'products-only'            => 'Products Only',
                 'save-btn'                 => 'Save Category',
                 'slug'                     => 'Slug',
                 'settings'                 => 'Settings',
                 'seo-details'              => 'SEO Details',
-                'select-parent-category'   => 'Select Parent Category',
+                'select-parent-category'   => 'Select Parent Category*',
                 'select-display-mode'      => 'Select Display Mode',
                 'title'                    => 'Edit Category',
                 'visible-in-menu'          => 'Visible In Menu',
@@ -1410,7 +1406,7 @@ return [
                 'edit' => [
                     'title'          => 'Edit Template',
                     'active'         => 'Active',
-                    'content'        => 'Content',
+                    'content'        => 'Content*',
                     'back-btn'       => 'Back',
                     'draft'          => 'Draft',
                     'general'        => 'General',
@@ -2620,11 +2616,6 @@ return [
                     'custom-scripts-info' => 'Custom scripts are personalized pieces of code created to add specific functions or features to software, enhancing its capabilities uniquely.',
                     'custom-css'          => 'Custom CSS',
                     'custom-javascript'   => 'Custom Javascript',
-                    'compare-options'     => 'Compare options',
-                    'wishlist-options'    => 'Wishlist options',
-                    'image-search-option' => 'Image Search Option',
-                    'settings-title'      => 'Settings',
-                    'settings-title-info' => 'Settings refer to configurable choices that control how a system, application, or device behaves, tailored to user preferences and requirements.',
                 ],
 
                 'design' => [
@@ -2971,13 +2962,6 @@ return [
         ],
 
         'datagrid' => [
-            'index' => [
-                'no-records-selected'              => 'No records have been selected.',
-                'must-select-a-mass-action'        => 'You must select a mass action.',
-                'must-select-a-mass-action-option' => 'You must select a mass action\'s option.',
-                'sure-want-to-perform-this-action' => 'Are you sure, you want to perform this action?',
-            ],
-
             'toolbar' => [
                 'mass-actions' => [
                     'select-action' => 'Select Action',

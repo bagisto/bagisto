@@ -229,7 +229,7 @@ return [
         'shipments' => [
             'index' => [
                 'title' => 'Expéditions',
-
+        
                 'datagrid'  => [
                     'id'               => 'ID',
                     'inventory-source' => 'Source d\'inventaire',
@@ -241,7 +241,7 @@ return [
                     'view'             => 'Voir',
                 ],
             ],
-
+        
             'create' => [
                 'amount-per-unit'  => ':amount par unité x :qty Quantité',
                 'cancel-error'     => 'La commande ne peut pas être annulée',
@@ -264,7 +264,7 @@ return [
                 'title'            => 'Créer une nouvelle expédition',
                 'tracking-number'  => 'Numéro de suivi',
             ],
-
+        
             'view' => [
                 'billing-address'      => 'Adresse de facturation',
                 'carrier-title'        => 'Titre du transporteur',
@@ -387,8 +387,7 @@ return [
                 'channel'                => 'Chaîne',
                 'customer'               => 'Client',
                 'discount'               => 'Montant de la réduction - :discount',
-                'customer-email'         => 'E-mail du client - :email',
-                'email'                  => 'E-mail',
+                'email'                  => 'E-mail - :email',
                 'grand-total'            => 'Total général',
                 'invoice-items'          => 'Articles de la facture',
                 'invoice-status'         => 'Statut de la facture',
@@ -408,8 +407,6 @@ return [
                 'sku'                    => 'SKU - :sku',
                 'sub-total'              => 'Sous-total - :sub_total',
                 'sub-total-summary'      => 'Sous-total',
-                'summary-tax'            => 'Montant de la taxe',
-                'summary-discount'       => 'Montant de la réduction',
                 'title'                  => 'Facture #:invoice_id',
                 'tax'                    => 'Montant de la taxe - :tax',
             ],
@@ -460,7 +457,7 @@ return [
             'index' => [
                 'create-btn' => 'Créer des transactions',
                 'title'      => 'Transactions',
-
+        
                 'datagrid' => [
                     'id'                 => 'ID',
                     'invoice-id'         => 'ID de facture',
@@ -470,7 +467,7 @@ return [
                     'transaction-date'   => 'Date',
                     'transaction-amount' => 'Montant',
                 ],
-
+        
                 'edit'  => [
                     'already-paid'               => 'Déjà payé',
                     'invoice-missing'            => 'Facture manquante',
@@ -488,10 +485,11 @@ return [
                 'create-btn'    => 'Créer un produit',
                 'title'         => 'Produits',
                 'already-taken' => ':name a déjà été pris.',
-
+        
                 'create' => [
                     'back-btn'                => 'Retour',
                     'bundle'                  => 'Regrouper',
+                    'booking'                 => 'Réservation',
                     'configurable'            => 'Configurable',
                     'configurable-attributes' => 'Attributs Configurables',
                     'create-btn'              => 'Créer un produit',
@@ -505,7 +503,7 @@ return [
                     'type'                    => 'Type',
                     'virtual'                 => 'Virtuel',
                 ],
-
+        
                 'datagrid' => [
                     'attribute-family'       => 'Famille d\'attributs',
                     'attribute-family-value' => 'Famille d\'attributs - :attribute_family',
@@ -533,26 +531,24 @@ return [
                     'mass-delete-success'    => 'Produits sélectionnés supprimés avec succès',
                 ],
             ],
-
+        
             'edit' => [
                 'save-btn' => 'Enregistrer le produit',
                 'title'    => 'Modifier le produit',
-
+        
                 'price' => [
                     'group' => [
                         'title'                     => 'Prix pour le groupe de clients',
                         'create-btn'                => 'Ajouter un nouveau',
                         'edit-btn'                  => 'Modifier',
                         'add-group-price'           => 'Ajouter un prix de groupe',
-                        'all-groups'                => '"Tous les groupes"',
-                        'fixed-group-price-info'    => 'Pour :qty unité(s) au prix de :price par :type',
+                        'fixed-group-price-info'    => 'Pour :qty Qté à un prix fixe de :price',
                         'discount-group-price-info' => 'Pour :qty Qté avec une réduction de :price',
                         'empty-info'                => 'Tarification spéciale pour les clients appartenant à un groupe spécifique.',
-
+        
                         'create' => [
                             'create-title'   => 'Créer un prix de groupe client',
                             'customer-group' => 'Groupe de clients',
-                            'all-groups'     => '"Tous les groupes"',
                             'discount'       => 'Réduction',
                             'delete-btn'     => 'Supprimer',
                             'fixed'          => 'Fixe',
@@ -564,24 +560,24 @@ return [
                         ],
                     ],
                 ],
-
+        
                 'inventories' => [
                     'pending-ordered-qty'      => 'Qté commandée en attente : :qty',
                     'pending-ordered-qty-info' => 'La quantité commandée en attente sera déduite de la source d\'inventaire respective après l\'expédition. En cas d\'annulation, la quantité en attente sera disponible à la vente.',
                     'title'                    => 'Inventaires',
                 ],
-
+        
                 'categories' => [
                     'title' => 'Catégories',
                 ],
-
+        
                 'images' => [
                     'add-image-btn'     => 'Ajouter une image',
                     'allowed-types'     => 'png, jpeg, jpg',
                     'info'              => 'La résolution de l\'image doit être de 609px x 560px',
                     'not-allowed-error' => 'Seuls les fichiers d\'images (.jpeg, .jpg, .png, ..) sont autorisés.',
                     'title'             => 'Images',
-
+        
                     'placeholders'  => [
                         'front'     => 'Avant',
                         'next'      => 'Suivant',
@@ -590,7 +586,7 @@ return [
                         'zoom'      => 'Zoom',
                     ],
                 ],
-
+        
                 'videos' => [
                     'add-video-btn'     => 'Ajouter une vidéo',
                     'allowed-types'     => 'mp4, webm, mkv',
@@ -598,33 +594,33 @@ return [
                     'not-allowed-error' => 'Seuls les fichiers vidéo (.mp4, .mov, .ogg ..) sont autorisés.',
                     'title'             => 'Vidéos',
                 ],
-
+        
                 'links' => [
                     'related-products' => [
                         'empty-info' => 'Ajouter des produits connexes en un instant.',
                         'info'       => 'En plus du produit que le client consulte, il lui est proposé des produits connexes.',
                         'title'      => 'Produits connexes',
                     ],
-
+        
                     'up-sells' => [
                         'empty-info' => 'Ajouter des produits de vente incitative en un instant.',
                         'info'       => 'Le client se voit proposer des produits de vente incitative, qui servent d\'alternative premium ou de meilleure qualité au produit qu\'il consulte actuellement.',
                         'title'      => 'Produits de vente incitative',
                     ],
-
+        
                     'cross-sells' => [
                         'empty-info' => 'Ajouter des produits de vente croisée en un instant.',
                         'info'       => 'À côté du panier d\'achat, vous trouverez ces produits "d\'achat impulsif" positionnés en tant que ventes croisées pour compléter les articles déjà ajoutés à votre panier.',
                         'title'      => 'Produits de vente croisée',
                     ],
-
+        
                     'add-btn'     => 'Ajouter un produit',
                     'delete'      => 'Supprimer',
                     'empty-title' => 'Ajouter un produit',
                     'empty-info'  => 'Ajouter des produits :type en un instant.',
                     'sku'         => 'SKU - :sku',
                 ],
-
+        
                 'types' => [
                     'configurable' => [
                         'add-btn'           => 'Ajouter une variante',
@@ -637,7 +633,7 @@ return [
                         'qty'               => ':qty Qté',
                         'sku'               => 'SKU - :sku',
                         'title'             => 'Variantes',
-
+        
                         'create'  => [
                             'description'            => 'Description',
                             'name'                   => 'Nom',
@@ -645,7 +641,7 @@ return [
                             'title'                  => 'Ajouter une variante',
                             'variant-already-exists' => 'Cette variante existe déjà',
                         ],
-
+        
                         'edit' => [
                             'disabled'        => 'Désactivé',
                             'edit-info'       => 'Si vous souhaitez mettre à jour les informations sur le produit en détail, rendez-vous sur la',
@@ -661,7 +657,7 @@ return [
                             'weight'          => 'Poids',
                         ],
                     ],
-
+        
                     'grouped' => [
                         'add-btn'     => 'Ajouter un produit',
                         'delete'      => 'Supprimer',
@@ -672,14 +668,14 @@ return [
                         'sku'         => 'SKU - :sku',
                         'title'       => 'Produits groupés',
                     ],
-
+        
                     'bundle' => [
                         'add-btn'     => 'Ajouter une option',
                         'empty-title' => 'Ajouter une option',
                         'empty-info'  => 'Créer des options de bundle en un instant.',
                         'info'        => 'Un produit en bundle est un ensemble de plusieurs articles ou services vendus ensemble à un prix spécial, offrant une valeur et une commodité aux clients.',
                         'title'       => 'Articles du bundle',
-
+        
                         'update-create' => [
                             'checkbox'    => 'Case à cocher',
                             'is-required' => 'Obligatoire',
@@ -693,7 +689,7 @@ return [
                             'type'        => 'Type',
                             'yes'         => 'Oui',
                         ],
-
+        
                         'option' => [
                             'add-btn'     => 'Ajouter un produit',
                             'delete-btn'  => 'Supprimer',
@@ -703,23 +699,23 @@ return [
                             'empty-title' => 'Ajouter un produit',
                             'empty-info'  => 'Créer diverses combinaisons de produits en un instant.',
                             'sku'         => 'SKU - :sku',
-
+        
                             'types' => [
                                 'checkbox' => [
                                     'info'  => 'Définir le produit par défaut à l\'aide d\'une case à cocher',
                                     'title' => 'Case à cocher',
                                 ],
-
+        
                                 'multiselect' => [
                                     'info'  => 'Définir le produit par défaut à l\'aide d\'un bouton de case à cocher',
                                     'title' => 'Multisélection',
                                 ],
-
+        
                                 'radio' => [
                                     'info'  => 'Définir le produit par défaut à l\'aide d\'un bouton radio',
                                     'title' => 'Bouton radio',
                                 ],
-
+        
                                 'select' => [
                                     'info'  => 'Définir le produit par défaut à l\'aide d\'un bouton radio',
                                     'title' => 'Sélectionner',
@@ -727,7 +723,7 @@ return [
                             ],
                         ],
                     ],
-
+        
                     'downloadable' => [
                         'links' => [
                             'add-btn'     => 'Ajouter un lien',
@@ -741,7 +737,7 @@ return [
                             'sample-url'  => 'URL d\'exemple : ',
                             'title'       => 'Liens téléchargeables',
                             'url'         => 'URL : ',
-
+        
                             'update-create' => [
                                 'downloads'   => 'Téléchargement autorisé',
                                 'file-type'   => 'Type de fichier',
@@ -755,7 +751,7 @@ return [
                                 'url'         => 'URL',
                             ],
                         ],
-
+        
                         'samples' => [
                             'add-btn'     => 'Ajouter un échantillon',
                             'delete-btn'  => 'Supprimer',
@@ -766,7 +762,7 @@ return [
                             'info'        => 'Le type de produit téléchargeable permet de vendre des produits numériques, tels que des livres électroniques, des applications logicielles, de la musique, des jeux, etc.',
                             'title'       => 'Échantillons téléchargeables',
                             'url'         => 'URL : ',
-
+        
                             'update-create' => [
                                 'file'        => 'Fichier',
                                 'file-type'   => 'Type de fichier',
@@ -778,6 +774,13 @@ return [
                         ],
                     ],
                 ],
+        
+                'create-success'           => 'Produit créé avec succès',
+                'delete-success'           => 'Produit supprimé avec succès',
+                'delete-failed'            => 'Échec de la suppression du produit',
+                'product-copied'           => 'Produit copié avec succès',
+                'saved-inventory-message'  => 'Produit enregistré avec succès',
+                'update-success'           => 'Produit mis à jour avec succès',
             ],
 
             'create-success'          => 'Produit créé avec succès',
@@ -1663,6 +1666,7 @@ return [
                     'attribute-name-parent-only'                => 'Nom de l’attribut Parent Uniquement',
                     'create-success'                            => 'Règle de panier créée avec succès',
                     'choose-condition-to-add'                   => 'Choisissez la condition à ajouter',
+                    
                 ],
 
                 'edit' => [
@@ -2620,11 +2624,6 @@ return [
                     'custom-scripts-info' => 'Les scripts personnalisés sont des morceaux de code personnalisés créés pour ajouter des fonctions ou des fonctionnalités spécifiques à un logiciel, améliorant ainsi ses capacités de manière unique.',
                     'custom-css'          => 'CSS personnalisé',
                     'custom-javascript'   => 'JavaScript personnalisé',
-                    'compare-options'     => 'Options de comparaison',
-                    'wishlist-options'    => 'Options de liste de souhaits',
-                    'image-search-option' => 'Option de recherche d’image',
-                    'settings-title'      => 'Paramètres',
-                    'settings-title-info' => 'Les paramètres font référence aux choix configurables qui contrôlent le comportement d’un système, d’une application ou d’un appareil, adaptés aux préférences et aux besoins de l’utilisateur.'
                 ],
 
                 'design' => [
@@ -2639,7 +2638,7 @@ return [
 
             'catalog' => [
                 'title' => 'Catalogue',
-                'info'  => 'Catalogue',
+                'info'  => 'Catalogue',        
 
                 'inventory' => [
                     'title'              => 'Inventaire',
@@ -2908,7 +2907,7 @@ return [
                 'my-account'    => 'Mon Compte',
                 'logout'        => 'Déconnexion',
                 'visit-shop'    => 'Visiter la Boutique',
-
+    
                 'mega-search' => [
                     'title'                           => 'Méga Recherche',
                     'products'                        => 'Produits',
@@ -2926,7 +2925,7 @@ return [
                     'explore-all-customers'           => 'Explorer tous les clients',
                 ],
             ],
-
+    
             'sidebar' => [
                 'collapse'                 => 'Réduire',
                 'dashboard'                => 'Tableau de bord',
@@ -2969,39 +2968,32 @@ return [
                 'mode'                     => 'Mode Sombre',
             ],
         ],
-
+    
         'datagrid' => [
-            'index' => [
-                'no-records-selected'              => 'Aucun enregistrement n\'a été sélectionné.',
-                'must-select-a-mass-action'        => 'Vous devez sélectionner une action de masse.',
-                'must-select-a-mass-action-option' => 'Vous devez sélectionner une option d\'action de masse.',
-                'sure-want-to-perform-this-action' => 'Êtes-vous sûr de vouloir effectuer cette action ?',
-            ],
-            
             'toolbar' => [
                 'mass-actions' => [
                     'select-action' => 'Sélectionner l\'action',
                     'select-option' => 'Sélectionner une option',
                     'submit'        => 'Soumettre',
                 ],
-
+    
                 'filter' => [
                     'title' => 'Filtrer',
                 ],
-
+    
                 'search' => [
                     'title' => 'Rechercher',
                 ],
             ],
-
+    
             'filters' => [
                 'title' => 'Appliquer les filtres',
-
+    
                 'custom-filters' => [
                     'title'     => 'Filtres personnalisés',
                     'clear-all' => 'Tout effacer',
                 ],
-
+    
                 'date-options' => [
                     'today'             => 'Aujourd\'hui',
                     'yesterday'         => 'Hier',
@@ -3013,13 +3005,13 @@ return [
                     'this-year'         => 'Cette année',
                 ],
             ],
-
+    
             'table' => [
                 'actions'              => 'Actions',
                 'no-records-available' => 'Aucun enregistrement disponible.',
             ],
         ],
-
+    
         'products' => [
             'search' => [
                 'title'       => 'Sélectionner des produits',
@@ -3031,7 +3023,7 @@ return [
             ],
         ],
     ],
-
+    
     'acl' => [
         'dashboard'                => 'Tableau de bord',
         'sales'                    => 'Ventes',
@@ -3082,38 +3074,38 @@ return [
         'sitemaps'                 => 'Sitemaps',
         'newsletter-subscriptions' => 'Abonnements à la newsletter',
     ],
-
+    
     'errors' => [
         'go-back'   => 'Retour',
         'dashboard' => 'Tableau de bord',
         'support'   => 'Si le problème persiste, contactez-nous à <a href=":link" class=":class">:email</a> pour obtenir de l\'aide.',
-
+    
         '404' => [
             'title'       => '404 Page non trouvée',
             'description' => 'Oups ! La page que vous recherchez est en vacances. Il semble que nous n\'ayons pas pu trouver ce que vous cherchiez.',
         ],
-
+    
         '401' => [
             'title'       => '401 Non autorisé',
             'description' => 'Oups ! Il semble que vous n\'ayez pas le droit d\'accéder à cette page. Vous semblez manquer des informations d\'identification nécessaires.',
         ],
-
+    
         '403' => [
             'title'       => '403 Interdit',
             'description' => 'Oups ! Cette page est interdite. Il semble que vous n\'ayez pas les autorisations nécessaires pour voir ce contenu.',
         ],
-
+    
         '500' => [
             'title'       => '500 Erreur interne du serveur',
             'description' => 'Oups ! Quelque chose s\'est mal passé. Il semble que nous ayons des problèmes pour charger la page que vous recherchez.',
         ],
-
+    
         '503' => [
             'title'       => '503 Service indisponible',
             'description' => 'Oups ! Il semble que nous soyons temporairement en maintenance. Veuillez revenir dans un moment.',
         ],
     ],
-
+    
     'export' => [
         'export'           => 'Exporter',
         'import'           => 'Importer',
@@ -3132,20 +3124,20 @@ return [
         'no-records'       => 'Rien à exporter',
         'illegal-format'   => 'Erreur ! Ce type de format n\'est pas pris en charge ou est un format illégal',
     ],
-
+    
     'validations' => [
         'slug-being-used' => 'Ce slug est utilisé dans les catégories ou les produits.',
         'slug-reserved'   => 'Ce slug est réservé.',
     ],
-
+    
     'footer' => [
         'copy-right' => 'Propulsé par <a href="https://bagisto.com/" target="_blank">Bagisto</a>, un projet communautaire par <a href="https://webkul.com/" target="_blank">Webkul</a>',
     ],
-
+    
     'emails' => [
         'dear'   => 'Cher :customer_name',
         'thanks' => 'Si vous avez besoin d\'aide, veuillez nous contacter à <a href=":link" style=":style">:email</a>.<br/>Merci !',
-
+    
         'orders' => [
             'created' => [
                 'subject'  => 'Confirmation de nouvelle commande',
@@ -3153,42 +3145,42 @@ return [
                 'greeting' => 'Vous avez une nouvelle commande :order_id passée le :created_at',
                 'summary'  => 'Résumé de la commande',
             ],
-
+    
             'invoiced' => [
                 'subject'  => 'Nouvelle confirmation de facture',
                 'title'    => 'Confirmation de facture !',
                 'greeting' => 'Votre facture n° :invoice_id pour la commande :order_id créée le :created_at',
                 'summary'  => 'Résumé de la facture',
             ],
-
+    
             'shipped' => [
                 'subject'  => 'Confirmation d\'expédition',
                 'title'    => 'Commande expédiée !',
                 'greeting' => 'Vous avez expédié la commande :order_id passée le :created_at',
                 'summary'  => 'Résumé de l\'expédition',
             ],
-
+    
             'inventory-source' => [
                 'subject'  => 'Confirmation d\'expédition',
                 'title'    => 'Commande expédiée !',
                 'greeting' => 'Vous avez expédié la commande :order_id passée le :created_at',
                 'summary'  => 'Résumé de l\'expédition',
             ],
-
+    
             'refunded' => [
                 'subject'  => 'Confirmation de remboursement',
                 'title'    => 'Commande remboursée !',
                 'greeting' => 'Vous avez remboursé la commande :order_id passée le :created_at',
                 'summary'  => 'Résumé du remboursement',
             ],
-
+    
             'canceled' => [
                 'subject'  => 'Commande annulée',
                 'title'    => 'Commande annulée !',
                 'greeting' => 'Vous avez annulé la commande :order_id passée le :created_at',
                 'summary'  => 'Résumé de la commande',
             ],
-
+    
             'shipping-address'  => 'Adresse de livraison',
             'billing-address'   => 'Adresse de facturation',
             'contact'           => 'Contact',
@@ -3204,5 +3196,5 @@ return [
             'discount'          => 'Réduction',
             'grand-total'       => 'Total général',
         ],
-    ],
+    ],    
 ];

@@ -9,7 +9,7 @@ return [
             'submit-btn'           => 'Iniciar Sesión',
             'title'                => 'Iniciar Sesión',
         ],
-
+    
         'forget-password' => [
             'create'    =>  [
                 'email'           => 'Correo Electrónico Registrado',
@@ -21,7 +21,7 @@ return [
                 'title'           => 'Recuperar Contraseña',
             ],
         ],
-
+    
         'reset-password' => [
             'back-link-title'  => '¿Volver a Iniciar Sesión?',
             'confirm-password' => 'Confirmar Contraseña',
@@ -31,14 +31,14 @@ return [
             'title'            => 'Restablecer Contraseña',
         ],
     ],
-
+    
     'notifications' => [
         'no-record'      => 'No se Encontraron Registros',
         'title'          => 'Notificaciones',
         'marked-success' => 'Notificación Marcada Exitosamente',
         'read-all'       => 'Marcar como Leído',
         'view-all'       => 'Ver Todas',
-
+    
         'order-status-messages' => [
             'completed'       => 'Pedido Completado',
             'closed'          => 'Pedido Cerrado',
@@ -47,7 +47,7 @@ return [
             'processing'      => 'Pedido en Proceso',
             'pending-payment' => 'Pago Pendiente',
         ],
-
+    
         'status'  => [
             'all'        => 'Todos',
             'pending'    => 'Pendiente',
@@ -74,7 +74,7 @@ return [
             'title'             => 'Mi Cuenta',
             'upload-image-info' => 'Cargar una Imagen de Perfil (110px X 110px) en formato PNG o JPG',
             'update-success'    => 'Cuenta actualizada con éxito',
-        ],
+        ],        
     ],
 
     'dashboard' => [
@@ -126,12 +126,12 @@ return [
             'visitor'                   => 'Visitante',
         ],
     ],
-
+    
     'sales' => [
         'orders' => [
             'index' => [
                 'title' => 'Pedidos',
-
+        
                 'datagrid' => [
                     'customer'         => 'Cliente',
                     'channel-name'     => 'Canal',
@@ -156,7 +156,7 @@ return [
                     'view'             => 'Ver',
                 ],
             ],
-
+        
             'view' => [
                 'amount-per-unit'       => ':amount Por Unidad x :qty Cantidad',
                 'billing-address'       => 'Dirección de Facturación',
@@ -225,11 +225,11 @@ return [
                 'write-your-comment'    => 'Escribe tu comentario',
             ],
         ],
-
+        
         'shipments' => [
             'index' => [
                 'title' => 'Envíos',
-
+        
                 'datagrid'  => [
                     'id'               => 'ID',
                     'inventory-source' => 'Fuente de Inventario',
@@ -241,7 +241,7 @@ return [
                     'view'             => 'Ver',
                 ],
             ],
-
+        
             'create' => [
                 'amount-per-unit'  => ':amount Por Unidad x :qty Cantidad',
                 'cancel-error'     => 'El pedido no puede ser cancelado',
@@ -264,7 +264,7 @@ return [
                 'title'            => 'Crear nuevo Envío',
                 'tracking-number'  => 'Número de Seguimiento',
             ],
-
+        
             'view' => [
                 'billing-address'      => 'Dirección de Facturación',
                 'carrier-title'        => 'Título de la Compañía de Envío',
@@ -289,12 +289,12 @@ return [
                 'title'                => 'Envío #:shipment_id',
                 'tracking-number'      => 'Número de Seguimiento',
             ]
-        ],
+        ], 
 
         'refunds' => [
             'index' => [
                 'title' => 'Reembolsos',
-
+        
                 'datagrid'  => [
                     'billed-to'    => 'Facturado a',
                     'id'           => 'ID',
@@ -304,7 +304,7 @@ return [
                     'view'         => 'Ver',
                 ],
             ],
-
+        
             'view' => [
                 'account-information'    => 'Información de la Cuenta',
                 'adjustment-refund'      => 'Reembolso de Ajuste',
@@ -336,7 +336,7 @@ return [
                 'title'                  => 'Reembolso #:refund_id',
                 'tax'                    => 'Impuestos',
             ],
-
+        
             'create' => [
                 'amount-per-unit'             => ':amount Por Unidad x :qty Cantidad',
                 'adjustment-refund'           => 'Reembolso de Ajuste',
@@ -364,11 +364,11 @@ return [
                 'update-quantity-btn'         => 'Actualizar Cantidad',
             ],
         ],
-
+        
         'invoices' => [
             'index' => [
                 'title' => 'Facturas',
-
+        
                 'datagrid' => [
                     'action'        => 'Acciones',
                     'id'            => 'ID',
@@ -381,14 +381,13 @@ return [
                     'status'        => 'Estado',
                 ],
             ],
-
+        
             'view' => [
                 'amount-per-unit'        => ':amount Por Unidad x :qty Cantidad',
                 'channel'                => 'Canal',
                 'customer'               => 'Cliente',
                 'discount'               => 'Monto de Descuento - :discount',
-                'customer-email'         => 'Correo electrónico - :email',
-                'email'                  => 'Correo electrónico',
+                'email'                  => 'Correo Electrónico - :email',
                 'grand-total'            => 'Total General',
                 'invoice-items'          => 'Ítems de la Factura',
                 'invoice-status'         => 'Estado de la Factura',
@@ -408,19 +407,17 @@ return [
                 'sku'                    => 'SKU - :sku',
                 'sub-total'              => 'Subtotal - :sub_total',
                 'sub-total-summary'      => 'Subtotal',
-                'summary-tax'            => 'Importe del Impuesto',
-                'summary-discount'       => 'Importe del Descuento',
                 'title'                  => 'Factura #:invoice_id',
                 'tax'                    => 'Monto de Impuestos - :tax',
             ],
-
+        
             'create'   => [
                 'creation-error' => 'No se permite la creación de factura de pedido.',
                 'create-success' => 'Factura creada exitosamente',
                 'invalid-qty'    => 'Encontramos una cantidad no válida para facturar ítems.',
                 'product-error'  => 'No se puede crear una factura sin productos.',
             ],
-
+        
             'invoice-pdf' => [
                 'invoice'           => 'Factura',
                 'date'              => 'Fecha de la Factura',
@@ -448,19 +445,19 @@ return [
                 'discount'          => 'Descuento',
             ],
         ],
-
+        
         'invoice-transaction' => [
             'view'             => 'Ver',
             'transaction-date' => 'Fecha de Transacción',
             'transaction-id'   => 'ID de Transacción',
             'id'               => 'ID',
         ],
-
+        
         'transactions' => [
             'index' => [
                 'create-btn'  => 'Crear Transacción',
                 'title'       => 'Transacciones',
-
+        
                 'datagrid' => [
                     'id'                 => 'ID',
                     'invoice-id'         => 'ID de Factura',
@@ -470,7 +467,7 @@ return [
                     'transaction-date'   => 'Fecha',
                     'transaction-amount' => 'Monto',
                 ],
-
+        
                 'edit'  =>  [
                     'already-paid'               => 'Ya pagado',
                     'invoice-missing'            => 'Factura no encontrada',
@@ -479,7 +476,7 @@ return [
                     'transaction-saved'          => 'Transacción guardada exitosamente',
                 ],
             ],
-        ],
+        ],      
     ],
 
     'catalog' => [
@@ -488,10 +485,11 @@ return [
                 'create-btn'    => 'Crear Producto',
                 'title'         => 'Productos',
                 'already-taken' => 'El :name ya ha sido tomado.',
-
+            
                 'create'     => [
                     'back-btn'                => 'Atrás',
                     'bundle'                  => 'Paquete',
+                    'booking'                 => 'Reserva',
                     'configurable'            => 'Configurable',
                     'configurable-attributes' => 'Atributos Configurables',
                     'create-btn'              => 'Crear Producto',
@@ -505,7 +503,7 @@ return [
                     'type'                    => 'Tipo',
                     'virtual'                 => 'Virtual',
                 ],
-
+            
                 'datagrid'   => [
                     'attribute-family'       => 'Familia de Atributos',
                     'attribute-family-value' => 'Familia de Atributos - :attribute_family',
@@ -544,15 +542,13 @@ return [
                         'create-btn'                => 'Agregar Nuevo',
                         'edit-btn'                  => 'Editar',
                         'add-group-price'           => 'Agregar Precio de Grupo',
-                        'all-groups'                => 'Todos los grupos',
-                        'fixed-group-price-info'    => 'Por :qty cantidad a un precio de :price por :type',
+                        'fixed-group-price-info'    => 'Para :qty Cantidad a precio fijo de :price',
                         'discount-group-price-info' => 'Para :qty Cantidad con descuento de :price',
                         'empty-info'                => 'Precios especiales para clientes que pertenecen a un grupo específico.',
-
+            
                         'create' => [
                             'create-title'   => 'Crear Precio de Grupo de Clientes',
                             'customer-group' => 'Grupo de Clientes',
-                            'all-groups'     => 'Todos los grupos',
                             'discount'       => 'Descuento',
                             'delete-btn'     => 'Eliminar',
                             'fixed'          => 'Fijo',
@@ -570,18 +566,18 @@ return [
                     'pending-ordered-qty-info' => 'La cantidad de pedido pendiente se deducirá de la fuente de inventario respectiva después del envío. En caso de cancelación, la cantidad pendiente estará disponible para la venta.',
                     'title'                    => 'Inventarios',
                 ],
-
+            
                 'categories' => [
                     'title' => 'Categorías',
                 ],
-
+            
                 'images' => [
                     'add-image-btn'     => 'Agregar Imagen',
                     'allowed-types'     => 'png, jpeg, jpg',
                     'info'              => 'La resolución de la imagen debe ser de 609px X 560px',
                     'not-allowed-error' => 'Solo se permiten archivos de imagen (.jpeg, .jpg, .png, ..).',
                     'title'             => 'Imágenes',
-
+            
                     'placeholders'  => [
                         'front'     => 'Frontal',
                         'next'      => 'Siguiente',
@@ -605,19 +601,19 @@ return [
                         'info'       => 'Además del producto que el cliente está viendo, se le presentan productos relacionados.',
                         'title'      => 'Productos Relacionados',
                     ],
-
+            
                     'up-sells' => [
                         'empty-info' => 'Para agregar productos de venta adicional de forma rápida.',
                         'info'       => 'Se presenta al cliente productos de venta adicional, que sirven como una alternativa premium o de mayor calidad al producto que están viendo actualmente.',
                         'title'      => 'Productos de Venta Adicional',
                     ],
-
+            
                     'cross-sells' => [
                         'empty-info' => 'Para agregar productos de venta cruzada de forma rápida.',
                         'info'       => 'Junto al carrito de compras, encontrará estos productos de "compra impulsiva" posicionados como ventas cruzadas para complementar los productos que ya ha agregado a su carrito.',
                         'title'      => 'Productos de Venta Cruzada',
                     ],
-
+            
                     'add-btn'     => 'Agregar Producto',
                     'delete'      => 'Eliminar',
                     'empty-title' => 'Agregar Producto',
@@ -637,7 +633,7 @@ return [
                         'qty'               => ':qty Cantidad',
                         'sku'               => 'SKU - :sku',
                         'title'             => 'Variantes',
-
+            
                         'create'  => [
                             'description'            => 'Descripción',
                             'name'                   => 'Nombre',
@@ -645,7 +641,7 @@ return [
                             'title'                  => 'Agregar Variante',
                             'variant-already-exists' => 'Esta variante ya existe',
                         ],
-
+            
                         'edit' => [
                             'disabled'        => 'Desactivado',
                             'edit-info'       => 'Si desea actualizar la información del producto en detalle, vaya a la',
@@ -661,7 +657,7 @@ return [
                             'weight'          => 'Peso',
                         ],
                     ],
-
+            
                     'grouped' => [
                         'add-btn'     => 'Agregar Producto',
                         'delete'      => 'Eliminar',
@@ -672,14 +668,14 @@ return [
                         'sku'         => 'SKU - :sku',
                         'title'       => 'Productos Agrupados',
                     ],
-
+            
                     'bundle' => [
                         'add-btn'     => 'Agregar Opción',
                         'empty-title' => 'Agregar Opción',
                         'empty-info'  => 'Para crear opciones de paquetes de forma rápida.',
                         'info'        => 'Un producto de paquete es un paquete de varios artículos o servicios que se venden juntos a un precio especial, ofreciendo valor y comodidad a los clientes.',
                         'title'       => 'Artículos del Paquete',
-
+            
                         'update-create' => [
                             'checkbox'    => 'Casilla de Verificación',
                             'is-required' => 'Es Obligatorio',
@@ -693,7 +689,7 @@ return [
                             'type'        => 'Tipo',
                             'yes'         => 'Sí',
                         ],
-
+            
                         'option' => [
                             'add-btn'     => 'Agregar Producto',
                             'delete-btn'  => 'Eliminar',
@@ -703,23 +699,23 @@ return [
                             'empty-title' => 'Agregar Producto',
                             'empty-info'  => 'Para crear varias combinaciones de productos de forma rápida.',
                             'sku'         => 'SKU - :sku',
-
+            
                             'types' => [
                                 'checkbox' => [
                                     'info'  => 'Establezca el producto predeterminado usando la casilla de verificación',
                                     'title' => 'Casilla de Verificación',
                                 ],
-
+            
                                 'multiselect' => [
                                     'info'  => 'Establezca el producto predeterminado utilizando el botón de selección múltiple',
                                     'title' => 'Selección Múltiple',
                                 ],
-
+            
                                 'radio' => [
                                     'info'  => 'Establezca el producto predeterminado utilizando el botón de radio',
                                     'title' => 'Radio',
                                 ],
-
+            
                                 'select' => [
                                     'info'  => 'Establezca el producto predeterminado utilizando el botón de radio',
                                     'title' => 'Seleccionar',
@@ -727,7 +723,7 @@ return [
                             ],
                         ],
                     ],
-
+            
                     'downloadable' => [
                         'links' => [
                             'add-btn'     => 'Agregar Enlace',
@@ -741,7 +737,7 @@ return [
                             'sample-url'  => 'URL de Muestra : ',
                             'title'       => 'Enlaces Descargables',
                             'url'         => 'URL : ',
-
+            
                             'update-create' => [
                                 'downloads'   => 'Descarga Permitida',
                                 'file-type'   => 'Tipo de Archivo',
@@ -755,7 +751,7 @@ return [
                                 'url'         => 'URL',
                             ],
                         ],
-
+            
                         'samples' => [
                             'add-btn'     => 'Agregar Muestra',
                             'delete-btn'  => 'Eliminar',
@@ -766,7 +762,7 @@ return [
                             'info'        => 'El tipo de producto descargable permite vender productos digitales, como libros electrónicos, aplicaciones de software, música, juegos, etc.',
                             'title'       => 'Muestras Descargables',
                             'url'         => 'URL : ',
-
+            
                             'update-create' => [
                                 'file'        => 'Archivo',
                                 'file-type'   => 'Tipo de Archivo',
@@ -792,7 +788,7 @@ return [
             'index' => [
                 'title'      => 'Atributos',
                 'create-btn' => 'Crear Atributos',
-
+        
                 'datagrid' => [
                     'id'                  => 'ID',
                     'name'                => 'Nombre',
@@ -860,7 +856,7 @@ return [
                 'value-per-locale'      => 'Valor por Localización',
                 'value-per-channel'     => 'Valor por Canal',
                 'yes'                   => 'Sí',
-
+                
                 'option'                => [
                     'color'     => 'Muestra de Color',
                     'dropdown'  => 'Desplegable',
@@ -929,7 +925,7 @@ return [
                     'save-btn'  => 'Guardar Opción',
                     'text'      => 'Muestra de Texto',
                 ],
-            ],
+            ],        
 
             'create-success'     => 'Atributo Creado Exitosamente',
             'update-success'     => 'Atributo Actualizado Exitosamente',
@@ -942,7 +938,7 @@ return [
             'index' => [
                 'title'    => 'Categorías',
                 'add-btn'  => 'Crear Categoría',
-
+        
                 'datagrid' => [
                     'id'             => 'ID',
                     'name'           => 'Nombre',
@@ -957,7 +953,7 @@ return [
                     'delete-success' => 'Las :resource seleccionadas se eliminaron correctamente',
                 ],
             ],
-
+        
             'create' => [
                 'add-logo'                 => 'Agregar Logo',
                 'add-banner'               => 'Agregar Banner',
@@ -989,7 +985,7 @@ return [
                 'title'                    => 'Agregar Nueva Categoría',
                 'visible-in-menu'          => 'Visible en el Menú',
             ],
-
+        
             'edit' => [
                 'add-logo'                 => 'Agregar Logo',
                 'add-banner'               => 'Agregar Banner',
@@ -1021,7 +1017,7 @@ return [
                 'title'                    => 'Editar Categoría',
                 'visible-in-menu'          => 'Visible en el Menú',
             ],
-
+        
             'create-success'       => 'Categoría creada con éxito.',
             'category'             => 'Categoría',
             'update-success'       => 'Categoría actualizada con éxito.',
@@ -1034,7 +1030,7 @@ return [
             'index' => [
                 'title'  => 'Familias',
                 'add'    => 'Crear Familia de Atributos',
-
+        
                 'datagrid' => [
                     'id'             => 'ID',
                     'code'           => 'Código',
@@ -1048,7 +1044,7 @@ return [
                     'method-error'   => 'Error. Método incorrecto detectado, por favor, verifica la configuración de acción masiva',
                 ],
             ],
-
+        
             'create' => [
                 'title'                            => 'Crear Familia de Atributos',
                 'save-btn'                         => 'Guardar Familia de Atributos',
@@ -1074,7 +1070,7 @@ return [
                 'group-contains-system-attributes' => 'Este grupo contiene atributos del sistema. Primero mueve los atributos del sistema a otro grupo y luego inténtalo de nuevo.',
                 'removal-not-possible'             => 'No puedes eliminar atributos del sistema de la familia de atributos.',
             ],
-
+        
             'edit' => [
                 'title'                            => 'Editar Familia de Atributos',
                 'save-btn'                         => 'Guardar Familia de Atributos',
@@ -1100,7 +1096,7 @@ return [
                 'group-contains-system-attributes' => 'Este grupo contiene atributos del sistema. Primero mueve los atributos del sistema a otro grupo y luego inténtalo de nuevo.',
                 'removal-not-possible'             => 'No puedes eliminar atributos del sistema de la familia de atributos.',
             ],
-
+        
             'family'                  => 'Familia',
             'attribute-family'        => 'Familia de Atributos',
             'create-success'          => 'Familia creada con éxito.',
@@ -1117,7 +1113,7 @@ return [
         'index'  => [
             'login-message'  => 'has iniciado sesión como :customer_name',
             'title'          => 'Clientes',
-
+    
             'datagrid'  => [
                 'id'             => 'ID de Cliente',
                 'order'          => ':order Pedido(s)',
@@ -1143,7 +1139,7 @@ return [
                 'no-resource'    => 'El recurso proporcionado no es suficiente para la acción',
                 'method-error'   => '¡Error! Se detectó un método incorrecto, por favor, verifica la configuración de acción masiva',
             ],
-
+    
             'create' => [
                 'create-btn'            => 'Crear Cliente',
                 'contact-number'        => 'Número de Contacto',
@@ -1163,12 +1159,12 @@ return [
                 'title'                 => 'Crear Nuevo Cliente',
             ],
         ],
-
+    
         'delete-success'   => 'Cliente Eliminado Exitosamente',
         'delete-failed'    => 'Error al Eliminar el Cliente',
         'update-success'   => 'Cliente Actualizado Exitosamente',
         'order-pending'    => 'Hay Pedidos Pendientes',
-
+    
         'edit' => [
             'contact-number'        => 'Número de Contacto',
             'customer-group'        => 'Grupo de Cliente',
@@ -1188,7 +1184,7 @@ return [
             'suspended'             => 'Suspendido',
             'title'                 => 'Editar Cliente',
         ],
-
+    
         'view' => [
             'address'                 => 'Dirección',
             'back-btn'                => 'Atrás',
@@ -1246,11 +1242,11 @@ return [
             'order-pending'           => 'No se puede eliminar la cuenta porque algunos pedidos están pendientes o en estado de procesamiento.',
             'delete-confirmation'     => '¿Estás seguro de que deseas eliminar esta cuenta?',
         ],
-
+    
         'groups' => [
             'index' => [
                 'title' => 'Grupos',
-
+    
                 'create' => [
                     'create-btn' => 'Crear Grupo',
                     'code'       => 'Código',
@@ -1259,7 +1255,7 @@ return [
                     'save-btn'   => 'Guardar Grupo',
                     'title'      => 'Crear Nuevo Grupo',
                 ],
-
+    
                 'edit'  => [
                     'title'          => 'Editar Grupo',
                     'success'        => 'Grupo Actualizado Exitosamente',
@@ -1267,7 +1263,7 @@ return [
                     'delete-failed'  => 'Error al Eliminar el Grupo',
                     'group-default'  => 'No se puede eliminar el Grupo Predeterminado',
                 ],
-
+    
                 'datagrid'  =>  [
                     'code'    => 'Código',
                     'id'      => 'ID',
@@ -1277,7 +1273,7 @@ return [
                 ],
             ],
         ],
-
+    
         'reviews' => [
             'index' => [
                 'description' => 'Descripción',
@@ -1288,7 +1284,7 @@ return [
                 'rating'      => 'Calificación',
                 'status'      => 'Estado',
                 'title'       => 'Reseñas',
-
+    
                 'edit'  => [
                     'title'          => 'Editar Reseña',
                     'save-btn'       => 'Guardar',
@@ -1306,7 +1302,7 @@ return [
                     'images'         => 'Imágenes',
                     'update-success' => 'Actualización Exitosa',
                 ],
-
+    
                 'datagrid'   =>  [
                     'customer-names'         => 'Nombre',
                     'comment'                => 'Comentario',
@@ -1330,7 +1326,7 @@ return [
                 ],
             ],
         ],
-
+    
         'addresses' => [
             'create' => [
                 'title'              => 'Crear Dirección del Cliente',
@@ -1351,7 +1347,7 @@ return [
                 'post-code'          => 'Código Postal',
                 'save-btn-title'     => 'Guardar Dirección',
             ],
-
+    
             'edit' => [
                 'title'            => 'Editar Dirección',
                 'company-name'     => 'Nombre de la Empresa',
@@ -1370,18 +1366,18 @@ return [
                 'post-code'        => 'Código Postal',
                 'save-btn-title'   => 'Guardar Dirección',
             ],
-
+    
             'success-mass-delete'  => 'Eliminación Masiva de Direcciones Exitosa',
         ],
     ],
-
+    
     'marketing' => [
         'communications' => [
             'templates' => [
                 'index' => [
                     'title'       => 'Plantillas de Correo Electrónico',
                     'create-btn'  => 'Crear Plantilla',
-
+    
                     'datagrid' => [
                         'id'       => 'ID',
                         'name'     => 'Nombre',
@@ -1565,13 +1561,13 @@ return [
             'index' => [
                 'catalog-rule-title' => 'Reglas de Catálogo',
                 'cart-rule-title'    => 'Reglas del Carrito',
-            ],
+            ],        
 
             'cart-rules' => [
                 'index' => [
                     'title'      => 'Reglas del Carrito',
                     'create-btn' => 'Crear Regla del Carrito',
-
+            
                     'datagrid' => [
                         'id'          => 'ID',
                         'name'        => 'Nombre',
@@ -1589,7 +1585,7 @@ return [
                         'view'        => 'Ver',
                     ],
                 ],
-
+            
                 'create' => [
                     'back-btn'                                  => 'Volver',
                     'title'                                     => 'Crear Regla del Carrito',
@@ -1664,7 +1660,7 @@ return [
                     'create-success'                            => 'Regla del carrito creada con éxito',
                     'choose-condition-to-add'                   => 'Elegir condición para agregar',
                 ],
-
+            
                 'edit' => [
                     'back-btn'                                  => 'Volver',
                     'title'                                     => 'Editar Regla del Carrito',
@@ -1749,16 +1745,16 @@ return [
                     'generate'                                  => 'Generar',
                     'customer-group'                            => 'Grupo de Clientes',
                 ],
-
+            
                 'delete-success' => 'Regla del Carrito Eliminada Exitosamente',
                 'delete-failed'  => 'Falló la Eliminación de la Regla del Carrito',
             ],
-
+            
             'catalog-rules' => [
                 'index' => [
                     'title'      => 'Reglas del Catálogo',
                     'create-btn' => 'Crear Regla del Catálogo',
-
+            
                     'datagrid' => [
                         'id'        => 'ID',
                         'name'      => 'Nombre',
@@ -1772,7 +1768,7 @@ return [
                         'delete'    => 'Eliminar',
                     ],
                 ],
-
+            
                 'create' => [
                     'back-btn'                 => 'Volver',
                     'title'                    => 'Crear Regla del Catálogo',
@@ -1815,7 +1811,7 @@ return [
                     'product-attribute'        => 'Atributo del Producto',
                     'action-type'              => 'Tipo de Acción',
                 ],
-
+            
                 'edit' => [
                     'back-btn'                 => 'Volver',
                     'title'                    => 'Editar Regla del Catálogo',
@@ -1857,17 +1853,17 @@ return [
                     'product-attribute'        => 'Atributo del Producto',
                     'action-type'              => 'Tipo de Acción',
                 ],
-
+            
                 'create-success' => 'Regla del Catálogo creada exitosamente',
                 'delete-success' => 'Regla del Catálogo eliminada exitosamente',
                 'update-success' => 'Regla del Catálogo actualizada exitosamente',
             ],
-
+            
             'cart-rules-coupons' => [
                 'cart-rule-not-defined-error'  => 'No se puede eliminar la regla del carrito',
                 'success'                      => ':name creado exitosamente',
                 'mass-delete-success'          => 'Eliminación masiva de reglas del carrito exitosa'
-            ],
+            ],            
         ],
 
         'sitemaps' => [
@@ -1875,7 +1871,7 @@ return [
                 'title'       => 'Mapas del sitio',
                 'create-btn'  => 'Crear Mapa del sitio',
                 'sitemap'     => 'Mapa del sitio',
-
+        
                 'datagrid' => [
                     'id'              => 'ID',
                     'file-name'       => 'Nombre del archivo',
@@ -1885,7 +1881,7 @@ return [
                     'delete'          => 'Eliminar',
                     'actions'         => 'Acciones',
                 ],
-
+        
                 'create'  => [
                     'file-name'      => 'Nombre del archivo',
                     'file-name-info' => 'Ejemplo: sitemap.xml',
@@ -1896,14 +1892,14 @@ return [
                     'success'        => 'Mapa del sitio creado exitosamente',
                     'delete-warning' => '¿Estás seguro de que deseas realizar esta acción?',
                 ],
-
+        
                 'edit'  =>  [
                     'title'   => 'Editar Mapa del sitio',
                     'success' => 'Mapa del sitio actualizado exitosamente',
                     'delete-success' => 'Mapa del sitio eliminado exitosamente'
                 ],
             ],
-
+        
             'edit'  => [
                 'back-btn'       => 'Volver',
                 'file-name'      => 'Nombre del archivo',
@@ -1913,9 +1909,9 @@ return [
                 'path-info'      => 'Ejemplo: "/sitemap/" o "/" para la ruta base',
                 'save-btn'       => 'Guardar Mapa del sitio',
             ],
-
+        
             'delete-failed'  => ':name Eliminado Fallido',
-        ],
+        ],        
     ],
 
     'cms' => [
@@ -1923,7 +1919,7 @@ return [
             'title'             => 'Páginas',
             'create-btn'        => 'Crear Página',
             'already-taken'     => 'El :name ya ha sido tomado.',
-
+    
             'datagrid' => [
                 'id'                  => 'ID',
                 'page-title'          => 'Título de la Página',
@@ -1934,7 +1930,7 @@ return [
                 'mass-delete-success' => 'Datos Seleccionados Eliminados Exitosamente'
             ],
         ],
-
+    
         'create' => [
             'title'             => 'Crear Página',
             'save-btn'          => 'Guardar Página',
@@ -1948,7 +1944,7 @@ return [
             'seo'               => 'SEO',
             'url-key'           => 'Clave de URL',
         ],
-
+    
         'edit' => [
             'title'            => 'Editar Página',
             'preview-btn'      => 'Vista Previa de la Página',
@@ -1964,20 +1960,20 @@ return [
             'meta-title'       => 'Meta Título',
             'url-key'          => 'Clave de URL',
         ],
-
+    
         'create-success'  => 'CMS creado exitosamente.',
         'delete-success'  => 'CMS eliminado exitosamente.',
         'update-success'  => 'CMS actualizado exitosamente.',
         'no-resource'     => 'El recurso no existe.',
     ],
-
+    
     'settings' => [
         'locales' => [
             'index' => [
                 'title'             => 'Idiomas',
                 'locale'            => 'Idioma',
                 'create-btn'        => 'Crear Idioma',
-
+        
                 'datagrid' => [
                     'actions'   => 'Acciones',
                     'id'        => 'ID',
@@ -1989,7 +1985,7 @@ return [
                     'edit'      => 'Editar',
                     'delete'    => 'Eliminar',
                 ],
-
+        
                 'create'  =>  [
                     'code'              => 'Código',
                     'name'              => 'Nombre',
@@ -1998,11 +1994,11 @@ return [
                     'title'             => 'Crear Idioma',
                     'save-btn'          => 'Guardar Idioma',
                 ],
-
+        
                 'edit'  => [
                     'title'   => 'Editar Idioma',
                 ],
-
+        
                 'create-success'    => 'Idioma creado exitosamente.',
                 'update-success'    => 'Idioma actualizado exitosamente.',
                 'delete-success'    => 'Idioma eliminado exitosamente.',
@@ -2010,14 +2006,14 @@ return [
                 'delete-warning'    => '¿Estás seguro de que deseas realizar esta acción?',
                 'delete-failed'     => 'Error al eliminar el idioma',
             ],
-        ],
+        ],   
 
         'currencies' => [
             'index' => [
                 'title'      => 'Monedas',
                 'create-btn' => 'Crear Moneda',
                 'currency'   => 'Moneda',
-
+        
                 'datagrid' => [
                     'id'             => 'ID',
                     'name'           => 'Nombre',
@@ -2030,7 +2026,7 @@ return [
                     'no-resource'    => 'El recurso proporcionado no es suficiente para la acción',
                     'method-error'   => '¡Error! Se detectó un método incorrecto, por favor verifique la configuración de la acción masiva',
                 ],
-
+        
                 'create' => [
                     'create-btn'        => 'Crear Moneda',
                     'code'              => 'Código',
@@ -2042,11 +2038,11 @@ return [
                     'symbol'            => 'Símbolo',
                     'title'             => 'Crear Nueva Moneda',
                 ],
-
+        
                 'edit' => [
                     'title'              => 'Editar Moneda',
                 ],
-
+        
                 'create-success'     => 'Moneda creada exitosamente.',
                 'delete-success'     => 'Moneda eliminada exitosamente.',
                 'delete-failed'      => 'Error al eliminar la Moneda',
@@ -2054,14 +2050,14 @@ return [
                 'update-success'     => 'Moneda actualizada exitosamente.',
             ],
         ],
-
+        
         'exchange-rates' => [
             'index' => [
                 'title'         => 'Tipos de Cambio',
                 'create-btn'    => 'Crear Tipo de Cambio',
                 'exchange-rate' => 'Tipo de Cambio',
                 'update-rates'  => 'Actualizar Tipo de Cambio',
-
+        
                 'create' => [
                     'delete-warning'   => '¿Estás seguro de que deseas realizar esta acción?',
                     'title'            => 'Crear Tipo de Cambio',
@@ -2070,11 +2066,11 @@ return [
                     'source-currency'  => 'Moneda Fuente',
                     'target-currency'  => 'Moneda Objetivo',
                 ],
-
+        
                 'edit' => [
                     'title'   => 'Editar Tipos de Cambio',
                 ],
-
+        
                 'datagrid' => [
                     'id'            => 'ID',
                     'currency-name' => 'Nombre de la Moneda',
@@ -2083,19 +2079,19 @@ return [
                     'delete'        => 'Eliminar',
                     'actions'       => 'Acciones',
                 ],
-
+        
                 'create-success'  => 'Tipo de Cambio Creado Exitosamente',
                 'update-success'  => 'Tipo de Cambio Actualizado Exitosamente',
                 'delete-success'  => 'Tipo de Cambio Eliminado Exitosamente',
                 'delete-error'    => 'Error al Eliminar el Tipo de Cambio'
             ],
-        ],
+        ],        
 
         'inventory-sources' => [
             'index'  => [
                 'title'      => 'Fuentes de Inventario',
                 'create-btn' => 'Crear Fuente de Inventario',
-
+        
                 'datagrid' => [
                     'id'       => 'ID',
                     'code'     => 'Código',
@@ -2108,7 +2104,7 @@ return [
                     'delete'   => 'Eliminar',
                 ],
             ],
-
+        
             'create' => [
                 'add-title'      => 'Agregar Fuente de Inventario',
                 'title'          => 'Fuentes de Inventario',
@@ -2137,7 +2133,7 @@ return [
                 'postcode'       => 'Código Postal',
                 'settings'       => 'Configuración',
             ],
-
+        
             'edit' => [
                 'title'             => 'Editar Fuentes de Inventario',
                 'general'           => 'General',
@@ -2165,13 +2161,13 @@ return [
                 'postcode'          => 'Código Postal',
                 'settings'          => 'Configuración',
             ],
-
+        
             'create-success'    => 'Fuente de Inventario creada exitosamente',
             'delete-success'    => 'Fuentes de Inventario eliminadas exitosamente',
             'delete-failed'     => 'Error al eliminar Fuentes de Inventario',
             'last-delete-error' => 'No se pueden eliminar las últimas Fuentes de Inventario',
             'update-success'    => 'Fuentes de Inventario actualizadas exitosamente',
-        ],
+        ], 
 
         'taxes' => [
             'categories' => [
@@ -2179,7 +2175,7 @@ return [
                     'title'          => 'Categorías de Impuestos',
                     'tax-category'   => 'Categoría de Impuestos',
                     'delete-warning' => '¿Estás seguro de que deseas eliminar?',
-
+        
                     'datagrid' => [
                         'id'       => 'ID',
                         'name'     => 'Nombre',
@@ -2188,7 +2184,7 @@ return [
                         'delete'   => 'Eliminar',
                         'actions' => 'Acciones',
                     ],
-
+        
                     'create' => [
                         'title'           => 'Crear Categoría de Impuestos',
                         'code'            => 'Código',
@@ -2201,24 +2197,24 @@ return [
                         'add-tax-rates'   => 'Agregar Tasas de Impuestos',
                         'empty-text'      => 'Las Tasas de Impuestos no están disponibles, por favor crea nuevas Tasas de Impuestos.',
                     ],
-
+        
                     'edit' => [
                         'title' => 'Editar Categorías de Impuestos',
                     ],
-
+        
                     'create-success'  => 'Nueva Categoría de Impuestos Creada',
                     'update-success'  => 'Categoría de Impuestos Actualizada Exitosamente',
                     'delete-success'  => 'Categoría de Impuestos Eliminada Exitosamente',
                     'delete-failed'   => 'Error al Eliminar Categoría de Impuestos',
                 ],
             ],
-
+        
             'rates' => [
                 'index' => [
                     'title'        => 'Tasas de Impuestos',
                     'tax-rate'     => 'Tasa de Impuestos',
                     'button-title' => 'Crear Tasas de Impuestos',
-
+        
                     'datagrid' => [
                         'id'         => 'ID',
                         'identifier' => 'Identificador',
@@ -2232,7 +2228,7 @@ return [
                         'delete'     => 'Eliminar',
                     ],
                 ],
-
+        
                 'create' => [
                     'country'        => 'País',
                     'back-btn'       => 'Volver',
@@ -2250,7 +2246,7 @@ return [
                     'zip-from'       => 'Desde Código Postal',
                     'zip-to'         => 'Hasta Código Postal',
                 ],
-
+        
                 'edit' => [
                     'basic-settings' => 'Configuración Básica',
                     'country'        => 'País',
@@ -2266,14 +2262,14 @@ return [
                     'zip-from'       => 'Desde Código Postal',
                     'zip-to'         => 'Hasta Código Postal',
                 ],
-
+        
                 'create-success' => 'Tasa de Impuestos creada exitosamente.',
                 'delete-failed'  => 'Error al eliminar Tasa de Impuestos',
                 'delete-success' => 'Tasa de Impuestos eliminada exitosamente',
                 'update-success' => 'Tasa de Impuestos Actualizada Exitosamente',
             ],
         ],
-
+        
         'channels' => [
             'index' => [
                 'title'             => 'Canales',
@@ -2281,7 +2277,7 @@ return [
                 'delete-success'    => 'Canal eliminado exitosamente.',
                 'delete-failed'     => 'Error al eliminar :name',
                 'last-delete-error' => 'Error al eliminar el último Canal.',
-
+        
                 'datagrid' => [
                     'id'        => 'ID',
                     'code'      => 'Código',
@@ -2291,7 +2287,7 @@ return [
                     'delete'    => 'Eliminar',
                 ],
             ],
-
+        
             'create' => [
                 'title'                  => 'Crear Canal',
                 'cancel'                 => 'Volver',
@@ -2326,7 +2322,7 @@ return [
                 'maintenance-mode-text'  => 'Mensaje',
                 'create-success'         => 'Canal creado exitosamente.',
             ],
-
+        
             'edit' => [
                 'title'                  => 'Editar Canal',
                 'back-btn'               => 'Volver',
@@ -2362,13 +2358,13 @@ return [
                 'update-success'         => 'Canal actualizado exitosamente',
             ],
         ],
-
+        
         'users' => [
             'index' => [
                 'title' => 'Usuarios',
                 'admin' => 'Administrador',
                 'user'  => 'Usuario',
-
+        
                 'create' => [
                     'title'             => 'Crear Usuario',
                     'name'              => 'Nombre',
@@ -2380,7 +2376,7 @@ return [
                     'save-btn'          => 'Guardar Usuario',
                     'upload-image-info' => 'Subir una imagen de perfil (110px X 110px) en formato PNG o JPG'
                 ],
-
+        
                 'datagrid' => [
                     'actions'   => 'Acciones',
                     'id'        => 'ID',
@@ -2392,11 +2388,11 @@ return [
                     'active'    => 'Activo',
                     'inactive'  => 'Inactivo',
                 ],
-
+        
                 'edit' => [
                     'title'    => 'Editar Usuario',
                 ],
-
+        
                 'activate-warning'   => 'Tu cuenta aún no ha sido activada, por favor contacta al administrador.',
                 'create-success'     => 'Usuario creado exitosamente.',
                 'cannot-change'      => 'No se puede cambiar el usuario',
@@ -2408,7 +2404,7 @@ return [
                 'update-success'     => 'Usuario actualizado exitosamente.',
                 'delete-warning'     => '¿Estás seguro de que deseas realizar esta acción?',
             ],
-
+        
             'edit' => [
                 'title'            => 'Editar Usuario',
                 'general'          => 'General',
@@ -2421,16 +2417,16 @@ return [
                 'status'           => 'Estado',
                 'save-btn'         => 'Guardar Usuario',
             ],
-
+        
             'update-success'   => 'Usuario actualizado exitosamente.',
             'delete-success'   => 'Usuario eliminado exitosamente.',
-        ],
+        ],     
 
         'roles' => [
             'index' => [
                 'title'      => 'Roles',
                 'create-btn' => 'Crear Rol',
-
+        
                 'datagrid'  =>  [
                     'delete'            => 'Eliminar',
                     'edit'              => 'Editar',
@@ -2439,7 +2435,7 @@ return [
                     'permission-type'   => 'Tipo de Permiso',
                 ],
             ],
-
+        
             'create' => [
                 'title'           => 'Crear Rol',
                 'save-btn'        => 'Guardar Rol',
@@ -2452,7 +2448,7 @@ return [
                 'custom'          => 'Personalizado',
                 'all'             => 'Todos',
             ],
-
+        
             'edit' => [
                 'title'           => 'Editar Rol',
                 'save-btn'        => 'Guardar Rol',
@@ -2465,7 +2461,7 @@ return [
                 'custom'          => 'Personalizado',
                 'all'             => 'Todos',
             ],
-
+        
             'create-success'     => 'Roles creados exitosamente',
             'update-success'     => 'Rol actualizado exitosamente',
             'last-delete-error'  => 'No se puede eliminar el último Rol',
@@ -2478,7 +2474,7 @@ return [
             'index' => [
                 'title'      => 'Temas',
                 'create-btn' => 'Crear Tema',
-
+                
                 'datagrid'   => [
                     'view'       => 'Ver',
                     'delete'     => 'Eliminar',
@@ -2491,7 +2487,7 @@ return [
                     'name'       => 'Nombre',
                 ]
             ],
-
+        
             'create' => [
                 'title'                         => 'Crear Tema',
                 'sliders'                        => 'Sliders',
@@ -2540,7 +2536,7 @@ return [
                 'select'                        => 'Seleccionar',
                 'back'                          => 'Volver',
              ],
-
+        
             'edit' => [
                 'title'                         => 'Editar Tema',
                 'slider'                        => 'Slider',
@@ -2588,7 +2584,7 @@ return [
                 'edit'                          => 'Editar',
                 'back'                          => 'Volver',
             ],
-
+        
             'create-success' => 'Tema creado exitosamente',
             'update-success' => 'Tema actualizado exitosamente',
             'delete-success' => 'Tema eliminado exitosamente',
@@ -2603,7 +2599,7 @@ return [
             'delete'                       => 'Eliminar',
             'enable-at-least-one-shipping' => 'Habilita al menos un método de envío.',
             'enable-at-least-one-payment'  => 'Habilita al menos un método de pago.',
-
+            
             'general' => [
                 'general' => [
                     'title'             => 'General',
@@ -2612,21 +2608,16 @@ return [
                     'unit-options-info' => 'Tamaño, color, material, personalización, mejora de la satisfacción del cliente y adaptación de las compras.',
                     'weight-unit'       => 'Unidad de Peso',
                 ],
-
+            
                 'content' => [
-                    'title'               => 'Contenido',
-                    'info'                => 'Configura opciones de comparación, opciones de lista de deseos, opciones de búsqueda de imágenes, pie de página, alternar pie de página y scripts personalizados.',
-                    'custom-scripts'      => 'Scripts Personalizados',
-                    'custom-scripts-info' => 'Los scripts personalizados son piezas de código personalizadas creadas para agregar funciones o características específicas al software, mejorando sus capacidades de manera única.',
-                    'custom-css'          => 'CSS Personalizado',
-                    'custom-javascript'   => 'Javascript Personalizado',
-                    'compare-options'     => 'Opciones de comparación',
-                    'wishlist-options'    => 'Opciones de lista de deseos',
-                    'image-search-option' => 'Opción de búsqueda de imágenes',
-                    'settings-title'      => 'Configuración',
-                    'settings-title-info' => 'Las configuraciones se refieren a opciones configurables que controlan cómo se comporta un sistema, aplicación o dispositivo, adaptadas a las preferencias y requisitos del usuario.'
+                    'title'                 => 'Contenido',
+                    'info'                  => 'Configura opciones de comparación, opciones de lista de deseos, opciones de búsqueda de imágenes, pie de página, alternar pie de página y scripts personalizados.',
+                    'custom-scripts'        => 'Scripts Personalizados',
+                    'custom-scripts-info'   => 'Los scripts personalizados son piezas de código personalizadas creadas para agregar funciones o características específicas al software, mejorando sus capacidades de manera única.',
+                    'custom-css'            => 'CSS Personalizado',
+                    'custom-javascript'     => 'Javascript Personalizado',
                 ],
-
+            
                 'design' => [
                     'title'           => 'Diseño',
                     'info'            => 'Configura el logo y el icono favicon.',
@@ -2636,18 +2627,18 @@ return [
                     'favicon'         => 'Favicon',
                 ],
             ],
-
+            
             'catalog' => [
                 'title' => 'Catálogo',
                 'info' => 'Catálogo',
-
+                
                 'inventory' => [
                     'title'              => 'Inventario',
                     'info'               => 'Configurar pedidos atrasados',
                     'stock-options'      => 'Opciones de acciones',
                     'stock-options-info' => 'Las opciones de acciones son contratos de inversión que otorgan el derecho de comprar o vender acciones de una empresa a un precio predeterminado, lo que influye en las ganancias potenciales.',
                     'allow-back-orders'  => 'Permitir pedidos atrasados',
-                ],
+                ],                
 
                 'products' => [
                     'title'                               => 'Productos',
@@ -2724,7 +2715,7 @@ return [
             'customer' => [
                 'title' => 'Cliente',
                 'info'  => 'Cliente',
-
+            
                 'address' => [
                     'title'              => 'Dirección',
                     'info'               => 'Configurar país, estado, código postal y líneas en una dirección de calle.',
@@ -2738,7 +2729,7 @@ return [
                     'information-info'   => '"Líneas en una dirección de calle" se refiere a los segmentos individuales de una dirección, a menudo separados por comas, que proporcionan información de ubicación como número de casa, calle, ciudad y más.',
                     'street-lines'       => 'Líneas en una Dirección de Calle',
                 ],
-
+            
                 'settings' => [
                     'title'                   => 'Configuración',
                     'settings-info'           => 'Configurar lista de deseos, suscripciones al boletín, verificaciones de correo electrónico y inicio de sesión social.',
@@ -2757,7 +2748,7 @@ return [
             'email' => [
                 'title' => 'Correo Electrónico',
                 'info'  => 'Correo Electrónico',
-
+            
                 'email-settings' => [
                     'title'                  => 'Configuración de Correo Electrónico',
                     'info'                   => 'Configurar nombre del remitente de correo electrónico, dirección de correo electrónico de la tienda, nombre del administrador y dirección de correo electrónico del administrador.',
@@ -2771,7 +2762,7 @@ return [
                     'admin-email-tip'        => 'La dirección de correo electrónico del administrador de este canal para recibir correos electrónicos.',
                     'admin-page-limit'       => 'Cantidad de Elementos por Página por Defecto (Administrador)',
                 ],
-
+            
                 'notifications' => [
                     'title'                                            => 'Notificaciones',
                     'info'                                             => 'Una "notificación" es un mensaje o alerta que informa a los usuarios sobre eventos, actualizaciones o acciones, mejorando el compromiso y la conciencia del usuario.',
@@ -2787,12 +2778,12 @@ return [
                     'new-inventory-source'                             => 'Enviar un correo electrónico de notificación a la fuente de inventario después de crear un envío',
                     'cancel-order'                                     => 'Enviar una notificación después de cancelar un pedido',
                 ],
-            ],
+            ],   
 
             'sales' => [
                 'title' => 'Ventas',
                 'info'  => 'Ventas',
-
+            
                 'shipping' => [
                     'title'           => 'Envío',
                     'info'            => 'Configurar información de envío.',
@@ -2808,7 +2799,7 @@ return [
                     'contact-number'  => 'Número de Contacto',
                     'bank-details'    => 'Detalles Bancarios',
                 ],
-
+            
                 'shipping-methods' => [
                     'page-title'                => 'Métodos de Envío',
                     'info'                      => 'Configurar información de métodos de envío',
@@ -2822,7 +2813,7 @@ return [
                     'status'                    => 'Estado',
                     'type'                      => 'Tipo',
                 ],
-
+            
                 'payment-methods' => [
                     'page-title'                     => 'Métodos de Pago',
                     'info'                           => 'Configurar información de métodos de pago',
@@ -2857,7 +2848,7 @@ return [
                     'accepted-currencies-info'       => 'Agrega códigos de moneda separados por comas, por ejemplo, USD, INR,...',
                     'business-account'               => 'Cuenta de Negocio',
                 ],
-
+            
                 'order-settings' => [
                     'title'                         => 'Configuración de Pedido',
                     'info'                          => 'Configurar números de pedido y pedidos mínimos.',
@@ -2871,7 +2862,7 @@ return [
                     'minimum-order-info'            => 'Criterios configurados que especifican la cantidad o el valor más bajo requerido para que se procese un pedido o califique para beneficios.',
                     'minimum-order-amount'          => 'Monto Mínimo del Pedido',
                 ],
-
+            
                 'invoice-settings' => [
                     'title'                            => 'Configuración de Factura',
                     'info'                             => 'Configurar número de factura, plazos de pago, diseño de factura y recordatorios de factura.',
@@ -2895,7 +2886,7 @@ return [
                     'maximum-limit-of-reminders'       => 'Límite Máximo de Recordatorios',
                     'interval-between-reminders'       => 'Intervalo entre Recordatorios',
                 ],
-            ],
+            ],            
         ],
     ],
 
@@ -2908,7 +2899,7 @@ return [
                 'my-account'    => 'Mi Cuenta',
                 'logout'        => 'Cerrar Sesión',
                 'visit-shop'    => 'Visitar Tienda',
-
+    
                 'mega-search' => [
                     'title'                           => 'Búsqueda Avanzada',
                     'products'                        => 'Productos',
@@ -2926,7 +2917,7 @@ return [
                     'explore-all-customers'           => 'Explorar todos los clientes',
                 ],
             ],
-
+    
             'sidebar' => [
                 'collapse'                 => 'Colapsar',
                 'dashboard'                => 'Tablero',
@@ -2969,39 +2960,32 @@ return [
                 'mode'                     => 'Modo Oscuro',
             ],
         ],
-
+    
         'datagrid' => [
-            'index' => [
-                'no-records-selected'              => 'No se han seleccionado registros.',
-                'must-select-a-mass-action'        => 'Debe seleccionar una acción masiva.',
-                'must-select-a-mass-action-option' => 'Debe seleccionar una opción de acción masiva.',
-                'sure-want-to-perform-this-action' => '¿Estás seguro de que deseas realizar esta acción?',
-            ],
-            
             'toolbar' => [
                 'mass-actions' => [
                     'select-action' => 'Seleccionar Acción',
                     'select-option' => 'Seleccionar Opción',
                     'submit'        => 'Enviar',
                 ],
-
+    
                 'filter' => [
                     'title' => 'Filtrar',
                 ],
-
+    
                 'search' => [
                     'title' => 'Buscar',
                 ],
             ],
-
+    
             'filters' => [
                 'title' => 'Aplicar Filtros',
-
+    
                 'custom-filters' => [
                     'title'     => 'Filtros Personalizados',
                     'clear-all' => 'Limpiar Todo',
                 ],
-
+    
                 'date-options' => [
                     'today'             => 'Hoy',
                     'yesterday'         => 'Ayer',
@@ -3013,13 +2997,13 @@ return [
                     'this-year'         => 'Este Año',
                 ],
             ],
-
+    
             'table' => [
                 'actions'              => 'Acciones',
                 'no-records-available' => 'No hay Registros Disponibles.',
             ],
         ],
-
+    
         'products' => [
             'search' => [
                 'title'       => 'Seleccionar Productos',
@@ -3031,7 +3015,7 @@ return [
             ],
         ],
     ],
-
+    
     'acl' => [
         'dashboard'                => 'Tablero',
         'sales'                    => 'Ventas',
@@ -3082,32 +3066,32 @@ return [
         'sitemaps'                 => 'Mapas del Sitio',
         'newsletter-subscriptions' => 'Suscripciones al Boletín',
     ],
-
+    
     'errors' => [
         'go-back'   => 'Regresar',
         'dashboard' => 'Tablero',
         'support'   => 'Si el problema persiste, contáctenos en <a href=":link" class=":class">:email</a> para obtener ayuda.',
-
+    
         '404' => [
             'title'       => '404 Página no Encontrada',
             'description' => '¡Ups! La página que estás buscando está de vacaciones. Parece que no pudimos encontrar lo que buscabas.',
         ],
-
+    
         '401' => [
             'title'       => '401 No Autorizado',
             'description' => '¡Ups! Parece que no tienes permiso para acceder a esta página. Parece que te faltan las credenciales necesarias.',
         ],
-
+    
         '403' => [
             'title'       => '403 Prohibido',
             'description' => '¡Ups! Esta página está fuera de límites. Parece que no tienes los permisos necesarios para ver este contenido.',
         ],
-
+    
         '500' => [
             'title'       => '500 Error Interno del Servidor',
             'description' => '¡Ups! Algo salió mal. Parece que tenemos problemas para cargar la página que estás buscando.',
         ],
-
+    
         '503' => [
             'title'       => '503 Servicio No Disponible',
             'description' => '¡Ups! Parece que estamos temporalmente fuera de servicio por mantenimiento. Por favor, vuelve a intentarlo en un momento.',
@@ -3141,11 +3125,11 @@ return [
     'footer' => [
         'copy-right' => 'Desarrollado por <a href="https://bagisto.com/" target="_blank">Bagisto</a>, Un Proyecto Comunitario por <a href="https://webkul.com/" target="_blank">Webkul</a>',
     ],
-
+    
     'emails' => [
         'dear'   => 'Estimado :customer_name',
         'thanks' => 'Si necesitas cualquier tipo de ayuda, por favor contáctanos en <a href=":link" style=":style">:email</a>.<br/>¡Gracias!',
-
+    
         'orders' => [
             'created' => [
                 'subject'  => 'Confirmación de Nuevo Pedido',
@@ -3153,42 +3137,42 @@ return [
                 'greeting' => 'Tienes un nuevo pedido :order_id realizado el :created_at',
                 'summary'  => 'Resumen del Pedido',
             ],
-
+    
             'invoiced' => [
                 'subject'  => 'Confirmación de Nueva Factura',
                 'title'    => '¡Confirmación de Factura!',
                 'greeting' => 'Tu factura #:invoice_id para el pedido :order_id se ha creado el :created_at',
                 'summary'  => 'Resumen de la Factura',
             ],
-
+    
             'shipped' => [
                 'subject'  => 'Confirmación de Nuevo Envío',
                 'title'    => '¡Pedido Enviado!',
                 'greeting' => 'Has enviado el pedido :order_id realizado el :created_at',
                 'summary'  => 'Resumen del Envío',
             ],
-
+    
             'inventory-source' => [
                 'subject'  => 'Confirmación de Nuevo Envío',
                 'title'    => '¡Pedido Enviado!',
                 'greeting' => 'Has enviado el pedido :order_id realizado el :created_at',
                 'summary'  => 'Resumen del Envío',
             ],
-
+    
             'refunded' => [
                 'subject'  => 'Confirmación de Nuevo Reembolso',
                 'title'    => '¡Pedido Reembolsado!',
                 'greeting' => 'Has reembolsado el pedido :order_id realizado el :created_at',
                 'summary'  => 'Resumen del Reembolso',
             ],
-
+    
             'canceled' => [
                 'subject'  => 'Confirmación de Cancelación de Pedido',
                 'title'    => '¡Pedido Cancelado!',
                 'greeting' => 'Has cancelado el pedido :order_id realizado el :created_at',
                 'summary'  => 'Resumen del Pedido',
             ],
-
+    
             'shipping-address'  => 'Dirección de Envío',
             'billing-address'   => 'Dirección de Facturación',
             'contact'           => 'Contacto',

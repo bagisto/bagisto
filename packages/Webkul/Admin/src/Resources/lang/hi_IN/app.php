@@ -387,8 +387,7 @@ return [
                 'channel'                => 'चैनल',
                 'customer'               => 'ग्राहक',
                 'discount'               => 'डिस्काउंट राशि - :discount',
-                'customer-email'         => 'ईमेल - :email',
-                'email'                  => 'ईमेल',
+                'email'                  => 'ईमेल - :email',
                 'grand-total'            => 'कुल योग',
                 'invoice-items'          => 'चालान आइटम',
                 'invoice-status'         => 'चालान स्थिति',
@@ -408,8 +407,6 @@ return [
                 'sku'                    => 'एसकेयू - :sku',
                 'sub-total'              => 'उप-योग - :sub_total',
                 'sub-total-summary'      => 'उप-योग',
-                'summary-tax'            => 'कर राशि',
-                'summary-discount'       => 'डिस्काउंट राशि',
                 'title'                  => 'चालान #:invoice_id',
                 'tax'                    => 'कर राशि - :tax',
             ],
@@ -492,6 +489,7 @@ return [
                 'create'     => [
                     'back-btn'                => 'वापस जाएं',
                     'bundle'                  => 'बंडल',
+                    'booking'                 => 'बुकिंग',
                     'configurable'            => 'कॉन्फ़िगरेबल',
                     'configurable-attributes' => 'कॉन्फ़िगरेबल गुण',
                     'create-btn'              => 'नया उत्पाद बनाएं',
@@ -544,15 +542,13 @@ return [
                         'create-btn'                => 'नया जोड़ें',
                         'edit-btn'                  => 'संपादित करें',
                         'add-group-price'           => 'समूह मूल्य जोड़ें',
-                        'all-groups'                => 'सभी समूह',
-                        'fixed-group-price-info'    => ':qty मात्रा पर :type मूल्य के :price के लिए',
+                        'fixed-group-price-info'    => 'मूल्य :qty मात्र के लिए स्थिर मूल्य पर :price',
                         'discount-group-price-info' => 'मूल्य पर qty मात्र के लिए :price की छूट',
                         'empty-info'                => 'विशेष मूल्यवान ग्राहकों के लिए विशिष्ट मूल्यनिर्धारण।',
 
                         'create' => [
                             'create-title'   => 'ग्राहक समूह मूल्य बनाएं',
                             'customer-group' => 'ग्राहक समूह',
-                            'all-groups'     => 'सभी समूह',
                             'discount'       => 'छूट',
                             'delete-btn'     => 'हटाएं',
                             'fixed'          => 'स्थिर',
@@ -2620,11 +2616,6 @@ return [
                     'custom-scripts-info' => 'कस्टम स्क्रिप्ट व्यक्तिगतकृत कोड के टुकड़े हैं जो विशिष्ट कार्यों या सुविधाओं को सॉफ़्टवेयर में जोड़ने के लिए बनाए जाते हैं, इसकी क्षमताओं को अद्वितीय रूप से बढ़ाते हैं।',
                     'custom-css'          => 'कस्टम सीएसएस',
                     'custom-javascript'   => 'कस्टम जावास्क्रिप्ट',
-                    'compare-options'     => 'तुलना विकल्प',
-                    'wishlist-options'    => 'इच्छा-सूची विकल्प',
-                    'image-search-option' => 'चित्र खोज विकल्प',
-                    'settings-title'      => 'सेटिंग्स',
-                    'settings-title-info' => 'सेटिंग्स एक सिस्टम, एप्लिकेशन, या उपकरण के व्यवहार को नियंत्रित करने वाले विकल्पों का संविचालन करने के लिए विकल्प करने के रूप में समर्थित हैं, जो उपयोगकर्ता की पसंदों और आवश्यकताओं के अनुसार तैयार किए जाते हैं।'
                 ],
 
                 'design' => [
@@ -2971,13 +2962,6 @@ return [
         ],
 
         'datagrid' => [
-            'index' => [
-                'no-records-selected'              => 'कोई रिकॉर्ड नहीं चुना गया है।',
-                'must-select-a-mass-action'        => 'आपको एक सामूहिक क्रिया का चयन करना चाहिए।',
-                'must-select-a-mass-action-option' => 'आपको एक सामूहिक क्रिया का चयन एक विकल्प करना चाहिए।',
-                'sure-want-to-perform-this-action' => 'क्या आपको यकीन है कि आप इस क्रिया को करना चाहते हैं?',
-            ],
-            
             'toolbar' => [
                 'mass-actions' => [
                     'select-action' => 'कार्रवाई चुनें',

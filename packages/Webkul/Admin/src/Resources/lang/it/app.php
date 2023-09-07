@@ -387,8 +387,7 @@ return [
                 'channel'                => 'Canale',
                 'customer'               => 'Cliente',
                 'discount'               => 'Importo Sconto - :discount',
-                'customer-email'         => 'Email del cliente - :email',
-                'email'                  => 'Email',
+                'email'                  => 'Email - :email',
                 'grand-total'            => 'Totale Generale',
                 'invoice-items'          => 'Elementi Fattura',
                 'invoice-status'         => 'Stato Fattura',
@@ -408,8 +407,6 @@ return [
                 'sku'                    => 'SKU - :sku',
                 'sub-total'              => 'Sub Totale - :sub-total',
                 'sub-total-summary'      => 'Sub Totale',
-                'summary-tax'            => 'Importo delle tasse',
-                'summary-discount'       => 'Importo dello sconto',
                 'title'                  => 'Fattura #:invoice_id',
                 'tax'                    => 'Importo Tasse - :tax',
             ],
@@ -492,6 +489,7 @@ return [
                 'create'     => [
                     'back-btn'                => 'Indietro',
                     'bundle'                  => 'Bundle',
+                    'booking'                 => 'Prenotazione',
                     'configurable'            => 'Configurabile',
                     'configurable-attributes' => 'Attributi Configurabili',
                     'create-btn'              => 'Crea Prodotto',
@@ -544,15 +542,13 @@ return [
                         'create-btn'                => 'Aggiungi Nuovo',
                         'edit-btn'                  => 'Modifica',
                         'add-group-price'           => 'Aggiungi Prezzo Gruppo',
-                        'all-groups'                => 'Tutti i gruppi',
-                        'fixed-group-price-info'    => 'Per :qty unità a un prezzo di :price a :type',
+                        'fixed-group-price-info'    => 'Per :qty Qtà a prezzo fisso di :price',
                         'discount-group-price-info' => 'Per :qty Qtà con sconto di :price',
                         'empty-info'                => 'Prezzi speciali per clienti appartenenti a un gruppo specifico.',
         
                         'create' => [
                             'create-title'   => 'Crea Prezzo Gruppo Clienti',
                             'customer-group' => 'Gruppo Clienti',
-                            'all-groups'     => 'Tutti i gruppi',
                             'discount'       => 'Sconto',
                             'delete-btn'     => 'Elimina',
                             'fixed'          => 'Fisso',
@@ -2619,11 +2615,6 @@ return [
                     'custom-scripts-info'   => 'Gli script personalizzati sono pezzi di codice personalizzati creati per aggiungere funzioni o caratteristiche specifiche al software, migliorandone le capacità in modo unico.',
                     'custom-css'            => 'CSS Personalizzato',
                     'custom-javascript'     => 'Javascript Personalizzato',
-                    'compare-options'     => 'Opzioni di confronto',
-                    'wishlist-options'    => 'Opzioni della lista dei desideri',
-                    'image-search-option' => 'Opzione di ricerca delle immagini',
-                    'settings-title'      => 'Impostazioni',
-                    'settings-title-info' => 'Le impostazioni si riferiscono a scelte configurabili che controllano il comportamento di un sistema, di un’applicazione o di un dispositivo, personalizzate in base alle preferenze e ai requisiti dell’utente.'
                 ],
             
                 'design' => [
@@ -2831,7 +2822,7 @@ return [
                     'description'                 => 'Descrizione',
                     'title'                       => 'Titolo',
                     'instructions'                => 'Istruzioni',
-                    'generate-invoice'            => 'Genera automaticamente la fattura dopo l’effettuazione dell’ordine',
+                    'generate-invoice'            => 'Genera automaticamente la fattura dopo l'effettuazione dell'ordine',
                     'set-invoice-status'          => 'Imposta lo stato della fattura dopo la creazione della fattura a',
                     'generate-invoice-applicable' => 'Applicabile se è abilitata la generazione automatica delle fatture',
                     'status'                      => 'Stato',
@@ -2971,13 +2962,6 @@ return [
         ],
     
         'datagrid' => [
-            'index' => [
-                'no-records-selected'              => 'Nessun record è stato selezionato.',
-                'must-select-a-mass-action'        => 'Devi selezionare un\'azione di massa.',
-                'must-select-a-mass-action-option' => 'Devi selezionare un\'opzione dell\'azione di massa.',
-                'sure-want-to-perform-this-action' => 'Sei sicuro di voler eseguire questa azione?',
-            ],
-            
             'toolbar' => [
                 'mass-actions' => [
                     'select-action' => 'Seleziona Azione',

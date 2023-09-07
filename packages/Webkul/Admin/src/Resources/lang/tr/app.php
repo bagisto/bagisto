@@ -387,8 +387,7 @@ return [
                 'channel'                => 'Kanal',
                 'customer'               => 'Müşteri',
                 'discount'               => 'İndirim Tutarı - :discount',
-                'customer-email'         => 'Müşteri E-posta - :email',
-                'email'                  => 'E-posta',
+                'email'                  => 'E-posta - :email',
                 'grand-total'            => 'Genel Toplam',
                 'invoice-items'          => 'Fatura Kalemleri',
                 'invoice-status'         => 'Fatura Durumu',
@@ -408,8 +407,6 @@ return [
                 'sku'                    => 'Ürün Kodu - :sku',
                 'sub-total'              => 'Ara Toplam - :sub_total',
                 'sub-total-summary'      => 'Ara Toplam',
-                'summary-tax'            => 'Vergi Tutarı',
-                'summary-discount'       => 'İndirim Tutarı',
                 'title'                  => 'Fatura #:invoice_id',
                 'tax'                    => 'Vergi Tutarı - :tax',
             ],
@@ -492,6 +489,7 @@ return [
                 'create'     => [
                     'back-btn'                => 'Geri',
                     'bundle'                  => 'Paket',
+                    'booking'                 => 'Rezervasyon',
                     'configurable'            => 'Yapılandırılabilir',
                     'configurable-attributes' => 'Yapılandırılabilir Özellikler',
                     'create-btn'              => 'Ürün Oluştur',
@@ -544,15 +542,13 @@ return [
                         'create-btn'                => 'Yeni Ekle',
                         'edit-btn'                  => 'Düzenle',
                         'add-group-price'           => 'Grup Fiyatı Ekle',
-                        'all-groups'                => 'Tüm Gruplar',
-                        'fixed-group-price-info'    => ':qty Adet için :type fiyatı :price',
+                        'fixed-group-price-info'    => ':qty Miktarında sabit fiyat :price',
                         'discount-group-price-info' => ':qty Miktarında indirimli fiyat :price',
                         'empty-info'                => 'Belirli bir gruba ait müşteriler için özel fiyatlandırma.',
 
                         'create' => [
                             'create-title'   => 'Müşteri Grubu Fiyatı Oluştur',
                             'customer-group' => 'Müşteri Grubu',
-                            'all-groups'     => 'Tüm Gruplar',
                             'discount'       => 'İndirim',
                             'delete-btn'     => 'Sil',
                             'fixed'          => 'Sabit',
@@ -2620,11 +2616,6 @@ return [
                     'custom-scripts-info' => 'Özel komut dosyaları, yazılıma belirli işlevler veya özellikler eklemek için oluşturulan kişiselleştirilmiş kod parçalarıdır ve benzersiz şekilde yeteneklerini artırır.',
                     'custom-css'          => 'Özel CSS',
                     'custom-javascript'   => 'Özel Javascript',
-                    'compare-options'     => 'Karşılaştırma seçenekleri',
-                    'wishlist-options'    => 'Dilek listesi seçenekleri',
-                    'image-search-option' => 'Resim Arama Seçeneği',
-                    'settings-title'      => 'Ayarlar',
-                    'settings-title-info' => 'Ayarlar, bir sistem, uygulama veya cihazın nasıl davrandığını kontrol eden yapılandırılabilir seçeneklere atıfta bulunur ve kullanıcı tercihlerine ve gereksinimlerine uyarlanır.'
                 ],
 
                 'design' => [
@@ -2971,13 +2962,6 @@ return [
         ],
 
         'datagrid' => [
-            'index' => [
-                'no-records-selected'              => 'Hiçbir kayıt seçilmedi.',
-                'must-select-a-mass-action'        => 'Toplu işlem seçmelisiniz.',
-                'must-select-a-mass-action-option' => 'Toplu işlem seçeneği seçmelisiniz.',
-                'sure-want-to-perform-this-action' => 'Bu işlemi gerçekleştirmek istediğinizden emin misiniz?',
-            ],
-            
             'toolbar' => [
                 'mass-actions' => [
                     'select-action' => 'Eylem Seç',

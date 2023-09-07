@@ -387,8 +387,7 @@ return [
                 'channel'                => 'Kanaal',
                 'customer'               => 'Klant',
                 'discount'               => 'Kortingsbedrag - :discount',
-                'customer-email'         => 'E-mail van de klant - :email',
-                'email'                  => 'E-mail',
+                'email'                  => 'E-mail - :email',
                 'grand-total'            => 'Totaalbedrag',
                 'invoice-items'          => 'Factuuritems',
                 'invoice-status'         => 'Factuurstatus',
@@ -408,8 +407,6 @@ return [
                 'sku'                    => 'Artikelnummer - :sku',
                 'sub-total'              => 'Subtotaal - :sub_total',
                 'sub-total-summary'      => 'Subtotaal',
-                'summary-tax'            => 'Belastingbedrag',
-                'summary-discount'       => 'Kortingsbedrag',
                 'title'                  => 'Factuur #:invoice_id',
                 'tax'                    => 'Belastingbedrag - :tax',
             ],
@@ -492,6 +489,7 @@ return [
                 'create'     => [
                     'back-btn'                => 'Terug',
                     'bundle'                  => 'Bundel',
+                    'booking'                 => 'Reservering',
                     'configurable'            => 'Configureerbaar',
                     'configurable-attributes' => 'Configureerbare Eigenschappen',
                     'create-btn'              => 'Product aanmaken',
@@ -544,15 +542,13 @@ return [
                         'create-btn'                => 'Nieuwe toevoegen',
                         'edit-btn'                  => 'Bewerk',
                         'add-group-price'           => 'Groepsprijs toevoegen',
-                        'all-groups'                => 'Alle groepen',
-                        'fixed-group-price-info'    => 'Voor :qty stuks tegen een prijs van :price per :type',
+                        'fixed-group-price-info'    => 'Voor :qty Hoeveelheid tegen een vaste prijs van :price',
                         'discount-group-price-info' => 'Voor :qty Hoeveelheid met een korting van :price',
                         'empty-info'                => 'Speciale prijzen voor klanten die behoren tot een specifieke groep.',
 
                         'create' => [
                             'create-title'   => 'Klantengroep Prijs Toevoegen',
                             'customer-group' => 'Klantengroep',
-                            'all-groups'     => 'Alle groepen',
                             'discount'       => 'Korting',
                             'delete-btn'     => 'Verwijderen',
                             'fixed'          => 'Vast',
@@ -2619,11 +2615,6 @@ return [
                     'custom-scripts-info' => 'Aangepaste scripts zijn gepersonaliseerde stukjes code die zijn gemaakt om specifieke functies of kenmerken aan software toe te voegen en de mogelijkheden ervan op unieke wijze te verbeteren.',
                     'custom-css'          => 'Aangepaste CSS',
                     'custom-javascript'   => 'Aangepaste JavaScript',
-                    'compare-options'     => 'Vergelijkingsmogelijkheden',
-                    'wishlist-options'    => 'Wenslijstopties',
-                    'image-search-option' => 'Optie voor afbeeldingen zoeken',
-                    'settings-title'      => 'Instellingen',
-                    'settings-title-info' => 'Met instellingen worden configureerbare keuzes bedoeld die bepalen hoe een systeem, toepassing of apparaat zich gedraagt, afgestemd op de voorkeuren en eisen van de gebruiker.'
                 ],
 
                 'design' => [
@@ -2971,13 +2962,6 @@ return [
         ],
 
         'datagrid' => [
-            'index' => [
-                'no-records-selected'              => 'Er zijn geen records geselecteerd.',
-                'must-select-a-mass-action'        => 'U moet een massale actie selecteren.',
-                'must-select-a-mass-action-option' => 'U moet een optie voor massale actie selecteren.',
-                'sure-want-to-perform-this-action' => 'Weet u zeker dat u deze actie wilt uitvoeren?',
-            ],
-                                    
             'toolbar' => [
                 'mass-actions' => [
                     'select-action' => 'Selecteer Actie',

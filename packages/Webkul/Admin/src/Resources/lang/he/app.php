@@ -387,8 +387,7 @@ return [
                 'channel'                => 'ערוץ',
                 'customer'               => 'לקוח',
                 'discount'               => 'סכום הנחה - :discount',
-                'customer-email'         => 'דוא"ל לקוח - :email',
-                'email'                  => 'דוא"ל',
+                'email'                  => 'אימייל - :email',
                 'grand-total'            => 'סכום כולל',
                 'invoice-items'          => 'פרטי החשבונית',
                 'invoice-status'         => 'סטטוס החשבונית',
@@ -408,8 +407,6 @@ return [
                 'sku'                    => 'SKU - :sku',
                 'sub-total'              => 'סכום חלקי - :sub_total',
                 'sub-total-summary'      => 'סכום חלקי',
-                'summary-tax'            => 'סכום המס',
-                'summary-discount'       => 'סכום ההנחה',
                 'title'                  => 'חשבונית #:invoice_id',
                 'tax'                    => 'סכום מס - :tax',
             ],
@@ -492,6 +489,7 @@ return [
                 'create'     => [
                     'back-btn'                => 'חזרה',
                     'bundle'                  => 'אוסף',
+                    'booking'                 => 'הזמנה',
                     'configurable'            => 'מתקנים',
                     'configurable-attributes' => 'מאפיינים מתקנים',
                     'create-btn'              => 'צור מוצר',
@@ -544,15 +542,13 @@ return [
                         'create-btn'                => 'הוסף חדש',
                         'edit-btn'                  => 'ערוך',
                         'add-group-price'           => 'הוסף מחיר קבוצתי',
-                        'all-groups'                => 'כל הקבוצות',
-                        'fixed-group-price-info'    => 'עבור :qty יחידות במחיר :price לכל :type',
+                        'fixed-group-price-info'    => 'עבור :qty יחידות במחיר קבוע של :price',
                         'discount-group-price-info' => 'עבור :qty יחידות בהנחה של :price',
                         'empty-info'                => 'הגדרת מחיר מיוחד ללקוחות שנמצאים בקבוצה מסוימת.',
 
                         'create' => [
                             'create-title'   => 'צור מחיר קבוצתי ללקוח',
                             'customer-group' => 'קבוצת לקוח',
-                            'all-groups'     => 'כל הקבוצות',
                             'discount'       => 'הנחה',
                             'delete-btn'     => 'מחק',
                             'fixed'          => 'קבוע',
@@ -2620,11 +2616,6 @@ return [
                     'custom-scripts-info' => 'קודים מותאמים אישית הם קטעי קוד אישיים שנוצרו כדי להוסיף פונקציות או יכולות מסוימות לתוך התוכנה, שמשפרים את יכולותיה באופן ייחודי.',
                     'custom-css'          => 'CSS מותאם אישית',
                     'custom-javascript'   => 'JavaScript מותאם אישית',
-                    'compare-options'     => 'אפשרויות השוואה',
-                    'wishlist-options'    => 'אפשרויות לרשימת המשאלות',
-                    'image-search-option' => 'אפשרות חיפוש בתמונות',
-                    'settings-title'      => 'הגדרות',
-                    'settings-title-info' => 'הגדרות מתייחסות לבחירות הניתנות להגדרה ששולטות באופן התנהגות המערכת, היישום או המכשיר, מותאמות להעדפות ולדרישות המשתמש.'
                 ],
 
                 'design' => [
@@ -2971,13 +2962,6 @@ return [
         ],
 
         'datagrid' => [
-            'index' => [
-                'no-records-selected'              => 'לא נבחרו רשומות.',
-                'must-select-a-mass-action'        => 'עליך לבחור פעולת מסה.',
-                'must-select-a-mass-action-option' => 'עליך לבחור אפשרות לפעולת מסה.',
-                'sure-want-to-perform-this-action' => 'האם אתה בטוח שברצונך לבצע פעולה זו?',
-            ],
-            
             'toolbar' => [
                 'mass-actions' => [
                     'select-action' => 'בחר פעולה',

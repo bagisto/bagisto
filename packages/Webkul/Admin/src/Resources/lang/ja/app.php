@@ -9,7 +9,7 @@ return [
             'submit-btn'           => 'サインイン',
             'title'                => 'サインイン',
         ],
-
+    
         'forget-password' => [
             'create'    =>  [
                 'email'           => '登録済みメールアドレス',
@@ -21,7 +21,7 @@ return [
                 'title'           => 'パスワードを回復',
             ],
         ],
-
+    
         'reset-password' => [
             'back-link-title'  => 'サインイン画面に戻る？',
             'confirm-password' => 'パスワードを確認',
@@ -38,7 +38,7 @@ return [
         'marked-success' => 'お知らせが正常にマークされました',
         'read-all'       => 'すべてを既読にする',
         'view-all'       => 'すべて表示',
-
+    
         'order-status-messages' => [
             'completed'       => '注文完了',
             'closed'          => '注文終了',
@@ -47,7 +47,7 @@ return [
             'processing'      => '注文処理中',
             'pending-payment' => '支払い保留中',
         ],
-
+    
         'status'  => [
             'all'        => 'すべて',
             'pending'    => '保留中',
@@ -76,7 +76,7 @@ return [
             'update-success'    => 'アカウントが正常に更新されました',
         ],
     ],
-
+    
     'dashboard' => [
         'index' => [
             'add-customer'              => '顧客を追加',
@@ -131,7 +131,7 @@ return [
         'orders' => [
             'index' => [
                 'title' => '注文',
-
+            
                 'datagrid' => [
                     'customer'        => '顧客',
                     'channel-name'    => 'チャネル',
@@ -229,7 +229,7 @@ return [
         'shipments' => [
             'index' => [
                 'title' => '出荷',
-
+            
                 'datagrid' => [
                     'id'               => 'ID',
                     'inventory-source' => '在庫ソース',
@@ -241,7 +241,7 @@ return [
                     'view'             => '表示',
                 ],
             ],
-
+            
             'create' => [
                 'amount-per-unit'  => ':amount 単位あたり x :qty 個数',
                 'cancel-error'     => '注文はキャンセルできません',
@@ -264,7 +264,7 @@ return [
                 'title'            => '新しい出荷を作成',
                 'tracking-number'  => '追跡番号',
             ],
-
+            
             'view' => [
                 'billing-address'      => '請求先住所',
                 'carrier-title'        => '運送会社タイトル',
@@ -294,7 +294,7 @@ return [
         'refunds' => [
             'index' => [
                 'title' => '返金',
-
+            
                 'datagrid' => [
                     'billed-to'   => '請求先',
                     'id'          => 'ID',
@@ -304,7 +304,7 @@ return [
                     'view'        => '表示',
                 ],
             ],
-
+            
             'view' => [
                 'account-information'    => 'アカウント情報',
                 'adjustment-refund'      => '調整返金',
@@ -336,7 +336,7 @@ return [
                 'title'                  => '返金 #:refund_id',
                 'tax'                    => '税金',
             ],
-
+            
             'create' => [
                 'amount-per-unit'             => ':amount 単位あたり x :qty 個数',
                 'adjustment-refund'           => '調整返金',
@@ -368,7 +368,7 @@ return [
         'invoices' => [
             'index' => [
                 'title' => '請求書',
-
+            
                 'datagrid' => [
                     'action'       => 'アクション',
                     'id'           => 'ID',
@@ -387,8 +387,7 @@ return [
                 'channel'                => 'チャネル',
                 'customer'               => '顧客',
                 'discount'               => '割引額 - :discount',
-                'customer-email'         => '顧客のメール - :email',
-                'email'                  => 'メール',
+                'email'                  => 'メール - :email',
                 'grand-total'            => '総合計',
                 'invoice-items'          => '請求書アイテム',
                 'invoice-status'         => '請求書のステータス',
@@ -408,8 +407,6 @@ return [
                 'sku'                    => 'SKU - :sku',
                 'sub-total'              => '小計 - :sub_total',
                 'sub-total-summary'      => '小計',
-                'summary-tax'            => '税額',
-                'summary-discount'       => '割引額',
                 'title'                  => '請求書 #:invoice_id',
                 'tax'                    => '税額 - :tax',
             ],
@@ -420,7 +417,7 @@ return [
                 'invalid-qty'    => '無効な数量の請求書アイテムが見つかりました。',
                 'product-error'  => '商品なしで請求書を作成することはできません。',
             ],
-
+            
             'invoice-pdf' => [
                 'invoice'           => '請求書',
                 'date'              => '請求書の日付',
@@ -455,12 +452,12 @@ return [
             'transaction-id'   => '取引ID',
             'id'               => 'ID',
         ],
-
+        
         'transactions' => [
             'index' => [
                 'create-btn'  => '取引を作成',
                 'title'       => '取引',
-
+        
                 'datagrid' => [
                     'id'                 => 'ID',
                     'invoice-id'         => '請求書ID',
@@ -470,7 +467,7 @@ return [
                     'transaction-date'   => '日付',
                     'transaction-amount' => '金額',
                 ],
-
+        
                 'edit'  =>  [
                     'already-paid'               => '既に支払済み',
                     'invoice-missing'            => '請求書が不足しています',
@@ -488,10 +485,11 @@ return [
                 'create-btn'    => '製品を作成',
                 'title'         => '製品',
                 'already-taken' => ':name は既に使用されています。',
-
+            
                 'create'     => [
                     'back-btn'                => '戻る',
                     'bundle'                  => 'バンドル',
+                    'booking'                 => '予約',
                     'configurable'            => '設定可能',
                     'configurable-attributes' => '設定可能な属性',
                     'create-btn'              => '製品を作成',
@@ -505,7 +503,7 @@ return [
                     'type'                    => 'タイプ',
                     'virtual'                 => '仮想',
                 ],
-
+            
                 'datagrid'   => [
                     'attribute-family'       => '属性ファミリー',
                     'attribute-family-value' => '属性ファミリー - :attribute_family',
@@ -544,15 +542,13 @@ return [
                         'create-btn'                => '新規追加',
                         'edit-btn'                  => '編集',
                         'add-group-price'           => 'グループ価格を追加',
-                        'all-groups'                => 'すべてのグループ',
-                        'fixed-group-price-info'    => ':qty 個の:type価格で:price',
+                        'fixed-group-price-info'    => ':price の固定価格で :qty 個の数量に対して',
                         'discount-group-price-info' => ':price の割引価格で :qty 個の数量に対して',
                         'empty-info'                => '特定のグループに所属する顧客のための特別価格',
 
                         'create' => [
                             'create-title'   => '顧客グループ価格を作成',
                             'customer-group' => '顧客グループ',
-                            'all-groups'     => 'すべてのグループ',
                             'discount'       => '割引',
                             'delete-btn'     => '削除',
                             'fixed'          => '固定',
@@ -598,26 +594,26 @@ return [
                     'not-allowed-error' => 'ビデオファイルのみ許可されています（.mp4、.mov、.ogg ..）。',
                     'title'             => 'ビデオ',
                 ],
-
+                
                 'links' => [
                     'related-products' => [
                         'empty-info' => '関連製品を追加するには。',
                         'info'       => 'お客様が表示中の製品に加えて、関連製品が表示されます。',
                         'title'      => '関連製品',
                     ],
-
+                
                     'up-sells' => [
                         'empty-info' => 'アップセル製品を追加するには。',
                         'info'       => 'お客様には、現在表示している製品のプレミアムまたは高品質の代替製品として機能するアップセル製品が提示されます。',
                         'title'      => 'アップセル製品',
                     ],
-
+                
                     'cross-sells' => [
                         'empty-info' => 'クロスセル製品を追加するには。',
                         'info'       => 'ショッピングカートの隣には、「インパルス購入」商品として配置されるクロスセル製品が表示され、すでにカートに追加された商品を補完します。',
                         'title'      => 'クロスセル製品',
                     ],
-
+                
                     'add-btn'     => '製品を追加',
                     'delete'      => '削除',
                     'empty-title' => '製品を追加',
@@ -637,7 +633,7 @@ return [
                         'qty'               => ':qty 個',
                         'sku'               => 'SKU - :sku',
                         'title'             => 'バリエーション',
-
+                    
                         'create'  => [
                             'description'            => '説明',
                             'name'                   => '名前',
@@ -645,7 +641,7 @@ return [
                             'title'                  => 'バリエーションを追加',
                             'variant-already-exists' => 'このバリエーションはすでに存在します',
                         ],
-
+                    
                         'edit' => [
                             'disabled'        => '無効',
                             'edit-info'       => '製品情報を詳細に更新する場合は、次の',
@@ -661,7 +657,7 @@ return [
                             'weight'          => '重さ',
                         ],
                     ],
-
+                    
                     'grouped' => [
                         'add-btn'     => '製品を追加',
                         'delete'      => '削除',
@@ -672,14 +668,14 @@ return [
                         'sku'         => 'SKU - :sku',
                         'title'       => 'グループ化された製品',
                     ],
-
+                    
                     'bundle' => [
                         'add-btn'     => 'オプションを追加',
                         'empty-title' => 'オプションを追加',
                         'empty-info'  => 'バンドルオプションをすぐに作成するには。',
                         'info'        => 'バンドル製品は、複数のアイテムまたはサービスが特別価格で一緒に販売されるパッケージで、顧客にとって価値と便益を提供します。',
                         'title'       => 'バンドルアイテム',
-
+                    
                         'update-create' => [
                             'checkbox'    => 'チェックボックス',
                             'is-required' => '必須',
@@ -693,7 +689,7 @@ return [
                             'type'        => 'タイプ',
                             'yes'         => 'はい',
                         ],
-
+                    
                         'option' => [
                             'add-btn'     => '製品を追加',
                             'delete-btn'  => '削除',
@@ -703,23 +699,23 @@ return [
                             'empty-title' => '製品を追加',
                             'empty-info'  => 'さまざまな製品の組み合わせをすぐに作成するには。',
                             'sku'         => 'SKU - :sku',
-
+                    
                             'types' => [
                                 'checkbox' => [
                                     'info'  => 'チェックボックスを使用してデフォルトの製品を設定します。',
                                     'title' => 'チェックボックス',
                                 ],
-
+                    
                                 'multiselect' => [
                                     'info'  => 'チェックボックスボタンを使用してデフォルトの製品を設定します。',
                                     'title' => 'マルチセレクト',
                                 ],
-
+                    
                                 'radio' => [
                                     'info'  => 'ラジオボタンを使用してデフォルトの製品を設定します。',
                                     'title' => 'ラジオ',
                                 ],
-
+                    
                                 'select' => [
                                     'info'  => 'ラジオボタンを使用してデフォルトの製品を設定します。',
                                     'title' => '選択',
@@ -741,7 +737,7 @@ return [
                             'sample-url'  => 'サンプルURL：',
                             'title'       => 'ダウンロード可能なリンク',
                             'url'         => 'URL：',
-
+                    
                             'update-create' => [
                                 'downloads'   => 'ダウンロード許可',
                                 'file-type'   => 'ファイルタイプ',
@@ -755,7 +751,7 @@ return [
                                 'url'         => 'URL',
                             ],
                         ],
-
+                    
                         'samples' => [
                             'add-btn'     => 'サンプルを追加',
                             'delete-btn'  => '削除',
@@ -766,7 +762,7 @@ return [
                             'info'        => 'ダウンロード可能な製品タイプは、電子書籍、ソフトウェアアプリケーション、音楽、ゲームなどのデジタル製品を販売できます。',
                             'title'       => 'ダウンロード可能なサンプル',
                             'url'         => 'URL：',
-
+                    
                             'update-create' => [
                                 'file'      => 'ファイル',
                                 'file-type' => 'ファイルタイプ',
@@ -921,7 +917,7 @@ return [
                 'value-per-locale'      => 'ロケールごとの値',
                 'value-per-channel'     => 'チャネルごとの値',
                 'yes'                   => 'はい',
-
+            
                 'option' => [
                     'color'    => 'カラースウォッチ',
                     'dropdown' => 'ドロップダウン',
@@ -930,7 +926,7 @@ return [
                     'text'     => 'テキストスウォッチ',
                 ],
             ],
-
+            
             'create-success'    => '属性が正常に作成されました',
             'update-success'    => '属性が正常に更新されました',
             'user-define-error' => 'システム属性を削除できません',
@@ -942,7 +938,7 @@ return [
             'index' => [
                 'title'   => 'カテゴリ',
                 'add-btn' => 'カテゴリを作成',
-
+            
                 'datagrid' => [
                     'id'             => 'ID',
                     'name'           => '名前',
@@ -957,7 +953,7 @@ return [
                     'delete-success' => '選択した :resource は正常に削除されました',
                 ],
             ],
-
+            
             'create' => [
                 'add-logo'                 => 'ロゴを追加',
                 'add-banner'               => 'バナーを追加',
@@ -1021,7 +1017,7 @@ return [
                 'title'                    => 'カテゴリを編集',
                 'visible-in-menu'          => 'メニューで表示',
             ],
-
+            
             'create-success'       => 'カテゴリが正常に作成されました。',
             'category'             => 'カテゴリ',
             'update-success'       => 'カテゴリが正常に更新されました。',
@@ -1034,7 +1030,7 @@ return [
             'index' => [
                 'title' => 'ファミリー',
                 'add'   => '属性ファミリーを作成',
-
+            
                 'datagrid' => [
                     'id'             => 'ID',
                     'code'           => 'コード',
@@ -1048,7 +1044,7 @@ return [
                     'method-error'   => 'エラー！誤ったメソッドが検出されました。大量アクションの設定を確認してください',
                 ],
             ],
-
+            
             'create' => [
                 'title'                            => '属性ファミリーを作成',
                 'save-btn'                         => '属性ファミリーを保存',
@@ -1074,7 +1070,7 @@ return [
                 'group-contains-system-attributes' => 'このグループにはシステム属性が含まれています。まずシステム属性を別のグループに移動してから再試行してください。',
                 'removal-not-possible'             => '属性ファミリーからシステム属性を削除することはできません。',
             ],
-
+            
             'edit' => [
                 'title'                            => '属性ファミリーを編集',
                 'save-btn'                         => '属性ファミリーを保存',
@@ -1100,7 +1096,7 @@ return [
                 'group-contains-system-attributes' => 'このグループにはシステム属性が含まれています。まずシステム属性を別のグループに移動してから再試行してください。',
                 'removal-not-possible'             => '属性ファミリーからシステム属性を削除することはできません。',
             ],
-
+            
             'family'                  => 'ファミリー',
             'attribute-family'        => '属性ファミリー',
             'create-success'          => 'ファミリーが正常に作成されました。',
@@ -1117,7 +1113,7 @@ return [
         'index'  => [
             'login-message' => ':customer_name としてログインしました',
             'title'         => '顧客',
-
+        
             'datagrid'  => [
                 'id'             => '顧客ID',
                 'order'          => ':order 注文',
@@ -1143,7 +1139,7 @@ return [
                 'no-resource'    => '提供されたリソースはアクションに不足しています',
                 'method-error'   => 'エラー！誤ったメソッドが検出されました。マスアクションの設定を確認してください',
             ],
-
+        
             'create' => [
                 'create-btn'            => '顧客を作成',
                 'contact-number'        => '連絡先番号',
@@ -1168,7 +1164,7 @@ return [
         'delete-failed'  => '顧客の削除に失敗しました',
         'update-success' => '顧客が正常に更新されました',
         'order-pending'  => '注文は保留中です',
-
+        
         'edit' => [
             'contact-number'        => '連絡先番号',
             'customer-group'        => '顧客グループ',
@@ -1188,7 +1184,7 @@ return [
             'suspended'             => '停止中',
             'title'                 => '顧客を編集',
         ],
-
+        
         'view' => [
             'address'                => '住所',
             'back-btn'               => '戻る',
@@ -1250,7 +1246,7 @@ return [
         'groups' => [
             'index' => [
                 'title' => 'グループ',
-
+        
                 'create' => [
                     'create-btn' => 'グループを作成',
                     'code'       => 'コード',
@@ -1259,7 +1255,7 @@ return [
                     'save-btn'   => 'グループを保存',
                     'title'      => '新しいグループを作成',
                 ],
-
+        
                 'edit'  => [
                     'title'          => 'グループを編集',
                     'success'        => 'グループが正常に更新されました',
@@ -1267,7 +1263,7 @@ return [
                     'delete-failed'  => 'グループの削除に失敗しました',
                     'group-default'  => 'デフォルトグループは削除できません',
                 ],
-
+        
                 'datagrid'  =>  [
                     'code'   => 'コード',
                     'id'     => 'ID',
@@ -1288,7 +1284,7 @@ return [
                 'rating'      => '評価',
                 'status'      => 'ステータス',
                 'title'       => 'レビュー',
-
+        
                 'edit'  => [
                     'title'          => 'レビューを編集',
                     'save-btn'       => '保存',
@@ -1306,7 +1302,7 @@ return [
                     'images'         => '画像',
                     'update-success' => '更新成功',
                 ],
-
+        
                 'datagrid'   =>  [
                     'customer-names'      => '名前',
                     'comment'             => 'コメント',
@@ -1381,7 +1377,7 @@ return [
                 'index' => [
                     'title'      => 'メールテンプレート',
                     'create-btn' => 'テンプレートを作成',
-
+            
                     'datagrid' => [
                         'id'       => 'ID',
                         'name'     => '名前',
@@ -1391,7 +1387,7 @@ return [
                         'draft'    => '下書き',
                     ],
                 ],
-
+            
                 'create' => [
                     'title'          => 'テンプレートを作成',
                     'active'         => 'アクティブ',
@@ -1406,7 +1402,7 @@ return [
                     'select-status'  => 'ステータスを選択',
                     'create-success' => 'メールテンプレートが正常に作成されました。',
                 ],
-
+            
                 'edit' => [
                     'title'          => 'テンプレートを編集',
                     'active'         => 'アクティブ',
@@ -1420,7 +1416,7 @@ return [
                     'status'         => 'ステータス',
                     'update-success' => '正常に更新されました',
                 ],
-
+            
                 'email-template' => 'メールテンプレート',
                 'delete-success' => 'テンプレートが正常に削除されました',
                 'delete-failed'  => ':name 削除に失敗しました',
@@ -1430,7 +1426,7 @@ return [
                 'index' => [
                     'title'      => 'キャンペーン',
                     'create-btn' => 'キャンペーンを作成',
-
+            
                     'datagrid' => [
                         'id'       => 'ID',
                         'name'     => '名前',
@@ -1442,7 +1438,7 @@ return [
                         'delete'   => '削除',
                     ],
                 ],
-
+            
                 'create'    => [
                     'active'          => 'アクティブ',
                     'back-btn'        => '戻る',
@@ -1462,7 +1458,7 @@ return [
                     'subject'         => '件名',
                     'title'           => 'キャンペーンを作成',
                 ],
-
+            
                 'edit'    => [
                     'active'          => 'アクティブ',
                     'audience'        => '対象',
@@ -1482,20 +1478,20 @@ return [
                     'subject'         => '件名',
                     'title'           => 'キャンペーンを編集',
                 ],
-
+            
                 'email-campaign' => 'メールキャンペーン',
                 'create-success' => 'キャンペーンが正常に作成されました。',
                 'update-success' => 'キャンペーンが正常に更新されました。',
                 'delete-success' => 'キャンペーンが正常に削除されました',
                 'delete-failed'  => ':name の削除に失敗しました',
             ],
-
+            
             'events' => [
                 'index'  => [
                     'create-btn' => 'イベントを作成',
                     'title'      => 'イベント',
                     'event'      => 'イベント',
-
+            
                     'datagrid' => [
                         'id'      => 'ID',
                         'name'    => '名前',
@@ -1504,7 +1500,7 @@ return [
                         'delete'  => '削除',
                         'actions' => 'アクション',
                     ],
-
+            
                     'create'   => [
                         'description'    => '説明',
                         'date'           => '日付',
@@ -1515,13 +1511,13 @@ return [
                         'title'          => 'イベントを作成',
                         'success'        => 'イベントが正常に作成されました',
                     ],
-
+            
                     'edit'  => [
                         'title'   => 'イベントを編集',
                         'success' => 'イベントが正常に更新されました',
                     ],
                 ],
-
+            
                 'edit-error'     => 'イベントは編集できません',
                 'delete-failed'  => ':name の削除に失敗しました',
                 'delete-success' => 'イベントが正常に削除されました',
@@ -1530,7 +1526,7 @@ return [
             'subscribers' => [
                 'index' => [
                     'title' => 'ニュースレターの購読者',
-
+            
                     'datagrid' => [
                         'id'         => 'ID',
                         'subscribed' => '購読中',
@@ -1541,7 +1537,7 @@ return [
                         'email'      => 'メールアドレス',
                         'actions'    => 'アクション',
                     ],
-
+            
                     'edit'  => [
                         'title'         => 'ニュースレターの購読者を編集',
                         'back-btn'      => '戻る',
@@ -1554,7 +1550,7 @@ return [
                         'update-failed' => 'ニュースレターの購読が更新されませんでした',
                     ],
                 ],
-
+            
                 'delete-warning' => 'このアクションを実行してもよろしいですか？',
                 'delete-success' => '購読者が正常に削除されました',
                 'delete-failed'  => '購読者の削除に失敗しました',
@@ -1571,7 +1567,7 @@ return [
                 'index' => [
                     'title'      => 'カートルール',
                     'create-btn' => 'カートルールを作成',
-
+            
                     'datagrid' => [
                         'id'          => 'ID',
                         'name'        => '名前',
@@ -1749,7 +1745,7 @@ return [
                     'generate'                                  => '生成',
                     'customer-group'                            => '顧客グループ',
                 ],
-
+                
                 'delete-success' => 'カートルールが正常に削除されました',
                 'delete-failed'  => 'カートルールの削除に失敗しました',
             ],
@@ -1758,7 +1754,7 @@ return [
                 'index' => [
                     'title'      => 'カタログルール',
                     'create-btn' => 'カタログルールを作成',
-
+                
                     'datagrid' => [
                         'id'       => 'ID',
                         'name'     => '名前',
@@ -1772,7 +1768,7 @@ return [
                         'delete'   => '削除',
                     ],
                 ],
-
+                
                 'create' => [
                     'back-btn'                 => '戻る',
                     'title'                    => 'カタログルールを作成',
@@ -1815,7 +1811,7 @@ return [
                     'product-attribute'        => '商品属性',
                     'action-type'              => 'アクションの種類',
                 ],
-
+                
                 'edit' => [
                     'back-btn'                 => '戻る',
                     'title'                    => 'カタログルールを編集',
@@ -1875,7 +1871,7 @@ return [
                 'title'      => 'サイトマップ',
                 'create-btn' => 'サイトマップを作成',
                 'sitemap'    => 'サイトマップ',
-
+        
                 'datagrid' => [
                     'id'              => 'ID',
                     'file-name'       => 'ファイル名',
@@ -1885,7 +1881,7 @@ return [
                     'delete'          => '削除',
                     'actions'         => 'アクション',
                 ],
-
+        
                 'create'  => [
                     'file-name'      => 'ファイル名',
                     'file-name-info' => '例: sitemap.xml',
@@ -1896,14 +1892,14 @@ return [
                     'success'        => 'サイトマップが正常に作成されました',
                     'delete-warning' => '本当にこのアクションを実行しますか？',
                 ],
-
+        
                 'edit'  =>  [
                     'title'          => 'サイトマップを編集',
                     'success'        => 'サイトマップが正常に更新されました',
                     'delete-success' => 'サイトマップが正常に削除されました'
                 ],
             ],
-
+        
             'edit'  => [
                 'back-btn'       => '戻る',
                 'file-name'      => 'ファイル名',
@@ -1913,7 +1909,7 @@ return [
                 'path-info'      => '例: "/sitemap/"または"/"（基本パス用）',
                 'save-btn'       => 'サイトマップを保存',
             ],
-
+        
             'delete-failed'  => ':name 削除に失敗しました',
         ],
     ],
@@ -1923,7 +1919,7 @@ return [
             'title'         => 'ページ',
             'create-btn'    => 'ページを作成',
             'already-taken' => ':name は既に使用されています。',
-
+    
             'datagrid' => [
                 'id'                  => 'ID',
                 'page-title'          => 'ページタイトル',
@@ -1934,7 +1930,7 @@ return [
                 'mass-delete-success' => '選択したデータが正常に削除されました'
             ],
         ],
-
+    
         'create' => [
             'title'            => 'ページを作成',
             'save-btn'         => 'ページを保存',
@@ -1948,7 +1944,7 @@ return [
             'seo'              => 'SEO',
             'url-key'          => 'URLキー',
         ],
-
+    
         'edit' => [
             'title'            => 'ページを編集',
             'preview-btn'      => 'ページをプレビュー',
@@ -1964,7 +1960,7 @@ return [
             'meta-title'       => 'メタタイトル',
             'url-key'          => 'URLキー',
         ],
-
+    
         'create-success' => 'CMSが正常に作成されました。',
         'delete-success' => 'CMSが正常に削除されました。',
         'update-success' => 'CMSが正常に更新されました。',
@@ -1977,7 +1973,7 @@ return [
                 'title'      => 'ロケール',
                 'locale'     => 'ロケール',
                 'create-btn' => 'ロケールを作成',
-
+        
                 'datagrid' => [
                     'actions'   => 'アクション',
                     'id'        => 'ID',
@@ -1989,7 +1985,7 @@ return [
                     'edit'      => '編集',
                     'delete'    => '削除',
                 ],
-
+        
                 'create'  =>  [
                     'code'        => 'コード',
                     'name'        => '名前',
@@ -1998,11 +1994,11 @@ return [
                     'title'       => 'ロケールを作成',
                     'save-btn'    => 'ロケールを保存',
                 ],
-
+        
                 'edit'  => [
                     'title' => 'ロケールを編集',
                 ],
-
+        
                 'create-success'    => 'ロケールが正常に作成されました。',
                 'update-success'    => 'ロケールが正常に更新されました。',
                 'delete-success'    => 'ロケールが正常に削除されました。',
@@ -2011,13 +2007,13 @@ return [
                 'delete-failed'     => 'ロケールの削除に失敗しました',
             ],
         ],
-
+        
         'currencies' => [
             'index' => [
                 'title'      => '通貨',
                 'create-btn' => '通貨を作成',
                 'currency'   => '通貨',
-
+        
                 'datagrid' => [
                     'id'             => 'ID',
                     'name'           => '名前',
@@ -2030,7 +2026,7 @@ return [
                     'no-resource'    => 'アクションに対して提供されたリソースが不足しています',
                     'method-error'   => 'エラー！誤ったメソッドが検出されました。マスアクションの構成を確認してください',
                 ],
-
+        
                 'create' => [
                     'create-btn'     => '通貨を作成',
                     'code'           => 'コード',
@@ -2042,11 +2038,11 @@ return [
                     'symbol'         => '記号',
                     'title'          => '新しい通貨を作成',
                 ],
-
+        
                 'edit' => [
                     'title' => '通貨を編集',
                 ],
-
+        
                 'create-success'    => '通貨が正常に作成されました。',
                 'delete-success'    => '通貨が正常に削除されました。',
                 'delete-failed'     => '通貨の削除に失敗しました',
@@ -2054,14 +2050,14 @@ return [
                 'update-success'    => '通貨が正常に更新されました。',
             ],
         ],
-
+        
         'exchange-rates' => [
             'index' => [
                 'title'         => '為替レート',
                 'create-btn'    => '為替レートを作成',
                 'exchange-rate' => '為替レート',
                 'update-rates'  => '為替レートを更新',
-
+        
                 'create' => [
                     'delete-warning'  => '本当にこのアクションを実行しますか？',
                     'title'           => '為替レートを作成',
@@ -2070,11 +2066,11 @@ return [
                     'source-currency' => '元通貨',
                     'target-currency' => 'ターゲット通貨',
                 ],
-
+        
                 'edit' => [
                     'title'   => '為替レートを編集',
                 ],
-
+        
                 'datagrid' => [
                     'id'            => 'ID',
                     'currency-name' => '通貨名',
@@ -2083,7 +2079,7 @@ return [
                     'delete'        => '削除',
                     'actions'       => 'アクション',
                 ],
-
+        
                 'create-success' => '為替レートが正常に作成されました',
                 'update-success' => '為替レートが正常に更新されました',
                 'delete-success' => '為替レートが正常に削除されました',
@@ -2095,7 +2091,7 @@ return [
             'index'  => [
                 'title'      => '在庫ソース',
                 'create-btn' => '在庫ソースを作成',
-
+        
                 'datagrid' => [
                     'id'       => 'ID',
                     'code'     => 'コード',
@@ -2108,7 +2104,7 @@ return [
                     'delete'   => '削除',
                 ],
             ],
-
+        
             'create' => [
                 'add-title'      => '在庫ソースを追加',
                 'title'          => '在庫ソース',
@@ -2137,7 +2133,7 @@ return [
                 'postcode'       => '郵便番号',
                 'settings'       => '設定',
             ],
-
+        
             'edit' => [
                 'title'          => '在庫ソースを編集',
                 'general'        => '一般',
@@ -2165,21 +2161,21 @@ return [
                 'postcode'       => '郵便番号',
                 'settings'       => '設定',
             ],
-
+        
             'create-success'    => '在庫ソースが正常に作成されました',
             'delete-success'    => '在庫ソースが正常に削除されました',
             'delete-failed'     => '在庫ソースの削除に失敗しました',
             'last-delete-error' => '最後の在庫ソースは削除できません',
             'update-success'    => '在庫ソースが正常に更新されました',
         ],
-
+        
         'taxes' => [
             'categories' => [
                 'index' => [
                     'title'          => '税カテゴリー',
                     'tax-category'   => '税カテゴリー',
                     'delete-warning' => '本当に削除しますか？',
-
+        
                     'datagrid' => [
                         'id'      => 'ID',
                         'name'    => '名前',
@@ -2188,7 +2184,7 @@ return [
                         'delete'  => '削除',
                         'actions' => 'アクション',
                     ],
-
+        
                     'create' => [
                         'title'         => '税カテゴリーを作成',
                         'code'          => 'コード',
@@ -2201,24 +2197,24 @@ return [
                         'add-tax-rates' => '税率を追加',
                         'empty-text'    => '税率は利用できません。新しい税率を作成してください。',
                     ],
-
+        
                     'edit'  => [
                         'title' => '税カテゴリーを編集',
                     ],
-
+        
                     'create-success' => '新しい税カテゴリーが作成されました',
                     'update-success' => '税カテゴリーが正常に更新されました',
                     'delete-success' => '税カテゴリーが正常に削除されました',
                     'delete-failed'  => '税カテゴリーの削除に失敗しました',
                 ],
             ],
-
+        
             'rates'   => [
                 'index' => [
                     'title'        => '税率',
                     'tax-rate'     => '税率',
                     'button-title' => '税率を作成',
-
+        
                     'datagrid' => [
                         'id'         => 'ID',
                         'identifier' => '識別子',
@@ -2232,7 +2228,7 @@ return [
                         'delete'     => '削除',
                     ],
                 ],
-
+        
                 'create'  => [
                     'country'        => '国',
                     'back-btn'       => '戻る',
@@ -2250,7 +2246,7 @@ return [
                     'zip-from'       => '開始郵便番号',
                     'zip-to'         => '終了郵便番号',
                 ],
-
+        
                 'edit'  => [
                     'basic-settings' => '基本設定',
                     'country'        => '国',
@@ -2266,7 +2262,7 @@ return [
                     'zip-from'       => '開始郵便番号',
                     'zip-to'         => '終了郵便番号',
                 ],
-
+        
                 'create-success' => '税率が正常に作成されました。',
                 'delete-failed'  => '税率の削除に失敗しました',
                 'delete-success' => '税率が正常に削除されました',
@@ -2281,7 +2277,7 @@ return [
                 'delete-success'    => 'チャネルが正常に削除されました。',
                 'delete-failed'     => ':name の削除に失敗しました',
                 'last-delete-error' => '最後のチャネルの削除に失敗しました。',
-
+        
                 'datagrid' => [
                     'id'        => 'ID',
                     'code'      => 'コード',
@@ -2291,7 +2287,7 @@ return [
                     'delete'    => '削除',
                 ],
             ],
-
+        
             'create' => [
                 'title'                  => 'チャネルを作成',
                 'cancel'                 => '戻る',
@@ -2326,7 +2322,7 @@ return [
                 'maintenance-mode-text'  => 'メッセージ',
                 'create-success'         => 'チャネルが正常に作成されました。',
             ],
-
+        
             'edit' => [
                 'title'                  => 'チャネルを編集',
                 'back-btn'               => '戻る',
@@ -2368,7 +2364,7 @@ return [
                 'title' => 'ユーザー',
                 'admin' => '管理者',
                 'user'  => 'ユーザー',
-
+        
                 'create'  => [
                     'title'             => 'ユーザーを作成',
                     'name'              => '名前',
@@ -2380,7 +2376,7 @@ return [
                     'save-btn'          => 'ユーザーを保存',
                     'upload-image-info' => 'プロフィール画像をアップロードしてください（110px X 110px）PNGまたはJPG形式'
                 ],
-
+        
                 'datagrid' => [
                     'actions'  => 'アクション',
                     'id'       => 'ID',
@@ -2392,11 +2388,11 @@ return [
                     'active'   => 'アクティブ',
                     'inactive' => '非アクティブ',
                 ],
-
+        
                 'edit'  => [
                     'title' => 'ユーザーを編集',
                 ],
-
+        
                 'activate-warning'   => 'アカウントはまだ有効化されていません。管理者にお問い合わせください。',
                 'create-success'     => 'ユーザーが正常に作成されました。',
                 'cannot-change'      => 'ユーザーは変更できません',
@@ -2408,7 +2404,7 @@ return [
                 'update-success'     => 'ユーザーが正常に更新されました。',
                 'delete-warning'     =>'本当にこのアクションを実行しますか？',
             ],
-
+        
             'edit'  => [
                 'title'            => 'ユーザーを編集',
                 'general'          => '一般',
@@ -2421,7 +2417,7 @@ return [
                 'status'           => 'ステータス',
                 'save-btn'         => 'ユーザーを保存',
             ],
-
+        
             'update-success' => 'ユーザーが正常に更新されました。',
             'delete-success' => 'ユーザーが正常に削除されました。',
         ],
@@ -2430,7 +2426,7 @@ return [
             'index' => [
                 'title'      => '役割',
                 'create-btn' => '役割を作成',
-
+        
                 'datagrid'  =>  [
                     'delete'          => '削除',
                     'edit'            => '編集',
@@ -2439,7 +2435,7 @@ return [
                     'permission-type' => '権限タイプ',
                 ],
             ],
-
+        
             'create' => [
                 'title'          => '役割を作成',
                 'save-btn'       => '役割を保存',
@@ -2452,7 +2448,7 @@ return [
                 'custom'         => 'カスタム',
                 'all'            => 'すべて',
             ],
-
+        
             'edit' => [
                 'title'          => '役割を編集',
                 'save-btn'       => '役割を保存',
@@ -2465,7 +2461,7 @@ return [
                 'custom'         => 'カスタム',
                 'all'            => 'すべて',
             ],
-
+        
             'create-success'    => '役割が正常に作成されました',
             'update-success'    => '役割が正常に更新されました',
             'last-delete-error' => '最後の役割は削除できません',
@@ -2473,12 +2469,12 @@ return [
             'delete-failed'     => '役割の削除に失敗しました',
             'being-used'        => '役割はすでに管理者ユーザーで使用されています',
         ],
-
+        
         'themes' => [
             'index' => [
                 'title'      => 'テーマ',
                 'create-btn' => 'テーマを作成',
-
+            
                 'datagrid'   => [
                     'view'       => '表示',
                     'delete'     => '削除',
@@ -2620,11 +2616,6 @@ return [
                     'custom-scripts-info' => 'カスタムスクリプトは、ソフトウェアに特定の機能や機能を追加するために作成された個別のコードの一部で、その機能を一意に強化します。',
                     'custom-css'          => 'カスタムCSS',
                     'custom-javascript'   => 'カスタムJavascript',
-                    'compare-options'     => '比較オプション',
-                    'wishlist-options'    => 'ほしい物リストオプション',
-                    'image-search-option' => '画像検索オプション',
-                    'settings-title'      => '設定',
-                    'settings-title-info' => '設定は、システム、アプリケーション、またはデバイスの挙動を制御する構成可能な選択肢を指し、ユーザーの好みや要件に合わせて調整されます。'
                 ],
 
                 'design' => [
@@ -2724,7 +2715,7 @@ return [
             'customer' => [
                 'title' => '顧客',
                 'info'  => '顧客',
-
+            
                 'address' => [
                     'title'             => '住所',
                     'info'              => '国、州、郵便番号、および通りの住所の設定',
@@ -2738,7 +2729,7 @@ return [
                     'information-info'  => '「通りの住所の行」とは、住所の個々のセグメントを指し、通常はコンマで区切られ、家の番号、通り、市町村などの位置情報を提供します。',
                     'street-lines'      => '通りの住所の行',
                 ],
-
+            
                 'settings' => [
                     'title'                   => '設定',
                     'settings-info'           => 'ウィッシュリスト、ニュースレターの購読、メール確認、ソーシャルログインの設定',
@@ -2756,7 +2747,7 @@ return [
             'email' => [
                 'title' => 'メール',
                 'info'  => 'メール',
-
+            
                 'email-settings' => [
                     'title'                  => 'メール設定',
                     'info'                   => 'メール送信者名、ショップのメールアドレス、管理者名、および管理者のメールアドレスを設定します。',
@@ -2770,7 +2761,7 @@ return [
                     'admin-email-tip'        => 'このチャンネルの管理者にメールを受信するためのメールアドレス',
                     'admin-page-limit'       => 'デフォルトの1ページあたりのアイテム数（管理者）',
                 ],
-
+            
                 'notifications' => [
                     'title'                                            => '通知',
                     'info'                                             => '「通知」とは、イベント、更新、またはアクションについてユーザーに知らせるメッセージまたはアラートで、ユーザーエンゲージメントと意識を向上させます。',
@@ -2856,7 +2847,7 @@ return [
                     'accepted-currencies-info'    => '通貨コードをカンマで区切って追加してください（例：USD、INR、...）。',
                     'business-account'            => 'ビジネスアカウント',
                 ],
-
+                
                 'order-settings' => [
                     'title'                        => '注文設定',
                     'info'                         => '注文番号と最低注文数量を設定します。',
@@ -2870,7 +2861,7 @@ return [
                     'minimum-order-info'           => '注文が処理されるか、特典を受けるために必要な数量または金額の最低要件を指定する設定基準。',
                     'minimum-order-amount'         => '最低注文金額',
                 ],
-
+                
                 'invoice-settings' => [
                     'title'                          => '請求書設定',
                     'info'                           => '請求書番号、支払条件、請求書スリップデザイン、および請求書リマインダーを設定します。',
@@ -2907,7 +2898,7 @@ return [
                 'my-account'    => 'マイアカウント',
                 'logout'        => 'ログアウト',
                 'visit-shop'    => 'ショップを訪問',
-
+            
                 'mega-search' => [
                     'title'                           => 'メガ検索',
                     'products'                        => '製品',
@@ -2925,7 +2916,7 @@ return [
                     'explore-all-customers'           => 'すべての顧客を探索',
                 ],
             ],
-
+            
             'sidebar' => [
                 'collapse'                 => '折りたたむ',
                 'dashboard'                => 'ダッシュボード',
@@ -2971,36 +2962,30 @@ return [
 
         'datagrid' => [
             'toolbar' => [
-                'index' => [
-                    'no-records-selected'              => 'レコードは選択されていません。',
-                    'must-select-a-mass-action'        => '一括操作を選択する必要があります。',
-                    'must-select-a-mass-action-option' => '一括操作のオプションを選択する必要があります。',
-                    'sure-want-to-perform-this-action' => 'この操作を実行してもよろしいですか？',
-                ],
-                
+
                 'mass-actions' => [
                     'select-action' => 'アクションを選択',
                     'select-option' => 'オプションを選択',
                     'submit'        => '送信',
                 ],
-
+        
                 'filter' => [
                     'title' => 'フィルター',
                 ],
-
+        
                 'search' => [
                     'title' => '検索',
                 ],
             ],
-
+        
             'filters' => [
                 'title' => 'フィルターを適用',
-
+        
                 'custom-filters' => [
                     'title'     => 'カスタムフィルター',
                     'clear-all' => 'すべてクリア',
                 ],
-
+        
                 'date-options' => [
                     'today'             => '今日',
                     'yesterday'         => '昨日',
@@ -3012,13 +2997,13 @@ return [
                     'this-year'         => '今年',
                 ],
             ],
-
+        
             'table' => [
                 'actions'              => 'アクション',
                 'no-records-available' => '利用可能なレコードはありません。',
             ],
         ],
-
+        
         'products' => [
             'search' => [
                 'title'       => '製品を選択',
@@ -3086,27 +3071,27 @@ return [
         'go-back'   => '戻る',
         'dashboard' => 'ダッシュボード',
         'support'   => '問題が解決しない場合、<a href=":link" class=":class">:email</a> までお問い合わせください。',
-
+    
         '404' => [
             'title'       => '404 ページが見つかりません',
             'description' => 'おっと！探しているページは休暇中のようです。お探しのものが見つからないようです。',
         ],
-
+    
         '401' => [
             'title'       => '401 認証エラー',
             'description' => 'おっと！このページにアクセスする権限がありません。必要な資格情報が不足しているようです。',
         ],
-
+    
         '403' => [
             'title'       => '403 アクセス拒否',
             'description' => 'おっと！このページへのアクセスは制限されています。必要なアクセス権限がないようです。',
         ],
-
+    
         '500' => [
             'title'       => '500 サーバーエラー',
             'description' => 'おっと！何か問題が発生しました。お探しのページを読み込むのに問題があるようです。',
         ],
-
+    
         '503' => [
             'title'       => '503 サービス利用不可',
             'description' => 'おっと！一時的にメンテナンス中のようです。少し後で再度ご確認ください。',
@@ -3131,12 +3116,12 @@ return [
         'no-records'       => 'エクスポート対象がありません',
         'illegal-format'   => 'エラー！このフォーマットの種類はサポートされていないか、不正なフォーマットです',
     ],
-
+    
     'validations' => [
         'slug-being-used' => 'このスラッグはカテゴリまたは製品で使用されています。',
         'slug-reserved'   => 'このスラッグは予約済みです。',
     ],
-
+    
     'footer' => [
         'copy-right' => '搭載 <a href="https://bagisto.com/" target="_blank">Bagisto</a>, Webkulによるコミュニティプロジェクト<a href="https://webkul.com/" target="_blank">Webkul</a>',
     ],
@@ -3152,42 +3137,42 @@ return [
                 'greeting' => ':created_at に注文 #:order_id が新しく受け付けられました',
                 'summary'  => '注文の要約',
             ],
-
+    
             'invoiced' => [
                 'subject'  => '新しい請求書確認',
                 'title'    => '請求書確認！',
                 'greeting' => ':created_at に注文 #:order_id の請求書 #:invoice_id が作成されました',
                 'summary'  => '請求書の要約',
             ],
-
+    
             'shipped' => [
                 'subject'  => '新しい出荷確認',
                 'title'    => '出荷確認！',
                 'greeting' => ':created_at に注文 #:order_id が発送されました',
                 'summary'  => '出荷の要約',
             ],
-
+    
             'inventory-source' => [
                 'subject'  => '新しい出荷確認',
                 'title'    => '出荷確認！',
                 'greeting' => ':created_at に注文 #:order_id が発送されました',
                 'summary'  => '出荷の要約',
             ],
-
+    
             'refunded' => [
                 'subject'  => '新しい払い戻し確認',
                 'title'    => '払い戻し確認！',
                 'greeting' => ':created_at に注文 #:order_id の払い戻しが行われました',
                 'summary'  => '払い戻しの要約',
             ],
-
+    
             'canceled' => [
                 'subject'  => '新しい注文キャンセル',
                 'title'    => '注文キャンセル！',
                 'greeting' => ':created_at に注文 #:order_id がキャンセルされました',
                 'summary'  => '注文の要約',
             ],
-
+    
             'shipping-address'  => '配送先住所',
             'billing-address'   => '請求先住所',
             'contact'           => '連絡先',

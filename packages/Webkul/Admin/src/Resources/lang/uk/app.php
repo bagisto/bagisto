@@ -387,8 +387,7 @@ return [
                 'channel'                => 'Канал',
                 'customer'               => 'Клієнт',
                 'discount'               => 'Сума знижки - :discount',
-                'customer-email'         => 'Email клієнта - :email',
-                'email'                  => 'Email',
+                'email'                  => 'Електронна пошта - :email',
                 'grand-total'            => 'Загальна сума',
                 'invoice-items'          => 'Елементи рахунку',
                 'invoice-status'         => 'Статус рахунку',
@@ -408,8 +407,6 @@ return [
                 'sku'                    => 'SKU - :sku',
                 'sub-total'              => 'Підсумок - :sub_total',
                 'sub-total-summary'      => 'Підсумок',
-                'summary-tax'            => 'Сума податку',
-                'summary-discount'       => 'Сума знижки',
                 'title'                  => 'Рахунок #:invoice_id',
                 'tax'                    => 'Сума податку - :tax',
             ],
@@ -492,6 +489,7 @@ return [
                 'create' => [
                     'back-btn'                => 'Назад',
                     'bundle'                  => 'Збирається',
+                    'booking'                 => 'Бронювання',
                     'configurable'            => 'Конфігурований',
                     'configurable-attributes' => 'Атрибути конфігурованого товару',
                     'create-btn'              => 'Створити товар',
@@ -544,15 +542,13 @@ return [
                         'create-btn'                => 'Додати новий',
                         'edit-btn'                  => 'Редагувати',
                         'add-group-price'           => 'Додати ціну для групи',
-                        'all-groups'                => 'Всі групи',
-                        'fixed-group-price-info'    => 'За :qty одиниць за ціною :price за :type',
+                        'fixed-group-price-info'    => 'Для :qty штук за фіксованою ціною :price',
                         'discount-group-price-info' => 'Для :qty штук зі знижкою :price',
                         'empty-info'                => 'Спеціальні ціни для покупців, які належать до певної групи.',
 
                         'create' => [
                             'create-title'   => 'Створити ціну для групи покупців',
                             'customer-group' => 'Група покупців',
-                            'all-groups'     => 'Всі групи',
                             'discount'       => 'Знижка',
                             'delete-btn'     => 'Видалити',
                             'fixed'          => 'Фіксована',
@@ -2619,11 +2615,6 @@ return [
                     'custom-scripts-info' => 'Користувацькі скрипти - це персоналізовані фрагменти коду, створені для додавання конкретних функцій або можливостей до програмного забезпечення, покращуючи його можливості унікальним чином.',
                     'custom-css'          => 'Користувацький CSS',
                     'custom-javascript'   => 'Користувацький JavaScript',
-                    'compare-options'     => 'Опції порівняння',
-                    'wishlist-options'    => 'Опції списку бажань',
-                    'image-search-option' => 'Опція пошуку зображень',
-                    'settings-title'      => 'Налаштування',
-                    'settings-title-info' => 'Налаштування відносяться до конфігурованих виборів, які контролюють спосіб роботи системи, програми або пристрою, налаштовані на вимоги та вподобання користувача.'
                 ],
 
                 'design' => [
@@ -2970,13 +2961,6 @@ return [
         ],
 
         'datagrid' => [
-            'index' => [
-                'no-records-selected'              => 'Не вибрано жодного запису.',
-                'must-select-a-mass-action'        => 'Ви повинні вибрати масову дію.',
-                'must-select-a-mass-action-option' => 'Ви повинні вибрати опцію масової дії.',
-                'sure-want-to-perform-this-action' => 'Ви впевнені, що хочете виконати цю дію?',
-            ],
-            
             'toolbar' => [
                 'mass-actions' => [
                     'select-action' => 'Вибрати дію',

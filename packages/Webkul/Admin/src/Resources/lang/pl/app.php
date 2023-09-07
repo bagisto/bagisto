@@ -387,8 +387,7 @@ return [
                 'channel'                => 'Kanał',
                 'customer'               => 'Klient',
                 'discount'               => 'Kwota zniżki - :discount',
-                'customer-email'         => 'Email klienta - :email',
-                'email'                  => 'Email',
+                'email'                  => 'E-mail - :email',
                 'grand-total'            => 'Razem',
                 'invoice-items'          => 'Pozycje faktury',
                 'invoice-status'         => 'Status faktury',
@@ -408,8 +407,6 @@ return [
                 'sku'                    => 'SKU - :sku',
                 'sub-total'              => 'Suma częściowa - :sub_total',
                 'sub-total-summary'      => 'Suma częściowa',
-                'summary-tax'            => 'Kwota podatku',
-                'summary-discount'       => 'Kwota rabatu',
                 'title'                  => 'Faktura #:invoice_id',
                 'tax'                    => 'Kwota podatku - :tax',
             ],
@@ -492,6 +489,7 @@ return [
                 'create' => [
                     'back-btn'                => 'Wróć',
                     'bundle'                  => 'Pakiet',
+                    'booking'                 => 'Rezerwacja',
                     'configurable'            => 'Konfigurowalny',
                     'configurable-attributes' => 'Atrybuty konfigurowalne',
                     'create-btn'              => 'Utwórz produkt',
@@ -544,15 +542,13 @@ return [
                         'create-btn'                => 'Dodaj nową',
                         'edit-btn'                  => 'Edytuj',
                         'add-group-price'           => 'Dodaj cenę dla grupy',
-                        'all-groups'                => 'Wszystkie grupy',
-                        'fixed-group-price-info'    => 'Dla :qty sztuk w cenie :price za :type',
+                        'fixed-group-price-info'    => 'Dla :qty sztuk w stałej cenie :price',
                         'discount-group-price-info' => 'Dla ilości :qty w cenie obniżonej o :price',
                         'empty-info'                => 'Specjalne ceny dla klientów należących do określonej grupy.',
 
                         'create' => [
                             'create-title'   => 'Utwórz cenę dla grupy klientów',
                             'customer-group' => 'Grupa klientów',
-                            'all-groups'     => 'Wszystkie grupy',
                             'discount'       => 'Rabat',
                             'delete-btn'     => 'Usuń',
                             'fixed'          => 'Stała',
@@ -2619,11 +2615,6 @@ return [
                     'custom-scripts-info' => 'Niestandardowe skrypty to spersonalizowane fragmenty kodu stworzone w celu dodania określonych funkcji lub możliwości do oprogramowania, zwiększając jego unikalne możliwości.',
                     'custom-css'          => 'Niestandardowe CSS',
                     'custom-javascript'   => 'Niestandardowy JavaScript',
-                    'compare-options'     => 'Opcje porównywania',
-                    'wishlist-options'    => 'Opcje listy życzeń',
-                    'image-search-option' => 'Opcja wyszukiwania obrazów',
-                    'settings-title'      => 'Ustawienia',
-                    'settings-title-info' => 'Termin "ustawienia" odnosi się do konfigurowalnych wyborów kontrolujących zachowanie systemu, aplikacji lub urządzenia, dostosowanych do preferencji i wymagań użytkownika.'
                 ],
 
                 'design' => [
@@ -2971,13 +2962,6 @@ return [
         ],
 
         'datagrid' => [
-            'index' => [
-                'no-records-selected'              => 'Nie wybrano żadnych rekordów.',
-                'must-select-a-mass-action'        => 'Musisz wybrać akcję masową.',
-                'must-select-a-mass-action-option' => 'Musisz wybrać opcję akcji masowej.',
-                'sure-want-to-perform-this-action' => 'Czy na pewno chcesz wykonać tę akcję?',
-            ],
-            
             'toolbar' => [
                 'mass-actions' => [
                     'select-action' => 'Wybierz Akcję',
