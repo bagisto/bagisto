@@ -15,8 +15,8 @@ export default defineConfig(({ mode }) => {
         envDir,
 
         server: {
-            host: process.env.VITE_SHOP_HOST || "localhost",
-            port: process.env.VITE_SHOP_PORT || 5173,
+            host: process.env.VITE_HOST || "localhost",
+            port: process.env.VITE_PORT || 5173,
         },
 
         plugins: [
