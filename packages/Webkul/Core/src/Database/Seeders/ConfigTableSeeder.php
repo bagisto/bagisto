@@ -16,7 +16,7 @@ class ConfigTableSeeder extends Seeder
 
         DB::table('core_config')->insert([
             'id'           => 1,
-            'code'         => 'catalog.products.guest-checkout.allow-guest-checkout',
+            'code'         => 'catalog.products.guest_checkout.allow-guest-checkout',
             'value'        => '1',
             'channel_code' => null,
             'locale_code'  => null,
