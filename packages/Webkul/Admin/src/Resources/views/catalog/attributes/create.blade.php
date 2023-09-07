@@ -248,7 +248,7 @@
                                                         <!-- Swatch Image -->
                                                         <div v-if="swatchType == 'image'">
                                                             <img 
-                                                                src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
+                                                                src="{{ bagisto_asset('images/product-placeholders/Front.svg') }}"
                                                                 :ref="'image_' + element.params.id"
                                                                 class="h-[50px] w-[50px]"
                                                             />

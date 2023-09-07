@@ -462,7 +462,7 @@
                                                     />
                                                 @else
                                                     <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
-                                                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+                                                        <img src="{{ bagisto_asset('images/product-placeholders/Front.svg')}}">
 
                                                         <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                                                             @lang('admin::app.dashboard.index.product-image')
@@ -525,7 +525,7 @@
                                         </div>
                                     @else
                                         <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
-                                            <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+                                            <img src="{{ bagisto_asset('images/product-placeholders/Front.svg')}}">
 
                                             <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                                                 @lang('admin::app.dashboard.index.product-image')
@@ -723,7 +723,7 @@
                                         v-else
                                         class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden"
                                     >
-                                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+                                        <img src="{{ bagisto_asset('images/product-placeholders/Front.svg')}}">
                                         
                                         <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                                             @lang('admin::app.dashboard.index.product-image')

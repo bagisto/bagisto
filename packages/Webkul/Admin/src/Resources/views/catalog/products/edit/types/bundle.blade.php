@@ -287,7 +287,7 @@
                                 <!-- Image -->
                                 <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
                                     <template v-if="! element.product.images.length">
-                                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                                        <img src="{{ bagisto_asset('images/product-placeholders/Front.svg') }}">
                                     </template>
 
                                     <template v-else>
