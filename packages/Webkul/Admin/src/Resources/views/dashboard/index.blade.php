@@ -910,6 +910,10 @@
                             end: "{{ $endDate->format('Y-m-d') }}",
                         },
 
+                        formatStart: "",
+
+                        formatEnd: "",
+
                         statistics: {},
 
                         _chart: undefined,
@@ -926,7 +930,11 @@
                                 params: this.filters
                             })
                             .then((response) => {
-                                this.statistics = response.data.statistics;
+                                const { startDate, endDate, statistics } = response.data;
+
+                                this.formatStart = startDate;
+                                this.formatEnd = endDate;
+                                this.statistics = statistics;
 
                                 setTimeout(() => {
                                     this.graphChart();
