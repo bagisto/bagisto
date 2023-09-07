@@ -645,6 +645,7 @@ return [
                 'discount-amount'  => 'Сума знижки',
                 'grand-total'      => 'Загальна сума',
                 'place-order'      => 'Замовити',
+                'processing'       => 'Обробка',
             ],
         ],
     ],

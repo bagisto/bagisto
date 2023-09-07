@@ -645,6 +645,7 @@ return [
                 'discount-amount'  => 'Importo Sconto',
                 'grand-total'      => 'Totale Generale',
                 'place-order'      => 'Effettua Ordine',
+                'processing'       => 'Elaborazione',
             ],
         ],
     ],

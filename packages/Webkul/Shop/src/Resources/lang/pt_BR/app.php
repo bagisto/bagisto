@@ -645,6 +645,7 @@ return [
                 'discount-amount'  => 'Valor do Desconto',
                 'grand-total'      => 'Total Geral',
                 'place-order'      => 'Finalizar Pedido',
+                'processing'       => 'Processando',
             ],
         ],
     ],
