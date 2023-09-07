@@ -407,6 +407,8 @@ return [
                 'sku'                    => 'SKU - :sku',
                 'sub-total'              => 'סכום חלקי - :sub_total',
                 'sub-total-summary'      => 'סכום חלקי',
+                'summary-tax'            => 'סכום המס',
+                'summary-discount'       => 'סכום ההנחה',
                 'title'                  => 'חשבונית #:invoice_id',
                 'tax'                    => 'סכום מס - :tax',
             ],

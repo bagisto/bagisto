@@ -407,6 +407,8 @@ return [
                 'sku'                    => 'SKU - :sku',
                 'sub-total'              => 'Підсумок - :sub_total',
                 'sub-total-summary'      => 'Підсумок',
+                'summary-tax'            => 'Сума податку',
+                'summary-discount'       => 'Сума знижки',
                 'title'                  => 'Рахунок #:invoice_id',
                 'tax'                    => 'Сума податку - :tax',
             ],

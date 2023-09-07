@@ -407,6 +407,8 @@ return [
                 'sku'                    => 'Artikelnummer - :sku',
                 'sub-total'              => 'Subtotaal - :sub_total',
                 'sub-total-summary'      => 'Subtotaal',
+                'summary-tax'            => 'Belastingbedrag',
+                'summary-discount'       => 'Kortingsbedrag',
                 'title'                  => 'Factuur #:invoice_id',
                 'tax'                    => 'Belastingbedrag - :tax',
             ],

@@ -407,6 +407,8 @@ return [
                 'sku'                    => 'SKU - :sku',
                 'sub-total'              => '小计 - :sub_total',
                 'sub-total-summary'      => '小计',
+                'summary-tax'            => '税额',
+                'summary-discount'       => '折扣金额',
                 'title'                  => '发票 #:invoice_id',
                 'tax'                    => '税额 - :tax',
             ],

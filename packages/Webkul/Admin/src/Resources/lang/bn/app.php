@@ -407,6 +407,8 @@ return [
                 'sku'                    => 'SKU - :sku',
                 'sub-total'              => 'সাব টোটাল - :sub_total',
                 'sub-total-summary'      => 'সাব টোটাল',
+                'summary-tax'            => 'ট্যাক্স পরিমাণ',
+                'summary-discount'       => 'ডিসকাউন্ট পরিমাণ',
                 'title'                  => 'চালান #:invoice_id',
                 'tax'                    => 'করের পরিমাণ - :tax',
             ],

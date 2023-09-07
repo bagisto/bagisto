@@ -407,6 +407,8 @@ return [
                 'sku'                    => 'SKU - :sku',
                 'sub-total'              => 'Sous-total - :sub_total',
                 'sub-total-summary'      => 'Sous-total',
+                'summary-tax'            => 'Montant de la taxe',
+                'summary-discount'       => 'Montant de la réduction',
                 'title'                  => 'Facture #:invoice_id',
                 'tax'                    => 'Montant de la taxe - :tax',
             ],

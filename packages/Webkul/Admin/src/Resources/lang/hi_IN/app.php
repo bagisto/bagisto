@@ -407,6 +407,8 @@ return [
                 'sku'                    => 'एसकेयू - :sku',
                 'sub-total'              => 'उप-योग - :sub_total',
                 'sub-total-summary'      => 'उप-योग',
+                'summary-tax'            => 'कर राशि',
+                'summary-discount'       => 'डिस्काउंट राशि',
                 'title'                  => 'चालान #:invoice_id',
                 'tax'                    => 'कर राशि - :tax',
             ],

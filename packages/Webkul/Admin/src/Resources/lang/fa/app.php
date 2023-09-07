@@ -407,6 +407,8 @@ return [
                 'sku'                    => 'کد SKU - :sku',
                 'sub-total'              => 'جمع کل جزئی - :sub_total',
                 'sub-total-summary'      => 'جمع کل جزئی',
+                'summary-tax'            => 'مبلغ مالیات',
+                'summary-discount'       => 'مبلغ تخفیف',
                 'title'                  => 'صورتحساب #:invoice_id',
                 'tax'                    => 'مقدار مالیات - :tax',
             ],
