@@ -146,7 +146,7 @@
 
                     <!-- Description -->
                     <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label>
+                        <x-admin::form.control-group.label class="required">
                             @lang('admin::app.catalog.categories.edit.description')
                         </x-admin::form.control-group.label>
 
@@ -247,7 +247,7 @@
 
                         {{-- Slug --}}
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.catalog.categories.create.slug')
                             </x-admin::form.control-group.label>
 
@@ -319,7 +319,7 @@
                         {{-- Position --}}
                         <div class="mb-[10px]">
                             <x-admin::form.control-group class="mb-[10px]">
-                                <x-admin::form.control-group.label class="!text-gray-800">
+                                <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.catalog.categories.edit.position')
                                 </x-admin::form.control-group.label>
 
@@ -346,13 +346,14 @@
                                 @lang('admin::app.catalog.categories.edit.display-mode')
                             </x-admin::form.control-group.label>
 
-                            @php $selectedValue = old('status') ?: $category->display_mode @endphp
-
+                            @php $selectedValue = old('display_mode') ?: $category->display_mode @endphp
+                            
                             <x-admin::form.control-group.control
                                 type="select"
                                 name="display_mode"
                                 class="cursor-pointer"
                                 rules="required"
+                                :value="$selectedValue"
                                 :label="trans('admin::app.catalog.categories.edit.display-mode')"
                             >
                                 @foreach (['products-and-description', 'products-only', 'description-only'] as $item)
