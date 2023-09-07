@@ -61,6 +61,7 @@
             name="{{ $name }}"
             v-slot="{ field }"
             {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+            value="{{ $slot }}"
         >
             <textarea
                 type="{{ $type }}"
