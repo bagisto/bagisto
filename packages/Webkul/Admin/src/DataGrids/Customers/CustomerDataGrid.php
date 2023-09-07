@@ -71,7 +71,7 @@ class CustomerDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'customer_id',
-            'label'      => trans('admin::app.customers.index.datagrid.id'),
+            'label'      => trans('admin::app.customers.customers.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => true,
@@ -80,7 +80,7 @@ class CustomerDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'full_name',
-            'label'      => trans('admin::app.customers.index.datagrid.name'),
+            'label'      => trans('admin::app.customers.customers.index.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -89,7 +89,7 @@ class CustomerDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'email',
-            'label'      => trans('admin::app.customers.index.datagrid.email'),
+            'label'      => trans('admin::app.customers.customers.index.datagrid.email'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -98,7 +98,7 @@ class CustomerDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'phone',
-            'label'      => trans('admin::app.customers.index.datagrid.phone'),
+            'label'      => trans('admin::app.customers.customers.index.datagrid.phone'),
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => true,
@@ -107,7 +107,7 @@ class CustomerDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'status',
-            'label'      => trans('admin::app.customers.index.datagrid.status'),
+            'label'      => trans('admin::app.customers.customers.index.datagrid.status'),
             'type'       => 'boolean',
             'searchable' => false,
             'filterable' => true,
@@ -116,7 +116,7 @@ class CustomerDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'gender',
-            'label'      => trans('admin::app.customers.index.datagrid.gender'),
+            'label'      => trans('admin::app.customers.customers.index.datagrid.gender'),
             'type'       => 'string',
             'searchable' => false,
             'filterable' => false,
@@ -125,7 +125,7 @@ class CustomerDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'group',
-            'label'      => trans('admin::app.customers.index.datagrid.group'),
+            'label'      => trans('admin::app.customers.customers.index.datagrid.group'),
             'type'       => 'string',
             'searchable' => false,
             'filterable' => true,
@@ -134,7 +134,7 @@ class CustomerDataGrid extends DataGrid
 
         $this->addColumn([
             'index'       => 'is_suspended',
-            'label'       => trans('admin::app.customers.index.datagrid.suspended'),
+            'label'       => trans('admin::app.customers.customers.index.datagrid.suspended'),
             'type'        => 'boolean',
             'searchable'  => false,
             'filterable'  => false,
@@ -144,7 +144,7 @@ class CustomerDataGrid extends DataGrid
 
         $this->addColumn([
             'index'       => 'total_base_grand_total',
-            'label'       => trans('admin::app.customers.index.datagrid.revenue'),
+            'label'       => trans('admin::app.customers.customers.index.datagrid.revenue'),
             'type'        => 'integer',
             'searchable'  => false,
             'filterable'  => false,
@@ -159,7 +159,7 @@ class CustomerDataGrid extends DataGrid
 
         $this->addColumn([
             'index'       => 'order_count',
-            'label'       => trans('admin::app.customers.index.datagrid.order-count'),
+            'label'       => trans('admin::app.customers.customers.index.datagrid.order-count'),
             'type'        => 'integer',
             'searchable'  => false,
             'filterable'  => false,
@@ -168,7 +168,7 @@ class CustomerDataGrid extends DataGrid
 
         $this->addColumn([
             'index'       => 'address_count',
-            'label'       => trans('admin::app.customers.index.datagrid.address-count'),
+            'label'       => trans('admin::app.customers.customers.index.datagrid.address-count'),
             'type'        => 'integer',
             'searchable'  => false,
             'filterable'  => false,
@@ -185,7 +185,7 @@ class CustomerDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-view',
-            'title'  => trans('admin::app.customers.index.datagrid.view'),
+            'title'  => trans('admin::app.customers.customers.index.datagrid.view'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.customers.customers.view', $row->customer_id);
@@ -194,7 +194,7 @@ class CustomerDataGrid extends DataGrid
 
         $this->addAction([
             'icon'   => 'icon-exit',
-            'title'  => trans('admin::app.customers.index.datagrid.login-as-customer'),
+            'title'  => trans('admin::app.customers.customers.index.datagrid.login-as-customer'),
             'method' => 'GET',
             'target' => 'blank',
             'url'    => function ($row) {
@@ -204,7 +204,7 @@ class CustomerDataGrid extends DataGrid
 
         $this->addAction([
             'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.customers.index.datagrid.delete'),
+            'title'  => trans('admin::app.customers.customers.index.datagrid.delete'),
             'method' => 'DELETE',
             'url'    => function ($row) {
                 return route('admin.customers.customers.delete', $row->customer_id);
@@ -220,22 +220,22 @@ class CustomerDataGrid extends DataGrid
     public function prepareMassActions()
     {
         $this->addMassAction([
-            'title'  => trans('admin::app.customers.index.datagrid.delete'),
+            'title'  => trans('admin::app.customers.customers.index.datagrid.delete'),
             'method' => 'POST',
             'url'    => route('admin.customers.customers.mass_delete'),
         ]);
 
         $this->addMassAction([
-            'title'   => trans('admin::app.customers.index.datagrid.update-status'),
+            'title'   => trans('admin::app.customers.customers.index.datagrid.update-status'),
             'method'  => 'POST',
             'url'     => route('admin.customers.customers.mass_update'),
             'options' => [
                 [
-                    'name' => trans('admin::app.customers.index.datagrid.active'),
+                    'name' => trans('admin::app.customers.customers.index.datagrid.active'),
                     'value' => 1,
                 ],
                 [
-                    'name' => trans('admin::app.customers.index.datagrid.inactive'),
+                    'name' => trans('admin::app.customers.customers.index.datagrid.inactive'),
                     'value' => 0,
                 ],
             ],
