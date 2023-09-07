@@ -831,7 +831,7 @@
                                 type="submit" 
                                 class="primary-button"
                             >
-                                @lang('admin::app.marketing.communications.events.edit.save-btn')
+                                @lang('admin::app.catalog.attributes.edit.option.save-btn')
                             </button>
                         </x-slot:footer>
                     </x-admin::modal>
