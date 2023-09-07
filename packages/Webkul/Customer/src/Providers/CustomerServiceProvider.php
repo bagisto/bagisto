@@ -33,20 +33,8 @@ class CustomerServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->registerConfig();
-
         $this->app->singleton('captcha', function ($app) {
             return new Captcha();
         });
-    }
-
-    /**
-     * Register package config.
-     *
-     * @return void
-     */
-    protected function registerConfig(): void
-    {
-        $this->mergeConfigFrom(dirname(__DIR__) . '/Config/system.php', 'core');
     }
 }

@@ -19,16 +19,4 @@ class TaxServiceProvider extends ServiceProvider
         
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'tax');
     }
-
-    /**
-     * Register services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/system.php', 'core'
-        );
-    }
 }

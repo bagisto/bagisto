@@ -14,16 +14,4 @@ class SocialShareServiceProvider extends ServiceProvider
 
         $this->app->register(EventServiceProvider::class);
     }
-
-    /**
-     * Register services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/system.php', 'core'
-        );
-    }
 }
