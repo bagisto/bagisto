@@ -57,16 +57,25 @@
                             @lang('admin::app.catalog.categories.create.company-name')
                         </x-admin::form.control-group.label>
 
-                        <x-admin::form.control-group.control
+                        <v-field
                             type="text"
                             name="name"
-                            :value="old('name')"
-                            class="w-full"
                             rules="required"
-                            :label="trans('admin::app.catalog.categories.create.company-name')"
-                            :placeholder="trans('admin::app.catalog.categories.create.company-name')"
+                            label="{{ trans('admin::app.catalog.categories.create.company-name') }}"
+                            value="{{ old('name') }}"
+                            v-slot="{ field }"
                         >
-                        </x-admin::form.control-group.control>
+                            <input
+                                type="text"
+                                name="name"
+                                id="name"
+                                v-bind="field"
+                                :class="[errors['{{ 'name' }}'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                placeholder="{{ trans('admin::app.catalog.categories.create.company-name') }}"
+                                v-slugify-target:slug
+                            >
+                        </v-field>
 
                         <x-admin::form.control-group.error
                             control-name="name"
@@ -192,16 +201,25 @@
                                 @lang('admin::app.catalog.categories.create.slug')
                             </x-admin::form.control-group.label>
 
-                            <x-admin::form.control-group.control
+                            <v-field
                                 type="text"
                                 name="slug"
-                                :value="old('slug')"
-                                id="slug"
                                 rules="required"
-                                :label="trans('admin::app.catalog.categories.create.slug')"
-                                :placeholder="trans('admin::app.catalog.categories.create.slug')"
+                                label="{{ trans('admin::app.catalog.categories.create.slug') }}"
+                                value="{{ old('slug') }}"
+                                v-slot="{ field }"
                             >
-                            </x-admin::form.control-group.control>
+                                <input
+                                    type="text"
+                                    name="slug"
+                                    id="slug"
+                                    v-bind="field"
+                                    :class="[errors['{{ 'slug' }}'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                    placeholder="{{ trans('admin::app.catalog.categories.create.slug') }}"
+                                    v-slugify-target:slug
+                                >
+                            </v-field>
 
                             <x-admin::form.control-group.error
                                 control-name="slug"
