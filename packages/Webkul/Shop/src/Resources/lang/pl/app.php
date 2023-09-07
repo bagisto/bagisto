@@ -645,6 +645,7 @@ return [
                 'discount-amount'  => 'Kwota rabatu',
                 'grand-total'      => 'Razem',
                 'place-order'      => 'Złóż zamówienie',
+                'processing'       => 'Przetwarzanie',
             ],
         ],
     ],

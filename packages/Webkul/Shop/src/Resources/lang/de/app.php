@@ -646,6 +646,7 @@ return [
                 'discount-amount'  => 'Rabattbetrag',
                 'grand-total'      => 'Gesamtsumme',
                 'place-order'      => 'Bestellung aufgeben',
+                'processing'       => 'Verarbeitung',
             ],
         ],
     ],

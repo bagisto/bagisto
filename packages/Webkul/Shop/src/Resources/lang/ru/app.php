@@ -645,6 +645,7 @@ return [
                 'discount-amount'  => 'Сумма скидки',
                 'grand-total'      => 'Итоговая сумма',
                 'place-order'      => 'Оформить заказ',
+                'processing'       => 'Обработка',
             ],
         ],
     ],

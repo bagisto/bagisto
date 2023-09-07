@@ -645,6 +645,7 @@ return [
                 'discount-amount'  => '折扣金额',
                 'grand-total'      => '总计',
                 'place-order'      => '下订单',
+                'processing'       => '处理中',
             ],
         ],
     ],

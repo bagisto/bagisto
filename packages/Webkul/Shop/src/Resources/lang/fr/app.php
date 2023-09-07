@@ -645,6 +645,7 @@ return [
                 'discount-amount'  => 'Montant de la réduction',
                 'grand-total'      => 'Total général',
                 'place-order'      => 'Passer la commande',
+                'processing'       => 'En cours de traitement',
             ],
         ],
     ],

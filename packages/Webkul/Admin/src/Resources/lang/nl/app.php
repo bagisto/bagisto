@@ -2971,6 +2971,13 @@ return [
         ],
 
         'datagrid' => [
+            'index' => [
+                'no-records-selected'              => 'Er zijn geen records geselecteerd.',
+                'must-select-a-mass-action'        => 'U moet een massale actie selecteren.',
+                'must-select-a-mass-action-option' => 'U moet een optie voor massale actie selecteren.',
+                'sure-want-to-perform-this-action' => 'Weet u zeker dat u deze actie wilt uitvoeren?',
+            ],
+                                    
             'toolbar' => [
                 'mass-actions' => [
                     'select-action' => 'Selecteer Actie',

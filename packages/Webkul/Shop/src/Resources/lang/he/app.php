@@ -645,6 +645,7 @@ return [
                 'discount-amount'  => 'סכום ההנחה',
                 'grand-total'      => 'סך הכל לתשלום',
                 'place-order'      => 'בצע הזמנה',
+                'processing'       => 'מעבד',
             ],
         ],
     ],

@@ -645,6 +645,7 @@ return [
                 'discount-amount'  => 'डिस्काउंट राशि',
                 'grand-total'      => 'कुल योग',
                 'place-order'      => 'आर्डर प्लेस करें',
+                'processing'       => 'प्रोसेसिंग',
             ],
         ],
     ],

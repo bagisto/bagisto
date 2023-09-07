@@ -645,6 +645,7 @@ return [
                 'discount-amount'  => 'පොදු මුදල',
                 'grand-total'      => 'මහු මුදල',
                 'place-order'      => 'ඇනවුම මඟ',
+                'processing'       => 'ක්රියා කරමින්',
             ],
         ],
     ],
