@@ -9,7 +9,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-datagrid-export-template">
         <div class="p-[6px] items-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
-            <x-admin::modal>
+            <x-admin::modal ref="exportModal">
                 <x-slot:toggle>
                     <p class="text-gray-600 font-semibold leading-[24px]">
                         @lang('admin::app.export.export')
@@ -84,49 +84,57 @@
                 },
 
                 download() {
-                    let params = {
-                        export: 1,
+                    if (! this.available?.records?.length) {                        
+                        this.$emitter.emit('add-flash', { type: 'warning', message: '@lang('admin::app.export.no-records')' });
 
-                        format: this.format,
-
-                        sort: {},
-
-                        filters: {},
-                    };
-
-                    if (
-                        this.applied.sort.column &&
-                        this.applied.sort.order
-                    ) {
-                        params.sort = this.applied.sort;
-                    }
-
-                    this.applied.filters.columns.forEach(column => {
-                        params.filters[column.index] = column.value;
-                    });
-
-                    this.$axios
-                        .get(this.src, {
-                            params,
-                            responseType: 'blob',
-                        })
-                        .then((response) => {
-                            const url = window.URL.createObjectURL(new Blob([response.data]));
-
-                            /**
-                             * Link generation.
-                             */
-                            const link = document.createElement('a');
-                            link.href = url;
-                            link.setAttribute('download', `${(Math.random() + 1).toString(36).substring(7)}.${this.format}`);
-
-                            /**
-                             * Adding a link to a document, clicking on the link, and then removing the link.
-                             */
-                            document.body.appendChild(link);
-                            link.click();
-                            document.body.removeChild(link);
+                        this.$refs.exportModal.toggle();
+                    } else {
+                        let params = {
+                            export: 1,
+    
+                            format: this.format,
+    
+                            sort: {},
+    
+                            filters: {},
+                        };
+    
+                        if (
+                            this.applied.sort.column &&
+                            this.applied.sort.order
+                        ) {
+                            params.sort = this.applied.sort;
+                        }
+    
+                        this.applied.filters.columns.forEach(column => {
+                            params.filters[column.index] = column.value;
                         });
+    
+                        this.$axios
+                            .get(this.src, {
+                                params,
+                                responseType: 'blob',
+                            })
+                            .then((response) => {
+                                const url = window.URL.createObjectURL(new Blob([response.data]));
+
+                                /**
+                                 * Link generation.
+                                 */
+                                const link = document.createElement('a');
+                                link.href = url;
+                                link.setAttribute('download', `${(Math.random() + 1).toString(36).substring(7)}.${this.format}`);
+
+                                /**
+                                 * Adding a link to a document, clicking on the link, and then removing the link.
+                                 */
+                                document.body.appendChild(link);
+                                link.click();
+                                document.body.removeChild(link);
+
+                                this.$refs.exportModal.toggle();
+                            });
+                    }
                 },
             },
         });
