@@ -38,7 +38,7 @@
 
                     <input type="hidden" :name="'customer_group_prices[' + item.id + '][value_type]'" :value="item.value_type"/>
 
-                    <input type="hidden" :name="'customer_group_prices[' + item.id + '][value]'" :value="item.amount"/>
+                    <input type="hidden" :name="'customer_group_prices[' + item.id + '][value]'" :value="item.value"/>
 
                     <div class="flex justify-between">
                         <p class="text-gray-600 font-semibold">
@@ -57,14 +57,14 @@
                         class="text-gray-600"
                         v-if="item.value_type == 'fixed'"
                     >
-                        @{{ "@lang('admin::app.catalog.products.edit.price.group.fixed-group-price-info')".replace(':qty', item.qty).replace(':price', item.amount) }}
+                        @{{ "@lang('admin::app.catalog.products.edit.price.group.fixed-group-price-info')".replace(':qty', item.qty).replace(':price', item.value) }}
                     </p>
 
                     <p
                         class="text-gray-600"
                         v-else
                     >
-                        @{{ "@lang('admin::app.catalog.products.edit.price.group.fixed-group-price-info')".replace(':qty', item.qty).replace(':price', item.amount) }}
+                        @{{ "@lang('admin::app.catalog.products.edit.price.group.discount-group-price-info')".replace(':qty', item.qty).replace(':price', item.value) }}
                     </p>
                 </div>
 
@@ -193,14 +193,14 @@
             
                                         <x-admin::form.control-group.control
                                             type="text"
-                                            name="amount"
-                                            v-model="selectedPrice.amount"
+                                            name="value"
+                                            v-model="selectedPrice.value"
                                             ::rules="{required: true, decimal: true, min_value: 0, ...(selectedPrice.value_type === 'discount' ? {max_value: 100} : {})}"
                                             :label="trans('admin::app.catalog.products.edit.price.group.create.price')"
                                         >
                                         </x-admin::form.control-group.control>
             
-                                        <x-admin::form.control-group.error control-name="amount"></x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="value"></x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
                                 </div>
 
@@ -248,7 +248,7 @@
                         customer_group_id: null,
                         qty: 0,
                         value_type: 'fixed',
-                        amount: 0,
+                        value: 0,
                     }
                 }
             },
@@ -281,7 +281,7 @@
                         customer_group_id: null,
                         qty: 0,
                         value_type: 'fixed',
-                        amount: 0,
+                        value: 0,
                     };
                 },
 
