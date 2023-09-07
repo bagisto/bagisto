@@ -701,10 +701,6 @@
 
                 props: ['index', 'condition'],
 
-                mounted() {
-                    console.log(this.condition);
-                },
-
                 data() {
                     return {
                         conditionAttributes: @json(app('\Webkul\CatalogRule\Repositories\CatalogRuleRepository')->getConditionAttributes()),
@@ -716,146 +712,146 @@
                         conditionOperators: {
                             'price': [{
                                     'operator': '==',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to')"
                                 }, {
                                     'operator': '!=',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to')"
                                 }, {
                                     'operator': '>=',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.equals-or-greater-than') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.equals-or-greater-than')"
                                 }, {
                                     'operator': '<=',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.equals-or-less-than') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.equals-or-less-than')"
                                 }, {
                                     'operator': '<=',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.greater-than') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.greater-than')"
                                 }, {
                                     'operator': '<=',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.less-than') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.less-than')"
                                 }],
                             'decimal': [{
                                     'operator': '==',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to')"
                                 }, {
                                     'operator': '!=',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to')"
                                 }, {
                                     'operator': '>=',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.equals-or-greater-than') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.equals-or-greater-than')"
                                 }, {
                                     'operator': '<=',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.equals-or-less-than') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.equals-or-less-than')"
                                 }, {
                                     'operator': '>',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.greater-than') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.greater-than')"
                                 }, {
                                     'operator': '<',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.less-than') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.less-than')"
                                 }],
                             'integer': [{
                                     'operator': '==',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to')"
                                 }, {
                                     'operator': '!=',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to')"
                                 }, {
                                     'operator': '>=',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.equals-or-greater-than') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.equals-or-greater-than')"
                                 }, {
                                     'operator': '<=',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.equals-or-less-than') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.equals-or-less-than')"
                                 }, {
                                     'operator': '>',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.greater-than') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.greater-than')"
                                 }, {
                                     'operator': '<',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.less-than') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.less-than')"
                                 }],
                             'text': [{
                                     'operator': '==',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to')"
                                 }, {
                                     'operator': '!=',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to')"
                                 }, {
                                     'operator': '{}',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.contain') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.contain')"
                                 }, {
                                     'operator': '!{}',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.does-not-contain') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.does-not-contain')"
                                 }],
                             'boolean': [{
                                     'operator': '==',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to')"
                                 }, {
                                     'operator': '!=',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to')"
                                 }],
                             'date': [{
                                     'operator': '==',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to')"
                                 }, {
                                     'operator': '!=',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to')"
                                 }, {
                                     'operator': '>=',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.equals-or-greater-than') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.equals-or-greater-than')"
                                 }, {
                                     'operator': '<=',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.equals-or-less-than') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.equals-or-less-than')"
                                 }, {
                                     'operator': '>',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.greater-than') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.greater-than')"
                                 }, {
                                     'operator': '<',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.less-than') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.less-than')"
                                 }],
                             'datetime': [{
                                     'operator': '==',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to')"
                                 }, {
                                     'operator': '!=',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to')"
                                 }, {
                                     'operator': '>=',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.equals-or-greater-than') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.equals-or-greater-than')"
                                 }, {
                                     'operator': '<=',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.equals-or-less-than') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.equals-or-less-than')"
                                 }, {
                                     'operator': '>',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.greater-than') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.greater-than')"
                                 }, {
                                     'operator': '<',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.less-than') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.less-than')"
                                 }],
                             'select': [{
                                     'operator': '==',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to')"
                                 }, {
                                     'operator': '!=',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to')"
                                 }],
                             'radio': [{
                                     'operator': '==',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to')"
                                 }, {
                                     'operator': '!=',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to')"
                                 }],
                             'multiselect': [{
                                     'operator': '{}',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.contains') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.contains')"
                                 }, {
                                     'operator': '!{}',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.does-not-contain') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.does-not-contain')"
                                 }],
                             'checkbox': [{
                                     'operator': '{}',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.contains') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.contains')"
                                 }, {
                                     'operator': '!{}',
-                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.does-not-contain') }}"
+                                    'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.does-not-contain')"
                                 }]
                         }
                     }

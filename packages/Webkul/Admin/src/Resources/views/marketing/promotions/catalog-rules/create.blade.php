@@ -457,7 +457,7 @@
                 
                 data() {
                     return {
-                        conditionType: "{{ old('condition_type', 0) }}",
+                        conditionType: "{{ old('condition_type', 1) }}",
 
                         conditions: []
                     }
@@ -559,15 +559,15 @@
                                     || matchedAttribute.type == 'decimal'
                                     || matchedAttribute.type == 'integer'"
                             >
-                                <v-field 
-                                    :name="`['conditions[${index}][value]']`"
-                                    v-slot="{ field, errorMessage }"
-                                    :id="`['conditions[${index}][value]']`"
+                                <v-field
+                                    :name="`conditions[${index}][value]`"
+                                    v-slot="{ field, errorMessage}"
+                                    :id="`conditions[${index}][value]`"
                                     :rules="matchedAttribute.type == 'price' ? 'regex:^[0-9]+(\.[0-9]+)?$' : ''
                                         || matchedAttribute.type == 'decimal' ? 'regex:^[0-9]+(\.[0-9]+)?$' : ''
                                         || matchedAttribute.type == 'integer' ? 'regex:^[0-9]+(\.[0-9]+)?$' : ''
                                         || matchedAttribute.type == 'text' ? 'regex:^([A-Za-z0-9_ \'\-]+)$' : ''"
-                                    label="Conditions"
+                                    label="@lang('admin::app.marketing.promotions.catalog-rules.edit.conditions')"
                                     v-model="condition.value"
                                 >
                                     <input 
@@ -579,7 +579,7 @@
                                 </v-field>
                                 
                                 <v-error-message
-                                    :name="`['conditions[${index}][value]']`"
+                                    :name="`conditions[${index}][value]`"
                                     class="mt-1 text-red-500 text-xs italic"
                                     as="p"
                                 />
