@@ -346,13 +346,14 @@
                                 @lang('admin::app.catalog.categories.edit.display-mode')
                             </x-admin::form.control-group.label>
 
-                            @php $selectedValue = old('status') ?: $category->display_mode @endphp
-
+                            @php $selectedValue = old('display_mode') ?: $category->display_mode @endphp
+                            
                             <x-admin::form.control-group.control
                                 type="select"
                                 name="display_mode"
                                 class="cursor-pointer"
                                 rules="required"
+                                :value="$selectedValue"
                                 :label="trans('admin::app.catalog.categories.edit.display-mode')"
                             >
                                 @foreach (['products-and-description', 'products-only', 'description-only'] as $item)
