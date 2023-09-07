@@ -59,9 +59,9 @@
     @case('textarea')
         <v-field
             name="{{ $name }}"
+            value="{{ $slot }}"
             v-slot="{ field }"
             {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
-            value="{{ $slot }}"
         >
             <textarea
                 type="{{ $type }}"
