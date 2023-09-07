@@ -91,7 +91,7 @@ return [
         'key'  => 'sales.invoice_settings',
         'name' => 'admin::app.configuration.index.sales.invoice-settings.title',
         'info' => 'admin::app.configuration.index.sales.invoice-settings.info',
-        'icon' => 'settings/Invoice-Setting.svg',
+        'icon' => 'settings/invoice.svg',
         'sort' => 5,
     ], [
         'key'    => 'sales.invoice_settings.invoice_number',
