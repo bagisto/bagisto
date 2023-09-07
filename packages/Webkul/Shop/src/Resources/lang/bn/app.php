@@ -645,6 +645,7 @@ return [
                 'discount-amount'  => 'ছাড়ের পরিমাণ',
                 'grand-total'      => 'মোট মূল্য',
                 'place-order'      => 'অর্ডার স্থাপন',
+                'processing'       => 'প্রসেসিং',
             ],
         ],
     ],

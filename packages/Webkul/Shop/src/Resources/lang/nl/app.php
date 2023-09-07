@@ -645,6 +645,7 @@ return [
                 'discount-amount'  => '割引額',
                 'grand-total'      => '総計',
                 'place-order'      => '注文を確定',
+                'processing'       => 'Verwerking',
             ],
         ],
     ],
