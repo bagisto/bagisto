@@ -645,6 +645,7 @@ return [
                 'discount-amount'  => 'Discount Amount',
                 'grand-total'      => 'Grand Total',
                 'place-order'      => 'Place Order',
+                'processing'       => 'Processing',
             ],
         ],
     ],
