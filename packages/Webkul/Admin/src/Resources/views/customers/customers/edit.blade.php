@@ -104,7 +104,7 @@
                 <div class="flex gap-[16px] max-sm:flex-wrap">
                     <!-- Phone -->
                     <x-admin::form.control-group class="w-full mb-[10px]">
-                        <x-admin::form.control-group.label class="required">
+                        <x-admin::form.control-group.label>
                             @lang('admin::app.customers.customers.edit.contact-number')
                         </x-admin::form.control-group.label>
 
@@ -113,7 +113,7 @@
                             name="phone"
                             :value="$customer->phone"
                             id="phone"
-                            rules="required|integer"
+                            rules="integer"
                             :label="trans('admin::app.customers.customers.edit.contact-number')"
                             :placeholder="trans('admin::app.customers.customers.edit.contact-number')"
                         >
