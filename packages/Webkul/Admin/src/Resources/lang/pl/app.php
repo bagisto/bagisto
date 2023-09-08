@@ -3179,6 +3179,15 @@ return [
         'dear'   => 'Szanowny(a) :customer_name',
         'thanks' => 'Jeśli potrzebujesz pomocy, skontaktuj się z nami pod adresem <a href=":link" style=":style">:email</a>.<br/>Dziękujemy!',
 
+        'admin' => [
+            'forgot-password' => [
+                'subject'        => 'E-mail resetowania hasła',
+                'greeting'       => 'Zapomniałeś hasła!',
+                'description'    => 'Otrzymujesz ten e-mail, ponieważ otrzymaliśmy prośbę o zresetowanie hasła dla Twojego konta.',
+                'reset-password' => 'Resetuj hasło',
+            ],
+        ],
+
         'orders' => [
             'created' => [
                 'subject'  => 'Potwierdzenie nowego zamówienia',

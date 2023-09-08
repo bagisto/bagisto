@@ -3179,6 +3179,15 @@ return [
         'dear'   => 'Cher :customer_name',
         'thanks' => 'Si vous avez besoin d\'aide, veuillez nous contacter à <a href=":link" style=":style">:email</a>.<br/>Merci !',
 
+        'admin' => [
+            'forgot-password' => [
+                'subject'        => 'E-mail de réinitialisation de mot de passe',
+                'greeting'       => 'Mot de passe oublié !',
+                'description'    => 'Vous recevez cet e-mail car nous avons reçu une demande de réinitialisation de mot de passe pour votre compte.',
+                'reset-password' => 'Réinitialiser le mot de passe',
+            ],
+        ],
+
         'orders' => [
             'created' => [
                 'subject'  => 'Confirmation de nouvelle commande',

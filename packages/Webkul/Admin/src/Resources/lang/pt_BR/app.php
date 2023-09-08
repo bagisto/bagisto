@@ -3179,6 +3179,15 @@ return [
         'dear'   => 'Estimado/a :customer_name',
         'thanks' => 'Si necesita cualquier tipo de ayuda, por favor contáctenos en <a href=":link" style=":style">:email</a>.<br/>¡Gracias!',
 
+        'admin' => [
+            'forgot-password' => [
+                'subject'        => 'Email de Redefinição de Senha',
+                'greeting'       => 'Esqueceu a Senha!',
+                'description'    => 'Está a receber este email porque recebemos um pedido de redefinição de senha para a sua conta.',
+                'reset-password' => 'Redefinir Senha',
+            ],
+        ],
+
         'orders' => [
             'created' => [
                 'subject'  => 'Confirmación de Nuevo Pedido',

@@ -3178,6 +3178,15 @@ return [
     'emails' => [
         'dear'   => 'Caro :customer_name',
         'thanks' => 'Se hai bisogno di assistenza, ti preghiamo di contattarci su <a href=":link" style=":style">:email</a>.<br/>Grazie!',
+
+        'admin' => [
+            'forgot-password' => [
+                'subject'        => 'Email di Ripristino Password',
+                'greeting'       => 'Hai dimenticato la Password!',
+                'description'    => 'Stai ricevendo questa email perché abbiamo ricevuto una richiesta di ripristino password per il tuo account.',
+                'reset-password' => 'Ripristina Password',
+            ],
+        ],
     
         'orders' => [
             'created' => [
