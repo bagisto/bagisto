@@ -214,6 +214,11 @@
                                         :label="trans('admin::app.settings.locales.index.create.direction')"
                                         v-model="locale.direction"
                                     >
+                                        <!-- Default Option -->
+                                        <option value="">
+                                            @lang('admin::app.settings.locales.index.create.select-direction')
+                                        </option>
+
                                         <option value="ltr" selected title="Text direction left to right">LTR</option>
                     
                                         <option value="rtl" title="Text direction right to left">RTL</option>

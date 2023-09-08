@@ -202,6 +202,11 @@
                                         v-model="selectedExchangeRate.target_currency"
                                         :label="trans('admin::app.settings.exchange-rates.index.create.target-currency')"
                                     >
+                                        <!-- Default Option -->
+                                        <option value="">
+                                            @lang('admin::app.settings.exchange-rates.index.create.select-target-currency')
+                                        </option>
+
                                         <option
                                             v-for="currency in currencies"
                                             :value="currency.id"

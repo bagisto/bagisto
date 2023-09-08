@@ -112,6 +112,11 @@
                                         rules="required"
                                         :label="trans('admin::app.marketing.communications.templates.create.status')"
                                     >
+                                        <!-- Default Option -->
+                                        <option value="">
+                                            @lang('admin::app.marketing.communications.templates.create.select-status')
+                                        </option>
+
                                         @foreach (['active', 'inactive', 'draft'] as $state)
                                             <option
                                                 value="{{ $state }}"
