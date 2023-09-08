@@ -578,27 +578,13 @@ return [
                 ],
 
                 'images' => [
-                    'add-image-btn'     => '添加图片',
-                    'allowed-types'     => 'png, jpeg, jpg',
-                    'info'              => '图像分辨率应为 609 像素 X 560 像素',
-                    'not-allowed-error' => '仅允许图像文件（.jpeg、.jpg、.png 等）。',
-                    'title'             => '图片',
-
-                    'placeholders'  => [
-                        'front'     => '正面',
-                        'next'      => '下一个',
-                        'size'      => '尺寸',
-                        'use-cases' => '用途',
-                        'zoom'      => '缩放',
-                    ],
+                    'title' => '图片',
+                    'info'  => '图像分辨率应为 609 像素 X 560 像素',
                 ],
 
                 'videos' => [
-                    'add-video-btn'     => '添加视频',
-                    'allowed-types'     => 'mp4, webm, mkv',
-                    'info'              => '最大视频尺寸应为 :size',
-                    'not-allowed-error' => '仅允许视频文件（.mp4、.mov、.ogg 等）。',
-                    'title'             => '视频',
+                    'title' => '视频',
+                    'info'  => '最大视频尺寸应为 :size',
                 ],
 
                 'links' => [
@@ -661,6 +647,19 @@ return [
                             'sku'             => 'SKU',
                             'status'          => '状态',
                             'weight'          => '重量',
+                        ],
+
+                        'mass-edit' => [
+                            'select-variants'  => '选择变体',
+                            'select-action'    => '选择操作',
+                            'edit-prices'      => '编辑价格',
+                            'edit-inventories' => '编辑库存',
+                            'add-images'       => '添加图片',
+                            'remove-images'    => '移除图片',
+                            'remove-variants'  => '移除变体',
+                            'price'            => '价格',
+                            'apply-to-all-sku' => '将价格应用于所有SKU。',
+                            'apply-to-all-btn' => '应用于全部',
                         ],
                     ],
 
@@ -3034,6 +3033,28 @@ return [
                 'qty'         => ':qty 可用',
             ],
         ],
+
+        'media' => [
+            'images' => [
+                'add-image-btn'     => '添加图片',
+                'allowed-types'     => 'png, jpeg, jpg',
+                'not-allowed-error' => '仅允许图像文件（.jpeg、.jpg、.png 等）。',
+
+                'placeholders'  => [
+                    'front'     => '正面',
+                    'next'      => '下一个',
+                    'size'      => '尺寸',
+                    'use-cases' => '用途',
+                    'zoom'      => '缩放',
+                ],
+            ],
+
+            'videos' => [
+                'add-video-btn'     => '添加视频',
+                'allowed-types'     => 'mp4, webm, mkv',
+                'not-allowed-error' => '仅允许视频文件（.mp4、.mov、.ogg 等）。',
+            ],
+        ]
     ],
 
     'acl' => [

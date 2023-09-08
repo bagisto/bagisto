@@ -578,27 +578,13 @@ return [
                 ],
 
                 'images' => [
-                    'add-image-btn'     => 'Resim Ekle',
-                    'allowed-types'     => 'png, jpeg, jpg',
-                    'info'              => 'Resim çözünürlüğü 609 piksel X 560 piksel gibi olmalıdır',
-                    'not-allowed-error' => 'Yalnızca resim dosyaları (.jpeg, .jpg, .png, ..) izin verilir.',
-                    'title'             => 'Resimler',
-
-                    'placeholders'  => [
-                        'front'     => 'Ön',
-                        'next'      => 'Sonraki',
-                        'size'      => 'Boyut',
-                        'use-cases' => 'Kullanım Alanları',
-                        'zoom'      => 'Yakınlaştırma',
-                    ],
+                    'title' => 'Resimler',
+                    'info'  => 'Resim çözünürlüğü 609 piksel X 560 piksel gibi olmalıdır',
                 ],
 
                 'videos' => [
-                    'add-video-btn'     => 'Video Ekle',
-                    'allowed-types'     => 'mp4, webm, mkv',
-                    'info'              => 'Maksimum video boyutu :size gibi olmalıdır',
-                    'not-allowed-error' => 'Yalnızca video dosyaları (.mp4, .mov, .ogg ..) izin verilir.',
-                    'title'             => 'Videolar',
+                    'title' => 'Videolar',
+                    'info'  => 'Maksimum video boyutu :size gibi olmalıdır',
                 ],
 
                 'links' => [
@@ -661,6 +647,19 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'Durum',
                             'weight'          => 'Ağırlık',
+                        ],
+
+                        'mass-edit' => [
+                            'select-variants'  => 'Varyantları Seç',
+                            'select-action'    => 'Eylemi Seç',
+                            'edit-prices'      => 'Fiyatları Düzenle',
+                            'edit-inventories' => 'Stokları Düzenle',
+                            'add-images'       => 'Resimleri Ekle',
+                            'remove-images'    => 'Resimleri Kaldır',
+                            'remove-variants'  => 'Varyantları Kaldır',
+                            'price'            => 'Fiyat',
+                            'apply-to-all-sku' => 'Tüm SKU\'lara fiyat uygula.',
+                            'apply-to-all-btn' => 'Tümüne Uygula',
                         ],
                     ],
 
@@ -3034,6 +3033,28 @@ return [
                 'qty'         => ':qty Mevcut',
             ],
         ],
+
+        'media' => [
+            'images' => [
+                'add-image-btn'     => 'Resim Ekle',
+                'allowed-types'     => 'png, jpeg, jpg',
+                'not-allowed-error' => 'Yalnızca resim dosyaları (.jpeg, .jpg, .png, ..) izin verilir.',
+
+                'placeholders'  => [
+                    'front'     => 'Ön',
+                    'next'      => 'Sonraki',
+                    'size'      => 'Boyut',
+                    'use-cases' => 'Kullanım Alanları',
+                    'zoom'      => 'Yakınlaştırma',
+                ],
+            ],
+
+            'videos' => [
+                'add-video-btn'     => 'Video Ekle',
+                'allowed-types'     => 'mp4, webm, mkv',
+                'not-allowed-error' => 'Yalnızca video dosyaları (.mp4, .mov, .ogg ..) izin verilir.',
+            ],
+        ]
     ],
 
     'acl' => [

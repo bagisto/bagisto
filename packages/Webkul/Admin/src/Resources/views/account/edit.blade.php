@@ -47,13 +47,9 @@
 
                     {{-- Image --}}
                     <x-admin::form.control-group>
-                        @php
-                            $imageImages = $user->image ? [['id' => 'image', 'url' => $user->image_url]] : [];
-                        @endphp
-
                         <x-admin::media.images
                             name="image"
-                            ::uploaded-images='{{ json_encode($imageImages) }}'
+                            :uploaded-images="$user->image ? [['id' => 'image', 'url' => $user->image_url]] : []"
                         >
                         </x-admin::media.images>
                     </x-admin::form.control-group>

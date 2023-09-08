@@ -578,27 +578,13 @@ return [
                 ],
 
                 'images' => [
-                    'add-image-btn'     => 'Додати зображення',
-                    'allowed-types'     => 'png, jpeg, jpg',
-                    'info'              => 'Роздільна здатність зображення повинна бути приблизно 609px X 560px',
-                    'not-allowed-error' => 'Дозволені тільки файли зображень (.jpeg, .jpg, .png, ..).',
-                    'title'             => 'Зображення',
-
-                    'placeholders' => [
-                        'front'     => 'Зверху',
-                        'next'      => 'Наступний',
-                        'size'      => 'Розмір',
-                        'use-cases' => 'Використання',
-                        'zoom'      => 'Збільшення',
-                    ],
+                    'title' => 'Зображення',
+                    'info'  => 'Роздільна здатність зображення повинна бути приблизно 609px X 560px',
                 ],
 
                 'videos' => [
-                    'add-video-btn'     => 'Додати відео',
-                    'allowed-types'     => 'mp4, webm, mkv',
-                    'info'              => 'Максимальний розмір відео повинен бути приблизно :size',
-                    'not-allowed-error' => 'Дозволені лише файли відео (.mp4, .mov, .ogg ..).',
-                    'title'             => 'Відео',
+                    'title' => 'Відео',
+                    'info'  => 'Максимальний розмір відео повинен бути приблизно :size',
                 ],
 
                 'links' => [
@@ -661,6 +647,19 @@ return [
                             'sku'             => 'Артикул',
                             'status'          => 'Статус',
                             'weight'          => 'Вага',
+                        ],
+
+                        'mass-edit' => [
+                            'select-variants'  => 'Вибрати Варіанти',
+                            'select-action'    => 'Вибрати Дію',
+                            'edit-prices'      => 'Редагувати Ціни',
+                            'edit-inventories' => 'Редагувати Запаси',
+                            'add-images'       => 'Додати Зображення',
+                            'remove-images'    => 'Видалити Зображення',
+                            'remove-variants'  => 'Видалити Варіанти',
+                            'price'            => 'Ціна',
+                            'apply-to-all-sku' => 'Застосувати ціну до всіх SKU.',
+                            'apply-to-all-btn' => 'Застосувати до всіх',
                         ],
                     ],
 
@@ -3034,6 +3033,28 @@ return [
                 'qty'         => ':qty доступно',
             ],
         ],
+
+        'media' => [
+            'images' => [
+                'add-image-btn'     => 'Додати зображення',
+                'allowed-types'     => 'png, jpeg, jpg',
+                'not-allowed-error' => 'Дозволені тільки файли зображень (.jpeg, .jpg, .png, ..).',
+
+                'placeholders' => [
+                    'front'     => 'Зверху',
+                    'next'      => 'Наступний',
+                    'size'      => 'Розмір',
+                    'use-cases' => 'Використання',
+                    'zoom'      => 'Збільшення',
+                ],
+            ],
+
+            'videos' => [
+                'add-video-btn'     => 'Додати відео',
+                'allowed-types'     => 'mp4, webm, mkv',
+                'not-allowed-error' => 'Дозволені лише файли відео (.mp4, .mov, .ogg ..).',
+            ],
+        ]
     ],
 
     'acl' => [

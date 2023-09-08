@@ -1,9 +1,26 @@
-<v-media {{ $attributes }}>
+@props([
+    'name'             => 'images',
+    'allowMultiple'    => false,
+    'showPlaceholders' => false,
+    'uploadedImages'   => [],
+    'width'            => '120px',
+    'height'           => '120px'
+])
+
+<v-media-images
+    name="{{ $name }}"
+    v-bind:allow-multiple="{{ $allowMultiple ? 'true' : 'false' }}"
+    v-bind:show-placeholders="{{ $showPlaceholders ? 'true' : 'false' }}"
+    :uploaded-images='{{ json_encode($uploadedImages) }}'
+    width="{{ $width }}"
+    height="{{ $height }}"
+    {{ $attributes->get('class') }}
+>
     <x-admin::shimmer.image class="w-[110px] h-[110px] rounded-[4px]"></x-admin::shimmer.image>
-</v-media>
+</v-media-images>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-media-template">
+    <script type="text/x-template" id="v-media-images-template">
         <!-- Panel Content -->
         <div class="grid">
             <div class="flex flex-wrap gap-[4px]">
@@ -18,10 +35,10 @@
                         <span class="icon-image text-[24px]"></span>
 
                         <p class="grid text-[14px] text-gray-600 font-semibold text-center">
-                            @lang('admin::app.catalog.products.edit.images.add-image-btn')
+                            @lang('admin::app.components.media.images.add-image-btn')
                             
                             <span class="text-[12px]">
-                                @lang('admin::app.catalog.products.edit.images.allowed-types')
+                                @lang('admin::app.components.media.images.allowed-types')
                             </span>
                         </p>
 
@@ -37,23 +54,46 @@
                     </div>
                 </label>
 
+
                 <!-- Uploaded Images -->
-                <div class="flex gap-[4px]">
-                    <v-product-image-item
-                        v-for="(image, index) in images"
-                        :name="name"
-                        :index="index"
-                        :image="image"
-                        :width="width"
-                        :height="height"
-                        @onRemove="remove($event)"
-                    ></v-product-image-item>
-                </div>
+                <draggable
+                    class="flex gap-[4px]"
+                    ghost-class="draggable-ghost"
+                    v-bind="{animation: 200}"
+                    :list="images"
+                    item-key="id"
+                >
+                    <template #item="{ element, index }">
+                        <v-media-image-item
+                            :name="name"
+                            :index="index"
+                            :image="element"
+                            :width="width"
+                            :height="height"
+                            @onRemove="remove($event)"
+                        ></v-media-image-item>
+                    </template>
+                </draggable>
+
+                <!-- Placeholders -->
+                <template v-if="showPlaceholders && ! images.length">
+                    <!-- Front Placeholder -->
+                    <div
+                        class="w-full h-[120px] max-w-[120px] min-w-[120px] max-h-[120px] relative border border-dashed border-gray-300 rounded-[4px]"
+                        v-for="placeholder in placeholders"
+                    >
+                        <img :src="placeholder.image">
+
+                        <p class="w-full absolute bottom-[15px] text-[12px] text-gray-400 text-center font-semibold">
+                            @{{ placeholder.label }}
+                        </p>
+                    </div>
+                </template>
             </div>
         </div>  
     </script>
 
-    <script type="text/x-template" id="v-product-image-item-template">
+    <script type="text/x-template" id="v-media-image-item-template">
         <div class="grid justify-items-center min-w-[120px] max-h-[120px] relative rounded-[4px] overflow-hidden transition-all hover:border-gray-400 group">
             <!-- Image Preview -->
             <img
@@ -95,16 +135,21 @@
     </script>
 
     <script type="module">
-        app.component('v-media', {
-            template: '#v-media-template',
+        app.component('v-media-images', {
+            template: '#v-media-images-template',
 
             props: {
                 name: {
                     type: String, 
-                    default: 'attachments',
-                }, 
+                    default: 'images',
+                },
 
                 allowMultiple: {
+                    type: Boolean,
+                    default: false,
+                },
+
+                showPlaceholders: {
                     type: Boolean,
                     default: false,
                 },
@@ -125,14 +170,36 @@
                 }
             },
 
-            mounted() {
-                this.images = this.uploadedImages;
-            },
-
             data() {
                 return {
                     images: [],
+
+                    placeholders: [
+                        {
+                            label: "@lang('admin::app.components.media.images.placeholders.front')",
+                            image: "{{ bagisto_asset('images/product-placeholders/front.svg') }}"
+                        }, {
+                            label: "@lang('admin::app.components.media.images.placeholders.next')",
+                            image: "{{ bagisto_asset('images/product-placeholders/next-1.svg') }}"
+                        }, {
+                            label: "@lang('admin::app.components.media.images.placeholders.next')",
+                            image: "{{ bagisto_asset('images/product-placeholders/next-2.svg') }}"
+                        }, {
+                            label: "@lang('admin::app.components.media.images.placeholders.zoom')",
+                            image: "{{ bagisto_asset('images/product-placeholders/zoom.svg') }}"
+                        }, {
+                            label: "@lang('admin::app.components.media.images.placeholders.use-cases')",
+                            image: "{{ bagisto_asset('images/product-placeholders/use-cases.svg') }}"
+                        }, {
+                            label: "@lang('admin::app.components.media.images.placeholders.size')",
+                            image: "{{ bagisto_asset('images/product-placeholders/size.svg') }}"
+                        }
+                    ]
                 }
+            },
+
+            mounted() {
+                this.images = this.uploadedImages;
             },
 
             methods: {
@@ -148,7 +215,7 @@
                     if (! validFiles) {
                         this.$emitter.emit('add-flash', {
                             type: 'warning',
-                            message: "@lang('admin::app.catalog.products.edit.images.not-allowed-error')"
+                            message: "@lang('admin::app.components.media.images.not-allowed-error')"
                         });
 
                         return;
@@ -171,8 +238,8 @@
             }
         });
 
-        app.component('v-product-image-item', {
-            template: '#v-product-image-item-template',
+        app.component('v-media-image-item', {
+            template: '#v-media-image-item-template',
 
             props: ['index', 'image', 'name', 'width', 'height'],
 
@@ -197,7 +264,7 @@
                     if (! validFiles) {
                         this.$emitter.emit('add-flash', {
                             type: 'warning',
-                            message: "@lang('admin::app.catalog.products.edit.images.not-allowed-error')"
+                            message: "@lang('admin::app.components.media.images.not-allowed-error')"
                         });
 
                         return;

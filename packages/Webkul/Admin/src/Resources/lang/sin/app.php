@@ -578,27 +578,13 @@ return [
                 ],
 
                 'images' => [
-                    'add-image-btn'     => 'රූපය එකතු කරන්න',
-                    'allowed-types'     => 'png, jpeg, jpg',
-                    'info'              => 'රූපයේ අවිස්සාව 609px X 560px වේ',
-                    'not-allowed-error' => 'එක්සත් ගොනුවේ පමණ (.jpeg, .jpg, .png, ..) වල ගොනුවක් සඳහා සමීක්ෂා කළ යුතුය.',
-                    'title'             => 'රූපයන්',
-
-                    'placeholders'  => [
-                        'front'     => 'මුර',
-                        'next'      => 'ඊළඟ',
-                        'size'      => 'ප්‍රමාණය',
-                        'use-cases' => 'භාවිතා කිරීම්',
-                        'zoom'      => 'ස්මෙයිල්',
-                    ],
+                    'title' => 'රූපයන්',
+                    'info'  => 'රූපයේ අවිස්සාව 609px X 560px වේ',
                 ],
 
                 'videos' => [
-                    'add-video-btn'     => 'වීඩියෝ එකතු කරන්න',
-                    'allowed-types'     => 'mp4, webm, mkv',
-                    'info'              => 'උපරිම වීඩියෝ ප්‍රමාණය :size වේ',
-                    'not-allowed-error' => 'වීඩියෝ ගොනුවේ පමණ (.mp4, .mov, .ogg ..) වල ගොනුවක් සඳහා සමීක්ෂා කළ යුතුය.',
-                    'title'             => 'වීඩියෝ',
+                    'title' => 'වීඩියෝ',
+                    'info'  => 'උපරිම වීඩියෝ ප්‍රමාණය :size වේ',
                 ],
 
                 'links' => [
@@ -661,6 +647,19 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'ස්ථානය',
                             'weight'          => 'බර',
+                        ],
+
+                        'mass-edit' => [
+                            'select-variants'  => 'වෛර තෝරන්න',
+                            'select-action'    => 'ක්‍රියාකාරකය තෝරන්න',
+                            'edit-prices'      => 'මිල සංස්කරණය කරන්න',
+                            'edit-inventories' => 'අනුයුක්ත සංස්කරණය කරන්න',
+                            'add-images'       => 'රූප එකතු කරන්න',
+                            'remove-images'    => 'රූප ඉවත් කරන්න',
+                            'remove-variants'  => 'වෛර ඉවත් කරන්න',
+                            'price'            => 'මිල',
+                            'apply-to-all-sku' => 'සෑම SKU වලටයිද මිලට අනුමුටු කරන්න.',
+                            'apply-to-all-btn' => 'සෑම වලටයිද අනුමුටු',
                         ],
                     ],
 
@@ -3034,6 +3033,28 @@ return [
                 'qty' => ':qty ලබාදුයි',
             ],
         ],
+
+        'media' => [
+            'images' => [
+                'add-image-btn'     => 'රූපය එකතු කරන්න',
+                'allowed-types'     => 'png, jpeg, jpg',
+                'not-allowed-error' => 'එක්සත් ගොනුවේ පමණ (.jpeg, .jpg, .png, ..) වල ගොනුවක් සඳහා සමීක්ෂා කළ යුතුය.',
+
+                'placeholders'  => [
+                    'front'     => 'මුර',
+                    'next'      => 'ඊළඟ',
+                    'size'      => 'ප්‍රමාණය',
+                    'use-cases' => 'භාවිතා කිරීම්',
+                    'zoom'      => 'ස්මෙයිල්',
+                ],
+            ],
+
+            'videos' => [
+                'add-video-btn'     => 'වීඩියෝ එකතු කරන්න',
+                'allowed-types'     => 'mp4, webm, mkv',
+                'not-allowed-error' => 'වීඩියෝ ගොනුවේ පමණ (.mp4, .mov, .ogg ..) වල ගොනුවක් සඳහා සමීක්ෂා කළ යුතුය.',
+            ],
+        ]
     ],
 
     'acl' => [
