@@ -36,7 +36,7 @@ class ForgetPasswordController extends Controller
      */
     public function store()
     {
-        // try {
+        try {
             $this->validate(request(), [
                 'email' => 'required|email',
             ]);
@@ -56,11 +56,11 @@ class ForgetPasswordController extends Controller
                 ->withErrors([
                     'email' => trans('admin::app.users.forget-password.create.email-not-exist'),
                 ]);
-        // } catch (\Exception $e) {
-        //     session()->flash('error', trans($e->getMessage()));
+        } catch (\Exception $e) {
+            session()->flash('error', trans($e->getMessage()));
 
-        //     return redirect()->back();
-        // }
+            return redirect()->back();
+        }
     }
 
     /**
