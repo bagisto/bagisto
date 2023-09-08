@@ -133,9 +133,9 @@ class CustomerController extends Controller
 
         Event::dispatch('customer.update.after', $customer);
 
-        return new JsonResource([
-            'message' => trans('admin::app.customers.customers.update-success'),
-        ]);
+        session()->flash('success', trans('admin::app.customers.customers.update-success'));
+
+        return redirect()->back();
     }
 
     /**
