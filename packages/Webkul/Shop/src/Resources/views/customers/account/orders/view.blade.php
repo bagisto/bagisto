@@ -929,7 +929,7 @@
                 </p>
 
                 <p class="text-[14px]">
-                    {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
+                    {{ core()->getConfigData('sales.payment_methods.' . $order->payment->method . '.title') }}
                 </p>
 
                 @if (! empty($additionalDetails))

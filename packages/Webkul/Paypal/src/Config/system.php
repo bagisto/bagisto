@@ -2,7 +2,7 @@
 
 return [
     [
-        'key'    => 'sales.paymentmethods.paypal_standard',
+        'key'    => 'sales.payment_methods.paypal_standard',
         'name'   => 'admin::app.configuration.index.sales.payment-methods.paypal-standard',
         'info'   => 'admin::app.configuration.index.sales.payment-methods.paypal-standard-info',
         'sort'   => 3,
@@ -64,7 +64,7 @@ return [
             ]
         ]
     ], [
-        'key'    => 'sales.paymentmethods.paypal_smart_button',
+        'key'    => 'sales.payment_methods.paypal_smart_button',
         'name'   => 'admin::app.configuration.index.sales.payment-methods.paypal-smart-button',
         'info'   => 'admin::app.configuration.index.sales.payment-methods.paypal-smart-button-info',
         'sort'   => 0,

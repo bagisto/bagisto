@@ -36,23 +36,23 @@ class GenerateInvoice
     {
         if (
             $order->payment->method == 'cashondelivery'
-            && core()->getConfigData('sales.paymentmethods.cashondelivery.generate_invoice')
+            && core()->getConfigData('sales.payment_methods.cashondelivery.generate_invoice')
         ) {
             $this->invoiceRepository->create(
                 $this->prepareInvoiceData($order),
-                core()->getConfigData('sales.paymentmethods.cashondelivery.invoice_status'),
-                core()->getConfigData('sales.paymentmethods.cashondelivery.order_status')
+                core()->getConfigData('sales.payment_methods.cashondelivery.invoice_status'),
+                core()->getConfigData('sales.payment_methods.cashondelivery.order_status')
             );
         }
 
         if (
             $order->payment->method == 'moneytransfer'
-            && core()->getConfigData('sales.paymentmethods.moneytransfer.generate_invoice')
+            && core()->getConfigData('sales.payment_methods.moneytransfer.generate_invoice')
         ) {
             $this->invoiceRepository->create(
                 $this->prepareInvoiceData($order),
-                core()->getConfigData('sales.paymentmethods.moneytransfer.invoice_status'),
-                core()->getConfigData('sales.paymentmethods.moneytransfer.order_status')
+                core()->getConfigData('sales.payment_methods.moneytransfer.invoice_status'),
+                core()->getConfigData('sales.payment_methods.moneytransfer.order_status')
             );
         }
     }

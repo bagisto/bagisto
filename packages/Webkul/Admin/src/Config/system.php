@@ -908,13 +908,13 @@ return [
             ],
         ],
     ], [
-        'key'  => 'sales.paymentmethods',
+        'key'  => 'sales.payment_methods',
         'name' => 'admin::app.configuration.index.sales.payment-methods.page-title',
         'info' => 'admin::app.configuration.index.sales.payment-methods.info',
         'icon' => 'settings/payment-method.svg',
         'sort' => 3,
     ], [
-        'key'    => 'sales.paymentmethods.cashondelivery',
+        'key'    => 'sales.payment_methods.cashondelivery',
         'name'   => 'admin::app.configuration.index.sales.payment-methods.cash-on-delivery',
         'info'   => 'admin::app.configuration.index.sales.payment-methods.cash-on-delivery-info',
         'sort'   => 1,
@@ -1011,7 +1011,7 @@ return [
             ],
         ],
     ], [
-        'key'    => 'sales.paymentmethods.moneytransfer',
+        'key'    => 'sales.payment_methods.moneytransfer',
         'name'   => 'admin::app.configuration.index.sales.payment-methods.money-transfer',
         'info'   => 'admin::app.configuration.index.sales.payment-methods.money-transfer-info',
         'sort'   => 2,

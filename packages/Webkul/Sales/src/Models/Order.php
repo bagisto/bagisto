@@ -353,14 +353,14 @@ class Order extends Model implements OrderContract
     {
         if (
             $this->payment->method == 'cashondelivery'
-            && core()->getConfigData('sales.paymentmethods.cashondelivery.generate_invoice')
+            && core()->getConfigData('sales.payment_methods.cashondelivery.generate_invoice')
         ) {
             return false;
         }
 
         if (
             $this->payment->method == 'moneytransfer'
-            && core()->getConfigData('sales.paymentmethods.moneytransfer.generate_invoice')
+            && core()->getConfigData('sales.payment_methods.moneytransfer.generate_invoice')
         ) {
             return false;
         }
