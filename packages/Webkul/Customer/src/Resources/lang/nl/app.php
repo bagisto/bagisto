@@ -22,21 +22,4 @@ return [
         'reset_link_sent' => 'We hebben de link voor het opnieuw instellen van uw wachtwoord per e-mail verzonden.',
         'email_not_exist' => "We kunnen geen gebruiker met dat e-mailadres vinden",
     ],
-
-    'admin' => [
-        'system' => [
-            'captcha' => [
-                'title' => 'Captcha',
-                'credentials' => 'Inloggegevens',
-                'site-key' => 'Sitesleutel',
-                'secret-key' => 'Geheime sleutel',
-                'status' => 'Toestand',
-
-                'validations' => [
-                    'required' => 'Selecteer CAPTCHA',
-                    'captcha' => 'Er is iets fout gegaan! Probeer het opnieuw.',
-                ]
-            ],
-        ],
-    ],
 ];

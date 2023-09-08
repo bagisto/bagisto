@@ -2609,35 +2609,51 @@ return [
             'enable-at-least-one-payment'  => 'Enable at least one payment method.',
 
             'general' => [
+                'title' => 'General',
+                'info'  => 'Set units options.',
+
                 'general' => [
-                    'title'             => 'General',
-                    'info'              => 'Set units options.',
-                    'unit-options'      => 'Unit Options',
-                    'unit-options-info' => 'Size, color, material, customization, enhancing customer satisfaction and tailoring purchases.',
-                    'weight-unit'       => 'Weight Unit',
+                    'title' => 'General',
+                    'info'  => 'Set units options.',
+
+                    'unit-options' => [
+                        'info'              => 'Set units options.',
+                        'title'             => 'Unit Options',
+                        'title-info' => 'Size, color, material, customization, enhancing customer satisfaction and tailoring purchases.',
+                        'weight-unit'       => 'Weight Unit',
+                    ],
                 ],
 
                 'content' => [
-                    'title'               => 'Content',
-                    'info'                => 'Set compare options, wishlist options, image search options, footer, toggle footer and custom scripts.',
-                    'custom-scripts'      => 'Custom Scripts',
-                    'custom-scripts-info' => 'Custom scripts are personalized pieces of code created to add specific functions or features to software, enhancing its capabilities uniquely.',
-                    'custom-css'          => 'Custom CSS',
-                    'custom-javascript'   => 'Custom Javascript',
-                    'compare-options'     => 'Compare options',
-                    'wishlist-options'    => 'Wishlist options',
-                    'image-search-option' => 'Image Search Option',
-                    'settings-title'      => 'Settings',
-                    'settings-title-info' => 'Settings refer to configurable choices that control how a system, application, or device behaves, tailored to user preferences and requirements.',
+                    'title' => 'Content',
+                    'info'  => 'Set compare options, wishlist options, image search options, footer, toggle footer and custom scripts.',
+
+                    'settings' => [
+                        'title'               => 'Settings',
+                        'title-info'          => 'Settings refer to configurable choices that control how a system, application, or device behaves, tailored to user preferences and requirements.',
+                        'compare-options'     => 'Compare options',
+                        'wishlist-options'    => 'Wishlist options',
+                        'image-search-option' => 'Image Search Option',
+                    ],
+
+                    'custom-scripts' => [
+                        'title'             => 'Custom Scripts',
+                        'title-info'        => 'Custom scripts are personalized pieces of code created to add specific functions or features to software, enhancing its capabilities uniquely.',
+                        'custom-css'        => 'Custom CSS',
+                        'custom-javascript' => 'Custom Javascript',
+                    ],
                 ],
 
                 'design' => [
-                    'title'           => 'Design',
-                    'info'            => 'Set logo and favicon icon.',
-                    'admin-logo'      => 'Admin Logo',
-                    'admin-logo-info' => 'Admin logo is the distinctive image or emblem representing the administration interface of a system or website, often customizable.',
-                    'logo-image'      => 'Logo Image',
-                    'favicon'         => 'Favicon',
+                    'title' => 'Design',
+                    'info'  => 'Set logo and favicon icon.',
+
+                    'admin-logo' => [
+                        'title'           => 'Admin Logo',
+                        'title-info'      => 'Admin logo is the distinctive image or emblem representing the administration interface of a system or website, often customizable.',
+                        'logo-image'      => 'Logo Image',
+                        'favicon'         => 'Favicon',
+                    ],
                 ],
             ],
 
@@ -2646,82 +2662,140 @@ return [
                 'info'  => 'Catalog',
 
                 'inventory' => [
-                    'title'              => 'Inventory',
-                    'info'               => 'Set back orders',
-                    'stock-options'      => 'Stock Options',
-                    'stock-options-info' => 'Stock options are investment contracts that grant the right to buy or sell company shares at a predetermined price, influencing potential profits.',
-                    'allow-back-orders'  => 'Allow Back orders',
+                    'title' => 'Inventory',
+                    'info'  => 'Set back orders',
+
+                    'stock-options' => [
+                        'title'      => 'Stock Options',
+                        'title-info' => 'Stock options are investment contracts that grant the right to buy or sell company shares at a predetermined price, influencing potential profits.',
+                        'allow-back-orders'  => 'Allow Back orders',
+                    ],
                 ],
 
                 'products' => [
-                    'title'                              => 'Products',
-                    'info'                               => 'Set guest checkout, homepage, product view page, cart view page, store front, review and attribute social share.',
-                    'guest-checkout'                     => 'Guest Checkout',
-                    'guest-checkout-info'                => 'Guest checkout allows customers to buy products without creating an account, streamlining the purchase process for convenience and faster transactions.',
-                    'allow-guest-checkout'               => 'Allow Guest Checkout',
-                    'allow-guest-checkout-hint'          => 'Hint: If turned on, this option can be configured for each product specifically.',
-                    'attribute'                          => 'Attribute',
-                    'homepage'                           => 'Homepage configuration',
-                    'homepage-info'                      => 'Homepage configuration involves customizing the layout, content, and design of a website\'s main page to present desired information effectively.',
-                    'allow-no-of-new-products'           => 'Allowed number of New Product in Homepage',
-                    'allow-no-of-featured-products'      => 'Allowed number of Featured Product in Homepage',
-                    'allow-no-of-related-products'       => 'Allowed number of Related Products',
-                    'allow-no-of-up-sells-products'      => 'Allowed number of Up-Sell Products',
-                    'allow-no-of-cross-sells-products'   => 'Allowed number of Cross-Sell Products',
-                    'product-view-page'                  => 'Product view page configuration',
-                    'product-view-page-info'             => 'Product view page configuration entails adjusting the layout and elements on a product\'s display page, enhancing user experience and information presentation.',
-                    'cart-view-page'                     => 'Cart view page configuration',
-                    'cart-view-page-info'                => 'Cart view page configuration involves arranging items, details, and options on the shopping cart page, improving user interaction and purchase flow.',
-                    'storefront'                         => 'Storefront',
-                    'storefront-info'                    => 'Storefront is the customer-facing interface of an online shop, showcasing products, categories, and navigation for a seamless shopping experience.',
-                    'search-mode'                        => 'Search Mode',
-                    'flat'                               => 'Flat Table',
-                    'elastic'                            => 'Elastic Search',
-                    'default-list-mode'                  => 'Default List Mode',
-                    'grid'                               => 'Grid',
-                    'list'                               => 'List',
-                    'products-per-page'                  => 'Products Per Page',
-                    'sort-by'                            => 'Sort By',
-                    'from-z-a'                           => 'From Z-A',
-                    'from-a-z'                           => 'From A-Z',
-                    'latest-first'                       => 'Newest First',
-                    'oldest-first'                       => 'Oldest First',
-                    'cheapest-first'                     => 'Cheapest First',
-                    'expensive-first'                    => 'Expensive First',
-                    'buy-now-button-display'             => 'Allow customers to directly buy products',
-                    'cache-small-image'                  => 'Small Image',
-                    'cache-small-image-info'             => 'Storefront is the customer-facing interface of an online shop, showcasing products, categories, and navigation for a seamless shopping experience.',
-                    'width'                              => 'Width',
-                    'height'                             => 'Height',
-                    'cache-medium-image'                 => 'Medium Image',
-                    'cache-medium-image-info'            => 'Medium image refers to a moderate-sized picture that offers a balance between detail and screen space, commonly used for visuals.',
-                    'cache-large-image'                  => 'Large image',
-                    'cache-large-image-info'             => 'Large image represents a high-resolution picture providing enhanced detail and visual impact, often used for showcasing products or graphics.',
-                    'review'                             => 'Review',
-                    'review-info'                        => 'Evaluation or assessment of something, often involving opinions and feedback.',
-                    'allow-guest-review'                 => 'Allow Guest Review',
-                    'attribute-info'                     => 'Characteristic or property that defines an object, influencing its behavior, appearance, or function.',
-                    'image-upload-size'                  => 'Allowed Image Upload Size (in Kb)',
-                    'file-upload-size'                   => 'Allowed File Upload Size (in Kb)',
-                    'comma-separated'                    => 'Comma Separated',
+                    'title' => 'Products',
+                    'info'  => 'Set guest checkout, homepage, product view page, cart view page, store front, review and attribute social share.',
+
+                    'guest-checkout' => [
+                        'title'                     => 'Guest Checkout',
+                        'title-info'                => 'Guest checkout allows customers to buy products without creating an account, streamlining the purchase process for convenience and faster transactions.',
+                        'allow-guest-checkout'      => 'Allow Guest Checkout',
+                        'allow-guest-checkout-hint' => 'Hint: If turned on, this option can be configured for each product specifically.',
+                    ],
+
+                    'homepage' => [
+                        'allow-no-of-new-products'       => 'Allowed number of New Product in Homepage',
+                        'allow-no-of-featured-products'  => 'Allowed number of Featured Product in Homepage',
+                        'title'                          => 'Homepage configuration',
+                        'title-info'                     => 'Homepage configuration involves customizing the layout, content, and design of a website’s main page to present desired information effectively.',
+                    ],
+
+                    'product-view-page' => [
+                        'allow-no-of-related-products'  => 'Allowed number of Related Products',
+                        'allow-no-of-up-sells-products' => 'Allowed number of Up-Sell Products',
+                        'title'                         => 'Product view page configuration',
+                        'title-info'                    => 'Product view page configuration entails adjusting the layout and elements on a product\'s display page, enhancing user experience and information presentation.',
+                    ],
+
+                    'cart-view-page' => [
+                        'allow-no-of-cross-sells-products' => 'Allowed number of Cross-Sell Products',
+                        'title'                            => 'Cart view page configuration',
+                        'title-info'                       => 'Cart view page configuration involves arranging items, details, and options on the shopping cart page, improving user interaction and purchase flow.',
+                    ],
+
+                    'storefront' => [
+                        'buy-now-button-display' => 'Allow customers to directly buy products',
+                        'comma-separated'        => 'Comma Separated',
+                        'cheapest-first'         => 'Cheapest First',
+                        'default-list-mode'      => 'Default List Mode',
+                        'expensive-first'        => 'Expensive First',
+                        'elastic'                => 'Elastic Search',
+                        'flat'                   => 'Flat Table',
+                        'from-z-a'               => 'From Z-A',
+                        'from-a-z'               => 'From A-Z',
+                        'grid'                   => 'Grid',
+                        'list'                   => 'List',
+                        'latest-first'           => 'Newest First',
+                        'oldest-first'           => 'Oldest First',
+                        'products-per-page'      => 'Products Per Page',
+                        'sort-by'                => 'Sort By',
+                        'search-mode'            => 'Search Mode',
+                        'title'                  => 'Storefront',
+                        'title-info'             => 'Storefront is the customer-facing interface of an online shop, showcasing products, categories, and navigation for a seamless shopping experience.',
+                    ],
+
+                    'small-image' => [
+                        'height'     => 'Height',
+                        'title'      => 'Small Image',
+                        'title-info' => 'Storefront is the customer-facing interface of an online shop, showcasing products, categories, and navigation for a seamless shopping experience.',
+                        'width'      => 'Width',
+                    ],
+
+                    'medium-image' => [
+                        'height'     => 'Height',
+                        'title'      => 'Medium Image',
+                        'title-info' => 'Medium image refers to a moderate-sized picture that offers a balance between detail and screen space, commonly used for visuals.',
+                        'width'      => 'Width',
+                    ],
+
+                    'large-image' => [
+                        'width'      => 'Width',
+                        'height'     => 'Height',
+                        'title'      => 'Large image',
+                        'title-info' => 'Large image represents a high-resolution picture providing enhanced detail and visual impact, often used for showcasing products or graphics.',
+                    ],
+
+                    'review' => [
+                        'allow-guest-review' => 'Allow Guest Review',
+                        'title'              => 'Review',
+                        'title-info'         => 'Evaluation or assessment of something, often involving opinions and feedback.',
+                    ],
+
+                    'attribute' => [
+                        'file-upload-size'  => 'Allowed File Upload Size (in Kb)',
+                        'image-upload-size' => 'Allowed Image Upload Size (in Kb)',
+                        'title'             => 'Attribute',
+                        'title-info'        => 'Characteristic or property that defines an object, influencing its behavior, appearance, or function.',
+                    ],
+
+                    'social-share'                       => [
+                        'enable-social-share'    => 'Enable Social Share?',
+                        'enable-share-facebook'  => 'Enable Share in Facebook?',
+                        'enable-share-twitter'   => 'Enable Share in Twitter?',
+                        'enable-share-pinterest' => 'Enable Share in Pinterest?',
+                        'enable-share-whatsapp'  => 'Enable Share in What\'s App?',
+                        'enable-share-linkedin'  => 'Enable Share in Linkedin?',
+                        'enable-share-email'     => 'Enable Share in Email?',
+                        'share-message'          => 'Share Message',
+                        'share'                  => 'Share',
+                        'title'                  => 'Social Share',
+                        'title-info'             => 'Sharing things from a website with friends on social media platforms like Facebook, Twitter, or Instagram.',
+                    ],
                 ],
 
                 'rich-snippets' => [
                     'title'                     => 'Rich Snippets',
                     'info'                      => 'Set products and categories.',
-                    'products'                  => 'Products',
-                    'rich-snippet-product-info' => 'Items available for purchase or use, offered by a business or seller.',
-                    'enable'                    => 'Enable',
-                    'show-weight'               => 'Show Weight',
-                    'show-categories'           => 'Show Categories',
-                    'show-images'               => 'Show Images',
-                    'show-reviews'              => 'Show Reviews',
-                    'show-ratings'              => 'Show Ratings',
-                    'show-offers'               => 'Show Offers',
-                    'show-sku'                  => 'Show SKU',
-                    'categories'                => 'Categories',
-                    'categories-info'           => '"Categories" refer to groups or classifications that help organize and group similar products or items together for easier browsing and navigation.',
-                    'show-search-input-field'   => 'Show Search Input Field',
+
+                    'products' => [
+                        'title'           => 'Products',
+                        'title-info'      => 'Items available for purchase or use, offered by a business or seller.',
+                        'enable'          => 'Enable',
+                        'show-weight'     => 'Show Weight',
+                        'show-categories' => 'Show Categories',
+                        'show-images'     => 'Show Images',
+                        'show-reviews'    => 'Show Reviews',
+                        'show-ratings'    => 'Show Ratings',
+                        'show-offers'     => 'Show Offers',
+                        'show-sku'        => 'Show SKU',
+                    ],
+
+                    'categories' => [
+                        'enable'                  => 'Enable',
+                        'title'                   => 'Categories',
+                        'title-info'              => '"Categories" refer to groups or classifications that help organize and group similar products or items together for easier browsing and navigation.',
+                        'show-search-input-field' => 'Show Search Input Field',
+                    ],
                 ],
             ],
 
@@ -2743,6 +2817,21 @@ return [
                     'street-lines'       => 'Lines in a Street Address',
                 ],
 
+                'captcha'  => [
+                    'title'            => 'Captcha',
+                    'info'             => 'Set site key, secret key and status.',
+                    'credentials'      => 'Credentials',
+                    'credentials-info' => '"Sitemap: Website layout map for search engines. Secret key: Secure code for data encryption, authentication, or API access protection."',
+                    'site-key'         => 'Site Key',
+                    'secret-key'       => 'Secret Key',
+                    'status'           => 'Status',
+
+                    'validations' => [
+                        'required' => 'Please select CAPTCHA',
+                        'captcha'  => 'Something went wrong! Please try again.',
+                    ]
+                ],
+
                 'settings' => [
                     'title'                   => 'Settings',
                     'settings-info'           => 'Set wishlist, newsletter subscriptions, email verifications and social login.',
@@ -2755,6 +2844,16 @@ return [
                     'email'                   => 'Email Verification',
                     'email-info'              => '"Email verification" confirms the authenticity of an email address, often by sending a confirmation link, enhancing account security and communication reliability.',
                     'email-verification'      => 'Allow Email Verification',
+
+                    'social-login' => [
+                        'social-login'      => 'Social Login',
+                        'social-login-info' => '"Social login" enables users to access websites using their social media accounts, streamlining registration and login processes for convenience.',
+                        'enable-facebook'   => 'Enable Facebook',
+                        'enable-twitter'    => 'Enable Twitter',
+                        'enable-google'     => 'Enable Google',
+                        'enable-linkedin'   => 'Enable LinkedIn',
+                        'enable-github'     => 'Enable Github'
+                    ],
                 ],
             ],
 
@@ -2899,6 +2998,20 @@ return [
                     'maximum-limit-of-reminders'       => 'Maximum limit of reminders',
                     'interval-between-reminders'       => 'Interval between reminders',
                 ],
+            ],
+
+            'taxes' => [
+                'title'                             => 'Taxes',
+                'catalogue'                         => 'Catalog',
+                'catalogue-info'                    => 'Set pricing and default location calculations',
+                'pricing'                           => 'Pricing',
+                'pricing-info'                      => 'Details about the cost of goods or services, including base price, discounts, taxes, and additional charges.information',
+                'tax-inclusive'                     => 'Tax inclusive',
+                'default-location-calculation'      => 'Default Location Calculation',
+                'default-location-calculation-info' => 'Automated determination of a standard or initial location based on predefined factors or settings.',
+                'default-country'                   => 'Default Country',
+                'default-state'                     => 'Default State',
+                'default-post-code'                 => 'Default Post Code',
             ],
         ],
     ],

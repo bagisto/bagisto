@@ -22,21 +22,4 @@ return [
         'reset_link_sent' => 'Abbiamo inviato un\'e-mail con il link per reimpostare la password.',
         'email_not_exist' => "Non riusciamo a trovare un utente con quell'indirizzo e-mail",
     ],
-
-    'admin' => [
-        'system' => [
-            'captcha' => [
-                'title' => 'Captcha',
-                'credentials' => 'Credenziali',
-                'site-key' => 'Chiave del sito',
-                'secret-key' => 'Chiave segreta',
-                'status' => 'Stato',
-
-                'validations' => [
-                    'required' => 'Seleziona CAPTCHA',
-                    'captcha' => 'Qualcosa è andato storto! Per favore riprova.',
-                ]
-            ],
-        ],
-    ],
 ];

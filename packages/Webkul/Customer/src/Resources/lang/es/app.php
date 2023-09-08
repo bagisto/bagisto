@@ -22,21 +22,4 @@ return [
         'reset_link_sent' => 'Hemos enviado un correo electrónico con el enlace para restablecer la contraseña.',
         'email_not_exist' => "No podemos encontrar un usuario con esa dirección de correo electrónico",
     ],
-
-    'admin' => [
-        'system' => [
-            'captcha' => [
-                'title' => 'Captcha',
-                'credentials' => 'Cartas credenciales',
-                'site-key' => 'Clave del sitio',
-                'secret-key' => 'Llave secreta',
-                'status' => 'Estado',
-
-                'validations' => [
-                    'required' => 'Seleccione CAPTCHA',
-                    'captcha' => '¡Algo salió mal! Inténtalo de nuevo.',
-                ]
-            ],
-        ],
-    ],
 ];

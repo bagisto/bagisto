@@ -22,21 +22,4 @@ return [
         'reset_link_sent' => 'Wir haben Ihren Link zum Zurücksetzen des Passworts per E-Mail gesendet.',
         'email_not_exist' => "Wir können keinen Benutzer mit dieser E-Mail-Adresse finden",
     ],
-
-    'admin' => [
-        'system' => [
-            'captcha' => [
-                'title' => 'Captcha',
-                'credentials' => 'Referenzen',
-                'site-key' => 'Site-Schlüssel',
-                'secret-key' => 'Geheimer Schlüssel',
-                'status' => 'Status',
-
-                'validations' => [
-                    'required' => 'Bitte wählen Sie CAPTCHA',
-                    'captcha' => 'Etwas ist schief gelaufen! Bitte versuche es erneut.',
-                ]
-            ],
-        ],
-    ],
 ];

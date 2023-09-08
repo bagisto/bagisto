@@ -16,7 +16,5 @@ class TaxServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
         $this->loadFactoriesFrom(__DIR__ . '/../Database/Factories');
-        
-        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'tax');
     }
 }
