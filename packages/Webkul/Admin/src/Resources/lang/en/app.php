@@ -1374,6 +1374,8 @@ return [
                 'save-btn-title'   => 'Save Address',
             ],
 
+            'create-success'      => 'Address Created Successfully',
+            'update-success'      => 'Address Updated Successfully',
             'success-mass-delete' => 'Address Mass Delete Successfully',
         ],
     ],

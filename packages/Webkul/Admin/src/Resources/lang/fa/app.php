@@ -1374,6 +1374,8 @@ return [
                 'save-btn-title'   => 'ذخیره آدرس',
             ],
 
+            'create-success'      => 'آدرس با موفقیت ایجاد شد',
+            'update-success'      => 'آدرس با موفقیت به‌روزرسانی شد',
             'success-mass-delete' => 'حذف گروهی آدرس با موفقیت انجام شد',
         ],
     ],

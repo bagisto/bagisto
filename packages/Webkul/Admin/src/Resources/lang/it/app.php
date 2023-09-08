@@ -1374,6 +1374,8 @@ return [
                 'save-btn-title'   => 'Salva Indirizzo',
             ],
         
+            'create-success'       => 'Indirizzo creato con successo',
+            'update-success'       => 'Indirizzo aggiornato con successo',
             'success-mass-delete'  => 'Eliminazione di Indirizzi in Massa Riuscita',
         ],
     ],

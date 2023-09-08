@@ -1374,7 +1374,9 @@ return [
                 'save-btn-title'  => 'حفظ العنوان',
             ],
 
-            'success-mass-delete'  => 'حذف العناوين بنجاح',
+            'create-success'      => 'تم إنشاء العنوان بنجاح',
+            'update-success'      => 'تم تحديث العنوان بنجاح',
+            'success-mass-delete' => 'حذف العناوين بنجاح',
         ],
     ],
 

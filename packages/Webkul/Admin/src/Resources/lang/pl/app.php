@@ -1374,6 +1374,8 @@ return [
                 'save-btn-title'   => 'Zapisz Adres',
             ],
 
+            'create-success'      => 'Adres utworzony pomyślnie',
+            'update-success'      => 'Adres zaktualizowany pomyślnie',
             'success-mass-delete' => 'Usunięto Masywnie Adresy Pomyślnie',
         ],
     ],

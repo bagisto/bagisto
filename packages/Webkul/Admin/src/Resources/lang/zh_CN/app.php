@@ -1373,6 +1373,8 @@ return [
                 'save-btn-title'   => '保存地址',
             ],
 
+            'create-success'      => '地址创建成功',
+            'update-success'      => '地址成功更新',
             'success-mass-delete' => '地址批量删除成功',
         ],
     ],

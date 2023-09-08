@@ -1374,6 +1374,8 @@ return [
                 'save-btn-title'   => 'Enregistrer l\'adresse',
             ],
 
+            'create-success' => 'Adresse créée avec succès',
+            'update-success' => 'Adresse mise à jour avec succès',
             'success-mass-delete' => 'Suppression en masse des adresses avec succès',
         ],
     ],
