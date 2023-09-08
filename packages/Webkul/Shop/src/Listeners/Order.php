@@ -17,7 +17,7 @@ class Order extends Base
     public function afterCreated($order)
     {
         try {
-            if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.new-order')) {
+            if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.new_order')) {
                 return;
             }
 
@@ -36,7 +36,7 @@ class Order extends Base
     public function afterCanceled($order)
     {
         try {
-            if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.cancel-order')) {
+            if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.cancel_order')) {
                 return;
             }
 

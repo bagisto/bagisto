@@ -15,7 +15,7 @@ class Refund extends Base
     public function afterCreated($refund)
     {
         try {
-            if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.new-refund')) {
+            if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.new_refund')) {
                 return;
             }
 

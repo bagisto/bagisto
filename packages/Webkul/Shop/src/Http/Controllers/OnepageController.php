@@ -21,7 +21,7 @@ class OnepageController extends Controller
          */
         if (
             ! auth()->guard('customer')->check()
-            && ! core()->getConfigData('catalog.products.guest_checkout.allow-guest-checkout')
+            && ! core()->getConfigData('catalog.products.guest_checkout.allow_guest_checkout')
         ) {
             return redirect()->route('shop.customer.session.index');
         }

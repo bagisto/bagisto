@@ -138,7 +138,7 @@ return [
         'sort'   => 1,
         'fields' => [
             [
-                'name'  => 'allow-guest-checkout',
+                'name'  => 'allow_guest_checkout',
                 'title' => 'admin::app.configuration.index.catalog.products.allow-guest-checkout',
                 'type'  => 'boolean',
             ],
@@ -265,7 +265,7 @@ return [
             ],
         ],
     ], [
-        'key'    => 'catalog.products.cache-small-image',
+        'key'    => 'catalog.products.cache_small_image',
         'name'   => 'admin::app.configuration.index.catalog.products.cache-small-image',
         'info'   => 'admin::app.configuration.index.catalog.products.cache-small-image-info',
         'sort'   => 4,
@@ -282,7 +282,7 @@ return [
             ],
         ],
     ], [
-        'key'    => 'catalog.products.cache-medium-image',
+        'key'    => 'catalog.products.cache_medium_image',
         'name'   => 'admin::app.configuration.index.catalog.products.cache-medium-image',
         'info'   => 'admin::app.configuration.index.catalog.products.cache-medium-image-info',
         'sort'   => 5,
@@ -299,7 +299,7 @@ return [
             ],
         ],
     ], [
-        'key'    => 'catalog.products.cache-large-image',
+        'key'    => 'catalog.products.cache_large_image',
         'name'   => 'admin::app.configuration.index.catalog.products.cache-large-image',
         'info'   => 'admin::app.configuration.index.catalog.products.cache-large-image-info',
         'sort'   => 6,
@@ -397,7 +397,7 @@ return [
         'sort'   => 1,
         'fields' => [
             [
-                'name'          => 'backorders',
+                'name'          => 'back_orders',
                 'title'         => 'admin::app.configuration.index.catalog.inventory.allow-back-orders',
                 'type'          => 'boolean',
                 'channel_based' => true,
@@ -699,54 +699,44 @@ return [
                 'name'  => 'emails.general.notifications.verification',
                 'title' => 'admin::app.configuration.index.email.notifications.verification',
                 'type'  => 'boolean',
-            ],
-            [
+            ], [
                 'name'  => 'emails.general.notifications.registration',
                 'title' => 'admin::app.configuration.index.email.notifications.registration',
                 'type'  => 'boolean',
-            ],
-            [
-                'name'  => 'emails.general.notifications.customer-registration-confirmation-mail-to-admin',
+            ], [
+                'name'  => 'emails.general.notifications.customer_registration_confirmation_mail_to_admin',
                 'title' => 'admin::app.configuration.index.email.notifications.customer-registration-confirmation-mail-to-admin',
                 'type'  => 'boolean',
-            ],
-            [
+            ], [
                 'name'  => 'emails.general.notifications.customer',
                 'title' => 'admin::app.configuration.index.email.notifications.customer',
                 'type'  => 'boolean',
-            ],
-            [
-                'name'  => 'emails.general.notifications.new-order',
+            ], [
+                'name'  => 'emails.general.notifications.new_order',
                 'title' => 'admin::app.configuration.index.email.notifications.new-order',
                 'type'  => 'boolean',
-            ],
-            [
-                'name'  => 'emails.general.notifications.new-admin',
+            ], [
+                'name'  => 'emails.general.notifications.new_admin',
                 'title' => 'admin::app.configuration.index.email.notifications.new-admin',
                 'type'  => 'boolean',
-            ],
-            [
-                'name'  => 'emails.general.notifications.new-invoice',
+            ], [
+                'name'  => 'emails.general.notifications.new_invoice',
                 'title' => 'admin::app.configuration.index.email.notifications.new-invoice',
                 'type'  => 'boolean',
-            ],
-            [
-                'name'  => 'emails.general.notifications.new-refund',
+            ], [
+                'name'  => 'emails.general.notifications.new_refund',
                 'title' => 'admin::app.configuration.index.email.notifications.new-refund',
                 'type'  => 'boolean',
-            ],
-            [
-                'name'  => 'emails.general.notifications.new-shipment',
+            ], [
+                'name'  => 'emails.general.notifications.new_shipment',
                 'title' => 'admin::app.configuration.index.email.notifications.new-shipment',
                 'type'  => 'boolean',
-            ],
-            [
-                'name'  => 'emails.general.notifications.new-inventory-source',
+            ], [
+                'name'  => 'emails.general.notifications.new_inventory_source',
                 'title' => 'admin::app.configuration.index.email.notifications.new-inventory-source',
                 'type'  => 'boolean',
-            ],
-            [
-                'name'  => 'emails.general.notifications.cancel-order',
+            ], [
+                'name'  => 'emails.general.notifications.cancel_order',
                 'title' => 'admin::app.configuration.index.email.notifications.cancel-order',
                 'type'  => 'boolean',
             ],

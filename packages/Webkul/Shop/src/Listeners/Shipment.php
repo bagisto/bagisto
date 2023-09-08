@@ -19,7 +19,7 @@ class Shipment extends Base
         }
 
         try {
-            if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.new-shipment')) {
+            if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.new_shipment')) {
                 return;
             }
 

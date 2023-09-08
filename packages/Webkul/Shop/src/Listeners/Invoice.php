@@ -19,7 +19,7 @@ class Invoice extends Base
         }
 
         try {
-            if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.new-invoice')) {
+            if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.new_invoice')) {
                 return;
             }
 

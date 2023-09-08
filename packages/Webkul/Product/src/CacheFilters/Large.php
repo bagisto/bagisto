@@ -15,12 +15,12 @@ class Large implements FilterInterface
      */
     public function applyFilter(Image $image)
     {
-        $width = core()->getConfigData('catalog.products.cache-large-image.width') != ''
-            ? core()->getConfigData('catalog.products.cache-large-image.width')
+        $width = core()->getConfigData('catalog.products.cache_large_image.width') != ''
+            ? core()->getConfigData('catalog.products.cache_large_image.width')
             : 560;
 
-        $height = core()->getConfigData('catalog.products.cache-large-image.height') != ''
-            ? core()->getConfigData('catalog.products.cache-large-image.height')
+        $height = core()->getConfigData('catalog.products.cache_large_image.height') != ''
+            ? core()->getConfigData('catalog.products.cache_large_image.height')
             : 610;
 
         return $image->fit($width, $height);
