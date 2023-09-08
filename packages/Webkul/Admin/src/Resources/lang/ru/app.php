@@ -174,6 +174,7 @@ return [
                 'contact'               => 'Контакт',
                 'comment-success'       => 'Комментарий успешно добавлен.',
                 'create-success'        => 'Заказ успешно создан',
+                'cancel-success'        => 'Заказ успешно отменен',
                 'create-invoice'        => 'Создать счет',
                 'discount'              => 'Скидка - :discount',
                 'download-pdf'          => 'Скачать PDF',

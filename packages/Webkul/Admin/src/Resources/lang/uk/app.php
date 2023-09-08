@@ -174,6 +174,7 @@ return [
                 'contact'               => 'Контакт',
                 'comment-success'       => 'Коментар успішно додано.',
                 'create-success'        => 'Замовлення створено успішно',
+                'cancel-success'        => 'Замовлення успішно скасоване',
                 'create-invoice'        => 'Створити рахунок',
                 'discount'              => 'Знижка - :discount',
                 'download-pdf'          => 'Завантажити PDF',

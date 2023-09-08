@@ -172,6 +172,7 @@ return [
                 'contact'               => 'تماس',
                 'comment-success'       => 'نظر با موفقیت افزوده شد.',
                 'create-success'        => 'سفارش با موفقیت ایجاد شد',
+                'cancel-success' => 'سفارش با موفقیت لغو شد',
                 'create-invoice'        => 'ایجاد فاکتور',
                 'discount'              => 'تخفیف - :discount',
                 'download-pdf'          => 'دانلود PDF',

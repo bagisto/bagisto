@@ -174,6 +174,7 @@ return [
                 'contact'               => 'Kontakt',
                 'comment-success'       => 'Komentarz dodany pomyślnie.',
                 'create-success'        => 'Zamówienie utworzone pomyślnie',
+                'cancel-success' => 'Zamówienie zostało pomyślnie anulowane',
                 'create-invoice'        => 'Utwórz fakturę',
                 'discount'              => 'Rabat - :discount',
                 'download-pdf'          => 'Pobierz PDF',

@@ -174,6 +174,7 @@ return [
                 'contact'               => '連絡先',
                 'comment-success'       => 'コメントが正常に追加されました。',
                 'create-success'        => '注文が正常に作成されました',
+                'cancel-success'        => '注文は正常にキャンセルされました',
                 'create-invoice'        => '請求書を作成',
                 'discount'              => '割引 - :discount',
                 'download-pdf'          => 'PDFをダウンロード',

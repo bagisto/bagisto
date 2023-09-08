@@ -174,6 +174,7 @@ return [
                 'contact'               => 'Contact',
                 'comment-success'       => 'Opmerking succesvol toegevoegd.',
                 'create-success'        => 'Bestelling succesvol aangemaakt',
+                'cancel-success'        => 'Bestelling succesvol geannuleerd',
                 'create-invoice'        => 'Factuur aanmaken',
                 'discount'              => 'Korting - :discount',
                 'download-pdf'          => 'PDF Downloaden',
