@@ -914,7 +914,7 @@ return [
         'icon' => 'settings/payment-method.svg',
         'sort' => 3,
     ], [
-        'key'    => 'sales.payment_methods.cashondelivery',
+        'key'    => 'sales.payment_methods.cash_on_delivery',
         'name'   => 'admin::app.configuration.index.sales.payment-methods.cash-on-delivery',
         'info'   => 'admin::app.configuration.index.sales.payment-methods.cash-on-delivery-info',
         'sort'   => 1,
@@ -1011,7 +1011,7 @@ return [
             ],
         ],
     ], [
-        'key'    => 'sales.payment_methods.moneytransfer',
+        'key'    => 'sales.payment_methods.money_transfer',
         'name'   => 'admin::app.configuration.index.sales.payment-methods.money-transfer',
         'info'   => 'admin::app.configuration.index.sales.payment-methods.money-transfer-info',
         'sort'   => 2,
@@ -1032,14 +1032,14 @@ return [
                 'locale_based'  => true,
             ], [
                 'name'          => 'generate_invoice',
-                'title'         => 'Automatically generate the invoice after placing an order',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.pending',
                 'type'          => 'boolean',
                 'default_value' => false,
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
                 'name'    => 'invoice_status',
-                'title'   => 'Invoice status after creating the invoice',
+                'title'   => 'admin::app.configuration.index.sales.payment-methods.pending',
                 'type'    => 'select',
                 'options' => [
                     [
@@ -1055,7 +1055,7 @@ return [
                 'locale_based'  => false,
             ], [
                 'name'    => 'order_status',
-                'title'   => 'Order status after creating the invoice',
+                'title'   => 'admin::app.configuration.index.sales.payment-methods.pending',
                 'type'    => 'select',
                 'options' => [
                     [
