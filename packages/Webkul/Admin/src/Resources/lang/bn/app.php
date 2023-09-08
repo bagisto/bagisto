@@ -1178,7 +1178,7 @@ return [
                 'date-of-birth'         => 'জন্ম তারিখ',
                 'email'                 => 'ইমেইল',
                 'edit-btn'              => 'সম্পাদনা করুন',
-                'female'                => 'মহিলা',
+                'female'                => 'নারী',
                 'first-name'            => 'প্রথম নাম',
                 'gender'                => 'লিঙ্গ',
                 'last-name'             => 'শেষ নাম',

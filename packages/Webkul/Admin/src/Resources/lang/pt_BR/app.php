@@ -1178,7 +1178,7 @@ return [
                 'date-of-birth'         => 'Data de Nascimento',
                 'email'                 => 'E-mail',
                 'edit-btn'              => 'Editar',
-                'female'                => 'Feminino',
+                'female'                => 'Fêmea',
                 'first-name'            => 'Primeiro Nome',
                 'gender'                => 'Gênero',
                 'last-name'             => 'Sobrenome',
