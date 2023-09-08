@@ -316,7 +316,7 @@
 
                                     <!-- Contact Number -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label class="required">
+                                        <x-admin::form.control-group.label>
                                             @lang('admin::app.customers.customers.index.create.contact-number')
                                         </x-admin::form.control-group.label>
 
@@ -324,7 +324,7 @@
                                             type="text"
                                             name="phone"
                                             id="phone"
-                                            rules="required|integer"
+                                            rules="integer"
                                             :label="trans('admin::app.customers.customers.index.create.contact-number')"
                                             :placeholder="trans('admin::app.customers.customers.index.create.contact-number')"
                                         >
@@ -405,6 +405,10 @@
                                                 id="customerGroup"
                                                 :label="trans('admin::app.customers.customers.index.create.customer-group')"
                                             >
+                                                <option value="">
+                                                    @lang('admin::app.customers.customers.index.create.select-customer-group')
+                                                </option>
+
                                                 @foreach ($groups as $group)
                                                     <option value="">
                                                         @lang('admin::app.customers.customers.index.create.select-customer-group')
