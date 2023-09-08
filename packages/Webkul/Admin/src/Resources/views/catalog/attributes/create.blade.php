@@ -464,7 +464,10 @@
                         
                             <x-slot:content>
                                 <!-- Input Validation -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group
+                                    v-if="swatchAttribute && (attributeType == 'text')"
+                                    class="mb-[10px]"
+                                >
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.catalog.attributes.create.input-validation')
                                     </x-admin::form.control-group.label>

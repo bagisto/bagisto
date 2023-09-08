@@ -519,31 +519,33 @@
                         
                             <x-slot:content>
                                 <!-- Input Validation -->
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
-                                        @lang('admin::app.catalog.attributes.edit.input-validation')
-                                    </x-admin::form.control-group.label>
+                                @if($attribute->type == 'text')
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.catalog.attributes.edit.input-validation')
+                                        </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
-                                        type="select"
-                                        name="validation"
-                                        :value="$attribute->validation"
-                                        class="cursor-pointer"
-                                        v-model="validationType"
-                                    >
-                                        <!-- Default Option -->
-                                        <option value="">
-                                            @lang('admin::app.catalog.attributes.edit.select')
-                                        </option>
+                                        <x-admin::form.control-group.control
+                                            type="select"
+                                            name="validation"
+                                            :value="$attribute->validation"
+                                            class="cursor-pointer"
+                                            v-model="validationType"
+                                        >
+                                            <!-- Default Option -->
+                                            <option value="">
+                                                @lang('admin::app.catalog.attributes.edit.select')
+                                            </option>
 
-                                         <!-- Here! All Needed types are defined -->
-                                         @foreach(['number', 'email', 'decimal', 'url', 'regex'] as $type)
-                                         <option value="{{ $type }}">
-                                             @lang('admin::app.catalog.attributes.edit.' . $type)
-                                         </option>
-                                     @endforeach
-                                    </x-admin::form.control-group.control>
-                                </x-admin::form.control-group>
+                                            <!-- Here! All Needed types are defined -->
+                                            @foreach(['number', 'email', 'decimal', 'url', 'regex'] as $type)
+                                            <option value="{{ $type }}">
+                                                @lang('admin::app.catalog.attributes.edit.' . $type)
+                                            </option>
+                                        @endforeach
+                                        </x-admin::form.control-group.control>
+                                    </x-admin::form.control-group>
+                                @endif
 
                                 <!-- REGEX -->
                                 <x-admin::form.control-group
