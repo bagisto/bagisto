@@ -1375,6 +1375,8 @@ return [
                 'save-btn-title'   => 'Adresse speichern',
             ],
 
+            'create-success'      => 'Adresse erfolgreich erstellt',
+            'update-success'      => 'Adresse erfolgreich aktualisiert',
             'success-mass-delete' => 'Adressen erfolgreich massenweise gelöscht',
         ],
     ],

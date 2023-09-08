@@ -1375,6 +1375,8 @@ return [
                 'save-btn-title'  => '住所を保存',
             ],
 
+            'create-success'      => 'アドレスが正常に作成されました',
+            'update-success'      => 'アドレスが正常に更新されました',
             'success-mass-delete' => '住所の一括削除に成功しました',
         ],
     ],

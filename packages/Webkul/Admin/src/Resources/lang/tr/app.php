@@ -1375,6 +1375,8 @@ return [
                 'save-btn-title'   => 'Adresi Kaydet',
             ],
 
+            'create-success'      => 'Adres başarıyla oluşturuldu',
+            'update-success'      => 'Adres başarıyla güncellendi',
             'success-mass-delete' => 'Adresler Topluca Silindi',
         ],
     ],

@@ -1375,6 +1375,8 @@ return [
                 'save-btn-title'  => 'Adres Opslaan',
             ],
 
+            'create-success'      => 'Adres succesvol aangemaakt',
+            'update-success'      => 'Adres succesvol bijgewerkt',
             'success-mass-delete' => 'Adressen succesvol verwijderd',
         ],
     ],
