@@ -3171,6 +3171,15 @@ return [
         'dear'   => 'יקר :customer_name',
         'thanks' => 'אם תזדקק לעזרה בכל סוג שהוא, אנא פנה אלינו ב-<a href=":link" style=":style">:email</a>.<br/>תודה!',
 
+        'admin' => [
+            'forgot-password' => [
+                'subject'        => 'איפוס סיסמה באמצעות אימייל',
+                'greeting'       => 'שכחת סיסמה!',
+                'description'    => 'אתה מקבל אימייל זה מכיוון שקיבלנו בקשת איפוס סיסמה עבור החשבון שלך.',
+                'reset-password' => 'איפוס סיסמה',
+            ],
+        ],
+
         'orders' => [
             'created' => [
                 'subject'  => 'אישור הזמנה חדשה',

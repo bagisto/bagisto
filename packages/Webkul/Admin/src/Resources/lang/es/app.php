@@ -3171,6 +3171,15 @@ return [
         'dear'   => 'Estimado :customer_name',
         'thanks' => 'Si necesitas cualquier tipo de ayuda, por favor contáctanos en <a href=":link" style=":style">:email</a>.<br/>¡Gracias!',
 
+        'admin' => [
+            'forgot-password' => [
+                'subject'        => 'E-Mail zum Zurücksetzen des Passworts',
+                'greeting'       => 'Passwort vergessen!',
+                'description'    => 'Sie erhalten diese E-Mail, weil wir eine Anfrage zum Zurücksetzen des Passworts für Ihr Konto erhalten haben.',
+                'reset-password' => 'Passwort zurücksetzen',
+            ],
+        ],
+
         'orders' => [
             'created' => [
                 'subject'  => 'Confirmación de Nuevo Pedido',

@@ -3171,6 +3171,15 @@ return [
         'dear'   => 'Dear :customer_name',
         'thanks' => 'If you need any kind of help please contact us at <a href=":link" style=":style">:email</a>.<br/>Thanks!',
 
+        'admin' => [
+            'forgot-password' => [
+                'subject'        => 'Reset Password Email',
+                'greeting'       => 'Forgot Password!',
+                'description'    => 'You are receiving this email because we received a password reset request for your account.',
+                'reset-password' => 'Reset Password',
+            ],
+        ],
+
         'orders' => [
             'created' => [
                 'subject'  => 'New Order Confirmation',

@@ -3171,6 +3171,15 @@ return [
         'dear'   => 'Beste :customer_name',
         'thanks' => 'Als u hulp nodig heeft, neem dan contact met ons op via <a href=":link" style=":style">:email</a>.<br/>Bedankt!',
 
+        'admin' => [
+            'forgot-password' => [
+                'subject'        => 'E-mail wachtwoord resetten',
+                'greeting'       => 'Wachtwoord vergeten!',
+                'description'    => 'U ontvangt deze e-mail omdat we een verzoek voor het opnieuw instellen van het wachtwoord voor uw account hebben ontvangen.',
+                'reset-password' => 'Wachtwoord opnieuw instellen',
+            ],
+        ],
+
         'orders' => [
             'created' => [
                 'subject'  => 'Bevestiging van nieuwe bestelling',

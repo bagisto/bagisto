@@ -3171,6 +3171,15 @@ return [
         'dear'   => 'Sayın :customer_name',
         'thanks' => 'Herhangi bir yardıma ihtiyacınız varsa, lütfen bize <a href=":link" style=":style">:email</a> adresinden ulaşın.<br/>Teşekkürler!',
 
+        'admin' => [
+            'forgot-password' => [
+                'subject'        => 'Şifre Sıfırlama E-postası',
+                'greeting'       => 'Şifrenizi mi unuttunuz!',
+                'description'    => 'Bu e-postayı hesabınız için bir şifre sıfırlama isteği aldığımız için alıyorsunuz.',
+                'reset-password' => 'Şifreyi Sıfırla',
+            ],
+        ],
+
         'orders' => [
             'created' => [
                 'subject'  => 'Yeni Sipariş Onayı',

@@ -3170,6 +3170,15 @@ return [
         'dear'   => '尊敬する :customer_name さん',
         'thanks' => '何かお手伝いが必要な場合は、<a href=":link" style=":style">:email</a> でお問い合わせいただくか、ご連絡ください。<br/>ありがとうございます！',
 
+        'admin' => [
+            'forgot-password' => [
+                'subject'        => 'パスワードリセットメール',
+                'greeting'       => 'パスワードを忘れました！',
+                'description'    => 'このメールは、アカウントのパスワードリセットリクエストを受けたため、お送りしています。',
+                'reset-password' => 'パスワードをリセット',
+            ],
+        ],
+
         'orders' => [
             'created' => [
                 'subject'  => '新しい注文確認',

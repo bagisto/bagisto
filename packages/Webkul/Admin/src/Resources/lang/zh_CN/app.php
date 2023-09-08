@@ -3171,6 +3171,15 @@ return [
         'dear'   => '尊敬的 :customer_name',
         'thanks' => '如果您需要任何帮助，请联系我们：<a href=":link" style=":style">:email</a>。<br/>谢谢！',
 
+        'admin' => [
+            'forgot-password' => [
+                'subject'        => '重置密码电子邮件',
+                'greeting'       => '忘记密码！',
+                'description'    => '您收到此电子邮件是因为我们收到了您的帐户的密码重置请求。',
+                'reset-password' => '重置密码',
+            ],
+        ],
+
         'orders' => [
             'created' => [
                 'subject'  => '新订单确认',
