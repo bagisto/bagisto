@@ -493,12 +493,19 @@ class OrderRepository extends Repository
      */
     public function getCustomerWithMostSalesByDate(?Carbon $from = null, ?Carbon $to = null): Collection
     {
-        $dbPrefix = DB::getTablePrefix();
+        $tablePrefix = DB::getTablePrefix();
 
         $query = $this->getModel()
-            ->leftJoin(DB::raw("(SELECT order_id, MAX(first_name) as first_name, MAX(last_name) as last_name, MAX(email) as email
-                           FROM addresses
-                           GROUP BY order_id) as addr"), 'orders.id', '=', 'addr.order_id')
+            ->leftJoin(
+                DB::raw("
+                    (SELECT order_id, MAX(first_name) as first_name, MAX(last_name) as last_name, MAX(email) as email
+                    FROM ". $tablePrefix ."addresses GROUP BY order_id) as address"
+                ),
+
+                function ($join) {
+                    $join->on('orders.id', '=', DB::raw('address.order_id'));
+                }
+            )
             ->whereNotIn("orders.status", ['closed', 'canceled'])
             ->select(
                 'orders.customer_id',
@@ -509,11 +516,11 @@ class OrderRepository extends Repository
                 SUM(base_grand_total) -
                 SUM(
                     IFNULL(
-                        (SELECT SUM(base_grand_total) FROM {$dbPrefix}refunds WHERE {$dbPrefix}refunds.order_id = {$dbPrefix}orders.id),
+                        (SELECT SUM(base_grand_total) FROM {$tablePrefix}refunds WHERE {$tablePrefix}refunds.order_id = {$tablePrefix}orders.id),
                         0)
                     )
                 ) as total_base_grand_total"),
-                DB::raw('COUNT(DISTINCT orders.id) as order_count')
+                DB::raw('COUNT(DISTINCT '. $tablePrefix .'orders.id) as order_count')
             );
 
         if ($from && $to) {
