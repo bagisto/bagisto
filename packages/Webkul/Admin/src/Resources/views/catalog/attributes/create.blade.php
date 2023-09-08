@@ -141,6 +141,11 @@
                                             v-model="swatchType"
                                             @change="showSwatch=true"
                                         >
+                                            <!-- Default Option -->
+                                            <option value="">
+                                                @lang('admin::app.catalog.attributes.create.select')
+                                            </option>
+
                                             @foreach (['dropdown', 'color', 'image', 'text'] as $type)
                                                 <option value="{{ $type }}">
                                                     @lang('admin::app.catalog.attributes.create.option.' . $type)
@@ -182,7 +187,7 @@
                                                 for="empty_option"
                                                 class="text-[14px] text-gray-600 font-semibold cursor-pointer"
                                             >
-                                                @lang('admin::app.catalog.attributes.create.default-options')
+                                                @lang('admin::app.catalog.attributes.create.create-empty-option')
                                             </label>
                                         </div>
                                     </div>
@@ -413,6 +418,11 @@
                                         v-model="attributeType"
                                         @change="swatchAttribute=true"
                                     >
+                                        <!-- Default Option -->
+                                        <option value="">
+                                            @lang('admin::app.catalog.attributes.create.select')
+                                        </option>
+
                                         <!-- Here! All Needed types are defined -->
                                         @foreach(['text', 'textarea', 'price', 'boolean', 'select', 'multiselect', 'datetime', 'date', 'image', 'file', 'checkbox'] as $type)
                                             <option value="{{ $type }}">
@@ -454,7 +464,10 @@
                         
                             <x-slot:content>
                                 <!-- Input Validation -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group
+                                    v-if="swatchAttribute && (attributeType == 'text')"
+                                    class="mb-[10px]"
+                                >
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.catalog.attributes.create.input-validation')
                                     </x-admin::form.control-group.label>
@@ -470,6 +483,11 @@
                                         v-model="validationType"
                                         @change="inputValidation=true"
                                     >
+                                        <!-- Default Option -->
+                                        <option value="">
+                                            @lang('admin::app.catalog.attributes.create.select')
+                                        </option>
+
                                         <!-- Here! All Needed types are defined -->
                                         @foreach(['number', 'email', 'decimal', 'url', 'regex'] as $type)
                                             <option value="{{ $type }}">
@@ -563,7 +581,7 @@
                                 <!-- Use in Layered -->
                                 <label
                                     for="is_filterable" 
-                                    class="flex gap-[10px] items-center w-max p-[6px] cursor-pointer select-none"
+                                    class="flex gap-[10px] items-center w-max py-[6px] px-[16px] cursor-pointer select-none"
                                 >
                                     <input
                                         type="checkbox"
