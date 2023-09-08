@@ -576,27 +576,13 @@ return [
                 ],
 
                 'images' => [
-                    'add-image-btn'     => 'চিত্র যোগ করুন',
-                    'allowed-types'     => 'png, jpeg, jpg',
-                    'info'              => 'চিত্রের নির্ধারণ হওয়া উচিত যেমন 609px X 560px',
-                    'not-allowed-error' => 'কেবল চিত্র ফাইল (.jpeg, .jpg, .png, ..) অনুমোদিত।',
-                    'title'             => 'চিত্র',
-
-                    'placeholders' => [
-                        'front'     => 'আগে',
-                        'next'      => 'পরবর্তী',
-                        'size'      => 'আকার',
-                        'use-cases' => 'ব্যবহারের উদ্দেশ্য',
-                        'zoom'      => 'জুম',
-                    ],
+                    'title' => 'চিত্র',
+                    'info'  => 'চিত্রের নির্ধারণ হওয়া উচিত যেমন 609px X 560px',
                 ],
 
                 'videos' => [
-                    'add-video-btn'     => 'ভিডিও যোগ করুন',
-                    'allowed-types'     => 'mp4, webm, mkv',
-                    'info'              => 'সর্বাধিক ভিডিও আকার হওয়া উচিত :size মধ্যে',
-                    'not-allowed-error' => 'কেবল ভিডিও ফাইল (.mp4, .mov, .ogg ..) অনুমোদিত।',
-                    'title'             => 'ভিডিও',
+                    'title' => 'ভিডিও',
+                    'info'  => 'সর্বাধিক ভিডিও আকার হওয়া উচিত :size মধ্যে',
                 ],
 
                 'links' => [
@@ -659,6 +645,19 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'স্থিতি',
                             'weight'          => 'ওজন',
+                        ],
+
+                        'mass-edit' => [
+                            'select-variants'  => 'ভিন্নভিন্ন বেছে নাও',
+                            'select-action'    => 'ক্রিয়া নির্বাচন করুন',
+                            'edit-prices'      => 'মূল্য সম্পাদনা করুন',
+                            'edit-inventories' => 'মূল্য সম্পাদনা করুন',
+                            'add-images'       => 'চিত্র যোগ করুন',
+                            'remove-images'    => 'চিত্র সরান',
+                            'remove-variants'  => 'প্রত্যাগাত্মক সরান',
+                            'price'            => 'মূল্য',
+                            'apply-to-all-sku' => 'সমস্ত SKU একই মূল্য প্রয়োগ করুন।',
+                            'apply-to-all-btn' => 'সমস্তে প্রয়োগ করুন',
                         ],
                     ],
 
@@ -3023,6 +3022,28 @@ return [
                 'qty'         => ':qty উপলব্ধ',
             ],
         ],
+
+        'media' => [
+            'images' => [
+                'add-image-btn'     => 'চিত্র যোগ করুন',
+                'allowed-types'     => 'png, jpeg, jpg',
+                'not-allowed-error' => 'কেবল চিত্র ফাইল (.jpeg, .jpg, .png, ..) অনুমোদিত।',
+
+                'placeholders' => [
+                    'front'     => 'আগে',
+                    'next'      => 'পরবর্তী',
+                    'size'      => 'আকার',
+                    'use-cases' => 'ব্যবহারের উদ্দেশ্য',
+                    'zoom'      => 'জুম',
+                ],
+            ],
+
+            'videos' => [
+                'add-video-btn'     => 'ভিডিও যোগ করুন',
+                'allowed-types'     => 'mp4, webm, mkv',
+                'not-allowed-error' => 'কেবল ভিডিও ফাইল (.mp4, .mov, .ogg ..) অনুমোদিত।',
+            ],
+        ]
     ],
 
     'acl' => [

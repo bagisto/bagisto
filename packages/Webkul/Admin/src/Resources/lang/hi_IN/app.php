@@ -576,27 +576,13 @@ return [
                 ],
 
                 'images' => [
-                    'add-image-btn'     => 'छवि जोड़ें',
-                    'allowed-types'     => 'png, jpeg, jpg',
-                    'info'              => 'छवि का निर्धारण 609px X 560px की तरह होना चाहिए',
-                    'not-allowed-error' => 'केवल छवि फ़ाइलें (.jpeg, .jpg, .png, ..) अनुमत हैं।',
-                    'title'             => 'छवियाँ',
-
-                    'placeholders'  => [
-                        'front'     => 'सामना',
-                        'next'      => 'अगला',
-                        'size'      => 'आकार',
-                        'use-cases' => 'उपयोग केस',
-                        'zoom'      => 'ज़ूम करें',
-                    ],
+                    'title' => 'छवियाँ',
+                    'info'  => 'छवि का निर्धारण 609px X 560px की तरह होना चाहिए',
                 ],
 
                 'videos' => [
-                    'add-video-btn'     => 'वीडियो जोड़ें',
-                    'allowed-types'     => 'mp4, webm, mkv',
-                    'info'              => 'अधिकतम वीडियो आकार का होना चाहिए :size की तरह',
-                    'not-allowed-error' => 'केवल वीडियो फ़ाइलें (.mp4, .mov, .ogg ..) अनुमत हैं।',
-                    'title'             => 'वीडियो',
+                    'title' => 'वीडियो',
+                    'info'  => 'अधिकतम वीडियो आकार का होना चाहिए :size की तरह',
                 ],
 
                 'links' => [
@@ -659,6 +645,19 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'स्थिति',
                             'weight'          => 'वजन',
+                        ],
+
+                        'mass-edit' => [
+                            'select-variants'  => 'वेरिएंट चुनें',
+                            'select-action'    => 'कार्रवाई चुनें',
+                            'edit-prices'      => 'मूल्य संपादित करें',
+                            'edit-inventories' => 'सूची संपादित करें',
+                            'add-images'       => 'छवियाँ जोड़ें',
+                            'remove-images'    => 'छवियाँ हटाएं',
+                            'remove-variants'  => 'वेरिएंट हटाएं',
+                            'price'            => 'मूल्य',
+                            'apply-to-all-sku' => 'सभी SKU पर मूल्य लागू करें।',
+                            'apply-to-all-btn' => 'सभी पर लागू करें',
                         ],
                     ],
 
@@ -3023,6 +3022,28 @@ return [
                 'qty'         => ':qty उपलब्ध हैं',
             ],
         ],
+
+        'media' => [
+            'images' => [
+                'add-image-btn'     => 'छवि जोड़ें',
+                'allowed-types'     => 'png, jpeg, jpg',
+                'not-allowed-error' => 'केवल छवि फ़ाइलें (.jpeg, .jpg, .png, ..) अनुमत हैं।',
+
+                'placeholders'  => [
+                    'front'     => 'सामना',
+                    'next'      => 'अगला',
+                    'size'      => 'आकार',
+                    'use-cases' => 'उपयोग केस',
+                    'zoom'      => 'ज़ूम करें',
+                ],
+            ],
+
+            'videos' => [
+                'add-video-btn'     => 'वीडियो जोड़ें',
+                'allowed-types'     => 'mp4, webm, mkv',
+                'not-allowed-error' => 'केवल वीडियो फ़ाइलें (.mp4, .mov, .ogg ..) अनुमत हैं।',
+            ],
+        ]
     ],
 
     'acl' => [

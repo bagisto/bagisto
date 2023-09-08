@@ -576,27 +576,13 @@ return [
                 ],
 
                 'images' => [
-                    'add-image-btn'     => 'Dodaj obraz',
-                    'allowed-types'     => 'png, jpeg, jpg',
-                    'info'              => 'Rozmiar obrazu powinien wynosić około 609px X 560px',
-                    'not-allowed-error' => 'Dozwolone są tylko pliki graficzne (.jpeg, .jpg, .png, ..).',
-                    'title'             => 'Obrazy',
-
-                    'placeholders'  => [
-                        'front'     => 'Przód',
-                        'next'      => 'Następny',
-                        'size'      => 'Rozmiar',
-                        'use-cases' => 'Zastosowanie',
-                        'zoom'      => 'Powiększenie',
-                    ],
+                    'title' => 'Obrazy',
+                    'info'  => 'Rozmiar obrazu powinien wynosić około 609px X 560px',
                 ],
 
                 'videos' => [
-                    'add-video-btn'     => 'Dodaj film',
-                    'allowed-types'     => 'mp4, webm, mkv',
-                    'info'              => 'Maksymalny rozmiar filmu powinien wynosić około :size',
-                    'not-allowed-error' => 'Dozwolone są tylko pliki wideo (.mp4, .mov, .ogg ..).',
-                    'title'             => 'Filmy',
+                    'title' => 'Filmy',
+                    'info'  => 'Maksymalny rozmiar filmu powinien wynosić około :size',
                 ],
 
                 'links' => [
@@ -659,6 +645,19 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'Status',
                             'weight'          => 'Waga',
+                        ],
+
+                        'mass-edit' => [
+                            'select-variants'  => 'Wybierz Warianty',
+                            'select-action'    => 'Wybierz Akcję',
+                            'edit-prices'      => 'Edytuj Ceny',
+                            'edit-inventories' => 'Edytuj Stan Magazynowy',
+                            'add-images'       => 'Dodaj Obrazy',
+                            'remove-images'    => 'Usuń Obrazy',
+                            'remove-variants'  => 'Usuń Warianty',
+                            'price'            => 'Cena',
+                            'apply-to-all-sku' => 'Zastosuj cenę do wszystkich SKU.',
+                            'apply-to-all-btn' => 'Zastosuj do wszystkich',
                         ],
                     ],
 
@@ -3023,6 +3022,28 @@ return [
                 'qty'         => ':qty Dostępnych',
             ],
         ],
+
+        'media' => [
+            'images' => [
+                'add-image-btn'     => 'Dodaj obraz',
+                'allowed-types'     => 'png, jpeg, jpg',
+                'not-allowed-error' => 'Dozwolone są tylko pliki graficzne (.jpeg, .jpg, .png, ..).',
+
+                'placeholders'  => [
+                    'front'     => 'Przód',
+                    'next'      => 'Następny',
+                    'size'      => 'Rozmiar',
+                    'use-cases' => 'Zastosowanie',
+                    'zoom'      => 'Powiększenie',
+                ],
+            ],
+
+            'videos' => [
+                'add-video-btn'     => 'Dodaj film',
+                'allowed-types'     => 'mp4, webm, mkv',
+                'not-allowed-error' => 'Dozwolone są tylko pliki wideo (.mp4, .mov, .ogg ..).',
+            ],
+        ]
     ],
 
     'acl' => [

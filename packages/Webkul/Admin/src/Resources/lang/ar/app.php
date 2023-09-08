@@ -576,27 +576,13 @@ return [
                 ],
 
                 'images' => [
-                    'add-image-btn'     => 'إضافة صورة',
-                    'allowed-types'     => 'png، jpeg، jpg',
-                    'info'              => 'يجب أن تكون دقة الصورة مثل 609 بيكسل في 560 بيكسل',
-                    'not-allowed-error' => 'تُسمح فقط بملفات الصور (.jpeg، .jpg، .png، ...).',
-                    'title'             => 'الصور',
-
-                    'placeholders'  => [
-                        'front'     => 'الواجهة الأمامية',
-                        'next'      => 'التالي',
-                        'size'      => 'الحجم',
-                        'use-cases' => 'حالات الاستخدام',
-                        'zoom'      => 'التكبير',
-                    ],
+                    'title' => 'الصور',
+                    'info'  => 'يجب أن تكون دقة الصورة مثل 609 بيكسل في 560 بيكسل',
                 ],
 
                 'videos' => [
-                    'add-video-btn'     => 'إضافة فيديو',
-                    'allowed-types'     => 'mp4، webm، mkv',
-                    'info'              => 'يجب أن يكون حجم الفيديو الأقصى مثل :size',
-                    'not-allowed-error' => 'يُسمح فقط بملفات الفيديو (.mp4، .mov، .ogg ..).',
-                    'title'             => 'مقاطع الفيديو',
+                    'title' => 'مقاطع الفيديو',
+                    'info'  => 'يجب أن يكون حجم الفيديو الأقصى مثل :size',
                 ],
 
                 'links' => [
@@ -659,6 +645,19 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'الحالة',
                             'weight'          => 'الوزن',
+                        ],
+
+                        'mass-edit' => [
+                            'select-variants'  => 'تحديد البدائل',
+                            'select-action'    => 'تحديد الإجراء',
+                            'edit-prices'      => 'تعديل الأسعار',
+                            'edit-inventories' => 'تعديل المخزون',
+                            'add-images'       => 'إضافة صور',
+                            'remove-images'    => 'إزالة الصور',
+                            'remove-variants'  => 'إزالة البدائل',
+                            'price'            => 'السعر',
+                            'apply-to-all-sku' => 'تطبيق سعر على جميع SKU.',
+                            'apply-to-all-btn' => 'تطبيق على الكل',
                         ],
                     ],
 
@@ -3021,6 +3020,28 @@ return [
                 'empty-info'  => 'لا توجد منتجات متاحة لمصطلح البحث.',
                 'sku'         => 'SKU - :sku',
                 'qty'         => ':qty متاحة',
+            ],
+        ],
+
+        'media' => [
+            'images' => [
+                'add-image-btn'     => 'إضافة صورة',
+                'allowed-types'     => 'png، jpeg، jpg',
+                'not-allowed-error' => 'تُسمح فقط بملفات الصور (.jpeg، .jpg، .png، ...).',
+
+                'placeholders'  => [
+                    'front'     => 'الواجهة الأمامية',
+                    'next'      => 'التالي',
+                    'size'      => 'الحجم',
+                    'use-cases' => 'حالات الاستخدام',
+                    'zoom'      => 'التكبير',
+                ],
+            ],
+
+            'videos' => [
+                'add-video-btn'     => 'إضافة فيديو',
+                'allowed-types'     => 'mp4، webm، mkv',
+                'not-allowed-error' => 'يُسمح فقط بملفات الفيديو (.mp4، .mov، .ogg ..).',
             ],
         ],
     ],

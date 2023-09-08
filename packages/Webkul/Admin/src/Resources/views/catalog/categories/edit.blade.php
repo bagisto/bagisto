@@ -47,7 +47,7 @@
                     <x-slot:toggle>
                         <button
                             type="button"
-                            class="inline-flex gap-x-[4px] items-center justify-between w-full max-w-max text-gray-600 font-semibold px-[4px] py-[6px] rounded-[6px] text-center cursor-pointer marker:shadow appearance-none hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:ring-gratext-gray-600"
+                            class="transparent-button px-[4px] py-[6px] hover:bg-gray-200 focus:bg-gray-200"
                         >
                             <span class="icon-language text-[24px] "></span>
 
@@ -179,13 +179,9 @@
                                 @lang('admin::app.catalog.categories.edit.logo-size')
                             </p>
 
-                            @php
-                                $logoImages = $category->logo_path ? [['id' => 'logo_path', 'url' => $category->logo_url]] : [];
-                            @endphp
-
                             <x-admin::media.images
                                 name="logo_path"
-                                ::uploaded-images='{{ json_encode($logoImages) }}'
+                                :uploaded-images="$category->logo_path ? [['id' => 'logo_path', 'url' => $category->logo_url]] : []"
                             >
                             </x-admin::media.images>
                         </div>
@@ -200,13 +196,9 @@
                                 @lang('admin::app.catalog.categories.edit.banner-size')
                             </p>
 
-                            @php
-                                $bannerImages = $category->banner_path ? [['id' => 'banner_path', 'url' => $category->banner_url]] : [];
-                            @endphp
-
                             <x-admin::media.images
                                 name="banner_path"
-                                ::uploaded-images='{{ json_encode($bannerImages) }}'
+                                :uploaded-images="$category->banner_path ? [['id' => 'banner_path', 'url' => $category->banner_url]] : []"
                                 width="220px"
                             >
                             </x-admin::media.images>

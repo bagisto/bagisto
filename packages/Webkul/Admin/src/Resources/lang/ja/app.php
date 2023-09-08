@@ -576,27 +576,13 @@ return [
                 ],
 
                 'images' => [
-                    'add-image-btn'     => '画像を追加',
-                    'allowed-types'     => 'png、jpeg、jpg',
-                    'info'              => '画像の解像度は 609px x 560px のようにする必要があります。',
-                    'not-allowed-error' => '画像ファイル（.jpeg、.jpg、.png、..）のみ許可されています。',
-                    'title'             => '画像',
-
-                    'placeholders'  => [
-                        'front'     => '前面',
-                        'next'      => '次',
-                        'size'      => 'サイズ',
-                        'use-cases' => '用途',
-                        'zoom'      => 'ズーム',
-                    ],
+                    'title' => '画像',
+                    'info'  => '画像の解像度は 609px x 560px のようにする必要があります。',
                 ],
 
                 'videos' => [
-                    'add-video-btn'     => 'ビデオを追加',
-                    'allowed-types'     => 'mp4、webm、mkv',
-                    'info'              => '最大ビデオサイズは :size となります',
-                    'not-allowed-error' => 'ビデオファイルのみ許可されています（.mp4、.mov、.ogg ..）。',
-                    'title'             => 'ビデオ',
+                    'title' => 'ビデオ',
+                    'info'  => '最大ビデオサイズは :size となります',
                 ],
 
                 'links' => [
@@ -659,6 +645,19 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'ステータス',
                             'weight'          => '重さ',
+                        ],
+
+                        'mass-edit' => [
+                            'select-variants'  => 'バリアントを選択',
+                            'select-action'    => 'アクションを選択',
+                            'edit-prices'      => '価格を編集',
+                            'edit-inventories' => '在庫を編集',
+                            'add-images'       => '画像を追加',
+                            'remove-images'    => '画像を削除',
+                            'remove-variants'  => 'バリアントを削除',
+                            'price'            => '価格',
+                            'apply-to-all-sku' => 'すべてのSKUに価格を適用する。',
+                            'apply-to-all-btn' => 'すべてに適用',
                         ],
                     ],
 
@@ -3023,6 +3022,28 @@ return [
                 'qty'         => ':qty 個利用可能',
             ],
         ],
+
+        'media' => [
+            'images' => [
+                'add-image-btn'     => '画像を追加',
+                'allowed-types'     => 'png、jpeg、jpg',
+                'not-allowed-error' => '画像ファイル（.jpeg、.jpg、.png、..）のみ許可されています。',
+
+                'placeholders'  => [
+                    'front'     => '前面',
+                    'next'      => '次',
+                    'size'      => 'サイズ',
+                    'use-cases' => '用途',
+                    'zoom'      => 'ズーム',
+                ],
+            ],
+
+            'videos' => [
+                'add-video-btn'     => 'ビデオを追加',
+                'allowed-types'     => 'mp4、webm、mkv',
+                'not-allowed-error' => 'ビデオファイルのみ許可されています（.mp4、.mov、.ogg ..）。',
+            ],
+        ]
     ],
 
     'acl' => [

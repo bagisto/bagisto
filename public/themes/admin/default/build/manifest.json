@@ -1,24 +1,12 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-52688b45.css",
+    "file": "assets/app-ea125877.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
   "src/Resources/assets/fonts/bagisto-admin.woff": {
     "file": "assets/bagisto-admin-040a45d4.woff",
     "src": "src/Resources/assets/fonts/bagisto-admin.woff"
-  },
-  "src/Resources/assets/images/Accordion-Dark-Arrow-Down.svg": {
-    "file": "assets/Accordion-Dark-Arrow-Down-3a8840fa.svg",
-    "src": "src/Resources/assets/images/Accordion-Dark-Arrow-Down.svg"
-  },
-  "src/Resources/assets/images/Accordion-Dark-Arrow-Up.svg": {
-    "file": "assets/Accordion-Dark-Arrow-Up-8b8f9f81.svg",
-    "src": "src/Resources/assets/images/Accordion-Dark-Arrow-Up.svg"
-  },
-  "src/Resources/assets/images/Checkbox-Checked.svg": {
-    "file": "assets/Checkbox-Checked-340e1127.svg",
-    "src": "src/Resources/assets/images/Checkbox-Checked.svg"
   },
   "src/Resources/assets/images/Icon-Calendar.svg": {
     "file": "assets/Icon-Calendar-bc2685cb.svg",
@@ -63,14 +51,6 @@
   "src/Resources/assets/images/captcha.png": {
     "file": "assets/captcha-d5a5a414.png",
     "src": "src/Resources/assets/images/captcha.png"
-  },
-  "src/Resources/assets/images/checked-checkbox.png": {
-    "file": "assets/checked-checkbox-98f8f649.png",
-    "src": "src/Resources/assets/images/checked-checkbox.png"
-  },
-  "src/Resources/assets/images/close.svg": {
-    "file": "assets/close-d41610b9.svg",
-    "src": "src/Resources/assets/images/close.svg"
   },
   "src/Resources/assets/images/customer.svg": {
     "file": "assets/customer-e452d8d5.svg",
@@ -159,10 +139,6 @@
   "src/Resources/assets/images/logo.png": {
     "file": "assets/logo-013cd27b.png",
     "src": "src/Resources/assets/images/logo.png"
-  },
-  "src/Resources/assets/images/media-image.png": {
-    "file": "assets/media-image-4aa33a76.png",
-    "src": "src/Resources/assets/images/media-image.png"
   },
   "src/Resources/assets/images/notification.svg": {
     "file": "assets/notification-2b25c326.svg",
@@ -256,7 +232,7 @@
     "css": [
       "assets/app-c04ede37.css"
     ],
-    "file": "assets/app-43acbb23.js",
+    "file": "assets/app-b5741f9c.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   },

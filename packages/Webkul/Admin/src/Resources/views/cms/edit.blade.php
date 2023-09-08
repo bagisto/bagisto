@@ -59,7 +59,7 @@
                     <x-slot:toggle>
                         <button
                             type="button"
-                            class="inline-flex gap-x-[4px] items-center justify-between w-full max-w-max text-gray-600 font-semibold px-[4px] py-[6px] rounded-[6px] text-center cursor-pointer marker:shadow appearance-none hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:ring-gratext-gray-600"
+                            class="transparent-button px-[4px] py-[6px] hover:bg-gray-200 focus:bg-gray-200"
                         >
                             <span class="icon-language text-[24px] "></span>
 

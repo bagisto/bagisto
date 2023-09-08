@@ -576,27 +576,13 @@ return [
                 ],
 
                 'images' => [
-                    'add-image-btn'     => 'הוסף תמונה',
-                    'allowed-types'     => 'png, jpeg, jpg',
-                    'info'              => 'רזולוציית התמונה צריכה להיות כמו 609 פיקסלים על 560 פיקסלים',
-                    'not-allowed-error' => 'ניתן להעלות רק קבצי תמונה (.jpeg, .jpg, .png, ..)',
-                    'title'             => 'תמונות',
-
-                    'placeholders'  => [
-                        'front'     => 'קדמית',
-                        'next'      => 'הבאה',
-                        'size'      => 'גודל',
-                        'use-cases' => 'מטרות שימוש',
-                        'zoom'      => 'הגדלה',
-                    ],
+                    'title' => 'תמונות',
+                    'info'  => 'רזולוציית התמונה צריכה להיות כמו 609 פיקסלים על 560 פיקסלים',
                 ],
 
                 'videos' => [
-                    'add-video-btn'     => 'הוסף וידאו',
-                    'allowed-types'     => 'mp4, webm, mkv',
-                    'info'              => 'הגודל המרבי לווידאו צריך להיות כמו :size',
-                    'not-allowed-error' => 'ניתן להעלות רק קבצי וידאו (.mp4, .mov, .ogg ..)',
-                    'title'             => 'וידאו',
+                    'title' => 'וידאו',
+                    'info'  => 'הגודל המרבי לווידאו צריך להיות כמו :size',
                 ],
 
                 'links' => [
@@ -659,6 +645,19 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'סטטוס',
                             'weight'          => 'משקל',
+                        ],
+
+                        'mass-edit' => [
+                            'select-variants'  => 'בחר וריאנטים',
+                            'select-action'    => 'בחר פעולה',
+                            'edit-prices'      => 'ערוך מחירים',
+                            'edit-inventories' => 'ערוך מלאי',
+                            'add-images'       => 'הוסף תמונות',
+                            'remove-images'    => 'הסר תמונות',
+                            'remove-variants'  => 'הסר וריאנטים',
+                            'price'            => 'מחיר',
+                            'apply-to-all-sku' => 'החל מחיר לכל ה-SKU.',
+                            'apply-to-all-btn' => 'החל לכל',
                         ],
                     ],
 
@@ -3023,6 +3022,28 @@ return [
                 'qty'         => ':qty זמין',
             ],
         ],
+
+        'media' => [
+            'images' => [
+                'add-image-btn'     => 'הוסף תמונה',
+                'allowed-types'     => 'png, jpeg, jpg',
+                'not-allowed-error' => 'ניתן להעלות רק קבצי תמונה (.jpeg, .jpg, .png, ..)',
+
+                'placeholders'  => [
+                    'front'     => 'קדמית',
+                    'next'      => 'הבאה',
+                    'size'      => 'גודל',
+                    'use-cases' => 'מטרות שימוש',
+                    'zoom'      => 'הגדלה',
+                ],
+            ],
+
+            'videos' => [
+                'add-video-btn'     => 'הוסף וידאו',
+                'allowed-types'     => 'mp4, webm, mkv',
+                'not-allowed-error' => 'ניתן להעלות רק קבצי וידאו (.mp4, .mov, .ogg ..)',
+            ],
+        ]
     ],
 
     'acl' => [

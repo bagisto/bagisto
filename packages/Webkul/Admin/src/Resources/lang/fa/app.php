@@ -576,27 +576,13 @@ return [
                 ],
 
                 'images' => [
-                    'add-image-btn'     => 'افزودن تصویر',
-                    'allowed-types'     => 'png، jpeg، jpg',
-                    'info'              => 'وضوح تصویر باید مانند 609px X 560px باشد',
-                    'not-allowed-error' => 'فقط فایل‌های تصویری (.jpeg، .jpg، .png، ..) مجاز هستند.',
-                    'title'             => 'تصاویر',
-
-                    'placeholders'  => [
-                        'front'     => 'جلو',
-                        'next'      => 'بعدی',
-                        'size'      => 'اندازه',
-                        'use-cases' => 'موارد استفاده',
-                        'zoom'      => 'بزرگ‌نمایی',
-                    ],
+                    'title' => 'تصاویر',
+                    'info'  => 'وضوح تصویر باید مانند 609px X 560px باشد',
                 ],
 
                 'videos' => [
-                    'add-video-btn'     => 'افزودن ویدیو',
-                    'allowed-types'     => 'mp4، webm، mkv',
-                    'info'              => 'حداکثر اندازه ویدیو باید مانند :size باشد',
-                    'not-allowed-error' => 'فقط فایل‌های ویدیویی (.mp4، .mov، .ogg ..) مجاز هستند.',
-                    'title'             => 'ویدیوها',
+                    'title' => 'ویدیوها',
+                    'info'  => 'حداکثر اندازه ویدیو باید مانند :size باشد',
                 ],
 
                 'links' => [
@@ -659,6 +645,19 @@ return [
                             'sku'             => 'کد محصول',
                             'status'          => 'وضعیت',
                             'weight'          => 'وزن',
+                        ],
+
+                        'mass-edit' => [
+                            'select-variants'  => 'انتخاب نسخه‌ها',
+                            'select-action'    => 'انتخاب عملیات',
+                            'edit-prices'      => 'ویرایش قیمت‌ها',
+                            'edit-inventories' => 'ویرایش موجودی‌ها',
+                            'add-images'       => 'افزودن تصاویر',
+                            'remove-images'    => 'حذف تصاویر',
+                            'remove-variants'  => 'حذف نسخه‌ها',
+                            'price'            => 'قیمت',
+                            'apply-to-all-sku' => 'اعمال قیمت به تمام SKUها',
+                            'apply-to-all-btn' => 'اعمال به همه',
                         ],
                     ],
 
@@ -3023,6 +3022,28 @@ return [
                 'qty'         => ':qty موجود است',
             ],
         ],
+
+        'media' => [
+            'images' => [
+                'add-image-btn'     => 'افزودن تصویر',
+                'allowed-types'     => 'png، jpeg، jpg',
+                'not-allowed-error' => 'فقط فایل‌های تصویری (.jpeg، .jpg، .png، ..) مجاز هستند.',
+
+                'placeholders'  => [
+                    'front'     => 'جلو',
+                    'next'      => 'بعدی',
+                    'size'      => 'اندازه',
+                    'use-cases' => 'موارد استفاده',
+                    'zoom'      => 'بزرگ‌نمایی',
+                ],
+            ],
+
+            'videos' => [
+                'add-video-btn'     => 'افزودن ویدیو',
+                'allowed-types'     => 'mp4، webm، mkv',
+                'not-allowed-error' => 'فقط فایل‌های ویدیویی (.mp4، .mov، .ogg ..) مجاز هستند.',
+            ],
+        ]
     ],
 
     'acl' => [

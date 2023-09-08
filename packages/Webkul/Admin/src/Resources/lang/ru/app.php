@@ -576,27 +576,13 @@ return [
                 ],
 
                 'images' => [
-                    'add-image-btn'     => 'Добавить изображение',
-                    'allowed-types'     => 'png, jpeg, jpg',
-                    'info'              => 'Разрешение изображения должно быть 609px X 560px',
-                    'not-allowed-error' => 'Разрешены только файлы изображений (.jpeg, .jpg, .png и др.)',
-                    'title'             => 'Изображения',
-
-                    'placeholders'  => [
-                        'front'     => 'Спереди',
-                        'next'      => 'Следующий',
-                        'size'      => 'Размер',
-                        'use-cases' => 'Использование',
-                        'zoom'      => 'Увеличить',
-                    ],
+                    'title' => 'Изображения',
+                    'info'  => 'Разрешение изображения должно быть 609px X 560px',
                 ],
 
                 'videos' => [
-                    'add-video-btn'     => 'Добавить видео',
-                    'allowed-types'     => 'mp4, webm, mkv',
-                    'info'              => 'Максимальный размер видео должен быть :size',
-                    'not-allowed-error' => 'Разрешены только файлы видео (.mp4, .mov, .ogg и др.)',
-                    'title'             => 'Видео',
+                    'title' => 'Видео',
+                    'info'  => 'Максимальный размер видео должен быть :size',
                 ],
 
                 'links' => [
@@ -659,6 +645,19 @@ return [
                             'sku'             => 'Артикул (SKU)',
                             'status'          => 'Статус',
                             'weight'          => 'Вес',
+                        ],
+
+                        'mass-edit' => [
+                            'select-variants'  => 'Выбрать Варианты',
+                            'select-action'    => 'Выбрать Действие',
+                            'edit-prices'      => 'Редактировать Цены',
+                            'edit-inventories' => 'Редактировать Наличие',
+                            'add-images'       => 'Добавить Изображения',
+                            'remove-images'    => 'Удалить Изображения',
+                            'remove-variants'  => 'Удалить Варианты',
+                            'price'            => 'Цена',
+                            'apply-to-all-sku' => 'Применить цену ко всем SKU.',
+                            'apply-to-all-btn' => 'Применить ко всем',
                         ],
                     ],
 
@@ -3023,6 +3022,28 @@ return [
                 'qty'         => ':qty доступно',
             ],
         ],
+
+        'media' => [
+            'images' => [
+                'add-image-btn'     => 'Добавить изображение',
+                'allowed-types'     => 'png, jpeg, jpg',
+                'not-allowed-error' => 'Разрешены только файлы изображений (.jpeg, .jpg, .png и др.)',
+
+                'placeholders'  => [
+                    'front'     => 'Спереди',
+                    'next'      => 'Следующий',
+                    'size'      => 'Размер',
+                    'use-cases' => 'Использование',
+                    'zoom'      => 'Увеличить',
+                ],
+            ],
+
+            'videos' => [
+                'add-video-btn'     => 'Добавить видео',
+                'allowed-types'     => 'mp4, webm, mkv',
+                'not-allowed-error' => 'Разрешены только файлы видео (.mp4, .mov, .ogg и др.)',
+            ],
+        ]
     ],
 
     'acl' => [

@@ -576,27 +576,13 @@ return [
                 ],
 
                 'images' => [
-                    'add-image-btn'     => 'Afbeelding Toevoegen',
-                    'allowed-types'     => 'png, jpeg, jpg',
-                    'info'              => 'De afbeeldingsresolutie moet zijn zoals 609px X 560px',
-                    'not-allowed-error' => 'Alleen afbeeldingsbestanden (.jpeg, .jpg, .png, ..) zijn toegestaan.',
-                    'title'             => 'Afbeeldingen',
-
-                    'placeholders'  => [
-                        'front'     => 'Voorkant',
-                        'next'      => 'Volgende',
-                        'size'      => 'Formaat',
-                        'use-cases' => 'Gebruiksscenario\'s',
-                        'zoom'      => 'Inzoomen',
-                    ],
+                    'title' => 'Afbeeldingen',
+                    'info'  => 'De afbeeldingsresolutie moet zijn zoals 609px X 560px',
                 ],
 
                 'videos' => [
-                    'add-video-btn'     => 'Video Toevoegen',
-                    'allowed-types'     => 'mp4, webm, mkv',
-                    'info'              => 'De maximale grootte van de video moet zijn zoals :size',
-                    'not-allowed-error' => 'Alleen videobestanden (.mp4, .mov, .ogg ..) zijn toegestaan.',
-                    'title'             => 'Video\'s',
+                    'title' => 'Video\'s',
+                    'info'  => 'De maximale grootte van de video moet zijn zoals :size',
                 ],
 
                 'links' => [
@@ -659,6 +645,19 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'Status',
                             'weight'          => 'Gewicht',
+                        ],
+
+                        'mass-edit' => [
+                            'select-variants'  => 'Selecteer Varianten',
+                            'select-action'    => 'Selecteer Actie',
+                            'edit-prices'      => 'Bewerk Prijzen',
+                            'edit-inventories' => 'Bewerk Voorraden',
+                            'add-images'       => 'Afbeeldingen Toevoegen',
+                            'remove-images'    => 'Afbeeldingen Verwijderen',
+                            'remove-variants'  => 'Varianten Verwijderen',
+                            'price'            => 'Prijs',
+                            'apply-to-all-sku' => 'Pas een prijs toe op alle SKU\'s.',
+                            'apply-to-all-btn' => 'Toepassen op Alles',
                         ],
                     ],
 
@@ -3021,6 +3020,28 @@ return [
                 'empty-info'  => 'Geen producten beschikbaar voor zoekterm.',
                 'sku'         => 'SKU - :sku',
                 'qty'         => ':qty Beschikbaar',
+            ],
+        ],
+
+        'media' => [
+            'images' => [
+                'add-image-btn'     => 'Afbeelding Toevoegen',
+                'allowed-types'     => 'png, jpeg, jpg',
+                'not-allowed-error' => 'Alleen afbeeldingsbestanden (.jpeg, .jpg, .png, ..) zijn toegestaan.',
+
+                'placeholders'  => [
+                    'front'     => 'Voorkant',
+                    'next'      => 'Volgende',
+                    'size'      => 'Formaat',
+                    'use-cases' => 'Gebruiksscenario\'s',
+                    'zoom'      => 'Inzoomen',
+                ],
+            ],
+
+            'videos' => [
+                'add-video-btn'     => 'Video Toevoegen',
+                'allowed-types'     => 'mp4, webm, mkv',
+                'not-allowed-error' => 'Alleen videobestanden (.mp4, .mov, .ogg ..) zijn toegestaan.',
             ],
         ],
     ],
