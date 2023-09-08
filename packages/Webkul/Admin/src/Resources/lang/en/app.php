@@ -89,6 +89,8 @@ return [
             'date-duration'               => ':start - :end',
             'decreased'                   => ':progress%',
             'end-date'                    => 'End Date',
+            'empty-threshold'             => 'Empty Threshold',
+            'empty-threshold-description' => 'There is no product available',
             'from'                        => 'From',
             'increased'                   => ':progress%',
             'more-products'               => ':product_count+ More Images',
@@ -124,8 +126,6 @@ return [
             'user-name'                   => 'Hi ! :user_name',
             'user-info'                   => 'Quickly Review what’s going on in your store',
             'visitor'                     => 'Visitor',
-            'empty-threshold'             => 'Empty Threshold',
-            'empty-threshold-description' => 'There is no product available',
         ],
     ],
 
