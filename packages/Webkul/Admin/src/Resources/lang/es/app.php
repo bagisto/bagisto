@@ -1997,12 +1997,13 @@ return [
                 ],
 
                 'create'  =>  [
-                    'code'              => 'Código',
-                    'name'              => 'Nombre',
-                    'direction'         => 'Dirección',
-                    'locale-logo'       => 'Logotipo del Idioma',
-                    'title'             => 'Crear Idioma',
-                    'save-btn'          => 'Guardar Idioma',
+                    'code'             => 'Código',
+                    'name'             => 'Nombre',
+                    'direction'        => 'Dirección',
+                    'locale-logo'      => 'Logotipo del Idioma',
+                    'title'            => 'Crear Idioma',
+                    'save-btn'         => 'Guardar Idioma',
+                    'select-direction' => 'Seleccionar dirección',
                 ],
 
                 'edit'  => [
@@ -2069,12 +2070,13 @@ return [
                 'update-rates'  => 'Actualizar Tipo de Cambio',
 
                 'create' => [
-                    'delete-warning'   => '¿Estás seguro de que deseas realizar esta acción?',
-                    'title'            => 'Crear Tipo de Cambio',
-                    'rate'             => 'Tasa',
-                    'save-btn'         => 'Guardar Tipo de Cambio',
-                    'source-currency'  => 'Moneda Fuente',
-                    'target-currency'  => 'Moneda Objetivo',
+                    'delete-warning'         => '¿Estás seguro de que deseas realizar esta acción?',
+                    'title'                  => 'Crear Tipo de Cambio',
+                    'rate'                   => 'Tasa',
+                    'save-btn'               => 'Guardar Tipo de Cambio',
+                    'source-currency'        => 'Moneda Fuente',
+                    'select-target-currency' => 'Seleccionar moneda objetivo',
+                    'target-currency'        => 'Moneda Objetivo',
                 ],
 
                 'edit' => [

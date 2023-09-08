@@ -1997,12 +1997,13 @@ return [
                 ],
         
                 'create' => [
-                    'code'         => 'Código',
-                    'name'         => 'Nombre',
-                    'direction'    => 'Dirección',
-                    'locale-logo'  => 'Logo de Localidad',
-                    'title'        => 'Crear Localidad',
-                    'save-btn'     => 'Guardar Localidad',
+                    'code'             => 'Código',
+                    'name'             => 'Nombre',
+                    'direction'        => 'Dirección',
+                    'locale-logo'      => 'Logo de Localidad',
+                    'title'            => 'Crear Localidad',
+                    'save-btn'         => 'Guardar Localidad',
+                    'select-direction' => 'Seleziona direzione',
                 ],
         
                 'edit' => [
@@ -2069,12 +2070,13 @@ return [
                 'update-rates'  => 'Actualizar Tasa de Cambio',
         
                 'create' => [
-                    'delete-warning'  => '¿Estás seguro de que deseas realizar esta acción?',
-                    'title'           => 'Crear Tasa de Cambio',
-                    'rate'            => 'Tasa',
-                    'save-btn'        => 'Guardar Tasa de Cambio',
-                    'source-currency' => 'Moneda Fuente',
-                    'target-currency' => 'Moneda Objetivo',
+                    'delete-warning'         => '¿Estás seguro de que deseas realizar esta acción?',
+                    'title'                  => 'Crear Tasa de Cambio',
+                    'rate'                   => 'Tasa',
+                    'save-btn'               => 'Guardar Tasa de Cambio',
+                    'source-currency'        => 'Moneda Fuente',
+                    'select-target-currency' => 'Seleziona la valuta di destinazione',
+                    'target-currency'        => 'Moneda Objetivo',
                 ],
         
                 'edit' => [

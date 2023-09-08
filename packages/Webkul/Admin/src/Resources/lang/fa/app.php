@@ -1997,12 +1997,13 @@ return [
                 ],
 
                 'create'  =>  [
-                    'code'        => 'کد',
-                    'name'        => 'نام',
-                    'direction'   => 'جهت',
-                    'locale-logo' => 'لوگو زبان',
-                    'title'       => 'ایجاد زبان',
-                    'save-btn'    => 'ذخیره زبان',
+                    'code'             => 'کد',
+                    'name'             => 'نام',
+                    'direction'        => 'جهت',
+                    'locale-logo'      => 'لوگو زبان',
+                    'title'            => 'ایجاد زبان',
+                    'save-btn'         => 'ذخیره زبان',
+                    'select-direction' => 'انتخاب جهت',
                 ],
 
                 'edit'  => [
@@ -2069,12 +2070,13 @@ return [
                 'update-rates'  => 'به‌روزرسانی نرخ ارز',
 
                 'create' => [
-                    'delete-warning'  => 'آیا مطمئن هستید که می‌خواهید این عملیات را انجام دهید؟',
-                    'title'           => 'ساخت نرخ ارز',
-                    'rate'            => 'نرخ',
-                    'save-btn'        => 'ذخیره نرخ ارز',
-                    'source-currency' => 'ارز مبدأ',
-                    'target-currency' => 'ارز مقصد',
+                    'delete-warning'         => 'آیا مطمئن هستید که می‌خواهید این عملیات را انجام دهید؟',
+                    'title'                  => 'ساخت نرخ ارز',
+                    'rate'                   => 'نرخ',
+                    'save-btn'               => 'ذخیره نرخ ارز',
+                    'source-currency'        => 'ارز مبدأ',
+                    'select-target-currency' => 'انتخاب ارز مقصد',
+                    'target-currency'        => 'ارز مقصد',
                 ],
 
                 'edit' => [

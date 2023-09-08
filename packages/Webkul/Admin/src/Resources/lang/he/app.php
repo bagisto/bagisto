@@ -1997,12 +1997,13 @@ return [
                 ],
 
                 'create'  => [
-                    'code'        => 'קוד',
-                    'name'        => 'שם',
-                    'direction'   => 'כיוון',
-                    'locale-logo' => 'לוגו אזור',
-                    'title'       => 'צור אזור',
-                    'save-btn'    => 'שמור אזור',
+                    'code'             => 'קוד',
+                    'name'             => 'שם',
+                    'direction'        => 'כיוון',
+                    'locale-logo'      => 'לוגו אזור',
+                    'title'            => 'צור אזור',
+                    'save-btn'         => 'שמור אזור',
+                    'select-direction' => 'בחר כיוון',
                 ],
 
                 'edit'  => [
@@ -2069,12 +2070,13 @@ return [
                 'update-rates'  => 'עדכן שער חליפין',
 
                 'create' => [
-                    'delete-warning'  => 'האם אתה בטוח שברצונך לבצע פעולה זו?',
-                    'title'           => 'צור שער חליפין',
-                    'rate'            => 'שער',
-                    'save-btn'        => 'שמור שער חליפין',
-                    'source-currency' => 'מטבע מקור',
-                    'target-currency' => 'מטבע יעד',
+                    'delete-warning'         => 'האם אתה בטוח שברצונך לבצע פעולה זו?',
+                    'title'                  => 'צור שער חליפין',
+                    'rate'                   => 'שער',
+                    'save-btn'               => 'שמור שער חליפין',
+                    'source-currency'        => 'מטבע מקור',
+                    'select-target-currency' => 'בחר מטבע יעד',
+                    'target-currency'        => 'מטבע יעד',
                 ],
 
                 'edit' => [

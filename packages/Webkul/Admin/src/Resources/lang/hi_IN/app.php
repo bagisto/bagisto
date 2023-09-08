@@ -1997,12 +1997,13 @@ return [
                 ],
 
                 'create'  => [
-                    'code'        => 'कोड',
-                    'name'        => 'नाम',
-                    'direction'   => 'दिशा',
-                    'locale-logo' => 'स्थान लोगो',
-                    'title'       => 'स्थान बनाएं',
-                    'save-btn'    => 'स्थान सहेजें',
+                    'code'             => 'कोड',
+                    'name'             => 'नाम',
+                    'direction'        => 'दिशा',
+                    'locale-logo'      => 'स्थान लोगो',
+                    'title'            => 'स्थान बनाएं',
+                    'save-btn'         => 'स्थान सहेजें',
+                    'select-direction' => 'दिशा चुनें',
                 ],
 
                 'edit'  => [
@@ -2069,12 +2070,13 @@ return [
                 'update-rates'  => 'विनिमय दर अपडेट करें',
 
                 'create' => [
-                    'delete-warning'  => 'क्या आप वाकई इस क्रिया को करना चाहते हैं?',
-                    'title'           => 'विनिमय दर बनाएं',
-                    'rate'            => 'दर',
-                    'save-btn'        => 'विनिमय दर सहेजें',
-                    'source-currency' => 'स्रोत मुद्रा',
-                    'target-currency' => 'लक्ष्य मुद्रा',
+                    'delete-warning'         => 'क्या आप वाकई इस क्रिया को करना चाहते हैं?',
+                    'title'                  => 'विनिमय दर बनाएं',
+                    'rate'                   => 'दर',
+                    'save-btn'               => 'विनिमय दर सहेजें',
+                    'source-currency'        => 'स्रोत मुद्रा',
+                    'select-target-currency' => 'लक्ष्य मुद्रा चुनें',
+                    'target-currency'        => 'लक्ष्य मुद्रा',
                 ],
 
                 'edit' => [

@@ -1996,12 +1996,13 @@ return [
                 ],
 
                 'create' => [
-                    'code'        => 'Code',
-                    'name'        => 'Naam',
-                    'direction'   => 'Richting',
-                    'locale-logo' => 'Taal Logo',
-                    'title'       => 'Taal Aanmaken',
-                    'save-btn'    => 'Taal Opslaan',
+                    'code'             => 'Code',
+                    'name'             => 'Naam',
+                    'direction'        => 'Richting',
+                    'locale-logo'      => 'Taal Logo',
+                    'title'            => 'Taal Aanmaken',
+                    'save-btn'         => 'Taal Opslaan',
+                    'select-direction' => 'Richting selecteren',
                 ],
 
                 'edit' => [
@@ -2068,12 +2069,13 @@ return [
                 'update-rates'  => 'Wisselkoers Bijwerken',
 
                 'create' => [
-                    'delete-warning'  => 'Weet je zeker dat je deze actie wilt uitvoeren?',
-                    'title'           => 'Wisselkoers Aanmaken',
-                    'rate'            => 'Koers',
-                    'save-btn'        => 'Wisselkoers Opslaan',
-                    'source-currency' => 'Bronvaluta',
-                    'target-currency' => 'Doelvaluta',
+                    'delete-warning'         => 'Weet je zeker dat je deze actie wilt uitvoeren?',
+                    'title'                  => 'Wisselkoers Aanmaken',
+                    'rate'                   => 'Koers',
+                    'save-btn'               => 'Wisselkoers Opslaan',
+                    'source-currency'        => 'Bronvaluta',
+                    'select-target-currency' => 'Selecteer doelvaluta',
+                    'target-currency'        => 'Doelvaluta',
                 ],
 
                 'edit' => [

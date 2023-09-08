@@ -1997,12 +1997,13 @@ return [
                 ],
 
                 'create'  => [
-                    'code'        => 'Código',
-                    'name'        => 'Nome',
-                    'direction'   => 'Direção',
-                    'locale-logo' => 'Logo do Idioma',
-                    'title'       => 'Criar Idioma',
-                    'save-btn'    => 'Salvar Idioma',
+                    'code'             => 'Código',
+                    'name'             => 'Nome',
+                    'direction'        => 'Direção',
+                    'locale-logo'      => 'Logo do Idioma',
+                    'title'            => 'Criar Idioma',
+                    'save-btn'         => 'Salvar Idioma',
+                    'select-direction' => 'Selecionar direção',
                 ],
 
                 'edit'  => [
@@ -2069,12 +2070,13 @@ return [
                 'update-rates'  => 'Atualizar Taxa de Câmbio',
 
                 'create' => [
-                    'delete-warning'  => 'Tem certeza de que deseja executar esta ação?',
-                    'title'           => 'Criar Taxa de Câmbio',
-                    'rate'            => 'Taxa',
-                    'save-btn'        => 'Salvar Taxa de Câmbio',
-                    'source-currency' => 'Moeda de Origem',
-                    'target-currency' => 'Moeda de Destino',
+                    'delete-warning'         => 'Tem certeza de que deseja executar esta ação?',
+                    'title'                  => 'Criar Taxa de Câmbio',
+                    'rate'                   => 'Taxa',
+                    'save-btn'               => 'Salvar Taxa de Câmbio',
+                    'source-currency'        => 'Moeda de Origem',
+                    'select-target-currency' => 'Selecionar moeda de destino',
+                    'target-currency'        => 'Moeda de Destino',
                 ],
 
                 'edit' => [

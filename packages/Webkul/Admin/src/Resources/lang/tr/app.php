@@ -1997,12 +1997,13 @@ return [
                 ],
 
                 'create'  => [
-                    'code'        => 'Kodu',
-                    'name'        => 'Adı',
-                    'direction'   => 'Yön',
-                    'locale-logo' => 'Yerel Logosu',
-                    'title'       => 'Yerel Oluştur',
-                    'save-btn'    => 'Yereli Kaydet',
+                    'code'             => 'Kodu',
+                    'name'             => 'Adı',
+                    'direction'        => 'Yön',
+                    'locale-logo'      => 'Yerel Logosu',
+                    'title'            => 'Yerel Oluştur',
+                    'save-btn'         => 'Yereli Kaydet',
+                    'select-direction' => 'Yön seç',
                 ],
 
                 'edit'  => [
@@ -2069,12 +2070,13 @@ return [
                 'update-rates'  => 'Döviz Kuru Güncelle',
 
                 'create' => [
-                    'delete-warning'  => 'Emin misiniz, bu işlemi gerçekleştirmek istediğinize?',
-                    'title'           => 'Döviz Kuru Oluştur',
-                    'rate'            => 'Kur',
-                    'save-btn'        => 'Döviz Kuru Kaydet',
-                    'source-currency' => 'Kaynak Para Birimi',
-                    'target-currency' => 'Hedef Para Birimi',
+                    'delete-warning'         => 'Emin misiniz, bu işlemi gerçekleştirmek istediğinize?',
+                    'title'                  => 'Döviz Kuru Oluştur',
+                    'rate'                   => 'Kur',
+                    'save-btn'               => 'Döviz Kuru Kaydet',
+                    'source-currency'        => 'Kaynak Para Birimi',
+                    'select-target-currency' => 'Hedef para birimini seç',
+                    'target-currency'        => 'Hedef Para Birimi',
                 ],
 
                 'edit' => [

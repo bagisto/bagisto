@@ -1997,12 +1997,13 @@ return [
                 ],
 
                 'create' => [
-                    'code'        => 'الكود',
-                    'name'        => 'الاسم',
-                    'direction'   => 'الاتجاه',
-                    'locale-logo' => 'شعار اللغة',
-                    'title'       => 'إنشاء لغة',
-                    'save-btn'    => 'حفظ اللغة',
+                    'code'             => 'الكود',
+                    'name'             => 'الاسم',
+                    'direction'        => 'الاتجاه',
+                    'locale-logo'      => 'شعار اللغة',
+                    'title'            => 'إنشاء لغة',
+                    'save-btn'         => 'حفظ اللغة',
+                    'select-direction' => 'اختر الاتجاه',
                 ],
 
                 'edit' => [
@@ -2069,12 +2070,13 @@ return [
                 'update-rates'  => 'تحديث سعر الصرف',
 
                 'create' => [
-                    'delete-warning'  => 'هل أنت متأكد أنك تريد أداء هذا الإجراء؟',
-                    'title'           => 'إنشاء سعر صرف',
-                    'rate'            => 'السعر',
-                    'save-btn'        => 'حفظ سعر الصرف',
-                    'source-currency' => 'العملة المصدر',
-                    'target-currency' => 'العملة المستهدفة',
+                    'delete-warning'         => 'هل أنت متأكد أنك تريد أداء هذا الإجراء؟',
+                    'title'                  => 'إنشاء سعر صرف',
+                    'rate'                   => 'السعر',
+                    'save-btn'               => 'حفظ سعر الصرف',
+                    'source-currency'        => 'العملة المصدر',
+                    'select-target-currency' => 'اختر العملة المستهدفة',
+                    'target-currency'        => 'العملة المستهدفة',
                 ],
 
                 'edit' => [

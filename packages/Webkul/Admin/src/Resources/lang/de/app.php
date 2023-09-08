@@ -1997,12 +1997,13 @@ return [
                 ],
 
                 'create'  =>  [
-                    'code'        => 'Code',
-                    'name'        => 'Name',
-                    'direction'   => 'Richtung',
-                    'locale-logo' => 'Sprachversionslogo',
-                    'title'       => 'Sprachversion erstellen',
-                    'save-btn'    => 'Sprachversion speichern',
+                    'code'             => 'Code',
+                    'name'             => 'Name',
+                    'direction'        => 'Richtung',
+                    'locale-logo'      => 'Sprachversionslogo',
+                    'title'            => 'Sprachversion erstellen',
+                    'save-btn'         => 'Sprachversion speichern',
+                    'select-direction' => 'Richtung auswählen',
                 ],
 
                 'edit'  => [
@@ -2069,12 +2070,13 @@ return [
                 'update-rates'  => 'Wechselkurs aktualisieren',
 
                 'create' => [
-                    'delete-warning'  => 'Sind Sie sicher, dass Sie diese Aktion durchführen möchten?',
-                    'title'           => 'Wechselkurs erstellen',
-                    'rate'            => 'Kurs',
-                    'save-btn'        => 'Wechselkurs speichern',
-                    'source-currency' => 'Quellwährung',
-                    'target-currency' => 'Zielwährung',
+                    'delete-warning'         => 'Sind Sie sicher, dass Sie diese Aktion durchführen möchten?',
+                    'title'                  => 'Wechselkurs erstellen',
+                    'rate'                   => 'Kurs',
+                    'save-btn'               => 'Wechselkurs speichern',
+                    'source-currency'        => 'Quellwährung',
+                    'select-target-currency' => 'Zielwährung auswählen',
+                    'target-currency'        => 'Zielwährung',
                 ],
 
                 'edit' => [

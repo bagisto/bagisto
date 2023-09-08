@@ -1997,12 +1997,13 @@ return [
                 ],
 
                 'create'  => [
-                    'code'        => 'Kod',
-                    'name'        => 'Nazwa',
-                    'direction'   => 'Kierunek',
-                    'locale-logo' => 'Logo Lokalizacji',
-                    'title'       => 'Utwórz Lokalizację',
-                    'save-btn'    => 'Zapisz Lokalizację',
+                    'code'             => 'Kod',
+                    'name'             => 'Nazwa',
+                    'direction'        => 'Kierunek',
+                    'locale-logo'      => 'Logo Lokalizacji',
+                    'title'            => 'Utwórz Lokalizację',
+                    'save-btn'         => 'Zapisz Lokalizację',
+                    'select-direction' => 'Wybierz kierunek',
                 ],
 
                 'edit'  => [
@@ -2069,12 +2070,13 @@ return [
                 'update-rates'  => 'Aktualizuj Kurs Walutowy',
 
                 'create' => [
-                    'delete-warning'  => 'Czy na pewno chcesz wykonać tę operację?',
-                    'title'           => 'Utwórz Kurs Walutowy',
-                    'rate'            => 'Kurs',
-                    'save-btn'        => 'Zapisz Kurs Walutowy',
-                    'source-currency' => 'Waluta Źródłowa',
-                    'target-currency' => 'Waluta Docelowa',
+                    'delete-warning'         => 'Czy na pewno chcesz wykonać tę operację?',
+                    'title'                  => 'Utwórz Kurs Walutowy',
+                    'rate'                   => 'Kurs',
+                    'save-btn'               => 'Zapisz Kurs Walutowy',
+                    'source-currency'        => 'Waluta Źródłowa',
+                    'select-target-currency' => 'Wybierz docelową walutę',
+                    'target-currency'        => 'Waluta Docelowa',
                 ],
 
                 'edit' => [

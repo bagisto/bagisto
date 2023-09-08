@@ -1980,42 +1980,43 @@ return [
     'settings' => [
         'locales' => [
             'index' => [
-                'title'      => 'Locales',
-                'locale'     => 'Locale',
-                'create-btn' => 'Create Locale',
-
+                'title'      => 'මාතෘකාවන්',
+                'locale'     => 'භාෂාව',
+                'create-btn' => 'මාතෘකාවක් සාදන්න',
+            
                 'datagrid' => [
-                    'actions'   => 'Actions',
-                    'id'        => 'ID',
-                    'name'      => 'Name',
-                    'code'      => 'Code',
-                    'direction' => 'Direction',
+                    'actions'   => 'ක්‍රියා',
+                    'id'        => 'අංකය',
+                    'name'      => 'නම',
+                    'code'      => 'කේතය',
+                    'direction' => 'දිශාව',
                     'ltr'       => 'LTR',
                     'rtl'       => 'RTL',
-                    'edit'      => 'Edit',
-                    'delete'    => 'Delete',
+                    'edit'      => 'සංස්කරණය',
+                    'delete'    => 'මකනවා',
                 ],
-
+            
                 'create'  =>  [
-                    'code'        => 'Code',
-                    'name'        => 'Name',
-                    'direction'   => 'Direction',
-                    'locale-logo' => 'Locale Logo',
-                    'title'       => 'Create Locale',
-                    'save-btn'    => 'Save Locale',
+                    'code'             => 'කේතය',
+                    'name'             => 'නම',
+                    'direction'        => 'දිශාව',
+                    'locale-logo'      => 'භාෂා ලෝගෝ',
+                    'title'            => 'මාතෘකාවක් සාදන්න',
+                    'save-btn'         => 'මාතෘකාව සුරකින්න',
+                    'select-direction' => 'දිශාව තෝරනවා',
                 ],
-
+            
                 'edit'  => [
-                    'title' => 'Edit Locales',
+                    'title' => 'මාතෘකාවක් සංස්කරණය කරනවා',
                 ],
-
-                'create-success'    => 'Locale created successfully.',
-                'update-success'    => 'Locale updated successfully.',
-                'delete-success'    => 'Locale deleted successfully.',
-                'last-delete-error' => 'At least one Locale is required.',
-                'delete-warning'    => 'Are you sure, you want to perform this action?',
-                'delete-failed'     => 'Locale deletion failed',
-            ],
+            
+                'create-success'    => 'මාතෘකාව සාර්ථකව සෑදීම.',
+                'update-success'    => 'මාතෘකාව සාර්ථකව වෙනස් කිරීම.',
+                'delete-success'    => 'මාතෘකාව සාර්ථකව මකා දමනවා.',
+                'last-delete-error' => 'අවිස්සාවේ අවශ්‍ය මාතෘකාවක් එකතු කළ යුතුය.',
+                'delete-warning'    => 'ඔබට මෙම ක්‍රියාකාරීත්වය මකා දමන්නම්?',
+                'delete-failed'     => 'මාතෘකාව මකා දැමීම අසාර්ථකයි',
+            ],            
         ],
 
         'currencies' => [
@@ -2069,12 +2070,13 @@ return [
                 'update-rates'  => 'වාරික තාක්ෂණය යාවත්කාලීන කරන්න',
 
                 'create' => [
-                    'delete-warning'  => 'ඔබට මෙම ක්‍රියාකාරකම කිරීමට යන අවිස්සාවක් සුදුසුදක්ද?',
-                    'title'           => 'වාරික තාක්ෂණය සාදන්න',
-                    'rate'            => 'තාක්ෂණය',
-                    'save-btn'        => 'වාරික තාක්ෂණය සුරකින්න',
-                    'source-currency' => 'මුලගේ මුදල්',
-                    'target-currency' => 'ඉලක්කගේ මුදල්',
+                    'delete-warning'         => 'ඔබට මෙම ක්‍රියාකාරකම කිරීමට යන අවිස්සාවක් සුදුසුදක්ද?',
+                    'title'                  => 'වාරික තාක්ෂණය සාදන්න',
+                    'rate'                   => 'තාක්ෂණය',
+                    'save-btn'               => 'වාරික තාක්ෂණය සුරකින්න',
+                    'source-currency'        => 'මුලගේ මුදල්',
+                    'select-target-currency' => 'ඉලක්කම් මුදල තෝරනවා',
+                    'target-currency'        => 'ඉලක්කගේ මුදල්',
                 ],
 
                 'edit' => [

@@ -1997,12 +1997,13 @@ return [
                 ],
 
                 'create'  =>  [
-                    'code'        => '代码',
-                    'name'        => '名称',
-                    'direction'   => '方向',
-                    'locale-logo' => '区域标志',
-                    'title'       => '创建区域',
-                    'save-btn'    => '保存区域',
+                    'code'             => '代码',
+                    'name'             => '名称',
+                    'direction'        => '方向',
+                    'locale-logo'      => '区域标志',
+                    'title'            => '创建区域',
+                    'save-btn'         => '保存区域',
+                    'select-direction' => '选择方向',
                 ],
 
                 'edit'  => [
@@ -2069,12 +2070,13 @@ return [
                 'update-rates'  => '更新汇率',
 
                 'create' => [
-                    'delete-warning'  => '确定要执行此操作吗？',
-                    'title'           => '创建汇率',
-                    'rate'            => '汇率',
-                    'save-btn'        => '保存汇率',
-                    'source-currency' => '源货币',
-                    'target-currency' => '目标货币',
+                    'delete-warning'         => '确定要执行此操作吗？',
+                    'title'                  => '创建汇率',
+                    'rate'                   => '汇率',
+                    'save-btn'               => '保存汇率',
+                    'source-currency'        => '源货币',
+                    'select-target-currency' => '选择目标货币',
+                    'target-currency'        => '目标货币',
                 ],
 
                 'edit' => [

@@ -1997,12 +1997,13 @@ return [
                 ],
 
                 'create'  => [
-                    'code'        => 'Code',
-                    'name'        => 'Nom',
-                    'direction'   => 'Direction',
-                    'locale-logo' => 'Logo de la locale',
-                    'title'       => 'Créer une locale',
-                    'save-btn'    => 'Enregistrer la locale',
+                    'code'             => 'Code',
+                    'name'             => 'Nom',
+                    'direction'        => 'Direction',
+                    'locale-logo'      => 'Logo de la locale',
+                    'title'            => 'Créer une locale',
+                    'save-btn'         => 'Enregistrer la locale',
+                    'select-direction' => 'Sélectionner la direction',
                 ],
 
                 'edit'  => [
@@ -2069,12 +2070,13 @@ return [
                 'update-rates'  => 'Mettre à jour les taux de change',
 
                 'create' => [
-                    'delete-warning'  => 'Êtes-vous sûr de vouloir effectuer cette action ?',
-                    'title'           => 'Créer un taux de change',
-                    'rate'            => 'Taux',
-                    'save-btn'        => 'Enregistrer le taux de change',
-                    'source-currency' => 'Devise source',
-                    'target-currency' => 'Devise cible',
+                    'delete-warning'         => 'Êtes-vous sûr de vouloir effectuer cette action ?',
+                    'title'                  => 'Créer un taux de change',
+                    'rate'                   => 'Taux',
+                    'save-btn'               => 'Enregistrer le taux de change',
+                    'source-currency'        => 'Devise source',
+                    'select-target-currency' => 'Sélectionnez la devise cible',
+                    'target-currency'        => 'Devise cible',
                 ],
 
                 'edit' => [

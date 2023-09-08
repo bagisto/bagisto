@@ -1996,16 +1996,17 @@ return [
                     'delete'    => 'Delete',
                 ],
 
-                'create'  => [
-                    'code'        => 'Code',
-                    'name'        => 'Name',
-                    'direction'   => 'Direction',
-                    'locale-logo' => 'Locale Logo',
-                    'title'       => 'Create Locale',
-                    'save-btn'    => 'Save Locale',
+                'create' => [
+                    'code'             => 'Code',
+                    'name'             => 'Name',
+                    'direction'        => 'Direction',
+                    'locale-logo'      => 'Locale Logo',
+                    'title'            => 'Create Locale',
+                    'save-btn'         => 'Save Locale',
+                    'select-direction' => 'Select Direction',
                 ],
 
-                'edit'  => [
+                'edit' => [
                     'title' => 'Edit Locales',
                 ],
 
@@ -2069,16 +2070,17 @@ return [
                 'update-rates'  => 'Update Exchange Rate',
 
                 'create' => [
-                    'delete-warning'  => 'Are you sure, you want to perform this action?',
-                    'title'           => 'Create Exchange Rate',
-                    'rate'            => 'Rate',
-                    'save-btn'        => 'Save Exchange Rate',
-                    'source-currency' => 'Source Currency',
-                    'target-currency' => 'Target Currency',
+                    'delete-warning'         => 'Are you sure, you want to perform this action?',
+                    'title'                  => 'Create Exchange Rate',
+                    'rate'                   => 'Rate',
+                    'save-btn'               => 'Save Exchange Rate',
+                    'source-currency'        => 'Source Currency',
+                    'select-target-currency' => 'Select Target Currency',
+                    'target-currency'        => 'Target Currency',
                 ],
 
                 'edit' => [
-                    'title'   => 'Edit Exchange Rates',
+                    'title' => 'Edit Exchange Rates',
                 ],
 
                 'datagrid' => [

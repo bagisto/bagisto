@@ -1997,12 +1997,13 @@ return [
                 ],
 
                 'create'  =>  [
-                    'code'        => 'コード',
-                    'name'        => '名前',
-                    'direction'   => '方向',
-                    'locale-logo' => 'ロケールロゴ',
-                    'title'       => 'ロケールを作成',
-                    'save-btn'    => 'ロケールを保存',
+                    'code'             => 'コード',
+                    'name'             => '名前',
+                    'direction'        => '方向',
+                    'locale-logo'      => 'ロケールロゴ',
+                    'title'            => 'ロケールを作成',
+                    'save-btn'         => 'ロケールを保存',
+                    'select-direction' => '方向を選択',
                 ],
 
                 'edit'  => [
@@ -2069,12 +2070,13 @@ return [
                 'update-rates'  => '為替レートを更新',
 
                 'create' => [
-                    'delete-warning'  => '本当にこのアクションを実行しますか？',
-                    'title'           => '為替レートを作成',
-                    'rate'            => 'レート',
-                    'save-btn'        => '為替レートを保存',
-                    'source-currency' => '元通貨',
-                    'target-currency' => 'ターゲット通貨',
+                    'delete-warning'         => '本当にこのアクションを実行しますか？',
+                    'title'                  => '為替レートを作成',
+                    'rate'                   => 'レート',
+                    'save-btn'               => '為替レートを保存',
+                    'source-currency'        => '元通貨',
+                    'select-target-currency' => '目標通貨を選択',
+                    'target-currency'        => 'ターゲット通貨',
                 ],
 
                 'edit' => [
