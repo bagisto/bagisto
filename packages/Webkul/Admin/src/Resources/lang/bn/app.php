@@ -1154,7 +1154,7 @@ return [
                     'create-success'        => 'গ্রাহক সফলভাবে তৈরি হয়েছে',
                     'date-of-birth'         => 'জন্ম তারিখ',
                     'email'                 => 'ইমেইল',
-                    'female'                => 'মহিলা',
+                    'female'                => 'নারী',
                     'first-name'            => 'প্রথম নাম',
                     'gender'                => 'লিঙ্গ',
                     'last-name'             => 'শেষ নাম',

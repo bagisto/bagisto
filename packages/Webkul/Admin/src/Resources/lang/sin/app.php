@@ -1154,7 +1154,7 @@ return [
                     'create-success'        => 'ප්‍රකාශය සාර්ථකව නික්මෙන',
                     'date-of-birth'         => 'උපන්දිනය',
                     'email'                 => 'ඊමේල්',
-                    'female'                => 'කාන්තා',
+                    'female'                => 'ගුරුවරු',
                     'first-name'            => 'මුල් නම',
                     'gender'                => 'පුරුෂ ප්‍රමාණය',
                     'last-name'             => 'අනාථ නම',

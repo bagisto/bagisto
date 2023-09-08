@@ -1154,7 +1154,7 @@ return [
                     'create-success'        => 'Cliente criado com sucesso',
                     'date-of-birth'         => 'Data de Nascimento',
                     'email'                 => 'E-mail',
-                    'female'                => 'Feminino',
+                    'female'                => 'Fêmea',
                     'first-name'            => 'Nome',
                     'gender'                => 'Gênero',
                     'last-name'             => 'Sobrenome',

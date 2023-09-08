@@ -370,6 +370,10 @@
                                                 rules="required"
                                                 :label="trans('admin::app.customers.customers.index.create.gender')"
                                             >
+                                                <option value="">
+                                                    @lang('admin::app.customers.customers.index.create.select-gender')
+                                                </option>
+
                                                 <option value="Male">
                                                     @lang('admin::app.customers.customers.index.create.male')
                                                 </option>
@@ -402,6 +406,10 @@
                                                 :label="trans('admin::app.customers.customers.index.create.customer-group')"
                                             >
                                                 @foreach ($groups as $group)
+                                                    <option value="">
+                                                        @lang('admin::app.customers.customers.index.create.select-customer-group')
+                                                    </option>
+
                                                     <option value="{{ $group->id }}"> {{ $group->name}} </option>
                                                 @endforeach
                                             </x-admin::form.control-group.control>
