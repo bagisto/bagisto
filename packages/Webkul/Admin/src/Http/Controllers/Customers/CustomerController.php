@@ -78,7 +78,7 @@ class CustomerController extends Controller
         $this->customerRepository->create($data);
 
         return new JsonResource([
-            'message' => trans('admin::app.customers.index.create.create-success'),
+            'message' => trans('admin::app.customers.customers.index.create.create-success'),
         ]);
     }
 
@@ -133,9 +133,9 @@ class CustomerController extends Controller
 
         Event::dispatch('customer.update.after', $customer);
 
-        return new JsonResource([
-            'message' => trans('admin::app.customers.update-success'),
-        ]);
+        session()->flash('success', trans('admin::app.customers.customers.update-success'));
+
+        return redirect()->back();
     }
 
     /**
@@ -149,19 +149,19 @@ class CustomerController extends Controller
         $customer = $this->customerRepository->findorFail($id);
 
         if (! $customer) {
-            return response()->json(['message' => trans('admin::app.customers.delete-failed')], 400);
+            return response()->json(['message' => trans('admin::app.customers.customers.delete-failed')], 400);
         }
 
         if (! $this->customerRepository->checkIfCustomerHasOrderPendingOrProcessing($customer)) {
 
             $this->customerRepository->delete($id);
 
-            session()->flash('success', trans('admin::app.customers.delete-success'));
+            session()->flash('success', trans('admin::app.customers.customers.delete-success'));
 
             return redirect(route('admin.customers.customers.index'));
         }
 
-        session()->flash('success', trans('admin::app.customers.view.order-pending'));
+        session()->flash('success', trans('admin::app.customers.customers.view.order-pending'));
 
         return redirect()->back();
     }
@@ -178,7 +178,7 @@ class CustomerController extends Controller
 
         auth()->guard('customer')->login($customer);
 
-        session()->flash('success', trans('admin::app.customers.index.login-message', ['customer_name' => $customer->name]));
+        session()->flash('success', trans('admin::app.customers.customers.index.login-message', ['customer_name' => $customer->name]));
 
         return redirect(route('shop.customers.account.profile.index'));
     }
@@ -205,7 +205,7 @@ class CustomerController extends Controller
             Event::dispatch('customer.note-created.after', $customerNote);
         }
 
-        session()->flash('success', trans('admin::app.customers.view.note-created-success'));
+        session()->flash('success', trans('admin::app.customers.customers.view.note-created-success'));
 
         return redirect()->back();
     }
@@ -269,7 +269,7 @@ class CustomerController extends Controller
         }
 
         return new JsonResource([
-            'message' => trans('admin::app.customers.index.datagrid.update-success')
+            'message' => trans('admin::app.customers.customers.index.datagrid.update-success')
         ]);
     }
 
@@ -294,7 +294,7 @@ class CustomerController extends Controller
                 }
     
                 return new JsonResource([
-                    'message' => trans('admin::app.customers.index.datagrid.delete-success')
+                    'message' => trans('admin::app.customers.customers.index.datagrid.delete-success')
                 ]);
             } catch (\Exception $e) {
                 return new JsonResource([
@@ -303,6 +303,6 @@ class CustomerController extends Controller
             }
         }
 
-        throw new \Exception(trans('admin::app.customers.index.datagrid.order-pending'));
+        throw new \Exception(trans('admin::app.customers.customers.index.datagrid.order-pending'));
     }
 }

@@ -510,78 +510,95 @@
                 </p>
 
                 {{-- Products List --}}
-                <div class="bg-white rounded-[4px] box-shadow">
-                    @foreach ($statistics['stock_threshold'] as $item)
-                        <!-- Single Product -->
-                        <div class="relative">
-                            <div class="row grid grid-cols-2 gap-y-[24px] p-[16px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-100 max-sm:grid-cols-[1fr_auto]">
-                                <div class="flex gap-[10px]">
-                                    @if ($item->product->base_image_url)
-                                        <div class="">
-                                            <img
-                                                class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
-                                                src="{{ $item->product->base_image_url }}"
-                                            >
-                                        </div>
-                                    @else
-                                        <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
-                                            <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+                @if(! $statistics['stock_threshold']->isEmpty())
+                    <div class="bg-white rounded-[4px] box-shadow">
+                        @foreach ($statistics['stock_threshold'] as $item)
+                            <!-- Single Product -->
+                            <div class="relative">
+                                <div class="row grid grid-cols-2 gap-y-[24px] p-[16px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-100 max-sm:grid-cols-[1fr_auto]">
+                                    <div class="flex gap-[10px]">
+                                        @if ($item->product->base_image_url)
+                                            <div class="">
+                                                <img
+                                                    class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
+                                                    src="{{ $item->product->base_image_url }}"
+                                                >
+                                            </div>
+                                        @else
+                                            <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
 
-                                            <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
-                                                @lang('admin::app.dashboard.index.product-image')
+                                                <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
+                                                    @lang('admin::app.dashboard.index.product-image')
+                                                </p>
+                                            </div>
+                                        @endif
+
+                                        <div class="flex flex-col gap-[6px]">
+                                            {{-- Product Name --}}
+                                            <p class="text-[16px] text-gray-800 font-semibold">
+                                                @if (isset($item->product->name))
+                                                    {{ $item->product->name }}
+                                                @endif
+                                            </p>
+
+                                            {{-- Product SKU --}}
+                                            <p class="text-gray-600">
+                                                @lang('admin::app.dashboard.index.sku', ['sku' => $item->product->sku])
+                                            </p>
+
+                                            {{-- Product Number --}}
+                                            <p class="text-gray-600">
+                                                @if (
+                                                    isset($item->product->product_number)
+                                                    && ! empty($item->product->product_number)
+                                                )
+                                                    @lang('admin::app.dashboard.index.product-number', ['product_number' => $item->product->product_number])
+                                                @endif
                                             </p>
                                         </div>
-                                    @endif
-
-                                    <div class="flex flex-col gap-[6px]">
-                                        {{-- Product Name --}}
-                                        <p class="text-[16px] text-gray-800 font-semibold">
-                                            @if (isset($item->product->name))
-                                                {{ $item->product->name }}
-                                            @endif
-                                        </p>
-
-                                        {{-- Product SKU --}}
-                                        <p class="text-gray-600">
-                                            @lang('admin::app.dashboard.index.sku', ['sku' => $item->product->sku])
-                                        </p>
-
-                                        {{-- Product Number --}}
-                                        <p class="text-gray-600">
-                                            @if (
-                                                isset($item->product->product_number)
-                                                && ! empty($item->product->product_number)
-                                            )
-                                                @lang('admin::app.dashboard.index.product-number', ['product_number' => $item->product->product_number])
-                                            @endif
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="flex gap-[6px] items-center justify-between">
-                                    <div class="flex flex-col gap-[6px]">
-                                        {{-- Product Price --}}
-                                        <p class="text-[16px] text-gray-800 font-semibold">
-                                            @if (isset($item->product->price))
-                                                {{ core()->formatBasePrice($item->product->price) }}
-                                            @endif
-                                        </p>
-
-                                        {{-- Total Product Stock --}}
-                                        <p class="{{ $item->total_qty > 10 ? 'text-emerald-500' : 'text-red-500' }} ">
-                                            @lang('admin::app.dashboard.index.total-stock', ['total_stock' => $item->total_qty])
-                                        </p>
                                     </div>
 
-                                    {{-- View More Icon --}}
-                                    <a href="{{ route('admin.catalog.products.edit', $item->product_id) }}">
-                                        <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"></span>
-                                    </a>
+                                    <div class="flex gap-[6px] items-center justify-between">
+                                        <div class="flex flex-col gap-[6px]">
+                                            {{-- Product Price --}}
+                                            <p class="text-[16px] text-gray-800 font-semibold">
+                                                @if (isset($item->product->price))
+                                                    {{ core()->formatBasePrice($item->product->price) }}
+                                                @endif
+                                            </p>
+
+                                            {{-- Total Product Stock --}}
+                                            <p class="{{ $item->total_qty > 10 ? 'text-emerald-500' : 'text-red-500' }} ">
+                                                @lang('admin::app.dashboard.index.total-stock', ['total_stock' => $item->total_qty])
+                                            </p>
+                                        </div>
+
+                                        {{-- View More Icon --}}
+                                        <a href="{{ route('admin.catalog.products.edit', $item->product_id) }}">
+                                            <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"></span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
+                        @endforeach
+                    </div>
+                @else
+                    <div class="bg-white rounded-[4px] box-shadow">
+                        <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
+                            <img src="{{ bagisto_asset('images/icon-add-product.svg') }}" class="w-[80px] h-[80px]">
+                            <div class="flex flex-col items-center">
+                                <p class="text-[16px] text-gray-400 font-semibold">
+                                    @lang('admin::app.dashboard.index.empty-threshold')
+                                </p>
+            
+                                <p class="text-gray-400">
+                                    @lang('admin::app.dashboard.index.empty-threshold-description')
+                                </p>
+                            </div>
                         </div>
-                    @endforeach
-                </div>
+                    </div>
+                @endif    
             </div>
         </div>
 
@@ -623,9 +640,8 @@
                                     type="date"
                                     name="startDate" 
                                     class="cursor-pointer"
-                                    :value="$startDate->format('Y-m-d')"
                                     :placeholder="trans('admin::app.dashboard.index.start-date')"
-                                    @change="applyFilter('start', $event)"
+                                    v-model="filters.start"
                                 >
                                 </x-admin::form.control-group.control>
                             </x-admin::form.control-group>
@@ -640,9 +656,8 @@
                                     type="date"
                                     name="endDate" 
                                     class="cursor-pointer"
-                                    :value="$endDate->format('Y-m-d')"
                                     :placeholder="trans('admin::app.dashboard.index.end-date')"
-                                    @change="applyFilter('end', $event)"
+                                    v-model="filters.end"
                                 >
                                 </x-admin::form.control-group.control>
                             </x-admin::form.control-group>
@@ -907,54 +922,42 @@
                     return {
                         isLoading: true,
 
-                        start: "{{ $startDate->format('Y-m-d') }}",
+                        filters: {
+                            start: "{{ $startDate->format('Y-m-d') }}",
+                            end: "{{ $endDate->format('Y-m-d') }}",
+                        },
 
                         formatStart: "",
-
-                        end: "{{ $endDate->format('Y-m-d') }}",
 
                         formatEnd: "",
 
                         statistics: {},
+
+                        _chart: undefined,
                     }
                 },
 
                 mounted() {
-                    this.$axios.get("{{ route('admin.dashboard.index') }}")
-                        .then((response) => {
-                            this.formatStart = response.data.startDate;
-
-                            this.formatEnd = response.data.endDate;
-
-                            this.statistics = response.data.statistics;
-
-                            this.isLoading = ! this.isLoading;
-
-                            setTimeout(() => {
-                                this.graphChart();
-                            }, 0);
-
-                        })
-                        .catch(error => {
-                            if (error.response.status == 422) {
-                                setErrors(error.response.data.errors);
-                            }
-                        });
+                   this.get();
                 },
 
                 methods: {
-                    applyFilter: function(field, date) {
-                        this[field] = event.target.value;
-
-                        const queryParams = `?start=${this.start}&end=${this.end}`;
-
-                        this.$axios.get("{{ route('admin.dashboard.index') }}" + queryParams)
+                    get() {
+                        this.$axios.get("{{ route('admin.dashboard.index') }}", {
+                                params: this.filters
+                            })
                             .then((response) => {
-                                this.formatStart = response.data.startDate;
+                                const { startDate, endDate, statistics } = response.data;
 
-                                this.formatEnd = response.data.endDate;
+                                this.formatStart = startDate;
+                                this.formatEnd = endDate;
+                                this.statistics = statistics;
 
-                                this.statistics = response.data.statistics;
+                                setTimeout(() => {
+                                    this.graphChart();
+                                }, 0);
+
+                                this.isLoading = false;
                             })
                             .catch(error => {
                                 if (error.response.status == 422) {
@@ -963,13 +966,18 @@
                             });
                     },
 
-                    graphChart: function () {
+                    graphChart () {
                         const ctx = document.getElementById('myChart');
-                
-                        var data = this.statistics.sale_graph;
-                    
-                        new Chart(ctx, {
+
+                        const data = this.statistics.sale_graph;
+
+                        if (this._chart) {
+                           this._chart.destroy();
+                        }
+
+                        this._chart = new Chart(ctx, {
                             type: 'bar',
+                            
                             data: {
                                 labels: data['label'],
                                 datasets: [{
@@ -996,6 +1004,16 @@
                             }
                         });
                     },
+                },
+
+                watch: {
+                    filters: {
+                        handler() {
+                            this.get();
+                        },
+
+                        deep: true
+                    }
                 }
             });
         </script>   

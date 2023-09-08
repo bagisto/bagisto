@@ -101,14 +101,13 @@
                         <x-admin::form.control-group.control
                             type="textarea"
                             name="{{ $currentLocale->code }}[html_content]"
-                            :value="old('html_content')"
+                            :value="old($currentLocale->code)['html_content'] ?? ($page->translate($currentLocale->code)['html_content'] ?? '')"
                             id="content"
                             rules="required"
                             :label="trans('admin::app.cms.edit.content')"
                             :placeholder="trans('admin::app.cms.edit.content')"
                             :tinymce="true"
                         >
-                            {{ old($currentLocale->code)['html_content'] ?? ($page->translate($currentLocale->code)['html_content'] ?? '') }}
                         </x-admin::form.control-group.control>
 
                         <x-admin::form.control-group.error

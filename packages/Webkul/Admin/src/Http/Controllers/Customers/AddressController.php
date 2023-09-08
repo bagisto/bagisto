@@ -176,7 +176,7 @@ class AddressController extends Controller
         if ($address) {
             $address->update(['default_address' => 1]);
 
-            session()->flash('success', trans('admin::app.customers.view.set-default-success'));
+            session()->flash('success', trans('admin::app.customers.customers.view.set-default-success'));
         }
 
         return redirect()->back();
@@ -196,7 +196,7 @@ class AddressController extends Controller
 
         Event::dispatch('customer.addresses.delete.after', $id);
 
-        session()->flash('success', trans('admin::app.customers.view.address-delete-success'));
+        session()->flash('success', trans('admin::app.customers.customers.view.address-delete-success'));
 
         return redirect()->back();
     }

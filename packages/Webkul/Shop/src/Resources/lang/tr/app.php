@@ -645,6 +645,7 @@ return [
                 'discount-amount'  => 'İndirim Tutarı',
                 'grand-total'      => 'Genel Toplam',
                 'place-order'      => 'Sipariş Ver',
+                'processing'       => 'İşleniyor',
             ],
         ],
     ],

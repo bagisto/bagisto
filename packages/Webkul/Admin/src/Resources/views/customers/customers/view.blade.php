@@ -1,7 +1,7 @@
 <x-admin::layouts>
     {{-- Page Title --}}
     <x-slot:title>
-        @lang('admin::app.customers.view.title')
+        @lang('admin::app.customers.customers.view.title')
     </x-slot:title>
 
     <div class="grid">
@@ -12,18 +12,18 @@
                 {{-- Customer Status --}}
                 @if ($customer->status == 1)
                     <span class="label-active text-[14px] mx-[5px]">
-                        @lang('admin::app.customers.view.active')
+                        @lang('admin::app.customers.customers.view.active')
                     </span>
                 @else    
                     <span class="label-cancelled text-[14px] mx-[5px]">
-                        @lang('admin::app.customers.view.inactive')
+                        @lang('admin::app.customers.customers.view.inactive')
                     </span>
                 @endif
 
                 {{-- Customer Suspended Status --}}
                 @if ($customer->is_suspended == 1)
                     <span class="label-pending text-[14px]">
-                        @lang('admin::app.customers.view.suspended')
+                        @lang('admin::app.customers.customers.view.suspended')
                     </span>
                 @endif
             </p>
@@ -33,7 +33,7 @@
                 href="{{ route('admin.customers.customers.index') }}"
                 class="transparent-button hover:bg-gray-200"
             >
-                @lang('admin::app.customers.view.back-btn')
+                @lang('admin::app.customers.customers.view.back-btn')
             </a>
         </div>
     </div>
@@ -45,14 +45,14 @@
 
         <div 
             class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
-            onclick="if (confirm('@lang('admin::app.customers.view.delete-confirmation')')) {
+            onclick="if (confirm('@lang('admin::app.customers.customers.view.delete-confirmation')')) {
                 event.preventDefault();
                 document.getElementById('delete-account{{ $customer->id }}').submit();
             }"
         >
             <span class="icon-cancel text-[24px]"></span>
 
-            @lang('admin::app.customers.view.delete-account')
+            @lang('admin::app.customers.customers.view.delete-account')
 
               {{-- Delete Customer Account --}}
               <form 
@@ -75,7 +75,7 @@
                     <div class=" p-[16px] flex justify-between">
                         {{-- Total Order Count --}}
                         <p class="text-[16px] text-gray-800 font-semibold">
-                            @lang('admin::app.customers.view.orders', ['order_count' => $totalOrderCount])
+                            @lang('admin::app.customers.customers.view.orders', ['order_count' => $totalOrderCount])
                         </p>    
 
                         @php
@@ -85,7 +85,7 @@
                         @endphp
 
                         <p class="text-[16px] text-gray-800 font-semibold">
-                            @lang('admin::app.customers.view.total-revenue', ['revenue' =>  $revenue])
+                            @lang('admin::app.customers.customers.view.total-revenue', ['revenue' =>  $revenue])
                         </p>
                     </div>
 
@@ -97,7 +97,7 @@
                                     <div class="flex gap-[10px]">
                                         <div class="flex flex-col gap-[6px]">
                                             <p class="text-[16px] text-gray-800 font-semibold">
-                                                @lang('admin::app.customers.view.increment-id', ['increment_id' => $order->increment_id])
+                                                @lang('admin::app.customers.customers.view.increment-id', ['increment_id' => $order->increment_id])
                                             </p>
 
                                             <p class="text-gray-600">
@@ -107,31 +107,31 @@
                                             @switch($order->status)
                                                 @case('processing')
                                                     <p class="label-active">
-                                                        @lang('admin::app.customers.view.processing')
+                                                        @lang('admin::app.customers.customers.view.processing')
                                                     </p>
                                                     @break
 
                                                 @case('completed')
                                                     <p class="label-active">
-                                                        @lang('admin::app.customers.view.completed')
+                                                        @lang('admin::app.customers.customers.view.completed')
                                                     </p>
                                                     @break
 
                                                 @case('pending')
                                                     <p class="label-pending">
-                                                        @lang('admin::app.customers.view.pending')
+                                                        @lang('admin::app.customers.customers.view.pending')
                                                     </p>
                                                     @break
 
                                                 @case('canceled')
                                                     <p class="label-cancelled">
-                                                        @lang('admin::app.customers.view.canceled')
+                                                        @lang('admin::app.customers.customers.view.canceled')
                                                     </p>
                                                     @break
 
                                                 @case('closed')
                                                     <p class="label-closed">
-                                                        @lang('admin::app.customers.view.closed')
+                                                        @lang('admin::app.customers.customers.view.closed')
                                                     </p>
                                                     @break
 
@@ -147,7 +147,7 @@
 
                                         {{-- Payment methods --}}   
                                         <p class="text-gray-600">
-                                            @lang('admin::app.customers.view.pay-by', ['payment_method' => core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title')])
+                                            @lang('admin::app.customers.customers.view.pay-by', ['payment_method' => core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title')])
                                         </p>
 
                                         {{-- Channel Code --}}
@@ -196,7 +196,7 @@
                     {{-- Empty Container --}} 
                     <div class="p-[16px] flex justify-between">
                         <p class="text-[16px] text-gray-800 font-semibold">
-                            @lang('admin::app.customers.view.orders', ['order_count' => $totalOrderCount])
+                            @lang('admin::app.customers.customers.view.orders', ['order_count' => $totalOrderCount])
                         </p>
                     </div>
 
@@ -205,13 +205,13 @@
                         <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
                             <!-- Placeholder Image -->
                             <img
-                                src="{{ bagisto_asset('images/empty-order.png') }}"
+                                src="{{ bagisto_asset('images/empty-placeholders/orders-empty.svg') }}"
                                 class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
                             />
 
                             <div class="flex flex-col items-center">
                                 <p class="text-[16px] text-gray-400 font-semibold"> 
-                                    @lang('admin::app.customers.view.empty-order')
+                                    @lang('admin::app.customers.customers.view.empty-order')
                                 </p>
                             </div>
                         </div>
@@ -224,7 +224,7 @@
                 @if ($totalInvoiceCount = count($customer->invoices))
                     {{--Invoice Count --}}
                     <p class=" p-[16px] text-[16px] text-gray-800 font-semibold">
-                        @lang('admin::app.customers.view.invoice', ['invoice_count' => $totalInvoiceCount])
+                        @lang('admin::app.customers.customers.view.invoice', ['invoice_count' => $totalInvoiceCount])
                     </p>
 
                     {{-- Invoice Table --}}
@@ -234,7 +234,7 @@
                                 <tr>
                                     @foreach (['invoice-id', 'invoice-date', 'invoice-amount', 'order-id'] as $item)
                                         <th scope="col" class="px-6 py-[16px] font-semibold"> 
-                                            @lang('admin::app.customers.view.' . $item)
+                                            @lang('admin::app.customers.customers.view.' . $item)
                                         </th>
                                     @endforeach
                                 </tr>
@@ -245,7 +245,7 @@
                                     {{-- Invoice Details --}}
                                     <tr class="bg-white border-b transition-all hover:bg-gray-100">
                                         <td class="px-6 py-[16px] text-gray-600">
-                                            @lang('admin::app.customers.view.invoice-id-prefix', ['invoice_id' => $invoice->id] )
+                                            @lang('admin::app.customers.customers.view.invoice-id-prefix', ['invoice_id' => $invoice->id] )
                                         </td>
 
                                         <td class="px-6 py-[16px] text-gray-600 whitespace-nowrap">
@@ -257,7 +257,7 @@
                                         </td>
 
                                         <td class="px-6 py-[16px] text-gray-600">
-                                            @lang('admin::app.customers.view.order-id-prefix', ['order_id' => $invoice->order_id] )
+                                            @lang('admin::app.customers.customers.view.order-id-prefix', ['order_id' => $invoice->order_id] )
                                         </td>
                                     </tr>
                                 </tbody>
@@ -268,7 +268,7 @@
                     {{-- Empty Container --}}
                     <div class="flex justify-between p-[16px]">
                         <p class="text-[16px] text-gray-800 font-semibold">
-                            @lang('admin::app.customers.view.invoice', ['invoice_count' => $totalInvoiceCount])
+                            @lang('admin::app.customers.customers.view.invoice', ['invoice_count' => $totalInvoiceCount])
                         </p>
                     </div>
 
@@ -276,13 +276,13 @@
                         <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
                             {{-- Placeholder Image --}}
                             <img
-                                src="{{ bagisto_asset('images/invoice-setting.png') }}"
+                                src="{{ bagisto_asset('images/settings/invoice.svg') }}"
                                 class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
                             />
 
                             <div class="flex flex-col items-center">
                                 <p class="text-[16px] text-gray-400 font-semibold"> 
-                                    @lang('admin::app.customers.view.empty-invoice')
+                                    @lang('admin::app.customers.customers.view.empty-invoice')
                                 </p>
                             </div>
                         </div>
@@ -295,7 +295,7 @@
                 @if($totalReviewsCount = count($customer->reviews) )
                     {{-- Reviews Count --}}
                     <p class=" p-[16px] text-[16px] text-gray-800 font-semibold">
-                        @lang('admin::app.customers.view.reviews', ['review_count' => $totalReviewsCount])
+                        @lang('admin::app.customers.customers.view.reviews', ['review_count' => $totalReviewsCount])
                     </p>
 
                     @foreach($customer->reviews as $review)
@@ -317,19 +317,19 @@
                                     @switch($review->status)
                                         @case('approved')
                                             <p class="label-active">
-                                                @lang('admin::app.customers.view.approved')
+                                                @lang('admin::app.customers.customers.view.approved')
                                             </p>
                                             @break
 
                                         @case('pending')
                                             <p class="label-pending">
-                                                @lang('admin::app.customers.view.pending')
+                                                @lang('admin::app.customers.customers.view.pending')
                                             </p>
                                             @break
 
                                         @case('disapproved')
                                             <p class="label-cancelled">
-                                                @lang('admin::app.customers.view.disapproved')
+                                                @lang('admin::app.customers.customers.view.disapproved')
                                             </p>
                                             @break
 
@@ -351,7 +351,7 @@
                                     </p>
 
                                     <p class="text-gray-600">
-                                        @lang('admin::app.customers.view.id', ['id' => $review->id])
+                                        @lang('admin::app.customers.customers.view.id', ['id' => $review->id])
                                     </p>
                                 </div>
                             </div>
@@ -379,7 +379,7 @@
                     {{-- Empty Invoice Container --}}
                     <div class="flex justify-between p-[16px]">
                         <p class="text-[16px] text-gray-800 font-semibold">
-                            @lang('admin::app.customers.view.reviews', ['review_count' => $totalReviewsCount])
+                            @lang('admin::app.customers.customers.view.reviews', ['review_count' => $totalReviewsCount])
                         </p>
                     </div>
 
@@ -387,13 +387,13 @@
                         <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
                             {{-- Placeholder Image --}}
                             <img
-                                src="{{ bagisto_asset('images/empty-review.png') }}"
+                                src="{{ bagisto_asset('images/empty-placeholders/reviews-empty.svg') }}"
                                 class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
                             />
 
                             <div class="flex flex-col items-center">
                                 <p class="text-[16px] text-gray-400 font-semibold"> 
-                                   @lang('admin::app.customers.view.empty-review')
+                                   @lang('admin::app.customers.customers.view.empty-review')
                                 </p>
                             </div>
                         </div>
@@ -404,7 +404,7 @@
             {{-- Notes Form --}}
             <div class="bg-white rounded box-shadow">
                 <p class=" p-[16px] pb-0 text-[16px] text-gray-800 font-semibold">
-                    @lang('admin::app.customers.view.add-note')
+                    @lang('admin::app.customers.customers.view.add-note')
                 </p>
 
                 <x-admin::form 
@@ -418,8 +418,8 @@
                                 name="note" 
                                 id="note"
                                 rules="required"
-                                :label="trans('admin::app.customers.view.note')"
-                                :placeholder="trans('admin::app.customers.view.note-placeholder')"
+                                :label="trans('admin::app.customers.customers.view.note')"
+                                :placeholder="trans('admin::app.customers.customers.view.note-placeholder')"
                                 rows="3"
                             >
                             </x-admin::form.control-group.control>
@@ -446,7 +446,7 @@
                                 <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"></span>
                     
                                 <p class="flex gap-x-[4px] items-center cursor-pointer">
-                                    @lang('admin::app.customers.view.notify-customer')
+                                    @lang('admin::app.customers.customers.view.notify-customer')
                                 </p>
                             </label>
                             
@@ -455,7 +455,7 @@
                                 type="submit"
                                 class="secondary-button"
                             >
-                                @lang('admin::app.customers.view.submit-btn-title')
+                                @lang('admin::app.customers.customers.view.submit-btn-title')
                             </button>
                         </div>
                     </div>
@@ -473,9 +473,9 @@
                         {{-- Notes List Title and Time --}}
                         <p class="text-gray-600">  
                             @if ($note->customer_notified)
-                                @lang('admin::app.customers.view.customer-notified', ['created_at' => $note->created_at])
+                                @lang('admin::app.customers.customers.view.customer-notified', ['created_at' => $note->created_at])
                             @else
-                                @lang('admin::app.customers.view.customer-not-notified', ['created_at' => $note->created_at])
+                                @lang('admin::app.customers.customers.view.customer-not-notified', ['created_at' => $note->created_at])
                             @endif
                         </p>
                     </div>
@@ -492,7 +492,7 @@
                 <x-slot:header>
                     <div class="flex w-[100%]">
                         <p class="w-[100%] p-[10px] text-gray-600 text-[16px] font-semibold">
-                            @lang('admin::app.customers.view.customer')
+                            @lang('admin::app.customers.customers.view.customer')
                         </p>
     
                         {{--Customer Edit Component --}}
@@ -507,23 +507,23 @@
                         </p>
 
                         <p class="text-gray-600">
-                            @lang('admin::app.customers.view.email', ['email' => $customer->email])
+                            @lang('admin::app.customers.customers.view.email', ['email' => $customer->email])
                         </p>
 
                         <p class="text-gray-600">
-                            @lang('admin::app.customers.view.phone', ['phone' => $customer->phone ?? 'N/A'])
+                            @lang('admin::app.customers.customers.view.phone', ['phone' => $customer->phone ?? 'N/A'])
                         </p>
 
                         <p class="text-gray-600">
-                            @lang('admin::app.customers.view.gender', ['gender' => $customer->gender ?? 'N/A'])
+                            @lang('admin::app.customers.customers.view.gender', ['gender' => $customer->gender ?? 'N/A'])
                         </p>
 
                         <p class="text-gray-600">
-                            @lang('admin::app.customers.view.date-of-birth', ['dob' => $customer->date_of_birth ?? 'N/A'])
+                            @lang('admin::app.customers.customers.view.date-of-birth', ['dob' => $customer->date_of_birth ?? 'N/A'])
                         </p>
 
                         <p class="text-gray-600">
-                            @lang('admin::app.customers.view.group', ['group_code' => $customer->group->code ?? 'N/A'])
+                            @lang('admin::app.customers.customers.view.group', ['group_code' => $customer->group->code ?? 'N/A'])
                         </p>
                     </div>
                 </x-slot:content>
@@ -534,7 +534,7 @@
                 <x-slot:header>
                     <div class="flex items-center justify-between p-[6px]">
                         <p class="text-gray-600 text-[16px] font-semibold">
-                            @lang('admin::app.customers.view.address', ['count' => count($customer->addresses)])
+                            @lang('admin::app.customers.customers.view.address', ['count' => count($customer->addresses)])
                         </p>
                     </div>
                 </x-slot:header>
@@ -545,7 +545,7 @@
                             <div class="grid gap-y-[10px]">
                                 @if ( $address->default_address )
                                     <p class="label-pending">
-                                        @lang('admin::app.customers.view.default-address')
+                                        @lang('admin::app.customers.customers.view.default-address')
                                     </p>
                                 @endif
 
@@ -562,7 +562,7 @@
                                 </p>
 
                                 <p class="text-gray-600">
-                                    @lang('admin::app.customers.view.phone', ['phone' => $address->phone ?? 'N/A'])
+                                    @lang('admin::app.customers.customers.view.phone', ['phone' => $address->phone ?? 'N/A'])
                                 </p>
 
                                 <div class="flex gap-[10px]">
@@ -575,7 +575,7 @@
                                         onclick="event.preventDefault();
                                         document.getElementById('delete-address{{ $address->id }}').submit();"
                                     >
-                                        @lang('admin::app.customers.view.delete')
+                                        @lang('admin::app.customers.customers.view.delete')
                                     </p>
 
                                     <form 
@@ -593,7 +593,7 @@
                                             onclick="event.preventDefault();
                                             document.getElementById('default-address{{ $address->id }}').submit();"
                                         >
-                                            @lang('admin::app.customers.view.set-as-default')
+                                            @lang('admin::app.customers.customers.view.set-as-default')
                                         </p>
 
                                         <form
@@ -622,17 +622,17 @@
                         {{-- Empty Address Container --}}
                         <div class="flex gap-[20px] items-center py-[10px]">
                             <img
-                                src="{{ bagisto_asset('images/address-setting.png') }}"
+                                src="{{ bagisto_asset('images/settings/address.svg') }}"
                                 class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
                             >
 
                             <div class="flex flex-col gap-[6px]">
                                 <p class="text-[16px] text-gray-400 font-semibold">
-                                    @lang('admin::app.customers.view.empty-title')
+                                    @lang('admin::app.customers.customers.view.empty-title')
                                 </p>
 
                                 <p class="text-gray-400">
-                                    @lang('admin::app.customers.view.empty-description')
+                                    @lang('admin::app.customers.customers.view.empty-description')
                                 </p>
                             </div>
                         </div>

@@ -453,6 +453,13 @@
                                         :disabled="(boolean) $selectedOption"
                                         :label="trans('admin::app.catalog.attributes.edit.type')"
                                     >
+                                        <!-- Default Option -->
+                                        <option value="">
+                                            <span class="text-gray-400">
+                                                @lang('admin::app.catalog.attributes.edit.select')
+                                            </span>
+                                        </option>
+
                                         <!-- Here! All Needed types are defined -->
                                         @foreach(['text', 'textarea', 'price', 'boolean', 'select', 'multiselect', 'datetime', 'date', 'image', 'file', 'checkbox'] as $type)
                                             <option
@@ -512,26 +519,33 @@
                         
                             <x-slot:content>
                                 <!-- Input Validation -->
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
-                                        @lang('admin::app.catalog.attributes.edit.input-validation')
-                                    </x-admin::form.control-group.label>
+                                @if($attribute->type == 'text')
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.catalog.attributes.edit.input-validation')
+                                        </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
-                                        type="select"
-                                        name="validation"
-                                        :value="$attribute->validation"
-                                        class="cursor-pointer"
-                                        v-model="validationType"
-                                    >
-                                         <!-- Here! All Needed types are defined -->
-                                         @foreach(['number', 'email', 'decimal', 'url', 'regex'] as $type)
-                                         <option value="{{ $type }}">
-                                             @lang('admin::app.catalog.attributes.edit.' . $type)
-                                         </option>
-                                     @endforeach
-                                    </x-admin::form.control-group.control>
-                                </x-admin::form.control-group>
+                                        <x-admin::form.control-group.control
+                                            type="select"
+                                            name="validation"
+                                            :value="$attribute->validation"
+                                            class="cursor-pointer"
+                                            v-model="validationType"
+                                        >
+                                            <!-- Default Option -->
+                                            <option value="">
+                                                @lang('admin::app.catalog.attributes.edit.select')
+                                            </option>
+
+                                            <!-- Here! All Needed types are defined -->
+                                            @foreach(['number', 'email', 'decimal', 'url', 'regex'] as $type)
+                                            <option value="{{ $type }}">
+                                                @lang('admin::app.catalog.attributes.edit.' . $type)
+                                            </option>
+                                        @endforeach
+                                        </x-admin::form.control-group.control>
+                                    </x-admin::form.control-group>
+                                @endif
 
                                 <!-- REGEX -->
                                 <x-admin::form.control-group
@@ -680,7 +694,6 @@
                         </x-admin::accordion>
 
                         {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.configuration.controls.after', ['attribute' => $attribute]) !!}
-
                     </div>
                 </div>
             </x-admin::form>

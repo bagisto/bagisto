@@ -3,7 +3,9 @@
 namespace Webkul\Theme;
 
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\Str;
+use Webkul\Theme\Exceptions\ViterNotFound;
 
 class Themes
 {
@@ -235,9 +237,33 @@ class Themes
      *
      * @return string
      */
-    public function url(string $filename, ?string $namespace)
+    public function url(string $filename, ?string $namespace = null)
     {
-        return $this->current()->url($filename, $namespace);
+        $url = trim($filename, '/');
+
+        /**
+         * If the namespace is null, it means the theming system is activated. We use the request URI to
+         * detect the theme and provide Vite assets based on the current theme.
+         */
+        if (empty($namespace)) {
+            return $this->current()->url($url);
+        }
+
+        /**
+         * If a namespace is provided, it means the developer knows what they are doing and must create the
+         * registry in the provided configuration. We will analyze based on that.
+         */
+        $viters = config('bagisto-vite.viters');
+
+        if (empty($viters[$namespace])) {
+            throw new ViterNotFound($namespace);
+        }
+
+        $viteUrl = trim($viters[$namespace]['package_assets_directory'], '/') . '/' . $url;
+
+        return Vite::useHotFile($viters[$namespace]['hot_file'])
+            ->useBuildDirectory($viters[$namespace]['build_directory'])
+            ->asset($viteUrl);
     }
 
     /**
@@ -246,8 +272,28 @@ class Themes
      * @param  mixed  $entryPoints
      * @return mixed
      */
-    public function setBagistoVite($entryPoints)
+    public function setBagistoVite($entryPoints, ?string $namespace = null)
     {
-        return $this->current()->setBagistoVite($entryPoints);
+        /**
+         * If the namespace is null, it means the theming system is activated. We use the request URI to
+         * detect the theme and provide Vite assets based on the current theme.
+         */
+        if (empty($namespace)) {
+            return $this->current()->setBagistoVite($entryPoints);
+        }
+
+        /**
+         * If a namespace is provided, it means the developer knows what they are doing and must create the
+         * registry in the provided configuration. We will analyze based on that.
+         */
+        $viters = config('bagisto-vite.viters');
+
+        if (empty($viters[$namespace])) {
+            throw new ViterNotFound($namespace);
+        }
+
+        return Vite::useHotFile($viters[$namespace]['hot_file'])
+            ->useBuildDirectory($viters[$namespace]['build_directory'])
+            ->withEntryPoints($entryPoints);
     }
 }

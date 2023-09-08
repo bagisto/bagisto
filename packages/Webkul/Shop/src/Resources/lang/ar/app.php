@@ -645,6 +645,7 @@ return [
                 'discount-amount'  => 'مبلغ الخصم',
                 'grand-total'      => 'المجموع الكلي',
                 'place-order'      => 'تأكيد الطلب',
+                'processing'       => 'معالجة',
             ],
         ],
     ],
