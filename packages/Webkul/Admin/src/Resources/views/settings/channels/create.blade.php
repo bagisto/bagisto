@@ -150,6 +150,11 @@
                                 rules="required"
                                 :label="trans('admin::app.settings.channels.create.root-category')"
                             >
+                                <!-- Default Option -->
+                                <option value="">
+                                    @lang('admin::app.settings.channels.create.select-root-category')
+                                </option>
+
                                 @foreach (app('Webkul\Category\Repositories\CategoryRepository')->getRootCategories() as $category)
                                     <option value="{{ $category->id }}" {{ old('root_category_id') == $category->id ? 'selected' : '' }}>
                                         {{ $category->name }}
@@ -205,6 +210,11 @@
                                 id="theme"
                                 :label="trans('admin::app.settings.channels.create.theme')"
                             >
+                                <!-- Default Option -->
+                                <option value="">
+                                    @lang('admin::app.settings.channels.create.select-theme')
+                                </option>
+
                                 @foreach (config('themes.themes') as $themeCode => $theme)
                                     <option value="{{ $themeCode }}" {{ old('theme') == $themeCode ? 'selected' : '' }}>
                                         {{ $theme['name'] }}
@@ -396,6 +406,11 @@
                                     rules="required"
                                     :label="trans('admin::app.settings.channels.create.default-locale')"
                                 >
+                                    <!-- Default Option -->
+                                    <option value="">
+                                        @lang('admin::app.settings.channels.create.select-default-locale')
+                                    </option>
+
                                     @foreach (core()->getAllLocales() as $locale)
                                         <option value="{{ $locale->id }}" {{ old('default_locale_id') == $locale->id ? 'selected' : '' }}>
                                             {{ $locale->name }}
@@ -457,6 +472,11 @@
                                     rules="required"
                                     :label="trans('admin::app.settings.channels.create.default-currency')"
                                 >
+                                    <!-- Default Option -->
+                                    <option value="">
+                                        @lang('admin::app.settings.channels.create.select-default-currency')
+                                    </option>
+
                                     @foreach (core()->getAllCurrencies() as $currency)
                                         <option value="{{ $currency->id }}" {{ old('base_currency_id') == $currency->id ? 'selected' : '' }}>
                                             {{ $currency->name }}
