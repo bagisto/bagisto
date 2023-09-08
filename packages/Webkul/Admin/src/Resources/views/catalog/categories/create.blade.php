@@ -311,6 +311,11 @@
                                 rules="required"
                                 :label="trans('admin::app.catalog.categories.create.display-mode')"
                             >
+                                <!-- Default Option -->
+                                <option value="">
+                                    @lang('admin::app.catalog.categories.create.select-display-mode')
+                                </option>
+
                                 @foreach (['products-and-description', 'products-only', 'description-only'] as $item)
                                     <option value="{{ $item }}">
                                         @lang('admin::app.catalog.categories.create.' . $item)

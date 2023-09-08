@@ -349,6 +349,11 @@
                                             rules="required"
                                             :label="trans('admin::app.catalog.families.edit.column')"
                                         >
+                                            <!-- Default Option -->
+                                            <option value="">
+                                                @lang('admin::app.catalog.families.create.select-group')
+                                            </option>
+
                                             <option value="1">
                                                 @lang('admin::app.catalog.families.edit.main-column')
                                             </option>

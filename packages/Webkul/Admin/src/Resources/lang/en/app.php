@@ -1463,6 +1463,8 @@ return [
                     'select-template' => 'Select Template',
                     'select-event'    => 'Select Event',
                     'select-status'   => 'Select Status',
+                    'select-channel'  => 'Select Channel',
+                    'select-group'    => 'Select Group',
                     'subject'         => 'Subject',
                     'title'           => 'Create Campaign',
                 ],
