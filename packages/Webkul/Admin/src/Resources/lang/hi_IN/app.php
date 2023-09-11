@@ -89,6 +89,8 @@ return [
             'date-duration'               => ':start - :end',
             'decreased'                   => ':progress%',
             'end-date'                    => 'समाप्ति तिथि',
+            'empty-threshold'             => 'खाली सीमा',
+            'empty-threshold-description' => 'कोई उपलब्ध उत्पाद नहीं है',
             'from'                        => 'से',
             'increased'                   => ':progress%',
             'more-products'               => ':product_count+ और छवियाँ',
@@ -124,8 +126,6 @@ return [
             'user-name'                   => 'नमस्ते! :user_name',
             'user-info'                   => 'आपके स्टोर में क्या हो रहा है, उसे तेजी से समीक्षा करें',
             'visitor'                     => 'आगंतुक',
-            'empty-threshold'             => 'खाली सीमा',
-            'empty-threshold-description' => 'कोई उपलब्ध उत्पाद नहीं है',
         ],
     ],
 
@@ -578,27 +578,13 @@ return [
                 ],
 
                 'images' => [
-                    'add-image-btn'     => 'छवि जोड़ें',
-                    'allowed-types'     => 'png, jpeg, jpg',
-                    'info'              => 'छवि का निर्धारण 609px X 560px की तरह होना चाहिए',
-                    'not-allowed-error' => 'केवल छवि फ़ाइलें (.jpeg, .jpg, .png, ..) अनुमत हैं।',
-                    'title'             => 'छवियाँ',
-
-                    'placeholders'  => [
-                        'front'     => 'सामना',
-                        'next'      => 'अगला',
-                        'size'      => 'आकार',
-                        'use-cases' => 'उपयोग केस',
-                        'zoom'      => 'ज़ूम करें',
-                    ],
+                    'title' => 'छवियाँ',
+                    'info'  => 'छवि का निर्धारण 609px X 560px की तरह होना चाहिए',
                 ],
 
                 'videos' => [
-                    'add-video-btn'     => 'वीडियो जोड़ें',
-                    'allowed-types'     => 'mp4, webm, mkv',
-                    'info'              => 'अधिकतम वीडियो आकार का होना चाहिए :size की तरह',
-                    'not-allowed-error' => 'केवल वीडियो फ़ाइलें (.mp4, .mov, .ogg ..) अनुमत हैं।',
-                    'title'             => 'वीडियो',
+                    'title' => 'वीडियो',
+                    'info'  => 'अधिकतम वीडियो आकार का होना चाहिए :size की तरह',
                 ],
 
                 'links' => [
@@ -661,6 +647,19 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'स्थिति',
                             'weight'          => 'वजन',
+                        ],
+
+                        'mass-edit' => [
+                            'select-variants'  => 'वेरिएंट चुनें',
+                            'select-action'    => 'कार्रवाई चुनें',
+                            'edit-prices'      => 'मूल्य संपादित करें',
+                            'edit-inventories' => 'सूची संपादित करें',
+                            'add-images'       => 'छवियाँ जोड़ें',
+                            'remove-images'    => 'छवियाँ हटाएं',
+                            'remove-variants'  => 'वेरिएंट हटाएं',
+                            'price'            => 'मूल्य',
+                            'apply-to-all-sku' => 'सभी SKU पर मूल्य लागू करें।',
+                            'apply-to-all-btn' => 'सभी पर लागू करें',
                         ],
                     ],
 
@@ -1375,6 +1374,8 @@ return [
                 'save-btn-title'   => 'पता सहेजें',
             ],
 
+            'create-success'      => 'पता सफलतापूर्वक बनाया गया',
+            'update-success'      => 'पता सफलतापूर्वक अपडेट किया गया',
             'success-mass-delete' => 'पता समूह सफलतापूर्वक हटा दिया गया है',
         ],
     ],
@@ -1463,6 +1464,8 @@ return [
                     'select-template' => 'टेम्पलेट चुनें',
                     'select-event'    => 'घटना चुनें',
                     'select-status'   => 'स्थिति चुनें',
+                    'select-channel'  => 'चैनल का चयन करें',
+                    'select-group'    => 'समूह का चयन करें',
                     'subject'         => 'विषय',
                     'title'           => 'कैम्पेन बनाएं',
                 ],
@@ -1995,12 +1998,13 @@ return [
                 ],
 
                 'create'  => [
-                    'code'        => 'कोड',
-                    'name'        => 'नाम',
-                    'direction'   => 'दिशा',
-                    'locale-logo' => 'स्थान लोगो',
-                    'title'       => 'स्थान बनाएं',
-                    'save-btn'    => 'स्थान सहेजें',
+                    'code'             => 'कोड',
+                    'name'             => 'नाम',
+                    'direction'        => 'दिशा',
+                    'locale-logo'      => 'स्थान लोगो',
+                    'title'            => 'स्थान बनाएं',
+                    'save-btn'         => 'स्थान सहेजें',
+                    'select-direction' => 'दिशा चुनें',
                 ],
 
                 'edit'  => [
@@ -2067,12 +2071,13 @@ return [
                 'update-rates'  => 'विनिमय दर अपडेट करें',
 
                 'create' => [
-                    'delete-warning'  => 'क्या आप वाकई इस क्रिया को करना चाहते हैं?',
-                    'title'           => 'विनिमय दर बनाएं',
-                    'rate'            => 'दर',
-                    'save-btn'        => 'विनिमय दर सहेजें',
-                    'source-currency' => 'स्रोत मुद्रा',
-                    'target-currency' => 'लक्ष्य मुद्रा',
+                    'delete-warning'         => 'क्या आप वाकई इस क्रिया को करना चाहते हैं?',
+                    'title'                  => 'विनिमय दर बनाएं',
+                    'rate'                   => 'दर',
+                    'save-btn'               => 'विनिमय दर सहेजें',
+                    'source-currency'        => 'स्रोत मुद्रा',
+                    'select-target-currency' => 'लक्ष्य मुद्रा चुनें',
+                    'target-currency'        => 'लक्ष्य मुद्रा',
                 ],
 
                 'edit' => [
@@ -2297,38 +2302,42 @@ return [
             ],
 
             'create' => [
-                'title'                  => 'चैनल बनाएं',
-                'cancel'                 => 'पीछे जाएं',
-                'save-btn'               => 'चैनल सहेजें',
-                'general'                => 'सामान्य',
-                'code'                   => 'कोड',
-                'name'                   => 'नाम',
-                'description'            => 'विवरण',
-                'inventory-sources'      => 'सूची स्रोत',
-                'root-category'          => 'रूट श्रेणी',
-                'hostname'               => 'होस्टनाम',
-                'hostname-placeholder'   => 'https://www.example.com (अंत में स्लैश न डालें)',
-                'design'                 => 'डिज़ाइन',
-                'theme'                  => 'थीम',
-                'logo'                   => 'लोगो',
-                'allowed-ips'            => 'अनुमति देने वाले IP',
-                'logo-size'              => 'छवि निर्देश जैसे होनी चाहिए 192px X 50px',
-                'favicon'                => 'फेविकॉन',
-                'favicon-size'           => 'छवि निर्देश जैसे होनी चाहिए 16px X 16px',
-                'seo'                    => 'होम पेज SEO',
-                'seo-title'              => 'मेटा शीर्षक',
-                'seo-description'        => 'मेटा विवरण',
-                'seo-keywords'           => 'मेटा कीवर्ड्स',
-                'currencies-and-locales' => 'मुद्रा और स्थल',
-                'locales'                => 'स्थल',
-                'default-locale'         => 'डिफ़ॉल्ट स्थल',
-                'currencies'             => 'मुद्राएँ',
-                'default-currency'       => 'डिफ़ॉल्ट मुद्रा',
-                'last-delete-error'      => 'कम से कम एक चैनल की आवश्यकता है।',
-                'settings'               => 'सेटिंग्स',
-                'status'                 => 'स्थिति',
-                'maintenance-mode-text'  => 'संदेश',
-                'create-success'         => 'चैनल सफलतापूर्वक बनाया गया।',
+                'title'                   => 'चैनल बनाएं',
+                'cancel'                  => 'पीछे जाएं',
+                'save-btn'                => 'चैनल सहेजें',
+                'general'                 => 'सामान्य',
+                'code'                    => 'कोड',
+                'name'                    => 'नाम',
+                'description'             => 'विवरण',
+                'inventory-sources'       => 'सूची स्रोत',
+                'root-category'           => 'रूट श्रेणी',
+                'hostname'                => 'होस्टनाम',
+                'hostname-placeholder'    => 'https://www.example.com (अंत में स्लैश न डालें)',
+                'design'                  => 'डिज़ाइन',
+                'theme'                   => 'थीम',
+                'logo'                    => 'लोगो',
+                'allowed-ips'             => 'अनुमति देने वाले IP',
+                'logo-size'               => 'छवि निर्देश जैसे होनी चाहिए 192px X 50px',
+                'favicon'                 => 'फेविकॉन',
+                'favicon-size'            => 'छवि निर्देश जैसे होनी चाहिए 16px X 16px',
+                'seo'                     => 'होम पेज SEO',
+                'seo-title'               => 'मेटा शीर्षक',
+                'seo-description'         => 'मेटा विवरण',
+                'seo-keywords'            => 'मेटा कीवर्ड्स',
+                'currencies-and-locales'  => 'मुद्रा और स्थल',
+                'locales'                 => 'स्थल',
+                'default-locale'          => 'डिफ़ॉल्ट स्थल',
+                'currencies'              => 'मुद्राएँ',
+                'default-currency'        => 'डिफ़ॉल्ट मुद्रा',
+                'last-delete-error'       => 'कम से कम एक चैनल की आवश्यकता है।',
+                'settings'                => 'सेटिंग्स',
+                'status'                  => 'स्थिति',
+                'select-root-category'    => 'मूल श्रेणी चुनें',
+                'select-theme'            => 'थीम चुनें',
+                'select-default-locale'   => 'डिफ़ॉल्ट लोकेल चुनें',
+                'select-default-currency' => 'डिफ़ॉल्ट मुद्रा चुनें',
+                'maintenance-mode-text'   => 'संदेश',
+                'create-success'          => 'चैनल सफलतापूर्वक बनाया गया।',
             ],
 
             'edit' => [
@@ -3034,6 +3043,28 @@ return [
                 'qty'         => ':qty उपलब्ध हैं',
             ],
         ],
+
+        'media' => [
+            'images' => [
+                'add-image-btn'     => 'छवि जोड़ें',
+                'allowed-types'     => 'png, jpeg, jpg',
+                'not-allowed-error' => 'केवल छवि फ़ाइलें (.jpeg, .jpg, .png, ..) अनुमत हैं।',
+
+                'placeholders'  => [
+                    'front'     => 'सामना',
+                    'next'      => 'अगला',
+                    'size'      => 'आकार',
+                    'use-cases' => 'उपयोग केस',
+                    'zoom'      => 'ज़ूम करें',
+                ],
+            ],
+
+            'videos' => [
+                'add-video-btn'     => 'वीडियो जोड़ें',
+                'allowed-types'     => 'mp4, webm, mkv',
+                'not-allowed-error' => 'केवल वीडियो फ़ाइलें (.mp4, .mov, .ogg ..) अनुमत हैं।',
+            ],
+        ]
     ],
 
     'acl' => [
@@ -3149,6 +3180,15 @@ return [
     'emails' => [
         'dear'   => 'प्रिय :customer_name',
         'thanks' => 'यदि आपको किसी प्रकार की मदद चाहिए, तो कृपया हमसे <a href=":link" style=":style">:email</a> पर संपर्क करें।<br/>धन्यवाद!',
+
+        'admin' => [
+            'forgot-password' => [
+                'subject'        => 'पासवर्ड रीसेट ईमेल',
+                'greeting'       => 'पासवर्ड भूल गए!',
+                'description'    => 'आपको इस ईमेल क्यों रसीव हो रहे है क्योंकि हमने आपके खाते के लिए पासवर्ड रीसेट अनुरोध प्राप्त किया है।',
+                'reset-password' => 'पासवर्ड रीसेट करें',
+            ],
+        ],
 
         'orders' => [
             'created' => [

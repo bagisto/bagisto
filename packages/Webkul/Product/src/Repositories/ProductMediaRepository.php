@@ -50,6 +50,8 @@ class ProductMediaRepository extends Repository
          */
         $previousIds = $this->resolveFileTypeQueryBuilder($product, $uploadFileType)->pluck('id');
 
+        $position = 0;
+
         if (! empty($data[$uploadFileType]['files'])) {
             foreach ($data[$uploadFileType]['files'] as $indexOrModelId => $file) {
                 if ($file instanceof UploadedFile) {
@@ -57,25 +59,16 @@ class ProductMediaRepository extends Repository
                         'type'       => $uploadFileType,
                         'path'       => $file->store($this->getProductDirectory($product)),
                         'product_id' => $product->id,
-                        'position'   => $indexOrModelId,
+                        'position'   => ++$position,
                     ]);
                 } else {
-                    /**
-                     * Filter out existing models because new model positions are already setup by index.
-                     */
-                    if (! empty($data[$uploadFileType]['positions'])) {
-                        $positions = collect($data[$uploadFileType]['positions'])->keys()->filter(function ($position) {
-                            return is_numeric($position);
-                        });
-
-                        $this->update([
-                            'position' => $positions->search($indexOrModelId),
-                        ], $indexOrModelId);
-                    }
-
                     if (is_numeric($index = $previousIds->search($indexOrModelId))) {
                         $previousIds->forget($index);
                     }
+
+                    $this->update([
+                        'position' => ++$position,
+                    ], $indexOrModelId);
                 }
             }
         }

@@ -83,6 +83,11 @@
                                         :placeholder="trans('admin::app.settings.taxes.rates.create.country')"
                                         v-model="country"
                                     >
+                                        <!-- Default Option -->
+                                        <option value="">
+                                            @lang('admin::app.settings.taxes.rates.create.select-country')
+                                        </option>
+
                                         @foreach (core()->countries() as $country)
                                             <option value="{{ $country->code }}">
                                                 {{ $country->name }}

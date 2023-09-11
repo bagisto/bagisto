@@ -89,6 +89,8 @@ return [
             'date-duration'               => ':start - :end',
             'decreased'                   => ':progress%',
             'end-date'                    => 'تاريخ الانتهاء',
+            'empty-threshold'             => 'الحد الأدنى للفارغ',
+            'empty-threshold-description' => 'لا تتوفر منتجات',
             'from'                        => 'من',
             'increased'                   => ':progress%',
             'more-products'               => ':product_count+ صورة إضافية',
@@ -124,8 +126,6 @@ return [
             'user-name'                   => 'مرحبًا! :user_name',
             'user-info'                   => 'استعراض سريع لما يحدث في متجرك',
             'visitor'                     => 'زائر',
-            'empty-threshold'             => 'الحد الأدنى للفارغ',
-            'empty-threshold-description' => 'لا تتوفر منتجات',
         ],
     ],
 
@@ -578,27 +578,13 @@ return [
                 ],
 
                 'images' => [
-                    'add-image-btn'     => 'إضافة صورة',
-                    'allowed-types'     => 'png، jpeg، jpg',
-                    'info'              => 'يجب أن تكون دقة الصورة مثل 609 بيكسل في 560 بيكسل',
-                    'not-allowed-error' => 'تُسمح فقط بملفات الصور (.jpeg، .jpg، .png، ...).',
-                    'title'             => 'الصور',
-
-                    'placeholders'  => [
-                        'front'     => 'الواجهة الأمامية',
-                        'next'      => 'التالي',
-                        'size'      => 'الحجم',
-                        'use-cases' => 'حالات الاستخدام',
-                        'zoom'      => 'التكبير',
-                    ],
+                    'title' => 'الصور',
+                    'info'  => 'يجب أن تكون دقة الصورة مثل 609 بيكسل في 560 بيكسل',
                 ],
 
                 'videos' => [
-                    'add-video-btn'     => 'إضافة فيديو',
-                    'allowed-types'     => 'mp4، webm، mkv',
-                    'info'              => 'يجب أن يكون حجم الفيديو الأقصى مثل :size',
-                    'not-allowed-error' => 'يُسمح فقط بملفات الفيديو (.mp4، .mov، .ogg ..).',
-                    'title'             => 'مقاطع الفيديو',
+                    'title' => 'مقاطع الفيديو',
+                    'info'  => 'يجب أن يكون حجم الفيديو الأقصى مثل :size',
                 ],
 
                 'links' => [
@@ -661,6 +647,19 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'الحالة',
                             'weight'          => 'الوزن',
+                        ],
+
+                        'mass-edit' => [
+                            'select-variants'  => 'تحديد البدائل',
+                            'select-action'    => 'تحديد الإجراء',
+                            'edit-prices'      => 'تعديل الأسعار',
+                            'edit-inventories' => 'تعديل المخزون',
+                            'add-images'       => 'إضافة صور',
+                            'remove-images'    => 'إزالة الصور',
+                            'remove-variants'  => 'إزالة البدائل',
+                            'price'            => 'السعر',
+                            'apply-to-all-sku' => 'تطبيق سعر على جميع SKU.',
+                            'apply-to-all-btn' => 'تطبيق على الكل',
                         ],
                     ],
 
@@ -1375,7 +1374,9 @@ return [
                 'save-btn-title'  => 'حفظ العنوان',
             ],
 
-            'success-mass-delete'  => 'حذف العناوين بنجاح',
+            'create-success'      => 'تم إنشاء العنوان بنجاح',
+            'update-success'      => 'تم تحديث العنوان بنجاح',
+            'success-mass-delete' => 'حذف العناوين بنجاح',
         ],
     ],
 
@@ -1463,6 +1464,8 @@ return [
                     'select-template' => 'اختر القالب',
                     'select-event'    => 'اختر الحدث',
                     'select-status'   => 'اختر الحالة',
+                    'select-channel'  => 'اختر القناة',
+                    'select-group'    => 'اختر المجموعة',
                     'subject'         => 'الموضوع',
                     'title'           => 'إنشاء حملة',
                 ],
@@ -1995,12 +1998,13 @@ return [
                 ],
 
                 'create' => [
-                    'code'        => 'الكود',
-                    'name'        => 'الاسم',
-                    'direction'   => 'الاتجاه',
-                    'locale-logo' => 'شعار اللغة',
-                    'title'       => 'إنشاء لغة',
-                    'save-btn'    => 'حفظ اللغة',
+                    'code'             => 'الكود',
+                    'name'             => 'الاسم',
+                    'direction'        => 'الاتجاه',
+                    'locale-logo'      => 'شعار اللغة',
+                    'title'            => 'إنشاء لغة',
+                    'save-btn'         => 'حفظ اللغة',
+                    'select-direction' => 'اختر الاتجاه',
                 ],
 
                 'edit' => [
@@ -2067,12 +2071,13 @@ return [
                 'update-rates'  => 'تحديث سعر الصرف',
 
                 'create' => [
-                    'delete-warning'  => 'هل أنت متأكد أنك تريد أداء هذا الإجراء؟',
-                    'title'           => 'إنشاء سعر صرف',
-                    'rate'            => 'السعر',
-                    'save-btn'        => 'حفظ سعر الصرف',
-                    'source-currency' => 'العملة المصدر',
-                    'target-currency' => 'العملة المستهدفة',
+                    'delete-warning'         => 'هل أنت متأكد أنك تريد أداء هذا الإجراء؟',
+                    'title'                  => 'إنشاء سعر صرف',
+                    'rate'                   => 'السعر',
+                    'save-btn'               => 'حفظ سعر الصرف',
+                    'source-currency'        => 'العملة المصدر',
+                    'select-target-currency' => 'اختر العملة المستهدفة',
+                    'target-currency'        => 'العملة المستهدفة',
                 ],
 
                 'edit' => [
@@ -2297,38 +2302,42 @@ return [
             ],
 
             'create' => [
-                'title'                  => 'إنشاء قناة',
-                'cancel'                 => 'رجوع',
-                'save-btn'               => 'حفظ القناة',
-                'general'                => 'عام',
-                'code'                   => 'الكود',
-                'name'                   => 'الاسم',
-                'description'            => 'الوصف',
-                'inventory-sources'      => 'مصادر المخزون',
-                'root-category'          => 'الفئة الجذرية',
-                'hostname'               => 'اسم المضيف',
-                'hostname-placeholder'   => 'https://www.example.com (لا تقم بإضافة شرطة في النهاية.)',
-                'design'                 => 'التصميم',
-                'theme'                  => 'السمة',
-                'logo'                   => 'الشعار',
-                'allowed-ips'            => 'عناوين IP المسموح بها',
-                'logo-size'              => 'يجب أن تكون دقة الصورة مثل 192 بيكسل × 50 بيكسل',
-                'favicon'                => 'رمز الموقع (Favicon)',
-                'favicon-size'           => 'يجب أن تكون دقة الصورة مثل 16 بيكسل × 16 بيكسل',
-                'seo'                    => 'تحسين محركات البحث للصفحة الرئيسية',
-                'seo-title'              => 'العنوان الوصفي (Meta title)',
-                'seo-description'        => 'الوصف الوصفي (Meta description)',
-                'seo-keywords'           => 'الكلمات الرئيسية (Meta keywords)',
-                'currencies-and-locales' => 'العملات واللغات',
-                'locales'                => 'اللغات',
-                'default-locale'         => 'اللغة الافتراضية',
-                'currencies'             => 'العملات',
-                'default-currency'       => 'العملة الافتراضية',
-                'last-delete-error'      => 'مطلوب وجود ما لا يقل عن قناة واحدة.',
-                'settings'               => 'الإعدادات',
-                'status'                 => 'الحالة',
-                'maintenance-mode-text'  => 'الرسالة',
-                'create-success'         => 'تم إنشاء القناة بنجاح.',
+                'title'                   => 'إنشاء قناة',
+                'cancel'                  => 'رجوع',
+                'save-btn'                => 'حفظ القناة',
+                'general'                 => 'عام',
+                'code'                    => 'الكود',
+                'name'                    => 'الاسم',
+                'description'             => 'الوصف',
+                'inventory-sources'       => 'مصادر المخزون',
+                'root-category'           => 'الفئة الجذرية',
+                'hostname'                => 'اسم المضيف',
+                'hostname-placeholder'    => 'https://www.example.com (لا تقم بإضافة شرطة في النهاية.)',
+                'design'                  => 'التصميم',
+                'theme'                   => 'السمة',
+                'logo'                    => 'الشعار',
+                'allowed-ips'             => 'عناوين IP المسموح بها',
+                'logo-size'               => 'يجب أن تكون دقة الصورة مثل 192 بيكسل × 50 بيكسل',
+                'favicon'                 => 'رمز الموقع (Favicon)',
+                'favicon-size'            => 'يجب أن تكون دقة الصورة مثل 16 بيكسل × 16 بيكسل',
+                'seo'                     => 'تحسين محركات البحث للصفحة الرئيسية',
+                'seo-title'               => 'العنوان الوصفي (Meta title)',
+                'seo-description'         => 'الوصف الوصفي (Meta description)',
+                'seo-keywords'            => 'الكلمات الرئيسية (Meta keywords)',
+                'currencies-and-locales'  => 'العملات واللغات',
+                'locales'                 => 'اللغات',
+                'default-locale'          => 'اللغة الافتراضية',
+                'currencies'              => 'العملات',
+                'default-currency'        => 'العملة الافتراضية',
+                'last-delete-error'       => 'مطلوب وجود ما لا يقل عن قناة واحدة.',
+                'settings'                => 'الإعدادات',
+                'status'                  => 'الحالة',
+                'select-root-category'    => 'اختر الفئة الجذرية',
+                'select-theme'            => 'اختر الثيم',
+                'select-default-locale'   => 'اختر اللغة الافتراضية',
+                'select-default-currency' => 'اختر العملة الافتراضية',
+                'maintenance-mode-text'   => 'الرسالة',
+                'create-success'          => 'تم إنشاء القناة بنجاح.',
             ],
 
             'edit' => [
@@ -3147,6 +3156,28 @@ return [
                 'qty'         => ':qty متاحة',
             ],
         ],
+
+        'media' => [
+            'images' => [
+                'add-image-btn'     => 'إضافة صورة',
+                'allowed-types'     => 'png، jpeg، jpg',
+                'not-allowed-error' => 'تُسمح فقط بملفات الصور (.jpeg، .jpg، .png، ...).',
+
+                'placeholders'  => [
+                    'front'     => 'الواجهة الأمامية',
+                    'next'      => 'التالي',
+                    'size'      => 'الحجم',
+                    'use-cases' => 'حالات الاستخدام',
+                    'zoom'      => 'التكبير',
+                ],
+            ],
+
+            'videos' => [
+                'add-video-btn'     => 'إضافة فيديو',
+                'allowed-types'     => 'mp4، webm، mkv',
+                'not-allowed-error' => 'يُسمح فقط بملفات الفيديو (.mp4، .mov، .ogg ..).',
+            ],
+        ],
     ],
 
     'acl' => [
@@ -3262,6 +3293,15 @@ return [
     'emails' => [
         'dear'   => 'عزيزي :customer_name',
         'thanks' => 'إذا كنت بحاجة إلى أي نوع من المساعدة، يرجى الاتصال بنا على <a href=":link" style=":style">:email</a>.<br/>شكرًا لك!',
+
+        'admin' => [
+            'forgot-password' => [
+                'subject'        => 'رسالة إعادة تعيين كلمة المرور',
+                'greeting'       => 'نسيت كلمة المرور!',
+                'description'    => 'تتلقى هذا البريد الإلكتروني لأننا تلقينا طلبًا لإعادة تعيين كلمة المرور الخاصة بحسابك.',
+                'reset-password' => 'إعادة تعيين كلمة المرور',
+            ],
+        ],
 
         'orders' => [
             'created' => [

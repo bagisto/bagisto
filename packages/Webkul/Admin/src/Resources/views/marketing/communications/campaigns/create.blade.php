@@ -97,6 +97,11 @@
                                 class="cursor-pointer"
                                 :label="trans('admin::app.marketing.communications.campaigns.create.event')"
                             >
+                                <!-- Default Option -->
+                                <option value="">
+                                    @lang('admin::app.marketing.communications.campaigns.create.select-event')
+                                </option>
+
                                 @foreach (app('Webkul\Marketing\Repositories\EventRepository')->all() as $event)
                                     <option 
                                         value="{{ $event->id }}" 
@@ -126,6 +131,11 @@
                                 class="cursor-pointer"
                                 :label="trans('admin::app.marketing.communications.campaigns.create.email-template')"
                             >
+                                <!-- Default Option -->
+                                <option value="">
+                                    @lang('admin::app.marketing.communications.campaigns.create.select-template')
+                                </option>
+
                                 @foreach ($templates as $template)
                                     <option 
                                         value="{{ $template->id }}" 
@@ -169,6 +179,11 @@
                                 class="cursor-pointer"
                                 :label="trans('admin::app.marketing.communications.campaigns.create.channel')"
                             >
+                                <!-- Default Option -->
+                                <option value="">
+                                    @lang('admin::app.marketing.communications.campaigns.create.select-channel')
+                                </option>
+
                                 @foreach (app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)
                                     <option 
                                         value="{{ $channel->id }}" 
@@ -198,6 +213,11 @@
                                 class="cursor-pointer"
                                 :label="trans('admin::app.marketing.communications.campaigns.create.customer-group')"
                             >
+                                <!-- Default Option -->
+                                <option value="">
+                                    @lang('admin::app.marketing.communications.campaigns.create.select-group')
+                                </option>
+
                                 @foreach (app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
                                     <option 
                                         value="{{ $customerGroup->id }}" 

@@ -89,6 +89,8 @@ return [
             'date-duration'               => ':start - :end',
             'decreased'                   => ':progress%',
             'end-date'                    => 'Einddatum',
+            'empty-threshold'             => 'Lege Drempel',
+            'empty-threshold-description' => 'Er zijn geen producten beschikbaar',
             'from'                        => 'Van',
             'increased'                   => ':progress%',
             'more-products'               => ':product_count+ Meer Afbeeldingen',
@@ -124,8 +126,6 @@ return [
             'user-name'                   => 'Hallo! :user_name',
             'user-info'                   => 'Bekijk snel wat er gebeurt in je winkel',
             'visitor'                     => 'Bezoeker',
-            'empty-threshold'             => 'Lege Drempel',
-            'empty-threshold-description' => 'Er zijn geen producten beschikbaar',
         ],
     ],
 
@@ -578,27 +578,13 @@ return [
                 ],
 
                 'images' => [
-                    'add-image-btn'     => 'Afbeelding Toevoegen',
-                    'allowed-types'     => 'png, jpeg, jpg',
-                    'info'              => 'De afbeeldingsresolutie moet zijn zoals 609px X 560px',
-                    'not-allowed-error' => 'Alleen afbeeldingsbestanden (.jpeg, .jpg, .png, ..) zijn toegestaan.',
-                    'title'             => 'Afbeeldingen',
-
-                    'placeholders'  => [
-                        'front'     => 'Voorkant',
-                        'next'      => 'Volgende',
-                        'size'      => 'Formaat',
-                        'use-cases' => 'Gebruiksscenario\'s',
-                        'zoom'      => 'Inzoomen',
-                    ],
+                    'title' => 'Afbeeldingen',
+                    'info'  => 'De afbeeldingsresolutie moet zijn zoals 609px X 560px',
                 ],
 
                 'videos' => [
-                    'add-video-btn'     => 'Video Toevoegen',
-                    'allowed-types'     => 'mp4, webm, mkv',
-                    'info'              => 'De maximale grootte van de video moet zijn zoals :size',
-                    'not-allowed-error' => 'Alleen videobestanden (.mp4, .mov, .ogg ..) zijn toegestaan.',
-                    'title'             => 'Video\'s',
+                    'title' => 'Video\'s',
+                    'info'  => 'De maximale grootte van de video moet zijn zoals :size',
                 ],
 
                 'links' => [
@@ -661,6 +647,19 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'Status',
                             'weight'          => 'Gewicht',
+                        ],
+
+                        'mass-edit' => [
+                            'select-variants'  => 'Selecteer Varianten',
+                            'select-action'    => 'Selecteer Actie',
+                            'edit-prices'      => 'Bewerk Prijzen',
+                            'edit-inventories' => 'Bewerk Voorraden',
+                            'add-images'       => 'Afbeeldingen Toevoegen',
+                            'remove-images'    => 'Afbeeldingen Verwijderen',
+                            'remove-variants'  => 'Varianten Verwijderen',
+                            'price'            => 'Prijs',
+                            'apply-to-all-sku' => 'Pas een prijs toe op alle SKU\'s.',
+                            'apply-to-all-btn' => 'Toepassen op Alles',
                         ],
                     ],
 
@@ -1375,6 +1374,8 @@ return [
                 'save-btn-title'  => 'Adres Opslaan',
             ],
 
+            'create-success'      => 'Adres succesvol aangemaakt',
+            'update-success'      => 'Adres succesvol bijgewerkt',
             'success-mass-delete' => 'Adressen succesvol verwijderd',
         ],
     ],
@@ -1463,6 +1464,8 @@ return [
                     'select-template' => 'Selecteer Sjabloon',
                     'select-event'    => 'Selecteer Gebeurtenis',
                     'select-status'   => 'Selecteer Status',
+                    'select-channel'  => 'Kanaal selecteren',
+                    'select-group'    => 'Groep selecteren',
                     'subject'         => 'Onderwerp',
                     'title'           => 'Campagne aanmaken',
                 ],
@@ -1994,12 +1997,13 @@ return [
                 ],
 
                 'create' => [
-                    'code'        => 'Code',
-                    'name'        => 'Naam',
-                    'direction'   => 'Richting',
-                    'locale-logo' => 'Taal Logo',
-                    'title'       => 'Taal Aanmaken',
-                    'save-btn'    => 'Taal Opslaan',
+                    'code'             => 'Code',
+                    'name'             => 'Naam',
+                    'direction'        => 'Richting',
+                    'locale-logo'      => 'Taal Logo',
+                    'title'            => 'Taal Aanmaken',
+                    'save-btn'         => 'Taal Opslaan',
+                    'select-direction' => 'Richting selecteren',
                 ],
 
                 'edit' => [
@@ -2066,12 +2070,13 @@ return [
                 'update-rates'  => 'Wisselkoers Bijwerken',
 
                 'create' => [
-                    'delete-warning'  => 'Weet je zeker dat je deze actie wilt uitvoeren?',
-                    'title'           => 'Wisselkoers Aanmaken',
-                    'rate'            => 'Koers',
-                    'save-btn'        => 'Wisselkoers Opslaan',
-                    'source-currency' => 'Bronvaluta',
-                    'target-currency' => 'Doelvaluta',
+                    'delete-warning'         => 'Weet je zeker dat je deze actie wilt uitvoeren?',
+                    'title'                  => 'Wisselkoers Aanmaken',
+                    'rate'                   => 'Koers',
+                    'save-btn'               => 'Wisselkoers Opslaan',
+                    'source-currency'        => 'Bronvaluta',
+                    'select-target-currency' => 'Selecteer doelvaluta',
+                    'target-currency'        => 'Doelvaluta',
                 ],
 
                 'edit' => [
@@ -2296,38 +2301,42 @@ return [
             ],
 
             'create' => [
-                'title'                  => 'Kanaal Aanmaken',
-                'cancel'                 => 'Terug',
-                'save-btn'               => 'Kanaal Opslaan',
-                'general'                => 'Algemeen',
-                'code'                   => 'Code',
-                'name'                   => 'Naam',
-                'description'            => 'Omschrijving',
-                'inventory-sources'      => 'Voorraadbronnen',
-                'root-category'          => 'Hoofdcategorie',
-                'hostname'               => 'Hostnaam',
-                'hostname-placeholder'   => 'https://www.example.com (Voeg geen slash aan het einde toe.)',
-                'design'                 => 'Ontwerp',
-                'theme'                  => 'Thema',
-                'logo'                   => 'Logo',
-                'allowed-ips'            => 'Toegestane IP’s',
-                'logo-size'              => 'Afbeeldingsresolutie moet zijn zoals 192px X 50px',
-                'favicon'                => 'Favicon',
-                'favicon-size'           => 'Afbeeldingsresolutie moet zijn zoals 16px X 16px',
-                'seo'                    => 'SEO voor startpagina',
-                'seo-title'              => 'Meta-titel',
-                'seo-description'        => 'Meta-beschrijving',
-                'seo-keywords'           => 'Meta-trefwoorden',
-                'currencies-and-locales' => 'Valuta’s en Locaties',
-                'locales'                => 'Locaties',
-                'default-locale'         => 'Standaardlocatie',
-                'currencies'             => 'Valuta’s',
-                'default-currency'       => 'Standaardvaluta',
-                'last-delete-error'      => 'Minimaal één kanaal is vereist.',
-                'settings'               => 'Instellingen',
-                'status'                 => 'Status',
-                'maintenance-mode-text'  => 'Bericht',
-                'create-success'         => 'Kanaal succesvol aangemaakt.',
+                'title'                   => 'Kanaal Aanmaken',
+                'cancel'                  => 'Terug',
+                'save-btn'                => 'Kanaal Opslaan',
+                'general'                 => 'Algemeen',
+                'code'                    => 'Code',
+                'name'                    => 'Naam',
+                'description'             => 'Omschrijving',
+                'inventory-sources'       => 'Voorraadbronnen',
+                'root-category'           => 'Hoofdcategorie',
+                'hostname'                => 'Hostnaam',
+                'hostname-placeholder'    => 'https://www.example.com (Voeg geen slash aan het einde toe.)',
+                'design'                  => 'Ontwerp',
+                'theme'                   => 'Thema',
+                'logo'                    => 'Logo',
+                'allowed-ips'             => 'Toegestane IP’s',
+                'logo-size'               => 'Afbeeldingsresolutie moet zijn zoals 192px X 50px',
+                'favicon'                 => 'Favicon',
+                'favicon-size'            => 'Afbeeldingsresolutie moet zijn zoals 16px X 16px',
+                'seo'                     => 'SEO voor startpagina',
+                'seo-title'               => 'Meta-titel',
+                'seo-description'         => 'Meta-beschrijving',
+                'seo-keywords'            => 'Meta-trefwoorden',
+                'currencies-and-locales'  => 'Valuta’s en Locaties',
+                'locales'                 => 'Locaties',
+                'default-locale'          => 'Standaardlocatie',
+                'currencies'              => 'Valuta’s',
+                'default-currency'        => 'Standaardvaluta',
+                'last-delete-error'       => 'Minimaal één kanaal is vereist.',
+                'settings'                => 'Instellingen',
+                'status'                  => 'Status',
+                'select-root-category'    => 'Selecteer hoofdcategorie',
+                'select-theme'            => 'Selecteer thema',
+                'select-default-locale'   => 'Selecteer standaardtaal',
+                'select-default-currency' => 'Selecteer standaardvaluta',
+                'maintenance-mode-text'   => 'Bericht',
+                'create-success'          => 'Kanaal succesvol aangemaakt.',
             ],
 
             'edit' => [
@@ -3034,6 +3043,28 @@ return [
                 'qty'         => ':qty Beschikbaar',
             ],
         ],
+
+        'media' => [
+            'images' => [
+                'add-image-btn'     => 'Afbeelding Toevoegen',
+                'allowed-types'     => 'png, jpeg, jpg',
+                'not-allowed-error' => 'Alleen afbeeldingsbestanden (.jpeg, .jpg, .png, ..) zijn toegestaan.',
+
+                'placeholders'  => [
+                    'front'     => 'Voorkant',
+                    'next'      => 'Volgende',
+                    'size'      => 'Formaat',
+                    'use-cases' => 'Gebruiksscenario\'s',
+                    'zoom'      => 'Inzoomen',
+                ],
+            ],
+
+            'videos' => [
+                'add-video-btn'     => 'Video Toevoegen',
+                'allowed-types'     => 'mp4, webm, mkv',
+                'not-allowed-error' => 'Alleen videobestanden (.mp4, .mov, .ogg ..) zijn toegestaan.',
+            ],
+        ],
     ],
 
     'acl' => [
@@ -3149,6 +3180,15 @@ return [
     'emails' => [
         'dear'   => 'Beste :customer_name',
         'thanks' => 'Als u hulp nodig heeft, neem dan contact met ons op via <a href=":link" style=":style">:email</a>.<br/>Bedankt!',
+
+        'admin' => [
+            'forgot-password' => [
+                'subject'        => 'E-mail wachtwoord resetten',
+                'greeting'       => 'Wachtwoord vergeten!',
+                'description'    => 'U ontvangt deze e-mail omdat we een verzoek voor het opnieuw instellen van het wachtwoord voor uw account hebben ontvangen.',
+                'reset-password' => 'Wachtwoord opnieuw instellen',
+            ],
+        ],
 
         'orders' => [
             'created' => [

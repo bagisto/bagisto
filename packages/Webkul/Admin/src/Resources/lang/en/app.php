@@ -89,6 +89,8 @@ return [
             'date-duration'               => ':start - :end',
             'decreased'                   => ':progress%',
             'end-date'                    => 'End Date',
+            'empty-threshold'             => 'Empty Threshold',
+            'empty-threshold-description' => 'There is no product available',
             'from'                        => 'From',
             'increased'                   => ':progress%',
             'more-products'               => ':product_count+ More Images',
@@ -124,8 +126,6 @@ return [
             'user-name'                   => 'Hi ! :user_name',
             'user-info'                   => 'Quickly Review what’s going on in your store',
             'visitor'                     => 'Visitor',
-            'empty-threshold'             => 'Empty Threshold',
-            'empty-threshold-description' => 'There is no product available',
         ],
     ],
 
@@ -578,27 +578,13 @@ return [
                 ],
 
                 'images' => [
-                    'add-image-btn'     => 'Add Image',
-                    'allowed-types'     => 'png, jpeg, jpg',
-                    'info'              => 'Image resolution should be like 609px X 560px',
-                    'not-allowed-error' => 'Only images files (.jpeg, .jpg, .png, ..) are allowed.',
-                    'title'             => 'Images',
-
-                    'placeholders'  => [
-                        'front'     => 'Front',
-                        'next'      => 'Next',
-                        'size'      => 'Size',
-                        'use-cases' => 'Use Cases',
-                        'zoom'      => 'Zoom',
-                    ],
+                    'title' => 'Images',
+                    'info'  => 'Image resolution should be like 609px X 560px',
                 ],
 
                 'videos' => [
-                    'add-video-btn'     => 'Add Video',
-                    'allowed-types'     => 'mp4, webm, mkv',
-                    'info'              => 'Maximum video size should be like :size',
-                    'not-allowed-error' => 'Only videos files (.mp4, .mov, .ogg ..) are allowed.',
-                    'title'             => 'Videos',
+                    'title' => 'Videos',
+                    'info'  => 'Maximum video size should be like :size',
                 ],
 
                 'links' => [
@@ -661,6 +647,19 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'Status',
                             'weight'          => 'Weight',
+                        ],
+
+                        'mass-edit' => [
+                            'select-variants'   => 'Select Variants',
+                            'select-action'     => 'Select Action',
+                            'edit-prices'       => 'Edit Prices',
+                            'edit-inventories'  => 'Edit Inventories',
+                            'add-images'        => 'Add Images',
+                            'remove-images'     => 'Remove Images',
+                            'remove-variants'   => 'Remove Variants',
+                            'price'             => 'Price',
+                            'apply-to-all-sku'  => 'Apply a price to all SKU.',
+                            'apply-to-all-btn'  => 'Apply to All',
                         ],
                     ],
 
@@ -1375,6 +1374,8 @@ return [
                 'save-btn-title'   => 'Save Address',
             ],
 
+            'create-success'      => 'Address Created Successfully',
+            'update-success'      => 'Address Updated Successfully',
             'success-mass-delete' => 'Address Mass Delete Successfully',
         ],
     ],
@@ -1463,6 +1464,8 @@ return [
                     'select-template' => 'Select Template',
                     'select-event'    => 'Select Event',
                     'select-status'   => 'Select Status',
+                    'select-channel'  => 'Select Channel',
+                    'select-group'    => 'Select Group',
                     'subject'         => 'Subject',
                     'title'           => 'Create Campaign',
                 ],
@@ -1994,16 +1997,17 @@ return [
                     'delete'    => 'Delete',
                 ],
 
-                'create'  => [
-                    'code'        => 'Code',
-                    'name'        => 'Name',
-                    'direction'   => 'Direction',
-                    'locale-logo' => 'Locale Logo',
-                    'title'       => 'Create Locale',
-                    'save-btn'    => 'Save Locale',
+                'create' => [
+                    'code'             => 'Code',
+                    'name'             => 'Name',
+                    'direction'        => 'Direction',
+                    'locale-logo'      => 'Locale Logo',
+                    'title'            => 'Create Locale',
+                    'save-btn'         => 'Save Locale',
+                    'select-direction' => 'Select Direction',
                 ],
 
-                'edit'  => [
+                'edit' => [
                     'title' => 'Edit Locales',
                 ],
 
@@ -2067,16 +2071,17 @@ return [
                 'update-rates'  => 'Update Exchange Rate',
 
                 'create' => [
-                    'delete-warning'  => 'Are you sure, you want to perform this action?',
-                    'title'           => 'Create Exchange Rate',
-                    'rate'            => 'Rate',
-                    'save-btn'        => 'Save Exchange Rate',
-                    'source-currency' => 'Source Currency',
-                    'target-currency' => 'Target Currency',
+                    'delete-warning'         => 'Are you sure, you want to perform this action?',
+                    'title'                  => 'Create Exchange Rate',
+                    'rate'                   => 'Rate',
+                    'save-btn'               => 'Save Exchange Rate',
+                    'source-currency'        => 'Source Currency',
+                    'select-target-currency' => 'Select Target Currency',
+                    'target-currency'        => 'Target Currency',
                 ],
 
                 'edit' => [
-                    'title'   => 'Edit Exchange Rates',
+                    'title' => 'Edit Exchange Rates',
                 ],
 
                 'datagrid' => [
@@ -2297,38 +2302,42 @@ return [
             ],
 
             'create' => [
-                'title'                  => 'Create Channel',
-                'cancel'                 => 'Back',
-                'save-btn'               => 'Save Channel',
-                'general'                => 'General',
-                'code'                   => 'Code',
-                'name'                   => 'Name',
-                'description'            => 'Description',
-                'inventory-sources'      => 'Inventory Sources',
-                'root-category'          => 'Root Category',
-                'hostname'               => 'Hostname',
-                'hostname-placeholder'   => 'https://www.example.com (Don\'t add slash in the end.)',
-                'design'                 => 'Design',
-                'theme'                  => 'Theme',
-                'logo'                   => 'Logo',
-                'allowed-ips'            => 'Allowed IPs',
-                'logo-size'              => 'Image resolution should be like 192px X 50px',
-                'favicon'                => 'Favicon',
-                'favicon-size'           => 'Image resolution should be like 16px X 16px',
-                'seo'                    => 'Home page SEO',
-                'seo-title'              => 'Meta title',
-                'seo-description'        => 'Meta description',
-                'seo-keywords'           => 'Meta keywords',
-                'currencies-and-locales' => 'Currencies and Locales',
-                'locales'                => 'Locales',
-                'default-locale'         => 'Default Locale',
-                'currencies'             => 'Currencies',
-                'default-currency'       => 'Default Currency',
-                'last-delete-error'      => 'At least one Channel is required.',
-                'settings'               => 'Settings',
-                'status'                 => 'Status',
-                'maintenance-mode-text'  => 'Message',
-                'create-success'         => 'Channel created successfully.',
+                'title'                   => 'Create Channel',
+                'cancel'                  => 'Back',
+                'save-btn'                => 'Save Channel',
+                'general'                 => 'General',
+                'code'                    => 'Code',
+                'name'                    => 'Name',
+                'description'             => 'Description',
+                'inventory-sources'       => 'Inventory Sources',
+                'root-category'           => 'Root Category',
+                'hostname'                => 'Hostname',
+                'hostname-placeholder'    => 'https://www.example.com (Don\'t add slash in the end.)',
+                'design'                  => 'Design',
+                'theme'                   => 'Theme',
+                'logo'                    => 'Logo',
+                'allowed-ips'             => 'Allowed IPs',
+                'logo-size'               => 'Image resolution should be like 192px X 50px',
+                'favicon'                 => 'Favicon',
+                'favicon-size'            => 'Image resolution should be like 16px X 16px',
+                'seo'                     => 'Home page SEO',
+                'seo-title'               => 'Meta title',
+                'seo-description'         => 'Meta description',
+                'seo-keywords'            => 'Meta keywords',
+                'currencies-and-locales'  => 'Currencies and Locales',
+                'locales'                 => 'Locales',
+                'default-locale'          => 'Default Locale',
+                'currencies'              => 'Currencies',
+                'default-currency'        => 'Default Currency',
+                'last-delete-error'       => 'At least one Channel is required.',
+                'settings'                => 'Settings',
+                'status'                  => 'Status',
+                'select-root-category'    => 'Select Root Category',
+                'select-theme'            => 'Select Theme',
+                'select-default-locale'   => 'Select Default Locale',
+                'select-default-currency' => 'Select Default Currency',
+                'maintenance-mode-text'   => 'Message',
+                'create-success'          => 'Channel created successfully.',
             ],
 
             'edit' => [
@@ -3147,6 +3156,28 @@ return [
                 'qty'         => ':qty Available',
             ],
         ],
+
+        'media' => [
+            'images' => [
+                'add-image-btn'     => 'Add Image',
+                'allowed-types'     => 'png, jpeg, jpg',
+                'not-allowed-error' => 'Only images files (.jpeg, .jpg, .png, ..) are allowed.',
+
+                'placeholders'  => [
+                    'front'     => 'Front',
+                    'next'      => 'Next',
+                    'size'      => 'Size',
+                    'use-cases' => 'Use Cases',
+                    'zoom'      => 'Zoom',
+                ],
+            ],
+
+            'videos' => [
+                'add-video-btn'     => 'Add Video',
+                'allowed-types'     => 'mp4, webm, mkv',
+                'not-allowed-error' => 'Only videos files (.mp4, .mov, .ogg ..) are allowed.',
+            ],
+        ],
     ],
 
     'acl' => [
@@ -3262,6 +3293,15 @@ return [
     'emails' => [
         'dear'   => 'Dear :customer_name',
         'thanks' => 'If you need any kind of help please contact us at <a href=":link" style=":style">:email</a>.<br/>Thanks!',
+
+        'admin' => [
+            'forgot-password' => [
+                'subject'        => 'Reset Password Email',
+                'greeting'       => 'Forgot Password!',
+                'description'    => 'You are receiving this email because we received a password reset request for your account.',
+                'reset-password' => 'Reset Password',
+            ],
+        ],
 
         'orders' => [
             'created' => [

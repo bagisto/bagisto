@@ -89,6 +89,8 @@ return [
             'date-duration'               => ':start - :end',
             'decreased'                   => ':progress%',
             'end-date'                    => 'Дата окончания',
+            'empty-threshold'             => 'Порог Пустоты',
+            'empty-threshold-description' => 'Нет доступных товаров',
             'from'                        => 'С',
             'increased'                   => ':progress%',
             'more-products'               => ':product_count+ дополнительных изображений',
@@ -124,8 +126,6 @@ return [
             'user-name'                   => 'Привет, :user_name!',
             'user-info'                   => 'Быстрый обзор текущей ситуации в вашем магазине',
             'visitor'                     => 'Посетитель',
-            'empty-threshold'             => 'Порог Пустоты',
-            'empty-threshold-description' => 'Нет доступных товаров',
         ],
     ],
 
@@ -578,27 +578,13 @@ return [
                 ],
 
                 'images' => [
-                    'add-image-btn'     => 'Добавить изображение',
-                    'allowed-types'     => 'png, jpeg, jpg',
-                    'info'              => 'Разрешение изображения должно быть 609px X 560px',
-                    'not-allowed-error' => 'Разрешены только файлы изображений (.jpeg, .jpg, .png и др.)',
-                    'title'             => 'Изображения',
-
-                    'placeholders'  => [
-                        'front'     => 'Спереди',
-                        'next'      => 'Следующий',
-                        'size'      => 'Размер',
-                        'use-cases' => 'Использование',
-                        'zoom'      => 'Увеличить',
-                    ],
+                    'title' => 'Изображения',
+                    'info'  => 'Разрешение изображения должно быть 609px X 560px',
                 ],
 
                 'videos' => [
-                    'add-video-btn'     => 'Добавить видео',
-                    'allowed-types'     => 'mp4, webm, mkv',
-                    'info'              => 'Максимальный размер видео должен быть :size',
-                    'not-allowed-error' => 'Разрешены только файлы видео (.mp4, .mov, .ogg и др.)',
-                    'title'             => 'Видео',
+                    'title' => 'Видео',
+                    'info'  => 'Максимальный размер видео должен быть :size',
                 ],
 
                 'links' => [
@@ -661,6 +647,19 @@ return [
                             'sku'             => 'Артикул (SKU)',
                             'status'          => 'Статус',
                             'weight'          => 'Вес',
+                        ],
+
+                        'mass-edit' => [
+                            'select-variants'  => 'Выбрать Варианты',
+                            'select-action'    => 'Выбрать Действие',
+                            'edit-prices'      => 'Редактировать Цены',
+                            'edit-inventories' => 'Редактировать Наличие',
+                            'add-images'       => 'Добавить Изображения',
+                            'remove-images'    => 'Удалить Изображения',
+                            'remove-variants'  => 'Удалить Варианты',
+                            'price'            => 'Цена',
+                            'apply-to-all-sku' => 'Применить цену ко всем SKU.',
+                            'apply-to-all-btn' => 'Применить ко всем',
                         ],
                     ],
 
@@ -1375,6 +1374,8 @@ return [
                 'save-btn-title'   => 'Сохранить Адрес',
             ],
 
+            'create-success'      => 'Адрес успешно создан',
+            'update-success'      => 'Адрес успешно обновлен',
             'success-mass-delete' => 'Массовое удаление Адресов выполнено успешно',
         ],
     ],
@@ -1463,6 +1464,8 @@ return [
                     'select-template' => 'Выберите шаблон',
                     'select-event'    => 'Выберите событие',
                     'select-status'   => 'Выберите статус',
+                    'select-channel'  => 'Выберите канал',
+                    'select-group'    => 'Выберите группу',
                     'subject'         => 'Тема',
                     'title'           => 'Создать кампанию',
                 ],
@@ -1995,12 +1998,13 @@ return [
                 ],
 
                 'create'  =>  [
-                    'code'        => 'Код',
-                    'name'        => 'Название',
-                    'direction'   => 'Направление',
-                    'locale-logo' => 'Логотип локали',
-                    'title'       => 'Создать локаль',
-                    'save-btn'    => 'Сохранить локаль',
+                    'code'             => 'Код',
+                    'name'             => 'Название',
+                    'direction'        => 'Направление',
+                    'locale-logo'      => 'Логотип локали',
+                    'title'            => 'Создать локаль',
+                    'save-btn'         => 'Сохранить локаль',
+                    'select-direction' => 'Выбрать направление',
                 ],
 
                 'edit'  => [
@@ -2067,12 +2071,13 @@ return [
                 'update-rates'  => 'Обновить обменный курс',
 
                 'create' => [
-                    'delete-warning'  => 'Вы уверены, что хотите выполнить это действие?',
-                    'title'           => 'Создать обменный курс',
-                    'rate'            => 'Курс',
-                    'save-btn'        => 'Сохранить обменный курс',
-                    'source-currency' => 'Исходная валюта',
-                    'target-currency' => 'Целевая валюта',
+                    'delete-warning'         => 'Вы уверены, что хотите выполнить это действие?',
+                    'title'                  => 'Создать обменный курс',
+                    'rate'                   => 'Курс',
+                    'save-btn'               => 'Сохранить обменный курс',
+                    'source-currency'        => 'Исходная валюта',
+                    'select-target-currency' => 'Выберите целевую валюту',
+                    'target-currency'        => 'Целевая валюта',
                 ],
 
                 'edit' => [
@@ -2297,38 +2302,42 @@ return [
             ],
 
             'create' => [
-                'title'                  => 'Создать канал',
-                'cancel'                 => 'Назад',
-                'save-btn'               => 'Сохранить канал',
-                'general'                => 'Общее',
-                'code'                   => 'Код',
-                'name'                   => 'Название',
-                'description'            => 'Описание',
-                'inventory-sources'      => 'Источники инвентаря',
-                'root-category'          => 'Корневая категория',
-                'hostname'               => 'Имя хоста',
-                'hostname-placeholder'   => 'https://www.example.com (Не добавляйте слеш в конце.)',
-                'design'                 => 'Дизайн',
-                'theme'                  => 'Тема',
-                'logo'                   => 'Логотип',
-                'allowed-ips'            => 'Разрешенные IP-адреса',
-                'logo-size'              => 'Разрешение изображения должно быть как 192px X 50px',
-                'favicon'                => 'Фавикон',
-                'favicon-size'           => 'Разрешение изображения должно быть как 16px X 16px',
-                'seo'                    => 'SEO домашней страницы',
-                'seo-title'              => 'Мета-заголовок',
-                'seo-description'        => 'Мета-описание',
-                'seo-keywords'           => 'Мета-ключевые слова',
-                'currencies-and-locales' => 'Валюты и локали',
-                'locales'                => 'Локали',
-                'default-locale'         => 'Локаль по умолчанию',
-                'currencies'             => 'Валюты',
-                'default-currency'       => 'Валюта по умолчанию',
-                'last-delete-error'      => 'Требуется хотя бы один канал.',
-                'settings'               => 'Настройки',
-                'status'                 => 'Статус',
-                'maintenance-mode-text'  => 'Сообщение',
-                'create-success'         => 'Канал успешно создан.',
+                'title'                   => 'Создать канал',
+                'cancel'                  => 'Назад',
+                'save-btn'                => 'Сохранить канал',
+                'general'                 => 'Общее',
+                'code'                    => 'Код',
+                'name'                    => 'Название',
+                'description'             => 'Описание',
+                'inventory-sources'       => 'Источники инвентаря',
+                'root-category'           => 'Корневая категория',
+                'hostname'                => 'Имя хоста',
+                'hostname-placeholder'    => 'https://www.example.com (Не добавляйте слеш в конце.)',
+                'design'                  => 'Дизайн',
+                'theme'                   => 'Тема',
+                'logo'                    => 'Логотип',
+                'allowed-ips'             => 'Разрешенные IP-адреса',
+                'logo-size'               => 'Разрешение изображения должно быть как 192px X 50px',
+                'favicon'                 => 'Фавикон',
+                'favicon-size'            => 'Разрешение изображения должно быть как 16px X 16px',
+                'seo'                     => 'SEO домашней страницы',
+                'seo-title'               => 'Мета-заголовок',
+                'seo-description'         => 'Мета-описание',
+                'seo-keywords'            => 'Мета-ключевые слова',
+                'currencies-and-locales'  => 'Валюты и локали',
+                'locales'                 => 'Локали',
+                'default-locale'          => 'Локаль по умолчанию',
+                'currencies'              => 'Валюты',
+                'default-currency'        => 'Валюта по умолчанию',
+                'last-delete-error'       => 'Требуется хотя бы один канал.',
+                'settings'                => 'Настройки',
+                'status'                  => 'Статус',
+                'select-root-category'    => 'Выберите корневую категорию',
+                'select-theme'            => 'Выберите тему',
+                'select-default-locale'   => 'Выберите язык по умолчанию',
+                'select-default-currency' => 'Выберите валюту по умолчанию',
+                'maintenance-mode-text'   => 'Сообщение',
+                'create-success'          => 'Канал успешно создан.',
             ],
 
             'edit' => [
@@ -3034,6 +3043,28 @@ return [
                 'qty'         => ':qty доступно',
             ],
         ],
+
+        'media' => [
+            'images' => [
+                'add-image-btn'     => 'Добавить изображение',
+                'allowed-types'     => 'png, jpeg, jpg',
+                'not-allowed-error' => 'Разрешены только файлы изображений (.jpeg, .jpg, .png и др.)',
+
+                'placeholders'  => [
+                    'front'     => 'Спереди',
+                    'next'      => 'Следующий',
+                    'size'      => 'Размер',
+                    'use-cases' => 'Использование',
+                    'zoom'      => 'Увеличить',
+                ],
+            ],
+
+            'videos' => [
+                'add-video-btn'     => 'Добавить видео',
+                'allowed-types'     => 'mp4, webm, mkv',
+                'not-allowed-error' => 'Разрешены только файлы видео (.mp4, .mov, .ogg и др.)',
+            ],
+        ]
     ],
 
     'acl' => [
@@ -3149,6 +3180,15 @@ return [
     'emails' => [
         'dear'   => 'Уважаемый :customer_name',
         'thanks' => 'Если вам нужна какая-либо помощь, пожалуйста, свяжитесь с нами по адресу <a href=":link" style=":style">:email</a>.<br/>Спасибо!',
+
+        'admin' => [
+            'forgot-password' => [
+                'subject'        => 'Письмо сброса пароля',
+                'greeting'       => 'Забыли пароль!',
+                'description'    => 'Вы получаете это письмо, потому что мы получили запрос на сброс пароля для вашей учетной записи.',
+                'reset-password' => 'Сбросить пароль',
+            ],
+        ],
 
         'orders' => [
             'created' => [

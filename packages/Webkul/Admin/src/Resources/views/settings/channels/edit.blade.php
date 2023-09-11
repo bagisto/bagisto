@@ -219,6 +219,11 @@
                                 id="theme"
                                 :label="trans('admin::app.settings.channels.edit.theme')"
                             >
+                                <!-- Default Option -->
+                                <option value="">
+                                    @lang('admin::app.settings.channels.create.select-theme')
+                                </option>
+
                                 @foreach (config('themes.themes') as $themeCode => $theme)
                                     <option value="{{ $themeCode }}" {{ old('theme') == $themeCode ? 'selected' : '' }}>
                                         {{ $theme['name'] }}
@@ -239,13 +244,9 @@
                                         @lang('admin::app.settings.channels.edit.logo')
                                     </x-admin::form.control-group.label>
 
-                                    @php
-                                        $logoImages = $channel->logo ? [['id' => 'logo_path', 'url' => $channel->logo_url]] : [];
-                                    @endphp
-
                                     <x-admin::media.images
                                         name="logo"
-                                        ::uploaded-images='{{ json_encode($logoImages) }}'
+                                        :uploaded-images="$channel->logo ? [['id' => 'logo_path', 'url' => $channel->logo_url]] : []"
                                     >
                                     </x-admin::media.images>
                                 </x-admin::form.control-group>
@@ -267,7 +268,7 @@
 
                                     <x-admin::media.images
                                         name="favicon"
-                                        ::uploaded-images='{{ json_encode($faviconImages) }}'
+                                        :uploaded-images="$channel->favicon ? [['id' => 'logo_path', 'url' => $channel->favicon_url]] : []"
                                     >
                                     </x-admin::media.images>
                                 </x-admin::form.control-group>

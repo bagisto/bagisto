@@ -89,6 +89,8 @@ return [
             'date-duration'               => ':start - :end',
             'decreased'                   => ':progress%',
             'end-date'                    => '结束日期',
+            'empty-threshold'             => '空阈值',
+            'empty-threshold-description' => '没有可用的产品',
             'from'                        => '从',
             'increased'                   => ':progress%',
             'more-products'               => ':product_count+ 更多图片',
@@ -124,8 +126,6 @@ return [
             'user-name'                   => '你好！:user_name',
             'user-info'                   => '快速查看商店的最新情况',
             'visitor'                     => '访客',
-            'empty-threshold'             => '空阈值',
-            'empty-threshold-description' => '没有可用的产品',
         ],
     ],
 
@@ -578,27 +578,13 @@ return [
                 ],
 
                 'images' => [
-                    'add-image-btn'     => '添加图片',
-                    'allowed-types'     => 'png, jpeg, jpg',
-                    'info'              => '图像分辨率应为 609 像素 X 560 像素',
-                    'not-allowed-error' => '仅允许图像文件（.jpeg、.jpg、.png 等）。',
-                    'title'             => '图片',
-
-                    'placeholders'  => [
-                        'front'     => '正面',
-                        'next'      => '下一个',
-                        'size'      => '尺寸',
-                        'use-cases' => '用途',
-                        'zoom'      => '缩放',
-                    ],
+                    'title' => '图片',
+                    'info'  => '图像分辨率应为 609 像素 X 560 像素',
                 ],
 
                 'videos' => [
-                    'add-video-btn'     => '添加视频',
-                    'allowed-types'     => 'mp4, webm, mkv',
-                    'info'              => '最大视频尺寸应为 :size',
-                    'not-allowed-error' => '仅允许视频文件（.mp4、.mov、.ogg 等）。',
-                    'title'             => '视频',
+                    'title' => '视频',
+                    'info'  => '最大视频尺寸应为 :size',
                 ],
 
                 'links' => [
@@ -661,6 +647,19 @@ return [
                             'sku'             => 'SKU',
                             'status'          => '状态',
                             'weight'          => '重量',
+                        ],
+
+                        'mass-edit' => [
+                            'select-variants'  => '选择变体',
+                            'select-action'    => '选择操作',
+                            'edit-prices'      => '编辑价格',
+                            'edit-inventories' => '编辑库存',
+                            'add-images'       => '添加图片',
+                            'remove-images'    => '移除图片',
+                            'remove-variants'  => '移除变体',
+                            'price'            => '价格',
+                            'apply-to-all-sku' => '将价格应用于所有SKU。',
+                            'apply-to-all-btn' => '应用于全部',
                         ],
                     ],
 
@@ -1374,6 +1373,8 @@ return [
                 'save-btn-title'   => '保存地址',
             ],
 
+            'create-success'      => '地址创建成功',
+            'update-success'      => '地址成功更新',
             'success-mass-delete' => '地址批量删除成功',
         ],
     ],
@@ -1462,6 +1463,8 @@ return [
                     'select-template' => '选择模板',
                     'select-event'    => '选择事件',
                     'select-status'   => '选择状态',
+                    'select-channel'  => '选择频道',
+                    'select-group'    => '选择群组',
                     'subject'         => '主题',
                     'title'           => '创建活动',
                 ],
@@ -1995,12 +1998,13 @@ return [
                 ],
 
                 'create'  =>  [
-                    'code'        => '代码',
-                    'name'        => '名称',
-                    'direction'   => '方向',
-                    'locale-logo' => '区域标志',
-                    'title'       => '创建区域',
-                    'save-btn'    => '保存区域',
+                    'code'             => '代码',
+                    'name'             => '名称',
+                    'direction'        => '方向',
+                    'locale-logo'      => '区域标志',
+                    'title'            => '创建区域',
+                    'save-btn'         => '保存区域',
+                    'select-direction' => '选择方向',
                 ],
 
                 'edit'  => [
@@ -2067,12 +2071,13 @@ return [
                 'update-rates'  => '更新汇率',
 
                 'create' => [
-                    'delete-warning'  => '确定要执行此操作吗？',
-                    'title'           => '创建汇率',
-                    'rate'            => '汇率',
-                    'save-btn'        => '保存汇率',
-                    'source-currency' => '源货币',
-                    'target-currency' => '目标货币',
+                    'delete-warning'         => '确定要执行此操作吗？',
+                    'title'                  => '创建汇率',
+                    'rate'                   => '汇率',
+                    'save-btn'               => '保存汇率',
+                    'source-currency'        => '源货币',
+                    'select-target-currency' => '选择目标货币',
+                    'target-currency'        => '目标货币',
                 ],
 
                 'edit' => [
@@ -2297,38 +2302,42 @@ return [
             ],
 
             'create' => [
-                'title'                  => '创建渠道',
-                'cancel'                 => '返回',
-                'save-btn'               => '保存渠道',
-                'general'                => '通用',
-                'code'                   => '代码',
-                'name'                   => '名称',
-                'description'            => '描述',
-                'inventory-sources'      => '库存来源',
-                'root-category'          => '根分类',
-                'hostname'               => '主机名',
-                'hostname-placeholder'   => 'https://www.example.com（不要在结尾添加斜杠。）',
-                'design'                 => '设计',
-                'theme'                  => '主题',
-                'logo'                   => '标志',
-                'allowed-ips'            => '允许的IP',
-                'logo-size'              => '图像分辨率应为192px x 50px',
-                'favicon'                => '网站图标',
-                'favicon-size'           => '图像分辨率应为16px x 16px',
-                'seo'                    => '主页SEO',
-                'seo-title'              => '元标题',
-                'seo-description'        => '元描述',
-                'seo-keywords'           => '元关键字',
-                'currencies-and-locales' => '货币和区域设置',
-                'locales'                => '区域设置',
-                'default-locale'         => '默认区域设置',
-                'currencies'             => '货币',
-                'default-currency'       => '默认货币',
-                'last-delete-error'      => '至少需要一个渠道。',
-                'settings'               => '设置',
-                'status'                 => '状态',
-                'maintenance-mode-text'  => '消息',
-                'create-success'         => '渠道创建成功。',
+                'title'                   => '创建渠道',
+                'cancel'                  => '返回',
+                'save-btn'                => '保存渠道',
+                'general'                 => '通用',
+                'code'                    => '代码',
+                'name'                    => '名称',
+                'description'             => '描述',
+                'inventory-sources'       => '库存来源',
+                'root-category'           => '根分类',
+                'hostname'                => '主机名',
+                'hostname-placeholder'    => 'https://www.example.com（不要在结尾添加斜杠。）',
+                'design'                  => '设计',
+                'theme'                   => '主题',
+                'logo'                    => '标志',
+                'allowed-ips'             => '允许的IP',
+                'logo-size'               => '图像分辨率应为192px x 50px',
+                'favicon'                 => '网站图标',
+                'favicon-size'            => '图像分辨率应为16px x 16px',
+                'seo'                     => '主页SEO',
+                'seo-title'               => '元标题',
+                'seo-description'         => '元描述',
+                'seo-keywords'            => '元关键字',
+                'currencies-and-locales'  => '货币和区域设置',
+                'locales'                 => '区域设置',
+                'default-locale'          => '默认区域设置',
+                'currencies'              => '货币',
+                'default-currency'        => '默认货币',
+                'last-delete-error'       => '至少需要一个渠道。',
+                'settings'                => '设置',
+                'status'                  => '状态',
+                'select-root-category'    => '选择根类别',
+                'select-theme'            => '选择主题',
+                'select-default-locale'   => '选择默认区域设置',
+                'select-default-currency' => '选择默认货币',
+                'maintenance-mode-text'   => '消息',
+                'create-success'          => '渠道创建成功。',
             ],
 
             'edit' => [
@@ -3034,6 +3043,28 @@ return [
                 'qty'         => ':qty 可用',
             ],
         ],
+
+        'media' => [
+            'images' => [
+                'add-image-btn'     => '添加图片',
+                'allowed-types'     => 'png, jpeg, jpg',
+                'not-allowed-error' => '仅允许图像文件（.jpeg、.jpg、.png 等）。',
+
+                'placeholders'  => [
+                    'front'     => '正面',
+                    'next'      => '下一个',
+                    'size'      => '尺寸',
+                    'use-cases' => '用途',
+                    'zoom'      => '缩放',
+                ],
+            ],
+
+            'videos' => [
+                'add-video-btn'     => '添加视频',
+                'allowed-types'     => 'mp4, webm, mkv',
+                'not-allowed-error' => '仅允许视频文件（.mp4、.mov、.ogg 等）。',
+            ],
+        ]
     ],
 
     'acl' => [
@@ -3149,6 +3180,15 @@ return [
     'emails' => [
         'dear'   => '尊敬的 :customer_name',
         'thanks' => '如果您需要任何帮助，请联系我们：<a href=":link" style=":style">:email</a>。<br/>谢谢！',
+
+        'admin' => [
+            'forgot-password' => [
+                'subject'        => '重置密码电子邮件',
+                'greeting'       => '忘记密码！',
+                'description'    => '您收到此电子邮件是因为我们收到了您的帐户的密码重置请求。',
+                'reset-password' => '重置密码',
+            ],
+        ],
 
         'orders' => [
             'created' => [

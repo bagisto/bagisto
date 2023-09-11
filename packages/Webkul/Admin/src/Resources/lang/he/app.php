@@ -89,6 +89,8 @@ return [
             'date-duration'               => ':start - :end',
             'decreased'                   => ':progress%',
             'end-date'                    => 'תאריך סיום',
+            'empty-threshold'             => 'רמת ריקון',
+            'empty-threshold-description' => 'אין מוצרים זמינים',
             'from'                        => 'מתאריך',
             'increased'                   => ':progress%',
             'more-products'               => ':product_count+ תמונות נוספות',
@@ -124,8 +126,6 @@ return [
             'user-name'                   => 'שלום, :user_name',
             'user-info'                   => 'בצע בדיקה מהירה על מה שקורה בחנות שלך',
             'visitor'                     => 'מבקר',
-            'empty-threshold'             => 'רמת ריקון',
-            'empty-threshold-description' => 'אין מוצרים זמינים',
         ],
     ],
 
@@ -578,27 +578,13 @@ return [
                 ],
 
                 'images' => [
-                    'add-image-btn'     => 'הוסף תמונה',
-                    'allowed-types'     => 'png, jpeg, jpg',
-                    'info'              => 'רזולוציית התמונה צריכה להיות כמו 609 פיקסלים על 560 פיקסלים',
-                    'not-allowed-error' => 'ניתן להעלות רק קבצי תמונה (.jpeg, .jpg, .png, ..)',
-                    'title'             => 'תמונות',
-
-                    'placeholders'  => [
-                        'front'     => 'קדמית',
-                        'next'      => 'הבאה',
-                        'size'      => 'גודל',
-                        'use-cases' => 'מטרות שימוש',
-                        'zoom'      => 'הגדלה',
-                    ],
+                    'title' => 'תמונות',
+                    'info'  => 'רזולוציית התמונה צריכה להיות כמו 609 פיקסלים על 560 פיקסלים',
                 ],
 
                 'videos' => [
-                    'add-video-btn'     => 'הוסף וידאו',
-                    'allowed-types'     => 'mp4, webm, mkv',
-                    'info'              => 'הגודל המרבי לווידאו צריך להיות כמו :size',
-                    'not-allowed-error' => 'ניתן להעלות רק קבצי וידאו (.mp4, .mov, .ogg ..)',
-                    'title'             => 'וידאו',
+                    'title' => 'וידאו',
+                    'info'  => 'הגודל המרבי לווידאו צריך להיות כמו :size',
                 ],
 
                 'links' => [
@@ -661,6 +647,19 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'סטטוס',
                             'weight'          => 'משקל',
+                        ],
+
+                        'mass-edit' => [
+                            'select-variants'  => 'בחר וריאנטים',
+                            'select-action'    => 'בחר פעולה',
+                            'edit-prices'      => 'ערוך מחירים',
+                            'edit-inventories' => 'ערוך מלאי',
+                            'add-images'       => 'הוסף תמונות',
+                            'remove-images'    => 'הסר תמונות',
+                            'remove-variants'  => 'הסר וריאנטים',
+                            'price'            => 'מחיר',
+                            'apply-to-all-sku' => 'החל מחיר לכל ה-SKU.',
+                            'apply-to-all-btn' => 'החל לכל',
                         ],
                     ],
 
@@ -1375,6 +1374,8 @@ return [
                 'save-btn-title'  => 'שמור כתובת',
             ],
 
+            'create-success'      => 'पता सफलतापूर्वक बनाया गया',
+            'update-success'      => 'पता सफलतापूर्वक अपडेट किया गया',
             'success-mass-delete' => 'מחיקת הכתובות בצורה המרובה נכשלה',
         ],
     ],
@@ -1463,6 +1464,8 @@ return [
                     'select-template' => 'בחר תבנית',
                     'select-event'    => 'בחר אירוע',
                     'select-status'   => 'בחר סטטוס',
+                    'select-channel'  => 'בחר ערוץ',
+                    'select-group'    => 'בחר קבוצה',
                     'subject'         => 'נושא',
                     'title'           => 'צור קמפיין',
                 ],
@@ -1995,12 +1998,13 @@ return [
                 ],
 
                 'create'  => [
-                    'code'        => 'קוד',
-                    'name'        => 'שם',
-                    'direction'   => 'כיוון',
-                    'locale-logo' => 'לוגו אזור',
-                    'title'       => 'צור אזור',
-                    'save-btn'    => 'שמור אזור',
+                    'code'             => 'קוד',
+                    'name'             => 'שם',
+                    'direction'        => 'כיוון',
+                    'locale-logo'      => 'לוגו אזור',
+                    'title'            => 'צור אזור',
+                    'save-btn'         => 'שמור אזור',
+                    'select-direction' => 'בחר כיוון',
                 ],
 
                 'edit'  => [
@@ -2067,12 +2071,13 @@ return [
                 'update-rates'  => 'עדכן שער חליפין',
 
                 'create' => [
-                    'delete-warning'  => 'האם אתה בטוח שברצונך לבצע פעולה זו?',
-                    'title'           => 'צור שער חליפין',
-                    'rate'            => 'שער',
-                    'save-btn'        => 'שמור שער חליפין',
-                    'source-currency' => 'מטבע מקור',
-                    'target-currency' => 'מטבע יעד',
+                    'delete-warning'         => 'האם אתה בטוח שברצונך לבצע פעולה זו?',
+                    'title'                  => 'צור שער חליפין',
+                    'rate'                   => 'שער',
+                    'save-btn'               => 'שמור שער חליפין',
+                    'source-currency'        => 'מטבע מקור',
+                    'select-target-currency' => 'בחר מטבע יעד',
+                    'target-currency'        => 'מטבע יעד',
                 ],
 
                 'edit' => [
@@ -2297,38 +2302,42 @@ return [
             ],
 
             'create' => [
-                'title'                  => 'צור ערוץ',
-                'cancel'                 => 'חזור',
-                'save-btn'               => 'שמור ערוץ',
-                'general'                => 'כללי',
-                'code'                   => 'קוד',
-                'name'                   => 'שם',
-                'description'            => 'תיאור',
-                'inventory-sources'      => 'מקורות מלאי',
-                'root-category'          => 'קטגורית שורש',
-                'hostname'               => 'שם המארח',
-                'hostname-placeholder'   => 'https://www.example.com (אל תוסיף סלאש בסוף.)',
-                'design'                 => 'עיצוב',
-                'theme'                  => 'ערכת נושא',
-                'logo'                   => 'לוגו',
-                'allowed-ips'            => 'כתובות IP מורשות',
-                'logo-size'              => 'רזולוציה תמונה כזו צריכה להיות כמו 192px X 50px',
-                'favicon'                => 'סמל בשוני',
-                'favicon-size'           => 'רזולוציה תמונה כזו צריכה להיות כמו 16px X 16px',
-                'seo'                    => 'SEO עבור דף הבית',
-                'seo-title'              => 'כותרת מתא',
-                'seo-description'        => 'תיאור מתא',
-                'seo-keywords'           => 'מילות מפתח מתא',
-                'currencies-and-locales' => 'מטבעות ושפות',
-                'locales'                => 'שפות',
-                'default-locale'         => 'שפת ברירת המחדל',
-                'currencies'             => 'מטבעות',
-                'default-currency'       => 'מטבע ברירת המחדל',
-                'last-delete-error'      => 'נדרש לפחות ערוץ אחד.',
-                'settings'               => 'הגדרות',
-                'status'                 => 'מצב',
-                'maintenance-mode-text'  => 'הודעה',
-                'create-success'         => 'הערוץ נוצר בהצלחה.',
+                'title'                   => 'צור ערוץ',
+                'cancel'                  => 'חזור',
+                'save-btn'                => 'שמור ערוץ',
+                'general'                 => 'כללי',
+                'code'                    => 'קוד',
+                'name'                    => 'שם',
+                'description'             => 'תיאור',
+                'inventory-sources'       => 'מקורות מלאי',
+                'root-category'           => 'קטגורית שורש',
+                'hostname'                => 'שם המארח',
+                'hostname-placeholder'    => 'https://www.example.com (אל תוסיף סלאש בסוף.)',
+                'design'                  => 'עיצוב',
+                'theme'                   => 'ערכת נושא',
+                'logo'                    => 'לוגו',
+                'allowed-ips'             => 'כתובות IP מורשות',
+                'logo-size'               => 'רזולוציה תמונה כזו צריכה להיות כמו 192px X 50px',
+                'favicon'                 => 'סמל בשוני',
+                'favicon-size'            => 'רזולוציה תמונה כזו צריכה להיות כמו 16px X 16px',
+                'seo'                     => 'SEO עבור דף הבית',
+                'seo-title'               => 'כותרת מתא',
+                'seo-description'         => 'תיאור מתא',
+                'seo-keywords'            => 'מילות מפתח מתא',
+                'currencies-and-locales'  => 'מטבעות ושפות',
+                'locales'                 => 'שפות',
+                'default-locale'          => 'שפת ברירת המחדל',
+                'currencies'              => 'מטבעות',
+                'default-currency'        => 'מטבע ברירת המחדל',
+                'last-delete-error'       => 'נדרש לפחות ערוץ אחד.',
+                'settings'                => 'הגדרות',
+                'status'                  => 'מצב',
+                'select-root-category'    => 'בחר קטגוריה שורש',
+                'select-theme'            => 'בחר ערך',
+                'select-default-locale'   => 'בחר שפת ברירת המחדל',
+                'select-default-currency' => 'בחר מטבע ברירת המחדל',
+                'maintenance-mode-text'   => 'הודעה',
+                'create-success'          => 'הערוץ נוצר בהצלחה.',
             ],
 
             'edit' => [
@@ -3034,6 +3043,28 @@ return [
                 'qty'         => ':qty זמין',
             ],
         ],
+
+        'media' => [
+            'images' => [
+                'add-image-btn'     => 'הוסף תמונה',
+                'allowed-types'     => 'png, jpeg, jpg',
+                'not-allowed-error' => 'ניתן להעלות רק קבצי תמונה (.jpeg, .jpg, .png, ..)',
+
+                'placeholders'  => [
+                    'front'     => 'קדמית',
+                    'next'      => 'הבאה',
+                    'size'      => 'גודל',
+                    'use-cases' => 'מטרות שימוש',
+                    'zoom'      => 'הגדלה',
+                ],
+            ],
+
+            'videos' => [
+                'add-video-btn'     => 'הוסף וידאו',
+                'allowed-types'     => 'mp4, webm, mkv',
+                'not-allowed-error' => 'ניתן להעלות רק קבצי וידאו (.mp4, .mov, .ogg ..)',
+            ],
+        ]
     ],
 
     'acl' => [
@@ -3149,6 +3180,15 @@ return [
     'emails' => [
         'dear'   => 'יקר :customer_name',
         'thanks' => 'אם תזדקק לעזרה בכל סוג שהוא, אנא פנה אלינו ב-<a href=":link" style=":style">:email</a>.<br/>תודה!',
+
+        'admin' => [
+            'forgot-password' => [
+                'subject'        => 'איפוס סיסמה באמצעות אימייל',
+                'greeting'       => 'שכחת סיסמה!',
+                'description'    => 'אתה מקבל אימייל זה מכיוון שקיבלנו בקשת איפוס סיסמה עבור החשבון שלך.',
+                'reset-password' => 'איפוס סיסמה',
+            ],
+        ],
 
         'orders' => [
             'created' => [

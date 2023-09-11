@@ -89,6 +89,8 @@ return [
             'date-duration'               => ':start - :end',
             'decreased'                   => ':progress%',
             'end-date'                    => 'Fecha de Fin',
+            'empty-threshold'             => 'Umbral de Vacío',
+            'empty-threshold-description' => 'No hay productos disponibles',
             'from'                        => 'Desde',
             'increased'                   => ':progress%',
             'more-products'               => ':product_count+ Más Imágenes',
@@ -124,8 +126,6 @@ return [
             'user-name'                   => '¡Hola! :user_name',
             'user-info'                   => 'Revise rápidamente lo que está sucediendo en su tienda',
             'visitor'                     => 'Visitante',
-            'empty-threshold'             => 'Umbral de Vacío',
-            'empty-threshold-description' => 'No hay productos disponibles',
         ],
     ],
 
@@ -578,27 +578,13 @@ return [
                 ],
 
                 'images' => [
-                    'add-image-btn'     => 'Agregar Imagen',
-                    'allowed-types'     => 'png, jpeg, jpg',
-                    'info'              => 'La resolución de la imagen debe ser de 609px X 560px',
-                    'not-allowed-error' => 'Solo se permiten archivos de imagen (.jpeg, .jpg, .png, ..).',
-                    'title'             => 'Imágenes',
-
-                    'placeholders'  => [
-                        'front'     => 'Frontal',
-                        'next'      => 'Siguiente',
-                        'size'      => 'Tamaño',
-                        'use-cases' => 'Casos de Uso',
-                        'zoom'      => 'Zoom',
-                    ],
+                    'title' => 'Imágenes',
+                    'info'  => 'La resolución de la imagen debe ser de 609px X 560px',
                 ],
 
                 'videos' => [
-                    'add-video-btn'     => 'Agregar Video',
-                    'allowed-types'     => 'mp4, webm, mkv',
-                    'info'              => 'El tamaño máximo del video debe ser de :size',
-                    'not-allowed-error' => 'Solo se permiten archivos de video (.mp4, .mov, .ogg ..).',
-                    'title'             => 'Videos',
+                    'title' => 'Videos',
+                    'info'  => 'El tamaño máximo del video debe ser de :size',
                 ],
 
                 'links' => [
@@ -661,6 +647,19 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'Estado',
                             'weight'          => 'Peso',
+                        ],
+
+                        'mass-edit' => [
+                            'select-variants'  => 'Seleccionar Variantes',
+                            'select-action'    => 'Seleccionar Acción',
+                            'edit-prices'      => 'Editar Precios',
+                            'edit-inventories' => 'Editar Inventarios',
+                            'add-images'       => 'Agregar Imágenes',
+                            'remove-images'    => 'Eliminar Imágenes',
+                            'remove-variants'  => 'Eliminar Variantes',
+                            'price'            => 'Precio',
+                            'apply-to-all-sku' => 'Aplicar un precio a todas las SKU.',
+                            'apply-to-all-btn' => 'Aplicar a Todos',
                         ],
                     ],
 
@@ -1375,6 +1374,8 @@ return [
                 'save-btn-title'   => 'Guardar Dirección',
             ],
 
+            'create-success'       => 'Dirección creada con éxito',
+            'update-success'       => 'Dirección actualizada con éxito',
             'success-mass-delete'  => 'Eliminación Masiva de Direcciones Exitosa',
         ],
     ],
@@ -1463,6 +1464,8 @@ return [
                     'select-template' => 'Select Template',
                     'select-event'    => 'Select Event',
                     'select-status'   => 'Select Status',
+                    'select-channel'  => 'Seleccionar canal',
+                    'select-group'    => 'Seleccionar grupo',
                     'subject'         => 'Subject',
                     'title'           => 'Create Campaign',
                 ],
@@ -1995,12 +1998,13 @@ return [
                 ],
 
                 'create'  =>  [
-                    'code'              => 'Código',
-                    'name'              => 'Nombre',
-                    'direction'         => 'Dirección',
-                    'locale-logo'       => 'Logotipo del Idioma',
-                    'title'             => 'Crear Idioma',
-                    'save-btn'          => 'Guardar Idioma',
+                    'code'             => 'Código',
+                    'name'             => 'Nombre',
+                    'direction'        => 'Dirección',
+                    'locale-logo'      => 'Logotipo del Idioma',
+                    'title'            => 'Crear Idioma',
+                    'save-btn'         => 'Guardar Idioma',
+                    'select-direction' => 'Seleccionar dirección',
                 ],
 
                 'edit'  => [
@@ -2067,12 +2071,13 @@ return [
                 'update-rates'  => 'Actualizar Tipo de Cambio',
 
                 'create' => [
-                    'delete-warning'   => '¿Estás seguro de que deseas realizar esta acción?',
-                    'title'            => 'Crear Tipo de Cambio',
-                    'rate'             => 'Tasa',
-                    'save-btn'         => 'Guardar Tipo de Cambio',
-                    'source-currency'  => 'Moneda Fuente',
-                    'target-currency'  => 'Moneda Objetivo',
+                    'delete-warning'         => '¿Estás seguro de que deseas realizar esta acción?',
+                    'title'                  => 'Crear Tipo de Cambio',
+                    'rate'                   => 'Tasa',
+                    'save-btn'               => 'Guardar Tipo de Cambio',
+                    'source-currency'        => 'Moneda Fuente',
+                    'select-target-currency' => 'Seleccionar moneda objetivo',
+                    'target-currency'        => 'Moneda Objetivo',
                 ],
 
                 'edit' => [
@@ -2297,38 +2302,42 @@ return [
             ],
 
             'create' => [
-                'title'                  => 'Crear Canal',
-                'cancel'                 => 'Volver',
-                'save-btn'               => 'Guardar Canal',
-                'general'                => 'General',
-                'code'                   => 'Código',
-                'name'                   => 'Nombre',
-                'description'            => 'Descripción',
-                'inventory-sources'      => 'Fuentes de Inventario',
-                'root-category'          => 'Categoría Raíz',
-                'hostname'               => 'Nombre del Host',
-                'hostname-placeholder'   => 'https://www.example.com (No agregar barra al final.)',
-                'design'                 => 'Diseño',
-                'theme'                  => 'Tema',
-                'logo'                   => 'Logo',
-                'allowed-ips'            => 'IPs Permitidas',
-                'logo-size'              => 'La resolución de la imagen debe ser de 192px X 50px',
-                'favicon'                => 'Favicon',
-                'favicon-size'           => 'La resolución de la imagen debe ser de 16px X 16px',
-                'seo'                    => 'SEO de la página de inicio',
-                'seo-title'              => 'Meta título',
-                'seo-description'        => 'Meta descripción',
-                'seo-keywords'           => 'Meta palabras clave',
-                'currencies-and-locales' => 'Monedas y Localidades',
-                'locales'                => 'Localidades',
-                'default-locale'         => 'Localidad Predeterminada',
-                'currencies'             => 'Monedas',
-                'default-currency'       => 'Moneda Predeterminada',
-                'last-delete-error'      => 'Se requiere al menos un Canal.',
-                'settings'               => 'Configuración',
-                'status'                 => 'Estado',
-                'maintenance-mode-text'  => 'Mensaje',
-                'create-success'         => 'Canal creado exitosamente.',
+                'title'                   => 'Crear Canal',
+                'cancel'                  => 'Volver',
+                'save-btn'                => 'Guardar Canal',
+                'general'                 => 'General',
+                'code'                    => 'Código',
+                'name'                    => 'Nombre',
+                'description'             => 'Descripción',
+                'inventory-sources'       => 'Fuentes de Inventario',
+                'root-category'           => 'Categoría Raíz',
+                'hostname'                => 'Nombre del Host',
+                'hostname-placeholder'    => 'https://www.example.com (No agregar barra al final.)',
+                'design'                  => 'Diseño',
+                'theme'                   => 'Tema',
+                'logo'                    => 'Logo',
+                'allowed-ips'             => 'IPs Permitidas',
+                'logo-size'               => 'La resolución de la imagen debe ser de 192px X 50px',
+                'favicon'                 => 'Favicon',
+                'favicon-size'            => 'La resolución de la imagen debe ser de 16px X 16px',
+                'seo'                     => 'SEO de la página de inicio',
+                'seo-title'               => 'Meta título',
+                'seo-description'         => 'Meta descripción',
+                'seo-keywords'            => 'Meta palabras clave',
+                'currencies-and-locales'  => 'Monedas y Localidades',
+                'locales'                 => 'Localidades',
+                'default-locale'          => 'Localidad Predeterminada',
+                'currencies'              => 'Monedas',
+                'default-currency'        => 'Moneda Predeterminada',
+                'last-delete-error'       => 'Se requiere al menos un Canal.',
+                'settings'                => 'Configuración',
+                'status'                  => 'Estado',
+                'select-root-category'    => 'Seleccionar categoría raíz',
+                'select-theme'            => 'Seleccionar tema',
+                'select-default-locale'   => 'Seleccionar idioma predeterminado',
+                'select-default-currency' => 'Seleccionar moneda predeterminada',
+                'maintenance-mode-text'   => 'Mensaje',
+                'create-success'          => 'Canal creado exitosamente.',
             ],
 
             'edit' => [
@@ -3034,6 +3043,28 @@ return [
                 'qty'         => ':qty Disponibles',
             ],
         ],
+
+        'media' => [
+            'images' => [
+                'add-image-btn'     => 'Agregar Imagen',
+                'allowed-types'     => 'png, jpeg, jpg',
+                'not-allowed-error' => 'Solo se permiten archivos de imagen (.jpeg, .jpg, .png, ..).',
+
+                'placeholders'  => [
+                    'front'     => 'Frontal',
+                    'next'      => 'Siguiente',
+                    'size'      => 'Tamaño',
+                    'use-cases' => 'Casos de Uso',
+                    'zoom'      => 'Zoom',
+                ],
+            ],
+
+            'videos' => [
+                'add-video-btn'     => 'Agregar Video',
+                'allowed-types'     => 'mp4, webm, mkv',
+                'not-allowed-error' => 'Solo se permiten archivos de video (.mp4, .mov, .ogg ..).',
+            ],
+        ]
     ],
 
     'acl' => [
@@ -3149,6 +3180,15 @@ return [
     'emails' => [
         'dear'   => 'Estimado :customer_name',
         'thanks' => 'Si necesitas cualquier tipo de ayuda, por favor contáctanos en <a href=":link" style=":style">:email</a>.<br/>¡Gracias!',
+
+        'admin' => [
+            'forgot-password' => [
+                'subject'        => 'E-Mail zum Zurücksetzen des Passworts',
+                'greeting'       => 'Passwort vergessen!',
+                'description'    => 'Sie erhalten diese E-Mail, weil wir eine Anfrage zum Zurücksetzen des Passworts für Ihr Konto erhalten haben.',
+                'reset-password' => 'Passwort zurücksetzen',
+            ],
+        ],
 
         'orders' => [
             'created' => [

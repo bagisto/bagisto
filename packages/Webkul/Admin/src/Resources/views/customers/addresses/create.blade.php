@@ -388,7 +388,9 @@
                     
                         .then((response) => {
                             this.$refs.CustomerAddress.toggle();
-                            
+
+                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+
                             window.location.reload();
 
                             resetForm();

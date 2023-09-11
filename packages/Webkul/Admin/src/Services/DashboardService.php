@@ -264,7 +264,9 @@ class DashboardService
         return $orderItems->map(function ($orderItem) use ($products) {
             $product = $products->firstWhere('id', $orderItem->product_id);
 
-            return $this->getCategoryDetails($product, $orderItem);
+            if ($product) {
+                return $this->getCategoryDetails($product, $orderItem);
+            }
         });
     }
 

@@ -89,6 +89,8 @@ return [
             'date-duration'               => ':start - :end',
             'decreased'                   => ':progress%',
             'end-date'                    => 'শেষ তারিখ',
+            'empty-threshold'             => 'ফাঁকি সীমা',
+            'empty-threshold-description' => 'কোনও পণ্য পাওয়া যায়নি',
             'from'                        => 'থেকে',
             'increased'                   => ':progress%',
             'more-products'               => ':product_count+ আরও পণ্য',
@@ -124,8 +126,6 @@ return [
             'user-name'                   => 'হায়! :user_name',
             'user-info'                   => 'আপনার দোকানে কী ঘটছে তা দ্রুত পর্যালোচনা করুন',
             'visitor'                     => 'দর্শক',
-            'empty-threshold'             => 'ফাঁকি সীমা',
-            'empty-threshold-description' => 'কোনও পণ্য পাওয়া যায়নি',
         ],
     ],
 
@@ -578,27 +578,13 @@ return [
                 ],
 
                 'images' => [
-                    'add-image-btn'     => 'চিত্র যোগ করুন',
-                    'allowed-types'     => 'png, jpeg, jpg',
-                    'info'              => 'চিত্রের নির্ধারণ হওয়া উচিত যেমন 609px X 560px',
-                    'not-allowed-error' => 'কেবল চিত্র ফাইল (.jpeg, .jpg, .png, ..) অনুমোদিত।',
-                    'title'             => 'চিত্র',
-
-                    'placeholders' => [
-                        'front'     => 'আগে',
-                        'next'      => 'পরবর্তী',
-                        'size'      => 'আকার',
-                        'use-cases' => 'ব্যবহারের উদ্দেশ্য',
-                        'zoom'      => 'জুম',
-                    ],
+                    'title' => 'চিত্র',
+                    'info'  => 'চিত্রের নির্ধারণ হওয়া উচিত যেমন 609px X 560px',
                 ],
 
                 'videos' => [
-                    'add-video-btn'     => 'ভিডিও যোগ করুন',
-                    'allowed-types'     => 'mp4, webm, mkv',
-                    'info'              => 'সর্বাধিক ভিডিও আকার হওয়া উচিত :size মধ্যে',
-                    'not-allowed-error' => 'কেবল ভিডিও ফাইল (.mp4, .mov, .ogg ..) অনুমোদিত।',
-                    'title'             => 'ভিডিও',
+                    'title' => 'ভিডিও',
+                    'info'  => 'সর্বাধিক ভিডিও আকার হওয়া উচিত :size মধ্যে',
                 ],
 
                 'links' => [
@@ -661,6 +647,19 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'স্থিতি',
                             'weight'          => 'ওজন',
+                        ],
+
+                        'mass-edit' => [
+                            'select-variants'  => 'ভিন্নভিন্ন বেছে নাও',
+                            'select-action'    => 'ক্রিয়া নির্বাচন করুন',
+                            'edit-prices'      => 'মূল্য সম্পাদনা করুন',
+                            'edit-inventories' => 'মূল্য সম্পাদনা করুন',
+                            'add-images'       => 'চিত্র যোগ করুন',
+                            'remove-images'    => 'চিত্র সরান',
+                            'remove-variants'  => 'প্রত্যাগাত্মক সরান',
+                            'price'            => 'মূল্য',
+                            'apply-to-all-sku' => 'সমস্ত SKU একই মূল্য প্রয়োগ করুন।',
+                            'apply-to-all-btn' => 'সমস্তে প্রয়োগ করুন',
                         ],
                     ],
 
@@ -1375,6 +1374,8 @@ return [
                 'save-btn-title'   => 'ঠিকানা সংরক্ষণ করুন',
             ],
 
+            'create-success'      => 'ঠিকানা সফলভাবে তৈরি হয়েছে',
+            'update-success'      => 'ঠিকানা সফলভাবে আপডেট হয়েছে',
             'success-mass-delete' => 'ঠিকানাগুলি সফলভাবে সরানো হয়েছে',
         ],
     ],
@@ -1463,6 +1464,8 @@ return [
                     'select-template' => 'টেম্পলেট নির্বাচন করুন',
                     'select-event'    => 'ঘটনা নির্বাচন করুন',
                     'select-status'   => 'অবস্থা নির্বাচন করুন',
+                    'select-channel'  => 'চ্যানেল নির্বাচন করুন',
+                    'select-group'    => 'গ্রুপ নির্বাচন করুন',
                     'subject'         => 'বিষয়',
                     'title'           => 'প্রচারণা তৈরি করুন',
                 ],
@@ -1995,12 +1998,13 @@ return [
                 ],
 
                 'create' => [
-                    'code'        => 'কোড',
-                    'name'        => 'নাম',
-                    'direction'   => 'দিক',
-                    'locale-logo' => 'লোকেল লোগো',
-                    'title'       => 'নতুন লোকাল তৈরি করুন',
-                    'save-btn'    => 'লোকেল সংরক্ষণ করুন',
+                    'code'             => 'কোড',
+                    'name'             => 'নাম',
+                    'direction'        => 'দিক',
+                    'locale-logo'      => 'লোকেল লোগো',
+                    'title'            => 'নতুন লোকাল তৈরি করুন',
+                    'save-btn'         => 'লোকেল সংরক্ষণ করুন',
+                    'select-direction' => 'দিশা নির্বাচন করুন',
                 ],
 
                 'edit' => [
@@ -2067,12 +2071,13 @@ return [
                 'update-rates'  => 'বিনিময় হার আপডেট করুন',
 
                 'create' => [
-                    'delete-warning'  => 'আপনি কি নিশ্চিত, এই ক্রিয়াটি সম্পাদনা করতে চান?',
-                    'title'           => 'বিনিময় হার তৈরি করুন',
-                    'rate'            => 'হার',
-                    'save-btn'        => 'বিনিময় হার সংরক্ষণ করুন',
-                    'source-currency' => 'উৎস মুদ্রা',
-                    'target-currency' => 'লক্ষ্য মুদ্রা',
+                    'delete-warning'         => 'আপনি কি নিশ্চিত, এই ক্রিয়াটি সম্পাদনা করতে চান?',
+                    'title'                  => 'বিনিময় হার তৈরি করুন',
+                    'rate'                   => 'হার',
+                    'save-btn'               => 'বিনিময় হার সংরক্ষণ করুন',
+                    'source-currency'        => 'উৎস মুদ্রা',
+                    'select-target-currency' => 'লক্ষ্য মুদ্রা নির্বাচন করুন',
+                    'target-currency'        => 'লক্ষ্য মুদ্রা',
                 ],
 
                 'edit' => [
@@ -2297,38 +2302,42 @@ return [
             ],
 
             'create' => [
-                'title'                  => 'চ্যানেল তৈরি করুন',
-                'cancel'                 => 'পেছনে যান',
-                'save-btn'               => 'চ্যানেল সংরক্ষণ করুন',
-                'general'                => 'সাধারণ',
-                'code'                   => 'কোড',
-                'name'                   => 'নাম',
-                'description'            => 'বর্ণনা',
-                'inventory-sources'      => 'ইনভেন্টরি উৎস',
-                'root-category'          => 'রুট ক্যাটাগরি',
-                'hostname'               => 'হোস্টনেম',
-                'hostname-placeholder'   => 'https://www.example.com (শেষে স্ল্যাশ যোগ না করুন।)',
-                'design'                 => 'ডিজাইন',
-                'theme'                  => 'থিম',
-                'logo'                   => 'লোগো',
-                'allowed-ips'            => 'অনুমোদিত আইপিএস',
-                'logo-size'              => 'চিত্র রেজোলিউশন হতে হবে যেমন 192px X 50px',
-                'favicon'                => 'ফেভিকন',
-                'favicon-size'           => 'চিত্র রেজোলিউশন হতে হবে যেমন 16px X 16px',
-                'seo'                    => 'হোম পেজ এসইও',
-                'seo-title'              => 'মেটা টাইটেল',
-                'seo-description'        => 'মেটা বর্ণনা',
-                'seo-keywords'           => 'মেটা কীওয়ার্ড',
-                'currencies-and-locales' => 'মুদ্রা ও লোকেল',
-                'locales'                => 'লোকেল',
-                'default-locale'         => 'ডিফল্ট লোকেল',
-                'currencies'             => 'মুদ্রা',
-                'default-currency'       => 'ডিফল্ট মুদ্রা',
-                'last-delete-error'      => 'কমপক্ষে একটি চ্যানেল প্রয়োজন।',
-                'settings'               => 'সেটিংস',
-                'status'                 => 'স্থিতি',
-                'maintenance-mode-text'  => 'বার্তা',
-                'create-success'         => 'চ্যানেল সফলভাবে তৈরি হয়েছে।',
+                'title'                   => 'চ্যানেল তৈরি করুন',
+                'cancel'                  => 'পেছনে যান',
+                'save-btn'                => 'চ্যানেল সংরক্ষণ করুন',
+                'general'                 => 'সাধারণ',
+                'code'                    => 'কোড',
+                'name'                    => 'নাম',
+                'description'             => 'বর্ণনা',
+                'inventory-sources'       => 'ইনভেন্টরি উৎস',
+                'root-category'           => 'রুট ক্যাটাগরি',
+                'hostname'                => 'হোস্টনেম',
+                'hostname-placeholder'    => 'https://www.example.com (শেষে স্ল্যাশ যোগ না করুন।)',
+                'design'                  => 'ডিজাইন',
+                'theme'                   => 'থিম',
+                'logo'                    => 'লোগো',
+                'allowed-ips'             => 'অনুমোদিত আইপিএস',
+                'logo-size'               => 'চিত্র রেজোলিউশন হতে হবে যেমন 192px X 50px',
+                'favicon'                 => 'ফেভিকন',
+                'favicon-size'            => 'চিত্র রেজোলিউশন হতে হবে যেমন 16px X 16px',
+                'seo'                     => 'হোম পেজ এসইও',
+                'seo-title'               => 'মেটা টাইটেল',
+                'seo-description'         => 'মেটা বর্ণনা',
+                'seo-keywords'            => 'মেটা কীওয়ার্ড',
+                'currencies-and-locales'  => 'মুদ্রা ও লোকেল',
+                'locales'                 => 'লোকেল',
+                'default-locale'          => 'ডিফল্ট লোকেল',
+                'currencies'              => 'মুদ্রা',
+                'default-currency'        => 'ডিফল্ট মুদ্রা',
+                'last-delete-error'       => 'কমপক্ষে একটি চ্যানেল প্রয়োজন।',
+                'settings'                => 'সেটিংস',
+                'status'                  => 'স্থিতি',
+                'select-root-category'    => 'রুট বিভাগ নির্বাচন করুন',
+                'select-theme'            => 'থিম নির্বাচন করুন',
+                'select-default-locale'   => 'ডিফল্ট লোকেল নির্বাচন করুন',
+                'select-default-currency' => 'ডিফল্ট মুদ্রা নির্বাচন করুন',
+                'maintenance-mode-text'   => 'বার্তা',
+                'create-success'          => 'চ্যানেল সফলভাবে তৈরি হয়েছে।',
             ],
 
             'edit' => [
@@ -3034,6 +3043,28 @@ return [
                 'qty'         => ':qty উপলব্ধ',
             ],
         ],
+
+        'media' => [
+            'images' => [
+                'add-image-btn'     => 'চিত্র যোগ করুন',
+                'allowed-types'     => 'png, jpeg, jpg',
+                'not-allowed-error' => 'কেবল চিত্র ফাইল (.jpeg, .jpg, .png, ..) অনুমোদিত।',
+
+                'placeholders' => [
+                    'front'     => 'আগে',
+                    'next'      => 'পরবর্তী',
+                    'size'      => 'আকার',
+                    'use-cases' => 'ব্যবহারের উদ্দেশ্য',
+                    'zoom'      => 'জুম',
+                ],
+            ],
+
+            'videos' => [
+                'add-video-btn'     => 'ভিডিও যোগ করুন',
+                'allowed-types'     => 'mp4, webm, mkv',
+                'not-allowed-error' => 'কেবল ভিডিও ফাইল (.mp4, .mov, .ogg ..) অনুমোদিত।',
+            ],
+        ]
     ],
 
     'acl' => [
@@ -3149,6 +3180,15 @@ return [
     'emails' => [
         'dear'   => 'প্রিয় :customer_name',
         'thanks' => 'আপনি যদি কোনও সাহায্যের দরকার হয়, তবে আমাদের সাথে যোগাযোগ করুন <a href=":link" style=":style">:email</a>।<br/>ধন্যবাদ!',
+
+        'admin' => [
+            'forgot-password' => [
+                'subject'        => 'পাসওয়ার্ড রিসেট ইমেইল',
+                'greeting'       => 'পাসওয়ার্ড ভুলে গেছেন!',
+                'description'    => 'আপনি এই ইমেইলটি পেয়েছেন কারণ আমরা আপনার অ্যাকাউন্টের জন্য একটি পাসওয়ার্ড রিসেট অনুরোধ পেয়েছি।',
+                'reset-password' => 'পাসওয়ার্ড রিসেট',
+            ],
+        ],
 
         'orders' => [
             'created' => [

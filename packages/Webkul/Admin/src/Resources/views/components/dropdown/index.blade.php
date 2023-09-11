@@ -66,6 +66,12 @@
 
             props: {
                 position: String,
+
+                closeOnClick: {
+                    type: Boolean,
+                    required: false,
+                    default: true
+                },
             },
 
             data() {
@@ -139,7 +145,7 @@
                 },
 
                 handleFocusOut(e) {
-                    if (! this.$el.contains(e.target) || this.$el.children[1].contains(e.target)) {
+                    if (! this.$el.contains(e.target) || (this.closeOnClick && this.$el.children[1].contains(e.target))) {
                         this.isActive = false;
                     }
                 },

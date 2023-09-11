@@ -89,6 +89,8 @@ return [
             'date-duration'               => ':start - :end',
             'decreased'                   => ':progress%',
             'end-date'                    => 'Bitiş Tarihi',
+            'empty-threshold'             => 'Boş Eşik',
+            'empty-threshold-description' => 'Uygun ürün bulunmuyor',
             'from'                        => 'Başlangıç',
             'increased'                   => ':progress%',
             'more-products'               => ':product_count+ Daha Fazla Ürün',
@@ -124,8 +126,6 @@ return [
             'user-name'                   => 'Merhaba! :user_name',
             'user-info'                   => 'Mağazanızda neler olup bittiğini hızlıca gözden geçirin',
             'visitor'                     => 'Ziyaretçi',
-            'empty-threshold'             => 'Boş Eşik',
-            'empty-threshold-description' => 'Uygun ürün bulunmuyor',
         ],
     ],
 
@@ -578,27 +578,13 @@ return [
                 ],
 
                 'images' => [
-                    'add-image-btn'     => 'Resim Ekle',
-                    'allowed-types'     => 'png, jpeg, jpg',
-                    'info'              => 'Resim çözünürlüğü 609 piksel X 560 piksel gibi olmalıdır',
-                    'not-allowed-error' => 'Yalnızca resim dosyaları (.jpeg, .jpg, .png, ..) izin verilir.',
-                    'title'             => 'Resimler',
-
-                    'placeholders'  => [
-                        'front'     => 'Ön',
-                        'next'      => 'Sonraki',
-                        'size'      => 'Boyut',
-                        'use-cases' => 'Kullanım Alanları',
-                        'zoom'      => 'Yakınlaştırma',
-                    ],
+                    'title' => 'Resimler',
+                    'info'  => 'Resim çözünürlüğü 609 piksel X 560 piksel gibi olmalıdır',
                 ],
 
                 'videos' => [
-                    'add-video-btn'     => 'Video Ekle',
-                    'allowed-types'     => 'mp4, webm, mkv',
-                    'info'              => 'Maksimum video boyutu :size gibi olmalıdır',
-                    'not-allowed-error' => 'Yalnızca video dosyaları (.mp4, .mov, .ogg ..) izin verilir.',
-                    'title'             => 'Videolar',
+                    'title' => 'Videolar',
+                    'info'  => 'Maksimum video boyutu :size gibi olmalıdır',
                 ],
 
                 'links' => [
@@ -661,6 +647,19 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'Durum',
                             'weight'          => 'Ağırlık',
+                        ],
+
+                        'mass-edit' => [
+                            'select-variants'  => 'Varyantları Seç',
+                            'select-action'    => 'Eylemi Seç',
+                            'edit-prices'      => 'Fiyatları Düzenle',
+                            'edit-inventories' => 'Stokları Düzenle',
+                            'add-images'       => 'Resimleri Ekle',
+                            'remove-images'    => 'Resimleri Kaldır',
+                            'remove-variants'  => 'Varyantları Kaldır',
+                            'price'            => 'Fiyat',
+                            'apply-to-all-sku' => 'Tüm SKU\'lara fiyat uygula.',
+                            'apply-to-all-btn' => 'Tümüne Uygula',
                         ],
                     ],
 
@@ -1375,6 +1374,8 @@ return [
                 'save-btn-title'   => 'Adresi Kaydet',
             ],
 
+            'create-success'      => 'Adres başarıyla oluşturuldu',
+            'update-success'      => 'Adres başarıyla güncellendi',
             'success-mass-delete' => 'Adresler Topluca Silindi',
         ],
     ],
@@ -1463,6 +1464,8 @@ return [
                     'select-template' => 'Şablon Seçin',
                     'select-event'    => 'Etkinlik Seçin',
                     'select-status'   => 'Durum Seçin',
+                    'select-channel'  => 'Kanal seç',
+                    'select-group'    => 'Grup seç',                    
                     'subject'         => 'Konu',
                     'title'           => 'Kampanya Oluştur',
                 ],
@@ -1995,12 +1998,13 @@ return [
                 ],
 
                 'create'  => [
-                    'code'        => 'Kodu',
-                    'name'        => 'Adı',
-                    'direction'   => 'Yön',
-                    'locale-logo' => 'Yerel Logosu',
-                    'title'       => 'Yerel Oluştur',
-                    'save-btn'    => 'Yereli Kaydet',
+                    'code'             => 'Kodu',
+                    'name'             => 'Adı',
+                    'direction'        => 'Yön',
+                    'locale-logo'      => 'Yerel Logosu',
+                    'title'            => 'Yerel Oluştur',
+                    'save-btn'         => 'Yereli Kaydet',
+                    'select-direction' => 'Yön seç',
                 ],
 
                 'edit'  => [
@@ -2067,12 +2071,13 @@ return [
                 'update-rates'  => 'Döviz Kuru Güncelle',
 
                 'create' => [
-                    'delete-warning'  => 'Emin misiniz, bu işlemi gerçekleştirmek istediğinize?',
-                    'title'           => 'Döviz Kuru Oluştur',
-                    'rate'            => 'Kur',
-                    'save-btn'        => 'Döviz Kuru Kaydet',
-                    'source-currency' => 'Kaynak Para Birimi',
-                    'target-currency' => 'Hedef Para Birimi',
+                    'delete-warning'         => 'Emin misiniz, bu işlemi gerçekleştirmek istediğinize?',
+                    'title'                  => 'Döviz Kuru Oluştur',
+                    'rate'                   => 'Kur',
+                    'save-btn'               => 'Döviz Kuru Kaydet',
+                    'source-currency'        => 'Kaynak Para Birimi',
+                    'select-target-currency' => 'Hedef para birimini seç',
+                    'target-currency'        => 'Hedef Para Birimi',
                 ],
 
                 'edit' => [
@@ -2297,38 +2302,42 @@ return [
             ],
 
             'create' => [
-                'title'                  => 'Kanal Oluştur',
-                'cancel'                 => 'Geri',
-                'save-btn'               => 'Kanalı Kaydet',
-                'general'                => 'Genel',
-                'code'                   => 'Kod',
-                'name'                   => 'Adı',
-                'description'            => 'Açıklama',
-                'inventory-sources'      => 'Envanter Kaynakları',
-                'root-category'          => 'Kök Kategori',
-                'hostname'               => 'Ana Bilgisayar Adı',
-                'hostname-placeholder'   => 'https://www.example.com (Sonuna kesme işareti ekleme.)',
-                'design'                 => 'Tasarım',
-                'theme'                  => 'Tema',
-                'logo'                   => 'Logo',
-                'allowed-ips'            => 'İzin Verilen IP Adresleri',
-                'logo-size'              => 'Resim çözünürlüğü 192 piksel X 50 piksel gibi olmalıdır',
-                'favicon'                => 'Favicon',
-                'favicon-size'           => 'Resim çözünürlüğü 16 piksel X 16 piksel gibi olmalıdır',
-                'seo'                    => 'Ana Sayfa SEO',
-                'seo-title'              => 'Meta başlığı',
-                'seo-description'        => 'Meta açıklama',
-                'seo-keywords'           => 'Meta anahtar kelimeler',
-                'currencies-and-locales' => 'Para Birimleri ve Diller',
-                'locales'                => 'Diller',
-                'default-locale'         => 'Varsayılan Dil',
-                'currencies'             => 'Para Birimleri',
-                'default-currency'       => 'Varsayılan Para Birimi',
-                'last-delete-error'      => 'En az bir Kanal gereklidir.',
-                'settings'               => 'Ayarlar',
-                'status'                 => 'Durum',
-                'maintenance-mode-text'  => 'Mesaj',
-                'create-success'         => 'Kanal başarıyla oluşturuldu.',
+                'title'                   => 'Kanal Oluştur',
+                'cancel'                  => 'Geri',
+                'save-btn'                => 'Kanalı Kaydet',
+                'general'                 => 'Genel',
+                'code'                    => 'Kod',
+                'name'                    => 'Adı',
+                'description'             => 'Açıklama',
+                'inventory-sources'       => 'Envanter Kaynakları',
+                'root-category'           => 'Kök Kategori',
+                'hostname'                => 'Ana Bilgisayar Adı',
+                'hostname-placeholder'    => 'https://www.example.com (Sonuna kesme işareti ekleme.)',
+                'design'                  => 'Tasarım',
+                'theme'                   => 'Tema',
+                'logo'                    => 'Logo',
+                'allowed-ips'             => 'İzin Verilen IP Adresleri',
+                'logo-size'               => 'Resim çözünürlüğü 192 piksel X 50 piksel gibi olmalıdır',
+                'favicon'                 => 'Favicon',
+                'favicon-size'            => 'Resim çözünürlüğü 16 piksel X 16 piksel gibi olmalıdır',
+                'seo'                     => 'Ana Sayfa SEO',
+                'seo-title'               => 'Meta başlığı',
+                'seo-description'         => 'Meta açıklama',
+                'seo-keywords'            => 'Meta anahtar kelimeler',
+                'currencies-and-locales'  => 'Para Birimleri ve Diller',
+                'locales'                 => 'Diller',
+                'default-locale'          => 'Varsayılan Dil',
+                'currencies'              => 'Para Birimleri',
+                'default-currency'        => 'Varsayılan Para Birimi',
+                'last-delete-error'       => 'En az bir Kanal gereklidir.',
+                'settings'                => 'Ayarlar',
+                'status'                  => 'Durum',
+                'select-root-category'    => 'Kök Kategoriyi Seç',
+                'select-theme'            => 'Tema Seç',
+                'select-default-locale'   => 'Varsayılan Yerelimi Seç',
+                'select-default-currency' => 'Varsayılan Para Birimini Seç',
+                'maintenance-mode-text'   => 'Mesaj',
+                'create-success'          => 'Kanal başarıyla oluşturuldu.',
             ],
 
             'edit' => [
@@ -3034,6 +3043,28 @@ return [
                 'qty'         => ':qty Mevcut',
             ],
         ],
+
+        'media' => [
+            'images' => [
+                'add-image-btn'     => 'Resim Ekle',
+                'allowed-types'     => 'png, jpeg, jpg',
+                'not-allowed-error' => 'Yalnızca resim dosyaları (.jpeg, .jpg, .png, ..) izin verilir.',
+
+                'placeholders'  => [
+                    'front'     => 'Ön',
+                    'next'      => 'Sonraki',
+                    'size'      => 'Boyut',
+                    'use-cases' => 'Kullanım Alanları',
+                    'zoom'      => 'Yakınlaştırma',
+                ],
+            ],
+
+            'videos' => [
+                'add-video-btn'     => 'Video Ekle',
+                'allowed-types'     => 'mp4, webm, mkv',
+                'not-allowed-error' => 'Yalnızca video dosyaları (.mp4, .mov, .ogg ..) izin verilir.',
+            ],
+        ]
     ],
 
     'acl' => [
@@ -3149,6 +3180,15 @@ return [
     'emails' => [
         'dear'   => 'Sayın :customer_name',
         'thanks' => 'Herhangi bir yardıma ihtiyacınız varsa, lütfen bize <a href=":link" style=":style">:email</a> adresinden ulaşın.<br/>Teşekkürler!',
+
+        'admin' => [
+            'forgot-password' => [
+                'subject'        => 'Şifre Sıfırlama E-postası',
+                'greeting'       => 'Şifrenizi mi unuttunuz!',
+                'description'    => 'Bu e-postayı hesabınız için bir şifre sıfırlama isteği aldığımız için alıyorsunuz.',
+                'reset-password' => 'Şifreyi Sıfırla',
+            ],
+        ],
 
         'orders' => [
             'created' => [

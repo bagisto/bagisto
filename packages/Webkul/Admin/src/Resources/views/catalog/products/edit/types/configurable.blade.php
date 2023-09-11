@@ -5,6 +5,7 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.configurable.after', ['product' => $product]) !!}
 
 @pushOnce('scripts')
+    {{-- Variations Template --}}
     <script type="text/x-template" id="v-product-variations-template">
         <div class="relative bg-white rounded-[4px] box-shadow">
             <!-- Panel Header -->
@@ -30,48 +31,56 @@
                 </div>
             </div>
 
-            <!-- Panel Content -->
-            <div class="grid">
-                <v-product-variation-item
-                    v-for='(variant, index) in variants'
-                    :key="index"
-                    :index="index"
-                    :variant="variant"
-                    :attributes="superAttributes"
-                    @onRemoved="removeVariant"
-                ></v-product-variation-item>
-            </div>
+            <template v-if="variants.length">
+                <!-- Mass Action Vue Component -->
+                <v-product-variations-mass-action
+                    :super-attributes="superAttributes"
+                    :variants="variants"
+                >
+                </v-product-variations-mass-action>
+
+                <!-- Panel Content -->
+                <div class="grid">
+                    <v-product-variation-item
+                        v-for='(variant, index) in variants'
+                        :key="index"
+                        :index="index"
+                        :variant="variant"
+                        :attributes="superAttributes"
+                        @onRemoved="removeVariant"
+                    ></v-product-variation-item>
+                </div>
+            </template>
 
             <!-- For Empty Variations -->
-            <div
-                class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
-                v-if="! variants.length"
-            >
-                <!-- Placeholder Image -->
-                <img
-                    src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                    class="w-[80px] h-[80px]"
-                />
+            <template v-else>
+                <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
+                    <!-- Placeholder Image -->
+                    <img
+                        src="{{ bagisto_asset('images/icon-add-product.svg') }}"
+                        class="w-[80px] h-[80px]"
+                    />
 
-                <!-- Add Variants Information -->
-                <div class="flex flex-col items-center">
-                    <p class="text-[16px] text-gray-400 font-semibold">
-                        @lang('admin::app.catalog.products.edit.types.configurable.empty-title')
-                    </p>
+                    <!-- Add Variants Information -->
+                    <div class="flex flex-col items-center">
+                        <p class="text-[16px] text-gray-400 font-semibold">
+                            @lang('admin::app.catalog.products.edit.types.configurable.empty-title')
+                        </p>
 
-                    <p class="text-gray-400">
-                        @lang('admin::app.catalog.products.edit.types.configurable.empty-info')
-                    </p>
+                        <p class="text-gray-400">
+                            @lang('admin::app.catalog.products.edit.types.configurable.empty-info')
+                        </p>
+                    </div>
+                    
+                    <!-- Add Row Button -->
+                    <div
+                        class="secondary-button text-[14px]"
+                        @click="$refs.variantCreateModal.open()"
+                    >
+                        @lang('admin::app.catalog.products.edit.types.configurable.add-btn')
+                    </div>
                 </div>
-                
-                <!-- Add Row Button -->
-                <div
-                    class="secondary-button text-[14px]"
-                    @click="$refs.variantCreateModal.open()"
-                >
-                    @lang('admin::app.catalog.products.edit.types.configurable.add-btn')
-                </div>
-            </div>
+            </template>
 
             <!-- Add Variant Form Modal -->
             <x-admin::form
@@ -145,9 +154,324 @@
         </div>
     </script>
 
+    {{-- Variations Mass Action Template --}}
+    <script type="text/x-template" id="v-product-variations-mass-action-template">
+        <!-- Mass Actions -->
+        <div class="flex gap-[5px] items-center px-[16px]">
+            <span
+                class="flex icon-uncheckbox text-[24px] cursor-pointer select-none"
+                :class="{
+                    '!icon-checked text-blue-600': variants.length == selectedVariants.length,
+                    '!icon-checkbox-partial text-blue-600': selectedVariants.length && variants.length != selectedVariants.length
+                }"
+                for="select-all-variants"
+                @click="selectAll"
+            >
+            </span>
+
+            <!-- Attribute Options Selector -->
+            <x-admin::dropdown v-bind:close-on-click="false">
+                <!-- Dropdown Toggler -->
+                <x-slot:toggle>
+                    <button
+                        type="button"
+                        class="flex items-center p-[6px] rounded-[6px] text-[12px] text-blue-600 font-semibold transition-all hover:bg-gray-100 focus:bg-gray-100 cursor-pointer"
+                    >
+                        @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.select-variants')
+
+                        <i class="icon-sort-down text-[24px] text-blue-600"></i>
+                    </button>
+                </x-slot:toggle>
+
+                <!-- Dropdown Content -->
+                <x-slot:content class="px-[0px] py-[15px]">
+                    <template v-for="attribute in superAttributes">
+                        <label
+                            class="flex gap-[10px] items-center px-5 py-2 text-[14px] text-gray-600 cursor-pointer hover:bg-gray-100 select-none"
+                            :for="'attribute_' + attribute.id + '_option_' + option.id"
+                            v-for="option in usedAttributeOptions(attribute)"
+                        >
+                            <div class="flex select-none">
+                                <input
+                                    type="checkbox"
+                                    :id="'attribute_' + attribute.id + '_option_' + option.id"
+                                    class="hidden peer"
+                                    :checked="isAttributeOptionChecked(attribute, option)"
+                                    @change="selectVariantsByAttributeOption(attribute, option)"
+                                >
+
+                                <label
+                                    class="icon-uncheckbox text-[24px] peer-checked:icon-checked peer-checked:text-blue-600 cursor-pointer"
+                                    :for="'attribute_' + attribute.id + '_option_' + option.id"
+                                >
+                                </label>
+                            </div>
+
+                            <div class="flex gap-[5px] items-center">
+                                <span class="text-gray-800">
+                                    @{{ attribute.admin_name }}
+                                </span>
+
+                                <i class="icon-sort-right text-[18px]"></i>
+
+                                @{{ option.admin_name }}
+                            </div>
+                        </label>
+                    </template>
+                </x-slot:content>
+            </x-admin::dropdown>
+
+            <!-- Actions Selector -->
+            <x-admin::dropdown v-if="selectedVariants.length">
+                <!-- Dropdown Toggler -->
+                <x-slot:toggle>
+                    <button
+                        type="button"
+                        class="flex items-center p-[6px] rounded-[6px] text-[12px] text-blue-600 font-semibold transition-all hover:bg-gray-100 focus:bg-gray-100 cursor-pointer"
+                    >
+                        @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.select-action')
+
+                        <i class="icon-sort-down text-[24px] text-blue-600"></i>
+                    </button>
+                </x-slot:toggle>
+
+                <!-- Dropdown Content -->
+                <x-slot:menu>
+                    <x-admin::dropdown.menu.item
+                        v-for="type in updateTypes"
+                        @click="edit(type.key)"
+                    >
+                        @{{ type.title }}
+                    </x-admin::dropdown.menu.item>
+                </x-slot:menu>
+            </x-admin::dropdown>
+
+            <!-- Edit Drawer -->
+            <x-admin::form
+                v-slot="{ meta, errors, handleSubmit }"
+                as="div"
+            >
+                <form @submit="handleSubmit($event, update)">
+                    <!-- Edit Drawer -->
+                    <x-admin::drawer
+                        ref="updateVariantsDrawer"
+                        class="text-left"
+                    >
+                        <!-- Drawer Header -->
+                        <x-slot:header>
+                            <div class="flex justify-between items-center">
+                                <p class="text-[20px] font-medium">
+                                    @{{ updateTypes[selectedType].title }}
+                                </p>
+
+                                <button class="mr-[45px] primary-button">
+                                    @lang('admin::app.catalog.products.edit.types.configurable.edit.save-btn')
+                                </button>
+                            </div>
+                        </x-slot:header>
+
+                        <!-- Drawer Content -->
+                        <x-slot:content class="p-[16px]">
+                            <!-- Mass Update -->
+                            <x-admin::form
+                                v-slot="{ meta, errors, handleSubmit }"
+                                as="div"
+                            >
+                                <form @submit="handleSubmit($event, update)">
+                                    <template v-if="selectedType == 'editPrices'">
+                                        <div class="pb-[10px] border-b-[1px] border-gray-300">
+                                            <div class="flex gap-[10px] items-end">
+                                                <x-admin::form.control-group class="flex-1 mb-0">
+                                                    <x-admin::form.control-group.label>
+                                                        @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-sku')
+                                                    </x-admin::form.control-group.label>
+                        
+
+                                                    <div class="relative">
+                                                        <span class="absolute ltr:left-[15px] rtl:right-[15px] top-[50%] -translate-y-[50%] text-gray-500">
+                                                            {{ core()->currencySymbol(core()->getBaseCurrencyCode()) }}
+                                                        </span>
+
+                                                        <x-admin::form.control-group.control
+                                                            type="text"
+                                                            name="price"
+                                                            class="ltr:pl-[30px] rtl:pr-[30px]"
+                                                            ::rules="{required: true, decimal: true, min_value: 0}"
+                                                            :label="trans('admin::app.catalog.products.edit.types.configurable.mass-edit.price')"
+                                                        >
+                                                        </x-admin::form.control-group.control>
+                                                    </div>
+                                                </x-admin::form.control-group>
+
+                                                <button class="secondary-button">
+                                                    @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-btn')
+                                                </button>
+                                            </div>
+                    
+                                            <x-admin::form.control-group.error control-name="price"></x-admin::form.control-group.error>
+                                        </div>
+                                    </template>
+
+                                    <template v-if="selectedType == 'editInventories'">
+                                        <div class="pb-[10px] border-b-[1px] border-gray-300">
+                                            <div class="grid grid-cols-3 gap-[16px] mb-[10px]">
+                                                <x-admin::form.control-group
+                                                    class="mb-[0px]"
+                                                    v-for='inventorySource in inventorySources'
+                                                >
+                                                    <x-admin::form.control-group.label>
+                                                        @{{ inventorySource.name }}
+                                                    </x-admin::form.control-group.label>
+
+                                                    <v-field
+                                                        type="text"
+                                                        :name="'inventories[' + inventorySource.id + ']'"
+                                                        class="flex w-full min-h-[39px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400"
+                                                        :class="[errors['inventories[' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
+                                                        rules="required|numeric|min:0"
+                                                        :label="inventorySource.name"
+                                                    >
+                                                    </v-field>
+
+                                                    <v-error-message
+                                                        :name="'inventories[' + inventorySource.id + ']'"
+                                                        v-slot="{ message }"
+                                                    >
+                                                        <p
+                                                            class="mt-1 text-red-600 text-xs italic"
+                                                            v-text="message"
+                                                        >
+                                                        </p>
+                                                    </v-error-message>
+                                                </x-admin::form.control-group>
+                                            </div>
+
+                                            <button class="secondary-button">
+                                                @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-btn')
+                                            </button>
+                                        </div>
+                                    </template>
+
+                                    <template v-if="selectedType == 'addImages'">
+                                        <div class="pb-[10px] border-b-[1px] border-gray-300">
+                                            <v-media-images
+                                                name="images"
+                                                class="mb-[10px]"
+                                                v-bind:allow-multiple="true"
+                                                :uploaded-images="updateTypes[selectedType].images"
+                                            ></v-media-images>
+
+                                            <button class="secondary-button">
+                                                @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-btn')
+                                            </button>
+                                        </div>
+                                    </template>
+                                </form>
+                            </x-admin::form>
+
+                            <div
+                                class="py-[16px] border-b-[1px] border-gray-300 last:border-b-0"
+                                :class="{'flex gap-[10px] justify-between items-center': selectedType == 'editPrices'}"
+                                v-for="variant in selectedVariants"
+                            >
+                                <div class="text-[14px] text-gray-800">
+                                    <span
+                                        class="after:content-['_/_'] last:after:content-['']"
+                                        v-for='(attribute, index) in superAttributes'
+                                    >
+                                        @{{ optionName(attribute, variant[attribute.code]) }}
+                                    </span>
+                                </div>
+
+                                <template v-if="selectedType == 'editPrices'">
+                                    <x-admin::form.control-group class="flex-1 mb-0 max-w-[115px]">
+                                        <div class="relative">
+                                            <span class="absolute ltr:left-[15px] rtl:right-[15px] top-[50%] -translate-y-[50%] text-gray-500">
+                                                {{ core()->currencySymbol(core()->getBaseCurrencyCode()) }}
+                                            </span>
+
+                                            <v-field
+                                                type="text"
+                                                :name="'variants[' + variant.id + ']'"
+                                                :value="variant.price"
+                                                class="flex w-full min-h-[39px] py-[6px] ltr:pl-[30px] rtl:pr-[30px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400"
+                                                :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
+                                                :rules="{required: true, decimal: true, min_value: 0}"
+                                                label="@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.price')"
+                                            >
+                                            </v-field>
+                                        </div>
+
+                                        <v-error-message
+                                            :name="'variants[' + variant.id + ']'"
+                                            v-slot="{ message }"
+                                        >
+                                            <p
+                                                class="mt-1 text-red-600 text-xs italic"
+                                                v-text="message"
+                                            >
+                                            </p>
+                                        </v-error-message>
+                                    </x-admin::form.control-group>
+                                </template>
+
+                                <template v-if="selectedType == 'editInventories'">
+                                    <x-admin::form.control-group class="mt-[10px] mb-0">
+                                        <div class="grid grid-cols-3 gap-[16px] mb-[10px]">
+                                            <x-admin::form.control-group
+                                                class="mb-[0px]"
+                                                v-for='inventorySource in inventorySources'
+                                            >
+                                                <x-admin::form.control-group.label>
+                                                    @{{ inventorySource.name }}
+                                                </x-admin::form.control-group.label>
+
+                                                <v-field
+                                                    type="text"
+                                                    :name="'variants[' + variant.id + '][' + inventorySource.id + ']'"
+                                                    :value="variant.inventories[inventorySource.id]"
+                                                    class="flex w-full min-h-[39px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400"
+                                                    :class="[errors['variants[' + variant.id + '][' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
+                                                    rules="required|numeric|min:0"
+                                                    :label="inventorySource.name"
+                                                >
+                                                </v-field>
+
+                                                <v-error-message
+                                                    :name="'variants[' + variant.id + '][' + inventorySource.id + ']'"
+                                                    v-slot="{ message }"
+                                                >
+                                                    <p
+                                                        class="mt-1 text-red-600 text-xs italic"
+                                                        v-text="message"
+                                                    >
+                                                    </p>
+                                                </v-error-message>
+                                            </x-admin::form.control-group>
+                                        </div>
+                                    </x-admin::form.control-group>
+                                </template>
+                                
+                                <template v-if="selectedType == 'addImages'">
+                                    <v-media-images
+                                        name="images"
+                                        class="mt-[10px]"
+                                        v-bind:allow-multiple="true"
+                                        :uploaded-images="variant.temp_images"
+                                    ></v-media-images>
+                                </template>
+                            </div>
+                        </x-slot:content>
+                    </x-admin::drawer>
+                </form>
+            </x-admin::form>
+        </div>
+    </script>
+
     {{-- Variation Item Template --}}
     <script type="text/x-template" id="v-product-variation-item-template">
         <div class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300">
+
             <!-- Information -->
             <div class="flex gap-[10px]">
                 <!-- Form Hidden Fields -->
@@ -172,8 +496,6 @@
                 <template v-for="(image, index) in variant.images">
                     <input type="hidden" :name="'variants[' + variant.id + '][images][files][' + image.id + ']'" v-if="! image.is_new"/>
 
-                    <input type="hidden" :name="'variants[' + variant.id + '][images][positions][' + image.id + ']'"/>
-
                     <input
                         type="file"
                         :name="'variants[' + variant.id + '][images][files][]'"
@@ -183,20 +505,39 @@
                         :ref="$.uid + '_imageInput_' + index"
                     />
                 </template>
+                <!-- //Ends Form Hidden Fields -->
+
+                <!-- Selection Checkbox -->
+                <div class="select-none">
+                    <input
+                        type="checkbox"
+                        :id="'variant_' + variant.id"
+                        class="hidden peer"
+                        v-model="variant.selected"
+                    >
+
+                    <label
+                        class="icon-uncheckbox text-[24px] peer-checked:icon-checked peer-checked:text-blue-600 cursor-pointer"
+                        :for="'variant_' + variant.id"
+                    ></label>
+                </div>
 
                 <!-- Image -->
-                <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                <div
+                    class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px] overflow-hidden"
+                    :class="{'border border-dashed border-gray-300': ! variant.images.length}"
+                >
                     <template v-if="! variant.images.length">
                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                    
+                        <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
+                            @lang('admin::app.catalog.products.edit.types.configurable.image-placeholder')
+                        </p>
                     </template>
 
                     <template v-else>
                         <img :src="variant.images[0].url">
                     </template>
-                    
-                    <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
-                        @lang('admin::app.catalog.products.edit.types.configurable.image-placeholder')
-                    </p>
                 </div>
 
                 <!-- Details -->
@@ -427,22 +768,30 @@
                                             </div>
                                         </div>
 
-                                        <v-product-images :uploaded-images="variant.images"></v-product-images>
+                                        <!-- Images -->
+                                        <div class="mb-[10px]">
+                                            <v-media-images
+                                                name="images"
+                                                v-bind:allow-multiple="true"
+                                                :uploaded-images="variant.images"
+                                            ></v-media-images>
+                                        </div>
 
-                                        <p
-                                            class="mt-[10px] font-semibold text-gray-800"
+                                        <!-- Actions -->
+                                        <div
+                                            class="mt-[10px] text-[14px] text-gray-800 font-semibold"
                                             v-if="typeof variant.id !== 'string'"
                                         >
                                             @lang('admin::app.catalog.products.edit.types.configurable.edit.edit-info')
 
                                             <a
                                                 :href="'{{ route('admin.catalog.products.edit', ':id') }}'.replace(':id', variant.id)" 
-                                                class="inline-block mt-[5px] text-blue-500 hover:text-blue-600"
+                                                class="inline-block text-blue-500 hover:text-blue-600 hover:underline"
                                                 target="_blank"
                                             >
                                                 @lang('admin::app.catalog.products.edit.types.configurable.edit.edit-link-title')
                                             </a>
-                                        </p>
+                                        </div>
                                     </x-slot:content>
                                 </x-admin::drawer>
                             </form>
@@ -474,7 +823,7 @@
                         weight: 0,
                         inventories: {},
                         images: []
-                    }
+                    },
                 }
             },
 
@@ -520,7 +869,191 @@
 
                 removeVariant(variant) {
                     this.variants.splice(this.variants.indexOf(variant), 1);
+                },
+            }
+        });
+
+        app.component('v-product-variations-mass-action', {
+            template: '#v-product-variations-mass-action-template',
+
+            props: ['superAttributes', 'variants'],
+
+            data: function () {
+                return {
+                    inventorySources: @json($inventorySources),
+
+                    updateTypes: {
+                        editPrices: {
+                            key: 'editPrices',
+                            title: "@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.edit-prices')"
+                        },
+
+                        editInventories: {
+                            key: 'editInventories',
+                            title: "@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.edit-inventories')"
+                        },
+
+                        addImages: {
+                            key: 'addImages',
+                            title: "@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.add-images')",
+                            images: []
+                        },
+
+                        removeImages: {
+                            key: 'removeImages',
+                            title: "@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.remove-images')"
+                        },
+
+                        removeVariants: {
+                            key: 'removeVariants',
+                            title: "@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.remove-variants')"
+                        }
+                    },
+
+                    selectedType: ''
                 }
+            },
+
+            computed: {
+                selectedVariants() {
+                    return this.variants.filter(function(variant) {
+                        variant.temp_images = [];
+
+                        return variant.selected;
+                    });
+                }
+            },
+
+            methods: {
+                usedAttributeOptions(attribute) {
+                    const options = [];
+
+                    for (const option of attribute.options) {
+                        if (this.variants.some(variant => variant[attribute.code] === option.id)) {
+                            if (! options.includes(option)) {
+                                options.push(option);
+                            }
+                        }
+                    }
+
+                    return options;
+                },
+
+                selectAll() {
+                    let isSelected = this.selectedVariants.length <= 0;
+
+                    this.variants.forEach(function (variant) {
+                        variant.selected = isSelected;
+                    });
+                },
+
+                selectVariantsByAttributeOption(attribute, option) {
+                    let self = this;
+
+                    let isAttributeOptionChecked = self.isAttributeOptionChecked(attribute, option);
+
+                    this.variants.forEach(function (variant) {
+                        if (variant[attribute.code] == option.id) {
+                            variant.selected = ! isAttributeOptionChecked;
+                        }
+                    });
+                },
+
+                isAttributeOptionChecked(attribute, option) {
+                    let variants = this.variants.filter(function (variant) {
+                        return variant[attribute.code] == option.id;
+                    });
+
+                    if (! variants.length) {
+                        return false;
+                    }
+                    
+                    let isSelected = true;
+
+                    variants.forEach(function (variant) {
+                        if (! variant.selected) {
+                            isSelected = false;
+                        }
+                    });
+
+                    return isSelected;
+                },
+
+                edit(type) {
+                    this.selectedType = type;
+
+                    if (['editPrices', 'editInventories', 'addImages'].includes(type)) {
+                        this.$refs.updateVariantsDrawer.open();
+                    } else {
+                        this[this.selectedType]();
+                    }
+                },
+
+                update(params) {
+                    this[this.selectedType](params);
+
+                    this.$refs.updateVariantsDrawer.close();
+                },
+
+                editPrices(params) {
+                    this.selectedVariants.forEach(function (variant) {
+                        variant.price = params?.price ?? params.variants[variant.id];
+
+                        variant.selected = false;
+                    });
+                },
+
+                editInventories(params) {
+                    this.selectedVariants.forEach(function (variant) {
+                        variant.inventories = params?.inventories ?? params.variants[variant.id];
+
+                        variant.selected = false;
+                    });
+                },
+
+                addImages(params) {
+                    let self = this;
+
+                    this.selectedVariants.forEach(function (variant) {
+                        if (self.updateTypes.addImages.images.length) {
+                            variant.images = variant.images.concat(self.updateTypes.addImages.images);
+                        } else {
+                            variant.images = variant.images.concat(variant.temp_images);
+
+                            variant.temp_images = [];
+                        }
+
+                        variant.selected = false;
+                    });
+
+                    this.updateTypes.addImages.images = [];
+                },
+
+                removeImages() {
+                    this.selectedVariants.forEach(function (variant) {
+                        variant.images = [];
+
+                        variant.selected = false;
+                    });
+                },
+
+                removeVariants() {
+                    let self = this;
+
+                    this.selectedVariants.forEach(function (variant) {
+                        if (variant.selected) {
+                            let index = self.variants.indexOf(variant);
+
+                            self.variants.splice(index, 1);
+                        }
+                    });
+                },
+
+                optionName: function (attribute, optionId) {
+                    return attribute.options.find(function (option) {
+                        return option.id == optionId;
+                    }).admin_name;
+                },
             }
         });
 
@@ -572,6 +1105,19 @@
                 }
             },
 
+            watch: {
+                variant: {
+                    handler: function(newValue) {
+                        let self = this;
+
+                        setTimeout(function() {
+                            self.setFiles();
+                        })
+                    },
+                    deep: true
+                }
+            },
+
             methods: {
                 optionName: function (attribute, optionId) {
                     return attribute.options.find(function (option) {
@@ -581,8 +1127,6 @@
 
                 update(params) {
                     Object.assign(this.variant, params);
-
-                    this.setFiles();
 
                     this.$refs.editVariantDrawer.close();
                 },

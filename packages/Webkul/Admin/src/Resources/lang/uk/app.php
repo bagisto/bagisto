@@ -89,6 +89,8 @@ return [
             'date-duration'               => ':start - :end',
             'decreased'                   => ':progress%',
             'end-date'                    => 'Дата закінчення',
+            'empty-threshold'             => 'Поріг Пустоти',
+            'empty-threshold-description' => 'Немає доступних товарів',
             'from'                        => 'З',
             'increased'                   => ':progress%',
             'more-products'               => ':product_count+ Ще продуктів',
@@ -124,8 +126,6 @@ return [
             'user-name'                   => 'Привіт! :user_name',
             'user-info'                   => 'Швидкий перегляд подій в вашому магазині',
             'visitor'                     => 'Відвідувач',
-            'empty-threshold'             => 'Поріг Пустоти',
-            'empty-threshold-description' => 'Немає доступних товарів',
         ],
     ],
 
@@ -578,27 +578,13 @@ return [
                 ],
 
                 'images' => [
-                    'add-image-btn'     => 'Додати зображення',
-                    'allowed-types'     => 'png, jpeg, jpg',
-                    'info'              => 'Роздільна здатність зображення повинна бути приблизно 609px X 560px',
-                    'not-allowed-error' => 'Дозволені тільки файли зображень (.jpeg, .jpg, .png, ..).',
-                    'title'             => 'Зображення',
-
-                    'placeholders' => [
-                        'front'     => 'Зверху',
-                        'next'      => 'Наступний',
-                        'size'      => 'Розмір',
-                        'use-cases' => 'Використання',
-                        'zoom'      => 'Збільшення',
-                    ],
+                    'title' => 'Зображення',
+                    'info'  => 'Роздільна здатність зображення повинна бути приблизно 609px X 560px',
                 ],
 
                 'videos' => [
-                    'add-video-btn'     => 'Додати відео',
-                    'allowed-types'     => 'mp4, webm, mkv',
-                    'info'              => 'Максимальний розмір відео повинен бути приблизно :size',
-                    'not-allowed-error' => 'Дозволені лише файли відео (.mp4, .mov, .ogg ..).',
-                    'title'             => 'Відео',
+                    'title' => 'Відео',
+                    'info'  => 'Максимальний розмір відео повинен бути приблизно :size',
                 ],
 
                 'links' => [
@@ -661,6 +647,19 @@ return [
                             'sku'             => 'Артикул',
                             'status'          => 'Статус',
                             'weight'          => 'Вага',
+                        ],
+
+                        'mass-edit' => [
+                            'select-variants'  => 'Вибрати Варіанти',
+                            'select-action'    => 'Вибрати Дію',
+                            'edit-prices'      => 'Редагувати Ціни',
+                            'edit-inventories' => 'Редагувати Запаси',
+                            'add-images'       => 'Додати Зображення',
+                            'remove-images'    => 'Видалити Зображення',
+                            'remove-variants'  => 'Видалити Варіанти',
+                            'price'            => 'Ціна',
+                            'apply-to-all-sku' => 'Застосувати ціну до всіх SKU.',
+                            'apply-to-all-btn' => 'Застосувати до всіх',
                         ],
                     ],
 
@@ -1375,6 +1374,8 @@ return [
                 'save-btn-title'   => 'Зберегти Адресу',
             ],
 
+            'create-success'      => 'Адреса успішно створено',
+            'update-success'      => 'Адреса успішно оновлено',
             'success-mass-delete' => 'Адреси успішно видалено масово',
         ],
     ],
@@ -1463,6 +1464,8 @@ return [
                     'select-template' => 'Виберіть Шаблон',
                     'select-event'    => 'Виберіть Подію',
                     'select-status'   => 'Виберіть Статус',
+                    'select-channel'  => 'Вибрати канал',
+                    'select-group'    => 'Вибрати групу',
                     'subject'         => 'Тема',
                     'title'           => 'Створити Кампанію',
                 ],
@@ -1995,12 +1998,13 @@ return [
                 ],
 
                 'create'  => [
-                    'code'        => 'Код',
-                    'name'        => 'Назва',
-                    'direction'   => 'Напрямок',
-                    'locale-logo' => 'Логотип Локалі',
-                    'title'       => 'Створити Локаль',
-                    'save-btn'    => 'Зберегти Локаль',
+                    'code'             => 'Код',
+                    'name'             => 'Назва',
+                    'direction'        => 'Напрямок',
+                    'locale-logo'      => 'Логотип Локалі',
+                    'title'            => 'Створити Локаль',
+                    'save-btn'         => 'Зберегти Локаль',
+                    'select-direction' => 'Вибрати напрямок',
                 ],
 
                 'edit'  => [
@@ -2067,12 +2071,13 @@ return [
                 'update-rates'  => 'Оновити Курс Валют',
 
                 'create' => [
-                    'delete-warning'  => 'Ви впевнені, що хочете виконати цю дію?',
-                    'title'           => 'Створити Курс Валют',
-                    'rate'            => 'Курс',
-                    'save-btn'        => 'Зберегти Курс Валют',
-                    'source-currency' => 'Вихідна Валюта',
-                    'target-currency' => 'Цільова Валюта',
+                    'delete-warning'         => 'Ви впевнені, що хочете виконати цю дію?',
+                    'title'                  => 'Створити Курс Валют',
+                    'rate'                   => 'Курс',
+                    'save-btn'               => 'Зберегти Курс Валют',
+                    'source-currency'        => 'Вихідна Валюта',
+                    'select-target-currency' => 'Виберіть цільову валюту',
+                    'target-currency'        => 'Цільова Валюта',
                 ],
 
                 'edit' => [
@@ -2297,38 +2302,42 @@ return [
             ],
 
             'create' => [
-                'title'                  => 'Створити канал',
-                'cancel'                 => 'Назад',
-                'save-btn'               => 'Зберегти канал',
-                'general'                => 'Загальне',
-                'code'                   => 'Код',
-                'name'                   => 'Назва',
-                'description'            => 'Опис',
-                'inventory-sources'      => 'Джерела інвентаризації',
-                'root-category'          => 'Коренева категорія',
-                'hostname'               => 'Ім "я хоста"',
-                'hostname-placeholder'   => 'https://www.example.com (Не додавайте слеш в кінці.)',
-                'design'                 => 'Дизайн',
-                'theme'                  => 'Тема',
-                'logo'                   => 'Логотип',
-                'allowed-ips'            => 'Дозволені IP-адреси',
-                'logo-size'              => 'Роздільна здатність зображення має бути приблизно 192px X 50px',
-                'favicon'                => 'Фавікон',
-                'favicon-size'           => 'Роздільна здатність зображення має бути приблизно 16px X 16px',
-                'seo'                    => 'SEO головної сторінки',
-                'seo-title'              => 'Мета-заголовок',
-                'seo-description'        => 'Мета-опис',
-                'seo-keywords'           => 'Мета-ключові слова',
-                'currencies-and-locales' => 'Валюти та локалі',
-                'locales'                => 'Локалі',
-                'default-locale'         => 'Мова за замовчуванням',
-                'currencies'             => 'Валюти',
-                'default-currency'       => 'Валюта за замовчуванням',
-                'last-delete-error'      => 'Принаймні один канал обов "язковий".',
-                'settings'               => 'Налаштування',
-                'status'                 => 'Статус',
-                'maintenance-mode-text'  => 'Повідомлення',
-                'create-success'         => 'Канал створено успішно.',
+                'title'                   => 'Створити канал',
+                'cancel'                  => 'Назад',
+                'save-btn'                => 'Зберегти канал',
+                'general'                 => 'Загальне',
+                'code'                    => 'Код',
+                'name'                    => 'Назва',
+                'description'             => 'Опис',
+                'inventory-sources'       => 'Джерела інвентаризації',
+                'root-category'           => 'Коренева категорія',
+                'hostname'                => 'Ім "я хоста"',
+                'hostname-placeholder'    => 'https://www.example.com (Не додавайте слеш в кінці.)',
+                'design'                  => 'Дизайн',
+                'theme'                   => 'Тема',
+                'logo'                    => 'Логотип',
+                'allowed-ips'             => 'Дозволені IP-адреси',
+                'logo-size'               => 'Роздільна здатність зображення має бути приблизно 192px X 50px',
+                'favicon'                 => 'Фавікон',
+                'favicon-size'            => 'Роздільна здатність зображення має бути приблизно 16px X 16px',
+                'seo'                     => 'SEO головної сторінки',
+                'seo-title'               => 'Мета-заголовок',
+                'seo-description'         => 'Мета-опис',
+                'seo-keywords'            => 'Мета-ключові слова',
+                'currencies-and-locales'  => 'Валюти та локалі',
+                'locales'                 => 'Локалі',
+                'default-locale'          => 'Мова за замовчуванням',
+                'currencies'              => 'Валюти',
+                'default-currency'        => 'Валюта за замовчуванням',
+                'last-delete-error'       => 'Принаймні один канал обов "язковий".',
+                'settings'                => 'Налаштування',
+                'status'                  => 'Статус',
+                'select-root-category'    => 'Виберіть кореневу категорію',
+                'select-theme'            => 'Виберіть тему',
+                'select-default-locale'   => 'Виберіть типову локаль',
+                'select-default-currency' => 'Виберіть типову валюту',
+                'maintenance-mode-text'   => 'Повідомлення',
+                'create-success'          => 'Канал створено успішно.',
             ],
 
             'edit' => [
@@ -3034,6 +3043,28 @@ return [
                 'qty'         => ':qty доступно',
             ],
         ],
+
+        'media' => [
+            'images' => [
+                'add-image-btn'     => 'Додати зображення',
+                'allowed-types'     => 'png, jpeg, jpg',
+                'not-allowed-error' => 'Дозволені тільки файли зображень (.jpeg, .jpg, .png, ..).',
+
+                'placeholders' => [
+                    'front'     => 'Зверху',
+                    'next'      => 'Наступний',
+                    'size'      => 'Розмір',
+                    'use-cases' => 'Використання',
+                    'zoom'      => 'Збільшення',
+                ],
+            ],
+
+            'videos' => [
+                'add-video-btn'     => 'Додати відео',
+                'allowed-types'     => 'mp4, webm, mkv',
+                'not-allowed-error' => 'Дозволені лише файли відео (.mp4, .mov, .ogg ..).',
+            ],
+        ]
     ],
 
     'acl' => [
@@ -3149,6 +3180,15 @@ return [
     'emails' => [
         'dear'   => 'Шановний :customer_name',
         'thanks' => 'Якщо вам потрібна будь-яка допомога, будь ласка, зв\'яжіться з нами за адресою <a href=":link" style=":style">:email</a>.<br/>Дякуємо!',
+
+        'admin' => [
+            'forgot-password' => [
+                'subject'        => 'Повідомлення про скидання пароля',
+                'greeting'       => 'Забули пароль!',
+                'description'    => 'Ви отримали цей лист, оскільки ми отримали запит на скидання пароля для вашого облікового запису.',
+                'reset-password' => 'Скинути пароль',
+            ],
+        ],
 
         'orders' => [
             'created' => [

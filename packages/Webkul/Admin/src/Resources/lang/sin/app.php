@@ -89,6 +89,8 @@ return [
             'date-duration'               => ':start - :end',
             'decreased'                   => ':progress%',
             'end-date'                    => 'අවසාන දිනය',
+            'empty-threshold'             => 'අහාස උපය',
+            'empty-threshold-description' => 'නොමැති නිෂ්පාදනයක් නොමැත',
             'from'                        => 'සිට',
             'increased'                   => ':progress%',
             'more-products'               => ':product_count+ අත්දැකීම්',
@@ -124,8 +126,6 @@ return [
             'user-name'                   => 'හෙලෝ! :user_name',
             'user-info'                   => 'ඔබගේ ෆාස්බුක් එකෙන් ඇය හොඳින් හේතුවක් කුමුද?',
             'visitor'                     => 'පැනදුම්',
-            'empty-threshold'             => 'අහාස උපය',
-            'empty-threshold-description' => 'නොමැති නිෂ්පාදනයක් නොමැත',
         ],
     ],
 
@@ -578,27 +578,13 @@ return [
                 ],
 
                 'images' => [
-                    'add-image-btn'     => 'රූපය එකතු කරන්න',
-                    'allowed-types'     => 'png, jpeg, jpg',
-                    'info'              => 'රූපයේ අවිස්සාව 609px X 560px වේ',
-                    'not-allowed-error' => 'එක්සත් ගොනුවේ පමණ (.jpeg, .jpg, .png, ..) වල ගොනුවක් සඳහා සමීක්ෂා කළ යුතුය.',
-                    'title'             => 'රූපයන්',
-
-                    'placeholders'  => [
-                        'front'     => 'මුර',
-                        'next'      => 'ඊළඟ',
-                        'size'      => 'ප්‍රමාණය',
-                        'use-cases' => 'භාවිතා කිරීම්',
-                        'zoom'      => 'ස්මෙයිල්',
-                    ],
+                    'title' => 'රූපයන්',
+                    'info'  => 'රූපයේ අවිස්සාව 609px X 560px වේ',
                 ],
 
                 'videos' => [
-                    'add-video-btn'     => 'වීඩියෝ එකතු කරන්න',
-                    'allowed-types'     => 'mp4, webm, mkv',
-                    'info'              => 'උපරිම වීඩියෝ ප්‍රමාණය :size වේ',
-                    'not-allowed-error' => 'වීඩියෝ ගොනුවේ පමණ (.mp4, .mov, .ogg ..) වල ගොනුවක් සඳහා සමීක්ෂා කළ යුතුය.',
-                    'title'             => 'වීඩියෝ',
+                    'title' => 'වීඩියෝ',
+                    'info'  => 'උපරිම වීඩියෝ ප්‍රමාණය :size වේ',
                 ],
 
                 'links' => [
@@ -661,6 +647,19 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'ස්ථානය',
                             'weight'          => 'බර',
+                        ],
+
+                        'mass-edit' => [
+                            'select-variants'  => 'වෛර තෝරන්න',
+                            'select-action'    => 'ක්‍රියාකාරකය තෝරන්න',
+                            'edit-prices'      => 'මිල සංස්කරණය කරන්න',
+                            'edit-inventories' => 'අනුයුක්ත සංස්කරණය කරන්න',
+                            'add-images'       => 'රූප එකතු කරන්න',
+                            'remove-images'    => 'රූප ඉවත් කරන්න',
+                            'remove-variants'  => 'වෛර ඉවත් කරන්න',
+                            'price'            => 'මිල',
+                            'apply-to-all-sku' => 'සෑම SKU වලටයිද මිලට අනුමුටු කරන්න.',
+                            'apply-to-all-btn' => 'සෑම වලටයිද අනුමුටු',
                         ],
                     ],
 
@@ -1375,6 +1374,8 @@ return [
                 'save-btn-title'   => 'ලිපිනය සුරකින්න',
             ],
 
+            'create-success'      => 'ලිපිනය සාර්ථකයෙනින් තාක්ෂණය කර ඇත',
+            'update-success'      => 'ලිපිනය සාර්ථකයෙනින් යාවත්කාලීන කර ඇත',
             'success-mass-delete' => 'ලිපිනයන් මස් මකා දමන ලදි',
         ],
     ],
@@ -1463,6 +1464,8 @@ return [
                     'select-template' => 'ආකෘතිය තෝරන්න',
                     'select-event'    => 'සළාය තෝරන්න',
                     'select-status'   => 'තත්ත්වය තෝරන්න',
+                    'select-channel'  => 'චැනලය තෝරනවා',
+                    'select-group'    => 'කණ්ඩායම තෝරනවා',
                     'subject'         => 'විෂය',
                     'title'           => 'පෙරදසුන්ක් සාදන්න',
                 ],
@@ -1978,42 +1981,43 @@ return [
     'settings' => [
         'locales' => [
             'index' => [
-                'title'      => 'Locales',
-                'locale'     => 'Locale',
-                'create-btn' => 'Create Locale',
-
+                'title'      => 'මාතෘකාවන්',
+                'locale'     => 'භාෂාව',
+                'create-btn' => 'මාතෘකාවක් සාදන්න',
+            
                 'datagrid' => [
-                    'actions'   => 'Actions',
-                    'id'        => 'ID',
-                    'name'      => 'Name',
-                    'code'      => 'Code',
-                    'direction' => 'Direction',
+                    'actions'   => 'ක්‍රියා',
+                    'id'        => 'අංකය',
+                    'name'      => 'නම',
+                    'code'      => 'කේතය',
+                    'direction' => 'දිශාව',
                     'ltr'       => 'LTR',
                     'rtl'       => 'RTL',
-                    'edit'      => 'Edit',
-                    'delete'    => 'Delete',
+                    'edit'      => 'සංස්කරණය',
+                    'delete'    => 'මකනවා',
                 ],
-
+            
                 'create'  =>  [
-                    'code'        => 'Code',
-                    'name'        => 'Name',
-                    'direction'   => 'Direction',
-                    'locale-logo' => 'Locale Logo',
-                    'title'       => 'Create Locale',
-                    'save-btn'    => 'Save Locale',
+                    'code'             => 'කේතය',
+                    'name'             => 'නම',
+                    'direction'        => 'දිශාව',
+                    'locale-logo'      => 'භාෂා ලෝගෝ',
+                    'title'            => 'මාතෘකාවක් සාදන්න',
+                    'save-btn'         => 'මාතෘකාව සුරකින්න',
+                    'select-direction' => 'දිශාව තෝරනවා',
                 ],
-
+            
                 'edit'  => [
-                    'title' => 'Edit Locales',
+                    'title' => 'මාතෘකාවක් සංස්කරණය කරනවා',
                 ],
-
-                'create-success'    => 'Locale created successfully.',
-                'update-success'    => 'Locale updated successfully.',
-                'delete-success'    => 'Locale deleted successfully.',
-                'last-delete-error' => 'At least one Locale is required.',
-                'delete-warning'    => 'Are you sure, you want to perform this action?',
-                'delete-failed'     => 'Locale deletion failed',
-            ],
+            
+                'create-success'    => 'මාතෘකාව සාර්ථකව සෑදීම.',
+                'update-success'    => 'මාතෘකාව සාර්ථකව වෙනස් කිරීම.',
+                'delete-success'    => 'මාතෘකාව සාර්ථකව මකා දමනවා.',
+                'last-delete-error' => 'අවිස්සාවේ අවශ්‍ය මාතෘකාවක් එකතු කළ යුතුය.',
+                'delete-warning'    => 'ඔබට මෙම ක්‍රියාකාරීත්වය මකා දමන්නම්?',
+                'delete-failed'     => 'මාතෘකාව මකා දැමීම අසාර්ථකයි',
+            ],            
         ],
 
         'currencies' => [
@@ -2067,12 +2071,13 @@ return [
                 'update-rates'  => 'වාරික තාක්ෂණය යාවත්කාලීන කරන්න',
 
                 'create' => [
-                    'delete-warning'  => 'ඔබට මෙම ක්‍රියාකාරකම කිරීමට යන අවිස්සාවක් සුදුසුදක්ද?',
-                    'title'           => 'වාරික තාක්ෂණය සාදන්න',
-                    'rate'            => 'තාක්ෂණය',
-                    'save-btn'        => 'වාරික තාක්ෂණය සුරකින්න',
-                    'source-currency' => 'මුලගේ මුදල්',
-                    'target-currency' => 'ඉලක්කගේ මුදල්',
+                    'delete-warning'         => 'ඔබට මෙම ක්‍රියාකාරකම කිරීමට යන අවිස්සාවක් සුදුසුදක්ද?',
+                    'title'                  => 'වාරික තාක්ෂණය සාදන්න',
+                    'rate'                   => 'තාක්ෂණය',
+                    'save-btn'               => 'වාරික තාක්ෂණය සුරකින්න',
+                    'source-currency'        => 'මුලගේ මුදල්',
+                    'select-target-currency' => 'ඉලක්කම් මුදල තෝරනවා',
+                    'target-currency'        => 'ඉලක්කගේ මුදල්',
                 ],
 
                 'edit' => [
@@ -2297,38 +2302,42 @@ return [
             ],
 
             'create' => [
-                'title'                  => 'නව චැනලය සාදන්න',
-                'cancel'                 => 'ආපසු',
-                'save-btn'               => 'චැනලය සුරක්ෂා කරන්න',
-                'general'                => 'සාමාන්‍ය',
-                'code'                   => 'කේතය',
-                'name'                   => 'නම',
-                'description'            => 'විස්තර',
-                'inventory-sources'      => 'ගනුදෙනු උපකරණ',
-                'root-category'          => 'මූල්‍ය කාණ්ඩය',
-                'hostname'               => 'සත්කාරක නම',
-                'hostname-placeholder'   => 'https://www.example.com (අවසානයේ පොදු පැත්තට එක් නැත.)',
-                'design'                 => 'නරකය',
-                'theme'                  => 'තේමා',
-                'logo'                   => 'ලෝගෝ',
-                'allowed-ips'            => 'ඉඩ දෙන IP ප්‍රතිපාදන',
-                'logo-size'              => 'රූපයේ ස්ථාන වලට 192px X 50px වල එවක් එළිය වේ',
-                'favicon'                => 'Favicon',
-                'favicon-size'           => 'Favicon ස්ථාන වලට 16px X 16px වල එවක් එළිය වේ',
-                'seo'                    => 'මුල් පිටව නිවේදනය SEO',
-                'seo-title'              => 'මෙටා මාතෘකා',
-                'seo-description'        => 'මෙටා විස්තර',
-                'seo-keywords'           => 'මෙටා නිර්ණායක',
-                'currencies-and-locales' => 'මුදල් සහ ස්ථාන',
-                'locales'                => 'ස්ථාන',
-                'default-locale'         => 'පෙරනි ස්ථාන',
-                'currencies'             => 'මුදල්',
-                'default-currency'       => 'පෙරනි මුදල',
-                'last-delete-error'      => 'අවශ්‍යවන්ගේ චැනලඑක එකතු කරන්න.',
-                'settings'               => 'සැකසුම්',
-                'status'                 => 'තත්වය',
-                'maintenance-mode-text'  => 'පරික්ෂා පෙලවන පණිවුඩය',
-                'create-success'         => 'චැනලය සාර්ථකව සාදන ලදි.'
+                'title'                   => 'නව චැනලය සාදන්න',
+                'cancel'                  => 'ආපසු',
+                'save-btn'                => 'චැනලය සුරක්ෂා කරන්න',
+                'general'                 => 'සාමාන්‍ය',
+                'code'                    => 'කේතය',
+                'name'                    => 'නම',
+                'description'             => 'විස්තර',
+                'inventory-sources'       => 'ගනුදෙනු උපකරණ',
+                'root-category'           => 'මූල්‍ය කාණ්ඩය',
+                'hostname'                => 'සත්කාරක නම',
+                'hostname-placeholder'    => 'https://www.example.com (අවසානයේ පොදු පැත්තට එක් නැත.)',
+                'design'                  => 'නරකය',
+                'theme'                   => 'තේමා',
+                'logo'                    => 'ලෝගෝ',
+                'allowed-ips'             => 'ඉඩ දෙන IP ප්‍රතිපාදන',
+                'logo-size'               => 'රූපයේ ස්ථාන වලට 192px X 50px වල එවක් එළිය වේ',
+                'favicon'                 => 'Favicon',
+                'favicon-size'            => 'Favicon ස්ථාන වලට 16px X 16px වල එවක් එළිය වේ',
+                'seo'                     => 'මුල් පිටව නිවේදනය SEO',
+                'seo-title'               => 'මෙටා මාතෘකා',
+                'seo-description'         => 'මෙටා විස්තර',
+                'seo-keywords'            => 'මෙටා නිර්ණායක',
+                'currencies-and-locales'  => 'මුදල් සහ ස්ථාන',
+                'locales'                 => 'ස්ථාන',
+                'default-locale'          => 'පෙරනි ස්ථාන',
+                'currencies'              => 'මුදල්',
+                'default-currency'        => 'පෙරනි මුදල',
+                'last-delete-error'       => 'අවශ්‍යවන්ගේ චැනලඑක එකතු කරන්න.',
+                'settings'                => 'සැකසුම්',
+                'status'                  => 'තත්වය',
+                'select-root-category'    => 'මූලික ප්‍රවර්ගය තෝරනවා',
+                'select-theme'            => 'තේමාව තෝරනවා',
+                'select-default-locale'   => 'ස්ථාපන භාෂාව තෝරනවා',
+                'select-default-currency' => 'ස්ථාපන වෙනත් මුදල තෝරනවා',
+                'maintenance-mode-text'   => 'පරික්ෂා පෙලවන පණිවුඩය',
+                'create-success'          => 'චැනලය සාර්ථකව සාදන ලදි.'
             ],
 
             'edit' => [
@@ -3034,6 +3043,28 @@ return [
                 'qty' => ':qty ලබාදුයි',
             ],
         ],
+
+        'media' => [
+            'images' => [
+                'add-image-btn'     => 'රූපය එකතු කරන්න',
+                'allowed-types'     => 'png, jpeg, jpg',
+                'not-allowed-error' => 'එක්සත් ගොනුවේ පමණ (.jpeg, .jpg, .png, ..) වල ගොනුවක් සඳහා සමීක්ෂා කළ යුතුය.',
+
+                'placeholders'  => [
+                    'front'     => 'මුර',
+                    'next'      => 'ඊළඟ',
+                    'size'      => 'ප්‍රමාණය',
+                    'use-cases' => 'භාවිතා කිරීම්',
+                    'zoom'      => 'ස්මෙයිල්',
+                ],
+            ],
+
+            'videos' => [
+                'add-video-btn'     => 'වීඩියෝ එකතු කරන්න',
+                'allowed-types'     => 'mp4, webm, mkv',
+                'not-allowed-error' => 'වීඩියෝ ගොනුවේ පමණ (.mp4, .mov, .ogg ..) වල ගොනුවක් සඳහා සමීක්ෂා කළ යුතුය.',
+            ],
+        ]
     ],
 
     'acl' => [
@@ -3149,6 +3180,15 @@ return [
     'emails' => [
         'dear'   => 'මහේෂ් :customer_name',
         'thanks' => 'ඔබට කුමු උපකාර අවශ්‍යයිද? කරුණාකර <a href=":link" style=":style">:email</a> අමතන්න.<br/>ස්තූති!',
+
+        'admin' => [
+            'forgot-password' => [
+                'subject'        => 'මුරපද නැවත සකසන්නේ ඊමේල්',
+                'greeting'       => 'මුරපද අමතපව!',
+                'description'    => 'ඔබට මෙම ඊමේල් ලිපිනයට සකසන සඳහා අපේට ඊමේල් ලිපිනයට ඉහල එක් ලිපිනයේ තැබීමේ ඉල්ලයට හදනු ලැබුවේ.',
+                'reset-password' => 'මුරපද නැවත සකසන්න',
+            ],
+        ],
 
         'orders' => [
             'created' => [

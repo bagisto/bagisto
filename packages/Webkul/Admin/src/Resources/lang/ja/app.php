@@ -89,6 +89,8 @@ return [
             'date-duration'               => ':start - :end',
             'decreased'                   => ':progress%',
             'end-date'                    => '終了日',
+            'empty-threshold'             => '空のしきい値',
+            'empty-threshold-description' => '商品は利用できません',
             'from'                        => '開始',
             'increased'                   => ':progress%',
             'more-products'               => ':product_count+ 画像以上',
@@ -124,8 +126,6 @@ return [
             'user-name'                   => 'こんにちは！ :user_name さん',
             'user-info'                   => 'ストアで何が起こっているかをすばやく確認',
             'visitor'                     => '訪問者',
-            'empty-threshold'             => '空のしきい値',
-            'empty-threshold-description' => '商品は利用できません',
         ],
     ],
 
@@ -578,27 +578,13 @@ return [
                 ],
 
                 'images' => [
-                    'add-image-btn'     => '画像を追加',
-                    'allowed-types'     => 'png、jpeg、jpg',
-                    'info'              => '画像の解像度は 609px x 560px のようにする必要があります。',
-                    'not-allowed-error' => '画像ファイル（.jpeg、.jpg、.png、..）のみ許可されています。',
-                    'title'             => '画像',
-
-                    'placeholders'  => [
-                        'front'     => '前面',
-                        'next'      => '次',
-                        'size'      => 'サイズ',
-                        'use-cases' => '用途',
-                        'zoom'      => 'ズーム',
-                    ],
+                    'title' => '画像',
+                    'info'  => '画像の解像度は 609px x 560px のようにする必要があります。',
                 ],
 
                 'videos' => [
-                    'add-video-btn'     => 'ビデオを追加',
-                    'allowed-types'     => 'mp4、webm、mkv',
-                    'info'              => '最大ビデオサイズは :size となります',
-                    'not-allowed-error' => 'ビデオファイルのみ許可されています（.mp4、.mov、.ogg ..）。',
-                    'title'             => 'ビデオ',
+                    'title' => 'ビデオ',
+                    'info'  => '最大ビデオサイズは :size となります',
                 ],
 
                 'links' => [
@@ -661,6 +647,19 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'ステータス',
                             'weight'          => '重さ',
+                        ],
+
+                        'mass-edit' => [
+                            'select-variants'  => 'バリアントを選択',
+                            'select-action'    => 'アクションを選択',
+                            'edit-prices'      => '価格を編集',
+                            'edit-inventories' => '在庫を編集',
+                            'add-images'       => '画像を追加',
+                            'remove-images'    => '画像を削除',
+                            'remove-variants'  => 'バリアントを削除',
+                            'price'            => '価格',
+                            'apply-to-all-sku' => 'すべてのSKUに価格を適用する。',
+                            'apply-to-all-btn' => 'すべてに適用',
                         ],
                     ],
 
@@ -1375,6 +1374,8 @@ return [
                 'save-btn-title'  => '住所を保存',
             ],
 
+            'create-success'      => 'アドレスが正常に作成されました',
+            'update-success'      => 'アドレスが正常に更新されました',
             'success-mass-delete' => '住所の一括削除に成功しました',
         ],
     ],
@@ -1463,6 +1464,8 @@ return [
                     'select-template' => 'テンプレートを選択',
                     'select-event'    => 'イベントを選択',
                     'select-status'   => 'ステータスを選択',
+                    'select-channel'  => 'チャンネルを選択',
+                    'select-group'    => 'グループを選択',
                     'subject'         => '件名',
                     'title'           => 'キャンペーンを作成',
                 ],
@@ -1995,12 +1998,13 @@ return [
                 ],
 
                 'create'  =>  [
-                    'code'        => 'コード',
-                    'name'        => '名前',
-                    'direction'   => '方向',
-                    'locale-logo' => 'ロケールロゴ',
-                    'title'       => 'ロケールを作成',
-                    'save-btn'    => 'ロケールを保存',
+                    'code'             => 'コード',
+                    'name'             => '名前',
+                    'direction'        => '方向',
+                    'locale-logo'      => 'ロケールロゴ',
+                    'title'            => 'ロケールを作成',
+                    'save-btn'         => 'ロケールを保存',
+                    'select-direction' => '方向を選択',
                 ],
 
                 'edit'  => [
@@ -2067,12 +2071,13 @@ return [
                 'update-rates'  => '為替レートを更新',
 
                 'create' => [
-                    'delete-warning'  => '本当にこのアクションを実行しますか？',
-                    'title'           => '為替レートを作成',
-                    'rate'            => 'レート',
-                    'save-btn'        => '為替レートを保存',
-                    'source-currency' => '元通貨',
-                    'target-currency' => 'ターゲット通貨',
+                    'delete-warning'         => '本当にこのアクションを実行しますか？',
+                    'title'                  => '為替レートを作成',
+                    'rate'                   => 'レート',
+                    'save-btn'               => '為替レートを保存',
+                    'source-currency'        => '元通貨',
+                    'select-target-currency' => '目標通貨を選択',
+                    'target-currency'        => 'ターゲット通貨',
                 ],
 
                 'edit' => [
@@ -2297,38 +2302,42 @@ return [
             ],
 
             'create' => [
-                'title'                  => 'チャネルを作成',
-                'cancel'                 => '戻る',
-                'save-btn'               => 'チャネルを保存',
-                'general'                => '一般',
-                'code'                   => 'コード',
-                'name'                   => '名前',
-                'description'            => '説明',
-                'inventory-sources'      => '在庫ソース',
-                'root-category'          => 'ルートカテゴリー',
-                'hostname'               => 'ホスト名',
-                'hostname-placeholder'   => 'https://www.example.com（末尾にスラッシュを追加しないでください。）',
-                'design'                 => 'デザイン',
-                'theme'                  => 'テーマ',
-                'logo'                   => 'ロゴ',
-                'allowed-ips'            => '許可されたIP',
-                'logo-size'              => '画像の解像度は192px X 50pxのようにする必要があります',
-                'favicon'                => 'ファビコン',
-                'favicon-size'           => '画像の解像度は16px X 16pxのようにする必要があります',
-                'seo'                    => 'ホームページのSEO',
-                'seo-title'              => 'メタタイトル',
-                'seo-description'        => 'メタディスクリプション',
-                'seo-keywords'           => 'メタキーワード',
-                'currencies-and-locales' => '通貨とロケール',
-                'locales'                => 'ロケール',
-                'default-locale'         => 'デフォルトロケール',
-                'currencies'             => '通貨',
-                'default-currency'       => 'デフォルト通貨',
-                'last-delete-error'      => '少なくとも1つのチャネルが必要です。',
-                'settings'               => '設定',
-                'status'                 => 'ステータス',
-                'maintenance-mode-text'  => 'メッセージ',
-                'create-success'         => 'チャネルが正常に作成されました。',
+                'title'                   => 'チャネルを作成',
+                'cancel'                  => '戻る',
+                'save-btn'                => 'チャネルを保存',
+                'general'                 => '一般',
+                'code'                    => 'コード',
+                'name'                    => '名前',
+                'description'             => '説明',
+                'inventory-sources'       => '在庫ソース',
+                'root-category'           => 'ルートカテゴリー',
+                'hostname'                => 'ホスト名',
+                'hostname-placeholder'    => 'https://www.example.com（末尾にスラッシュを追加しないでください。）',
+                'design'                  => 'デザイン',
+                'theme'                   => 'テーマ',
+                'logo'                    => 'ロゴ',
+                'allowed-ips'             => '許可されたIP',
+                'logo-size'               => '画像の解像度は192px X 50pxのようにする必要があります',
+                'favicon'                 => 'ファビコン',
+                'favicon-size'            => '画像の解像度は16px X 16pxのようにする必要があります',
+                'seo'                     => 'ホームページのSEO',
+                'seo-title'               => 'メタタイトル',
+                'seo-description'         => 'メタディスクリプション',
+                'seo-keywords'            => 'メタキーワード',
+                'currencies-and-locales'  => '通貨とロケール',
+                'locales'                 => 'ロケール',
+                'default-locale'          => 'デフォルトロケール',
+                'currencies'              => '通貨',
+                'default-currency'        => 'デフォルト通貨',
+                'last-delete-error'       => '少なくとも1つのチャネルが必要です。',
+                'settings'                => '設定',
+                'status'                  => 'ステータス',
+                'select-root-category'    => 'ルートカテゴリを選択',
+                'select-theme'            => 'テーマを選択',
+                'select-default-locale'   => 'デフォルトロケールを選択',
+                'select-default-currency' => 'デフォルト通貨を選択',
+                'maintenance-mode-text'   => 'メッセージ',
+                'create-success'          => 'チャネルが正常に作成されました。',
             ],
 
             'edit' => [
@@ -3033,6 +3042,28 @@ return [
                 'qty'         => ':qty 個利用可能',
             ],
         ],
+
+        'media' => [
+            'images' => [
+                'add-image-btn'     => '画像を追加',
+                'allowed-types'     => 'png、jpeg、jpg',
+                'not-allowed-error' => '画像ファイル（.jpeg、.jpg、.png、..）のみ許可されています。',
+
+                'placeholders'  => [
+                    'front'     => '前面',
+                    'next'      => '次',
+                    'size'      => 'サイズ',
+                    'use-cases' => '用途',
+                    'zoom'      => 'ズーム',
+                ],
+            ],
+
+            'videos' => [
+                'add-video-btn'     => 'ビデオを追加',
+                'allowed-types'     => 'mp4、webm、mkv',
+                'not-allowed-error' => 'ビデオファイルのみ許可されています（.mp4、.mov、.ogg ..）。',
+            ],
+        ]
     ],
 
     'acl' => [
@@ -3148,6 +3179,15 @@ return [
     'emails' => [
         'dear'   => '尊敬する :customer_name さん',
         'thanks' => '何かお手伝いが必要な場合は、<a href=":link" style=":style">:email</a> でお問い合わせいただくか、ご連絡ください。<br/>ありがとうございます！',
+
+        'admin' => [
+            'forgot-password' => [
+                'subject'        => 'パスワードリセットメール',
+                'greeting'       => 'パスワードを忘れました！',
+                'description'    => 'このメールは、アカウントのパスワードリセットリクエストを受けたため、お送りしています。',
+                'reset-password' => 'パスワードをリセット',
+            ],
+        ],
 
         'orders' => [
             'created' => [
