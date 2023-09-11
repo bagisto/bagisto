@@ -45,13 +45,15 @@ class ProductDataGrid extends DataGrid
             $whereInLocales = [core()->getRequestedLocaleCode()];
         }
 
+        $tablePrefix = DB::getTablePrefix();
+
         /**
          * Query Builder to fetch records from `product_flat` table
          */
         $queryBuilder = DB::table('product_flat')
             ->leftJoin('attribute_families as af', 'product_flat.attribute_family_id', '=', 'af.id')
             ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
-            ->leftJoin('product_images as images', 'product_flat.product_id', '=', 'images.product_id')
+            ->leftJoin('product_images', 'product_flat.product_id', '=', 'product_images.product_id')
             ->distinct()
             ->leftJoin('product_categories as pc', 'product_flat.product_id', '=', 'pc.product_id')
             ->leftJoin('category_translations as ct', function ($leftJoin) use ($whereInLocales) {
@@ -61,7 +63,7 @@ class ProductDataGrid extends DataGrid
             ->select(
                 'product_flat.locale',
                 'product_flat.channel',
-                'images.path as base_image',
+                'product_images.path as base_image',
                 'pc.category_id',
                 'ct.name as category_name',
                 'product_flat.product_id',
@@ -73,9 +75,9 @@ class ProductDataGrid extends DataGrid
                 'product_flat.url_key',
                 'product_flat.visible_individually',
                 'af.name as attribute_family',
-                DB::raw('SUM(' . DB::getTablePrefix() . 'product_inventories.qty) as quantity')
+                DB::raw('SUM(' . $tablePrefix . 'product_inventories.qty) as quantity')
             )
-            ->addSelect(DB::raw('COUNT(DISTINCT images.id) as images_count'));
+            ->addSelect(DB::raw('COUNT(DISTINCT ' . $tablePrefix . 'product_images.id) as images_count'));
 
         $queryBuilder->groupBy(
             'product_flat.product_id',
