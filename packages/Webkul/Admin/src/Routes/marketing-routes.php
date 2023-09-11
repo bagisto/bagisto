@@ -46,6 +46,8 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
                 Route::post('{id}', 'store')->name('admin.marketing.promotions.cart_rules.coupons.store');
 
+                Route::delete('edit/{id}', 'destroy')->name('admin.marketing.promotions.cart_rules.coupons.delete');
+
                 Route::post('mass-delete', 'massDelete')->name('admin.marketing.promotions.cart_rules.coupons.mass_delete');
             });
 
