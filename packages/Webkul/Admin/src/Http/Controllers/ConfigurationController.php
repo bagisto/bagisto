@@ -92,10 +92,10 @@ class ConfigurationController extends Controller
 
                 return redirect()->back();
             }
-        } elseif (isset($data['sales']['paymentmethods'])) {
+        } elseif (isset($data['sales']['payment_methods'])) {
             $atLeastOnePaymentMethodEnabled = false;
 
-            foreach ($data['sales']['paymentmethods'] as $paymentMethod) {
+            foreach ($data['sales']['payment_methods'] as $paymentMethod) {
                 if ($paymentMethod['active']) {
                     $atLeastOnePaymentMethodEnabled = true;
 

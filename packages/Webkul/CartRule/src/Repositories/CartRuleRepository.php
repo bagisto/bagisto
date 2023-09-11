@@ -312,7 +312,7 @@ class CartRuleRepository extends Repository
     {
         $methods = [];
 
-        foreach (config('paymentmethods') as $paymentMethod) {
+        foreach (config('payment_methods') as $paymentMethod) {
             $object = app($paymentMethod['class']);
 
             $methods[] = [

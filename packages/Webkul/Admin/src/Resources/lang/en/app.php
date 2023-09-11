@@ -2813,27 +2813,36 @@ return [
                 'info'  => 'Customer',
 
                 'address' => [
-                    'title'              => 'Address',
-                    'info'               => 'Set country, state, zip and lines in a street address.',
-                    'requirements'       => 'Requirements',
-                    'requirements-info'  => 'Requirements are the conditions, features, or specifications necessary for something to be fulfilled, achieved, or met successfully.',
-                    'country'            => 'Country',
-                    'state'              => 'State',
-                    'zip'                => 'Zip',
-                    'city'               => 'City',
-                    'information'        => 'Information',
-                    'information-info'   => '"Lines in a street address" refer to individual segments of an address, often separated by commas, providing location information such as house number, street, city, and more.',
-                    'street-lines'       => 'Lines in a Street Address',
+                    'title' => 'Address',
+                    'info'  => 'Set country, state, zip and lines in a street address.',
+
+                    'requirements' => [
+                        'title'      => 'Requirements',
+                        'title-info' => 'Requirements are the conditions, features, or specifications necessary for something to be fulfilled, achieved, or met successfully.',
+                        'country'    => 'Country',
+                        'state'      => 'State',
+                        'zip'        => 'Zip',
+                        'city'       => 'City',
+                    ],
+
+                    'information' => [
+                        'title'        => 'Information',
+                        'title-info'   => '"Lines in a street address" refer to individual segments of an address, often separated by commas, providing location information such as house number, street, city, and more.',
+                        'street-lines' => 'Lines in a Street Address',
+                    ],
                 ],
 
                 'captcha'  => [
                     'title'            => 'Captcha',
                     'info'             => 'Set site key, secret key and status.',
-                    'credentials'      => 'Credentials',
-                    'credentials-info' => '"Sitemap: Website layout map for search engines. Secret key: Secure code for data encryption, authentication, or API access protection."',
-                    'site-key'         => 'Site Key',
-                    'secret-key'       => 'Secret Key',
-                    'status'           => 'Status',
+
+                    'credentials' => [
+                        'title'      => 'Credentials',
+                        'title-info' => '"Sitemap: Website layout map for search engines. Secret key: Secure code for data encryption, authentication, or API access protection."',
+                        'site-key'   => 'Site Key',
+                        'secret-key' => 'Secret Key',
+                        'status'     => 'Status',
+                    ],
 
                     'validations' => [
                         'required' => 'Please select CAPTCHA',
@@ -2844,15 +2853,24 @@ return [
                 'settings' => [
                     'title'                   => 'Settings',
                     'settings-info'           => 'Set wishlist, newsletter subscriptions, email verifications and social login.',
-                    'wishlist'                => 'Wishlist',
-                    'wishlist-info'           => '"Wishlist" is a personalized collection of desired items, allowing users to save products for future reference or potential purchase.',
-                    'wishlist-share'          => 'Enable Sharing',
-                    'newsletter'              => 'Newsletter Subscription',
-                    'newsletter-info'         => '"Newsletter information" contains updates, offers, or content shared regularly through emails to subscribers, keeping them informed and engaged.',
-                    'newsletter-subscription' => 'Allow Newsletter Subscription',
-                    'email'                   => 'Email Verification',
-                    'email-info'              => '"Email verification" confirms the authenticity of an email address, often by sending a confirmation link, enhancing account security and communication reliability.',
-                    'email-verification'      => 'Allow Email Verification',
+
+                    'wishlist' => [
+                        'title'      => 'Wishlist',
+                        'title-info' => '"Wishlist" is a personalized collection of desired items, allowing users to save products for future reference or potential purchase.',
+                        'share'      => 'Enable Sharing',
+                    ],
+
+                    'newsletter' => [
+                        'title'        => 'Newsletter Subscription',
+                        'title-info'   => '"Newsletter information" contains updates, offers, or content shared regularly through emails to subscribers, keeping them informed and engaged.',
+                        'subscription' => 'Allow Newsletter Subscription',
+                    ],
+
+                    'email' => [
+                        'title'              => 'Email Verification',
+                        'title-info'         => '"Email verification" confirms the authenticity of an email address, often by sending a confirmation link, enhancing account security and communication reliability.',
+                        'email-verification' => 'Allow Email Verification',
+                    ],
 
                     'social-login' => [
                         'social-login'      => 'Social Login',
@@ -2908,31 +2926,43 @@ return [
                 'shipping' => [
                     'title'          => 'Shipping',
                     'info'           => 'Set shipping information.',
-                    'origin'         => 'Origin',
-                    'origin-info'    => 'Shipping origin refers to the location where goods or products originate before being transported to their destination.',
-                    'country'        => 'Country',
-                    'state'          => 'State',
-                    'zip'            => 'Zip',
-                    'city'           => 'City',
-                    'street-address' => 'Street Address',
-                    'store-name'     => 'Store Name',
-                    'vat-number'     => 'Vat Number',
-                    'contact-number' => 'Contact Number',
-                    'bank-details'   => 'Bank Details',
+
+                    'origin' => [
+                        'title'          => 'Origin',
+                        'title-info'     => 'Shipping origin refers to the location where goods or products originate before being transported to their destination.',
+                        'country'        => 'Country',
+                        'state'          => 'State',
+                        'zip'            => 'Zip',
+                        'city'           => 'City',
+                        'street-address' => 'Street Address',
+                        'store-name'     => 'Store Name',
+                        'vat-number'     => 'Vat Number',
+                        'contact-number' => 'Contact Number',
+                        'bank-details'   => 'Bank Details',
+                    ],
                 ],
 
                 'shipping-methods' => [
-                    'page-title'                => 'Shipping Methods',
+                    'title'                => 'Shipping Methods',
                     'info'                      => 'Set shipping methods information',
-                    'free-shipping'             => 'Free Shipping',
-                    'free-shipping-info'        => '"Free shipping" refers to a shipping method where the cost of shipping is waived, and the seller covers the shipping expenses for delivering goods to the buyer.',
-                    'flat-rate-shipping'        => 'Flat Rate Shipping',
-                    'flat-rate-shipping-info'   => 'Flat rate shipping is a shipping method where a fixed fee is charged for shipping, regardless of the weight, size, or distance of the package. This simplifies shipping costs and can be advantageous for both buyers and sellers.',
-                    'title'                     => 'Title',
-                    'description'               => 'Description',
-                    'rate'                      => 'Rate',
-                    'status'                    => 'Status',
-                    'type'                      => 'Type',
+
+                    'free-shipping' => [
+                        'page-title'  => 'Free Shipping',
+                        'title-info'  => '"Free shipping" refers to a shipping method where the cost of shipping is waived, and the seller covers the shipping expenses for delivering goods to the buyer.',
+                        'title'       => 'Title',
+                        'description' => 'Description',
+                        'status'      => 'Status',
+                    ],
+
+                    'flat-rate-shipping' => [
+                        'page-title'  => 'Flat Rate Shipping',
+                        'title-info'  => 'Flat rate shipping is a shipping method where a fixed fee is charged for shipping, regardless of the weight, size, or distance of the package. This simplifies shipping costs and can be advantageous for both buyers and sellers.',
+                        'title'       => 'Title',
+                        'description' => 'Description',
+                        'rate'        => 'Rate',
+                        'status'      => 'Status',
+                        'type'        => 'Type',
+                    ],
                 ],
 
                 'payment-methods' => [
@@ -2971,56 +3001,82 @@ return [
                 ],
 
                 'order-settings' => [
-                    'title'                         => 'Order Settings',
-                    'info'                          => 'Set order numbers and minimum orders.',
-                    'order-number'                  => 'Order Number Settings',
-                    'order-number-info'             => 'Unique identifier assigned to a specific customer order, aiding tracking, communication, and reference throughout the purchasing process.',
-                    'order-number-prefix'           => 'Order Number Prefix',
-                    'order-number-length'           => 'Order Number Length',
-                    'order-number-suffix'           => 'Order Number Suffix',
-                    'order-number-generator-class'  => 'Order Number Generator',
-                    'minimum-order'                 => 'Minimum Order Settings',
-                    'minimum-order-info'            => 'Configured criteria specifying the lowest required quantity or value for an order to be processed or qualify for benefits.',
-                    'minimum-order-amount'          => 'Minimum Order Amount',
+                    'title' => 'Order Settings',
+                    'info'  => 'Set order numbers and minimum orders.',
+
+                    'order-number' => [
+                        'title'       => 'Order Number Settings',
+                        'title-info'  => 'Unique identifier assigned to a specific customer order, aiding tracking, communication, and reference throughout the purchasing process.',
+                        'prefix'      => 'Order Number Prefix',
+                        'length'      => 'Order Number Length',
+                        'suffix'      => 'Order Number Suffix',
+                        'generator'   => 'Order Number Generator',
+                    ],
+
+                    'minimum-order' => [
+                        'title'                => 'Minimum Order Settings',
+                        'title-info'           => 'Configured criteria specifying the lowest required quantity or value for an order to be processed or qualify for benefits.',
+                        'minimum-order-amount' => 'Minimum Order Amount',
+                    ],
                 ],
 
                 'invoice-settings' => [
-                    'title'                            => 'Invoice Settings',
-                    'info'                             => 'Set invoice number, payment terms, invoice slip design and invoice reminders.',
-                    'invoice-number'                   => 'Invoice Number Settings',
-                    'invoice-number-info'              => 'Configuration of rules or parameters for generating and assigning unique identification numbers to invoices for organizational and tracking purposes.',
-                    'invoice-number-prefix'            => 'Invoice Number Prefix',
-                    'invoice-number-length'            => 'Invoice Number Length',
-                    'invoice-number-suffix'            => 'Invoice Number Suffix',
-                    'invoice-number-generator-class'   => 'Invoice Number Generator',
-                    'payment-terms'                    => 'Payment Terms',
-                    'payment-terms-info'               => 'Agreed-upon conditions dictating when and how payment for goods or services should be made by the buyer to the seller.',
-                    'due-duration'                     => 'Due Duration',
-                    'due-duration-day'                 => ':due-duration Day',
-                    'due-duration-days'                => ':due-duration Days',
-                    'invoice-slip-design'              => 'Invoice Slip Design',
-                    'invoice-slip-design-info'         => 'Visual layout and formatting of an invoice slip, including company branding, itemization, pricing, and payment details for professional presentation.',
-                    'logo'                             => 'Logo',
-                    'default'                          => 'Default',
-                    'invoice-reminders'                => 'Invoice Reminders',
-                    'invoice-reminders-info'           => 'Automated notifications or communications sent to customers to remind them of upcoming or overdue payments for invoices.',
-                    'maximum-limit-of-reminders'       => 'Maximum limit of reminders',
-                    'interval-between-reminders'       => 'Interval between reminders',
+                    'title' => 'Invoice Settings',
+                    'info'  => 'Set invoice number, payment terms, invoice slip design and invoice reminders.',
+
+                    'invoice-number' => [
+                        'title'      => 'Invoice Number Settings',
+                        'title-info' => 'Configuration of rules or parameters for generating and assigning unique identification numbers to invoices for organizational and tracking purposes.',
+                        'prefix'     => 'Invoice Number Prefix',
+                        'length'     => 'Invoice Number Length',
+                        'suffix'     => 'Invoice Number Suffix',
+                        'generator'  => 'Invoice Number Generator',
+                    ],
+
+                    'payment-terms' => [
+                        'title'             => 'Payment Terms',
+                        'title-info'        => 'Agreed-upon conditions dictating when and how payment for goods or services should be made by the buyer to the seller.',
+                        'due-duration'      => 'Due Duration',
+                        'due-duration-day'  => ':due-duration Day',
+                        'due-duration-days' => ':due-duration Days',
+                    ],
+
+                    'invoice-slip-design' => [
+                        'title'      => 'Invoice Slip Design',
+                        'title-info' => 'Visual layout and formatting of an invoice slip, including company branding, itemization, pricing, and payment details for professional presentation.',
+                        'logo'       => 'Logo',
+                    ],
+
+                    'invoice-reminders' => [
+                        'title'                      => 'Invoice Reminders',
+                        'title-info'                 => 'Automated notifications or communications sent to customers to remind them of upcoming or overdue payments for invoices.',
+                        'maximum-limit-of-reminders' => 'Maximum limit of reminders',
+                        'interval-between-reminders' => 'Interval between reminders',
+                    ],
                 ],
             ],
 
             'taxes' => [
-                'title'                             => 'Taxes',
-                'catalogue'                         => 'Catalog',
-                'catalogue-info'                    => 'Set pricing and default location calculations',
-                'pricing'                           => 'Pricing',
-                'pricing-info'                      => 'Details about the cost of goods or services, including base price, discounts, taxes, and additional charges.information',
-                'tax-inclusive'                     => 'Tax inclusive',
-                'default-location-calculation'      => 'Default Location Calculation',
-                'default-location-calculation-info' => 'Automated determination of a standard or initial location based on predefined factors or settings.',
-                'default-country'                   => 'Default Country',
-                'default-state'                     => 'Default State',
-                'default-post-code'                 => 'Default Post Code',
+                'title' => 'Taxes',
+
+                'catalog' => [
+                    'title'      => 'Catalog',
+                    'title-info' => 'Set pricing and default location calculations',
+
+                    'pricing' => [
+                        'title'         => 'Pricing',
+                        'title-info'    => 'Details about the cost of goods or services, including base price, discounts, taxes, and additional charges.information',
+                        'tax-inclusive' => 'Tax inclusive',
+                    ],
+
+                    'default-location-calculation' => [
+                        'title'             => 'Default Location Calculation',
+                        'title-info'        => 'Automated determination of a standard or initial location based on predefined factors or settings.',
+                        'default-country'   => 'Default Country',
+                        'default-state'     => 'Default State',
+                        'default-post-code' => 'Default Post Code',
+                    ],
+                ],
             ],
         ],
     ],

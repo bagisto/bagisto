@@ -483,27 +483,27 @@ return [
         'sort' => 1,
     ], [
         'key'    => 'customer.address.requirements',
-        'name'   => 'admin::app.configuration.index.customer.address.requirements',
-        'info'   => 'admin::app.configuration.index.customer.address.requirements-info',
+        'name'   => 'admin::app.configuration.index.customer.address.requirements.title',
+        'info'   => 'admin::app.configuration.index.customer.address.requirements.title-info',
         'sort'   => 1,
         'fields' => [
             [
                 'name'          => 'country',
-                'title'         => 'admin::app.configuration.index.customer.address.country',
+                'title'         => 'admin::app.configuration.index.customer.address.requirements.country',
                 'type'          => 'boolean',
                 'channel_based' => true,
                 'default'       => '1',
             ],
             [
                 'name'          => 'state',
-                'title'         => 'admin::app.configuration.index.customer.address.state',
+                'title'         => 'admin::app.configuration.index.customer.address.requirements.state',
                 'type'          => 'boolean',
                 'channel_based' => true,
                 'default'       => '1',
             ],
             [
                 'name'          => 'postcode',
-                'title'         => 'admin::app.configuration.index.customer.address.zip',
+                'title'         => 'admin::app.configuration.index.customer.address.requirements.zip',
                 'type'          => 'boolean',
                 'channel_based' => true,
                 'default'       => '1',
@@ -511,13 +511,13 @@ return [
         ],
     ], [
         'key'    => 'customer.address.information',
-        'name'   => 'admin::app.configuration.index.customer.address.information',
-        'info'   => 'admin::app.configuration.index.customer.address.information-info',
+        'name'   => 'admin::app.configuration.index.customer.address.information.title',
+        'info'   => 'admin::app.configuration.index.customer.address.information.title-info',
         'sort'   => 2,
         'fields' => [
             [
                 'name'          => 'street_lines',
-                'title'         => 'admin::app.configuration.index.customer.address.street-lines',
+                'title'         => 'admin::app.configuration.index.customer.address.information.street-lines',
                 'type'          => 'text',
                 'validation'    => 'between:1,4',
                 'channel_based' => true,
@@ -531,23 +531,23 @@ return [
         'sort' => 2,
     ], [
         'key'    => 'customer.captcha.credentials',
-        'name'   => 'admin::app.configuration.index.customer.captcha.credentials',
-        'info'   => 'admin::app.configuration.index.customer.captcha.credentials-info',
+        'name'   => 'admin::app.configuration.index.customer.captcha.credentials.title',
+        'info'   => 'admin::app.configuration.index.customer.captcha.credentials.title-info',
         'sort'   => 1,
         'fields' => [
             [
                 'name'          => 'site_key',
-                'title'         => 'admin::app.configuration.index.customer.captcha.site-key',
+                'title'         => 'admin::app.configuration.index.customer.captcha.credentials.site-key',
                 'type'          => 'text',
                 'channel_based' => true,
             ], [
                 'name'          => 'secret_key',
-                'title'         => 'admin::app.configuration.index.customer.captcha.secret-key',
+                'title'         => 'admin::app.configuration.index.customer.captcha.credentials.secret-key',
                 'type'          => 'text',
                 'channel_based' => true,
             ], [
                 'name'          => 'status',
-                'title'         => 'admin::app.configuration.index.customer.captcha.status',
+                'title'         => 'admin::app.configuration.index.customer.captcha.credentials.status',
                 'type'          => 'boolean',
                 'channel_based' => true,
             ],
@@ -560,37 +560,37 @@ return [
         'sort' => 3,
     ], [
         'key'    => 'customer.settings.wishlist',
-        'name'   => 'admin::app.configuration.index.customer.settings.wishlist',
-        'info'   => 'admin::app.configuration.index.customer.settings.wishlist-info',
+        'name'   => 'admin::app.configuration.index.customer.settings.wishlist.title',
+        'info'   => 'admin::app.configuration.index.customer.settings.wishlist.title-info',
         'sort'   => 1,
         'fields' => [
             [
                 'name'  => 'share',
-                'title' => 'admin::app.configuration.index.customer.settings.wishlist-share',
+                'title' => 'admin::app.configuration.index.customer.settings.wishlist.share',
                 'type'  => 'boolean',
             ],
         ],
     ], [
         'key'    => 'customer.settings.newsletter',
-        'name'   => 'admin::app.configuration.index.customer.settings.newsletter',
-        'info'   => 'admin::app.configuration.index.customer.settings.newsletter-info',
+        'name'   => 'admin::app.configuration.index.customer.settings.newsletter.title',
+        'info'   => 'admin::app.configuration.index.customer.settings.newsletter.title-info',
         'sort'   => 2,
         'fields' => [
             [
                 'name'  => 'subscription',
-                'title' => 'admin::app.configuration.index.customer.settings.newsletter-subscription',
+                'title' => 'admin::app.configuration.index.customer.settings.newsletter.subscription',
                 'type'  => 'boolean',
             ],
         ],
     ], [
         'key'    => 'customer.settings.email',
-        'name'   => 'admin::app.configuration.index.customer.settings.email',
-        'info'   => 'admin::app.configuration.index.customer.settings.email-info',
+        'name'   => 'admin::app.configuration.index.customer.settings.email.title',
+        'info'   => 'admin::app.configuration.index.customer.settings.email.title-info',
         'sort'   => 3,
         'fields' => [
             [
                 'name'  => 'verification',
-                'title' => 'admin::app.configuration.index.customer.settings.email-verification',
+                'title' => 'admin::app.configuration.index.customer.settings.email.email-verification',
                 'type'  => 'boolean',
             ],
         ],
@@ -759,82 +759,82 @@ return [
        'sort' => 1,
     ], [
         'key'    => 'sales.shipping.origin',
-        'name'   => 'admin::app.configuration.index.sales.shipping.origin',
-        'info'   => 'admin::app.configuration.index.sales.shipping.origin-info',
+        'name'   => 'admin::app.configuration.index.sales.shipping.origin.title',
+        'info'   => 'admin::app.configuration.index.sales.shipping.origin.title-info',
         'sort'   => 0,
         'fields' => [
             [
                 'name'          => 'country',
-                'title'         => 'admin::app.configuration.index.sales.shipping.country',
+                'title'         => 'admin::app.configuration.index.sales.shipping.origin.country',
                 'type'          => 'country',
                 'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
                 'name'          => 'state',
-                'title'         => 'admin::app.configuration.index.sales.shipping.state',
+                'title'         => 'admin::app.configuration.index.sales.shipping.origin.state',
                 'type'          => 'state',
                 'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
                 'name'          => 'city',
-                'title'         => 'admin::app.configuration.index.sales.shipping.city',
+                'title'         => 'admin::app.configuration.index.sales.shipping.origin.city',
                 'type'          => 'text',
                 'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
                 'name'          => 'address1',
-                'title'         => 'admin::app.configuration.index.sales.shipping.street-address',
+                'title'         => 'admin::app.configuration.index.sales.shipping.origin.street-address',
                 'type'          => 'text',
                 'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
                 'name'          => 'zipcode',
-                'title'         => 'admin::app.configuration.index.sales.shipping.zip',
+                'title'         => 'admin::app.configuration.index.sales.shipping.origin.zip',
                 'type'          => 'text',
                 'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
                 'name'          => 'store_name',
-                'title'         => 'admin::app.configuration.index.sales.shipping.store-name',
+                'title'         => 'admin::app.configuration.index.sales.shipping.origin.store-name',
                 'type'          => 'text',
                 'channel_based' => true,
             ], [
                 'name'          => 'vat_number',
-                'title'         => 'admin::app.configuration.index.sales.shipping.vat-number',
+                'title'         => 'admin::app.configuration.index.sales.shipping.origin.vat-number',
                 'type'          => 'text',
                 'channel_based' => true,
             ], [
                 'name'          => 'contact',
-                'title'         => 'admin::app.configuration.index.sales.shipping.contact-number',
+                'title'         => 'admin::app.configuration.index.sales.shipping.origin.contact-number',
                 'type'          => 'text',
                 'channel_based' => true,
             ], [
                 'name'          => 'bank_details',
-                'title'         => 'admin::app.configuration.index.sales.shipping.bank-details',
+                'title'         => 'admin::app.configuration.index.sales.shipping.origin.bank-details',
                 'type'          => 'textarea',
                 'channel_based' => true,
             ],
         ],
     ], [
         'key'  => 'sales.carriers',
-        'name' => 'admin::app.configuration.index.sales.shipping-methods.page-title',
+        'name' => 'admin::app.configuration.index.sales.shipping-methods.title',
         'info' => 'admin::app.configuration.index.sales.shipping-methods.info',
         'icon' => 'settings/shipping-method.svg',
         'sort' => 2,
     ], [
         'key'    => 'sales.carriers.free',
-        'name'   => 'admin::app.configuration.index.sales.shipping-methods.free-shipping',
-        'info'   => 'admin::app.configuration.index.sales.shipping-methods.free-shipping-info',
+        'name'   => 'admin::app.configuration.index.sales.shipping-methods.free-shipping.page-title',
+        'info'   => 'admin::app.configuration.index.sales.shipping-methods.free-shipping.title-info',
         'sort'   => 1,
         'fields' => [
             [
                 'name'          => 'title',
-                'title'         => 'admin::app.configuration.index.sales.shipping-methods.title',
+                'title'         => 'admin::app.configuration.index.sales.shipping-methods.free-shipping.title',
                 'type'          => 'depends',
                 'depend'        => 'active:1',
                 'validation'    => 'required_if:active,1',
@@ -842,13 +842,13 @@ return [
                 'locale_based'  => true,
             ], [
                 'name'          => 'description',
-                'title'         => 'admin::app.configuration.index.sales.shipping-methods.description',
+                'title'         => 'admin::app.configuration.index.sales.shipping-methods.free-shipping.description',
                 'type'          => 'textarea',
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
                 'name'          => 'active',
-                'title'         => 'admin::app.configuration.index.sales.shipping-methods.status',
+                'title'         => 'admin::app.configuration.index.sales.shipping-methods.free-shipping.status',
                 'type'          => 'boolean',
                 'validation'    => 'required',
                 'channel_based' => true,
@@ -857,13 +857,13 @@ return [
         ],
     ], [
         'key'    => 'sales.carriers.flat_rate',
-        'name'   => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping',
-        'info'   => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping-info',
+        'name'   => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping.page-title',
+        'info'   => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping.title-info',
         'sort'   => 2,
         'fields' => [
             [
                 'name'          => 'title',
-                'title'         => 'admin::app.configuration.index.sales.shipping-methods.title',
+                'title'         => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping.title',
                 'type'          => 'depends',
                 'depend'        => 'active:1',
                 'validation'    => 'required_if:active,1',
@@ -871,13 +871,13 @@ return [
                 'locale_based'  => true,
             ], [
                 'name'          => 'description',
-                'title'         => 'admin::app.configuration.index.sales.shipping-methods.description',
+                'title'         => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping.description',
                 'type'          => 'textarea',
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
                 'name'          => 'default_rate',
-                'title'         => 'admin::app.configuration.index.sales.shipping-methods.rate',
+                'title'         => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping.rate',
                 'type'          => 'depends',
                 'depend'        => 'active:1',
                 'validation'    => 'required_if:active,1',
@@ -885,7 +885,7 @@ return [
                 'locale_based'  => false,
             ], [
                 'name'    => 'type',
-                'title'   => 'admin::app.configuration.index.sales.shipping-methods.type',
+                'title'   => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping.type',
                 'type'    => 'select',
                 'options' => [
                     [
@@ -900,7 +900,7 @@ return [
                 'locale_based'  => false,
             ], [
                 'name'          => 'active',
-                'title'         => 'admin::app.configuration.index.sales.shipping-methods.status',
+                'title'         => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping.status',
                 'type'          => 'boolean',
                 'validation'    => 'required',
                 'channel_based' => true,
@@ -1174,80 +1174,80 @@ return [
         'info'   => 'admin::app.configuration.index.sales.payment-methods.paypal-smart-button-info',
         'sort'   => 0,
         'fields' => [
-            // [
-            //     'name'          => 'title',
-            //     'title'         => 'admin::app.configuration.index.sales.payment-methods.title',
-            //     'type'          => 'depends',
-            //     'depend'        => 'active:1',
-            //     'validation'    => 'required_if:active,1',
-            //     'channel_based' => true,
-            //     'locale_based'  => true,
-            // ], [
-            //     'name'          => 'description',
-            //     'title'         => 'admin::app.configuration.index.sales.payment-methods.description',
-            //     'type'          => 'textarea',
-            //     'channel_based' => true,
-            //     'locale_based'  => true,
-            // ], [
-            //     'name'          => 'client_id',
-            //     'title'         => 'admin::app.configuration.index.sales.payment-methods.client-id',
-            //     'info'          => 'admin::app.configuration.index.sales.payment-methods.client-id-info',
-            //     'type'          => 'depends',
-            //     'depend'        => 'active:1',
-            //     'validation'    => 'required_if:active,1',
-            //     'channel_based' => true,
-            //     'locale_based'  => false,
-            // ], [
-            //     'name'          => 'client_secret',
-            //     'title'         => 'admin::app.configuration.index.sales.payment-methods.client-secret',
-            //     'info'          => 'admin::app.configuration.index.sales.payment-methods.client-secret-info',
-            //     'type'          => 'depends',
-            //     'depend'        => 'active:1',
-            //     'validation'    => 'required_if:active,1',
-            //     'channel_based' => true,
-            //     'locale_based'  => false,
-            // ], [
-            //     'name'          => 'accepted_currencies',
-            //     'title'         => 'admin::app.configuration.index.sales.payment-methods.accepted-currencies',
-            //     'info'          => 'admin::app.configuration.index.sales.payment-methods.accepted-currencies-info',
-            //     'type'          => 'depends',
-            //     'depend'        => 'active:1',
-            //     'validation'    => 'required_if:active,1',
-            //     'channel_based' => true,
-            //     'locale_based'  => false,
-            // ], [
-            //     'name'          => 'active',
-            //     'title'         => 'admin::app.configuration.index.sales.payment-methods.status',
-            //     'type'          => 'boolean',
-            //     'validation'    => 'required',
-            //     'channel_based' => true,
-            //     'locale_based'  => false,
-            // ], [
-            //     'name'          => 'sandbox',
-            //     'title'         => 'admin::app.configuration.index.sales.payment-methods.sandbox',
-            //     'type'          => 'boolean',
-            //     'channel_based' => true,
-            //     'locale_based'  => false,
-            // ], [
-            //     'name'    => 'sort',
-            //     'title'   => 'admin::app.configuration.index.sales.payment-methods.sort-order',
-            //     'type'    => 'select',
-            //     'options' => [
-            //         [
-            //             'title' => '1',
-            //             'value' => 1,
-            //         ], [
-            //             'title' => '2',
-            //             'value' => 2,
-            //         ], [
-            //             'title' => '3',
-            //             'value' => 3,
-            //         ], [
-            //             'title' => '4',
-            //             'value' => 4,
-            //         ],
-            //     ],
-            // ]
+            [
+                'name'          => 'title',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.title',
+                'type'          => 'depends',
+                'depend'        => 'active:1',
+                'validation'    => 'required_if:active,1',
+                'channel_based' => true,
+                'locale_based'  => true,
+            ], [
+                'name'          => 'description',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.description',
+                'type'          => 'textarea',
+                'channel_based' => true,
+                'locale_based'  => true,
+            ], [
+                'name'          => 'client_id',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.client-id',
+                'info'          => 'admin::app.configuration.index.sales.payment-methods.client-id-info',
+                'type'          => 'depends',
+                'depend'        => 'active:1',
+                'validation'    => 'required',
+                'channel_based' => true,
+                'locale_based'  => false,
+            ], [
+                'name'          => 'client_secret',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.client-secret',
+                'info'          => 'admin::app.configuration.index.sales.payment-methods.client-secret-info',
+                'type'          => 'depends',
+                'depend'        => 'active:1',
+                'validation'    => 'required_if:active,1',
+                'channel_based' => true,
+                'locale_based'  => false,
+            ], [
+                'name'          => 'accepted_currencies',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.accepted-currencies',
+                'info'          => 'admin::app.configuration.index.sales.payment-methods.accepted-currencies-info',
+                'type'          => 'depends',
+                'depend'        => 'active:1',
+                'validation'    => 'required_if:active,1',
+                'channel_based' => true,
+                'locale_based'  => false,
+            ], [
+                'name'          => 'active',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.status',
+                'type'          => 'boolean',
+                'validation'    => 'required',
+                'channel_based' => true,
+                'locale_based'  => false,
+            ], [
+                'name'          => 'sandbox',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.sandbox',
+                'type'          => 'boolean',
+                'channel_based' => true,
+                'locale_based'  => false,
+            ], [
+                'name'    => 'sort',
+                'title'   => 'admin::app.configuration.index.sales.payment-methods.sort-order',
+                'type'    => 'select',
+                'options' => [
+                    [
+                        'title' => '1',
+                        'value' => 1,
+                    ], [
+                        'title' => '2',
+                        'value' => 2,
+                    ], [
+                        'title' => '3',
+                        'value' => 3,
+                    ], [
+                        'title' => '4',
+                        'value' => 4,
+                    ],
+                ],
+            ]
         ]
     ], [
         'key'  => 'sales.order_settings',
@@ -1257,34 +1257,34 @@ return [
         'sort' => 4,
     ], [
         'key'    => 'sales.order_settings.order_number',
-        'name'   => 'admin::app.configuration.index.sales.order-settings.order-number',
-        'info'   => 'admin::app.configuration.index.sales.order-settings.order-number-info',
+        'name'   => 'admin::app.configuration.index.sales.order-settings.order-number.title',
+        'info'   => 'admin::app.configuration.index.sales.order-settings.order-number.title-info',
         'sort'   => 0,
         'fields' => [
             [
                 'name'          => 'order_number_prefix',
-                'title'         => 'admin::app.configuration.index.sales.order-settings.order-number-prefix',
+                'title'         => 'admin::app.configuration.index.sales.order-settings.order-number.prefix',
                 'type'          => 'text',
                 'validation'    => false,
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
                 'name'          => 'order_number_length',
-                'title'         => 'admin::app.configuration.index.sales.order-settings.order-number-length',
+                'title'         => 'admin::app.configuration.index.sales.order-settings.order-number.length',
                 'type'          => 'text',
                 'validation'    => 'numeric',
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
                 'name'          => 'order_number_suffix',
-                'title'         => 'admin::app.configuration.index.sales.order-settings.order-number-suffix',
+                'title'         => 'admin::app.configuration.index.sales.order-settings.order-number.suffix',
                 'type'          => 'text',
                 'validation'    => false,
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
-                'name'          => 'order_number_generator_class',
-                'title'         => 'admin::app.configuration.index.sales.order-settings.order-number-generator-class',
+                'name'          => 'order_number_generator',
+                'title'         => 'admin::app.configuration.index.sales.order-settings.order-number.generator',
                 'type'          => 'text',
                 'validation'    => false,
                 'channel_based' => true,
@@ -1293,13 +1293,13 @@ return [
         ],
     ], [
         'key'    => 'sales.order_settings.minimum_order',
-        'name'   => 'admin::app.configuration.index.sales.order-settings.minimum-order',
-        'info'   => 'admin::app.configuration.index.sales.order-settings.minimum-order-info',
+        'name'   => 'admin::app.configuration.index.sales.order-settings.minimum-order.title',
+        'info'   => 'admin::app.configuration.index.sales.order-settings.minimum-order.title-info',
         'sort'   => 1,
         'fields' => [
             [
                 'name'          => 'minimum_order_amount',
-                'title'         => 'admin::app.configuration.index.sales.order-settings.minimum-order-amount',
+                'title'         => 'admin::app.configuration.index.sales.order-settings.minimum-order.minimum-order-amount',
                 'type'          => 'number',
                 'validation'    => 'regex:^-?\d+(\.\d+)?$',
                 'channel_based' => true,
@@ -1314,34 +1314,34 @@ return [
         'sort' => 5,
     ], [
         'key'    => 'sales.invoice_settings.invoice_number',
-        'name'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-number',
-        'info'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-number-info',
+        'name'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-number.title',
+        'info'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-number.title-info',
         'sort'   => 0,
         'fields' => [
             [
                 'name'          => 'invoice_number_prefix',
-                'title'         => 'admin::app.configuration.index.sales.invoice-settings.invoice-number-prefix',
+                'title'         => 'admin::app.configuration.index.sales.invoice-settings.invoice-number.prefix',
                 'type'          => 'text',
                 'validation'    => false,
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
                 'name'          => 'invoice_number_length',
-                'title'         => 'admin::app.configuration.index.sales.invoice-settings.invoice-number-length',
+                'title'         => 'admin::app.configuration.index.sales.invoice-settings.invoice-number.length',
                 'type'          => 'text',
                 'validation'    => 'numeric',
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
                 'name'          => 'invoice_number_suffix',
-                'title'         => 'admin::app.configuration.index.sales.invoice-settings.invoice-number-suffix',
+                'title'         => 'admin::app.configuration.index.sales.invoice-settings.invoice-number.suffix',
                 'type'          => 'text',
                 'validation'    => false,
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
                 'name'          => 'invoice_number_generator_class',
-                'title'         => 'admin::app.configuration.index.sales.invoice-settings.invoice-number-generator-class',
+                'title'         => 'admin::app.configuration.index.sales.invoice-settings.invoice-number.generator',
                 'type'          => 'text',
                 'validation'    => false,
                 'channel_based' => true,
@@ -1350,13 +1350,13 @@ return [
         ],
     ], [
         'key'    => 'sales.invoice_settings.payment_terms',
-        'name'   => 'admin::app.configuration.index.sales.invoice-settings.payment-terms',
-        'info'   => 'admin::app.configuration.index.sales.invoice-settings.payment-terms-info',
+        'name'   => 'admin::app.configuration.index.sales.invoice-settings.payment-terms.title',
+        'info'   => 'admin::app.configuration.index.sales.invoice-settings.payment-terms.title-info',
         'sort'   => 1,
         'fields' => [
             [
                 'name'          => 'due_duration',
-                'title'         => 'admin::app.configuration.index.sales.invoice-settings.due-duration',
+                'title'         => 'admin::app.configuration.index.sales.invoice-settings.payment-terms.due-duration',
                 'type'          => 'text',
                 'validation'    => 'numeric',
                 'channel_based' => true,
@@ -1364,13 +1364,13 @@ return [
         ],
     ], [
         'key'    => 'sales.invoice_settings.invoice_slip_design',
-        'name'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-slip-design',
-        'info'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-slip-design-info',
+        'name'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-slip-design.title',
+        'info'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-slip-design.title-info',
         'sort'   => 2,
         'fields' => [
             [
                 'name'          => 'logo',
-                'title'         => 'admin::app.configuration.index.sales.invoice-settings.logo',
+                'title'         => 'admin::app.configuration.index.sales.invoice-settings.invoice-slip-design.logo',
                 'type'          => 'image',
                 'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
                 'channel_based' => true,
@@ -1378,19 +1378,19 @@ return [
         ],
     ], [
         'key'    => 'sales.invoice_settings.invoice_reminders',
-        'name'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-reminders',
-        'info'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-reminders-info',
+        'name'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-reminders.title',
+        'info'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-reminders.title-info',
         'sort'   => 2,
         'fields' => [
             [
                 'name'          => 'reminders_limit',
-                'title'         => 'admin::app.configuration.index.sales.invoice-settings.maximum-limit-of-reminders',
+                'title'         => 'admin::app.configuration.index.sales.invoice-settings.invoice-reminders.maximum-limit-of-reminders',
                 'type'          => 'text',
                 'validation'    => 'numeric',
                 'channel_based' => true,
             ], [
                 'name'    => 'interval_between_reminders',
-                'title'   => 'admin::app.configuration.index.sales.invoice-settings.interval-between-reminders',
+                'title'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-reminders.interval-between-reminders',
                 'type'    => 'select',
                 'options' => [
                     [
@@ -1434,19 +1434,19 @@ return [
         'sort' => 6,
     ], [
         'key'  => 'taxes.catalogue',
-        'name' => 'admin::app.configuration.index.taxes.catalogue',
-        'info' => 'admin::app.configuration.index.taxes.catalogue-info',
+        'name' => 'admin::app.configuration.index.taxes.catalog.title',
+        'info' => 'admin::app.configuration.index.taxes.catalog.title-info',
         'icon' => 'settings/tax.svg',
         'sort' => 1,
     ], [
         'key'    => 'taxes.catalogue.pricing',
-        'name'   => 'admin::app.configuration.index.taxes.pricing',
-        'info'   => 'admin::app.configuration.index.taxes.pricing-info',
+        'name'   => 'admin::app.configuration.index.taxes.catalog.pricing.title',
+        'info'   => 'admin::app.configuration.index.taxes.catalog.pricing.title-info',
         'sort'   => 1,
         'fields' => [
             [
                 'name'       => 'tax_inclusive',
-                'title'      => 'admin::app.configuration.index.taxes.tax-inclusive',
+                'title'      => 'admin::app.configuration.index.taxes.catalog.pricing.tax-inclusive',
                 'type'       => 'boolean',
                 'validation' => 'required',
                 'default'    => false,
@@ -1454,23 +1454,23 @@ return [
         ],
     ], [
         'key'    => 'taxes.catalogue.default_location_calculation',
-        'name'   => 'admin::app.configuration.index.taxes.default-location-calculation',
-        'info'   => 'admin::app.configuration.index.taxes.default-location-calculation-info',
+        'name'   => 'admin::app.configuration.index.taxes.catalog.default-location-calculation.title',
+        'info'   => 'admin::app.configuration.index.taxes.catalog.default-location-calculation.title-info',
         'sort'   => 1,
         'fields' => [
             [
                 'name'    => 'country',
-                'title'   => 'admin::app.configuration.index.taxes.default-country',
+                'title'   => 'admin::app.configuration.index.taxes.catalog.default-location-calculation.default-country',
                 'type'    => 'country',
                 'default' => '',
             ], [
                 'name'    => 'state',
-                'title'   => 'admin::app.configuration.index.taxes.default-state',
+                'title'   => 'admin::app.configuration.index.taxes.catalog.default-location-calculation.default-state',
                 'type'    => 'state',
                 'default' => '',
             ], [
                 'name'    => 'post_code',
-                'title'   => 'admin::app.configuration.index.taxes.default-post-code',
+                'title'   => 'admin::app.configuration.index.taxes.catalog.default-location-calculation.default-post-code',
                 'type'    => 'text',
                 'default' => '',
             ],

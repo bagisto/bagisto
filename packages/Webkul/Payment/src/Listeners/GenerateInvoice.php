@@ -35,7 +35,7 @@ class GenerateInvoice
     public function handle($order)
     {
         if (
-            $order->payment->method == 'cashondelivery'
+            $order->payment->method == 'cash_on_delivery'
             && core()->getConfigData('sales.payment_methods.cash_on_delivery.generate_invoice')
         ) {
             $this->invoiceRepository->create(
@@ -46,7 +46,7 @@ class GenerateInvoice
         }
 
         if (
-            $order->payment->method == 'moneytransfer'
+            $order->payment->method == 'money_transfer'
             && core()->getConfigData('sales.payment_methods.money_transfer.generate_invoice')
         ) {
             $this->invoiceRepository->create(
