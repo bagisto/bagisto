@@ -7,7 +7,7 @@ use Webkul\DataGrid\DataGrid;
 
 class CartRuleCouponDataGrid extends DataGrid
 {
-        /**
+    /**
      * Prepare query builder.
      *
      * @return \Illuminate\Database\Query\Builder
