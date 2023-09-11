@@ -1293,7 +1293,7 @@
     
                                                 <p class="text-gray-600">
                                                     <div> 
-                                                        @lang('admin::app.settings.themes.edit.url'):
+                                                        @lang('admin::app.settings.themes.edit.path'):
 
                                                         <a
                                                             :href="link.url"
@@ -1540,15 +1540,15 @@
         
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.settings.themes.edit.url')
+                                            @lang('admin::app.settings.themes.edit.path')
                                         </x-admin::form.control-group.label>
         
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="url"
-                                            rules="required|url"
-                                            :label="trans('admin::app.settings.themes.edit.url')"
-                                            :placeholder="trans('admin::app.settings.themes.edit.url')"
+                                            rules="required"
+                                            :label="trans('admin::app.settings.themes.edit.path')"
+                                            :placeholder="trans('admin::app.settings.themes.edit.path')"
                                             ::disabled="isUpdating"
                                         >
                                         </x-admin::form.control-group.control>
