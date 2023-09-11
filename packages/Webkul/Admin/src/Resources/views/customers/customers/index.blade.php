@@ -193,6 +193,7 @@
                             <a
                                 class="icon-login text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"
                                 :href=`{{ route('admin.customers.customers.login_as_customer', '') }}/${record.customer_id}`
+                                target="_blank"
                             >
                             </a>
 
@@ -408,7 +409,7 @@
                                                 <option value="">
                                                     @lang('admin::app.customers.customers.index.create.select-customer-group')
                                                 </option>
-
+                                                
                                                 @foreach ($groups as $group)
                                                     <option value="{{ $group->id }}"> {{ $group->name}} </option>
                                                 @endforeach

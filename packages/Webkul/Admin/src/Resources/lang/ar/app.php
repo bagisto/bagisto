@@ -174,6 +174,7 @@ return [
                 'contact'               => 'الاتصال',
                 'comment-success'       => 'تمت إضافة التعليق بنجاح.',
                 'create-success'        => 'تم إنشاء الطلب بنجاح',
+                'cancel-success'        => 'تم إلغاء الطلب بنجاح',
                 'create-invoice'        => 'إنشاء فاتورة',
                 'discount'              => 'الخصم - :discount',
                 'download-pdf'          => 'تحميل PDF',

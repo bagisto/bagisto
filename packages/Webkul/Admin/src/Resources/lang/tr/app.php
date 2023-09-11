@@ -174,6 +174,7 @@ return [
                 'contact'               => 'İletişim',
                 'comment-success'       => 'Yorum başarıyla eklendi.',
                 'create-success'        => 'Sipariş başarıyla oluşturuldu',
+                'cancel-success'        => 'Sipariş başarıyla iptal edildi',
                 'create-invoice'        => 'Fatura Oluştur',
                 'discount'              => 'İndirim - :discount',
                 'download-pdf'          => 'PDF İndir',

@@ -174,6 +174,7 @@ return [
                 'contact'               => 'איש קשר',
                 'comment-success'       => 'ההערה נוספה בהצלחה.',
                 'create-success'        => 'הזמנה נוצרה בהצלחה',
+                'cancel-success'        => 'ההזמנה בוטלה בהצלחה',
                 'create-invoice'        => 'צור חשבונית',
                 'discount'              => 'הנחה - :discount',
                 'download-pdf'          => 'הורד PDF',
