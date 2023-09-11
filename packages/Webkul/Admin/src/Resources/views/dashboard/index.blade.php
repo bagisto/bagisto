@@ -455,10 +455,10 @@
                                             @endif
 
                                             <div class="relative">
-                                                @if ($orderItem->product->base_image_url)
+                                                @if ($orderItem?->product?->base_image_url)
                                                     <img
                                                         class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
-                                                        src="{{ $orderItem->product->base_image_url }}"
+                                                        src="{{ $orderItem?->product?->base_image_url }}"
                                                     />
                                                 @else
                                                     <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
@@ -472,7 +472,7 @@
 
 
                                                 <span class="absolute bottom-[1px] ltr:left-[1px] rtl:right-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]">
-                                                    {{ $orderItem->product->images->count() }}
+                                                    {{ $orderItem->product?->images?->count() }}
                                                 </span>
                                             </div>
                                         @endforeach
@@ -517,11 +517,11 @@
                             <div class="relative">
                                 <div class="row grid grid-cols-2 gap-y-[24px] p-[16px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-100 max-sm:grid-cols-[1fr_auto]">
                                     <div class="flex gap-[10px]">
-                                        @if ($item->product->base_image_url)
+                                        @if ($item?->product?->base_image_url)
                                             <div class="">
                                                 <img
                                                     class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
-                                                    src="{{ $item->product->base_image_url }}"
+                                                    src="{{ $item?->product?->base_image_url }}"
                                                 >
                                             </div>
                                         @else
