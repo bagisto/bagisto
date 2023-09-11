@@ -121,7 +121,6 @@ class TemplateController extends Controller
      */
     public function destroy($id): JsonResource
     {
-        dd($id);
         $this->templateRepository->findOrFail($id);
 
         try {
