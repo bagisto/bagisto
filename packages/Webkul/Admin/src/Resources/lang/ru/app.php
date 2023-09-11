@@ -1873,8 +1873,18 @@ return [
 
             'cart-rules-coupons' => [
                 'cart-rule-not-defined-error' => 'Правило корзины не может быть удалено',
-                'success'                     => ':name Успешно создано',
-                'mass-delete-success'         => 'Массовое удаление правил корзины успешно выполнено'
+                'delete-success'              => 'Купон правила корзины успешно удален',
+                'mass-delete-success'         => 'Выбранные элементы успешно удалены',
+                'success'                     => ':name успешно создано',
+            
+                'datagrid' => [
+                    'coupon-code'     => 'Код купона',
+                    'created-date'    => 'Дата создания',
+                    'delete'          => 'Удалить',
+                    'expiration-date' => 'Дата истечения срока действия',
+                    'id'              => 'ID',
+                    'times-used'      => 'Количество использований',
+                ],
             ],
         ],
 

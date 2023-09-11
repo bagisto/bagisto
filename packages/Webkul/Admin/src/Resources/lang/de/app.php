@@ -1873,8 +1873,18 @@ return [
 
             'cart-rules-coupons' => [
                 'cart-rule-not-defined-error' => 'Warenkorbregel kann nicht gelöscht werden',
+                'delete-success'              => 'Warenkorb-Gutschein erfolgreich gelöscht',
+                'mass-delete-success'         => 'Ausgewählte Elemente erfolgreich gelöscht',
                 'success'                     => ':name erfolgreich erstellt',
-                'mass-delete-success'         => 'Massenlöschung von Warenkorbregeln erfolgreich',
+            
+                'datagrid' => [
+                    'coupon-code'     => 'Gutscheincode',
+                    'created-date'    => 'Erstellungsdatum',
+                    'delete'          => 'Löschen',
+                    'expiration-date' => 'Ablaufdatum',
+                    'id'              => 'ID',
+                    'times-used'      => 'Verwendete Male',
+                ],
             ],
         ],
 

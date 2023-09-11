@@ -1872,9 +1872,19 @@ return [
             ],
 
             'cart-rules-coupons' => [
-                'cart-rule-not-defined-error' => 'لا يمكن حذف قاعدة العربة',
-                'success'                     => ':name تم إنشاؤها بنجاح',
-                'mass-delete-success'         => 'تم حذف قاعدة العربة جماعيًا بنجاح'
+                'cart-rule-not-defined-error' => 'لا يمكن حذف قاعدة السلة',
+                'delete-success'              => 'تم حذف قاعدة السلة بنجاح',
+                'mass-delete-success'         => 'تم حذف العناصر المحددة بنجاح',
+                'success'                     => 'تم إنشاء :name بنجاح',
+            
+                'datagrid' => [
+                    'coupon-code'     => 'كود الكوبون',
+                    'created-date'    => 'تاريخ الإنشاء',
+                    'delete'          => 'حذف',
+                    'expiration-date' => 'تاريخ الانتهاء',
+                    'id'              => 'الرقم التعريفي',
+                    'times-used'      => 'عدد المرات المستخدمة',
+                ],
             ],
         ],
 

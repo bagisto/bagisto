@@ -1871,9 +1871,19 @@ return [
                 ],
 
                 'cart-rules-coupons' => [
-                    'cart-rule-not-defined-error' => 'Nie można usunąć zasady katalogowej, która nie jest zdefiniowana',
-                    'success'                     => ':name Pomyślnie Utworzona',
-                    'mass-delete-success'         => 'Masowe Usuwanie Zasady Katalogowej Pomyślnie Zakończone',
+                    'cart-rule-not-defined-error' => 'Nie można usunąć zasady koszyka',
+                    'delete-success'              => 'Kupon zasady koszyka został pomyślnie usunięty',
+                    'mass-delete-success'         => 'Wybrane elementy zostały pomyślnie usunięte',
+                    'success'                     => ':name zostało pomyślnie utworzone',
+                
+                    'datagrid' => [
+                        'coupon-code'     => 'Kod kuponu',
+                        'created-date'    => 'Data utworzenia',
+                        'delete'          => 'Usuń',
+                        'expiration-date' => 'Data wygaśnięcia',
+                        'id'              => 'ID',
+                        'times-used'      => 'Liczba użyć',
+                    ],
                 ],
             ],
         ],

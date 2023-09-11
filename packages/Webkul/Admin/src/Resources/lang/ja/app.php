@@ -1873,8 +1873,18 @@ return [
 
             'cart-rules-coupons' => [
                 'cart-rule-not-defined-error' => 'カートルールは削除できません',
+                'delete-success'              => 'カートルールクーポンが正常に削除されました',
+                'mass-delete-success'         => '選択したアイテムが正常に削除されました',
                 'success'                     => ':name が正常に作成されました',
-                'mass-delete-success'         => 'カートルールの一括削除が正常に完了しました'
+            
+                'datagrid' => [
+                    'coupon-code'     => 'クーポンコード',
+                    'created-date'    => '作成日',
+                    'delete'          => '削除',
+                    'expiration-date' => '有効期限日',
+                    'id'              => 'ID',
+                    'times-used'      => '使用回数',
+                ],
             ],
         ],
 

@@ -1873,17 +1873,17 @@ return [
 
             'cart-rules-coupons' => [
                 'cart-rule-not-defined-error' => 'Cart rule can not be deleted',
-                'success'                     => ':name Successfully Created',
-                'mass-delete-success'         => 'Selected items Delete Successfully',
                 'delete-success'              => 'Cart Rule Coupon Deleted Successfully',
+                'mass-delete-success'         => 'Selected items Delete Successfully',
+                'success'                     => ':name Successfully Created',
 
                 'datagrid' =>[
-                    'id'              => 'ID',
                     'coupon-code'     => 'Coupon Code',
                     'created-date'    => 'Created Date',
                     'expiration-date' => 'Expiration Date',
-                    'times-used'      => 'Times Used',
                     'delete'          => 'Delete', 
+                    'id'              => 'ID',
+                    'times-used'      => 'Times Used',
                 ],
             ],
         ],
