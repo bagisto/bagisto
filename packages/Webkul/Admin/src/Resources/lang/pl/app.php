@@ -174,7 +174,7 @@ return [
                 'contact'               => 'Kontakt',
                 'comment-success'       => 'Komentarz dodany pomyślnie.',
                 'create-success'        => 'Zamówienie utworzone pomyślnie',
-                'cancel-success' => 'Zamówienie zostało pomyślnie anulowane',
+                'cancel-success'        => 'Zamówienie zostało pomyślnie anulowane',
                 'create-invoice'        => 'Utwórz fakturę',
                 'discount'              => 'Rabat - :discount',
                 'download-pdf'          => 'Pobierz PDF',
@@ -2610,43 +2610,59 @@ return [
 
     'configuration' => [
         'index' => [
-            'title'                        => 'Konfiguracja',
-            'save-btn'                     => 'Zapisz Konfigurację',
-            'save-message'                 => 'Konfiguracja została pomyślnie zapisana',
             'delete'                       => 'Usuń',
-            'enable-at-least-one-shipping' => 'Włącz co najmniej jedną metodę dostawy.',
-            'enable-at-least-one-payment'  => 'Włącz co najmniej jedną metodę płatności.',
+            'enable-at-least-one-shipping' => 'Włącz przynajmniej jedną metodę dostawy.',
+            'enable-at-least-one-payment'  => 'Włącz przynajmniej jedną metodę płatności.',
+            'save-btn'                     => 'Zapisz konfigurację',
+            'save-message'                 => 'Konfiguracja została pomyślnie zapisana',
+            'title'                        => 'Konfiguracja',
 
             'general' => [
+                'info'  => 'Ustaw opcje jednostek.',
+                'title' => 'Ogólne',
+
                 'general' => [
-                    'title'             => 'Ogólne',
-                    'info'              => 'Ustaw opcje jednostek.',
-                    'unit-options'      => 'Opcje Jednostek',
-                    'unit-options-info' => 'Rozmiar, kolor, materiał, dostosowanie, zwiększenie satysfakcji klienta i dostosowanie zakupów.',
-                    'weight-unit'       => 'Jednostka Masy',
+                    'info'  => 'Ustaw opcje jednostek.',
+                    'title' => 'Ogólne',
+
+                    'unit-options' => [
+                        'info'        => 'Ustaw opcje jednostek.',
+                        'title'       => 'Opcje jednostek',
+                        'title-info'  => 'Rozmiar, kolor, materiał, dostosowanie, zwiększanie satysfakcji klienta i dostosowywanie zakupów.',
+                        'weight-unit' => 'Jednostka wagi',
+                    ],
                 ],
 
                 'content' => [
-                    'title'               => 'Zawartość',
-                    'info'                => 'Ustaw opcje porównywania, opcje listy życzeń, opcje wyszukiwania obrazów, stopkę, przełącz stopkę i niestandardowe skrypty.',
-                    'custom-scripts'      => 'Niestandardowe Skrypty',
-                    'custom-scripts-info' => 'Niestandardowe skrypty to spersonalizowane fragmenty kodu stworzone w celu dodania określonych funkcji lub możliwości do oprogramowania, zwiększając jego unikalne możliwości.',
-                    'custom-css'          => 'Niestandardowe CSS',
-                    'custom-javascript'   => 'Niestandardowy JavaScript',
-                    'compare-options'     => 'Opcje porównywania',
-                    'wishlist-options'    => 'Opcje listy życzeń',
-                    'image-search-option' => 'Opcja wyszukiwania obrazów',
-                    'settings-title'      => 'Ustawienia',
-                    'settings-title-info' => 'Termin "ustawienia" odnosi się do konfigurowalnych wyborów kontrolujących zachowanie systemu, aplikacji lub urządzenia, dostosowanych do preferencji i wymagań użytkownika.'
+                    'info'  => 'Ustaw opcje porównywania, opcje listy życzeń, opcje wyszukiwania obrazów, stopkę, przełącz stopkę i niestandardowe skrypty.',
+                    'title' => 'Zawartość',
+
+                    'settings' => [
+                        'compare-options'     => 'Opcje porównywania',
+                        'image-search-option' => 'Opcja wyszukiwania obrazów',
+                        'title'               => 'Ustawienia',
+                        'title-info'          => 'Termin "ustawienia" odnosi się do konfigurowalnych wyborów, które kontrolują zachowanie systemu, aplikacji lub urządzenia, dostosowane do preferencji i wymagań użytkownika.',
+                        'wishlist-options'    => 'Opcje listy życzeń',
+                    ],
+
+                    'custom-scripts' => [
+                        'custom-css'        => 'Niestandardowe CSS',
+                        'custom-javascript' => 'Niestandardowy JavaScript',
+                        'title'             => 'Niestandardowe skrypty',
+                        'title-info'        => 'Niestandardowe skrypty to spersonalizowane fragmenty kodu stworzone w celu dodania określonych funkcji lub cech oprogramowaniu, zwiększając jego zdolności w unikalny sposób.',
+                    ],
                 ],
 
                 'design' => [
-                    'title'           => 'Projekt',
-                    'info'            => 'Ustaw logo i ikonę favicon.',
-                    'admin-logo'      => 'Logo Administratora',
-                    'admin-logo-info' => 'Logo administratora to charakterystyczny obraz lub emblemat reprezentujący interfejs administracyjny systemu lub strony internetowej, często dostosowywany.',
-                    'logo-image'      => 'Obraz Logo',
-                    'favicon'         => 'Favicon',
+                    'info'  => 'Ustaw logo i ikonę favicon.',
+                    'title' => 'Projekt',
+
+                    'admin-logo' => [
+                        'favicon'      => 'Favicon',
+                        'logo-image'   => 'Obraz loga',
+                        'title'        => 'Logo administratora',
+                        'title-info'   => 'Logo administratora to charakterystyczny obraz lub emblem reprezentujący interfejs administracyjny systemu lub witryny, często dostosowywany.',
+                    ],
                 ],
             ],
 
@@ -2991,7 +3007,7 @@ return [
                 'must-select-a-mass-action-option' => 'Musisz wybrać opcję akcji masowej.',
                 'sure-want-to-perform-this-action' => 'Czy na pewno chcesz wykonać tę akcję?',
             ],
-            
+
             'toolbar' => [
                 'mass-actions' => [
                     'select-action' => 'Wybierz Akcję',
@@ -3065,7 +3081,7 @@ return [
                 'allowed-types'     => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Dozwolone są tylko pliki wideo (.mp4, .mov, .ogg ..).',
             ],
-        ]
+        ],
     ],
 
     'acl' => [

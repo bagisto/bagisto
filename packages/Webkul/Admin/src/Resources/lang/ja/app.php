@@ -11,7 +11,7 @@ return [
         ],
 
         'forget-password' => [
-            'create'    =>  [
+            'create'    => [
                 'email'           => '登録済みメールアドレス',
                 'email-not-exist' => 'メールアドレスが存在しません',
                 'page-title'      => 'パスワードを忘れる',
@@ -474,7 +474,7 @@ return [
                     'transaction-amount' => '金額',
                 ],
 
-                'edit'  =>  [
+                'edit'  => [
                     'already-paid'               => '既に支払済み',
                     'invoice-missing'            => '請求書が不足しています',
                     'transaction-amount-zero'    => '取引金額がゼロです',
@@ -1272,7 +1272,7 @@ return [
                     'group-default'  => 'デフォルトグループは削除できません',
                 ],
 
-                'datagrid'  =>  [
+                'datagrid'  => [
                     'code'   => 'コード',
                     'id'     => 'ID',
                     'name'   => '名前',
@@ -1311,7 +1311,7 @@ return [
                     'update-success' => '更新成功',
                 ],
 
-                'datagrid'   =>  [
+                'datagrid'   => [
                     'customer-names'      => '名前',
                     'comment'             => 'コメント',
                     'date'                => '日付',
@@ -1345,7 +1345,7 @@ return [
                 'address-2'          => '住所2',
                 'city'               => '市区町村',
                 'state'              => '都道府県',
-                'select-country'     => "国を選択",
+                'select-country'     => '国を選択',
                 'country'            => '国',
                 'default-address'    => 'デフォルトの住所',
                 'first-name'         => '名',
@@ -1364,7 +1364,7 @@ return [
                 'address-2'       => '住所2',
                 'city'            => '市区町村',
                 'state'           => '都道府県',
-                'select-country'  => "国を選択",
+                'select-country'  => '国を選択',
                 'country'         => '国',
                 'default-address' => 'デフォルトの住所',
                 'first-name'      => '名',
@@ -1874,7 +1874,7 @@ return [
             'cart-rules-coupons' => [
                 'cart-rule-not-defined-error' => 'カートルールは削除できません',
                 'success'                     => ':name が正常に作成されました',
-                'mass-delete-success'         => 'カートルールの一括削除が正常に完了しました'
+                'mass-delete-success'         => 'カートルールの一括削除が正常に完了しました',
             ],
         ],
 
@@ -1905,10 +1905,10 @@ return [
                     'delete-warning' => '本当にこのアクションを実行しますか？',
                 ],
 
-                'edit'  =>  [
+                'edit'  => [
                     'title'          => 'サイトマップを編集',
                     'success'        => 'サイトマップが正常に更新されました',
-                    'delete-success' => 'サイトマップが正常に削除されました'
+                    'delete-success' => 'サイトマップが正常に削除されました',
                 ],
             ],
 
@@ -1939,7 +1939,7 @@ return [
                 'view'                => '表示',
                 'edit'                => '編集',
                 'delete'              => '削除',
-                'mass-delete-success' => '選択したデータが正常に削除されました'
+                'mass-delete-success' => '選択したデータが正常に削除されました',
             ],
         ],
 
@@ -1998,7 +1998,7 @@ return [
                     'delete'    => '削除',
                 ],
 
-                'create'  =>  [
+                'create'  => [
                     'code'             => 'コード',
                     'name'             => '名前',
                     'direction'        => '方向',
@@ -2392,7 +2392,7 @@ return [
                     'role'              => '役割',
                     'status'            => 'ステータス',
                     'save-btn'          => 'ユーザーを保存',
-                    'upload-image-info' => 'プロフィール画像をアップロードしてください（110px X 110px）PNGまたはJPG形式'
+                    'upload-image-info' => 'プロフィール画像をアップロードしてください（110px X 110px）PNGまたはJPG形式',
                 ],
 
                 'datagrid' => [
@@ -2420,7 +2420,7 @@ return [
                 'last-delete-error'  => '最後のユーザーの削除に失敗しました',
                 'login-error'        => '資格情報を確認してもう一度お試しください。',
                 'update-success'     => 'ユーザーが正常に更新されました。',
-                'delete-warning'     =>'本当にこのアクションを実行しますか？',
+                'delete-warning'     => '本当にこのアクションを実行しますか？',
             ],
 
             'edit'  => [
@@ -2445,7 +2445,7 @@ return [
                 'title'      => '役割',
                 'create-btn' => '役割を作成',
 
-                'datagrid'  =>  [
+                'datagrid'  => [
                     'delete'          => '削除',
                     'edit'            => '編集',
                     'id'              => 'ID',
@@ -2503,7 +2503,7 @@ return [
                     'id'         => 'ID',
                     'type'       => 'タイプ',
                     'name'       => '名前',
-                ]
+                ],
             ],
 
             'create' => [
@@ -2555,7 +2555,7 @@ return [
                 'back'                          => '戻る',
             ],
 
-           'edit' => [
+            'edit' => [
                 'title'                         => 'テーマを編集',
                 'slider'                        => 'スライダー',
                 'product-carousel'              => '商品カルーセル',
@@ -2611,43 +2611,59 @@ return [
 
     'configuration' => [
         'index' => [
-            'title'                        => '設定',
-            'save-btn'                     => '設定を保存',
-            'save-message'                 => '設定が正常に保存されました',
             'delete'                       => '削除',
             'enable-at-least-one-shipping' => '少なくとも1つの配送方法を有効にしてください。',
             'enable-at-least-one-payment'  => '少なくとも1つの支払い方法を有効にしてください。',
+            'save-btn'                     => '設定を保存',
+            'save-message'                 => '設定が正常に保存されました',
+            'title'                        => '設定',
 
             'general' => [
+                'info'  => 'ユニットオプションを設定します。',
+                'title' => '一般',
+
                 'general' => [
-                    'title'             => '一般',
-                    'info'              => '単位のオプションを設定します。',
-                    'unit-options'      => '単位オプション',
-                    'unit-options-info' => 'サイズ、色、素材、カスタマイズ、お客様の満足度を高め、購入を調整します。',
-                    'weight-unit'       => '重量単位',
+                    'info'  => 'ユニットオプションを設定します。',
+                    'title' => '一般',
+
+                    'unit-options' => [
+                        'info'        => 'ユニットオプションを設定します。',
+                        'title'       => 'ユニットオプション',
+                        'title-info'  => 'サイズ、色、材料、カスタマイズ、顧客満足度の向上、および購入の調整。',
+                        'weight-unit' => '重量単位',
+                    ],
                 ],
 
                 'content' => [
-                    'title'               => 'コンテンツ',
-                    'info'                => '比較オプション、ウィッシュリストオプション、画像検索オプション、フッター、フッターの切り替え、カスタムスクリプトを設定します。',
-                    'custom-scripts'      => 'カスタムスクリプト',
-                    'custom-scripts-info' => 'カスタムスクリプトは、ソフトウェアに特定の機能や機能を追加するために作成された個別のコードの一部で、その機能を一意に強化します。',
-                    'custom-css'          => 'カスタムCSS',
-                    'custom-javascript'   => 'カスタムJavascript',
-                    'compare-options'     => '比較オプション',
-                    'wishlist-options'    => 'ほしい物リストオプション',
-                    'image-search-option' => '画像検索オプション',
-                    'settings-title'      => '設定',
-                    'settings-title-info' => '設定は、システム、アプリケーション、またはデバイスの挙動を制御する構成可能な選択肢を指し、ユーザーの好みや要件に合わせて調整されます。'
+                    'info'  => '比較オプション、ウィッシュリストオプション、画像検索オプション、フッター、フッターの切り替え、およびカスタムスクリプトを設定します。',
+                    'title' => 'コンテンツ',
+
+                    'settings' => [
+                        'compare-options'     => '比較オプション',
+                        'image-search-option' => '画像検索オプション',
+                        'title'               => '設定',
+                        'title-info'          => '設定は、システム、アプリケーション、またはデバイスの動作を制御するための設定可能な選択肢を指し、ユーザーの好みと要件に合わせて調整されます。',
+                        'wishlist-options'    => 'ウィッシュリストオプション',
+                    ],
+
+                    'custom-scripts' => [
+                        'custom-css'        => 'カスタムCSS',
+                        'custom-javascript' => 'カスタムJavascript',
+                        'title'             => 'カスタムスクリプト',
+                        'title-info'        => 'カスタムスクリプトは、ソフトウェアに特定の機能や機能を追加するために作成された個別のコードの断片です。その独自の能力を向上させます。',
+                    ],
                 ],
 
                 'design' => [
-                    'title'           => 'デザイン',
-                    'info'            => 'ロゴとファビコンアイコンを設定します。',
-                    'admin-logo'      => '管理者ロゴ',
-                    'admin-logo-info' => '管理者ロゴは、システムまたはウェブサイトの管理インターフェースを表す特徴的なイメージやエンブレムであり、しばしばカスタマイズ可能です。',
-                    'logo-image'      => 'ロゴ画像',
-                    'favicon'         => 'ファビコン',
+                    'info'  => 'ロゴとファビコンアイコンを設定します。',
+                    'title' => 'デザイン',
+
+                    'admin-logo' => [
+                        'favicon'      => 'ファビコン',
+                        'logo-image'   => 'ロゴ画像',
+                        'title'        => '管理者ロゴ',
+                        'title-info'   => '管理者ロゴは、システムまたはウェブサイトの管理インターフェースを表す独特のイメージまたはエンブレムで、しばしばカスタマイズ可能です。',
+                    ],
                 ],
             ],
 
@@ -2991,7 +3007,7 @@ return [
                     'must-select-a-mass-action-option' => '一括操作のオプションを選択する必要があります。',
                     'sure-want-to-perform-this-action' => 'この操作を実行してもよろしいですか？',
                 ],
-                
+
                 'mass-actions' => [
                     'select-action' => 'アクションを選択',
                     'select-option' => 'オプションを選択',
@@ -3064,7 +3080,7 @@ return [
                 'allowed-types'     => 'mp4、webm、mkv',
                 'not-allowed-error' => 'ビデオファイルのみ許可されています（.mp4、.mov、.ogg ..）。',
             ],
-        ]
+        ],
     ],
 
     'acl' => [
@@ -3146,7 +3162,7 @@ return [
         '503' => [
             'title'       => '503 サービス利用不可',
             'description' => 'おっと！一時的にメンテナンス中のようです。少し後で再度ご確認ください。',
-        ]
+        ],
     ],
 
     'export' => [

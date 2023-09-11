@@ -1120,7 +1120,7 @@ return [
             'index'  => [
                 'login-message' => 'Você está logado como :customer_name',
                 'title'         => 'Clientes',
-    
+
                 'datagrid'  => [
                     'id'             => 'ID do Cliente',
                     'order'          => ':order Pedido(s)',
@@ -1146,7 +1146,7 @@ return [
                     'no-resource'    => 'O recurso fornecido é insuficiente para a ação',
                     'method-error'   => 'Erro! Método incorreto detectado, verifique a configuração de ações em massa',
                 ],
-    
+
                 'create' => [
                     'create-btn'            => 'Criar Cliente',
                     'contact-number'        => 'Número de Contato',
@@ -1166,12 +1166,12 @@ return [
                     'title'                 => 'Criar Novo Cliente',
                 ],
             ],
-    
+
             'delete-success' => 'Cliente excluído com sucesso',
             'delete-failed'  => 'Falha ao excluir o cliente',
             'update-success' => 'Cliente atualizado com sucesso',
             'order-pending'  => 'Pedidos pendentes',
-    
+
             'edit' => [
                 'contact-number'        => 'Número de Contato',
                 'customer-group'        => 'Grupo de Cliente',
@@ -1191,7 +1191,7 @@ return [
                 'suspended'             => 'Suspenso',
                 'title'                 => 'Editar Cliente',
             ],
-    
+
             'view' => [
                 'address'                => 'Endereço',
                 'back-btn'               => 'Voltar',
@@ -1375,8 +1375,8 @@ return [
                 'save-btn-title'   => 'Salvar Endereço',
             ],
 
-            'create-success' => 'Endereço criado com sucesso',
-            'update-success' => 'Endereço atualizado com sucesso',
+            'create-success'      => 'Endereço criado com sucesso',
+            'update-success'      => 'Endereço atualizado com sucesso',
             'success-mass-delete' => 'Exclusão em Massa de Endereços com Sucesso',
         ],
     ],
@@ -2611,43 +2611,59 @@ return [
 
     'configuration' => [
         'index' => [
-            'title'                         => 'Configuration',
-            'save-btn'                      => 'Enregistrer la Configuration',
-            'save-message'                  => 'Configuration enregistrée avec succès',
-            'delete'                        => 'Supprimer',
-            'enable-at-least-one-shipping'  => 'Activez au moins une méthode d\'expédition.',
-            'enable-at-least-one-payment'   => 'Activez au moins une méthode de paiement.',
+            'delete'                       => 'Excluir',
+            'enable-at-least-one-shipping' => 'Ative pelo menos um método de envio.',
+            'enable-at-least-one-payment'  => 'Ative pelo menos um método de pagamento.',
+            'save-btn'                     => 'Salvar Configuração',
+            'save-message'                 => 'Configuração salva com sucesso',
+            'title'                        => 'Configuração',
 
             'general' => [
+                'info'  => 'Defina as opções de unidades.',
+                'title' => 'Geral',
+
                 'general' => [
-                    'title'             => 'Général',
-                    'info'              => 'Configurer les options des unités.',
-                    'unit-options'      => 'Options d\'unités',
-                    'unit-options-info' => 'Taille, couleur, matériau, personnalisation, amélioration de la satisfaction client et adaptation des achats.',
-                    'weight-unit'       => 'Unité de poids',
+                    'info'  => 'Defina as opções de unidades.',
+                    'title' => 'Geral',
+
+                    'unit-options' => [
+                        'info'        => 'Defina as opções de unidades.',
+                        'title'       => 'Opções de Unidades',
+                        'title-info'  => 'Tamanho, cor, material, personalização, aumento da satisfação do cliente e adaptação das compras.',
+                        'weight-unit' => 'Unidade de Peso',
+                    ],
                 ],
 
                 'content' => [
-                    'title'               => 'Contenu',
-                    'info'                => 'Configurer les options de comparaison, les options de liste de souhaits, les options de recherche d\'images, le pied de page, basculer le pied de page et les scripts personnalisés.',
-                    'custom-scripts'      => 'Scripts personnalisés',
-                    'custom-scripts-info' => 'Les scripts personnalisés sont des morceaux de code personnalisés créés pour ajouter des fonctions ou des fonctionnalités spécifiques à un logiciel, améliorant ainsi ses capacités de manière unique.',
-                    'custom-css'          => 'CSS personnalisé',
-                    'custom-javascript'   => 'Javascript personnalisé',
-                    'compare-options'     => 'Opções de comparação',
-                    'wishlist-options'    => 'Opções de lista de desejos',
-                    'image-search-option' => 'Opção de busca por imagens',
-                    'settings-title'      => 'Configurações',
-                    'settings-title-info' => 'Configurações referem-se a escolhas configuráveis que controlam como um sistema, aplicativo ou dispositivo se comporta, adaptadas às preferências e requisitos do usuário.'
+                    'info'  => 'Defina as opções de comparação, opções de lista de desejos, opções de pesquisa de imagens, rodapé, alternar rodapé e scripts personalizados.',
+                    'title' => 'Conteúdo',
+
+                    'settings' => [
+                        'compare-options'     => 'Opções de Comparação',
+                        'image-search-option' => 'Opção de Pesquisa de Imagem',
+                        'title'               => 'Configurações',
+                        'title-info'          => 'Configurações referem-se a escolhas configuráveis que controlam como um sistema, aplicativo ou dispositivo se comporta, adaptadas às preferências e requisitos do usuário.',
+                        'wishlist-options'    => 'Opções de Lista de Desejos',
+                    ],
+
+                    'custom-scripts' => [
+                        'custom-css'        => 'CSS Personalizado',
+                        'custom-javascript' => 'Javascript Personalizado',
+                        'title'             => 'Scripts Personalizados',
+                        'title-info'        => 'Scripts personalizados são fragmentos de código personalizados criados para adicionar funções ou recursos específicos ao software, melhorando suas capacidades de forma única.',
+                    ],
                 ],
 
                 'design' => [
-                    'title'           => 'Design',
-                    'info'            => 'Configurer le logo et l\'icône de favicon.',
-                    'admin-logo'      => 'Logo de l\'administration',
-                    'admin-logo-info' => 'Le logo de l\'administration est l\'image ou l\'emblème distinctif représentant l\'interface d\'administration d\'un système ou d\'un site web, souvent personnalisable.',
-                    'logo-image'      => 'Image du logo',
-                    'favicon'         => 'Favicon',
+                    'info'  => 'Defina o logotipo e o ícone de favicon.',
+                    'title' => 'Design',
+
+                    'admin-logo' => [
+                        'favicon'      => 'Favicon',
+                        'logo-image'   => 'Imagem do Logotipo',
+                        'title'        => 'Logotipo do Administrador',
+                        'title-info'   => 'O logotipo do administrador é a imagem ou emblema distintivo que representa a interface de administração de um sistema ou site, frequentemente personalizável.',
+                    ],
                 ],
             ],
 
@@ -3065,7 +3081,7 @@ return [
                 'allowed-types'     => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Apenas arquivos de vídeo (.mp4, .mov, .ogg ..) são permitidos.',
             ],
-        ]
+        ],
     ],
 
     'acl' => [

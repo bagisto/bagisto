@@ -11,7 +11,7 @@ return [
         ],
 
         'forget-password' => [
-            'create'    =>  [
+            'create'    => [
                 'email'            => '注册电子邮件',
                 'email-not-exist'  => '电子邮件不存在',
                 'page-title'       => '忘记密码',
@@ -291,7 +291,7 @@ return [
                 'shipping-price'       => '发货价格',
                 'title'                => '发货 #:shipment_id',
                 'tracking-number'      => '跟踪编号',
-            ]
+            ],
         ],
 
         'refunds' => [
@@ -474,7 +474,7 @@ return [
                     'transaction-amount' => '金额',
                 ],
 
-                'edit'  =>  [
+                'edit'  => [
                     'already-paid'               => '已支付',
                     'invoice-missing'            => '缺少发票',
                     'transaction-amount-zero'    => '交易金额为零',
@@ -1874,7 +1874,7 @@ return [
             'cart-rules-coupons' => [
                 'cart-rule-not-defined-error' => '购物车规则无法删除',
                 'success'                     => ':name 创建成功',
-                'mass-delete-success'         => '购物车规则批量删除成功'
+                'mass-delete-success'         => '购物车规则批量删除成功',
             ],
         ],
 
@@ -1905,10 +1905,10 @@ return [
                     'delete-warning' => '您确定要执行此操作吗？',
                 ],
 
-                'edit'  =>  [
+                'edit'  => [
                     'title'          => '编辑站点地图',
                     'success'        => '站点地图更新成功',
-                    'delete-success' => '站点地图删除成功'
+                    'delete-success' => '站点地图删除成功',
                 ],
             ],
 
@@ -1939,7 +1939,7 @@ return [
                 'view'                => '查看',
                 'edit'                => '编辑',
                 'delete'              => '删除',
-                'mass-delete-success' => '所选数据已成功删除'
+                'mass-delete-success' => '所选数据已成功删除',
             ],
         ],
 
@@ -1998,7 +1998,7 @@ return [
                     'delete'    => '删除',
                 ],
 
-                'create'  =>  [
+                'create'  => [
                     'code'             => '代码',
                     'name'             => '名称',
                     'direction'        => '方向',
@@ -2097,7 +2097,7 @@ return [
                 'create-success'  => '汇率创建成功',
                 'update-success'  => '汇率更新成功',
                 'delete-success'  => '汇率删除成功',
-                'delete-error'    => '汇率删除失败'
+                'delete-error'    => '汇率删除失败',
             ],
         ],
 
@@ -2218,8 +2218,8 @@ return [
 
                     'create-success'  => '新税收分类已创建',
                     'update-success'  => '税收分类成功更新',
-                    'delete-success' => '税收分类已成功删除',
-                    'delete-failed'  => '税收分类删除失败',
+                    'delete-success'  => '税收分类已成功删除',
+                    'delete-failed'   => '税收分类删除失败',
                 ],
             ],
 
@@ -2392,7 +2392,7 @@ return [
                     'role'              => '角色',
                     'status'            => '状态',
                     'save-btn'          => '保存用户',
-                    'upload-image-info' => '上传头像图片（110px x 110px），支持PNG或JPG格式'
+                    'upload-image-info' => '上传头像图片（110px x 110px），支持PNG或JPG格式',
                 ],
 
                 'datagrid' => [
@@ -2420,7 +2420,7 @@ return [
                 'last-delete-error'  => '最后一个用户删除失败',
                 'login-error'        => '请检查您的凭据并重试。',
                 'update-success'     => '用户更新成功。',
-                'delete-warning'     =>'您确定要执行此操作吗？',
+                'delete-warning'     => '您确定要执行此操作吗？',
             ],
 
             'edit'  => [
@@ -2445,7 +2445,7 @@ return [
                 'title'      => '角色',
                 'create-btn' => '创建角色',
 
-                'datagrid'  =>  [
+                'datagrid'  => [
                     'delete'          => '删除',
                     'edit'            => '编辑',
                     'id'              => 'ID',
@@ -2503,57 +2503,57 @@ return [
                     'id'         => 'ID',
                     'type'       => '类型',
                     'name'       => '名称',
-                ]
+                ],
             ],
 
             'create' => [
-                'title'                         => '创建主题',
+                'title'                          => '创建主题',
                 'sliders'                        => '轮播图',
-                'product-carousel'              => '产品轮播',
-                'product-carousel-description'  => '使用动态和响应式产品轮播优雅地展示产品。',
-                'category-carousel-description' => '使用响应式的类别轮播动态展示吸引人的类别。',
-                'static-content-description'    => '通过简明扼要的静态内容提高受众的参与度。',
-                'footer-link-description'       => '通过页脚链接进行无缝的网站探索和信息浏览。',
-                'category-carousel'             => '类别轮播',
-                'static-content'                => '静态内容',
-                'footer-link'                   => '页脚链接',
-                'footer-link-form-title'        => '页脚链接',
-                'slider-description'            => '与轮播相关的主题定制。',
-                'slider-add-btn'                => '添加轮播',
-                'general'                       => '通用',
-                'add-filter-btn'                => '添加过滤器',
-                'save-btn'                      => '保存',
-                'filter-title'                  => '标题',
-                'sort'                          => '排序',
-                'desc'                          => '降序',
-                'asc'                           => '升序',
-                'limit'                         => '限制',
-                'footer-title'                  => '标题',
-                'link'                          => '链接',
-                'add-logo'                      => '添加标志',
-                'key'                           => '键：:key',
-                'value'                         => '值：:value',
-                'delete'                        => '删除',
-                'name'                          => '名称',
-                'sort-order'                    => '排序顺序',
-                'status'                        => '状态',
-                'image'                         => '图片',
-                'create-filter'                 => '创建过滤器',
-                'key-input'                     => '键',
-                'value-input'                   => '值',
-                'html'                          => 'HTML',
-                'css'                           => 'CSS',
-                'add-footer-link-btn'           => '添加页脚链接',
-                'filters'                       => '过滤器',
-                'edit'                          => '编辑',
-                'url'                           => 'URL',
-                'add-link'                      => '添加链接',
-                'create-slider'                 => '创建轮播',
-                'slider-image'                  => '轮播图片',
-                'column'                        => '列',
-                'select'                        => '选择',
-                'back'                          => '返回',
-             ],
+                'product-carousel'               => '产品轮播',
+                'product-carousel-description'   => '使用动态和响应式产品轮播优雅地展示产品。',
+                'category-carousel-description'  => '使用响应式的类别轮播动态展示吸引人的类别。',
+                'static-content-description'     => '通过简明扼要的静态内容提高受众的参与度。',
+                'footer-link-description'        => '通过页脚链接进行无缝的网站探索和信息浏览。',
+                'category-carousel'              => '类别轮播',
+                'static-content'                 => '静态内容',
+                'footer-link'                    => '页脚链接',
+                'footer-link-form-title'         => '页脚链接',
+                'slider-description'             => '与轮播相关的主题定制。',
+                'slider-add-btn'                 => '添加轮播',
+                'general'                        => '通用',
+                'add-filter-btn'                 => '添加过滤器',
+                'save-btn'                       => '保存',
+                'filter-title'                   => '标题',
+                'sort'                           => '排序',
+                'desc'                           => '降序',
+                'asc'                            => '升序',
+                'limit'                          => '限制',
+                'footer-title'                   => '标题',
+                'link'                           => '链接',
+                'add-logo'                       => '添加标志',
+                'key'                            => '键：:key',
+                'value'                          => '值：:value',
+                'delete'                         => '删除',
+                'name'                           => '名称',
+                'sort-order'                     => '排序顺序',
+                'status'                         => '状态',
+                'image'                          => '图片',
+                'create-filter'                  => '创建过滤器',
+                'key-input'                      => '键',
+                'value-input'                    => '值',
+                'html'                           => 'HTML',
+                'css'                            => 'CSS',
+                'add-footer-link-btn'            => '添加页脚链接',
+                'filters'                        => '过滤器',
+                'edit'                           => '编辑',
+                'url'                            => 'URL',
+                'add-link'                       => '添加链接',
+                'create-slider'                  => '创建轮播',
+                'slider-image'                   => '轮播图片',
+                'column'                         => '列',
+                'select'                         => '选择',
+                'back'                           => '返回',
+            ],
 
             'edit' => [
                 'title'                         => '编辑主题',
@@ -2611,43 +2611,59 @@ return [
 
     'configuration' => [
         'index' => [
-            'title'                        => '配置',
-            'save-btn'                     => '保存配置',
-            'save-message'                 => '配置保存成功',
             'delete'                       => '删除',
             'enable-at-least-one-shipping' => '至少启用一种运输方式。',
-            'enable-at-least-one-payment'  => '至少启用一种付款方式。',
+            'enable-at-least-one-payment'  => '至少启用一种支付方式。',
+            'save-btn'                     => '保存配置',
+            'save-message'                 => '配置已成功保存',
+            'title'                        => '配置',
 
             'general' => [
+                'info'  => '设置单位选项。',
+                'title' => '通用',
+
                 'general' => [
-                    'title'             => '通用',
-                    'info'              => '设置单位选项。',
-                    'unit-options'      => '单位选项',
-                    'unit-options-info' => '尺寸、颜色、材料、定制、提高客户满意度和个性化购买。',
-                    'weight-unit'       => '重量单位',
+                    'info'  => '设置单位选项。',
+                    'title' => '通用',
+
+                    'unit-options' => [
+                        'info'              => '设置单位选项。',
+                        'title'             => '单位选项',
+                        'title-info'        => '尺寸、颜色、材料、定制、增强客户满意度和定制购买。',
+                        'weight-unit'       => '重量单位',
+                    ],
                 ],
 
                 'content' => [
-                    'title'               => '内容',
-                    'info'                => '设置比较选项、心愿单选项、图像搜索选项、页脚、切换页脚和自定义脚本。',
-                    'custom-scripts'      => '自定义脚本',
-                    'custom-scripts-info' => '自定义脚本是用于向软件添加特定功能或特性以增强其独特能力的个性化代码块。',
-                    'custom-css'          => '自定义CSS',
-                    'custom-javascript'   => '自定义Javascript',
-                    'compare-options'     => '比较选项',
-                    'wishlist-options'    => '愿望清单选项',
-                    'image-search-option' => '图像搜索选项',
-                    'settings-title'      => '设置',
-                    'settings-title-info' => '设置指的是可配置的选择，用于控制系统、应用程序或设备的行为方式，根据用户的偏好和需求进行定制。'
+                    'info'  => '设置比较选项、愿望列表选项、图像搜索选项、页脚、切换页脚和自定义脚本。',
+                    'title' => '内容',
+
+                    'settings' => [
+                        'compare-options'     => '比较选项',
+                        'image-search-option' => '图像搜索选项',
+                        'title'               => '设置',
+                        'title-info'          => '设置是指可配置的选择，控制系统、应用程序或设备的行为方式，根据用户的偏好和要求进行定制。',
+                        'wishlist-options'    => '愿望列表选项',
+                    ],
+
+                    'custom-scripts' => [
+                        'custom-css'        => '自定义CSS',
+                        'custom-javascript' => '自定义Javascript',
+                        'title'             => '自定义脚本',
+                        'title-info'        => '自定义脚本是为软件添加特定功能或特性而创建的个性化代码片段，增强其独特功能。',
+                    ],
                 ],
 
                 'design' => [
-                    'title'           => '设计',
-                    'info'            => '设置标志和网站图标。',
-                    'admin-logo'      => '管理员标志',
-                    'admin-logo-info' => '管理员标志是代表系统或网站管理界面的特定图像或徽标，通常可自定义。',
-                    'logo-image'      => '标志图像',
-                    'favicon'         => '网站图标',
+                    'info'  => '设置标志和Favicon图标。',
+                    'title' => '设计',
+
+                    'admin-logo' => [
+                        'favicon'         => 'Favicon',
+                        'logo-image'      => '标志图像',
+                        'title'           => '管理员标志',
+                        'title-info'      => '管理员标志是代表系统或网站管理界面的独特图像或标志，通常可以定制。',
+                    ],
                 ],
             ],
 
@@ -2991,7 +3007,7 @@ return [
                 'must-select-a-mass-action-option' => '您必须选择批量操作的选项。',
                 'sure-want-to-perform-this-action' => '您确定要执行此操作吗？',
             ],
-            
+
             'toolbar' => [
                 'mass-actions' => [
                     'select-action' => '选择操作',
@@ -3065,7 +3081,7 @@ return [
                 'allowed-types'     => 'mp4, webm, mkv',
                 'not-allowed-error' => '仅允许视频文件（.mp4、.mov、.ogg 等）。',
             ],
-        ]
+        ],
     ],
 
     'acl' => [

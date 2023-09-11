@@ -11,7 +11,7 @@ return [
         ],
 
         'forget-password' => [
-            'create'    =>  [
+            'create'    => [
                 'email'           => 'Correo Electrónico Registrado',
                 'email-not-exist' => 'El Correo Electrónico no Existe',
                 'page-title'      => 'Olvidar Contraseña',
@@ -174,7 +174,7 @@ return [
                 'contact'               => 'Contacto',
                 'comment-success'       => 'Comentario agregado con éxito.',
                 'create-success'        => 'Pedido creado con éxito',
-                'cancel-success' => 'Pedido cancelado con éxito',
+                'cancel-success'        => 'Pedido cancelado con éxito',
                 'create-invoice'        => 'Crear Factura',
                 'discount'              => 'Descuento - :discount',
                 'download-pdf'          => 'Descargar PDF',
@@ -291,7 +291,7 @@ return [
                 'shipping-price'       => 'Precio de Envío',
                 'title'                => 'Envío #:shipment_id',
                 'tracking-number'      => 'Número de Seguimiento',
-            ]
+            ],
         ],
 
         'refunds' => [
@@ -474,7 +474,7 @@ return [
                     'transaction-amount' => 'Monto',
                 ],
 
-                'edit'  =>  [
+                'edit'  => [
                     'already-paid'               => 'Ya pagado',
                     'invoice-missing'            => 'Factura no encontrada',
                     'transaction-amount-zero'    => 'Monto de Transacción en cero',
@@ -1272,7 +1272,7 @@ return [
                     'group-default'  => 'No se puede eliminar el Grupo Predeterminado',
                 ],
 
-                'datagrid'  =>  [
+                'datagrid'  => [
                     'code'    => 'Código',
                     'id'      => 'ID',
                     'name'    => 'Nombre',
@@ -1311,7 +1311,7 @@ return [
                     'update-success' => 'Actualización Exitosa',
                 ],
 
-                'datagrid'   =>  [
+                'datagrid'   => [
                     'customer-names'         => 'Nombre',
                     'comment'                => 'Comentario',
                     'date'                   => 'Fecha',
@@ -1345,7 +1345,7 @@ return [
                 'address-2'          => 'Dirección 2',
                 'city'               => 'Ciudad',
                 'state'              => 'Estado',
-                'select-country'     => "Selecciona el País",
+                'select-country'     => 'Selecciona el País',
                 'country'            => 'País',
                 'default-address'    => 'Dirección Predeterminada',
                 'first-name'         => 'Nombre',
@@ -1364,7 +1364,7 @@ return [
                 'address-2'        => 'Dirección 2',
                 'city'             => 'Ciudad',
                 'state'            => 'Estado',
-                'select-country'   => "Selecciona el País",
+                'select-country'   => 'Selecciona el País',
                 'country'          => 'País',
                 'default-address'  => 'Dirección Predeterminada',
                 'first-name'       => 'Nombre',
@@ -1874,7 +1874,7 @@ return [
             'cart-rules-coupons' => [
                 'cart-rule-not-defined-error'  => 'No se puede eliminar la regla del carrito',
                 'success'                      => ':name creado exitosamente',
-                'mass-delete-success'          => 'Eliminación masiva de reglas del carrito exitosa'
+                'mass-delete-success'          => 'Eliminación masiva de reglas del carrito exitosa',
             ],
         ],
 
@@ -1905,10 +1905,10 @@ return [
                     'delete-warning' => '¿Estás seguro de que deseas realizar esta acción?',
                 ],
 
-                'edit'  =>  [
-                    'title'   => 'Editar Mapa del sitio',
-                    'success' => 'Mapa del sitio actualizado exitosamente',
-                    'delete-success' => 'Mapa del sitio eliminado exitosamente'
+                'edit'  => [
+                    'title'          => 'Editar Mapa del sitio',
+                    'success'        => 'Mapa del sitio actualizado exitosamente',
+                    'delete-success' => 'Mapa del sitio eliminado exitosamente',
                 ],
             ],
 
@@ -1939,7 +1939,7 @@ return [
                 'view'                => 'Ver',
                 'edit'                => 'Editar',
                 'delete'              => 'Eliminar',
-                'mass-delete-success' => 'Datos Seleccionados Eliminados Exitosamente'
+                'mass-delete-success' => 'Datos Seleccionados Eliminados Exitosamente',
             ],
         ],
 
@@ -1998,7 +1998,7 @@ return [
                     'delete'    => 'Eliminar',
                 ],
 
-                'create'  =>  [
+                'create'  => [
                     'code'             => 'Código',
                     'name'             => 'Nombre',
                     'direction'        => 'Dirección',
@@ -2097,7 +2097,7 @@ return [
                 'create-success'  => 'Tipo de Cambio Creado Exitosamente',
                 'update-success'  => 'Tipo de Cambio Actualizado Exitosamente',
                 'delete-success'  => 'Tipo de Cambio Eliminado Exitosamente',
-                'delete-error'    => 'Error al Eliminar el Tipo de Cambio'
+                'delete-error'    => 'Error al Eliminar el Tipo de Cambio',
             ],
         ],
 
@@ -2196,7 +2196,7 @@ return [
                         'code'     => 'Código',
                         'edit'     => 'Editar',
                         'delete'   => 'Eliminar',
-                        'actions' => 'Acciones',
+                        'actions'  => 'Acciones',
                     ],
 
                     'create' => [
@@ -2392,7 +2392,7 @@ return [
                     'role'              => 'Rol',
                     'status'            => 'Estado',
                     'save-btn'          => 'Guardar Usuario',
-                    'upload-image-info' => 'Subir una imagen de perfil (110px X 110px) en formato PNG o JPG'
+                    'upload-image-info' => 'Subir una imagen de perfil (110px X 110px) en formato PNG o JPG',
                 ],
 
                 'datagrid' => [
@@ -2445,7 +2445,7 @@ return [
                 'title'      => 'Roles',
                 'create-btn' => 'Crear Rol',
 
-                'datagrid'  =>  [
+                'datagrid'  => [
                     'delete'            => 'Eliminar',
                     'edit'              => 'Editar',
                     'id'                => 'Id',
@@ -2503,57 +2503,57 @@ return [
                     'id'         => 'Id',
                     'type'       => 'Tipo',
                     'name'       => 'Nombre',
-                ]
+                ],
             ],
 
             'create' => [
-                'title'                         => 'Crear Tema',
+                'title'                          => 'Crear Tema',
                 'sliders'                        => 'Sliders',
-                'product-carousel'              => 'Carrusel de Productos',
-                'product-carousel-description'  => 'Muestra productos de forma elegante con un carrusel de productos dinámico y receptivo.',
-                'category-carousel-description' => 'Muestra categorías dinámicas de forma atractiva utilizando un carrusel de categorías receptivo.',
-                'static-content-description'    => 'Mejora la interacción con contenido estático conciso e informativo para tu audiencia.',
-                'footer-link-description'       => 'Navega a través de enlaces en el pie de página para una exploración e información del sitio web sin problemas.',
-                'category-carousel'             => 'Carrusel de Categorías',
-                'static-content'                => 'Contenido Estático',
-                'footer-link'                   => 'Enlaces del Pie de Página',
-                'footer-link-form-title'        => 'Enlace del Pie de Página',
-                'slider-description'            => 'Personalización de temas relacionados con el Slider.',
-                'slider-add-btn'                => 'Agregar Slider',
-                'general'                       => 'General',
-                'add-filter-btn'                => 'Agregar Filtro',
-                'save-btn'                      => 'Guardar',
-                'filter-title'                  => 'Título',
-                'sort'                          => 'Orden',
-                'desc'                          => 'Descendente',
-                'asc'                           => 'Ascendente',
-                'limit'                         => 'Límite',
-                'footer-title'                  => 'Título',
-                'link'                          => 'Enlace',
-                'add-logo'                      => 'Agregar Logotipo',
-                'key'                           => 'Clave: :key',
-                'value'                         => 'Valor: :value',
-                'delete'                        => 'Eliminar',
-                'name'                          => 'Nombre',
-                'sort-order'                    => 'Orden de Clasificación',
-                'status'                        => 'Estado',
-                'image'                         => 'Imagen',
-                'create-filter'                 => 'Crear Filtro',
-                'key-input'                     => 'Clave',
-                'value-input'                   => 'Valor',
-                'html'                          => 'HTML',
-                'css'                           => 'CSS',
-                'add-footer-link-btn'           => 'Agregar Enlace del Pie de Página',
-                'filters'                       => 'Filtros',
-                'edit'                          => 'Editar',
-                'url'                           => 'URL',
-                'add-link'                      => 'Agregar Enlace',
-                'create-slider'                 => 'Crear Slider',
-                'slider-image'                  => 'Imagen del Slider',
-                'column'                        => 'Columna',
-                'select'                        => 'Seleccionar',
-                'back'                          => 'Volver',
-             ],
+                'product-carousel'               => 'Carrusel de Productos',
+                'product-carousel-description'   => 'Muestra productos de forma elegante con un carrusel de productos dinámico y receptivo.',
+                'category-carousel-description'  => 'Muestra categorías dinámicas de forma atractiva utilizando un carrusel de categorías receptivo.',
+                'static-content-description'     => 'Mejora la interacción con contenido estático conciso e informativo para tu audiencia.',
+                'footer-link-description'        => 'Navega a través de enlaces en el pie de página para una exploración e información del sitio web sin problemas.',
+                'category-carousel'              => 'Carrusel de Categorías',
+                'static-content'                 => 'Contenido Estático',
+                'footer-link'                    => 'Enlaces del Pie de Página',
+                'footer-link-form-title'         => 'Enlace del Pie de Página',
+                'slider-description'             => 'Personalización de temas relacionados con el Slider.',
+                'slider-add-btn'                 => 'Agregar Slider',
+                'general'                        => 'General',
+                'add-filter-btn'                 => 'Agregar Filtro',
+                'save-btn'                       => 'Guardar',
+                'filter-title'                   => 'Título',
+                'sort'                           => 'Orden',
+                'desc'                           => 'Descendente',
+                'asc'                            => 'Ascendente',
+                'limit'                          => 'Límite',
+                'footer-title'                   => 'Título',
+                'link'                           => 'Enlace',
+                'add-logo'                       => 'Agregar Logotipo',
+                'key'                            => 'Clave: :key',
+                'value'                          => 'Valor: :value',
+                'delete'                         => 'Eliminar',
+                'name'                           => 'Nombre',
+                'sort-order'                     => 'Orden de Clasificación',
+                'status'                         => 'Estado',
+                'image'                          => 'Imagen',
+                'create-filter'                  => 'Crear Filtro',
+                'key-input'                      => 'Clave',
+                'value-input'                    => 'Valor',
+                'html'                           => 'HTML',
+                'css'                            => 'CSS',
+                'add-footer-link-btn'            => 'Agregar Enlace del Pie de Página',
+                'filters'                        => 'Filtros',
+                'edit'                           => 'Editar',
+                'url'                            => 'URL',
+                'add-link'                       => 'Agregar Enlace',
+                'create-slider'                  => 'Crear Slider',
+                'slider-image'                   => 'Imagen del Slider',
+                'column'                         => 'Columna',
+                'select'                         => 'Seleccionar',
+                'back'                           => 'Volver',
+            ],
 
             'edit' => [
                 'title'                         => 'Editar Tema',
@@ -2611,303 +2611,472 @@ return [
 
     'configuration' => [
         'index' => [
-            'title'                        => 'Configuración',
-            'save-btn'                     => 'Guardar Configuración',
-            'save-message'                 => 'Configuración guardada exitosamente',
             'delete'                       => 'Eliminar',
-            'enable-at-least-one-shipping' => 'Habilita al menos un método de envío.',
-            'enable-at-least-one-payment'  => 'Habilita al menos un método de pago.',
+            'enable-at-least-one-shipping' => 'Habilitar al menos un método de envío.',
+            'enable-at-least-one-payment'  => 'Habilitar al menos un método de pago.',
+            'save-btn'                     => 'Guardar configuración',
+            'save-message'                 => 'Configuración guardada exitosamente',
+            'title'                        => 'Configuración',
 
             'general' => [
+                'info'  => 'Establecer opciones generales.',
+                'title' => 'General',
+
                 'general' => [
-                    'title'             => 'General',
-                    'info'              => 'Configura opciones de unidades.',
-                    'unit-options'      => 'Opciones de Unidades',
-                    'unit-options-info' => 'Tamaño, color, material, personalización, mejora de la satisfacción del cliente y adaptación de las compras.',
-                    'weight-unit'       => 'Unidad de Peso',
+                    'info'  => 'Establecer opciones generales.',
+                    'title' => 'General',
+
+                    'unit-options' => [
+                        'info'              => 'Establecer opciones de unidades.',
+                        'title'             => 'Opciones de unidades',
+                        'title-info'        => 'Tamaño, color, material, personalización, mejora de la satisfacción del cliente y personalización de compras.',
+                        'weight-unit'       => 'Unidad de peso',
+                    ],
                 ],
 
                 'content' => [
-                    'title'               => 'Contenido',
-                    'info'                => 'Configura opciones de comparación, opciones de lista de deseos, opciones de búsqueda de imágenes, pie de página, alternar pie de página y scripts personalizados.',
-                    'custom-scripts'      => 'Scripts Personalizados',
-                    'custom-scripts-info' => 'Los scripts personalizados son piezas de código personalizadas creadas para agregar funciones o características específicas al software, mejorando sus capacidades de manera única.',
-                    'custom-css'          => 'CSS Personalizado',
-                    'custom-javascript'   => 'Javascript Personalizado',
-                    'compare-options'     => 'Opciones de comparación',
-                    'wishlist-options'    => 'Opciones de lista de deseos',
-                    'image-search-option' => 'Opción de búsqueda de imágenes',
-                    'settings-title'      => 'Configuración',
-                    'settings-title-info' => 'Las configuraciones se refieren a opciones configurables que controlan cómo se comporta un sistema, aplicación o dispositivo, adaptadas a las preferencias y requisitos del usuario.'
+                    'info'  => 'Configurar opciones de comparación, lista de deseos, opciones de búsqueda de imágenes, pie de página, conmutación de pie de página y scripts personalizados.',
+                    'title' => 'Contenido',
+
+                    'settings' => [
+                        'compare-options'     => 'Opciones de comparación',
+                        'image-search-option' => 'Opción de búsqueda de imágenes',
+                        'title'               => 'Configuración',
+                        'title-info'          => 'La configuración se refiere a las opciones configurables que controlan cómo se comporta un sistema, una aplicación o un dispositivo, adaptadas a las preferencias y requisitos del usuario.',
+                        'wishlist-options'    => 'Opciones de lista de deseos',
+                    ],
+
+                    'custom-scripts' => [
+                        'custom-css'        => 'CSS personalizado',
+                        'custom-javascript' => 'Javascript personalizado',
+                        'title'             => 'Scripts personalizados',
+                        'title-info'        => 'Los scripts personalizados son fragmentos de código personalizados creados para agregar funciones o características específicas al software y ampliar sus capacidades de manera única.',
+                    ],
                 ],
 
                 'design' => [
-                    'title'           => 'Diseño',
-                    'info'            => 'Configura el logo y el icono favicon.',
-                    'admin-logo'      => 'Logo de Administración',
-                    'admin-logo-info' => 'El logo de administración es la imagen distintiva o emblema que representa la interfaz de administración de un sistema o sitio web, a menudo personalizable.',
-                    'logo-image'      => 'Imagen del Logo',
-                    'favicon'         => 'Favicon',
+                    'info'  => 'Establecer logo y favicon.',
+                    'title' => 'Diseño',
+
+                    'admin-logo' => [
+                        'favicon'         => 'Favicon',
+                        'logo-image'      => 'Imagen del logo',
+                        'title'           => 'Logo de administrador',
+                        'title-info'      => 'El logo de administrador es la imagen o emblema característico que representa la interfaz de administración de un sistema o sitio web, a menudo personalizable.',
+                    ],
                 ],
             ],
 
             'catalog' => [
                 'title' => 'Catálogo',
-                'info' => 'Catálogo',
+                'info'  => 'Catálogo',
 
                 'inventory' => [
-                    'title'              => 'Inventario',
-                    'info'               => 'Configurar pedidos atrasados',
-                    'stock-options'      => 'Opciones de acciones',
-                    'stock-options-info' => 'Las opciones de acciones son contratos de inversión que otorgan el derecho de comprar o vender acciones de una empresa a un precio predeterminado, lo que influye en las ganancias potenciales.',
-                    'allow-back-orders'  => 'Permitir pedidos atrasados',
+                    'title' => 'Inventario',
+                    'info'  => 'Configuración de pedidos atrasados',
+
+                    'stock-options' => [
+                        'allow-back-orders'  => 'Permitir pedidos atrasados',
+                        'title'              => 'Opciones de stock',
+                        'title-info'         => 'Las opciones de stock son contratos de inversión que otorgan el derecho de comprar o vender acciones de una empresa a un precio predeterminado, lo que influye en las ganancias potenciales.',
+                    ],
                 ],
 
                 'products' => [
-                    'title'                               => 'Productos',
-                    'info'                                => 'Configuración de productos',
-                    'guest-checkout'                      => 'Compra de invitados',
-                    'guest-checkout-info'                 => 'La compra de invitados permite a los clientes comprar productos sin crear una cuenta, agilizando el proceso de compra para mayor comodidad y transacciones más rápidas.',
-                    'allow-guest-checkout'                => 'Permitir compra de invitados',
-                    'allow-guest-checkout-hint'           => 'Sugerencia: si está activado, esta opción se puede configurar específicamente para cada producto.',
-                    'attribute'                           => 'Atributo',
-                    'homepage'                            => 'Configuración de la página de inicio',
-                    'homepage-info'                       => 'La configuración de la página de inicio implica personalizar el diseño, contenido y diseño de la página principal de un sitio web para presentar la información deseada de manera efectiva.',
-                    'allow-no-of-new-products'            => 'Número permitido de nuevos productos en la página de inicio',
-                    'allow-no-of-featured-products'       => 'Número permitido de productos destacados en la página de inicio',
-                    'allow-no-of-related-products'        => 'Número permitido de productos relacionados',
-                    'allow-no-of-up-sells-products'       => 'Número permitido de productos de venta cruzada',
-                    'allow-no-of-cross-sells-products'    => 'Número permitido de productos complementarios',
-                    'product-view-page'                   => 'Configuración de la página de vista del producto',
-                    'product-view-page-info'              => 'La configuración de la página de vista del producto implica ajustar el diseño y los elementos en la página de visualización de un producto, mejorando la experiencia del usuario y la presentación de información.',
-                    'cart-view-page'                      => 'Configuración de la página de vista del carrito',
-                    'cart-view-page-info'                 => 'La configuración de la página de vista del carrito implica organizar elementos, detalles y opciones en la página del carrito de compras, mejorando la interacción del usuario y el flujo de compra.',
-                    'storefront'                          => 'Tienda',
-                    'storefront-info'                     => 'La tienda es la interfaz orientada al cliente de una tienda en línea, donde se muestran productos, categorías y navegación para una experiencia de compra sin problemas.',
-                    'search-mode'                         => 'Modo de búsqueda',
-                    'flat'                                => 'Tabla plana',
-                    'elastic'                             => 'Búsqueda elástica',
-                    'default-list-mode'                   => 'Modo de lista predeterminado',
-                    'grid'                                => 'Cuadrícula',
-                    'list'                                => 'Lista',
-                    'products-per-page'                   => 'Productos por página',
-                    'sort-by'                             => 'Ordenar por',
-                    'from-z-a'                            => 'De la Z a la A',
-                    'from-a-z'                            => 'De la A a la Z',
-                    'latest-first'                        => 'Más recientes primero',
-                    'oldest-first'                        => 'Más antiguos primero',
-                    'cheapest-first'                      => 'Más baratos primero',
-                    'expensive-first'                     => 'Más caros primero',
-                    'buy-now-button-display'              => 'Permitir a los clientes comprar productos directamente',
-                    'cache-small-image'                   => 'Imagen pequeña',
-                    'cache-small-image-info'              => 'La imagen pequeña se utiliza comúnmente para las vistas previas en la tienda, mostrando productos de manera compacta.',
-                    'width'                               => 'Ancho',
-                    'height'                              => 'Altura',
-                    'cache-medium-image'                  => 'Imagen mediana',
-                    'cache-medium-image-info'             => 'La imagen mediana se refiere a una imagen de tamaño moderado que ofrece un equilibrio entre el detalle y el espacio en pantalla, comúnmente utilizada para visuales.',
-                    'cache-large-image'                   => 'Imagen grande',
-                    'cache-large-image-info'              => 'La imagen grande representa una imagen de alta resolución que proporciona un detalle mejorado y un impacto visual, a menudo utilizada para mostrar productos o gráficos.',
-                    'review'                              => 'Reseña',
-                    'review-info'                         => 'Evaluación o valoración de algo, a menudo con opiniones y comentarios.',
-                    'allow-guest-review'                  => 'Permitir reseñas de invitados',
-                    'attribute-info'                      => 'Característica o propiedad que define un objeto, influenciando su comportamiento, apariencia o función.',
-                    'image-upload-size'                   => 'Tamaño de Carga de Imagen Permitido (en Kb)',
-                    'file-upload-size'                    => 'Tamaño de Carga de Archivo Permitido (en Kb)',
-                    'comma-separated'                     => 'Separado por comas',
+                    'info'  => 'Einrichten von Gastbestellung, Startseite, Produktansichtsseite, Warenkorbansichtsseite, Ladenfront, Bewertung und soziale Freigabe von Attributen.',
+                    'title' => 'Produkte',
+
+                    'guest-checkout' => [
+                        'allow-guest-checkout'      => 'Gastbestellung erlauben',
+                        'allow-guest-checkout-hint' => 'Hinweis: Wenn aktiviert, kann diese Option für jedes Produkt speziell konfiguriert werden.',
+                        'title'                     => 'Gastbestellung',
+                        'title-info'                => 'Die Gastbestellung ermöglicht es Kunden, Produkte zu kaufen, ohne ein Konto zu erstellen, und erleichtert den Kaufprozess für Bequemlichkeit und schnellere Transaktionen.',
+                    ],
+
+                    'homepage' => [
+                        'allow-no-of-new-products'       => 'Zulässige Anzahl neuer Produkte auf der Startseite',
+                        'allow-no-of-featured-products'  => 'Zulässige Anzahl der vorgestellten Produkte auf der Startseite',
+                        'title'                          => 'Startseitenkonfiguration',
+                        'title-info'                     => 'Die Konfiguration der Startseite beinhaltet die Anpassung des Layouts, des Inhalts und des Designs der Hauptseite einer Website, um gewünschte Informationen effektiv zu präsentieren.',
+                    ],
+
+                    'product-view-page' => [
+                        'allow-no-of-related-products'  => 'Zulässige Anzahl verwandter Produkte',
+                        'allow-no-of-up-sells-products' => 'Zulässige Anzahl von Up-Sell-Produkten',
+                        'title'                         => 'Konfiguration der Produktansichtsseite',
+                        'title-info'                    => 'Die Konfiguration der Produktansichtsseite beinhaltet die Anpassung des Layouts und der Elemente auf einer Produktanszeigeseite, um die Benutzererfahrung und die Präsentation von Informationen zu verbessern.',
+                    ],
+
+                    'cart-view-page' => [
+                        'allow-no-of-cross-sells-products' => 'Zulässige Anzahl von Cross-Sell-Produkten',
+                        'title'                            => 'Konfiguration der Warenkorbansichtsseite',
+                        'title-info'                       => 'Die Konfiguration der Warenkorbansichtsseite beinhaltet die Anordnung von Artikeln, Details und Optionen auf der Einkaufswagen-Seite, um die Benutzerinteraktion und den Kaufvorgang zu verbessern.',
+                    ],
+
+                    'storefront' => [
+                        'buy-now-button-display' => 'Kunden können Produkte direkt kaufen',
+                        'comma-separated'        => 'Durch Komma getrennt',
+                        'cheapest-first'         => 'Günstigste zuerst',
+                        'default-list-mode'      => 'Standardlistenmodus',
+                        'expensive-first'        => 'Teuerste zuerst',
+                        'elastic'                => 'Elastische Suche',
+                        'flat'                   => 'Flache Tabelle',
+                        'from-z-a'               => 'Von Z-A',
+                        'from-a-z'               => 'Von A-Z',
+                        'grid'                   => 'Raster',
+                        'list'                   => 'Liste',
+                        'latest-first'           => 'Neueste zuerst',
+                        'oldest-first'           => 'Älteste zuerst',
+                        'products-per-page'      => 'Produkte pro Seite',
+                        'sort-by'                => 'Sortieren nach',
+                        'search-mode'            => 'Suchmodus',
+                        'title'                  => 'Ladenfront',
+                        'title-info'             => 'Die Ladenfront ist die kundenorientierte Benutzeroberfläche eines Online-Shops und präsentiert Produkte, Kategorien und Navigation für ein nahtloses Einkaufserlebnis.',
+                    ],
+
+                    'small-image' => [
+                        'height'     => 'Höhe',
+                        'title'      => 'Kleines Bild',
+                        'title-info' => 'Kleines Bild ist die kundenorientierte Benutzeroberfläche eines Online-Shops und präsentiert Produkte, Kategorien und Navigation für ein nahtloses Einkaufserlebnis.',
+                        'width'      => 'Breite',
+                    ],
+
+                    'medium-image' => [
+                        'height'     => 'Höhe',
+                        'title'      => 'Mittleres Bild',
+                        'title-info' => 'Mittleres Bild bezieht sich auf ein mittelgroßes Bild, das eine Balance zwischen Detail und Bildschirmfläche bietet und häufig für visuelle Darstellungen verwendet wird.',
+                        'width'      => 'Breite',
+                    ],
+
+                    'large-image' => [
+                        'width'      => 'Breite',
+                        'height'     => 'Höhe',
+                        'title'      => 'Großes Bild',
+                        'title-info' => 'Großes Bild stellt ein hochauflösendes Bild dar, das eine verbesserte Detailgenauigkeit und visuelle Wirkung bietet und häufig für die Präsentation von Produkten oder Grafiken verwendet wird.',
+                    ],
+
+                    'review' => [
+                        'allow-guest-review' => 'Gastbewertung zulassen',
+                        'title'              => 'Bewertung',
+                        'title-info'         => 'Bewertung oder Einschätzung von etwas, oft unter Einbeziehung von Meinungen und Feedback.',
+                    ],
+
+                    'attribute' => [
+                        'file-upload-size'  => 'Zulässige Dateigröße für den Upload (in KB)',
+                        'image-upload-size' => 'Zulässige Bildgröße für den Upload (in KB)',
+                        'title'             => 'Attribut',
+                        'title-info'        => 'Merkmale oder Eigenschaften, die ein Objekt definieren und sein Verhalten, sein Aussehen oder seine Funktion beeinflussen.',
+                    ],
+
+                    'social-share' => [
+                        'enable-social-share'    => 'Soziale Freigabe aktivieren?',
+                        'enable-share-facebook'  => 'Freigabe in Facebook aktivieren?',
+                        'enable-share-twitter'   => 'Freigabe in Twitter aktivieren?',
+                        'enable-share-pinterest' => 'Freigabe in Pinterest aktivieren?',
+                        'enable-share-whatsapp'  => 'Freigabe in WhatsApp aktivieren?',
+                        'enable-share-linkedin'  => 'Freigabe in LinkedIn aktivieren?',
+                        'enable-share-email'     => 'Freigabe in E-Mail aktivieren?',
+                        'share-message'          => 'Freigabemeldung',
+                        'share'                  => 'Teilen',
+                        'title'                  => 'Soziale Freigabe',
+                        'title-info'             => 'Dinge von einer Website mit Freunden auf sozialen Medienplattformen wie Facebook, Twitter oder Instagram teilen.',
+                    ],
                 ],
 
                 'rich-snippets' => [
-                    'title'                       => 'Fragmentos Enriquecidos',
-                    'info'                        => 'Configurar productos y categorías.',
-                    'products'                    => 'Productos',
-                    'rich-snippet-product-info'   => 'Artículos disponibles para compra o uso, ofrecidos por un negocio o vendedor.',
-                    'enable'                      => 'Habilitar',
-                    'show-weight'                 => 'Mostrar Peso',
-                    'show-categories'             => 'Mostrar Categorías',
-                    'show-images'                 => 'Mostrar Imágenes',
-                    'show-reviews'                => 'Mostrar Reseñas',
-                    'show-ratings'                => 'Mostrar Calificaciones',
-                    'show-offers'                 => 'Mostrar Ofertas',
-                    'show-sku'                    => 'Mostrar SKU',
-                    'categories'                  => 'Categorías',
-                    'categories-info'             => '"Categorías" se refieren a grupos o clasificaciones que ayudan a organizar y agrupar productos o artículos similares para facilitar la navegación y búsqueda.',
-                    'show-search-input-field'     => 'Mostrar Campo de Entrada de Búsqueda',
+                    'info'  => 'Produkte und Kategorien einstellen.',
+                    'title' => 'Rich Snippets',
+
+                    'products' => [
+                        'enable'          => 'Aktivieren',
+                        'show-weight'     => 'Gewicht anzeigen',
+                        'show-categories' => 'Kategorien anzeigen',
+                        'show-images'     => 'Bilder anzeigen',
+                        'show-reviews'    => 'Bewertungen anzeigen',
+                        'show-ratings'    => 'Bewertungen anzeigen',
+                        'show-offers'     => 'Angebote anzeigen',
+                        'show-sku'        => 'SKU anzeigen',
+                        'title'           => 'Produkte',
+                        'title-info'      => 'Artikel, die zum Kauf oder zur Verwendung angeboten werden, die von einem Unternehmen oder Verkäufer angeboten werden.',
+                    ],
+
+                    'categories' => [
+                        'enable'                  => 'Aktivieren',
+                        'show-search-input-field' => 'Sucheingabefeld anzeigen',
+                        'title'                   => 'Kategorien',
+                        'title-info'              => '"Kategorien" beziehen sich auf Gruppen oder Klassifikationen, die dazu beitragen, ähnliche Produkte oder Artikel für eine einfachere Durchsicht und Navigation zusammenzufassen.',
+                    ],
                 ],
             ],
 
             'customer' => [
-                'title' => 'Cliente',
                 'info'  => 'Cliente',
+                'title' => 'Cliente',
 
                 'address' => [
-                    'title'              => 'Dirección',
-                    'info'               => 'Configurar país, estado, código postal y líneas en una dirección de calle.',
-                    'requirements'       => 'Requisitos',
-                    'requirements-info'  => 'Los requisitos son las condiciones, características o especificaciones necesarias para que algo se cumpla, logre o satisfaga con éxito.',
-                    'country'            => 'País',
-                    'state'              => 'Estado',
-                    'zip'                => 'Código Postal',
-                    'city'               => 'Ciudad',
-                    'information'        => 'Información',
-                    'information-info'   => '"Líneas en una dirección de calle" se refiere a los segmentos individuales de una dirección, a menudo separados por comas, que proporcionan información de ubicación como número de casa, calle, ciudad y más.',
-                    'street-lines'       => 'Líneas en una Dirección de Calle',
+                    'info'  => 'Establecer país, estado, código postal y dirección.',
+                    'title' => 'Dirección',
+
+                    'requirements' => [
+                        'country'    => 'País',
+                        'city'       => 'Ciudad',
+                        'state'      => 'Estado',
+                        'title'      => 'Requisitos',
+                        'title-info' => 'Los requisitos son condiciones, propiedades o características que deben cumplirse, adquirirse o completarse con éxito.',
+                        'zip'        => 'Código Postal',
+                    ],
+
+                    'information' => [
+                        'street-lines' => 'Líneas de Dirección',
+                        'title'        => 'Información',
+                        'title-info'   => 'Una "línea de dirección" es una categoría individual de una dirección, generalmente separada por comas, que proporciona información de ubicación como número de casa, calle, ciudad y otros detalles.',
+                    ],
+                ],
+
+                'captcha' => [
+                    'info'  => 'Configurar clave del sitio, clave secreta y estado.',
+                    'title' => 'Captcha',
+
+                    'credentials' => [
+                        'site-key'   => 'Clave del Sitio Web',
+                        'secret-key' => 'Clave Secreta',
+                        'status'     => 'Estado',
+                        'title'      => 'Credenciales',
+                        'title-info' => '"Clave del Sitio": Mapa de diseño del sitio web para motores de búsqueda. "Clave Secreta": Código de seguridad para cifrado de datos, autenticación o protección de acceso a la API.',
+                    ],
+
+                    'validations' => [
+                        'captcha'  => '¡Hubo un error! Por favor, inténtelo de nuevo.',
+                        'required' => 'Por favor, seleccione Captcha.',
+                    ],
                 ],
 
                 'settings' => [
-                    'title'                   => 'Configuración',
-                    'settings-info'           => 'Configurar lista de deseos, suscripciones al boletín, verificaciones de correo electrónico y inicio de sesión social.',
-                    'wishlist'                => 'Lista de Deseos',
-                    'wishlist-info'           => '"Lista de deseos" es una colección personalizada de artículos deseados que permite a los usuarios guardar productos para referencia futura o posibles compras.',
-                    'wishlist-share'          => 'Habilitar Compartir',
-                    'newsletter'              => 'Suscripción al Boletín',
-                    'newsletter-info'         => 'La "información del boletín" contiene actualizaciones, ofertas o contenido compartido regularmente a través de correos electrónicos a suscriptores, manteniéndolos informados y comprometidos.',
-                    'newsletter-subscription' => 'Permitir Suscripción al Boletín',
-                    'email'                   => 'Verificación de Correo Electrónico',
-                    'email-info'              => 'La "verificación de correo electrónico" confirma la autenticidad de una dirección de correo electrónico, a menudo enviando un enlace de confirmación, mejorando la seguridad de la cuenta y la confiabilidad de la comunicación.',
-                    'email-verification'      => 'Permitir Verificación de Correo Electrónico',
+                    'settings-info' => 'Configurar lista de deseos, suscripción al boletín, verificación de correo electrónico y inicio de sesión social.',
+                    'title'         => 'Configuración',
+
+                    'wishlist' => [
+                        'share'      => 'Activar Compartir',
+                        'title'      => 'Lista de Deseos',
+                        'title-info' => 'Una "Lista de Deseos" es una colección personal de elementos deseados que permite a los usuarios guardar productos para futuras referencias o posibles compras.',
+                    ],
+
+                    'newsletter' => [
+                        'subscription' => 'Activar Suscripción al Boletín',
+                        'title'        => 'Suscripción al Boletín',
+                        'title-info'   => 'La "Información del Boletín" se envía regularmente por correo electrónico a los suscriptores e incluye actualizaciones, ofertas o contenido para compartir, identificar información y ayudar en la toma de decisiones.',
+                    ],
+
+                    'email' => [
+                        'email-verification' => 'Activar Verificación de Correo Electrónico',
+                        'title'              => 'Verificación de Correo Electrónico',
+                        'title-info'         => 'La "Verificación de Correo Electrónico" confirma la validez de una dirección de correo electrónico, generalmente mediante el envío de un enlace de confirmación, para aumentar la seguridad de la cuenta y la fiabilidad de la comunicación.',
+                    ],
+
+                    'social-login' => [
+                        'enable-facebook'   => 'Activar Facebook',
+                        'enable-twitter'    => 'Activar Twitter',
+                        'enable-google'     => 'Activar Google',
+                        'enable-linkedin'   => 'Activar LinkedIn',
+                        'enable-github'     => 'Activar GitHub',
+                        'social-login'      => 'Inicio de Sesión Social',
+                        'social-login-info' => 'El "Inicio de Sesión Social" facilita a los usuarios el acceso al sitio web, el registro y el proceso de inicio de sesión utilizando sus cuentas de redes sociales para aumentar las opciones y la facilidad de uso.',
+                    ],
                 ],
             ],
 
             'email' => [
-                'title' => 'Correo Electrónico',
                 'info'  => 'Correo Electrónico',
+                'title' => 'Correo Electrónico',
 
                 'email-settings' => [
-                    'title'                  => 'Configuración de Correo Electrónico',
-                    'info'                   => 'Configurar nombre del remitente de correo electrónico, dirección de correo electrónico de la tienda, nombre del administrador y dirección de correo electrónico del administrador.',
-                    'email-sender-name'      => 'Nombre del Remitente de Correo Electrónico',
-                    'email-sender-name-tip'  => 'Este nombre se mostrará en la bandeja de entrada de los clientes.',
-                    'shop-email-from'        => 'Dirección de Correo Electrónico de la Tienda',
-                    'shop-email-from-tip'    => 'La dirección de correo electrónico de este canal para enviar correos electrónicos a sus clientes.',
-                    'admin-name'             => 'Nombre del Administrador',
-                    'admin-name-tip'         => 'Este nombre se mostrará en todos los correos electrónicos del administrador.',
-                    'admin-email'            => 'Correo Electrónico del Administrador',
-                    'admin-email-tip'        => 'La dirección de correo electrónico del administrador de este canal para recibir correos electrónicos.',
-                    'admin-page-limit'       => 'Cantidad de Elementos por Página por Defecto (Administrador)',
+                    'admin-name'            => 'Nombre del Administrador',
+                    'admin-name-tip'        => 'Este nombre se mostrará en todos los correos electrónicos del administrador.',
+                    'admin-email'           => 'Correo Electrónico del Administrador',
+                    'admin-email-tip'       => 'Esta dirección de correo electrónico se utilizará para recibir correos electrónicos en este canal.',
+                    'admin-page-limit'      => 'Límite de Páginas Predeterminado por Página (Administrador)',
+                    'email-sender-name'     => 'Nombre del Remitente del Correo Electrónico',
+                    'email-sender-name-tip' => 'Este nombre se mostrará en la bandeja de entrada del cliente.',
+                    'info'                  => 'Establezca el nombre del remitente de correo electrónico, la dirección de correo electrónico de la tienda, el nombre del administrador y la dirección de correo electrónico del administrador.',
+                    'shop-email-from'       => 'Dirección de Correo Electrónico de la Tienda',
+                    'shop-email-from-tip'   => 'Dirección de correo electrónico desde la cual los clientes recibirán correos electrónicos.',
+                    'title'                 => 'Configuración de Correo Electrónico',
                 ],
 
                 'notifications' => [
+                    'customer-registration-confirmation-mail-to-admin' => 'Enviar un Correo Electrónico de Confirmación al Administrador Después del Registro del Cliente',
+                    'customer'                                         => 'Enviar Información de Registro al Cliente Después del Registro',
+                    'cancel-order'                                     => 'Enviar una Notificación Después de Cancelar un Pedido',
+                    'info'                                             => 'Las "Notificaciones" son mensajes o alertas que informan a los usuarios sobre eventos, actualizaciones o acciones, aumentando las opciones y la conciencia del usuario.',
+                    'new-admin'                                        => 'Enviar un Correo Electrónico de Confirmación al Administrador Después de Realizar un Nuevo Pedido',
+                    'new-invoice'                                      => 'Enviar una Notificación al Cliente Después de Crear una Nueva Factura',
+                    'new-refund'                                       => 'Enviar una Notificación al Cliente Después de Crear un Nuevo Reembolso',
+                    'new-shipment'                                     => 'Enviar una Notificación al Cliente Después de Crear un Nuevo Envío',
+                    'new-inventory-source'                             => 'Enviar una Notificación Después de Crear una Nueva Fuente de Inventario',
+                    'registration'                                     => 'Enviar un Correo Electrónico de Confirmación Después del Registro del Cliente',
+                    'new-order'                                        => 'Enviar un Correo Electrónico de Confirmación al Cliente Después de Realizar un Nuevo Pedido',
                     'title'                                            => 'Notificaciones',
-                    'info'                                             => 'Una "notificación" es un mensaje o alerta que informa a los usuarios sobre eventos, actualizaciones o acciones, mejorando el compromiso y la conciencia del usuario.',
-                    'verification'                                     => 'Enviar un correo electrónico de verificación después del registro del cliente',
-                    'registration'                                     => 'Enviar un correo electrónico de confirmación después del registro del cliente',
-                    'customer-registration-confirmation-mail-to-admin' => 'Enviar un correo electrónico de confirmación al administrador después del registro del cliente',
-                    'customer'                                         => 'Enviar las credenciales de la cuenta del cliente después del registro',
-                    'new-order'                                        => 'Enviar un correo electrónico de confirmación al cliente después de realizar un nuevo pedido',
-                    'new-admin'                                        => 'Enviar un correo electrónico de confirmación al administrador después de realizar un nuevo pedido',
-                    'new-invoice'                                      => 'Enviar un correo electrónico de notificación al cliente después de crear una nueva factura',
-                    'new-refund'                                       => 'Enviar un correo electrónico de notificación al cliente después de crear un reembolso',
-                    'new-shipment'                                     => 'Enviar un correo electrónico de notificación al cliente después de crear un envío',
-                    'new-inventory-source'                             => 'Enviar un correo electrónico de notificación a la fuente de inventario después de crear un envío',
-                    'cancel-order'                                     => 'Enviar una notificación después de cancelar un pedido',
+                    'verification'                                     => 'Enviar un Correo Electrónico de Verificación Después del Registro del Cliente',
                 ],
             ],
 
             'sales' => [
-                'title' => 'Ventas',
-                'info'  => 'Ventas',
+                'info'  => 'Venta',
+                'title' => 'Venta',
 
                 'shipping' => [
-                    'title'           => 'Envío',
-                    'info'            => 'Configurar información de envío.',
-                    'origin'          => 'Origen',
-                    'origin-info'     => 'El origen del envío se refiere al lugar donde los productos tienen su origen antes de ser transportados a su destino.',
-                    'country'         => 'País',
-                    'state'           => 'Estado',
-                    'zip'             => 'Código Postal',
-                    'city'            => 'Ciudad',
-                    'street-address'  => 'Dirección',
-                    'store-name'      => 'Nombre de la Tienda',
-                    'vat-number'      => 'Número de IVA',
-                    'contact-number'  => 'Número de Contacto',
-                    'bank-details'    => 'Detalles Bancarios',
+                    'info'  => 'Configurar información de envío',
+                    'title' => 'Envío',
+
+                    'origin' => [
+                        'bank-details'   => 'Detalles Bancarios',
+                        'contact-number' => 'Número de Contacto',
+                        'city'           => 'Ciudad',
+                        'country'        => 'País',
+                        'state'          => 'Estado',
+                        'street-address' => 'Dirección de Calle',
+                        'store-name'     => 'Nombre de la Tienda',
+                        'title'          => 'Origen',
+                        'title-info'     => 'El lugar de origen del envío se establece desde donde los productos o bienes se envían al destino. Se utiliza para identificación.',
+                        'vat-number'     => 'Número de Identificación de IVA',
+                        'zip'            => 'Código Postal',
+                    ],
                 ],
 
                 'shipping-methods' => [
-                    'page-title'                => 'Métodos de Envío',
-                    'info'                      => 'Configurar información de métodos de envío',
-                    'free-shipping'             => 'Envío Gratuito',
-                    'free-shipping-info'        => '"Envío gratuito" se refiere a un método de envío en el que se exime el costo de envío, y el vendedor cubre los gastos de envío para entregar los productos al comprador.',
-                    'flat-rate-shipping'        => 'Envío de Tarifa Plana',
-                    'flat-rate-shipping-info'   => 'El envío de tarifa plana es un método de envío en el que se cobra una tarifa fija por el envío, independientemente del peso, tamaño o distancia del paquete. Esto simplifica los costos de envío y puede ser ventajoso tanto para compradores como vendedores.',
-                    'title'                     => 'Título',
-                    'description'               => 'Descripción',
-                    'rate'                      => 'Tarifa',
-                    'status'                    => 'Estado',
-                    'type'                      => 'Tipo',
+                    'info'  => 'Configurar información de métodos de envío',
+                    'title' => 'Métodos de Envío',
+
+                    'free-shipping' => [
+                        'description' => 'Descripción',
+                        'page-title'  => 'Envío Gratuito',
+                        'status'      => 'Estado',
+                        'title-info'  => '"Envío Gratuito" se refiere a un método de envío donde los costos de envío son asumidos por el vendedor después de que el cliente compra los productos.',
+                        'title'       => 'Título',
+                    ],
+
+                    'flat-rate-shipping' => [
+                        'description' => 'Descripción',
+                        'page-title'  => 'Envío a Tarifa Plana',
+                        'rate'        => 'Tarifa',
+                        'status'      => 'Estado',
+                        'title'       => 'Título',
+                        'title-info'  => 'El envío a tarifa plana es un método de envío en el cual se cobra una tarifa fija por un paquete basado en el peso, tamaño o distancia. Ofrece una opción de envío simple y puede ser beneficioso tanto para los clientes como para los vendedores.',
+                        'type'        => 'Tipo',
+                    ],
                 ],
 
                 'payment-methods' => [
                     'page-title'                     => 'Métodos de Pago',
                     'info'                           => 'Configurar información de métodos de pago',
-                    'cash-on-delivery'               => 'Contra Entrega',
-                    'cash-on-delivery-info'          => 'Método de pago en el que los clientes pagan en efectivo al recibir productos o servicios en su puerta.',
+                    'cash-on-delivery'               => 'Pago Contra Entrega',
+                    'cash-on-delivery-info'          => 'Pago en efectivo por productos o servicios por parte de los clientes después de recibirlos.',
                     'description'                    => 'Descripción',
                     'title'                          => 'Título',
                     'instructions'                   => 'Instrucciones',
-                    'generate-invoice'               => 'Generar automáticamente la factura después de realizar un pedido',
-                    'set-invoice-status'             => 'Establecer el estado de la factura después de crearla a',
-                    'generate-invoice-applicable'    => 'Aplicable si la generación automática de facturas está habilitada',
+                    'generate-invoice'               => 'Generar automáticamente una factura después de la orden',
+                    'set-invoice-status'             => 'Establecer estado de factura después de generar',
+                    'generate-invoice-applicable'    => 'Aplicable para generación automática de factura',
                     'status'                         => 'Estado',
                     'sort-order'                     => 'Orden de Clasificación',
-                    'set-order-status'               => 'Establecer el estado del pedido después de crear la factura a',
+                    'set-order-status'               => 'Establecer estado de orden después de generar',
                     'pending'                        => 'Pendiente',
                     'paid'                           => 'Pagado',
-                    'sandbox'                        => 'Entorno de Pruebas',
+                    'sandbox'                        => 'Sandbox',
                     'pending-payment'                => 'Pago Pendiente',
                     'processing'                     => 'Procesando',
-                    'money-transfer'                 => 'Transferencia Bancaria',
-                    'money-transfer-info'            => 'Transferencia de fondos de una persona o cuenta a otra, a menudo electrónicamente, para diversos fines como transacciones o remesas.',
-                    'mailing-address'                => 'Enviar Cheque a',
+                    'money-transfer'                 => 'Transferencia de Dinero',
+                    'money-transfer-info'            => 'Transferencia de dinero o servicios a otra ubicación, generalmente electrónicamente, con diversos fines como compras o transferencias.',
+                    'mailing-address'                => 'Enviar cheques a',
                     'paypal-standard'                => 'PayPal Estándar',
-                    'paypal-standard-info'           => 'PayPal Estándar es una opción de pago básica de PayPal para negocios en línea, que permite a los clientes pagar con sus cuentas de PayPal o tarjetas de crédito/débito.',
-                    'paypal-smart-button'            => 'PayPal',
-                    'paypal-smart-button-info'       => 'Botón Inteligente de PayPal: Simplifica los pagos en línea con botones personalizables para transacciones seguras y de múltiples métodos en sitios web y aplicaciones.',
+                    'paypal-standard-info'           => 'PayPal Estándar es una opción de pago en línea básica para empresas, donde los clientes pueden realizar pagos a través de su cuenta de PayPal o tarjetas de crédito / débito.',
+                    'paypal-smart-button'            => 'Botón Inteligente de PayPal',
+                    'paypal-smart-button-info'       => 'Botón Inteligente de PayPal: Proporciona soporte de pago en línea seguro y personalizable con botones personalizados para sitios web y aplicaciones para diversas transacciones.',
                     'client-id'                      => 'ID de Cliente',
-                    'client-id-info'                 => 'Utiliza "sb" para pruebas.',
-                    'client-secret'                  => 'Clave Secreta del Cliente',
-                    'client-secret-info'             => 'Agrega aquí tu clave secreta',
+                    'client-id-info'                 => 'Para pruebas, use "self".',
+                    'client-secret'                  => 'Secreto del Cliente',
+                    'client-secret-info'             => 'Inserte su código secreto aquí.',
                     'accepted-currencies'            => 'Monedas Aceptadas',
-                    'accepted-currencies-info'       => 'Agrega códigos de moneda separados por comas, por ejemplo, USD, INR,...',
-                    'business-account'               => 'Cuenta de Negocio',
+                    'accepted-currencies-info'       => 'Agregue códigos de moneda separados por comas, por ejemplo: USD, EUR, ...',
+                    'business-account'               => 'Cuenta Empresarial',
                 ],
 
                 'order-settings' => [
-                    'title'                         => 'Configuración de Pedido',
-                    'info'                          => 'Configurar números de pedido y pedidos mínimos.',
-                    'order-number'                  => 'Configuración de Número de Pedido',
-                    'order-number-info'             => 'Identificador único asignado a un pedido específico de un cliente, que ayuda en el seguimiento, la comunicación y la referencia a lo largo del proceso de compra.',
-                    'order-number-prefix'           => 'Prefijo de Número de Pedido',
-                    'order-number-length'           => 'Longitud del Número de Pedido',
-                    'order-number-suffix'           => 'Sufijo de Número de Pedido',
-                    'order-number-generator-class'  => 'Generador de Número de Pedido',
-                    'minimum-order'                 => 'Configuración de Pedido Mínimo',
-                    'minimum-order-info'            => 'Criterios configurados que especifican la cantidad o el valor más bajo requerido para que se procese un pedido o califique para beneficios.',
-                    'minimum-order-amount'          => 'Monto Mínimo del Pedido',
+                    'info'  => 'Establecer número de orden y pedido mínimo',
+                    'title' => 'Configuración de Pedido',
+
+                    'order-number' => [
+                        'generator'   => 'Generador de Número de Pedido',
+                        'length'      => 'Longitud del Número de Pedido',
+                        'prefix'      => 'Prefijo del Número de Pedido',
+                        'suffix'      => 'Sufijo del Número de Pedido',
+                        'title'       => 'Configuración de Número de Pedido',
+                        'title-info'  => 'Una identificación única o asignación otorgada a un pedido de cliente específico para su seguimiento, contacto y proceso de envío.',
+                    ],
+
+                    'minimum-order' => [
+                        'minimum-order-amount' => 'Monto Mínimo del Pedido',
+                        'title'                => 'Configuración de Cantidad Mínima del Pedido',
+                        'title-info'           => 'Configure la cantidad mínima del pedido o el valor predeterminado para el proceso de compra o ventaja.',
+                    ],
                 ],
 
                 'invoice-settings' => [
-                    'title'                            => 'Configuración de Factura',
-                    'info'                             => 'Configurar número de factura, plazos de pago, diseño de factura y recordatorios de factura.',
-                    'invoice-number'                   => 'Configuración de Número de Factura',
-                    'invoice-number-info'              => 'Configuración de reglas o parámetros para generar y asignar números de identificación únicos a facturas con fines organizativos y de seguimiento.',
-                    'invoice-number-prefix'            => 'Prefijo de Número de Factura',
-                    'invoice-number-length'            => 'Longitud del Número de Factura',
-                    'invoice-number-suffix'            => 'Sufijo de Número de Factura',
-                    'invoice-number-generator-class'   => 'Generador de Número de Factura',
-                    'payment-terms'                    => 'Términos de Pago',
-                    'payment-terms-info'               => 'Condiciones acordadas que dictan cuándo y cómo debe realizarse el pago de bienes o servicios por parte del comprador al vendedor.',
-                    'due-duration'                     => 'Duración de Vencimiento',
-                    'due-duration-day'                 => ':due-duration Día',
-                    'due-duration-days'                => ':due-duration Días',
-                    'invoice-slip-design'              => 'Diseño de Comprobante de Factura',
-                    'invoice-slip-design-info'         => 'Diseño visual y formato de un comprobante de factura, incluyendo la identidad de la empresa, la itemización, los precios y los detalles de pago para una presentación profesional.',
-                    'logo'                             => 'Logo',
-                    'default'                          => 'Predeterminado',
-                    'invoice-reminders'                => 'Recordatorios de Factura',
-                    'invoice-reminders-info'           => 'Notificaciones o comunicaciones automatizadas enviadas a los clientes para recordarles los pagos próximos o vencidos de las facturas.',
-                    'maximum-limit-of-reminders'       => 'Límite Máximo de Recordatorios',
-                    'interval-between-reminders'       => 'Intervalo entre Recordatorios',
+                    'info'  => 'Establecer número de factura, condiciones de pago, diseño de factura y recordatorios de factura',
+                    'title' => 'Configuración de Facturación',
+
+                    'invoice-number' => [
+                        'generator'  => 'Generador de Número de Factura',
+                        'length'     => 'Longitud del Número de Factura',
+                        'suffix'     => 'Sufijo del Número de Factura',
+                        'title'      => 'Configuración de Número de Factura',
+                        'title-info' => 'Configuración de reglas o parámetros para asignar números de recepción a facturas, para identificación organizativa y rastreabilidad basada en factores o configuraciones predefinidas.',
+                        'prefix'     => 'Prefijo del Número de Factura',
+                    ],
+
+                    'payment-terms' => [
+                        'due-duration'      => 'Duración para el Vencimiento',
+                        'due-duration-day'  => 'Días para el Vencimiento',
+                        'due-duration-days' => 'Días para el Vencimiento',
+                        'title'             => 'Términos de Pago',
+                        'title-info'        => 'Las condiciones bajo las cuales los pagos deben realizarse por parte del cliente al vendedor, y los términos aceptados por el cliente.',
+                    ],
+
+                    'invoice-slip-design' => [
+                        'logo'       => 'Logo',
+                        'title'      => 'Diseño de Comprobante de Factura',
+                        'title-info' => 'Diseño visual y formato de un comprobante de factura, incluyendo la imagen corporativa, desglose de artículos, información de precios, impuestos y cargos adicionales.',
+                    ],
+
+                    'invoice-reminders' => [
+                        'interval-between-reminders' => 'Intervalo entre Recordatorios',
+                        'maximum-limit-of-reminders' => 'Límite Máximo de Recordatorios',
+                        'title'                      => 'Recordatorios de Factura',
+                        'title-info'                 => 'Notificaciones automáticas o contactos para recordar a los clientes sobre pagos pendientes o vencidos en facturas, y motivar a los clientes a realizar pagos automáticos o saldar deudas si es necesario.',
+                    ],
+                ],
+            ],
+
+            'taxes' => [
+                'title' => 'Impuestos',
+
+                'catalog' => [
+                    'title'      => 'Catálogo',
+                    'title-info' => 'Configuración de precios y ubicación predeterminada',
+
+                    'pricing' => [
+                        'title'         => 'Configuración de Precios',
+                        'title-info'    => 'Información detallada sobre los precios de productos o servicios, costos base, descuentos, impuestos y cargos adicionales.',
+                        'tax-inclusive' => 'Incluye Impuestos',
+                    ],
+
+                    'default-location-calculation' => [
+                        'default-country'   => 'País Predeterminado',
+                        'default-state'     => 'Estado Predeterminado',
+                        'default-post-code' => 'Código Postal Predeterminado',
+                        'title'             => 'Cálculo de Ubicación Predeterminada',
+                        'title-info'        => 'Una determinación automática de una ubicación predeterminada o adicional basada en factores o configuraciones predefinidas, dependiendo de los factores o configuraciones previamente establecidos.',
+                    ],
                 ],
             ],
         ],
@@ -2991,7 +3160,7 @@ return [
                 'must-select-a-mass-action-option' => 'Debe seleccionar una opción de acción masiva.',
                 'sure-want-to-perform-this-action' => '¿Estás seguro de que deseas realizar esta acción?',
             ],
-            
+
             'toolbar' => [
                 'mass-actions' => [
                     'select-action' => 'Seleccionar Acción',
@@ -3065,7 +3234,7 @@ return [
                 'allowed-types'     => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Solo se permiten archivos de video (.mp4, .mov, .ogg ..).',
             ],
-        ]
+        ],
     ],
 
     'acl' => [
@@ -3147,7 +3316,7 @@ return [
         '503' => [
             'title'       => '503 Servicio No Disponible',
             'description' => '¡Ups! Parece que estamos temporalmente fuera de servicio por mantenimiento. Por favor, vuelve a intentarlo en un momento.',
-        ]
+        ],
     ],
 
     'export' => [

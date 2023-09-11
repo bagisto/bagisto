@@ -1466,7 +1466,7 @@ return [
                     'select-event'    => 'Etkinlik Seçin',
                     'select-status'   => 'Durum Seçin',
                     'select-channel'  => 'Kanal seç',
-                    'select-group'    => 'Grup seç',                    
+                    'select-group'    => 'Grup seç',
                     'subject'         => 'Konu',
                     'title'           => 'Kampanya Oluştur',
                 ],
@@ -2611,43 +2611,59 @@ return [
 
     'configuration' => [
         'index' => [
-            'title'                        => 'Yapılandırma',
-            'save-btn'                     => 'Yapılandırmayı Kaydet',
-            'save-message'                 => 'Yapılandırma başarıyla kaydedildi',
-            'delete'                       => 'Sil',
-            'enable-at-least-one-shipping' => 'En az bir kargo yöntemi etkinleştirin.',
-            'enable-at-least-one-payment'  => 'En az bir ödeme yöntemi etkinleştirin.',
+            'delete'                       => 'මකන්න',
+            'enable-at-least-one-shipping' => 'අවකාශ අයක් නම් එකක් නිරවද්‍ය ක්‍රමයක් සක්‍රිය කරන්න.',
+            'enable-at-least-one-payment'  => 'අවකාශ අයක් නම් එකක් නිරවද්‍ය ක්‍රමයක් සක්‍රිය කරන්න.',
+            'save-btn'                     => 'වින්‍යාස සුරකින්න',
+            'save-message'                 => 'වින්‍යාස සුරකින්නාගේ ගොනු දැක්කාක් අත්‍යවශ්‍ය සූර්යයක් සුරකින්න.',
+            'title'                        => 'වින්‍යාස',
 
             'general' => [
+                'info'  => 'Genel ayarlar.',
+                'title' => 'Genel',
+
                 'general' => [
-                    'title'             => 'Genel',
-                    'info'              => 'Birim seçeneklerini ayarlayın.',
-                    'unit-options'      => 'Birim Seçenekleri',
-                    'unit-options-info' => 'Boyut, renk, malzeme, özelleştirme, müşteri memnuniyetini artırma ve alışverişi kişiselleştirme.',
-                    'weight-unit'       => 'Ağırlık Birimi',
+                    'info'  => 'Genel ayarlar.',
+                    'title' => 'Genel',
+
+                    'unit-options' => [
+                        'info'              => 'Birim seçenekleri ayarları.',
+                        'title'             => 'Birim Seçenekleri',
+                        'title-info'        => 'Boyut, renk, malzeme, özelleştirme, müşteri memnuniyetini artırma ve satın alma işlemlerini özelleştirme.',
+                        'weight-unit'       => 'Ağırlık Birimi',
+                    ],
                 ],
 
                 'content' => [
-                    'title'               => 'İçerik',
-                    'info'                => 'Karşılaştırma seçenekleri, dilek listesi seçenekleri, resim arama seçenekleri, altbilgi, altbilgiyi aç/kapa ve özel komut dosyalarını ayarlayın.',
-                    'custom-scripts'      => 'Özel Komut Dosyaları',
-                    'custom-scripts-info' => 'Özel komut dosyaları, yazılıma belirli işlevler veya özellikler eklemek için oluşturulan kişiselleştirilmiş kod parçalarıdır ve benzersiz şekilde yeteneklerini artırır.',
-                    'custom-css'          => 'Özel CSS',
-                    'custom-javascript'   => 'Özel Javascript',
-                    'compare-options'     => 'Karşılaştırma seçenekleri',
-                    'wishlist-options'    => 'Dilek listesi seçenekleri',
-                    'image-search-option' => 'Resim Arama Seçeneği',
-                    'settings-title'      => 'Ayarlar',
-                    'settings-title-info' => 'Ayarlar, bir sistem, uygulama veya cihazın nasıl davrandığını kontrol eden yapılandırılabilir seçeneklere atıfta bulunur ve kullanıcı tercihlerine ve gereksinimlerine uyarlanır.'
+                    'info'  => 'Karşılaştırma seçenekleri, dilek listesi seçenekleri, görüntü arama seçenekleri, altbilgi, altbilgiyi açma/kapatma ve özel komut dosyalarını ayarlama.',
+                    'title' => 'İçerik',
+
+                    'settings' => [
+                        'compare-options'     => 'Karşılaştırma seçenekleri',
+                        'image-search-option' => 'Resim Arama Seçeneği',
+                        'title'               => 'Ayarlar',
+                        'title-info'          => 'Ayarlar, bir sistemin, uygulamanın veya cihazın nasıl davranacağını kontrol eden yapılandırılabilir seçenekleri ifade eder, kullanıcı tercihlerine ve gereksinimlerine göre uyarlanır.',
+                        'wishlist-options'    => 'Dilek Listesi Seçenekleri',
+                    ],
+
+                    'custom-scripts' => [
+                        'custom-css'        => 'Özel CSS',
+                        'custom-javascript' => 'Özel JavaScript',
+                        'title'             => 'Özel Komut Dosyaları',
+                        'title-info'        => 'Özel komut dosyaları, yazılıma belirli işlevler veya özellikler eklemek için oluşturulan kişiselleştirilmiş kod parçalarıdır, benzersiz yeteneklerini artırır.',
+                    ],
                 ],
 
                 'design' => [
-                    'title'           => 'Tasarım',
-                    'info'            => 'Logo ve favicon simgesini ayarlayın.',
-                    'admin-logo'      => 'Yönetici Logo',
-                    'admin-logo-info' => 'Yönetici logosu, bir sistemin veya web sitesinin yönetim arayüzünü temsil eden ayırt edici bir resim veya simgedir, genellikle özelleştirilebilir.',
-                    'logo-image'      => 'Logo Resmi',
-                    'favicon'         => 'Favicon',
+                    'info'  => 'Logo ve favicon ikonunu ayarlama.',
+                    'title' => 'Tasarım',
+
+                    'admin-logo' => [
+                        'favicon'         => 'Favicon',
+                        'logo-image'      => 'Logo Resmi',
+                        'title'           => 'Yönetici Logo',
+                        'title-info'      => 'Yönetici logosu, genellikle özelleştirilebilen bir sistemin veya web sitesinin yönetim arayüzünü temsil eden ayırt edici bir görüntü veya semboldür.',
+                    ],
                 ],
             ],
 
@@ -2991,7 +3007,7 @@ return [
                 'must-select-a-mass-action-option' => 'Toplu işlem seçeneği seçmelisiniz.',
                 'sure-want-to-perform-this-action' => 'Bu işlemi gerçekleştirmek istediğinizden emin misiniz?',
             ],
-            
+
             'toolbar' => [
                 'mass-actions' => [
                     'select-action' => 'Eylem Seç',
@@ -3065,7 +3081,7 @@ return [
                 'allowed-types'     => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Yalnızca video dosyaları (.mp4, .mov, .ogg ..) izin verilir.',
             ],
-        ]
+        ],
     ],
 
     'acl' => [

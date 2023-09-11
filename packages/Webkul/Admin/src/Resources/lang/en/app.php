@@ -2611,12 +2611,12 @@ return [
 
     'configuration' => [
         'index' => [
-            'delete'                       => 'Delete',
-            'enable-at-least-one-shipping' => 'Enable at least one shipping method.',
-            'enable-at-least-one-payment'  => 'Enable at least one payment method.',
-            'save-btn'                     => 'Save Configuration',
-            'save-message'                 => 'Configuration saved successfully',
-            'title'                        => 'Configuration',
+            'delete'                       => 'Eliminar',
+            'enable-at-least-one-shipping' => 'Habilitar al menos un método de envío.',
+            'enable-at-least-one-payment'  => 'Habilitar al menos un método de pago.',
+            'save-btn'                     => 'Guardar configuración',
+            'save-message'                 => 'Configuración guardada con éxito',
+            'title'                        => 'Configuración',
 
             'general' => [
                 'info'  => 'Set units options.',
@@ -2629,7 +2629,7 @@ return [
                     'unit-options' => [
                         'info'              => 'Set units options.',
                         'title'             => 'Unit Options',
-                        'title-info' => 'Size, color, material, customization, enhancing customer satisfaction and tailoring purchases.',
+                        'title-info'        => 'Size, color, material, customization, enhancing customer satisfaction and tailoring purchases.',
                         'weight-unit'       => 'Weight Unit',
                     ],
                 ],
@@ -2677,8 +2677,8 @@ return [
 
                     'stock-options' => [
                         'allow-back-orders'  => 'Allow Back orders',
-                        'title'      => 'Stock Options',
-                        'title-info' => 'Stock options are investment contracts that grant the right to buy or sell company shares at a predetermined price, influencing potential profits.',
+                        'title'              => 'Stock Options',
+                        'title-info'         => 'Stock options are investment contracts that grant the right to buy or sell company shares at a predetermined price, influencing potential profits.',
                     ],
                 ],
 
@@ -2848,7 +2848,7 @@ return [
                     'validations' => [
                         'captcha'  => 'Something went wrong! Please try again.',
                         'required' => 'Please select CAPTCHA',
-                    ]
+                    ],
                 ],
 
                 'settings' => [

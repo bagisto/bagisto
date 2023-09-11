@@ -2610,43 +2610,59 @@ return [
 
     'configuration' => [
         'index' => [
-            'title'                        => 'Configuratie',
-            'save-btn'                     => 'Configuratie Opslaan',
-            'save-message'                 => 'Configuratie succesvol opgeslagen',
             'delete'                       => 'Verwijderen',
             'enable-at-least-one-shipping' => 'Schakel ten minste één verzendmethode in.',
             'enable-at-least-one-payment'  => 'Schakel ten minste één betaalmethode in.',
+            'save-btn'                     => 'Instellingen opslaan',
+            'save-message'                 => 'Configuratie succesvol opgeslagen',
+            'title'                        => 'Configuratie',
 
             'general' => [
+                'info'  => 'Stel eenhedenopties in.',
+                'title' => 'Algemeen',
+
                 'general' => [
-                    'title'             => 'Algemeen',
-                    'info'              => 'Stel opties voor eenheden in.',
-                    'unit-options'      => 'Opties voor eenheden',
-                    'unit-options-info' => 'Grootte, kleur, materiaal, aanpassing, verbetering van de klanttevredenheid en het aanpassen van aankopen.',
-                    'weight-unit'       => 'Gewichtseenheid',
+                    'info'  => 'Stel eenhedenopties in.',
+                    'title' => 'Algemeen',
+
+                    'unit-options' => [
+                        'info'        => 'Stel eenhedenopties in.',
+                        'title'       => 'Eenheidsopties',
+                        'title-info'  => 'Grootte, kleur, materiaal, aanpassing, verbetering van de klanttevredenheid en aanpassing van aankopen.',
+                        'weight-unit' => 'Gewichtseenheid',
+                    ],
                 ],
 
                 'content' => [
-                    'title'               => 'Inhoud',
-                    'info'                => 'Stel vergelijkingsmogelijkheden, wenslijstopties, opties voor afbeelding zoeken, voettekst, schakel voettekst en aangepaste scripts in.',
-                    'custom-scripts'      => 'Aangepaste Scripts',
-                    'custom-scripts-info' => 'Aangepaste scripts zijn gepersonaliseerde stukjes code die zijn gemaakt om specifieke functies of kenmerken aan software toe te voegen en de mogelijkheden ervan op unieke wijze te verbeteren.',
-                    'custom-css'          => 'Aangepaste CSS',
-                    'custom-javascript'   => 'Aangepaste JavaScript',
-                    'compare-options'     => 'Vergelijkingsmogelijkheden',
-                    'wishlist-options'    => 'Wenslijstopties',
-                    'image-search-option' => 'Optie voor afbeeldingen zoeken',
-                    'settings-title'      => 'Instellingen',
-                    'settings-title-info' => 'Met instellingen worden configureerbare keuzes bedoeld die bepalen hoe een systeem, toepassing of apparaat zich gedraagt, afgestemd op de voorkeuren en eisen van de gebruiker.'
+                    'info'  => 'Stel vergelijkingsmogelijkheden, wenslijstmogelijkheden, afbeeldingszoekopties, voettekst, schakel voettekst en aangepaste scripts in.',
+                    'title' => 'Inhoud',
+
+                    'settings' => [
+                        'compare-options'     => 'Vergelijk opties',
+                        'image-search-option' => 'Afbeeldingszoekoptie',
+                        'title'               => 'Instellingen',
+                        'title-info'          => 'Instellingen verwijzen naar configureerbare keuzes die bepalen hoe een systeem, toepassing of apparaat zich gedraagt, afgestemd op de voorkeuren en vereisten van de gebruiker.',
+                        'wishlist-options'    => 'Wenslijstmogelijkheden',
+                    ],
+
+                    'custom-scripts' => [
+                        'custom-css'        => 'Aangepaste CSS',
+                        'custom-javascript' => 'Aangepaste Javascript',
+                        'title'             => 'Aangepaste Scripts',
+                        'title-info'        => 'Aangepaste scripts zijn gepersonaliseerde stukken code die zijn gemaakt om specifieke functies of kenmerken aan software toe te voegen, waardoor de mogelijkheden ervan uniek worden verbeterd.',
+                    ],
                 ],
 
                 'design' => [
-                    'title'           => 'Ontwerp',
-                    'info'            => 'Stel logo en favicon-pictogram in.',
-                    'admin-logo'      => 'Admin Logo',
-                    'admin-logo-info' => 'Het admin-logo is het onderscheidende beeld of embleem dat de beheerinterface van een systeem of website vertegenwoordigt, vaak aanpasbaar.',
-                    'logo-image'      => 'Logo Afbeelding',
-                    'favicon'         => 'Favicon',
+                    'info'  => 'Stel logo en favicon-pictogram in.',
+                    'title' => 'Ontwerp',
+
+                    'admin-logo' => [
+                        'favicon'      => 'Favicon',
+                        'logo-image'   => 'Logobeeld',
+                        'title'        => 'Beheerderslogo',
+                        'title-info'   => 'Beheerderslogo is het onderscheidende beeld of embleem dat de beheerdersinterface van een systeem of website vertegenwoordigt, vaak aanpasbaar.',
+                    ],
                 ],
             ],
 
@@ -2991,7 +3007,7 @@ return [
                 'must-select-a-mass-action-option' => 'U moet een optie voor massale actie selecteren.',
                 'sure-want-to-perform-this-action' => 'Weet u zeker dat u deze actie wilt uitvoeren?',
             ],
-                                    
+
             'toolbar' => [
                 'mass-actions' => [
                     'select-action' => 'Selecteer Actie',
