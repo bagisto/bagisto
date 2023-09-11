@@ -1194,6 +1194,7 @@ return [
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.client-id-info',
                 'type'          => 'depends',
                 'depend'        => 'active:1',
+                // 'validation'    => 'required_if:active,true',
                 'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => false,

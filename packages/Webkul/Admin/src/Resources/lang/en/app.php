@@ -2611,20 +2611,20 @@ return [
 
     'configuration' => [
         'index' => [
-            'title'                        => 'Configuration',
-            'save-btn'                     => 'Save Configuration',
-            'save-message'                 => 'Configuration saved successfully',
             'delete'                       => 'Delete',
             'enable-at-least-one-shipping' => 'Enable at least one shipping method.',
             'enable-at-least-one-payment'  => 'Enable at least one payment method.',
+            'save-btn'                     => 'Save Configuration',
+            'save-message'                 => 'Configuration saved successfully',
+            'title'                        => 'Configuration',
 
             'general' => [
-                'title' => 'General',
                 'info'  => 'Set units options.',
+                'title' => 'General',
 
                 'general' => [
-                    'title' => 'General',
                     'info'  => 'Set units options.',
+                    'title' => 'General',
 
                     'unit-options' => [
                         'info'              => 'Set units options.',
@@ -2635,62 +2635,62 @@ return [
                 ],
 
                 'content' => [
-                    'title' => 'Content',
                     'info'  => 'Set compare options, wishlist options, image search options, footer, toggle footer and custom scripts.',
+                    'title' => 'Content',
 
                     'settings' => [
+                        'compare-options'     => 'Compare options',
+                        'image-search-option' => 'Image Search Option',
                         'title'               => 'Settings',
                         'title-info'          => 'Settings refer to configurable choices that control how a system, application, or device behaves, tailored to user preferences and requirements.',
-                        'compare-options'     => 'Compare options',
                         'wishlist-options'    => 'Wishlist options',
-                        'image-search-option' => 'Image Search Option',
                     ],
 
                     'custom-scripts' => [
-                        'title'             => 'Custom Scripts',
-                        'title-info'        => 'Custom scripts are personalized pieces of code created to add specific functions or features to software, enhancing its capabilities uniquely.',
                         'custom-css'        => 'Custom CSS',
                         'custom-javascript' => 'Custom Javascript',
+                        'title'             => 'Custom Scripts',
+                        'title-info'        => 'Custom scripts are personalized pieces of code created to add specific functions or features to software, enhancing its capabilities uniquely.',
                     ],
                 ],
 
                 'design' => [
-                    'title' => 'Design',
                     'info'  => 'Set logo and favicon icon.',
+                    'title' => 'Design',
 
                     'admin-logo' => [
+                        'favicon'         => 'Favicon',
+                        'logo-image'      => 'Logo Image',
                         'title'           => 'Admin Logo',
                         'title-info'      => 'Admin logo is the distinctive image or emblem representing the administration interface of a system or website, often customizable.',
-                        'logo-image'      => 'Logo Image',
-                        'favicon'         => 'Favicon',
                     ],
                 ],
             ],
 
             'catalog' => [
-                'title' => 'Catalog',
                 'info'  => 'Catalog',
+                'title' => 'Catalog',
 
                 'inventory' => [
-                    'title' => 'Inventory',
                     'info'  => 'Set back orders',
+                    'title' => 'Inventory',
 
                     'stock-options' => [
+                        'allow-back-orders'  => 'Allow Back orders',
                         'title'      => 'Stock Options',
                         'title-info' => 'Stock options are investment contracts that grant the right to buy or sell company shares at a predetermined price, influencing potential profits.',
-                        'allow-back-orders'  => 'Allow Back orders',
                     ],
                 ],
 
                 'products' => [
-                    'title' => 'Products',
                     'info'  => 'Set guest checkout, homepage, product view page, cart view page, store front, review and attribute social share.',
+                    'title' => 'Products',
 
                     'guest-checkout' => [
-                        'title'                     => 'Guest Checkout',
-                        'title-info'                => 'Guest checkout allows customers to buy products without creating an account, streamlining the purchase process for convenience and faster transactions.',
                         'allow-guest-checkout'      => 'Allow Guest Checkout',
                         'allow-guest-checkout-hint' => 'Hint: If turned on, this option can be configured for each product specifically.',
+                        'title'                     => 'Guest Checkout',
+                        'title-info'                => 'Guest checkout allows customers to buy products without creating an account, streamlining the purchase process for convenience and faster transactions.',
                     ],
 
                     'homepage' => [
@@ -2768,7 +2768,7 @@ return [
                         'title-info'        => 'Characteristic or property that defines an object, influencing its behavior, appearance, or function.',
                     ],
 
-                    'social-share'                       => [
+                    'social-share' => [
                         'enable-social-share'    => 'Enable Social Share?',
                         'enable-share-facebook'  => 'Enable Share in Facebook?',
                         'enable-share-twitter'   => 'Enable Share in Twitter?',
@@ -2784,12 +2784,10 @@ return [
                 ],
 
                 'rich-snippets' => [
-                    'title'                     => 'Rich Snippets',
-                    'info'                      => 'Set products and categories.',
+                    'info'  => 'Set products and categories.',
+                    'title' => 'Rich Snippets',
 
                     'products' => [
-                        'title'           => 'Products',
-                        'title-info'      => 'Items available for purchase or use, offered by a business or seller.',
                         'enable'          => 'Enable',
                         'show-weight'     => 'Show Weight',
                         'show-categories' => 'Show Categories',
@@ -2798,170 +2796,172 @@ return [
                         'show-ratings'    => 'Show Ratings',
                         'show-offers'     => 'Show Offers',
                         'show-sku'        => 'Show SKU',
+                        'title'           => 'Products',
+                        'title-info'      => 'Items available for purchase or use, offered by a business or seller.',
                     ],
 
                     'categories' => [
                         'enable'                  => 'Enable',
+                        'show-search-input-field' => 'Show Search Input Field',
                         'title'                   => 'Categories',
                         'title-info'              => '"Categories" refer to groups or classifications that help organize and group similar products or items together for easier browsing and navigation.',
-                        'show-search-input-field' => 'Show Search Input Field',
                     ],
                 ],
             ],
 
             'customer' => [
-                'title' => 'Customer',
                 'info'  => 'Customer',
+                'title' => 'Customer',
 
                 'address' => [
-                    'title' => 'Address',
                     'info'  => 'Set country, state, zip and lines in a street address.',
+                    'title' => 'Address',
 
                     'requirements' => [
+                        'country'    => 'Country',
+                        'city'       => 'City',
+                        'state'      => 'State',
                         'title'      => 'Requirements',
                         'title-info' => 'Requirements are the conditions, features, or specifications necessary for something to be fulfilled, achieved, or met successfully.',
-                        'country'    => 'Country',
-                        'state'      => 'State',
                         'zip'        => 'Zip',
-                        'city'       => 'City',
                     ],
 
                     'information' => [
+                        'street-lines' => 'Lines in a Street Address',
                         'title'        => 'Information',
                         'title-info'   => '"Lines in a street address" refer to individual segments of an address, often separated by commas, providing location information such as house number, street, city, and more.',
-                        'street-lines' => 'Lines in a Street Address',
                     ],
                 ],
 
                 'captcha'  => [
-                    'title'            => 'Captcha',
-                    'info'             => 'Set site key, secret key and status.',
+                    'info'  => 'Set site key, secret key and status.',
+                    'title' => 'Captcha',
 
                     'credentials' => [
-                        'title'      => 'Credentials',
-                        'title-info' => '"Sitemap: Website layout map for search engines. Secret key: Secure code for data encryption, authentication, or API access protection."',
                         'site-key'   => 'Site Key',
                         'secret-key' => 'Secret Key',
                         'status'     => 'Status',
+                        'title'      => 'Credentials',
+                        'title-info' => '"Sitemap: Website layout map for search engines. Secret key: Secure code for data encryption, authentication, or API access protection."',
                     ],
 
                     'validations' => [
-                        'required' => 'Please select CAPTCHA',
                         'captcha'  => 'Something went wrong! Please try again.',
+                        'required' => 'Please select CAPTCHA',
                     ]
                 ],
 
                 'settings' => [
-                    'title'                   => 'Settings',
-                    'settings-info'           => 'Set wishlist, newsletter subscriptions, email verifications and social login.',
+                    'settings-info' => 'Set wishlist, newsletter subscriptions, email verifications and social login.',
+                    'title'         => 'Settings',
 
                     'wishlist' => [
+                        'share'      => 'Enable Sharing',
                         'title'      => 'Wishlist',
                         'title-info' => '"Wishlist" is a personalized collection of desired items, allowing users to save products for future reference or potential purchase.',
-                        'share'      => 'Enable Sharing',
                     ],
 
                     'newsletter' => [
+                        'subscription' => 'Allow Newsletter Subscription',
                         'title'        => 'Newsletter Subscription',
                         'title-info'   => '"Newsletter information" contains updates, offers, or content shared regularly through emails to subscribers, keeping them informed and engaged.',
-                        'subscription' => 'Allow Newsletter Subscription',
                     ],
 
                     'email' => [
+                        'email-verification' => 'Allow Email Verification',
                         'title'              => 'Email Verification',
                         'title-info'         => '"Email verification" confirms the authenticity of an email address, often by sending a confirmation link, enhancing account security and communication reliability.',
-                        'email-verification' => 'Allow Email Verification',
                     ],
 
                     'social-login' => [
-                        'social-login'      => 'Social Login',
-                        'social-login-info' => '"Social login" enables users to access websites using their social media accounts, streamlining registration and login processes for convenience.',
                         'enable-facebook'   => 'Enable Facebook',
                         'enable-twitter'    => 'Enable Twitter',
                         'enable-google'     => 'Enable Google',
                         'enable-linkedin'   => 'Enable LinkedIn',
-                        'enable-github'     => 'Enable Github'
+                        'enable-github'     => 'Enable Github',
+                        'social-login'      => 'Social Login',
+                        'social-login-info' => '"Social login" enables users to access websites using their social media accounts, streamlining registration and login processes for convenience.',
                     ],
                 ],
             ],
 
             'email' => [
-                'title' => 'Email',
                 'info'  => 'Email',
+                'title' => 'Email',
 
                 'email-settings' => [
-                    'title'                  => 'Email Settings',
-                    'info'                   => 'Set email sender name, shop email address, admin name and admin email address.',
-                    'email-sender-name'      => 'Email Sender Name',
-                    'email-sender-name-tip'  => 'This name will be displayed in the customers inbox',
-                    'shop-email-from'        => 'Shop Email Address',
-                    'shop-email-from-tip'    => 'The email address of this channel to send emails to your customers',
                     'admin-name'             => 'Admin Name',
                     'admin-name-tip'         => 'This name will be displayed in all admin emails',
                     'admin-email'            => 'Admin Email',
                     'admin-email-tip'        => 'The email address of the admin for this channel to receive emails',
                     'admin-page-limit'       => 'Default Items Per Page (Admin)',
+                    'email-sender-name'      => 'Email Sender Name',
+                    'email-sender-name-tip'  => 'This name will be displayed in the customers inbox',
+                    'info'                   => 'Set email sender name, shop email address, admin name and admin email address.',
+                    'shop-email-from'        => 'Shop Email Address',
+                    'shop-email-from-tip'    => 'The email address of this channel to send emails to your customers',
+                    'title'                  => 'Email Settings',
                 ],
 
                 'notifications' => [
-                    'title'                                            => 'Notifications',
-                    'info'                                             => '"Notification" is a message or alert that informs users about events, updates, or actions, enhancing user engagement and awareness.',
-                    'verification'                                     => 'Send a verification e-mail after customer registration',
-                    'registration'                                     => 'Send a confirmation e-mail after customer registration',
                     'customer-registration-confirmation-mail-to-admin' => 'Send a confirmation e-mail to admin after customer registration',
                     'customer'                                         => 'Send the customer account credentials after registration',
+                    'cancel-order'                                     => 'Send a notification after canceling an order',
+                    'info'                                             => '"Notification" is a message or alert that informs users about events, updates, or actions, enhancing user engagement and awareness.',
                     'new-order'                                        => 'Send a confirmation e-mail to the customer after placing a new order',
                     'new-admin'                                        => 'Send a confirmation e-mail to the admin after placing a new order',
                     'new-invoice'                                      => 'Send a notification e-mail to the customer after creating a new invoice',
                     'new-refund'                                       => 'Send a notification e-mail to the customer after creating a refund',
                     'new-shipment'                                     => 'Send a notification e-mail to the customer after creating a shipment',
                     'new-inventory-source'                             => 'Send a notification e-mail to the inventory source after creating a shipment',
-                    'cancel-order'                                     => 'Send a notification after canceling an order',
+                    'registration'                                     => 'Send a confirmation e-mail after customer registration',
+                    'title'                                            => 'Notifications',
+                    'verification'                                     => 'Send a verification e-mail after customer registration',
                 ],
             ],
 
             'sales' => [
-                'title' => 'Sales',
                 'info'  => 'Sales',
+                'title' => 'Sales',
 
                 'shipping' => [
-                    'title'          => 'Shipping',
-                    'info'           => 'Set shipping information.',
+                    'info'  => 'Set shipping information.',
+                    'title' => 'Shipping',
 
                     'origin' => [
-                        'title'          => 'Origin',
-                        'title-info'     => 'Shipping origin refers to the location where goods or products originate before being transported to their destination.',
+                        'bank-details'   => 'Bank Details',
+                        'contact-number' => 'Contact Number',
+                        'city'           => 'City',
                         'country'        => 'Country',
                         'state'          => 'State',
-                        'zip'            => 'Zip',
-                        'city'           => 'City',
                         'street-address' => 'Street Address',
                         'store-name'     => 'Store Name',
+                        'title'          => 'Origin',
+                        'title-info'     => 'Shipping origin refers to the location where goods or products originate before being transported to their destination.',
                         'vat-number'     => 'Vat Number',
-                        'contact-number' => 'Contact Number',
-                        'bank-details'   => 'Bank Details',
+                        'zip'            => 'Zip',
                     ],
                 ],
 
                 'shipping-methods' => [
-                    'title'                => 'Shipping Methods',
-                    'info'                      => 'Set shipping methods information',
+                    'info'  => 'Set shipping methods information',
+                    'title' => 'Shipping Methods',
 
                     'free-shipping' => [
+                        'description' => 'Description',
                         'page-title'  => 'Free Shipping',
+                        'status'      => 'Status',
                         'title-info'  => '"Free shipping" refers to a shipping method where the cost of shipping is waived, and the seller covers the shipping expenses for delivering goods to the buyer.',
                         'title'       => 'Title',
-                        'description' => 'Description',
-                        'status'      => 'Status',
                     ],
 
                     'flat-rate-shipping' => [
-                        'page-title'  => 'Flat Rate Shipping',
-                        'title-info'  => 'Flat rate shipping is a shipping method where a fixed fee is charged for shipping, regardless of the weight, size, or distance of the package. This simplifies shipping costs and can be advantageous for both buyers and sellers.',
-                        'title'       => 'Title',
                         'description' => 'Description',
+                        'page-title'  => 'Flat Rate Shipping',
                         'rate'        => 'Rate',
                         'status'      => 'Status',
+                        'title'       => 'Title',
+                        'title-info'  => 'Flat rate shipping is a shipping method where a fixed fee is charged for shipping, regardless of the weight, size, or distance of the package. This simplifies shipping costs and can be advantageous for both buyers and sellers.',
                         'type'        => 'Type',
                     ],
                 ],
@@ -3002,57 +3002,57 @@ return [
                 ],
 
                 'order-settings' => [
-                    'title' => 'Order Settings',
                     'info'  => 'Set order numbers and minimum orders.',
+                    'title' => 'Order Settings',
 
                     'order-number' => [
+                        'generator'   => 'Order Number Generator',
+                        'length'      => 'Order Number Length',
+                        'prefix'      => 'Order Number Prefix',
+                        'suffix'      => 'Order Number Suffix',
                         'title'       => 'Order Number Settings',
                         'title-info'  => 'Unique identifier assigned to a specific customer order, aiding tracking, communication, and reference throughout the purchasing process.',
-                        'prefix'      => 'Order Number Prefix',
-                        'length'      => 'Order Number Length',
-                        'suffix'      => 'Order Number Suffix',
-                        'generator'   => 'Order Number Generator',
                     ],
 
                     'minimum-order' => [
+                        'minimum-order-amount' => 'Minimum Order Amount',
                         'title'                => 'Minimum Order Settings',
                         'title-info'           => 'Configured criteria specifying the lowest required quantity or value for an order to be processed or qualify for benefits.',
-                        'minimum-order-amount' => 'Minimum Order Amount',
                     ],
                 ],
 
                 'invoice-settings' => [
-                    'title' => 'Invoice Settings',
                     'info'  => 'Set invoice number, payment terms, invoice slip design and invoice reminders.',
+                    'title' => 'Invoice Settings',
 
                     'invoice-number' => [
+                        'generator'  => 'Invoice Number Generator',
+                        'length'     => 'Invoice Number Length',
+                        'prefix'     => 'Invoice Number Prefix',
+                        'suffix'     => 'Invoice Number Suffix',
                         'title'      => 'Invoice Number Settings',
                         'title-info' => 'Configuration of rules or parameters for generating and assigning unique identification numbers to invoices for organizational and tracking purposes.',
-                        'prefix'     => 'Invoice Number Prefix',
-                        'length'     => 'Invoice Number Length',
-                        'suffix'     => 'Invoice Number Suffix',
-                        'generator'  => 'Invoice Number Generator',
                     ],
 
                     'payment-terms' => [
-                        'title'             => 'Payment Terms',
-                        'title-info'        => 'Agreed-upon conditions dictating when and how payment for goods or services should be made by the buyer to the seller.',
                         'due-duration'      => 'Due Duration',
                         'due-duration-day'  => ':due-duration Day',
                         'due-duration-days' => ':due-duration Days',
+                        'title'             => 'Payment Terms',
+                        'title-info'        => 'Agreed-upon conditions dictating when and how payment for goods or services should be made by the buyer to the seller.',
                     ],
 
                     'invoice-slip-design' => [
+                        'logo'       => 'Logo',
                         'title'      => 'Invoice Slip Design',
                         'title-info' => 'Visual layout and formatting of an invoice slip, including company branding, itemization, pricing, and payment details for professional presentation.',
-                        'logo'       => 'Logo',
                     ],
 
                     'invoice-reminders' => [
+                        'interval-between-reminders' => 'Interval between reminders',
+                        'maximum-limit-of-reminders' => 'Maximum limit of reminders',
                         'title'                      => 'Invoice Reminders',
                         'title-info'                 => 'Automated notifications or communications sent to customers to remind them of upcoming or overdue payments for invoices.',
-                        'maximum-limit-of-reminders' => 'Maximum limit of reminders',
-                        'interval-between-reminders' => 'Interval between reminders',
                     ],
                 ],
             ],
@@ -3071,11 +3071,11 @@ return [
                     ],
 
                     'default-location-calculation' => [
-                        'title'             => 'Default Location Calculation',
-                        'title-info'        => 'Automated determination of a standard or initial location based on predefined factors or settings.',
                         'default-country'   => 'Default Country',
                         'default-state'     => 'Default State',
                         'default-post-code' => 'Default Post Code',
+                        'title'             => 'Default Location Calculation',
+                        'title-info'        => 'Automated determination of a standard or initial location based on predefined factors or settings.',
                     ],
                 ],
             ],
