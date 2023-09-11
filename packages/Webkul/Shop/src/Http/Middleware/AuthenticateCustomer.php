@@ -30,11 +30,11 @@ class AuthenticateCustomer
 
                 if ($request->expectsJson()) {
                     return response()->json([
-                        'message' => trans('shop::app.customer.login-form.not-activated'),
+                        'message' => trans('shop::app.customers.login-form.not-activated'),
                     ], 401);
                 }
 
-                session()->flash('warning', trans('shop::app.customer.login-form.not-activated'));
+                session()->flash('warning', trans('shop::app.customers.login-form.not-activated'));
 
                 return redirect()->route('shop.customer.session.index');
             }

@@ -174,6 +174,7 @@ return [
                 'contact'               => 'Contact',
                 'comment-success'       => 'Commentaire ajouté avec succès.',
                 'create-success'        => 'Commande créée avec succès',
+                'cancel-success'        => 'Commande annulée avec succès',
                 'create-invoice'        => 'Créer une facture',
                 'discount'              => 'Réduction - :discount',
                 'download-pdf'          => 'Télécharger le PDF',

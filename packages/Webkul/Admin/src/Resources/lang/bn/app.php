@@ -174,6 +174,7 @@ return [
                 'contact'               => 'যোগাযোগ',
                 'comment-success'       => 'মন্তব্য সফলভাবে যোগ করা হয়েছে।',
                 'create-success'        => 'অর্ডার সফলভাবে তৈরি হয়েছে',
+                'cancel-success'        => 'অর্ডার সফলভাবে বাতিল হয়েছে',
                 'create-invoice'        => 'চালান তৈরি করুন',
                 'discount'              => 'ছাড় - :discount',
                 'download-pdf'          => 'PDF ডাউনলোড করুন',
