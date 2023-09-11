@@ -174,6 +174,7 @@ return [
                 'contact'               => 'සම්බන්ධය',
                 'comment-success'       => 'සාර්ථකයි, විවේකය එක්කාර කරන ලදි.',
                 'create-success'        => 'ඇණවුම සාර්ථකයි',
+                'cancel-success'        => 'ඇනවුම සාර්ථකව කැඳවූ',
                 'create-invoice'        => 'කාර්තු ලිපියක් සාදන්න',
                 'discount'              => 'වට්ටම - :discount',
                 'download-pdf'          => 'PDF බාගත කරන්න',

@@ -49,7 +49,7 @@ class SessionController extends Controller
         }
 
         if (! auth()->guard('admin')->user()->status) {
-            session()->flash('warning', trans('admin::app.settings.users.activate-warning'));
+            session()->flash('warning', trans('admin::app.settings.users.index.activate-warning'));
 
             auth()->guard('admin')->logout();
 

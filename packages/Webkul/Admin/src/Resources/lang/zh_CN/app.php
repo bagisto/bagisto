@@ -174,6 +174,7 @@ return [
                 'contact'               => '联系',
                 'comment-success'       => '评论成功添加。',
                 'create-success'        => '订单创建成功',
+                'cancel-success'        => '订单取消成功',
                 'create-invoice'        => '创建发票',
                 'discount'              => '折扣 - :discount',
                 'download-pdf'          => '下载PDF',
