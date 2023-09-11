@@ -75,7 +75,7 @@
                                 </x-admin::form.control-group>
 
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
+                                    <x-admin::form.control-group.label>
                                         @lang('admin::app.marketing.promotions.cart-rules.edit.description')
                                     </x-admin::form.control-group.label>
 
@@ -85,7 +85,6 @@
                                         :value="old('description') ?? $cartRule->description"
                                         id="description"
                                         class="text-gray-600"
-                                        rules="required"
                                         :label="trans('admin::app.marketing.promotions.cart-rules.edit.description')"
                                         :placeholder="trans('admin::app.marketing.promotions.cart-rules.edit.description')"
                                     >
@@ -1295,7 +1294,7 @@
                                     </x-admin::form.control-group>
 
                                     <x-admin::form.control-group>
-                                        <x-admin::form.control-group.label class="required">
+                                        <x-admin::form.control-group.label>
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.code-prefix')
                                         </x-admin::form.control-group.label>
                         
@@ -1303,7 +1302,6 @@
                                             type="text"
                                             name="code_prefix"
                                             id="code_prefix"
-                                            rules="required"
                                             :label="trans('admin::app.marketing.promotions.cart-rules.edit.code-prefix')"
                                             :placeholder="trans('admin::app.marketing.promotions.cart-rules.edit.code-prefix')"
                                             v-model="coupon_format.code_prefix"
@@ -1319,7 +1317,7 @@
 
                                 <div class="w-full mb-[10px]">
                                     <x-admin::form.control-group>
-                                        <x-admin::form.control-group.label class="required">
+                                        <x-admin::form.control-group.label>
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.code-suffix')
                                         </x-admin::form.control-group.label>
                         
@@ -1327,7 +1325,6 @@
                                             type="text"
                                             name="code_suffix"
                                             id="code_suffix"
-                                            rules="required"
                                             :label="trans('admin::app.marketing.promotions.cart-rules.edit.code-suffix')"
                                             :placeholder="trans('admin::app.marketing.promotions.cart-rules.edit.code-suffix')"
                                             v-model="coupon_format.code_suffix"
