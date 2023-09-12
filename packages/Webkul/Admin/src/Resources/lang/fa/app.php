@@ -11,7 +11,7 @@ return [
         ],
 
         'forget-password' => [
-            'create'    =>  [
+            'create'    => [
                 'email'            => 'آدرس ایمیل ثبت شده',
                 'email-not-exist'  => 'آدرس ایمیل وجود ندارد',
                 'page-title'       => 'فراموشی رمز عبور',
@@ -174,7 +174,7 @@ return [
                 'contact'               => 'تماس',
                 'comment-success'       => 'نظر با موفقیت افزوده شد.',
                 'create-success'        => 'سفارش با موفقیت ایجاد شد',
-                'cancel-success' => 'سفارش با موفقیت لغو شد',
+                'cancel-success'        => 'سفارش با موفقیت لغو شد',
                 'create-invoice'        => 'ایجاد فاکتور',
                 'discount'              => 'تخفیف - :discount',
                 'download-pdf'          => 'دانلود PDF',
@@ -291,7 +291,7 @@ return [
                 'shipping-price'       => 'هزینه حمل و نقل',
                 'title'                => 'ارسال #:shipment_id',
                 'tracking-number'      => 'شماره پیگیری',
-            ]
+            ],
         ],
 
         'refunds' => [
@@ -474,7 +474,7 @@ return [
                     'transaction-amount' => 'مقدار',
                 ],
 
-                'edit'  =>  [
+                'edit'  => [
                     'already-paid'               => 'قبلاً پرداخت شده',
                     'invoice-missing'            => 'صورتحساب موجود نیست',
                     'transaction-amount-zero'    => 'مقدار تراکنش صفر است',
@@ -1272,7 +1272,7 @@ return [
                     'group-default'  => 'گروه پیش‌فرض قابل حذف نیست',
                 ],
 
-                'datagrid'  =>  [
+                'datagrid'  => [
                     'code'   => 'کد',
                     'id'     => 'شناسه',
                     'name'   => 'نام',
@@ -1311,7 +1311,7 @@ return [
                     'update-success' => 'با موفقیت به‌روزرسانی شد',
                 ],
 
-                'datagrid'   =>  [
+                'datagrid'   => [
                     'customer-names'      => 'نام',
                     'comment'             => 'نظر',
                     'date'                => 'تاریخ',
@@ -1345,7 +1345,7 @@ return [
                 'address-2'          => 'آدرس 2',
                 'city'               => 'شهر',
                 'state'              => 'استان',
-                'select-country'     => "انتخاب کشور",
+                'select-country'     => 'انتخاب کشور',
                 'country'            => 'کشور',
                 'default-address'    => 'آدرس پیش‌فرض',
                 'first-name'         => 'نام',
@@ -1364,7 +1364,7 @@ return [
                 'address-2'        => 'آدرس 2',
                 'city'             => 'شهر',
                 'state'            => 'استان',
-                'select-country'   => "انتخاب کشور",
+                'select-country'   => 'انتخاب کشور',
                 'country'          => 'کشور',
                 'default-address'  => 'آدرس پیش‌فرض',
                 'first-name'       => 'نام',
@@ -1915,10 +1915,10 @@ return [
                     'delete-warning' => 'آیا از انجام این عملیات مطمئن هستید؟',
                 ],
 
-                'edit'  =>  [
+                'edit'  => [
                     'title'          => 'ویرایش نقشه‌ی سایت',
                     'success'        => 'نقشه‌ی سایت با موفقیت به‌روزرسانی شد',
-                    'delete-success' => 'نقشه‌ی سایت با موفقیت حذف شد'
+                    'delete-success' => 'نقشه‌ی سایت با موفقیت حذف شد',
                 ],
             ],
 
@@ -1949,7 +1949,7 @@ return [
                 'view'                => 'مشاهده',
                 'edit'                => 'ویرایش',
                 'delete'              => 'حذف',
-                'mass-delete-success' => 'داده‌های انتخاب شده با موفقیت حذف شدند'
+                'mass-delete-success' => 'داده‌های انتخاب شده با موفقیت حذف شدند',
             ],
         ],
 
@@ -2008,7 +2008,7 @@ return [
                     'delete'    => 'حذف',
                 ],
 
-                'create'  =>  [
+                'create'  => [
                     'code'             => 'کد',
                     'name'             => 'نام',
                     'direction'        => 'جهت',
@@ -2228,8 +2228,8 @@ return [
 
                     'create-success'  => 'دسته‌بندی مالیاتی جدید ایجاد شد.',
                     'update-success'  => 'دسته‌بندی مالیاتی با موفقیت به‌روزرسانی شد.',
-                    'delete-success' => 'دسته‌بندی مالیاتی با موفقیت حذف شد.',
-                    'delete-failed'  => 'حذف دسته‌بندی مالیاتی با شکست مواجه شد.',
+                    'delete-success'  => 'دسته‌بندی مالیاتی با موفقیت حذف شد.',
+                    'delete-failed'   => 'حذف دسته‌بندی مالیاتی با شکست مواجه شد.',
                 ],
             ],
 
@@ -2402,7 +2402,7 @@ return [
                     'role'              => 'نقش',
                     'status'            => 'وضعیت',
                     'save-btn'          => 'ذخیره کاربر',
-                    'upload-image-info' => 'آپلود تصویر پروفایل (110px X 110px) به فرمت PNG یا JPG'
+                    'upload-image-info' => 'آپلود تصویر پروفایل (110px X 110px) به فرمت PNG یا JPG',
                 ],
 
                 'datagrid' => [
@@ -2430,7 +2430,7 @@ return [
                 'last-delete-error'  => 'آخرین حذف کاربر ناموفق بود',
                 'login-error'        => 'لطفاً اطلاعات ورود خود را بررسی کرده و دوباره تلاش کنید.',
                 'update-success'     => 'کاربر با موفقیت به‌روزرسانی شد.',
-                'delete-warning'     =>'آیا مطمئن هستید که می‌خواهید این عمل را انجام دهید؟',
+                'delete-warning'     => 'آیا مطمئن هستید که می‌خواهید این عمل را انجام دهید؟',
             ],
 
             'edit'  => [
@@ -2455,7 +2455,7 @@ return [
                 'title'      => 'نقش‌ها',
                 'create-btn' => 'ایجاد نقش',
 
-                'datagrid'  =>  [
+                'datagrid'  => [
                     'delete'          => 'حذف',
                     'edit'            => 'ویرایش',
                     'id'              => 'شناسه',
@@ -2513,57 +2513,57 @@ return [
                     'id'         => 'شناسه',
                     'type'       => 'نوع',
                     'name'       => 'نام',
-                ]
+                ],
             ],
 
             'create' => [
-                'title'                         => 'ایجاد پوسته',
+                'title'                          => 'ایجاد پوسته',
                 'sliders'                        => 'اسلایدرها',
-                'product-carousel'              => 'کاروسل محصول',
-                'product-carousel-description'  => 'نمایش محصولات به شکل زیبا با یک کاروسل محصول پویا و واکنش‌پذیر.',
-                'category-carousel-description' => 'نمایش دسته‌بندی‌ها به شکل جذاب با استفاده از یک کاروسل دسته‌بندی واکنش‌پذیر.',
-                'static-content-description'    => 'افزایش انگیزه با محتوای ثابت مختصر و اطلاعاتی برای مخاطبین خود.',
-                'footer-link-description'       => 'مسیریابی از طریق پیوندهای پایین صفحه برای کاوش و دریافت اطلاعات بی‌وقفه.',
-                'category-carousel'             => 'کاروسل دسته‌بندی',
-                'static-content'                => 'محتوای ثابت',
-                'footer-link'                   => 'پیوندهای پایین صفحه',
-                'footer-link-form-title'        => 'پیوند پایین صفحه',
-                'slider-description'            => 'سفارشی‌سازی مرتبط با اسلایدر.',
-                'slider-add-btn'                => 'افزودن اسلایدر',
-                'general'                       => 'عمومی',
-                'add-filter-btn'                => 'افزودن فیلتر',
-                'save-btn'                      => 'ذخیره',
-                'filter-title'                  => 'عنوان',
-                'sort'                          => 'مرتب‌سازی',
-                'desc'                          => 'نزولی',
-                'asc'                           => 'صعودی',
-                'limit'                         => 'محدودیت',
-                'footer-title'                  => 'عنوان',
-                'link'                          => 'پیوند',
-                'add-logo'                      => 'افزودن لوگو',
-                'key'                           => 'کلید: :key',
-                'value'                         => 'مقدار: :value',
-                'delete'                        => 'حذف',
-                'name'                          => 'نام',
-                'sort-order'                    => 'ترتیب مرتب‌سازی',
-                'status'                        => 'وضعیت',
-                'image'                         => 'تصویر',
-                'create-filter'                 => 'ایجاد فیلتر',
-                'key-input'                     => 'کلید',
-                'value-input'                   => 'مقدار',
-                'html'                          => 'HTML',
-                'css'                           => 'CSS',
-                'add-footer-link-btn'           => 'افزودن پیوند پایین صفحه',
-                'filters'                       => 'فیلترها',
-                'edit'                          => 'ویرایش',
-                'path'                          => 'مسیر',
-                'add-link'                      => 'افزودن پیوند',
-                'create-slider'                 => 'ایجاد اسلایدر',
-                'slider-image'                  => 'تصویر اسلایدر',
-                'column'                        => 'ستون',
-                'select'                        => 'انتخاب',
-                'back'                          => 'بازگشت',
-             ],
+                'product-carousel'               => 'کاروسل محصول',
+                'product-carousel-description'   => 'نمایش محصولات به شکل زیبا با یک کاروسل محصول پویا و واکنش‌پذیر.',
+                'category-carousel-description'  => 'نمایش دسته‌بندی‌ها به شکل جذاب با استفاده از یک کاروسل دسته‌بندی واکنش‌پذیر.',
+                'static-content-description'     => 'افزایش انگیزه با محتوای ثابت مختصر و اطلاعاتی برای مخاطبین خود.',
+                'footer-link-description'        => 'مسیریابی از طریق پیوندهای پایین صفحه برای کاوش و دریافت اطلاعات بی‌وقفه.',
+                'category-carousel'              => 'کاروسل دسته‌بندی',
+                'static-content'                 => 'محتوای ثابت',
+                'footer-link'                    => 'پیوندهای پایین صفحه',
+                'footer-link-form-title'         => 'پیوند پایین صفحه',
+                'slider-description'             => 'سفارشی‌سازی مرتبط با اسلایدر.',
+                'slider-add-btn'                 => 'افزودن اسلایدر',
+                'general'                        => 'عمومی',
+                'add-filter-btn'                 => 'افزودن فیلتر',
+                'save-btn'                       => 'ذخیره',
+                'filter-title'                   => 'عنوان',
+                'sort'                           => 'مرتب‌سازی',
+                'desc'                           => 'نزولی',
+                'asc'                            => 'صعودی',
+                'limit'                          => 'محدودیت',
+                'footer-title'                   => 'عنوان',
+                'link'                           => 'پیوند',
+                'add-logo'                       => 'افزودن لوگو',
+                'key'                            => 'کلید: :key',
+                'value'                          => 'مقدار: :value',
+                'delete'                         => 'حذف',
+                'name'                           => 'نام',
+                'sort-order'                     => 'ترتیب مرتب‌سازی',
+                'status'                         => 'وضعیت',
+                'image'                          => 'تصویر',
+                'create-filter'                  => 'ایجاد فیلتر',
+                'key-input'                      => 'کلید',
+                'value-input'                    => 'مقدار',
+                'html'                           => 'HTML',
+                'css'                            => 'CSS',
+                'add-footer-link-btn'            => 'افزودن پیوند پایین صفحه',
+                'filters'                        => 'فیلترها',
+                'edit'                           => 'ویرایش',
+                'path'                           => 'مسیر',
+                'add-link'                       => 'افزودن پیوند',
+                'create-slider'                  => 'ایجاد اسلایدر',
+                'slider-image'                   => 'تصویر اسلایدر',
+                'column'                         => 'ستون',
+                'select'                         => 'انتخاب',
+                'back'                           => 'بازگشت',
+            ],
 
             'edit' => [
                 'title'                         => 'ویرایش پوسته',
@@ -2621,303 +2621,472 @@ return [
 
     'configuration' => [
         'index' => [
-            'title'                        => 'پیکربندی',
+            'delete'                       => 'حذف',
+            'enable-at-least-one-shipping' => 'حداقل یک روش حمل و نقل را فعال کنید.',
+            'enable-at-least-one-payment'  => 'حداقل یک روش پرداخت را فعال کنید.',
             'save-btn'                     => 'ذخیره پیکربندی',
             'save-message'                 => 'پیکربندی با موفقیت ذخیره شد',
-            'delete'                       => 'حذف',
-            'enable-at-least-one-shipping' => 'حداقل یک روش ارسال را فعال کنید.',
-            'enable-at-least-one-payment'  => 'حداقل یک روش پرداخت را فعال کنید.',
+            'title'                        => 'پیکربندی',
 
             'general' => [
+                'info'  => 'تنظیم گزینه‌های واحد.',
+                'title' => 'عمومی',
+
                 'general' => [
-                    'title'             => 'عمومی',
-                    'info'              => 'تنظیم گزینه‌های واحد.',
-                    'unit-options'      => 'گزینه‌های واحد',
-                    'unit-options-info' => 'سایز، رنگ، مواد، سفارشی‌سازی، افزایش رضایت مشتری و تطبیق خریدها.',
-                    'weight-unit'       => 'واحد وزن',
+                    'info'  => 'تنظیم گزینه‌های واحد.',
+                    'title' => 'عمومی',
+
+                    'unit-options' => [
+                        'info'          => 'تنظیم گزینه‌های واحد.',
+                        'title'         => 'گزینه‌های واحد',
+                        'title-info'    => 'اندازه، رنگ، مواد، سفارشی‌سازی، افزایش رضایت مشتریان و تطبیق خریدها.',
+                        'weight-unit'   => 'واحد وزن',
+                    ],
                 ],
 
                 'content' => [
-                    'title'               => 'محتوا',
-                    'info'                => 'تنظیم گزینه‌های مقایسه، گزینه‌های لیست علاقه‌مندی، گزینه‌های جستجوی تصویر، پاورقی، تغییر وضعیت پاورقی و اسکریپت‌های سفارشی.',
-                    'custom-scripts'      => 'اسکریپت‌های سفارشی',
-                    'custom-scripts-info' => 'اسکریپت‌های سفارشی تکه‌های کد شخصی‌سازی شده هستند که برای افزودن عملکردها یا ویژگی‌های خاص به نرم‌افزار ایجاد شده‌اند و قابلیت‌های آن را به طور منحصربه‌فرد ارتقا می‌دهند.',
-                    'custom-css'          => 'CSS سفارشی',
-                    'custom-javascript'   => 'Javascript سفارشی',
-                    'compare-options'     => 'گزینه‌های مقایسه',
-                    'wishlist-options'    => 'گزینه‌های لیست علاقه‌مندی',
-                    'image-search-option' => 'گزینه جستجوی تصویر',
-                    'settings-title'      => 'تنظیمات',
-                    'settings-title-info' => 'تنظیمات به انتخاب‌های قابل پیکربندی اشاره دارند که کنترل نحوه رفتار یک سیستم، برنامه یا دستگاه را به تنظیمات کاربری و نیازهای کاربر سفارشی می‌کنند.'
+                    'info'  => 'تنظیم گزینه‌های مقایسه، گزینه‌های لیست دلخواه، گزینه‌های جستجوی تصویر، پاورقی، تغییر پاورقی و اسکریپت‌های سفارشی.',
+                    'title' => 'محتوا',
+
+                    'settings' => [
+                        'compare-options'     => 'گزینه‌های مقایسه',
+                        'image-search-option' => 'گزینه جستجوی تصویر',
+                        'title'               => 'تنظیمات',
+                        'title-info'          => 'تنظیمات به انتخاب‌های پیکربندی‌پذیر اشاره دارند که کنترل می‌کنند چگونه یک سیستم، برنامه یا دستگاه بر اساس ترجیحات و نیازهای کاربری تنظیم می‌شود.',
+                        'wishlist-options'    => 'گزینه‌های لیست دلخواه',
+                    ],
+
+                    'custom-scripts' => [
+                        'custom-css'        => 'سی‌اس‌اس سفارشی',
+                        'custom-javascript' => 'جاوااسکریپت سفارشی',
+                        'title'             => 'اسکریپت‌های سفارشی',
+                        'title-info'        => 'اسکریپت‌های سفارشی کدهای شخصی‌سازی شده‌ای هستند که برای افزودن ویژگی‌ها یا امکانات خاص به نرم‌افزار ایجاد شده‌اند و قابلیت‌های منحصربه‌فردی را به آن اضافه می‌کنند.',
+                    ],
                 ],
 
                 'design' => [
-                    'title'           => 'طراحی',
-                    'info'            => 'تنظیم لوگو و آیکون فاویکون.',
-                    'admin-logo'      => 'لوگو مدیر',
-                    'admin-logo-info' => 'لوگو مدیر تصویر منحصر به فرد یا نماد نماینده رابط مدیریت یک سیستم یا وب‌سایت است که اغلب قابل تنظیم است.',
-                    'logo-image'      => 'تصویر لوگو',
-                    'favicon'         => 'آیکون فاویکون',
+                    'info'  => 'تنظیم لوگو و نماد Favicon.',
+                    'title' => 'طراحی',
+
+                    'admin-logo' => [
+                        'favicon'     => 'نماد Favicon',
+                        'logo-image'  => 'تصویر لوگو',
+                        'title'       => 'لوگوی مدیریت',
+                        'title-info'  => 'لوگوی مدیریت تصویر ممیزی است که رابط مدیریت یک سیستم یا وب‌سایت را نمایان می‌کند، اغلب قابل تنظیم است.',
+                    ],
                 ],
             ],
 
             'catalog' => [
-                'title' => 'کاتالوگ',
                 'info'  => 'کاتالوگ',
+                'title' => 'کاتالوگ',
 
                 'inventory' => [
-                    'title'              => 'موجودی',
-                    'info'               => 'تنظیم سفارشات پس‌زمینه',
-                    'stock-options'      => 'گزینه‌های موجودی',
-                    'stock-options-info' => 'گزینه‌های موجودی تعهدات سرمایه‌گذاری هستند که حق خرید یا فروش سهام شرکت را به قیمت تعیین‌شده اعطا می‌کنند و سودهای احتمالی را تحت تأثیر قرار می‌دهند.',
-                    'allow-back-orders'  => 'اجازه دادن به سفارشات پس‌زمینه',
+                    'info'  => 'راه‌اندازی سفارش‌های بازگشتی',
+                    'title' => 'موجودی',
+
+                    'stock-options' => [
+                        'allow-back-orders'  => 'امکان سفارش‌های بازگشتی',
+                        'title'              => 'گزینه‌های موجودی',
+                        'title-info'         => 'گزینه‌های موجودی توافقنامه‌های مالکیت هستند که حق خرید یا فروش سهام شرکت‌ها را به قیمت تعیین‌شده اعطا می‌کنند و به تاثیرگذاری در سودهای ممکن کمک می‌کنند.',
+                    ],
                 ],
 
                 'products' => [
-                    'title'                              => 'محصولات',
-                    'info'                               => 'تنظیم خرید مهمان، صفحه اصلی، صفحه مشاهده محصول، صفحه سبد خرید، نمایش فروشگاه، بررسی و اشتراک‌گذاری اجتماعی ویژگی‌ها.',
-                    'guest-checkout'                     => 'خرید مهمان',
-                    'guest-checkout-info'                => 'خرید مهمان به مشتریان اجازه می‌دهد تا محصولات را بدون ایجاد حساب کاربری بخرند و فرآیند خرید را برای راحتی و تراکنش‌های سریع ساده‌تر کنند.',
-                    'allow-guest-checkout'               => 'اجازه دادن به خرید مهمان',
-                    'allow-guest-checkout-hint'          => 'راهنما: اگر فعال باشد، این گزینه برای هر محصول به‌طور خاص قابل تنظیم است.',
-                    'attribute'                          => 'ویژگی',
-                    'homepage'                           => 'تنظیمات صفحه اصلی',
-                    'homepage-info'                      => 'تنظیم صفحه اصلی شامل سفارشی‌سازی طرح، محتوا و طراحی صفحه اصلی وب‌سایت برای ارائه اطلاعات مورد نظر به بهترین شکل ممکن است.',
-                    'allow-no-of-new-products'           => 'تعداد مجاز محصولات جدید در صفحه اصلی',
-                    'allow-no-of-featured-products'      => 'تعداد مجاز محصولات ویژه در صفحه اصلی',
-                    'allow-no-of-related-products'       => 'تعداد مجاز محصولات مرتبط',
-                    'allow-no-of-up-sells-products'      => 'تعداد مجاز محصولات پیشنهادی',
-                    'allow-no-of-cross-sells-products'   => 'تعداد مجاز محصولات مرتبط در سبد خرید',
-                    'product-view-page'                  => 'تنظیمات صفحه مشاهده محصول',
-                    'product-view-page-info'             => 'تنظیم صفحه مشاهده محصول شامل تنظیمات طراحی و المان‌های نمایش محصول است، که تجربه کاربری و ارائه اطلاعات را بهبود می‌بخشد.',
-                    'cart-view-page'                     => 'تنظیمات صفحه سبد خرید',
-                    'cart-view-page-info'                => 'تنظیم صفحه سبد خرید شامل ترتیب موارد، جزئیات و گزینه‌ها در صفحه سبد خرید است، که تعامل کاربر و جریان خرید را بهبود می‌بخشد.',
-                    'storefront'                         => 'فروشگاه',
-                    'storefront-info'                    => 'فروشگاه رابط مشتریانه یک فروشگاه آنلاین است که محصولات، دسته‌ها و ناوبری را برای تجربه خرید بدون مشکل نمایش می‌دهد.',
-                    'search-mode'                        => 'حالت جستجو',
-                    'flat'                               => 'Flat Table',
-                    'elastic'                            => 'Elastic Search',
-                    'default-list-mode'                  => 'حالت لیست پیش‌فرض',
-                    'grid'                               => 'شبکه',
-                    'list'                               => 'لیست',
-                    'products-per-page'                  => 'محصولات در هر صفحه',
-                    'sort-by'                            => 'مرتب‌سازی بر اساس',
-                    'from-z-a'                           => 'از Z به A',
-                    'from-a-z'                           => 'از A به Z',
-                    'latest-first'                       => 'جدیدترین‌ها اول',
-                    'oldest-first'                       => 'قدیمی‌ترین‌ها اول',
-                    'cheapest-first'                     => 'ارزانترین‌ها اول',
-                    'expensive-first'                    => 'گرانترین‌ها اول',
-                    'buy-now-button-display'             => 'اجازه دادن به مشتریان برای مستقیم خرید محصولات',
-                    'cache-small-image'                  => 'تصویر کوچک',
-                    'cache-small-image-info'             => 'تصویر کوچک رابط مشتریانه یک فروشگاه آنلاین است که محصولات، دسته‌ها و ناوبری را برای تجربه خرید بدون مشکل نمایش می‌دهد.',
-                    'width'                              => 'عرض',
-                    'height'                             => 'ارتفاع',
-                    'cache-medium-image'                 => 'تصویر متوسط',
-                    'cache-medium-image-info'            => 'تصویر متوسط به تصویری با اندازه متوسط اشاره دارد که تعادل بین جزئیات و فضای صفحه را به ارمغان می‌آورد و معمولاً برای تصاویر استفاده می‌شود.',
-                    'cache-large-image'                  => 'تصویر بزرگ',
-                    'cache-large-image-info'             => 'تصویر بزرگ تصویر با وضوح بالا است که جزئیات و تأثیر بصری بهبود یافته را ارائه می‌دهد و معمولاً برای نمایش محصولات یا گرافیک‌ها استفاده می‌شود.',
-                    'review'                             => 'بررسی',
-                    'review-info'                        => 'ارزیابی یا ارزیابی چیزی، اغلب شامل نظرات و بازخوردها است.',
-                    'allow-guest-review'                 => 'اجازه دادن به بررسی مهمان',
-                    'attribute-info'                     => 'ویژگی یا ویژگی که یک شیء را تعریف می‌کند و تأثیری بر رفتار، ظاهر یا عملکرد آن دارد.',
-                    'image-upload-size'                  => 'اندازه مجاز بارگذاری تصویر (به کیلوبایت)',
-                    'file-upload-size'                   => 'اندازه مجاز بارگذاری فایل (به کیلوبایت)',
-                    'comma-separated'                    => 'جداکننده با ویرگول',
+                    'info'  => 'راه‌اندازی سفارش‌های بازگشتی',
+                    'title' => 'محصولات',
+
+                    'guest-checkout' => [
+                        'allow-guest-checkout'      => 'امکان خرید به عنوان مهمان',
+                        'allow-guest-checkout-hint' => 'نکته: در صورت فعال بودن، این گزینه برای هر محصول به طور جداگانه قابل پیکربندی است.',
+                        'title'                     => 'خرید به عنوان مهمان',
+                        'title-info'                => 'خرید به عنوان مهمان به مشتریان امکان خرید محصولات بدون ایجاد حساب کاربری را می‌دهد و فرآیند خرید را برای راحتی و تسریع در معاملات آسان می‌کند.',
+                    ],
+
+                    'homepage' => [
+                        'allow-no-of-new-products'       => 'حداکثر تعداد محصولات جدید در صفحه اصلی',
+                        'allow-no-of-featured-products'  => 'حداکثر تعداد محصولات ویژه در صفحه اصلی',
+                        'title'                          => 'پیکربندی صفحه اصلی',
+                        'title-info'                     => 'پیکربندی صفحه اصلی شامل تنظیم طراحی، محتوا و طرح صفحه اصلی وب‌سایت است تا اطلاعات مورد نظر به صورت مؤثر ارائه شود.',
+                    ],
+
+                    'product-view-page' => [
+                        'allow-no-of-related-products'  => 'حداکثر تعداد محصولات مرتبط',
+                        'allow-no-of-up-sells-products' => 'حداکثر تعداد محصولات مرتبط با افزایش فروش',
+                        'title'                         => 'پیکربندی صفحه مشاهده محصول',
+                        'title-info'                    => 'پیکربندی صفحه مشاهده محصول شامل تنظیم طراحی و عناصر صفحه نمایش محصول است تا تجربه کاربری و ارائه اطلاعات بهبود یابد.',
+                    ],
+
+                    'cart-view-page' => [
+                        'allow-no-of-cross-sells-products' => 'حداکثر تعداد محصولات فروش متقابل',
+                        'title'                            => 'پیکربندی صفحه سبد خرید',
+                        'title-info'                       => 'پیکربندی صفحه سبد خرید شامل ترتیب موارد، جزئیات و گزینه‌های صفحه سبد خرید است تا تعامل کاربران و فرآیند خرید بهبود یابد.',
+                    ],
+
+                    'storefront' => [
+                        'buy-now-button-display' => 'امکان خرید مستقیم محصول برای مشتریان',
+                        'comma-separated'        => 'با کاما جداشده',
+                        'cheapest-first'         => 'ارزان‌ترین اول',
+                        'default-list-mode'      => 'حالت پیش‌فرض لیست',
+                        'expensive-first'        => 'گران‌ترین اول',
+                        'elastic'                => 'جستجوی انعطاف‌پذیر',
+                        'flat'                   => 'جدول تخت',
+                        'from-z-a'               => 'از Z تا A',
+                        'from-a-z'               => 'از A تا Z',
+                        'grid'                   => 'شبکه',
+                        'list'                   => 'لیست',
+                        'latest-first'           => 'جدیدترین اول',
+                        'oldest-first'           => 'قدیمی‌ترین اول',
+                        'products-per-page'      => 'تعداد محصولات در هر صفحه',
+                        'sort-by'                => 'مرتب‌سازی بر اساس',
+                        'search-mode'            => 'حالت جستجو',
+                        'title'                  => 'جلوه فروشگاه',
+                        'title-info'             => 'جلوه فروشگاه رابط کاربری یک فروشگاه آنلاین است که محصولات، دسته‌بندی‌ها و مسیریابی را برای تجربه خریدی بدون شکست ارائه می‌دهد.',
+                    ],
+
+                    'small-image' => [
+                        'height'     => 'ارتفاع',
+                        'title'      => 'تصویر کوچک',
+                        'title-info' => 'تصویر کوچک رابط کاربری مشتریان یک فروشگاه آنلاین است که محصولات، دسته‌بندی‌ها و مسیریابی را برای تجربه خریدی بدون شکست ارائه می‌دهد.',
+                        'width'      => 'عرض',
+                    ],
+
+                    'medium-image' => [
+                        'height'     => 'ارتفاع',
+                        'title'      => 'تصویر متوسط',
+                        'title-info' => 'تصویر متوسط به تصویر متوسطی اشاره دارد که تعادلی بین جزئیات و سطح صفحه را ارائه می‌دهد و به طور معمول برای نمایش‌های بصری استفاده می‌شود.',
+                        'width'      => 'عرض',
+                    ],
+
+                    'large-image' => [
+                        'width'      => 'عرض',
+                        'height'     => 'ارتفاع',
+                        'title'      => 'تصویر بزرگ',
+                        'title-info' => 'تصویر بزرگ یک تصویر با وضوح بالاست که دقت و تأثیر بصری بهتری ارائه می‌دهد و به طور معمول برای ارائه محصولات یا گرافیک‌ها استفاده می‌شود.',
+                    ],
+
+                    'review' => [
+                        'allow-guest-review' => 'امکان نظر دادن به عنوان مهمان',
+                        'title'              => 'نقد و بررسی',
+                        'title-info'         => 'نقد و بررسی یا ارزیابی چیزی است، معمولاً با در نظر گرفتن نظرات و بازخوردها.',
+                    ],
+
+                    'attribute' => [
+                        'file-upload-size'  => 'حجم مجاز برای آپلود فایل (به کیلوبایت)',
+                        'image-upload-size' => 'اندازه مجاز تصویر برای آپلود (به کیلوبایت)',
+                        'title'             => 'ویژگی',
+                        'title-info'        => 'ویژگی‌ها یا خصوصیت‌ها، ویژگی‌هایی هستند که یک شی را تعریف می‌کنند و بر تعیین رفتار، ظاهر یا عملکرد آن تأثیر می‌گذارند.',
+                    ],
+
+                    'social-share' => [
+                        'enable-social-share'    => 'فعال کردن اشتراک‌گذاری اجتماعی',
+                        'enable-share-facebook'  => 'فعال کردن اشتراک‌گذاری در فیس‌بوک',
+                        'enable-share-twitter'   => 'فعال کردن اشتراک‌گذاری در توییتر',
+                        'enable-share-pinterest' => 'فعال کردن اشتراک‌گذاری در پین‌ترست',
+                        'enable-share-whatsapp'  => 'فعال کردن اشتراک‌گذاری در واتس‌اپ',
+                        'enable-share-linkedin'  => 'فعال کردن اشتراک‌گذاری در لینکدین',
+                        'enable-share-email'     => 'فعال کردن اشتراک‌گذاری از طریق ایمیل',
+                        'share-message'          => 'پیام اشتراک‌گذاری',
+                        'share'                  => 'اشتراک‌گذاری',
+                        'title'                  => 'اشتراک‌گذاری اجتماعی',
+                        'title-info'             => 'اشیاء را از وب‌سایت با دوستان در پلتفرم‌های رسانه‌های اجتماعی مانند فیس‌بوک، توییتر یا اینستاگرام به اشتراک بگذارید.',
+                    ],
                 ],
 
                 'rich-snippets' => [
-                    'title'                     => 'برچسب‌های غنی',
-                    'info'                      => 'تنظیم محصولات و دسته‌ها',
-                    'products'                  => 'محصولات',
-                    'rich-snippet-product-info' => 'موارد موجود برای خرید یا استفاده، ارائه شده توسط یک کسب و کار یا فروشنده.',
-                    'enable'                    => 'فعال کردن',
-                    'show-weight'               => 'نمایش وزن',
-                    'show-categories'           => 'نمایش دسته‌ها',
-                    'show-images'               => 'نمایش تصاویر',
-                    'show-reviews'              => 'نمایش بررسی‌ها',
-                    'show-ratings'              => 'نمایش امتیازها',
-                    'show-offers'               => 'نمایش پیشنهادها',
-                    'show-sku'                  => 'نمایش SKU',
-                    'categories'                => 'دسته‌ها',
-                    'categories-info'           => '«دسته‌ها» به گروه‌ها یا تصنیف‌هایی اشاره دارند که به ترتیب و دسته‌بندی محصولات یا موارد مشابه را برای مرور و ناوبری آسان گروه‌بندی می‌کنند.',
-                    'show-search-input-field'   => 'نمایش فیلد ورود جستجو',
+                    'info'  => 'تنظیم محصولات و دسته‌بندی‌ها',
+                    'title' => 'قطعات غنی',
+
+                    'products' => [
+                        'enable'          => 'فعال کردن',
+                        'show-weight'     => 'نمایش وزن',
+                        'show-categories' => 'نمایش دسته‌بندی‌ها',
+                        'show-images'     => 'نمایش تصاویر',
+                        'show-reviews'    => 'نمایش نقد و بررسی‌ها',
+                        'show-ratings'    => 'نمایش امتیازات',
+                        'show-offers'     => 'نمایش پیشنهادها',
+                        'show-sku'        => 'نمایش کد SKU',
+                        'title'           => 'محصولات',
+                        'title-info'      => 'مواردی هستند که برای خرید یا استفاده از طرف یک شرکت یا فروشنده ارائه می‌شوند.',
+                    ],
+
+                    'categories' => [
+                        'enable'                  => 'فعال کردن',
+                        'show-search-input-field' => 'نمایش فیلد ورودی جستجو',
+                        'title'                   => 'دسته‌بندی‌ها',
+                        'title-info'              => 'دسته‌بندی‌ها به گروه‌ها یا دسته‌ها اشاره دارند که به تسهیل مشاهده و مرور محصولات یا مقالات مشابه برای کاربران کمک می‌کنند.',
+                    ],
                 ],
             ],
 
             'customer' => [
-                'title' => 'مشتری',
-                'info'  => 'مشتری',
+                'info'  => 'Kunde',
+                'title' => 'Kunde',
 
                 'address' => [
-                    'title'             => 'آدرس',
-                    'info'              => 'تنظیم کشور، ایالت، کد پستی و خطوط آدرس در خیابان.',
-                    'requirements'      => 'نیازمندی‌ها',
-                    'requirements-info' => 'نیازمندی‌ها شرایط، ویژگی‌ها یا مشخصاتی هستند که برای موفقیت یک چیزی لازم است تا به انجام برسد، دستیابی یابد یا متقاضی شود.',
-                    'country'           => 'کشور',
-                    'state'             => 'ایالت',
-                    'zip'               => 'کد پستی',
-                    'city'              => 'شهر',
-                    'information'       => 'اطلاعات',
-                    'information-info'  => '«خطوط در آدرس خیابان» به بخش‌های جداگانه‌ای از یک آدرس اشاره دارند که معمولاً با کاما جدا شده‌اند و اطلاعات مکانی مانند شماره خانه، خیابان، شهر و موارد دیگر را ارائه می‌دهند.',
-                    'street-lines'      => 'خطوط در آدرس خیابان',
+                    'info'  => 'Land, Bundesland, PLZ und Straßenadresse festlegen.',
+                    'title' => 'Adresse',
+
+                    'requirements' => [
+                        'country'    => 'Land',
+                        'city'       => 'Stadt',
+                        'state'      => 'Bundesland',
+                        'title'      => 'Anforderungen',
+                        'title-info' => 'Anforderungen sind Bedingungen, Eigenschaften oder Merkmale, die erfolgreich erfüllt, erworben oder abgeschlossen werden müssen.',
+                        'zip'        => 'PLZ',
+                    ],
+
+                    'information' => [
+                        'street-lines' => 'Straßenadresszeilen',
+                        'title'        => 'Information',
+                        'title-info'   => 'Eine "Straßenadresszeile" ist eine einzelne Kategorie einer Adresse, die in der Regel durch Kommas getrennt ist und Standortinformationen wie Hausnummer, Straße, Stadt und weitere Details bereitstellt.',
+                    ],
+                ],
+
+                'captcha' => [
+                    'info'  => 'Website-Key, Geheimnis-Key und Status festlegen.',
+                    'title' => 'Captcha',
+
+                    'credentials' => [
+                        'site-key'   => 'Website-Key',
+                        'secret-key' => 'Geheimnis-Key',
+                        'status'     => 'Status',
+                        'title'      => 'Anmeldeinformationen',
+                        'title-info' => '"Site-Key": Website-Layout-Karte für Suchmaschinen. "Geheimnis-Key": Sicherheitscode für Datenverschlüsselung, Authentifizierung oder API-Zugriffsschutz.',
+                    ],
+
+                    'validations' => [
+                        'captcha'  => 'Es gab einen Fehler! Bitte versuchen Sie es erneut.',
+                        'required' => 'Bitte wählen Sie Captcha aus.',
+                    ],
                 ],
 
                 'settings' => [
-                    'title'                   => 'تنظیمات',
-                    'settings-info'           => 'تنظیمات لیست علاقه‌مندی، اشتراک در خبرنامه، تایید ایمیل و ورود اجتماعی را تنظیم کنید.',
-                    'wishlist'                => 'لیست علاقه‌مندی',
-                    'wishlist-info'           => '«لیست علاقه‌مندی» مجموعه‌ای شخصی از موارد مورد نظر است که به کاربران اجازه می‌دهد محصولات را برای مرجع آینده یا خرید احتمالی ذخیره کنند.',
-                    'wishlist-share'          => 'فعال کردن اشتراک‌گذاری',
-                    'newsletter'              => 'اشتراک در خبرنامه',
-                    'newsletter-info'         => '«اطلاعات خبرنامه» شامل بروزرسانی‌ها، پیشنهادات یا محتواهای به اشتراک‌گذاری شده به صورت منظم از طریق ایمیل به مشترکان می‌شود و آن‌ها را در جریان اخبار نگه می‌دارد.',
-                    'newsletter-subscription' => 'اجازه اشتراک در خبرنامه',
-                    'email'                   => 'تأیید ایمیل',
-                    'email-info'              => '«تأیید ایمیل» اعتبار ایمیل را تایید می‌کند، معمولاً با ارسال یک لینک تأیید، امنیت حساب کاربری و قابلیت ارتباط موثر را افزایش می‌دهد.',
-                    'email-verification'      => 'اجازه تایید ایمیل',
+                    'settings-info' => 'Wunschliste, Newsletter-Abonnement, E-Mail-Verifikation und soziale Anmeldung einrichten.',
+                    'title'         => 'Einstellungen',
+
+                    'wishlist' => [
+                        'share'      => 'Freigabe aktivieren',
+                        'title'      => 'Wunschliste',
+                        'title-info' => 'Eine "Wunschliste" ist eine persönliche Sammlung von gewünschten Elementen, die Benutzern ermöglicht, Produkte für zukünftige Referenzen oder mögliche Einkäufe zu speichern.',
+                    ],
+
+                    'newsletter' => [
+                        'subscription' => 'Newsletter-Abonnement aktivieren',
+                        'title'        => 'Newsletter-Abonnement',
+                        'title-info'   => 'Die "Newsletter-Informationen" werden regelmäßig per E-Mail an Abonnenten gesendet und enthalten Updates, Angebote oder Inhalte zum Teilen, Identifizieren von Informationen und Entscheidungshilfe.',
+                    ],
+
+                    'email' => [
+                        'email-verification' => 'E-Mail-Verifikation aktivieren',
+                        'title'              => 'E-Mail-Verifikation',
+                        'title-info'         => 'Die "E-Mail-Verifikation" bestätigt die Gültigkeit einer E-Mail-Adresse, normalerweise durch das Senden eines Bestätigungslinks, um Kontosicherheit und Kommunikationszuverlässigkeit zu erhöhen.',
+                    ],
+
+                    'social-login' => [
+                        'enable-facebook'   => 'Facebook aktivieren',
+                        'enable-twitter'    => 'Twitter aktivieren',
+                        'enable-google'     => 'Google aktivieren',
+                        'enable-linkedin'   => 'LinkedIn aktivieren',
+                        'enable-github'     => 'GitHub aktivieren',
+                        'social-login'      => 'Soziale Anmeldung',
+                        'social-login-info' => 'Die "Soziale Anmeldung" erleichtert Benutzern den Zugriff auf die Website, die Registrierung und die Anmeldeprozesse unter Verwendung ihrer Social-Media-Konten, um Optionen und Benutzerfreundlichkeit zu erhöhen.',
+                    ],
                 ],
             ],
 
             'email' => [
-                'title' => 'ایمیل',
                 'info'  => 'ایمیل',
+                'title' => 'ایمیل',
 
                 'email-settings' => [
-                    'title'                  => 'تنظیمات ایمیل',
-                    'info'                   => 'تنظیم نام فرستنده ایمیل، آدرس ایمیل فروشگاه، نام مدیر و آدرس ایمیل مدیر را مشخص کنید.',
-                    'email-sender-name'      => 'نام فرستنده ایمیل',
-                    'email-sender-name-tip'  => 'این نام در صندوق پیام مشتریان نمایش داده می‌شود.',
-                    'shop-email-from'        => 'آدرس ایمیل فروشگاه',
-                    'shop-email-from-tip'    => 'آدرس ایمیل این کانال برای ارسال ایمیل به مشتریان شما.',
-                    'admin-name'             => 'نام مدیر',
-                    'admin-name-tip'         => 'این نام در تمام ایمیل‌های مدیر نمایش داده می‌شود.',
-                    'admin-email'            => 'آدرس ایمیل مدیر',
-                    'admin-email-tip'        => 'آدرس ایمیل مدیر این کانال برای دریافت ایمیل‌ها.',
-                    'admin-page-limit'       => 'تعداد مورد نمایش پیشفرض در هر صفحه (مدیریت)',
+                    'admin-name'            => 'نام مدیر',
+                    'admin-name-tip'        => 'این نام در تمامی ایمیل‌های مدیر نمایش داده می‌شود.',
+                    'admin-email'           => 'ایمیل مدیر',
+                    'admin-email-tip'       => 'این آدرس ایمیل برای دریافت ایمیل‌ها در این کانال استفاده می‌شود.',
+                    'admin-page-limit'      => 'محدودیت تعداد صفحات پیش‌فرض (مدیر)',
+                    'email-sender-name'     => 'نام فرستنده ایمیل',
+                    'email-sender-name-tip' => 'این نام در صندوق ورودی مشتری نمایش داده می‌شود.',
+                    'info'                  => 'نام فرستنده ایمیل، آدرس ایمیل فروشگاه، نام مدیر و آدرس ایمیل مدیر را تنظیم کنید.',
+                    'shop-email-from'       => 'آدرس ایمیل فروشگاه',
+                    'shop-email-from-tip'   => 'این آدرس ایمیل برای مشتریان برای دریافت ایمیل‌ها استفاده می‌شود.',
+                    'title'                 => 'تنظیمات ایمیل',
                 ],
 
                 'notifications' => [
+                    'customer-registration-confirmation-mail-to-admin' => 'ارسال ایمیل تأییدیه به مدیر پس از ثبت‌نام مشتری',
+                    'customer'                                         => 'ارسال اطلاعات ورود به مشتریان پس از ثبت‌نام',
+                    'cancel-order'                                     => 'ارسال اعلان پس از لغو سفارش',
+                    'info'                                             => '«اطلاعیه‌ها» پیام‌ها یا هشدارهایی هستند که کاربران را از رویدادها، به‌روزرسانی‌ها یا اقدامات آگاه می‌کنند و گزینه‌ها و آگاهی کاربران را افزایش می‌دهند.',
+                    'new-admin'                                        => 'ارسال ایمیل تأییدیه به مدیر پس از سفارش جدید',
+                    'new-invoice'                                      => 'ارسال اعلان به مشتری پس از ایجاد فاکتور جدید',
+                    'new-refund'                                       => 'ارسال اعلان به مشتری پس از ایجاد استرداد جدید',
+                    'new-shipment'                                     => 'ارسال اعلان به مشتری پس از ایجاد محموله جدید',
+                    'new-inventory-source'                             => 'ارسال اعلان به مشتری پس از ایجاد منبع موجودی جدید',
+                    'registration'                                     => 'ارسال ایمیل تأییدیه به مشتریان پس از ثبت‌نام',
+                    'new-order'                                        => 'ارسال ایمیل تأییدیه به مشتری پس از سفارش جدید',
                     'title'                                            => 'اعلان‌ها',
-                    'info'                                             => '«اعلان» پیام یا هشداری است که کاربران را در مورد رویدادها، بروزرسانی‌ها یا اقدامات مطلع می‌سازد و مشارکت و آگاهی کاربر را افزایش می‌دهد.',
-                    'verification'                                     => 'ارسال ایمیل تأییدیه بعد از ثبت نام مشتری',
-                    'registration'                                     => 'ارسال ایمیل تأییدیه بعد از ثبت نام مشتری',
-                    'customer-registration-confirmation-mail-to-admin' => 'ارسال ایمیل تأییدیه به مدیر بعد از ثبت نام مشتری',
-                    'customer'                                         => 'ارسال اطلاعات حساب مشتری به او بعد از ثبت نام',
-                    'new-order'                                        => 'ارسال ایمیل تأییدیه به مشتری بعد از ثبت سفارش جدید',
-                    'new-admin'                                        => 'ارسال ایمیل تأییدیه به مدیر بعد از ثبت سفارش جدید',
-                    'new-invoice'                                      => 'ارسال ایمیل اطلاع‌رسانی به مشتری بعد از ایجاد فاکتور جدید',
-                    'new-refund'                                       => 'ارسال ایمیل اطلاع‌رسانی به مشتری بعد از ایجاد بازپرداخت جدید',
-                    'new-shipment'                                     => 'ارسال ایمیل اطلاع‌رسانی به مشتری بعد از ایجاد ارسال جدید',
-                    'new-inventory-source'                             => 'ارسال ایمیل اطلاع‌رسانی به منبع موجودی بعد از ایجاد ارسال جدید',
-                    'cancel-order'                                     => 'ارسال اطلاع‌رسانی بعد از لغو سفارش',
+                    'verification'                                     => 'ارسال ایمیل تأیید به مشتریان پس از ثبت‌نام',
                 ],
             ],
 
             'sales' => [
-                'title' => 'فروش',
                 'info'  => 'فروش',
+                'title' => 'فروش',
 
                 'shipping' => [
-                    'title'          => 'حمل و نقل',
-                    'info'           => 'تنظیم اطلاعات حمل و نقل.',
-                    'origin'         => 'منبع',
-                    'origin-info'    => 'منبع حمل و نقل به مکانی اشاره دارد که کالاها یا محصولات قبل از ارسال به مقصد از آنجا نشات می‌گیرند.',
-                    'country'        => 'کشور',
-                    'state'          => 'استان',
-                    'zip'            => 'کد پستی',
-                    'city'           => 'شهر',
-                    'street-address' => 'آدرس خیابانی',
-                    'store-name'     => 'نام فروشگاه',
-                    'vat-number'     => 'شماره مالیات بر ارزش افزوده (VAT)',
-                    'contact-number' => 'شماره تماس',
-                    'bank-details'   => 'جزئیات بانکی',
+                    'info'  => 'تنظیمات حمل و نقل',
+                    'title' => 'حمل و نقل',
+
+                    'origin' => [
+                        'bank-details'   => 'جزئیات بانکی',
+                        'contact-number' => 'شماره تماس',
+                        'city'           => 'شهر',
+                        'country'        => 'کشور',
+                        'state'          => 'استان',
+                        'street-address' => 'آدرس خیابان',
+                        'store-name'     => 'نام فروشگاه',
+                        'title'          => 'مبدأ حمل و نقل',
+                        'title-info'     => 'محلی که محصولات یا کالاها به مقصد ارسال می‌شوند، مشخص می‌کند. این به عنوان یک شناسه استفاده می‌شود.',
+                        'vat-number'     => 'شماره مالیات بر ارزش افزوده',
+                        'zip'            => 'کد پستی',
+                    ],
                 ],
 
                 'shipping-methods' => [
-                    'page-title'                => 'روش‌های حمل و نقل',
-                    'info'                      => 'تنظیم اطلاعات روش‌های حمل و نقل',
-                    'free-shipping'             => 'حمل و نقل رایگان',
-                    'free-shipping-info'        => '«حمل و نقل رایگان» به روش حمل و نقلی اشاره دارد که هزینه حمل و نقل برای خریدار معاف شده و فروشنده هزینه‌های حمل و نقل را بر عهده می‌گیرد.',
-                    'flat-rate-shipping'        => 'حمل و نقل با نرخ ثابت',
-                    'flat-rate-shipping-info'   => 'حمل و نقل با نرخ ثابت روشی است که در آن هزینه ثابتی برای حمل و نقل دریافت می‌شود، بدون توجه به وزن، اندازه یا فاصله بسته. این ساده‌ترین روش محاسبه هزینه‌های حمل و نقل است و می‌تواند برای خریداران و فروشندگان مفید باشد.',
-                    'title'                     => 'عنوان',
-                    'description'               => 'توضیحات',
-                    'rate'                      => 'نرخ',
-                    'status'                    => 'وضعیت',
-                    'type'                      => 'نوع',
+                    'info'  => 'تنظیمات روش‌های حمل و نقل',
+                    'title' => 'روش‌های حمل و نقل',
+
+                    'free-shipping' => [
+                        'description' => 'توضیحات',
+                        'page-title'  => 'ارسال رایگان',
+                        'status'      => 'وضعیت',
+                        'title-info'  => '«ارسال رایگان» به عنوان یک روش حمل و نقل استفاده می‌شود که هزینه حمل و نقل پس از خرید توسط فروشنده تهیه می‌شود.',
+                        'title'       => 'عنوان',
+                    ],
+
+                    'flat-rate-shipping' => [
+                        'description' => 'توضیحات',
+                        'page-title'  => 'ارسال به قیمت ثابت',
+                        'rate'        => 'نرخ',
+                        'status'      => 'وضعیت',
+                        'title'       => 'عنوان',
+                        'title-info'  => 'ارسال به قیمت ثابت یک روش حمل و نقل است که هزینه ثابتی برای یک بسته بر اساس وزن، اندازه یا فاصله مشخص شده پرداخت می‌شود. این یک گزینه ساده برای هزینه‌های حمل و نقل است و ممکن است برای مشتریان و فروشندگان مفید باشد.',
+                        'type'        => 'نوع',
+                    ],
                 ],
 
                 'payment-methods' => [
                     'page-title'                     => 'روش‌های پرداخت',
                     'info'                           => 'تنظیم اطلاعات روش‌های پرداخت',
-                    'cash-on-delivery'               => 'پرداخت در محل تحویل (COD)',
-                    'cash-on-delivery-info'          => 'روش پرداخت که در آن مشتریان پس از دریافت کالاها یا خدمات در محل تحویل وجه نقد پرداخت می‌کنند.',
+                    'cash-on-delivery'               => 'پرداخت نقدی در محل تحویل',
+                    'cash-on-delivery-info'          => 'روش پرداختی که مشتریان به صورت نقدی هنگام دریافت کالا یا خدمات در محل پرداخت می‌کنند.',
                     'description'                    => 'توضیحات',
                     'title'                          => 'عنوان',
                     'instructions'                   => 'دستورالعمل‌ها',
                     'generate-invoice'               => 'تولید خودکار فاکتور پس از ثبت سفارش',
                     'set-invoice-status'             => 'تنظیم وضعیت فاکتور پس از ایجاد فاکتور به',
-                    'generate-invoice-applicable'    => 'قابل اجرا اگر تولید خودکار فاکتور فعال باشد',
+                    'generate-invoice-applicable'    => 'اعمال می‌شود اگر تولید خودکار فاکتور فعال باشد',
                     'status'                         => 'وضعیت',
                     'sort-order'                     => 'ترتیب مرتب‌سازی',
                     'set-order-status'               => 'تنظیم وضعیت سفارش پس از ایجاد فاکتور به',
-                    'pending'                        => 'در انتظار',
+                    'pending'                        => 'معلق',
                     'paid'                           => 'پرداخت شده',
-                    'sandbox'                        => 'منطقه آزمایشی (Sandbox)',
-                    'pending-payment'                => 'در انتظار پرداخت',
+                    'sandbox'                        => 'محیط آزمایشی',
+                    'pending-payment'                => 'پرداخت معلق',
                     'processing'                     => 'در حال پردازش',
                     'money-transfer'                 => 'انتقال وجه',
-                    'money-transfer-info'            => 'انتقال وجه از یک شخص یا حساب به شخص یا حساب دیگر، اغلب به صورت الکترونیکی، به منظور انجام معاملات یا ارسال وجه.',
+                    'money-transfer-info'            => 'انتقال وجه از یک شخص یا حساب به شخص یا حساب دیگر، معمولاً به صورت الکترونیکی، برای اهداف مختلف مانند معاملات یا انتقال وجه.',
                     'mailing-address'                => 'ارسال چک به',
-                    'paypal-standard'                => 'پی پال استاندارد',
-                    'paypal-standard-info'           => 'پی پال استاندارد یک گزینه پرداخت پایه پی پال برای کسب‌وکارهای آنلاین است که به مشتریان امکان پرداخت با استفاده از حساب پی پال خود یا کارت‌های اعتباری/پیش‌پرداخت فراهم می‌کند.',
-                    'paypal-smart-button'            => 'پی پال',
-                    'paypal-smart-button-info'       => 'دکمه پی پال: پرداخت‌های آنلاین را با دکمه‌های دلخواه برای تراکنش‌های امن و چندروشی در وب‌سایت‌ها و اپلیکیشن‌ها ساده می‌کند.',
-                    'client-id'                      => 'شناسه مشتری (Client ID)',
+                    'paypal-standard'                => 'پیپال استاندارد',
+                    'paypal-standard-info'           => 'پیپال استاندارد یک گزینه پرداخت پیپال پایه برای کسب‌وکارهای آنلاین است که به مشتریان امکان پرداخت با استفاده از حساب پیپال یا کارت‌های اعتباری/پیش‌پرداختی را فراهم می‌کند.',
+                    'paypal-smart-button'            => 'پیپال هوشمند',
+                    'paypal-smart-button-info'       => 'پیپال هوشمند: تسهیل پرداخت‌های آنلاین با دکمه‌های قابل تنظیم برای تراکنش‌های امن چندمنظوره در وب‌سایت‌ها و برنامه‌ها.',
+                    'client-id'                      => 'شناسه مشتری',
                     'client-id-info'                 => 'برای تست از "sb" استفاده کنید.',
-                    'client-secret'                  => 'رمز مشتری (Client Secret)',
-                    'client-secret-info'             => 'کلید مخفی خود را اینجا وارد کنید',
-                    'accepted-currencies'            => 'ارزهای پذیرفته شده',
-                    'accepted-currencies-info'       => 'کدهای ارز را با کاما جدا کنید، مانند USD، INR، ...',
+                    'client-secret'                  => 'رمز مشتری',
+                    'client-secret-info'             => 'کلید مخفی خود را در اینجا وارد کنید',
+                    'accepted-currencies'            => 'ارزهای پذیرفته‌شده',
+                    'accepted-currencies-info'       => 'کدهای ارز را با ویرگول جدا شده وارد کنید، مثلاً USD, INR, ...',
                     'business-account'               => 'حساب تجاری',
                 ],
 
                 'order-settings' => [
-                    'title'                         => 'تنظیمات سفارش',
-                    'info'                          => 'تنظیم شماره‌های سفارش و حداقل سفارش.',
-                    'order-number'                  => 'تنظیمات شماره سفارش',
-                    'order-number-info'             => 'شناسه منحصر به فردی که به یک سفارش خاص اختصاص داده می‌شود و در پیگیری، ارتباط و مرجع‌گیری در طول فرآیند خرید به کار می‌رود.',
-                    'order-number-prefix'           => 'پیش‌وند شماره سفارش',
-                    'order-number-length'           => 'طول شماره سفارش',
-                    'order-number-suffix'           => 'پسوند شماره سفارش',
-                    'order-number-generator-class'  => 'کلاس تولید کننده شماره سفارش',
-                    'minimum-order'                 => 'تنظیمات حداقل سفارش',
-                    'minimum-order-info'            => 'معیارهای تنظیم شده که حداقل تعداد یا ارزش مورد نیاز برای یک سفارش برای پردازش یا معافیت از مزایا تعیین می‌کنند.',
-                    'minimum-order-amount'          => 'مقدار حداقل سفارش',
+                    'info'  => 'تنظیم شماره‌های سفارش و حداقل مقدارهای سفارش.',
+                    'title' => 'تنظیمات سفارش',
+
+                    'order-number' => [
+                        'generator'   => 'مولد شماره سفارش',
+                        'length'      => 'طول شماره سفارش',
+                        'prefix'      => 'پیش‌وند شماره سفارش',
+                        'suffix'      => 'پسوند شماره سفارش',
+                        'title'       => 'تنظیمات شماره سفارش',
+                        'title-info'  => 'شناسه منحصربه‌فردی که به یک سفارش خاص اختصاص داده می‌شود و به رهگیری، ارتباط و ارجاع در طول فرآیند خرید کمک می‌کند.',
+                    ],
+
+                    'minimum-order' => [
+                        'minimum-order-amount' => 'حداقل مبلغ سفارش',
+                        'title'                => 'تنظیمات حداقل مقدار سفارش',
+                        'title-info'           => 'معیارهای پیکربندی شده که حداقل تعداد یا ارزش مورد نیاز برای یک سفارش برای پردازش یا واجد شرایط شدن مشخص می‌کند.',
+                    ],
                 ],
 
                 'invoice-settings' => [
-                    'title'                            => 'تنظیمات فاکتور',
-                    'info'                             => 'تنظیم شماره فاکتور، شرایط پرداخت، طراحی برگه فاکتور و یادآوری‌های فاکتور.',
-                    'invoice-number'                   => 'تنظیمات شماره فاکتور',
-                    'invoice-number-info'              => 'پیکربندی قوانین یا پارامترها برای تولید و اختصاص شناسه منحصر به فرد به فاکتورها به منظور سازماندهی و پیگیری.',
-                    'invoice-number-prefix'            => 'پیش‌وند شماره فاکتور',
-                    'invoice-number-length'            => 'طول شماره فاکتور',
-                    'invoice-number-suffix'            => 'پسوند شماره فاکتور',
-                    'invoice-number-generator-class'   => 'کلاس تولید کننده شماره فاکتور',
-                    'payment-terms'                    => 'شرایط پرداخت',
-                    'payment-terms-info'               => 'شرایط متفق برای زمان و شیوه پرداخت کالاها یا خدمات توسط خریدار به فروشنده.',
-                    'due-duration'                     => 'مدت زمان پرداخت',
-                    'due-duration-day'                 => ':due-duration روز',
-                    'due-duration-days'                => ':due-duration روز',
-                    'invoice-slip-design'              => 'طراحی برگه فاکتور',
-                    'invoice-slip-design-info'         => 'طرح و قالب بصری برگه فاکتور، شامل نمایش تصویری شرکت، آیتم‌بندی، قیمت‌گذاری و جزئیات پرداخت برای ارائه حرفه‌ای.',
-                    'logo'                             => 'لوگو',
-                    'default'                          => 'پیش‌فرض',
-                    'invoice-reminders'                => 'یادآوری‌های فاکتور',
-                    'invoice-reminders-info'           => 'اعلان‌ها یا ارتباطات خودکار ارسالی به مشتریان برای یادآوری زمان پرداخت نزدیک یا عقب‌افتاده فاکتورها.',
-                    'maximum-limit-of-reminders'       => 'حداکثر محدوده یادآوری‌ها',
-                    'interval-between-reminders'       => 'فاصله بین یادآوری‌ها',
+                    'info'  => 'تنظیم شماره فاکتور، شرایط پرداخت، طراحی فاکتور و یادآوری‌های فاکتور.',
+                    'title' => 'تنظیمات فاکتور',
+
+                    'invoice-number' => [
+                        'generator'  => 'مولد شماره فاکتور',
+                        'length'     => 'طول شماره فاکتور',
+                        'prefix'     => 'پیش‌وند شماره فاکتور',
+                        'suffix'     => 'پسوند شماره فاکتور',
+                        'title'      => 'تنظیمات شماره فاکتور',
+                        'title-info' => 'پیکربندی قوانین یا پارامترها برای تولید و اختصاص شماره شناسایی منحصربه‌فرد به فاکتورها به منظور سازماندهی و پیگیری.',
+                    ],
+
+                    'payment-terms' => [
+                        'due-duration'      => 'مدت سررسید',
+                        'due-duration-day'  => ':due-duration روز',
+                        'due-duration-days' => ':due-duration روز',
+                        'title'             => 'شرایط پرداخت',
+                        'title-info'        => 'شرایط توافق شده که مشخص می‌کنند چگونه و کیفیت پرداخت برای کالاها یا خدمات باید توسط خریدار به فروشنده انجام شود.',
+                    ],
+
+                    'invoice-slip-design' => [
+                        'logo'       => 'آرم',
+                        'title'      => 'طراحی رسید فاکتور',
+                        'title-info' => 'چیدمان و قالب بندی بصری یک رسید فاکتور، شامل نمادگذاری شرکت، جزئیات اقلام، قیمت‌گذاری و جزئیات پرداختی برای ارائه حرفه‌ای.',
+                    ],
+
+                    'invoice-reminders' => [
+                        'interval-between-reminders' => 'فاصله بین یادآوری‌ها',
+                        'maximum-limit-of-reminders' => 'حداکثر محدودیت یادآوری‌ها',
+                        'title'                      => 'یادآوری‌های فاکتور',
+                        'title-info'                 => 'هشدارها یا ارتباطات خودکار ارسالی به مشتریان برای یادآوری زمان بندی یا عقب‌مانده برای پرداخت فاکتورها.',
+                    ],
+                ],
+            ],
+
+            'taxes' => [
+                'title' => 'مالیات',
+
+                'catalog' => [
+                    'title'      => 'کاتالوگ',
+                    'title-info' => 'تعیین قیمت و تنظیم به عنوان مکان استاندارد',
+
+                    'pricing' => [
+                        'title'         => 'تنظیم قیمت',
+                        'title-info'    => 'اطلاعات دقیق در مورد قیمت‌های محصولات یا خدمات، هزینه‌های پایه، تخفیف‌ها، مالیات‌ها و هزینه‌های اضافی.',
+                        'tax-inclusive' => 'شامل مالیات',
+                    ],
+
+                    'default-location-calculation' => [
+                        'default-country'   => 'کشور استاندارد',
+                        'default-state'     => 'ایالت استاندارد',
+                        'default-post-code' => 'کد پستی استاندارد',
+                        'title'             => 'محاسبه مکان استاندارد',
+                        'title-info'        => 'تعیین خودکار یک مکان استاندارد یا اضافی بر اساس عوامل یا تنظیمات پیش‌فرض، بسته به عوامل یا تنظیمات قبلی تعیین شده.',
+                    ],
                 ],
             ],
         ],
@@ -3001,7 +3170,7 @@ return [
                 'must-select-a-mass-action-option' => 'شما باید یک گزینه عمل جمعی انتخاب کنید.',
                 'sure-want-to-perform-this-action' => 'آیا مطمئن هستید که می‌خواهید این عمل را انجام دهید؟',
             ],
-            
+
             'toolbar' => [
                 'mass-actions' => [
                     'select-action' => 'انتخاب عملیات',
@@ -3075,7 +3244,7 @@ return [
                 'allowed-types'     => 'mp4، webm، mkv',
                 'not-allowed-error' => 'فقط فایل‌های ویدیویی (.mp4، .mov، .ogg ..) مجاز هستند.',
             ],
-        ]
+        ],
     ],
 
     'acl' => [
@@ -3157,7 +3326,7 @@ return [
         '503' => [
             'title'       => '503 خدمات در دسترس نیست',
             'description' => 'اوه! به نظر می‌آید ما موقتاً برای تعمیرات پایین هستیم. لطفاً بعداً مراجعه کنید.',
-        ]
+        ],
     ],
 
     'export' => [

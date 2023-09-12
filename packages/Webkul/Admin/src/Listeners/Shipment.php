@@ -20,14 +20,14 @@ class Shipment extends Base
         }
 
         try {
-            if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.new-shipment')) {
+            if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.new_shipment')) {
                 return;
             }
 
             $this->prepareMail($shipment, new ShippedNotification($shipment));
 
 
-            if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.new-inventory-source')) {
+            if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.new_inventory_source')) {
                 return;
             }
 

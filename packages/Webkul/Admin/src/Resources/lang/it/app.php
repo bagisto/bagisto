@@ -9,7 +9,7 @@ return [
             'submit-btn'           => 'Accedi',
             'title'                => 'Accedi',
         ],
-    
+
         'forget-password' => [
             'create' => [
                 'email'           => 'Email registrata',
@@ -21,7 +21,7 @@ return [
                 'title'           => 'Recupera la password',
             ],
         ],
-    
+
         'reset-password' => [
             'back-link-title'  => 'Torna al login?',
             'confirm-password' => 'Conferma Password',
@@ -38,7 +38,7 @@ return [
         'marked-success' => 'Notifica contrassegnata con successo',
         'read-all'       => 'Segna come Letto',
         'view-all'       => 'Visualizza Tutte',
-    
+
         'order-status-messages' => [
             'completed'       => 'Ordine Completato',
             'closed'          => 'Ordine Chiuso',
@@ -47,7 +47,7 @@ return [
             'processing'      => 'Ordine in Elaborazione',
             'pending-payment' => 'Pagamento in Attesa',
         ],
-    
+
         'status'  => [
             'all'        => 'Tutti',
             'pending'    => 'In sospeso',
@@ -57,7 +57,7 @@ return [
             'completed'  => 'Completato',
         ],
     ],
-    
+
     'account' => [
         'edit' => [
             'back-btn'          => 'Indietro',
@@ -128,12 +128,12 @@ return [
             'visitor'                     => 'Visitatore',
         ],
     ],
-    
+
     'sales' => [
         'orders' => [
             'index' => [
                 'title' => 'Ordini',
-            
+
                 'datagrid' => [
                     'customer'        => 'Cliente',
                     'channel-name'    => 'Canale',
@@ -158,7 +158,7 @@ return [
                     'view'            => 'Vedi',
                 ],
             ],
-            
+
             'view' => [
                 'amount-per-unit'       => ':amount Per Unit x :qty Quantità',
                 'billing-address'       => 'Indirizzo di Fatturazione',
@@ -232,7 +232,7 @@ return [
         'shipments' => [
             'index' => [
                 'title' => 'Spedizioni',
-        
+
                 'datagrid'  => [
                     'id'               => 'ID',
                     'inventory-source' => 'Sorgente Inventario',
@@ -244,7 +244,7 @@ return [
                     'view'             => 'Vedi',
                 ],
             ],
-        
+
             'create' => [
                 'amount-per-unit'  => ':amount Per Unità x :qty Quantità',
                 'cancel-error'     => 'Ordine non può essere annullato',
@@ -291,13 +291,13 @@ return [
                 'shipping-price'       => 'Costo di Spedizione',
                 'title'                => 'Spedizione #:shipment_id',
                 'tracking-number'      => 'Numero di Tracking',
-            ]
+            ],
         ],
 
         'refunds' => [
             'index' => [
                 'title' => 'Rimborsi',
-        
+
                 'datagrid'  => [
                     'billed-to'   => 'Fatturato A',
                     'id'          => 'ID',
@@ -307,7 +307,7 @@ return [
                     'view'        => 'Vedi',
                 ],
             ],
-        
+
             'view' => [
                 'account-information'    => 'Informazioni dell\'Account',
                 'adjustment-refund'      => 'Rimborso di Regolazione',
@@ -339,7 +339,7 @@ return [
                 'title'                  => 'Rimborso #:refund_id',
                 'tax'                    => 'Tasse',
             ],
-        
+
             'create' => [
                 'amount-per-unit'             => ':amount Per Unità x :qty Quantità',
                 'adjustment-refund'           => 'Rimborso di Regolazione',
@@ -371,7 +371,7 @@ return [
         'invoices' => [
             'index' => [
                 'title' => 'Fatture',
-        
+
                 'datagrid' => [
                     'action'       => 'Azioni',
                     'id'           => 'ID',
@@ -384,7 +384,7 @@ return [
                     'status'       => 'Stato',
                 ],
             ],
-        
+
             'view' => [
                 'amount-per-unit'        => ':amount Per Unità x :qty Quantità',
                 'channel'                => 'Canale',
@@ -416,14 +416,14 @@ return [
                 'title'                  => 'Fattura #:invoice_id',
                 'tax'                    => 'Importo Tasse - :tax',
             ],
-        
+
             'create'   => [
                 'creation-error' => 'Creazione Fattura dell\'Ordine non consentita.',
                 'create-success' => 'Fattura creata con successo',
                 'invalid-qty'    => 'Abbiamo riscontrato una quantità non valida per gli articoli da fatturare.',
                 'product-error'  => 'La Fattura non può essere creata senza prodotti.',
             ],
-        
+
             'invoice-pdf' => [
                 'invoice'           => 'Fattura',
                 'date'              => 'Data Fattura',
@@ -451,8 +451,8 @@ return [
                 'discount'          => 'Sconto',
             ],
         ],
-        
-        'invoice-transaction'  =>  [
+
+        'invoice-transaction'  => [
             'view'             => 'Visualizza',
             'transaction-date' => 'Data Transazione',
             'transaction-id'   => 'ID Transazione',
@@ -463,7 +463,7 @@ return [
             'index' => [
                 'create-btn'  => 'Crea Transazioni',
                 'title'       => 'Transazioni',
-        
+
                 'datagrid' => [
                     'id'                 => 'ID',
                     'invoice-id'         => 'ID Fattura',
@@ -473,8 +473,8 @@ return [
                     'transaction-date'   => 'Data',
                     'transaction-amount' => 'Importo',
                 ],
-        
-                'edit'  =>  [
+
+                'edit'  => [
                     'already-paid'               => 'Già pagato',
                     'invoice-missing'            => 'Fattura Mancante',
                     'transaction-amount-zero'    => 'Importo Transazione zero',
@@ -482,7 +482,7 @@ return [
                     'transaction-saved'          => 'Transazione salvata con successo',
                 ],
             ],
-        ],   
+        ],
     ],
 
     'catalog' => [
@@ -491,7 +491,7 @@ return [
                 'create-btn'    => 'Crea Prodotto',
                 'title'         => 'Prodotti',
                 'already-taken' => ':name è già stato preso.',
-        
+
                 'create'     => [
                     'back-btn'                => 'Indietro',
                     'bundle'                  => 'Bundle',
@@ -508,7 +508,7 @@ return [
                     'type'                    => 'Tipo',
                     'virtual'                 => 'Virtuale',
                 ],
-        
+
                 'datagrid'   => [
                     'attribute-family'       => 'Famiglia di Attributi',
                     'attribute-family-value' => 'Famiglia di Attributi - :attribute_family',
@@ -536,11 +536,11 @@ return [
                     'mass-delete-success'    => 'Prodotti Selezionati Eliminati con Successo',
                 ],
             ],
-        
+
             'edit' => [
                 'save-btn' => 'Salva Prodotto',
                 'title'    => 'Modifica Prodotto',
-        
+
                 'price' => [
                     'group' => [
                         'title'                     => 'Prezzo per Gruppo Clienti',
@@ -551,7 +551,7 @@ return [
                         'fixed-group-price-info'    => 'Per :qty Qtà a prezzo fisso di :price',
                         'discount-group-price-info' => 'Per :qty Qtà con sconto di :price',
                         'empty-info'                => 'Prezzi speciali per clienti appartenenti a un gruppo specifico.',
-        
+
                         'create' => [
                             'create-title'   => 'Crea Prezzo Gruppo Clienti',
                             'customer-group' => 'Gruppo Clienti',
@@ -567,53 +567,53 @@ return [
                         ],
                     ],
                 ],
-        
+
                 'inventories' => [
                     'pending-ordered-qty'      => 'Qtà Ordinata in Sospeso: :qty',
                     'pending-ordered-qty-info' => 'La quantità ordinata in sospeso sarà detratta dalla rispettiva fonte di inventario dopo la spedizione. In caso di annullamento, la quantità in sospeso sarà disponibile per la vendita.',
                     'title'                    => 'Inventario',
                 ],
-        
+
                 'categories' => [
                     'title' => 'Categorie',
                 ],
-        
+
                 'images' => [
                     'title' => 'Immagini',
                     'info'  => 'La risoluzione dell\'immagine dovrebbe essere di 609px X 560px',
                 ],
-        
+
                 'videos' => [
                     'title' => 'Video',
                     'info'  => 'La dimensione massima del video dovrebbe essere di :size',
                 ],
-        
+
                 'links' => [
                     'related-products' => [
                         'empty-info' => 'Per aggiungere prodotti correlati in un colpo solo.',
                         'info'       => 'Oltre al prodotto che il cliente sta visualizzando, vengono presentati prodotti correlati.',
                         'title'      => 'Prodotti Correlati',
                     ],
-        
+
                     'up-sells' => [
                         'empty-info' => 'Per aggiungere prodotti upsell in un colpo solo.',
                         'info'       => 'Al cliente vengono presentati prodotti upsell, che fungono da alternativa premium o di qualità superiore al prodotto che stanno visualizzando.',
                         'title'      => 'Prodotti Upsell',
                     ],
-        
+
                     'cross-sells' => [
                         'empty-info' => 'Per aggiungere prodotti cross-sell in un colpo solo.',
                         'info'       => 'Accanto al carrello della spesa, troverai questi prodotti "acquisto d\'impulso" posizionati come cross-sell per completare gli articoli già aggiunti al tuo carrello.',
                         'title'      => 'Prodotti Cross-Sell',
                     ],
-        
+
                     'add-btn'     => 'Aggiungi Prodotto',
                     'delete'      => 'Elimina',
                     'empty-title' => 'Aggiungi Prodotto',
                     'empty-info'  => 'Per aggiungere prodotti :type in un colpo solo.',
                     'sku'         => 'SKU - :sku',
                 ],
-        
+
                 'types' => [
                     'configurable' => [
                         'add-btn'           => 'Aggiungi Variante',
@@ -626,7 +626,7 @@ return [
                         'qty'               => ':qty Qtà',
                         'sku'               => 'SKU - :sku',
                         'title'             => 'Varianti',
-        
+
                         'create'  => [
                             'description'            => 'Descrizione',
                             'name'                   => 'Nome',
@@ -634,7 +634,7 @@ return [
                             'title'                  => 'Aggiungi Variante',
                             'variant-already-exists' => 'Questa variante esiste già',
                         ],
-        
+
                         'edit' => [
                             'disabled'        => 'Disabilitato',
                             'edit-info'       => 'Se desideri aggiornare le informazioni dettagliate del prodotto, vai alla',
@@ -663,7 +663,7 @@ return [
                             'apply-to-all-btn' => 'Applica a Tutti',
                         ],
                     ],
-        
+
                     'grouped' => [
                         'add-btn'     => 'Aggiungi Prodotto',
                         'delete'      => 'Elimina',
@@ -674,14 +674,14 @@ return [
                         'sku'         => 'SKU - :sku',
                         'title'       => 'Prodotti Raggruppati',
                     ],
-        
+
                     'bundle' => [
                         'add-btn'     => 'Aggiungi Opzione',
                         'empty-title' => 'Aggiungi Opzione',
                         'empty-info'  => 'Per creare opzioni bundle rapidamente.',
                         'info'        => 'Un prodotto bundle è un pacchetto di articoli o servizi multipli venduti insieme a un prezzo speciale, offrendo valore e comodità ai clienti.',
                         'title'       => 'Elementi del Bundle',
-        
+
                         'update-create' => [
                             'checkbox'    => 'Casella di Controllo',
                             'is-required' => 'Obbligatorio',
@@ -695,7 +695,7 @@ return [
                             'type'        => 'Tipo',
                             'yes'         => 'Sì',
                         ],
-        
+
                         'option' => [
                             'add-btn'     => 'Aggiungi Prodotto',
                             'delete-btn'  => 'Elimina',
@@ -705,23 +705,23 @@ return [
                             'empty-title' => 'Aggiungi Prodotto',
                             'empty-info'  => 'Per creare varie combinazioni di prodotti rapidamente.',
                             'sku'         => 'SKU - :sku',
-        
+
                             'types' => [
                                 'checkbox' => [
                                     'info'  => 'Imposta il prodotto predefinito usando la casella di controllo',
                                     'title' => 'Casella di Controllo',
                                 ],
-        
+
                                 'multiselect' => [
                                     'info'  => 'Imposta il prodotto predefinito usando il pulsante di selezione multipla',
                                     'title' => 'Selezione Multipla',
                                 ],
-        
+
                                 'radio' => [
                                     'info'  => 'Imposta il prodotto predefinito usando il pulsante di opzione',
                                     'title' => 'Radio',
                                 ],
-        
+
                                 'select' => [
                                     'info'  => 'Imposta il prodotto predefinito usando il pulsante di selezione',
                                     'title' => 'Selezione',
@@ -729,7 +729,7 @@ return [
                             ],
                         ],
                     ],
-        
+
                     'downloadable' => [
                         'links' => [
                             'add-btn'     => 'Aggiungi Link',
@@ -743,7 +743,7 @@ return [
                             'sample-url'  => 'URL Esempio : ',
                             'title'       => 'Link Scaricabili',
                             'url'         => 'URL : ',
-        
+
                             'update-create' => [
                                 'downloads'   => 'Download Consentiti',
                                 'file-type'   => 'Tipo di File',
@@ -757,7 +757,7 @@ return [
                                 'url'         => 'URL',
                             ],
                         ],
-        
+
                         'samples' => [
                             'add-btn'     => 'Aggiungi Esempio',
                             'delete-btn'  => 'Elimina',
@@ -768,7 +768,7 @@ return [
                             'info'        => 'Il tipo di prodotto scaricabile consente di vendere prodotti digitali, come eBook, applicazioni software, musica, giochi, ecc.',
                             'title'       => 'Campioni Scaricabili',
                             'url'         => 'URL : ',
-        
+
                             'update-create' => [
                                 'file'        => 'File',
                                 'file-type'   => 'Tipo di File',
@@ -781,7 +781,7 @@ return [
                     ],
                 ],
             ],
-        
+
             'create-success'           => 'Prodotto creato con successo',
             'delete-success'           => 'Prodotto eliminato con successo',
             'delete-failed'            => 'Eliminazione del prodotto fallita',
@@ -789,12 +789,12 @@ return [
             'saved-inventory-message'  => 'Prodotto salvato con successo',
             'update-success'           => 'Prodotto aggiornato con successo',
         ],
-        
+
         'attributes' => [
             'index' => [
                 'title'      => 'Attributi',
                 'create-btn' => 'Crea Attributi',
-        
+
                 'datagrid' => [
                     'id'                  => 'ID',
                     'name'                => 'Nome',
@@ -810,7 +810,7 @@ return [
                     'mass-delete-success' => 'Attributi Selezionati Eliminati con Successo',
                 ],
             ],
-        
+
             'create'  => [
                 'admin'                 => 'Amministratore',
                 'add-row'               => 'Aggiungi Riga',
@@ -862,7 +862,7 @@ return [
                 'value-per-locale'      => 'Valore per Locale',
                 'value-per-channel'     => 'Valore per Canale',
                 'yes'                   => 'Sì',
-            
+
                 'option'                => [
                     'color'    => 'Campione di Colore',
                     'dropdown' => 'Menù a Tendina',
@@ -871,7 +871,7 @@ return [
                     'text'     => 'Campione Testo',
                 ],
             ],
-        
+
             'edit'  => [
                 'admin'                 => 'Amministratore',
                 'add-row'               => 'Aggiungi Riga',
@@ -923,7 +923,7 @@ return [
                 'value-per-locale'      => 'Valore per Locale',
                 'value-per-channel'     => 'Valore per Canale',
                 'yes'                   => 'Sì',
-            
+
                 'option' => [
                     'color'    => 'Campione di Colore',
                     'dropdown' => 'Menù a Tendina',
@@ -932,7 +932,7 @@ return [
                     'text'     => 'Campione Testo',
                 ],
             ],
-            
+
             'create-success'    => 'Attributo Creato con Successo',
             'update-success'    => 'Attributo Aggiornato con Successo',
             'user-define-error' => 'Impossibile eliminare l\'Attributo di Sistema',
@@ -944,7 +944,7 @@ return [
             'index' => [
                 'title'   => 'Categorie',
                 'add-btn' => 'Crea Categoria',
-            
+
                 'datagrid' => [
                     'id'             => 'ID',
                     'name'           => 'Nome',
@@ -991,7 +991,7 @@ return [
                 'title'                    => 'Aggiungi Nuova Categoria',
                 'visible-in-menu'          => 'Visibile Nel Menu',
             ],
-            
+
             'edit'  => [
                 'add-logo'                 => 'Aggiungi Logo',
                 'add-banner'               => 'Aggiungi Banner',
@@ -1023,7 +1023,7 @@ return [
                 'title'                    => 'Modifica Categoria',
                 'visible-in-menu'          => 'Visibile Nel Menu',
             ],
-            
+
             'create-success'       => 'Categoria creata con successo.',
             'category'             => 'Categoria',
             'update-success'       => 'Categoria aggiornata con successo.',
@@ -1036,7 +1036,7 @@ return [
             'index' => [
                 'title' => 'Famiglie',
                 'add'   => 'Crea Famiglia di Attributi',
-            
+
                 'datagrid' => [
                     'id'             => 'ID',
                     'code'           => 'Codice',
@@ -1191,7 +1191,7 @@ return [
                 'suspended'             => 'Sospeso',
                 'title'                 => 'Modifica Cliente',
             ],
-            
+
             'view' => [
                 'address'                 => 'Indirizzo',
                 'back-btn'                => 'Indietro',
@@ -1254,7 +1254,7 @@ return [
         'groups' => [
             'index' => [
                 'title' => 'Gruppi',
-        
+
                 'create' => [
                     'create-btn' => 'Crea Gruppo',
                     'code'       => 'Codice',
@@ -1263,7 +1263,7 @@ return [
                     'save-btn'   => 'Salva Gruppo',
                     'title'      => 'Crea nuovo Gruppo',
                 ],
-        
+
                 'edit'  => [
                     'title'          => 'Modifica Gruppo',
                     'success'        => 'Gruppo Aggiornato con Successo',
@@ -1271,8 +1271,8 @@ return [
                     'delete-failed'  => 'Eliminazione Gruppo Fallita',
                     'group-default'  => 'Il Gruppo Predefinito non può essere Eliminato',
                 ],
-        
-                'datagrid'  =>  [
+
+                'datagrid'  => [
                     'code'    => 'Codice',
                     'id'      => 'ID',
                     'name'    => 'Nome',
@@ -1292,7 +1292,7 @@ return [
                 'rating'      => 'Valutazione',
                 'status'      => 'Stato',
                 'title'       => 'Recensioni',
-        
+
                 'edit'  => [
                     'title'          => 'Modifica Recensione',
                     'save-btn'       => 'Salva',
@@ -1310,8 +1310,8 @@ return [
                     'images'         => 'Immagini',
                     'update-success' => 'Aggiornato con Successo',
                 ],
-        
-                'datagrid'   =>  [
+
+                'datagrid'   => [
                     'customer-names'      => 'Nome',
                     'comment'             => 'Commento',
                     'date'                => 'Data',
@@ -1334,7 +1334,7 @@ return [
                 ],
             ],
         ],
-        
+
         'addresses' => [
             'create' => [
                 'title'              => 'Crea Indirizzo del Cliente',
@@ -1345,7 +1345,7 @@ return [
                 'address-2'          => 'Indirizzo 2',
                 'city'               => 'Città',
                 'state'              => 'Stato',
-                'select-country'     => "Seleziona Paese",
+                'select-country'     => 'Seleziona Paese',
                 'country'            => 'Paese',
                 'default-address'    => 'Indirizzo Predefinito',
                 'first-name'         => 'Nome',
@@ -1355,7 +1355,7 @@ return [
                 'post-code'          => 'Codice Postale',
                 'save-btn-title'     => 'Salva Indirizzo',
             ],
-        
+
             'edit' => [
                 'title'            => 'Modifica Indirizzo',
                 'company-name'     => 'Nome Azienda',
@@ -1364,7 +1364,7 @@ return [
                 'address-2'        => 'Indirizzo 2',
                 'city'             => 'Città',
                 'state'            => 'Stato',
-                'select-country'   => "Seleziona Paese",
+                'select-country'   => 'Seleziona Paese',
                 'country'          => 'Paese',
                 'default-address'  => 'Indirizzo Predefinito',
                 'first-name'       => 'Nome',
@@ -1374,7 +1374,7 @@ return [
                 'post-code'        => 'Codice Postale',
                 'save-btn-title'   => 'Salva Indirizzo',
             ],
-        
+
             'create-success'       => 'Indirizzo creato con successo',
             'update-success'       => 'Indirizzo aggiornato con successo',
             'success-mass-delete'  => 'Eliminazione di Indirizzi in Massa Riuscita',
@@ -1387,7 +1387,7 @@ return [
                 'index' => [
                     'title'       => 'Modelli di Email',
                     'create-btn'  => 'Crea Modello',
-        
+
                     'datagrid' => [
                         'id'       => 'ID',
                         'name'     => 'Nome',
@@ -1397,7 +1397,7 @@ return [
                         'draft'    => 'Bozza',
                     ],
                 ],
-        
+
                 'create' => [
                     'title'          => 'Crea Modello',
                     'active'         => 'Attivo',
@@ -1412,7 +1412,7 @@ return [
                     'select-status'  => 'Seleziona Stato',
                     'create-success' => 'Modello email creato con successo.',
                 ],
-        
+
                 'edit' => [
                     'title'          => 'Modifica Modello',
                     'active'         => 'Attivo',
@@ -1426,17 +1426,17 @@ return [
                     'status'         => 'Stato',
                     'update-success' => 'Aggiornato con successo',
                 ],
-        
+
                 'email-template'  => 'Modello Email',
                 'delete-success'  => 'Modello Eliminato con successo',
                 'delete-failed'   => ':name Eliminazione Fallita',
             ],
-        
+
             'campaigns' => [
                 'index' => [
                     'title'       => 'Campagne',
                     'create-btn'  => 'Crea Campagna',
-        
+
                     'datagrid' => [
                         'id'       => 'ID',
                         'name'     => 'Nome',
@@ -1448,7 +1448,7 @@ return [
                         'delete'   => 'Elimina',
                     ],
                 ],
-        
+
                 'create'    => [
                     'active'          => 'Attivo',
                     'back-btn'        => 'Indietro',
@@ -1470,7 +1470,7 @@ return [
                     'subject'         => 'Oggetto',
                     'title'           => 'Crea Campagna',
                 ],
-        
+
                 'edit'    => [
                     'active'          => 'Attivo',
                     'audience'        => 'Pubblico',
@@ -1490,20 +1490,20 @@ return [
                     'subject'         => 'Oggetto',
                     'title'           => 'Modifica Campagna',
                 ],
-        
+
                 'email-campaign' => 'Campagna Email',
                 'create-success' => 'Campagna creata con successo.',
                 'update-success' => 'Campagna aggiornata con successo.',
                 'delete-success' => 'Campagna eliminata con successo',
                 'delete-failed'  => ':name Eliminazione Fallita',
             ],
-        
+
             'events' => [
                 'index'  => [
                     'create-btn'  => 'Crea Evento',
                     'title'       => 'Eventi',
                     'event'       => 'Evento',
-        
+
                     'datagrid' => [
                         'id'      => 'ID',
                         'name'    => 'Nome',
@@ -1512,7 +1512,7 @@ return [
                         'delete'  => 'Elimina',
                         'actions' => 'Azioni',
                     ],
-        
+
                     'create'   => [
                         'description'    => 'Descrizione',
                         'date'           => 'Data',
@@ -1523,22 +1523,22 @@ return [
                         'title'          => 'Crea Eventi',
                         'success'        => 'Eventi Creati con Successo',
                     ],
-        
+
                     'edit'  => [
                         'title'   => 'Modifica Eventi',
                         'success' => 'Eventi Aggiornati con Successo',
                     ],
                 ],
-        
+
                 'edit-error'     => 'Non è possibile modificare l\'evento',
                 'delete-failed'  => ':name Eliminazione Fallita',
                 'delete-success' => 'Eventi Eliminati con Successo',
             ],
-        
+
             'subscribers' => [
                 'index' => [
                     'title' => 'Iscrizioni alla Newsletter',
-        
+
                     'datagrid' => [
                         'id'          => 'ID',
                         'subscribed'  => 'Iscritto',
@@ -1549,7 +1549,7 @@ return [
                         'email'       => 'Email',
                         'actions'     => 'Azioni',
                     ],
-        
+
                     'edit'  => [
                         'title'         => 'Modifica Iscritto alla Newsletter',
                         'back-btn'      => 'Indietro',
@@ -1562,7 +1562,7 @@ return [
                         'update-failed' => 'Iscrizione alla Newsletter Non Aggiornata',
                     ],
                 ],
-        
+
                 'delete-warning'  => 'Sei sicuro di voler eseguire questa azione?',
                 'delete-success'  => 'Iscritto Eliminato con Successo',
                 'delete-failed'   => 'Eliminazione Iscritto Fallita',
@@ -1574,12 +1574,12 @@ return [
                 'catalog-rule-title' => 'Regole del Catalogo',
                 'cart-rule-title'    => 'Regole del Carrello',
             ],
-        
+
             'cart-rules' => [
                 'index' => [
                     'title'      => 'Regole del Carrello',
                     'create-btn' => 'Crea Regola del Carrello',
-        
+
                     'datagrid' => [
                         'id'          => 'ID',
                         'name'        => 'Nome',
@@ -1597,7 +1597,7 @@ return [
                         'view'        => 'Visualizza',
                     ],
                 ],
-        
+
                 'create' => [
                     'back-btn'                                  => 'Indietro',
                     'title'                                     => 'Crea Regola del Carrello',
@@ -1672,7 +1672,7 @@ return [
                     'create-success'                            => 'Regola del Carrello creata con successo',
                     'choose-condition-to-add'                   => 'Scegli la condizione da aggiungere',
                 ],
-        
+
                 'edit' => [
                     'back-btn'                                  => 'Indietro',
                     'title'                                     => 'Modifica Regola del Carrello',
@@ -1757,16 +1757,16 @@ return [
                     'generate'                                  => 'Genera',
                     'customer-group'                            => 'Gruppo di Clienti',
                 ],
-        
+
                 'delete-success' => 'Regola del Carrello eliminata con successo',
                 'delete-failed'  => 'Eliminazione Regola del Carrello fallita',
             ],
-        
+
             'catalog-rules' => [
                 'index' => [
                     'title'      => 'Regole del Catalogo',
                     'create-btn' => 'Crea Regola del Catalogo',
-        
+
                     'datagrid' => [
                         'id'        => 'ID',
                         'name'      => 'Nome',
@@ -1780,7 +1780,7 @@ return [
                         'delete'    => 'Elimina',
                     ],
                 ],
-        
+
                 'create' => [
                     'back-btn'                 => 'Indietro',
                     'title'                    => 'Crea Regola del Catalogo',
@@ -1823,7 +1823,7 @@ return [
                     'product-attribute'        => 'Attributo del Prodotto',
                     'action-type'              => 'Tipo di Azione',
                 ],
-        
+
                 'edit' => [
                     'back-btn'                 => 'Indietro',
                     'title'                    => 'Modifica Regola del Catalogo',
@@ -1865,18 +1865,18 @@ return [
                     'product-attribute'        => 'Attributo del Prodotto',
                     'action-type'              => 'Tipo di Azione',
                 ],
-                
+
                 'create-success' => 'Regola del catalogo creata con successo',
                 'delete-success' => 'Regola del catalogo eliminata con successo',
                 'update-success' => 'Regola del catalogo aggiornata con successo',
             ],
-        
+
             'cart-rules-coupons' => [
                 'cart-rule-not-defined-error' => 'La regola del carrello non può essere eliminata',
                 'delete-success'              => 'Coupon della regola del carrello eliminato con successo',
                 'mass-delete-success'         => 'Elementi selezionati eliminati con successo',
                 'success'                     => ':name creato con successo',
-            
+
                 'datagrid' => [
                     'coupon-code'     => 'Codice coupon',
                     'created-date'    => 'Data di creazione',
@@ -1887,13 +1887,13 @@ return [
                 ],
             ],
         ],
-        
+
         'sitemaps' => [
             'index' => [
                 'title'       => 'Mappa del sito',
                 'create-btn'  => 'Crea mappa del sito',
                 'sitemap'     => 'Mappa del sito',
-        
+
                 'datagrid' => [
                     'id'              => 'ID',
                     'file-name'       => 'Nome file',
@@ -1903,7 +1903,7 @@ return [
                     'delete'          => 'Elimina',
                     'actions'         => 'Azioni',
                 ],
-        
+
                 'create'  => [
                     'file-name'      => 'Nome file',
                     'file-name-info' => 'Esempio: sitemap.xml',
@@ -1914,14 +1914,14 @@ return [
                     'success'        => 'Mappa del sito creata con successo',
                     'delete-warning' => 'Sei sicuro di voler eseguire questa azione?',
                 ],
-        
-                'edit'  =>  [
-                    'title'   => 'Modifica mappa del sito',
-                    'success' => 'Mappa del sito aggiornata con successo',
-                    'delete-success' => 'Mappa del sito eliminata con successo'
+
+                'edit'  => [
+                    'title'          => 'Modifica mappa del sito',
+                    'success'        => 'Mappa del sito aggiornata con successo',
+                    'delete-success' => 'Mappa del sito eliminata con successo',
                 ],
             ],
-        
+
             'edit'  => [
                 'back-btn'       => 'Indietro',
                 'file-name'      => 'Nome file',
@@ -1931,7 +1931,7 @@ return [
                 'path-info'      => 'Esempio: "/sitemap/" o "/" per il percorso di base',
                 'save-btn'       => 'Salva mappa del sito',
             ],
-        
+
             'delete-failed'  => ':name Eliminata con errore',
         ],
     ],
@@ -1941,7 +1941,7 @@ return [
             'title'             => 'Pagine',
             'create-btn'        => 'Crea Pagina',
             'already-taken'     => ':name è già stato preso.',
-    
+
             'datagrid' => [
                 'id'                  => 'ID',
                 'page-title'          => 'Titolo Pagina',
@@ -1949,10 +1949,10 @@ return [
                 'view'                => 'Visualizza',
                 'edit'                => 'Modifica',
                 'delete'              => 'Elimina',
-                'mass-delete-success' => 'Dati selezionati eliminati con successo'
+                'mass-delete-success' => 'Dati selezionati eliminati con successo',
             ],
         ],
-    
+
         'create' => [
             'title'             => 'Crea Pagina',
             'save-btn'          => 'Salva Pagina',
@@ -1966,7 +1966,7 @@ return [
             'seo'               => 'SEO',
             'url-key'           => 'Chiave URL',
         ],
-    
+
         'edit' => [
             'title'            => 'Modifica Pagina',
             'preview-btn'      => 'Anteprima Pagina',
@@ -1982,20 +1982,20 @@ return [
             'meta-title'       => 'Meta Titolo',
             'url-key'          => 'Chiave URL',
         ],
-    
+
         'create-success'  => 'CMS creato con successo.',
         'delete-success'  => 'CMS eliminato con successo.',
         'update-success'  => 'CMS aggiornato con successo.',
         'no-resource'     => 'Risorsa non esiste.',
     ],
-    
+
     'settings' => [
         'locales' => [
             'index' => [
                 'title'      => 'Localidades',
                 'locale'     => 'Localidad',
                 'create-btn' => 'Crear Localidad',
-        
+
                 'datagrid' => [
                     'actions'   => 'Acciones',
                     'id'        => 'ID',
@@ -2007,7 +2007,7 @@ return [
                     'edit'      => 'Editar',
                     'delete'    => 'Eliminar',
                 ],
-        
+
                 'create' => [
                     'code'             => 'Código',
                     'name'             => 'Nombre',
@@ -2017,11 +2017,11 @@ return [
                     'save-btn'         => 'Guardar Localidad',
                     'select-direction' => 'Seleziona direzione',
                 ],
-        
+
                 'edit' => [
                     'title' => 'Editar Localidad',
                 ],
-        
+
                 'create-success'    => 'Localidad creada exitosamente.',
                 'update-success'    => 'Localidad actualizada exitosamente.',
                 'delete-success'    => 'Localidad eliminada exitosamente.',
@@ -2036,7 +2036,7 @@ return [
                 'title'      => 'Monedas',
                 'create-btn' => 'Crear Moneda',
                 'currency'   => 'Moneda',
-        
+
                 'datagrid' => [
                     'id'             => 'ID',
                     'name'           => 'Nombre',
@@ -2049,7 +2049,7 @@ return [
                     'no-resource'    => 'El recurso proporcionado no es suficiente para la acción',
                     'method-error'   => '¡Error! Se detectó un método incorrecto, por favor, verifique la configuración de la acción masiva',
                 ],
-        
+
                 'create' => [
                     'create-btn'     => 'Crear Moneda',
                     'code'           => 'Código',
@@ -2061,11 +2061,11 @@ return [
                     'symbol'         => 'Símbolo',
                     'title'          => 'Crear Nueva Moneda',
                 ],
-        
+
                 'edit' => [
                     'title' => 'Editar Moneda',
                 ],
-        
+
                 'create-success'    => 'Moneda creada exitosamente.',
                 'delete-success'    => 'Moneda eliminada exitosamente.',
                 'delete-failed'     => 'Error al eliminar la Moneda',
@@ -2073,14 +2073,14 @@ return [
                 'update-success'    => 'Moneda actualizada exitosamente.',
             ],
         ],
-        
+
         'exchange-rates' => [
             'index' => [
                 'title'         => 'Tasas de Cambio',
                 'create-btn'    => 'Crear Tasa de Cambio',
                 'exchange-rate' => 'Tasa de Cambio',
                 'update-rates'  => 'Actualizar Tasa de Cambio',
-        
+
                 'create' => [
                     'delete-warning'         => '¿Estás seguro de que deseas realizar esta acción?',
                     'title'                  => 'Crear Tasa de Cambio',
@@ -2090,11 +2090,11 @@ return [
                     'select-target-currency' => 'Seleziona la valuta di destinazione',
                     'target-currency'        => 'Moneda Objetivo',
                 ],
-        
+
                 'edit' => [
                     'title' => 'Editar Tasas de Cambio',
                 ],
-        
+
                 'datagrid' => [
                     'id'            => 'ID',
                     'currency-name' => 'Nombre de la Moneda',
@@ -2103,19 +2103,19 @@ return [
                     'delete'        => 'Eliminar',
                     'actions'       => 'Acciones',
                 ],
-        
+
                 'create-success' => 'Tasa de Cambio Creada Exitosamente',
                 'update-success' => 'Tasa de Cambio Actualizada Exitosamente',
                 'delete-success' => 'Tasa de Cambio Eliminada Exitosamente',
                 'delete-error'   => 'Error al Eliminar la Tasa de Cambio',
             ],
         ],
-        
+
         'inventory-sources' => [
             'index' => [
                 'title'      => 'Fuentes de Inventario',
                 'create-btn' => 'Crear Fuente de Inventario',
-        
+
                 'datagrid' => [
                     'id'       => 'ID',
                     'code'     => 'Código',
@@ -2128,7 +2128,7 @@ return [
                     'delete'   => 'Eliminar',
                 ],
             ],
-        
+
             'create' => [
                 'add-title'      => 'Agregar Fuente de Inventario',
                 'title'          => 'Fuentes de Inventario',
@@ -2157,7 +2157,7 @@ return [
                 'postcode'       => 'Código Postal',
                 'settings'       => 'Configuraciones',
             ],
-        
+
             'edit' => [
                 'title'             => 'Editar Fuentes de Inventario',
                 'general'           => 'General',
@@ -2185,30 +2185,30 @@ return [
                 'postcode'          => 'Código Postal',
                 'settings'          => 'Configuraciones',
             ],
-        
+
             'create-success'    => 'Fuente de Inventario creada exitosamente',
             'delete-success'    => 'Fuentes de Inventario eliminadas exitosamente',
             'delete-failed'     => 'Error al eliminar las Fuentes de Inventario',
             'last-delete-error' => 'No se pueden eliminar las últimas Fuentes de Inventario',
             'update-success'    => 'Fuentes de Inventario actualizadas exitosamente',
         ],
-        
+
         'taxes' => [
             'categories' => [
                 'index' => [
-                    'title'        => 'Categorías de Impuestos',
-                    'tax-category' => 'Categoría de Impuesto',
+                    'title'           => 'Categorías de Impuestos',
+                    'tax-category'    => 'Categoría de Impuesto',
                     'delete-warning'  => '¿Estás seguro de que deseas eliminar?',
-        
+
                     'datagrid' => [
-                        'id'     => 'ID',
-                        'name'   => 'Nombre',
-                        'code'   => 'Código',
-                        'edit'   => 'Editar',
-                        'delete' => 'Eliminar',
+                        'id'      => 'ID',
+                        'name'    => 'Nombre',
+                        'code'    => 'Código',
+                        'edit'    => 'Editar',
+                        'delete'  => 'Eliminar',
                         'actions' => 'Acciones',
                     ],
-        
+
                     'create' => [
                         'title'           => 'Crear Categoría de Impuesto',
                         'code'            => 'Código',
@@ -2221,24 +2221,24 @@ return [
                         'add-tax-rates'   => 'Agregar Tasas de Impuesto',
                         'empty-text'      => 'No hay Tasas de Impuesto disponibles, por favor crea nuevas Tasas de Impuesto.',
                     ],
-        
+
                     'edit'  => [
                         'title'   => 'Editar Categorías de Impuestos',
                     ],
-        
+
                     'create-success'  => 'Nueva Categoría de Impuesto creada',
                     'update-success'  => 'Categoría de Impuesto actualizada exitosamente',
-                    'delete-success' => 'Categoría de Impuesto eliminada exitosamente',
-                    'delete-failed'  => 'Error al eliminar la Categoría de Impuesto',
+                    'delete-success'  => 'Categoría de Impuesto eliminada exitosamente',
+                    'delete-failed'   => 'Error al eliminar la Categoría de Impuesto',
                 ],
             ],
-        
+
             'rates'   => [
                 'index' => [
                     'title'        => 'Tasas de Impuesto',
                     'tax-rate'     => 'Tasa de Impuesto',
                     'button-title' => 'Crear Tasas de Impuesto',
-        
+
                     'datagrid' => [
                         'id'         => 'ID',
                         'identifier' => 'Identificador',
@@ -2252,7 +2252,7 @@ return [
                         'delete'     => 'Eliminar',
                     ],
                 ],
-        
+
                 'create' => [
                     'country'        => 'Paese',
                     'back-btn'       => 'Indietro',
@@ -2270,7 +2270,7 @@ return [
                     'zip-from'       => 'CAP Da',
                     'zip-to'         => 'CAP A',
                 ],
-        
+
                 'edit' => [
                     'basic-settings'  => 'Impostazioni di Base',
                     'country'         => 'Paese',
@@ -2287,14 +2287,14 @@ return [
                     'zip_from'        => 'Da CAP',
                     'zip_to'          => 'A CAP',
                 ],
-        
+
                 'create-success' => 'Tasa de Impuesto creada exitosamente.',
                 'delete-failed'  => 'Error al eliminar la Tasa de Impuesto',
                 'delete-success' => 'Tasa de Impuesto eliminada exitosamente',
                 'update-success' => 'Tasa de Impuesto actualizada exitosamente',
             ],
         ],
-        
+
         'channels' => [
             'index' => [
                 'title'             => 'Canales',
@@ -2302,7 +2302,7 @@ return [
                 'delete-success'    => 'Canal eliminado exitosamente.',
                 'delete-failed'     => 'Error al eliminar :name',
                 'last-delete-error' => 'Error al eliminar el último Canal.',
-        
+
                 'datagrid' => [
                     'id'        => 'ID',
                     'code'      => 'Código',
@@ -2312,7 +2312,7 @@ return [
                     'delete'    => 'Eliminar',
                 ],
             ],
-        
+
             'create' => [
                 'title'                   => 'Crear Canal',
                 'cancel'                  => 'Atrás',
@@ -2351,7 +2351,7 @@ return [
                 'maintenance-mode-text'   => 'Mensaje',
                 'create-success'          => 'Canal creado exitosamente.',
             ],
-        
+
             'edit' => [
                 'title'                  => 'Editar Canal',
                 'back-btn'               => 'Atrás',
@@ -2387,13 +2387,13 @@ return [
                 'update-success'         => 'Canal actualizado exitosamente.',
             ],
         ],
-        
+
         'users' => [
             'index' => [
                 'title' => 'Usuarios',
                 'admin' => 'Administrador',
                 'user'  => 'Usuario',
-        
+
                 'create'  => [
                     'title'             => 'Crear Usuario',
                     'name'              => 'Nombre',
@@ -2403,9 +2403,9 @@ return [
                     'role'              => 'Rol',
                     'status'            => 'Estado',
                     'save-btn'          => 'Guardar Usuario',
-                    'upload-image-info' => 'Subir una Imagen de Perfil (110px X 110px) en Formato PNG o JPG'
+                    'upload-image-info' => 'Subir una Imagen de Perfil (110px X 110px) en Formato PNG o JPG',
                 ],
-        
+
                 'datagrid' => [
                     'actions'   => 'Acciones',
                     'id'        => 'ID',
@@ -2417,11 +2417,11 @@ return [
                     'active'    => 'Activo',
                     'inactive'  => 'Inactivo',
                 ],
-        
+
                 'edit'  => [
                     'title'    => 'Editar Usuario',
                 ],
-        
+
                 'activate-warning'   => 'Tu cuenta aún no ha sido activada, por favor contacta al administrador.',
                 'create-success'     => 'Usuario creado exitosamente.',
                 'cannot-change'      => 'No se puede cambiar el usuario',
@@ -2433,7 +2433,7 @@ return [
                 'update-success'     => 'Usuario actualizado exitosamente.',
                 'delete-warning'     => '¿Estás seguro de que deseas realizar esta acción?',
             ],
-        
+
             'edit'  => [
                 'title'            => 'Editar Usuario',
                 'general'          => 'General',
@@ -2446,17 +2446,17 @@ return [
                 'status'           => 'Estado',
                 'save-btn'         => 'Guardar Usuario',
             ],
-        
+
             'update-success'   => 'Usuario actualizado exitosamente.',
             'delete-success'   => 'Usuario eliminado exitosamente.',
         ],
-        
+
         'roles' => [
             'index' => [
                 'title'      => 'Roles',
                 'create-btn' => 'Crear Rol',
-        
-                'datagrid'  =>  [
+
+                'datagrid'  => [
                     'delete'            => 'Eliminar',
                     'edit'              => 'Editar',
                     'id'                => 'ID',
@@ -2464,7 +2464,7 @@ return [
                     'permission-type'   => 'Tipo de Permiso',
                 ],
             ],
-        
+
             'create' => [
                 'title'           => 'Crear Rol',
                 'save-btn'        => 'Guardar Rol',
@@ -2477,7 +2477,7 @@ return [
                 'custom'          => 'Personalizado',
                 'all'             => 'Todos',
             ],
-        
+
             'edit' => [
                 'title'           => 'Editar Rol',
                 'save-btn'        => 'Guardar Rol',
@@ -2490,7 +2490,7 @@ return [
                 'custom'          => 'Personalizado',
                 'all'             => 'Todos',
             ],
-        
+
             'create-success'     => 'Roles Creados Exitosamente',
             'update-success'     => 'Rol Actualizado Exitosamente',
             'last-delete-error'  => 'El último Rol no puede ser eliminado',
@@ -2498,7 +2498,7 @@ return [
             'delete-failed'      => 'Error al eliminar el Rol',
             'being-used'         => 'El Rol ya está siendo utilizado por un Usuario Administrador',
         ],
-        
+
         'themes' => [
             'index' => [
                 'title'      => 'Temas',
@@ -2513,57 +2513,57 @@ return [
                     'id'         => 'ID',
                     'type'       => 'Tipo',
                     'name'       => 'Nombre',
-                ]
+                ],
             ],
-        
+
             'create' => [
-                'title'                         => 'Crear Tema',
+                'title'                          => 'Crear Tema',
                 'sliders'                        => 'Sliders',
-                'product-carousel'              => 'Carrusel de Productos',
-                'product-carousel-description'  => 'Muestra productos de forma elegante con un carrusel de productos dinámico y receptivo.',
-                'category-carousel-description' => 'Muestra categorías dinámicas de forma atractiva utilizando un carrusel de categorías receptivo.',
-                'static-content-description'    => 'Mejora la participación con contenido estático conciso e informativo para tu audiencia.',
-                'footer-link-description'       => 'Navega a través de los enlaces del pie de página para una exploración e información del sitio web sin problemas.',
-                'category-carousel'             => 'Carrusel de Categorías',
-                'static-content'                => 'Contenido Estático',
-                'footer-title'                  => 'Título',
-                'footer-link'                   => 'Enlaces del Pie de Página',
-                'footer-link-form-title'        => 'Enlace del Pie de Página',
-                'slider-description'            => 'Personalización del tema relacionada con los sliders.',
-                'slider-add-btn'                => 'Agregar Slider',
-                'general'                       => 'General',
-                'add-filter-btn'                => 'Agregar Filtro',
-                'save-btn'                      => 'Guardar',
-                'filter-title'                  => 'Título',
-                'sort'                          => 'Ordenar',
-                'desc'                          => 'Descendente',
-                'asc'                           => 'Ascendente',
-                'limit'                         => 'Límite',
-                'key'                           => 'Clave: :key',
-                'value'                         => 'Valor: :value',
-                'delete'                        => 'Eliminar',
-                'link'                          => 'Enlace',
-                'image'                         => 'Imagen',
-                'name'                          => 'Nombre',
-                'sort-order'                    => 'Orden de Clasificación',
-                'status'                        => 'Estado',
-                'create-filter'                 => 'Crear Filtro',
-                'key-input'                     => 'Clave',
-                'value-input'                   => 'Valor',
-                'html'                          => 'HTML',
-                'css'                           => 'CSS',
-                'add-footer-link-btn'           => 'Agregar Enlace del Pie de Página',
-                'filters'                       => 'Filtros',
-                'slider-image'                  => 'Imagen del Slider',
-                'update-slider'                 => 'Actualizar Slider',
-                'select'                        => 'Seleccionar',
-                'add-link'                      => 'Agregar Enlace',
-                'column'                        => 'Columna',
-                'path'                          => 'Percorso',
-                'edit'                          => 'Editar',
-                'back'                          => 'Atrás',
-             ],
-        
+                'product-carousel'               => 'Carrusel de Productos',
+                'product-carousel-description'   => 'Muestra productos de forma elegante con un carrusel de productos dinámico y receptivo.',
+                'category-carousel-description'  => 'Muestra categorías dinámicas de forma atractiva utilizando un carrusel de categorías receptivo.',
+                'static-content-description'     => 'Mejora la participación con contenido estático conciso e informativo para tu audiencia.',
+                'footer-link-description'        => 'Navega a través de los enlaces del pie de página para una exploración e información del sitio web sin problemas.',
+                'category-carousel'              => 'Carrusel de Categorías',
+                'static-content'                 => 'Contenido Estático',
+                'footer-title'                   => 'Título',
+                'footer-link'                    => 'Enlaces del Pie de Página',
+                'footer-link-form-title'         => 'Enlace del Pie de Página',
+                'slider-description'             => 'Personalización del tema relacionada con los sliders.',
+                'slider-add-btn'                 => 'Agregar Slider',
+                'general'                        => 'General',
+                'add-filter-btn'                 => 'Agregar Filtro',
+                'save-btn'                       => 'Guardar',
+                'filter-title'                   => 'Título',
+                'sort'                           => 'Ordenar',
+                'desc'                           => 'Descendente',
+                'asc'                            => 'Ascendente',
+                'limit'                          => 'Límite',
+                'key'                            => 'Clave: :key',
+                'value'                          => 'Valor: :value',
+                'delete'                         => 'Eliminar',
+                'link'                           => 'Enlace',
+                'image'                          => 'Imagen',
+                'name'                           => 'Nombre',
+                'sort-order'                     => 'Orden de Clasificación',
+                'status'                         => 'Estado',
+                'create-filter'                  => 'Crear Filtro',
+                'key-input'                      => 'Clave',
+                'value-input'                    => 'Valor',
+                'html'                           => 'HTML',
+                'css'                            => 'CSS',
+                'add-footer-link-btn'            => 'Agregar Enlace del Pie de Página',
+                'filters'                        => 'Filtros',
+                'slider-image'                   => 'Imagen del Slider',
+                'update-slider'                  => 'Actualizar Slider',
+                'select'                         => 'Seleccionar',
+                'add-link'                       => 'Agregar Enlace',
+                'column'                         => 'Columna',
+                'path'                           => 'Percorso',
+                'edit'                           => 'Editar',
+                'back'                           => 'Atrás',
+            ],
+
             'edit' => [
                 'title'                         => 'Editar Tema',
                 'slider'                        => 'Slider',
@@ -2611,7 +2611,7 @@ return [
                 'edit'                          => 'Editar',
                 'back'                          => 'Atrás',
             ],
-        
+
             'create-success' => 'Tema creado exitosamente',
             'update-success' => 'Tema actualizado exitosamente',
             'delete-success' => 'Tema eliminado exitosamente',
@@ -2620,307 +2620,474 @@ return [
 
     'configuration' => [
         'index' => [
-            'title'                        => 'Configurazione',
-            'save-btn'                     => 'Salva Configurazione',
-            'save-message'                 => 'Configurazione salvata con successo',
             'delete'                       => 'Elimina',
             'enable-at-least-one-shipping' => 'Abilita almeno un metodo di spedizione.',
             'enable-at-least-one-payment'  => 'Abilita almeno un metodo di pagamento.',
+            'save-btn'                     => 'Salva Configurazione',
+            'save-message'                 => 'Configurazione salvata con successo',
+            'title'                        => 'Configurazione',
 
             'general' => [
+                'info'  => 'Imposta le opzioni delle unità.',
+                'title' => 'Generale',
+
                 'general' => [
-                    'title'             => 'Generale',
-                    'info'              => 'Imposta le opzioni delle unità.',
-                    'unit-options'      => 'Opzioni delle Unità',
-                    'unit-options-info' => 'Dimensioni, colore, materiale, personalizzazione, miglioramento della soddisfazione del cliente e adattamento degli acquisti.',
-                    'weight-unit'       => 'Unità di Peso',
+                    'info'  => 'Imposta le opzioni delle unità.',
+                    'title' => 'Generale',
+
+                    'unit-options' => [
+                        'info'        => 'Imposta le opzioni delle unità.',
+                        'title'       => 'Opzioni Unità',
+                        'title-info'  => 'Dimensioni, colore, materiale, personalizzazione, miglioramento della soddisfazione del cliente e personalizzazione degli acquisti.',
+                        'weight-unit' => 'Unità di Peso',
+                    ],
                 ],
-            
+
                 'content' => [
-                    'title'                 => 'Contenuto',
-                    'info'                  => 'Imposta le opzioni di confronto, le opzioni della lista dei desideri, le opzioni di ricerca delle immagini, il piè di pagina, il piè di pagina componibile e gli script personalizzati.',
-                    'custom-scripts'        => 'Script Personalizzati',
-                    'custom-scripts-info'   => 'Gli script personalizzati sono pezzi di codice personalizzati creati per aggiungere funzioni o caratteristiche specifiche al software, migliorandone le capacità in modo unico.',
-                    'custom-css'            => 'CSS Personalizzato',
-                    'custom-javascript'     => 'Javascript Personalizzato',
-                    'compare-options'     => 'Opzioni di confronto',
-                    'wishlist-options'    => 'Opzioni della lista dei desideri',
-                    'image-search-option' => 'Opzione di ricerca delle immagini',
-                    'settings-title'      => 'Impostazioni',
-                    'settings-title-info' => 'Le impostazioni si riferiscono a scelte configurabili che controllano il comportamento di un sistema, di un’applicazione o di un dispositivo, personalizzate in base alle preferenze e ai requisiti dell’utente.'
+                    'info'  => 'Imposta le opzioni di confronto, le opzioni della lista dei desideri, le opzioni di ricerca delle immagini, il piè di pagina, il piè di pagina attivo e gli script personalizzati.',
+                    'title' => 'Contenuto',
+
+                    'settings' => [
+                        'compare-options'     => 'Opzioni di Confronto',
+                        'image-search-option' => 'Opzione di Ricerca Immagine',
+                        'title'               => 'Impostazioni',
+                        'title-info'          => 'Le impostazioni si riferiscono a scelte configurabili che controllano il comportamento di un sistema, di un\'applicazione o di un dispositivo, adattate alle preferenze e ai requisiti dell\'utente.',
+                        'wishlist-options'    => 'Opzioni della Lista dei Desideri',
+                    ],
+
+                    'custom-scripts' => [
+                        'custom-css'        => 'CSS Personalizzato',
+                        'custom-javascript' => 'Javascript Personalizzato',
+                        'title'             => 'Script Personalizzati',
+                        'title-info'        => 'Gli script personalizzati sono porzioni di codice personalizzate create per aggiungere funzioni o caratteristiche specifiche al software, migliorandone unicità e capacità.',
+                    ],
                 ],
-            
+
                 'design' => [
-                    'title'           => 'Design',
-                    'info'            => 'Imposta il logo e l\'icona del favicon.',
-                    'admin-logo'      => 'Logo Amministratore',
-                    'admin-logo-info' => 'Il logo amministratore è l\'immagine o emblema distintivo che rappresenta l\'interfaccia di amministrazione di un sistema o di un sito web, spesso personalizzabile.',
-                    'logo-image'      => 'Immagine del Logo',
-                    'favicon'         => 'Favicon',
+                    'info'  => 'Imposta il logo e l\'icona del favicon.',
+                    'title' => 'Design',
+
+                    'admin-logo' => [
+                        'favicon'    => 'Favicon',
+                        'logo-image' => 'Immagine del Logo',
+                        'title'      => 'Logo dell\'Amministratore',
+                        'title-info' => 'Il logo dell\'amministratore è l\'immagine o l\'emblema distintivo che rappresenta l\'interfaccia di amministrazione di un sistema o di un sito web, spesso personalizzabile.',
+                    ],
                 ],
             ],
 
             'catalog' => [
-                'title' => 'Catalogo',
                 'info'  => 'Catalogo',
-            
+                'title' => 'Catalogo',
+
                 'inventory' => [
-                    'title'                 => 'Inventario',
-                    'info'                  => 'Imposta gli ordini in sospeso',
-                    'stock-options'         => 'Opzioni di Magazzino',
-                    'stock-options-info'    => 'Le opzioni di magazzino sono contratti di investimento che concedono il diritto di acquistare o vendere azioni di una società a un prezzo predeterminato, influenzando i potenziali profitti.',
-                    'allow-back-orders'     => 'Consenti Ordini in Sospeso',
+                    'info'  => 'Imposta gli ordini in sospeso.',
+                    'title' => 'Inventario',
+
+                    'stock-options' => [
+                        'allow-back-orders' => 'Consenti Ordini in Sospeso',
+                        'title'             => 'Opzioni Stock',
+                        'title-info'        => 'Le opzioni di stock sono contratti di investimento che concedono il diritto di acquistare o vendere azioni di una società a un prezzo predeterminato, influenzando i potenziali profitti.',
+                    ],
                 ],
-            
+
                 'products' => [
-                    'title'                              => 'Prodotti',
-                    'info'                               => 'Imposta il checkout per gli ospiti, la homepage, la pagina di visualizzazione del prodotto, la pagina del carrello, il front-end del negozio, le recensioni e la condivisione sociale degli attributi.',
-                    'guest-checkout'                     => 'Checkout per gli Ospiti',
-                    'guest-checkout-info'                => 'Il checkout per gli ospiti consente ai clienti di acquistare prodotti senza creare un account, semplificando il processo di acquisto per maggiore comodità e transazioni più rapide.',
-                    'allow-guest-checkout'               => 'Consenti Checkout per gli Ospiti',
-                    'allow-guest-checkout-hint'          => 'Suggerimento: Se attivato, questa opzione può essere configurata per ciascun prodotto in modo specifico.',
-                    'attribute'                          => 'Attributo',
-                    'homepage'                           => 'Configurazione Homepage',
-                    'homepage-info'                      => 'La configurazione della homepage comporta la personalizzazione del layout, del contenuto e del design della pagina principale del sito web per presentare le informazioni desiderate in modo efficace.',
-                    'allow-no-of-new-products'           => 'Numero Consentito di Nuovi Prodotti nella Homepage',
-                    'allow-no-of-featured-products'      => 'Numero Consentito di Prodotti in Primo Piano nella Homepage',
-                    'allow-no-of-related-products'       => 'Numero Consentito di Prodotti Correlati',
-                    'allow-no-of-up-sells-products'      => 'Numero Consentito di Prodotti Up-Sell',
-                    'allow-no-of-cross-sells-products'   => 'Numero Consentito di Prodotti Cross-Sell',
-                    'product-view-page'                  => 'Configurazione Pagina di Visualizzazione Prodotto',
-                    'product-view-page-info'             => 'La configurazione della pagina di visualizzazione del prodotto comporta l\'adattamento del layout ed degli elementi sulla pagina di visualizzazione di un prodotto, migliorando l\'esperienza utente e la presentazione delle informazioni.',
-                    'cart-view-page'                     => 'Configurazione Pagina del Carrello',
-                    'cart-view-page-info'                => 'La configurazione della pagina del carrello comporta l\'organizzazione degli articoli, dei dettagli e delle opzioni sulla pagina del carrello degli acquisti, migliorando l\'interazione dell\'utente e il flusso d\'acquisto.',
-                    'storefront'                         => 'Vetrina',
-                    'storefront-info'                    => 'La vetrina è l\'interfaccia rivolta al cliente di un negozio online, che presenta prodotti, categorie e navigazione per un\'esperienza di shopping senza soluzione di continuità.',
-                    'search-mode'                        => 'Modalità di Ricerca',
-                    'flat'                               => 'Tabella Piana',
-                    'elastic'                            => 'Ricerca Elastica',
-                    'default-list-mode'                  => 'Modalità di Elenco Predefinita',
-                    'grid'                               => 'Griglia',
-                    'list'                               => 'Elenco',
-                    'products-per-page'                  => 'Prodotti per Pagina',
-                    'sort-by'                            => 'Ordina Per',
-                    'from-z-a'                           => 'Da Z a A',
-                    'from-a-z'                           => 'Da A a Z',
-                    'latest-first'                       => 'Più Recenti Primi',
-                    'oldest-first'                       => 'Più Vecchi Primi',
-                    'cheapest-first'                     => 'Più Economici Primi',
-                    'expensive-first'                    => 'Più Costosi Primi',
-                    'buy-now-button-display'             => 'Consenti ai clienti di acquistare direttamente i prodotti',
-                    'cache-small-image'                  => 'Immagine Piccola',
-                    'cache-small-image-info'             => 'La cache dell\'immagine piccola è l\'interfaccia rivolta al cliente di un negozio online, che presenta prodotti, categorie e navigazione per un\'esperienza di shopping senza soluzione di continuità.',
-                    'width'                              => 'Larghezza',
-                    'height'                             => 'Altezza',
-                    'cache-medium-image'                 => 'Immagine Media',
-                    'cache-medium-image-info'            => 'L\'immagine media si riferisce a un\'immagine di dimensioni moderate che offre un equilibrio tra dettaglio e spazio schermo, comunemente utilizzata per le visualizzazioni.',
-                    'cache-large-image'                  => 'Immagine Grande',
-                    'cache-large-image-info'             => 'L\'immagine grande rappresenta un\'immagine ad alta risoluzione che offre un dettaglio e un impatto visivo migliori, spesso utilizzata per la presentazione di prodotti o grafiche.',
-                    'review'                             => 'Recensione',
-                    'review-info'                        => 'Valutazione o valutazione di qualcosa, spesso coinvolgendo opinioni e feedback.',
-                    'allow-guest-review'                 => 'Consenti Recensioni degli Ospiti',
-                    'attribute-info'                     => 'Caratteristica o proprietà che definisce un oggetto, influenzandone il comportamento, l\'aspetto o la funzione.',
-                    'image-upload-size'                  => 'Dimensioni Consentite per il Caricamento delle Immagini (in Kb)',
-                    'file-upload-size'                   => 'Dimensioni Consentite per il Caricamento dei File (in Kb)',
-                    'comma-separated'                    => 'Separati da Virgola',
-            
+                    'info'  => 'Imposta il checkout per gli ospiti, la homepage, la pagina di visualizzazione del prodotto, la pagina di visualizzazione del carrello, il front-end del negozio, la recensione e la condivisione sociale degli attributi.',
+                    'title' => 'Prodotti',
+
+                    'guest-checkout' => [
+                        'allow-guest-checkout'      => 'Consenti il Checkout per gli Ospiti',
+                        'allow-guest-checkout-hint' => 'Suggerimento: se attivato, questa opzione può essere configurata per ciascun prodotto in modo specifico.',
+                        'title'                     => 'Checkout per gli Ospiti',
+                        'title-info'                => 'Il checkout per gli ospiti consente ai clienti di acquistare prodotti senza creare un account, semplificando il processo di acquisto per comodità e transazioni più veloci.',
+                    ],
+
+                    'homepage' => [
+                        'allow-no-of-new-products'      => 'Numero Consentito di Nuovi Prodotti in Homepage',
+                        'allow-no-of-featured-products' => 'Numero Consentito di Prodotti in Primo Piano in Homepage',
+                        'title'                         => 'Configurazione Homepage',
+                        'title-info'                    => 'La configurazione della homepage consiste nella personalizzazione del layout, del contenuto e del design della pagina principale di un sito web per presentare in modo efficace le informazioni desiderate.',
+                    ],
+
+                    'product-view-page' => [
+                        'allow-no-of-related-products'  => 'Numero Consentito di Prodotti Correlati',
+                        'allow-no-of-up-sells-products' => 'Numero Consentito di Prodotti Upsell',
+                        'title'                         => 'Configurazione della Pagina di Visualizzazione del Prodotto',
+                        'title-info'                    => 'La configurazione della pagina di visualizzazione del prodotto implica l\'adattamento del layout ed degli elementi sulla pagina di visualizzazione di un prodotto, migliorando l\'esperienza dell\'utente e la presentazione delle informazioni.',
+                    ],
+
+                    'cart-view-page' => [
+                        'allow-no-of-cross-sells-products' => 'Numero Consentito di Prodotti Cross-Sell',
+                        'title'                            => 'Configurazione della Pagina del Carrello',
+                        'title-info'                       => 'La configurazione della pagina del carrello comporta la disposizione degli articoli, dei dettagli e delle opzioni sulla pagina del carrello degli acquisti, migliorando l\'interazione dell\'utente e il flusso di acquisto.',
+                    ],
+
+                    'storefront' => [
+                        'buy-now-button-display' => 'Consenti ai clienti di acquistare direttamente i prodotti',
+                        'comma-separated'        => 'Separati da virgola',
+                        'cheapest-first'         => 'Meno Costosi Prima',
+                        'default-list-mode'      => 'Modalità di Elenco Predefinita',
+                        'expensive-first'        => 'Più Costosi Prima',
+                        'elastic'                => 'Ricerca Elastic',
+                        'flat'                   => 'Tabella Flat',
+                        'from-z-a'               => 'Da Z a A',
+                        'from-a-z'               => 'Da A a Z',
+                        'grid'                   => 'Griglia',
+                        'list'                   => 'Elenco',
+                        'latest-first'           => 'Più Recenti Prima',
+                        'oldest-first'           => 'Più Vecchi Prima',
+                        'products-per-page'      => 'Prodotti per Pagina',
+                        'sort-by'                => 'Ordina Per',
+                        'search-mode'            => 'Modalità di Ricerca',
+                        'title'                  => 'Vetrina',
+                        'title-info'             => 'La vetrina è l\'interfaccia rivolta al cliente di un negozio online, che presenta prodotti, categorie e navigazione per un\'esperienza di acquisto senza soluzione di continuità.',
+                    ],
+
+                    'small-image' => [
+                        'height'     => 'Altezza',
+                        'title'      => 'Immagine Piccola',
+                        'title-info' => 'L\'immagine piccola rappresenta una foto di dimensioni moderate che offre un equilibrio tra dettaglio e spazio sullo schermo, comunemente utilizzata per le immagini.',
+                        'width'      => 'Larghezza',
+                    ],
+
+                    'medium-image' => [
+                        'height'     => 'Altezza',
+                        'title'      => 'Immagine Media',
+                        'title-info' => 'L\'immagine media rappresenta una foto di dimensioni moderate che offre un equilibrio tra dettaglio e spazio sullo schermo, comunemente utilizzata per le immagini.',
+                        'width'      => 'Larghezza',
+                    ],
+
+                    'large-image' => [
+                        'width'      => 'Larghezza',
+                        'height'     => 'Altezza',
+                        'title'      => 'Immagine Grande',
+                        'title-info' => 'L\'immagine grande rappresenta una foto ad alta risoluzione che fornisce dettagli e impatto visivo migliori, spesso utilizzata per la presentazione di prodotti o grafiche.',
+                    ],
+
+                    'review' => [
+                        'allow-guest-review' => 'Consenti Recensioni degli Ospiti',
+                        'title'              => 'Recensione',
+                        'title-info'         => 'Valutazione o valutazione di qualcosa, spesso coinvolgendo opinioni e feedback.',
+                    ],
+
+                    'attribute' => [
+                        'file-upload-size'  => 'Dimensione Consentita per il Caricamento di File (in Kb)',
+                        'image-upload-size' => 'Dimensione Consentita per il Caricamento di Immagini (in Kb)',
+                        'title'             => 'Attributo',
+                        'title-info'        => 'Caratteristica o proprietà che definisce un oggetto, influenzandone il comportamento, l\'aspetto o la funzione.',
+                    ],
+
+                    'social-share' => [
+                        'enable-social-share'    => 'Abilita Condivisione Sociale?',
+                        'enable-share-facebook'  => 'Abilita Condivisione su Facebook?',
+                        'enable-share-twitter'   => 'Abilita Condivisione su Twitter?',
+                        'enable-share-pinterest' => 'Abilita Condivisione su Pinterest?',
+                        'enable-share-whatsapp'  => 'Abilita Condivisione su WhatsApp?',
+                        'enable-share-linkedin'  => 'Abilita Condivisione su LinkedIn?',
+                        'enable-share-email'     => 'Abilita Condivisione tramite Email?',
+                        'share-message'          => 'Messaggio di Condivisione',
+                        'share'                  => 'Condividi',
+                        'title'                  => 'Condivisione Sociale',
+                        'title-info'             => 'Condivisione di contenuti da un sito web con gli amici su piattaforme di social media come Facebook, Twitter o Instagram.',
+                    ],
                 ],
-            
+
                 'rich-snippets' => [
-                    'title'                       => 'Snippet Ricchi',
-                    'info'                        => 'Imposta prodotti e categorie.',
-                    'products'                    => 'Prodotti',
-                    'rich-snippet-product-info'   => 'Articoli disponibili per l\'acquisto o l\'uso, offerti da un\'azienda o da un venditore.',
-                    'enable'                      => 'Abilita',
-                    'show-weight'                 => 'Mostra Peso',
-                    'show-categories'             => 'Mostra Categorie',
-                    'show-images'                 => 'Mostra Immagini',
-                    'show-reviews'                => 'Mostra Recensioni',
-                    'show-ratings'                => 'Mostra Valutazioni',
-                    'show-offers'                 => 'Mostra Offerte',
-                    'show-sku'                    => 'Mostra SKU',
-                    'categories'                  => 'Categorie',
-                    'categories-info'             => '"Categorie" si riferiscono a gruppi o classificazioni che aiutano a organizzare e raggruppare prodotti o articoli simili per una navigazione più semplice.',
-                    'show-search-input-field'     => 'Mostra Campo di Input di Ricerca',
+                    'info'  => 'Imposta prodotti e categorie.',
+                    'title' => 'Snippet Ricchi',
+
+                    'products' => [
+                        'enable'          => 'Abilita',
+                        'show-weight'     => 'Mostra Peso',
+                        'show-categories' => 'Mostra Categorie',
+                        'show-images'     => 'Mostra Immagini',
+                        'show-reviews'    => 'Mostra Recensioni',
+                        'show-ratings'    => 'Mostra Valutazioni',
+                        'show-offers'     => 'Mostra Offerte',
+                        'show-sku'        => 'Mostra SKU',
+                        'title'           => 'Prodotti',
+                        'title-info'      => 'Prodotti disponibili per l\'acquisto o l\'uso, offerti da un\'azienda o da un venditore.',
+                    ],
+
+                    'categories' => [
+                        'enable'                  => 'Abilita',
+                        'show-search-input-field' => 'Mostra Campo di Inserimento Ricerca',
+                        'title'                   => 'Categorie',
+                        'title-info'              => '"Categorie" si riferiscono a gruppi o classificazioni che aiutano a organizzare e raggruppare prodotti o articoli simili per una navigazione e ricerca più semplice.',
+                    ],
                 ],
             ],
 
             'customer' => [
-                'title' => 'Cliente',
                 'info'  => 'Cliente',
-            
+                'title' => 'Cliente',
+
                 'address' => [
-                    'title'              => 'Indirizzo',
-                    'info'               => 'Imposta paese, stato, CAP e linee in un indirizzo.',
-                    'requirements'       => 'Requisiti',
-                    'requirements-info'  => 'I requisiti sono le condizioni, le caratteristiche o le specifiche necessarie affinché qualcosa sia soddisfatto, raggiunto o realizzato con successo.',
-                    'country'            => 'Paese',
-                    'state'              => 'Stato',
-                    'zip'                => 'CAP',
-                    'city'               => 'Città',
-                    'information'        => 'Informazioni',
-                    'information-info'   => '"Linee in un indirizzo" si riferiscono a segmenti individuali di un indirizzo, spesso separati da virgole, che forniscono informazioni sulla posizione come numero civico, strada, città e altro.',
-                    'street-lines'       => 'Linee in un Indirizzo',
+                    'info'  => 'Imposta paese, stato, codice postale e linee in un indirizzo stradale.',
+                    'title' => 'Indirizzo',
+
+                    'requirements' => [
+                        'country'    => 'Paese',
+                        'city'       => 'Città',
+                        'state'      => 'Stato',
+                        'title'      => 'Requisiti',
+                        'title-info' => 'I requisiti sono le condizioni, le caratteristiche o le specifiche necessarie affinché qualcosa sia soddisfatto, realizzato o completato con successo.',
+                        'zip'        => 'Codice Postale',
+                    ],
+
+                    'information' => [
+                        'street-lines' => 'Linee in un Indirizzo Stradale',
+                        'title'        => 'Informazioni',
+                        'title-info'   => '"Linee in un indirizzo stradale" si riferiscono a segmenti individuali di un indirizzo, spesso separati da virgole, che forniscono informazioni sulla posizione come numero civico, strada, città e altro.',
+                    ],
                 ],
-            
+
+                'captcha' => [
+                    'info'  => 'Imposta chiave del sito, chiave segreta e stato.',
+                    'title' => 'Captcha',
+
+                    'credentials' => [
+                        'site-key'   => 'Chiave del Sito',
+                        'secret-key' => 'Chiave Segreta',
+                        'status'     => 'Stato',
+                        'title'      => 'Credenziali',
+                        'title-info' => '"Sitemap: Mappa del layout del sito web per i motori di ricerca. Chiave segreta: Codice di sicurezza per la crittografia dei dati, l\'autenticazione o la protezione dell\'accesso alle API."',
+                    ],
+
+                    'validations' => [
+                        'captcha'  => 'Qualcosa è andato storto! Per favore riprova.',
+                        'required' => 'Seleziona il CAPTCHA, per favore.',
+                    ],
+                ],
+
                 'settings' => [
-                    'title'                   => 'Impostazioni',
-                    'settings-info'           => 'Imposta lista dei desideri, iscrizioni alla newsletter, verifica via email e login sociale.',
-                    'wishlist'                => 'Lista dei Desideri',
-                    'wishlist-info'           => '"Lista dei desideri" è una raccolta personalizzata di articoli desiderati, che consente agli utenti di salvare prodotti per riferimenti futuri o un potenziale acquisto.',
-                    'wishlist-share'          => 'Abilita la Condivisione',
-                    'newsletter'              => 'Iscrizione alla Newsletter',
-                    'newsletter-info'         => '"Informazioni sulla newsletter" contengono aggiornamenti, offerte o contenuti condivisi regolarmente tramite e-mail ai destinatari iscritti, mantenendoli informati e coinvolti.',
-                    'newsletter-subscription' => 'Consenti Iscrizione alla Newsletter',
-                    'email'                   => 'Verifica via Email',
-                    'email-info'              => '"Verifica via email" conferma l\'autenticità di un indirizzo email, spesso inviando un link di conferma, migliorando la sicurezza dell\'account e l\'affidabilità della comunicazione.',
-                    'email-verification'      => 'Consenti Verifica via Email',
+                    'settings-info' => 'Imposta lista dei desideri, iscrizioni alla newsletter, verifica dell\'email e accesso tramite social media.',
+                    'title'         => 'Impostazioni',
+
+                    'wishlist' => [
+                        'share'      => 'Abilita Condivisione',
+                        'title'      => 'Lista dei Desideri',
+                        'title-info' => '"Lista dei desideri" è una raccolta personalizzata di articoli desiderati, che consente agli utenti di salvare prodotti per futuri riferimenti o potenziali acquisti.',
+                    ],
+
+                    'newsletter' => [
+                        'subscription' => 'Permetti Iscrizione alla Newsletter',
+                        'title'        => 'Iscrizione alla Newsletter',
+                        'title-info'   => '"Informazioni sulla newsletter" contengono aggiornamenti, offerte o contenuti condivisi regolarmente tramite e-mail ai sottoscrittori, tenendoli informati e coinvolti.',
+                    ],
+
+                    'email' => [
+                        'email-verification' => 'Abilita Verifica dell\'Email',
+                        'title'              => 'Verifica dell\'Email',
+                        'title-info'         => '"La verifica dell\'email" conferma l\'autenticità di un indirizzo email, spesso inviando un link di conferma, migliorando la sicurezza del tuo account e l\'affidabilità delle comunicazioni.',
+                    ],
+
+                    'social-login' => [
+                        'enable-facebook'   => 'Abilita Facebook',
+                        'enable-twitter'    => 'Abilita Twitter',
+                        'enable-google'     => 'Abilita Google',
+                        'enable-linkedin'   => 'Abilita LinkedIn',
+                        'enable-github'     => 'Abilita Github',
+                        'social-login'      => 'Accesso tramite Social Media',
+                        'social-login-info' => '"Accesso tramite social media" consente agli utenti di accedere ai siti web utilizzando i loro account dei social media, semplificando i processi di registrazione e accesso per maggiore comodità.',
+                    ],
                 ],
             ],
-            
+
             'email' => [
-                'title' => 'Email',
                 'info'  => 'Email',
-            
+                'title' => 'Email',
+
                 'email-settings' => [
-                    'title'                  => 'Impostazioni Email',
-                    'info'                   => 'Imposta il nome del mittente delle email, l\'indirizzo email del negozio, il nome dell\'amministratore e l\'indirizzo email dell\'amministratore.',
-                    'email-sender-name'      => 'Nome del Mittente delle Email',
-                    'email-sender-name-tip'  => 'Questo nome sarà visualizzato nella casella di posta del cliente',
-                    'shop-email-from'        => 'Indirizzo Email del Negozio',
-                    'shop-email-from-tip'    => 'L\'indirizzo email di questo canale per inviare email ai tuoi clienti',
-                    'admin-name'             => 'Nome Amministratore',
-                    'admin-name-tip'         => 'Questo nome sarà visualizzato in tutte le email amministrative',
-                    'admin-email'            => 'Email Amministratore',
-                    'admin-email-tip'        => 'L\'indirizzo email dell\'amministratore per questo canale per ricevere email',
-                    'admin-page-limit'       => 'Numero Predefinito di Elementi per Pagina (Amministratore)',
+                    'admin-name'            => 'Nome Admin',
+                    'admin-name-tip'        => 'Questo nome verrà visualizzato in tutte le email dell\'admin',
+                    'admin-email'           => 'Email Admin',
+                    'admin-email-tip'       => 'L\'indirizzo email dell\'admin per questo canale per ricevere email',
+                    'admin-page-limit'      => 'Elementi Predefiniti Per Pagina (Admin)',
+                    'email-sender-name'     => 'Nome Mittente Email',
+                    'email-sender-name-tip' => 'Questo nome verrà visualizzato nella casella di posta dei clienti',
+                    'info'                  => 'Imposta il nome del mittente dell\'email, l\'indirizzo email del negozio, il nome dell\'admin e l\'indirizzo email dell\'admin.',
+                    'shop-email-from'       => 'Indirizzo Email del Negozio',
+                    'shop-email-from-tip'   => 'L\'indirizzo email di questo canale per inviare email ai tuoi clienti',
+                    'title'                 => 'Impostazioni Email',
                 ],
-            
+
                 'notifications' => [
-                    'title'                                            => 'Notifiche',
-                    'info'                                             => '"Notifica" è un messaggio o un avviso che informa gli utenti su eventi, aggiornamenti o azioni, migliorando il coinvolgimento e la consapevolezza dell\'utente.',
-                    'verification'                                     => 'Invia una email di verifica dopo la registrazione del cliente',
-                    'registration'                                     => 'Invia una email di conferma dopo la registrazione del cliente',
-                    'customer-registration-confirmation-mail-to-admin' => 'Invia una email di conferma all\'amministratore dopo la registrazione del cliente',
+                    'customer-registration-confirmation-mail-to-admin' => 'Invia una email di conferma all\'admin dopo la registrazione del cliente',
                     'customer'                                         => 'Invia le credenziali dell\'account del cliente dopo la registrazione',
+                    'cancel-order'                                     => 'Invia una notifica dopo la cancellazione di un ordine',
+                    'info'                                             => '"Notifica" è un messaggio o un avviso che informa gli utenti sugli eventi, gli aggiornamenti o le azioni, migliorando il coinvolgimento e la consapevolezza dell\'utente.',
                     'new-order'                                        => 'Invia una email di conferma al cliente dopo aver effettuato un nuovo ordine',
-                    'new-admin'                                        => 'Invia una email di conferma all\'amministratore dopo aver effettuato un nuovo ordine',
+                    'new-admin'                                        => 'Invia una email di conferma all\'admin dopo aver effettuato un nuovo ordine',
                     'new-invoice'                                      => 'Invia una email di notifica al cliente dopo aver creato una nuova fattura',
-                    'new-refund'                                       => 'Invia una email di notifica al cliente dopo aver creato un rimborso',
+                    'new-refund'                                       => 'Invia una email di notifica al cliente dopo aver effettuato un rimborso',
                     'new-shipment'                                     => 'Invia una email di notifica al cliente dopo aver creato una spedizione',
-                    'new-inventory-source'                             => 'Invia una email di notifica al sorgente di inventario dopo aver creato una spedizione',
-                    'cancel-order'                                     => 'Invia una notifica dopo aver annullato un ordine',
+                    'new-inventory-source'                             => 'Invia una email di notifica all\'inventario dopo aver creato una spedizione',
+                    'registration'                                     => 'Invia una email di conferma dopo la registrazione del cliente',
+                    'title'                                            => 'Notifiche',
+                    'verification'                                     => 'Invia una email di verifica dopo la registrazione del cliente',
                 ],
             ],
 
             'sales' => [
-                'title' => 'Vendite',
                 'info'  => 'Vendite',
-            
+                'title' => 'Vendite',
+
                 'shipping' => [
-                    'title'          => 'Spedizione',
-                    'info'           => 'Imposta le informazioni di spedizione.',
-                    'origin'         => 'Origine',
-                    'origin-info'    => 'L\'origine della spedizione si riferisce al luogo in cui le merci o i prodotti hanno origine prima di essere trasportati alla destinazione.',
-                    'country'        => 'Paese',
-                    'state'          => 'Stato',
-                    'zip'            => 'CAP',
-                    'city'           => 'Città',
-                    'street-address' => 'Indirizzo',
-                    'store-name'     => 'Nome del Negozio',
-                    'vat-number'     => 'Numero di Partita IVA',
-                    'contact-number' => 'Numero di Contatto',
-                    'bank-details'   => 'Dettagli Bancari',
+                    'info'  => 'Imposta le informazioni sulla spedizione.',
+                    'title' => 'Spedizione',
+
+                    'origin' => [
+                        'bank-details'   => 'Dettagli Bancari',
+                        'contact-number' => 'Numero di Contatto',
+                        'city'           => 'Città',
+                        'country'        => 'Paese',
+                        'state'          => 'Stato',
+                        'street-address' => 'Indirizzo Stradale',
+                        'store-name'     => 'Nome del Negozio',
+                        'title'          => 'Origine',
+                        'title-info'     => 'L\'origine della spedizione si riferisce al luogo in cui le merci o i prodotti hanno origine prima di essere trasportati alla loro destinazione.',
+                        'vat-number'     => 'Partita IVA',
+                        'zip'            => 'CAP',
+                    ],
                 ],
-            
+
                 'shipping-methods' => [
-                    'page-title'              => 'Metodi di Spedizione',
-                    'info'                    => 'Imposta le informazioni sui metodi di spedizione',
-                    'free-shipping'           => 'Spedizione Gratuita',
-                    'free-shipping-info'      => '"Spedizione gratuita" si riferisce a un metodo di spedizione in cui il costo della spedizione è annullato, e il venditore copre le spese di spedizione per consegnare la merce all\'acquirente.',
-                    'flat-rate-shipping'      => 'Spedizione a Tariffa Fissa',
-                    'flat-rate-shipping-info' => 'La spedizione a tariffa fissa è un metodo di spedizione in cui viene addebitata una tariffa fissa per la spedizione, indipendentemente dal peso, dalle dimensioni o dalla distanza del pacchetto. Questo semplifica i costi di spedizione e può essere vantaggioso sia per gli acquirenti che per i venditori.',
-                    'title'                   => 'Titolo',
-                    'description'             => 'Descrizione',
-                    'rate'                    => 'Tariffa',
-                    'status'                  => 'Stato',
-                    'type'                    => 'Tipo',
+                    'info'  => 'Imposta le informazioni sui metodi di spedizione',
+                    'title' => 'Metodi di Spedizione',
+
+                    'free-shipping' => [
+                        'description' => 'Descrizione',
+                        'page-title'  => 'Spedizione Gratuita',
+                        'status'      => 'Stato',
+                        'title-info'  => '"Spedizione gratuita" si riferisce a un metodo di spedizione in cui il costo della spedizione viene annullato e il venditore copre le spese di spedizione per la consegna di merci all\'acquirente.',
+                        'title'       => 'Titolo',
+                    ],
+
+                    'flat-rate-shipping' => [
+                        'description' => 'Descrizione',
+                        'page-title'  => 'Spedizione a Tariffa Fissa',
+                        'rate'        => 'Tariffa',
+                        'status'      => 'Stato',
+                        'title'       => 'Titolo',
+                        'title-info'  => 'La spedizione a tariffa fissa è un metodo di spedizione in cui viene addebitata una tariffa fissa per la spedizione, indipendentemente dal peso, dal volume o dalla destinazione del pacco.',
+                    ],
                 ],
-            
+
                 'payment-methods' => [
                     'page-title'                  => 'Metodi di Pagamento',
-                    'info'                        => 'Configura le informazioni sui metodi di pagamento',
+                    'info'                        => 'Imposta informazioni sui metodi di pagamento',
                     'cash-on-delivery'            => 'Pagamento alla Consegna',
-                    'cash-on-delivery-info'       => 'Metodo di pagamento in cui i clienti pagano in contanti al momento della consegna dei beni o servizi.',
+                    'cash-on-delivery-info'       => 'Metodo di pagamento in cui i clienti pagano in contanti al momento della consegna dei beni o dei servizi a domicilio.',
                     'description'                 => 'Descrizione',
                     'title'                       => 'Titolo',
                     'instructions'                => 'Istruzioni',
-                    'generate-invoice'            => 'Genera automaticamente la fattura dopo l’effettuazione dell’ordine',
+                    'generate-invoice'            => 'Genera automaticamente la fattura dopo aver effettuato un ordine',
                     'set-invoice-status'          => 'Imposta lo stato della fattura dopo la creazione della fattura a',
-                    'generate-invoice-applicable' => 'Applicabile se è abilitata la generazione automatica delle fatture',
+                    'generate-invoice-applicable' => 'Applicabile se la generazione automatica della fattura è abilitata',
                     'status'                      => 'Stato',
-                    'sort_order'                  => 'Ordinamento',
+                    'sort-order'                  => 'Ordina per',
                     'set-order-status'            => 'Imposta lo stato dell\'ordine dopo la creazione della fattura a',
-                    'pending'                     => 'In Attesa',
+                    'pending'                     => 'In attesa',
                     'paid'                        => 'Pagato',
-                    'sandbox'                     => 'Ambiente di Test',
+                    'sandbox'                     => 'Ambiente di Prova',
                     'pending-payment'             => 'Pagamento in Sospeso',
                     'processing'                  => 'In Elaborazione',
-                    'money-transfer'              => 'Bonifico Bancario',
-                    'money-transfer-info'         => 'Il trasferimento di denaro da una persona o da un conto all\'altro, spesso in forma elettronica, per vari scopi come transazioni o rimesse.',
-                    'mailing-address'             => 'Indirizzo di Spedizione',
+                    'money-transfer'              => 'Trasferimento di Denaro',
+                    'money-transfer-info'         => 'Trasferimento di fondi da una persona o un conto all\'altro, spesso in modo elettronico, per vari scopi come transazioni o rimesse.',
+                    'mailing-address'             => 'Invia il Controllo a',
                     'paypal-standard'             => 'PayPal Standard',
-                    'paypal-standard-info'        => 'PayPal Standard è una semplice opzione di pagamento PayPal per attività online che consente ai clienti di pagare utilizzando i loro account PayPal o le carte di credito/debito.',
-                    'paypal-smart-button'         => 'Pulsante PayPal',
-                    'paypal-smart-button-info'    => 'Pulsante PayPal Smart: semplifica i pagamenti online con pulsanti personalizzabili per transazioni sicure e multimediali su siti web e app.',
+                    'paypal-standard-info'        => 'PayPal Standard è una semplice opzione di pagamento PayPal per le attività online, che consente ai clienti di pagare utilizzando i loro account PayPal o carte di credito/debito.',
+                    'paypal-smart-button'         => 'PayPal',
+                    'paypal-smart-button-info'    => 'Pulsante PayPal Smart: semplifica i pagamenti online con pulsanti personalizzabili per transazioni sicure e multi-metodo su siti web e app.',
                     'client-id'                   => 'ID Cliente',
                     'client-id-info'              => 'Usa "sb" per i test.',
                     'client-secret'               => 'Chiave Segreta del Cliente',
                     'client-secret-info'          => 'Aggiungi qui la tua chiave segreta',
                     'accepted-currencies'         => 'Valute Accettate',
-                    'accepted-currencies-info'    => 'Aggiungi i codici delle valute separati da virgola, ad esempio USD, INR,...',
+                    'accepted-currencies-info'    => 'Aggiungi codici di valuta separati da virgola, ad esempio USD, EUR, ...',
                     'business-account'            => 'Account Aziendale',
                 ],
-            
+
                 'order-settings' => [
-                    'title'                        => 'Impostazioni dell\'Ordine',
-                    'info'                         => 'Imposta numeri d\'ordine e ordini minimi.',
-                    'order-number'                 => 'Impostazioni del Numero d\'Ordine',
-                    'order-number-info'            => 'Identificatore unico assegnato a un ordine specifico del cliente, che aiuta nel tracciamento, nella comunicazione e nel riferimento durante il processo di acquisto.',
-                    'order-number-prefix'          => 'Prefisso del Numero d\'Ordine',
-                    'order-number-length'          => 'Lunghezza del Numero d\'Ordine',
-                    'order-number-suffix'          => 'Suffisso del Numero d\'Ordine',
-                    'order-number-generator-class' => 'Generatore del Numero d\'Ordine',
-                    'minimum-order'                => 'Impostazioni d\'Ordine Minimo',
-                    'minimum-order-info'           => 'Criteri configurati che specificano la quantità o il valore minimo richiesto affinché un ordine venga elaborato o abbia diritto a benefici.',
-                    'minimum-order-amount'         => 'Importo d\'Ordine Minimo',
+                    'info'  => 'Imposta numeri d\'ordine e ordini minimi.',
+                    'title' => 'Impostazioni d\'Ordine',
+
+                    'order-number' => [
+                        'generator'  => 'Generatore di Numero d\'Ordine',
+                        'length'     => 'Lunghezza del Numero d\'Ordine',
+                        'prefix'     => 'Prefisso del Numero d\'Ordine',
+                        'suffix'     => 'Suffisso del Numero d\'Ordine',
+                        'title'      => 'Impostazioni del Numero d\'Ordine',
+                        'title-info' => 'Identificatore unico assegnato a un ordine specifico del cliente, che aiuta nel tracciamento, nella comunicazione e nel riferimento durante il processo d\'acquisto.',
+                    ],
+
+                    'minimum-order' => [
+                        'minimum-order-amount' => 'Importo Minimo d\'Ordine',
+                        'title'                => 'Impostazioni d\'Ordine Minimo',
+                        'title-info'           => 'Criteri configurati che specificano la quantità o il valore minimo richiesto per l\'elaborazione di un ordine o per beneficiare di vantaggi.',
+                    ],
                 ],
-            
+
                 'invoice-settings' => [
-                    'title'                          => 'Impostazioni Fattura',
-                    'info'                           => 'Imposta il numero di fattura, i termini di pagamento, il design dello scontrino della fattura e i promemoria della fattura.',
-                    'invoice-number'                 => 'Impostazioni del Numero di Fattura',
-                    'invoice-number-info'            => 'Configurazione delle regole o dei parametri per la generazione e l\'assegnazione di numeri di identificazione unici alle fatture per scopi organizzativi e di tracciamento.',
-                    'invoice-number-prefix'          => 'Prefisso del Numero di Fattura',
-                    'invoice-number-length'          => 'Lunghezza del Numero di Fattura',
-                    'invoice-number-suffix'          => 'Suffisso del Numero di Fattura',
-                    'invoice-number-generator-class' => 'Generatore del Numero di Fattura',
-                    'payment-terms'                  => 'Termini di Pagamento',
-                    'payment-terms-info'             => 'Condizioni concordate che stabiliscono quando e come il pagamento per beni o servizi dovrebbe essere effettuato dall\'acquirente al venditore.',
-                    'due-duration'                   => 'Durata Scadenza',
-                    'due-duration-day'               => ':due-duration Giorno',
-                    'due-duration-days'              => ':due-duration Giorni',
-                    'invoice-slip-design'            => 'Design Scontrino Fattura',
-                    'invoice-slip-design-info'       => 'Layout visivo e formattazione di uno scontrino di fattura, inclusi il branding aziendale, la dettagliata del prodotto, i prezzi e le informazioni di pagamento per una presentazione professionale.',
-                    'logo'                           => 'Logo',
-                    'default'                        => 'Predefinito',
-                    'invoice-reminders'              => 'Promemoria della Fattura',
-                    'invoice-reminders-info'         => 'Comunicazioni o notifiche automatizzate inviate ai clienti per ricordare loro i pagamenti futuri o scaduti delle fatture.',
-                    'maximum-limit-of-reminders'     => 'Limite Massimo dei Promemoria',
-                    'interval-between-reminders'     => 'Intervallo tra i Promemoria',
+                    'info'  => 'Imposta numero della fattura, termini di pagamento, design della scheda della fattura e promemoria della fattura.',
+                    'title' => 'Impostazioni della Fattura',
+
+                    'invoice-number' => [
+                        'generator'  => 'Generatore di Numero della Fattura',
+                        'length'     => 'Lunghezza del Numero della Fattura',
+                        'prefix'     => 'Prefisso del Numero della Fattura',
+                        'suffix'     => 'Suffisso del Numero della Fattura',
+                        'title'      => 'Impostazioni del Numero della Fattura',
+                        'title-info' => 'Configurazione di regole o parametri per la generazione e l\'assegnazione di numeri di identificazione unici alle fatture per scopi organizzativi e di tracciamento.',
+                    ],
+
+                    'payment-terms' => [
+                        'due-duration'      => 'Durata Scadenza',
+                        'due-duration-day'  => ':durata-scadenza Giorno',
+                        'due-duration-days' => ':durata-scadenza Giorni',
+                        'title'             => 'Termini di Pagamento',
+                        'title-info'        => 'Condizioni concordate che stabiliscono quando e come il pagamento dei beni o dei servizi deve essere effettuato dall\'acquirente al venditore.',
+                    ],
+
+                    'invoice-slip-design' => [
+                        'logo'       => 'Logo',
+                        'title'      => 'Design della Scheda della Fattura',
+                        'title-info' => 'Layout visivo e formattazione di una scheda della fattura, inclusi i dettagli aziendali, l\'elenco degli articoli, i prezzi e le informazioni di pagamento per una presentazione professionale.',
+                    ],
+
+                    'invoice-reminders' => [
+                        'interval-between-reminders' => 'Intervallo tra i Promemoria',
+                        'maximum-limit-of-reminders' => 'Limite Massimo di Promemoria',
+                        'title'                      => 'Promemoria della Fattura',
+                        'title-info'                 => 'Notifiche o comunicazioni automatizzate inviate ai clienti per ricordare loro i pagamenti imminenti o scaduti delle fatture.',
+                    ],
                 ],
             ],
-        ]
+
+            'taxes' => [
+                'title' => 'Taxes',
+
+                'catalog' => [
+                    'title'      => 'Catalog',
+                    'title-info' => 'Set pricing and default location calculations',
+
+                    'pricing' => [
+                        'title'         => 'Pricing',
+                        'title-info'    => 'Details about the cost of goods or services, including base price, discounts, taxes, and additional charges.information',
+                        'tax-inclusive' => 'Tax inclusive',
+                    ],
+
+                    'default-location-calculation' => [
+                        'default-country'   => 'Default Country',
+                        'default-state'     => 'Default State',
+                        'default-post-code' => 'Default Post Code',
+                        'title'             => 'Default Location Calculation',
+                        'title-info'        => 'Automated determination of a standard or initial location based on predefined factors or settings.',
+                    ],
+                ],
+            ],
+        ],
     ],
 
     'components' => [
@@ -2932,7 +3099,7 @@ return [
                 'my-account'    => 'Il mio Account',
                 'logout'        => 'Esci',
                 'visit-shop'    => 'Visita il Negozio',
-    
+
                 'mega-search' => [
                     'title'                           => 'Ricerca Avanzata',
                     'products'                        => 'Prodotti',
@@ -2950,7 +3117,7 @@ return [
                     'explore-all-customers'           => 'Esplora tutti i clienti',
                 ],
             ],
-    
+
             'sidebar' => [
                 'collapse'                 => 'Comprimi',
                 'dashboard'                => 'Dashboard',
@@ -2993,7 +3160,7 @@ return [
                 'mode'                     => 'Modalità Scura',
             ],
         ],
-    
+
         'datagrid' => [
             'index' => [
                 'no-records-selected'              => 'Nessun record è stato selezionato.',
@@ -3001,31 +3168,31 @@ return [
                 'must-select-a-mass-action-option' => 'Devi selezionare un\'opzione dell\'azione di massa.',
                 'sure-want-to-perform-this-action' => 'Sei sicuro di voler eseguire questa azione?',
             ],
-            
+
             'toolbar' => [
                 'mass-actions' => [
                     'select-action' => 'Seleziona Azione',
                     'select-option' => 'Seleziona Opzione',
                     'submit'        => 'Invia',
                 ],
-    
+
                 'filter' => [
                     'title' => 'Filtra',
                 ],
-    
+
                 'search' => [
                     'title' => 'Cerca',
                 ],
             ],
-    
+
             'filters' => [
                 'title' => 'Applica Filtri',
-    
+
                 'custom-filters' => [
                     'title'     => 'Filtri Personalizzati',
                     'clear-all' => 'Cancella Tutto',
                 ],
-    
+
                 'date-options' => [
                     'today'             => 'Oggi',
                     'yesterday'         => 'Ieri',
@@ -3037,13 +3204,13 @@ return [
                     'this-year'         => 'Questo Anno',
                 ],
             ],
-    
+
             'table' => [
                 'actions'              => 'Azioni',
                 'no-records-available' => 'Nessun Record Disponibile.',
             ],
         ],
-    
+
         'products' => [
             'search' => [
                 'title'       => 'Seleziona Prodotti',
@@ -3060,7 +3227,7 @@ return [
                 'add-image-btn'     => 'Aggiungi Immagine',
                 'allowed-types'     => 'png, jpeg, jpg',
                 'not-allowed-error' => 'Sono consentiti solo file immagine (.jpeg, .jpg, .png, ..).',
-    
+
                 'placeholders'  => [
                     'front'     => 'Fronte',
                     'next'      => 'Successivo',
@@ -3069,13 +3236,13 @@ return [
                     'zoom'      => 'Zoom',
                 ],
             ],
-        
+
             'videos' => [
                 'add-video-btn'     => 'Aggiungi Video',
                 'allowed-types'     => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Sono consentiti solo file video (.mp4, .mov, .ogg ..).',
             ],
-        ]
+        ],
     ],
 
     'acl' => [
@@ -3128,38 +3295,38 @@ return [
         'sitemaps'                 => 'Sitemap',
         'newsletter-subscriptions' => 'Iscrizioni alla Newsletter',
     ],
-    
+
     'errors' => [
         'go-back'   => 'Torna Indietro',
         'dashboard' => 'Dashboard',
         'support'   => 'Se il problema persiste, contattaci su <a href=":link" class=":class">:email</a> per assistenza.',
-    
+
         '404' => [
             'title'       => '404 Pagina Non Trovata',
             'description' => 'Ops! La pagina che stai cercando è in vacanza. Sembra che non siamo riusciti a trovare ciò che cercavi.',
         ],
-    
+
         '401' => [
             'title'       => '401 Non Autorizzato',
             'description' => 'Ops! Sembra che tu non abbia il permesso di accedere a questa pagina. Sembra che tu stia mancando le credenziali necessarie.',
         ],
-    
+
         '403' => [
             'title'       => '403 Accesso Negato',
             'description' => 'Ops! Questa pagina è fuori limite. Sembra che tu non abbia le autorizzazioni necessarie per visualizzare questo contenuto.',
         ],
-    
+
         '500' => [
             'title'       => '500 Errore Interno del Server',
             'description' => 'Ops! Qualcosa è andato storto. Sembra che stiamo avendo problemi nel caricare la pagina che stai cercando.',
         ],
-    
+
         '503' => [
             'title'       => '503 Servizio Non Disponibile',
             'description' => 'Ops! Sembra che siamo temporaneamente offline per manutenzione. Ti preghiamo di tornare più tardi.',
-        ]
+        ],
     ],
-    
+
     'export' => [
         'export'           => 'Esporta',
         'import'           => 'Importa',
@@ -3178,7 +3345,7 @@ return [
         'no-records'       => 'Niente da esportare',
         'illegal-format'   => 'Errore! Questo tipo di formato non è supportato o è un formato illegale',
     ],
-    
+
     'validations' => [
         'slug-being-used' => 'Questo slug è in uso in categorie o prodotti.',
         'slug-reserved'   => 'Questo slug è riservato.',
@@ -3187,7 +3354,7 @@ return [
     'footer' => [
         'copy-right' => 'Realizzato da <a href="https://bagisto.com/" target="_blank">Bagisto</a>, Un Progetto della Comunità di <a href="https://webkul.com/" target="_blank">Webkul</a>',
     ],
-    
+
     'emails' => [
         'dear'   => 'Caro :customer_name',
         'thanks' => 'Se hai bisogno di assistenza, ti preghiamo di contattarci su <a href=":link" style=":style">:email</a>.<br/>Grazie!',
@@ -3200,7 +3367,7 @@ return [
                 'reset-password' => 'Ripristina Password',
             ],
         ],
-    
+
         'orders' => [
             'created' => [
                 'subject'  => 'Conferma del Nuovo Ordine',
@@ -3208,42 +3375,42 @@ return [
                 'greeting' => 'Hai un nuovo ordine :order_id effettuato il :created_at',
                 'summary'  => 'Riepilogo dell\'Ordine',
             ],
-    
+
             'invoiced' => [
                 'subject'  => 'Conferma della Nuova Fattura',
                 'title'    => 'Conferma della Fattura!',
                 'greeting' => 'La tua fattura #:invoice_id per l\'ordine :order_id è stata creata il :created_at',
                 'summary'  => 'Riepilogo della Fattura',
             ],
-    
+
             'shipped' => [
                 'subject'  => 'Conferma della Nuova Spedizione',
                 'title'    => 'Ordine Spedito!',
                 'greeting' => 'Hai spedito l\'ordine :order_id effettuato il :created_at',
                 'summary'  => 'Riepilogo della Spedizione',
             ],
-    
+
             'inventory-source' => [
                 'subject'  => 'Conferma della Nuova Spedizione',
                 'title'    => 'Ordine Spedito!',
                 'greeting' => 'Hai spedito l\'ordine :order_id effettuato il :created_at',
                 'summary'  => 'Riepilogo della Spedizione',
             ],
-    
+
             'refunded' => [
                 'subject'  => 'Conferma del Nuovo Rimborso',
                 'title'    => 'Ordine Rimborsato!',
                 'greeting' => 'Hai rimborsato l\'ordine :order_id effettuato il :created_at',
                 'summary'  => 'Riepilogo del Rimborso',
             ],
-    
+
             'canceled' => [
                 'subject'  => 'Nuovo Ordine Annullato',
                 'title'    => 'Ordine Annullato!',
                 'greeting' => 'Hai annullato l\'ordine :order_id effettuato il :created_at',
                 'summary'  => 'Riepilogo dell\'Ordine',
             ],
-    
+
             'shipping-address'  => 'Indirizzo di Spedizione',
             'billing-address'   => 'Indirizzo di Fatturazione',
             'contact'           => 'Contatto',

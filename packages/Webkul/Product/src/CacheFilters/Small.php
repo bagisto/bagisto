@@ -15,12 +15,12 @@ class Small implements FilterInterface
      */
     public function applyFilter(Image $image)
     {
-        $width = core()->getConfigData('catalog.products.cache-small-image.width')
-            ? core()->getConfigData('catalog.products.cache-small-image.width')
+        $width = core()->getConfigData('catalog.products.cache_small_image.width')
+            ? core()->getConfigData('catalog.products.cache_small_image.width')
             : 100;
 
-        $height = core()->getConfigData('catalog.products.cache-small-image.height')
-            ? core()->getConfigData('catalog.products.cache-small-image.height')
+        $height = core()->getConfigData('catalog.products.cache_small_image.height')
+            ? core()->getConfigData('catalog.products.cache_small_image.height')
             : 100;
 
         return $image->fit($width, $height);

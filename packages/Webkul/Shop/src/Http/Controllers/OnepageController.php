@@ -21,7 +21,7 @@ class OnepageController extends Controller
          */
         if (
             ! auth()->guard('customer')->check()
-            && ! core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')
+            && ! core()->getConfigData('catalog.products.guest_checkout.allow_guest_checkout')
         ) {
             return redirect()->route('shop.customer.session.index');
         }
@@ -61,7 +61,7 @@ class OnepageController extends Controller
         /**
          * If cart minimum order amount is not satisfied then redirect back to the cart page
          */
-        $minimumOrderAmount = (float) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?: 0;
+        $minimumOrderAmount = (float) core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: 0;
 
         if (! $cart->checkMinimumOrder()) {
             session()->flash('warning', trans('shop::app.checkout.cart.minimum-order-message', [

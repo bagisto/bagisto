@@ -15,12 +15,12 @@ class Medium implements FilterInterface
      */
     public function applyFilter(Image $image)
     {
-        $width = core()->getConfigData('catalog.products.cache-medium-image.width') != ''
-            ? core()->getConfigData('catalog.products.cache-medium-image.width')
+        $width = core()->getConfigData('catalog.products.cache_medium_image.width') != ''
+            ? core()->getConfigData('catalog.products.cache_medium_image.width')
             : 350;
 
-        $height = core()->getConfigData('catalog.products.cache-medium-image.height') != ''
-            ? core()->getConfigData('catalog.products.cache-medium-image.height')
+        $height = core()->getConfigData('catalog.products.cache_medium_image.height') != ''
+            ? core()->getConfigData('catalog.products.cache_medium_image.height')
             : 360;
 
         return $image->fit($width, $height);
