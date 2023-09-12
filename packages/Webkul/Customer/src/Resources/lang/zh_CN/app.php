@@ -20,6 +20,17 @@ return [
 
     'forget_password' => [
         'reset_link_sent' => '我们已通过电子邮件发送您的重置密码链接.',
-        'email_not_exist' => "我们找不到具有该电子邮件地址的用户",
+        'email_not_exist' => '我们找不到具有该电子邮件地址的用户',
+    ],
+
+    'admin' => [
+        'system' => [
+            'captcha' => [
+                'validations' => [
+                    'required' => '请选择验证码',
+                    'captcha'  => '出问题了! 请再试一次.',
+                ],
+            ],
+        ],
     ],
 ];

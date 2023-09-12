@@ -1,3 +1,4 @@
+
 <?php
 
 return [
@@ -20,6 +21,17 @@ return [
 
     'forget_password' => [
         'reset_link_sent' => 'Şifre sıfırlama bağlantınızı e-posta ile gönderdik.',
-        'email_not_exist' => "Bu e-posta adresine sahip bir kullanıcı bulamıyoruz",
+        'email_not_exist' => 'Bu e-posta adresine sahip bir kullanıcı bulamıyoruz',
+    ],
+
+    'admin' => [
+        'system' => [
+            'captcha' => [
+                'validations' => [
+                    'required' => 'Lütfen CAPTCHA\'yı seçin',
+                    'captcha'  => 'Bir şeyler yanlış gitti! Lütfen tekrar deneyin.',
+                ],
+            ],
+        ],
     ],
 ];
