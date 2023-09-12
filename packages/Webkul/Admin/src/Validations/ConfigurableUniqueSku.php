@@ -54,7 +54,11 @@ class ConfigurableUniqueSku implements Rule
          * First we will check sku in all the products except the
          * current variant ids.
          */
-        if ($productRepository->whereIn('sku', $requestedSkus)->exists()) {
+        if (
+            $productRepository->whereIn('sku', $requestedSkus)
+                ->whereNotIn('id', $this->currentIds)
+                ->exists()
+        ) {
             return false;
         }
 
