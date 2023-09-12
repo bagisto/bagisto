@@ -1872,9 +1872,19 @@ return [
             ],
 
             'cart-rules-coupons' => [
-                'cart-rule-not-defined-error' => 'قانون سبد خرید مشخص نشده است و نمی‌تواند حذف شود',
+                'cart-rule-not-defined-error' => 'قاعده سبد خرید قابل حذف نیست',
+                'delete-success'              => 'کد تخفیف قاعده سبد خرید با موفقیت حذف شد',
+                'mass-delete-success'         => 'موارد انتخاب شده با موفقیت حذف شدند',
                 'success'                     => ':name با موفقیت ایجاد شد',
-                'mass-delete-success'         => 'حذف دسته‌ای قوانین سبد خرید با موفقیت انجام شد'
+            
+                'datagrid' => [
+                    'coupon-code'     => 'کد تخفیف',
+                    'created-date'    => 'تاریخ ایجاد',
+                    'delete'          => 'حذف',
+                    'expiration-date' => 'تاریخ انقضا',
+                    'id'              => 'شناسه',
+                    'times-used'      => 'تعداد مرتبه استفاده شده',
+                ],
             ],
         ],
 

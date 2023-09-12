@@ -1872,9 +1872,19 @@ return [
             ],
 
             'cart-rules-coupons' => [
-                'cart-rule-not-defined-error' => 'Правило Кошика не може бути видалено',
-                'success'                     => ':name Успішно Створено',
-                'mass-delete-success'         => 'Масове Видалення Правил Кошика Успішно',
+                'cart-rule-not-defined-error' => 'Правило кошика не можна видалити',
+                'delete-success'              => 'Купон правила кошика успішно видалено',
+                'mass-delete-success'         => 'Вибрані елементи успішно видалено',
+                'success'                     => ':name успішно створено',
+            
+                'datagrid' => [
+                    'coupon-code'     => 'Код купона',
+                    'created-date'    => 'Дата створення',
+                    'delete'          => 'Видалити',
+                    'expiration-date' => 'Дата закінчення',
+                    'id'              => 'ID',
+                    'times-used'      => 'Кількість використань',
+                ],
             ],
         ],
 

@@ -1873,9 +1873,20 @@ return [
 
             'cart-rules-coupons' => [
                 'cart-rule-not-defined-error' => 'Winkelwagenregel kan niet worden verwijderd',
+                'delete-success'              => 'Winkelwagenregelcoupon succesvol verwijderd',
+                'mass-delete-success'         => 'Geselecteerde items succesvol verwijderd',
                 'success'                     => ':name succesvol aangemaakt',
-                'mass-delete-success'         => 'Winkelwagenregel Massaal succesvol verwijderd',
+            
+                'datagrid' => [
+                    'coupon-code'     => 'Couponcode',
+                    'created-date'    => 'Aanmaakdatum',
+                    'delete'          => 'Verwijderen',
+                    'expiration-date' => 'Vervaldatum',
+                    'id'              => 'ID',
+                    'times-used'      => 'Aantal keren gebruikt',
+                ],
             ],
+            
         ],
 
         'sitemaps' => [

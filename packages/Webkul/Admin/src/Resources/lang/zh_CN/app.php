@@ -1873,8 +1873,18 @@ return [
 
             'cart-rules-coupons' => [
                 'cart-rule-not-defined-error' => '购物车规则无法删除',
-                'success'                     => ':name 创建成功',
-                'mass-delete-success'         => '购物车规则批量删除成功'
+                'delete-success'              => '购物车规则优惠券成功删除',
+                'mass-delete-success'         => '成功删除所选项目',
+                'success'                     => '成功创建 :name',
+            
+                'datagrid' => [
+                    'coupon-code'     => '优惠券代码',
+                    'created-date'    => '创建日期',
+                    'delete'          => '删除',
+                    'expiration-date' => '到期日期',
+                    'id'              => 'ID',
+                    'times-used'      => '使用次数',
+                ],
             ],
         ],
 

@@ -1872,9 +1872,19 @@ return [
             ],
         
             'cart-rules-coupons' => [
-                'cart-rule-not-defined-error'  => 'La regola del carrello non può essere eliminata',
-                'success'                      => ':name Creato con Successo',
-                'mass-delete-success'          => 'Eliminazione di Massa delle Regole del Carrello completata con Successo',
+                'cart-rule-not-defined-error' => 'La regola del carrello non può essere eliminata',
+                'delete-success'              => 'Coupon della regola del carrello eliminato con successo',
+                'mass-delete-success'         => 'Elementi selezionati eliminati con successo',
+                'success'                     => ':name creato con successo',
+            
+                'datagrid' => [
+                    'coupon-code'     => 'Codice coupon',
+                    'created-date'    => 'Data di creazione',
+                    'delete'          => 'Elimina',
+                    'expiration-date' => 'Data di scadenza',
+                    'id'              => 'ID',
+                    'times-used'      => 'Volte utilizzato',
+                ],
             ],
         ],
         

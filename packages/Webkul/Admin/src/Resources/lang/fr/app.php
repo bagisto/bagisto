@@ -1873,8 +1873,18 @@ return [
 
             'cart-rules-coupons' => [
                 'cart-rule-not-defined-error' => 'La règle du panier ne peut pas être supprimée',
-                'success' => ':name créée avec succès',
-                'mass-delete-success' => 'Suppression en masse des règles du panier réussie',
+                'delete-success'              => 'Coupon de règle du panier supprimé avec succès',
+                'mass-delete-success'         => 'Éléments sélectionnés supprimés avec succès',
+                'success'                     => ':name créé avec succès',
+            
+                'datagrid' => [
+                    'coupon-code'     => 'Code coupon',
+                    'created-date'    => 'Date de création',
+                    'delete'          => 'Supprimer',
+                    'expiration-date' => 'Date d\'expiration',
+                    'id'              => 'ID',
+                    'times-used'      => 'Utilisations',
+                ],
             ],
         ],
 

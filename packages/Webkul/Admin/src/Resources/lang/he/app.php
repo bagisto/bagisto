@@ -1872,9 +1872,19 @@ return [
             ],
 
             'cart-rules-coupons' => [
-                'cart-rule-not-defined-error' => 'לא ניתן למחוק את כלל עגלת הקניות',
+                'cart-rule-not-defined-error' => 'לא ניתן למחוק כלל עגלת הקניות',
+                'delete-success'              => 'קופון כלל עגלת הקניות נמחק בהצלחה',
+                'mass-delete-success'         => 'פריטים שנבחרו נמחקו בהצלחה',
                 'success'                     => ':name נוצר בהצלחה',
-                'mass-delete-success'         => 'מחיקת כללי עגלת הקניות במספר רב בוצעה בהצלחה',
+            
+                'datagrid' => [
+                    'coupon-code'     => 'קוד קופון',
+                    'created-date'    => 'תאריך יצירה',
+                    'delete'          => 'מחק',
+                    'expiration-date' => 'תאריך תפוגה',
+                    'id'              => 'מזהה',
+                    'times-used'      => 'פעמים בהם השתמש',
+                ],
             ],
         ],
 
