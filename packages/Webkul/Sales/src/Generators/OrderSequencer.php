@@ -24,13 +24,13 @@ class OrderSequencer extends Sequencer
      */
     public function setAllConfigs()
     {
-        $this->prefix = core()->getConfigData('sales.orderSettings.order_number.order_number_prefix');
+        $this->prefix = core()->getConfigData('sales.order_settings.order_number.order_number_prefix');
 
-        $this->length = core()->getConfigData('sales.orderSettings.order_number.order_number_length');
+        $this->length = core()->getConfigData('sales.order_settings.order_number.order_number_length');
 
-        $this->suffix = core()->getConfigData('sales.orderSettings.order_number.order_number_suffix');
+        $this->suffix = core()->getConfigData('sales.order_settings.order_number.order_number_suffix');
 
-        $this->generatorClass = core()->getConfigData('sales.orderSettings.order_number.order_number_generator_class');
+        $this->generatorClass = core()->getConfigData('sales.order_settings.order_number.order_number_generator');
 
         $this->lastId = $this->getLastId();
     }

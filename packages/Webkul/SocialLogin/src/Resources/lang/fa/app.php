@@ -1,17 +1,6 @@
 <?php
 
 return [
-    'admin' => [
-        'system' => [
-            'social-login' => 'سوشیال لاگین',
-            'enable-facebook' => 'فعالسازی فیس بوک',
-            'enable-twitter' => 'فعال سازی توییتر',
-            'enable-google' => 'فعال سازی گوگل',
-            'enable-linkedin' => 'فعال سازی لینکدین',
-            'enable-github' => 'فعال سازی گیت هاب'
-        ]
-    ],
-
     'shop' => [
         'customer' => [
             'login-form' => [

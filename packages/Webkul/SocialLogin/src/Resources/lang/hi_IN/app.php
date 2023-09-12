@@ -1,18 +1,6 @@
 <?php
 
 return [
-    'admin' => [
-        'system' => [
-            'social-login' => 'सामाजिक लॉगिन',
-            'enable-facebook' => 'फेसबुक सक्षम करें',
-            'enable-twitter' => 'ट्विटर सक्षम करें',
-            'enable-google' =>'गूगल सक्षम करें',
-            'enable-twitter' =>  'ट्विटर सक्षम करें',
-            'enable-linkedin' => 'लिंक्डइन सक्षम करें',
-            'enable-github' => 'गीथब सक्षम करें'
-        ]
-    ],
-
     'shop' => [
         'customer' => [
             'login-form' => [

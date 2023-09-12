@@ -16,7 +16,7 @@ class ConfigTableSeeder extends Seeder
 
         DB::table('core_config')->insert([
             'id'           => 1,
-            'code'         => 'catalog.products.guest-checkout.allow-guest-checkout',
+            'code'         => 'catalog.products.guest_checkout.allow_guest_checkout',
             'value'        => '1',
             'channel_code' => null,
             'locale_code'  => null,
@@ -56,7 +56,7 @@ class ConfigTableSeeder extends Seeder
 
         DB::table('core_config')->insert([
             'id'           => 5,
-            'code'         => 'emails.general.notifications.emails.general.notifications.new-order',
+            'code'         => 'emails.general.notifications.emails.general.notifications.new_order',
             'value'        => '1',
             'channel_code' => null,
             'locale_code'  => null,
@@ -66,7 +66,7 @@ class ConfigTableSeeder extends Seeder
 
         DB::table('core_config')->insert([
             'id'           => 6,
-            'code'         => 'emails.general.notifications.emails.general.notifications.new-admin',
+            'code'         => 'emails.general.notifications.emails.general.notifications.new_admin',
             'value'        => '1',
             'channel_code' => null,
             'locale_code'  => null,
@@ -76,7 +76,7 @@ class ConfigTableSeeder extends Seeder
 
         DB::table('core_config')->insert([
             'id'           => 7,
-            'code'         => 'emails.general.notifications.emails.general.notifications.new-invoice',
+            'code'         => 'emails.general.notifications.emails.general.notifications.new_invoice',
             'value'        => '1',
             'channel_code' => null,
             'locale_code'  => null,
@@ -86,7 +86,7 @@ class ConfigTableSeeder extends Seeder
 
         DB::table('core_config')->insert([
             'id'           => 8,
-            'code'         => 'emails.general.notifications.emails.general.notifications.new-refund',
+            'code'         => 'emails.general.notifications.emails.general.notifications.new_refund',
             'value'        => '1',
             'channel_code' => null,
             'locale_code'  => null,
@@ -96,7 +96,7 @@ class ConfigTableSeeder extends Seeder
 
         DB::table('core_config')->insert([
             'id'           => 9,
-            'code'         => 'emails.general.notifications.emails.general.notifications.new-shipment',
+            'code'         => 'emails.general.notifications.emails.general.notifications.new_shipment',
             'value'        => '1',
             'channel_code' => null,
             'locale_code'  => null,
@@ -106,7 +106,7 @@ class ConfigTableSeeder extends Seeder
 
         DB::table('core_config')->insert([
             'id'           => 10,
-            'code'         => 'emails.general.notifications.emails.general.notifications.new-inventory-source',
+            'code'         => 'emails.general.notifications.emails.general.notifications.new_inventory_source',
             'value'        => '1',
             'channel_code' => null,
             'locale_code'  => null,
@@ -116,7 +116,7 @@ class ConfigTableSeeder extends Seeder
 
         DB::table('core_config')->insert([
             'id'           => 11,
-            'code'         => 'emails.general.notifications.emails.general.notifications.cancel-order',
+            'code'         => 'emails.general.notifications.emails.general.notifications.cancel_order',
             'value'        => '1',
             'channel_code' => null,
             'locale_code'  => null,

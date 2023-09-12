@@ -234,8 +234,8 @@
                             },
                         })
                         .then(response => {
-                            if (response.data.data.paymentMethods) {
-                                this.$parent.$refs.vPaymentMethod.paymentMethods = response.data.data.paymentMethods;
+                            if (response.data.data.payment_methods) {
+                                this.$parent.$refs.vPaymentMethod.payment_methods = response.data.data.payment_methods;
                                 
                                 this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = true;
     

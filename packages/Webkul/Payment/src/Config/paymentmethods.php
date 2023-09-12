@@ -1,7 +1,7 @@
 <?php
 return [
-    'cashondelivery'  => [
-        'code'        => 'cashondelivery',
+    'cash_on_delivery'  => [
+        'code'        => 'cash_on_delivery',
         'title'       => 'Cash On Delivery',
         'description' => 'Cash On Delivery',
         'class'       => 'Webkul\Payment\Payment\CashOnDelivery',
@@ -9,8 +9,8 @@ return [
         'sort'        => 1,
     ],
 
-    'moneytransfer'   => [
-        'code'        => 'moneytransfer',
+    'money_transfer'   => [
+        'code'        => 'money_transfer',
         'title'       => 'Money Transfer',
         'description' => 'Money Transfer',
         'class'       => 'Webkul\Payment\Payment\MoneyTransfer',

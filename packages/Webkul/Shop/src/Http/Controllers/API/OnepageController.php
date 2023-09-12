@@ -189,7 +189,7 @@ class OnepageController extends APIController
      */
     public function checkMinimumOrder()
     {
-        $minimumOrderAmount = (float) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?: 0;
+        $minimumOrderAmount = (float) core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: 0;
 
         $status = Cart::checkMinimumOrder();
 
@@ -212,7 +212,7 @@ class OnepageController extends APIController
     {
         $cart = Cart::getCart();
 
-        $minimumOrderAmount = core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?: 0;
+        $minimumOrderAmount = core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: 0;
 
         if (
             auth()->guard('customer')->check()

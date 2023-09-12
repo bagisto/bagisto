@@ -1,18 +1,6 @@
 <?php
 
 return [
-    'admin' => [
-        'system' => [
-            'social-login' => '社交登录',
-            'enable-facebook' => '启用Facebook',
-            'enable-twitter' => '启动Twitter',
-            'enable-google' => '启动Google',
-            'enable-twitter' => '启动Twitter',
-            'enable-linkedin' => '启动LinkedIn',
-            'enable-github' => '启动Github'
-        ]
-    ],
-
     'shop' => [
         'customer' => [
             'login-form' => [

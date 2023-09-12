@@ -98,7 +98,7 @@
                         .then(response => {
                             this.$parent.getOrderSummary();
 
-                            this.$parent.$refs.vPaymentMethod.paymentMethods = response.data.paymentMethods;
+                            this.$parent.$refs.vPaymentMethod.payment_methods = response.data.payment_methods;
                                 
                             this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = true;
 

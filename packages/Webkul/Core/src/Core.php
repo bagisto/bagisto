@@ -44,7 +44,7 @@ class Core
      * every time the `getConfigData` method is called.
      */
     private $coreConfigExceptions = [
-        'catalog.products.guest-checkout.allow-guest-checkout',
+        'catalog.products.guest_checkout.allow_guest_checkout',
     ];
 
     /**

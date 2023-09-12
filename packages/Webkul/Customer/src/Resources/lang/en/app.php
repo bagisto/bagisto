@@ -26,14 +26,6 @@ return [
     'admin' => [
         'system' => [
             'captcha' => [
-                'title'            => 'Captcha',
-                'info'             => 'Set site key, secret key and status.',
-                'credentials'      => 'Credentials',
-                'credentials-info' => '"Sitemap: Website layout map for search engines. Secret key: Secure code for data encryption, authentication, or API access protection."',
-                'site-key'         => 'Site Key',
-                'secret-key'       => 'Secret Key',
-                'status'           => 'Status',
-
                 'validations' => [
                     'required' => 'Please select CAPTCHA',
                     'captcha'  => 'Something went wrong! Please try again.',

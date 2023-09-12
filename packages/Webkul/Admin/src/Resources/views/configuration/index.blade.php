@@ -9,10 +9,6 @@
         <p class="text-[20px] text-gray-800 font-bold">
             @lang('admin::app.configuration.index.title')
         </p>
-
-        <div class="flex gap-x-[10px] items-center">
-            <span class="icon-settings p-[6px] rounded-[6px] text-[24px]  cursor-pointer transition-all hover:bg-gray-200"></span>
-        </div>
     </div>
 
     {{-- Page Content --}}
