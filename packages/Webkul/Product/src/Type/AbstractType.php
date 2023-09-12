@@ -195,7 +195,7 @@ abstract class AbstractType
             ) {
                 $data[$attribute->code] = gettype($data[$attribute->code]) === 'object'
                     ? request()->file($attribute->code)->store('product/' . $product->id)
-                    : null;
+                    : $data[$attribute->code];
             }
 
             $attributeValues = $product->attribute_values
@@ -230,29 +230,31 @@ abstract class AbstractType
             } else {
                 $previousTextValue = $attributeValue->text_value;
 
-                $attributeValue->update([$attribute->column_name => $data[$attribute->code]]);
-
                 if (
                     $attribute->type == 'image'
                     || $attribute->type == 'file'
                 ) {
                     /**
-                     * If $data[$attribute->code] is null, that means someone selected the "delete" option.
+                     * If $data[$attribute->code]['delete'] is not empty, that means someone selected the "delete" option.
                      */
-                    if (! $data[$attribute->code]) {
+                    if (! empty($data[$attribute->code]['delete'])) {
                         Storage::delete($previousTextValue);
 
+                        $data[$attribute->code] = null;
+                    }
                     /**
                      * If $data[$attribute->code] is not equal to the previous one, that means someone has
                      * updated the file or image. In that case, we will remove the previous file.
                      */
-                    } else if (
+                    else if (
                         ! empty($previousTextValue)
                         && $data[$attribute->code] != $previousTextValue
                     ) {
                         Storage::delete($previousTextValue);
                     }
                 }
+
+                $attributeValue->update([$attribute->column_name => $data[$attribute->code]]);
             }
         }
 

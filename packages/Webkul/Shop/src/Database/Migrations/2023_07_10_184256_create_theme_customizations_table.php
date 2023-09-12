@@ -73,9 +73,11 @@ return new class extends Migration
                     'created_at' => $now,
                     'updated_at' => $now,
                     'options'    => json_encode([
-                        'limit'         => 8,
-                        'status'        => true,
-                        'only_children' => true,
+                        'filters' => [
+                            'parent_id'  => 1,
+                            'sort'      => 'asc',
+                            'limit'     => 10,
+                        ],
                     ]),
                 ], [
                     'id'         => 4,

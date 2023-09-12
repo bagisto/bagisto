@@ -200,27 +200,36 @@
                             >
                             </p>
 
-                            <p
-                                class="text-gray-600"
-                                v-if="record.quantity > 0"
-                            >
-                                <span class="text-green-600">
-                                    @{{ "@lang('admin::app.catalog.products.index.datagrid.qty-value')".replace(':qty', record.quantity) }}
-                                </span>
-                            </p>
+                            <!-- Parent Product Quantity -->
+                            <div  v-if="['configurable', 'bundle', 'grouped'].includes(record.type)">
+                                <p class="text-gray-600">
+                                    <span class="text-red-600" v-text="'N/A'"></span>
+                                </p>
+                            </div>
 
-                            <p
-                                class="text-gray-600"
-                                v-else
-                            >
-                                <span class="text-red-600">
-                                    @lang('admin::app.catalog.products.index.datagrid.out-of-stock')
-                                </span>
-                            </p>
+                            <div v-else>
+                                <p
+                                    class="text-gray-600"
+                                    v-if="record.quantity > 0"
+                                >
+                                    <span class="text-green-600">
+                                        @{{ "@lang('admin::app.catalog.products.index.datagrid.qty-value')".replace(':qty', record.quantity) }}
+                                    </span>
+                                </p>
+
+                                <p
+                                    class="text-gray-600"
+                                    v-else
+                                >
+                                    <span class="text-red-600">
+                                        @lang('admin::app.catalog.products.index.datagrid.out-of-stock')
+                                    </span>
+                                </p>
+                            </div>
 
                             <p class="text-gray-600">
                                 @{{ "@lang('admin::app.catalog.products.index.datagrid.id-value')".replace(':id', record.product_id) }}
-                            </p>
+                            </p> 
                         </div>
                     </div>
 
