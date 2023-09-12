@@ -171,11 +171,15 @@
                 open() {
                     this.isOpen = true;
 
+                    document.body.style.overflow = 'hidden';
+
                     this.$emit('open', { isActive: this.isOpen });
                 },
 
                 close() {
                     this.isOpen = false;
+
+                    document.body.style.overflow = 'auto';
 
                     this.$emit('close', { isActive: this.isOpen });
                 }
