@@ -1873,9 +1873,20 @@ return [
 
             'cart-rules-coupons' => [
                 'cart-rule-not-defined-error' => 'Winkelwagenregel kan niet worden verwijderd',
+                'delete-success'              => 'Winkelwagenregelcoupon succesvol verwijderd',
+                'mass-delete-success'         => 'Geselecteerde items succesvol verwijderd',
                 'success'                     => ':name succesvol aangemaakt',
-                'mass-delete-success'         => 'Winkelwagenregel Massaal succesvol verwijderd',
+            
+                'datagrid' => [
+                    'coupon-code'     => 'Couponcode',
+                    'created-date'    => 'Aanmaakdatum',
+                    'delete'          => 'Verwijderen',
+                    'expiration-date' => 'Vervaldatum',
+                    'id'              => 'ID',
+                    'times-used'      => 'Aantal keren gebruikt',
+                ],
             ],
+            
         ],
 
         'sitemaps' => [
@@ -2545,7 +2556,7 @@ return [
                 'add-footer-link-btn'           => 'Voettekstlink toevoegen',
                 'filters'                       => 'Filters',
                 'edit'                          => 'Bewerken',
-                'url'                           => 'URL',
+                'path'                          => 'Pad',
                 'add-link'                      => 'Link toevoegen',
                 'create-slider'                 => 'Slider maken',
                 'slider-image'                  => 'Sliderafbeelding',
@@ -2597,7 +2608,7 @@ return [
                 'select'                        => 'Selecteer',
                 'add-link'                      => 'Link toevoegen',
                 'column'                        => 'Kolom',
-                'url'                           => 'URL',
+                'path'                          => 'Pad',
                 'edit'                          => 'Bewerken',
                 'back'                          => 'Terug',
             ],

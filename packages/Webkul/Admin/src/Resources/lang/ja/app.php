@@ -1873,8 +1873,18 @@ return [
 
             'cart-rules-coupons' => [
                 'cart-rule-not-defined-error' => 'カートルールは削除できません',
+                'delete-success'              => 'カートルールクーポンが正常に削除されました',
+                'mass-delete-success'         => '選択したアイテムが正常に削除されました',
                 'success'                     => ':name が正常に作成されました',
-                'mass-delete-success'         => 'カートルールの一括削除が正常に完了しました',
+            
+                'datagrid' => [
+                    'coupon-code'     => 'クーポンコード',
+                    'created-date'    => '作成日',
+                    'delete'          => '削除',
+                    'expiration-date' => '有効期限日',
+                    'id'              => 'ID',
+                    'times-used'      => '使用回数',
+                ],
             ],
         ],
 
@@ -2546,7 +2556,7 @@ return [
                 'add-footer-link-btn'           => 'フッターリンクを追加',
                 'filters'                       => 'フィルター',
                 'edit'                          => '編集',
-                'url'                           => 'URL',
+                'path'                          => 'パス',
                 'add-link'                      => 'リンクを追加',
                 'create-slider'                 => 'スライダーを作成',
                 'slider-image'                  => 'スライダー画像',
@@ -2598,7 +2608,7 @@ return [
                 'select'                        => '選択',
                 'add-link'                      => 'リンクを追加',
                 'column'                        => '列',
-                'url'                           => 'URL',
+                'path'                          => 'パス',
                 'edit'                          => '編集',
                 'back'                          => '戻る',
             ],

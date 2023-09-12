@@ -1872,9 +1872,19 @@ return [
             ],
 
             'cart-rules-coupons' => [
-                'cart-rule-not-defined-error' => 'לא ניתן למחוק את כלל עגלת הקניות',
+                'cart-rule-not-defined-error' => 'לא ניתן למחוק כלל עגלת הקניות',
+                'delete-success'              => 'קופון כלל עגלת הקניות נמחק בהצלחה',
+                'mass-delete-success'         => 'פריטים שנבחרו נמחקו בהצלחה',
                 'success'                     => ':name נוצר בהצלחה',
-                'mass-delete-success'         => 'מחיקת כללי עגלת הקניות במספר רב בוצעה בהצלחה',
+            
+                'datagrid' => [
+                    'coupon-code'     => 'קוד קופון',
+                    'created-date'    => 'תאריך יצירה',
+                    'delete'          => 'מחק',
+                    'expiration-date' => 'תאריך תפוגה',
+                    'id'              => 'מזהה',
+                    'times-used'      => 'פעמים בהם השתמש',
+                ],
             ],
         ],
 
@@ -2546,7 +2556,7 @@ return [
                 'add-footer-link-btn'           => 'הוסף קישור תחתית',
                 'filters'                       => 'מסננים',
                 'edit'                          => 'ערוך',
-                'url'                           => 'כתובת',
+                'path'                          => 'נתיב',
                 'add-link'                      => 'הוסף קישור',
                 'create-slider'                 => 'יצירת מציג',
                 'slider-image'                  => 'תמונת מציג',
@@ -2598,7 +2608,7 @@ return [
                 'select'                        => 'בחר',
                 'add-link'                      => 'הוסף קישור',
                 'column'                        => 'עמודה',
-                'url'                           => 'כתובת',
+                'path'                          => 'נתיב',
                 'edit'                          => 'ערוך',
                 'back'                          => 'חזור',
             ],

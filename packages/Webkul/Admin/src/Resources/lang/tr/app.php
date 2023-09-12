@@ -1873,8 +1873,18 @@ return [
 
             'cart-rules-coupons' => [
                 'cart-rule-not-defined-error' => 'Sepet kuralı silinemez',
-                'success'                     => ':name Başarıyla Oluşturuldu',
-                'mass-delete-success'         => 'Sepet Kuralı Toplu Silme Başarıyla Tamamlandı',
+                'delete-success'              => 'Sepet Kuralı Kuponu başarıyla silindi',
+                'mass-delete-success'         => 'Seçilen öğeler başarıyla silindi',
+                'success'                     => ':name başarıyla oluşturuldu',
+            
+                'datagrid' => [
+                    'coupon-code'     => 'Kupon Kodu',
+                    'created-date'    => 'Oluşturma Tarihi',
+                    'delete'          => 'Sil',
+                    'expiration-date' => 'Son Kullanma Tarihi',
+                    'id'              => 'Kimlik',
+                    'times-used'      => 'Kullanım Sayısı',
+                ],
             ],
         ],
 
@@ -2546,7 +2556,7 @@ return [
                 'add-footer-link-btn'            => 'Footer Bağlantısı Ekle',
                 'filters'                        => 'Filtreler',
                 'edit'                           => 'Düzenle',
-                'url'                            => 'URL',
+                'path'                           => 'Yol',
                 'add-link'                       => 'Bağlantı Ekle',
                 'create-slider'                  => 'Slider Oluştur',
                 'slider-image'                   => 'Slider Resmi',
@@ -2598,7 +2608,7 @@ return [
                 'select'                        => 'Seç',
                 'add-link'                      => 'Bağlantı Ekle',
                 'column'                        => 'Sütun',
-                'url'                           => 'URL',
+                'path'                          => 'Yol',
                 'edit'                          => 'Düzenle',
                 'back'                          => 'Geri',
             ],
