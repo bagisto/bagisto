@@ -249,7 +249,6 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-checkbox-handler-template">
-        <div></div>
     </script>
 
     <script type="module">
