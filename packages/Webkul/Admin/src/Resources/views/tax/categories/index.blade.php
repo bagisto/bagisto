@@ -98,7 +98,7 @@
                 <template #body="{ columns, records }">
                     <div
                         v-for="record in records"
-                        class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600 transition-all hover:bg-gray-100"
+                        class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600 transition-all hover:bg-gray-50"
                         style="grid-template-columns: repeat(4, 1fr);"
                     >
                         <!-- Id -->

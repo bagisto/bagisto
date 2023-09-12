@@ -39,6 +39,7 @@
         "predis/predis": "^2.2",
         "prettus/l5-repository": "^2.6",
         "pusher/pusher-php-server": "^7.0",
+        "spatie/laravel-responsecache": "^7.4",
         "spatie/laravel-sitemap": "^6.2"
     },
     "require-dev": {
@@ -68,6 +69,7 @@
             "Webkul\\Customer\\": "packages/Webkul/Customer/src",
             "Webkul\\DataGrid\\": "packages/Webkul/DataGrid/src",
             "Webkul\\DebugBar\\": "packages/Webkul/DebugBar/src",
+            "Webkul\\FPC\\": "packages/Webkul/FPC/src",
             "Webkul\\Inventory\\": "packages/Webkul/Inventory/src",
             "Webkul\\Marketing\\": "packages/Webkul/Marketing/src",
             "Webkul\\Notification\\": "packages/Webkul/Notification/src",
