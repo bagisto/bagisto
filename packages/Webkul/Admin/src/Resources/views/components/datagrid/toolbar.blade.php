@@ -130,13 +130,18 @@
                 <x-slot:toggle>
                     <div>
                         <div
-                            class="focus:ring-gratext-gray-600 inline-flex w-full max-w-max ltr:pl-[12px] rtl:pr-[12px] ltr:pr-[16px] rtl:pl-[16px] cursor-pointer select-none appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-gray-300 bg-white px-[4px] py-[6px] text-center text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2"
+                            class="relative inline-flex w-full max-w-max ltr:pl-[12px] rtl:pr-[12px] ltr:pr-[16px] rtl:pl-[16px] cursor-pointer select-none appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-gray-300 bg-white px-[4px] py-[6px] text-center text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2"
                         >
                             <span class="icon-filter text-[22px]"></span>
 
                             <span>
                                 @lang('admin::app.components.datagrid.toolbar.filter.title')
                             </span>
+
+                            <span
+                                class="icon-dot absolute top-0 right-[6px] text-[14px] text-blue-600 font-bold"
+                                v-if="applied.filters.columns.length > 1"
+                            ></span>
                         </div>
 
                         <div class="z-10 hidden w-full divide-y divide-gray-100 rounded bg-white shadow">
