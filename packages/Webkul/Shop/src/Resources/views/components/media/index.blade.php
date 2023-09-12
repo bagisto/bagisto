@@ -52,7 +52,6 @@
                         type="file"
                         :name="name"
                         id="file-input"
-                        class="hidden"
                         :accept="acceptedTypes"
                         :rules="appliedRules"
                         :multiple="isMultiple"
@@ -274,10 +273,6 @@
 
                         this.appliedRules = this.rules;
                         
-                        return;
-                    }
-
-                    if (typeof this.uploadedFiles == 'object') {
                         return;
                     }
 

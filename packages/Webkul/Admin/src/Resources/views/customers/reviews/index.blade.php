@@ -346,11 +346,23 @@
                                             @lang('admin::app.customers.reviews.index.edit.images')     
                                         </x-admin::form.control-group.label>
             
-                                        <div class="flex gap-4">   
+                                        <div 
+                                            class="flex flex- gap-4"
+                                            v-for="image in review.images"
+                                        >   
+                                            <video
+                                                class="h-[60px] w-[60px] rounded-[4px]" 
+                                                controls
+                                                v-if="image.type == 'video'"
+                                            >
+                                                <source :src="image.url" type="video/mp4">
+                                                <source :src="image.url" type="video/ogg">
+                                            </video>
+
                                             <img
                                                 class="h-[60px] w-[60px] rounded-[4px]" 
-                                                v-for="image in review.images"
                                                 :src="image.url"
+                                                v-else
                                             >
                                         </div>
                                     </div>
