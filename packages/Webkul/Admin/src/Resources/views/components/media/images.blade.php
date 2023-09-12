@@ -14,7 +14,6 @@
     :uploaded-images='{{ json_encode($uploadedImages) }}'
     width="{{ $width }}"
     height="{{ $height }}"
-    {{ $attributes->get('class') }}
 >
     <x-admin::shimmer.image class="w-[110px] h-[110px] rounded-[4px]"></x-admin::shimmer.image>
 </v-media-images>
