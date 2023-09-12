@@ -42,11 +42,14 @@
                 <img 
                     class="min-w-[450px] rounded-[12px]" 
                     :src="baseFile.path" 
-                    v-if='baseFile.type == "image"'
+                    v-if="baseFile.type == 'image'"
                     @load="onMediaLoad()"
                 />
 
-                <div class="min-w-[450px] rounded-[12px]" v-if='baseFile.type == "video"'>
+                <div
+                    class="min-w-[450px] rounded-[12px]"
+                    v-if="baseFile.type == 'video'"
+                >
                     <video  
                         controls                             
                         width='475'
@@ -102,7 +105,7 @@
                     this.baseFile.type = 'image';
                     this.baseFile.path = this.media.images[0].large_image_url;
                 } else {
-                    this.baseFile.type = this.media.videos[0].type;
+                    this.baseFile.type = 'video';
                     this.baseFile.path = this.media.videos[0].video_url;
                 }
             },
@@ -113,11 +116,13 @@
                 },
 
                 change(file) {
-                    if (file.type == 'video') {
-                        this.baseFile.type = file.type;
+                    if (file.type == 'videos') {
+                        this.baseFile.type = 'video';
+
                         this.baseFile.path = file.video_url;
                     } else {
                         this.baseFile.type = 'image';
+
                         this.baseFile.path = file.large_image_url;
                     }
                     
