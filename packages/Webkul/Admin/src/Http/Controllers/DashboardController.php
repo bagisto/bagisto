@@ -18,8 +18,6 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $themes = app(\Webkul\Shop\Repositories\ThemeCustomizationRepository::class)->all();
-
         if (request()->ajax()) {
             $statistics = $this->dashboardService
                 ->setStartDate(request()->date('start'))
