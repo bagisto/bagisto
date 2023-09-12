@@ -316,7 +316,7 @@
                                     @lang('admin::app.catalog.categories.create.select-display-mode')
                                 </option>
 
-                                 <!-- Options -->
+                                <!-- Options -->
                                 <option value="products_and_description">
                                     @lang('admin::app.catalog.categories.create.products-and-description')
                                 </option>
