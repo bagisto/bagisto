@@ -348,14 +348,17 @@
                                 :value="$selectedValue"
                                 :label="trans('admin::app.catalog.categories.edit.display-mode')"
                             >
-                                @foreach (['products-and-description', 'products-only', 'description-only'] as $item)
-                                    <option
-                                        value="{{ $item }}"
-                                        {{ $selectedValue == $item ? 'selected' : '' }}
-                                    >
-                                        @lang('admin::app.catalog.categories.edit.' . $item)
-                                    </option>
-                                @endforeach
+                                <option value="products_and_description" {{ $category->display_mode == 'products_and_description' ? 'selected' : '' }}>
+                                    @lang('admin::app.catalog.categories.edit.products-and-description') 
+                                </option>
+
+                                <option value="products_only" {{ $category->display_mode == 'products_only' ? 'selected' : '' }}>
+                                    @lang('admin::app.catalog.categories.edit.products-only')
+                                </option>
+
+                                <option value="description_only" {{ $category->display_mode == 'description_only' ? 'selected' : '' }}>
+                                    @lang('admin::app.catalog.categories.edit.description-only')
+                                </option>
                             </x-admin::form.control-group.control>
 
                             <x-admin::form.control-group.error
