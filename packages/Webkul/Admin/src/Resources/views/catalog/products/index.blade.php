@@ -201,7 +201,7 @@
                             </p>
 
                             <!-- Parent Product Quantity -->
-                            <div v-if="record.type == 'configurable'">
+                            <div  v-if="['configurable', 'bundle', 'grouped'].includes(record.type)">
                                 <p class="text-gray-600">
                                     <span class="text-red-600" v-text="'N/A'"></span>
                                 </p>
