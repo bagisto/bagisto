@@ -178,4 +178,67 @@
 
         @break
 
+    @case('image')
+    @case('file')
+        <div class="flex gap-[10px]">
+            @if ($product[$attribute->code])
+                <a
+                    href="{{ route('admin.catalog.products.file.download', [$product->id, $attribute->id] )}}"
+                    class="flex"
+                >
+                    @if ($attribute->type == 'image')
+                        <img
+                            src="{{ Storage::url($product[$attribute->code]) }}"
+                            class="w-[45px] h-[45px] border border-gray-300 rounded-[4px] overflow-hidden hover:border-gray-400"
+                        />
+                    @else
+                        <div class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-transparent p-[6px] text-center text-gray-600 transition-all marker:shadow hover:bg-gray-200 active:border-gray-300">
+                            <i class="icon-down-stat text-[24px]"></i>
+                        </div>
+                    @endif
+                </a>
+
+                <input type="hidden" name="{{ $attribute->code }}" value="{{ $product[$attribute->code] }}"/>
+            @endif
+
+            <v-field
+                type="text"
+                class="w-full"
+                name="{{ $attribute->code }}"
+                :rules="{{ $attribute->validations }}"
+                label="{{ $attribute->admin_name }}"
+                v-slot="{ handleChange, handleBlur }"
+                value="{{ old($attribute->code) ?: $product[$attribute->code] }}"
+            >
+                <input
+                    type="file"
+                    name="{{ $attribute->code }}"
+                    id="{{ $attribute->code }}"
+                    :class="[errors['{{ $attribute->code }}'] ? 'border border-red-600 hover:border-red-600' : '']"
+                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                    @change="handleChange"
+                    @blur="handleBlur"
+                >
+            </v-field>
+        </div>
+
+        @if ($product[$attribute->code])
+            <div class="flex gap-[10px] items-center mt-[10px]">
+                <x-admin::form.control-group.control
+                    type="checkbox"
+                    :name="$attribute->code . '[delete]'"
+                    value="1"
+                    :id="$attribute->code . '_delete'"
+                    :for="$attribute->code . '_delete'"
+                >
+                </x-admin::form.control-group.control>
+
+                <p class="text-[14px] text-gray-600">
+                    Remove
+                </p>
+            </div>
+        @endif
+
+        @break
+
 @endswitch

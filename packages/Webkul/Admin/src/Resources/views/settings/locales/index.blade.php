@@ -85,7 +85,7 @@
                 <template #body="{ columns, records }">
                     <div
                         v-for="record in records"
-                        class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600 transition-all hover:bg-gray-100"
+                        class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600 transition-all hover:bg-gray-50"
                         style="grid-template-columns: repeat(5, 1fr);"
                     >
                         <!-- Id -->
@@ -235,11 +235,19 @@
                                         @lang('admin::app.settings.locales.index.create.locale-logo')
                                     </x-admin::form.control-group.label>
 
-                                    <x-admin::media.images
+                                    <div class="hidden">
+                                        <x-admin::media.images
+                                            name="logo_path"
+                                            ::uploaded-images='locale.image'
+                                        >
+                                        </x-admin::media.images>
+                                    </div>
+
+                                    <v-media-images
                                         name="logo_path"
-                                        ::uploaded-images='locale.image'
+                                        :uploaded-images='locale.image'
                                     >
-                                    </x-admin::media.images>
+                                    </v-media-images>
 
                                     <x-admin::form.control-group.error
                                         control-name="logo_path"
@@ -316,7 +324,7 @@
                                 this.locale = {
                                     ...response.data.data,
                                         image: response.data.data.logo_path
-                                        ? [{ id: '', url: response.data.data.logo_url }]
+                                        ? [{ id: 'logo_url', url: response.data.data.logo_url }]
                                         : [],
                                 };
 

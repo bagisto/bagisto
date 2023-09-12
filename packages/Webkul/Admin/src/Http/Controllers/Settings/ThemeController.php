@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Settings;
 
+use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Shop\Repositories\ThemeCustomizationRepository;
 use Webkul\Admin\DataGrids\Theme\ThemeDatagrid;
@@ -51,15 +52,19 @@ class ThemeController extends Controller
         $data = request()->only(['options', 'type', 'name', 'sort_order', 'status']);
 
         if ($data['type'] == 'static_content') {
-            $data['options']['html'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $data['options']['html']); 
-            $data['options']['css'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $data['options']['css']); 
+            $data['options']['html'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $data['options']['html']); 
+            $data['options']['css'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $data['options']['css']); 
         }
+
+        Event::dispatch('theme_customization.create.before');
 
         $theme = $this->themeCustomizationRepository->create($data);
 
         if ($data['type'] == 'image_carousel') {
             $this->themeCustomizationRepository->uploadImage(request()->all('options'), $theme);
         }
+
+        Event::dispatch('theme_customization.create.after', $theme);
 
         session()->flash('success', trans('admin::app.settings.themes.create-success'));
 
@@ -100,6 +105,8 @@ class ThemeController extends Controller
             unset($data['options']);
         }
 
+        Event::dispatch('theme_customization.update.before', $id);
+
         $theme = $this->themeCustomizationRepository->update($data, $id);
 
         if ($data['type'] == 'image_carousel') {
@@ -109,6 +116,8 @@ class ThemeController extends Controller
                 request()->input('options_remove')
             );
         }
+
+        Event::dispatch('theme_customization.update.after', $theme);
 
         session()->flash('success', trans('admin::app.settings.themes.update-success'));
 
@@ -122,7 +131,11 @@ class ThemeController extends Controller
      */
     public function destroy($id)
     {
+        Event::dispatch('theme_customization.delete.before', $id);
+
         $this->themeCustomizationRepository->delete($id);
+
+        Event::dispatch('theme_customization.delete.after', $id);
 
         return response()->json([
             'message' => trans('admin::app.settings.themes.delete-success'),

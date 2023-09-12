@@ -94,7 +94,7 @@
                 <template #body="{ columns, records }">
                     <div
                         v-for="record in records"
-                        class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600 transition-all hover:bg-gray-100"
+                        class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600 transition-all hover:bg-gray-50"
                         style="grid-template-columns: repeat(6, 1fr);"
                     >
                         <!-- Id -->
@@ -371,11 +371,19 @@
                                 </div>
 
                                 <x-admin::form.control-group>
-                                    <x-admin::media.images
+                                    <div class="hidden">
+                                        <x-admin::media.images
+                                            name="image"
+                                            ::uploaded-images='data.images'
+                                        >
+                                        </x-admin::media.images>
+                                    </div>
+
+                                    <v-media-images
                                         name="image"
-                                        ::uploaded-images='data.images'
+                                        :uploaded-images='data.images'
                                     >
-                                    </x-admin::media.images>
+                                    </v-media-images>
 
                                     <p class="required my-3 text-[14px] text-gray-400">
                                         @lang('admin::app.settings.users.index.create.upload-image-info')

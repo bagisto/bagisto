@@ -8,6 +8,7 @@ use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Shop\Http\Resources\AttributeResource;
 use Webkul\Shop\Http\Resources\CategoryResource;
+use Webkul\Shop\Http\Resources\CategoryTreeResource;
 
 class CategoryController extends APIController
 {
@@ -40,6 +41,16 @@ class CategoryController extends APIController
         $categories = $this->categoryRepository->getAll(array_merge($defaultParams, request()->all()));
 
         return CategoryResource::collection($categories);
+    }
+
+    /**
+     * Get all categories in tree format.
+     */
+    public function tree(): JsonResource
+    {
+        $categories = $this->categoryRepository->getVisibleCategoryTree(core()->getCurrentChannel()->root_category_id);
+
+        return CategoryTreeResource::collection($categories);
     }
 
     /**

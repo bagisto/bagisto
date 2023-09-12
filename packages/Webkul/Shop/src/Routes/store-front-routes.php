@@ -13,18 +13,23 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
     /**
      * CMS pages.
      */
-    Route::get('page/{slug}', [PagePresenterController::class, 'presenter'])->name('shop.cms.page');
+    Route::get('page/{slug}', [PagePresenterController::class, 'presenter'])
+        ->name('shop.cms.page')
+        ->middleware('cacheResponse');
 
     /**
      * Fallback route.
      */
     Route::fallback(ProductsCategoriesProxyController::class . '@index')
-        ->name('shop.product_or_category.index');
+        ->name('shop.product_or_category.index')
+        ->middleware('cacheResponse');
 
     /**
      * Store front home.
      */
-    Route::get('/', [HomeController::class, 'index'])->name('shop.home.index');
+    Route::get('/', [HomeController::class, 'index'])
+        ->name('shop.home.index')
+        ->middleware('cacheResponse');
 
     /**
      * Store front search.
@@ -57,5 +62,4 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
             'view' => 'shop.products.index',
         ])->name('shop.product.file.download');
     });
-
 });

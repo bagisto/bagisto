@@ -532,7 +532,7 @@
                 <!-- Content -->
                 <div class="grid">
                     <a
-                        class="flex gap-[5px] items-start p-[12px] hover:bg-gray-100 border-b-[1px] last:border-b-0"
+                        class="flex gap-[5px] items-start p-[12px] hover:bg-gray-50 border-b-[1px] last:border-b-0"
                         v-for="notification in notifications"
                         :href="'{{ route('admin.notification.viewed_notification', ':orderId') }}'.replace(':orderId', notification.order_id)"
                     >
