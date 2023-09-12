@@ -1,6 +1,6 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.configurable.before', ['product' => $product]) !!}
 
-<v-product-variations></v-product-variations>
+<v-product-variations :errors="errors"></v-product-variations>
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.configurable.after', ['product' => $product]) !!}
 
@@ -48,6 +48,7 @@
                         :variant="variant"
                         :attributes="superAttributes"
                         @onRemoved="removeVariant"
+                        :errors="errors"
                     ></v-product-variation-item>
                 </div>
             </template>
@@ -552,6 +553,17 @@
                         @{{ "@lang('admin::app.catalog.products.edit.types.configurable.sku')".replace(':sku', variant.sku) }}
                     </p>
 
+                    <v-error-message
+                        :name="'variants[' + variant.id + '].sku'"
+                        v-slot="{ message }"
+                    >
+                        <p
+                            class="mt-1 text-red-600 text-xs italic"
+                            v-text="message"
+                        >
+                        </p>
+                    </v-error-message>
+
                     <div class="flex gap-[6px] place-items-start">
                         <span
                             class="label-active"
@@ -806,7 +818,9 @@
         app.component('v-product-variations', {
             template: '#v-product-variations-template',
 
-            data: function () {
+            props: ['errors'],
+
+            data () {
                 return {
                     defaultId: parseInt('{{ $product->additional['default_variant_id'] ?? null }}'),
 
@@ -1062,7 +1076,8 @@
 
             props: [
                 'variant',
-                'attributes'
+                'attributes',
+                'errors',
             ],
 
             data() {
