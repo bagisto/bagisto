@@ -297,6 +297,10 @@
         content: "\e93d";
     }
 
+    .icon-view-close:before {
+        content: "\e946";
+    }
+
     .icon-copy:before {
         content: "\e93e";
     }
@@ -328,6 +332,7 @@
     .icon-play:before {
         content: "\e945";
     }
+      
 
 
     p {
