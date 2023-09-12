@@ -316,18 +316,11 @@
                                     @lang('admin::app.catalog.categories.create.select-display-mode')
                                 </option>
 
-                                <!-- Options -->
-                                <option value="products_and_description">
-                                    @lang('admin::app.catalog.categories.create.products-and-description')
-                                </option>
-
-                                <option value="products_only">
-                                    @lang('admin::app.catalog.categories.create.products-only')
-                                </option>
-
-                                <option value="description_only">
-                                    @lang('admin::app.catalog.categories.create.description-only')
-                                </option>
+                                @foreach (['products-and-description', 'products-only', 'description-only'] as $item)
+                                    <option value="{{ $item }}">
+                                        @lang('admin::app.catalog.categories.create.' . $item)
+                                    </option>
+                                @endforeach
                             </x-admin::form.control-group.control>
 
                             <x-admin::form.control-group.error
