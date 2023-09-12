@@ -89,7 +89,7 @@
                 <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
                     <template v-if="! isLoading">
                         <div
-                            class="row grid grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] px-[16px] py-[10px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-100"
+                            class="row grid grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] px-[16px] py-[10px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-50"
                             v-for="record in records"
                         >
                             <!-- Name, Product, Description -->

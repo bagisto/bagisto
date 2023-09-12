@@ -1,16 +1,8 @@
 {{--
-    The category repository is injected directly here because there is no way
-    to retrieve it from the view composer, as this is an anonymous component.
---}}
-@inject('categoryRepository', 'Webkul\Category\Repositories\CategoryRepository')
-
-{{--
     This code needs to be refactored to reduce the amount of PHP in the Blade
     template as much as possible.
 --}}
 @php
-    $categories = $categoryRepository->getVisibleCategoryTree(core()->getCurrentChannel()->root_category_id);
-
     $showCompare = (bool) core()->getConfigData('general.content.shop.compare_option');
 
     $showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
@@ -32,55 +24,13 @@
             <img src="{{ bagisto_asset('images/logo.svg') }}">
         </a>
 
-        <div class="flex items-center">
-            {{--
-                For active category: `text-sm border-t-0 border-b-[2px] border-l-0 border-r-0 border-navyBlue`.
-            --}}
-            @foreach ($categories as $firstLevelCategory)
-                <div class="relative group border-b-[4px] border-transparent hover:border-b-[4px] hover:border-navyBlue">
-                    <span>
-                        <a
-                            href="{{ $firstLevelCategory->url }}"
-                            class="inline-block pb-[21px] px-[20px] uppercase"
-                        >
-                            {{ $firstLevelCategory->name }}
-                        </a>
-                    </span>
-
-                    @if ($firstLevelCategory->children->isNotEmpty())
-                        <div
-                            class="w-max absolute top-[49px] max-h-[580px] max-w-[1260px] p-[35px] z-[1] overflow-auto overflow-x-auto bg-white shadow-[0_6px_6px_1px_rgba(0,0,0,.3)] border border-b-0 border-l-0 border-r-0 border-t-[1px] border-[#F3F3F3] pointer-events-none opacity-0 transition duration-300 ease-out translate-y-1 group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-y-0 group-hover:ease-in group-hover:duration-200 ltr:-left-[35px] rtl:-right-[35px]"
-                        >
-                            <div class="flex aigns gap-x-[70px] justify-between">
-                                @foreach ($firstLevelCategory->children->chunk(2) as $pair)
-                                    <div class="grid grid-cols-[1fr] gap-[20px] content-start w-full flex-auto min-w-max max-w-[150px]">
-                                        @foreach ($pair as $secondLevelCategory)
-                                            <p class="text-navyBlue font-medium">
-                                                <a href="{{ $secondLevelCategory->url }}">
-                                                    {{ $secondLevelCategory->name }}
-                                                </a>
-                                            </p>
-
-                                            @if ($secondLevelCategory->children->isNotEmpty())
-                                                <ul class="grid grid-cols-[1fr] gap-[12px]">
-                                                    @foreach ($secondLevelCategory->children as $thirdLevelCategory)
-                                                        <li class="text-[14px] font-medium text-[#7D7D7D]">
-                                                            <a href="{{ $thirdLevelCategory->url }}">
-                                                                {{ $thirdLevelCategory->name }}
-                                                            </a>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            @endif
-                                        @endforeach
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    @endif
-                </div>
-            @endforeach
-        </div>
+        <v-desktop-category>
+            <div class="flex gap-[20px] items-center pb-[21px]">
+                <span class="shimmer w-[80px] h-[24px] rounded-[4px]"></span>
+                <span class="shimmer w-[80px] h-[24px] rounded-[4px]"></span>
+                <span class="shimmer w-[80px] h-[24px] rounded-[4px]"></span>
+            </div>
+        </v-desktop-category>
     </div>
 
     {{-- Right Nagivation Section --}}
@@ -230,3 +180,110 @@
         </div>
     </div>
 </div>
+
+@pushOnce('scripts')
+    <script type="text/x-template" id="v-desktop-category-template">
+        <div
+            class="flex gap-[20px] items-center pb-[21px]"
+            v-if="isLoading"
+        >
+            <span class="shimmer w-[80px] h-[24px] rounded-[4px]"></span>
+            <span class="shimmer w-[80px] h-[24px] rounded-[4px]"></span>
+            <span class="shimmer w-[80px] h-[24px] rounded-[4px]"></span>
+        </div>
+
+        <div
+            class="flex items-center"
+            v-else
+        >
+            <div
+                class="relative group border-b-[4px] border-transparent hover:border-b-[4px] hover:border-navyBlue"
+                v-for="category in categories"
+            >
+                <span>
+                    <a
+                        :href="category.url"
+                        class="inline-block pb-[21px] px-[20px] uppercase"
+                    >
+                        @{{ category.name }}
+                    </a>
+                </span>
+
+                <div
+                    class="w-max absolute top-[49px] max-h-[580px] max-w-[1260px] p-[35px] z-[1] overflow-auto overflow-x-auto bg-white shadow-[0_6px_6px_1px_rgba(0,0,0,.3)] border border-b-0 border-l-0 border-r-0 border-t-[1px] border-[#F3F3F3] pointer-events-none opacity-0 transition duration-300 ease-out translate-y-1 group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-y-0 group-hover:ease-in group-hover:duration-200 ltr:-left-[35px] rtl:-right-[35px]"
+                    v-if="category.children.length"
+                >
+                    <div class="flex aigns gap-x-[70px] justify-between">
+                        <div
+                            class="grid grid-cols-[1fr] gap-[20px] content-start w-full flex-auto min-w-max max-w-[150px]"
+                            v-for="pairCategoryChildren in pairCategoryChildren(category)"
+                        >
+                            <template v-for="secondLevelCategory in pairCategoryChildren">
+                                <p class="text-navyBlue font-medium">
+                                    <a :href="secondLevelCategory.url">
+                                        @{{ secondLevelCategory.name }}
+                                    </a>
+                                </p>
+
+                                <ul
+                                    class="grid grid-cols-[1fr] gap-[12px]"
+                                    v-if="secondLevelCategory.children.length"
+                                >
+                                    <li
+                                        class="text-[14px] font-medium text-[#7D7D7D]"
+                                        v-for="thirdLevelCategory in secondLevelCategory.children"
+                                    >
+                                        <a :href="thirdLevelCategory.url">
+                                            @{{ thirdLevelCategory.name }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="module">
+        app.component('v-desktop-category', {
+            template: '#v-desktop-category-template',
+
+            data() {
+                return  {
+                    isLoading: true,
+
+                    categories: [],
+                }
+            },
+
+            mounted() {
+                this.get();
+            },
+
+            methods: {
+                get() {
+                    this.$axios.get("{{ route('shop.api.categories.tree') }}")
+                        .then(response => {
+                            this.isLoading = false;
+
+                            this.categories = response.data.data;
+                        }).catch(error => {
+                            console.log(error);
+                        });
+                },
+
+                pairCategoryChildren(category) {
+                    return category.children.reduce((result, value, index, array) => {
+                        if (index % 2 === 0) {
+                            result.push(array.slice(index, index + 2));
+                        }
+
+                        return result;
+                    }, []);
+                }
+            },
+        });
+    </script>
+@endPushOnce
