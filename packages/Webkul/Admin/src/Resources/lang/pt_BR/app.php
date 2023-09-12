@@ -1872,9 +1872,19 @@ return [
             ],
 
             'cart-rules-coupons' => [
-                'cart-rule-not-defined-error'   => 'A regra de carrinho não pode ser excluída',
-                'success'                       => ':name criada com sucesso',
-                'mass-delete-success'           => 'Exclusão em massa de regras de carrinho bem-sucedida',
+                'cart-rule-not-defined-error' => 'Regra do carrinho não pode ser excluída',
+                'delete-success'              => 'Cupom da regra do carrinho excluído com sucesso',
+                'mass-delete-success'         => 'Itens selecionados excluídos com sucesso',
+                'success'                     => ':name criado com sucesso',
+            
+                'datagrid' => [
+                    'coupon-code'     => 'Código do cupom',
+                    'created-date'    => 'Data de criação',
+                    'delete'          => 'Excluir',
+                    'expiration-date' => 'Data de validade',
+                    'id'              => 'ID',
+                    'times-used'      => 'Vezes utilizado',
+                ],
             ],
         ],
 
@@ -2546,7 +2556,7 @@ return [
                 'add-footer-link-btn'            => 'Adicionar Link no Rodapé',
                 'filters'                        => 'Filtros',
                 'edit'                           => 'Editar',
-                'url'                            => 'URL',
+                'path'                           => 'Caminho',
                 'add-link'                       => 'Adicionar Link',
                 'create-slider'                  => 'Criar Slider',
                 'slider-image'                   => 'Imagem do Slider',

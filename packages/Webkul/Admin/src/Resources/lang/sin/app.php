@@ -1871,9 +1871,19 @@ return [
             ],
 
             'cart-rules-coupons' => [
-                'cart-rule-not-defined-error' => 'කාට් රුල් අරුතක් නොවේ',
-                'success'                     => ':name සාර්ථකයේ තබනවා',
-                'mass-delete-success'         => 'කාට් රුල් ජනන ඉවත් කළ සාර්ථකයි'
+                'cart-rule-not-defined-error' => 'කර්තෘ රූල් ඉවත් කළ නොහැකිය',
+                'delete-success'              => 'කර්තෘ රූල් කූපනය සාර්ථකව මකාදමට නියමිත',
+                'mass-delete-success'         => 'තෙවන අයිතමයෙන් සාර්ථකව මකාදැමීමට නියමිත',
+                'success'                     => ':name සාර්ථකව සෑදීමට නියමිත',
+            
+                'datagrid' => [
+                    'coupon-code'     => 'කූපන් කේතය',
+                    'created-date'    => 'සෑදීමේ දිනය',
+                    'expiration-date' => 'වටහාවක් ඉවත් කරන දිනය',
+                    'delete'          => 'මකනවා',
+                    'id'              => 'අංකය',
+                    'times-used'      => 'භාවිතා කල වේලා',
+                ],
             ],
         ],
 
@@ -2546,7 +2556,7 @@ return [
                 'add-footer-link-btn'            => 'පිටු මාධ්‍ය එකතු කරන්න',
                 'filters'                        => 'පෙරහන',
                 'edit'                           => 'සංස්කරණය කරන්න',
-                'url'                            => 'URL',
+                'path'                           => 'මාර්ගය',
                 'add-link'                       => 'ලින්ක් එකතු කරන්න',
                 'create-slider'                  => 'ස්ලයිඩර් නිර්මාණය කරන්න',
                 'slider-image'                   => 'ස්ලයිඩර් පින්තූරය',
@@ -2598,7 +2608,7 @@ return [
                 'select'                        => 'තේරීම',
                 'add-link'                      => 'සබැඳියක් එකතු කරන්න',
                 'column'                        => 'තීරුව',
-                'url'                           => 'URL',
+                'path'                          => 'මාර්ගය',
                 'edit'                          => 'සංස්කරණය',
                 'back'                          => 'ආපසු'
             ],

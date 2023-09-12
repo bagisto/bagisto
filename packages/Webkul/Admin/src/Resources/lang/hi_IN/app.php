@@ -1873,8 +1873,18 @@ return [
 
             'cart-rules-coupons' => [
                 'cart-rule-not-defined-error' => 'कार्ट नियम को हटाया नहीं जा सकता है',
+                'delete-success'              => 'कार्ट नियम कूपन सफलतापूर्वक हटा दिया गया',
+                'mass-delete-success'         => 'चयनित आइटम सफलतापूर्वक हटाए गए',
                 'success'                     => ':name सफलतापूर्वक बनाया गया',
-                'mass-delete-success'         => 'कार्ट नियम समूह सफलतापूर्वक हटाया गया',
+            
+                'datagrid' => [
+                    'coupon-code'     => 'कूपन कोड',
+                    'created-date'    => 'निर्माण तिथि',
+                    'delete'          => 'हटाएं',
+                    'expiration-date' => 'समापन तिथि',
+                    'id'              => 'आईडी',
+                    'times-used'      => 'बार उपयोग किया गया',
+                ],
             ],
         ],
 
@@ -2546,7 +2556,7 @@ return [
                 'add-footer-link-btn'            => 'फ़ुटर लिंक जोड़ें',
                 'filters'                        => 'फ़िल्टर',
                 'edit'                           => 'संपादित करें',
-                'url'                            => 'URL',
+                'path'                           => 'पथ',
                 'add-link'                       => 'लिंक जोड़ें',
                 'create-slider'                  => 'स्लाइडर बनाएँ',
                 'slider-image'                   => 'स्लाइडर छवि',
@@ -2598,7 +2608,7 @@ return [
                 'select'                        => 'चयन करें',
                 'add-link'                      => 'लिंक जोड़ें',
                 'column'                        => 'स्तंभ',
-                'url'                           => 'URL',
+                'path'                          => 'पथ',
                 'edit'                          => 'संपादित करें',
                 'back'                          => 'वापस',
             ],

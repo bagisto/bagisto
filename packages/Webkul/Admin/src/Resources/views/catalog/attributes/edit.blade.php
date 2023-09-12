@@ -637,59 +637,215 @@
                             </x-slot:header>
                         
                             <x-slot:content>
-                                @foreach (['value-per-locale', 'value-per-channel'] as $type)
-                                    <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] opacity-70 select-none ">
-                                        <x-admin::form.control-group.control
-                                            type="checkbox"
-                                            :name="$type"
-                                            :id="$type"
-                                            :checked="(boolean) $attribute->$type"
-                                            :disabled="(boolean) $attribute->$type"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                <!-- Value Per Locale -->
+                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] opacity-70 select-none ">
+                                    @php
+                                        $selectedOption = old('value_per_locale') ?? $attribute->value_per_locale;
+                                    @endphp
 
-                                        <x-admin::form.control-group.label class="!text-[14px] !font-semibold !text-gray-600 cursor-not-allowed">
-                                            @lang('admin::app.catalog.attributes.edit.' .  $type)
-                                        </x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        name="value_per_locale"
+                                        id="value_per_locale"
+                                        :checked="(boolean) $selectedOption"
+                                        :disabled="(boolean) $selectedOption"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                                        <x-admin::form.control-group.control
-                                            type="hidden"
-                                            :name="$type"
-                                            :value="$attribute->$type"
-                                        >
-                                        </x-admin::form.control-group.control>
-                                    </x-admin::form.control-group>
-                                @endforeach
+                                    <x-admin::form.control-group.label class="!text-[14px] !font-semibold !text-gray-600 cursor-not-allowed">
+                                        @lang('admin::app.catalog.attributes.edit.value-per-locale')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="hidden"
+                                        name="value_per_locale"
+                                        :value="$selectedOption"
+                                    >
+                                    </x-admin::form.control-group.control>
+                                </x-admin::form.control-group>
+
+                                <!-- Value Per Channel -->
+                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] opacity-70 select-none ">
+                                    @php
+                                        $selectedOption = old('value_per_channel') ?? $attribute->value_per_channel
+                                    @endphp
+
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        name="value_per_channel"
+                                        id="value_per_channel"
+                                        :checked="(boolean) $selectedOption"
+                                        :disabled="(boolean) $selectedOption"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.label class="!text-[14px] !font-semibold !text-gray-600 cursor-not-allowed">
+                                        @lang('admin::app.catalog.attributes.edit.value-per-channel')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="hidden"
+                                        name="value_per_channel"
+                                        :value="$selectedOption"
+                                    >
+                                    </x-admin::form.control-group.control>
+                                </x-admin::form.control-group>
 
                                 <!-- Use in Layered -->
-                                @foreach (['is-filterable', 'is-configurable', 'is-visible-on-front', 'use-in-flat', 'is-comparable'] as $type)
-                                    <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
-                                        <x-admin::form.control-group.control
-                                            type="checkbox"
-                                            :id="$type"
-                                            :name="$type"
-                                            :for="$type"
-                                            value="1"
-                                            :checked="(boolean) $attribute->$type"
+                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                    @php
+                                        $selectedOption = $attribute->is_filterable ?? old('is_filterable');
+                                    @endphp
 
-                                        >
-                                        </x-admin::form.control-group.control>
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        id="is_filterable"
+                                        name="is_filterable"
+                                        for="is_filterable"
+                                        value="1"
+                                        :checked="(boolean) $selectedOption"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                                        <x-admin::form.control-group.label
-                                            :for="$type"
-                                            class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer" 
-                                        >
-                                            @lang('admin::app.catalog.attributes.edit.' .  $type)
-                                        </x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label
+                                        for="is_filterable"
+                                        class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer" 
+                                    >
+                                        @lang('admin::app.catalog.attributes.edit.is-filterable')
+                                    </x-admin::form.control-group.label>
 
-                                        <x-admin::form.control-group.control
-                                            type="hidden"
-                                            :name="$type"
-                                            :value="$attribute->$type"
-                                        >
-                                        </x-admin::form.control-group.control>
-                                    </x-admin::form.control-group>
-                                @endforeach
+                                    <x-admin::form.control-group.control
+                                        type="hidden"
+                                        name="is_filterable"
+                                        :value="$selectedOption"
+                                    >
+                                    </x-admin::form.control-group.control>
+                                </x-admin::form.control-group>
+
+                                <!-- Use to create configuable product -->
+                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                    @php
+                                        $selectedOption = $attribute->is_configurable ?? old('is_configurable');
+                                    @endphp
+
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        id="is_configurable"
+                                        name="is_configurable"
+                                        for="is_configurable"
+                                        value="1"
+                                        :checked="(boolean) $selectedOption"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.label
+                                        for="is_configurable"
+                                        class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer" 
+                                    >
+                                        @lang('admin::app.catalog.attributes.edit.is-configurable')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="hidden"
+                                        name="is_configurable"
+                                        :value="$selectedOption"
+                                    >
+                                    </x-admin::form.control-group.control>
+                                </x-admin::form.control-group>
+
+                                <!-- Visible On Product View Page On Fornt End -->
+                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                    @php
+                                        $selectedOption = $attribute->is_visible_on_front ?? old('is_visible_on_front');
+                                    @endphp
+
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        id="is_visible_on_front"
+                                        name="is_visible_on_front"
+                                        for="is_visible_on_front"
+                                        value="1"
+                                        :checked="(boolean) $selectedOption"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.label
+                                        for="is_visible_on_front"
+                                        class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer" 
+                                    >
+                                        @lang('admin::app.catalog.attributes.edit.is-visible-on-front')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="hidden"
+                                        name="is_visible_on_front"
+                                        :value="$selectedOption"
+                                    >
+                                    </x-admin::form.control-group.control>
+                                </x-admin::form.control-group>
+
+                                <!-- Create in Product Flat Table -->
+                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                    @php
+                                        $selectedOption = $attribute->is_user_defined ?? old('is_user_defined');
+                                    @endphp
+
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        id="is_user_defined"
+                                        name="is_user_defined"
+                                        for="is_user_defined"
+                                        value="1"
+                                        :checked="(boolean) $selectedOption"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.label
+                                        for="is_user_defined"
+                                        class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer" 
+                                    >
+                                        @lang('admin::app.catalog.attributes.edit.use-in-flat')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="hidden"
+                                        name="use_in_flat"
+                                        :value="$selectedOption"
+                                    >
+                                    </x-admin::form.control-group.control>
+                                </x-admin::form.control-group>
+
+                                <!-- Attribute is Comparable -->
+                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                    @php
+                                        $selectedOption = old('is_comparable') ?? $attribute->is_comparable
+                                    @endphp
+
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        id="is_comparable"
+                                        name="$type"
+                                        for="is_comparable"
+                                        value="1"
+                                        :checked="(boolean) $selectedOption"
+
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.label
+                                        for="checkedValue"
+                                        class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer" 
+                                    >
+                                        @lang('admin::app.catalog.attributes.edit.is-comparable')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="hidden"
+                                        name="is_comparable"
+                                        :value="$selectedOption"
+                                    >
+                                    </x-admin::form.control-group.control>
+                                </x-admin::form.control-group>
                             </x-slot:content>
                         </x-admin::accordion>
 

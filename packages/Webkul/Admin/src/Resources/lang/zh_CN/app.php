@@ -1873,8 +1873,18 @@ return [
 
             'cart-rules-coupons' => [
                 'cart-rule-not-defined-error' => '购物车规则无法删除',
-                'success'                     => ':name 创建成功',
-                'mass-delete-success'         => '购物车规则批量删除成功'
+                'delete-success'              => '购物车规则优惠券成功删除',
+                'mass-delete-success'         => '成功删除所选项目',
+                'success'                     => '成功创建 :name',
+            
+                'datagrid' => [
+                    'coupon-code'     => '优惠券代码',
+                    'created-date'    => '创建日期',
+                    'delete'          => '删除',
+                    'expiration-date' => '到期日期',
+                    'id'              => 'ID',
+                    'times-used'      => '使用次数',
+                ],
             ],
         ],
 
@@ -2546,7 +2556,7 @@ return [
                 'add-footer-link-btn'           => '添加页脚链接',
                 'filters'                       => '过滤器',
                 'edit'                          => '编辑',
-                'url'                           => 'URL',
+                'path'                          => '路径',
                 'add-link'                      => '添加链接',
                 'create-slider'                 => '创建轮播',
                 'slider-image'                  => '轮播图片',
@@ -2598,7 +2608,7 @@ return [
                 'select'                        => '选择',
                 'add-link'                      => '添加链接',
                 'column'                        => '列',
-                'url'                           => 'URL',
+                'path'                          => '路径',
                 'edit'                          => '编辑',
                 'back'                          => '返回',
             ],
