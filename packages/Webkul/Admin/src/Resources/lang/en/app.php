@@ -2611,12 +2611,12 @@ return [
 
     'configuration' => [
         'index' => [
-            'delete'                       => 'Eliminar',
-            'enable-at-least-one-shipping' => 'Habilitar al menos un método de envío.',
-            'enable-at-least-one-payment'  => 'Habilitar al menos un método de pago.',
-            'save-btn'                     => 'Guardar configuración',
-            'save-message'                 => 'Configuración guardada con éxito',
-            'title'                        => 'Configuración',
+            'delete'                       => 'Delete',
+            'enable-at-least-one-shipping' => 'Enable at least one shipping method.',
+            'enable-at-least-one-payment'  => 'Enable at least one payment method.',
+            'save-btn'                     => 'Save Configuration',
+            'save-message'                 => 'Configuration saved successfully',
+            'title'                        => 'Configuration',
 
             'general' => [
                 'info'  => 'Set units options.',
