@@ -55,13 +55,18 @@
                             {{ $link->title . ' + ' . core()->currency($link->price) }}
                         </label>
 
-                        <a 
-                            href="{{ route('shop.downloadable.download_sample', ['type' => 'link', 'id' => $link->id]) }}"
-                            target="_blank"
-                            class="text-[#0A49A7] ml-2"
-                        >
-                            @lang('shop::app.products.view.type.downloadable.sample')
-                        </a>
+                        @if (
+                            $link->sample_file
+                            || $link->sample_url
+                        )
+                            <a 
+                                href="{{ route('shop.downloadable.download_sample', ['type' => 'link', 'id' => $link->id]) }}"
+                                target="_blank"
+                                class="text-[#0A49A7] ml-2"
+                            >
+                                @lang('shop::app.products.view.type.downloadable.sample')
+                            </a>
+                        @endif
                     </div>
                 </div>
             @endforeach
