@@ -1348,8 +1348,19 @@
                         </form>
                     </x-admin::form>
 
-                    {{-- Todo (@suraj-webkul) --}}
-                    {{-- datagrid will be here --}}
+                    <!-- Coupons Export Modal -->
+                    <div class="flex justify-between items-center">
+                        <div class="flex gap-x-[10px] items-center">
+                            <p class="text-[20px] text-gray-800 font-bold"></p>
+                        </div>
+                        <div> <!-- Empty div to push content to the right end --> </div>
+                        <div class="flex gap-x-[10px] items-center">
+                            <x-admin::datagrid.export src="{{ route('admin.marketing.promotions.cart_rules.coupons.index', $cartRule->id) }}"></x-admin::datagrid.export>
+                        </div>
+                    </div>
+                    
+                    <!--Coupon datagrid -->
+                    <x-admin::datagrid :src="route('admin.marketing.promotions.cart_rules.coupons.index', $cartRule->id)"></x-admin::datagrid>
                 </div>
             </div>
         </script>
@@ -1378,7 +1389,9 @@
                     store(params, { resetForm, setErrors }) {
                         this.$axios.post('{{ route('admin.marketing.promotions.cart_rules.coupons.store', $cartRule->id) }}', params)
                             .then((response) => {
-                                alert(response.data.message);
+                                window.location.reload();
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
                                 resetForm();
                             })

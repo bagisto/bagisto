@@ -1872,9 +1872,19 @@ return [
             ],
 
             'cart-rules-coupons' => [
-                'cart-rule-not-defined-error' => 'Правило Кошика не може бути видалено',
-                'success'                     => ':name Успішно Створено',
-                'mass-delete-success'         => 'Масове Видалення Правил Кошика Успішно',
+                'cart-rule-not-defined-error' => 'Правило кошика не можна видалити',
+                'delete-success'              => 'Купон правила кошика успішно видалено',
+                'mass-delete-success'         => 'Вибрані елементи успішно видалено',
+                'success'                     => ':name успішно створено',
+            
+                'datagrid' => [
+                    'coupon-code'     => 'Код купона',
+                    'created-date'    => 'Дата створення',
+                    'delete'          => 'Видалити',
+                    'expiration-date' => 'Дата закінчення',
+                    'id'              => 'ID',
+                    'times-used'      => 'Кількість використань',
+                ],
             ],
         ],
 
@@ -2546,7 +2556,7 @@ return [
                 'add-footer-link-btn'            => 'Додати посилання у підвалі',
                 'filters'                        => 'Фільтри',
                 'edit'                           => 'Редагувати',
-                'url'                            => 'URL',
+                'path'                           => 'Шлях',
                 'add-link'                       => 'Додати посилання',
                 'create-slider'                  => 'Створити слайдер',
                 'slider-image'                   => 'Зображення слайдера',
@@ -2598,7 +2608,7 @@ return [
                 'select'                        => 'Вибрати',
                 'add-link'                      => 'Додати посилання',
                 'column'                        => 'Колонка',
-                'url'                           => 'URL',
+                'path'                          => 'Шлях',
                 'edit'                          => 'Редагувати',
                 'back'                          => 'Назад',
             ],

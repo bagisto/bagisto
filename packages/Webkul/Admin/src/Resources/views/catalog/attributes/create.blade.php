@@ -525,26 +525,43 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <!-- All Types Define In The Loop -->
-                                @foreach (['is-required', 'is-unique'] as $item)
-                                    <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
-                                        <x-admin::form.control-group.control
-                                            type="checkbox"
-                                            :id="$item"
-                                            :name="$item"
-                                            :for="$item"
-                                            value="1"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                <!-- Is Required -->
+                                 <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        name="is_required"
+                                        id="is_required"
+                                        for="is_required"
+                                        value="1"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                                        <x-admin::form.control-group.label
-                                            :for="$item"
-                                            class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer" 
-                                        >
-                                            @lang('admin::app.catalog.attributes.create.' . $item)
-                                        </x-admin::form.control-group.label>
-                                    </x-admin::form.control-group>
-                                @endforeach
+                                    <x-admin::form.control-group.label
+                                        for="is_required"
+                                        class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer"
+                                    >
+                                        @lang('admin::app.catalog.attributes.edit.is-required')
+                                    </x-admin::form.control-group.label>
+                                </x-admin::form.control-group>
+
+                                <!-- Is Unique -->
+                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        name="is_unique"
+                                        id="is_unique"
+                                        for="is_unique"
+                                        value="1"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.label
+                                        for="is_unique"
+                                        class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer"
+                                    >
+                                        @lang('admin::app.catalog.attributes.edit.is-unique')
+                                    </x-admin::form.control-group.label>
+                                </x-admin::form.control-group>
                             </x-slot:content>
                         </x-admin::accordion>
 
@@ -557,26 +574,119 @@
                             </x-slot:header>
                         
                             <x-slot:content>
-                                <!-- Configuration Types Define In The Loop -->
-                                @foreach (['value-per-locale', 'value-per-channel', 'is-configurable', 'is-visible-on-front', 'use-in-flat','is-comparable'] as $item)
-                                    <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
-                                        <x-admin::form.control-group.control
-                                            type="checkbox"
-                                            :id="$item"
-                                            :name="$item"
-                                            :for="$item"
-                                            value="1"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                <!-- Value Per Locale -->
+                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        name="value_per_locale"
+                                        id="value_per_locale"
+                                        for="value_per_locale"
+                                        value="1"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                                        <x-admin::form.control-group.label
-                                            :for="$item"
-                                            class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer" 
-                                        >
-                                            @lang('admin::app.catalog.attributes.create.' .  $item)
-                                        </x-admin::form.control-group.label>
-                                    </x-admin::form.control-group>
-                                @endforeach
+                                    <x-admin::form.control-group.label
+                                        for="value_per_locale"
+                                        class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer"
+                                    >
+                                        @lang('admin::app.catalog.attributes.edit.value-per-locale')
+                                    </x-admin::form.control-group.label>
+                                </x-admin::form.control-group>
+
+                                <!-- Value Per Channel -->
+                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        name="value_per_channel"
+                                        id="value_per_channel"
+                                        for="value_per_channel"
+                                        value="1"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.label
+                                        for="value_per_channel"
+                                        class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer"
+                                    >
+                                        @lang('admin::app.catalog.attributes.edit.value-per-channel')
+                                    </x-admin::form.control-group.label>
+                                </x-admin::form.control-group>
+
+                                <!-- Use to create configuable product -->
+                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        name="is_configurable"
+                                        id="is_configurable"
+                                        for="is_configurable"
+                                        value="1"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.label
+                                        for="is_configurable"
+                                        class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer"
+                                    >
+                                        @lang('admin::app.catalog.attributes.edit.is-configurable')
+                                    </x-admin::form.control-group.label>
+                                </x-admin::form.control-group>
+
+                                <!-- Visible On Product View Page On Fornt End -->
+                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        name="is_visible_on_front"
+                                        id="is_visible_on_front"
+                                        for="is_visible_on_front"
+                                        value="1"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.label
+                                        for="is_visible_on_front"
+                                        class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer"
+                                    >
+                                        @lang('admin::app.catalog.attributes.edit.is-visible-on-front')
+                                    </x-admin::form.control-group.label>
+                                </x-admin::form.control-group>
+
+                                <!-- Create in Product Flat Table -->
+                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        name="is_user_defined"
+                                        id="is_user_defined"
+                                        for="is_user_defined"
+                                        value="1"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.label
+                                        for="is_user_defined"
+                                        class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer"
+                                    >
+                                        @lang('admin::app.catalog.attributes.edit.use-in-flat')
+                                    </x-admin::form.control-group.label>
+                                </x-admin::form.control-group>
+
+                                <!-- Attribute is Comparable -->
+                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        name="is_comparable"
+                                        id="is_comparable"
+                                        for="is_comparable"
+                                        value="1"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.label
+                                        for="is_comparable"
+                                        class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer"
+                                    >
+                                        @lang('admin::app.catalog.attributes.edit.is-comparable')
+                                    </x-admin::form.control-group.label>
+                                </x-admin::form.control-group>
 
                                 <!-- Use in Layered -->
                                 <label

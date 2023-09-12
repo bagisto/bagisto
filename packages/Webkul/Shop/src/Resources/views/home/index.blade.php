@@ -1,33 +1,21 @@
 @php
     $channel = core()->getCurrentChannel();
-
-    $homeSEO = $channel->home_seo;
-
-    if (isset($homeSEO)) {
-        $homeSEO = json_decode($channel->home_seo);
-
-        $metaTitle = $homeSEO->meta_title;
-
-        $metaDescription = $homeSEO->meta_description;
-
-        $metaKeywords = $homeSEO->meta_keywords;
-    }
 @endphp
 
 
 {{-- SEO Meta Content --}}
 @push ('meta')
-    <meta name="title" content="{{ $metaTitle }}" />
+    <meta name="title" content="{{ $channel->home_seo['meta_title'] ?? '' }}" />
 
-    <meta name="description" content="{{ $metaDescription }}" />
+    <meta name="description" content="{{ $channel->home_seo['meta_description'] ?? '' }}" />
 
-    <meta name="keywords" content="{{ $metaKeywords }}" />
+    <meta name="keywords" content="{{ $channel->home_seo['meta_keywords'] ?? '' }}" />
 @endPush
 
 <x-shop::layouts>
     {{-- Page Title --}}
     <x-slot:title>
-        {{ $metaTitle ?? "" }}
+        {{  $channel->home_seo['meta_title'] ?? '' }}
     </x-slot>
     
     {{-- Loop over the theme customization --}}

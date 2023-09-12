@@ -1873,8 +1873,18 @@ return [
 
             'cart-rules-coupons' => [
                 'cart-rule-not-defined-error' => 'La règle du panier ne peut pas être supprimée',
-                'success' => ':name créée avec succès',
-                'mass-delete-success' => 'Suppression en masse des règles du panier réussie',
+                'delete-success'              => 'Coupon de règle du panier supprimé avec succès',
+                'mass-delete-success'         => 'Éléments sélectionnés supprimés avec succès',
+                'success'                     => ':name créé avec succès',
+            
+                'datagrid' => [
+                    'coupon-code'     => 'Code coupon',
+                    'created-date'    => 'Date de création',
+                    'delete'          => 'Supprimer',
+                    'expiration-date' => 'Date d\'expiration',
+                    'id'              => 'ID',
+                    'times-used'      => 'Utilisations',
+                ],
             ],
         ],
 
@@ -2546,7 +2556,7 @@ return [
                 'add-footer-link-btn'            => 'Ajouter un lien du pied de page',
                 'filters'                        => 'Filtres',
                 'edit'                           => 'Éditer',
-                'url'                            => 'URL',
+                'path'                           => 'Chemin',
                 'add-link'                       => 'Ajouter un lien',
                 'create-slider'                  => 'Créer un slider',
                 'slider-image'                   => 'Image du slider',
@@ -2598,7 +2608,7 @@ return [
                 'select'                        => 'Sélectionner',
                 'add-link'                      => 'Ajouter un lien',
                 'column'                        => 'Colonne',
-                'url'                           => 'URL',
+                'path'                          => 'Chemin',
                 'edit'                          => 'Éditer',
                 'back'                          => 'Retour',
             ],

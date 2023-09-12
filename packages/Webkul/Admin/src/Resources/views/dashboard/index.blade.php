@@ -120,7 +120,7 @@
                         <div class="flex gap-[10px] flex-1 min-w-[200px]">
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
-                                    src="{{ bagisto_asset('images/customer.svg')}}"
+                                    src="{{ bagisto_asset('images/customers.svg')}}"
                                     title="@lang('admin::app.dashboard.index.total-customers')"
                                 >
                             </div>
@@ -162,7 +162,7 @@
                         <div class="flex gap-[10px] flex-1 min-w-[200px]">
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
-                                    src="{{ bagisto_asset('images/average-order.svg')}}"
+                                    src="{{ bagisto_asset('images/average-orders.svg')}}"
                                     title="@lang('admin::app.dashboard.index.average-sale')"
                                 >
                             </div>
@@ -203,7 +203,7 @@
                         <div class="flex gap-[10px] flex-1 min-w-[200px]">
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
-                                    src="{{ bagisto_asset('images/unpaid-invoice.svg')}}"
+                                    src="{{ bagisto_asset('images/unpaid-invoices.svg')}}"
                                     title="@lang('admin::app.dashboard.index.total-unpaid-invoices')"
                                 >
                             </div>
@@ -316,7 +316,7 @@
                         <div class="flex gap-[10px] flex-1">
                             <img
                                 class="w-full h-[60px] max-w-[60px] max-h-[60px]"
-                                src="{{ bagisto_asset('images/customer.svg')}}"
+                                src="{{ bagisto_asset('images/customers.svg')}}"
                                 title="@lang('admin::app.dashboard.index.today-customers')"
                             >
 
@@ -356,7 +356,7 @@
 
                     <!-- Today Orders Detailes -->
                     @foreach ($statistics['today_details']['today_orders']['current'] as $item)
-                        <div class="row grid grid-cols-4  gap-y-[24px] p-[16px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-100 max-1580:grid-cols-3 max-sm:grid-cols-1">
+                        <div class="row grid grid-cols-4  gap-y-[24px] p-[16px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-50 max-1580:grid-cols-3 max-sm:grid-cols-1">
                             {{-- Order ID, Status, Created --}}
                             <div class="flex gap-[10px]">
                                 <div class="flex flex-col gap-[6px]">
@@ -455,7 +455,7 @@
                                             @endif
 
                                             <div class="relative">
-                                                @if ($orderItem->product->base_image_url)
+                                                @if ($orderItem->product?->base_image_url)
                                                     <img
                                                         class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
                                                         src="{{ $orderItem->product->base_image_url }}"
@@ -472,7 +472,7 @@
 
 
                                                 <span class="absolute bottom-[1px] ltr:left-[1px] rtl:right-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]">
-                                                    {{ $orderItem->product->images->count() }}
+                                                    {{ $orderItem->product?->images->count() }}
                                                 </span>
                                             </div>
                                         @endforeach
@@ -515,9 +515,9 @@
                         @foreach ($statistics['stock_threshold'] as $item)
                             <!-- Single Product -->
                             <div class="relative">
-                                <div class="row grid grid-cols-2 gap-y-[24px] p-[16px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-100 max-sm:grid-cols-[1fr_auto]">
+                                <div class="row grid grid-cols-2 gap-y-[24px] p-[16px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-50 max-sm:grid-cols-[1fr_auto]">
                                     <div class="flex gap-[10px]">
-                                        @if ($item->product->base_image_url)
+                                        @if ($item->product?->base_image_url)
                                             <div class="">
                                                 <img
                                                     class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
@@ -724,7 +724,7 @@
                             >
                                 <a
                                     :href="`{{route('admin.catalog.products.edit', '')}}/${item.product_id}`"
-                                    class="flex gap-[10px] p-[16px] border-b-[1px] border-gray-300 last:border-b-0 transition-all hover:bg-gray-100"
+                                    class="flex gap-[10px] p-[16px] border-b-[1px] border-gray-300 last:border-b-0 transition-all hover:bg-gray-50"
                                     v-for="item in statistics.top_selling_products"
                                 >
                                     <!-- Product Item -->
@@ -817,7 +817,7 @@
                     <template v-else>
                         <!-- Customers Lists -->
                         <div
-                            class="flex flex-col gap-[32px] p-[16px] border-b-[1px] border-gray-300 last:border-b-0 transition-all hover:bg-gray-100"
+                            class="flex flex-col gap-[32px] p-[16px] border-b-[1px] border-gray-300 last:border-b-0 transition-all hover:bg-gray-50"
                             v-if="statistics?.customer_with_most_sales?.length"
                             v-for="item in statistics.customer_with_most_sales"
                         >

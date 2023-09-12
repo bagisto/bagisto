@@ -129,7 +129,7 @@
         <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
             <template v-if="! isLoading">
                 <div
-                    class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 px-[16px] py-[10px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-100"
+                    class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 px-[16px] py-[10px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-50"
                     v-for="record in records"
                 >
                     {{-- Name, SKU, Attribute Family Columns --}}
@@ -388,7 +388,7 @@
 
                                             <div class="flex gap-[4px] min-h-[38px] p-[6px] border border-gray-300 rounded-[6px]">
                                                 <p
-                                                    class="flex items-center py-[3px] px-[8px] bg-gray-600 rounded-[3px] text-white font-semibold"
+                                                    class="flex items-center py-[3px] px-[8px] bg-gray-600 rounded-[4px] text-white font-semibold"
                                                     v-for="option in attribute.options"
                                                 >
                                                     @{{ option.name + option.id }}

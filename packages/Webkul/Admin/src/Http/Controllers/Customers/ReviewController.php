@@ -133,21 +133,15 @@ class ReviewController extends Controller
     public function massUpdate(MassUpdateRequest $massUpdateRequest): JsonResource
     {
         $indices = $massUpdateRequest->input('indices');
-        $validStatuses = [0 => 'pending', 1 => 'approved', 2 => 'disapproved'];
 
-        foreach ($indices as $value) {
-            $review = $this->productReviewRepository->find($value);
+        foreach ($indices as $id) {
+            Event::dispatch('customer.review.update.before', $id);
 
-            $newStatus = $validStatuses[$massUpdateRequest->input('value')] ?? null;
+            $review = $this->productReviewRepository->update([
+                'status' => $massUpdateRequest->input('value'),
+            ], $id);
 
-            if ($newStatus !== null) {
-                if ($newStatus === 'approved') {
-                    Event::dispatch('customer.review.update.before', $value);
-                    Event::dispatch('customer.review.update.after', $review);
-                }
-
-                $review->update(['status' => $newStatus]);
-            }
+            Event::dispatch('customer.review.update.after', $review);
         }
 
         return new JsonResource([

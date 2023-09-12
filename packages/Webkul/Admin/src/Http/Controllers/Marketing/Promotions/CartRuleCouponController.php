@@ -53,8 +53,23 @@ class CartRuleCouponController extends Controller
         $this->cartRuleCouponRepository->generateCoupons(request()->all(), request('id'));
 
         return new JsonResource([
-            'message' => trans('admin::app.promotions.cart-rules-coupons.success', ['name' => 'Cart rule coupons']
+            'message' => trans('admin::app.marketing.promotions.cart-rules-coupons.success', ['name' => 'Cart rule coupons']
         )]);
+    }
+
+    /**
+     * Delete Generated coupon code
+     *
+     * @param int $id
+     * @return JsonResource
+     */
+    public function destroy($id): JsonResource
+    {
+        $this->cartRuleCouponRepository->findOrFail($id);
+
+        $this->cartRuleCouponRepository->delete($id);
+
+        return new JsonResource(['message' => trans('admin::app.marketing.promotions.cart-rules-coupons.delete-success')]);
     }
 
     /**
@@ -75,7 +90,7 @@ class CartRuleCouponController extends Controller
             }
         }
 
-        session()->flash('success', trans('admin::app.promotions.cart-rules-coupons.mass-delete-success'));
+        session()->flash('success', trans('admin::app.marketing.promotions.cart-rules-coupons.mass-delete-success'));
 
         return redirect()->back();
     }

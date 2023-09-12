@@ -1,5 +1,5 @@
 @for ($i = 0; $i < 3; $i++)
-    <div class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300 cursor-pointer hover:bg-gray-100">
+    <div class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300">
         <!-- Left Information -->
         <div class="flex gap-[10px]">
             <!-- Image -->

@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-09cfe4a3.css",
+    "file": "assets/app-01683af0.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -28,13 +28,13 @@
     "file": "assets/active-static-content-704f03d2.svg",
     "src": "src/Resources/assets/images/active-static-content.svg"
   },
-  "src/Resources/assets/images/average-order.svg": {
-    "file": "assets/average-order-867ac5c6.svg",
-    "src": "src/Resources/assets/images/average-order.svg"
+  "src/Resources/assets/images/average-orders.svg": {
+    "file": "assets/average-orders-71c4bf9a.svg",
+    "src": "src/Resources/assets/images/average-orders.svg"
   },
-  "src/Resources/assets/images/customer.svg": {
-    "file": "assets/customer-e452d8d5.svg",
-    "src": "src/Resources/assets/images/customer.svg"
+  "src/Resources/assets/images/customers.svg": {
+    "file": "assets/customers-199df769.svg",
+    "src": "src/Resources/assets/images/customers.svg"
   },
   "src/Resources/assets/images/empty-placeholders/default-empty.svg": {
     "file": "assets/default-empty-2c56169a.svg",
@@ -169,16 +169,16 @@
     "src": "src/Resources/assets/images/settings/theme.svg"
   },
   "src/Resources/assets/images/total-orders.svg": {
-    "file": "assets/total-orders-3185b633.svg",
+    "file": "assets/total-orders-f1b2017e.svg",
     "src": "src/Resources/assets/images/total-orders.svg"
   },
   "src/Resources/assets/images/total-sales.svg": {
-    "file": "assets/total-sales-ba93a6bc.svg",
+    "file": "assets/total-sales-5b2c7b58.svg",
     "src": "src/Resources/assets/images/total-sales.svg"
   },
-  "src/Resources/assets/images/unpaid-invoice.svg": {
-    "file": "assets/unpaid-invoice-e28016d2.svg",
-    "src": "src/Resources/assets/images/unpaid-invoice.svg"
+  "src/Resources/assets/images/unpaid-invoices.svg": {
+    "file": "assets/unpaid-invoices-6c51662d.svg",
+    "src": "src/Resources/assets/images/unpaid-invoices.svg"
   },
   "src/Resources/assets/js/app.css": {
     "file": "assets/app-c04ede37.css",

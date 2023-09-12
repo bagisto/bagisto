@@ -1,16 +1,8 @@
 {{--
-    The category repository is injected directly here because there is no way
-    to retrieve it from the view composer, as this is an anonymous component.
---}}
-@inject('categoryRepository', 'Webkul\Category\Repositories\CategoryRepository')
-
-{{--
     This code needs to be refactored to reduce the amount of PHP in the Blade
     template as much as possible.
 --}}
 @php
-    $categories = $categoryRepository->getVisibleCategoryTree(core()->getCurrentChannel()->root_category_id);
-
     $showCompare = (bool) core()->getConfigData('general.content.shop.compare_option');
 
     $showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
@@ -254,7 +246,10 @@
 
                                 <span
                                     class="text-[24px] cursor-pointer"
-                                    :class="{'icon-arrow-down': secondLevelCategory.category_show, 'icon-arrow-right': ! secondLevelCategory.category_show}"
+                                    :class="{
+                                        'icon-arrow-down': secondLevelCategory.category_show,
+                                        'icon-arrow-right': ! secondLevelCategory.category_show
+                                    }"
                                     @click="secondLevelCategory.category_show = ! secondLevelCategory.category_show"
                                 >
                                 </span>
@@ -301,11 +296,24 @@
 
             data() {
                 return  {
-                    categories: @json($categories),
+                    categories: [],
                 }
-            }, 
+            },
+
+            mounted() {
+                this.get();
+            },
 
             methods: {
+                get() {
+                    this.$axios.get("{{ route('shop.api.categories.tree') }}")
+                        .then(response => {
+                            this.categories = response.data.data;
+                        }).catch(error => {
+                            console.log(error);
+                        });
+                },
+
                 toggle(selectedCategory) {
                     this.categories = this.categories.map((category) => ({
                         ...category,
