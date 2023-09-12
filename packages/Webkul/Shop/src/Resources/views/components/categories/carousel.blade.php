@@ -29,7 +29,7 @@
                                 <img
                                     class="w-[110px] h-[110px] rounded-full"
                                     :src="category.images.icon_url"
-                                    v-if="category?.images?.icon_url"
+                                    v-if="category.images.icon_url"
                                 />
                             </div>
                         </a>
