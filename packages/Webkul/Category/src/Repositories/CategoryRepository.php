@@ -57,8 +57,7 @@ class CategoryRepository extends Repository
             }
         }
 
-        return $queryBuilder->where('categories.id', '!=', core()->getCurrentChannel()->root_category_id)
-                ->paginate($params['limit'] ?? 10);
+        return $queryBuilder->paginate($params['limit'] ?? 10);
     }
 
     /**
