@@ -31,8 +31,9 @@
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.control
                                     type="image"
-                                    name="attachments[]"
+                                    name="attachments"
                                     class="!p-0 !mb-0"
+                                    rules="required"
                                     :label="trans('shop::app.products.view.reviews.attachments')"
                                     :is-multiple="true"
                                 >
