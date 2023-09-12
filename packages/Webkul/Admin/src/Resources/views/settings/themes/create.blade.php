@@ -1228,7 +1228,7 @@
     
                                                 <p class="text-gray-600">
                                                     <div> 
-                                                        @lang('admin::app.settings.themes.create.url'):
+                                                        @lang('admin::app.settings.themes.create.path'):
 
                                                         <a
                                                             :href="link.url"
@@ -1476,15 +1476,15 @@
         
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.settings.themes.create.url')
+                                            @lang('admin::app.settings.themes.create.path')
                                         </x-admin::form.control-group.label>
         
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="url"
-                                            rules="required|url"
-                                            :label="trans('admin::app.settings.themes.create.url')"
-                                            :placeholder="trans('admin::app.settings.themes.create.url')"
+                                            rules="required"
+                                            :label="trans('admin::app.settings.themes.create.path')"
+                                            :placeholder="trans('admin::app.settings.themes.create.path')"
                                             ::disabled="isUpdating"
                                         >
                                         </x-admin::form.control-group.control>

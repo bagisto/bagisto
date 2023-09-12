@@ -2546,7 +2546,7 @@ return [
                 'add-footer-link-btn'            => 'Adicionar Link no Rodapé',
                 'filters'                        => 'Filtros',
                 'edit'                           => 'Editar',
-                'url'                            => 'URL',
+                'path'                           => 'Caminho',
                 'add-link'                       => 'Adicionar Link',
                 'create-slider'                  => 'Criar Slider',
                 'slider-image'                   => 'Imagem do Slider',
