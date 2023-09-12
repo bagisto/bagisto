@@ -126,11 +126,12 @@
         <!-- Right Toolbar -->
         <div class="flex gap-x-[16px]">
             <!-- Filters Activation Button -->
-            <x-admin::drawer width="350px">
+            <x-admin::drawer width="350px" ref="filterDrawer">
                 <x-slot:toggle>
                     <div>
                         <div
-                            class="relative inline-flex w-full max-w-max ltr:pl-[12px] rtl:pr-[12px] ltr:pr-[16px] rtl:pl-[16px] cursor-pointer select-none appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-gray-300 bg-white px-[4px] py-[6px] text-center text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2"
+                            class="relative inline-flex w-full max-w-max ltr:pl-[12px] rtl:pr-[12px] ltr:pr-[18px] rtl:pl-[18px] cursor-pointer select-none appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-gray-300 bg-white px-[4px] py-[6px] text-center text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2"
+                            :class="{'[&>*]:text-blue-600': applied.filters.columns.length > 1}"
                         >
                             <span class="icon-filter text-[22px]"></span>
 
@@ -139,7 +140,7 @@
                             </span>
 
                             <span
-                                class="icon-dot absolute top-0 right-[6px] text-[14px] text-blue-600 font-bold"
+                                class="icon-dot absolute top-[5px] right-[8px] text-[14px] font-bold"
                                 v-if="applied.filters.columns.length > 1"
                             ></span>
                         </div>
@@ -159,7 +160,7 @@
                 </x-slot:header>
 
                 <!-- Drawer Content -->
-                <x-slot:content class="!p-[4px]">
+                <x-slot:content class="!p-[20px]">
                     <x-admin::datagrid.filters></x-admin::datagrid.filters>
                 </x-slot:content>
             </x-admin::drawer>
