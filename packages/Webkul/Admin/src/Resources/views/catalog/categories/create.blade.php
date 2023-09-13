@@ -60,9 +60,9 @@
                         <v-field
                             type="text"
                             name="name"
-                            rules="required"
-                            label="{{ trans('admin::app.catalog.categories.create.company-name') }}"
                             value="{{ old('name') }}"
+                            label="{{ trans('admin::app.catalog.categories.create.company-name') }}"
+                            rules="required"
                             v-slot="{ field }"
                         >
                             <input
@@ -204,9 +204,9 @@
                             <v-field
                                 type="text"
                                 name="slug"
-                                rules="required"
-                                label="{{ trans('admin::app.catalog.categories.create.slug') }}"
                                 value="{{ old('slug') }}"
+                                label="{{ trans('admin::app.catalog.categories.create.slug') }}"
+                                rules="required"
                                 v-slot="{ field }"
                             >
                                 <input

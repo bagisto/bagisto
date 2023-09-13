@@ -96,9 +96,9 @@
                         <v-field
                             type="text"
                             name="{{$currentLocale->code}}[name]"
-                            rules="required"
-                            label="{{ trans('admin::app.catalog.categories.edit.company-name') }}"
                             value="{{ old($currentLocale->code)['name'] ?? ($category->translate($currentLocale->code)['name'] ?? '') }}"
+                            label="{{ trans('admin::app.catalog.categories.edit.company-name') }}"
+                            rules="required"
                             v-slot="{ field }"
                         >
                             <input
@@ -255,9 +255,9 @@
                             <v-field
                                 type="text"
                                 name="{{$currentLocale->code}}[slug]"
-                                rules="required"
-                                label="{{ trans('admin::app.catalog.categories.edit.slug') }}"
                                 value="{{ old($currentLocale->code)['slug'] ?? ($category->translate($currentLocale->code)['slug'] ?? '') }}"
+                                label="{{ trans('admin::app.catalog.categories.edit.slug') }}"
+                                rules="required"
                                 v-slot="{ field }"
                             >
                                 <input
