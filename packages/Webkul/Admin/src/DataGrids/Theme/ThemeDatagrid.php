@@ -98,10 +98,10 @@ class ThemeDatagrid extends DataGrid
         ]);
 
         $this->addAction([
-            'icon'    => 'icon-delete',
-            'title'   => trans('admin::app.settings.themes.index.datagrid.delete'),
-            'method'  => 'DELETE',
-            'url'     => function ($row) {
+            'icon'   => 'icon-delete',
+            'title'  => trans('admin::app.settings.themes.index.datagrid.delete'),
+            'method' => 'DELETE',
+            'url'    => function ($row) {
                 return route('admin.theme.delete', $row->id);
             },
         ]);

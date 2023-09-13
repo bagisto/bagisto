@@ -86,10 +86,10 @@ class ChannelDataGrid extends DataGrid
         ]);
 
         $this->addAction([
-            'icon'         => 'icon-delete',
-            'title'        => trans('admin::app.settings.channels.index.datagrid.delete'),
-            'method'       => 'DELETE',
-            'url'          => function ($row) {
+            'icon'   => 'icon-delete',
+            'title'  => trans('admin::app.settings.channels.index.datagrid.delete'),
+            'method' => 'DELETE',
+            'url'    => function ($row) {
                 return route('admin.settings.channels.delete', $row->id);
             },
         ]);

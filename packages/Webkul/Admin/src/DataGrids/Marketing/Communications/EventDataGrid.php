@@ -61,10 +61,10 @@ class EventDataGrid extends DataGrid
         ]);
 
         $this->addAction([
-            'icon'    => 'icon-delete',
-            'title'   => trans('admin::app.marketing.communications.events.index.datagrid.delete'),
-            'method'  => 'POST',
-            'url'     => function ($row) {
+            'icon'   => 'icon-delete',
+            'title'  => trans('admin::app.marketing.communications.events.index.datagrid.delete'),
+            'method' => 'POST',
+            'url'    => function ($row) {
                 return route('admin.marketing.communications.events.delete', $row->id);
             },
         ]);
