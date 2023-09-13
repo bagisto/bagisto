@@ -225,28 +225,4 @@ class CartController extends APIController
             'message'  => trans('shop::app.checkout.cart.coupon.remove'),
         ]);
     }
-
-        /**
-     * Returns true, if result of adding product to cart
-     * is an array and contains a key "warning" or "info".
-     *
-     * @param  array  $result
-     * @return boolean
-     */
-    private function onFailureAddingToCart($result): bool
-    {
-        if (! is_array($result)) {
-            return false;
-        }
-
-        if (isset($result['warning'])) {
-            session()->flash('warning', $result['warning']);
-        } elseif (isset($result['info'])) {
-            session()->flash('info', $result['info']);
-        } else {
-            return false;
-        }
-
-        return true;
-    }
 }
