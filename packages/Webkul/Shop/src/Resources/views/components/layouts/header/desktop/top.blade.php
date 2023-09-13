@@ -25,21 +25,15 @@
         <x-slot:toggle>
             {{-- Dropdown Toggler --}}
             <div class="flex gap-[10px] cursor-pointer">
-                @if (! empty(core()->getCurrentLocale()->logo_url))
-                    <img 
-                        src="{{ core()->getCurrentLocale()->logo_url }}"
-                        alt="Default locale"
-                        width="20"
-                        height="20"
-                    />
-                @else
-                    <img 
-                        src="{{ asset('/themes/velocity/assets/images/flags/default-locale-image.png') }}"
-                        alt="Default locale" 
-                        width="20"
-                        height="20"
-                    />
-                @endif
+                <img 
+                    src="{{ ! empty(core()->getCurrentLocale()->logo_url) 
+                            ? core()->getCurrentLocale()->logo_url 
+                            : bagisto_asset('images/default-language.svg') 
+                        }}"
+                    alt="Default locale"
+                    width="20"
+                    height="20"
+                />
                 
                 <span>
                     {{ core()->getCurrentChannel()->locales()->orderBy('name')->where('code', app()->getLocale())->value('name') }}
@@ -78,8 +72,8 @@
                 :class="{'bg-gray-100': locale.code == '{{ app()->getLocale() }}'}"
                 @click="change(locale)"                  
             >
-                <img 
-                    :src="locale.logo_url"
+                <img
+                    :src="locale.logo_url || '{{ bagisto_asset('images/default-language.svg') }}'"
                     width="20"
                     height="20"
                 />

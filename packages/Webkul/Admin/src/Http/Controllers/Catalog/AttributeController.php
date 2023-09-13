@@ -64,9 +64,7 @@ class AttributeController extends Controller
 
         Event::dispatch('catalog.attribute.create.before');
 
-        $attribute = $this->attributeRepository->create(array_merge(request()->all(), [
-            'is_user_defined' => 1,
-        ]));
+        $attribute = $this->attributeRepository->create(array_merge(request()->input()));
 
         Event::dispatch('catalog.attribute.create.after', $attribute);
 
