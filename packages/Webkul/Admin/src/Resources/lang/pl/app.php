@@ -607,11 +607,12 @@ return [
                         'title'      => 'Produkty do sprzedaży krzyżowej',
                     ],
 
-                    'add-btn'     => 'Dodaj produkt',
-                    'delete'      => 'Usuń',
-                    'empty-title' => 'Dodaj produkt',
-                    'empty-info'  => 'Aby dodać produkty :type, wystarczy to zrobić.',
-                    'sku'         => 'SKU - :sku',
+                    'add-btn'           => 'Dodaj produkt',
+                    'delete'            => 'Usuń',
+                    'empty-title'       => 'Dodaj produkt',
+                    'empty-info'        => 'Aby dodać produkty :type, wystarczy to zrobić.',
+                    'sku'               => 'SKU - :sku',
+                    'image-placeholder' => 'Obraz produktu',
                 ],
 
                 'types' => [

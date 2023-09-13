@@ -612,6 +612,7 @@ return [
                     'empty-title' => 'उत्पाद जोड़ें',
                     'empty-info'  => 'क्रिया के लिए :type उत्पाद जोड़ने के लिए।',
                     'sku'         => 'SKU - :sku',
+                    'image-placeholder' => 'उत्पाद छवि',
                 ],
 
                 'types' => [

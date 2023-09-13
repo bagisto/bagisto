@@ -607,11 +607,12 @@ return [
                         'title'      => 'Produtos de Venda Cruzada',
                     ],
 
-                    'add-btn'     => 'Adicionar Produto',
-                    'delete'      => 'Excluir',
-                    'empty-title' => 'Adicionar Produto',
-                    'empty-info'  => 'Para adicionar produtos :type rapidamente.',
-                    'sku'         => 'SKU - :sku',
+                    'add-btn'           => 'Adicionar Produto',
+                    'delete'            => 'Excluir',
+                    'empty-title'       => 'Adicionar Produto',
+                    'empty-info'        => 'Para adicionar produtos :type rapidamente.',
+                    'sku'               => 'SKU - :sku',
+                    'image-placeholder' => 'Imagem do Produto',
                 ],
 
                 'types' => [

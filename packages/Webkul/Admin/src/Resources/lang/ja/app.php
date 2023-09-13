@@ -607,11 +607,12 @@ return [
                         'title'      => 'クロスセル製品',
                     ],
 
-                    'add-btn'     => '製品を追加',
-                    'delete'      => '削除',
-                    'empty-title' => '製品を追加',
-                    'empty-info'  => ':type 製品を追加するには。',
-                    'sku'         => 'SKU - :sku',
+                    'add-btn'           => '製品を追加',
+                    'delete'            => '削除',
+                    'empty-title'       => '製品を追加',
+                    'empty-info'        => ':type 製品を追加するには。',
+                    'sku'               => 'SKU - :sku',
+                    'image-placeholder' => '製品画像',
                 ],
 
                 'types' => [

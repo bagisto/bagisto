@@ -607,11 +607,12 @@ return [
                         'title'      => 'Cross-sell-producten',
                     ],
 
-                    'add-btn'     => 'Product Toevoegen',
-                    'delete'      => 'Verwijderen',
-                    'empty-title' => 'Product Toevoegen',
-                    'empty-info'  => 'Om :type producten snel toe te voegen.',
-                    'sku'         => 'SKU - :sku',
+                    'add-btn'           => 'Product Toevoegen',
+                    'delete'            => 'Verwijderen',
+                    'empty-title'       => 'Product Toevoegen',
+                    'empty-info'        => 'Om :type producten snel toe te voegen.',
+                    'sku'               => 'SKU - :sku',
+                    'image-placeholder' => 'Product Afbeelding',
                 ],
 
                 'types' => [
