@@ -2415,6 +2415,7 @@ return [
                     'edit'     => '编辑',
                     'active'   => '活跃',
                     'inactive' => '不活跃',
+                    'delete'   => '删除'
                 ],
 
                 'edit'  => [

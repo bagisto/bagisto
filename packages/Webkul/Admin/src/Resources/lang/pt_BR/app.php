@@ -2415,6 +2415,7 @@ return [
                     'edit'     => 'Editar',
                     'active'   => 'Ativo',
                     'inactive' => 'Inativo',
+                    'delete'   => 'Apagar',
                 ],
 
                 'edit'  => [
