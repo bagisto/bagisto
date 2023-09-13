@@ -650,25 +650,6 @@
                                     </x-admin::form.control-group.label>
                                 </x-admin::form.control-group>
 
-                                <!-- Create in Product Flat Table -->
-                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
-                                    <x-admin::form.control-group.control
-                                        type="checkbox"
-                                        name="is_user_defined"
-                                        id="is_user_defined"
-                                        for="is_user_defined"
-                                        value="1"
-                                    >
-                                    </x-admin::form.control-group.control>
-
-                                    <x-admin::form.control-group.label
-                                        for="is_user_defined"
-                                        class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer"
-                                    >
-                                        @lang('admin::app.catalog.attributes.edit.use-in-flat')
-                                    </x-admin::form.control-group.label>
-                                </x-admin::form.control-group>
-
                                 <!-- Attribute is Comparable -->
                                 <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
                                     <x-admin::form.control-group.control
@@ -691,7 +672,7 @@
                                 <!-- Use in Layered -->
                                 <label
                                     for="is_filterable" 
-                                    class="flex gap-[10px] items-center w-max py-[6px] px-[16px] cursor-pointer select-none"
+                                    class="flex gap-[10px] items-center w-max p-[6px] cursor-pointer select-none"
                                 >
                                     <input
                                         type="checkbox"

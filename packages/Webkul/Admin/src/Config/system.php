@@ -224,8 +224,8 @@ return [
                 'type'          => 'select',
                 'options'       => [
                     [
-                        'title' => 'admin::app.configuration.index.catalog.products.storefront.flat',
-                        'value' => 'flat',
+                        'title' => 'admin::app.configuration.index.catalog.products.storefront.database',
+                        'value' => 'database',
                     ], [
                         'title' => 'admin::app.configuration.index.catalog.products.storefront.elastic',
                         'value' => 'elastic',
