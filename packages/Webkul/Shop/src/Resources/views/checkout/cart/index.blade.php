@@ -71,8 +71,10 @@
                                     </span>
                                 </div>
 
-                                @{{allSelected}}
-                                <div class="max-sm:ml-[35px] max-sm:mt-[10px]">
+                                <div 
+                                    class="max-sm:ml-[35px] max-sm:mt-[10px]"
+                                    v-if="selectedItemsCount"
+                                >
                                     <span
                                         class="text-[16px] text-[#0A49A7] cursor-pointer" 
                                         @click="removeSelectedItems"
@@ -267,7 +269,7 @@
                 computed: {
                     selectedItemsCount() {
                         return this.cart.items.filter(item => item.selected).length;
-                    }
+                    },
                 },
 
                 methods: {
