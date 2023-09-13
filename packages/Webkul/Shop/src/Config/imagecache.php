@@ -51,9 +51,9 @@ return [
      */
 
     'templates' => [
-        'small'  => 'Webkul\Product\CacheFilters\Small',
-        'medium' => 'Webkul\Product\CacheFilters\Medium',
-        'large'  => 'Webkul\Product\CacheFilters\Large',
+        'small'  => 'Webkul\Shop\CacheFilters\Small',
+        'medium' => 'Webkul\Shop\CacheFilters\Medium',
+        'large'  => 'Webkul\Shop\CacheFilters\Large',
     ],
 
     /*

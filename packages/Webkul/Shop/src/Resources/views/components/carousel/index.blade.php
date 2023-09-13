@@ -17,6 +17,7 @@
                 <x-shop::shimmer.image
                     class="w-full aspect-[2.743/1]"
                     ::src="image.image"
+                    ::srcset="image.image + ' 1920w, ' + image.image.replace('storage', 'cache/large') + ' 1280w,' + image.image.replace('storage', 'cache/medium') + ' 1024w, ' + image.image.replace('storage', 'cache/small') + ' 525w'"
                 ></x-shop::shimmer.image>
             </a>
 
@@ -79,7 +80,7 @@
                     let self = this;
 
                     setInterval(() => {
-                        this.navigate(this.currentIndex += 1);
+                        //this.navigate(this.currentIndex += 1);
                     }, 5000);
                 }
             }

@@ -36,6 +36,10 @@ class ShopServiceProvider extends ServiceProvider
         $router->aliasMiddleware('customer', AuthenticateCustomer::class);
         $router->aliasMiddleware('theme', Theme::class);
 
+        $this->publishes([
+            dirname(__DIR__) . '/Config/imagecache.php' => config_path('imagecache.php'),
+        ]);
+
         /* View Composers */
         $this->composeView();
 
