@@ -78,8 +78,8 @@
                 :class="{'bg-gray-100': locale.code == '{{ app()->getLocale() }}'}"
                 @click="change(locale)"                  
             >
-                <img 
-                    :src="locale.logo_url"
+                <img
+                    :src="locale.logo_url || '{{ bagisto_asset('images/small-product-placeholder.png') }}'"
                     width="20"
                     height="20"
                 />
