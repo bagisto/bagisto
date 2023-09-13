@@ -522,6 +522,7 @@ return [
                 'quantity-update'          => 'تعداد با موفقیت به‌روزرسانی شد',
                 'see-details'              => 'مشاهده جزئیات',
                 'move-to-wishlist'         => 'انتقال به لیست علاقه‌مندی',
+                'items-selected'           => ':count مورد انتخاب شده',
             ],
     
             'coupon' => [

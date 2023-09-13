@@ -522,6 +522,7 @@ return [
                 'quantity-update'          => 'পরিমাণ সফলভাবে আপডেট হয়েছে',
                 'see-details'              => 'বিশদ দেখুন',
                 'move-to-wishlist'         => 'ইচ্ছেসূচি তালিকায় সরান',
+                'items-selected'           => ':count টি আইটেম নির্বাচিত',
             ],
 
             'coupon' => [

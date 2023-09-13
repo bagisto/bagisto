@@ -522,6 +522,7 @@ return [
                 'quantity-update'          => 'Hoeveelheid succesvol bijgewerkt',
                 'see-details'              => 'Details bekijken',
                 'move-to-wishlist'         => 'Verplaatsen naar verlanglijst',
+                'items-selected'           => ':count items geselecteerd',
             ],
     
             'coupon'   => [

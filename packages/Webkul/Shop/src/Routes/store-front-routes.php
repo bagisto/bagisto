@@ -34,7 +34,9 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
     /**
      * Store front search.
      */
-    Route::get('search', [SearchController::class, 'index'])->name('shop.search.index');
+    Route::get('search', [SearchController::class, 'index'])
+        ->name('shop.search.index')
+        ->middleware('cacheResponse');
 
     Route::post('search/upload', [SearchController::class, 'upload'])->name('shop.search.upload');
 
@@ -50,7 +52,9 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
     /**
      * Compare products
      */
-    Route::get('compare', [CompareController::class, 'index'])->name('shop.compare.index');
+    Route::get('compare', [CompareController::class, 'index'])
+        ->name('shop.compare.index')
+        ->middleware('cacheResponse');
 
     /**
      * Downloadable products

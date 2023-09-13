@@ -522,6 +522,7 @@ return [
                 'quantity-update'          => 'Quantidade atualizada com sucesso',
                 'see-details'              => 'Ver Detalhes',
                 'move-to-wishlist'         => 'Mover para a Lista de Desejos',
+                'items-selected'           => ':count Itens Selecionados',
             ],
 
             'coupon'   => [

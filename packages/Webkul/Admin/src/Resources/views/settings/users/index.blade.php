@@ -385,7 +385,7 @@
                                     >
                                     </v-media-images>
 
-                                    <p class="required my-3 text-[14px] text-gray-400">
+                                    <p class="my-3 text-[14px] text-gray-400">
                                         @lang('admin::app.settings.users.index.create.upload-image-info')
                                     </p>
                                 </x-admin::form.control-group>

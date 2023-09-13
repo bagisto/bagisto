@@ -69,7 +69,7 @@ return new class extends Migration
                     'type'       => 'category_carousel',
                     'name'       => 'Categories Collections',
                     'sort_order' => 3,
-                    'status'     => 0,
+                    'status'     => 1,
                     'created_at' => $now,
                     'updated_at' => $now,
                     'options'    => json_encode([
@@ -84,7 +84,7 @@ return new class extends Migration
                     'type'       => 'product_carousel',
                     'name'       => 'New Products',
                     'sort_order' => 4,
-                    'status'     => 0,
+                    'status'     => 1,
                     'created_at' => $now,
                     'updated_at' => $now,
                     'options'    => json_encode([
@@ -100,7 +100,7 @@ return new class extends Migration
                     'type'       => 'static_content',
                     'name'       => 'Top Collections',
                     'sort_order' => 5,
-                    'status'     => 0,
+                    'status'     => 1,
                     'created_at' => $now,
                     'updated_at' => $now,
                     'options'    => json_encode([
@@ -112,7 +112,7 @@ return new class extends Migration
                     'type'       => 'static_content',
                     'name'       => 'Bold Collections',
                     'sort_order' => 6,
-                    'status'     => 0,
+                    'status'     => 1,
                     'created_at' => $now,
                     'updated_at' => $now,
                     'options'    => json_encode([
@@ -124,7 +124,7 @@ return new class extends Migration
                     'type'       => 'product_carousel',
                     'name'       => 'Featured Collections',
                     'sort_order' => 7,
-                    'status'     => 0,
+                    'status'     => 1,
                     'created_at' => $now,
                     'updated_at' => $now,
                     'options'    => json_encode([
@@ -140,7 +140,7 @@ return new class extends Migration
                     'type'       => 'static_content',
                     'name'       => 'Game Container',
                     'sort_order' => 8,
-                    'status'     => 0,
+                    'status'     => 1,
                     'created_at' => $now,
                     'updated_at' => $now,
                     'options'    => json_encode([
@@ -152,7 +152,7 @@ return new class extends Migration
                     'type'       => 'product_carousel',
                     'name'       => 'All Products',
                     'sort_order' => 9,
-                    'status'     => 0,
+                    'status'     => 1,
                     'created_at' => $now,
                     'updated_at' => $now,
                     'options'    => json_encode([
@@ -167,7 +167,7 @@ return new class extends Migration
                     'type'       => 'static_content',
                     'name'       => 'Bold Collections',
                     'sort_order' => 10,
-                    'status'     => 0,
+                    'status'     => 1,
                     'created_at' => $now,
                     'updated_at' => $now,
                     'options'    => json_encode([
@@ -179,7 +179,7 @@ return new class extends Migration
                     'type'       => 'footer_links',
                     'name'       => 'Footer Links',
                     'sort_order' => 11,
-                    'status'     => 0,
+                    'status'     => 1,
                     'created_at' => $now,
                     'updated_at' => $now,
                     'options'    => json_encode([

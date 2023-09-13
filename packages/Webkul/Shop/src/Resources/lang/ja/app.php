@@ -522,6 +522,7 @@ return [
                 'quantity-update'          => '数量が正常に更新されました',
                 'see-details'              => '詳細を見る',
                 'move-to-wishlist'         => 'ウィッシュリストに移動',
+                'items-selected'           => ':count 個のアイテムが選択されました',
             ],
 
             'coupon'   => [

@@ -522,6 +522,7 @@ return [
                 'quantity-update'          => '数量已成功更新',
                 'see-details'              => '查看详情',
                 'move-to-wishlist'         => '移至愿望清单',
+                'items-selected'           => '已选择 :count 项',
             ],
 
             'coupon'   => [

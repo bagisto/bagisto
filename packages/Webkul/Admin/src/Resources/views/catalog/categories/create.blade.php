@@ -54,15 +54,15 @@
                     {{-- Name --}}
                     <x-admin::form.control-group class="mb-[10px]">
                         <x-admin::form.control-group.label class="required">
-                            @lang('admin::app.catalog.categories.create.company-name')
+                            @lang('admin::app.catalog.categories.create.name')
                         </x-admin::form.control-group.label>
 
                         <v-field
                             type="text"
                             name="name"
-                            rules="required"
-                            label="{{ trans('admin::app.catalog.categories.create.company-name') }}"
                             value="{{ old('name') }}"
+                            label="{{ trans('admin::app.catalog.categories.create.name') }}"
+                            rules="required"
                             v-slot="{ field }"
                         >
                             <input
@@ -72,8 +72,8 @@
                                 v-bind="field"
                                 :class="[errors['{{ 'name' }}'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
-                                placeholder="{{ trans('admin::app.catalog.categories.create.company-name') }}"
-                                v-slugify-target:slug
+                                placeholder="{{ trans('admin::app.catalog.categories.create.name') }}"
+                                v-slugify-target:slug="setValues"
                             >
                         </v-field>
 
@@ -204,9 +204,9 @@
                             <v-field
                                 type="text"
                                 name="slug"
-                                rules="required"
-                                label="{{ trans('admin::app.catalog.categories.create.slug') }}"
                                 value="{{ old('slug') }}"
+                                label="{{ trans('admin::app.catalog.categories.create.slug') }}"
+                                rules="required"
                                 v-slot="{ field }"
                             >
                                 <input

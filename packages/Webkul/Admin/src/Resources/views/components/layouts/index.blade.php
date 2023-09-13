@@ -64,7 +64,7 @@
         <x-admin::layouts.header />
 
         <div
-            class="flex gap-[16px] group/container {{ ($_COOKIE['sidebar_collapsed'] ?? 0) ? 'sidebar-collapsed' : '' }}"
+            class="flex gap-[16px] group/container {{ (request()->cookie('sidebar_collapsed') ?? 0) ? 'sidebar-collapsed' : '' }}"
             ref="appLayout"
         >
             {{-- Page Sidebar Blade Component --}}
