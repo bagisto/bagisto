@@ -3,6 +3,7 @@
 namespace Webkul\Shop\Http\Controllers\API;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Http\Response;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductRepository;
@@ -92,34 +93,43 @@ class CartController extends APIController
     public function add(): JsonResource
     {
         try {
-            $product = $this->productRepository->with('parent')->find(request()->input('product_id'));
+            $id = request()->input('product_id');
 
-            Cart::removeCart(Cart::getCart());
+            if ($product = $this->productRepository->findOrFail($id)) {
+                if (! $product->visible_individually) {
+                    return redirect()->back();
+                }
+            }
 
-            $cart = Cart::addProduct($product->id, request()->all());
+            Cart::deactivateCurrentCartIfBuyNowIsActive();
 
-            if (
-                is_array($cart)
-                && isset($cart['warning'])
-            ) {
-                return new JsonResource([
-                    'message' => $cart['warning'],
+            $result = Cart::addProduct($id, request()->all());
+
+            if ($this->onFailureAddingToCart($result)) {
+                return redirect()->back();
+            }
+
+            if ($customer = auth()->guard('customer')->user()) {
+                $this->wishlistRepository->deleteWhere([
+                    'product_id'  => $product->id,
+                    'customer_id' => $customer->id,
                 ]);
             }
 
-            if ($cart) {
-                if ($customer = auth()->guard('customer')->user()) {
-                    $this->wishlistRepository->deleteWhere([
-                        'product_id'  => $product->id,
-                        'customer_id' => $customer->id,
-                    ]);
-                }
+            if (request()->get('is_buy_now')) {
+                Event::dispatch('shop.item.buy-now', $id);
 
                 return new JsonResource([
                     'data'     => new CartResource(Cart::getCart()),
+                    'redirect' => route('shop.checkout.onepage.index'),
                     'message'  => trans('shop::app.checkout.cart.item-add-to-cart'),
                 ]);
             }
+
+            return new JsonResource([
+                'data'     => new CartResource(Cart::getCart()),
+                'message'  => trans('shop::app.checkout.cart.item-add-to-cart'),
+            ]);
         } catch (\Exception $exception) {
             return new JsonResource([
                 'redirect_uri' => route('shop.product_or_category.index', $product->product->url_key),
@@ -251,5 +261,29 @@ class CartController extends APIController
             'data'     => new CartResource(Cart::getCart()),
             'message'  => trans('shop::app.checkout.cart.coupon.remove'),
         ]);
+    }
+
+        /**
+     * Returns true, if result of adding product to cart
+     * is an array and contains a key "warning" or "info".
+     *
+     * @param  array  $result
+     * @return boolean
+     */
+    private function onFailureAddingToCart($result): bool
+    {
+        if (! is_array($result)) {
+            return false;
+        }
+
+        if (isset($result['warning'])) {
+            session()->flash('warning', $result['warning']);
+        } elseif (isset($result['info'])) {
+            session()->flash('info', $result['info']);
+        } else {
+            return false;
+        }
+
+        return true;
     }
 }

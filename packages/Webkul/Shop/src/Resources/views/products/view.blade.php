@@ -217,6 +217,12 @@
                         name="product_id" 
                         value="{{ $product->id }}"
                     >
+
+                    <input
+                        type="hidden"
+                        name="is_buy_now"
+                        v-model="is_buy_now"
+                    >
                     
                     <input 
                         type="hidden" 
@@ -309,7 +315,6 @@
 
                                     {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
 
-
                                     <!-- Add To Cart Button -->
                                     {!! view_render_event('bagisto.shop.products.view.add_to_cart.before', ['product' => $product]) !!}
 
@@ -326,13 +331,16 @@
                                 <!-- Buy Now Button -->
                                 {!! view_render_event('bagisto.shop.products.view.buy_now.before', ['product' => $product]) !!}
 
-                                <p
-                                    class="bs-primary-button w-full max-w-[470px] mt-[20px] text-center"
-                                    @click="buyNow({{ $product->id }})"
-                                    {{ ! $product->isSaleable(1) ? 'disabled' : '' }}
-                                >
-                                    @lang('shop::app.products.buy-now')
-                                </p>
+                                @if (core()->getConfigData('catalog.products.storefront.buy_now_button_display'))
+                                    <button
+                                        type="submit"
+                                        class="bs-primary-button w-full max-w-[470px] mt-[20px]"
+                                        @click="is_buy_now=1;"
+                                        {{ ! $product->isSaleable(1) ? 'disabled' : '' }}
+                                    >
+                                        @lang('shop::app.products.buy-now')
+                                    </button>
+                                @endif
 
                                 {!! view_render_event('bagisto.shop.products.view.buy_now.after', ['product' => $product]) !!}
 
@@ -342,7 +350,7 @@
 
                                     <div
                                         class="flex gap-[10px] justify-center items-center cursor-pointer"
-                                        @click="addToCompare({{ $product->id }})"
+                                        @click="is_buy_now=0; addToCompare({{ $product->id }})"
                                     >
                                         <span class="icon-compare text-[24px]"></span>
                                         @lang('shop::app.products.compare')
@@ -368,31 +376,13 @@
                         isWishlist: Boolean("{{ (boolean) auth()->guard()->user()?->wishlist_items->where('channel_id', core()->getCurrentChannel()->id)->where('product_id', $product->id)->count() }}"),
 
                         isCustomer: '{{ auth()->guard('customer')->check() }}',
+
+                        is_buy_now: 0,
                     }
                 },
 
                 methods: {
                     addToCart(params) {
-                        let formData = new FormData(this.$refs.formData);
-
-                        this.$axios.post('{{ route("shop.api.checkout.cart.store") }}', formData, {
-                                headers: {
-                                    'Content-Type': 'multipart/form-data'
-                                }
-                            })
-                            .then(response => {
-                                if (response.data.message) {
-                                    this.$emitter.emit('update-mini-cart', response.data.data);
-
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
-                                } else {
-                                    this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
-                                }
-                            })
-                            .catch(error => {});
-                    },
-
-                    buyNow(productId) {
                         let formData = new FormData(this.$refs.formData);
 
                         this.$axios.post('{{ route("shop.api.checkout.cart.add") }}', formData, {
@@ -402,11 +392,13 @@
                             })
                             .then(response => {
                                 if (response.data.message) {
-                                    window.location.href = "{{ route('shop.checkout.onepage.index') }}";
-
                                     this.$emitter.emit('update-mini-cart', response.data.data);
-                                    
+
                                     this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+
+                                    if (response.data.redirect) {
+                                        window.location.href= response.data.redirect;
+                                    }
                                 } else {
                                     this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
                                 }
