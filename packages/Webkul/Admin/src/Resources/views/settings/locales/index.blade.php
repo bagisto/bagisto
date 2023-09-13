@@ -306,8 +306,8 @@
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
                             this.isUpdating = false;
-
-                            window.location.reload();
+                            
+                            this.$refs.datagrid.get();
                         })
                         .catch(error => {
                             if (error.response.status == 422) {
