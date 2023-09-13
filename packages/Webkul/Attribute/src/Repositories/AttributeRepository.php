@@ -73,8 +73,6 @@ class AttributeRepository extends Repository
 
         $attribute = $this->find($id);
 
-        $data['enable_wysiwyg'] = isset($data['enable_wysiwyg']);
-
         $attribute->update($data);
 
         if (! in_array($attribute->type, ['select', 'multiselect', 'checkbox'])) {
