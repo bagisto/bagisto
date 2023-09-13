@@ -78,10 +78,10 @@ class ExchangeRatesDataGrid extends DataGrid
         ]);
 
         $this->addAction([
-            'icon'    => 'icon-delete',
-            'title'   => trans('admin::app.settings.exchange-rates.index.datagrid.delete'),
-            'method'  => 'DELETE',
-            'url'     => function ($row) {
+            'icon'   => 'icon-delete',
+            'title'  => trans('admin::app.settings.exchange-rates.index.datagrid.delete'),
+            'method' => 'DELETE',
+            'url'    => function ($row) {
                 return route('admin.settings.exchange_rates.delete', $row->currency_exchange_id);
             },
         ]);
