@@ -394,15 +394,19 @@
                     },
 
                     addToWishlist() {
-                        this.$axios.post('{{ route('shop.api.customers.account.wishlist.store') }}', {
-                                product_id: "{{ $product->id }}"
-                            })
-                            .then(response => {
-                                this.isWishlist = ! this.isWishlist;
+                        if (this.isCustomer) {
+                            this.$axios.post('{{ route('shop.api.customers.account.wishlist.store') }}', {
+                                    product_id: "{{ $product->id }}"
+                                })
+                                .then(response => {
+                                    this.isWishlist = ! this.isWishlist;
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
-                            })
-                            .catch(error => {});
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                })
+                                .catch(error => {});
+                        } else {
+                            window.location.href = "{{ route('shop.customer.session.index')}}";
+                        }
                     },
 
                     addToCompare(productId) {
