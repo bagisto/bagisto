@@ -607,11 +607,12 @@ return [
                         'title'      => 'Productos de Venta Cruzada',
                     ],
 
-                    'add-btn'     => 'Agregar Producto',
-                    'delete'      => 'Eliminar',
-                    'empty-title' => 'Agregar Producto',
-                    'empty-info'  => 'Para agregar productos de tipo :type de forma rápida.',
-                    'sku'         => 'SKU - :sku',
+                    'add-btn'           => 'Agregar Producto',
+                    'delete'            => 'Eliminar',
+                    'empty-title'       => 'Agregar Producto',
+                    'empty-info'        => 'Para agregar productos de tipo :type de forma rápida.',
+                    'sku'               => 'SKU - :sku',
+                    'image-placeholder' => 'Imagen del Producto',
                 ],
 
                 'types' => [
@@ -2415,6 +2416,7 @@ return [
                     'edit'      => 'Editar',
                     'active'    => 'Activo',
                     'inactive'  => 'Inactivo',
+                    'delete'    => 'Borrar',
                 ],
 
                 'edit' => [

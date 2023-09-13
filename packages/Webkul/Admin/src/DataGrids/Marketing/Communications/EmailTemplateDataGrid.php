@@ -82,10 +82,10 @@ class EmailTemplateDataGrid extends DataGrid
         ]);
 
         $this->addAction([
-            'icon'    => 'icon-delete',
-            'title'   => trans('admin::app.marketing.communications.templates.index.datagrid.delete'),
-            'method'  => 'DELETE',
-            'url'     => function ($row) {
+            'icon'   => 'icon-delete',
+            'title'  => trans('admin::app.marketing.communications.templates.index.datagrid.delete'),
+            'method' => 'DELETE',
+            'url'    => function ($row) {
                 return route('admin.marketing.communications.email_templates.delete', $row->id);
             },
         ]);

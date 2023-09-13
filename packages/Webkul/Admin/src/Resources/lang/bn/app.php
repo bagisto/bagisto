@@ -607,11 +607,12 @@ return [
                         'title'      => 'ক্রস-সেল পণ্য',
                     ],
 
-                    'add-btn'     => 'পণ্য যোগ করুন',
-                    'delete'      => 'মুছে ফেলুন',
-                    'empty-title' => 'পণ্য যোগ করুন',
-                    'empty-info'  => ':type পণ্য সম্পাদনা করতে যোগ করুন।',
-                    'sku'         => 'SKU - :sku',
+                    'add-btn'           => 'পণ্য যোগ করুন',
+                    'delete'            => 'মুছে ফেলুন',
+                    'empty-title'       => 'পণ্য যোগ করুন',
+                    'empty-info'        => ':type পণ্য সম্পাদনা করতে যোগ করুন।',
+                    'sku'               => 'SKU - :sku',
+                    'image-placeholder' => 'পণ্য চিত্র',
                 ],
 
                 'types' => [
@@ -2415,6 +2416,7 @@ return [
                     'edit'     => 'সম্পাদনা',
                     'active'   => 'সক্রিয়',
                     'inactive' => 'নিষ্ক্রিয়',
+                    'delete'   => 'মুছে ফেলা',
                 ],
 
                 'edit' => [

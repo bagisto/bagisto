@@ -140,10 +140,10 @@ class ProductDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'icon'      => 'icon-edit',
-            'title'     => trans('admin::app.datagrid.edit'),
-            'method'    => 'GET',
-            'url'       => function ($row) {
+            'icon'   => 'icon-edit',
+            'title'  => trans('admin::app.datagrid.edit'),
+            'method' => 'GET',
+            'url'    => function ($row) {
                 return route('admin.catalog.products.index', $row->id);
             },
 

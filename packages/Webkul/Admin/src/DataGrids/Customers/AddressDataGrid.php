@@ -174,10 +174,10 @@ class AddressDataGrid extends DataGrid
         ]);
 
         $this->addAction([
-            'icon'    => 'icon-delete',
-            'title'   => trans('admin::app.customers.addresses.datagrid.delete'),
-            'method'  => 'POST',
-            'url'     => function ($row) {
+            'icon'   => 'icon-delete',
+            'title'  => trans('admin::app.customers.addresses.datagrid.delete'),
+            'method' => 'POST',
+            'url'    => function ($row) {
                 return route('admin.customers.customers.addresses.delete', $row->address_id);
             },
         ]);
