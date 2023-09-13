@@ -90,7 +90,7 @@
                     {{-- Name --}}
                     <x-admin::form.control-group class="mb-[10px]">
                         <x-admin::form.control-group.label class="required">
-                            @lang('admin::app.catalog.categories.edit.company-name')
+                            @lang('admin::app.catalog.categories.edit.name')
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
@@ -99,8 +99,8 @@
                             value="{{ old($currentLocale->code)['name'] ?? ($category->translate($currentLocale->code)['name'] ?? '') }}"
                             class="w-full"
                             rules="required"
-                            :label="trans('admin::app.catalog.categories.edit.company-name')"
-                            :placeholder="trans('admin::app.catalog.categories.edit.company-name')"
+                            :label="trans('admin::app.catalog.categories.edit.name')"
+                            :placeholder="trans('admin::app.catalog.categories.edit.name')"
                         >
                         </x-admin::form.control-group.control>
 
