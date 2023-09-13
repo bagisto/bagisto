@@ -66,7 +66,7 @@
 
             data() {
                 return {
-                    isCollapsed: {{ $_COOKIE['sidebar_collapsed'] ?? 0 }},
+                    isCollapsed: {{ request()->cookie('sidebar_collapsed') ?? 0 }},
                 }
             },
 
