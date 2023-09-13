@@ -30,6 +30,7 @@
         "khaled.alshamaa/ar-php": "^6.0.0",
         "konekt/concord": "^1.2",
         "laravel/framework": "^10.0",
+        "laravel/octane": "^2.0",
         "laravel/sanctum": "^3.2",
         "laravel/socialite": "^5.0",
         "laravel/tinker": "^2.0",
