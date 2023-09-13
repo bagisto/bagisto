@@ -2415,6 +2415,7 @@ return [
                     'edit'     => 'ערוך',
                     'active'   => 'פעיל',
                     'inactive' => 'לא פעיל',
+                    'delete'   => 'מחק',
                 ],
 
                 'edit'  => [
