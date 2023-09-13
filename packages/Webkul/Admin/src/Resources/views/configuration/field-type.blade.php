@@ -178,7 +178,17 @@
 
         {{-- Boolean/Switch input --}}
         @elseif ($field['type'] == 'boolean')
-            @php $selectedOption = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? ($field['default_value'] ?? ''); @endphp
+            @php
+                $selectedOption = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? ($field['default_value'] ?? '');
+            @endphp
+
+            <!-- Hidden Fild for unseleted Switch button -->
+            <x-admin::form.control-group.control
+                type="hidden"
+                :name="$name"
+                value="0"
+            >
+            </x-admin::form.control-group.control>
 
             <x-admin::form.control-group.control
                 type="switch"
