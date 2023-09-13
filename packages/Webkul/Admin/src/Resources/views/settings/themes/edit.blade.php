@@ -722,29 +722,6 @@
                             </div>
                         </div>
 
-                        <x-admin::form.control-group class="mb-[10px] pt-[16px]">
-                            <x-admin::form.control-group.label class="required">
-                                @lang('admin::app.settings.themes.edit.filter-title')
-                            </x-admin::form.control-group.label>
-
-                            <v-field
-                                type="text"
-                                name="options[title]"
-                                value="{{ $theme->options['title'] ?? ''}}"
-                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
-                                :class="[errors['options[title]'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                rules="required"
-                                label="@lang('admin::app.settings.themes.edit.filter-title')"
-                                placeholder="@lang('admin::app.settings.themes.edit.filter-title')"
-                            >
-                            </v-field>
-
-                            <x-admin::form.control-group.error
-                                control-name="options[title]"
-                            >
-                            </x-admin::form.control-group.error>
-                        </x-admin::form.control-group>
-
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.sort')

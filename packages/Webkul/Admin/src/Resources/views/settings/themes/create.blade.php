@@ -175,7 +175,7 @@
                 <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                     <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                         <div class="p-[16px] bg-white rounded box-shadow">
-                            <div class="flex gap-x-[10px] justify-between items-center">
+                            <div class="flex gap-x-[10px] justify-between items-center mb-[10px]">
                                 <div class="flex flex-col gap-[4px]">
                                     <p class="text-[16px] text-gray-800 font-semibold">@lang('admin::app.settings.themes.create.sliders')</p>
                                     <p class="text-[12px] text-gray-500 font-medium">
@@ -461,7 +461,7 @@
             <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                 <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                     <div class="p-[16px] bg-white rounded box-shadow">
-                        <div class="flex gap-x-[10px] justify-between items-center">
+                        <div class="flex gap-x-[10px] justify-between items-center mb-[10px]">
                             <div class="flex flex-col gap-[4px]">
                                 <p class="text-[16px] text-gray-800 font-semibold">
                                     @lang('admin::app.settings.themes.create.product-carousel')
@@ -548,7 +548,7 @@
 
                         <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] border-gray-300"></span>
 
-                        <div class="flex gap-x-[10px] justify-between items-center">
+                        <div class="flex gap-x-[10px] justify-between items-center mb-[10px]">
                             <div class="flex flex-col gap-[4px]">
                                 <p class="text-[16px] text-gray-800 font-semibold">
                                     @lang('admin::app.settings.themes.create.filters')
@@ -817,7 +817,7 @@
             <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                 <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                     <div class="p-[16px] bg-white rounded box-shadow">
-                        <div class="flex gap-x-[10px] justify-between items-center">
+                        <div class="flex gap-x-[10px] justify-between items-center mb-[10px]">
                             <div class="flex flex-col gap-[4px]">
                                 <p class="text-[16px] text-gray-800 font-semibold">
                                     @lang('admin::app.settings.themes.create.category-carousel')
@@ -828,28 +828,6 @@
                                 </p>
                             </div>
                         </div>
-
-                        <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label class="required">
-                                @lang('admin::app.settings.themes.create.filter-title')
-                            </x-admin::form.control-group.label>
-
-                            <v-field
-                                type="text"
-                                name="options[title]"
-                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
-                                :class="[errors['options[title]'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                rules="required"
-                                label="@lang('admin::app.settings.themes.create.filter-title')"
-                                placeholder="@lang('admin::app.settings.themes.create.filter-title')"
-                            >
-                            </v-field>
-
-                            <x-admin::form.control-group.error
-                                control-name="options[title]"
-                            >
-                            </x-admin::form.control-group.error>
-                        </x-admin::form.control-group>
 
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label class="required">
@@ -904,7 +882,7 @@
 
                         <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] border-gray-300"></span>
 
-                        <div class="flex gap-x-[10px] justify-between items-center">
+                        <div class="flex gap-x-[10px] justify-between items-center mb-[10px]">
                             <div class="flex flex-col gap-[4px]">
                                 <p class="text-[16px] text-gray-800 font-semibold">
                                     @lang('admin::app.settings.themes.create.filters')
@@ -1176,7 +1154,7 @@
                     <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                         <div class="p-[16px] bg-white rounded box-shadow">
                             <!-- Add Links-->
-                            <div class="flex gap-x-[10px] justify-between items-center">
+                            <div class="flex gap-x-[10px] justify-between items-center mb-[10px]">
                                 <div class="flex flex-col gap-[4px]">
                                     <p class="text-[16px] text-gray-800 font-semibold">
                                         @lang('admin::app.settings.themes.create.footer-link')
@@ -1539,7 +1517,7 @@
             <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                 <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                     <div class="p-[16px] bg-white rounded box-shadow">
-                        <div class="flex gap-x-[10px] justify-between items-center">
+                        <div class="flex gap-x-[10px] justify-between items-center mb-[10px]">
                             <div class="flex flex-col gap-[4px]">
                                 <p class="text-[16px] text-gray-800 font-semibold">
                                     @lang('admin::app.settings.themes.create.static-content')

@@ -138,7 +138,9 @@ class ThemeController extends Controller
         Event::dispatch('theme_customization.delete.after', $id);
 
         return response()->json([
-            'message' => trans('admin::app.settings.themes.delete-success'),
+            'data' => [
+                'message' => trans('admin::app.settings.themes.delete-success'),
+            ]
         ], 200);
     }
 }
