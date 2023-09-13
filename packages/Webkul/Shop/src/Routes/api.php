@@ -55,8 +55,6 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
     Route::controller(CartController::class)->prefix('checkout/cart')->group(function () {
         Route::get('', 'index')->name('shop.api.checkout.cart.index');
 
-        Route::post('add', 'add')->name('shop.api.checkout.cart.add');
-
         Route::post('', 'store')->name('shop.api.checkout.cart.store');
 
         Route::put('', 'update')->name('shop.api.checkout.cart.update');

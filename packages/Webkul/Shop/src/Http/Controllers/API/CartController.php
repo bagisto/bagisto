@@ -52,6 +52,10 @@ class CartController extends APIController
         try {
             $product = $this->productRepository->with('parent')->find(request()->input('product_id'));
 
+            if (request()->get('is_buy_now')) {
+                Cart::deActivateCart();
+            } 
+
             $cart = Cart::addProduct($product->id, request()->all());
 
             /**
@@ -74,62 +78,21 @@ class CartController extends APIController
                     ]);
                 }
 
-                return new JsonResource([
-                    'data'     => new CartResource(Cart::getCart()),
-                    'message'  => trans('shop::app.checkout.cart.item-add-to-cart'),
-                ]);
-            }
-        } catch (\Exception $exception) {
-            return new JsonResource([
-                'redirect_uri' => route('shop.product_or_category.index', $product->product->url_key),
-                'message'      => $exception->getMessage(),
-            ]);
-        }
-    }
+                if (request()->get('is_buy_now')) {
+                    Event::dispatch('shop.item.buy-now', request()->input('product_id'));
 
-    /**
-     * Add items in cart.
-     */
-    public function add(): JsonResource
-    {
-        try {
-            $id = request()->input('product_id');
-
-            if ($product = $this->productRepository->findOrFail($id)) {
-                if (! $product->visible_individually) {
-                    return redirect()->back();
+                    return new JsonResource([
+                        'data'     => new CartResource(Cart::getCart()),
+                        'redirect' => route('shop.checkout.onepage.index'),
+                        'message'  => trans('shop::app.checkout.cart.item-add-to-cart'),
+                    ]);
                 }
-            }
-
-            Cart::deactivateCurrentCartIfBuyNowIsActive();
-
-            $result = Cart::addProduct($id, request()->all());
-
-            if ($this->onFailureAddingToCart($result)) {
-                return redirect()->back();
-            }
-
-            if ($customer = auth()->guard('customer')->user()) {
-                $this->wishlistRepository->deleteWhere([
-                    'product_id'  => $product->id,
-                    'customer_id' => $customer->id,
-                ]);
-            }
-
-            if (request()->get('is_buy_now')) {
-                Event::dispatch('shop.item.buy-now', $id);
 
                 return new JsonResource([
                     'data'     => new CartResource(Cart::getCart()),
-                    'redirect' => route('shop.checkout.onepage.index'),
                     'message'  => trans('shop::app.checkout.cart.item-add-to-cart'),
                 ]);
             }
-
-            return new JsonResource([
-                'data'     => new CartResource(Cart::getCart()),
-                'message'  => trans('shop::app.checkout.cart.item-add-to-cart'),
-            ]);
         } catch (\Exception $exception) {
             return new JsonResource([
                 'redirect_uri' => route('shop.product_or_category.index', $product->product->url_key),

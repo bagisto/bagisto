@@ -385,7 +385,7 @@
                     addToCart(params) {
                         let formData = new FormData(this.$refs.formData);
 
-                        this.$axios.post('{{ route("shop.api.checkout.cart.add") }}', formData, {
+                        this.$axios.post('{{ route("shop.api.checkout.cart.store") }}', formData, {
                                 headers: {
                                     'Content-Type': 'multipart/form-data'
                                 }
