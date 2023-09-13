@@ -87,6 +87,48 @@ class CartController extends APIController
     }
 
     /**
+     * Add items in cart.
+     */
+    public function add(): JsonResource
+    {
+        try {
+            $product = $this->productRepository->with('parent')->find(request()->input('product_id'));
+
+            Cart::removeCart(Cart::getCart());
+
+            $cart = Cart::addProduct($product->id, request()->all());
+
+            if (
+                is_array($cart)
+                && isset($cart['warning'])
+            ) {
+                return new JsonResource([
+                    'message' => $cart['warning'],
+                ]);
+            }
+
+            if ($cart) {
+                if ($customer = auth()->guard('customer')->user()) {
+                    $this->wishlistRepository->deleteWhere([
+                        'product_id'  => $product->id,
+                        'customer_id' => $customer->id,
+                    ]);
+                }
+
+                return new JsonResource([
+                    'data'     => new CartResource(Cart::getCart()),
+                    'message'  => trans('shop::app.checkout.cart.item-add-to-cart'),
+                ]);
+            }
+        } catch (\Exception $exception) {
+            return new JsonResource([
+                'redirect_uri' => route('shop.product_or_category.index', $product->product->url_key),
+                'message'      => $exception->getMessage(),
+            ]);
+        }
+    }
+
+    /**
      * Removes the item from the cart if it exists.
      */
     public function destroy(): JsonResource

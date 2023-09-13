@@ -13,9 +13,9 @@
 
                     <span
                         class="absolute  px-[7px] top-[-15px] left-[18px] py-[5px] bg-[#060C3B] rounded-[44px] text-[#fff] text-[10px] font-semibold leading-[9px]"
-                        v-if="cart?.items_count"
+                        v-if="cart?.items_qty"
                     >
-                        @{{ cart.items_count }}
+                        @{{ cart.items_qty }}
                     </span>
                 </span>
             </x-slot:toggle>

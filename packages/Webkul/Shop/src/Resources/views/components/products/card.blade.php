@@ -269,8 +269,9 @@
                                 this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
                             }
                         })
-                        .catch(error => {});
+                        .catch(error => {
                             this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
+                        });
                 },
             },
         });

@@ -323,17 +323,16 @@
                                     {!! view_render_event('bagisto.shop.products.view.add_to_cart.after', ['product' => $product]) !!}
                                 </div>
 
-
                                 <!-- Buy Now Button -->
                                 {!! view_render_event('bagisto.shop.products.view.buy_now.before', ['product' => $product]) !!}
 
-                                <button
-                                    type="submit"
-                                    class="bs-primary-button w-full max-w-[470px] mt-[20px]"
+                                <p
+                                    class="bs-primary-button w-full max-w-[470px] mt-[20px] text-center"
+                                    @click="buyNow({{ $product->id }})"
                                     {{ ! $product->isSaleable(1) ? 'disabled' : '' }}
                                 >
                                     @lang('shop::app.products.buy-now')
-                                </button>
+                                </p>
 
                                 {!! view_render_event('bagisto.shop.products.view.buy_now.after', ['product' => $product]) !!}
 
@@ -385,6 +384,28 @@
                                 if (response.data.message) {
                                     this.$emitter.emit('update-mini-cart', response.data.data);
 
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                } else {
+                                    this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
+                                }
+                            })
+                            .catch(error => {});
+                    },
+
+                    buyNow(productId) {
+                        let formData = new FormData(this.$refs.formData);
+
+                        this.$axios.post('{{ route("shop.api.checkout.cart.add") }}', formData, {
+                                headers: {
+                                    'Content-Type': 'multipart/form-data'
+                                }
+                            })
+                            .then(response => {
+                                if (response.data.message) {
+                                    window.location.href = "{{ route('shop.checkout.onepage.index') }}";
+
+                                    this.$emitter.emit('update-mini-cart', response.data.data);
+                                    
                                     this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                                 } else {
                                     this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
