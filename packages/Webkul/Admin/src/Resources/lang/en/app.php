@@ -607,11 +607,12 @@ return [
                         'title'      => 'Cross-Sell Products',
                     ],
 
-                    'add-btn'     => 'Add Product',
-                    'delete'      => 'Delete',
-                    'empty-title' => 'Add Product',
-                    'empty-info'  => 'To add :type products on a go.',
-                    'sku'         => 'SKU - :sku',
+                    'add-btn'           => 'Add Product',
+                    'delete'            => 'Delete',
+                    'empty-title'       => 'Add Product',
+                    'empty-info'        => 'To add :type products on a go.',
+                    'sku'               => 'SKU - :sku',
+                    'image-placeholder' => 'Product Image',
                 ],
 
                 'types' => [

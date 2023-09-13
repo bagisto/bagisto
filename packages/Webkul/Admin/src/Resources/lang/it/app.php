@@ -612,6 +612,7 @@ return [
                     'empty-title' => 'Aggiungi Prodotto',
                     'empty-info'  => 'Per aggiungere prodotti :type in un colpo solo.',
                     'sku'         => 'SKU - :sku',
+                    'image-placeholder' => 'Immagine Prodotto',
                 ],
 
                 'types' => [
