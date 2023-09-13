@@ -34,7 +34,7 @@
                     <button 
                         type="button"
                         class="primary-button"
-                        @click="$refs.localeUpdateOrCreateModal.toggle()"
+                        @click="resetForm();$refs.localeUpdateOrCreateModal.toggle()"
                     >
                         @lang('admin::app.settings.locales.index.create-btn')
                     </button>
@@ -308,6 +308,8 @@
                             this.isUpdating = false;
                             
                             this.$refs.datagrid.get();
+
+                            resetForm();
                         })
                         .catch(error => {
                             if (error.response.status == 422) {
@@ -351,6 +353,12 @@
                                 }
                             });
                     },
+
+                    resetForm() {
+                        this.locale = {
+                            image: [],
+                        };
+                    }
                 },
             });
         </script>
