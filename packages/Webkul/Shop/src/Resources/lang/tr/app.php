@@ -522,6 +522,7 @@ return [
                 'quantity-update'          => 'Miktar başarıyla güncellendi',
                 'see-details'              => 'Detayları Gör',
                 'move-to-wishlist'         => 'Favorilere Taşı',
+                'items-selected'           => ':count Seçilen Öğeler',
             ],
 
             'coupon' => [

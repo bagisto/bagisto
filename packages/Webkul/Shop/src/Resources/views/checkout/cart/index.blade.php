@@ -67,10 +67,11 @@
                                     </label>
 
                                     <span class="text-[20px] max-md:text-[22px] max-sm:text-[18px] ml-[10px]">
-                                        @{{ selectedItemsCount }} Items Selected
+                                        @{{ "@lang('shop::app.checkout.cart.index.items-selected')".replace(':count', selectedItemsCount) }}
                                     </span>
                                 </div>
 
+                                @{{allSelected}}
                                 <div class="max-sm:ml-[35px] max-sm:mt-[10px]">
                                     <span
                                         class="text-[16px] text-[#0A49A7] cursor-pointer" 
@@ -273,9 +274,9 @@
                     get() {
                         this.$axios.get('{{ route('shop.api.checkout.cart.index') }}')
                             .then(response => {
-                                this.isLoading = false;
-
                                 this.cart = response.data.data;
+
+                                this.isLoading = false;
 
                                 if (response.data.message) {
                                     this.$emitter.emit('add-flash', { type: 'info', message: response.data.message });
