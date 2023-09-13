@@ -90,14 +90,14 @@
                     {{-- Name --}}
                     <x-admin::form.control-group class="mb-[10px]">
                         <x-admin::form.control-group.label class="required">
-                            @lang('admin::app.catalog.categories.edit.company-name')
+                            @lang('admin::app.catalog.categories.edit.name')
                         </x-admin::form.control-group.label>
 
                         <v-field
                             type="text"
                             name="{{$currentLocale->code}}[name]"
                             value="{{ old($currentLocale->code)['name'] ?? ($category->translate($currentLocale->code)['name'] ?? '') }}"
-                            label="{{ trans('admin::app.catalog.categories.edit.company-name') }}"
+                            label="{{ trans('admin::app.catalog.categories.edit.name') }}"
                             rules="required"
                             v-slot="{ field }"
                         >
@@ -108,7 +108,7 @@
                                 v-bind="field"
                                 :class="[errors['{{ $currentLocale->code }}[name]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
-                                placeholder="{{ trans('admin::app.catalog.categories.edit.company-name') }}"
+                                placeholder="{{ trans('admin::app.catalog.categories.edit.name') }}"
                                 v-slugify-target:{{$currentLocale->code . '[slug]'}}="setValues"
                             >
                         </v-field>
