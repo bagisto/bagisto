@@ -522,6 +522,7 @@ return [
                 'quantity-update'          => 'मात्रा सफलतापूर्वक अपडेट की गई',
                 'see-details'              => 'विवरण देखें',
                 'move-to-wishlist'         => 'विशलिस्ट में मूव करें',
+                'items-selected'           => ':count वस्तुएँ चयनित',
             ],
 
             'coupon'   => [

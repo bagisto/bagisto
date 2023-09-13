@@ -522,6 +522,7 @@ return [
                 'quantity-update'          => 'Количество успешно обновлено',
                 'see-details'              => 'Подробнее',
                 'move-to-wishlist'         => 'Переместить в список желаний',
+                'items-selected'           => ':count выбранных элементов',
             ],
 
             'coupon' => [

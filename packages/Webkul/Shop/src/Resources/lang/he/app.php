@@ -522,6 +522,7 @@ return [
                 'quantity-update'          => 'עודכן בהצלחה',
                 'see-details'              => 'ראה פרטים',
                 'move-to-wishlist'         => 'העבר לרשימת המשאלות',
+                'items-selected'           => ':count פריטים נבחרו',
             ],
 
             'coupon'   => [

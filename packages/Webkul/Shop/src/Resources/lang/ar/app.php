@@ -522,6 +522,7 @@ return [
                 'quantity-update'          => 'تم تحديث الكمية بنجاح',
                 'see-details'              => 'رؤية التفاصيل',
                 'move-to-wishlist'         => 'نقل إلى قائمة الأماني',
+                'items-selected'           => ':count عناصر تم تحديدها',
             ],
 
             'coupon' => [

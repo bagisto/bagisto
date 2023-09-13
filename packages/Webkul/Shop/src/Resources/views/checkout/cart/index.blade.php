@@ -67,11 +67,14 @@
                                     </label>
 
                                     <span class="text-[20px] max-md:text-[22px] max-sm:text-[18px] ml-[10px]">
-                                        @{{ selectedItemsCount }} Items Selected
+                                        @{{ "@lang('shop::app.checkout.cart.index.items-selected')".replace(':count', selectedItemsCount) }}
                                     </span>
                                 </div>
 
-                                <div class="max-sm:ml-[35px] max-sm:mt-[10px]">
+                                <div 
+                                    class="max-sm:ml-[35px] max-sm:mt-[10px]"
+                                    v-if="selectedItemsCount"
+                                >
                                     <span
                                         class="text-[16px] text-[#0A49A7] cursor-pointer" 
                                         @click="removeSelectedItems"
@@ -79,14 +82,16 @@
                                         @lang('shop::app.checkout.cart.index.remove')
                                     </span>
 
-                                    <span class="mx-[10px] border-r-[2px] border-[#E9E9E9]"></span>
+                                    @if (auth()->guard()->check())
+                                        <span class="mx-[10px] border-r-[2px] border-[#E9E9E9]"></span>
 
-                                    <span
-                                        class="text-[16px] text-[#0A49A7] cursor-pointer" 
-                                        @click="moveToWishlistSelectedItems"
-                                    >
-                                        @lang('shop::app.checkout.cart.index.move-to-wishlist')
-                                    </span>
+                                        <span
+                                            class="text-[16px] text-[#0A49A7] cursor-pointer" 
+                                            @click="moveToWishlistSelectedItems"
+                                        >
+                                            @lang('shop::app.checkout.cart.index.move-to-wishlist')
+                                        </span>    
+                                    @endif
                                 </div>
                             </div>
                         
@@ -266,16 +271,16 @@
                 computed: {
                     selectedItemsCount() {
                         return this.cart.items.filter(item => item.selected).length;
-                    }
+                    },
                 },
 
                 methods: {
                     get() {
                         this.$axios.get('{{ route('shop.api.checkout.cart.index') }}')
                             .then(response => {
-                                this.isLoading = false;
-
                                 this.cart = response.data.data;
+
+                                this.isLoading = false;
 
                                 if (response.data.message) {
                                     this.$emitter.emit('add-flash', { type: 'info', message: response.data.message });
