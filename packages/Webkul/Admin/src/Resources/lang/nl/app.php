@@ -2834,12 +2834,6 @@ return [
                     'settings-info' => 'Stel verlanglijst, abonnementen op nieuwsbrieven, e-mailverificaties en sociale login in.',
                     'title'         => 'Instellingen',
 
-                    'wishlist' => [
-                        'share'      => 'Delen inschakelen',
-                        'title'      => 'Verlanglijst',
-                        'title-info' => '"Verlanglijst" is een persoonlijke verzameling gewenste items, waarmee gebruikers producten kunnen opslaan voor toekomstige referentie of mogelijke aankoop.',
-                    ],
-
                     'newsletter' => [
                         'subscription' => 'Abonnement op nieuwsbrief toestaan',
                         'title'        => 'Abonnement op nieuwsbrief',

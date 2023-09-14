@@ -2834,12 +2834,6 @@ return [
                     'settings-info' => 'Configurar lista de deseos, suscripción al boletín, verificación de correo electrónico y inicio de sesión social.',
                     'title'         => 'Configuración',
 
-                    'wishlist' => [
-                        'share'      => 'Activar Compartir',
-                        'title'      => 'Lista de Deseos',
-                        'title-info' => 'Una "Lista de Deseos" es una colección personal de elementos deseados que permite a los usuarios guardar productos para futuras referencias o posibles compras.',
-                    ],
-
                     'newsletter' => [
                         'subscription' => 'Activar Suscripción al Boletín',
                         'title'        => 'Suscripción al Boletín',

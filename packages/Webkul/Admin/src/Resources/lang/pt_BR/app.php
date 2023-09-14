@@ -2834,12 +2834,6 @@ return [
                     'settings-info' => 'Defina lista de desejos, assinaturas de boletim informativo, verificação de e-mail e login social.',
                     'title'         => 'Configurações',
 
-                    'wishlist' => [
-                        'share'      => 'Ativar Compartilhamento',
-                        'title'      => 'Lista de Desejos',
-                        'title-info' => '"Lista de desejos" é uma coleção personalizada de itens desejados, permitindo que os usuários salvem produtos para referência futura ou compra potencial.',
-                    ],
-
                     'newsletter' => [
                         'subscription' => 'Permitir Assinatura de Boletim Informativo',
                         'title'        => 'Assinatura de Boletim Informativo',
