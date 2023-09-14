@@ -84,9 +84,11 @@
         {{-- Right Navigation --}}
         <div>
             <div class="flex  items-center gap-x-[20px]">
-                <a href="{{ route('shop.compare.index') }}">
-                    <span class="icon-compare text-[24px] cursor-pointer"></span>
-                </a>
+                @if($showCompare)
+                    <a href="{{ route('shop.compare.index') }}">
+                        <span class="icon-compare text-[24px] cursor-pointer"></span>
+                    </a>
+                @endif
                 
                 @include('shop::checkout.cart.mini-cart')
 

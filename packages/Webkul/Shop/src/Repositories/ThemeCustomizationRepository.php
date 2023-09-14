@@ -23,17 +23,27 @@ class ThemeCustomizationRepository extends Repository
      * @param  array  $imageOptions
      * @param  \Webkul\Shop\Contracts\ThemeCustomization  $theme
      * 
-     * @return void
+     * @return void|string
      */
-    public function uploadImage($imageOptions, $theme, $removeImages = [])
+    public function uploadImage($imageOptions, $theme, $deletedSliderImages = [])
     {
-        if (! empty($imageOptions)) {
-            return;
+        foreach ($deletedSliderImages as $slider) {
+            Storage::delete(str_replace('storage/', '', $slider['image']));
         }
 
-        $options = [];
-
         foreach($imageOptions as $images) {
+            if (empty($images) || is_string($images)) {
+                continue;
+            }
+
+            if ($images instanceof UploadedFile) {
+                $folder = 'theme/' . $theme->id;
+
+                $fileName = uniqid('static_content') . '.' . $images->getClientOriginalExtension();
+
+                return '<img class="lazy" data-src="'. Storage::url($images->storeAs($folder, $fileName)) .'">';
+            }
+
             foreach ($images as $key => $image) {
                 if (isset($image['image']) && $image['image'] instanceof UploadedFile) {
                     $options['images'][] = [
@@ -43,12 +53,18 @@ class ThemeCustomizationRepository extends Repository
                         'link' => $image['link'],
                     ];
                 } else {
-                    $options['images'] = $theme->options['images'];
+                    foreach ($imageOptions['options'] as $option) {
+                        if (! $option['image'] instanceof UploadedFile) {
+                            $previousOptions[] = $option;
+                        }
+                    }
+
+                    $options['images'] = $previousOptions ?? [];
                 }
             }   
         }
 
-        $theme->options = $options;
+        $theme->options = $options ?? [];
     
         $theme->save();
     }

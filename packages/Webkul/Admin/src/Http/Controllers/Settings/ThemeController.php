@@ -3,6 +3,8 @@
 namespace Webkul\Admin\Http\Controllers\Settings;
 
 use Illuminate\Support\Facades\Event;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Shop\Repositories\ThemeCustomizationRepository;
 use Webkul\Admin\DataGrids\Theme\ThemeDatagrid;
@@ -33,42 +35,37 @@ class ThemeController extends Controller
     }
 
     /**
-     * Create a new theme
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create()
-    {
-        return view('admin::settings.themes.create');
-    }
-
-    /**
-     * Store theme
-     *
-     * @return \Illuminate\Http\RedirectResponse
+     * Store a newly created resource in storage.
+     * 
+     * @return \Illuminate\Http\Resources\Json\JsonResource|string
      */
     public function store()
     {
-        $data = request()->only(['options', 'type', 'name', 'sort_order', 'status']);
+        if (request()->has('id')) {
+            $theme = $this->themeCustomizationRepository->find(request()->input('id'));
 
-        if ($data['type'] == 'static_content') {
-            $data['options']['html'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $data['options']['html']); 
-            $data['options']['css'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $data['options']['css']); 
+            return $this->themeCustomizationRepository->uploadImage(request()->all(), $theme);
         }
+
+        $this->validate(request(), [
+            'name'       => 'required',
+            'sort_order' => 'required|numeric',
+            'type'       => 'in:product_carousel,category_carousel,static_content,image_carousel,footer_links'
+        ]);
 
         Event::dispatch('theme_customization.create.before');
 
-        $theme = $this->themeCustomizationRepository->create($data);
-
-        if ($data['type'] == 'image_carousel') {
-            $this->themeCustomizationRepository->uploadImage(request()->all('options'), $theme);
-        }
+        $theme = $this->themeCustomizationRepository->create([
+            'name'       => request()->input('name'),
+            'sort_order' => request()->input('sort_order'),
+            'type'       => request()->input('type'),
+        ]);
 
         Event::dispatch('theme_customization.create.after', $theme);
 
-        session()->flash('success', trans('admin::app.settings.themes.create-success'));
-
-        return redirect()->route('admin.theme.index');
+        return new JsonResource([
+            'redirect_url' => route('admin.theme.edit', $theme->id),
+        ]);
     }
 
     /**
@@ -113,7 +110,7 @@ class ThemeController extends Controller
             $this->themeCustomizationRepository->uploadImage(
                 request()->all('options'), 
                 $theme,
-                request()->input('options_remove')
+                request()->input('deleted_sliders', [])
             );
         }
 
@@ -133,12 +130,18 @@ class ThemeController extends Controller
     {
         Event::dispatch('theme_customization.delete.before', $id);
 
-        $this->themeCustomizationRepository->delete($id);
+        $theme = $this->themeCustomizationRepository->find($id);
+
+        $theme?->delete();
+
+        Storage::deleteDirectory('theme/'. $theme->id);
 
         Event::dispatch('theme_customization.delete.after', $id);
 
         return response()->json([
-            'message' => trans('admin::app.settings.themes.delete-success'),
+            'data' => [
+                'message' => trans('admin::app.settings.themes.delete-success'),
+            ]
         ], 200);
     }
 }

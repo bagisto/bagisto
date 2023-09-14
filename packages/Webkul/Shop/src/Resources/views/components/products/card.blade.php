@@ -16,8 +16,6 @@
                     <x-shop::shimmer.image
                         class="relative after:content-[' '] after:block after:pb-[calc(100%+9px)] rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
                         ::src="product.base_image.medium_image_url"
-                        width="291"
-                        height="300"
                     ></x-shop::shimmer.image>
                 </a>
                 
@@ -46,11 +44,13 @@
                             </a>
                         @endif
 
-                        <a
-                            class="icon-compare flex justify-center items-center w-[30px] h-[30px] absolute top-[60px] right-[20px] bg-white rounded-md cursor-pointer text-[25px]"
-                            @click="addToCompare(product.id)"
-                        >
-                        </a>
+                        @if (core()->getConfigData('general.content.shop.compare_option'))
+                            <a
+                                class="icon-compare flex justify-center items-center w-[30px] h-[30px] absolute top-[60px] right-[20px] bg-white rounded-md cursor-pointer text-[25px]"
+                                @click="addToCompare(product.id)"
+                            >
+                            </a>
+                        @endif
 
                         <a
                             class="absolute bottom-[15px] left-[50%] py-[11px] px-[43px] bg-white rounded-xl text-navyBlue text-xs w-max font-medium cursor-pointer -translate-x-[50%] translate-y-[54px] group-hover:translate-y-0 transition-all duration-300"
@@ -118,11 +118,13 @@
                             </span> 
                         @endif
                         
-                        <span 
-                            class="icon-compare flex justify-center items-center absolute top-[60px] right-[20px] w-[30px] h-[30px] bg-white rounded-md text-[25px] cursor-pointer"
-                            @click="addToCompare(product.id)"
-                        >
-                        </span>
+                        @if (core()->getConfigData('general.content.shop.compare_option'))
+                            <span 
+                                class="icon-compare flex justify-center items-center absolute top-[60px] right-[20px] w-[30px] h-[30px] bg-white rounded-md text-[25px] cursor-pointer"
+                                @click="addToCompare(product.id)"
+                            >
+                            </span>
+                        @endif
                     </div> 
                 </div> 
             </div> 

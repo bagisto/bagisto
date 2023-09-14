@@ -174,8 +174,6 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
     Route::controller(ThemeController::class)->prefix('settings/themes')->group(function () {
         Route::get('', 'index')->name('admin.theme.index');
 
-        Route::get('create', 'create')->name('admin.theme.create');
-
         Route::get('edit/{id}', 'edit')->name('admin.theme.edit');
 
         Route::post('store', 'store')->name('admin.theme.store');
