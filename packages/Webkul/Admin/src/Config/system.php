@@ -559,18 +559,6 @@ return [
         'icon' => 'settings/settings.svg',
         'sort' => 3,
     ], [
-        'key'    => 'customer.settings.wishlist',
-        'name'   => 'admin::app.configuration.index.customer.settings.wishlist.title',
-        'info'   => 'admin::app.configuration.index.customer.settings.wishlist.title-info',
-        'sort'   => 1,
-        'fields' => [
-            [
-                'name'  => 'share',
-                'title' => 'admin::app.configuration.index.customer.settings.wishlist.share',
-                'type'  => 'boolean',
-            ],
-        ],
-    ], [
         'key'    => 'customer.settings.newsletter',
         'name'   => 'admin::app.configuration.index.customer.settings.newsletter.title',
         'info'   => 'admin::app.configuration.index.customer.settings.newsletter.title-info',
