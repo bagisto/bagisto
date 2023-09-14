@@ -113,7 +113,7 @@ class ThemeController extends Controller
             $this->themeCustomizationRepository->uploadImage(
                 request()->all('options'), 
                 $theme,
-                request()->input('options_remove')
+                request()->input('deleted_sliders', [])
             );
         }
 

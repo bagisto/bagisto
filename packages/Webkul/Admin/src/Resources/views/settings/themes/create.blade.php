@@ -1703,7 +1703,6 @@
                                 tabSize: 2,
                                 value: this.options.html,
                                 mode: 'htmlmixed',
-                                theme: 'monokai'
                             });
 
                             this._html.on('changes', () => {
@@ -1954,7 +1953,6 @@
                                 tabSize: 2,
                                 value: this.options.css,
                                 mode: 'css',
-                                theme: 'monokai'
                             });
 
                             this._css.on('changes', () => {

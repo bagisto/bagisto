@@ -74,12 +74,8 @@
                                 </div>
                             </div>
 
-                            <template v-for="(removeImage, index) in removedImages">
-                                <!-- Hidden Input -->
-                                <input type="file" class="hidden" :name="'options_remove['+ index +'][image]'" :ref="'imageInput_' + index" />
-                                <input type="hidden" :name="'removeImages[]'" :value="removeImage"/>  
-                                <input type="hidden" :name="'options_remove['+ index +'][link]'" :value="removeImage.link" />    
-                                <input type="hidden" :name="'options_remove['+ index +'][image]'" :value="removeImage.image" />  
+                            <template v-for="(deletedSlider, index) in deletedSliders">
+                                <input type="hidden" :name="'deleted_sliders['+ index +'][image]'" :value="deletedSlider.image" />  
                             </template>
 
                             <div
@@ -1586,7 +1582,7 @@
                     return {
                         sliders: @json($theme->options),
 
-                        removedImages: [],
+                        deletedSliders: [],
                     };
                 },
 
@@ -1621,11 +1617,14 @@
                     },
 
                     remove(image) {
-                        this.removedImages.push(image);
-
-                        let index = this.sliders.images.indexOf(image);
-
-                        this.sliders.images.splice(image, 1);
+                        this.deletedSliders.push(image);
+                        
+                        this.sliders.images = this.sliders.images.filter(item => {
+                            return (
+                                item.link !== image.link || 
+                                item.image !== image.image
+                            );
+                        });
                     },
                 },
             });
@@ -1769,7 +1768,6 @@
                                 tabSize: 2,
                                 value: this.options.html,
                                 mode: 'htmlmixed',
-                                theme: 'monokai'
                             });
 
                             this._html.on('changes', () => {
@@ -1810,7 +1808,6 @@
                                 tabSize: 2,
                                 value: this.options.css,
                                 mode: 'css',
-                                theme: 'monokai'
                             });
 
                             this._css.on('changes', () => {
