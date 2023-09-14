@@ -244,12 +244,14 @@
                                         {{ $product->name }}
                                     </h1>
 
-                                    <div
-                                        class="flex items-center justify-center min-w-[46px] min-h-[46px] max-h-[46px] bg-white border border-black rounded-full text-[24px] transition-all hover:opacity-[0.8] cursor-pointer"
-                                        :class="isWishlist ? 'icon-heart-fill' : 'icon-heart'"
-                                        @click="addToWishlist"
-                                    >
-                                    </div>
+                                    @if (core()->getConfigData('general.content.shop.wishlist_option'))
+                                        <div
+                                            class="flex items-center justify-center min-w-[46px] min-h-[46px] max-h-[46px] bg-white border border-black rounded-full text-[24px] transition-all hover:opacity-[0.8] cursor-pointer"
+                                            :class="isWishlist ? 'icon-heart-fill' : 'icon-heart'"
+                                            @click="addToWishlist"
+                                        >
+                                        </div>
+                                    @endif
                                 </div>
 
                                 {!! view_render_event('bagisto.shop.products.name.before', ['product' => $product]) !!}
