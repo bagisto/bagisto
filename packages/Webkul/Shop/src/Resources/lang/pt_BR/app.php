@@ -255,6 +255,7 @@ return [
                 'delete-all'         => 'Excluir Todos',
                 'empty'              => 'Nenhum produto foi adicionado à página de lista de desejos.',
                 'move-to-cart'       => 'Mover para o Carrinho',
+                'moved-success'      => 'Item movido com sucesso para o carrinho',    
                 'profile'            => 'Perfil',
                 'removed'            => 'Item removido com sucesso da lista de desejos',
                 'remove-fail'        => 'O item não pode ser removido da lista de desejos',

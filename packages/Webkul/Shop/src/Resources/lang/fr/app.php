@@ -255,6 +255,7 @@ return [
                 'delete-all'         => 'Tout supprimer',
                 'empty'              => 'Aucun produit n\'a été ajouté à la liste de souhaits.',
                 'move-to-cart'       => 'Déplacer vers le panier',
+                'moved-success'      => 'Article déplacé avec succès dans le panier',    
                 'profile'            => 'Profil',
                 'removed'            => 'Article supprimé avec succès de la liste de souhaits',
                 'remove-fail'        => 'L\'article ne peut pas être supprimé de la liste de souhaits.',

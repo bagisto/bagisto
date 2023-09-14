@@ -255,6 +255,7 @@ return [
                 'delete-all'         => 'Elimina Tutto',
                 'empty'              => 'Non sono stati aggiunti prodotti alla pagina dei desideri.',
                 'move-to-cart'       => 'Sposta Nel Carrello',
+                'moved-success'      => 'Articolo spostato con successo nel carrello',    
                 'profile'            => 'Profilo',
                 'removed'            => 'Elemento Rimosso Con Successo Dalla Lista dei Desideri',
                 'remove-fail'        => 'L’elemento non può essere rimosso dalla lista dei desideri.',
