@@ -53,12 +53,14 @@ return [
                 'name'          => 'compare_option',
                 'title'         => 'admin::app.configuration.index.general.content.settings.compare-options',
                 'type'          => 'boolean',
+                'default'       => '1',
                 'locale_based'  => true,
                 'channel_based' => true,
             ], [
                 'name'          => 'wishlist_option',
                 'title'         => 'admin::app.configuration.index.general.content.settings.wishlist-options',
                 'type'          => 'boolean',
+                'default'       => '1',
                 'locale_based'  => true,
                 'channel_based' => true,
             ], [
