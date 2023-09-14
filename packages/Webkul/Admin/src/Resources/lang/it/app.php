@@ -2834,12 +2834,6 @@ return [
                     'settings-info' => 'Imposta lista dei desideri, iscrizioni alla newsletter, verifica dell\'email e accesso tramite social media.',
                     'title'         => 'Impostazioni',
 
-                    'wishlist' => [
-                        'share'      => 'Abilita Condivisione',
-                        'title'      => 'Lista dei Desideri',
-                        'title-info' => '"Lista dei desideri" è una raccolta personalizzata di articoli desiderati, che consente agli utenti di salvare prodotti per futuri riferimenti o potenziali acquisti.',
-                    ],
-
                     'newsletter' => [
                         'subscription' => 'Permetti Iscrizione alla Newsletter',
                         'title'        => 'Iscrizione alla Newsletter',

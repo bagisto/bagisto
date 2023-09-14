@@ -2834,12 +2834,6 @@ return [
                     'settings-info' => '设置愿望清单、新闻订阅、电子邮件验证和社交登录。',
                     'title'         => '设置',
 
-                    'wishlist' => [
-                        'share'      => '启用分享',
-                        'title'      => '愿望清单',
-                        'title-info' => '"愿望清单"是用户个性化的心愿物品收藏，允许用户保存未来参考或潜在购买的产品。',
-                    ],
-
                     'newsletter' => [
                         'subscription' => '允许新闻订阅',
                         'title'        => '新闻订阅',

@@ -2834,12 +2834,6 @@ return [
                     'settings-info' => 'Configurer la liste de souhaits, l\'abonnement à la newsletter, la vérification par e-mail et la connexion via les réseaux sociaux.',
                     'title'         => 'Paramètres',
 
-                    'wishlist' => [
-                        'share'      => 'Activer le partage',
-                        'title'      => 'Liste de souhaits',
-                        'title-info' => 'Une "liste de souhaits" est une collection personnelle d\'articles souhaités qui permet aux utilisateurs de sauvegarder des produits pour des références futures ou des achats potentiels.',
-                    ],
-
                     'newsletter' => [
                         'subscription' => 'Activer l\'abonnement à la newsletter',
                         'title'        => 'Abonnement à la newsletter',

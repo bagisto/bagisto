@@ -2834,12 +2834,6 @@ return [
                     'settings-info' => 'Dilek listesi, bülten abonelikleri, e-posta doğrulamaları ve sosyal giriş ayarlarını yapın.',
                     'title'         => 'Ayarlar',
 
-                    'wishlist' => [
-                        'share'      => 'Paylaşımı Etkinleştir',
-                        'title'      => 'Dilek Listesi',
-                        'title-info' => '"Dilek listesi", kullanıcıların gelecekte başvurmak veya potansiyel satın alma için ürünleri kaydetmelerine olanak tanıyan kişiselleştirilmiş bir ürün koleksiyonudur.',
-                    ],
-
                     'newsletter' => [
                         'subscription' => 'Bülten Aboneliğine İzin Ver',
                         'title'        => 'Bülten Aboneliği',
