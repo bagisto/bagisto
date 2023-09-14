@@ -2300,7 +2300,7 @@ return [
                 'title'             => 'Канали',
                 'create-btn'        => 'Створити канал',
                 'delete-success'    => 'Канал успішно видалено.',
-                'delete-failed'     => ':name Видалення не вдалося',
+                'delete-failed'     => 'Канал Видалення не вдалося',
                 'last-delete-error' => 'Не вдалося видалити останній канал.',
 
                 'datagrid' => [

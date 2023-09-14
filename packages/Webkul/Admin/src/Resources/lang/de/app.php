@@ -2300,7 +2300,7 @@ return [
                 'title'             => 'Kanäle',
                 'create-btn'        => 'Kanal erstellen',
                 'delete-success'    => 'Kanal erfolgreich gelöscht.',
-                'delete-failed'     => ':name konnte nicht gelöscht werden',
+                'delete-failed'     => 'Kanal konnte nicht gelöscht werden',
                 'last-delete-error' => 'Der letzte Kanal konnte nicht gelöscht werden.',
 
                 'datagrid' => [

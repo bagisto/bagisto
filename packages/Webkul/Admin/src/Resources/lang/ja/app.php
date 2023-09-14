@@ -2300,7 +2300,7 @@ return [
                 'title'             => 'チャネル',
                 'create-btn'        => 'チャネルを作成',
                 'delete-success'    => 'チャネルが正常に削除されました。',
-                'delete-failed'     => ':name の削除に失敗しました',
+                'delete-failed'     => 'チャンネル の削除に失敗しました',
                 'last-delete-error' => '最後のチャネルの削除に失敗しました。',
 
                 'datagrid' => [

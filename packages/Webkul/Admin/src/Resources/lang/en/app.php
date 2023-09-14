@@ -2300,7 +2300,7 @@ return [
                 'title'             => 'Channels',
                 'create-btn'        => 'Create Channel',
                 'delete-success'    => 'Channel deleted successfully.',
-                'delete-failed'     => ':name Delete Failed',
+                'delete-failed'     => 'Channel Delete Failed',
                 'last-delete-error' => 'Last Channel deleted failed.',
 
                 'datagrid' => [

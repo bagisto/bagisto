@@ -2300,7 +2300,7 @@ return [
                 'title'             => 'Canais',
                 'create-btn'        => 'Criar Canal',
                 'delete-success'    => 'Canal excluído com sucesso.',
-                'delete-failed'     => ':name Exclusão Falhou',
+                'delete-failed'     => 'Canal Exclusão Falhou',
                 'last-delete-error' => 'Falha na exclusão do último canal.',
 
                 'datagrid' => [

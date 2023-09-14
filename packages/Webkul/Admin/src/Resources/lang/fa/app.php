@@ -2300,7 +2300,7 @@ return [
                 'title'             => 'کانال‌ها',
                 'create-btn'        => 'ساخت کانال',
                 'delete-success'    => 'کانال با موفقیت حذف شد.',
-                'delete-failed'     => 'حذف :name ناموفق بود',
+                'delete-failed'     => 'حذف کانال ناموفق بود',
                 'last-delete-error' => 'حذف آخرین کانال ناموفق بود.',
 
                 'datagrid' => [
