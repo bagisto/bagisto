@@ -74,6 +74,7 @@ return [
                 'delete-profile'          => 'Profili Sil',
                 'edit-profile'            => 'Profili Düzenle',
                 'edit'                    => 'Düzenle',
+                'edit-success'            => 'Profil Başarıyla Güncellendi',
                 'phone'                   => 'Telefon',
                 'current-password'        => 'Geçerli Parola',
                 'new-password'            => 'Yeni Parola',

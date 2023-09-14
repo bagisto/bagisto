@@ -74,6 +74,7 @@ return [
                 'delete-profile'          => '删除个人资料',
                 'edit-profile'            => '编辑个人资料',
                 'edit'                    => '编辑',
+                'edit-success'            => '成功更新个人资料',
                 'phone'                   => '电话',
                 'current-password'        => '当前密码',
                 'new-password'            => '新密码',

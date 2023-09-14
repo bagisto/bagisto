@@ -74,6 +74,7 @@ return [
                 'delete-profile'          => 'প্রোফাইল মুছে ফেলুন',
                 'edit-profile'            => 'প্রোফাইল সম্পাদনা করুন',
                 'edit'                    => 'সম্পাদনা করুন',
+                'edit-success'            => 'প্রোফাইল সফলভাবে আপডেট হয়েছে',
                 'phone'                   => 'ফোন',
                 'current-password'        => 'বর্তমান পাসওয়ার্ড',
                 'new-password'            => 'নতুন পাসওয়ার্ড',

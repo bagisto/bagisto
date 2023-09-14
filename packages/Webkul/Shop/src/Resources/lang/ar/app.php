@@ -74,6 +74,7 @@ return [
                 'delete-profile'          => 'حذف الحساب',
                 'edit-profile'            => 'تعديل الحساب',
                 'edit'                    => 'تعديل',
+                'edit-success'            => 'تم تحديث الملف الشخصي بنجاح',
                 'phone'                   => 'الهاتف',
                 'current-password'        => 'كلمة المرور الحالية',
                 'new-password'            => 'كلمة المرور الجديدة',

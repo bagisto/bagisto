@@ -74,6 +74,7 @@ return [
                 'delete-profile'          => 'Elimina Profilo',
                 'edit-profile'            => 'Modifica Profilo',
                 'edit'                    => 'Modifica',
+                'edit-success'            => 'Profilo aggiornato con successo',
                 'phone'                   => 'Telefono',
                 'current-password'        => 'Password Attuale',
                 'new-password'            => 'Nuova Password',
