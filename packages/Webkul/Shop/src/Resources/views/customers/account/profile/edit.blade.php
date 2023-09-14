@@ -131,11 +131,10 @@
                 type="select"
                 name="gender"
                 :value="old('gender') ?? $customer->gender"
-                class="mb-4"
+                class="mb-3"
                 rules="required"
                 :label="trans('shop::app.customers.account.profile.gender')"
             >
-                <option value="">@lang('Select Gender')</option>
                 <option value="Other">@lang('shop::app.customers.account.profile.other')</option>
                 <option value="Male">@lang('shop::app.customers.account.profile.male')</option>
                 <option value="Female">@lang('shop::app.customers.account.profile.female')</option>
@@ -156,7 +155,6 @@
                 type="date"
                 name="date_of_birth"
                 :value="old('date_of_birth') ?? $customer->date_of_birth"
-                class="mb-4"
                 :label="trans('shop::app.customers.account.profile.dob')"
                 :placeholder="trans('shop::app.customers.account.profile.dob')"
             >
