@@ -231,7 +231,7 @@
 
         <button
             type="submit"
-            class="bs-primary-button block m-0 w-max py-[11px] px-[43px] rounded-[18px] text-base text-center"
+            class="primary-button block m-0 w-max py-[11px] px-[43px] rounded-[18px] text-base text-center"
         >
             @lang('shop::app.customers.account.profile.save')
         </button>

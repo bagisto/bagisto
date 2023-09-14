@@ -12,7 +12,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-categories-carousel-template">
         <div class="container mt-[60px] max-lg:px-[30px] max-sm:mt-[20px]" v-if="! isLoading && categories?.length">
-            <div class="bs-item-carousal-wrapper relative">
+            <div class="relative">
                 <div
                     ref="swiperContainer"
                     class="flex gap-10 overflow-auto scroll-smooth scrollbar-hide max-sm:gap-4"
@@ -48,13 +48,13 @@
                 </div>
 
                 <span
-                    class="bs-carousal-next flex items-center justify-center absolute top-[37px] -left-[41px] w-[50px] h-[50px] bg-white border border-black rounded-full transition icon-arrow-left-stylish text-[25px] hover:bg-black hover:text-white max-lg:-left-[29px] cursor-pointer"
+                    class="flex items-center justify-center absolute top-[37px] -left-[41px] w-[50px] h-[50px] bg-white border border-black rounded-full transition icon-arrow-left-stylish text-[25px] hover:bg-black hover:text-white max-lg:-left-[29px] cursor-pointer"
                     @click="swipeLeft"
                 >
                 </span>
 
                 <span
-                    class="bs-carousal-prev flex items-center justify-center absolute top-[37px] -right-[22px] w-[50px] h-[50px] bg-white border border-black rounded-full transition icon-arrow-right-stylish text-[25px] hover:bg-black hover:text-white max-lg:-right-[29px] cursor-pointer"
+                    class="flex items-center justify-center absolute top-[37px] -right-[22px] w-[50px] h-[50px] bg-white border border-black rounded-full transition icon-arrow-right-stylish text-[25px] hover:bg-black hover:text-white max-lg:-right-[29px] cursor-pointer"
                     @click="swipeRight"
                 >
                 </span>

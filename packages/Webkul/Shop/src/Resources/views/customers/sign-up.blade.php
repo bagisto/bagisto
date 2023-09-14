@@ -195,7 +195,7 @@
 
                     <div class="flex gap-[36px] flex-wrap items-center mt-[30px]">
                         <button
-                            class="bs-primary-button block w-full max-w-[374px] py-[16px] px-[43px] mx-auto m-0 ml-[0px] rounded-[18px] text-[16px] text-center"
+                            class="primary-button block w-full max-w-[374px] py-[16px] px-[43px] mx-auto m-0 ml-[0px] rounded-[18px] text-[16px] text-center"
                             type="submit"
                         >
                             @lang('shop::app.customers.signup-form.button-title')

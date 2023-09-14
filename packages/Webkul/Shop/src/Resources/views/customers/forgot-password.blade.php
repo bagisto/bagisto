@@ -73,7 +73,7 @@
 
                     <div class="flex gap-[36px] flex-wrap mt-[30px] items-center">
                         <button
-                            class="bs-primary-button block w-full max-w-[374px] m-0 ml-[0px] mx-auto px-[43px] py-[16px] rounded-[18px] text-[16px] text-center"
+                            class="primary-button block w-full max-w-[374px] m-0 ml-[0px] mx-auto px-[43px] py-[16px] rounded-[18px] text-[16px] text-center"
                             type="submit"
                         >
                             @lang('shop::app.customers.forgot-password.submit')
