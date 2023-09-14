@@ -410,7 +410,7 @@
                 {{-- Filterable Attributes --}}
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                        <p class="required text-gray-600 text-[16px] p-[10px] font-semibold">
                             @lang('admin::app.catalog.categories.edit.filterable-attributes')
                         </p>
                     </x-slot:header>
@@ -429,8 +429,10 @@
                                     for="{{ $attribute->name ?? $attribute->admin_name }}"
                                     value="{{ $attribute->id }}"
                                     name="attributes[]"
+                                    rules="required"
                                     class="hidden peer"
                                     :checked="in_array($attribute->id, $selectedaAtributes)"
+                                    :label="trans('admin::app.catalog.categories.edit.filterable-attributes')"
                                 >
                                 </x-admin::form.control-group.control>
 
@@ -439,6 +441,11 @@
                                 </div>
                             </label>
                         @endforeach
+
+                        <x-admin::form.control-group.error
+                            control-name="attributes[]"
+                        >
+                        </x-admin::form.control-group.error>
                     </x-slot:content>
                 </x-admin::accordion>
             </div>
