@@ -74,6 +74,7 @@ return [
                 'delete-profile'          => 'Видалити профіль',
                 'edit-profile'            => 'Редагувати профіль',
                 'edit'                    => 'Редагувати',
+                'edit-success'            => 'Профіль успішно оновлено',
                 'phone'                   => 'Телефон',
                 'current-password'        => 'Поточний пароль',
                 'new-password'            => 'Новий пароль',

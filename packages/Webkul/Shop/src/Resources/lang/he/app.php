@@ -74,6 +74,7 @@ return [
                 'delete-profile'          => 'מחק פרופיל',
                 'edit-profile'            => 'ערוך פרופיל',
                 'edit'                    => 'ערוך',
+                'edit-success'            => 'פרופיל עודכן בהצלחה',
                 'phone'                   => 'טלפון',
                 'current-password'        => 'סיסמה נוכחית',
                 'new-password'            => 'סיסמה חדשה',

@@ -74,6 +74,7 @@ return [
                 'delete-profile'          => 'プロフィールを削除',
                 'edit-profile'            => 'プロフィールを編集',
                 'edit'                    => '編集',
+                'edit-success'            => 'プロフィールが正常に更新されました',
                 'phone'                   => '電話',
                 'current-password'        => '現在のパスワード',
                 'new-password'            => '新しいパスワード',

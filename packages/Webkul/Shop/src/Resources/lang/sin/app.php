@@ -74,6 +74,7 @@ return [
                 'delete-profile'          => 'පැතිකඩ මකන්න',
                 'edit-profile'            => 'පැතිකඩ සංස්කරණය කරන්න',
                 'edit'                    => 'සංස්කරණය කරන්න',
+                'edit-success'            => 'සාර්ථකව පැරණිය සංවර්ධනය කිරී',
                 'phone'                   => 'දුරකථන',
                 'current-password'        => 'වත්මන් මුරපදය',
                 'new-password'            => 'නව මුරපදය',

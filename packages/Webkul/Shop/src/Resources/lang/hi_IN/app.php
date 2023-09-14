@@ -74,6 +74,7 @@ return [
                 'delete-profile'          => 'प्रोफ़ाइल हटाएं',
                 'edit-profile'            => 'प्रोफ़ाइल संपादित करें',
                 'edit'                    => 'संपादित करें',
+                'edit-success'            => 'प्रोफ़ाइल सफलतापूर्वक अपडेट हो गया',
                 'phone'                   => 'फ़ोन',
                 'current-password'        => 'वर्तमान पासवर्ड',
                 'new-password'            => 'नया पासवर्ड',

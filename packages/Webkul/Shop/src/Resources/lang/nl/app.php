@@ -74,6 +74,7 @@ return [
                 'delete-profile'          => 'Profiel Verwijderen',
                 'edit-profile'            => 'Profiel Bewerken',
                 'edit'                    => 'Bewerken',
+                'edit-success'            => 'Profiel succesvol bijgewerkt',
                 'phone'                   => 'Telefoon',
                 'current-password'        => 'Huidig Wachtwoord',
                 'new-password'            => 'Nieuw Wachtwoord',
