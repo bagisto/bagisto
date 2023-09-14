@@ -28,10 +28,6 @@ class WishlistController extends APIController
      */
     public function index(): JsonResource
     {
-        if (! core()->getConfigData('general.content.shop.wishlist_option')) {
-            abort(404);
-        }
-
         $this->removeInactiveItems();
 
         $items = $this->wishlistRepository

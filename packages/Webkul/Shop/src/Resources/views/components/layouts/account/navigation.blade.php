@@ -46,6 +46,12 @@
 
                 {{-- Account Navigation Content --}}
                 <div class="grid border border-t-0 border-r-[1px] border-l-[1px] border-b-[1px] border-[#E9E9E9] rounded-[6px] max-md:hidden max-md:border-none accordian-content">
+                    @if (! (bool) core()->getConfigData('general.content.shop.wishlist_option'))
+                        @php
+                            unset($menuItem['children']['wishlist']);
+                        @endphp
+                    @endif
+
                     @foreach ($menuItem['children'] as $subMenuItem)
                         <a href="{{ $subMenuItem['url'] }}">
                             <div class="flex justify-between px-[25px] py-[20px] border-t-[1px] border-[#E9E9E9] hover:bg-[#f3f4f682] cursor-pointer {{ request()->routeIs($subMenuItem['route']) ? 'bg-gray-100' : '' }}">
