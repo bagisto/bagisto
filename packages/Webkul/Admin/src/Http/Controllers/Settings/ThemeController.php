@@ -3,10 +3,11 @@
 namespace Webkul\Admin\Http\Controllers\Settings;
 
 use Illuminate\Support\Facades\Event;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Shop\Repositories\ThemeCustomizationRepository;
 use Webkul\Admin\DataGrids\Theme\ThemeDatagrid;
-use Illuminate\Http\Resources\Json\JsonResource;
 
 class ThemeController extends Controller
 {
@@ -35,9 +36,17 @@ class ThemeController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * 
+     * @return \Illuminate\Http\Resources\Json\JsonResource|string
      */
-    public function store(): JsonResource
+    public function store()
     {
+        if (request()->has('id')) {
+            $theme = $this->themeCustomizationRepository->find(request()->input('id'));
+
+            return $this->themeCustomizationRepository->uploadImage(request()->all(), $theme);
+        }
+
         $this->validate(request(), [
             'name'       => 'required',
             'sort_order' => 'required|numeric',
@@ -121,7 +130,11 @@ class ThemeController extends Controller
     {
         Event::dispatch('theme_customization.delete.before', $id);
 
-        $this->themeCustomizationRepository->delete($id);
+        $theme = $this->themeCustomizationRepository->find($id);
+
+        $theme?->delete();
+
+        Storage::deleteDirectory('theme/'. $theme->id);
 
         Event::dispatch('theme_customization.delete.after', $id);
 

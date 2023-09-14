@@ -23,7 +23,7 @@ class ThemeCustomizationRepository extends Repository
      * @param  array  $imageOptions
      * @param  \Webkul\Shop\Contracts\ThemeCustomization  $theme
      * 
-     * @return void
+     * @return void|string
      */
     public function uploadImage($imageOptions, $theme, $deletedSliderImages = [])
     {
@@ -32,8 +32,16 @@ class ThemeCustomizationRepository extends Repository
         }
 
         foreach($imageOptions as $images) {
-            if (empty($images)) {
+            if (empty($images) || is_string($images)) {
                 continue;
+            }
+
+            if ($images instanceof UploadedFile) {
+                $folder = 'theme/' . $theme->id;
+
+                $fileName = uniqid('static_content') . '.' . $images->getClientOriginalExtension();
+
+                return '<img class="lazy" data-src="'. Storage::url($images->storeAs($folder, $fileName)) .'">';
             }
 
             foreach ($images as $key => $image) {

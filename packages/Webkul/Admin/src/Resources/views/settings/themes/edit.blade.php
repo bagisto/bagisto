@@ -1054,6 +1054,24 @@
                                     @lang('admin::app.settings.themes.edit.static-content-description')
                                 </p>
                             </div>
+
+                            <div class="flex gap-[10px]">
+                                <!-- Hidden Input Filed for upload images -->
+                                <label
+                                    class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                    for="static_image"
+                                >
+                                    @lang('admin::app.settings.themes.edit.add-image-btn')
+                                </label>
+
+                                <input 
+                                    type="file"
+                                    name="static_image"
+                                    id="static_image"
+                                    class="hidden"
+                                    @change="storeImage($event)"
+                                >
+                            </div>
                         </div>
                         
                         <div class="text-sm font-medium text-center pt-[16px] text-gray-500">
@@ -1088,6 +1106,7 @@
                             <component 
                                 :is="inittialEditor"
                                 @editor-data="editorData"
+                                ref="editor"
                             >
                             </component>
                         </KeepAlive>
@@ -1790,6 +1809,10 @@
                             this.options.css = value.css;
                         } 
                     },
+
+                    storeImage($event) {
+                        this.$refs.editor.storeImage($event)
+                    }
                 },
             });
         </script>
@@ -1803,7 +1826,9 @@
                     return {
                         options:{
                             html: `{!! $theme->options['html'] ?? '' !!}`,
-                        }
+                        },
+
+                        cursorPointer: {},
                     };
                 },
 
@@ -1823,14 +1848,57 @@
                                 mode: 'htmlmixed',
                             });
 
-                            this._html.on('changes', () => {
+                            this._html.on('changes', (e) => {
                                 this.options.html = this._html.getValue();
+
+                                this.cursorPointer = e.getCursor();
 
                                 this.$emit('editorData', this.options);
                             });
                         }, 0);
                     },
+
+                    storeImage($event) {
+                        let selectedImage = $event.target.files[0];
+
+                        if (! selectedImage) {
+                            return;
+                        }
+
+                        let formData = new FormData();
+
+                        formData.append('image', selectedImage);
+                        formData.append('id', "{{ $theme->id }}");
+
+                        this.$axios.post('{{ route('admin.theme.store') }}', formData)
+                            .then((response) => {
+                                let editor = this._html.getDoc();
+
+                                let cursorPointer = editor.getCursor();
+
+                                editor.replaceRange(response.data, { 
+                                    line: cursorPointer.line, ch: cursorPointer.ch
+                                });
+
+                                editor.setCursor({
+                                    line: cursorPointer.line, ch: cursorPointer.ch + response.data.length
+                                });
+                            })
+                            .catch((error) => {
+
+                            });
+                    }
                 },
+
+                watch: {
+                    cursorPointer: {
+                        handler() {
+                         
+                        },
+
+                        deep: true
+                    }
+                }
             });
         </script>
 

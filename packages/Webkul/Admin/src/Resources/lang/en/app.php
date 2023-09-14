@@ -2530,7 +2530,8 @@ return [
                     'static-content'    => 'Static Content',
                     'image-carousel'    => 'Slider Carousel',
                     'footer-links'      => 'Footer Links',
-                ]
+                ],
+                'add-image-btn'                 => 'Add Image',
             ],
 
             'edit' => [
@@ -2548,6 +2549,7 @@ return [
                 'footer-link-form-title'        => 'Footer Link',
                 'slider-description'            => 'Slider related theme customization.',
                 'slider-add-btn'                => 'Add Slider',
+                'add-image-btn'                 => 'Add Image',
                 'general'                       => 'General',
                 'add-filter-btn'                => 'Add Filter',
                 'save-btn'                      => 'Save',
