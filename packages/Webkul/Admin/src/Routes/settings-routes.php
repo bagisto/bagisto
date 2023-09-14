@@ -167,9 +167,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::delete('edit/{id}', 'destroy')->name('admin.settings.users.delete');
 
-            Route::get('confirm/{id}', 'confirm')->name('super.settings.users.confirm');
-
-            Route::post('confirm/{id}', 'destroy')->name('admin.settings.users.destroy');
+            Route::put('confirm', 'destroySelf')->name('admin.settings.users.destroy');
         });
     });
 
