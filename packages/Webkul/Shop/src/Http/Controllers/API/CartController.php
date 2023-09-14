@@ -3,6 +3,7 @@
 namespace Webkul\Shop\Http\Controllers\API;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Http\Response;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductRepository;
@@ -51,6 +52,10 @@ class CartController extends APIController
         try {
             $product = $this->productRepository->with('parent')->find(request()->input('product_id'));
 
+            if (request()->get('is_buy_now')) {
+                Cart::deActivateCart();
+            } 
+
             $cart = Cart::addProduct($product->id, request()->all());
 
             /**
@@ -70,6 +75,16 @@ class CartController extends APIController
                     $this->wishlistRepository->deleteWhere([
                         'product_id'  => $product->id,
                         'customer_id' => $customer->id,
+                    ]);
+                }
+
+                if (request()->get('is_buy_now')) {
+                    Event::dispatch('shop.item.buy-now', request()->input('product_id'));
+
+                    return new JsonResource([
+                        'data'     => new CartResource(Cart::getCart()),
+                        'redirect' => route('shop.checkout.onepage.index'),
+                        'message'  => trans('shop::app.checkout.cart.item-add-to-cart'),
                     ]);
                 }
 
