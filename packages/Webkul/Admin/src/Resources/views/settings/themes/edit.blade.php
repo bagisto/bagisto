@@ -1236,7 +1236,6 @@
     
                             <!-- Footer Links -->
                             <div
-                                class="pt-[16px]"
                                 v-if="Object.keys(footerLinks).length"
                                 v-for="(footerLink, index) in footerLinks"
                             >
@@ -1571,6 +1570,33 @@
             </div>
         </script>
 
+        {{-- Parent Theme Customizer Component --}}
+        <script type="module">
+            app.component('v-theme-customizer', {
+                template: '#v-theme-customizer-template',
+
+                props: ['errors'],
+
+                data() {
+                    return {
+                        componentName: 'v-slider-theme',
+
+                        themeType: {
+                            product_carousel: 'v-product-theme',
+                            category_carousel: 'v-category-theme',
+                            static_content: 'v-static-theme',
+                            image_carousel: 'v-slider-theme',
+                            footer_links: 'v-footer-link-theme',
+                        } 
+                    };
+                },
+
+                created(){
+                    this.componentName = this.themeType["{{ $theme->type }}"];
+                },
+            });
+        </script>
+
         {{-- Slider Theme Component --}}
         <script type="module">
             app.component('v-slider-theme', {
@@ -1584,6 +1610,15 @@
 
                         deletedSliders: [],
                     };
+                },
+                
+                created() {
+                    if (
+                        this.sliders == null 
+                        || this.sliders.length == 0
+                    ) {
+                        this.sliders = { images: [] };
+                    }   
                 },
 
                 methods: {
@@ -1630,113 +1665,131 @@
             });
         </script>
 
-        {{-- Footer component --}}
+        {{-- Product Theme Component --}}
         <script type="module">
-            app.component('v-footer-link-theme', {
-                template: '#v-footer-link-theme-template',
+            app.component('v-product-theme', {
+                template: '#v-product-theme-template',
 
                 props: ['errors'],
 
                 data() {
                     return {
-                        footerLinks: @json($theme->options),
-
-                        isUpdating: false,
+                        options: @json($theme->options),
                     };
                 },
 
-                computed: {
-                    isFooterLinksEmpty() {
-                        return Object.values(this.footerLinks).every(column => column.length === 0);
-                    },
-                },
-
-                mounted() {
-                    Object.keys(this.footerLinks).forEach(key => {
-                        this.footerLinks[key] = this.footerLinks[key].map(item => ({
-                            ...item,
-                            column: key
-                        }));
-                    });
-
-                    for (let i = 1; i <= 3; i++) {
-                        if (!this.footerLinks.hasOwnProperty(`column_${i}`)) {
-                            this.footerLinks[`column_${i}`] = [];
-                        }
+                created() {
+                    if (this.options === null) {
+                        this.options = { filters: {} };
+                    }   
+                    
+                    if (! this.options.filters) {
+                        this.options.filters = {};
                     }
+
+                    this.options.filters = Object.keys(this.options.filters)
+                        .filter(key => ! ['sort', 'limit', 'title'].includes(key))
+                        .map(key => ({
+                            key: key,
+                            value: this.options.filters[key]
+                        }));
                 },
 
                 methods: {
-                    updateOrCreate(params) {
-                        let updatedFooterLinks = this.footerLinks[params.column].map((item) => {
-                            if (item.url === params.url) {
-                                return params;
-                            }
+                    addFilter(params) {
+                        this.options.filters.push(params);
 
-                            return item;
-                        });
-
-                        this.footerLinks[params.column] = updatedFooterLinks;
-
-                        if (! updatedFooterLinks.some((item) => item.url === params.url)) {
-                            if (!this.footerLinks.hasOwnProperty(params.column)) {
-                                this.footerLinks[params.column] = []; 
-                            }
-                            
-                            this.footerLinks[params.column].push(params);
-                        }
-
-                        this.$refs.addLinksModal.toggle();
+                        this.$refs.productFilterModal.toggle();
                     },
 
-                    remove(footerLink) {
-                        if (
-                            this.footerLinks.hasOwnProperty(footerLink.column) 
-                            && Array.isArray(this.footerLinks[footerLink.column])
-                            && this.footerLinks[footerLink.column].length > 0
-                        ) {
-                            this.footerLinks[footerLink.column].splice(0, 1);
-                        }
+                    remove(filter) {
+                        let index = this.options.filters.indexOf(filter);
 
-                        if (this.isFooterLinksEmpty) {
-                            this.isShowIllustrator = true;
-                        }
-                    },
-
-                    edit(footerLink) {
-                        this.isUpdating = true;
-
-                        this.$refs.footerLinkUpdateOrCreateModal.setValues(footerLink);
-
-                        this.$refs.addLinksModal.toggle();
+                        this.options.filters.splice(index, 1);
                     },
                 },
             });
         </script>
 
-        {{-- Parent Theme Customizer Component --}}
+        {{-- Category Theme Component --}}
         <script type="module">
-            app.component('v-theme-customizer', {
-                template: '#v-theme-customizer-template',
+            app.component('v-category-theme', {
+                template: '#v-category-theme-template',
 
                 props: ['errors'],
 
                 data() {
                     return {
-                        componentName: 'v-slider-theme',
-
-                        themeType: {
-                            product_carousel: 'v-product-theme',
-                            category_carousel: 'v-category-theme',
-                            static_content: 'v-static-theme',
-                            image_carousel: 'v-slider-theme',
-                            footer_links: 'v-footer-link-theme',
-                        } 
+                        options: @json($theme->options),
                     };
                 },
 
-                created(){
-                    this.componentName = this.themeType["{{ $theme->type }}"];
+                created() {
+                    if (this.options === null) {
+                        this.options = { filters: {} };
+                    }   
+
+                    if (! this.options.filters) {
+                        this.options.filters = {};
+                    }
+
+                    this.options.filters = Object.keys(this.options.filters)
+                        .filter(key => ! ['sort', 'limit', 'title'].includes(key))
+                        .map(key => ({
+                            key: key,
+                            value: this.options.filters[key]
+                        }));
+                },
+                
+                methods: {
+                    addFilter(params) {
+                        this.options.filters.push(params);
+
+                        this.$refs.categoryFilterModal.toggle();
+                    },
+
+                    remove(filter) {
+                        let index = this.options.filters.indexOf(filter);
+
+                        this.options.filters.splice(index, 1);
+                    },
+                },
+            });
+        </script>
+
+        {{-- Static Theme component --}}
+        <script type="module">
+            app.component('v-static-theme', {
+                template: '#v-static-theme-template',
+
+                props: ['errors'],
+
+                data() {
+                    return {
+                        inittialEditor: 'v-html-editor-theme',
+
+                        options: @json($theme->options)
+                    };
+                },
+
+                created() {
+                    if (this.options === null) {
+                        this.options = { html: {} };
+                    }   
+                },
+
+                methods: {
+                    switchEditor(editor) {
+                        this.inittialEditor = editor;
+                    },
+
+                    editorData(value) {
+                        if (value.html) {
+                            this.options.html = value.html;
+                        } else {
+                            this.options.css = value.css;
+                        } 
+                    },
                 },
             });
         </script>
@@ -1821,116 +1874,89 @@
             });
         </script>
 
-        {{-- Static Theme component --}}
+        {{-- Footer component --}}
         <script type="module">
-            app.component('v-static-theme', {
-                template: '#v-static-theme-template',
+            app.component('v-footer-link-theme', {
+                template: '#v-footer-link-theme-template',
 
                 props: ['errors'],
 
                 data() {
                     return {
-                        inittialEditor: 'v-html-editor-theme',
+                        footerLinks: @json($theme->options),
 
-                        options: @json($theme->options)
+                        isUpdating: false,
                     };
                 },
 
-                methods: {
-                    switchEditor(editor) {
-                        this.inittialEditor = editor;
+                computed: {
+                    isFooterLinksEmpty() {
+                        return Object.values(this.footerLinks).every(column => column.length === 0);
                     },
-
-                    editorData(value) {
-                        if (value.html) {
-                            this.options.html = value.html;
-                        } else {
-                            this.options.css = value.css;
-                        } 
-                    },
-                },
-            });
-        </script>
-            
-        {{-- Category Theme Component --}}
-        <script type="module">
-            app.component('v-category-theme', {
-                template: '#v-category-theme-template',
-
-                props: ['errors'],
-
-                data() {
-                    return {
-                        options: @json($theme->options),
-                    };
                 },
 
                 created() {
-                    if (! this.options.filters) {
-                        this.options.filters = {};
+                    if (this.footerLinks === null) {
+                        this.footerLinks = {};
                     }
 
-                    this.options.filters = Object.keys(this.options.filters)
-                        .filter(key => ! ['sort', 'limit', 'title'].includes(key))
-                        .map(key => ({
-                            key: key,
-                            value: this.options.filters[key]
-                        }));
-                },
-                
-                methods: {
-                    addFilter(params) {
-                        this.options.filters.push(params);
-
-                        this.$refs.categoryFilterModal.toggle();
-                    },
-
-                    remove(filter) {
-                        let index = this.options.filters.indexOf(filter);
-
-                        this.options.filters.splice(index, 1);
-                    },
-                },
-            });
-        </script>
-
-        {{-- Product Theme Component --}}
-        <script type="module">
-            app.component('v-product-theme', {
-                template: '#v-product-theme-template',
-
-                props: ['errors'],
-
-                data() {
-                    return {
-                        options: @json($theme->options),
-                    };
-                },
-
-                created() {
-                    if (! this.options.filters) {
-                        this.options.filters = {};
+                    for (let i = 1; i <= 3; i++) {
+                        if (!this.footerLinks.hasOwnProperty(`column_${i}`)) {
+                            this.footerLinks[`column_${i}`] = [];
+                        }
                     }
 
-                    this.options.filters = Object.keys(this.options.filters)
-                        .filter(key => ! ['sort', 'limit', 'title'].includes(key))
-                        .map(key => ({
-                            key: key,
-                            value: this.options.filters[key]
+                    Object.keys(this.footerLinks).forEach(key => {
+                        this.footerLinks[key] = this.footerLinks[key].map(item => ({
+                            ...item,
+                            column: key
                         }));
+                    });
                 },
 
                 methods: {
-                    addFilter(params) {
-                        this.options.filters.push(params);
+                    updateOrCreate(params) {
+                        let updatedFooterLinks = this.footerLinks[params.column].map((item) => {
+                            if (item.url === params.url) {
+                                return params;
+                            }
 
-                        this.$refs.productFilterModal.toggle();
+                            return item;
+                        });
+
+                        this.footerLinks[params.column] = updatedFooterLinks;
+
+                        if (! updatedFooterLinks.some((item) => item.url === params.url)) {
+                            if (!this.footerLinks.hasOwnProperty(params.column)) {
+                                this.footerLinks[params.column] = []; 
+                            }
+                            
+                            this.footerLinks[params.column].push(params);
+                        }
+
+                        this.$refs.addLinksModal.toggle();
                     },
 
-                    remove(filter) {
-                        let index = this.options.filters.indexOf(filter);
+                    remove(footerLink) {
+                        if (
+                            this.footerLinks.hasOwnProperty(footerLink.column) 
+                            && Array.isArray(this.footerLinks[footerLink.column])
+                            && this.footerLinks[footerLink.column].length > 0
+                        ) {
+                            this.footerLinks[footerLink.column].splice(0, 1);
+                        }
 
-                        this.options.filters.splice(index, 1);
+                        if (this.isFooterLinksEmpty) {
+                            this.isShowIllustrator = true;
+                        }
+                    },
+
+                    edit(footerLink) {
+                        this.isUpdating = true;
+
+                        this.$refs.footerLinkUpdateOrCreateModal.setValues(footerLink);
+
+                        this.$refs.addLinksModal.toggle();
                     },
                 },
             });

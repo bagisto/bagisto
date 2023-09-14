@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Shop\Repositories\ThemeCustomizationRepository;
 use Webkul\Admin\DataGrids\Theme\ThemeDatagrid;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class ThemeController extends Controller
 {
@@ -33,42 +34,29 @@ class ThemeController extends Controller
     }
 
     /**
-     * Create a new theme
-     *
-     * @return \Illuminate\View\View
+     * Store a newly created resource in storage.
      */
-    public function create()
+    public function store(): JsonResource
     {
-        return view('admin::settings.themes.create');
-    }
-
-    /**
-     * Store theme
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store()
-    {
-        $data = request()->only(['options', 'type', 'name', 'sort_order', 'status']);
-
-        if ($data['type'] == 'static_content') {
-            $data['options']['html'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $data['options']['html']); 
-            $data['options']['css'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $data['options']['css']); 
-        }
+        $this->validate(request(), [
+            'name'       => 'required',
+            'sort_order' => 'required|numeric',
+            'type'       => 'in:product_carousel,category_carousel,static_content,image_carousel,footer_links'
+        ]);
 
         Event::dispatch('theme_customization.create.before');
 
-        $theme = $this->themeCustomizationRepository->create($data);
-
-        if ($data['type'] == 'image_carousel') {
-            $this->themeCustomizationRepository->uploadImage(request()->all('options'), $theme);
-        }
+        $theme = $this->themeCustomizationRepository->create([
+            'name'       => request()->input('name'),
+            'sort_order' => request()->input('sort_order'),
+            'type'       => request()->input('type'),
+        ]);
 
         Event::dispatch('theme_customization.create.after', $theme);
 
-        session()->flash('success', trans('admin::app.settings.themes.create-success'));
-
-        return redirect()->route('admin.theme.index');
+        return new JsonResource([
+            'redirect_url' => route('admin.theme.edit', $theme->id),
+        ]);
     }
 
     /**

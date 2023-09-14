@@ -19,13 +19,13 @@ return new class extends Migration
             $table->string('name');
             $table->json('options');
             $table->integer('sort_order');
-            $table->boolean('status');
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
 
         $now = Carbon::now();
 
-        DB::table(DB::getTablePrefix() . 'theme_customizations')
+        DB::table('theme_customizations')
             ->insert([
                 [
                     'id'         => 1,

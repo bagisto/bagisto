@@ -10,17 +10,150 @@
         
         <div class="flex gap-x-[10px] items-center">
             <div class="flex gap-x-[10px] items-center">
-                {{-- Create Tax Category Button --}}
-                <a
-                    href="{{ route('admin.theme.create') }}"
-                    class="primary-button"
-                >
-                    @lang('admin::app.settings.themes.index.create-btn')
-                </a>
+              <v-create-theme-form></v-create-theme-form>
             </div>
         </div>
     </div>
     
     <x-admin::datagrid :src="route('admin.theme.index')"></x-admin::datagrid>
+
+    @pushOnce('scripts')
+        <script type="text/x-template" id="v-create-theme-form-template">
+            <div>
+                <!-- Theme Create Button -->
+                <button
+                    type="button"
+                    class="primary-button"
+                    @click="$refs.themeCreateModal.toggle()"
+                >
+                    @lang('admin::app.settings.themes.index.create-btn')
+                </button>
+
+                <x-admin::form
+                    v-slot="{ meta, errors, handleSubmit }"
+                    as="div"
+                >
+                    <form @submit="handleSubmit($event, create)">
+                        <!-- Customer Create Modal -->
+                        <x-admin::modal ref="themeCreateModal">
+                            <x-slot:header>
+                                <!-- Modal Header -->
+                                <p class="text-[18px] text-gray-800 font-bold">
+                                    @lang('admin::app.settings.themes.create.title')
+                                </p>
+                            </x-slot:header>
+
+                            <x-slot:content>
+                                <!-- Modal Content -->
+                                <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                    <x-admin::form.control-group>
+                                        <x-admin::form.control-group.label class="required">
+                                            @lang('admin::app.settings.themes.create.name')
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="name"
+                                            rules="required"
+                                            :label="trans('admin::app.settings.themes.create.name')"
+                                            :placeholder="trans('admin::app.settings.themes.create.name')"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error control-name="name"></x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+
+                                    <x-admin::form.control-group>
+                                        <x-admin::form.control-group.label class="required">
+                                            @lang('admin::app.settings.themes.create.sort-order')
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="sort_order"
+                                            rules="required|numeric"
+                                            :label="trans('admin::app.settings.themes.create.sort-order')"
+                                            :placeholder="trans('admin::app.settings.themes.create.sort-order')"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error control-name="sort_order"></x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+
+                                    <x-admin::form.control-group>
+                                        <x-admin::form.control-group.label class="required">
+                                            @lang('admin::app.settings.themes.create.type.title')
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="select"
+                                            name="type"
+                                            rules="required"
+                                            value="product_carousel"
+                                        >
+                                            <option 
+                                                v-for="(type, key) in themeTypes"
+                                                :value="key"
+                                                :text="type"
+                                            >
+                                            </option>
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error control-name="type"></x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+                                </div>
+                            </x-slot:content>
+
+                            <x-slot:footer>
+                                <!-- Modal Submission -->
+                                <div class="flex gap-x-[10px] items-center">
+                                    <button
+                                        type="submit"
+                                        class="primary-button"
+                                    >
+                                        @lang('admin::app.catalog.products.index.create.save-btn')
+                                    </button>
+                                </div>
+                            </x-slot:footer>
+                        </x-admin::modal>
+                    </form>
+                </x-admin::form>
+            </div>
+        </script>
+
+        <script type="module">
+            app.component('v-create-theme-form', {
+                template: '#v-create-theme-form-template',
+
+                data() {
+                    return {
+                        themeTypes: {
+                            product_carousel: "@lang('admin::app.settings.themes.create.type.product-carousel')",
+                            category_carousel: "@lang('admin::app.settings.themes.create.type.category-carousel')",
+                            static_content: "@lang('admin::app.settings.themes.create.type.static-content')",
+                            image_carousel: "@lang('admin::app.settings.themes.create.type.image-carousel')",
+                            footer_links: "@lang('admin::app.settings.themes.create.type.footer-links')",
+                        }
+                    };
+                },
+
+                methods: {
+                    create(params, { setErrors }) {
+                        this.$axios.post('{{ route('admin.theme.store') }}', params)
+                            .then((response) => {
+                                if (response.data.data.redirect_url) {
+                                    window.location.href = response.data.data.redirect_url;
+                                } 
+                            })
+                            .catch((error) => {
+                                if (error.response.status == 422) {
+                                    setErrors(error.response.data.errors);
+                                }
+                            });
+                    },
+                },
+            });
+        </script>
+    @endPushOnce
     
 </x-admin::layouts>

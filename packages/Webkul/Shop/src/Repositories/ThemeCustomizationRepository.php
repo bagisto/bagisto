@@ -25,18 +25,22 @@ class ThemeCustomizationRepository extends Repository
      * 
      * @return void
      */
-    public function uploadImage($imageOptions, $theme, $deletedSliderImages)
+    public function uploadImage($imageOptions, $theme, $deletedSliderImages = [])
     {
         foreach ($deletedSliderImages as $slider) {
             Storage::delete(str_replace('storage/', '', $slider['image']));
         }
 
         foreach($imageOptions as $images) {
-            foreach ($images as $image) {
+            if (empty($images)) {
+                continue;
+            }
+
+            foreach ($images as $key => $image) {
                 if (isset($image['image']) && $image['image'] instanceof UploadedFile) {
                     $options['images'][] = [
                         'image' =>  'storage/' . $image['image']->storeAs(
-                            'theme/' . $theme->id, count($theme->options['images']) + 1 . '.' . $image['image']->getClientOriginalExtension()
+                            'theme/' . $theme->id, ++$key . '.' . $image['image']->getClientOriginalExtension()
                         ),
                         'link' => $image['link'],
                     ];
