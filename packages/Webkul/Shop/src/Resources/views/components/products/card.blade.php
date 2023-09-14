@@ -35,12 +35,14 @@
                     </p>
 
                     <div class="group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                        <a
-                            class="flex justify-center items-center absolute top-[20px] right-[20px] w-[30px] h-[30px] bg-white rounded-md cursor-pointer text-[25px]"
-                            :class="product.is_wishlist ? 'icon-heart-fill' : 'icon-heart'"
-                            @click="addToWishlist()"
-                        >
-                        </a>
+                        @if (core()->getConfigData('general.content.shop.wishlist_option'))
+                            <a
+                                class="flex justify-center items-center absolute top-[20px] right-[20px] w-[30px] h-[30px] bg-white rounded-md cursor-pointer text-[25px]"
+                                :class="product.is_wishlist ? 'icon-heart-fill' : 'icon-heart'"
+                                @click="addToWishlist()"
+                            >
+                            </a>
+                        @endif
 
                         <a
                             class="icon-compare flex justify-center items-center w-[30px] h-[30px] absolute top-[60px] right-[20px] bg-white rounded-md cursor-pointer text-[25px]"
@@ -105,12 +107,14 @@
                     </p>
 
                     <div class="group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                        <span 
-                            class="flex justify-center items-center absolute top-[20px] right-[20px] w-[30px] h-[30px] bg-white rounded-md text-[25px] cursor-pointer"
-                            :class="product.is_wishlist ? 'icon-heart-fill' : 'icon-heart'"
-                            @click="addToWishlist()"
-                        >
-                        </span> 
+                        @if (core()->getConfigData('general.content.shop.wishlist_option'))
+                            <span 
+                                class="flex justify-center items-center absolute top-[20px] right-[20px] w-[30px] h-[30px] bg-white rounded-md text-[25px] cursor-pointer"
+                                :class="product.is_wishlist ? 'icon-heart-fill' : 'icon-heart'"
+                                @click="addToWishlist()"
+                            >
+                            </span> 
+                        @endif
                         
                         <span 
                             class="icon-compare flex justify-center items-center absolute top-[60px] right-[20px] w-[30px] h-[30px] bg-white rounded-md text-[25px] cursor-pointer"
