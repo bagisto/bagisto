@@ -607,11 +607,13 @@ return [
                         'title'      => 'Çapraz Satış Ürünleri',
                     ],
 
-                    'add-btn'     => 'Ürün Ekle',
-                    'delete'      => 'Sil',
-                    'empty-title' => 'Ürün Ekle',
-                    'empty-info'  => ':type ürünleri eklemek için.',
-                    'sku'         => 'SKU - :sku',
+                    'add-btn'           => 'Ürün Ekle',
+                    'delete'            => 'Sil',
+                    'empty-title'       => 'Ürün Ekle',
+                    'empty-info'        => ':type ürünleri eklemek için.',
+                    'sku'               => 'SKU - :sku',
+                    'image-placeholder' => 'Ürün Resmi',
+
                 ],
 
                 'types' => [
@@ -2415,6 +2417,7 @@ return [
                     'edit'     => 'Düzenle',
                     'active'   => 'Aktif',
                     'inactive' => 'Pasif',
+                    'delete'   => 'Sil',
                 ],
 
                 'edit'  => [

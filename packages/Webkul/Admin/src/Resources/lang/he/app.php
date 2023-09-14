@@ -612,6 +612,7 @@ return [
                     'empty-title' => 'הוסף מוצר',
                     'empty-info'  => 'כדי להוסיף מוצרים מסוג :type ברגע.',
                     'sku'         => 'SKU - :sku',
+                    'image-placeholder' => 'תמונת המוצר',
                 ],
 
                 'types' => [
@@ -2415,6 +2416,7 @@ return [
                     'edit'     => 'ערוך',
                     'active'   => 'פעיל',
                     'inactive' => 'לא פעיל',
+                    'delete'   => 'מחק',
                 ],
 
                 'edit'  => [

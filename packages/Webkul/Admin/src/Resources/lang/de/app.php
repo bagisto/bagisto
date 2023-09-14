@@ -607,11 +607,12 @@ return [
                         'title'      => 'Cross-Sell-Produkte',
                     ],
 
-                    'add-btn'     => 'Produkt hinzufügen',
-                    'delete'      => 'Löschen',
-                    'empty-title' => 'Produkt hinzufügen',
-                    'empty-info'  => 'Um :type Produkte hinzuzufügen.',
-                    'sku'         => 'Artikelnummer (SKU) - :sku',
+                    'add-btn'           => 'Produkt hinzufügen',
+                    'delete'            => 'Löschen',
+                    'empty-title'       => 'Produkt hinzufügen',
+                    'empty-info'        => 'Um :type Produkte hinzuzufügen.',
+                    'sku'               => 'Artikelnummer (SKU) - :sku',
+                    'image-placeholder' => 'Produktbild',
                 ],
 
                 'types' => [
@@ -2415,6 +2416,7 @@ return [
                     'edit'     => 'Bearbeiten',
                     'active'   => 'Aktiv',
                     'inactive' => 'Inaktiv',
+                    'delete'   => 'Löschen',
                 ],
 
                 'edit'  => [

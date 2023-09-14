@@ -607,11 +607,12 @@ return [
                         'title'      => 'منتجات التقاط المبيعات',
                     ],
 
-                    'add-btn'     => 'إضافة منتج',
-                    'delete'      => 'حذف',
-                    'empty-title' => 'إضافة منتج',
-                    'empty-info'  => 'لإضافة منتجات :type على الفور.',
-                    'sku'         => 'SKU - :sku',
+                    'add-btn'           => 'إضافة منتج',
+                    'delete'            => 'حذف',
+                    'empty-title'       => 'إضافة منتج',
+                    'empty-info'        => 'لإضافة منتجات :type على الفور.',
+                    'sku'               => 'SKU - :sku',
+                    'image-placeholder' => 'صورة المنتج',
                 ],
 
                 'types' => [
@@ -686,7 +687,8 @@ return [
                             'checkbox'    => 'خانة اختيار',
                             'is-required' => 'مطلوب',
                             'multiselect' => 'اختيار متعدد',
-                            'name'        => 'العنوان',
+                            'name'                        'image-placeholder' => 'صورة المنتج',
+                            => 'العنوان',
                             'no'          => 'لا',
                             'radio'       => 'زر الراديو',
                             'select'      => 'اختيار',
@@ -2415,6 +2417,7 @@ return [
                     'edit'      => 'تعديل',
                     'active'    => 'نشط',
                     'inactive'  => 'غير نشط',
+                    'delete'    => 'حذف',
                 ],
 
                 'edit'  => [

@@ -135,10 +135,10 @@ class CategoryDataGrid extends DataGrid
         ]);
 
         $this->addAction([
-            'icon'         => 'icon-delete',
-            'title'        => trans('admin::app.catalog.categories.index.datagrid.delete'),
-            'method'       => 'DELETE',
-            'url'          => function ($row) {
+            'icon'   => 'icon-delete',
+            'title'  => trans('admin::app.catalog.categories.index.datagrid.delete'),
+            'method' => 'DELETE',
+            'url'    => function ($row) {
                 return route('admin.catalog.categories.delete', $row->category_id);
             },
         ]);

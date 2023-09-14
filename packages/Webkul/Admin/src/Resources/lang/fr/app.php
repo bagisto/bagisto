@@ -607,11 +607,12 @@ return [
                         'title'      => 'Produits de vente croisée',
                     ],
 
-                    'add-btn'     => 'Ajouter un produit',
-                    'delete'      => 'Supprimer',
-                    'empty-title' => 'Ajouter un produit',
-                    'empty-info'  => 'Ajouter des produits :type en un instant.',
-                    'sku'         => 'SKU - :sku',
+                    'add-btn'           => 'Ajouter un produit',
+                    'delete'            => 'Supprimer',
+                    'empty-title'       => 'Ajouter un produit',
+                    'empty-info'        => 'Ajouter des produits :type en un instant.',
+                    'sku'               => 'SKU - :sku',
+                    'image-placeholder' => 'Image du produit',
                 ],
 
                 'types' => [
@@ -2415,6 +2416,7 @@ return [
                     'edit'     => 'Éditer',
                     'active'   => 'Actif',
                     'inactive' => 'Inactif',
+                    'delete'   => 'Supprimer',
                 ],
 
                 'edit'  => [

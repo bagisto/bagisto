@@ -607,11 +607,12 @@ return [
                         'title'      => '交叉销售产品',
                     ],
 
-                    'add-btn'     => '添加产品',
-                    'delete'      => '删除',
-                    'empty-title' => '添加产品',
-                    'empty-info'  => '随时添加 :type 产品。',
-                    'sku'         => 'SKU - :sku',
+                    'add-btn'           => '添加产品',
+                    'delete'            => '删除',
+                    'empty-title'       => '添加产品',
+                    'empty-info'        => '随时添加 :type 产品。',
+                    'sku'               => 'SKU - :sku',
+                    'image-placeholder' => '产品图片',
                 ],
 
                 'types' => [
@@ -2415,6 +2416,7 @@ return [
                     'edit'     => '编辑',
                     'active'   => '活跃',
                     'inactive' => '不活跃',
+                    'delete'   => '删除'
                 ],
 
                 'edit'  => [

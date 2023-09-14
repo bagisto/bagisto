@@ -27,10 +27,6 @@ class ProductServiceProvider extends ServiceProvider
 
         $this->app->register(EventServiceProvider::class);
 
-        $this->publishes([
-            dirname(__DIR__) . '/Config/imagecache.php' => config_path('imagecache.php'),
-        ]);
-
         ProductProxy::observe(ProductObserver::class);
     }
 
