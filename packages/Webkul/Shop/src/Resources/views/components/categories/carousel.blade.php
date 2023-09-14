@@ -28,8 +28,8 @@
                             <div class="w-[110px] h-[110px] bg-[#F5F5F5] rounded-full">
                                 <img
                                     class="w-[110px] h-[110px] rounded-full"
-                                    :src="category.images.icon_url"
-                                    v-if="category.images.icon_url"
+                                    :src="category.images.logo_url"
+                                    v-if="category.images.logo_url"
                                 />
                             </div>
                         </a>

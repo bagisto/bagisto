@@ -3,8 +3,10 @@
 namespace Webkul\Product\Repositories;
 
 use Exception;
-use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
+use Intervention\Image\ImageManager;
 use Webkul\Core\Eloquent\Repository;
 
 class ProductMediaRepository extends Repository
@@ -55,9 +57,21 @@ class ProductMediaRepository extends Repository
         if (! empty($data[$uploadFileType]['files'])) {
             foreach ($data[$uploadFileType]['files'] as $indexOrModelId => $file) {
                 if ($file instanceof UploadedFile) {
+                    if (Str::contains($file->getMimeType(), 'image')) {
+                        $manager = new ImageManager();
+
+                        $image = $manager->make($file)->encode('webp');
+    
+                        $path = $this->getProductDirectory($product) . '/' . Str::random(40) . '.webp';
+    
+                        Storage::put($path, $image);
+                    } else {
+                        $path = $file->store($this->getProductDirectory($product));
+                    }
+
                     $this->create([
                         'type'       => $uploadFileType,
-                        'path'       => $file->store($this->getProductDirectory($product)),
+                        'path'       => $path,
                         'product_id' => $product->id,
                         'position'   => ++$position,
                     ]);
