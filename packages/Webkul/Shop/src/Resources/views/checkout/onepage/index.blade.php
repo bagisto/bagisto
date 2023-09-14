@@ -16,7 +16,11 @@
                     href="{{ route('shop.home.index') }}"
                     class="flex min-h-[30px]"
                 >
-                    <img src="{{ bagisto_asset('images/logo.svg') }}">
+                    <img
+                        src="{{ bagisto_asset('images/logo.svg') }}"
+                        width="131"
+                        height="29"
+                    >
                 </a>
             </div>
         </div>

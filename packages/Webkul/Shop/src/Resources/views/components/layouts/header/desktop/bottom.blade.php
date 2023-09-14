@@ -21,7 +21,11 @@
             href="{{ route('shop.home.index') }}" 
             class="place-self-start -mt-[4px]"
         >
-            <img src="{{ bagisto_asset('images/logo.svg') }}">
+            <img
+                src="{{ bagisto_asset('images/logo.svg') }}"
+                width="131"
+                height="29"
+            >
         </a>
 
         <v-desktop-category>

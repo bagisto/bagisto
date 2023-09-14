@@ -250,7 +250,9 @@
             methods: {
                 getFilters() {
                     this.$axios.get('{{ route("shop.api.categories.attributes") }}', {
-                            category_id: "{{ request('category_id') }}",
+                            params: { 
+                                category_id: "{{ isset($category) ? $category->id : ''  }}",
+                            }
                         })
                         .then((response) => {
                             this.isLoading = false;

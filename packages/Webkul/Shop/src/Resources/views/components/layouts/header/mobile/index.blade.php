@@ -23,7 +23,11 @@
                 <x-slot:header>
                     <div class="flex justify-between items-center">
                         <a href="{{ route('shop.home.index') }}">
-                            <img src="{{ bagisto_asset('images/logo.svg') }}">
+                            <img
+                                src="{{ bagisto_asset('images/logo.svg') }}"
+                                width="131"
+                                height="29"
+                            >
                         </a>
                     </div>
                 </x-slot:header>
@@ -69,7 +73,11 @@
                 href="{{ route('shop.home.index') }}" 
                 class="max-h-[30px]"
             >
-                <img src="{{ bagisto_asset('images/logo.svg') }}">
+                <img
+                    src="{{ bagisto_asset('images/logo.svg') }}"
+                    width="131"
+                    height="29"
+                >
             </a>
         </div>
 

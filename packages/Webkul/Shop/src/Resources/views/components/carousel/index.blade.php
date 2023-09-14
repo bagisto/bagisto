@@ -80,7 +80,7 @@
                     let self = this;
 
                     setInterval(() => {
-                        //this.navigate(this.currentIndex += 1);
+                        this.navigate(this.currentIndex += 1);
                     }, 5000);
                 }
             }
