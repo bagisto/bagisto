@@ -526,6 +526,11 @@
                                         images: response.data.data.user.image_url
                                         ? [{ id: 'image', url: response.data.data.user.image_url }]
                                         : [],
+                                        user: {
+                                            ...response.data.data.user,
+                                            password:'',
+                                            password_confirmation:'',
+                                        },
                                 };
 
                                 this.$refs.modalForm.setValues(response.data.data.user);
