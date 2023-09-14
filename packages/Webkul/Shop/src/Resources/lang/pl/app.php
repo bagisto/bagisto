@@ -90,6 +90,7 @@ return [
                 'female'                  => 'Kobieta',
                 'other'                   => 'Inna',
                 'save'                    => 'Zapisz',
+                'unmatch'                 => 'Stare hasło nie pasuje.',
             ],
 
             'addresses' => [

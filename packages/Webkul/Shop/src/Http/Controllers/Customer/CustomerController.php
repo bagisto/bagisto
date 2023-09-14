@@ -2,8 +2,8 @@
 
 namespace Webkul\Shop\Http\Controllers\Customer;
 
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Hash;
 use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
@@ -79,7 +79,7 @@ class CustomerController extends Controller
 
                 $data['password'] = bcrypt($data['new_password']);
             } else {
-                session()->flash('warning', trans('shop::app.customer.account.profile.unmatch'));
+                session()->flash('warning', trans('shop::app.customers.account.profile.unmatch'));
 
                 return redirect()->back();
             }

@@ -90,6 +90,7 @@ return [
                 'female'                  => 'Kadın',
                 'other'                   => 'Diğer',
                 'save'                    => 'Kaydet',
+                'unmatch'                 => 'Eski şifre eşleşmiyor.',
             ],
 
             'addresses' => [

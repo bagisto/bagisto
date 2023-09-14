@@ -90,6 +90,7 @@ return [
                 'female'                  => 'Weiblich',
                 'other'                   => 'Andere',
                 'save'                    => 'Speichern',
+                'unmatch'                 => 'Das alte Passwort stimmt nicht überein.',
             ],
 
             'addresses' => [

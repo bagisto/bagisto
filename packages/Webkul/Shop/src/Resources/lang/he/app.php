@@ -90,6 +90,7 @@ return [
                 'female'                  => 'נקבה',
                 'other'                   => 'אחר',
                 'save'                    => 'שמור',
+                'unmatch'                 => 'הסיסמה הישנה אינה תואמת.',
             ],
 
             'addresses' => [
