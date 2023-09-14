@@ -90,6 +90,7 @@ return [
                 'female'                  => 'Feminino',
                 'other'                   => 'Outro',
                 'save'                    => 'Salvar',
+                'unmatch'                 => 'A senha antiga não coincide.',
             ],
 
             'addresses' => [

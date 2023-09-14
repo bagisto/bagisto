@@ -90,6 +90,7 @@ return [
                 'female'                  => 'ගැහැණු',
                 'other'                   => 'වෙනත',
                 'save'                    => 'සුරකින්න',
+                'unmatch'                 => 'පරිශීලක මුරපදය නොගැලපෙනිය.',
             ],
 
             'addresses' => [
@@ -523,7 +524,7 @@ return [
                 'quantity-update'          => 'ප්රමාණය සාර්ථකව යාවත්කාලීන කරන ලදි',
                 'see-details'              => 'වැරදියිද?',
                 'move-to-wishlist'         => 'තොරුමයට ගෙනාන්න',
-                'items-selected' => ':count අයිතමයින් තෝරා ඇත්තා',
+                'items-selected'           => ':count අයිතමයින් තෝරා ඇත්තා',
             ],
 
             'coupon'   => [

@@ -90,6 +90,7 @@ return [
                 'female'                  => '女性',
                 'other'                   => 'その他',
                 'save'                    => '保存',
+                'unmatch'                 => '古いパスワードが一致しません。',
             ],
 
             'addresses' => [

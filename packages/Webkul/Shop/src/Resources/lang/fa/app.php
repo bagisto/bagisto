@@ -90,6 +90,7 @@ return [
                 'female'                  => 'زن',
                 'other'                   => 'سایر',
                 'save'                    => 'ذخیره',
+                'unmatch'                 => 'رمز عبور قدیمی مطابقت ندارد.',
             ],
 
             'addresses' => [
@@ -487,7 +488,7 @@ return [
             'order-id-info' => 'شماره سفارش شما #:order_id',
             'info'          => 'جزئیات سفارش و اطلاعات پیگیری به ایمیل شما ارسال خواهد شد',
         ],
-    
+
         'cart' => [
             'item-add-to-cart'          => 'کالا با موفقیت اضافه شد',
             'return-to-shop'            => 'بازگشت به فروشگاه',
@@ -504,7 +505,7 @@ return [
             'inventory-warning'         => 'تعداد درخواستی موجود نیست، لطفاً بعداً دوباره امتحان کنید.',
             'illegal'                   => 'تعداد نمی‌تواند کمتر از یک باشد.',
             'inactive'                  => 'این مورد غیرفعال شده و بعداً از سبد خرید حذف می‌شود.',
-    
+
             'index' => [
                 'home'                     => 'خانه',
                 'cart'                     => 'سبد خرید',
@@ -525,7 +526,7 @@ return [
                 'move-to-wishlist'         => 'انتقال به لیست علاقه‌مندی',
                 'items-selected'           => ':count مورد انتخاب شده',
             ],
-    
+
             'coupon' => [
                 'code'            => 'کد تخفیف',
                 'applied'         => 'کد تخفیف اعمال شد',
@@ -541,7 +542,7 @@ return [
                 'subtotal'        => 'جمع کل',
                 'button-title'    => 'اعمال',
             ],
-    
+
             'mini-cart' => [
                 'see-details'          => 'مشاهده جزئیات',
                 'shopping-cart'        => 'سبد خرید',
@@ -552,7 +553,7 @@ return [
                 'continue-to-checkout' => 'ادامه به تسویه حساب',
                 'view-cart'            => 'مشاهده سبد خرید',
             ],
-    
+
             'summary' => [
                 'cart-summary'        => 'خلاصه سبد خرید',
                 'sub-total'           => 'جمع جزئیات',
@@ -564,7 +565,7 @@ return [
                 'proceed-to-checkout' => 'ادامه به تسویه حساب',
             ],
         ],
-    
+
         'onepage' => [
             'addresses' => [
                 'billing' => [
@@ -586,11 +587,11 @@ return [
                     'save-address'         => 'ذخیره این آدرس',
                     'confirm'              => 'تأیید',
                 ],
-    
+
                 'index' => [
                     'confirm' => 'تأیید',
                 ],
-    
+
                 'shipping' => [
                     'shipping-address' => 'آدرس ارسال',
                     'add-new-address'  => 'افزودن آدرس جدید',
@@ -611,7 +612,7 @@ return [
                     'confirm'          => 'تأیید',
                 ],
             ],
-    
+
             'coupon' => [
                 'discount'        => 'تخفیف کد تخفیف',
                 'code'            => 'کد تخفیف',
@@ -625,20 +626,20 @@ return [
                 'enter-your-code' => 'کد خود را وارد کنید',
                 'subtotal'        => 'جمع جزئیات',
             ],
-    
+
             'index' => [
                 'home'     => 'خانه',
                 'checkout' => 'تسویه حساب',
             ],
-    
+
             'payment' => [
                 'payment-method' => 'روش پرداخت',
             ],
-    
+
             'shipping' => [
                 'shipping-method' => 'روش ارسال',
             ],
-    
+
             'summary' => [
                 'cart-summary'     => 'خلاصه سبد خرید',
                 'sub-total'        => 'جمع جزئیات',
@@ -650,7 +651,7 @@ return [
                 'processing'       => 'در حال پردازش',
             ],
         ],
-    ],    
+    ],
 
     'home' => [
         'index' => [
