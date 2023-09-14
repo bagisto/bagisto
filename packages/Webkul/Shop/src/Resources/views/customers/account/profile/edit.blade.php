@@ -149,6 +149,27 @@
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
+                @lang('shop::app.customers.account.profile.dob')
+            </x-shop::form.control-group.label>
+
+            <x-shop::form.control-group.control
+                type="date"
+                name="date_of_birth"
+                :value="old('date_of_birth') ?? $customer->date_of_birth"
+                class="mb-4"
+                :label="trans('shop::app.customers.account.profile.dob')"
+                :placeholder="trans('shop::app.customers.account.profile.dob')"
+            >
+            </x-shop::form.control-group.control>
+
+            <x-shop::form.control-group.error
+                control-name="date_of_birth"
+            >
+            </x-shop::form.control-group.error>
+        </x-shop::form.control-group>
+
+        <x-shop::form.control-group class="mb-4">
+            <x-shop::form.control-group.label>
                 @lang('shop::app.customers.account.profile.current-password')
             </x-shop::form.control-group.label>
 
