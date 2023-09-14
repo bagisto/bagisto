@@ -2300,7 +2300,7 @@ return [
                 'title'             => 'ערוצים',
                 'create-btn'        => 'צור ערוץ',
                 'delete-success'    => 'הערוץ נמחק בהצלחה.',
-                'delete-failed'     => 'מחיקת :name נכשלה',
+                'delete-failed'     => 'מחיקת ערוץ נכשלה',
                 'last-delete-error' => 'מחיקת הערוץ האחרון נכשלה.',
 
                 'datagrid' => [

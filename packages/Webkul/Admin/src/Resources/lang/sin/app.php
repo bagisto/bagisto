@@ -2301,7 +2301,7 @@ return [
                 'title'             => 'චැනල්ස්',
                 'create-btn'        => 'චැනල් සාදන්න',
                 'delete-success'    => 'චැනල් ඉවත් කරන විට සාර්ථකව ඉවත් කරන ලදි.',
-                'delete-failed'     => ':name ඉවත් කළායි',
+                'delete-failed'     => 'චැනලය ඉවත් කළායි',
                 'last-delete-error' => 'අගයේ අඩුම චැනල් ඉවත් කරන ලදි.',
 
                 'datagrid' => [

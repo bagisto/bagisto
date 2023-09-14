@@ -2300,7 +2300,7 @@ return [
                 'title'             => 'Chaînes',
                 'create-btn'        => 'Créer une chaîne',
                 'delete-success'    => 'Chaîne supprimée avec succès.',
-                'delete-failed'     => ':name Échec de la suppression',
+                'delete-failed'     => 'Chaîne Échec de la suppression',
                 'last-delete-error' => 'La dernière chaîne n\'a pas pu être supprimée.',
 
                 'datagrid' => [

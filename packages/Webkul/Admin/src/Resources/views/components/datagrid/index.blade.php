@@ -580,12 +580,20 @@
                                     value: this.applied.massActions.value,
                                 })
                                 .then(response => {
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                    if (response.data.message) {
+                                        this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                    } else {
+                                        this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                    }
 
                                     this.get();
                                 })
                                 .catch((error) => {
-                                    this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.data.message });
+                                    if (response.data.message) {
+                                        this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
+                                    } else {
+                                        this.$emitter.emit('add-flash', { type: 'error', message: response.data.data.message });
+                                    }
                                 });
 
                             break;
@@ -595,12 +603,20 @@
                                     indices: this.applied.massActions.indices
                                 })
                                 .then(response => {
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                    if (response.data.message) {
+                                        this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                    } else {
+                                        this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                    }
 
                                     this.get();
                                 })
                                 .catch((error) => {
-                                    this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.data.message });
+                                    if (response.data.message) {
+                                        this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
+                                    } else {
+                                        this.$emitter.emit('add-flash', { type: 'error', message: response.data.data.message });
+                                    }
                                 });
 
                             break;
@@ -699,7 +715,19 @@
 
                             this.$axios[method](action.url)
                                 .then(response => {
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                    if (response.data.message) {
+                                        if (response.data.statusCode === 200) {
+                                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                        } else {
+                                            this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
+                                        }
+                                    } else {
+                                        if (response.data.statusCode === 200) {
+                                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                        } else {
+                                            this.$emitter.emit('add-flash', { type: 'error', message: response.data.data.message });
+                                        }
+                                    }
 
                                     this.get();
                                 });

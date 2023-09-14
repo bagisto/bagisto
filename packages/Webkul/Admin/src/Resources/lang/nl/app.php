@@ -2300,7 +2300,7 @@ return [
                 'title'             => 'Kanalen',
                 'create-btn'        => 'Kanaal Aanmaken',
                 'delete-success'    => 'Kanaal succesvol verwijderd.',
-                'delete-failed'     => ':name Verwijderen Mislukt',
+                'delete-failed'     => 'Kanaal Verwijderen Mislukt',
                 'last-delete-error' => 'Laatste Kanaal Verwijderen Mislukt',
 
                 'datagrid' => [

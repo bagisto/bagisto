@@ -2301,7 +2301,7 @@ return [
                 'title'             => 'Kanallar',
                 'create-btn'        => 'Kanal Oluştur',
                 'delete-success'    => 'Kanal başarıyla silindi.',
-                'delete-failed'     => ':name Silme Başarısız',
+                'delete-failed'     => 'Kanal Silme Başarısız',
                 'last-delete-error' => 'Son Kanal silinemedi.',
 
                 'datagrid' => [

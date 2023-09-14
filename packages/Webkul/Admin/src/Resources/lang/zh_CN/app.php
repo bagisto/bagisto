@@ -2300,7 +2300,7 @@ return [
                 'title'             => '渠道',
                 'create-btn'        => '创建渠道',
                 'delete-success'    => '渠道删除成功。',
-                'delete-failed'     => ':name 删除失败',
+                'delete-failed'     => '频道 删除失败',
                 'last-delete-error' => '最后一个渠道删除失败。',
 
                 'datagrid' => [

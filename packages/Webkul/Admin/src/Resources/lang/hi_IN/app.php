@@ -2300,7 +2300,7 @@ return [
                 'title'             => 'चैनल',
                 'create-btn'        => 'चैनल बनाएं',
                 'delete-success'    => 'चैनल को सफलतापूर्वक हटा दिया गया।',
-                'delete-failed'     => ':name हटाने में विफल हुआ',
+                'delete-failed'     => 'चैनल हटाने में विफल हुआ',
                 'last-delete-error' => 'अंतिम चैनल को हटाने में विफल हुआ।',
 
                 'datagrid' => [

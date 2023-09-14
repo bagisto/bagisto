@@ -687,8 +687,7 @@ return [
                             'checkbox'    => 'خانة اختيار',
                             'is-required' => 'مطلوب',
                             'multiselect' => 'اختيار متعدد',
-                            'name'                        'image-placeholder' => 'صورة المنتج',
-                            => 'العنوان',
+                            'name'        => 'العنوان',
                             'no'          => 'لا',
                             'radio'       => 'زر الراديو',
                             'select'      => 'اختيار',
@@ -2301,7 +2300,7 @@ return [
                 'title'             => 'القنوات',
                 'create-btn'        => 'إنشاء قناة',
                 'delete-success'    => 'تم حذف القناة بنجاح.',
-                'delete-failed'     => 'فشل حذف :name',
+                'delete-failed'     => 'فشل حذف قناة',
                 'last-delete-error' => 'فشل حذف آخر قناة.',
 
                 'datagrid' => [
