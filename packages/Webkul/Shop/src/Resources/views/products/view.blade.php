@@ -352,8 +352,11 @@
                                         class="flex gap-[10px] justify-center items-center cursor-pointer"
                                         @click="is_buy_now=0; addToCompare({{ $product->id }})"
                                     >
-                                        <span class="icon-compare text-[24px]"></span>
-                                        @lang('shop::app.products.compare')
+                                        @if (core()->getConfigData('general.content.shop.compare_option') == 'on')
+                                            <span class="icon-compare text-[24px]"></span>
+                                            
+                                            @lang('shop::app.products.compare')
+                                        @endif
                                     </div>
 
                                     {!! view_render_event('bagisto.shop.products.view.compare.after', ['product' => $product]) !!}

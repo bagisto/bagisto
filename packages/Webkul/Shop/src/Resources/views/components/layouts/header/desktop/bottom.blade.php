@@ -70,9 +70,11 @@
         {{-- Right Navigation Links --}}
         <div class="flex gap-x-[35px] mt-[5px] max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px]">
             {{-- Compare --}}
-            <a href="{{ route('shop.compare.index') }}">
-                <span class="icon-compare inline-block text-[24px] cursor-pointer"></span>
-            </a>
+            @if($showCompare)
+                <a href="{{ route('shop.compare.index') }}">
+                    <span class="icon-compare inline-block text-[24px] cursor-pointer"></span>
+                </a>
+            @endif
 
             {{-- Mini cart --}}
             @include('shop::checkout.cart.mini-cart')
