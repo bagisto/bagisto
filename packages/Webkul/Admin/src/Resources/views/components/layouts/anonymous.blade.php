@@ -68,14 +68,6 @@
 
     {!! view_render_event('bagisto.shop.layout.body.after') !!}
 
-    <script type="text/javascript">
-        window.serverErrors = [];
-
-        @if (count($errors))
-            window.serverErrors = @json($errors->getMessages());
-        @endif
-    </script>
-
     @stack('scripts')
 
     <script type="text/javascript">

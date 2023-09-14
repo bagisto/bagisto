@@ -8,7 +8,7 @@
     $showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
 @endphp
 
-<div class="bs-mobile-menu gap-[15px] flex-wrap px-[15px] pt-[25px] hidden max-lg:flex max-lg:mb-[15px]">
+<div class="gap-[15px] flex-wrap px-[15px] pt-[25px] hidden max-lg:flex max-lg:mb-[15px]">
     <div class="w-full flex justify-between items-center">
         {{-- Left Navigation --}}
         <div class="flex items-center gap-x-[5px]">
@@ -23,7 +23,11 @@
                 <x-slot:header>
                     <div class="flex justify-between items-center">
                         <a href="{{ route('shop.home.index') }}">
-                            <img src="{{ bagisto_asset('images/logo.svg') }}">
+                            <img
+                                src="{{ bagisto_asset('images/logo.svg') }}"
+                                width="131"
+                                height="29"
+                            >
                         </a>
                     </div>
                 </x-slot:header>
@@ -69,7 +73,11 @@
                 href="{{ route('shop.home.index') }}" 
                 class="max-h-[30px]"
             >
-                <img src="{{ bagisto_asset('images/logo.svg') }}">
+                <img
+                    src="{{ bagisto_asset('images/logo.svg') }}"
+                    width="131"
+                    height="29"
+                >
             </a>
         </div>
 

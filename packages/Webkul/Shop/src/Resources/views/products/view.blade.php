@@ -320,7 +320,7 @@
 
                                     <button
                                         type="submit"
-                                        class="bs-secondary-button w-full max-w-full"
+                                        class="secondary-button w-full max-w-full"
                                     >
                                         @lang('shop::app.products.add-to-cart')
                                     </button>
@@ -334,7 +334,7 @@
                                 @if (core()->getConfigData('catalog.products.storefront.buy_now_button_display'))
                                     <button
                                         type="submit"
-                                        class="bs-primary-button w-full max-w-[470px] mt-[20px]"
+                                        class="primary-button w-full max-w-[470px] mt-[20px]"
                                         @click="is_buy_now=1;"
                                         {{ ! $product->isSaleable(1) ? 'disabled' : '' }}
                                     >

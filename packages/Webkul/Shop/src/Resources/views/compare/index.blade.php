@@ -32,7 +32,7 @@
                         </h2>
 
                         <div
-                            class="bs-secondary-button flex gap-x-[10px] items-center py-[12px] px-[20px] border-[#E9E9E9] font-normal whitespace-nowrap"
+                            class="secondary-button flex gap-x-[10px] items-center py-[12px] px-[20px] border-[#E9E9E9] font-normal whitespace-nowrap"
                             v-if="items.length"
                             @click="removeAll"
                         >

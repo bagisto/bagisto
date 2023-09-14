@@ -16,6 +16,8 @@
                     <x-shop::shimmer.image
                         class="relative after:content-[' '] after:block after:pb-[calc(100%+9px)] rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
                         ::src="product.base_image.medium_image_url"
+                        width="291"
+                        height="300"
                     ></x-shop::shimmer.image>
                 </a>
                 
@@ -156,7 +158,7 @@
                 </p>
             
                 <div 
-                    class="bs-primary-button px-[30px] py-[10px] whitespace-nowrap"
+                    class="primary-button px-[30px] py-[10px] whitespace-nowrap"
                     @click="addToCart()"
                 >
                     @lang('shop::app.components.products.card.add-to-cart')

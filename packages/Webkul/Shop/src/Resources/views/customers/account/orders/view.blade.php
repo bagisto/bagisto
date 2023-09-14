@@ -24,7 +24,7 @@
             </x-shop::form>
 
             <a
-                class="bs-secondary-button flex items-center gap-x-[10px] py-[12px] px-[20px] border-[#E9E9E9] font-normal"
+                class="secondary-button flex items-center gap-x-[10px] py-[12px] px-[20px] border-[#E9E9E9] font-normal"
                 href="javascript:void(0);"
                 onclick="cancelOrder('@lang('shop::app.customers.account.orders.view.cancel-confirm-msg')')"
             >
@@ -347,7 +347,7 @@
                                     @lang('shop::app.customers.account.orders.view.invoices.individual-invoice', ['invoice_id' => $invoice->increment_id ?? $invoice->id])
                                 </p>
                             </div>
-                            <div class="bs-secondary-button flex gap-x-[10px] items-center py-[12px] px-[20px] border-[#E9E9E9] font-normal">
+                            <div class="secondary-button flex gap-x-[10px] items-center py-[12px] px-[20px] border-[#E9E9E9] font-normal">
                                 <a href="{{ route('shop.customers.account.orders.print-invoice', $invoice->id) }}">
                                         @lang('shop::app.customers.account.orders.view.invoices.print')
                                 </a>
