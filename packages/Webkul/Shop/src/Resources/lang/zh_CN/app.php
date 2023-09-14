@@ -256,6 +256,7 @@ return [
                 'delete-all'         => '全部删除',
                 'empty'              => '愿望清单中没有任何商品。',
                 'move-to-cart'       => '移到购物车',
+                'moved-success'      => '商品成功移入購物車',    
                 'profile'            => '个人资料',
                 'removed'            => '商品已成功从愿望清单中移除',
                 'remove-fail'        => '商品无法从愿望清单中移除',

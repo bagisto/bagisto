@@ -107,7 +107,7 @@ class WishlistController extends APIController
                         'cart'     => new CartResource(Cart::getCart()),
                     ],
 
-                    'message'  => trans('shop::app.customers.account.wishlist.item-add-to-cart'),
+                    'message'  => trans('shop::app.customers.account.wishlist.moved-success'),
                 ]);
             }
 

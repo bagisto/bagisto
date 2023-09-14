@@ -256,6 +256,7 @@ return [
                 'delete-all'         => 'Tümünü Sil',
                 'empty'              => 'İstek listesi sayfasına herhangi bir ürün eklenmedi.',
                 'move-to-cart'       => 'Sepete Taşı',
+                'moved-success'      => 'Öğe Başarıyla Sepete Taşındı',    
                 'profile'            => 'Profil',
                 'removed'            => 'Ürün Başarıyla İstek Listesinden Kaldırıldı',
                 'remove-fail'        => 'Ürün İstek Listesinden Kaldırılamıyor',

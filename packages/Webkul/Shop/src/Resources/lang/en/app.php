@@ -256,6 +256,7 @@ return [
                 'delete-all'         => 'Delete All',
                 'empty'              => 'No products were added to the wishlist page.',
                 'move-to-cart'       => 'Move To Cart',
+                'moved-success'      => 'Item Successfully Moved to Cart',    
                 'profile'            => 'Profile',
                 'removed'            => 'Item Successfully Removed From Wishlist',
                 'remove-fail'        => 'Item Cannot Be Removed From Wishlist',

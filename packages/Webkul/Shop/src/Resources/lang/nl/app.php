@@ -256,6 +256,7 @@ return [
                 'delete-all'         => 'Alles Verwijderen',
                 'empty'              => 'Er zijn geen producten toegevoegd aan de wenslijstpagina.',
                 'move-to-cart'       => 'Verplaatsen naar winkelwagen',
+                'moved-success'      => 'Item succesvol verplaatst naar de winkelwagen',    
                 'profile'            => 'Profiel',
                 'removed'            => 'Item succesvol verwijderd uit de wenslijst',
                 'remove-fail'        => 'Item kan niet worden verwijderd uit de wenslijst',
