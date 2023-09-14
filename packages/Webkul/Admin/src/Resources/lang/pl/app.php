@@ -607,11 +607,12 @@ return [
                         'title'      => 'Produkty do sprzedaży krzyżowej',
                     ],
 
-                    'add-btn'     => 'Dodaj produkt',
-                    'delete'      => 'Usuń',
-                    'empty-title' => 'Dodaj produkt',
-                    'empty-info'  => 'Aby dodać produkty :type, wystarczy to zrobić.',
-                    'sku'         => 'SKU - :sku',
+                    'add-btn'           => 'Dodaj produkt',
+                    'delete'            => 'Usuń',
+                    'empty-title'       => 'Dodaj produkt',
+                    'empty-info'        => 'Aby dodać produkty :type, wystarczy to zrobić.',
+                    'sku'               => 'SKU - :sku',
+                    'image-placeholder' => 'Obraz produktu',
                 ],
 
                 'types' => [
@@ -966,7 +967,7 @@ return [
                 'banner'                   => 'Baner',
                 'banner-size'              => 'Proporcje banera (1320px X 300px)',
                 'back-btn'                 => 'Powrót',
-                'company-name'             => 'Nazwa',
+                'name'                     => 'Nazwa',
                 'description'              => 'Opis',
                 'description-and-images'   => 'Opis i Obrazy',
                 'description-only'         => 'Tylko Opis',
@@ -998,7 +999,7 @@ return [
                 'banner'                   => 'Baner',
                 'banner-size'              => 'Proporcje banera (1320px X 300px)',
                 'back-btn'                 => 'Powrót',
-                'company-name'             => 'Nazwa*',
+                'name'                     => 'Nazwa',
                 'description'              => 'Opis',
                 'description-and-images'   => 'Opis i Obrazy',
                 'description-only'         => 'Tylko Opis',
@@ -2299,7 +2300,7 @@ return [
                 'title'             => 'Kanały',
                 'create-btn'        => 'Utwórz Kanał',
                 'delete-success'    => 'Kanał pomyślnie usunięty.',
-                'delete-failed'     => 'Usunięcie :name nie powiodło się',
+                'delete-failed'     => 'Usunięcie Kanał nie powiodło się',
                 'last-delete-error' => 'Ostatni kanał nie może zostać usunięty.',
 
                 'datagrid' => [
@@ -2415,6 +2416,7 @@ return [
                     'edit'     => 'Edytuj',
                     'active'   => 'Aktywny',
                     'inactive' => 'Nieaktywny',
+                    'delete'   => 'Usuń',
                 ],
 
                 'edit'  => [
@@ -2727,9 +2729,9 @@ return [
                         'comma-separated'        => 'Oddzielone przecinkami',
                         'cheapest-first'         => 'Najtańsze najpierw',
                         'default-list-mode'      => 'Domyślny tryb listy',
+                        'database'               => 'Baza danych',
                         'expensive-first'        => 'Najdroższe najpierw',
                         'elastic'                => 'Elastyczne wyszukiwanie',
-                        'flat'                   => 'Płaska tabela',
                         'from-z-a'               => 'Od Z do A',
                         'from-a-z'               => 'Od A do Z',
                         'grid'                   => 'Siatka',

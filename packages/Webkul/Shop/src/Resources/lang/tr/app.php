@@ -74,6 +74,7 @@ return [
                 'delete-profile'          => 'Profili Sil',
                 'edit-profile'            => 'Profili Düzenle',
                 'edit'                    => 'Düzenle',
+                'edit-success'            => 'Profil Başarıyla Güncellendi',
                 'phone'                   => 'Telefon',
                 'current-password'        => 'Geçerli Parola',
                 'new-password'            => 'Yeni Parola',
@@ -255,6 +256,7 @@ return [
                 'delete-all'         => 'Tümünü Sil',
                 'empty'              => 'İstek listesi sayfasına herhangi bir ürün eklenmedi.',
                 'move-to-cart'       => 'Sepete Taşı',
+                'moved-success'      => 'Öğe Başarıyla Sepete Taşındı',    
                 'profile'            => 'Profil',
                 'removed'            => 'Ürün Başarıyla İstek Listesinden Kaldırıldı',
                 'remove-fail'        => 'Ürün İstek Listesinden Kaldırılamıyor',
@@ -522,6 +524,7 @@ return [
                 'quantity-update'          => 'Miktar başarıyla güncellendi',
                 'see-details'              => 'Detayları Gör',
                 'move-to-wishlist'         => 'Favorilere Taşı',
+                'items-selected'           => ':count Seçilen Öğeler',
             ],
 
             'coupon' => [

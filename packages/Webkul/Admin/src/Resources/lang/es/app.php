@@ -607,11 +607,12 @@ return [
                         'title'      => 'Productos de Venta Cruzada',
                     ],
 
-                    'add-btn'     => 'Agregar Producto',
-                    'delete'      => 'Eliminar',
-                    'empty-title' => 'Agregar Producto',
-                    'empty-info'  => 'Para agregar productos de tipo :type de forma rápida.',
-                    'sku'         => 'SKU - :sku',
+                    'add-btn'           => 'Agregar Producto',
+                    'delete'            => 'Eliminar',
+                    'empty-title'       => 'Agregar Producto',
+                    'empty-info'        => 'Para agregar productos de tipo :type de forma rápida.',
+                    'sku'               => 'SKU - :sku',
+                    'image-placeholder' => 'Imagen del Producto',
                 ],
 
                 'types' => [
@@ -966,7 +967,7 @@ return [
                 'banner'                   => 'Banner',
                 'banner-size'              => 'Proporción de aspecto del banner (1320px X 300px)',
                 'back-btn'                 => 'Atrás',
-                'company-name'             => 'Nombre',
+                'name'                     => 'Nombre',
                 'description'              => 'Descripción',
                 'description-and-images'   => 'Descripción e Imágenes',
                 'description-only'         => 'Solo Descripción',
@@ -998,7 +999,7 @@ return [
                 'banner'                   => 'Banner',
                 'banner-size'              => 'Proporción de aspecto del banner (1320px X 300px)',
                 'back-btn'                 => 'Atrás',
-                'company-name'             => 'Nombre*',
+                'name'                     => 'Nombre',
                 'description'              => 'Descripción',
                 'description-and-images'   => 'Descripción e Imágenes',
                 'description-only'         => 'Solo Descripción',
@@ -2299,7 +2300,7 @@ return [
                 'title'             => 'Canales',
                 'create-btn'        => 'Crear Canal',
                 'delete-success'    => 'Canal eliminado exitosamente.',
-                'delete-failed'     => 'Error al eliminar :name',
+                'delete-failed'     => 'Error al eliminar Canal',
                 'last-delete-error' => 'Error al eliminar el último Canal.',
 
                 'datagrid' => [
@@ -2415,6 +2416,7 @@ return [
                     'edit'      => 'Editar',
                     'active'    => 'Activo',
                     'inactive'  => 'Inactivo',
+                    'delete'    => 'Borrar',
                 ],
 
                 'edit' => [
@@ -2728,9 +2730,9 @@ return [
                         'comma-separated'        => 'Durch Komma getrennt',
                         'cheapest-first'         => 'Günstigste zuerst',
                         'default-list-mode'      => 'Standardlistenmodus',
+                        'database'               => 'Base de datos',
                         'expensive-first'        => 'Teuerste zuerst',
                         'elastic'                => 'Elastische Suche',
-                        'flat'                   => 'Flache Tabelle',
                         'from-z-a'               => 'Von Z-A',
                         'from-a-z'               => 'Von A-Z',
                         'grid'                   => 'Raster',

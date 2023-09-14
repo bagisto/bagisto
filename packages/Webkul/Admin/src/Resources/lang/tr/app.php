@@ -607,11 +607,13 @@ return [
                         'title'      => 'Çapraz Satış Ürünleri',
                     ],
 
-                    'add-btn'     => 'Ürün Ekle',
-                    'delete'      => 'Sil',
-                    'empty-title' => 'Ürün Ekle',
-                    'empty-info'  => ':type ürünleri eklemek için.',
-                    'sku'         => 'SKU - :sku',
+                    'add-btn'           => 'Ürün Ekle',
+                    'delete'            => 'Sil',
+                    'empty-title'       => 'Ürün Ekle',
+                    'empty-info'        => ':type ürünleri eklemek için.',
+                    'sku'               => 'SKU - :sku',
+                    'image-placeholder' => 'Ürün Resmi',
+
                 ],
 
                 'types' => [
@@ -966,7 +968,7 @@ return [
                 'banner'                    => 'Banner',
                 'banner-size'               => 'Banner boyut oranı (1320px X 300px)',
                 'back-btn'                  => 'Geri',
-                'company-name'              => 'Adı',
+                'name'                      => 'Adı',
                 'description'               => 'Açıklama',
                 'description-and-images'    => 'Açıklama ve Resimler',
                 'description-only'          => 'Sadece Açıklama',
@@ -998,7 +1000,7 @@ return [
                 'banner'                    => 'Banner',
                 'banner-size'               => 'Banner boyut oranı (1320px X 300px)',
                 'back-btn'                  => 'Geri',
-                'company-name'              => 'Adı *',
+                'name'                      => 'Adı',
                 'description'               => 'Açıklama',
                 'description-and-images'    => 'Açıklama ve Resimler',
                 'description-only'          => 'Sadece Açıklama',
@@ -2299,7 +2301,7 @@ return [
                 'title'             => 'Kanallar',
                 'create-btn'        => 'Kanal Oluştur',
                 'delete-success'    => 'Kanal başarıyla silindi.',
-                'delete-failed'     => ':name Silme Başarısız',
+                'delete-failed'     => 'Kanal Silme Başarısız',
                 'last-delete-error' => 'Son Kanal silinemedi.',
 
                 'datagrid' => [
@@ -2415,6 +2417,7 @@ return [
                     'edit'     => 'Düzenle',
                     'active'   => 'Aktif',
                     'inactive' => 'Pasif',
+                    'delete'   => 'Sil',
                 ],
 
                 'edit'  => [
@@ -2727,9 +2730,9 @@ return [
                         'comma-separated'        => 'Virgülle Ayrılmış',
                         'cheapest-first'         => 'En Ucuz İlk',
                         'default-list-mode'      => 'Varsayılan Liste Modu',
+                        'database'               => 'Veritabanı',
                         'expensive-first'        => 'En Pahalı İlk',
                         'elastic'                => 'Elastik Arama',
-                        'flat'                   => 'Düz Tablo',
                         'from-z-a'               => 'Z\'den A\'ya',
                         'from-a-z'               => 'A\'dan Z\'ye',
                         'grid'                   => 'Izgara',

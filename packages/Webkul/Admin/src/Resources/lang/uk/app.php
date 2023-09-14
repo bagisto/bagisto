@@ -607,11 +607,12 @@ return [
                         'title'      => 'Товари для перекресних продажів',
                     ],
 
-                    'add-btn'     => 'Додати товар',
-                    'delete'      => 'Видалити',
-                    'empty-title' => 'Додати товар',
-                    'empty-info'  => 'Додати товари типу :type на ходу.',
-                    'sku'         => 'Артикул - :sku',
+                    'add-btn'           => 'Додати товар',
+                    'delete'            => 'Видалити',
+                    'empty-title'       => 'Додати товар',
+                    'empty-info'        => 'Додати товари типу :type на ходу.',
+                    'sku'               => 'Артикул - :sku',
+                    'image-placeholder' => 'Зображення товару',
                 ],
 
                 'types' => [
@@ -966,7 +967,7 @@ return [
                 'banner'                   => 'Банер',
                 'banner-size'              => 'Розмір банера (1320px X 300px)',
                 'back-btn'                 => 'Назад',
-                'company-name'             => 'Назва',
+                'name'                     => 'Назва',
                 'description'              => 'Опис',
                 'description-and-images'   => 'Опис та Зображення',
                 'description-only'         => 'Лише Опис',
@@ -998,7 +999,7 @@ return [
                 'banner'                   => 'Банер',
                 'banner-size'              => 'Розмір банера (1320px X 300px)',
                 'back-btn'                 => 'Назад',
-                'company-name'             => 'Назва*',
+                'name'                     => 'Назва',
                 'description'              => 'Опис',
                 'description-and-images'   => 'Опис та Зображення',
                 'description-only'         => 'Лише Опис',
@@ -2299,7 +2300,7 @@ return [
                 'title'             => 'Канали',
                 'create-btn'        => 'Створити канал',
                 'delete-success'    => 'Канал успішно видалено.',
-                'delete-failed'     => ':name Видалення не вдалося',
+                'delete-failed'     => 'Канал Видалення не вдалося',
                 'last-delete-error' => 'Не вдалося видалити останній канал.',
 
                 'datagrid' => [
@@ -2415,6 +2416,7 @@ return [
                     'edit'     => 'Редагувати',
                     'active'   => 'Активний',
                     'inactive' => 'Неактивний',
+                    'delete'   => 'Видалити',
                 ],
 
                 'edit'  => [
@@ -2728,9 +2730,9 @@ return [
                         'comma-separated'        => 'Розділені комами',
                         'cheapest-first'         => 'Спочатку найдешевші',
                         'default-list-mode'      => 'Режим списку за замовчуванням',
+                        'database'               => 'База даних',
                         'expensive-first'        => 'Спочатку найкращі',
                         'elastic'                => 'Elastic Search',
-                        'flat'                   => 'Плоска таблиця',
                         'from-z-a'               => 'Від Z до A',
                         'from-a-z'               => 'Від А до Z',
                         'grid'                   => 'Сітка',

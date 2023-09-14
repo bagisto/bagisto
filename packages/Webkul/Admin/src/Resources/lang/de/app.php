@@ -607,11 +607,12 @@ return [
                         'title'      => 'Cross-Sell-Produkte',
                     ],
 
-                    'add-btn'     => 'Produkt hinzufügen',
-                    'delete'      => 'Löschen',
-                    'empty-title' => 'Produkt hinzufügen',
-                    'empty-info'  => 'Um :type Produkte hinzuzufügen.',
-                    'sku'         => 'Artikelnummer (SKU) - :sku',
+                    'add-btn'           => 'Produkt hinzufügen',
+                    'delete'            => 'Löschen',
+                    'empty-title'       => 'Produkt hinzufügen',
+                    'empty-info'        => 'Um :type Produkte hinzuzufügen.',
+                    'sku'               => 'Artikelnummer (SKU) - :sku',
+                    'image-placeholder' => 'Produktbild',
                 ],
 
                 'types' => [
@@ -966,7 +967,7 @@ return [
                 'banner'                   => 'Banner',
                 'banner-size'              => 'Banner-Seitenverhältnis (1320px X 300px)',
                 'back-btn'                 => 'Zurück',
-                'company-name'             => 'Name',
+                'name'                     => 'Name',
                 'description'              => 'Beschreibung',
                 'description-and-images'   => 'Beschreibung und Bilder',
                 'description-only'         => 'Nur Beschreibung',
@@ -998,7 +999,7 @@ return [
                 'banner'                   => 'Banner',
                 'banner-size'              => 'Banner-Seitenverhältnis (1320px X 300px)',
                 'back-btn'                 => 'Zurück',
-                'company-name'             => 'Name*',
+                'name'                     => 'Name',
                 'description'              => 'Beschreibung',
                 'description-and-images'   => 'Beschreibung und Bilder',
                 'description-only'         => 'Nur Beschreibung',
@@ -2299,7 +2300,7 @@ return [
                 'title'             => 'Kanäle',
                 'create-btn'        => 'Kanal erstellen',
                 'delete-success'    => 'Kanal erfolgreich gelöscht.',
-                'delete-failed'     => ':name konnte nicht gelöscht werden',
+                'delete-failed'     => 'Kanal konnte nicht gelöscht werden',
                 'last-delete-error' => 'Der letzte Kanal konnte nicht gelöscht werden.',
 
                 'datagrid' => [
@@ -2415,6 +2416,7 @@ return [
                     'edit'     => 'Bearbeiten',
                     'active'   => 'Aktiv',
                     'inactive' => 'Inaktiv',
+                    'delete'   => 'Löschen',
                 ],
 
                 'edit'  => [
@@ -2729,9 +2731,9 @@ return [
                         'comma-separated'        => 'Durch Komma getrennt',
                         'cheapest-first'         => 'Günstigste zuerst',
                         'default-list-mode'      => 'Standardlistenmodus',
+                        'databse'                => 'Datenbank',
                         'expensive-first'        => 'Teuerste zuerst',
                         'elastic'                => 'Elastische Suche',
-                        'flat'                   => 'Flache Tabelle',
                         'from-z-a'               => 'Von Z-A',
                         'from-a-z'               => 'Von A-Z',
                         'grid'                   => 'Raster',

@@ -612,6 +612,7 @@ return [
                     'empty-title' => 'उत्पाद जोड़ें',
                     'empty-info'  => 'क्रिया के लिए :type उत्पाद जोड़ने के लिए।',
                     'sku'         => 'SKU - :sku',
+                    'image-placeholder' => 'उत्पाद छवि',
                 ],
 
                 'types' => [
@@ -966,7 +967,7 @@ return [
                 'banner'                   => 'बैनर',
                 'banner-size'              => 'बैनर पुनर्विचलन (1320px X 300px)',
                 'back-btn'                 => 'पीछे',
-                'company-name'             => 'नाम',
+                'name'                     => 'नाम',
                 'description'              => 'विवरण',
                 'description-and-images'   => 'विवरण और छवियाँ',
                 'description-only'         => 'केवल विवरण',
@@ -998,7 +999,7 @@ return [
                 'banner'                   => 'बैनर',
                 'banner-size'              => 'बैनर पुनर्विचलन (1320px X 300px)',
                 'back-btn'                 => 'पीछे',
-                'company-name'             => 'नाम*',
+                'name'                     => 'नाम',
                 'description'              => 'विवरण',
                 'description-and-images'   => 'विवरण और छवियाँ',
                 'description-only'         => 'केवल विवरण',
@@ -2299,7 +2300,7 @@ return [
                 'title'             => 'चैनल',
                 'create-btn'        => 'चैनल बनाएं',
                 'delete-success'    => 'चैनल को सफलतापूर्वक हटा दिया गया।',
-                'delete-failed'     => ':name हटाने में विफल हुआ',
+                'delete-failed'     => 'चैनल हटाने में विफल हुआ',
                 'last-delete-error' => 'अंतिम चैनल को हटाने में विफल हुआ।',
 
                 'datagrid' => [
@@ -2415,6 +2416,7 @@ return [
                     'edit'     => 'संपादित करें',
                     'active'   => 'सक्रिय',
                     'inactive' => 'निष्क्रिय',
+                    'delete'   => 'हटाएं',
                 ],
 
                 'edit'  => [
@@ -2728,9 +2730,9 @@ return [
                         'comma-separated'        => 'कॉमा से अलग',
                         'cheapest-first'         => 'सबसे सस्ती पहले',
                         'default-list-mode'      => 'डिफ़ॉल्ट सूची मोड',
+                        'database'               => 'डेटाबेस',
                         'expensive-first'        => 'सबसे महंगी पहले',
                         'elastic'                => 'इलास्टिक सर्च',
-                        'flat'                   => 'फ्लैट टेबल',
                         'from-z-a'               => 'ज़ से ए तक',
                         'from-a-z'               => 'ए से ज़ तक',
                         'grid'                   => 'ग्रिड',

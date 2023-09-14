@@ -74,6 +74,7 @@ return [
                 'delete-profile'          => 'Excluir Perfil',
                 'edit-profile'            => 'Editar Perfil',
                 'edit'                    => 'Editar',
+                'edit-success'            => 'Perfil atualizado com sucesso',
                 'phone'                   => 'Telefone',
                 'current-password'        => 'Senha Atual',
                 'new-password'            => 'Nova Senha',
@@ -255,6 +256,7 @@ return [
                 'delete-all'         => 'Excluir Todos',
                 'empty'              => 'Nenhum produto foi adicionado à página de lista de desejos.',
                 'move-to-cart'       => 'Mover para o Carrinho',
+                'moved-success'      => 'Item movido com sucesso para o carrinho',    
                 'profile'            => 'Perfil',
                 'removed'            => 'Item removido com sucesso da lista de desejos',
                 'remove-fail'        => 'O item não pode ser removido da lista de desejos',
@@ -522,6 +524,7 @@ return [
                 'quantity-update'          => 'Quantidade atualizada com sucesso',
                 'see-details'              => 'Ver Detalhes',
                 'move-to-wishlist'         => 'Mover para a Lista de Desejos',
+                'items-selected'           => ':count Itens Selecionados',
             ],
 
             'coupon'   => [

@@ -607,11 +607,12 @@ return [
                         'title'      => 'Produits de vente croisée',
                     ],
 
-                    'add-btn'     => 'Ajouter un produit',
-                    'delete'      => 'Supprimer',
-                    'empty-title' => 'Ajouter un produit',
-                    'empty-info'  => 'Ajouter des produits :type en un instant.',
-                    'sku'         => 'SKU - :sku',
+                    'add-btn'           => 'Ajouter un produit',
+                    'delete'            => 'Supprimer',
+                    'empty-title'       => 'Ajouter un produit',
+                    'empty-info'        => 'Ajouter des produits :type en un instant.',
+                    'sku'               => 'SKU - :sku',
+                    'image-placeholder' => 'Image du produit',
                 ],
 
                 'types' => [
@@ -966,7 +967,7 @@ return [
                 'banner'                   => 'Bannière',
                 'banner-size'              => 'Format de bannière (1320px X 300px)',
                 'back-btn'                 => 'Retour',
-                'company-name'             => 'Nom',
+                'name'                     => 'Nom',
                 'description'              => 'Description',
                 'description-and-images'   => 'Description et images',
                 'description-only'         => 'Description uniquement',
@@ -998,7 +999,7 @@ return [
                 'banner'                   => 'Bannière',
                 'banner-size'              => 'Format de bannière (1320px X 300px)',
                 'back-btn'                 => 'Retour',
-                'company-name'             => 'Nom*',
+                'name'                     => 'Nom',
                 'description'              => 'Description',
                 'description-and-images'   => 'Description et images',
                 'description-only'         => 'Description uniquement',
@@ -2299,7 +2300,7 @@ return [
                 'title'             => 'Chaînes',
                 'create-btn'        => 'Créer une chaîne',
                 'delete-success'    => 'Chaîne supprimée avec succès.',
-                'delete-failed'     => ':name Échec de la suppression',
+                'delete-failed'     => 'Chaîne Échec de la suppression',
                 'last-delete-error' => 'La dernière chaîne n\'a pas pu être supprimée.',
 
                 'datagrid' => [
@@ -2415,6 +2416,7 @@ return [
                     'edit'     => 'Éditer',
                     'active'   => 'Actif',
                     'inactive' => 'Inactif',
+                    'delete'   => 'Supprimer',
                 ],
 
                 'edit'  => [
@@ -2728,9 +2730,9 @@ return [
                         'comma-separated'        => 'Séparés par des virgules',
                         'cheapest-first'         => 'Les moins chers d\'abord',
                         'default-list-mode'      => 'Mode de liste par défaut',
+                        'database'               => 'Base de données',
                         'expensive-first'        => 'Les plus chers d\'abord',
                         'elastic'                => 'Recherche élastique',
-                        'flat'                   => 'Table plate',
                         'from-z-a'               => 'De Z à A',
                         'from-a-z'               => 'De A à Z',
                         'grid'                   => 'Grille',

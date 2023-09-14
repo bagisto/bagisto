@@ -607,11 +607,13 @@ return [
                         'title'      => 'ප්‍රෙරෝටේන්සියානුගේ නිර්මාණයන්',
                     ],
 
-                    'add-btn'     => 'නිර්මාණය කරන්න',
-                    'delete'      => 'මකන්න',
-                    'empty-title' => 'නිර්මාණය කරන්න',
-                    'empty-info'  => ':type නිර්මාණයන් එකතු කිරීමට.',
-                    'sku'         => 'SKU - :sku',
+                    'add-btn'           => 'නිර්මාණය කරන්න',
+                    'delete'            => 'මකන්න',
+                    'empty-title'       => 'නිර්මාණය කරන්න',
+                    'empty-info'        => ':type නිර්මාණයන් එකතු කිරීමට.',
+                    'sku'               => 'SKU - :sku',
+                    'image-placeholder' => 'උපකරණ රූපය',
+
                 ],
 
                 'types' => [
@@ -966,7 +968,7 @@ return [
                 'banner'                   => 'බැනරය',
                 'banner-size'              => 'බැනරයේ අස්පෙක්ට් අනුභාවය (1320px X 300px)',
                 'back-btn'                 => 'ආපසු',
-                'company-name'             => 'නම',
+                'name'                     => 'නම',
                 'description'              => 'විස්තර',
                 'description-and-images'   => 'විස්තර සහ රූපයන්',
                 'description-only'         => 'විස්තර පමණක්',
@@ -998,7 +1000,7 @@ return [
                 'banner'                   => 'බැනරය',
                 'banner-size'              => 'බැනරයේ අස්පෙක්ට් අනුභාවය (1320px X 300px)',
                 'back-btn'                 => 'ආපසු',
-                'company-name'             => 'නම*',
+                'name'                     => 'නම',
                 'description'              => 'විස්තර',
                 'description-and-images'   => 'විස්තර සහ රූපයන්',
                 'description-only'         => 'විස්තර පමණක්',
@@ -2299,7 +2301,7 @@ return [
                 'title'             => 'චැනල්ස්',
                 'create-btn'        => 'චැනල් සාදන්න',
                 'delete-success'    => 'චැනල් ඉවත් කරන විට සාර්ථකව ඉවත් කරන ලදි.',
-                'delete-failed'     => ':name ඉවත් කළායි',
+                'delete-failed'     => 'චැනලය ඉවත් කළායි',
                 'last-delete-error' => 'අගයේ අඩුම චැනල් ඉවත් කරන ලදි.',
 
                 'datagrid' => [
@@ -2415,6 +2417,7 @@ return [
                     'edit'     => 'සාදන්න',
                     'active'   => 'සක්‍රීය',
                     'inactive' => 'අක්‍රීය',
+                    'delete'   => 'මකනවා',
                 ],
 
                 'edit'  => [
@@ -2728,9 +2731,9 @@ return [
                         'comma-separated'        => 'අගුළු-සුපාංගී සහිතයේ',
                         'cheapest-first'         => 'අඩුම් වෙනස්',
                         'default-list-mode'      => 'පෙරනි ලැයිස්තුව',
+                        'database'               => 'දත්කර ගබඩා ',
                         'expensive-first'        => 'උඩුම් වෙනස්',
                         'elastic'                => 'අසංගු සෙවී',
-                        'flat'                   => 'සම්පූර්ණ වගාව',
                         'from-z-a'               => 'සුළු',
                         'from-a-z'               => 'මුලු',
                         'grid'                   => 'ජර්ඩ්',

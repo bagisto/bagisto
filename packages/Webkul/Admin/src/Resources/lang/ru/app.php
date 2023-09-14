@@ -607,11 +607,12 @@ return [
                         'title'      => 'Продукты перекрестной продажи',
                     ],
 
-                    'add-btn'     => 'Добавить продукт',
-                    'delete'      => 'Удалить',
-                    'empty-title' => 'Добавить продукт',
-                    'empty-info'  => 'Чтобы добавить продукты :type, выполните действие.',
-                    'sku'         => 'Артикул (SKU) - :sku',
+                    'add-btn'           => 'Добавить продукт',
+                    'delete'            => 'Удалить',
+                    'empty-title'       => 'Добавить продукт',
+                    'empty-info'        => 'Чтобы добавить продукты :type, выполните действие.',
+                    'sku'               => 'Артикул (SKU) - :sku',
+                    'image-placeholder' => 'Изображение продукта',
                 ],
 
                 'types' => [
@@ -966,7 +967,7 @@ return [
                 'banner'                   => 'Баннер',
                 'banner-size'              => 'Соотношение сторон баннера (1320px X 300px)',
                 'back-btn'                 => 'Назад',
-                'company-name'             => 'Название',
+                'name'                     => 'Название',
                 'description'              => 'Описание',
                 'description-and-images'   => 'Описание и изображения',
                 'description-only'         => 'Только описание',
@@ -998,7 +999,7 @@ return [
                 'banner'                   => 'Баннер',
                 'banner-size'              => 'Соотношение сторон баннера (1320px X 300px)',
                 'back-btn'                 => 'Назад',
-                'company-name'             => 'Название*',
+                'name'                     => 'Название',
                 'description'              => 'Описание',
                 'description-and-images'   => 'Описание и изображения',
                 'description-only'         => 'Только описание',
@@ -2299,7 +2300,7 @@ return [
                 'title'             => 'Каналы',
                 'create-btn'        => 'Создать канал',
                 'delete-success'    => 'Канал успешно удален.',
-                'delete-failed'     => ':name удаление не удалось',
+                'delete-failed'     => 'Канал удаление не удалось',
                 'last-delete-error' => 'Последнее удаление канала не удалось.',
 
                 'datagrid' => [
@@ -2415,6 +2416,7 @@ return [
                     'edit'     => 'Редактировать',
                     'active'   => 'Активный',
                     'inactive' => 'Неактивный',
+                    'delete'   => 'Удалить',
                 ],
 
                 'edit'  => [
@@ -2727,9 +2729,9 @@ return [
                     'comma-separated'        => 'Разделенные запятой',
                     'cheapest-first'         => 'Сначала дешевые',
                     'default-list-mode'      => 'Режим списка по умолчанию',
+                    'database'               => 'База данных',
                     'expensive-first'        => 'Сначала дорогие',
                     'elastic'                => 'Упругий поиск',
-                    'flat'                   => 'Плоская таблица',
                     'from-z-a'               => 'От Z до A',
                     'from-a-z'               => 'От A до Z',
                     'grid'                   => 'Сетка',

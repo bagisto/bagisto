@@ -607,11 +607,12 @@ return [
                         'title'      => '交叉销售产品',
                     ],
 
-                    'add-btn'     => '添加产品',
-                    'delete'      => '删除',
-                    'empty-title' => '添加产品',
-                    'empty-info'  => '随时添加 :type 产品。',
-                    'sku'         => 'SKU - :sku',
+                    'add-btn'           => '添加产品',
+                    'delete'            => '删除',
+                    'empty-title'       => '添加产品',
+                    'empty-info'        => '随时添加 :type 产品。',
+                    'sku'               => 'SKU - :sku',
+                    'image-placeholder' => '产品图片',
                 ],
 
                 'types' => [
@@ -2299,7 +2300,7 @@ return [
                 'title'             => '渠道',
                 'create-btn'        => '创建渠道',
                 'delete-success'    => '渠道删除成功。',
-                'delete-failed'     => ':name 删除失败',
+                'delete-failed'     => '频道 删除失败',
                 'last-delete-error' => '最后一个渠道删除失败。',
 
                 'datagrid' => [
@@ -2415,6 +2416,7 @@ return [
                     'edit'     => '编辑',
                     'active'   => '活跃',
                     'inactive' => '不活跃',
+                    'delete'   => '删除'
                 ],
 
                 'edit'  => [
@@ -2728,9 +2730,9 @@ return [
                         'comma-separated'        => '逗号分隔',
                         'cheapest-first'         => '最便宜的优先',
                         'default-list-mode'      => '默认列表模式',
+                        'database'               => '数据库',
                         'expensive-first'        => '最贵的优先',
                         'elastic'                => '弹性搜索',
-                        'flat'                   => '平面表格',
                         'from-z-a'               => '从Z到A',
                         'from-a-z'               => '从A到Z',
                         'grid'                   => '网格',

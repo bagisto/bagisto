@@ -277,10 +277,6 @@
                         return;
                     }
 
-                    if (typeof this.uploadedFiles == 'object') {
-                        return;
-                    }
-
                     this.uploadedFiles.splice(index, 1);
                 },
             },        

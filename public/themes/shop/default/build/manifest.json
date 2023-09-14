@@ -8,6 +8,10 @@
     "file": "assets/velicon-2b79b97c.woff",
     "src": "src/Resources/assets/fonts/velicon.woff"
   },
+  "src/Resources/assets/images/default-language.svg": {
+    "file": "assets/default-language-6ef0ef70.svg",
+    "src": "src/Resources/assets/images/default-language.svg"
+  },
   "src/Resources/assets/images/empty-dwn-product.png": {
     "file": "assets/empty-dwn-product-3c9202e1.png",
     "src": "src/Resources/assets/images/empty-dwn-product.png"
@@ -72,7 +76,7 @@
     "css": [
       "assets/app-f72387a9.css"
     ],
-    "file": "assets/app-e49f5ac1.js",
+    "file": "assets/app-e8f91f89.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   }

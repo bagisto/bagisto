@@ -607,11 +607,12 @@ return [
                         'title'      => 'محصولات متقابل',
                     ],
 
-                    'add-btn'     => 'افزودن محصول',
-                    'delete'      => 'حذف',
-                    'empty-title' => 'افزودن محصول',
-                    'empty-info'  => 'برای افزودن محصولات :type به سرعت.',
-                    'sku'         => 'کد محصول - :sku',
+                    'add-btn'           => 'افزودن محصول',
+                    'delete'            => 'حذف',
+                    'empty-title'       => 'افزودن محصول',
+                    'empty-info'        => 'برای افزودن محصولات :type به سرعت.',
+                    'sku'               => 'کد محصول - :sku',
+                    'image-placeholder' => 'تصویر محصول',
                 ],
 
                 'types' => [
@@ -966,7 +967,7 @@ return [
                 'banner'                   => 'بنر',
                 'banner-size'              => 'نسبت ابعاد بنر (1320px X 300px)',
                 'back-btn'                 => 'بازگشت',
-                'company-name'             => 'نام',
+                'name'                     => 'نام',
                 'description'              => 'توضیحات',
                 'description-and-images'   => 'توضیحات و تصاویر',
                 'description-only'         => 'توضیحات فقط',
@@ -998,7 +999,7 @@ return [
                 'banner'                   => 'بنر',
                 'banner-size'              => 'نسبت ابعاد بنر (1320px X 300px)',
                 'back-btn'                 => 'بازگشت',
-                'company-name'             => 'نام*',
+                'name'                     => 'نام',
                 'description'              => 'توضیحات',
                 'description-and-images'   => 'توضیحات و تصاویر',
                 'description-only'         => 'توضیحات فقط',
@@ -2299,7 +2300,7 @@ return [
                 'title'             => 'کانال‌ها',
                 'create-btn'        => 'ساخت کانال',
                 'delete-success'    => 'کانال با موفقیت حذف شد.',
-                'delete-failed'     => 'حذف :name ناموفق بود',
+                'delete-failed'     => 'حذف کانال ناموفق بود',
                 'last-delete-error' => 'حذف آخرین کانال ناموفق بود.',
 
                 'datagrid' => [
@@ -2415,6 +2416,7 @@ return [
                     'edit'     => 'ویرایش',
                     'active'   => 'فعال',
                     'inactive' => 'غیرفعال',
+                    'delete'   => 'حذف کردن',
                 ],
 
                 'edit'  => [
@@ -2728,9 +2730,9 @@ return [
                         'comma-separated'        => 'با کاما جداشده',
                         'cheapest-first'         => 'ارزان‌ترین اول',
                         'default-list-mode'      => 'حالت پیش‌فرض لیست',
+                        'database'               => 'پایگاه داده',
                         'expensive-first'        => 'گران‌ترین اول',
                         'elastic'                => 'جستجوی انعطاف‌پذیر',
-                        'flat'                   => 'جدول تخت',
                         'from-z-a'               => 'از Z تا A',
                         'from-a-z'               => 'از A تا Z',
                         'grid'                   => 'شبکه',

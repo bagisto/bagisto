@@ -607,11 +607,12 @@ return [
                         'title'      => 'ক্রস-সেল পণ্য',
                     ],
 
-                    'add-btn'     => 'পণ্য যোগ করুন',
-                    'delete'      => 'মুছে ফেলুন',
-                    'empty-title' => 'পণ্য যোগ করুন',
-                    'empty-info'  => ':type পণ্য সম্পাদনা করতে যোগ করুন।',
-                    'sku'         => 'SKU - :sku',
+                    'add-btn'           => 'পণ্য যোগ করুন',
+                    'delete'            => 'মুছে ফেলুন',
+                    'empty-title'       => 'পণ্য যোগ করুন',
+                    'empty-info'        => ':type পণ্য সম্পাদনা করতে যোগ করুন।',
+                    'sku'               => 'SKU - :sku',
+                    'image-placeholder' => 'পণ্য চিত্র',
                 ],
 
                 'types' => [
@@ -966,7 +967,7 @@ return [
                 'banner'                   => 'ব্যানার',
                 'banner-size'              => 'ব্যানার অবস্থান অবস্থান (1320px X 300px)',
                 'back-btn'                 => 'পেছনে',
-                'company-name'             => 'নাম',
+                'name'                     => 'নাম',
                 'description'              => 'বিবরণ',
                 'description-and-images'   => 'বিবরণ এবং চিত্র',
                 'description-only'         => 'শুধুমাত্র বিবরণ',
@@ -998,7 +999,7 @@ return [
                 'banner'                   => 'ব্যানার',
                 'banner-size'              => 'ব্যানার অবস্থান অবস্থান (1320px X 300px)',
                 'back-btn'                 => 'পেছনে',
-                'company-name'             => 'নাম*',
+                'name'                     => 'নাম',
                 'description'              => 'বিবরণ',
                 'description-and-images'   => 'বিবরণ এবং চিত্র',
                 'description-only'         => 'শুধুমাত্র বিবরণ',
@@ -2299,7 +2300,7 @@ return [
                 'title'             => 'চ্যানেল',
                 'create-btn'        => 'চ্যানেল তৈরি করুন',
                 'delete-success'    => 'চ্যানেল সফলভাবে মুছে ফেলা হয়েছে',
-                'delete-failed'     => ':name মুছে ফেলা ব্যর্থ হয়েছে',
+                'delete-failed'     => 'চ্যানেল মুছে ফেলা ব্যর্থ হয়েছে',
                 'last-delete-error' => 'সর্বশেষ চ্যানেল মুছে ফেলা ব্যর্থ হয়েছে।',
 
                 'datagrid' => [
@@ -2415,6 +2416,7 @@ return [
                     'edit'     => 'সম্পাদনা',
                     'active'   => 'সক্রিয়',
                     'inactive' => 'নিষ্ক্রিয়',
+                    'delete'   => 'মুছে ফেলা',
                 ],
 
                 'edit' => [
@@ -2728,9 +2730,9 @@ return [
                         'comma-separated'        => 'কমা দিয়ে বিচ্ছিন্ন',
                         'cheapest-first'         => 'সবচেয়ে সস্তা প্রথম',
                         'default-list-mode'      => 'ডিফল্ট তালিকা মোড',
+                        'database'               => 'ডেটাবেস',
                         'expensive-first'        => 'সবচেয়ে দামী প্রথম',
                         'elastic'                => 'ইলাস্টিক সার্চ',
-                        'flat'                   => 'ফ্ল্যাট টেবিল',
                         'from-z-a'               => 'সংখ্যা প্রথম থেকে সর্বাধিক',
                         'from-a-z'               => 'অক্ষর প্রথম থেকে সর্বাধিক',
                         'grid'                   => 'গ্রিড',

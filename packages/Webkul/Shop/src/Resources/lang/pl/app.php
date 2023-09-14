@@ -74,6 +74,7 @@ return [
                 'delete-profile'          => 'Usuń profil',
                 'edit-profile'            => 'Edytuj profil',
                 'edit'                    => 'Edytuj',
+                'edit-success'            => 'Profil zaktualizowany pomyślnie',
                 'phone'                   => 'Telefon',
                 'current-password'        => 'Obecne hasło',
                 'new-password'            => 'Nowe hasło',
@@ -255,6 +256,7 @@ return [
                 'delete-all'         => 'Usuń wszystko',
                 'empty'              => 'Na liście życzeń nie dodano jeszcze żadnych produktów.',
                 'move-to-cart'       => 'Przenieś do koszyka',
+                'moved-success'      => 'Przedmiot pomyślnie przeniesiony do koszyka',    
                 'profile'            => 'Profil',
                 'removed'            => 'Produkt pomyślnie usunięty z listy życzeń',
                 'remove-fail'        => 'Produkt nie może zostać usunięty z listy życzeń',
@@ -522,6 +524,7 @@ return [
                 'quantity-update'          => 'Aktualizacja ilości zakończona sukcesem',
                 'see-details'              => 'Zobacz szczegóły',
                 'move-to-wishlist'         => 'Przenieś do listy życzeń',
+                'items-selected'           => ':count wybranych elementów',
             ],
 
             'coupon' => [

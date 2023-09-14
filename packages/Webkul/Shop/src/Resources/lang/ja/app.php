@@ -74,6 +74,7 @@ return [
                 'delete-profile'          => 'プロフィールを削除',
                 'edit-profile'            => 'プロフィールを編集',
                 'edit'                    => '編集',
+                'edit-success'            => 'プロフィールが正常に更新されました',
                 'phone'                   => '電話',
                 'current-password'        => '現在のパスワード',
                 'new-password'            => '新しいパスワード',
@@ -255,6 +256,7 @@ return [
                 'delete-all'         => 'すべて削除',
                 'empty'              => 'ウィッシュリストページには製品が追加されていません。',
                 'move-to-cart'       => 'カートに移動',
+                'moved-success'      => 'アイテムがカートに正常に移動しました',    
                 'profile'            => 'プロフィール',
                 'removed'            => 'アイテムがウィッシュリストから正常に削除されました',
                 'remove-fail'        => 'アイテムをウィッシュリストから削除できませんでした',
@@ -522,6 +524,7 @@ return [
                 'quantity-update'          => '数量が正常に更新されました',
                 'see-details'              => '詳細を見る',
                 'move-to-wishlist'         => 'ウィッシュリストに移動',
+                'items-selected'           => ':count 個のアイテムが選択されました',
             ],
 
             'coupon'   => [

@@ -607,11 +607,12 @@ return [
                         'title'      => 'クロスセル製品',
                     ],
 
-                    'add-btn'     => '製品を追加',
-                    'delete'      => '削除',
-                    'empty-title' => '製品を追加',
-                    'empty-info'  => ':type 製品を追加するには。',
-                    'sku'         => 'SKU - :sku',
+                    'add-btn'           => '製品を追加',
+                    'delete'            => '削除',
+                    'empty-title'       => '製品を追加',
+                    'empty-info'        => ':type 製品を追加するには。',
+                    'sku'               => 'SKU - :sku',
+                    'image-placeholder' => '製品画像',
                 ],
 
                 'types' => [
@@ -966,7 +967,7 @@ return [
                 'banner'                   => 'バナー',
                 'banner-size'              => 'バナーアスペクト比（1320px X 300px）',
                 'back-btn'                 => '戻る',
-                'company-name'             => '名前',
+                'name'                     => '名前',
                 'description'              => '説明',
                 'description-and-images'   => '説明と画像',
                 'description-only'         => '説明のみ',
@@ -998,7 +999,7 @@ return [
                 'banner'                   => 'バナー',
                 'banner-size'              => 'バナーアスペクト比（1320px X 300px）',
                 'back-btn'                 => '戻る',
-                'company-name'             => '名前*',
+                'name'                     => '名前',
                 'description'              => '説明',
                 'description-and-images'   => '説明と画像',
                 'description-only'         => '説明のみ',
@@ -2299,7 +2300,7 @@ return [
                 'title'             => 'チャネル',
                 'create-btn'        => 'チャネルを作成',
                 'delete-success'    => 'チャネルが正常に削除されました。',
-                'delete-failed'     => ':name の削除に失敗しました',
+                'delete-failed'     => 'チャンネル の削除に失敗しました',
                 'last-delete-error' => '最後のチャネルの削除に失敗しました。',
 
                 'datagrid' => [
@@ -2415,6 +2416,7 @@ return [
                     'edit'     => '編集',
                     'active'   => 'アクティブ',
                     'inactive' => '非アクティブ',
+                    'delete'   => '削除',
                 ],
 
                 'edit'  => [
@@ -2728,9 +2730,9 @@ return [
                         'comma-separated'        => 'カンマ区切り',
                         'cheapest-first'         => '最安値から',
                         'default-list-mode'      => 'デフォルトリストモード',
+                        'database'               => 'データベース',
                         'expensive-first'        => '最高価格から',
                         'elastic'                => 'エラスティックサーチ',
-                        'flat'                   => 'フラットテーブル',
                         'from-z-a'               => 'ZからAへ',
                         'from-a-z'               => 'AからZへ',
                         'grid'                   => 'グリッド',

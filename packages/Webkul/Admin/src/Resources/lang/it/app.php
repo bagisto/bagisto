@@ -612,6 +612,7 @@ return [
                     'empty-title' => 'Aggiungi Prodotto',
                     'empty-info'  => 'Per aggiungere prodotti :type in un colpo solo.',
                     'sku'         => 'SKU - :sku',
+                    'image-placeholder' => 'Immagine Prodotto',
                 ],
 
                 'types' => [
@@ -966,7 +967,7 @@ return [
                 'banner'                   => 'Banner',
                 'banner-size'              => 'Proporzioni del banner (1320px X 300px)',
                 'back-btn'                 => 'Indietro',
-                'company-name'             => 'Nome Azienda',
+                'name'                     => 'Nome Azienda',
                 'description'              => 'Descrizione',
                 'description-and-images'   => 'Descrizione e Immagini',
                 'description-only'         => 'Solo Descrizione',
@@ -998,7 +999,7 @@ return [
                 'banner'                   => 'Banner',
                 'banner-size'              => 'Proporzioni del banner (1320px X 300px)',
                 'back-btn'                 => 'Indietro',
-                'company-name'             => 'Nome*',
+                'name'                     => 'Nome',
                 'description'              => 'Descrizione',
                 'description-and-images'   => 'Descrizione e Immagini',
                 'description-only'         => 'Solo Descrizione',
@@ -2300,7 +2301,7 @@ return [
                 'title'             => 'Canales',
                 'create-btn'        => 'Crear Canal',
                 'delete-success'    => 'Canal eliminado exitosamente.',
-                'delete-failed'     => 'Error al eliminar :name',
+                'delete-failed'     => 'Error al eliminar Canal',
                 'last-delete-error' => 'Error al eliminar el último Canal.',
 
                 'datagrid' => [
@@ -2416,6 +2417,7 @@ return [
                     'edit'      => 'Editar',
                     'active'    => 'Activo',
                     'inactive'  => 'Inactivo',
+                    'delete'    => 'Elimina',
                 ],
 
                 'edit'  => [
@@ -2727,9 +2729,9 @@ return [
                         'comma-separated'        => 'Separati da virgola',
                         'cheapest-first'         => 'Meno Costosi Prima',
                         'default-list-mode'      => 'Modalità di Elenco Predefinita',
+                        'database'               => 'Database',
                         'expensive-first'        => 'Più Costosi Prima',
                         'elastic'                => 'Ricerca Elastic',
-                        'flat'                   => 'Tabella Flat',
                         'from-z-a'               => 'Da Z a A',
                         'from-a-z'               => 'Da A a Z',
                         'grid'                   => 'Griglia',

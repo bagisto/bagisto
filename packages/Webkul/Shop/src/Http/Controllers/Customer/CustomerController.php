@@ -126,7 +126,7 @@ class CustomerController extends Controller
 
             $this->customerRepository->uploadImages($data, $customer);
 
-            session()->flash('success', trans('shop::app.customer.account.profile.edit-success'));
+            session()->flash('success', trans('shop::app.customers.account.profile.edit-success'));
 
             return redirect()->route('shop.customers.account.profile.index');
         }

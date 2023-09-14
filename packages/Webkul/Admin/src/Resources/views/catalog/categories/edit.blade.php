@@ -90,22 +90,31 @@
                     {{-- Name --}}
                     <x-admin::form.control-group class="mb-[10px]">
                         <x-admin::form.control-group.label class="required">
-                            @lang('admin::app.catalog.categories.edit.company-name')
+                            @lang('admin::app.catalog.categories.edit.name')
                         </x-admin::form.control-group.label>
 
-                        <x-admin::form.control-group.control
+                        <v-field
                             type="text"
                             name="{{$currentLocale->code}}[name]"
                             value="{{ old($currentLocale->code)['name'] ?? ($category->translate($currentLocale->code)['name'] ?? '') }}"
-                            class="w-full"
+                            label="{{ trans('admin::app.catalog.categories.edit.name') }}"
                             rules="required"
-                            :label="trans('admin::app.catalog.categories.edit.company-name')"
-                            :placeholder="trans('admin::app.catalog.categories.edit.company-name')"
+                            v-slot="{ field }"
                         >
-                        </x-admin::form.control-group.control>
+                            <input
+                                type="text"
+                                name="{{$currentLocale->code}}[name]"
+                                id="{{$currentLocale->code}}[name]"
+                                v-bind="field"
+                                :class="[errors['{{ $currentLocale->code }}[name]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                placeholder="{{ trans('admin::app.catalog.categories.edit.name') }}"
+                                v-slugify-target:{{$currentLocale->code . '[slug]'}}="setValues"
+                            >
+                        </v-field>
 
                         <x-admin::form.control-group.error
-                            control-name="name"
+                            control-name="{{ $currentLocale->code}}[name]"
                         >
                         </x-admin::form.control-group.error>
                     </x-admin::form.control-group>
@@ -240,21 +249,31 @@
                         {{-- Slug --}}
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label class="required">
-                                @lang('admin::app.catalog.categories.create.slug')
+                                @lang('admin::app.catalog.categories.edit.slug')
                             </x-admin::form.control-group.label>
 
-                            <x-admin::form.control-group.control
+                            <v-field
                                 type="text"
                                 name="{{$currentLocale->code}}[slug]"
-                                :value="old($currentLocale->code)['slug'] ?? ($category->translate($currentLocale->code)['slug'] ?? '')"
+                                value="{{ old($currentLocale->code)['slug'] ?? ($category->translate($currentLocale->code)['slug'] ?? '') }}"
+                                label="{{ trans('admin::app.catalog.categories.edit.slug') }}"
                                 rules="required"
-                                :label="trans('admin::app.catalog.categories.create.slug')"
-                                :placeholder="trans('admin::app.catalog.categories.create.slug')"
+                                v-slot="{ field }"
                             >
-                            </x-admin::form.control-group.control>
+                                <input
+                                    type="text"
+                                    name="{{$currentLocale->code}}[slug]"
+                                    id="{{$currentLocale->code}}[slug]"
+                                    v-bind="field"
+                                    :class="[errors['{{$currentLocale->code}}[slug]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                    placeholder="{{ trans('admin::app.catalog.categories.edit.slug') }}"
+                                    v-slugify-target:slug
+                                >
+                            </v-field>
 
                             <x-admin::form.control-group.error
-                                control-name="slug"
+                                control-name="{{$currentLocale->code}}[slug]"
                             >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
@@ -391,7 +410,7 @@
                 {{-- Filterable Attributes --}}
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                        <p class="required text-gray-600 text-[16px] p-[10px] font-semibold">
                             @lang('admin::app.catalog.categories.edit.filterable-attributes')
                         </p>
                     </x-slot:header>
@@ -410,8 +429,10 @@
                                     for="{{ $attribute->name ?? $attribute->admin_name }}"
                                     value="{{ $attribute->id }}"
                                     name="attributes[]"
+                                    rules="required"
                                     class="hidden peer"
                                     :checked="in_array($attribute->id, $selectedaAtributes)"
+                                    :label="trans('admin::app.catalog.categories.edit.filterable-attributes')"
                                 >
                                 </x-admin::form.control-group.control>
 
@@ -420,6 +441,11 @@
                                 </div>
                             </label>
                         @endforeach
+
+                        <x-admin::form.control-group.error
+                            control-name="attributes[]"
+                        >
+                        </x-admin::form.control-group.error>
                     </x-slot:content>
                 </x-admin::accordion>
             </div>

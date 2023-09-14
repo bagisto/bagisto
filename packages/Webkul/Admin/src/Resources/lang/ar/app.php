@@ -607,11 +607,12 @@ return [
                         'title'      => 'منتجات التقاط المبيعات',
                     ],
 
-                    'add-btn'     => 'إضافة منتج',
-                    'delete'      => 'حذف',
-                    'empty-title' => 'إضافة منتج',
-                    'empty-info'  => 'لإضافة منتجات :type على الفور.',
-                    'sku'         => 'SKU - :sku',
+                    'add-btn'           => 'إضافة منتج',
+                    'delete'            => 'حذف',
+                    'empty-title'       => 'إضافة منتج',
+                    'empty-info'        => 'لإضافة منتجات :type على الفور.',
+                    'sku'               => 'SKU - :sku',
+                    'image-placeholder' => 'صورة المنتج',
                 ],
 
                 'types' => [
@@ -966,7 +967,7 @@ return [
                 'banner'                   => 'بانر',
                 'banner-size'              => 'نسبة البانر (1320px X 300px)',
                 'back-btn'                 => 'رجوع',
-                'company-name'             => 'الاسم',
+                'name'                     => 'الاسم',
                 'description'              => 'الوصف',
                 'description-and-images'   => 'الوصف والصور',
                 'description-only'         => 'الوصف فقط',
@@ -998,7 +999,7 @@ return [
                 'banner'                   => 'بانر',
                 'banner-size'              => 'نسبة البانر (1320px X 300px)',
                 'back-btn'                 => 'رجوع',
-                'company-name'             => 'الاسم*',
+                'name'                     => 'الاسم',
                 'description'              => 'الوصف',
                 'description-and-images'   => 'الوصف والصور',
                 'description-only'         => 'الوصف فقط',
@@ -2299,7 +2300,7 @@ return [
                 'title'             => 'القنوات',
                 'create-btn'        => 'إنشاء قناة',
                 'delete-success'    => 'تم حذف القناة بنجاح.',
-                'delete-failed'     => 'فشل حذف :name',
+                'delete-failed'     => 'فشل حذف قناة',
                 'last-delete-error' => 'فشل حذف آخر قناة.',
 
                 'datagrid' => [
@@ -2415,6 +2416,7 @@ return [
                     'edit'      => 'تعديل',
                     'active'    => 'نشط',
                     'inactive'  => 'غير نشط',
+                    'delete'    => 'حذف',
                 ],
 
                 'edit'  => [
@@ -2728,9 +2730,9 @@ return [
                         'comma-separated'        => 'مفصولة بالفاصلة',
                         'cheapest-first'         => 'الأرخص أولاً',
                         'default-list-mode'      => 'وضع القائمة الافتراضي',
+                        'database'               => 'قاعدة بيانات',
                         'expensive-first'        => 'الأغلى أولاً',
                         'elastic'                => 'بحث مرن',
-                        'flat'                   => 'جدول مسطح',
                         'from-z-a'               => 'من Z إلى A',
                         'from-a-z'               => 'من A إلى Z',
                         'grid'                   => 'شبكة',

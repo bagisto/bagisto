@@ -607,11 +607,12 @@ return [
                         'title'      => 'Cross-Sell Products',
                     ],
 
-                    'add-btn'     => 'Add Product',
-                    'delete'      => 'Delete',
-                    'empty-title' => 'Add Product',
-                    'empty-info'  => 'To add :type products on a go.',
-                    'sku'         => 'SKU - :sku',
+                    'add-btn'           => 'Add Product',
+                    'delete'            => 'Delete',
+                    'empty-title'       => 'Add Product',
+                    'empty-info'        => 'To add :type products on a go.',
+                    'sku'               => 'SKU - :sku',
+                    'image-placeholder' => 'Product Image',
                 ],
 
                 'types' => [
@@ -966,7 +967,7 @@ return [
                 'banner'                   => 'Banner',
                 'banner-size'              => 'Banner aspect ration (1320px X 300px)',
                 'back-btn'                 => 'Back',
-                'company-name'             => 'Name',
+                'name'                     => 'Name',
                 'description'              => 'Description',
                 'description-and-images'   => 'Description and Images',
                 'description-only'         => 'Description Only',
@@ -998,7 +999,7 @@ return [
                 'banner'                   => 'Banner',
                 'banner-size'              => 'Banner aspect ration (1320px X 300px)',
                 'back-btn'                 => 'Back',
-                'company-name'             => 'Name',
+                'name'                     => 'Name',
                 'description'              => 'Description',
                 'description-and-images'   => 'Description and Images',
                 'description-only'         => 'Description Only',
@@ -2299,7 +2300,7 @@ return [
                 'title'             => 'Channels',
                 'create-btn'        => 'Create Channel',
                 'delete-success'    => 'Channel deleted successfully.',
-                'delete-failed'     => ':name Delete Failed',
+                'delete-failed'     => 'Channel Delete Failed',
                 'last-delete-error' => 'Last Channel deleted failed.',
 
                 'datagrid' => [
@@ -2415,6 +2416,7 @@ return [
                     'edit'     => 'Edit',
                     'active'   => 'Active',
                     'inactive' => 'Inactive',
+                    'delete'   => 'Delete',
                 ],
 
                 'edit'  => [
@@ -2728,9 +2730,9 @@ return [
                         'comma-separated'        => 'Comma Separated',
                         'cheapest-first'         => 'Cheapest First',
                         'default-list-mode'      => 'Default List Mode',
+                        'database'               => 'Database',
                         'expensive-first'        => 'Expensive First',
                         'elastic'                => 'Elastic Search',
-                        'flat'                   => 'Flat Table',
                         'from-z-a'               => 'From Z-A',
                         'from-a-z'               => 'From A-Z',
                         'grid'                   => 'Grid',

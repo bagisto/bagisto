@@ -612,6 +612,7 @@ return [
                     'empty-title' => 'הוסף מוצר',
                     'empty-info'  => 'כדי להוסיף מוצרים מסוג :type ברגע.',
                     'sku'         => 'SKU - :sku',
+                    'image-placeholder' => 'תמונת המוצר',
                 ],
 
                 'types' => [
@@ -966,7 +967,7 @@ return [
                 'banner'                   => 'באנר',
                 'banner-size'              => 'יחס הגובה לרוחב של הבאנר (1320px X 300px)',
                 'back-btn'                 => 'חזור',
-                'company-name'             => 'שם',
+                'name'                     => 'שם',
                 'description'              => 'תיאור',
                 'description-and-images'   => 'תיאור ותמונות',
                 'description-only'         => 'תיאור בלבד',
@@ -998,7 +999,7 @@ return [
                 'banner'                   => 'באנר',
                 'banner-size'              => 'יחס הגובה לרוחב של הבאנר (1320px X 300px)',
                 'back-btn'                 => 'חזור',
-                'company-name'             => 'שם*',
+                'name'                     => 'שם',
                 'description'              => 'תיאור',
                 'description-and-images'   => 'תיאור ותמונות',
                 'description-only'         => 'תיאור בלבד',
@@ -2299,7 +2300,7 @@ return [
                 'title'             => 'ערוצים',
                 'create-btn'        => 'צור ערוץ',
                 'delete-success'    => 'הערוץ נמחק בהצלחה.',
-                'delete-failed'     => 'מחיקת :name נכשלה',
+                'delete-failed'     => 'מחיקת ערוץ נכשלה',
                 'last-delete-error' => 'מחיקת הערוץ האחרון נכשלה.',
 
                 'datagrid' => [
@@ -2415,6 +2416,7 @@ return [
                     'edit'     => 'ערוך',
                     'active'   => 'פעיל',
                     'inactive' => 'לא פעיל',
+                    'delete'   => 'מחק',
                 ],
 
                 'edit'  => [
@@ -2728,9 +2730,9 @@ return [
                         'comma-separated'        => 'מופרדים בפסיקים',
                         'cheapest-first'         => 'הכי זולים קודם',
                         'default-list-mode'      => 'מצב רשימת ברירת מחדל',
+                        'database'               => 'בסיס נתונים',
                         'expensive-first'        => 'הכי יקרים קודם',
                         'elastic'                => 'חיפוש מרובה תוצאות',
-                        'flat'                   => 'טבלה משושהה',
                         'from-z-a'               => 'מאות Z לא',
                         'from-a-z'               => 'מאות A ל Z',
                         'grid'                   => 'רשת',

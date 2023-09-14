@@ -607,11 +607,12 @@ return [
                         'title'      => 'Cross-sell-producten',
                     ],
 
-                    'add-btn'     => 'Product Toevoegen',
-                    'delete'      => 'Verwijderen',
-                    'empty-title' => 'Product Toevoegen',
-                    'empty-info'  => 'Om :type producten snel toe te voegen.',
-                    'sku'         => 'SKU - :sku',
+                    'add-btn'           => 'Product Toevoegen',
+                    'delete'            => 'Verwijderen',
+                    'empty-title'       => 'Product Toevoegen',
+                    'empty-info'        => 'Om :type producten snel toe te voegen.',
+                    'sku'               => 'SKU - :sku',
+                    'image-placeholder' => 'Product Afbeelding',
                 ],
 
                 'types' => [
@@ -966,7 +967,7 @@ return [
                 'banner'                   => 'Banner',
                 'banner-size'              => 'Banner verhouding (1320px X 300px)',
                 'back-btn'                 => 'Terug',
-                'company-name'             => 'Naam',
+                'name'                     => 'Naam',
                 'description'              => 'Beschrijving',
                 'description-and-images'   => 'Beschrijving en Afbeeldingen',
                 'description-only'         => 'Alleen Beschrijving',
@@ -998,7 +999,7 @@ return [
                 'banner'                   => 'Banner',
                 'banner-size'              => 'Banner verhouding (1320px X 300px)',
                 'back-btn'                 => 'Terug',
-                'company-name'             => 'Naam*',
+                'name'                     => 'Naam',
                 'description'              => 'Beschrijving',
                 'description-and-images'   => 'Beschrijving en Afbeeldingen',
                 'description-only'         => 'Alleen Beschrijving',
@@ -2299,7 +2300,7 @@ return [
                 'title'             => 'Kanalen',
                 'create-btn'        => 'Kanaal Aanmaken',
                 'delete-success'    => 'Kanaal succesvol verwijderd.',
-                'delete-failed'     => ':name Verwijderen Mislukt',
+                'delete-failed'     => 'Kanaal Verwijderen Mislukt',
                 'last-delete-error' => 'Laatste Kanaal Verwijderen Mislukt',
 
                 'datagrid' => [
@@ -2415,6 +2416,7 @@ return [
                     'edit'     => 'Bewerken',
                     'active'   => 'Actief',
                     'inactive' => 'Inactief',
+                    'delete'   => 'Verwijderen',
                 ],
 
                 'edit' => [
@@ -2728,9 +2730,9 @@ return [
                         'comma-separated'        => 'Komma gescheiden',
                         'cheapest-first'         => 'Goedkoopste eerst',
                         'default-list-mode'      => 'Standaard lijstmodus',
+                        'database'               => 'Database',
                         'expensive-first'        => 'Duurste eerst',
                         'elastic'                => 'Elastische zoekopdracht',
-                        'flat'                   => 'Vlakke tabel',
                         'from-z-a'               => 'Van Z-A',
                         'from-a-z'               => 'Van A-Z',
                         'grid'                   => 'Raster',

@@ -607,11 +607,12 @@ return [
                         'title'      => 'Produtos de Venda Cruzada',
                     ],
 
-                    'add-btn'     => 'Adicionar Produto',
-                    'delete'      => 'Excluir',
-                    'empty-title' => 'Adicionar Produto',
-                    'empty-info'  => 'Para adicionar produtos :type rapidamente.',
-                    'sku'         => 'SKU - :sku',
+                    'add-btn'           => 'Adicionar Produto',
+                    'delete'            => 'Excluir',
+                    'empty-title'       => 'Adicionar Produto',
+                    'empty-info'        => 'Para adicionar produtos :type rapidamente.',
+                    'sku'               => 'SKU - :sku',
+                    'image-placeholder' => 'Imagem do Produto',
                 ],
 
                 'types' => [
@@ -966,7 +967,7 @@ return [
                 'banner'                   => 'Banner',
                 'banner-size'              => 'Proporção do banner (1320px X 300px)',
                 'back-btn'                 => 'Voltar',
-                'company-name'             => 'Nome',
+                'name'                     => 'Nome',
                 'description'              => 'Descrição',
                 'description-and-images'   => 'Descrição e Imagens',
                 'description-only'         => 'Apenas Descrição',
@@ -998,7 +999,7 @@ return [
                 'banner'                   => 'Banner',
                 'banner-size'              => 'Proporção do banner (1320px X 300px)',
                 'back-btn'                 => 'Voltar',
-                'company-name'             => 'Nome*',
+                'name'                     => 'Nome',
                 'description'              => 'Descrição',
                 'description-and-images'   => 'Descrição e Imagens',
                 'description-only'         => 'Apenas Descrição',
@@ -2299,7 +2300,7 @@ return [
                 'title'             => 'Canais',
                 'create-btn'        => 'Criar Canal',
                 'delete-success'    => 'Canal excluído com sucesso.',
-                'delete-failed'     => ':name Exclusão Falhou',
+                'delete-failed'     => 'Canal Exclusão Falhou',
                 'last-delete-error' => 'Falha na exclusão do último canal.',
 
                 'datagrid' => [
@@ -2415,6 +2416,7 @@ return [
                     'edit'     => 'Editar',
                     'active'   => 'Ativo',
                     'inactive' => 'Inativo',
+                    'delete'   => 'Apagar',
                 ],
 
                 'edit'  => [
@@ -2728,9 +2730,9 @@ return [
                         'comma-separated'        => 'Separado por Vírgula',
                         'cheapest-first'         => 'Mais Baratos Primeiro',
                         'default-list-mode'      => 'Modo de Lista Padrão',
+                        'database'               => 'Banco de dados',
                         'expensive-first'        => 'Mais Caros Primeiro',
                         'elastic'                => 'Pesquisa Elástica',
-                        'flat'                   => 'Tabela Plana',
                         'from-z-a'               => 'De Z a A',
                         'from-a-z'               => 'De A a Z',
                         'grid'                   => 'Grade',

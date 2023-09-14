@@ -53,16 +53,21 @@
                         <!-- Information -->
                         <div class="flex gap-[10px]">
                             <!-- Image -->
-                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                            <div
+                                class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px] overflow-hidden"
+                                :class="{'border border-dashed border-gray-300': ! product.images.length}"
+                            >
                                 <template v-if="! product.images.length">
                                     <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                                
+                                    <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
+                                        @lang('admin::app.catalog.products.edit.links.image-placeholder')
+                                    </p>
                                 </template>
-
+            
                                 <template v-else>
                                     <img :src="product.images[0].url">
                                 </template>
-                                
-                                <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">Product Image</p>
                             </div>
 
                             <!-- Details -->

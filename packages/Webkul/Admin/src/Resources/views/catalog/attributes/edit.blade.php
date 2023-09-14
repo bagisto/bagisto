@@ -491,15 +491,20 @@
                                             @lang('admin::app.catalog.attributes.edit.enable-wysiwyg')
                                         </x-admin::form.control-group.label>
 
-                                        @php $selectedOption = old('enable_wysiwyg') ?: $attribute->enable_wysiwyg; @endphp
+                                        <input 
+                                            type="hidden"
+                                            name="enable_wysiwyg"
+                                            value="0"
+                                        />
+
+                                        @php $selectedOption = old('enable_wysiwyg') ?: $attribute->enable_wysiwyg @endphp
 
                                         <x-admin::form.control-group.control
                                             type="switch"
                                             name="enable_wysiwyg"
-                                            class="cursor-pointer"
                                             value="1"
                                             :label="trans('admin::app.catalog.attributes.edit.enable-wysiwyg')"
-                                            :checked="(boolean) $selectedOption"
+                                            :checked="(bool) $selectedOption"
                                         >
                                         </x-admin::form.control-group.control>
                                     </x-admin::form.control-group>
@@ -577,8 +582,8 @@
                                         id="is_required"
                                         for="is_required"
                                         value="1"
-                                        :checked="(boolean) $attribute->is_user_defined"
-                                        :disabled="(boolean) !$attribute->is_user_defined"
+                                        :checked="(boolean) $attribute->is_required"
+                                        :disabled="(boolean) !$attribute->is_required"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -640,7 +645,7 @@
                                 <!-- Value Per Locale -->
                                 <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] opacity-70 select-none ">
                                     @php
-                                        $selectedOption = old('value_per_locale') ?? $attribute->value_per_locale;
+                                        $selectedOption = old('value_per_locale') ?? $attribute->value_per_locale
                                     @endphp
 
                                     <x-admin::form.control-group.control
@@ -694,7 +699,7 @@
                                 <!-- Use in Layered -->
                                 <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
                                     @php
-                                        $selectedOption = $attribute->is_filterable ?? old('is_filterable');
+                                        $selectedOption = $attribute->is_filterable ?? old('is_filterable')
                                     @endphp
 
                                     <x-admin::form.control-group.control
@@ -725,7 +730,7 @@
                                 <!-- Use to create configuable product -->
                                 <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
                                     @php
-                                        $selectedOption = $attribute->is_configurable ?? old('is_configurable');
+                                        $selectedOption = $attribute->is_configurable ?? old('is_configurable')
                                     @endphp
 
                                     <x-admin::form.control-group.control
@@ -784,37 +789,6 @@
                                     </x-admin::form.control-group.control>
                                 </x-admin::form.control-group>
 
-                                <!-- Create in Product Flat Table -->
-                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
-                                    @php
-                                        $selectedOption = $attribute->is_user_defined ?? old('is_user_defined');
-                                    @endphp
-
-                                    <x-admin::form.control-group.control
-                                        type="checkbox"
-                                        id="is_user_defined"
-                                        name="is_user_defined"
-                                        for="is_user_defined"
-                                        value="1"
-                                        :checked="(boolean) $selectedOption"
-                                    >
-                                    </x-admin::form.control-group.control>
-
-                                    <x-admin::form.control-group.label
-                                        for="is_user_defined"
-                                        class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer" 
-                                    >
-                                        @lang('admin::app.catalog.attributes.edit.use-in-flat')
-                                    </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.control
-                                        type="hidden"
-                                        name="use_in_flat"
-                                        :value="$selectedOption"
-                                    >
-                                    </x-admin::form.control-group.control>
-                                </x-admin::form.control-group>
-
                                 <!-- Attribute is Comparable -->
                                 <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
                                     @php
@@ -824,16 +798,15 @@
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         id="is_comparable"
-                                        name="$type"
+                                        name="is_comparable"
                                         for="is_comparable"
                                         value="1"
                                         :checked="(boolean) $selectedOption"
-
                                     >
                                     </x-admin::form.control-group.control>
 
                                     <x-admin::form.control-group.label
-                                        for="checkedValue"
+                                        for="is_comparable"
                                         class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer" 
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-comparable')

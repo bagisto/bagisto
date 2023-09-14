@@ -74,6 +74,7 @@ return [
                 'delete-profile'          => 'מחק פרופיל',
                 'edit-profile'            => 'ערוך פרופיל',
                 'edit'                    => 'ערוך',
+                'edit-success'            => 'פרופיל עודכן בהצלחה',
                 'phone'                   => 'טלפון',
                 'current-password'        => 'סיסמה נוכחית',
                 'new-password'            => 'סיסמה חדשה',
@@ -255,6 +256,7 @@ return [
                 'delete-all'         => 'מחק הכל',
                 'empty'              => 'לא הוספת מוצרים לרשימת המשאלות שלך.',
                 'move-to-cart'       => 'העבר אל העגלה',
+                'moved-success'      => 'הפריט הועבר בהצלחה לעגלה',    
                 'profile'            => 'פרופיל',
                 'removed'            => 'הפריט הוסר בהצלחה מרשימת המשאלות',
                 'remove-fail'        => 'לא ניתן להסיר את הפריט מרשימת המשאלות, אנא נסה שוב מאוחר יותר.',
@@ -522,6 +524,7 @@ return [
                 'quantity-update'          => 'עודכן בהצלחה',
                 'see-details'              => 'ראה פרטים',
                 'move-to-wishlist'         => 'העבר לרשימת המשאלות',
+                'items-selected'           => ':count פריטים נבחרו',
             ],
 
             'coupon'   => [

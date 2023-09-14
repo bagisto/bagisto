@@ -16,6 +16,12 @@ export default {
                     // avoid having multiple dashes (---- translates into -)
                     .replace('![-\s]+!u', '-')
                     .trim();
+                
+                if (binding.value) {
+                    binding.value({
+                        [binding.arg]: target.value
+                    });    
+                }
             }, 100);
         };
 

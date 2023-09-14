@@ -385,15 +385,25 @@
                                         @lang('admin::app.catalog.attributes.create.code')
                                     </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
+                                    <v-field
                                         type="text"
                                         name="code"
-                                        :value="old('code')"
+                                        value="{{ old('code') }}"
+                                        label="{{ trans('admin::app.catalog.attributes.create.code') }}"
                                         rules="required"
-                                        :label="trans('admin::app.catalog.attributes.create.code')"
-                                        :placeholder="trans('admin::app.catalog.attributes.create.code')"
+                                        v-slot="{ field }"
                                     >
-                                    </x-admin::form.control-group.control>
+                                        <input
+                                            type="text"
+                                            name="slug"
+                                            id="code"
+                                            v-bind="field"
+                                            :class="[errors['{{ 'code' }}'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                            class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                            placeholder="{{ trans('admin::app.catalog.attributes.create.code') }}"
+                                            v-code
+                                        >
+                                    </v-field>
 
                                     <x-admin::form.control-group.error
                                         control-name="code"
@@ -650,25 +660,6 @@
                                     </x-admin::form.control-group.label>
                                 </x-admin::form.control-group>
 
-                                <!-- Create in Product Flat Table -->
-                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
-                                    <x-admin::form.control-group.control
-                                        type="checkbox"
-                                        name="is_user_defined"
-                                        id="is_user_defined"
-                                        for="is_user_defined"
-                                        value="1"
-                                    >
-                                    </x-admin::form.control-group.control>
-
-                                    <x-admin::form.control-group.label
-                                        for="is_user_defined"
-                                        class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer"
-                                    >
-                                        @lang('admin::app.catalog.attributes.edit.use-in-flat')
-                                    </x-admin::form.control-group.label>
-                                </x-admin::form.control-group>
-
                                 <!-- Attribute is Comparable -->
                                 <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
                                     <x-admin::form.control-group.control
@@ -691,7 +682,7 @@
                                 <!-- Use in Layered -->
                                 <label
                                     for="is_filterable" 
-                                    class="flex gap-[10px] items-center w-max py-[6px] px-[16px] cursor-pointer select-none"
+                                    class="flex gap-[10px] items-center w-max p-[6px] cursor-pointer select-none"
                                 >
                                     <input
                                         type="checkbox"

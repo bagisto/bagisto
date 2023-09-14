@@ -74,6 +74,7 @@ return [
                 'delete-profile'          => 'Profiel Verwijderen',
                 'edit-profile'            => 'Profiel Bewerken',
                 'edit'                    => 'Bewerken',
+                'edit-success'            => 'Profiel succesvol bijgewerkt',
                 'phone'                   => 'Telefoon',
                 'current-password'        => 'Huidig Wachtwoord',
                 'new-password'            => 'Nieuw Wachtwoord',
@@ -255,6 +256,7 @@ return [
                 'delete-all'         => 'Alles Verwijderen',
                 'empty'              => 'Er zijn geen producten toegevoegd aan de wenslijstpagina.',
                 'move-to-cart'       => 'Verplaatsen naar winkelwagen',
+                'moved-success'      => 'Item succesvol verplaatst naar de winkelwagen',    
                 'profile'            => 'Profiel',
                 'removed'            => 'Item succesvol verwijderd uit de wenslijst',
                 'remove-fail'        => 'Item kan niet worden verwijderd uit de wenslijst',
@@ -522,6 +524,7 @@ return [
                 'quantity-update'          => 'Hoeveelheid succesvol bijgewerkt',
                 'see-details'              => 'Details bekijken',
                 'move-to-wishlist'         => 'Verplaatsen naar verlanglijst',
+                'items-selected'           => ':count items geselecteerd',
             ],
     
             'coupon'   => [
