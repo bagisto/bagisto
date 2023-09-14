@@ -354,9 +354,9 @@
                                         class="flex gap-[10px] justify-center items-center cursor-pointer"
                                         @click="is_buy_now=0; addToCompare({{ $product->id }})"
                                     >
-                                        @if (core()->getConfigData('general.content.shop.compare_option') == 'on')
+                                        @if (core()->getConfigData('general.content.shop.compare_option'))
                                             <span class="icon-compare text-[24px]"></span>
-                                            
+
                                             @lang('shop::app.products.compare')
                                         @endif
                                     </div>

@@ -16,8 +16,6 @@
                     <x-shop::shimmer.image
                         class="relative after:content-[' '] after:block after:pb-[calc(100%+9px)] rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
                         ::src="product.base_image.medium_image_url"
-                        width="291"
-                        height="300"
                     ></x-shop::shimmer.image>
                 </a>
                 
@@ -46,7 +44,7 @@
                             </a>
                         @endif
 
-                        @if (core()->getConfigData('general.content.shop.compare_option') == 'on')
+                        @if (core()->getConfigData('general.content.shop.compare_option'))
                             <a
                                 class="icon-compare flex justify-center items-center w-[30px] h-[30px] absolute top-[60px] right-[20px] bg-white rounded-md cursor-pointer text-[25px]"
                                 @click="addToCompare(product.id)"
@@ -111,14 +109,6 @@
                     </p>
 
                     <div class="group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                        @if (core()->getConfigData('general.content.shop.compare_option') == 'on')
-                            <span 
-                                class="icon-compare flex justify-center items-center absolute top-[60px] right-[20px] w-[30px] h-[30px] bg-white rounded-md text-[25px] cursor-pointer"
-                                @click="addToCompare(product.id)"
-                            >
-                            </span>
-                        @endif
-
                         @if (core()->getConfigData('general.content.shop.wishlist_option'))
                             <span 
                                 class="flex justify-center items-center absolute top-[20px] right-[20px] w-[30px] h-[30px] bg-white rounded-md text-[25px] cursor-pointer"
@@ -126,6 +116,14 @@
                                 @click="addToWishlist()"
                             >
                             </span> 
+                        @endif
+                        
+                        @if (core()->getConfigData('general.content.shop.compare_option'))
+                            <span 
+                                class="icon-compare flex justify-center items-center absolute top-[60px] right-[20px] w-[30px] h-[30px] bg-white rounded-md text-[25px] cursor-pointer"
+                                @click="addToCompare(product.id)"
+                            >
+                            </span>
                         @endif
                     </div> 
                 </div> 
@@ -166,7 +164,7 @@
                 </p>
             
                 <div 
-                    class="primary-button px-[30px] py-[10px] whitespace-nowrap"
+                    class="bs-primary-button px-[30px] py-[10px] whitespace-nowrap"
                     @click="addToCart()"
                 >
                     @lang('shop::app.components.products.card.add-to-cart')
