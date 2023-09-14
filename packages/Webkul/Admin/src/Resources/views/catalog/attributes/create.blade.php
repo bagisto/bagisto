@@ -385,15 +385,25 @@
                                         @lang('admin::app.catalog.attributes.create.code')
                                     </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
+                                    <v-field
                                         type="text"
                                         name="code"
-                                        :value="old('code')"
+                                        value="{{ old('code') }}"
+                                        label="{{ trans('admin::app.catalog.attributes.create.code') }}"
                                         rules="required"
-                                        :label="trans('admin::app.catalog.attributes.create.code')"
-                                        :placeholder="trans('admin::app.catalog.attributes.create.code')"
+                                        v-slot="{ field }"
                                     >
-                                    </x-admin::form.control-group.control>
+                                        <input
+                                            type="text"
+                                            name="slug"
+                                            id="code"
+                                            v-bind="field"
+                                            :class="[errors['{{ 'code' }}'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                            class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                            placeholder="{{ trans('admin::app.catalog.attributes.create.code') }}"
+                                            v-code
+                                        >
+                                    </v-field>
 
                                     <x-admin::form.control-group.error
                                         control-name="code"

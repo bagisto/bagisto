@@ -128,10 +128,12 @@ app.component("draggable", Draggable);
 import Slugify from "./directives/slugify";
 import SlugifyTarget from "./directives/slugify-target";
 import Debounce from "./directives/debounce";
+import Code from "./directives/code";
 
 app.directive("slugify", Slugify);
 app.directive("slugify-target", SlugifyTarget);
 app.directive("debounce", Debounce);
+app.directive("code", Code);
 
 import Flatpickr from "flatpickr";
 import 'flatpickr/dist/flatpickr.css';
