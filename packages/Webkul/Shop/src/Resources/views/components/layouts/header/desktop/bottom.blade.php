@@ -63,11 +63,13 @@
                     required
                 >
 
-                <button
-                    type="button"
-                    class="icon-camera flex items-center absolute top-[10px] ltr:right-[12px] rtl:left-[12px] pr-3 text-[22px]"
-                >
-                </button>
+                @if (core()->getConfigData('general.content.shop.image_search')) 
+                    <button
+                        type="button"
+                        class="icon-camera flex items-center absolute top-[10px] ltr:right-[12px] rtl:left-[12px] pr-3 text-[22px]"
+                    >
+                    </button>
+                @endif
             </div>
         </form>
 
