@@ -100,10 +100,12 @@
                                 type="password"
                                 name="password"
                                 class="py-[20px] px-[25px]"
+                                rules="required"
                                 placeholder="Enter your password"
                             />
 
                             <x-shop::form.control-group.error
+                                class=" text-left"
                                 control-name="password"
                             >
                             </x-shop::form.control-group.error>
