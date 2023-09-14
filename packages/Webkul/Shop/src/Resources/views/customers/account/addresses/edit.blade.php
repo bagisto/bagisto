@@ -243,7 +243,7 @@
 
         <button
             type="submit"
-            class="bs-primary-button m-0 block text-base w-max py-[11px] px-[43px] rounded-[18px] text-center"
+            class="primary-button m-0 block text-base w-max py-[11px] px-[43px] rounded-[18px] text-center"
         >
             @lang('shop::app.customers.account.addresses.save')
         </button>

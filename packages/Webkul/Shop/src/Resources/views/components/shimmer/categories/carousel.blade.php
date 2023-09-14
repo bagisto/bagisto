@@ -1,7 +1,7 @@
 @props(['count' => 0])
 
 <div class="container mt-[60px] max-lg:px-[30px] max-sm:mt-[20px]">
-    <div class="bs-item-carousal-wrapper relative">
+    <div class="relative">
         <div class="flex gap-10 overflow-auto scrollbar-hide max-sm:gap-4">
             @for ($i = 0;  $i < $count; $i++)
                 <div class="grid grid-cols-1 gap-[15px] justify-items-center min-w-[120px]">
@@ -9,7 +9,7 @@
                         <img class="bg-[#F5F5F5] rounded-sm">
                     </div>
 
-                    <p class="shimmer w-[90px] h-[32px] rounded-[18px]"></p>
+                    <p class="shimmer w-[90px] h-[27px] rounded-[18px]"></p>
                 </div>
             @endfor
         </div>

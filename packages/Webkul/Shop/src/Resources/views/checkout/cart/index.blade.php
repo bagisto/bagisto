@@ -9,14 +9,18 @@
     </x-slot>
 
     {{-- Page Header --}}
-    <div class="bs-dekstop-menu flex flex-wrap">
+    <div class="flex flex-wrap">
         <div class="w-full flex justify-between px-[60px] border border-t-0 border-b-[1px] border-l-0 border-r-0 py-[17px] max-lg:px-[30px] max-sm:px-[15px]">
             <div class="flex items-center gap-x-[54px] max-[1180px]:gap-x-[35px]">
                 <a
                     href="{{ route('shop.home.index') }}"
                     class="flex min-h-[30px]"
                 >
-                    <img src="{{ bagisto_asset('images/logo.svg') }}">
+                    <img
+                        src="{{ bagisto_asset('images/logo.svg') }}"
+                        width="131"
+                        height="29"
+                    >
                 </a>
             </div>
         </div>
@@ -212,14 +216,14 @@
                             <!-- Cart Item Actions -->
                             <div class="flex flex-wrap gap-[30px] justify-end">
                                 <a
-                                    class="bs-secondary-button max-h-[55px] rounded-[18px]"
+                                    class="secondary-button max-h-[55px] rounded-[18px]"
                                     href="{{ route('shop.home.index') }}"
                                 >
                                     @lang('shop::app.checkout.cart.index.continue-shopping')
                                 </a> 
 
                                 <a 
-                                    class="bs-secondary-button max-h-[55px] rounded-[18px]"
+                                    class="secondary-button max-h-[55px] rounded-[18px]"
                                     @click="update()"
                                 >
                                     @lang('shop::app.checkout.cart.index.update-cart')

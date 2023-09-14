@@ -130,6 +130,22 @@
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
+        @if (
+            core()->getConfigData('customer.address.information.street_lines')
+            && core()->getConfigData('customer.address.information.street_lines') > 1
+        )
+            @for ($i = 2; $i <= core()->getConfigData('customer.address.information.street_lines'); $i++)
+                <x-shop::form.control-group.control
+                    type="text"
+                    name="address{{ $i }}[]"
+                    :value="old('address{{ $i }}[]')"
+                    :label="trans('shop::app.customers.account.addresses.street-address')"
+                    :placeholder="trans('shop::app.customers.account.addresses.street-address')"
+                >
+                </x-shop::form.control-group.control>
+            @endfor
+        @endif
+
         {{-- Country --}}
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label class="required">
@@ -276,7 +292,7 @@
 
         <button
             type="submit"
-            class="bs-primary-button m-0 block text-base w-max py-[11px] px-[43px] rounded-[18px] text-center"
+            class="primary-button m-0 block text-base w-max py-[11px] px-[43px] rounded-[18px] text-center"
         >
             @lang('shop::app.customers.account.addresses.save')
         </button>

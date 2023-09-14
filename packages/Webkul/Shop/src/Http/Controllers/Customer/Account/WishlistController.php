@@ -13,6 +13,10 @@ class WishlistController extends Controller
      */
     public function index()
     {
+        if (! core()->getConfigData('general.content.shop.wishlist_option')) {
+            abort(404);
+        }
+
         return view('shop::customers.account.wishlist.index');
     }
 }
