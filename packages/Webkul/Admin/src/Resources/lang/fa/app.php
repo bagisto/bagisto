@@ -2834,12 +2834,6 @@ return [
                     'settings-info' => 'Wunschliste, Newsletter-Abonnement, E-Mail-Verifikation und soziale Anmeldung einrichten.',
                     'title'         => 'Einstellungen',
 
-                    'wishlist' => [
-                        'share'      => 'Freigabe aktivieren',
-                        'title'      => 'Wunschliste',
-                        'title-info' => 'Eine "Wunschliste" ist eine persönliche Sammlung von gewünschten Elementen, die Benutzern ermöglicht, Produkte für zukünftige Referenzen oder mögliche Einkäufe zu speichern.',
-                    ],
-
                     'newsletter' => [
                         'subscription' => 'Newsletter-Abonnement aktivieren',
                         'title'        => 'Newsletter-Abonnement',

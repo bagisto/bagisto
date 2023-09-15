@@ -2833,12 +2833,6 @@ return [
                     'settings-info' => 'Ustawienia listy życzeń, subskrypcji newslettera, weryfikacji e-mail i logowania społecznościowego.',
                     'title'         => 'Ustawienia',
 
-                    'wishlist' => [
-                        'share'      => 'Włącz udostępnianie',
-                        'title'      => 'Lista życzeń',
-                        'title-info' => '"Lista życzeń" to spersonalizowana kolekcja pożądanych przedmiotów, pozwalająca użytkownikom zapisywać produkty na przyszłość lub potencjalny zakup.',
-                    ],
-
                     'newsletter' => [
                         'subscription' => 'Zezwalaj na subskrypcję newslettera',
                         'title'        => 'Subskrypcja newslettera',

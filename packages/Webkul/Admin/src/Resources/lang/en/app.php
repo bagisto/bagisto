@@ -2835,12 +2835,6 @@ return [
                     'settings-info' => 'Set wishlist, newsletter subscriptions, email verifications and social login.',
                     'title'         => 'Settings',
 
-                    'wishlist' => [
-                        'share'      => 'Enable Sharing',
-                        'title'      => 'Wishlist',
-                        'title-info' => '"Wishlist" is a personalized collection of desired items, allowing users to save products for future reference or potential purchase.',
-                    ],
-
                     'newsletter' => [
                         'subscription' => 'Allow Newsletter Subscription',
                         'title'        => 'Newsletter Subscription',

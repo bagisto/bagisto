@@ -452,15 +452,19 @@
 
     @keyframes skeleton {
         0% {
-            background-position: -1250px 0;
+            @apply bg-[-1250px_0];
         }
 
         100% {
-            background-position: 1250px 0;
+            @apply bg-[1250px_0];
         }
     }
 
     .required:after {
-        content: "*";
+        @apply content-['*'];
+    }
+
+    .CodeMirror {
+        @apply !h-[calc(100vh-299px)]
     }
 }
