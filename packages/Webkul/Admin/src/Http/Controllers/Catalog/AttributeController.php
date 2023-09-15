@@ -134,7 +134,7 @@ class AttributeController extends Controller
     {
         $attribute = $this->attributeRepository->findOrFail($id);
 
-        if (!$attribute->is_user_defined) {
+        if (! $attribute->is_user_defined) {
             return response()->json([
                 'message' => trans('admin::app.catalog.attributes.user-define-error'),
             ], 400);
@@ -171,7 +171,7 @@ class AttributeController extends Controller
         foreach ($indices as $index) {
             $attribute = $this->attributeRepository->find($index);
 
-            if (!$attribute->is_user_defined) {
+            if (! $attribute->is_user_defined) {
                 return response()->json([], 422);
             }
         }
