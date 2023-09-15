@@ -20,7 +20,7 @@ export default {
                 if (binding.value) {
                     binding.value({
                         [binding.arg]: target.value
-                    });    
+                    }, false);    
                 }
             }, 100);
         };
