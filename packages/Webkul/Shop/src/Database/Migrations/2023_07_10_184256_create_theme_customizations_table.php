@@ -20,6 +20,7 @@ return new class extends Migration
             $table->json('options');
             $table->integer('sort_order');
             $table->boolean('status')->default(0);
+            $table->integer('channel_id')->unsigned()->default(1);
             $table->timestamps();
         });
 

@@ -50,7 +50,8 @@ class ThemeController extends Controller
         $this->validate(request(), [
             'name'       => 'required',
             'sort_order' => 'required|numeric',
-            'type'       => 'in:product_carousel,category_carousel,static_content,image_carousel,footer_links'
+            'type'       => 'in:product_carousel,category_carousel,static_content,image_carousel,footer_links',
+            'channel_id' => 'required|in:'.implode(',', (core()->getAllChannels()->pluck("id")->toArray())),
         ]);
 
         Event::dispatch('theme_customization.create.before');
