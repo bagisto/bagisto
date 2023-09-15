@@ -176,9 +176,10 @@ class CategoryController extends Controller
     /**
      * Remove the specified resources from database.
      *
-     * @return \Illuminate\Http\Response
+     * @param MassDestroyRequest $massDestroyRequest
+     * @return JsonResponse
      */
-    public function massDestroy(MassDestroyRequest $massDestroyRequest)
+    public function massDestroy(MassDestroyRequest $massDestroyRequest): JsonResponse
     {
         $suppressFlash = true;
 
@@ -202,7 +203,9 @@ class CategoryController extends Controller
 
                         Event::dispatch('catalog.category.delete.after', $categoryId);
                     } catch (\Exception $e) {
-                        session()->flash('error', trans('admin::app.catalog.categories.delete-failed', ['name' => 'admin::app.catalog.categories.category']));
+                        return new JsonResponse([
+                            'message' => trans('admin::app.catalog.categories.delete-failed', ['name' => 'admin::app.catalog.categories.category'])
+                        ], 500);
                     }
                 }
             }
@@ -212,7 +215,9 @@ class CategoryController extends Controller
             count($categoryIds) != 1
             || $suppressFlash == true
         ) {
-            session()->flash('success', trans('admin::app.catalog.categories.index.datagrid.delete-success', ['resource' => 'admin::app.catalog.categories.category']));
+            return new JsonResponse([
+                'message' => trans('admin::app.catalog.categories.index.datagrid.delete-success', ['resource' => 'admin::app.catalog.categories.category'])
+            ]);
         }
 
         return redirect()->route('admin.catalog.categories.index');
@@ -243,7 +248,8 @@ class CategoryController extends Controller
             }
     
             return new JsonResponse([
-                'message' => trans('admin::app.catalog.categories.update-success')]);
+                'message' => trans('admin::app.catalog.categories.update-success')
+            ]);
         } catch (\Exception $e) {
             return new JsonResponse([
                 'message' => $e->getMessage(),

@@ -108,7 +108,9 @@ class ProductController extends Controller
                 ->find(request()->input('attribute_family_id'));
 
             return new JsonResponse([
-                'attributes' => AttributeResource::collection($configurableFamily->configurable_attributes),
+                'data' => [
+                    'attributes' => AttributeResource::collection($configurableFamily->configurable_attributes),
+                ]
             ]);
         }
 
@@ -129,7 +131,9 @@ class ProductController extends Controller
         session()->flash('success', trans('admin::app.catalog.products.create-success'));
 
         return new JsonResponse([
-            'redirect_url' => route('admin.catalog.products.edit', $product->id),
+            'data' => [
+                'redirect_url' => route('admin.catalog.products.edit', $product->id),
+            ]
         ]);
     }
 

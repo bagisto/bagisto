@@ -78,8 +78,10 @@ class ExchangeRateController extends Controller
         $exchangeRate = $this->exchangeRateRepository->findOrFail($id);
 
         return new JsonResponse([
-            'currencies' => $currencies,
-            'exchangeRate' => $exchangeRate,
+            'data' => [
+                'currencies' => $currencies,
+                'exchangeRate' => $exchangeRate,
+            ]
         ]);
     }
 

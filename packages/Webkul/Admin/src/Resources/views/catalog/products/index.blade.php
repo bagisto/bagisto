@@ -454,10 +454,10 @@
 
                         this.$axios.post("{{ route('admin.catalog.products.store') }}", params)
                             .then((response) => {
-                                if (response.data.redirect_url) {
-                                    window.location.href = response.data.redirect_url;
+                                if (response.data.data.redirect_url) {
+                                    window.location.href = response.data.data.redirect_url;
                                 } else {
-                                    this.attributes = response.data.attributes;
+                                    this.attributes = response.data.data.attributes;
 
                                     this.setSuperAttributes();
                                 }

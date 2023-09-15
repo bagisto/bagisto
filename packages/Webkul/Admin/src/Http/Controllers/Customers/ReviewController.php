@@ -48,7 +48,9 @@ class ReviewController extends Controller
 
         $review->date = $review->created_at->format('Y-m-d');
 
-        return new JsonResponse($review);
+        return new JsonResponse([
+            'data' => $review
+        ]);
     }
 
     /**
@@ -89,10 +91,8 @@ class ReviewController extends Controller
 
             return new JsonResponse(['message' => trans('admin::app.customers.reviews.index.datagrid.delete-success', ['name' => 'Review'])]);
         } catch (\Exception $e) {
-            report($e);
+            return new JsonResponse(['message' => trans('admin::app.response.delete-failed', ['name' => 'Review'])], 500);
         }
-
-        return new JsonResponse(['message' => trans('admin::app.response.delete-failed', ['name' => 'Review'])], 500);
     }
 
     /**
