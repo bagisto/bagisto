@@ -840,7 +840,6 @@ return [
                 'name'          => 'active',
                 'title'         => 'admin::app.configuration.index.sales.shipping-methods.free-shipping.status',
                 'type'          => 'boolean',
-                'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => false,
             ],
@@ -892,7 +891,6 @@ return [
                 'name'          => 'active',
                 'title'         => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping.status',
                 'type'          => 'boolean',
-                'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => false,
             ],
@@ -976,7 +974,6 @@ return [
                 'name'          => 'active',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.status',
                 'type'          => 'boolean',
-                'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
@@ -1072,7 +1069,6 @@ return [
                 'name'          => 'active',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.status',
                 'type'          => 'boolean',
-                'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
@@ -1128,7 +1124,6 @@ return [
                 'name'          => 'active',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.status',
                 'type'          => 'boolean',
-                'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
@@ -1210,7 +1205,6 @@ return [
                 'name'          => 'active',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.status',
                 'type'          => 'boolean',
-                'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
@@ -1439,7 +1433,6 @@ return [
                 'name'       => 'tax_inclusive',
                 'title'      => 'admin::app.configuration.index.taxes.catalog.pricing.tax-inclusive',
                 'type'       => 'boolean',
-                'validation' => 'required',
                 'default'    => false,
             ],
         ],
