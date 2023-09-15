@@ -3,7 +3,10 @@
 namespace Webkul\Category\Repositories;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
+use Intervention\Image\ImageManager;
 use Webkul\Category\Contracts\Category;
 use Webkul\Category\Models\CategoryTranslationProxy;
 use Webkul\Core\Eloquent\Repository;
@@ -260,7 +263,13 @@ class CategoryRepository extends Repository
                         Storage::delete($category->{$type});
                     }
 
-                    $category->{$type} = request()->file($file)->store($dir);
+                    $manager = new ImageManager();
+
+                    $image = $manager->make(request()->file($file))->encode('webp');
+
+                    $category->{$type} = 'category/' . $category->id . '/' . Str::random(40) . '.webp';
+
+                    Storage::put($category->{$type}, $image);
 
                     $category->save();
                 }

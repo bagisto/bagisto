@@ -2,8 +2,10 @@
 
 namespace Webkul\Shop\Repositories;
 
-use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
+use Intervention\Image\ImageManager;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Shop\Contracts\ThemeCustomization;
 
@@ -37,20 +39,30 @@ class ThemeCustomizationRepository extends Repository
             }
 
             if ($images instanceof UploadedFile) {
-                $folder = 'theme/' . $theme->id;
+                $manager = new ImageManager();
 
-                $fileName = uniqid('static_content') . '.' . $images->getClientOriginalExtension();
+                $image = $manager->make($images)->encode('webp');
 
-                return Storage::url($images->storeAs($folder, $fileName));
+                $path = 'theme/' . $theme->id . '/' . Str::random(40) . '.webp';
+
+                Storage::put($path, $image);
+
+                return Storage::url($path);
             }
 
             foreach ($images as $key => $image) {
                 if (isset($image['image']) && $image['image'] instanceof UploadedFile) {
+                    $manager = new ImageManager();
+    
+                    $image = $manager->make($image['image'])->encode('webp');
+    
+                    $path = 'theme/' . $theme->id . '/' . Str::random(40) . '.webp';
+    
+                    Storage::put($path, $image);
+
                     $options['images'][] = [
-                        'image' =>  'storage/' . $image['image']->storeAs(
-                            'theme/' . $theme->id, ++$key . '.' . $image['image']->getClientOriginalExtension()
-                        ),
-                        'link' => $image['link'],
+                        'image' => $path,
+                        'link'  => $image['link'],
                     ];
                 } else {
                     foreach ($imageOptions['options'] as $option) {

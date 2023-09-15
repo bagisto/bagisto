@@ -1959,17 +1959,13 @@
 
                 props: ['options'],
 
-                data() {
-                    return {
-                        styleElement: '',
-                    }
-                },
-
                 methods: {
                     getPreviewContent() {
-                        this.options.html = this.options.html.replace('src=""', '').replace('data-src', 'src').replace('src="storage/theme/', "src=\"{{ config('app.url') }}/storage/theme/");
+                        let html = this.options.html.slice();
 
-                        return this.options.html + '<style type=\"text/css\">' +   this.options.css + '</style>';
+                        html = html.replaceAll('src=""', '').replaceAll('data-src', 'src').replaceAll('src="storage/theme/', "src=\"{{ config('app.url') }}/storage/theme/");
+
+                        return html + '<style type=\"text/css\">' +   this.options.css + '</style>';
                     },
                 },
             });

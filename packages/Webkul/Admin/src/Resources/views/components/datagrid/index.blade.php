@@ -716,21 +716,20 @@
                             this.$axios[method](action.url)
                                 .then(response => {
                                     if (response.data.message) {
-                                        if (response.data.statusCode === 200) {
-                                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
-                                        } else {
-                                            this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
-                                        }
+                                        this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                                     } else {
-                                        if (response.data.statusCode === 200) {
-                                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
-                                        } else {
-                                            this.$emitter.emit('add-flash', { type: 'error', message: response.data.data.message });
-                                        }
+                                        this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                                     }
 
                                     this.get();
-                                });
+                                })
+                                .catch((error) => {
+                                    if (response.data.message) {
+                                        this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
+                                    } else {
+                                        this.$emitter.emit('add-flash', { type: 'error', message: response.data.data.message });
+                                    }
+                                });;
 
                             break;
 
