@@ -1237,7 +1237,7 @@
         {{-- Static Content Previewer --}}
         <script type="text/x-template" id="v-static-content-previewer-template">
             <div>   
-                <div v-html="options.html"></div>
+                <div v-html="getPreviewContent()"></div>
             </div>
         </script>
 
@@ -1959,31 +1959,25 @@
 
                 props: ['options'],
 
-                created() {
-                    const styleElement = document.createElement('style');
+                mounted() {
+                    this.createStyle();
+                },
 
-                    styleElement.textContent = this.options.css;
+                methods: {
+                    createStyle() {
+                        let styleElement = document.createElement('style');
 
-                    document.head.appendChild(styleElement);
+                        styleElement.textContent = this.options.css;
 
-                    setTimeout(() => {
-                        const lazyImages = document.querySelectorAll('.lazy[data-src]');
+                        document.head.appendChild(styleElement);
+                    },
 
-                        lazyImages.forEach((img) => {
-                            const dataSrc = img.getAttribute('data-src');
+                    getPreviewContent() {
+                        this.options.html = this.options.html.replace('data-src', 'src').replace('src="storage/theme/', "src=\"{{ config('app.url') }}/storage/theme/");
 
-                            if (dataSrc.startsWith('storage/theme/')) {
-                                img.setAttribute('src', "{{ config('app.url') }}" + dataSrc);
-
-                                img.removeAttribute('data-src');
-                            } else {
-                                img.setAttribute('src', dataSrc);
-                                
-                                img.removeAttribute('data-src');
-                            }
-                        });
-                    }, 0);
-                }
+                        return this.options.html;
+                    },
+                },
             });
         </script>
 
