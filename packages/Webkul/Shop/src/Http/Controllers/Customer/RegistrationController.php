@@ -75,7 +75,7 @@ class RegistrationController extends Controller
             } else {
                 Event::dispatch('customer.subscription.before');
 
-                $this->subscriptionRepository->create([
+                $subscription = $this->subscriptionRepository->create([
                     'email'         => $data['email'],
                     'customer_id'   => $customer->id,
                     'channel_id'    => core()->getCurrentChannel()->id,
