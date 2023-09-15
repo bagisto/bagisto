@@ -1029,8 +1029,8 @@ return [
             'category'             => 'Categoria',
             'update-success'       => 'Categoria aggiornata con successo.',
             'delete-success'       => 'La categoria è stata eliminata con successo.',
-            'delete-category-root' => 'La categoria principale :name non può essere eliminata.',
-            'delete-failed'        => 'Impossibile eliminare la categoria :name',
+            'delete-category-root' => 'La categoria principale non può essere eliminata.',
+            'delete-failed'        => 'Errore durante l\'eliminazione della categoria',
         ],
 
         'families'   => [

@@ -1029,8 +1029,8 @@ return [
             'category'             => 'カテゴリ',
             'update-success'       => 'カテゴリが正常に更新されました。',
             'delete-success'       => 'カテゴリが正常に削除されました。',
-            'delete-category-root' => 'ルート :name は削除できません。',
-            'delete-failed'        => ':name を削除できませんでした。',
+            'delete-category-root' => 'ルートカテゴリは削除できません。',
+            'delete-failed'        => 'カテゴリの削除中にエラーが発生しました',
         ],
 
         'families'   => [

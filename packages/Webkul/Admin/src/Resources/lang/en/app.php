@@ -1029,8 +1029,8 @@ return [
             'category'             => 'Category',
             'update-success'       => 'category updated successfully.',
             'delete-success'       => 'The category has been successfully deleted.',
-            'delete-category-root' => 'The Root :name can not be deleted.',
-            'delete-failed'        => 'The :name could not be deleted',
+            'delete-category-root' => 'The Root category can not be deleted.',
+            'delete-failed'        => 'Error encountered while deleting category',
         ],
 
         'families'   => [

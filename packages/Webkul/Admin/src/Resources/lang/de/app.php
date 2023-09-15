@@ -1029,8 +1029,8 @@ return [
             'category'             => 'Kategorie',
             'update-success'       => 'Kategorie erfolgreich aktualisiert.',
             'delete-success'       => 'Die Kategorie wurde erfolgreich gelöscht.',
-            'delete-category-root' => 'Die Root-Kategorie :name kann nicht gelöscht werden.',
-            'delete-failed'        => 'Die :name konnte nicht gelöscht werden.',
+            'delete-category-root' => 'Die Stammkategorie kann nicht gelöscht werden.',
+            'delete-failed'        => 'Fehler beim Löschen der Kategorie aufgetreten',
         ],
 
         'families'   => [

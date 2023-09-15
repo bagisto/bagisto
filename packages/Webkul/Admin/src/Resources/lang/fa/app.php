@@ -1028,9 +1028,9 @@ return [
             'create-success'       => 'دسته‌بندی با موفقیت ایجاد شد.',
             'category'             => 'دسته‌بندی',
             'update-success'       => 'دسته‌بندی با موفقیت به‌روزرسانی شد.',
-            'delete-success'       => 'دسته‌بندی با موفقیت حذف شد.',
-            'delete-category-root' => 'ریشه :name نمی‌تواند حذف شود.',
-            'delete-failed'        => ':name حذف نشد.',
+            'delete-success'       => 'دسته‌بندی با موفق',
+            'delete-category-root' => 'دسته بندی اصلی قابل حذف نیست.',
+            'delete-failed'        => 'خطا در حذف دسته بندی رخ داده است',
         ],
 
         'families'   => [

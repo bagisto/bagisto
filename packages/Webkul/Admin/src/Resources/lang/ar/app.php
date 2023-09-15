@@ -1029,8 +1029,8 @@ return [
             'category'             => 'الفئة',
             'update-success'       => 'تم تحديث الفئة بنجاح.',
             'delete-success'       => 'تم حذف الفئة بنجاح.',
-            'delete-category-root' => 'لا يمكن حذف الفئة الجذر :name.',
-            'delete-failed'        => 'فشل حذف الفئة :name.',
+            'delete-category-root' => 'لا يمكن حذف الفئة الجذر.',
+            'delete-failed'        => 'حدث خطأ أثناء حذف الفئة.',
         ],
 
         'families'   => [

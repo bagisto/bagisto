@@ -1029,8 +1029,7 @@ return [
             'category'             => 'Catégorie',
             'update-success'       => 'Catégorie mise à jour avec succès.',
             'delete-success'       => 'La catégorie a été supprimée avec succès.',
-            'delete-category-root' => 'La racine :name ne peut pas être supprimée.',
-            'delete-failed'        => 'Impossible de supprimer :name',
+            'delete-failed'        => 'Erreur rencontrée lors de la suppression de la catégorie'
         ],
 
         'families'   => [

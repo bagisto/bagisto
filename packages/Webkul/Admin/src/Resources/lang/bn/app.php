@@ -1029,8 +1029,8 @@ return [
             'category'             => 'বিভাগ',
             'update-success'       => 'ক্যাটেগরি সফলভাবে আপডেট হয়েছে',
             'delete-success'       => 'বিভাগটি সফলভাবে মোছা হয়েছে।',
-            'delete-category-root' => 'মূল :name মোছা যাবে না।',
-            'delete-failed'        => ':name মোছা গেলনি',
+            'delete-category-root' => 'রুট বিভাগটি মুছে ফেলা যাবে না।',
+            'delete-failed' => 'বিভাগ মুছে ফেলতে সমস্যা হয়েছে',
         ],
 
         'families' => [
