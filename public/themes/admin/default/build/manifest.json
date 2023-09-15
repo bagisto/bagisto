@@ -1,32 +1,12 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-38b92a9f.css",
+    "file": "assets/app-abe8bb04.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
   "src/Resources/assets/fonts/bagisto-admin.woff": {
     "file": "assets/bagisto-admin-765030d0.woff",
     "src": "src/Resources/assets/fonts/bagisto-admin.woff"
-  },
-  "src/Resources/assets/images/active-category.svg": {
-    "file": "assets/active-category-c1dfa420.svg",
-    "src": "src/Resources/assets/images/active-category.svg"
-  },
-  "src/Resources/assets/images/active-footer-link.svg": {
-    "file": "assets/active-footer-link-96777bc4.svg",
-    "src": "src/Resources/assets/images/active-footer-link.svg"
-  },
-  "src/Resources/assets/images/active-product-carousel.svg": {
-    "file": "assets/active-product-carousel-fd01914e.svg",
-    "src": "src/Resources/assets/images/active-product-carousel.svg"
-  },
-  "src/Resources/assets/images/active-slider.svg": {
-    "file": "assets/active-slider-783b6d6d.svg",
-    "src": "src/Resources/assets/images/active-slider.svg"
-  },
-  "src/Resources/assets/images/active-static-content.svg": {
-    "file": "assets/active-static-content-704f03d2.svg",
-    "src": "src/Resources/assets/images/active-static-content.svg"
   },
   "src/Resources/assets/images/average-orders.svg": {
     "file": "assets/average-orders-71c4bf9a.svg",
@@ -67,26 +47,6 @@
   "src/Resources/assets/images/icon-options.svg": {
     "file": "assets/icon-options-ebfcd268.svg",
     "src": "src/Resources/assets/images/settings/shipping-method.svg"
-  },
-  "src/Resources/assets/images/inactive-category.svg": {
-    "file": "assets/inactive-category-71a5e3f3.svg",
-    "src": "src/Resources/assets/images/inactive-category.svg"
-  },
-  "src/Resources/assets/images/inactive-footer-link.svg": {
-    "file": "assets/inactive-footer-link-6f9f2dcd.svg",
-    "src": "src/Resources/assets/images/inactive-footer-link.svg"
-  },
-  "src/Resources/assets/images/inactive-product-carousel.svg": {
-    "file": "assets/inactive-product-carousel-7adbcefe.svg",
-    "src": "src/Resources/assets/images/inactive-product-carousel.svg"
-  },
-  "src/Resources/assets/images/inactive-slider.svg": {
-    "file": "assets/inactive-slider-7c641f26.svg",
-    "src": "src/Resources/assets/images/inactive-slider.svg"
-  },
-  "src/Resources/assets/images/inactive-static-content.svg": {
-    "file": "assets/inactive-static-content-8fc6b3af.svg",
-    "src": "src/Resources/assets/images/inactive-static-content.svg"
   },
   "src/Resources/assets/images/logo.svg": {
     "file": "assets/logo-f02a1643.svg",
@@ -188,7 +148,7 @@
     "css": [
       "assets/app-c04ede37.css"
     ],
-    "file": "assets/app-b5741f9c.js",
+    "file": "assets/app-5151c601.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   },
