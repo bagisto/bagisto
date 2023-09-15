@@ -6,6 +6,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-shimmer-image-template">
         <div
+            :id="'image-shimmer-' + $.uid"
             class="shimmer"
             v-bind="$attrs"
             v-show="isLoading"
@@ -14,7 +15,8 @@
 
         <img
             v-bind="$attrs"
-            :src="src"
+            :data-src="src"
+            :id="'image-' + $.uid"
             @load="onLoad"
             v-show="! isLoading"
         >
@@ -30,6 +32,24 @@
                 return {
                     isLoading: true,
                 };
+            },
+
+            mounted() {
+                let self = this;
+                
+                let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            let lazyImage = document.getElementById('image-' + self.$.uid);
+
+                            lazyImage.src = lazyImage.dataset.src;
+
+                            lazyImageObserver.unobserve(lazyImage);
+                        }
+                    });
+                });
+
+                lazyImageObserver.observe(document.getElementById('image-shimmer-' + this.$.uid));
             },
             
             methods: {
