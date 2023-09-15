@@ -1094,6 +1094,15 @@
                                             @lang('admin::app.settings.themes.edit.css')
                                         </div>
                                     </p>
+
+                                    <p @click="switchEditor('v-static-content-previewer')">
+                                        <div
+                                            class="mb-[-1px] border-b-[1px] transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 cursor-pointer"
+                                            :class="{'border-blue-600': inittialEditor == 'v-static-content-previewer'}"
+                                        >
+                                            @lang('admin::app.settings.themes.edit.preview')
+                                        </div>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -1101,12 +1110,12 @@
                         <input type="hidden" name="options[html]" v-model="options.html">
                         <input type="hidden" name="options[css]" v-model="options.css">
 
-
                         <KeepAlive>
                             <component 
                                 :is="inittialEditor"
-                                @editor-data="editorData"
                                 ref="editor"
+                                @editor-data="editorData"
+                                :options="options"
                             >
                             </component>
                         </KeepAlive>
@@ -1222,6 +1231,13 @@
         <script type="text/x-template" id="v-css-editor-theme-template">
             <div>
                 <div ref="css"></div>
+            </div>
+        </script>
+
+        {{-- Static Content Previewer --}}
+        <script type="text/x-template" id="v-static-content-previewer-template">
+            <div>   
+                <div v-html="getPreviewContent()"></div>
             </div>
         </script>
 
@@ -1787,7 +1803,7 @@
                     return {
                         inittialEditor: 'v-html-editor-theme',
 
-                        options: @json($theme->options)
+                        options: @json($theme->options),
                     };
                 },
 
@@ -1800,6 +1816,10 @@
                 methods: {
                     switchEditor(editor) {
                         this.inittialEditor = editor;
+
+                        if (editor == 'v-static-content-previewer') {
+                            this.$refs.editor.review = this.options;
+                        }
                     },
 
                     editorData(value) {
@@ -1821,7 +1841,7 @@
         <script type="module">
             app.component('v-html-editor-theme', {
                 template: '#v-html-editor-theme-template',
-
+                
                 data() {
                     return {
                         options:{
@@ -1877,7 +1897,7 @@
 
                                 let cursorPointer = editor.getCursor();
 
-                                editor.replaceRange(response.data, { 
+                                editor.replaceRange(`<img class="lazy" data-src="${response.data}">`, {
                                     line: cursorPointer.line, ch: cursorPointer.ch
                                 });
 
@@ -1885,21 +1905,9 @@
                                     line: cursorPointer.line, ch: cursorPointer.ch + response.data.length
                                 });
                             })
-                            .catch((error) => {
-
-                            });
-                    }
+                            .catch((error) => {});
+                    },
                 },
-
-                watch: {
-                    cursorPointer: {
-                        handler() {
-                         
-                        },
-
-                        deep: true
-                    }
-                }
             });
         </script>
 
@@ -1939,6 +1947,29 @@
                                 this.$emit('editorData', this.options);
                             });
                         }, 0);
+                    },
+                },
+            });
+        </script>
+
+        {{-- Static Content Previewer --}}
+        <script type="module">
+            app.component('v-static-content-previewer', {
+                template: '#v-static-content-previewer-template',
+
+                props: ['options'],
+
+                data() {
+                    return {
+                        styleElement: '',
+                    }
+                },
+
+                methods: {
+                    getPreviewContent() {
+                        this.options.html = this.options.html.replace('src=""', '').replace('data-src', 'src').replace('src="storage/theme/', "src=\"{{ config('app.url') }}/storage/theme/");
+
+                        return this.options.html + '<style type=\"text/css\">' +   this.options.css + '</style>';
                     },
                 },
             });

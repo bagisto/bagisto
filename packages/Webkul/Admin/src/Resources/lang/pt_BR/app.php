@@ -2580,6 +2580,7 @@ return [
                 'url'                           => 'URL',
                 'edit'                          => 'Editar',
                 'back'                          => 'Voltar',
+                'preview'                       => 'Prévia',
             ],
 
             'create-success' => 'Tema criado com sucesso',

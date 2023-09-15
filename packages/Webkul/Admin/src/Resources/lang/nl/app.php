@@ -2580,6 +2580,7 @@ return [
                 'path'                          => 'Pad',
                 'edit'                          => 'Bewerken',
                 'back'                          => 'Terug',
+                'preview'                       => 'Voorbeeld',
             ],
 
             'create-success' => 'Thema succesvol aangemaakt',

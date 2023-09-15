@@ -2581,6 +2581,7 @@ return [
                 'path'                          => 'Pfad',
                 'edit'                          => 'Bearbeiten',
                 'back'                          => 'Zurück',
+                'preview'                       => 'Vorschau',
             ],
 
             'create-success' => 'Thema erfolgreich erstellt',

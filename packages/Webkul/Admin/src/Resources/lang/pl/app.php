@@ -2579,6 +2579,7 @@ return [
                 'path'                          => 'Ścieżka',
                 'edit'                          => 'Edytuj',
                 'back'                          => 'Wróć',
+                'preview'                       => 'Podgląd',
             ],
 
             'create-success' => 'Motyw został pomyślnie utworzony',
