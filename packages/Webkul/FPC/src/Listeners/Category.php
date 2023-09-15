@@ -42,6 +42,8 @@ class Category
      */
     public function beforeDelete($categoryId)
     {
+        $category = $this->categoryRepository->find($categoryId);
+        
         foreach (core()->getAllLocales() as $locale) {
             if ($categoryTranslation = $category->translate($locale->code)) {
                 ResponseCache::forget($categoryTranslation->url_path);
