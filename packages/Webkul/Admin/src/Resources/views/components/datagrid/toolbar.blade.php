@@ -15,7 +15,10 @@
                 <x-admin::dropdown>
                     <!-- Dropdown Toggler -->
                     <x-slot:toggle>
-                        <button class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border border-gray-300 bg-white px-[10px] py-[6px] text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black">
+                        <button
+                            type="button" 
+                            class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border border-gray-300 bg-white px-[10px] py-[6px] text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black"
+                        >
                             <span>
                                 @lang('admin::app.components.datagrid.toolbar.mass-actions.select-action')
                             </span>
@@ -169,7 +172,10 @@
                 <x-admin::dropdown>
                     <!-- Dropdown Toggler -->
                     <x-slot:toggle>
-                        <button class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border border-gray-300 bg-white px-[10px] py-[6px] text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400">
+                        <button
+                            type="button" 
+                            class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border border-gray-300 bg-white px-[10px] py-[6px] text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400"
+                        >
                             <span v-text="applied.pagination.perPage"></span>
 
                             <span class="icon-sort-down text-[24px]"></span>
