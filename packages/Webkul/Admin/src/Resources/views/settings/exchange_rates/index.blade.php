@@ -289,7 +289,7 @@
 
                         this.$axios.post(params.id ? "{{ route('admin.settings.exchange_rates.update')  }}" : "{{ route('admin.settings.exchange_rates.store')  }}", formData)
                             .then((response) => {
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
                                 this.$refs.exchangeRateUpdateOrCreateModal.close();
 
@@ -307,7 +307,7 @@
                     editModal(id) {
                         this.$axios.get(`{{ route('admin.settings.exchange_rates.edit', '') }}/${id}`)
                             .then((response) => {
-                                this.selectedExchangeRate = response.data.data.exchangeRate;
+                                this.selectedExchangeRate = response.data.exchangeRate;
 
                                 this.$refs.exchangeRateUpdateOrCreateModal.toggle();
                             })

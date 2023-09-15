@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Settings;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\User\Repositories\RoleRepository;
@@ -140,21 +140,21 @@ class RoleController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id): JsonResource
+    public function destroy($id): JsonResponse
     {
         $role = $this->roleRepository->findOrFail($id);
 
         if ($role->admins->count() >= 1) {
-            return new JsonResource(['message' => trans('admin::app.settings.roles.being-used', [
+            return new JsonResponse(['message' => trans('admin::app.settings.roles.being-used', [
                 'name'   => 'admin::app.settings.roles.index.title',
                 'source' => 'admin::app.settings.roles.index.admin-user'
             ])], 400);
         }
 
         if ($this->roleRepository->count() == 1) {
-            return new JsonResource([
+            return new JsonResponse([
                 'message' => trans(
                     'admin::app.settings.roles.last-delete-error'
                 )
@@ -168,11 +168,11 @@ class RoleController extends Controller
 
             Event::dispatch('user.role.delete.after', $id);
 
-            return new JsonResource(['message' => trans('admin::app.settings.roles.delete-success')]);
+            return new JsonResponse(['message' => trans('admin::app.settings.roles.delete-success')]);
         } catch (\Exception $e) {
         }
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans(
                 'admin::app.settings.roles.delete-failed'
             )

@@ -3,7 +3,7 @@
 namespace Webkul\Admin\Http\Controllers\Customers;
 
 use Illuminate\Support\Facades\Event;
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\JsonResponse;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Admin\DataGrids\Customers\GroupDataGrid;
@@ -38,9 +38,9 @@ class CustomerGroupController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(): JsonResource
+    public function store(): JsonResponse
     {
         $this->validate(request(), [
             'code' => ['required', 'unique:customer_groups,code', new Code],
@@ -60,7 +60,7 @@ class CustomerGroupController extends Controller
 
         Event::dispatch('customer.customer_group.create.after', $customerGroup);
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.customers.groups.index.create.success'),
         ]);
     }
@@ -68,9 +68,9 @@ class CustomerGroupController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(): JsonResource
+    public function update(): JsonResponse
     {
         $id = request()->input('id');
 
@@ -90,7 +90,7 @@ class CustomerGroupController extends Controller
 
         Event::dispatch('customer.customer_group.update.after', $customerGroup);
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.customers.groups.index.edit.success'),
         ]);
     }
@@ -99,20 +99,20 @@ class CustomerGroupController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id): JsonResource
+    public function destroy($id): JsonResponse
     {
         $customerGroup = $this->customerGroupRepository->findOrFail($id);
 
         if (!$customerGroup->is_user_defined) {
-            return new JsonResource([
+            return new JsonResponse([
                 'message' => trans('admin::app.customers.groups.index.edit.group-default'),
             ], 400);
         }
 
         if ($customerGroup->customers->count()) {
-            return new JsonResource([
+            return new JsonResponse([
                 'message' => trans('admin::app.customers.groups.customer-associate'),
             ], 400);
         }
@@ -124,13 +124,13 @@ class CustomerGroupController extends Controller
 
             Event::dispatch('customer.customer_group.delete.after', $id);
 
-            return new JsonResource([
+            return new JsonResponse([
                 'message' => trans('admin::app.customers.groups.index.edit.delete-success'),
             ]);
         } catch (\Exception $e) {
         }
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.customers.groups.index.edit.delete-failed'),
         ], 500);
     }

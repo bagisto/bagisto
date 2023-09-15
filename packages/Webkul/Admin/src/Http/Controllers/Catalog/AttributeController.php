@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Catalog;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Attribute\Repositories\AttributeRepository;
@@ -128,9 +128,9 @@ class AttributeController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id): JsonResource
+    public function destroy($id): JsonResponse
     {
         $attribute = $this->attributeRepository->findOrFail($id);
 
@@ -147,13 +147,13 @@ class AttributeController extends Controller
 
             Event::dispatch('catalog.attribute.delete.after', $id);
 
-            return new JsonResource([
+            return new JsonResponse([
                 'message' => trans('admin::app.catalog.attributes.delete-success')
             ]);
         } catch (\Exception $e) {
         }
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.catalog.attributes.delete-failed')
         ], 500);
     }
@@ -162,9 +162,9 @@ class AttributeController extends Controller
      * Remove the specified resources from database.
      *
      * @param MassDestroyRequest $massDestroyRequest
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function massDestroy(MassDestroyRequest $massDestroyRequest): JsonResource
+    public function massDestroy(MassDestroyRequest $massDestroyRequest): JsonResponse
     {
         $indices = $massDestroyRequest->input('indices');
 
@@ -184,7 +184,7 @@ class AttributeController extends Controller
             Event::dispatch('catalog.attribute.delete.after', $index);
         }
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.catalog.attributes.index.datagrid.mass-delete-success')
         ]);
     }

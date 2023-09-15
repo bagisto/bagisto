@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Settings\Tax;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Validators\Failure;
@@ -151,9 +151,9 @@ class TaxRateController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id): JsonResource
+    public function destroy($id): JsonResponse
     {
         $this->taxRateRepository->findOrFail($id);
 
@@ -164,11 +164,11 @@ class TaxRateController extends Controller
 
             Event::dispatch('tax.rate.delete.after', $id);
 
-            return new JsonResource(['message' => trans('admin::app.settings.taxes.rates.delete-success')]);
+            return new JsonResponse(['message' => trans('admin::app.settings.taxes.rates.delete-success')]);
         } catch (\Exception $e) {
         }
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans(
                 'admin::app.settings.taxes.rates.delete-failed'
             )

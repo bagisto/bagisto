@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Customers;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Rules\AlphaNumericSpace;
 use Webkul\Core\Rules\PhoneNumber;
@@ -56,7 +56,7 @@ class AddressController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(): JsonResource
+    public function store(): JsonResponse
     {
         $this->validate(request(), [
             'company_name' => [new AlphaNumericSpace],
@@ -92,7 +92,7 @@ class AddressController extends Controller
 
         Event::dispatch('customer.addresses.create.after', $customerAddress);
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.customers.addresses.create-success'),
         ]);
     }
@@ -116,7 +116,7 @@ class AddressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id) :JsonResource
+    public function update($id): JsonResponse
     {
         $this->validate(request(), [
             'company_name' => [new AlphaNumericSpace],
@@ -152,7 +152,7 @@ class AddressController extends Controller
 
         Event::dispatch('customer.addresses.update.after', $customerAddress);
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.customers.addresses.update-success'),
         ]);
     }

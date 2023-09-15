@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Settings;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\JsonResponse;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\LocaleRepository;
 use Webkul\Admin\DataGrids\Settings\LocalesDataGrid;
@@ -35,9 +35,9 @@ class LocaleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(): JsonResource
+    public function store(): JsonResponse
     {
         $this->validate(request(), [
             'code'      => ['required', 'unique:locales,code', new \Webkul\Core\Rules\Code],
@@ -55,7 +55,7 @@ class LocaleController extends Controller
 
         $this->localeRepository->create($data);
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.settings.locales.index.create-success'),
         ]);
     }
@@ -64,13 +64,13 @@ class LocaleController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function edit($id): JsonResource
+    public function edit($id): JsonResponse
     {
         $locale = $this->localeRepository->findOrFail($id);
 
-        return new JsonResource([
+        return new JsonResponse([
             'data' => $locale,
         ]);
     }
@@ -78,9 +78,9 @@ class LocaleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(): JsonResource
+    public function update(): JsonResponse
     {
         $this->validate(request(), [
             'code'      => ['required', 'unique:locales,code,' . request()->id, new \Webkul\Core\Rules\Code],
@@ -98,7 +98,7 @@ class LocaleController extends Controller
 
         $this->localeRepository->update($data, request()->id);
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.settings.locales.index.update-success'),
         ]);
     }
@@ -107,7 +107,7 @@ class LocaleController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response|JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
@@ -122,7 +122,7 @@ class LocaleController extends Controller
         try {
             $this->localeRepository->delete($id);
 
-            return new JsonResource([
+            return new JsonResponse([
                 'message' => trans('admin::app.settings.locales.index.delete-success'),
             ]);
         } catch (\Exception $e) {

@@ -3,7 +3,7 @@
 namespace Webkul\Admin\Http\Controllers\Marketing\Promotions;
 
 use Exception;
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Validation\ValidationException;
 use Webkul\Admin\Http\Controllers\Controller;
@@ -161,9 +161,9 @@ class CartRuleController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id): JsonResource
+    public function destroy($id): JsonResponse
     {
         $this->cartRuleRepository->findOrFail($id);
 
@@ -174,13 +174,13 @@ class CartRuleController extends Controller
 
             Event::dispatch('promotions.cart_rule.delete.after', $id);
 
-            return new JsonResource([
+            return new JsonResponse([
                 'message' => trans('admin::app.marketing.promotions.cart-rules.delete-success'
             )]);
         } catch (Exception $e) {
         }
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.marketing.promotions.cart-rules.delete-failed'
         )], 400);
     }
