@@ -2580,6 +2580,7 @@ return [
                 'path'                          => 'パス',
                 'edit'                          => '編集',
                 'back'                          => '戻る',
+                'preview'                       => 'プレビュー',
             ],
 
             'create-success' => 'テーマは正常に作成されました',

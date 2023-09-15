@@ -2581,6 +2581,7 @@ return [
                 'path'                          => 'Yol',
                 'edit'                          => 'Düzenle',
                 'back'                          => 'Geri',
+                'preview'                       => 'Önizleme',
             ],
 
             'create-success' => 'Tema başarıyla oluşturuldu',

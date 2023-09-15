@@ -1100,7 +1100,7 @@
                                             class="mb-[-1px] border-b-[1px] transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 cursor-pointer"
                                             :class="{'border-blue-600': inittialEditor == 'v-static-content-previewer'}"
                                         >
-                                            @lang('Preview')
+                                            @lang('admin::app.settings.themes.edit.preview')
                                         </div>
                                     </p>
                                 </div>
@@ -1965,34 +1965,12 @@
                     }
                 },
 
-                mounted() {
-                    this.createStyle();
-                },
-
                 methods: {
-                    createStyle() {
-                        this.styleElement = document.createElement('style');
-
-                        this.styleElement.textContent = this.options.css;
-
-                        document.head.appendChild(this.styleElement);
-                    },
-
                     getPreviewContent() {
-                        this.options.html = this.options.html.replace('data-src', 'src').replace('src="storage/theme/', "src=\"{{ config('app.url') }}/storage/theme/");
+                        this.options.html = this.options.html.replace('src=""', '').replace('data-src', 'src').replace('src="storage/theme/', "src=\"{{ config('app.url') }}/storage/theme/");
 
-                        return this.options.html;
+                        return this.options.html + '<style type=\"text/css\">' +   this.options.css + '</style>';
                     },
-                },
-
-                watch: {
-                    'options.css': function(newCss) {
-                        if (this.styleElement) {
-                            this.styleElement.textContent = newCss;
-                        }
-                    },
-
-                    deep: true,
                 },
             });
         </script>

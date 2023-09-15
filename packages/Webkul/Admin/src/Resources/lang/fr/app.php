@@ -2580,6 +2580,7 @@ return [
                 'path'                          => 'Chemin',
                 'edit'                          => 'Éditer',
                 'back'                          => 'Retour',
+                'preview'                       => 'Aperçu',
             ],
 
             'create-success' => 'Thème créé avec succès',

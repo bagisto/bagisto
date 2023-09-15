@@ -2580,6 +2580,7 @@ return [
                 'path'                          => '路径',
                 'edit'                          => '编辑',
                 'back'                          => '返回',
+                'preview'                       => '预览',
             ],
 
             'create-success' => '主题创建成功',
