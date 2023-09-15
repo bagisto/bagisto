@@ -1113,8 +1113,9 @@
                         <KeepAlive>
                             <component 
                                 :is="inittialEditor"
-                                @editor-data="editorData"
                                 ref="editor"
+                                @editor-data="editorData"
+                                :options="options"
                             >
                             </component>
                         </KeepAlive>
@@ -1236,7 +1237,7 @@
         {{-- Static Content Previewer --}}
         <script type="text/x-template" id="v-static-content-previewer-template">
             <div>   
-                Previewer
+                <div v-html="options.html"></div>
             </div>
         </script>
 
@@ -1817,8 +1818,7 @@
                         this.inittialEditor = editor;
 
                         if (editor == 'v-static-content-previewer') {
-                            console.log(this.$refs.editor);
-                            // review
+                            this.$refs.editor.review = this.options;
                         }
                     },
 
@@ -1841,7 +1841,7 @@
         <script type="module">
             app.component('v-html-editor-theme', {
                 template: '#v-html-editor-theme-template',
-
+                
                 data() {
                     return {
                         options:{
@@ -1896,7 +1896,7 @@
 
                                 let cursorPointer = editor.getCursor();
 
-                                editor.replaceRange(response.data, { 
+                                editor.replaceRange(`<img class="lazy" data-src="${response.data}">`, {
                                     line: cursorPointer.line, ch: cursorPointer.ch
                                 });
 
@@ -1904,21 +1904,9 @@
                                     line: cursorPointer.line, ch: cursorPointer.ch + response.data.length
                                 });
                             })
-                            .catch((error) => {
-
-                            });
-                    }
+                            .catch((error) => {});
+                    },
                 },
-
-                watch: {
-                    cursorPointer: {
-                        handler() {
-                         
-                        },
-
-                        deep: true
-                    }
-                }
             });
         </script>
 
@@ -1967,14 +1955,33 @@
             app.component('v-static-content-previewer', {
                 template: '#v-static-content-previewer-template',
 
-                data() {
-                    return {
-                        review: {
-                            html: '',
-                            css: '',
-                        }
-                    };
-                },
+                props: ['options'],
+
+                created() {
+                    const styleElement = document.createElement('style');
+
+                    styleElement.textContent = this.options.css;
+
+                    document.head.appendChild(styleElement);
+
+                    setTimeout(() => {
+                        const lazyImages = document.querySelectorAll('.lazy[data-src]');
+
+                        lazyImages.forEach((img) => {
+                            const dataSrc = img.getAttribute('data-src');
+
+                            if (dataSrc.startsWith('storage/theme/')) {
+                                img.setAttribute('src', "{{ config('app.url') }}" + dataSrc);
+
+                                img.removeAttribute('data-src');
+                            } else {
+                                img.setAttribute('src', dataSrc);
+                                
+                                img.removeAttribute('data-src');
+                            }
+                        });
+                    }, 0);
+                }
             });
         </script>
 

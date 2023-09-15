@@ -41,7 +41,7 @@ class ThemeCustomizationRepository extends Repository
 
                 $fileName = uniqid('static_content') . '.' . $images->getClientOriginalExtension();
 
-                return '<img class="lazy" data-src="'. Storage::url($images->storeAs($folder, $fileName)) .'">';
+                return Storage::url($images->storeAs($folder, $fileName));
             }
 
             foreach ($images as $key => $image) {
