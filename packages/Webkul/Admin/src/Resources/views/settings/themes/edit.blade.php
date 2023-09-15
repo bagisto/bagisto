@@ -1959,17 +1959,23 @@
 
                 props: ['options'],
 
+                data() {
+                    return {
+                        styleElement: '',
+                    }
+                },
+
                 mounted() {
                     this.createStyle();
                 },
 
                 methods: {
                     createStyle() {
-                        let styleElement = document.createElement('style');
+                        this.styleElement = document.createElement('style');
 
-                        styleElement.textContent = this.options.css;
+                        this.styleElement.textContent = this.options.css;
 
-                        document.head.appendChild(styleElement);
+                        document.head.appendChild(this.styleElement);
                     },
 
                     getPreviewContent() {
@@ -1977,6 +1983,16 @@
 
                         return this.options.html;
                     },
+                },
+
+                watch: {
+                    'options.css': function(newCss) {
+                        if (this.styleElement) {
+                            this.styleElement.textContent = newCss;
+                        }
+                    },
+
+                    deep: true,
                 },
             });
         </script>
