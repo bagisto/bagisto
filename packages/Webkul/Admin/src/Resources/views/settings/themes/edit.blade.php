@@ -1839,11 +1839,12 @@
                 methods: {
                     initHtmlEditor() {
                         setTimeout(() => {
-                            this.options.html = beautify.html(this.options.html);
+                            this.options.html = SimplyBeautiful().html(this.options.html);
 
                             this._html = new CodeMirror(this.$refs.html, {
                                 lineNumbers: true,
-                                tabSize: 2,
+                                tabSize: 4,
+                                lineWiseCopyCut: true,
                                 value: this.options.html,
                                 mode: 'htmlmixed',
                             });
@@ -1922,11 +1923,12 @@
                 methods: {
                     initCssEditor() {
                         setTimeout(() => {
-                            this.options.css = beautify.css(this.options.css);
+                            this.options.css = SimplyBeautiful().css(this.options.css);
 
                             this._css = new CodeMirror(this.$refs.css, {
                                 lineNumbers: true,
-                                tabSize: 2,
+                                tabSize: 4,
+                                lineWiseCopyCut: true,
                                 value: this.options.css,
                                 mode: 'css',
                             });
@@ -2049,11 +2051,6 @@
 
         {{-- Beatutify html and css --}}
         <script src="https://cdn.jsdelivr.net/npm/simply-beautiful@latest/dist/index.min.js"></script>
-
-        {{-- Instance of the SimplyBeautiful --}}
-        <script>
-            let beautify = SimplyBeautiful();
-        </script>
     @endPushOnce
 
     @pushOnce('styles')
@@ -2063,9 +2060,6 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/codemirror.css"
         >
         </link>
-
-        {{-- Monokai theme css cdn --}}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/theme/monokai.css">
     @endPushOnce
 </x-admin::layouts>
                             
