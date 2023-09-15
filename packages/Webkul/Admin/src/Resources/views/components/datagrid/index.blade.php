@@ -589,10 +589,10 @@
                                     this.get();
                                 })
                                 .catch((error) => {
-                                    if (response.data.message) {
-                                        this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
+                                    if (error.response.data.message) {
+                                        this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
                                     } else {
-                                        this.$emitter.emit('add-flash', { type: 'error', message: response.data.data.message });
+                                        this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.data.message });
                                     }
                                 });
 
@@ -612,10 +612,10 @@
                                     this.get();
                                 })
                                 .catch((error) => {
-                                    if (response.data.message) {
-                                        this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
+                                    if (error.response.data.message) {
+                                        this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
                                     } else {
-                                        this.$emitter.emit('add-flash', { type: 'error', message: response.data.data.message });
+                                        this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.data.message });
                                     }
                                 });
 
@@ -724,10 +724,11 @@
                                     this.get();
                                 })
                                 .catch((error) => {
-                                    if (response.data.message) {
-                                        this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
+                                    console.log(error)
+                                    if (error.response.data.message) {
+                                        this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
                                     } else {
-                                        this.$emitter.emit('add-flash', { type: 'error', message: response.data.data.message });
+                                        this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.data.message });
                                     }
                                 });;
 
