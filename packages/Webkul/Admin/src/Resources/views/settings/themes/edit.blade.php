@@ -150,7 +150,7 @@
                             </div>
 
                             <template v-for="(deletedSlider, index) in deletedSliders">
-                                <input type="hidden" :name="'deleted_sliders['+ index +'][image]'" :value="deletedSlider.image" />  
+                                <input type="hidden" :name="'deleted_sliders['+ index +'][image]'" :value="deletedSlider.image" />
                             </template>
 
                             <div
@@ -160,8 +160,8 @@
                             >
                                 <!-- Hidden Input -->
                                 <input type="file" class="hidden" :name="'options['+ index +'][image]'" :ref="'imageInput_' + index" />
-                                <input type="hidden" :name="'options['+ index +'][link]'" :value="image.link" />    
-                                <input type="hidden" :name="'options['+ index +'][image]'" :value="image.image" />    
+                                <input type="hidden" :name="'options['+ index +'][link]'" :value="image.link" />
+                                <input type="hidden" :name="'options['+ index +'][image]'" :value="image.image" />
                             
                                 <!-- Details -->
                                 <div 
@@ -264,7 +264,7 @@
     
                                     <v-field
                                         type="text"
-                                        name="name"
+                                        name="{{ $currentLocale->code }}[name]"
                                         value="{{ $theme->name }}"
                                         rules="required"
                                         class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
@@ -274,7 +274,7 @@
                                     ></v-field>
     
                                     <x-admin::form.control-group.error
-                                        control-name="name"
+                                        control-name="{{ $currentLocale->code }}[name]"
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
@@ -368,7 +368,7 @@
 
                                             <x-admin::form.control-group.control
                                                 type="text"
-                                                name="link"
+                                                name="{{ $currentLocale->code }}[link]"
                                                 rules="required|url"
                                                 :label="trans('admin::app.settings.themes.edit.link')"
                                                 :placeholder="trans('admin::app.settings.themes.edit.link')"
@@ -376,7 +376,7 @@
                                             </x-admin::form.control-group.control>
             
                                             <x-admin::form.control-group.error
-                                                control-name="link"
+                                                control-name="{{ $currentLocale->code }}[link]"
                                             >
                                             </x-admin::form.control-group.error>
                                         </x-admin::form.control-group>
@@ -442,7 +442,7 @@
 
                             <v-field
                                 type="text"
-                                name="options[title]"
+                                name="{{ $currentLocale->code }}[options[title]]"
                                 value="{{ $theme->options['title'] ?? '' }}"
                                 class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
                                 :class="[errors['options[title]'] ? 'border border-red-600 hover:border-red-600' : '']"
@@ -453,7 +453,7 @@
                             </v-field>
 
                             <x-admin::form.control-group.error
-                                control-name="options[title]"
+                                control-name="{{ $currentLocale->code }}[options[title]]"
                             >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
@@ -1130,7 +1130,10 @@
                                 </p>
                             </div>
 
-                            <div class="flex gap-[10px]">
+                            <div
+                                class="flex gap-[10px]"
+                                v-if="isHtmlEditorActive"
+                            >
                                 <!-- Hidden Input Filed for upload images -->
                                 <label
                                     class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
@@ -1152,7 +1155,7 @@
                         <div class="text-sm font-medium text-center pt-[16px] text-gray-500">
                             <div class="tabs">
                                 <div class="flex gap-[15px] mb-[15px] pt-[8px] border-b-[2px] max-sm:hidden">
-                                    <p @click="switchEditor('v-html-editor-theme')">
+                                    <p @click="switchEditor('v-html-editor-theme', 1)">
                                         <div
                                             class="mb-[-1px] border-b-[1px] transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 cursor-pointer"
                                             :class="{'border-blue-600': inittialEditor == 'v-html-editor-theme'}"
@@ -1161,7 +1164,7 @@
                                         </div>
                                     </p>
 
-                                    <p @click="switchEditor('v-css-editor-theme')">
+                                    <p @click="switchEditor('v-css-editor-theme', 0);">
                                         <div
                                             class="mb-[-1px] border-b-[1px] transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 cursor-pointer"
                                             :class="{'border-blue-600': inittialEditor == 'v-css-editor-theme'}"
@@ -1170,7 +1173,7 @@
                                         </div>
                                     </p>
 
-                                    <p @click="switchEditor('v-static-content-previewer')">
+                                    <p @click="switchEditor('v-static-content-previewer', 0);">
                                         <div
                                             class="mb-[-1px] border-b-[1px] transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 cursor-pointer"
                                             :class="{'border-blue-600': inittialEditor == 'v-static-content-previewer'}"
@@ -1879,6 +1882,8 @@
                         inittialEditor: 'v-html-editor-theme',
 
                         options: @json($theme->options),
+
+                        isHtmlEditorActive: true,
                     };
                 },
 
@@ -1889,8 +1894,10 @@
                 },
 
                 methods: {
-                    switchEditor(editor) {
+                    switchEditor(editor, isActive) {
                         this.inittialEditor = editor;
+
+                        this.isHtmlEditorActive = isActive;
 
                         if (editor == 'v-static-content-previewer') {
                             this.$refs.editor.review = this.options;
