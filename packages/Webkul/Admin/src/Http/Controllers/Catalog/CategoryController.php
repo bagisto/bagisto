@@ -152,7 +152,7 @@ class CategoryController extends Controller
         $category = $this->categoryRepository->findOrFail($id);
 
         if ($this->isCategoryDeletable($category)) {
-            return new JsonResource(['message' => trans('admin::app.catalog.categories.delete-category-root')], 400);
+            return new JsonResource(['message' => trans('admin::app.catalog.categories.delete-category-root',['name' => 'Category'])], 400);
         }
 
         try {
@@ -163,14 +163,13 @@ class CategoryController extends Controller
             Event::dispatch('catalog.category.delete.after', $id);
 
             return new JsonResource([
-                'message' => trans('admin::app.catalog.categories.delete-success', ['name' => 'admin::app.catalog.categories.category'
-            ])]);
+                'message' => trans('admin::app.catalog.categories.delete-success', ['name' => 'Category'])]);
         } catch (\Exception $e) {
         }
 
         return new JsonResource([
-            'message' => trans('admin::app.catalog.categories.delete-failed', ['name' => 'admin::app.catalog.categories.category'
-        ])], 500);
+            'message' => trans('admin::app.catalog.categories.delete-failed', ['name' => 'Category']
+        )], 500);
     }
 
     /**
