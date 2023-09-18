@@ -43,13 +43,13 @@ class SessionController extends Controller
         $remember = request('remember');
 
         if (! auth()->guard('admin')->attempt(request(['email', 'password']), $remember)) {
-            session()->flash('error', trans('admin::app.settings.users.index.login-error'));
+            session()->flash('error', trans('admin::app.settings.users.login-error'));
 
             return redirect()->back();
         }
 
         if (! auth()->guard('admin')->user()->status) {
-            session()->flash('warning', trans('admin::app.settings.users.index.activate-warning'));
+            session()->flash('warning', trans('admin::app.settings.users.activate-warning'));
 
             auth()->guard('admin')->logout();
 

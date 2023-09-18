@@ -2422,17 +2422,6 @@ return [
                 'edit'  => [
                     'title'    => 'ערוך משתמש',
                 ],
-
-                'activate-warning'   => 'חשבונך עדיין לא הופעל, נא ליצור קשר עם המנהל.',
-                'create-success'     => 'משתמש נוצר בהצלחה.',
-                'cannot-change'      => 'אין אפשרות לשנות את המשתמש',
-                'delete-failed'      => 'מחיקת משתמש נכשלה.',
-                'delete-success'     => 'משתמש נמחק בהצלחה.',
-                'incorrect-password' => 'סיסמה שגויה',
-                'last-delete-error'  => 'מחיקת המשתמש האחרון נכשלה',
-                'login-error'        => 'נא לבדוק את פרטי הכניסה שלך ולנסות שוב.',
-                'update-success'     => 'משתמש עודכן בהצלחה.',
-                'delete-warning'     => 'האם אתה בטוח שברצונך לבצע פעולה זו?',
             ],
 
             'edit'  => [
@@ -2448,8 +2437,16 @@ return [
                 'save-btn'         => 'שמור משתמש',
             ],
 
-            'update-success' => 'משתמש עודכן בהצלחה.',
-            'delete-success' => 'משתמש נמחק בהצלחה.',
+            'delete-failed'      => 'נכשל במחיקת המשתמש.',
+            'cannot-change'      => 'לא ניתן לשנות את המשתמש.',
+            'update-success'     => 'המשתמש עודכן בהצלחה.',
+            'delete-success'     => 'המשתמש נמחק בהצלחה.',
+            'incorrect-password' => 'סיסמה שגויה',
+            'create-success'     => 'המשתמש נוצר בהצלחה.',
+            'delete-warning'     => 'האם אתה בטוח שברצונך לבצע פעולה זו?',
+            'login-error'        => 'אנא בדוק את פרטי הכניסה שלך ונסה שוב.',
+            'activate-warning'   => 'החשבון שלך עדיין לא הופעל, אנא צור קשר עם המנהל.',
+            'last-delete-error'  => 'נכשל במחיקת המשתמש האחרון.'
         ],
 
         'roles' => [

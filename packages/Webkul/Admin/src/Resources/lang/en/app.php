@@ -2423,16 +2423,7 @@ return [
                     'title'    => 'Edit User',
                 ],
 
-                'activate-warning'   => 'Your account is yet to be activated, please contact administrator.',
-                'create-success'     => 'User created successfully.',
-                'cannot-change'      => 'User cannot be changed',
-                'delete-failed'      => 'User deleted failed.',
-                'delete-success'     => 'User deleted successfully.',
-                'incorrect-password' => 'Incorrect password',
-                'last-delete-error'  => 'Last User delete failed',
-                'login-error'        => 'Please check your credentials and try again.',
-                'update-success'     => 'User updated successfully.',
-                'delete-warning'     => 'Are you sure, you want to perform this action?',
+                
             ],
 
             'edit'  => [
@@ -2448,8 +2439,16 @@ return [
                 'save-btn'         => 'Save User',
             ],
 
-            'update-success' => 'User updated successfully.',
-            'delete-success' => 'User deleted successfully.',
+            'delete-failed'      => 'User deleted failed.',
+            'cannot-change'      => 'User cannot be changed',
+            'update-success'     => 'User updated successfully.',
+            'delete-success'     => 'User deleted successfully.',
+            'incorrect-password' => 'Incorrect password',
+            'create-success'     => 'User created successfully.',
+            'delete-warning'     => 'Are you sure, you want to perform this action?',
+            'login-error'        => 'Please check your credentials and try again.',
+            'activate-warning'   => 'Your account is yet to be activated, please contact administrator.',
+            'last-delete-error'  => 'Last User delete failed',
         ],
 
         'roles' => [
