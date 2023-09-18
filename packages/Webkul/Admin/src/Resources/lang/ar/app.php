@@ -2577,7 +2577,8 @@ return [
                 'path'                          => 'مسار',
                 'edit'                          => 'تعديل',
                 'back'                          => 'رجوع',
-                'preview'                       => 'معاينة'
+                'preview'                       => 'معاينة',
+                'channels'                      => 'القنوات',
             ],
 
             'create-success' => 'تم إنشاء السمة بنجاح',

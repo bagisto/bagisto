@@ -2577,6 +2577,7 @@ return [
                 'edit'                          => 'Edytuj',
                 'back'                          => 'Wróć',
                 'preview'                       => 'Podgląd',
+                'channels'                      => 'kanały',
             ],
 
             'create-success' => 'Motyw został pomyślnie utworzony',

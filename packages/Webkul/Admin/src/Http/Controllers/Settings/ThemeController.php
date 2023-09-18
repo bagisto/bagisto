@@ -90,18 +90,13 @@ class ThemeController extends Controller
      */
     public function update($id)
     {
-        $data = request()->only([
-            request()->input('locale') . '.options',
-            'type',
-            request()->input('locale') . '.name',
-            'sort_order',
-            'locale',
-            'channels'
-        ]);
-        
+        $locale = core()->getRequestedLocaleCode();
+
+        $data = request()->all();
+
         if ($data['type'] == 'static_content') {
-            $data[request()->input('locale')]['options']['html'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $data[request()->input('locale')]['options']['html']); 
-            $data[request()->input('locale')]['options']['css'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $data[request()->input('locale')]['options']['css']); 
+            $data[$locale]['options']['html'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $data[$locale]['options']['html']); 
+            $data[$locale]['options']['css'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $data[$locale]['options']['css']); 
         }
 
         $data['status'] = request()->input('status') == 'on';

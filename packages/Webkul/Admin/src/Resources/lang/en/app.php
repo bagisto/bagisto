@@ -2581,6 +2581,7 @@ return [
                 'edit'                          => 'Edit',
                 'back'                          => 'Back',
                 'preview'                       => 'Preview',
+                'channels'                      => 'Channels',
             ],
 
             'create-success' => 'Theme created successfully',

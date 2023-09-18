@@ -2578,6 +2578,7 @@ return [
                 'edit'                          => '編集',
                 'back'                          => '戻る',
                 'preview'                       => 'プレビュー',
+                'channels'                      => 'チャンネル'
             ],
 
             'create-success' => 'テーマは正常に作成されました',

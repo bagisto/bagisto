@@ -2578,6 +2578,7 @@ return [
                 'edit'                          => '编辑',
                 'back'                          => '返回',
                 'preview'                       => '预览',
+                'channels'                      => '频道'
             ],
 
             'create-success' => '主题创建成功',

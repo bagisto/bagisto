@@ -2578,6 +2578,7 @@ return [
                 'edit'                          => 'Bewerken',
                 'back'                          => 'Terug',
                 'preview'                       => 'Voorbeeld',
+                'channels'                      => 'kanalen',
             ],
 
             'create-success' => 'Thema succesvol aangemaakt',

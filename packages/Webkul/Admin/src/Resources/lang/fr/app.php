@@ -2578,6 +2578,7 @@ return [
                 'edit'                          => 'Éditer',
                 'back'                          => 'Retour',
                 'preview'                       => 'Aperçu',
+                'channels'                      => 'Chaînes',
             ],
 
             'create-success' => 'Thème créé avec succès',

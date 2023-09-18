@@ -116,12 +116,7 @@ class PageController extends Controller
 
         Event::dispatch('cms.pages.update.before', $id);
 
-        $data = [
-            'en'       => request()->input('en'),
-            'channels' => request()->input('channels'),
-        ];
-
-        $page = $this->cmsRepository->update($data, $id);
+        $page = $this->cmsRepository->update(request()->all(), $id);
 
         Event::dispatch('cms.pages.update.after', $page);
 

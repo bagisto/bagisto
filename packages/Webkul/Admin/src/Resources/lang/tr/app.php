@@ -2579,6 +2579,7 @@ return [
                 'edit'                          => 'Düzenle',
                 'back'                          => 'Geri',
                 'preview'                       => 'Önizleme',
+                'channels'                      => 'kanallar',
             ],
 
             'create-success' => 'Tema başarıyla oluşturuldu',
