@@ -896,13 +896,13 @@ return [
             ],
         ],
     ], [
-        'key'  => 'sales.paymentmethods',
+        'key'  => 'sales.payment_methods',
         'name' => 'admin::app.configuration.index.sales.payment-methods.page-title',
         'info' => 'admin::app.configuration.index.sales.payment-methods.info',
         'icon' => 'settings/payment-method.svg',
         'sort' => 3,
     ], [
-        'key'    => 'sales.paymentmethods.cash_on_delivery',
+        'key'    => 'sales.payment_methods.cash_on_delivery',
         'name'   => 'admin::app.configuration.index.sales.payment-methods.cash-on-delivery',
         'info'   => 'admin::app.configuration.index.sales.payment-methods.cash-on-delivery-info',
         'sort'   => 1,
@@ -998,7 +998,7 @@ return [
             ],
         ],
     ], [
-        'key'    => 'sales.paymentmethods.money_transfer',
+        'key'    => 'sales.payment_methods.money_transfer',
         'name'   => 'admin::app.configuration.index.sales.payment-methods.money-transfer',
         'info'   => 'admin::app.configuration.index.sales.payment-methods.money-transfer-info',
         'sort'   => 2,
@@ -1093,7 +1093,7 @@ return [
             ],
         ],
     ], [
-        'key'    => 'sales.paymentmethods.paypal_standard',
+        'key'    => 'sales.payment_methods.paypal_standard',
         'name'   => 'admin::app.configuration.index.sales.payment-methods.paypal-standard',
         'info'   => 'admin::app.configuration.index.sales.payment-methods.paypal-standard-info',
         'sort'   => 3,
@@ -1154,7 +1154,7 @@ return [
             ]
         ]
     ], [
-        'key'    => 'sales.paymentmethods.paypal_smart_button',
+        'key'    => 'sales.payment_methods.paypal_smart_button',
         'name'   => 'admin::app.configuration.index.sales.payment-methods.paypal-smart-button',
         'info'   => 'admin::app.configuration.index.sales.payment-methods.paypal-smart-button-info',
         'sort'   => 0,
