@@ -45,7 +45,6 @@
                             <!-- Columns -->
                             <p
                                 v-for="column in $parent.available.columns"
-                                v-if="$parent.available.actions.length"
                                 class="flex gap-[5px] items-center"
                                 :class="{'cursor-pointer select-none hover:text-gray-800': column.sortable}"
                                 @click="$parent.sortPage(column)"
@@ -60,7 +59,10 @@
                             </p>
 
                             <!-- Actions -->
-                            <p class="col-start-[none]">
+                            <p
+                                class="col-start-[none]"
+                                v-if="$parent.available.actions.length"
+                            >
                                 @lang('admin::app.components.datagrid.table.actions')
                             </p>
                         </div>
