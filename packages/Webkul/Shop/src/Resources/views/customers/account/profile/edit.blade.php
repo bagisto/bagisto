@@ -24,7 +24,6 @@
                 type="image"
                 name="image[]"
                 class="!p-0 rounded-[12px] text-gray-700 mb-0"
-                rules="required"
                 :label="trans('Image')"
                 :is-multiple="false"
                 accepted-types="image/*"

@@ -48,6 +48,8 @@
                         @lang('Add attachments')
                     </label>
 
+                    <input type="hidden" :name="name" v-if="! uploadedFiles.isPicked"/>
+
                     <v-field
                         type="file"
                         :name="name"
@@ -177,7 +179,7 @@
                     this.uploadedFiles = {
                         isPicked: true,
                         url: this.src,
-                    }
+                    }                        
                 }
             },
 

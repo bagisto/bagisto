@@ -4,6 +4,7 @@ namespace Webkul\Shop\Http\Controllers\Customer;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
@@ -124,7 +125,20 @@ class CustomerController extends Controller
                 }
             }
 
-            $this->customerRepository->uploadImages($data, $customer);
+            if (request()->hasFile('image')) {
+                $this->customerRepository->uploadImages($data, $customer);
+            } else {
+                if (isset($data['image'])) {
+                    if (! empty($data['image'])) {
+                        Storage::delete($customer->image);
+                    }
+                
+                    $customer->image = null;
+
+                    $customer->save();
+                }
+            }
+
 
             session()->flash('success', trans('shop::app.customers.account.profile.edit-success'));
 
