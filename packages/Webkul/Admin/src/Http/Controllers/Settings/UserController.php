@@ -157,8 +157,7 @@ class UserController extends Controller
         if ($this->adminRepository->count() == 1) {
             return new JsonResponse([
                 'message' => trans('admin::app.settings.users.last-delete-error'),
-                'statusCode' => 400,
-            ]);
+            ], 400);
         }
 
         try {
@@ -170,15 +169,13 @@ class UserController extends Controller
 
             return new JsonResponse([
                 'message' => trans('admin::app.settings.users.delete-success'),
-                'statusCode' => 200,
-            ]);
+            ], 200);
         } catch (\Exception $e) {
         }
 
         return new JsonResponse([
             'message' => trans('admin::app.settings.users.delete-failed'),
-            'statusCode' => 500,
-        ]);
+        ], 500);
     }
 
     /**
@@ -218,14 +215,12 @@ class UserController extends Controller
                 return new JsonResponse([
                     'redirectUrl' => route('admin.session.create'),
                     'message' => trans('admin::app.settings.users.delete-success'),
-                    'statusCode' => 200,
                 ]);
             }
         } else {
             return new JsonResponse([
                 'message' => trans('admin::app.settings.users.incorrect-password'),
-                'statusCode' => 199,
-            ]);
+            ], 404);
         }
     }
 
