@@ -54,7 +54,7 @@ class AddressController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(): JsonResponse
     {
@@ -114,7 +114,7 @@ class AddressController extends Controller
      * Edit's the pre made resource of customer called address.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update($id): JsonResponse
     {

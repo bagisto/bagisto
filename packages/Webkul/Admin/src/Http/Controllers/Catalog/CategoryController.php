@@ -177,7 +177,7 @@ class CategoryController extends Controller
      * Remove the specified resources from database.
      *
      * @param MassDestroyRequest $massDestroyRequest
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function massDestroy(MassDestroyRequest $massDestroyRequest): JsonResponse
     {
