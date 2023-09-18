@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Marketing;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\Http\Controllers\Controller;
@@ -37,9 +37,9 @@ class SitemapController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(): JsonResource
+    public function store(): JsonResponse
     {
         $this->validate(request(), [
             'file_name' => 'required',
@@ -55,7 +55,7 @@ class SitemapController extends Controller
 
         Event::dispatch('marketing.sitemaps.create.after', $sitemap);
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.marketing.sitemaps.index.create.success'),
         ]);
     }
@@ -64,9 +64,9 @@ class SitemapController extends Controller
      * Update the specified resource in storage.
      *
      * @param  int  $id
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(): JsonResource
+    public function update(): JsonResponse
     {
         $id = request()->id;
 
@@ -84,7 +84,7 @@ class SitemapController extends Controller
 
         Event::dispatch('marketing.sitemaps.update.after', $sitemap);
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.marketing.sitemaps.index.edit.success'),
         ]);
     }

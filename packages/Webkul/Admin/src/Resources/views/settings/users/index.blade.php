@@ -505,7 +505,7 @@
 
                                 this.$refs.datagrid.get();
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
                                 this.resetForm();
                             })
@@ -521,19 +521,20 @@
 
                         this.$axios.get(`{{ route('admin.settings.users.edit', '') }}/${id}`)
                             .then((response) => {
+                                console.log(response);
                                 this.data = {
-                                    ...response.data.data,
-                                        images: response.data.data.user.image_url
-                                        ? [{ id: 'image', url: response.data.data.user.image_url }]
+                                    ...response.data,
+                                        images: response.data.user.image_url
+                                        ? [{ id: 'image', url: response.data.user.image_url }]
                                         : [],
                                         user: {
-                                            ...response.data.data.user,
+                                            ...response.data.user,
                                             password:'',
                                             password_confirmation:'',
                                         },
                                 };
 
-                                this.$refs.modalForm.setValues(response.data.data.user);
+                                this.$refs.modalForm.setValues(response.data.user);
 
                                 this.$refs.userUpdateOrCreateModal.toggle();
                             })
@@ -555,13 +556,9 @@
                                     '_method': 'DELETE'
                                 })
                                 .then((response) => {
-                                    if (response.data.data.statusCode == 200) {
-                                        this.$refs.datagrid.get();
+                                    this.$refs.datagrid.get();
 
-                                        this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
-                                    } else {
-                                        this.$emitter.emit('add-flash', { type: 'error', message: response.data.data.message });
-                                    }
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                                 })
                                 .catch(error => {
                                     if (error.response.status == 422) {
@@ -579,11 +576,11 @@
                         this.$axios.post("{{ route('admin.settings.users.destroy')}}", formData)
                             .then((response) => {
                                 if (response.data.data.statusCode === 200) {
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
                                      window.location.href = response.data.data.redirectUrl;
                                 } else {
-                                    this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
+                                    this.$emitter.emit('add-flash', { type: 'warning', message: response.data.message });
 
                                     this.$refs.confirmPasswordModal.toggle();
                                 }

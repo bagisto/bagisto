@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Catalog;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Arr;
@@ -88,7 +88,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store()
     {
@@ -107,8 +107,10 @@ class ProductController extends Controller
             $configurableFamily = $this->attributeFamilyRepository
                 ->find(request()->input('attribute_family_id'));
 
-            return new JsonResource([
-                'attributes' => AttributeResource::collection($configurableFamily->configurable_attributes),
+            return new JsonResponse([
+                'data' => [
+                    'attributes' => AttributeResource::collection($configurableFamily->configurable_attributes),
+                ]
             ]);
         }
 
@@ -128,8 +130,10 @@ class ProductController extends Controller
 
         session()->flash('success', trans('admin::app.catalog.products.create-success'));
 
-        return new JsonResource([
-            'redirect_url' => route('admin.catalog.products.edit', $product->id),
+        return new JsonResponse([
+            'data' => [
+                'redirect_url' => route('admin.catalog.products.edit', $product->id),
+            ]
         ]);
     }
 
@@ -246,9 +250,9 @@ class ProductController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id): JsonResource
+    public function destroy($id): JsonResponse
     {
         $product = $this->productRepository->findOrFail($id);
 
@@ -259,14 +263,14 @@ class ProductController extends Controller
 
             Event::dispatch('catalog.product.delete.after', $id);
 
-            return new JsonResource([
+            return new JsonResponse([
                 'message' => trans('admin::app.catalog.products.delete-success'),
             ]);
         } catch (\Exception $e) {
             report($e);
         }
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.catalog.products.delete-failed'),
         ], 500);
     }
@@ -275,9 +279,9 @@ class ProductController extends Controller
      * Mass delete the products.
      *
      * @param MassDestroyRequest $massDestroyRequest
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function massDestroy(MassDestroyRequest $massDestroyRequest): JsonResource
+    public function massDestroy(MassDestroyRequest $massDestroyRequest): JsonResponse
     {
         $productIds = $massDestroyRequest->input('indices');
 
@@ -294,11 +298,11 @@ class ProductController extends Controller
                 }
             }
 
-            return new JsonResource([
+            return new JsonResponse([
                 'message' => trans('admin::app.catalog.products.index.datagrid.mass-delete-success')
             ]);
         } catch (\Exception $e) {
-            return new JsonResource([
+            return new JsonResponse([
                 'message' => $e->getMessage()
             ], 500);
         }
@@ -308,9 +312,9 @@ class ProductController extends Controller
      * Mass update the products.
      *
      * @param MassUpdateRequest $massUpdateRequest
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function massUpdate(MassUpdateRequest $massUpdateRequest): JsonResource
+    public function massUpdate(MassUpdateRequest $massUpdateRequest): JsonResponse
     {
         $data = $massUpdateRequest->all();
 
@@ -326,7 +330,7 @@ class ProductController extends Controller
             Event::dispatch('catalog.product.update.after', $product);
         }
         
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.catalog.products.index.datagrid.mass-update-success')
         ], 200);
     }

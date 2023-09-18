@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Settings;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
@@ -140,9 +140,9 @@ class InventorySourceController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id): JsonResource
+    public function destroy($id): JsonResponse
     {
         $this->inventorySourceRepository->findOrFail($id);
 
@@ -157,14 +157,14 @@ class InventorySourceController extends Controller
 
             Event::dispatch('inventory.inventory_source.delete.after', $id);
 
-            return new JsonResource([
+            return new JsonResponse([
                 'message' => trans('admin::app.settings.inventory-sources.delete-success')
             ]);
         } catch (\Exception $e) {
             report($e);
         }
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.settings.inventory-sources.delete-failed', ['name' => 'admin::app.settings.inventory_sources.index.title'])
         ], 500);
     }

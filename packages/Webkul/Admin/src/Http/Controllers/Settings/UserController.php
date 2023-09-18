@@ -5,7 +5,7 @@ namespace Webkul\Admin\Http\Controllers\Settings;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\User\Repositories\AdminRepository;
@@ -47,9 +47,9 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param UserForm $request
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(UserForm $request): JsonResource
+    public function store(UserForm $request): JsonResponse
     {
         $data = $request->only([
             'name',
@@ -78,8 +78,8 @@ class UserController extends Controller
 
         Event::dispatch('user.admin.create.after', $admin);
 
-        return new JsonResource([
-            'message' => trans('admin::app.settings.users.create-success'),
+        return new JsonResponse([
+            'message' => trans('admin::app.settings.users.index.create-success'),
         ]);
     }
 
@@ -87,15 +87,15 @@ class UserController extends Controller
      * User Details
      *
      * @param int $id
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function edit($id): JsonResource
+    public function edit($id): JsonResponse
     {
         $user = $this->adminRepository->findOrFail($id);
 
         $roles = $this->roleRepository->all();
 
-        return new JsonResource([
+        return new JsonResponse([
             'roles' => $roles,
             'user' => $user,
         ]);
@@ -105,9 +105,9 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param UserForm $request
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UserForm $request): JsonResource
+    public function update(UserForm $request): JsonResponse
     {
         $id = request()->id;
 
@@ -141,8 +141,8 @@ class UserController extends Controller
 
         Event::dispatch('user.admin.update.after', $admin);
 
-        return new JsonResource([
-            'message' => trans('admin::app.settings.users.update-success'),
+        return new JsonResponse([
+            'message' => trans('admin::app.settings.users.index.update-success'),
         ]);
     }
 
@@ -150,12 +150,12 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id): JsonResource
+    public function destroy($id): JsonResponse
     {
         if ($this->adminRepository->count() == 1) {
-            return new JsonResource([
+            return new JsonResponse([
                 'message' => trans('admin::app.settings.users.last-delete-error'),
                 'statusCode' => 400,
             ]);
@@ -168,14 +168,14 @@ class UserController extends Controller
 
             Event::dispatch('user.admin.delete.after', $id);
 
-            return new JsonResource([
+            return new JsonResponse([
                 'message' => trans('admin::app.settings.users.delete-success'),
                 'statusCode' => 200,
             ]);
         } catch (\Exception $e) {
         }
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.settings.users.delete-failed'),
             'statusCode' => 500,
         ]);
@@ -199,7 +199,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroySelf(): JsonResource
+    public function destroySelf(): JsonResponse
     {
         $password = request()->input('password');
 
@@ -215,14 +215,14 @@ class UserController extends Controller
 
                 Event::dispatch('user.admin.delete.after', $id);
 
-                return new JsonResource([
+                return new JsonResponse([
                     'redirectUrl' => route('admin.session.create'),
                     'message' => trans('admin::app.settings.users.delete-success'),
                     'statusCode' => 200,
                 ]);
             }
         } else {
-            return new JsonResource([
+            return new JsonResponse([
                 'message' => trans('admin::app.settings.users.incorrect-password'),
                 'statusCode' => 199,
             ]);
