@@ -12,12 +12,14 @@
     
             <div class="flex gap-x-[10px] items-center">
                 {{-- Create User Button --}}
-                <button
-                    type="button"
-                    class="primary-button"
-                >
-                    @lang('admin::app.settings.users.index.create.title')
-                </button>
+                @if (bouncer()->hasPermission('settings.users.users.create'))
+                    <button
+                        type="button"
+                        class="primary-button"
+                    >
+                        @lang('admin::app.settings.users.index.create.title')
+                    </button>
+                @endif
             </div>
         </div>
 

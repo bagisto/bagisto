@@ -11,12 +11,14 @@
 
             <div class="flex gap-x-[10px] items-center">
                 <!-- Craete currency Button -->
-                <button 
-                    type="button"
-                    class="primary-button"
-                >
-                    @lang('admin::app.settings.currencies.index.create-btn')
-                </button>
+                @if (bouncer()->hasPermission('settings.currencies.create'))
+                    <button 
+                        type="button"
+                        class="primary-button"
+                    >
+                        @lang('admin::app.settings.currencies.index.create-btn')
+                    </button>
+                @endif
             </div>
         </div>
 
@@ -36,13 +38,15 @@
 
                 <div class="flex gap-x-[10px] items-center">
                     <!-- Craete currency Button -->
-                    <button 
-                        type="button"
-                        class="primary-button"
-                        @click="selectedCurrency={}; $refs.currencyUpdateOrCreateModal.toggle()"
-                    >
-                        @lang('admin::app.settings.currencies.index.create-btn')
-                    </button>
+                    @if (bouncer()->hasPermission('settings.currencies.create'))
+                        <button 
+                            type="button"
+                            class="primary-button"
+                            @click="selectedCurrency={}; $refs.currencyUpdateOrCreateModal.toggle()"
+                        >
+                            @lang('admin::app.settings.currencies.index.create-btn')
+                        </button>
+                    @endif
                 </div>
             </div>
     
@@ -50,9 +54,13 @@
                 :src="route('admin.settings.currencies.index')"
                 ref="datagrid"
             >
+                @php
+                    $hasPermission = bouncer()->hasPermission('settings.currencies.edit') || bouncer()->hasPermission('settings.currencies.delete');
+                @endphp
+
                 <!-- DataGrid Header -->
                 <template #header="{ columns, records, sortPage, applied}">
-                    <div class="row grid grid-cols-4 grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] border-gray-300 text-gray-600 bg-gray-50 font-semibold">
+                    <div class="row grid grid-cols-{{ $hasPermission ? '4' : '3' }} grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] border-gray-300 text-gray-600 bg-gray-50 font-semibold">
                         <div
                             class="flex gap-[10px] cursor-pointer"
                             v-for="(columnGroup, index) in ['id', 'code', 'name']"
@@ -83,9 +91,11 @@
                         </div>
 
                         <!-- Actions -->
-                        <p class="flex gap-[10px] justify-end">
-                            @lang('admin::app.components.datagrid.table.actions')
-                        </p>
+                        @if ($hasPermission)
+                            <p class="flex gap-[10px] justify-end">
+                                @lang('admin::app.components.datagrid.table.actions')
+                            </p>
+                        @endif
                     </div>
                 </template>
 
@@ -94,7 +104,7 @@
                     <div
                         v-for="record in records"
                         class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600 transition-all hover:bg-gray-50"
-                        style="grid-template-columns: repeat(4, 1fr);"
+                        :style="'grid-template-columns: repeat(' + (record.actions.length ? 4 : 3) + ', 1fr);'"
                     >
                         <!-- Id -->
                         <p v-text="record.id"></p>
@@ -107,23 +117,27 @@
 
                         <!-- Actions -->
                         <div class="flex justify-end">
-                            <a @click="editModal(record.id)">
-                                <span
-                                    :class="record.actions['0'].icon"
-                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
-                                    :title="record.actions['0'].title"
-                                >
-                                </span>
-                            </a>
+                            @if (bouncer()->hasPermission('settings.currencies.edit'))
+                                <a @click="editModal(record.id)">
+                                    <span
+                                        :class="record.actions['0'].icon"
+                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
+                                        :title="record.actions['0'].title"
+                                    >
+                                    </span>
+                                </a>
+                            @endif
 
-                            <a @click="deleteModal(record.actions['1']?.url)">
-                                <span
-                                    :class="record.actions['1'].icon"
-                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
-                                    :title="record.actions['1'].title"
-                                >
-                                </span>
-                            </a>
+                            @if (bouncer()->hasPermission('settings.currencies.edit'))
+                                <a @click="deleteModal(record.actions['1']?.url)">
+                                    <span
+                                        :class="record.actions['1'].icon"
+                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
+                                        :title="record.actions['1'].title"
+                                    >
+                                    </span>
+                                </a>
+                            @endif
                         </div>
                     </div>
                 </template>

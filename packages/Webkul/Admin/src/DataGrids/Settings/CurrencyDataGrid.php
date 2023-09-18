@@ -66,36 +66,26 @@ class CurrencyDataGrid extends DataGrid
      */
     public function prepareActions()
     {
-        $this->addAction([
-            'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.settings.currencies.index.datagrid.edit'),
-            'method' => 'GET',
-            'url'    => function ($row) {
-                return route('admin.settings.currencies.edit', $row->id);
-            },
-        ]);
+        if (bouncer()->hasPermission('settings.currencies.delete')) {
+            $this->addAction([
+                'icon'   => 'icon-edit',
+                'title'  => trans('admin::app.settings.currencies.index.datagrid.edit'),
+                'method' => 'GET',
+                'url'    => function ($row) {
+                    return route('admin.settings.currencies.edit', $row->id);
+                },
+            ]);
+        }
 
-        $this->addAction([
-            'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.settings.currencies.index.datagrid.delete'),
-            'method' => 'DELETE',
-            'url'    => function ($row) {
-                return route('admin.settings.currencies.delete', $row->id);
-            },
-        ]);
-    }
-
-    /**
-     * Prepare mass actions.
-     *
-     * @return void
-     */
-    public function prepareMassActions()
-    {
-        $this->addMassAction([
-            'title'  => trans('admin::app.settings.currencies.index.datagrid.delete'),
-            'method' => 'POST',
-            'url'    => route('admin.settings.currencies.mass_delete'),
-        ]);
+        if (bouncer()->hasPermission('settings.currencies.delete')) {
+            $this->addAction([
+                'icon'   => 'icon-delete',
+                'title'  => trans('admin::app.settings.currencies.index.datagrid.delete'),
+                'method' => 'DELETE',
+                'url'    => function ($row) {
+                    return route('admin.settings.currencies.delete', $row->id);
+                },
+            ]);
+        }
     }
 }
