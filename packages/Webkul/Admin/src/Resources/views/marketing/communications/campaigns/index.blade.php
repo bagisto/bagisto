@@ -10,11 +10,13 @@
         </p>
 
         <div class="flex gap-x-[10px] items-center">
-            <a href="{{ route('admin.marketing.communications.campaigns.create') }}">
-                <div class="primary-button">
-                    @lang('admin::app.marketing.communications.campaigns.index.create-btn')
-                </div>
-            </a>
+            @if (bouncer()->hasPermission('marketing.communications.campaigns.create'))
+                <a href="{{ route('admin.marketing.communications.campaigns.create') }}">
+                    <div class="primary-button">
+                        @lang('admin::app.marketing.communications.campaigns.index.create-btn')
+                    </div>
+                </a>
+            @endif
         </div>
     </div>
 

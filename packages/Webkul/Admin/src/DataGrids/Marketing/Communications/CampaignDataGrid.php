@@ -79,23 +79,27 @@ class CampaignDataGrid extends DataGrid
      */
     public function prepareActions()
     {
-        $this->addAction([
-            'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.marketing.communications.campaigns.index.datagrid.edit'),
-            'method' => 'GET',
-            'url'    => function ($row) {
-                return route('admin.marketing.communications.campaigns.edit', $row->id);
-            },
-        ]);
+        if (bouncer()->hasPermission('marketing.communications.campaigns.edit')) {
+            $this->addAction([
+                'icon'   => 'icon-edit',
+                'title'  => trans('admin::app.marketing.communications.campaigns.index.datagrid.edit'),
+                'method' => 'GET',
+                'url'    => function ($row) {
+                    return route('admin.marketing.communications.campaigns.edit', $row->id);
+                },
+            ]);
+        }
 
-        $this->addAction([
-            'icon'         => 'icon-delete',
-            'title'        => trans('admin::app.marketing.communications.campaigns.index.datagrid.delete'),
-            'method'       => 'DELETE',
-            'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'Campaign']),
-            'url'          => function ($row) {
-                return route('admin.marketing.communications.campaigns.delete', $row->id);
-            },
-        ]);
+        if (bouncer()->hasPermission('marketing.communications.campaigns.delete')) {
+            $this->addAction([
+                'icon'         => 'icon-delete',
+                'title'        => trans('admin::app.marketing.communications.campaigns.index.datagrid.delete'),
+                'method'       => 'DELETE',
+                'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'Campaign']),
+                'url'          => function ($row) {
+                    return route('admin.marketing.communications.campaigns.delete', $row->id);
+                },
+            ]);
+        }
     }
 }

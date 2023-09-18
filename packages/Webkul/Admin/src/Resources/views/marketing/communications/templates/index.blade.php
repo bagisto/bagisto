@@ -10,11 +10,13 @@
         </p>
 
         <div class="flex gap-x-[10px] items-center">
-            <a href="{{ route('admin.marketing.communications.email_templates.create') }}">
-                <div class="primary-button">
-                    @lang('admin::app.marketing.communications.templates.index.create-btn')
-                </div>
-            </a>
+            @if (bouncer()->hasPermission('marketing.communications.email-templates.create'))
+                <a href="{{ route('admin.marketing.communications.email_templates.create') }}">
+                    <div class="primary-button">
+                        @lang('admin::app.marketing.communications.templates.index.create-btn')
+                    </div>
+                </a>
+            @endif
         </div>
     </div>
 
