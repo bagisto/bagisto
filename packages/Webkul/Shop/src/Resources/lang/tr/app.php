@@ -74,6 +74,7 @@ return [
                 'delete-profile'          => 'Profili Sil',
                 'edit-profile'            => 'Profili Düzenle',
                 'edit'                    => 'Düzenle',
+                'edit-success'            => 'Profil Başarıyla Güncellendi',
                 'phone'                   => 'Telefon',
                 'current-password'        => 'Geçerli Parola',
                 'new-password'            => 'Yeni Parola',
@@ -89,6 +90,7 @@ return [
                 'female'                  => 'Kadın',
                 'other'                   => 'Diğer',
                 'save'                    => 'Kaydet',
+                'unmatch'                 => 'Eski şifre eşleşmiyor.',
             ],
 
             'addresses' => [
@@ -255,6 +257,7 @@ return [
                 'delete-all'         => 'Tümünü Sil',
                 'empty'              => 'İstek listesi sayfasına herhangi bir ürün eklenmedi.',
                 'move-to-cart'       => 'Sepete Taşı',
+                'moved-success'      => 'Öğe Başarıyla Sepete Taşındı',    
                 'profile'            => 'Profil',
                 'removed'            => 'Ürün Başarıyla İstek Listesinden Kaldırıldı',
                 'remove-fail'        => 'Ürün İstek Listesinden Kaldırılamıyor',

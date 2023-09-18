@@ -53,12 +53,14 @@ return [
                 'name'          => 'compare_option',
                 'title'         => 'admin::app.configuration.index.general.content.settings.compare-options',
                 'type'          => 'boolean',
+                'default'       => '1',
                 'locale_based'  => true,
                 'channel_based' => true,
             ], [
                 'name'          => 'wishlist_option',
                 'title'         => 'admin::app.configuration.index.general.content.settings.wishlist-options',
                 'type'          => 'boolean',
+                'default'       => '1',
                 'locale_based'  => true,
                 'channel_based' => true,
             ], [
@@ -519,7 +521,7 @@ return [
                 'name'          => 'street_lines',
                 'title'         => 'admin::app.configuration.index.customer.address.information.street-lines',
                 'type'          => 'text',
-                'validation'    => 'between:1,4',
+                'validation'    => 'between:1,2',
                 'channel_based' => true,
             ],
         ],
@@ -558,18 +560,6 @@ return [
         'info' => 'admin::app.configuration.index.customer.settings.settings-info',
         'icon' => 'settings/settings.svg',
         'sort' => 3,
-    ], [
-        'key'    => 'customer.settings.wishlist',
-        'name'   => 'admin::app.configuration.index.customer.settings.wishlist.title',
-        'info'   => 'admin::app.configuration.index.customer.settings.wishlist.title-info',
-        'sort'   => 1,
-        'fields' => [
-            [
-                'name'  => 'share',
-                'title' => 'admin::app.configuration.index.customer.settings.wishlist.share',
-                'type'  => 'boolean',
-            ],
-        ],
     ], [
         'key'    => 'customer.settings.newsletter',
         'name'   => 'admin::app.configuration.index.customer.settings.newsletter.title',
@@ -850,7 +840,6 @@ return [
                 'name'          => 'active',
                 'title'         => 'admin::app.configuration.index.sales.shipping-methods.free-shipping.status',
                 'type'          => 'boolean',
-                'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => false,
             ],
@@ -902,7 +891,6 @@ return [
                 'name'          => 'active',
                 'title'         => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping.status',
                 'type'          => 'boolean',
-                'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => false,
             ],
@@ -986,7 +974,6 @@ return [
                 'name'          => 'active',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.status',
                 'type'          => 'boolean',
-                'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
@@ -1082,7 +1069,6 @@ return [
                 'name'          => 'active',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.status',
                 'type'          => 'boolean',
-                'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
@@ -1138,7 +1124,6 @@ return [
                 'name'          => 'active',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.status',
                 'type'          => 'boolean',
-                'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
@@ -1220,7 +1205,6 @@ return [
                 'name'          => 'active',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.status',
                 'type'          => 'boolean',
-                'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
@@ -1449,7 +1433,6 @@ return [
                 'name'       => 'tax_inclusive',
                 'title'      => 'admin::app.configuration.index.taxes.catalog.pricing.tax-inclusive',
                 'type'       => 'boolean',
-                'validation' => 'required',
                 'default'    => false,
             ],
         ],

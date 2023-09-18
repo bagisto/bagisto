@@ -1029,8 +1029,8 @@ return [
             'category'             => '分类',
             'update-success'       => '分类更新成功。',
             'delete-success'       => '分类已成功删除。',
-            'delete-category-root' => '根分类 :name 无法删除。',
-            'delete-failed'        => ':name 无法删除。',
+            'delete-category-root' => '无法删除根类别 ',
+            'delete-failed'        => '删除类别时发生错误',
         ],
 
         'families' => [
@@ -2300,7 +2300,7 @@ return [
                 'title'             => '渠道',
                 'create-btn'        => '创建渠道',
                 'delete-success'    => '渠道删除成功。',
-                'delete-failed'     => ':name 删除失败',
+                'delete-failed'     => '频道 删除失败',
                 'last-delete-error' => '最后一个渠道删除失败。',
 
                 'datagrid' => [
@@ -2422,17 +2422,6 @@ return [
                 'edit'  => [
                     'title'    => '编辑用户',
                 ],
-
-                'activate-warning'   => '您的帐户尚未激活，请联系管理员。',
-                'create-success'     => '用户创建成功。',
-                'cannot-change'      => '无法更改用户',
-                'delete-failed'      => '用户删除失败。',
-                'delete-success'     => '用户删除成功。',
-                'incorrect-password' => '密码错误',
-                'last-delete-error'  => '最后一个用户删除失败',
-                'login-error'        => '请检查您的凭据并重试。',
-                'update-success'     => '用户更新成功。',
-                'delete-warning'     => '您确定要执行此操作吗？',
             ],
 
             'edit'  => [
@@ -2448,8 +2437,16 @@ return [
                 'save-btn'         => '保存用户',
             ],
 
-            'update-success' => '用户更新成功。',
-            'delete-success' => '用户删除成功。',
+            'delete-failed'      => '删除用户失败。',
+            'cannot-change'      => '无法更改用户。',
+            'update-success'     => '用户成功更新。',
+            'delete-success'     => '用户成功删除。',
+            'incorrect-password' => '密码错误',
+            'create-success'     => '用户成功创建。',
+            'delete-warning'     => '您确定要执行此操作吗？',
+            'login-error'        => '请检查您的凭据并重试。',
+            'activate-warning'   => '您的帐户尚未激活，请联系管理员。',
+            'last-delete-error'  => '删除最后一个用户失败。'
         ],
 
         'roles' => [
@@ -2519,52 +2516,18 @@ return [
             ],
 
             'create' => [
-                'title'                          => '创建主题',
-                'sliders'                        => '轮播图',
-                'product-carousel'               => '产品轮播',
-                'product-carousel-description'   => '使用动态和响应式产品轮播优雅地展示产品。',
-                'category-carousel-description'  => '使用响应式的类别轮播动态展示吸引人的类别。',
-                'static-content-description'     => '通过简明扼要的静态内容提高受众的参与度。',
-                'footer-link-description'        => '通过页脚链接进行无缝的网站探索和信息浏览。',
-                'category-carousel'              => '类别轮播',
-                'static-content'                 => '静态内容',
-                'footer-link'                    => '页脚链接',
-                'footer-link-form-title'         => '页脚链接',
-                'slider-description'             => '与轮播相关的主题定制。',
-                'slider-add-btn'                 => '添加轮播',
-                'general'                        => '通用',
-                'add-filter-btn'                 => '添加过滤器',
-                'save-btn'                       => '保存',
-                'filter-title'                   => '标题',
-                'sort'                           => '排序',
-                'desc'                           => '降序',
-                'asc'                            => '升序',
-                'limit'                          => '限制',
-                'footer-title'                   => '标题',
-                'link'                           => '链接',
-                'add-logo'                       => '添加标志',
-                'key'                            => '键：:key',
-                'value'                          => '值：:value',
-                'delete'                         => '删除',
-                'name'                           => '名称',
-                'sort-order'                     => '排序顺序',
-                'status'                         => '状态',
-                'image'                          => '图片',
-                'create-filter'                  => '创建过滤器',
-                'key-input'                      => '键',
-                'value-input'                    => '值',
-                'html'                           => 'HTML',
-                'css'                            => 'CSS',
-                'add-footer-link-btn'            => '添加页脚链接',
-                'filters'                        => '过滤器',
-                'edit'                           => '编辑',
-                'path'                           => '路径',
-                'add-link'                       => '添加链接',
-                'create-slider'                  => '创建轮播',
-                'slider-image'                   => '轮播图片',
-                'column'                         => '列',
-                'select'                         => '选择',
-                'back'                           => '返回',
+                'title'      => '创建主题',
+                'save-btn'   => '保存',
+                'name'       => '名称',
+                'sort-order' => '排序顺序',
+                'type'       => [
+                    'title'             => '类型',
+                    'product-carousel'  => '产品轮播',
+                    'category-carousel' => '分类轮播',
+                    'static-content'    => '静态内容',
+                    'image-carousel'    => '图片轮播',
+                    'footer-links'      => '页脚链接',
+                ],
             ],
 
             'edit' => [
@@ -2584,6 +2547,7 @@ return [
                 'slider-add-btn'                => '添加轮播',
                 'general'                       => '通用',
                 'add-filter-btn'                => '添加过滤器',
+                'add-image-btn'                 => '添加图片',
                 'save-btn'                      => '保存',
                 'filter-title'                  => '标题',
                 'sort'                          => '排序',
@@ -2613,6 +2577,7 @@ return [
                 'path'                          => '路径',
                 'edit'                          => '编辑',
                 'back'                          => '返回',
+                'preview'                       => '预览',
             ],
 
             'create-success' => '主题创建成功',
@@ -2866,12 +2831,6 @@ return [
                 'settings' => [
                     'settings-info' => '设置愿望清单、新闻订阅、电子邮件验证和社交登录。',
                     'title'         => '设置',
-
-                    'wishlist' => [
-                        'share'      => '启用分享',
-                        'title'      => '愿望清单',
-                        'title-info' => '"愿望清单"是用户个性化的心愿物品收藏，允许用户保存未来参考或潜在购买的产品。',
-                    ],
 
                     'newsletter' => [
                         'subscription' => '允许新闻订阅',

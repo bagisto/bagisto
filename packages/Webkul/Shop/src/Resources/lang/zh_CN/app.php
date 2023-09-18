@@ -74,6 +74,7 @@ return [
                 'delete-profile'          => '删除个人资料',
                 'edit-profile'            => '编辑个人资料',
                 'edit'                    => '编辑',
+                'edit-success'            => '成功更新个人资料',
                 'phone'                   => '电话',
                 'current-password'        => '当前密码',
                 'new-password'            => '新密码',
@@ -89,6 +90,7 @@ return [
                 'female'                  => '女性',
                 'other'                   => '其他',
                 'save'                    => '保存',
+                'unmatch'                 => '旧密码不匹配。',
             ],
 
             'addresses' => [
@@ -255,6 +257,7 @@ return [
                 'delete-all'         => '全部删除',
                 'empty'              => '愿望清单中没有任何商品。',
                 'move-to-cart'       => '移到购物车',
+                'moved-success'      => '商品成功移入購物車',    
                 'profile'            => '个人资料',
                 'removed'            => '商品已成功从愿望清单中移除',
                 'remove-fail'        => '商品无法从愿望清单中移除',

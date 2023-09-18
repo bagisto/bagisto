@@ -1029,8 +1029,8 @@ return [
             'category'             => 'Kategorie',
             'update-success'       => 'Kategorie erfolgreich aktualisiert.',
             'delete-success'       => 'Die Kategorie wurde erfolgreich gelöscht.',
-            'delete-category-root' => 'Die Root-Kategorie :name kann nicht gelöscht werden.',
-            'delete-failed'        => 'Die :name konnte nicht gelöscht werden.',
+            'delete-category-root' => 'Die Stammkategorie kann nicht gelöscht werden.',
+            'delete-failed'        => 'Fehler beim Löschen der Kategorie aufgetreten',
         ],
 
         'families'   => [
@@ -2300,7 +2300,7 @@ return [
                 'title'             => 'Kanäle',
                 'create-btn'        => 'Kanal erstellen',
                 'delete-success'    => 'Kanal erfolgreich gelöscht.',
-                'delete-failed'     => ':name konnte nicht gelöscht werden',
+                'delete-failed'     => 'Kanal konnte nicht gelöscht werden',
                 'last-delete-error' => 'Der letzte Kanal konnte nicht gelöscht werden.',
 
                 'datagrid' => [
@@ -2422,17 +2422,6 @@ return [
                 'edit'  => [
                     'title'    => 'Benutzer bearbeiten',
                 ],
-
-                'activate-warning'   => 'Ihr Konto muss noch aktiviert werden. Bitte kontaktieren Sie den Administrator.',
-                'create-success'     => 'Benutzer wurde erfolgreich erstellt.',
-                'cannot-change'      => 'Benutzer kann nicht geändert werden',
-                'delete-failed'      => 'Benutzer konnte nicht gelöscht werden.',
-                'delete-success'     => 'Benutzer wurde erfolgreich gelöscht.',
-                'incorrect-password' => 'Falsches Passwort',
-                'last-delete-error'  => 'Letzter Benutzerlöschfehler',
-                'login-error'        => 'Bitte überprüfen Sie Ihre Anmeldeinformationen und versuchen Sie es erneut.',
-                'update-success'     => 'Benutzer wurde erfolgreich aktualisiert.',
-                'delete-warning'     => 'Sind Sie sicher, dass Sie diese Aktion ausführen möchten?',
             ],
 
             'edit'  => [
@@ -2448,9 +2437,16 @@ return [
                 'save-btn'         => 'Benutzer speichern',
             ],
 
-            'update-success' => 'Benutzer wurde erfolgreich aktualisiert.',
-            'delete-success' => 'Benutzer wurde erfolgreich gelöscht.',
-
+            'delete-failed'      => 'Benutzerlöschung fehlgeschlagen.',
+            'cannot-change'      => 'Benutzer kann nicht geändert werden.',
+            'update-success'     => 'Benutzer erfolgreich aktualisiert.',
+            'delete-success'     => 'Benutzer erfolgreich gelöscht.',
+            'incorrect-password' => 'Falsches Passwort',
+            'create-success'     => 'Benutzer erfolgreich erstellt.',
+            'delete-warning'     => 'Sind Sie sicher, dass Sie diese Aktion ausführen möchten?',
+            'login-error'        => 'Bitte überprüfen Sie Ihre Anmeldeinformationen und versuchen Sie es erneut.',
+            'activate-warning'   => 'Ihr Konto wurde noch nicht aktiviert. Bitte kontaktieren Sie den Administrator.',
+            'last-delete-error'  => 'Letzte Benutzerlöschung fehlgeschlagen.'
         ],
 
         'roles' => [
@@ -2520,52 +2516,18 @@ return [
             ],
 
             'create' => [
-                'title'                          => 'Thema erstellen',
-                'sliders'                        => 'Slider',
-                'product-carousel'               => 'Produktkarussell',
-                'product-carousel-description'   => 'Zeigen Sie Produkte elegant mit einem dynamischen und responsiven Produktkarussell.',
-                'category-carousel-description'  => 'Attraktive Darstellung dynamischer Kategorien mit einem responsiven Kategoriekarussell.',
-                'static-content-description'     => 'Verbessern Sie die Engagement durch präzise, informative statische Inhalte für Ihr Publikum.',
-                'footer-link-description'        => 'Navigieren Sie über Fußzeilenlinks nahtlos auf der Website und erhalten Sie Informationen.',
-                'category-carousel'              => 'Kategoriekarussell',
-                'static-content'                 => 'Statischer Inhalt',
-                'footer-link'                    => 'Fußzeilenlinks',
-                'footer-link-form-title'         => 'Fußzeilenlink',
-                'slider-description'             => 'Mit diesem Thema können Sie Slider anpassen.',
-                'slider-add-btn'                 => 'Slider hinzufügen',
-                'general'                        => 'Allgemein',
-                'add-filter-btn'                 => 'Filter hinzufügen',
-                'save-btn'                       => 'Thema speichern',
-                'filter-title'                   => 'Titel',
-                'sort'                           => 'Sortieren',
-                'desc'                           => 'Absteigend',
-                'asc'                            => 'Aufsteigend',
-                'limit'                          => 'Limit',
-                'footer-title'                   => 'Titel',
-                'link'                           => 'Link',
-                'add-logo'                       => 'Logo hinzufügen',
-                'key'                            => 'Schlüssel: :key',
-                'value'                          => 'Wert: :value',
-                'delete'                         => 'Löschen',
-                'name'                           => 'Name',
-                'sort-order'                     => 'Sortierreihenfolge',
-                'status'                         => 'Status',
-                'image'                          => 'Bild',
-                'create-filter'                  => 'Filter erstellen',
-                'key-input'                      => 'Schlüssel',
-                'value-input'                    => 'Wert',
-                'html'                           => 'HTML',
-                'css'                            => 'CSS',
-                'add-footer-link-btn'            => 'Fußzeilenlink hinzufügen',
-                'filters'                        => 'Filter',
-                'edit'                           => 'Bearbeiten',
-                'path'                           => 'Pfad',
-                'add-link'                       => 'Link hinzufügen',
-                'create-slider'                  => 'Slider erstellen',
-                'slider-image'                   => 'Slider-Bild',
-                'column'                         => 'Spalte',
-                'select'                         => 'Auswählen',
-                'back'                           => 'Zurück',
+                'title'      => 'Thema erstellen',
+                'save-btn'   => 'Speichern',
+                'name'       => 'Name',
+                'sort-order' => 'Sortierreihenfolge',
+                'type'       => [
+                    'title'             => 'Typ',
+                    'product-carousel'  => 'Produktkarussell',
+                    'category-carousel' => 'Kategoriekarussell',
+                    'static-content'    => 'Statischer Inhalt',
+                    'image-carousel'    => 'Bildkarussell',
+                    'footer-links'      => 'Fußzeilen-Links',
+                ],
             ],
 
             'edit' => [
@@ -2585,6 +2547,7 @@ return [
                 'slider-add-btn'                => 'Slider hinzufügen',
                 'general'                       => 'Allgemein',
                 'add-filter-btn'                => 'Filter hinzufügen',
+                'add-image-btn'                 => 'Bild hinzufügen',
                 'save-btn'                      => 'Thema speichern',
                 'filter-title'                  => 'Titel',
                 'sort'                          => 'Sortieren',
@@ -2614,6 +2577,7 @@ return [
                 'path'                          => 'Pfad',
                 'edit'                          => 'Bearbeiten',
                 'back'                          => 'Zurück',
+                'preview'                       => 'Vorschau',
             ],
 
             'create-success' => 'Thema erfolgreich erstellt',
@@ -2867,12 +2831,6 @@ return [
                 'settings' => [
                     'settings-info' => 'Wunschliste, Newsletter-Abonnement, E-Mail-Verifikation und soziale Anmeldung einrichten.',
                     'title'         => 'Einstellungen',
-
-                    'wishlist' => [
-                        'share'      => 'Freigabe aktivieren',
-                        'title'      => 'Wunschliste',
-                        'title-info' => 'Eine "Wunschliste" ist eine persönliche Sammlung von gewünschten Elementen, die Benutzern ermöglicht, Produkte für zukünftige Referenzen oder mögliche Einkäufe zu speichern.',
-                    ],
 
                     'newsletter' => [
                         'subscription' => 'Newsletter-Abonnement aktivieren',

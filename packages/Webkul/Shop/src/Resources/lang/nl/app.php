@@ -74,6 +74,7 @@ return [
                 'delete-profile'          => 'Profiel Verwijderen',
                 'edit-profile'            => 'Profiel Bewerken',
                 'edit'                    => 'Bewerken',
+                'edit-success'            => 'Profiel succesvol bijgewerkt',
                 'phone'                   => 'Telefoon',
                 'current-password'        => 'Huidig Wachtwoord',
                 'new-password'            => 'Nieuw Wachtwoord',
@@ -89,6 +90,7 @@ return [
                 'female'                  => 'Vrouw',
                 'other'                   => 'Anders',
                 'save'                    => 'Opslaan',
+                'unmatch'                 => 'Het oude wachtwoord komt niet overeen.',
             ],
 
             'addresses' => [
@@ -255,6 +257,7 @@ return [
                 'delete-all'         => 'Alles Verwijderen',
                 'empty'              => 'Er zijn geen producten toegevoegd aan de wenslijstpagina.',
                 'move-to-cart'       => 'Verplaatsen naar winkelwagen',
+                'moved-success'      => 'Item succesvol verplaatst naar de winkelwagen',    
                 'profile'            => 'Profiel',
                 'removed'            => 'Item succesvol verwijderd uit de wenslijst',
                 'remove-fail'        => 'Item kan niet worden verwijderd uit de wenslijst',
@@ -402,7 +405,7 @@ return [
         'name'                   => 'Naam',
         'qty'                    => 'Aantal',
         'offers'                 => 'Koop :qty voor :price per stuk en bespaar :discount%',
-    
+
         'sort-by'                => [
             'title'   => 'Sorteer op',
             'options' => [
@@ -414,29 +417,29 @@ return [
                 'expensive-first' => 'Duurste eerst',
             ],
         ],
-    
+
         'view' => [
             'type' => [
                 'configurable' => [
                     'select-options'       => 'Selecteer een optie',
                     'select-above-options' => 'Selecteer bovenstaande opties',
                 ],
-    
+
                 'bundle' => [
                     'none' => 'Geen',
                 ],
-    
+
                 'downloadable' => [
                     'samples' => 'Voorbeelden',
                     'links'   => 'Links',
                     'sample'  => 'Voorbeeld',
                 ],
-    
+
                 'grouped' => [
                     'name' => 'Naam',
                 ],
             ],
-    
+
             'reviews' => [
                 'cancel'      => 'Annuleren',
                 'success'     => 'Beoordeling succesvol ingediend.',
@@ -452,11 +455,11 @@ return [
             'sort'      => 'Sorteer',
             'clear-all' => 'Alles wissen',
         ],
-    
+
         'toolbar' => [
             'show' => 'Toon',
         ],
-    
+
         'view' => [
             'empty'     => 'Geen producten beschikbaar in deze categorie',
             'load-more' => 'Meer laden',
@@ -486,7 +489,7 @@ return [
             'order-id-info' => 'Uw bestelnummer is #:order_id',
             'info'          => 'We sturen u een e-mail met uw bestelgegevens en trackinginformatie.',
         ],
-    
+
         'cart' => [
             'item-add-to-cart'          => 'Item succesvol toegevoegd',
             'return-to-shop'            => 'Terug naar de winkel',
@@ -503,7 +506,7 @@ return [
             'inventory-warning'         => 'De gevraagde hoeveelheid is niet beschikbaar, probeer het later opnieuw.',
             'illegal'                   => 'De hoeveelheid kan niet minder zijn dan één.',
             'inactive'                  => 'Het item is gedeactiveerd en vervolgens uit de winkelwagen verwijderd.',
-    
+
             'index' => [
                 'home'                     => 'Home',
                 'cart'                     => 'Winkelwagen',
@@ -524,7 +527,7 @@ return [
                 'move-to-wishlist'         => 'Verplaatsen naar verlanglijst',
                 'items-selected'           => ':count items geselecteerd',
             ],
-    
+
             'coupon'   => [
                 'code'            => 'Couponcode',
                 'applied'         => 'Coupon toegepast',
@@ -540,7 +543,7 @@ return [
                 'subtotal'        => 'Subtotaal',
                 'button-title'    => 'Toepassen',
             ],
-    
+
             'mini-cart' => [
                 'see-details'          => 'Details bekijken',
                 'shopping-cart'        => 'Winkelwagen',
@@ -551,7 +554,7 @@ return [
                 'continue-to-checkout' => 'Doorgaan naar afrekenen',
                 'view-cart'            => 'Bekijk winkelwagen',
             ],
-    
+
             'summary' => [
                 'cart-summary'        => 'Winkelwagenoverzicht',
                 'sub-total'           => 'Subtotaal',
@@ -563,7 +566,7 @@ return [
                 'proceed-to-checkout' => 'Doorgaan naar afrekenen',
             ],
         ],
-    
+
         'onepage' => [
             'addresses' => [
                 'billing' => [
@@ -585,11 +588,11 @@ return [
                     'save-address'         => 'Dit adres opslaan',
                     'confirm'              => 'Bevestigen',
                 ],
-    
+
                 'index' => [
                     'confirm' => 'Bevestigen',
                 ],
-    
+
                 'shipping' => [
                     'shipping-address' => 'Verzendadres',
                     'add-new-address'  => 'Nieuw adres toevoegen',
@@ -610,7 +613,7 @@ return [
                     'confirm'          => 'Bevestigen',
                 ],
             ],
-    
+
             'coupon' => [
                 'discount'        => 'Couponkorting',
                 'code'            => 'Couponcode',
@@ -624,20 +627,20 @@ return [
                 'enter-your-code' => 'Voer uw code in',
                 'subtotal'        => 'Subtotaal',
             ],
-    
+
             'index' => [
                 'home'     => 'Home',
                 'checkout' => 'Afrekenen',
             ],
-    
+
             'payment' => [
                 'payment-method' => 'Betaalmethode',
             ],
-    
+
             'shipping' => [
                 'shipping-method' => 'Verzendmethode',
             ],
-    
+
             'summary' => [
                 'cart-summary'     => 'Winkelwagenoverzicht',
                 'sub-total'        => 'Subtotaal',
@@ -661,27 +664,27 @@ return [
 
     'errors' => [
         'go-to-home'   => 'Ga naar Startpagina',
-    
+
         '404' => [
             'title'       => '404 Pagina Niet Gevonden',
             'description' => 'Oeps! De pagina die je zoekt is met vakantie. Het lijkt erop dat we niet konden vinden wat je zocht.',
         ],
-    
+
         '401' => [
             'title'       => '401 Niet Geautoriseerd',
             'description' => 'Oeps! Het lijkt erop dat je geen toegang hebt tot deze pagina. Het lijkt erop dat je de vereiste referenties mist.',
         ],
-    
+
         '403' => [
             'title'       => '403 Verboden',
             'description' => 'Oeps! Deze pagina is verboden terrein. Het lijkt erop dat je niet de vereiste machtigingen hebt om deze inhoud te bekijken.',
         ],
-    
+
         '500' => [
             'title'       => '500 Interne Serverfout',
             'description' => 'Oeps! Er is iets misgegaan. Het lijkt erop dat we moeite hebben met het laden van de pagina die je zoekt.',
         ],
-    
+
         '503' => [
             'title'       => '503 Service Niet Beschikbaar',
             'description' => 'Oeps! Het lijkt erop dat we tijdelijk offline zijn voor onderhoud. Kom later nog eens terug.',
@@ -707,7 +710,7 @@ return [
     'emails' => [
         'dear'   => 'Beste :customer_name',
         'thanks' => 'Als u hulp nodig heeft, neem dan contact met ons op via <a href=":link" style=":style">:email</a>.<br/>Bedankt!',
-    
+
         'customers' => [
             'registration' => [
                 'subject'     => 'Nieuwe Klantregistratie',
@@ -715,32 +718,32 @@ return [
                 'description' => 'Uw account is nu succesvol aangemaakt en u kunt inloggen met uw e-mailadres en wachtwoord. Na het inloggen kunt u andere services gebruiken, zoals het bekijken van eerdere bestellingen, verlanglijstjes en het bewerken van uw accountinformatie.',
                 'sign-in'     => 'Aanmelden',
             ],
-    
+
             'forgot-password' => [
                 'subject'        => 'E-mail wachtwoord resetten',
                 'greeting'       => 'Wachtwoord vergeten!',
                 'description'    => 'U ontvangt deze e-mail omdat we een verzoek voor het resetten van uw wachtwoord voor uw account hebben ontvangen.',
                 'reset-password' => 'Wachtwoord resetten',
             ],
-    
+
             'update-password' => [
                 'subject'     => 'Wachtwoord bijgewerkt',
                 'greeting'    => 'Wachtwoord bijgewerkt!',
                 'description' => 'U ontvangt deze e-mail omdat u uw wachtwoord heeft bijgewerkt.',
             ],
-    
+
             'verification' => [
                 'subject'      => 'E-mailadres Verificatie E-mail',
                 'greeting'     => 'Welkom!',
                 'description'  => 'Klik op de onderstaande knop om uw e-mailadres te verifiëren.',
                 'verify-email' => 'E-mailadres Verifiëren',
             ],
-    
+
             'commented' => [
                 'subject'     => 'Nieuwe opmerking toegevoegd',
                 'description' => 'Opmerking is - :note',
             ],
-    
+
             'subscribed' => [
                 'subject'     => 'U! Abonneer u op Onze Nieuwsbrief',
                 'greeting'    => 'Welkom bij onze nieuwsbrief!',
@@ -748,7 +751,7 @@ return [
                 'unsubscribe' => 'Afmelden',
             ],
         ],
-    
+
         'orders' => [
             'created' => [
                 'subject'  => 'Nieuwe Bestellingsbevestiging',
@@ -756,40 +759,40 @@ return [
                 'greeting' => 'Bedankt voor uw bestelling :order_id geplaatst op :created_at',
                 'summary'  => 'Samenvatting van de bestelling',
             ],
-    
+
             'invoiced' => [
                 'subject'  => 'Nieuwe Factuurbevestiging',
                 'title'    => 'Factuurbevestiging!',
                 'greeting' => 'Uw factuur #:invoice_id voor bestelling :order_id aangemaakt op :created_at',
                 'summary'  => 'Samenvatting van de factuur',
             ],
-    
+
             'shipped' => [
                 'subject'  => 'Nieuwe Verzendbevestiging',
                 'title'    => 'Bestelling Verzonden!',
                 'greeting' => 'Uw bestelling :order_id geplaatst op :created_at is verzonden',
                 'summary'  => 'Samenvatting van de verzending',
             ],
-    
+
             'refunded' => [
                 'subject'  => 'Nieuwe Terugbetalingsbevestiging',
                 'title'    => 'Bestelling Terugbetaald!',
                 'greeting' => 'De terugbetaling is gestart voor :order_id geplaatst op :created_at',
                 'summary'  => 'Samenvatting van de terugbetaling',
             ],
-    
+
             'canceled' => [
                 'subject'  => 'Nieuwe Bestellingsannulering',
                 'title'    => 'Bestelling Geannuleerd!',
                 'greeting' => 'Uw bestelling :order_id geplaatst op :created_at is geannuleerd',
                 'summary'  => 'Samenvatting van de bestelling',
             ],
-    
+
             'commented' => [
                 'subject' => 'Nieuwe opmerking toegevoegd',
                 'title'   => 'Nieuwe opmerking toegevoegd aan uw bestelling :order_id geplaatst op :created_at',
             ],
-    
+
             'shipping-address'  => 'Verzendadres',
             'carrier'           => 'Vervoerder',
             'tracking-number'   => 'Trackingnummer: :tracking_number',
@@ -809,4 +812,3 @@ return [
         ],
     ],
 ];
-    

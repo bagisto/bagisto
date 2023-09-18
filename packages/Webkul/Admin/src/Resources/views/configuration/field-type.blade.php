@@ -17,6 +17,7 @@
     <div class="flex justify-between">
         <x-admin::form.control-group.label
             :for="$name"
+            :class="$validations"
         >
             @lang($field['title'])
         </x-admin::form.control-group.label>

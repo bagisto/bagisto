@@ -155,7 +155,7 @@
                                 </span>
                             </a>
 
-                            <a @click="deleteModal(record.actions['1']?.url)">
+                            <a @click="deleteModal(record.actions['1']?.url, record.user_id, records?.length)">
                                 <span
                                     :class="record.actions['1'].icon"
                                     class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
@@ -385,7 +385,7 @@
                                     >
                                     </v-media-images>
 
-                                    <p class="my-3 text-[14px] text-gray-400">
+                                    <p class="required my-3 text-[14px] text-gray-400">
                                         @lang('admin::app.settings.users.index.create.upload-image-info')
                                     </p>
                                 </x-admin::form.control-group>
@@ -405,8 +405,67 @@
                         </x-slot:footer>
                     </x-admin::modal>
                 </form>
-            </x-admin::form>                           
+            </x-admin::form>
 
+            <!-- User Delete Password Form -->
+            <x-admin::form
+                v-slot="{ meta, errors, handleSubmit }"
+                as="div"
+            >
+                <form 
+                    @submit="handleSubmit($event, UserConfirmModal)"
+                    ref="confirmPassword"
+                >
+                    <x-admin::modal ref="confirmPasswordModal">
+                        <!-- Modal Header -->
+                        <x-slot:header>
+                            <p class="text-[18px] text-gray-800 font-bold">
+                                @lang('Confirm Password Before DELETE')
+                            </p>  
+                            
+                        </x-slot:header>
+        
+                        <x-slot:content>
+                            <!-- Modal Content -->
+                            <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                <!-- Password -->
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('Enter Current Password')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="password"
+                                        name="password"
+                                        id="password"
+                                        rules="required"
+                                        :label="trans('Password')" 
+                                        :placeholder="trans('Password')"
+                                    >
+                                    </x-admin::form.control-group.control>
+        
+                                    <x-admin::form.control-group.error
+                                        control-name="password"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+                            </div>
+                        </x-slot:content>
+        
+                        <x-slot:footer>
+                            <!-- Modal Submission -->
+                            <div class="flex gap-x-[10px] items-center">
+                                <button 
+                                    type="submit"
+                                    class="primary-button"
+                                >
+                                    @lang('Confirm Delete This Account')
+                                </button>
+                            </div>
+                        </x-slot:footer>
+                    </x-admin::modal>
+                </form>
+            </x-admin::form>
         </script>
 
         <script type="module">
@@ -467,6 +526,11 @@
                                         images: response.data.data.user.image_url
                                         ? [{ id: 'image', url: response.data.data.user.image_url }]
                                         : [],
+                                        user: {
+                                            ...response.data.data.user,
+                                            password:'',
+                                            password_confirmation:'',
+                                        },
                                 };
 
                                 this.$refs.modalForm.setValues(response.data.data.user);
@@ -480,18 +544,49 @@
                             });
                     },
 
-                    deleteModal(url) {
-                        if (! confirm('@lang('admin::app.settings.users.index.delete-warning')')) {
+                    deleteModal(url, id, recordCount) {
+                        if (! confirm('@lang('admin::app.settings.users.delete-warning')')) {
                             return;
                         }
+                        if (this.currentUserId == id && recordCount != 1) {
+                            this.$refs.confirmPasswordModal.toggle();
+                        } else {
+                            this.$axios.post(url, {
+                                    '_method': 'DELETE'
+                                })
+                                .then((response) => {
+                                    if (response.data.data.statusCode == 200) {
+                                        this.$refs.datagrid.get();
 
-                        this.$axios.post(url, {
-                                '_method': 'DELETE'
-                            })
+                                        this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                    } else {
+                                        this.$emitter.emit('add-flash', { type: 'error', message: response.data.data.message });
+                                    }
+                                })
+                                .catch(error => {
+                                    if (error.response.status == 422) {
+                                        setErrors(error.response.data.errors);
+                                    }
+                                });
+                        }
+                    },
+
+                    UserConfirmModal() {
+                        let formData = new FormData(this.$refs.confirmPassword);
+
+                        formData.append('_method', 'put');
+                        
+                        this.$axios.post("{{ route('admin.settings.users.destroy')}}", formData)
                             .then((response) => {
-                                this.$refs.datagrid.get();
+                                if (response.data.data.statusCode === 200) {
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                     window.location.href = response.data.data.redirectUrl;
+                                } else {
+                                    this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
+
+                                    this.$refs.confirmPasswordModal.toggle();
+                                }
                             })
                             .catch(error => {
                                 if (error.response.status == 422) {

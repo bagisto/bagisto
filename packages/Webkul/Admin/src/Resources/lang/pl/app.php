@@ -1029,8 +1029,8 @@ return [
             'category'             => 'Kategoria',
             'update-success'       => 'Kategoria została pomyślnie zaktualizowana.',
             'delete-success'       => 'Kategoria została pomyślnie usunięta.',
-            'delete-category-root' => 'Korzeń :name nie może zostać usunięty.',
-            'delete-failed'        => 'Nie można usunąć :name',
+            'delete-category-root' => 'Kategoria główna nie może zostać usunięta.',
+            'delete-failed'        => 'Wystąpił błąd podczas usuwania kategorii',
         ],
 
         'families' => [
@@ -2300,7 +2300,7 @@ return [
                 'title'             => 'Kanały',
                 'create-btn'        => 'Utwórz Kanał',
                 'delete-success'    => 'Kanał pomyślnie usunięty.',
-                'delete-failed'     => 'Usunięcie :name nie powiodło się',
+                'delete-failed'     => 'Usunięcie Kanał nie powiodło się',
                 'last-delete-error' => 'Ostatni kanał nie może zostać usunięty.',
 
                 'datagrid' => [
@@ -2422,17 +2422,6 @@ return [
                 'edit'  => [
                     'title'    => 'Edytuj Użytkownika',
                 ],
-
-                'activate-warning'   => 'Twoje konto nie zostało jeszcze aktywowane, skontaktuj się z administratorem.',
-                'create-success'     => 'Użytkownik został pomyślnie utworzony.',
-                'cannot-change'      => 'Nie można zmienić użytkownika',
-                'delete-failed'      => 'Usuwanie użytkownika nie powiodło się.',
-                'delete-success'     => 'Użytkownik został pomyślnie usunięty.',
-                'incorrect-password' => 'Nieprawidłowe hasło',
-                'last-delete-error'  => 'Ostatnie usunięcie użytkownika nie powiodło się',
-                'login-error'        => 'Proszę sprawdzić dane logowania i spróbować ponownie.',
-                'update-success'     => 'Użytkownik został pomyślnie zaktualizowany.',
-                'delete-warning'     => 'Czy na pewno chcesz wykonać tę operację?',
             ],
 
             'edit'  => [
@@ -2448,8 +2437,16 @@ return [
                 'save-btn'         => 'Zapisz Użytkownika',
             ],
 
-            'update-success' => 'Użytkownik został pomyślnie zaktualizowany.',
-            'delete-success' => 'Użytkownik został pomyślnie usunięty.',
+            'delete-failed'      => 'Usuwanie użytkownika nie powiodło się.',
+            'cannot-change'      => 'Nie można zmienić użytkownika.',
+            'update-success'     => 'Użytkownik został pomyślnie zaktualizowany.',
+            'delete-success'     => 'Użytkownik został pomyślnie usunięty.',
+            'incorrect-password' => 'Niepoprawne hasło',
+            'create-success'     => 'Użytkownik został pomyślnie utworzony.',
+            'delete-warning'     => 'Czy na pewno chcesz wykonać tę akcję?',
+            'login-error'        => 'Sprawdź swoje dane logowania i spróbuj ponownie.',
+            'activate-warning'   => 'Twoje konto nie zostało jeszcze aktywowane, skontaktuj się z administratorem.',
+            'last-delete-error'  => 'Usuwanie ostatniego użytkownika nie powiodło się.'
         ],
 
         'roles' => [
@@ -2518,52 +2515,18 @@ return [
             ],
 
             'create' => [
-                'title'                          => 'Utwórz Motyw',
-                'sliders'                        => 'Slajdy',
-                'product-carousel'               => 'Karuzela Produktów',
-                'product-carousel-description'   => 'Elegancko prezentuj produkty za pomocą dynamicznej i responsywnej karuzeli produktów.',
-                'category-carousel-description'  => 'Przyciągnij uwagę dynamicznych kategorii, korzystając z responsywnej karuzeli kategorii.',
-                'static-content-description'     => 'Zwiększ zaangażowanie za pomocą treści statycznych, które są zwięzłe i informacyjne dla Twojej publiczności.',
-                'footer-link-description'        => 'Nawiguj za pomocą linków w stopce, aby bezproblemowo przeglądać stronę internetową i uzyskiwać informacje.',
-                'category-carousel'              => 'Karuzela Kategorii',
-                'static-content'                 => 'Treść Statyczna',
-                'footer-link'                    => 'Linki w Stopce',
-                'footer-link-form-title'         => 'Link w Stopce',
-                'slider-description'             => 'Dostosowanie motywu związane z sliderem.',
-                'slider-add-btn'                 => 'Dodaj Slajd',
-                'general'                        => 'Ogólne',
-                'add-filter-btn'                 => 'Dodaj Filtr',
-                'save-btn'                       => 'Zapisz',
-                'filter-title'                   => 'Tytuł',
-                'sort'                           => 'Sortuj',
-                'desc'                           => 'Malejąco',
-                'asc'                            => 'Rosnąco',
-                'limit'                          => 'Limit',
-                'footer-title'                   => 'Tytuł',
-                'link'                           => 'Link',
-                'add-logo'                       => 'Dodaj Logo',
-                'key'                            => 'Klucz: :key',
-                'value'                          => 'Wartość: :value',
-                'delete'                         => 'Usuń',
-                'name'                           => 'Nazwa',
-                'sort-order'                     => 'Kolejność Sortowania',
-                'status'                         => 'Status',
-                'image'                          => 'Obraz',
-                'create-filter'                  => 'Utwórz Filtr',
-                'key-input'                      => 'Klucz',
-                'value-input'                    => 'Wartość',
-                'html'                           => 'HTML',
-                'css'                            => 'CSS',
-                'add-footer-link-btn'            => 'Dodaj Link w Stopce',
-                'filters'                        => 'Filtry',
-                'edit'                           => 'Edytuj',
-                'path'                           => 'Ścieżka',
-                'add-link'                       => 'Dodaj Link',
-                'create-slider'                  => 'Utwórz Slajd',
-                'slider-image'                   => 'Obraz Slajdu',
-                'column'                         => 'Kolumna',
-                'select'                         => 'Wybierz',
-                'back'                           => 'Wróć',
+                'title'      => 'Utwórz Motyw',
+                'save-btn'   => 'Zapisz',
+                'name'       => 'Nazwa',
+                'sort-order' => 'Kolejność Sortowania',
+                'type'       => [
+                    'title'             => 'Typ',
+                    'product-carousel'  => 'Karuzela Produktów',
+                    'category-carousel' => 'Karuzela Kategorii',
+                    'static-content'    => 'Treść Statyczna',
+                    'image-carousel'    => 'Karuzela Obrazów',
+                    'footer-links'      => 'Linki Stopki',
+                ],
             ],
 
             'edit' => [
@@ -2583,6 +2546,7 @@ return [
                 'slider-add-btn'                => 'Dodaj Slajd',
                 'general'                       => 'Ogólne',
                 'add-filter-btn'                => 'Dodaj Filtr',
+                'add-image-btn'                 => 'Dodaj Obraz',
                 'save-btn'                      => 'Zapisz',
                 'filter-title'                  => 'Tytuł',
                 'sort'                          => 'Sortuj',
@@ -2612,6 +2576,7 @@ return [
                 'path'                          => 'Ścieżka',
                 'edit'                          => 'Edytuj',
                 'back'                          => 'Wróć',
+                'preview'                       => 'Podgląd',
             ],
 
             'create-success' => 'Motyw został pomyślnie utworzony',
@@ -2865,12 +2830,6 @@ return [
                 'settings' => [
                     'settings-info' => 'Ustawienia listy życzeń, subskrypcji newslettera, weryfikacji e-mail i logowania społecznościowego.',
                     'title'         => 'Ustawienia',
-
-                    'wishlist' => [
-                        'share'      => 'Włącz udostępnianie',
-                        'title'      => 'Lista życzeń',
-                        'title-info' => '"Lista życzeń" to spersonalizowana kolekcja pożądanych przedmiotów, pozwalająca użytkownikom zapisywać produkty na przyszłość lub potencjalny zakup.',
-                    ],
 
                     'newsletter' => [
                         'subscription' => 'Zezwalaj na subskrypcję newslettera',

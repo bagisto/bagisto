@@ -74,6 +74,7 @@ return [
                 'delete-profile'          => 'Profil löschen',
                 'edit-profile'            => 'Profil bearbeiten',
                 'edit'                    => 'Bearbeiten',
+                'edit-success'            => 'Profil erfolgreich aktualisiert',
                 'phone'                   => 'Telefon',
                 'current-password'        => 'Aktuelles Passwort',
                 'new-password'            => 'Neues Passwort',
@@ -89,6 +90,7 @@ return [
                 'female'                  => 'Weiblich',
                 'other'                   => 'Andere',
                 'save'                    => 'Speichern',
+                'unmatch'                 => 'Das alte Passwort stimmt nicht überein.',
             ],
 
             'addresses' => [
@@ -255,6 +257,7 @@ return [
                 'delete-all'         => 'Alle löschen',
                 'empty'              => 'Es wurden keine Produkte zur Wunschliste hinzugefügt.',
                 'move-to-cart'       => 'In den Warenkorb legen',
+                'moved-success'      => 'Artikel erfolgreich in den Warenkorb verschoben',    
                 'profile'            => 'Profil',
                 'removed'            => 'Artikel erfolgreich aus der Wunschliste entfernt',
                 'remove-fail'        => 'Artikel kann nicht aus der Wunschliste entfernt werden',

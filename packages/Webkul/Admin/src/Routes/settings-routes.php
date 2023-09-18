@@ -167,16 +167,12 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::delete('edit/{id}', 'destroy')->name('admin.settings.users.delete');
 
-            Route::get('confirm/{id}', 'confirm')->name('super.settings.users.confirm');
-
-            Route::post('confirm/{id}', 'destroy')->name('admin.settings.users.destroy');
+            Route::put('confirm', 'destroySelf')->name('admin.settings.users.destroy');
         });
     });
 
     Route::controller(ThemeController::class)->prefix('settings/themes')->group(function () {
         Route::get('', 'index')->name('admin.theme.index');
-
-        Route::get('create', 'create')->name('admin.theme.create');
 
         Route::get('edit/{id}', 'edit')->name('admin.theme.edit');
 

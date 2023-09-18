@@ -1029,8 +1029,8 @@ return [
             'category'             => 'Categoria',
             'update-success'       => 'Categoria atualizada com sucesso.',
             'delete-success'       => 'A categoria foi excluída com sucesso.',
-            'delete-category-root' => 'A categoria raiz :name não pode ser excluída.',
-            'delete-failed'        => 'A categoria :name não pôde ser excluída',
+            'delete-category-root' => 'A categoria raiz não pode ser excluída.',
+            'delete-failed'        => 'Erro ao excluir a categoria',
         ],
 
         'families'   => [
@@ -2300,7 +2300,7 @@ return [
                 'title'             => 'Canais',
                 'create-btn'        => 'Criar Canal',
                 'delete-success'    => 'Canal excluído com sucesso.',
-                'delete-failed'     => ':name Exclusão Falhou',
+                'delete-failed'     => 'Canal Exclusão Falhou',
                 'last-delete-error' => 'Falha na exclusão do último canal.',
 
                 'datagrid' => [
@@ -2422,17 +2422,6 @@ return [
                 'edit'  => [
                     'title'    => 'Editar Usuário',
                 ],
-
-                'activate-warning'   => 'Sua conta ainda não foi ativada, entre em contato com o administrador.',
-                'create-success'     => 'Usuário criado com sucesso.',
-                'cannot-change'      => 'Não é possível alterar o usuário',
-                'delete-failed'      => 'Falha ao excluir o usuário.',
-                'delete-success'     => 'Usuário excluído com sucesso.',
-                'incorrect-password' => 'Senha incorreta',
-                'last-delete-error'  => 'Falha na exclusão do último usuário',
-                'login-error'        => 'Verifique suas credenciais e tente novamente.',
-                'update-success'     => 'Usuário atualizado com sucesso.',
-                'delete-warning'     => 'Tem certeza de que deseja realizar esta ação?',
             ],
 
             'edit'  => [
@@ -2448,8 +2437,16 @@ return [
                 'save-btn'         => 'Salvar Usuário',
             ],
 
-            'update-success' => 'Usuário atualizado com sucesso.',
-            'delete-success' => 'Usuário excluído com sucesso.',
+            'delete-failed'      => 'Falha ao excluir usuário.',
+            'cannot-change'      => 'Não é possível alterar o usuário.',
+            'update-success'     => 'Usuário atualizado com sucesso.',
+            'delete-success'     => 'Usuário excluído com sucesso.',
+            'incorrect-password' => 'Senha incorreta',
+            'create-success'     => 'Usuário criado com sucesso.',
+            'delete-warning'     => 'Tem certeza de que deseja realizar esta ação?',
+            'login-error'        => 'Verifique suas credenciais e tente novamente.',
+            'activate-warning'   => 'Sua conta ainda não foi ativada, entre em contato com o administrador.',
+            'last-delete-error'  => 'Falha ao excluir o último usuário.'
         ],
 
         'roles' => [
@@ -2519,52 +2516,18 @@ return [
             ],
 
             'create' => [
-                'title'                          => 'Criar Tema',
-                'sliders'                        => 'Sliders',
-                'product-carousel'               => 'Carrossel de Produtos',
-                'product-carousel-description'   => 'Apresente produtos de forma elegante com um carrossel de produtos dinâmico e responsivo.',
-                'category-carousel-description'  => 'Exiba categorias dinâmicas de forma atrativa usando um carrossel de categorias responsivo.',
-                'static-content-description'     => 'Melhore o envolvimento com conteúdo estático conciso e informativo para seu público.',
-                'footer-link-description'        => 'Navegue através de links no rodapé para exploração e obtenção de informações sem interrupções no site.',
-                'category-carousel'              => 'Carrossel de Categorias',
-                'static-content'                 => 'Conteúdo Estático',
-                'footer-link'                    => 'Links no Rodapé',
-                'footer-link-form-title'         => 'Link no Rodapé',
-                'slider-description'             => 'Customização de temas relacionados a sliders.',
-                'slider-add-btn'                 => 'Adicionar Slider',
-                'general'                        => 'Geral',
-                'add-filter-btn'                 => 'Adicionar Filtro',
-                'save-btn'                       => 'Salvar',
-                'filter-title'                   => 'Título',
-                'sort'                           => 'Ordenar',
-                'desc'                           => 'Desc',
-                'asc'                            => 'Asc',
-                'limit'                          => 'Limite',
-                'footer-title'                   => 'Título',
-                'link'                           => 'Link',
-                'add-logo'                       => 'Adicionar Logotipo',
-                'key'                            => 'Chave: :key',
-                'value'                          => 'Valor: :value',
-                'delete'                         => 'Excluir',
-                'name'                           => 'Nome',
-                'sort-order'                     => 'Ordem de Classificação',
-                'status'                         => 'Status',
-                'image'                          => 'Imagem',
-                'create-filter'                  => 'Criar Filtro',
-                'key-input'                      => 'Chave',
-                'value-input'                    => 'Valor',
-                'html'                           => 'HTML',
-                'css'                            => 'CSS',
-                'add-footer-link-btn'            => 'Adicionar Link no Rodapé',
-                'filters'                        => 'Filtros',
-                'edit'                           => 'Editar',
-                'path'                           => 'Caminho',
-                'add-link'                       => 'Adicionar Link',
-                'create-slider'                  => 'Criar Slider',
-                'slider-image'                   => 'Imagem do Slider',
-                'column'                         => 'Coluna',
-                'select'                         => 'Selecionar',
-                'back'                           => 'Voltar',
+                'title'      => 'Criar Tema',
+                'save-btn'   => 'Salvar',
+                'name'       => 'Nome',
+                'sort-order' => 'Ordem de Classificação',
+                'type'       => [
+                    'title'             => 'Tipo',
+                    'product-carousel'  => 'Carrossel de Produtos',
+                    'category-carousel' => 'Carrossel de Categorias',
+                    'static-content'    => 'Conteúdo Estático',
+                    'image-carousel'    => 'Carrossel de Imagens',
+                    'footer-links'      => 'Links do Rodapé',
+                ],
             ],
 
             'edit' => [
@@ -2584,6 +2547,7 @@ return [
                 'slider-add-btn'                => 'Adicionar Slide',
                 'general'                       => 'Geral',
                 'add-filter-btn'                => 'Adicionar Filtro',
+                'add-image-btn'                 => 'Adicionar Imagem',
                 'save-btn'                      => 'Salvar',
                 'filter-title'                  => 'Título',
                 'sort'                          => 'Ordenar',
@@ -2613,6 +2577,7 @@ return [
                 'url'                           => 'URL',
                 'edit'                          => 'Editar',
                 'back'                          => 'Voltar',
+                'preview'                       => 'Prévia',
             ],
 
             'create-success' => 'Tema criado com sucesso',
@@ -2866,12 +2831,6 @@ return [
                 'settings' => [
                     'settings-info' => 'Defina lista de desejos, assinaturas de boletim informativo, verificação de e-mail e login social.',
                     'title'         => 'Configurações',
-
-                    'wishlist' => [
-                        'share'      => 'Ativar Compartilhamento',
-                        'title'      => 'Lista de Desejos',
-                        'title-info' => '"Lista de desejos" é uma coleção personalizada de itens desejados, permitindo que os usuários salvem produtos para referência futura ou compra potencial.',
-                    ],
 
                     'newsletter' => [
                         'subscription' => 'Permitir Assinatura de Boletim Informativo',

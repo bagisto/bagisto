@@ -1,5 +1,3 @@
-@inject('channels', 'Webkul\Core\Repositories\ChannelRepository')
-
 @php
     $currentLocale = core()->getRequestedLocale();
 
@@ -254,7 +252,7 @@
                                 @lang('admin::app.cms.create.channels')
                             </p>
 
-                            @foreach($channels->all() as $channel)
+                            @foreach(core()->getAllChannels() as $channel)
                                 <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
                                     <x-admin::form.control-group.control
                                         type="checkbox"

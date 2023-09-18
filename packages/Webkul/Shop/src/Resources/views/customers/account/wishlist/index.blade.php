@@ -31,7 +31,7 @@
                         </h2>
 
                         <div
-                            class="bs-secondary-button flex gap-x-[10px] items-center py-[12px] px-[20px] border-[#E9E9E9]"
+                            class="secondary-button flex gap-x-[10px] items-center py-[12px] px-[20px] border-[#E9E9E9]"
                             @click="removeAll"
                             v-if="wishlist.length"
                         >
@@ -115,7 +115,7 @@
 
                                                 <!--Wishlist Item removed button-->
                                                 <a 
-                                                    class="text-[16px] text-[#0A49A7] cursor-pointer" 
+                                                    class="flex justify-end text-[16px] text-[#0A49A7] cursor-pointer" 
                                                     @click="remove(item.id)"
                                                 >
                                                     @lang('shop::app.customers.account.wishlist.remove')
@@ -133,7 +133,7 @@
                                                 <!--Wishlist Item Move-to-cart-->
                                                 <button
                                                     type="button"
-                                                    class="bs-primary-button block w-max max-h-[40px] py-[6px] px-[25px] rounded-[18px] text-base text-center"
+                                                    class="primary-button block w-max max-h-[40px] py-[6px] px-[25px] rounded-[18px] text-base text-center"
                                                     @click="moveToCart(item.id)"
                                                 >
                                                     @lang('shop::app.customers.account.wishlist.move-to-cart')
@@ -150,7 +150,7 @@
                                         </p>
 
                                         <a 
-                                            class="text-[16px] text-[#0A49A7] cursor-pointer" 
+                                            class="flex justify-end text-[16px] text-[#0A49A7] cursor-pointer" 
                                             @click="remove(item.id)"
                                         >
                                             @lang('shop::app.customers.account.wishlist.remove')

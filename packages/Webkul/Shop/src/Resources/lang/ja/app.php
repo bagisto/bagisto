@@ -74,6 +74,7 @@ return [
                 'delete-profile'          => 'プロフィールを削除',
                 'edit-profile'            => 'プロフィールを編集',
                 'edit'                    => '編集',
+                'edit-success'            => 'プロフィールが正常に更新されました',
                 'phone'                   => '電話',
                 'current-password'        => '現在のパスワード',
                 'new-password'            => '新しいパスワード',
@@ -89,6 +90,7 @@ return [
                 'female'                  => '女性',
                 'other'                   => 'その他',
                 'save'                    => '保存',
+                'unmatch'                 => '古いパスワードが一致しません。',
             ],
 
             'addresses' => [
@@ -255,6 +257,7 @@ return [
                 'delete-all'         => 'すべて削除',
                 'empty'              => 'ウィッシュリストページには製品が追加されていません。',
                 'move-to-cart'       => 'カートに移動',
+                'moved-success'      => 'アイテムがカートに正常に移動しました',    
                 'profile'            => 'プロフィール',
                 'removed'            => 'アイテムがウィッシュリストから正常に削除されました',
                 'remove-fail'        => 'アイテムをウィッシュリストから削除できませんでした',

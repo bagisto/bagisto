@@ -1029,8 +1029,8 @@ return [
             'category'             => 'קטגוריה',
             'update-success'       => 'הקטגוריה עודכנה בהצלחה.',
             'delete-success'       => 'הקטגוריה נמחקה בהצלחה.',
-            'delete-category-root' => 'שורש :name אינו ניתן למחיקה.',
-            'delete-failed'        => ':name לא ניתן היה למחוק',
+            'delete-category-root' => 'אי אפשר למחוק את הקטגוריה הראשית.',
+            'delete-failed'        => 'אירעה שגיאה במהלך המחיקה של הקטגוריה',
         ],
 
         'families' => [
@@ -2300,7 +2300,7 @@ return [
                 'title'             => 'ערוצים',
                 'create-btn'        => 'צור ערוץ',
                 'delete-success'    => 'הערוץ נמחק בהצלחה.',
-                'delete-failed'     => 'מחיקת :name נכשלה',
+                'delete-failed'     => 'מחיקת ערוץ נכשלה',
                 'last-delete-error' => 'מחיקת הערוץ האחרון נכשלה.',
 
                 'datagrid' => [
@@ -2422,17 +2422,6 @@ return [
                 'edit'  => [
                     'title'    => 'ערוך משתמש',
                 ],
-
-                'activate-warning'   => 'חשבונך עדיין לא הופעל, נא ליצור קשר עם המנהל.',
-                'create-success'     => 'משתמש נוצר בהצלחה.',
-                'cannot-change'      => 'אין אפשרות לשנות את המשתמש',
-                'delete-failed'      => 'מחיקת משתמש נכשלה.',
-                'delete-success'     => 'משתמש נמחק בהצלחה.',
-                'incorrect-password' => 'סיסמה שגויה',
-                'last-delete-error'  => 'מחיקת המשתמש האחרון נכשלה',
-                'login-error'        => 'נא לבדוק את פרטי הכניסה שלך ולנסות שוב.',
-                'update-success'     => 'משתמש עודכן בהצלחה.',
-                'delete-warning'     => 'האם אתה בטוח שברצונך לבצע פעולה זו?',
             ],
 
             'edit'  => [
@@ -2448,8 +2437,16 @@ return [
                 'save-btn'         => 'שמור משתמש',
             ],
 
-            'update-success' => 'משתמש עודכן בהצלחה.',
-            'delete-success' => 'משתמש נמחק בהצלחה.',
+            'delete-failed'      => 'נכשל במחיקת המשתמש.',
+            'cannot-change'      => 'לא ניתן לשנות את המשתמש.',
+            'update-success'     => 'המשתמש עודכן בהצלחה.',
+            'delete-success'     => 'המשתמש נמחק בהצלחה.',
+            'incorrect-password' => 'סיסמה שגויה',
+            'create-success'     => 'המשתמש נוצר בהצלחה.',
+            'delete-warning'     => 'האם אתה בטוח שברצונך לבצע פעולה זו?',
+            'login-error'        => 'אנא בדוק את פרטי הכניסה שלך ונסה שוב.',
+            'activate-warning'   => 'החשבון שלך עדיין לא הופעל, אנא צור קשר עם המנהל.',
+            'last-delete-error'  => 'נכשל במחיקת המשתמש האחרון.'
         ],
 
         'roles' => [
@@ -2519,52 +2516,18 @@ return [
             ],
 
             'create' => [
-                'title'                         => 'יצירת ערכת נושא',
-                'sliders'                       => 'מציגים',
-                'product-carousel'              => 'מציג מוצרים בקרוסלה',
-                'product-carousel-description'  => 'הצגת מוצרים באופן אלגנטי עם קרוסלת מוצרים דינמית ורספונסיבית.',
-                'category-carousel-description' => 'הצגת קטגוריות דינמיות באמצעות קרוסלת קטגוריות רספונסיבית מרהיבה.',
-                'static-content-description'    => 'שפר את ההתעסקות עם תוכן סטטי ומרשים לקהל שלך.',
-                'footer-link-description'       => 'ניווט באמצעות קישורים בתחתית העמוד לסיור ומידע חלקם.',
-                'category-carousel'             => 'קרוסלת קטגוריות',
-                'static-content'                => 'תוכן סטטי',
-                'footer-link'                   => 'קישורי תחתית',
-                'footer-link-form-title'        => 'קישור תחתית',
-                'slider-description'            => 'התאמת ערכת הנושא הנמצאת בקרוסלה.',
-                'slider-add-btn'                => 'הוסף מציג',
-                'general'                       => 'כללי',
-                'add-filter-btn'                => 'הוסף מסנן',
-                'save-btn'                      => 'שמור',
-                'filter-title'                  => 'כותרת',
-                'sort'                          => 'מיון',
-                'desc'                          => 'יורד',
-                'asc'                           => 'עולה',
-                'limit'                         => 'מגבלה',
-                'footer-title'                  => 'כותרת',
-                'link'                          => 'קישור',
-                'add-logo'                      => 'הוסף לוגו',
-                'key'                           => 'מפתח: :key',
-                'value'                         => 'ערך: :value',
-                'delete'                        => 'מחק',
-                'name'                          => 'שם',
-                'sort-order'                    => 'סדר מיון',
-                'status'                        => 'סטטוס',
-                'image'                         => 'תמונה',
-                'create-filter'                 => 'יצירת מסנן',
-                'key-input'                     => 'מפתח',
-                'value-input'                   => 'ערך',
-                'html'                          => 'HTML',
-                'css'                           => 'CSS',
-                'add-footer-link-btn'           => 'הוסף קישור תחתית',
-                'filters'                       => 'מסננים',
-                'edit'                          => 'ערוך',
-                'path'                          => 'נתיב',
-                'add-link'                      => 'הוסף קישור',
-                'create-slider'                 => 'יצירת מציג',
-                'slider-image'                  => 'תמונת מציג',
-                'column'                        => 'עמודה',
-                'select'                        => 'בחר',
-                'back'                          => 'חזור',
+                'title'      => 'יצירת ערכת עיצוב',
+                'save-btn'   => 'שמור',
+                'name'       => 'שם',
+                'sort-order' => 'סדר מיון',
+                'type'       => [
+                    'title'             => 'סוג',
+                    'product-carousel'  => 'קרוסלת מוצרים',
+                    'category-carousel' => 'קרוסלת קטגוריות',
+                    'static-content'    => 'תוכן סטטי',
+                    'image-carousel'    => 'קרוסלת תמונות',
+                    'footer-links'      => 'קישורי תחתית',
+                ],
             ],
 
             'edit' => [
@@ -2584,6 +2547,7 @@ return [
                 'slider-add-btn'                => 'הוסף מציג',
                 'general'                       => 'כללי',
                 'add-filter-btn'                => 'הוסף מסנן',
+                'add-image-btn'                 => 'הוסף תמונה',
                 'save-btn'                      => 'שמור',
                 'filter-title'                  => 'כותרת',
                 'sort'                          => 'מיון',
@@ -2613,6 +2577,7 @@ return [
                 'path'                          => 'נתיב',
                 'edit'                          => 'ערוך',
                 'back'                          => 'חזור',
+                'preview'                       => 'תצוגה מקדימה',
             ],
 
             'create-success' => 'ערכת הנושא נוצרה בהצלחה',
@@ -2866,12 +2831,6 @@ return [
                 'settings' => [
                     'settings-info' => 'הגדרת משאלות, מנויי ידע, אימות דוא"ל וכניסה חברתית.',
                     'title'         => 'הגדרות',
-
-                    'wishlist' => [
-                        'share'      => 'הפעל שיתוף',
-                        'title'      => 'רשימת משאלות',
-                        'title-info' => 'רשימת משאלות היא אוסף אישי של פריטים מבוקשים שמאפשר למשתמשים לשמור מוצרים להפנייה עתידית או רכישות אפשריות.',
-                    ],
 
                     'newsletter' => [
                         'subscription' => 'הפעלת מנוי לידע',

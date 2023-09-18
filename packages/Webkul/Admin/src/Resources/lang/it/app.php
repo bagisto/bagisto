@@ -1029,8 +1029,8 @@ return [
             'category'             => 'Categoria',
             'update-success'       => 'Categoria aggiornata con successo.',
             'delete-success'       => 'La categoria è stata eliminata con successo.',
-            'delete-category-root' => 'La categoria principale :name non può essere eliminata.',
-            'delete-failed'        => 'Impossibile eliminare la categoria :name',
+            'delete-category-root' => 'La categoria principale non può essere eliminata.',
+            'delete-failed'        => 'Errore durante l\'eliminazione della categoria',
         ],
 
         'families'   => [
@@ -2301,7 +2301,7 @@ return [
                 'title'             => 'Canales',
                 'create-btn'        => 'Crear Canal',
                 'delete-success'    => 'Canal eliminado exitosamente.',
-                'delete-failed'     => 'Error al eliminar :name',
+                'delete-failed'     => 'Error al eliminar Canal',
                 'last-delete-error' => 'Error al eliminar el último Canal.',
 
                 'datagrid' => [
@@ -2423,17 +2423,6 @@ return [
                 'edit'  => [
                     'title'    => 'Editar Usuario',
                 ],
-
-                'activate-warning'   => 'Tu cuenta aún no ha sido activada, por favor contacta al administrador.',
-                'create-success'     => 'Usuario creado exitosamente.',
-                'cannot-change'      => 'No se puede cambiar el usuario',
-                'delete-failed'      => 'Error al eliminar el usuario.',
-                'delete-success'     => 'Usuario eliminado exitosamente.',
-                'incorrect-password' => 'Contraseña incorrecta',
-                'last-delete-error'  => 'Error al eliminar el último usuario',
-                'login-error'        => 'Por favor, verifica tus credenciales e intenta nuevamente.',
-                'update-success'     => 'Usuario actualizado exitosamente.',
-                'delete-warning'     => '¿Estás seguro de que deseas realizar esta acción?',
             ],
 
             'edit'  => [
@@ -2449,8 +2438,16 @@ return [
                 'save-btn'         => 'Guardar Usuario',
             ],
 
-            'update-success'   => 'Usuario actualizado exitosamente.',
-            'delete-success'   => 'Usuario eliminado exitosamente.',
+            'delete-failed'      => 'Eliminazione utente non riuscita.',
+            'cannot-change'      => 'Impossibile modificare l\'utente.',
+            'update-success'     => 'Utente aggiornato con successo.',
+            'delete-success'     => 'Utente eliminato con successo.',
+            'incorrect-password' => 'Password errata',
+            'create-success'     => 'Utente creato con successo.',
+            'delete-warning'     => 'Sei sicuro di voler eseguire questa azione?',
+            'login-error'        => 'Controlla le tue credenziali e riprova.',
+            'activate-warning'   => 'Il tuo account non è ancora attivato, contatta l\'amministratore.',
+            'last-delete-error'  => 'Eliminazione dell\'ultimo utente non riuscita.'
         ],
 
         'roles' => [
@@ -2519,51 +2516,18 @@ return [
             ],
 
             'create' => [
-                'title'                          => 'Crear Tema',
-                'sliders'                        => 'Sliders',
-                'product-carousel'               => 'Carrusel de Productos',
-                'product-carousel-description'   => 'Muestra productos de forma elegante con un carrusel de productos dinámico y receptivo.',
-                'category-carousel-description'  => 'Muestra categorías dinámicas de forma atractiva utilizando un carrusel de categorías receptivo.',
-                'static-content-description'     => 'Mejora la participación con contenido estático conciso e informativo para tu audiencia.',
-                'footer-link-description'        => 'Navega a través de los enlaces del pie de página para una exploración e información del sitio web sin problemas.',
-                'category-carousel'              => 'Carrusel de Categorías',
-                'static-content'                 => 'Contenido Estático',
-                'footer-title'                   => 'Título',
-                'footer-link'                    => 'Enlaces del Pie de Página',
-                'footer-link-form-title'         => 'Enlace del Pie de Página',
-                'slider-description'             => 'Personalización del tema relacionada con los sliders.',
-                'slider-add-btn'                 => 'Agregar Slider',
-                'general'                        => 'General',
-                'add-filter-btn'                 => 'Agregar Filtro',
-                'save-btn'                       => 'Guardar',
-                'filter-title'                   => 'Título',
-                'sort'                           => 'Ordenar',
-                'desc'                           => 'Descendente',
-                'asc'                            => 'Ascendente',
-                'limit'                          => 'Límite',
-                'key'                            => 'Clave: :key',
-                'value'                          => 'Valor: :value',
-                'delete'                         => 'Eliminar',
-                'link'                           => 'Enlace',
-                'image'                          => 'Imagen',
-                'name'                           => 'Nombre',
-                'sort-order'                     => 'Orden de Clasificación',
-                'status'                         => 'Estado',
-                'create-filter'                  => 'Crear Filtro',
-                'key-input'                      => 'Clave',
-                'value-input'                    => 'Valor',
-                'html'                           => 'HTML',
-                'css'                            => 'CSS',
-                'add-footer-link-btn'            => 'Agregar Enlace del Pie de Página',
-                'filters'                        => 'Filtros',
-                'slider-image'                   => 'Imagen del Slider',
-                'update-slider'                  => 'Actualizar Slider',
-                'select'                         => 'Seleccionar',
-                'add-link'                       => 'Agregar Enlace',
-                'column'                         => 'Columna',
-                'path'                           => 'Percorso',
-                'edit'                           => 'Editar',
-                'back'                           => 'Atrás',
+                'title'      => 'Crea Tema',
+                'save-btn'   => 'Salva',
+                'name'       => 'Nome',
+                'sort-order' => 'Ordine di Classificazione',
+                'type'       => [
+                    'title'             => 'Tipo',
+                    'product-carousel'  => 'Carosello Prodotti',
+                    'category-carousel' => 'Carosello Categorie',
+                    'static-content'    => 'Contenuto Statico',
+                    'image-carousel'    => 'Carosello Immagini',
+                    'footer-links'      => 'Collegamenti Footer',
+                ],
             ],
 
             'edit' => [
@@ -2583,6 +2547,7 @@ return [
                 'slider-add-btn'                => 'Agregar Slider',
                 'general'                       => 'General',
                 'add-filter-btn'                => 'Agregar Filtro',
+                'add-image-btn'                 => 'Aggiungi Immagine',
                 'save-btn'                      => 'Guardar',
                 'filter-title'                  => 'Título',
                 'sort'                          => 'Ordenar',
@@ -2612,6 +2577,7 @@ return [
                 'path'                          => 'Percorso',
                 'edit'                          => 'Editar',
                 'back'                          => 'Atrás',
+                'preview'                       => 'Anteprima',
             ],
 
             'create-success' => 'Tema creado exitosamente',
@@ -2865,12 +2831,6 @@ return [
                 'settings' => [
                     'settings-info' => 'Imposta lista dei desideri, iscrizioni alla newsletter, verifica dell\'email e accesso tramite social media.',
                     'title'         => 'Impostazioni',
-
-                    'wishlist' => [
-                        'share'      => 'Abilita Condivisione',
-                        'title'      => 'Lista dei Desideri',
-                        'title-info' => '"Lista dei desideri" è una raccolta personalizzata di articoli desiderati, che consente agli utenti di salvare prodotti per futuri riferimenti o potenziali acquisti.',
-                    ],
 
                     'newsletter' => [
                         'subscription' => 'Permetti Iscrizione alla Newsletter',

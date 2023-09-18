@@ -1029,8 +1029,8 @@ return [
             'category'             => 'カテゴリ',
             'update-success'       => 'カテゴリが正常に更新されました。',
             'delete-success'       => 'カテゴリが正常に削除されました。',
-            'delete-category-root' => 'ルート :name は削除できません。',
-            'delete-failed'        => ':name を削除できませんでした。',
+            'delete-category-root' => 'ルートカテゴリは削除できません。',
+            'delete-failed'        => 'カテゴリの削除中にエラーが発生しました',
         ],
 
         'families'   => [
@@ -2300,7 +2300,7 @@ return [
                 'title'             => 'チャネル',
                 'create-btn'        => 'チャネルを作成',
                 'delete-success'    => 'チャネルが正常に削除されました。',
-                'delete-failed'     => ':name の削除に失敗しました',
+                'delete-failed'     => 'チャンネル の削除に失敗しました',
                 'last-delete-error' => '最後のチャネルの削除に失敗しました。',
 
                 'datagrid' => [
@@ -2422,17 +2422,6 @@ return [
                 'edit'  => [
                     'title' => 'ユーザーを編集',
                 ],
-
-                'activate-warning'   => 'アカウントはまだ有効化されていません。管理者にお問い合わせください。',
-                'create-success'     => 'ユーザーが正常に作成されました。',
-                'cannot-change'      => 'ユーザーは変更できません',
-                'delete-failed'      => 'ユーザーの削除に失敗しました。',
-                'delete-success'     => 'ユーザーが正常に削除されました。',
-                'incorrect-password' => 'パスワードが間違っています',
-                'last-delete-error'  => '最後のユーザーの削除に失敗しました',
-                'login-error'        => '資格情報を確認してもう一度お試しください。',
-                'update-success'     => 'ユーザーが正常に更新されました。',
-                'delete-warning'     => '本当にこのアクションを実行しますか？',
             ],
 
             'edit'  => [
@@ -2448,8 +2437,16 @@ return [
                 'save-btn'         => 'ユーザーを保存',
             ],
 
-            'update-success' => 'ユーザーが正常に更新されました。',
-            'delete-success' => 'ユーザーが正常に削除されました。',
+            'delete-failed'      => 'ユーザーの削除に失敗しました。',
+            'cannot-change'      => 'ユーザーは変更できません。',
+            'update-success'     => 'ユーザーが正常に更新されました。',
+            'delete-success'     => 'ユーザーが正常に削除されました。',
+            'incorrect-password' => 'パスワードが正しくありません',
+            'create-success'     => 'ユーザーが正常に作成されました。',
+            'delete-warning'     => 'このアクションを実行してもよろしいですか？',
+            'login-error'        => '資格情報を確認して、もう一度試してください。',
+            'activate-warning'   => 'アカウントはまだ有効になっていません。管理者に連絡してください。',
+            'last-delete-error'  => '最後のユーザーの削除に失敗しました。'
         ],
 
         'roles' => [
@@ -2519,52 +2516,18 @@ return [
             ],
 
             'create' => [
-                'title'                         => 'テーマを作成',
-                'sliders'                       => 'スライダー',
-                'product-carousel'              => '商品カルーセル',
-                'product-carousel-description'  => '動的でレスポンシブな商品カルーセルで製品を見栄えよく展示します。',
-                'category-carousel-description' => 'レスポンシブなカテゴリーカルーセルを使用してダイナミックなカテゴリーを魅力的に表示します。',
-                'static-content-description'    => 'コンパクトで情報豊かな静的コンテンツを使用して、観客のエンゲージメントを向上させます。',
-                'footer-link-description'       => 'シームレスなウェブサイトの探索と情報提供のために、フッターリンクを使用してナビゲーションします。',
-                'category-carousel'             => 'カテゴリーカルーセル',
-                'static-content'                => '静的コンテンツ',
-                'footer-link'                   => 'フッターリンク',
-                'footer-link-form-title'        => 'フッターリンク',
-                'slider-description'            => 'スライダー関連のテーマカスタマイズ。',
-                'slider-add-btn'                => 'スライダーを追加',
-                'general'                       => '一般',
-                'add-filter-btn'                => 'フィルターを追加',
-                'save-btn'                      => '保存',
-                'filter-title'                  => 'タイトル',
-                'sort'                          => 'ソート',
-                'desc'                          => '降順',
-                'asc'                           => '昇順',
-                'limit'                         => '制限',
-                'footer-title'                  => 'タイトル',
-                'link'                          => 'リンク',
-                'add-logo'                      => 'ロゴを追加',
-                'key'                           => 'キー: :key',
-                'value'                         => '値: :value',
-                'delete'                        => '削除',
-                'name'                          => '名前',
-                'sort-order'                    => '並び順',
-                'status'                        => 'ステータス',
-                'image'                         => '画像',
-                'create-filter'                 => 'フィルターを作成',
-                'key-input'                     => 'キー',
-                'value-input'                   => '値',
-                'html'                          => 'HTML',
-                'css'                           => 'CSS',
-                'add-footer-link-btn'           => 'フッターリンクを追加',
-                'filters'                       => 'フィルター',
-                'edit'                          => '編集',
-                'path'                          => 'パス',
-                'add-link'                      => 'リンクを追加',
-                'create-slider'                 => 'スライダーを作成',
-                'slider-image'                  => 'スライダー画像',
-                'column'                        => '列',
-                'select'                        => '選択',
-                'back'                          => '戻る',
+                'title'      => 'テーマを作成する',
+                'save-btn'   => '保存',
+                'name'       => '名前',
+                'sort-order' => '並べ替え順',
+                'type'       => [
+                    'title'             => 'タイプ',
+                    'product-carousel'  => '製品カルーセル',
+                    'category-carousel' => 'カテゴリーカルーセル',
+                    'static-content'    => '静的コンテンツ',
+                    'image-carousel'    => '画像カルーセル',
+                    'footer-links'      => 'フッターリンク',
+                ],
             ],
 
             'edit' => [
@@ -2584,6 +2547,7 @@ return [
                 'slider-add-btn'                => 'スライダーを追加',
                 'general'                       => '一般',
                 'add-filter-btn'                => 'フィルターを追加',
+                'add-image-btn'                 => '画像を追加',
                 'save-btn'                      => '保存',
                 'filter-title'                  => 'タイトル',
                 'sort'                          => 'ソート',
@@ -2613,6 +2577,7 @@ return [
                 'path'                          => 'パス',
                 'edit'                          => '編集',
                 'back'                          => '戻る',
+                'preview'                       => 'プレビュー',
             ],
 
             'create-success' => 'テーマは正常に作成されました',
@@ -2866,12 +2831,6 @@ return [
                 'settings' => [
                     'settings-info' => 'ウィッシュリスト、ニュースレターの購読、メール確認、ソーシャルログインを設定します。',
                     'title'         => '設定',
-
-                    'wishlist' => [
-                        'share'      => '共有を有効にする',
-                        'title'      => 'ウィッシュリスト',
-                        'title-info' => '「ウィッシュリスト」は、ユーザーが将来の参照や潜在的な購入のために製品を保存できる個人用のアイテムコレクションです。',
-                    ],
 
                     'newsletter' => [
                         'subscription' => 'ニュースレターの購読を許可',

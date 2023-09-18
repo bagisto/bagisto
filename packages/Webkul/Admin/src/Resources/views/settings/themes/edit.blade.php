@@ -74,12 +74,8 @@
                                 </div>
                             </div>
 
-                            <template v-for="(removeImage, index) in removedImages">
-                                <!-- Hidden Input -->
-                                <input type="file" class="hidden" :name="'options_remove['+ index +'][image]'" :ref="'imageInput_' + index" />
-                                <input type="hidden" :name="'removeImages[]'" :value="removeImage"/>  
-                                <input type="hidden" :name="'options_remove['+ index +'][link]'" :value="removeImage.link" />    
-                                <input type="hidden" :name="'options_remove['+ index +'][image]'" :value="removeImage.image" />  
+                            <template v-for="(deletedSlider, index) in deletedSliders">
+                                <input type="hidden" :name="'deleted_sliders['+ index +'][image]'" :value="deletedSlider.image" />  
                             </template>
 
                             <div
@@ -722,29 +718,6 @@
                             </div>
                         </div>
 
-                        <x-admin::form.control-group class="mb-[10px] pt-[16px]">
-                            <x-admin::form.control-group.label class="required">
-                                @lang('admin::app.settings.themes.edit.filter-title')
-                            </x-admin::form.control-group.label>
-
-                            <v-field
-                                type="text"
-                                name="options[title]"
-                                value="{{ $theme->options['title'] ?? ''}}"
-                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
-                                :class="[errors['options[title]'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                rules="required"
-                                label="@lang('admin::app.settings.themes.edit.filter-title')"
-                                placeholder="@lang('admin::app.settings.themes.edit.filter-title')"
-                            >
-                            </v-field>
-
-                            <x-admin::form.control-group.error
-                                control-name="options[title]"
-                            >
-                            </x-admin::form.control-group.error>
-                        </x-admin::form.control-group>
-
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.sort')
@@ -1081,6 +1054,24 @@
                                     @lang('admin::app.settings.themes.edit.static-content-description')
                                 </p>
                             </div>
+
+                            <div class="flex gap-[10px]">
+                                <!-- Hidden Input Filed for upload images -->
+                                <label
+                                    class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                    for="static_image"
+                                >
+                                    @lang('admin::app.settings.themes.edit.add-image-btn')
+                                </label>
+
+                                <input 
+                                    type="file"
+                                    name="static_image"
+                                    id="static_image"
+                                    class="hidden"
+                                    @change="storeImage($event)"
+                                >
+                            </div>
                         </div>
                         
                         <div class="text-sm font-medium text-center pt-[16px] text-gray-500">
@@ -1103,6 +1094,15 @@
                                             @lang('admin::app.settings.themes.edit.css')
                                         </div>
                                     </p>
+
+                                    <p @click="switchEditor('v-static-content-previewer')">
+                                        <div
+                                            class="mb-[-1px] border-b-[1px] transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 cursor-pointer"
+                                            :class="{'border-blue-600': inittialEditor == 'v-static-content-previewer'}"
+                                        >
+                                            @lang('admin::app.settings.themes.edit.preview')
+                                        </div>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -1110,11 +1110,12 @@
                         <input type="hidden" name="options[html]" v-model="options.html">
                         <input type="hidden" name="options[css]" v-model="options.css">
 
-
                         <KeepAlive>
                             <component 
                                 :is="inittialEditor"
+                                ref="editor"
                                 @editor-data="editorData"
+                                :options="options"
                             >
                             </component>
                         </KeepAlive>
@@ -1233,6 +1234,13 @@
             </div>
         </script>
 
+        {{-- Static Content Previewer --}}
+        <script type="text/x-template" id="v-static-content-previewer-template">
+            <div>   
+                <div v-html="getPreviewContent()"></div>
+            </div>
+        </script>
+
         {{-- Footer Template --}}
         <script type="text/x-template" id="v-footer-link-theme-template">
             <div>
@@ -1263,7 +1271,6 @@
     
                             <!-- Footer Links -->
                             <div
-                                class="pt-[16px]"
                                 v-if="Object.keys(footerLinks).length"
                                 v-for="(footerLink, index) in footerLinks"
                             >
@@ -1598,6 +1605,33 @@
             </div>
         </script>
 
+        {{-- Parent Theme Customizer Component --}}
+        <script type="module">
+            app.component('v-theme-customizer', {
+                template: '#v-theme-customizer-template',
+
+                props: ['errors'],
+
+                data() {
+                    return {
+                        componentName: 'v-slider-theme',
+
+                        themeType: {
+                            product_carousel: 'v-product-theme',
+                            category_carousel: 'v-category-theme',
+                            static_content: 'v-static-theme',
+                            image_carousel: 'v-slider-theme',
+                            footer_links: 'v-footer-link-theme',
+                        } 
+                    };
+                },
+
+                created(){
+                    this.componentName = this.themeType["{{ $theme->type }}"];
+                },
+            });
+        </script>
+
         {{-- Slider Theme Component --}}
         <script type="module">
             app.component('v-slider-theme', {
@@ -1609,8 +1643,17 @@
                     return {
                         sliders: @json($theme->options),
 
-                        removedImages: [],
+                        deletedSliders: [],
                     };
+                },
+                
+                created() {
+                    if (
+                        this.sliders == null 
+                        || this.sliders.length == 0
+                    ) {
+                        this.sliders = { images: [] };
+                    }   
                 },
 
                 methods: {
@@ -1644,11 +1687,285 @@
                     },
 
                     remove(image) {
-                        this.removedImages.push(image);
+                        this.deletedSliders.push(image);
+                        
+                        this.sliders.images = this.sliders.images.filter(item => {
+                            return (
+                                item.link !== image.link || 
+                                item.image !== image.image
+                            );
+                        });
+                    },
+                },
+            });
+        </script>
 
-                        let index = this.sliders.images.indexOf(image);
+        {{-- Product Theme Component --}}
+        <script type="module">
+            app.component('v-product-theme', {
+                template: '#v-product-theme-template',
 
-                        this.sliders.images.splice(image, 1);
+                props: ['errors'],
+
+                data() {
+                    return {
+                        options: @json($theme->options),
+                    };
+                },
+
+                created() {
+                    if (this.options === null) {
+                        this.options = { filters: {} };
+                    }   
+                    
+                    if (! this.options.filters) {
+                        this.options.filters = {};
+                    }
+
+                    this.options.filters = Object.keys(this.options.filters)
+                        .filter(key => ! ['sort', 'limit', 'title'].includes(key))
+                        .map(key => ({
+                            key: key,
+                            value: this.options.filters[key]
+                        }));
+                },
+
+                methods: {
+                    addFilter(params) {
+                        this.options.filters.push(params);
+
+                        this.$refs.productFilterModal.toggle();
+                    },
+
+                    remove(filter) {
+                        let index = this.options.filters.indexOf(filter);
+
+                        this.options.filters.splice(index, 1);
+                    },
+                },
+            });
+        </script>
+
+        {{-- Category Theme Component --}}
+        <script type="module">
+            app.component('v-category-theme', {
+                template: '#v-category-theme-template',
+
+                props: ['errors'],
+
+                data() {
+                    return {
+                        options: @json($theme->options),
+                    };
+                },
+
+                created() {
+                    if (this.options === null) {
+                        this.options = { filters: {} };
+                    }   
+
+                    if (! this.options.filters) {
+                        this.options.filters = {};
+                    }
+
+                    this.options.filters = Object.keys(this.options.filters)
+                        .filter(key => ! ['sort', 'limit', 'title'].includes(key))
+                        .map(key => ({
+                            key: key,
+                            value: this.options.filters[key]
+                        }));
+                },
+                
+                methods: {
+                    addFilter(params) {
+                        this.options.filters.push(params);
+
+                        this.$refs.categoryFilterModal.toggle();
+                    },
+
+                    remove(filter) {
+                        let index = this.options.filters.indexOf(filter);
+
+                        this.options.filters.splice(index, 1);
+                    },
+                },
+            });
+        </script>
+
+        {{-- Static Theme component --}}
+        <script type="module">
+            app.component('v-static-theme', {
+                template: '#v-static-theme-template',
+
+                props: ['errors'],
+
+                data() {
+                    return {
+                        inittialEditor: 'v-html-editor-theme',
+
+                        options: @json($theme->options),
+                    };
+                },
+
+                created() {
+                    if (this.options === null) {
+                        this.options = { html: {} };
+                    }   
+                },
+
+                methods: {
+                    switchEditor(editor) {
+                        this.inittialEditor = editor;
+
+                        if (editor == 'v-static-content-previewer') {
+                            this.$refs.editor.review = this.options;
+                        }
+                    },
+
+                    editorData(value) {
+                        if (value.html) {
+                            this.options.html = value.html;
+                        } else {
+                            this.options.css = value.css;
+                        } 
+                    },
+
+                    storeImage($event) {
+                        this.$refs.editor.storeImage($event)
+                    }
+                },
+            });
+        </script>
+
+        {{-- Html Editor Component --}}
+        <script type="module">
+            app.component('v-html-editor-theme', {
+                template: '#v-html-editor-theme-template',
+                
+                data() {
+                    return {
+                        options:{
+                            html: `{!! $theme->options['html'] ?? '' !!}`,
+                        },
+
+                        cursorPointer: {},
+                    };
+                },
+
+                created() {
+                    this.initHtmlEditor();
+                },
+
+                methods: {
+                    initHtmlEditor() {
+                        setTimeout(() => {
+                            this.options.html = SimplyBeautiful().html(this.options.html);
+
+                            this._html = new CodeMirror(this.$refs.html, {
+                                lineNumbers: true,
+                                tabSize: 4,
+                                lineWiseCopyCut: true,
+                                value: this.options.html,
+                                mode: 'htmlmixed',
+                            });
+
+                            this._html.on('changes', (e) => {
+                                this.options.html = this._html.getValue();
+
+                                this.cursorPointer = e.getCursor();
+
+                                this.$emit('editorData', this.options);
+                            });
+                        }, 0);
+                    },
+
+                    storeImage($event) {
+                        let selectedImage = $event.target.files[0];
+
+                        if (! selectedImage) {
+                            return;
+                        }
+
+                        let formData = new FormData();
+
+                        formData.append('image', selectedImage);
+                        formData.append('id', "{{ $theme->id }}");
+
+                        this.$axios.post('{{ route('admin.theme.store') }}', formData)
+                            .then((response) => {
+                                let editor = this._html.getDoc();
+
+                                let cursorPointer = editor.getCursor();
+
+                                editor.replaceRange(`<img class="lazy" data-src="${response.data}">`, {
+                                    line: cursorPointer.line, ch: cursorPointer.ch
+                                });
+
+                                editor.setCursor({
+                                    line: cursorPointer.line, ch: cursorPointer.ch + response.data.length
+                                });
+                            })
+                            .catch((error) => {});
+                    },
+                },
+            });
+        </script>
+
+        {{-- Css Editor Component --}}
+        <script type="module">
+            app.component('v-css-editor-theme', {
+                template: '#v-css-editor-theme-template',
+
+                data() {
+                    return {
+                        options:{
+                            css: `{!! $theme->options['css'] ?? '' !!}`,
+                        }
+                    };
+                },
+
+                created() {
+                    this.initCssEditor();
+                },
+
+                methods: {
+                    initCssEditor() {
+                        setTimeout(() => {
+                            this.options.css = SimplyBeautiful().css(this.options.css);
+
+                            this._css = new CodeMirror(this.$refs.css, {
+                                lineNumbers: true,
+                                tabSize: 4,
+                                lineWiseCopyCut: true,
+                                value: this.options.css,
+                                mode: 'css',
+                            });
+
+                            this._css.on('changes', () => {
+                                this.options.css = this._css.getValue();
+
+                                this.$emit('editorData', this.options);
+                            });
+                        }, 0);
+                    },
+                },
+            });
+        </script>
+
+        {{-- Static Content Previewer --}}
+        <script type="module">
+            app.component('v-static-content-previewer', {
+                template: '#v-static-content-previewer-template',
+
+                props: ['options'],
+
+                methods: {
+                    getPreviewContent() {
+                        let html = this.options.html.slice();
+
+                        html = html.replaceAll('src=""', '').replaceAll('data-src', 'src').replaceAll('src="storage/theme/', "src=\"{{ config('app.url') }}/storage/theme/");
+
+                        return html + '<style type=\"text/css\">' +   this.options.css + '</style>';
                     },
                 },
             });
@@ -1675,19 +1992,23 @@
                     },
                 },
 
-                mounted() {
-                    Object.keys(this.footerLinks).forEach(key => {
-                        this.footerLinks[key] = this.footerLinks[key].map(item => ({
-                            ...item,
-                            column: key
-                        }));
-                    });
+                created() {
+                    if (this.footerLinks === null) {
+                        this.footerLinks = {};
+                    }
 
                     for (let i = 1; i <= 3; i++) {
                         if (!this.footerLinks.hasOwnProperty(`column_${i}`)) {
                             this.footerLinks[`column_${i}`] = [];
                         }
                     }
+
+                    Object.keys(this.footerLinks).forEach(key => {
+                        this.footerLinks[key] = this.footerLinks[key].map(item => ({
+                            ...item,
+                            column: key
+                        }));
+                    });
                 },
 
                 methods: {
@@ -1738,230 +2059,6 @@
             });
         </script>
 
-        {{-- Parent Theme Customizer Component --}}
-        <script type="module">
-            app.component('v-theme-customizer', {
-                template: '#v-theme-customizer-template',
-
-                props: ['errors'],
-
-                data() {
-                    return {
-                        componentName: 'v-slider-theme',
-
-                        themeType: {
-                            product_carousel: 'v-product-theme',
-                            category_carousel: 'v-category-theme',
-                            static_content: 'v-static-theme',
-                            image_carousel: 'v-slider-theme',
-                            footer_links: 'v-footer-link-theme',
-                        } 
-                    };
-                },
-
-                created(){
-                    this.componentName = this.themeType["{{ $theme->type }}"];
-                },
-            });
-        </script>
-
-        {{-- Html Editor Component --}}
-        <script type="module">
-            app.component('v-html-editor-theme', {
-                template: '#v-html-editor-theme-template',
-
-                data() {
-                    return {
-                        options:{
-                            html: `{!! $theme->options['html'] ?? '' !!}`,
-                        }
-                    };
-                },
-
-                created() {
-                    this.initHtmlEditor();
-                },
-
-                methods: {
-                    initHtmlEditor() {
-                        setTimeout(() => {
-                            this.options.html = beautify.html(this.options.html);
-
-                            this._html = new CodeMirror(this.$refs.html, {
-                                lineNumbers: true,
-                                tabSize: 2,
-                                value: this.options.html,
-                                mode: 'htmlmixed',
-                                theme: 'monokai'
-                            });
-
-                            this._html.on('changes', () => {
-                                this.options.html = this._html.getValue();
-
-                                this.$emit('editorData', this.options);
-                            });
-                        }, 0);
-                    },
-                },
-            });
-        </script>
-
-        {{-- Css Editor Component --}}
-        <script type="module">
-            app.component('v-css-editor-theme', {
-                template: '#v-css-editor-theme-template',
-
-                data() {
-                    return {
-                        options:{
-                            css: `{!! $theme->options['css'] ?? '' !!}`,
-                        }
-                    };
-                },
-
-                created() {
-                    this.initCssEditor();
-                },
-
-                methods: {
-                    initCssEditor() {
-                        setTimeout(() => {
-                            this.options.css = beautify.css(this.options.css);
-
-                            this._css = new CodeMirror(this.$refs.css, {
-                                lineNumbers: true,
-                                tabSize: 2,
-                                value: this.options.css,
-                                mode: 'css',
-                                theme: 'monokai'
-                            });
-
-                            this._css.on('changes', () => {
-                                this.options.css = this._css.getValue();
-
-                                this.$emit('editorData', this.options);
-                            });
-                        }, 0);
-                    },
-                },
-            });
-        </script>
-
-        {{-- Static Theme component --}}
-        <script type="module">
-            app.component('v-static-theme', {
-                template: '#v-static-theme-template',
-
-                props: ['errors'],
-
-                data() {
-                    return {
-                        inittialEditor: 'v-html-editor-theme',
-
-                        options: @json($theme->options)
-                    };
-                },
-
-                methods: {
-                    switchEditor(editor) {
-                        this.inittialEditor = editor;
-                    },
-
-                    editorData(value) {
-                        if (value.html) {
-                            this.options.html = value.html;
-                        } else {
-                            this.options.css = value.css;
-                        } 
-                    },
-                },
-            });
-        </script>
-            
-        {{-- Category Theme Component --}}
-        <script type="module">
-            app.component('v-category-theme', {
-                template: '#v-category-theme-template',
-
-                props: ['errors'],
-
-                data() {
-                    return {
-                        options: @json($theme->options),
-                    };
-                },
-
-                created() {
-                    if (! this.options.filters) {
-                        this.options.filters = {};
-                    }
-
-                    this.options.filters = Object.keys(this.options.filters)
-                        .filter(key => ! ['sort', 'limit', 'title'].includes(key))
-                        .map(key => ({
-                            key: key,
-                            value: this.options.filters[key]
-                        }));
-                },
-                
-                methods: {
-                    addFilter(params) {
-                        this.options.filters.push(params);
-
-                        this.$refs.categoryFilterModal.toggle();
-                    },
-
-                    remove(filter) {
-                        let index = this.options.filters.indexOf(filter);
-
-                        this.options.filters.splice(index, 1);
-                    },
-                },
-            });
-        </script>
-
-        {{-- Product Theme Component --}}
-        <script type="module">
-            app.component('v-product-theme', {
-                template: '#v-product-theme-template',
-
-                props: ['errors'],
-
-                data() {
-                    return {
-                        options: @json($theme->options),
-                    };
-                },
-
-                created() {
-                    if (! this.options.filters) {
-                        this.options.filters = {};
-                    }
-
-                    this.options.filters = Object.keys(this.options.filters)
-                        .filter(key => ! ['sort', 'limit', 'title'].includes(key))
-                        .map(key => ({
-                            key: key,
-                            value: this.options.filters[key]
-                        }));
-                },
-
-                methods: {
-                    addFilter(params) {
-                        this.options.filters.push(params);
-
-                        this.$refs.productFilterModal.toggle();
-                    },
-
-                    remove(filter) {
-                        let index = this.options.filters.indexOf(filter);
-
-                        this.options.filters.splice(index, 1);
-                    },
-                },
-            });
-        </script>
-
         {{-- Code mirror script CDN --}}
         <script
             type="text/javascript"
@@ -1981,11 +2078,6 @@
 
         {{-- Beatutify html and css --}}
         <script src="https://cdn.jsdelivr.net/npm/simply-beautiful@latest/dist/index.min.js"></script>
-
-        {{-- Instance of the SimplyBeautiful --}}
-        <script>
-            let beautify = SimplyBeautiful();
-        </script>
     @endPushOnce
 
     @pushOnce('styles')
@@ -1995,9 +2087,6 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/codemirror.css"
         >
         </link>
-
-        {{-- Monokai theme css cdn --}}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/theme/monokai.css">
     @endPushOnce
 </x-admin::layouts>
                             

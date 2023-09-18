@@ -114,7 +114,7 @@
 
                             <div class="flex gap-[15px] justify-start max-sm:flex-wrap mt-4 max-sm:justify-center max-sm:mb-[20px] max-xl:mb-[20px]">
                                 <button
-                                    class="bs-primary-button w-full max-w-[374px] py-[16px] px-[43px] rounded-[18px] text-center"
+                                    class="primary-button w-full max-w-[374px] py-[16px] px-[43px] rounded-[18px] text-center"
                                     type='submit'
                                 >
                                     @lang('shop::app.products.submit-review')
@@ -122,7 +122,7 @@
                                 
                                 <button
                                     type="button"
-                                    class="bs-secondary-button items-center px-[30px] py-[10px] rounded-[18px] max-sm:w-full max-sm:max-w-[374px]"
+                                    class="secondary-button items-center px-[30px] py-[10px] rounded-[18px] max-sm:w-full max-sm:max-w-[374px]"
                                     @click="canReview = false"
                                 >
                                     @lang('shop::app.products.view.reviews.cancel')

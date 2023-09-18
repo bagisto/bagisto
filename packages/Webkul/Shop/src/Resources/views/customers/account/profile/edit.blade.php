@@ -131,11 +131,10 @@
                 type="select"
                 name="gender"
                 :value="old('gender') ?? $customer->gender"
-                class="mb-4"
+                class="mb-3"
                 rules="required"
                 :label="trans('shop::app.customers.account.profile.gender')"
             >
-                <option value="">@lang('Select Gender')</option>
                 <option value="Other">@lang('shop::app.customers.account.profile.other')</option>
                 <option value="Male">@lang('shop::app.customers.account.profile.male')</option>
                 <option value="Female">@lang('shop::app.customers.account.profile.female')</option>
@@ -143,6 +142,26 @@
 
             <x-shop::form.control-group.error
                 control-name="gender"
+            >
+            </x-shop::form.control-group.error>
+        </x-shop::form.control-group>
+
+        <x-shop::form.control-group class="mb-4">
+            <x-shop::form.control-group.label>
+                @lang('shop::app.customers.account.profile.dob')
+            </x-shop::form.control-group.label>
+
+            <x-shop::form.control-group.control
+                type="date"
+                name="date_of_birth"
+                :value="old('date_of_birth') ?? $customer->date_of_birth"
+                :label="trans('shop::app.customers.account.profile.dob')"
+                :placeholder="trans('shop::app.customers.account.profile.dob')"
+            >
+            </x-shop::form.control-group.control>
+
+            <x-shop::form.control-group.error
+                control-name="date_of_birth"
             >
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
@@ -231,7 +250,7 @@
 
         <button
             type="submit"
-            class="bs-primary-button block m-0 w-max py-[11px] px-[43px] rounded-[18px] text-base text-center"
+            class="primary-button block m-0 w-max py-[11px] px-[43px] rounded-[18px] text-base text-center"
         >
             @lang('shop::app.customers.account.profile.save')
         </button>

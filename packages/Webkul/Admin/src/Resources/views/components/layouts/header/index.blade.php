@@ -65,18 +65,16 @@
         <x-admin::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
             <x-slot:toggle>
                 @if ($admin->image)
-                    <div class="profile-info-icon">
+                    <button class="flex w-[36px] h-[36px] overflow-hidden rounded-full cursor-pointer hover:opacity-80 focus:opacity-80">
                         <img
                             src="{{ $admin->image_url }}"
-                            class="max-w-[36px] max-h-[36px] rounded-[6px]"
+                            class="w-full"
                         />
-                    </div>
+                    </button>
                 @else
-                    <div class="profile-info-icon">
-                        <button class="flex justify-center items-center w-[36px] h-[36px] bg-blue-400 rounded-full text-[14px] text-white font-semibold cursor-pointer leading-6 transition-all hover:bg-blue-500 focus:bg-blue-500">
-                            {{ substr($admin->name, 0, 1) }}
-                        </button>
-                    </div>
+                    <button class="flex justify-center items-center w-[36px] h-[36px] bg-blue-400 rounded-full text-[14px] text-white font-semibold cursor-pointer leading-6 transition-all hover:bg-blue-500 focus:bg-blue-500">
+                        {{ substr($admin->name, 0, 1) }}
+                    </button>
                 @endif
             </x-slot:toggle>
 

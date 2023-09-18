@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-d6ac9242.css",
+    "file": "assets/app-c5ff1413.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -16,6 +16,10 @@
     "file": "assets/empty-dwn-product-3c9202e1.png",
     "src": "src/Resources/assets/images/empty-dwn-product.png"
   },
+  "src/Resources/assets/images/favicon.ico": {
+    "file": "assets/favicon-1b7c1fb6.ico",
+    "src": "src/Resources/assets/images/favicon.ico"
+  },
   "src/Resources/assets/images/hero-image.jpg": {
     "file": "assets/hero-image-feee3420.jpg",
     "src": "src/Resources/assets/images/hero-image.jpg"
@@ -24,17 +28,17 @@
     "file": "assets/hero-image-3170dce6.webp",
     "src": "src/Resources/assets/images/hero-image.webp"
   },
-  "src/Resources/assets/images/large-product-placeholder.png": {
-    "file": "assets/large-product-placeholder-b4cf34bf.png",
-    "src": "src/Resources/assets/images/large-product-placeholder.png"
+  "src/Resources/assets/images/large-product-placeholder.webp": {
+    "file": "assets/large-product-placeholder-13b8a96b.webp",
+    "src": "src/Resources/assets/images/large-product-placeholder.webp"
   },
   "src/Resources/assets/images/logo.svg": {
     "file": "assets/logo-942157c2.svg",
     "src": "src/Resources/assets/images/logo.svg"
   },
-  "src/Resources/assets/images/medium-product-placeholder.png": {
-    "file": "assets/medium-product-placeholder-e6cf535d.png",
-    "src": "src/Resources/assets/images/medium-product-placeholder.png"
+  "src/Resources/assets/images/medium-product-placeholder.webp": {
+    "file": "assets/medium-product-placeholder-3b1a7b7d.webp",
+    "src": "src/Resources/assets/images/medium-product-placeholder.webp"
   },
   "src/Resources/assets/images/no-address.png": {
     "file": "assets/no-address-740c7843.png",
@@ -48,9 +52,9 @@
     "file": "assets/review-342fab8f.png",
     "src": "src/Resources/assets/images/review.png"
   },
-  "src/Resources/assets/images/small-product-placeholder.png": {
-    "file": "assets/small-product-placeholder-9140cd4a.png",
-    "src": "src/Resources/assets/images/small-product-placeholder.png"
+  "src/Resources/assets/images/small-product-placeholder.webp": {
+    "file": "assets/small-product-placeholder-64b7f208.webp",
+    "src": "src/Resources/assets/images/small-product-placeholder.webp"
   },
   "src/Resources/assets/images/thank-you.png": {
     "file": "assets/thank-you-aa4a2b62.png",
@@ -72,7 +76,7 @@
     "css": [
       "assets/app-f72387a9.css"
     ],
-    "file": "assets/app-e8f91f89.js",
+    "file": "assets/app-e49f5ac1.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   }

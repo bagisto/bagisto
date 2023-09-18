@@ -1028,9 +1028,9 @@ return [
             'create-success'       => 'دسته‌بندی با موفقیت ایجاد شد.',
             'category'             => 'دسته‌بندی',
             'update-success'       => 'دسته‌بندی با موفقیت به‌روزرسانی شد.',
-            'delete-success'       => 'دسته‌بندی با موفقیت حذف شد.',
-            'delete-category-root' => 'ریشه :name نمی‌تواند حذف شود.',
-            'delete-failed'        => ':name حذف نشد.',
+            'delete-success'       => 'دسته‌بندی با موفق',
+            'delete-category-root' => 'دسته بندی اصلی قابل حذف نیست.',
+            'delete-failed'        => 'خطا در حذف دسته بندی رخ داده است',
         ],
 
         'families'   => [
@@ -2300,7 +2300,7 @@ return [
                 'title'             => 'کانال‌ها',
                 'create-btn'        => 'ساخت کانال',
                 'delete-success'    => 'کانال با موفقیت حذف شد.',
-                'delete-failed'     => 'حذف :name ناموفق بود',
+                'delete-failed'     => 'حذف کانال ناموفق بود',
                 'last-delete-error' => 'حذف آخرین کانال ناموفق بود.',
 
                 'datagrid' => [
@@ -2422,17 +2422,6 @@ return [
                 'edit'  => [
                     'title'    => 'ویرایش کاربر',
                 ],
-
-                'activate-warning'   => 'حساب کاربری شما هنوز فعال نشده است، لطفا با مدیر تماس بگیرید.',
-                'create-success'     => 'کاربر با موفقیت ایجاد شد.',
-                'cannot-change'      => 'امکان تغییر کاربر وجود ندارد',
-                'delete-failed'      => 'حذف کاربر ناموفق بود.',
-                'delete-success'     => 'کاربر با موفقیت حذف شد.',
-                'incorrect-password' => 'رمز عبور نادرست است',
-                'last-delete-error'  => 'آخرین حذف کاربر ناموفق بود',
-                'login-error'        => 'لطفاً اطلاعات ورود خود را بررسی کرده و دوباره تلاش کنید.',
-                'update-success'     => 'کاربر با موفقیت به‌روزرسانی شد.',
-                'delete-warning'     => 'آیا مطمئن هستید که می‌خواهید این عمل را انجام دهید؟',
             ],
 
             'edit'  => [
@@ -2448,8 +2437,16 @@ return [
                 'save-btn'         => 'ذخیره کاربر',
             ],
 
-            'update-success' => 'کاربر با موفقیت به‌روزرسانی شد.',
-            'delete-success' => 'کاربر با موفقیت حذف شد.',
+            'delete-failed'      => 'حذف کاربر ناموفق بود.',
+            'cannot-change'      => 'امکان تغییر کاربر وجود ندارد.',
+            'update-success'     => 'کاربر با موفقیت به‌روزرسانی شد.',
+            'delete-success'     => 'کاربر با موفقیت حذف شد.',
+            'incorrect-password' => 'رمزعبور نادرست است',
+            'create-success'     => 'کاربر با موفقیت ایجاد شد.',
+            'delete-warning'     => 'آیا از انجام این عمل مطمئن هستید؟',
+            'login-error'        => 'لطفاً اطلاعات ورود خود را بررسی کرده و دوباره تلاش کنید.',
+            'activate-warning'   => 'حساب شما هنوز فعال نشده است، لطفاً با مدیر تماس بگیرید.',
+            'last-delete-error'  => 'حذف آخرین کاربر ناموفق بود.'
         ],
 
         'roles' => [
@@ -2519,52 +2516,18 @@ return [
             ],
 
             'create' => [
-                'title'                          => 'ایجاد پوسته',
-                'sliders'                        => 'اسلایدرها',
-                'product-carousel'               => 'کاروسل محصول',
-                'product-carousel-description'   => 'نمایش محصولات به شکل زیبا با یک کاروسل محصول پویا و واکنش‌پذیر.',
-                'category-carousel-description'  => 'نمایش دسته‌بندی‌ها به شکل جذاب با استفاده از یک کاروسل دسته‌بندی واکنش‌پذیر.',
-                'static-content-description'     => 'افزایش انگیزه با محتوای ثابت مختصر و اطلاعاتی برای مخاطبین خود.',
-                'footer-link-description'        => 'مسیریابی از طریق پیوندهای پایین صفحه برای کاوش و دریافت اطلاعات بی‌وقفه.',
-                'category-carousel'              => 'کاروسل دسته‌بندی',
-                'static-content'                 => 'محتوای ثابت',
-                'footer-link'                    => 'پیوندهای پایین صفحه',
-                'footer-link-form-title'         => 'پیوند پایین صفحه',
-                'slider-description'             => 'سفارشی‌سازی مرتبط با اسلایدر.',
-                'slider-add-btn'                 => 'افزودن اسلایدر',
-                'general'                        => 'عمومی',
-                'add-filter-btn'                 => 'افزودن فیلتر',
-                'save-btn'                       => 'ذخیره',
-                'filter-title'                   => 'عنوان',
-                'sort'                           => 'مرتب‌سازی',
-                'desc'                           => 'نزولی',
-                'asc'                            => 'صعودی',
-                'limit'                          => 'محدودیت',
-                'footer-title'                   => 'عنوان',
-                'link'                           => 'پیوند',
-                'add-logo'                       => 'افزودن لوگو',
-                'key'                            => 'کلید: :key',
-                'value'                          => 'مقدار: :value',
-                'delete'                         => 'حذف',
-                'name'                           => 'نام',
-                'sort-order'                     => 'ترتیب مرتب‌سازی',
-                'status'                         => 'وضعیت',
-                'image'                          => 'تصویر',
-                'create-filter'                  => 'ایجاد فیلتر',
-                'key-input'                      => 'کلید',
-                'value-input'                    => 'مقدار',
-                'html'                           => 'HTML',
-                'css'                            => 'CSS',
-                'add-footer-link-btn'            => 'افزودن پیوند پایین صفحه',
-                'filters'                        => 'فیلترها',
-                'edit'                           => 'ویرایش',
-                'path'                           => 'مسیر',
-                'add-link'                       => 'افزودن پیوند',
-                'create-slider'                  => 'ایجاد اسلایدر',
-                'slider-image'                   => 'تصویر اسلایدر',
-                'column'                         => 'ستون',
-                'select'                         => 'انتخاب',
-                'back'                           => 'بازگشت',
+                'title'      => 'ایجاد تم',
+                'save-btn'   => 'ذخیره',
+                'name'       => 'نام',
+                'sort-order' => 'ترتیب مرتب‌سازی',
+                'type'       => [
+                    'title'             => 'نوع',
+                    'product-carousel'  => 'کاروسل محصولات',
+                    'category-carousel' => 'کاروسل دسته‌بندی‌ها',
+                    'static-content'    => 'محتوای استاتیک',
+                    'image-carousel'    => 'کاروسل تصاویر',
+                    'footer-links'      => 'لینک‌های پاورقی',
+                ],
             ],
 
             'edit' => [
@@ -2584,6 +2547,7 @@ return [
                 'slider-add-btn'                => 'افزودن اسلایدر',
                 'general'                       => 'عمومی',
                 'add-filter-btn'                => 'افزودن فیلتر',
+                'add-image-btn'                 => 'افزودن تصویر',
                 'save-btn'                      => 'ذخیره',
                 'filter-title'                  => 'عنوان',
                 'sort'                          => 'مرتب‌سازی',
@@ -2613,6 +2577,7 @@ return [
                 'path'                          => 'مسیر',
                 'edit'                          => 'ویرایش',
                 'back'                          => 'بازگشت',
+                'preview'                       => 'پیش‌نمایش',
             ],
 
             'create-success' => 'پوسته با موفقیت ایجاد شد',
@@ -2866,12 +2831,6 @@ return [
                 'settings' => [
                     'settings-info' => 'Wunschliste, Newsletter-Abonnement, E-Mail-Verifikation und soziale Anmeldung einrichten.',
                     'title'         => 'Einstellungen',
-
-                    'wishlist' => [
-                        'share'      => 'Freigabe aktivieren',
-                        'title'      => 'Wunschliste',
-                        'title-info' => 'Eine "Wunschliste" ist eine persönliche Sammlung von gewünschten Elementen, die Benutzern ermöglicht, Produkte für zukünftige Referenzen oder mögliche Einkäufe zu speichern.',
-                    ],
 
                     'newsletter' => [
                         'subscription' => 'Newsletter-Abonnement aktivieren',

@@ -1029,8 +1029,8 @@ return [
             'category'             => 'Categorie',
             'update-success'       => 'Categorie succesvol bijgewerkt.',
             'delete-success'       => 'De categorie is succesvol verwijderd.',
-            'delete-category-root' => 'De Hoofdcategorie :name kan niet worden verwijderd.',
-            'delete-failed'        => 'De :name kon niet worden verwijderd',
+            'delete-category-root' => 'De hoofdcategorie kan niet worden verwijderd.',
+            'delete-failed'        => 'Fout opgetreden bij het verwijderen van de categorie',
         ],
 
         'families' => [
@@ -2300,7 +2300,7 @@ return [
                 'title'             => 'Kanalen',
                 'create-btn'        => 'Kanaal Aanmaken',
                 'delete-success'    => 'Kanaal succesvol verwijderd.',
-                'delete-failed'     => ':name Verwijderen Mislukt',
+                'delete-failed'     => 'Kanaal Verwijderen Mislukt',
                 'last-delete-error' => 'Laatste Kanaal Verwijderen Mislukt',
 
                 'datagrid' => [
@@ -2422,17 +2422,6 @@ return [
                 'edit' => [
                     'title' => 'Gebruiker Bewerken',
                 ],
-
-                'activate-warning'   => 'Uw account is nog niet geactiveerd, neem contact op met de beheerder.',
-                'create-success'     => 'Gebruiker succesvol aangemaakt.',
-                'cannot-change'      => 'Gebruiker kan niet worden gewijzigd',
-                'delete-failed'      => 'Gebruiker verwijderen mislukt.',
-                'delete-success'     => 'Gebruiker succesvol verwijderd.',
-                'incorrect-password' => 'Onjuist wachtwoord',
-                'last-delete-error'  => 'Laatste Gebruiker verwijderen mislukt',
-                'login-error'        => 'Controleer uw inloggegevens en probeer het opnieuw.',
-                'update-success'     => 'Gebruiker succesvol bijgewerkt.',
-                'delete-warning'     => 'Weet u zeker dat u deze actie wilt uitvoeren?',
             ],
 
             'edit' => [
@@ -2448,8 +2437,16 @@ return [
                 'save-btn'         => 'Gebruiker Opslaan',
             ],
 
-            'update-success' => 'Gebruiker succesvol bijgewerkt.',
-            'delete-success' => 'Gebruiker succesvol verwijderd.',
+            'delete-failed'      => 'Gebruiker kon niet worden verwijderd.',
+            'cannot-change'      => 'Gebruiker kan niet worden gewijzigd.',
+            'update-success'     => 'Gebruiker succesvol bijgewerkt.',
+            'delete-success'     => 'Gebruiker succesvol verwijderd.',
+            'incorrect-password' => 'Onjuist wachtwoord',
+            'create-success'     => 'Gebruiker succesvol aangemaakt.',
+            'delete-warning'     => 'Weet u zeker dat u deze actie wilt uitvoeren?',
+            'login-error'        => 'Controleer uw inloggegevens en probeer het opnieuw.',
+            'activate-warning'   => 'Uw account is nog niet geactiveerd, neem contact op met de beheerder.',
+            'last-delete-error'  => 'Laatste gebruiker kon niet worden verwijderd.'
         ],
 
         'roles' => [
@@ -2519,52 +2516,18 @@ return [
             ],
 
             'create' => [
-                'title'                         => 'Thema maken',
-                'sliders'                       => 'Sliders',
-                'product-carousel'              => 'Productcarrousel',
-                'product-carousel-description'  => 'Toon producten elegant met een dynamische en responsieve productcarrousel.',
-                'category-carousel-description' => 'Toon dynamische categorieën aantrekkelijk met een responsieve categoriecarrousel.',
-                'static-content-description'    => 'Verbeter de betrokkenheid van uw publiek met beknopte, informatieve statische inhoud.',
-                'footer-link-description'       => 'Navigeer via voettekstlinks voor naadloze websiteverkenning en informatie.',
-                'category-carousel'             => 'Categoriecarrousel',
-                'static-content'                => 'Statische inhoud',
-                'footer-link'                   => 'Voettekstlinks',
-                'footer-link-form-title'        => 'Voettekstlink',
-                'slider-description'            => 'Thema-aanpassing gerelateerd aan sliders.',
-                'slider-add-btn'                => 'Slider toevoegen',
-                'general'                       => 'Algemeen',
-                'add-filter-btn'                => 'Filter toevoegen',
-                'save-btn'                      => 'Opslaan',
-                'filter-title'                  => 'Titel',
-                'sort'                          => 'Sorteren',
-                'desc'                          => 'Aflopend',
-                'asc'                           => 'Oplopend',
-                'limit'                         => 'Limiet',
-                'footer-title'                  => 'Titel',
-                'link'                          => 'Link',
-                'add-logo'                      => 'Logo toevoegen',
-                'key'                           => 'Sleutel: :key',
-                'value'                         => 'Waarde: :value',
-                'delete'                        => 'Verwijderen',
-                'name'                          => 'Naam',
-                'sort-order'                    => 'Sorteervolgorde',
-                'status'                        => 'Status',
-                'image'                         => 'Afbeelding',
-                'create-filter'                 => 'Filter maken',
-                'key-input'                     => 'Sleutel',
-                'value-input'                   => 'Waarde',
-                'html'                          => 'HTML',
-                'css'                           => 'CSS',
-                'add-footer-link-btn'           => 'Voettekstlink toevoegen',
-                'filters'                       => 'Filters',
-                'edit'                          => 'Bewerken',
-                'path'                          => 'Pad',
-                'add-link'                      => 'Link toevoegen',
-                'create-slider'                 => 'Slider maken',
-                'slider-image'                  => 'Sliderafbeelding',
-                'column'                        => 'Kolom',
-                'select'                        => 'Selecteer',
-                'back'                          => 'Terug',
+                'title'      => 'Thema maken',
+                'save-btn'   => 'Opslaan',
+                'name'       => 'Naam',
+                'sort-order' => 'Sorteervolgorde',
+                'type'       => [
+                    'title'             => 'Type',
+                    'product-carousel'  => 'Product Carrousel',
+                    'category-carousel' => 'Categorie Carrousel',
+                    'static-content'    => 'Statische Inhoud',
+                    'image-carousel'    => 'Afbeelding Carrousel',
+                    'footer-links'      => 'Voettekst Koppelingen',
+                ],
             ],
 
             'edit' => [
@@ -2584,6 +2547,7 @@ return [
                 'slider-add-btn'                => 'Slider toevoegen',
                 'general'                       => 'Algemeen',
                 'add-filter-btn'                => 'Filter toevoegen',
+                'add-image-btn'                 => 'Afbeelding Toevoegen',
                 'save-btn'                      => 'Opslaan',
                 'filter-title'                  => 'Titel',
                 'sort'                          => 'Sorteren',
@@ -2613,6 +2577,7 @@ return [
                 'path'                          => 'Pad',
                 'edit'                          => 'Bewerken',
                 'back'                          => 'Terug',
+                'preview'                       => 'Voorbeeld',
             ],
 
             'create-success' => 'Thema succesvol aangemaakt',
@@ -2866,12 +2831,6 @@ return [
                 'settings' => [
                     'settings-info' => 'Stel verlanglijst, abonnementen op nieuwsbrieven, e-mailverificaties en sociale login in.',
                     'title'         => 'Instellingen',
-
-                    'wishlist' => [
-                        'share'      => 'Delen inschakelen',
-                        'title'      => 'Verlanglijst',
-                        'title-info' => '"Verlanglijst" is een persoonlijke verzameling gewenste items, waarmee gebruikers producten kunnen opslaan voor toekomstige referentie of mogelijke aankoop.',
-                    ],
 
                     'newsletter' => [
                         'subscription' => 'Abonnement op nieuwsbrief toestaan',

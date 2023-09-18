@@ -21,7 +21,11 @@
             href="{{ route('shop.home.index') }}" 
             class="place-self-start -mt-[4px]"
         >
-            <img src="{{ bagisto_asset('images/logo.svg') }}">
+            <img
+                src="{{ bagisto_asset('images/logo.svg') }}"
+                width="131"
+                height="29"
+            >
         </a>
 
         <v-desktop-category>
@@ -59,20 +63,24 @@
                     required
                 >
 
-                <button
-                    type="button"
-                    class="icon-camera flex items-center absolute top-[10px] ltr:right-[12px] rtl:left-[12px] pr-3 text-[22px]"
-                >
-                </button>
+                @if (core()->getConfigData('general.content.shop.image_search')) 
+                    <button
+                        type="button"
+                        class="icon-camera flex items-center absolute top-[10px] ltr:right-[12px] rtl:left-[12px] pr-3 text-[22px]"
+                    >
+                    </button>
+                @endif
             </div>
         </form>
 
         {{-- Right Navigation Links --}}
         <div class="flex gap-x-[35px] mt-[5px] max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px]">
             {{-- Compare --}}
-            <a href="{{ route('shop.compare.index') }}">
-                <span class="icon-compare inline-block text-[24px] cursor-pointer"></span>
-            </a>
+            @if($showCompare)
+                <a href="{{ route('shop.compare.index') }}">
+                    <span class="icon-compare inline-block text-[24px] cursor-pointer"></span>
+                </a>
+            @endif
 
             {{-- Mini cart --}}
             @include('shop::checkout.cart.mini-cart')
@@ -101,14 +109,14 @@
                         <div class="flex gap-[16px] mt-[25px]">
                             <a
                                 href="{{ route('shop.customer.session.create') }}"
-                                class="bs-primary-button block w-max px-[29px] mx-auto m-0 ml-[0px] rounded-[18px] text-base text-center"
+                                class="primary-button block w-max px-[29px] mx-auto m-0 ml-[0px] rounded-[18px] text-base text-center"
                             >
                                 @lang('shop::app.components.layouts.header.sign-in')
                             </a>
 
                             <a
                                 href="{{ route('shop.customers.register.index') }}"
-                                class="bs-secondary-button block w-max m-0 ml-[0px] mx-auto px-[29px] border-2 rounded-[18px] text-base text-center"
+                                class="secondary-button block w-max m-0 ml-[0px] mx-auto px-[29px] border-2 rounded-[18px] text-base text-center"
                             >
                                 @lang('shop::app.components.layouts.header.sign-up')
                             </a>

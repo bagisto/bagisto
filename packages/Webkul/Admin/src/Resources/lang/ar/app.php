@@ -687,8 +687,7 @@ return [
                             'checkbox'    => 'خانة اختيار',
                             'is-required' => 'مطلوب',
                             'multiselect' => 'اختيار متعدد',
-                            'name'                        'image-placeholder' => 'صورة المنتج',
-                            => 'العنوان',
+                            'name'        => 'العنوان',
                             'no'          => 'لا',
                             'radio'       => 'زر الراديو',
                             'select'      => 'اختيار',
@@ -1030,8 +1029,8 @@ return [
             'category'             => 'الفئة',
             'update-success'       => 'تم تحديث الفئة بنجاح.',
             'delete-success'       => 'تم حذف الفئة بنجاح.',
-            'delete-category-root' => 'لا يمكن حذف الفئة الجذر :name.',
-            'delete-failed'        => 'فشل حذف الفئة :name.',
+            'delete-category-root' => 'لا يمكن حذف الفئة الجذر.',
+            'delete-failed'        => 'حدث خطأ أثناء حذف الفئة.',
         ],
 
         'families'   => [
@@ -2301,7 +2300,7 @@ return [
                 'title'             => 'القنوات',
                 'create-btn'        => 'إنشاء قناة',
                 'delete-success'    => 'تم حذف القناة بنجاح.',
-                'delete-failed'     => 'فشل حذف :name',
+                'delete-failed'     => 'فشل حذف قناة',
                 'last-delete-error' => 'فشل حذف آخر قناة.',
 
                 'datagrid' => [
@@ -2423,17 +2422,6 @@ return [
                 'edit'  => [
                     'title'    => 'تعديل المستخدم',
                 ],
-
-                'activate-warning'   => 'حسابك لم يتم تفعيله بعد، يرجى التواصل مع المسؤول.',
-                'create-success'     => 'تم إنشاء المستخدم بنجاح.',
-                'cannot-change'      => 'لا يمكن تغيير المستخدم',
-                'delete-failed'      => 'فشل حذف المستخدم.',
-                'delete-success'     => 'تم حذف المستخدم بنجاح.',
-                'incorrect-password' => 'كلمة المرور غير صحيحة',
-                'last-delete-error'  => 'فشل حذف آخر مستخدم',
-                'login-error'        => 'يرجى التحقق من بيانات الاعتماد الخاصة بك والمحاولة مرة أخرى.',
-                'update-success'     => 'تم تحديث المستخدم بنجاح.',
-                'delete-warning'     =>'هل أنت متأكد أنك تريد أن تنفذ هذا الإجراء؟',
             ],
 
             'edit'  => [
@@ -2449,8 +2437,16 @@ return [
                 'save-btn'         => 'حفظ المستخدم',
             ],
 
-            'update-success'   => 'تم تحديث المستخدم بنجاح.',
-            'delete-success'   => 'تم حذف المستخدم بنجاح.',
+            'delete-failed'      => 'فشل حذف المستخدم.',
+            'cannot-change'      => 'لا يمكن تغيير المستخدم.',
+            'update-success'     => 'تم تحديث المستخدم بنجاح.',
+            'delete-success'     => 'تم حذف المستخدم بنجاح.',
+            'incorrect-password' => 'كلمة المرور غير صحيحة.',
+            'create-success'     => 'تم إنشاء المستخدم بنجاح.',
+            'delete-warning'     => 'هل أنت متأكد أنك تريد القيام بهذا الإجراء؟',
+            'login-error'        => 'يرجى التحقق من بيانات الاعتماد الخاصة بك والمحاولة مرة أخرى.',
+            'activate-warning'   => 'حسابك لم يتم تفعيله بعد، يرجى التواصل مع المسؤول.',
+            'last-delete-error'  => 'فشل حذف المستخدم الأخير.'
         ],
 
         'roles' => [
@@ -2520,52 +2516,18 @@ return [
             ],
 
             'create' => [
-                'title'                         => 'إنشاء سمة',
-                'sliders'                       => 'شرائح',
-                'product-carousel'              => 'شريط منتجات',
-                'product-carousel-description'  => 'عرض المنتجات بشكل أنيق باستخدام شريط منتجات ديناميكي ومتجاوب.',
-                'category-carousel-description' => 'عرض الفئات الديناميكية بشكل جذاب باستخدام شريط فئات متجاوب.',
-                'static-content-description'    => 'زيادة التفاعل مع محتوى ثابت وموجز ومعلوماتي لجمهورك.',
-                'footer-link-description'       => 'انتقل عبر روابط التذييل لاستكشاف الموقع بسلاسة والحصول على المعلومات.',
-                'category-carousel'             => 'شريط فئات',
-                'static-content'                => 'محتوى ثابت',
-                'footer-link'                   => 'روابط التذييل',
-                'footer-link-form-title'        => 'روابط التذييل',
-                'slider-description'            => 'تخصيص السمة المتعلق بالشرائح.',
-                'slider-add-btn'                => 'إضافة شريحة',
-                'general'                       => 'عام',
-                'add-filter-btn'                => 'إضافة مرشح',
-                'save-btn'                      => 'حفظ',
-                'filter-title'                  => 'العنوان',
-                'sort'                          => 'فرز',
-                'desc'                          => 'تنازلي',
-                'asc'                           => 'تصاعدي',
-                'limit'                         => 'الحد',
-                'footer-title'                  => 'العنوان',
-                'link'                          => 'الرابط',
-                'add-logo'                      => 'إضافة شعار',
-                'key'                           => 'المفتاح: :key',
-                'value'                         => 'القيمة: :value',
-                'delete'                        => 'حذف',
-                'name'                          => 'الاسم',
-                'sort-order'                    => 'ترتيب الفرز',
-                'status'                        => 'الحالة',
-                'image'                         => 'الصورة',
-                'create-filter'                 => 'إنشاء مرشح',
-                'key-input'                     => 'المفتاح',
-                'value-input'                   => 'القيمة',
-                'html'                          => 'HTML',
-                'css'                           => 'CSS',
-                'add-footer-link-btn'           => 'إضافة رابط التذييل',
-                'filters'                       => 'مرشحات',
-                'edit'                          => 'تعديل',
-                'path'                          => 'مسار',
-                'add-link'                      => 'إضافة رابط',
-                'create-slider'                 => 'إنشاء شريحة',
-                'slider-image'                  => 'صورة الشريحة',
-                'column'                        => 'العمود',
-                'select'                        => 'اختر',
-                'back'                          => 'رجوع',
+                'title'      => 'إنشاء السمة',
+                'save-btn'   => 'حفظ',
+                'name'       => 'الاسم',
+                'sort-order' => 'ترتيب الفرز',
+                'type'       => [
+                    'title'             => 'النوع',
+                    'product-carousel'  => 'المنتجات المتجولة',
+                    'category-carousel' => 'متجر الفئات',
+                    'static-content'    => 'المحتوى الثابت',
+                    'image-carousel'    => 'متجر الصور',
+                    'footer-links'      => 'روابط الذيل',
+                ],
              ],
 
             'edit' => [
@@ -2585,6 +2547,7 @@ return [
                 'slider-add-btn'                => 'إضافة شريحة',
                 'general'                       => 'عام',
                 'add-filter-btn'                => 'إضافة مرشح',
+                'add-image-btn'                 => 'إضافة صورة',
                 'save-btn'                      => 'حفظ',
                 'filter-title'                  => 'العنوان',
                 'sort'                          => 'فرز',
@@ -2614,6 +2577,7 @@ return [
                 'path'                          => 'مسار',
                 'edit'                          => 'تعديل',
                 'back'                          => 'رجوع',
+                'preview'                       => 'معاينة'
             ],
 
             'create-success' => 'تم إنشاء السمة بنجاح',
@@ -2867,12 +2831,6 @@ return [
                 'settings' => [
                     'title'          => 'الإعدادات',
                     'settings-info'  => 'تعيين قائمة الأماني، الاشتراك في النشرة الإخبارية، التحقق من البريد الإلكتروني وتسجيل الدخول الاجتماعي.',
-
-                    'wishlist' => [
-                        'share'      => 'تمكين المشاركة',
-                        'title'      => 'قائمة الأماني',
-                        'title-info' => '"قائمة الأماني" هي مجموعة شخصية من العناصر المرغوبة، تتيح للمستخدمين حفظ المنتجات للرجوع إليها في المستقبل أو للشراء المحتمل.',
-                    ],
 
                     'newsletter' => [
                         'subscription' => 'السماح بالاشتراك في النشرة الإخبارية',

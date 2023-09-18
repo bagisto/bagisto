@@ -1030,8 +1030,8 @@ return [
             'category'              => 'Kategori',
             'update-success'        => 'Kategori başarıyla güncellendi.',
             'delete-success'        => 'Kategori başarıyla silindi.',
-            'delete-category-root'  => 'Kök :name silinemez.',
-            'delete-failed'         => ':name silinemedi.',
+            'delete-category-root'  => 'Ana kategori silinemez.',
+            'delete-failed'         => 'Kategori silinirken bir hata oluştu',
         ],
 
         'families' => [
@@ -2301,7 +2301,7 @@ return [
                 'title'             => 'Kanallar',
                 'create-btn'        => 'Kanal Oluştur',
                 'delete-success'    => 'Kanal başarıyla silindi.',
-                'delete-failed'     => ':name Silme Başarısız',
+                'delete-failed'     => 'Kanal Silme Başarısız',
                 'last-delete-error' => 'Son Kanal silinemedi.',
 
                 'datagrid' => [
@@ -2423,17 +2423,6 @@ return [
                 'edit'  => [
                     'title'    => 'Kullanıcıyı Düzenle',
                 ],
-
-                'activate-warning'   => 'Hesabınız henüz etkinleştirilmedi, lütfen yönetici ile iletişime geçin.',
-                'create-success'     => 'Kullanıcı başarıyla oluşturuldu.',
-                'cannot-change'      => 'Kullanıcı değiştirilemez',
-                'delete-failed'      => 'Kullanıcı silinemedi.',
-                'delete-success'     => 'Kullanıcı başarıyla silindi.',
-                'incorrect-password' => 'Geçersiz şifre',
-                'last-delete-error'  => 'Son Kullanıcı silme başarısız',
-                'login-error'        => 'Lütfen kimlik bilgilerinizi kontrol edin ve yeniden deneyin.',
-                'update-success'     => 'Kullanıcı başarıyla güncellendi.',
-                'delete-warning'     => 'Bu işlemi yapmak istediğinizden emin misiniz?',
             ],
 
             'edit'  => [
@@ -2448,9 +2437,17 @@ return [
                 'status'           => 'Durum',
                 'save-btn'         => 'Kullanıcıyı Kaydet',
             ],
-
-            'update-success' => 'Kullanıcı başarıyla güncellendi.',
-            'delete-success' => 'Kullanıcı başarıyla silindi.',
+            
+            'delete-failed'      => 'Kullanıcı silme başarısız.',
+            'cannot-change'      => 'Kullanıcı değiştirilemez.',
+            'update-success'     => 'Kullanıcı başarıyla güncellendi.',
+            'delete-success'     => 'Kullanıcı başarıyla silindi.',
+            'incorrect-password' => 'Yanlış şifre',
+            'create-success'     => 'Kullanıcı başarıyla oluşturuldu.',
+            'delete-warning'     => 'Bu işlemi gerçekleştirmek istediğinizden emin misiniz?',
+            'login-error'        => 'Kimlik bilgilerinizi kontrol edin ve yeniden deneyin.',
+            'activate-warning'   => 'Hesabınız henüz etkinleştirilmedi, lütfen yöneticiyle iletişime geçin.',
+            'last-delete-error'  => 'Son kullanıcıyı silme başarısız.'
         ],
 
         'roles' => [
@@ -2520,52 +2517,18 @@ return [
             ],
 
             'create' => [
-                'title'                          => 'Tema Oluştur',
-                'sliders'                        => 'Sliderlar',
-                'product-carousel'               => 'Ürün Karuseli',
-                'product-carousel-description'   => 'Ürünleri dinamik ve duyarlı bir ürün karuseli ile şık bir şekilde sergileyin.',
-                'category-carousel-description'  => 'Dinamik kategorileri duyarlı bir kategori karuseli kullanarak çekici bir şekilde görüntüleyin.',
-                'static-content-description'     => 'Kitlenizin ilgisini çekecek özlü ve bilgilendirici statik içerik sunun.',
-                'footer-link-description'        => 'Sorunsuz web sitesi keşfi ve bilgi için footer bağlantıları üzerinden gezinin.',
-                'category-carousel'              => 'Kategori Karuseli',
-                'static-content'                 => 'Statik İçerik',
-                'footer-link'                    => 'Footer Bağlantıları',
-                'footer-link-form-title'         => 'Footer Bağlantısı',
-                'slider-description'             => 'Slider ile ilgili tema özelleştirmesi.',
-                'slider-add-btn'                 => 'Slider Ekle',
-                'general'                        => 'Genel',
-                'add-filter-btn'                 => 'Filtre Ekle',
-                'save-btn'                       => 'Kaydet',
-                'filter-title'                   => 'Başlık',
-                'sort'                           => 'Sırala',
-                'desc'                           => 'Azalan',
-                'asc'                            => 'Artan',
-                'limit'                          => 'Sınırla',
-                'footer-title'                   => 'Başlık',
-                'link'                           => 'Bağlantı',
-                'add-logo'                       => 'Logo Ekle',
-                'key'                            => 'Anahtar: :key',
-                'value'                          => 'Değer: :value',
-                'delete'                         => 'Sil',
-                'name'                           => 'Ad',
-                'sort-order'                     => 'Sıralama Sırası',
-                'status'                         => 'Durum',
-                'image'                          => 'Resim',
-                'create-filter'                  => 'Filtre Oluştur',
-                'key-input'                      => 'Anahtar',
-                'value-input'                    => 'Değer',
-                'html'                           => 'HTML',
-                'css'                            => 'CSS',
-                'add-footer-link-btn'            => 'Footer Bağlantısı Ekle',
-                'filters'                        => 'Filtreler',
-                'edit'                           => 'Düzenle',
-                'path'                           => 'Yol',
-                'add-link'                       => 'Bağlantı Ekle',
-                'create-slider'                  => 'Slider Oluştur',
-                'slider-image'                   => 'Slider Resmi',
-                'column'                         => 'Sütun',
-                'select'                         => 'Seç',
-                'back'                           => 'Geri',
+                'title'      => 'Tema Oluştur',
+                'save-btn'   => 'Kaydet',
+                'name'       => 'Ad',
+                'sort-order' => 'Sıralama Sırası',
+                'type'       => [
+                    'title'             => 'Tür',
+                    'product-carousel'  => 'Ürün Karuseli',
+                    'category-carousel' => 'Kategori Karuseli',
+                    'static-content'    => 'Statik İçerik',
+                    'image-carousel'    => 'Resim Karuseli',
+                    'footer-links'      => 'Alt Bağlantılar',
+                ],
             ],
 
             'edit' => [
@@ -2585,6 +2548,7 @@ return [
                 'slider-add-btn'                => 'Slider Ekle',
                 'general'                       => 'Genel',
                 'add-filter-btn'                => 'Filtre Ekle',
+                'add-image-btn'                 => 'Resim Ekle',
                 'save-btn'                      => 'Kaydet',
                 'filter-title'                  => 'Başlık',
                 'sort'                          => 'Sırala',
@@ -2614,6 +2578,7 @@ return [
                 'path'                          => 'Yol',
                 'edit'                          => 'Düzenle',
                 'back'                          => 'Geri',
+                'preview'                       => 'Önizleme',
             ],
 
             'create-success' => 'Tema başarıyla oluşturuldu',
@@ -2866,12 +2831,6 @@ return [
                 'settings' => [
                     'settings-info' => 'Dilek listesi, bülten abonelikleri, e-posta doğrulamaları ve sosyal giriş ayarlarını yapın.',
                     'title'         => 'Ayarlar',
-
-                    'wishlist' => [
-                        'share'      => 'Paylaşımı Etkinleştir',
-                        'title'      => 'Dilek Listesi',
-                        'title-info' => '"Dilek listesi", kullanıcıların gelecekte başvurmak veya potansiyel satın alma için ürünleri kaydetmelerine olanak tanıyan kişiselleştirilmiş bir ürün koleksiyonudur.',
-                    ],
 
                     'newsletter' => [
                         'subscription' => 'Bülten Aboneliğine İzin Ver',

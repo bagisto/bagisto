@@ -74,6 +74,7 @@ return [
                 'delete-profile'          => 'Usuń profil',
                 'edit-profile'            => 'Edytuj profil',
                 'edit'                    => 'Edytuj',
+                'edit-success'            => 'Profil zaktualizowany pomyślnie',
                 'phone'                   => 'Telefon',
                 'current-password'        => 'Obecne hasło',
                 'new-password'            => 'Nowe hasło',
@@ -89,6 +90,7 @@ return [
                 'female'                  => 'Kobieta',
                 'other'                   => 'Inna',
                 'save'                    => 'Zapisz',
+                'unmatch'                 => 'Stare hasło nie pasuje.',
             ],
 
             'addresses' => [
@@ -255,6 +257,7 @@ return [
                 'delete-all'         => 'Usuń wszystko',
                 'empty'              => 'Na liście życzeń nie dodano jeszcze żadnych produktów.',
                 'move-to-cart'       => 'Przenieś do koszyka',
+                'moved-success'      => 'Przedmiot pomyślnie przeniesiony do koszyka',    
                 'profile'            => 'Profil',
                 'removed'            => 'Produkt pomyślnie usunięty z listy życzeń',
                 'remove-fail'        => 'Produkt nie może zostać usunięty z listy życzeń',

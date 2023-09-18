@@ -2,7 +2,6 @@
 
 namespace Webkul\Admin\Http\Controllers\Settings;
 
-use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\ChannelRepository;
@@ -168,15 +167,18 @@ class ChannelController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return \Illuminate\Http\JsonResponse
+     * @param  int  $id
+     * @return void
      */
     public function destroy($id)
     {
         $channel = $this->channelRepository->findOrFail($id);
 
         if ($channel->code == config('app.channel')) {
-            return response()->json(['message' => trans('admin::app.settings.channels.index.last-delete-error')], 400);
+            return response()->json([
+                'message'    => trans('admin::app.settings.channels.index.last-delete-error'),
+                'statusCode' => 400,
+            ]);
         }
 
         try {
@@ -187,18 +189,16 @@ class ChannelController extends Controller
             Event::dispatch('core.channel.delete.after', $id);
 
             return response()->json([
-                'data' => [
-                    'message' => trans('admin::app.settings.channels.delete-success')
-                ]
-            ], 200);
+                'message'    => trans('admin::app.settings.channels.index.delete-success'),
+                'statusCode' => 200,
+            ]);
         } catch (\Exception $e) {
         }
 
         return response()->json([
-            'data' => [
-                'message' => trans('admin::app.settings.channels.delete-failed'),
-            ]
-        ], 500);
+            'message'    => trans('admin::app.settings.channels.index.delete-failed'),
+            'statusCode' => 500,
+        ]);
     }
 
     /**
@@ -218,7 +218,6 @@ class ChannelController extends Controller
         $editedData['home_seo']['meta_title'] = $editedData['seo_title'];
         $editedData['home_seo']['meta_description'] = $editedData['seo_description'];
         $editedData['home_seo']['meta_keywords'] = $editedData['seo_keywords'];
-        $editedData['home_seo'] = json_encode($editedData['home_seo']);
 
         $editedData = $this->unsetKeys($editedData, ['seo_title', 'seo_description', 'seo_keywords']);
 

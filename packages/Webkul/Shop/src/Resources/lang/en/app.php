@@ -74,6 +74,7 @@ return [
                 'delete-profile'          => 'Delete Profile',
                 'edit-profile'            => 'Edit Profile',
                 'edit'                    => 'Edit',
+                'edit-success'            => 'Profile Updated Successfully',
                 'phone'                   => 'Phone',
                 'current-password'        => 'Current Password',
                 'new-password'            => 'New Password',
@@ -89,6 +90,7 @@ return [
                 'female'                  => 'Female',
                 'other'                   => 'Other',
                 'save'                    => 'Save',
+                'unmatch'                 => 'The old password does not match.',
             ],
 
             'addresses' => [
@@ -255,6 +257,7 @@ return [
                 'delete-all'         => 'Delete All',
                 'empty'              => 'No products were added to the wishlist page.',
                 'move-to-cart'       => 'Move To Cart',
+                'moved-success'      => 'Item Successfully Moved to Cart',    
                 'profile'            => 'Profile',
                 'removed'            => 'Item Successfully Removed From Wishlist',
                 'remove-fail'        => 'Item Cannot Be Removed From Wishlist',

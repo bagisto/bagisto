@@ -79,7 +79,7 @@ class UserController extends Controller
         Event::dispatch('user.admin.create.after', $admin);
 
         return new JsonResource([
-            'message' => trans('admin::app.settings.users.index.create-success'),
+            'message' => trans('admin::app.settings.users.create-success'),
         ]);
     }
 
@@ -142,7 +142,7 @@ class UserController extends Controller
         Event::dispatch('user.admin.update.after', $admin);
 
         return new JsonResource([
-            'message' => trans('admin::app.settings.users.index.update-success'),
+            'message' => trans('admin::app.settings.users.update-success'),
         ]);
     }
 
@@ -155,14 +155,9 @@ class UserController extends Controller
     public function destroy($id): JsonResource
     {
         if ($this->adminRepository->count() == 1) {
-            return response()->json([
-                'message' => trans('admin::app.settings.users.last-delete-error'
-            )], 400);
-        }
-
-        if (auth()->guard('admin')->user()->id == $id) {
-            return response()->json([
-                'redirect' => route('super.settings.users.confirm', ['id' => $id]),
+            return new JsonResource([
+                'message' => trans('admin::app.settings.users.last-delete-error'),
+                'statusCode' => 400,
             ]);
         }
 
@@ -174,14 +169,16 @@ class UserController extends Controller
             Event::dispatch('user.admin.delete.after', $id);
 
             return new JsonResource([
-                'message' => trans('admin::app.settings.users.delete-success')
+                'message' => trans('admin::app.settings.users.delete-success'),
+                'statusCode' => 200,
             ]);
         } catch (\Exception $e) {
         }
 
         return new JsonResource([
             'message' => trans('admin::app.settings.users.delete-failed'),
-        ], 500);
+            'statusCode' => 500,
+        ]);
     }
 
     /**
@@ -202,7 +199,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroySelf()
+    public function destroySelf(): JsonResource
     {
         $password = request()->input('password');
 
@@ -218,14 +215,17 @@ class UserController extends Controller
 
                 Event::dispatch('user.admin.delete.after', $id);
 
-                session()->flash('success', trans('admin::app.settings.users.delete-success'));
-
-                return redirect()->route('admin.session.create');
+                return new JsonResource([
+                    'redirectUrl' => route('admin.session.create'),
+                    'message' => trans('admin::app.settings.users.delete-success'),
+                    'statusCode' => 200,
+                ]);
             }
         } else {
-            session()->flash('warning', trans('admin::app.settings.users.incorrect-password'));
-
-            return redirect()->route('admin.settings.users.index');
+            return new JsonResource([
+                'message' => trans('admin::app.settings.users.incorrect-password'),
+                'statusCode' => 199,
+            ]);
         }
     }
 

@@ -73,7 +73,7 @@ window.app = createApp({
     },
 
     mounted() {
-        var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+        var lazyImages = [].slice.call(document.querySelectorAll('img.lazy'));
 
         let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
             entries.forEach(function(entry) {

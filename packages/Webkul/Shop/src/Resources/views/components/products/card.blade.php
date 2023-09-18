@@ -16,6 +16,8 @@
                     <x-shop::shimmer.image
                         class="relative after:content-[' '] after:block after:pb-[calc(100%+9px)] rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
                         ::src="product.base_image.medium_image_url"
+                        width="291"
+                        height="300"
                     ></x-shop::shimmer.image>
                 </a>
                 
@@ -35,18 +37,22 @@
                     </p>
 
                     <div class="group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                        <a
-                            class="flex justify-center items-center absolute top-[20px] right-[20px] w-[30px] h-[30px] bg-white rounded-md cursor-pointer text-[25px]"
-                            :class="product.is_wishlist ? 'icon-heart-fill' : 'icon-heart'"
-                            @click="addToWishlist()"
-                        >
-                        </a>
+                        @if (core()->getConfigData('general.content.shop.wishlist_option'))
+                            <a
+                                class="flex justify-center items-center absolute top-[20px] right-[20px] w-[30px] h-[30px] bg-white rounded-md cursor-pointer text-[25px]"
+                                :class="product.is_wishlist ? 'icon-heart-fill' : 'icon-heart'"
+                                @click="addToWishlist()"
+                            >
+                            </a>
+                        @endif
 
-                        <a
-                            class="icon-compare flex justify-center items-center w-[30px] h-[30px] absolute top-[60px] right-[20px] bg-white rounded-md cursor-pointer text-[25px]"
-                            @click="addToCompare(product.id)"
-                        >
-                        </a>
+                        @if (core()->getConfigData('general.content.shop.compare_option'))
+                            <a
+                                class="icon-compare flex justify-center items-center w-[30px] h-[30px] absolute top-[60px] right-[20px] bg-white rounded-md cursor-pointer text-[25px]"
+                                @click="addToCompare(product.id)"
+                            >
+                            </a>
+                        @endif
 
                         <a
                             class="absolute bottom-[15px] left-[50%] py-[11px] px-[43px] bg-white rounded-xl text-navyBlue text-xs w-max font-medium cursor-pointer -translate-x-[50%] translate-y-[54px] group-hover:translate-y-0 transition-all duration-300"
@@ -86,6 +92,8 @@
                     <x-shop::shimmer.image
                         class="min-w-[250px] relative after:content-[' '] after:block after:pb-[calc(100%+9px)] rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
                         ::src="product.base_image.medium_image_url"
+                        width="291"
+                        height="300"
                     ></x-shop::shimmer.image>
                 </a>
             
@@ -105,18 +113,22 @@
                     </p>
 
                     <div class="group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                        <span 
-                            class="flex justify-center items-center absolute top-[20px] right-[20px] w-[30px] h-[30px] bg-white rounded-md text-[25px] cursor-pointer"
-                            :class="product.is_wishlist ? 'icon-heart-fill' : 'icon-heart'"
-                            @click="addToWishlist()"
-                        >
-                        </span> 
+                        @if (core()->getConfigData('general.content.shop.wishlist_option'))
+                            <span 
+                                class="flex justify-center items-center absolute top-[20px] right-[20px] w-[30px] h-[30px] bg-white rounded-md text-[25px] cursor-pointer"
+                                :class="product.is_wishlist ? 'icon-heart-fill' : 'icon-heart'"
+                                @click="addToWishlist()"
+                            >
+                            </span> 
+                        @endif
                         
-                        <span 
-                            class="icon-compare flex justify-center items-center absolute top-[60px] right-[20px] w-[30px] h-[30px] bg-white rounded-md text-[25px] cursor-pointer"
-                            @click="addToCompare(product.id)"
-                        >
-                        </span>
+                        @if (core()->getConfigData('general.content.shop.compare_option'))
+                            <span 
+                                class="icon-compare flex justify-center items-center absolute top-[60px] right-[20px] w-[30px] h-[30px] bg-white rounded-md text-[25px] cursor-pointer"
+                                @click="addToCompare(product.id)"
+                            >
+                            </span>
+                        @endif
                     </div> 
                 </div> 
             </div> 
@@ -156,7 +168,7 @@
                 </p>
             
                 <div 
-                    class="bs-primary-button px-[30px] py-[10px] whitespace-nowrap"
+                    class="primary-button px-[30px] py-[10px] whitespace-nowrap"
                     @click="addToCart()"
                 >
                     @lang('shop::app.components.products.card.add-to-cart')

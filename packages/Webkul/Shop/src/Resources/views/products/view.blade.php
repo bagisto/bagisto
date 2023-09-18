@@ -244,12 +244,14 @@
                                         {{ $product->name }}
                                     </h1>
 
-                                    <div
-                                        class="flex items-center justify-center min-w-[46px] min-h-[46px] max-h-[46px] bg-white border border-black rounded-full text-[24px] transition-all hover:opacity-[0.8] cursor-pointer"
-                                        :class="isWishlist ? 'icon-heart-fill' : 'icon-heart'"
-                                        @click="addToWishlist"
-                                    >
-                                    </div>
+                                    @if (core()->getConfigData('general.content.shop.wishlist_option'))
+                                        <div
+                                            class="flex items-center justify-center min-w-[46px] min-h-[46px] max-h-[46px] bg-white border border-black rounded-full text-[24px] transition-all hover:opacity-[0.8] cursor-pointer"
+                                            :class="isWishlist ? 'icon-heart-fill' : 'icon-heart'"
+                                            @click="addToWishlist"
+                                        >
+                                        </div>
+                                    @endif
                                 </div>
 
                                 {!! view_render_event('bagisto.shop.products.name.before', ['product' => $product]) !!}
@@ -320,7 +322,7 @@
 
                                     <button
                                         type="submit"
-                                        class="bs-secondary-button w-full max-w-full"
+                                        class="secondary-button w-full max-w-full"
                                     >
                                         @lang('shop::app.products.add-to-cart')
                                     </button>
@@ -334,7 +336,7 @@
                                 @if (core()->getConfigData('catalog.products.storefront.buy_now_button_display'))
                                     <button
                                         type="submit"
-                                        class="bs-primary-button w-full max-w-[470px] mt-[20px]"
+                                        class="primary-button w-full max-w-[470px] mt-[20px]"
                                         @click="is_buy_now=1;"
                                         {{ ! $product->isSaleable(1) ? 'disabled' : '' }}
                                     >
@@ -352,8 +354,11 @@
                                         class="flex gap-[10px] justify-center items-center cursor-pointer"
                                         @click="is_buy_now=0; addToCompare({{ $product->id }})"
                                     >
-                                        <span class="icon-compare text-[24px]"></span>
-                                        @lang('shop::app.products.compare')
+                                        @if (core()->getConfigData('general.content.shop.compare_option'))
+                                            <span class="icon-compare text-[24px]"></span>
+
+                                            @lang('shop::app.products.compare')
+                                        @endif
                                     </div>
 
                                     {!! view_render_event('bagisto.shop.products.view.compare.after', ['product' => $product]) !!}
@@ -407,15 +412,19 @@
                     },
 
                     addToWishlist() {
-                        this.$axios.post('{{ route('shop.api.customers.account.wishlist.store') }}', {
-                                product_id: "{{ $product->id }}"
-                            })
-                            .then(response => {
-                                this.isWishlist = ! this.isWishlist;
+                        if (this.isCustomer) {
+                            this.$axios.post('{{ route('shop.api.customers.account.wishlist.store') }}', {
+                                    product_id: "{{ $product->id }}"
+                                })
+                                .then(response => {
+                                    this.isWishlist = ! this.isWishlist;
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
-                            })
-                            .catch(error => {});
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                })
+                                .catch(error => {});
+                        } else {
+                            window.location.href = "{{ route('shop.customer.session.index')}}";
+                        }
                     },
 
                     addToCompare(productId) {

@@ -1029,8 +1029,8 @@ return [
             'category'             => 'Category',
             'update-success'       => 'category updated successfully.',
             'delete-success'       => 'The category has been successfully deleted.',
-            'delete-category-root' => 'The Root :name can not be deleted.',
-            'delete-failed'        => 'The :name could not be deleted',
+            'delete-category-root' => 'The Root category can not be deleted.',
+            'delete-failed'        => 'Error encountered while deleting category',
         ],
 
         'families'   => [
@@ -2300,7 +2300,7 @@ return [
                 'title'             => 'Channels',
                 'create-btn'        => 'Create Channel',
                 'delete-success'    => 'Channel deleted successfully.',
-                'delete-failed'     => ':name Delete Failed',
+                'delete-failed'     => 'Channel Delete Failed',
                 'last-delete-error' => 'Last Channel deleted failed.',
 
                 'datagrid' => [
@@ -2423,16 +2423,7 @@ return [
                     'title'    => 'Edit User',
                 ],
 
-                'activate-warning'   => 'Your account is yet to be activated, please contact administrator.',
-                'create-success'     => 'User created successfully.',
-                'cannot-change'      => 'User cannot be changed',
-                'delete-failed'      => 'User deleted failed.',
-                'delete-success'     => 'User deleted successfully.',
-                'incorrect-password' => 'Incorrect password',
-                'last-delete-error'  => 'Last User delete failed',
-                'login-error'        => 'Please check your credentials and try again.',
-                'update-success'     => 'User updated successfully.',
-                'delete-warning'     => 'Are you sure, you want to perform this action?',
+                
             ],
 
             'edit'  => [
@@ -2448,8 +2439,16 @@ return [
                 'save-btn'         => 'Save User',
             ],
 
-            'update-success' => 'User updated successfully.',
-            'delete-success' => 'User deleted successfully.',
+            'delete-failed'      => 'User deleted failed.',
+            'cannot-change'      => 'User cannot be changed',
+            'update-success'     => 'User updated successfully.',
+            'delete-success'     => 'User deleted successfully.',
+            'incorrect-password' => 'Incorrect password',
+            'create-success'     => 'User created successfully.',
+            'delete-warning'     => 'Are you sure, you want to perform this action?',
+            'login-error'        => 'Please check your credentials and try again.',
+            'activate-warning'   => 'Your account is yet to be activated, please contact administrator.',
+            'last-delete-error'  => 'Last User delete failed',
         ],
 
         'roles' => [
@@ -2519,52 +2518,19 @@ return [
             ],
 
             'create' => [
-                'title'                          => 'Create Theme',
-                'sliders'                        => 'Sliders',
-                'product-carousel'               => 'Product Carousel',
-                'product-carousel-description'   => 'Showcase products elegantly with a dynamic and responsive product carousel.',
-                'category-carousel-description'  => 'Display dynamic categories attractively using a responsive category carousel.',
-                'static-content-description'     => 'Improve engagement with concise, informative static content for your audience.',
-                'footer-link-description'        => 'Navigate via footer links for seamless website exploration and information.',
-                'category-carousel'              => 'Category Carousel',
-                'static-content'                 => 'Static Content',
-                'footer-link'                    => 'Footer Links',
-                'footer-link-form-title'         => 'Footer Link',
-                'slider-description'             => 'Slider related theme customization.',
-                'slider-add-btn'                 => 'Add Slider',
-                'general'                        => 'General',
-                'add-filter-btn'                 => 'Add Filter',
-                'save-btn'                       => 'Save',
-                'filter-title'                   => 'Title',
-                'sort'                           => 'Sort',
-                'desc'                           => 'Desc',
-                'asc'                            => 'Asc',
-                'limit'                          => 'Limit',
-                'footer-title'                   => 'Title',
-                'link'                           => 'Link',
-                'add-logo'                       => 'Add Logo',
-                'key'                            => 'Key: :key',
-                'value'                          => 'Value: :value',
-                'delete'                         => 'Delete',
-                'name'                           => 'Name',
-                'sort-order'                     => 'Sort Order',
-                'status'                         => 'Status',
-                'image'                          => 'Image',
-                'create-filter'                  => 'Create Filter',
-                'key-input'                      => 'Key',
-                'value-input'                    => 'Value',
-                'html'                           => 'HTML',
-                'css'                            => 'CSS',
-                'add-footer-link-btn'            => 'Add Footer Link',
-                'filters'                        => 'Filters',
-                'edit'                           => 'Edit',
-                'path'                           => 'Path',
-                'add-link'                       => 'Add Link',
-                'create-slider'                  => 'Create Slider',
-                'slider-image'                   => 'Slider Image',
-                'column'                         => 'Column',
-                'select'                         => 'Select',
-                'back'                           => 'Back',
+                'title'      => 'Create Theme',
+                'save-btn'   => 'Save',
+                'name'       => 'Name',
+                'sort-order' => 'Sort Order',
+                'type'       => [
+                    'title'             => 'Type',
+                    'product-carousel'  => 'Product Carousel',
+                    'category-carousel' => 'Category Carousel',
+                    'static-content'    => 'Static Content',
+                    'image-carousel'    => 'Slider Carousel',
+                    'footer-links'      => 'Footer Links',
+                ],
+                'add-image-btn'                 => 'Add Image',
             ],
 
             'edit' => [
@@ -2582,6 +2548,7 @@ return [
                 'footer-link-form-title'        => 'Footer Link',
                 'slider-description'            => 'Slider related theme customization.',
                 'slider-add-btn'                => 'Add Slider',
+                'add-image-btn'                 => 'Add Image',
                 'general'                       => 'General',
                 'add-filter-btn'                => 'Add Filter',
                 'save-btn'                      => 'Save',
@@ -2613,6 +2580,7 @@ return [
                 'path'                          => 'Path',
                 'edit'                          => 'Edit',
                 'back'                          => 'Back',
+                'preview'                       => 'Preview',
             ],
 
             'create-success' => 'Theme created successfully',
@@ -2866,12 +2834,6 @@ return [
                 'settings' => [
                     'settings-info' => 'Set wishlist, newsletter subscriptions, email verifications and social login.',
                     'title'         => 'Settings',
-
-                    'wishlist' => [
-                        'share'      => 'Enable Sharing',
-                        'title'      => 'Wishlist',
-                        'title-info' => '"Wishlist" is a personalized collection of desired items, allowing users to save products for future reference or potential purchase.',
-                    ],
 
                     'newsletter' => [
                         'subscription' => 'Allow Newsletter Subscription',

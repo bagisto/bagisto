@@ -163,14 +163,13 @@ class CategoryController extends Controller
             Event::dispatch('catalog.category.delete.after', $id);
 
             return new JsonResource([
-                'message' => trans('admin::app.catalog.categories.delete-success', ['name' => 'admin::app.catalog.categories.category'
-            ])]);
+                'message' => trans('admin::app.catalog.categories.delete-success')]);
         } catch (\Exception $e) {
         }
 
         return new JsonResource([
-            'message' => trans('admin::app.catalog.categories.delete-failed', ['name' => 'admin::app.catalog.categories.category'
-        ])], 500);
+            'message' => trans('admin::app.catalog.categories.delete-failed'
+        )], 500);
     }
 
     /**

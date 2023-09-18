@@ -65,19 +65,26 @@ class RegistrationController extends Controller
 
         $customer = $this->customerRepository->create($data);
 
-        if (isset($data['subscribed_to_news_letter'])) {
-            Event::dispatch('customer.subscription.before');
+        if (isset($data['is_subscribed'])) {
+            $subscription = $this->subscriptionRepository->findOneWhere(['email' => $data['email']]);
 
-            $subscription = $this->subscriptionRepository->updateOrCreate([
-                'email'      => $data['email'],
-                'channel_id' => core()->getCurrentChannel()->id,
-            ], [
-                'customer_id'   => $customer->id,
-                'is_subscribed' => 1,
-                'token'         => uniqid(),
-            ]);
+            if ($subscription) {
+                $this->subscriptionRepository->update([
+                    'customer_id' => $customer->id,
+                ], $subscription->id);
+            } else {
+                Event::dispatch('customer.subscription.before');
 
-            Event::dispatch('customer.subscription.after', $subscription);
+                $subscription = $this->subscriptionRepository->create([
+                    'email'         => $data['email'],
+                    'customer_id'   => $customer->id,
+                    'channel_id'    => core()->getCurrentChannel()->id,
+                    'is_subscribed' => 1,
+                    'token'         => uniqid(),
+                ]);
+
+                Event::dispatch('customer.subscription.after', $subscription);
+            }
         }
 
         Event::dispatch('customer.registration.after', $customer);
