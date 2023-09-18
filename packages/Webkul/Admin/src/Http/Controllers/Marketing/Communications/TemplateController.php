@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Marketing\Communications;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Marketing\Repositories\TemplateRepository;
@@ -117,9 +117,9 @@ class TemplateController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id): JsonResource
+    public function destroy($id): JsonResponse
     {
         $this->templateRepository->findOrFail($id);
 
@@ -130,13 +130,13 @@ class TemplateController extends Controller
 
             Event::dispatch('marketing.templates.delete.after', $id);
 
-            return new JsonResource([
+            return new JsonResponse([
                 'message' => trans('admin::app.marketing.communications.templates.delete-success')
             ]);
         } catch (\Exception $e) {
         }
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.marketing.communications.templates.delete-failed', ['name' => 'admin::app.marketing.communications.templates.email-template']
         )], 400);
     }

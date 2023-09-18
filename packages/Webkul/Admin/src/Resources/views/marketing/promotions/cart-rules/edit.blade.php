@@ -1391,7 +1391,7 @@
                             .then((response) => {
                                 window.location.reload();
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
                                 resetForm();
                             })

@@ -420,7 +420,7 @@
                     .then((response) => {
                         this.$refs.CustomerAddressEdit.toggle();
                         
-                        this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                        this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
                         window.location.reload();
 

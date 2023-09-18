@@ -458,7 +458,7 @@
 
                                 this.$root.$refs.customer_data.get();
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
                                 resetForm();
                             })

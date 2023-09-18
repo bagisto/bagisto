@@ -290,7 +290,7 @@
 
                                     this.$refs.emailEvents.toggle();
                                 } else {
-                                    this.$emitter.emit('add-flash', { type: 'error', message: response.data.data.message });
+                                    this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
                                 }
                             })
                             .catch(error => {

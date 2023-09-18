@@ -296,7 +296,7 @@
 
                             this.$refs.datagrid.get();
 
-                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
                             resetForm();
                         })
@@ -310,7 +310,7 @@
                     editModal(id) {
                         this.$axios.get(`{{ route('admin.settings.currencies.edit', '') }}/${id}`)
                             .then((response) => {
-                                this.selectedCurrency = response.data.data;
+                                this.selectedCurrency = response.data;
 
                                 this.$refs.currencyUpdateOrCreateModal.toggle();
                             })

@@ -3,7 +3,7 @@
 namespace Webkul\Admin\Http\Controllers\Settings;
 
 use Illuminate\Support\Facades\Event;
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Shop\Repositories\ThemeCustomizationRepository;
@@ -37,7 +37,7 @@ class ThemeController extends Controller
     /**
      * Store a newly created resource in storage.
      * 
-     * @return \Illuminate\Http\Resources\Json\JsonResource|string
+     * @return \Illuminate\Http\JsonResponse|string
      */
     public function store()
     {
@@ -63,7 +63,7 @@ class ThemeController extends Controller
 
         Event::dispatch('theme_customization.create.after', $theme);
 
-        return new JsonResource([
+        return new JsonResponse([
             'redirect_url' => route('admin.theme.edit', $theme->id),
         ]);
     }
@@ -122,9 +122,10 @@ class ThemeController extends Controller
     }
 
     /**
-     * Delete a specified theme
+     * Delete a specified theme.
      *
-     * @return void
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
@@ -138,10 +139,8 @@ class ThemeController extends Controller
 
         Event::dispatch('theme_customization.delete.after', $id);
 
-        return response()->json([
-            'data' => [
+        return new JsonResponse([
                 'message' => trans('admin::app.settings.themes.delete-success'),
-            ]
         ], 200);
     }
 }

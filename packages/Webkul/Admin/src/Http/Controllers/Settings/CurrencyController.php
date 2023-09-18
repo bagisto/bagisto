@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Settings;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\JsonResponse;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\CurrencyRepository;
 use Webkul\Admin\DataGrids\Settings\CurrencyDataGrid;
@@ -35,9 +35,9 @@ class CurrencyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(): JsonResource
+    public function store(): JsonResponse
     {
         $this->validate(request(), [
             'code' => 'required|min:3|max:3|unique:currencies,code',
@@ -53,7 +53,7 @@ class CurrencyController extends Controller
 
         $this->currencyRepository->create($data);
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.settings.currencies.index.create-success'),
         ]);
     }
@@ -62,21 +62,21 @@ class CurrencyController extends Controller
      * Currency Details
      *
      * @param  int  $id
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function edit($id): JsonResource
+    public function edit($id): JsonResponse
     {
         $currency = $this->currencyRepository->findOrFail($id);
 
-        return new JsonResource($currency);
+        return new JsonResponse($currency);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(): JsonResource
+    public function update(): JsonResponse
     {
         $id = request()->id;
 
@@ -94,7 +94,7 @@ class CurrencyController extends Controller
 
         $this->currencyRepository->update($data, $id);
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.settings.currencies.index.update-success'),
         ]);
     }
