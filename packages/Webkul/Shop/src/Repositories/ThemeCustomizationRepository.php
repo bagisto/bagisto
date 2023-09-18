@@ -33,47 +33,34 @@ class ThemeCustomizationRepository extends Repository
             Storage::delete(str_replace('storage/', '', $slider['image']));
         }
 
-        foreach($imageOptions as $images) {
-            if (empty($images) || is_string($images)) {
-                continue;
-            }
+        if (isset($imageOptions['options'])) {
+            $options = [];
 
-            if ($images instanceof UploadedFile) {
-                $manager = new ImageManager();
-
-                $image = $manager->make($images)->encode('webp');
-
-                $path = 'theme/' . $theme->id . '/' . Str::random(40) . '.webp';
-
-                Storage::put($path, $image);
-
-                return Storage::url($path);
-            }
-
-            foreach ($images as $key => $image) {
-                if (isset($image['image']) && $image['image'] instanceof UploadedFile) {
+            foreach ($imageOptions['options'] as $image) {
+                if ($image['image'] instanceof UploadedFile) {
                     $manager = new ImageManager();
     
-                    $image = $manager->make($image['image'])->encode('webp');
+                    $webpImage = $manager->make($image['image'])->encode('webp');
     
                     $path = 'theme/' . $theme->id . '/' . Str::random(40) . '.webp';
-    
-                    Storage::put($path, $image);
+
+                    Storage::put($path, $webpImage);
+
+                    if (
+                        isset($imageOptions['type']) 
+                        && $imageOptions['type'] == 'static_content'
+                    ) {
+                        return Storage::url($path);
+                    }
 
                     $options['images'][] = [
-                        'image' => $path,
+                        'image' => 'storage/' . $path,
                         'link'  => $image['link'],
                     ];
                 } else {
-                    foreach ($imageOptions['options'] as $option) {
-                        if (! $option['image'] instanceof UploadedFile) {
-                            $previousOptions[] = $option;
-                        }
-                    }
-
-                    $options['images'] = $previousOptions ?? [];
+                    $options['images'][] = $image;
                 }
-            }   
+            }
         }
 
         $theme->options = $options ?? [];

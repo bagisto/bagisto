@@ -2137,8 +2137,9 @@
 
                         let formData = new FormData();
 
-                        formData.append('image', selectedImage);
+                        formData.append('options[image][image]', selectedImage);
                         formData.append('id', "{{ $theme->id }}");
+                        formData.append('type', "static_content");
 
                         this.$axios.post('{{ route('admin.theme.store') }}', formData)
                             .then((response) => {
