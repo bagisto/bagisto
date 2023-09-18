@@ -208,7 +208,7 @@
                     <div class="pb-[16px]">
                         {{-- Payment method --}}
                         <p class="text-gray-800 font-semibold">
-                            {{ core()->getConfigData('sales.payment_methods.' . $order->payment->method . '.title') }}
+                            {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
                         </p>
 
                         <p class="text-gray-600">

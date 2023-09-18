@@ -147,7 +147,7 @@
 
                                         {{-- Payment methods --}}   
                                         <p class="text-gray-600">
-                                            @lang('admin::app.customers.customers.view.pay-by', ['payment_method' => core()->getConfigData('sales.payment_methods.' . $order->payment->method . '.title')])
+                                            @lang('admin::app.customers.customers.view.pay-by', ['payment_method' => core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title')])
                                         </p>
 
                                         {{-- Channel Code --}}

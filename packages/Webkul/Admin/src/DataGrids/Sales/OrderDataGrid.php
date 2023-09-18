@@ -121,7 +121,7 @@ class OrderDataGrid extends DataGrid
             'filterable' => false,
             'sortable'   => false,
             'closure'    => function ($row) {
-                return core()->getConfigData('sales.payment_methods.' . $row->method . '.title');
+                return core()->getConfigData('sales.paymentmethods.' . $row->method . '.title');
             },
         ]);
 

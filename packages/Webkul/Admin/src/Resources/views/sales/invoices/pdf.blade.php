@@ -304,7 +304,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    {{ core()->getConfigData('sales.payment_methods.' . $invoice->order->payment->method . '.title') }}
+                                    {{ core()->getConfigData('sales.paymentmethods.' . $invoice->order->payment->method . '.title') }}
 
                                     @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($invoice->order->payment->method); @endphp
 

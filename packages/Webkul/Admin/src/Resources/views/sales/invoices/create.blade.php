@@ -165,7 +165,7 @@
                                             </span>
 
                                             <span class="value">
-                                                {{ core()->getConfigData('sales.payment_methods.' . $order->payment->method . '.title') }}
+                                                {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
                                             </span>
                                         </div>
 

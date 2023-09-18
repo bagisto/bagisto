@@ -329,7 +329,7 @@
                         <div class="flex flex-col gap-y-[6px]">
                             <p class="text-gray-600">
                                 <a href="{{ route('admin.sales.orders.view', $order->id) }}">
-                                    {{ core()->getConfigData('sales.payment_methods.' . $order->payment->method . '.title') }}
+                                    {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
                                 </a>
                             </p>
 

@@ -414,7 +414,7 @@
 
                                 {{-- Payment Mode --}}
                                 <p class="text-gray-600">
-                                    @lang('admin::app.dashboard.index.pay-by', ['method' => core()->getConfigData('sales.payment_methods.' . $item->payment->method . '.title')])
+                                    @lang('admin::app.dashboard.index.pay-by', ['method' => core()->getConfigData('sales.paymentmethods.' . $item->payment->method . '.title')])
                                 </p>
 
                                 {{-- Channel Name --}}

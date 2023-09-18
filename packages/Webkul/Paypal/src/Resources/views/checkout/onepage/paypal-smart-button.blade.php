@@ -1,11 +1,11 @@
 @if (
     request()->routeIs('shop.checkout.onepage.index')
-    && (bool) core()->getConfigData('sales.payment_methods.paypal_smart_button.active')
+    && (bool) core()->getConfigData('sales.paymentmethods.paypal_smart_button.active')
 )
     @pushOnce('scripts')
         @php
-            $clientId = core()->getConfigData('sales.payment_methods.paypal_smart_button.client_id');
-            $acceptedCurrency = core()->getConfigData('sales.payment_methods.paypal_smart_button.accepted_currencies');
+            $clientId = core()->getConfigData('sales.paymentmethods.paypal_smart_button.client_id');
+            $acceptedCurrency = core()->getConfigData('sales.paymentmethods.paypal_smart_button.accepted_currencies');
         @endphp
 
         <script 

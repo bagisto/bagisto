@@ -99,7 +99,7 @@
                 </div>
 
                 <div style="font-size: 16px;font-weight: 400;color: #384860;">
-                    {{ core()->getConfigData('sales.payment_methods.' . $shipment->order->payment->method . '.title') }}
+                    {{ core()->getConfigData('sales.paymentmethods.' . $shipment->order->payment->method . '.title') }}
                 </div>
             </div>
         @endif
