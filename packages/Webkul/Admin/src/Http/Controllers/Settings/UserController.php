@@ -79,7 +79,7 @@ class UserController extends Controller
         Event::dispatch('user.admin.create.after', $admin);
 
         return new JsonResponse([
-            'message' => trans('admin::app.settings.users.index.create-success'),
+            'message' => trans('admin::app.settings.users.create-success'),
         ]);
     }
 
@@ -142,7 +142,7 @@ class UserController extends Controller
         Event::dispatch('user.admin.update.after', $admin);
 
         return new JsonResponse([
-            'message' => trans('admin::app.settings.users.index.update-success'),
+            'message' => trans('admin::app.settings.users.update-success'),
         ]);
     }
 
@@ -157,8 +157,7 @@ class UserController extends Controller
         if ($this->adminRepository->count() == 1) {
             return new JsonResponse([
                 'message' => trans('admin::app.settings.users.last-delete-error'),
-                'statusCode' => 400,
-            ]);
+            ], 400);
         }
 
         try {
@@ -170,15 +169,13 @@ class UserController extends Controller
 
             return new JsonResponse([
                 'message' => trans('admin::app.settings.users.delete-success'),
-                'statusCode' => 200,
-            ]);
+            ], 200);
         } catch (\Exception $e) {
         }
 
         return new JsonResponse([
             'message' => trans('admin::app.settings.users.delete-failed'),
-            'statusCode' => 500,
-        ]);
+        ], 500);
     }
 
     /**
@@ -218,14 +215,12 @@ class UserController extends Controller
                 return new JsonResponse([
                     'redirectUrl' => route('admin.session.create'),
                     'message' => trans('admin::app.settings.users.delete-success'),
-                    'statusCode' => 200,
                 ]);
             }
         } else {
             return new JsonResponse([
                 'message' => trans('admin::app.settings.users.incorrect-password'),
-                'statusCode' => 199,
-            ]);
+            ], 404);
         }
     }
 

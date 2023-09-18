@@ -575,20 +575,14 @@
                         
                         this.$axios.post("{{ route('admin.settings.users.destroy')}}", formData)
                             .then((response) => {
-                                if (response.data.data.statusCode === 200) {
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
-                                     window.location.href = response.data.data.redirectUrl;
-                                } else {
-                                    this.$emitter.emit('add-flash', { type: 'warning', message: response.data.message });
-
-                                    this.$refs.confirmPasswordModal.toggle();
-                                }
+                                window.location.href = response.data.redirectUrl;
                             })
                             .catch(error => {
-                                if (error.response.status == 422) {
-                                    setErrors(error.response.data.errors);
-                                }
+                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
+
+                                this.$refs.confirmPasswordModal.toggle();
                             });
                     },
 

@@ -4,7 +4,7 @@
         <!-- Mass Actions Panel --><!-- Filters And Search Panel -->
         <div class="flex gap-x-[4px] w-full items-center">
             <!-- Search Panel -->
-            <div class="shimmer w-[262px] h-[38px]"></div>
+            <div class="shimmer w-[302px] h-[38px] rounded-lg"></div>
 
             <!-- Information Panel -->
             <div class="ltr:pl-[10px] rtl:pr-[10px]">
