@@ -1586,6 +1586,7 @@ return [
                         'name'        => 'Name',
                         'coupon-code' => 'Coupon Code',
                         'copy-of'     => ':value',
+                        'copy'        => 'Copy',
                         'start'       => 'Start',
                         'end'         => 'End',
                         'status'      => 'Status',
@@ -1595,7 +1596,6 @@ return [
                         'priority'    => 'Priority',
                         'edit'        => 'Edit',
                         'delete'      => 'Delete',
-                        'view'        => 'View',
                     ],
                 ],
 

@@ -1586,6 +1586,7 @@ return [
                         'name'        => 'الاسم',
                         'coupon-code' => 'كود القسيمة',
                         'copy-of'     => ':value',
+                        'copy'        => 'نسخ',
                         'start'       => 'بداية',
                         'end'         => 'نهاية',
                         'status'      => 'الحالة',
@@ -1595,7 +1596,6 @@ return [
                         'priority'    => 'الأولوية',
                         'edit'        => 'تعديل',
                         'delete'      => 'حذف',
-                        'view'        => 'عرض',
                     ],
                 ],
 

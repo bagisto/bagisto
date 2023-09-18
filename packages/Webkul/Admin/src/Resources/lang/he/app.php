@@ -1586,6 +1586,7 @@ return [
                         'name'        => 'שם',
                         'coupon-code' => 'קוד קופון',
                         'copy-of'     => 'עותק של :value',
+                        'copy'        => 'העתק',
                         'start'       => 'התחלה',
                         'end'         => 'סיום',
                         'status'      => 'סטטוס',
@@ -1595,7 +1596,6 @@ return [
                         'priority'    => 'עדיפות',
                         'edit'        => 'ערוך',
                         'delete'      => 'מחק',
-                        'view'        => 'צפה',
                     ],
                 ],
 

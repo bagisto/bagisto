@@ -1586,6 +1586,7 @@ return [
                         'name'        => '名称',
                         'coupon-code' => '优惠券码',
                         'copy-of'     => ':value',
+                        'copy'        => '复制z',
                         'start'       => '开始',
                         'end'         => '结束',
                         'status'      => '状态',
@@ -1595,7 +1596,6 @@ return [
                         'priority'    => '优先级',
                         'edit'        => '编辑',
                         'delete'      => '删除',
-                        'view'        => '查看',
                     ],
                 ],
 

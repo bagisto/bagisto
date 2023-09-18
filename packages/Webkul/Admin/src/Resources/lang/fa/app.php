@@ -1586,6 +1586,7 @@ return [
                         'name'        => 'نام',
                         'coupon-code' => 'کد تخفیف',
                         'copy-of'     => ':value',
+                        'copy'        => 'کپی',
                         'start'       => 'شروع',
                         'end'         => 'پایان',
                         'status'      => 'وضعیت',
@@ -1595,7 +1596,6 @@ return [
                         'priority'    => 'اولویت',
                         'edit'        => 'ویرایش',
                         'delete'      => 'حذف',
-                        'view'        => 'نمایش',
                     ],
                 ],
 
