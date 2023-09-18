@@ -43,26 +43,28 @@
         {{--Address Create component --}}
         @include('admin::customers.addresses.create')
 
-        <div 
-            class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
-            onclick="if (confirm('@lang('admin::app.customers.customers.view.delete-confirmation')')) {
-                event.preventDefault();
-                document.getElementById('delete-account{{ $customer->id }}').submit();
-            }"
-        >
-            <span class="icon-cancel text-[24px]"></span>
-
-            @lang('admin::app.customers.customers.view.delete-account')
-
-              {{-- Delete Customer Account --}}
-              <form 
-                method="post"
-                action="{{ route('admin.customers.customers.delete', $customer->id) }}" 
-                id="delete-account{{ $customer->id }}" 
+        @if (bouncer()->hasPermission('customers.customers.delete'))
+            <div 
+                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
+                onclick="if (confirm('@lang('admin::app.customers.customers.view.delete-confirmation')')) {
+                    event.preventDefault();
+                    document.getElementById('delete-account{{ $customer->id }}').submit();
+                }"
             >
-                @csrf
-            </form>
-        </div>
+                <span class="icon-cancel text-[24px]"></span>
+
+                @lang('admin::app.customers.customers.view.delete-account')
+
+                {{-- Delete Customer Account --}}
+                <form 
+                    method="post"
+                    action="{{ route('admin.customers.customers.delete', $customer->id) }}" 
+                    id="delete-account{{ $customer->id }}" 
+                >
+                    @csrf
+                </form>
+            </div>
+        @endif
     </div>
 
     {{-- Content --}}
@@ -570,21 +572,23 @@
                                     @include('admin::customers.addresses.edit')
 
                                     {{-- Delete Address --}}
-                                    <p 
-                                        class="text-blue-600 cursor-pointer transition-all hover:underline"
-                                        onclick="event.preventDefault();
-                                        document.getElementById('delete-address{{ $address->id }}').submit();"
-                                    >
-                                        @lang('admin::app.customers.customers.view.delete')
-                                    </p>
+                                    @if (bouncer()->hasPermission('customers.addresses.delete'))
+                                        <p 
+                                            class="text-blue-600 cursor-pointer transition-all hover:underline"
+                                            onclick="event.preventDefault();
+                                            document.getElementById('delete-address{{ $address->id }}').submit();"
+                                        >
+                                            @lang('admin::app.customers.customers.view.delete')
+                                        </p>
 
-                                    <form 
-                                        method="post"
-                                        action="{{ route('admin.customers.customers.addresses.delete', $address->id) }}" 
-                                        id="delete-address{{ $address->id }}" 
-                                    >
-                                        @csrf
-                                    </form>
+                                        <form 
+                                            method="post"
+                                            action="{{ route('admin.customers.customers.addresses.delete', $address->id) }}" 
+                                            id="delete-address{{ $address->id }}" 
+                                        >
+                                            @csrf
+                                        </form>
+                                    @endif
 
                                     {{-- Set Default Address --}}
                                     @if (! $address->default_address )

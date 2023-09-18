@@ -204,14 +204,16 @@ class CustomerDataGrid extends DataGrid
             },
         ]);
 
-        $this->addAction([
-            'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.customers.customers.index.datagrid.delete'),
-            'method' => 'DELETE',
-            'url'    => function ($row) {
-                return route('admin.customers.customers.delete', $row->customer_id);
-            },
-        ]);
+        if (bouncer()->hasPermission('customers.customers.delete')) {
+            $this->addAction([
+                'icon'   => 'icon-delete',
+                'title'  => trans('admin::app.customers.customers.index.datagrid.delete'),
+                'method' => 'DELETE',
+                'url'    => function ($row) {
+                    return route('admin.customers.customers.delete', $row->customer_id);
+                },
+            ]);
+        }
     }
 
     /**
