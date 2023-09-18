@@ -1029,8 +1029,8 @@ return [
             'category'             => 'Kategoria',
             'update-success'       => 'Kategoria została pomyślnie zaktualizowana.',
             'delete-success'       => 'Kategoria została pomyślnie usunięta.',
-            'delete-category-root' => 'Korzeń :name nie może zostać usunięty.',
-            'delete-failed'        => 'Nie można usunąć :name',
+            'delete-category-root' => 'Kategoria główna nie może zostać usunięta.',
+            'delete-failed'        => 'Wystąpił błąd podczas usuwania kategorii',
         ],
 
         'families' => [

@@ -1029,8 +1029,8 @@ return [
             'category'             => 'קטגוריה',
             'update-success'       => 'הקטגוריה עודכנה בהצלחה.',
             'delete-success'       => 'הקטגוריה נמחקה בהצלחה.',
-            'delete-category-root' => 'שורש :name אינו ניתן למחיקה.',
-            'delete-failed'        => ':name לא ניתן היה למחוק',
+            'delete-category-root' => 'אי אפשר למחוק את הקטגוריה הראשית.',
+            'delete-failed'        => 'אירעה שגיאה במהלך המחיקה של הקטגוריה',
         ],
 
         'families' => [

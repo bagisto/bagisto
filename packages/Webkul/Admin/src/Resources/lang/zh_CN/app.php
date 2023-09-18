@@ -1029,8 +1029,8 @@ return [
             'category'             => '分类',
             'update-success'       => '分类更新成功。',
             'delete-success'       => '分类已成功删除。',
-            'delete-category-root' => '根分类 :name 无法删除。',
-            'delete-failed'        => ':name 无法删除。',
+            'delete-category-root' => '无法删除根类别 ',
+            'delete-failed'        => '删除类别时发生错误',
         ],
 
         'families' => [
