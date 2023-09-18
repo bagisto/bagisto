@@ -1029,8 +1029,8 @@ return [
             'category'             => 'श्रेणी',
             'update-success'       => 'श्रेणी सफलतापूर्वक अपडेट की गई।',
             'delete-success'       => 'श्रेणी सफलतापूर्वक हटाई गई है।',
-            'delete-category-root' => 'मूल :name को हटाया नहीं जा सकता है।',
-            'delete-failed'        => ':name को हटाया नहीं जा सका',
+            'delete-category-root' => 'मूल श्रेणी को हटाया नहीं जा सकता।',
+            'delete-failed'        => 'श्रेणी को हटाने के दौरान त्रुटि आई',
         ],
 
         'families' => [

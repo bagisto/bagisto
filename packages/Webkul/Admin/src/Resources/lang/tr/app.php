@@ -1030,8 +1030,8 @@ return [
             'category'              => 'Kategori',
             'update-success'        => 'Kategori başarıyla güncellendi.',
             'delete-success'        => 'Kategori başarıyla silindi.',
-            'delete-category-root'  => 'Kök :name silinemez.',
-            'delete-failed'         => ':name silinemedi.',
+            'delete-category-root'  => 'Ana kategori silinemez.',
+            'delete-failed'         => 'Kategori silinirken bir hata oluştu',
         ],
 
         'families' => [

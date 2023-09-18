@@ -1030,8 +1030,8 @@ return [
             'category'             => 'ප්‍රවර්ගය',
             'update-success'       => 'ප්‍රවර්ගය සාර්ථකව යාවත්කාලීන කරන ලදි.',
             'delete-success'       => 'ප්‍රවර්ගය අවලංගුවනි.',
-            'delete-category-root' => 'මූලාශ්‍ර :name ඉවත් කළ නොහැක.',
-            'delete-failed'        => ':name මකා දමා නොහැක',
+            'delete-category-root' => 'මූල්‍ය ප්‍රවර්ගය ඉවත් කරන ලදින්ද කරන්න නොහැක.',
+            'delete-failed'        => 'ප්‍රවර්ගය ඉවත් කිරීම සාදන්නේද දැයි දැයි සදහාද',
         ],
 
         'families'   => [

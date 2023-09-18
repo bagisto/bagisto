@@ -1029,8 +1029,8 @@ return [
             'category'             => 'Categorie',
             'update-success'       => 'Categorie succesvol bijgewerkt.',
             'delete-success'       => 'De categorie is succesvol verwijderd.',
-            'delete-category-root' => 'De Hoofdcategorie :name kan niet worden verwijderd.',
-            'delete-failed'        => 'De :name kon niet worden verwijderd',
+            'delete-category-root' => 'De hoofdcategorie kan niet worden verwijderd.',
+            'delete-failed'        => 'Fout opgetreden bij het verwijderen van de categorie',
         ],
 
         'families' => [
