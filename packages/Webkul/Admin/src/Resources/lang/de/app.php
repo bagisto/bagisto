@@ -2422,17 +2422,6 @@ return [
                 'edit'  => [
                     'title'    => 'Benutzer bearbeiten',
                 ],
-
-                'activate-warning'   => 'Ihr Konto muss noch aktiviert werden. Bitte kontaktieren Sie den Administrator.',
-                'create-success'     => 'Benutzer wurde erfolgreich erstellt.',
-                'cannot-change'      => 'Benutzer kann nicht geändert werden',
-                'delete-failed'      => 'Benutzer konnte nicht gelöscht werden.',
-                'delete-success'     => 'Benutzer wurde erfolgreich gelöscht.',
-                'incorrect-password' => 'Falsches Passwort',
-                'last-delete-error'  => 'Letzter Benutzerlöschfehler',
-                'login-error'        => 'Bitte überprüfen Sie Ihre Anmeldeinformationen und versuchen Sie es erneut.',
-                'update-success'     => 'Benutzer wurde erfolgreich aktualisiert.',
-                'delete-warning'     => 'Sind Sie sicher, dass Sie diese Aktion ausführen möchten?',
             ],
 
             'edit'  => [
@@ -2448,9 +2437,16 @@ return [
                 'save-btn'         => 'Benutzer speichern',
             ],
 
-            'update-success' => 'Benutzer wurde erfolgreich aktualisiert.',
-            'delete-success' => 'Benutzer wurde erfolgreich gelöscht.',
-
+            'delete-failed'      => 'Benutzerlöschung fehlgeschlagen.',
+            'cannot-change'      => 'Benutzer kann nicht geändert werden.',
+            'update-success'     => 'Benutzer erfolgreich aktualisiert.',
+            'delete-success'     => 'Benutzer erfolgreich gelöscht.',
+            'incorrect-password' => 'Falsches Passwort',
+            'create-success'     => 'Benutzer erfolgreich erstellt.',
+            'delete-warning'     => 'Sind Sie sicher, dass Sie diese Aktion ausführen möchten?',
+            'login-error'        => 'Bitte überprüfen Sie Ihre Anmeldeinformationen und versuchen Sie es erneut.',
+            'activate-warning'   => 'Ihr Konto wurde noch nicht aktiviert. Bitte kontaktieren Sie den Administrator.',
+            'last-delete-error'  => 'Letzte Benutzerlöschung fehlgeschlagen.'
         ],
 
         'roles' => [

@@ -2422,17 +2422,6 @@ return [
                 'edit' => [
                     'title'    => 'Editar Usuario',
                 ],
-
-                'activate-warning'   => 'Tu cuenta aún no ha sido activada, por favor contacta al administrador.',
-                'create-success'     => 'Usuario creado exitosamente.',
-                'cannot-change'      => 'No se puede cambiar el usuario',
-                'delete-failed'      => 'Error al eliminar el usuario.',
-                'delete-success'     => 'Usuario eliminado exitosamente.',
-                'incorrect-password' => 'Contraseña incorrecta',
-                'last-delete-error'  => 'Error al eliminar el último usuario',
-                'login-error'        => 'Por favor verifica tus credenciales e intenta nuevamente.',
-                'update-success'     => 'Usuario actualizado exitosamente.',
-                'delete-warning'     => '¿Estás seguro de que deseas realizar esta acción?',
             ],
 
             'edit' => [
@@ -2448,8 +2437,16 @@ return [
                 'save-btn'         => 'Guardar Usuario',
             ],
 
-            'update-success'   => 'Usuario actualizado exitosamente.',
-            'delete-success'   => 'Usuario eliminado exitosamente.',
+            'delete-failed'      => 'Error al eliminar el usuario.',
+            'cannot-change'      => 'No se puede cambiar el usuario.',
+            'update-success'     => 'Usuario actualizado con éxito.',
+            'delete-success'     => 'Usuario eliminado con éxito.',
+            'incorrect-password' => 'Contraseña incorrecta',
+            'create-success'     => 'Usuario creado con éxito.',
+            'delete-warning'     => '¿Estás seguro de que quieres realizar esta acción?',
+            'login-error'        => 'Por favor, verifica tus credenciales e intenta nuevamente.',
+            'activate-warning'   => 'Tu cuenta aún no ha sido activada, por favor, contacta al administrador.',
+            'last-delete-error'  => 'Error al eliminar el último usuario.'
         ],
 
         'roles' => [

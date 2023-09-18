@@ -2423,17 +2423,6 @@ return [
                 'edit'  => [
                     'title'    => 'Kullanıcıyı Düzenle',
                 ],
-
-                'activate-warning'   => 'Hesabınız henüz etkinleştirilmedi, lütfen yönetici ile iletişime geçin.',
-                'create-success'     => 'Kullanıcı başarıyla oluşturuldu.',
-                'cannot-change'      => 'Kullanıcı değiştirilemez',
-                'delete-failed'      => 'Kullanıcı silinemedi.',
-                'delete-success'     => 'Kullanıcı başarıyla silindi.',
-                'incorrect-password' => 'Geçersiz şifre',
-                'last-delete-error'  => 'Son Kullanıcı silme başarısız',
-                'login-error'        => 'Lütfen kimlik bilgilerinizi kontrol edin ve yeniden deneyin.',
-                'update-success'     => 'Kullanıcı başarıyla güncellendi.',
-                'delete-warning'     => 'Bu işlemi yapmak istediğinizden emin misiniz?',
             ],
 
             'edit'  => [
@@ -2448,9 +2437,17 @@ return [
                 'status'           => 'Durum',
                 'save-btn'         => 'Kullanıcıyı Kaydet',
             ],
-
-            'update-success' => 'Kullanıcı başarıyla güncellendi.',
-            'delete-success' => 'Kullanıcı başarıyla silindi.',
+            
+            'delete-failed'      => 'Kullanıcı silme başarısız.',
+            'cannot-change'      => 'Kullanıcı değiştirilemez.',
+            'update-success'     => 'Kullanıcı başarıyla güncellendi.',
+            'delete-success'     => 'Kullanıcı başarıyla silindi.',
+            'incorrect-password' => 'Yanlış şifre',
+            'create-success'     => 'Kullanıcı başarıyla oluşturuldu.',
+            'delete-warning'     => 'Bu işlemi gerçekleştirmek istediğinizden emin misiniz?',
+            'login-error'        => 'Kimlik bilgilerinizi kontrol edin ve yeniden deneyin.',
+            'activate-warning'   => 'Hesabınız henüz etkinleştirilmedi, lütfen yöneticiyle iletişime geçin.',
+            'last-delete-error'  => 'Son kullanıcıyı silme başarısız.'
         ],
 
         'roles' => [

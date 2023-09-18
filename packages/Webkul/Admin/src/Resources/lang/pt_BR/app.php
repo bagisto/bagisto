@@ -2422,17 +2422,6 @@ return [
                 'edit'  => [
                     'title'    => 'Editar Usuário',
                 ],
-
-                'activate-warning'   => 'Sua conta ainda não foi ativada, entre em contato com o administrador.',
-                'create-success'     => 'Usuário criado com sucesso.',
-                'cannot-change'      => 'Não é possível alterar o usuário',
-                'delete-failed'      => 'Falha ao excluir o usuário.',
-                'delete-success'     => 'Usuário excluído com sucesso.',
-                'incorrect-password' => 'Senha incorreta',
-                'last-delete-error'  => 'Falha na exclusão do último usuário',
-                'login-error'        => 'Verifique suas credenciais e tente novamente.',
-                'update-success'     => 'Usuário atualizado com sucesso.',
-                'delete-warning'     => 'Tem certeza de que deseja realizar esta ação?',
             ],
 
             'edit'  => [
@@ -2448,8 +2437,16 @@ return [
                 'save-btn'         => 'Salvar Usuário',
             ],
 
-            'update-success' => 'Usuário atualizado com sucesso.',
-            'delete-success' => 'Usuário excluído com sucesso.',
+            'delete-failed'      => 'Falha ao excluir usuário.',
+            'cannot-change'      => 'Não é possível alterar o usuário.',
+            'update-success'     => 'Usuário atualizado com sucesso.',
+            'delete-success'     => 'Usuário excluído com sucesso.',
+            'incorrect-password' => 'Senha incorreta',
+            'create-success'     => 'Usuário criado com sucesso.',
+            'delete-warning'     => 'Tem certeza de que deseja realizar esta ação?',
+            'login-error'        => 'Verifique suas credenciais e tente novamente.',
+            'activate-warning'   => 'Sua conta ainda não foi ativada, entre em contato com o administrador.',
+            'last-delete-error'  => 'Falha ao excluir o último usuário.'
         ],
 
         'roles' => [
