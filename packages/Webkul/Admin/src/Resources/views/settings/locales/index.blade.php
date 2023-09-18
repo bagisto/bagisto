@@ -10,12 +10,14 @@
             </p>
 
             <div class="flex gap-x-[10px] items-center">
-                <button 
-                    type="button"
-                    class="primary-button"
-                >
-                    @lang('admin::app.settings.locales.index.create-btn')
-                </button>
+                @if (bouncer()->hasPermission('settings.locales.create'))
+                    <button 
+                        type="button"
+                        class="primary-button"
+                    >
+                        @lang('admin::app.settings.locales.index.create-btn')
+                    </button>
+                @endif
             </div>
         </div>
 
@@ -31,20 +33,27 @@
                 </p>
 
                 <div class="flex gap-x-[10px] items-center">
-                    <button 
-                        type="button"
-                        class="primary-button"
-                        @click="resetForm();$refs.localeUpdateOrCreateModal.toggle()"
-                    >
-                        @lang('admin::app.settings.locales.index.create-btn')
-                    </button>
+                    <!-- Locale Create Button -->
+                    @if (bouncer()->hasPermission('settings.locales.create'))
+                        <button
+                            type="button"
+                            class="primary-button"
+                            @click="resetForm();$refs.localeUpdateOrCreateModal.toggle()"
+                        >
+                            @lang('admin::app.settings.locales.index.create-btn')
+                        </button>
+                    @endif
                 </div>
             </div>
     
             <x-admin::datagrid :src="route('admin.settings.locales.index')" ref="datagrid">
+                @php
+                    $hasPermission = bouncer()->hasPermission('settings.locales.edit') || bouncer()->hasPermission('settings.locales.delete');
+                @endphp
+
                 <!-- DataGrid Header -->
                 <template #header="{ columns, records, sortPage, applied}">
-                    <div class="row grid grid-cols-5 grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] border-gray-300 text-gray-600 bg-gray-50 font-semibold">
+                    <div class="row grid grid-cols-{{ $hasPermission ? '5' : '4' }} grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] border-gray-300 text-gray-600 bg-gray-50 font-semibold">
                         <div
                             class="flex gap-[10px] cursor-pointer"
                             v-for="(columnGroup, index) in ['id', 'code', 'name', 'direction']"
@@ -75,9 +84,11 @@
                         </div>
 
                         <!-- Actions -->
-                        <p class="flex gap-[10px] justify-end">
-                            @lang('admin::app.components.datagrid.table.actions')
-                        </p>
+                        @if ($hasPermission)
+                            <p class="flex gap-[10px] justify-end">
+                                @lang('admin::app.components.datagrid.table.actions')
+                            </p>
+                        @endif
                     </div>
                 </template>
 
@@ -86,7 +97,7 @@
                     <div
                         v-for="record in records"
                         class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600 transition-all hover:bg-gray-50"
-                        style="grid-template-columns: repeat(5, 1fr);"
+                        :style="'grid-template-columns: repeat(' + (record.actions.length ? 5 : 4) + ', 1fr);'"
                     >
                         <!-- Id -->
                         <p v-text="record.id"></p>
@@ -102,23 +113,27 @@
 
                         <!-- Actions -->
                         <div class="flex justify-end">
-                            <a @click="id=1; editModal(record.id)">
-                                <span
-                                    :class="record.actions['0'].icon"
-                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
-                                    :title="record.actions['0'].title"
-                                >
-                                </span>
-                            </a>
+                            @if (bouncer()->hasPermission('settings.locales.edit'))
+                                <a @click="id=1; editModal(record.id)">
+                                    <span
+                                        :class="record.actions['0'].icon"
+                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
+                                        :title="record.actions['0'].title"
+                                    >
+                                    </span>
+                                </a>
+                            @endif
 
-                            <a @click="deleteModal(record.actions['1']?.url)">
-                                <span
-                                    :class="record.actions['1'].icon"
-                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
-                                    :title="record.actions['1'].title"
-                                >
-                                </span>
-                            </a>
+                            @if (bouncer()->hasPermission('settings.locales.delete'))
+                                <a @click="deleteModal(record.actions['1']?.url)">
+                                    <span
+                                        :class="record.actions['1'].icon"
+                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
+                                        :title="record.actions['1'].title"
+                                    >
+                                    </span>
+                                </a>
+                            @endif
                         </div>
                     </div>
                 </template>
