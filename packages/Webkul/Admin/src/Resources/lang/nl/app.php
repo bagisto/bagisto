@@ -2422,17 +2422,6 @@ return [
                 'edit' => [
                     'title' => 'Gebruiker Bewerken',
                 ],
-
-                'activate-warning'   => 'Uw account is nog niet geactiveerd, neem contact op met de beheerder.',
-                'create-success'     => 'Gebruiker succesvol aangemaakt.',
-                'cannot-change'      => 'Gebruiker kan niet worden gewijzigd',
-                'delete-failed'      => 'Gebruiker verwijderen mislukt.',
-                'delete-success'     => 'Gebruiker succesvol verwijderd.',
-                'incorrect-password' => 'Onjuist wachtwoord',
-                'last-delete-error'  => 'Laatste Gebruiker verwijderen mislukt',
-                'login-error'        => 'Controleer uw inloggegevens en probeer het opnieuw.',
-                'update-success'     => 'Gebruiker succesvol bijgewerkt.',
-                'delete-warning'     => 'Weet u zeker dat u deze actie wilt uitvoeren?',
             ],
 
             'edit' => [
@@ -2448,8 +2437,16 @@ return [
                 'save-btn'         => 'Gebruiker Opslaan',
             ],
 
-            'update-success' => 'Gebruiker succesvol bijgewerkt.',
-            'delete-success' => 'Gebruiker succesvol verwijderd.',
+            'delete-failed'      => 'Gebruiker kon niet worden verwijderd.',
+            'cannot-change'      => 'Gebruiker kan niet worden gewijzigd.',
+            'update-success'     => 'Gebruiker succesvol bijgewerkt.',
+            'delete-success'     => 'Gebruiker succesvol verwijderd.',
+            'incorrect-password' => 'Onjuist wachtwoord',
+            'create-success'     => 'Gebruiker succesvol aangemaakt.',
+            'delete-warning'     => 'Weet u zeker dat u deze actie wilt uitvoeren?',
+            'login-error'        => 'Controleer uw inloggegevens en probeer het opnieuw.',
+            'activate-warning'   => 'Uw account is nog niet geactiveerd, neem contact op met de beheerder.',
+            'last-delete-error'  => 'Laatste gebruiker kon niet worden verwijderd.'
         ],
 
         'roles' => [

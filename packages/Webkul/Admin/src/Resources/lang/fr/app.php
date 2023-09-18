@@ -2422,17 +2422,6 @@ return [
                 'edit'  => [
                     'title'    => 'Éditer un utilisateur',
                 ],
-
-                'activate-warning'   => 'Votre compte doit encore être activé, veuillez contacter l\'administrateur.',
-                'create-success'     => 'Utilisateur créé avec succès.',
-                'cannot-change'      => 'Impossible de modifier l\'utilisateur',
-                'delete-failed'      => 'Échec de la suppression de l\'utilisateur.',
-                'delete-success'     => 'Utilisateur supprimé avec succès.',
-                'incorrect-password' => 'Mot de passe incorrect',
-                'last-delete-error'  => 'La dernière suppression d\'utilisateur a échoué',
-                'login-error'        => 'Veuillez vérifier vos informations d\'identification et réessayer.',
-                'update-success'     => 'Utilisateur mis à jour avec succès.',
-                'delete-warning'     => 'Êtes-vous sûr de vouloir effectuer cette action?',
             ],
 
             'edit'  => [
@@ -2448,8 +2437,16 @@ return [
                 'save-btn'         => 'Enregistrer l\'utilisateur',
             ],
 
-            'update-success' => 'Utilisateur mis à jour avec succès.',
-            'delete-success' => 'Utilisateur supprimé avec succès.',
+            'delete-failed'      => 'Échec de la suppression de l\'utilisateur.',
+            'cannot-change'      => 'L\'utilisateur ne peut pas être modifié.',
+            'update-success'     => 'Utilisateur mis à jour avec succès.',
+            'delete-success'     => 'Utilisateur supprimé avec succès.',
+            'incorrect-password' => 'Mot de passe incorrect',
+            'create-success'     => 'Utilisateur créé avec succès.',
+            'delete-warning'     => 'Êtes-vous sûr de vouloir effectuer cette action ?',
+            'login-error'        => 'Veuillez vérifier vos identifiants et réessayer.',
+            'activate-warning'   => 'Votre compte n\'est pas encore activé, veuillez contacter l\'administrateur.',
+            'last-delete-error'  => 'Échec de la suppression du dernier utilisateur.'
         ],
 
         'roles' => [
