@@ -14,13 +14,21 @@ class ThemeDatagrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
+        $whereInLocales = core()->getRequestedLocaleCode() === 'all'
+            ? core()->getAllLocales()->pluck('code')->toArray()
+            : [core()->getRequestedLocaleCode()];
+
         $queryBuilder = DB::table('theme_customizations')
+            ->join('theme_customization_translations', function ($leftJoin) use ($whereInLocales) {
+                $leftJoin->on('theme_customizations.id', '=', 'theme_customization_translations.theme_customization_id')
+                    ->whereIn('theme_customization_translations.locale', $whereInLocales);
+            })
             ->addSelect(
                 'theme_customizations.id',
                 'theme_customizations.type',
-                'theme_customizations.name',
                 'theme_customizations.sort_order',
                 'theme_customizations.status',
+                'theme_customization_translations.name as name',
             );
 
         $this->addFilter('type', 'channel_translations.type');

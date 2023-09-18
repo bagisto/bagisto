@@ -9,6 +9,8 @@
         $currentChannel = core()->getRequestedChannel();
 
         $currentLocale = core()->getRequestedLocale();
+
+        $selectedOptionIds = $theme->channels()->pluck('id')->toArray();
     @endphp
 
     <x-admin::form 
@@ -265,7 +267,7 @@
                                     <v-field
                                         type="text"
                                         name="{{ $currentLocale->code }}[name]"
-                                        value="{{ $theme->name }}"
+                                        value="{{ $theme->translate($currentLocale->code)['name'] ?? ''}}"
                                         rules="required"
                                         class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
                                         :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
@@ -302,6 +304,39 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
     
+                                {{-- Select Channels --}}
+                                <p class="required block leading-[24px] text-gray-800 font-medium">
+                                    @lang('admin::app.cms.create.channels')
+                                </p>
+    
+                                @foreach(core()->getAllChannels() as $channel)
+                                    <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
+                                        <x-admin::form.control-group.control
+                                            type="checkbox"
+                                            name="channels[]"
+                                            :value="$channel->id"
+                                            :id="'channels_' . $channel->id"
+                                            :for="'channels_' . $channel->id"
+                                            rules="required"
+                                            :label="trans('admin::app.cms.create.channels')"
+                                            :checked="in_array($channel->id, $selectedOptionIds)"
+                                        >
+                                        </x-admin::form.control-group.control>
+    
+                                        <x-admin::form.control-group.label
+                                            :for="'channels_' . $channel->id"
+                                            class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
+                                        >
+                                            {{ core()->getChannelName($channel) }}
+                                        </x-admin::form.control-group.label>
+    
+                                        <x-admin::form.control-group.error
+                                            control-name="channels[]"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+                                @endforeach
+
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.themes.edit.status')
@@ -336,6 +371,7 @@
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
+
                             </x-slot:content>
                         </x-admin::accordion>
                     </div>
@@ -353,7 +389,6 @@
                         <x-admin::modal ref="addSliderModal">
                             <x-slot:header>
                                 <p class="text-[18px] text-gray-800 font-bold">
-                                    
                                     @lang('admin::app.settings.themes.edit.update-slider')
                                 </p>
                             </x-slot:header>
@@ -394,7 +429,7 @@
                                         </x-admin::form.control-group.control>
         
                                         <x-admin::form.control-group.error
-                                            control-name="title"
+                                            control-name="slider_image"
                                         >
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
@@ -623,8 +658,8 @@
 
                                 <v-field
                                     type="text"
-                                    name="name"
-                                    value="{{ $theme->name }}"
+                                    name="{{ $currentLocale->code }}[name]"
+                                    value="{{ $theme->translate($currentLocale->code)['name'] ?? ''}}"
                                     rules="required"
                                     class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
                                     :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
@@ -661,6 +696,39 @@
                                 >
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
+
+                            <!-- Select Channels -->
+                            <p class="required block leading-[24px] text-gray-800 font-medium">
+                                @lang('admin::app.cms.create.channels')
+                            </p>
+
+                            @foreach(core()->getAllChannels() as $channel)
+                                <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        name="channels[]"
+                                        :value="$channel->id"
+                                        :id="'channels_' . $channel->id"
+                                        :for="'channels_' . $channel->id"
+                                        rules="required"
+                                        :label="trans('admin::app.cms.create.channels')"
+                                        :checked="in_array($channel->id, $selectedOptionIds)"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.label
+                                        :for="'channels_' . $channel->id"
+                                        class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
+                                    >
+                                        {{ core()->getChannelName($channel) }}
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="channels[]"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+                            @endforeach
 
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
@@ -961,8 +1029,8 @@
 
                                 <v-field
                                     type="text"
-                                    name="name"
-                                    value="{{ $theme->name }}"
+                                    name="{{ $currentLocale->code }}[name]"
+                                    value="{{ $theme->translate($currentLocale->code)['name'] ?? ''}}"
                                     class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
                                     :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     rules="required"
@@ -999,6 +1067,39 @@
                                 >
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
+
+                            <!-- Select Channels -->
+                            <p class="required block leading-[24px] text-gray-800 font-medium">
+                                @lang('admin::app.cms.create.channels')
+                            </p>
+
+                            @foreach(core()->getAllChannels() as $channel)
+                                <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        name="channels[]"
+                                        :value="$channel->id"
+                                        :id="'channels_' . $channel->id"
+                                        :for="'channels_' . $channel->id"
+                                        rules="required"
+                                        :label="trans('admin::app.cms.create.channels')"
+                                        :checked="in_array($channel->id, $selectedOptionIds)"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.label
+                                        :for="'channels_' . $channel->id"
+                                        class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
+                                    >
+                                        {{ core()->getChannelName($channel) }}
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="channels[]"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+                            @endforeach
 
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
@@ -1185,8 +1286,8 @@
                             </div>
                         </div>
 
-                        <input type="hidden" name="options[html]" v-model="options.html">
-                        <input type="hidden" name="options[css]" v-model="options.css">
+                        <input type="hidden" name="{{ $currentLocale->code }}[options][html]" v-model="options.html">
+                        <input type="hidden" name="{{ $currentLocale->code }}[options][css]" v-model="options.css">
 
                         <KeepAlive>
                             <component 
@@ -1219,8 +1320,8 @@
 
                                 <v-field
                                     type="text"
-                                    name="name"
-                                    value="{{ $theme->name }}"
+                                    name="{{ $currentLocale->code }}[name]"
+                                    value="{{ $theme->translate($currentLocale->code)['name'] ?? ''}}"
                                     class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
                                     :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     rules="required"
@@ -1257,6 +1358,39 @@
                                 >
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
+
+                            <!-- Select Channels -->
+                            <p class="required block leading-[24px] text-gray-800 font-medium">
+                                @lang('admin::app.cms.create.channels')
+                            </p>
+
+                            @foreach(core()->getAllChannels() as $channel)
+                                <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        name="channels[]"
+                                        :value="$channel->id"
+                                        :id="'channels_' . $channel->id"
+                                        :for="'channels_' . $channel->id"
+                                        rules="required"
+                                        :label="trans('admin::app.cms.create.channels')"
+                                        :checked="in_array($channel->id, $selectedOptionIds)"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.label
+                                        :for="'channels_' . $channel->id"
+                                        class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
+                                    >
+                                        {{ core()->getChannelName($channel) }}
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="channels[]"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+                            @endforeach
 
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
@@ -1485,8 +1619,8 @@
     
                                     <v-field
                                         type="text"
-                                        name="name"
-                                        value="{{ $theme->name }}"
+                                        name="{{ $currentLocale->code }}[name]"
+                                        value="{{ $theme->translate($currentLocale->code)['name'] ?? ''}}"
                                         class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
                                         :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         rules="required"
@@ -1524,6 +1658,39 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
     
+                                <!-- Select Channels -->
+                                <p class="required block leading-[24px] text-gray-800 font-medium">
+                                    @lang('admin::app.cms.create.channels')
+                                </p>
+
+                                @foreach(core()->getAllChannels() as $channel)
+                                    <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
+                                        <x-admin::form.control-group.control
+                                            type="checkbox"
+                                            name="channels[]"
+                                            :value="$channel->id"
+                                            :id="'channels_' . $channel->id"
+                                            :for="'channels_' . $channel->id"
+                                            rules="required"
+                                            :label="trans('admin::app.cms.create.channels')"
+                                            :checked="in_array($channel->id, $selectedOptionIds)"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.label
+                                            :for="'channels_' . $channel->id"
+                                            class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
+                                        >
+                                            {{ core()->getChannelName($channel) }}
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.error
+                                            control-name="channels[]"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+                                @endforeach
+
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.themes.edit.status')
@@ -1881,7 +2048,7 @@
                     return {
                         inittialEditor: 'v-html-editor-theme',
 
-                        options: @json($theme->options),
+                        options: @json($theme->translate($currentLocale->code)['options'] ?? null),
 
                         isHtmlEditorActive: true,
                     };
@@ -1927,7 +2094,7 @@
                 data() {
                     return {
                         options:{
-                            html: `{!! $theme->options['html'] ?? '' !!}`,
+                            html: `{!! $theme->translate($currentLocale->code)['options']['html'] ?? '' !!}`,
                         },
 
                         cursorPointer: {},
@@ -2001,7 +2168,7 @@
                 data() {
                     return {
                         options:{
-                            css: `{!! $theme->options['css'] ?? '' !!}`,
+                            css: `{!! $theme->translate($currentLocale->code)['options']['css'] ?? '' !!}`,
                         }
                     };
                 },

@@ -3,31 +3,13 @@
 namespace Webkul\Shop\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Webkul\Core\Eloquent\TranslatableModel;
-use Webkul\Core\Models\ChannelProxy;
-use Webkul\Shop\Contracts\ThemeCustomization as ThemeCustomizationContract;
+use Illuminate\Database\Eloquent\Model;
+use Webkul\Shop\Contracts\ThemeCustomizationTranslation as ThemeCustomizationTranslationContract;
 
 
-class ThemeCustomization extends TranslatableModel implements ThemeCustomizationContract
+class ThemeCustomizationTranslation extends Model implements ThemeCustomizationTranslationContract
 {
     use HasFactory;
-
-    /**
-     * The attributes that are translatable.
-     *
-     * @var array
-     */
-    public $translatedAttributes = [
-        'options',
-        'name',
-    ];
-
-    /**
-     * With the translations given attributes
-     *
-     * @var array
-     */
-    protected $with = ['translations'];
 
     /**
      * Image carousel precision.
@@ -79,18 +61,7 @@ class ThemeCustomization extends TranslatableModel implements ThemeCustomization
      * @var array
      */
     protected $fillable = [
-        'type',
         'name',
         'options',
-        'sort_order',
-        'status',
     ];
-
-    /**
-     * Get the channels.
-     */
-    public function channels()
-    {
-        return $this->belongsToMany(ChannelProxy::modelClass(), 'theme_customization_channels');
-    }
 }

@@ -90,11 +90,18 @@ class ThemeController extends Controller
      */
     public function update($id)
     {
-        $data = request()->only(['options', 'type', 'name', 'sort_order']);
-
+        $data = request()->only([
+            request()->input('locale') . '.options',
+            'type',
+            request()->input('locale') . '.name',
+            'sort_order',
+            'locale',
+            'channels'
+        ]);
+        
         if ($data['type'] == 'static_content') {
-            $data['options']['html'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $data['options']['html']); 
-            $data['options']['css'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $data['options']['css']); 
+            $data[request()->input('locale')]['options']['html'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $data[request()->input('locale')]['options']['html']); 
+            $data[request()->input('locale')]['options']['css'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $data[request()->input('locale')]['options']['css']); 
         }
 
         $data['status'] = request()->input('status') == 'on';
@@ -106,6 +113,8 @@ class ThemeController extends Controller
         Event::dispatch('theme_customization.update.before', $id);
 
         $theme = $this->themeCustomizationRepository->update($data, $id);
+
+        $theme->channels()->sync($data['channels']);
 
         if ($data['type'] == 'image_carousel') {
             $this->themeCustomizationRepository->uploadImage(
