@@ -281,7 +281,7 @@
                                 <form @submit="handleSubmit($event, update)">
                                     <template v-if="selectedType == 'editPrices'">
                                         <div class="pb-[10px] border-b-[1px] border-gray-300">
-                                            <div class="flex gap-[10px] items-end">
+                                            <div class="flex gap-[10px] items-center">
                                                 <x-admin::form.control-group class="flex-1 mb-0">
                                                     <x-admin::form.control-group.label>
                                                         @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-sku')
@@ -304,7 +304,7 @@
                                                     </div>
                                                 </x-admin::form.control-group>
 
-                                                <button class="secondary-button">
+                                                <button class="secondary-button mt-[15px]">
                                                     @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-btn')
                                                 </button>
                                             </div>
