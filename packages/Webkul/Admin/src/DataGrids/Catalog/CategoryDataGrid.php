@@ -125,44 +125,52 @@ class CategoryDataGrid extends DataGrid
      */
     public function prepareActions()
     {
-        $this->addAction([
-            'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.catalog.categories.index.datagrid.edit'),
-            'method' => 'GET',
-            'url'    => function ($row) {
-                return route('admin.catalog.categories.edit', $row->category_id);
-            },
-        ]);
+        if (bouncer()->hasPermission('catalog.categories.edit')) {
+            $this->addAction([
+                'icon'   => 'icon-edit',
+                'title'  => trans('admin::app.catalog.categories.index.datagrid.edit'),
+                'method' => 'GET',
+                'url'    => function ($row) {
+                    return route('admin.catalog.categories.edit', $row->category_id);
+                },
+            ]);
+        }
 
-        $this->addAction([
-            'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.catalog.categories.index.datagrid.delete'),
-            'method' => 'DELETE',
-            'url'    => function ($row) {
-                return route('admin.catalog.categories.delete', $row->category_id);
-            },
-        ]);
+        if (bouncer()->hasPermission('catalog.categories.delete')) {
+            $this->addAction([
+                'icon'   => 'icon-delete',
+                'title'  => trans('admin::app.catalog.categories.index.datagrid.delete'),
+                'method' => 'DELETE',
+                'url'    => function ($row) {
+                    return route('admin.catalog.categories.delete', $row->category_id);
+                },
+            ]);
+        }
 
-        $this->addMassAction([
-            'title'  => trans('admin::app.catalog.categories.index.datagrid.delete'),
-            'method' => 'POST',
-            'url'    => route('admin.catalog.categories.mass_delete'),
-        ]);
+        if (bouncer()->hasPermission('catalog.categories.mass-delete')) {
+            $this->addMassAction([
+                'title'  => trans('admin::app.catalog.categories.index.datagrid.delete'),
+                'method' => 'POST',
+                'url'    => route('admin.catalog.categories.mass_delete'),
+            ]);
+        }
 
-        $this->addMassAction([
-            'title'   => trans('admin::app.catalog.categories.index.datagrid.update-status'),
-            'method'  => 'POST',
-            'url'     => route('admin.catalog.categories.mass_update'),
-            'options' => [
-                [
-                    'name' => trans('admin::app.catalog.categories.index.datagrid.active'),
-                    'value' => 1,
+        if (bouncer()->hasPermission('catalog.categories.mass-update')) {
+            $this->addMassAction([
+                'title'   => trans('admin::app.catalog.categories.index.datagrid.update-status'),
+                'method'  => 'POST',
+                'url'     => route('admin.catalog.categories.mass_update'),
+                'options' => [
+                    [
+                        'name' => trans('admin::app.catalog.categories.index.datagrid.active'),
+                        'value' => 1,
+                    ],
+                    [
+                        'name' => trans('admin::app.catalog.categories.index.datagrid.inactive'),
+                        'value' => 0,
+                    ],
                 ],
-                [
-                    'name' => trans('admin::app.catalog.categories.index.datagrid.inactive'),
-                    'value' => 0,
-                ],
-            ],
-        ]);
+            ]);
+        }
     }
 }

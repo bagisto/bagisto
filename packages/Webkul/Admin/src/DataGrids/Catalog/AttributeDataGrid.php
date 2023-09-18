@@ -117,23 +117,27 @@ class AttributeDataGrid extends DataGrid
      */
     public function prepareActions()
     {
-        $this->addAction([
-            'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.catalog.attributes.index.datagrid.edit'),
-            'method' => 'GET',
-            'url'    => function ($row) {
-                return route('admin.catalog.attributes.edit', $row->id);
-            },
-        ]);
+        if (bouncer()->hasPermission('catalog.attributes.edit')) {
+            $this->addAction([
+                'icon'   => 'icon-edit',
+                'title'  => trans('admin::app.catalog.attributes.index.datagrid.edit'),
+                'method' => 'GET',
+                'url'    => function ($row) {
+                    return route('admin.catalog.attributes.edit', $row->id);
+                },
+            ]);
+        }
 
-        $this->addAction([
-            'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.catalog.attributes.index.datagrid.delete'),
-            'method' => 'DELETE',
-            'url'    => function ($row) {
-                return route('admin.catalog.attributes.delete', $row->id);
-            },
-        ]);
+        if (bouncer()->hasPermission('catalog.attributes.delete')) {
+            $this->addAction([
+                'icon'   => 'icon-delete',
+                'title'  => trans('admin::app.catalog.attributes.index.datagrid.delete'),
+                'method' => 'DELETE',
+                'url'    => function ($row) {
+                    return route('admin.catalog.attributes.delete', $row->id);
+                },
+            ]);
+        }
     }
 
     /**
@@ -143,11 +147,13 @@ class AttributeDataGrid extends DataGrid
      */
     public function prepareMassActions()
     {
-        $this->addMassAction([
-            'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.catalog.attributes.index.datagrid.delete'),
-            'method' => 'POST',
-            'url'    => route('admin.catalog.attributes.mass_delete'),
-        ]);
+        if (bouncer()->hasPermission('catalog.attributes.mass-delete')) {
+            $this->addMassAction([
+                'icon'   => 'icon-delete',
+                'title'  => trans('admin::app.catalog.attributes.index.datagrid.delete'),
+                'method' => 'POST',
+                'url'    => route('admin.catalog.attributes.mass_delete'),
+            ]);
+        }
     }
 }
