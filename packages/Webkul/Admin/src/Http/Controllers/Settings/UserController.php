@@ -79,7 +79,7 @@ class UserController extends Controller
         Event::dispatch('user.admin.create.after', $admin);
 
         return new JsonResponse([
-            'message' => trans('admin::app.settings.users.index.create-success'),
+            'message' => trans('admin::app.settings.users.create-success'),
         ]);
     }
 
