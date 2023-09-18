@@ -30,6 +30,7 @@
                                     ::src="category.images.logo_url"
                                     width="110"
                                     height="110"
+                                    class="w-[110px] h-[110px] rounded-full"
                                 ></x-shop::shimmer.image>
                             </template>
                         </a>

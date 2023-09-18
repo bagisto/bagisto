@@ -3,7 +3,7 @@
 namespace Webkul\Admin\Http\Controllers\Settings\Tax;
 
 use Illuminate\Support\Facades\Event;
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\JsonResponse;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Tax\Repositories\TaxRateRepository;
@@ -40,9 +40,9 @@ class TaxCategoryController extends Controller
     /**
      * Function to create the tax category.
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(): JsonResponse
     {
         $this->validate(request(), [
             'code'        => 'required|string|unique:tax_categories,code',
@@ -66,7 +66,7 @@ class TaxCategoryController extends Controller
 
         Event::dispatch('tax.category.create.after', $taxCategory);
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.settings.taxes.categories.index.create-success'),
         ]);
     }
@@ -86,9 +86,9 @@ class TaxCategoryController extends Controller
     /**
      * To update the tax category.
      *
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(): JsonResource
+    public function update(): JsonResponse
     {
         $id = request()->id;
 
@@ -114,7 +114,7 @@ class TaxCategoryController extends Controller
 
         Event::dispatch('tax.category.update.after', $taxCategory);
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.settings.taxes.categories.index.update-success'),
         ]);
     }
@@ -123,9 +123,9 @@ class TaxCategoryController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id): JsonResource
+    public function destroy($id): JsonResponse
     {
         $this->taxCategoryRepository->findOrFail($id);
 
@@ -136,13 +136,13 @@ class TaxCategoryController extends Controller
 
             Event::dispatch('tax.category.delete.after', $id);
 
-            return new JsonResource([
+            return new JsonResponse([
                 'message' => trans('admin::app.settings.taxes.categories.index.delete-success'),
             ]);
         } catch (\Exception $e) {
         }
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.settings.taxes.categories.index.delete-failed'),
         ], 500);
     }

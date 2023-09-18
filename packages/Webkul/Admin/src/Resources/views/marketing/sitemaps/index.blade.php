@@ -257,7 +257,7 @@
 
                         this.$axios.post(params.id ? "{{ route('admin.marketing.promotions.sitemaps.update') }}" : "{{ route('admin.marketing.promotions.sitemaps.store') }}", formData )
                             .then((response) => {
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
                                 this.$refs.sitemap.toggle();
 

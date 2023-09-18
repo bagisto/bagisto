@@ -3,7 +3,7 @@
 namespace Webkul\Admin\Http\Controllers\Settings;
 
 use Illuminate\Support\Facades\Event;
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\JsonResponse;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\ExchangeRateRepository;
 use Webkul\Core\Repositories\CurrencyRepository;
@@ -42,9 +42,9 @@ class ExchangeRateController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(): JsonResource
+    public function store(): JsonResponse
     {
         $this->validate(request(), [
             'target_currency' => ['required', 'unique:currency_exchange_rates,target_currency'],
@@ -60,7 +60,7 @@ class ExchangeRateController extends Controller
 
         Event::dispatch('core.exchange_rate.create.after', $exchangeRate);
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.settings.exchange-rates.index.create-success'),
         ]);
     }
@@ -69,26 +69,28 @@ class ExchangeRateController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function edit($id): JsonResource
+    public function edit($id): JsonResponse
     {
         $currencies = $this->currencyRepository->all();
 
         $exchangeRate = $this->exchangeRateRepository->findOrFail($id);
 
-        return new JsonResource([
-            'currencies' => $currencies,
-            'exchangeRate' => $exchangeRate,
+        return new JsonResponse([
+            'data' => [
+                'currencies' => $currencies,
+                'exchangeRate' => $exchangeRate,
+            ]
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(): JsonResource
+    public function update(): JsonResponse
     {
         $this->validate(request(), [
             'target_currency' => ['required', 'unique:currency_exchange_rates,target_currency,' . request()->id],
@@ -104,7 +106,7 @@ class ExchangeRateController extends Controller
 
         Event::dispatch('core.exchange_rate.update.after', $exchangeRate);
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.settings.exchange-rates.index.update-success'),
         ]);
     }

@@ -40,11 +40,9 @@ class ThemeCustomizationRepository extends Repository
                 if ($image['image'] instanceof UploadedFile) {
                     $manager = new ImageManager();
     
-                    $webpImage = $manager->make($image['image'])->encode('webp');
-    
                     $path = 'theme/' . $theme->id . '/' . Str::random(40) . '.webp';
-
-                    Storage::put($path, $webpImage);
+    
+                    Storage::put($path, $manager->make($image['image'])->encode('webp'));
 
                     if (
                         isset($imageOptions['type']) 

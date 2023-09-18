@@ -1053,7 +1053,7 @@
                     getAttributesOption() {
                         this.$axios.get(`${this.src}`)
                             .then(response => {
-                                let options = response.data.data;
+                                let options = response.data;
                                 options.forEach((option) => {
                                     this.optionRowCount++;
 

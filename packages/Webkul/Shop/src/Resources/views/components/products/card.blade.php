@@ -11,10 +11,10 @@
             class='grid gap-2.5 content-start w-full relative'
             v-if="mode != 'list'"
         >
-            <div class="relative overflow-hidden group max-w-[291px] max-h-[300px]">
+            <div class="relative overflow-hidden group max-w-[291px] max-h-[300px] rounded-[4px]">
                 <a :href="`{{ route('shop.product_or_category.index', '') }}/${product.url_key}`">
                     <x-shop::shimmer.image
-                        class="relative after:content-[' '] after:block after:pb-[calc(100%+9px)] rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
+                        class="relative after:content-[' '] after:block after:pb-[calc(100%+9px)] bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
                         ::src="product.base_image.medium_image_url"
                         width="291"
                         height="300"
@@ -84,13 +84,13 @@
 
         <!-- List Card -->
         <div
-            class="flex gap-[15px] grid-cols-2 max-w-max relative max-sm:flex-wrap"
+            class="flex gap-[15px] grid-cols-2 max-w-max relative max-sm:flex-wrap rounded-[4px] overflow-hidden"
             v-else
         >
             <div class="relative max-w-[250px] max-h-[258px] overflow-hidden group"> 
                 <a :href="`{{ route('shop.product_or_category.index', '') }}/${product.url_key}`">
                     <x-shop::shimmer.image
-                        class="min-w-[250px] relative after:content-[' '] after:block after:pb-[calc(100%+9px)] rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
+                        class="min-w-[250px] relative after:content-[' '] after:block after:pb-[calc(100%+9px)] bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
                         ::src="product.base_image.medium_image_url"
                         width="291"
                         height="300"

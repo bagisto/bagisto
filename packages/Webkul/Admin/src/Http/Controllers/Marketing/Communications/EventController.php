@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Marketing\Communications;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Marketing\Repositories\EventRepository;
@@ -36,7 +36,7 @@ class EventController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store()
     {
@@ -65,19 +65,19 @@ class EventController extends Controller
      * Event Details
      *
      * @param  int  $id
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function edit($id): JsonResource
+    public function edit($id): JsonResponse
     {
         if ($id == 1) {
-            return new JsonResource([
+            return new JsonResponse([
                 'message' => trans('admin::app.marketing.communications.events.edit-error'),
             ]);
         }
 
         $event = $this->eventRepository->findOrFail($id);
 
-        return new JsonResource([
+        return new JsonResponse([
             'data' => $event,
         ]);
     }
@@ -85,7 +85,7 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update()
     {
@@ -116,7 +116,7 @@ class EventController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {

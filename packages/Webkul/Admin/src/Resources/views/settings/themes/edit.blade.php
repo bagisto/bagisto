@@ -1258,8 +1258,8 @@
                                 <div class="flex gap-[15px] mb-[15px] pt-[8px] border-b-[2px] max-sm:hidden">
                                     <p @click="switchEditor('v-html-editor-theme', 1)">
                                         <div
-                                            class="mb-[-1px] border-b-[1px] transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 cursor-pointer"
-                                            :class="{'border-blue-600': inittialEditor == 'v-html-editor-theme'}"
+                                            class="transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 cursor-pointer"
+                                            :class="{'mb-[-1px] border-b-[2px] border-blue-600': inittialEditor == 'v-html-editor-theme'}"
                                         >
                                             @lang('admin::app.settings.themes.edit.html')
                                         </div>
@@ -1267,8 +1267,8 @@
 
                                     <p @click="switchEditor('v-css-editor-theme', 0);">
                                         <div
-                                            class="mb-[-1px] border-b-[1px] transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 cursor-pointer"
-                                            :class="{'border-blue-600': inittialEditor == 'v-css-editor-theme'}"
+                                            class="transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 cursor-pointer"
+                                            :class="{'mb-[-1px] border-b-[2px] border-blue-600': inittialEditor == 'v-css-editor-theme'}"
                                         >
                                             @lang('admin::app.settings.themes.edit.css')
                                         </div>
@@ -1276,8 +1276,8 @@
 
                                     <p @click="switchEditor('v-static-content-previewer', 0);">
                                         <div
-                                            class="mb-[-1px] border-b-[1px] transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 cursor-pointer"
-                                            :class="{'border-blue-600': inittialEditor == 'v-static-content-previewer'}"
+                                            class="transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 cursor-pointer"
+                                            :class="{'mb-[-1px] border-b-[2px] border-blue-600': inittialEditor == 'v-static-content-previewer'}"
                                         >
                                             @lang('admin::app.settings.themes.edit.preview')
                                         </div>
@@ -1907,7 +1907,7 @@
 
                         this.sliders.images.push({
                             slider_image: formData.get("slider_image[]"),
-                            link: formData.get("link"),
+                            link: formData.get("{{ $currentLocale->code }}[link]"),
                         });
 
                         if (formData.get("slider_image[]") instanceof File) {

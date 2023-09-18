@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Catalog;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\ChannelRepository;
@@ -145,14 +145,14 @@ class CategoryController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id): JsonResource
+    public function destroy($id): JsonResponse
     {
         $category = $this->categoryRepository->findOrFail($id);
 
         if ($this->isCategoryDeletable($category)) {
-            return new JsonResource(['message' => trans('admin::app.catalog.categories.delete-category-root')], 400);
+            return new JsonResponse(['message' => trans('admin::app.catalog.categories.delete-category-root')], 400);
         }
 
         try {
@@ -162,22 +162,24 @@ class CategoryController extends Controller
 
             Event::dispatch('catalog.category.delete.after', $id);
 
-            return new JsonResource([
-                'message' => trans('admin::app.catalog.categories.delete-success')]);
+            return new JsonResponse([
+                'message' => trans('admin::app.catalog.categories.delete-success', ['name' => 'admin::app.catalog.categories.category'
+            ])]);
         } catch (\Exception $e) {
         }
 
-        return new JsonResource([
-            'message' => trans('admin::app.catalog.categories.delete-failed'
-        )], 500);
+        return new JsonResponse([
+            'message' => trans('admin::app.catalog.categories.delete-failed', ['name' => 'admin::app.catalog.categories.category'
+        ])], 500);
     }
 
     /**
      * Remove the specified resources from database.
      *
-     * @return \Illuminate\Http\Response
+     * @param MassDestroyRequest $massDestroyRequest
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function massDestroy(MassDestroyRequest $massDestroyRequest)
+    public function massDestroy(MassDestroyRequest $massDestroyRequest): JsonResponse
     {
         $suppressFlash = true;
 
@@ -201,7 +203,9 @@ class CategoryController extends Controller
 
                         Event::dispatch('catalog.category.delete.after', $categoryId);
                     } catch (\Exception $e) {
-                        session()->flash('error', trans('admin::app.catalog.categories.delete-failed', ['name' => 'admin::app.catalog.categories.category']));
+                        return new JsonResponse([
+                            'message' => trans('admin::app.catalog.categories.delete-failed', ['name' => 'admin::app.catalog.categories.category'])
+                        ], 500);
                     }
                 }
             }
@@ -211,7 +215,9 @@ class CategoryController extends Controller
             count($categoryIds) != 1
             || $suppressFlash == true
         ) {
-            session()->flash('success', trans('admin::app.catalog.categories.index.datagrid.delete-success', ['resource' => 'admin::app.catalog.categories.category']));
+            return new JsonResponse([
+                'message' => trans('admin::app.catalog.categories.index.datagrid.delete-success', ['resource' => 'admin::app.catalog.categories.category'])
+            ]);
         }
 
         return redirect()->route('admin.catalog.categories.index');
@@ -220,7 +226,7 @@ class CategoryController extends Controller
     /**
      * Mass update Category.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function massUpdate(MassUpdateRequest $massUpdateRequest)
     {
@@ -241,10 +247,11 @@ class CategoryController extends Controller
                 Event::dispatch('catalog.categories.mass-update.after', $category);
             }
     
-            return new JsonResource([
-                'message' => trans('admin::app.catalog.categories.update-success')]);
+            return new JsonResponse([
+                'message' => trans('admin::app.catalog.categories.update-success')
+            ]);
         } catch (\Exception $e) {
-            return new JsonResource([
+            return new JsonResponse([
                 'message' => $e->getMessage(),
             ], 500);
         }

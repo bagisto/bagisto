@@ -10,7 +10,14 @@
         
         <div class="flex gap-x-[10px] items-center">
             <div class="flex gap-x-[10px] items-center">
-              <v-create-theme-form></v-create-theme-form>
+                <v-create-theme-form>
+                    <button
+                        type="button"
+                        class="primary-button"
+                    >
+                        @lang('admin::app.settings.themes.index.create-btn')
+                    </button>  
+                </v-create-theme-form>
             </div>
         </div>
     </div>
@@ -160,8 +167,8 @@
                     create(params, { setErrors }) {
                         this.$axios.post('{{ route('admin.theme.store') }}', params)
                             .then((response) => {
-                                if (response.data.data.redirect_url) {
-                                    window.location.href = response.data.data.redirect_url;
+                                if (response.data.redirect_url) {
+                                    window.location.href = response.data.redirect_url;
                                 } 
                             })
                             .catch((error) => {

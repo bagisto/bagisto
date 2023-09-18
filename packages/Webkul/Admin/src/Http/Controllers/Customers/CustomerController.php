@@ -3,7 +3,7 @@
 namespace Webkul\Admin\Http\Controllers\Customers;
 
 use Illuminate\Support\Facades\Event;
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerRepository;
@@ -45,9 +45,9 @@ class CustomerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(): JsonResource
+    public function store(): JsonResponse
     {
         $this->validate(request(), [
             'first_name'    => 'string|required',
@@ -77,7 +77,7 @@ class CustomerController extends Controller
 
         $this->customerRepository->create($data);
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.customers.customers.index.create.create-success'),
         ]);
     }
@@ -252,9 +252,9 @@ class CustomerController extends Controller
      * To mass update the customer.
      *
      * @param MassUpdateRequest $massUpdateRequest
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function massUpdate(MassUpdateRequest $massUpdateRequest): JsonResource
+    public function massUpdate(MassUpdateRequest $massUpdateRequest): JsonResponse
     {
         $selectedCustomerIds = $massUpdateRequest->input('indices');
     
@@ -268,7 +268,7 @@ class CustomerController extends Controller
             Event::dispatch('customer.update.after', $customer);
         }
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.customers.customers.index.datagrid.update-success')
         ]);
     }
@@ -277,9 +277,9 @@ class CustomerController extends Controller
      * To mass delete the customer.
      *
      * @param MassDestroyRequest $massDestroyRequest
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function massDestroy(MassDestroyRequest $massDestroyRequest): JsonResource
+    public function massDestroy(MassDestroyRequest $massDestroyRequest): JsonResponse
     {
         $customerIds = $massDestroyRequest->input('indices');
 
@@ -293,11 +293,11 @@ class CustomerController extends Controller
                     Event::dispatch('customer.delete.after', $customerId);
                 }
     
-                return new JsonResource([
+                return new JsonResponse([
                     'message' => trans('admin::app.customers.customers.index.datagrid.delete-success')
                 ]);
             } catch (\Exception $e) {
-                return new JsonResource([
+                return new JsonResponse([
                     'message' => $e->getMessage()
                 ]);
             }

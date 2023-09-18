@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Marketing\Promotions;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\JsonResponse;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Http\Requests\MassDestroyRequest;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
@@ -34,9 +34,9 @@ class CartRuleCouponController extends Controller
      * Generate coupon code for cart rule.
      *
      * @param int $id
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store($id):JsonResource
+    public function store($id):JsonResponse
     {
         $this->validate(request(), [
             'coupon_qty'  => 'required|integer|min:1',
@@ -45,14 +45,14 @@ class CartRuleCouponController extends Controller
         ]);
 
         if (!request('id')) {
-            return new JsonResource([
+            return new JsonResponse([
                 'message' => trans('admin::app.promotions.cart-rules-coupons.cart-rule-not-defined-error'
             )], 400);
         }
 
         $this->cartRuleCouponRepository->generateCoupons(request()->all(), request('id'));
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.marketing.promotions.cart-rules-coupons.success', ['name' => 'Cart rule coupons']
         )]);
     }
@@ -61,15 +61,15 @@ class CartRuleCouponController extends Controller
      * Delete Generated coupon code
      *
      * @param int $id
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id): JsonResource
+    public function destroy($id): JsonResponse
     {
         $this->cartRuleCouponRepository->findOrFail($id);
 
         $this->cartRuleCouponRepository->delete($id);
 
-        return new JsonResource(['message' => trans('admin::app.marketing.promotions.cart-rules-coupons.delete-success')]);
+        return new JsonResponse(['message' => trans('admin::app.marketing.promotions.cart-rules-coupons.delete-success')]);
     }
 
     /**
