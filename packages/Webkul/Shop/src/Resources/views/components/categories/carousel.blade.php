@@ -23,13 +23,13 @@
                     >
                         <a
                             :href="category.url_path"
-                            class="w-[110px] h-[110px] bg-[#F5F5F5] rounded-full"
                         >
                             <template v-if="category.images.logo_url">
                                 <x-shop::shimmer.image
                                     ::src="category.images.logo_url"
                                     width="110"
                                     height="110"
+                                    class="w-[110px] h-[110px] bg-[#F5F5F5] rounded-full"
                                 ></x-shop::shimmer.image>
                             </template>
                         </a>
