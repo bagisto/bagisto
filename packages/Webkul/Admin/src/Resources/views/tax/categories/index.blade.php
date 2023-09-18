@@ -244,7 +244,6 @@
                                 
                                 <x-admin::form.control-group 
                                     class="flex gap-[10px] !mb-0 p-[6px]"
-                                    v-if="taxRates.length"
                                 >
                                     <v-field
                                         name="taxrates[]" 
@@ -278,26 +277,6 @@
 
                                 </x-admin::form.control-group>
 
-                                <div 
-                                    class="flex gap-[20px] items-center py-[10px]"
-                                    v-else
-                                >
-                                    <img 
-                                        src="{{ bagisto_asset('images/settings/tax.svg') }}" 
-                                        class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
-                                    >
-
-                                    <div class="flex flex-col gap-[6px]">
-                                        <p class="text-[16px] text-gray-400 font-semibold">
-                                            @lang('admin::app.settings.taxes.categories.index.create.add-tax-rates')
-                                        </p>
-
-                                        <p class="text-gray-400"> 
-                                            @lang('admin::app.settings.taxes.categories.index.create.empty-text')
-                                        </p>
-                                    </div>
-                                </div>
-                                
                                 <x-admin::form.control-group.error
                                     control-name="taxrates[]"
                                 >

@@ -1029,8 +1029,8 @@ return [
             'category'             => 'Kategoria',
             'update-success'       => 'Kategoria została pomyślnie zaktualizowana.',
             'delete-success'       => 'Kategoria została pomyślnie usunięta.',
-            'delete-category-root' => 'Korzeń :name nie może zostać usunięty.',
-            'delete-failed'        => 'Nie można usunąć :name',
+            'delete-category-root' => 'Kategoria główna nie może zostać usunięta.',
+            'delete-failed'        => 'Wystąpił błąd podczas usuwania kategorii',
         ],
 
         'families' => [
@@ -2422,17 +2422,6 @@ return [
                 'edit'  => [
                     'title'    => 'Edytuj Użytkownika',
                 ],
-
-                'activate-warning'   => 'Twoje konto nie zostało jeszcze aktywowane, skontaktuj się z administratorem.',
-                'create-success'     => 'Użytkownik został pomyślnie utworzony.',
-                'cannot-change'      => 'Nie można zmienić użytkownika',
-                'delete-failed'      => 'Usuwanie użytkownika nie powiodło się.',
-                'delete-success'     => 'Użytkownik został pomyślnie usunięty.',
-                'incorrect-password' => 'Nieprawidłowe hasło',
-                'last-delete-error'  => 'Ostatnie usunięcie użytkownika nie powiodło się',
-                'login-error'        => 'Proszę sprawdzić dane logowania i spróbować ponownie.',
-                'update-success'     => 'Użytkownik został pomyślnie zaktualizowany.',
-                'delete-warning'     => 'Czy na pewno chcesz wykonać tę operację?',
             ],
 
             'edit'  => [
@@ -2448,8 +2437,16 @@ return [
                 'save-btn'         => 'Zapisz Użytkownika',
             ],
 
-            'update-success' => 'Użytkownik został pomyślnie zaktualizowany.',
-            'delete-success' => 'Użytkownik został pomyślnie usunięty.',
+            'delete-failed'      => 'Usuwanie użytkownika nie powiodło się.',
+            'cannot-change'      => 'Nie można zmienić użytkownika.',
+            'update-success'     => 'Użytkownik został pomyślnie zaktualizowany.',
+            'delete-success'     => 'Użytkownik został pomyślnie usunięty.',
+            'incorrect-password' => 'Niepoprawne hasło',
+            'create-success'     => 'Użytkownik został pomyślnie utworzony.',
+            'delete-warning'     => 'Czy na pewno chcesz wykonać tę akcję?',
+            'login-error'        => 'Sprawdź swoje dane logowania i spróbuj ponownie.',
+            'activate-warning'   => 'Twoje konto nie zostało jeszcze aktywowane, skontaktuj się z administratorem.',
+            'last-delete-error'  => 'Usuwanie ostatniego użytkownika nie powiodło się.'
         ],
 
         'roles' => [

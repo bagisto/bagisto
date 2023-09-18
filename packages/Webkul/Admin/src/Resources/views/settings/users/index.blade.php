@@ -546,7 +546,7 @@
                     },
 
                     deleteModal(url, id, recordCount) {
-                        if (! confirm('@lang('admin::app.settings.users.index.delete-warning')')) {
+                        if (! confirm('@lang('admin::app.settings.users.delete-warning')')) {
                             return;
                         }
                         if (this.currentUserId == id && recordCount != 1) {

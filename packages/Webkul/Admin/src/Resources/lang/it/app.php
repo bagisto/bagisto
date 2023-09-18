@@ -1029,8 +1029,8 @@ return [
             'category'             => 'Categoria',
             'update-success'       => 'Categoria aggiornata con successo.',
             'delete-success'       => 'La categoria è stata eliminata con successo.',
-            'delete-category-root' => 'La categoria principale :name non può essere eliminata.',
-            'delete-failed'        => 'Impossibile eliminare la categoria :name',
+            'delete-category-root' => 'La categoria principale non può essere eliminata.',
+            'delete-failed'        => 'Errore durante l\'eliminazione della categoria',
         ],
 
         'families'   => [
@@ -2423,17 +2423,6 @@ return [
                 'edit'  => [
                     'title'    => 'Editar Usuario',
                 ],
-
-                'activate-warning'   => 'Tu cuenta aún no ha sido activada, por favor contacta al administrador.',
-                'create-success'     => 'Usuario creado exitosamente.',
-                'cannot-change'      => 'No se puede cambiar el usuario',
-                'delete-failed'      => 'Error al eliminar el usuario.',
-                'delete-success'     => 'Usuario eliminado exitosamente.',
-                'incorrect-password' => 'Contraseña incorrecta',
-                'last-delete-error'  => 'Error al eliminar el último usuario',
-                'login-error'        => 'Por favor, verifica tus credenciales e intenta nuevamente.',
-                'update-success'     => 'Usuario actualizado exitosamente.',
-                'delete-warning'     => '¿Estás seguro de que deseas realizar esta acción?',
             ],
 
             'edit'  => [
@@ -2449,8 +2438,16 @@ return [
                 'save-btn'         => 'Guardar Usuario',
             ],
 
-            'update-success'   => 'Usuario actualizado exitosamente.',
-            'delete-success'   => 'Usuario eliminado exitosamente.',
+            'delete-failed'      => 'Eliminazione utente non riuscita.',
+            'cannot-change'      => 'Impossibile modificare l\'utente.',
+            'update-success'     => 'Utente aggiornato con successo.',
+            'delete-success'     => 'Utente eliminato con successo.',
+            'incorrect-password' => 'Password errata',
+            'create-success'     => 'Utente creato con successo.',
+            'delete-warning'     => 'Sei sicuro di voler eseguire questa azione?',
+            'login-error'        => 'Controlla le tue credenziali e riprova.',
+            'activate-warning'   => 'Il tuo account non è ancora attivato, contatta l\'amministratore.',
+            'last-delete-error'  => 'Eliminazione dell\'ultimo utente non riuscita.'
         ],
 
         'roles' => [

@@ -1029,8 +1029,8 @@ return [
             'category'             => '分类',
             'update-success'       => '分类更新成功。',
             'delete-success'       => '分类已成功删除。',
-            'delete-category-root' => '根分类 :name 无法删除。',
-            'delete-failed'        => ':name 无法删除。',
+            'delete-category-root' => '无法删除根类别 ',
+            'delete-failed'        => '删除类别时发生错误',
         ],
 
         'families' => [
@@ -2422,17 +2422,6 @@ return [
                 'edit'  => [
                     'title'    => '编辑用户',
                 ],
-
-                'activate-warning'   => '您的帐户尚未激活，请联系管理员。',
-                'create-success'     => '用户创建成功。',
-                'cannot-change'      => '无法更改用户',
-                'delete-failed'      => '用户删除失败。',
-                'delete-success'     => '用户删除成功。',
-                'incorrect-password' => '密码错误',
-                'last-delete-error'  => '最后一个用户删除失败',
-                'login-error'        => '请检查您的凭据并重试。',
-                'update-success'     => '用户更新成功。',
-                'delete-warning'     => '您确定要执行此操作吗？',
             ],
 
             'edit'  => [
@@ -2448,8 +2437,16 @@ return [
                 'save-btn'         => '保存用户',
             ],
 
-            'update-success' => '用户更新成功。',
-            'delete-success' => '用户删除成功。',
+            'delete-failed'      => '删除用户失败。',
+            'cannot-change'      => '无法更改用户。',
+            'update-success'     => '用户成功更新。',
+            'delete-success'     => '用户成功删除。',
+            'incorrect-password' => '密码错误',
+            'create-success'     => '用户成功创建。',
+            'delete-warning'     => '您确定要执行此操作吗？',
+            'login-error'        => '请检查您的凭据并重试。',
+            'activate-warning'   => '您的帐户尚未激活，请联系管理员。',
+            'last-delete-error'  => '删除最后一个用户失败。'
         ],
 
         'roles' => [

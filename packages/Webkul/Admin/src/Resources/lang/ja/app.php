@@ -1029,8 +1029,8 @@ return [
             'category'             => 'カテゴリ',
             'update-success'       => 'カテゴリが正常に更新されました。',
             'delete-success'       => 'カテゴリが正常に削除されました。',
-            'delete-category-root' => 'ルート :name は削除できません。',
-            'delete-failed'        => ':name を削除できませんでした。',
+            'delete-category-root' => 'ルートカテゴリは削除できません。',
+            'delete-failed'        => 'カテゴリの削除中にエラーが発生しました',
         ],
 
         'families'   => [
@@ -2422,17 +2422,6 @@ return [
                 'edit'  => [
                     'title' => 'ユーザーを編集',
                 ],
-
-                'activate-warning'   => 'アカウントはまだ有効化されていません。管理者にお問い合わせください。',
-                'create-success'     => 'ユーザーが正常に作成されました。',
-                'cannot-change'      => 'ユーザーは変更できません',
-                'delete-failed'      => 'ユーザーの削除に失敗しました。',
-                'delete-success'     => 'ユーザーが正常に削除されました。',
-                'incorrect-password' => 'パスワードが間違っています',
-                'last-delete-error'  => '最後のユーザーの削除に失敗しました',
-                'login-error'        => '資格情報を確認してもう一度お試しください。',
-                'update-success'     => 'ユーザーが正常に更新されました。',
-                'delete-warning'     => '本当にこのアクションを実行しますか？',
             ],
 
             'edit'  => [
@@ -2448,8 +2437,16 @@ return [
                 'save-btn'         => 'ユーザーを保存',
             ],
 
-            'update-success' => 'ユーザーが正常に更新されました。',
-            'delete-success' => 'ユーザーが正常に削除されました。',
+            'delete-failed'      => 'ユーザーの削除に失敗しました。',
+            'cannot-change'      => 'ユーザーは変更できません。',
+            'update-success'     => 'ユーザーが正常に更新されました。',
+            'delete-success'     => 'ユーザーが正常に削除されました。',
+            'incorrect-password' => 'パスワードが正しくありません',
+            'create-success'     => 'ユーザーが正常に作成されました。',
+            'delete-warning'     => 'このアクションを実行してもよろしいですか？',
+            'login-error'        => '資格情報を確認して、もう一度試してください。',
+            'activate-warning'   => 'アカウントはまだ有効になっていません。管理者に連絡してください。',
+            'last-delete-error'  => '最後のユーザーの削除に失敗しました。'
         ],
 
         'roles' => [

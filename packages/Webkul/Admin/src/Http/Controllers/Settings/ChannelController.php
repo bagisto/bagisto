@@ -218,7 +218,6 @@ class ChannelController extends Controller
         $editedData['home_seo']['meta_title'] = $editedData['seo_title'];
         $editedData['home_seo']['meta_description'] = $editedData['seo_description'];
         $editedData['home_seo']['meta_keywords'] = $editedData['seo_keywords'];
-        $editedData['home_seo'] = json_encode($editedData['home_seo']);
 
         $editedData = $this->unsetKeys($editedData, ['seo_title', 'seo_description', 'seo_keywords']);
 

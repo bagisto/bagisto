@@ -1,7 +1,7 @@
 @php
     $locale = core()->getRequestedLocaleCode();
 
-    $seo = json_decode($channel->translate($locale)['home_seo'] ?? $channel->home_seo);
+    $seo = $channel->translate($locale)['home_seo'] ?? $channel->home_seo;
 @endphp
 
 <x-admin::layouts>
@@ -299,7 +299,7 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 :name="$locale . '[seo_title]'"
-                                :value="$seo->meta_title ?? (old($locale)['seo_title'] ?? '')"
+                                :value="old($locale)['seo_title'] ?? $seo['meta_title']"
                                 id="meta_title"
                                 rules="required"
                                 :label="trans('admin::app.settings.channels.edit.seo-title')"
@@ -321,7 +321,7 @@
                             <x-admin::form.control-group.control
                                 type="textarea"
                                 :name="$locale . '[seo_keywords]'"
-                                :value="old($locale)['seo_keywords'] ?? $seo->meta_keywords"
+                                :value="old($locale)['seo_keywords'] ?? $seo['meta_keywords']"
                                 id="seo_keywords"
                                 :label="trans('admin::app.settings.channels.edit.seo-keywords')"
                                 :placeholder="trans('admin::app.settings.channels.edit.seo-keywords')"
@@ -342,7 +342,7 @@
                             <x-admin::form.control-group.control
                                 type="textarea"
                                 :name="$locale . '[seo_description]'"
-                                :value="$seo->meta_description ?? (old($locale)['seo_description'] ?? '')"
+                                :value="old($locale)['seo_description'] ?? $seo['meta_description']"
                                 id="meta_description"
                                 rules="required"
                                 :label="trans('admin::app.settings.channels.edit.seo-description')"
