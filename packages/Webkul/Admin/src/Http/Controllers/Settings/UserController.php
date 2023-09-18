@@ -142,7 +142,7 @@ class UserController extends Controller
         Event::dispatch('user.admin.update.after', $admin);
 
         return new JsonResponse([
-            'message' => trans('admin::app.settings.users.index.update-success'),
+            'message' => trans('admin::app.settings.users.update-success'),
         ]);
     }
 
