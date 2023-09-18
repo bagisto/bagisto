@@ -477,7 +477,7 @@
 
                             <v-field
                                 type="text"
-                                name="{{ $currentLocale->code }}[options[title]]"
+                                name="options[title]"
                                 value="{{ $theme->options['title'] ?? '' }}"
                                 class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
                                 :class="[errors['options[title]'] ? 'border border-red-600 hover:border-red-600' : '']"

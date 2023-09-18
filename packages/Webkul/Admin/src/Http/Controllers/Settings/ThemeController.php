@@ -93,7 +93,7 @@ class ThemeController extends Controller
         $locale = core()->getRequestedLocaleCode();
 
         $data = request()->all();
-
+        
         if ($data['type'] == 'static_content') {
             $data[$locale]['options']['html'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $data[$locale]['options']['html']); 
             $data[$locale]['options']['css'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $data[$locale]['options']['css']); 
