@@ -2787,71 +2787,71 @@ return [
             ],
 
             'customer' => [
-                'info'  => 'Kunde',
-                'title' => 'Kunde',
-
+                'info'  => 'مشتری',
+                'title' => 'مشتری',
+            
                 'address' => [
-                    'info'  => 'Land, Bundesland, PLZ und Straßenadresse festlegen.',
-                    'title' => 'Adresse',
-
+                    'info'  => 'کشور، استان، کد پستی و آدرس خود را مشخص کنید.',
+                    'title' => 'آدرس',
+            
                     'requirements' => [
-                        'country'    => 'Land',
-                        'city'       => 'Stadt',
-                        'state'      => 'Bundesland',
-                        'title'      => 'Anforderungen',
-                        'title-info' => 'Anforderungen sind Bedingungen, Eigenschaften oder Merkmale, die erfolgreich erfüllt, erworben oder abgeschlossen werden müssen.',
-                        'zip'        => 'PLZ',
+                        'country'    => 'کشور',
+                        'city'       => 'شهر',
+                        'state'      => 'استان',
+                        'title'      => 'نیازمندی‌ها',
+                        'title-info' => 'نیازمندی‌ها شرایط، ویژگی‌ها یا مشخصه‌هایی هستند که باید با موفقیت انجام یا تکمیل شوند.',
+                        'zip'        => 'کد پستی',
                     ],
-
+            
                     'information' => [
-                        'street-lines' => 'Straßenadresszeilen',
-                        'title'        => 'Information',
-                        'title-info'   => 'Eine "Straßenadresszeile" ist eine einzelne Kategorie einer Adresse, die in der Regel durch Kommas getrennt ist und Standortinformationen wie Hausnummer, Straße, Stadt und weitere Details bereitstellt.',
+                        'street-lines' => 'خطوط آدرس خیابان',
+                        'title'        => 'اطلاعات',
+                        'title-info'   => 'یک "خط آدرس خیابان" دسته‌بندی تکی از آدرس است که معمولاً توسط ویرگول‌ها جدا شده و اطلاعات مکانی مانند شماره خانه، خیابان، شهر و جزئیات دیگر را ارائه می‌دهد.',
                     ],
                 ],
-
+            
                 'captcha' => [
-                    'info'  => 'Website-Key, Geheimnis-Key und Status festlegen.',
-                    'title' => 'Captcha',
-
+                    'info'  => 'کلید وب‌سایت، کلید مخفی و وضعیت را تنظیم کنید.',
+                    'title' => 'کپچا',
+            
                     'credentials' => [
-                        'site-key'   => 'Website-Key',
-                        'secret-key' => 'Geheimnis-Key',
-                        'status'     => 'Status',
-                        'title'      => 'Anmeldeinformationen',
-                        'title-info' => '"Site-Key": Website-Layout-Karte für Suchmaschinen. "Geheimnis-Key": Sicherheitscode für Datenverschlüsselung, Authentifizierung oder API-Zugriffsschutz.',
+                        'site-key'   => 'کلید وب‌سایت',
+                        'secret-key' => 'کلید مخفی',
+                        'status'     => 'وضعیت',
+                        'title'      => 'اطلاعات ورود',
+                        'title-info' => '"کلید وب‌سایت": نقشه طراحی وب برای موتورهای جستجو. "کلید مخفی": کد امنیتی برای رمزگذاری داده، احراز هویت یا حفاظت در برابر دسترسی API.',
                     ],
-
+            
                     'validations' => [
-                        'captcha'  => 'Es gab einen Fehler! Bitte versuchen Sie es erneut.',
-                        'required' => 'Bitte wählen Sie Captcha aus.',
+                        'captcha'  => 'خطا رخ داده است! لطفاً مجدداً تلاش کنید.',
+                        'required' => 'لطفاً کپچا را انتخاب کنید.',
                     ],
                 ],
-
+            
                 'settings' => [
-                    'settings-info' => 'تنظیم اشتراک نامه های خبری، تایید ایمیل و ورود اجتماعی.',
-                    'title'         => 'Einstellungen',
-
+                    'settings-info' => 'تنظیم اشتراک‌نامه‌ها، تأیید ایمیل و ورود اجتماعی را تنظیم کنید.',
+                    'title'         => 'تنظیمات',
+            
                     'newsletter' => [
-                        'subscription' => 'Newsletter-Abonnement aktivieren',
-                        'title'        => 'Newsletter-Abonnement',
-                        'title-info'   => 'Die "Newsletter-Informationen" werden regelmäßig per E-Mail an Abonnenten gesendet und enthalten Updates, Angebote oder Inhalte zum Teilen, Identifizieren von Informationen und Entscheidungshilfe.',
+                        'subscription' => 'فعال کردن اشتراک نامه',
+                        'title'        => 'اشتراک نامه',
+                        'title-info'   => 'اطلاعات "اشتراک نامه" به صورت منظم از طریق ایمیل به مشترکان ارسال می‌شود و شامل به‌روزرسانی‌ها، پیشنهادها یا محتواهای به اشتراک گذاری‌شده، شناسایی اطلاعات و کمک در تصمیم‌گیری می‌شود.',
                     ],
-
+            
                     'email' => [
-                        'email-verification' => 'E-Mail-Verifikation aktivieren',
-                        'title'              => 'E-Mail-Verifikation',
-                        'title-info'         => 'Die "E-Mail-Verifikation" bestätigt die Gültigkeit einer E-Mail-Adresse, normalerweise durch das Senden eines Bestätigungslinks, um Kontosicherheit und Kommunikationszuverlässigkeit zu erhöhen.',
+                        'email-verification' => 'فعال کردن تأیید ایمیل',
+                        'title'              => 'تأیید ایمیل',
+                        'title-info'         => 'تأیید ایمیل، اعتبار یک آدرس ایمیل را تأیید می‌کند، معمولاً با ارسال یک لینک تأییدی برای افزایش امنیت حساب و قابلیت اطمینان از ارتباطات انجام می‌شود.',
                     ],
-
+            
                     'social-login' => [
-                        'enable-facebook'   => 'Facebook aktivieren',
-                        'enable-twitter'    => 'Twitter aktivieren',
-                        'enable-google'     => 'Google aktivieren',
-                        'enable-linkedin'   => 'LinkedIn aktivieren',
-                        'enable-github'     => 'GitHub aktivieren',
-                        'social-login'      => 'Soziale Anmeldung',
-                        'social-login-info' => 'Die "Soziale Anmeldung" erleichtert Benutzern den Zugriff auf die Website, die Registrierung und die Anmeldeprozesse unter Verwendung ihrer Social-Media-Konten, um Optionen und Benutzerfreundlichkeit zu erhöhen.',
+                        'enable-facebook'   => 'فعال کردن فیس‌بوک',
+                        'enable-twitter'    => 'فعال کردن توییتر',
+                        'enable-google'     => 'فعال کردن گوگل',
+                        'enable-linkedin'   => 'فعال کردن لینکداین',
+                        'enable-github'     => 'فعال کردن گیت‌هاب',
+                        'social-login'      => 'ورود اجتماعی',
+                        'social-login-info' => 'ورود اجتماعی، دسترسی کاربران به وب‌سایت، فرآیند ثبت‌نام و ورود به حساب با استفاده از حساب‌های رسانه‌های اجتماعی را آسان‌تر می‌کند تا گزینه‌ها و سهولت کاربر را افزایش دهد.',
                     ],
                 ],
             ],
