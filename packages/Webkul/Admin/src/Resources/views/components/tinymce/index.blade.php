@@ -15,6 +15,8 @@
         app.component('v-tinymce', {
             props: ['selector', 'field'],
 
+            render() {},
+
             mounted() {
                 this.init();
             },
