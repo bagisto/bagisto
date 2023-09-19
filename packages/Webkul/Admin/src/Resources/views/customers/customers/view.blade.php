@@ -466,7 +466,7 @@
 
                 @foreach ($customer->notes as $note)
                     <div class="grid gap-[6px] p-[16px]">
-                        <p class="text-[16px] text-gray-800">
+                        <p class="text-[16px] text-gray-800 leading-6">
                             {{$note->note}}
                         </p>
 

@@ -344,11 +344,11 @@
                     {{-- Comment List --}}
                     @foreach ($order->comments()->orderBy('id', 'desc')->get() as $comment)
                         <div class="grid gap-[6px] p-[16px]">
-                            <p class="text-[16px] text-gray-800">
+                            <p class="text-[16px] text-gray-800 leading-6">
                                 {{ $comment->comment }}
                             </p>
 
-                            <p class="text-gray-600">  
+                            <p class="text-gray-600 ">  
                                 @if ($comment->customer_notified)
                                     @lang('admin::app.sales.orders.view.customer-notified', ['date' => core()->formatDate($comment->created_at, 'Y-m-d H:i:s a')])
                                 @else
