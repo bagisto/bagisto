@@ -12,6 +12,11 @@ class ThemeCustomization extends TranslatableModel implements ThemeCustomization
 {
     use HasFactory;
 
+    /**
+     * Set default locale
+     *
+     * @var string
+     */
     protected $defaultLocale = 'en';
 
     /**
