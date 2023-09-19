@@ -60,6 +60,7 @@ class ThemeController extends Controller
             'name'       => request()->input('name'),
             'sort_order' => request()->input('sort_order'),
             'type'       => request()->input('type'),
+            'channel_id' => request()->input('channel_id'),
         ]);
 
         Event::dispatch('theme_customization.create.after', $theme);
