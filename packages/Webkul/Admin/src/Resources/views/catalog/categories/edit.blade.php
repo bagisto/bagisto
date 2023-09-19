@@ -475,10 +475,9 @@
                 methods: {
                     modeChange() {
                         this.isDescriptionRequired = this.displayMode !== 'products_only';
-                    }
+                    },
                 },
-            })
+            });
         </script>
     @endPushOnce
 </x-admin::layouts>
-h
