@@ -3237,6 +3237,7 @@ return [
         'users'                    => 'Utenti',
         'roles'                    => 'Ruoli',
         'taxes'                    => 'Tasse',
+        'themes'                   => 'Temi',
         'tax-categories'           => 'Categorie di Tasse',
         'tax-rates'                => 'Aliquote Fiscali',
         'view'                     => 'Visualizza',

@@ -3237,6 +3237,7 @@ return [
         'users'                    => 'ব্যবহারকারীগণ',
         'roles'                    => 'ভূমিকা',
         'taxes'                    => 'কর',
+        'themes'                   => 'থিম',
         'tax-categories'           => 'কর বিভাগ',
         'tax-rates'                => 'কর হার',
         'view'                     => 'দেখুন',

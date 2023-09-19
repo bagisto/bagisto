@@ -3238,6 +3238,7 @@ return [
         'users'                    => 'משתמשים',
         'roles'                    => 'תפקידים',
         'taxes'                    => 'מסים',
+        'themes'                   => 'ערכות',
         'tax-categories'           => 'קטגוריות מס',
         'tax-rates'                => 'שערי מס',
         'view'                     => 'צפה',

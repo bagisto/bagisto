@@ -64,7 +64,7 @@ class ThemeController extends Controller
         Event::dispatch('theme_customization.create.after', $theme);
 
         return new JsonResponse([
-            'redirect_url' => route('admin.theme.edit', $theme->id),
+            'redirect_url' => route('admin.settings.themes.edit', $theme->id),
         ]);
     }
 
@@ -118,7 +118,7 @@ class ThemeController extends Controller
 
         session()->flash('success', trans('admin::app.settings.themes.update-success'));
 
-        return redirect()->route('admin.theme.index');
+        return redirect()->route('admin.settings.themes.index');
     }
 
     /**

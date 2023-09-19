@@ -3237,6 +3237,7 @@ return [
         'users'                    => 'Użytkownicy',
         'roles'                    => 'Role',
         'taxes'                    => 'Podatki',
+        'themes'                   => 'Motywy',
         'tax-categories'           => 'Kategorie Podatków',
         'tax-rates'                => 'Stawki Podatków',
         'view'                     => 'Wyświetl',

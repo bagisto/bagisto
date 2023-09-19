@@ -4,7 +4,7 @@
     </x-slot:title>
    
     <x-admin::form 
-        :action="route('admin.theme.update', $theme->id)"
+        :action="route('admin.settings.themes.update', $theme->id)"
         enctype="multipart/form-data"
         v-slot="{ errors }"
     >
@@ -16,7 +16,7 @@
             <div class="flex gap-x-[10px] items-center">
                 <div class="flex gap-x-[10px] items-center">
                     <a 
-                        href="{{ route('admin.theme.index') }}"
+                        href="{{ route('admin.settings.themes.index') }}"
                         class="transparent-button hover:bg-gray-200"
                     > 
                         @lang('admin::app.settings.themes.edit.back')
@@ -1891,7 +1891,7 @@
                         formData.append('image', selectedImage);
                         formData.append('id', "{{ $theme->id }}");
 
-                        this.$axios.post('{{ route('admin.theme.store') }}', formData)
+                        this.$axios.post('{{ route('admin.settings.themes.store') }}', formData)
                             .then((response) => {
                                 let editor = this._html.getDoc();
 

@@ -181,7 +181,7 @@ return [
     ], [
         'key'        => 'settings.theme',
         'name'       => 'Themes',
-        'route'      => 'admin.theme.index',
+        'route'      => 'admin.settings.themes.index',
         'sort'       => 7,
         'icon'       => '',
     ], [

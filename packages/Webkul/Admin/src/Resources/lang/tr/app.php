@@ -3238,6 +3238,7 @@ return [
         'users'                    => 'Kullanıcılar',
         'roles'                    => 'Roller',
         'taxes'                    => 'Vergiler',
+        'themes'                   => 'Temalar',
         'tax-categories'           => 'Vergi Kategorileri',
         'tax-rates'                => 'Vergi Oranları',
         'view'                     => 'Görüntüle',

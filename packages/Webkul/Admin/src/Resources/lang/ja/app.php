@@ -3238,6 +3238,7 @@ return [
         'users'                    => 'ユーザー',
         'roles'                    => 'ロール',
         'taxes'                    => '税金',
+        'themes'                   => 'テーマ',
         'tax-categories'           => '税カテゴリ',
         'tax-rates'                => '税率',
         'view'                     => '表示',

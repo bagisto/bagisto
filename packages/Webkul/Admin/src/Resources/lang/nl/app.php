@@ -3238,6 +3238,7 @@ return [
         'users'                    => 'Gebruikers',
         'roles'                    => 'Rollen',
         'taxes'                    => 'Belastingen',
+        'themes'                   => 'Thema\'s',
         'tax-categories'           => 'Belastingcategorieën',
         'tax-rates'                => 'Belastingtarieven',
         'view'                     => 'Bekijken',

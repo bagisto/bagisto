@@ -88,22 +88,26 @@ class ThemeDatagrid extends DataGrid
 
     public function prepareActions()
     {
-        $this->addAction([
-            'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.settings.themes.index.datagrid.view'),
-            'method' => 'GET',
-            'url'    => function ($row) {
-                return route('admin.theme.edit', $row->id);
-            },
-        ]);
-
-        $this->addAction([
-            'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.settings.themes.index.datagrid.delete'),
-            'method' => 'DELETE',
-            'url'    => function ($row) {
-                return route('admin.theme.delete', $row->id);
-            },
-        ]);
+        if (bouncer()->hasPermission('settings.users.theme.edit')) {
+            $this->addAction([
+                'icon'   => 'icon-edit',
+                'title'  => trans('admin::app.settings.themes.index.datagrid.view'),
+                'method' => 'GET',
+                'url'    => function ($row) {
+                    return route('admin.settings.themes.edit', $row->id);
+                },
+            ]);
+        }
+    
+        if (bouncer()->hasPermission('settings.users.theme.delete')) {
+            $this->addAction([
+                'icon'   => 'icon-delete',
+                'title'  => trans('admin::app.settings.themes.index.datagrid.delete'),
+                'method' => 'DELETE',
+                'url'    => function ($row) {
+                    return route('admin.settings.themes.delete', $row->id);
+                },
+            ]);
+        }
     }
 }

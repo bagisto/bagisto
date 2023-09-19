@@ -22,19 +22,21 @@
         </div>
     </div>
     
-    <x-admin::datagrid :src="route('admin.theme.index')"></x-admin::datagrid>
+    <x-admin::datagrid :src="route('admin.settings.themes.index')"></x-admin::datagrid>
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-create-theme-form-template">
             <div>
                 <!-- Theme Create Button -->
-                <button
-                    type="button"
-                    class="primary-button"
-                    @click="$refs.themeCreateModal.toggle()"
-                >
-                    @lang('admin::app.settings.themes.index.create-btn')
-                </button>
+                @if (bouncer()->hasPermission('settings.users.theme.create'))
+                    <button
+                        type="button"
+                        class="primary-button"
+                        @click="$refs.themeCreateModal.toggle()"
+                    >
+                        @lang('admin::app.settings.themes.index.create-btn')
+                    </button>
+                @endif
 
                 <x-admin::form
                     v-slot="{ meta, errors, handleSubmit }"
@@ -146,7 +148,7 @@
 
                 methods: {
                     create(params, { setErrors }) {
-                        this.$axios.post('{{ route('admin.theme.store') }}', params)
+                        this.$axios.post('{{ route('admin.settings.themes.store') }}', params)
                             .then((response) => {
                                 if (response.data.redirect_url) {
                                     window.location.href = response.data.redirect_url;

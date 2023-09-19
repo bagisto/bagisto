@@ -3238,6 +3238,7 @@ return [
         'users'                    => 'Benutzer',
         'roles'                    => 'Rollen',
         'taxes'                    => 'Steuern',
+        'themes'                   => 'Themen',
         'tax-categories'           => 'Steuerkategorien',
         'tax-rates'                => 'Steuersätze',
         'view'                     => 'Ansehen',

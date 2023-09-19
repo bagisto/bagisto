@@ -679,7 +679,7 @@ return [
         'key'   => 'settings.users.roles',
         'name'  => 'admin::app.acl.roles',
         'route' => 'admin.settings.roles.index',
-        'sort'  => 2,
+        'sort'  => 7,
     ], [
         'key'   => 'settings.users.roles.create',
         'name'  => 'admin::app.acl.create',
@@ -696,10 +696,30 @@ return [
         'route' => 'admin.settings.roles.delete',
         'sort'  => 3,
     ], [
+        'key'   => 'settings.users.theme',
+        'name'  => 'admin::app.acl.themes',
+        'route' => 'admin.settings.themes.index',
+        'sort'  => 8,
+    ], [
+        'key'   => 'settings.users.theme.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => 'admin.settings.themes.store',
+        'sort'  => 1,
+    ], [
+        'key'   => 'settings.users.theme.edit',
+        'name'  => 'admin::app.acl.edit',
+        'route' => 'admin.settings.themes.edit',
+        'sort'  => 2,
+    ], [
+        'key'   => 'settings.users.theme.delete',
+        'name'  => 'admin::app.acl.delete',
+        'route' => 'admin.settings.themes.delete',
+        'sort'  => 3,
+    ], [
         'key'   => 'settings.taxes',
         'name'  => 'admin::app.acl.taxes',
         'route' => 'admin.settings.taxes.categories.index',
-        'sort'  => 7,
+        'sort'  => 9,
     ], [
         'key'   => 'settings.taxes.tax-categories',
         'name'  => 'admin::app.acl.tax-categories',

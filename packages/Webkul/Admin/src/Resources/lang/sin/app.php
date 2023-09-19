@@ -3237,6 +3237,7 @@ return [
         'users'                    => 'පරිශීලකයන්',
         'roles'                    => 'භූමිකා',
         'taxes'                    => 'බදු',
+        'themes'                   => 'දායක',
         'tax-categories'           => 'බදු ප්රවර්ග',
         'tax-rates'                => 'බදු අනුපාත',
         'view'                     => 'බලන්න',

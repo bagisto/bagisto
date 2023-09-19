@@ -3238,6 +3238,7 @@ return [
         'users'                    => 'उपयोगकर्ता',
         'roles'                    => 'भूमिकाएँ',
         'taxes'                    => 'कर',
+        'themes'                   => 'थीम्स',
         'tax-categories'           => 'कर श्रेणियाँ',
         'tax-rates'                => 'कर दरें',
         'view'                     => 'देखें',

@@ -3241,6 +3241,7 @@ return [
         'users'                    => 'Users',
         'roles'                    => 'Roles',
         'taxes'                    => 'Taxes',
+        'themes'                   => 'Themes',
         'tax-categories'           => 'Tax Categories',
         'tax-rates'                => 'Tax Rates',
         'view'                     => 'View',

@@ -3238,6 +3238,7 @@ return [
         'users'                    => '用户',
         'roles'                    => '角色',
         'taxes'                    => '税费',
+        'themes'                   => '主题',
         'tax-categories'           => '税费分类',
         'tax-rates'                => '税率',
         'view'                     => '查看',
