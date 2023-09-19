@@ -33,7 +33,7 @@ class ThemeDatagrid extends DataGrid
                 'theme_customizations.sort_order',
                 'channel_translations.name as channel_name',
                 'theme_customizations.status',
-                'theme_customization_translations.name as name',
+                'theme_customizations.name as name',
             );
 
         $this->addFilter('type', 'channel_translations.type');

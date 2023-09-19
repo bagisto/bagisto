@@ -12,6 +12,13 @@ class ThemeCustomizationTranslation extends Model implements ThemeCustomizationT
     use HasFactory;
 
     /**
+     * Timestamp false of the model
+     *
+     * @var boolean
+     */
+    public $timestamps = false;
+
+    /**
      * Image carousel precision.
      *
      * @var string

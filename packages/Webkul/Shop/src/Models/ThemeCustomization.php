@@ -12,6 +12,8 @@ class ThemeCustomization extends TranslatableModel implements ThemeCustomization
 {
     use HasFactory;
 
+    protected $defaultLocale = 'en';
+
     /**
      * The attributes that are translatable.
      *
@@ -19,7 +21,6 @@ class ThemeCustomization extends TranslatableModel implements ThemeCustomization
      */
     public $translatedAttributes = [
         'options',
-        'name',
     ];
 
     /**
@@ -84,14 +85,5 @@ class ThemeCustomization extends TranslatableModel implements ThemeCustomization
         'options',
         'sort_order',
         'status',
-        'channel_id',
     ];
-
-    /**
-     * Get the channels.
-     */
-    public function channels()
-    {
-        return $this->belongsToMany(ChannelProxy::modelClass(), 'theme_customization_channels');
-    }
 }
