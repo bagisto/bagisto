@@ -845,7 +845,7 @@ return [
             ],
         ],
     ], [
-        'key'    => 'sales.carriers.flat_rate',
+        'key'    => 'sales.carriers.flatrate',
         'name'   => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping.page-title',
         'info'   => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping.title-info',
         'sort'   => 2,

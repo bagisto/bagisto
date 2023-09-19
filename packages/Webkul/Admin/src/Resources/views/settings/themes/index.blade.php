@@ -10,7 +10,14 @@
         
         <div class="flex gap-x-[10px] items-center">
             <div class="flex gap-x-[10px] items-center">
-              <v-create-theme-form></v-create-theme-form>
+                <v-create-theme-form>
+                    <button
+                        type="button"
+                        class="primary-button"
+                    >
+                        @lang('admin::app.settings.themes.index.create-btn')
+                    </button>  
+                </v-create-theme-form>
             </div>
         </div>
     </div>
