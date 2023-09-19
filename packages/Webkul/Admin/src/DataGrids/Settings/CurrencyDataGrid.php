@@ -66,7 +66,7 @@ class CurrencyDataGrid extends DataGrid
      */
     public function prepareActions()
     {
-        if (bouncer()->hasPermission('settings.currencies.delete')) {
+        if (bouncer()->hasPermission('settings.currencies.edit')) {
             $this->addAction([
                 'icon'   => 'icon-edit',
                 'title'  => trans('admin::app.settings.currencies.index.datagrid.edit'),

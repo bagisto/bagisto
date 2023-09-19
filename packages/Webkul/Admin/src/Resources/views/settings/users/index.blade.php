@@ -153,27 +153,16 @@
 
                         <!-- Actions -->
                         <div class="flex justify-end">
-                            @if (bouncer()->hasPermission('settings.users.users.edit'))
-                                <a @click="id=1; editModal(record.user_id)">
+                            <div v-for="action in record.actions">
+                                <a @click="id=1; actionHandler(action.url, action.title, record.user_id, records?.length)">
                                     <span
-                                        :class="record.actions['0'].icon"
+                                        :class="action.icon"
                                         class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
-                                        :title="record.actions['0'].title"
+                                        :title="action.title"
                                     >
                                     </span>
                                 </a>
-                            @endif
-
-                            @if (bouncer()->hasPermission('settings.users.users.delete'))
-                                <a @click="deleteModal(record.actions['1']?.url, record.user_id, records?.length)">
-                                    <span
-                                        :class="record.actions['1'].icon"
-                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
-                                        :title="record.actions['1'].title"
-                                    >
-                                    </span>
-                                </a>
-                            @endif
+                            </div>
                         </div>
                     </div>
                 </template>
@@ -527,12 +516,19 @@
                             });
                     },
 
-                    editModal(id) {
+                    actionHandler(url, title, id, recordCount) {
+                        if (title == 'Edit') {
+                            this.editModal(url);
+                        } else {
+                            this.deleteModal(url);
+                        }
+                    },
+
+                    editModal(url) {
                         this.isUpdating = true;
 
-                        this.$axios.get(`{{ route('admin.settings.users.edit', '') }}/${id}`)
+                        this.$axios.get(url)
                             .then((response) => {
-                                console.log(response);
                                 this.data = {
                                     ...response.data,
                                         images: response.data.user.image_url
@@ -549,17 +545,14 @@
 
                                 this.$refs.userUpdateOrCreateModal.toggle();
                             })
-                            .catch(error => {
-                                if (error.response.status == 422) {
-                                    setErrors(error.response.data.errors);
-                                }
-                            });
+                            .catch(this.errorHandler);
                     },
 
                     deleteModal(url, id, recordCount) {
                         if (! confirm('@lang('admin::app.settings.users.delete-warning')')) {
                             return;
                         }
+
                         if (this.currentUserId == id && recordCount != 1) {
                             this.$refs.confirmPasswordModal.toggle();
                         } else {
@@ -571,12 +564,12 @@
 
                                     this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                                 })
-                                .catch(error => {
-                                    if (error.response.status == 422) {
-                                        setErrors(error.response.data.errors);
-                                    }
-                                });
+                                .catch(this.errorHandler);
                         }
+                    },
+
+                    errorHandler(error) {
+                        this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
                     },
 
                     UserConfirmModal() {

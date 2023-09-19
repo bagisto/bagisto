@@ -115,27 +115,16 @@
         
                         <!-- Actions -->
                         <div class="flex justify-end">
-                            @if (bouncer()->hasPermission('marketing.communications.events.edit'))
-                                <a @click="editModal(record.id)">
+                            <div v-for="action in record.actions">
+                                <a @click="id=1; actionHandler(action.url, action.title)">
                                     <span
-                                        :class="record.actions['0'].icon"
-                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-100 max-sm:place-self-center"
-                                        :title="record.actions['0'].title"
+                                        :class="action.icon"
+                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
+                                        :title="action.title"
                                     >
                                     </span>
                                 </a>
-                            @endif
-
-                            @if (bouncer()->hasPermission('marketing.communications.events.delete'))
-                                <a @click="deleteModal(record.actions['1']?.url)">
-                                    <span
-                                        :class="record.actions['1'].icon"
-                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-100 max-sm:place-self-center"
-                                        :title="record.actions['1'].title"
-                                    >
-                                    </span>
-                                </a>
-                            @endif
+                            </div>
                         </div>
                     </div>
                 </template>
@@ -296,6 +285,14 @@
                             });
                     },
 
+                    actionHandler(url, title) {
+                        if (title == 'Edit') {
+                            this.editModal(url);  
+                        } else {
+                            this.deleteModal(url);
+                        }
+                    },
+
                     editModal(id) {
                         this.$axios.get(`{{ route('admin.marketing.communications.events.edit', '') }}/${id}`)
                             .then((response) => {
@@ -307,11 +304,7 @@
                                     this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
                                 }
                             })
-                            .catch(error => {
-                                if (error.response.status ==422) {
-                                    setErrors(error.response.data.errors);
-                                }
-                            });
+                            .catch(this.errorHandler);
                     },
 
                     deleteModal(url) {
@@ -327,12 +320,12 @@
 
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                             })
-                            .catch(error => {
-                                if (error.response.status ==422) {
-                                    setErrors(error.response.data.errors);
-                                }
-                            });
-                    }
+                            .catch(this.errorHandler);
+                    },
+
+                    errorHandler(error) {
+                        this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
+                    },
                 }
             })
         </script>

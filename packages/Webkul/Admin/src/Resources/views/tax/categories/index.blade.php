@@ -118,30 +118,18 @@
                         <!-- Code -->
                         <p v-text="record.code"></p>
 
-
                         <!-- Actions -->
                         <div class="flex justify-end">
-                            @if (bouncer()->hasPermission('settings.taxes.tax-categories.edit'))
-                                <a @click="id=1; editModal(record.id)">
+                            <div v-for="action in record.actions">
+                                <a @click="id=1; actionHandler(action.url, action.title)">
                                     <span
-                                        :class="record.actions['0'].icon"
-                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-100 max-sm:place-self-center"
-                                        :title="record.actions['0'].title"
+                                        :class="action.icon"
+                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
+                                        :title="action.title"
                                     >
                                     </span>
                                 </a>
-                            @endif
-
-                            @if (bouncer()->hasPermission('settings.taxes.tax-categories.delete'))
-                                <a @click="deleteModal(record.actions['1']?.url)">
-                                    <span
-                                        :class="record.actions['1'].icon"
-                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-100 max-sm:place-self-center"
-                                        :title="record.actions['1'].title"
-                                    >
-                                    </span>
-                                </a>
-                            @endif
+                            </div>
                         </div>
                     </div>
                 </template>
@@ -353,18 +341,22 @@
                             });
                     },
 
-                    editModal(id) {
-                        this.$axios.get(`{{ route('admin.settings.taxes.categories.edit', '') }}/${id}`)
-                            .then((response) => {
+                    actionHandler(url, title) {
+                        if (title == 'Edit') {
+                            this.editModal(url);
+                        } else {
+                            this.deleteModal(url);
+                        }
+                    },
+
+                    editModal(url) {
+                        this.$axios.get(url)
+                            .then(response => {
                                 this.selectedTaxRates = response.data.data;
 
                                 this.$refs.taxCategory.toggle();
                             })
-                            .catch(error => {
-                                if (error.response.status ==422) {
-                                    setErrors(error.response.data.errors);
-                                }
-                            });
+                            .catch(this.errorHandler);
                     },
 
                     deleteModal(url) {
@@ -372,21 +364,20 @@
                             return;
                         }
 
-                        this.$axios.post(url, {
-                                '_method': 'DELETE'
-                            })
-                            .then((response) => {
+                        this.$axios.post(url, { '_method': 'DELETE' })
+                            .then(response => {
                                 this.$refs.datagrid.get();
 
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                             })
-                            .catch(error => {
-                                if (error.response.status ==422) {
-                                    setErrors(error.response.data.errors);
-                                }
-                            });
-                    }
+                            .catch(this.errorHandler);
+                    },
 
+                    errorHandler(error) {
+                        if (error.response && error.response.status === 422) {
+                            setErrors(error.response.data.errors);
+                        }
+                    },
                 },
             });
         </script>
