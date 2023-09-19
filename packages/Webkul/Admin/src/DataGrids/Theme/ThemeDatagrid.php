@@ -88,7 +88,7 @@ class ThemeDatagrid extends DataGrid
 
     public function prepareActions()
     {
-        if (bouncer()->hasPermission('settings.users.themes.edit')) {
+        if (bouncer()->hasPermission('settings.themes.edit')) {
             $this->addAction([
                 'icon'   => 'icon-edit',
                 'title'  => trans('admin::app.settings.themes.index.datagrid.view'),
@@ -99,7 +99,7 @@ class ThemeDatagrid extends DataGrid
             ]);
         }
     
-        if (bouncer()->hasPermission('settings.users.themes.delete')) {
+        if (bouncer()->hasPermission('settings.themes.delete')) {
             $this->addAction([
                 'icon'   => 'icon-delete',
                 'title'  => trans('admin::app.settings.themes.index.datagrid.delete'),

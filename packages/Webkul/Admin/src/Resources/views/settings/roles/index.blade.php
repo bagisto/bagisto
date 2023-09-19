@@ -12,7 +12,7 @@
         
         <div class="flex gap-x-[10px] items-center">
             {{-- Add Role Button --}}
-            @if (bouncer()->hasPermission('settings.users.roles.create')) 
+            @if (bouncer()->hasPermission('settings.roles.create')) 
                 <a 
                     href="{{ route('admin.settings.roles.create') }}"
                     class="primary-button"
