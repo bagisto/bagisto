@@ -109,8 +109,6 @@ class ThemeController extends Controller
 
         $theme = $this->themeCustomizationRepository->update($data, $id);
 
-        $theme->channels()->sync($data['channels']);
-
         if ($data['type'] == 'image_carousel') {
             $this->themeCustomizationRepository->uploadImage(
                 request()->all('options'), 

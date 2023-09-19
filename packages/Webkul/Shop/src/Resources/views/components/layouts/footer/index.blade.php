@@ -12,8 +12,9 @@
 --}}
 @php
     $customization = $themeCustomizationRepository->findOneWhere([
-        'type'   => 'footer_links',
-        'status' => 1
+        'type'       => 'footer_links',
+        'status'     => 1,
+        'channel_id' => core()->getCurrentChannel()->id,
     ]); 
 @endphp
 

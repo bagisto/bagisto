@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('theme_customizations', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('channel_id')->unsigned()->default(1);
             $table->string('type');
             $table->integer('sort_order');
             $table->boolean('status')->default(0);

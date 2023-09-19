@@ -111,7 +111,7 @@
 
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.settings.themes.create.type.title')
+                                            @lang('admin::app.settings.themes.edit.channels')
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control

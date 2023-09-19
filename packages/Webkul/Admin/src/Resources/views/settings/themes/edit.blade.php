@@ -9,8 +9,6 @@
         $currentChannel = core()->getRequestedChannel();
 
         $currentLocale = core()->getRequestedLocale();
-
-        $selectedOptionIds = $theme->channels()->pluck('id')->toArray();
     @endphp
 
     <x-admin::form 
@@ -304,38 +302,24 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
     
-                                <!-- Select Channels -->
-                                <p class="required block leading-[24px] text-gray-800 font-medium">
-                                    @lang('admin::app.settings.themes.edit.channels')
-                                </p>
-    
-                                @foreach($channels as $channel)
-                                    <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
-                                        <x-admin::form.control-group.control
-                                            type="checkbox"
-                                            name="channels[]"
-                                            :value="$channel->id"
-                                            :id="'channels_' . $channel->id"
-                                            :for="'channels_' . $channel->id"
-                                            rules="required"
-                                            :label="trans('admin::app.settings.themes.edit.channels')"
-                                            :checked="in_array($channel->id, $selectedOptionIds)"
-                                        >
-                                        </x-admin::form.control-group.control>
-    
-                                        <x-admin::form.control-group.label
-                                            :for="'channels_' . $channel->id"
-                                            class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
-                                        >
-                                            {{ core()->getChannelName($channel) }}
-                                        </x-admin::form.control-group.label>
-    
-                                        <x-admin::form.control-group.error
-                                            control-name="channels[]"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-                                @endforeach
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.settings.themes.edit.channels')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="channel_id"
+                                        rules="required"
+                                        :value="$theme->channel_id"
+                                    >
+                                        @foreach($channels as $channel)
+                                            <option value="{{ $channel->id }}">{{ $channel->name }}</option>
+                                        @endforeach 
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
@@ -697,38 +681,24 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <!-- Select Channels -->
-                            <p class="required block leading-[24px] text-gray-800 font-medium">
-                                @lang('admin::app.settings.themes.edit.channels')
-                            </p>
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.themes.edit.channels')
+                                </x-admin::form.control-group.label>
 
-                            @foreach($channels as $channel)
-                                <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
-                                    <x-admin::form.control-group.control
-                                        type="checkbox"
-                                        name="channels[]"
-                                        :value="$channel->id"
-                                        :id="'channels_' . $channel->id"
-                                        :for="'channels_' . $channel->id"
-                                        rules="required"
-                                        :label="trans('admin::app.settings.themes.edit.channels')"
-                                        :checked="in_array($channel->id, $selectedOptionIds)"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                <x-admin::form.control-group.control
+                                    type="select"
+                                    name="channel_id"
+                                    rules="required"
+                                    :value="$theme->channel_id"
+                                >
+                                    @foreach($channels as $channel)
+                                        <option value="{{ $channel->id }}">{{ $channel->name }}</option>
+                                    @endforeach 
+                                </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label
-                                        :for="'channels_' . $channel->id"
-                                        class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
-                                    >
-                                        {{ core()->getChannelName($channel) }}
-                                    </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.error
-                                        control-name="channels[]"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-                            @endforeach
+                                <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
@@ -1068,38 +1038,31 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <!-- Select Channels -->
-                            <p class="required block leading-[24px] text-gray-800 font-medium">
-                                @lang('admin::app.settings.themes.edit.channels')
-                            </p>
+                            <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
+                                <x-admin::form.control-group.label
+                                    for="channel_id"
+                                    class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
+                                >
+                                    @lang('admin::app.settings.themes.edit.channels')
+                                </x-admin::form.control-group.label>
 
-                            @foreach($channels as $channel)
-                                <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
-                                    <x-admin::form.control-group.control
-                                        type="checkbox"
-                                        name="channels[]"
-                                        :value="$channel->id"
-                                        :id="'channels_' . $channel->id"
-                                        :for="'channels_' . $channel->id"
-                                        rules="required"
-                                        :label="trans('admin::app.settings.themes.edit.channels')"
-                                        :checked="in_array($channel->id, $selectedOptionIds)"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                <x-admin::form.control-group.control
+                                    type="select"
+                                    name="channel_id"
+                                    :value="$theme->channel_id"
+                                    rules="required"
+                                    :label="trans('admin::app.settings.themes.edit.channels')"
+                                >
+                                    @foreach($channels as $channel)
+                                    
+                                    @endforeach
+                                </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label
-                                        :for="'channels_' . $channel->id"
-                                        class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
-                                    >
-                                        {{ core()->getChannelName($channel) }}
-                                    </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.error
-                                        control-name="channels[]"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-                            @endforeach
+                                <x-admin::form.control-group.error
+                                    control-name="channel_id"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
@@ -1359,38 +1322,24 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <!-- Select Channels -->
-                            <p class="required block leading-[24px] text-gray-800 font-medium">
-                                @lang('admin::app.settings.themes.edit.channels')
-                            </p>
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.themes.edit.channels')
+                                </x-admin::form.control-group.label>
 
-                            @foreach($channels as $channel)
-                                <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
-                                    <x-admin::form.control-group.control
-                                        type="checkbox"
-                                        name="channels[]"
-                                        :value="$channel->id"
-                                        :id="'channels_' . $channel->id"
-                                        :for="'channels_' . $channel->id"
-                                        rules="required"
-                                        :label="trans('admin::app.settings.themes.edit.channels')"
-                                        :checked="in_array($channel->id, $selectedOptionIds)"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                <x-admin::form.control-group.control
+                                    type="select"
+                                    name="channel_id"
+                                    rules="required"
+                                    :value="$theme->channel_id"
+                                >
+                                    @foreach($channels as $channel)
+                                        <option value="{{ $channel->id }}">{{ $channel->name }}</option>
+                                    @endforeach 
+                                </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label
-                                        :for="'channels_' . $channel->id"
-                                        class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
-                                    >
-                                        {{ core()->getChannelName($channel) }}
-                                    </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.error
-                                        control-name="channels[]"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-                            @endforeach
+                                <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
@@ -1658,38 +1607,24 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
     
-                                <!-- Select Channels -->
-                                <p class="required block leading-[24px] text-gray-800 font-medium">
-                                    @lang('admin::app.settings.themes.edit.channels')
-                                </p>
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.settings.themes.edit.channels')
+                                    </x-admin::form.control-group.label>
 
-                                @foreach($channels as $channel)
-                                    <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
-                                        <x-admin::form.control-group.control
-                                            type="checkbox"
-                                            name="channels[]"
-                                            :value="$channel->id"
-                                            :id="'channels_' . $channel->id"
-                                            :for="'channels_' . $channel->id"
-                                            rules="required"
-                                            :label="trans('admin::app.settings.themes.edit.channels')"
-                                            :checked="in_array($channel->id, $selectedOptionIds)"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="channel_id"
+                                        rules="required"
+                                        :value="$theme->channel_id"
+                                    >
+                                        @foreach($channels as $channel)
+                                            <option value="{{ $channel->id }}">{{ $channel->name }}</option>
+                                        @endforeach 
+                                    </x-admin::form.control-group.control>
 
-                                        <x-admin::form.control-group.label
-                                            :for="'channels_' . $channel->id"
-                                            class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
-                                        >
-                                            {{ core()->getChannelName($channel) }}
-                                        </x-admin::form.control-group.label>
-
-                                        <x-admin::form.control-group.error
-                                            control-name="channels[]"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-                                @endforeach
+                                    <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">

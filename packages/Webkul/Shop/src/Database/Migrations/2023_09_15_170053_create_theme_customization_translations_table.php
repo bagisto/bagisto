@@ -26,7 +26,7 @@ return new class extends Migration
         $now = Carbon::now();
 
         foreach (['en', 'es', 'tr', 'nl', 'fr'] as $locale) {
-            DB::table('theme_customization_translations')
+            DB::table('theme_customization_translations')   
             ->insert([
                 [
                     'theme_customization_id' => 1,
