@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Inventory\Http\Requests;
+namespace Webkul\Admin\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Webkul\Core\Rules\Address;

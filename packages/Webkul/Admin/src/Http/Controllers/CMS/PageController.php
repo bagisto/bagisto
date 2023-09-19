@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Event;
 use Webkul\CMS\Repositories\CmsRepository;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\DataGrids\CMS\CMSPageDataGrid;
-use Webkul\Core\Http\Requests\MassDestroyRequest;
+use Webkul\Admin\Http\Requests\MassDestroyRequest;
 
 
 class PageController extends Controller
