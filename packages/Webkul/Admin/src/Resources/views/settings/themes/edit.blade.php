@@ -43,37 +43,6 @@
         {{-- Channel and Locale Switcher --}}
         <div class="flex  gap-[16px] justify-between items-center mt-[28px] max-md:flex-wrap">
             <div class="flex gap-x-[4px] items-center">
-                {{-- Channel Switcher --}}
-                <x-admin::dropdown :class="$channels->count() <= 1 ? 'hidden' : ''">
-                    {{-- Dropdown Toggler --}}
-                    <x-slot:toggle>
-                        <button
-                            type="button"
-                            class="transparent-button px-[4px] py-[6px] hover:bg-gray-200 focus:bg-gray-200"
-                        >
-                            <span class="icon-store text-[24px] "></span>
-                            
-                            {{ $currentChannel->name }}
-
-                            <input type="hidden" name="channel" value="{{ $currentChannel->code }}"/>
-
-                            <span class="icon-sort-down text-[24px]"></span>
-                        </button>
-                    </x-slot:toggle>
-
-                    {{-- Dropdown Content --}}
-                    <x-slot:content class="!p-[0px]">
-                        @foreach ($channels as $channel)
-                            <a
-                                href="?{{ Arr::query(['channel' => $channel->code, 'locale' => $currentLocale->code]) }}"
-                                class="flex gap-[10px] px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100"
-                            >
-                                {{ $channel->name }}
-                            </a>
-                        @endforeach
-                    </x-slot:content>
-                </x-admin::dropdown>
-
                 {{-- Locale Switcher --}}
                 <x-admin::dropdown>
                     {{-- Dropdown Toggler --}}
