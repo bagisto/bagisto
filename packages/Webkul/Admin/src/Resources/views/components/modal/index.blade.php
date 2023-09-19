@@ -78,7 +78,7 @@
                                 </slot>
 
                                 <span
-                                    class="icon-cancel-1 text-[30px] cursor-pointer"
+                                    class="icon-cancel-1 text-[30px] cursor-pointer hover:bg-gray-100 hover:rounded-[6px]"
                                     @click="toggle"
                                 >
                                 </span>

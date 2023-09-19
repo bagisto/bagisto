@@ -97,7 +97,7 @@
 
                                         <div class="absolute top-4 ltr:right-3 rtl:left-3">
                                             <span
-                                                class="icon-cross text-[30px] cursor-pointer"
+                                                class="icon-cross text-[30px] cursor-pointer hover:bg-gray-100 hover:rounded-[6px]"
                                                 @click="close"
                                             >
                                             </span>
