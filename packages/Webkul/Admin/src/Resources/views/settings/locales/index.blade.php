@@ -113,27 +113,16 @@
 
                         <!-- Actions -->
                         <div class="flex justify-end">
-                            @if (bouncer()->hasPermission('settings.locales.edit'))
-                                <a @click="id=1; editModal(record.id)">
+                            <div v-for="action in record.actions">
+                                <a @click="id=1; actionHandler(action.url, action.title)">
                                     <span
-                                        :class="record.actions['0'].icon"
+                                        :class="action.icon"
                                         class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
-                                        :title="record.actions['0'].title"
+                                        :title="action.title"
                                     >
                                     </span>
                                 </a>
-                            @endif
-
-                            @if (bouncer()->hasPermission('settings.locales.delete'))
-                                <a @click="deleteModal(record.actions['1']?.url)">
-                                    <span
-                                        :class="record.actions['1'].icon"
-                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
-                                        :title="record.actions['1'].title"
-                                    >
-                                    </span>
-                                </a>
-                            @endif
+                            </div>
                         </div>
                     </div>
                 </template>
@@ -302,6 +291,7 @@
                         isUpdating: false,
                     }
                 },
+
                 methods: {
                     updateOrCreate(params, { resetForm, setErrors  }) {
                         let formData = new FormData(this.$refs.createLocaleForm);
@@ -333,40 +323,40 @@
                         });
                     },
 
-                    editModal(id) {
-                        this.isUpdating = true;
+                    actionHandler(url, title) {
+                        if (title == 'Edit') {
+                            this.isUpdating = true;
 
-                        this.$axios.get(`{{ route('admin.settings.locales.edit', '') }}/${id}`)
-                            .then((response) => {
-                                this.locale = {
-                                    ...response.data.data,
-                                        image: response.data.data.logo_path
-                                        ? [{ id: 'logo_url', url: response.data.data.logo_url }]
-                                        : [],
-                                };
+                            this.$axios.get(url)
+                                .then((response) => {
+                                    this.locale = {
+                                        ...response.data.data,
+                                            image: response.data.data.logo_path
+                                            ? [{ id: 'logo_url', url: response.data.data.logo_url }]
+                                            : [],
+                                    };
 
-                                this.$refs.localeUpdateOrCreateModal.toggle();
-                            })
-                    },
+                                    this.$refs.localeUpdateOrCreateModal.toggle();
+                                })
+                        } else {
+                            if (! confirm('@lang('admin::app.settings.locales.index.delete-warning')')) {
+                                return;
+                            }
 
-                    deleteModal(url) {
-                        if (! confirm('@lang('admin::app.settings.locales.index.delete-warning')')) {
-                            return;
+                            this.$axios.delete(url)
+                                .then((response) => {
+                                    this.$refs.datagrid.get();
+
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                })
+                                .catch(error => {
+                                    if (error.response.status == 422) {
+                                        setErrors(error.response.data.errors);
+                                    } else if(error.response.status == 500) {
+                                        this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message});
+                                    }
+                                });
                         }
-
-                        this.$axios.delete(url)
-                            .then((response) => {
-                                this.$refs.datagrid.get();
-
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
-                            })
-                            .catch(error => {
-                                if (error.response.status == 422) {
-                                    setErrors(error.response.data.errors);
-                                } else if(error.response.status == 500) {
-                                    this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message});
-                                }
-                            });
                     },
 
                     resetForm() {

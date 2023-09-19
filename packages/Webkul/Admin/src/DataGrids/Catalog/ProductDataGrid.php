@@ -211,33 +211,10 @@ class ProductDataGrid extends DataGrid
                     return route('admin.catalog.products.edit', $row->product_id);
                 },
 
-                'condition' => function () {
-                    return true;
-                },
-            ]);
-        }
-
-        if (bouncer()->hasPermission('catalog.products.delete')) {
-            $this->addAction([
-                'icon'   => 'icon-delete',
-                'title'  => trans('admin::app.catalog.products.index.datagrid.delete'),
-                'method' => 'DELETE',
-                'url'    => function ($row) {
-                    return route('admin.catalog.products.delete', $row->product_id);
-                },
-            ]);
-        }
-
-        if (bouncer()->hasPermission('catalog.products.copy')) {
-            $this->addAction([
-                'icon'   => 'icon-copy',
-                'title'  => trans('admin::app.catalog.products.index.datagrid.copy'),
-                'method' => 'GET',
-                'url'    => function ($row) {
-                    return route('admin.catalog.products.copy', $row->product_id);
-                },
-            ]);
-        }
+            'condition' => function () {
+                return true;
+            },
+        ]);
     }
 
     /**
