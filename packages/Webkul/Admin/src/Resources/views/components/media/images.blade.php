@@ -14,6 +14,7 @@
     :uploaded-images='{{ json_encode($uploadedImages) }}'
     width="{{ $width }}"
     height="{{ $height }}"
+    :errors="errors"
 >
     <x-admin::shimmer.image class="w-[110px] h-[110px] rounded-[4px]"></x-admin::shimmer.image>
 </v-media-images>
@@ -166,6 +167,11 @@
                 height: {
                     type: String,
                     default: '120px'
+                },
+
+                errors: {
+                    type: Object,
+                    default: () => {}
                 }
             },
 
@@ -198,6 +204,7 @@
             },
 
             mounted() {
+                console.log(this.errors)
                 this.images = this.uploadedImages;
             },
 
