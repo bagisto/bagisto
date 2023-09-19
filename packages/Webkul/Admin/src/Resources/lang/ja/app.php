@@ -226,6 +226,11 @@ return [
                 'total-due'             => '支払い待ち合計',
                 'view'                  => '表示',
                 'write-your-comment'    => 'コメントを書く',
+                'pending'               => '保留中',
+                'processing'            => '処理中',
+                'canceled'              => 'キャンセル済み',
+                'closed'                => '閉じられた',
+                'completed'             => '完了済み',
             ],
         ],
 

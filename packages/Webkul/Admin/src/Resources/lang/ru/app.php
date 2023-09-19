@@ -226,6 +226,11 @@ return [
                 'total-due'             => 'Итого к оплате',
                 'view'                  => 'Просмотр',
                 'write-your-comment'    => 'Оставьте свой комментарий',
+                'pending'               => 'В ожидании',
+                'processing'            => 'Обработка',
+                'canceled'              => 'Отменено',
+                'closed'                => 'Закрыто',
+                'completed'             => 'Завершено',
             ],
         ],
 

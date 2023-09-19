@@ -226,6 +226,11 @@ return [
                 'total-due'             => 'Toplam Hesap',
                 'view'                  => 'Görüntüle',
                 'write-your-comment'    => 'Yorumunuzu Yazın',
+                'pending'               => 'Beklemede',
+                'processing'            => 'İşleniyor',
+                'canceled'              => 'İptal Edildi',
+                'closed'                => 'Kapalı',
+                'completed'             => 'Tamamlandı',
             ],
         ],
 

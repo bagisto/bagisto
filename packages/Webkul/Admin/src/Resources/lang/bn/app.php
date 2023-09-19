@@ -226,6 +226,11 @@ return [
                 'total-due'             => 'মোট বাকি',
                 'view'                  => 'দেখুন',
                 'write-your-comment'    => 'আপনার মন্তব্য লিখুন',
+                'pending'               => 'মুলতবি',
+                'processing'            => 'প্রসেসিং',
+                'canceled'              => 'বাতিল',
+                'closed'                => 'বন্ধ',
+                'completed'             => 'সম্পূর্ণ',
             ],
         ],
 

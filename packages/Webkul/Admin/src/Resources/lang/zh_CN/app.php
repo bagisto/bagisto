@@ -226,6 +226,11 @@ return [
                 'total-due'             => '总待支付',
                 'view'                  => '查看',
                 'write-your-comment'    => '填写您的评论',
+                'pending'               => '待处理',
+                'processing'            => '处理中',
+                'canceled'              => '已取消',
+                'closed'                => '已关闭',
+                'completed'             => '已完成',
             ],
         ],
 
