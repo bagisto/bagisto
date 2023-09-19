@@ -35,7 +35,7 @@
                                 v-if="massAction?.options?.length"
                             >
                                 <a
-                                    class="flex gap-[5px] justify-between whitespace-no-wrap cursor-not-allowed rounded-t px-4 py-2 hover:bg-gray-100"
+                                    class="flex gap-[5px] justify-between whitespace-no-wrap cursor-not-allowed rounded-t px-4 py-2 text-[14px] text-gray-600 hover:bg-gray-100"
                                     href="javascript:void(0);"
                                 >
                                     <i
@@ -49,13 +49,13 @@
                                         @{{ massAction.title }}
                                     </span>
 
-                                    <i class="icon-arrow-right text-[24px] !icon-arrow-left"></i>
+                                    <i class="icon-arrow-left text-[20px] -mt-[1px]"></i>
                                 </a>
 
                                 <ul class="absolute ltr:left-full rtl:right-full top-0 z-10 hidden w-max min-w-[150px] border border-gray-300 rounded-[4px] bg-white shadow-[0_5px_20px_rgba(0,0,0,0.15)] group-hover/item:block">
                                     <li v-for="option in massAction.options">
                                         <a
-                                            class="whitespace-no-wrap block rounded-t px-4 py-2 hover:bg-gray-100"
+                                            class="whitespace-no-wrap block rounded-t px-4 py-2 text-[14px] text-gray-600 hover:bg-gray-100"
                                             href="javascript:void(0);"
                                             v-text="option.name"
                                             @click="performMassAction(massAction, option)"
@@ -67,7 +67,7 @@
 
                             <li v-else>
                                 <a
-                                    class="flex gap-[5px] whitespace-no-wrap rounded-b px-4 py-2 hover:bg-gray-100"
+                                    class="flex gap-[5px] whitespace-no-wrap rounded-b px-4 py-2 text-[14px] text-gray-600 hover:bg-gray-100"
                                     href="javascript:void(0);"
                                     @click="performMassAction(massAction)"
                                 >

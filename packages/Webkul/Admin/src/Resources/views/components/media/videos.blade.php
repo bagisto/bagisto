@@ -12,6 +12,7 @@
     :uploaded-videos='{{ json_encode($uploadedVideos) }}'
     width="{{ $width }}"
     height="{{ $height }}"
+    :errors="errors"
     {{ $attributes->get('class') }}
 >
 </v-media-videos>
@@ -153,6 +154,11 @@
                 height: {
                     type: String,
                     default: '120px'
+                },
+
+                errors: {
+                    type: Object,
+                    default: () => {}
                 }
             },
 
@@ -163,6 +169,7 @@
             },
 
             mounted() {
+                console.log(this.errors)
                 this.videos = this.uploadedVideos;
             },
 
