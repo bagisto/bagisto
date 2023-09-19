@@ -2829,7 +2829,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Wunschliste, Newsletter-Abonnement, E-Mail-Verifikation und soziale Anmeldung einrichten.',
+                    'settings-info' => 'تنظیم اشتراک نامه های خبری، تایید ایمیل و ورود اجتماعی.',
                     'title'         => 'Einstellungen',
 
                     'newsletter' => [

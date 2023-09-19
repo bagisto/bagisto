@@ -2829,7 +2829,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Configurer la liste de souhaits, l\'abonnement à la newsletter, la vérification par e-mail et la connexion via les réseaux sociaux.',
+                    'settings-info' => 'Configurer les abonnements à la newsletter, les vérifications par e-mail et la connexion sociale.',
                     'title'         => 'Paramètres',
 
                     'newsletter' => [

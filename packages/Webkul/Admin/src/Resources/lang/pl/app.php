@@ -2828,7 +2828,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Ustawienia listy życzeń, subskrypcji newslettera, weryfikacji e-mail i logowania społecznościowego.',
+                    'settings-info' => 'Ustaw subskrypcje newslettera, weryfikacje emaili oraz logowanie przez media społecznościowe.',
                     'title'         => 'Ustawienia',
 
                     'newsletter' => [

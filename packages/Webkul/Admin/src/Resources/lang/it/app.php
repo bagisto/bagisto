@@ -2829,7 +2829,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Imposta lista dei desideri, iscrizioni alla newsletter, verifica dell\'email e accesso tramite social media.',
+                    'settings-info' => 'Imposta iscrizioni alla newsletter, verifiche via email e accesso sociale.',
                     'title'         => 'Impostazioni',
 
                     'newsletter' => [

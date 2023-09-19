@@ -2829,7 +2829,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Dilek listesi, bülten abonelikleri, e-posta doğrulamaları ve sosyal giriş ayarlarını yapın.',
+                    'settings-info' => 'Bülten abonelikleri, e-posta doğrulamaları ve sosyal giriş ayarla.',
                     'title'         => 'Ayarlar',
 
                     'newsletter' => [
