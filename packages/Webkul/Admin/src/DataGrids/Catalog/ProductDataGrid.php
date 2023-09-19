@@ -211,10 +211,11 @@ class ProductDataGrid extends DataGrid
                     return route('admin.catalog.products.edit', $row->product_id);
                 },
 
-            'condition' => function () {
-                return true;
-            },
-        ]);
+                'condition' => function () {
+                    return true;
+                },
+            ]);
+        }
     }
 
     /**

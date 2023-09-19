@@ -95,27 +95,16 @@
 
                             <!-- Actions -->
                             <div class="flex justify-end">
-                                @if (bouncer()->hasPermission('customers.groups.edit'))
-                                    <a @click="id=1; editModal(record)">
+                                <div v-for="action in record.actions">
+                                    <a @click="id=1; actionHandler(action.url, action.title, record)">
                                         <span
-                                            :class="record.actions['0'].icon"
+                                            :class="action.icon"
                                             class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
-                                            :title="record.actions['0'].title"
+                                            :title="action.title"
                                         >
                                         </span>
                                     </a>
-                                @endif
-
-                                @if (bouncer()->hasPermission('customers.groups.delete'))
-                                    <a @click="deleteModal(record.actions['1']?.url)">
-                                        <span
-                                            :class="record.actions['1'].icon"
-                                            class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
-                                            :title="record.actions['1'].title"
-                                        >
-                                        </span>
-                                    </a>
-                                @endif
+                                </div>
                             </div>
                         </div>
                     </template>
@@ -252,6 +241,15 @@
                             });
                     },
 
+
+                    actionHandler(url, title, value) {
+                        if (title == 'Edit') {
+                            this.editModal(value);
+                        } else {
+                            this.deleteModal(url);
+                        }
+                    },
+
                     editModal(value) {
                         this.$refs.groupUpdateOrCreateModal.toggle();
 
@@ -272,11 +270,9 @@
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                             })
                             .catch(error => {
-                                if (error.response.status ==422) {
-                                    setErrors(error.response.data.errors);
-                                }
+                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
                             });
-                    }
+                    },
                 }
             })
         </script>
