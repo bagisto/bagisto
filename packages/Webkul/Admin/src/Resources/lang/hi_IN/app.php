@@ -226,6 +226,11 @@ return [
                 'total-due'             => 'कुल बकाया',
                 'view'                  => 'देखें',
                 'write-your-comment'    => 'अपनी टिप्पणी लिखें',
+                'pending'               => 'बकाया',
+                'processing'            => 'प्रसंस्करण',
+                'canceled'              => 'रद्द किया गया',
+                'closed'                => 'बंद',
+                'completed'             => 'पूरा हुआ',
             ],
         ],
 

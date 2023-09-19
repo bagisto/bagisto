@@ -14,31 +14,31 @@
                 @switch($order->status)
                     @case('processing')
                         <span class="label-processing text-[14px] mx-[5px]">
-                            {{ $order->status }}
+                            @lang('admin::app.sales.orders.view.processing')    
                         </span>
                         @break
 
                     @case('completed')
                         <span class="label-closed text-[14px] mx-[5px]">
-                            {{ $order->status }}
+                            @lang('admin::app.sales.orders.view.completed')    
                         </span>
                         @break
 
                     @case('pending')
                         <span class="label-pending text-[14px] mx-[5px]">
-                            {{ $order->status }}
+                            @lang('admin::app.sales.orders.view.pending')    
                         </span>
                         @break
 
                     @case('closed')
                         <span class="label-closed text-[14px] mx-[5px]">
-                            {{ $order->status }}
+                            @lang('admin::app.sales.orders.view.closed')    
                         </span>
                         @break
 
                     @case('canceled')
                         <span class="label-canceled text-[14px] mx-[5px]">
-                            {{ $order->status }}
+                            @lang('admin::app.sales.orders.view.canceled')    
                         </span>
                         @break
 

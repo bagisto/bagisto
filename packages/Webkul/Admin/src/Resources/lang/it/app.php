@@ -226,6 +226,11 @@ return [
                 'total-due'             => 'Totale Dovuto',
                 'view'                  => 'Vedi',
                 'write-your-comment'    => 'Scrivi il tuo commento',
+                'pending'               => 'In attesa',
+                'processing'            => 'Elaborazione',
+                'canceled'              => 'Annullato',
+                'closed'                => 'Chiuso',
+                'completed'             => 'Completato',
             ],
         ],
 

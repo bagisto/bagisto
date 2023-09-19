@@ -226,6 +226,11 @@ return [
                 'total-due'             => 'סה"כ לתשלום',
                 'view'                  => 'צפה',
                 'write-your-comment'    => 'כתוב את ההערה שלך',
+                'pending'               => 'ממתין',
+                'processing'            => 'בעיבוד',
+                'canceled'              => 'בוטל',
+                'closed'                => 'סגור',
+                'completed'             => 'הושלם',
             ],
         ],
 

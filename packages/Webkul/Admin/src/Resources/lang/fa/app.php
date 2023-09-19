@@ -226,6 +226,11 @@ return [
                 'total-due'             => 'مجموع بدهی',
                 'view'                  => 'مشاهده',
                 'write-your-comment'    => 'نظر خود را بنویسید',
+                'pending'               => 'در انتظار',
+                'processing'            => 'در حال پردازش',
+                'canceled'              => 'لغو شده',
+                'closed'                => 'بسته شده',
+                'completed'             => 'تکمیل شده'
             ],
         ],
 

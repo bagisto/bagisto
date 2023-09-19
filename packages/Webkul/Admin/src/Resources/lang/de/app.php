@@ -226,6 +226,11 @@ return [
                 'total-due'             => 'Gesamtfällig',
                 'view'                  => 'Ansehen',
                 'write-your-comment'    => 'Schreiben Sie Ihren Kommentar',
+                'pending'               => 'Ausstehend',
+                'processing'            => 'Verarbeitung',
+                'canceled'              => 'Abgebrochen',
+                'closed'                => 'Geschlossen',
+                'completed'             => 'Abgeschlossen',
             ],
         ],
 

@@ -226,6 +226,11 @@ return [
                 'total-due'             => 'المجموع المستحق',
                 'view'                  => 'عرض',
                 'write-your-comment'    => 'اكتب تعليقك',
+                'pending'               => 'قيد الانتظار',
+                'processing'            => 'جارٍ المعالجة',
+                'canceled'              => 'ملغاة',
+                'closed'                => 'مغلقة',
+                'completed'             => 'مكتملة',
             ],
         ],
 

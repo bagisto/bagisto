@@ -226,6 +226,11 @@ return [
                 'total-due'             => 'සහෝදරයට සඳහා මුළු',
                 'view'                  => 'දර්ශකයට',
                 'write-your-comment'    => 'ඔබගේ අදහසක් ලියන්න',
+                'pending'               => 'අපේක්ෂක',
+                'processing'            => 'සැකසීම',
+                'canceled'              => 'අවලංගු',
+                'closed'                => 'සමස්වූ',
+                'completed'             => 'සම්පූර්ණ',
             ],
         ],
 

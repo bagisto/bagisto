@@ -226,6 +226,11 @@ return [
                 'total-due'             => 'Total Due',
                 'view'                  => 'View',
                 'write-your-comment'    => 'Write your comment',
+                'pending'               => 'Pending',
+                'processing'            => 'Processing',
+                'canceled'              => 'Canceled',
+                'closed'                => 'Closed',
+                'completed'             => 'Completed',
             ],
         ],
 

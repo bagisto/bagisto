@@ -226,6 +226,11 @@ return [
                 'total-due'             => 'Łącznie do zapłaty',
                 'view'                  => 'Widok',
                 'write-your-comment'    => 'Napisz swój komentarz',
+                'pending'               => 'Oczekujący',
+                'processing'            => 'Przetwarzanie',
+                'canceled'              => 'Anulowane',
+                'closed'                => 'Zamknięte',
+                'completed'             => 'Zakończone',
             ],
         ],
 

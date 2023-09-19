@@ -226,6 +226,11 @@ return [
                 'total-due'             => 'Totaal Te Betalen',
                 'view'                  => 'Bekijken',
                 'write-your-comment'    => 'Schrijf uw opmerking',
+                'pending'               => 'In behandeling',
+                'processing'            => 'Verwerking',
+                'canceled'              => 'Geannuleerd',
+                'closed'                => 'Gesloten',
+                'completed'             => 'Voltooid',
             ],
         ],
 
