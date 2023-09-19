@@ -67,6 +67,7 @@ return [
                 'name'          => 'image_search',
                 'title'         => 'admin::app.configuration.index.general.content.settings.image-search-option',
                 'type'          => 'boolean',
+                'default'       => '1',
                 'locale_based'  => true,
                 'channel_based' => true,
             ],
