@@ -1,13 +1,13 @@
 <div class="flex flex-col">
-    <p class="text-gray-800 font-semibold">
+    <p class="text-gray-800 font-semibold leading-6">
         {{ $address->company_name ?? '' }}
     </p>
 
-    <p class="text-gray-800 font-semibold">
+    <p class="text-gray-800 font-semibold leading-6">
         {{ $address->name }}
     </p>
     
-    <p class="text-gray-600">
+    <p class="text-gray-600 leading-6">
         {{ $address->address1 }}<br>
 
         {{ $address->postcode }} {{ $address->city }}<br>

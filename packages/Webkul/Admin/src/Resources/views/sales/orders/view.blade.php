@@ -7,55 +7,56 @@
     <div class="grid">
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
             {!! view_render_event('sales.order.title.before', ['order' => $order]) !!}
+            <div class="flex gap-[10px] items-center">
+                <p class="text-[20px] text-gray-800 font-bold leading-[24px]">
+                    @lang('admin::app.sales.orders.view.title', ['order_id' => $order->increment_id])
+                </p>
 
-            <p class="text-[20px] text-gray-800 font-bold leading-[24px]">
-                @lang('admin::app.sales.orders.view.title', ['order_id' => $order->increment_id])
+                <div>
+                    @switch($order->status)
+                        @case('processing')
+                            <span class="label-processing text-[14px] mx-[5px]">
+                                @lang('admin::app.sales.orders.view.processing')    
+                            </span>
+                            @break
 
-                @switch($order->status)
-                    @case('processing')
-                        <span class="label-processing text-[14px] mx-[5px]">
-                            @lang('admin::app.sales.orders.view.processing')    
-                        </span>
-                        @break
+                        @case('completed')
+                            <span class="label-closed text-[14px] mx-[5px]">
+                                @lang('admin::app.sales.orders.view.completed')    
+                            </span>
+                            @break
 
-                    @case('completed')
-                        <span class="label-closed text-[14px] mx-[5px]">
-                            @lang('admin::app.sales.orders.view.completed')    
-                        </span>
-                        @break
+                        @case('pending')
+                            <span class="label-pending text-[14px] mx-[5px]">
+                                @lang('admin::app.sales.orders.view.pending')    
+                            </span>
+                            @break
 
-                    @case('pending')
-                        <span class="label-pending text-[14px] mx-[5px]">
-                            @lang('admin::app.sales.orders.view.pending')    
-                        </span>
-                        @break
+                        @case('closed')
+                            <span class="label-closed text-[14px] mx-[5px]">
+                                @lang('admin::app.sales.orders.view.closed')    
+                            </span>
+                            @break
 
-                    @case('closed')
-                        <span class="label-closed text-[14px] mx-[5px]">
-                            @lang('admin::app.sales.orders.view.closed')    
-                        </span>
-                        @break
+                        @case('canceled')
+                            <span class="label-canceled text-[14px] mx-[5px]">
+                                @lang('admin::app.sales.orders.view.canceled')    
+                            </span>
+                            @break
 
-                    @case('canceled')
-                        <span class="label-canceled text-[14px] mx-[5px]">
-                            @lang('admin::app.sales.orders.view.canceled')    
-                        </span>
-                        @break
-
-                @endswitch
-            </p>
+                    @endswitch
+                </div>
+            </div>
 
             {!! view_render_event('sales.order.title.after', ['order' => $order]) !!}
 
-            <div class="flex gap-x-[10px] items-center">
-                {{-- Cancel Button --}}
-                <a
-                    href="{{ route('admin.sales.orders.index') }}"
-                    class="transparent-button hover:bg-gray-200"
-                >
-                    @lang('admin::app.account.edit.back-btn')
-                </a>
-            </div>
+            {{-- Back Button --}}
+            <a
+                href="{{ route('admin.sales.orders.index') }}"
+                class="transparent-button hover:bg-gray-200"
+            >
+                @lang('admin::app.account.edit.back-btn')
+            </a>
         </div>
     </div>
 
@@ -344,7 +345,7 @@
                     {{-- Comment List --}}
                     @foreach ($order->comments()->orderBy('id', 'desc')->get() as $comment)
                         <div class="grid gap-[6px] p-[16px]">
-                            <p class="text-[16px] text-gray-800">
+                            <p class="text-[16px] text-gray-800 leading-6">
                                 {{ $comment->comment }}
                             </p>
 
