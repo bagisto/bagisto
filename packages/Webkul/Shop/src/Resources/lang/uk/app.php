@@ -405,6 +405,7 @@ return [
         'name'                   => 'Назва',
         'qty'                    => 'Кількість',
         'offers'                 => 'Купуйте :qty за :price кожен і економте :discount%',
+        'tax-inclusive'          => 'Включаючи всі податки',
 
         'sort-by'                => [
             'title'   => 'Сортувати за',

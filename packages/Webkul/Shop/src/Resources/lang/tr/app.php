@@ -405,6 +405,7 @@ return [
         'name'                   => 'Ad',
         'qty'                    => 'Adet',
         'offers'                 => ':qty adet alın, her biri :price ve %:discount indirim ile satın alın',
+        'tax-inclusive'          => 'Tüm vergiler dahil',
 
         'sort-by' => [
             'title'   => 'Sırala',
