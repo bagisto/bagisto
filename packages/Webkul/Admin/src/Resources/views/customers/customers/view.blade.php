@@ -40,12 +40,13 @@
 
     {{-- Filters --}}
     <div class="flex gap-x-[4px] gap-y-[8px] items-center flex-wrap mt-[28px]">
-        {{--Address Create component --}}
+        {{-- Address Create component --}}
         @include('admin::customers.addresses.create')
 
+        {{-- Account Delete button --}}
         <div 
             class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
-            onclick="if (confirm('@lang('admin::app.customers.customers.view.delete-confirmation')')) {
+            onclick="if (confirm('@lang('admin::app.customers.customers.view.account-delete-confirmation')')) {
                 event.preventDefault();
                 document.getElementById('delete-account{{ $customer->id }}').submit();
             }"
@@ -466,7 +467,7 @@
 
                 @foreach ($customer->notes as $note)
                     <div class="grid gap-[6px] p-[16px]">
-                        <p class="text-[16px] text-gray-800">
+                        <p class="text-[16px] text-gray-800 leading-6">
                             {{$note->note}}
                         </p>
 
@@ -572,8 +573,10 @@
                                     {{-- Delete Address --}}
                                     <p 
                                         class="text-blue-600 cursor-pointer transition-all hover:underline"
-                                        onclick="event.preventDefault();
-                                        document.getElementById('delete-address{{ $address->id }}').submit();"
+                                        onclick="if (confirm('@lang('admin::app.customers.customers.view.address-delete-confirmation')')) {
+                                            event.preventDefault();
+                                            document.getElementById('delete-address{{ $address->id }}').submit();
+                                        }"
                                     >
                                         @lang('admin::app.customers.customers.view.delete')
                                     </p>

@@ -108,6 +108,25 @@
 
                                         <x-admin::form.control-group.error control-name="type"></x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
+
+                                    <x-admin::form.control-group>
+                                        <x-admin::form.control-group.label class="required">
+                                            @lang('admin::app.settings.themes.edit.channels')
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="select"
+                                            name="channel_id"
+                                            rules="required"
+                                            :value="1"
+                                        >
+                                            @foreach (core()->getAllChannels() as $channel)
+                                                <option value="{{ $channel->id }}">{{ $channel->name }}</option>
+                                            @endforeach 
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error control-name="type"></x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
                                 </div>
                             </x-slot:content>
 

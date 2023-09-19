@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Category\Http\Requests;
+namespace Webkul\Admin\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Webkul\Admin\Validations\ProductCategoryUniqueSlug;

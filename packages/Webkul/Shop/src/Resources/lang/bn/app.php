@@ -405,6 +405,7 @@ return [
         'name'                   => 'নাম',
         'qty'                    => 'পরিমাণ',
         'offers'                 => ':price প্রতি :qty কে ক্রয় করুন এবং :discount% সেভ করুন',
+        'tax-inclusive'          => 'সমস্ত কর সহ',
 
         'sort-by'                => [
             'title'   => 'দ্বারা সাজান',

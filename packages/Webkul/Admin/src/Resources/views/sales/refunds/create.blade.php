@@ -149,7 +149,7 @@
                                             </div>
 
                                             <!-- Item Order Summary -->
-                                            <div class="flex w-full gap-[20px] justify-end">
+                                            <div class="flex w-full gap-[20px] justify-end item">
                                                 <div class="flex flex-col gap-y-[6px]">
                                                     <p class="text-gray-600">
                                                         @lang('admin::app.sales.refunds.create.price')
@@ -187,13 +187,13 @@
                                                         {{ core()->formatBasePrice($item->base_tax_amount) }} 
                                                     </p>
 
-                                                    <p class="text-gray-600"> 
-                                                        @if ($order->base_discount_amount > 0)
+                                                    @if ($order->base_discount_amount > 0)
+                                                        <p class="text-gray-600"> 
                                                             {{ core()->formatBasePrice($item->base_discount_amount) }}
-                                                        @endif 
-                                                    </p>
+                                                        </p>
+                                                    @endif 
 
-                                                    <p class="text-gray-600"> 
+                                                    <p class="text-gray-600 font-semibold"> 
                                                         {{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }} 
                                                     </p>
                                                 </div>

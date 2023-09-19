@@ -8,7 +8,7 @@ use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\CatalogRule\Repositories\CatalogRuleRepository;
 use Webkul\CatalogRule\Helpers\CatalogRuleIndex;
 use Webkul\Admin\DataGrids\Marketing\Promotions\CatalogRuleDataGrid;
-use Webkul\CatalogRule\Http\Requests\CatalogRuleRequest;
+use Webkul\Admin\Http\Requests\CatalogRuleRequest;
 
 class CatalogRuleController extends Controller
 {

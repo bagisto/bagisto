@@ -16,28 +16,28 @@
 
 @if (strpos($field['validation'], 'required_if') !== false)
     <v-required-if
-        name = "{{ $name }}"
-        :result = "'{{ $selectedOption }}'"
-        :validations = "'{{ $validations }}'"
-        label = "@lang($field['title'])"
-        :options = '@json($field['options'])'
-        :info = "'@lang($field['info'] ?? '')'"
-        :depend = "'{{ $dependName }}'"
-        :depend-result= "'{{ $dependSelectedOption }}'"
-        :channel_locale = "'{{ $channelLocaleInfo }}'"
+        name="{{ $name }}"
+        result="{{ $selectedOption }}"
+        validations="{{ $validations }}"
+        label="@lang($field['title'])"
+        options="{{ json_decode($field['options']) }}"
+        info="{{ json_encode($field['info'] ?? '') }}"
+        depend="{{ $dependName }}"
+        depend-result="{{ $dependSelectedOption }}"
+        channel_locale="{{ $channelLocaleInfo }}"
     >
     </v-required-if>
 @else
     <v-depends
-        name = "{{ $name }}"
-        :validations = "'{{ $validations }}'"
-        :options = '@json($field['options'])'
-        :depend = "'{{ $dependName }}'"
-        :value = "'{{ $dependValue }}'"
-        :field_name = "'@lang($field['title'])'"
-        :channel_locale = "'{{ $channelLocaleInfo }}'"
-        :result = "'{{ $selectedOption }}'"
-        :depend-saved-value= "'{{ $dependSelectedOption }}'"
+        name="{{ $name }}"
+        validations="{{ $validations }}"
+        options="{{ json_decode($field['options']) }}"
+        depend="{{ $dependName }}"
+        value="'{{ $dependValue }}'"
+        label="@lang($field['title'])"
+        channel_locale="{{ $channelLocaleInfo }}"
+        result="{{ $selectedOption }}"
+        depend-saved-value="{{ $dependSelectedOption }}"
     >
     </v-depends>
 @endif
@@ -48,6 +48,23 @@
         id="v-depends-template"
     >
         <div>
+            <div class="flex justify-between">
+                <label
+                    class="block leading-[24px] text-[12px] text-gray-800 font-medium"
+                    :class="{ 'required' : isRequire }"
+                    :for="name"
+                >
+                    @{{ label }}
+                </label>
+
+                <label
+                    class="block leading-[24px] text-[12px] text-gray-800 font-medium"
+                    :for="name"
+                >
+                    @{{ channel_locale }}
+                </label>
+            </div>
+            
             <v-field 
                 :name="name"
                 v-slot="{ field, errorMessage }"
@@ -89,69 +106,6 @@
                 />
             </v-field>
         </div>
-
-    </script>
-
-    <script type="module">
-        app.component('v-depends', {
-            template: '#v-depends-template',
-
-            props: [
-                'options',
-                'name',
-                'validations',
-                'depend',
-                'value',
-                'field_name',
-                'channel_locale',
-                'repository',
-                'result'
-            ],
-
-            data() {
-                return {
-                    isRequire: false,
-                    isVisible: false,
-                    value: this.result,
-                }
-            },
-
-            mounted() {
-                if (this.validations || this.validations.indexOf("required") !== -1) {
-                    this.isRequire = true;
-                }
-
-                let dependentElement = document.getElementById(this.depend);
-
-                let dependValue = this.value;
-
-                if (dependValue === 'true') {
-                    dependValue = 1;
-                } else if (dependValue === 'false') {
-                    dependValue = 0;
-                }
-
-                document.addEventListener("change", (event) => {
-                    if (this.depend === event.target.name) {
-                        this.isVisible = this.value === event.target.value;
-                    }
-                });
-
-                if (dependentElement && dependentElement.value == dependValue) {
-                    this.isVisible = true;
-                } else {
-                    this.isVisible = false;
-                }
-
-                if (this.result) {
-                    if (dependentElement && dependentElement.value == this.value) {
-                        this.isVisible = true;
-                    } else {
-                        this.isVisible = false;
-                    }
-                }
-            },
-        });
     </script>
 
     <script
@@ -159,6 +113,23 @@
         id="v-required-if-template"
     >
         <div>
+            <div class="flex justify-between">
+                <label
+                    class="block leading-[24px] text-[12px] text-gray-800 font-medium"
+                    :class="{ 'required' : isRequire }"
+                    :for="name"
+                >
+                    @{{ label }}
+                </label>
+
+                <label
+                    class="block leading-[24px] text-[12px] text-gray-800 font-medium"
+                    :for="name"
+                >
+                    @{{ channel_locale }}
+                </label>
+            </div>
+            
             <v-field 
                 :name="name"
                 v-slot="{ field, errorMessage }"
@@ -203,8 +174,71 @@
     </script>
     
     <script type="module">
+        app.component('v-depends', {
+            template: '#v-depends-template',
+
+            props: [
+                'options',
+                'name',
+                'validations',
+                'depend',
+                'value',
+                'label',
+                'channel_locale',
+                'repository',
+                'result'
+            ],
+
+            data() {
+                return {
+                    isRequire: false,
+                    isVisible: false,
+                    value: this.result,
+                };
+            },
+
+            mounted() {
+                if (this.validations || this.validations.indexOf("required") !== -1) {
+                    this.isRequire = true;
+                }
+
+                let dependentElement = document.getElementById(this.depend);
+
+                let dependValue = this.value;
+
+                if (dependValue === 'true') {
+                    dependValue = 1;
+                } else if (dependValue === 'false') {
+                    dependValue = 0;
+                }
+
+                document.addEventListener("change", (event) => {
+                    if (this.depend === event.target.name) {
+                        this.isVisible = this.value === event.target.value;
+                    }
+                });
+
+                if (dependentElement && dependentElement.value == dependValue) {
+                    this.isVisible = true;
+                } else {
+                    this.isVisible = false;
+                }
+
+                if (this.result) {
+                    if (dependentElement && dependentElement.value == this.value) {
+                        this.isVisible = true;
+                    } else {
+                        this.isVisible = false;
+                    }
+                }
+            },
+        });
+    </script>
+
+    <script type="module">
         app.component('v-required-if', {
             template: '#v-required-if-template',
+
             props: [
                 'name',
                 'label',
@@ -226,7 +260,7 @@
                     value: this.result,
 
                     dependSavedValue: parseInt(this.dependResult)
-                }
+                };
             },
 
             mounted() {
@@ -260,8 +294,8 @@
                     }
 
                     this.appliedRules = this.appliedRules.join('|');
-                }
-            }
+                },
+            },
         });
     </script>
 @endPushOnce

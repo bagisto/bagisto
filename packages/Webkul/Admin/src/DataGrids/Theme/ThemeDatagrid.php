@@ -14,19 +14,33 @@ class ThemeDatagrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
+        $whereInLocales = core()->getRequestedLocaleCode() === 'all'
+            ? core()->getAllLocales()->pluck('code')->toArray()
+            : [core()->getRequestedLocaleCode()];
+
         $queryBuilder = DB::table('theme_customizations')
+            ->join('theme_customization_translations', function ($leftJoin) use ($whereInLocales) {
+                $leftJoin->on('theme_customizations.id', '=', 'theme_customization_translations.theme_customization_id')
+                    ->whereIn('theme_customization_translations.locale', $whereInLocales);
+            })
+            ->join('channel_translations', function ($leftJoin) use ($whereInLocales) {
+                $leftJoin->on('theme_customizations.channel_id', '=', 'channel_translations.channel_id')
+                    ->whereIn('channel_translations.locale', $whereInLocales);
+            })
             ->addSelect(
                 'theme_customizations.id',
                 'theme_customizations.type',
-                'theme_customizations.name',
                 'theme_customizations.sort_order',
+                'channel_translations.name as channel_name',
                 'theme_customizations.status',
+                'theme_customizations.name as name',
             );
 
         $this->addFilter('type', 'channel_translations.type');
         $this->addFilter('name', 'channel_translations.name');
         $this->addFilter('sort_order', 'channel_translations.sort_order');
         $this->addFilter('status', 'theme_customizations.status');
+        $this->addFilter('channel_name', 'channel_name');
 
         return $queryBuilder;
     }
@@ -36,6 +50,15 @@ class ThemeDatagrid extends DataGrid
         $this->addColumn([
             'index'      => 'id',
             'label'      => trans('admin::app.settings.themes.index.datagrid.id'),
+            'type'       => 'integer',
+            'searchable' => false,
+            'filterable' => true,
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'channel_name',
+            'label'      => trans('admin::app.settings.themes.index.datagrid.channel_name'),
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => true,

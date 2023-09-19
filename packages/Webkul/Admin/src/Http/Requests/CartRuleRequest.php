@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\CartRule\Http\Requests;
+namespace Webkul\Admin\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

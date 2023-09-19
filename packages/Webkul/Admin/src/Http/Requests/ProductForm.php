@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Product\Http\Requests;
+namespace Webkul\Admin\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;

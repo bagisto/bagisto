@@ -405,6 +405,7 @@ return [
         'name'                   => '名前',
         'qty'                    => '数量',
         'offers'                 => ':qty個購入で1個あたり:priceで購入し、:discount%を節約',
+        'tax-inclusive'          => 'すべての税金込み',
 
         'sort-by' => [
             'title'   => '並び替え',

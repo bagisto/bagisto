@@ -220,7 +220,7 @@
 		</div>
 
         <p class="mt-[30px] mb-[15px] text-center text-[#7d7d7d] text-xs">
-            @lang('shop::app.customer.signup-form.footer')
+            @lang('shop::app.customers.signup-form.footer')
         </p>
 	</div>
 

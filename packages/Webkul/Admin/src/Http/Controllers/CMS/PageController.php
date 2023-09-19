@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Event;
 use Webkul\CMS\Repositories\CmsRepository;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\DataGrids\CMS\CMSPageDataGrid;
-use Webkul\Core\Http\Requests\MassDestroyRequest;
+use Webkul\Admin\Http\Requests\MassDestroyRequest;
 
 
 class PageController extends Controller
@@ -117,8 +117,9 @@ class PageController extends Controller
         Event::dispatch('cms.pages.update.before', $id);
 
         $data = [
-            'en'       => request()->input('en'),
+            $locale    => request()->input($locale),
             'channels' => request()->input('channels'),
+            'locale'   => $locale,
         ];
 
         $page = $this->cmsRepository->update($data, $id);
