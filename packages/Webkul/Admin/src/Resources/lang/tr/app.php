@@ -2509,15 +2509,16 @@ return [
                 'create-btn' => 'Tema Oluştur',
 
                 'datagrid'   => [
-                    'view'       => 'Görünüm',
-                    'delete'     => 'Sil',
-                    'status'     => 'Durum',
-                    'active'     => 'Aktif',
-                    'inactive'   => 'Pasif',
-                    'sort-order' => 'Sıralama Sırası',
-                    'id'         => 'ID',
-                    'type'       => 'Tür',
-                    'name'       => 'Ad',
+                    'view'         => 'Görüntüle',
+                    'delete'       => 'Sil',
+                    'status'       => 'Durum',
+                    'active'       => 'Aktif',
+                    'inactive'     => 'Pasif',
+                    'sort-order'   => 'Sıralama Sırası',
+                    'id'           => 'ID',
+                    'type'         => 'Tip',
+                    'name'         => 'Ad',
+                    'channel_name' => 'Kanal Adı',
                 ],
             ],
 
@@ -2584,6 +2585,7 @@ return [
                 'edit'                          => 'Düzenle',
                 'back'                          => 'Geri',
                 'preview'                       => 'Önizleme',
+                'channels'                      => 'kanallar',
             ],
 
             'create-success' => 'Tema başarıyla oluşturuldu',

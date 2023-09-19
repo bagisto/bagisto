@@ -43,7 +43,7 @@
                 return {
                     currentIndex: 1,
 
-                    images: @json($options['images']),
+                    images: @json($options['images'] ?? []),
                 };
             },
 

@@ -2510,15 +2510,16 @@ return [
                 'create-btn' => 'Create Theme',
 
                 'datagrid'   => [
-                    'view'       => 'View',
-                    'delete'     => 'Delete',
-                    'status'     => 'Status',
-                    'active'     => 'Active',
-                    'inactive'   => 'Inactive',
-                    'sort-order' => 'Sort Order',
-                    'id'         => 'Id',
-                    'type'       => 'Type',
-                    'name'       => 'Name',
+                    'view'         => 'View',
+                    'delete'       => 'Delete',
+                    'status'       => 'Status',
+                    'active'       => 'Active',
+                    'inactive'     => 'Inactive',
+                    'sort-order'   => 'Sort Order',
+                    'id'           => 'Id',
+                    'type'         => 'Type',
+                    'name'         => 'Name',
+                    'channel_name' => 'Channel Name',
                 ],
             ],
 
@@ -2586,6 +2587,7 @@ return [
                 'edit'                          => 'Edit',
                 'back'                          => 'Back',
                 'preview'                       => 'Preview',
+                'channels'                      => 'Channels',
             ],
 
             'create-success' => 'Theme created successfully',

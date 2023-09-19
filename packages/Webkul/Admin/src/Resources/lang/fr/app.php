@@ -2508,15 +2508,16 @@ return [
                 'create-btn' => 'Créer un thème',
 
                 'datagrid'   => [
-                    'view'       => 'Voir',
-                    'delete'     => 'Supprimer',
-                    'status'     => 'Statut',
-                    'active'     => 'Actif',
-                    'inactive'   => 'Inactif',
-                    'sort-order' => 'Ordre de tri',
-                    'id'         => 'ID',
-                    'type'       => 'Type',
-                    'name'       => 'Nom',
+                    'view'         => 'Voir',
+                    'delete'       => 'Supprimer',
+                    'status'       => 'Statut',
+                    'active'       => 'Actif',
+                    'inactive'     => 'Inactif',
+                    'sort-order'   => 'Ordre de tri',
+                    'id'           => 'ID',
+                    'type'         => 'Type',
+                    'name'         => 'Nom',
+                    'channel_name' => 'Nom du canal',
                 ],
             ],
 
@@ -2583,6 +2584,7 @@ return [
                 'edit'                          => 'Éditer',
                 'back'                          => 'Retour',
                 'preview'                       => 'Aperçu',
+                'channels'                      => 'Chaînes',
             ],
 
             'create-success' => 'Thème créé avec succès',

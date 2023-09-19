@@ -2508,15 +2508,17 @@ return [
                 'create-btn' => 'テーマを作成',
 
                 'datagrid'   => [
-                    'view'       => '表示',
-                    'delete'     => '削除',
-                    'status'     => 'ステータス',
-                    'active'     => 'アクティブ',
-                    'inactive'   => '非アクティブ',
-                    'sort-order' => 'ソート順',
-                    'id'         => 'ID',
-                    'type'       => 'タイプ',
-                    'name'       => '名前',
+                    'view'         => '表示',
+                    'delete'       => '削除',
+                    'status'       => 'ステータス',
+                    'active'       => 'アクティブ',
+                    'inactive'     => '非アクティブ',
+                    'sort-order'   => '並べ替え順',
+                    'id'           => 'ID',
+                    'type'         => 'タイプ',
+                    'name'         => '名前',
+                    'channel_name' => 'チャネル名',
+
                 ],
             ],
 
@@ -2583,6 +2585,7 @@ return [
                 'edit'                          => '編集',
                 'back'                          => '戻る',
                 'preview'                       => 'プレビュー',
+                'channels'                      => 'チャンネル'
             ],
 
             'create-success' => 'テーマは正常に作成されました',

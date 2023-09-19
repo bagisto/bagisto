@@ -3,6 +3,14 @@
         @lang('admin::app.settings.themes.edit.title')
     </x-slot:title>
    
+    @php
+        $channels = core()->getAllChannels();
+
+        $currentChannel = core()->getRequestedChannel();
+
+        $currentLocale = core()->getRequestedLocale();
+    @endphp
+
     <x-admin::form 
         :action="route('admin.theme.update', $theme->id)"
         enctype="multipart/form-data"
@@ -29,6 +37,42 @@
                 >
                     @lang('admin::app.settings.themes.edit.save-btn')
                 </button>
+            </div>
+        </div>
+
+        {{-- Channel and Locale Switcher --}}
+        <div class="flex  gap-[16px] justify-between items-center mt-[28px] max-md:flex-wrap">
+            <div class="flex gap-x-[4px] items-center">
+                {{-- Locale Switcher --}}
+                <x-admin::dropdown>
+                    {{-- Dropdown Toggler --}}
+                    <x-slot:toggle>
+                        <button
+                            type="button"
+                            class="transparent-button px-[4px] py-[6px] hover:bg-gray-200 focus:bg-gray-200"
+                        >
+                            <span class="icon-language text-[24px] "></span>
+
+                            {{ $currentLocale->name }}
+                            
+                            <input type="hidden" name="locale" value="{{ $currentLocale->code }}"/>
+
+                            <span class="icon-sort-down text-[24px]"></span>
+                        </button>
+                    </x-slot:toggle>
+
+                    {{-- Dropdown Content --}}
+                    <x-slot:content class="!p-[0px]">
+                        @foreach ($currentChannel->locales as $locale)
+                            <a
+                                href="?{{ Arr::query(['channel' => $currentChannel->code, 'locale' => $locale->code]) }}"
+                                class="flex gap-[10px] px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100 {{ $locale->code == $currentLocale->code ? 'bg-gray-100' : ''}}"
+                            >
+                                {{ $locale->name }}
+                            </a>
+                        @endforeach
+                    </x-slot:content>
+                </x-admin::dropdown>
             </div>
         </div>
 
@@ -75,7 +119,7 @@
                             </div>
 
                             <template v-for="(deletedSlider, index) in deletedSliders">
-                                <input type="hidden" :name="'deleted_sliders['+ index +'][image]'" :value="deletedSlider.image" />  
+                                <input type="hidden" :name="'deleted_sliders['+ index +'][image]'" :value="deletedSlider.image" />
                             </template>
 
                             <div
@@ -85,8 +129,8 @@
                             >
                                 <!-- Hidden Input -->
                                 <input type="file" class="hidden" :name="'options['+ index +'][image]'" :ref="'imageInput_' + index" />
-                                <input type="hidden" :name="'options['+ index +'][link]'" :value="image.link" />    
-                                <input type="hidden" :name="'options['+ index +'][image]'" :value="image.image" />    
+                                <input type="hidden" :name="'options['+ index +'][link]'" :value="image.link" />
+                                <input type="hidden" :name="'options['+ index +'][image]'" :value="image.image" />
                             
                                 <!-- Details -->
                                 <div 
@@ -229,6 +273,25 @@
     
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.settings.themes.edit.channels')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="channel_id"
+                                        rules="required"
+                                        :value="$theme->channel_id"
+                                    >
+                                        @foreach($channels as $channel)
+                                            <option value="{{ $channel->id }}">{{ $channel->name }}</option>
+                                        @endforeach 
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.themes.edit.status')
                                     </x-admin::form.control-group.label>
     
@@ -261,6 +324,7 @@
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
+
                             </x-slot:content>
                         </x-admin::accordion>
                     </div>
@@ -278,7 +342,6 @@
                         <x-admin::modal ref="addSliderModal">
                             <x-slot:header>
                                 <p class="text-[18px] text-gray-800 font-bold">
-                                    
                                     @lang('admin::app.settings.themes.edit.update-slider')
                                 </p>
                             </x-slot:header>
@@ -293,7 +356,7 @@
 
                                             <x-admin::form.control-group.control
                                                 type="text"
-                                                name="link"
+                                                name="{{ $currentLocale->code }}[link]"
                                                 rules="required|url"
                                                 :label="trans('admin::app.settings.themes.edit.link')"
                                                 :placeholder="trans('admin::app.settings.themes.edit.link')"
@@ -301,7 +364,7 @@
                                             </x-admin::form.control-group.control>
             
                                             <x-admin::form.control-group.error
-                                                control-name="link"
+                                                control-name="{{ $currentLocale->code }}[link]"
                                             >
                                             </x-admin::form.control-group.error>
                                         </x-admin::form.control-group>
@@ -319,7 +382,7 @@
                                         </x-admin::form.control-group.control>
         
                                         <x-admin::form.control-group.error
-                                            control-name="title"
+                                            control-name="slider_image"
                                         >
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
@@ -378,7 +441,7 @@
                             </v-field>
 
                             <x-admin::form.control-group.error
-                                control-name="options[title]"
+                                control-name="{{ $currentLocale->code }}[options[title]]"
                             >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
@@ -585,6 +648,25 @@
                                     control-name="sort_order"
                                 >
                                 </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.themes.edit.channels')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="select"
+                                    name="channel_id"
+                                    rules="required"
+                                    :value="$theme->channel_id"
+                                >
+                                    @foreach($channels as $channel)
+                                        <option value="{{ $channel->id }}">{{ $channel->name }}</option>
+                                    @endforeach 
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group>
@@ -927,6 +1009,25 @@
 
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.themes.edit.channels')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="select"
+                                    name="channel_id"
+                                    rules="required"
+                                    :value="$theme->channel_id"
+                                >
+                                    @foreach($channels as $channel)
+                                        <option value="{{ $channel->id }}">{{ $channel->name }}</option>
+                                    @endforeach 
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.status')
                                 </x-admin::form.control-group.label>
 
@@ -1055,7 +1156,10 @@
                                 </p>
                             </div>
 
-                            <div class="flex gap-[10px]">
+                            <div
+                                class="flex gap-[10px]"
+                                v-if="isHtmlEditorActive"
+                            >
                                 <!-- Hidden Input Filed for upload images -->
                                 <label
                                     class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
@@ -1077,7 +1181,7 @@
                         <div class="text-sm font-medium text-center pt-[16px] text-gray-500">
                             <div class="tabs">
                                 <div class="flex gap-[15px] mb-[15px] pt-[8px] border-b-[2px] max-sm:hidden">
-                                    <p @click="switchEditor('v-html-editor-theme')">
+                                    <p @click="switchEditor('v-html-editor-theme', 1)">
                                         <div
                                             class="transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 cursor-pointer"
                                             :class="{'mb-[-1px] border-b-[2px] border-blue-600': inittialEditor == 'v-html-editor-theme'}"
@@ -1086,7 +1190,7 @@
                                         </div>
                                     </p>
 
-                                    <p @click="switchEditor('v-css-editor-theme')">
+                                    <p @click="switchEditor('v-css-editor-theme', 0);">
                                         <div
                                             class="transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 cursor-pointer"
                                             :class="{'mb-[-1px] border-b-[2px] border-blue-600': inittialEditor == 'v-css-editor-theme'}"
@@ -1095,7 +1199,7 @@
                                         </div>
                                     </p>
 
-                                    <p @click="switchEditor('v-static-content-previewer')">
+                                    <p @click="switchEditor('v-static-content-previewer', 0);">
                                         <div
                                             class="transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 cursor-pointer"
                                             :class="{'mb-[-1px] border-b-[2px] border-blue-600': inittialEditor == 'v-static-content-previewer'}"
@@ -1107,8 +1211,8 @@
                             </div>
                         </div>
 
-                        <input type="hidden" name="options[html]" v-model="options.html">
-                        <input type="hidden" name="options[css]" v-model="options.css">
+                        <input type="hidden" name="{{ $currentLocale->code }}[options][html]" v-model="options.html">
+                        <input type="hidden" name="{{ $currentLocale->code }}[options][css]" v-model="options.css">
 
                         <KeepAlive>
                             <component 
@@ -1178,6 +1282,25 @@
                                     control-name="sort_order"
                                 >
                                 </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.themes.edit.channels')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="select"
+                                    name="channel_id"
+                                    rules="required"
+                                    :value="$theme->channel_id"
+                                >
+                                    @foreach($channels as $channel)
+                                        <option value="{{ $channel->id }}">{{ $channel->name }}</option>
+                                    @endforeach 
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group>
@@ -1448,6 +1571,25 @@
     
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.settings.themes.edit.channels')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="channel_id"
+                                        rules="required"
+                                        :value="$theme->channel_id"
+                                    >
+                                        @foreach($channels as $channel)
+                                            <option value="{{ $channel->id }}">{{ $channel->name }}</option>
+                                        @endforeach 
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.themes.edit.status')
                                     </x-admin::form.control-group.label>
     
@@ -1662,7 +1804,7 @@
 
                         this.sliders.images.push({
                             slider_image: formData.get("slider_image[]"),
-                            link: formData.get("link"),
+                            link: formData.get("{{ $currentLocale->code }}[link]"),
                         });
 
                         if (formData.get("slider_image[]") instanceof File) {
@@ -1803,7 +1945,9 @@
                     return {
                         inittialEditor: 'v-html-editor-theme',
 
-                        options: @json($theme->options),
+                        options: @json($theme->translate($currentLocale->code)['options'] ?? null),
+
+                        isHtmlEditorActive: true,
                     };
                 },
 
@@ -1814,8 +1958,10 @@
                 },
 
                 methods: {
-                    switchEditor(editor) {
+                    switchEditor(editor, isActive) {
                         this.inittialEditor = editor;
+
+                        this.isHtmlEditorActive = isActive;
 
                         if (editor == 'v-static-content-previewer') {
                             this.$refs.editor.review = this.options;
@@ -1845,7 +1991,7 @@
                 data() {
                     return {
                         options:{
-                            html: `{!! $theme->options['html'] ?? '' !!}`,
+                            html: `{!! $theme->translate($currentLocale->code)['options']['html'] ?? '' !!}`,
                         },
 
                         cursorPointer: {},
@@ -1888,8 +2034,9 @@
 
                         let formData = new FormData();
 
-                        formData.append('image', selectedImage);
+                        formData.append('options[image][image]', selectedImage);
                         formData.append('id', "{{ $theme->id }}");
+                        formData.append('type', "static_content");
 
                         this.$axios.post('{{ route('admin.theme.store') }}', formData)
                             .then((response) => {
@@ -1919,7 +2066,7 @@
                 data() {
                     return {
                         options:{
-                            css: `{!! $theme->options['css'] ?? '' !!}`,
+                            css: `{!! $theme->translate($currentLocale->code)['options']['css'] ?? '' !!}`,
                         }
                     };
                 },

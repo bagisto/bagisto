@@ -50,7 +50,8 @@ class ThemeController extends Controller
         $this->validate(request(), [
             'name'       => 'required',
             'sort_order' => 'required|numeric',
-            'type'       => 'in:product_carousel,category_carousel,static_content,image_carousel,footer_links'
+            'type'       => 'in:product_carousel,category_carousel,static_content,image_carousel,footer_links',
+            'channel_id' => 'required|in:'.implode(',', (core()->getAllChannels()->pluck("id")->toArray())),
         ]);
 
         Event::dispatch('theme_customization.create.before');
@@ -59,6 +60,7 @@ class ThemeController extends Controller
             'name'       => request()->input('name'),
             'sort_order' => request()->input('sort_order'),
             'type'       => request()->input('type'),
+            'channel_id' => request()->input('channel_id'),
         ]);
 
         Event::dispatch('theme_customization.create.after', $theme);
@@ -89,11 +91,13 @@ class ThemeController extends Controller
      */
     public function update($id)
     {
-        $data = request()->only(['options', 'type', 'name', 'sort_order']);
+        $locale = core()->getRequestedLocaleCode();
+
+        $data = request()->all();
 
         if ($data['type'] == 'static_content') {
-            $data['options']['html'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $data['options']['html']); 
-            $data['options']['css'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $data['options']['css']); 
+            $data[$locale]['options']['html'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $data[$locale]['options']['html']); 
+            $data[$locale]['options']['css'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $data[$locale]['options']['css']); 
         }
 
         $data['status'] = request()->input('status') == 'on';
@@ -140,7 +144,7 @@ class ThemeController extends Controller
         Event::dispatch('theme_customization.delete.after', $id);
 
         return new JsonResponse([
-                'message' => trans('admin::app.settings.themes.delete-success'),
+            'message' => trans('admin::app.settings.themes.delete-success'),
         ], 200);
     }
 }

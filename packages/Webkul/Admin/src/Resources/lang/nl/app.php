@@ -2508,15 +2508,16 @@ return [
                 'create-btn' => 'Thema maken',
 
                 'datagrid' => [
-                    'view'       => 'Bekijken',
-                    'delete'     => 'Verwijderen',
-                    'status'     => 'Status',
-                    'active'     => 'Actief',
-                    'inactive'   => 'Inactief',
-                    'sort-order' => 'Sorteervolgorde',
-                    'id'         => 'Id',
-                    'type'       => 'Type',
-                    'name'       => 'Naam',
+                    'view'         => 'Bekijken',
+                    'delete'       => 'Verwijderen',
+                    'status'       => 'Status',
+                    'active'       => 'Actief',
+                    'inactive'     => 'Inactief',
+                    'sort-order'   => 'Sorteervolgorde',
+                    'id'           => 'ID',
+                    'type'         => 'Type',
+                    'name'         => 'Naam',
+                    'channel_name' => 'Kanaalnaam',
                 ],
             ],
 
@@ -2583,6 +2584,7 @@ return [
                 'edit'                          => 'Bewerken',
                 'back'                          => 'Terug',
                 'preview'                       => 'Voorbeeld',
+                'channels'                      => 'kanalen',
             ],
 
             'create-success' => 'Thema succesvol aangemaakt',

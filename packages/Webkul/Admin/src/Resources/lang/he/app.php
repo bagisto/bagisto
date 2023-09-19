@@ -2508,15 +2508,16 @@ return [
                 'create-btn' => 'יצירת ערכת נושא',
 
                 'datagrid' => [
-                    'view'       => 'הצגה',
-                    'delete'     => 'מחיקה',
-                    'status'     => 'סטטוס',
-                    'active'     => 'פעיל',
-                    'inactive'   => 'לא פעיל',
-                    'sort-order' => 'סדר מיון',
-                    'id'         => 'מזהה',
-                    'type'       => 'סוג',
-                    'name'       => 'שם',
+                    'view'         => 'צפייה',
+                    'delete'       => 'מחיקה',
+                    'status'       => 'סטטוס',
+                    'active'       => 'פעיל',
+                    'inactive'     => 'לא פעיל',
+                    'sort-order'   => 'סדר מיון',
+                    'id'           => 'מזהה',
+                    'type'         => 'סוג',
+                    'name'         => 'שם',
+                    'channel_name' => 'שם הערוץ',
                 ],
             ],
 
@@ -2583,6 +2584,7 @@ return [
                 'edit'                          => 'ערוך',
                 'back'                          => 'חזור',
                 'preview'                       => 'תצוגה מקדימה',
+                'channels'                      => 'ערוצים',
             ],
 
             'create-success' => 'ערכת הנושא נוצרה בהצלחה',
