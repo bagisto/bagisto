@@ -348,7 +348,7 @@
                                 {{ $comment->comment }}
                             </p>
 
-                            <p class="text-gray-600 ">  
+                            <p class="text-gray-600">  
                                 @if ($comment->customer_notified)
                                     @lang('admin::app.sales.orders.view.customer-notified', ['date' => core()->formatDate($comment->created_at, 'Y-m-d H:i:s a')])
                                 @else
