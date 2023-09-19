@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Checkout\Http\Requests;
+namespace Webkul\Shop\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Webkul\Core\Rules\AlphaNumericSpace;
