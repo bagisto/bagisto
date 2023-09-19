@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
 use Webkul\Admin\DataGrids\Settings\InventorySourcesDataGrid;
-use Webkul\Inventory\Http\Requests\InventorySourceRequest;
+use Webkul\Admin\Http\Requests\InventorySourceRequest;
 
 class InventorySourceController extends Controller
 {

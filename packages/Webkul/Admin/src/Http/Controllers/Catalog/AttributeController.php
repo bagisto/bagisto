@@ -6,7 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Core\Http\Requests\MassDestroyRequest;
+use Webkul\Admin\Http\Requests\MassDestroyRequest;
 use Webkul\Core\Rules\Code;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Admin\DataGrids\Catalog\AttributeDataGrid;

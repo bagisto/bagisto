@@ -5,8 +5,8 @@ namespace Webkul\Admin\Http\Controllers\Customers;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Http\JsonResponse;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Core\Http\Requests\MassDestroyRequest;
-use Webkul\Core\Http\Requests\MassUpdateRequest;
+use Webkul\Admin\Http\Requests\MassDestroyRequest;
+use Webkul\Admin\Http\Requests\MassUpdateRequest;
 use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Admin\DataGrids\Customers\ReviewDataGrid;
 
