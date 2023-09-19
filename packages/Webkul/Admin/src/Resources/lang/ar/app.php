@@ -2503,15 +2503,17 @@ return [
                 'create-btn' => 'إنشاء سمة',
 
                 'datagrid'   => [
-                    'view'       => 'عرض',
-                    'delete'     => 'حذف',
-                    'status'     => 'الحالة',
-                    'active'     => 'نشط',
-                    'inactive'   => 'غير نشط',
-                    'sort-order' => 'ترتيب الفرز',
-                    'id'         => 'المعرف',
-                    'type'       => 'النوع',
-                    'name'       => 'الاسم',
+                    'view'         => 'عرض',
+                    'delete'       => 'حذف',
+                    'status'       => 'الحالة',
+                    'active'       => 'نشط',
+                    'inactive'     => 'غير نشط',
+                    'sort-order'   => 'ترتيب الفرز',
+                    'id'           => 'المعرف',
+                    'type'         => 'النوع',
+                    'name'         => 'الاسم',
+                    'channel_name' => 'اسم القناة',
+
                 ]
             ],
 

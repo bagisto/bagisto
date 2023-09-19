@@ -1038,30 +1038,23 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
-                                <x-admin::form.control-group.label
-                                    for="channel_id"
-                                    class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
-                                >
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.channels')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
                                     type="select"
                                     name="channel_id"
-                                    :value="$theme->channel_id"
                                     rules="required"
-                                    :label="trans('admin::app.settings.themes.edit.channels')"
+                                    :value="$theme->channel_id"
                                 >
                                     @foreach($channels as $channel)
-                                    
-                                    @endforeach
+                                        <option value="{{ $channel->id }}">{{ $channel->name }}</option>
+                                    @endforeach 
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error
-                                    control-name="channel_id"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group>
