@@ -405,6 +405,7 @@ return [
         'name'                   => 'නම',
         'qty'                    => 'ප්රමාණය',
         'offers'                 => 'ගින්දර :qty සඳහා :price එක්ක වෙනස් කර :discount%',
+        'tax-inclusive'          => 'සියලු බද්දක් සහිත',
 
         'sort-by'                => [
             'title'   => 'වකුගඩය සම්පූර්ණවේ',
