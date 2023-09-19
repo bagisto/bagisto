@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Marketing\Communications;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Marketing\Repositories\CampaignRepository;
@@ -139,9 +139,9 @@ class CampaignController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id): JsonResource
+    public function destroy($id): JsonResponse
     {
         $this->campaignRepository->findOrFail($id);
 
@@ -152,13 +152,13 @@ class CampaignController extends Controller
 
             Event::dispatch('marketing.campaigns.delete.after', $id);
 
-            return new JsonResource([
+            return new JsonResponse([
                 'message' => trans('admin::app.marketing.communications.campaigns.delete-success'),
             ]);
         } catch (\Exception $e) {
         }
 
-        return new JsonResource([
+        return new JsonResponse([
             'message' => trans('admin::app.marketing.communications.campaigns.delete-failed', ['name' => 'admin::app.marketing.communications.campaigns.email-campaign']),
         ], 500);
     }

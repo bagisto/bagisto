@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Marketing\Communications;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\JsonResponse;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\SubscribersListRepository;
 use Webkul\Admin\DataGrids\Marketing\Communications\NewsLetterDataGrid;
@@ -36,13 +36,13 @@ class SubscriptionController extends Controller
      * Subscriber Details
      *
      * @param  int  $id
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function edit($id): JsonResource
+    public function edit($id): JsonResponse
     {
         $subscriber = $this->subscribersListRepository->findOrFail($id);
 
-        return new JsonResource([
+        return new JsonResponse([
             'data'  =>  $subscriber,
         ]);
     }

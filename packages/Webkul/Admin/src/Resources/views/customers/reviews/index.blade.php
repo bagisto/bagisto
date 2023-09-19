@@ -419,7 +419,7 @@
                             .then((response) => {
                                 this.$refs.review_data.get();
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                             })
                             .catch(error => {
                                 if (error.response.status == 422) {
