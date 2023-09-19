@@ -13,25 +13,24 @@
 @endphp
 
 <x-admin::form.control-group>
-    {{-- Title of the input field --}}
-    <div class="flex justify-between">
-        <x-admin::form.control-group.label
-            :for="$name"
-            :class="$validations"
-        >
-            @lang($field['title'])
-        </x-admin::form.control-group.label>
-        
-        <x-admin::form.control-group.label
-            :for="$name"
-        >
-            <span class="flex">{{ $channelLocaleInfo }}</span>
-        </x-admin::form.control-group.label>
-    </div>
-
     @if ($field['type'] == 'depends')
         @include('admin::configuration.dependent-field-type')
     @else
+        {{-- Title of the input field --}}
+        <div class="flex justify-between">
+            <x-admin::form.control-group.label
+                :for="$name"
+            >
+                @lang($field['title'])
+            </x-admin::form.control-group.label>
+            
+            <x-admin::form.control-group.label
+                :for="$name"
+            >
+                <span class="flex">{{ $channelLocaleInfo }}</span>
+            </x-admin::form.control-group.label>
+        </div>
+
         {{-- Text input --}}
         @if ($field['type'] == 'text')
             <x-admin::form.control-group.control
