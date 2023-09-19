@@ -28,7 +28,7 @@
         <script type="text/x-template" id="v-create-theme-form-template">
             <div>
                 <!-- Theme Create Button -->
-                @if (bouncer()->hasPermission('settings.users.theme.create'))
+                @if (bouncer()->hasPermission('settings.users.themes.create'))
                     <button
                         type="button"
                         class="primary-button"

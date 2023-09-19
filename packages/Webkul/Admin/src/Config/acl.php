@@ -696,22 +696,22 @@ return [
         'route' => 'admin.settings.roles.delete',
         'sort'  => 3,
     ], [
-        'key'   => 'settings.users.theme',
+        'key'   => 'settings.users.themes',
         'name'  => 'admin::app.acl.themes',
         'route' => 'admin.settings.themes.index',
         'sort'  => 8,
     ], [
-        'key'   => 'settings.users.theme.create',
+        'key'   => 'settings.users.themes.create',
         'name'  => 'admin::app.acl.create',
         'route' => 'admin.settings.themes.store',
         'sort'  => 1,
     ], [
-        'key'   => 'settings.users.theme.edit',
+        'key'   => 'settings.users.themes.edit',
         'name'  => 'admin::app.acl.edit',
         'route' => 'admin.settings.themes.edit',
         'sort'  => 2,
     ], [
-        'key'   => 'settings.users.theme.delete',
+        'key'   => 'settings.users.themes.delete',
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.settings.themes.delete',
         'sort'  => 3,

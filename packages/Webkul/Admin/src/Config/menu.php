@@ -7,35 +7,30 @@ return [
         'route'      => 'admin.dashboard.index',
         'sort'       => 1,
         'icon'       => 'icon-dashboard',
-        'icon-class' => 'dashboard-icon',
     ], [
         'key'        => 'sales',
         'name'       => 'admin::app.components.layouts.sidebar.sales',
         'route'      => 'admin.sales.orders.index',
         'sort'       => 2,
         'icon'       => 'icon-sales',
-        'icon-class' => 'sales-icon',
     ], [
         'key'        => 'sales.orders',
         'name'       => 'admin::app.components.layouts.sidebar.orders',
         'route'      => 'admin.sales.orders.index',
         'sort'       => 1,
         'icon'       => '',
-        'icon-class' => '',
     ], [
         'key'        => 'sales.shipments',
         'name'       => 'admin::app.components.layouts.sidebar.shipments',
         'route'      => 'admin.sales.shipments.index',
         'sort'       => 2,
         'icon'       => '',
-        'icon-class' => '',
     ], [
         'key'        => 'sales.invoices',
         'name'       => 'admin::app.components.layouts.sidebar.invoices',
         'route'      => 'admin.sales.invoices.index',
         'sort'       => 3,
         'icon'       => '',
-        'icon-class' => '',
     ], [
         'key'        => 'sales.refunds',
         'name'       => 'admin::app.components.layouts.sidebar.refunds',
@@ -54,7 +49,6 @@ return [
         'route'      => 'admin.catalog.products.index',
         'sort'       => 3,
         'icon'       => 'icon-product',
-        'icon-class' => 'catalog-icon',
     ], [
         'key'        => 'catalog.products',
         'name'       => 'admin::app.components.layouts.sidebar.products',
@@ -85,7 +79,6 @@ return [
         'route'      => 'admin.customers.customers.index',
         'sort'       => 4,
         'icon'       => 'icon-customer-2',
-        'icon-class' => 'customer-icon',
     ], [
         'key'        => 'customers.customers',
         'name'       => 'admin::app.components.layouts.sidebar.customers',
@@ -105,17 +98,16 @@ return [
         'sort'       => 3,
         'icon'       => '',
     ], [
-        'key'        => 'configuration',
-        'name'       => 'admin::app.components.layouts.sidebar.configure',
-        'route'      => 'admin.configuration.index',
-        'sort'       => 7,
-        'icon'       => 'icon-configuration',
-        'icon-class' => 'configuration-icon',
+        'key'        => 'cms',
+        'name'       => 'admin::app.components.layouts.sidebar.cms',
+        'route'      => 'admin.cms.index',
+        'sort'       => 5,
+        'icon'       => 'icon-cms',
     ], [
         'key'        => 'settings',
         'name'       => 'admin::app.components.layouts.sidebar.settings',
         'route'      => 'admin.settings.locales.index',
-        'sort'       => 6,
+        'sort'       => 7,
         'icon'       => 'icon-settings',
         'icon-class' => 'settings-icon',
     ], [
@@ -161,10 +153,22 @@ return [
         'sort'       => 7,
         'icon'       => '',
     ], [
+        'key'        => 'settings.themes',
+        'name'       => 'Themes',
+        'route'      => 'admin.settings.themes.index',
+        'sort'       => 8,
+        'icon'       => '',
+    ], [
+        'key'        => 'configuration',
+        'name'       => 'admin::app.components.layouts.sidebar.configure',
+        'route'      => 'admin.configuration.index',
+        'sort'       => 8,
+        'icon'       => 'icon-configuration',
+    ], [
         'key'        => 'settings.taxes',
         'name'       => 'admin::app.components.layouts.sidebar.taxes',
         'route'      => 'admin.settings.taxes.categories.index',
-        'sort'       => 8,
+        'sort'       => 9,
         'icon'       => '',
     ], [
         'key'        => 'settings.taxes.tax-categories',
@@ -179,16 +183,10 @@ return [
         'sort'       => 2,
         'icon'       => '',
     ], [
-        'key'        => 'settings.theme',
-        'name'       => 'Themes',
-        'route'      => 'admin.settings.themes.index',
-        'sort'       => 7,
-        'icon'       => '',
-    ], [
         'key'        => 'marketing',
         'name'       => 'admin::app.components.layouts.sidebar.marketing',
         'route'      => 'admin.marketing.promotions.catalog_rules.index',
-        'sort'       => 5,
+        'sort'       => 6,
         'icon'       => 'icon-promotion',
         'icon-class' => 'promotion-icon',
     ], [
@@ -245,12 +243,5 @@ return [
         'route'      => 'admin.marketing.promotions.sitemaps.index',
         'sort'       => 3,
         'icon'       => '',
-    ], [
-        'key'        => 'cms',
-        'name'       => 'admin::app.components.layouts.sidebar.cms',
-        'route'      => 'admin.cms.index',
-        'sort'       => 5,
-        'icon'       => 'icon-cms',
-        'icon-class' => 'cms-icon',
     ]
 ];
