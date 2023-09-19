@@ -2836,7 +2836,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Configurar lista de deseos, suscripción al boletín, verificación de correo electrónico y inicio de sesión social.',
+                    'settings-info' => 'Configurar suscripciones al boletín, verificaciones de correo electrónico y inicio de sesión social.',
                     'title'         => 'Configuración',
 
                     'newsletter' => [

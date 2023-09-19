@@ -2836,7 +2836,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Defina lista de desejos, assinaturas de boletim informativo, verificação de e-mail e login social.',
+                    'settings-info' => 'Configurar subscrições de newsletter, verificações de email e login social.',
                     'title'         => 'Configurações',
 
                     'newsletter' => [

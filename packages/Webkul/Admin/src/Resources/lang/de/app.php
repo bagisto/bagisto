@@ -2836,7 +2836,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Wunschliste, Newsletter-Abonnement, E-Mail-Verifikation und soziale Anmeldung einrichten.',
+                    'settings-info' => 'Newsletter-Abonnements, E-Mail-Verifizierungen und soziale Anmeldung einrichten.',
                     'title'         => 'Einstellungen',
 
                     'newsletter' => [

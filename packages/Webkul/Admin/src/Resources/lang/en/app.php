@@ -2839,7 +2839,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Set wishlist, newsletter subscriptions, email verifications and social login.',
+                    'settings-info' => 'Set newsletter subscriptions, email verifications and social login.',
                     'title'         => 'Settings',
 
                     'newsletter' => [

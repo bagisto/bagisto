@@ -2836,7 +2836,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => '设置愿望清单、新闻订阅、电子邮件验证和社交登录。',
+                    'settings-info' => '设置通讯订阅、电子邮件验证和社交登录。',
                     'title'         => '设置',
 
                     'newsletter' => [

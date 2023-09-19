@@ -2836,7 +2836,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Stel verlanglijst, abonnementen op nieuwsbrieven, e-mailverificaties en sociale login in.',
+                    'settings-info' => 'Stel nieuwsbriefabonnementen, e-mailverificaties en sociale login in.',
                     'title'         => 'Instellingen',
 
                     'newsletter' => [
