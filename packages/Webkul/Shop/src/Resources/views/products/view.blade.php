@@ -105,10 +105,11 @@
                             )
                                 <a
                                     href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
-                                    class="flex text-blue-500 underline"
                                     download="{{ $customAttributeValue['label'] }}"
                                 >
-                                    {{ $customAttributeValue['label'] }}
+                                    <p class="text-[16px] text-blue-500 underline">
+                                        {{ $customAttributeValue['label'] }}
+                                    </p>
                                 </a>
                             @else 
                                 <div class="grid">
@@ -172,11 +173,25 @@
                                 </p>
                             </div>
 
-                            <div class="grid">
-                                <p class="text-[16px] text-[#7D7D7D]">
-                                    {{ $customAttributeValue['value']??'-' }}
-                                </p>
-                            </div>
+                            @if (
+                                $customAttributeValue['type'] == 'file'
+                                || $customAttributeValue['type'] == 'image'
+                            )
+                                <a
+                                    href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
+                                    download="{{ $customAttributeValue['label'] }}"
+                                >
+                                    <p class="text-[16px] text-blue-500 underline">
+                                        {{ $customAttributeValue['label'] }}
+                                    </p>
+                                </a>
+                            @else 
+                                <div class="grid">
+                                    <p class="text-[16px] text-[#7D7D7D]">
+                                        {{ $customAttributeValue['value'] ?? '-' }}
+                                    </p>
+                                </div>
+                            @endif
                         @endforeach
                     </p>
                 </div>
