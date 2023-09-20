@@ -50,7 +50,7 @@
             </p>
 
             <p class="text-[14px] text-[#7D7D7D] font-medium">
-                {{ $customer->gender }}
+                {{ $customer->gender ?? '-'}}
             </p>
         </div>
 
@@ -60,7 +60,7 @@
             </p>
 
             <p class="text-[14px] text-[#7D7D7D] font-medium">
-                {{ $customer->date_of_birth }}
+                {{ $customer->date_of_birth ?? '-' }}
             </p>
         </div>
 
