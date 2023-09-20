@@ -100,7 +100,7 @@ return [
             'product-number'              => 'Producto - :product_number',
             'product-image'               => 'Imagen de Producto',
             'pay-by'                      => 'Pago Por - :method',
-            'product-info'                => 'Para agregar productos relacionados sobre la marcha.',
+            'product-info'                => 'Agregar productos relacionados sobre la marcha.',
             'revenue'                     => 'Ingresos :total',
             'stock-threshold'             => 'Umbral de Stock',
             'sale-count'                  => ':count Ventas',
@@ -595,19 +595,19 @@ return [
 
                 'links' => [
                     'related-products' => [
-                        'empty-info' => 'Para agregar productos relacionados de forma rápida.',
+                        'empty-info' => ' Agregar productos relacionados sobre la marcha.',
                         'info'       => 'Además del producto que el cliente está viendo, se le presentan productos relacionados.',
                         'title'      => 'Productos Relacionados',
                     ],
 
                     'up-sells' => [
-                        'empty-info' => 'Para agregar productos de venta adicional de forma rápida.',
+                        'empty-info' => 'Agregue productos de venta adicional sobre la marcha.',
                         'info'       => 'Se presenta al cliente productos de venta adicional, que sirven como una alternativa premium o de mayor calidad al producto que están viendo actualmente.',
                         'title'      => 'Productos de Venta Adicional',
                     ],
 
                     'cross-sells' => [
-                        'empty-info' => 'Para agregar productos de venta cruzada de forma rápida.',
+                        'empty-info' => 'Agregar productos de venta cruzada sobre la marcha.',
                         'info'       => 'Junto al carrito de compras, encontrará estos productos de "compra impulsiva" posicionados como ventas cruzadas para complementar los productos que ya ha agregado a su carrito.',
                         'title'      => 'Productos de Venta Cruzada',
                     ],

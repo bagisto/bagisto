@@ -100,7 +100,7 @@ return [
             'product-number'              => '製品 - :product_number',
             'product-image'               => '製品画像',
             'pay-by'                      => '支払い方法 - :method',
-            'product-info'                => '関連製品を追加するには。',
+            'product-info'                => ' 移動中に関連する製品を追加します。',
             'revenue'                     => '収益 :total',
             'stock-threshold'             => '在庫閾値',
             'sale-count'                  => ':count 販売',
@@ -595,19 +595,19 @@ return [
 
                 'links' => [
                     'related-products' => [
-                        'empty-info' => '関連製品を追加するには。',
+                        'empty-info' => '移動中に関連する製品を追加します。',
                         'info'       => 'お客様が表示中の製品に加えて、関連製品が表示されます。',
                         'title'      => '関連製品',
                     ],
 
                     'up-sells' => [
-                        'empty-info' => 'アップセル製品を追加するには。',
+                        'empty-info' => '移動中に追加の販売商品を追加します。',
                         'info'       => 'お客様には、現在表示している製品のプレミアムまたは高品質の代替製品として機能するアップセル製品が提示されます。',
                         'title'      => 'アップセル製品',
                     ],
 
                     'cross-sells' => [
-                        'empty-info' => 'クロスセル製品を追加するには。',
+                        'empty-info' => '移動中にクロスセル商品を追加します。',
                         'info'       => 'ショッピングカートの隣には、「インパルス購入」商品として配置されるクロスセル製品が表示され、すでにカートに追加された商品を補完します。',
                         'title'      => 'クロスセル製品',
                     ],

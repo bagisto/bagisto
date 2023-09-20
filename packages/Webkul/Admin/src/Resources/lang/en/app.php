@@ -100,7 +100,7 @@ return [
             'product-number'              => 'Product - :product_number',
             'product-image'               => 'Product Image',
             'pay-by'                      => 'Pay By - :method',
-            'product-info'                => 'To add related products on a go.',
+            'product-info'                => 'Add related products on the go.',
             'revenue'                     => 'Revenue :total',
             'stock-threshold'             => 'Stock Threshold',
             'sale-count'                  => ':count Sales',
@@ -595,19 +595,19 @@ return [
 
                 'links' => [
                     'related-products' => [
-                        'empty-info' => 'To add related products on a go.',
+                        'empty-info' => 'Add related products on the go.',
                         'info'       => 'In addition to the product the customer is viewing, they are presented with related products.',
                         'title'      => 'Related Products',
                     ],
 
                     'up-sells' => [
-                        'empty-info' => 'To add up sells products on a go.',
+                        'empty-info' => 'Add up sells products on the go.',
                         'info'       => 'The customer is presented with an up-sell products, which serves as a premium or higher-quality alternative to the product they are currently viewing.',
                         'title'      => 'Up-Sell Products',
                     ],
 
                     'cross-sells' => [
-                        'empty-info' => 'To add cross sells products on a go.',
+                        'empty-info' => 'Add cross sells products on the go.',
                         'info'       => 'Adjacent to the shopping cart, you\'ll find these \"impulse-buy\" products positioned as cross-sells to complement the items already added to your cart.',
                         'title'      => 'Cross-Sell Products',
                     ],

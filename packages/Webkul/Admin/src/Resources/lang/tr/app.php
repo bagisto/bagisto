@@ -100,7 +100,7 @@ return [
             'product-number'              => 'Ürün - :product_number',
             'product-image'               => 'Ürün Resmi',
             'pay-by'                      => ':method ile Ödeme Yapıldı',
-            'product-info'                => 'Hızlıca ilişkili ürünleri eklemek için.',
+            'product-info'                => 'Yoldayken ilgili ürünleri ekleyin.',
             'revenue'                     => 'Gelir: :total',
             'stock-threshold'             => 'Stok Eşiği',
             'sale-count'                  => ':count Satış',
@@ -595,19 +595,19 @@ return [
 
                 'links' => [
                     'related-products' => [
-                        'empty-info' => 'Ürünleri ilişkilendirmek için.',
+                        'empty-info' => 'Yoldayken ilgili ürünleri ekleyin.',
                         'info'       => 'Müşteri görüntülediği ürüne ek olarak ilişkili ürünlerle karşılaştırılır.',
                         'title'      => 'İlgili Ürünler',
                     ],
 
                     'up-sells' => [
-                        'empty-info' => 'Ürünleri satmak için.',
+                        'empty-info' => 'Yoldayken satış ürünleri ekleyin.',
                         'info'       => 'Müşteri, şu anda görüntüledikleri ürünün bir alternatifi olarak hizmet eden üst satış ürünleriyle karşılaşır.',
                         'title'      => 'Üst Satış Ürünleri',
                     ],
 
                     'cross-sells' => [
-                        'empty-info' => 'Ürünleri satmak için.',
+                        'empty-info' => 'Yoldayken çapraz satış ürünleri ekleyin.',
                         'info'       => 'Alışveriş sepetine bitişik olarak, zaten sepetinize eklenen ürünleri tamamlamak için çapraz satış olarak konumlandırılan bu "dürtü alışverişi" ürünlerini bulacaksınız.',
                         'title'      => 'Çapraz Satış Ürünleri',
                     ],

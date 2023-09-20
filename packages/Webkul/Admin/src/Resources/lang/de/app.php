@@ -100,7 +100,7 @@ return [
             'product-number'              => 'Produkt - :product_number',
             'product-image'               => 'Produktbild',
             'pay-by'                      => 'Bezahlen mit - :method',
-            'product-info'                => 'Um verwandte Produkte hinzuzufügen.',
+            'product-info'                => 'Fügen Sie verwandte Produkte unterwegs hinzu.',
             'revenue'                     => 'Einnahmen: :total',
             'stock-threshold'             => 'Lagerbestandsschwelle',
             'sale-count'                  => ':count Verkäufe',
@@ -595,19 +595,19 @@ return [
 
                 'links' => [
                     'related-products' => [
-                        'empty-info' => 'Um verwandte Produkte hinzuzufügen.',
+                        'empty-info' => 'Fügen Sie verwandte Produkte unterwegs hinzu.',
                         'info'       => 'Zusätzlich zum Produkt, das der Kunde gerade ansieht, werden ihm verwandte Produkte angezeigt.',
                         'title'      => 'Verwandte Produkte',
                     ],
 
                     'up-sells' => [
-                        'empty-info' => 'Um Upsell-Produkte hinzuzufügen.',
+                        'empty-info' => 'Fügen Sie unterwegs Zusatzverkaufsprodukte hinzu.',
                         'info'       => 'Dem Kunden werden Upsell-Produkte präsentiert, die als Premium- oder hochwertigere Alternative zum derzeit angezeigten Produkt dienen.',
                         'title'      => 'Upsell-Produkte',
                     ],
 
                     'cross-sells' => [
-                        'empty-info' => 'Um Cross-Sell-Produkte hinzuzufügen.',
+                        'empty-info' => 'Fügen Sie unterwegs Cross-Selling-Produkte hinzu.',
                         'info'       => 'Direkt neben dem Warenkorb finden Sie diese "Impulskauf"-Produkte, die als Cross-Sells positioniert sind, um die bereits in den Warenkorb gelegten Artikel zu ergänzen.',
                         'title'      => 'Cross-Sell-Produkte',
                     ],
