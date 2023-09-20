@@ -162,6 +162,11 @@
                                 @endforeach
 
                                 @includeWhen($group->name == 'Price', 'admin::catalog.products.edit.price.group')
+
+                                @includeWhen(
+                                    $group->name == 'Inventories' && ! $product->getTypeInstance()->isComposite(),
+                                    'admin::catalog.products.edit.inventories'
+                                )
                             </div>
 
                             {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->name . '.after', ['product' => $product]) !!}
@@ -186,9 +191,6 @@
                             @includeIf($view)
                         @endforeach
                     @else
-                        {{-- Inventory View Blade File --}}
-                        @includeWhen(! $product->getTypeInstance()->isComposite(), 'admin::catalog.products.edit.inventory')
-
                         {{-- Categories View Blade File --}}
                         @include('admin::catalog.products.edit.categories')
                     @endif

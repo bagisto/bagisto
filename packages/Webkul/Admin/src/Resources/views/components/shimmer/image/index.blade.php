@@ -1,5 +1,5 @@
 <v-shimmer-image {{ $attributes }}>
-    <div {{ $attributes->merge(['class' => 'shimmer bg-[#F5F5F5]']) }}></div>
+    <div {{ $attributes->merge(['class' => 'shimmer bg-neutral-100']) }}></div>
 </v-shimmer-image>
 
 @pushOnce('scripts')

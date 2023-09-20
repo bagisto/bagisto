@@ -14,12 +14,12 @@
     >
         <div>
             <div
-                class="flex gap-[15px] justify-center pt-[8px] bg-[#F5F5F5] max-sm:hidden"
+                class="flex gap-[15px] justify-center pt-[8px] bg-neutral-100 max-sm:hidden"
                 :style="positionStyles"
             >
                 <div
                     v-for="tab in tabs"
-                    class="pb-[14px] px-[10px] text-[16px] font-medium text-[#7D7D7D] cursor-pointer"
+                    class="pb-[14px] px-[10px] text-[16px] font-medium text-gray-300 cursor-pointer"
                     :class="{'border-navyBlue border-b-[2px] text-black transition': tab.isActive }"
                     v-text="tab.title"
                     @click="change(tab)"

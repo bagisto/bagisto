@@ -323,6 +323,7 @@
                                     <button
                                         type="submit"
                                         class="secondary-button w-full max-w-full"
+                                        {{ ! $product->isSaleable(1) ? 'disabled' : '' }}
                                     >
                                         @lang('shop::app.products.add-to-cart')
                                     </button>

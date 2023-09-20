@@ -782,6 +782,10 @@
 
                                         <!-- Images -->
                                         <div class="mb-[10px]">
+                                            <p class="mb-[10px] text-gray-800 font-semibold">
+                                                @lang('admin::app.catalog.products.edit.types.configurable.edit.images')
+                                            </p>
+
                                             <v-media-images
                                                 name="images"
                                                 v-bind:allow-multiple="true"
