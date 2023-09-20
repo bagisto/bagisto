@@ -3,14 +3,16 @@
 return [
     'customers' => [
         'forgot-password' => [
-            'title'                => 'Passwort wiederherstellen',
+            'back'                 => 'Zurück zur Anmeldung?',
+            'email-not-exist'      => "Wir konnten keinen Benutzer mit dieser E-Mail-Adresse finden.",
             'email'                => 'E-Mail',
             'forgot-password-text' => 'Wenn Sie Ihr Passwort vergessen haben, stellen Sie es wieder her, indem Sie Ihre E-Mail-Adresse eingeben.',
-            'submit'               => 'Passwort zurücksetzen',
-            'page-title'           => 'Passwort vergessen?',
-            'back'                 => 'Zurück zur Anmeldung?',
-            'sign-in-button'       => 'Anmelden',
             'footer'               => '© Copyright 2010 - 2022, Webkul Software (in Indien registriert). Alle Rechte vorbehalten.',
+            'page-title'           => 'Passwort vergessen?',
+            'reset-link-sent'      => 'Wir haben Ihnen den Link zum Zurücksetzen Ihres Passworts per E-Mail gesendet.',
+            'submit'               => 'Passwort zurücksetzen',
+            'sign-in-button'       => 'Anmelden',
+            'title'                => 'Passwort wiederherstellen',
         ],
 
         'reset-password' => [
@@ -250,21 +252,22 @@ return [
             ],
 
             'wishlist' => [
-                'page-title'         => 'Wunschliste',
-                'title'              => 'Wunschliste',
                 'color'              => 'Farbe',
-                'remove'             => 'Entfernen',
                 'delete-all'         => 'Alle löschen',
                 'empty'              => 'Es wurden keine Produkte zur Wunschliste hinzugefügt.',
                 'move-to-cart'       => 'In den Warenkorb legen',
                 'moved-success'      => 'Artikel erfolgreich in den Warenkorb verschoben',    
+                'moved'              => 'Artikel erfolgreich in den Warenkorb verschoben',
+                'page-title'         => 'Wunschliste',
                 'profile'            => 'Profil',
+                'remove'             => 'Entfernen',
                 'removed'            => 'Artikel erfolgreich aus der Wunschliste entfernt',
                 'remove-fail'        => 'Artikel kann nicht aus der Wunschliste entfernt werden',
-                'moved'              => 'Artikel erfolgreich in den Warenkorb verschoben',
                 'product-removed'    => 'Produkt ist nicht mehr verfügbar, da es vom Administrator entfernt wurde',
                 'remove-all-success' => 'Alle Artikel aus Ihrer Wunschliste wurden entfernt',
+                'success'            => 'Artikel erfolgreich zur Wunschliste hinzugefügt',
                 'see-details'        => 'Details anzeigen',
+                'title'              => 'Wunschliste',
             ],
         ],
     ],

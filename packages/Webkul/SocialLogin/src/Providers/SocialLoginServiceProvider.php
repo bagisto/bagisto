@@ -16,8 +16,6 @@ class SocialLoginServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
-        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'social_login');
-
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'social_login');
 
         $this->app->register(EventServiceProvider::class);

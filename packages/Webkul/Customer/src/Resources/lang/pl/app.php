@@ -5,10 +5,10 @@ return [
         'system' => [
             'captcha' => [
                 'validations' => [
-                    'required' => '请选择验证码',
-                    'captcha'  => '出问题了! 请再试一次.',
+                    'required' => 'Proszę wybrać CAPTCHA',
+                    'captcha'  => 'Wystąpił błąd! Spróbuj ponownie.',
                 ],
             ],
         ],
-    ],
+    ],    
 ];

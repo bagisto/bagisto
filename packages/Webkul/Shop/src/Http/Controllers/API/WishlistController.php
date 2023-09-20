@@ -49,7 +49,7 @@ class WishlistController extends APIController
 
         if (! $product) {
             return new JsonResource([
-                'message' => trans('customer::app.product-removed'),
+                'message' => trans('shop::app.customers.account.wishlist.product-removed'),
             ]);
         }
 
@@ -63,7 +63,7 @@ class WishlistController extends APIController
             $this->wishlistRepository->create($data);
 
             return new JsonResource([
-                'message' => trans('customer::app.wishlist.success'),
+                'message' => trans('shop::app.customers.account.wishlist.success'),
             ]);
         }
 
@@ -73,7 +73,7 @@ class WishlistController extends APIController
         ]);
 
         return new JsonResource([
-            'message' => trans('customer::app.wishlist.removed'),
+            'message' => trans('shop::app.customers.account.wishlist.removed'),
         ]);
     }
 
