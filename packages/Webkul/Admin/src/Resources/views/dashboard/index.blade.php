@@ -30,7 +30,7 @@
                     @lang('admin::app.dashboard.index.overall-details')
                 </p>
 
-                <div class="p-[16px] rounded-[4px]  bg-white dark:bg-gray-900  dark:bg-gray-900 box-shadow">
+                <div class="p-[16px] rounded-[4px]  bg-white  dark:bg-gray-900 box-shadow">
                     <div class="flex gap-[16px] flex-wrap ">
                         {{-- Total Sales --}}
                         <div class="flex gap-[10px] flex-1 min-w-[200px]">
