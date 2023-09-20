@@ -20,7 +20,7 @@ return new class extends Migration
                 'position'          => 1,
                 'value_per_channel' => 1,
                 'default_value'     => 1,
-                'is_user_defined'   => 1,
+                'is_user_defined'   => 0,
                 'created_at'        => Carbon::now(),
                 'updated_at'        => Carbon::now(),
             ]);
