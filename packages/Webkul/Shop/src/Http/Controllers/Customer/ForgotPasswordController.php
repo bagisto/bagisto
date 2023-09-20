@@ -24,7 +24,8 @@ class ForgotPasswordController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @param ForgotPasswordRequest $request
+     * @return void
      */
     public function store(ForgotPasswordRequest $request)
     {
@@ -34,7 +35,7 @@ class ForgotPasswordController extends Controller
             $response = $this->broker()->sendResetLink($request->only(['email']));
 
             if ($response == Password::RESET_LINK_SENT) {
-                session()->flash('success', trans('customer::app.forget_password.reset_link_sent'));
+                session()->flash('success', trans('shop::app.customers.forgot-password.reset-link-sent'));
 
                 return back();
             }
@@ -42,10 +43,10 @@ class ForgotPasswordController extends Controller
             return back()
                 ->withInput($request->only(['email']))
                 ->withErrors([
-                    'email' => trans('customer::app.forget_password.email_not_exist'),
+                    'email' => trans('shop::app.customers.forgot-password.email-not-exist'),
                 ]);
         } catch (\Swift_RfcComplianceException $e) {
-            session()->flash('success', trans('customer::app.forget_password.reset_link_sent'));
+            session()->flash('success', trans('shop::app.customers.forgot-password.reset-link-sent'));
 
             return redirect()->back();
         } catch (\Exception $e) {
