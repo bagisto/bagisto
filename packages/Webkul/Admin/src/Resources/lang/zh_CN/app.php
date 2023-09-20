@@ -868,6 +868,7 @@ return [
                 'value-per-locale'      => '区域性值',
                 'value-per-channel'     => '渠道性值',
                 'yes'                   => '是',
+                'default-value'         => '默认值',
 
                 'option' => [
                     'color'    => '颜色样本',
@@ -929,6 +930,7 @@ return [
                 'value-per-locale'      => '区域性值',
                 'value-per-channel'     => '渠道性值',
                 'yes'                   => '是',
+                'default-value'         => '默认值',
 
                 'option' => [
                     'color'    => '颜色样本',

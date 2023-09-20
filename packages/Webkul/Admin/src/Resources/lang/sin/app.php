@@ -869,6 +869,7 @@ return [
                 'value-per-locale'      => 'භාවිතය පදනම',
                 'value-per-channel'     => 'චැනලයට පදනම',
                 'yes'                   => 'ඔව්',
+                'default-value'         => 'ස්ථිත අගය',
 
                 'option'                => [
                     'color'    => 'පරිස්වය සුහුජ්වය',
@@ -930,6 +931,7 @@ return [
                 'value-per-locale'      => 'පළාත අයිතමයන් සමඟ අගය',
                 'value-per-channel'     => 'චැනලය අයිතමයන් සමඟ අගය',
                 'yes'                   => 'ඔව්',
+                'default-value'         => 'ස්ථිත අගය',
 
                 'option' => [
                     'color'    => 'පැනස් ස්වැච්',

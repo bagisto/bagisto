@@ -868,6 +868,7 @@ return [
                 'value-per-locale'      => 'Valore per Locale',
                 'value-per-channel'     => 'Valore per Canale',
                 'yes'                   => 'Sì',
+                'default-value'         => 'Valore predefinito',
 
                 'option'                => [
                     'color'    => 'Campione di Colore',
@@ -929,6 +930,7 @@ return [
                 'value-per-locale'      => 'Valore per Locale',
                 'value-per-channel'     => 'Valore per Canale',
                 'yes'                   => 'Sì',
+                'default-value'         => 'Valore predefinito',
 
                 'option' => [
                     'color'    => 'Campione di Colore',

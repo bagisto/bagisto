@@ -868,6 +868,7 @@ return [
                 'value-per-locale'      => 'Значення за локаллю',
                 'value-per-channel'     => 'Значення за каналом',
                 'yes'                   => 'Так',
+                'default-value'         => 'Значення за замовчуванням',
 
                 'option'                => [
                     'color'    => 'Колір палітри',
@@ -929,6 +930,7 @@ return [
                 'value-per-locale'      => 'Значення За Мовою',
                 'value-per-channel'     => 'Значення За Каналом',
                 'yes'                   => 'Так',
+                'default-value'         => 'Значення за замовчуванням',
 
                 'option' => [
                     'color'    => 'Вибір Кольору',

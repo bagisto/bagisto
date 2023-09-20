@@ -868,6 +868,7 @@ return [
                 'value-per-locale'      => 'القيمة لكل لغة',
                 'value-per-channel'     => 'القيمة لكل قناة',
                 'yes'                   => 'نعم',
+                'default-value'         => 'القيمة الافتراضية',
 
                 'option'                => [
                     'color'     => 'عينة لون',
@@ -929,6 +930,7 @@ return [
                 'value-per-locale'       => 'القيمة لكل لغة',
                 'value-per-channel'      => 'القيمة لكل قناة',
                 'yes'                    => 'نعم',
+                'default-value'          => 'القيمة الافتراضية',
 
                 'option'                 => [
                     'color'     => 'عينة لون',

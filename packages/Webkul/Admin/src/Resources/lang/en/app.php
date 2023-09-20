@@ -868,6 +868,7 @@ return [
                 'value-per-locale'      => 'Value Per Locale',
                 'value-per-channel'     => 'Value Per Channel',
                 'yes'                   => 'Yes',
+                'default-value'         => 'Default Value',
 
                 'option'                => [
                     'color'    => 'Color Swatch',
@@ -929,6 +930,7 @@ return [
                 'value-per-locale'      => 'Value Per Locale',
                 'value-per-channel'     => 'Value Per Channel',
                 'yes'                   => 'Yes',
+                'default-value'         => 'Default Value',
 
                 'option' => [
                     'color'    => 'Color Swatch',

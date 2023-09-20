@@ -868,6 +868,7 @@ return [
                 'value-per-locale'      => 'লোকেল অনুসারে মান',
                 'value-per-channel'     => 'চ্যানেল অনুসারে মান',
                 'yes'                   => 'হ্যাঁ',
+                'default-value'         => 'ডিফল্ট মান',
 
                 'option' => [
                     'color'    => 'রঙ সোয়াচ',
@@ -929,6 +930,7 @@ return [
                 'value-per-locale'      => 'লোকেল অনুসারে মান',
                 'value-per-channel'     => 'চ্যানেল অনুসারে মান',
                 'yes'                   => 'হ্যাঁ',
+                'default-value'         => 'ডিফল্ট মান',
 
                 'option' => [
                     'color'    => 'রঙ সোয়াচ',
