@@ -100,7 +100,7 @@ return [
             'product-number'              => 'Produkt - :product_number',
             'product-image'               => 'Zdjęcie Produktu',
             'pay-by'                      => 'Płatność Przez - :method',
-            'product-info'                => 'Dodaj powiązane produkty na bieżąco.',
+            'product-info'                => 'Dodaj powiązane produkty w locie.',
             'revenue'                     => 'Dochód :total',
             'stock-threshold'             => 'Próg Stanu Magazynowego',
             'sale-count'                  => ':count Sprzedaże',
@@ -595,19 +595,19 @@ return [
 
                 'links' => [
                     'related-products' => [
-                        'empty-info' => 'Aby dodać powiązane produkty, wystarczy to zrobić.',
+                        'empty-info' => 'Dodaj powiązane produkty w locie.',
                         'info'       => 'Oprócz produktu, który ogląda klient, prezentowane są mu powiązane produkty.',
                         'title'      => 'Powiązane produkty',
                     ],
 
                     'up-sells' => [
-                        'empty-info' => 'Aby dodać produkty do sprzedaży krzyżowej, wystarczy to zrobić.',
+                        'empty-info' => 'Dodaj produkty do sprzedaży w locie.',
                         'info'       => 'Klientowi prezentowane są produkty do sprzedaży krzyżowej, które stanowią alternatywę o wyższej jakości lub jakości premium w stosunku do produktu, który aktualnie ogląda.',
                         'title'      => 'Produkty do sprzedaży krzyżowej',
                     ],
 
                     'cross-sells' => [
-                        'empty-info' => 'Aby dodać produkty do sprzedaży krzyżowej, wystarczy to zrobić.',
+                        'empty-info' => 'Dodaj produkty cross-sell w locie.',
                         'info'       => 'Obok koszyka zakupów znajdziesz te produkty typu "impuls zakupowy", które są pozycjonowane jako produkty do sprzedaży krzyżowej, aby uzupełnić towary już dodane do koszyka.',
                         'title'      => 'Produkty do sprzedaży krzyżowej',
                     ],
@@ -1972,6 +1972,7 @@ return [
             'meta-title'       => 'Tytuł Meta',
             'seo'              => 'SEO',
             'url-key'          => 'Klucz URL',
+            'description'      => 'Opis',
         ],
 
         'edit' => [
@@ -1988,6 +1989,7 @@ return [
             'meta-description' => 'Opis Meta',
             'meta-title'       => 'Tytuł Meta',
             'url-key'          => 'Klucz URL',
+            'description'      => 'Opis',
         ],
 
         'create-success' => 'CMS został pomyślnie utworzony.',

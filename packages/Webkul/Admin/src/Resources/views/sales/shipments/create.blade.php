@@ -186,64 +186,62 @@
                                     </div>
                                 </div>
 
-                                <div class="gap-[10px] justify-between pb-[16px] border-b-[1px] border-slate-300">
-                                    <!-- Information -->
-                                    <div class="flex justify-between">
-                                        @foreach ($order->channel->inventory_sources as $inventorySource)
-                                            <div class="grid gap-[10px]">
-                                                <!--Inventory Source -->
-                                                <p class="text-[16x] text-gray-800 font-semibold">
-                                                    {{ $inventorySource->name }}
-                                                </p>
+                                <!-- Information -->
+                                @foreach ($order->channel->inventory_sources as $inventorySource)
+                                    <div class="flex gap-[10px] justify-between pb-[10px] mt-[10px] border-b-[1px] border-slate-300">
+                                        <div class="grid gap-[10px]">
+                                            <!--Inventory Source -->
+                                            <p class="text-[16x] text-gray-800 font-semibold">
+                                                {{ $inventorySource->name }}
+                                            </p>
 
-                                                <!-- Available Quantity -->
-                                                <p class="text-gray-600">
-                                                    @lang('admin::app.sales.shipments.create.qty-available') :                  
+                                            <!-- Available Quantity -->
+                                            <p class="text-gray-600">
+                                                @lang('admin::app.sales.shipments.create.qty-available') :                  
 
-                                                    @php
-                                                        $product = $item->getTypeInstance()->getOrderedItem($item)->product;
-
-                                                        $sourceQty = $product?->type == 'bundle' ? $item->qty_ordered : $product?->inventory_source_qty($inventorySource->id);
-                                                    @endphp
-
-                                                    {{ $sourceQty }}
-                                                </p>
-                                            </div>
-
-                                            <div class="flex gap-[10px] items-center">
                                                 @php
-                                                    $inputName = "shipment[items][$item->id][$inventorySource->id]";
+                                                    $product = $item->getTypeInstance()->getOrderedItem($item)->product;
+
+                                                    $sourceQty = $product?->type == 'bundle' ? $item->qty_ordered : $product?->inventory_source_qty($inventorySource->id);
                                                 @endphp
 
-                                                <!-- Quantity  To Ship -->
-                                                <x-admin::form.control-group.label class="required">
-                                                    @lang('admin::app.sales.shipments.create.qty-to-ship')
-                                                </x-admin::form.control-group.label>
+                                                {{ $sourceQty }}
+                                            </p>
+                                        </div>
 
-                                                <x-admin::form.control-group class="!mb-0">
-                                                    <x-admin::form.control-group.control
-                                                        type="text"
-                                                        :name="$inputName" 
-                                                        :id="$inputName" 
-                                                        :value="$item->qty_to_ship"
-                                                        :rules="'required|numeric|min_value:0|max_value:' . $item->qty_ordered"
-                                                        class="!w-[100px]"
-                                                        :label="trans('admin::app.sales.shipments.create.qty-to-ship')"
-                                                        data-original-quantity="{{ $item->qty_to_ship }}"
-                                                        ::disabled="'{{ empty($sourceQty) }}' || source != '{{ $inventorySource->id }}'"
-                                                        :ref="$inputName"
-                                                    >
-                                                    </x-admin::form.control-group.control>
-                        
-                                                    <x-admin::form.control-group.error
-                                                        :control-name="$inputName"
-                                                    >
-                                                    </x-admin::form.control-group.error>
-                                                </x-admin::form.control-group>
-                                            </div>
-                                        @endforeach
+                                        <div class="flex gap-[10px] items-center">
+                                            @php
+                                                $inputName = "shipment[items][$item->id][$inventorySource->id]";
+                                            @endphp
+
+                                            <!-- Quantity  To Ship -->
+                                            <x-admin::form.control-group.label class="required">
+                                                @lang('admin::app.sales.shipments.create.qty-to-ship')
+                                            </x-admin::form.control-group.label>
+
+                                            <x-admin::form.control-group class="!mb-0">
+                                                <x-admin::form.control-group.control
+                                                    type="text"
+                                                    :name="$inputName" 
+                                                    :id="$inputName" 
+                                                    :value="$item->qty_to_ship"
+                                                    :rules="'required|numeric|min_value:0|max_value:' . $item->qty_ordered"
+                                                    class="!w-[100px]"
+                                                    :label="trans('admin::app.sales.shipments.create.qty-to-ship')"
+                                                    data-original-quantity="{{ $item->qty_to_ship }}"
+                                                    ::disabled="'{{ empty($sourceQty) }}' || source != '{{ $inventorySource->id }}'"
+                                                    :ref="$inputName"
+                                                >
+                                                </x-admin::form.control-group.control>
+                    
+                                                <x-admin::form.control-group.error
+                                                    :control-name="$inputName"
+                                                >
+                                                </x-admin::form.control-group.error>
+                                            </x-admin::form.control-group>
+                                        </div>
                                     </div>
-                                </div>
+                                @endforeach
                             @endforeach
                         </div>
                     </div>

@@ -206,10 +206,6 @@
                                         @lang('admin::app.settings.themes.edit.slider-description')
                                     </p>
                                 </div>
-                
-                                <div class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer">
-                                    @lang('admin::app.settings.themes.edit.slider-add-btn')
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -580,13 +576,6 @@
                                 <p class="text-gray-400">
                                     @lang('admin::app.settings.themes.edit.product-carousel-description')
                                 </p>
-                            </div>
-
-                            <div 
-                                class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
-                                @click="$refs.productFilterModal.toggle()"
-                            >
-                                @lang('admin::app.settings.themes.edit.add-filter-btn')
                             </div>
                         </div>
                     </div>

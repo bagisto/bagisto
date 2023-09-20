@@ -100,7 +100,7 @@ return [
             'product-number'              => 'Produit - :product_number',
             'product-image'               => 'Image du produit',
             'pay-by'                      => 'Payé par - :method',
-            'product-info'                => 'Pour ajouter des produits connexes en un clin d\'œil.',
+            'product-info'                => 'Ajoutez des produits connexes en cours de route.',
             'revenue'                     => 'Revenu :total',
             'stock-threshold'             => 'Seuil de stock',
             'sale-count'                  => ':count ventes',
@@ -595,7 +595,7 @@ return [
 
                 'links' => [
                     'related-products' => [
-                        'empty-info' => 'Ajouter des produits connexes en un instant.',
+                        'empty-info' => 'Ajoutez des produits connexes en cours de route.',
                         'info'       => 'En plus du produit que le client consulte, il lui est proposé des produits connexes.',
                         'title'      => 'Produits connexes',
                     ],
@@ -607,7 +607,7 @@ return [
                     ],
 
                     'cross-sells' => [
-                        'empty-info' => 'Ajouter des produits de vente croisée en un instant.',
+                        'empty-info' => 'Ajoutez des produits de vente croisée en cours de route.',
                         'info'       => 'À côté du panier d\'achat, vous trouverez ces produits "d\'achat impulsif" positionnés en tant que ventes croisées pour compléter les articles déjà ajoutés à votre panier.',
                         'title'      => 'Produits de vente croisée',
                     ],
@@ -1972,6 +1972,7 @@ return [
             'meta-title'       => 'Méta-titre',
             'seo'              => 'SEO',
             'url-key'          => 'Clé URL',
+            'description'      => 'Description',
         ],
 
         'edit' => [
@@ -1988,6 +1989,7 @@ return [
             'meta-description' => 'Méta-description',
             'meta-title'       => 'Méta-titre',
             'url-key'          => 'Clé URL',
+            'description'      => 'Description',
         ],
 
         'create-success' => 'CMS créé avec succès.',

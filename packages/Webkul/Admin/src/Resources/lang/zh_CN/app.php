@@ -100,7 +100,7 @@ return [
             'product-number'              => '产品 - :product_number',
             'product-image'               => '产品图片',
             'pay-by'                      => '支付方式 - :method',
-            'product-info'                => '随时添加相关产品。',
+            'product-info'                => '在路上添加相关产品。',
             'revenue'                     => '收入 :total',
             'stock-threshold'             => '库存阈值',
             'sale-count'                  => ':count 销售',
@@ -595,19 +595,19 @@ return [
 
                 'links' => [
                     'related-products' => [
-                        'empty-info' => '随时添加相关产品。',
+                        'empty-info' => '在路上添加相关产品。',
                         'info'       => '除了客户当前查看的产品外，他们还会看到相关产品。',
                         'title'      => '相关产品',
                     ],
 
                     'up-sells' => [
-                        'empty-info' => '随时添加上卖产品。',
+                        'empty-info' => '在路上添加额外的销售产品。',
                         'info'       => '客户将看到上卖产品，这些产品是当前查看的产品的高级或更高质量的替代品。',
                         'title'      => '上卖产品',
                     ],
 
                     'cross-sells' => [
-                        'empty-info' => '随时添加交叉销售产品。',
+                        'empty-info' => '在路上添加交叉销售产品。',
                         'info'       => '在购物车旁边，您将找到这些“冲动购买”产品，它们被定位为与已经添加到购物车的商品相补充的交叉销售产品。',
                         'title'      => '交叉销售产品',
                     ],
@@ -1972,6 +1972,7 @@ return [
             'meta-title'       => 'Meta标题',
             'seo'              => 'SEO',
             'url-key'          => 'URL键',
+            'description'      => '描述',
         ],
 
         'edit' => [
@@ -1988,6 +1989,7 @@ return [
             'meta-description' => 'Meta描述',
             'meta-title'       => 'Meta标题',
             'url-key'          => 'URL键',
+            'description'      => '描述',
         ],
 
         'create-success' => 'CMS页面创建成功。',

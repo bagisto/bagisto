@@ -10,7 +10,7 @@ use Webkul\Checkout\Facades\Cart;
 use Webkul\Payment\Facades\Payment;
 use Webkul\Shipping\Facades\Shipping;
 use Webkul\Shop\Http\Resources\CartResource;
-use Webkul\Shop\Http\Requests\CustomerAddressForm;
+use Webkul\Shop\Http\Requests\Customer\CustomerAddressForm;
 
 class OnepageController extends APIController
 {

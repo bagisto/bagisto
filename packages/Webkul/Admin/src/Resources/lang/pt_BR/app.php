@@ -100,7 +100,7 @@ return [
             'product-number'              => 'Produto - :product_number',
             'product-image'               => 'Imagem do Produto',
             'pay-by'                      => 'Pagamento por - :method',
-            'product-info'                => 'Para adicionar produtos relacionados rapidamente.',
+            'product-info'                => 'Adicione produtos relacionados enquanto está em movimento.',
             'revenue'                     => 'Receita :total',
             'stock-threshold'             => 'Limite de Estoque',
             'sale-count'                  => ':count Vendas',
@@ -595,19 +595,19 @@ return [
 
                 'links' => [
                     'related-products' => [
-                        'empty-info' => 'Para adicionar produtos relacionados rapidamente.',
+                        'empty-info' => 'Adicione produtos relacionados enquanto está em movimento.',
                         'info'       => 'Além do produto que o cliente está visualizando, são apresentados produtos relacionados.',
                         'title'      => 'Produtos Relacionados',
                     ],
 
                     'up-sells' => [
-                        'empty-info' => 'Para adicionar produtos para venda cruzada rapidamente.',
+                        'empty-info' => 'Adicione produtos de venda adicional enquanto estiver em movimento.',
                         'info'       => 'O cliente é apresentado com produtos para venda cruzada, que servem como uma alternativa premium ou de maior qualidade ao produto que estão visualizando atualmente.',
                         'title'      => 'Produtos para Venda Cruzada',
                     ],
 
                     'cross-sells' => [
-                        'empty-info' => 'Para adicionar produtos de venda cruzada rapidamente.',
+                        'empty-info' => 'Adicione produtos de venda cruzada enquanto está em movimento.',
                         'info'       => 'Ao lado do carrinho de compras, você encontrará esses produtos de "compra por impulso" posicionados como vendas cruzadas para complementar os itens já adicionados ao seu carrinho.',
                         'title'      => 'Produtos de Venda Cruzada',
                     ],
@@ -1972,6 +1972,7 @@ return [
             'meta-title'       => 'Meta Título',
             'seo'              => 'SEO',
             'url-key'          => 'Chave de URL',
+            'description'      => 'Descrição',
         ],
 
         'edit' => [
@@ -1988,6 +1989,7 @@ return [
             'meta-description' => 'Meta Descrição',
             'meta-title'       => 'Meta Título',
             'url-key'          => 'Chave de URL',
+            'description'      => 'Descrição',
         ],
 
         'create-success' => 'CMS criado com sucesso.',

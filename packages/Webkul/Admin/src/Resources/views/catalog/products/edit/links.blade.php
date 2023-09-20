@@ -119,13 +119,6 @@
                             @{{ type.empty_info }}
                         </p>
                     </div>
-
-                    <div
-                        class="secondary-button text-[14px]"
-                        @click="selectedType = type.key; $refs.productSearch.openDrawer()"
-                    >
-                        @lang('admin::app.catalog.products.edit.links.add-btn')
-                    </div>
                 </div>
             </div>
 

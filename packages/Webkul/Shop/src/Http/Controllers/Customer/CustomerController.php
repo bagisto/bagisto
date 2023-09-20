@@ -130,7 +130,7 @@ class CustomerController extends Controller
             } else {
                 if (isset($data['image'])) {
                     if (! empty($data['image'])) {
-                        Storage::delete($customer->image);
+                        Storage::delete((string)$customer->image);
                     }
                 
                     $customer->image = null;

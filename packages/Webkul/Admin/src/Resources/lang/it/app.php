@@ -100,7 +100,7 @@ return [
             'product-number'              => 'Prodotto - :product_number',
             'product-image'               => 'Immagine Prodotto',
             'pay-by'                      => 'Pagato Con - :method',
-            'product-info'                => 'Per aggiungere prodotti correlati in modo rapido.',
+            'product-info'                => 'Aggiungi prodotti correlati mentre sei in viaggio.',
             'revenue'                     => 'Ricavo :total',
             'stock-threshold'             => 'Soglia di Scorta',
             'sale-count'                  => ':count Vendite',
@@ -595,19 +595,19 @@ return [
 
                 'links' => [
                     'related-products' => [
-                        'empty-info' => 'Per aggiungere prodotti correlati in un colpo solo.',
+                        'empty-info' => 'Aggiungi prodotti correlati mentre sei in viaggio.',
                         'info'       => 'Oltre al prodotto che il cliente sta visualizzando, vengono presentati prodotti correlati.',
                         'title'      => 'Prodotti Correlati',
                     ],
 
                     'up-sells' => [
-                        'empty-info' => 'Per aggiungere prodotti upsell in un colpo solo.',
+                        'empty-info' => 'Aggiungi prodotti di vendita aggiuntiva mentre sei in movimento.',
                         'info'       => 'Al cliente vengono presentati prodotti upsell, che fungono da alternativa premium o di qualità superiore al prodotto che stanno visualizzando.',
                         'title'      => 'Prodotti Upsell',
                     ],
 
                     'cross-sells' => [
-                        'empty-info' => 'Per aggiungere prodotti cross-sell in un colpo solo.',
+                        'empty-info' => 'Aggiungi prodotti di cross-selling mentre sei in movimento.',
                         'info'       => 'Accanto al carrello della spesa, troverai questi prodotti "acquisto d\'impulso" posizionati come cross-sell per completare gli articoli già aggiunti al tuo carrello.',
                         'title'      => 'Prodotti Cross-Sell',
                     ],
@@ -1972,6 +1972,7 @@ return [
             'meta-title'        => 'Meta Titolo',
             'seo'               => 'SEO',
             'url-key'           => 'Chiave URL',
+            'description'       => 'Descrizione',
         ],
 
         'edit' => [
@@ -1988,6 +1989,7 @@ return [
             'meta-description' => 'Meta Descrizione',
             'meta-title'       => 'Meta Titolo',
             'url-key'          => 'Chiave URL',
+            'description'      => 'Descrizione',
         ],
 
         'create-success'  => 'CMS creato con successo.',
