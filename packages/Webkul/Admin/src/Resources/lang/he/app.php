@@ -1592,6 +1592,7 @@ return [
                         'name'        => 'שם',
                         'coupon-code' => 'קוד קופון',
                         'copy-of'     => 'עותק של :value',
+                        'copy'        => 'העתק',
                         'start'       => 'התחלה',
                         'end'         => 'סיום',
                         'status'      => 'סטטוס',
@@ -1601,7 +1602,6 @@ return [
                         'priority'    => 'עדיפות',
                         'edit'        => 'ערוך',
                         'delete'      => 'מחק',
-                        'view'        => 'צפה',
                     ],
                 ],
 
@@ -3248,6 +3248,7 @@ return [
         'users'                    => 'משתמשים',
         'roles'                    => 'תפקידים',
         'taxes'                    => 'מסים',
+        'themes'                   => 'ערכות',
         'tax-categories'           => 'קטגוריות מס',
         'tax-rates'                => 'שערי מס',
         'view'                     => 'צפה',

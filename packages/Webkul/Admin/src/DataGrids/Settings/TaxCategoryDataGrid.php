@@ -61,22 +61,26 @@ class TaxCategoryDataGrid extends DataGrid
      */
     public function prepareActions()
     {
-        $this->addAction([
-            'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.settings.taxes.categories.index.datagrid.edit'),
-            'method' => 'GET',
-            'url'    => function ($row) {
-                return route('admin.settings.taxes.categories.edit', $row->id);
-            },
-        ]);
+        if (bouncer()->hasPermission('settings.taxes.tax-categories.edit')) {
+            $this->addAction([
+                'icon'   => 'icon-edit',
+                'title'  => trans('admin::app.settings.taxes.categories.index.datagrid.edit'),
+                'method' => 'GET',
+                'url'    => function ($row) {
+                    return route('admin.settings.taxes.categories.edit', $row->id);
+                },
+            ]);
+        }
 
-        $this->addAction([
-            'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.settings.taxes.categories.index.datagrid.delete'),
-            'method' => 'DELETE',
-            'url'    => function ($row) {
-                return route('admin.settings.taxes.categories.delete', $row->id);
-            },
-        ]);
+        if (bouncer()->hasPermission('settings.taxes.tax-categories.delete')) {
+            $this->addAction([
+                'icon'   => 'icon-delete',
+                'title'  => trans('admin::app.settings.taxes.categories.index.datagrid.delete'),
+                'method' => 'DELETE',
+                'url'    => function ($row) {
+                    return route('admin.settings.taxes.categories.delete', $row->id);
+                },
+            ]);
+        }
     }
 }

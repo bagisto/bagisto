@@ -203,15 +203,6 @@ class CustomerDataGrid extends DataGrid
                 return route('admin.customers.customers.login_as_customer', $row->customer_id);
             },
         ]);
-
-        $this->addAction([
-            'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.customers.customers.index.datagrid.delete'),
-            'method' => 'DELETE',
-            'url'    => function ($row) {
-                return route('admin.customers.customers.delete', $row->customer_id);
-            },
-        ]);
     }
 
     /**

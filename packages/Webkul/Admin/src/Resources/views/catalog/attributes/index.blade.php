@@ -10,11 +10,13 @@
         </p>
 
         <div class="flex items-center gap-x-[10px]">
-            <a href="{{ route('admin.catalog.attributes.create') }}">
-                <div class="cursor-pointer rounded-[6px] border border-blue-700 bg-blue-600 px-[12px] py-[6px] font-semibold text-gray-50">
-                    @lang('admin::app.catalog.attributes.index.create-btn')
-                </div>
-            </a>
+            @if (bouncer()->hasPermission('catalog.attributes.create'))
+                <a href="{{ route('admin.catalog.attributes.create') }}">
+                    <div class="cursor-pointer rounded-[6px] border border-blue-700 bg-blue-600 px-[12px] py-[6px] font-semibold text-gray-50">
+                        @lang('admin::app.catalog.attributes.index.create-btn')
+                    </div>
+                </a>
+            @endif
         </div>
     </div>
 

@@ -12,12 +12,14 @@
     
             <div class="flex gap-x-[10px] items-center">
                 {{-- Create User Button --}}
-                <button
-                    type="button"
-                    class="primary-button"
-                >
-                    @lang('admin::app.settings.users.index.create.title')
-                </button>
+                @if (bouncer()->hasPermission('settings.users.users.create'))
+                    <button
+                        type="button"
+                        class="primary-button"
+                    >
+                        @lang('admin::app.settings.users.index.create.title')
+                    </button>
+                @endif
             </div>
         </div>
 
@@ -51,9 +53,12 @@
                 src="{{ route('admin.settings.users.index') }}"
                 ref="datagrid"
             >
+                @php
+                    $hasPermission = bouncer()->hasPermission('settings.users.users.edit') || bouncer()->hasPermission('settings.users.users.delete');
+                @endphp
                 <!-- DataGrid Header -->
-                <template #header="{ columns, records, sortPage, applied}">
-                    <div class="row grid grid-cols-6 grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] border-gray-300 text-gray-600 bg-gray-50 font-semibold">
+                <template #header="{columns, records, sortPage, applied}">
+                    <div class="row grid grid-cols-{{ $hasPermission ? '6' : '5' }} grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] border-gray-300 text-gray-600 bg-gray-50 font-semibold">
                         <div
                             class="flex gap-[10px] cursor-pointer"
                             v-for="(columnGroup, index) in ['user_id', 'user_name', 'status', 'email', 'role_name']"
@@ -84,9 +89,11 @@
                         </div>
 
                         <!-- Actions -->
-                        <p class="flex gap-[10px] justify-end">
-                            @lang('admin::app.components.datagrid.table.actions')
-                        </p>
+                        @if ($hasPermission)
+                            <p class="flex gap-[10px] justify-end">
+                                @lang('admin::app.components.datagrid.table.actions')
+                            </p>
+                        @endif
                     </div>
                 </template>
 
@@ -95,7 +102,7 @@
                     <div
                         v-for="record in records"
                         class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600 transition-all hover:bg-gray-50"
-                        style="grid-template-columns: repeat(6, 1fr);"
+                        :style="'grid-template-columns: repeat(' + (record.actions.length ? 6 : 5) + ', 1fr);'"
                     >
                         <!-- Id -->
                         <p v-text="record.user_id"></p>
@@ -146,23 +153,16 @@
 
                         <!-- Actions -->
                         <div class="flex justify-end">
-                            <a @click="id=1; editModal(record.user_id)">
-                                <span
-                                    :class="record.actions['0'].icon"
-                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
-                                    :title="record.actions['0'].title"
-                                >
-                                </span>
-                            </a>
-
-                            <a @click="deleteModal(record.actions['1']?.url, record.user_id, records?.length)">
-                                <span
-                                    :class="record.actions['1'].icon"
-                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
-                                    :title="record.actions['1'].title"
-                                >
-                                </span>
-                            </a>
+                            <div v-for="action in record.actions">
+                                <a @click="id=1; actionHandler(action.url, action.title, record.user_id, records?.length)">
+                                    <span
+                                        :class="action.icon"
+                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
+                                        :title="action.title"
+                                    >
+                                    </span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </template>
@@ -516,12 +516,19 @@
                             });
                     },
 
-                    editModal(id) {
+                    actionHandler(url, title, id, recordCount) {
+                        if (title == 'Edit') {
+                            this.editModal(url);
+                        } else {
+                            this.deleteModal(url);
+                        }
+                    },
+
+                    editModal(url) {
                         this.isUpdating = true;
 
-                        this.$axios.get(`{{ route('admin.settings.users.edit', '') }}/${id}`)
+                        this.$axios.get(url)
                             .then((response) => {
-                                console.log(response);
                                 this.data = {
                                     ...response.data,
                                         images: response.data.user.image_url
@@ -538,17 +545,14 @@
 
                                 this.$refs.userUpdateOrCreateModal.toggle();
                             })
-                            .catch(error => {
-                                if (error.response.status == 422) {
-                                    setErrors(error.response.data.errors);
-                                }
-                            });
+                            .catch(this.errorHandler);
                     },
 
                     deleteModal(url, id, recordCount) {
                         if (! confirm('@lang('admin::app.settings.users.delete-warning')')) {
                             return;
                         }
+
                         if (this.currentUserId == id && recordCount != 1) {
                             this.$refs.confirmPasswordModal.toggle();
                         } else {
@@ -560,12 +564,12 @@
 
                                     this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                                 })
-                                .catch(error => {
-                                    if (error.response.status == 422) {
-                                        setErrors(error.response.data.errors);
-                                    }
-                                });
+                                .catch(this.errorHandler);
                         }
+                    },
+
+                    errorHandler(error) {
+                        this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
                     },
 
                     UserConfirmModal() {

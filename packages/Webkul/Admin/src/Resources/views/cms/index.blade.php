@@ -39,7 +39,7 @@
             <x-admin::datagrid.export src="{{ route('admin.cms.index') }}"></x-admin::datagrid.export>
 
             {{-- Create New Pages Button --}}
-            @if (bouncer()->hasPermission('cms.pages.create'))
+            @if (bouncer()->hasPermission('cms.create'))
                 <a
                     href="{{ route('admin.cms.create') }}"
                     class="primary-button"

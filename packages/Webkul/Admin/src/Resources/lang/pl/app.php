@@ -1592,6 +1592,7 @@ return [
                         'name'        => 'Nazwa',
                         'coupon-code' => 'Kod kuponu',
                         'copy-of'     => ':value',
+                        'copy'        => 'Kopiuj',
                         'start'       => 'Rozpoczęcie',
                         'end'         => 'Zakończenie',
                         'status'      => 'Status',
@@ -1601,7 +1602,6 @@ return [
                         'priority'    => 'Priorytet',
                         'edit'        => 'Edytuj',
                         'delete'      => 'Usuń',
-                        'view'        => 'Podgląd',
                     ],
                 ],
 
@@ -3247,6 +3247,7 @@ return [
         'users'                    => 'Użytkownicy',
         'roles'                    => 'Role',
         'taxes'                    => 'Podatki',
+        'themes'                   => 'Motywy',
         'tax-categories'           => 'Kategorie Podatków',
         'tax-rates'                => 'Stawki Podatków',
         'view'                     => 'Wyświetl',

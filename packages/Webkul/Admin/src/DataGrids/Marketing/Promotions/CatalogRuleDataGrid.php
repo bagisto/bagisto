@@ -111,22 +111,26 @@ class CatalogRuleDataGrid extends DataGrid
      */
     public function prepareActions()
     {
-        $this->addAction([
-            'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.marketing.promotions.catalog-rules.index.datagrid.edit'),
-            'method' => 'GET',
-            'url'    => function ($row) {
-                return route('admin.marketing.promotions.catalog_rules.edit', $row->id);
-            },
-        ]);
+        if (bouncer()->hasPermission('marketing.promotions.catalog-rules.edit')) {
+            $this->addAction([
+                'icon'   => 'icon-edit',
+                'title'  => trans('admin::app.marketing.promotions.catalog-rules.index.datagrid.edit'),
+                'method' => 'GET',
+                'url'    => function ($row) {
+                    return route('admin.marketing.promotions.catalog_rules.edit', $row->id);
+                },
+            ]);
+        }
 
-        $this->addAction([
-            'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.marketing.promotions.catalog-rules.index.datagrid.delete'),
-            'method' => 'DELETE',
-            'url'    => function ($row) {
-                return route('admin.marketing.promotions.catalog_rules.delete', $row->id);
-            },
-        ]);
+        if (bouncer()->hasPermission('marketing.promotions.catalog-rules.delete')) {
+            $this->addAction([
+                'icon'   => 'icon-delete',
+                'title'  => trans('admin::app.marketing.promotions.catalog-rules.index.datagrid.delete'),
+                'method' => 'DELETE',
+                'url'    => function ($row) {
+                    return route('admin.marketing.promotions.catalog_rules.delete', $row->id);
+                },
+            ]);
+        }
     }
 }

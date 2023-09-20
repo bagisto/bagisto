@@ -142,23 +142,27 @@ class ReviewDataGrid extends DataGrid
      */
     public function prepareActions()
     {
-        $this->addAction([
-            'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.customers.reviews.index.datagrid.edit'),
-            'method' => 'GET',
-            'url'    => function ($row) {
-                return route('admin.customers.customers.review.edit', $row->product_review_id);
-            },
-        ]);
+        if (bouncer()->hasPermission('customers.reviews.edit')) {
+            $this->addAction([
+                'icon'   => 'icon-edit',
+                'title'  => trans('admin::app.customers.reviews.index.datagrid.edit'),
+                'method' => 'GET',
+                'url'    => function ($row) {
+                    return route('admin.customers.customers.review.edit', $row->product_review_id);
+                },
+            ]);
+        }
 
-        $this->addAction([
-            'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.customers.reviews.index.datagrid.delete'),
-            'method' => 'DELETE',
-            'url'    => function ($row) {
-                return route('admin.customers.customers.review.delete', $row->product_review_id);
-            },
-        ]);
+        if (bouncer()->hasPermission('customers.reviews.delete')) {
+            $this->addAction([
+                'icon'   => 'icon-delete',
+                'title'  => trans('admin::app.customers.reviews.index.datagrid.delete'),
+                'method' => 'DELETE',
+                'url'    => function ($row) {
+                    return route('admin.customers.customers.review.delete', $row->product_review_id);
+                },
+            ]);
+        }
     }
 
     /**

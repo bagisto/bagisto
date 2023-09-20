@@ -1594,6 +1594,7 @@ return [
                         'name'        => 'Adı',
                         'coupon-code' => 'Kupon Kodu',
                         'copy-of'     => ':value',
+                        'copy'        => 'Kopyala',
                         'start'       => 'Başlangıç',
                         'end'         => 'Bitiş',
                         'status'      => 'Durum',
@@ -1603,7 +1604,6 @@ return [
                         'priority'    => 'Öncelik',
                         'edit'        => 'Düzenle',
                         'delete'      => 'Sil',
-                        'view'        => 'Görüntüle',
                     ],
                 ],
 
@@ -3249,6 +3249,7 @@ return [
         'users'                    => 'Kullanıcılar',
         'roles'                    => 'Roller',
         'taxes'                    => 'Vergiler',
+        'themes'                   => 'Temalar',
         'tax-categories'           => 'Vergi Kategorileri',
         'tax-rates'                => 'Vergi Oranları',
         'view'                     => 'Görüntüle',

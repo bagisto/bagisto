@@ -1592,6 +1592,7 @@ return [
                         'name'        => '名称',
                         'coupon-code' => '优惠券码',
                         'copy-of'     => ':value',
+                        'copy'        => '复制z',
                         'start'       => '开始',
                         'end'         => '结束',
                         'status'      => '状态',
@@ -1601,7 +1602,6 @@ return [
                         'priority'    => '优先级',
                         'edit'        => '编辑',
                         'delete'      => '删除',
-                        'view'        => '查看',
                     ],
                 ],
 
@@ -3248,6 +3248,7 @@ return [
         'users'                    => '用户',
         'roles'                    => '角色',
         'taxes'                    => '税费',
+        'themes'                   => '主题',
         'tax-categories'           => '税费分类',
         'tax-rates'                => '税率',
         'view'                     => '查看',

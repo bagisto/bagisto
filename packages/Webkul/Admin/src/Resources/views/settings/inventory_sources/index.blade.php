@@ -10,11 +10,13 @@
         </p>
 
         {{-- Create Button --}}
-        <a href="{{ route('admin.settings.inventory_sources.create') }}">
-            <div class="primary-button">
-                @lang('admin::app.settings.inventory-sources.index.create-btn')
-            </div>
-        </a>
+        @if (bouncer()->hasPermission('settings.inventory_sources.create'))
+            <a href="{{ route('admin.settings.inventory_sources.create') }}">
+                <div class="primary-button">
+                    @lang('admin::app.settings.inventory-sources.index.create-btn')
+                </div>
+            </a>
+        @endif
     </div>
 
     <x-admin::datagrid :src="route('admin.settings.inventory_sources.index')"></x-admin::datagrid>

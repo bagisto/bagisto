@@ -1592,6 +1592,7 @@ return [
                         'name'        => '名前',
                         'coupon-code' => 'クーポンコード',
                         'copy-of'     => ':value',
+                        'copy'        => 'コピー',
                         'start'       => '開始',
                         'end'         => '終了',
                         'status'      => 'ステータス',
@@ -1601,7 +1602,6 @@ return [
                         'priority'    => '優先度',
                         'edit'        => '編集',
                         'delete'      => '削除',
-                        'view'        => '表示',
                     ],
                 ],
 
@@ -3249,6 +3249,7 @@ return [
         'users'                    => 'ユーザー',
         'roles'                    => 'ロール',
         'taxes'                    => '税金',
+        'themes'                   => 'テーマ',
         'tax-categories'           => '税カテゴリ',
         'tax-rates'                => '税率',
         'view'                     => '表示',

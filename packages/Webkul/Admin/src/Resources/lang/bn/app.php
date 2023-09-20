@@ -1592,6 +1592,7 @@ return [
                         'name'        => 'নাম',
                         'coupon-code' => 'কুপন কোড',
                         'copy-of'     => ':value',
+                        'copy'        => 'কপি',
                         'start'       => 'শুরু',
                         'end'         => 'শেষ',
                         'status'      => 'স্থিতি',
@@ -1601,7 +1602,6 @@ return [
                         'priority'    => 'অগ্রাধিকার',
                         'edit'        => 'সম্পাদনা',
                         'delete'      => 'মুছে ফেলুন',
-                        'view'        => 'দেখুন',
                     ],
                 ],
 
@@ -3248,6 +3248,7 @@ return [
         'users'                    => 'ব্যবহারকারীগণ',
         'roles'                    => 'ভূমিকা',
         'taxes'                    => 'কর',
+        'themes'                   => 'থিম',
         'tax-categories'           => 'কর বিভাগ',
         'tax-rates'                => 'কর হার',
         'view'                     => 'দেখুন',

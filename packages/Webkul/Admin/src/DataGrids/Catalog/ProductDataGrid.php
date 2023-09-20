@@ -202,36 +202,20 @@ class ProductDataGrid extends DataGrid
      */
     public function prepareActions()
     {
-        $this->addAction([
-            'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.catalog.products.index.datagrid.edit'),
-            'method' => 'GET',
-            'url'    => function ($row) {
-                return route('admin.catalog.products.edit', $row->product_id);
-            },
+        if (bouncer()->hasPermission('catalog.products.edit')) {
+            $this->addAction([
+                'icon'   => 'icon-edit',
+                'title'  => trans('admin::app.catalog.products.index.datagrid.edit'),
+                'method' => 'GET',
+                'url'    => function ($row) {
+                    return route('admin.catalog.products.edit', $row->product_id);
+                },
 
-            'condition' => function () {
-                return true;
-            },
-        ]);
-
-        $this->addAction([
-            'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.catalog.products.index.datagrid.delete'),
-            'method' => 'DELETE',
-            'url'    => function ($row) {
-                return route('admin.catalog.products.delete', $row->product_id);
-            },
-        ]);
-
-        $this->addAction([
-            'icon'   => 'icon-copy',
-            'title'  => trans('admin::app.catalog.products.index.datagrid.copy'),
-            'method' => 'GET',
-            'url'    => function ($row) {
-                return route('admin.catalog.products.copy', $row->product_id);
-            },
-        ]);
+                'condition' => function () {
+                    return true;
+                },
+            ]);
+        }
     }
 
     /**
@@ -241,26 +225,30 @@ class ProductDataGrid extends DataGrid
      */
     public function prepareMassActions()
     {
-        $this->addMassAction([
-            'title'  => trans('admin::app.catalog.products.index.datagrid.delete'),
-            'url'    => route('admin.catalog.products.mass_delete'),
-            'method' => 'POST',
-        ]);
+        if (bouncer()->hasPermission('catalog.products.mass-delete')) {
+            $this->addMassAction([
+                'title'  => trans('admin::app.catalog.products.index.datagrid.delete'),
+                'url'    => route('admin.catalog.products.mass_delete'),
+                'method' => 'POST',
+            ]);
+        }
 
-        $this->addMassAction([
-            'title'   => trans('admin::app.catalog.products.index.datagrid.update-status'),
-            'url'     => route('admin.catalog.products.mass_update'),
-            'method'  => 'POST',
-            'options' => [
-                [
-                    'name' => trans('admin::app.catalog.products.index.datagrid.active'),
-                    'value' => 1,
+        if (bouncer()->hasPermission('catalog.products.mass-update')) {
+            $this->addMassAction([
+                'title'   => trans('admin::app.catalog.products.index.datagrid.update-status'),
+                'url'     => route('admin.catalog.products.mass_update'),
+                'method'  => 'POST',
+                'options' => [
+                    [
+                        'name' => trans('admin::app.catalog.products.index.datagrid.active'),
+                        'value' => 1,
+                    ],
+                    [
+                        'name' => trans('admin::app.catalog.products.index.datagrid.disable'),
+                        'value' => 0,
+                    ],
                 ],
-                [
-                    'name' => trans('admin::app.catalog.products.index.datagrid.disable'),
-                    'value' => 0,
-                ],
-            ],
-        ]);
+            ]);
+        }
     }
 }

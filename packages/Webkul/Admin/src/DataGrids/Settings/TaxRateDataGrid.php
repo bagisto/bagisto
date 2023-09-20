@@ -123,22 +123,26 @@ class TaxRateDataGrid extends DataGrid
      */
     public function prepareActions()
     {
-        $this->addAction([
-            'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.settings.taxes.rates.index.datagrid.edit'),
-            'method' => 'GET',
-            'url'    => function ($row) {
-                return route('admin.settings.taxes.rates.edit', $row->id);
-            },
-        ]);
+        if (bouncer()->hasPermission('settings.taxes.tax-rates.edit')) {
+            $this->addAction([
+                'icon'   => 'icon-edit',
+                'title'  => trans('admin::app.settings.taxes.rates.index.datagrid.edit'),
+                'method' => 'GET',
+                'url'    => function ($row) {
+                    return route('admin.settings.taxes.rates.edit', $row->id);
+                },
+            ]);
+        }
 
-        $this->addAction([
-            'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.settings.taxes.rates.index.datagrid.delete'),
-            'method' => 'DELETE',
-            'url'    => function ($row) {
-                return route('admin.settings.taxes.rates.delete', $row->id);
-            },
-        ]);
+        if (bouncer()->hasPermission('settings.taxes.tax-rates.delete')) {
+            $this->addAction([
+                'icon'   => 'icon-delete',
+                'title'  => trans('admin::app.settings.taxes.rates.index.datagrid.delete'),
+                'method' => 'DELETE',
+                'url'    => function ($row) {
+                    return route('admin.settings.taxes.rates.delete', $row->id);
+                },
+            ]);
+        }
     }
 }

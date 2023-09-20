@@ -191,31 +191,37 @@ class CartRuleDataGrid extends DataGrid
      */
     public function prepareActions()
     {
-        $this->addAction([
-            'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.edit'),
-            'method' => 'GET',
-            'url'    => function ($row) {
-                return route('admin.marketing.promotions.cart_rules.edit', $row->id);
-            },
-        ]);
+        if (bouncer()->hasPermission('marketing.promotions.cart-rules.edit')) {
+            $this->addAction([
+                'icon'   => 'icon-edit',
+                'title'  => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.edit'),
+                'method' => 'GET',
+                'url'    => function ($row) {
+                    return route('admin.marketing.promotions.cart_rules.edit', $row->id);
+                },
+            ]);
+        }
 
-        $this->addAction([
-            'icon'   => 'icon-view',
-            'title'  => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.view'),
-            'method' => 'GET',
-            'url'    => function ($row) {
-                return route('admin.marketing.promotions.cart_rules.copy', $row->id);
-            },
-        ]);
+        if (bouncer()->hasPermission('marketing.promotions.cart-rules.copy')) {
+            $this->addAction([
+                'icon'   => 'icon-copy',
+                'title'  => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.copy'),
+                'method' => 'GET',
+                'url'    => function ($row) {
+                    return route('admin.marketing.promotions.cart_rules.copy', $row->id);
+                },
+            ]);
+        }
 
-        $this->addAction([
-            'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.delete'),
-            'method' => 'DELETE',
-            'url'    => function ($row) {
-                return route('admin.marketing.promotions.cart_rules.delete', $row->id);
-            },
-        ]);
+        if (bouncer()->hasPermission('marketing.promotions.cart-rules.delete')) {
+            $this->addAction([
+                'icon'   => 'icon-delete',
+                'title'  => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.delete'),
+                'method' => 'DELETE',
+                'url'    => function ($row) {
+                    return route('admin.marketing.promotions.cart_rules.delete', $row->id);
+                },
+            ]);
+        }
     }
 }

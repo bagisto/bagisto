@@ -165,17 +165,21 @@
 
                             <div class="flex gap-[5px] place-content-end items-center self-center">
                                 <!-- Review Delete Button -->
-                                <a  
-                                    @click="deleteReview(record.actions['1']?.url)">
-                                    <span class="icon-delete text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"></span>
-                                </a>
+                                @if (bouncer()->hasPermission('customers.reviews.delete'))
+                                    <a  
+                                        @click="deleteReview(record.actions['1']?.url)">
+                                        <span class="icon-delete text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"></span>
+                                    </a>
+                                @endif
 
                                 <!-- View Button -->
-                                <span 
-                                    @click="edit(record.product_review_id)" 
-                                    class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"
-                                >
-                                </span>
+                                @if (bouncer()->hasPermission('customers.reviews.edit'))
+                                    <span 
+                                        @click="edit(record.product_review_id)" 
+                                        class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"
+                                    >
+                                    </span>
+                                @endif
                             </div>
                         </div>
                     </template>

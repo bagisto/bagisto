@@ -172,14 +172,14 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
     });
 
     Route::controller(ThemeController::class)->prefix('settings/themes')->group(function () {
-        Route::get('', 'index')->name('admin.theme.index');
+        Route::get('', 'index')->name('admin.settings.themes.index');
 
-        Route::get('edit/{id}', 'edit')->name('admin.theme.edit');
+        Route::get('edit/{id}', 'edit')->name('admin.settings.themes.edit');
 
-        Route::post('store', 'store')->name('admin.theme.store');
+        Route::post('store', 'store')->name('admin.settings.themes.store');
 
-        Route::post('edit/{id}', 'update')->name('admin.theme.update');
+        Route::post('edit/{id}', 'update')->name('admin.settings.themes.update');
 
-        Route::delete('edit/{id}', 'destroy')->name('admin.theme.delete');
+        Route::delete('edit/{id}', 'destroy')->name('admin.settings.themes.delete');
     });
 });

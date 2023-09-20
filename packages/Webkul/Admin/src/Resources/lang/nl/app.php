@@ -1592,6 +1592,7 @@ return [
                         'name'        => 'Naam',
                         'coupon-code' => 'Couponcode',
                         'copy-of'     => ':value',
+                        'copy'        => 'Kopiëren',
                         'start'       => 'Start',
                         'end'         => 'Eind',
                         'status'      => 'Status',
@@ -1601,7 +1602,6 @@ return [
                         'priority'    => 'Prioriteit',
                         'edit'        => 'Bewerken',
                         'delete'      => 'Verwijderen',
-                        'view'        => 'Bekijken',
                     ],
                 ],
 
@@ -3248,6 +3248,7 @@ return [
         'users'                    => 'Gebruikers',
         'roles'                    => 'Rollen',
         'taxes'                    => 'Belastingen',
+        'themes'                   => 'Thema\'s',
         'tax-categories'           => 'Belastingcategorieën',
         'tax-rates'                => 'Belastingtarieven',
         'view'                     => 'Bekijken',

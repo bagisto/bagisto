@@ -51,22 +51,26 @@ class GroupDataGrid extends DataGrid
 
     public function prepareActions()
     {
-        $this->addAction([
-            'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.customers.groups.index.datagrid.edit'),
-            'method' => 'GET',
-            'url'    => function ($row) {
-                // return route('admin.groups.edit', $row->id);
-            },
-        ]);
+        if (bouncer()->hasPermission('customers.groups.edit')) {
+            $this->addAction([
+                'icon'   => 'icon-edit',
+                'title'  => trans('admin::app.customers.groups.index.datagrid.edit'),
+                'method' => 'GET',
+                'url'    => function ($row) {
+                    // return route('admin.groups.edit', $row->id);
+                },
+            ]);
+        }
 
-        $this->addAction([
-            'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.customers.groups.index.datagrid.delete'),
-            'method' => 'POST',
-            'url'    => function ($row) {
-                return route('admin.customers.groups.delete', $row->id);
-            },
-        ]);
+        if (bouncer()->hasPermission('customers.groups.delete')) {
+            $this->addAction([
+                'icon'   => 'icon-delete',
+                'title'  => trans('admin::app.customers.groups.index.datagrid.delete'),
+                'method' => 'POST',
+                'url'    => function ($row) {
+                    return route('admin.customers.groups.delete', $row->id);
+                },
+            ]);
+        }
     }
 }

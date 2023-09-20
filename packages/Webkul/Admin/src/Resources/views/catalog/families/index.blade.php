@@ -9,11 +9,13 @@
         </p>
 
         <div class="flex gap-x-[10px] items-center">
-            <a href="{{ route('admin.catalog.families.create') }}">
-                <div class="primary-button">
-                    @lang('admin::app.catalog.families.index.add')
-                </div>
-            </a>
+            @if (bouncer()->hasPermission('catalog.families.create'))
+                <a href="{{ route('admin.catalog.families.create') }}">
+                    <div class="primary-button">
+                        @lang('admin::app.catalog.families.index.add')
+                    </div>
+                </a>
+            @endif
         </div>
     </div>
 

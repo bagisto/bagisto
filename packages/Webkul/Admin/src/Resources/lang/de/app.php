@@ -1592,6 +1592,7 @@ return [
                         'name'        => 'Name',
                         'coupon-code' => 'Coupon-Code',
                         'copy-of'     => ':value',
+                        'copy'        => 'Kopieren',
                         'start'       => 'Start',
                         'end'         => 'Ende',
                         'status'      => 'Status',
@@ -1601,7 +1602,6 @@ return [
                         'priority'    => 'Priorität',
                         'edit'        => 'Bearbeiten',
                         'delete'      => 'Löschen',
-                        'view'        => 'Anzeigen',
                     ],
                 ],
 
@@ -3248,6 +3248,7 @@ return [
         'users'                    => 'Benutzer',
         'roles'                    => 'Rollen',
         'taxes'                    => 'Steuern',
+        'themes'                   => 'Themen',
         'tax-categories'           => 'Steuerkategorien',
         'tax-rates'                => 'Steuersätze',
         'view'                     => 'Ansehen',

@@ -1592,6 +1592,7 @@ return [
                         'name'        => 'Nome',
                         'coupon-code' => 'Codice Coupon',
                         'copy-of'     => ':value',
+                        'copy'        => 'Copia',
                         'start'       => 'Inizio',
                         'end'         => 'Fine',
                         'status'      => 'Stato',
@@ -1601,7 +1602,6 @@ return [
                         'priority'    => 'Priorità',
                         'edit'        => 'Modifica',
                         'delete'      => 'Elimina',
-                        'view'        => 'Visualizza',
                     ],
                 ],
 
@@ -3247,6 +3247,7 @@ return [
         'users'                    => 'Utenti',
         'roles'                    => 'Ruoli',
         'taxes'                    => 'Tasse',
+        'themes'                   => 'Temi',
         'tax-categories'           => 'Categorie di Tasse',
         'tax-rates'                => 'Aliquote Fiscali',
         'view'                     => 'Visualizza',

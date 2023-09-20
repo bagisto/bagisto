@@ -51,22 +51,26 @@ class EventDataGrid extends DataGrid
 
     public function prepareActions()
     {
-        $this->addAction([
-            'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.marketing.communications.events.index.datagrid.edit'),
-            'method' => 'GET',
-            'url'    => function ($row) {
-                return route('admin.marketing.communications.events.edit', $row->id);
-            },
-        ]);
+        if (bouncer()->hasPermission('marketing.communications.events.edit')) {
+            $this->addAction([
+                'icon'   => 'icon-edit',
+                'title'  => trans('admin::app.marketing.communications.events.index.datagrid.edit'),
+                'method' => 'GET',
+                'url'    => function ($row) {
+                    return route('admin.marketing.communications.events.edit', $row->id);
+                },
+            ]);
+        }
 
-        $this->addAction([
-            'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.marketing.communications.events.index.datagrid.delete'),
-            'method' => 'POST',
-            'url'    => function ($row) {
-                return route('admin.marketing.communications.events.delete', $row->id);
-            },
-        ]);
+        if (bouncer()->hasPermission('marketing.communications.events.delete')) {
+            $this->addAction([
+                'icon'   => 'icon-delete',
+                'title'  => trans('admin::app.marketing.communications.events.index.datagrid.delete'),
+                'method' => 'POST',
+                'url'    => function ($row) {
+                    return route('admin.marketing.communications.events.delete', $row->id);
+                },
+            ]);
+        }
     }
 }
