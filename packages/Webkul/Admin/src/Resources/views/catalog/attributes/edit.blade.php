@@ -238,7 +238,7 @@
                                             item-key="id"
                                         >
                                             <template #item="{ element, index }" v-show="! element.isDelete">
-                                                <x-admin::table.thead.tr>
+                                                <x-admin::table.thead.tr class="text-center">
                                                     <input
                                                         type="hidden"
                                                         :name="'options[' + element.id + '][isNew]'"
