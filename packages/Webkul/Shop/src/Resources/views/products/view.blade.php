@@ -99,11 +99,24 @@
                                 </p>
                             </div>
 
-                            <div class="grid">
-                                <p class="text-[16px] text-[#7D7D7D]">
-                                    {{ $customAttributeValue['value']??'-' }}
-                                </p>
-                            </div>
+                            @if (
+                                $customAttributeValue['type'] == 'file'
+                                || $customAttributeValue['type'] == 'image'
+                            )
+                                <a
+                                    href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
+                                    class="flex text-blue-500 underline"
+                                    download="{{ $customAttributeValue['label'] }}"
+                                >
+                                    {{ $customAttributeValue['label'] }}
+                                </a>
+                            @else 
+                                <div class="grid">
+                                    <p class="text-[16px] text-[#7D7D7D]">
+                                        {{ $customAttributeValue['value'] ?? '-' }}
+                                    </p>
+                                </div>
+                            @endif
                         @endforeach
                     </p>
                 </div>
