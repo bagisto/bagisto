@@ -487,7 +487,7 @@
                                 value="{{ $theme->options['filters']['limit'] ?? '' }}"
                                 class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
                                 :class="[errors['options[filters][limit]'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                rules="required"
+                                rules="required|min_value:1"
                                 label="@lang('admin::app.settings.themes.edit.limit')"
                                 placeholder="@lang('admin::app.settings.themes.edit.limit')"
                             >
@@ -841,7 +841,7 @@
                                 value="{{ $theme->options['filters']['limit'] ?? '' }}"
                                 class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
                                 :class="[errors['options[filters][limit]'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                rules="required"
+                                rules="required|min_value:1"
                                 label="@lang('admin::app.settings.themes.edit.limit')"
                                 placeholder="@lang('admin::app.settings.themes.edit.limit')"
                             >
