@@ -10,7 +10,7 @@
     {{-- User Detailes Section --}}
     <div class="flex gap-[16px] justify-between items-center mb-[20px] max-sm:flex-wrap">
         <div class="grid gap-[6px]">
-            <p class="pt-[6px] text-[20px] text-gray-800 font-bold leading-[24px]">
+            <p class="pt-[6px] text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
                 @lang('admin::app.dashboard.index.user-name', ['user_name' => $admin->name])
             </p>
 
@@ -43,7 +43,7 @@
 
                             {{-- Sales Stats --}}
                             <div class="grid gap-[4px] place-content-start">
-                                <p class="text-[16px] text-gray-800 font-semibold">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                     {{ core()->formatBasePrice($statistics['total_sales']['current']) }}
                                 </p>
 
@@ -85,7 +85,7 @@
 
                             {{-- Orders Stats --}}
                             <div class="grid gap-[4px] place-content-start">
-                                <p class="text-[16px] text-gray-800 font-semibold">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                     {{ $statistics['total_orders']['current'] }}
                                 </p>
 
@@ -127,7 +127,7 @@
 
                             {{-- Customers Stats --}}
                             <div class="grid gap-[4px] place-content-start">
-                                <p class="text-[16px] text-gray-800 font-semibold">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                     {{ $statistics['total_customers']['current'] }}
                                 </p>
 
@@ -169,7 +169,7 @@
 
                             {{-- Sales Stats --}}
                             <div class="grid gap-[4px] place-content-start">
-                                <p class="text-[16px] text-gray-800 font-semibold">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                     {{ core()->formatBasePrice($statistics['avg_sales']['current']) }}
                                 </p>
 
@@ -209,7 +209,7 @@
                             </div>
 
                             <div class="grid gap-[4px] place-content-start">
-                                <p class="text-[16px] text-gray-800 font-semibold">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                     {{ core()->formatBasePrice($statistics['total_unpaid_invoices']) }}
                                 </p>
 
@@ -240,7 +240,7 @@
 
                             {{-- Sales Stats --}}
                             <div class="grid gap-[4px] place-content-start">
-                                <p class="text-[16px] text-gray-800 font-semibold">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                     {{ core()->formatBasePrice($statistics['today_details']['today_sales']['current']) }}
                                 </p>
 
@@ -281,7 +281,7 @@
 
                             {{-- Orders Stats --}}
                             <div class="grid gap-[4px] place-content-start">
-                                <p class="text-[16px] text-gray-800 font-semibold">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                     {{ $statistics['today_details']['today_orders']['current']->count() }}
                                 </p>
 
@@ -322,7 +322,7 @@
 
                             {{-- Customers Stats --}}
                             <div class="grid gap-[4px] place-content-start">
-                                <p class="text-[16px] text-gray-800 font-semibold">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                     {{ $statistics['today_details']['today_customers']['current'] }}
                                 </p>
 
@@ -361,7 +361,7 @@
                             <div class="flex gap-[10px]">
                                 <div class="flex flex-col gap-[6px]">
                                     {{-- Order Id --}}
-                                    <p class="text-[16px] text-gray-800 font-semibold">
+                                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                         @lang('admin::app.dashboard.index.order-id', ['id' => $item->id])
                                     </p>
 
@@ -408,7 +408,7 @@
                             {{-- Payment And Channel Detailes --}}
                             <div class="flex flex-col gap-[6px]">
                                 {{-- Grand Total --}}
-                                <p class="text-[16px] text-gray-800 font-semibold">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                     {{ core()->formatBasePrice($item->grand_total)}}
                                 </p>
 
@@ -536,7 +536,7 @@
 
                                         <div class="flex flex-col gap-[6px]">
                                             {{-- Product Name --}}
-                                            <p class="text-[16px] text-gray-800 font-semibold">
+                                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                                 @if (isset($item->product->name))
                                                     {{ $item->product->name }}
                                                 @endif
@@ -562,7 +562,7 @@
                                     <div class="flex gap-[6px] items-center justify-between">
                                         <div class="flex flex-col gap-[6px]">
                                             {{-- Product Price --}}
-                                            <p class="text-[16px] text-gray-800 font-semibold">
+                                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                                 @if (isset($item->product->price))
                                                     {{ core()->formatBasePrice($item->product->price) }}
                                                 @endif
@@ -672,7 +672,7 @@
                                     </p>
     
                                     <!-- Total Order Revenue -->
-                                    <p class="text-[18px] text-gray-800 font-bold">
+                                    <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                         @{{ statistics.total_sales?.formatted_total }}
                                     </p>
                                 </div>
@@ -761,7 +761,7 @@
                                             </p>
 
                                             <p
-                                                class="text-[16px] text-gray-800 font-semibold"
+                                                class="text-[16px] text-gray-800 dark:text-white font-semibold"
                                                 v-text="item.formatted_total"
                                             >
                                             </p>

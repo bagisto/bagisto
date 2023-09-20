@@ -25,7 +25,7 @@
     >
         {{-- Save Inventory --}}
         <div class="flex gap-[16px] justify-between items-center mt-[14px] max-sm:flex-wrap">
-            <p class="text-[20px] text-gray-800 font-bold">
+            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 {{ $title }}
             </p>
 

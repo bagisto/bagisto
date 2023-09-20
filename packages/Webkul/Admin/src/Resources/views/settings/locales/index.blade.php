@@ -5,7 +5,7 @@
 
     <v-locales>
         <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
-            <p class="text-[20px] text-gray-800 font-bold">
+            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.settings.locales.index.title')
             </p>
 
@@ -28,7 +28,7 @@
     @pushOnce('scripts')
         <script type="text/x-template" id="v-locales-template">
             <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
-                <p class="text-[20px] text-gray-800 font-bold">
+                <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                     @lang('admin::app.settings.locales.index.title')
                 </p>
 
@@ -76,7 +76,7 @@
 
                                 <!-- Filter Arrow Icon -->
                                 <i
-                                    class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 align-text-bottom"
+                                    class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 dark:text-white align-text-bottom"
                                     :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                     v-if="columnGroup.includes(applied.sort.column)"
                                 ></i>
@@ -139,7 +139,7 @@
                 >
                     <x-admin::modal ref="localeUpdateOrCreateModal">
                         <x-slot:header>
-                            <p class="text-[18px] text-gray-800 font-bold">
+                            <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                 <span v-if="isUpdating">
                                     @lang('admin::app.settings.locales.index.edit.title')
                                 </span>

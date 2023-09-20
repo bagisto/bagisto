@@ -6,7 +6,7 @@
 
     <v-tax-categories>
         <div class="flex justify-between items-center">
-            <p class="text-[20px] text-gray-800 font-bold">
+            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.settings.taxes.categories.index.title')
             </p>
             
@@ -32,7 +32,7 @@
     @pushOnce('scripts')
         <script type="text/x-template" id="v-tax-categories-template">
             <div class="flex justify-between items-center">
-                <p class="text-[20px] text-gray-800 font-bold">
+                <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                     @lang('admin::app.settings.taxes.categories.index.title')
                 </p>
                 
@@ -86,7 +86,7 @@
 
                                 <!-- Filter Arrow Icon -->
                                 <i
-                                    class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 align-text-bottom"
+                                    class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 dark:text-white align-text-bottom"
                                     :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                     v-if="columnGroup.includes(applied.sort.column)"
                                 ></i>
@@ -148,7 +148,7 @@
                 >
                     <x-admin::modal ref="taxCategory">
                         <x-slot:header>
-                            <p class="text-[18px] text-gray-800 font-bold">
+                            <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                 <span v-if="id">
                                     @lang('admin::app.settings.taxes.categories.index.edit.title')
                                 </span>
@@ -238,7 +238,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Select Tax Rates -->
-                                <p class="required block leading-[24px] text-gray-800 font-medium">
+                                <p class="required block leading-[24px] text-gray-800 dark:text-white font-medium">
                                     @lang('admin::app.settings.taxes.categories.index.create.tax-rates')
                                 </p>
                                 

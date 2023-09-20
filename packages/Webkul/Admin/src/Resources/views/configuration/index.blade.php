@@ -6,7 +6,7 @@
 
     {{-- Heading of the page --}}
     <div class="flex justify-between items-center mb-[26px]">
-        <p class="text-[20px] text-gray-800 font-bold">
+        <p class="text-[20px] text-gray-800 dark:text-white font-bold">
             @lang('admin::app.configuration.index.title')
         </p>
     </div>
@@ -42,7 +42,7 @@
                             @endif
 
                             <div class="grid">
-                                <p class="mb-[5px] text-[16px] text-gray-800 font-semibold">
+                                <p class="mb-[5px] text-[16px] text-gray-800 dark:text-white font-semibold">
                                     @lang($child['name'])
                                 </p>
                                 

@@ -7,7 +7,7 @@
     <x-admin::form :action="route('admin.catalog.families.store')">
         {{-- Page Header --}}
         <div class="flex justify-between items-center">
-            <p class="text-[20px] text-gray-800 font-bold">
+            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.catalog.families.create.title')
             </p>
 
@@ -110,7 +110,7 @@
                 <div class="flex flex-wrap gap-[10px] justify-between mb-[10px] p-[16px]">
                     <!-- Panel Header -->
                     <div class="flex flex-col gap-[8px]">
-                        <p class="text-[16px] text-gray-800 font-semibold">
+                        <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.catalog.families.create.groups')
                         </p>
 
@@ -153,7 +153,7 @@
                                 }}
                             </p>
                             
-                            <p class="text-[12px] text-gray-800 font-medium">
+                            <p class="text-[12px] text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.catalog.families.create.edit-group-info')
                             </p>
                         </div>
@@ -279,7 +279,7 @@
                                 @lang('admin::app.catalog.families.create.unassigned-attributes')
                             </p>
 
-                            <p class="text-[12px] text-gray-800 font-medium ">
+                            <p class="text-[12px] text-gray-800 dark:text-white font-medium ">
                                 @lang('admin::app.catalog.families.create.unassigned-attributes-info')
                             </p>
                         </div>
@@ -320,7 +320,7 @@
                         <x-admin::modal ref="addGroupModal">
                             <!-- Model Header -->
                             <x-slot:header>
-                                <p class="text-[18px] text-gray-800 font-bold">
+                                <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                     @lang('admin::app.catalog.families.create.add-group-title')
                                 </p>
                             </x-slot:header>

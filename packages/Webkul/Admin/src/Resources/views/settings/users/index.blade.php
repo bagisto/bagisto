@@ -6,7 +6,7 @@
 
     <v-users>
         <div class="flex justify-between items-center">
-            <p class="text-[20px] text-gray-800 font-bold">
+            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.settings.users.index.title')
             </p>
     
@@ -30,7 +30,7 @@
     @pushOnce('scripts')
         <script type="text/x-template" id="v-users-template">
             <div class="flex justify-between items-center">
-                <p class="text-[20px] text-gray-800 font-bold">
+                <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                     @lang('admin::app.settings.users.index.title')
                 </p>
 
@@ -81,7 +81,7 @@
 
                                 <!-- Filter Arrow Icon -->
                                 <i
-                                    class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 align-text-bottom"
+                                    class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 dark:text-white align-text-bottom"
                                     :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                     v-if="columnGroup.includes(applied.sort.column)"
                                 ></i>
@@ -183,14 +183,14 @@
                         <x-slot:header>
                             <!-- Modal Header -->
                             <p 
-                                class="text-[18px] text-gray-800 font-bold"
+                                class="text-[18px] text-gray-800 dark:text-white font-bold"
                                 v-if="isUpdating"
                             >
                                 @lang('admin::app.settings.users.index.edit.title')
                             </p>    
 
                             <p 
-                                class="text-[18px] text-gray-800 font-bold"
+                                class="text-[18px] text-gray-800 dark:text-white font-bold"
                                 v-else
                             >
                                 @lang('admin::app.settings.users.index.create.title')
@@ -419,7 +419,7 @@
                     <x-admin::modal ref="confirmPasswordModal">
                         <!-- Modal Header -->
                         <x-slot:header>
-                            <p class="text-[18px] text-gray-800 font-bold">
+                            <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                 @lang('Confirm Password Before DELETE')
                             </p>  
                             

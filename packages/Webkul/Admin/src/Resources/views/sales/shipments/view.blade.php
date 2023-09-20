@@ -9,7 +9,7 @@
 
     <div class="grid">
         <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
-            <p class="text-[20px] text-gray-800 font-bold leading-[24px]">
+            <p class="text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
                 @lang('admin::app.sales.shipments.view.title', ['shipment_id' => $shipment->id])
             </p>
 
@@ -30,7 +30,7 @@
         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
             {{-- General --}}
             <div class="bg-white rounded-[4px] box-shadow">
-                <p class="text-[16px] text-gray-800 font-semibold mb-[16px] p-[16px]">
+                <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px] p-[16px]">
                     @lang('admin::app.sales.shipments.view.ordered-items') ({{count($shipment->items)}})
                 </p>
 
@@ -56,7 +56,7 @@
                                 @endif
 
                                 <div class="grid gap-[6px] place-content-start">
-                                    <p class="text-[16x] text-gray-800 font-semibold">{{ $item->name }}
+                                    <p class="text-[16x] text-gray-800 dark:text-white font-semibold">{{ $item->name }}
                                     </p>
                                     <div class="flex flex-col gap-[6px] place-items-start">
 
@@ -216,7 +216,7 @@
                         </p>
 
                         {{-- Currency Code --}}
-                        <p class="pt-[16px] text-gray-800 font-semibold">  
+                        <p class="pt-[16px] text-gray-800 dark:text-white font-semibold">  
                             {{ $order->order_currency_code }}
                         </p>
 
@@ -239,7 +239,7 @@
                         </p>
 
                         {{-- Inventory Source --}}
-                        <p class="pt-[16px] text-gray-800 font-semibold">
+                        <p class="pt-[16px] text-gray-800 dark:text-white font-semibold">
                             {{ core()->formatBasePrice($order->base_shipping_amount) }}
                         </p>
 
@@ -251,7 +251,7 @@
                             $shipment->inventory_source
                             || $shipment->inventory_source_name
                         )
-                            <p class="pt-[16px] text-gray-800 font-semibold">
+                            <p class="pt-[16px] text-gray-800 dark:text-white font-semibold">
                                 {{ $shipment->inventory_source ? $shipment->inventory_source->name : $shipment->inventory_source_name }}
                             </p>
 
@@ -261,7 +261,7 @@
                         @endif
 
                         @if ($shipment->carrier_title)
-                            <p class="pt-[16px] text-gray-800 font-semibold">
+                            <p class="pt-[16px] text-gray-800 dark:text-white font-semibold">
                                 {{ $shipment->carrier_title }}
                             </p>
                             
@@ -271,7 +271,7 @@
                         @endif
 
                         @if ($shipment->track_number)
-                            <p class="pt-[16px] text-gray-800 font-semibold">
+                            <p class="pt-[16px] text-gray-800 dark:text-white font-semibold">
                                 {{ $shipment->track_number }}
                             </p>
 

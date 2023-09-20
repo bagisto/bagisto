@@ -156,7 +156,7 @@
                 <!-- Drawer Header -->
                 <x-slot:header>
                     <div class="flex justify-between items-center p-3">
-                        <p class="text-[16px] text-gray-800 font-semibold">
+                        <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.components.datagrid.filters.title')
                         </p>
                     </div>

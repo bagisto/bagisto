@@ -14,7 +14,7 @@
             <!-- Panel Header -->
             <div class="flex gap-[20px] justify-between mb-[10px] p-[16px]">
                 <div class="flex flex-col gap-[8px]">
-                    <p class="text-[16px] text-gray-800 font-semibold">
+                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.products.edit.types.bundle.title')
                     </p>
 
@@ -91,7 +91,7 @@
                     <x-admin::modal ref="updateCreateOptionModal">
                         <x-slot:header>
                             <!-- Modal Header -->
-                            <p class="text-[18px] text-gray-800 font-bold">
+                            <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.catalog.products.edit.types.bundle.update-create.title')
                             </p>
                         </x-slot:header>
@@ -209,7 +209,7 @@
             <div class="flex gap-[20px] justify-between mb-[10px] p-[16px]">
                 <div class="flex flex-col gap-[8px]">
                     <p
-                        class="text-[16px] text-gray-800 font-semibold"
+                        class="text-[16px] text-gray-800 dark:text-white font-semibold"
                         :class="{'required': option.is_required}"
                     >
                         @{{ (index + 1) + '. ' + option.label + ' - ' + types[option.type].title }}
@@ -299,7 +299,7 @@
 
                                 <!-- Details -->
                                 <div class="grid gap-[6px] place-content-start">
-                                    <p class="text-[16x] text-gray-800 font-semibold">
+                                    <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                         @{{ element.product.name }}
                                     </p>
 

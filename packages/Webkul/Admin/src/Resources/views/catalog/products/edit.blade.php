@@ -16,7 +16,7 @@
         <div class="grid gap-[10px]">
             <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
                 <div class="grid gap-[6px]">
-                    <p class="text-[20px] text-gray-800 font-bold leading-[24px]">
+                    <p class="text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
                         @lang('admin::app.catalog.products.edit.title')
                     </p>
                 </div>
@@ -133,7 +133,7 @@
                             {!! view_render_event('bagisto.admin.catalog.product.edit.form..' . $group->name . '.before', ['product' => $product]) !!}
 
                             <div class="relative p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
-                                <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                                     {{ $group->name }}
                                 </p>
 

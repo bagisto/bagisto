@@ -83,7 +83,7 @@
 
                             <!-- Details -->
                             <div class="grid gap-[6px] place-content-start">
-                                <p class="text-[16x] text-gray-800 font-semibold">
+                                <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                     @{{ product.name }}
                                 </p>
 

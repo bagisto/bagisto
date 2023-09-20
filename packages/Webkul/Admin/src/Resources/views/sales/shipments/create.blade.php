@@ -143,7 +143,7 @@
         
                                         <div class="grid gap-[6px] place-content-start">
                                             <!-- Item Name -->
-                                            <p class="text-[16x] text-gray-800 font-semibold">
+                                            <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                                 {{ $item->name }}
                                             </p>
         
@@ -191,7 +191,7 @@
                                     <div class="flex gap-[10px] justify-between pb-[10px] mt-[10px] border-b-[1px] border-slate-300">
                                         <div class="grid gap-[10px]">
                                             <!--Inventory Source -->
-                                            <p class="text-[16x] text-gray-800 font-semibold">
+                                            <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                                 {{ $inventorySource->name }}
                                             </p>
 

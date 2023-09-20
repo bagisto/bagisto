@@ -19,7 +19,7 @@
                     enctype="multipart/form-data"
                 >
                     <div class="flex gap-[16px] justify-between items-center mt-3 max-sm:flex-wrap">
-                        <p class="text-[20px] text-gray-800 font-bold">
+                        <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                             @lang('admin::app.marketing.promotions.cart-rules.edit.title')
                         </p>
                 
@@ -48,7 +48,7 @@
                         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                             {{-- General --}}
                             <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
-                                <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                                     @lang('admin::app.marketing.promotions.cart-rules.edit.general')
                                 </p>
 
@@ -246,7 +246,7 @@
                             <!-- Conditions -->
                             <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
                                 <div class="flex gap-[16px] items-center justify-between">
-                                    <p class="text-[16px] text-gray-800 font-semibold">
+                                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                         @lang('admin::app.marketing.promotions.cart-rules.edit.conditions')
                                     </p>
 
@@ -301,7 +301,7 @@
                             <!-- Action -->
                             <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
                                 <div class="grid gap-[6px]">
-                                    <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                                    <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                                         @lang('admin::app.marketing.promotions.cart-rules.edit.actions')
                                     </p>
                 
@@ -590,7 +590,7 @@
                                     @php($selectedOptionIds = old('channels') ?? $cartRule->channels->pluck('id')->toArray())
                                     <!--Channel--> 
                                     <div class="mb-[10px]">
-                                        <p class="required block leading-[24px] text-gray-800 font-medium">
+                                        <p class="required block leading-[24px] text-gray-800 dark:text-white font-medium">
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.channels')
                                         </p>
                                         
@@ -625,7 +625,7 @@
 
                                     <!--Customer Groups -->
                                     <div class="mb-[10px]">
-                                        <p class="required block leading-[24px] text-gray-800 font-medium">
+                                        <p class="required block leading-[24px] text-gray-800 dark:text-white font-medium">
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.customer-groups')
                                         </p>
                                             
@@ -663,7 +663,7 @@
 
                                     <!-- Status -->
                                     <div>
-                                        <p class="block leading-[24px] text-gray-800 font-medium">
+                                        <p class="block leading-[24px] text-gray-800 dark:text-white font-medium">
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.status')
                                         </p>
     
@@ -1192,7 +1192,7 @@
         >
             <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
                 <div class="grid gap-[6px]">
-                    <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                    <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.marketing.promotions.cart-rules.edit.coupon-code')
                     </p>
 
@@ -1351,7 +1351,7 @@
                     <!-- Coupons Export Modal -->
                     <div class="flex justify-between items-center">
                         <div class="flex gap-x-[10px] items-center">
-                            <p class="text-[20px] text-gray-800 font-bold"></p>
+                            <p class="text-[20px] text-gray-800 dark:text-white font-bold"></p>
                         </div>
                         <div> <!-- Empty div to push content to the right end --> </div>
                         <div class="flex gap-x-[10px] items-center">

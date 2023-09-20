@@ -7,7 +7,7 @@
     {{-- Create Sitemap Vue Component --}}
     <v-create-sitemaps>
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-            <p class="text-[20px] text-gray-800 font-bold">
+            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.marketing.sitemaps.index.title')
             </p>
 
@@ -29,7 +29,7 @@
             id="v-create-sitemaps-template"
         >
             <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-                <p class="text-[20px] text-gray-800 font-bold">
+                <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                     @lang('admin::app.marketing.sitemaps.index.title')
                 </p>
 
@@ -77,7 +77,7 @@
 
                                 <!-- Filter Arrow Icon -->
                                 <i
-                                    class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 align-text-bottom"
+                                    class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 dark:text-white align-text-bottom"
                                     :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                     v-if="columnGroup.includes(applied.sort.column)"
                                 ></i>
@@ -160,7 +160,7 @@
                         <x-slot:header>
                             <!-- Create Modal title -->
                             <p
-                                class="text-[18px] text-gray-800 font-bold"
+                                class="text-[18px] text-gray-800 dark:text-white font-bold"
                                 v-if="selectedSitemap"
                             >
                                 @lang('admin::app.marketing.sitemaps.index.edit.title')
@@ -168,7 +168,7 @@
 
                             <!-- Edit Modal title -->
                             <p 
-                                class="text-[18px] text-gray-800 font-bold"
+                                class="text-[18px] text-gray-800 dark:text-white font-bold"
                                 v-else
                             >
                                 @lang('admin::app.marketing.sitemaps.index.create.title')

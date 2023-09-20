@@ -3,7 +3,7 @@
 {{-- Panel --}}
 <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
     {{-- Panel Header --}}
-    <p class="flex justify-between text-[16px] text-gray-800 font-semibold mb-[16px]">
+    <p class="flex justify-between text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
         @lang('admin::app.catalog.products.edit.categories.title')
     </p>
 

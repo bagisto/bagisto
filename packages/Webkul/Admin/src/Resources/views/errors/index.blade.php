@@ -13,7 +13,7 @@
                     class="mb-[25px]"
                 >
 
-				<div class="text-[38px] text-gray-800 font-bold">
+				<div class="text-[38px] text-gray-800 dark:text-white font-bold">
                     {{ $errorCode }}
                 </div>
 

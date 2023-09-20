@@ -10,7 +10,7 @@
         method="PUT"
     >
         <div class="flex justify-between items-center">
-            <p class="text-[20px] text-gray-800 font-bold">
+            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.marketing.communications.templates.edit.title')
             </p>
 

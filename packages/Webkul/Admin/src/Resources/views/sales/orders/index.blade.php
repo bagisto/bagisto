@@ -4,7 +4,7 @@
     </x-slot:title>
 
     <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
-        <p class="py-[11px] text-[20px] text-gray-800 font-bold">
+        <p class="py-[11px] text-[20px] text-gray-800 dark:text-white font-bold">
             @lang('admin::app.sales.orders.index.title')
         </p>
 
@@ -42,7 +42,7 @@
                             </span>
 
                             <i
-                                class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 align-text-bottom"
+                                class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 dark:text-white align-text-bottom"
                                 :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                 v-if="columnGroup.includes(applied.sort.column)"
                             ></i>
@@ -68,7 +68,7 @@
                         <div class="flex gap-[10px]">
                             <div class="flex flex-col gap-[6px]">
                                 <p
-                                    class="text-[16px] text-gray-800 font-semibold"
+                                    class="text-[16px] text-gray-800 dark:text-white font-semibold"
                                 >
                                     @{{ "@lang('admin::app.sales.orders.index.datagrid.id')".replace(':id', record.increment_id) }}
                                 </p>
@@ -97,7 +97,7 @@
                     {{-- Total Amount, Pay Via, Channel --}}
                     <div class="">
                         <div class="flex flex-col gap-[6px]">
-                            <p class="text-[16px] text-gray-800 font-semibold">
+                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @{{ $admin.formatPrice(record.base_grand_total) }}
                             </p>
 

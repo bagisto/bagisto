@@ -89,7 +89,7 @@
 
                 <div class="grid gap-[4px] pb-[10px]">
                     <a
-                        class="px-5 py-2 text-[16px] text-gray-800 hover:bg-gray-100 cursor-pointer"
+                        class="px-5 py-2 text-[16px] text-gray-800 dark:text-white hover:bg-gray-100 cursor-pointer"
                         href="{{ route('admin.account.edit') }}"
                     >
                         @lang('admin::app.components.layouts.header.my-account')
@@ -104,7 +104,7 @@
                     </x-admin::form>
 
                     <a
-                        class="px-5 py-2 text-[16px] text-gray-800 hover:bg-gray-100 cursor-pointer"
+                        class="px-5 py-2 text-[16px] text-gray-800 dark:text-white hover:bg-gray-100 cursor-pointer"
                         href="{{ route('admin.session.destroy') }}"
                         onclick="event.preventDefault(); document.getElementById('adminLogout').submit();"
                     >

@@ -50,7 +50,7 @@
         <div>
             <div class="flex justify-between">
                 <label
-                    class="block leading-[24px] text-[12px] text-gray-800 font-medium"
+                    class="block leading-[24px] text-[12px] text-gray-800 dark:text-white font-medium"
                     :class="{ 'required' : isRequire }"
                     :for="name"
                 >
@@ -58,7 +58,7 @@
                 </label>
 
                 <label
-                    class="block leading-[24px] text-[12px] text-gray-800 font-medium"
+                    class="block leading-[24px] text-[12px] text-gray-800 dark:text-white font-medium"
                     :for="name"
                 >
                     @{{ channel_locale }}
@@ -115,7 +115,7 @@
         <div>
             <div class="flex justify-between">
                 <label
-                    class="block leading-[24px] text-[12px] text-gray-800 font-medium"
+                    class="block leading-[24px] text-[12px] text-gray-800 dark:text-white font-medium"
                     :class="{ 'required' : isRequire }"
                     :for="name"
                 >
@@ -123,7 +123,7 @@
                 </label>
 
                 <label
-                    class="block leading-[24px] text-[12px] text-gray-800 font-medium"
+                    class="block leading-[24px] text-[12px] text-gray-800 dark:text-white font-medium"
                     :for="name"
                 >
                     @{{ channel_locale }}

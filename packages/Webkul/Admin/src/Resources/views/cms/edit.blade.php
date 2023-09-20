@@ -15,7 +15,7 @@
         enctype="multipart/form-data"
     >
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-            <p class="text-[20px] text-gray-800 font-bold">
+            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.cms.edit.title')
             </p>
 
@@ -91,7 +91,7 @@
 
                 {{--Content --}}
                 <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
-                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                         @lang('admin::app.cms.edit.description')
                     </p>
 
@@ -121,7 +121,7 @@
 
                 {{-- SEO Input Fields --}}
                 <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
-                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                         @lang('admin::app.cms.edit.seo')
                     </p>
 
@@ -256,7 +256,7 @@
                             </x-admin::form.control-group>
 
                             {{-- Select Channels --}}
-                            <p class="required block leading-[24px] text-gray-800 font-medium">
+                            <p class="required block leading-[24px] text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.cms.create.channels')
                             </p>
 

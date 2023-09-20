@@ -16,7 +16,7 @@
                     method="PUT"
                 >
                     <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-                        <p class="text-[20px] text-gray-800 font-bold">
+                        <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                             @lang('admin::app.settings.inventory-sources.edit.title')
                         </p>
 
@@ -50,7 +50,7 @@
                         <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                             <!-- General -->
                             <div class="p-[16px] bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
-                                <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                                <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.inventory-sources.edit.general')
                                 </p>
 
@@ -126,7 +126,7 @@
 
                             <!-- Contact Information -->
                             <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
-                                <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                                <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.inventory-sources.edit.contact-info')
                                 </p>
 
@@ -224,7 +224,7 @@
 
                             <!-- Source Address -->
                             <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
-                                <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                                <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.inventory-sources.edit.source-address')
                                 </p>
 

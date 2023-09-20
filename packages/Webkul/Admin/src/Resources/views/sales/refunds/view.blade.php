@@ -9,7 +9,7 @@
     {{-- Page Header --}}
     <div class="grid pt-[11px]">
         <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
-            <p class="text-[20px] text-gray-800 font-bold leading-[24px]">
+            <p class="text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
                 @lang('admin::app.sales.refunds.view.title', ['refund_id' => $refund->id])
             </p>
 
@@ -31,7 +31,7 @@
         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
             <!-- General -->
             <div class=" bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
-                <p class="text-[16px] text-gray-800 font-semibold mb-[16px] p-[16px]">
+                <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px] p-[16px]">
                     @lang('admin::app.sales.refunds.view.product-ordered') ({{ $refund->items->count() ?? 0 }})
                 </p>
 
@@ -57,7 +57,7 @@
 
                                 {{-- Product Name --}}
                                 <div class="grid gap-[6px] place-content-start">
-                                    <p class="text-[16x] text-gray-800 font-semibold">
+                                    <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                         {{ $item->name }}
                                     </p>
 
@@ -87,7 +87,7 @@
                             {{-- Product Price Section --}}
                             <div class="grid gap-[4px] place-content-start">
                                 <div class="">
-                                    <p class="flex items-center gap-x-[4px] justify-end text-[16px] text-gray-800 font-semibold">
+                                    <p class="flex items-center gap-x-[4px] justify-end text-[16px] text-gray-800 dark:text-white font-semibold">
                                         {{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }}
                                     </p>
                                 </div>
@@ -151,7 +151,7 @@
                             @lang('admin::app.sales.refunds.view.adjustment-fee')
                         </p>
 
-                        <p class="text-[16px] text-gray-800 font-semibold">
+                        <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.sales.refunds.view.grand-total')
                         </p>
                     </div>
@@ -194,7 +194,7 @@
                         </p>
 
                         {{-- Base Grand Total --}}
-                        <p class="text-[16px] text-gray-800 font-semibold">
+                        <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                             {{ core()->formatBasePrice($refund->base_grand_total) }}
                         </p>
                     </div>

@@ -10,7 +10,7 @@
         enctype="multipart/form-data"
     >
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-            <p class="text-[20px] text-gray-800 font-bold">
+            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.catalog.categories.create.title')
             </p>
 
@@ -39,7 +39,7 @@
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                 <!-- General -->
                 <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
-                    <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                    <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.categories.create.general')
                     </p>
 
@@ -85,7 +85,7 @@
 
                     <div class="mb-[10px]">
                         {{-- Parent category --}}
-                        <label class="block mb-[10px] text-[12px] text-gray-800 font-medium leading-[24px]">
+                        <label class="block mb-[10px] text-[12px] text-gray-800 dark:text-white font-medium leading-[24px]">
                             @lang('admin::app.catalog.categories.create.parent-category')
                         </label>
 
@@ -107,7 +107,7 @@
 
                 <!-- Description and images -->
                 <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
-                    <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                    <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.categories.create.description-and-images')
                     </p>
 
@@ -172,7 +172,7 @@
 
                 {{-- SEO Deatils --}}
                 <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
-                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                         @lang('admin::app.catalog.categories.create.seo-details')
                     </p>
 

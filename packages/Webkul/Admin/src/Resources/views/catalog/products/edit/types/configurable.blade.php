@@ -11,7 +11,7 @@
             <!-- Panel Header -->
             <div class="flex flex-wrap gap-[10px] justify-between mb-[10px] p-[16px]">
                 <div class="flex flex-col gap-[8px]">
-                    <p class="text-[16px] text-gray-800 font-semibold">
+                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.products.edit.types.configurable.title')
                     </p>
 
@@ -93,7 +93,7 @@
                     <x-admin::modal ref="variantCreateModal">
                         <x-slot:header>
                             <!-- Modal Header -->
-                            <p class="text-[18px] text-gray-800 font-bold">
+                            <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.catalog.products.edit.types.configurable.create.title')
                             </p>
                         </x-slot:header>
@@ -544,7 +544,7 @@
                 <!-- Details -->
                 <div class="grid gap-[6px] place-content-start">
                     <p
-                        class="text-[16x] text-gray-800 font-semibold"
+                        class="text-[16x] text-gray-800 dark:text-white font-semibold"
                         v-text="variant.name ?? 'N/A'"
                     >
                     </p>
@@ -742,7 +742,7 @@
 
                                         <!-- Inventories -->
                                         <div class="grid mt-[20px]">
-                                            <p class="mb-[10px] text-gray-800 font-semibold">
+                                            <p class="mb-[10px] text-gray-800 dark:text-white font-semibold">
                                                 @lang('admin::app.catalog.products.edit.types.configurable.edit.quantities')
                                             </p>
 
@@ -782,7 +782,7 @@
 
                                         <!-- Images -->
                                         <div class="mb-[10px]">
-                                            <p class="mb-[10px] text-gray-800 font-semibold">
+                                            <p class="mb-[10px] text-gray-800 dark:text-white font-semibold">
                                                 @lang('admin::app.catalog.products.edit.types.configurable.edit.images')
                                             </p>
 
@@ -795,7 +795,7 @@
 
                                         <!-- Actions -->
                                         <div
-                                            class="mt-[10px] text-[14px] text-gray-800 font-semibold"
+                                            class="mt-[10px] text-[14px] text-gray-800 dark:text-white font-semibold"
                                             v-if="typeof variant.id !== 'string'"
                                         >
                                             @lang('admin::app.catalog.products.edit.types.configurable.edit.edit-info')

@@ -5,7 +5,7 @@
 
     <v-currencies>
         <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
-            <p class="text-[20px] text-gray-800 font-bold">
+            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.settings.currencies.index.title')
             </p>
 
@@ -32,7 +32,7 @@
             id="v-currencies-template"
         >
             <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-                <p class="text-[20px] text-gray-800 font-bold">
+                <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                     @lang('admin::app.settings.currencies.index.title')
                 </p>
 
@@ -83,7 +83,7 @@
 
                                 <!-- Filter Arrow Icon -->
                                 <i
-                                    class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 align-text-bottom"
+                                    class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 dark:text-white align-text-bottom"
                                     :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                     v-if="columnGroup.includes(applied.sort.column)"
                                 ></i>
@@ -145,14 +145,14 @@
                     <x-admin::modal ref="currencyUpdateOrCreateModal">
                         <x-slot:header>
                             <p
-                                class="text-[18px] text-gray-800 font-bold"
+                                class="text-[18px] text-gray-800 dark:text-white font-bold"
                                 v-if="selectedCurrency"
                             >
                                 @lang('admin::app.settings.currencies.index.edit.title')
                             </p>
 
                             <p 
-                                class="text-[18px] text-gray-800 font-bold"
+                                class="text-[18px] text-gray-800 dark:text-white font-bold"
                                 v-else
                             >
                                 @lang('admin::app.settings.currencies.index.create.title')

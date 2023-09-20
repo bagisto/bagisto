@@ -6,7 +6,7 @@
 
     <div class="grid">
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-            <p class="text-[20px] text-gray-800 font-bold leading-[24px]">
+            <p class="text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
                 {{ $customer->first_name . " " . $customer->last_name }}
 
                 {{-- Customer Status --}}
@@ -77,7 +77,7 @@
                 @if ($totalOrderCount = count($customer->orders))
                     <div class=" p-[16px] flex justify-between">
                         {{-- Total Order Count --}}
-                        <p class="text-[16px] text-gray-800 font-semibold">
+                        <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.customers.customers.view.orders', ['order_count' => $totalOrderCount])
                         </p>    
 
@@ -87,7 +87,7 @@
                                 ->sum('grand_total'));
                         @endphp
 
-                        <p class="text-[16px] text-gray-800 font-semibold">
+                        <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.customers.customers.view.total-revenue', ['revenue' =>  $revenue])
                         </p>
                     </div>
@@ -99,7 +99,7 @@
                                 <div class="row grid grid-cols-3 w-full">
                                     <div class="flex gap-[10px]">
                                         <div class="flex flex-col gap-[6px]">
-                                            <p class="text-[16px] text-gray-800 font-semibold">
+                                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                                 @lang('admin::app.customers.customers.view.increment-id', ['increment_id' => $order->increment_id])
                                             </p>
 
@@ -144,7 +144,7 @@
 
                                     <div class="flex flex-col gap-[6px]">
                                         {{-- Grand Total --}}
-                                        <p class="text-[16px] text-gray-800 font-semibold">
+                                        <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                             {{ core()->currency($order->grand_total ) }}
                                         </p>
 
@@ -198,7 +198,7 @@
                 @else
                     {{-- Empty Container --}} 
                     <div class="p-[16px] flex justify-between">
-                        <p class="text-[16px] text-gray-800 font-semibold">
+                        <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.customers.customers.view.orders', ['order_count' => $totalOrderCount])
                         </p>
                     </div>
@@ -226,7 +226,7 @@
             <div class="bg-white rounded box-shadow">
                 @if ($totalInvoiceCount = count($customer->invoices))
                     {{--Invoice Count --}}
-                    <p class=" p-[16px] text-[16px] text-gray-800 font-semibold">
+                    <p class=" p-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.customers.customers.view.invoice', ['invoice_count' => $totalInvoiceCount])
                     </p>
 
@@ -270,7 +270,7 @@
                 @else
                     {{-- Empty Container --}}
                     <div class="flex justify-between p-[16px]">
-                        <p class="text-[16px] text-gray-800 font-semibold">
+                        <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.customers.customers.view.invoice', ['invoice_count' => $totalInvoiceCount])
                         </p>
                     </div>
@@ -297,7 +297,7 @@
             <div class="bg-white rounded box-shadow">
                 @if($totalReviewsCount = count($customer->reviews) )
                     {{-- Reviews Count --}}
-                    <p class=" p-[16px] text-[16px] text-gray-800 font-semibold">
+                    <p class=" p-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.customers.customers.view.reviews', ['review_count' => $totalReviewsCount])
                     </p>
 
@@ -307,7 +307,7 @@
                             <div class="flex justify-start [&amp;>*]:flex-1">
                                 <div class="flex flex-col gap-[6px]">
                                     {{-- Review Name --}}
-                                    <p class="text-[16px] text-gray-800 font-semibold">
+                                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                         {{ $review->name }}
                                     </p>
 
@@ -362,7 +362,7 @@
                             <div class="flex justify-between gap-x-[16px] items-center">
                                 <div class="flex flex-col gap-[6px]">
                                     {{-- Review Title --}}
-                                    <p class="text-[16px] text-gray-800 font-semibold">
+                                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                         {{ $review->title }}
                                     </p>
 
@@ -381,7 +381,7 @@
                 @else
                     {{-- Empty Invoice Container --}}
                     <div class="flex justify-between p-[16px]">
-                        <p class="text-[16px] text-gray-800 font-semibold">
+                        <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.customers.customers.view.reviews', ['review_count' => $totalReviewsCount])
                         </p>
                     </div>
@@ -406,7 +406,7 @@
           
             {{-- Notes Form --}}
             <div class="bg-white rounded box-shadow">
-                <p class=" p-[16px] pb-0 text-[16px] text-gray-800 font-semibold">
+                <p class=" p-[16px] pb-0 text-[16px] text-gray-800 dark:text-white font-semibold">
                     @lang('admin::app.customers.customers.view.add-note')
                 </p>
 
@@ -469,7 +469,7 @@
 
                 @foreach ($customer->notes as $note)
                     <div class="grid gap-[6px] p-[16px]">
-                        <p class="text-[16px] text-gray-800 leading-6">
+                        <p class="text-[16px] text-gray-800 dark:text-white leading-6">
                             {{$note->note}}
                         </p>
 

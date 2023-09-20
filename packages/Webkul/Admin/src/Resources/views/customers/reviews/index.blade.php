@@ -4,7 +4,7 @@
     </x-slot:title>
 
     <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
-        <p class="py-[11px] text-[20px] text-gray-800 font-bold">
+        <p class="py-[11px] text-[20px] text-gray-800 dark:text-white font-bold">
             @lang('admin::app.customers.reviews.index.title')
         </p>
     </div>
@@ -71,7 +71,7 @@
                                     </span>
 
                                     <i
-                                        class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 align-text-bottom"
+                                        class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 dark:text-white align-text-bottom"
                                         :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                         v-if="columnGroup.includes(applied.sort.column)"
                                     ></i>
@@ -111,7 +111,7 @@
 
                                 <div class="flex flex-col gap-[6px]">
                                     <p
-                                        class="text-[16px] text-gray-800 font-semibold"
+                                        class="text-[16px] text-gray-800 dark:text-white font-semibold"
                                         v-text="record.customer_full_name"
                                     >
                                     </p>
@@ -151,7 +151,7 @@
                             <!-- Title, Description -->
                             <div class="flex flex-col gap-[6px]">
                                 <p
-                                    class="text-[16px] text-gray-800 font-semibold"
+                                    class="text-[16px] text-gray-800 dark:text-white font-semibold"
                                     v-text="record.title"
                                 >
                                 </p>
@@ -322,7 +322,7 @@
                                     </div>
                 
                                     <div class="w-full">
-                                        <p class="block text-[12px] text-gray-800 font-medium leading-[24px]">
+                                        <p class="block text-[12px] text-gray-800 dark:text-white font-medium leading-[24px]">
                                             @lang('admin::app.customers.reviews.index.edit.review-title') 
                                         </p>
 

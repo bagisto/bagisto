@@ -23,7 +23,7 @@
                 method="PUT"
             >
                 <div class="flex justify-between items-center">
-                    <p class="text-[20px] text-gray-800 font-bold">
+                    <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                         @lang('admin::app.catalog.attributes.edit.title')
                     </p>
         
@@ -55,7 +55,7 @@
 
                         <!-- Label -->
                         <div class="p-[16px] bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
-                            <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                            <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @lang('admin::app.catalog.attributes.edit.label')
                             </p>
 
@@ -112,7 +112,7 @@
                             v-if="showSwatch"
                         >
                             <div class="flex justify-between items-center mb-3">
-                                <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                                <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.catalog.attributes.edit.title')
                                 </p>
 
@@ -854,7 +854,7 @@
                         ref="addOptionsRow"
                     >
                         <x-slot:header>
-                            <p class="text-[18px] text-gray-800 font-bold">
+                            <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.catalog.attributes.edit.add-option')
                             </p>
                         </x-slot:header>

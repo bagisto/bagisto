@@ -6,7 +6,7 @@
 
     <v-exchange-rates>
         <div class="flex justify-between items-center">
-            <p class="text-[20px] text-gray-800 font-bold">
+            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.settings.exchange-rates.index.title')
             </p>
 
@@ -41,7 +41,7 @@
             id="v-exchange-rates-template"
         >
             <div class="flex justify-between items-center">
-                <p class="text-[20px] text-gray-800 font-bold">
+                <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                     @lang('admin::app.settings.exchange-rates.index.title')
                 </p>
 
@@ -97,7 +97,7 @@
 
                                 <!-- Filter Arrow Icon -->
                                 <i
-                                    class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 align-text-bottom"
+                                    class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 dark:text-white align-text-bottom"
                                     :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                     v-if="columnGroup.includes(applied.sort.column)"
                                 ></i>
@@ -160,7 +160,7 @@
                     <x-admin::modal ref="exchangeRateUpdateOrCreateModal">
                         <x-slot:header>
                             <!-- Modal Header -->
-                            <p class="text-[18px] text-gray-800 font-bold">
+                            <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                 <span v-if="selectRate">
                                     @lang('admin::app.settings.exchange-rates.index.create.title')
                                 </span>

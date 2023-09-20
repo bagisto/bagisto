@@ -13,7 +13,7 @@
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
             {!! view_render_event('sales.invoice.title.before', ['order' => $order]) !!}
 
-            <p class="text-[20px] text-gray-800 font-bold leading-[24px]">
+            <p class="text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
                 @lang('admin::app.sales.invoices.view.title', ['invoice_id' => $invoice->increment_id ?? $invoice->id])
 
                 <span class="label-active text-[14px] mx-[5px]">
@@ -66,7 +66,7 @@
                     <x-admin::modal ref="groupCreateModal">
                         <x-slot:header>
                             <!-- Modal Header -->
-                            <p class="text-[18px] text-gray-800 font-bold">
+                            <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.sales.invoices.view.send-duplicate-invoice')
                             </p>
                         </x-slot:header>
@@ -123,7 +123,7 @@
         <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
             {{-- Invoice Item Section --}}
             <div class="bg-white rounded-[4px] box-shadow">
-                <p class="text-[16px] text-gray-800 font-semibold mb-[16px] p-[16px]">
+                <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px] p-[16px]">
                     @lang('admin::app.sales.invoices.view.invoice-items') ({{ count($invoice->items) }})
                 </p>
 
@@ -150,7 +150,7 @@
                                 
                                 <div class="grid gap-[6px] place-content-start">
                                     {{-- Item Name --}}
-                                    <p class="text-[16x] text-gray-800 font-semibold">
+                                    <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                         {{ $item->name }}
                                     </p>
 
@@ -186,7 +186,7 @@
 
                             <div class="grid gap-[4px] place-content-start">
                                 {{-- Item Grand Total --}}
-                                <p class="flex items-center gap-x-[4px] justify-end text-[16px] text-gray-800 font-semibold">
+                                <p class="flex items-center gap-x-[4px] justify-end text-[16px] text-gray-800 dark:text-white font-semibold">
                                     {{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }}
                                 </p>
 
@@ -239,7 +239,7 @@
                             </p>
                         @endif
 
-                        <p class="text-[16px] text-gray-800 font-semibold">
+                        <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.sales.invoices.view.grand-total')   
                         </p>
                     </div>
@@ -268,7 +268,7 @@
                         @endif
                         
                         {{-- Grand Total --}}
-                        <p class="text-[16px] text-gray-800 font-semibold">
+                        <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                             {{ core()->formatBasePrice($invoice->base_grand_total) }}
                         </p>
                     </div>

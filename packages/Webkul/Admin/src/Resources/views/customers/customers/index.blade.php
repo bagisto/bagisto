@@ -5,7 +5,7 @@
     </x-slot:title>
 
     <div class="flex justify-between items-center">
-        <p class="text-[20px] text-gray-800 font-bold">
+        <p class="text-[20px] text-gray-800 dark:text-white font-bold">
             @lang('admin::app.customers.customers.index.title')
         </p>
 
@@ -80,7 +80,7 @@
                             </span>
 
                             <i
-                                class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 align-text-bottom"
+                                class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 dark:text-white align-text-bottom"
                                 :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                 v-if="columnGroup.includes(applied.sort.column)"
                             ></i>
@@ -120,7 +120,7 @@
                         </label>
                         <div class="flex flex-col gap-[6px]">
                             <p
-                                class="text-[16px] text-gray-800 font-semibold"
+                                class="text-[16px] text-gray-800 dark:text-white font-semibold"
                                 v-text="record.full_name"
                             >
                             </p>
@@ -175,7 +175,7 @@
                     <div class="flex gap-x-[16px] justify-between items-center">
                         <div class="flex flex-col gap-[6px]">
                             <p
-                                class="text-[16px] text-gray-800 font-semibold"
+                                class="text-[16px] text-gray-800 dark:text-white font-semibold"
                                 v-text="$admin.formatPrice(record.total_base_grand_total)"
                             >
                             </p>
@@ -237,7 +237,7 @@
                         <x-admin::modal ref="customerCreateModal">
                             <x-slot:header>
                                 <!-- Modal Header -->
-                                <p class="text-[18px] text-gray-800 font-bold">
+                                <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                     @lang('admin::app.customers.customers.index.create.title')
                                 </p>
                             </x-slot:header>

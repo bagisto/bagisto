@@ -20,7 +20,7 @@
     <x-admin::modal ref="customerEditModal">
         <x-slot:header>
             <!-- Modal Header -->
-            <p class="text-[18px] text-gray-800 font-bold">
+            <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.customers.customers.edit.title')
             </p>    
         </x-slot:header>

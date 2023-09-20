@@ -12,7 +12,7 @@
             <!-- Panel Header -->
             <div class="flex gap-[20px] justify-between mb-[10px] p-[16px]">
                 <div class="flex flex-col gap-[8px]">
-                    <p class="text-[16px] text-gray-800 font-semibold">
+                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.products.edit.types.downloadable.links.title')
                     </p>
 
@@ -90,7 +90,7 @@
                                 <i class="icon-drag text-[20px] text-gray-600 transition-all pointer-events-none"></i>
 
                                 <div class="grid gap-[6px] place-content-start">
-                                    <p class="text-[16x] text-gray-800 font-semibold">
+                                    <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                         @{{ element.title }}
                                     </p>
 
@@ -494,7 +494,7 @@
             <!-- Panel Header -->
             <div class="flex gap-[20px] justify-between mb-[10px] p-[16px]">
                 <div class="flex flex-col gap-[8px]">
-                    <p class="text-[16px] text-gray-800 font-semibold">
+                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.products.edit.types.downloadable.samples.title')
                     </p>
 
@@ -553,7 +553,7 @@
                                 <i class="icon-drag text-[20px] text-gray-600 transition-all pointer-events-none"></i>
 
                                 <div class="grid gap-[6px] place-content-start">
-                                    <p class="text-[16x] text-gray-800 font-semibold">
+                                    <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                         @{{ element.title }}
                                     </p>
 

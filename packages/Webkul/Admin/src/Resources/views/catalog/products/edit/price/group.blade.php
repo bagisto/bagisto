@@ -101,14 +101,14 @@
                         <x-slot:header>
                             <!-- Modal Header -->
                             <p
-                                class="text-[18px] text-gray-800 font-bold"
+                                class="text-[18px] text-gray-800 dark:text-white font-bold"
                                 v-if="! selectedPrice.id"
                             >
                                 @lang('admin::app.catalog.products.edit.price.group.create.create-title')
                             </p>
 
                             <p
-                                class="text-[18px] text-gray-800 font-bold"
+                                class="text-[18px] text-gray-800 dark:text-white font-bold"
                                 v-else
                             >
                                 @lang('admin::app.catalog.products.edit.price.group.create.update-title')

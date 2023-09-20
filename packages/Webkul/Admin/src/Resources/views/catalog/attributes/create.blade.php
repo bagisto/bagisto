@@ -23,7 +23,7 @@
             >
                 <!-- actions buttons -->
                 <div class="flex justify-between items-center">
-                    <p class="text-[20px] text-gray-800 font-bold">
+                    <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                         @lang('admin::app.catalog.attributes.create.title')
                     </p>
         
@@ -52,7 +52,7 @@
                     <div class="flex flex-col gap-[8px] flex-1">
                         <!-- Label -->
                         <div class="p-[16px] bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
-                            <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                            <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @lang('admin::app.catalog.attributes.create.label')
                             </p>
 
@@ -112,7 +112,7 @@
                                 )"
                         >
                             <div class="flex justify-between items-center mb-3">
-                                <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                                <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.catalog.attributes.create.title')
                                 </p>
 
@@ -737,7 +737,7 @@
                         ref="addOptionsRow"
                     >
                         <x-slot:header>
-                            <p class="text-[18px] text-gray-800 font-bold">
+                            <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.catalog.attributes.create.add-option')
                             </p>
                         </x-slot:header>

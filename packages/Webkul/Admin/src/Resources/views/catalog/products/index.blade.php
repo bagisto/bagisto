@@ -4,7 +4,7 @@
     </x-slot:title>
 
     <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-        <p class="text-[20px] text-gray-800 font-bold">
+        <p class="text-[20px] text-gray-800 dark:text-white font-bold">
             @lang('admin::app.catalog.products.index.title')
         </p>
 
@@ -110,7 +110,7 @@
                             </span>
 
                             <i
-                                class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 align-text-bottom"
+                                class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 dark:text-white align-text-bottom"
                                 :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                 v-if="columnGroup.includes(applied.sort.column)"
                             ></i>
@@ -151,7 +151,7 @@
 
                         <div class="flex flex-col gap-[6px]">
                             <p
-                                class="text-[16px] text-gray-800 font-semibold"
+                                class="text-[16px] text-gray-800 dark:text-white font-semibold"
                                 v-text="record.name"
                             >
                             </p>
@@ -195,7 +195,7 @@
 
                         <div class="flex flex-col gap-[6px]">
                             <p
-                                class="text-[16px] text-gray-800 font-semibold"
+                                class="text-[16px] text-gray-800 dark:text-white font-semibold"
                                 v-text="$admin.formatPrice(record.price)"
                             >
                             </p>
@@ -294,14 +294,14 @@
                             <x-slot:header>
                                 <!-- Modal Header -->
                                 <p
-                                    class="text-[18px] text-gray-800 font-bold"
+                                    class="text-[18px] text-gray-800 dark:text-white font-bold"
                                     v-if="! attributes.length"
                                 >
                                     @lang('admin::app.catalog.products.index.create.title')
                                 </p>
 
                                 <p
-                                    class="text-[18px] text-gray-800 font-bold"
+                                    class="text-[18px] text-gray-800 dark:text-white font-bold"
                                     v-else
                                 >
                                     @lang('admin::app.catalog.products.index.create.configurable-attributes')
@@ -382,7 +382,7 @@
                                             class="mb-[10px]"
                                             v-for="attribute in attributes"
                                         >
-                                            <label class="block leading-[24px] text-[12px] text-gray-800 font-medium">
+                                            <label class="block leading-[24px] text-[12px] text-gray-800 dark:text-white font-medium">
                                                 @{{ attribute.name }}
                                             </label>
 

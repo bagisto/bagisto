@@ -17,7 +17,7 @@
         v-slot="{ errors }"
     >
         <div class="flex justify-between items-center">
-            <p class="text-[20px] text-gray-800 font-bold">
+            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.settings.themes.edit.title')
             </p>
             
@@ -100,7 +100,7 @@
                         <div class="p-[16px] bg-white dark:bg-gray-900  rounded box-shadow">
                             <div class="flex gap-x-[10px] justify-between items-center">
                                 <div class="flex flex-col gap-[4px]">
-                                    <p class="text-[16px] text-gray-800 font-semibold">@lang('admin::app.settings.themes.edit.slider')</p>
+                                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold">@lang('admin::app.settings.themes.edit.slider')</p>
                                     
                                     <p class="text-[12px] text-gray-500 font-medium">
                                         @lang('admin::app.settings.themes.edit.slider-description')
@@ -337,7 +337,7 @@
                     >
                         <x-admin::modal ref="addSliderModal">
                             <x-slot:header>
-                                <p class="text-[18px] text-gray-800 font-bold">
+                                <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                     @lang('admin::app.settings.themes.edit.update-slider')
                                 </p>
                             </x-slot:header>
@@ -409,7 +409,7 @@
                     <div class="p-[16px] bg-white dark:bg-gray-900  rounded box-shadow">
                         <div class="flex gap-x-[10px] justify-between items-center mb-[10px]">
                             <div class="flex flex-col gap-[4px]">
-                                <p class="text-[16px] text-gray-800 font-semibold">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.themes.edit.product-carousel')
                                 </p>
 
@@ -499,7 +499,7 @@
 
                         <div class="flex gap-x-[10px] justify-between items-center">
                             <div class="flex flex-col gap-[4px]">
-                                <p class="text-[16px] text-gray-800 font-semibold">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.themes.edit.filters')
                                 </p>
                             </div>
@@ -704,7 +704,7 @@
                     <form @submit="handleSubmit($event, addFilter)">
                         <x-admin::modal ref="productFilterModal">
                             <x-slot:header>
-                                <p class="text-[18px] text-gray-800 font-bold">
+                                <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                     @lang('admin::app.settings.themes.edit.create-filter')
                                 </p>
                             </x-slot:header>
@@ -779,7 +779,7 @@
                     <div class="p-[16px] bg-white dark:bg-gray-900  rounded box-shadow">
                         <div class="flex gap-x-[10px] justify-between items-center mb-[10px]">
                             <div class="flex flex-col gap-[4px]">
-                                <p class="text-[16px] text-gray-800 font-semibold">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.themes.edit.category-carousel')
                                 </p>
 
@@ -847,7 +847,7 @@
 
                         <div class="flex gap-x-[10px] justify-between items-center">
                             <div class="flex flex-col gap-[4px]">
-                                <p class="text-[16px] text-gray-800 font-semibold">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.themes.edit.filters')
                                 </p>
                             </div>
@@ -1061,7 +1061,7 @@
                     <form @submit="handleSubmit($event, addFilter)">
                         <x-admin::modal ref="categoryFilterModal">
                             <x-slot:header>
-                                <p class="text-[18px] text-gray-800 font-bold">
+                                <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                     @lang('admin::app.settings.themes.edit.create-filter')
                                 </p>
                             </x-slot:header>
@@ -1136,7 +1136,7 @@
                     <div class="p-[16px] bg-white dark:bg-gray-900  rounded box-shadow">
                         <div class="flex gap-x-[10px] justify-between items-center mb-[10px]">
                             <div class="flex flex-col gap-[4px]">
-                                <p class="text-[16px] text-gray-800 font-semibold">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.themes.edit.static-content')
                                 </p>
 
@@ -1362,7 +1362,7 @@
                             <!-- Add Links-->
                             <div class="flex gap-x-[10px] justify-between items-center mb-[10px]">
                                 <div class="flex flex-col gap-[4px]">
-                                    <p class="text-[16px] text-gray-800 font-semibold">
+                                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                         @lang('admin::app.settings.themes.edit.footer-link')
                                     </p>
     
@@ -1625,7 +1625,7 @@
                     <form @submit="handleSubmit($event, updateOrCreate)">
                         <x-admin::modal ref="addLinksModal">
                             <x-slot:header>
-                                <p class="text-[18px] text-gray-800 font-bold">
+                                <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                     @lang('admin::app.settings.themes.edit.footer-link-form-title')
                                 </p>
                             </x-slot:header>
