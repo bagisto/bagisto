@@ -28,6 +28,10 @@ class ShipmentItemRepository extends Repository
             return;
         }
 
+        if (! $data['product']->manage_stock) {
+            return;
+        }
+
         $orderedInventory = $data['product']->ordered_inventories()
             ->where('channel_id', $data['shipment']->order->channel->id)
             ->first();

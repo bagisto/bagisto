@@ -11,8 +11,16 @@
 }
 
 @layer components {
-    input{
+    input {
         @apply outline-none;
+    }
+
+    button:disabled {
+        @apply cursor-not-allowed opacity-50;
+    }
+
+    button:disabled:hover {
+        @apply cursor-not-allowed opacity-50;
     }
 
     [class^="icon-"],

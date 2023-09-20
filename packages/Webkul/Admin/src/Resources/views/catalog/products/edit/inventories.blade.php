@@ -1,14 +1,6 @@
-{!! view_render_event('bagisto.admin.catalog.product.edit.form.inventories.before', ['product' => $product]) !!}
+{!! view_render_event('bagisto.admin.catalog.product.edit.form.inventories.controls.before', ['product' => $product]) !!}
 
-{{-- Panel --}}
-<div class="p-[16px] bg-white rounded-[4px] box-shadow">
-    {{-- Panel Header --}}
-    <p class="flex justify-between text-[16px] text-gray-800 font-semibold mb-[16px]">
-        @lang('admin::app.catalog.products.edit.inventories.title')
-    </p>
-
-    {!! view_render_event('bagisto.admin.catalog.product.edit.form.inventories.controls.before', ['product' => $product]) !!}
-
+<v-inventories>
     {{-- Panel Content --}}
     <div class="mb-[20px] text-[14px] text-gray-600">
         <div class="flex  items-center relative mb-[10px]">
@@ -48,10 +40,36 @@
 
             <x-admin::form.control-group.error :control-name="'inventories[' . $inventorySource->id . ']'"></x-admin::form.control-group.error>
         </x-admin::form.control-group>
-    
     @endforeach
+</v-inventories>
 
-    {!! view_render_event('bagisto.admin.catalog.product.edit.form.inventories.controls.after', ['product' => $product]) !!}
-</div>
+{!! view_render_event('bagisto.admin.catalog.product.edit.form.inventories.controls.after', ['product' => $product]) !!}
 
-{!! view_render_event('bagisto.admin.catalog.product.edit.form.inventories.after', ['product' => $product]) !!}
+
+@pushOnce('scripts')
+    <script type="text/x-template" id="v-inventories-template">
+        <div v-show="manageStock">
+            <slot></slot>
+        </div>
+    </script>
+
+    <script type="module">
+        app.component('v-inventories', {
+            template: '#v-inventories-template',
+
+            data() {
+                return {
+                    manageStock: "{{ (boolean) $product->manage_stock }}",
+                }
+            },
+
+            mounted: function() {
+                let self = this;
+
+                document.getElementById('manage_stock').addEventListener('change', function(e) {
+                    self.manageStock = e.target.checked;
+                });
+            }
+        });
+    </script>
+@endpushOnce

@@ -30,6 +30,10 @@ class RefundItemRepository extends Repository
             return;
         }
 
+        if (! $product->manage_stock) {
+            return;
+        }
+
         if (
             $orderItem->qty_shipped
             && $quantity > $orderItem->qty_ordered - $orderItem->qty_shipped
