@@ -169,7 +169,6 @@
             },
 
             mounted() {
-                console.log(this.errors)
                 this.videos = this.uploadedVideos;
             },
 

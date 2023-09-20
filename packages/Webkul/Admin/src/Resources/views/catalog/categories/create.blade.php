@@ -4,7 +4,7 @@
         @lang('admin::app.catalog.categories.create.title')
     </x-slot:title>
 
-    {{-- Input Form --}}
+    {{-- Category Create Form --}}
     <x-admin::form
         :action="route('admin.catalog.categories.store')"
         enctype="multipart/form-data"
@@ -112,28 +112,30 @@
                     </p>
 
                     <!-- Description -->
-                    <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label class="required">
-                            @lang('admin::app.catalog.categories.create.description')
-                        </x-admin::form.control-group.label>
+                    <v-description v-slot="{ isDescriptionRequired }">
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label ::class="{ 'required' : isDescriptionRequired}">
+                                @lang('admin::app.catalog.categories.create.description')
+                            </x-admin::form.control-group.label>
 
-                        <x-admin::form.control-group.control
-                            type="textarea"
-                            name="description"
-                            id="description"
-                            class="description"
-                            :value="old('description')"
-                            rules="required"
-                            :label="trans('admin::app.catalog.categories.create.description')"
-                            :tinymce="true"
-                        >
-                        </x-admin::form.control-group.control>
+                            <x-admin::form.control-group.control
+                                type="textarea"
+                                name="description"
+                                id="description"
+                                class="description"
+                                :value="old('description')"
+                                ::rules="{ 'required' : isDescriptionRequired}"
+                                :label="trans('admin::app.catalog.categories.create.description')"
+                                :tinymce="true"
+                            >
+                            </x-admin::form.control-group.control>
 
-                        <x-admin::form.control-group.error
-                            control-name="description"
-                        >
-                        </x-admin::form.control-group.error>
-                    </x-admin::form.control-group>
+                            <x-admin::form.control-group.error
+                                control-name="description"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+                    </v-description>
 
                     <div class="flex gap-[50px]">
                         {{-- Add Logo --}}
@@ -307,15 +309,12 @@
                             <x-admin::form.control-group.control
                                 type="select"
                                 name="display_mode"
+                                id="display_mode"
                                 class="cursor-pointer"
                                 rules="required"
+                                value="products_and_description"
                                 :label="trans('admin::app.catalog.categories.create.display-mode')"
                             >
-                                <!-- Default Option -->
-                                <option value="">
-                                    @lang('admin::app.catalog.categories.create.select-display-mode')
-                                </option>
-
                                 <!-- Options -->
                                 <option value="products_and_description">
                                     @lang('admin::app.catalog.categories.create.products-and-description')
@@ -396,4 +395,37 @@
             </div>
         </div>
     </x-admin::form>
+
+    @pushOnce('scripts')
+        <script type="text/x-template" id="v-description-template">
+            <div>
+                <slot :is-description-required="isDescriptionRequired"></slot>
+            </div>
+        </script>
+
+        <script type="module">
+            app.component('v-description', {
+                template: '#v-description-template',
+
+                data() {
+                    return {
+                        isDescriptionRequired: true,
+
+                        displayMode: "{{ old('display_mode') ?? 'products_and_description' }}",
+                    };
+                },
+
+                mounted() {
+                    this.isDescriptionRequired = this.displayMode !== 'products_only';
+
+                    this.$nextTick(() => {
+                        document.querySelector('#display_mode').addEventListener('change', (e) => {
+                            this.isDescriptionRequired = e.target.value !== 'products_only';
+                        });
+                    });
+                },
+            });
+        </script>
+    @endPushOnce
+
 </x-admin::layouts>

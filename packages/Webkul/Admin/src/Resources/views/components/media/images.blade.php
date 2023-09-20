@@ -204,7 +204,6 @@
             },
 
             mounted() {
-                console.log(this.errors)
                 this.images = this.uploadedImages;
             },
 

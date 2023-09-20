@@ -4,7 +4,11 @@
         @lang('admin::app.catalog.categories.edit.title')
     </x-slot:title>
 
-    {{-- Input Form --}}
+    @php
+        $currentLocale = core()->getRequestedLocale();
+    @endphp
+
+    {{-- Category Edit Form --}}
     <x-admin::form
         :action="route('admin.catalog.categories.update', $category->id)"
         enctype="multipart/form-data"
@@ -33,10 +37,6 @@
                 </button>
             </div>
         </div>
-
-        @php
-            $currentLocale = core()->getRequestedLocale();
-        @endphp
 
         <!-- Filter Row -->
         <div class="flex  gap-[16px] justify-between items-center mt-[28px] max-md:flex-wrap">
@@ -154,28 +154,30 @@
                     </p>
 
                     <!-- Description -->
-                    <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label class="required">
-                            @lang('admin::app.catalog.categories.edit.description')
-                        </x-admin::form.control-group.label>
-
-                        <x-admin::form.control-group.control
-                            type="textarea"
-                            name="description"
-                            id="description"
-                            class="description"
-                            :value="old($currentLocale->code)['description'] ?? ($category->translate($currentLocale->code)['description'] ?? '')"
-                            rules="required"
-                            :label="trans('admin::app.catalog.categories.edit.description')"
-                            :tinymce="true"
-                        >
-                        </x-admin::form.control-group.control>
-
-                        <x-admin::form.control-group.error
-                            control-name="description"
-                        >
-                        </x-admin::form.control-group.error>
-                    </x-admin::form.control-group>
+                    <v-description v-slot="{ isDescriptionRequired }">
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label ::class="{ 'required' : isDescriptionRequired}">
+                                @lang('admin::app.catalog.categories.edit.description')
+                            </x-admin::form.control-group.label>
+        
+                            <x-admin::form.control-group.control
+                                type="textarea"
+                                name="description"
+                                id="description"
+                                class="description"
+                                :value="old($currentLocale->code)['description'] ?? ($category->translate($currentLocale->code)['description'] ?? '')"
+                                ::rules="{ 'required' : isDescriptionRequired}"
+                                :label="trans('admin::app.catalog.categories.edit.description')"
+                                :tinymce="true"
+                            >
+                            </x-admin::form.control-group.control>
+        
+                            <x-admin::form.control-group.error
+                                control-name="description"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+                    </v-description>
 
                     <div class="flex gap-[50px]">
                         {{-- Add Logo --}}
@@ -357,25 +359,26 @@
                                 @lang('admin::app.catalog.categories.edit.display-mode')
                             </x-admin::form.control-group.label>
 
-                            @php $selectedValue = old('display_mode') ?: $category->display_mode @endphp
+                            @php $selectedValue = old('display_mode') ?? $category->display_mode @endphp
                             
                             <x-admin::form.control-group.control
                                 type="select"
                                 name="display_mode"
+                                id="display_mode"
                                 class="cursor-pointer"
                                 rules="required"
                                 :value="$selectedValue"
                                 :label="trans('admin::app.catalog.categories.edit.display-mode')"
                             >
-                                <option value="products_and_description" {{ $category->display_mode == 'products_and_description' ? 'selected' : '' }}>
+                                <option value="products_and_description" {{ $selectedValue == 'products_and_description' ? 'selected' : '' }}>
                                     @lang('admin::app.catalog.categories.edit.products-and-description') 
                                 </option>
 
-                                <option value="products_only" {{ $category->display_mode == 'products_only' ? 'selected' : '' }}>
+                                <option value="products_only" {{ $selectedValue == 'products_only' ? 'selected' : '' }}>
                                     @lang('admin::app.catalog.categories.edit.products-only')
                                 </option>
 
-                                <option value="description_only" {{ $category->display_mode == 'description_only' ? 'selected' : '' }}>
+                                <option value="description_only" {{ $selectedValue == 'description_only' ? 'selected' : '' }}>
                                     @lang('admin::app.catalog.categories.edit.description-only')
                                 </option>
                             </x-admin::form.control-group.control>
@@ -451,4 +454,37 @@
             </div>
         </div>
     </x-admin::form>
+
+    @pushOnce('scripts')
+        <script type="text/x-template" id="v-description-template">
+            <div>
+               <slot :is-description-required="isDescriptionRequired"></slot>
+            </div>
+        </script>
+
+        <script type="module">
+            app.component('v-description', {
+                template: '#v-description-template',
+
+                data() {
+                    return {
+                        isDescriptionRequired: true,
+
+                        displayMode: "{{ $category->display_mode }}",
+                    };
+                },
+
+                mounted() {
+                    this.isDescriptionRequired = this.displayMode !== 'products_only';
+
+                    this.$nextTick(() => {
+                        document.querySelector('#display_mode').addEventListener('change', (e) => {
+                            this.isDescriptionRequired = e.target.value !== 'products_only';
+                        });
+                    });
+                },
+            });
+        </script>
+    @endPushOnce
+
 </x-admin::layouts>
