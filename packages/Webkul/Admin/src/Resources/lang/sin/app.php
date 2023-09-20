@@ -655,6 +655,7 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'ස්ථානය',
                             'weight'          => 'බර',
+                            'images'          => 'පින්තූර',
                         ],
 
                         'mass-edit' => [

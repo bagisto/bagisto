@@ -654,6 +654,7 @@ return [
                             'sku'             => 'SKU',
                             'status'          => '状态',
                             'weight'          => '重量',
+                            'images'         => '图片',
                         ],
 
                         'mass-edit' => [
