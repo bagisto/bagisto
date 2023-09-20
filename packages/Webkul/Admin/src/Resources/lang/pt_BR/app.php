@@ -868,6 +868,7 @@ return [
                 'value-per-locale'      => 'Valor Por Localização',
                 'value-per-channel'     => 'Valor Por Canal',
                 'yes'                   => 'Sim',
+                'default-value'         => 'Valor padrão',
 
                 'option' => [
                     'color'    => 'Mostruário de Cores',
@@ -929,6 +930,7 @@ return [
                 'value-per-locale'      => 'Valor Por Localização',
                 'value-per-channel'     => 'Valor Por Canal',
                 'yes'                   => 'Sim',
+                'default-value'         => 'Valor padrão',
 
                 'option' => [
                     'color'    => 'Mostruário de Cores',

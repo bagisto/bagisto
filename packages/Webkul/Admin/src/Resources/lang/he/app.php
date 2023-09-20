@@ -868,6 +868,7 @@ return [
                 'value-per-locale'      => 'ערך לפי אזור',
                 'value-per-channel'     => 'ערך לפי ערוץ',
                 'yes'                   => 'כן',
+                'default-value'         => 'ערך ברירת מחדל',
 
                 'option' => [
                     'color'    => 'Swatch צבע',
@@ -929,6 +930,7 @@ return [
                 'value-per-locale'      => 'ערך לפי אזור',
                 'value-per-channel'     => 'ערך לפי ערוץ',
                 'yes'                   => 'כן',
+                'default-value'         => 'ערך ברירת מחדל',
 
                 'option' => [
                     'color'    => 'Swatch צבע',

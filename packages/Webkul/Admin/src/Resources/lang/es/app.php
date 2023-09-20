@@ -868,6 +868,7 @@ return [
                 'value-per-locale'      => 'Valor por Localización',
                 'value-per-channel'     => 'Valor por Canal',
                 'yes'                   => 'Sí',
+                'default-value'         => 'Valor predeterminado',
 
                 'option'                => [
                     'color'     => 'Muestra de Color',
@@ -929,6 +930,7 @@ return [
                 'value-per-locale'       => 'Valor por Localización',
                 'value-per-channel'      => 'Valor por Canal',
                 'yes'                    => 'Sí',
+                'default-value'         => 'Valor predeterminado',
 
                 'option'                 => [
                     'color'     => 'Muestra de Color',

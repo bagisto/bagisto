@@ -868,6 +868,7 @@ return [
                 'value-per-locale'      => 'مقدار برای مکان (Locale)',
                 'value-per-channel'     => 'مقدار برای کانال',
                 'yes'                   => 'بله',
+                'default-value'         => 'مقدار پیش‌فرض',
 
                 'option'                => [
                     'color'    => 'نمونه رنگ',
@@ -929,6 +930,7 @@ return [
                 'value-per-locale'      => 'مقدار برای مکان (Locale)',
                 'value-per-channel'     => 'مقدار برای کانال',
                 'yes'                   => 'بله',
+                'default-value'         => 'مقدار پیش‌فرض',
 
                 'option' => [
                     'color'    => 'نمونه رنگ',

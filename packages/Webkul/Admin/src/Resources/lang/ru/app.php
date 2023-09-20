@@ -868,6 +868,7 @@ return [
                 'value-per-locale'      => 'Значение для локали',
                 'value-per-channel'     => 'Значение для канала',
                 'yes'                   => 'Да',
+                'default-value'         => 'Значение по умолчанию',
 
                 'option'                => [
                     'color'    => 'Палитра цветов',
@@ -929,6 +930,7 @@ return [
                 'value-per-locale'      => 'Значение для локали',
                 'value-per-channel'     => 'Значение для канала',
                 'yes'                   => 'Да',
+                'default-value'         => 'Значение по умолчанию',
 
                 'option' => [
                     'color'    => 'Палитра цветов',

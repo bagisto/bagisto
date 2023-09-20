@@ -868,6 +868,7 @@ return [
                 'value-per-locale'        => 'Waarde per Locatie',
                 'value-per-channel'       => 'Waarde per Kanaal',
                 'yes'                     => 'Ja',
+                'default-value'           => 'Standaardwaarde',
 
                 'option'  => [
                     'color'    => 'Kleurstaal',
@@ -929,6 +930,7 @@ return [
                 'value-per-locale'      => 'Waarde per Locatie',
                 'value-per-channel'     => 'Waarde per Kanaal',
                 'yes'                   => 'Ja',
+                'default-value'         => 'Standaardwaarde',
 
                 'option' => [
                     'color'    => 'Kleurstaal',

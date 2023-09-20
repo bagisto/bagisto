@@ -868,6 +868,7 @@ return [
                 'value-per-locale'      => 'ロケールごとの値',
                 'value-per-channel'     => 'チャネルごとの値',
                 'yes'                   => 'はい',
+                'default-value'         => 'デフォルト値',
 
                 'option'                => [
                     'color'    => 'カラースウォッチ',
@@ -929,6 +930,7 @@ return [
                 'value-per-locale'      => 'ロケールごとの値',
                 'value-per-channel'     => 'チャネルごとの値',
                 'yes'                   => 'はい',
+                'default-value'         => 'デフォルト値',
 
                 'option' => [
                     'color'    => 'カラースウォッチ',

@@ -869,6 +869,7 @@ return [
                 'value-per-locale'      => 'Yerel Dile Göre Değer',
                 'value-per-channel'     => 'Kanala Göre Değer',
                 'yes'                   => 'Evet',
+                'default-value'         => 'Varsayılan Değer',
 
                 'option' => [
                     'color'    => 'Renk Örneği',
@@ -930,6 +931,7 @@ return [
                 'value-per-locale'      => 'Yerel Dil Başına Değer',
                 'value-per-channel'     => 'Kanal Başına Değer',
                 'yes'                   => 'Evet',
+                'default-value'         => 'Varsayılan Değer',
 
                 'option' => [
                     'color'    => 'Renk Kartelası',

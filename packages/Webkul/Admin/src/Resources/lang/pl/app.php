@@ -868,6 +868,7 @@ return [
                 'value-per-locale'      => 'Wartość Na Lokalizację',
                 'value-per-channel'     => 'Wartość Na Kanał',
                 'yes'                   => 'Tak',
+                'default-value'         => 'Wartość domyślna',
 
                 'option'                => [
                     'color'    => 'Próbka Kolorów',
@@ -929,6 +930,7 @@ return [
                 'value-per-locale'      => 'Wartość na Lokalizację',
                 'value-per-channel'     => 'Wartość na Kanał',
                 'yes'                   => 'Tak',
+                'default-value'         => 'Wartość domyślna',
 
                 'option' => [
                     'color'    => 'Kolor Swatch',

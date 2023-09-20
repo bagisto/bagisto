@@ -868,6 +868,7 @@ return [
                 'value-per-locale'      => 'Wert pro Sprache',
                 'value-per-channel'     => 'Wert pro Kanal',
                 'yes'                   => 'Ja',
+                'default-value'         => 'Standardwert',
 
                 'option'                => [
                     'color'    => 'Farbschwamm',
@@ -929,6 +930,7 @@ return [
                 'value-per-locale'      => 'Wert pro Locale',
                 'value-per-channel'     => 'Wert pro Channel',
                 'yes'                   => 'Ja',
+                'default-value'         => 'Standardwert',
 
                 'option' => [
                     'color'    => 'Farbmuster',

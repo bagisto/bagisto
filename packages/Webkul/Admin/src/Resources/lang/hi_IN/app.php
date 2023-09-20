@@ -868,6 +868,7 @@ return [
                 'value-per-locale'      => 'स्थान के अनुसार मूल्य',
                 'value-per-channel'     => 'चैनल के अनुसार मूल्य',
                 'yes'                   => 'हाँ',
+                'default-value'         => 'डिफ़ॉल्ट मूल्य',
 
                 'option' => [
                     'color'    => 'रंग स्वॉच',
@@ -929,6 +930,7 @@ return [
                 'value-per-locale'      => 'स्थान के अनुसार मूल्य',
                 'value-per-channel'     => 'चैनल के अनुसार मूल्य',
                 'yes'                   => 'हाँ',
+                'default-value'         => 'डिफ़ॉल्ट मूल्य',
 
                 'option' => [
                     'color'    => 'रंग स्वॉच',
