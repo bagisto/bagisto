@@ -10,11 +10,15 @@
     <p class="text-gray-600 leading-6">
         {{ $address->address1 }}<br>
 
-        {{ $address->postcode }} {{ $address->city }}<br>
+        @if ($address->address2)
+            {{ $address->address2 }}<br>
+        @endif
+
+        {{ $address->city }}<br>
 
         {{ $address->state }}<br>
 
-        {{ core()->country_name($address->country) }}<br>
+        {{ core()->country_name($address->country) }} @if ($address->postcode) ({{ $address->postcode }}) @endif<br>
 
         {{ __('admin::app.sales.orders.view.contact') }} : {{ $address->phone }}
     </p>

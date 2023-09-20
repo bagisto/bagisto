@@ -85,7 +85,12 @@
                     </div>
 
                     <p class="text-[#7D7D7D] mt-[25px]">
-                        {{ $address->address1 }} {{ $address->address2 }},
+                        {{ $address->address1 }},
+
+                        @if ($address->address2)
+                            {{ $address->address2 }},
+                        @endif
+
                         {{ $address->city }}, 
                         {{ $address->state }}, {{ $address->country }}, 
                         {{ $address->postcode }}

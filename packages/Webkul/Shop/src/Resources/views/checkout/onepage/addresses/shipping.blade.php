@@ -56,12 +56,17 @@
 
                                     <p class="mt-[25px] text-[#7D7D7D] text-[14px]">
                                         <template v-if="typeof address.address1 === 'string'">
-                                            @{{ address.address1 }}
+                                            @{{ address.address1 }},
                                         </template>
                                         
                                         <template v-else>
                                             @{{ address.address1.join(', ') }}
                                         </template>
+
+                                        <template v-if="address.address2">
+                                            @{{ address.address2 }},
+                                        </template>
+
                                         @{{ address.city }}, 
                                         @{{ address.state }}, @{{ address.country }}, 
                                         @{{ address.postcode }}
