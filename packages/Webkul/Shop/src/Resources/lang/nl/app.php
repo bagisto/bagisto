@@ -405,6 +405,7 @@ return [
         'name'                   => 'Naam',
         'qty'                    => 'Aantal',
         'offers'                 => 'Koop :qty voor :price per stuk en bespaar :discount%',
+        'tax-inclusive'          => 'Inclusief alle belastingen',
 
         'sort-by'                => [
             'title'   => 'Sorteer op',

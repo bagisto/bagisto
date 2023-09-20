@@ -405,6 +405,7 @@ return [
         'name'                   => '名称',
         'qty'                    => '数量',
         'offers'                 => '购买 :qty 件，每件 :price，可节省 :discount%',
+        'tax-inclusive'          => '含所有税费',
 
         'sort-by'                => [
             'title'   => '排序方式',

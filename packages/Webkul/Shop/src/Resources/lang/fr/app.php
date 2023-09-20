@@ -405,6 +405,7 @@ return [
         'name'                   => 'Nom',
         'qty'                    => 'Qté',
         'offers'                 => 'Achetez :qty pour :price chacun et économisez :discount%',
+        'tax-inclusive'          => 'Toutes taxes comprises',
 
         'sort-by' => [
             'title'   => 'Trier par',

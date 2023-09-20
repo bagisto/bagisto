@@ -405,6 +405,7 @@ return [
         'name'                   => 'नाम',
         'qty'                    => 'मात्रा',
         'offers'                 => ':qty को :price प्रति प्रति खरीदें और :discount% बचाएं',
+        'tax-inclusive'          => 'सभी करों के साथ',
 
         'sort-by'                => [
             'title'   => 'क्रमबद्ध करें',

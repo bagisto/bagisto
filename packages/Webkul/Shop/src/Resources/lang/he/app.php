@@ -405,6 +405,7 @@ return [
         'name'                   => 'שם',
         'qty'                    => 'כמות',
         'offers'                 => 'קנה :qty במחיר של :price לכל יחידה וחסוך :discount%',
+        'tax-inclusive'          => 'כולל כל המסים',
 
         'sort-by'                => [
             'title'   => 'מיין לפי',
