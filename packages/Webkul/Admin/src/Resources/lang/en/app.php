@@ -3189,6 +3189,15 @@ return [
             ],
         ],
 
+        'modal' => [
+            'confirm' => [
+                'title'        => 'Are you sure?',
+                'message'      => 'Are you sure you want to perform this action?',
+                'agree-btn'    => 'Agree',
+                'disagree-btn' => 'Disagree',
+            ],
+        ],
+
         'products' => [
             'search' => [
                 'title'       => 'Select Products',

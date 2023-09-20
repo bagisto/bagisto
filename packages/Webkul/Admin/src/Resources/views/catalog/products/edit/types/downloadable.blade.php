@@ -32,7 +32,6 @@
                 </div>
             </div>
 
-
             <!-- Panel Content -->
             <div
                 class="grid"
@@ -486,6 +485,8 @@
                     </x-admin::drawer>
                 </form>
             </x-admin::form>
+
+            <x-admin::modal.confirm ref="confirmRemoveDownloadableLinkModal"/>
         </div>
     </script>
 
@@ -790,6 +791,8 @@
                     </x-admin::drawer>
                 </form>
             </x-admin::form>
+
+            <x-admin::modal.confirm ref="confirmRemoveDownloadableSampleModal"/>
         </div>
     </script>
 
@@ -843,9 +846,13 @@
                 },
 
                 remove(link) {
-                    let index = this.links.indexOf(link);
+                    this.$refs.confirmRemoveDownloadableLinkModal.open({
+                        agree: () => {
+                            let index = this.links.indexOf(link);
 
-                    this.links.splice(index, 1);
+                            this.links.splice(index, 1);
+                        }
+                    });
                 },
 
                 resetForm() {
@@ -917,9 +924,13 @@
                 },
 
                 remove(sample) {
-                    let index = this.samples.indexOf(sample)
+                    this.$refs.confirmRemoveDownloadableSampleModal.open({
+                        agree: () => {
+                            let index = this.samples.indexOf(sample)
 
-                    this.samples.splice(index, 1)
+                            this.samples.splice(index, 1)
+                        }
+                    });
                 },
 
                 resetForm() {
