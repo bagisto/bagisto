@@ -1972,6 +1972,7 @@ return [
             'meta-title'       => 'כותרת מטא',
             'seo'              => 'קידום אתרים (SEO)',
             'url-key'          => 'מפתח URL',
+            'description'      => 'תיאור',
         ],
 
         'edit' => [
@@ -1988,6 +1989,7 @@ return [
             'meta-description' => 'תיאור מטא',
             'meta-title'       => 'כותרת מטא',
             'url-key'          => 'מפתח URL',
+            'description'      => 'תיאור',
         ],
 
         'create-success' => 'נוצר עמוד בהצלחה.',

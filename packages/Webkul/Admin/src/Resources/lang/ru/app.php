@@ -1972,6 +1972,7 @@ return [
             'meta-title'       => 'Мета-заголовок',
             'seo'              => 'SEO',
             'url-key'          => 'URL-ключ',
+            'description'      => 'Описание',
         ],
 
         'edit' => [
@@ -1988,6 +1989,7 @@ return [
             'meta-description' => 'Мета-описание',
             'meta-title'       => 'Мета-заголовок',
             'url-key'          => 'URL-ключ',
+            'description'      => 'Описание',
         ],
 
         'create-success' => 'Страница CMS успешно создана.',

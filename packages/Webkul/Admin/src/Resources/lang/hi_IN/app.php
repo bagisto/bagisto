@@ -1972,6 +1972,7 @@ return [
             'meta-title'       => 'मेटा शीर्षक',
             'seo'              => 'SEO',
             'url-key'          => 'URL कुंजी',
+            'description'      => 'विवरण',
         ],
 
         'edit' => [
@@ -1988,6 +1989,7 @@ return [
             'meta-description' => 'मेटा विवरण',
             'meta-title'       => 'मेटा शीर्षक',
             'url-key'          => 'URL कुंजी',
+            'description'      => 'विवरण',
         ],
 
         'create-success' => 'CMS सफलतापूर्वक बनाया गया।',

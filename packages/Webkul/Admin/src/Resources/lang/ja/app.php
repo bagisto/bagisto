@@ -1972,6 +1972,7 @@ return [
             'meta-title'       => 'メタタイトル',
             'seo'              => 'SEO',
             'url-key'          => 'URLキー',
+            'description'      => '説明',
         ],
 
         'edit' => [
@@ -1988,6 +1989,7 @@ return [
             'meta-description' => 'メタディスクリプション',
             'meta-title'       => 'メタタイトル',
             'url-key'          => 'URLキー',
+            'description'      => '説明',
         ],
 
         'create-success' => 'CMSが正常に作成されました。',

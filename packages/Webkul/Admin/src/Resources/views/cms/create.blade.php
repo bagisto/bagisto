@@ -41,6 +41,10 @@
 
                 {{--Content --}}
                 <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                        @lang('admin::app.cms.create.description')
+                    </p>
+
                     <x-admin::form.control-group class="mb-[10px]">
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.cms.create.content')

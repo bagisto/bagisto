@@ -1972,6 +1972,7 @@ return [
             'meta-title'       => 'عنوان الميتا',
             'seo'              => 'تحسين محركات البحث',
             'url-key'          => 'مفتاح الرابط',
+            'description'      => 'وصف',
         ],
 
         'edit' => [
@@ -1988,6 +1989,7 @@ return [
             'meta-description' => 'وصف الميتا',
             'meta-title'       => 'عنوان الميتا',
             'url-key'          => 'مفتاح الرابط',
+            'description'      => 'وصف',
         ],
 
         'create-success'  => 'تم إنشاء صفحة بنجاح.',

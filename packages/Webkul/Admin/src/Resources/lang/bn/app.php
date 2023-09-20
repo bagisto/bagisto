@@ -1972,6 +1972,7 @@ return [
             'meta-title'       => 'মেটা শিরোনাম',
             'seo'              => 'এসইও',
             'url-key'          => 'URL কী',
+            'description'      => 'বর্ণনা',
         ],
 
         'edit' => [
@@ -1988,6 +1989,7 @@ return [
             'meta-description' => 'মেটা বিবরণ',
             'meta-title'       => 'মেটা শিরোনাম',
             'url-key'          => 'URL কী',
+            'description'      => 'বর্ণনা',
         ],
 
         'create-success' => 'সিএমএস সফলভাবে তৈরি করা হয়েছে।',

@@ -1972,6 +1972,7 @@ return [
             'meta-title'       => 'Мета заголовок',
             'seo'              => 'Пошукова оптимізація',
             'url-key'          => 'URL-ключ',
+            'description'      => 'Опис',
         ],
 
         'edit' => [
@@ -1988,6 +1989,7 @@ return [
             'meta-description' => 'Мета опис',
             'meta-title'       => 'Мета заголовок',
             'url-key'          => 'URL-ключ',
+            'description'      => 'Опис',
         ],
 
         'create-success' => 'CMS створена успішно.',

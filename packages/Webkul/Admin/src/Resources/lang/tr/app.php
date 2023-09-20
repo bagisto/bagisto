@@ -1973,6 +1973,8 @@ return [
             'meta-title'       => 'Meta Başlık',
             'seo'              => 'SEO',
             'url-key'          => 'URL Anahtarı',
+            'description'      => 'Açıklama',
+
         ],
 
         'edit' => [
@@ -1989,6 +1991,7 @@ return [
             'meta-description' => 'Meta Açıklama',
             'meta-title'       => 'Meta Başlık',
             'url-key'          => 'URL Anahtarı',
+            'description'      => 'Açıklama',
         ],
 
         'create-success' => 'CMS başarıyla oluşturuldu.',

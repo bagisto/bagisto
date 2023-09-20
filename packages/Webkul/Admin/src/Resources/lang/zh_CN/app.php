@@ -1972,6 +1972,7 @@ return [
             'meta-title'       => 'Meta标题',
             'seo'              => 'SEO',
             'url-key'          => 'URL键',
+            'description'      => '描述',
         ],
 
         'edit' => [
@@ -1988,6 +1989,7 @@ return [
             'meta-description' => 'Meta描述',
             'meta-title'       => 'Meta标题',
             'url-key'          => 'URL键',
+            'description'      => '描述',
         ],
 
         'create-success' => 'CMS页面创建成功。',

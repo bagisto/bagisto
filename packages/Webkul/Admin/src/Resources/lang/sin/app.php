@@ -1973,6 +1973,7 @@ return [
             'meta-title'       => 'මෙටා මාධ්‍යය',
             'seo'              => 'SEO',
             'url-key'          => 'URL යතුර',
+            'description'      => 'විස්තරය',
         ],
 
         'edit' => [
@@ -1989,6 +1990,7 @@ return [
             'meta-description' => 'මෙටා විස්තරය',
             'meta-title'       => 'මෙටා මාධ්‍යය',
             'url-key'          => 'URL යතුර',
+            'description'      => 'විස්තරය',
         ],
 
         'create-success' => 'CMS සාර්ථකව සාදන ලදි.',

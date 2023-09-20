@@ -1972,6 +1972,7 @@ return [
             'meta-title'       => 'Tytuł Meta',
             'seo'              => 'SEO',
             'url-key'          => 'Klucz URL',
+            'description'      => 'Opis',
         ],
 
         'edit' => [
@@ -1988,6 +1989,7 @@ return [
             'meta-description' => 'Opis Meta',
             'meta-title'       => 'Tytuł Meta',
             'url-key'          => 'Klucz URL',
+            'description'      => 'Opis',
         ],
 
         'create-success' => 'CMS został pomyślnie utworzony.',

@@ -1972,6 +1972,7 @@ return [
             'meta-title'       => 'متا عنوان',
             'seo'              => 'سئو',
             'url-key'          => 'کلید URL',
+            'description'      => 'توضیح',
         ],
 
         'edit' => [
@@ -1988,6 +1989,7 @@ return [
             'meta-description' => 'متا توضیحات',
             'meta-title'       => 'متا عنوان',
             'url-key'          => 'کلید URL',
+            'description'      => 'توضیح',
         ],
 
         'create-success' => 'CMS با موفقیت ایجاد شد.',
