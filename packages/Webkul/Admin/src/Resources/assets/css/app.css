@@ -465,6 +465,6 @@
     }
 
     .CodeMirror {
-        @apply !h-[calc(100vh-299px)]
+        @apply !h-[calc(100vh-367px)]
     }
 }
