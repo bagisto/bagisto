@@ -23,12 +23,14 @@
 
             <span
                 class="icon-arrow-left text-[24px] font-bold text-white w-auto -mt-[22px] p-[12px] absolute top-1/2 left-[10px] bg-[rgba(0,0,0,0.8)] transition-all opacity-30 rounded-full hover:opacity-100 cursor-pointer"
+                v-if="images?.length >= 2"
                 @click="navigate(currentIndex -= 1)"
             >
             </span>
 
             <span
                 class="icon-arrow-right text-[24px] font-bold text-white w-auto -mt-[22px] p-[12px] absolute top-1/2 right-[10px] bg-[rgba(0,0,0,0.8)] transition-all opacity-30 rounded-full hover:opacity-100 cursor-pointer"
+                v-if="images?.length >= 2"
                 @click="navigate(currentIndex += 1)"
             >
             </span>
