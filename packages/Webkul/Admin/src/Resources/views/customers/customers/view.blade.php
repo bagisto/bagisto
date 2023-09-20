@@ -558,10 +558,18 @@
 
                                 <p class="text-gray-600">
                                     {{ $address->address1 }},
+
+                                    @if ($address->address2)
+                                        {{ $address->address2 }},
+                                    @endif
+
                                     {{ $address->city }},
-                                    {{ $address->postcode }},
-                                    {{ $address->state }}, 
+                                    {{ $address->state }},
                                     {{ core()->country_name($address->country) }}
+
+                                    @if($address->postcode)
+                                        ({{ $address->postcode }})
+                                    @endif
                                 </p>
 
                                 <p class="text-gray-600">

@@ -124,6 +124,22 @@
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
+        @if (
+            core()->getConfigData('customer.address.information.street_lines')
+            && core()->getConfigData('customer.address.information.street_lines') > 1
+        )
+            @for ($i = 2; $i <= core()->getConfigData('customer.address.information.street_lines'); $i++)
+                <x-shop::form.control-group.control
+                    type="text"
+                    name="address{{ $i }}[]"
+                    :value="old('address{{$i}}[]', $address->{'address'.$i})"
+                    :label="trans('shop::app.customers.account.addresses.street-address')"
+                    :placeholder="trans('shop::app.customers.account.addresses.street-address')"
+                >
+                </x-shop::form.control-group.control>
+            @endfor
+        @endif
+
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.addresses.country')

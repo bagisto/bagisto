@@ -167,6 +167,20 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
+                                @if (core()->getConfigData('customer.address.information.street_lines') > 1)
+                                    @for ($i = 2; $i <= core()->getConfigData('customer.address.information.street_lines'); $i++)
+                                        <x-shop::form.control-group.control
+                                            type="text"
+                                            name="address{{ $i }}[]"
+                                            id="address{{ $i }}[]"
+                                            :label="trans('admin::app.customers.addresses.create.street-address')"
+                                            :placeholder="trans('admin::app.customers.addresses.create.street-address')"
+                                            v-model="addressData.address{{ $i }}"
+                                        >
+                                        </x-shop::form.control-group.control>
+                                    @endfor
+                                @endif
+
                                 <!--need to check this -->
                                 <div
                                     v-if="streetLineCount && streetLineCount > 1"
@@ -214,7 +228,7 @@
                                     </x-admin::form.control-group>
 
                                     <!-- PostCode -->
-                                    <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group class="w-full mb-[10px]">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.customers.addresses.edit.post-code')
                                         </x-admin::form.control-group.label>
