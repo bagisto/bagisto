@@ -2,7 +2,7 @@
     $admin = auth()->guard('admin')->user();
 @endphp
 
-<header class="flex justify-between items-center px-[16px] py-[10px] bg-white border-b-[1px] border-gray-300 sticky top-0 z-[10001]">
+<header class="flex justify-between items-center px-[16px] py-[10px] bg-white dark:bg-gray-900  border-b-[1px] border-gray-300 sticky top-0 z-[10001]">
     <div class="flex gap-[6px] items-center">
         {{-- Hamburger Menu --}}
         <i
@@ -186,7 +186,7 @@
             >
 
             <div
-                class="absolute top-[40px] w-full bg-white shadow-[0px_0px_0px_0px_rgba(0,0,0,0.10),0px_1px_3px_0px_rgba(0,0,0,0.10),0px_5px_5px_0px_rgba(0,0,0,0.09),0px_12px_7px_0px_rgba(0,0,0,0.05),0px_22px_9px_0px_rgba(0,0,0,0.01),0px_34px_9px_0px_rgba(0,0,0,0.00)] border border-gray-300 rounded-[8px] z-10"
+                class="absolute top-[40px] w-full bg-white dark:bg-gray-900  shadow-[0px_0px_0px_0px_rgba(0,0,0,0.10),0px_1px_3px_0px_rgba(0,0,0,0.10),0px_5px_5px_0px_rgba(0,0,0,0.09),0px_12px_7px_0px_rgba(0,0,0,0.05),0px_22px_9px_0px_rgba(0,0,0,0.01),0px_34px_9px_0px_rgba(0,0,0,0.00)] border border-gray-300 rounded-[8px] z-10"
                 v-if="isDropdownOpen"
             >
                 <!-- Search Tabs -->

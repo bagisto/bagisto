@@ -33,7 +33,7 @@
             {{-- Left sub-component --}}
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                 {{-- General Information --}}
-                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
                     <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
                         @lang('admin::app.settings.channels.create.general')
                     </p>
@@ -192,7 +192,7 @@
                 </div>
 
                 {{-- Logo and Design --}}
-                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
                     <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
                         @lang('admin::app.settings.channels.create.design')
                     </p>
@@ -267,7 +267,7 @@
                 </div>
 
                 {{-- Home Page SEO --}} 
-                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
                     <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
                         @lang('admin::app.settings.channels.create.seo')
                     </p>

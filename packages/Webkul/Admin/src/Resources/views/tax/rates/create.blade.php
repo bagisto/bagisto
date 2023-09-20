@@ -40,7 +40,7 @@
                 <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                     <!-- Left Component -->
                     <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                        <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                        <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
                             <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
                                 @lang('admin::app.settings.taxes.rates.create.general')
                             </p>

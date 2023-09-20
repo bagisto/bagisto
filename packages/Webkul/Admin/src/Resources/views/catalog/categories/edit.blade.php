@@ -82,7 +82,7 @@
                 {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.general.before', ['category' => $category]) !!}
 
                 <!-- General -->
-                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
                     <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
                         @lang('admin::app.catalog.categories.edit.general')
                     </p>
@@ -148,7 +148,7 @@
                 {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.description_images.before', ['category' => $category]) !!}
 
                 <!-- Description and images -->
-                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
                     <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
                         @lang('admin::app.catalog.categories.edit.description-and-images')
                     </p>
@@ -222,7 +222,7 @@
                 {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.seo.before', ['category' => $category]) !!}
 
                 {{-- SEO Deatils --}}
-                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
                     <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
                         @lang('admin::app.catalog.categories.edit.seo-details')
                     </p>

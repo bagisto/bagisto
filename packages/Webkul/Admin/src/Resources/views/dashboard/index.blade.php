@@ -25,12 +25,12 @@
         {{-- Left Component --}}
         <div class=" flex flex-col gap-[30px] flex-1 max-xl:flex-auto">
             {{-- Overall Detailes --}}
-            <div class="flex flex-col gap-[8px] ">
+            <div class="flex flex-col gap-[8px]   ">
                 <p class="text-[16px] text-gray-600 font-semibold">
                     @lang('admin::app.dashboard.index.overall-details')
                 </p>
 
-                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                <div class="p-[16px] rounded-[4px]  bg-white dark:bg-gray-900  dark:bg-gray-900 box-shadow">
                     <div class="flex gap-[16px] flex-wrap ">
                         {{-- Total Sales --}}
                         <div class="flex gap-[10px] flex-1 min-w-[200px]">
@@ -222,14 +222,14 @@
                 </div>
             </div>
 
-            {{-- Todays Deatiles --}}
-            <div class="flex flex-col gap-[8px]">
+            {{-- Todays Details --}}
+            <div class="flex flex-col gap-[8px]  ">
                 <p class="text-[16px] text-gray-600 font-semibold">
                     @lang('admin::app.dashboard.index.today-details')
                 </p>
 
-                <div class="bg-white rounded-[4px] box-shadow">
-                    <div class="flex gap-[16px] flex-wrap p-[16px] border-b-[1px] border-gray-300">
+                <div class="rounded-[4px] box-shadow">
+                    <div class="flex gap-[16px] flex-wrap p-[16px]  bg-white dark:bg-gray-900  dark:bg-gray-900 border-b-[1px] border-gray-300">
                         {{-- Today's Sales --}}
                         <div class="flex gap-[10px] flex-1">
                             <img
@@ -354,9 +354,9 @@
                         </div>
                     </div>
 
-                    <!-- Today Orders Detailes -->
+                    <!-- Today Orders Details -->
                     @foreach ($statistics['today_details']['today_orders']['current'] as $item)
-                        <div class="row grid grid-cols-4  gap-y-[24px] p-[16px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-50 max-1580:grid-cols-3 max-sm:grid-cols-1">
+                        <div class="row grid grid-cols-4  gap-y-[24px] p-[16px]  bg-white dark:bg-gray-900  dark:bg-gray-900 border-b-[1px] border-gray-300 transition-all hover:bg-gray-50 max-1580:grid-cols-3 max-sm:grid-cols-1">
                             {{-- Order ID, Status, Created --}}
                             <div class="flex gap-[10px]">
                                 <div class="flex flex-col gap-[6px]">
@@ -504,18 +504,18 @@
             </div>
 
             {{-- Stock Thereshold --}}
-            <div class="flex flex-col gap-[8px]">
+            <div class="flex flex-col gap-[8px]  ">
                 <p class="text-[16px] text-gray-600 font-semibold">
                     @lang('admin::app.dashboard.index.stock-threshold')
                 </p>
 
                 {{-- Products List --}}
                 @if(! $statistics['stock_threshold']->isEmpty())
-                    <div class="bg-white rounded-[4px] box-shadow">
+                    <div class="rounded-[4px] box-shadow">
                         @foreach ($statistics['stock_threshold'] as $item)
                             <!-- Single Product -->
                             <div class="relative">
-                                <div class="row grid grid-cols-2 gap-y-[24px] p-[16px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-50 max-sm:grid-cols-[1fr_auto]">
+                                <div class="row grid grid-cols-2 gap-y-[24px] p-[16px]  bg-white dark:bg-gray-900  dark:bg-gray-900 border-b-[1px] border-gray-300 transition-all hover:bg-gray-50 max-sm:grid-cols-[1fr_auto]">
                                     <div class="flex gap-[10px]">
                                         @if ($item->product?->base_image_url)
                                             <div class="">
@@ -584,7 +584,7 @@
                         @endforeach
                     </div>
                 @else
-                    <div class="bg-white rounded-[4px] box-shadow">
+                    <div class="rounded-[4px] box-shadow">
                         <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
                             <img src="{{ bagisto_asset('images/icon-add-product.svg') }}" class="w-[80px] h-[80px]">
                             <div class="flex flex-col items-center">
@@ -603,7 +603,7 @@
         </div>
 
         {{-- Right Component --}}
-        <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+        <div class="flex flex-col gap-[8px] w-[360px] max-w-full   max-sm:w-full">
             {{-- First Component --}}
             <p class="text-[16px] text-gray-600 font-semibold">
                 @lang('admin::app.dashboard.index.store-stats')
@@ -621,7 +621,7 @@
 
         <script type="text/x-template" id="v-store-stats-template">
             <x-admin::form :action="route('admin.catalog.categories.store')">
-                <div class="bg-white rounded-[4px] box-shadow box-shadow">
+                <div class="rounded-[4px]  bg-white dark:bg-gray-900  dark:bg-gray-900 box-shadow">
                     <!-- Total Sales Shimmer -->
                     <template v-if="isLoading">
                         <x-admin::shimmer.dashboard.right.total-sales/>

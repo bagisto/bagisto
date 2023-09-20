@@ -7,7 +7,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-datagrid-table-template">
         <div class="w-full">
-            <div class="table-responsive grid w-full box-shadow rounded-[4px] bg-white overflow-hidden">
+            <div class="table-responsive grid w-full box-shadow rounded-[4px] bg-white dark:bg-gray-900  overflow-hidden">
                 <slot name="header">
                     <template v-if="$parent.isLoading">
                         <x-admin::shimmer.datagrid.table.head :isMultiRow="$isMultiRow"></x-admin::shimmer.datagrid.table.head>

@@ -13,7 +13,7 @@
                 alt="Bagisto Logo"
             >
 
-            <div class="flex flex-col min-w-[300px] bg-white rounded-[6px] box-shadow">
+            <div class="flex flex-col min-w-[300px] bg-white dark:bg-gray-900  rounded-[6px] box-shadow">
                 {{-- Login Form --}}
                 <x-admin::form :action="route('admin.reset_password.store')">
                     <div class="p-[16px]  ">

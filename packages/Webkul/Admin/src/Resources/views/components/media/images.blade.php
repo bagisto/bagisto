@@ -102,7 +102,7 @@
                 :style="{'width': this.width, 'height': this.height}"
             />
 
-            <div class="flex flex-col justify-between invisible w-full p-[11px] bg-white absolute top-0 bottom-0 opacity-80 transition-all group-hover:visible">
+            <div class="flex flex-col justify-between invisible w-full p-[11px] bg-white dark:bg-gray-900  absolute top-0 bottom-0 opacity-80 transition-all group-hover:visible">
                 <!-- Image Name -->
                 <p class="text-[12px] text-gray-600 font-semibold break-all"></p>
 

@@ -54,7 +54,7 @@
                         {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.attributes.before', ['attribute' => $attribute]) !!}
 
                         <!-- Label -->
-                        <div class="p-[16px] bg-white box-shadow rounded-[4px]">
+                        <div class="p-[16px] bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
                             <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
                                 @lang('admin::app.catalog.attributes.edit.label')
                             </p>
@@ -108,7 +108,7 @@
 
                         <!-- Options -->
                         <div
-                            class="p-[16px] bg-white box-shadow rounded-[4px] {{ in_array($attribute->type, ['select', 'multiselect', 'checkbox']) ?: 'hidden' }}"
+                            class="p-[16px] bg-white dark:bg-gray-900  box-shadow rounded-[4px] {{ in_array($attribute->type, ['select', 'multiselect', 'checkbox']) ?: 'hidden' }}"
                             v-if="showSwatch"
                         >
                             <div class="flex justify-between items-center mb-3">

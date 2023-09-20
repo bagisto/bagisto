@@ -132,7 +132,7 @@
                         @if (count($customAttributes))
                             {!! view_render_event('bagisto.admin.catalog.product.edit.form..' . $group->name . '.before', ['product' => $product]) !!}
 
-                            <div class="relative p-[16px] bg-white rounded-[4px] box-shadow">
+                            <div class="relative p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
                                 <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
                                     {{ $group->name }}
                                 </p>

@@ -17,7 +17,7 @@
                     <x-slot:toggle>
                         <button
                             type="button" 
-                            class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border border-gray-300 bg-white px-[10px] py-[6px] text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black"
+                            class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border border-gray-300 bg-white dark:bg-gray-900  px-[10px] py-[6px] text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black"
                         >
                             <span>
                                 @lang('admin::app.components.datagrid.toolbar.mass-actions.select-action')
@@ -52,7 +52,7 @@
                                     <i class="icon-arrow-left text-[20px] -mt-[1px]"></i>
                                 </a>
 
-                                <ul class="absolute ltr:left-full rtl:right-full top-0 z-10 hidden w-max min-w-[150px] border border-gray-300 rounded-[4px] bg-white shadow-[0_5px_20px_rgba(0,0,0,0.15)] group-hover/item:block">
+                                <ul class="absolute ltr:left-full rtl:right-full top-0 z-10 hidden w-max min-w-[150px] border border-gray-300 rounded-[4px] bg-white dark:bg-gray-900  shadow-[0_5px_20px_rgba(0,0,0,0.15)] group-hover/item:block">
                                     <li v-for="option in massAction.options">
                                         <a
                                             class="whitespace-no-wrap block rounded-t px-4 py-2 text-[14px] text-gray-600 hover:bg-gray-100"
@@ -105,7 +105,7 @@
                             type="text"
                             name="search"
                             :value="getAppliedColumnValues('all')"
-                            class="block w-full rounded-lg border border-gray-300 bg-white py-[6px] ltr:pl-[12px] rtl:pr-[12px] ltr:pr-[40px] rtl:pl-[40px] leading-6 text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                            class="block w-full rounded-lg border border-gray-300 bg-white dark:bg-gray-900  py-[6px] ltr:pl-[12px] rtl:pr-[12px] ltr:pr-[40px] rtl:pl-[40px] leading-6 text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
                             placeholder="@lang('admin::app.components.datagrid.toolbar.search.title')"
                             autocomplete="off"
                             @keyup.enter="filterPage"
@@ -133,7 +133,7 @@
                 <x-slot:toggle>
                     <div>
                         <div
-                            class="relative inline-flex w-full max-w-max ltr:pl-[12px] rtl:pr-[12px] ltr:pr-[18px] rtl:pl-[18px] cursor-pointer select-none appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-gray-300 bg-white px-[4px] py-[6px] text-center text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2"
+                            class="relative inline-flex w-full max-w-max ltr:pl-[12px] rtl:pr-[12px] ltr:pr-[18px] rtl:pl-[18px] cursor-pointer select-none appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-gray-300 bg-white dark:bg-gray-900  px-[4px] py-[6px] text-center text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2"
                             :class="{'[&>*]:text-blue-600': applied.filters.columns.length > 1}"
                         >
                             <span class="icon-filter text-[22px]"></span>
@@ -148,7 +148,7 @@
                             ></span>
                         </div>
 
-                        <div class="z-10 hidden w-full divide-y divide-gray-100 rounded bg-white shadow">
+                        <div class="z-10 hidden w-full divide-y divide-gray-100 rounded bg-white dark:bg-gray-900  shadow">
                         </div>
                     </div>
                 </x-slot:toggle>
@@ -174,7 +174,7 @@
                     <x-slot:toggle>
                         <button
                             type="button" 
-                            class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border border-gray-300 bg-white px-[10px] py-[6px] text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400"
+                            class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border border-gray-300 bg-white dark:bg-gray-900  px-[10px] py-[6px] text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400"
                         >
                             <span v-text="applied.pagination.perPage"></span>
 
@@ -197,7 +197,7 @@
 
                 <input
                     type="text"
-                    class="ltr:ml-[8px] rtl:mr-[8px] inline-flex min-h-[38px] max-w-[40px] appearance-none items-center justify-center gap-x-[4px] rounded-[6px] border border-gray-300 bg-white px-[12px] py-[6px] text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:border-gray-400 max-sm:hidden"
+                    class="ltr:ml-[8px] rtl:mr-[8px] inline-flex min-h-[38px] max-w-[40px] appearance-none items-center justify-center gap-x-[4px] rounded-[6px] border border-gray-300 bg-white dark:bg-gray-900  px-[12px] py-[6px] text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:border-gray-400 max-sm:hidden"
                     :value="available.meta.current_page"
                     @change="changePage(parseInt($event.target.value))"
                 >

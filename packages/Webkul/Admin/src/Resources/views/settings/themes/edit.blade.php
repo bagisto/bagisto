@@ -97,7 +97,7 @@
             <div>
                 <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                     <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                        <div class="p-[16px] bg-white rounded box-shadow">
+                        <div class="p-[16px] bg-white dark:bg-gray-900  rounded box-shadow">
                             <div class="flex gap-x-[10px] justify-between items-center">
                                 <div class="flex flex-col gap-[4px]">
                                     <p class="text-[16px] text-gray-800 font-semibold">@lang('admin::app.settings.themes.edit.slider')</p>
@@ -110,7 +110,7 @@
                                 
                                 <div class="flex gap-[10px]">
                                     <div
-                                        class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                        class="max-w-max px-[12px] py-[5px] bg-white dark:bg-gray-900  border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                         @click="$refs.addSliderModal.toggle()"
                                     >
                                         @lang('admin::app.settings.themes.edit.slider-add-btn')
@@ -406,7 +406,7 @@
         <script type="text/x-template" id="v-product-theme-template">
             <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                 <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                    <div class="p-[16px] bg-white rounded box-shadow">
+                    <div class="p-[16px] bg-white dark:bg-gray-900  rounded box-shadow">
                         <div class="flex gap-x-[10px] justify-between items-center mb-[10px]">
                             <div class="flex flex-col gap-[4px]">
                                 <p class="text-[16px] text-gray-800 font-semibold">
@@ -457,7 +457,7 @@
                                 <select
                                     name="options[filters][sort]"
                                     v-bind="field"
-                                    class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400"
+                                    class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400"
                                     :class="[errors['options[filters][sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 >
                                     <option value="" selected disabled>@lang('admin::app.settings.themes.edit.select')</option>
@@ -506,7 +506,7 @@
             
                             <div class="flex gap-[10px]">
                                 <div
-                                    class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                    class="max-w-max px-[12px] py-[5px] bg-white dark:bg-gray-900  border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                     @click="$refs.productFilterModal.toggle()"
                                 >
                                     @lang('admin::app.settings.themes.edit.add-filter-btn')
@@ -776,7 +776,7 @@
         <script type="text/x-template" id="v-category-theme-template">
             <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                 <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                    <div class="p-[16px] bg-white rounded box-shadow">
+                    <div class="p-[16px] bg-white dark:bg-gray-900  rounded box-shadow">
                         <div class="flex gap-x-[10px] justify-between items-center mb-[10px]">
                             <div class="flex flex-col gap-[4px]">
                                 <p class="text-[16px] text-gray-800 font-semibold">
@@ -804,7 +804,7 @@
                                 <select
                                     name="options[filters][sort]"
                                     v-bind="field"
-                                    class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400"
+                                    class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400"
                                     :class="[errors['options[filters][sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 >
                                     <option value="" selected disabled>@lang('admin::app.settings.themes.edit.select')</option>
@@ -854,7 +854,7 @@
             
                             <div class="flex gap-[10px]">
                                 <div
-                                    class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                    class="max-w-max px-[12px] py-[5px] bg-white dark:bg-gray-900  border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                     @click="$refs.categoryFilterModal.toggle()"
                                 >
                                     @lang('admin::app.settings.themes.edit.add-filter-btn')
@@ -929,7 +929,7 @@
                             </div>
             
                             <div 
-                                class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                class="max-w-max px-[12px] py-[5px] bg-white dark:bg-gray-900  border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                 @click="$refs.categoryFilterModal.toggle()"
                             >
                                 @lang('admin::app.settings.themes.edit.add-filter-btn')
@@ -1133,7 +1133,7 @@
         <script type="text/x-template" id="v-static-theme-template">
             <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                 <div class="flex flex-col gap-[8px] flex-1 min-w-[931px] max-xl:flex-auto">
-                    <div class="p-[16px] bg-white rounded box-shadow">
+                    <div class="p-[16px] bg-white dark:bg-gray-900  rounded box-shadow">
                         <div class="flex gap-x-[10px] justify-between items-center mb-[10px]">
                             <div class="flex flex-col gap-[4px]">
                                 <p class="text-[16px] text-gray-800 font-semibold">
@@ -1151,7 +1151,7 @@
                             >
                                 <!-- Hidden Input Filed for upload images -->
                                 <label
-                                    class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                    class="max-w-max px-[12px] py-[5px] bg-white dark:bg-gray-900  border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                     for="static_image"
                                 >
                                     @lang('admin::app.settings.themes.edit.add-image-btn')
@@ -1358,7 +1358,7 @@
             <div>
                 <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                     <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                        <div class="p-[16px] bg-white rounded box-shadow">
+                        <div class="p-[16px] bg-white dark:bg-gray-900  rounded box-shadow">
                             <!-- Add Links-->
                             <div class="flex gap-x-[10px] justify-between items-center mb-[10px]">
                                 <div class="flex flex-col gap-[4px]">
@@ -1373,7 +1373,7 @@
                 
                                 <div class="flex gap-[10px]">
                                     <div
-                                        class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                        class="max-w-max px-[12px] py-[5px] bg-white dark:bg-gray-900  border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                         @click="isUpdating=false;$refs.addLinksModal.toggle()"
                                     >
                                         @lang('admin::app.settings.themes.edit.add-link')
@@ -1493,7 +1493,7 @@
                                     </p>
                                 </div>
                 
-                                <div class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer">
+                                <div class="max-w-max px-[12px] py-[5px] bg-white dark:bg-gray-900  border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer">
                                     @lang('admin::app.settings.themes.edit.add-footer-link-btn')
                                 </div>
                             </div>

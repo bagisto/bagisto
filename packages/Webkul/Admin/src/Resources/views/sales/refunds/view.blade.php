@@ -30,7 +30,7 @@
         <!-- Left sub-component -->
         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
             <!-- General -->
-            <div class=" bg-white rounded-[4px] box-shadow">
+            <div class=" bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
                 <p class="text-[16px] text-gray-800 font-semibold mb-[16px] p-[16px]">
                     @lang('admin::app.sales.refunds.view.product-ordered') ({{ $refund->items->count() ?? 0 }})
                 </p>

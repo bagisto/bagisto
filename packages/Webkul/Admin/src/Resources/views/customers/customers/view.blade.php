@@ -73,7 +73,7 @@
         {{-- Left Component --}}
         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
             {{-- Orders --}}
-            <div class=" bg-white rounded-[4px] box-shadow">
+            <div class=" bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
                 @if ($totalOrderCount = count($customer->orders))
                     <div class=" p-[16px] flex justify-between">
                         {{-- Total Order Count --}}

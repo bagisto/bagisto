@@ -21,7 +21,7 @@
                     </div>
                 </div>
 
-                <div class="flex flex-col justify-between max-w-max bg-white rounded-[6px] box-shadow h-[calc(100vh-179px)]">
+                <div class="flex flex-col justify-between max-w-max bg-white dark:bg-gray-900  rounded-[6px] box-shadow h-[calc(100vh-179px)]">
                     <div class="">
                         <div class="flex border-b-[1px] border-gray-300 overflow-auto journal-scroll">
                             <div
@@ -88,7 +88,7 @@
                     <!-- Pagination -->
                     <div class="flex gap-x-[8px] items-center p-[24px] border-t-[1px] border-gray-300">
                         <div
-                            class="inline-flex gap-x-[4px] items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 py-[6px] px-[8px] leading-[24px] text-center w-full max-w-max bg-white border border-gray-300 rounded-[6px] marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400 max-sm:hidden" v-text="pagination.per_page"
+                            class="inline-flex gap-x-[4px] items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 py-[6px] px-[8px] leading-[24px] text-center w-full max-w-max bg-white dark:bg-gray-900  border border-gray-300 rounded-[6px] marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400 max-sm:hidden" v-text="pagination.per_page"
                         >
                         </div>
 
@@ -103,7 +103,7 @@
                         <!-- Prev & Next Page Button -->
                         <div class="flex gap-[4px] items-center">
                             <a @click="getResults()">
-                                <div class="inline-flex gap-x-[4px] items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 p-[6px] text-center w-full max-w-max bg-white border rounded-[6px] border-gray-300 cursor-pointer transition-all hover:border hover:bg-gray-100 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
+                                <div class="inline-flex gap-x-[4px] items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 p-[6px] text-center w-full max-w-max bg-white dark:bg-gray-900  border rounded-[6px] border-gray-300 cursor-pointer transition-all hover:border hover:bg-gray-100 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
                                     <span class="icon-sort-left text-[24px]"></span>
                                 </div>
                             </a>

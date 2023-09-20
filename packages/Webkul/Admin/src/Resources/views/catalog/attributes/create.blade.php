@@ -51,7 +51,7 @@
                     <!-- Left sub Component -->
                     <div class="flex flex-col gap-[8px] flex-1">
                         <!-- Label -->
-                        <div class="p-[16px] bg-white box-shadow rounded-[4px]">
+                        <div class="p-[16px] bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
                             <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
                                 @lang('admin::app.catalog.attributes.create.label')
                             </p>
@@ -103,7 +103,7 @@
 
                         <!-- Options -->
                         <div 
-                            class="p-[16px] bg-white box-shadow rounded-[4px]"
+                            class="p-[16px] bg-white dark:bg-gray-900  box-shadow rounded-[4px]"
                             v-if="swatchAttribute && (
                                     attributeType == 'select' 
                                     || attributeType == 'multiselect' 
