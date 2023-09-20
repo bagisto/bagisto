@@ -22,9 +22,9 @@ return new class extends Migration
             DB::table('attribute_groups')
                 ->insert([
                     'name'                => 'Settings',
-                    'column'              => '2',
-                    'is_user_defined'     => '0',
-                    'position'            => '3',
+                    'column'              => 2,
+                    'is_user_defined'     => 0,
+                    'position'            => 3,
                     'attribute_family_id' => $family->id,
                 ]);
             
