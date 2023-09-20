@@ -49,7 +49,7 @@ class InvoiceItemRepository extends Repository
             ->orderBy('qty', 'desc')
             ->get();
 
-        foreach ($inventories as $key => $inventory) {
+        foreach ($inventories as $inventory) {
             if ($inventory->qty >= $data['qty']) {
                 $inventory->update(['qty' => $inventory->qty - $data['qty']]);
 

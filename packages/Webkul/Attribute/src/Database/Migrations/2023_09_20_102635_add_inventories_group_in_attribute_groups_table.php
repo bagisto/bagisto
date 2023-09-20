@@ -31,9 +31,9 @@ return new class extends Migration
             foreach ($families as $family) {
                 DB::table('attribute_groups')->insert([
                     'name'                => 'Inventories',
-                    'column'              => '2',
-                    'is_user_defined'     => '0',
-                    'position'            => '4',
+                    'column'              => 2,
+                    'is_user_defined'     => 0,
+                    'position'            => 4,
                     'attribute_family_id' => $family->id,
                 ]);
 

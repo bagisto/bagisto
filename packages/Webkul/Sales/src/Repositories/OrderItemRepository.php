@@ -137,19 +137,7 @@ class OrderItemRepository extends Repository
                 if (isset($item->qty_ordered)) {
                     $qty = $item->qty_ordered;
                 } else {
-                    Log::info('OrderItem has no `qty_ordered`.', ['orderItem' => $item, 'product' => $item->product]);
-
-                    if (isset($item->parent->qty_ordered)) {
-                        $qty = $item->parent->qty_ordered;
-                    } else {
-                        $qty = 1;
-
-                        Log::info('OrderItem has no parent with `qty_ordered`', [
-                            'orderItem' => $item,
-                            'parent'    => $item->parent,
-                            'product'   => $item->product,
-                        ]);
-                    }
+                    $qty = $item?->parent?->qty_ordered ?? 1;
                 }
 
                 if ($orderedInventory) {
@@ -186,7 +174,7 @@ class OrderItemRepository extends Repository
         $this->updateProductOrderedInventories($orderItem);
 
         if ($orderItem->getTypeInstance()->isStockable()) {
-            $shipmentItems = $orderItem->parent ? $orderItem->parent->shipment_items : $orderItem->shipment_items;
+            $shipmentItems = $orderItem?->parent->shipment_items ?? $orderItem->shipment_items;
 
             foreach ($shipmentItems as $shipmentItem) {
                 if ($orderItem->parent) {
@@ -257,7 +245,7 @@ class OrderItemRepository extends Repository
     }
 
     /**
-     * Get top sellling order items by date.
+     * Get top selling order items by date.
      */
     public function getTopSellingOrderItemsByDate(?Carbon $from = null, ?Carbon $to = null): Collection
     {
