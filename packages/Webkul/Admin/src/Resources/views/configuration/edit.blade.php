@@ -110,7 +110,7 @@
             <div class="grid grid-cols-[1fr_2fr] gap-[10px] mt-[25px] max-xl:flex-wrap">
                 @foreach ($groups as $key => $item)
                     <div>
-                        <p class="text-[16px] text-gray-600 font-semibold">
+                        <p class="text-[16px] text-gray-600 dark:text-gray-300 font-semibold">
                             @lang($item['name'])
                         </p>
 
@@ -128,7 +128,7 @@
                             @if ($hint !== __($hint))
                                 <label 
                                     for="@lang($hint)"
-                                    class="block leading-[20px] text-[12px] text-gray-600 font-medium"
+                                    class="block leading-[20px] text-[12px] text-gray-600 dark:text-gray-300 font-medium"
                                 >
                                     @lang($hint)
                                 </label>

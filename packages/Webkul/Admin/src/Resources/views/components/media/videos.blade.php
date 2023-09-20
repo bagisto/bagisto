@@ -31,7 +31,7 @@
                     <div class="flex flex-col items-center">
                         <span class="icon-image text-[24px]"></span>
 
-                        <p class="grid text-[14px] text-gray-600 font-semibold text-center">
+                        <p class="grid text-[14px] text-gray-600 dark:text-gray-300 font-semibold text-center">
                             @lang('admin::app.components.media.videos.add-video-btn')
                             
                             <span class="text-[12px]">
@@ -87,7 +87,7 @@
 
             <div class="flex flex-col justify-between invisible w-full p-[11px] bg-white dark:bg-gray-900  absolute top-0 bottom-0 opacity-80  transition-all group-hover:visible">
                 <!-- Video Name -->
-                <p class="text-[12px] text-gray-600 font-semibold break-all"></p>
+                <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold break-all"></p>
 
                 <!-- Actions -->
                 <div class="flex justify-between">

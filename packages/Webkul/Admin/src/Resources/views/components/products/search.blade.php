@@ -26,7 +26,7 @@
                     <div class="relative w-full">
                         <input
                             type="text"
-                            class="bg-white border border-gray-300 rounded-lg block w-full ltr:pl-[12px] rtl:pr-[12px] ltr:pr-[40px] rtl:pl-[40px] py-[5px] leading-6 text-gray-600 transition-all hover:border-gray-400"
+                            class="bg-white border border-gray-300 rounded-lg block w-full ltr:pl-[12px] rtl:pr-[12px] ltr:pr-[40px] rtl:pl-[40px] py-[5px] leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                             placeholder="Search by name"
                             v-model.lazy="searchTerm"
                             v-debounce="500"
@@ -87,7 +87,7 @@
                                     @{{ product.name }}
                                 </p>
 
-                                <p class="text-gray-600">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     @{{ "@lang('admin::app.components.products.search.sku')".replace(':sku', product.sku) }}
                                 </p>
                             </div>

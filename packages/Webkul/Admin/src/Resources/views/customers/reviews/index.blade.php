@@ -52,7 +52,7 @@
                                 </label>
 
                                 <!-- Product Name, Review Status -->
-                                <p class="text-gray-600">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     <span class="[&>*]:after:content-['_/_']">
                                         <template v-for="column in columnGroup">
                                             <span
@@ -116,7 +116,7 @@
                                     >
                                     </p>
                                     <p
-                                        class="text-gray-600"
+                                        class="text-gray-600 dark:text-gray-300"
                                         v-text="record.product_name"
                                     >
                                     </p>
@@ -136,13 +136,13 @@
                                 </div>
 
                                 <p
-                                    class="text-gray-600"
+                                    class="text-gray-600 dark:text-gray-300"
                                     v-text="record.created_at"
                                 >
                                 </p>
 
                                 <p
-                                    class="text-gray-600"
+                                    class="text-gray-600 dark:text-gray-300"
                                 >
                                     @{{ "@lang('admin::app.customers.reviews.index.datagrid.review-id')".replace(':review_id', record.product_review_id) }}
                                 </p>
@@ -157,7 +157,7 @@
                                 </p>
 
                                 <p
-                                    class="text-gray-600"
+                                    class="text-gray-600 dark:text-gray-300"
                                     v-text="record.comment"
                                 >
                                 </p>
@@ -221,7 +221,7 @@
                                     <div class="grid grid-cols-2 gap-[16px]">
                                         <div class="">
                                             <!-- Customer Name -->
-                                            <p class="text-[12px] text-gray-600 font-semibold">
+                                            <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                                 @lang('admin::app.customers.reviews.index.edit.customer')
                                             </p>
 
@@ -233,7 +233,7 @@
                                         </div>
 
                                         <div class="">
-                                            <p class="text-[12px] text-gray-600 font-semibold">
+                                            <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                                 @lang('admin::app.customers.reviews.index.edit.product')
                                             </p>
 
@@ -245,7 +245,7 @@
                                         </div>
                 
                                         <div class="">
-                                            <p class="text-[12px] text-gray-600 font-semibold">
+                                            <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                                 @lang('admin::app.customers.reviews.index.edit.id')
                                             </p>
 
@@ -257,7 +257,7 @@
                                         </div>
                 
                                         <div class="">
-                                            <p class="text-[12px] text-gray-600 font-semibold">
+                                            <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                                 @lang('admin::app.customers.reviews.index.edit.date')
                                             </p>
 
@@ -334,7 +334,7 @@
                                     </div>
                 
                                     <div class="w-full">
-                                        <p class="block text-[12px]  text-gray-600 font-semibold leading-[24px]">
+                                        <p class="block text-[12px]  text-gray-600 dark:text-gray-300 font-semibold leading-[24px]">
                                             @lang('admin::app.customers.reviews.index.edit.review-comment')     
                                         </p>
 

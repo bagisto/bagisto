@@ -107,7 +107,7 @@
                                 id="{{$currentLocale->code}}[name]"
                                 v-bind="field"
                                 :class="[errors['{{ $currentLocale->code }}[name]'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400"
                                 placeholder="{{ trans('admin::app.catalog.categories.edit.name') }}"
                                 v-slugify-target:{{$currentLocale->code . '[slug]'}}="setValues"
                             >
@@ -268,7 +268,7 @@
                                     id="{{$currentLocale->code}}[slug]"
                                     v-bind="field"
                                     :class="[errors['{{$currentLocale->code}}[slug]'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400"
                                     placeholder="{{ trans('admin::app.catalog.categories.edit.slug') }}"
                                     v-slugify-target:slug
                                 >
@@ -323,7 +323,7 @@
                 {{-- Settings --}}
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                        <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                             @lang('admin::app.catalog.categories.edit.settings')
                         </p>
                     </x-slot:header>
@@ -413,7 +413,7 @@
                 {{-- Filterable Attributes --}}
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="required text-gray-600 text-[16px] p-[10px] font-semibold">
+                        <p class="required text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
                             @lang('admin::app.catalog.categories.edit.filterable-attributes')
                         </p>
                     </x-slot:header>
@@ -439,7 +439,7 @@
                                 >
                                 </x-admin::form.control-group.control>
 
-                                <div class="text-[14px] text-gray-600 font-semibold cursor-pointer">
+                                <div class="text-[14px] text-gray-600 dark:text-gray-300 font-semibold cursor-pointer">
                                     {{ $attribute->name ?? $attribute->admin_name }}
                                 </div>
                             </label>

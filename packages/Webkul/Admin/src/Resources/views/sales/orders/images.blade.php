@@ -39,7 +39,7 @@
         @if ($restCount >= 1)
             <a href="{{ route('admin.sales.orders.view', $order->id) }}">
                 <div class="flex items-center w-[65px] h-[65px] bg-gray-50 rounded-[4px]">
-                    <p class="text-[12px] text-gray-600 text-center font-bold px-[6px] py-[6px]">{{ $restCount }}+ More Products</p>
+                    <p class="text-[12px] text-gray-600 dark:text-gray-300 text-center font-bold px-[6px] py-[6px]">{{ $restCount }}+ More Products</p>
                 </div>
             </a>
         @endif

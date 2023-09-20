@@ -15,7 +15,7 @@
 
                     <template v-else>
                         <div
-                            class="row grid gap-[10px] min-h-[47px] px-[16px] py-[10px] border-b-[1px] border-gray-300 text-gray-600 bg-gray-50 dark:bg-gray-900 font-semibold items-center"
+                            class="row grid gap-[10px] min-h-[47px] px-[16px] py-[10px] border-b-[1px] border-gray-300 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold items-center"
                             :style="`grid-template-columns: repeat(${gridsCount}, 1fr)`"
                         >
                             <!-- Mass Actions -->
@@ -52,7 +52,7 @@
                                 @{{ column.label }}
 
                                 <i
-                                    class="text-[16px] text-gray-600 align-text-bottom"
+                                    class="text-[16px] text-gray-600 dark:text-gray-300 align-text-bottom"
                                     :class="[$parent.applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                     v-if="column.index == $parent.applied.sort.column"
                                 ></i>
@@ -77,7 +77,7 @@
                     <template v-else>
                         <template v-if="$parent.available.records.length">
                             <div
-                                class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600 transition-all hover:bg-gray-50"
+                                class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50"
                                 v-for="record in $parent.available.records"
                                 :style="`grid-template-columns: repeat(${gridsCount}, 1fr)`"
                             >
@@ -132,7 +132,7 @@
                         </template>
 
                         <template v-else>
-                            <div class="row grid px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600 text-center">
+                            <div class="row grid px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600 dark:text-gray-300 text-center">
                                 <p>
                                     @lang('admin::app.components.datagrid.table.no-records-available')
                                 </p>

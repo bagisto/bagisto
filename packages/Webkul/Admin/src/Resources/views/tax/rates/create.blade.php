@@ -170,7 +170,7 @@
                     <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-md:w-full">
                         <x-admin::accordion>
                             <x-slot:header>
-                                <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                                     @lang('admin::app.settings.taxes.rates.create.settings')
                                 </p>
                             </x-slot:header>

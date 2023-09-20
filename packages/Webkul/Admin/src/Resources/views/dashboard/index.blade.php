@@ -14,7 +14,7 @@
                 @lang('admin::app.dashboard.index.user-name', ['user_name' => $admin->name])
             </p>
 
-            <p class="text-gray-600">
+            <p class="text-gray-600 dark:text-gray-300">
                 @lang('admin::app.dashboard.index.user-info')
             </p>
         </div>
@@ -26,7 +26,7 @@
         <div class=" flex flex-col gap-[30px] flex-1 max-xl:flex-auto">
             {{-- Overall Detailes --}}
             <div class="flex flex-col gap-[8px]   ">
-                <p class="text-[16px] text-gray-600 font-semibold">
+                <p class="text-[16px] text-gray-600 dark:text-gray-300 font-semibold">
                     @lang('admin::app.dashboard.index.overall-details')
                 </p>
 
@@ -47,7 +47,7 @@
                                     {{ core()->formatBasePrice($statistics['total_sales']['current']) }}
                                 </p>
 
-                                <p class="text-[12px] text-gray-600 font-semibold">
+                                <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                     @lang('admin::app.dashboard.index.total-sales')
                                 </p>
 
@@ -89,7 +89,7 @@
                                     {{ $statistics['total_orders']['current'] }}
                                 </p>
 
-                                <p class="text-[12px] text-gray-600 font-semibold">
+                                <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                     @lang('admin::app.dashboard.index.total-orders')
                                 </p>
 
@@ -131,7 +131,7 @@
                                     {{ $statistics['total_customers']['current'] }}
                                 </p>
 
-                                <p class="text-[12px] text-gray-600 font-semibold">
+                                <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                     @lang('admin::app.dashboard.index.total-customers')
                                 </p>
 
@@ -173,7 +173,7 @@
                                     {{ core()->formatBasePrice($statistics['avg_sales']['current']) }}
                                 </p>
 
-                                <p class="text-[12px] text-gray-600 font-semibold">
+                                <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                     @lang('admin::app.dashboard.index.average-sale')
                                 </p>
 
@@ -213,7 +213,7 @@
                                     {{ core()->formatBasePrice($statistics['total_unpaid_invoices']) }}
                                 </p>
 
-                                <p class="text-[12px] text-gray-600 font-semibold">
+                                <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                     @lang('admin::app.dashboard.index.total-unpaid-invoices')
                                 </p>
                             </div>
@@ -224,7 +224,7 @@
 
             {{-- Todays Details --}}
             <div class="flex flex-col gap-[8px]  ">
-                <p class="text-[16px] text-gray-600 font-semibold">
+                <p class="text-[16px] text-gray-600 dark:text-gray-300 font-semibold">
                     @lang('admin::app.dashboard.index.today-details')
                 </p>
 
@@ -244,7 +244,7 @@
                                     {{ core()->formatBasePrice($statistics['today_details']['today_sales']['current']) }}
                                 </p>
 
-                                <p class="text-[12px] text-gray-600 font-semibold">
+                                <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                     @lang('admin::app.dashboard.index.today-sales')
                                 </p>
 
@@ -285,7 +285,7 @@
                                     {{ $statistics['today_details']['today_orders']['current']->count() }}
                                 </p>
 
-                                <p class="text-[12px] text-gray-600 font-semibold">
+                                <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                     @lang('admin::app.dashboard.index.today-orders')
                                 </p>
 
@@ -326,7 +326,7 @@
                                     {{ $statistics['today_details']['today_customers']['current'] }}
                                 </p>
 
-                                <p class="text-[12px] text-gray-600 font-semibold">
+                                <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                     @lang('admin::app.dashboard.index.today-customers')
                                 </p>
 
@@ -365,7 +365,7 @@
                                         @lang('admin::app.dashboard.index.order-id', ['id' => $item->id])
                                     </p>
 
-                                    <p class="text-gray-600">
+                                    <p class="text-gray-600 dark:text-gray-300">
                                         {{ $item->created_at}}
                                     </p>
 
@@ -413,12 +413,12 @@
                                 </p>
 
                                 {{-- Payment Mode --}}
-                                <p class="text-gray-600">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     @lang('admin::app.dashboard.index.pay-by', ['method' => core()->getConfigData('sales.payment_methods.' . $item->payment->method . '.title')])
                                 </p>
 
                                 {{-- Channel Name --}}
-                                <p class="text-gray-600">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     {{ $item->channel_name }}
                                 </p>
                             </div>
@@ -429,14 +429,14 @@
                                     {{ $item->customer_first_name }} {{ $item->customer_last_name }}
                                 </p>
 
-                                <p class="text-gray-600">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     {{ $item->customer_email }}
                                 </p>
 
                                 {{-- Order Address --}}
                                 @foreach ($item->addresses as $address)
                                     @if ($address->address_type == 'order_billing')
-                                        <p class="text-gray-600">
+                                        <p class="text-gray-600 dark:text-gray-300">
                                             {{ $address->city . ($address->country ? ', ' . core()->country_name($address->country) : '') }}
                                         </p>
                                     @endif
@@ -484,7 +484,7 @@
                                         )
                                             <a href="{{ route('admin.sales.orders.view', $item->id) }}">
                                                 <div class="flex items-center w-[65px] h-[65px] bg-gray-50 rounded-[4px]">
-                                                    <p class="text-[12px] text-gray-600 text-center font-bold px-[6px] py-[6px]">
+                                                    <p class="text-[12px] text-gray-600 dark:text-gray-300 text-center font-bold px-[6px] py-[6px]">
                                                         @lang('admin::app.dashboard.index.more-products', ['product_count' => $item->items->count() - 3 ])
                                                     </p>
                                                 </div>
@@ -505,7 +505,7 @@
 
             {{-- Stock Thereshold --}}
             <div class="flex flex-col gap-[8px]  ">
-                <p class="text-[16px] text-gray-600 font-semibold">
+                <p class="text-[16px] text-gray-600 dark:text-gray-300 font-semibold">
                     @lang('admin::app.dashboard.index.stock-threshold')
                 </p>
 
@@ -543,12 +543,12 @@
                                             </p>
 
                                             {{-- Product SKU --}}
-                                            <p class="text-gray-600">
+                                            <p class="text-gray-600 dark:text-gray-300">
                                                 @lang('admin::app.dashboard.index.sku', ['sku' => $item->product->sku])
                                             </p>
 
                                             {{-- Product Number --}}
-                                            <p class="text-gray-600">
+                                            <p class="text-gray-600 dark:text-gray-300">
                                                 @if (
                                                     isset($item->product->product_number)
                                                     && ! empty($item->product->product_number)
@@ -605,7 +605,7 @@
         {{-- Right Component --}}
         <div class="flex flex-col gap-[8px] w-[360px] max-w-full   max-sm:w-full">
             {{-- First Component --}}
-            <p class="text-[16px] text-gray-600 font-semibold">
+            <p class="text-[16px] text-gray-600 dark:text-gray-300 font-semibold">
                 @lang('admin::app.dashboard.index.store-stats')
             </p>
 
@@ -632,7 +632,7 @@
                         <div class="flex gap-[6px] px-[16px] py-[8px] border-b border-gray-300">
                             <!-- Start Date Filter -->
                             <x-admin::form.control-group class="flex-1 mb-[10px]">
-                                <x-admin::form.control-group.label class="!text-gray-800 font-medium">
+                                <x-admin::form.control-group.label class="!text-gray-800 dark:!text-white font-medium">
                                     @lang('admin::app.dashboard.index.start-date')
                                 </x-admin::form.control-group.label>
     
@@ -648,7 +648,7 @@
     
                             <!-- End Date Filter -->
                             <x-admin::form.control-group class="flex-1 mb-[10px]">
-                                <x-admin::form.control-group.label class="!text-gray-800 font-medium">
+                                <x-admin::form.control-group.label class="!text-gray-800 dark:!text-white font-medium">
                                     @lang('admin::app.dashboard.index.end-date')
                                 </x-admin::form.control-group.label>
     
@@ -667,7 +667,7 @@
                         <div class="grid gap-[16px] px-[16px] py-[8px] border-b border-gray-300">
                             <div class="flex gap-[8px] justify-between">
                                 <div class="flex flex-col gap-[4px] justify-between">
-                                    <p class="text-[12px] text-gray-600 font-semibold">
+                                    <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                         @lang('admin::app.dashboard.index.total-sales')
                                     </p>
     
@@ -748,7 +748,7 @@
                                     <!-- Product Detailes -->
                                     <div class="flex flex-col gap-[6px] w-full">
                                         <p
-                                            class="text-gray-600"
+                                            class="text-gray-600 dark:text-gray-300"
                                             v-text="item.name"
                                         >
                                         </p>
@@ -834,7 +834,7 @@
                                         </p>
 
                                         <p
-                                            class="text-gray-600"
+                                            class="text-gray-600 dark:text-gray-300"
                                             v-text="item.customer_email ?? item.customer_address_email"
                                         >
                                         </p>
@@ -847,7 +847,7 @@
                                         >
                                         </p>
 
-                                        <p class="text-gray-600" v-if="item.order_count">
+                                        <p class="text-gray-600 dark:text-gray-300" v-if="item.order_count">
                                             @{{ "@lang('admin::app.dashboard.index.order-count')".replace(':count', item.order_count) }}
                                         </p>
                                     </div>
@@ -866,7 +866,7 @@
                                     </p>
 
                                     <p
-                                        class="text-gray-600"
+                                        class="text-gray-600 dark:text-gray-300"
                                         v-text="item.customer_email ?? item.customer_address_email"
                                     >
                                     </p>
@@ -879,7 +879,7 @@
                                     >
                                     </p>
 
-                                    <p class="text-gray-600" v-if="item.order_count">
+                                    <p class="text-gray-600 dark:text-gray-300" v-if="item.order_count">
                                         @{{ "@lang('admin::app.dashboard.index.order-count')".replace(':count', item.order_count) }}
                                     </p>
                                 </div>

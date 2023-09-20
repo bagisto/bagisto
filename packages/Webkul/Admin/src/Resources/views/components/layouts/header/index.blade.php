@@ -30,7 +30,7 @@
 
                 <input 
                     type="text" 
-                    class="bg-white border border-gray-300 rounded-lg block w-full px-[40px] py-[5px] leading-6 text-gray-600 transition-all hover:border-gray-400"
+                    class="bg-white border border-gray-300 rounded-lg block w-full px-[40px] py-[5px] leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                     placeholder="@lang('admin::app.components.layouts.header.mega-search.title')" 
                 >
             </div>
@@ -110,6 +110,8 @@
                     >
                         @lang('admin::app.components.layouts.header.logout')
                     </a>
+
+                    <v-dark></v-dark>
                 </div>
             </x-slot:content>
         </x-admin::dropdown>
@@ -177,7 +179,7 @@
 
             <input 
                 type="text" 
-                class="bg-white border border-gray-300 rounded-lg block w-full px-[40px] py-[5px] leading-6 text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 peer"
+                class="bg-white border border-gray-300 rounded-lg block w-full px-[40px] py-[5px] leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 peer"
                 :class="{'border-gray-400': isDropdownOpen}"
                 placeholder="@lang('admin::app.components.layouts.header.mega-search.title')"
                 v-model.lazy="searchTerm"
@@ -234,7 +236,7 @@
 
                                     <!-- Details -->
                                     <div class="grid gap-[6px] place-content-start">
-                                        <p class="text-[16x] text-gray-600 font-semibold">
+                                        <p class="text-[16x] text-gray-600 dark:text-gray-300 font-semibold">
                                             @{{ product.name }}
                                         </p>
 
@@ -285,7 +287,7 @@
                                 class="grid gap-[6px] place-content-start p-[16px] border-b-[1px] border-slate-300 cursor-pointer hover:bg-gray-100 last:border-b-0"
                                 v-for="order in searchedResults.orders.data"
                             >
-                                <p class="text-[16x] text-gray-600 font-semibold">
+                                <p class="text-[16x] text-gray-600 dark:text-gray-300 font-semibold">
                                     #@{{ order.increment_id }}
                                 </p>
 
@@ -324,7 +326,7 @@
                         <div class="grid max-h-[400px] overflow-y-auto">
                             <a
                                 :href="'{{ route('admin.catalog.categories.edit', ':id') }}'.replace(':id', category.id)"
-                                class="p-[16px] border-b-[1px] border-gray-300 text-[14px] text-gray-600 font-semibold cursor-pointer hover:bg-gray-100 last:border-b-0"
+                                class="p-[16px] border-b-[1px] border-gray-300 text-[14px] text-gray-600 dark:text-gray-300 font-semibold cursor-pointer hover:bg-gray-100 last:border-b-0"
                                 v-for="category in searchedResults.categories.data"
                             >
                                 @{{ category.name }}
@@ -363,7 +365,7 @@
                                 class="grid gap-[6px] place-content-start p-[16px] border-b-[1px] border-slate-300 cursor-pointer hover:bg-gray-100 last:border-b-0"
                                 v-for="customer in searchedResults.customers.data"
                             >
-                                <p class="text-[16x] text-gray-600 font-semibold">
+                                <p class="text-[16x] text-gray-600 dark:text-gray-300 font-semibold">
                                     @{{ customer.first_name + ' ' + customer.last_name }}
                                 </p>
 
@@ -523,7 +525,7 @@
             <!-- Notification Content -->
             <x-slot:content class="!p-0 min-w-[250px] max-w-[250px]">
                 <!-- Header -->
-                <div class="text-[16px] p-[12px] text-gray-600 font-semibold  border-b-[1px]">
+                <div class="text-[16px] p-[12px] text-gray-600 dark:text-gray-300 font-semibold  border-b-[1px]">
                     @lang('admin::app.notifications.title', ['read' => 0])
                 </div>
 
@@ -676,5 +678,52 @@
                 }
             }
         });
-        </script>
+    </script>
+
+    <script type="text/x-template" id="v-dark-template">
+        <div class="px-5 py-2 text-[16px] text-gray-800 dark:text-white hover:bg-gray-100 cursor-pointer">
+            <x-admin::form.control-group.label class="!text-gray-800 font-medium">
+                @lang('Dark Mode')
+            </x-admin::form.control-group.label>
+
+            <x-admin::form.control-group.control
+                type="switch"
+                name="status"
+                class="cursor-pointer"
+                value="1"
+                :label="trans('Dark Mode')"
+                :checked="true"
+                @change="switchMode"
+            >
+            </x-admin::form.control-group.control>
+        </div>
+    </script>
+
+    <script type="module">
+        app.component('v-dark', {
+            template: '#v-dark-template',
+
+            data() {
+                return {
+                    isDarkMode: localStorage.getItem('dark-mode') == 'true',
+                };
+            },
+
+            methods: {
+                switchMode() {
+                    this.checkMode();
+
+                    let element = document.documentElement;
+                    
+                    element.classList.toggle('dark');
+                },
+
+                checkMode() {
+                    this.isDarkMode = ! this.isDarkMode;
+
+                    localStorage.setItem('dark-mode', this.isDarkMode);
+                },
+            },
+        });
+    </script>
 @endpushOnce

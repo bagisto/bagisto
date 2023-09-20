@@ -87,14 +87,14 @@
                             <!-- Information -->
                             <div class="flex gap-[10px]">
                                 <!-- Drag Icon -->
-                                <i class="icon-drag text-[20px] text-gray-600 transition-all pointer-events-none"></i>
+                                <i class="icon-drag text-[20px] text-gray-600 dark:text-gray-300 transition-all pointer-events-none"></i>
 
                                 <div class="grid gap-[6px] place-content-start">
                                     <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                         @{{ element.title }}
                                     </p>
 
-                                    <p class="text-gray-600">
+                                    <p class="text-gray-600 dark:text-gray-300">
                                         <template v-if="element.type == 'file'">
                                             <div>
                                                 @lang('admin::app.catalog.products.edit.types.downloadable.links.file')
@@ -124,7 +124,7 @@
                                         </template>
                                     </p>
 
-                                    <p class="text-gray-600">
+                                    <p class="text-gray-600 dark:text-gray-300">
                                         <template v-if="element.sample_type == 'file'">
                                             <div v-if="element.sample_file_url">
                                                 @lang('admin::app.catalog.products.edit.types.downloadable.links.sample-file')
@@ -353,7 +353,7 @@
                                             <input
                                                 type="file"
                                                 name="file"
-                                                class="flex w-full min-h-[39px] py-1 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                                                class="flex w-full min-h-[39px] py-1 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                                                 :class="[errors['file'] ? 'border border-red-600 hover:border-red-600' : '']"
                                                 ref="file"
                                                 @change="uploadFile('file')"
@@ -445,7 +445,7 @@
                                             <input
                                                 type="file"
                                                 name="sample_file"
-                                                class="flex w-full min-h-[39px] py-1 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                                                class="flex w-full min-h-[39px] py-1 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                                                 ref="sample_file"
                                                 @change="uploadFile('sample_file')"
                                             />
@@ -550,14 +550,14 @@
                             <!-- Information -->
                             <div class="flex gap-[10px]">
                                 <!-- Drag Icon -->
-                                <i class="icon-drag text-[20px] text-gray-600 transition-all pointer-events-none"></i>
+                                <i class="icon-drag text-[20px] text-gray-600 dark:text-gray-300 transition-all pointer-events-none"></i>
 
                                 <div class="grid gap-[6px] place-content-start">
                                     <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                         @{{ element.title }}
                                     </p>
 
-                                    <p class="text-gray-600">
+                                    <p class="text-gray-600 dark:text-gray-300">
                                         <template v-if="element.type == 'file'">
                                             <div>
                                                 @lang('admin::app.catalog.products.edit.types.downloadable.samples.file')
@@ -746,7 +746,7 @@
                                             <input
                                                 type="file"
                                                 name="file"
-                                                class="flex w-full min-h-[39px] py-1 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                                                class="flex w-full min-h-[39px] py-1 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                                                 :class="[errors['file'] ? 'border border-red-600 hover:border-red-600' : '']"
                                                 ref="file"
                                                 @change="uploadFile('file')"
