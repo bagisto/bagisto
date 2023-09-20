@@ -280,6 +280,15 @@
 
                                 <p class="flex gap-2.5 items-center mt-[25px] text-[24px] !font-medium max-sm:mt-[15px] max-sm:text-[18px]">
                                     {!! $product->getTypeInstance()->getPriceHtml() !!}
+
+                                    <span class="text-[18px] text-[#7D7D7D]">
+                                        @if (
+                                            (bool) core()->getConfigData('taxes.catalogue.pricing.tax_inclusive') 
+                                            && $product->getTypeInstance()->getTaxCategory()
+                                        )
+                                            @lang('shop::app.products.tax-inclusive')
+                                        @endif
+                                    </span>
                                 </p>
 
                                 {!! view_render_event('bagisto.shop.products.price.after', ['product' => $product]) !!}
@@ -323,6 +332,7 @@
                                     <button
                                         type="submit"
                                         class="secondary-button w-full max-w-full"
+                                        {{ ! $product->isSaleable(1) ? 'disabled' : '' }}
                                     >
                                         @lang('shop::app.products.add-to-cart')
                                     </button>

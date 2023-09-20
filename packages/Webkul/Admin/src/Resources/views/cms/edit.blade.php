@@ -117,6 +117,10 @@
 
                 {{-- SEO Input Fields --}}
                 <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                        @lang('admin::app.cms.edit.seo')
+                    </p>
+
                     {{-- SEO Title & Description Blade Componnet --}}
                     <x-admin::seo/>
 

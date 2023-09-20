@@ -9,7 +9,7 @@ use Illuminate\Validation\ValidationException;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\CartRule\Repositories\CartRuleRepository;
 use Webkul\Admin\DataGrids\Marketing\Promotions\CartRuleDataGrid;
-use Webkul\CartRule\Http\Requests\CartRuleRequest;
+use Webkul\Admin\Http\Requests\CartRuleRequest;
 
 class CartRuleController extends Controller
 {

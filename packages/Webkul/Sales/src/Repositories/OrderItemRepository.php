@@ -112,10 +112,16 @@ class OrderItemRepository extends Repository
 
         if ($orderItem->getTypeInstance()->isComposite()) {
             foreach ($orderItem->children as $child) {
+                if (! $child->product->manage_stock) {
+                    continue;
+                }
+
                 $orderItems[] = $child;
             }
         } else {
-            $orderItems[] = $orderItem;
+            if ($orderItem->product->manage_stock) {
+                $orderItems[] = $orderItem;
+            }
         }
 
         foreach ($orderItems as $item) {
@@ -169,27 +175,33 @@ class OrderItemRepository extends Repository
      */
     public function returnQtyToProductInventory($orderItem)
     {
+        if ($orderItem->product) {
+            return;
+        }
+
+        if (! $orderItem->product->manage_stock) {
+            return;
+        }
+
         $this->updateProductOrderedInventories($orderItem);
 
         if ($orderItem->getTypeInstance()->isStockable()) {
             $shipmentItems = $orderItem->parent ? $orderItem->parent->shipment_items : $orderItem->shipment_items;
 
-            if ($shipmentItems) {
-                foreach ($shipmentItems as $shipmentItem) {
-                    if ($orderItem->parent) {
-                        $shippedQty = $orderItem->qty_ordered
-                            ? ($orderItem->qty_ordered / $orderItem->parent->qty_ordered) * $shipmentItem->qty
-                            : $orderItem->parent->qty_ordered;
-                    } else {
-                        $shippedQty = $shipmentItem->qty;
-                    }
-
-                    $inventory = $orderItem->product->inventories()
-                        ->where('inventory_source_id', $shipmentItem->shipment->inventory_source_id)
-                        ->first();
-
-                    $inventory->update(['qty' => $inventory->qty + $shippedQty]);
+            foreach ($shipmentItems as $shipmentItem) {
+                if ($orderItem->parent) {
+                    $shippedQty = $orderItem->qty_ordered
+                        ? ($orderItem->qty_ordered / $orderItem->parent->qty_ordered) * $shipmentItem->qty
+                        : $orderItem->parent->qty_ordered;
+                } else {
+                    $shippedQty = $shipmentItem->qty;
                 }
+
+                $inventory = $orderItem->product->inventories()
+                    ->where('inventory_source_id', $shipmentItem->shipment->inventory_source_id)
+                    ->first();
+
+                $inventory->update(['qty' => $inventory->qty + $shippedQty]);
             }
         }
     }
@@ -211,16 +223,9 @@ class OrderItemRepository extends Repository
         }
 
         $qty = (
-            $orderedInventory->qty +
-            (
-                isset($orderItem->qty_shipped)
-                    ? $orderItem->qty_shipped
-                    : $orderItem->parent->qty_shipped
-            )
+            $orderedInventory->qty + ($orderItem->qty_shipped ?? $orderItem->parent->qty_shipped)
         ) - (
-            isset($orderItem->qty_ordered)
-                ? $orderItem->qty_ordered
-                : $orderItem->parent->qty_ordered
+            $orderItem->qty_ordered ?? $orderItem->parent->qty_ordered
         );
 
         if ($qty < 0) {

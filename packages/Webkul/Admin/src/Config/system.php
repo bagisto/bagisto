@@ -67,6 +67,7 @@ return [
                 'name'          => 'image_search',
                 'title'         => 'admin::app.configuration.index.general.content.settings.image-search-option',
                 'type'          => 'boolean',
+                'default'       => '1',
                 'locale_based'  => true,
                 'channel_based' => true,
             ],
@@ -1179,8 +1180,7 @@ return [
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.client-id-info',
                 'type'          => 'depends',
                 'depend'        => 'active:1',
-                // 'validation'    => 'required_if:active,true',
-                'validation'    => 'required',
+                'validation'    => 'required_if:active,true',
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [

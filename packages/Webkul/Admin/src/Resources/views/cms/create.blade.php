@@ -16,7 +16,7 @@
 
 
             <div class="flex gap-x-[10px] items-center">
-                {{-- Cancel Button --}}
+                {{-- Back Button --}}
                 <a
                     href="{{ route('admin.cms.index') }}"
                     class="transparent-button hover:bg-gray-200"

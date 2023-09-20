@@ -27,7 +27,8 @@ class HomeController extends Controller
     public function index()
     {
         $customizations = $this->themeCustomizationRepository->orderBy('sort_order')->findWhere([
-            'status' => self::STATUS
+            'status'     => self::STATUS,
+            'channel_id' => core()->getCurrentChannel()->id
         ]);
 
         return view('shop::home.index', compact('customizations'));

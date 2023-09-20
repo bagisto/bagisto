@@ -59,6 +59,16 @@ defineRule("decimal", (value, { decimals = '*', separator = '.' } = {}) => {
     return regex.test(value);
 });
 
+defineRule("required_if", (value, { condition = true } = {}) => {
+    if (condition) {
+        if (value === null || value === undefined || value === '') {
+            return false;
+        }
+    }
+
+    return true;
+});
+
 defineRule("", () => true);
 
 configure({

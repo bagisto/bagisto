@@ -28,6 +28,7 @@ class Attribute extends TranslatableModel implements AttributeContract
         'regex',
         'value_per_locale',
         'value_per_channel',
+        'default_value',
         'is_filterable',
         'is_configurable',
         'is_visible_on_front',

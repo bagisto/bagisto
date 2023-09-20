@@ -512,7 +512,7 @@
                     </span>
                 
                     <span
-                        class="flex justify-center items-center min-w-[20px] h-[20px] absolute top-[-8px] p-[5px] ltr:left-[18px] rtl:right-[18px] bg-blue-600 rounded-[44px] text-[#fff] text-[10px] font-semibold leading-[9px] cursor-pointer"
+                        class="flex justify-center items-center min-w-[20px] h-[20px] absolute top-[-8px] p-[5px] ltr:left-[18px] rtl:right-[18px] bg-blue-600 rounded-[44px] text-white text-[10px] font-semibold leading-[9px] cursor-pointer"
                         v-text="totalUnRead"
                         v-if="totalUnRead"
                     >

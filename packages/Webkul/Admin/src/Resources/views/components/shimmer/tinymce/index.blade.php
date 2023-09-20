@@ -1,3 +1,3 @@
-<div {{ $attributes->merge(['class' => 'shimmer block bg-[#F5F5F5]']) }}>
+<div {{ $attributes->merge(['class' => 'shimmer block bg-neutral-100']) }}>
 
 </div>

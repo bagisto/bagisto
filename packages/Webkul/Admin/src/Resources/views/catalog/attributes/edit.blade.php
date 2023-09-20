@@ -509,6 +509,21 @@
                                         </x-admin::form.control-group.control>
                                     </x-admin::form.control-group>
                                 @endif
+
+                                <!-- Default Value -->
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.catalog.attributes.edit.default-value')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="default-value"
+                                        value="{{ old('default-value') ?: $attribute->default_value }}"
+                                        :label="trans('admin::app.catalog.attributes.edit.default-value')"
+                                    >
+                                    </x-admin::form.control-group.control>
+                                </x-admin::form.control-group>
                             </div>
                         </div>
 

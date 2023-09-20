@@ -405,6 +405,7 @@ return [
         'name'                   => 'نام',
         'qty'                    => 'تعداد',
         'offers'                 => 'خرید :qty برای :price هر عدد و تخفیف :discount%',
+        'tax-inclusive'          => 'شامل همه مالیات‌ها',
 
         'sort-by'                => [
             'title'   => 'مرتب‌سازی بر اساس',

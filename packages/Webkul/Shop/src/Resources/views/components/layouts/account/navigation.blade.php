@@ -26,7 +26,7 @@
             >
         </div>
 
-        <div class="flex flex-col gap-[10px] justify-between">
+        <div class="flex flex-col justify-between">
             <p class="text-[25px] font-mediums">Hello! {{ $customer->first_name }}</p>
 
             <p class="text-[#7D7D7D] ">{{ $customer->email }}</p>

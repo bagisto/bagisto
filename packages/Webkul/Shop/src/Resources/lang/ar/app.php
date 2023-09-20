@@ -405,6 +405,7 @@ return [
         'name'                   => 'الاسم',
         'qty'                    => 'الكمية',
         'offers'                 => 'اشترِ :qty بسعر :price للوحدة ووفّر :discount%',
+        'tax-inclusive'          => 'شامل الضرائب',
 
         'sort-by'                => [
             'title'   => 'ترتيب حسب',
