@@ -352,15 +352,15 @@ class Order extends Model implements OrderContract
     public function canCancel(): bool
     {
         if (
-            $this->payment->method == 'cash_on_delivery'
-            && core()->getConfigData('sales.payment_methods.cash_on_delivery.generate_invoice')
+            $this->payment->method == 'cashondelivery'
+            && core()->getConfigData('sales.payment_methods.cashondelivery.generate_invoice')
         ) {
             return false;
         }
 
         if (
-            $this->payment->method == 'money_transfer'
-            && core()->getConfigData('sales.payment_methods.money_transfer.generate_invoice')
+            $this->payment->method == 'moneytransfer'
+            && core()->getConfigData('sales.payment_methods.moneytransfer.generate_invoice')
         ) {
             return false;
         }

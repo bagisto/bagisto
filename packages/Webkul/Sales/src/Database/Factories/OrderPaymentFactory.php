@@ -22,7 +22,7 @@ class OrderPaymentFactory extends Factory
     public function definition(): array
     {
         return [
-            'method' => 'cash_on_delivery',
+            'method' => 'cashondelivery',
         ];
     }
 }
