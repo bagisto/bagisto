@@ -441,7 +441,7 @@
                             </v-field>
 
                             <x-admin::form.control-group.error
-                                control-name="{{ $currentLocale->code }}[options[title]]"
+                                control-name="options[title]"
                             >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
