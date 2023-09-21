@@ -545,6 +545,7 @@ return [
             'edit' => [
                 'save-btn' => 'Save Product',
                 'title'    => 'Edit Product',
+                'remove'   => 'Remove',
 
                 'price' => [
                     'group' => [

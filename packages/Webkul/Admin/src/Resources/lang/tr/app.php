@@ -545,6 +545,7 @@ return [
             'edit' => [
                 'save-btn' => 'Ürünü Kaydet',
                 'title'    => 'Ürünü Düzenle',
+                'remove'   => 'Kaldır',
 
                 'price' => [
                     'group' => [
