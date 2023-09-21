@@ -32,7 +32,16 @@
         </nav>
 
         {{-- Dark mode Switcher --}}
-        <v-dark></v-dark>
+        <v-dark>
+            <div class="px-5 py-2 text-[16px] text-gray-800 dark:text-white hover:bg-gray-100 cursor-pointer">
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <label
+                        class="rounded-full w-[36px] h-[20px] bg-gray-200 cursor-pointer peer-focus:ring-blue-300 after:bg-white after:border-gray-300 peer-checked:bg-blue-600 peer peer-checked:after:border-white peer-checked:after:ltr:translate-x-full peer-checked:after:rtl:-translate-x-full after:content-[''] after:absolute after:top-[2px] after:ltr:left-[2px] after:rtl:right-[2px] peer-focus:outline-none after:border after:rounded-full after:h-[16px] after:w-[16px] after:transition-all"
+                        for="dark_mode"
+                    ></label>
+                </label>
+            </div>
+        </v-dark>
     </div>
 
     {{-- Collapse menu --}}
@@ -109,7 +118,7 @@
                             return value;
                         }
                     }
-
+                    <label class="rounded-full w-[36px] h-[20px] bg-gray-200 cursor-pointer peer-focus:ring-blue-300 after:bg-white after:border-gray-300 peer-checked:bg-blue-600 peer peer-checked:after:border-white peer-checked:after:ltr:translate-x-full peer-checked:after:rtl:-translate-x-full after:content-[''] after:absolute after:top-[2px] after:ltr:left-[2px] after:rtl:right-[2px] peer-focus:outline-none after:border after:rounded-full after:h-[16px] after:w-[16px] after:transition-all" for="dark_mode"></label>
                     return 0;
                 },
             },
