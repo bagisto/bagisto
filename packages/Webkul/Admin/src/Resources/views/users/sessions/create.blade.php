@@ -69,6 +69,7 @@
                                 <span 
                                     class="icon-view text-[22px] cursor-pointer absolute top-[42px] transform -translate-y-1/2 ltr:right-2 rtl:left-2"
                                     onclick="switchVisibility()"
+                                    id="visibilityIcon"
                                 >
                                 </span>
                         
@@ -101,10 +102,10 @@
         <script>
             function switchVisibility() {
                 let passwordField = document.getElementById("password");
+                let visibilityIcon = document.getElementById("visibilityIcon");
 
-                passwordField.type = passwordField.type === "password"
-                    ? "text"
-                    : "password";
+                passwordField.type = passwordField.type === "password" ? "text" : "password";
+                visibilityIcon.classList.toggle("icon-view-close");
             }
         </script>
     @endpush
