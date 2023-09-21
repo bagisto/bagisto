@@ -95,7 +95,7 @@
                     {{-- Order Details --}}
                     <div class="table-responsive grid w-full">
                         @foreach ($customer->orders as $order)
-                            <div class="flex justify-between items-center px-[16px] py-[16px] transition-all hover:bg-gray-50">
+                            <div class="flex justify-between items-center px-[16px] py-[16px] transition-all hover:bg-gray-50 dark:hover:bg-gray-950  ">
                                 <div class="row grid grid-cols-3 w-full">
                                     <div class="flex gap-[10px]">
                                         <div class="flex flex-col gap-[6px]">
@@ -246,7 +246,7 @@
                             @foreach ($customer->invoices as $invoice)
                                 <tbody>
                                     {{-- Invoice Details --}}
-                                    <tr class="bg-white border-b transition-all hover:bg-gray-50">
+                                    <tr class="bg-white border-b transition-all hover:bg-gray-50 dark:hover:bg-gray-950  ">
                                         <td class="px-6 py-[16px] text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.customers.customers.view.invoice-id-prefix', ['invoice_id' => $invoice->id] )
                                         </td>
@@ -303,7 +303,7 @@
 
                     @foreach($customer->reviews as $review)
                         {{-- Reviews Details --}}
-                        <div class="grid gap-y-[16px] p-[16px] transition-all hover:bg-gray-50">
+                        <div class="grid gap-y-[16px] p-[16px] transition-all hover:bg-gray-50 dark:hover:bg-gray-950  ">
                             <div class="flex justify-start [&amp;>*]:flex-1">
                                 <div class="flex flex-col gap-[6px]">
                                     {{-- Review Name --}}

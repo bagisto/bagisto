@@ -356,7 +356,7 @@
 
                     <!-- Today Orders Details -->
                     @foreach ($statistics['today_details']['today_orders']['current'] as $item)
-                        <div class="row grid grid-cols-4  gap-y-[24px] p-[16px]  bg-white dark:bg-gray-900  dark:bg-gray-900 border-b-[1px] border-gray-300 transition-all hover:bg-gray-50 max-1580:grid-cols-3 max-sm:grid-cols-1">
+                        <div class="row grid grid-cols-4  gap-y-[24px] p-[16px]  bg-white dark:bg-gray-900  dark:bg-gray-900 border-b-[1px] border-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950   max-1580:grid-cols-3 max-sm:grid-cols-1">
                             {{-- Order ID, Status, Created --}}
                             <div class="flex gap-[10px]">
                                 <div class="flex flex-col gap-[6px]">
@@ -515,7 +515,7 @@
                         @foreach ($statistics['stock_threshold'] as $item)
                             <!-- Single Product -->
                             <div class="relative">
-                                <div class="row grid grid-cols-2 gap-y-[24px] p-[16px]  bg-white dark:bg-gray-900  dark:bg-gray-900 border-b-[1px] border-gray-300 transition-all hover:bg-gray-50 max-sm:grid-cols-[1fr_auto]">
+                                <div class="row grid grid-cols-2 gap-y-[24px] p-[16px]  bg-white dark:bg-gray-900  dark:bg-gray-900 border-b-[1px] border-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950   max-sm:grid-cols-[1fr_auto]">
                                     <div class="flex gap-[10px]">
                                         @if ($item->product?->base_image_url)
                                             <div class="">
@@ -724,7 +724,7 @@
                             >
                                 <a
                                     :href="`{{route('admin.catalog.products.edit', '')}}/${item.product_id}`"
-                                    class="flex gap-[10px] p-[16px] border-b-[1px] border-gray-300 last:border-b-0 transition-all hover:bg-gray-50"
+                                    class="flex gap-[10px] p-[16px] border-b-[1px] border-gray-300 last:border-b-0 transition-all hover:bg-gray-50 dark:hover:bg-gray-950  "
                                     v-for="item in statistics.top_selling_products"
                                 >
                                     <!-- Product Item -->
@@ -817,7 +817,7 @@
                     <template v-else>
                         <!-- Customers Lists -->
                         <div
-                            class="flex flex-col gap-[32px] p-[16px] border-b-[1px] border-gray-300 last:border-b-0 transition-all hover:bg-gray-50"
+                            class="flex flex-col gap-[32px] p-[16px] border-b-[1px] border-gray-300 last:border-b-0 transition-all hover:bg-gray-50 dark:hover:bg-gray-950  "
                             v-if="statistics?.customer_with_most_sales?.length"
                             v-for="item in statistics.customer_with_most_sales"
                         >

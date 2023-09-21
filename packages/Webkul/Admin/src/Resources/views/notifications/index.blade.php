@@ -52,7 +52,7 @@
                         >
                             <a
                                 :href="'{{ route('admin.notification.viewed_notification', ':orderId') }}'.replace(':orderId', notification.order_id)"
-                                class="flex  gap-[5px] p-[16px] items-start hover:bg-gray-50"
+                                class="flex  gap-[5px] p-[16px] items-start hover:bg-gray-50 dark:hover:bg-gray-950  "
                                 v-for="notification in notifications"
                                 :class="notification.read ? 'opacity-50' : ''"
                             >

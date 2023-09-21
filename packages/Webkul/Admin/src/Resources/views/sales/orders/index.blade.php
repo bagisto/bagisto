@@ -60,7 +60,7 @@
         <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
             <template v-if="! isLoading">
                 <div
-                    class="row grid grid-cols-4 px-[16px] py-[10px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-50"
+                    class="row grid grid-cols-4 px-[16px] py-[10px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950  "
                     v-for="record in records"
                 >
                     {{-- Order Id, Created, Status Section --}}
