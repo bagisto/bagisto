@@ -3141,7 +3141,6 @@ return [
                 'no-records-selected'              => 'Не вибрано жодного запису.',
                 'must-select-a-mass-action'        => 'Ви повинні вибрати масову дію.',
                 'must-select-a-mass-action-option' => 'Ви повинні вибрати опцію масової дії.',
-                'sure-want-to-perform-this-action' => 'Ви впевнені, що хочете виконати цю дію?',
             ],
 
             'toolbar' => [

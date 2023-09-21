@@ -1,4 +1,4 @@
-<v-modal-confirm {{ $attributes }}></v-modal-confirm>
+<v-modal-confirm ref="confirmModal"></v-modal-confirm>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-modal-confirm-template">
@@ -14,7 +14,7 @@
                 leave-to-class="opacity-0"
             >
                 <div
-                    class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity z-[10001]"
+                    class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity z-[10002]"
                     v-show="isOpen"
                 ></div>
             </transition>
@@ -82,6 +82,10 @@
                 };
             },
 
+            created() {
+                this.registerGlobalEvents();
+            },
+
             methods: {
                 open({
                     title = "@lang('admin::app.components.modal.confirm.title')",
@@ -122,6 +126,10 @@
                     document.body.style.overflow = 'auto';
 
                     this.agreeCallback();
+                },
+
+                registerGlobalEvents() {
+                    this.$emitter.on('open-confirm-modal', this.open);
                 },
             }
         });

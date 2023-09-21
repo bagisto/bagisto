@@ -3140,7 +3140,6 @@ return [
                 'no-records-selected'              => 'කිසිද වාර්තාවක් තෝරාගෙන නැත.',
                 'must-select-a-mass-action'        => 'ඔබ බොහෝනය ක්‍රියාකාරීත්වයක් තෝරා යන්නේ යොදා ගැනේ.',
                 'must-select-a-mass-action-option' => 'ඔබ බොහෝනය ක්‍රියාකාරීත්වයක් තෝරා යන්නේ එකක් තෝරා යන්නේ.',
-                'sure-want-to-perform-this-action' => 'ඔබට මෙම ක්‍රියාකාරීත්වය ප්‍රයෝජනය කිරීමට නොහැකියාවක්ද?',
             ],
 
             'toolbar' => [
