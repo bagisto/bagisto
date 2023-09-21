@@ -93,11 +93,11 @@ class LocaleRepository extends Repository
         if (! isset($localeImages['logo_path'])) {
             if (! empty($localeImages['logo_path'])) {
                 Storage::delete((string) $locale->logo_path);
-
-                $locale->logo_path = null;
-
-                $locale->save();
             }
+
+            $locale->logo_path = null;
+
+            $locale->save();
 
             return;
         }
