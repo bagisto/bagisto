@@ -123,7 +123,7 @@
                     <div class="flex gap-x-[4px] items-center">
                         <!-- Delete Group Button -->
                         <div
-                            class="px-[12px] py-[5px] border-[2px] border-transparent rounded-[6px] text-red-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer"
+                            class="px-[12px] py-[5px] border-[2px] border-transparent rounded-[6px] text-red-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 dark:hover:bg-gray-950  cursor-pointer"
                             @click="deleteGroup"
                         >
                             @lang('admin::app.catalog.families.create.delete-group-btn')
@@ -173,7 +173,7 @@
                                     <div class="flex items-center group">
                                         <!-- Toggle -->
                                         <i
-                                            class="icon-sort-down text-[20px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 group-hover:text-gray-800"
+                                            class="icon-sort-down text-[20px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950  group-hover:text-gray-800"
                                             @click="element.hide = ! element.hide"
                                         >
                                         </i>

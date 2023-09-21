@@ -50,7 +50,7 @@
                             @lang('General')
                         </p>
 
-                        <span class="icon-arrow-up p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100"></span>
+                        <span class="icon-arrow-up p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950 "></span>
                     </div>
 
                     {{-- Panel Content --}}
@@ -175,7 +175,7 @@
                                     <div class="flex items-center group">
                                         <!-- Toggle -->
                                         <i
-                                            class="icon-sort-down text-[20px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 group-hover:text-gray-800"
+                                            class="icon-sort-down text-[20px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950  group-hover:text-gray-800"
                                             @click="element.hide = ! element.hide"
                                         ></i>
 

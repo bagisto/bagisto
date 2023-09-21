@@ -178,7 +178,7 @@
                 <x-slot:toggle>
                     <button
                         type="button"
-                        class="flex items-center p-[6px] rounded-[6px] text-[12px] text-blue-600 font-semibold transition-all hover:bg-gray-100 focus:bg-gray-100 cursor-pointer"
+                        class="flex items-center p-[6px] rounded-[6px] text-[12px] text-blue-600 font-semibold transition-all hover:bg-gray-100 dark:hover:bg-gray-950  focus:bg-gray-100 cursor-pointer"
                     >
                         @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.select-variants')
 
@@ -190,7 +190,7 @@
                 <x-slot:content class="px-[0px] py-[15px]">
                     <template v-for="attribute in superAttributes">
                         <label
-                            class="flex gap-[10px] items-center px-5 py-2 text-[14px] text-gray-600 dark:text-gray-300 cursor-pointer hover:bg-gray-100 select-none"
+                            class="flex gap-[10px] items-center px-5 py-2 text-[14px] text-gray-600 dark:text-gray-300 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950  select-none"
                             :for="'attribute_' + attribute.id + '_option_' + option.id"
                             v-for="option in usedAttributeOptions(attribute)"
                         >
@@ -230,7 +230,7 @@
                 <x-slot:toggle>
                     <button
                         type="button"
-                        class="flex items-center p-[6px] rounded-[6px] text-[12px] text-blue-600 font-semibold transition-all hover:bg-gray-100 focus:bg-gray-100 cursor-pointer"
+                        class="flex items-center p-[6px] rounded-[6px] text-[12px] text-blue-600 font-semibold transition-all hover:bg-gray-100 dark:hover:bg-gray-950  focus:bg-gray-100 cursor-pointer"
                     >
                         @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.select-action')
 

@@ -6,7 +6,7 @@
                 <div class="relative px-[16px] group/item">
                     <a
                         href="{{ $menuItem['url'] }}"
-                        class="flex gap-[10px] p-[6px] items-center cursor-pointer hover:rounded-[8px] {{ $menu->getActive($menuItem) == 'active' ? 'bg-blue-600 rounded-[8px]' : ' hover:bg-gray-100' }} peer"
+                        class="flex gap-[10px] p-[6px] items-center cursor-pointer hover:rounded-[8px] {{ $menu->getActive($menuItem) == 'active' ? 'bg-blue-600 rounded-[8px]' : ' hover:bg-gray-100 dark:hover:bg-gray-950 ' }} peer"
                     >
                         <span class="{{ $menuItem['icon'] }} text-[24px] {{ $menu->getActive($menuItem) ? 'text-white' : ''}}"></span>
                         
@@ -20,7 +20,7 @@
                             @foreach ($menuItem['children'] as $subMenuItem)
                                 <a
                                     href="{{ $subMenuItem['url'] }}"
-                                    class="text-[14px] text-{{ $menu->getActive($subMenuItem) ? 'blue':'gray' }}-600 whitespace-nowrap py-[4px] group-[.sidebar-collapsed]/container:px-[20px] group-[.sidebar-collapsed]/container:py-[10px] hover:bg-gray-100"
+                                    class="text-[14px] text-{{ $menu->getActive($subMenuItem) ? 'blue':'gray' }}-600 whitespace-nowrap py-[4px] group-[.sidebar-collapsed]/container:px-[20px] group-[.sidebar-collapsed]/container:py-[10px] hover:bg-gray-100 dark:hover:bg-gray-950 "
                                 >
                                     @lang($subMenuItem['name'])
                                 </a>
@@ -33,7 +33,7 @@
 
         {{-- Dark mode Switcher --}}
         <v-dark>
-            <div class="px-5 py-2 text-[16px] text-gray-800 dark:text-white hover:bg-gray-100 cursor-pointer">
+            <div class="px-5 py-2 text-[16px] text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-950  cursor-pointer">
                 <label class="relative inline-flex items-center cursor-pointer">
                     <label
                         class="rounded-full w-[36px] h-[20px] bg-gray-200 cursor-pointer peer-focus:ring-blue-300 after:bg-white after:border-gray-300 peer-checked:bg-blue-600 peer peer-checked:after:border-white peer-checked:after:ltr:translate-x-full peer-checked:after:rtl:-translate-x-full after:content-[''] after:absolute after:top-[2px] after:ltr:left-[2px] after:rtl:right-[2px] peer-focus:outline-none after:border after:rounded-full after:h-[16px] after:w-[16px] after:transition-all"
@@ -51,7 +51,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-sidebar-collapse-template">
         <div
-            class="bg-white fixed w-full max-w-[270px] bottom-0 px-[16px] hover:bg-gray-100 border-t-[1px] border-gray-200 transition-all duration-300 cursor-pointer"
+            class="bg-white fixed w-full max-w-[270px] bottom-0 px-[16px] hover:bg-gray-100 dark:hover:bg-gray-950  border-t-[1px] border-gray-200 transition-all duration-300 cursor-pointer"
             :class="{'max-w-[70px]': isCollapsed}"
             @click="toggle"
         >
@@ -73,7 +73,7 @@
     </script>
 
     <script type="text/x-template" id="v-dark-template">
-        <div class="px-5 py-2 text-[16px] text-gray-800 dark:text-white hover:bg-gray-100 cursor-pointer">
+        <div class="px-5 py-2 text-[16px] text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-950  cursor-pointer">
             <x-admin::form.control-group.control
                 type="switch"
                 name="dark_mode"

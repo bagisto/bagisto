@@ -35,7 +35,7 @@
                                 v-if="massAction?.options?.length"
                             >
                                 <a
-                                    class="flex gap-[5px] justify-between whitespace-no-wrap cursor-not-allowed rounded-t px-4 py-2 text-[14px] text-gray-600 dark:text-gray-300 hover:bg-gray-100"
+                                    class="flex gap-[5px] justify-between whitespace-no-wrap cursor-not-allowed rounded-t px-4 py-2 text-[14px] text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-950 "
                                     href="javascript:void(0);"
                                 >
                                     <i
@@ -55,7 +55,7 @@
                                 <ul class="absolute ltr:left-full rtl:right-full top-0 z-10 hidden w-max min-w-[150px] border border-gray-300 rounded-[4px] bg-white dark:bg-gray-900  shadow-[0_5px_20px_rgba(0,0,0,0.15)] group-hover/item:block">
                                     <li v-for="option in massAction.options">
                                         <a
-                                            class="whitespace-no-wrap block rounded-t px-4 py-2 text-[14px] text-gray-600 dark:text-gray-300 hover:bg-gray-100"
+                                            class="whitespace-no-wrap block rounded-t px-4 py-2 text-[14px] text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-950 "
                                             href="javascript:void(0);"
                                             v-text="option.name"
                                             @click="performMassAction(massAction, option)"
@@ -67,7 +67,7 @@
 
                             <li v-else>
                                 <a
-                                    class="flex gap-[5px] whitespace-no-wrap rounded-b px-4 py-2 text-[14px] text-gray-600 dark:text-gray-300 hover:bg-gray-100"
+                                    class="flex gap-[5px] whitespace-no-wrap rounded-b px-4 py-2 text-[14px] text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-950 "
                                     href="javascript:void(0);"
                                     @click="performMassAction(massAction)"
                                 >
