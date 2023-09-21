@@ -59,7 +59,7 @@
                 <!-- Placeholder Image -->
                 <img
                     src="{{ bagisto_asset('images/icon-options.svg') }}"
-                    class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
+                    class="w-[80px] h-[80px] border border-dashed dark:border-gray-800   rounded-[4px]"
                 />
 
                 <!-- Add Variants Information -->
@@ -98,7 +98,7 @@
         
                         <x-slot:content>
                             <!-- Modal Content -->
-                            <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.products.edit.types.bundle.update-create.name')
@@ -287,7 +287,7 @@
                                 </div>
                                 
                                 <!-- Image -->
-                                <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                                <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed dark:border-gray-800   rounded-[4px] overflow-hidden">
                                     <template v-if="! element.product.images.length">
                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                     </template>

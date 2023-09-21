@@ -192,7 +192,7 @@
                                 </a>
                             </div>
 
-                            <span class="block w-full border-b-[1px] border-gray-300"></span>
+                            <span class="block w-full border-b-[1px] dark:border-gray-800  "></span>
                         @endforeach
                     </div>
                 @else
@@ -209,7 +209,7 @@
                             <!-- Placeholder Image -->
                             <img
                                 src="{{ bagisto_asset('images/empty-placeholders/orders-empty.svg') }}"
-                                class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
+                                class="w-[80px] h-[80px] border border-dashed dark:border-gray-800   rounded-[4px]"
                             />
 
                             <div class="flex flex-col items-center">
@@ -280,7 +280,7 @@
                             {{-- Placeholder Image --}}
                             <img
                                 src="{{ bagisto_asset('images/settings/invoice.svg') }}"
-                                class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
+                                class="w-[80px] h-[80px] border border-dashed dark:border-gray-800   rounded-[4px]"
                             />
 
                             <div class="flex flex-col items-center">
@@ -376,7 +376,7 @@
                             </div>
                         </div>
 
-                        <span class="block w-full border-b-[1px] border-gray-300"></span>
+                        <span class="block w-full border-b-[1px] dark:border-gray-800  "></span>
                     @endforeach    
                 @else
                     {{-- Empty Invoice Container --}}
@@ -391,7 +391,7 @@
                             {{-- Placeholder Image --}}
                             <img
                                 src="{{ bagisto_asset('images/empty-placeholders/reviews-empty.svg') }}"
-                                class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
+                                class="w-[80px] h-[80px] border border-dashed dark:border-gray-800   rounded-[4px]"
                             />
 
                             <div class="flex flex-col items-center">
@@ -465,7 +465,7 @@
                 </x-admin::form> 
 
                 {{-- Notes List --}}
-                <span class="block w-full border-b-[1px] border-gray-300"></span>
+                <span class="block w-full border-b-[1px] dark:border-gray-800  "></span>
 
                 @foreach ($customer->notes as $note)
                     <div class="grid gap-[6px] p-[16px]">
@@ -483,7 +483,7 @@
                         </p>
                     </div>
 
-                    <span class="block w-full border-b-[1px] border-gray-300"></span>
+                    <span class="block w-full border-b-[1px] dark:border-gray-800  "></span>
                 @endforeach
             </div>
         </div>
@@ -630,7 +630,7 @@
                             </div>
                             
                             @if ($index < count($customer->addresses) - 1)
-                                <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] border-gray-300"></span>
+                                <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] dark:border-gray-800  "></span>
                             @endif
                         @endforeach
                     @else    
@@ -638,7 +638,7 @@
                         <div class="flex gap-[20px] items-center py-[10px]">
                             <img
                                 src="{{ bagisto_asset('images/settings/address.svg') }}"
-                                class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
+                                class="w-[80px] h-[80px] border border-dashed dark:border-gray-800   rounded-[4px]"
                             >
 
                             <div class="flex flex-col gap-[6px]">

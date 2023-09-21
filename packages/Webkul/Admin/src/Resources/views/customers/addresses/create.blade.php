@@ -52,7 +52,7 @@
                             </x-admin::form.control-group.control>
                         </x-admin::form.control-group>
 
-                        <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                        <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
                             <div class="flex gap-[16px] max-sm:flex-wrap">
                                 <!-- Company Name -->
                                 <x-admin::form.control-group class="w-full mb-[10px]">

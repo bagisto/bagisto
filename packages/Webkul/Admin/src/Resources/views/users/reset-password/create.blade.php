@@ -29,7 +29,7 @@
                     >
                     </x-admin::form.control-group.control>
 
-                    <div class="p-[16px] border-t-[1px] border-b-[1px] border-gray-300">
+                    <div class="p-[16px] border-t-[1px] border-b-[1px] dark:border-gray-800  ">
                         <div class="mb-[10px]">
                             {{-- Register Email --}}
                             <x-admin::form.control-group>

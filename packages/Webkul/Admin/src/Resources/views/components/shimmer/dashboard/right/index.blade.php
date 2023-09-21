@@ -3,7 +3,7 @@
     <x-admin::shimmer.dashboard.right.total-sales/>
 
     <!-- Top Selling Products -->
-    <div class="border-b border-gray-300">
+    <div class="border-b dark:border-gray-800  ">
         <div class="flex items-center justify-between p-[16px]">
             <div class="shimmer w-[157px] h-[17px]"></div>
 

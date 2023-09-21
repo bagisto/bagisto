@@ -53,7 +53,7 @@
 
                 <!-- DataGrid Header -->
                 <template #header="{ columns, records, sortPage, applied}">
-                    <div class="row grid grid-cols-{{ $hasPermission ? '5' : '4' }} grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] border-gray-300 text-gray-600 dark:text-gray-300 bg-gray-50 font-semibold">
+                    <div class="row grid grid-cols-{{ $hasPermission ? '5' : '4' }} grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800   text-gray-600 dark:text-gray-300 bg-gray-50 font-semibold">
                         <div
                             class="flex gap-[10px] cursor-pointer"
                             v-for="(columnGroup, index) in ['id', 'code', 'name', 'direction']"
@@ -96,7 +96,7 @@
                 <template #body="{ columns, records }">
                     <div
                         v-for="record in records"
-                        class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950  "
+                        class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800   text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950  "
                         :style="'grid-template-columns: repeat(' + (record.actions.length ? 5 : 4) + ', 1fr);'"
                     >
                         <!-- Id -->
@@ -151,7 +151,7 @@
                         </x-slot:header>
 
                         <x-slot:content>
-                            <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
                                 {!! view_render_event('bagisto.admin.settings.locale.create.before') !!}
 
                                 <x-admin::form.control-group.control

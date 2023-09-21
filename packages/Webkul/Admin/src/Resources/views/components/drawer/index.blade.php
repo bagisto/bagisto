@@ -91,7 +91,7 @@
                         <div class="flex flex-col h-full w-full">
                             <div class="flex-1 min-h-0 min-w-0 overflow-auto">
                                 <div class="flex flex-col h-full">
-                                    <div class="grid gap-y-[10px] p-[12px]  border-b-[1px] border-gray-300 max-sm:px-[15px]">
+                                    <div class="grid gap-y-[10px] p-[12px]  border-b-[1px] dark:border-gray-800   max-sm:px-[15px]">
                                         <!-- Content Slot -->
                                         <slot name="header"></slot>
 

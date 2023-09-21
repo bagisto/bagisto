@@ -75,7 +75,7 @@
                 >
                     <img
                         src="{{ bagisto_asset('images/icon-discount.svg') }}"
-                        class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
+                        class="w-[80px] h-[80px] border border-dashed dark:border-gray-800   rounded-[4px]"
                     />
 
                     <div class="flex flex-col gap-[6px]">
@@ -117,7 +117,7 @@
         
                         <x-slot:content>
                             <!-- Modal Content -->
-                            <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
                                 {!! view_render_event('bagisto.admin.catalog.products.create_form.general.controls.before') !!}
 
                                 <x-admin::form.control-group>

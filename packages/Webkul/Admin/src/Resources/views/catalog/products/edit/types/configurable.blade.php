@@ -100,7 +100,7 @@
         
                         <x-slot:content>
                             <!-- Modal Content -->
-                            <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
                                 <x-admin::form.control-group
                                     v-for='(attribute, index) in superAttributes'
                                 >
@@ -111,7 +111,7 @@
                                     <v-field
                                         as="select"
                                         :name="attribute.code"
-                                        class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border border-gray-300 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                        class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                         :class="[errors[attribute.code] ? 'border border-red-500' : '']"
                                         rules="required"
                                         :label="attribute.admin_name"
@@ -282,7 +282,7 @@
                             >
                                 <form @submit="handleSubmit($event, update)">
                                     <template v-if="selectedType == 'editPrices'">
-                                        <div class="pb-[10px] border-b-[1px] border-gray-300">
+                                        <div class="pb-[10px] border-b-[1px] dark:border-gray-800  ">
                                             <div class="flex gap-[10px] items-center">
                                                 <x-admin::form.control-group class="flex-1 mb-0">
                                                     <x-admin::form.control-group.label>
@@ -316,7 +316,7 @@
                                     </template>
 
                                     <template v-if="selectedType == 'editInventories'">
-                                        <div class="pb-[10px] border-b-[1px] border-gray-300">
+                                        <div class="pb-[10px] border-b-[1px] dark:border-gray-800  ">
                                             <div class="grid grid-cols-3 gap-[16px] mb-[10px]">
                                                 <x-admin::form.control-group
                                                     class="mb-[0px]"
@@ -329,7 +329,7 @@
                                                     <v-field
                                                         type="text"
                                                         :name="'inventories[' + inventorySource.id + ']'"
-                                                        class="flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border border-gray-300 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                        class="flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                         :class="[errors['inventories[' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
                                                         rules="required|numeric|min:0"
                                                         :label="inventorySource.name"
@@ -356,7 +356,7 @@
                                     </template>
 
                                     <template v-if="selectedType == 'addImages'">
-                                        <div class="pb-[10px] border-b-[1px] border-gray-300">
+                                        <div class="pb-[10px] border-b-[1px] dark:border-gray-800  ">
                                             <v-media-images
                                                 name="images"
                                                 class="mb-[10px]"
@@ -373,7 +373,7 @@
                             </x-admin::form>
 
                             <div
-                                class="py-[16px] border-b-[1px] border-gray-300 last:border-b-0"
+                                class="py-[16px] border-b-[1px] dark:border-gray-800   last:border-b-0"
                                 :class="{'flex gap-[10px] justify-between items-center': selectedType == 'editPrices'}"
                                 v-for="variant in selectedVariants"
                             >
@@ -397,7 +397,7 @@
                                                 type="text"
                                                 :name="'variants[' + variant.id + ']'"
                                                 :value="variant.price"
-                                                class="flex w-full min-h-[39px] py-[6px] ltr:pl-[30px] rtl:pr-[30px] bg-white dark:bg-gray-900  border border-gray-300 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                class="flex w-full min-h-[39px] py-[6px] ltr:pl-[30px] rtl:pr-[30px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 :rules="{required: true, decimal: true, min_value: 0}"
                                                 label="@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.price')"
@@ -433,7 +433,7 @@
                                                     type="text"
                                                     :name="'variants[' + variant.id + '][' + inventorySource.id + ']'"
                                                     :value="variant.inventories[inventorySource.id]"
-                                                    class="flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border border-gray-300 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                    class="flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                     :class="[errors['variants[' + variant.id + '][' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
                                                     rules="required|numeric|min:0"
                                                     :label="inventorySource.name"
@@ -530,7 +530,7 @@
                 <!-- Image -->
                 <div
                     class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px] overflow-hidden"
-                    :class="{'border border-dashed border-gray-300': ! variant.images.length}"
+                    :class="{'border border-dashed dark:border-gray-800  ': ! variant.images.length}"
                 >
                     <template v-if="! variant.images.length">
                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
@@ -763,7 +763,7 @@
                                                         type="text"
                                                         :name="'inventories[' + inventorySource.id + ']'"
                                                         v-model="variant.inventories[inventorySource.id]"
-                                                        class="flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border border-gray-300 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                        class="flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                         :class="[errors['inventories[' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
                                                         rules="numeric|min:0"
                                                         :label="inventorySource.name"

@@ -15,7 +15,7 @@
                     <span class="flex icon-setting p-[6px] rounded-[6px] text-[24px]  cursor-pointer transition-all hover:bg-gray-200"></span>
                 </x-slot:toggle>
 
-                <x-slot:content class="w-[174px] max-w-full !p-[8PX] border border-gray-300 rounded-[4px] z-10 bg-white dark:bg-gray-900  shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)]">
+                <x-slot:content class="w-[174px] max-w-full !p-[8PX] border dark:border-gray-800   rounded-[4px] z-10 bg-white dark:bg-gray-900  shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)]">
                     <div class="grid gap-[2px]">
                         <!-- Current Channel -->
                         <div class="p-[6px] items-center cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950  hover:rounded-[6px]">
@@ -61,7 +61,7 @@
         {{-- Datagrid Header --}}
         <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
             <template v-if="! isLoading">
-                <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
                     <div
                         class="flex gap-[10px] items-center select-none"
                         v-for="(columnGroup, index) in [['name', 'sku', 'attribute_family'], ['base_image', 'price', 'quantity', 'product_id'], ['status', 'category_name', 'type']]"
@@ -129,7 +129,7 @@
         <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
             <template v-if="! isLoading">
                 <div
-                    class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 px-[16px] py-[10px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950  "
+                    class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 px-[16px] py-[10px] border-b-[1px] dark:border-gray-800   transition-all hover:bg-gray-50 dark:hover:bg-gray-950  "
                     v-for="record in records"
                 >
                     {{-- Name, SKU, Attribute Family Columns --}}
@@ -179,7 +179,7 @@
                                 :src=`{{ Storage::url('') }}${record.base_image}`
                             />
 
-                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden" v-else>
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed dark:border-gray-800   rounded-[4px] overflow-hidden" v-else>
                                 <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
                                 <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                                     @lang('admin::app.catalog.products.index.datagrid.product-image')
@@ -310,7 +310,7 @@
 
                             <x-slot:content>
                                 <!-- Modal Content -->
-                                <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
                                     <div v-show="! attributes.length">
                                         {!! view_render_event('bagisto.admin.catalog.products.create_form.general.controls.before') !!}
 
@@ -386,7 +386,7 @@
                                                 @{{ attribute.name }}
                                             </label>
 
-                                            <div class="flex gap-[4px] min-h-[38px] p-[6px] border border-gray-300 rounded-[6px]">
+                                            <div class="flex gap-[4px] min-h-[38px] p-[6px] border dark:border-gray-800   rounded-[6px]">
                                                 <p
                                                     class="flex items-center py-[3px] px-[8px] bg-gray-600 rounded-[4px] text-white font-semibold"
                                                     v-for="option in attribute.options"

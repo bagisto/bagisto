@@ -354,7 +354,7 @@
                                     <div class="grid gap-[14px] justify-items-center py-[40px] px-[10px]">
                                         <!-- Attribute Option Image -->
                                         <img 
-                                            class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]" 
+                                            class="w-[120px] h-[120px] border border-dashed dark:border-gray-800   rounded-[4px]" 
                                             src="{{ bagisto_asset('images/icon-add-product.svg') }}" 
                                             alt="{{ trans('admin::app.catalog.attributes.edit.add-attribute-options') }}"
                                         >
@@ -906,7 +906,7 @@
                                 </x-admin::form.control-group>
                             </div>
 
-                            <div class="grid grid-cols-3 gap-[16px] px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                            <div class="grid grid-cols-3 gap-[16px] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
                                 <!-- Hidden Id Input -->
                                 <x-admin::form.control-group.control
                                     type="hidden"

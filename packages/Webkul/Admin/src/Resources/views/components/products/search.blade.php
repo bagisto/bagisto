@@ -26,7 +26,7 @@
                     <div class="relative w-full">
                         <input
                             type="text"
-                            class="bg-white border border-gray-300 rounded-lg block w-full ltr:pl-[12px] rtl:pr-[12px] ltr:pr-[40px] rtl:pl-[40px] py-[5px] leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                            class="bg-white border dark:border-gray-800   rounded-lg block w-full ltr:pl-[12px] rtl:pr-[12px] ltr:pr-[40px] rtl:pl-[40px] py-[5px] leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                             placeholder="Search by name"
                             v-model.lazy="searchTerm"
                             v-debounce="500"
@@ -68,7 +68,7 @@
                             <!-- Image -->
                             <div
                                 class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px] overflow-hidden"
-                                :class="{'border border-dashed border-gray-300': ! product.images.length}"
+                                :class="{'border border-dashed dark:border-gray-800  ': ! product.images.length}"
                             >
                                 <template v-if="! product.images.length">
                                     <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">

@@ -26,7 +26,7 @@
             <div class="flex flex-wrap gap-[4px]">
                 <!-- Upload Image Button -->
                 <label
-                    class="grid justify-items-center items-center w-full h-[120px] max-w-[120px] min-w-[120px] max-h-[120px] border border-dashed border-gray-300 rounded-[4px] cursor-pointer transition-all hover:border-gray-400"
+                    class="grid justify-items-center items-center w-full h-[120px] max-w-[120px] min-w-[120px] max-h-[120px] border border-dashed dark:border-gray-800   rounded-[4px] cursor-pointer transition-all hover:border-gray-400"
                     :style="{'max-width': this.width, 'max-height': this.height}"
                     :for="$.uid + '_imageInput'"
                     v-if="allowMultiple || images.length == 0"
@@ -79,7 +79,7 @@
                 <template v-if="showPlaceholders && ! images.length">
                     <!-- Front Placeholder -->
                     <div
-                        class="w-full h-[120px] max-w-[120px] min-w-[120px] max-h-[120px] relative border border-dashed border-gray-300 rounded-[4px]"
+                        class="w-full h-[120px] max-w-[120px] min-w-[120px] max-h-[120px] relative border border-dashed dark:border-gray-800   rounded-[4px]"
                         v-for="placeholder in placeholders"
                     >
                         <img :src="placeholder.image">

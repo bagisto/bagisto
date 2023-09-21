@@ -2,7 +2,7 @@
     $admin = auth()->guard('admin')->user();
 @endphp
 
-<header class="flex justify-between items-center px-[16px] py-[10px] bg-white dark:bg-gray-900  border-b-[1px] border-gray-300 sticky top-0 z-[10001]">
+<header class="flex justify-between items-center px-[16px] py-[10px] bg-white dark:bg-gray-900  border-b-[1px] dark:border-gray-800   sticky top-0 z-[10001]">
     <div class="flex gap-[6px] items-center">
         {{-- Hamburger Menu --}}
         <i
@@ -30,7 +30,7 @@
 
                 <input 
                     type="text" 
-                    class="bg-white border border-gray-300 rounded-lg block w-full px-[40px] py-[5px] leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                    class="bg-white border dark:border-gray-800   rounded-lg block w-full px-[40px] py-[5px] leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                     placeholder="@lang('admin::app.components.layouts.header.mega-search.title')" 
                 >
             </div>
@@ -177,7 +177,7 @@
 
             <input 
                 type="text" 
-                class="bg-white border border-gray-300 rounded-lg block w-full px-[40px] py-[5px] leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 peer"
+                class="bg-white border dark:border-gray-800   rounded-lg block w-full px-[40px] py-[5px] leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 peer"
                 :class="{'border-gray-400': isDropdownOpen}"
                 placeholder="@lang('admin::app.components.layouts.header.mega-search.title')"
                 v-model.lazy="searchTerm"
@@ -186,11 +186,11 @@
             >
 
             <div
-                class="absolute top-[40px] w-full bg-white dark:bg-gray-900  shadow-[0px_0px_0px_0px_rgba(0,0,0,0.10),0px_1px_3px_0px_rgba(0,0,0,0.10),0px_5px_5px_0px_rgba(0,0,0,0.09),0px_12px_7px_0px_rgba(0,0,0,0.05),0px_22px_9px_0px_rgba(0,0,0,0.01),0px_34px_9px_0px_rgba(0,0,0,0.00)] border border-gray-300 rounded-[8px] z-10"
+                class="absolute top-[40px] w-full bg-white dark:bg-gray-900  shadow-[0px_0px_0px_0px_rgba(0,0,0,0.10),0px_1px_3px_0px_rgba(0,0,0,0.10),0px_5px_5px_0px_rgba(0,0,0,0.09),0px_12px_7px_0px_rgba(0,0,0,0.05),0px_22px_9px_0px_rgba(0,0,0,0.01),0px_34px_9px_0px_rgba(0,0,0,0.00)] border dark:border-gray-800   rounded-[8px] z-10"
                 v-if="isDropdownOpen"
             >
                 <!-- Search Tabs -->
-                <div class="flex border-b-[1px] border-gray-300 text-[14px] text-gray-600 dark:text-gray-300">
+                <div class="flex border-b-[1px] dark:border-gray-800   text-[14px] text-gray-600 dark:text-gray-300">
                     <div
                         class="p-[16px] hover:bg-gray-100 dark:hover:bg-gray-950  cursor-pointer"
                         :class="{ 'border-b-[2px] border-blue-600': activeTab == tab.key }"
@@ -219,7 +219,7 @@
                                     <!-- Image -->
                                     <div
                                         class="w-full h-[46px] max-w-[46px] max-h-[46px] relative rounded-[4px] overflow-hidden"
-                                        :class="{'border border-dashed border-gray-300': ! product.images.length}"
+                                        :class="{'border border-dashed dark:border-gray-800  ': ! product.images.length}"
                                     >
                                         <template v-if="! product.images.length">
                                             <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
@@ -253,7 +253,7 @@
                             </a>
                         </div>
 
-                        <div class="flex p-[12px] border-t-[1px] border-gray-300">
+                        <div class="flex p-[12px] border-t-[1px] dark:border-gray-800  ">
                             <a
                                 :href="'{{ route('admin.catalog.products.index') }}?search=:query'.replace(':query', searchTerm)"
                                 class=" text-[12px] text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
@@ -295,7 +295,7 @@
                             </a>
                         </div>
 
-                        <div class="flex p-[12px] border-t-[1px] border-gray-300">
+                        <div class="flex p-[12px] border-t-[1px] dark:border-gray-800  ">
                             <a
                                 :href="'{{ route('admin.sales.orders.index') }}?search=:query'.replace(':query', searchTerm)"
                                 class=" text-[12px] text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
@@ -324,14 +324,14 @@
                         <div class="grid max-h-[400px] overflow-y-auto">
                             <a
                                 :href="'{{ route('admin.catalog.categories.edit', ':id') }}'.replace(':id', category.id)"
-                                class="p-[16px] border-b-[1px] border-gray-300 text-[14px] text-gray-600 dark:text-gray-300 font-semibold cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950  last:border-b-0"
+                                class="p-[16px] border-b-[1px] dark:border-gray-800   text-[14px] text-gray-600 dark:text-gray-300 font-semibold cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950  last:border-b-0"
                                 v-for="category in searchedResults.categories.data"
                             >
                                 @{{ category.name }}
                             </a>
                         </div>
 
-                        <div class="flex p-[12px] border-t-[1px] border-gray-300">
+                        <div class="flex p-[12px] border-t-[1px] dark:border-gray-800  ">
                             <a
                                 :href="'{{ route('admin.catalog.categories.index') }}?search=:query'.replace(':query', searchTerm)"
                                 class=" text-[12px] text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
@@ -373,7 +373,7 @@
                             </a>
                         </div>
 
-                        <div class="flex p-[12px] border-t-[1px] border-gray-300">
+                        <div class="flex p-[12px] border-t-[1px] dark:border-gray-800  ">
                             <a
                                 :href="'{{ route('admin.customers.customers.index') }}?search=:query'.replace(':query', searchTerm)"
                                 class=" text-[12px] text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
@@ -558,7 +558,7 @@
                 </div>
 
                 <!-- Footer -->
-                <div class="flex gap-[10px] justify-between p-[12px] border-t-[1px] border-gray-300">
+                <div class="flex gap-[10px] justify-between p-[12px] border-t-[1px] dark:border-gray-800  ">
                     <a
                         href="{{ route('admin.notification.index') }}"
                         class="text-[12px] text-blue-600 font-semibold cursor-pointer transition-all hover:underline"

@@ -46,7 +46,7 @@
                                         src="{{ $item->product->base_image_url }}"
                                     >
                                 @else
-                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px]">
+                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed dark:border-gray-800   rounded-[4px]">
                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                         
                                         <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
@@ -232,7 +232,7 @@
 
                         {{-- Billing Address --}}
                         @if ($order->billing_address)
-                            <span class="block w-full border-b-[1px] border-gray-300"></span>
+                            <span class="block w-full border-b-[1px] dark:border-gray-800  "></span>
 
                             {{-- Billing Address --}}
                             <div class="flex items-center justify-between">
@@ -246,7 +246,7 @@
 
                         {{-- Shipping Address --}}
                         @if ($order->shipping_address)
-                            <span class="block w-full mt-[16px] border-b-[1px] border-gray-300"></span>
+                            <span class="block w-full mt-[16px] border-b-[1px] dark:border-gray-800  "></span>
 
                             <div class="flex items-center justify-between">
                                 <p class="text-gray-600 dark:text-gray-300  text-[16px] py-[16px] font-semibold">

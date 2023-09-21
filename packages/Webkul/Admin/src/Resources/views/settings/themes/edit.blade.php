@@ -192,7 +192,7 @@
                                 v-else
                             >
                                 <img    
-                                    class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]"
+                                    class="w-[120px] h-[120px] border border-dashed dark:border-gray-800   rounded-[4px]"
                                     src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
                                     alt="add-product-to-store"
                                 >
@@ -343,7 +343,7 @@
                             </x-slot:header>
         
                             <x-slot:content>
-                                <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group class="mb-[10px]">
                                             <x-admin::form.control-group.label class="required">
@@ -457,7 +457,7 @@
                                 <select
                                     name="options[filters][sort]"
                                     v-bind="field"
-                                    class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border border-gray-300 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                    class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                     :class="[errors['options[filters][sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 >
                                     <option value="" selected disabled>@lang('admin::app.settings.themes.edit.select')</option>
@@ -495,7 +495,7 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
-                        <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] border-gray-300"></span>
+                        <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] dark:border-gray-800  "></span>
 
                         <div class="flex gap-x-[10px] justify-between items-center">
                             <div class="flex flex-col gap-[4px]">
@@ -563,7 +563,7 @@
                             v-else
                         >
                             <img
-                                class="w-[120px] h-[120px] p-2 border border-dashed border-gray-300 rounded-[4px]"
+                                class="w-[120px] h-[120px] p-2 border border-dashed dark:border-gray-800   rounded-[4px]"
                                 src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
                                 alt="add-product-to-store"
                             >
@@ -710,7 +710,7 @@
                             </x-slot:header>
         
                             <x-slot:content>
-                                <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
                                     <!-- Key -->
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label class="required">
@@ -804,7 +804,7 @@
                                 <select
                                     name="options[filters][sort]"
                                     v-bind="field"
-                                    class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border border-gray-300 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                    class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                     :class="[errors['options[filters][sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 >
                                     <option value="" selected disabled>@lang('admin::app.settings.themes.edit.select')</option>
@@ -843,7 +843,7 @@
                         </x-admin::form.control-group>
 
 
-                        <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] border-gray-300"></span>
+                        <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] dark:border-gray-800  "></span>
 
                         <div class="flex gap-x-[10px] justify-between items-center">
                             <div class="flex flex-col gap-[4px]">
@@ -912,7 +912,7 @@
                             v-else
                         >
                             <img
-                                class="w-[120px] h-[120px] p-2 border border-dashed border-gray-300 rounded-[4px]"
+                                class="w-[120px] h-[120px] p-2 border border-dashed dark:border-gray-800   rounded-[4px]"
                                 src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
                                 alt="add-category-to-store"
                             >
@@ -1067,7 +1067,7 @@
                             </x-slot:header>
         
                             <x-slot:content>
-                                <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
                                     <!-- Key -->
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label class="required">
@@ -1477,7 +1477,7 @@
                                 class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
                             >
                                 <img
-                                    class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]"
+                                    class="w-[120px] h-[120px] border border-dashed dark:border-gray-800   rounded-[4px]"
                                     src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
                                     alt="add-product-to-store"
                                 >
@@ -1631,7 +1631,7 @@
                             </x-slot:header>
         
                             <x-slot:content>
-                                <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.themes.edit.column')
