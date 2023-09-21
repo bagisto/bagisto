@@ -3186,6 +3186,15 @@ return [
             ],
         ],
 
+        'modal' => [
+            'confirm' => [
+                'title'        => '¿Estás seguro?',
+                'message'      => '¿Estás seguro de que quieres realizar esta acción?',
+                'agree-btn'    => 'Aceptar',
+                'disagree-btn' => 'Cancelar',
+            ],
+        ],
+
         'products' => [
             'search' => [
                 'title'       => 'Seleccionar Productos',

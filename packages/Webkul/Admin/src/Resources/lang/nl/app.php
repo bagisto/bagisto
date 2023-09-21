@@ -3186,6 +3186,15 @@ return [
             ],
         ],
 
+        'modal' => [
+            'confirm' => [
+                'title'        => 'Weet u het zeker?',
+                'message'      => 'Bent u zeker dat u deze actie wilt uitvoeren?',
+                'agree-btn'    => 'Akkoord',
+                'disagree-btn' => 'Niet akkoord',
+            ],
+        ],
+
         'products' => [
             'search' => [
                 'title'       => 'Selecteer Producten',

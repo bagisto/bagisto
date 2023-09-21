@@ -3186,6 +3186,15 @@ return [
             ],
         ],
 
+        'modal' => [
+            'confirm' => [
+                'title'        => 'האם אתה בטוח?',
+                'message'      => 'האם אתה בטוח שברצונך לבצע פעולה זו?',
+                'agree-btn'    => 'הסכם',
+                'disagree-btn' => 'אי הסכמה',
+            ],
+        ],
+
         'products' => [
             'search' => [
                 'title'       => 'בחר מוצרים',

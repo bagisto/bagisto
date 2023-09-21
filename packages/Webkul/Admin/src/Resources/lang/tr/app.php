@@ -3187,6 +3187,15 @@ return [
             ],
         ],
 
+        'modal' => [
+            'confirm' => [
+                'title'        => 'Emin misiniz?',
+                'message'      => 'Bu işlemi gerçekleştirmek istediğinizden emin misiniz?',
+                'agree-btn'    => 'Kabul Et',
+                'disagree-btn' => 'Reddet',
+            ],
+        ],
+
         'products' => [
             'search' => [
                 'title'       => 'Ürünleri Seç',
