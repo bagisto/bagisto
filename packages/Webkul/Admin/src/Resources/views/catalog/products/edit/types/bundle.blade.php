@@ -434,9 +434,13 @@
                 },
 
                 removeOption(option) {
-                    let index = this.options.indexOf(option);
+                    this.$emitter.emit('open-confirm-modal', {
+                        agree: () => {
+                            let index = this.options.indexOf(option);
 
-                    this.options.splice(index, 1);
+                            this.options.splice(index, 1);
+                        }
+                    });
                 },
 
                 resetForm() {
@@ -514,9 +518,13 @@
                 },
 
                 removeProduct(product) {
-                    let index = this.option.bundle_option_products.indexOf(product);
+                    this.$emitter.emit('open-confirm-modal', {
+                        agree: () => {
+                            let index = this.option.bundle_option_products.indexOf(product);
 
-                    this.option.bundle_option_products.splice(index, 1);
+                            this.option.bundle_option_products.splice(index, 1);
+                        }
+                    });
                 },
 
                 updateIsDefault: function(updatedProductOption) {

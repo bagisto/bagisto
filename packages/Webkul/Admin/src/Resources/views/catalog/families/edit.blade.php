@@ -105,7 +105,6 @@
         </div>
     </x-admin::form>
 
-
     @pushOnce('scripts')
         <script type="text/x-template" id="v-family-attributes-template">
             <div class="">
@@ -490,25 +489,29 @@
                     },
 
                     deleteGroup() {
-                        if (! this.selectedGroup.id) {
-                            this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('admin::app.catalog.families.edit.select-group')" });
+                        this.$emitter.emit('open-confirm-modal', {
+                            agree: () => {
+                                if (! this.selectedGroup.id) {
+                                    this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('admin::app.catalog.families.edit.select-group')" });
 
-                            return;
-                        }
+                                    return;
+                                }
 
-                        if (this.isGroupContainsSystemAttributes(this.selectedGroup)) {
-                            this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('admin::app.catalog.families.edit.group-contains-system-attributes')" });
+                                if (this.isGroupContainsSystemAttributes(this.selectedGroup)) {
+                                    this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('admin::app.catalog.families.edit.group-contains-system-attributes')" });
 
-                            return;
-                        }
+                                    return;
+                                }
 
-                        for (const [key, groups] of Object.entries(this.columnGroups)) {
-                            let index = groups.indexOf(this.selectedGroup);
+                                for (const [key, groups] of Object.entries(this.columnGroups)) {
+                                    let index = groups.indexOf(this.selectedGroup);
 
-                            if (index > -1) {
-                                groups.splice(index, 1);
+                                    if (index > -1) {
+                                        groups.splice(index, 1);
+                                    }
+                                }
                             }
-                        }
+                        });
                     },
 
                     handleFocusOut(e) {

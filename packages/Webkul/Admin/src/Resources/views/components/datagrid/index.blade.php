@@ -41,6 +41,7 @@
                             :records="available.records"
                             :meta="available.meta"
                             :setCurrentSelectionMode="setCurrentSelectionMode"
+                            :performAction="performAction"
                             :applied="applied"
                             :is-loading="isLoading"
                         >
@@ -527,13 +528,13 @@
 
                 validateMassAction() {
                     if (! this.applied.massActions.indices.length) {
-                        alert("@lang('admin::app.components.datagrid.index.no-records-selected')");
+                        this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('admin::app.components.datagrid.index.no-records-selected')" });
 
                         return false;
                     }
 
                     if (! this.applied.massActions.meta.action) {
-                        alert("@lang('admin::app.components.datagrid.index.must-select-a-mass-action')");
+                        this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('admin::app.components.datagrid.index.must-select-a-mass-action')" });
 
                         return false;
                     }
@@ -542,12 +543,8 @@
                         this.applied.massActions.meta.action?.options?.length &&
                         this.applied.massActions.value === null
                     ) {
-                        alert("@lang('admin::app.components.datagrid.index.must-select-a-mass-action-option')");
-
-                        return false;
-                    }
-
-                    if (! confirm("@lang('admin::app.components.datagrid.index.sure-want-to-perform-this-action')")) {
+                        this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('admin::app.components.datagrid.index.must-select-a-mass-action-option')" });
+                        
                         return false;
                     }
 
@@ -561,7 +558,7 @@
                         this.applied.massActions.value = currentOption.value;
                     }
 
-                    if (!this.validateMassAction()) {
+                    if (! this.validateMassAction()) {
                         return;
                     }
 
@@ -571,47 +568,51 @@
 
                     const method = action.method.toLowerCase();
 
-                    switch (method) {
-                        case 'post':
-                        case 'put':
-                        case 'patch':
-                            this.$axios[method](action.url, {
-                                    indices: this.applied.massActions.indices,
-                                    value: this.applied.massActions.value,
-                                })
-                                .then(response => {
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                    this.$emitter.emit('open-confirm-modal', {
+                        agree: () => {
+                            switch (method) {
+                                case 'post':
+                                case 'put':
+                                case 'patch':
+                                    this.$axios[method](action.url, {
+                                            indices: this.applied.massActions.indices,
+                                            value: this.applied.massActions.value,
+                                        })
+                                        .then(response => {
+                                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
-                                    this.get();
-                                })
-                                .catch((error) => {
-                                    this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
-                                });
+                                            this.get();
+                                        })
+                                        .catch((error) => {
+                                            this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
+                                        });
 
-                            break;
+                                    break;
 
-                        case 'delete':
-                            this.$axios[method](action.url, {
-                                    indices: this.applied.massActions.indices
-                                })
-                                .then(response => {
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                case 'delete':
+                                    this.$axios[method](action.url, {
+                                            indices: this.applied.massActions.indices
+                                        })
+                                        .then(response => {
+                                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
-                                    this.get();
-                                })
-                                .catch((error) => {
-                                    this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
-                                });
+                                            this.get();
+                                        })
+                                        .catch((error) => {
+                                            this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
+                                        });
 
-                            break;
+                                    break;
 
-                        default:
-                            console.error('Method not supported.');
+                                default:
+                                    console.error('Method not supported.');
 
-                            break;
-                    }
+                                    break;
+                            }
 
-                    this.applied.massActions.indices  = [];
+                            this.applied.massActions.indices  = [];
+                        }
+                    });
                 },
 
                 //=======================================================================================
@@ -693,19 +694,19 @@
                         case 'put':
                         case 'patch':
                         case 'delete':
-                            if (! confirm("@lang('admin::app.components.datagrid.index.sure-want-to-perform-this-action')")) {
-                                return;
-                            }
+                            this.$emitter.emit('open-confirm-modal', {
+                                agree: () => {
+                                    this.$axios[method](action.url)
+                                        .then(response => {
+                                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
-                            this.$axios[method](action.url)
-                                .then(response => {
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
-
-                                    this.get();
-                                })
-                                .catch((error) => {
-                                    this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
-                                });;
+                                            this.get();
+                                        })
+                                        .catch((error) => {
+                                            this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
+                                        });
+                                }
+                            });
 
                             break;
 

@@ -3144,7 +3144,6 @@ return [
                     'no-records-selected'              => 'Es wurden keine Datensätze ausgewählt.',
                     'must-select-a-mass-action'        => 'Sie müssen eine Massenaktion auswählen.',
                     'must-select-a-mass-action-option' => 'Sie müssen eine Option für die Massenaktion auswählen.',
-                    'sure-want-to-perform-this-action' => 'Sind Sie sicher, dass Sie diese Aktion ausführen möchten?',
                 ],
 
                 'mass-actions' => [

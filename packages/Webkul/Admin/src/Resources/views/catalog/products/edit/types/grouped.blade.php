@@ -193,9 +193,13 @@
                 },
 
                 remove(product) {
-                    let index = this.groupProducts.indexOf(product)
+                    this.$emitter.emit('open-confirm-modal', {
+                        agree: () => {
+                            let index = this.groupProducts.indexOf(product)
 
-                    this.groupProducts.splice(index, 1)
+                            this.groupProducts.splice(index, 1);
+                        }
+                    });
                 },
             }
         });

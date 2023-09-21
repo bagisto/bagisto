@@ -32,7 +32,6 @@
                 </div>
             </div>
 
-
             <!-- Panel Content -->
             <div
                 class="grid"
@@ -843,9 +842,13 @@
                 },
 
                 remove(link) {
-                    let index = this.links.indexOf(link);
+                    this.$emitter.emit('open-confirm-modal', {
+                        agree: () => {
+                            let index = this.links.indexOf(link);
 
-                    this.links.splice(index, 1);
+                            this.links.splice(index, 1);
+                        }
+                    });
                 },
 
                 resetForm() {
@@ -917,9 +920,13 @@
                 },
 
                 remove(sample) {
-                    let index = this.samples.indexOf(sample)
+                    this.$emitter.emit('open-confirm-modal', {
+                        agree: () => {
+                            let index = this.samples.indexOf(sample)
 
-                    this.samples.splice(index, 1)
+                            this.samples.splice(index, 1)
+                        }
+                    });
                 },
 
                 resetForm() {

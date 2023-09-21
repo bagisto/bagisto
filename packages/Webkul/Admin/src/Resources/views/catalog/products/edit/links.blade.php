@@ -186,7 +186,11 @@
                 },
 
                 remove(type, product) {
-                    this.addedProducts[type] = this.addedProducts[type].filter(item => item.id !== product.id);
+                    this.$emitter.emit('open-confirm-modal', {
+                        agree: () => {
+                            this.addedProducts[type] = this.addedProducts[type].filter(item => item.id !== product.id);
+                        },
+                    });
                 },
 
                 totalQty(product) {

@@ -286,13 +286,17 @@
                 },
 
                 remove() {
-                    let index = this.prices.indexOf(this.selectedPrice);
-
-                    this.prices.splice(index, 1);
-
-                    this.resetForm();
-
                     this.$refs.groupPriceCreateModal.close();
+
+                    this.$emitter.emit('open-confirm-modal', {
+                        agree: () => {
+                            let index = this.prices.indexOf(this.selectedPrice);
+
+                            this.prices.splice(index, 1);
+
+                            this.resetForm();
+                        }
+                    });
                 }
             }
         });

@@ -886,7 +886,11 @@
                 },
 
                 removeVariant(variant) {
-                    this.variants.splice(this.variants.indexOf(variant), 1);
+                    this.$emitter.emit('open-confirm-modal', {
+                        agree: () => {
+                            this.variants.splice(this.variants.indexOf(variant), 1);
+                        },
+                    });
                 },
             }
         });
@@ -998,13 +1002,17 @@
                 },
 
                 edit(type) {
-                    this.selectedType = type;
+                    this.$emitter.emit('open-confirm-modal', {
+                        agree: () => {
+                            this.selectedType = type;
 
-                    if (['editPrices', 'editInventories', 'addImages'].includes(type)) {
-                        this.$refs.updateVariantsDrawer.open();
-                    } else {
-                        this[this.selectedType]();
-                    }
+                            if (['editPrices', 'editInventories', 'addImages'].includes(type)) {
+                                this.$refs.updateVariantsDrawer.open();
+                            } else {
+                                this[this.selectedType]();
+                            }
+                        }
+                    });
                 },
 
                 update(params) {
