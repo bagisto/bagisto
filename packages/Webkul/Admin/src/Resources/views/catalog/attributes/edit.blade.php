@@ -913,7 +913,14 @@
                                     name="id"
                                 >
                                 </x-admin::form.control-group.control>
-                                
+
+                                <x-admin::form.control-group.control
+                                    type="hidden"
+                                    name="isNew"
+                                    ::value="optionIsNew"
+                                >
+                                </x-admin::form.control-group.control>
+
                                 <!-- Admin Input -->
                                 <x-admin::form.control-group class="w-full mb-[10px]">
                                     <x-admin::form.control-group.label ::class="{ 'required' : ! isNullOptionChecked }">
@@ -1018,6 +1025,10 @@
 
                         optionsData: [],
 
+                        optionIsNew: true,
+
+                        optionId: 0,
+
                         src: "{{ route('admin.catalog.attributes.options', $attribute->id) }}",
                     }
                 },
@@ -1028,6 +1039,11 @@
 
                 methods: {
                     storeOptions(params, { resetForm, setValues }) {
+                        if (! params.id) {
+                            params.id = 'option_' + this.optionId;
+                            this.optionId++;
+                        }
+
                         let foundIndex = this.optionsData.findIndex(item => item.id === params.id);
 
                         if (foundIndex !== -1) {
@@ -1046,6 +1062,8 @@
                     },
 
                     editOptions(value) {
+                        this.optionIsNew = false;
+
                         this.$refs.modelForm.setValues(value);
 
                         this.$refs.addOptionsRow.toggle();
