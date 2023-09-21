@@ -47,10 +47,13 @@
         @if (bouncer()->hasPermission('customers.customers.delete'))
             <div 
                 class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
-                onclick="if (confirm('@lang('admin::app.customers.customers.view.account-delete-confirmation')')) {
-                    event.preventDefault();
-                    document.getElementById('delete-account{{ $customer->id }}').submit();
-                }"
+                @click="$emitter.emit('open-confirm-modal', {
+                    message: '@lang('admin::app.customers.customers.view.account-delete-confirmation')',
+
+                    agree: () => {
+                        this.$refs['delete-account'].submit()
+                    }
+                })"
             >
                 <span class="icon-cancel text-[24px]"></span>
 
@@ -60,7 +63,7 @@
                 <form 
                     method="post"
                     action="{{ route('admin.customers.customers.delete', $customer->id) }}" 
-                    id="delete-account{{ $customer->id }}" 
+                    ref="delete-account"
                 >
                     @csrf
                 </form>
@@ -584,18 +587,21 @@
                                     @if (bouncer()->hasPermission('customers.addresses.delete'))
                                         <p 
                                             class="text-blue-600 cursor-pointer transition-all hover:underline"
-                                            onclick="if (confirm('@lang('admin::app.customers.customers.view.address-delete-confirmation')')) {
-                                            event.preventDefault();
-                                                document.getElementById('delete-address{{ $address->id }}').submit();
-                                        }"
+                                            @click="$emitter.emit('open-confirm-modal', {
+                                                message: '@lang('admin::app.customers.customers.view.address-delete-confirmation')',
+
+                                                agree: () => {
+                                                    this.$refs['delete-address-{{ $address->id }}'].submit()
+                                                }
+                                            })"
                                         >
                                             @lang('admin::app.customers.customers.view.delete')
                                         </p>
 
                                         <form 
                                             method="post"
-                                            action="{{ route('admin.customers.customers.addresses.delete', $address->id) }}" 
-                                            id="delete-address{{ $address->id }}" 
+                                            action="{{ route('admin.customers.customers.addresses.delete', $address->id) }}"
+                                            ref="delete-address-{{ $address->id }}" 
                                         >
                                             @csrf
                                         </form>

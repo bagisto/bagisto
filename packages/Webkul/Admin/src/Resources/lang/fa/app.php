@@ -3141,7 +3141,6 @@ return [
                 'no-records-selected'              => 'هیچ سابقه‌ای انتخاب نشده است.',
                 'must-select-a-mass-action'        => 'شما باید یک عمل جمعی انتخاب کنید.',
                 'must-select-a-mass-action-option' => 'شما باید یک گزینه عمل جمعی انتخاب کنید.',
-                'sure-want-to-perform-this-action' => 'آیا مطمئن هستید که می‌خواهید این عمل را انجام دهید؟',
             ],
 
             'toolbar' => [

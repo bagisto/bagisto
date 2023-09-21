@@ -231,8 +231,6 @@
                     </x-admin::modal>
                 </form>
             </x-admin::form>
-
-            <x-admin::modal.confirm ref="confirmRemoveGroupPriceModal"/>
         </div>
     </script>
 
@@ -290,7 +288,7 @@
                 remove() {
                     this.$refs.groupPriceCreateModal.close();
 
-                    this.$refs.confirmRemoveGroupPriceModal.open({
+                    this.$emitter.emit('open-confirm-modal', {
                         agree: () => {
                             let index = this.prices.indexOf(this.selectedPrice);
 

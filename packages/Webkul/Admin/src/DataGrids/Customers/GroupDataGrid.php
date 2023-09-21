@@ -66,7 +66,7 @@ class GroupDataGrid extends DataGrid
             $this->addAction([
                 'icon'   => 'icon-delete',
                 'title'  => trans('admin::app.customers.groups.index.datagrid.delete'),
-                'method' => 'POST',
+                'method' => 'DELETE',
                 'url'    => function ($row) {
                     return route('admin.customers.groups.delete', $row->id);
                 },

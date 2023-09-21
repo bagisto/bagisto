@@ -3141,7 +3141,6 @@ return [
                 'no-records-selected'              => 'No se han seleccionado registros.',
                 'must-select-a-mass-action'        => 'Debe seleccionar una acción masiva.',
                 'must-select-a-mass-action-option' => 'Debe seleccionar una opción de acción masiva.',
-                'sure-want-to-perform-this-action' => '¿Estás seguro de que deseas realizar esta acción?',
             ],
 
             'toolbar' => [
