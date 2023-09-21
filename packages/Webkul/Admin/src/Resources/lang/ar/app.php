@@ -3141,7 +3141,6 @@ return [
                 'no-records-selected'              => 'لم تتم اختيار أي سجلات.',
                 'must-select-a-mass-action'        => 'يجب عليك تحديد إجراء جماعي.',
                 'must-select-a-mass-action-option' => 'يجب عليك تحديد خيار إجراء جماعي.',
-                'sure-want-to-perform-this-action' => 'هل أنت متأكد أنك تريد أداء هذا الإجراء؟',
             ],
             
             'toolbar' => [

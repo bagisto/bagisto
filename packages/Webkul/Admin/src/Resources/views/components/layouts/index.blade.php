@@ -57,6 +57,8 @@
             {{-- Flash Message Blade Component --}}
             <x-admin::flash-group />
 
+            <x-admin::modal.confirm />
+
             {!! view_render_event('bagisto.shop.layout.content.before') !!}
 
             {{-- Page Header Blade Component --}}

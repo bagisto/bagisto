@@ -159,8 +159,6 @@
                 ::query-params="{type: 'simple'}"
                 @onProductAdded="addSelected($event)"
             ></x-admin::products.search>
-
-            <x-admin::modal.confirm ref="confirmRemoveGroupProductModal"/>
         </div>
     </script>
 
@@ -195,7 +193,7 @@
                 },
 
                 remove(product) {
-                    this.$refs.confirmRemoveGroupProductModal.open({
+                    this.$emitter.emit('open-confirm-modal', {
                         agree: () => {
                             let index = this.groupProducts.indexOf(product)
 

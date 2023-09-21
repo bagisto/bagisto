@@ -3141,7 +3141,6 @@ return [
                 'no-records-selected'              => 'কোন রেকর্ড নির্বাচন করা হয়নি।',
                 'must-select-a-mass-action'        => 'আপনাকে একটি যথার্থ কর্মসূচি নির্বাচন করতে হবে।',
                 'must-select-a-mass-action-option' => 'আপনাকে একটি যথার্থ কর্মসূচির বিকল্প নির্বাচন করতে হবে।',
-                'sure-want-to-perform-this-action' => 'আপনি কি নিশ্চিত, এই কার্যটি সম্পাদন করতে চান?',
             ],
             
             'toolbar' => [
