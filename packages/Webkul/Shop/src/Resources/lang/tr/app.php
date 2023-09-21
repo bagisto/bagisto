@@ -354,6 +354,15 @@ return [
             ],
         ],
 
+        'modal' => [
+            'confirm' => [
+                'title'        => 'Emin misiniz?',
+                'message'      => 'Bu işlemi yapmak istediğinizden emin misiniz?',
+                'agree-btn'    => 'Onayla',
+                'disagree-btn' => 'Onaylama',
+            ],
+        ],        
+
         'products'   => [
             'card' => [
                 'new'                => 'Yeni',

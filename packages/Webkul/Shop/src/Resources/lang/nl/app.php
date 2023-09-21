@@ -354,6 +354,15 @@ return [
             ],
         ],
 
+        'modal' => [
+            'confirm' => [
+                'title'        => 'Bent u zeker?',
+                'message'      => 'Bent u zeker dat u deze actie wilt uitvoeren?',
+                'agree-btn'    => 'Akkoord',
+                'disagree-btn' => 'Niet akkoord',
+            ],
+        ],
+
         'products'   => [
             'card' => [
                 'new'                => 'Nieuw',

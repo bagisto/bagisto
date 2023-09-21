@@ -353,6 +353,15 @@ return [
                 'no-records-available' => 'Keine Datensätze verfügbar.',
             ],
         ],
+        
+        'modal' => [
+            'confirm' => [
+                'title'        => 'Sind Sie sicher?',
+                'message'      => 'Sind Sie sicher, dass Sie diese Aktion ausführen möchten?',
+                'agree-btn'    => 'Zustimmen',
+                'disagree-btn' => 'Nicht zustimmen',
+            ],
+        ],
 
         'products' => [
             'card' => [

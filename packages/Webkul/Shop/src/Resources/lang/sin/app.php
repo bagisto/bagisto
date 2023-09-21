@@ -354,6 +354,15 @@ return [
             ],
         ],
 
+        'modal' => [
+            'confirm' => [
+                'title'        => 'ඔබට සැමට විශ්ලේෂණයක් තිබේද?',
+                'message'      => 'ඔබට මෙම ක්‍රියාව කියවන්ද?',
+                'agree-btn'    => 'එකඟයි',
+                'disagree-btn' => 'නැත',
+            ],
+        ],        
+
         'products'   => [
             'card' => [
                 'new'                => 'නව',

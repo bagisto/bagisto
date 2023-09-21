@@ -354,6 +354,15 @@ return [
             ],
         ],
 
+        'modal' => [
+            'confirm' => [
+                'title'        => 'Sei sicuro?',
+                'message'      => 'Sei sicuro di voler eseguire questa azione?',
+                'agree-btn'    => 'Conferma',
+                'disagree-btn' => 'Annulla',
+            ],
+        ],
+
         'products'   => [
             'card' => [
                 'new'                => 'Nuovo',

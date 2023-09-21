@@ -354,6 +354,15 @@ return [
             ],
         ],
 
+        'modal' => [
+            'confirm' => [
+                'title'        => '本当によろしいですか？',
+                'message'      => 'このアクションを実行してもよろしいですか？',
+                'agree-btn'    => '同意',
+                'disagree-btn' => '不同意',
+            ],
+        ],
+
         'products' => [
             'card' => [
                 'new'                => '新着',
