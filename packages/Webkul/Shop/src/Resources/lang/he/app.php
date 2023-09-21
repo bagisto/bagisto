@@ -273,6 +273,19 @@ return [
     ],
 
     'components' => [
+        'accordion' => [
+            'default-content' => 'תוכן ברירת מחדל',
+            'default-header'  => 'כותרת ברירת מחדל',
+        ],
+        
+        'drawer' => [
+           'default-toggle'  => 'מתג ברירת מחדל',
+        ],
+        
+        'media' => [
+            'add-attachments' => 'הוסף קבצים מצורפים',
+        ],
+        
         'layouts' => [
             'header' => [
                 'title'         => 'חשבון',
@@ -355,6 +368,9 @@ return [
         ],
 
         'modal' => [
+            'default-content' => 'תוכן ברירת מחדל',
+            'default-header'  => 'כותרת ברירת מחדל',
+            
             'confirm' => [
                 'title'        => 'האם אתה בטוח?',
                 'message'      => 'האם אתה בטוח שברצונך לבצע פעולה זו?',

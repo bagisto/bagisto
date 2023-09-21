@@ -273,6 +273,19 @@ return [
     ],
 
     'components' => [
+        'accordion' => [
+            'default-content' => 'デフォルトコンテンツ',
+            'default-header'  => 'デフォルトヘッダー',
+        ],
+        
+        'drawer' => [
+           'default-toggle'  => 'デフォルトトグル',
+        ],
+        
+        'media' => [
+            'add-attachments' => '添付ファイルを追加',
+        ],
+        
         'layouts' => [
             'header' => [
                 'title'         => 'アカウント',
@@ -355,6 +368,9 @@ return [
         ],
 
         'modal' => [
+            'default-content' => 'デフォルトコンテンツ',
+            'default-header'  => 'デフォルトヘッダー',
+            
             'confirm' => [
                 'title'        => '本当によろしいですか？',
                 'message'      => 'このアクションを実行してもよろしいですか？',

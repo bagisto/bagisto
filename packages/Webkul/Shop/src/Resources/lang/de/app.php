@@ -273,6 +273,19 @@ return [
     ],
 
     'components' => [
+        'accordion' => [
+            'default-content' => 'Standardinhalt',
+            'default-header'  => 'Standardüberschrift',
+        ],
+        
+        'drawer' => [
+           'default-toggle'  => 'Standardumschaltung',
+        ],
+        
+        'media' => [
+            'add-attachments' => 'Anhänge hinzufügen',
+        ],
+        
         'layouts' => [
             'header' => [
                 'title'         => 'Konto',
@@ -355,6 +368,9 @@ return [
         ],
         
         'modal' => [
+            'default-content' => 'Standardinhalt',
+            'default-header'  => 'Standardüberschrift',
+
             'confirm' => [
                 'title'        => 'Sind Sie sicher?',
                 'message'      => 'Sind Sie sicher, dass Sie diese Aktion ausführen möchten?',

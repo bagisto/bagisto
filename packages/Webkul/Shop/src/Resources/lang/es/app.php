@@ -273,6 +273,19 @@ return [
     ],
 
     'components' => [
+        'accordion' => [
+            'default-content' => 'Contenido predeterminado',
+            'default-header'  => 'Encabezado predeterminado',
+        ],
+        
+        'drawer' => [
+           'default-toggle'  => 'Alternar predeterminado',
+        ],
+        
+        'media' => [
+            'add-attachments' => 'Agregar adjuntos',
+        ],
+
         'layouts' => [
             'header' => [
                 'title'         => 'Konto',
@@ -355,6 +368,9 @@ return [
         ],
 
         'modal' => [
+            'default-content' => 'Contenido predeterminado',
+            'default-header'  => 'Encabezado predeterminado',
+            
             'confirm' => [
                 'title'        => '¿Estás seguro?',
                 'message'      => '¿Estás seguro de que quieres realizar esta acción?',

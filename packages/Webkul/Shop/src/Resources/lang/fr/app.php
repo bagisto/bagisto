@@ -273,6 +273,19 @@ return [
     ],
 
     'components' => [
+        'accordion' => [
+            'default-content' => 'Contenu par défaut',
+            'default-header'  => 'En-tête par défaut',
+        ],
+        
+        'drawer' => [
+           'default-toggle'  => 'Basculer par défaut',
+        ],
+        
+        'media' => [
+            'add-attachments' => 'Ajouter des pièces jointes',
+        ],
+        
         'layouts' => [
             'header' => [
                 'title'         => 'Compte',
@@ -355,6 +368,9 @@ return [
         ],
 
         'modal' => [
+            'default-content' => 'Contenu par défaut',
+            'default-header'  => 'En-tête par défaut',
+            
             'confirm' => [
                 'title'        => 'Êtes-vous sûr ?',
                 'message'      => 'Êtes-vous sûr de vouloir effectuer cette action ?',

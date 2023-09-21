@@ -45,7 +45,7 @@
                         for="file-input"
                         class="primary-button block w-max m-0 mx-auto py-[11px] px-[43px] rounded-[18px] text-base text-center"
                     >
-                        @lang('Add attachments')
+                        @lang('admin::app.components.media.add-attachments')
                     </label>
 
                     <input type="hidden" :name="name" v-if="! uploadedFiles.isPicked"/>

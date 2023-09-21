@@ -273,6 +273,19 @@ return [
     ],
 
     'components' => [
+        'accordion' => [
+            'default-content' => 'محتوای پیش‌فرض',
+            'default-header'  => 'سربرگ پیش‌فرض',
+        ],
+        
+        'drawer' => [
+           'default-toggle'  => 'کلیک کردن پیش‌فرض',
+        ],
+        
+        'media' => [
+            'add-attachments' => 'افزودن پیوست',
+        ],
+        
         'layouts' => [
             'header' => [
                 'title'         => 'حساب کاربری',
@@ -355,6 +368,9 @@ return [
         ],
 
         'modal' => [
+            'default-content' => 'محتوای پیش‌فرض',
+            'default-header'  => 'سربرگ پیش‌فرض',
+            
             'confirm' => [
                 'title'        => 'آیا مطمئن هستید؟',
                 'message'      => 'آیا مطمئن هستید که می خواهید این کار را انجام دهید؟',

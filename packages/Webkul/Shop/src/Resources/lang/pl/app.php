@@ -273,6 +273,19 @@ return [
     ],
 
     'components' => [
+        'accordion' => [
+            'default-content' => 'Domyślna treść',
+            'default-header'  => 'Domyślny nagłówek',
+        ],
+        
+        'drawer' => [
+           'default-toggle'  => 'Domyślne przełączanie',
+        ],
+        
+        'media' => [
+            'add-attachments' => 'Dodaj załączniki',
+        ],
+        
         'layouts' => [
             'header' => [
                 'title'         => 'Konto',
@@ -355,6 +368,9 @@ return [
         ],
 
         'modal' => [
+            'default-content' => 'Domyślna treść',
+            'default-header'  => 'Domyślny nagłówek',
+            
             'confirm' => [
                 'title'        => 'Czy jesteś pewien?',
                 'message'      => 'Czy na pewno chcesz wykonać tę akcję?',

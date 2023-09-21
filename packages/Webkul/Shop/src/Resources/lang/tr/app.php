@@ -273,6 +273,19 @@ return [
     ],
 
     'components' => [
+        'accordion' => [
+            'default-content' => 'Varsayılan İçerik',
+            'default-header'  => 'Varsayılan Başlık',
+        ],
+        
+        'drawer' => [
+           'default-toggle'  => 'Varsayılan Değiştirme',
+        ],
+        
+        'media' => [
+            'add-attachments' => 'Ekler Ekle',
+        ],
+        
         'layouts' => [
             'header' => [
                 'title'         => 'Hesap',
@@ -355,6 +368,9 @@ return [
         ],
 
         'modal' => [
+            'default-content' => 'Varsayılan İçerik',
+            'default-header'  => 'Varsayılan Başlık',
+            
             'confirm' => [
                 'title'        => 'Emin misiniz?',
                 'message'      => 'Bu işlemi yapmak istediğinizden emin misiniz?',

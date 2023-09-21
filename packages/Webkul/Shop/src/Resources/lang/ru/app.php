@@ -273,6 +273,19 @@ return [
     ],
 
     'components' => [
+        'accordion' => [
+            'default-content' => 'Содержимое по умолчанию',
+            'default-header'  => 'Заголовок по умолчанию',
+        ],
+        
+        'drawer' => [
+           'default-toggle'  => 'Переключатель по умолчанию',
+        ],
+        
+        'media' => [
+            'add-attachments' => 'Добавить вложения',
+        ],
+        
         'layouts' => [
             'header' => [
                 'title'         => 'Личный кабинет',
@@ -355,6 +368,9 @@ return [
         ],
 
         'modal' => [
+            'default-content' => 'Содержимое по умолчанию',
+            'default-header'  => 'Заголовок по умолчанию',
+            
             'confirm' => [
                 'title'        => 'Вы уверены?',
                 'message'      => 'Вы уверены, что хотите выполнить это действие?',

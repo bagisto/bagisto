@@ -273,6 +273,19 @@ return [
     ],
 
     'components' => [
+        'accordion' => [
+            'default-content' => 'Вміст за замовчуванням',
+            'default-header'  => 'Заголовок за замовчуванням',
+        ],
+        
+        'drawer' => [
+           'default-toggle'  => 'Перемикач за замовчуванням',
+        ],
+        
+        'media' => [
+            'add-attachments' => 'Додати вкладення',
+        ],
+        
         'layouts' => [
             'header' => [
                 'title'         => 'Обліковий запис',
@@ -355,6 +368,9 @@ return [
         ],
 
         'modal' => [
+            'default-content' => 'Вміст за замовчуванням',
+            'default-header'  => 'Заголовок за замовчуванням',
+            
             'confirm' => [
                 'title'        => 'Ви впевнені?',
                 'message'      => 'Ви впевнені, що хочете виконати цю дію?',

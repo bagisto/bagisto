@@ -29,7 +29,8 @@
                 @click="toggle"
             >
                 <slot name="header">
-                    Default Header
+                    @lang('admin::app.components.accordion.default-content')
+
                 </slot>
 
                 <span :class="`text-[24px] ${isOpen ? 'icon-arrow-up' : 'icon-arrow-down'}`"></span>
@@ -37,7 +38,7 @@
 
             <div class="z-10 bg-white rounded-lg" v-show="isOpen">
                 <slot name="content">
-                    Default Content
+                    @lang('admin::app.components.accordion.default-content')
                 </slot>
             </div>
         </div>

@@ -273,6 +273,19 @@ return [
     ],
 
     'components' => [
+        'accordion' => [
+            'default-content' => 'المحتوى الافتراضي',
+            'default-header'  => 'العنوان الافتراضي',
+        ],
+        
+        'drawer' => [
+           'default-toggle'  => 'التبديل الافتراضي',
+        ],
+        
+        'media' => [
+            'add-attachments' => 'إضافة المرفقات',
+        ],
+
         'layouts' => [
             'header' => [
                 'title'         => 'الحساب',
@@ -355,6 +368,9 @@ return [
         ],
 
         'modal' => [
+            'default-content' => 'المحتوى الافتراضي',
+            'default-header'  => 'العنوان الافتراضي',
+            
             'confirm' => [
                 'title'        => 'هل أنت متأكد؟',
                 'message'      => 'هل أنت متأكد أنك تريد القيام بهذا الإجراء؟',
