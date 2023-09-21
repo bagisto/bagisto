@@ -31,7 +31,7 @@
             {{-- Back Button --}}
             <a
                 href="{{ route('admin.customers.customers.index') }}"
-                class="transparent-button hover:bg-gray-200"
+                class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 "
             >
                 @lang('admin::app.customers.customers.view.back-btn')
             </a>
@@ -46,7 +46,7 @@
         {{-- Account Delete button --}}
         @if (bouncer()->hasPermission('customers.customers.delete'))
             <div 
-                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
+                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800  hover:rounded-[6px]"
                 onclick="if (confirm('@lang('admin::app.customers.customers.view.account-delete-confirmation')')) {
                     event.preventDefault();
                     document.getElementById('delete-account{{ $customer->id }}').submit();
@@ -187,7 +187,7 @@
 
                                 <a 
                                     href="{{ route('admin.sales.orders.view', $order->id) }}" 
-                                    class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"
+                                    class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 "
                                 >
                                 </a>
                             </div>
@@ -372,7 +372,7 @@
                                     </p>
                                 </div>
 
-                                <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"></span>
+                                <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 "></span>
                             </div>
                         </div>
 
@@ -505,7 +505,7 @@
 
                 <x-slot:content>
                     <div class="grid gap-y-[10px]">
-                        <p class="text-gray-800 font-semibold">
+                        <p class="text-gray-800 font-semibold dark:text-white">
                             {{ $customer->first_name . " " . $customer->last_name }}
                         </p>
 
@@ -552,7 +552,7 @@
                                     </p>
                                 @endif
 
-                                <p class="text-gray-800 font-semibold">
+                                <p class="text-gray-800 font-semibold dark:text-white">
                                     {{ $address->name }}
                                 </p>
 

@@ -53,7 +53,7 @@
             {{-- Back Button --}}
             <a
                 href="{{ route('admin.sales.orders.index') }}"
-                class="transparent-button hover:bg-gray-200"
+                class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 "
             >
                 @lang('admin::app.account.edit.back-btn')
             </a>
@@ -68,7 +68,7 @@
                 $order->canCancel()
                 && bouncer()->hasPermission('sales.orders.cancel')
             )
-                <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
+                <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800  hover:rounded-[6px]">
                     <span class="icon-cancel text-[24px]"></span>
 
                     <a
@@ -85,7 +85,7 @@
                 && $order->payment->method !== 'paypal_standard'
             )
                 <div
-                    class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
+                    class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800  hover:rounded-[6px]"
                     @click="$refs.invoice.open()"
                 >
                     <span class="icon-mail text-[24px]"></span> 
@@ -378,7 +378,7 @@
                     <x-slot:content>
                         <div class="{{ $order->billing_address ? 'pb-[16px]' : '' }}">
                             <div class="flex flex-col gap-[5px]">
-                                <p class="text-gray-800 font-semibold">
+                                <p class="text-gray-800 font-semibold dark:text-white">
                                     {{ $order->customer_full_name }}
                                 </p>
 
@@ -496,7 +496,7 @@
                     <x-slot:content>
                         <div>
                             {{-- Payment method --}}
-                            <p class="text-gray-800 font-semibold">
+                            <p class="text-gray-800 font-semibold dark:text-white">
                                 {{ core()->getConfigData('sales.payment_methods.' . $order->payment->method . '.title') }}
                             </p>
 
@@ -533,7 +533,7 @@
                         @if ($order->shipping_address)
                             <span class="block w-full mt-[16px] border-b-[1px] dark:border-gray-800  "></span>
                             <div class="pt-[16px]">
-                                <p class="text-gray-800 font-semibold">
+                                <p class="text-gray-800 font-semibold dark:text-white">
                                     {{ $order->shipping_title }}
                                 </p>
 
@@ -567,7 +567,7 @@
                         @forelse ($order->invoices as $index => $invoice)
                             <div class="grid gap-y-[10px]">
                                 <div>
-                                    <p class="text-gray-800 font-semibold">
+                                    <p class="text-gray-800 font-semibold dark:text-white">
                                         @lang('admin::app.sales.orders.view.invoice-id', ['invoice' => $invoice->increment_id ?? $invoice->id])
                                     </p>
 
@@ -617,7 +617,7 @@
                             <div class="grid gap-y-[10px]">
                                 <div>
                                     {{-- Shipment Id --}}
-                                    <p class="text-gray-800 font-semibold">
+                                    <p class="text-gray-800 font-semibold dark:text-white">
                                         @lang('admin::app.sales.orders.view.shipment', ['shipment' => $shipment->id])
                                     </p>
 
@@ -656,7 +656,7 @@
                         @forelse ($order->refunds as $refund)
                             <div class="grid gap-y-[10px]">
                                 <div>
-                                    <p class="text-gray-800 font-semibold">
+                                    <p class="text-gray-800 font-semibold dark:text-white">
                                         @lang('admin::app.sales.orders.view.refund-id', ['refund' => $refund->id])
                                     </p>
 
@@ -679,7 +679,7 @@
                                     <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                         @lang('admin::app.sales.orders.view.refunded') 
                                         
-                                        <span class="text-gray-800 font-semibold">
+                                        <span class="text-gray-800 font-semibold dark:text-white">
                                             {{ core()->formatBasePrice($refund->base_grand_total) }}
                                         </span>
                                     </p>

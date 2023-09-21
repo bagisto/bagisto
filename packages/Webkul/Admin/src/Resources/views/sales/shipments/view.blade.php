@@ -17,7 +17,7 @@
                 {{-- Cancel Button --}}
                 <a
                     href="{{ route('admin.sales.shipments.index') }}"
-                    class="transparent-button hover:bg-gray-200"
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 "
                 >
                     @lang('admin::app.account.edit.back-btn')
                 </a>
@@ -101,7 +101,7 @@
                 <x-slot:content>
                     <div class="flex flex-col pb-[16px]">
                         {{-- Customer Full Name --}}
-                        <p class="text-gray-800 font-semibold">
+                        <p class="text-gray-800 font-semibold dark:text-white">
                             {{ $shipment->order->customer_full_name }}
                         </p>
 
@@ -207,7 +207,7 @@
                 <x-slot:content>
                     <div class="pb-[16px]">
                         {{-- Payment method --}}
-                        <p class="text-gray-800 font-semibold">
+                        <p class="text-gray-800 font-semibold dark:text-white">
                             {{ core()->getConfigData('sales.payment_methods.' . $order->payment->method . '.title') }}
                         </p>
 
@@ -230,7 +230,7 @@
                 
                     <div class="pt-[16px]">
                         {{-- Shipping Menthod --}}
-                        <p class="text-gray-800 font-semibold">
+                        <p class="text-gray-800 font-semibold dark:text-white">
                             {{ $order->shipping_title }}
                         </p>
 

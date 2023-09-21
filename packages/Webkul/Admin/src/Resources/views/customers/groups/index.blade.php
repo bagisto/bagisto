@@ -99,7 +99,7 @@
                                     <a @click="id=1; actionHandler(action.url, action.title, record)">
                                         <span
                                             :class="action.icon"
-                                            class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
+                                            class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800  max-sm:place-self-center"
                                             :title="action.title"
                                         >
                                         </span>

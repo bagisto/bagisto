@@ -494,7 +494,7 @@
 
                                     {{-- View More Icon --}}
                                     <a href="{{ route('admin.sales.orders.view', $item->id) }}">
-                                        <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"></span>
+                                        <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800  hover:rounded-[6px]"></span>
                                     </a>
                                 </div>
                             </div>
@@ -576,7 +576,7 @@
 
                                         {{-- View More Icon --}}
                                         <a href="{{ route('admin.catalog.products.edit', $item->product_id) }}">
-                                            <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"></span>
+                                            <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800  hover:rounded-[6px]"></span>
                                         </a>
                                     </div>
                                 </div>
@@ -842,7 +842,7 @@
 
                                     <div class="flex flex-col">
                                         <p
-                                            class="text-gray-800 font-semibold"
+                                            class="text-gray-800 font-semibold dark:text-white"
                                             v-text="item.formatted_total_base_grand_total"
                                         >
                                         </p>
@@ -874,7 +874,7 @@
 
                                 <div class="flex flex-col">
                                     <p
-                                        class="text-gray-800 font-semibold"
+                                        class="text-gray-800 font-semibold dark:text-white"
                                         v-text="item.formatted_total_base_grand_total"
                                     >
                                     </p>

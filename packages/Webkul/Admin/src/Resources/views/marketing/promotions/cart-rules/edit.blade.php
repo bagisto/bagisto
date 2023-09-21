@@ -27,7 +27,7 @@
                             <!-- Cancel Button -->
                             <a
                                 href="{{ route('admin.marketing.promotions.cart_rules.index') }}"
-                                class="transparent-button hover:bg-gray-200"
+                                class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 "
                             >
                                 @lang('admin::app.marketing.promotions.cart-rules.edit.back-btn')
                             </a>

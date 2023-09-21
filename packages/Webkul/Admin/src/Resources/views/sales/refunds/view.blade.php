@@ -17,7 +17,7 @@
             <div class="flex gap-x-[10px] items-center">
                 <a
                     href="{{ route('admin.sales.refunds.index') }}"
-                    class="transparent-button hover:bg-gray-200"
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 "
                 >
                     @lang('admin::app.account.edit.back-btn')
                 </a>
@@ -220,7 +220,7 @@
                         {{-- Account Info --}}
                         <div class="flex flex-col pb-[16px]">
                             {{-- Customer Full Name --}}
-                            <p class="text-gray-800 font-semibold">
+                            <p class="text-gray-800 font-semibold dark:text-white">
                                 {{ $refund->order->customer_full_name }}
                             </p>
 

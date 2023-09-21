@@ -27,7 +27,7 @@
                 {{-- Cancel Button --}}
                 <a
                     href="{{ route('admin.sales.invoices.index') }}"
-                    class="transparent-button hover:bg-gray-200"
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 "
                 >
                     @lang('admin::app.account.edit.back-btn')
                 </a>
@@ -42,7 +42,7 @@
 
             <a
                 href="{{ route('admin.sales.invoices.print', $invoice->id) }}"
-                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
+                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800  hover:rounded-[6px]"
             >
                 <span class="icon-printer text-[24px] "></span> 
 
@@ -53,7 +53,7 @@
             <div>
                 <button
                     type="button"
-                    class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
+                    class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800  hover:rounded-[6px]"
                     @click="$refs.groupCreateModal.open()"
                 >
                     <span class="icon-cart text-[24px] "></span>
@@ -288,7 +288,7 @@
 
                 <x-slot:content>
                     <div class="flex flex-col {{ $order->billing_address ? 'pb-[16px]' : ''}}">
-                        <p class="text-gray-800 font-semibold">
+                        <p class="text-gray-800 font-semibold dark:text-white">
                             {{ $invoice->order->customer_full_name }}
                         </p>
 

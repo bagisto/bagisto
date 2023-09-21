@@ -168,7 +168,7 @@
                                 @if (bouncer()->hasPermission('customers.reviews.delete'))
                                     <a  
                                         @click="deleteReview(record.actions['1']?.url)">
-                                        <span class="icon-delete text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"></span>
+                                        <span class="icon-delete text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 "></span>
                                     </a>
                                 @endif
 
@@ -176,7 +176,7 @@
                                 @if (bouncer()->hasPermission('customers.reviews.edit'))
                                     <span 
                                         @click="edit(record.product_review_id)" 
-                                        class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"
+                                        class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 "
                                     >
                                     </span>
                                 @endif
@@ -226,7 +226,7 @@
                                             </p>
 
                                             <p 
-                                                class="text-gray-800 font-semibold" 
+                                                class="text-gray-800 font-semibold dark:text-white" 
                                                 v-text="review.name !== '' ? review.name : 'N/A'"
                                             >
                                             </p>
@@ -238,7 +238,7 @@
                                             </p>
 
                                             <p 
-                                                class="text-gray-800 font-semibold" 
+                                                class="text-gray-800 font-semibold dark:text-white" 
                                                 v-text="review.product.name"
                                             >
                                             </p>
@@ -250,7 +250,7 @@
                                             </p>
 
                                             <p 
-                                                class="text-gray-800 font-semibold" 
+                                                class="text-gray-800 font-semibold dark:text-white" 
                                                 v-text="review.id"
                                             >
                                             </p>
@@ -262,7 +262,7 @@
                                             </p>
 
                                             <p 
-                                                class="text-gray-800 font-semibold" 
+                                                class="text-gray-800 font-semibold dark:text-white" 
                                                 v-text="review.date"
                                             >
                                             </p>
@@ -327,7 +327,7 @@
                                         </p>
 
                                         <p 
-                                            class="text-gray-800 font-semibold" 
+                                            class="text-gray-800 font-semibold dark:text-white" 
                                             v-text="review.title"
                                         >
                                         </p>

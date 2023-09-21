@@ -25,7 +25,7 @@
                 <div class="flex gap-x-[10px] items-center">
                     <a 
                         href="{{ route('admin.settings.themes.index') }}"
-                        class="transparent-button hover:bg-gray-200"
+                        class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 "
                     > 
                         @lang('admin::app.settings.themes.edit.back')
                     </a>
@@ -49,7 +49,7 @@
                     <x-slot:toggle>
                         <button
                             type="button"
-                            class="transparent-button px-[4px] py-[6px] hover:bg-gray-200 focus:bg-gray-200"
+                            class="transparent-button px-[4px] py-[6px] hover:bg-gray-200 dark:hover:bg-gray-800  focus:bg-gray-200"
                         >
                             <span class="icon-language text-[24px] "></span>
 

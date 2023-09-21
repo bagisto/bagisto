@@ -12,7 +12,7 @@
             <!-- Dropdown -->
             <x-admin::dropdown position="bottom-right">
                 <x-slot:toggle>
-                    <span class="flex icon-setting p-[6px] rounded-[6px] text-[24px]  cursor-pointer transition-all hover:bg-gray-200"></span>
+                    <span class="flex icon-setting p-[6px] rounded-[6px] text-[24px]  cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 "></span>
                 </x-slot:toggle>
 
                 <x-slot:content class="w-[174px] max-w-full !p-[8PX] border dark:border-gray-800   rounded-[4px] z-10 bg-white dark:bg-gray-900  shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)]">
@@ -254,7 +254,7 @@
                         </div>
 
                         <a :href=`{{ route('admin.catalog.products.edit', '') }}/${record.product_id}`>
-                            <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"></span>
+                            <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 "></span>
                         </a>
 
                     </div>
@@ -411,7 +411,7 @@
                                 <div class="flex gap-x-[10px] items-center">
                                     <button
                                         type="button"
-                                        class="transparent-button hover:bg-gray-200"
+                                        class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 "
                                         v-if="attributes.length"
                                         @click="attributes = []"
                                     >

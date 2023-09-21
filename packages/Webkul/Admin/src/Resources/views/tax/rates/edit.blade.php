@@ -22,7 +22,7 @@
                         <!-- Cancel Button -->
                         <a
                             href="{{ route('admin.settings.taxes.rates.index') }}"
-                            class="transparent-button hover:bg-gray-200"
+                            class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 "
                         >
                             @lang('admin::app.settings.taxes.rates.edit.back-btn')
                         </a>

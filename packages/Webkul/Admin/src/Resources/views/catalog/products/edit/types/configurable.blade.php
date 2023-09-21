@@ -590,11 +590,11 @@
 
             <!-- Actions -->
             <div class="grid gap-[4px] place-content-start text-right">
-                <p class="text-gray-800 font-semibold">
+                <p class="text-gray-800 font-semibold dark:text-white">
                     @{{ $admin.formatPrice(variant.price) }}  
                 </p>
 
-                <p class="text-gray-800 font-semibold">
+                <p class="text-gray-800 font-semibold dark:text-white">
                     @{{ "@lang('admin::app.catalog.products.edit.types.configurable.qty')".replace(':qty', totalQty) }}
                 </p>
 

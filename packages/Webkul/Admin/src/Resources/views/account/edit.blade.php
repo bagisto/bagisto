@@ -18,7 +18,7 @@
                  <!-- Cancel Button -->
                 <a
                     href="{{ route('admin.dashboard.index') }}"
-                    class="transparent-button hover:bg-gray-200"
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 "
                 >
                     @lang('admin::app.account.edit.back-btn')
                 </a>

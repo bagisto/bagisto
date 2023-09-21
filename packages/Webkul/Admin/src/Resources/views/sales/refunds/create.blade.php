@@ -1,5 +1,5 @@
 <v-create-refund>
-    <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
+    <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800  hover:rounded-[6px]">
         <span class="icon-cancel text-[24px]"></span> 
 
         @lang('admin::app.sales.orders.view.refund')     
@@ -9,7 +9,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-create-refund-template">
         <div
-            class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
+            class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800  hover:rounded-[6px]"
             @click="$refs.refund.open()"
         >
             <span class="icon-cancel text-[24px]"></span> 
@@ -34,7 +34,7 @@
                             <div class="flex gap-x-[10px]">
                                 <!-- Update Quantity Button -->
                                 <div 
-                                    class="transparent-button text-red-600 hover:bg-gray-200"
+                                    class="transparent-button text-red-600 hover:bg-gray-200 dark:hover:bg-gray-800 "
                                     @click="updateQty"
                                 >
                                     @lang('admin::app.sales.refunds.create.update-quantity-btn')
