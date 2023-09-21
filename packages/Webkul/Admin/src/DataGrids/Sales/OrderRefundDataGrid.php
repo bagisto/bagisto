@@ -100,13 +100,15 @@ class OrderRefundDataGrid extends DataGrid
      */
     public function prepareActions()
     {
-        $this->addAction([
-            'icon'   => 'icon-view',
-            'title'  => trans('admin::app.sales.refunds.index.datagrid.view'),
-            'method' => 'GET',
-            'url'    => function ($row) {
-                return route('admin.sales.refunds.view', $row->id);
-            },
-        ]);
+        if (bouncer()->hasPermission('sales.refunds.view')) {
+            $this->addAction([
+                'icon'   => 'icon-view',
+                'title'  => trans('admin::app.sales.refunds.index.datagrid.view'),
+                'method' => 'GET',
+                'url'    => function ($row) {
+                    return route('admin.sales.refunds.view', $row->id);
+                },
+            ]);
+        }
     }
 }

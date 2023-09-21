@@ -212,26 +212,30 @@ class CustomerDataGrid extends DataGrid
      */
     public function prepareMassActions()
     {
-        $this->addMassAction([
-            'title'  => trans('admin::app.customers.customers.index.datagrid.delete'),
-            'method' => 'POST',
-            'url'    => route('admin.customers.customers.mass_delete'),
-        ]);
+        if (bouncer()->hasPermission('customers.customers.mass-delete')) {
+            $this->addMassAction([
+                'title'  => trans('admin::app.customers.customers.index.datagrid.delete'),
+                'method' => 'POST',
+                'url'    => route('admin.customers.customers.mass_delete'),
+            ]);
+        }
 
-        $this->addMassAction([
-            'title'   => trans('admin::app.customers.customers.index.datagrid.update-status'),
-            'method'  => 'POST',
-            'url'     => route('admin.customers.customers.mass_update'),
-            'options' => [
-                [
-                    'name' => trans('admin::app.customers.customers.index.datagrid.active'),
-                    'value' => 1,
+        if (bouncer()->hasPermission('customers.customers.mass-update')) {
+            $this->addMassAction([
+                'title'   => trans('admin::app.customers.customers.index.datagrid.update-status'),
+                'method'  => 'POST',
+                'url'     => route('admin.customers.customers.mass_update'),
+                'options' => [
+                    [
+                        'name' => trans('admin::app.customers.customers.index.datagrid.active'),
+                        'value' => 1,
+                    ],
+                    [
+                        'name' => trans('admin::app.customers.customers.index.datagrid.inactive'),
+                        'value' => 0,
+                    ],
                 ],
-                [
-                    'name' => trans('admin::app.customers.customers.index.datagrid.inactive'),
-                    'value' => 0,
-                ],
-            ],
-        ]);
+            ]);
+        }
     }
 }
