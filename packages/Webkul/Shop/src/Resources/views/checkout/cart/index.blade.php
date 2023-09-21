@@ -318,52 +318,64 @@
                     },
 
                     removeItem(itemId) {
-                        this.$axios.post('{{ route('shop.api.checkout.cart.destroy') }}', {
-                                '_method': 'DELETE',
-                                'cart_item_id': itemId,
-                            })
-                            .then(response => {
-                                this.cart = response.data.data;
+                        this.$emitter.emit('open-confirm-modal', {
+                            agree: () => {
+                                this.$axios.post('{{ route('shop.api.checkout.cart.destroy') }}', {
+                                        '_method': 'DELETE',
+                                        'cart_item_id': itemId,
+                                    })
+                                    .then(response => {
+                                        this.cart = response.data.data;
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                        this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
-                            })
-                            .catch(error => {});
+                                    })
+                                    .catch(error => {});
+                            }
+                        });
                     },
 
                     removeSelectedItems() {
-                        const selectedItemsIds = this.cart.items.flatMap(item => item.selected ? item.id : []);
+                        this.$emitter.emit('open-confirm-modal', {
+                            agree: () => {
+                                const selectedItemsIds = this.cart.items.flatMap(item => item.selected ? item.id : []);
 
-                        this.$axios.post('{{ route('shop.api.checkout.cart.destroy_selected') }}', {
-                                '_method': 'DELETE',
-                                'ids': selectedItemsIds,
-                            })
-                            .then(response => {
-                                this.cart = response.data.data;
+                                this.$axios.post('{{ route('shop.api.checkout.cart.destroy_selected') }}', {
+                                        '_method': 'DELETE',
+                                        'ids': selectedItemsIds,
+                                    })
+                                    .then(response => {
+                                        this.cart = response.data.data;
 
-                                this.$emitter.emit('update-mini-cart', response.data.data );
+                                        this.$emitter.emit('update-mini-cart', response.data.data );
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                        this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
-                            })
-                            .catch(error => {});
+                                    })
+                                    .catch(error => {});
+                            }
+                        });
                     },
 
                     moveToWishlistSelectedItems() {
-                        const selectedItemsIds = this.cart.items.flatMap(item => item.selected ? item.id : []);
+                        this.$emitter.emit('open-confirm-modal', {
+                            agree: () => {
+                                const selectedItemsIds = this.cart.items.flatMap(item => item.selected ? item.id : []);
 
-                        this.$axios.post('{{ route('shop.api.checkout.cart.move_to_wishlist') }}', {
-                                'ids': selectedItemsIds,
-                            })
-                            .then(response => {
-                                this.cart = response.data.data;
+                                this.$axios.post('{{ route('shop.api.checkout.cart.move_to_wishlist') }}', {
+                                        'ids': selectedItemsIds,
+                                    })
+                                    .then(response => {
+                                        this.cart = response.data.data;
 
-                                this.$emitter.emit('update-mini-cart', response.data.data );
+                                        this.$emitter.emit('update-mini-cart', response.data.data );
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                        this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
-                            })
-                            .catch(error => {});
+                                    })
+                                    .catch(error => {});
+                            }
+                        });
                     },
                 }
             });

@@ -654,6 +654,7 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'Status',
                             'weight'          => 'Gewicht',
+                            'images'          => 'Afbeeldingen',
                         ],
 
                         'mass-edit' => [
@@ -3182,6 +3183,15 @@ return [
             'table' => [
                 'actions'              => 'Acties',
                 'no-records-available' => 'Geen Gegevens Beschikbaar.',
+            ],
+        ],
+
+        'modal' => [
+            'confirm' => [
+                'title'        => 'Weet u het zeker?',
+                'message'      => 'Bent u zeker dat u deze actie wilt uitvoeren?',
+                'agree-btn'    => 'Akkoord',
+                'disagree-btn' => 'Niet akkoord',
             ],
         ],
 

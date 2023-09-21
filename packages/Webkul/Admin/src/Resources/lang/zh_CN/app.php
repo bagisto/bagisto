@@ -654,6 +654,7 @@ return [
                             'sku'             => 'SKU',
                             'status'          => '状态',
                             'weight'          => '重量',
+                            'images'         => '图片',
                         ],
 
                         'mass-edit' => [
@@ -3182,6 +3183,15 @@ return [
             'table' => [
                 'actions'              => '操作',
                 'no-records-available' => '没有可用记录。',
+            ],
+        ],
+
+        'modal' => [
+            'confirm' => [
+                'title'        => '您确定吗？',
+                'message'      => '您确定要执行此操作吗？',
+                'agree-btn'    => '同意',
+                'disagree-btn' => '不同意',
             ],
         ],
 

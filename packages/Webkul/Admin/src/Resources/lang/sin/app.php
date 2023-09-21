@@ -655,6 +655,7 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'ස්ථානය',
                             'weight'          => 'බර',
+                            'images'          => 'පින්තූර',
                         ],
 
                         'mass-edit' => [
@@ -3181,6 +3182,15 @@ return [
             'table' => [
                 'actions'              => 'ක්‍රියාකාර',
                 'no-records-available' => 'ලකුණු ප්‍රතිඵලය නැත.',
+            ],
+        ],
+
+        'modal' => [
+            'confirm' => [
+                'title'        => 'ඔබට විශ්ලේෂණය කරනවාද?',
+                'message'      => 'ඔබට විශ්ලේෂණය කරනවාද මෙය ක්‍රියා කරනවාද?',
+                'agree-btn'    => 'සහෝදරයේ',
+                'disagree-btn' => 'අනුපාතයේ',
             ],
         ],
 

@@ -654,6 +654,7 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'স্থিতি',
                             'weight'          => 'ওজন',
+                            'images'          => 'চিত্র',
                         ],
 
                         'mass-edit' => [
@@ -3182,6 +3183,15 @@ return [
             'table' => [
                 'actions'              => 'কার্যক্ষমতা',
                 'no-records-available' => 'কোন রেকর্ড উপলব্ধ নেই।',
+            ],
+        ],
+
+        'modal' => [
+            'confirm' => [
+                'title'        => 'আপনি কি নিশ্চিত?',
+                'message'      => 'আপনি কি নিশ্চিত যে আপনি এই কাজটি করতে চান?',
+                'agree-btn'    => 'সম্মত',
+                'disagree-btn' => 'অসম্মত',
             ],
         ],
 

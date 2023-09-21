@@ -654,6 +654,7 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'स्थिति',
                             'weight'          => 'वजन',
+                            'images'          => 'चित्र',
                         ],
 
                         'mass-edit' => [
@@ -3182,6 +3183,15 @@ return [
             'table' => [
                 'actions'              => 'क्रियाएँ',
                 'no-records-available' => 'कोई रिकॉर्ड उपलब्ध नहीं हैं.',
+            ],
+        ],
+
+        'modal' => [
+            'confirm' => [
+                'title'        => 'क्या आपको यकीन है?',
+                'message'      => 'क्या आपको यकीन है कि आप इस क्रिया को करना चाहते हैं?',
+                'agree-btn'    => 'सहमत',
+                'disagree-btn' => 'असहमत',
             ],
         ],
 

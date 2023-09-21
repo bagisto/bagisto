@@ -655,6 +655,7 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'Durum',
                             'weight'          => 'Ağırlık',
+                            'images'          => 'Resimler',
                         ],
 
                         'mass-edit' => [
@@ -3183,6 +3184,15 @@ return [
             'table' => [
                 'actions'              => 'Eylemler',
                 'no-records-available' => 'Kullanılabilir Kayıt Yok.',
+            ],
+        ],
+
+        'modal' => [
+            'confirm' => [
+                'title'        => 'Emin misiniz?',
+                'message'      => 'Bu işlemi gerçekleştirmek istediğinizden emin misiniz?',
+                'agree-btn'    => 'Kabul Et',
+                'disagree-btn' => 'Reddet',
             ],
         ],
 

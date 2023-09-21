@@ -654,6 +654,7 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'ステータス',
                             'weight'          => '重さ',
+                            'images'          => '画像',
                         ],
 
                         'mass-edit' => [
@@ -3183,6 +3184,15 @@ return [
             'table' => [
                 'actions'              => 'アクション',
                 'no-records-available' => '利用可能なレコードはありません。',
+            ],
+        ],
+
+        'modal' => [
+            'confirm' => [
+                'title'        => '本当によろしいですか？',
+                'message'      => 'この操作を実行してもよろしいですか？',
+                'agree-btn'    => '同意',
+                'disagree-btn' => '同意しない',
             ],
         ],
 

@@ -654,6 +654,7 @@ return [
                             'sku'             => 'Артикул',
                             'status'          => 'Статус',
                             'weight'          => 'Вага',
+                            'images'          => 'Зображення',
                         ],
 
                         'mass-edit' => [
@@ -3182,6 +3183,15 @@ return [
             'table' => [
                 'actions'              => 'Дії',
                 'no-records-available' => 'Записи відсутні.',
+            ],
+        ],
+
+        'modal' => [
+            'confirm' => [
+                'title'        => 'Ви впевнені?',
+                'message'      => 'Ви впевнені, що хочете виконати цю дію?',
+                'agree-btn'    => 'Згоден',
+                'disagree-btn' => 'Не згоден',
             ],
         ],
 

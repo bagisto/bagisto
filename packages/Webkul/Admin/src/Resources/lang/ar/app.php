@@ -654,6 +654,7 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'الحالة',
                             'weight'          => 'الوزن',
+                            'images'         => 'الصور',
                         ],
 
                         'mass-edit' => [
@@ -3182,6 +3183,15 @@ return [
             'table' => [
                 'actions'              => 'الإجراءات',
                 'no-records-available' => 'لا توجد سجلات متاحة.',
+            ],
+        ],
+
+        'modal' => [
+            'confirm' => [
+                'title'        => 'هل أنت متأكد؟',
+                'message'      => 'هل أنت متأكد أنك تريد أن تقوم بهذا الإجراء؟',
+                'agree-btn'    => 'موافق',
+                'disagree-btn' => 'غير موافق',
             ],
         ],
 

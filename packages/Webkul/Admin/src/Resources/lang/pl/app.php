@@ -654,6 +654,7 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'Status',
                             'weight'          => 'Waga',
+                            'images'          => 'Zdjęcia',
                         ],
 
                         'mass-edit' => [
@@ -3181,6 +3182,15 @@ return [
             'table' => [
                 'actions'              => 'Akcje',
                 'no-records-available' => 'Brak Dostępnych Rekordów.',
+            ],
+        ],
+
+        'modal' => [
+            'confirm' => [
+                'title'        => 'Jesteś pewny?',
+                'message'      => 'Czy na pewno chcesz wykonać tę czynność?',
+                'agree-btn'    => 'Zgadzam się',
+                'disagree-btn' => 'Nie zgadzam się',
             ],
         ],
 
