@@ -96,7 +96,7 @@ class AttributeController extends Controller
     {
         $attribute = $this->attributeRepository->findOrFail($id);
 
-        return $attribute->options()->paginate(50);
+        return $attribute->options()->get();
     }
 
     /**
