@@ -56,7 +56,6 @@
                                         @{{ attribute.name ?? attribute.admin_name }}
                                     </p>
                                 </div>
-
                                 <div class="flex gap-[12px] border-l-[1px] border-[#E9E9E9] max-sm:border-0">
                                     <div
                                         class="relative group"
@@ -166,55 +165,62 @@
                     },
 
                     remove(productId) {
-                        if (! this.isCustomer) {
-                            const index = this.items.findIndex((item) => item.id === productId);
+                        this.$emitter.emit('open-confirm-modal', {
+                            agree: () => {
+                                if (! this.isCustomer) {
+                                    const index = this.items.findIndex((item) => item.id === productId);
 
-                            this.items.splice(index, 1);
+                                    this.items.splice(index, 1);
 
-                            let items = this.getStorageValue()
-                                .filter(item => item != productId);
+                                    let items = this.getStorageValue()
+                                        .filter(item => item != productId);
 
-                            localStorage.setItem('compare_items', JSON.stringify(items));
+                                    localStorage.setItem('compare_items', JSON.stringify(items));
 
-                            return;
-                        }
+                                    return;
+                                }
 
-                        this.$axios.post("{{ route('shop.api.compare.destroy') }}", {
-                                '_method': 'DELETE',
-                                'product_id': productId,
-                            })
-                            .then(response => {
-                                this.items = response.data.data;
+                                this.$axios.post("{{ route('shop.api.compare.destroy') }}", {
+                                        '_method': 'DELETE',
+                                        'product_id': productId,
+                                    })
+                                    .then(response => {
+                                        this.items = response.data.data;
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                        this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
-                            })
-                            .catch(error => {
-                                this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
-                            });
+                                    })
+                                    .catch(error => {
+                                        this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
+                                    });
+                            }
+                        });
                     },
 
                     removeAll() {
-                        if (! this.isCustomer) {
-                            localStorage.removeItem('compare_items');
+                        this.$emitter.emit('open-confirm-modal', {
+                            agree: () => {
+                                if (! this.isCustomer) {
+                                    localStorage.removeItem('compare_items');
 
-                            this.items = [];
+                                    this.items = [];
 
-                            this.$emitter.emit('add-flash', { type: 'success', message:  "@lang('shop::app.compare.remove-all-success')" });
+                                    this.$emitter.emit('add-flash', { type: 'success', message:  "@lang('shop::app.compare.remove-all-success')" });
 
-                            return;
-                        }
-                        
-                        this.$axios.post("{{ route('shop.api.compare.destroy_all') }}", {
-                                '_method': 'DELETE',
-                            })
-                            .then(response => {
-                                this.items = [];
+                                    return;
+                                }
+                                
+                                this.$axios.post("{{ route('shop.api.compare.destroy_all') }}", {
+                                        '_method': 'DELETE',
+                                    })
+                                    .then(response => {
+                                        this.items = [];
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
-                            })
-                            .catch(error => {});
-
+                                        this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                    })
+                                    .catch(error => {});
+                            }
+                        });
                     },
 
                     getStorageValue() {

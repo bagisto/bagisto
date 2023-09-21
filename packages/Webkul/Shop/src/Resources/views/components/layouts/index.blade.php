@@ -49,6 +49,9 @@
             {{-- Flash Message Blade Component --}}
             <x-shop::flash-group />
 
+            {{-- Confirm Modal Blade Component --}}
+            <x-shop::modal.confirm />
+
             {{-- Page Header Blade Component --}}
             @if ($hasHeader)
                 <x-shop::layouts.header />
