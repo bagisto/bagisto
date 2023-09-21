@@ -3185,6 +3185,15 @@ return [
                 'no-records-available' => 'رکوردهای موجودی نیست.',
             ],
         ],
+        
+        'modal' => [
+            'confirm' => [
+                'title'        => 'آیا مطمئن هستید؟',
+                'message'      => 'آیا مطمئن هستید که می‌خواهید این عمل را انجام دهید؟',
+                'agree-btn'    => 'موافقم',
+                'disagree-btn' => 'مخالفم',
+            ],
+        ],
 
         'products' => [
             'search' => [

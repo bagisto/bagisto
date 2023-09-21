@@ -3185,6 +3185,15 @@ return [
             ],
         ],
 
+        'modal' => [
+            'confirm' => [
+                'title'        => 'Sei sicuro?',
+                'message'      => 'Sei sicuro di voler eseguire questa azione?',
+                'agree-btn'    => 'Concorda',
+                'disagree-btn' => 'Non Concordare',
+            ],
+        ],
+
         'products' => [
             'search' => [
                 'title'       => 'Seleziona Prodotti',

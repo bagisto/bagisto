@@ -3187,6 +3187,15 @@ return [
             ],
         ],
 
+        'modal' => [
+            'confirm' => [
+                'title'        => 'Bist du sicher?',
+                'message'      => 'Möchtest du diese Aktion wirklich ausführen?',
+                'agree-btn'    => 'Zustimmen',
+                'disagree-btn' => 'Nicht zustimmen',
+            ],
+        ],
+
         'products' => [
             'search' => [
                 'title'       => 'Produkte auswählen',
