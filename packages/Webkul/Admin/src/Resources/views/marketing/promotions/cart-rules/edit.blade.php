@@ -84,7 +84,7 @@
                                         name="description"
                                         :value="old('description') ?? $cartRule->description"
                                         id="description"
-                                        class="text-gray-600 dark:text-gray-300"
+                                        class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
                                         :label="trans('admin::app.marketing.promotions.cart-rules.edit.description')"
                                         :placeholder="trans('admin::app.marketing.promotions.cart-rules.edit.description')"
                                     >
@@ -559,7 +559,7 @@
                             <x-admin::accordion>
                                 <x-slot:header>
                                     <div class="flex items-center justify-between p-[6px]">
-                                        <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                                        <p class="text-gray-600 dark:text-gray-300  text-[16px] p-[10px] font-semibold">
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.settings')
                                         </p>
                                     </div>
@@ -699,7 +699,7 @@
                             <x-admin::accordion>
                                 <x-slot:header>
                                     <div class="flex items-center justify-between p-[6px]">
-                                        <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                                        <p class="text-gray-600 dark:text-gray-300  text-[16px] p-[10px] font-semibold">
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.marketing-time')
                                         </p>
                                     </div>

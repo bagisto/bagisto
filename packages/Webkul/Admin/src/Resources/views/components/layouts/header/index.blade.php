@@ -146,7 +146,7 @@
                         >
                             <span class="{{ $menuItem['icon'] }} text-[24px] {{ $menu->getActive($menuItem) ? 'text-white' : ''}}"></span>
                             
-                            <p class="text-gray-600 font-semibold whitespace-nowrap {{ $menu->getActive($menuItem) ? 'text-white' : ''}}">
+                            <p class="text-gray-600 dark:text-gray-300  font-semibold whitespace-nowrap {{ $menu->getActive($menuItem) ? 'text-white' : ''}}">
                                 @lang($menuItem['name'])
                             </p>
                         </a>
@@ -246,7 +246,7 @@
 
                                 <!-- Right Information -->
                                 <div class="grid gap-[4px] place-content-center text-right">
-                                    <p class="text-gray-600 font-semibold">
+                                    <p class="text-gray-600 dark:text-gray-300  font-semibold">
                                         @{{ product.formatted_price }}
                                     </p>
                                 </div>

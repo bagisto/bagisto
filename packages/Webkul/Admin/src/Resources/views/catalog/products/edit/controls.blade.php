@@ -155,7 +155,7 @@
                 >
                 </x-admin::form.control-group.control>
 
-                <p class="text-gray-600 font-semibold">
+                <p class="text-gray-600 dark:text-gray-300  font-semibold">
                     {{ $option->admin_name }}
                 </p>
             </div>

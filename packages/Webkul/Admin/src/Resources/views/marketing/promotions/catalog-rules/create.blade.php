@@ -79,7 +79,7 @@
                                         name="description"
                                         :value="old('description')"
                                         id="description"
-                                        class="text-gray-600 dark:text-gray-300"
+                                        class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
                                         :label="trans('admin::app.marketing.promotions.catalog-rules.create.description')"
                                         :placeholder="trans('admin::app.marketing.promotions.catalog-rules.create.description')"
                                     >
@@ -257,7 +257,7 @@
                             <x-admin::accordion>
                                 <x-slot:header>
                                     <div class="flex items-center justify-between p-[6px]">
-                                        <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                                        <p class="text-gray-600 dark:text-gray-300  text-[16px] p-[10px] font-semibold">
                                             @lang('admin::app.marketing.promotions.catalog-rules.create.settings')
                                         </p>
                                     </div>
@@ -392,7 +392,7 @@
                             <x-admin::accordion>
                                 <x-slot:header>
                                     <div class="flex items-center justify-between p-[6px]">
-                                        <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                                        <p class="text-gray-600 dark:text-gray-300  text-[16px] p-[10px] font-semibold">
                                             @lang('admin::app.marketing.promotions.catalog-rules.create.marketing-time')
                                         </p>
                                     </div>

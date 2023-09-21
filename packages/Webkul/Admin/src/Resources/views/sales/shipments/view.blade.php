@@ -61,18 +61,18 @@
                                     <div class="flex flex-col gap-[6px] place-items-start">
 
                                         @if (isset($item->additional['attributes']))
-                                            <p class="text-gray-600 dark:text-gray-300">
+                                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                                 @foreach ($item->additional['attributes'] as $attribute)
                                                     {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
                                                 @endforeach
                                             </p>
                                         @endif
 
-                                        <p class="text-gray-600 dark:text-gray-300">
+                                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                             @lang('admin::app.sales.shipments.view.sku', ['sku' =>  $item->sku ])
                                         </p>
                                         
-                                        <p class="text-gray-600 dark:text-gray-300">
+                                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                             @lang('admin::app.sales.shipments.view.qty', ['qty' =>  $item->qty ])
                                         </p>
                                     </div>
@@ -93,7 +93,7 @@
             {{-- component 1 --}}
             <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300  text-[16px] p-[10px] font-semibold">
                         @lang('admin::app.sales.shipments.view.customer')
                     </p>
                 </x-slot:header>
@@ -106,7 +106,7 @@
                         </p>
 
                         {{-- Customer Email --}}
-                        <p class="text-gray-600 dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                             @lang('admin::app.sales.shipments.view.email', ['email' =>  $shipment->order->customer_email ])
                         </p>
                     </div>
@@ -117,7 +117,7 @@
                         {{-- Billing Address --}}
                         @if ($order->billing_address)
                             <div class="flex items-center justify-between">
-                                <p class="text-gray-600 text-[16px] py-[16px] font-semibold">
+                                <p class="text-gray-600 dark:text-gray-300  text-[16px] py-[16px] font-semibold">
                                     @lang('admin::app.sales.shipments.view.billing-address')
                                 </p>
                             </div>
@@ -131,7 +131,7 @@
                             <span class="block w-full mt-[16px] border-b-[1px] border-gray-300"></span>
 
                             <div class="flex items-center justify-between">
-                                <p class="text-gray-600 text-[16px] py-[16px] font-semibold">
+                                <p class="text-gray-600 dark:text-gray-300  text-[16px] py-[16px] font-semibold">
                                     @lang('admin::app.sales.shipments.view.shipping-address')
                                 </p>
                             </div>
@@ -146,7 +146,7 @@
             {{-- component 2 --}}
             <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300  text-[16px] p-[10px] font-semibold">
                         @lang('admin::app.sales.shipments.view.order-information')
                     </p>
                 </x-slot:header>
@@ -154,19 +154,19 @@
                 <x-slot:content>
                     <div class="flex w-full gap-[20px] justify-start">
                         <div class="flex flex-col gap-y-[6px]">
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                 @lang('admin::app.sales.shipments.view.order-id')     
                             </p>
 
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                 @lang('admin::app.sales.shipments.view.order-date')     
                            </p>
 
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                 @lang('admin::app.sales.shipments.view.order-status')        
                             </p>
 
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                 @lang('admin::app.sales.shipments.view.channel')                     
                             </p>
                         </div>
@@ -178,17 +178,17 @@
                             </p>
 
                             {{-- Order Date --}}
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                 {{ core()->formatDate($order->created_at) }}
                             </p>
 
                             {{-- Order Status --}}
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                 {{ $order->status_label }}
                             </p>
 
                             {{-- Order Channel --}}
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                 {{ $order->channel_name }}
                             </p>
                         </div>
@@ -199,7 +199,7 @@
             {{-- Component 3 --}}
             <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300  text-[16px] p-[10px] font-semibold">
                         @lang('admin::app.sales.shipments.view.payment-and-shipping')
                     </p>
                 </x-slot:header>
@@ -211,7 +211,7 @@
                             {{ core()->getConfigData('sales.payment_methods.' . $order->payment->method . '.title') }}
                         </p>
 
-                        <p class="text-gray-600 dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                             @lang('admin::app.sales.shipments.view.payment-method')
                         </p>
 
@@ -220,7 +220,7 @@
                             {{ $order->order_currency_code }}
                         </p>
 
-                        <p class="text-gray-600 dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                             @lang('admin::app.sales.shipments.view.currency')
                         </p>
                     </div>
@@ -234,7 +234,7 @@
                             {{ $order->shipping_title }}
                         </p>
 
-                        <p class="text-gray-600 dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                             @lang('admin::app.sales.shipments.view.shipping-method')
                         </p>
 
@@ -243,7 +243,7 @@
                             {{ core()->formatBasePrice($order->base_shipping_amount) }}
                         </p>
 
-                        <p class="text-gray-600 dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                             @lang('admin::app.sales.shipments.view.shipping-price')
                         </p>
 
@@ -255,7 +255,7 @@
                                 {{ $shipment->inventory_source ? $shipment->inventory_source->name : $shipment->inventory_source_name }}
                             </p>
 
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                 @lang('admin::app.sales.shipments.view.inventory-source')
                             </p>
                         @endif
@@ -265,7 +265,7 @@
                                 {{ $shipment->carrier_title }}
                             </p>
                             
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                 @lang('admin::app.sales.shipments.view.carrier-title')
                             </p>
                         @endif
@@ -275,7 +275,7 @@
                                 {{ $shipment->track_number }}
                             </p>
 
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                 @lang('admin::app.sales.shipments.view.tracking-number')
                             </p>
                         @endif

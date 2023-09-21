@@ -20,14 +20,14 @@
                     <div class="grid gap-[2px]">
                         <!-- Current Channel -->
                         <div class="p-[6px] items-center cursor-pointer transition-all hover:bg-gray-100 hover:rounded-[6px]">
-                            <p class="text-gray-600 font-semibold leading-[24px]">
+                            <p class="text-gray-600 dark:text-gray-300  font-semibold leading-[24px]">
                                 Channel - {{ core()->getCurrentChannel()->name }}
                             </p>
                         </div>
 
                         <!-- Current Locale -->
                         <div class="p-[6px] items-center cursor-pointer transition-all hover:bg-gray-100 hover:rounded-[6px]">
-                            <p class="text-gray-600 font-semibold leading-[24px]">
+                            <p class="text-gray-600 dark:text-gray-300  font-semibold leading-[24px]">
                                 Language - {{ core()->getCurrentLocale()->name }}
                             </p>
                         </div>

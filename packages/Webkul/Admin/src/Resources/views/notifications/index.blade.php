@@ -17,7 +17,7 @@
                             @lang('admin::app.notifications.title')
                         </p>
 
-                        <p class="text-gray-600 dark:text-gray-300">List all the Notifications</p>
+                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">List all the Notifications</p>
                     </div>
                 </div>
 
@@ -32,7 +32,7 @@
                                 @click="status = data.status; getNotification()"
                             >
                                 <p
-                                    class="text-gray-600 dark:text-gray-300"
+                                    class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
                                     v-text="data.message"
                                 >
                                 </p>
@@ -92,10 +92,10 @@
                         >
                         </div>
 
-                        <span class="text-gray-600 whitespace-nowrap">of</span>
+                        <span class="text-gray-600 dark:text-gray-300  whitespace-nowrap">of</span>
 
                         <p
-                            class="text-gray-600 whitespace-nowrap"
+                            class="text-gray-600 dark:text-gray-300  whitespace-nowrap"
                             v-text="pagination.current_page"
                         >
                         </p>

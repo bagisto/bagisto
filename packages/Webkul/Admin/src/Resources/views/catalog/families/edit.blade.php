@@ -147,7 +147,7 @@
                     <div v-for="(groups, column) in columnGroups">
                         <!-- Attributes Groups Header -->
                         <div class="flex flex-col mb-[16px]">
-                            <p class="text-gray-600 font-semibold leading-[24px]">
+                            <p class="text-gray-600 dark:text-gray-300  font-semibold leading-[24px]">
                                 @{{
                                     column == 1
                                     ? "@lang('admin::app.catalog.families.edit.main-column')"
@@ -272,7 +272,7 @@
                     <div class="">
                         <!-- Unassigned Attributes Header -->
                         <div class="flex flex-col mb-[16px]">
-                            <p class="text-gray-600 font-semibold leading-[24px]">
+                            <p class="text-gray-600 dark:text-gray-300  font-semibold leading-[24px]">
                                 @lang('admin::app.catalog.families.edit.unassigned-attributes')
                             </p>
 

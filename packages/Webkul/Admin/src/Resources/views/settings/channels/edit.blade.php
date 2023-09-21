@@ -137,7 +137,7 @@
                                         :for="'inventory_sources_' . $inventorySource->id"
                                         class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
                                     >
-                                        <span class="text-gray-600 font-semibold cursor-pointer">
+                                        <span class="text-gray-600 dark:text-gray-300  font-semibold cursor-pointer">
                                             {{ $inventorySource->name }}
                                         </span>
                                     </x-admin::form.control-group.label>
@@ -396,7 +396,7 @@
                                         :for="'locales_' . $locale->id"
                                         class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
                                     >
-                                        <span class="text-gray-600 font-semibold cursor-pointer">
+                                        <span class="text-gray-600 dark:text-gray-300  font-semibold cursor-pointer">
                                             {{ $locale->name }} 
                                         </span>
                                     </x-admin::form.control-group.label>
@@ -460,7 +460,7 @@
                                         :for="'currencies_' . $currency->id"
                                         class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
                                     >
-                                        <span class="text-gray-600 font-semibold cursor-pointer">
+                                        <span class="text-gray-600 dark:text-gray-300  font-semibold cursor-pointer">
                                             {{ $currency->name }} 
                                         </span>
                                     </x-admin::form.control-group.label>

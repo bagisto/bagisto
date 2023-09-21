@@ -17,12 +17,12 @@
             <div>
                 <div class="grid gap-[4px]">
                     {{-- Title of the Main Card --}}
-                    <p class="text-gray-600 font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300  font-semibold">
                         @lang($item['name'] ?? '')
                     </p>
 
                     {{-- Info of the Main Card --}}
-                    <p class="text-gray-600 dark:text-gray-300">
+                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                         @lang($item['info'] ?? '')
                     </p>
                 </div>

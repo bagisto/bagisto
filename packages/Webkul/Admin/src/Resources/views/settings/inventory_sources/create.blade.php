@@ -106,7 +106,7 @@
                                         name="description"
                                         :value="old('description')"
                                         id="description"
-                                        class="text-gray-600 !mb-[0px]"
+                                        class="text-gray-600 dark:text-gray-300  !mb-[0px]"
                                         :label="trans('admin::app.settings.inventory-sources.create.description')"
                                         :placeholder="trans('admin::app.settings.inventory-sources.create.description')"
                                     >
@@ -379,7 +379,7 @@
                             <x-admin::accordion>
                                 <x-slot:header>
                                     <div class="flex items-center justify-between p-[6px]">
-                                        <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                                        <p class="text-gray-600 dark:text-gray-300  text-[16px] p-[10px] font-semibold">
                                             @lang('admin::app.settings.inventory-sources.create.settings')
                                         </p>
                                     </div>

@@ -63,7 +63,7 @@
                             class="flex gap-[10px] cursor-pointer"
                             v-for="(columnGroup, index) in ['id', 'name', 'date']"
                         >
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                 <span class="[&>*]:after:content-['_/_']">
                                     <span
                                         class="after:content-['/'] last:after:content-['']"

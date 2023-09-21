@@ -103,7 +103,7 @@
                                                 @lang('admin::app.customers.customers.view.increment-id', ['increment_id' => $order->increment_id])
                                             </p>
 
-                                            <p class="text-gray-600 dark:text-gray-300">
+                                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                                 {{ $order->created_at }}
                                             </p>
 
@@ -149,12 +149,12 @@
                                         </p>
 
                                         {{-- Payment methods --}}   
-                                        <p class="text-gray-600 dark:text-gray-300">
+                                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                             @lang('admin::app.customers.customers.view.pay-by', ['payment_method' => core()->getConfigData('sales.payment_methods.' . $order->payment->method . '.title')])
                                         </p>
 
                                         {{-- Channel Code --}}
-                                        <p class="text-gray-600 dark:text-gray-300">
+                                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                             {{ $order->channel->code }}
                                         </p>
                                     </div>
@@ -165,11 +165,11 @@
                                             {{ $order->billingAddress->name }}
                                         </p>
 
-                                        <p class="text-gray-600 dark:text-gray-300">
+                                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                             {{ $order->billingAddress->email }}
                                         </p>
 
-                                        <p class="text-gray-600 dark:text-gray-300">
+                                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                             @if($order->billingAddress->address1)
                                                 {{ $order->billingAddress->address1 }},
                                             @endif
@@ -312,7 +312,7 @@
                                     </p>
 
                                     {{-- Product Name --}}
-                                    <p class="text-gray-600 dark:text-gray-300">
+                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                         {{ $review->product->name }}
                                     </p>
 
@@ -349,11 +349,11 @@
                                         </x-admin::star-rating>
                                     </div>
 
-                                    <p class="text-gray-600 dark:text-gray-300">
+                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                         {{ $review->created_at }}
                                     </p>
 
-                                    <p class="text-gray-600 dark:text-gray-300">
+                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                         @lang('admin::app.customers.customers.view.id', ['id' => $review->id])
                                     </p>
                                 </div>
@@ -367,7 +367,7 @@
                                     </p>
 
                                     {{-- Review Comment --}}
-                                    <p class="text-gray-600 dark:text-gray-300">
+                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                         {{ $review->comment }}
                                     </p>
                                 </div>
@@ -474,7 +474,7 @@
                         </p>
 
                         {{-- Notes List Title and Time --}}
-                        <p class="text-gray-600 dark:text-gray-300">  
+                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">  
                             @if ($note->customer_notified)
                                 @lang('admin::app.customers.customers.view.customer-notified', ['created_at' => $note->created_at])
                             @else
@@ -509,23 +509,23 @@
                             {{ $customer->first_name . " " . $customer->last_name }}
                         </p>
 
-                        <p class="text-gray-600 dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                             @lang('admin::app.customers.customers.view.email', ['email' => $customer->email])
                         </p>
 
-                        <p class="text-gray-600 dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                             @lang('admin::app.customers.customers.view.phone', ['phone' => $customer->phone ?? 'N/A'])
                         </p>
 
-                        <p class="text-gray-600 dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                             @lang('admin::app.customers.customers.view.gender', ['gender' => $customer->gender ?? 'N/A'])
                         </p>
 
-                        <p class="text-gray-600 dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                             @lang('admin::app.customers.customers.view.date-of-birth', ['dob' => $customer->date_of_birth ?? 'N/A'])
                         </p>
 
-                        <p class="text-gray-600 dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                             @lang('admin::app.customers.customers.view.group', ['group_code' => $customer->group->code ?? 'N/A'])
                         </p>
                     </div>
@@ -536,7 +536,7 @@
             <x-admin::accordion>
                 <x-slot:header>
                     <div class="flex items-center justify-between p-[6px]">
-                        <p class="text-gray-600 text-[16px] font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300  text-[16px] font-semibold">
                             @lang('admin::app.customers.customers.view.address', ['count' => count($customer->addresses)])
                         </p>
                     </div>
@@ -556,7 +556,7 @@
                                     {{ $address->name }}
                                 </p>
 
-                                <p class="text-gray-600 dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                     {{ $address->address1 }},
 
                                     @if ($address->address2)
@@ -572,7 +572,7 @@
                                     @endif
                                 </p>
 
-                                <p class="text-gray-600 dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                     @lang('admin::app.customers.customers.view.phone', ['phone' => $address->phone ?? 'N/A'])
                                 </p>
 

@@ -14,7 +14,7 @@
                 @lang('admin::app.dashboard.index.user-name', ['user_name' => $admin->name])
             </p>
 
-            <p class="text-gray-600 dark:text-gray-300">
+            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                 @lang('admin::app.dashboard.index.user-info')
             </p>
         </div>
@@ -365,7 +365,7 @@
                                         @lang('admin::app.dashboard.index.order-id', ['id' => $item->id])
                                     </p>
 
-                                    <p class="text-gray-600 dark:text-gray-300">
+                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                         {{ $item->created_at}}
                                     </p>
 
@@ -413,12 +413,12 @@
                                 </p>
 
                                 {{-- Payment Mode --}}
-                                <p class="text-gray-600 dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                     @lang('admin::app.dashboard.index.pay-by', ['method' => core()->getConfigData('sales.payment_methods.' . $item->payment->method . '.title')])
                                 </p>
 
                                 {{-- Channel Name --}}
-                                <p class="text-gray-600 dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                     {{ $item->channel_name }}
                                 </p>
                             </div>
@@ -429,14 +429,14 @@
                                     {{ $item->customer_first_name }} {{ $item->customer_last_name }}
                                 </p>
 
-                                <p class="text-gray-600 dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                     {{ $item->customer_email }}
                                 </p>
 
                                 {{-- Order Address --}}
                                 @foreach ($item->addresses as $address)
                                     @if ($address->address_type == 'order_billing')
-                                        <p class="text-gray-600 dark:text-gray-300">
+                                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                             {{ $address->city . ($address->country ? ', ' . core()->country_name($address->country) : '') }}
                                         </p>
                                     @endif
@@ -543,12 +543,12 @@
                                             </p>
 
                                             {{-- Product SKU --}}
-                                            <p class="text-gray-600 dark:text-gray-300">
+                                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                                 @lang('admin::app.dashboard.index.sku', ['sku' => $item->product->sku])
                                             </p>
 
                                             {{-- Product Number --}}
-                                            <p class="text-gray-600 dark:text-gray-300">
+                                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                                 @if (
                                                     isset($item->product->product_number)
                                                     && ! empty($item->product->product_number)
@@ -702,7 +702,7 @@
                     <!-- Top Selling Products -->
                     <div class="border-b border-gray-300">
                         <div class="flex items-center justify-between p-[16px]">
-                            <p class="text-gray-600 text-[16px] font-semibold">
+                            <p class="text-gray-600 dark:text-gray-300  text-[16px] font-semibold">
                                 @lang('admin::app.dashboard.index.top-selling-products')
                             </p>
 
@@ -748,14 +748,14 @@
                                     <!-- Product Detailes -->
                                     <div class="flex flex-col gap-[6px] w-full">
                                         <p
-                                            class="text-gray-600 dark:text-gray-300"
+                                            class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
                                             v-text="item.name"
                                         >
                                         </p>
 
                                         <div class="flex justify-between">
                                             <p
-                                                class="text-gray-600 font-semibold"
+                                                class="text-gray-600 dark:text-gray-300  font-semibold"
                                                 v-text="item.formatted_price"
                                             >
                                             </p>
@@ -799,7 +799,7 @@
 
                     <!-- Top Customers -->
                     <div class="flex items-center justify-between p-[16px]">
-                        <p class="text-gray-600 text-[16px] font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300  text-[16px] font-semibold">
                             @lang('admin::app.dashboard.index.customer-with-most-sales')
                         </p>
 
@@ -828,13 +828,13 @@
                                 <div class="flex justify-between gap-[6px]">
                                     <div class="flex flex-col">
                                         <p
-                                            class="text-gray-600 font-semibold"
+                                            class="text-gray-600 dark:text-gray-300  font-semibold"
                                             v-text="item.customer_first_name + ' ' + item.customer_last_name"
                                         >
                                         </p>
 
                                         <p
-                                            class="text-gray-600 dark:text-gray-300"
+                                            class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
                                             v-text="item.customer_email ?? item.customer_address_email"
                                         >
                                         </p>
@@ -847,7 +847,7 @@
                                         >
                                         </p>
 
-                                        <p class="text-gray-600 dark:text-gray-300" v-if="item.order_count">
+                                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300" v-if="item.order_count">
                                             @{{ "@lang('admin::app.dashboard.index.order-count')".replace(':count', item.order_count) }}
                                         </p>
                                     </div>
@@ -860,13 +860,13 @@
                             >
                                 <div class="flex flex-col">
                                     <p
-                                        class="text-gray-600 font-semibold"
+                                        class="text-gray-600 dark:text-gray-300  font-semibold"
                                         v-text="item.customer_first_name + ' ' + item.customer_last_name"
                                     >
                                     </p>
 
                                     <p
-                                        class="text-gray-600 dark:text-gray-300"
+                                        class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
                                         v-text="item.customer_email ?? item.customer_address_email"
                                     >
                                     </p>
@@ -879,7 +879,7 @@
                                     >
                                     </p>
 
-                                    <p class="text-gray-600 dark:text-gray-300" v-if="item.order_count">
+                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300" v-if="item.order_count">
                                         @{{ "@lang('admin::app.dashboard.index.order-count')".replace(':count', item.order_count) }}
                                     </p>
                                 </div>

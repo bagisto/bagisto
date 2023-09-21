@@ -114,7 +114,7 @@
                             @lang($item['name'])
                         </p>
 
-                        <p class="text-gray-600 mt-[4px]">
+                        <p class="text-gray-600 dark:text-gray-300  mt-[4px]">
                             @lang($item['info'] ?? '')
                         </p>
                     </div>

@@ -141,21 +141,21 @@
                                 >
                                     <div class="flex gap-[10px]">
                                         <div class="grid gap-[6px] place-content-start">
-                                            <p class="text-gray-600 dark:text-gray-300">
+                                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                                 <div> 
                                                     @lang('admin::app.settings.themes.edit.link'): 
 
-                                                    <span class="text-gray-600 transition-all">
+                                                    <span class="text-gray-600 dark:text-gray-300  transition-all">
                                                         @{{ image.link }}
                                                     </span>
                                                 </div>
                                             </p>
 
-                                            <p class="text-gray-600 dark:text-gray-300">
+                                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                                 <div class="flex justify-between"> 
                                                     @lang('admin::app.settings.themes.edit.image'): 
 
-                                                    <span class="text-gray-600 transition-all">
+                                                    <span class="text-gray-600 dark:text-gray-300  transition-all">
                                                         <a 
                                                             :href="image.image"
                                                             :ref="'image_' + index"
@@ -532,13 +532,13 @@
                             >
                                 <div class="flex gap-[10px]">
                                     <div class="grid gap-[6px] place-content-start">
-                                        <p class="text-gray-600 dark:text-gray-300">
+                                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                             <div> 
                                                 @{{ "@lang('admin::app.settings.themes.edit.key')".replace(':key', filter.key) }}
                                             </div>
                                         </p>
 
-                                        <p class="text-gray-600 dark:text-gray-300">
+                                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                             @{{ "@lang('admin::app.settings.themes.edit.value')".replace(':value', filter.value) }}
                                         </p>
                                     </div>
@@ -880,13 +880,13 @@
                             >
                                 <div class="flex gap-[10px]">
                                     <div class="grid gap-[6px] place-content-start">
-                                        <p class="text-gray-600 dark:text-gray-300">
+                                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                             <div> 
                                                 @{{ "@lang('admin::app.settings.themes.edit.key')".replace(':key', filter.key) }}
                                             </div>
                                         </p>
 
-                                        <p class="text-gray-600 dark:text-gray-300">
+                                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                             @{{ "@lang('admin::app.settings.themes.edit.value')".replace(':value', filter.value) }}
                                         </p>
                                     </div>
@@ -1400,17 +1400,17 @@
                                     <div class="flex gap-[10px] justify-between py-5 cursor-pointer">
                                         <div class="flex gap-[10px] ">
                                             <div class="grid gap-[6px] place-content-start">
-                                                <p class="text-gray-600 dark:text-gray-300">
+                                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                                     <div> 
                                                         @lang('admin::app.settings.themes.edit.column'): 
 
-                                                        <span class="text-gray-600 transition-all">
+                                                        <span class="text-gray-600 dark:text-gray-300  transition-all">
                                                             @{{ link.column }}
                                                         </span>
                                                     </div>
                                                 </p>
     
-                                                <p class="text-gray-600 dark:text-gray-300">
+                                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                                     <div> 
                                                         @lang('admin::app.settings.themes.edit.path'):
 
@@ -1424,24 +1424,24 @@
                                                     </div>
                                                 </p>
 
-                                                <p class="text-gray-600 dark:text-gray-300">
+                                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                                     <div> 
                                                         @lang('admin::app.settings.themes.edit.filter-title'):
 
                                                         <span
-                                                            class="text-gray-600 transition-all"
+                                                            class="text-gray-600 dark:text-gray-300  transition-all"
                                                             v-text="link.title"
                                                         >
                                                         </span>
                                                     </div>
                                                 </p>
 
-                                                <p class="text-gray-600 dark:text-gray-300">
+                                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                                     <div> 
                                                         @lang('admin::app.settings.themes.edit.sort-order'):
 
                                                         <span
-                                                            class="text-gray-600 transition-all"
+                                                            class="text-gray-600 dark:text-gray-300  transition-all"
                                                             v-text="link.sort_order"
                                                         >
                                                         </span>

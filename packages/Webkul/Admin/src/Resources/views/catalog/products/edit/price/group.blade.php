@@ -41,7 +41,7 @@
                     <input type="hidden" :name="'customer_group_prices[' + item.id + '][value]'" :value="item.value"/>
 
                     <div class="flex justify-between">
-                        <p class="text-gray-600 font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300  font-semibold">
                             @{{ getGroupNameById(item.customer_group_id) }}
                         </p>
 
@@ -54,14 +54,14 @@
                     </div>
 
                     <p
-                        class="text-gray-600 dark:text-gray-300"
+                        class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
                         v-if="item.value_type == 'fixed'"
                     >
                         @{{ "@lang('admin::app.catalog.products.edit.price.group.fixed-group-price-info')".replace(':qty', item.qty).replace(':price', item.value) }}
                     </p>
 
                     <p
-                        class="text-gray-600 dark:text-gray-300"
+                        class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
                         v-else
                     >
                         @{{ "@lang('admin::app.catalog.products.edit.price.group.discount-group-price-info')".replace(':qty', item.qty).replace(':price', item.value) }}
