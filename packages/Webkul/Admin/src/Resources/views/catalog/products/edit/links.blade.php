@@ -128,8 +128,6 @@
                 ::added-product-ids="addedProductIds"
                 @onProductAdded="addSelected($event)"
             ></x-admin::products.search>
-
-            <x-admin::modal.confirm ref="confirmRemoveLinkModal"/>
         </div>
     </script>
 
@@ -188,7 +186,7 @@
                 },
 
                 remove(type, product) {
-                    this.$refs.confirmRemoveLinkModal.open({
+                    this.$emitter.emit('open-confirm-modal', {
                         agree: () => {
                             this.addedProducts[type] = this.addedProducts[type].filter(item => item.id !== product.id);
                         },

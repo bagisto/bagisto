@@ -241,7 +241,6 @@
                             });
                     },
 
-
                     actionHandler(url, title, value) {
                         if (title == 'Edit') {
                             this.editModal(value);

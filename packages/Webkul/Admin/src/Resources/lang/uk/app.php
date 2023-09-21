@@ -654,6 +654,7 @@ return [
                             'sku'             => 'Артикул',
                             'status'          => 'Статус',
                             'weight'          => 'Вага',
+                            'images'          => 'Зображення',
                         ],
 
                         'mass-edit' => [
@@ -3141,7 +3142,6 @@ return [
                 'no-records-selected'              => 'Не вибрано жодного запису.',
                 'must-select-a-mass-action'        => 'Ви повинні вибрати масову дію.',
                 'must-select-a-mass-action-option' => 'Ви повинні вибрати опцію масової дії.',
-                'sure-want-to-perform-this-action' => 'Ви впевнені, що хочете виконати цю дію?',
             ],
 
             'toolbar' => [
@@ -3183,6 +3183,15 @@ return [
             'table' => [
                 'actions'              => 'Дії',
                 'no-records-available' => 'Записи відсутні.',
+            ],
+        ],
+
+        'modal' => [
+            'confirm' => [
+                'title'        => 'Ви впевнені?',
+                'message'      => 'Ви впевнені, що хочете виконати цю дію?',
+                'agree-btn'    => 'Згоден',
+                'disagree-btn' => 'Не згоден',
             ],
         ],
 

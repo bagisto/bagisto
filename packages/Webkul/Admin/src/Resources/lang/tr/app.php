@@ -655,6 +655,7 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'Durum',
                             'weight'          => 'Ağırlık',
+                            'images'          => 'Resimler',
                         ],
 
                         'mass-edit' => [
@@ -3142,7 +3143,6 @@ return [
                 'no-records-selected'              => 'Hiçbir kayıt seçilmedi.',
                 'must-select-a-mass-action'        => 'Toplu işlem seçmelisiniz.',
                 'must-select-a-mass-action-option' => 'Toplu işlem seçeneği seçmelisiniz.',
-                'sure-want-to-perform-this-action' => 'Bu işlemi gerçekleştirmek istediğinizden emin misiniz?',
             ],
 
             'toolbar' => [
@@ -3184,6 +3184,15 @@ return [
             'table' => [
                 'actions'              => 'Eylemler',
                 'no-records-available' => 'Kullanılabilir Kayıt Yok.',
+            ],
+        ],
+
+        'modal' => [
+            'confirm' => [
+                'title'        => 'Emin misiniz?',
+                'message'      => 'Bu işlemi gerçekleştirmek istediğinizden emin misiniz?',
+                'agree-btn'    => 'Kabul Et',
+                'disagree-btn' => 'Reddet',
             ],
         ],
 

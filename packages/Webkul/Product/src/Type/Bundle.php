@@ -187,23 +187,23 @@ class Bundle extends AbstractType
         return [
             'from' => [
                 'regular' => [
-                    'price'           => core()->convertPrice($this->evaluatePrice($regularMinimalPrice = $this->getRegularMinimalPrice())),
-                    'formatted_price' => core()->currency($this->evaluatePrice($regularMinimalPrice)),
+                    'price'           => core()->convertPrice($regularMinimalPrice = $this->evaluatePrice($this->getRegularMinimalPrice())),
+                    'formatted_price' => core()->currency($regularMinimalPrice),
                 ],
                 'final'   => [
-                    'price'           => core()->convertPrice($this->evaluatePrice($minimalPrice = $this->getMinimalPrice())),
-                    'formatted_price' => core()->currency($this->evaluatePrice($minimalPrice)),
+                    'price'           => core()->convertPrice($minimalPrice = $this->evaluatePrice($this->getMinimalPrice())),
+                    'formatted_price' => core()->currency($minimalPrice),
                 ],
             ],
 
             'to' => [
                 'regular' => [
-                    'price'           => core()->convertPrice($this->evaluatePrice($regularMaximumPrice = $this->getRegularMaximumPrice())),
-                    'formatted_price' => core()->currency($this->evaluatePrice($regularMaximumPrice)),
+                    'price'           => core()->convertPrice($regularMaximumPrice = $this->evaluatePrice($this->getRegularMaximumPrice())),
+                    'formatted_price' => core()->currency($regularMaximumPrice),
                 ],
                 'final'   => [
-                    'price'           => core()->convertPrice($this->evaluatePrice($maximumPrice = $this->getMaximumPrice())),
-                    'formatted_price' => core()->currency($this->evaluatePrice($maximumPrice)),
+                    'price'           => core()->convertPrice($maximumPrice = $this->evaluatePrice($this->getMaximumPrice())),
+                    'formatted_price' => core()->currency($maximumPrice),
                 ],
             ],
         ];

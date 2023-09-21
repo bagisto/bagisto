@@ -654,6 +654,7 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'Status',
                             'weight'          => 'Waga',
+                            'images'          => 'Zdjęcia',
                         ],
 
                         'mass-edit' => [
@@ -3140,7 +3141,6 @@ return [
                 'no-records-selected'              => 'Nie wybrano żadnych rekordów.',
                 'must-select-a-mass-action'        => 'Musisz wybrać akcję masową.',
                 'must-select-a-mass-action-option' => 'Musisz wybrać opcję akcji masowej.',
-                'sure-want-to-perform-this-action' => 'Czy na pewno chcesz wykonać tę akcję?',
             ],
 
             'toolbar' => [
@@ -3182,6 +3182,15 @@ return [
             'table' => [
                 'actions'              => 'Akcje',
                 'no-records-available' => 'Brak Dostępnych Rekordów.',
+            ],
+        ],
+
+        'modal' => [
+            'confirm' => [
+                'title'        => 'Jesteś pewny?',
+                'message'      => 'Czy na pewno chcesz wykonać tę czynność?',
+                'agree-btn'    => 'Zgadzam się',
+                'disagree-btn' => 'Nie zgadzam się',
             ],
         ],
 

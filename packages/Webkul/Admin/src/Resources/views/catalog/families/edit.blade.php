@@ -380,8 +380,6 @@
                         </x-admin::modal>
                     </form>
                 </x-admin::form>
-
-                <x-admin::modal.confirm ref="confirmRemoveGroupModal"/>
             </div>
         </script>
 
@@ -491,7 +489,7 @@
                     },
 
                     deleteGroup() {
-                        this.$refs.confirmRemoveGroupModal.open({
+                        this.$emitter.emit('open-confirm-modal', {
                             agree: () => {
                                 if (! this.selectedGroup.id) {
                                     this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('admin::app.catalog.families.edit.select-group')" });

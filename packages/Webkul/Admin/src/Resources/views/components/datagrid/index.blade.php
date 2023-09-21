@@ -12,8 +12,6 @@
         id="v-datagrid-template"
     >
         <div>
-            <x-admin::modal.confirm ref="confirmModal"/>
-
             <x-admin::datagrid.toolbar></x-admin::datagrid.toolbar>
 
             <div class="flex mt-[16px]">
@@ -43,6 +41,7 @@
                             :records="available.records"
                             :meta="available.meta"
                             :setCurrentSelectionMode="setCurrentSelectionMode"
+                            :performAction="performAction"
                             :applied="applied"
                             :is-loading="isLoading"
                         >
@@ -545,6 +544,7 @@
                         this.applied.massActions.value === null
                     ) {
                         this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('admin::app.components.datagrid.index.must-select-a-mass-action-option')" });
+                        
                         return false;
                     }
 
@@ -568,7 +568,7 @@
 
                     const method = action.method.toLowerCase();
 
-                    this.$refs.confirmModal.open({
+                    this.$emitter.emit('open-confirm-modal', {
                         agree: () => {
                             switch (method) {
                                 case 'post':
@@ -694,7 +694,7 @@
                         case 'put':
                         case 'patch':
                         case 'delete':
-                            this.$refs.confirmModal.open({
+                            this.$emitter.emit('open-confirm-modal', {
                                 agree: () => {
                                     this.$axios[method](action.url)
                                         .then(response => {

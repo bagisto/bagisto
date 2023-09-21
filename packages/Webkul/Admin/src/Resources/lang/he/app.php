@@ -654,6 +654,8 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'סטטוס',
                             'weight'          => 'משקל',
+                            'images'          => 'תמונות',
+
                         ],
 
                         'mass-edit' => [
@@ -3141,7 +3143,6 @@ return [
                 'no-records-selected'              => 'לא נבחרו רשומות.',
                 'must-select-a-mass-action'        => 'עליך לבחור פעולת מסה.',
                 'must-select-a-mass-action-option' => 'עליך לבחור אפשרות לפעולת מסה.',
-                'sure-want-to-perform-this-action' => 'האם אתה בטוח שברצונך לבצע פעולה זו?',
             ],
 
             'toolbar' => [
@@ -3183,6 +3184,15 @@ return [
             'table' => [
                 'actions'              => 'פעולות',
                 'no-records-available' => 'אין רשומות זמינות.',
+            ],
+        ],
+
+        'modal' => [
+            'confirm' => [
+                'title'        => 'האם אתה בטוח?',
+                'message'      => 'האם אתה בטוח שברצונך לבצע פעולה זו?',
+                'agree-btn'    => 'הסכם',
+                'disagree-btn' => 'אי הסכמה',
             ],
         ],
 

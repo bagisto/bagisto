@@ -654,6 +654,7 @@ return [
                             'sku'             => 'Артикул (SKU)',
                             'status'          => 'Статус',
                             'weight'          => 'Вес',
+                            'images'           => 'Изображения',
                         ],
 
                         'mass-edit' => [
@@ -3139,7 +3140,6 @@ return [
                 'no-records-selected'              => 'Не выбрано ни одной записи.',
                 'must-select-a-mass-action'        => 'Вы должны выбрать массовое действие.',
                 'must-select-a-mass-action-option' => 'Вы должны выбрать опцию массового действия.',
-                'sure-want-to-perform-this-action' => 'Вы уверены, что хотите выполнить это действие?',
             ],
 
             'toolbar' => [
@@ -3181,6 +3181,15 @@ return [
             'table' => [
                 'actions'              => 'Действия',
                 'no-records-available' => 'Нет доступных записей.',
+            ],
+        ],
+
+        'modal' => [
+            'confirm' => [
+                'title'        => 'Вы уверены?',
+                'message'      => 'Вы уверены, что хотите выполнить это действие?',
+                'agree-btn'    => 'Согласен',
+                'disagree-btn' => 'Не согласен',
             ],
         ],
 

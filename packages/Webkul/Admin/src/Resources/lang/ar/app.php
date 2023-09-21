@@ -654,6 +654,7 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'الحالة',
                             'weight'          => 'الوزن',
+                            'images'         => 'الصور',
                         ],
 
                         'mass-edit' => [
@@ -3141,7 +3142,6 @@ return [
                 'no-records-selected'              => 'لم تتم اختيار أي سجلات.',
                 'must-select-a-mass-action'        => 'يجب عليك تحديد إجراء جماعي.',
                 'must-select-a-mass-action-option' => 'يجب عليك تحديد خيار إجراء جماعي.',
-                'sure-want-to-perform-this-action' => 'هل أنت متأكد أنك تريد أداء هذا الإجراء؟',
             ],
             
             'toolbar' => [
@@ -3183,6 +3183,15 @@ return [
             'table' => [
                 'actions'              => 'الإجراءات',
                 'no-records-available' => 'لا توجد سجلات متاحة.',
+            ],
+        ],
+
+        'modal' => [
+            'confirm' => [
+                'title'        => 'هل أنت متأكد؟',
+                'message'      => 'هل أنت متأكد أنك تريد أن تقوم بهذا الإجراء؟',
+                'agree-btn'    => 'موافق',
+                'disagree-btn' => 'غير موافق',
             ],
         ],
 

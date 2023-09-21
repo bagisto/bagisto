@@ -818,13 +818,13 @@ abstract class AbstractType
     {
         return [
             'regular' => [
-                'price'           => core()->convertPrice($this->evaluatePrice($regularPrice = $this->product->price)),
-                'formatted_price' => core()->currency($this->evaluatePrice($regularPrice)),
+                'price'           => core()->convertPrice($regularPrice = $this->evaluatePrice($this->product->price)),
+                'formatted_price' => core()->currency($regularPrice),
             ],
 
             'final'   => [
-                'price'           => core()->convertPrice($this->evaluatePrice($minimalPrice = $this->getMinimalPrice())),
-                'formatted_price' => core()->currency($this->evaluatePrice($minimalPrice)),
+                'price'           => core()->convertPrice($minimalPrice = $this->evaluatePrice($this->getMinimalPrice())),
+                'formatted_price' => core()->currency($minimalPrice),
             ],
         ];
     }
@@ -850,25 +850,19 @@ abstract class AbstractType
      */
     public function getTaxInclusiveRate($totalPrice)
     {
-        /* this is added for future purpose like if shipping tax also added then case is needed */
-        $address = null;
-
-        if ($taxCategory = $this->getTaxCategory()) {
-            if (
-                $address === null
-                && auth()->guard('customer')->check()
-            ) {
-                $address = auth()->guard('customer')->user()->addresses->where('default_address', 1)->first();
-            }
-
-            if ($address === null) {
-                $address = Tax::getDefaultAddress();
-            }
-
-            Tax::isTaxApplicableInCurrentAddress($taxCategory, $address, function ($rate) use (&$totalPrice) {
-                $totalPrice = round($totalPrice, 4) + round(($totalPrice * $rate->tax_rate) / 100, 4);
-            });
+        if (! $taxCategory = $this->getTaxCategory()) {
+            return $totalPrice;
         }
+
+        if (auth()->guard('customer')->check()) {
+            $address = auth()->guard('customer')->user()->addresses->where('default_address', 1)->first();
+        } else {
+            $address = Tax::getDefaultAddress();
+        }
+
+        Tax::isTaxApplicableInCurrentAddress($taxCategory, $address, function ($rate) use (&$totalPrice) {
+            $totalPrice = round($totalPrice, 4) + round(($totalPrice * $rate->tax_rate) / 100, 4);
+        });
 
         return $totalPrice;
     }
@@ -884,7 +878,13 @@ abstract class AbstractType
             ? $this->product->parent->tax_category_id
             : $this->product->tax_category_id;
 
-        return $this->taxCategoryRepository->find($taxCategoryId);
+        static $taxCategories = [];
+
+        if (array_key_exists($taxCategoryId, $taxCategories)) {
+            return $taxCategories[$taxCategoryId];
+        }
+
+        return $taxCategories[$taxCategoryId] = $this->taxCategoryRepository->find($taxCategoryId);
     }
 
     /**

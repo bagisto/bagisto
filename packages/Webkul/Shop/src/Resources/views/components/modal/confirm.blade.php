@@ -14,7 +14,7 @@
                 leave-to-class="opacity-0"
             >
                 <div
-                    class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity z-[10002]"
+                    class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity z-[1]"
                     v-show="isOpen"
                 ></div>
             </transition>
@@ -30,27 +30,36 @@
                 leave-to-class="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
             >
                 <div
-                    class="fixed inset-0 z-[10002] transform transition overflow-y-auto"
-                    v-if="isOpen"
+                    class="fixed inset-0 z-10 transform transition overflow-y-auto" v-show="isOpen"
                 >
-                    <div class="flex min-h-full items-end justify-center p-[20px] sm:items-center sm:p-0">
-                        <div class="w-full max-w-[400px] z-[999] absolute left-[50%] top-[50%] rounded-lg bg-white box-shadow max-md:w-[90%] -translate-x-[50%] -translate-y-[50%]">
-                            <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] dark:border-gray-800   text-[18px] text-gray-800 font-bold">
-                                @{{ title }}
-                            </div>
-
-                            <div class="px-[16px] py-[11px] text-gray-600 text-left">
-                                @{{ message }}
-                            </div>
+                    <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                        <div class="w-full max-w-[475px] z-[999] absolute left-[50%] top-[50%] p-[20px] rounded-[12px] bg-white overflow-hidden max-md:w-[90%] -translate-x-[50%] -translate-y-[50%]">
+                            <div class="flex gap-[10px]">
+                                <div>
+                                    <span class="flex p-[10px] border border-[rgba(6,12,59,0.20)] rounded-full">
+                                        <i class="icon-error text-[28px]"></i>
+                                    </span>
+                                </div>
                             
-                            <div class="flex gap-[10px] justify-end px-[16px] py-[10px]">
-                                <button type="button" class="transparent-button" @click="disagree">
-                                    @{{ options.btnDisagree }}
-                                </button>
+                                <div>
+                                    <div class="flex gap-[20px] justify-between items-center text-[20px]">
+                                        @{{ title }}
+                                    </div>
 
-                                <button type="button" class="primary-button" @click="agree">
-                                    @{{ options.btnAgree }} 
-                                </button>
+                                    <div class="pt-[5px] pb-[20px] tex-[14px] text-[#727272] text-left">
+                                        @{{ message }}
+                                    </div>
+                                    
+                                    <div class="flex gap-[10px] justify-end">
+                                        <button type="button" class="secondary-button" @click="disagree">
+                                            @{{ options.btnDisagree }}
+                                        </button>
+
+                                        <button type="button" class="primary-button" @click="agree">
+                                            @{{ options.btnAgree }} 
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -88,11 +97,11 @@
 
             methods: {
                 open({
-                    title = "@lang('admin::app.components.modal.confirm.title')",
-                    message = "@lang('admin::app.components.modal.confirm.message')",
+                    title = "@lang('shop::app.components.modal.confirm.title')",
+                    message = "@lang('shop::app.components.modal.confirm.message')",
                     options = {
-                        btnDisagree: "@lang('admin::app.components.modal.confirm.disagree-btn')",
-                        btnAgree: "@lang('admin::app.components.modal.confirm.agree-btn')",
+                        btnDisagree: "@lang('shop::app.components.modal.confirm.disagree-btn')",
+                        btnAgree: "@lang('shop::app.components.modal.confirm.agree-btn')",
                     },
                     agree = () => {},
                     disagree = () => {},

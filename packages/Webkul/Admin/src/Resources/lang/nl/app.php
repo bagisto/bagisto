@@ -654,6 +654,7 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'Status',
                             'weight'          => 'Gewicht',
+                            'images'          => 'Afbeeldingen',
                         ],
 
                         'mass-edit' => [
@@ -3141,7 +3142,6 @@ return [
                 'no-records-selected'              => 'Er zijn geen records geselecteerd.',
                 'must-select-a-mass-action'        => 'U moet een massale actie selecteren.',
                 'must-select-a-mass-action-option' => 'U moet een optie voor massale actie selecteren.',
-                'sure-want-to-perform-this-action' => 'Weet u zeker dat u deze actie wilt uitvoeren?',
             ],
 
             'toolbar' => [
@@ -3183,6 +3183,15 @@ return [
             'table' => [
                 'actions'              => 'Acties',
                 'no-records-available' => 'Geen Gegevens Beschikbaar.',
+            ],
+        ],
+
+        'modal' => [
+            'confirm' => [
+                'title'        => 'Weet u het zeker?',
+                'message'      => 'Bent u zeker dat u deze actie wilt uitvoeren?',
+                'agree-btn'    => 'Akkoord',
+                'disagree-btn' => 'Niet akkoord',
             ],
         ],
 

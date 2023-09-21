@@ -654,6 +654,7 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'स्थिति',
                             'weight'          => 'वजन',
+                            'images'          => 'चित्र',
                         ],
 
                         'mass-edit' => [
@@ -3141,7 +3142,6 @@ return [
                 'no-records-selected'              => 'कोई रिकॉर्ड नहीं चुना गया है।',
                 'must-select-a-mass-action'        => 'आपको एक सामूहिक क्रिया का चयन करना चाहिए।',
                 'must-select-a-mass-action-option' => 'आपको एक सामूहिक क्रिया का चयन एक विकल्प करना चाहिए।',
-                'sure-want-to-perform-this-action' => 'क्या आपको यकीन है कि आप इस क्रिया को करना चाहते हैं?',
             ],
 
             'toolbar' => [
@@ -3183,6 +3183,15 @@ return [
             'table' => [
                 'actions'              => 'क्रियाएँ',
                 'no-records-available' => 'कोई रिकॉर्ड उपलब्ध नहीं हैं.',
+            ],
+        ],
+
+        'modal' => [
+            'confirm' => [
+                'title'        => 'क्या आपको यकीन है?',
+                'message'      => 'क्या आपको यकीन है कि आप इस क्रिया को करना चाहते हैं?',
+                'agree-btn'    => 'सहमत',
+                'disagree-btn' => 'असहमत',
             ],
         ],
 

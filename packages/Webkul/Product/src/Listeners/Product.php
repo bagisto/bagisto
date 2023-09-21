@@ -2,32 +2,32 @@
 
 namespace Webkul\Product\Listeners;
 
+use Illuminate\Support\Facades\Bus;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
 use Webkul\Product\Repositories\ProductGroupedProductRepository;
-use Webkul\Product\Helpers\Indexers\{Inventory, Price, ElasticSearch, Flat};
+use Webkul\Product\Helpers\Indexers\Flat as FlatIndexer;
+use Webkul\Product\Jobs\UpdateCreateInventoryIndex as UpdateCreateInventoryIndexJob;
+use Webkul\Product\Jobs\UpdateCreatePriceIndex as UpdateCreatePriceIndexJob;
+use Webkul\Product\Jobs\ElasticSearch\UpdateCreateIndex as UpdateCreateElasticSearchIndexJob;
+use Webkul\Product\Jobs\ElasticSearch\DeleteIndex as DeleteElasticSearchIndexJob;
 
 class Product
 {
-    protected $indexers = [
-        'inventory' => Inventory::class,
-        'price'     => Price::class,
-        'elastic'   => ElasticSearch::class,
-        'flat'      => Flat::class,
-    ];
-
     /**
      * Create a new listener instance.
      *
      * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @param  \Webkul\Product\Repositories\ProductBundleOptionProductRepository  $productBundleOptionProductRepository
      * @param  \Webkul\Product\Repositories\ProductGroupedProductRepository  $productGroupedProductRepository
+     * @param  \Webkul\Product\Helpers\Indexers\Flat  $flatIndexer
      * @return void
      */
     public function __construct(
         protected ProductRepository $productRepository,
         protected ProductBundleOptionProductRepository $productBundleOptionProductRepository,
-        protected ProductGroupedProductRepository $productGroupedProductRepository
+        protected ProductGroupedProductRepository $productGroupedProductRepository,
+        protected FlatIndexer $flatIndexer
     )
     {
     }
@@ -40,7 +40,7 @@ class Product
      */
     public function afterCreate($product)
     {
-        app($this->indexers['flat'])->refresh($product);
+        $this->flatIndexer->refresh($product);
     }
 
     /**
@@ -51,17 +51,15 @@ class Product
      */
     public function afterUpdate($product)
     {
-        $products = $this->getAllRelatedProducts($product);
+        $this->flatIndexer->refresh($product);
 
-        app($this->indexers['flat'])->refresh($product);
+        $productIds = $this->getAllRelatedProductIds($product);
 
-        app($this->indexers['inventory'])->reindexRows($products);
-
-        app($this->indexers['price'])->reindexRows($products);
-
-        if (core()->getConfigData('catalog.products.storefront.search_mode') == 'elastic') {
-            app($this->indexers['elastic'])->reindexRows($products);
-        }
+        Bus::chain([
+            new UpdateCreateInventoryIndexJob($productIds),
+            new UpdateCreatePriceIndexJob($productIds),
+            new UpdateCreateElasticSearchIndexJob($productIds),
+        ])->dispatch();
     }
 
     /**
@@ -76,86 +74,72 @@ class Product
             return;
         }
 
-        $product = $this->productRepository->find($productId);
-
-        app($this->indexers['elastic'])->reindexRow($product);
+        DeleteElasticSearchIndexJob::dispatch($productId);
     }
 
     /**
-     * Returns parents bundle products associated with simple product
+     * Returns parents bundle product ids associated with simple product
      *
      * @param  \Webkul\Product\Contracts\Product  $product
      * @return array
      */
-    public function getAllRelatedProducts($product)
+    public function getAllRelatedProductIds($product)
     {
-        $products = [$product];
+        $productIds = [$product->id];
 
         if ($product->type == 'simple') {
             if ($product->parent_id) {
-                $products[] = $product->parent;
+                $productIds[] = $product->parent_id;
             }
 
-            $products = array_merge(
-                $products,
-                $this->getParentBundleProducts($product),
-                $this->getParentGroupProducts($product)
+            $productIds = array_merge(
+                $productIds,
+                $this->getParentBundleProductIds($product),
+                $this->getParentGroupProductIds($product)
             );
         } elseif ($product->type == 'configurable') {
-            $products = [];
-
-            /**
-             * Fetching fresh variants.
-             */
-            foreach ($product->variants()->get() as $variant) {
-                $products[] = $variant;
-            }
-
-            $products[] = $product;
+            $productIds = [
+                ...$product->variants->pluck('id')->toArray(),
+                ...$productIds
+            ];
         }
 
-        return $products;
+        return $productIds;
     }
 
     /**
-     * Returns parents bundle products associated with simple product
+     * Returns parents bundle product ids associated with simple product
      *
      * @param  \Webkul\Product\Contracts\Product  $product
      * @return array
      */
-    public function getParentBundleProducts($product)
+    public function getParentBundleProductIds($product)
     {
         $bundleOptionProducts = $this->productBundleOptionProductRepository->findWhere([
             'product_id' => $product->id,
         ]);
 
-        $products = [];
+        $productIds = [];
 
         foreach ($bundleOptionProducts as $bundleOptionProduct) {
-            $products[] = $bundleOptionProduct->bundle_option->product;
+            $productIds[] = $bundleOptionProduct->bundle_option->product_id;
         }
 
-        return $products;
+        return $productIds;
     }
 
     /**
-     * Returns parents group products associated with simple product
+     * Returns parents group product ids associated with simple product
      *
      * @param  \Webkul\Product\Contracts\Product  $product
      * @return array
      */
-    public function getParentGroupProducts($product)
+    public function getParentGroupProductIds($product)
     {
         $groupedOptionProducts = $this->productGroupedProductRepository->findWhere([
             'associated_product_id' => $product->id,
         ]);
 
-        $products = [];
-
-        foreach ($groupedOptionProducts as $groupedOptionProduct) {
-            $products[] = $groupedOptionProduct->product;
-        }
-
-        return $products;
+        return $groupedOptionProducts->pluck('product_id')->toArray();
     }
 }

@@ -654,6 +654,7 @@ return [
                             'sku'             => 'SKU',
                             'status'          => '状态',
                             'weight'          => '重量',
+                            'images'         => '图片',
                         ],
 
                         'mass-edit' => [
@@ -3141,7 +3142,6 @@ return [
                 'no-records-selected'              => '没有选择任何记录。',
                 'must-select-a-mass-action'        => '您必须选择一项批量操作。',
                 'must-select-a-mass-action-option' => '您必须选择批量操作的选项。',
-                'sure-want-to-perform-this-action' => '您确定要执行此操作吗？',
             ],
 
             'toolbar' => [
@@ -3183,6 +3183,15 @@ return [
             'table' => [
                 'actions'              => '操作',
                 'no-records-available' => '没有可用记录。',
+            ],
+        ],
+
+        'modal' => [
+            'confirm' => [
+                'title'        => '您确定吗？',
+                'message'      => '您确定要执行此操作吗？',
+                'agree-btn'    => '同意',
+                'disagree-btn' => '不同意',
             ],
         ],
 

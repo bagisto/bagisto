@@ -152,8 +152,6 @@
                     </x-admin::modal>
                 </form>
             </x-admin::form>
-
-            <x-admin::modal.confirm ref="confirmRemoveVariantModal"/>
         </div>
     </script>
 
@@ -468,8 +466,6 @@
                     </x-admin::drawer>
                 </form>
             </x-admin::form>
-
-            <x-admin::modal.confirm ref="confirmModal"/>
         </div>
     </script>
 
@@ -890,7 +886,7 @@
                 },
 
                 removeVariant(variant) {
-                    this.$refs.confirmRemoveVariantModal.open({
+                    this.$emitter.emit('open-confirm-modal', {
                         agree: () => {
                             this.variants.splice(this.variants.indexOf(variant), 1);
                         },
@@ -1006,7 +1002,7 @@
                 },
 
                 edit(type) {
-                    this.$refs.confirmModal.open({
+                    this.$emitter.emit('open-confirm-modal', {
                         agree: () => {
                             this.selectedType = type;
 

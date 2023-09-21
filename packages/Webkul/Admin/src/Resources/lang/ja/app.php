@@ -654,6 +654,7 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'ステータス',
                             'weight'          => '重さ',
+                            'images'          => '画像',
                         ],
 
                         'mass-edit' => [
@@ -3143,7 +3144,6 @@ return [
                     'no-records-selected'              => 'レコードは選択されていません。',
                     'must-select-a-mass-action'        => '一括操作を選択する必要があります。',
                     'must-select-a-mass-action-option' => '一括操作のオプションを選択する必要があります。',
-                    'sure-want-to-perform-this-action' => 'この操作を実行してもよろしいですか？',
                 ],
 
                 'mass-actions' => [
@@ -3184,6 +3184,15 @@ return [
             'table' => [
                 'actions'              => 'アクション',
                 'no-records-available' => '利用可能なレコードはありません。',
+            ],
+        ],
+
+        'modal' => [
+            'confirm' => [
+                'title'        => '本当によろしいですか？',
+                'message'      => 'この操作を実行してもよろしいですか？',
+                'agree-btn'    => '同意',
+                'disagree-btn' => '同意しない',
             ],
         ],
 

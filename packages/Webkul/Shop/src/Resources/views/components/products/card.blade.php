@@ -18,6 +18,8 @@
                         ::src="product.base_image.medium_image_url"
                         width="291"
                         height="300"
+                        ::key="product.id"
+                        ::index="product.id"
                     ></x-shop::shimmer.image>
                 </a>
                 

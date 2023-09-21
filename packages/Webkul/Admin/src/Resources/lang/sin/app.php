@@ -655,6 +655,7 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'ස්ථානය',
                             'weight'          => 'බර',
+                            'images'          => 'පින්තූර',
                         ],
 
                         'mass-edit' => [
@@ -3140,7 +3141,6 @@ return [
                 'no-records-selected'              => 'කිසිද වාර්තාවක් තෝරාගෙන නැත.',
                 'must-select-a-mass-action'        => 'ඔබ බොහෝනය ක්‍රියාකාරීත්වයක් තෝරා යන්නේ යොදා ගැනේ.',
                 'must-select-a-mass-action-option' => 'ඔබ බොහෝනය ක්‍රියාකාරීත්වයක් තෝරා යන්නේ එකක් තෝරා යන්නේ.',
-                'sure-want-to-perform-this-action' => 'ඔබට මෙම ක්‍රියාකාරීත්වය ප්‍රයෝජනය කිරීමට නොහැකියාවක්ද?',
             ],
 
             'toolbar' => [
@@ -3182,6 +3182,15 @@ return [
             'table' => [
                 'actions'              => 'ක්‍රියාකාර',
                 'no-records-available' => 'ලකුණු ප්‍රතිඵලය නැත.',
+            ],
+        ],
+
+        'modal' => [
+            'confirm' => [
+                'title'        => 'ඔබට විශ්ලේෂණය කරනවාද?',
+                'message'      => 'ඔබට විශ්ලේෂණය කරනවාද මෙය ක්‍රියා කරනවාද?',
+                'agree-btn'    => 'සහෝදරයේ',
+                'disagree-btn' => 'අනුපාතයේ',
             ],
         ],
 

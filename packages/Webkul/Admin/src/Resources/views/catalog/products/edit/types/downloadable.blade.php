@@ -485,8 +485,6 @@
                     </x-admin::drawer>
                 </form>
             </x-admin::form>
-
-            <x-admin::modal.confirm ref="confirmRemoveDownloadableLinkModal"/>
         </div>
     </script>
 
@@ -791,8 +789,6 @@
                     </x-admin::drawer>
                 </form>
             </x-admin::form>
-
-            <x-admin::modal.confirm ref="confirmRemoveDownloadableSampleModal"/>
         </div>
     </script>
 
@@ -846,7 +842,7 @@
                 },
 
                 remove(link) {
-                    this.$refs.confirmRemoveDownloadableLinkModal.open({
+                    this.$emitter.emit('open-confirm-modal', {
                         agree: () => {
                             let index = this.links.indexOf(link);
 
@@ -924,7 +920,7 @@
                 },
 
                 remove(sample) {
-                    this.$refs.confirmRemoveDownloadableSampleModal.open({
+                    this.$emitter.emit('open-confirm-modal', {
                         agree: () => {
                             let index = this.samples.indexOf(sample)
 

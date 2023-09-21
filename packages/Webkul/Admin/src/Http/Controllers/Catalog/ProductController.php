@@ -9,7 +9,6 @@ use Illuminate\Support\Arr;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\InventoryRequest;
 use Webkul\Admin\Http\Requests\ProductForm;
-use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
 use Webkul\Product\Repositories\ProductRepository;
@@ -27,11 +26,10 @@ use Webkul\Product\Facades\ProductImage;
 
 class ProductController extends Controller
 {
-
     /*
     * Using const variable for status 
     */
-    const STATUS = 1;
+    const ACTIVE_STATUS = 1;
 
     /**
      * Create a new controller instance.
@@ -39,7 +37,6 @@ class ProductController extends Controller
      * @return void
      */
     public function __construct(
-        protected CategoryRepository $categoryRepository,
         protected AttributeFamilyRepository $attributeFamilyRepository,
         protected InventorySourceRepository $inventorySourceRepository,
         protected ProductRepository $productRepository,
@@ -147,16 +144,9 @@ class ProductController extends Controller
     {
         $product = $this->productRepository->findOrFail($id);
 
-        $categories = $this->categoryRepository->getCategoryTree();
+        $inventorySources = $this->inventorySourceRepository->findWhere(['status' => self::ACTIVE_STATUS]);
 
-        $inventorySources = $this->inventorySourceRepository->findWhere(['status' => self::STATUS]);
-
-
-        if (request()->has('old')) {
-            return view('admin::catalog.products.edit_old', compact('product', 'categories', 'inventorySources'));
-        }
-
-        return view('admin::catalog.products.edit', compact('product', 'categories', 'inventorySources'));
+        return view('admin::catalog.products.edit', compact('product', 'inventorySources'));
     }
 
     /**
