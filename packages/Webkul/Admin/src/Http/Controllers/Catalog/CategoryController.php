@@ -13,6 +13,7 @@ use Webkul\Admin\DataGrids\Catalog\CategoryDataGrid;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Admin\DataGrids\Catalog\CategoryProductDataGrid;
+use Webkul\Admin\Http\Resources\CategoryTreeResource;
 
 class CategoryController extends Controller
 {
@@ -258,26 +259,6 @@ class CategoryController extends Controller
     }
 
     /**
-     * Get category product count.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function categoryProductCount()
-    {
-        $productCount = 0;
-
-        $indices = request()->input('indices');
-
-        foreach ($indices as $index) {
-            $category = $this->categoryRepository->find($index);
-
-            $productCount += $category->products->count();
-        }
-
-        return response()->json(['product_count' => $productCount]);
-    }
-
-    /**
      * Check whether the current category is deletable or not.
      *
      * This method will fetch all root category ids from the channel. If `id` is present,
@@ -295,6 +276,18 @@ class CategoryController extends Controller
         }
 
         return $category->id === 1 || $channelRootCategoryIds->contains($category->id);
+    }
+
+    /**
+     * Get all categories in tree format.
+     * 
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function tree()
+    {
+        $categories = $this->categoryRepository->getVisibleCategoryTree(core()->getCurrentChannel()->root_category_id);
+
+        return CategoryTreeResource::collection($categories);
     }
 
     /**
