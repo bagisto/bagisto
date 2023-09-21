@@ -10,7 +10,7 @@
     {!! view_render_event('bagisto.admin.catalog.product.edit.form.categories.controls.before', ['product' => $product]) !!}
 
     {{-- Panel Content --}}
-    <div class="mb-[20px] text-[14px] text-gray-600">
+    <div class="mb-[20px] text-[14px] text-gray-600 dark:text-gray-300">
         <x-admin::tree.view
             input-type="checkbox"
             name-field="categories"

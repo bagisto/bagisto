@@ -46,7 +46,7 @@
                                     @lang($child['name'])
                                 </p>
                                 
-                                <p class="text-[12px] text-gray-600">
+                                <p class="text-[12px] text-gray-600 dark:text-gray-300">
                                     @lang($child['info'] ?? '')
                                 </p>
                             </div>

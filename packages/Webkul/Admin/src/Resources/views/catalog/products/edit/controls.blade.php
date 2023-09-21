@@ -233,7 +233,7 @@
                 >
                 </x-admin::form.control-group.control>
 
-                <p class="text-[14px] text-gray-600">
+                <p class="text-[14px] text-gray-600 dark:text-gray-300">
                     Remove
                 </p>
             </div>

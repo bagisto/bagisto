@@ -202,7 +202,7 @@
                                             <input
                                                 type="text"
                                                 :name="'attribute_groups[' + element.id + '][name]'"
-                                                class="group_node text-[14px] !text-gray-600"
+                                                class="group_node text-[14px] !text-gray-600 dark:!text-gray-300"
                                                 v-model="element.name"
                                                 v-show="editableGroup.id == element.id"
                                             />
@@ -253,14 +253,14 @@
                                                 <input
                                                     type="hidden"
                                                     :name="'attribute_groups[' + element.group_id + '][custom_attributes][' + index + '][id]'"
-                                                    class="text-[14px] text-gray-600"
+                                                    class="text-[14px] text-gray-600 dark:text-gray-300"
                                                     v-model="element.id"
                                                 />
 
                                                 <input
                                                     type="hidden"
                                                     :name="'attribute_groups[' + element.group_id + '][custom_attributes][' + index + '][position]'"
-                                                    class="text-[14px] text-gray-600"
+                                                    class="text-[14px] text-gray-600 dark:text-gray-300"
                                                     :value="index + 1"
                                                 />
                                             </div>

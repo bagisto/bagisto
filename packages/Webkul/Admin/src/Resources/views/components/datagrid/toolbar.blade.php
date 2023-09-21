@@ -86,7 +86,7 @@
                 </x-admin::dropdown>
 
                 <div class="ltr:pl-[10px] rtl:pr-[10px]">
-                    <p class="text-[14px] font-light text-gray-800">
+                    <p class="text-[14px] font-light text-gray-800 dark:text-white">
                         <!-- Need to manage this translation. -->
                         @{{ applied.massActions.indices.length }} of @{{ available.meta.total }} Selected
                     </p>
@@ -118,7 +118,7 @@
 
                 <!-- Information Panel -->
                 <div class="ltr:pl-[10px] rtl:pr-[10px]">
-                    <p class="text-[14px] font-light text-gray-800">
+                    <p class="text-[14px] font-light text-gray-800 dark:text-white">
                         <!-- Need to manage this translation. -->
                         @{{ available.meta.total }} Results
                     </p>
@@ -202,7 +202,7 @@
                     @change="changePage(parseInt($event.target.value))"
                 >
 
-                <div class="whitespace-nowrap text-gray-600">
+                <div class="whitespace-nowrap text-gray-600 dark:text-gray-300">
                     <span>of </span>
 
                     <span v-text="available.meta.last_page"></span>

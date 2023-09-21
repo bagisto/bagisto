@@ -251,7 +251,7 @@
                                     </x-admin::media.images>
                                 </x-admin::form.control-group>
 
-                                <p class="text-[12px] text-gray-600">
+                                <p class="text-[12px] text-gray-600 dark:text-gray-300">
                                     @lang('admin::app.settings.channels.edit.logo-size')
                                 </p>
                             </div>
@@ -273,7 +273,7 @@
                                     </x-admin::media.images>
                                 </x-admin::form.control-group>
 
-                                <p class="text-[12px] text-gray-600">
+                                <p class="text-[12px] text-gray-600 dark:text-gray-300">
                                     @lang('admin::app.settings.channels.edit.favicon-size')
                                 </p>
                             </div>

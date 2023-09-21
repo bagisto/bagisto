@@ -190,7 +190,7 @@
                 v-if="isDropdownOpen"
             >
                 <!-- Search Tabs -->
-                <div class="flex border-b-[1px] border-gray-300 text-[14px] text-gray-600">
+                <div class="flex border-b-[1px] border-gray-300 text-[14px] text-gray-600 dark:text-gray-300">
                     <div
                         class="p-[16px] hover:bg-gray-100 cursor-pointer"
                         :class="{ 'border-b-[2px] border-blue-600': activeTab == tab.key }"
@@ -550,7 +550,7 @@
                             </p>
 
                             <!-- Craeted Date In humand Readable Format -->
-                            <p class="text-[12px] text-gray-600">
+                            <p class="text-[12px] text-gray-600 dark:text-gray-300">
                                 @{{ notification.order.datetime }}
                             </p>
                         </div>

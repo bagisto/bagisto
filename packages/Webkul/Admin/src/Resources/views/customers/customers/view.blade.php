@@ -161,7 +161,7 @@
 
                                     {{-- Order Address Details --}}
                                     <div class="flex flex-col gap-[6px]">
-                                        <p class="text-[16px] text-gray-800">
+                                        <p class="text-[16px] text-gray-800 dark:text-white">
                                             {{ $order->billingAddress->name }}
                                         </p>
 
@@ -247,7 +247,7 @@
                                 <tbody>
                                     {{-- Invoice Details --}}
                                     <tr class="bg-white border-b transition-all hover:bg-gray-50">
-                                        <td class="px-6 py-[16px] text-gray-600">
+                                        <td class="px-6 py-[16px] text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.customers.customers.view.invoice-id-prefix', ['invoice_id' => $invoice->id] )
                                         </td>
 
@@ -255,11 +255,11 @@
                                             {{ $invoice->created_at }}
                                         </td>
 
-                                        <td scope="row" class="px-6 py-[16px] text-gray-600">
+                                        <td scope="row" class="px-6 py-[16px] text-gray-600 dark:text-gray-300">
                                             {{ core()->currency($invoice->grand_total) }}
                                         </td>
 
-                                        <td class="px-6 py-[16px] text-gray-600">
+                                        <td class="px-6 py-[16px] text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.customers.customers.view.order-id-prefix', ['order_id' => $invoice->order_id] )
                                         </td>
                                     </tr>

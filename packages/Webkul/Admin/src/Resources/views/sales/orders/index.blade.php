@@ -117,19 +117,19 @@
                     <div class="">
                         <div class="flex flex-col gap-[6px]">
                             <p
-                                class="text-[16px] text-gray-800"
+                                class="text-[16px] text-gray-800 dark:text-white"
                                 v-text="record.full_name"
                             >
                             </p>
 
                             <p
-                                class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
+                                class="text-gray-600 dark:text-gray-300"
                                 v-text="record.customer_email"
                             >
                             </p>
 
                             <p
-                                class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
+                                class="text-gray-600 dark:text-gray-300"
                                 v-text="record.location"
                             >
                             </p>

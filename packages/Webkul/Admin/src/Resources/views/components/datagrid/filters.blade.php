@@ -4,7 +4,7 @@
         <div v-if="column.type === 'date_range'">
             <div class="flex items-center justify-between">
                 <p
-                    class="text-[14px] font-medium leading-[24px] text-gray-800"
+                    class="text-[14px] font-medium leading-[24px] dark:text-white"
                     v-text="column.label"
                 >
                 </p>
@@ -88,7 +88,7 @@
         <div v-else-if="column.type === 'datetime_range'">
             <div class="flex items-center justify-between">
                 <p
-                    class="text-[14px] font-medium leading-[24px] text-gray-800"
+                    class="text-[14px] font-medium leading-[24px]  dark:text-white"
                     v-text="column.label"
                 >
                 </p>
@@ -172,7 +172,7 @@
         <div v-else>
             <div class="flex items-center justify-between">
                 <p
-                    class="text-[14px] font-medium leading-[24px] text-gray-800"
+                    class="text-[14px] font-medium leading-[24px]  dark:text-white"
                     v-text="column.label"
                 >
                 </p>

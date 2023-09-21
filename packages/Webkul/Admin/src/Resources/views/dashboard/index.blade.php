@@ -425,7 +425,7 @@
 
                             <div class="flex flex-col gap-[6px]">
                                 {{-- Customer Detailes --}}
-                                <p class="text-[16px] text-gray-800">
+                                <p class="text-[16px] text-gray-800 dark:text-white">
                                     {{ $item->customer_first_name }} {{ $item->customer_last_name }}
                                 </p>
 
