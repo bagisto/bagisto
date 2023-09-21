@@ -152,6 +152,8 @@
                     </x-admin::modal>
                 </form>
             </x-admin::form>
+
+            <x-admin::modal.confirm ref="confirmRemoveVariantModal"/>
         </div>
     </script>
 
@@ -466,6 +468,8 @@
                     </x-admin::drawer>
                 </form>
             </x-admin::form>
+
+            <x-admin::modal.confirm ref="confirmModal"/>
         </div>
     </script>
 
@@ -886,7 +890,11 @@
                 },
 
                 removeVariant(variant) {
-                    this.variants.splice(this.variants.indexOf(variant), 1);
+                    this.$refs.confirmRemoveVariantModal.open({
+                        agree: () => {
+                            this.variants.splice(this.variants.indexOf(variant), 1);
+                        },
+                    });
                 },
             }
         });
@@ -998,13 +1006,17 @@
                 },
 
                 edit(type) {
-                    this.selectedType = type;
+                    this.$refs.confirmModal.open({
+                        agree: () => {
+                            this.selectedType = type;
 
-                    if (['editPrices', 'editInventories', 'addImages'].includes(type)) {
-                        this.$refs.updateVariantsDrawer.open();
-                    } else {
-                        this[this.selectedType]();
-                    }
+                            if (['editPrices', 'editInventories', 'addImages'].includes(type)) {
+                                this.$refs.updateVariantsDrawer.open();
+                            } else {
+                                this[this.selectedType]();
+                            }
+                        }
+                    });
                 },
 
                 update(params) {

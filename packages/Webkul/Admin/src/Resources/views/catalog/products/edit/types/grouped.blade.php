@@ -159,6 +159,8 @@
                 ::query-params="{type: 'simple'}"
                 @onProductAdded="addSelected($event)"
             ></x-admin::products.search>
+
+            <x-admin::modal.confirm ref="confirmRemoveGroupProductModal"/>
         </div>
     </script>
 
@@ -193,9 +195,13 @@
                 },
 
                 remove(product) {
-                    let index = this.groupProducts.indexOf(product)
+                    this.$refs.confirmRemoveGroupProductModal.open({
+                        agree: () => {
+                            let index = this.groupProducts.indexOf(product)
 
-                    this.groupProducts.splice(index, 1)
+                            this.groupProducts.splice(index, 1);
+                        }
+                    });
                 },
             }
         });

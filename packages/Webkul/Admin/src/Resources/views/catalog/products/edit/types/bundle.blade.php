@@ -190,6 +190,8 @@
                     </x-admin::modal>
                 </form>
             </x-admin::form>
+
+            <x-admin::modal.confirm ref="confirmRemoveBundleOptionModal"/>
         </div>
     </script>
 
@@ -385,6 +387,8 @@
                 </div>
             </div>
 
+            <x-admin::modal.confirm ref="confirmRemoveBundleOptionProductModal"/>
+
             <!-- Product Search Blade Component -->
             <x-admin::products.search
                 ::ref="'productSearch' + option.id"
@@ -434,9 +438,13 @@
                 },
 
                 removeOption(option) {
-                    let index = this.options.indexOf(option);
+                    this.$refs.confirmRemoveBundleOptionModal.open({
+                        agree: () => {
+                            let index = this.options.indexOf(option);
 
-                    this.options.splice(index, 1);
+                            this.options.splice(index, 1);
+                        }
+                    });
                 },
 
                 resetForm() {
@@ -514,9 +522,13 @@
                 },
 
                 removeProduct(product) {
-                    let index = this.option.bundle_option_products.indexOf(product);
+                    this.$refs.confirmRemoveBundleOptionProductModal.open({
+                        agree: () => {
+                            let index = this.option.bundle_option_products.indexOf(product);
 
-                    this.option.bundle_option_products.splice(index, 1);
+                            this.option.bundle_option_products.splice(index, 1);
+                        }
+                    });
                 },
 
                 updateIsDefault: function(updatedProductOption) {
