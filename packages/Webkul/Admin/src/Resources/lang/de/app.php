@@ -654,6 +654,8 @@ return [
                             'sku'             => 'Artikelnummer (SKU)',
                             'status'          => 'Status',
                             'weight'          => 'Gewicht',
+                            'images'          => 'Bilder',
+
                         ],
 
                         'mass-edit' => [

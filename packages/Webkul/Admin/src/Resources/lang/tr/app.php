@@ -655,6 +655,7 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'Durum',
                             'weight'          => 'Ağırlık',
+                            'images'          => 'Resimler',
                         ],
 
                         'mass-edit' => [
