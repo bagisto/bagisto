@@ -14,7 +14,7 @@
                 {{-- Cancel Button --}}
                 <a
                     href="{{ route('admin.marketing.communications.email_templates.index') }}"
-                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 "
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
                 >
                     @lang('admin::app.marketing.communications.templates.create.back-btn')
                 </a>
@@ -66,7 +66,7 @@
             {{-- Right sub-component --}}
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
                 {{-- General --}}
-                <div class="bg-white rounded-[4px] box-shadow">
+                <div class="bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
                     <x-admin::accordion>
                         <x-slot:header>
                             <div class="flex items-center justify-between">

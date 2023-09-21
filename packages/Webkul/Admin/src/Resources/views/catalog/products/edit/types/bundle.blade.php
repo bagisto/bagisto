@@ -18,7 +18,7 @@
                         @lang('admin::app.catalog.products.edit.types.bundle.title')
                     </p>
 
-                    <p class="text-[12px] text-gray-500 font-medium">
+                    <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
                         @lang('admin::app.catalog.products.edit.types.bundle.info')
                     </p>
                 </div>
@@ -217,7 +217,7 @@
                         @{{ (index + 1) + '. ' + option.label + ' - ' + types[option.type].title }}
                     </p>
 
-                    <p class="text-[12px] text-gray-500 font-medium">
+                    <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
                         @{{ types[option.type].info }}
                     </p>
                 </div>

@@ -12,7 +12,7 @@
         <div>
             <!-- Header -->
             <div class="flex items-center justify-between mt-[6px] py-[15px]">
-                <p class="text-gray-800 text-[16px] py-[10px] font-semibold">
+                <p class="text-gray-800 text-[16px] py-[10px] font-semibold dark:text-white">
                     @lang('admin::app.catalog.products.edit.price.group.title')
                 </p>
 

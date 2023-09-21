@@ -31,7 +31,7 @@
                         <!-- Cancel Button -->
                         <a
                             href="{{ route('admin.catalog.attributes.index') }}"
-                            class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 "
+                            class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
                         >
                             @lang('admin::app.catalog.attributes.edit.back-btn')
                         </a>
@@ -389,7 +389,7 @@
                         {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.general.before', ['attribute' => $attribute]) !!}
 
                         <!-- General -->
-                        <div class="bg-white box-shadow rounded-[4px]">
+                        <div class="bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
                             <div class="flex justify-between items-center p-[6px]">
                                 <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                                     @lang('admin::app.catalog.attributes.edit.general')

@@ -31,7 +31,7 @@
                         <!-- Cancel Button -->
                         <a
                             href="{{ route('admin.catalog.attributes.index') }}"
-                            class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 "
+                            class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
                         >
                             @lang('admin::app.catalog.attributes.create.back-btn')
                         </a>
@@ -371,7 +371,7 @@
                     <!-- Right sub-component -->
                     <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
                         <!-- General -->
-                        <div class="bg-white box-shadow rounded-[4px]">
+                        <div class="bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
                             <div class="flex justify-between items-center p-[6px]">
                                 <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                                     @lang('admin::app.catalog.attributes.create.general')
@@ -399,7 +399,7 @@
                                             id="code"
                                             v-bind="field"
                                             :class="[errors['{{ 'code' }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                            class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400"
+                                            class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                             placeholder="{{ trans('admin::app.catalog.attributes.create.code') }}"
                                             v-code
                                         >

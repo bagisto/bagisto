@@ -25,7 +25,7 @@
                 <div class="flex gap-x-[10px] items-center">
                     <a 
                         href="{{ route('admin.settings.themes.index') }}"
-                        class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 "
+                        class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
                     > 
                         @lang('admin::app.settings.themes.edit.back')
                     </a>
@@ -66,7 +66,7 @@
                         @foreach ($currentChannel->locales as $locale)
                             <a
                                 href="?{{ Arr::query(['channel' => $currentChannel->code, 'locale' => $locale->code]) }}"
-                                class="flex gap-[10px] px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950  {{ $locale->code == $currentLocale->code ? 'bg-gray-100' : ''}}"
+                                class="flex gap-[10px] px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white   {{ $locale->code == $currentLocale->code ? 'bg-gray-100' : ''}}"
                             >
                                 {{ $locale->name }}
                             </a>
@@ -102,7 +102,7 @@
                                 <div class="flex flex-col gap-[4px]">
                                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold">@lang('admin::app.settings.themes.edit.slider')</p>
                                     
-                                    <p class="text-[12px] text-gray-500 font-medium">
+                                    <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
                                         @lang('admin::app.settings.themes.edit.slider-description')
                                     </p>
                                 </div>
@@ -232,7 +232,7 @@
                                         name="name"
                                         value="{{ $theme->name }}"
                                         rules="required"
-                                        class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400"
+                                        class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                         :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         label="@lang('admin::app.settings.themes.edit.name')"
                                         placeholder="@lang('admin::app.settings.themes.edit.name')"
@@ -254,7 +254,7 @@
                                         name="sort_order"
                                         rules="required|min_value:1"
                                         value="{{ $theme->sort_order }}"
-                                        class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400"
+                                        class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                         :class="[errors['sort_order'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         label="@lang('admin::app.settings.themes.edit.sort-order')"
                                         placeholder="@lang('admin::app.settings.themes.edit.sort-order')"
@@ -413,7 +413,7 @@
                                     @lang('admin::app.settings.themes.edit.product-carousel')
                                 </p>
 
-                                <p class="text-[12px] text-gray-500 font-medium">
+                                <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
                                     @lang('admin::app.settings.themes.edit.product-carousel-description')
                                 </p>
                             </div>
@@ -428,7 +428,7 @@
                                 type="text"
                                 name="options[title]"
                                 value="{{ $theme->options['title'] ?? '' }}"
-                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400"
+                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                 :class="[errors['options[title]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 rules="required"
                                 label="@lang('admin::app.settings.themes.edit.filter-title')"
@@ -481,7 +481,7 @@
                                 type="text"
                                 name="options[filters][limit]"
                                 value="{{ $theme->options['filters']['limit'] ?? '' }}"
-                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400"
+                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                 :class="[errors['options[filters][limit]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 rules="required|min_value:1"
                                 label="@lang('admin::app.settings.themes.edit.limit')"
@@ -603,7 +603,7 @@
                                     name="name"
                                     value="{{ $theme->name }}"
                                     rules="required"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     label="@lang('admin::app.settings.themes.edit.name')"
                                     placeholder="@lang('admin::app.settings.themes.edit.name')"
@@ -626,7 +626,7 @@
                                     name="sort_order"
                                     value="{{ $theme->sort_order }}"
                                     rules="required|min_value:1"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['sort_order'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     label="@lang('admin::app.settings.themes.edit.sort-order')"
                                     placeholder="@lang('admin::app.settings.themes.edit.sort-order')"
@@ -783,7 +783,7 @@
                                     @lang('admin::app.settings.themes.edit.category-carousel')
                                 </p>
 
-                                <p class="text-[12px] text-gray-500 font-medium">
+                                <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
                                     @lang('admin::app.settings.themes.edit.category-carousel-description')
                                 </p>
                             </div>
@@ -828,7 +828,7 @@
                                 type="text"
                                 name="options[filters][limit]"
                                 value="{{ $theme->options['filters']['limit'] ?? '' }}"
-                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400"
+                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                 :class="[errors['options[filters][limit]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 rules="required|min_value:1"
                                 label="@lang('admin::app.settings.themes.edit.limit')"
@@ -959,7 +959,7 @@
                                     type="text"
                                     name="name"
                                     value="{{ $theme->name }}"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     rules="required"
                                     label="@lang('admin::app.settings.themes.edit.name')"
@@ -982,7 +982,7 @@
                                     type="text"
                                     name="sort_order"
                                     value="{{ $theme->sort_order }}"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['sort_order'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     rules="required|min_value:1"
                                     label="@lang('admin::app.settings.themes.edit.sort-order')"
@@ -1140,7 +1140,7 @@
                                     @lang('admin::app.settings.themes.edit.static-content')
                                 </p>
 
-                                <p class="text-[12px] text-gray-500 font-medium">
+                                <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
                                     @lang('admin::app.settings.themes.edit.static-content-description')
                                 </p>
                             </div>
@@ -1236,7 +1236,7 @@
                                     type="text"
                                     name="name"
                                     value="{{ $theme->name }}"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     rules="required"
                                     label="@lang('admin::app.settings.themes.edit.name')"
@@ -1260,7 +1260,7 @@
                                     name="sort_order"
                                     value="{{ $theme->sort_order }}"
                                     rules="required|min_value:1"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['sort_order'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     label="@lang('admin::app.settings.themes.edit.sort-order')"
                                     placeholder="@lang('admin::app.settings.themes.edit.sort-order')"
@@ -1366,7 +1366,7 @@
                                         @lang('admin::app.settings.themes.edit.footer-link')
                                     </p>
     
-                                    <p class="text-[12px] text-gray-500 font-medium">
+                                    <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
                                         @lang('admin::app.settings.themes.edit.footer-link-description')
                                     </p>
                                 </div>
@@ -1521,7 +1521,7 @@
                                         type="text"
                                         name="name"
                                         value="{{ $theme->name }}"
-                                        class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400"
+                                        class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                         :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         rules="required"
                                         label="@lang('admin::app.settings.themes.edit.name')"
@@ -1544,7 +1544,7 @@
                                         type="text"
                                         name="sort_order"
                                         value="{{ $theme->sort_order }}"
-                                        class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400"
+                                        class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                         :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         rules="required"
                                         label="@lang('admin::app.settings.themes.edit.sort-order')"

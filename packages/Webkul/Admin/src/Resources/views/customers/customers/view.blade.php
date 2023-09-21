@@ -31,7 +31,7 @@
             {{-- Back Button --}}
             <a
                 href="{{ route('admin.customers.customers.index') }}"
-                class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 "
+                class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
             >
                 @lang('admin::app.customers.customers.view.back-btn')
             </a>
@@ -223,7 +223,7 @@
             </div>
 
             {{-- Invoices --}}
-            <div class="bg-white rounded box-shadow">
+            <div class="bg-white dark:bg-gray-900  rounded box-shadow">
                 @if ($totalInvoiceCount = count($customer->invoices))
                     {{--Invoice Count --}}
                     <p class=" p-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
@@ -246,7 +246,7 @@
                             @foreach ($customer->invoices as $invoice)
                                 <tbody>
                                     {{-- Invoice Details --}}
-                                    <tr class="bg-white border-b transition-all hover:bg-gray-50 dark:hover:bg-gray-950  ">
+                                    <tr class="bg-white dark:bg-gray-900  border-b transition-all hover:bg-gray-50 dark:hover:bg-gray-950  ">
                                         <td class="px-6 py-[16px] text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.customers.customers.view.invoice-id-prefix', ['invoice_id' => $invoice->id] )
                                         </td>
@@ -294,7 +294,7 @@
             </div>
 
             {{-- Reviews --}}
-            <div class="bg-white rounded box-shadow">
+            <div class="bg-white dark:bg-gray-900  rounded box-shadow">
                 @if($totalReviewsCount = count($customer->reviews) )
                     {{-- Reviews Count --}}
                     <p class=" p-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
@@ -405,7 +405,7 @@
             </div>
           
             {{-- Notes Form --}}
-            <div class="bg-white rounded box-shadow">
+            <div class="bg-white dark:bg-gray-900  rounded box-shadow">
                 <p class=" p-[16px] pb-0 text-[16px] text-gray-800 dark:text-white font-semibold">
                     @lang('admin::app.customers.customers.view.add-note')
                 </p>

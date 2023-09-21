@@ -18,7 +18,7 @@
                             @{{ type.title }}
                         </p>
 
-                        <p class="text-[12px] text-gray-500 font-medium">
+                        <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
                             @{{ type.info }}
                         </p>
                     </div>

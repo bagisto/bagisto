@@ -411,7 +411,7 @@
                                 <div class="flex gap-x-[10px] items-center">
                                     <button
                                         type="button"
-                                        class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 "
+                                        class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
                                         v-if="attributes.length"
                                         @click="attributes = []"
                                     >

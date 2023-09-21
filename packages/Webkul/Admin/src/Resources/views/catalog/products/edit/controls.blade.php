@@ -14,7 +14,7 @@
                 id="{{ $attribute->code }}"
                 v-bind="field"
                 :class="[errors['{{ $attribute->code }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400"
+                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                 @if ($attribute->code == 'url_key') v-slugify @endif
                 @if ($attribute->code == 'name') v-slugify-target:url_key="setValues" @endif
             >
@@ -24,7 +24,7 @@
 
     @case('price')
         <div class="relative">
-            <span class="absolute ltr:left-[15px] rtl:right-[15px] top-[50%] -translate-y-[50%] text-gray-500 {{ $attribute->code == 'price' ? 'text-[20px]' : '' }}">
+            <span class="absolute ltr:left-[15px] rtl:right-[15px] top-[50%] -translate-y-[50%] text-gray-500 dark:text-gray-300 {{ $attribute->code == 'price' ? 'text-[20px]' : '' }}">
                 {{ core()->currencySymbol(core()->getBaseCurrencyCode()) }}
             </span>
 
@@ -215,7 +215,7 @@
                     name="{{ $attribute->code }}"
                     id="{{ $attribute->code }}"
                     :class="[errors['{{ $attribute->code }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400"
+                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                     @change="handleChange"
                     @blur="handleBlur"
                 >

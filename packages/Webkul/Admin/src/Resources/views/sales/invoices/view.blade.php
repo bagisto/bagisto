@@ -27,7 +27,7 @@
                 {{-- Cancel Button --}}
                 <a
                     href="{{ route('admin.sales.invoices.index') }}"
-                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 "
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
                 >
                     @lang('admin::app.account.edit.back-btn')
                 </a>
@@ -122,7 +122,7 @@
         {{-- Left sub-component --}}
         <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
             {{-- Invoice Item Section --}}
-            <div class="bg-white rounded-[4px] box-shadow">
+            <div class="bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px] p-[16px]">
                     @lang('admin::app.sales.invoices.view.invoice-items') ({{ count($invoice->items) }})
                 </p>

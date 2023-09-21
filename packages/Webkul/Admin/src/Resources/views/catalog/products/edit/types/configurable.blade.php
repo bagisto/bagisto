@@ -15,7 +15,7 @@
                         @lang('admin::app.catalog.products.edit.types.configurable.title')
                     </p>
 
-                    <p class="text-[12px] text-gray-500 font-medium">
+                    <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
                         @lang('admin::app.catalog.products.edit.types.configurable.info')
                     </p>
                 </div>

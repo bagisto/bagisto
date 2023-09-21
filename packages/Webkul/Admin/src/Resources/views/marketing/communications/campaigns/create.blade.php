@@ -15,7 +15,7 @@
                 {{-- Cancel Button --}}
                 <a
                     href="{{ route('admin.marketing.communications.campaigns.index') }}"
-                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 "
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
                 >
                     @lang('admin::app.marketing.communications.campaigns.create.back-btn')
                 </a>

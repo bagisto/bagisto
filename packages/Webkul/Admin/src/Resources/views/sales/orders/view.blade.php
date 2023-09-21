@@ -53,7 +53,7 @@
             {{-- Back Button --}}
             <a
                 href="{{ route('admin.sales.orders.index') }}"
-                class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 "
+                class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
             >
                 @lang('admin::app.account.edit.back-btn')
             </a>
@@ -109,7 +109,7 @@
         <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
             {{-- Left Component --}}
             <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                <div class="bg-white rounded-[4px] box-shadow">
+                <div class="bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
                     <div class="flex justify-between p-[16px]">
                         <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                             @lang('Order Items') ({{ count($order->items) }})
@@ -283,7 +283,7 @@
                 </div>
             
                 {{-- Customer's comment form --}}
-                <div class="bg-white rounded box-shadow">
+                <div class="bg-white dark:bg-gray-900  rounded box-shadow">
                     <p class="p-[16px] pb-0 text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.sales.orders.view.comments')
                     </p>

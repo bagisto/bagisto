@@ -14,7 +14,7 @@
             <div class="flex gap-x-[10px] items-center">
                 <a
                     href="{{ route('admin.catalog.families.index') }}"
-                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 "
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
                 >
                     @lang('admin::app.catalog.families.create.back-btn')
                 </a>
@@ -40,7 +40,7 @@
             {{-- Right Container --}}
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
                 {{-- General Pannel --}}
-                <div class="bg-white box-shadow rounded-[4px]">
+                <div class="bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
                     {{-- Settings --}}
                     <x-admin::accordion>
                         {{-- Panel Header --}}
@@ -114,7 +114,7 @@
                             @lang('admin::app.catalog.families.create.groups')
                         </p>
 
-                        <p class="text-[12px] text-gray-500 font-medium">
+                        <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
                             @lang('admin::app.catalog.families.create.groups-info')
                         </p>
                     </div>
