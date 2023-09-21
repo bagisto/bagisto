@@ -30,6 +30,9 @@
                 </div>
             @endforeach
         </nav>
+
+        {{-- Dark mode Switcher --}}
+        <v-dark></v-dark>
     </div>
 
     {{-- Collapse menu --}}
@@ -57,6 +60,19 @@
                     @lang('admin::app.components.layouts.sidebar.collapse')
                 </p>
             </div>
+        </div>
+    </script>
+
+    <script type="text/x-template" id="v-dark-template">
+        <div class="px-5 py-2 text-[16px] text-gray-800 dark:text-white hover:bg-gray-100 cursor-pointer">
+            <x-admin::form.control-group.control
+                type="switch"
+                name="dark_mode"
+                ::checked="isDarkMode"
+                v-model="isDarkMode"
+                @change="toggle"
+            >
+            </x-admin::form.control-group.control>
         </div>
     </script>
 
@@ -95,8 +111,48 @@
                     }
 
                     return 0;
-                }
-            }
+                },
+            },
+        });
+    </script>
+
+    <script type="module">
+        app.component('v-dark', {
+            template: '#v-dark-template',
+
+            data() {
+                return {
+                    isDarkMode: {{ request()->cookie('is_dark_mode') ?? 0 }},
+                };
+            },
+
+            methods: {
+                toggle() {
+                    this.isDarkMode = parseInt(this.isDarkModeCookie()) ? 0 : 1;
+
+                    var expiryDate = new Date();
+
+                    expiryDate.setMonth(expiryDate.getMonth() + 1);
+
+                    document.cookie = 'is_dark_mode=' + this.isDarkMode + '; path=/; expires=' + expiryDate.toGMTString();
+
+                    document.documentElement.classList.toggle('dark', this.isDarkMode === 1);
+                },
+
+                isDarkModeCookie() {
+                    const cookies = document.cookie.split(';');
+
+                    for (const cookie of cookies) {
+                        const [name, value] = cookie.trim().split('=');
+
+                        if (name === 'is_dark_mode') {
+                            return value;
+                        }
+                    }
+
+                    return 0;
+                },
+            },
         });
     </script>
 @endpushOnce

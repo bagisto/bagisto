@@ -110,8 +110,6 @@
                     >
                         @lang('admin::app.components.layouts.header.logout')
                     </a>
-
-                    <v-dark></v-dark>
                 </div>
             </x-slot:content>
         </x-admin::dropdown>
@@ -578,9 +576,9 @@
                 </div>
             </x-slot:content>
         </x-admin::dropdown>
-        </script>
+    </script>
 
-        <script type="module">
+    <script type="module">
         app.component('v-notifications', {
             template: '#v-notifications-template',
 
@@ -675,53 +673,6 @@
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.success_message });
                         })
                         .catch((error) => {});
-                }
-            }
-        });
-    </script>
-
-    <script type="text/x-template" id="v-dark-template">
-        <div class="px-5 py-2 text-[16px] text-gray-800 dark:text-white hover:bg-gray-100 cursor-pointer">
-            <x-admin::form.control-group.label class="!text-gray-800 font-medium">
-                @lang('Dark Mode')
-            </x-admin::form.control-group.label>
-
-            <x-admin::form.control-group.control
-                type="switch"
-                name="status"
-                class="cursor-pointer"
-                value="1"
-                :label="trans('Dark Mode')"
-                :checked="true"
-                @change="switchMode"
-            >
-            </x-admin::form.control-group.control>
-        </div>
-    </script>
-
-    <script type="module">
-        app.component('v-dark', {
-            template: '#v-dark-template',
-
-            data() {
-                return {
-                    isDarkMode: localStorage.getItem('dark-mode') == 'true',
-                };
-            },
-
-            methods: {
-                switchMode() {
-                    this.checkMode();
-
-                    let element = document.documentElement;
-                    
-                    element.classList.toggle('dark');
-                },
-
-                checkMode() {
-                    this.isDarkMode = ! this.isDarkMode;
-
-                    localStorage.setItem('dark-mode', this.isDarkMode);
                 },
             },
         });

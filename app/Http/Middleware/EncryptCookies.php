@@ -12,6 +12,7 @@ class EncryptCookies extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        'sidebar_collapsed'
+        'sidebar_collapsed',
+        'is_dark_mode',
     ];
 }
