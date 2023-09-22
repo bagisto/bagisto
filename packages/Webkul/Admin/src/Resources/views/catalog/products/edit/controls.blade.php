@@ -14,7 +14,7 @@
                 id="{{ $attribute->code }}"
                 v-bind="field"
                 :class="[errors['{{ $attribute->code }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                 @if ($attribute->code == 'url_key') v-slugify @endif
                 @if ($attribute->code == 'name') v-slugify-target:url_key="setValues" @endif
             >
@@ -24,7 +24,7 @@
 
     @case('price')
         <div class="relative">
-            <span class="absolute ltr:left-[15px] rtl:right-[15px] top-[50%] -translate-y-[50%] text-gray-500 {{ $attribute->code == 'price' ? 'text-[20px]' : '' }}">
+            <span class="absolute ltr:left-[15px] rtl:right-[15px] top-[50%] -translate-y-[50%] text-gray-500 dark:text-gray-300 {{ $attribute->code == 'price' ? 'text-[20px]' : '' }}">
                 {{ core()->currencySymbol(core()->getBaseCurrencyCode()) }}
             </span>
 
@@ -155,7 +155,7 @@
                 >
                 </x-admin::form.control-group.control>
 
-                <p class="text-gray-600 font-semibold">
+                <p class="text-gray-600 dark:text-gray-300  font-semibold">
                     {{ $option->admin_name }}
                 </p>
             </div>
@@ -189,10 +189,10 @@
                     @if ($attribute->type == 'image')
                         <img
                             src="{{ Storage::url($product[$attribute->code]) }}"
-                            class="w-[45px] h-[45px] border border-gray-300 rounded-[4px] overflow-hidden hover:border-gray-400"
+                            class="w-[45px] h-[45px] border dark:border-gray-800   rounded-[4px] overflow-hidden hover:border-gray-400"
                         />
                     @else
-                        <div class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-transparent p-[6px] text-center text-gray-600 transition-all marker:shadow hover:bg-gray-200 active:border-gray-300">
+                        <div class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-transparent p-[6px] text-center text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:bg-gray-200 dark:hover:bg-gray-800  active:border-gray-300">
                             <i class="icon-down-stat text-[24px]"></i>
                         </div>
                     @endif
@@ -215,7 +215,7 @@
                     name="{{ $attribute->code }}"
                     id="{{ $attribute->code }}"
                     :class="[errors['{{ $attribute->code }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                     @change="handleChange"
                     @blur="handleBlur"
                 >
@@ -233,7 +233,7 @@
                 >
                 </x-admin::form.control-group.control>
 
-                <p class="text-[14px] text-gray-600">
+                <p class="text-[14px] text-gray-600 dark:text-gray-300">
                     @lang('admin::app.catalog.products.edit.remove')
                 </p>
             </div>

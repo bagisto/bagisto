@@ -5,7 +5,7 @@
     </x-slot:title>
 
     <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-        <p class="text-[20px] text-gray-800 font-bold">
+        <p class="text-[20px] text-gray-800 dark:text-white font-bold">
             @lang('admin::app.marketing.communications.subscribers.index.title')
         </p>
     </div>
@@ -29,12 +29,12 @@
 
                     <!-- DataGrid Header -->
                     <template #header="{ columns, records, sortPage, applied}">
-                        <div class="row grid grid-cols-{{ $hasPermission ? '4' : '3' }} grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] border-gray-300 text-gray-600 bg-gray-50 font-semibold">
+                        <div class="row grid grid-cols-{{ $hasPermission ? '4' : '3' }} grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800   text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold ">
                             <div
                                 class="flex gap-[10px] cursor-pointer"
                                 v-for="(columnGroup, index) in ['id', 'status', 'email']"
                             >
-                                <p class="text-gray-600">
+                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                     <span class="[&>*]:after:content-['_/_']">
                                         <span
                                             class="after:content-['/'] last:after:content-['']"
@@ -52,7 +52,7 @@
 
                                     <!-- Filter Arrow Icon -->
                                     <i
-                                        class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 align-text-bottom"
+                                        class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 dark:text-white align-text-bottom"
                                         :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                         v-if="columnGroup.includes(applied.sort.column)"
                                     ></i>
@@ -72,7 +72,7 @@
                     <template #body="{ columns, records, performAction }">
                         <div
                             v-for="record in records"
-                            class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600 transition-all hover:bg-gray-50"
+                            class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800   text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950  "
                             :style="'grid-template-columns: repeat(' + (record.actions.length ? 4 : 3) + ', 1fr);'"
                         >
                             <!-- Id -->
@@ -89,7 +89,7 @@
                                 <a @click="id=1; editModal(record.actions.find(action => action.title === 'Edit')?.url)">
                                     <span
                                         :class="record.actions.find(action => action.title === 'Edit')?.icon"
-                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
+                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                     >
                                     </span>
                                 </a>
@@ -97,7 +97,7 @@
                                 <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
                                     <span
                                         :class="record.actions.find(action => action.method === 'DELETE')?.icon"
-                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
+                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                     >
                                     </span>
                                 </a>
@@ -119,14 +119,14 @@
                         <x-admin::modal ref="groupCreateModal">          
                             <x-slot:header>
                                 <!-- Modal Header -->
-                                <p class="text-[18px] text-gray-800 font-bold">
+                                <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                     @lang('admin::app.marketing.communications.subscribers.index.edit.title')
                                 </p>    
                             </x-slot:header>
             
                             <x-slot:content>
                                 <!-- Modal Content -->
-                                <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
                                     <!-- Id -->
                                     <x-admin::form.control-group.control
                                         type="hidden"

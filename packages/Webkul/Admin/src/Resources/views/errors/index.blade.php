@@ -5,7 +5,7 @@
     </x-slot>
 
     {{-- Error page Information --}}
-	<div class="flex justify-center items-center h-[100vh] bg-white">
+	<div class="flex justify-center items-center h-[100vh] bg-white dark:bg-gray-900 ">
         <div class="flex gap-[20px] items-center max-w-[745px]">
             <div class="w-full">
                 <img
@@ -13,7 +13,7 @@
                     class="mb-[25px]"
                 >
 
-				<div class="text-[38px] text-gray-800 font-bold">
+				<div class="text-[38px] text-gray-800 dark:text-white font-bold">
                     {{ $errorCode }}
                 </div>
 

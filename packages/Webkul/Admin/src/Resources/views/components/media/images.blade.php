@@ -26,7 +26,7 @@
             <div class="flex flex-wrap gap-[4px]">
                 <!-- Upload Image Button -->
                 <label
-                    class="grid justify-items-center items-center w-full h-[120px] max-w-[120px] min-w-[120px] max-h-[120px] border border-dashed border-gray-300 rounded-[4px] cursor-pointer transition-all hover:border-gray-400"
+                    class="grid justify-items-center items-center w-full h-[120px] max-w-[120px] min-w-[120px] max-h-[120px] border border-dashed dark:border-gray-800   rounded-[4px] cursor-pointer transition-all hover:border-gray-400"
                     :style="{'max-width': this.width, 'max-height': this.height}"
                     :for="$.uid + '_imageInput'"
                     v-if="allowMultiple || images.length == 0"
@@ -34,7 +34,7 @@
                     <div class="flex flex-col items-center">
                         <span class="icon-image text-[24px]"></span>
 
-                        <p class="grid text-[14px] text-gray-600 font-semibold text-center">
+                        <p class="grid text-[14px] text-gray-600 dark:text-gray-300 font-semibold text-center">
                             @lang('admin::app.components.media.images.add-image-btn')
                             
                             <span class="text-[12px]">
@@ -79,7 +79,7 @@
                 <template v-if="showPlaceholders && ! images.length">
                     <!-- Front Placeholder -->
                     <div
-                        class="w-full h-[120px] max-w-[120px] min-w-[120px] max-h-[120px] relative border border-dashed border-gray-300 rounded-[4px]"
+                        class="w-full h-[120px] max-w-[120px] min-w-[120px] max-h-[120px] relative border border-dashed dark:border-gray-800   rounded-[4px]"
                         v-for="placeholder in placeholders"
                     >
                         <img :src="placeholder.image">
@@ -102,19 +102,19 @@
                 :style="{'width': this.width, 'height': this.height}"
             />
 
-            <div class="flex flex-col justify-between invisible w-full p-[11px] bg-white absolute top-0 bottom-0 opacity-80 transition-all group-hover:visible">
+            <div class="flex flex-col justify-between invisible w-full p-[11px] bg-white dark:bg-gray-900  absolute top-0 bottom-0 opacity-80 transition-all group-hover:visible">
                 <!-- Image Name -->
-                <p class="text-[12px] text-gray-600 font-semibold break-all"></p>
+                <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold break-all"></p>
 
                 <!-- Actions -->
                 <div class="flex justify-between">
                     <span
-                        class="icon-delete text-[24px] p-[6px]  rounded-[6px] cursor-pointer hover:bg-gray-200"
+                        class="icon-delete text-[24px] p-[6px]  rounded-[6px] cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 "
                         @click="remove"
                     ></span>
 
                     <label
-                        class="icon-edit text-[24px] p-[6px]  rounded-[6px] cursor-pointer hover:bg-gray-200"
+                        class="icon-edit text-[24px] p-[6px]  rounded-[6px] cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 "
                         :for="$.uid + '_imageInput_' + index"
                     ></label>
 

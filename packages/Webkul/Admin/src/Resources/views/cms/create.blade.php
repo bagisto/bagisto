@@ -10,7 +10,7 @@
         enctype="multipart/form-data"
     >
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-            <p class="text-[20px] text-gray-800 font-bold">
+            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.cms.create.title')
             </p>
 
@@ -19,7 +19,7 @@
                 {{-- Back Button --}}
                 <a
                     href="{{ route('admin.cms.index') }}"
-                    class="transparent-button hover:bg-gray-200"
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
                 >
                     @lang('admin::app.account.edit.back-btn')
                 </a>
@@ -40,8 +40,8 @@
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
 
                 {{--Content --}}
-                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                         @lang('admin::app.cms.create.description')
                     </p>
 
@@ -70,8 +70,8 @@
                 </div>
 
                 {{-- SEO Input Fields --}}
-                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                         @lang('admin::app.cms.create.seo')
                     </p>
 
@@ -173,7 +173,7 @@
                 <x-admin::accordion>
                     <x-slot:header>
                         <div class="flex items-center justify-between">
-                            <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                            <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                                 @lang('admin::app.cms.create.general')
                             </p>
                         </div>
@@ -204,7 +204,7 @@
                             </x-admin::form.control-group>
 
                             {{-- Select Channels --}}
-                            <p class="required block leading-[24px] text-gray-800 font-medium">
+                            <p class="required block leading-[24px] text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.cms.create.channels')
                             </p>
 

@@ -20,7 +20,7 @@
     <x-admin::modal ref="customerEditModal">
         <x-slot:header>
             <!-- Modal Header -->
-            <p class="text-[18px] text-gray-800 font-bold">
+            <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.customers.customers.edit.title')
             </p>    
         </x-slot:header>
@@ -29,7 +29,7 @@
             <!-- Modal Content -->
             {!! view_render_event('bagisto.admin.customers.edit.before') !!}
 
-            <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
                 <div class="flex gap-[16px] max-sm:flex-wrap">
                     <!--First Name -->
                     <x-admin::form.control-group class="w-full mb-[10px]">
@@ -226,7 +226,7 @@
 
                         <x-admin::form.control-group.label 
                             for="status"
-                            class="text-gray-600 font-semibold cursor-pointer"
+                            class="text-gray-600 dark:text-gray-300  font-semibold cursor-pointer"
                         >
                             @lang('admin::app.customers.customers.edit.status')
                         </x-admin::form.control-group.label>
@@ -251,7 +251,7 @@
 
                         <x-admin::form.control-group.label 
                             for="isSuspended"
-                            class="text-gray-600 font-semibold cursor-pointer"
+                            class="text-gray-600 dark:text-gray-300  font-semibold cursor-pointer"
                         >
                             @lang('admin::app.customers.customers.edit.suspended')
                         </x-admin::form.control-group.label>

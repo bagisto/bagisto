@@ -7,15 +7,15 @@
 @pushOnce('scripts')
     {{-- Variations Template --}}
     <script type="text/x-template" id="v-product-variations-template">
-        <div class="relative bg-white rounded-[4px] box-shadow">
+        <div class="relative bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
             <!-- Panel Header -->
             <div class="flex flex-wrap gap-[10px] justify-between mb-[10px] p-[16px]">
                 <div class="flex flex-col gap-[8px]">
-                    <p class="text-[16px] text-gray-800 font-semibold">
+                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.products.edit.types.configurable.title')
                     </p>
 
-                    <p class="text-[12px] text-gray-500 font-medium">
+                    <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
                         @lang('admin::app.catalog.products.edit.types.configurable.info')
                     </p>
                 </div>
@@ -93,14 +93,14 @@
                     <x-admin::modal ref="variantCreateModal">
                         <x-slot:header>
                             <!-- Modal Header -->
-                            <p class="text-[18px] text-gray-800 font-bold">
+                            <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.catalog.products.edit.types.configurable.create.title')
                             </p>
                         </x-slot:header>
         
                         <x-slot:content>
                             <!-- Modal Content -->
-                            <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
                                 <x-admin::form.control-group
                                     v-for='(attribute, index) in superAttributes'
                                 >
@@ -111,7 +111,7 @@
                                     <v-field
                                         as="select"
                                         :name="attribute.code"
-                                        class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400"
+                                        class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                         :class="[errors[attribute.code] ? 'border border-red-500' : '']"
                                         rules="required"
                                         :label="attribute.admin_name"
@@ -176,7 +176,7 @@
                 <x-slot:toggle>
                     <button
                         type="button"
-                        class="flex items-center p-[6px] rounded-[6px] text-[12px] text-blue-600 font-semibold transition-all hover:bg-gray-100 focus:bg-gray-100 cursor-pointer"
+                        class="flex items-center p-[6px] rounded-[6px] text-[12px] text-blue-600 font-semibold transition-all hover:bg-gray-100 dark:hover:bg-gray-950  focus:bg-gray-100 cursor-pointer"
                     >
                         @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.select-variants')
 
@@ -188,7 +188,7 @@
                 <x-slot:content class="px-[0px] py-[15px]">
                     <template v-for="attribute in superAttributes">
                         <label
-                            class="flex gap-[10px] items-center px-5 py-2 text-[14px] text-gray-600 cursor-pointer hover:bg-gray-100 select-none"
+                            class="flex gap-[10px] items-center px-5 py-2 text-[14px] text-gray-600 dark:text-gray-300 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950  select-none"
                             :for="'attribute_' + attribute.id + '_option_' + option.id"
                             v-for="option in usedAttributeOptions(attribute)"
                         >
@@ -228,7 +228,7 @@
                 <x-slot:toggle>
                     <button
                         type="button"
-                        class="flex items-center p-[6px] rounded-[6px] text-[12px] text-blue-600 font-semibold transition-all hover:bg-gray-100 focus:bg-gray-100 cursor-pointer"
+                        class="flex items-center p-[6px] rounded-[6px] text-[12px] text-blue-600 font-semibold transition-all hover:bg-gray-100 dark:hover:bg-gray-950  focus:bg-gray-100 cursor-pointer"
                     >
                         @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.select-action')
 
@@ -280,7 +280,7 @@
                             >
                                 <form @submit="handleSubmit($event, update)">
                                     <template v-if="selectedType == 'editPrices'">
-                                        <div class="pb-[10px] border-b-[1px] border-gray-300">
+                                        <div class="pb-[10px] border-b-[1px] dark:border-gray-800  ">
                                             <div class="flex gap-[10px] items-center">
                                                 <x-admin::form.control-group class="flex-1 mb-0">
                                                     <x-admin::form.control-group.label>
@@ -314,7 +314,7 @@
                                     </template>
 
                                     <template v-if="selectedType == 'editInventories'">
-                                        <div class="pb-[10px] border-b-[1px] border-gray-300">
+                                        <div class="pb-[10px] border-b-[1px] dark:border-gray-800  ">
                                             <div class="grid grid-cols-3 gap-[16px] mb-[10px]">
                                                 <x-admin::form.control-group
                                                     class="mb-[0px]"
@@ -327,7 +327,7 @@
                                                     <v-field
                                                         type="text"
                                                         :name="'inventories[' + inventorySource.id + ']'"
-                                                        class="flex w-full min-h-[39px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400"
+                                                        class="flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                         :class="[errors['inventories[' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
                                                         rules="required|numeric|min:0"
                                                         :label="inventorySource.name"
@@ -354,7 +354,7 @@
                                     </template>
 
                                     <template v-if="selectedType == 'addImages'">
-                                        <div class="pb-[10px] border-b-[1px] border-gray-300">
+                                        <div class="pb-[10px] border-b-[1px] dark:border-gray-800  ">
                                             <v-media-images
                                                 name="images"
                                                 class="mb-[10px]"
@@ -371,7 +371,7 @@
                             </x-admin::form>
 
                             <div
-                                class="py-[16px] border-b-[1px] border-gray-300 last:border-b-0"
+                                class="py-[16px] border-b-[1px] dark:border-gray-800   last:border-b-0"
                                 :class="{'flex gap-[10px] justify-between items-center': selectedType == 'editPrices'}"
                                 v-for="variant in selectedVariants"
                             >
@@ -395,7 +395,7 @@
                                                 type="text"
                                                 :name="'variants[' + variant.id + ']'"
                                                 :value="variant.price"
-                                                class="flex w-full min-h-[39px] py-[6px] ltr:pl-[30px] rtl:pr-[30px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400"
+                                                class="flex w-full min-h-[39px] py-[6px] ltr:pl-[30px] rtl:pr-[30px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 :rules="{required: true, decimal: true, min_value: 0}"
                                                 label="@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.price')"
@@ -431,7 +431,7 @@
                                                     type="text"
                                                     :name="'variants[' + variant.id + '][' + inventorySource.id + ']'"
                                                     :value="variant.inventories[inventorySource.id]"
-                                                    class="flex w-full min-h-[39px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400"
+                                                    class="flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                     :class="[errors['variants[' + variant.id + '][' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
                                                     rules="required|numeric|min:0"
                                                     :label="inventorySource.name"
@@ -526,7 +526,7 @@
                 <!-- Image -->
                 <div
                     class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px] overflow-hidden"
-                    :class="{'border border-dashed border-gray-300': ! variant.images.length}"
+                    :class="{'border border-dashed dark:border-gray-800  ': ! variant.images.length}"
                 >
                     <template v-if="! variant.images.length">
                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
@@ -544,12 +544,12 @@
                 <!-- Details -->
                 <div class="grid gap-[6px] place-content-start">
                     <p
-                        class="text-[16x] text-gray-800 font-semibold"
+                        class="text-[16x] text-gray-800 dark:text-white font-semibold"
                         v-text="variant.name ?? 'N/A'"
                     >
                     </p>
 
-                    <p class="text-gray-600">
+                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                         @{{ "@lang('admin::app.catalog.products.edit.types.configurable.sku')".replace(':sku', variant.sku) }}
                     </p>
 
@@ -572,7 +572,7 @@
                             Default
                         </span>
 
-                        <p class="text-gray-600">
+                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                             <span
                                 class="after:content-[',_'] last:after:content-['']"
                                 v-for='(attribute, index) in attributes'
@@ -586,11 +586,11 @@
 
             <!-- Actions -->
             <div class="grid gap-[4px] place-content-start text-right">
-                <p class="text-gray-800 font-semibold">
+                <p class="text-gray-800 font-semibold dark:text-white">
                     @{{ $admin.formatPrice(variant.price) }}  
                 </p>
 
-                <p class="text-gray-800 font-semibold">
+                <p class="text-gray-800 font-semibold dark:text-white">
                     @{{ "@lang('admin::app.catalog.products.edit.types.configurable.qty')".replace(':qty', totalQty) }}
                 </p>
 
@@ -742,7 +742,7 @@
 
                                         <!-- Inventories -->
                                         <div class="grid mt-[20px]">
-                                            <p class="mb-[10px] text-gray-800 font-semibold">
+                                            <p class="mb-[10px] text-gray-800 dark:text-white font-semibold">
                                                 @lang('admin::app.catalog.products.edit.types.configurable.edit.quantities')
                                             </p>
 
@@ -759,7 +759,7 @@
                                                         type="text"
                                                         :name="'inventories[' + inventorySource.id + ']'"
                                                         v-model="variant.inventories[inventorySource.id]"
-                                                        class="flex w-full min-h-[39px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400"
+                                                        class="flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                         :class="[errors['inventories[' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
                                                         rules="numeric|min:0"
                                                         :label="inventorySource.name"
@@ -782,7 +782,7 @@
 
                                         <!-- Images -->
                                         <div class="mb-[10px]">
-                                            <p class="mb-[10px] text-gray-800 font-semibold">
+                                            <p class="mb-[10px] text-gray-800 dark:text-white font-semibold">
                                                 @lang('admin::app.catalog.products.edit.types.configurable.edit.images')
                                             </p>
 
@@ -795,7 +795,7 @@
 
                                         <!-- Actions -->
                                         <div
-                                            class="mt-[10px] text-[14px] text-gray-800 font-semibold"
+                                            class="mt-[10px] text-[14px] text-gray-800 dark:text-white font-semibold"
                                             v-if="typeof variant.id !== 'string'"
                                         >
                                             @lang('admin::app.catalog.products.edit.types.configurable.edit.edit-info')

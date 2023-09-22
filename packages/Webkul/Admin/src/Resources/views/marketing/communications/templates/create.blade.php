@@ -6,7 +6,7 @@
     {{-- Input Form --}}
     <x-admin::form :action="route('admin.marketing.communications.email_templates.store')">
         <div class="flex justify-between items-center">
-            <p class="text-[20px] text-gray-800 font-bold">
+            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.marketing.communications.templates.create.title')
             </p>
 
@@ -14,7 +14,7 @@
                 {{-- Cancel Button --}}
                 <a
                     href="{{ route('admin.marketing.communications.email_templates.index') }}"
-                    class="transparent-button hover:bg-gray-200"
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
                 >
                     @lang('admin::app.marketing.communications.templates.create.back-btn')
                 </a>
@@ -34,7 +34,7 @@
             {{-- Left sub-component --}}
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                 {{--Content --}}
-                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
                     <div class="mb-[10px]">
                         {{-- Template Textarea --}}
                         <x-admin::form.control-group>
@@ -66,11 +66,11 @@
             {{-- Right sub-component --}}
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
                 {{-- General --}}
-                <div class="bg-white rounded-[4px] box-shadow">
+                <div class="bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
                     <x-admin::accordion>
                         <x-slot:header>
                             <div class="flex items-center justify-between">
-                                <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                                     @lang('admin::app.marketing.communications.templates.create.general')
                                 </p>
                             </div>

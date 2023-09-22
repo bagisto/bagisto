@@ -1,7 +1,7 @@
 
 <v-create-shipment>
     <div
-        class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
+        class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800  hover:rounded-[6px]"
     >
         <span class="icon-ship text-[24px]"></span> 
 
@@ -12,7 +12,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-create-shipment-template">
     <div
-        class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
+        class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800  hover:rounded-[6px]"
         @click="$refs.shipment.open()"
     >
         <span class="icon-ship text-[24px]"></span> 
@@ -132,7 +132,7 @@
                                                 src="{{ $item->product?->base_image_url }}"
                                             >
                                         @else
-                                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px]">
+                                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed dark:border-gray-800   rounded-[4px]">
                                                 <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                                 
                                                 <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
@@ -143,12 +143,12 @@
         
                                         <div class="grid gap-[6px] place-content-start">
                                             <!-- Item Name -->
-                                            <p class="text-[16x] text-gray-800 font-semibold">
+                                            <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                                 {{ $item->name }}
                                             </p>
         
                                             <div class="flex flex-col gap-[6px] place-items-start">
-                                                <p class="text-gray-600">
+                                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                                     @lang('admin::app.sales.shipments.create.amount-per-unit', [
                                                         'amount' => core()->formatBasePrice($item->base_price),
                                                         'qty'    => $item->qty_ordered,
@@ -157,7 +157,7 @@
         
                                                 <!--Additional Attributes -->
                                                 @if (isset($item->additional['attributes']))
-                                                    <p class="text-gray-600">
+                                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                                         @foreach ($item->additional['attributes'] as $attribute)
                                                             {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
                                                         @endforeach
@@ -165,12 +165,12 @@
                                                 @endif
 
                                                 <!-- Item SKU -->
-                                                <p class="text-gray-600">
+                                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                                     @lang('admin::app.sales.shipments.create.sku', ['sku' => $item->sku])
                                                 </p>
 
                                                 <!--Item Status -->
-                                                <p class="text-gray-600">
+                                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                                     {{ $item->qty_ordered ? trans('admin::app.sales.shipments.create.item-ordered', ['qty_ordered' => $item->qty_ordered]) : '' }}
 
                                                     {{ $item->qty_invoiced ? trans('admin::app.sales.shipments.create.item-invoice', ['qty_invoiced' => $item->qty_invoiced]) : '' }}
@@ -191,12 +191,12 @@
                                     <div class="flex gap-[10px] justify-between pb-[10px] mt-[10px] border-b-[1px] border-slate-300">
                                         <div class="grid gap-[10px]">
                                             <!--Inventory Source -->
-                                            <p class="text-[16x] text-gray-800 font-semibold">
+                                            <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                                 {{ $inventorySource->name }}
                                             </p>
 
                                             <!-- Available Quantity -->
-                                            <p class="text-gray-600">
+                                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                                 @lang('admin::app.sales.shipments.create.qty-available') :                  
 
                                                 @php

@@ -4,7 +4,7 @@
         <div v-if="column.type === 'date_range'">
             <div class="flex items-center justify-between">
                 <p
-                    class="text-[14px] font-medium leading-[24px] text-gray-800"
+                    class="text-[14px] font-medium leading-[24px] dark:text-white"
                     v-text="column.label"
                 >
                 </p>
@@ -24,7 +24,7 @@
 
             <div class="mt-[5px] grid grid-cols-2 gap-[5px]">
                 <p
-                    class="cursor-pointer rounded-[6px] border border-gray-300 px-[8px] py-[6px] text-center text-[14px] font-medium leading-[24px] text-gray-600 transition-all hover:border-gray-400"
+                    class="cursor-pointer rounded-[6px] border dark:border-gray-800   px-[8px] py-[6px] text-center text-[14px] font-medium leading-[24px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                     v-for="option in column.options"
                     v-text="option.label"
                     @click="filterPage(
@@ -38,7 +38,7 @@
                 <x-admin::flat-picker.date ::allow-input="false">
                     <input
                         value=""
-                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                         :type="column.input_type"
                         :name="`${column.index}[from]`"
                         :placeholder="column.label"
@@ -55,7 +55,7 @@
                     <input
                         type="column.input_type"
                         value=""
-                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                         :name="`${column.index}[to]`"
                         :placeholder="column.label"
                         :ref="`${column.index}[from]`"
@@ -88,7 +88,7 @@
         <div v-else-if="column.type === 'datetime_range'">
             <div class="flex items-center justify-between">
                 <p
-                    class="text-[14px] font-medium leading-[24px] text-gray-800"
+                    class="text-[14px] font-medium leading-[24px]  dark:text-white"
                     v-text="column.label"
                 >
                 </p>
@@ -108,7 +108,7 @@
 
             <div class="my-[16px] grid grid-cols-2 gap-[5px]">
                 <p
-                    class="cursor-pointer rounded-[6px] border border-gray-300 px-[8px] py-[6px] text-center text-[14px] font-medium leading-[24px] text-gray-600 transition-all hover:border-gray-400"
+                    class="cursor-pointer rounded-[6px] border dark:border-gray-800   px-[8px] py-[6px] text-center text-[14px] font-medium leading-[24px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                     v-for="option in column.options"
                     v-text="option.label"
                     @click="filterPage(
@@ -122,7 +122,7 @@
                 <x-admin::flat-picker.datetime ::allow-input="false">
                     <input
                         value=""
-                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                         :type="column.input_type"
                         :name="`${column.index}[from]`"
                         :placeholder="column.label"
@@ -139,7 +139,7 @@
                     <input
                         type="column.input_type"
                         value=""
-                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                         :name="`${column.index}[to]`"
                         :placeholder="column.label"
                         :ref="`${column.index}[from]`"
@@ -172,7 +172,7 @@
         <div v-else>
             <div class="flex items-center justify-between">
                 <p
-                    class="text-[14px] font-medium leading-[24px] text-gray-800"
+                    class="text-[14px] font-medium leading-[24px]  dark:text-white"
                     v-text="column.label"
                 >
                 </p>
@@ -193,7 +193,7 @@
             <div class="mb-[8px] mt-[5px] grid">
                 <input
                     type="text"
-                    class="block w-full rounded-[6px] border border-gray-300 bg-white px-[8px] py-[6px] text-[14px] leading-[24px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                    class="block w-full rounded-[6px] border dark:border-gray-800   bg-white dark:bg-gray-900  px-[8px] py-[6px] text-[14px] leading-[24px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400"
                     :name="column.index"
                     :placeholder="column.label"
                     @keyup.enter="filterPage($event, column)"

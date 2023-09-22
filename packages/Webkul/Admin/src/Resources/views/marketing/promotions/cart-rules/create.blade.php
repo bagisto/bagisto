@@ -18,7 +18,7 @@
                     enctype="multipart/form-data"
                 >
                     <div class="flex gap-[16px] justify-between items-center mt-3 max-sm:flex-wrap">
-                        <p class="text-[20px] text-gray-800 font-bold">
+                        <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                             @lang('admin::app.marketing.promotions.cart-rules.create.title')
                         </p>
                 
@@ -26,7 +26,7 @@
                             <!-- Cancel button -->
                             <a
                                 href="{{ route('admin.marketing.promotions.cart_rules.index') }}"
-                                class="transparent-button hover:bg-gray-200"
+                                class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
                             >
                                 @lang('admin::app.account.edit.back-btn')
                             </a>
@@ -46,8 +46,8 @@
                         <!-- Left sub-component -->
                         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                             <!-- General -->
-                            <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-                                <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                            <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                                     @lang('admin::app.marketing.promotions.cart-rules.create.general')
                                 </p>
 
@@ -83,7 +83,7 @@
                                         name="description"
                                         :value="old('description')"
                                         id="description"
-                                        class="text-gray-600"
+                                        class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
                                         :label="trans('admin::app.marketing.promotions.cart-rules.create.description')"
                                         :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.description')"
                                     >
@@ -226,9 +226,9 @@
                             </div>
                 
                             <!-- Conditions -->
-                            <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                            <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
                                 <div class="flex gap-[16px] items-center justify-between">
-                                    <p class="text-[16px] text-gray-800 font-semibold">
+                                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                         @lang('admin::app.marketing.promotions.cart-rules.create.conditions')
                                     </p>
 
@@ -268,7 +268,7 @@
                                 </v-cart-rule-condition-item>
                       
                                 <div 
-                                    class="max-w-max px-[12px] py-[5px] mt-[15px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                    class="max-w-max px-[12px] py-[5px] mt-[15px] bg-white dark:bg-gray-900  border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                     @click="addCondition"
                                 >
                                     @lang('admin::app.marketing.promotions.cart-rules.create.add-condition')
@@ -277,9 +277,9 @@
                             </div>
 
                             <!-- Action -->
-                            <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                            <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
                                 <div class="grid gap-[6px]">
-                                    <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                                    <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                                         @lang('admin::app.marketing.promotions.cart-rules.create.actions')
                                     </p>
                 
@@ -530,7 +530,7 @@
                             <x-admin::accordion>
                                 <x-slot:header>
                                     <div class="flex items-center justify-between p-[6px]">
-                                        <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                                        <p class="text-gray-600 dark:text-gray-300  text-[16px] p-[10px] font-semibold">
                                             @lang('admin::app.marketing.promotions.cart-rules.create.settings')
                                         </p>
                                     </div>
@@ -560,7 +560,7 @@
 
                                     <!-- channels -->
                                     <div class="mb-[10px]">
-                                        <p class="required block leading-[24px] text-gray-800 font-medium">
+                                        <p class="required block leading-[24px] text-gray-800 dark:text-white font-medium">
                                             @lang('admin::app.marketing.promotions.cart-rules.create.channels')
                                         </p>
                                         
@@ -595,7 +595,7 @@
     
                                     <!-- Customer Grous -->
                                     <div class="mb-[10px]">
-                                        <p class="required block leading-[24px] text-gray-800 font-medium">
+                                        <p class="required block leading-[24px] text-gray-800 dark:text-white font-medium">
                                             @lang('admin::app.marketing.promotions.cart-rules.create.customer-groups')
                                         </p>
                                         
@@ -630,7 +630,7 @@
 
                                     <!-- Status -->
                                     <div class="mb-[10px]">
-                                        <p class="block leading-[24px] text-gray-800 font-medium">
+                                        <p class="block leading-[24px] text-gray-800 dark:text-white font-medium">
                                             @lang('admin::app.marketing.promotions.cart-rules.create.status')
                                         </p>
     
@@ -666,7 +666,7 @@
                             <x-admin::accordion>
                                 <x-slot:header>
                                     <div class="flex items-center justify-between p-[6px]">
-                                        <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                                        <p class="text-gray-600 dark:text-gray-300  text-[16px] p-[10px] font-semibold">
                                             @lang('admin::app.marketing.promotions.cart-rules.create.marketing-time')
                                         </p>
                                     </div>
@@ -770,7 +770,7 @@
                     <select
                         :name="['conditions[' + index + '][attribute]']"
                         :id="['conditions[' + index + '][attribute]']"
-                        class="custom-select flex w-1/3 min:w-1/3 h-[40px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400 ltr:pr-[40px] rtl:pl-[40px]"
+                        class="custom-select flex w-1/3 min:w-1/3 h-[40px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 ltr:pr-[40px] rtl:pl-[40px]"
                         v-model="condition.attribute"
                     >
                         <option value="">@lang('admin::app.marketing.promotions.cart-rules.create.choose-condition-to-add')</option>
@@ -790,7 +790,7 @@
 
                     <select 
                         :name="['conditions[' + index + '][operator]']"
-                        class="custom-select flex w-1/3 min:w-1/3 h-[40px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400 ltr:pr-[40px] rtl:pl-[40px]"
+                        class="custom-select flex w-1/3 min:w-1/3 h-[40px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 ltr:pr-[40px] rtl:pl-[40px]"
                         v-model="condition.operator"
                         v-if="matchedAttribute"
                     >
@@ -849,7 +849,7 @@
                                         type="text"
                                         v-bind="field"
                                         :class="{ 'border border-red-500': errorMessage }"
-                                        class="flex w-[289px] min:w-1/3 h-[40px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400 ltr:pr-[40px] rtl:pl-[40px]"
+                                        class="flex w-[289px] min:w-1/3 h-[40px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 ltr:pr-[40px] rtl:pl-[40px]"
                                     />
                                 </v-field>
                                 
@@ -864,7 +864,7 @@
                                 <input 
                                     type="date"
                                     :name="['conditions[' + index + '][value]']"
-                                    class="border w-[289px] py-2 px-3 appearance-none rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                                    class="border w-[289px] py-2 px-3 appearance-none rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                                     v-model="condition.value"
                                 />
                             </div>
@@ -873,7 +873,7 @@
                                 <input 
                                     type="datetime"
                                     :name="['conditions[' + index + '][value]']"
-                                    class="border w-full py-2 px-3 appearance-none rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                                    class="border w-full py-2 px-3 appearance-none rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                                     v-model="condition.value"
                                 />
                             </div>
@@ -881,7 +881,7 @@
                             <div v-if="matchedAttribute.type == 'boolean'">
                                 <select 
                                     :name="['conditions[' + index + '][value]']"
-                                    class="custom-select inline-flex gap-x-[4px] justify-between items-center h-[40px] w-[196px] max-w-[196px] py-[6px] ltr:pl-[12px] rtl:pr-[12px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                                    class="custom-select inline-flex gap-x-[4px] justify-between items-center h-[40px] w-[196px] max-w-[196px] py-[6px] ltr:pl-[12px] rtl:pr-[12px] px-[12px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
                                     v-model="condition.value"
                                 >
                                     <option value="1">
@@ -897,7 +897,7 @@
                             <div v-if="matchedAttribute.type == 'select' || matchedAttribute.type == 'radio'">
                                 <select
                                     :name="['conditions[' + index + '][value]']"
-                                    class="custom-select inline-flex gap-x-[4px] justify-between items-center h-[40px] w-[196px] max-w-[196px] py-[6px] ltr:pl-[12px] rtl:pr-[12px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                                    class="custom-select inline-flex gap-x-[4px] justify-between items-center h-[40px] w-[196px] max-w-[196px] py-[6px] ltr:pl-[12px] rtl:pr-[12px] px-[12px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
                                     v-if="matchedAttribute.key != 'catalog|state'"
                                     v-model="condition.value"
                                 >
@@ -911,7 +911,7 @@
 
                                 <select 
                                     :name="['conditions[' + index + '][value]']"
-                                    class="custom-select inline-flex gap-x-[4px] justify-between items-center h-[40px] w-[196px] max-w-[196px] py-[6px] ltr:pl-[12px] rtl:pr-[12px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                                    class="custom-select inline-flex gap-x-[4px] justify-between items-center h-[40px] w-[196px] max-w-[196px] py-[6px] ltr:pl-[12px] rtl:pr-[12px] px-[12px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
                                     v-model="condition.value" 
                                     v-else
                                 >
@@ -932,7 +932,7 @@
                             <div v-if="matchedAttribute.type == 'multiselect' || matchedAttribute.type == 'checkbox'">
                                 <select 
                                     :name="['conditions[' + index + '][value][]']"
-                                    class="custom-select inline-flex gap-x-[4px] justify-between items-center h-[40px] w-[196px] max-w-[196px] py-[6px] ltr:pl-[12px] rtl:pr-[12px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                                    class="custom-select inline-flex gap-x-[4px] justify-between items-center h-[40px] w-[196px] max-w-[196px] py-[6px] ltr:pl-[12px] rtl:pr-[12px] px-[12px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
                                     v-model="condition.value"
                                     multiple
                                 >
@@ -949,7 +949,7 @@
                 </div>
 
                 <span 
-                    class="icon-delete max-h-[36px] max-w-[36px] text-[24px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 max-sm:place-self-center"
+                    class="icon-delete max-h-[36px] max-w-[36px] text-[24px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950  max-sm:place-self-center"
                     @click="removeCondition"
                 >
                 </span>

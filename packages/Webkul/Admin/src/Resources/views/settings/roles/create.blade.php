@@ -13,7 +13,7 @@
             <div>
                 <x-admin::form :action="route('admin.settings.roles.store')">
                     <div class="flex justify-between items-center">
-                        <p class="text-[20px] text-gray-800 font-bold">
+                        <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                             @lang('admin::app.settings.roles.create.title')
                         </p>
 
@@ -21,7 +21,7 @@
                             <!-- Cancel Button -->
                             <a
                                 href="{{ route('admin.settings.roles.index') }}"
-                                class="transparent-button hover:bg-gray-200"
+                                class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
                             >
                                 @lang('admin::app.settings.roles.create.back-btn')
                             </a>
@@ -41,8 +41,8 @@
                         <!-- Left sub-component -->
                         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                             <!-- Access Control Input Fields -->
-                            <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-                                <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                            <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                                     @lang('admin::app.settings.roles.create.access-control')
                                 </p>
 
@@ -91,7 +91,7 @@
                             <x-admin::accordion>
                                 <x-slot:header>
                                     <div class="flex items-center justify-between p-[6px]">
-                                        <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                        <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                                             @lang('admin::app.settings.roles.create.general')
                                         </p>
                                     </div>

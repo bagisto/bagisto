@@ -15,7 +15,7 @@
         enctype="multipart/form-data"
     >
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-            <p class="text-[20px] text-gray-800 font-bold">
+            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.cms.edit.title')
             </p>
 
@@ -23,7 +23,7 @@
                 <!-- Cancel Button -->
                 <a
                     href="{{ route('admin.cms.index') }}"
-                    class="transparent-button hover:bg-gray-200"
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
                 >
                     @lang('admin::app.cms.edit.back-btn')
                 </a>
@@ -57,7 +57,7 @@
                     <x-slot:toggle>
                         <button
                             type="button"
-                            class="transparent-button px-[4px] py-[6px] hover:bg-gray-200 focus:bg-gray-200"
+                            class="transparent-button px-[4px] py-[6px] hover:bg-gray-200 dark:hover:bg-gray-800  focus:bg-gray-200"
                         >
                             <span class="icon-language text-[24px] "></span>
 
@@ -74,7 +74,7 @@
                         @foreach (core()->getAllLocales() as $locale)
                             <a
                                 href="?{{ Arr::query(['locale' => $locale->code]) }}"
-                                class="flex gap-[10px] px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100 {{ $locale->code == $currentLocale->code ? 'bg-gray-100' : ''}}"
+                                class="flex gap-[10px] px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white   {{ $locale->code == $currentLocale->code ? 'bg-gray-100' : ''}}"
                             >
                                 {{ $locale->name }}
                             </a>
@@ -90,8 +90,8 @@
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
 
                 {{--Content --}}
-                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                         @lang('admin::app.cms.edit.description')
                     </p>
 
@@ -120,8 +120,8 @@
                 </div>
 
                 {{-- SEO Input Fields --}}
-                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                         @lang('admin::app.cms.edit.seo')
                     </p>
 
@@ -182,7 +182,7 @@
                                 name="{{$currentLocale->code}}[meta_keywords]"
                                 :value="old($currentLocale->code)['meta_keywords'] ?? ($page->translate($currentLocale->code)['meta_keywords'] ?? '')"
                                 id="meta_keywords"
-                                class="text-gray-600"
+                                class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
                                 :label="trans('admin::app.cms.edit.meta-keywords')"
                                 :placeholder="trans('admin::app.cms.edit.meta-keywords')"
                             >
@@ -204,7 +204,7 @@
                                 name="{{$currentLocale->code}}[meta_description]"
                                 :value="old($currentLocale->code)['meta_description'] ?? ($page->translate($currentLocale->code)['meta_description'] ?? '')"
                                 id="meta_description"
-                                class="text-gray-600"
+                                class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
                                 :label="trans('admin::app.cms.edit.meta-description')"
                                 :placeholder="trans('admin::app.cms.edit.meta-description')"
                             >
@@ -225,7 +225,7 @@
                 <x-admin::accordion>
                     <x-slot:header>
                         <div class="flex items-center justify-between">
-                            <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                            <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                                 @lang('admin::app.cms.create.general')
                             </p>
                         </div>
@@ -256,7 +256,7 @@
                             </x-admin::form.control-group>
 
                             {{-- Select Channels --}}
-                            <p class="required block leading-[24px] text-gray-800 font-medium">
+                            <p class="required block leading-[24px] text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.cms.create.channels')
                             </p>
 

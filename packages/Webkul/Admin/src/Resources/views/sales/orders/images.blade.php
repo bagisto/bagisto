@@ -18,7 +18,7 @@
                         src="{{ $item->product?->base_image_url }}"
                     >
                 @else
-                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px]">
+                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed dark:border-gray-800   rounded-[4px]">
                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                         
                         <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
@@ -39,7 +39,7 @@
         @if ($restCount >= 1)
             <a href="{{ route('admin.sales.orders.view', $order->id) }}">
                 <div class="flex items-center w-[65px] h-[65px] bg-gray-50 rounded-[4px]">
-                    <p class="text-[12px] text-gray-600 text-center font-bold px-[6px] py-[6px]">{{ $restCount }}+ More Products</p>
+                    <p class="text-[12px] text-gray-600 dark:text-gray-300 text-center font-bold px-[6px] py-[6px]">{{ $restCount }}+ More Products</p>
                 </div>
             </a>
         @endif

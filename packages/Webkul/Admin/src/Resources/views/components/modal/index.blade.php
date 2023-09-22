@@ -71,14 +71,14 @@
                     v-if="isOpen"
                 >
                     <div class="flex min-h-full items-end justify-center p-4 sm:items-center sm:p-0">
-                        <div class="w-full max-w-[568px] z-[999] absolute ltr:left-[50%] rtl:right-[50%] top-[50%] rounded-lg bg-white box-shadow max-md:w-[90%] ltr:-translate-x-[50%] rtl:translate-x-[50%] -translate-y-[50%]">
-                            <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
+                        <div class="w-full max-w-[568px] z-[999] absolute ltr:left-[50%] rtl:right-[50%] top-[50%] rounded-lg bg-white dark:bg-gray-900  box-shadow max-md:w-[90%] ltr:-translate-x-[50%] rtl:translate-x-[50%] -translate-y-[50%]">
+                            <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] dark:border-gray-800  ">
                                 <slot name="header">
                                     Default Header
                                 </slot>
 
                                 <span
-                                    class="icon-cancel-1 text-[30px] cursor-pointer hover:bg-gray-100 hover:rounded-[6px]"
+                                    class="icon-cancel-1 text-[30px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950  hover:rounded-[6px]"
                                     @click="toggle"
                                 >
                                 </span>

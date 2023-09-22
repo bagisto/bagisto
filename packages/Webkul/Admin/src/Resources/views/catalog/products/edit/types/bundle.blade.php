@@ -10,15 +10,15 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-bundle-options-template">
-        <div class="relative bg-white rounded-[4px] box-shadow">
+        <div class="relative bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
             <!-- Panel Header -->
             <div class="flex gap-[20px] justify-between mb-[10px] p-[16px]">
                 <div class="flex flex-col gap-[8px]">
-                    <p class="text-[16px] text-gray-800 font-semibold">
+                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.products.edit.types.bundle.title')
                     </p>
 
-                    <p class="text-[12px] text-gray-500 font-medium">
+                    <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
                         @lang('admin::app.catalog.products.edit.types.bundle.info')
                     </p>
                 </div>
@@ -59,7 +59,7 @@
                 <!-- Placeholder Image -->
                 <img
                     src="{{ bagisto_asset('images/icon-options.svg') }}"
-                    class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
+                    class="w-[80px] h-[80px] border border-dashed dark:border-gray-800   rounded-[4px]"
                 />
 
                 <!-- Add Variants Information -->
@@ -91,14 +91,14 @@
                     <x-admin::modal ref="updateCreateOptionModal">
                         <x-slot:header>
                             <!-- Modal Header -->
-                            <p class="text-[18px] text-gray-800 font-bold">
+                            <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.catalog.products.edit.types.bundle.update-create.title')
                             </p>
                         </x-slot:header>
         
                         <x-slot:content>
                             <!-- Modal Content -->
-                            <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.products.edit.types.bundle.update-create.name')
@@ -209,13 +209,13 @@
             <div class="flex gap-[20px] justify-between mb-[10px] p-[16px]">
                 <div class="flex flex-col gap-[8px]">
                     <p
-                        class="text-[16px] text-gray-800 font-semibold"
+                        class="text-[16px] text-gray-800 dark:text-white font-semibold"
                         :class="{'required': option.is_required}"
                     >
                         @{{ (index + 1) + '. ' + option.label + ' - ' + types[option.type].title }}
                     </p>
 
-                    <p class="text-[12px] text-gray-500 font-medium">
+                    <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
                         @{{ types[option.type].info }}
                     </p>
                 </div>
@@ -262,7 +262,7 @@
                             <!-- Information -->
                             <div class="flex gap-[10px]">
                                 <!-- Drag Icon -->
-                                <i class="icon-drag text-[20px] text-gray-600 transition-all pointer-events-none"></i>
+                                <i class="icon-drag text-[20px] text-gray-600 dark:text-gray-300 transition-all pointer-events-none"></i>
 
                                 <!-- Is Default Option -->
                                 <div>
@@ -285,7 +285,7 @@
                                 </div>
                                 
                                 <!-- Image -->
-                                <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                                <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed dark:border-gray-800   rounded-[4px] overflow-hidden">
                                     <template v-if="! element.product.images.length">
                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                     </template>
@@ -299,11 +299,11 @@
 
                                 <!-- Details -->
                                 <div class="grid gap-[6px] place-content-start">
-                                    <p class="text-[16x] text-gray-800 font-semibold">
+                                    <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                         @{{ element.product.name }}
                                     </p>
 
-                                    <p class="text-gray-600">
+                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                         @{{ "@lang('admin::app.catalog.products.edit.types.bundle.option.sku')".replace(':sku', element.product.sku) }}
                                     </p>
                                 </div>
@@ -311,7 +311,7 @@
 
                             <!-- Actions -->
                             <div class="grid gap-[4px] place-content-start text-right">
-                                <p class="text-gray-800 font-semibold">
+                                <p class="text-gray-800 font-semibold dark:text-white">
                                     @{{ $admin.formatPrice(element.product.price) }}    
                                 </p>
                                 
@@ -337,7 +337,7 @@
                                         type="text"
                                         :name="'bundle_options[' + option.id + '][products][' + element.id + '][qty]'"
                                         v-model="element.qty"
-                                        class="flex w-[86px] min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                                        class="flex w-[86px] min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                                         :class="[errors['bundle_options[' + option.id + '][products][' + element.id + '][qty]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         rules="required|numeric|min_value:1"
                                     ></v-field>

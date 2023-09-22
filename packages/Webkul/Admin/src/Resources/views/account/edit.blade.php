@@ -10,7 +10,7 @@
         method="PUT"
     >
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-            <p class="text-[20px] text-gray-800 font-bold">
+            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.account.edit.title')
             </p>
 
@@ -18,7 +18,7 @@
                  <!-- Cancel Button -->
                 <a
                     href="{{ route('admin.dashboard.index') }}"
-                    class="transparent-button hover:bg-gray-200"
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
                 >
                     @lang('admin::app.account.edit.back-btn')
                 </a>
@@ -40,8 +40,8 @@
              <!-- Left sub Component -->
              <div class="flex flex-col gap-[8px] flex-1">
                  <!-- General -->
-                 <div class="p-[16px] bg-white box-shadow rounded-[4px]">
-                    <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                 <div class="p-[16px] bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
+                    <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.account.edit.general')
                     </p>
 
@@ -108,7 +108,7 @@
              <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-md:w-full">
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                        <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                             @lang('admin::app.account.edit.change-password')
                         </p>
                     </x-slot:header>

@@ -23,7 +23,7 @@
             >
                 <!-- actions buttons -->
                 <div class="flex justify-between items-center">
-                    <p class="text-[20px] text-gray-800 font-bold">
+                    <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                         @lang('admin::app.catalog.attributes.create.title')
                     </p>
         
@@ -31,7 +31,7 @@
                         <!-- Cancel Button -->
                         <a
                             href="{{ route('admin.catalog.attributes.index') }}"
-                            class="transparent-button hover:bg-gray-200"
+                            class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
                         >
                             @lang('admin::app.catalog.attributes.create.back-btn')
                         </a>
@@ -51,8 +51,8 @@
                     <!-- Left sub Component -->
                     <div class="flex flex-col gap-[8px] flex-1">
                         <!-- Label -->
-                        <div class="p-[16px] bg-white box-shadow rounded-[4px]">
-                            <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                        <div class="p-[16px] bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
+                            <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @lang('admin::app.catalog.attributes.create.label')
                             </p>
 
@@ -103,7 +103,7 @@
 
                         <!-- Options -->
                         <div 
-                            class="p-[16px] bg-white box-shadow rounded-[4px]"
+                            class="p-[16px] bg-white dark:bg-gray-900  box-shadow rounded-[4px]"
                             v-if="swatchAttribute && (
                                     attributeType == 'select' 
                                     || attributeType == 'multiselect' 
@@ -112,7 +112,7 @@
                                 )"
                         >
                             <div class="flex justify-between items-center mb-3">
-                                <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                                <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.catalog.attributes.create.title')
                                 </p>
 
@@ -185,7 +185,7 @@
 
                                             <label
                                                 for="empty_option"
-                                                class="text-[14px] text-gray-600 font-semibold cursor-pointer"
+                                                class="text-[14px] text-gray-600 dark:text-gray-300 font-semibold cursor-pointer"
                                             >
                                                 @lang('admin::app.catalog.attributes.create.create-empty-option')
                                             </label>
@@ -317,13 +317,13 @@
                                                     <!-- Actions button -->
                                                     <x-admin::table.td class="!px-0">
                                                         <span
-                                                            class="icon-edit p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 max-sm:place-self-center"
+                                                            class="icon-edit p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950  max-sm:place-self-center"
                                                             @click="editModal(element)"
                                                         >
                                                         </span> 
 
                                                         <span
-                                                            class="icon-delete p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 max-sm:place-self-center"
+                                                            class="icon-delete p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950  max-sm:place-self-center"
                                                             @click="removeOption(element.id)"
                                                         >
                                                         </span> 
@@ -371,9 +371,9 @@
                     <!-- Right sub-component -->
                     <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
                         <!-- General -->
-                        <div class="bg-white box-shadow rounded-[4px]">
+                        <div class="bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
                             <div class="flex justify-between items-center p-[6px]">
-                                <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                                     @lang('admin::app.catalog.attributes.create.general')
                                 </p>
                             </div>
@@ -399,7 +399,7 @@
                                             id="code"
                                             v-bind="field"
                                             :class="[errors['{{ 'code' }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                            class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                            class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                             placeholder="{{ trans('admin::app.catalog.attributes.create.code') }}"
                                             v-code
                                         >
@@ -481,7 +481,7 @@
                         <!-- Validations -->
                         <x-admin::accordion>
                             <x-slot:header>
-                                <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                                     @lang('admin::app.catalog.attributes.create.validations')
                                 </p>
                             </x-slot:header>
@@ -592,7 +592,7 @@
                         <!-- Configurations -->
                         <x-admin::accordion>
                             <x-slot:header>
-                                <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                                     @lang('admin::app.catalog.attributes.create.configuration')
                                 </p>
                             </x-slot:header>
@@ -712,7 +712,7 @@
             
                                     <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"></span>
 
-                                    <div class="text-[14px] text-gray-600 font-semibold cursor-pointer">
+                                    <div class="text-[14px] text-gray-600 dark:text-gray-300 font-semibold cursor-pointer">
                                         @lang('admin::app.catalog.attributes.create.is-filterable')
                                     </div>
                                 </label>
@@ -737,7 +737,7 @@
                         ref="addOptionsRow"
                     >
                         <x-slot:header>
-                            <p class="text-[18px] text-gray-800 font-bold">
+                            <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.catalog.attributes.create.add-option')
                             </p>
                         </x-slot:header>
@@ -789,7 +789,7 @@
                                 </x-admin::form.control-group>
                             </div>
 
-                            <div class="grid grid-cols-3 gap-[16px] px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                            <div class="grid grid-cols-3 gap-[16px] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
                                 <!-- Hidden Id Input -->
                                 <x-admin::form.control-group.control
                                     type="hidden"

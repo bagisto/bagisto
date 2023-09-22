@@ -10,14 +10,14 @@
     >
         {{-- Page Header --}}
         <div class="flex justify-between items-center">
-            <p class="text-[20px] text-gray-800 font-bold">
+            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.catalog.families.edit.title')
             </p>
 
             <div class="flex gap-x-[10px] items-center">
                 <a
                     href="{{ route('admin.catalog.families.index') }}"
-                    class="transparent-button hover:bg-gray-200"
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
                 >
                     @lang('admin::app.catalog.families.edit.back-btn')
                 </a>
@@ -34,7 +34,7 @@
         {{-- Container --}}
         <div class="flex gap-[10px] mt-[14px]">
             {{-- Left Container --}}
-            <div class="flex flex-col gap-[8px] flex-1 bg-white rounded-[4px] box-shadow">
+            <div class="flex flex-col gap-[8px] flex-1 bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
                 <v-family-attributes>
                     <x-admin::shimmer.families.attributes-panel/>
                 </v-family-attributes>
@@ -43,14 +43,14 @@
             {{-- Right Container --}}
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
                 {{-- General Pannel --}}
-                <div class="bg-white rounded-[4px] box-shadow">
+                <div class="bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
                     {{-- Panel Header --}}
                     <div class="flex items-center justify-between p-[6px]">
-                        <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                        <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                             @lang('General')
                         </p>
 
-                        <span class="icon-arrow-up p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100"></span>
+                        <span class="icon-arrow-up p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950 "></span>
                     </div>
 
                     {{-- Panel Content --}}
@@ -112,11 +112,11 @@
                 <div class="flex gap-[10px] justify-between flex-wrap mb-[10px] p-[16px]">
                     <!-- Panel Header -->
                     <div class="flex flex-col gap-[8px]">
-                        <p class=" text-[16px] text-gray-800 font-semibold">
+                        <p class=" text-[16px] text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.catalog.families.edit.groups')
                         </p>
 
-                        <p class=" text-[12px] text-gray-500 font-medium">
+                        <p class=" text-[12px] text-gray-500 dark:text-gray-300 font-medium">
                             @lang('admin::app.catalog.families.edit.groups-info')
                         </p>
                     </div>
@@ -147,7 +147,7 @@
                     <div v-for="(groups, column) in columnGroups">
                         <!-- Attributes Groups Header -->
                         <div class="flex flex-col mb-[16px]">
-                            <p class="text-gray-600 font-semibold leading-[24px]">
+                            <p class="text-gray-600 dark:text-gray-300  font-semibold leading-[24px]">
                                 @{{
                                     column == 1
                                     ? "@lang('admin::app.catalog.families.edit.main-column')"
@@ -155,7 +155,7 @@
                                 }}
                             </p>
                             
-                            <p class="text-[12px] text-gray-800 font-medium ">
+                            <p class="text-[12px] text-gray-800 dark:text-white font-medium ">
                                 @lang('admin::app.catalog.families.edit.edit-group-info')
                             </p>
                         </div>
@@ -175,13 +175,13 @@
                                     <div class="flex items-center group">
                                         <!-- Toggle -->
                                         <i
-                                            class="icon-sort-down text-[20px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 group-hover:text-gray-800"
+                                            class="icon-sort-down text-[20px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950  group-hover:text-gray-800"
                                             @click="element.hide = ! element.hide"
                                         ></i>
 
                                         <!-- Group Name -->
                                         <div
-                                            class="group_node flex gap-[6px] max-w-max py-[6px] ltr:pr-[6px] rtl:pl-[6px] rounded-[4px] transition-all text-gray-600 group cursor-pointer"
+                                            class="group_node flex gap-[6px] max-w-max py-[6px] ltr:pr-[6px] rtl:pl-[6px] rounded-[4px] transition-all text-gray-600 dark:text-gray-300 group cursor-pointer"
                                             :class="{'bg-blue-600 text-white group-hover:[&>*]:text-white': selectedGroup.id == element.id}"
                                             @click="groupSelected(element)"
                                         >
@@ -202,7 +202,7 @@
                                             <input
                                                 type="text"
                                                 :name="'attribute_groups[' + element.id + '][name]'"
-                                                class="group_node text-[14px] !text-gray-600"
+                                                class="group_node text-[14px] !text-gray-600 dark:text-gray-300"
                                                 v-model="element.name"
                                                 v-show="editableGroup.id == element.id"
                                             />
@@ -234,7 +234,7 @@
                                         v-show="! element.hide"
                                     >
                                         <template #item="{ element, index }">
-                                            <div class="flex gap-[6px] max-w-max py-[6px] ltr:pr-[6px] rtl:pl-[6px] rounded-[4px] text-gray-600 group cursor-pointer">
+                                            <div class="flex gap-[6px] max-w-max py-[6px] ltr:pr-[6px] rtl:pl-[6px] rounded-[4px] text-gray-600 dark:text-gray-300 group cursor-pointer">
                                                 <i class="icon-drag text-[20px] transition-all group-hover:text-gray-700"></i>
 
                                                 <i
@@ -250,14 +250,14 @@
                                                 <input
                                                     type="hidden"
                                                     :name="'attribute_groups[' + element.group_id + '][custom_attributes][' + index + '][id]'"
-                                                    class="text-[14px] text-gray-600"
+                                                    class="text-[14px] text-gray-600 dark:text-gray-300"
                                                     v-model="element.id"
                                                 />
 
                                                 <input
                                                     type="hidden"
                                                     :name="'attribute_groups[' + element.group_id + '][custom_attributes][' + index + '][position]'"
-                                                    class="text-[14px] text-gray-600"
+                                                    class="text-[14px] text-gray-600 dark:text-gray-300"
                                                     :value="index + 1"
                                                 />
                                             </div>
@@ -272,11 +272,11 @@
                     <div class="">
                         <!-- Unassigned Attributes Header -->
                         <div class="flex flex-col mb-[16px]">
-                            <p class="text-gray-600 font-semibold leading-[24px]">
+                            <p class="text-gray-600 dark:text-gray-300  font-semibold leading-[24px]">
                                 @lang('admin::app.catalog.families.edit.unassigned-attributes')
                             </p>
 
-                            <p class="text-[12px] text-gray-800 font-medium ">
+                            <p class="text-[12px] text-gray-800 dark:text-white font-medium ">
                                 @lang('admin::app.catalog.families.edit.unassigned-attributes-info')
                             </p>
                         </div>
@@ -292,7 +292,7 @@
                             group="attributes"
                         >
                             <template #item="{ element }">
-                                <div class="flex gap-[6px] max-w-max py-[6px] ltr:pr-[6px] rtl:pl-[6px] rounded-[4px] text-gray-600 group cursor-pointer">
+                                <div class="flex gap-[6px] max-w-max py-[6px] ltr:pr-[6px] rtl:pl-[6px] rounded-[4px] text-gray-600 dark:text-gray-300 group cursor-pointer">
                                     <i class="icon-drag text-[20px] transition-all group-hover:text-gray-700"></i>
 
                                     <i class="icon-attribute text-[20px] transition-all group-hover:text-gray-700"></i>
@@ -313,13 +313,13 @@
                     <form @submit="handleSubmit($event, addGroup)">
                         <x-admin::modal ref="addGroupModal">
                             <x-slot:header>
-                                <p class="text-[18px] text-gray-800 font-bold">
+                                <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                     @lang('admin::app.catalog.families.edit.add-group-title')
                                 </p>
                             </x-slot:header>
 
                             <x-slot:content>
-                                <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.catalog.families.edit.name')

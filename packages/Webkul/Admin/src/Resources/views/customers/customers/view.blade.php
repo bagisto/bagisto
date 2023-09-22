@@ -6,7 +6,7 @@
 
     <div class="grid">
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-            <p class="text-[20px] text-gray-800 font-bold leading-[24px]">
+            <p class="text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
                 {{ $customer->first_name . " " . $customer->last_name }}
 
                 {{-- Customer Status --}}
@@ -31,7 +31,7 @@
             {{-- Back Button --}}
             <a
                 href="{{ route('admin.customers.customers.index') }}"
-                class="transparent-button hover:bg-gray-200"
+                class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
             >
                 @lang('admin::app.customers.customers.view.back-btn')
             </a>
@@ -46,7 +46,7 @@
         {{-- Account Delete button --}}
         @if (bouncer()->hasPermission('customers.customers.delete'))
             <div 
-                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
+                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800  hover:rounded-[6px]"
                 @click="$emitter.emit('open-confirm-modal', {
                     message: '@lang('admin::app.customers.customers.view.account-delete-confirmation')',
 
@@ -76,11 +76,11 @@
         {{-- Left Component --}}
         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
             {{-- Orders --}}
-            <div class=" bg-white rounded-[4px] box-shadow">
+            <div class=" bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
                 @if ($totalOrderCount = count($customer->orders))
                     <div class=" p-[16px] flex justify-between">
                         {{-- Total Order Count --}}
-                        <p class="text-[16px] text-gray-800 font-semibold">
+                        <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.customers.customers.view.orders', ['order_count' => $totalOrderCount])
                         </p>    
 
@@ -90,7 +90,7 @@
                                 ->sum('grand_total'));
                         @endphp
 
-                        <p class="text-[16px] text-gray-800 font-semibold">
+                        <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.customers.customers.view.total-revenue', ['revenue' =>  $revenue])
                         </p>
                     </div>
@@ -98,15 +98,15 @@
                     {{-- Order Details --}}
                     <div class="table-responsive grid w-full">
                         @foreach ($customer->orders as $order)
-                            <div class="flex justify-between items-center px-[16px] py-[16px] transition-all hover:bg-gray-50">
+                            <div class="flex justify-between items-center px-[16px] py-[16px] transition-all hover:bg-gray-50 dark:hover:bg-gray-950  ">
                                 <div class="row grid grid-cols-3 w-full">
                                     <div class="flex gap-[10px]">
                                         <div class="flex flex-col gap-[6px]">
-                                            <p class="text-[16px] text-gray-800 font-semibold">
+                                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                                 @lang('admin::app.customers.customers.view.increment-id', ['increment_id' => $order->increment_id])
                                             </p>
 
-                                            <p class="text-gray-600">
+                                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                                 {{ $order->created_at }}
                                             </p>
 
@@ -147,32 +147,32 @@
 
                                     <div class="flex flex-col gap-[6px]">
                                         {{-- Grand Total --}}
-                                        <p class="text-[16px] text-gray-800 font-semibold">
+                                        <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                             {{ core()->currency($order->grand_total ) }}
                                         </p>
 
                                         {{-- Payment methods --}}   
-                                        <p class="text-gray-600">
+                                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                             @lang('admin::app.customers.customers.view.pay-by', ['payment_method' => core()->getConfigData('sales.payment_methods.' . $order->payment->method . '.title')])
                                         </p>
 
                                         {{-- Channel Code --}}
-                                        <p class="text-gray-600">
+                                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                             {{ $order->channel->code }}
                                         </p>
                                     </div>
 
                                     {{-- Order Address Details --}}
                                     <div class="flex flex-col gap-[6px]">
-                                        <p class="text-[16px] text-gray-800">
+                                        <p class="text-[16px] text-gray-800 dark:text-white">
                                             {{ $order->billingAddress->name }}
                                         </p>
 
-                                        <p class="text-gray-600">
+                                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                             {{ $order->billingAddress->email }}
                                         </p>
 
-                                        <p class="text-gray-600">
+                                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                             @if($order->billingAddress->address1)
                                                 {{ $order->billingAddress->address1 }},
                                             @endif
@@ -190,18 +190,18 @@
 
                                 <a 
                                     href="{{ route('admin.sales.orders.view', $order->id) }}" 
-                                    class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"
+                                    class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 "
                                 >
                                 </a>
                             </div>
 
-                            <span class="block w-full border-b-[1px] border-gray-300"></span>
+                            <span class="block w-full border-b-[1px] dark:border-gray-800  "></span>
                         @endforeach
                     </div>
                 @else
                     {{-- Empty Container --}} 
                     <div class="p-[16px] flex justify-between">
-                        <p class="text-[16px] text-gray-800 font-semibold">
+                        <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.customers.customers.view.orders', ['order_count' => $totalOrderCount])
                         </p>
                     </div>
@@ -212,7 +212,7 @@
                             <!-- Placeholder Image -->
                             <img
                                 src="{{ bagisto_asset('images/empty-placeholders/orders-empty.svg') }}"
-                                class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
+                                class="w-[80px] h-[80px] border border-dashed dark:border-gray-800   rounded-[4px]"
                             />
 
                             <div class="flex flex-col items-center">
@@ -226,17 +226,17 @@
             </div>
 
             {{-- Invoices --}}
-            <div class="bg-white rounded box-shadow">
+            <div class="bg-white dark:bg-gray-900  rounded box-shadow">
                 @if ($totalInvoiceCount = count($customer->invoices))
                     {{--Invoice Count --}}
-                    <p class=" p-[16px] text-[16px] text-gray-800 font-semibold">
+                    <p class=" p-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.customers.customers.view.invoice', ['invoice_count' => $totalInvoiceCount])
                     </p>
 
                     {{-- Invoice Table --}}
                     <div class="relative overflow-x-auto">
                         <table class="w-full text-sm text-left min-w-[800px]">
-                            <thead class="text-[14px] text-gray-600 bg-gray-50 border-b-[1px] border-gray-200">
+                            <thead class="text-[14px] text-gray-600 dark:text-gray-300 bg-gray-50 border-b-[1px] border-gray-200">
                                 <tr>
                                     @foreach (['invoice-id', 'invoice-date', 'invoice-amount', 'order-id'] as $item)
                                         <th scope="col" class="px-6 py-[16px] font-semibold"> 
@@ -249,20 +249,20 @@
                             @foreach ($customer->invoices as $invoice)
                                 <tbody>
                                     {{-- Invoice Details --}}
-                                    <tr class="bg-white border-b transition-all hover:bg-gray-50">
-                                        <td class="px-6 py-[16px] text-gray-600">
+                                    <tr class="bg-white dark:bg-gray-900  border-b transition-all hover:bg-gray-50 dark:hover:bg-gray-950  ">
+                                        <td class="px-6 py-[16px] text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.customers.customers.view.invoice-id-prefix', ['invoice_id' => $invoice->id] )
                                         </td>
 
-                                        <td class="px-6 py-[16px] text-gray-600 whitespace-nowrap">
+                                        <td class="px-6 py-[16px] text-gray-600 dark:text-gray-300 whitespace-nowrap">
                                             {{ $invoice->created_at }}
                                         </td>
 
-                                        <td scope="row" class="px-6 py-[16px] text-gray-600">
+                                        <td scope="row" class="px-6 py-[16px] text-gray-600 dark:text-gray-300">
                                             {{ core()->currency($invoice->grand_total) }}
                                         </td>
 
-                                        <td class="px-6 py-[16px] text-gray-600">
+                                        <td class="px-6 py-[16px] text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.customers.customers.view.order-id-prefix', ['order_id' => $invoice->order_id] )
                                         </td>
                                     </tr>
@@ -273,7 +273,7 @@
                 @else
                     {{-- Empty Container --}}
                     <div class="flex justify-between p-[16px]">
-                        <p class="text-[16px] text-gray-800 font-semibold">
+                        <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.customers.customers.view.invoice', ['invoice_count' => $totalInvoiceCount])
                         </p>
                     </div>
@@ -283,7 +283,7 @@
                             {{-- Placeholder Image --}}
                             <img
                                 src="{{ bagisto_asset('images/settings/invoice.svg') }}"
-                                class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
+                                class="w-[80px] h-[80px] border border-dashed dark:border-gray-800   rounded-[4px]"
                             />
 
                             <div class="flex flex-col items-center">
@@ -297,25 +297,25 @@
             </div>
 
             {{-- Reviews --}}
-            <div class="bg-white rounded box-shadow">
+            <div class="bg-white dark:bg-gray-900  rounded box-shadow">
                 @if($totalReviewsCount = count($customer->reviews) )
                     {{-- Reviews Count --}}
-                    <p class=" p-[16px] text-[16px] text-gray-800 font-semibold">
+                    <p class=" p-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.customers.customers.view.reviews', ['review_count' => $totalReviewsCount])
                     </p>
 
                     @foreach($customer->reviews as $review)
                         {{-- Reviews Details --}}
-                        <div class="grid gap-y-[16px] p-[16px] transition-all hover:bg-gray-50">
+                        <div class="grid gap-y-[16px] p-[16px] transition-all hover:bg-gray-50 dark:hover:bg-gray-950  ">
                             <div class="flex justify-start [&amp;>*]:flex-1">
                                 <div class="flex flex-col gap-[6px]">
                                     {{-- Review Name --}}
-                                    <p class="text-[16px] text-gray-800 font-semibold">
+                                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                         {{ $review->name }}
                                     </p>
 
                                     {{-- Product Name --}}
-                                    <p class="text-gray-600">
+                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                         {{ $review->product->name }}
                                     </p>
 
@@ -352,11 +352,11 @@
                                         </x-admin::star-rating>
                                     </div>
 
-                                    <p class="text-gray-600">
+                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                         {{ $review->created_at }}
                                     </p>
 
-                                    <p class="text-gray-600">
+                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                         @lang('admin::app.customers.customers.view.id', ['id' => $review->id])
                                     </p>
                                 </div>
@@ -365,26 +365,26 @@
                             <div class="flex justify-between gap-x-[16px] items-center">
                                 <div class="flex flex-col gap-[6px]">
                                     {{-- Review Title --}}
-                                    <p class="text-[16px] text-gray-800 font-semibold">
+                                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                         {{ $review->title }}
                                     </p>
 
                                     {{-- Review Comment --}}
-                                    <p class="text-gray-600">
+                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                         {{ $review->comment }}
                                     </p>
                                 </div>
 
-                                <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"></span>
+                                <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 "></span>
                             </div>
                         </div>
 
-                        <span class="block w-full border-b-[1px] border-gray-300"></span>
+                        <span class="block w-full border-b-[1px] dark:border-gray-800  "></span>
                     @endforeach    
                 @else
                     {{-- Empty Invoice Container --}}
                     <div class="flex justify-between p-[16px]">
-                        <p class="text-[16px] text-gray-800 font-semibold">
+                        <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.customers.customers.view.reviews', ['review_count' => $totalReviewsCount])
                         </p>
                     </div>
@@ -394,7 +394,7 @@
                             {{-- Placeholder Image --}}
                             <img
                                 src="{{ bagisto_asset('images/empty-placeholders/reviews-empty.svg') }}"
-                                class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
+                                class="w-[80px] h-[80px] border border-dashed dark:border-gray-800   rounded-[4px]"
                             />
 
                             <div class="flex flex-col items-center">
@@ -408,8 +408,8 @@
             </div>
           
             {{-- Notes Form --}}
-            <div class="bg-white rounded box-shadow">
-                <p class=" p-[16px] pb-0 text-[16px] text-gray-800 font-semibold">
+            <div class="bg-white dark:bg-gray-900  rounded box-shadow">
+                <p class=" p-[16px] pb-0 text-[16px] text-gray-800 dark:text-white font-semibold">
                     @lang('admin::app.customers.customers.view.add-note')
                 </p>
 
@@ -468,16 +468,16 @@
                 </x-admin::form> 
 
                 {{-- Notes List --}}
-                <span class="block w-full border-b-[1px] border-gray-300"></span>
+                <span class="block w-full border-b-[1px] dark:border-gray-800  "></span>
 
                 @foreach ($customer->notes as $note)
                     <div class="grid gap-[6px] p-[16px]">
-                        <p class="text-[16px] text-gray-800 leading-6">
+                        <p class="text-[16px] text-gray-800 dark:text-white leading-6">
                             {{$note->note}}
                         </p>
 
                         {{-- Notes List Title and Time --}}
-                        <p class="text-gray-600">  
+                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">  
                             @if ($note->customer_notified)
                                 @lang('admin::app.customers.customers.view.customer-notified', ['created_at' => $note->created_at])
                             @else
@@ -486,7 +486,7 @@
                         </p>
                     </div>
 
-                    <span class="block w-full border-b-[1px] border-gray-300"></span>
+                    <span class="block w-full border-b-[1px] dark:border-gray-800  "></span>
                 @endforeach
             </div>
         </div>
@@ -497,7 +497,7 @@
             <x-admin::accordion>
                 <x-slot:header>
                     <div class="flex w-[100%]">
-                        <p class="w-[100%] p-[10px] text-gray-600 text-[16px] font-semibold">
+                        <p class="w-[100%] p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                             @lang('admin::app.customers.customers.view.customer')
                         </p>
     
@@ -508,27 +508,27 @@
 
                 <x-slot:content>
                     <div class="grid gap-y-[10px]">
-                        <p class="text-gray-800 font-semibold">
+                        <p class="text-gray-800 font-semibold dark:text-white">
                             {{ $customer->first_name . " " . $customer->last_name }}
                         </p>
 
-                        <p class="text-gray-600">
+                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                             @lang('admin::app.customers.customers.view.email', ['email' => $customer->email])
                         </p>
 
-                        <p class="text-gray-600">
+                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                             @lang('admin::app.customers.customers.view.phone', ['phone' => $customer->phone ?? 'N/A'])
                         </p>
 
-                        <p class="text-gray-600">
+                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                             @lang('admin::app.customers.customers.view.gender', ['gender' => $customer->gender ?? 'N/A'])
                         </p>
 
-                        <p class="text-gray-600">
+                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                             @lang('admin::app.customers.customers.view.date-of-birth', ['dob' => $customer->date_of_birth ?? 'N/A'])
                         </p>
 
-                        <p class="text-gray-600">
+                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                             @lang('admin::app.customers.customers.view.group', ['group_code' => $customer->group->code ?? 'N/A'])
                         </p>
                     </div>
@@ -539,7 +539,7 @@
             <x-admin::accordion>
                 <x-slot:header>
                     <div class="flex items-center justify-between p-[6px]">
-                        <p class="text-gray-600 text-[16px] font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300  text-[16px] font-semibold">
                             @lang('admin::app.customers.customers.view.address', ['count' => count($customer->addresses)])
                         </p>
                     </div>
@@ -555,11 +555,11 @@
                                     </p>
                                 @endif
 
-                                <p class="text-gray-800 font-semibold">
+                                <p class="text-gray-800 font-semibold dark:text-white">
                                     {{ $address->name }}
                                 </p>
 
-                                <p class="text-gray-600">
+                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                     {{ $address->address1 }},
 
                                     @if ($address->address2)
@@ -575,7 +575,7 @@
                                     @endif
                                 </p>
 
-                                <p class="text-gray-600">
+                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
                                     @lang('admin::app.customers.customers.view.phone', ['phone' => $address->phone ?? 'N/A'])
                                 </p>
 
@@ -636,7 +636,7 @@
                             </div>
                             
                             @if ($index < count($customer->addresses) - 1)
-                                <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] border-gray-300"></span>
+                                <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] dark:border-gray-800  "></span>
                             @endif
                         @endforeach
                     @else    
@@ -644,7 +644,7 @@
                         <div class="flex gap-[20px] items-center py-[10px]">
                             <img
                                 src="{{ bagisto_asset('images/settings/address.svg') }}"
-                                class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
+                                class="w-[80px] h-[80px] border border-dashed dark:border-gray-800   rounded-[4px]"
                             >
 
                             <div class="flex flex-col gap-[6px]">

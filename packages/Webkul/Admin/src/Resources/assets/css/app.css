@@ -28,6 +28,7 @@
         background: #e0e7ff;
     }
 
+    
     [class^="icon-"],
     [class*=" icon-"] {
         /* use !important to prevent issues with browser extensions that change fonts */
@@ -38,15 +39,20 @@
         font-variant: normal;
         text-transform: none;
         line-height: 1;
-        color: #4b5563;
-
+        color: #6b7280;
+        
         /* Better Font Rendering =========== */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
 
+    html.dark [class^="icon-"],
+    [class*=" icon-"]{
+        color: #d1d5db;
+    }
+    
     .box-shadow {
-        @apply shadow-[0px_0px_0px_0px_rgba(0,0,0,0.03),0px_1px_1px_0px_rgba(0,0,0,0.03),0px_3px_3px_0px_rgba(0,0,0,0.03),0px_6px_4px_0px_rgba(0,0,0,0.02),0px_11px_4px_0px_rgba(0,0,0,0.00),0px_17px_5px_0px_rgba(0,0,0,0.00)] border-[1px];
+        @apply shadow-[0px_0px_0px_0px_rgba(0,0,0,0.03),0px_1px_1px_0px_rgba(0,0,0,0.03),0px_3px_3px_0px_rgba(0,0,0,0.03),0px_6px_4px_0px_rgba(0,0,0,0.02),0px_11px_4px_0px_rgba(0,0,0,0.00),0px_17px_5px_0px_rgba(0,0,0,0.00)] border-[1px] dark:border-gray-800;
     }
 
     .icon-checkbox-partial:before {
@@ -354,7 +360,7 @@
     }
 
     .transparent-button {
-        @apply flex gap-x-[4px] items-center px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap cursor-pointer marker:shadow appearance-none transition-all hover:bg-gray-100 focus:bg-gray-100;
+        @apply flex gap-x-[4px] items-center px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap cursor-pointer marker:shadow appearance-none transition-all hover:bg-gray-100 dark:hover:bg-gray-950  focus:bg-gray-100;
     }
 
     .journal-scroll::-webkit-scrollbar {
