@@ -55,7 +55,7 @@ class GroupDataGrid extends DataGrid
             $this->addAction([
                 'icon'   => 'icon-edit',
                 'title'  => trans('admin::app.customers.groups.index.datagrid.edit'),
-                'method' => 'GET',
+                'method' => 'PUT',
                 'url'    => function ($row) {
                     // return route('admin.groups.edit', $row->id);
                 },
