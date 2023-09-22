@@ -125,6 +125,10 @@
                                         <x-shop::shimmer.image
                                             class="h-[110px] min-w-[110px] max-w[110px] rounded-[12px]"
                                             ::src="item.base_image.small_image_url"
+                                            width="110"
+                                            height="110"
+                                            ::key="item.id"
+                                            ::index="item.id"
                                         >
                                         </x-shop::shimmer.image>
 
