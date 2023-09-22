@@ -36,6 +36,7 @@ class Bundle extends AbstractType
         'height',
         'weight',
         'depth',
+        'manage_stock',
     ];
 
     /**
