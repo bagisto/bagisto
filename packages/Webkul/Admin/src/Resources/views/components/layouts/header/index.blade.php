@@ -544,7 +544,7 @@
 
                         <div class="grid">
                             <!-- Order Id & Status -->
-                            <p class="text-gray-800">
+                            <p class="text-gray-800 dark:text-white">
                                 #@{{ notification.order.id }}
                                 @{{ orderTypeMessages[notification.order.status] }}
                             </p>

@@ -27,7 +27,7 @@
                 <x-slot:header>
                     <div class="grid gap-[12px]">
                         <div class="flex justify-between items-center">
-                            <p class="text-[20px] font-medium">
+                            <p class="text-[20px] font-medium dark:text-white">
                                 @lang('admin::app.sales.refunds.create.title')
                             </p>
 

@@ -38,7 +38,7 @@
                 <x-admin::flat-picker.date ::allow-input="false">
                     <input
                         value=""
-                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                        class="flex min-h-[39px] w-full rounded-[6px] border dark:border-gray-800 px-3 py-2 text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900"
                         :type="column.input_type"
                         :name="`${column.index}[from]`"
                         :placeholder="column.label"
@@ -55,7 +55,7 @@
                     <input
                         type="column.input_type"
                         value=""
-                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                        class="flex min-h-[39px] w-full rounded-[6px] border dark:border-gray-800 px-3 py-2 text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900"
                         :name="`${column.index}[to]`"
                         :placeholder="column.label"
                         :ref="`${column.index}[from]`"
@@ -122,7 +122,7 @@
                 <x-admin::flat-picker.datetime ::allow-input="false">
                     <input
                         value=""
-                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                        class="flex min-h-[39px] w-full rounded-[6px] border dark:border-gray-800 px-3 py-2 text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900"
                         :type="column.input_type"
                         :name="`${column.index}[from]`"
                         :placeholder="column.label"
@@ -139,7 +139,7 @@
                     <input
                         type="column.input_type"
                         value=""
-                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                        class="flex min-h-[39px] w-full rounded-[6px] border dark:border-gray-800 px-3 py-2 text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900"
                         :name="`${column.index}[to]`"
                         :placeholder="column.label"
                         :ref="`${column.index}[from]`"

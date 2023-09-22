@@ -226,7 +226,7 @@
                         <x-slot:header>
                             <div class="grid gap-[12px]">
                                 <div class="flex justify-between items-center">
-                                    <p class="text-[20px] font-medium">
+                                    <p class="text-[20px] font-medium dark:text-white">
                                         @lang('admin::app.catalog.products.edit.types.downloadable.links.update-create.title')
                                     </p>
 
@@ -655,7 +655,7 @@
                         <x-slot:header>
                             <div class="grid gap-[12px]">
                                 <div class="flex justify-between items-center">
-                                    <p class="text-[20px] font-medium">
+                                    <p class="text-[20px] font-medium dark:text-white">
                                         @lang('admin::app.catalog.products.edit.types.downloadable.samples.update-create.title')
                                     </p>
 

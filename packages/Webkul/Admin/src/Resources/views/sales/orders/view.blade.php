@@ -336,7 +336,7 @@
                                         class="hidden peer"
                                     >
                         
-                                    <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"></span>
+                                    <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600 "></span>
                         
                                     <p class="flex gap-x-[4px] items-center cursor-pointer">
                                         @lang('admin::app.sales.orders.view.notify-customer')
@@ -729,7 +729,7 @@
                 <x-slot:header>
                     <div class="grid gap-[12px]">
                         <div class="flex justify-between items-center">
-                            <p class="text-[20px] font-medium">
+                            <p class="text-[20px] font-medium dark:text-white">
                                 @lang('admin::app.sales.orders.view.new-invoice')     
                             </p>
 

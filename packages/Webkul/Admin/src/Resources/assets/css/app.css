@@ -356,7 +356,7 @@
     }
 
     .secondary-button {
-        @apply flex gap-x-[4px] items-center px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer transition-all hover:bg-[#eff6ff61] focus:bg-[#eff6ff61];
+        @apply flex gap-x-[4px] items-center px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer transition-all hover:bg-[#eff6ff61] focus:bg-[#eff6ff61] dark:border-gray-400 dark:bg-gray-800 dark:text-white dark:hover:opacity-80;
     }
 
     .transparent-button {
@@ -392,6 +392,9 @@
         background-repeat: no-repeat;
         background-position-x: calc(100% - 10px);
         background-position-y: 50%;
+    }
+    .dark .custom-select{
+        background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
     }
 
     [dir="rtl"] .custom-select {

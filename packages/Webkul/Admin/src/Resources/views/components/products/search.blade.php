@@ -11,7 +11,7 @@
             <x-slot:header>
                 <div class="grid gap-[12px]">
                     <div class="flex justify-between items-center">
-                        <p class="text-[20px] font-medium">
+                        <p class="text-[20px] font-medium dark:text-white">
                             @lang('admin::app.components.products.search.title')
                         </p>
 
@@ -59,7 +59,7 @@
                                 />
 
                                 <label
-                                    class="icon-uncheckbox text-[24px] peer-checked:icon-checked peer-checked:text-blue-600 cursor-pointer"
+                                    class="icon-uncheckbox text-[24px] peer-checked:icon-checked peer-checked:text-blue-600  cursor-pointer"
                                     :for="'searched-product' + product.id"
                                 >
                                 </label>

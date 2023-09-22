@@ -202,14 +202,14 @@
                                 >
 
                                 <label
-                                    class="icon-uncheckbox text-[24px] peer-checked:icon-checked peer-checked:text-blue-600 cursor-pointer"
+                                    class="icon-uncheckbox text-[24px] peer-checked:icon-checked peer-checked:text-blue-600  cursor-pointer"
                                     :for="'attribute_' + attribute.id + '_option_' + option.id"
                                 >
                                 </label>
                             </div>
 
                             <div class="flex gap-[5px] items-center">
-                                <span class="text-gray-800">
+                                <span class="text-gray-800 dark:text-white">
                                     @{{ attribute.admin_name }}
                                 </span>
 
@@ -261,7 +261,7 @@
                         <!-- Drawer Header -->
                         <x-slot:header>
                             <div class="flex justify-between items-center">
-                                <p class="text-[20px] font-medium">
+                                <p class="text-[20px] font-medium dark:text-white">
                                     @{{ updateTypes[selectedType].title }}
                                 </p>
 
@@ -518,7 +518,7 @@
                     >
 
                     <label
-                        class="icon-uncheckbox text-[24px] peer-checked:icon-checked peer-checked:text-blue-600 cursor-pointer"
+                        class="icon-uncheckbox text-[24px] peer-checked:icon-checked peer-checked:text-blue-600  cursor-pointer"
                         :for="'variant_' + variant.id"
                     ></label>
                 </div>
@@ -626,7 +626,7 @@
                                     <!-- Drawer Header -->
                                     <x-slot:header>
                                         <div class="flex justify-between items-center">
-                                            <p class="text-[20px] font-medium">
+                                            <p class="text-[20px] font-medium dark:text-white">
                                                 @lang('admin::app.catalog.products.edit.types.configurable.edit.title')
                                             </p>
 

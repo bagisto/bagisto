@@ -181,7 +181,7 @@
 
                                             <label
                                                 for="empty_option"
-                                                class="icon-uncheckbox text-[24px] rounded-[6px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                                                class="icon-uncheckbox text-[24px] rounded-[6px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600 "
                                             >
                                             </label>
 

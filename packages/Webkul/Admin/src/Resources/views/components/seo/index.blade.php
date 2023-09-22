@@ -5,7 +5,7 @@
     <script type="text/x-template" id="v-seo-helper-template">
         <div class="flex flex-col gap-[3px] mb-[30px]">
             <p 
-                class="text-[#161B9D]"
+                class="text-[#161B9D] dark:text-white"
                 v-text="metaTitle"
             >
             </p>

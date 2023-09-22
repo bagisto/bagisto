@@ -83,7 +83,7 @@
                             <span
                                 class="icon-uncheckbox cursor-pointer rounded-[6px] text-[24px]"
                                 :class="[
-                                    applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-blue-600' : (
+                                    applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-blue-600 ' : (
                                         applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-blue-600' : ''
                                     ),
                                 ]"
@@ -145,7 +145,7 @@
                         >
 
                         <label
-                            class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                            class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600 "
                             :for="`mass_action_select_record_${record.product_id}`"
                         ></label>
 

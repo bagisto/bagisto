@@ -64,7 +64,7 @@
                                 </span>
 
                                 <div class="grid">
-                                    <p class="text-gray-800">
+                                    <p class="text-gray-800 dark:text-white">
                                         #@{{ notification.order.id }}
                                         @{{ orderType[notification.order.status].message }}
                                     </p>
