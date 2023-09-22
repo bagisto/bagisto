@@ -67,12 +67,12 @@
 
         <!-- Product slider Image with shimmer -->
         <div class="flex gap-[30px] 1180:hidden overflow-auto scrollbar-hide">
-            <x-shop::shimmer.image
+            <x-shop::media.images.lazy
                 ::src="image.large_image_url"
                 class="min-w-[450px] max-sm:min-w-full w-[490px]" 
                 v-for="image in media.images"
             >
-            </x-shop::shimmer.image>
+            </x-shop::media.images.lazy>
         </div>
     </script>
 
