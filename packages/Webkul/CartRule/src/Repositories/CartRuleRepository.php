@@ -139,7 +139,7 @@ class CartRuleRepository extends Repository
                     'cart_rule_id' => $cartRule->id,
                 ]);
 
-                $this->cartRuleCouponRepository->getModel()->where('cart_rule_id', $cartRule->id)->update([
+                $this->cartRuleCouponRepository->where('cart_rule_id', $cartRule->id)->update([
                     'usage_limit'        => $data['uses_per_coupon'] ?? 0,
                     'usage_per_customer' => $data['usage_per_customer'] ?? 0,
                     'expired_at'         => $data['ends_till'] ?: null,

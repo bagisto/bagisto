@@ -41,7 +41,7 @@
                         <x-slot:toggle>
                             <!-- Dropdown Toggler -->
                             <button class="flex gap-[15px] justify-between items-center max-w-[200px] bg-white border border-[#E9E9E9] text-[16px] rounded-lg w-full p-[14px] max-md:pr-[10px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer">
-                                @{{ filters.applied.limit ?? "@lang('shop::app.categories.toolbar.show')" }}
+                                @{{ filters.available.limit[0] ?? "@lang('shop::app.categories.toolbar.show')" }}
 
                                 <span class="text-[24px] icon-arrow-down"></span>
                             </button>
