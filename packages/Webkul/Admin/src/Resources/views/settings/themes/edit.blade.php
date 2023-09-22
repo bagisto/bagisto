@@ -1163,6 +1163,7 @@
                                     id="static_image"
                                     class="hidden"
                                     @change="storeImage($event)"
+                                    accept="image/*"
                                 >
                             </div>
                         </div>
@@ -2018,6 +2019,12 @@
                         let selectedImage = $event.target.files[0];
 
                         if (! selectedImage) {
+                            return;
+                        }
+
+                        const allowedImageTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'];
+
+                        if (! allowedImageTypes.includes(selectedImage.type)) {
                             return;
                         }
 
