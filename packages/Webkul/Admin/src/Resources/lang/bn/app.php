@@ -545,6 +545,7 @@ return [
             'edit' => [
                 'save-btn' => 'পণ্য সংরক্ষণ করুন',
                 'title'    => 'পণ্য সম্পাদনা',
+                'remove'   => 'সরান',
 
                 'price' => [
                     'group' => [

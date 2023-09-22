@@ -273,6 +273,19 @@ return [
     ],
 
     'components' => [
+        'accordion' => [
+            'default-content' => 'Standaardinhoud',
+            'default-header'  => 'Standaardkop',
+        ],
+        
+        'drawer' => [
+           'default-toggle'  => 'Standaardwissel',
+        ],
+        
+        'media' => [
+            'add-attachments' => 'Bijlagen toevoegen',
+        ],
+        
         'layouts' => [
             'header' => [
                 'title'         => 'Account',
@@ -351,6 +364,18 @@ return [
             'table' => [
                 'actions'              => 'Acties',
                 'no-records-available' => 'Geen gegevens beschikbaar.',
+            ],
+        ],
+
+        'modal' => [
+            'default-content' => 'Standaardinhoud',
+            'default-header'  => 'Standaardkop',
+            
+            'confirm' => [
+                'title'        => 'Bent u zeker?',
+                'message'      => 'Bent u zeker dat u deze actie wilt uitvoeren?',
+                'agree-btn'    => 'Akkoord',
+                'disagree-btn' => 'Niet akkoord',
             ],
         ],
 

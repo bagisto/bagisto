@@ -53,7 +53,10 @@
 
                 <!-- DataGrid Header -->
                 <template #header="{ columns, records, sortPage, applied}">
-                    <div class="row grid grid-cols-{{ $hasPermission ? '5' : '4' }} grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] border-gray-300 text-gray-600 bg-gray-50 font-semibold">
+                    <div
+                        class="row grid grid-cols-{{ $hasPermission ? '5' : '4' }} grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] border-gray-300 text-gray-600 bg-gray-50 font-semibold"
+                        :style="'grid-template-columns: repeat({{ $hasPermission ? '5' : '4' }} , 1fr);'"
+                    >
                         <div
                             class="flex gap-[10px] cursor-pointer"
                             v-for="(columnGroup, index) in ['id', 'code', 'name', 'direction']"
@@ -93,7 +96,7 @@
                 </template>
 
                 <!-- DataGrid Body -->
-                <template #body="{ columns, records }">
+                <template #body="{ columns, records, performAction }">
                     <div
                         v-for="record in records"
                         class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600 transition-all hover:bg-gray-50"
@@ -113,16 +116,21 @@
 
                         <!-- Actions -->
                         <div class="flex justify-end">
-                            <div v-for="action in record.actions">
-                                <a @click="id=1; actionHandler(action.url, action.title)">
-                                    <span
-                                        :class="action.icon"
-                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
-                                        :title="action.title"
-                                    >
-                                    </span>
-                                </a>
-                            </div>
+                            <a @click="id=1; editModal(record.actions.find(action => action.title === 'Edit')?.url)">
+                                <span
+                                    :class="record.actions.find(action => action.title === 'Edit')?.icon"
+                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
+                                >
+                                </span>
+                            </a>
+
+                            <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
+                                <span
+                                    :class="record.actions.find(action => action.method === 'DELETE')?.icon"
+                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
+                                >
+                                </span>
+                            </a>
                         </div>
                     </div>
                 </template>
@@ -323,40 +331,20 @@
                         });
                     },
 
-                    actionHandler(url, title) {
-                        if (title == 'Edit') {
-                            this.isUpdating = true;
+                    editModal(url) {
+                        this.isUpdating = true;
 
-                            this.$axios.get(url)
-                                .then((response) => {
-                                    this.locale = {
-                                        ...response.data.data,
-                                            image: response.data.data.logo_path
-                                            ? [{ id: 'logo_url', url: response.data.data.logo_url }]
-                                            : [],
-                                    };
+                        this.$axios.get(url)
+                            .then((response) => {
+                                this.locale = {
+                                    ...response.data.data,
+                                        image: response.data.data.logo_path
+                                        ? [{ id: 'logo_url', url: response.data.data.logo_url }]
+                                        : [],
+                                };
 
-                                    this.$refs.localeUpdateOrCreateModal.toggle();
-                                })
-                        } else {
-                            if (! confirm('@lang('admin::app.settings.locales.index.delete-warning')')) {
-                                return;
-                            }
-
-                            this.$axios.delete(url)
-                                .then((response) => {
-                                    this.$refs.datagrid.get();
-
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
-                                })
-                                .catch(error => {
-                                    if (error.response.status == 422) {
-                                        setErrors(error.response.data.errors);
-                                    } else if(error.response.status == 500) {
-                                        this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message});
-                                    }
-                                });
-                        }
+                                this.$refs.localeUpdateOrCreateModal.toggle();
+                            })
                     },
 
                     resetForm() {

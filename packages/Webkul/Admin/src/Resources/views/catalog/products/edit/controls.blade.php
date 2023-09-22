@@ -234,7 +234,7 @@
                 </x-admin::form.control-group.control>
 
                 <p class="text-[14px] text-gray-600">
-                    Remove
+                    @lang('admin::app.catalog.products.edit.remove')
                 </p>
             </div>
         @endif

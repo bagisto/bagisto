@@ -273,6 +273,19 @@ return [
     ],
 
     'components' => [
+        'accordion' => [
+            'default-content' => 'محتوای پیش‌فرض',
+            'default-header'  => 'سربرگ پیش‌فرض',
+        ],
+        
+        'drawer' => [
+           'default-toggle'  => 'کلیک کردن پیش‌فرض',
+        ],
+        
+        'media' => [
+            'add-attachments' => 'افزودن پیوست',
+        ],
+        
         'layouts' => [
             'header' => [
                 'title'         => 'حساب کاربری',
@@ -351,6 +364,18 @@ return [
             'table' => [
                 'actions'              => 'عملیات',
                 'no-records-available' => 'رکوردی موجود نیست.',
+            ],
+        ],
+
+        'modal' => [
+            'default-content' => 'محتوای پیش‌فرض',
+            'default-header'  => 'سربرگ پیش‌فرض',
+            
+            'confirm' => [
+                'title'        => 'آیا مطمئن هستید؟',
+                'message'      => 'آیا مطمئن هستید که می خواهید این کار را انجام دهید؟',
+                'agree-btn'    => 'موافقم',
+                'disagree-btn' => 'مخالفم',
             ],
         ],
 

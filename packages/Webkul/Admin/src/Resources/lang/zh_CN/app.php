@@ -545,6 +545,7 @@ return [
             'edit' => [
                 'save-btn' => '保存产品',
                 'title'    => '编辑产品',
+                'remove'   => '删除',
 
                 'price' => [
                     'group' => [

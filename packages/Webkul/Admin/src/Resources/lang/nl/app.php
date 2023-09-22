@@ -545,6 +545,7 @@ return [
             'edit' => [
                 'save-btn' => 'Product Opslaan',
                 'title'    => 'Bewerk Product',
+                'remove'   => 'Verwijderen',
 
                 'price' => [
                     'group' => [

@@ -273,6 +273,19 @@ return [
     ],
 
     'components' => [
+        'accordion' => [
+            'default-content' => 'Varsayılan İçerik',
+            'default-header'  => 'Varsayılan Başlık',
+        ],
+        
+        'drawer' => [
+           'default-toggle'  => 'Varsayılan Değiştirme',
+        ],
+        
+        'media' => [
+            'add-attachments' => 'Ekler Ekle',
+        ],
+        
         'layouts' => [
             'header' => [
                 'title'         => 'Hesap',
@@ -353,6 +366,18 @@ return [
                 'no-records-available' => 'Kayıt Yok.',
             ],
         ],
+
+        'modal' => [
+            'default-content' => 'Varsayılan İçerik',
+            'default-header'  => 'Varsayılan Başlık',
+            
+            'confirm' => [
+                'title'        => 'Emin misiniz?',
+                'message'      => 'Bu işlemi yapmak istediğinizden emin misiniz?',
+                'agree-btn'    => 'Onayla',
+                'disagree-btn' => 'Onaylama',
+            ],
+        ],        
 
         'products'   => [
             'card' => [
