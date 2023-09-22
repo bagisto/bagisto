@@ -189,8 +189,7 @@
                             }
                         })
                         .then(function(response) {
-                            console.log(response);
-                            self.searchedProducts = response.data;
+                            self.searchedProducts = response.data.data;
                         })
                         .catch(function (error) {
                         })
