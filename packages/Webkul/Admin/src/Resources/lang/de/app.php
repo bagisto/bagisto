@@ -656,7 +656,6 @@ return [
                             'status'          => 'Status',
                             'weight'          => 'Gewicht',
                             'images'          => 'Bilder',
-
                         ],
 
                         'mass-edit' => [
@@ -3274,6 +3273,7 @@ return [
         'events'                   => 'Ereignisse',
         'sitemaps'                 => 'Sitemaps',
         'newsletter-subscriptions' => 'Newsletter-Abonnements',
+        'transactions'             => 'Transaktionen',
     ],
 
     'errors' => [

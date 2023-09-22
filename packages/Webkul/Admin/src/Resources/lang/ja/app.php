@@ -2525,7 +2525,6 @@ return [
                     'type'         => 'タイプ',
                     'name'         => '名前',
                     'channel_name' => 'チャネル名',
-
                 ],
             ],
 
@@ -3274,6 +3273,7 @@ return [
         'events'                   => 'イベント',
         'sitemaps'                 => 'サイトマップ',
         'newsletter-subscriptions' => 'ニュースレター購読',
+        'transactions'             => '取引',
     ],
 
     'errors' => [

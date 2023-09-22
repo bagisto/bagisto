@@ -3273,6 +3273,7 @@ return [
         'events'                   => 'Eventos',
         'sitemaps'                 => 'Mapas del Sitio',
         'newsletter-subscriptions' => 'Suscripciones al Boletín',
+        'transactions'             => 'Transacciones',
     ],
 
     'errors' => [

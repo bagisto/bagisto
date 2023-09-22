@@ -2508,6 +2508,7 @@ return [
             'delete-failed'     => 'Usunięcie roli nie powiodło się',
             'being-used'        => 'Rola jest już używana przez Administratora',
         ],
+
         'themes' => [
             'index' => [
                 'title'      => 'Motywy',
@@ -3272,6 +3273,7 @@ return [
         'events'                   => 'Wydarzenia',
         'sitemaps'                 => 'Mapy Strony',
         'newsletter-subscriptions' => 'Subskrypcje Newslettera',
+        'transactions'             => 'Transakcje',
     ],
 
     'errors' => [

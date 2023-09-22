@@ -656,7 +656,6 @@ return [
                             'status'          => 'סטטוס',
                             'weight'          => 'משקל',
                             'images'          => 'תמונות',
-
                         ],
 
                         'mass-edit' => [
@@ -3274,6 +3273,7 @@ return [
         'events'                   => 'אירועים',
         'sitemaps'                 => 'מפות אתר',
         'newsletter-subscriptions' => 'מנויים לניוזלטר',
+        'transactions'             => 'עסקאות',
     ],
 
     'errors' => [

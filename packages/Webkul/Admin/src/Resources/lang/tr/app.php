@@ -619,7 +619,6 @@ return [
                     'empty-info'        => ':type ürünleri eklemek için.',
                     'sku'               => 'SKU - :sku',
                     'image-placeholder' => 'Ürün Resmi',
-
                 ],
 
                 'types' => [
@@ -3274,6 +3273,7 @@ return [
         'events'                   => 'Etkinlikler',
         'sitemaps'                 => 'Site Haritaları',
         'newsletter-subscriptions' => 'Bülten Abonelikleri',
+        'transactions'             => 'İşlemler',
     ],
 
     'errors' => [

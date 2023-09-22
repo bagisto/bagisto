@@ -2288,7 +2288,6 @@ return [
                     'basic-settings'  => 'Impostazioni di Base',
                     'country'         => 'Paese',
                     'back-btn'        => 'Indietro',
-                    'is_zip'          => 'Abilita Intervallo di CAP',
                     'identifier'      => 'Identificatore',
                     'select-country'  => 'Seleziona Paese',
                     'select-state'    => 'Seleziona Stato',
@@ -2514,6 +2513,7 @@ return [
             'index' => [
                 'title'      => 'Temas',
                 'create-btn' => 'Crear Tema',
+
                 'datagrid'   => [
                     'view'         => 'Vedi',
                     'delete'       => 'Elimina',
@@ -2931,6 +2931,7 @@ return [
                         'status'      => 'Stato',
                         'title-info'  => '"Spedizione gratuita" si riferisce a un metodo di spedizione in cui il costo della spedizione viene annullato e il venditore copre le spese di spedizione per la consegna di merci all\'acquirente.',
                         'title'       => 'Titolo',
+                        'type'        => 'Tipo',
                     ],
 
                     'flat-rate-shipping' => [
@@ -3272,6 +3273,7 @@ return [
         'events'                   => 'Eventi',
         'sitemaps'                 => 'Sitemap',
         'newsletter-subscriptions' => 'Iscrizioni alla Newsletter',
+        'transactions'             => 'Transazioni',
     ],
 
     'errors' => [
