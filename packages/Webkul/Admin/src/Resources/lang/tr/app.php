@@ -2685,13 +2685,6 @@ return [
                         'title-info'                => 'Misafir ödemesi, müşterilere hesap oluşturmadan ürün satın alma olanağı sunar, işlemi kolaylaştırır ve daha hızlı işlemler için.',
                     ],
 
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'Ana Sayfadaki Yeni Ürün Sayısına İzin Ver',
-                        'allow-no-of-featured-products'  => 'Ana Sayfadaki Öne Çıkan Ürün Sayısına İzin Ver',
-                        'title'                          => 'Ana Sayfa yapılandırması',
-                        'title-info'                     => 'Ana sayfa yapılandırması, istenen bilgiyi etkili bir şekilde sunmak için bir web sitesinin ana sayfasının düzenini, içeriğini ve tasarımını özelleştirmeyi içerir.',
-                    ],
-
                     'product-view-page' => [
                         'allow-no-of-related-products'  => 'İlgili Ürünler Sayısına İzin Ver',
                         'allow-no-of-up-sells-products' => 'Yükseltilmiş Ürün Sayısına İzin Ver',

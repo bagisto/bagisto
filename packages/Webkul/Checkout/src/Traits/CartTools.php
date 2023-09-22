@@ -266,9 +266,9 @@ trait CartTools
 
         if (! $cart->items->count()) {
             $this->cartRepository->delete($cart->id);
+        } else {
+            $this->collectTotals();
         }
-
-        $this->collectTotals();
 
         return true;
     }

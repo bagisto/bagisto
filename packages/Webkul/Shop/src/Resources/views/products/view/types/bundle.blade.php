@@ -32,14 +32,15 @@
                             @{{ option.label }}
                         </span>
 
-                        <div
-                            class="text-[#7D7D7D]"
-                            v-for="product in option.products"
-                            :key="product.id"
-                            :if="product.is_default"
-                        >
-                            @{{ product.qty + ' x ' + product.name }}
-                        </div>
+                        <template v-for="product in option.products">
+                            <div
+                                class="text-[#7D7D7D]"
+                                :key="product.id"
+                                v-if="product.is_default"
+                            >
+                                @{{ product.qty + ' x ' + product.name }}
+                            </div>
+                        </template>
                     </li>
                 </ul>
             </div>

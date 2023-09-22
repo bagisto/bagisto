@@ -101,20 +101,31 @@
 
                             @if (
                                 $customAttributeValue['type'] == 'file'
-                                || $customAttributeValue['type'] == 'image'
+                                && $customAttributeValue['value']
                             )
                                 <a
                                     href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
                                     download="{{ $customAttributeValue['label'] }}"
                                 >
-                                    <p class="text-[16px] text-blue-500 underline">
-                                        {{ $customAttributeValue['label'] }}
-                                    </p>
+                                    <span class="icon-download text-[24px]"></span>
+                                </a>
+                            @elseif (
+                                $customAttributeValue['type'] == 'image'
+                                && $customAttributeValue['value']
+                            )
+                                <a
+                                    href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
+                                    download="{{ $customAttributeValue['label'] }}"
+                                >
+                                    <img 
+                                        class="h-[20px] w-[20px] min-h-[20px] min-w-[20px]"
+                                        src="{{ Storage::url($customAttributeValue['value']) }}"
+                                    />
                                 </a>
                             @else 
                                 <div class="grid">
                                     <p class="text-[16px] text-[#7D7D7D]">
-                                        {{ $customAttributeValue['value'] ?? '-' }}
+                                        {{ $customAttributeValue['value'] ? $customAttributeValue['value'] : '-' }}
                                     </p>
                                 </div>
                             @endif

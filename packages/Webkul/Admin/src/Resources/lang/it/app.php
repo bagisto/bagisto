@@ -2684,13 +2684,6 @@ return [
                         'title-info'                => 'Il checkout per gli ospiti consente ai clienti di acquistare prodotti senza creare un account, semplificando il processo di acquisto per comodità e transazioni più veloci.',
                     ],
 
-                    'homepage' => [
-                        'allow-no-of-new-products'      => 'Numero Consentito di Nuovi Prodotti in Homepage',
-                        'allow-no-of-featured-products' => 'Numero Consentito di Prodotti in Primo Piano in Homepage',
-                        'title'                         => 'Configurazione Homepage',
-                        'title-info'                    => 'La configurazione della homepage consiste nella personalizzazione del layout, del contenuto e del design della pagina principale di un sito web per presentare in modo efficace le informazioni desiderate.',
-                    ],
-
                     'product-view-page' => [
                         'allow-no-of-related-products'  => 'Numero Consentito di Prodotti Correlati',
                         'allow-no-of-up-sells-products' => 'Numero Consentito di Prodotti Upsell',

@@ -32,6 +32,7 @@ class Grouped extends AbstractType
         'height',
         'weight',
         'depth',
+        'manage_stock',
     ];
 
     /**

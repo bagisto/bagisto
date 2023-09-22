@@ -1,7 +1,7 @@
 <v-media {{ $attributes }} >
-    <x-shop::shimmer.image
+    <x-shop::media.images.lazy
         class="w-[284px] h-[284px] mt-[30px] rounded-[12px]"
-    ></x-shop::shimmer.image>
+    ></x-shop::media.images.lazy>
 </v-media>
 
 @pushOnce('scripts')
