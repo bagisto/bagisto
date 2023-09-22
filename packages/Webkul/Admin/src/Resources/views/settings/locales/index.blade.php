@@ -276,7 +276,7 @@
                                 <button 
                                     type="submit"
                                     class="primary-button"
-                                >row grid grid-cols-5 grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold 
+                                >
                                     @lang('admin::app.settings.locales.index.create.save-btn')
                                 </button>
                             </div>
