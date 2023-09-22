@@ -2684,13 +2684,6 @@ return [
                         'title-info'                => 'Gastafrekening stelt klanten in staat om producten te kopen zonder een account aan te maken, wat het aankoopproces vereenvoudigt voor gemak en snellere transacties.',
                     ],
 
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'Toegestaan aantal nieuwe producten op de startpagina',
-                        'allow-no-of-featured-products'  => 'Toegestaan aantal uitgelichte producten op de startpagina',
-                        'title'                          => 'Configuratie startpagina',
-                        'title-info'                     => 'Configuratie van de lay-out, inhoud en vormgeving van de hoofdpagina van een website om gewenste informatie effectief te presenteren.',
-                    ],
-
                     'product-view-page' => [
                         'allow-no-of-related-products'  => 'Toegestaan aantal gerelateerde producten',
                         'allow-no-of-up-sells-products' => 'Toegestaan aantal up-sell-producten',

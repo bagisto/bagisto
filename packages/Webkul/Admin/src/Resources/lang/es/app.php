@@ -2684,13 +2684,6 @@ return [
                         'title-info'                => 'Die Gastbestellung ermöglicht es Kunden, Produkte zu kaufen, ohne ein Konto zu erstellen, und erleichtert den Kaufprozess für Bequemlichkeit und schnellere Transaktionen.',
                     ],
 
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'Zulässige Anzahl neuer Produkte auf der Startseite',
-                        'allow-no-of-featured-products'  => 'Zulässige Anzahl der vorgestellten Produkte auf der Startseite',
-                        'title'                          => 'Startseitenkonfiguration',
-                        'title-info'                     => 'Die Konfiguration der Startseite beinhaltet die Anpassung des Layouts, des Inhalts und des Designs der Hauptseite einer Website, um gewünschte Informationen effektiv zu präsentieren.',
-                    ],
-
                     'product-view-page' => [
                         'allow-no-of-related-products'  => 'Zulässige Anzahl verwandter Produkte',
                         'allow-no-of-up-sells-products' => 'Zulässige Anzahl von Up-Sell-Produkten',

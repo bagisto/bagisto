@@ -2684,13 +2684,6 @@ return [
                         'title-info'                => '访客结账允许客户在不创建帐户的情况下购买产品，以方便和加快交易过程。',
                     ],
 
-                    'homepage' => [
-                        'allow-no-of-new-products'       => '主页上的新产品数量限制',
-                        'allow-no-of-featured-products'  => '主页上的精选产品数量限制',
-                        'title'                          => '主页配置',
-                        'title-info'                     => '主页配置涉及自定义网站主页的布局、内容和设计，以有效呈现所需的信息。',
-                    ],
-
                     'product-view-page' => [
                         'allow-no-of-related-products'  => '相关产品的数量限制',
                         'allow-no-of-up-sells-products' => '上销产品的数量限制',
