@@ -49,7 +49,7 @@
                     <x-slot:toggle>
                         <button
                             type="button"
-                            class="transparent-button px-[4px] py-[6px] hover:bg-gray-200 dark:hover:bg-gray-800  focus:bg-gray-200 dark:focus:bg-gray-800"
+                            class="transparent-button px-[4px] py-[6px] hover:bg-gray-200 dark:hover:bg-gray-800  focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
                         >
                             <span class="icon-language text-[24px] "></span>
 
@@ -110,7 +110,7 @@
                                 
                                 <div class="flex gap-[10px]">
                                     <div
-                                        class="max-w-max px-[12px] py-[5px] bg-white dark:bg-gray-900  border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                        class="secondary-button"
                                         @click="$refs.addSliderModal.toggle()"
                                     >
                                         @lang('admin::app.settings.themes.edit.slider-add-btn')
@@ -506,7 +506,7 @@
             
                             <div class="flex gap-[10px]">
                                 <div
-                                    class="max-w-max px-[12px] py-[5px] bg-white dark:bg-gray-900  border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                    class="secondary-button"
                                     @click="$refs.productFilterModal.toggle()"
                                 >
                                     @lang('admin::app.settings.themes.edit.add-filter-btn')
@@ -854,7 +854,7 @@
             
                             <div class="flex gap-[10px]">
                                 <div
-                                    class="max-w-max px-[12px] py-[5px] bg-white dark:bg-gray-900  border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                    class="secondary-button"
                                     @click="$refs.categoryFilterModal.toggle()"
                                 >
                                     @lang('admin::app.settings.themes.edit.add-filter-btn')
@@ -929,7 +929,7 @@
                             </div>
             
                             <div 
-                                class="max-w-max px-[12px] py-[5px] bg-white dark:bg-gray-900  border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                class="secondary-button"
                                 @click="$refs.categoryFilterModal.toggle()"
                             >
                                 @lang('admin::app.settings.themes.edit.add-filter-btn')
@@ -1151,7 +1151,7 @@
                             >
                                 <!-- Hidden Input Filed for upload images -->
                                 <label
-                                    class="max-w-max px-[12px] py-[5px] bg-white dark:bg-gray-900  border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                    class="secondary-button"
                                     for="static_image"
                                 >
                                     @lang('admin::app.settings.themes.edit.add-image-btn')
@@ -1373,7 +1373,7 @@
                 
                                 <div class="flex gap-[10px]">
                                     <div
-                                        class="max-w-max px-[12px] py-[5px] bg-white dark:bg-gray-900  border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                        class="secondary-button"
                                         @click="isUpdating=false;$refs.addLinksModal.toggle()"
                                     >
                                         @lang('admin::app.settings.themes.edit.add-link')
@@ -1493,7 +1493,7 @@
                                     </p>
                                 </div>
                 
-                                <div class="max-w-max px-[12px] py-[5px] bg-white dark:bg-gray-900  border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer">
+                                <div class="secondary-button">
                                     @lang('admin::app.settings.themes.edit.add-footer-link-btn')
                                 </div>
                             </div>

@@ -19,7 +19,7 @@
             </span>
 
             <div
-                class="text-[14px] text-gray-600 dark:text-gray-300 cursor-pointer hover:text-gray-800"
+                class="text-[14px] text-gray-600 dark:text-gray-300 cursor-pointer hover:text-gray-800 dark:hover:text-white"
                 v-text="label"
             >
             </div>

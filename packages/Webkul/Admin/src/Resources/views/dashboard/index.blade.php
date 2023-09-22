@@ -679,12 +679,12 @@
     
                                 <div class="flex flex-col gap-[4px] justify-between">
                                     <!-- Orders Time Duration -->
-                                    <p class="text-[12px] text-gray-400 font-semibold text-right">
+                                    <p class="text-[12px] text-gray-400 font-semibold text-right dark:text-white">
                                         @{{ "@lang('admin::app.dashboard.index.date-duration')".replace(':start', formatStart ?? 0).replace(':end', formatEnd ?? 0) }}
                                     </p>
     
                                     <!-- Total Orders -->
-                                    <p class="text-[12px] text-gray-400 font-semibold text-right">
+                                    <p class="text-[12px] text-gray-400 font-semibold text-right dark:text-white">
                                         @{{ "@lang('admin::app.dashboard.index.order')".replace(':total_orders', statistics.total_orders?.current ?? 0) }}
                                     </p>
                                 </div>

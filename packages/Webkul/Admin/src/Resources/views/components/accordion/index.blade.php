@@ -25,7 +25,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-accordion-template">
-        <div {{ $attributes->merge(['class' => 'bg-white rounded-[4px] box-shadow']) }}>
+        <div {{ $attributes->merge(['class' => 'bg-white dark:bg-gray-900 rounded-[4px] box-shadow']) }}>
             <div :class="`flex items-center justify-between p-[6px] ${isOpen ? 'active' : ''}`">
                 <slot name="header">
                     Default Header

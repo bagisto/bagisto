@@ -236,7 +236,7 @@
                     {{-- Invoice Table --}}
                     <div class="relative overflow-x-auto">
                         <table class="w-full text-sm text-left min-w-[800px]">
-                            <thead class="text-[14px] text-gray-600 dark:text-gray-300 bg-gray-50 border-b-[1px] border-gray-200">
+                            <thead class="text-[14px] text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 border-b-[1px] border-gray-200 dark:border-gray-800">
                                 <tr>
                                     @foreach (['invoice-id', 'invoice-date', 'invoice-amount', 'order-id'] as $item)
                                         <th scope="col" class="px-6 py-[16px] font-semibold"> 
@@ -249,7 +249,7 @@
                             @foreach ($customer->invoices as $invoice)
                                 <tbody>
                                     {{-- Invoice Details --}}
-                                    <tr class="bg-white dark:bg-gray-900  border-b transition-all hover:bg-gray-50 dark:hover:bg-gray-950  ">
+                                    <tr class="bg-white dark:bg-gray-900  border-b transition-all hover:bg-gray-50 dark:hover:bg-gray-950 dark:border-gray-800">
                                         <td class="px-6 py-[16px] text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.customers.customers.view.invoice-id-prefix', ['invoice_id' => $invoice->id] )
                                         </td>
@@ -451,7 +451,7 @@
                     
                                 <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600 "></span>
                     
-                                <p class="flex gap-x-[4px] items-center cursor-pointer">
+                                <p class="flex gap-x-[4px] items-center cursor-pointer dark:text-white">
                                     @lang('admin::app.customers.customers.view.notify-customer')
                                 </p>
                             </label>

@@ -47,7 +47,7 @@
     }
 
     html.dark [class^="icon-"],
-    [class*=" icon-"]{
+    html.dark [class*=" icon-"]{
         color: #d1d5db;
     }
     

@@ -338,7 +338,7 @@
                         
                                     <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600 "></span>
                         
-                                    <p class="flex gap-x-[4px] items-center cursor-pointer">
+                                    <p class="flex gap-x-[4px] items-center cursor-pointer dark:text-white">
                                         @lang('admin::app.sales.orders.view.notify-customer')
                                     </p>
                                 </label>

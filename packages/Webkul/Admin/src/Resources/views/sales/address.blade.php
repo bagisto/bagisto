@@ -1,9 +1,9 @@
 <div class="flex flex-col">
-    <p class="text-gray-800 font-semibold leading-6">
+    <p class="text-gray-800 font-semibold leading-6 dark:text-white">
         {{ $address->company_name ?? '' }}
     </p>
 
-    <p class="text-gray-800 font-semibold leading-6">
+    <p class="text-gray-800 font-semibold leading-6 dark:text-white">
         {{ $address->name }}
     </p>
     
