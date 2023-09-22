@@ -2685,13 +2685,6 @@ return [
                         'title-info'                => 'ゲストチェックアウトは、アカウントを作成せずに製品を購入できるようにすることで、購入プロセスを簡略化し、迅速な取引を実現します。',
                     ],
 
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'ホームページでの新製品の許可数',
-                        'allow-no-of-featured-products'  => 'ホームページでの注目製品の許可数',
-                        'title'                          => 'ホームページの構成',
-                        'title-info'                     => 'ホームページの構成には、ウェブサイトのメインページのレイアウト、コンテンツ、デザインを効果的に表示するためのカスタマイズが含まれます。',
-                    ],
-
                     'product-view-page' => [
                         'allow-no-of-related-products'  => '関連製品の許可数',
                         'allow-no-of-up-sells-products' => 'アップセル製品の許可数',

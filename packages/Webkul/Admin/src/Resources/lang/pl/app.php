@@ -2683,13 +2683,6 @@ return [
                         'title-info'                => 'Zakupy gości pozwalają klientom na zakup produktów bez konieczności zakładania konta, usprawniając proces zakupów dla wygody i szybszych transakcji.',
                     ],
 
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'Dozwolona liczba nowych produktów na stronie głównej',
-                        'allow-no-of-featured-products'  => 'Dozwolona liczba wyróżnionych produktów na stronie głównej',
-                        'title'                          => 'Konfiguracja strony głównej',
-                        'title-info'                     => 'Konfiguracja strony głównej polega na dostosowywaniu układu, treści i projektu głównej strony internetowej w celu efektywnego przedstawiania pożądanych informacji.',
-                    ],
-
                     'product-view-page' => [
                         'allow-no-of-related-products'  => 'Dozwolona liczba powiązanych produktów',
                         'allow-no-of-up-sells-products' => 'Dozwolona liczba produktów do polecania',

@@ -2684,13 +2684,6 @@ return [
                         'title-info'                => 'O checkout de convidado permite que os clientes comprem produtos sem criar uma conta, agilizando o processo de compra para maior conveniência e transações mais rápidas.',
                     ],
 
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'Número Permitido de Novos Produtos na Página Inicial',
-                        'allow-no-of-featured-products'  => 'Número Permitido de Produtos em Destaque na Página Inicial',
-                        'title'                          => 'Configuração da Página Inicial',
-                        'title-info'                     => 'A configuração da página inicial envolve a personalização do layout, conteúdo e design da página principal de um site para apresentar informações desejadas de forma eficaz.',
-                    ],
-
                     'product-view-page' => [
                         'allow-no-of-related-products'  => 'Número Permitido de Produtos Relacionados',
                         'allow-no-of-up-sells-products' => 'Número Permitido de Produtos de Up-Sell',

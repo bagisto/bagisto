@@ -166,25 +166,6 @@ return [
             ],
         ],
     ], [
-        'key'    => 'catalog.products.homepage',
-        'name'   => 'admin::app.configuration.index.catalog.products.homepage.title',
-        'info'   => 'admin::app.configuration.index.catalog.products.homepage.title-info',
-        'sort'   => 2,
-        'fields' => [
-            [
-                'name'       => 'no_of_new_product_homepage',
-                'title'      => 'admin::app.configuration.index.catalog.products.homepage.allow-no-of-new-products',
-                'type'       => 'number',
-                'validation' => 'min:0',
-            ],
-            [
-                'name'       => 'no_of_featured_product_homepage',
-                'title'      => 'admin::app.configuration.index.catalog.products.homepage.allow-no-of-featured-products',
-                'type'       => 'number',
-                'validation' => 'min:0',
-            ],
-        ],
-    ], [
         'key'    => 'catalog.products.product_view_page',
         'name'   => 'admin::app.configuration.index.catalog.products.product-view-page.title',
         'info'   => 'admin::app.configuration.index.catalog.products.product-view-page.title-info',
