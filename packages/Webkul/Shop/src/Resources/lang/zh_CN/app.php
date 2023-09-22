@@ -273,6 +273,19 @@ return [
     ],
 
     'components' => [
+        'accordion' => [
+            'default-content' => '默认内容',
+            'default-header'  => '默认标题',
+        ],
+        
+        'drawer' => [
+           'default-toggle'  => '默认切换',
+        ],
+        
+        'media' => [
+            'add-attachments' => '添加附件',
+        ],
+        
         'layouts' => [
             'header' => [
                 'title'         => '帐户',
@@ -353,6 +366,18 @@ return [
                 'no-records-available' => '没有可用记录。',
             ],
         ],
+
+        'modal' => [
+            'default-content' => '默认内容',
+            'default-header'  => '默认标题',
+            
+            'confirm' => [
+                'title'        => '您确定吗？',
+                'message'      => '您确定要执行此操作吗？',
+                'agree-btn'    => '同意',
+                'disagree-btn' => '不同意',
+            ],
+        ],        
 
         'products' => [
             'card' => [

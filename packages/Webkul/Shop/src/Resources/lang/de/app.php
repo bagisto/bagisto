@@ -273,6 +273,19 @@ return [
     ],
 
     'components' => [
+        'accordion' => [
+            'default-content' => 'Standardinhalt',
+            'default-header'  => 'Standardüberschrift',
+        ],
+        
+        'drawer' => [
+           'default-toggle'  => 'Standardumschaltung',
+        ],
+        
+        'media' => [
+            'add-attachments' => 'Anhänge hinzufügen',
+        ],
+        
         'layouts' => [
             'header' => [
                 'title'         => 'Konto',
@@ -351,6 +364,18 @@ return [
             'table' => [
                 'actions'              => 'Aktionen',
                 'no-records-available' => 'Keine Datensätze verfügbar.',
+            ],
+        ],
+        
+        'modal' => [
+            'default-content' => 'Standardinhalt',
+            'default-header'  => 'Standardüberschrift',
+
+            'confirm' => [
+                'title'        => 'Sind Sie sicher?',
+                'message'      => 'Sind Sie sicher, dass Sie diese Aktion ausführen möchten?',
+                'agree-btn'    => 'Zustimmen',
+                'disagree-btn' => 'Nicht zustimmen',
             ],
         ],
 

@@ -273,6 +273,19 @@ return [
     ],
 
     'components' => [
+        'accordion' => [
+            'default-content' => 'Contenuto predefinito',
+            'default-header'  => 'Intestazione predefinita',
+        ],
+        
+        'drawer' => [
+           'default-toggle'  => 'Attivazione predefinita',
+        ],
+        
+        'media' => [
+            'add-attachments' => 'Aggiungi allegati',
+        ],
+        
         'layouts' => [
             'header' => [
                 'title'         => 'Account',
@@ -351,6 +364,18 @@ return [
             'table' => [
                 'actions'              => 'Azioni',
                 'no-records-available' => 'Nessun Record Disponibile.',
+            ],
+        ],
+
+        'modal' => [
+            'default-content' => 'Contenuto predefinito',
+            'default-header'  => 'Intestazione predefinita',
+            
+            'confirm' => [
+                'title'        => 'Sei sicuro?',
+                'message'      => 'Sei sicuro di voler eseguire questa azione?',
+                'agree-btn'    => 'Conferma',
+                'disagree-btn' => 'Annulla',
             ],
         ],
 

@@ -273,6 +273,19 @@ return [
     ],
 
     'components' => [
+        'accordion' => [
+            'default-content' => 'ডিফল্ট কন্টেন্ট',
+            'default-header'  => 'ডিফল্ট হেডার',
+        ],
+        
+        'drawer' => [
+           'default-toggle'  => 'ডিফল্ট টগল',
+        ],
+        
+        'media' => [
+            'add-attachments' => 'সংযুক্তি যোগ করুন',
+        ],
+        
         'layouts' => [
             'header' => [
                 'title'         => 'একাউন্ট',
@@ -351,6 +364,18 @@ return [
             'table' => [
                 'actions'              => 'ক্রিয়া',
                 'no-records-available' => 'রেকর্ড পাওয়া যায়নি।',
+            ],
+        ],
+
+        'modal' => [
+            'default-content' => 'ডিফল্ট কন্টেন্ট',
+            'default-header'  => 'ডিফল্ট হেডার',
+            
+            'confirm' => [
+                'title'        => 'আপনি কি নিশ্চিত?',
+                'message'      => 'আপনি কি নিশ্চিত যে আপনি এই কাজটি সম্পাদন করতে চান?',
+                'agree-btn'    => 'সম্মত',
+                'disagree-btn' => 'অসম্মত',
             ],
         ],
 

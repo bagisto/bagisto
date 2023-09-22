@@ -273,6 +273,19 @@ return [
     ],
 
     'components' => [
+        'accordion' => [
+            'default-content' => 'डिफ़ॉल्ट सामग्री',
+            'default-header'  => 'डिफ़ॉल्ट हेडर',
+        ],
+        
+        'drawer' => [
+           'default-toggle'  => 'डिफ़ॉल्ट टॉगल',
+        ],
+        
+        'media' => [
+            'add-attachments' => 'संलग्न करने के लिए अटैचमेंट जोड़ें',
+        ],
+        
         'layouts' => [
             'header' => [
                 'title'         => 'खाता',
@@ -351,6 +364,18 @@ return [
             'table' => [
                 'actions'              => 'क्रियाएँ',
                 'no-records-available' => 'कोई रिकॉर्ड उपलब्ध नहीं है।',
+            ],
+        ],
+
+        'modal' => [
+            'default-content' => 'डिफ़ॉल्ट सामग्री',
+            'default-header'  => 'डिफ़ॉल्ट हेडर',
+            
+            'confirm' => [
+                'title'        => 'क्या आपको यकीन है?',
+                'message'      => 'क्या आपको इस क्रिया को करने के लिए यकीन है?',
+                'agree-btn'    => 'सहमत',
+                'disagree-btn' => 'असहमत',
             ],
         ],
 

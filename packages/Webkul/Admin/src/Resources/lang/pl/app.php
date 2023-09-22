@@ -545,6 +545,7 @@ return [
             'edit' => [
                 'save-btn' => 'Zapisz produkt',
                 'title'    => 'Edytuj produkt',
+                'remove'   => 'Usuń',
 
                 'price' => [
                     'group' => [

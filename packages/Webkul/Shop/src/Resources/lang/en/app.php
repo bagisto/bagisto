@@ -273,6 +273,19 @@ return [
     ],
 
     'components' => [
+        'accordion' => [
+            'default-content' => 'Default Content',
+            'default-header'  => 'Default Header',
+        ],
+
+        'drawer' => [
+           'default-toggle'  => 'Default Toggle',
+        ],
+
+        'media' => [
+            'add-attachments' => 'Add attachments',
+        ],
+
         'layouts' => [
             'header' => [
                 'title'         => 'Account',
@@ -355,6 +368,9 @@ return [
         ],
 
         'modal' => [
+            'default-content' => 'Default Content',
+            'default-header'  => 'Default Header',
+
             'confirm' => [
                 'title'        => 'Are you sure?',
                 'message'      => 'Are you sure you want to perform this action?',
