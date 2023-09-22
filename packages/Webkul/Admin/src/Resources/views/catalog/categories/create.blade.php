@@ -140,7 +140,7 @@
                     <div class="flex gap-[50px]">
                         {{-- Add Logo --}}
                         <div class="flex flex-col gap-[8px] w-[40%] mt-5">
-                            <p class="text-gray-800 font-medium">
+                            <p class="text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.catalog.categories.create.logo')
                             </p>
 
@@ -153,7 +153,7 @@
 
                         {{-- Add Banner --}}
                         <div class="flex flex-col gap-[8px] w-[40%] mt-5">
-                            <p class="text-gray-800 font-medium">
+                            <p class="text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.catalog.categories.create.banner')
                             </p>
 
@@ -279,7 +279,7 @@
                         {{-- Position --}}
                         <div class="mb-[10px]">
                             <x-admin::form.control-group class="mb-[10px]">
-                                <x-admin::form.control-group.label class="required !text-gray-800">
+                                <x-admin::form.control-group.label class="required text-gray-800 dark:text-white">
                                     @lang('admin::app.catalog.categories.create.position')
                                 </x-admin::form.control-group.label>
 
@@ -302,7 +302,7 @@
 
                         {{-- Display Mode  --}}
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label class="required !text-gray-800 font-medium required">
+                            <x-admin::form.control-group.label class="required text-gray-800 dark:text-white font-medium required">
                                 @lang('admin::app.catalog.categories.create.display-mode')
                             </x-admin::form.control-group.label>
 
@@ -337,7 +337,7 @@
 
                         {{-- Visible in menu --}}
                         <x-admin::form.control-group>
-                            <x-admin::form.control-group.label class="!text-gray-800 font-medium">
+                            <x-admin::form.control-group.label class="text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.catalog.categories.create.visible-in-menu')
                             </x-admin::form.control-group.label>
 

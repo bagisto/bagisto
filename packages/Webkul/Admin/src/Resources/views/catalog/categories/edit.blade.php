@@ -20,7 +20,7 @@
             </p>
 
             <div class="flex gap-x-[10px] items-center">
-                <!-- Cancel Button -->
+                <!-- Back Button -->
                 <a
                     href="{{ route('admin.catalog.categories.index') }}"
                     class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
@@ -47,7 +47,7 @@
                     <x-slot:toggle>
                         <button
                             type="button"
-                            class="transparent-button px-[4px] py-[6px] hover:bg-gray-200 dark:hover:bg-gray-800  focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
+                            class="transparent-button px-[4px] py-[6px] hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
                         >
                             <span class="icon-language text-[24px] "></span>
 
@@ -182,7 +182,7 @@
                     <div class="flex gap-[50px]">
                         {{-- Add Logo --}}
                         <div class="flex flex-col gap-[8px] w-[40%] mt-5">
-                            <p class="text-gray-800 font-medium">
+                            <p class="text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.catalog.categories.edit.logo')
                             </p>
 
@@ -199,7 +199,7 @@
 
                         {{-- Add Banner --}}
                         <div class="flex flex-col gap-[8px] w-[40%] mt-5">
-                            <p class="text-gray-800 font-medium">
+                            <p class="text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.catalog.categories.edit.banner')
                             </p>
 
@@ -355,7 +355,7 @@
 
                         {{-- Display Mode  --}}
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label class="!text-gray-800 font-medium required">
+                            <x-admin::form.control-group.label class="text-gray-800 dark:text-white font-medium required">
                                 @lang('admin::app.catalog.categories.edit.display-mode')
                             </x-admin::form.control-group.label>
 
@@ -391,7 +391,7 @@
 
                         {{-- Visible in menu --}}
                         <x-admin::form.control-group>
-                            <x-admin::form.control-group.label class="!text-gray-800 font-medium">
+                            <x-admin::form.control-group.label class="text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.catalog.categories.edit.visible-in-menu')
                             </x-admin::form.control-group.label>
 
