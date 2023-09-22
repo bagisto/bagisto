@@ -2687,13 +2687,6 @@ return [
                         'title-info'                => 'Guest checkout allows customers to buy products without creating an account, streamlining the purchase process for convenience and faster transactions.',
                     ],
 
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'Allowed number of New Product in Homepage',
-                        'allow-no-of-featured-products'  => 'Allowed number of Featured Product in Homepage',
-                        'title'                          => 'Homepage configuration',
-                        'title-info'                     => 'Homepage configuration involves customizing the layout, content, and design of a website’s main page to present desired information effectively.',
-                    ],
-
                     'product-view-page' => [
                         'allow-no-of-related-products'  => 'Allowed number of Related Products',
                         'allow-no-of-up-sells-products' => 'Allowed number of Up-Sell Products',

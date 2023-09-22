@@ -2684,13 +2684,6 @@ return [
                         'title-info'                => 'La commande en tant qu\'invité permet aux clients d\'acheter des produits sans créer de compte, facilitant le processus d\'achat pour plus de commodité et de rapidité des transactions.',
                     ],
 
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'Nombre autorisé de nouveaux produits sur la page d\'accueil',
-                        'allow-no-of-featured-products'  => 'Nombre autorisé de produits en vedette sur la page d\'accueil',
-                        'title'                          => 'Configuration de la page d\'accueil',
-                        'title-info'                     => 'La configuration de la page d\'accueil comprend la personnalisation de la mise en page, du contenu et du design de la page principale d\'un site Web pour présenter efficacement les informations souhaitées.',
-                    ],
-
                     'product-view-page' => [
                         'allow-no-of-related-products'  => 'Nombre autorisé de produits similaires',
                         'allow-no-of-up-sells-products' => 'Nombre autorisé de produits de vente incitative',

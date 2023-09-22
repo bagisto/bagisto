@@ -45,13 +45,17 @@ class CatalogRuleProduct
 
         $rows = [];
 
-        $startsFrom = $rule->starts_from ? Carbon::createFromTimeString($rule->starts_from . " 00:00:01") : null;
+        $startsFrom = $rule->starts_from ? Carbon::createFromTimeString($rule->starts_from . ' 00:00:01') : null;
 
-        $endsTill = $rule->ends_till ? Carbon::createFromTimeString($rule->ends_till . " 23:59:59") : null;
+        $endsTill = $rule->ends_till ? Carbon::createFromTimeString($rule->ends_till . ' 23:59:59') : null;
+
+        $channelIds = $rule->channels->pluck('id');
+
+        $customerGroupIds = $rule->customer_groups->pluck('id');
 
         foreach ($productIds as $productId) {
-            foreach ($rule->channels()->pluck('id') as $channelId) {
-                foreach ($rule->customer_groups()->pluck('id') as $customerGroupId) {
+            foreach ($channelIds as $channelId) {
+                foreach ($customerGroupIds as $customerGroupId) {
                     $rows[] = [
                         'starts_from'       => $startsFrom,
                         'ends_till'         => $endsTill,
@@ -66,7 +70,7 @@ class CatalogRuleProduct
                     ];
 
                     if (count($rows) == $batchCount) {
-                        $this->catalogRuleProductRepository->getModel()->insert($rows);
+                        $this->catalogRuleProductRepository->insert($rows);
 
                         $rows = [];
                     }
@@ -75,7 +79,35 @@ class CatalogRuleProduct
         }
 
         if (! empty($rows)) {
-            $this->catalogRuleProductRepository->getModel()->insert($rows);
+            $this->catalogRuleProductRepository->insert($rows);
+        }
+    }
+
+    /**
+     * Clean catalog rule product indices
+     *
+     * @param  \Webkul\CatalogRule\Contracts\CatalogRule  $rule
+     * @return void
+     */
+    public function cleanRuleIndices($rule)
+    {
+        $this->catalogRuleProductRepository->where('catalog_rule_id', $rule->id)->delete();
+    }
+
+    /**
+     * Clean products indices
+     *
+     * @param  array  $productIds
+     * @return void
+     */
+    public function cleanProductIndices($productIds = [])
+    {
+        if (count($productIds)) {
+            $this->catalogRuleProductRepository->whereIn('product_id', $productIds)->delete();
+        } else {
+            $this->catalogRuleProductRepository->deleteWhere([
+                ['product_id', 'like', '%%'],
+            ]);
         }
     }
 
@@ -88,19 +120,11 @@ class CatalogRuleProduct
      */
     public function getMatchingProductIds($rule, $product = null)
     {
-        $qb = $this->productRepository->scopeQuery(function($query) use($rule, $product) {
-            $qb = $query->distinct()
-                ->addSelect('products.*')
-                ->leftJoin('product_flat', 'products.id', '=', 'product_flat.product_id')
-                ->leftJoin('channels', 'product_flat.channel', '=', 'channels.code')
-                ->whereIn('channels.id', $rule->channels()->pluck('id')->toArray());
+        $products = $this->productRepository->scopeQuery(function($query) use($rule, $product) {
+            $query = $query->addSelect('products.*');
 
             if ($product) {
-                $qb->where('products.id', $product->id);
-            }
-
-            if (! $rule->conditions) {
-                return $qb;
+                $query->where('products.id', $product->id);
             }
 
             $appliedAttributes = [];
@@ -118,15 +142,15 @@ class CatalogRuleProduct
 
                 $chunks = explode('|', $condition['attribute']);
 
-                $qb = $this->addAttributeToSelect(end($chunks), $qb);
+                $query = $this->addAttributeToSelect(end($chunks), $query);
             }
 
-            return $qb;
-        });
+            return $query;
+        })->get();
 
         $validatedProductIds = [];
 
-        foreach ($qb->get() as $product) {
+        foreach ($products as $product) {
             if (! $product->getTypeInstance()->priceRuleCanBeApplied()) {
                 continue;
             }
@@ -141,6 +165,46 @@ class CatalogRuleProduct
         }
 
         return array_unique($validatedProductIds);
+    }
+
+    /**
+     * Returns catalog rule products
+     *
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @return \Illuminate\Support\Collection
+     */
+    public function getCatalogRuleProducts($product = null)
+    {
+        $ruleProducts = $this->catalogRuleProductRepository->scopeQuery(function($query) use($product) {
+            $query = $query->distinct()
+                ->select('catalog_rule_products.*')
+                ->leftJoin('products', 'catalog_rule_products.product_id', '=', 'products.id')
+                ->orderBy('channel_id', 'asc')
+                ->orderBy('customer_group_id', 'asc')
+                ->orderBy('product_id', 'asc')
+                ->orderBy('sort_order', 'asc')
+                ->orderBy('catalog_rule_id', 'asc');
+
+            $query = $this->addAttributeToSelect('price', $query);
+
+            if (! $product) {
+                return $query;
+            }
+            
+            if (! $product->getTypeInstance()->priceRuleCanBeApplied()) {
+                return $query;
+            }
+
+            if ($product->getTypeInstance()->isComposite()) {
+                $query->whereIn('catalog_rule_products.product_id', $product->getTypeInstance()->getChildrenIds());
+            } else {
+                $query->where('catalog_rule_products.product_id', $product->id);
+            }
+
+            return $query;
+        })->get();
+
+        return $ruleProducts;
     }
     
     /**
@@ -158,71 +222,16 @@ class CatalogRuleProduct
             return $query;
         }
 
-        $query = $query->leftJoin('product_attribute_values as ' . 'pav_' . $attribute->code, function($qb) use($attribute) {
-            $qb = $qb->where('pav_' . $attribute->code . '.channel', $attribute->value_per_channel ? core()->getDefaultChannelCode() : null)
+        $query->leftJoin('product_attribute_values as ' . 'pav_' . $attribute->code, function($qb) use($attribute) {
+            $qb->where('pav_' . $attribute->code . '.channel', $attribute->value_per_channel ? core()->getDefaultChannelCode() : null)
                 ->where('pav_' . $attribute->code . '.locale', $attribute->value_per_locale ? app()->getLocale() : null);
             
             $qb->on('products.id', 'pav_' . $attribute->code . '.product_id')
                ->where('pav_' . $attribute->code . '.attribute_id', $attribute->id);
         });
 
-        $query = $query->addSelect('pav_' . $attribute->code . '.' . $attribute->column_name . ' as ' . $attribute->code);
+        $query->addSelect('pav_' . $attribute->code . '.' . $attribute->column_name . ' as ' . $attribute->code);
 
         return $query;
-    }
-
-    /**
-     * Returns catalog rule products
-     *
-     * @param  \Webkul\Product\Contracts\Product  $product
-     * @return \Illuminate\Support\Collection
-     */
-    public function getCatalogRuleProducts($product = null)
-    {
-        $results = $this->catalogRuleProductRepository->scopeQuery(function($query) use($product) {
-            $qb = $query->distinct()
-                ->select('catalog_rule_products.*')
-                ->leftJoin('products', 'catalog_rule_products.product_id', '=', 'products.id')
-                ->orderBy('channel_id', 'asc')
-                ->orderBy('customer_group_id', 'asc')
-                ->orderBy('product_id', 'asc')
-                ->orderBy('sort_order', 'asc')
-                ->orderBy('catalog_rule_id', 'asc');
-
-            $qb = $this->addAttributeToSelect('price', $qb);
-
-            if ($product) {
-                if (! $product->getTypeInstance()->priceRuleCanBeApplied()) {
-                    return $qb;
-                }
-
-                if ($product->getTypeInstance()->isComposite()) {
-                    $qb->whereIn('catalog_rule_products.product_id', $product->getTypeInstance()->getChildrenIds());
-                } else {
-                    $qb->where('catalog_rule_products.product_id', $product->id);
-                }
-            }
-
-            return $qb;
-        })->get();
-
-        return $results;
-    }
-
-    /**
-     * Returns catalog rules
-     *
-     * @param  \Webkul\CatalogRule\Contracts\CatalogRule  $rule
-     * @return void
-     */
-    public function cleanProductIndex($productIds = [])
-    {
-        if (count($productIds)) {
-            $this->catalogRuleProductRepository->getModel()->whereIn('product_id', $productIds)->delete();
-        } else {
-            $this->catalogRuleProductRepository->deleteWhere([
-                ['product_id', 'like', '%%']
-            ]);
-        }
     }
 }

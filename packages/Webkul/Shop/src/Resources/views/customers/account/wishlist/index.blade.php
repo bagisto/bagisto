@@ -53,11 +53,11 @@
                                         <div class="">
                                             <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product.url_key}`">
                                                 <!-- Wishlist Item Image -->
-                                                <x-shop::shimmer.image
+                                                <x-shop::media.images.lazy
                                                     class="max-w-[110px] max-h-[110px] min-w-[110px] w-[110px] h-[110px] rounded-[12px]" 
                                                     ::src="item.product.base_image.small_image_url"                                         
                                                 >
-                                                </x-shop::shimmer.image>
+                                                </x-shop::media.images.lazy>
                                             </a>
                                         </div>
 

@@ -3,8 +3,6 @@
 namespace Webkul\CatalogRule\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\Event;
 use Webkul\CatalogRule\Console\Commands\PriceRuleIndex;
 
 class CatalogRuleServiceProvider extends ServiceProvider
@@ -14,11 +12,11 @@ class CatalogRuleServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(Router $router)
+    public function boot()
     {
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
-        Event::listen('catalog.product.update.after', 'Webkul\CatalogRule\Listeners\Product@createProductRuleIndex');
+        $this->app->register(EventServiceProvider::class);
     }
 
     /**

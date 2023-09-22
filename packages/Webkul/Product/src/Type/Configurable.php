@@ -27,6 +27,7 @@ class Configurable extends AbstractType
         'width',
         'height',
         'weight',
+        'manage_stock',
     ];
 
     /**

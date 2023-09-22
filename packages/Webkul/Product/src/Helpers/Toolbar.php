@@ -106,7 +106,7 @@ class Toolbar
      */
     public function getDefaultLimit(): int
     {
-        return 12;
+        return $this->getAvailableLimits()->first();
     }
 
     /**
@@ -144,7 +144,7 @@ class Toolbar
      */
     public function getDefaultMode(): string
     {
-        return 'grid';
+        return core()->getConfigData('catalog.products.storefront.mode') ?? 'grid';
     }
 
     /**
