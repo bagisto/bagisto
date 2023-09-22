@@ -440,19 +440,19 @@
                                     <div class="select-none flex gap-x-[15px]">
                                         <input 
                                             type="checkbox"
-                                            name="billing[is_save_as_address]"
-                                            id="billing[is_save_as_address]"
+                                            name="billing[default_address]"
+                                            id="billing[default_address]"
                                             class="hidden peer"
                                             v-model="forms.billing.address.isSaved"
                                         >
 
                                         <label
                                             class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
-                                            for="billing[is_save_as_address]"
+                                            for="billing[default_address]"
                                         >
                                         </label>
 
-                                        <label for="billing[is_save_as_address]">
+                                        <label for="billing[default_address]">
                                             @lang('shop::app.checkout.onepage.addresses.billing.save-address')
                                         </label>
                                     </div>

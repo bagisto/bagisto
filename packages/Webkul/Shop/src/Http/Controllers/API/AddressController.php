@@ -48,10 +48,11 @@ class AddressController extends APIController
             'state',
             'city',
             'postcode',
+            'default_address'
         ]), [
             'customer_id'     => $customer->id,
             'address1'        => implode(PHP_EOL, array_filter($request->input('address1'))),
-            'address2'        => implode(PHP_EOL, array_filter($request->input('address2'))),
+            'address2'        => implode(PHP_EOL, array_filter($request->input('address2', []))),
         ]);
 
         $customerAddress = $this->customerAddressRepository->create($data);

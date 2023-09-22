@@ -77,9 +77,7 @@ class EventController extends Controller
 
         $event = $this->eventRepository->findOrFail($id);
 
-        return new JsonResponse([
-            'data' => $event,
-        ]);
+        return new JsonResponse($event);
     }
 
     /**

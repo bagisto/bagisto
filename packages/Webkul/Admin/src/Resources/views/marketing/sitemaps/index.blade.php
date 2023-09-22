@@ -54,7 +54,10 @@
 
                 <!-- Datagrid Header -->
                 <template #header="{ columns, records, sortPage, applied }">
-                    <div class="row grid grid-cols-{{ $hasPermission ? '5' : '4' }} grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] border-gray-300 text-gray-600 bg-gray-50 font-semibold">
+                    <div
+                        class="row grid grid-cols-{{ $hasPermission ? '5' : '4' }} grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] border-gray-300 text-gray-600 bg-gray-50 font-semibold"
+                        :style="'grid-template-columns: repeat({{ $hasPermission ? '5' : '4' }}, 1fr);'"
+                    >
                         <div
                             class="flex gap-[10px] cursor-pointer"
                             v-for="(columnGroup, index) in ['id', 'file_name', 'path', 'url']"
@@ -94,7 +97,7 @@
                 </template>
 
                 <!-- DataGrid Body -->
-                <template #body="{ columns, records }">
+                <template #body="{ columns, records, performAction }">
                     <div
                         v-for="record in records"
                         class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600 transition-all hover:bg-gray-50"
@@ -118,27 +121,21 @@
 
                         <!-- Actions -->
                         <div class="flex justify-end">
-                            @if (bouncer()->hasPermission('marketing.sitemaps.edit'))
-                                <a @click="selectedSitemap=1; editModal(record)">
-                                    <span
-                                        :class="record.actions['0'].icon"
-                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-100 max-sm:place-self-center"
-                                        :title="record.actions['0'].title"
-                                    >
-                                    </span>
-                                </a>
-                            @endif
-                            
-                            @if (bouncer()->hasPermission('marketing.sitemaps.delete'))
-                                <a @click="deleteModal(record.actions['1']?.url)">
-                                    <span
-                                        :class="record.actions['1'].icon"
-                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-100 max-sm:place-self-center"
-                                        :title="record.actions['1'].title"
-                                    >
-                                    </span>
-                                </a>
-                            @endif
+                            <a @click="selectedSitemap=1; editModal(record)">
+                                <span
+                                    :class="record.actions.find(action => action.title === 'Edit')?.icon"
+                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
+                                >
+                                </span>
+                            </a>
+
+                            <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
+                                <span
+                                    :class="record.actions.find(action => action.method === 'DELETE')?.icon"
+                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
+                                >
+                                </span>
+                            </a>
                         </div>
                     </div>
                 </template>
@@ -291,26 +288,6 @@
 
                         this.$refs.modalForm.setValues(values);
                     },
-
-                    deleteModal(url) {
-                        if (! confirm("@lang('admin::app.marketing.sitemaps.index.create.delete-warning')")) {
-                            return;
-                        }
-
-                        this.$axios.post(url, {
-                                '_method': 'DELETE'
-                            })
-                            .then((response) => {
-                                this.$refs.datagrid.get();
-
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
-                            })
-                            .catch(error => {
-                                if (error.response.status ==422) {
-                                    setErrors(error.response.data.errors);
-                                }
-                            });
-                    }
                 },
             })
         </script>
