@@ -48,7 +48,7 @@
                             {{-- Dropdown Actions --}}
                             <x-shop::dropdown position="bottom-right">
                                 <x-slot:toggle>
-                                    <button class="icon-more px-[6px] py-[4px] rounded-[6px] text-[24px] text-[#7D7D7D] cursor-pointer transition-all hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black"></button>
+                                    <button class="icon-more px-[6px] py-[4px] rounded-[6px] text-[24px] text-[#6E6E6E] cursor-pointer transition-all hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black"></button>
                                 </x-slot:toggle>
 
                                 <x-slot:menu>
@@ -84,7 +84,7 @@
                         </div>
                     </div>
 
-                    <p class="text-[#7D7D7D] mt-[25px]">
+                    <p class="text-[#6E6E6E] mt-[25px]">
                         {{ $address->address1 }},
 
                         @if ($address->address2)

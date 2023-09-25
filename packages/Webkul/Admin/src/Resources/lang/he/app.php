@@ -656,7 +656,6 @@ return [
                             'status'          => 'סטטוס',
                             'weight'          => 'משקל',
                             'images'          => 'תמונות',
-
                         ],
 
                         'mass-edit' => [
@@ -2558,6 +2557,7 @@ return [
                 'footer-link'                   => 'קישורי תחתית',
                 'footer-link-form-title'        => 'קישור תחתית',
                 'slider-description'            => 'התאמת ערכת הנושא הנמצאת בקרוסלה.',
+                'slider-required'               => 'שדה המחוון נדרש.',
                 'slider-add-btn'                => 'הוסף מציג',
                 'general'                       => 'כללי',
                 'add-filter-btn'                => 'הוסף מסנן',
@@ -3274,6 +3274,7 @@ return [
         'events'                   => 'אירועים',
         'sitemaps'                 => 'מפות אתר',
         'newsletter-subscriptions' => 'מנויים לניוזלטר',
+        'transactions'             => 'עסקאות',
     ],
 
     'errors' => [

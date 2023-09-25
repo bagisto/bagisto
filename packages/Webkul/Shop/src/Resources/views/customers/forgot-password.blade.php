@@ -1,3 +1,10 @@
+{{-- SEO Meta Content --}}
+@push('meta')
+    <meta name="description" content="@lang('shop::app.customers.forgot-password.title')"/>
+
+    <meta name="keywords" content="@lang('shop::app.customers.forgot-password.title')"/>
+@endPush
+
 <x-shop::layouts
     :has-header="false"
     :has-feature="false"
@@ -14,9 +21,11 @@
             <a
                 href="{{ route('shop.home.index') }}" 
                 class="m-[0_auto_20px_auto]"
+                aria-label="Bagisto "
             >
                 <img
                     src="{{ bagisto_asset('images/logo.svg') }}"
+                    alt="Bagisto "
                     width="131"
                     height="29"
                 >
@@ -31,7 +40,7 @@
                 @lang('shop::app.customers.forgot-password.title')
             </h1>
 
-            <p class="mt-[15px] text-[#7D7D7D] text-[20px] max-sm:text-[16px]">
+            <p class="mt-[15px] text-[#6E6E6E] text-[20px] max-sm:text-[16px]">
                 @lang('shop::app.customers.forgot-password.forgot-password-text')
             </p>
 
@@ -80,7 +89,7 @@
                         </button>
                     </div>
 
-                    <p class="mt-[20px] text-[#7D7D7D] font-medium">
+                    <p class="mt-[20px] text-[#6E6E6E] font-medium">
                         @lang('shop::app.customers.forgot-password.back')
                         
                         <a class="text-navyBlue" 
@@ -96,7 +105,7 @@
             </div>
         </div>
 
-        <p class="mt-[30px] mb-[15px] text-[#7d7d7d] text-xs text-center">
+        <p class="mt-[30px] mb-[15px] text-[#6E6E6E] text-xs text-center">
             @lang('shop::app.customers.forgot-password.footer')
         </p>
     </div>

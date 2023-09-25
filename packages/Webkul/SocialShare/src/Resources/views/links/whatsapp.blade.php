@@ -15,6 +15,7 @@
                 :href="shareUrl" 
                 data-action="share/whatsapp/share" 
                 target="_blank"
+                aria-label="Whatsapp"
             >
                 @include('social_share::icons.whatsapp')
             </a>

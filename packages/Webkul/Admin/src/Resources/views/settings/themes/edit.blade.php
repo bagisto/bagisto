@@ -346,23 +346,16 @@
                                 <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group class="mb-[10px]">
-                                            <x-admin::form.control-group.label class="required">
+                                            <x-admin::form.control-group.label>
                                                 @lang('admin::app.settings.themes.edit.link')
                                             </x-admin::form.control-group.label>
 
                                             <x-admin::form.control-group.control
                                                 type="text"
                                                 name="{{ $currentLocale->code }}[link]"
-                                                rules="required|url"
-                                                :label="trans('admin::app.settings.themes.edit.link')"
                                                 :placeholder="trans('admin::app.settings.themes.edit.link')"
                                             >
                                             </x-admin::form.control-group.control>
-            
-                                            <x-admin::form.control-group.error
-                                                control-name="{{ $currentLocale->code }}[link]"
-                                            >
-                                            </x-admin::form.control-group.error>
                                         </x-admin::form.control-group>
 
                                         <x-admin::form.control-group.label class="required">
@@ -372,7 +365,7 @@
                                         <x-admin::form.control-group.control
                                             type="image"
                                             name="slider_image"
-                                            :label="trans('admin::app.catalog.categories.create.add-logo')"
+                                            rules="required"
                                             :is-multiple="false"
                                         >
                                         </x-admin::form.control-group.control>
@@ -1163,6 +1156,7 @@
                                     id="static_image"
                                     class="hidden"
                                     @change="storeImage($event)"
+                                    accept="image/*"
                                 >
                             </div>
                         </div>
@@ -1788,19 +1782,31 @@
                 },
 
                 methods: {
-                    saveSliderImage(params) {
+                    saveSliderImage(params, { resetForm ,setErrors }) {
                         let formData = new FormData(this.$refs.createSliderForm);
 
-                        this.sliders.images.push({
-                            slider_image: formData.get("slider_image[]"),
-                            link: formData.get("{{ $currentLocale->code }}[link]"),
-                        });
+                        try {
+                            const sliderImage = formData.get("slider_image[]");
 
-                        if (formData.get("slider_image[]") instanceof File) {
-                            this.setFile(formData.get("slider_image[]"), this.sliders.images.length - 1);
+                            if (! sliderImage) {
+                                throw new Error("{{ trans('admin::app.settings.themes.edit.slider-required') }}");
+                            }
+
+                            this.sliders.images.push({
+                                slider_image: sliderImage,
+                                link: formData.get("{{ $currentLocale->code }}[link]"),
+                            });
+
+                            if (sliderImage instanceof File) {
+                                this.setFile(sliderImage, this.sliders.images.length - 1);
+                            }
+
+                            resetForm();
+
+                            this.$refs.addSliderModal.toggle();
+                        } catch (error) {
+                            setErrors({'slider_image': [error.message]});
                         }
-
-                        this.$refs.addSliderModal.toggle();
                     },
 
                     setFile(file, index) {
@@ -2018,6 +2024,12 @@
                         let selectedImage = $event.target.files[0];
 
                         if (! selectedImage) {
+                            return;
+                        }
+
+                        const allowedImageTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'];
+
+                        if (! allowedImageTypes.includes(selectedImage.type)) {
                             return;
                         }
 

@@ -2557,6 +2557,7 @@ return [
                 'footer-link'                   => 'Посилання у підвалі',
                 'footer-link-form-title'        => 'Посилання у підвалі',
                 'slider-description'            => 'Настроювання теми, пов "язані зі слайдером".',
+                'slider-required'               => 'Поле слайдера обов\'язкове.',
                 'slider-add-btn'                => 'Додати слайдер',
                 'general'                       => 'Загальне',
                 'add-filter-btn'                => 'Додати фільтр',
@@ -3273,6 +3274,7 @@ return [
         'events'                   => 'Події',
         'sitemaps'                 => 'Карти сайту',
         'newsletter-subscriptions' => 'Підписка на розсилку',
+        'transactions'             => 'Транзакції',
     ],
 
     'errors' => [

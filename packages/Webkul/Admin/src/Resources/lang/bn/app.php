@@ -2558,6 +2558,7 @@ return [
                 'footer-link'                   => 'ফুটার লিঙ্ক',
                 'footer-link-form-title'        => 'ফুটার লিঙ্ক',
                 'slider-description'            => 'স্লাইডার সম্পর্কিত থিম কাস্টমাইজেশন।',
+                'slider-required'               => 'স্লাইডার ক্ষেত্র প্রয়োজন.',
                 'slider-add-btn'                => 'স্লাইডার যোগ করুন',
                 'general'                       => 'সাধারণ',
                 'add-filter-btn'                => 'ফিল্টার যোগ করুন',
@@ -3273,6 +3274,7 @@ return [
         'events'                   => 'ইভেন্টগুলি',
         'sitemaps'                 => 'সাইটম্যাপগুলি',
         'newsletter-subscriptions' => 'নিউজলেটার সাবস্ক্রিপশন',
+        'transactions'             => 'লেনদেন',
     ],
 
     'errors' => [

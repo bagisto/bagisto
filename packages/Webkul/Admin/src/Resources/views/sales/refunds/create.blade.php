@@ -343,8 +343,7 @@
                         .then((response) => {
 
                             if (! response.data) {
-                                alert('admin::app.sales.refunds.invalid-qty');
-
+                                this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('admin::app.sales.refunds.invalid-qty')" });
                             } else {
                                 this.refund.summary = response.data;
                             }

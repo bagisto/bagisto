@@ -2525,7 +2525,6 @@ return [
                     'type'         => 'タイプ',
                     'name'         => '名前',
                     'channel_name' => 'チャネル名',
-
                 ],
             ],
 
@@ -2558,6 +2557,7 @@ return [
                 'footer-link'                   => 'フッターリンク',
                 'footer-link-form-title'        => 'フッターリンク',
                 'slider-description'            => 'スライダー関連のテーマカスタマイズ。',
+                'slider-required'               => 'スライダーフィールドは必須です。',
                 'slider-add-btn'                => 'スライダーを追加',
                 'general'                       => '一般',
                 'add-filter-btn'                => 'フィルターを追加',
@@ -3274,6 +3274,7 @@ return [
         'events'                   => 'イベント',
         'sitemaps'                 => 'サイトマップ',
         'newsletter-subscriptions' => 'ニュースレター購読',
+        'transactions'             => '取引',
     ],
 
     'errors' => [

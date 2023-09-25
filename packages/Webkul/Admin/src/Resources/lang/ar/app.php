@@ -2558,6 +2558,7 @@ return [
                 'footer-link'                   => 'روابط التذييل',
                 'footer-link-form-title'        => 'روابط التذييل',
                 'slider-description'            => 'تخصيص السمة المتعلق بالشرائح.',
+                'slider-required'               => 'حقل الشريط مطلوب.',
                 'slider-add-btn'                => 'إضافة شريحة',
                 'general'                       => 'عام',
                 'add-filter-btn'                => 'إضافة مرشح',
@@ -3273,6 +3274,7 @@ return [
         'events'                   => 'الأحداث',
         'sitemaps'                 => 'خرائط الموقع',
         'newsletter-subscriptions' => 'اشتراكات النشرة الإخبارية',
+        'transactions'             => 'المعاملات',
     ],
 
     'errors' => [

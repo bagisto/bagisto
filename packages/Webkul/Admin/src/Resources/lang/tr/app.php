@@ -619,7 +619,6 @@ return [
                     'empty-info'        => ':type ürünleri eklemek için.',
                     'sku'               => 'SKU - :sku',
                     'image-placeholder' => 'Ürün Resmi',
-
                 ],
 
                 'types' => [
@@ -2559,6 +2558,7 @@ return [
                 'footer-link'                   => 'Footer Bağlantıları',
                 'footer-link-form-title'        => 'Footer Bağlantısı',
                 'slider-description'            => 'Slider ile ilgili tema özelleştirmesi.',
+                'slider-required'               => 'Slider alanı gereklidir.',
                 'slider-add-btn'                => 'Slider Ekle',
                 'general'                       => 'Genel',
                 'add-filter-btn'                => 'Filtre Ekle',
@@ -3274,6 +3274,7 @@ return [
         'events'                   => 'Etkinlikler',
         'sitemaps'                 => 'Site Haritaları',
         'newsletter-subscriptions' => 'Bülten Abonelikleri',
+        'transactions'             => 'İşlemler',
     ],
 
     'errors' => [

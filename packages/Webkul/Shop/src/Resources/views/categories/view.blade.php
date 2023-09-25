@@ -24,6 +24,9 @@
                 <img
                     class="rounded-[12px]"
                     src="{{ $category->banner_url }}"
+                    alt="{{ $category->name }}"
+                    width="1320"
+                    height="300"
                 >
             </div>
         </div>

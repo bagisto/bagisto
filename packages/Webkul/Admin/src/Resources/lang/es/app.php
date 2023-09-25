@@ -2557,6 +2557,7 @@ return [
                 'footer-link'                   => 'Enlaces del Pie de Página',
                 'footer-link-form-title'        => 'Enlace del Pie de Página',
                 'slider-description'            => 'Personalización de temas relacionados con el Slider.',
+                'slider-required'               => 'Campo de diapositivas es obligatorio.',
                 'slider-add-btn'                => 'Agregar Slider',
                 'general'                       => 'General',
                 'add-filter-btn'                => 'Agregar Filtro',
@@ -3273,6 +3274,7 @@ return [
         'events'                   => 'Eventos',
         'sitemaps'                 => 'Mapas del Sitio',
         'newsletter-subscriptions' => 'Suscripciones al Boletín',
+        'transactions'             => 'Transacciones',
     ],
 
     'errors' => [

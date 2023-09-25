@@ -18,6 +18,10 @@
                 :isMultiRow="true"
                 ref="review_data"
             >
+                @php 
+                    $hasPermission = core()->getConfigData('customers.reviews.mass-update') || core()->getConfigData('customers.reviews.mass-delete');
+                @endphp
+
                 <!-- Datagrid Header -->
                 <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading }">
                     <template v-if="! isLoading">
@@ -26,30 +30,32 @@
                                 class="flex gap-[10px] items-center"
                                 v-for="(columnGroup, index) in [['name', 'product_name', 'product_review_status'], ['rating', 'created_at', 'product_review_id'], ['title', 'comment']]"
                             >
-                                <label
-                                    class="flex gap-[4px] w-max items-center cursor-pointer select-none"
-                                    for="mass_action_select_all_records"
-                                    v-if="! index"
-                                >
-                                    <input 
-                                        type="checkbox" 
-                                        name="mass_action_select_all_records"
-                                        id="mass_action_select_all_records"
-                                        class="hidden peer"
-                                        :checked="['all', 'partial'].includes(applied.massActions.meta.mode)"
-                                        @change="selectAllRecords"
+                                @if ($hasPermission)
+                                    <label
+                                        class="flex gap-[4px] w-max items-center cursor-pointer select-none"
+                                        for="mass_action_select_all_records"
+                                        v-if="! index"
                                     >
-                        
-                                    <span
-                                        class="icon-uncheckbox cursor-pointer rounded-[6px] text-[24px]"
-                                        :class="[
-                                            applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-blue-600 ' : (
-                                                applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-blue-600' : ''
-                                            ),
-                                        ]"
-                                    >
-                                    </span>
-                                </label>
+                                        <input 
+                                            type="checkbox" 
+                                            name="mass_action_select_all_records"
+                                            id="mass_action_select_all_records"
+                                            class="hidden peer"
+                                            :checked="['all', 'partial'].includes(applied.massActions.meta.mode)"
+                                            @change="selectAllRecords"
+                                        >
+                            
+                                        <span
+                                            class="icon-uncheckbox cursor-pointer rounded-[6px] text-[24px]"
+                                            :class="[
+                                                applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-blue-600' : (
+                                                    applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-blue-600' : ''
+                                                ),
+                                            ]"
+                                        >
+                                        </span>
+                                    </label>
+                                @endif
 
                                 <!-- Product Name, Review Status -->
                                 <p class="text-gray-600 dark:text-gray-300">
@@ -94,20 +100,22 @@
                         >
                             <!-- Name, Product, Description -->
                             <div class="flex gap-[10px]">
-                                <input 
-                                    type="checkbox" 
-                                    :name="`mass_action_select_record_${record.product_review_id}`"
-                                    :id="`mass_action_select_record_${record.product_review_id}`"
-                                    :value="record.product_review_id"
-                                    class="hidden peer"
-                                    v-model="applied.massActions.indices"
-                                    @change="setCurrentSelectionMode"
-                                >
-                    
-                                <label 
-                                    class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600 "
-                                    :for="`mass_action_select_record_${record.product_review_id}`"
-                                ></label>
+                                @if ($hasPermission)
+                                    <input 
+                                        type="checkbox" 
+                                        :name="`mass_action_select_record_${record.product_review_id}`"
+                                        :id="`mass_action_select_record_${record.product_review_id}`"
+                                        :value="record.product_review_id"
+                                        class="hidden peer"
+                                        v-model="applied.massActions.indices"
+                                        @change="setCurrentSelectionMode"
+                                    >
+                        
+                                    <label 
+                                        class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                                        :for="`mass_action_select_record_${record.product_review_id}`"
+                                    ></label>
+                                @endif
 
                                 <div class="flex flex-col gap-[6px]">
                                     <p

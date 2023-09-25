@@ -2557,6 +2557,7 @@ return [
                 'footer-link'                   => 'फ़ुटर लिंक',
                 'footer-link-form-title'        => 'फ़ुटर लिंक',
                 'slider-description'            => 'स्लाइडर से संबंधित थीम अनुकूलन।',
+                'slider-required'               => 'स्लाइडर क्षेत्र आवश्यक है।',
                 'slider-add-btn'                => 'स्लाइडर जोड़ें',
                 'general'                       => 'सामान्य',
                 'add-filter-btn'                => 'फ़िल्टर जोड़ें',
@@ -3273,6 +3274,7 @@ return [
         'events'                   => 'इवेंट्स',
         'sitemaps'                 => 'साइटमैप्स',
         'newsletter-subscriptions' => 'न्यूजलेटर सब्सक्रिप्शन्स',
+        'transactions'             => 'लेन-देन',
     ],
 
     'errors' => [

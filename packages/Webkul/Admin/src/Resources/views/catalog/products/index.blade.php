@@ -59,6 +59,10 @@
     {{-- Datagrid --}}
     <x-admin::datagrid src="{{ route('admin.catalog.products.index') }}" :isMultiRow="true">
         {{-- Datagrid Header --}}
+        @php 
+            $hasPermission = core()->getConfigData('catalog.products.mass-update') || core()->getConfigData('catalog.products.mass-delete');
+        @endphp
+
         <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
             <template v-if="! isLoading">
                 <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
@@ -66,30 +70,32 @@
                         class="flex gap-[10px] items-center select-none"
                         v-for="(columnGroup, index) in [['name', 'sku', 'attribute_family'], ['base_image', 'price', 'quantity', 'product_id'], ['status', 'category_name', 'type']]"
                     >
-                        <label
-                            class="flex gap-[4px] items-center w-max cursor-pointer select-none"
-                            for="mass_action_select_all_records"
-                            v-if="! index"
-                        >
-                            <input
-                                type="checkbox"
-                                name="mass_action_select_all_records"
-                                id="mass_action_select_all_records"
-                                class="hidden peer"
-                                :checked="['all', 'partial'].includes(applied.massActions.meta.mode)"
-                                @change="selectAllRecords"
+                        @if ($hasPermission)
+                            <label
+                                class="flex gap-[4px] items-center w-max cursor-pointer select-none"
+                                for="mass_action_select_all_records"
+                                v-if="! index"
                             >
+                                <input
+                                    type="checkbox"
+                                    name="mass_action_select_all_records"
+                                    id="mass_action_select_all_records"
+                                    class="hidden peer"
+                                    :checked="['all', 'partial'].includes(applied.massActions.meta.mode)"
+                                    @change="selectAllRecords"
+                                >
 
-                            <span
-                                class="icon-uncheckbox cursor-pointer rounded-[6px] text-[24px]"
-                                :class="[
-                                    applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-blue-600 ' : (
-                                        applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-blue-600' : ''
-                                    ),
-                                ]"
-                            >
-                            </span>
-                        </label>
+                                <span
+                                    class="icon-uncheckbox cursor-pointer rounded-[6px] text-[24px]"
+                                    :class="[
+                                        applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-blue-600' : (
+                                            applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-blue-600' : ''
+                                        ),
+                                    ]"
+                                >
+                                </span>
+                            </label>
+                        @endif
 
                         <p class="text-gray-600 dark:text-gray-300">
                             <span class="[&>*]:after:content-['_/_']">
@@ -134,20 +140,22 @@
                 >
                     {{-- Name, SKU, Attribute Family Columns --}}
                     <div class="flex gap-[10px]">
-                        <input
-                            type="checkbox"
-                            :name="`mass_action_select_record_${record.product_id}`"
-                            :id="`mass_action_select_record_${record.product_id}`"
-                            :value="record.product_id"
-                            class="hidden peer"
-                            v-model="applied.massActions.indices"
-                            @change="setCurrentSelectionMode"
-                        >
+                        @if ($hasPermission)
+                            <input
+                                type="checkbox"
+                                :name="`mass_action_select_record_${record.product_id}`"
+                                :id="`mass_action_select_record_${record.product_id}`"
+                                :value="record.product_id"
+                                class="hidden peer"
+                                v-model="applied.massActions.indices"
+                                @change="setCurrentSelectionMode"
+                            >
 
-                        <label
-                            class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600 "
-                            :for="`mass_action_select_record_${record.product_id}`"
-                        ></label>
+                            <label
+                                class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                                :for="`mass_action_select_record_${record.product_id}`"
+                            ></label>
+                        @endif
 
                         <div class="flex flex-col gap-[6px]">
                             <p

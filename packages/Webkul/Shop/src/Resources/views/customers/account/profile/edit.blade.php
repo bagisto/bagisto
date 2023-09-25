@@ -240,7 +240,7 @@
             ></label>
 
             <label
-                class="text-[16] text-[#7d7d7d] max-sm:text-[12px] pl-0 select-none cursor-pointer"
+                class="text-[16] text-[#6E6E6E] max-sm:text-[12px] pl-0 select-none cursor-pointer"
                 for="is-subscribed"
             >
                 @lang('shop::app.customers.account.profile.subscribe-to-newsletter')

@@ -2557,6 +2557,7 @@ return [
                 'footer-link'                   => '页脚链接',
                 'footer-link-form-title'        => '页脚链接',
                 'slider-description'            => '与轮播相关的主题定制。',
+                'slider-required'               => '滑块字段是必需的。',
                 'slider-add-btn'                => '添加轮播',
                 'general'                       => '通用',
                 'add-filter-btn'                => '添加过滤器',
@@ -3273,6 +3274,7 @@ return [
         'events'                   => '事件',
         'sitemaps'                 => '站点地图',
         'newsletter-subscriptions' => '电子报订阅',
+        'transactions'             => '交易',
     ],
 
     'errors' => [

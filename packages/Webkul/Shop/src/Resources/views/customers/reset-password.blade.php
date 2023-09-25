@@ -1,3 +1,10 @@
+{{-- SEO Meta Content --}}
+@push('meta')
+    <meta name="description" content="@lang('shop::app.customers.reset-password.title')"/>
+
+    <meta name="keywords" content="@lang('shop::app.customers.reset-password.title')"/>
+@endPush
+
 <x-shop::layouts
     :has-header="false"
     :has-feature="false"
@@ -14,9 +21,11 @@
             <a
                 href="{{ route('shop.home.index') }}"
                 class="m-[0_auto_20px_auto]"
+                aria-label="Bagisto "
             >
                 <img
                     src="{{ bagisto_asset('images/logo.svg') }}"
+                    alt="Bagisto "
                     width="131"
                     height="29"
                 >
@@ -130,7 +139,7 @@
 
         </div>
 
-        <p class="mt-[30px] mb-[15px] text-center text-[#7d7d7d] text-xs">
+        <p class="mt-[30px] mb-[15px] text-center text-[#6E6E6E] text-xs">
             @lang('shop::app.customers.reset_password.footer')
         </p>
     </div>
