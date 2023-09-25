@@ -182,7 +182,7 @@
                                 name="{{$currentLocale->code}}[meta_keywords]"
                                 :value="old($currentLocale->code)['meta_keywords'] ?? ($page->translate($currentLocale->code)['meta_keywords'] ?? '')"
                                 id="meta_keywords"
-                                class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
+                                class="text-gray-600 dark:text-gray-300"
                                 :label="trans('admin::app.cms.edit.meta-keywords')"
                                 :placeholder="trans('admin::app.cms.edit.meta-keywords')"
                             >
@@ -204,7 +204,7 @@
                                 name="{{$currentLocale->code}}[meta_description]"
                                 :value="old($currentLocale->code)['meta_description'] ?? ($page->translate($currentLocale->code)['meta_description'] ?? '')"
                                 id="meta_description"
-                                class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
+                                class="text-gray-600 dark:text-gray-300"
                                 :label="trans('admin::app.cms.edit.meta-description')"
                                 :placeholder="trans('admin::app.cms.edit.meta-description')"
                             >

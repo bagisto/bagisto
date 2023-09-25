@@ -93,7 +93,7 @@
                                         @{{ element.title }}
                                     </p>
 
-                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                    <p class="text-gray-600 dark:text-gray-300">
                                         <template v-if="element.type == 'file'">
                                             <div>
                                                 @lang('admin::app.catalog.products.edit.types.downloadable.links.file')
@@ -123,7 +123,7 @@
                                         </template>
                                     </p>
 
-                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                    <p class="text-gray-600 dark:text-gray-300">
                                         <template v-if="element.sample_type == 'file'">
                                             <div v-if="element.sample_file_url">
                                                 @lang('admin::app.catalog.products.edit.types.downloadable.links.sample-file')
@@ -556,7 +556,7 @@
                                         @{{ element.title }}
                                     </p>
 
-                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                    <p class="text-gray-600 dark:text-gray-300">
                                         <template v-if="element.type == 'file'">
                                             <div>
                                                 @lang('admin::app.catalog.products.edit.types.downloadable.samples.file')

@@ -34,12 +34,12 @@
                                 class="flex gap-[10px] cursor-pointer"
                                 v-for="(columnGroup, index) in ['id', 'status', 'email']"
                             >
-                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     <span class="[&>*]:after:content-['_/_']">
                                         <span
                                             class="after:content-['/'] last:after:content-['']"
                                             :class="{
-                                                'text-gray-800 font-medium': applied.sort.column == columnGroup,
+                                                'text-gray-800 dark:text-white font-medium': applied.sort.column == columnGroup,
                                                 'cursor-pointer hover:text-gray-800 dark:hover:text-white': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
                                             }"
                                             @click="

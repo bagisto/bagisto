@@ -56,7 +56,7 @@
                     {{-- Panel Content --}}
                     <div class="px-[16px] pb-[16px]">
                         <x-admin::form.control-group class="mb-4">
-                            <x-admin::form.control-group.label class="!text-gray-800">
+                            <x-admin::form.control-group.label class="!text-gray-800 dark:!text-white">
                                 @lang('admin::app.catalog.families.edit.code')
                             </x-admin::form.control-group.label>
 
@@ -80,7 +80,7 @@
                         </x-admin::form.control-group>
 
                         <x-admin::form.control-group class="mb-4">
-                            <x-admin::form.control-group.label class="!text-gray-800">
+                            <x-admin::form.control-group.label class="!text-gray-800 dark:!text-white">
                                 @lang('admin::app.catalog.families.edit.name')
                             </x-admin::form.control-group.label>
 

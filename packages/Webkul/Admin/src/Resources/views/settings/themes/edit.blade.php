@@ -141,7 +141,7 @@
                                 >
                                     <div class="flex gap-[10px]">
                                         <div class="grid gap-[6px] place-content-start">
-                                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                            <p class="text-gray-600 dark:text-gray-300">
                                                 <div> 
                                                     @lang('admin::app.settings.themes.edit.link'): 
 
@@ -151,7 +151,7 @@
                                                 </div>
                                             </p>
 
-                                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                            <p class="text-gray-600 dark:text-gray-300">
                                                 <div class="flex justify-between"> 
                                                     @lang('admin::app.settings.themes.edit.image'): 
 
@@ -532,13 +532,13 @@
                             >
                                 <div class="flex gap-[10px]">
                                     <div class="grid gap-[6px] place-content-start">
-                                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                        <p class="text-gray-600 dark:text-gray-300">
                                             <div> 
                                                 @{{ "@lang('admin::app.settings.themes.edit.key')".replace(':key', filter.key) }}
                                             </div>
                                         </p>
 
-                                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                        <p class="text-gray-600 dark:text-gray-300">
                                             @{{ "@lang('admin::app.settings.themes.edit.value')".replace(':value', filter.value) }}
                                         </p>
                                     </div>
@@ -880,13 +880,13 @@
                             >
                                 <div class="flex gap-[10px]">
                                     <div class="grid gap-[6px] place-content-start">
-                                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                        <p class="text-gray-600 dark:text-gray-300">
                                             <div> 
                                                 @{{ "@lang('admin::app.settings.themes.edit.key')".replace(':key', filter.key) }}
                                             </div>
                                         </p>
 
-                                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                        <p class="text-gray-600 dark:text-gray-300">
                                             @{{ "@lang('admin::app.settings.themes.edit.value')".replace(':value', filter.value) }}
                                         </p>
                                     </div>
@@ -1400,7 +1400,7 @@
                                     <div class="flex gap-[10px] justify-between py-5 cursor-pointer">
                                         <div class="flex gap-[10px] ">
                                             <div class="grid gap-[6px] place-content-start">
-                                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                                <p class="text-gray-600 dark:text-gray-300">
                                                     <div> 
                                                         @lang('admin::app.settings.themes.edit.column'): 
 
@@ -1410,7 +1410,7 @@
                                                     </div>
                                                 </p>
     
-                                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                                <p class="text-gray-600 dark:text-gray-300">
                                                     <div> 
                                                         @lang('admin::app.settings.themes.edit.path'):
 
@@ -1424,7 +1424,7 @@
                                                     </div>
                                                 </p>
 
-                                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                                <p class="text-gray-600 dark:text-gray-300">
                                                     <div> 
                                                         @lang('admin::app.settings.themes.edit.filter-title'):
 
@@ -1436,7 +1436,7 @@
                                                     </div>
                                                 </p>
 
-                                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                                <p class="text-gray-600 dark:text-gray-300">
                                                     <div> 
                                                         @lang('admin::app.settings.themes.edit.sort-order'):
 

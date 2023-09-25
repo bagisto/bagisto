@@ -52,13 +52,13 @@
                                 </label>
 
                                 <!-- Product Name, Review Status -->
-                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     <span class="[&>*]:after:content-['_/_']">
                                         <template v-for="column in columnGroup">
                                             <span
                                                 class="after:content-['/'] last:after:content-['']"
                                                 :class="{
-                                                    'text-gray-800 font-medium': applied.sort.column == column,
+                                                    'text-gray-800 dark:text-white font-medium': applied.sort.column == column,
                                                     'cursor-pointer hover:text-gray-800 dark:hover:text-white': columns.find(columnTemp => columnTemp.index === column)?.sortable,
                                                 }"
                                                 @click="
@@ -116,7 +116,7 @@
                                     >
                                     </p>
                                     <p
-                                        class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
+                                        class="text-gray-600 dark:text-gray-300"
                                         v-text="record.product_name"
                                     >
                                     </p>
@@ -136,13 +136,13 @@
                                 </div>
 
                                 <p
-                                    class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
+                                    class="text-gray-600 dark:text-gray-300"
                                     v-text="record.created_at"
                                 >
                                 </p>
 
                                 <p
-                                    class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
+                                    class="text-gray-600 dark:text-gray-300"
                                 >
                                     @{{ "@lang('admin::app.customers.reviews.index.datagrid.review-id')".replace(':review_id', record.product_review_id) }}
                                 </p>
@@ -157,7 +157,7 @@
                                 </p>
 
                                 <p
-                                    class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
+                                    class="text-gray-600 dark:text-gray-300"
                                     v-text="record.comment"
                                 >
                                 </p>

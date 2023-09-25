@@ -83,7 +83,7 @@
                                         name="description"
                                         :value="old('description')"
                                         id="description"
-                                        class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
+                                        class="text-gray-600 dark:text-gray-300"
                                         :label="trans('admin::app.marketing.promotions.cart-rules.create.description')"
                                         :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.description')"
                                     >

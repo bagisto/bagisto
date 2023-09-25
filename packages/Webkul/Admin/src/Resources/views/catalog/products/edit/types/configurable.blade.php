@@ -549,7 +549,7 @@
                     >
                     </p>
 
-                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                    <p class="text-gray-600 dark:text-gray-300">
                         @{{ "@lang('admin::app.catalog.products.edit.types.configurable.sku')".replace(':sku', variant.sku) }}
                     </p>
 
@@ -572,7 +572,7 @@
                             Default
                         </span>
 
-                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300">
                             <span
                                 class="after:content-[',_'] last:after:content-['']"
                                 v-for='(attribute, index) in attributes'

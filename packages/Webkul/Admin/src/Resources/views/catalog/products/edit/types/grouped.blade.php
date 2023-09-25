@@ -68,7 +68,7 @@
                                         @{{ element.associated_product.name }}
                                     </p>
 
-                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                    <p class="text-gray-600 dark:text-gray-300">
                                         @{{ "@lang('admin::app.catalog.products.edit.types.grouped.sku')".replace(':sku', element.associated_product.sku) }}
                                     </p>
                                 </div>

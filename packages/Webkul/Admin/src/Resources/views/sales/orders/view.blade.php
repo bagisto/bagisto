@@ -159,7 +159,7 @@
                                         </p>
 
                                         <div class="flex flex-col gap-[6px] place-items-start">
-                                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                            <p class="text-gray-600 dark:text-gray-300">
                                                 @lang('admin::app.sales.orders.view.amount-per-unit', [
                                                     'amount' => core()->formatBasePrice($item->base_price),
                                                     'qty'    => $item->qty_ordered,
@@ -167,18 +167,18 @@
                                             </p>
 
                                             @if (isset($item->additional['attributes']))
-                                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                                <p class="text-gray-600 dark:text-gray-300">
                                                     @foreach ($item->additional['attributes'] as $attribute)
                                                         {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
                                                     @endforeach
                                                 </p>
                                             @endif
 
-                                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                            <p class="text-gray-600 dark:text-gray-300">
                                                 @lang('admin::app.sales.orders.view.sku', ['sku' => $item->sku])
                                             </p>
 
-                                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                            <p class="text-gray-600 dark:text-gray-300">
                                                 {{ $item->qty_ordered ? trans('admin::app.sales.orders.view.item-ordered', ['qty_ordered' => $item->qty_ordered]) : '' }}
 
                                                 {{ $item->qty_invoiced ? trans('admin::app.sales.orders.view.item-invoice', ['qty_invoiced' => $item->qty_invoiced]) : '' }}
@@ -201,21 +201,21 @@
                                     </div>
 
                                     <div class="flex flex-col gap-[6px] items-end place-items-start">
-                                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                        <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.sales.orders.view.price', ['price' => core()->formatBasePrice($item->base_price)])
                                         </p>
 
-                                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                        <p class="text-gray-600 dark:text-gray-300">
                                             {{ $item->tax_percent }}%
                                             @lang('admin::app.sales.orders.view.tax', ['tax' => core()->formatBasePrice($item->base_tax_amount)])
                                         </p>
                                         @if ($order->base_discount_amount > 0)
-                                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                            <p class="text-gray-600 dark:text-gray-300">
                                                 @lang('admin::app.sales.orders.view.discount', ['discount' => core()->formatBasePrice($item->base_discount_amount)])
                                             </p>
                                         @endif
 
-                                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                        <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.sales.orders.view.sub-total', ['sub_total' => core()->formatBasePrice($item->base_total)])
                                         </p>
                                     </div>
@@ -230,12 +230,12 @@
                                 @lang('admin::app.sales.orders.view.summary-sub-total')
                             </p>
 
-                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.sales.orders.view.summary-tax')
                             </p>
 
                             @if ($haveStockableItems = $order->haveStockableItems())
-                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     @lang('admin::app.sales.orders.view.shipping-and-handling')</p>
                             @endif
 
@@ -243,15 +243,15 @@
                                 @lang('admin::app.sales.orders.view.summary-grand-total')
                             </p>
 
-                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.sales.orders.view.total-paid')
                             </p>
 
-                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.sales.orders.view.total-refund')
                             </p>
 
-                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.sales.orders.view.total-due')
                             </p>
                         </div>
@@ -260,12 +260,12 @@
                                 {{ core()->formatBasePrice($order->base_sub_total) }}
                             </p>
 
-                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300">
                                 {{ core()->formatBasePrice($order->base_tax_amount) }}
                             </p>
 
                             @if ($haveStockableItems)
-                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     {{ core()->formatBasePrice($order->base_shipping_amount) }}
                                 </p>
                             @endif
@@ -274,20 +274,20 @@
                                 {{ core()->formatBasePrice($order->base_grand_total) }}
                             </p>
 
-                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300">
                                 {{ core()->formatBasePrice($order->base_grand_total_invoiced) }}
                             </p>
 
-                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300">
                                 {{ core()->formatBasePrice($order->base_grand_total_refunded) }}
                             </p>
 
                             @if($order->status !== 'canceled')
-                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     {{ core()->formatBasePrice($order->base_total_due) }}
                                 </p>
                             @else
-                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     {{ core()->formatBasePrice(0.00) }}
                                 </p>
                             @endif
@@ -362,7 +362,7 @@
                                 {{ $comment->comment }}
                             </p>
 
-                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">  
+                            <p class="text-gray-600 dark:text-gray-300">  
                                 @if ($comment->customer_notified)
                                     @lang('admin::app.sales.orders.view.customer-notified', ['date' => core()->formatDate($comment->created_at, 'Y-m-d H:i:s a')])
                                 @else
@@ -397,13 +397,13 @@
 
                                 {!! view_render_event('sales.order.customer_full_name.after', ['order' => $order]) !!}
 
-                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     {{ $order->customer_email }}
                                 </p>
 
                                 {!! view_render_event('sales.order.customer_email.after', ['order' => $order]) !!}
 
-                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     @lang('admin::app.sales.orders.view.customer-group') : {{ $order->customer->group->name ?? '' }}
                                 </p>
 
@@ -457,15 +457,15 @@
                     <x-slot:content>
                         <div class="flex w-full gap-[20px] justify-start">
                             <div class="flex flex-col gap-y-[6px]">
-                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     @lang('admin::app.sales.orders.view.order-date')
                                 </p>
 
-                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     @lang('admin::app.sales.orders.view.order-status')
                                 </p>
 
-                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     @lang('admin::app.sales.orders.view.channel')
                                 </p>
                             </div>
@@ -474,21 +474,21 @@
                                 {!! view_render_event('sales.order.created_at.before', ['order' => $order]) !!}
 
                                 {{-- Order Date --}}
-                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     {{core()->formatDate($order->created_at) }}
                                 </p>
 
                                 {!! view_render_event('sales.order.created_at.after', ['order' => $order]) !!}
                             
                                 {{-- Order Status --}}
-                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     {{$order->status_label}}
                                 </p>
                             
                                 {!! view_render_event('sales.order.status_label.after', ['order' => $order]) !!}
 
                                 {{-- Order Channel --}}
-                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     {{$order->channel_name}}
                                 </p>
 
@@ -513,7 +513,7 @@
                                 {{ core()->getConfigData('sales.payment_methods.' . $order->payment->method . '.title') }}
                             </p>
 
-                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.sales.orders.view.payment-method')
                             </p>
 
@@ -522,7 +522,7 @@
                                 {{ $order->order_currency_code }}
                             </p>
 
-                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.sales.orders.view.currency')
                             </p>
 
@@ -534,7 +534,7 @@
                                     {{ $additionalDetails['title'] }}
                                 </p>
 
-                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     {{ $additionalDetails['value'] }}
                                 </p>
                             @endif
@@ -550,7 +550,7 @@
                                     {{ $order->shipping_title }}
                                 </p>
 
-                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     @lang('admin::app.sales.orders.view.shipping-method')
                                 </p>
 
@@ -558,7 +558,7 @@
                                     {{ core()->formatBasePrice($order->base_shipping_amount) }}
                                 </p>
 
-                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     @lang('admin::app.sales.orders.view.shipping-price')
                                 </p>
                             </div>
@@ -584,7 +584,7 @@
                                         @lang('admin::app.sales.orders.view.invoice-id', ['invoice' => $invoice->increment_id ?? $invoice->id])
                                     </p>
 
-                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                    <p class="text-gray-600 dark:text-gray-300">
                                         {{ core()->formatDate($invoice->created_at, 'd M, Y H:i:s a') }}
                                     </p>
                                 </div>
@@ -610,7 +610,7 @@
                                 <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] dark:border-gray-800  "></span>
                             @endif
                         @empty 
-                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.sales.orders.view.no-invoice-found')
                             </p>
                         @endforelse
@@ -635,7 +635,7 @@
                                     </p>
 
                                     {{-- Shipment Created --}}
-                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                    <p class="text-gray-600 dark:text-gray-300">
                                         {{ core()->formatDate($shipment->created_at, 'd M, Y H:i:s a') }}
                                     </p>
                                 </div>
@@ -650,7 +650,7 @@
                                 </div>
                             </div>
                         @empty 
-                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.sales.orders.view.no-shipment-found')
                             </p>
                         @endforelse
@@ -673,7 +673,7 @@
                                         @lang('admin::app.sales.orders.view.refund-id', ['refund' => $refund->id])
                                     </p>
 
-                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                    <p class="text-gray-600 dark:text-gray-300">
                                         {{ core()->formatDate($refund->created_at, 'd M, Y H:i:s a') }}
                                     </p>
 
@@ -681,7 +681,7 @@
                                         @lang('admin::app.sales.orders.view.name')
                                     </p>
 
-                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                    <p class="text-gray-600 dark:text-gray-300">
                                         {{ $refund->order->customer_full_name }}
                                     </p>
 
@@ -689,7 +689,7 @@
                                         @lang('admin::app.sales.orders.view.status')
                                     </p>
 
-                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                    <p class="text-gray-600 dark:text-gray-300">
                                         @lang('admin::app.sales.orders.view.refunded') 
                                         
                                         <span class="text-gray-800 font-semibold dark:text-white">
@@ -708,7 +708,7 @@
                                 </div>
                             </div>
                         @empty 
-                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.sales.orders.view.no-refund-found')
                             </p>
                         @endforelse
@@ -770,7 +770,7 @@
                                                 <p class="text-[16x] text-gray-800 dark:text-white font-semibold">{{ $item->name }}</p>
             
                                                 <div class="flex flex-col gap-[6px] place-items-start">
-                                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                                    <p class="text-gray-600 dark:text-gray-300">
                                                         @lang('admin::app.sales.orders.view.amount-per-unit', [
                                                             'amount' => core()->formatBasePrice($item->base_price),
                                                             'qty'    => $item->qty_ordered,
@@ -778,14 +778,14 @@
                                                     </p>
             
                                                     @if (isset($item->additional['attributes']))
-                                                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                                        <p class="text-gray-600 dark:text-gray-300">
                                                             @foreach ($item->additional['attributes'] as $attribute)
                                                                 {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
                                                             @endforeach
                                                         </p>
                                                     @endif
             
-                                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                                    <p class="text-gray-600 dark:text-gray-300">
                                                         @lang('admin::app.sales.orders.view.sku', ['sku' => $item->sku])
                                                     </p>
                                                 </div>

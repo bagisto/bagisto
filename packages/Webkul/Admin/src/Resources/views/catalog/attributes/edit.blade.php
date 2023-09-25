@@ -391,7 +391,7 @@
                         <!-- General -->
                         <div class="bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
                             <div class="flex justify-between items-center p-[6px]">
-                                <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                                <p class="p-[10px] text-gray-800 dark:text-white text-[16px] font-semibold">
                                     @lang('admin::app.catalog.attributes.edit.general')
                                 </p>
                             </div>
@@ -532,7 +532,7 @@
                         <!-- Validations -->
                         <x-admin::accordion>
                             <x-slot:header>
-                                <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                                <p class="p-[10px] text-gray-800 dark:text-white text-[16px] font-semibold">
                                     @lang('admin::app.catalog.attributes.edit.validations')
                                 </p>
                             </x-slot:header>
@@ -604,7 +604,7 @@
 
                                     <x-admin::form.control-group.label
                                         for="is_required"
-                                        class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer"
+                                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-required')
                                     </x-admin::form.control-group.label>
@@ -630,7 +630,7 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label class="!text-[14px] !font-semibold !text-gray-600 cursor-not-allowed">
+                                    <x-admin::form.control-group.label class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-not-allowed">
                                         @lang('admin::app.catalog.attributes.edit.is-unique')
                                     </x-admin::form.control-group.label>
 
@@ -651,7 +651,7 @@
                         <!-- Configurations -->
                         <x-admin::accordion>
                             <x-slot:header>
-                                <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                                <p class="p-[10px] text-gray-800 dark:text-white text-[16px] font-semibold">
                                     @lang('admin::app.catalog.attributes.edit.configuration')
                                 </p>
                             </x-slot:header>
@@ -672,7 +672,7 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label class="!text-[14px] !font-semibold !text-gray-600 cursor-not-allowed">
+                                    <x-admin::form.control-group.label class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-not-allowed">
                                         @lang('admin::app.catalog.attributes.edit.value-per-locale')
                                     </x-admin::form.control-group.label>
 
@@ -699,7 +699,7 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label class="!text-[14px] !font-semibold !text-gray-600 cursor-not-allowed">
+                                    <x-admin::form.control-group.label class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-not-allowed">
                                         @lang('admin::app.catalog.attributes.edit.value-per-channel')
                                     </x-admin::form.control-group.label>
 
@@ -729,7 +729,7 @@
 
                                     <x-admin::form.control-group.label
                                         for="is_filterable"
-                                        class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer" 
+                                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer" 
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-filterable')
                                     </x-admin::form.control-group.label>
@@ -760,7 +760,7 @@
 
                                     <x-admin::form.control-group.label
                                         for="is_configurable"
-                                        class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer" 
+                                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer" 
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-configurable')
                                     </x-admin::form.control-group.label>
@@ -791,7 +791,7 @@
 
                                     <x-admin::form.control-group.label
                                         for="is_visible_on_front"
-                                        class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer" 
+                                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer" 
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-visible-on-front')
                                     </x-admin::form.control-group.label>
@@ -822,7 +822,7 @@
 
                                     <x-admin::form.control-group.label
                                         for="is_comparable"
-                                        class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer" 
+                                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer" 
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-comparable')
                                     </x-admin::form.control-group.label>

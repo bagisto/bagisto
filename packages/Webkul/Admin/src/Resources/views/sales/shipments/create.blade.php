@@ -148,7 +148,7 @@
                                             </p>
         
                                             <div class="flex flex-col gap-[6px] place-items-start">
-                                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                                <p class="text-gray-600 dark:text-gray-300">
                                                     @lang('admin::app.sales.shipments.create.amount-per-unit', [
                                                         'amount' => core()->formatBasePrice($item->base_price),
                                                         'qty'    => $item->qty_ordered,
@@ -157,7 +157,7 @@
         
                                                 <!--Additional Attributes -->
                                                 @if (isset($item->additional['attributes']))
-                                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                                    <p class="text-gray-600 dark:text-gray-300">
                                                         @foreach ($item->additional['attributes'] as $attribute)
                                                             {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
                                                         @endforeach
@@ -165,12 +165,12 @@
                                                 @endif
 
                                                 <!-- Item SKU -->
-                                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                                <p class="text-gray-600 dark:text-gray-300">
                                                     @lang('admin::app.sales.shipments.create.sku', ['sku' => $item->sku])
                                                 </p>
 
                                                 <!--Item Status -->
-                                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                                <p class="text-gray-600 dark:text-gray-300">
                                                     {{ $item->qty_ordered ? trans('admin::app.sales.shipments.create.item-ordered', ['qty_ordered' => $item->qty_ordered]) : '' }}
 
                                                     {{ $item->qty_invoiced ? trans('admin::app.sales.shipments.create.item-invoice', ['qty_invoiced' => $item->qty_invoiced]) : '' }}
@@ -196,7 +196,7 @@
                                             </p>
 
                                             <!-- Available Quantity -->
-                                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                            <p class="text-gray-600 dark:text-gray-300">
                                                 @lang('admin::app.sales.shipments.create.qty-available') :                  
 
                                                 @php

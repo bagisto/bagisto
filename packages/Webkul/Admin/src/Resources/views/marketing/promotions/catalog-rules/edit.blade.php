@@ -81,7 +81,7 @@
                                         name="description"
                                         :value="old('description') ?? $catalogRule->description"
                                         id="description"
-                                        class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
+                                        class="text-gray-600 dark:text-gray-300"
                                         :label="trans('admin::app.marketing.promotions.catalog-rules.edit.description')"
                                         :placeholder="trans('admin::app.marketing.promotions.catalog-rules.edit.description')"
                                     >

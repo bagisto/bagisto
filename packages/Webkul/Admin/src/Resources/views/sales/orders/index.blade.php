@@ -23,13 +23,13 @@
                         class="flex gap-[10px] items-center select-none"
                         v-for="(columnGroup, index) in [['increment_id', 'created_at', 'status'], ['base_grand_total', 'method', 'channel_name'], ['full_name', 'customer_email', 'location', 'image']]"
                     >
-                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300">
                             <span class="[&>*]:after:content-['_/_']">
                                 <template v-for="column in columnGroup">
                                     <span
                                         class="after:content-['/'] last:after:content-['']"
                                         :class="{
-                                            'text-gray-800 font-medium': applied.sort.column == column,
+                                            'text-gray-800 dark:text-white font-medium': applied.sort.column == column,
                                             'cursor-pointer hover:text-gray-800 dark:hover:text-white': columns.find(columnTemp => columnTemp.index === column)?.sortable,
                                         }"
                                         @click="
@@ -74,7 +74,7 @@
                                 </p>
 
                                 <p
-                                    class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
+                                    class="text-gray-600 dark:text-gray-300"
                                     v-text="record.created_at"
                                 >
                                 </p>
@@ -101,12 +101,12 @@
                                 @{{ $admin.formatPrice(record.base_grand_total) }}
                             </p>
 
-                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.sales.orders.index.datagrid.pay-by', ['method' => ''])@{{ record.method }}
                             </p>
 
                             <p
-                                class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
+                                class="text-gray-600 dark:text-gray-300"
                                 v-text="record.channel_name"
                             >
                             </p>
@@ -141,14 +141,14 @@
                         <div class="flex flex-col gap-[6px]">
                             <p
                                 v-if="record.is_closure"
-                                class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
+                                class="text-gray-600 dark:text-gray-300"
                                 v-html="record.image"
                             >
                             </p>
 
                             <p
                                 v-else
-                                class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
+                                class="text-gray-600 dark:text-gray-300"
                                 v-html="record.image"
                             >
                             </p>

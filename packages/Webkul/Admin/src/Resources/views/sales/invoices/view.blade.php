@@ -154,7 +154,7 @@
                                         {{ $item->name }}
                                     </p>
 
-                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                    <p class="text-gray-600 dark:text-gray-300">
                                         @lang('admin::app.sales.invoices.view.amount-per-unit', [
                                             'amount' => core()->formatBasePrice($item->base_price),
                                             'qty'    => $item->qty,
@@ -164,7 +164,7 @@
                                     <div class="flex flex-col gap-[6px] place-items-start">
                                         @if (isset($item->additional['attributes']))
                                             {{-- Item Additional Details --}} 
-                                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                            <p class="text-gray-600 dark:text-gray-300">
                                                 @foreach ($item->additional['attributes'] as $attribute)
                                                     {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
                                                 @endforeach
@@ -172,12 +172,12 @@
                                         @endif
 
                                         {{--SKU --}}
-                                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                        <p class="text-gray-600 dark:text-gray-300">
                                              @lang('admin::app.sales.invoices.view.sku', ['sku' => $item->getTypeInstance()->getOrderedItem($item)->sku])
                                         </p>
 
                                         {{-- Quantity --}}
-                                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                        <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.sales.invoices.view.qty', ['qty' => $item->qty])
                                         </p>
                                     </div>
@@ -192,24 +192,24 @@
 
                                 {{-- Item Base Price --}}
                                 <div class="flex flex-col gap-[6px] items-end place-items-start">
-                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                    <p class="text-gray-600 dark:text-gray-300">
                                         @lang('admin::app.sales.invoices.view.price', ['price' => core()->formatBasePrice($item->base_price)])
                                     </p>
 
                                     {{-- Item Tax Amount --}}
-                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                    <p class="text-gray-600 dark:text-gray-300">
                                         @lang('admin::app.sales.invoices.view.tax', ['tax' => core()->formatBasePrice($item->base_tax_amount)])
                                     </p>
 
                                     {{-- Item Discount --}}
                                     @if ($invoice->base_discount_amount > 0)
-                                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                        <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.sales.invoices.view.discount', ['discount' => core()->formatBasePrice($item->base_discount_amount)])
                                         </p>
                                     @endif
 
                                     {{-- Item Sub-Total --}}
-                                    <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                    <p class="text-gray-600 dark:text-gray-300">
                                         @lang('admin::app.sales.invoices.view.sub-total', ['sub_total' => core()->formatBasePrice($item->base_total)])
                                     </p>
                                 </div>
@@ -225,16 +225,16 @@
                             @lang('admin::app.sales.invoices.view.sub-total-summary')
                         </p>
 
-                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300">
                             @lang('admin::app.sales.invoices.view.shipping-and-handling')                    
                         </p>
 
-                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300">
                             @lang('admin::app.sales.invoices.view.summary-tax')    
                         </p>
 
                         @if ($invoice->base_discount_amount > 0)
-                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.sales.invoices.view.summary-discount')    
                             </p>
                         @endif
@@ -251,18 +251,18 @@
                         </p>
 
                         {{-- Shipping and Handling --}}
-                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300">
                             {{ core()->formatBasePrice($invoice->base_shipping_amount) }}
                         </p>
 
                         {{-- Tax --}}
-                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300">
                             {{ core()->formatBasePrice($invoice->base_tax_amount) }}
                         </p>
 
                         {{-- Discount --}}
                         @if ($invoice->base_discount_amount > 0)
-                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300">
                                 {{ core()->formatBasePrice($invoice->base_discount_amount) }}
                             </p>
                         @endif
@@ -294,7 +294,7 @@
 
                         {!! view_render_event('sales.invoice.customer_name.after', ['order' => $order]) !!}
 
-                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300">
                             @lang('admin::app.sales.invoices.view.customer-email', ['email' => $invoice->order->customer_email])
                         </p>
 
@@ -349,7 +349,7 @@
                     <div class="flex w-full gap-[20px] justify-start">
                         <div class="flex flex-col gap-y-[6px]">
                             @foreach (['order-id', 'order-date', 'order-status', 'invoice-status', 'channel'] as $item)
-                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     @lang('admin::app.sales.invoices.view.' . $item) 
                                 </p>    
                             @endforeach
@@ -364,26 +364,26 @@
                             {!! view_render_event('sales.invoice.increment_id.after', ['order' => $order]) !!}
 
                             {{-- Order Date --}}
-                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300">
                                 {{ core()->formatDate($order->created_at) }}
                             </p>
 
                             {!! view_render_event('sales.invoice.created_at.after', ['order' => $order]) !!}
 
                             {{-- Order Status --}}
-                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300">
                                 {{ $order->status_label }}
                             </p>
 
                             {!! view_render_event('sales.invoice.status_label.after', ['order' => $order]) !!}
 
                             {{-- Invoice Status --}}
-                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300">
                                 {{ $invoice->status_label }}
                             </p>
 
                             {{-- Order Channel --}}
-                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300">
                                 {{ $order->channel_name }}
                             </p>
 

@@ -53,7 +53,7 @@
                         {{-- Panel Content --}}
                         <x-slot:content>
                             <x-admin::form.control-group class="mb-[10px]">
-                                <x-admin::form.control-group.label class="required !text-gray-800">
+                                <x-admin::form.control-group.label class="required !text-gray-800 dark:!text-white">
                                     @lang('admin::app.catalog.families.create.code')
                                 </x-admin::form.control-group.label>
 
@@ -74,7 +74,7 @@
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group class="mb-[10px]">
-                                <x-admin::form.control-group.label class="required !text-gray-800">
+                                <x-admin::form.control-group.label class="required !text-gray-800 dark:!text-white">
                                     @lang('admin::app.catalog.families.create.name')
                                 </x-admin::form.control-group.label>
 

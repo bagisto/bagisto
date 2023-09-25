@@ -61,13 +61,13 @@
                             </span>
                         </label>
 
-                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300">
                             <span class="[&>*]:after:content-['_/_']">
                                 <template v-for="column in columnGroup">
                                     <span
                                         class="after:content-['/'] last:after:content-['']"
                                         :class="{
-                                            'text-gray-800 font-medium': applied.sort.column == column,
+                                            'text-gray-800 dark:text-white font-medium': applied.sort.column == column,
                                             'cursor-pointer hover:text-gray-800 dark:hover:text-white': columns.find(columnTemp => columnTemp.index === column)?.sortable,
                                         }"
                                         @click="
@@ -126,13 +126,13 @@
                             </p>
 
                             <p
-                                class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
+                                class="text-gray-600 dark:text-gray-300"
                                 v-text="record.email"
                             >
                             </p>
 
                             <p
-                                class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
+                                class="text-gray-600 dark:text-gray-300"
                                 v-text="record.phone ?? 'N/A'"
                             >
                             </p>
@@ -160,13 +160,13 @@
                         </div>
 
                         <p
-                            class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
+                            class="text-gray-600 dark:text-gray-300"
                             v-text="record.gender ?? 'N/A'"
                         >
                         </p>
 
                         <p
-                            class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
+                            class="text-gray-600 dark:text-gray-300"
                             v-text="record.group ?? 'N/A'"
                         >
                         </p>
@@ -180,11 +180,11 @@
                             >
                             </p>
 
-                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300">
                                 @{{ "@lang('admin::app.customers.customers.index.datagrid.order')".replace(':order', record.order_count) }}
                             </p>
 
-                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300">
                                 @{{ "@lang('admin::app.customers.customers.index.datagrid.address')".replace(':address', record.address_count) }}
                             </p>
                         </div>

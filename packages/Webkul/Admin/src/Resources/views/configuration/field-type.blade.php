@@ -86,7 +86,7 @@
                 type="textarea"
                 :name="$name"
                 :value="old($nameKey) ?: core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?: (isset($field['default_value']) ? $field['default_value'] : '')"
-                class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
+                class="text-gray-600 dark:text-gray-300"
                 :id="$name"
                 :rules="$validations"
                 :label="trans($field['title'])"

@@ -91,13 +91,13 @@
                             </span>
                         </label>
 
-                        <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300">
                             <span class="[&>*]:after:content-['_/_']">
                                 <template v-for="column in columnGroup">
                                     <span
                                         class="after:content-['/'] last:after:content-['']"
                                         :class="{
-                                            'text-gray-800 font-medium': applied.sort.column == column,
+                                            'text-gray-800 dark:text-white font-medium': applied.sort.column == column,
                                             'cursor-pointer hover:text-gray-800 dark:hover:text-white': columns.find(columnTemp => columnTemp.index === column)?.sortable,
                                         }"
                                         @click="
@@ -157,13 +157,13 @@
                             </p>
 
                             <p
-                                class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
+                                class="text-gray-600 dark:text-gray-300"
                             >
                                 @{{ "@lang('admin::app.catalog.products.index.datagrid.sku-value')".replace(':sku', record.sku) }}
                             </p>
 
                             <p
-                                class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
+                                class="text-gray-600 dark:text-gray-300"
                             >
                                 @{{ "@lang('admin::app.catalog.products.index.datagrid.attribute-family-value')".replace(':attribute_family', record.attribute_family) }}
                             </p>
@@ -202,14 +202,14 @@
 
                             <!-- Parent Product Quantity -->
                             <div  v-if="['configurable', 'bundle', 'grouped'].includes(record.type)">
-                                <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     <span class="text-red-600" v-text="'N/A'"></span>
                                 </p>
                             </div>
 
                             <div v-else>
                                 <p
-                                    class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
+                                    class="text-gray-600 dark:text-gray-300"
                                     v-if="record.quantity > 0"
                                 >
                                     <span class="text-green-600">
@@ -218,7 +218,7 @@
                                 </p>
 
                                 <p
-                                    class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
+                                    class="text-gray-600 dark:text-gray-300"
                                     v-else
                                 >
                                     <span class="text-red-600">
@@ -227,7 +227,7 @@
                                 </p>
                             </div>
 
-                            <p class="text-gray-600 dark:text-gray-300  dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300">
                                 @{{ "@lang('admin::app.catalog.products.index.datagrid.id-value')".replace(':id', record.product_id) }}
                             </p> 
                         </div>
@@ -241,13 +241,13 @@
                             </p>
 
                             <p
-                                class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
+                                class="text-gray-600 dark:text-gray-300"
                                 v-text="record.category_name ?? 'N/A'"
                             >
                             </p>
 
                             <p
-                                class="text-gray-600 dark:text-gray-300  dark:text-gray-300"
+                                class="text-gray-600 dark:text-gray-300"
                                 v-text="record.type"
                             >
                             </p>
