@@ -3273,6 +3273,7 @@ return [
         'events'                   => 'الأحداث',
         'sitemaps'                 => 'خرائط الموقع',
         'newsletter-subscriptions' => 'اشتراكات النشرة الإخبارية',
+        'transactions'             => 'المعاملات',
     ],
 
     'errors' => [

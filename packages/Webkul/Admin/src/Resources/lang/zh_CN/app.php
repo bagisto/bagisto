@@ -3273,6 +3273,7 @@ return [
         'events'                   => '事件',
         'sitemaps'                 => '站点地图',
         'newsletter-subscriptions' => '电子报订阅',
+        'transactions'             => '交易',
     ],
 
     'errors' => [

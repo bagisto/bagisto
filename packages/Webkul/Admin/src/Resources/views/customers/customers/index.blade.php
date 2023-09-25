@@ -28,6 +28,10 @@
     </div>
 
     <x-admin::datagrid src="{{ route('admin.customers.customers.index') }}" ref="customer_data" :isMultiRow="true">
+        @php 
+            $hasPermission = core()->getConfigData('customers.customers.mass-update') || core()->getConfigData('customers.customers.mass-delete');
+        @endphp
+
         {{-- Datagrid Header --}}
         <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
             <template v-if="! isLoading">
@@ -36,30 +40,32 @@
                         class="flex gap-[10px] items-center select-none"
                         v-for="(columnGroup, index) in [['full_name', 'email', 'phone'], ['status', 'gender', 'group'], ['total_base_grand_total', 'order_count', 'address_count']]"
                     >
-                        <label
-                            class="flex gap-[4px] items-center w-max cursor-pointer select-none"
-                            for="mass_action_select_all_records"
-                            v-if="! index"
-                        >
-                            <input
-                                type="checkbox"
-                                name="mass_action_select_all_records"
-                                id="mass_action_select_all_records"
-                                class="hidden peer"
-                                :checked="['all', 'partial'].includes(applied.massActions.meta.mode)"
-                                @change="selectAllRecords"
+                        @if ($hasPermission)
+                            <label
+                                class="flex gap-[4px] items-center w-max cursor-pointer select-none"
+                                for="mass_action_select_all_records"
+                                v-if="! index"
                             >
+                                <input
+                                    type="checkbox"
+                                    name="mass_action_select_all_records"
+                                    id="mass_action_select_all_records"
+                                    class="hidden peer"
+                                    :checked="['all', 'partial'].includes(applied.massActions.meta.mode)"
+                                    @change="selectAllRecords"
+                                >
 
-                            <span
-                                class="icon-uncheckbox cursor-pointer rounded-[6px] text-[24px]"
-                                :class="[
-                                    applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-blue-600' : (
-                                        applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-blue-600' : ''
-                                    ),
-                                ]"
-                            >
-                            </span>
-                        </label>
+                                <span
+                                    class="icon-uncheckbox cursor-pointer rounded-[6px] text-[24px]"
+                                    :class="[
+                                        applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-blue-600' : (
+                                            applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-blue-600' : ''
+                                        ),
+                                    ]"
+                                >
+                                </span>
+                            </label>
+                        @endif
 
                         <p class="text-gray-600">
                             <span class="[&>*]:after:content-['_/_']">
@@ -103,21 +109,24 @@
                     v-for="record in records"
                 >
                     <div class="flex gap-[10px]">
-                        <input
-                            type="checkbox"
-                            :name="`mass_action_select_record_${record.customer_id}`"
-                            :id="`mass_action_select_record_${record.customer_id}`"
-                            :value="record.customer_id"
-                            class="hidden peer"
-                            v-model="applied.massActions.indices"
-                            @change="setCurrentSelectionMode"
-                        >
+                        @if ($hasPermission)
+                            <input
+                                type="checkbox"
+                                :name="`mass_action_select_record_${record.customer_id}`"
+                                :id="`mass_action_select_record_${record.customer_id}`"
+                                :value="record.customer_id"
+                                class="hidden peer"
+                                v-model="applied.massActions.indices"
+                                @change="setCurrentSelectionMode"
+                            >
 
-                        <label
-                            class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
-                            :for="`mass_action_select_record_${record.customer_id}`"
-                        >
-                        </label>
+                            <label
+                                class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                                :for="`mass_action_select_record_${record.customer_id}`"
+                            >
+                            </label>
+                        @endif
+
                         <div class="flex flex-col gap-[6px]">
                             <p
                                 class="text-[16px] text-gray-800 font-semibold"

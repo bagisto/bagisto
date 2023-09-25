@@ -2434,8 +2434,6 @@ return [
                 'edit'  => [
                     'title'    => 'Edit User',
                 ],
-
-                
             ],
 
             'edit'  => [
@@ -2543,7 +2541,6 @@ return [
                     'image-carousel'    => 'Slider Carousel',
                     'footer-links'      => 'Footer Links',
                 ],
-                'add-image-btn'                 => 'Add Image',
             ],
 
             'edit' => [
@@ -3276,6 +3273,7 @@ return [
         'events'                   => 'Events',
         'sitemaps'                 => 'Sitemaps',
         'newsletter-subscriptions' => 'Newsletter Subscriptions',
+        'transactions'             => 'Transactions',
     ],
 
     'errors' => [

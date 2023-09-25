@@ -3273,6 +3273,7 @@ return [
         'events'                   => 'رویدادها',
         'sitemaps'                 => 'نقشه‌های سایت',
         'newsletter-subscriptions' => 'اشتراک خبرنامه',
+        'transactions'             => 'تراکنش‌ها',
     ],
 
     'errors' => [

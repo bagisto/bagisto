@@ -113,13 +113,15 @@ class OrderTransactionsDataGrid extends DataGrid
      */
     public function prepareActions()
     {
-        $this->addAction([
-            'icon'   => 'icon-view',
-            'title'  => trans('admin::app.sales.transactions.index.datagrid.view'),
-            'method' => 'GET',
-            'url'    => function ($row) {
-                return route('admin.sales.transactions.view', $row->id);
-            },
-        ]);
+        if (bouncer()->hasPermission('sales.shipments.view')) {
+            $this->addAction([
+                'icon'   => 'icon-view',
+                'title'  => trans('admin::app.sales.transactions.index.datagrid.view'),
+                'method' => 'GET',
+                'url'    => function ($row) {
+                    return route('admin.sales.transactions.view', $row->id);
+                },
+            ]);
+        }
     }
 }

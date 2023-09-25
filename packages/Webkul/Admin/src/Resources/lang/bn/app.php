@@ -3273,6 +3273,7 @@ return [
         'events'                   => 'ইভেন্টগুলি',
         'sitemaps'                 => 'সাইটম্যাপগুলি',
         'newsletter-subscriptions' => 'নিউজলেটার সাবস্ক্রিপশন',
+        'transactions'             => 'লেনদেন',
     ],
 
     'errors' => [
