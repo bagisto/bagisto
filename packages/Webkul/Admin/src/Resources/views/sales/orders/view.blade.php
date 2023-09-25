@@ -68,25 +68,27 @@
                 $order->canCancel()
                 && bouncer()->hasPermission('sales.orders.cancel')
             )
-                <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
-                    <span class="icon-cancel text-[24px]"></span>
+               <form
+                    method="POST"
+                    ref="cancelOrderForm"
+                    action="{{ route('admin.sales.orders.cancel', $order->id) }}"
+                >
+                    @csrf
+                </form>
 
-                    <form
-                        method="POST"
-                        ref="cancelOrderForm"
-                        action="{{ route('admin.sales.orders.cancel', $order->id) }}"
-                    >
-                        @csrf
-                    </form>
+                <div 
+                    class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
+                    @click="$emitter.emit('open-confirm-modal', {
+                        message: '@lang('shop::app.customers.account.orders.view.cancel-confirm-msg')',
+                        agree: () => {
+                            this.$refs['cancelOrderForm'].submit()
+                        }
+                    })"
+                >
+                    <span class="icon-cancel text-[24px]"></span>
 
                     <a
                         href="javascript:void(0);"
-                        @click="$emitter.emit('open-confirm-modal', {
-                            message: '@lang('shop::app.customers.account.orders.view.cancel-confirm-msg')',
-                            agree: () => {
-                                this.$refs['cancelOrderForm'].submit()
-                            }
-                        })"
                     >
                         @lang('admin::app.sales.orders.view.cancel')    
                     </a>
@@ -101,7 +103,7 @@
                     class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
                     @click="$refs.invoice.open()"
                 >
-                    <span class="icon-mail text-[24px]"></span> 
+                    <span class="icon-sales text-[24px]"></span> 
     
                     @lang('admin::app.sales.orders.view.invoice')     
                 </div>
