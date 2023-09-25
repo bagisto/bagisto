@@ -136,7 +136,7 @@
                                 <label class="text-[#6E6E6E]" :for="'bundle_options[' + option.id + '][' + index + ']'">
                                     @{{ product.name }}
 
-                                    <span class="text-[#000000]">
+                                    <span class="text-black">
                                         @{{ '+ ' + product.price.final.formatted_price }}
                                     </span>
                                 </label>
@@ -181,7 +181,7 @@
                                 >
                                     @{{ product.name }}
 
-                                    <span class="text-[#000000]">
+                                    <span class="text-black">
                                         @{{ '+ ' + product.price.final.formatted_price }}
                                     </span>
                                 </label>
@@ -213,7 +213,7 @@
                             >
                                 @{{ product.name }}
 
-                                <span class="text-[#000000]">
+                                <span class="text-black">
                                     @{{ '+ ' + product.price.final.formatted_price }}
                                 </span>
                             </option>
