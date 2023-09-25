@@ -107,6 +107,7 @@ abstract class DataGrid
             index: $column['index'],
             label: $column['label'],
             type: $column['type'],
+            options: $column['options'] ?? null,
             searchable: $column['searchable'],
             filterable: $column['filterable'],
             sortable: $column['sortable'],
@@ -201,6 +202,15 @@ abstract class DataGrid
                 $column = collect($this->columns)->first(fn ($c) => $c->index === $requestedColumn);
 
                 switch ($column->type) {
+                    case ColumnTypeEnum::BASIC_DROPDOWN->value:
+                        $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
+                            foreach ($requestedValues as $value) {
+                                $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), $value);
+                            }
+                        });
+
+                        break;
+
                     case ColumnTypeEnum::DATE_RANGE->value:
                     case ColumnTypeEnum::DATE_TIME_RANGE->value:
                         $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {

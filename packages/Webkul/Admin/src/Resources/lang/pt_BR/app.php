@@ -655,7 +655,7 @@ return [
                             'sku'             => 'SKU',
                             'status'          => 'Status',
                             'weight'          => 'Peso',
-                            'images'         => 'Imagens',
+                            'images'          => 'Imagens',
                         ],
 
                         'mass-edit' => [
@@ -2458,7 +2458,7 @@ return [
             'delete-warning'     => 'Tem certeza de que deseja realizar esta ação?',
             'login-error'        => 'Verifique suas credenciais e tente novamente.',
             'activate-warning'   => 'Sua conta ainda não foi ativada, entre em contato com o administrador.',
-            'last-delete-error'  => 'Falha ao excluir o último usuário.'
+            'last-delete-error'  => 'Falha ao excluir o último usuário.',
         ],
 
         'roles' => [
@@ -3155,11 +3155,17 @@ return [
             ],
 
             'filters' => [
-                'title' => 'Appliquer des filtres',
+                'title'  => 'Appliquer des filtres',
+                'select' => 'Selecionar.',
 
                 'custom-filters' => [
                     'title'     => 'Filtres personnalisés',
                     'clear-all' => 'Effacer tout',
+                ],
+
+                'boolean-options' => [
+                    'true'  => 'Verdadeiro',
+                    'false' => 'Falso',
                 ],
 
                 'date-options' => [

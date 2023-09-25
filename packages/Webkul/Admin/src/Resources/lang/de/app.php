@@ -1888,7 +1888,7 @@ return [
                 'delete-success'              => 'Warenkorb-Gutschein erfolgreich gelöscht',
                 'mass-delete-success'         => 'Ausgewählte Elemente erfolgreich gelöscht',
                 'success'                     => ':name erfolgreich erstellt',
-            
+
                 'datagrid' => [
                     'coupon-code'     => 'Gutscheincode',
                     'created-date'    => 'Erstellungsdatum',
@@ -2459,7 +2459,7 @@ return [
             'delete-warning'     => 'Sind Sie sicher, dass Sie diese Aktion ausführen möchten?',
             'login-error'        => 'Bitte überprüfen Sie Ihre Anmeldeinformationen und versuchen Sie es erneut.',
             'activate-warning'   => 'Ihr Konto wurde noch nicht aktiviert. Bitte kontaktieren Sie den Administrator.',
-            'last-delete-error'  => 'Letzte Benutzerlöschung fehlgeschlagen.'
+            'last-delete-error'  => 'Letzte Benutzerlöschung fehlgeschlagen.',
         ],
 
         'roles' => [
@@ -3156,11 +3156,17 @@ return [
             ],
 
             'filters' => [
-                'title' => 'Filter anwenden',
+                'title'  => 'Filter anwenden',
+                'select' => 'Auswählen',
 
                 'custom-filters' => [
                     'title'     => 'Benutzerdefinierte Filter',
                     'clear-all' => 'Alles löschen',
+                ],
+
+                'boolean-options' => [
+                    'true'  => 'Wahr',
+                    'false' => 'Falsch',
                 ],
 
                 'date-options' => [

@@ -10,6 +10,11 @@ enum ColumnTypeEnum: string
     case BOOLEAN = 'boolean';
 
     /**
+     * Basic dropdown.
+     */
+    case BASIC_DROPDOWN = 'basic_dropdown';
+
+    /**
      * Date range.
      */
     case DATE_RANGE = 'date_range';

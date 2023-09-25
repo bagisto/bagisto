@@ -613,11 +613,11 @@ return [
                         'title'      => 'Prodotti Cross-Sell',
                     ],
 
-                    'add-btn'     => 'Aggiungi Prodotto',
-                    'delete'      => 'Elimina',
-                    'empty-title' => 'Aggiungi Prodotto',
-                    'empty-info'  => 'Per aggiungere prodotti :type in un colpo solo.',
-                    'sku'         => 'SKU - :sku',
+                    'add-btn'           => 'Aggiungi Prodotto',
+                    'delete'            => 'Elimina',
+                    'empty-title'       => 'Aggiungi Prodotto',
+                    'empty-info'        => 'Per aggiungere prodotti :type in un colpo solo.',
+                    'sku'               => 'SKU - :sku',
                     'image-placeholder' => 'Immagine Prodotto',
                 ],
 
@@ -2459,7 +2459,7 @@ return [
             'delete-warning'     => 'Sei sicuro di voler eseguire questa azione?',
             'login-error'        => 'Controlla le tue credenziali e riprova.',
             'activate-warning'   => 'Il tuo account non è ancora attivato, contatta l\'amministratore.',
-            'last-delete-error'  => 'Eliminazione dell\'ultimo utente non riuscita.'
+            'last-delete-error'  => 'Eliminazione dell\'ultimo utente non riuscita.',
         ],
 
         'roles' => [
@@ -3154,11 +3154,17 @@ return [
             ],
 
             'filters' => [
-                'title' => 'Applica Filtri',
+                'title'  => 'Applica Filtri',
+                'select' => 'Seleziona.',
 
                 'custom-filters' => [
                     'title'     => 'Filtri Personalizzati',
                     'clear-all' => 'Cancella Tutto',
+                ],
+
+                'boolean-options' => [
+                    'true'  => 'Vero',
+                    'false' => 'Falso',
                 ],
 
                 'date-options' => [

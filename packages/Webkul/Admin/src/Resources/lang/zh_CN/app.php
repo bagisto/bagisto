@@ -655,7 +655,7 @@ return [
                             'sku'             => 'SKU',
                             'status'          => '状态',
                             'weight'          => '重量',
-                            'images'         => '图片',
+                            'images'          => '图片',
                         ],
 
                         'mass-edit' => [
@@ -2428,7 +2428,7 @@ return [
                     'edit'     => '编辑',
                     'active'   => '活跃',
                     'inactive' => '不活跃',
-                    'delete'   => '删除'
+                    'delete'   => '删除',
                 ],
 
                 'edit'  => [
@@ -2458,7 +2458,7 @@ return [
             'delete-warning'     => '您确定要执行此操作吗？',
             'login-error'        => '请检查您的凭据并重试。',
             'activate-warning'   => '您的帐户尚未激活，请联系管理员。',
-            'last-delete-error'  => '删除最后一个用户失败。'
+            'last-delete-error'  => '删除最后一个用户失败。',
         ],
 
         'roles' => [
@@ -2591,7 +2591,7 @@ return [
                 'edit'                          => '编辑',
                 'back'                          => '返回',
                 'preview'                       => '预览',
-                'channels'                      => '频道'
+                'channels'                      => '频道',
             ],
 
             'create-success' => '主题创建成功',
@@ -3155,11 +3155,17 @@ return [
             ],
 
             'filters' => [
-                'title' => '应用筛选',
+                'title'  => '应用筛选',
+                'select' => '选择',
 
                 'custom-filters' => [
                     'title'     => '自定义筛选',
                     'clear-all' => '清除所有',
+                ],
+
+                'boolean-options' => [
+                    'true'  => '真',
+                    'false' => '假',
                 ],
 
                 'date-options' => [

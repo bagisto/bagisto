@@ -643,18 +643,18 @@ return [
                         ],
 
                         'edit' => [
-                            'disabled'        => 'Disabled',
-                            'edit-info'       => 'If you want to update product information in detail, then go to the',
-                            'edit-link-title' => 'Product Details Page',
-                            'enabled'         => 'Enabled',
-                            'title'           => 'Product',
-                            'name'            => 'Name',
-                            'price'           => 'Price',
-                            'quantities'      => 'Quantities',
-                            'save-btn'        => 'Save',
-                            'sku'             => 'SKU',
-                            'status'          => 'Status',
-                            'weight'          => 'Weight',
+                            'disabled'         => 'Disabled',
+                            'edit-info'        => 'If you want to update product information in detail, then go to the',
+                            'edit-link-title'  => 'Product Details Page',
+                            'enabled'          => 'Enabled',
+                            'title'            => 'Product',
+                            'name'             => 'Name',
+                            'price'            => 'Price',
+                            'quantities'       => 'Quantities',
+                            'save-btn'         => 'Save',
+                            'sku'              => 'SKU',
+                            'status'           => 'Status',
+                            'weight'           => 'Weight',
                             'images'           => 'Images',
                         ],
 
@@ -1888,11 +1888,11 @@ return [
                 'mass-delete-success'         => 'Selected items Delete Successfully',
                 'success'                     => ':name Successfully Created',
 
-                'datagrid' =>[
+                'datagrid' => [
                     'coupon-code'     => 'Coupon Code',
                     'created-date'    => 'Created Date',
                     'expiration-date' => 'Expiration Date',
-                    'delete'          => 'Delete', 
+                    'delete'          => 'Delete',
                     'id'              => 'ID',
                     'times-used'      => 'Times Used',
                 ],
@@ -2435,7 +2435,6 @@ return [
                     'title'    => 'Edit User',
                 ],
 
-                
             ],
 
             'edit'  => [
@@ -3158,11 +3157,17 @@ return [
             ],
 
             'filters' => [
-                'title' => 'Apply Filters',
+                'title'  => 'Apply Filters',
+                'select' => 'Select',
 
                 'custom-filters' => [
                     'title'     => 'Custom Filters',
                     'clear-all' => 'Clear All',
+                ],
+
+                'boolean-options' => [
+                    'true'  => 'True',
+                    'false' => 'False',
                 ],
 
                 'date-options' => [
