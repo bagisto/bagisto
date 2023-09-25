@@ -12,14 +12,18 @@
             v-if="mode != 'list'"
         >
             <div class="relative overflow-hidden group max-w-[291px] max-h-[300px] rounded-[4px]">
-                <a :href="`{{ route('shop.product_or_category.index', '') }}/${product.url_key}`">
+                <a
+                    :href="`{{ route('shop.product_or_category.index', '') }}/${product.url_key}`"
+                    :aria-label="product.name + ' '"
+                >
                     <x-shop::media.images.lazy
                         class="relative after:content-[' '] after:block after:pb-[calc(100%+9px)] bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
                         ::src="product.base_image.medium_image_url"
-                        width="291"
-                        height="300"
                         ::key="product.id"
                         ::index="product.id"
+                        width="291"
+                        height="300"
+                        ::alt="product.name"
                     ></x-shop::media.images.lazy>
                 </a>
                 
@@ -40,28 +44,28 @@
 
                     <div class="group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
                         @if (core()->getConfigData('general.content.shop.wishlist_option'))
-                            <a
+                            <span
                                 class="flex justify-center items-center absolute top-[20px] right-[20px] w-[30px] h-[30px] bg-white rounded-md cursor-pointer text-[25px]"
                                 :class="product.is_wishlist ? 'icon-heart-fill' : 'icon-heart'"
                                 @click="addToWishlist()"
                             >
-                            </a>
+                            </span>
                         @endif
 
                         @if (core()->getConfigData('general.content.shop.compare_option'))
-                            <a
+                            <span
                                 class="icon-compare flex justify-center items-center w-[30px] h-[30px] absolute top-[60px] right-[20px] bg-white rounded-md cursor-pointer text-[25px]"
                                 @click="addToCompare(product.id)"
                             >
-                            </a>
+                            </span>
                         @endif
 
-                        <a
+                        <button
                             class="absolute bottom-[15px] left-[50%] py-[11px] px-[43px] bg-white rounded-xl text-navyBlue text-xs w-max font-medium cursor-pointer -translate-x-[50%] translate-y-[54px] group-hover:translate-y-0 transition-all duration-300"
                             @click="addToCart()"
                         >
                             @lang('shop::app.components.products.card.add-to-cart')
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>

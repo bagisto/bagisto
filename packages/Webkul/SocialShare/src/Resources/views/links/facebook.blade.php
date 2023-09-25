@@ -12,6 +12,7 @@
             <a 
                 href="#"
                 @click="openSharePopup"
+                aria-label="Facebook"
             >
                 @include('social_share::icons.facebook')
             </a>

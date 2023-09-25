@@ -20,11 +20,13 @@
         <a
             href="{{ route('shop.home.index') }}" 
             class="place-self-start -mt-[4px]"
+            aria-label="Bagisto "
         >
             <img
                 src="{{ bagisto_asset('images/logo.svg') }}"
                 width="131"
                 height="29"
+                alt="Bagisto"
             >
         </a>
 
@@ -67,6 +69,7 @@
                     <button
                         type="button"
                         class="icon-camera flex items-center absolute top-[10px] ltr:right-[12px] rtl:left-[12px] pr-3 text-[22px]"
+                        aria-label="Search"
                     >
                     </button>
                 @endif
@@ -77,7 +80,10 @@
         <div class="flex gap-x-[35px] mt-[5px] max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px]">
             {{-- Compare --}}
             @if($showCompare)
-                <a href="{{ route('shop.compare.index') }}">
+                <a
+                    href="{{ route('shop.compare.index') }}"
+                    aria-label="Compare "
+                >
                     <span class="icon-compare inline-block text-[24px] cursor-pointer"></span>
                 </a>
             @endif

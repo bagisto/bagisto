@@ -25,6 +25,7 @@
                         <a href="{{ route('shop.home.index') }}">
                             <img
                                 src="{{ bagisto_asset('images/logo.svg') }}"
+                                alt="Bagisto"
                                 width="131"
                                 height="29"
                             >
@@ -72,9 +73,11 @@
             <a 
                 href="{{ route('shop.home.index') }}" 
                 class="max-h-[30px]"
+                aria-label="Bagisto "
             >
                 <img
                     src="{{ bagisto_asset('images/logo.svg') }}"
+                    alt="Bagisto"
                     width="131"
                     height="29"
                 >
@@ -85,7 +88,10 @@
         <div>
             <div class="flex  items-center gap-x-[20px]">
                 @if($showCompare)
-                    <a href="{{ route('shop.compare.index') }}">
+                    <a
+                        href="{{ route('shop.compare.index') }}"
+                        aria-label="Compare "
+                    >
                         <span class="icon-compare text-[24px] cursor-pointer"></span>
                     </a>
                 @endif
@@ -213,8 +219,11 @@
                 required
             >
 
-            <button type="button"
-                class="icon-camera flex items-center absolute top-[12px] right-[12px] pr-3 text-[22px]">
+            <button
+                type="button"
+                class="icon-camera flex items-center absolute top-[12px] right-[12px] pr-3 text-[22px]"
+                aria-label="Search"
+            >
             </button>
         </div>
     </form>

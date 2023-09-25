@@ -10,14 +10,16 @@
             <a
                 v-for="(image, index) in images"
                 class="fade"
-                :href="image.link"
+                :href="image.link || '#'"
                 ref="slides"
                 :key="index"
+                aria-label="Image Slide "
             >
                 <x-shop::media.images.lazy
                     class="w-full aspect-[2.743/1]"
                     ::src="image.image"
                     ::srcset="image.image + ' 1920w, ' + image.image.replace('storage', 'cache/large') + ' 1280w,' + image.image.replace('storage', 'cache/medium') + ' 1024w, ' + image.image.replace('storage', 'cache/small') + ' 525w'"
+                    alt=""
                 ></x-shop::media.images.lazy>
             </a>
 

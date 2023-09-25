@@ -1,3 +1,10 @@
+{{-- SEO Meta Content --}}
+@push('meta')
+    <meta name="description" content="@lang('shop::app.compare.title')"/>
+
+    <meta name="keywords" content="@lang('shop::app.compare.title')"/>
+@endPush
+
 <x-shop::layouts>
     {{-- Page Title --}}
     <x-slot:title>
@@ -61,10 +68,10 @@
                                         class="relative group"
                                         v-for="product in items"
                                     >
-                                        <a
+                                        <span
                                             class="hidden absolute top-[60px] right-[20px] justify-center items-center w-[30px] h-[30px] rounded-md bg-white cursor-pointer icon-cancel text-[25px] group-hover:flex group-hover:z-[1] transition-all duration-300"
                                             @click="remove(product.id)"
-                                        ></a>
+                                        ></span>
 
                                         <x-shop::products.card class="min-w-[311px] max-w-[311px] pt-0 pr-0 p-[20px] max-sm:pl-0"></x-shop::products.card>
                                     </div>
