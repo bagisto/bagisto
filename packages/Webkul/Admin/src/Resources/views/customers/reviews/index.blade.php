@@ -18,6 +18,10 @@
                 :isMultiRow="true"
                 ref="review_data"
             >
+                @php 
+                    $hasPermission = core()->getConfigData('customers.reviews.mass-update') || core()->getConfigData('customers.reviews.mass-delete');
+                @endphp
+
                 <!-- Datagrid Header -->
                 <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading }">
                     <template v-if="! isLoading">
@@ -26,30 +30,32 @@
                                 class="flex gap-[10px] items-center"
                                 v-for="(columnGroup, index) in [['name', 'product_name', 'product_review_status'], ['rating', 'created_at', 'product_review_id'], ['title', 'comment']]"
                             >
-                                <label
-                                    class="flex gap-[4px] w-max items-center cursor-pointer select-none"
-                                    for="mass_action_select_all_records"
-                                    v-if="! index"
-                                >
-                                    <input 
-                                        type="checkbox" 
-                                        name="mass_action_select_all_records"
-                                        id="mass_action_select_all_records"
-                                        class="hidden peer"
-                                        :checked="['all', 'partial'].includes(applied.massActions.meta.mode)"
-                                        @change="selectAllRecords"
+                                @if ($hasPermission)
+                                    <label
+                                        class="flex gap-[4px] w-max items-center cursor-pointer select-none"
+                                        for="mass_action_select_all_records"
+                                        v-if="! index"
                                     >
-                        
-                                    <span
-                                        class="icon-uncheckbox cursor-pointer rounded-[6px] text-[24px]"
-                                        :class="[
-                                            applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-blue-600' : (
-                                                applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-blue-600' : ''
-                                            ),
-                                        ]"
-                                    >
-                                    </span>
-                                </label>
+                                        <input 
+                                            type="checkbox" 
+                                            name="mass_action_select_all_records"
+                                            id="mass_action_select_all_records"
+                                            class="hidden peer"
+                                            :checked="['all', 'partial'].includes(applied.massActions.meta.mode)"
+                                            @change="selectAllRecords"
+                                        >
+                            
+                                        <span
+                                            class="icon-uncheckbox cursor-pointer rounded-[6px] text-[24px]"
+                                            :class="[
+                                                applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-blue-600' : (
+                                                    applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-blue-600' : ''
+                                                ),
+                                            ]"
+                                        >
+                                        </span>
+                                    </label>
+                                @endif
 
                                 <!-- Product Name, Review Status -->
                                 <p class="text-gray-600">
@@ -86,7 +92,7 @@
                     </template>
                 </template>
 
-                <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
+                <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading, performAction }">
                     <template v-if="! isLoading">
                         <div
                             class="row grid grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] px-[16px] py-[10px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-50"
@@ -94,20 +100,22 @@
                         >
                             <!-- Name, Product, Description -->
                             <div class="flex gap-[10px]">
-                                <input 
-                                    type="checkbox" 
-                                    :name="`mass_action_select_record_${record.product_review_id}`"
-                                    :id="`mass_action_select_record_${record.product_review_id}`"
-                                    :value="record.product_review_id"
-                                    class="hidden peer"
-                                    v-model="applied.massActions.indices"
-                                    @change="setCurrentSelectionMode"
-                                >
-                    
-                                <label 
-                                    class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
-                                    :for="`mass_action_select_record_${record.product_review_id}`"
-                                ></label>
+                                @if ($hasPermission)
+                                    <input 
+                                        type="checkbox" 
+                                        :name="`mass_action_select_record_${record.product_review_id}`"
+                                        :id="`mass_action_select_record_${record.product_review_id}`"
+                                        :value="record.product_review_id"
+                                        class="hidden peer"
+                                        v-model="applied.massActions.indices"
+                                        @change="setCurrentSelectionMode"
+                                    >
+                        
+                                    <label 
+                                        class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                                        :for="`mass_action_select_record_${record.product_review_id}`"
+                                    ></label>
+                                @endif
 
                                 <div class="flex flex-col gap-[6px]">
                                     <p
@@ -165,21 +173,22 @@
 
                             <div class="flex gap-[5px] place-content-end items-center self-center">
                                 <!-- Review Delete Button -->
-                                @if (bouncer()->hasPermission('customers.reviews.delete'))
-                                    <a  
-                                        @click="deleteReview(record.actions['1']?.url)">
-                                        <span class="icon-delete text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"></span>
-                                    </a>
-                                @endif
-
-                                <!-- View Button -->
-                                @if (bouncer()->hasPermission('customers.reviews.edit'))
-                                    <span 
-                                        @click="edit(record.product_review_id)" 
-                                        class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"
+                                <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
+                                    <span
+                                        :class="record.actions.find(action => action.method === 'DELETE')?.icon"
+                                        class="text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"
                                     >
                                     </span>
-                                @endif
+                                </a>
+
+                                <!-- View Button -->
+                                <a
+                                    v-if="record.actions.find(action => action.title === 'Edit')"
+                                    @click="edit(record.actions.find(action => action.title === 'Edit')?.url)"
+                                >
+                                    <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200">
+                                    </span>
+                                </a>
                             </div>
                         </div>
                     </template>
@@ -377,8 +386,8 @@
                 },
 
                 methods: {
-                    edit(id) {
-                        this.$axios.get(`{{ route('admin.customers.customers.review.edit', '') }}/${id}`)
+                    edit(url) {
+                        this.$axios.get(url)
                             .then((response) => {
                                 this.$refs.review.open(),
 
@@ -404,26 +413,6 @@
                                 this.$refs.review_data.get();
 
                                 this.$emitter.emit('add-flash', { type: 'success', message: 'Review Updated Successfully' });
-                            })
-                            .catch(error => {
-                                if (error.response.status == 422) {
-                                    setErrors(error.response.data.errors);
-                                }
-                            });
-                    },
-
-                    deleteReview(url) {
-                        if (! confirm('Are you sure, you want to perform this action?')) {
-                            return;
-                        }
-
-                        this.$axios.post(url, {
-                            '_method': 'DELETE'
-                        })
-                            .then((response) => {
-                                this.$refs.review_data.get();
-
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                             })
                             .catch(error => {
                                 if (error.response.status == 422) {

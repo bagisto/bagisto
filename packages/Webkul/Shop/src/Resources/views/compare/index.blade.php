@@ -1,3 +1,10 @@
+{{-- SEO Meta Content --}}
+@push('meta')
+    <meta name="description" content="@lang('shop::app.compare.title')"/>
+
+    <meta name="keywords" content="@lang('shop::app.compare.title')"/>
+@endPush
+
 <x-shop::layouts>
     {{-- Page Title --}}
     <x-slot:title>
@@ -56,16 +63,15 @@
                                         @{{ attribute.name ?? attribute.admin_name }}
                                     </p>
                                 </div>
-
                                 <div class="flex gap-[12px] border-l-[1px] border-[#E9E9E9] max-sm:border-0">
                                     <div
                                         class="relative group"
                                         v-for="product in items"
                                     >
-                                        <a
+                                        <span
                                             class="hidden absolute top-[60px] right-[20px] justify-center items-center w-[30px] h-[30px] rounded-md bg-white cursor-pointer icon-cancel text-[25px] group-hover:flex group-hover:z-[1] transition-all duration-300"
                                             @click="remove(product.id)"
-                                        ></a>
+                                        ></span>
 
                                         <x-shop::products.card class="min-w-[311px] max-w-[311px] pt-0 pr-0 p-[20px] max-sm:pl-0"></x-shop::products.card>
                                     </div>
@@ -166,55 +172,62 @@
                     },
 
                     remove(productId) {
-                        if (! this.isCustomer) {
-                            const index = this.items.findIndex((item) => item.id === productId);
+                        this.$emitter.emit('open-confirm-modal', {
+                            agree: () => {
+                                if (! this.isCustomer) {
+                                    const index = this.items.findIndex((item) => item.id === productId);
 
-                            this.items.splice(index, 1);
+                                    this.items.splice(index, 1);
 
-                            let items = this.getStorageValue()
-                                .filter(item => item != productId);
+                                    let items = this.getStorageValue()
+                                        .filter(item => item != productId);
 
-                            localStorage.setItem('compare_items', JSON.stringify(items));
+                                    localStorage.setItem('compare_items', JSON.stringify(items));
 
-                            return;
-                        }
+                                    return;
+                                }
 
-                        this.$axios.post("{{ route('shop.api.compare.destroy') }}", {
-                                '_method': 'DELETE',
-                                'product_id': productId,
-                            })
-                            .then(response => {
-                                this.items = response.data.data;
+                                this.$axios.post("{{ route('shop.api.compare.destroy') }}", {
+                                        '_method': 'DELETE',
+                                        'product_id': productId,
+                                    })
+                                    .then(response => {
+                                        this.items = response.data.data;
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                        this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
-                            })
-                            .catch(error => {
-                                this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
-                            });
+                                    })
+                                    .catch(error => {
+                                        this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
+                                    });
+                            }
+                        });
                     },
 
                     removeAll() {
-                        if (! this.isCustomer) {
-                            localStorage.removeItem('compare_items');
+                        this.$emitter.emit('open-confirm-modal', {
+                            agree: () => {
+                                if (! this.isCustomer) {
+                                    localStorage.removeItem('compare_items');
 
-                            this.items = [];
+                                    this.items = [];
 
-                            this.$emitter.emit('add-flash', { type: 'success', message:  "@lang('shop::app.compare.remove-all-success')" });
+                                    this.$emitter.emit('add-flash', { type: 'success', message:  "@lang('shop::app.compare.remove-all-success')" });
 
-                            return;
-                        }
-                        
-                        this.$axios.post("{{ route('shop.api.compare.destroy_all') }}", {
-                                '_method': 'DELETE',
-                            })
-                            .then(response => {
-                                this.items = [];
+                                    return;
+                                }
+                                
+                                this.$axios.post("{{ route('shop.api.compare.destroy_all') }}", {
+                                        '_method': 'DELETE',
+                                    })
+                                    .then(response => {
+                                        this.items = [];
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
-                            })
-                            .catch(error => {});
-
+                                        this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                    })
+                                    .catch(error => {});
+                            }
+                        });
                     },
 
                     getStorageValue() {

@@ -32,14 +32,15 @@
                             @{{ option.label }}
                         </span>
 
-                        <div
-                            class="text-[#7D7D7D]"
-                            v-for="product in option.products"
-                            :key="product.id"
-                            :if="product.is_default"
-                        >
-                            @{{ product.qty + ' x ' + product.name }}
-                        </div>
+                        <template v-for="product in option.products">
+                            <div
+                                class="text-[#6E6E6E]"
+                                :key="product.id"
+                                v-if="product.is_default"
+                            >
+                                @{{ product.qty + ' x ' + product.name }}
+                            </div>
+                        </template>
                     </li>
                 </ul>
             </div>
@@ -56,7 +57,7 @@
                         <v-field
                             as="select"
                             :name="'bundle_options[' + option.id + '][]'"
-                            class="custom-select block w-full p-[14px] pr-[36px] bg-white border border-[#E9E9E9] rounded-lg text-[16px] text-[#7D7D7D] focus:ring-blue-500 focus:border-blue-500 max-md:border-0 max-md:outline-none max-md:w-[110px] cursor-pointer"
+                            class="custom-select block w-full p-[14px] pr-[36px] bg-white border border-[#E9E9E9] rounded-lg text-[16px] text-[#6E6E6E] focus:ring-blue-500 focus:border-blue-500 max-md:border-0 max-md:outline-none max-md:w-[110px] cursor-pointer"
                             :class="[errors['bundle_options[' + option.id + '][]'] ? 'border border-red-500' : '']"
                             :rules="{'required': option.is_required}"
                             v-model="selectedProduct"
@@ -96,7 +97,7 @@
                                 <span class="icon-radio-unselect text-[24px] text-navyBlue peer-checked:icon-radio-select"></span>
 
                                 <label
-                                    class="text-[#7D7D7D]"
+                                    class="text-[#6E6E6E]"
                                     :for="'bundle_options[' + option.id + '][]'"
                                 >
                                     @lang('shop::app.products.view.type.bundle.none')
@@ -132,10 +133,10 @@
                                 >
                                 </label>
 
-                                <label class="text-[#7D7D7D]" :for="'bundle_options[' + option.id + '][' + index + ']'">
+                                <label class="text-[#6E6E6E]" :for="'bundle_options[' + option.id + '][' + index + ']'">
                                     @{{ product.name }}
 
-                                    <span class="text-[#000000]">
+                                    <span class="text-black">
                                         @{{ '+ ' + product.price.final.formatted_price }}
                                     </span>
                                 </label>
@@ -175,12 +176,12 @@
                                 </label>
 
                                 <label 
-                                    class="text-[#7D7D7D]" 
+                                    class="text-[#6E6E6E]" 
                                     :for="'bundle_options[' + option.id + '][' + index + ']'"
                                 >
                                     @{{ product.name }}
 
-                                    <span class="text-[#000000]">
+                                    <span class="text-black">
                                         @{{ '+ ' + product.price.final.formatted_price }}
                                     </span>
                                 </label>
@@ -193,7 +194,7 @@
                             as="select"
                             multiple
                             :name="'bundle_options[' + option.id + '][]'"
-                            class="block w-full p-[14px] pr-[36px] bg-white border border-[#E9E9E9] rounded-lg text-[16px] text-[#7D7D7D] focus:ring-blue-500 focus:border-blue-500 max-md:border-0 max-md:outline-none max-md:w-[110px] cursor-pointer"
+                            class="block w-full p-[14px] pr-[36px] bg-white border border-[#E9E9E9] rounded-lg text-[16px] text-[#6E6E6E] focus:ring-blue-500 focus:border-blue-500 max-md:border-0 max-md:outline-none max-md:w-[110px] cursor-pointer"
                             :class="[errors['bundle_options[' + option.id + '][]'] ? 'border border-red-500' : '']"
                             :rules="{'required': option.is_required}"
                             v-model="selectedProduct"
@@ -212,7 +213,7 @@
                             >
                                 @{{ product.name }}
 
-                                <span class="text-[#000000]">
+                                <span class="text-black">
                                     @{{ '+ ' + product.price.final.formatted_price }}
                                 </span>
                             </option>

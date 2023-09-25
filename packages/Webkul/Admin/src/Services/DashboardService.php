@@ -259,7 +259,7 @@ class DashboardService
     private function getCategoryStats(Collection $orderItems): SupportCollection
     {
         $productIds = $orderItems->pluck('product_id');
-        $products = $this->productRepository->getModel()->whereIn('id', $productIds)->with('categories')->get();
+        $products = $this->productRepository->whereIn('id', $productIds)->with('categories')->get();
 
         return $orderItems->map(function ($orderItem) use ($products) {
             $product = $products->firstWhere('id', $orderItem->product_id);

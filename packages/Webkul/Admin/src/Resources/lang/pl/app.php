@@ -545,6 +545,7 @@ return [
             'edit' => [
                 'save-btn' => 'Zapisz produkt',
                 'title'    => 'Edytuj produkt',
+                'remove'   => 'Usuń',
 
                 'price' => [
                     'group' => [
@@ -2507,6 +2508,7 @@ return [
             'delete-failed'     => 'Usunięcie roli nie powiodło się',
             'being-used'        => 'Rola jest już używana przez Administratora',
         ],
+
         'themes' => [
             'index' => [
                 'title'      => 'Motywy',
@@ -2555,6 +2557,7 @@ return [
                 'footer-link'                   => 'Linki w Stopce',
                 'footer-link-form-title'        => 'Link w Stopce',
                 'slider-description'            => 'Dostosowanie motywu związane z sliderem.',
+                'slider-required'               => 'Pole suwaka jest wymagane.',
                 'slider-add-btn'                => 'Dodaj Slajd',
                 'general'                       => 'Ogólne',
                 'add-filter-btn'                => 'Dodaj Filtr',
@@ -2680,13 +2683,6 @@ return [
                         'allow-guest-checkout-hint' => 'Wskazówka: Jeśli jest włączone, opcję tę można skonfigurować dla każdego produktu osobno.',
                         'title'                     => 'Gościnne zakupy',
                         'title-info'                => 'Zakupy gości pozwalają klientom na zakup produktów bez konieczności zakładania konta, usprawniając proces zakupów dla wygody i szybszych transakcji.',
-                    ],
-
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'Dozwolona liczba nowych produktów na stronie głównej',
-                        'allow-no-of-featured-products'  => 'Dozwolona liczba wyróżnionych produktów na stronie głównej',
-                        'title'                          => 'Konfiguracja strony głównej',
-                        'title-info'                     => 'Konfiguracja strony głównej polega na dostosowywaniu układu, treści i projektu głównej strony internetowej w celu efektywnego przedstawiania pożądanych informacji.',
                     ],
 
                     'product-view-page' => [
@@ -3185,6 +3181,15 @@ return [
             ],
         ],
 
+        'modal' => [
+            'confirm' => [
+                'title'        => 'Jesteś pewny?',
+                'message'      => 'Czy na pewno chcesz wykonać tę czynność?',
+                'agree-btn'    => 'Zgadzam się',
+                'disagree-btn' => 'Nie zgadzam się',
+            ],
+        ],
+
         'products' => [
             'search' => [
                 'title'       => 'Wybierz Produkty',
@@ -3269,6 +3274,7 @@ return [
         'events'                   => 'Wydarzenia',
         'sitemaps'                 => 'Mapy Strony',
         'newsletter-subscriptions' => 'Subskrypcje Newslettera',
+        'transactions'             => 'Transakcje',
     ],
 
     'errors' => [

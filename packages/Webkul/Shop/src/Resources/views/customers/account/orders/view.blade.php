@@ -17,16 +17,24 @@
         </div>
 
         @if ($order->canCancel())
-            <x-shop::form
-                id="cancelOrderForm"
+            <form
+                method="POST"
+                ref="cancelOrderForm"
                 action="{{ route('shop.customers.account.orders.cancel', $order->id) }}"
             >
-            </x-shop::form>
+                @csrf
+            </form>
 
             <a
                 class="secondary-button flex items-center gap-x-[10px] py-[12px] px-[20px] border-[#E9E9E9] font-normal"
                 href="javascript:void(0);"
-                onclick="cancelOrder('@lang('shop::app.customers.account.orders.view.cancel-confirm-msg')')"
+                @click="$emitter.emit('open-confirm-modal', {
+                    message: '@lang('shop::app.customers.account.orders.view.cancel-confirm-msg')',
+
+                    agree: () => {
+                        this.$refs['cancelOrderForm'].submit()
+                    }
+                })"
             >
                 @lang('shop::app.customers.account.orders.view.cancel-btn-title')
             </a>
@@ -877,7 +885,7 @@
             {{-- Biiling Address --}}
             @if ($order->billing_address)
                 <div class="grid gap-[15px] max-w-[200px] max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
-                    <p class="text-[16px] text-[#7D7D7D]">
+                    <p class="text-[16px] text-[#6E6E6E]">
                         @lang('shop::app.customers.account.orders.view.billing-address')
                     </p>
 
@@ -894,7 +902,7 @@
             {{-- Shipping Address --}}
             @if ($order->shipping_address)
                 <div class="grid gap-[15px] max-w-[200px] max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
-                    <p class="text-[16px] text-[#7D7D7D]">
+                    <p class="text-[16px] text-[#6E6E6E]">
                         @lang('shop::app.customers.account.orders.view.shipping-address')
                     </p>
 
@@ -909,7 +917,7 @@
 
                 {{-- Shipping Method --}}
                 <div class="grid gap-[15px] max-w-[200px] place-content-baseline max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
-                    <p class="text-[16px] text-[#7D7D7D]">
+                    <p class="text-[16px] text-[#6E6E6E]">
                         @lang('shop::app.customers.account.orders.view.shipping-method')
                     </p>
 
@@ -924,7 +932,7 @@
 
             {{-- Billing Method --}}
             <div class="grid gap-[15px] place-content-baseline max-w-[200px] max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
-                <p class="text-[16px] text-[#7D7D7D]">
+                <p class="text-[16px] text-[#6E6E6E]">
                     @lang('shop::app.customers.account.orders.view.payment-method')
                 </p>
 
@@ -939,19 +947,7 @@
                 @endif
 
                 {!! view_render_event('bagisto.shop.customers.account.orders.view.payment-method.after', ['order' => $order]) !!}
-
             </div>
         </div>
     </div>
-
-    <script>
-        function cancelOrder(message) {
-            if (! confirm(message)) {
-                return;
-            }
-
-            const form = document.getElementById('cancelOrderForm');
-            form.submit();
-        }
-    </script>
 </x-shop::layouts.account>

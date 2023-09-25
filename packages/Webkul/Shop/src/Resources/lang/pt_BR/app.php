@@ -273,6 +273,19 @@ return [
     ],
 
     'components' => [
+        'accordion' => [
+            'default-content' => 'Conteúdo padrão',
+            'default-header'  => 'Cabeçalho padrão',
+        ],
+        
+        'drawer' => [
+           'default-toggle'  => 'Alternar padrão',
+        ],
+        
+        'media' => [
+            'add-attachments' => 'Adicionar anexos',
+        ],
+        
         'layouts' => [
             'header' => [
                 'title'         => 'Conta',
@@ -351,6 +364,18 @@ return [
             'table' => [
                 'actions'              => 'Ações',
                 'no-records-available' => 'Nenhum registro disponível.',
+            ],
+        ],
+
+        'modal' => [
+            'default-content' => 'Conteúdo padrão',
+            'default-header'  => 'Cabeçalho padrão',
+            
+            'confirm' => [
+                'title'        => 'Você tem certeza?',
+                'message'      => 'Você tem certeza de que deseja realizar esta ação?',
+                'agree-btn'    => 'Concordar',
+                'disagree-btn' => 'Discordar',
             ],
         ],
 

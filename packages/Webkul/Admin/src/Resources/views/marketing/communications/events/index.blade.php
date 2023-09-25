@@ -98,7 +98,7 @@
                 </template>
 
                  <!-- DataGrid Body -->
-                 <template #body="{ columns, records }">
+                 <template #body="{ columns, records, performAction }">
                     <div
                         v-for="record in records"
                         class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600 transition-all hover:bg-gray-50"
@@ -115,16 +115,23 @@
         
                         <!-- Actions -->
                         <div class="flex justify-end">
-                            <div v-for="action in record.actions">
-                                <a @click="id=1; actionHandler(action.url, action.title)">
-                                    <span
-                                        :class="action.icon"
-                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
-                                        :title="action.title"
-                                    >
-                                    </span>
-                                </a>
-                            </div>
+                            <a @click="id=1; editModal(record.actions.find(action => action.title === 'Edit')?.url)">
+                                <span
+                                    :class="record.actions.find(action => action.title === 'Edit')?.icon"
+                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
+                                    :title="record.actions.find(action => action.title === 'Edit')?.title"
+                                >
+                                </span>
+                            </a>
+
+                            <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
+                                <span
+                                    :class="record.actions.find(action => action.method === 'DELETE')?.icon"
+                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
+                                    :title="record.actions.find(action => action.method === 'DELETE')?.title"
+                                >
+                                </span>
+                            </a>
                         </div>
                     </div>
                 </template>
@@ -285,46 +292,20 @@
                             });
                     },
 
-                    actionHandler(url, title) {
-                        if (title == 'Edit') {
-                            this.editModal(url);  
-                        } else {
-                            this.deleteModal(url);
-                        }
-                    },
-
-                    editModal(id) {
-                        this.$axios.get(`{{ route('admin.marketing.communications.events.edit', '') }}/${id}`)
+                    editModal(url) {
+                        this.$axios.get(url)
                             .then((response) => {
-                                if (response.data.data.id) {
-                                    this.selectedEvents = response.data.data;
+                                if (response.data.id) {
+                                    this.selectedEvents = response.data;
 
                                     this.$refs.emailEvents.toggle();
                                 } else {
                                     this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
                                 }
                             })
-                            .catch(this.errorHandler);
-                    },
-
-                    deleteModal(url) {
-                        if (! confirm("@lang('admin::app.marketing.communications.events.index.create.delete-warning')")) {
-                            return;
-                        }
-
-                        this.$axios.post(url, {
-                                '_method': 'DELETE'
-                            })
-                            .then((response) => {
-                                this.$refs.datagrid.get();
-
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
-                            })
-                            .catch(this.errorHandler);
-                    },
-
-                    errorHandler(error) {
-                        this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
+                            .catch(error => [
+                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message })
+                            ]);
                     },
                 }
             })

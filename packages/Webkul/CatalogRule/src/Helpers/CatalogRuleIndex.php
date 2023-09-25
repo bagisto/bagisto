@@ -31,7 +31,7 @@ class CatalogRuleIndex
     public function reIndexComplete()
     {
         try {
-            $this->cleanIndexes();
+            $this->cleanProductIndices();
 
             foreach ($this->getCatalogRules() as $rule) {
                 $this->catalogRuleProductHelper->insertRuleProduct($rule);
@@ -44,7 +44,37 @@ class CatalogRuleIndex
     }
 
     /**
-     * Full re-index
+     * Re-index rule indices
+     *
+     * @param  \Webkul\CatalogRule\Contracts\CatalogRule  $rule
+     * @return void
+     */
+    public function reIndexRule($rule)
+    {
+        $this->cleanRuleIndices($rule);
+
+        $startsFrom = $rule->starts_from ? Carbon::createFromTimeString($rule->starts_from . ' 00:00:01') : null;
+
+        $endsTill = $rule->ends_till ? Carbon::createFromTimeString($rule->ends_till . ' 23:59:59') : null;
+
+        if (
+            (
+                ! $startsFrom
+                || $rule->starts_from <= Carbon::now()
+            )
+            && (
+                ! $endsTill
+                || $rule->ends_till >= Carbon::now()
+            )
+        ) {
+            $this->catalogRuleProductHelper->insertRuleProduct($rule);
+        }
+
+        $this->catalogRuleProductPriceHelper->indexRuleProductPrice(1000);
+    }
+
+    /**
+     * Re-index single product
      *
      * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
@@ -60,7 +90,7 @@ class CatalogRuleIndex
                 ? $product->getTypeInstance()->getChildrenIds()
                 : [$product->id];
 
-            $this->cleanIndexes($productIds);
+            $this->cleanProductIndices($productIds);
 
             foreach ($this->getCatalogRules() as $rule) {
                 $this->catalogRuleProductHelper->insertRuleProduct($rule, 1000, $product);
@@ -73,16 +103,29 @@ class CatalogRuleIndex
     }
 
     /**
-     * Deletes catalog rule product and catalog rule product price indexes
+     * Clean rule indices
+     *
+     * @param  \Webkul\CatalogRule\Contracts\CatalogRule  $rule
+     * @return void
+     */
+    public function cleanRuleIndices($rule)
+    {
+        $this->catalogRuleProductHelper->cleanRuleIndices($rule);
+
+        $this->catalogRuleProductPriceHelper->cleanProductPriceIndices();
+    }
+
+    /**
+     * Clean products indices
      *
      * @param  array  $productIds
      * @return void
      */
-    public function cleanIndexes($productIds = [])
+    public function cleanProductIndices($productIds = [])
     {
-        $this->catalogRuleProductHelper->cleanProductIndex($productIds);
+        $this->catalogRuleProductHelper->cleanProductIndices($productIds);
 
-        $this->catalogRuleProductPriceHelper->cleanProductPriceIndex($productIds);
+        $this->catalogRuleProductPriceHelper->cleanProductPriceIndices($productIds);
     }
 
     /**

@@ -29,9 +29,10 @@
                     >
                         <img
                             class="max-w-[90px] max-h-[90px] w-[90px] h-[90px] rounded-md"
-                            :src="item.base_image.medium_image_url"
-                            :title="item.name"
+                            :src="item.base_image.small_image_url"
                             :alt="item.name"
+                            width="110"
+                            height="110"
                         />
 
                         <div>

@@ -545,6 +545,7 @@ return [
             'edit' => [
                 'save-btn' => '製品を保存',
                 'title'    => '製品を編集',
+                'remove'   => '削除',
 
                 'price' => [
                     'group' => [
@@ -2524,7 +2525,6 @@ return [
                     'type'         => 'タイプ',
                     'name'         => '名前',
                     'channel_name' => 'チャネル名',
-
                 ],
             ],
 
@@ -2557,6 +2557,7 @@ return [
                 'footer-link'                   => 'フッターリンク',
                 'footer-link-form-title'        => 'フッターリンク',
                 'slider-description'            => 'スライダー関連のテーマカスタマイズ。',
+                'slider-required'               => 'スライダーフィールドは必須です。',
                 'slider-add-btn'                => 'スライダーを追加',
                 'general'                       => '一般',
                 'add-filter-btn'                => 'フィルターを追加',
@@ -2682,13 +2683,6 @@ return [
                         'allow-guest-checkout-hint' => 'ヒント：オンにすると、このオプションは各製品ごとに設定できます。',
                         'title'                     => 'ゲストチェックアウト',
                         'title-info'                => 'ゲストチェックアウトは、アカウントを作成せずに製品を購入できるようにすることで、購入プロセスを簡略化し、迅速な取引を実現します。',
-                    ],
-
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'ホームページでの新製品の許可数',
-                        'allow-no-of-featured-products'  => 'ホームページでの注目製品の許可数',
-                        'title'                          => 'ホームページの構成',
-                        'title-info'                     => 'ホームページの構成には、ウェブサイトのメインページのレイアウト、コンテンツ、デザインを効果的に表示するためのカスタマイズが含まれます。',
                     ],
 
                     'product-view-page' => [
@@ -3187,6 +3181,15 @@ return [
             ],
         ],
 
+        'modal' => [
+            'confirm' => [
+                'title'        => '本当によろしいですか？',
+                'message'      => 'この操作を実行してもよろしいですか？',
+                'agree-btn'    => '同意',
+                'disagree-btn' => '同意しない',
+            ],
+        ],
+
         'products' => [
             'search' => [
                 'title'       => '製品を選択',
@@ -3271,6 +3274,7 @@ return [
         'events'                   => 'イベント',
         'sitemaps'                 => 'サイトマップ',
         'newsletter-subscriptions' => 'ニュースレター購読',
+        'transactions'             => '取引',
     ],
 
     'errors' => [

@@ -545,6 +545,7 @@ return [
             'edit' => [
                 'save-btn' => 'שמור מוצר',
                 'title'    => 'ערוך מוצר',
+                'remove'   => 'הסר',
 
                 'price' => [
                     'group' => [
@@ -655,7 +656,6 @@ return [
                             'status'          => 'סטטוס',
                             'weight'          => 'משקל',
                             'images'          => 'תמונות',
-
                         ],
 
                         'mass-edit' => [
@@ -2557,6 +2557,7 @@ return [
                 'footer-link'                   => 'קישורי תחתית',
                 'footer-link-form-title'        => 'קישור תחתית',
                 'slider-description'            => 'התאמת ערכת הנושא הנמצאת בקרוסלה.',
+                'slider-required'               => 'שדה המחוון נדרש.',
                 'slider-add-btn'                => 'הוסף מציג',
                 'general'                       => 'כללי',
                 'add-filter-btn'                => 'הוסף מסנן',
@@ -2682,13 +2683,6 @@ return [
                         'allow-guest-checkout-hint' => 'הערה: כאשר מופעל, ניתן להגדיר אופציה זו לכל מוצר באופן פרטי.',
                         'title'                     => 'רכישה באורח אורח',
                         'title-info'                => 'רכישה באורח אורח מאפשרת ללקוחות לרכוש מוצרים מבלי ליצור חשבון, ומקלה על התהליך לשם נוחות ומהירות בעסקאות.',
-                    ],
-
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'הרשה מספר מקסימלי של מוצרים חדשים בדף הבית',
-                        'allow-no-of-featured-products'  => 'הרשה מספר מקסימלי של מוצרים מומלצים בדף הבית',
-                        'title'                          => 'הגדרות דף הבית',
-                        'title-info'                     => 'הגדרות דף הבית כוללות התאמת התצוגה, התוכן והעיצוב של דף הבית של אתר כדי להציג מידע מבוקש בצורה יעילה.',
                     ],
 
                     'product-view-page' => [
@@ -3187,6 +3181,15 @@ return [
             ],
         ],
 
+        'modal' => [
+            'confirm' => [
+                'title'        => 'האם אתה בטוח?',
+                'message'      => 'האם אתה בטוח שברצונך לבצע פעולה זו?',
+                'agree-btn'    => 'הסכם',
+                'disagree-btn' => 'אי הסכמה',
+            ],
+        ],
+
         'products' => [
             'search' => [
                 'title'       => 'בחר מוצרים',
@@ -3271,6 +3274,7 @@ return [
         'events'                   => 'אירועים',
         'sitemaps'                 => 'מפות אתר',
         'newsletter-subscriptions' => 'מנויים לניוזלטר',
+        'transactions'             => 'עסקאות',
     ],
 
     'errors' => [

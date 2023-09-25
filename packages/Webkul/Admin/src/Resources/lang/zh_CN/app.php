@@ -545,6 +545,7 @@ return [
             'edit' => [
                 'save-btn' => '保存产品',
                 'title'    => '编辑产品',
+                'remove'   => '删除',
 
                 'price' => [
                     'group' => [
@@ -2556,6 +2557,7 @@ return [
                 'footer-link'                   => '页脚链接',
                 'footer-link-form-title'        => '页脚链接',
                 'slider-description'            => '与轮播相关的主题定制。',
+                'slider-required'               => '滑块字段是必需的。',
                 'slider-add-btn'                => '添加轮播',
                 'general'                       => '通用',
                 'add-filter-btn'                => '添加过滤器',
@@ -2681,13 +2683,6 @@ return [
                         'allow-guest-checkout-hint' => '提示：如果启用，可以为每个产品单独配置此选项。',
                         'title'                     => '访客结账',
                         'title-info'                => '访客结账允许客户在不创建帐户的情况下购买产品，以方便和加快交易过程。',
-                    ],
-
-                    'homepage' => [
-                        'allow-no-of-new-products'       => '主页上的新产品数量限制',
-                        'allow-no-of-featured-products'  => '主页上的精选产品数量限制',
-                        'title'                          => '主页配置',
-                        'title-info'                     => '主页配置涉及自定义网站主页的布局、内容和设计，以有效呈现所需的信息。',
                     ],
 
                     'product-view-page' => [
@@ -3186,6 +3181,15 @@ return [
             ],
         ],
 
+        'modal' => [
+            'confirm' => [
+                'title'        => '您确定吗？',
+                'message'      => '您确定要执行此操作吗？',
+                'agree-btn'    => '同意',
+                'disagree-btn' => '不同意',
+            ],
+        ],
+
         'products' => [
             'search' => [
                 'title'       => '选择产品',
@@ -3270,6 +3274,7 @@ return [
         'events'                   => '事件',
         'sitemaps'                 => '站点地图',
         'newsletter-subscriptions' => '电子报订阅',
+        'transactions'             => '交易',
     ],
 
     'errors' => [

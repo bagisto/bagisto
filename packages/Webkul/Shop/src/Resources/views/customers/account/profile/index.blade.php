@@ -29,7 +29,7 @@
                 @lang('shop::app.customers.account.profile.first-name')
             </p>
 
-            <p class="text-[14px] text-[#7D7D7D] font-medium">
+            <p class="text-[14px] text-[#6E6E6E] font-medium">
                 {{ $customer->first_name }}
             </p>
         </div>
@@ -39,7 +39,7 @@
                 @lang('shop::app.customers.account.profile.last-name')
             </p>
 
-            <p class="text-[14px] font-medium text-[#7D7D7D]">
+            <p class="text-[14px] font-medium text-[#6E6E6E]">
                 {{ $customer->last_name }}
             </p>
         </div>
@@ -49,7 +49,7 @@
                 @lang('shop::app.customers.account.profile.gender')
             </p>
 
-            <p class="text-[14px] text-[#7D7D7D] font-medium">
+            <p class="text-[14px] text-[#6E6E6E] font-medium">
                 {{ $customer->gender ?? '-'}}
             </p>
         </div>
@@ -59,7 +59,7 @@
                 @lang('shop::app.customers.account.profile.dob')
             </p>
 
-            <p class="text-[14px] text-[#7D7D7D] font-medium">
+            <p class="text-[14px] text-[#6E6E6E] font-medium">
                 {{ $customer->date_of_birth ?? '-' }}
             </p>
         </div>
@@ -69,7 +69,7 @@
                 @lang('shop::app.customers.account.profile.email')
             </p>
 
-            <p class="text-[14px] text-[#7D7D7D] font-medium">
+            <p class="text-[14px] text-[#6E6E6E] font-medium">
                 {{ $customer->email }}
             </p>
         </div>

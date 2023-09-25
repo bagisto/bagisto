@@ -192,13 +192,15 @@ class OrderDataGrid extends DataGrid
      */
     public function prepareActions()
     {
-        $this->addAction([
-            'icon'   => 'icon-view',
-            'title'  => trans('admin::app.sales.orders.index.datagrid.view'),
-            'method' => 'GET',
-            'url'    => function ($row) {
-                return route('admin.sales.orders.view', $row->id);
-            },
-        ]);
+        if (bouncer()->hasPermission('sales.orders.view')) {
+            $this->addAction([
+                'icon'   => 'icon-view',
+                'title'  => trans('admin::app.sales.orders.index.datagrid.view'),
+                'method' => 'GET',
+                'url'    => function ($row) {
+                    return route('admin.sales.orders.view', $row->id);
+                },
+            ]);
+        }
     }
 }

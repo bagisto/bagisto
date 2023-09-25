@@ -67,7 +67,7 @@
                             <div>
                                 <div class="flex gap-[20px] justify-between items-center p-[30px] bg-white border-b-[1px] border-[#E9E9E9]">
                                     <slot name="header">
-                                        Default Header
+                                        @lang('admin::app.components.modal.default-header')
                                     </slot>
 
                                     <span
@@ -80,7 +80,7 @@
 
                             <div>
                                 <slot name="content">
-                                    Default Content
+                                    @lang('admin::app.components.modal.default-content')
                                 </slot>
                             </div>
                         </div>

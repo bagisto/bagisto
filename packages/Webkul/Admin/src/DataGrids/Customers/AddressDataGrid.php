@@ -164,23 +164,27 @@ class AddressDataGrid extends DataGrid
      */
     public function prepareActions()
     {
-        $this->addAction([
-            'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.customers.addresses.datagrid.edit'),
-            'method' => 'GET',
-            'url'    => function ($row) {
-                return route('admin.customers.customers.addresses.edit', $row->address_id);
-            },
-        ]);
+        if (bouncer()->hasPermission('customers.addresses.edit')) {
+            $this->addAction([
+                'icon'   => 'icon-edit',
+                'title'  => trans('admin::app.customers.addresses.datagrid.edit'),
+                'method' => 'GET',
+                'url'    => function ($row) {
+                    return route('admin.customers.customers.addresses.edit', $row->address_id);
+                },
+            ]);
+        }
 
-        $this->addAction([
-            'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.customers.addresses.datagrid.delete'),
-            'method' => 'POST',
-            'url'    => function ($row) {
-                return route('admin.customers.customers.addresses.delete', $row->address_id);
-            },
-        ]);
+        if (bouncer()->hasPermission('customers.addresses.delete')) {
+            $this->addAction([
+                'icon'   => 'icon-delete',
+                'title'  => trans('admin::app.customers.addresses.datagrid.delete'),
+                'method' => 'POST',
+                'url'    => function ($row) {
+                    return route('admin.customers.customers.addresses.delete', $row->address_id);
+                },
+            ]);
+        }
     }
 
     /**

@@ -75,7 +75,7 @@
                 :is-selected="true"
             >
                 <div class="container mt-[60px] max-1180:px-[20px]">
-                    <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px]">
+                    <p class="text-[#6E6E6E] text-[18px] max-1180:text-[14px]">
                         {!! $product->description !!}
                     </p>
                 </div>
@@ -91,7 +91,7 @@
                 :is-selected="false"
             >
                 <div class="container mt-[60px] max-1180:px-[20px]">
-                    <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px]">
+                    <p class="text-[#6E6E6E] text-[18px] max-1180:text-[14px]">
                         @foreach ($customAttributeValues as $customAttributeValue)
                             <div class="grid">
                                 <p class="text-[16px] text-black">
@@ -101,20 +101,31 @@
 
                             @if (
                                 $customAttributeValue['type'] == 'file'
-                                || $customAttributeValue['type'] == 'image'
+                                && $customAttributeValue['value']
                             )
                                 <a
                                     href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
                                     download="{{ $customAttributeValue['label'] }}"
                                 >
-                                    <p class="text-[16px] text-blue-500 underline">
-                                        {{ $customAttributeValue['label'] }}
-                                    </p>
+                                    <span class="icon-download text-[24px]"></span>
+                                </a>
+                            @elseif (
+                                $customAttributeValue['type'] == 'image'
+                                && $customAttributeValue['value']
+                            )
+                                <a
+                                    href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
+                                    download="{{ $customAttributeValue['label'] }}"
+                                >
+                                    <img 
+                                        class="h-[20px] w-[20px] min-h-[20px] min-w-[20px]"
+                                        src="{{ Storage::url($customAttributeValue['value']) }}"
+                                    />
                                 </a>
                             @else 
                                 <div class="grid">
-                                    <p class="text-[16px] text-[#7D7D7D]">
-                                        {{ $customAttributeValue['value'] ?? '-' }}
+                                    <p class="text-[16px] text-[#6E6E6E]">
+                                        {{ $customAttributeValue['value'] ? $customAttributeValue['value'] : '-' }}
                                     </p>
                                 </div>
                             @endif
@@ -147,7 +158,7 @@
             </x-slot:header>
 
             <x-slot:content>
-                <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px] mb-[20px]">
+                <p class="text-[#6E6E6E] text-[18px] max-1180:text-[14px] mb-[20px]">
                     {!! $product->description !!}
                 </p>
             </x-slot:content>
@@ -165,7 +176,7 @@
 
             <x-slot:content>
                 <div class="container mt-[20px] mb-[20px] max-1180:px-[20px]">
-                    <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px]">
+                    <p class="text-[#6E6E6E] text-[18px] max-1180:text-[14px]">
                         @foreach ($customAttributeValues as $customAttributeValue)
                             <div class="grid">
                                 <p class="text-[16px] text-black">
@@ -187,7 +198,7 @@
                                 </a>
                             @else 
                                 <div class="grid">
-                                    <p class="text-[16px] text-[#7D7D7D]">
+                                    <p class="text-[16px] text-[#6E6E6E]">
                                         {{ $customAttributeValue['value'] ?? '-' }}
                                     </p>
                                 </div>
@@ -295,7 +306,7 @@
                                     </x-shop::products.star-rating>
 
                                     <div class="flex gap-[15px] items-center">
-                                        <p class="text-[#7D7D7D] text-[14px]">
+                                        <p class="text-[#6E6E6E] text-[14px]">
                                             ({{ $product->approvedReviews->count() }} @lang('reviews'))
                                         </p>
                                     </div>
@@ -309,7 +320,7 @@
                                 <p class="flex gap-2.5 items-center mt-[25px] text-[24px] !font-medium max-sm:mt-[15px] max-sm:text-[18px]">
                                     {!! $product->getTypeInstance()->getPriceHtml() !!}
 
-                                    <span class="text-[18px] text-[#7D7D7D]">
+                                    <span class="text-[18px] text-[#6E6E6E]">
                                         @if (
                                             (bool) core()->getConfigData('taxes.catalogue.pricing.tax_inclusive') 
                                             && $product->getTypeInstance()->getTaxCategory()
@@ -323,7 +334,7 @@
 
                                 {!! view_render_event('bagisto.shop.products.short_description.before', ['product' => $product]) !!}
 
-                                <p class="mt-[25px] text-[18px] text-[#7D7D7D] max-sm:text-[14px] max-sm:mt-[15px]">
+                                <p class="mt-[25px] text-[18px] text-[#6E6E6E] max-sm:text-[14px] max-sm:mt-[15px]">
                                     {!! $product->short_description !!}
                                 </p>
 

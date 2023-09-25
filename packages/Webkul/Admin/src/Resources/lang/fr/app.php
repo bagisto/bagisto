@@ -545,6 +545,7 @@ return [
             'edit' => [
                 'save-btn' => 'Enregistrer le produit',
                 'title'    => 'Modifier le produit',
+                'remove'   => 'Supprimer',
 
                 'price' => [
                     'group' => [
@@ -2556,6 +2557,7 @@ return [
                 'footer-link'                   => 'Liens du pied de page',
                 'footer-link-form-title'        => 'Lien du pied de page',
                 'slider-description'            => 'Personnalisation du thème liée au slider.',
+                'slider-required'               => 'Le champ du curseur est requis.',
                 'slider-add-btn'                => 'Ajouter un slider',
                 'general'                       => 'Général',
                 'add-filter-btn'                => 'Ajouter un filtre',
@@ -2681,13 +2683,6 @@ return [
                         'allow-guest-checkout-hint' => 'Remarque : lorsqu\'elle est activée, cette option peut être configurée individuellement pour chaque produit.',
                         'title'                     => 'Commande en tant qu\'invité',
                         'title-info'                => 'La commande en tant qu\'invité permet aux clients d\'acheter des produits sans créer de compte, facilitant le processus d\'achat pour plus de commodité et de rapidité des transactions.',
-                    ],
-
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'Nombre autorisé de nouveaux produits sur la page d\'accueil',
-                        'allow-no-of-featured-products'  => 'Nombre autorisé de produits en vedette sur la page d\'accueil',
-                        'title'                          => 'Configuration de la page d\'accueil',
-                        'title-info'                     => 'La configuration de la page d\'accueil comprend la personnalisation de la mise en page, du contenu et du design de la page principale d\'un site Web pour présenter efficacement les informations souhaitées.',
                     ],
 
                     'product-view-page' => [
@@ -3186,6 +3181,15 @@ return [
             ],
         ],
 
+        'modal' => [
+            'confirm' => [
+                'title'        => 'Êtes-vous sûr(e) ?',
+                'message'      => 'Êtes-vous sûr(e) de vouloir effectuer cette action ?',
+                'agree-btn'    => 'D\'accord',
+                'disagree-btn' => 'Pas d\'accord',
+            ],
+        ],
+
         'products' => [
             'search' => [
                 'title'       => 'Sélectionner des produits',
@@ -3270,6 +3274,7 @@ return [
         'events'                   => 'Événements',
         'sitemaps'                 => 'Sitemaps',
         'newsletter-subscriptions' => 'Abonnements à la newsletter',
+        'transactions'             => 'Transactions',
     ],
 
     'errors' => [

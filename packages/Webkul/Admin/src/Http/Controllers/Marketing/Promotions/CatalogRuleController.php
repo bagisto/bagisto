@@ -6,7 +6,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\CatalogRule\Repositories\CatalogRuleRepository;
-use Webkul\CatalogRule\Helpers\CatalogRuleIndex;
 use Webkul\Admin\DataGrids\Marketing\Promotions\CatalogRuleDataGrid;
 use Webkul\Admin\Http\Requests\CatalogRuleRequest;
 
@@ -17,10 +16,7 @@ class CatalogRuleController extends Controller
      *
      * @return void
      */
-    public function __construct(
-        protected CatalogRuleRepository $catalogRuleRepository,
-        protected CatalogRuleIndex $catalogRuleIndexHelper
-    )
+    public function __construct(protected CatalogRuleRepository $catalogRuleRepository)
     {
     }
 
@@ -61,8 +57,6 @@ class CatalogRuleController extends Controller
 
         Event::dispatch('promotions.catalog_rule.create.after', $catalogRule);
 
-        $this->catalogRuleIndexHelper->reIndexComplete();
-
         session()->flash('success', trans('admin::app.marketing.promotions.catalog-rules.create-success'));
 
         return redirect()->route('admin.marketing.promotions.catalog_rules.index');
@@ -96,8 +90,6 @@ class CatalogRuleController extends Controller
         $catalogRule = $this->catalogRuleRepository->update($catalogRuleRequest->all(), $id);
 
         Event::dispatch('promotions.catalog_rule.update.after', $catalogRule);
-
-        $this->catalogRuleIndexHelper->reIndexComplete();
 
         session()->flash('success', trans('admin::app.marketing.promotions.catalog-rules.update-success'));
 

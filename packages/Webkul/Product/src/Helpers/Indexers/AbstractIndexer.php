@@ -47,7 +47,7 @@ abstract class AbstractIndexer
      * @param  array  $products
      * @return void
      */
-    public function reindexRows(array $products)
+    public function reindexRows($products)
     {
         $currentBatch = [];
 

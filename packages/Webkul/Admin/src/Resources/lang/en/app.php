@@ -545,6 +545,7 @@ return [
             'edit' => [
                 'save-btn' => 'Save Product',
                 'title'    => 'Edit Product',
+                'remove'   => 'Remove',
 
                 'price' => [
                     'group' => [
@@ -2433,8 +2434,6 @@ return [
                 'edit'  => [
                     'title'    => 'Edit User',
                 ],
-
-                
             ],
 
             'edit'  => [
@@ -2542,7 +2541,6 @@ return [
                     'image-carousel'    => 'Slider Carousel',
                     'footer-links'      => 'Footer Links',
                 ],
-                'add-image-btn'                 => 'Add Image',
             ],
 
             'edit' => [
@@ -2559,6 +2557,7 @@ return [
                 'footer-link'                   => 'Footer Links',
                 'footer-link-form-title'        => 'Footer Link',
                 'slider-description'            => 'Slider related theme customization.',
+                'slider-required'               => 'Slider field is Required.',
                 'slider-add-btn'                => 'Add Slider',
                 'add-image-btn'                 => 'Add Image',
                 'general'                       => 'General',
@@ -2684,13 +2683,6 @@ return [
                         'allow-guest-checkout-hint' => 'Hint: If turned on, this option can be configured for each product specifically.',
                         'title'                     => 'Guest Checkout',
                         'title-info'                => 'Guest checkout allows customers to buy products without creating an account, streamlining the purchase process for convenience and faster transactions.',
-                    ],
-
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'Allowed number of New Product in Homepage',
-                        'allow-no-of-featured-products'  => 'Allowed number of Featured Product in Homepage',
-                        'title'                          => 'Homepage configuration',
-                        'title-info'                     => 'Homepage configuration involves customizing the layout, content, and design of a website’s main page to present desired information effectively.',
                     ],
 
                     'product-view-page' => [
@@ -3282,6 +3274,7 @@ return [
         'events'                   => 'Events',
         'sitemaps'                 => 'Sitemaps',
         'newsletter-subscriptions' => 'Newsletter Subscriptions',
+        'transactions'             => 'Transactions',
     ],
 
     'errors' => [

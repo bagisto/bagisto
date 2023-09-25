@@ -20,11 +20,13 @@
         <a
             href="{{ route('shop.home.index') }}" 
             class="place-self-start -mt-[4px]"
+            aria-label="Bagisto "
         >
             <img
                 src="{{ bagisto_asset('images/logo.svg') }}"
                 width="131"
                 height="29"
+                alt="Bagisto"
             >
         </a>
 
@@ -52,7 +54,10 @@
             </label>
 
             <div class="relative w-full">
-                <div class="icon-search flex items-center  absolute ltr:left-[12px] rtl:right-[12px] top-[10px] text-[22px] pointer-events-none"></div>
+                <button
+                    type="submit"
+                    class="icon-search absolute flex items-center ltr:left-[12px] rtl:right-[12px] top-[10px] text-[22px]"
+                ></button>
 
                 <input
                     type="text"
@@ -67,6 +72,7 @@
                     <button
                         type="button"
                         class="icon-camera flex items-center absolute top-[10px] ltr:right-[12px] rtl:left-[12px] pr-3 text-[22px]"
+                        aria-label="Search"
                     >
                     </button>
                 @endif
@@ -77,7 +83,10 @@
         <div class="flex gap-x-[35px] mt-[5px] max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px]">
             {{-- Compare --}}
             @if($showCompare)
-                <a href="{{ route('shop.compare.index') }}">
+                <a
+                    href="{{ route('shop.compare.index') }}"
+                    aria-label="Compare "
+                >
                     <span class="icon-compare inline-block text-[24px] cursor-pointer"></span>
                 </a>
             @endif
@@ -238,7 +247,7 @@
                                     v-if="secondLevelCategory.children.length"
                                 >
                                     <li
-                                        class="text-[14px] font-medium text-[#7D7D7D]"
+                                        class="text-[14px] font-medium text-[#6E6E6E]"
                                         v-for="thirdLevelCategory in secondLevelCategory.children"
                                     >
                                         <a :href="thirdLevelCategory.url">

@@ -545,6 +545,7 @@ return [
             'edit' => [
                 'save-btn' => 'Ürünü Kaydet',
                 'title'    => 'Ürünü Düzenle',
+                'remove'   => 'Kaldır',
 
                 'price' => [
                     'group' => [
@@ -618,7 +619,6 @@ return [
                     'empty-info'        => ':type ürünleri eklemek için.',
                     'sku'               => 'SKU - :sku',
                     'image-placeholder' => 'Ürün Resmi',
-
                 ],
 
                 'types' => [
@@ -2558,6 +2558,7 @@ return [
                 'footer-link'                   => 'Footer Bağlantıları',
                 'footer-link-form-title'        => 'Footer Bağlantısı',
                 'slider-description'            => 'Slider ile ilgili tema özelleştirmesi.',
+                'slider-required'               => 'Slider alanı gereklidir.',
                 'slider-add-btn'                => 'Slider Ekle',
                 'general'                       => 'Genel',
                 'add-filter-btn'                => 'Filtre Ekle',
@@ -2682,13 +2683,6 @@ return [
                         'allow-guest-checkout-hint' => 'İpucu: Açıkken, bu seçenek her ürün için özelleştirilebilir.',
                         'title'                     => 'Misafir Ödemesi',
                         'title-info'                => 'Misafir ödemesi, müşterilere hesap oluşturmadan ürün satın alma olanağı sunar, işlemi kolaylaştırır ve daha hızlı işlemler için.',
-                    ],
-
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'Ana Sayfadaki Yeni Ürün Sayısına İzin Ver',
-                        'allow-no-of-featured-products'  => 'Ana Sayfadaki Öne Çıkan Ürün Sayısına İzin Ver',
-                        'title'                          => 'Ana Sayfa yapılandırması',
-                        'title-info'                     => 'Ana sayfa yapılandırması, istenen bilgiyi etkili bir şekilde sunmak için bir web sitesinin ana sayfasının düzenini, içeriğini ve tasarımını özelleştirmeyi içerir.',
                     ],
 
                     'product-view-page' => [
@@ -3187,6 +3181,15 @@ return [
             ],
         ],
 
+        'modal' => [
+            'confirm' => [
+                'title'        => 'Emin misiniz?',
+                'message'      => 'Bu işlemi gerçekleştirmek istediğinizden emin misiniz?',
+                'agree-btn'    => 'Kabul Et',
+                'disagree-btn' => 'Reddet',
+            ],
+        ],
+
         'products' => [
             'search' => [
                 'title'       => 'Ürünleri Seç',
@@ -3271,6 +3274,7 @@ return [
         'events'                   => 'Etkinlikler',
         'sitemaps'                 => 'Site Haritaları',
         'newsletter-subscriptions' => 'Bülten Abonelikleri',
+        'transactions'             => 'İşlemler',
     ],
 
     'errors' => [

@@ -273,6 +273,19 @@ return [
     ],
 
     'components' => [
+        'accordion' => [
+            'default-content' => 'පෙරනිමැති අන්තරජනනීයය',
+            'default-header'  => 'පෙරනිමැති ශීර්ෂය',
+        ],
+        
+        'drawer' => [
+           'default-toggle'  => 'පෙරනිමැති ස්ථවාදය',
+        ],
+        
+        'media' => [
+            'add-attachments' => 'ඇණවුම් එකතු කරන්න',
+        ],
+        
         'layouts' => [
             'header' => [
                 'title'         => 'ගිණුම',
@@ -353,6 +366,18 @@ return [
                 'no-records-available' => 'ලබා දී ඇණවුම් නැත.',
             ],
         ],
+
+        'modal' => [
+            'default-content' => 'පෙරනිමැති අන්තරජනනීයය',
+            'default-header'  => 'පෙරනිමැති ශීර්ෂය',
+            
+            'confirm' => [
+                'title'        => 'ඔබට සැමට විශ්ලේෂණයක් තිබේද?',
+                'message'      => 'ඔබට මෙම ක්‍රියාව කියවන්ද?',
+                'agree-btn'    => 'එකඟයි',
+                'disagree-btn' => 'නැත',
+            ],
+        ],        
 
         'products'   => [
             'card' => [

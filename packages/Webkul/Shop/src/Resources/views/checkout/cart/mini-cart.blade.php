@@ -12,7 +12,7 @@
                     <span class="icon-cart text-[24px] cursor-pointer"></span>
 
                     <span
-                        class="absolute  px-[7px] top-[-15px] left-[18px] py-[5px] bg-[#060C3B] rounded-[44px] text-[#fff] text-[10px] font-semibold leading-[9px]"
+                        class="absolute  px-[7px] top-[-15px] left-[18px] py-[5px] bg-[#060C3B] rounded-[44px] text-white text-[10px] font-semibold leading-[9px]"
                         v-if="cart?.items_qty"
                     >
                         @{{ cart.items_qty }}
@@ -145,7 +145,7 @@
             <x-slot:footer>
                 <div v-if="cart?.items?.length">
                     <div class="flex justify-between items-center mt-[60px] mb-[30px] px-[25px] pb-[8px] border-b-[1px] border-[#E9E9E9]">
-                        <p class="text-[14px] font-medium text-[#7D7D7D]">
+                        <p class="text-[14px] font-medium text-[#6E6E6E]">
                             @lang('shop::app.checkout.cart.mini-cart.subtotal')
                         </p>
 

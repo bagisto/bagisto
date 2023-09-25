@@ -545,6 +545,7 @@ return [
             'edit' => [
                 'save-btn' => 'Product Opslaan',
                 'title'    => 'Bewerk Product',
+                'remove'   => 'Verwijderen',
 
                 'price' => [
                     'group' => [
@@ -2556,6 +2557,7 @@ return [
                 'footer-link'                   => 'Voettekstlinks',
                 'footer-link-form-title'        => 'Voettekstlink',
                 'slider-description'            => 'Thema-aanpassing gerelateerd aan sliders.',
+                'slider-required'               => 'Slider-veld is verplicht.',
                 'slider-add-btn'                => 'Slider toevoegen',
                 'general'                       => 'Algemeen',
                 'add-filter-btn'                => 'Filter toevoegen',
@@ -2681,13 +2683,6 @@ return [
                         'allow-guest-checkout-hint' => 'Hint: Als dit is ingeschakeld, kan deze optie specifiek worden geconfigureerd voor elk product.',
                         'title'                     => 'Gastafrekening',
                         'title-info'                => 'Gastafrekening stelt klanten in staat om producten te kopen zonder een account aan te maken, wat het aankoopproces vereenvoudigt voor gemak en snellere transacties.',
-                    ],
-
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'Toegestaan aantal nieuwe producten op de startpagina',
-                        'allow-no-of-featured-products'  => 'Toegestaan aantal uitgelichte producten op de startpagina',
-                        'title'                          => 'Configuratie startpagina',
-                        'title-info'                     => 'Configuratie van de lay-out, inhoud en vormgeving van de hoofdpagina van een website om gewenste informatie effectief te presenteren.',
                     ],
 
                     'product-view-page' => [
@@ -3186,6 +3181,15 @@ return [
             ],
         ],
 
+        'modal' => [
+            'confirm' => [
+                'title'        => 'Weet u het zeker?',
+                'message'      => 'Bent u zeker dat u deze actie wilt uitvoeren?',
+                'agree-btn'    => 'Akkoord',
+                'disagree-btn' => 'Niet akkoord',
+            ],
+        ],
+
         'products' => [
             'search' => [
                 'title'       => 'Selecteer Producten',
@@ -3270,6 +3274,7 @@ return [
         'events'                   => 'Evenementen',
         'sitemaps'                 => 'Sitemaps',
         'newsletter-subscriptions' => 'Nieuwsbriefabonnementen',
+        'transactions'             => 'Transacties',
     ],
 
     'errors' => [

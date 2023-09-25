@@ -1,3 +1,10 @@
+{{-- SEO Meta Content --}}
+@push('meta')
+    <meta name="description" content="@lang('shop::app.search.title', ['query' => request()->query('query')])"/>
+
+    <meta name="keywords" content="@lang('shop::app.search.title', ['query' => request()->query('query')])"/>
+@endPush
+
 <x-shop::layouts>
     {{-- Page Title --}}
     <x-slot:title>

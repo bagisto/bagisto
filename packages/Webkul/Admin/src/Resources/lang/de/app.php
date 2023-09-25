@@ -545,6 +545,7 @@ return [
             'edit' => [
                 'save-btn' => 'Produkt speichern',
                 'title'    => 'Produkt bearbeiten',
+                'remove'   => 'Entfernen',
 
                 'price' => [
                     'group' => [
@@ -655,7 +656,6 @@ return [
                             'status'          => 'Status',
                             'weight'          => 'Gewicht',
                             'images'          => 'Bilder',
-
                         ],
 
                         'mass-edit' => [
@@ -2557,6 +2557,7 @@ return [
                 'footer-link'                   => 'Fußzeilenlinks',
                 'footer-link-form-title'        => 'Fußzeilenlink',
                 'slider-description'            => 'Mit diesem Thema können Sie Slider anpassen.',
+                'slider-required'               => 'Slider-Feld ist erforderlich.',
                 'slider-add-btn'                => 'Slider hinzufügen',
                 'general'                       => 'Allgemein',
                 'add-filter-btn'                => 'Filter hinzufügen',
@@ -2682,13 +2683,6 @@ return [
                         'allow-guest-checkout-hint' => 'Hinweis: Wenn aktiviert, kann diese Option für jedes Produkt speziell konfiguriert werden.',
                         'title'                     => 'Gastbestellung',
                         'title-info'                => 'Die Gastbestellung ermöglicht es Kunden, Produkte zu kaufen, ohne ein Konto zu erstellen, und erleichtert den Kaufprozess für Bequemlichkeit und schnellere Transaktionen.',
-                    ],
-
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'Zulässige Anzahl neuer Produkte auf der Startseite',
-                        'allow-no-of-featured-products'  => 'Zulässige Anzahl der vorgestellten Produkte auf der Startseite',
-                        'title'                          => 'Startseitenkonfiguration',
-                        'title-info'                     => 'Die Konfiguration der Startseite beinhaltet die Anpassung des Layouts, des Inhalts und des Designs der Hauptseite einer Website, um gewünschte Informationen effektiv zu präsentieren.',
                     ],
 
                     'product-view-page' => [
@@ -3187,6 +3181,15 @@ return [
             ],
         ],
 
+        'modal' => [
+            'confirm' => [
+                'title'        => 'Bist du sicher?',
+                'message'      => 'Möchtest du diese Aktion wirklich ausführen?',
+                'agree-btn'    => 'Zustimmen',
+                'disagree-btn' => 'Nicht zustimmen',
+            ],
+        ],
+
         'products' => [
             'search' => [
                 'title'       => 'Produkte auswählen',
@@ -3271,6 +3274,7 @@ return [
         'events'                   => 'Ereignisse',
         'sitemaps'                 => 'Sitemaps',
         'newsletter-subscriptions' => 'Newsletter-Abonnements',
+        'transactions'             => 'Transaktionen',
     ],
 
     'errors' => [

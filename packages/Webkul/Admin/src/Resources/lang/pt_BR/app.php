@@ -545,6 +545,7 @@ return [
             'edit' => [
                 'save-btn' => 'Salvar Produto',
                 'title'    => 'Editar Produto',
+                'remove'   => 'Remover',
 
                 'price' => [
                     'group' => [
@@ -2556,6 +2557,7 @@ return [
                 'footer-link'                   => 'Links no Rodapé',
                 'footer-link-form-title'        => 'Link no Rodapé',
                 'slider-description'            => 'Personalização relacionada a slides.',
+                'slider-required'               => 'Campo do slider é obrigatório.',
                 'slider-add-btn'                => 'Adicionar Slide',
                 'general'                       => 'Geral',
                 'add-filter-btn'                => 'Adicionar Filtro',
@@ -2681,13 +2683,6 @@ return [
                         'allow-guest-checkout-hint' => 'Dica: Se ativado, esta opção pode ser configurada especificamente para cada produto.',
                         'title'                     => 'Checkout de Convidado',
                         'title-info'                => 'O checkout de convidado permite que os clientes comprem produtos sem criar uma conta, agilizando o processo de compra para maior conveniência e transações mais rápidas.',
-                    ],
-
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'Número Permitido de Novos Produtos na Página Inicial',
-                        'allow-no-of-featured-products'  => 'Número Permitido de Produtos em Destaque na Página Inicial',
-                        'title'                          => 'Configuração da Página Inicial',
-                        'title-info'                     => 'A configuração da página inicial envolve a personalização do layout, conteúdo e design da página principal de um site para apresentar informações desejadas de forma eficaz.',
                     ],
 
                     'product-view-page' => [
@@ -3186,6 +3181,15 @@ return [
             ],
         ],
 
+        'modal' => [
+            'confirm' => [
+                'title'        => 'Tem certeza?',
+                'message'      => 'Tem certeza de que deseja realizar esta ação?',
+                'agree-btn'    => 'Concordar',
+                'disagree-btn' => 'Discordar',
+            ],
+        ],
+
         'products' => [
             'search' => [
                 'title'       => 'Sélectionner des produits',
@@ -3270,6 +3274,7 @@ return [
         'events'                   => 'Événements',
         'sitemaps'                 => 'Sitemaps',
         'newsletter-subscriptions' => 'Abonnements à la newsletter',
+        'transactions'             => 'Transações',
     ],
 
     'errors' => [

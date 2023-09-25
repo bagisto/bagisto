@@ -273,6 +273,19 @@ return [
     ],
 
     'components' => [
+        'accordion' => [
+            'default-content' => 'Domyślna treść',
+            'default-header'  => 'Domyślny nagłówek',
+        ],
+        
+        'drawer' => [
+           'default-toggle'  => 'Domyślne przełączanie',
+        ],
+        
+        'media' => [
+            'add-attachments' => 'Dodaj załączniki',
+        ],
+        
         'layouts' => [
             'header' => [
                 'title'         => 'Konto',
@@ -351,6 +364,18 @@ return [
             'table' => [
                 'actions'              => 'Działania',
                 'no-records-available' => 'Brak dostępnych rekordów.',
+            ],
+        ],
+
+        'modal' => [
+            'default-content' => 'Domyślna treść',
+            'default-header'  => 'Domyślny nagłówek',
+            
+            'confirm' => [
+                'title'        => 'Czy jesteś pewien?',
+                'message'      => 'Czy na pewno chcesz wykonać tę akcję?',
+                'agree-btn'    => 'Zgadzam się',
+                'disagree-btn' => 'Nie zgadzam się',
             ],
         ],
 

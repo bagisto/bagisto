@@ -545,6 +545,7 @@ return [
             'edit' => [
                 'save-btn' => 'Guardar Producto',
                 'title'    => 'Editar Producto',
+                'remove'   => 'Eliminar',
 
                 'price' => [
                     'group' => [
@@ -2556,6 +2557,7 @@ return [
                 'footer-link'                   => 'Enlaces del Pie de Página',
                 'footer-link-form-title'        => 'Enlace del Pie de Página',
                 'slider-description'            => 'Personalización de temas relacionados con el Slider.',
+                'slider-required'               => 'Campo de diapositivas es obligatorio.',
                 'slider-add-btn'                => 'Agregar Slider',
                 'general'                       => 'General',
                 'add-filter-btn'                => 'Agregar Filtro',
@@ -2681,13 +2683,6 @@ return [
                         'allow-guest-checkout-hint' => 'Hinweis: Wenn aktiviert, kann diese Option für jedes Produkt speziell konfiguriert werden.',
                         'title'                     => 'Gastbestellung',
                         'title-info'                => 'Die Gastbestellung ermöglicht es Kunden, Produkte zu kaufen, ohne ein Konto zu erstellen, und erleichtert den Kaufprozess für Bequemlichkeit und schnellere Transaktionen.',
-                    ],
-
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'Zulässige Anzahl neuer Produkte auf der Startseite',
-                        'allow-no-of-featured-products'  => 'Zulässige Anzahl der vorgestellten Produkte auf der Startseite',
-                        'title'                          => 'Startseitenkonfiguration',
-                        'title-info'                     => 'Die Konfiguration der Startseite beinhaltet die Anpassung des Layouts, des Inhalts und des Designs der Hauptseite einer Website, um gewünschte Informationen effektiv zu präsentieren.',
                     ],
 
                     'product-view-page' => [
@@ -3186,6 +3181,15 @@ return [
             ],
         ],
 
+        'modal' => [
+            'confirm' => [
+                'title'        => '¿Estás seguro?',
+                'message'      => '¿Estás seguro de que quieres realizar esta acción?',
+                'agree-btn'    => 'Aceptar',
+                'disagree-btn' => 'Cancelar',
+            ],
+        ],
+
         'products' => [
             'search' => [
                 'title'       => 'Seleccionar Productos',
@@ -3270,6 +3274,7 @@ return [
         'events'                   => 'Eventos',
         'sitemaps'                 => 'Mapas del Sitio',
         'newsletter-subscriptions' => 'Suscripciones al Boletín',
+        'transactions'             => 'Transacciones',
     ],
 
     'errors' => [

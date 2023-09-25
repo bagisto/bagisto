@@ -545,6 +545,7 @@ return [
             'edit' => [
                 'save-btn' => 'Salva Prodotto',
                 'title'    => 'Modifica Prodotto',
+                'remove'   => 'Rimuovi',
 
                 'price' => [
                     'group' => [
@@ -2287,7 +2288,6 @@ return [
                     'basic-settings'  => 'Impostazioni di Base',
                     'country'         => 'Paese',
                     'back-btn'        => 'Indietro',
-                    'is_zip'          => 'Abilita Intervallo di CAP',
                     'identifier'      => 'Identificatore',
                     'select-country'  => 'Seleziona Paese',
                     'select-state'    => 'Seleziona Stato',
@@ -2513,6 +2513,7 @@ return [
             'index' => [
                 'title'      => 'Temas',
                 'create-btn' => 'Crear Tema',
+
                 'datagrid'   => [
                     'view'         => 'Vedi',
                     'delete'       => 'Elimina',
@@ -2556,6 +2557,7 @@ return [
                 'footer-link'                   => 'Enlaces del Pie de Página',
                 'footer-link-form-title'        => 'Enlace del Pie de Página',
                 'slider-description'            => 'Personalización del tema relacionada con los sliders.',
+                'slider-required'               => 'Il campo del cursore è obbligatorio.',
                 'slider-add-btn'                => 'Agregar Slider',
                 'general'                       => 'General',
                 'add-filter-btn'                => 'Agregar Filtro',
@@ -2681,13 +2683,6 @@ return [
                         'allow-guest-checkout-hint' => 'Suggerimento: se attivato, questa opzione può essere configurata per ciascun prodotto in modo specifico.',
                         'title'                     => 'Checkout per gli Ospiti',
                         'title-info'                => 'Il checkout per gli ospiti consente ai clienti di acquistare prodotti senza creare un account, semplificando il processo di acquisto per comodità e transazioni più veloci.',
-                    ],
-
-                    'homepage' => [
-                        'allow-no-of-new-products'      => 'Numero Consentito di Nuovi Prodotti in Homepage',
-                        'allow-no-of-featured-products' => 'Numero Consentito di Prodotti in Primo Piano in Homepage',
-                        'title'                         => 'Configurazione Homepage',
-                        'title-info'                    => 'La configurazione della homepage consiste nella personalizzazione del layout, del contenuto e del design della pagina principale di un sito web per presentare in modo efficace le informazioni desiderate.',
                     ],
 
                     'product-view-page' => [
@@ -2937,6 +2932,7 @@ return [
                         'status'      => 'Stato',
                         'title-info'  => '"Spedizione gratuita" si riferisce a un metodo di spedizione in cui il costo della spedizione viene annullato e il venditore copre le spese di spedizione per la consegna di merci all\'acquirente.',
                         'title'       => 'Titolo',
+                        'type'        => 'Tipo',
                     ],
 
                     'flat-rate-shipping' => [
@@ -3185,6 +3181,15 @@ return [
             ],
         ],
 
+        'modal' => [
+            'confirm' => [
+                'title'        => 'Sei sicuro?',
+                'message'      => 'Sei sicuro di voler eseguire questa azione?',
+                'agree-btn'    => 'Concorda',
+                'disagree-btn' => 'Non Concordare',
+            ],
+        ],
+
         'products' => [
             'search' => [
                 'title'       => 'Seleziona Prodotti',
@@ -3269,6 +3274,7 @@ return [
         'events'                   => 'Eventi',
         'sitemaps'                 => 'Sitemap',
         'newsletter-subscriptions' => 'Iscrizioni alla Newsletter',
+        'transactions'             => 'Transazioni',
     ],
 
     'errors' => [

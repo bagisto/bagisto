@@ -1,7 +1,8 @@
 @props(['options'])
 
 <v-carousel>
-    <div class="shimmer w-full aspect-[2.743/1]"></div>
+    <div class="shimmer w-full aspect-[2.743/1]">
+    </div>
 </v-carousel>
 
 @pushOnce('scripts')
@@ -10,15 +11,17 @@
             <a
                 v-for="(image, index) in images"
                 class="fade"
-                :href="image.link"
+                :href="image.link || '#'"
                 ref="slides"
                 :key="index"
+                aria-label="Image Slide "
             >
-                <x-shop::shimmer.image
+                <x-shop::media.images.lazy
                     class="w-full aspect-[2.743/1]"
                     ::src="image.image"
                     ::srcset="image.image + ' 1920w, ' + image.image.replace('storage', 'cache/large') + ' 1280w,' + image.image.replace('storage', 'cache/medium') + ' 1024w, ' + image.image.replace('storage', 'cache/small') + ' 525w'"
-                ></x-shop::shimmer.image>
+                    alt=""
+                ></x-shop::media.images.lazy>
             </a>
 
             <span

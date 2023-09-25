@@ -2,20 +2,10 @@
 
 namespace Webkul\Product\Listeners;
 
-use Webkul\Product\Helpers\Indexers\Inventory;
+use Webkul\Product\Jobs\UpdateCreateInventoryIndex as UpdateCreateInventoryIndexJob;
 
 class Refund
 {
-    /**
-     * Create a new listener instance.
-     *
-     * @param  \Webkul\Product\Helpers\Indexers\Inventory  $inventoryIndexer
-     * @return void
-     */
-    public function __construct(protected Inventory $inventoryIndexer)
-    {
-    }
-
     /**
      * After refund is created
      *
@@ -24,12 +14,10 @@ class Refund
      */
     public function afterCreate($refund)
     {
-        $products = [];
+        $productIds = $refund->items
+            ->pluck('product_id')
+            ->toArray();
 
-        foreach ($refund->items as $item) {
-            $products[] = $item->product;
-        }
-
-        $this->inventoryIndexer->reindexRows($products);
+        UpdateCreateInventoryIndexJob::dispatch($productIds);
     }
 }

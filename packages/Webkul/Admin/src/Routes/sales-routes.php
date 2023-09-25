@@ -39,7 +39,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::get('view/{id}', 'view')->name('admin.sales.orders.view');
 
-            Route::get('cancel/{id}', 'cancel')->name('admin.sales.orders.cancel');
+            Route::post('cancel/{id}', 'cancel')->name('admin.sales.orders.cancel');
 
             Route::post('create/{order_id}', 'comment')->name('admin.sales.orders.comment');
 
