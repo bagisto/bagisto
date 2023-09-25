@@ -538,6 +538,12 @@
 
                     <template v-else>
                         <img :src="variant.images[0].url">
+
+                        <span
+                            class="absolute bottom-[1px] ltr:left-[1px] rtl:right-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]"
+                            v-text="variant.images.length"
+                        >
+                        </span>
                     </template>
                 </div>
 
