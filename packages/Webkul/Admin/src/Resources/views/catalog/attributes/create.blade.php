@@ -215,12 +215,7 @@
                                                     <x-admin::table.th>
                                                         {{ $locale->name . ' (' . $locale->code . ')' }}
                                                     </x-admin::table.th>
-                                                @endforeach                                
-
-                                                <!-- Positions tables heading -->
-                                                <x-admin::table.th>
-                                                    @lang('admin::app.catalog.attributes.create.position')
-                                                </x-admin::table.th>
+                                                @endforeach
 
                                                 <!-- Action tables heading -->
                                                 <x-admin::table.th></x-admin::table.th>
@@ -300,17 +295,6 @@
                                                             type="hidden"
                                                             :name="'options[' + element.id + '][' + locale.code + '][label]'"
                                                             v-model="element.params[locale.code]"
-                                                        />
-                                                    </x-admin::table.td>
-
-                                                    <!-- Position Loacle -->
-                                                    <x-admin::table.td>
-                                                        <p v-text="element.params.sort_order"></p>
-
-                                                        <input
-                                                            type="hidden"
-                                                            :name="'options[' + element.id + '][sort_order]'"
-                                                            v-model="element.params.sort_order"
                                                         />
                                                     </x-admin::table.td>
 
@@ -840,27 +824,6 @@
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
                                 @endforeach
-
-                                <!-- Position Input -->
-                                <x-admin::form.control-group class="w-full mb-[10px]">
-                                    <x-admin::form.control-group.label ::class="{ 'required' : ! isNullOptionChecked }">
-                                        @lang('admin::app.catalog.attributes.create.position')
-                                    </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.control
-                                        type="number"
-                                        name="sort_order"
-                                        ::rules="{ 'required' : ! isNullOptionChecked }"
-                                        :label="trans('admin::app.catalog.attributes.create.position')"
-                                        :placeholder="trans('admin::app.catalog.attributes.create.position')"
-                                    >
-                                    </x-admin::form.control-group.control>
-        
-                                    <x-admin::form.control-group.error
-                                        control-name="sort_order"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
                             </div>
                         </x-slot:content>
                         
