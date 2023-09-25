@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-0e441111.css",
+    "file": "assets/app-90ca9e6c.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -69,14 +69,14 @@
     "src": "src/Resources/assets/images/wishlist.png"
   },
   "src/Resources/assets/js/app.css": {
-    "file": "assets/app-f72387a9.css",
+    "file": "assets/app-05f8acf7.css",
     "src": "src/Resources/assets/js/app.css"
   },
   "src/Resources/assets/js/app.js": {
     "css": [
-      "assets/app-f72387a9.css"
+      "assets/app-05f8acf7.css"
     ],
-    "file": "assets/app-b5bea281.js",
+    "file": "assets/app-0d53d371.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   }
