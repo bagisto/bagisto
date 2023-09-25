@@ -2543,7 +2543,6 @@ return [
                     'image-carousel'    => 'Slider Carousel',
                     'footer-links'      => 'Footer Links',
                 ],
-                'add-image-btn'                 => 'Add Image',
             ],
 
             'edit' => [
@@ -2560,6 +2559,7 @@ return [
                 'footer-link'                   => 'Footer Links',
                 'footer-link-form-title'        => 'Footer Link',
                 'slider-description'            => 'Slider related theme customization.',
+                'slider-required'               => 'Slider field is Required.',
                 'slider-add-btn'                => 'Add Slider',
                 'add-image-btn'                 => 'Add Image',
                 'general'                       => 'General',

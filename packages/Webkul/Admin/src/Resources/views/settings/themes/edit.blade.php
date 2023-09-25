@@ -366,7 +366,6 @@
                                             type="image"
                                             name="slider_image"
                                             rules="required"
-                                            :label="trans('admin::app.settings.themes.edit.slider-image')"
                                             :is-multiple="false"
                                         >
                                         </x-admin::form.control-group.control>
@@ -1789,7 +1788,7 @@
                             const sliderImage = formData.get("slider_image[]");
 
                             if (! sliderImage) {
-                                throw new Error("Slider image is required.");
+                                throw new Error("{{ trans('admin::app.settings.themes.edit.slider-required') }}");
                             }
 
                             this.sliders.images.push({

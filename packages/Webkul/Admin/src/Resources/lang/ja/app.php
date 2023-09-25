@@ -2558,6 +2558,7 @@ return [
                 'footer-link'                   => 'フッターリンク',
                 'footer-link-form-title'        => 'フッターリンク',
                 'slider-description'            => 'スライダー関連のテーマカスタマイズ。',
+                'slider-required'               => 'スライダーフィールドは必須です。',
                 'slider-add-btn'                => 'スライダーを追加',
                 'general'                       => '一般',
                 'add-filter-btn'                => 'フィルターを追加',
