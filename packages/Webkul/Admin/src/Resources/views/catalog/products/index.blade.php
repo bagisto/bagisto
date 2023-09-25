@@ -399,7 +399,7 @@
                                                     class="flex items-center py-[3px] px-[8px] bg-gray-600 rounded-[4px] text-white font-semibold"
                                                     v-for="option in attribute.options"
                                                 >
-                                                    @{{ option.name + option.id }}
+                                                    @{{ option.name }}
 
                                                     <span
                                                         class="icon-cross text-white text-[18px] ltr:ml-[5px] rtl:mr-[5px] cursor-pointer"
