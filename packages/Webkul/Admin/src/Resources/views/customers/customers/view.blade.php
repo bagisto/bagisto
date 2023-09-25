@@ -497,7 +497,7 @@
             <x-admin::accordion>
                 <x-slot:header>
                     <div class="flex w-[100%]">
-                        <p class="w-[100%] p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                        <p class="w-[100%] p-[10px] text-gray-800 dark:text-white text-[16px] font-semibold">
                             @lang('admin::app.customers.customers.view.customer')
                         </p>
     
@@ -539,7 +539,7 @@
             <x-admin::accordion>
                 <x-slot:header>
                     <div class="flex items-center justify-between p-[6px]">
-                        <p class="text-gray-600 dark:text-gray-300  text-[16px] font-semibold">
+                        <p class="text-gray-800 dark:text-white text-[16px] font-semibold">
                             @lang('admin::app.customers.customers.view.address', ['count' => count($customer->addresses)])
                         </p>
                     </div>

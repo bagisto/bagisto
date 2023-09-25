@@ -74,7 +74,7 @@
                     <x-admin::accordion>
                         <x-slot:header>
                             <div class="flex items-center justify-between">
-                                <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                                <p class="p-[10px] text-gray-800 dark:text-white text-[16px] font-semibold">
                                     @lang('admin::app.marketing.communications.templates.edit.general')
                                 </p>
                             </div>
@@ -87,7 +87,6 @@
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.communications.templates.edit.name')
                                     </x-admin::form.control-group.label>
-
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="name"

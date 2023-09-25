@@ -290,7 +290,7 @@
                                 </v-cart-rule-condition-item>
                       
                                 <div 
-                                    class="max-w-max px-[12px] py-[5px] mt-[15px] bg-white dark:bg-gray-900  border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                    class="secondary-button max-w-max mt-[15px]"
                                     @click="addCondition"
                                 >
                                     @lang('admin::app.marketing.promotions.cart-rules.edit.add-condition')
@@ -559,7 +559,7 @@
                             <x-admin::accordion>
                                 <x-slot:header>
                                     <div class="flex items-center justify-between p-[6px]">
-                                        <p class="text-gray-600 dark:text-gray-300  text-[16px] p-[10px] font-semibold">
+                                        <p class="text-gray-800 dark:text-white text-[16px] p-[10px] font-semibold">
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.settings')
                                         </p>
                                     </div>
@@ -610,7 +610,7 @@
                                 
                                                 <x-admin::form.control-group.label
                                                     :for="'channel_' . '_' . $channel->id"
-                                                    class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
+                                                    class="!text-[14px] !text-gray-600 dark:!text-gray-300 font-semibold cursor-pointer"
                                                 >
                                                     {{ core()->getChannelName($channel) }}
                                                 </x-admin::form.control-group.label>
@@ -647,7 +647,7 @@
 
                                                 <x-admin::form.control-group.label
                                                     :for="'customer_group_' . '_' . $customerGroup->id"
-                                                    class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
+                                                    class="!text-[14px] !text-gray-600 dark:!text-gray-300 font-semibold cursor-pointer"
                                                 >
                                                     {{ $customerGroup->name }}
                                                 </x-admin::form.control-group.label>
@@ -681,7 +681,7 @@
                             
                                             <x-admin::form.control-group.label
                                                 for="status"
-                                                class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
+                                                class="!text-[14px] !text-gray-600 dark:!text-gray-300 font-semibold cursor-pointer"
                                             >
                                                 @lang('admin::app.marketing.promotions.cart-rules.edit.status')
                                             </x-admin::form.control-group.label>
@@ -699,7 +699,7 @@
                             <x-admin::accordion>
                                 <x-slot:header>
                                     <div class="flex items-center justify-between p-[6px]">
-                                        <p class="text-gray-600 dark:text-gray-300  text-[16px] p-[10px] font-semibold">
+                                        <p class="text-gray-800 dark:text-white text-[16px] p-[10px] font-semibold">
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.marketing-time')
                                         </p>
                                     </div>
