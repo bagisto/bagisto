@@ -15,12 +15,12 @@ import { createApp } from "vue/dist/vue.esm-bundler";
 import { configure, defineRule, Field, Form, ErrorMessage } from "vee-validate";
 import { localize } from "@vee-validate/i18n";
 import en from "@vee-validate/i18n/dist/locale/en.json";
-import AllRules from "@vee-validate/rules";
+import * as AllRules from '@vee-validate/rules';
 
 /**
  * Registration of all global validators.
  */
-Object.keys(AllRules).forEach((rule) => {
+Object.keys(AllRules).forEach(rule => {
     defineRule(rule, AllRules[rule]);
 });
 

@@ -56,7 +56,7 @@
                     class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800  hover:rounded-[6px]"
                     @click="$refs.groupCreateModal.open()"
                 >
-                    <span class="icon-cart text-[24px] "></span>
+                    <span class="icon-mail text-[24px] "></span>
 
                     @lang('admin::app.sales.invoices.view.send-duplicate-invoice')
                 </button>

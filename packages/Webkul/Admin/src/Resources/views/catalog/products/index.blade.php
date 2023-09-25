@@ -60,7 +60,7 @@
     <x-admin::datagrid src="{{ route('admin.catalog.products.index') }}" :isMultiRow="true">
         {{-- Datagrid Header --}}
         @php 
-            $hasPermission = core()->getConfigData('catalog.products.mass-update') || core()->getConfigData('catalog.products.mass-delete');
+            $hasPermission = bouncer()->hasPermission('catalog.products.mass-update') || bouncer()->hasPermission('catalog.products.mass-delete');
         @endphp
 
         <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
@@ -181,24 +181,28 @@
                     {{-- Image, Price, Id, Stock Columns --}}
                     <div class="flex gap-[6px]">
                         <div class="relative">
-                            <img
-                                class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
-                                v-if="record.base_image"
-                                :src=`{{ Storage::url('') }}${record.base_image}`
-                            />
+                            <template v-if="record.base_image">
+                                <img
+                                    class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
+                                    :src=`{{ Storage::url('') }}${record.base_image}`
+                                />
 
-                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed dark:border-gray-800   rounded-[4px] overflow-hidden" v-else>
-                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
-                                <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
-                                    @lang('admin::app.catalog.products.index.datagrid.product-image')
-                                </p>
-                            </div>
+                                <span
+                                    class="absolute bottom-[1px] ltr:left-[1px] rtl:right-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]"
+                                    v-text="record.images_count"
+                                >
+                                </span>
+                            </template>
 
-                            <span
-                                class="absolute bottom-[1px] ltr:left-[1px] rtl:right-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]"
-                                v-text="record.images_count"
-                            >
-                            </span>
+                            <template v-else>
+                                <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                                    <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+
+                                    <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
+                                        @lang('admin::app.catalog.products.index.datagrid.product-image')
+                                    </p>
+                                </div>
+                            </template>
                         </div>
 
                         <div class="flex flex-col gap-[6px]">
@@ -399,7 +403,7 @@
                                                     class="flex items-center py-[3px] px-[8px] bg-gray-600 rounded-[4px] text-white font-semibold"
                                                     v-for="option in attribute.options"
                                                 >
-                                                    @{{ option.name + option.id }}
+                                                    @{{ option.name }}
 
                                                     <span
                                                         class="icon-cross text-white text-[18px] ltr:ml-[5px] rtl:mr-[5px] cursor-pointer"

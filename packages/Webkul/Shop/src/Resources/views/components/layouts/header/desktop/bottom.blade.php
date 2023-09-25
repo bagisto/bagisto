@@ -54,7 +54,10 @@
             </label>
 
             <div class="relative w-full">
-                <div class="icon-search flex items-center  absolute ltr:left-[12px] rtl:right-[12px] top-[10px] text-[22px] pointer-events-none"></div>
+                <button
+                    type="submit"
+                    class="icon-search absolute flex items-center ltr:left-[12px] rtl:right-[12px] top-[10px] text-[22px]"
+                ></button>
 
                 <input
                     type="text"

@@ -108,7 +108,7 @@
 
                         <!-- Options -->
                         <div
-                            class="p-[16px] bg-white dark:bg-gray-900  box-shadow rounded-[4px] {{ in_array($attribute->type, ['select', 'multiselect', 'checkbox']) ?: 'hidden' }}"
+                            class="p-[16px] bg-white dark:bg-gray-900 box-shadow rounded-[4px] {{ in_array($attribute->type, ['select', 'multiselect', 'checkbox', 'price']) ?: 'hidden' }}"
                             v-if="showSwatch"
                         >
                             <div class="flex justify-between items-center mb-3">
@@ -219,11 +219,6 @@
                                                     </x-admin::table.th>
                                                 @endforeach
 
-                                                <!-- Positions tables heading -->
-                                                <x-admin::table.th>
-                                                    @lang('admin::app.catalog.attributes.edit.position')
-                                                </x-admin::table.th>
-
                                                 <!-- Action tables heading -->
                                                 <x-admin::table.th></x-admin::table.th>
                                             </x-admin::table.thead.tr>
@@ -315,17 +310,6 @@
                                                             type="hidden"
                                                             :name="'options[' + element.id + '][' + locale.code + '][label]'"
                                                             v-model="element['locales'][locale.code]"
-                                                        />
-                                                    </x-admin::table.td>
-
-                                                    <!-- Position -->
-                                                    <x-admin::table.td>
-                                                        <p v-text="element.sort_order"></p>
-
-                                                        <input
-                                                            type="hidden"
-                                                            :name="'options[' + element.id + '][sort_order]'"
-                                                            v-model="element.sort_order"
                                                         />
                                                     </x-admin::table.td>
 
@@ -965,27 +949,6 @@
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
                                 @endforeach
-
-                                <!-- Position Input -->
-                                <x-admin::form.control-group class="w-full mb-[10px]">
-                                    <x-admin::form.control-group.label ::class="{ 'required' : ! isNullOptionChecked }">
-                                        @lang('admin::app.catalog.attributes.edit.position')
-                                    </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.control
-                                        type="number"
-                                        name="sort_order"
-                                        ::rules="{ 'required' : ! isNullOptionChecked }"
-                                        :label="trans('admin::app.catalog.attributes.edit.position')"
-                                        :placeholder="trans('admin::app.catalog.attributes.edit.position')"
-                                    >
-                                    </x-admin::form.control-group.control>
-        
-                                    <x-admin::form.control-group.error
-                                        control-name="sort_order"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
                             </div>
                         </x-slot:content>
                         
@@ -1013,7 +976,7 @@
                     return {
                         optionRowCount: 1,
 
-                        showSwatch: "{{ $attribute->type == 'select' ? true : false  }}",
+                        showSwatch: {{ in_array($attribute->type, ['select', 'checkbox', 'price', 'multiselect']) ? 'true' : 'false' }},
 
                         swatchType: "{{ $attribute->swatch_type == '' ? 'dropdown' : $attribute->swatch_type }}",
 
