@@ -2557,6 +2557,7 @@ return [
                 'footer-link'                   => 'پیوندهای پایین صفحه',
                 'footer-link-form-title'        => 'پیوند پایین صفحه',
                 'slider-description'            => 'سفارشی‌سازی مرتبط با اسلایدر.',
+                'slider-required'               => 'فیلد اسلایدر الزامی است.',
                 'slider-add-btn'                => 'افزودن اسلایدر',
                 'general'                       => 'عمومی',
                 'add-filter-btn'                => 'افزودن فیلتر',

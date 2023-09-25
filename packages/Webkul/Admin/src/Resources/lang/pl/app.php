@@ -2557,6 +2557,7 @@ return [
                 'footer-link'                   => 'Linki w Stopce',
                 'footer-link-form-title'        => 'Link w Stopce',
                 'slider-description'            => 'Dostosowanie motywu związane z sliderem.',
+                'slider-required'               => 'Pole suwaka jest wymagane.',
                 'slider-add-btn'                => 'Dodaj Slajd',
                 'general'                       => 'Ogólne',
                 'add-filter-btn'                => 'Dodaj Filtr',

@@ -2557,6 +2557,7 @@ return [
                 'footer-link'                   => 'Ссылки в подвале',
                 'footer-link-form-title'        => 'Ссылка в подвале',
                 'slider-description'            => 'Настройка темы, связанная со слайдером.',
+                'slider-required'               => 'Поле слайдера обязательно.',
                 'slider-add-btn'                => 'Добавить слайдер',
                 'general'                       => 'Общее',
                 'add-filter-btn'                => 'Добавить фильтр',

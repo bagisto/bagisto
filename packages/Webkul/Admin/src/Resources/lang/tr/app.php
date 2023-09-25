@@ -2558,6 +2558,7 @@ return [
                 'footer-link'                   => 'Footer Bağlantıları',
                 'footer-link-form-title'        => 'Footer Bağlantısı',
                 'slider-description'            => 'Slider ile ilgili tema özelleştirmesi.',
+                'slider-required'               => 'Slider alanı gereklidir.',
                 'slider-add-btn'                => 'Slider Ekle',
                 'general'                       => 'Genel',
                 'add-filter-btn'                => 'Filtre Ekle',

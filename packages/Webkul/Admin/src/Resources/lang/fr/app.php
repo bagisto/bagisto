@@ -2557,6 +2557,7 @@ return [
                 'footer-link'                   => 'Liens du pied de page',
                 'footer-link-form-title'        => 'Lien du pied de page',
                 'slider-description'            => 'Personnalisation du thème liée au slider.',
+                'slider-required'               => 'Le champ du curseur est requis.',
                 'slider-add-btn'                => 'Ajouter un slider',
                 'general'                       => 'Général',
                 'add-filter-btn'                => 'Ajouter un filtre',
