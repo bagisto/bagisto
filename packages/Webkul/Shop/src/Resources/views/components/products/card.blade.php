@@ -29,14 +29,14 @@
                 
                 <div class="action-items bg-black">
                     <p
-                        class="inline-block absolute top-[20px] left-[20px] px-[10px]  bg-[#E03935] rounded-[44px] text-[#fff] text-[14px]"
+                        class="inline-block absolute top-[20px] left-[20px] px-[10px]  bg-[#E51A1A] rounded-[44px] text-white text-[14px]"
                         v-if="product.on_sale"
                     >
                         @lang('shop::app.components.products.card.sale')
                     </p>
 
                     <p
-                        class="inline-block absolute top-[20px] left-[20px] px-[10px] bg-navyBlue rounded-[44px] text-[#fff] text-[14px]"
+                        class="inline-block absolute top-[20px] left-[20px] px-[10px] bg-navyBlue rounded-[44px] text-white text-[14px]"
                         v-else-if="product.is_new"
                     >
                         @lang('shop::app.components.products.card.new')
@@ -105,14 +105,14 @@
             
                 <div class="action-items bg-black"> 
                     <p
-                        class="inline-block absolute top-[20px] left-[20px] px-[10px] bg-[#E03935] rounded-[44px] text-[#fff] text-[14px]"
+                        class="inline-block absolute top-[20px] left-[20px] px-[10px] bg-[#E51A1A] rounded-[44px] text-white text-[14px]"
                         v-if="product.on_sale"
                     >
                         @lang('shop::app.components.products.card.sale')
                     </p>
 
                     <p
-                        class="inline-block absolute top-[20px] left-[20px] px-[10px] bg-navyBlue rounded-[44px] text-[#fff] text-[14px]"
+                        class="inline-block absolute top-[20px] left-[20px] px-[10px] bg-navyBlue rounded-[44px] text-white text-[14px]"
                         v-else-if="product.is_new"
                     >
                         @lang('shop::app.components.products.card.new')
@@ -161,11 +161,11 @@
                     </span> 
                 </div> 
                 
-                <p class="text-[14px] text-[#7D7D7D]" v-if="! product.avg_ratings">
+                <p class="text-[14px] text-[#6E6E6E]" v-if="! product.avg_ratings">
                     @lang('shop::app.components.products.card.review-description')
                 </p>
             
-                <p v-else class="text-[14px] text-[#7D7D7D]">
+                <p v-else class="text-[14px] text-[#6E6E6E]">
                     <x-shop::products.star-rating 
                         ::value="product && product.avg_ratings ? product.avg_ratings : 0"
                         :is-editable=false

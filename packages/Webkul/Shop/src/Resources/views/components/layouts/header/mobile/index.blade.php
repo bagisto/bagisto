@@ -58,7 +58,7 @@
                             <div class="flex flex-col gap-[10px] justify-between">
                                 <p class="text-[25px] font-mediums">Hello! {{ auth()->user()?->first_name }}</p>
 
-                                <p class="text-[#7D7D7D] ">{{ auth()->user()?->email }}</p>
+                                <p class="text-[#6E6E6E] ">{{ auth()->user()?->email }}</p>
                             </div>
                         @endauth
                     </div>
