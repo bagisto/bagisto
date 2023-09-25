@@ -656,7 +656,6 @@ return [
                             'status'          => 'Status',
                             'weight'          => 'Gewicht',
                             'images'          => 'Bilder',
-
                         ],
 
                         'mass-edit' => [
@@ -2558,6 +2557,7 @@ return [
                 'footer-link'                   => 'Fußzeilenlinks',
                 'footer-link-form-title'        => 'Fußzeilenlink',
                 'slider-description'            => 'Mit diesem Thema können Sie Slider anpassen.',
+                'slider-required'               => 'Slider-Feld ist erforderlich.',
                 'slider-add-btn'                => 'Slider hinzufügen',
                 'general'                       => 'Allgemein',
                 'add-filter-btn'                => 'Filter hinzufügen',
@@ -3280,6 +3280,7 @@ return [
         'events'                   => 'Ereignisse',
         'sitemaps'                 => 'Sitemaps',
         'newsletter-subscriptions' => 'Newsletter-Abonnements',
+        'transactions'             => 'Transaktionen',
     ],
 
     'errors' => [

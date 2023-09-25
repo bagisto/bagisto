@@ -39,6 +39,27 @@ class LocalesTableSeeder extends Seeder
                 'code'      => 'es',
                 'name'      => 'Español',
                 'logo_path' => 'locales/es.png',
-            ]]);
+            ], [
+                'id'        => 6,
+                'code'      => 'de',
+                'name'      => 'German',
+                'logo_path' => 'locales/de.png',
+            ], [
+                'id'        => 7,
+                'code'      => 'it',
+                'name'      => 'Italian	',
+                'logo_path' => 'locales/it.png',
+            ], [
+                'id'        => 8,
+                'code'      => 'ru',
+                'name'      => 'Russian',
+                'logo_path' => 'locales/ru.png',
+            ], [
+                'id'        => 9,
+                'code'      => 'uk',
+                'name'      => 'Ukrainian',
+                'logo_path' => 'locales/uk.png',
+            ],
+        ]);
     }
 }

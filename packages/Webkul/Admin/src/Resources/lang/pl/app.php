@@ -2508,6 +2508,7 @@ return [
             'delete-failed'     => 'Usunięcie roli nie powiodło się',
             'being-used'        => 'Rola jest już używana przez Administratora',
         ],
+
         'themes' => [
             'index' => [
                 'title'      => 'Motywy',
@@ -2556,6 +2557,7 @@ return [
                 'footer-link'                   => 'Linki w Stopce',
                 'footer-link-form-title'        => 'Link w Stopce',
                 'slider-description'            => 'Dostosowanie motywu związane z sliderem.',
+                'slider-required'               => 'Pole suwaka jest wymagane.',
                 'slider-add-btn'                => 'Dodaj Slajd',
                 'general'                       => 'Ogólne',
                 'add-filter-btn'                => 'Dodaj Filtr',
@@ -3278,6 +3280,7 @@ return [
         'events'                   => 'Wydarzenia',
         'sitemaps'                 => 'Mapy Strony',
         'newsletter-subscriptions' => 'Subskrypcje Newslettera',
+        'transactions'             => 'Transakcje',
     ],
 
     'errors' => [

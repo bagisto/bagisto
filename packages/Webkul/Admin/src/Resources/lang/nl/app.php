@@ -2557,6 +2557,7 @@ return [
                 'footer-link'                   => 'Voettekstlinks',
                 'footer-link-form-title'        => 'Voettekstlink',
                 'slider-description'            => 'Thema-aanpassing gerelateerd aan sliders.',
+                'slider-required'               => 'Slider-veld is verplicht.',
                 'slider-add-btn'                => 'Slider toevoegen',
                 'general'                       => 'Algemeen',
                 'add-filter-btn'                => 'Filter toevoegen',
@@ -3279,6 +3280,7 @@ return [
         'events'                   => 'Evenementen',
         'sitemaps'                 => 'Sitemaps',
         'newsletter-subscriptions' => 'Nieuwsbriefabonnementen',
+        'transactions'             => 'Transacties',
     ],
 
     'errors' => [

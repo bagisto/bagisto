@@ -32,7 +32,7 @@
                         @lang("admin::app.errors.{$errorCode}.title")
                     </h1>
 
-					<p class="text-[18px] text-[#7D7D7D] mt-[15px]">
+					<p class="text-[18px] text-[#6E6E6E] mt-[15px]">
                         @lang("admin::app.errors.{$errorCode}.description")
                     </p>
 

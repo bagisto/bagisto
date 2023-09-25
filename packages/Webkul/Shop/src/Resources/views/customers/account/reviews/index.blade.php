@@ -41,7 +41,7 @@
 
                                         <div class="flex gap-[10px] items-center">
                                             @for ($i = 1; $i <= 5; $i++)
-                                                <span class="icon-star-fill text-[24px] {{ $review->rating >= $i ? 'text-[#ffb600]' : 'text-[#7d7d7d]' }}"></span>
+                                                <span class="icon-star-fill text-[24px] {{ $review->rating >= $i ? 'text-[#ffb600]' : 'text-[#6E6E6E]' }}"></span>
                                             @endfor
                                         </div>
                                     </div>
@@ -50,7 +50,7 @@
                                         {{ $review->created_at }}
                                     </p>
 
-                                    <p class="mt-[20px] text-[16px] text-[#7D7D7D] max-sm:text-[12px]">
+                                    <p class="mt-[20px] text-[16px] text-[#6E6E6E] max-sm:text-[12px]">
                                         {{ $review->comment }}
                                     </p>
                                 </div>

@@ -50,7 +50,7 @@
                                     </p>
                                 </div>
 
-                                <p class="mt-[25px] text-[14px] text-[#7D7D7D]">
+                                <p class="mt-[25px] text-[14px] text-[#6E6E6E]">
                                     <template v-if="typeof address.address1 === 'string'">
                                         @{{ address.address1 }},
                                     </template>
@@ -88,7 +88,7 @@
                     >
                     </v-error-message>
 
-                    <div class="flex gap-x-[15px] mt-[20px] text-[14px] text-[#7D7D7D] select-none">
+                    <div class="flex gap-x-[15px] mt-[20px] text-[14px] text-[#6E6E6E] select-none">
                         <input
                             type="checkbox"
                             id="isUsedForShipping"

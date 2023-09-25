@@ -17,6 +17,7 @@
             <a 
                 href="#" 
                 @click="openSharePopup"
+                aria-label="Linkedin"
             >
                 @include('social_share::icons.linkedin')
             </a>

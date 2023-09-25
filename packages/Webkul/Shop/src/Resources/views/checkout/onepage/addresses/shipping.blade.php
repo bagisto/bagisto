@@ -54,7 +54,7 @@
                                         </p>
                                     </div>
 
-                                    <p class="mt-[25px] text-[#7D7D7D] text-[14px]">
+                                    <p class="mt-[25px] text-[#6E6E6E] text-[14px]">
                                         <template v-if="typeof address.address1 === 'string'">
                                             @{{ address.address1 }},
                                         </template>

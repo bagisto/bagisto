@@ -90,6 +90,16 @@ return [
         'name'  => 'admin::app.acl.create',
         'route' => 'admin.sales.refunds.create',
         'sort'  => 2,
+    ], [
+        'key'   => 'sales.transactions',
+        'name'  => 'admin::app.acl.transactions',
+        'route' => 'admin.sales.transactions.index',
+        'sort'  => 5,
+    ],[
+        'key'   => 'sales.transactions.view',
+        'name'  => 'admin::app.acl.view',
+        'route' => 'admin.sales.transactions.view',
+        'sort'  => 1,
     ],
 
     /*

@@ -56,7 +56,7 @@
     
                                     <div class="p-[30px] bg-white mt-[20px]">
                                         <div class="flex justify-between items-center gap-[15px] flex-wrap">
-                                            <p class="text-[14px] font-medium text-[#7D7D7D]">
+                                            <p class="text-[14px] font-medium text-[#6E6E6E]">
                                                 @lang('shop::app.checkout.onepage.coupon.sub-total')
                                             </p>
 

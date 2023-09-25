@@ -2557,6 +2557,7 @@ return [
                 'footer-link'                   => 'Links no Rodapé',
                 'footer-link-form-title'        => 'Link no Rodapé',
                 'slider-description'            => 'Personalização relacionada a slides.',
+                'slider-required'               => 'Campo do slider é obrigatório.',
                 'slider-add-btn'                => 'Adicionar Slide',
                 'general'                       => 'Geral',
                 'add-filter-btn'                => 'Adicionar Filtro',
@@ -3279,6 +3280,7 @@ return [
         'events'                   => 'Événements',
         'sitemaps'                 => 'Sitemaps',
         'newsletter-subscriptions' => 'Abonnements à la newsletter',
+        'transactions'             => 'Transações',
     ],
 
     'errors' => [
