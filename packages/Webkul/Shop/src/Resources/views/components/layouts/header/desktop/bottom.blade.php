@@ -244,7 +244,7 @@
                                     v-if="secondLevelCategory.children.length"
                                 >
                                     <li
-                                        class="text-[14px] font-medium text-[#7D7D7D]"
+                                        class="text-[14px] font-medium text-[#6E6E6E]"
                                         v-for="thirdLevelCategory in secondLevelCategory.children"
                                     >
                                         <a :href="thirdLevelCategory.url">

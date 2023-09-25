@@ -1,7 +1,8 @@
 @props(['options'])
 
 <v-carousel>
-    <div class="shimmer w-full aspect-[2.743/1]"></div>
+    <div class="shimmer w-full aspect-[2.743/1]">
+    </div>
 </v-carousel>
 
 @pushOnce('scripts')

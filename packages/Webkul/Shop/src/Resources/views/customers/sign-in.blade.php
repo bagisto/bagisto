@@ -40,7 +40,7 @@
                 @lang('shop::app.customers.login-form.page-title')
             </h1>
 
-            <p class="mt-[15px] text-[#7D7D7D] text-[20px] max-sm:text-[16px]">
+            <p class="mt-[15px] text-[#6E6E6E] text-[20px] max-sm:text-[16px]">
                 @lang('shop::app.customers.login-form.form-login-text')
             </p>
 
@@ -108,7 +108,7 @@
                             ></label>
 
                             <label
-                                class="text-[16] text-[#7d7d7d] max-sm:text-[12px] pl-0 select-none cursor-pointer"
+                                class="text-[16] text-[#6E6E6E] max-sm:text-[12px] pl-0 select-none cursor-pointer"
                                 for="show-password"
                             >
                                 @lang('shop::app.customers.login-form.show-password')
@@ -150,7 +150,7 @@
                 </x-shop::form>
             </div>
 
-            <p class="mt-[20px] text-[#7D7D7D] font-medium">
+            <p class="mt-[20px] text-[#6E6E6E] font-medium">
                 @lang('shop::app.customers.login-form.new-customer')
 
                 <a
@@ -162,7 +162,7 @@
             </p>
         </div>
 
-        <p class="mt-[30px] mb-[15px] text-center text-[#7d7d7d] text-xs">
+        <p class="mt-[30px] mb-[15px] text-center text-[#6E6E6E] text-xs">
             @lang('shop::app.customers.login-form.footer')
         </p>
     </div>

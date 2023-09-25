@@ -139,7 +139,7 @@
 
         </div>
 
-        <p class="mt-[30px] mb-[15px] text-center text-[#7d7d7d] text-xs">
+        <p class="mt-[30px] mb-[15px] text-center text-[#6E6E6E] text-xs">
             @lang('shop::app.customers.reset_password.footer')
         </p>
     </div>

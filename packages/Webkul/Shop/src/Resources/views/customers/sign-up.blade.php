@@ -40,7 +40,7 @@
                 @lang('shop::app.customers.signup-form.page-title')
             </h1>
 
-			<p class="mt-[15px] text-[#7D7D7D] text-[20px] max-sm:text-[16px]"> 
+			<p class="mt-[15px] text-[#6E6E6E] text-[20px] max-sm:text-[16px]"> 
                 @lang('shop::app.customers.signup-form.form-signup-text')
             </p>
 
@@ -192,7 +192,7 @@
                             ></label>
 
                             <label
-                                class="pl-0 text-[16] text-[#7d7d7d] max-sm:text-[12px] select-none cursor-pointer"
+                                class="pl-0 text-[16] text-[#6E6E6E] max-sm:text-[12px] select-none cursor-pointer"
                                 for="is-subscribed"
                             >
                                 @lang('shop::app.customers.signup-form.subscribe-to-newsletter')
@@ -217,7 +217,7 @@
                 </x-shop::form>
             </div>
 
-			<p class="mt-[20px] text-[#7D7D7D] font-medium">
+			<p class="mt-[20px] text-[#6E6E6E] font-medium">
                 @lang('shop::app.customers.signup-form.account-exists')
                 
                 <a class="text-navyBlue" 
@@ -228,7 +228,7 @@
             </p>
 		</div>
 
-        <p class="mt-[30px] mb-[15px] text-center text-[#7d7d7d] text-xs">
+        <p class="mt-[30px] mb-[15px] text-center text-[#6E6E6E] text-xs">
             @lang('shop::app.customers.signup-form.footer')
         </p>
 	</div>
