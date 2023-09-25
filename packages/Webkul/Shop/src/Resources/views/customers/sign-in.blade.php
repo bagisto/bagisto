@@ -1,3 +1,10 @@
+{{-- SEO Meta Content --}}
+@push('meta')
+    <meta name="description" content="@lang('shop::app.customers.login-form.page-title')"/>
+
+    <meta name="keywords" content="@lang('shop::app.customers.login-form.page-title')"/>
+@endPush
+
 <x-shop::layouts
     :has-header="false"
     :has-feature="false"
@@ -14,9 +21,11 @@
             <a
                 href="{{ route('shop.home.index') }}" 
                 class="m-[0_auto_20px_auto]"
+                aria-label="Bagisto "
             >
                 <img
                     src="{{ bagisto_asset('images/logo.svg') }}"
+                    alt="Bagisto "
                     width="131"
                     height="29"
                 >

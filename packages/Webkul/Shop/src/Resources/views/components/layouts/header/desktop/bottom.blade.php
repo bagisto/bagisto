@@ -20,6 +20,7 @@
         <a
             href="{{ route('shop.home.index') }}" 
             class="place-self-start -mt-[4px]"
+            aria-label="Bagisto "
         >
             <img
                 src="{{ bagisto_asset('images/logo.svg') }}"
