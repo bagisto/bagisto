@@ -422,11 +422,18 @@ return [
                 'tax'                    => 'Kwota podatku - :tax',
             ],
 
-            'create'   => [
-                'creation-error' => 'Nie można utworzyć faktury zamówienia.',
-                'create-success' => 'Faktura utworzona pomyślnie',
-                'invalid-qty'    => 'Znaleziono nieprawidłową ilość pozycji do faktury.',
-                'product-error'  => 'Nie można utworzyć faktury bez produktów.',
+            'create' => [
+                'invoice'         => 'Faktura',
+                'create-invoice'  => 'Utwórz fakturę',
+                'new-invoice'     => 'Nowa faktura',
+                'product-image'   => 'Zdjęcie produktu',
+                'amount-per-unit' => ':amount Na jednostkę x :qty Ilość',
+                'sku'             => 'SKU - :sku',
+                'qty-to-invoiced' => 'Ilość do faktury',
+                'creation-error'  => 'Nie wolno tworzyć faktury zamówienia.',
+                'create-success'  => 'Faktura utworzona pomyślnie',
+                'invalid-qty'     => 'Znaleziono nieprawidłową ilość pozycji do faktury.',
+                'product-error'   => 'Nie można tworzyć faktury bez produktów.',
             ],
 
             'invoice-pdf' => [

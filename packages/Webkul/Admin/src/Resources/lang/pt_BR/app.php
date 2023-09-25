@@ -423,10 +423,17 @@ return [
             ],
 
             'create' => [
-                'creation-error' => 'A criação da fatura do pedido não é permitida.',
-                'create-success' => 'Fatura criada com sucesso',
-                'invalid-qty'    => 'Encontramos uma quantidade inválida para faturar itens.',
-                'product-error'  => 'A fatura não pode ser criada sem produtos.',
+                'invoice'         => 'Fatura',
+                'create-invoice'  => 'Criar Fatura',
+                'new-invoice'     => 'Nova Fatura',
+                'product-image'   => 'Imagem do Produto',
+                'amount-per-unit' => ':amount Por Unidade x :qty Quantidade',
+                'sku'             => 'SKU - :sku',
+                'qty-to-invoiced' => 'Quantidade a faturar',
+                'creation-error'  => 'A criação da fatura do pedido não é permitida.',
+                'create-success'  => 'Fatura criada com sucesso',
+                'invalid-qty'     => 'Encontramos uma quantidade inválida para itens a faturar.',
+                'product-error'   => 'Não é possível criar uma fatura sem produtos.',
             ],
 
             'invoice-pdf' => [

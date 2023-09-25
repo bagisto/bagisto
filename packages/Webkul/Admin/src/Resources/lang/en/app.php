@@ -423,6 +423,13 @@ return [
             ],
 
             'create'   => [
+                'invoice'         => 'Invoice',
+                'create-invoice'  => 'Create Invoice',
+                'new-invoice'     => 'New Invoice',
+                'product-image'   => 'Product Image',
+                'amount-per-unit' => ':amount Per Unit x :qty Quantity',
+                'sku'             => 'SKU - :sku',
+                'qty-to-invoiced' => 'Qty. to invoiced',
                 'creation-error' => 'Order invoice creation is not allowed.',
                 'create-success' => 'Invoice created successfully',
                 'invalid-qty'    => 'We found an invalid quantity to invoice items.',

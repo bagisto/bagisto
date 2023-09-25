@@ -423,10 +423,17 @@ return [
             ],
 
             'create' => [
-                'creation-error' => "La création de la facture de la commande n'est pas autorisée.",
-                'create-success' => 'Facture créée avec succès',
-                'invalid-qty'    => 'Nous avons trouvé une quantité invalide d’articles à facturer.',
-                'product-error'  => 'La facture ne peut pas être créée sans produits.',
+                'invoice'         => 'Facture',
+                'create-invoice'  => 'Créer une facture',
+                'new-invoice'     => 'Nouvelle facture',
+                'product-image'   => 'Image du produit',
+                'amount-per-unit' => ':amount Par unité x :qty Quantité',
+                'sku'             => 'SKU - :sku',
+                'qty-to-invoiced' => 'Quantité à facturer',
+                'creation-error'  => "La création de la facture de la commande n'est pas autorisée.",
+                'create-success'  => 'Facture créée avec succès',
+                'invalid-qty'     => 'Nous avons trouvé une quantité invalide pour les articles à facturer.',
+                'product-error'   => 'Impossible de créer une facture sans produits.',
             ],
 
             'invoice-pdf' => [

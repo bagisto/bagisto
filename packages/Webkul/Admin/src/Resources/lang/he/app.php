@@ -423,10 +423,17 @@ return [
             ],
 
             'create' => [
-                'creation-error' => 'יצירת חשבונית הזמנה אסורה.',
-                'create-success' => 'חשבונית נוצרה בהצלחה',
-                'invalid-qty'    => 'מצאנו כמות לא תקינה לחשבונית מוצרים.',
-                'product-error'  => 'לא ניתן ליצור חשבונית ללא מוצרים.',
+                'invoice'         => 'חשבונית',
+                'create-invoice'  => 'יצירת חשבונית',
+                'new-invoice'     => 'חשבונית חדשה',
+                'product-image'   => 'תמונת המוצר',
+                'amount-per-unit' => ':amount ליחידה x :qty כמות',
+                'sku'             => 'SKU - :sku',
+                'qty-to-invoiced' => 'כמות לחשבונית',
+                'creation-error'  => 'אי אפשר ליצור חשבונית הזמנה.',
+                'create-success'  => 'חשבונית נוצרה בהצלחה',
+                'invalid-qty'     => 'נמצאה כמות לא תקינה לפריטים לחשבונית.',
+                'product-error'   => 'אי אפשר ליצור חשבונית בלעדי מוצרים.',
             ],
 
             'invoice-pdf' => [

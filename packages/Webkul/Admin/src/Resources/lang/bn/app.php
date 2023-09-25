@@ -423,10 +423,17 @@ return [
             ],
 
             'create' => [
-                'creation-error' => 'অর্ডার চালান তৈরি করার অনুমতি নেই।',
-                'create-success' => 'চালান সফলভাবে তৈরি হয়েছে',
-                'invalid-qty'    => 'আমরা অবৈধ পরিমাণ চেনে পেয়েছি।',
-                'product-error'  => 'প্রোডাক্ট ছাড়া চালান তৈরি করা যাবে না।',
+                'invoice'         => 'চালান',
+                'create-invoice'  => 'চালান তৈরি করুন',
+                'new-invoice'     => 'নতুন চালান',
+                'product-image'   => 'পণ্যের চিত্র',
+                'amount-per-unit' => ':amount প্রতি একক x :qty পরিমাণ',
+                'sku'             => 'SKU - :sku',
+                'qty-to-invoiced' => 'চালান করার পরিমাণ',
+                'creation-error'  => 'অর্ডার চালান তৈরি করা যাবে না।',
+                'create-success'  => 'চালান সফলভাবে তৈরি হয়েছে',
+                'invalid-qty'     => 'আমরা অবৈধ পরিমাণ চালান আইটেম পেয়েছি।',
+                'product-error'   => 'পণ্য ছাড়া চালান তৈরি করা যাবে না।',
             ],
 
             'invoice-pdf' => [

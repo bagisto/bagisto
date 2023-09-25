@@ -422,11 +422,18 @@ return [
                 'tax'                    => 'Vergi Tutarı - :tax',
             ],
 
-            'create'   => [
-                'creation-error' => 'Sipariş faturası oluşturulamaz.',
-                'create-success' => 'Fatura başarıyla oluşturuldu',
-                'invalid-qty'    => 'Faturalandırılacak ürünlerde geçersiz miktar bulduk.',
-                'product-error'  => 'Ürün olmadan fatura oluşturulamaz.',
+            'create' => [
+                'invoice'         => 'Fatura',
+                'create-invoice'  => 'Fatura Oluştur',
+                'new-invoice'     => 'Yeni Fatura',
+                'product-image'   => 'Ürün Resmi',
+                'amount-per-unit' => ':amount Birim Başına x :qty Miktar',
+                'sku'             => 'SKU - :sku',
+                'qty-to-invoiced' => 'Faturalanacak Miktar',
+                'creation-error'  => 'Sipariş faturası oluşturulamaz.',
+                'create-success'  => 'Fatura başarıyla oluşturuldu',
+                'invalid-qty'     => 'Faturalanacak öğeler için geçersiz miktar bulduk.',
+                'product-error'   => 'Ürün olmadan fatura oluşturulamaz.',
             ],
 
             'invoice-pdf' => [

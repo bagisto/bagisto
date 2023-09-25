@@ -422,11 +422,18 @@ return [
                 'tax'                    => '税额 - :tax',
             ],
 
-            'create'   => [
-                'creation-error' => '不允许创建订单发票。',
-                'create-success' => '发票创建成功',
-                'invalid-qty'    => '我们发现了无效的商品数量要开发票。',
-                'product-error'  => '没有产品的情况下无法创建发票。',
+            'create' => [
+                'invoice'         => '发票',
+                'create-invoice'  => '创建发票',
+                'new-invoice'     => '新发票',
+                'product-image'   => '产品图片',
+                'amount-per-unit' => ':amount 每单位 x :qty 数量',
+                'sku'             => 'SKU - :sku',
+                'qty-to-invoiced' => '要开具发票的数量',
+                'creation-error'  => '不允许创建订单发票。',
+                'create-success'  => '发票创建成功',
+                'invalid-qty'     => '我们发现了无效的数量以开具发票。',
+                'product-error'   => '没有产品无法创建发票。',
             ],
 
             'invoice-pdf' => [

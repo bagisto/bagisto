@@ -422,11 +422,18 @@ return [
                 'tax'                    => 'مبلغ الضريبة - :tax',
             ],
 
-            'create'   => [
-                'creation-error' => 'إنشاء فاتورة الطلب غير مسموح به.',
-                'create-success' => 'تم إنشاء الفاتورة بنجاح',
-                'invalid-qty'    => 'تم العثور على كمية غير صالحة لفواتير العناصر.',
-                'product-error'  => 'لا يمكن إنشاء فاتورة بدون منتجات.',
+            'create' => [
+                'invoice'         => 'فاتورة',
+                'create-invoice'  => 'إنشاء فاتورة',
+                'new-invoice'     => 'فاتورة جديدة',
+                'product-image'   => 'صورة المنتج',
+                'amount-per-unit' => ':amount للوحدة x :qty الكمية',
+                'sku'             => 'SKU - :sku',
+                'qty-to-invoiced' => 'الكمية المراد فوترتها',
+                'creation-error'  => 'غير مسموح بإنشاء فاتورة الطلب.',
+                'create-success'  => 'تم إنشاء الفاتورة بنجاح',
+                'invalid-qty'     => 'تم العثور على كمية غير صالحة لفوترة العناصر.',
+                'product-error'   => 'لا يمكن إنشاء فاتورة بدون منتجات.',
             ],
 
             'invoice-pdf' => [

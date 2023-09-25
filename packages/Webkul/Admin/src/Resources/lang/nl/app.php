@@ -422,11 +422,18 @@ return [
                 'tax'                    => 'Belastingbedrag - :tax',
             ],
 
-            'create'   => [
-                'creation-error' => 'Het aanmaken van een factuur voor deze bestelling is niet toegestaan.',
-                'create-success' => 'Factuur succesvol aangemaakt',
-                'invalid-qty'    => 'We hebben een ongeldige hoeveelheid gevonden om items te factureren.',
-                'product-error'  => 'Een factuur kan niet worden aangemaakt zonder producten.',
+            'create' => [
+                'invoice'         => 'Factuur',
+                'create-invoice'  => 'Factuur aanmaken',
+                'new-invoice'     => 'Nieuwe Factuur',
+                'product-image'   => 'Productafbeelding',
+                'amount-per-unit' => ':amount Per Eenheid x :qty Hoeveelheid',
+                'sku'             => 'SKU - :sku',
+                'qty-to-invoiced' => 'Te factureren hoeveelheid',
+                'creation-error'  => 'Het aanmaken van een orderfactuur is niet toegestaan.',
+                'create-success'  => 'Factuur succesvol aangemaakt',
+                'invalid-qty'     => 'We hebben een ongeldige hoeveelheid voor te factureren items gevonden.',
+                'product-error'   => 'Een factuur kan niet worden aangemaakt zonder producten.',
             ],
 
             'invoice-pdf' => [

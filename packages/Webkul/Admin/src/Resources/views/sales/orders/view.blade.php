@@ -99,14 +99,8 @@
                 $order->canInvoice()
                 && $order->payment->method !== 'paypal_standard'
             )
-                <div
-                    class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
-                    @click="$refs.invoice.open()"
-                >
-                    <span class="icon-sales text-[24px]"></span> 
-    
-                    @lang('admin::app.sales.orders.view.invoice')     
-                </div>
+              
+                @include('admin::sales.invoices.create')
             @endif
 
             @if ($order->canShip())
@@ -722,7 +716,7 @@
         </div>
 
         {{-- Invoice Create drawer. --}}
-        <x-admin::form  
+        {{-- <x-admin::form  
             method="POST"
             :action="route('admin.sales.invoices.store', $order->id)"
         >
@@ -823,6 +817,6 @@
                     </div>
                 </x-slot:content>
             </x-admin::drawer>
-        </x-admin::form>
+        </x-admin::form> --}}
     </div>
 </x-admin::layouts>

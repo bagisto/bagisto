@@ -422,11 +422,18 @@ return [
                 'tax'                    => 'Importo Tasse - :tax',
             ],
 
-            'create'   => [
-                'creation-error' => 'Creazione Fattura dell\'Ordine non consentita.',
-                'create-success' => 'Fattura creata con successo',
-                'invalid-qty'    => 'Abbiamo riscontrato una quantità non valida per gli articoli da fatturare.',
-                'product-error'  => 'La Fattura non può essere creata senza prodotti.',
+            'create' => [
+                'invoice'         => 'Fattura',
+                'create-invoice'  => 'Crea Fattura',
+                'new-invoice'     => 'Nuova Fattura',
+                'product-image'   => 'Immagine Prodotto',
+                'amount-per-unit' => ':amount Per Unità x :qty Quantità',
+                'sku'             => 'SKU - :sku',
+                'qty-to-invoiced' => 'Quantità da fatturare',
+                'creation-error'  => "La creazione della fattura dell'ordine non è consentita.",
+                'create-success'  => 'Fattura creata con successo',
+                'invalid-qty'     => 'Abbiamo trovato una quantità non valida per gli articoli da fatturare.',
+                'product-error'   => 'Non è possibile creare una fattura senza prodotti.',
             ],
 
             'invoice-pdf' => [
