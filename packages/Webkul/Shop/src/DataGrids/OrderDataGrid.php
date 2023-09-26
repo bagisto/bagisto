@@ -68,35 +68,41 @@ class OrderDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'status',
             'label'      => trans('shop::app.customers.account.orders.status.title'),
-            'type'       => 'checkbox',
+            'type'       => 'dropdown',
             'options'    => [
-                [
-                    'name'  => 'processing',
-                    'value' => trans('shop::app.customers.account.orders.status.options.processing'),
-                ],
-                [
-                    'name'  => 'completed',
-                    'value' => trans('shop::app.customers.account.orders.status.options.completed'),
-                ],
-                [
-                    'name'  => 'canceled',
-                    'value' => trans('shop::app.customers.account.orders.status.options.canceled'),
-                ],
-                [
-                    'name'  => 'closed',
-                    'value' => trans('shop::app.customers.account.orders.status.options.closed'),
-                ],
-                [
-                    'name'  => 'pending',
-                    'value' => trans('shop::app.customers.account.orders.status.options.pending'),
-                ],
-                [
-                    'name'  => 'pending_payment',
-                    'value' => trans('shop::app.customers.account.orders.status.options.pending-payment'),
-                ],
-                [
-                    'name'  => 'fraud',
-                    'value' => trans('shop::app.customers.account.orders.status.options.fraud'),
+                'type' => 'basic',
+
+                'params' => [
+                    'options' => [
+                        [
+                            'label'  => trans('shop::app.customers.account.orders.status.options.processing'),
+                            'value'  => 'processing',
+                        ],
+                        [
+                            'label'  => trans('shop::app.customers.account.orders.status.options.completed'),
+                            'value'  => 'completed',
+                        ],
+                        [
+                            'label'  => trans('shop::app.customers.account.orders.status.options.canceled'),
+                            'value'  => 'canceled',
+                        ],
+                        [
+                            'label'  => trans('shop::app.customers.account.orders.status.options.closed'),
+                            'value'  => 'closed',
+                        ],
+                        [
+                            'label'  => trans('shop::app.customers.account.orders.status.options.pending'),
+                            'value'  => 'pending',
+                        ],
+                        [
+                            'label'  => trans('shop::app.customers.account.orders.status.options.pending-payment'),
+                            'value'  => 'pending_payment',
+                        ],
+                        [
+                            'label'  => trans('shop::app.customers.account.orders.status.options.fraud'),
+                            'value'  => 'fraud',
+                        ],
+                    ],
                 ],
             ],
             'searchable' => true,

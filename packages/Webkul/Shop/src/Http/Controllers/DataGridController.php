@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Admin\Http\Controllers;
+namespace Webkul\Shop\Http\Controllers;
 
 class DataGridController extends Controller
 {
