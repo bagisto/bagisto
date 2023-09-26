@@ -418,6 +418,7 @@ return [
         'was-this-helpful'       => 'Was This Review Helpful?',
         'load-more'              => 'Load More',
         'add-image'              => 'Add Image',
+        'failed-to-upload'       => 'The image failed to upload',
         'description'            => 'Description',
         'additional-information' => 'Additional Information',
         'submit-success'         => 'Submit Successfully',

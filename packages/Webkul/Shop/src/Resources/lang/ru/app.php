@@ -418,6 +418,7 @@ return [
         'was-this-helpful'       => 'Помог ли вам этот отзыв?',
         'load-more'              => 'Загрузить еще',
         'add-image'              => 'Добавить изображение',
+        'failed-to-upload'       => 'Не удалось загрузить изображение',
         'description'            => 'Описание',
         'additional-information' => 'Дополнительная информация',
         'submit-success'         => 'Успешно отправлено',

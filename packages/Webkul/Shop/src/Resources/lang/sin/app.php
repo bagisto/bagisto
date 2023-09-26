@@ -418,6 +418,7 @@ return [
         'was-this-helpful'       => 'මෙය උපකාර කරයිද?',
         'load-more'              => 'අලුත් බැලීම',
         'add-image'              => 'පින්තූරයක් එකතු කරන්න',
+        'failed-to-upload'       => 'රූපය උඩුගත කළ නොහැක',
         'description'            => 'විස්තර',
         'additional-information' => 'අතිරේක විස්තර',
         'submit-success'         => 'සාර්ථකව ඉදිරිපත් කරන ලදි',

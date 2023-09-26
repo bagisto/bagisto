@@ -34,6 +34,7 @@
                                     name="attachments"
                                     class="!p-0 !mb-0"
                                     rules="required"
+                                    ref="reviewImages"
                                     :label="trans('shop::app.products.view.reviews.attachments')"
                                     :is-multiple="true"
                                 >
@@ -346,7 +347,7 @@
                     }
                 },
 
-                store(params, { resetForm }) {
+                store(params, { resetForm, setErrors }) {
                     this.$axios.post('{{ route("shop.api.products.reviews.store", $product->id) }}', params, {
                             headers: {
                                 'Content-Type': 'multipart/form-data'
@@ -359,7 +360,13 @@
 
                             this.canReview = false;
                         })
-                        .catch(error => {});
+                        .catch(error => {
+                            if (error.response.status == 422) {
+                                setErrors({'attachments': ["@lang('shop::app.products.failed-to-upload')"]});
+                            }
+                            
+                            this.$refs.reviewImages.removeFile();
+                        });
                 },
 
                 selectReviewImage() {
