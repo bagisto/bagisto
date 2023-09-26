@@ -256,7 +256,7 @@ return [
                 'delete-all'         => 'מחק הכל',
                 'empty'              => 'לא הוספת מוצרים לרשימת המשאלות שלך.',
                 'move-to-cart'       => 'העבר אל העגלה',
-                'moved-success'      => 'הפריט הועבר בהצלחה לעגלה',    
+                'moved-success'      => 'הפריט הועבר בהצלחה לעגלה',
                 'moved'              => 'הפריט הועבר בהצלחה לעגלת הקניות',
                 'page-title'         => 'רשימת משאלות',
                 'profile'            => 'פרופיל',
@@ -277,15 +277,15 @@ return [
             'default-content' => 'תוכן ברירת מחדל',
             'default-header'  => 'כותרת ברירת מחדל',
         ],
-        
+
         'drawer' => [
-           'default-toggle'  => 'מתג ברירת מחדל',
+            'default-toggle'  => 'מתג ברירת מחדל',
         ],
-        
+
         'media' => [
             'add-attachments' => 'הוסף קבצים מצורפים',
         ],
-        
+
         'layouts' => [
             'header' => [
                 'title'         => 'חשבון',
@@ -344,6 +344,13 @@ return [
             'filters' => [
                 'title' => 'החל מסננים',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'הקלד לפחות 2 תווים...',
+                        'no-results'        => 'לא נמצאו תוצאות...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'title'     => 'סננים מותאמים אישית',
                     'clear-all' => 'נקה הכל',
@@ -370,7 +377,7 @@ return [
         'modal' => [
             'default-content' => 'תוכן ברירת מחדל',
             'default-header'  => 'כותרת ברירת מחדל',
-            
+
             'confirm' => [
                 'title'        => 'האם אתה בטוח?',
                 'message'      => 'האם אתה בטוח שברצונך לבצע פעולה זו?',

@@ -3162,6 +3162,13 @@ return [
                 'title'  => 'החל סינון',
                 'select' => 'בחר',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'הקלד לפחות 2 תווים...',
+                        'no-results'        => 'לא נמצאו תוצאות...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'title'     => 'סננים מותאמים אישית',
                     'clear-all' => 'נקה הכל',

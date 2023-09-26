@@ -256,7 +256,7 @@ return [
                 'delete-all'         => 'すべて削除',
                 'empty'              => 'ウィッシュリストページには製品が追加されていません。',
                 'move-to-cart'       => 'カートに移動',
-                'moved-success'      => 'アイテムがカートに正常に移動しました',    
+                'moved-success'      => 'アイテムがカートに正常に移動しました',
                 'moved'              => 'アイテムがカートに正常に移動しました',
                 'page-title'         => 'ウィッシュリスト',
                 'profile'            => 'プロフィール',
@@ -277,15 +277,15 @@ return [
             'default-content' => 'デフォルトコンテンツ',
             'default-header'  => 'デフォルトヘッダー',
         ],
-        
+
         'drawer' => [
-           'default-toggle'  => 'デフォルトトグル',
+            'default-toggle'  => 'デフォルトトグル',
         ],
-        
+
         'media' => [
             'add-attachments' => '添付ファイルを追加',
         ],
-        
+
         'layouts' => [
             'header' => [
                 'title'         => 'アカウント',
@@ -344,6 +344,13 @@ return [
             'filters' => [
                 'title' => 'フィルターの適用',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => '少なくとも2文字を入力してください...',
+                        'no-results'        => '結果が見つかりませんでした...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'title'     => 'カスタムフィルター',
                     'clear-all' => 'すべてクリア',
@@ -370,7 +377,7 @@ return [
         'modal' => [
             'default-content' => 'デフォルトコンテンツ',
             'default-header'  => 'デフォルトヘッダー',
-            
+
             'confirm' => [
                 'title'        => '本当によろしいですか？',
                 'message'      => 'このアクションを実行してもよろしいですか？',

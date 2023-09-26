@@ -3162,6 +3162,13 @@ return [
                 'title'  => 'Применить фильтры',
                 'select' => 'Выбрать',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'Введите хотя бы 2 символа...',
+                        'no-results'        => 'Результаты не найдены...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'title'     => 'Пользовательские фильтры',
                     'clear-all' => 'Очистить все',

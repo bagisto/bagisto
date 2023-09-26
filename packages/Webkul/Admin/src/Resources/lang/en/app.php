@@ -426,10 +426,10 @@ return [
                 'amount-per-unit' => ':amount Per Unit x :qty Quantity',
                 'sku'             => 'SKU - :sku',
                 'qty-to-invoiced' => 'Qty. to invoiced',
-                'creation-error' => 'Order invoice creation is not allowed.',
-                'create-success' => 'Invoice created successfully',
-                'invalid-qty'    => 'We found an invalid quantity to invoice items.',
-                'product-error'  => 'Invoice can not be created without products.',
+                'creation-error'  => 'Order invoice creation is not allowed.',
+                'create-success'  => 'Invoice created successfully',
+                'invalid-qty'     => 'We found an invalid quantity to invoice items.',
+                'product-error'   => 'Invoice can not be created without products.',
             ],
 
             'invoice-pdf' => [
@@ -3161,6 +3161,13 @@ return [
             'filters' => [
                 'title'  => 'Apply Filters',
                 'select' => 'Select',
+
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'Type atleast 2 characters...',
+                        'no-results'        => 'No result found...',
+                    ],
+                ],
 
                 'custom-filters' => [
                     'title'     => 'Custom Filters',

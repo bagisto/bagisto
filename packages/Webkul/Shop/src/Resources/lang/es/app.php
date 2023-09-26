@@ -256,7 +256,7 @@ return [
                 'delete-all'         => 'Eliminar todo',
                 'empty'              => 'No se agregaron productos a la página de la lista de deseos.',
                 'move-to-cart'       => 'Mover al carrito',
-                'moved-success'      => 'Artículo movido con éxito al carrito',    
+                'moved-success'      => 'Artículo movido con éxito al carrito',
                 'moved'              => 'Elemento movido con éxito al carrito',
                 'page-title'         => 'Lista de deseos',
                 'profile'            => 'Perfil',
@@ -277,11 +277,11 @@ return [
             'default-content' => 'Contenido predeterminado',
             'default-header'  => 'Encabezado predeterminado',
         ],
-        
+
         'drawer' => [
-           'default-toggle'  => 'Alternar predeterminado',
+            'default-toggle'  => 'Alternar predeterminado',
         ],
-        
+
         'media' => [
             'add-attachments' => 'Agregar adjuntos',
         ],
@@ -344,6 +344,13 @@ return [
             'filters' => [
                 'title' => 'Filter anwenden',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'Escribe al menos 2 caracteres...',
+                        'no-results'        => 'No se encontraron resultados...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'title'     => 'Benutzerdefinierte Filter',
                     'clear-all' => 'Alle löschen',
@@ -370,7 +377,7 @@ return [
         'modal' => [
             'default-content' => 'Contenido predeterminado',
             'default-header'  => 'Encabezado predeterminado',
-            
+
             'confirm' => [
                 'title'        => '¿Estás seguro?',
                 'message'      => '¿Estás seguro de que quieres realizar esta acción?',

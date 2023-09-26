@@ -256,7 +256,7 @@ return [
                 'delete-all'         => 'حذف الكل',
                 'empty'              => 'لم يتم إضافة منتجات إلى صفحة قائمة الأماني',
                 'move-to-cart'       => 'نقل إلى السلة',
-                'moved-success'      =>  'تم نقل العنصر بنجاح إلى العربة',    
+                'moved-success'      => 'تم نقل العنصر بنجاح إلى العربة',
                 'moved'              => 'تم نقل العنصر بنجاح إلى السلة',
                 'page-title'         => 'قائمة الأماني',
                 'profile'            => 'الملف الشخصي',
@@ -277,11 +277,11 @@ return [
             'default-content' => 'المحتوى الافتراضي',
             'default-header'  => 'العنوان الافتراضي',
         ],
-        
+
         'drawer' => [
-           'default-toggle'  => 'التبديل الافتراضي',
+            'default-toggle'  => 'التبديل الافتراضي',
         ],
-        
+
         'media' => [
             'add-attachments' => 'إضافة المرفقات',
         ],
@@ -344,6 +344,13 @@ return [
             'filters' => [
                 'title' => 'تطبيق الفلاتر',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'اكتب ما لا يقل عن حرفين...',
+                        'no-results'        => 'لم يتم العثور على نتائج...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'title'     => 'تصفيات مخصصة',
                     'clear-all' => 'امسح الكل',
@@ -370,7 +377,7 @@ return [
         'modal' => [
             'default-content' => 'المحتوى الافتراضي',
             'default-header'  => 'العنوان الافتراضي',
-            
+
             'confirm' => [
                 'title'        => 'هل أنت متأكد؟',
                 'message'      => 'هل أنت متأكد أنك تريد القيام بهذا الإجراء؟',

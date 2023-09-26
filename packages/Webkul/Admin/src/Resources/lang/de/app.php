@@ -3162,6 +3162,13 @@ return [
                 'title'  => 'Filter anwenden',
                 'select' => 'Auswählen',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'Mindestens 2 Zeichen eingeben...',
+                        'no-results'        => 'Keine Ergebnisse gefunden...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'title'     => 'Benutzerdefinierte Filter',
                     'clear-all' => 'Alles löschen',

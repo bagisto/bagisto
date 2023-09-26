@@ -3162,6 +3162,13 @@ return [
                 'title'  => 'फ़िल्टर लागू करें',
                 'select' => 'चुनें',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'कम से कम 2 अक्षर लिखें...',
+                        'no-results'        => 'कोई परिणाम नहीं मिला...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'title'     => 'कस्टम फ़िल्टर',
                     'clear-all' => 'सभी को हटाएं',

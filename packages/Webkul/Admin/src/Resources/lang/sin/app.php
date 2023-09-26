@@ -3162,6 +3162,13 @@ return [
                 'title'  => 'වෙනස් කිරීමට',
                 'select' => 'තේරීම',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'අයක්කු අකුරු 2 කට ටයිප් කරන්න...',
+                        'no-results'        => 'කිසිද ප්‍රතිඵලයක් හමු නොවීය...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'title'     => 'සැකසීම් පෙරහන',
                     'clear-all' => 'සියල්ල මකන්න',

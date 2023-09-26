@@ -257,7 +257,7 @@ return [
                 'delete-all'         => 'حذف همه',
                 'empty'              => 'هیچ محصولی به لیست علاقه‌مندی اضافه نشده است.',
                 'move-to-cart'       => 'انتقال به سبد خرید',
-                'moved-success'      => 'مورد با موفقیت به سبد خرید منتقل شد',    
+                'moved-success'      => 'مورد با موفقیت به سبد خرید منتقل شد',
                 'moved'              => 'مورد با موفقیت به سبد خرید منتقل شد',
                 'page-title'         => 'لیست علاقه‌مندی',
                 'profile'            => 'پروفایل',
@@ -277,15 +277,15 @@ return [
             'default-content' => 'محتوای پیش‌فرض',
             'default-header'  => 'سربرگ پیش‌فرض',
         ],
-        
+
         'drawer' => [
-           'default-toggle'  => 'کلیک کردن پیش‌فرض',
+            'default-toggle'  => 'کلیک کردن پیش‌فرض',
         ],
-        
+
         'media' => [
             'add-attachments' => 'افزودن پیوست',
         ],
-        
+
         'layouts' => [
             'header' => [
                 'title'         => 'حساب کاربری',
@@ -344,6 +344,13 @@ return [
             'filters' => [
                 'title' => 'اعمال فیلترها',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'حداقل 2 حرف را تایپ کنید...',
+                        'no-results'        => 'هیچ نتیجه‌ای یافت نشد...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'title'     => 'فیلترهای سفارشی',
                     'clear-all' => 'پاک کردن همه',
@@ -370,7 +377,7 @@ return [
         'modal' => [
             'default-content' => 'محتوای پیش‌فرض',
             'default-header'  => 'سربرگ پیش‌فرض',
-            
+
             'confirm' => [
                 'title'        => 'آیا مطمئن هستید؟',
                 'message'      => 'آیا مطمئن هستید که می خواهید این کار را انجام دهید؟',

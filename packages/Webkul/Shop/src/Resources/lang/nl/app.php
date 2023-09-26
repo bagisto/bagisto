@@ -256,7 +256,7 @@ return [
                 'delete-all'         => 'Alles Verwijderen',
                 'empty'              => 'Er zijn geen producten toegevoegd aan de wenslijstpagina.',
                 'move-to-cart'       => 'Verplaatsen naar winkelwagen',
-                'moved-success'      => 'Item succesvol verplaatst naar de winkelwagen',    
+                'moved-success'      => 'Item succesvol verplaatst naar de winkelwagen',
                 'moved'              => 'Item succesvol verplaatst naar winkelwagen',
                 'page-title'         => 'Wenslijst',
                 'profile'            => 'Profiel',
@@ -277,15 +277,15 @@ return [
             'default-content' => 'Standaardinhoud',
             'default-header'  => 'Standaardkop',
         ],
-        
+
         'drawer' => [
-           'default-toggle'  => 'Standaardwissel',
+            'default-toggle'  => 'Standaardwissel',
         ],
-        
+
         'media' => [
             'add-attachments' => 'Bijlagen toevoegen',
         ],
-        
+
         'layouts' => [
             'header' => [
                 'title'         => 'Account',
@@ -344,6 +344,13 @@ return [
             'filters' => [
                 'title' => 'Filters toepassen',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'Typ minimaal 2 tekens...',
+                        'no-results'        => 'Geen resultaten gevonden...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'title'     => 'Aangepaste filters',
                     'clear-all' => 'Alles wissen',
@@ -370,7 +377,7 @@ return [
         'modal' => [
             'default-content' => 'Standaardinhoud',
             'default-header'  => 'Standaardkop',
-            
+
             'confirm' => [
                 'title'        => 'Bent u zeker?',
                 'message'      => 'Bent u zeker dat u deze actie wilt uitvoeren?',

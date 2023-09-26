@@ -3162,6 +3162,13 @@ return [
                 'title'  => 'Appliquer des filtres',
                 'select' => 'Selecionar.',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'Digite pelo menos 2 caracteres...',
+                        'no-results'        => 'Nenhum resultado encontrado...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'title'     => 'Filtres personnalisés',
                     'clear-all' => 'Effacer tout',

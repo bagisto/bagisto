@@ -3162,6 +3162,13 @@ return [
                 'title'  => 'Filters Toepassen',
                 'select' => 'Selecteren.',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'Typ minimaal 2 tekens...',
+                        'no-results'        => 'Geen resultaten gevonden...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'title'     => 'Aangepaste Filters',
                     'clear-all' => 'Alles Wissen',

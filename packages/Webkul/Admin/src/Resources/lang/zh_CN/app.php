@@ -3162,6 +3162,13 @@ return [
                 'title'  => '应用筛选',
                 'select' => '选择',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => '请输入至少2个字符...',
+                        'no-results'        => '未找到结果...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'title'     => '自定义筛选',
                     'clear-all' => '清除所有',

@@ -3162,6 +3162,13 @@ return [
                 'title'  => 'تطبيق الفلاتر',
                 'select' => 'اختر',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'اكتب ما لا يقل عن حرفين...',
+                        'no-results'        => 'لم يتم العثور على نتائج...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'title'     => 'فلاتر مخصصة',
                     'clear-all' => 'مسح الكل',

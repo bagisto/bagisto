@@ -256,7 +256,7 @@ return [
                 'delete-all'         => 'সব মুছুন',
                 'empty'              => 'কোনও পণ্যটি ইচ্ছেসূচি পেজে যোগ করা হয়নি।',
                 'move-to-cart'       => 'কার্টে সরিয়ে যান',
-                'moved-success'      => 'আইটেমটি সফলভাবে কার্টে সরানো হয়েছে',    
+                'moved-success'      => 'আইটেমটি সফলভাবে কার্টে সরানো হয়েছে',
                 'moved'              => 'আইটেমটি সফলভাবে কার্টে সরানো হয়েছে',
                 'page-title'         => 'ইচ্ছেসূচি',
                 'profile'            => 'প্রোফাইল',
@@ -277,15 +277,15 @@ return [
             'default-content' => 'ডিফল্ট কন্টেন্ট',
             'default-header'  => 'ডিফল্ট হেডার',
         ],
-        
+
         'drawer' => [
-           'default-toggle'  => 'ডিফল্ট টগল',
+            'default-toggle'  => 'ডিফল্ট টগল',
         ],
-        
+
         'media' => [
             'add-attachments' => 'সংযুক্তি যোগ করুন',
         ],
-        
+
         'layouts' => [
             'header' => [
                 'title'         => 'একাউন্ট',
@@ -344,6 +344,13 @@ return [
             'filters' => [
                 'title' => 'ফিল্টার প্রয়োগ করুন',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'কমপক্ষে 2 টি অক্ষর লিখুন...',
+                        'no-results'        => 'কোন ফলাফল পাওয়া যায়নি...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'title'     => 'কাস্টম ফিল্টার',
                     'clear-all' => 'সব মুছুন',
@@ -370,7 +377,7 @@ return [
         'modal' => [
             'default-content' => 'ডিফল্ট কন্টেন্ট',
             'default-header'  => 'ডিফল্ট হেডার',
-            
+
             'confirm' => [
                 'title'        => 'আপনি কি নিশ্চিত?',
                 'message'      => 'আপনি কি নিশ্চিত যে আপনি এই কাজটি সম্পাদন করতে চান?',

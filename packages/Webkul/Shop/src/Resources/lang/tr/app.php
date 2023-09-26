@@ -256,7 +256,7 @@ return [
                 'delete-all'         => 'Tümünü Sil',
                 'empty'              => 'İstek listesi sayfasına herhangi bir ürün eklenmedi.',
                 'move-to-cart'       => 'Sepete Taşı',
-                'moved-success'      => 'Öğe Başarıyla Sepete Taşındı',    
+                'moved-success'      => 'Öğe Başarıyla Sepete Taşındı',
                 'moved'              => 'Ürün başarıyla sepete taşındı',
                 'profile'            => 'Profil',
                 'product-removed'    => 'Ürün, Yönetici Tarafından Kaldırıldığı İçin Artık Mevcut Değil',
@@ -277,15 +277,15 @@ return [
             'default-content' => 'Varsayılan İçerik',
             'default-header'  => 'Varsayılan Başlık',
         ],
-        
+
         'drawer' => [
-           'default-toggle'  => 'Varsayılan Değiştirme',
+            'default-toggle'  => 'Varsayılan Değiştirme',
         ],
-        
+
         'media' => [
             'add-attachments' => 'Ekler Ekle',
         ],
-        
+
         'layouts' => [
             'header' => [
                 'title'         => 'Hesap',
@@ -344,6 +344,13 @@ return [
             'filters' => [
                 'title' => 'Filtreleri Uygula',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'En az 2 karakter girin...',
+                        'no-results'        => 'Sonuç bulunamadı...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'title'     => 'Özel Filtreler',
                     'clear-all' => 'Hepsini Temizle',
@@ -370,14 +377,14 @@ return [
         'modal' => [
             'default-content' => 'Varsayılan İçerik',
             'default-header'  => 'Varsayılan Başlık',
-            
+
             'confirm' => [
                 'title'        => 'Emin misiniz?',
                 'message'      => 'Bu işlemi yapmak istediğinizden emin misiniz?',
                 'agree-btn'    => 'Onayla',
                 'disagree-btn' => 'Onaylama',
             ],
-        ],        
+        ],
 
         'products'   => [
             'card' => [

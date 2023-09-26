@@ -3162,6 +3162,13 @@ return [
                 'title'  => 'Filtreleri Uygula',
                 'select' => 'Seçiniz',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'En az 2 karakter girin...',
+                        'no-results'        => 'Sonuç bulunamadı...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'title'     => 'Özel Filtreler',
                     'clear-all' => 'Hepsini Temizle',

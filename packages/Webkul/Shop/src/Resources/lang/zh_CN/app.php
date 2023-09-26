@@ -256,7 +256,7 @@ return [
                 'delete-all'         => '全部删除',
                 'empty'              => '愿望清单中没有任何商品。',
                 'move-to-cart'       => '移到购物车',
-                'moved-success'      => '商品成功移入購物車',    
+                'moved-success'      => '商品成功移入購物車',
                 'moved'              => '商品已成功移至购物车',
                 'page-title'         => '愿望清单',
                 'profile'            => '个人资料',
@@ -277,15 +277,15 @@ return [
             'default-content' => '默认内容',
             'default-header'  => '默认标题',
         ],
-        
+
         'drawer' => [
-           'default-toggle'  => '默认切换',
+            'default-toggle'  => '默认切换',
         ],
-        
+
         'media' => [
             'add-attachments' => '添加附件',
         ],
-        
+
         'layouts' => [
             'header' => [
                 'title'         => '帐户',
@@ -344,6 +344,13 @@ return [
             'filters' => [
                 'title' => '应用筛选',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => '请输入至少2个字符...',
+                        'no-results'        => '未找到结果...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'title'     => '自定义筛选',
                     'clear-all' => '清除所有',
@@ -370,14 +377,14 @@ return [
         'modal' => [
             'default-content' => '默认内容',
             'default-header'  => '默认标题',
-            
+
             'confirm' => [
                 'title'        => '您确定吗？',
                 'message'      => '您确定要执行此操作吗？',
                 'agree-btn'    => '同意',
                 'disagree-btn' => '不同意',
             ],
-        ],        
+        ],
 
         'products' => [
             'card' => [
