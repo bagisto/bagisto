@@ -1,7 +1,61 @@
 <div v-for="column in available.columns">
     <div v-if="column.filterable">
+        <!-- Boolean -->
+        <div v-if="column.type === 'boolean'">
+            <div class="flex items-center justify-between">
+                <p
+                    class="text-[14px] font-medium leading-[24px] text-gray-800"
+                    v-text="column.label"
+                >
+                </p>
+
+                <div
+                    class="flex items-center gap-x-[5px]"
+                    @click="removeAppliedColumnAllValues(column.index)"
+                >
+                    <p
+                        class="cursor-pointer text-[12px] font-medium leading-[24px] text-blue-600"
+                        v-if="hasAnyAppliedColumnValues(column.index)"
+                    >
+                        @lang('admin::app.components.datagrid.filters.custom-filters.clear-all')
+                    </p>
+                </div>
+            </div>
+
+            <div class="mb-[8px] mt-[5px]">
+                <select
+                    class="custom-select block w-full py-2 px-3 shadow bg-white border border-[#E9E9E9] rounded-lg text-[16px] transition-all hover:border-gray-400 focus:border-gray-400"
+                    @change="filterPage($event, column)"
+                >
+                    <option value="">@lang('admin::app.components.datagrid.filters.select')</option>
+
+                    <option
+                        :value="option.value"
+                        v-for="option in column.options"
+                        v-text="option.label"
+                    >
+                    </option>
+                </select>
+            </div>
+
+            <div class="mb-[16px] flex gap-2">
+                <p
+                    class="flex items-center rounded-[4px] bg-gray-600 px-[8px] py-[4px] font-semibold text-white"
+                    v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
+                >
+                    <span v-text="appliedColumnValue"></span>
+
+                    <span
+                        class="icon-cross cursor-pointer text-[18px] text-white ltr:ml-[5px] rtl:mr-[5px]"
+                        @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
+                    >
+                    </span>
+                </p>
+            </div>
+        </div>
+
         <!-- Dropdown -->
-        <div v-if="column.type === 'dropdown'">
+        <div v-else-if="column.type === 'dropdown'">
             <!-- Basic -->
             <div v-if="column.options.type === 'basic'">
                 <div class="flex items-center justify-between">
