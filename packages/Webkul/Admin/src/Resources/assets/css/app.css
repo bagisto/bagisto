@@ -459,6 +459,17 @@
         background-size: 1250px 100%;
     }
 
+    .dark .shimmer{
+        background: linear-gradient(
+            to right,
+            #1f2937 8%,
+            #1a2232 18%,
+            #1f2937 33%
+        );
+        background-size: 1250px 100%;
+
+    }
+
     @keyframes skeleton {
         0% {
             @apply bg-[-1250px_0];
