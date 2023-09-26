@@ -714,6 +714,10 @@
             data() {
                 return {
                     isDarkMode: {{ request()->cookie('is_dark_mode') ?? 0 }},
+
+                    logo: "{{ bagisto_asset('images/logo.svg') }}",
+
+                    dark_logo: "{{ bagisto_asset('images/dark-logo.svg') }}",
                 };
             },
 
@@ -728,6 +732,12 @@
                     document.cookie = 'is_dark_mode=' + this.isDarkMode + '; path=/; expires=' + expiryDate.toGMTString();
 
                     document.documentElement.classList.toggle('dark', this.isDarkMode === 1);
+
+                    if (this.isDarkMode) {
+                        document.getElementById('logo-image').src= this.dark_logo;
+                    } else {
+                        document.getElementById('logo-image').src=this.logo;
+                    }
                 },
 
                 isDarkModeCookie() {
