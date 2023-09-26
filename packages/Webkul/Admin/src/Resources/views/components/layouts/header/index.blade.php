@@ -80,7 +80,7 @@
 
             {{-- Admin Dropdown --}}
             <x-slot:content class="!p-[0px]">
-                <div class="grid gap-[10px] px-[20px] py-[10px] border border-b-gray-300">
+                <div class="grid gap-[10px] px-[20px] py-[10px] border border-b-gray-300 dark:border-gray-800">
                     {{-- Version --}}
                     <p class="text-gray-400">
                         @lang('admin::app.components.layouts.header.app-version', ['version' => 'v' . core()->version()])
@@ -523,14 +523,14 @@
             <!-- Notification Content -->
             <x-slot:content class="!p-0 min-w-[250px] max-w-[250px]">
                 <!-- Header -->
-                <div class="text-[16px] p-[12px] text-gray-600 dark:text-gray-300 font-semibold  border-b-[1px]">
+                <div class="text-[16px] p-[12px] text-gray-600 dark:text-gray-300 font-semibold border-b-[1px] dark:border-gray-800">
                     @lang('admin::app.notifications.title', ['read' => 0])
                 </div>
 
                 <!-- Content -->
                 <div class="grid">
                     <a
-                        class="flex gap-[5px] items-start p-[12px] hover:bg-gray-50 dark:hover:bg-gray-950   border-b-[1px] last:border-b-0"
+                        class="flex gap-[5px] items-start p-[12px] hover:bg-gray-50 dark:hover:bg-gray-950 border-b-[1px] dark:border-gray-800 last:border-b-0"
                         v-for="notification in notifications"
                         :href="'{{ route('admin.notification.viewed_notification', ':orderId') }}'.replace(':orderId', notification.order_id)"
                     >
