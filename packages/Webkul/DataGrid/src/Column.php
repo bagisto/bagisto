@@ -54,7 +54,7 @@ class Column
 
                 break;
 
-            case ColumnTypeEnum::BASIC_DROPDOWN->value:
+            case ColumnTypeEnum::DROPDOWN->value:
                 $this->setFormOptions($this->options);
 
                 break;
@@ -131,11 +131,11 @@ class Column
     {
         return [
             [
-                'name'  => trans('admin::app.components.datagrid.filters.boolean-options.true'),
+                'label' => trans('admin::app.components.datagrid.filters.boolean-options.true'),
                 'value' => 1,
             ],
             [
-                'name'  => trans('admin::app.components.datagrid.filters.boolean-options.false'),
+                'label' => trans('admin::app.components.datagrid.filters.boolean-options.false'),
                 'value' => 0,
             ],
         ];

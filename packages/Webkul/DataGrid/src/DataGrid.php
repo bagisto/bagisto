@@ -202,7 +202,7 @@ abstract class DataGrid
                 $column = collect($this->columns)->first(fn ($c) => $c->index === $requestedColumn);
 
                 switch ($column->type) {
-                    case ColumnTypeEnum::BASIC_DROPDOWN->value:
+                    case ColumnTypeEnum::DROPDOWN->value:
                         $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
                             foreach ($requestedValues as $value) {
                                 $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), $value);

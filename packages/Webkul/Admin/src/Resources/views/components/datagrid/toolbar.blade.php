@@ -16,7 +16,7 @@
                     <!-- Dropdown Toggler -->
                     <x-slot:toggle>
                         <button
-                            type="button" 
+                            type="button"
                             class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border border-gray-300 bg-white px-[10px] py-[6px] text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black"
                         >
                             <span>
@@ -57,7 +57,7 @@
                                         <a
                                             class="whitespace-no-wrap block rounded-t px-4 py-2 text-[14px] text-gray-600 hover:bg-gray-100"
                                             href="javascript:void(0);"
-                                            v-text="option.name"
+                                            v-text="option.label"
                                             @click="performMassAction(massAction, option)"
                                         >
                                         </a>
@@ -173,7 +173,7 @@
                     <!-- Dropdown Toggler -->
                     <x-slot:toggle>
                         <button
-                            type="button" 
+                            type="button"
                             class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border border-gray-300 bg-white px-[10px] py-[6px] text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400"
                         >
                             <span v-text="applied.pagination.perPage"></span>

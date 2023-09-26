@@ -30,14 +30,14 @@ class CustomerDataGrid extends DataGrid
                     ->where('addresses.address_type', '=', 'customer');
             })
             ->addSelect('customers.id as customer_id')
-            ->addSelect(DB::raw('COUNT(DISTINCT '. $tablePrefix .'addresses.id) as address_count'))
+            ->addSelect(DB::raw('COUNT(DISTINCT ' . $tablePrefix . 'addresses.id) as address_count'))
             ->groupBy('customers.id')
 
             ->leftJoin('orders', function ($join) {
                 $join->on('customers.id', '=', 'orders.customer_id');
             })
             ->addSelect('customers.id as customer_id')
-            ->addSelect(DB::raw('COUNT(DISTINCT '. $tablePrefix .'orders.id) as order_count'))
+            ->addSelect(DB::raw('COUNT(DISTINCT ' . $tablePrefix . 'orders.id) as order_count'))
             ->groupBy('customers.id')
 
             ->leftJoin('customer_groups', 'customers.customer_group_id', '=', 'customer_groups.id')
@@ -151,12 +151,12 @@ class CustomerDataGrid extends DataGrid
             'searchable'  => false,
             'filterable'  => false,
             'sortable'    => false,
-            'closure'     => function($row) {
-                return app(OrderRepository::class)->scopeQuery(function($q) use($row) {
+            'closure'     => function ($row) {
+                return app(OrderRepository::class)->scopeQuery(function ($q) use ($row) {
                     return $q->whereNotIn('status', ['canceled', 'closed'])
                         ->where('customer_id', $row->customer_id);
                 })->sum('grand_total');
-            }
+            },
         ]);
 
         $this->addColumn([
@@ -227,11 +227,11 @@ class CustomerDataGrid extends DataGrid
                 'url'     => route('admin.customers.customers.mass_update'),
                 'options' => [
                     [
-                        'name' => trans('admin::app.customers.customers.index.datagrid.active'),
+                        'label' => trans('admin::app.customers.customers.index.datagrid.active'),
                         'value' => 1,
                     ],
                     [
-                        'name' => trans('admin::app.customers.customers.index.datagrid.inactive'),
+                        'label' => trans('admin::app.customers.customers.index.datagrid.inactive'),
                         'value' => 0,
                     ],
                 ],
