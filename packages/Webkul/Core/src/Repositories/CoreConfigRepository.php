@@ -13,11 +13,6 @@ class CoreConfigRepository extends Repository
     use CoreConfigField;
 
     /**
-     * @var boolean
-     */
-    protected $cacheEnabled = true;
-
-    /**
      * Specify model class name.
      *
      * @return string
@@ -25,37 +20,6 @@ class CoreConfigRepository extends Repository
     public function model(): string
     {
         return 'Webkul\Core\Contracts\CoreConfig';
-    }
-
-    /**
-     * @param $method
-     *
-     * @return bool
-     */
-    protected function allowedCache($method)
-    {
-        $cacheEnabled = config('repository.cache.enabled', true);
-
-        if (! $this->cacheEnabled && ! $cacheEnabled) {
-            return false;
-        }
-
-        $cacheOnly = isset($this->cacheOnly) ? $this->cacheOnly : config('repository.cache.allowed.only', null);
-        $cacheExcept = isset($this->cacheExcept) ? $this->cacheExcept : config('repository.cache.allowed.except', null);
-
-        if (is_array($cacheOnly)) {
-            return in_array($method, $cacheOnly);
-        }
-
-        if (is_array($cacheExcept)) {
-            return !in_array($method, $cacheExcept);
-        }
-
-        if (is_null($cacheOnly) && is_null($cacheExcept)) {
-            return true;
-        }
-
-        return false;
     }
 
     /**
