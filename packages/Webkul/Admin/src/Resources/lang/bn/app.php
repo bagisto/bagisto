@@ -175,7 +175,6 @@ return [
                 'comment-success'       => 'মন্তব্য সফলভাবে যোগ করা হয়েছে।',
                 'create-success'        => 'অর্ডার সফলভাবে তৈরি হয়েছে',
                 'cancel-success'        => 'অর্ডার সফলভাবে বাতিল হয়েছে',
-                'create-invoice'        => 'চালান তৈরি করুন',
                 'discount'              => 'ছাড় - :discount',
                 'download-pdf'          => 'PDF ডাউনলোড করুন',
                 'grand-total'           => 'মোট টোটাল - :grand_total',
@@ -185,7 +184,6 @@ return [
                 'item-shipped'          => 'প্রেরিত (:qty_shipped)',
                 'item-canceled'         => 'বাতিল হয়েছে (:qty_canceled)',
                 'item-refunded'         => 'ফেরত দেওয়া (:qty_refunded)',
-                'invoice'               => 'চালান',
                 'invoice-id'            => 'চালান #:invoice',
                 'invoices'              => 'চালান',
                 'notify-customer'       => 'গ্রাহককে অবগত করুন',
@@ -193,7 +191,6 @@ return [
                 'no-shipment-found'     => 'প্রেরণ খুঁজে পাওয়া যায়নি',
                 'name'                  => 'নাম',
                 'no-refund-found'       => 'ফেরত পাওয়া যায়নি',
-                'new-invoice'           => 'নতুন চালান',
                 'order-date'            => 'অর্ডারের তারিখ',
                 'order-status'          => 'অর্ডার স্থিতি',
                 'order-information'     => 'অর্ডার তথ্য',
@@ -202,7 +199,6 @@ return [
                 'payment-method'        => 'পেমেন্ট পদ্ধতি',
                 'per-unit'              => 'প্রতি ইউনিট',
                 'quantity'              => 'পরিমাণ',
-                'qty-to-invoiced'       => 'চালানে যেতে প্রয়োজনীয় পরিমাণ',
                 'refunded'              => 'ফেরত দেওয়া',
                 'refund-id'             => 'ফেরত দেওয়া #:refund',
                 'refund'                => 'ফেরত',
@@ -423,10 +419,17 @@ return [
             ],
 
             'create' => [
-                'creation-error' => 'অর্ডার চালান তৈরি করার অনুমতি নেই।',
-                'create-success' => 'চালান সফলভাবে তৈরি হয়েছে',
-                'invalid-qty'    => 'আমরা অবৈধ পরিমাণ চেনে পেয়েছি।',
-                'product-error'  => 'প্রোডাক্ট ছাড়া চালান তৈরি করা যাবে না।',
+                'invoice'         => 'চালান',
+                'create-invoice'  => 'চালান তৈরি করুন',
+                'new-invoice'     => 'নতুন চালান',
+                'product-image'   => 'পণ্যের চিত্র',
+                'amount-per-unit' => ':amount প্রতি একক x :qty পরিমাণ',
+                'sku'             => 'SKU - :sku',
+                'qty-to-invoiced' => 'চালান করার পরিমাণ',
+                'creation-error'  => 'অর্ডার চালান তৈরি করা যাবে না।',
+                'create-success'  => 'চালান সফলভাবে তৈরি হয়েছে',
+                'invalid-qty'     => 'আমরা অবৈধ পরিমাণ চালান আইটেম পেয়েছি।',
+                'product-error'   => 'পণ্য ছাড়া চালান তৈরি করা যাবে না।',
             ],
 
             'invoice-pdf' => [
@@ -2558,6 +2561,7 @@ return [
                 'footer-link'                   => 'ফুটার লিঙ্ক',
                 'footer-link-form-title'        => 'ফুটার লিঙ্ক',
                 'slider-description'            => 'স্লাইডার সম্পর্কিত থিম কাস্টমাইজেশন।',
+                'slider-required'               => 'স্লাইডার ক্ষেত্র প্রয়োজন.',
                 'slider-add-btn'                => 'স্লাইডার যোগ করুন',
                 'general'                       => 'সাধারণ',
                 'add-filter-btn'                => 'ফিল্টার যোগ করুন',
@@ -2683,13 +2687,6 @@ return [
                         'allow-guest-checkout-hint' => 'ইফ টার্নড অন, এই অপশনটি প্রতিটি পণ্যের স্পেসিফিকভাবে কনফিগার করা যেতে পারে।',
                         'title'                     => 'গেস্ট চেকআউট',
                         'title-info'                => 'গেস্ট চেকআউট গ্রাহকদের একাধিক অ্যাকাউন্ট তৈরি করার বিনা পণ্য কেনার সুযোগ দেওয়া, সুবিধা এবং দ্রুত লেনদেনের প্রক্রিয়া সরলীকরণের জন্য।',
-                    ],
-    
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'হোমপেজে নতুন প্রোডাক্টের সংখ্যা অনুমতি দিন',
-                        'allow-no-of-featured-products'  => 'হোমপেজে বৈশিষ্ট্যযুক্ত প্রোডাক্টের সংখ্যা অনুমতি দিন',
-                        'title'                          => 'হোমপেজ কনফিগারেশন',
-                        'title-info'                     => 'হোমপেজ কনফিগারেশন সাইটের মূখ্য পৃষ্ঠার বিবরণ, সামগ্রী, এবং ডিজাইন সার্ভিস করার সহায়ক তথ্য সফলভাবে প্রস্তুত করার জন্য মূল পৃষ্ঠার কাঠামো, সামগ্রী এবং ডিজাইনটি কাস্টমাইজ করা।',
                     ],
     
                     'product-view-page' => [
@@ -3280,6 +3277,7 @@ return [
         'events'                   => 'ইভেন্টগুলি',
         'sitemaps'                 => 'সাইটম্যাপগুলি',
         'newsletter-subscriptions' => 'নিউজলেটার সাবস্ক্রিপশন',
+        'transactions'             => 'লেনদেন',
     ],
 
     'errors' => [

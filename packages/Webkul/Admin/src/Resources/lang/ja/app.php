@@ -175,7 +175,6 @@ return [
                 'comment-success'       => 'コメントが正常に追加されました。',
                 'create-success'        => '注文が正常に作成されました',
                 'cancel-success'        => '注文は正常にキャンセルされました',
-                'create-invoice'        => '請求書を作成',
                 'discount'              => '割引 - :discount',
                 'download-pdf'          => 'PDFをダウンロード',
                 'grand-total'           => '合計金額 - :grand_total',
@@ -185,7 +184,6 @@ return [
                 'item-shipped'          => '発送済み (:qty_shipped)',
                 'item-canceled'         => 'キャンセル済み (:qty_canceled)',
                 'item-refunded'         => '返金済み (:qty_refunded)',
-                'invoice'               => '請求書',
                 'invoice-id'            => '請求書 #:invoice',
                 'invoices'              => '請求書',
                 'notify-customer'       => '顧客に通知',
@@ -193,7 +191,6 @@ return [
                 'no-shipment-found'     => '出荷情報が見つかりません',
                 'name'                  => '名前',
                 'no-refund-found'       => '返金情報が見つかりません',
-                'new-invoice'           => '新しい請求書',
                 'order-date'            => '注文日',
                 'order-status'          => '注文ステータス',
                 'order-information'     => '注文情報',
@@ -202,7 +199,6 @@ return [
                 'payment-method'        => '支払い方法',
                 'per-unit'              => '単位あたり',
                 'quantity'              => '数量',
-                'qty-to-invoiced'       => '請求予定数',
                 'refunded'              => '返金済み',
                 'refund-id'             => '返金 #:refund',
                 'refund'                => '返金',
@@ -423,10 +419,17 @@ return [
             ],
 
             'create' => [
-                'creation-error' => '注文請求書の作成は許可されていません。',
-                'create-success' => '請求書が正常に作成されました',
-                'invalid-qty'    => '無効な数量の請求書アイテムが見つかりました。',
-                'product-error'  => '商品なしで請求書を作成することはできません。',
+                'invoice'         => '請求書',
+                'create-invoice'  => '請求書を作成',
+                'new-invoice'     => '新しい請求書',
+                'product-image'   => '製品画像',
+                'amount-per-unit' => ':amount 1単位あたり x :qty 数量',
+                'sku'             => 'SKU - :sku',
+                'qty-to-invoiced' => '請求数量',
+                'creation-error'  => '注文請求書の作成は許可されていません。',
+                'create-success'  => '請求書が正常に作成されました',
+                'invalid-qty'     => '無効な数量の請求アイテムが見つかりました。',
+                'product-error'   => '製品なしでは請求書を作成できません。',
             ],
 
             'invoice-pdf' => [
@@ -2525,7 +2528,6 @@ return [
                     'type'         => 'タイプ',
                     'name'         => '名前',
                     'channel_name' => 'チャネル名',
-
                 ],
             ],
 
@@ -2558,6 +2560,7 @@ return [
                 'footer-link'                   => 'フッターリンク',
                 'footer-link-form-title'        => 'フッターリンク',
                 'slider-description'            => 'スライダー関連のテーマカスタマイズ。',
+                'slider-required'               => 'スライダーフィールドは必須です。',
                 'slider-add-btn'                => 'スライダーを追加',
                 'general'                       => '一般',
                 'add-filter-btn'                => 'フィルターを追加',
@@ -2683,13 +2686,6 @@ return [
                         'allow-guest-checkout-hint' => 'ヒント：オンにすると、このオプションは各製品ごとに設定できます。',
                         'title'                     => 'ゲストチェックアウト',
                         'title-info'                => 'ゲストチェックアウトは、アカウントを作成せずに製品を購入できるようにすることで、購入プロセスを簡略化し、迅速な取引を実現します。',
-                    ],
-
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'ホームページでの新製品の許可数',
-                        'allow-no-of-featured-products'  => 'ホームページでの注目製品の許可数',
-                        'title'                          => 'ホームページの構成',
-                        'title-info'                     => 'ホームページの構成には、ウェブサイトのメインページのレイアウト、コンテンツ、デザインを効果的に表示するためのカスタマイズが含まれます。',
                     ],
 
                     'product-view-page' => [
@@ -3281,6 +3277,7 @@ return [
         'events'                   => 'イベント',
         'sitemaps'                 => 'サイトマップ',
         'newsletter-subscriptions' => 'ニュースレター購読',
+        'transactions'             => '取引',
     ],
 
     'errors' => [

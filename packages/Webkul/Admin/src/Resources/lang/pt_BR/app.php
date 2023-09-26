@@ -175,7 +175,6 @@ return [
                 'comment-success'       => 'Comentário adicionado com sucesso.',
                 'create-success'        => 'Pedido criado com sucesso',
                 'cancel-success'        => 'Pedido cancelado com sucesso',
-                'create-invoice'        => 'Criar Fatura',
                 'discount'              => 'Desconto - :discount',
                 'download-pdf'          => 'Baixar PDF',
                 'grand-total'           => 'Total Geral - :grand_total',
@@ -185,7 +184,6 @@ return [
                 'item-shipped'          => 'Enviado (:qty_shipped)',
                 'item-canceled'         => 'Cancelado (:qty_canceled)',
                 'item-refunded'         => 'Reembolsado (:qty_refunded)',
-                'invoice'               => 'Fatura',
                 'invoice-id'            => 'Fatura #:invoice',
                 'invoices'              => 'Faturas',
                 'notify-customer'       => 'Notificar Cliente',
@@ -193,7 +191,6 @@ return [
                 'no-shipment-found'     => 'Nenhuma Remessa Encontrada',
                 'name'                  => 'Nome',
                 'no-refund-found'       => 'Nenhum Reembolso Encontrado',
-                'new-invoice'           => 'Nova Fatura',
                 'order-date'            => 'Data do Pedido',
                 'order-status'          => 'Status do Pedido',
                 'order-information'     => 'Informações do Pedido',
@@ -202,7 +199,6 @@ return [
                 'payment-method'        => 'Método de Pagamento',
                 'per-unit'              => 'Por Unidade',
                 'quantity'              => 'Quantidade',
-                'qty-to-invoiced'       => 'Qtde. para Faturar',
                 'refunded'              => 'Reembolsado',
                 'refund-id'             => 'Reembolso #:refund',
                 'refund'                => 'Reembolso',
@@ -423,10 +419,17 @@ return [
             ],
 
             'create' => [
-                'creation-error' => 'A criação da fatura do pedido não é permitida.',
-                'create-success' => 'Fatura criada com sucesso',
-                'invalid-qty'    => 'Encontramos uma quantidade inválida para faturar itens.',
-                'product-error'  => 'A fatura não pode ser criada sem produtos.',
+                'invoice'         => 'Fatura',
+                'create-invoice'  => 'Criar Fatura',
+                'new-invoice'     => 'Nova Fatura',
+                'product-image'   => 'Imagem do Produto',
+                'amount-per-unit' => ':amount Por Unidade x :qty Quantidade',
+                'sku'             => 'SKU - :sku',
+                'qty-to-invoiced' => 'Quantidade a faturar',
+                'creation-error'  => 'A criação da fatura do pedido não é permitida.',
+                'create-success'  => 'Fatura criada com sucesso',
+                'invalid-qty'     => 'Encontramos uma quantidade inválida para itens a faturar.',
+                'product-error'   => 'Não é possível criar uma fatura sem produtos.',
             ],
 
             'invoice-pdf' => [
@@ -2557,6 +2560,7 @@ return [
                 'footer-link'                   => 'Links no Rodapé',
                 'footer-link-form-title'        => 'Link no Rodapé',
                 'slider-description'            => 'Personalização relacionada a slides.',
+                'slider-required'               => 'Campo do slider é obrigatório.',
                 'slider-add-btn'                => 'Adicionar Slide',
                 'general'                       => 'Geral',
                 'add-filter-btn'                => 'Adicionar Filtro',
@@ -2682,13 +2686,6 @@ return [
                         'allow-guest-checkout-hint' => 'Dica: Se ativado, esta opção pode ser configurada especificamente para cada produto.',
                         'title'                     => 'Checkout de Convidado',
                         'title-info'                => 'O checkout de convidado permite que os clientes comprem produtos sem criar uma conta, agilizando o processo de compra para maior conveniência e transações mais rápidas.',
-                    ],
-
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'Número Permitido de Novos Produtos na Página Inicial',
-                        'allow-no-of-featured-products'  => 'Número Permitido de Produtos em Destaque na Página Inicial',
-                        'title'                          => 'Configuração da Página Inicial',
-                        'title-info'                     => 'A configuração da página inicial envolve a personalização do layout, conteúdo e design da página principal de um site para apresentar informações desejadas de forma eficaz.',
                     ],
 
                     'product-view-page' => [
@@ -3280,6 +3277,7 @@ return [
         'events'                   => 'Événements',
         'sitemaps'                 => 'Sitemaps',
         'newsletter-subscriptions' => 'Abonnements à la newsletter',
+        'transactions'             => 'Transações',
     ],
 
     'errors' => [

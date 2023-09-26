@@ -175,7 +175,6 @@ return [
                 'comment-success'       => 'Commentaire ajouté avec succès.',
                 'create-success'        => 'Commande créée avec succès',
                 'cancel-success'        => 'Commande annulée avec succès',
-                'create-invoice'        => 'Créer une facture',
                 'discount'              => 'Réduction - :discount',
                 'download-pdf'          => 'Télécharger le PDF',
                 'grand-total'           => 'Total général - :grand_total',
@@ -185,7 +184,6 @@ return [
                 'item-shipped'          => 'Expédié (:qty_shipped)',
                 'item-canceled'         => 'Annulé (:qty_canceled)',
                 'item-refunded'         => 'Remboursé (:qty_refunded)',
-                'invoice'               => 'Facture',
                 'invoice-id'            => 'Facture n°:invoice',
                 'invoices'              => 'Factures',
                 'notify-customer'       => 'Notifier le client',
@@ -193,7 +191,6 @@ return [
                 'no-shipment-found'     => 'Aucune expédition trouvée',
                 'name'                  => 'Nom',
                 'no-refund-found'       => 'Aucun remboursement trouvé',
-                'new-invoice'           => 'Nouvelle facture',
                 'order-date'            => 'Date de commande',
                 'order-status'          => 'Statut de la commande',
                 'order-information'     => 'Informations sur la commande',
@@ -202,7 +199,6 @@ return [
                 'payment-method'        => 'Méthode de paiement',
                 'per-unit'              => 'Par unité',
                 'quantity'              => 'Quantité',
-                'qty-to-invoiced'       => 'Qté. à facturer',
                 'refunded'              => 'Remboursé',
                 'refund-id'             => 'Remboursement n°:refund',
                 'refund'                => 'Remboursement',
@@ -423,10 +419,17 @@ return [
             ],
 
             'create' => [
-                'creation-error' => "La création de la facture de la commande n'est pas autorisée.",
-                'create-success' => 'Facture créée avec succès',
-                'invalid-qty'    => 'Nous avons trouvé une quantité invalide d’articles à facturer.',
-                'product-error'  => 'La facture ne peut pas être créée sans produits.',
+                'invoice'         => 'Facture',
+                'create-invoice'  => 'Créer une facture',
+                'new-invoice'     => 'Nouvelle facture',
+                'product-image'   => 'Image du produit',
+                'amount-per-unit' => ':amount Par unité x :qty Quantité',
+                'sku'             => 'SKU - :sku',
+                'qty-to-invoiced' => 'Quantité à facturer',
+                'creation-error'  => "La création de la facture de la commande n'est pas autorisée.",
+                'create-success'  => 'Facture créée avec succès',
+                'invalid-qty'     => 'Nous avons trouvé une quantité invalide pour les articles à facturer.',
+                'product-error'   => 'Impossible de créer une facture sans produits.',
             ],
 
             'invoice-pdf' => [
@@ -2557,6 +2560,7 @@ return [
                 'footer-link'                   => 'Liens du pied de page',
                 'footer-link-form-title'        => 'Lien du pied de page',
                 'slider-description'            => 'Personnalisation du thème liée au slider.',
+                'slider-required'               => 'Le champ du curseur est requis.',
                 'slider-add-btn'                => 'Ajouter un slider',
                 'general'                       => 'Général',
                 'add-filter-btn'                => 'Ajouter un filtre',
@@ -2682,13 +2686,6 @@ return [
                         'allow-guest-checkout-hint' => 'Remarque : lorsqu\'elle est activée, cette option peut être configurée individuellement pour chaque produit.',
                         'title'                     => 'Commande en tant qu\'invité',
                         'title-info'                => 'La commande en tant qu\'invité permet aux clients d\'acheter des produits sans créer de compte, facilitant le processus d\'achat pour plus de commodité et de rapidité des transactions.',
-                    ],
-
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'Nombre autorisé de nouveaux produits sur la page d\'accueil',
-                        'allow-no-of-featured-products'  => 'Nombre autorisé de produits en vedette sur la page d\'accueil',
-                        'title'                          => 'Configuration de la page d\'accueil',
-                        'title-info'                     => 'La configuration de la page d\'accueil comprend la personnalisation de la mise en page, du contenu et du design de la page principale d\'un site Web pour présenter efficacement les informations souhaitées.',
                     ],
 
                     'product-view-page' => [
@@ -3280,6 +3277,7 @@ return [
         'events'                   => 'Événements',
         'sitemaps'                 => 'Sitemaps',
         'newsletter-subscriptions' => 'Abonnements à la newsletter',
+        'transactions'             => 'Transactions',
     ],
 
     'errors' => [

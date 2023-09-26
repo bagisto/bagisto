@@ -175,7 +175,6 @@ return [
                 'comment-success'       => 'ההערה נוספה בהצלחה.',
                 'create-success'        => 'הזמנה נוצרה בהצלחה',
                 'cancel-success'        => 'ההזמנה בוטלה בהצלחה',
-                'create-invoice'        => 'צור חשבונית',
                 'discount'              => 'הנחה - :discount',
                 'download-pdf'          => 'הורד PDF',
                 'grand-total'           => 'סכום כולל - :grand_total',
@@ -185,7 +184,6 @@ return [
                 'item-shipped'          => 'נשלח (:qty_shipped)',
                 'item-canceled'         => 'בוטלו (:qty_canceled)',
                 'item-refunded'         => 'הוחזרו (:qty_refunded)',
-                'invoice'               => 'חשבונית',
                 'invoice-id'            => 'חשבונית #:invoice',
                 'invoices'              => 'חשבוניות',
                 'notify-customer'       => 'הודע ללקוח',
@@ -193,7 +191,6 @@ return [
                 'no-shipment-found'     => 'לא נמצאו משלוחים',
                 'name'                  => 'שם',
                 'no-refund-found'       => 'לא נמצא החזר',
-                'new-invoice'           => 'חשבונית חדשה',
                 'order-date'            => 'תאריך הזמנה',
                 'order-status'          => 'מצב הזמנה',
                 'order-information'     => 'מידע על הזמנה',
@@ -202,7 +199,6 @@ return [
                 'payment-method'        => 'אמצעי תשלום',
                 'per-unit'              => 'ליחידה',
                 'quantity'              => 'כמות',
-                'qty-to-invoiced'       => 'כמות לחשבונית',
                 'refunded'              => 'הוחזר',
                 'refund-id'             => 'החזר #:refund',
                 'refund'                => 'החזר',
@@ -423,10 +419,17 @@ return [
             ],
 
             'create' => [
-                'creation-error' => 'יצירת חשבונית הזמנה אסורה.',
-                'create-success' => 'חשבונית נוצרה בהצלחה',
-                'invalid-qty'    => 'מצאנו כמות לא תקינה לחשבונית מוצרים.',
-                'product-error'  => 'לא ניתן ליצור חשבונית ללא מוצרים.',
+                'invoice'         => 'חשבונית',
+                'create-invoice'  => 'יצירת חשבונית',
+                'new-invoice'     => 'חשבונית חדשה',
+                'product-image'   => 'תמונת המוצר',
+                'amount-per-unit' => ':amount ליחידה x :qty כמות',
+                'sku'             => 'SKU - :sku',
+                'qty-to-invoiced' => 'כמות לחשבונית',
+                'creation-error'  => 'אי אפשר ליצור חשבונית הזמנה.',
+                'create-success'  => 'חשבונית נוצרה בהצלחה',
+                'invalid-qty'     => 'נמצאה כמות לא תקינה לפריטים לחשבונית.',
+                'product-error'   => 'אי אפשר ליצור חשבונית בלעדי מוצרים.',
             ],
 
             'invoice-pdf' => [
@@ -656,7 +659,6 @@ return [
                             'status'          => 'סטטוס',
                             'weight'          => 'משקל',
                             'images'          => 'תמונות',
-
                         ],
 
                         'mass-edit' => [
@@ -2558,6 +2560,7 @@ return [
                 'footer-link'                   => 'קישורי תחתית',
                 'footer-link-form-title'        => 'קישור תחתית',
                 'slider-description'            => 'התאמת ערכת הנושא הנמצאת בקרוסלה.',
+                'slider-required'               => 'שדה המחוון נדרש.',
                 'slider-add-btn'                => 'הוסף מציג',
                 'general'                       => 'כללי',
                 'add-filter-btn'                => 'הוסף מסנן',
@@ -2683,13 +2686,6 @@ return [
                         'allow-guest-checkout-hint' => 'הערה: כאשר מופעל, ניתן להגדיר אופציה זו לכל מוצר באופן פרטי.',
                         'title'                     => 'רכישה באורח אורח',
                         'title-info'                => 'רכישה באורח אורח מאפשרת ללקוחות לרכוש מוצרים מבלי ליצור חשבון, ומקלה על התהליך לשם נוחות ומהירות בעסקאות.',
-                    ],
-
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'הרשה מספר מקסימלי של מוצרים חדשים בדף הבית',
-                        'allow-no-of-featured-products'  => 'הרשה מספר מקסימלי של מוצרים מומלצים בדף הבית',
-                        'title'                          => 'הגדרות דף הבית',
-                        'title-info'                     => 'הגדרות דף הבית כוללות התאמת התצוגה, התוכן והעיצוב של דף הבית של אתר כדי להציג מידע מבוקש בצורה יעילה.',
                     ],
 
                     'product-view-page' => [
@@ -3281,6 +3277,7 @@ return [
         'events'                   => 'אירועים',
         'sitemaps'                 => 'מפות אתר',
         'newsletter-subscriptions' => 'מנויים לניוזלטר',
+        'transactions'             => 'עסקאות',
     ],
 
     'errors' => [

@@ -12,27 +12,31 @@
             v-if="mode != 'list'"
         >
             <div class="relative overflow-hidden group max-w-[291px] max-h-[300px] rounded-[4px]">
-                <a :href="`{{ route('shop.product_or_category.index', '') }}/${product.url_key}`">
-                    <x-shop::shimmer.image
+                <a
+                    :href="`{{ route('shop.product_or_category.index', '') }}/${product.url_key}`"
+                    :aria-label="product.name + ' '"
+                >
+                    <x-shop::media.images.lazy
                         class="relative after:content-[' '] after:block after:pb-[calc(100%+9px)] bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
                         ::src="product.base_image.medium_image_url"
-                        width="291"
-                        height="300"
                         ::key="product.id"
                         ::index="product.id"
-                    ></x-shop::shimmer.image>
+                        width="291"
+                        height="300"
+                        ::alt="product.name"
+                    ></x-shop::media.images.lazy>
                 </a>
                 
                 <div class="action-items bg-black">
                     <p
-                        class="inline-block absolute top-[20px] left-[20px] px-[10px]  bg-[#E03935] rounded-[44px] text-[#fff] text-[14px]"
+                        class="inline-block absolute top-[20px] left-[20px] px-[10px]  bg-[#E51A1A] rounded-[44px] text-white text-[14px]"
                         v-if="product.on_sale"
                     >
                         @lang('shop::app.components.products.card.sale')
                     </p>
 
                     <p
-                        class="inline-block absolute top-[20px] left-[20px] px-[10px] bg-navyBlue rounded-[44px] text-[#fff] text-[14px]"
+                        class="inline-block absolute top-[20px] left-[20px] px-[10px] bg-navyBlue rounded-[44px] text-white text-[14px]"
                         v-else-if="product.is_new"
                     >
                         @lang('shop::app.components.products.card.new')
@@ -40,28 +44,28 @@
 
                     <div class="group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
                         @if (core()->getConfigData('general.content.shop.wishlist_option'))
-                            <a
+                            <span
                                 class="flex justify-center items-center absolute top-[20px] right-[20px] w-[30px] h-[30px] bg-white rounded-md cursor-pointer text-[25px]"
                                 :class="product.is_wishlist ? 'icon-heart-fill' : 'icon-heart'"
                                 @click="addToWishlist()"
                             >
-                            </a>
+                            </span>
                         @endif
 
                         @if (core()->getConfigData('general.content.shop.compare_option'))
-                            <a
+                            <span
                                 class="icon-compare flex justify-center items-center w-[30px] h-[30px] absolute top-[60px] right-[20px] bg-white rounded-md cursor-pointer text-[25px]"
                                 @click="addToCompare(product.id)"
                             >
-                            </a>
+                            </span>
                         @endif
 
-                        <a
+                        <button
                             class="absolute bottom-[15px] left-[50%] py-[11px] px-[43px] bg-white rounded-xl text-navyBlue text-xs w-max font-medium cursor-pointer -translate-x-[50%] translate-y-[54px] group-hover:translate-y-0 transition-all duration-300"
                             @click="addToCart()"
                         >
                             @lang('shop::app.components.products.card.add-to-cart')
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -91,24 +95,24 @@
         >
             <div class="relative max-w-[250px] max-h-[258px] overflow-hidden group"> 
                 <a :href="`{{ route('shop.product_or_category.index', '') }}/${product.url_key}`">
-                    <x-shop::shimmer.image
+                    <x-shop::media.images.lazy
                         class="min-w-[250px] relative after:content-[' '] after:block after:pb-[calc(100%+9px)] bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
                         ::src="product.base_image.medium_image_url"
                         width="291"
                         height="300"
-                    ></x-shop::shimmer.image>
+                    ></x-shop::media.images.lazy>
                 </a>
             
                 <div class="action-items bg-black"> 
                     <p
-                        class="inline-block absolute top-[20px] left-[20px] px-[10px] bg-[#E03935] rounded-[44px] text-[#fff] text-[14px]"
+                        class="inline-block absolute top-[20px] left-[20px] px-[10px] bg-[#E51A1A] rounded-[44px] text-white text-[14px]"
                         v-if="product.on_sale"
                     >
                         @lang('shop::app.components.products.card.sale')
                     </p>
 
                     <p
-                        class="inline-block absolute top-[20px] left-[20px] px-[10px] bg-navyBlue rounded-[44px] text-[#fff] text-[14px]"
+                        class="inline-block absolute top-[20px] left-[20px] px-[10px] bg-navyBlue rounded-[44px] text-white text-[14px]"
                         v-else-if="product.is_new"
                     >
                         @lang('shop::app.components.products.card.new')
@@ -157,11 +161,11 @@
                     </span> 
                 </div> 
                 
-                <p class="text-[14px] text-[#7D7D7D]" v-if="! product.avg_ratings">
+                <p class="text-[14px] text-[#6E6E6E]" v-if="! product.avg_ratings">
                     @lang('shop::app.components.products.card.review-description')
                 </p>
             
-                <p v-else class="text-[14px] text-[#7D7D7D]">
+                <p v-else class="text-[14px] text-[#6E6E6E]">
                     <x-shop::products.star-rating 
                         ::value="product && product.avg_ratings ? product.avg_ratings : 0"
                         :is-editable=false

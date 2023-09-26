@@ -18,6 +18,7 @@
             <a 
                 href="#" 
                 @click="openSharePopup"
+                aria-label="Pinterest"
             >
                 @include('social_share::icons.pinterest')
             </a>

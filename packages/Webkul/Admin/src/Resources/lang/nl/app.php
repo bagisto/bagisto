@@ -175,7 +175,6 @@ return [
                 'comment-success'       => 'Opmerking succesvol toegevoegd.',
                 'create-success'        => 'Bestelling succesvol aangemaakt',
                 'cancel-success'        => 'Bestelling succesvol geannuleerd',
-                'create-invoice'        => 'Factuur aanmaken',
                 'discount'              => 'Korting - :discount',
                 'download-pdf'          => 'PDF Downloaden',
                 'grand-total'           => 'Totaalbedrag - :grand_total',
@@ -185,7 +184,6 @@ return [
                 'item-shipped'          => 'Verzonden (:qty_shipped)',
                 'item-canceled'         => 'Geannuleerd (:qty_canceled)',
                 'item-refunded'         => 'Terugbetaald (:qty_refunded)',
-                'invoice'               => 'Factuur',
                 'invoice-id'            => 'Factuur #:invoice',
                 'invoices'              => 'Facturen',
                 'notify-customer'       => 'Klant Informeren',
@@ -193,7 +191,6 @@ return [
                 'no-shipment-found'     => 'Geen Verzending Gevonden',
                 'name'                  => 'Naam',
                 'no-refund-found'       => 'Geen Terugbetaling Gevonden',
-                'new-invoice'           => 'Nieuwe Factuur',
                 'order-date'            => 'Besteldatum',
                 'order-status'          => 'Bestelstatus',
                 'order-information'     => 'Bestelinformatie',
@@ -202,7 +199,6 @@ return [
                 'payment-method'        => 'Betaalmethode',
                 'per-unit'              => 'Per Eenheid',
                 'quantity'              => 'Hoeveelheid',
-                'qty-to-invoiced'       => 'Aantal te factureren',
                 'refunded'              => 'Terugbetaald',
                 'refund-id'             => 'Terugbetaling #:refund',
                 'refund'                => 'Terugbetaling',
@@ -422,11 +418,18 @@ return [
                 'tax'                    => 'Belastingbedrag - :tax',
             ],
 
-            'create'   => [
-                'creation-error' => 'Het aanmaken van een factuur voor deze bestelling is niet toegestaan.',
-                'create-success' => 'Factuur succesvol aangemaakt',
-                'invalid-qty'    => 'We hebben een ongeldige hoeveelheid gevonden om items te factureren.',
-                'product-error'  => 'Een factuur kan niet worden aangemaakt zonder producten.',
+            'create' => [
+                'invoice'         => 'Factuur',
+                'create-invoice'  => 'Factuur aanmaken',
+                'new-invoice'     => 'Nieuwe Factuur',
+                'product-image'   => 'Productafbeelding',
+                'amount-per-unit' => ':amount Per Eenheid x :qty Hoeveelheid',
+                'sku'             => 'SKU - :sku',
+                'qty-to-invoiced' => 'Te factureren hoeveelheid',
+                'creation-error'  => 'Het aanmaken van een orderfactuur is niet toegestaan.',
+                'create-success'  => 'Factuur succesvol aangemaakt',
+                'invalid-qty'     => 'We hebben een ongeldige hoeveelheid voor te factureren items gevonden.',
+                'product-error'   => 'Een factuur kan niet worden aangemaakt zonder producten.',
             ],
 
             'invoice-pdf' => [
@@ -2557,6 +2560,7 @@ return [
                 'footer-link'                   => 'Voettekstlinks',
                 'footer-link-form-title'        => 'Voettekstlink',
                 'slider-description'            => 'Thema-aanpassing gerelateerd aan sliders.',
+                'slider-required'               => 'Slider-veld is verplicht.',
                 'slider-add-btn'                => 'Slider toevoegen',
                 'general'                       => 'Algemeen',
                 'add-filter-btn'                => 'Filter toevoegen',
@@ -2682,13 +2686,6 @@ return [
                         'allow-guest-checkout-hint' => 'Hint: Als dit is ingeschakeld, kan deze optie specifiek worden geconfigureerd voor elk product.',
                         'title'                     => 'Gastafrekening',
                         'title-info'                => 'Gastafrekening stelt klanten in staat om producten te kopen zonder een account aan te maken, wat het aankoopproces vereenvoudigt voor gemak en snellere transacties.',
-                    ],
-
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'Toegestaan aantal nieuwe producten op de startpagina',
-                        'allow-no-of-featured-products'  => 'Toegestaan aantal uitgelichte producten op de startpagina',
-                        'title'                          => 'Configuratie startpagina',
-                        'title-info'                     => 'Configuratie van de lay-out, inhoud en vormgeving van de hoofdpagina van een website om gewenste informatie effectief te presenteren.',
                     ],
 
                     'product-view-page' => [
@@ -3280,6 +3277,7 @@ return [
         'events'                   => 'Evenementen',
         'sitemaps'                 => 'Sitemaps',
         'newsletter-subscriptions' => 'Nieuwsbriefabonnementen',
+        'transactions'             => 'Transacties',
     ],
 
     'errors' => [

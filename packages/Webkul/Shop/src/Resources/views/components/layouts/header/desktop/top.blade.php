@@ -24,15 +24,16 @@
     <x-shop::dropdown position="bottom-right">
         <x-slot:toggle>
             {{-- Dropdown Toggler --}}
-            <div class="flex gap-[10px] cursor-pointer">
+            <div class="flex items-center gap-[10px] cursor-pointer">
                 <img 
                     src="{{ ! empty(core()->getCurrentLocale()->logo_url) 
                             ? core()->getCurrentLocale()->logo_url 
                             : bagisto_asset('images/default-language.svg') 
                         }}"
+                    class="h-full"
                     alt="Default locale"
-                    width="20"
-                    height="20"
+                    width="24"
+                    height="16"
                 />
                 
                 <span>
@@ -67,15 +68,15 @@
     <script type="text/x-template" id="v-locale-switcher-template">
         <div class="grid gap-[4px] mt-[10px] pb-[10px]">
             <span
-                class="flex gap-[10px] px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100"
+                class="flex items-center gap-[10px] px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100"
                 v-for="locale in locales"
                 :class="{'bg-gray-100': locale.code == '{{ app()->getLocale() }}'}"
                 @click="change(locale)"                  
             >
                 <img
                     :src="locale.logo_url || '{{ bagisto_asset('images/default-language.svg') }}'"
-                    width="20"
-                    height="20"
+                    width="24"
+                    height="16"
                 />
 
                 @{{ locale.name }}

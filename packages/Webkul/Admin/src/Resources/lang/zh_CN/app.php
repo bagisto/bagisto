@@ -175,7 +175,6 @@ return [
                 'comment-success'       => '评论成功添加。',
                 'create-success'        => '订单创建成功',
                 'cancel-success'        => '订单取消成功',
-                'create-invoice'        => '创建发票',
                 'discount'              => '折扣 - :discount',
                 'download-pdf'          => '下载PDF',
                 'grand-total'           => '总计 - :grand_total',
@@ -185,7 +184,6 @@ return [
                 'item-shipped'          => '已发货 (:qty_shipped)',
                 'item-canceled'         => '已取消 (:qty_canceled)',
                 'item-refunded'         => '已退款 (:qty_refunded)',
-                'invoice'               => '发票',
                 'invoice-id'            => '发票 #:invoice',
                 'invoices'              => '发票',
                 'notify-customer'       => '通知客户',
@@ -193,7 +191,6 @@ return [
                 'no-shipment-found'     => '未找到发货',
                 'name'                  => '姓名',
                 'no-refund-found'       => '未找到退款',
-                'new-invoice'           => '新发票',
                 'order-date'            => '订单日期',
                 'order-status'          => '订单状态',
                 'order-information'     => '订单信息',
@@ -202,7 +199,6 @@ return [
                 'payment-method'        => '付款方式',
                 'per-unit'              => '每单位',
                 'quantity'              => '数量',
-                'qty-to-invoiced'       => '待开票数量',
                 'refunded'              => '已退款',
                 'refund-id'             => '退款 #:refund',
                 'refund'                => '退款',
@@ -422,11 +418,18 @@ return [
                 'tax'                    => '税额 - :tax',
             ],
 
-            'create'   => [
-                'creation-error' => '不允许创建订单发票。',
-                'create-success' => '发票创建成功',
-                'invalid-qty'    => '我们发现了无效的商品数量要开发票。',
-                'product-error'  => '没有产品的情况下无法创建发票。',
+            'create' => [
+                'invoice'         => '发票',
+                'create-invoice'  => '创建发票',
+                'new-invoice'     => '新发票',
+                'product-image'   => '产品图片',
+                'amount-per-unit' => ':amount 每单位 x :qty 数量',
+                'sku'             => 'SKU - :sku',
+                'qty-to-invoiced' => '要开具发票的数量',
+                'creation-error'  => '不允许创建订单发票。',
+                'create-success'  => '发票创建成功',
+                'invalid-qty'     => '我们发现了无效的数量以开具发票。',
+                'product-error'   => '没有产品无法创建发票。',
             ],
 
             'invoice-pdf' => [
@@ -2557,6 +2560,7 @@ return [
                 'footer-link'                   => '页脚链接',
                 'footer-link-form-title'        => '页脚链接',
                 'slider-description'            => '与轮播相关的主题定制。',
+                'slider-required'               => '滑块字段是必需的。',
                 'slider-add-btn'                => '添加轮播',
                 'general'                       => '通用',
                 'add-filter-btn'                => '添加过滤器',
@@ -2682,13 +2686,6 @@ return [
                         'allow-guest-checkout-hint' => '提示：如果启用，可以为每个产品单独配置此选项。',
                         'title'                     => '访客结账',
                         'title-info'                => '访客结账允许客户在不创建帐户的情况下购买产品，以方便和加快交易过程。',
-                    ],
-
-                    'homepage' => [
-                        'allow-no-of-new-products'       => '主页上的新产品数量限制',
-                        'allow-no-of-featured-products'  => '主页上的精选产品数量限制',
-                        'title'                          => '主页配置',
-                        'title-info'                     => '主页配置涉及自定义网站主页的布局、内容和设计，以有效呈现所需的信息。',
                     ],
 
                     'product-view-page' => [
@@ -3280,6 +3277,7 @@ return [
         'events'                   => '事件',
         'sitemaps'                 => '站点地图',
         'newsletter-subscriptions' => '电子报订阅',
+        'transactions'             => '交易',
     ],
 
     'errors' => [

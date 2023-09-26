@@ -224,7 +224,7 @@
                     :title="review.name"
                 >
                     <span
-                        class="text-[24px] text-[#7D7D7D] font-semibold"
+                        class="text-[24px] text-[#6E6E6E] font-semibold"
                         v-text="review.name.split(' ').map(name => name.charAt(0).toUpperCase()).join('')"
                     >
                     </span>
@@ -255,13 +255,13 @@
                 </p>
 
                 <p
-                    class="mt-[20px] text-[16px] text-[#7D7D7D] font-semibold max-sm:text-[12px]"
+                    class="mt-[20px] text-[16px] text-[#6E6E6E] font-semibold max-sm:text-[12px]"
                     v-text="review.title"
                 >
                 </p>
 
                 <p
-                    class="mt-[20px] text-[16px] text-[#7D7D7D] max-sm:text-[12px]"
+                    class="mt-[20px] text-[16px] text-[#6E6E6E] max-sm:text-[12px]"
                     v-text="review.comment"
                 >
                 </p>

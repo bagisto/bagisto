@@ -32,7 +32,7 @@
 				@lang('shop::app.checkout.success.thanks')
 			</p>
 			
-			<p class="text-[20px] text-[#7D7D7D]">
+			<p class="text-[20px] text-[#6E6E6E]">
 				@lang('shop::app.checkout.success.info')
 			</p>
 

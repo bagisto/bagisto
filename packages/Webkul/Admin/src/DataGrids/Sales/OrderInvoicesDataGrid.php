@@ -109,13 +109,15 @@ class OrderInvoicesDataGrid extends DataGrid
      */
     public function prepareActions()
     {
-        $this->addAction([
-            'icon'   => 'icon-view',
-            'title'  => trans('admin::app.sales.invoices.index.datagrid.view'),
-            'method' => 'GET',
-            'url'    => function ($row) {
-                return route('admin.sales.invoices.view', $row->id);
-            },
-        ]);
+        if (bouncer()->hasPermission('sales.invoices.view')) {
+            $this->addAction([
+                'icon'   => 'icon-view',
+                'title'  => trans('admin::app.sales.invoices.index.datagrid.view'),
+                'method' => 'GET',
+                'url'    => function ($row) {
+                    return route('admin.sales.invoices.view', $row->id);
+                },
+            ]);
+        }
     }
 }

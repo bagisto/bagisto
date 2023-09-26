@@ -175,7 +175,6 @@ return [
                 'comment-success'       => 'Kommentar erfolgreich hinzugefügt.',
                 'create-success'        => 'Bestellung erfolgreich erstellt',
                 'cancel-success'        => 'Bestellung erfolgreich storniert',
-                'create-invoice'        => 'Rechnung erstellen',
                 'discount'              => 'Rabatt - :discount',
                 'download-pdf'          => 'PDF herunterladen',
                 'grand-total'           => 'Gesamtsumme - :grand_total',
@@ -185,7 +184,6 @@ return [
                 'item-shipped'          => 'Versandt (:qty_shipped)',
                 'item-canceled'         => 'Storniert (:qty_canceled)',
                 'item-refunded'         => 'Erstattet (:qty_refunded)',
-                'invoice'               => 'Rechnung',
                 'invoice-id'            => 'Rechnung #:invoice',
                 'invoices'              => 'Rechnungen',
                 'notify-customer'       => 'Kunde benachrichtigen',
@@ -193,7 +191,6 @@ return [
                 'no-shipment-found'     => 'Keine Sendungen gefunden',
                 'name'                  => 'Name',
                 'no-refund-found'       => 'Keine Rückerstattung gefunden',
-                'new-invoice'           => 'Neue Rechnung',
                 'order-date'            => 'Bestelldatum',
                 'order-status'          => 'Bestellstatus',
                 'order-information'     => 'Bestellinformationen',
@@ -202,7 +199,6 @@ return [
                 'payment-method'        => 'Zahlungsmethode',
                 'per-unit'              => 'Pro Einheit',
                 'quantity'              => 'Menge',
-                'qty-to-invoiced'       => 'Menge zur Rechnungsstellung',
                 'refunded'              => 'Erstattet',
                 'refund-id'             => 'Rückerstattung #:refund',
                 'refund'                => 'Rückerstattung',
@@ -423,10 +419,17 @@ return [
             ],
 
             'create' => [
-                'creation-error' => 'Die Erstellung der Bestellrechnung ist nicht erlaubt.',
-                'create-success' => 'Rechnung erfolgreich erstellt',
-                'invalid-qty'    => 'Es wurde eine ungültige Menge zum Rechnungsstellen von Artikeln gefunden.',
-                'product-error'  => 'Rechnung kann nicht ohne Produkte erstellt werden.',
+                'invoice'         => 'Rechnung',
+                'create-invoice'  => 'Rechnung erstellen',
+                'new-invoice'     => 'Neue Rechnung',
+                'product-image'   => 'Produktbild',
+                'amount-per-unit' => ':amount pro Einheit x :qty Menge',
+                'sku'             => 'Artikelnummer - :sku',
+                'qty-to-invoiced' => 'Menge zur Rechnungsstellung',
+                'creation-error'  => 'Die Erstellung der Auftragsrechnung ist nicht erlaubt.',
+                'create-success'  => 'Rechnung erfolgreich erstellt',
+                'invalid-qty'     => 'Ungültige Menge für Rechnungspositionen gefunden.',
+                'product-error'   => 'Rechnung kann nicht ohne Produkte erstellt werden.',
             ],
 
             'invoice-pdf' => [
@@ -656,7 +659,6 @@ return [
                             'status'          => 'Status',
                             'weight'          => 'Gewicht',
                             'images'          => 'Bilder',
-
                         ],
 
                         'mass-edit' => [
@@ -2558,6 +2560,7 @@ return [
                 'footer-link'                   => 'Fußzeilenlinks',
                 'footer-link-form-title'        => 'Fußzeilenlink',
                 'slider-description'            => 'Mit diesem Thema können Sie Slider anpassen.',
+                'slider-required'               => 'Slider-Feld ist erforderlich.',
                 'slider-add-btn'                => 'Slider hinzufügen',
                 'general'                       => 'Allgemein',
                 'add-filter-btn'                => 'Filter hinzufügen',
@@ -2683,13 +2686,6 @@ return [
                         'allow-guest-checkout-hint' => 'Hinweis: Wenn aktiviert, kann diese Option für jedes Produkt speziell konfiguriert werden.',
                         'title'                     => 'Gastbestellung',
                         'title-info'                => 'Die Gastbestellung ermöglicht es Kunden, Produkte zu kaufen, ohne ein Konto zu erstellen, und erleichtert den Kaufprozess für Bequemlichkeit und schnellere Transaktionen.',
-                    ],
-
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'Zulässige Anzahl neuer Produkte auf der Startseite',
-                        'allow-no-of-featured-products'  => 'Zulässige Anzahl der vorgestellten Produkte auf der Startseite',
-                        'title'                          => 'Startseitenkonfiguration',
-                        'title-info'                     => 'Die Konfiguration der Startseite beinhaltet die Anpassung des Layouts, des Inhalts und des Designs der Hauptseite einer Website, um gewünschte Informationen effektiv zu präsentieren.',
                     ],
 
                     'product-view-page' => [
@@ -3281,6 +3277,7 @@ return [
         'events'                   => 'Ereignisse',
         'sitemaps'                 => 'Sitemaps',
         'newsletter-subscriptions' => 'Newsletter-Abonnements',
+        'transactions'             => 'Transaktionen',
     ],
 
     'errors' => [

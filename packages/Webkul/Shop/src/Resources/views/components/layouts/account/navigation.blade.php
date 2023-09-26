@@ -29,7 +29,7 @@
         <div class="flex flex-col justify-between">
             <p class="text-[25px] font-mediums">Hello! {{ $customer->first_name }}</p>
 
-            <p class="text-[#7D7D7D] ">{{ $customer->email }}</p>
+            <p class="text-[#6E6E6E] ">{{ $customer->email }}</p>
         </div>
     </div>
 

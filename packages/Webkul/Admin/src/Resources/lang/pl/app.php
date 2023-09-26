@@ -175,7 +175,6 @@ return [
                 'comment-success'       => 'Komentarz dodany pomyślnie.',
                 'create-success'        => 'Zamówienie utworzone pomyślnie',
                 'cancel-success'        => 'Zamówienie zostało pomyślnie anulowane',
-                'create-invoice'        => 'Utwórz fakturę',
                 'discount'              => 'Rabat - :discount',
                 'download-pdf'          => 'Pobierz PDF',
                 'grand-total'           => 'Suma ogólna - :grand_total',
@@ -185,7 +184,6 @@ return [
                 'item-shipped'          => 'Wysłane (:qty_shipped)',
                 'item-canceled'         => 'Anulowane (:qty_canceled)',
                 'item-refunded'         => 'Zwrócone (:qty_refunded)',
-                'invoice'               => 'Faktura',
                 'invoice-id'            => 'Faktura #:invoice',
                 'invoices'              => 'Faktury',
                 'notify-customer'       => 'Powiadom klienta',
@@ -193,7 +191,6 @@ return [
                 'no-shipment-found'     => 'Nie znaleziono przesyłek',
                 'name'                  => 'Nazwa',
                 'no-refund-found'       => 'Nie znaleziono zwrotów',
-                'new-invoice'           => 'Nowa faktura',
                 'order-date'            => 'Data zamówienia',
                 'order-status'          => 'Status zamówienia',
                 'order-information'     => 'Informacje o zamówieniu',
@@ -202,7 +199,6 @@ return [
                 'payment-method'        => 'Metoda płatności',
                 'per-unit'              => 'Za jednostkę',
                 'quantity'              => 'Ilość',
-                'qty-to-invoiced'       => 'Ilość do zafakturowania',
                 'refunded'              => 'Zwrócone',
                 'refund-id'             => 'Zwrot #:refund',
                 'refund'                => 'Zwrot',
@@ -422,11 +418,18 @@ return [
                 'tax'                    => 'Kwota podatku - :tax',
             ],
 
-            'create'   => [
-                'creation-error' => 'Nie można utworzyć faktury zamówienia.',
-                'create-success' => 'Faktura utworzona pomyślnie',
-                'invalid-qty'    => 'Znaleziono nieprawidłową ilość pozycji do faktury.',
-                'product-error'  => 'Nie można utworzyć faktury bez produktów.',
+            'create' => [
+                'invoice'         => 'Faktura',
+                'create-invoice'  => 'Utwórz fakturę',
+                'new-invoice'     => 'Nowa faktura',
+                'product-image'   => 'Zdjęcie produktu',
+                'amount-per-unit' => ':amount Na jednostkę x :qty Ilość',
+                'sku'             => 'SKU - :sku',
+                'qty-to-invoiced' => 'Ilość do faktury',
+                'creation-error'  => 'Nie wolno tworzyć faktury zamówienia.',
+                'create-success'  => 'Faktura utworzona pomyślnie',
+                'invalid-qty'     => 'Znaleziono nieprawidłową ilość pozycji do faktury.',
+                'product-error'   => 'Nie można tworzyć faktury bez produktów.',
             ],
 
             'invoice-pdf' => [
@@ -2508,6 +2511,7 @@ return [
             'delete-failed'     => 'Usunięcie roli nie powiodło się',
             'being-used'        => 'Rola jest już używana przez Administratora',
         ],
+
         'themes' => [
             'index' => [
                 'title'      => 'Motywy',
@@ -2556,6 +2560,7 @@ return [
                 'footer-link'                   => 'Linki w Stopce',
                 'footer-link-form-title'        => 'Link w Stopce',
                 'slider-description'            => 'Dostosowanie motywu związane z sliderem.',
+                'slider-required'               => 'Pole suwaka jest wymagane.',
                 'slider-add-btn'                => 'Dodaj Slajd',
                 'general'                       => 'Ogólne',
                 'add-filter-btn'                => 'Dodaj Filtr',
@@ -2681,13 +2686,6 @@ return [
                         'allow-guest-checkout-hint' => 'Wskazówka: Jeśli jest włączone, opcję tę można skonfigurować dla każdego produktu osobno.',
                         'title'                     => 'Gościnne zakupy',
                         'title-info'                => 'Zakupy gości pozwalają klientom na zakup produktów bez konieczności zakładania konta, usprawniając proces zakupów dla wygody i szybszych transakcji.',
-                    ],
-
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'Dozwolona liczba nowych produktów na stronie głównej',
-                        'allow-no-of-featured-products'  => 'Dozwolona liczba wyróżnionych produktów na stronie głównej',
-                        'title'                          => 'Konfiguracja strony głównej',
-                        'title-info'                     => 'Konfiguracja strony głównej polega na dostosowywaniu układu, treści i projektu głównej strony internetowej w celu efektywnego przedstawiania pożądanych informacji.',
                     ],
 
                     'product-view-page' => [
@@ -3279,6 +3277,7 @@ return [
         'events'                   => 'Wydarzenia',
         'sitemaps'                 => 'Mapy Strony',
         'newsletter-subscriptions' => 'Subskrypcje Newslettera',
+        'transactions'             => 'Transakcje',
     ],
 
     'errors' => [

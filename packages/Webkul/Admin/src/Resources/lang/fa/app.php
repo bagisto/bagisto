@@ -175,7 +175,6 @@ return [
                 'comment-success'       => 'نظر با موفقیت افزوده شد.',
                 'create-success'        => 'سفارش با موفقیت ایجاد شد',
                 'cancel-success'        => 'سفارش با موفقیت لغو شد',
-                'create-invoice'        => 'ایجاد فاکتور',
                 'discount'              => 'تخفیف - :discount',
                 'download-pdf'          => 'دانلود PDF',
                 'grand-total'           => 'مجموع کل - :grand_total',
@@ -185,7 +184,6 @@ return [
                 'item-shipped'          => 'ارسال شده (:qty_shipped)',
                 'item-canceled'         => 'لغو شده (:qty_canceled)',
                 'item-refunded'         => 'بازپرداخت شده (:qty_refunded)',
-                'invoice'               => 'فاکتور',
                 'invoice-id'            => 'شماره فاکتور #:invoice',
                 'invoices'              => 'فاکتورها',
                 'notify-customer'       => 'آگاهی به مشتری',
@@ -193,7 +191,6 @@ return [
                 'no-shipment-found'     => 'ارسالی یافت نشد',
                 'name'                  => 'نام',
                 'no-refund-found'       => 'بازپرداختی یافت نشد',
-                'new-invoice'           => 'فاکتور جدید',
                 'order-date'            => 'تاریخ سفارش',
                 'order-status'          => 'وضعیت سفارش',
                 'order-information'     => 'اطلاعات سفارش',
@@ -202,7 +199,6 @@ return [
                 'payment-method'        => 'روش پرداخت',
                 'per-unit'              => 'در واحد',
                 'quantity'              => 'تعداد',
-                'qty-to-invoiced'       => 'تعداد برای فاکتور',
                 'refunded'              => 'بازپرداخت',
                 'refund-id'             => 'بازپرداخت #:refund',
                 'refund'                => 'بازپرداخت',
@@ -422,11 +418,18 @@ return [
                 'tax'                    => 'مقدار مالیات - :tax',
             ],
 
-            'create'   => [
-                'creation-error' => 'ایجاد صورتحساب سفارش مجاز نمی‌باشد.',
-                'create-success' => 'صورتحساب با موفقیت ایجاد شد',
-                'invalid-qty'    => 'تعداد نامعتبری برای صورتحساب کردن موارد پیدا کردیم.',
-                'product-error'  => 'صورتحساب نمی‌تواند بدون محصولات ایجاد شود.',
+            'create' => [
+                'invoice'         => 'فاکتور',
+                'create-invoice'  => 'ساخت فاکتور',
+                'new-invoice'     => 'فاکتور جدید',
+                'product-image'   => 'تصویر محصول',
+                'amount-per-unit' => ':amount در هر واحد x :qty تعداد',
+                'sku'             => 'کد محصول - :sku',
+                'qty-to-invoiced' => 'تعداد جهت فاکتور',
+                'creation-error'  => 'ساخت فاکتور سفارش مجاز نمی‌باشد.',
+                'create-success'  => 'فاکتور با موفقیت ایجاد شد',
+                'invalid-qty'     => 'ما تعداد نامعتبری برای محصولات جهت فاکتور یافتیم.',
+                'product-error'   => 'فاکتور بدون محصول نمی‌تواند ایجاد شود.',
             ],
 
             'invoice-pdf' => [
@@ -2557,6 +2560,7 @@ return [
                 'footer-link'                   => 'پیوندهای پایین صفحه',
                 'footer-link-form-title'        => 'پیوند پایین صفحه',
                 'slider-description'            => 'سفارشی‌سازی مرتبط با اسلایدر.',
+                'slider-required'               => 'فیلد اسلایدر الزامی است.',
                 'slider-add-btn'                => 'افزودن اسلایدر',
                 'general'                       => 'عمومی',
                 'add-filter-btn'                => 'افزودن فیلتر',
@@ -2682,13 +2686,6 @@ return [
                         'allow-guest-checkout-hint' => 'نکته: در صورت فعال بودن، این گزینه برای هر محصول به طور جداگانه قابل پیکربندی است.',
                         'title'                     => 'خرید به عنوان مهمان',
                         'title-info'                => 'خرید به عنوان مهمان به مشتریان امکان خرید محصولات بدون ایجاد حساب کاربری را می‌دهد و فرآیند خرید را برای راحتی و تسریع در معاملات آسان می‌کند.',
-                    ],
-
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'حداکثر تعداد محصولات جدید در صفحه اصلی',
-                        'allow-no-of-featured-products'  => 'حداکثر تعداد محصولات ویژه در صفحه اصلی',
-                        'title'                          => 'پیکربندی صفحه اصلی',
-                        'title-info'                     => 'پیکربندی صفحه اصلی شامل تنظیم طراحی، محتوا و طرح صفحه اصلی وب‌سایت است تا اطلاعات مورد نظر به صورت مؤثر ارائه شود.',
                     ],
 
                     'product-view-page' => [
@@ -3280,6 +3277,7 @@ return [
         'events'                   => 'رویدادها',
         'sitemaps'                 => 'نقشه‌های سایت',
         'newsletter-subscriptions' => 'اشتراک خبرنامه',
+        'transactions'             => 'تراکنش‌ها',
     ],
 
     'errors' => [

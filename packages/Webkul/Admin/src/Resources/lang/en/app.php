@@ -175,7 +175,6 @@ return [
                 'comment-success'       => 'Comment added successfully.',
                 'create-success'        => 'Order created successfully',
                 'cancel-success'        => 'Order cancelled successfully',
-                'create-invoice'        => 'Create Invoice',
                 'discount'              => 'Discount - :discount',
                 'download-pdf'          => 'Download PDF',
                 'grand-total'           => 'Grand Total - :grand_total',
@@ -185,7 +184,6 @@ return [
                 'item-shipped'          => 'Shipped (:qty_shipped)',
                 'item-canceled'         => 'Canceled (:qty_canceled)',
                 'item-refunded'         => 'Refunded (:qty_refunded)',
-                'invoice'               => 'Invoice',
                 'invoice-id'            => 'Invoice #:invoice',
                 'invoices'              => 'Invoices',
                 'notify-customer'       => 'Notify Customer',
@@ -193,7 +191,6 @@ return [
                 'no-shipment-found'     => 'No Shipments Found',
                 'name'                  => 'Name',
                 'no-refund-found'       => 'No Refund Found',
-                'new-invoice'           => 'New Invoice',
                 'order-date'            => 'Order Date',
                 'order-status'          => 'Order Status',
                 'order-information'     => 'Order Information',
@@ -202,7 +199,6 @@ return [
                 'payment-method'        => 'Payment method',
                 'per-unit'              => 'Per Unit',
                 'quantity'              => 'Quantity',
-                'qty-to-invoiced'       => 'Qty. to invoiced',
                 'refunded'              => 'Refunded',
                 'refund-id'             => 'Refund #:refund',
                 'refund'                => 'Refund',
@@ -423,6 +419,13 @@ return [
             ],
 
             'create'   => [
+                'invoice'         => 'Invoice',
+                'create-invoice'  => 'Create Invoice',
+                'new-invoice'     => 'New Invoice',
+                'product-image'   => 'Product Image',
+                'amount-per-unit' => ':amount Per Unit x :qty Quantity',
+                'sku'             => 'SKU - :sku',
+                'qty-to-invoiced' => 'Qty. to invoiced',
                 'creation-error' => 'Order invoice creation is not allowed.',
                 'create-success' => 'Invoice created successfully',
                 'invalid-qty'    => 'We found an invalid quantity to invoice items.',
@@ -2434,8 +2437,6 @@ return [
                 'edit'  => [
                     'title'    => 'Edit User',
                 ],
-
-                
             ],
 
             'edit'  => [
@@ -2543,7 +2544,6 @@ return [
                     'image-carousel'    => 'Slider Carousel',
                     'footer-links'      => 'Footer Links',
                 ],
-                'add-image-btn'                 => 'Add Image',
             ],
 
             'edit' => [
@@ -2560,6 +2560,7 @@ return [
                 'footer-link'                   => 'Footer Links',
                 'footer-link-form-title'        => 'Footer Link',
                 'slider-description'            => 'Slider related theme customization.',
+                'slider-required'               => 'Slider field is Required.',
                 'slider-add-btn'                => 'Add Slider',
                 'add-image-btn'                 => 'Add Image',
                 'general'                       => 'General',
@@ -2685,13 +2686,6 @@ return [
                         'allow-guest-checkout-hint' => 'Hint: If turned on, this option can be configured for each product specifically.',
                         'title'                     => 'Guest Checkout',
                         'title-info'                => 'Guest checkout allows customers to buy products without creating an account, streamlining the purchase process for convenience and faster transactions.',
-                    ],
-
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'Allowed number of New Product in Homepage',
-                        'allow-no-of-featured-products'  => 'Allowed number of Featured Product in Homepage',
-                        'title'                          => 'Homepage configuration',
-                        'title-info'                     => 'Homepage configuration involves customizing the layout, content, and design of a website’s main page to present desired information effectively.',
                     ],
 
                     'product-view-page' => [
@@ -3283,6 +3277,7 @@ return [
         'events'                   => 'Events',
         'sitemaps'                 => 'Sitemaps',
         'newsletter-subscriptions' => 'Newsletter Subscriptions',
+        'transactions'             => 'Transactions',
     ],
 
     'errors' => [

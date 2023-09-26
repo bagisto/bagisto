@@ -175,7 +175,6 @@ return [
                 'comment-success'       => 'Yorum başarıyla eklendi.',
                 'create-success'        => 'Sipariş başarıyla oluşturuldu',
                 'cancel-success'        => 'Sipariş başarıyla iptal edildi',
-                'create-invoice'        => 'Fatura Oluştur',
                 'discount'              => 'İndirim - :discount',
                 'download-pdf'          => 'PDF İndir',
                 'grand-total'           => 'Genel Toplam - :grand_total',
@@ -185,7 +184,6 @@ return [
                 'item-shipped'          => 'Gönderildi (:qty_shipped)',
                 'item-canceled'         => 'İptal Edildi (:qty_canceled)',
                 'item-refunded'         => 'İade Edildi (:qty_refunded)',
-                'invoice'               => 'Fatura',
                 'invoice-id'            => 'Fatura #:invoice',
                 'invoices'              => 'Faturalar',
                 'notify-customer'       => 'Müşteriyi Bilgilendir',
@@ -193,7 +191,6 @@ return [
                 'no-shipment-found'     => 'Gönderim Bulunamadı',
                 'name'                  => 'Ad',
                 'no-refund-found'       => 'İade Bulunamadı',
-                'new-invoice'           => 'Yeni Fatura',
                 'order-date'            => 'Sipariş Tarihi',
                 'order-status'          => 'Sipariş Durumu',
                 'order-information'     => 'Sipariş Bilgileri',
@@ -202,7 +199,6 @@ return [
                 'payment-method'        => 'Ödeme Yöntemi',
                 'per-unit'              => 'Birim Başı',
                 'quantity'              => 'Miktar',
-                'qty-to-invoiced'       => 'Faturalanacak Miktar',
                 'refunded'              => 'İade Edildi',
                 'refund-id'             => 'İade #:refund',
                 'refund'                => 'İade',
@@ -422,11 +418,18 @@ return [
                 'tax'                    => 'Vergi Tutarı - :tax',
             ],
 
-            'create'   => [
-                'creation-error' => 'Sipariş faturası oluşturulamaz.',
-                'create-success' => 'Fatura başarıyla oluşturuldu',
-                'invalid-qty'    => 'Faturalandırılacak ürünlerde geçersiz miktar bulduk.',
-                'product-error'  => 'Ürün olmadan fatura oluşturulamaz.',
+            'create' => [
+                'invoice'         => 'Fatura',
+                'create-invoice'  => 'Fatura Oluştur',
+                'new-invoice'     => 'Yeni Fatura',
+                'product-image'   => 'Ürün Resmi',
+                'amount-per-unit' => ':amount Birim Başına x :qty Miktar',
+                'sku'             => 'SKU - :sku',
+                'qty-to-invoiced' => 'Faturalanacak Miktar',
+                'creation-error'  => 'Sipariş faturası oluşturulamaz.',
+                'create-success'  => 'Fatura başarıyla oluşturuldu',
+                'invalid-qty'     => 'Faturalanacak öğeler için geçersiz miktar bulduk.',
+                'product-error'   => 'Ürün olmadan fatura oluşturulamaz.',
             ],
 
             'invoice-pdf' => [
@@ -619,7 +622,6 @@ return [
                     'empty-info'        => ':type ürünleri eklemek için.',
                     'sku'               => 'SKU - :sku',
                     'image-placeholder' => 'Ürün Resmi',
-
                 ],
 
                 'types' => [
@@ -2559,6 +2561,7 @@ return [
                 'footer-link'                   => 'Footer Bağlantıları',
                 'footer-link-form-title'        => 'Footer Bağlantısı',
                 'slider-description'            => 'Slider ile ilgili tema özelleştirmesi.',
+                'slider-required'               => 'Slider alanı gereklidir.',
                 'slider-add-btn'                => 'Slider Ekle',
                 'general'                       => 'Genel',
                 'add-filter-btn'                => 'Filtre Ekle',
@@ -2683,13 +2686,6 @@ return [
                         'allow-guest-checkout-hint' => 'İpucu: Açıkken, bu seçenek her ürün için özelleştirilebilir.',
                         'title'                     => 'Misafir Ödemesi',
                         'title-info'                => 'Misafir ödemesi, müşterilere hesap oluşturmadan ürün satın alma olanağı sunar, işlemi kolaylaştırır ve daha hızlı işlemler için.',
-                    ],
-
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'Ana Sayfadaki Yeni Ürün Sayısına İzin Ver',
-                        'allow-no-of-featured-products'  => 'Ana Sayfadaki Öne Çıkan Ürün Sayısına İzin Ver',
-                        'title'                          => 'Ana Sayfa yapılandırması',
-                        'title-info'                     => 'Ana sayfa yapılandırması, istenen bilgiyi etkili bir şekilde sunmak için bir web sitesinin ana sayfasının düzenini, içeriğini ve tasarımını özelleştirmeyi içerir.',
                     ],
 
                     'product-view-page' => [
@@ -3281,6 +3277,7 @@ return [
         'events'                   => 'Etkinlikler',
         'sitemaps'                 => 'Site Haritaları',
         'newsletter-subscriptions' => 'Bülten Abonelikleri',
+        'transactions'             => 'İşlemler',
     ],
 
     'errors' => [

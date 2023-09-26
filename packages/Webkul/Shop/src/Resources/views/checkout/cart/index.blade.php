@@ -1,3 +1,10 @@
+{{-- SEO Meta Content --}}
+@push('meta')
+    <meta name="description" content="@lang('shop::app.checkout.cart.index.cart')"/>
+
+    <meta name="keywords" content="@lang('shop::app.checkout.cart.index.cart')"/>
+@endPush
+
 <x-shop::layouts
     :has-header="false"
     :has-feature="false"
@@ -15,9 +22,11 @@
                 <a
                     href="{{ route('shop.home.index') }}"
                     class="flex min-h-[30px]"
+                    aria-label="Bagisto "
                 >
                     <img
                         src="{{ bagisto_asset('images/logo.svg') }}"
+                        alt="Bagisto "
                         width="131"
                         height="29"
                     >
@@ -122,11 +131,16 @@
                                         </div>
 
                                         <!-- Cart Item Image -->
-                                        <x-shop::shimmer.image
+                                        <x-shop::media.images.lazy
                                             class="h-[110px] min-w-[110px] max-w[110px] rounded-[12px]"
                                             ::src="item.base_image.small_image_url"
+                                            ::alt="item.name"
+                                            width="110"
+                                            height="110"
+                                            ::key="item.id"
+                                            ::index="item.id"
                                         >
-                                        </x-shop::shimmer.image>
+                                        </x-shop::media.images.lazy>
 
                                         <!-- Cart Item Options Container -->
                                         <div class="grid place-content-start gap-y-[10px]">
@@ -222,12 +236,12 @@
                                     @lang('shop::app.checkout.cart.index.continue-shopping')
                                 </a> 
 
-                                <a 
+                                <button
                                     class="secondary-button max-h-[55px] rounded-[18px]"
                                     @click="update()"
                                 >
                                     @lang('shop::app.checkout.cart.index.update-cart')
-                                </a>
+                                </button>
                             </div>
                         </div>
 

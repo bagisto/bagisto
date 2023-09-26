@@ -175,7 +175,6 @@ return [
                 'comment-success'       => 'Commento aggiunto con successo.',
                 'create-success'        => 'Ordine creato con successo',
                 'cancel-success'        => 'Ordine annullato con successo',
-                'create-invoice'        => 'Crea Fattura',
                 'discount'              => 'Sconto - :discount',
                 'download-pdf'          => 'Scarica PDF',
                 'grand-total'           => 'Totale Generale - :grand-total ',
@@ -185,7 +184,6 @@ return [
                 'item-shipped'          => 'Spediti (:qty_shipped)',
                 'item-canceled'         => 'Annullati (:qty_canceled)',
                 'item-refunded'         => 'Rimborsati (:qty_refunded)',
-                'invoice'               => 'Fattura',
                 'invoice-id'            => 'Fattura #:invoice',
                 'invoices'              => 'Fatture',
                 'notify-customer'       => 'Avvisa Cliente',
@@ -193,7 +191,6 @@ return [
                 'no-shipment-found'     => 'Nessuna Spedizione Trovata',
                 'name'                  => 'Nome',
                 'no-refund-found'       => 'Nessun Rimborso Trovato',
-                'new-invoice'           => 'Nuova Fattura',
                 'order-date'            => 'Data Ordine',
                 'order-status'          => 'Stato Ordine',
                 'order-information'     => 'Informazioni sull\'Ordine',
@@ -202,7 +199,6 @@ return [
                 'payment-method'        => 'Metodo di Pagamento',
                 'per-unit'              => 'Per Unità',
                 'quantity'              => 'Quantità',
-                'qty-to-invoiced'       => 'Qtà da Fatturare',
                 'refunded'              => 'Rimborsato',
                 'refund-id'             => 'Rimborso #:refund',
                 'refund'                => 'Rimborso',
@@ -422,11 +418,18 @@ return [
                 'tax'                    => 'Importo Tasse - :tax',
             ],
 
-            'create'   => [
-                'creation-error' => 'Creazione Fattura dell\'Ordine non consentita.',
-                'create-success' => 'Fattura creata con successo',
-                'invalid-qty'    => 'Abbiamo riscontrato una quantità non valida per gli articoli da fatturare.',
-                'product-error'  => 'La Fattura non può essere creata senza prodotti.',
+            'create' => [
+                'invoice'         => 'Fattura',
+                'create-invoice'  => 'Crea Fattura',
+                'new-invoice'     => 'Nuova Fattura',
+                'product-image'   => 'Immagine Prodotto',
+                'amount-per-unit' => ':amount Per Unità x :qty Quantità',
+                'sku'             => 'SKU - :sku',
+                'qty-to-invoiced' => 'Quantità da fatturare',
+                'creation-error'  => "La creazione della fattura dell'ordine non è consentita.",
+                'create-success'  => 'Fattura creata con successo',
+                'invalid-qty'     => 'Abbiamo trovato una quantità non valida per gli articoli da fatturare.',
+                'product-error'   => 'Non è possibile creare una fattura senza prodotti.',
             ],
 
             'invoice-pdf' => [
@@ -2288,7 +2291,6 @@ return [
                     'basic-settings'  => 'Impostazioni di Base',
                     'country'         => 'Paese',
                     'back-btn'        => 'Indietro',
-                    'is_zip'          => 'Abilita Intervallo di CAP',
                     'identifier'      => 'Identificatore',
                     'select-country'  => 'Seleziona Paese',
                     'select-state'    => 'Seleziona Stato',
@@ -2514,6 +2516,7 @@ return [
             'index' => [
                 'title'      => 'Temas',
                 'create-btn' => 'Crear Tema',
+
                 'datagrid'   => [
                     'view'         => 'Vedi',
                     'delete'       => 'Elimina',
@@ -2557,6 +2560,7 @@ return [
                 'footer-link'                   => 'Enlaces del Pie de Página',
                 'footer-link-form-title'        => 'Enlace del Pie de Página',
                 'slider-description'            => 'Personalización del tema relacionada con los sliders.',
+                'slider-required'               => 'Il campo del cursore è obbligatorio.',
                 'slider-add-btn'                => 'Agregar Slider',
                 'general'                       => 'General',
                 'add-filter-btn'                => 'Agregar Filtro',
@@ -2682,13 +2686,6 @@ return [
                         'allow-guest-checkout-hint' => 'Suggerimento: se attivato, questa opzione può essere configurata per ciascun prodotto in modo specifico.',
                         'title'                     => 'Checkout per gli Ospiti',
                         'title-info'                => 'Il checkout per gli ospiti consente ai clienti di acquistare prodotti senza creare un account, semplificando il processo di acquisto per comodità e transazioni più veloci.',
-                    ],
-
-                    'homepage' => [
-                        'allow-no-of-new-products'      => 'Numero Consentito di Nuovi Prodotti in Homepage',
-                        'allow-no-of-featured-products' => 'Numero Consentito di Prodotti in Primo Piano in Homepage',
-                        'title'                         => 'Configurazione Homepage',
-                        'title-info'                    => 'La configurazione della homepage consiste nella personalizzazione del layout, del contenuto e del design della pagina principale di un sito web per presentare in modo efficace le informazioni desiderate.',
                     ],
 
                     'product-view-page' => [
@@ -2938,6 +2935,7 @@ return [
                         'status'      => 'Stato',
                         'title-info'  => '"Spedizione gratuita" si riferisce a un metodo di spedizione in cui il costo della spedizione viene annullato e il venditore copre le spese di spedizione per la consegna di merci all\'acquirente.',
                         'title'       => 'Titolo',
+                        'type'        => 'Tipo',
                     ],
 
                     'flat-rate-shipping' => [
@@ -3279,6 +3277,7 @@ return [
         'events'                   => 'Eventi',
         'sitemaps'                 => 'Sitemap',
         'newsletter-subscriptions' => 'Iscrizioni alla Newsletter',
+        'transactions'             => 'Transazioni',
     ],
 
     'errors' => [

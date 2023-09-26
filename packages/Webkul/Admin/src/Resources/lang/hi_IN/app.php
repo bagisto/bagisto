@@ -175,7 +175,6 @@ return [
                 'comment-success'       => 'टिप्पणी सफलतापूर्वक जोड़ी गई।',
                 'create-success'        => 'आदेश सफलतापूर्वक बनाया गया',
                 'cancel-success'        => 'आदेश सफलतापूर्वक रद्द किया गया',
-                'create-invoice'        => 'चालान बनाएं',
                 'discount'              => 'डिस्काउंट - :discount',
                 'download-pdf'          => 'पीडीएफ डाउनलोड करें',
                 'grand-total'           => 'कुल योग - :grand_total',
@@ -185,7 +184,6 @@ return [
                 'item-shipped'          => 'भेजा गया (:qty_shipped)',
                 'item-canceled'         => 'रद्द किया गया (:qty_canceled)',
                 'item-refunded'         => 'वापस किया गया (:qty_refunded)',
-                'invoice'               => 'चालान',
                 'invoice-id'            => 'चालान #:invoice',
                 'invoices'              => 'चालान',
                 'notify-customer'       => 'ग्राहक को सूचित करें',
@@ -193,7 +191,6 @@ return [
                 'no-shipment-found'     => 'कोई भेजवाने के लिए नहीं मिला',
                 'name'                  => 'नाम',
                 'no-refund-found'       => 'कोई वापसी नहीं मिली',
-                'new-invoice'           => 'नया चालान',
                 'order-date'            => 'आदेश की तारीख',
                 'order-status'          => 'आदेश की स्थिति',
                 'order-information'     => 'आदेश की जानकारी',
@@ -202,7 +199,6 @@ return [
                 'payment-method'        => 'भुगतान विधि',
                 'per-unit'              => 'प्रति इकाई',
                 'quantity'              => 'मात्रा',
-                'qty-to-invoiced'       => 'चालान के लिए मात्रा',
                 'refunded'              => 'वापसी की गई',
                 'refund-id'             => 'वापसी #:refund',
                 'refund'                => 'वापसी',
@@ -423,10 +419,17 @@ return [
             ],
 
             'create' => [
-                'creation-error' => 'आदेश चालान निर्माण अनुमति देने के लिए उपलब्ध नहीं है।',
-                'create-success' => 'चालान सफलतापूर्वक बनाया गया',
-                'invalid-qty'    => 'हमने चालान आइटम्स के लिए एक अवैध मात्रा पाई है।',
-                'product-error'  => 'उत्पादों के बिना चालान नहीं बना सकता है।',
+                'invoice'         => 'चालान',
+                'create-invoice'  => 'चालान बनाएं',
+                'new-invoice'     => 'नया चालान',
+                'product-image'   => 'उत्पाद छवि',
+                'amount-per-unit' => ':amount प्रति इकाई x :qty मात्रा',
+                'sku'             => 'SKU - :sku',
+                'qty-to-invoiced' => 'चालान करने की मात्रा',
+                'creation-error'  => 'आदेश चालान निर्माण अनुमति नहीं है।',
+                'create-success'  => 'चालान सफलतापूर्वक बनाया गया',
+                'invalid-qty'     => 'हमने चालान करने के लिए अमान्य मात्रा पाई है।',
+                'product-error'   => 'माल बिना चालान नहीं बना सकता।',
             ],
 
             'invoice-pdf' => [
@@ -2557,6 +2560,7 @@ return [
                 'footer-link'                   => 'फ़ुटर लिंक',
                 'footer-link-form-title'        => 'फ़ुटर लिंक',
                 'slider-description'            => 'स्लाइडर से संबंधित थीम अनुकूलन।',
+                'slider-required'               => 'स्लाइडर क्षेत्र आवश्यक है।',
                 'slider-add-btn'                => 'स्लाइडर जोड़ें',
                 'general'                       => 'सामान्य',
                 'add-filter-btn'                => 'फ़िल्टर जोड़ें',
@@ -2682,13 +2686,6 @@ return [
                         'allow-guest-checkout-hint' => 'सुझाव: यदि इसे चालित किया गया है, तो इस विकल्प को प्रत्येक प्रोडक्ट के लिए विशेष रूप से कॉन्फ़िगर किया जा सकता है।',
                         'title'                     => 'मेहमान चेकआउट',
                         'title-info'                => 'मेहमान चेकआउट ग्राहकों को खाता बनाए बिना उत्पादों को खरीदने की अनुमति देता है, खरीदारी प्रक्रिया को सुविधाजनकता और तेज़ लेन-देन के लिए सुगम बनाता है।',
-                    ],
-
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'होमपेज में नए प्रोडक्ट की अनुमति है',
-                        'allow-no-of-featured-products'  => 'होमपेज में प्रमुख प्रोडक्ट की अनुमति है',
-                        'title'                          => 'होमपेज कॉन्फ़िगरेशन',
-                        'title-info'                     => 'होमपेज कॉन्फ़िगरेशन मुख्य पृष्ठ का डिज़ाइन, सामग्री और डिज़ाइन को कस्टमाइज करने में विशेष जानकारी को प्रभावी रूप से प्रस्तुत करने के लिए सुझावित जानकारी को समर्थन करता है।',
                     ],
 
                     'product-view-page' => [
@@ -3280,6 +3277,7 @@ return [
         'events'                   => 'इवेंट्स',
         'sitemaps'                 => 'साइटमैप्स',
         'newsletter-subscriptions' => 'न्यूजलेटर सब्सक्रिप्शन्स',
+        'transactions'             => 'लेन-देन',
     ],
 
     'errors' => [

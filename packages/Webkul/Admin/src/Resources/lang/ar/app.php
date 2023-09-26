@@ -175,7 +175,6 @@ return [
                 'comment-success'       => 'تمت إضافة التعليق بنجاح.',
                 'create-success'        => 'تم إنشاء الطلب بنجاح',
                 'cancel-success'        => 'تم إلغاء الطلب بنجاح',
-                'create-invoice'        => 'إنشاء فاتورة',
                 'discount'              => 'الخصم - :discount',
                 'download-pdf'          => 'تحميل PDF',
                 'grand-total'           => 'الإجمالي الكبير - :grand-total ',
@@ -185,7 +184,6 @@ return [
                 'item-shipped'          => 'تم الشحن (:qty_shipped)',
                 'item-canceled'         => 'تم الإلغاء (:qty_canceled)',
                 'item-refunded'         => 'تمت إعادة المبلغ (:qty_refunded)',
-                'invoice'               => 'الفاتورة',
                 'invoice-id'            => 'الفاتورة #:invoice',
                 'invoices'              => 'الفواتير',
                 'notify-customer'       => 'إعلام العميل',
@@ -193,7 +191,6 @@ return [
                 'no-shipment-found'     => 'لم يتم العثور على أي شحنات',
                 'name'                  => 'الاسم',
                 'no-refund-found'       => 'لم يتم العثور على أي مبالغ مستردة',
-                'new-invoice'           => 'فاتورة جديدة',
                 'order-date'            => 'تاريخ الطلب',
                 'order-status'          => 'حالة الطلب',
                 'order-information'     => 'معلومات الطلب',
@@ -202,7 +199,6 @@ return [
                 'payment-method'        => 'طريقة الدفع',
                 'per-unit'              => 'للوحدة',
                 'quantity'              => 'الكمية',
-                'qty-to-invoiced'       => 'الكمية للفوترة',
                 'refunded'              => 'تم الاسترداد',
                 'refund-id'             => 'الاسترداد #:refund',
                 'refund'                => 'استرداد',
@@ -422,11 +418,18 @@ return [
                 'tax'                    => 'مبلغ الضريبة - :tax',
             ],
 
-            'create'   => [
-                'creation-error' => 'إنشاء فاتورة الطلب غير مسموح به.',
-                'create-success' => 'تم إنشاء الفاتورة بنجاح',
-                'invalid-qty'    => 'تم العثور على كمية غير صالحة لفواتير العناصر.',
-                'product-error'  => 'لا يمكن إنشاء فاتورة بدون منتجات.',
+            'create' => [
+                'invoice'         => 'فاتورة',
+                'create-invoice'  => 'إنشاء فاتورة',
+                'new-invoice'     => 'فاتورة جديدة',
+                'product-image'   => 'صورة المنتج',
+                'amount-per-unit' => ':amount للوحدة x :qty الكمية',
+                'sku'             => 'SKU - :sku',
+                'qty-to-invoiced' => 'الكمية المراد فوترتها',
+                'creation-error'  => 'غير مسموح بإنشاء فاتورة الطلب.',
+                'create-success'  => 'تم إنشاء الفاتورة بنجاح',
+                'invalid-qty'     => 'تم العثور على كمية غير صالحة لفوترة العناصر.',
+                'product-error'   => 'لا يمكن إنشاء فاتورة بدون منتجات.',
             ],
 
             'invoice-pdf' => [
@@ -2558,6 +2561,7 @@ return [
                 'footer-link'                   => 'روابط التذييل',
                 'footer-link-form-title'        => 'روابط التذييل',
                 'slider-description'            => 'تخصيص السمة المتعلق بالشرائح.',
+                'slider-required'               => 'حقل الشريط مطلوب.',
                 'slider-add-btn'                => 'إضافة شريحة',
                 'general'                       => 'عام',
                 'add-filter-btn'                => 'إضافة مرشح',
@@ -2683,13 +2687,6 @@ return [
                         'allow-guest-checkout-hint' => 'تلميح: إذا تم تشغيل هذا الخيار، يمكن تكوينه لكل منتج على حدة.',
                         'title'                     => 'الشراء كضيف',
                         'title-info'                => 'السماح للعملاء بشراء المنتجات دون إنشاء حساب، مما يبسط عملية الشراء لتوفير الوقت والمرونة.',
-                    ],
-
-                    'homepage' => [
-                        'allow-no-of-new-products'      => 'العدد المسموح به من المنتجات الجديدة في الصفحة الرئيسية',
-                        'allow-no-of-featured-products' => 'العدد المسموح به من المنتجات المميزة في الصفحة الرئيسية',
-                        'title'                         => 'تكوين الصفحة الرئيسية',
-                        'title-info'                    => 'يتضمن تكوين الصفحة الرئيسية تخصيص تصميم ومحتوى الصفحة الرئيسية لعرض المعلومات المطلوبة بفعالية.',
                     ],
 
                     'product-view-page' => [
@@ -3280,6 +3277,7 @@ return [
         'events'                   => 'الأحداث',
         'sitemaps'                 => 'خرائط الموقع',
         'newsletter-subscriptions' => 'اشتراكات النشرة الإخبارية',
+        'transactions'             => 'المعاملات',
     ],
 
     'errors' => [

@@ -175,7 +175,6 @@ return [
                 'comment-success'       => 'Comentario agregado con éxito.',
                 'create-success'        => 'Pedido creado con éxito',
                 'cancel-success'        => 'Pedido cancelado con éxito',
-                'create-invoice'        => 'Crear Factura',
                 'discount'              => 'Descuento - :discount',
                 'download-pdf'          => 'Descargar PDF',
                 'grand-total'           => 'Total General - :grand_total',
@@ -185,7 +184,6 @@ return [
                 'item-shipped'          => 'Enviado (:qty_shipped)',
                 'item-canceled'         => 'Cancelado (:qty_canceled)',
                 'item-refunded'         => 'Reembolsado (:qty_refunded)',
-                'invoice'               => 'Factura',
                 'invoice-id'            => 'Factura #:invoice',
                 'invoices'              => 'Facturas',
                 'notify-customer'       => 'Notificar al Cliente',
@@ -193,7 +191,6 @@ return [
                 'no-shipment-found'     => 'No se encontraron envíos',
                 'name'                  => 'Nombre',
                 'no-refund-found'       => 'No se encontraron reembolsos',
-                'new-invoice'           => 'Nueva Factura',
                 'order-date'            => 'Fecha de Pedido',
                 'order-status'          => 'Estado del Pedido',
                 'order-information'     => 'Información del Pedido',
@@ -202,7 +199,6 @@ return [
                 'payment-method'        => 'Método de Pago',
                 'per-unit'              => 'Por Unidad',
                 'quantity'              => 'Cantidad',
-                'qty-to-invoiced'       => 'Cant. a Facturar',
                 'refunded'              => 'Reembolsado',
                 'refund-id'             => 'Reembolso #:refund',
                 'refund'                => 'Reembolso',
@@ -422,11 +418,18 @@ return [
                 'tax'                    => 'Monto de Impuestos - :tax',
             ],
 
-            'create'   => [
-                'creation-error' => 'No se permite la creación de factura de pedido.',
-                'create-success' => 'Factura creada exitosamente',
-                'invalid-qty'    => 'Encontramos una cantidad no válida para facturar ítems.',
-                'product-error'  => 'No se puede crear una factura sin productos.',
+            'create' => [
+                'invoice'         => 'Factura',
+                'create-invoice'  => 'Crear Factura',
+                'new-invoice'     => 'Nueva Factura',
+                'product-image'   => 'Imagen del Producto',
+                'amount-per-unit' => ':amount Por Unidad x :qty Cantidad',
+                'sku'             => 'SKU - :sku',
+                'qty-to-invoiced' => 'Cantidad a Facturar',
+                'creation-error'  => 'No se permite la creación de la factura del pedido.',
+                'create-success'  => 'Factura creada con éxito',
+                'invalid-qty'     => 'Encontramos una cantidad inválida para los elementos a facturar.',
+                'product-error'   => 'No se puede crear una factura sin productos.',
             ],
 
             'invoice-pdf' => [
@@ -2557,6 +2560,7 @@ return [
                 'footer-link'                   => 'Enlaces del Pie de Página',
                 'footer-link-form-title'        => 'Enlace del Pie de Página',
                 'slider-description'            => 'Personalización de temas relacionados con el Slider.',
+                'slider-required'               => 'Campo de diapositivas es obligatorio.',
                 'slider-add-btn'                => 'Agregar Slider',
                 'general'                       => 'General',
                 'add-filter-btn'                => 'Agregar Filtro',
@@ -2682,13 +2686,6 @@ return [
                         'allow-guest-checkout-hint' => 'Hinweis: Wenn aktiviert, kann diese Option für jedes Produkt speziell konfiguriert werden.',
                         'title'                     => 'Gastbestellung',
                         'title-info'                => 'Die Gastbestellung ermöglicht es Kunden, Produkte zu kaufen, ohne ein Konto zu erstellen, und erleichtert den Kaufprozess für Bequemlichkeit und schnellere Transaktionen.',
-                    ],
-
-                    'homepage' => [
-                        'allow-no-of-new-products'       => 'Zulässige Anzahl neuer Produkte auf der Startseite',
-                        'allow-no-of-featured-products'  => 'Zulässige Anzahl der vorgestellten Produkte auf der Startseite',
-                        'title'                          => 'Startseitenkonfiguration',
-                        'title-info'                     => 'Die Konfiguration der Startseite beinhaltet die Anpassung des Layouts, des Inhalts und des Designs der Hauptseite einer Website, um gewünschte Informationen effektiv zu präsentieren.',
                     ],
 
                     'product-view-page' => [
@@ -3280,6 +3277,7 @@ return [
         'events'                   => 'Eventos',
         'sitemaps'                 => 'Mapas del Sitio',
         'newsletter-subscriptions' => 'Suscripciones al Boletín',
+        'transactions'             => 'Transacciones',
     ],
 
     'errors' => [
