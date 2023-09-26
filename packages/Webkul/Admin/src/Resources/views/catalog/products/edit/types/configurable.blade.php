@@ -59,7 +59,7 @@
                     <!-- Placeholder Image -->
                     <img
                         src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                        class="w-[80px] h-[80px]"
+                        class="w-[80px] h-[80px] dark:invert dark:mix-blend-exclusion"
                     />
 
                     <!-- Add Variants Information -->
@@ -470,8 +470,8 @@
     </script>
 
     {{-- Variation Item Template --}}
-    <script type="text/x-template" id="v-product-variation-item-template">
-        <div class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300">
+    <script type="text/x-template" id="v-product-variation-item-template"> 
+        <div class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300 dark:border-gray-800">
 
             <!-- Information -->
             <div class="flex gap-[10px]">

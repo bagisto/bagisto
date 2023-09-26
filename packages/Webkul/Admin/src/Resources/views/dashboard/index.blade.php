@@ -34,7 +34,7 @@
                     <div class="flex gap-[16px] flex-wrap ">
                         {{-- Total Sales --}}
                         <div class="flex gap-[10px] flex-1 min-w-[200px]">
-                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion">
                                 <img
                                     src="{{ bagisto_asset('images/total-sales.svg')}}"
                                     title="@lang('admin::app.dashboard.index.total-sales')"
@@ -76,7 +76,7 @@
 
                         {{-- Total Orders --}}
                         <div class="flex gap-[10px] flex-1 min-w-[200px]">
-                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion">
                                 <img
                                     src="{{ bagisto_asset('images/total-orders.svg')}}"
                                     title="@lang('admin::app.dashboard.index.total-orders')"
@@ -118,7 +118,7 @@
 
                         {{-- Total Customers --}}
                         <div class="flex gap-[10px] flex-1 min-w-[200px]">
-                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion">
                                 <img
                                     src="{{ bagisto_asset('images/customers.svg')}}"
                                     title="@lang('admin::app.dashboard.index.total-customers')"
@@ -160,7 +160,7 @@
 
                         {{-- Average sales --}}
                         <div class="flex gap-[10px] flex-1 min-w-[200px]">
-                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion">
                                 <img
                                     src="{{ bagisto_asset('images/average-orders.svg')}}"
                                     title="@lang('admin::app.dashboard.index.average-sale')"
@@ -201,7 +201,7 @@
 
                         {{-- Unpaid Invoices --}}
                         <div class="flex gap-[10px] flex-1 min-w-[200px]">
-                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion">
                                 <img
                                     src="{{ bagisto_asset('images/unpaid-invoices.svg')}}"
                                     title="@lang('admin::app.dashboard.index.total-unpaid-invoices')"
@@ -229,11 +229,11 @@
                 </p>
 
                 <div class="rounded-[4px] box-shadow">
-                    <div class="flex gap-[16px] flex-wrap p-[16px]  bg-white dark:bg-gray-900  dark:bg-gray-900 border-b-[1px] dark:border-gray-800  ">
+                    <div class="flex gap-[16px] flex-wrap p-[16px] bg-white dark:bg-gray-900 border-b-[1px] dark:border-gray-800  ">
                         {{-- Today's Sales --}}
                         <div class="flex gap-[10px] flex-1">
                             <img
-                                class="w-full h-[60px] max-w-[60px] max-h-[60px]"
+                                class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion"
                                 src="{{ bagisto_asset('images/total-sales.svg')}}"
                                 title="@lang('admin::app.dashboard.index.today-sales')"
                             >
@@ -274,7 +274,7 @@
                         {{-- Today's Orders --}}
                         <div class="flex gap-[10px] flex-1">
                             <img
-                                class="w-full h-[60px] max-w-[60px] max-h-[60px]"
+                                class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion"
                                 src="{{ bagisto_asset('images/total-orders.svg')}}"
                                 title="@lang('admin::app.dashboard.index.today-orders')"
                             >
@@ -315,7 +315,7 @@
                         {{-- Today's Customers --}}
                         <div class="flex gap-[10px] flex-1">
                             <img
-                                class="w-full h-[60px] max-w-[60px] max-h-[60px]"
+                                class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion"
                                 src="{{ bagisto_asset('images/customers.svg')}}"
                                 title="@lang('admin::app.dashboard.index.today-customers')"
                             >
@@ -461,7 +461,7 @@
                                                         src="{{ $orderItem->product->base_image_url }}"
                                                     />
                                                 @else
-                                                    <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed dark:border-gray-800   rounded-[4px] overflow-hidden">
+                                                    <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed dark:border-gray-800 rounded-[4px] overflow-hidden dark:invert dark:mix-blend-exclusion">
                                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
 
                                                         <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
@@ -525,7 +525,7 @@
                                                 >
                                             </div>
                                         @else
-                                            <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed dark:border-gray-800   rounded-[4px] overflow-hidden">
+                                            <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed dark:border-gray-800 rounded-[4px] overflow-hidden dark:invert dark:mix-blend-exclusion">
                                                 <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
 
                                                 <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
@@ -585,8 +585,8 @@
                     </div>
                 @else
                     <div class="rounded-[4px] box-shadow">
-                        <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
-                            <img src="{{ bagisto_asset('images/icon-add-product.svg') }}" class="w-[80px] h-[80px]">
+                        <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px] ">
+                            <img src="{{ bagisto_asset('images/icon-add-product.svg') }}" class="w-[80px] h-[80px] dark:invert dark:mix-blend-exclusion">
                             <div class="flex flex-col items-center">
                                 <p class="text-[16px] text-gray-400 font-semibold">
                                     @lang('admin::app.dashboard.index.empty-threshold')
@@ -736,7 +736,7 @@
 
                                     <div
                                         v-else
-                                        class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed dark:border-gray-800   rounded-[4px] overflow-hidden"
+                                        class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed dark:border-gray-800 rounded-[4px] overflow-hidden dark:invert dark:mix-blend-exclusion"
                                     >
                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
                                         
@@ -779,7 +779,7 @@
                                     <!-- Placeholder Image -->
                                     <img
                                         src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                                        class="w-[80px] h-[80px]"
+                                        class="w-[80px] h-[80px] dark:invert dark:mix-blend-exclusion"
                                     >
     
                                     <!-- Add Variants Information -->
@@ -894,7 +894,7 @@
                                 <!-- Placeholder Image -->
                                 <img
                                     src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                                    class="w-[80px] h-[80px]"
+                                    class="w-[80px] h-[80px] dark:invert dark:mix-blend-exclusion"
                                 />
 
                                 <!-- Add Variants Information -->

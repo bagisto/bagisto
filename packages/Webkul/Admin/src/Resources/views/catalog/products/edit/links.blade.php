@@ -100,13 +100,13 @@
 
                 <!-- For Empty Variations -->
                 <div
-                    class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
+                    class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px] "
                     v-else
                 >
                     <!-- Placeholder Image -->
                     <img
                         src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                        class="w-[80px] h-[80px]"
+                        class="w-[80px] h-[80px] dark:invert dark:mix-blend-exclusion"
                     />
 
                     <!-- Add Variants Information -->

@@ -250,7 +250,7 @@
                                                             <img 
                                                                 src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
                                                                 :ref="'image_' + element.params.id"
-                                                                class="h-[50px] w-[50px]"
+                                                                class="h-[50px] w-[50px] dark:invert dark:mix-blend-exclusion"
                                                             />
 
                                                             <input

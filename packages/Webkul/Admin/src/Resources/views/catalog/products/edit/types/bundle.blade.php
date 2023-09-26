@@ -59,7 +59,7 @@
                 <!-- Placeholder Image -->
                 <img
                     src="{{ bagisto_asset('images/icon-options.svg') }}"
-                    class="w-[80px] h-[80px] border border-dashed dark:border-gray-800   rounded-[4px]"
+                    class="w-[80px] h-[80px] border border-dashed dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
                 />
 
                 <!-- Add Variants Information -->
@@ -285,7 +285,7 @@
                                 </div>
                                 
                                 <!-- Image -->
-                                <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed dark:border-gray-800   rounded-[4px] overflow-hidden">
+                                <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion overflow-hidden">
                                     <template v-if="! element.product.images.length">
                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                     </template>
@@ -363,7 +363,7 @@
                 <!-- Placeholder Image -->
                 <img
                     src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                    class="w-[80px] h-[80px]"
+                    class="w-[80px] h-[80px] dark:invert dark:mix-blend-exclusion"
                 />
 
                 <!-- Add Variants Information -->

@@ -19,7 +19,11 @@
             @if (core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode()))
                 <img src="{{ Storage::url(core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode())) }}" alt="{{ config('app.name') }}" style="height: 40px; width: 110px;"/>
             @else
-                <img src="{{ bagisto_asset('images/logo.svg') }}">
+                @if (! request()->cookie('is_dark_mode'))
+                    <img src="{{ bagisto_asset('images/logo.svg') }}">
+                @else
+                    <img src="{{ bagisto_asset('images/dark-logo.svg') }}">
+                @endif
             @endif
         </a>
 
@@ -211,7 +215,7 @@
                         <div class="grid max-h-[400px] overflow-y-auto">
                             <a
                                 :href="'{{ route('admin.catalog.products.edit', ':id') }}'.replace(':id', product.id)"
-                                class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950  last:border-b-0"
+                                class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300 dark:border-gray-800 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950  last:border-b-0"
                                 v-for="product in searchedResults.products.data"
                             >
                                 <!-- Left Information -->
@@ -282,14 +286,14 @@
                         <div class="grid max-h-[400px] overflow-y-auto">
                             <a
                                 :href="'{{ route('admin.sales.orders.view', ':id') }}'.replace(':id', order.id)"
-                                class="grid gap-[6px] place-content-start p-[16px] border-b-[1px] border-slate-300 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950  last:border-b-0"
+                                class="grid gap-[6px] place-content-start p-[16px] border-b-[1px] border-slate-300 dark:border-gray-800 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 last:border-b-0"
                                 v-for="order in searchedResults.orders.data"
                             >
                                 <p class="text-[16x] text-gray-600 dark:text-gray-300 font-semibold">
                                     #@{{ order.increment_id }}
                                 </p>
 
-                                <p class="text-gray-500">
+                                <p class="text-gray-500 dark:text-gray-300">
                                     @{{ order.formatted_created_at + ', ' + order.status_label + ', ' + order.customer_full_name }}
                                 </p>
                             </a>

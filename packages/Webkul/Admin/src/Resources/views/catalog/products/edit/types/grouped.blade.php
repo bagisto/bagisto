@@ -50,7 +50,7 @@
                                 <i class="icon-drag text-[20px] text-gray-600 dark:text-gray-300 transition-all pointer-events-none"></i>
                                 
                                 <!-- Image -->
-                                <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed dark:border-gray-800   rounded-[4px] overflow-hidden">
+                                <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion overflow-hidden">
                                     <template v-if="! element.associated_product.images.length">
                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                     </template>
@@ -129,7 +129,7 @@
                 <!-- Placeholder Image -->
                 <img
                     src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                    class="w-[80px] h-[80px]"
+                    class="w-[80px] h-[80px] dark:invert dark:mix-blend-exclusion"
                 />
 
                 <!-- Add Variants Information -->

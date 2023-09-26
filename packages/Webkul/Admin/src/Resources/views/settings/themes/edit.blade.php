@@ -552,7 +552,7 @@
                         </div>
                         <!-- Filters Illustration -->
                         <div    
-                            class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
+                            class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px] "
                             v-else
                         >
                             <img
@@ -901,7 +901,7 @@
 
                         <!-- Filters Illustration -->
                         <div    
-                            class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
+                            class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px] "
                             v-else
                         >
                             <img
@@ -1468,7 +1468,7 @@
 
                             <div   
                                 v-else
-                                class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
+                                class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px] "
                             >
                                 <img
                                     class="w-[120px] h-[120px] border border-dashed dark:border-gray-800   rounded-[4px]"
