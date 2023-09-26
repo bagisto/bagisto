@@ -20,9 +20,9 @@
                 <img src="{{ Storage::url(core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode())) }}" alt="{{ config('app.name') }}" style="height: 40px; width: 110px;"/>
             @else
                 @if (! request()->cookie('is_dark_mode'))
-                    <img src="{{ bagisto_asset('images/logo.svg') }}">
+                    <img src="{{ bagisto_asset('images/logo.svg') }}" id="logo-image">
                 @else
-                    <img src="{{ bagisto_asset('images/dark-logo.svg') }}">
+                    <img src="{{ bagisto_asset('images/dark-logo.svg') }}" id="logo-image">
                 @endif
             @endif
         </a>
@@ -42,6 +42,18 @@
     </div>
 
     <div class="flex gap-[10px] items-center">
+        {{-- Dark mode Switcher --}}
+        <v-dark>
+            <div class="text-[16px] text-gray-800 dark:text-white cursor-pointer">
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <label
+                        class="rounded-full w-[36px] h-[20px] bg-gray-200 cursor-pointer peer-focus:ring-blue-300 after:bg-white dark:after:bg-white  after:border-gray-300 dark:after:border-white peer-checked:bg-blue-600 dark:peer-checked:bg-gray-950 peer peer-checked:after:border-white peer-checked:after:ltr:translate-x-full peer-checked:after:rtl:-translate-x-full after:content-[''] after:absolute after:top-[2px] after:ltr:left-[2px] after:rtl:right-[2px] peer-focus:outline-none after:border after:rounded-full after:h-[16px] after:w-[16px] after:transition-all dark:bg-gray-800"
+                        for="dark_mode"
+                    ></label>
+                </label>
+            </div>
+        </v-dark>
+
         <a 
             href="{{ route('shop.home.index') }}" 
             target="_blank"
@@ -677,6 +689,59 @@
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.success_message });
                         })
                         .catch((error) => {});
+                },
+            },
+        });
+    </script>
+
+    <script type="text/x-template" id="v-dark-template">
+        <div class="text-[16px] text-gray-800 dark:text-white cursor-pointer">
+            <x-admin::form.control-group.control
+                type="switch"
+                name="dark_mode"
+                ::checked="isDarkMode"
+                v-model="isDarkMode"
+                @change="toggle"
+            >
+            </x-admin::form.control-group.control>
+        </div>
+    </script>
+
+    <script type="module">
+        app.component('v-dark', {
+            template: '#v-dark-template',
+
+            data() {
+                return {
+                    isDarkMode: {{ request()->cookie('is_dark_mode') ?? 0 }},
+                };
+            },
+
+            methods: {
+                toggle() {
+                    this.isDarkMode = parseInt(this.isDarkModeCookie()) ? 0 : 1;
+
+                    var expiryDate = new Date();
+
+                    expiryDate.setMonth(expiryDate.getMonth() + 1);
+
+                    document.cookie = 'is_dark_mode=' + this.isDarkMode + '; path=/; expires=' + expiryDate.toGMTString();
+
+                    document.documentElement.classList.toggle('dark', this.isDarkMode === 1);
+                },
+
+                isDarkModeCookie() {
+                    const cookies = document.cookie.split(';');
+
+                    for (const cookie of cookies) {
+                        const [name, value] = cookie.trim().split('=');
+
+                        if (name === 'is_dark_mode') {
+                            return value;
+                        }
+                    }
+
+                    return 0;
                 },
             },
         });
