@@ -21,13 +21,7 @@ trait PaymentTerm
      */
     public function getPaymentTerm()
     {
-        static $dueDuration = 0;
-
-        if ($dueDuration) {
-            return $dueDuration;
-        }
-
-        return $dueDuration = (int) core()->getConfigData('sales.invoice_settings.payment_terms.due_duration');
+        return (int) core()->getConfigData('sales.invoice_settings.payment_terms.due_duration');
     }
 
     /**

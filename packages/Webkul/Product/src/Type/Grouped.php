@@ -10,7 +10,6 @@ use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductVideoRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
-use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Product\Repositories\ProductGroupedProductRepository;
 use Webkul\Product\Helpers\Indexers\Price\Grouped as GroupedIndexer;
 
@@ -52,7 +51,6 @@ class Grouped extends AbstractType
      * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
      * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
      * @param  \Webkul\Product\Repositories\ProductCustomerGroupPriceRepository  $productCustomerGroupPriceRepository
-     * @param  \Webkul\Tax\Repositories\TaxCategoryRepository  $taxCategoryRepository
      * @param  \Webkul\Product\Repositories\ProductGroupedProductRepository  $productGroupedProductRepository
      * @param  \Webkul\Product\Repositories\ProductVideoRepository  $productVideoRepository
      * @return void
@@ -66,7 +64,6 @@ class Grouped extends AbstractType
         ProductImageRepository $productImageRepository,
         ProductVideoRepository $productVideoRepository,
         ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository,
-        TaxCategoryRepository $taxCategoryRepository,
         protected ProductGroupedProductRepository $productGroupedProductRepository
     )
     {
@@ -78,8 +75,7 @@ class Grouped extends AbstractType
             $productInventoryRepository,
             $productImageRepository,
             $productVideoRepository,
-            $productCustomerGroupPriceRepository,
-            $taxCategoryRepository
+            $productCustomerGroupPriceRepository
         );
     }
 

@@ -3,11 +3,13 @@
 namespace Webkul\Core\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
-use Prettus\Repository\Traits\CacheableRepository;
 
 class CountryStateRepository extends Repository
 {
-    use CacheableRepository;
+    /**
+     * @var boolean
+     */
+    protected $cacheEnabled = true;
 
     /**
      * Specify Model class name
