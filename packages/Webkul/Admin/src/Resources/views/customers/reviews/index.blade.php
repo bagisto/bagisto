@@ -19,7 +19,7 @@
                 ref="review_data"
             >
                 @php 
-                    $hasPermission = core()->getConfigData('customers.reviews.mass-update') || core()->getConfigData('customers.reviews.mass-delete');
+                    $hasPermission = bouncer()->hasPermission('customers.reviews.mass-update') || bouncer()->hasPermission('customers.reviews.mass-delete');
                 @endphp
 
                 <!-- Datagrid Header -->
