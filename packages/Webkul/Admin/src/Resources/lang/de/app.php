@@ -2678,7 +2678,7 @@ return [
                 ],
 
                 'products' => [
-                    'info'  => 'Gastbestellung, Startseite, Produktansichtsseite, Warenkorbansichtsseite, Ladenfront, Bewertung und soziale Freigabe von Attributen einrichten.',
+                    'info'  => 'Gastkasse einrichten, Produktansichtsseite, Warenkorbansichtsseite, Ladenfront, Bewertung und Attribut-Social-Share festlegen.',
                     'title' => 'Produkte',
 
                     'guest-checkout' => [

@@ -2678,7 +2678,7 @@ return [
                 ],
 
                 'products' => [
-                    'info'  => 'Set guest checkout, homepage, product view page, cart view page, store front, review and attribute social share.',
+                    'info'  => 'Set guest checkout, product view page, cart view page, store front, review and attribute social share.',
                     'title' => 'Products',
 
                     'guest-checkout' => [

@@ -2678,7 +2678,7 @@ return [
                 ],
 
                 'products' => [
-                    'info'  => 'Defina checkout de convidado, página inicial, página de visualização de produtos, página de visualização do carrinho, loja, revisão e compartilhamento social de atributos.',
+                    'info'  => 'Configure o checkout de convidado, página de visualização de produtos, página de visualização de carrinho, frente de loja, revisão e compartilhamento social de atributos.',
                     'title' => 'Produtos',
 
                     'guest-checkout' => [

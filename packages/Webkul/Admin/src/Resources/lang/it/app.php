@@ -2678,7 +2678,7 @@ return [
                 ],
 
                 'products' => [
-                    'info'  => 'Imposta il checkout per gli ospiti, la homepage, la pagina di visualizzazione del prodotto, la pagina di visualizzazione del carrello, il front-end del negozio, la recensione e la condivisione sociale degli attributi.',
+                    'info'  => 'Imposta il checkout per gli ospiti, la pagina di visualizzazione del prodotto, la pagina del carrello, il fronte del negozio, la recensione e la condivisione sociale dell\'attributo.',
                     'title' => 'Prodotti',
 
                     'guest-checkout' => [
