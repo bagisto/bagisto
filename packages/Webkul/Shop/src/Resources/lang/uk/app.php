@@ -66,6 +66,7 @@ return [
 
         'account' => [
             'home'      => 'Головна',
+
             'profile'   => [
                 'title'                   => 'Профіль',
                 'first-name'              => 'Ім’я',
@@ -399,83 +400,90 @@ return [
         ],
     ],
 
-    'products'  => [
-        'reviews'                => 'Відгуки',
-        'add-to-cart'            => 'Додати в кошик',
-        'add-to-compare'         => 'Товар додано для порівняння.',
-        'already-in-compare'     => 'Товар вже додано для порівняння.',
-        'buy-now'                => 'Купити зараз',
-        'compare'                => 'Порівняти',
-        'rating'                 => 'Рейтинг',
-        'title'                  => 'Назва',
-        'comment'                => 'Коментар',
-        'submit-review'          => 'Надіслати відгук',
-        'customer-review'        => 'Відгуки клієнтів',
-        'write-a-review'         => 'Написати відгук',
-        'stars'                  => 'Зірки',
-        'share'                  => 'Поділитися',
-        'empty-review'           => 'Відгуків не знайдено, будьте першим, хто залишить відгук на цей товар',
-        'was-this-helpful'       => 'Цей відгук був корисним?',
-        'load-more'              => 'Завантажити ще',
-        'add-image'              => 'Додати зображення',
-        'description'            => 'Опис',
-        'additional-information' => 'Додаткова інформація',
-        'submit-success'         => 'Успішно надіслано',
-        'something-went-wrong'   => 'Щось пішло не так',
-        'in-stock'               => 'В наявності',
-        'available-for-order'    => 'Доступно для замовлення',
-        'out-of-stock'           => 'Немає в наявності',
-        'related-product-title'  => 'Споріднені товари',
-        'up-sell-title'          => 'Ми також порекомендуємо',
-        'new'                    => 'Новий',
-        'as-low-as'              => 'Починаючи від',
-        'starting-at'            => 'Починаючи з',
-        'name'                   => 'Назва',
-        'qty'                    => 'Кількість',
-        'offers'                 => 'Купуйте :qty за :price кожен і економте :discount%',
-        'tax-inclusive'          => 'Включаючи всі податки',
-
-        'sort-by'                => [
+    'products' => [
+        'prices' => [
+            'grouped' => [
+                'starting-at' => 'Починаючи з',
+            ],
+    
+            'configurable' => [
+                'as-low-as' => 'Від',
+            ],
+        ],
+    
+        'sort-by' => [
             'title'   => 'Сортувати за',
             'options' => [
                 'from-a-z'        => 'Від А до Я',
                 'from-z-a'        => 'Від Я до А',
-                'latest-first'    => 'Спочатку нові',
-                'oldest-first'    => 'Спочатку старі',
-                'cheapest-first'  => 'Спочатку дешеві',
-                'expensive-first' => 'Спочатку дорогі',
+                'latest-first'    => 'Нові спершу',
+                'oldest-first'    => 'Старі спершу',
+                'cheapest-first'  => 'Дешевші спершу',
+                'expensive-first' => 'Дорожчі спершу',
             ],
         ],
-
+    
         'view' => [
             'type' => [
                 'configurable' => [
-                    'select-options'       => 'Будь ласка, виберіть опцію',
-                    'select-above-options' => 'Будь ласка, виберіть вище вказані опції',
+                    'select-options'       => 'Будь ласка, оберіть опцію',
+                    'select-above-options' => 'Будь ласка, оберіть вищезазначені опції',
                 ],
-
+    
                 'bundle' => [
                     'none' => 'Немає',
                 ],
-
+    
                 'downloadable' => [
                     'samples' => 'Зразки',
                     'links'   => 'Посилання',
                     'sample'  => 'Зразок',
                 ],
-
+    
                 'grouped' => [
                     'name' => 'Назва',
                 ],
             ],
-
+    
+            'gallery' => [
+                'thumbnail-image' => 'Мініатюрне зображення',
+                'product-image'   => 'Зображення товару',
+            ],
+    
             'reviews' => [
                 'cancel'      => 'Скасувати',
+                'rating'      => 'Рейтинг',
                 'success'     => 'Відгук успішно надіслано.',
-                'attachments' => 'Вкладення',
+                'attachments' => 'Додатки',
+                'title'       => 'Заголовок',
+                'comment'     => 'Коментар',
+                'customer-review'        => 'Відгуки клієнтів',
+                'submit-review'          => 'Надіслати відгук',
+                'write-a-review'         => 'Написати відгук',
+                'empty-review'           => 'Відгуків не знайдено, будьте першим, хто залишить відгук про цей товар',
+                'load-more'              => 'Завантажити ще',
+                'failed-to-upload'       => 'Не вдалося завантажити зображення',
+            ],
+    
+            'description'            => 'Опис',
+            'additional-information' => 'Додаткова інформація',
+            'review'                 => 'Відгуки',
+            'related-product-title'  => 'Супутні товари',
+            'up-sell-title'          => 'Ми знайшли інші товари, які вам можуть сподобатися!',
+            'tax-inclusive'          => 'Включаючи всі податки',
+            'add-to-cart'            => 'Додати в кошик',
+            'buy-now'                => 'Купити зараз',
+            'compare'                => 'Порівняти',
+            'add-to-compare'         => 'Товар додано для порівняння.',
+            'already-in-compare'     => 'Товар вже додано для порівняння.',
+        ],
+    
+        'type' => [
+            'abstract' => [
+                'offers' => 'Купуйте :qty по :price кожен та зекономте :discount%',
             ],
         ],
-    ],
+    ],    
 
     'categories' => [
         'filters' => [

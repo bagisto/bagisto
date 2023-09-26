@@ -66,6 +66,7 @@ return [
 
         'account' => [
             'home'      => 'Home',
+
             'profile'   => [
                 'title'                   => 'Profilo',
                 'first-name'              => 'Nome',
@@ -399,83 +400,90 @@ return [
         ],
     ],
 
-    'products'  => [
-        'reviews'                => 'Recensioni',
-        'add-to-cart'            => 'Aggiungi al Carrello',
-        'add-to-compare'         => 'Prodotto aggiunto al confronto.',
-        'already-in-compare'     => 'Il prodotto è già stato aggiunto al confronto.',
-        'buy-now'                => 'Compra Ora',
-        'compare'                => 'Confronta',
-        'rating'                 => 'Valutazione',
-        'title'                  => 'Titolo',
-        'comment'                => 'Commento',
-        'submit-review'          => 'Invia Recensione',
-        'customer-review'        => 'Recensioni dei Clienti',
-        'write-a-review'         => 'Scrivi una Recensione',
-        'stars'                  => 'Stelle',
-        'share'                  => 'Condividi',
-        'empty-review'           => 'Nessuna recensione trovata, sii il primo a recensire questo prodotto',
-        'was-this-helpful'       => 'È stata utile questa recensione?',
-        'load-more'              => 'Carica Altre',
-        'add-image'              => 'Aggiungi Immagine',
-        'description'            => 'Descrizione',
-        'additional-information' => 'Informazioni Aggiuntive',
-        'submit-success'         => 'Inviato con Successo',
-        'something-went-wrong'   => 'Qualcosa è andato storto',
-        'in-stock'               => 'Disponibile',
-        'available-for-order'    => 'Disponibile per l’Ordinazione',
-        'out-of-stock'           => 'Non Disponibile',
-        'related-product-title'  => 'Prodotti Correlati',
-        'up-sell-title'          => 'Abbiamo trovato altri prodotti che potrebbero interessarti!',
-        'new'                    => 'Nuovo',
-        'as-low-as'              => 'A partire da',
-        'starting-at'            => 'A partire da',
-        'name'                   => 'Nome',
-        'qty'                    => 'Quantità',
-        'offers'                 => 'Compra :qty per :price ciascuno e risparmia il :discount%',
-        'tax-inclusive'          => 'Tutte le tasse incluse',
-
-        'sort-by'                => [
-            'title'   => 'Ordina Per',
-            'options' => [
-                'from-a-z'        => 'Da A-Z',
-                'from-z-a'        => 'Da Z-A',
-                'latest-first'    => 'I più Recenti',
-                'oldest-first'    => 'I più Vecchi',
-                'cheapest-first'  => 'I più Economici',
-                'expensive-first' => 'I più Costosi',
+    'products' => [
+        'prices' => [
+            'grouped' => [
+                'starting-at' => 'A partire da',
+            ],
+    
+            'configurable' => [
+                'as-low-as' => 'A partire da',
             ],
         ],
-
+    
+        'sort-by' => [
+            'title'   => 'Ordina per',
+            'options' => [
+                'from-a-z'        => 'Da A a Z',
+                'from-z-a'        => 'Da Z a A',
+                'latest-first'    => 'I più recenti prima',
+                'oldest-first'    => 'I più vecchi prima',
+                'cheapest-first'  => 'I più economici prima',
+                'expensive-first' => 'I più costosi prima',
+            ],
+        ],
+    
         'view' => [
             'type' => [
                 'configurable' => [
-                    'select-options'       => 'Seleziona un’opzione',
+                    'select-options'       => 'Seleziona un\'opzione',
                     'select-above-options' => 'Seleziona le opzioni sopra',
                 ],
-
+    
                 'bundle' => [
                     'none' => 'Nessuno',
                 ],
-
+    
                 'downloadable' => [
                     'samples' => 'Campioni',
-                    'links'   => 'Link',
+                    'links'   => 'Collegamenti',
                     'sample'  => 'Campione',
                 ],
-
+    
                 'grouped' => [
                     'name' => 'Nome',
                 ],
             ],
-
+    
+            'gallery' => [
+                'thumbnail-image' => 'Immagine Miniatura',
+                'product-image'   => 'Immagine del Prodotto',
+            ],
+    
             'reviews' => [
                 'cancel'      => 'Annulla',
+                'rating'      => 'Valutazione',
                 'success'     => 'Recensione inviata con successo.',
                 'attachments' => 'Allegati',
+                'title'       => 'Titolo',
+                'comment'     => 'Commento',
+                'customer-review'        => 'Recensioni dei Clienti',
+                'submit-review'          => 'Invia Recensione',
+                'write-a-review'         => 'Scrivi una Recensione',
+                'empty-review'           => 'Nessuna Recensione trovata, sii il primo a recensire questo prodotto',
+                'load-more'              => 'Carica Altro',
+                'failed-to-upload'       => 'Caricamento dell\'immagine fallito',
+            ],
+    
+            'description'            => 'Descrizione',
+            'additional-information' => 'Informazioni Aggiuntive',
+            'review'                 => 'Recensioni',
+            'related-product-title'  => 'Prodotti Correlati',
+            'up-sell-title'          => 'Abbiamo trovato altri prodotti che potrebbero interessarti!',
+            'tax-inclusive'          => 'Tasse incluse',
+            'add-to-cart'            => 'Aggiungi al Carrello',
+            'buy-now'                => 'Compra Ora',
+            'compare'                => 'Confronta',
+            'add-to-compare'         => 'Prodotto aggiunto al confronto.',
+            'already-in-compare'     => 'Il prodotto è già stato aggiunto al confronto.',
+        ],
+    
+        'type' => [
+            'abstract' => [
+                'offers' => 'Acquista :qty a :price ciascuno e risparmia il :discount%',
             ],
         ],
-    ],
+    ],    
 
     'categories' => [
         'filters' => [

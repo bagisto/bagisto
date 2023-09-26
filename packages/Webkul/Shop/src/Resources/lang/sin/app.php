@@ -66,6 +66,7 @@ return [
 
         'account' => [
             'home'    => 'මුලු පිටවක්',
+
             'profile' => [
                 'title'                   => 'පැතිකඩ',
                 'first-name'              => 'මුල් නම',
@@ -399,83 +400,90 @@ return [
         ],
     ],
 
-    'products'  => [
-        'reviews'                => 'ඇදවුම්',
-        'add-to-cart'            => 'කාට්ටයට එකතු කරන්න',
-        'add-to-compare'         => 'අයිතමක් උල්ලංඝනය කරන ලදි.',
-        'already-in-compare'     => 'අයිතමක් දැක්කාක් උල්ලංඝනය කරන ලදි.',
-        'buy-now'                => 'දැමීමට',
-        'compare'                => 'කොම්පේයියාරය',
-        'rating'                 => 'දත්තගබඩා',
-        'title'                  => 'සිරැසිය',
-        'comment'                => 'විනෝදජනය',
-        'submit-review'          => 'ඇදවුම ඉදිරිපත් කරන්න',
-        'customer-review'        => 'පාරිභෝගේ ඇදවුම්',
-        'write-a-review'         => 'ඇදවුමක් ලියන්න',
-        'stars'                  => 'තරමු',
-        'share'                  => 'බෙදාගන්න',
-        'empty-review'           => 'ඇදවුම නොමැත, මේ නිෂ්පාදනය කරන ලදීයි',
-        'was-this-helpful'       => 'මෙය උපකාර කරයිද?',
-        'load-more'              => 'අලුත් බැලීම',
-        'add-image'              => 'පින්තූරයක් එකතු කරන්න',
-        'description'            => 'විස්තර',
-        'additional-information' => 'අතිරේක විස්තර',
-        'submit-success'         => 'සාර්ථකව ඉදිරිපත් කරන ලදි',
-        'something-went-wrong'   => 'දක්වාකව සිටී',
-        'in-stock'               => 'සැපයි',
-        'available-for-order'    => 'ඇණවුම සඳහා ලබාගත හැක',
-        'out-of-stock'           => 'ඇණවුම් වෙනස',
-        'related-product-title'  => 'සම්බොදම් නිෂ්පාදන',
-        'up-sell-title'          => 'අපට මේ නිෂ්පාදනයට අනුපිටපත් කරන ලද අයිතම',
-        'new'                    => 'නව',
-        'as-low-as'              => 'එහි',
-        'starting-at'            => 'ආරම්භක',
-        'name'                   => 'නම',
-        'qty'                    => 'ප්රමාණය',
-        'offers'                 => 'ගින්දර :qty සඳහා :price එක්ක වෙනස් කර :discount%',
-        'tax-inclusive'          => 'සියලු බද්දක් සහිත',
-
-        'sort-by'                => [
-            'title'   => 'වකුගඩය සම්පූර්ණවේ',
-            'options' => [
-                'from-a-z'        => 'අ-ය',
-                'from-z-a'        => 'ය-අ',
-                'latest-first'    => 'නවම පළමු',
-                'oldest-first'    => 'පැරණිම',
-                'cheapest-first'  => 'අඩුමු',
-                'expensive-first' => 'මිලියනයේ',
+    'products' => [
+        'prices' => [
+            'grouped' => [
+                'starting-at' => 'ආරම්භයට',
+            ],
+    
+            'configurable' => [
+                'as-low-as' => 'පිටවන්',
             ],
         ],
-
+    
+        'sort-by' => [
+            'title'   => 'අනුවාදයක්',
+            'options' => [
+                'from-a-z'        => 'ඒ සිට Z දක්වා',
+                'from-z-a'        => 'Z සිට ඒ දක්වා',
+                'latest-first'    => 'නවයේ පළමු',
+                'oldest-first'    => 'පැරණියේ පළමු',
+                'cheapest-first'  => 'අඩු වට්ටම් පළමු',
+                'expensive-first' => 'උපන් වට්ටම් පළමු',
+            ],
+        ],
+    
         'view' => [
             'type' => [
                 'configurable' => [
-                    'select-options'       => 'කරුණාකර විකල්ප කරන්න',
-                    'select-above-options' => 'කරුණාකර ඉහළ විකල්ප කරන්න',
+                    'select-options'       => 'කරුණාකර විකල්ප එකක් තෝරන්න',
+                    'select-above-options' => 'කරුණාකර ඉහළ උකස් එකක් තෝරන්න',
                 ],
-
+    
                 'bundle' => [
-                    'none' => 'කිසිදු',
+                    'none' => 'කිසිවක් නැත',
                 ],
-
+    
                 'downloadable' => [
-                    'samples' => 'පිටවන්',
-                    'links'   => 'සබැඳියානු',
-                    'sample'  => 'පිටවන',
+                    'samples' => 'පරිගණක ප්‍රමාණ',
+                    'links'   => 'සබැඳියෙන්',
+                    'sample'  => 'පරිගණක ප්‍රමාණය',
                 ],
-
+    
                 'grouped' => [
                     'name' => 'නම',
                 ],
             ],
-
+    
+            'gallery' => [
+                'thumbnail-image' => 'ප්‍රථම රූපය',
+                'product-image'   => 'නිෂ්පාදන රූපය',
+            ],
+    
             'reviews' => [
-                'cancel'      => 'අවලංගුයි',
-                'success'     => 'ඇදවුම සාර්ථකව ඉදිරිපත් කරන්න.',
-                'attachments' => 'ඇදවුම් මොතා',
+                'cancel'      => 'අවලංගු කරන්න',
+                'rating'      => 'අගය',
+                'success'     => 'අදම සටහනක් එවන්නේ සාර්ථකයි.',
+                'attachments' => 'ඇමිලුම්',
+                'title'       => 'සිරැසි',
+                'comment'     => 'අදහස්',
+                'customer-review'        => 'පාරිභෝගික විකාශන',
+                'submit-review'          => 'සටහනක් එවන්න',
+                'write-a-review'         => 'සටහනක් ලියන්න',
+                'empty-review'           => 'ගවේෂණයක් හමුවුනේ නෑ, මෙම නිෂ්පාදනය සටහනක් ලියන්නේ පළමු කෙනෙක් බව',
+                'load-more'              => 'බැලීම් කරන්න',
+                'failed-to-upload'       => 'රූපය උඩුගත කිරීම අසාර්ථකයි',
+            ],
+    
+            'description'            => 'විස්තර',
+            'additional-information' => 'අමතර තොරතුරු',
+            'review'                 => 'සටහන',
+            'related-product-title'  => 'සම්බන්ද නිෂ්පාදන',
+            'up-sell-title'          => 'අපෙන් ඔබට ආයතනය හොඳයි!',
+            'tax-inclusive'          => 'වාපිපුව සහිතවා',
+            'add-to-cart'            => 'කරත්තයට එක් කරන්න',
+            'buy-now'                => 'දැක්කාක් කරන්න',
+            'compare'                => 'සීමා කරන්න',
+            'add-to-compare'         => 'නිෂ්පාදනය සීමා කරන ලදි.',
+            'already-in-compare'     => 'නිෂ්පාදනය දැක්කාක් කර ඇත.',
+        ],
+    
+        'type' => [
+            'abstract' => [
+                'offers' => ':qty ක් :price ක් දිනාගත් නම් :discount% සහිතයි',
             ],
         ],
-    ],
+    ],    
 
     'categories' => [
         'filters' => [

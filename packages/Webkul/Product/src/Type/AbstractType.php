@@ -1147,7 +1147,7 @@ abstract class AbstractType
 
         $discount = number_format((($this->product->price - $price) * 100) / ($this->product->price), 2);
 
-        $offerLines = trans('shop::app.products.offers', [
+        $offerLines = trans('shop::app.products.type.abstract.offers', [
             'qty'      => $customerGroupPrice->qty,
             'price'    => core()->currency($price),
             'discount' => $discount,

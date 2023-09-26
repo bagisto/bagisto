@@ -66,6 +66,7 @@ return [
 
         'account' => [
             'home'      => 'الصفحة الرئيسية',
+
             'profile'   => [
                 'title'                   => 'الملف الشخصي',
                 'first-name'              => 'الاسم الأول',
@@ -400,42 +401,17 @@ return [
     ],
 
     'products' => [
-        'reviews'                => 'التقييمات',
-        'add-to-cart'            => 'أضف إلى العربة',
-        'add-to-compare'         => 'تمت إضافة المنتج للمقارنة.',
-        'already-in-compare'     => 'المنتج مضاف بالفعل للمقارنة.',
-        'buy-now'                => 'اشتري الآن',
-        'compare'                => 'قارن',
-        'rating'                 => 'التقييم',
-        'title'                  => 'العنوان',
-        'comment'                => 'التعليق',
-        'submit-review'          => 'أرسل تقييمًا',
-        'customer-review'        => 'تقييمات العملاء',
-        'write-a-review'         => 'اكتب تقييمًا',
-        'stars'                  => 'النجوم',
-        'share'                  => 'شارك',
-        'empty-review'           => 'لا توجد تقييمات، كن أول من يقيم هذا المنتج',
-        'was-this-helpful'       => 'هل كان هذا التقييم مفيدًا؟',
-        'load-more'              => 'تحميل المزيد',
-        'add-image'              => 'إضافة صورة',
-        'description'            => 'الوصف',
-        'additional-information' => 'معلومات إضافية',
-        'submit-success'         => 'تم الإرسال بنجاح',
-        'something-went-wrong'   => 'حدث خطأ ما',
-        'in-stock'               => 'متوفر',
-        'available-for-order'    => 'متاح للطلب',
-        'out-of-stock'           => 'نفذت الكمية',
-        'related-product-title'  => 'منتجات ذات صلة',
-        'up-sell-title'          => 'عثرنا على منتجات أخرى قد تعجبك!',
-        'new'                    => 'جديد',
-        'as-low-as'              => 'بأقل سعر',
-        'starting-at'            => 'ابتداءً من',
-        'name'                   => 'الاسم',
-        'qty'                    => 'الكمية',
-        'offers'                 => 'اشترِ :qty بسعر :price للوحدة ووفّر :discount%',
-        'tax-inclusive'          => 'شامل الضرائب',
-
-        'sort-by'                => [
+        'prices' => [
+            'grouped' => [
+                'starting-at' => 'بدءًا من',
+            ],
+    
+            'configurable' => [
+                'as-low-as' => 'بأقل من',
+            ],
+        ],
+    
+        'sort-by' => [
             'title'   => 'ترتيب حسب',
             'options' => [
                 'from-a-z'        => 'من الألف إلى الياء',
@@ -446,33 +422,65 @@ return [
                 'expensive-first' => 'الأغلى أولاً',
             ],
         ],
-
+    
         'view' => [
             'type' => [
                 'configurable' => [
-                    'select-options'       => 'الرجاء اختيار خيار',
-                    'select-above-options' => 'الرجاء اختيار الخيارات أعلاه',
+                    'select-options'       => 'يرجى اختيار خيار',
+                    'select-above-options' => 'يرجى اختيار الخيارات أعلاه',
                 ],
-
+    
                 'bundle' => [
                     'none' => 'لا شيء',
                 ],
-
+    
                 'downloadable' => [
                     'samples' => 'عينات',
                     'links'   => 'روابط',
                     'sample'  => 'عينة',
                 ],
-
+    
                 'grouped' => [
                     'name' => 'الاسم',
                 ],
             ],
-
+    
+            'gallery' => [
+                'thumbnail-image' => 'صورة مصغرة',
+                'product-image'   => 'صورة المنتج',
+            ],
+    
             'reviews' => [
                 'cancel'      => 'إلغاء',
-                'success'     => 'تم إرسال التقييم بنجاح.',
+                'rating'      => 'التقييم',
+                'success'     => 'تم إرسال المراجعة بنجاح.',
                 'attachments' => 'المرفقات',
+                'title'       => 'العنوان',
+                'comment'     => 'التعليق',
+                'customer-review'        => 'آراء العملاء',
+                'submit-review'          => 'إرسال المراجعة',
+                'write-a-review'         => 'كتابة مراجعة',
+                'empty-review'           => 'لم يتم العثور على مراجعات، كن أول من يراجع هذا المنتج',
+                'load-more'              => 'تحميل المزيد',
+                'failed-to-upload'       => 'فشل تحميل الصورة',
+            ],
+    
+            'description'            => 'الوصف',
+            'additional-information' => 'معلومات إضافية',
+            'review'                 => 'المراجعات',
+            'related-product-title'  => 'منتجات ذات صلة',
+            'up-sell-title'          => 'لقد وجدنا منتجات أخرى قد تعجبك!',
+            'tax-inclusive'          => 'شامل للضرائب',
+            'add-to-cart'            => 'أضف إلى السلة',
+            'buy-now'                => 'اشتر الآن',
+            'compare'                => 'مقارنة',
+            'add-to-compare'         => 'تمت إضافة المنتج إلى قائمة المقارنة.',
+            'already-in-compare'     => 'المنتج مضاف بالفعل إلى قائمة المقارنة.',
+        ],
+    
+        'type' => [
+            'abstract' => [
+                'offers' => 'اشترِ :qty بسعر :price للوحدة ووفّر :discount%',
             ],
         ],
     ],

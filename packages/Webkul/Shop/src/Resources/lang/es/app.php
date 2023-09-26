@@ -66,6 +66,7 @@ return [
 
         'account' => [
             'home'      => 'Inicio',
+
             'profile'   => [
                 'title'                   => 'Perfil',
                 'first-name'              => 'Nombre',
@@ -399,83 +400,90 @@ return [
         ],
     ],
 
-    'products'  => [
-        'reviews'                => 'Bewertungen',
-        'add-to-cart'            => 'In den Warenkorb legen',
-        'add-to-compare'         => 'Produkt zum Vergleich hinzugefügt.',
-        'already-in-compare'     => 'Produkt ist bereits im Vergleich.',
-        'buy-now'                => 'Jetzt kaufen',
-        'compare'                => 'Vergleichen',
-        'rating'                 => 'Bewertung',
-        'title'                  => 'Titel',
-        'comment'                => 'Kommentar',
-        'submit-review'          => 'Bewertung abschicken',
-        'customer-review'        => 'Kundenbewertungen',
-        'write-a-review'         => 'Eine Bewertung schreiben',
-        'stars'                  => 'Sterne',
-        'share'                  => 'Teilen',
-        'empty-review'           => 'Keine Bewertungen gefunden. Seien Sie der Erste, der dieses Produkt bewertet',
-        'was-this-helpful'       => 'War diese Bewertung hilfreich?',
-        'load-more'              => 'Mehr laden',
-        'add-image'              => 'Bild hinzufügen',
-        'description'            => 'Beschreibung',
-        'additional-information' => 'Zusätzliche Informationen',
-        'submit-success'         => 'Erfolgreich abgeschickt',
-        'something-went-wrong'   => 'Etwas ist schiefgegangen',
-        'in-stock'               => 'Auf Lager',
-        'available-for-order'    => 'Bestellbar',
-        'out-of-stock'           => 'Nicht vorrätig',
-        'related-product-title'  => 'Ähnliche Produkte',
-        'up-sell-title'          => 'Wir haben andere Produkte gefunden, die Ihnen vielleicht gefallen!',
-        'new'                    => 'Neu',
-        'as-low-as'              => 'Ab',
-        'starting-at'            => 'Startet bei',
-        'name'                   => 'Name',
-        'qty'                    => 'Menge',
-        'offers'                 => 'Kaufen Sie :qty für jeweils :price und sparen Sie :discount%',
-        'tax-inclusive'          => 'Incluye todos los impuestos',
-
-        'sort-by'                => [
-            'title'   => 'Sortieren nach',
-            'options' => [
-                'from-a-z'        => 'Von A-Z',
-                'from-z-a'        => 'Von Z-A',
-                'latest-first'    => 'Neueste zuerst',
-                'oldest-first'    => 'Älteste zuerst',
-                'cheapest-first'  => 'Günstigste zuerst',
-                'expensive-first' => 'Teuerste zuerst',
+    'products' => [
+        'prices' => [
+            'grouped' => [
+                'starting-at' => 'A partir de',
+            ],
+    
+            'configurable' => [
+                'as-low-as' => 'Desde',
             ],
         ],
-
+    
+        'sort-by' => [
+            'title'   => 'Ordenar por',
+            'options' => [
+                'from-a-z'        => 'De la A a la Z',
+                'from-z-a'        => 'De la Z a la A',
+                'latest-first'    => 'Más recientes primero',
+                'oldest-first'    => 'Más antiguos primero',
+                'cheapest-first'  => 'Más baratos primero',
+                'expensive-first' => 'Más caros primero',
+            ],
+        ],
+    
         'view' => [
             'type' => [
                 'configurable' => [
-                    'select-options'       => 'Bitte eine Option auswählen',
-                    'select-above-options' => 'Bitte die oben genannten Optionen auswählen',
+                    'select-options'       => 'Por favor, seleccione una opción',
+                    'select-above-options' => 'Por favor, seleccione las opciones anteriores',
                 ],
-
+    
                 'bundle' => [
-                    'none' => 'Keine',
+                    'none' => 'Ninguno',
                 ],
-
+    
                 'downloadable' => [
-                    'samples' => 'Muster',
-                    'links'   => 'Links',
-                    'sample'  => 'Muster',
+                    'samples' => 'Muestras',
+                    'links'   => 'Enlaces',
+                    'sample'  => 'Muestra',
                 ],
-
+    
                 'grouped' => [
-                    'name' => 'Name',
+                    'name' => 'Nombre',
                 ],
             ],
-
+    
+            'gallery' => [
+                'thumbnail-image' => 'Imagen en miniatura',
+                'product-image'   => 'Imagen del producto',
+            ],
+    
             'reviews' => [
-                'cancel'      => 'Abbrechen',
-                'success'     => 'Bewertung erfolgreich abgegeben.',
-                'attachments' => 'Anhänge',
+                'cancel'      => 'Cancelar',
+                'rating'      => 'Calificación',
+                'success'     => 'Revisión enviada con éxito.',
+                'attachments' => 'Adjuntos',
+                'title'       => 'Título',
+                'comment'     => 'Comentario',
+                'customer-review'        => 'Opiniones de clientes',
+                'submit-review'          => 'Enviar reseña',
+                'write-a-review'         => 'Escribir una reseña',
+                'empty-review'           => 'No se encontraron reseñas, sé el primero en calificar este producto.',
+                'load-more'              => 'Cargar más',
+                'failed-to-upload'       => 'La imagen no se pudo cargar',
+            ],
+    
+            'description'            => 'Descripción',
+            'additional-information' => 'Información adicional',
+            'review'                 => 'Reseñas',
+            'related-product-title'  => 'Productos relacionados',
+            'up-sell-title'          => 'Hemos encontrado otros productos que podrían gustarte.',
+            'tax-inclusive'          => 'Incluye todos los impuestos',
+            'add-to-cart'            => 'Agregar al carrito',
+            'buy-now'                => 'Comprar ahora',
+            'compare'                => 'Comparar',
+            'add-to-compare'         => 'Producto añadido a la lista de comparación.',
+            'already-in-compare'     => 'El producto ya está en la lista de comparación.',
+        ],
+    
+        'type' => [
+            'abstract' => [
+                'offers' => 'Compra :qty a :price cada uno y ahorra :discount%',
             ],
         ],
-    ],
+    ],    
 
     'categories' => [
         'filters' => [

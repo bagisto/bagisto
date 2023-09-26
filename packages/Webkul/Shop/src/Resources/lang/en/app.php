@@ -66,6 +66,7 @@ return [
 
         'account' => [
             'home'      => 'Home',
+
             'profile'   => [
                 'title'                   => 'Profile',
                 'first-name'              => 'First Name',
@@ -399,43 +400,18 @@ return [
         ],
     ],
 
-    'products'  => [
-        'reviews'                => 'Reviews',
-        'add-to-cart'            => 'Add To Cart',
-        'add-to-compare'         => 'Product added in compare.',
-        'already-in-compare'     => 'Product is already added in compare.',
-        'buy-now'                => 'Buy Now',
-        'compare'                => 'Compare',
-        'rating'                 => 'Rating',
-        'title'                  => 'Title',
-        'comment'                => 'Comment',
-        'submit-review'          => 'Submit Review',
-        'customer-review'        => 'Customer Reviews',
-        'write-a-review'         => 'Write a Review',
-        'stars'                  => 'Stars',
-        'share'                  => 'Share',
-        'empty-review'           => 'No Review found, be the first to review this product',
-        'was-this-helpful'       => 'Was This Review Helpful?',
-        'load-more'              => 'Load More',
-        'add-image'              => 'Add Image',
-        'description'            => 'Description',
-        'additional-information' => 'Additional Information',
-        'submit-success'         => 'Submit Successfully',
-        'something-went-wrong'   => 'Something went wrong',
-        'in-stock'               => 'In Stock',
-        'available-for-order'    => 'Available For Order',
-        'out-of-stock'           => 'Out of Stock',
-        'related-product-title'  => 'Related Products',
-        'up-sell-title'          => 'We found other products you might like!',
-        'new'                    => 'New',
-        'as-low-as'              => 'As low as',
-        'starting-at'            => 'Starting at',
-        'name'                   => 'Name',
-        'qty'                    => 'Qty',
-        'offers'                 => 'Buy :qty for :price each and save :discount%',
-        'tax-inclusive'          => 'Inclusive of all taxes',
+    'products' => [
+        'prices' => [
+            'grouped' => [
+                'starting-at' => 'Starting at',
+            ],
 
-        'sort-by'                => [
+            'configurable' => [
+                'as-low-as' => 'As low as',
+            ],
+        ],
+
+        'sort-by' => [
             'title'   => 'Sort By',
             'options' => [
                 'from-a-z'        => 'From A-Z',
@@ -469,10 +445,42 @@ return [
                 ],
             ],
 
+            'gallery' => [
+                'thumbnail-image' => 'Thumbnail Image',
+                'product-image'   => 'Product Image',
+            ],
+
             'reviews' => [
                 'cancel'      => 'Cancel',
+                'rating'      => 'Rating',
                 'success'     => 'Review submitted successfully.',
                 'attachments' => 'Attachments',
+                'title'       => 'Title',
+                'comment'     => 'Comment',
+                'customer-review'        => 'Customer Reviews',
+                'submit-review'          => 'Submit Review',
+                'write-a-review'         => 'Write a Review',
+                'empty-review'           => 'No Review found, be the first to review this product',
+                'load-more'              => 'Load More',
+                'failed-to-upload'       => 'The image failed to upload',
+            ],
+
+            'description'            => 'Description',
+            'additional-information' => 'Additional Information',
+            'review'                 => 'Reviews',
+            'related-product-title'  => 'Related Products',
+            'up-sell-title'          => 'We found other products you might like!',
+            'tax-inclusive'          => 'Inclusive of all taxes',
+            'add-to-cart'            => 'Add To Cart',
+            'buy-now'                => 'Buy Now',
+            'compare'                => 'Compare',
+            'add-to-compare'         => 'Product added in compare.',
+            'already-in-compare'     => 'Product is already added in compare.',
+        ],
+
+        'type' => [
+            'abstract' => [
+                'offers' => 'Buy :qty for :price each and save :discount%',
             ],
         ],
     ],
@@ -499,7 +507,7 @@ return [
         'title' => 'Search results for : :query',
     ],
 
-    'compare'  => [
+    'compare' => [
         'product-compare'    => 'Product Compare',
         'delete-all'         => 'Delete All',
         'empty-text'         => 'You have no items in your compare list',

@@ -66,6 +66,7 @@ return [
 
         'account' => [
             'home'      => 'Accueil',
+
             'profile'   => [
                 'title'                   => 'Profil',
                 'first-name'              => 'Prénom',
@@ -400,41 +401,16 @@ return [
     ],
 
     'products' => [
-        'reviews'                => 'Avis',
-        'add-to-cart'            => 'Ajouter au panier',
-        'add-to-compare'         => 'Produit ajouté à la comparaison.',
-        'already-in-compare'     => 'Le produit est déjà ajouté à la comparaison.',
-        'buy-now'                => 'Acheter maintenant',
-        'compare'                => 'Comparer',
-        'rating'                 => 'Note',
-        'title'                  => 'Titre',
-        'comment'                => 'Commentaire',
-        'submit-review'          => 'Soumettre un avis',
-        'customer-review'        => 'Avis des clients',
-        'write-a-review'         => 'Écrire un avis',
-        'stars'                  => 'Étoiles',
-        'share'                  => 'Partager',
-        'empty-review'           => 'Aucun avis trouvé, soyez le premier à donner votre avis sur ce produit',
-        'was-this-helpful'       => 'Cet avis vous a-t-il été utile ?',
-        'load-more'              => 'Charger plus',
-        'add-image'              => 'Ajouter une image',
-        'description'            => 'Description',
-        'additional-information' => 'Informations supplémentaires',
-        'submit-success'         => 'Soumis avec succès',
-        'something-went-wrong'   => 'Quelque chose s\'est mal passé',
-        'in-stock'               => 'En stock',
-        'available-for-order'    => 'Disponible pour commande',
-        'out-of-stock'           => 'Épuisé',
-        'related-product-title'  => 'Produits similaires',
-        'up-sell-title'          => 'Nous avons trouvé d\'autres produits qui pourraient vous intéresser !',
-        'new'                    => 'Nouveau',
-        'as-low-as'              => 'À partir de',
-        'starting-at'            => 'À partir de',
-        'name'                   => 'Nom',
-        'qty'                    => 'Qté',
-        'offers'                 => 'Achetez :qty pour :price chacun et économisez :discount%',
-        'tax-inclusive'          => 'Toutes taxes comprises',
-
+        'prices' => [
+            'grouped' => [
+                'starting-at' => 'À partir de',
+            ],
+    
+            'configurable' => [
+                'as-low-as' => 'À partir de',
+            ],
+        ],
+    
         'sort-by' => [
             'title'   => 'Trier par',
             'options' => [
@@ -442,40 +418,72 @@ return [
                 'from-z-a'        => 'De Z à A',
                 'latest-first'    => 'Plus récent en premier',
                 'oldest-first'    => 'Plus ancien en premier',
-                'cheapest-first'  => 'Les moins chers en premier',
-                'expensive-first' => 'Les plus chers en premier',
+                'cheapest-first'  => 'Moins cher en premier',
+                'expensive-first' => 'Plus cher en premier',
             ],
         ],
-
+    
         'view' => [
             'type' => [
                 'configurable' => [
                     'select-options'       => 'Veuillez sélectionner une option',
                     'select-above-options' => 'Veuillez sélectionner les options ci-dessus',
                 ],
-
+    
                 'bundle' => [
                     'none' => 'Aucun',
                 ],
-
+    
                 'downloadable' => [
                     'samples' => 'Échantillons',
                     'links'   => 'Liens',
                     'sample'  => 'Échantillon',
                 ],
-
+    
                 'grouped' => [
                     'name' => 'Nom',
                 ],
             ],
-
+    
+            'gallery' => [
+                'thumbnail-image' => 'Image miniature',
+                'product-image'   => 'Image du produit',
+            ],
+    
             'reviews' => [
                 'cancel'      => 'Annuler',
+                'rating'      => 'Évaluation',
                 'success'     => 'Avis soumis avec succès.',
                 'attachments' => 'Pièces jointes',
+                'title'       => 'Titre',
+                'comment'     => 'Commentaire',
+                'customer-review'        => 'Avis clients',
+                'submit-review'          => 'Envoyer un avis',
+                'write-a-review'         => 'Rédiger un avis',
+                'empty-review'           => 'Aucun avis trouvé, soyez le premier à évaluer ce produit.',
+                'load-more'              => 'Charger plus',
+                'failed-to-upload'       => 'Échec du téléchargement de l\'image',
+            ],
+    
+            'description'            => 'Description',
+            'additional-information' => 'Informations complémentaires',
+            'review'                 => 'Avis',
+            'related-product-title'  => 'Produits connexes',
+            'up-sell-title'          => 'Nous avons trouvé d\'autres produits qui pourraient vous plaire !',
+            'tax-inclusive'          => 'Taxes incluses',
+            'add-to-cart'            => 'Ajouter au panier',
+            'buy-now'                => 'Acheter maintenant',
+            'compare'                => 'Comparer',
+            'add-to-compare'         => 'Produit ajouté à la liste de comparaison.',
+            'already-in-compare'     => 'Le produit est déjà ajouté à la liste de comparaison.',
+        ],
+    
+        'type' => [
+            'abstract' => [
+                'offers' => 'Achetez :qty pour :price chacun et économisez :discount%',
             ],
         ],
-    ],
+    ],    
 
     'categories' => [
         'filters' => [

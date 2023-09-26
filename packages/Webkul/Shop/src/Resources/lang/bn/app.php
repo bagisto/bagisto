@@ -66,6 +66,7 @@ return [
 
         'account' => [
             'home'      => 'হোম',
+
             'profile'   => [
                 'title'                   => 'প্রোফাইল',
                 'first-name'              => 'প্রথম নাম',
@@ -399,83 +400,90 @@ return [
         ],
     ],
 
-    'products'  => [
-        'reviews'                => 'পর্যালোচনা',
-        'add-to-cart'            => 'কার্টে যোগ করুন',
-        'add-to-compare'         => 'তুলনা তালিকায় পণ্য যোগ করুন',
-        'already-in-compare'     => 'পণ্যটি ইতিমধ্যে তুলনা তালিকায় যোগ করা হয়েছে।',
-        'buy-now'                => 'এখনই ক্রয় করুন',
-        'compare'                => 'তুলনা করুন',
-        'rating'                 => 'রেটিং',
-        'title'                  => 'শিরোনাম',
-        'comment'                => 'মন্তব্য',
-        'submit-review'          => 'পর্যালোচনা জমা দিন',
-        'customer-review'        => 'গ্রাহক পর্যালোচনা',
-        'write-a-review'         => 'পর্যালোচনা লিখুন',
-        'stars'                  => 'তারা',
-        'share'                  => 'শেয়ার করুন',
-        'empty-review'           => 'কোনও পর্যালোচনা পাওয়া যায়নি, এই পণ্যটির প্রথম পর্যালোচনা করুন',
-        'was-this-helpful'       => 'এই পর্যালোচনা সাহায্যকর ছিল কি?',
-        'load-more'              => 'আরো দেখুন',
-        'add-image'              => 'চিত্র যোগ করুন',
-        'description'            => 'বর্ণনা',
-        'additional-information' => 'অতিরিক্ত তথ্য',
-        'submit-success'         => 'সাফল্যের সাথে জমা দেওয়া হয়েছে',
-        'something-went-wrong'   => 'কিছু ভুল হয়েছে',
-        'in-stock'               => 'স্টকে আছে',
-        'available-for-order'    => 'অর্ডার এর জন্য উপলব্ধ',
-        'out-of-stock'           => 'স্টক শেষ',
-        'related-product-title'  => 'সম্পর্কিত পণ্য',
-        'up-sell-title'          => 'আমরা আরো কিছু পণ্য পেয়েছি যা আপনি পছন্দ করতে পারেন!',
-        'new'                    => 'নতুন',
-        'as-low-as'              => 'যেমন লো',
-        'starting-at'            => 'শুরু হতে',
-        'name'                   => 'নাম',
-        'qty'                    => 'পরিমাণ',
-        'offers'                 => ':price প্রতি :qty কে ক্রয় করুন এবং :discount% সেভ করুন',
-        'tax-inclusive'          => 'সমস্ত কর সহ',
-
-        'sort-by'                => [
-            'title'   => 'দ্বারা সাজান',
-            'options' => [
-                'from-a-z'        => 'সাজান (এ - জে)',
-                'from-z-a'        => 'সাজান (জে - এ)',
-                'latest-first'    => 'নতুনতম প্রথম',
-                'oldest-first'    => 'প্রাচীনতম প্রথম',
-                'cheapest-first'  => 'সবচেয়ে সস্তা প্রথম',
-                'expensive-first' => 'সবচেয়ে মানি প্রথম',
+    'products' => [
+        'prices' => [
+            'grouped' => [
+                'starting-at' => 'শুরু হচ্ছে',
+            ],
+    
+            'configurable' => [
+                'as-low-as' => 'যেহেতু সর্বনিম্ন',
             ],
         ],
-
+    
+        'sort-by' => [
+            'title'   => 'দ্বারা বাছাই করুন',
+            'options' => [
+                'from-a-z'        => 'এ থেকে জে',
+                'from-z-a'        => 'জ থেকে এ',
+                'latest-first'    => 'সর্বশেষ প্রথম',
+                'oldest-first'    => 'প্রাচীনতম প্রথম',
+                'cheapest-first'  => 'সবচেয়ে সুস্থ প্রথম',
+                'expensive-first' => 'সবচেয়ে দামি প্রথম',
+            ],
+        ],
+    
         'view' => [
             'type' => [
                 'configurable' => [
                     'select-options'       => 'দয়া করে একটি বিকল্প নির্বাচন করুন',
-                    'select-above-options' => 'দয়া করে উপরের বিকল্প নির্বাচন করুন',
+                    'select-above-options' => 'দয়া করে উপরের বিকল্পগুলি নির্বাচন করুন',
                 ],
-
+    
                 'bundle' => [
                     'none' => 'কোনটি নেই',
                 ],
-
+    
                 'downloadable' => [
-                    'samples' => 'স্যাম্পল',
-                    'links'   => 'লিঙ্কগুলি',
-                    'sample'  => 'স্যাম্পল',
+                    'samples' => 'নমুনা',
+                    'links'   => 'লিংকগুলি',
+                    'sample'  => 'নমুনা',
                 ],
-
+    
                 'grouped' => [
                     'name' => 'নাম',
                 ],
             ],
-
+    
+            'gallery' => [
+                'thumbnail-image' => 'থাম্বনেল ইমেজ',
+                'product-image'   => 'পণ্য ইমেজ',
+            ],
+    
             'reviews' => [
                 'cancel'      => 'বাতিল করুন',
-                'success'     => 'পর্যালোচনা সফলভাবে জমা দেওয়া হয়েছে',
-                'attachments' => 'সংযোগ',
+                'rating'      => 'রেটিং',
+                'success'     => 'রিভিউ সফলভাবে দাখিল করা হয়েছে।',
+                'attachments' => 'সংযুক্তিসমূহ',
+                'title'       => 'শিরোনাম',
+                'comment'     => 'মন্তব্য',
+                'customer-review'        => 'গ্রাহক পর্যালোচনা',
+                'submit-review'          => 'রিভিউ জমা দিন',
+                'write-a-review'         => 'রিভিউ লিখুন',
+                'empty-review'           => 'কোনও রিভিউ পাওয়া যায়নি, প্রথমে এই পণ্যটির প্রতি রিভিউ দিতে হয়',
+                'load-more'              => 'আরও লোড করুন',
+                'failed-to-upload'       => 'চিত্র আপলোড ব্যর্থ হয়েছে',
+            ],
+    
+            'description'            => 'বিবরণ',
+            'additional-information' => 'অতিরিক্ত তথ্য',
+            'review'                 => 'রিভিউ',
+            'related-product-title'  => 'সাথে সম্পর্কিত পণ্যগুলি',
+            'up-sell-title'          => 'আমরা অন্যান্য পণ্য পেয়েছি যা আপনার পছন্দের হতে পারে!',
+            'tax-inclusive'          => 'সমস্ত কর সহ',
+            'add-to-cart'            => 'কার্টে যোগ করুন',
+            'buy-now'                => 'এখন ক্রয় করুন',
+            'compare'                => 'তুলনা',
+            'add-to-compare'         => 'পণ্য তুলনা তালিকায় যোগ করা হয়েছে।',
+            'already-in-compare'     => 'পণ্যটি ইতিমধ্যে তুলনা তালিকায় যোগ করা হয়েছে।',
+        ],
+    
+        'type' => [
+            'abstract' => [
+                'offers' => 'প্রতি একক মূল্যে কিনুন :qty এবং :discount% সেভ করুন',
             ],
         ],
-    ],
+    ],    
 
     'categories' => [
         'filters' => [

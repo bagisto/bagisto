@@ -66,6 +66,7 @@ return [
 
         'account' => [
             'home'      => 'خانه',
+
             'profile'   => [
                 'title'                   => 'پروفایل',
                 'first-name'              => 'نام',
@@ -400,82 +401,89 @@ return [
     ],
 
     'products' => [
-        'reviews'                => 'نقد و بررسی‌ها',
-        'add-to-cart'            => 'افزودن به سبد خرید',
-        'add-to-compare'         => 'محصول به لیست مقایسه افزوده شد.',
-        'already-in-compare'     => 'محصول در حال حاضر در لیست مقایسه قرار دارد.',
-        'buy-now'                => 'خرید فوری',
-        'compare'                => 'مقایسه',
-        'rating'                 => 'امتیاز',
-        'title'                  => 'عنوان',
-        'comment'                => 'نظر',
-        'submit-review'          => 'ثبت نقد و بررسی',
-        'customer-review'        => 'نقد و بررسی‌های مشتریان',
-        'write-a-review'         => 'نوشتن یک نقد و بررسی',
-        'stars'                  => 'ستاره‌ها',
-        'share'                  => 'اشتراک‌گذاری',
-        'empty-review'           => 'هیچ نقد و بررسی‌ای یافت نشد. اولین نفری باشید که این محصول را بررسی کنید.',
-        'was-this-helpful'       => 'آیا این نقد و بررسی به شما کمک کرد؟',
-        'load-more'              => 'بارگذاری بیشتر',
-        'add-image'              => 'افزودن تصویر',
-        'description'            => 'توضیحات',
-        'additional-information' => 'اطلاعات تکمیلی',
-        'submit-success'         => 'با موفقیت ثبت شد',
-        'something-went-wrong'   => 'مشکلی پیش آمده است',
-        'in-stock'               => 'موجود در انبار',
-        'available-for-order'    => 'موجود برای سفارش',
-        'out-of-stock'           => 'ناموجود در انبار',
-        'related-product-title'  => 'محصولات مرتبط',
-        'up-sell-title'          => 'ما محصولات دیگری پیدا کردیم که ممکن است برایتان جالب باشد!',
-        'new'                    => 'جدید',
-        'as-low-as'              => 'از',
-        'starting-at'            => 'شروع از',
-        'name'                   => 'نام',
-        'qty'                    => 'تعداد',
-        'offers'                 => 'خرید :qty برای :price هر عدد و تخفیف :discount%',
-        'tax-inclusive'          => 'شامل همه مالیات‌ها',
-
-        'sort-by'                => [
-            'title'   => 'مرتب‌سازی بر اساس',
-            'options' => [
-                'from-a-z'        => 'از A تا Z',
-                'from-z-a'        => 'از Z تا A',
-                'latest-first'    => 'جدیدترین اول',
-                'oldest-first'    => 'قدیمی‌ترین اول',
-                'cheapest-first'  => 'ارزان‌ترین اول',
-                'expensive-first' => 'گران‌ترین اول',
+        'prices' => [
+            'grouped' => [
+                'starting-at' => 'شروع از',
+            ],
+    
+            'configurable' => [
+                'as-low-as' => 'از',
             ],
         ],
-
+    
+        'sort-by' => [
+            'title'   => 'مرتب‌سازی بر اساس',
+            'options' => [
+                'from-a-z'        => 'از الف تا ی',
+                'from-z-a'        => 'از ی تا الف',
+                'latest-first'    => 'جدیدترین‌ها اول',
+                'oldest-first'    => 'قدیمی‌ترین‌ها اول',
+                'cheapest-first'  => 'ارزانترین‌ها اول',
+                'expensive-first' => 'گرانترین‌ها اول',
+            ],
+        ],
+    
         'view' => [
             'type' => [
                 'configurable' => [
-                    'select-options'       => 'لطفاً یک گزینه را انتخاب کنید',
+                    'select-options'       => 'لطفاً یک گزینه انتخاب کنید',
                     'select-above-options' => 'لطفاً گزینه‌های بالا را انتخاب کنید',
                 ],
-
+    
                 'bundle' => [
-                    'none' => 'هیچ‌کدام',
+                    'none' => 'هیچ',
                 ],
-
+    
                 'downloadable' => [
                     'samples' => 'نمونه‌ها',
-                    'links'   => 'لینک‌ها',
+                    'links'   => 'پیوندها',
                     'sample'  => 'نمونه',
                 ],
-
+    
                 'grouped' => [
                     'name' => 'نام',
                 ],
             ],
-
+    
+            'gallery' => [
+                'thumbnail-image' => 'تصویر کوچک',
+                'product-image'   => 'تصویر محصول',
+            ],
+    
             'reviews' => [
                 'cancel'      => 'لغو',
+                'rating'      => 'امتیاز',
                 'success'     => 'نقد و بررسی با موفقیت ارسال شد.',
-                'attachments' => 'پیوست‌ها',
+                'attachments' => 'ضمائم',
+                'title'       => 'عنوان',
+                'comment'     => 'نظر',
+                'customer-review'        => 'نظرات مشتریان',
+                'submit-review'          => 'ثبت نقد و بررسی',
+                'write-a-review'         => 'نوشتن یک نقد و بررسی',
+                'empty-review'           => 'هیچ نقد و بررسی ای یافت نشد، اولین نفری باشید که این محصول را مورد بررسی قرار دهید.',
+                'load-more'              => 'بارگذاری بیشتر',
+                'failed-to-upload'       => 'تصویر بارگذاری نشد',
+            ],
+    
+            'description'            => 'توضیحات',
+            'additional-information' => 'اطلاعات اضافی',
+            'review'                 => 'نقد و بررسی‌ها',
+            'related-product-title'  => 'محصولات مرتبط',
+            'up-sell-title'          => 'ما محصولات دیگری پیدا کردیم که شاید به شما بپسندد!',
+            'tax-inclusive'          => 'شامل تمام مالیات‌ها',
+            'add-to-cart'            => 'افزودن به سبد خرید',
+            'buy-now'                => 'خرید فوری',
+            'compare'                => 'مقایسه',
+            'add-to-compare'         => 'محصول به لیست مقایسه اضافه شد.',
+            'already-in-compare'     => 'محصول از قبل در لیست مقایسه وجود دارد.',
+        ],
+    
+        'type' => [
+            'abstract' => [
+                'offers' => 'خرید کالاهای :qty به قیمت :price هر کدام و صرفه‌جویی :discount%',
             ],
         ],
-    ],
+    ],    
 
     'categories' => [
         'filters' => [

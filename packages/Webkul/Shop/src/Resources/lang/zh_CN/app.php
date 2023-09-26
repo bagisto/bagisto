@@ -66,6 +66,7 @@ return [
 
         'account' => [
             'home'      => '主页',
+
             'profile'   => [
                 'title'                   => '个人资料',
                 'first-name'              => '名字',
@@ -399,83 +400,90 @@ return [
         ],
     ],
 
-    'products'  => [
-        'reviews'                => '评论',
-        'add-to-cart'            => '加入购物车',
-        'add-to-compare'         => '商品已添加到比较列表。',
-        'already-in-compare'     => '商品已经在比较列表中。',
-        'buy-now'                => '立即购买',
-        'compare'                => '比较',
-        'rating'                 => '评分',
-        'title'                  => '标题',
-        'comment'                => '评论',
-        'submit-review'          => '提交评论',
-        'customer-review'        => '客户评论',
-        'write-a-review'         => '撰写评论',
-        'stars'                  => '星级',
-        'share'                  => '分享',
-        'empty-review'           => '暂无评论，成为第一个评论该商品的人',
-        'was-this-helpful'       => '此评论是否有帮助？',
-        'load-more'              => '加载更多',
-        'add-image'              => '添加图片',
-        'description'            => '描述',
-        'additional-information' => '附加信息',
-        'submit-success'         => '提交成功',
-        'something-went-wrong'   => '出现问题',
-        'in-stock'               => '有库存',
-        'available-for-order'    => '可供订购',
-        'out-of-stock'           => '缺货',
-        'related-product-title'  => '相关商品',
-        'up-sell-title'          => '我们还为您推荐',
-        'new'                    => '新',
-        'as-low-as'              => '最低',
-        'starting-at'            => '起价',
-        'name'                   => '名称',
-        'qty'                    => '数量',
-        'offers'                 => '购买 :qty 件，每件 :price，可节省 :discount%',
-        'tax-inclusive'          => '含所有税费',
-
-        'sort-by'                => [
+    'products' => [
+        'prices' => [
+            'grouped' => [
+                'starting-at' => '起始价',
+            ],
+    
+            'configurable' => [
+                'as-low-as' => '低至',
+            ],
+        ],
+    
+        'sort-by' => [
             'title'   => '排序方式',
             'options' => [
                 'from-a-z'        => '从A到Z',
                 'from-z-a'        => '从Z到A',
                 'latest-first'    => '最新优先',
                 'oldest-first'    => '最旧优先',
-                'cheapest-first'  => '价格最低优先',
-                'expensive-first' => '价格最高优先',
+                'cheapest-first'  => '最便宜优先',
+                'expensive-first' => '最贵优先',
             ],
         ],
-
+    
         'view' => [
             'type' => [
                 'configurable' => [
-                    'select-options'       => '请选择选项',
-                    'select-above-options' => '请选择上述选项',
+                    'select-options'       => '请选择一个选项',
+                    'select-above-options' => '请选择上面的选项',
                 ],
-
+    
                 'bundle' => [
                     'none' => '无',
                 ],
-
+    
                 'downloadable' => [
-                    'samples' => '示例',
+                    'samples' => '样品',
                     'links'   => '链接',
-                    'sample'  => '示例',
+                    'sample'  => '样品',
                 ],
-
+    
                 'grouped' => [
                     'name' => '名称',
                 ],
             ],
-
+    
+            'gallery' => [
+                'thumbnail-image' => '缩略图',
+                'product-image'   => '产品图片',
+            ],
+    
             'reviews' => [
                 'cancel'      => '取消',
+                'rating'      => '评分',
                 'success'     => '评论提交成功。',
                 'attachments' => '附件',
+                'title'       => '标题',
+                'comment'     => '评论',
+                'customer-review'        => '客户评论',
+                'submit-review'          => '提交评论',
+                'write-a-review'         => '撰写评论',
+                'empty-review'           => '没有找到评论，成为第一个评论这个产品的人',
+                'load-more'              => '加载更多',
+                'failed-to-upload'       => '图片上传失败',
+            ],
+    
+            'description'            => '描述',
+            'additional-information' => '附加信息',
+            'review'                 => '评论',
+            'related-product-title'  => '相关产品',
+            'up-sell-title'          => '我们找到了您可能喜欢的其他产品！',
+            'tax-inclusive'          => '包含所有税费',
+            'add-to-cart'            => '加入购物车',
+            'buy-now'                => '立即购买',
+            'compare'                => '比较',
+            'add-to-compare'         => '产品已添加到比较。',
+            'already-in-compare'     => '产品已经添加到比较中。',
+        ],
+    
+        'type' => [
+            'abstract' => [
+                'offers' => '每个 :qty 以 :price 的价格购买，并节省 :discount%',
             ],
         ],
-    ],
+    ],    
 
     'categories' => [
         'filters' => [
