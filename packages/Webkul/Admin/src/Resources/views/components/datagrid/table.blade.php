@@ -7,7 +7,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-datagrid-table-template">
         <div class="w-full">
-            <div class="table-responsive grid w-full box-shadow rounded-[4px] bg-white dark:bg-gray-900  overflow-hidden">
+            <div class="table-responsive grid w-full box-shadow rounded-[4px] bg-white dark:bg-gray-900 overflow-hidden">
                 <slot name="header">
                     <template v-if="$parent.isLoading">
                         <x-admin::shimmer.datagrid.table.head :isMultiRow="$isMultiRow"></x-admin::shimmer.datagrid.table.head>
@@ -15,7 +15,7 @@
 
                     <template v-else>
                         <div
-                            class="row grid gap-[10px] min-h-[47px] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800   text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold items-center"
+                            class="row grid gap-[10px] min-h-[47px] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold items-center"
                             :style="`grid-template-columns: repeat(${gridsCount}, 1fr)`"
                         >
                             <!-- Mass Actions -->

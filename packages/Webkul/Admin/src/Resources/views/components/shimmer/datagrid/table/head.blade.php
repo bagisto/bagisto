@@ -1,7 +1,7 @@
 @props(['isMultiRow' => false])
 
 @if (! $isMultiRow)
-    <div class="row grid grid-cols-6 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800   bg-gray-50">
+    <div class="row grid grid-cols-6 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
         <!-- Mass Actions -->
         <div class="shimmer w-[24px] h-[26px]"></div>
 
