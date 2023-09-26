@@ -18,7 +18,7 @@ class AttributeResource extends JsonResource
             'id'      => $this->id,
             'code'    => $this->code,
             'type'    => $this->type,
-            'name'    => $this->name ?? $this->admin_name,
+            'name'    => $this->admin_name,
             'options' => AttributeOptionResource::collection($this->options),
         ];
     }
