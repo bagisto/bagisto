@@ -43,8 +43,12 @@
 
     <div class="flex gap-[10px] items-center">
         {{-- Dark mode Switcher --}}
-        <v-dark class="mt-[5px]">
-            <span class="transition-all text-[24px] {{ request()->cookie('dark_mode') ? 'icon-light' : 'icon-dark' }}"></span>
+        <v-dark>
+            <div class="flex">
+                <span
+                    class="{{ request()->cookie('dark_mode') ? 'icon-light' : 'icon-dark' }} p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
+                ></span>
+            </div>
         </v-dark>
 
         <a 
@@ -688,9 +692,9 @@
     </script>
 
     <script type="text/x-template" id="v-dark-template">
-        <div class="mt-[5px] text-[16px] text-gray-800 dark:text-white cursor-pointer">
+        <div class="flex">
             <span
-                class=" transition-all text-[24px]"
+                class="p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
                 :class="[isDarkMode ? 'icon-light' : 'icon-dark']"
                 @click="toggle"
             ></span>
