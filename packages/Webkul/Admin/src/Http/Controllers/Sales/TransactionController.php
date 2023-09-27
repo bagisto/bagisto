@@ -157,7 +157,7 @@ class TransactionController extends Controller
      */
     public function convertIntoSingleDimArray($transData)
     {
-        static $detailsData = [];
+        $data = [];
 
         foreach ($transData as $key => $data) {
             if (is_array($data)) {
@@ -169,10 +169,10 @@ class TransactionController extends Controller
                     continue;
                 }
 
-                $detailsData[$key] = $data;
+                $data[$key] = $data;
             }
         }
 
-        return $detailsData;
+        return $data;
     }
 }

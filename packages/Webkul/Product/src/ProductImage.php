@@ -26,14 +26,8 @@ class ProductImage
      */
     public function getGalleryImages($product)
     {
-        static $loadedGalleryImages = [];
-
         if (! $product) {
             return [];
-        }
-
-        if (array_key_exists($product->id, $loadedGalleryImages)) {
-            return $loadedGalleryImages[$product->id];
         }
 
         $images = [];
@@ -63,7 +57,7 @@ class ProductImage
             $images = $this->getGalleryImages($product->parent);
         }
 
-        return $loadedGalleryImages[$product->id] = $images;
+        return $images;
     }
 
     /**
@@ -97,17 +91,11 @@ class ProductImage
      */
     public function getProductBaseImage($product, array $galleryImages = null)
     {
-        static $loadedBaseImages = [];
-
         if (! $product) {
             return;
         }
 
-        if (array_key_exists($product->id, $loadedBaseImages)) {
-            return $loadedBaseImages[$product->id];
-        }
-
-        return $loadedBaseImages[$product->id] = $galleryImages
+        return $galleryImages
             ? $galleryImages[0]
             : $this->otherwiseLoadFromProduct($product);
     }

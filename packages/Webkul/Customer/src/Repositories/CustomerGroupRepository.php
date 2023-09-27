@@ -15,20 +15,4 @@ class CustomerGroupRepository extends Repository
     {
         return 'Webkul\Customer\Contracts\CustomerGroup';
     }
-
-    /**
-     * Returns guest group.
-     *
-     * @return object
-     */
-    public function getCustomerGuestGroup()
-    {
-        static $customerGuestGroup;
-
-        if ($customerGuestGroup) {
-            return $customerGuestGroup;
-        }
-
-        return $customerGuestGroup = $this->findOneByField('code', 'guest');
-    }
 }

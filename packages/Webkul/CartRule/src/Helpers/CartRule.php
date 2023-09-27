@@ -22,6 +22,11 @@ class CartRule
     protected $itemTotals = [];
 
     /**
+     * @var array
+     */
+    protected $cartRules = null;
+
+    /**
      * Create a new helper instance.
      *
      * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
@@ -59,7 +64,7 @@ class CartRule
          */
         if (
             ! $this->haveCartRules()
-            && ! $cart->base_discount_amount
+            && ! (float) $cart->base_discount_amount
         ) {
             return;
         }
@@ -97,26 +102,15 @@ class CartRule
     /**
      * Returns cart rules
      *
-     * @param  \Webkul\Checkout\Contracts\Cart  $cart
      * @return \Illuminate\Support\Collection
      */
-    public function getCartRules($cart)
+    public function getCartRules()
     {
-        $staticCartRules = new class() {
-            public static $cartRules;
-            public static $cartID;
-        };
-
-        if (
-            $staticCartRules::$cartID === $cart->id
-            && $staticCartRules::$cartRules
-        ) {
-            return $staticCartRules::$cartRules;
+        if ($this->cartRules) {
+            return $this->cartRules;
         }
 
-        $staticCartRules::$cartID = $cart->id;
-
-        $cartRules = $this->getCartRuleQuery()
+        $this->cartRules = $this->getCartRuleQuery()
             ->with([
                 'cart_rule_customer_groups',
                 'cart_rule_channels',
@@ -124,9 +118,7 @@ class CartRule
             ])
             ->get();
 
-        $staticCartRules::$cartRules = $cartRules;
-        
-        return $cartRules;
+        return $this->cartRules;
     }
 
     /**
@@ -211,7 +203,7 @@ class CartRule
 
         $appliedRuleIds = [];
 
-        foreach ($rules = $this->getCartRules($item->cart) as $rule) {
+        foreach ($rules = $this->getCartRules() as $rule) {
             if (! $this->canProcessRule($item->cart, $rule)) {
                 continue;
             }
@@ -338,7 +330,7 @@ class CartRule
 
         $appliedRuleIds = [];
 
-        foreach ($this->getCartRules($cart) as $rule) {
+        foreach ($this->getCartRules() as $rule) {
             if (! $this->canProcessRule($cart, $rule)) {
                 continue;
             }
@@ -424,7 +416,7 @@ class CartRule
         $appliedRuleIds = [];
 
         foreach ($cart->items->all() as $item) {
-            foreach ($this->getCartRules($cart) as $rule) {
+            foreach ($this->getCartRules() as $rule) {
                 if (! $this->canProcessRule($cart, $rule)) {
                     continue;
                 }
@@ -476,7 +468,7 @@ class CartRule
      */
     public function calculateCartItemTotals($cart)
     {
-        foreach ($this->getCartRules($cart) as $rule) {
+        foreach ($this->getCartRules() as $rule) {
             if ($rule->action_type != 'cart_fixed') {
                 continue;
             }
@@ -586,8 +578,6 @@ class CartRule
      */
     public function haveCartRules(): bool
     {
-        $customerGroup = $this->customerRepository->getCurrentGroup();
-
         return (boolean) $this->getCartRuleQuery()->count();
     }
 }

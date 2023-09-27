@@ -579,102 +579,102 @@
         </script>
 
         <script type="module">
-        app.component('v-notifications', {
-            template: '#v-notifications-template',
+            app.component('v-notifications', {
+                template: '#v-notifications-template',
 
-            props: [
-                'getReadAllUrl',
-                'readAllTitle',
-            ],
+                props: [
+                    'getReadAllUrl',
+                    'readAllTitle',
+                ],
 
-            data() {
-                return {
-                    notifications: [],
+                data() {
+                    return {
+                        notifications: [],
 
-                    ordertype: {
-                        pending: {
-                            icon: 'icon-information',
-                            message: 'Order Pending',
+                        ordertype: {
+                            pending: {
+                                icon: 'icon-information',
+                                message: 'Order Pending',
+                            },
+                            processing: {
+                                icon: 'icon-processing',
+                                message: 'Order Processing'
+                            },
+                            canceled: {
+                                icon: 'icon-cancel-1',
+                                message: 'Order Canceled'
+                            },
+                            completed: {
+                                icon: 'icon-done',
+                                message: 'Order Completed'
+                            },
+                            closed: {
+                                icon: 'icon-cancel-1',
+                                message: 'Order Closed'
+                            },
+                            pending_payment: {
+                                icon: 'icon-information',
+                                message: 'Payment Pending'
+                            },
                         },
-                        processing: {
-                            icon: 'icon-processing',
-                            message: 'Order Processing'
-                        },
-                        canceled: {
-                            icon: 'icon-cancel-1',
-                            message: 'Order Canceled'
-                        },
-                        completed: {
-                            icon: 'icon-done',
-                            message: 'Order Completed'
-                        },
-                        closed: {
-                            icon: 'icon-cancel-1',
-                            message: 'Order Closed'
-                        },
-                        pending_payment: {
-                            icon: 'icon-information',
-                            message: 'Payment Pending'
-                        },
+
+                        totalUnRead: 0,
+
+                        orderTypeMessages: {
+                            'pending': "@lang('admin::app.notifications.order-status-messages.pending')",
+                            'canceled': "@lang('admin::app.notifications.order-status-messages.canceled')",
+                            'closed': "@lang('admin::app.notifications.order-status-messages.closed')",
+                            'completed': "@lang('admin::app.notifications.order-status-messages.completed')",
+                            'processing': "@lang('admin::app.notifications.order-status-messages.processing')",
+                            'pending_payment': "@lang('admin::app.notifications.order-status-messages.pending-payment')",
+                        }
+                    }
+                },
+
+                computed: {
+                    notificationStatusIcon() {
+                        return {
+                            pending: 'icon-information text-[24px] text-amber-600 bg-amber-100 rounded-full',
+                            closed: 'icon-repeat text-[24px] text-red-600 bg-red-100 rounded-full',
+                            completed: 'icon-done text-[24px] text-blue-600 bg-blue-100 rounded-full',
+                            canceled: 'icon-cancel-1 text-[24px] text-red-600 bg-red-100 rounded-full',
+                            processing: 'icon-sort-right text-[24px] text-green-600 bg-green-100 rounded-full',
+                        };
+                    },
+                },
+
+                mounted() {
+                    this.getNotification();
+                },
+
+                methods: {
+                    getNotification() {
+                        this.$axios.get('{{ route('admin.notification.get_notification') }}', {
+                                params: {
+                                    limit: 5,
+                                    read: 0
+                                }
+                            })
+                            .then((response) => {
+                                this.notifications = response.data.search_results.data;
+
+                                this.totalUnRead =   response.data.total_unread;
+                            })
+                            .catch(error => console.log(error))
                     },
 
-                    totalUnRead: 0,
+                    readAll() {
+                        this.$axios.post('{{ route('admin.notification.read_all') }}')
+                            .then((response) => {
+                                this.notifications = response.data.search_results.data;
 
-                    orderTypeMessages: {
-                        'pending': "@lang('admin::app.notifications.order-status-messages.pending')",
-                        'canceled': "@lang('admin::app.notifications.order-status-messages.canceled')",
-                        'closed': "@lang('admin::app.notifications.order-status-messages.closed')",
-                        'completed': "@lang('admin::app.notifications.order-status-messages.completed')",
-                        'processing': "@lang('admin::app.notifications.order-status-messages.processing')",
-                        'pending_payment': "@lang('admin::app.notifications.order-status-messages.pending-payment')",
+                                this.totalUnRead = response.data.total_unread;
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.success_message });
+                            })
+                            .catch((error) => {});
                     }
                 }
-            },
-
-            computed: {
-                notificationStatusIcon() {
-                    return {
-                        pending: 'icon-information text-[24px] text-amber-600 bg-amber-100 rounded-full',
-                        closed: 'icon-repeat text-[24px] text-red-600 bg-red-100 rounded-full',
-                        completed: 'icon-done text-[24px] text-blue-600 bg-blue-100 rounded-full',
-                        canceled: 'icon-cancel-1 text-[24px] text-red-600 bg-red-100 rounded-full',
-                        processing: 'icon-sort-right text-[24px] text-green-600 bg-green-100 rounded-full',
-                    };
-                },
-            },
-
-            mounted() {
-                this.getNotification();
-            },
-
-            methods: {
-                getNotification() {
-                    this.$axios.get('{{ route('admin.notification.get_notification') }}', {
-                            params: {
-                                limit: 5,
-                                read: 0
-                            }
-                        })
-                        .then((response) => {
-                            this.notifications = response.data.search_results.data;
-
-                            this.totalUnRead =   response.data.total_unread;
-                        })
-                        .catch(error => console.log(error))
-                },
-
-                readAll() {
-                    this.$axios.post('{{ route('admin.notification.read_all') }}')
-                        .then((response) => {
-                            this.notifications = response.data.search_results.data;
-
-                            this.totalUnRead = response.data.total_unread;
-
-                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.success_message });
-                        })
-                        .catch((error) => {});
-                }
-            }
-        });
+            });
         </script>
 @endpushOnce

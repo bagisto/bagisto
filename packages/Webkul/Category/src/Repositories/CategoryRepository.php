@@ -180,13 +180,7 @@ class CategoryRepository extends Repository
      */
     public function getVisibleCategoryTree($id = null)
     {
-        static $categories = [];
-
-        if (array_key_exists($id, $categories)) {
-            return $categories[$id];
-        }
-
-        return $categories[$id] = $id
+        return $id
             ? $this->model::orderBy('position', 'ASC')->where('status', 1)->descendantsAndSelf($id)->toTree($id)
             : $this->model::orderBy('position', 'ASC')->where('status', 1)->get()->toTree();
     }
