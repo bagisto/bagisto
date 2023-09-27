@@ -44,10 +44,7 @@
     <div class="flex gap-[10px] items-center">
         {{-- Dark mode Switcher --}}
         <v-dark>
-            <span
-                class=" transition-all text-[24px]"
-                :class="[isDarkMode ? 'icon-light' : 'icon-dark']"
-            ></span>
+            <span class=" transition-all text-[24px] {{ request()->cookie('is_dark_mode') ? 'icon-light' : 'icon-dark' }}"></span>
         </v-dark>
 
         <a 
