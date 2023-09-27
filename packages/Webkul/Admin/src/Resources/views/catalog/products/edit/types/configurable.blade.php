@@ -526,7 +526,7 @@
                 <!-- Image -->
                 <div
                     class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px] overflow-hidden"
-                    :class="{'border border-dashed dark:border-gray-800  ': ! variant.images.length}"
+                    :class="{'border border-dashed dark:border-gray-800 dark:invert dark:mix-blend-exclusion': ! variant.images.length}"
                 >
                     <template v-if="! variant.images.length">
                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
