@@ -271,6 +271,13 @@
                 changePerPageOption(option) {
                     this.applied.pagination.perPage = option;
 
+                    /**
+                     * When the total records are less than the number of data per page, we need to reset the page.
+                     */
+                    if (this.available.meta.last_page >= this.applied.pagination.page) {
+                        this.applied.pagination.page = 1;
+                    }
+
                     this.get();
                 },
 
