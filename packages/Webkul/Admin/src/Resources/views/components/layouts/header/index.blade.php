@@ -19,7 +19,7 @@
             @if (core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode()))
                 <img src="{{ Storage::url(core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode())) }}" alt="{{ config('app.name') }}" style="height: 40px; width: 110px;"/>
             @else
-                @if (! request()->cookie('is_dark_mode'))
+                @if (! request()->cookie('dark_mode'))
                     <img src="{{ bagisto_asset('images/logo.svg') }}" id="logo-image">
                 @else
                     <img src="{{ bagisto_asset('images/dark-logo.svg') }}" id="logo-image">
@@ -44,7 +44,7 @@
     <div class="flex gap-[10px] items-center">
         {{-- Dark mode Switcher --}}
         <v-dark class="mt-[5px]">
-            <span class="transition-all text-[24px] {{ request()->cookie('is_dark_mode') ? 'icon-light' : 'icon-dark' }}"></span>
+            <span class="transition-all text-[24px] {{ request()->cookie('dark_mode') ? 'icon-light' : 'icon-dark' }}"></span>
         </v-dark>
 
         <a 
@@ -703,7 +703,7 @@
 
             data() {
                 return {
-                    isDarkMode: {{ request()->cookie('is_dark_mode') ?? 0 }},
+                    isDarkMode: {{ request()->cookie('dark_mode') ?? 0 }},
 
                     logo: "{{ bagisto_asset('images/logo.svg') }}",
 
@@ -719,7 +719,7 @@
 
                     expiryDate.setMonth(expiryDate.getMonth() + 1);
 
-                    document.cookie = 'is_dark_mode=' + this.isDarkMode + '; path=/; expires=' + expiryDate.toGMTString();
+                    document.cookie = 'dark_mode=' + this.isDarkMode + '; path=/; expires=' + expiryDate.toGMTString();
 
                     document.documentElement.classList.toggle('dark', this.isDarkMode === 1);
 
@@ -736,7 +736,7 @@
                     for (const cookie of cookies) {
                         const [name, value] = cookie.trim().split('=');
 
-                        if (name === 'is_dark_mode') {
+                        if (name === 'dark_mode') {
                             return value;
                         }
                     }

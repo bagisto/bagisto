@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}" dir="{{ core()->getCurrentLocale()->direction }}" class="{{ (request()->cookie('is_dark_mode') ?? 0) ? 'dark' : '' }}">
+<html lang="{{ app()->getLocale() }}" dir="{{ core()->getCurrentLocale()->direction }}" class="{{ (request()->cookie('dark_mode') ?? 0) ? 'dark' : '' }}">
     <head>
         <title>{{ $title ?? '' }}</title>
 
