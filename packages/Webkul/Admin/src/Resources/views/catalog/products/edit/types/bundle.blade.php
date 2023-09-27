@@ -285,16 +285,21 @@
                                 </div>
                                 
                                 <!-- Image -->
-                                <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion overflow-hidden">
+                                <div
+                                    class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px] overflow-hidden"
+                                    :class="{'border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion overflow-hidden': ! element.product.images.length}"
+                                >
                                     <template v-if="! element.product.images.length">
                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                                    
+                                        <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
+                                            @lang('admin::app.catalog.products.edit.types.bundle.image-placeholder')
+                                        </p>
                                     </template>
-
+                
                                     <template v-else>
                                         <img :src="element.product.images[0].url">
                                     </template>
-                                    
-                                    <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">Product Image</p>
                                 </div>
 
                                 <!-- Details -->

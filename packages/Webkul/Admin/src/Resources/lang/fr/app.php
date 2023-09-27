@@ -676,22 +676,24 @@ return [
                     ],
 
                     'grouped' => [
-                        'add-btn'     => 'Ajouter un produit',
-                        'delete'      => 'Supprimer',
-                        'default-qty' => 'Qté par défaut',
-                        'empty-title' => 'Ajouter un produit',
-                        'empty-info'  => 'Créer diverses combinaisons de produits en un instant.',
-                        'info'        => 'Un produit groupé comprend des articles autonomes présentés comme un ensemble, permettant des variations ou une coordination en fonction de la saison ou du thème. Chaque produit peut être acheté individuellement ou en tant que partie du groupe.',
-                        'sku'         => 'SKU - :sku',
-                        'title'       => 'Produits groupés',
+                        'add-btn'           => 'Ajouter un produit',
+                        'delete'            => 'Supprimer',
+                        'default-qty'       => 'Qté par défaut',
+                        'empty-title'       => 'Ajouter un produit',
+                        'empty-info'        => 'Créer diverses combinaisons de produits en un instant.',
+                        'image-placeholder' => 'Image du produit',
+                        'info'              => 'Un produit groupé comprend des articles autonomes présentés comme un ensemble, permettant des variations ou une coordination en fonction de la saison ou du thème. Chaque produit peut être acheté individuellement ou en tant que partie du groupe.',
+                        'sku'               => 'SKU - :sku',
+                        'title'             => 'Produits groupés',
                     ],
 
                     'bundle' => [
-                        'add-btn'     => 'Ajouter une option',
-                        'empty-title' => 'Ajouter une option',
-                        'empty-info'  => 'Créer des options de bundle en un instant.',
-                        'info'        => 'Un produit en bundle est un ensemble de plusieurs articles ou services vendus ensemble à un prix spécial, offrant une valeur et une commodité aux clients.',
-                        'title'       => 'Articles du bundle',
+                        'add-btn'           => 'Ajouter une option',
+                        'empty-title'       => 'Ajouter une option',
+                        'empty-info'        => 'Créer des options de bundle en un instant.',
+                        'image-placeholder' => 'Image du produit',
+                        'info'              => 'Un produit en bundle est un ensemble de plusieurs articles ou services vendus ensemble à un prix spécial, offrant une valeur et une commodité aux clients.',
+                        'title'             => 'Articles du bundle',
 
                         'update-create' => [
                             'checkbox'    => 'Case à cocher',

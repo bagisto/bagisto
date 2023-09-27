@@ -676,22 +676,24 @@ return [
                     ],
 
                     'grouped' => [
-                        'add-btn'     => 'Product Toevoegen',
-                        'delete'      => 'Verwijderen',
-                        'default-qty' => 'Standaard Hoeveelheid',
-                        'empty-title' => 'Product Toevoegen',
-                        'empty-info'  => 'Om verschillende combinaties van producten snel te maken.',
-                        'info'        => 'Een gegroepeerd product bestaat uit op zichzelf staande items die als een set worden gepresenteerd, waardoor variaties of coördinatie per seizoen of thema mogelijk zijn. Elk product kan afzonderlijk worden gekocht of als onderdeel van de groep.',
-                        'sku'         => 'SKU - :sku',
-                        'title'       => 'Gegroepeerde Producten',
+                        'add-btn'           => 'Product Toevoegen',
+                        'delete'            => 'Verwijderen',
+                        'default-qty'       => 'Standaard Hoeveelheid',
+                        'empty-title'       => 'Product Toevoegen',
+                        'empty-info'        => 'Om verschillende combinaties van producten snel te maken.',
+                        'image-placeholder' => 'Product Afbeelding',
+                        'info'              => 'Een gegroepeerd product bestaat uit op zichzelf staande items die als een set worden gepresenteerd, waardoor variaties of coördinatie per seizoen of thema mogelijk zijn. Elk product kan afzonderlijk worden gekocht of als onderdeel van de groep.',
+                        'sku'               => 'SKU - :sku',
+                        'title'             => 'Gegroepeerde Producten',
                     ],
 
                     'bundle' => [
-                        'add-btn'     => 'Optie Toevoegen',
-                        'empty-title' => 'Optie Toevoegen',
-                        'empty-info'  => 'Om bundelopties snel te maken.',
-                        'info'        => 'Een bundelproduct is een pakket van meerdere items of diensten die samen worden verkocht tegen een speciale prijs, waardoor waarde en gemak voor klanten worden geboden.',
-                        'title'       => 'Bundelopties',
+                        'add-btn'           => 'Optie Toevoegen',
+                        'empty-title'       => 'Optie Toevoegen',
+                        'empty-info'        => 'Om bundelopties snel te maken.',
+                        'image-placeholder' => 'Product Afbeelding',
+                        'info'              => 'Een bundelproduct is een pakket van meerdere items of diensten die samen worden verkocht tegen een speciale prijs, waardoor waarde en gemak voor klanten worden geboden.',
+                        'title'             => 'Bundelopties',
 
                         'update-create' => [
                             'checkbox'    => 'Aankruisvak',
