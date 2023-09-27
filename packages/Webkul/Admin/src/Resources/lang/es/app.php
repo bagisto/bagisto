@@ -676,22 +676,24 @@ return [
                     ],
 
                     'grouped' => [
-                        'add-btn'     => 'Agregar Producto',
-                        'delete'      => 'Eliminar',
-                        'default-qty' => 'Cantidad Predeterminada',
-                        'empty-title' => 'Agregar Producto',
-                        'empty-info'  => 'Para crear varias combinaciones de productos de forma rápida.',
-                        'info'        => 'Un producto agrupado consta de elementos independientes presentados como un conjunto, lo que permite variaciones o coordinación por temporada o tema. Cada producto se puede comprar individualmente o como parte del grupo.',
-                        'sku'         => 'SKU - :sku',
-                        'title'       => 'Productos Agrupados',
+                        'add-btn'           => 'Agregar Producto',
+                        'delete'            => 'Eliminar',
+                        'default-qty'       => 'Cantidad Predeterminada',
+                        'empty-title'       => 'Agregar Producto',
+                        'empty-info'        => 'Para crear varias combinaciones de productos de forma rápida.',
+                        'image-placeholder' => 'Imagen del Producto',
+                        'info'              => 'Un producto agrupado consta de elementos independientes presentados como un conjunto, lo que permite variaciones o coordinación por temporada o tema. Cada producto se puede comprar individualmente o como parte del grupo.',
+                        'sku'               => 'SKU - :sku',
+                        'title'             => 'Productos Agrupados',
                     ],
 
                     'bundle' => [
-                        'add-btn'     => 'Agregar Opción',
-                        'empty-title' => 'Agregar Opción',
-                        'empty-info'  => 'Para crear opciones de paquetes de forma rápida.',
-                        'info'        => 'Un producto de paquete es un paquete de varios artículos o servicios que se venden juntos a un precio especial, ofreciendo valor y comodidad a los clientes.',
-                        'title'       => 'Artículos del Paquete',
+                        'add-btn'           => 'Agregar Opción',
+                        'empty-title'       => 'Agregar Opción',
+                        'empty-info'        => 'Para crear opciones de paquetes de forma rápida.',
+                        'image-placeholder' => 'Imagen del Producto',
+                        'info'              => 'Un producto de paquete es un paquete de varios artículos o servicios que se venden juntos a un precio especial, ofreciendo valor y comodidad a los clientes.',
+                        'title'             => 'Artículos del Paquete',
 
                         'update-create' => [
                             'checkbox'    => 'Casilla de Verificación',

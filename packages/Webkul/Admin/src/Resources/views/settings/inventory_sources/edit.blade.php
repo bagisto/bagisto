@@ -16,7 +16,7 @@
                     method="PUT"
                 >
                     <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-                        <p class="text-[20px] text-gray-800 font-bold">
+                        <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                             @lang('admin::app.settings.inventory-sources.edit.title')
                         </p>
 
@@ -24,7 +24,7 @@
                             <!-- Cancel Button -->
                             <a
                                 href="{{ route('admin.settings.inventory_sources.index') }}"
-                                class="transparent-button hover:bg-gray-200"
+                                class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
                             >
                                 @lang('admin::app.settings.inventory-sources.edit.back-btn')
                             </a>
@@ -49,8 +49,8 @@
                         <!-- Left Section -->
                         <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                             <!-- General -->
-                            <div class="p-[16px] bg-white box-shadow rounded-[4px]">
-                                <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                            <div class="p-[16px] bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
+                                <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.inventory-sources.edit.general')
                                 </p>
 
@@ -111,7 +111,7 @@
                                         name="description"
                                         :value="old('description') ?? $inventorySource->description"
                                         id="description"
-                                        class="text-gray-600 "
+                                        class="text-gray-600 dark:text-gray-300  "
                                         :label="trans('admin::app.settings.inventory-sources.edit.description')"
                                         :placeholder="trans('admin::app.settings.inventory-sources.edit.description')"
                                     >
@@ -125,8 +125,8 @@
                             </div>
 
                             <!-- Contact Information -->
-                            <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-                                <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                            <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                                <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.inventory-sources.edit.contact-info')
                                 </p>
 
@@ -223,8 +223,8 @@
                             </div>
 
                             <!-- Source Address -->
-                            <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-                                <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                            <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                                <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.inventory-sources.edit.source-address')
                                 </p>
 
@@ -378,7 +378,7 @@
                             <x-admin::accordion>
                                 <x-slot:header>
                                     <div class="flex items-center justify-between p-[6px]">
-                                        <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                                        <p class="text-gray-600 dark:text-gray-300  text-[16px] p-[10px] font-semibold">
                                             @lang('admin::app.settings.inventory-sources.edit.settings')
                                         </p>
                                     </div>

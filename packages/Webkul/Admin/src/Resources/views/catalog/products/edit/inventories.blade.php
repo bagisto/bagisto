@@ -2,7 +2,7 @@
 
 <v-inventories>
     {{-- Panel Content --}}
-    <div class="mb-[20px] text-[14px] text-gray-600">
+    <div class="mb-[20px] text-[14px] text-gray-600 dark:text-gray-300">
         <div class="flex  items-center relative mb-[10px]">
             <span class="inline-block ltr:mr-[5px] rtl:ml-[5px] p-[5px] bg-yellow-500 rounded-full"></span>
 

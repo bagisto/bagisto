@@ -45,7 +45,7 @@
 
                         <x-slot:header>
                             <!-- Modal Header -->
-                            <p class="text-[18px] text-gray-800 font-bold">
+                            <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.customers.addresses.edit.title')
                             </p>    
                         </x-slot:header>
@@ -53,7 +53,7 @@
                         <x-slot:content>
                             <!-- Modal Content -->
                             {!! view_render_event('admin.customer.addresses.edit.before') !!}
-                            <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
                                 <div class="flex gap-[16px] max-sm:flex-wrap">
                                     <!-- Company Name -->
                                     <x-admin::form.control-group class="w-full mb-[10px]">
@@ -361,7 +361,7 @@
 
                                         <x-admin::form.control-group.label 
                                             for="default_address"
-                                            class="text-gray-600 font-semibold cursor-pointer" 
+                                            class="text-gray-600 dark:text-gray-300  font-semibold cursor-pointer" 
                                         >
                                             @lang('admin::app.customers.addresses.edit.default-address')
                                         </x-admin::form.control-group.label>

@@ -13,11 +13,11 @@
                 alt="Bagisto Logo"
             >
 
-            <div class="flex flex-col min-w-[300px] bg-white rounded-[6px] box-shadow">
+            <div class="flex flex-col min-w-[300px] bg-white dark:bg-gray-900  rounded-[6px] box-shadow">
                 {{-- Login Form --}}
                 <x-admin::form :action="route('admin.reset_password.store')">
                     <div class="p-[16px]  ">
-                        <p class="text-[20px] text-gray-800 font-bold ">
+                        <p class="text-[20px] text-gray-800 dark:text-white font-bold ">
                             @lang('admin::app.users.reset-password.title')
                         </p>
                     </div>
@@ -29,7 +29,7 @@
                     >
                     </x-admin::form.control-group.control>
 
-                    <div class="p-[16px] border-t-[1px] border-b-[1px] border-gray-300">
+                    <div class="p-[16px] border-t-[1px] border-b-[1px] dark:border-gray-800  ">
                         <div class="mb-[10px]">
                             {{-- Register Email --}}
                             <x-admin::form.control-group>

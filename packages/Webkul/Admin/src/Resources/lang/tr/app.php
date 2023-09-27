@@ -676,22 +676,24 @@ return [
                     ],
 
                     'grouped' => [
-                        'add-btn'     => 'Ürün Ekle',
-                        'delete'      => 'Sil',
-                        'default-qty' => 'Varsayılan Miktar',
-                        'empty-title' => 'Ürün Ekle',
-                        'empty-info'  => 'Hızlı bir şekilde ürünün farklı kombinasyonlarını oluşturmak için.',
-                        'info'        => 'Gruplu bir ürün, bir takım olarak sunulan bağımsız ürünlerden oluşur ve müşterilere değer ve kolaylık sağlayan özel bir fiyatla birlikte satılır. Her ürün bireysel olarak veya gruba dahil olarak satın alınabilir.',
-                        'sku'         => 'SKU - :sku',
-                        'title'       => 'Grup Ürünler',
+                        'add-btn'           => 'Ürün Ekle',
+                        'delete'            => 'Sil',
+                        'default-qty'       => 'Varsayılan Miktar',
+                        'empty-title'       => 'Ürün Ekle',
+                        'empty-info'        => 'Hızlı bir şekilde ürünün farklı kombinasyonlarını oluşturmak için.',
+                        'image-placeholder' => 'Ürün Resmi',
+                        'info'              => 'Gruplu bir ürün, bir takım olarak sunulan bağımsız ürünlerden oluşur ve müşterilere değer ve kolaylık sağlayan özel bir fiyatla birlikte satılır. Her ürün bireysel olarak veya gruba dahil olarak satın alınabilir.',
+                        'sku'               => 'SKU - :sku',
+                        'title'             => 'Grup Ürünler',
                     ],
 
                     'bundle' => [
-                        'add-btn'     => 'Seçenek Ekle',
-                        'empty-title' => 'Seçenek Ekle',
-                        'empty-info'  => 'Hızlı bir şekilde paketleme seçenekleri oluşturmak için.',
-                        'info'        => 'Bir paketleme ürünü, bir arada satılan birden fazla ürün veya hizmetin özel bir fiyatla sunulduğu bir pakettir ve müşterilere değer ve kolaylık sağlar.',
-                        'title'       => 'Paketleme Ürünleri',
+                        'add-btn'           => 'Seçenek Ekle',
+                        'empty-title'       => 'Seçenek Ekle',
+                        'empty-info'        => 'Hızlı bir şekilde paketleme seçenekleri oluşturmak için.',
+                        'image-placeholder' => 'Ürün Resmi',
+                        'info'              => 'Bir paketleme ürünü, bir arada satılan birden fazla ürün veya hizmetin özel bir fiyatla sunulduğu bir pakettir ve müşterilere değer ve kolaylık sağlar.',
+                        'title'             => 'Paketleme Ürünleri',
 
                         'update-create' => [
                             'checkbox'    => 'Onay Kutusu',

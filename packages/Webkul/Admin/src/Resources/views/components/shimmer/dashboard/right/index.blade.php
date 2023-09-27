@@ -1,9 +1,9 @@
-<div class="bg-white rounded-[4px] box-shadow">
+<div class="bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
     <!-- Total Sales Shimmer -->
     <x-admin::shimmer.dashboard.right.total-sales/>
 
     <!-- Top Selling Products -->
-    <div class="border-b border-gray-300">
+    <div class="border-b dark:border-gray-800  ">
         <div class="flex items-center justify-between p-[16px]">
             <div class="shimmer w-[157px] h-[17px]"></div>
 

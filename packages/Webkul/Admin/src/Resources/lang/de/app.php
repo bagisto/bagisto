@@ -676,22 +676,24 @@ return [
                     ],
 
                     'grouped' => [
-                        'add-btn'     => 'Produkt hinzufügen',
-                        'delete'      => 'Löschen',
-                        'default-qty' => 'Standardmenge',
-                        'empty-title' => 'Produkt hinzufügen',
-                        'empty-info'  => 'Um verschiedene Kombinationen von Produkten zu erstellen.',
-                        'info'        => 'Ein Gruppenprodukt besteht aus eigenständigen Artikeln, die als Set präsentiert werden und Variationen oder Koordination nach Saison oder Thema ermöglichen. Jedes Produkt kann einzeln oder als Teil der Gruppe gekauft werden.',
-                        'sku'         => 'Artikelnummer (SKU) - :sku',
-                        'title'       => 'Gruppenprodukte',
+                        'add-btn'           => 'Produkt hinzufügen',
+                        'delete'            => 'Löschen',
+                        'default-qty'       => 'Standardmenge',
+                        'empty-title'       => 'Produkt hinzufügen',
+                        'empty-info'        => 'Um verschiedene Kombinatinen von Produkten zu erstellen.',
+                        'image-placeholder' => 'Produktbild',
+                        'info'              => 'Ein Gruppenprodukt besteht aus eigenständigen Artikeln, die als Set präsentiert werden und Variationen oder Koordination nach Saison oder Thema ermöglichen. Jedes Produkt kann einzeln oder als Teil der Gruppe gekauft werden.',
+                        'sku'               => 'Artikelnummer (SKU) - :sku',
+                        'title'             => 'Gruppenprodukte',
                     ],
 
                     'bundle' => [
-                        'add-btn'     => 'Option hinzufügen',
-                        'empty-title' => 'Option hinzufügen',
-                        'empty-info'  => 'Um Bündeloptionen zu erstellen.',
-                        'info'        => 'Ein Bündelprodukt ist ein Paket aus mehreren Artikeln oder Dienstleistungen, die zusammen zu einem Sonderpreis verkauft werden und den Kunden Wert und Bequemlichkeit bieten.',
-                        'title'       => 'Bündelartikel',
+                        'add-btn'           => 'Option hinzufügen',
+                        'empty-title'       => 'Option hinzufügen',
+                        'empty-info'        => 'Um Bündeloptionen zu erstellen.',
+                        'image-placeholder' => 'Produktbild',
+                        'info'              => 'Ein Bündelprodukt ist ein Paket aus mehreren Artikeln oder Dienstleistungen, die zusammen zu einem Sonderpreis verkauft werden und den Kunden Wert und Bequemlichkeit bieten.',
+                        'title'             => 'Bündelartikel',
 
                         'update-create' => [
                             'checkbox'    => 'Checkbox',

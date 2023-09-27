@@ -106,6 +106,18 @@
                 }
             },
 
+            watch: {
+                'media.images': {
+                    deep: true,
+
+                    handler(newImages, oldImages) {
+                        if (JSON.stringify(newImages) !== JSON.stringify(oldImages)) {
+                            this.baseFile.path = newImages[0].large_image_url; 
+                        }
+                    },
+                },
+            },
+
             mounted() {
                 if (this.media.images.length) {
                     this.baseFile.type = 'image';

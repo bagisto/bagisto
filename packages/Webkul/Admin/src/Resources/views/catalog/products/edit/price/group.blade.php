@@ -12,7 +12,7 @@
         <div>
             <!-- Header -->
             <div class="flex items-center justify-between mt-[6px] py-[15px]">
-                <p class="text-gray-800 text-[16px] py-[10px] font-semibold">
+                <p class="text-gray-800 text-[16px] py-[10px] font-semibold dark:text-white">
                     @lang('admin::app.catalog.products.edit.price.group.title')
                 </p>
 
@@ -41,7 +41,7 @@
                     <input type="hidden" :name="'customer_group_prices[' + item.id + '][value]'" :value="item.value"/>
 
                     <div class="flex justify-between">
-                        <p class="text-gray-600 font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300  font-semibold">
                             @{{ getGroupNameById(item.customer_group_id) }}
                         </p>
 
@@ -54,14 +54,14 @@
                     </div>
 
                     <p
-                        class="text-gray-600"
+                        class="text-gray-600 dark:text-gray-300"
                         v-if="item.value_type == 'fixed'"
                     >
                         @{{ "@lang('admin::app.catalog.products.edit.price.group.fixed-group-price-info')".replace(':qty', item.qty).replace(':price', item.value) }}
                     </p>
 
                     <p
-                        class="text-gray-600"
+                        class="text-gray-600 dark:text-gray-300"
                         v-else
                     >
                         @{{ "@lang('admin::app.catalog.products.edit.price.group.discount-group-price-info')".replace(':qty', item.qty).replace(':price', item.value) }}
@@ -75,7 +75,7 @@
                 >
                     <img
                         src="{{ bagisto_asset('images/icon-discount.svg') }}"
-                        class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
+                        class="w-[80px] h-[80px] border border-dashed dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
                     />
 
                     <div class="flex flex-col gap-[6px]">
@@ -101,14 +101,14 @@
                         <x-slot:header>
                             <!-- Modal Header -->
                             <p
-                                class="text-[18px] text-gray-800 font-bold"
+                                class="text-[18px] text-gray-800 dark:text-white font-bold"
                                 v-if="! selectedPrice.id"
                             >
                                 @lang('admin::app.catalog.products.edit.price.group.create.create-title')
                             </p>
 
                             <p
-                                class="text-[18px] text-gray-800 font-bold"
+                                class="text-[18px] text-gray-800 dark:text-white font-bold"
                                 v-else
                             >
                                 @lang('admin::app.catalog.products.edit.price.group.create.update-title')
@@ -117,7 +117,7 @@
         
                         <x-slot:content>
                             <!-- Modal Content -->
-                            <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
                                 {!! view_render_event('bagisto.admin.catalog.products.create_form.general.controls.before') !!}
 
                                 <x-admin::form.control-group>
@@ -213,7 +213,7 @@
                             <div class="flex gap-x-[10px] items-center">
                                 <button
                                     type="button"
-                                    class="text-red-600 font-semibold whitespace-nowrap px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] transition-all hover:bg-gray-100 cursor-pointer"
+                                    class="text-red-600 font-semibold whitespace-nowrap px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] transition-all hover:bg-gray-100 dark:hover:bg-gray-950  cursor-pointer"
                                     @click="remove"
                                     v-if="selectedPrice.id"
                                 >
