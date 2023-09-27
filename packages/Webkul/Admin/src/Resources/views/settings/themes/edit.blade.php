@@ -479,15 +479,15 @@
                                 type="select"
                                 name="options[filters][limit]"
                                 v-slot="{ field }"
-                                rules="required|min_value:1"
+                                rules="required"
                                 value="{{ $theme->options['filters']['limit'] ?? '' }}"
                                 label="@lang('admin::app.settings.themes.edit.limit')"
                             >
                                 <select
-                                    name="options[filters][sort]"
+                                    name="options[filters][limit]"
                                     v-bind="field"
                                     class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400"
-                                    :class="[errors['options[filters][sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                    :class="[errors['options[filters][limit]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 >
                                     <option value="" selected disabled>@lang('admin::app.settings.themes.edit.select')</option>
 
