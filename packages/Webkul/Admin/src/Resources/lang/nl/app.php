@@ -2678,7 +2678,7 @@ return [
                 ],
 
                 'products' => [
-                    'info'  => 'Stel gastafrekening, startpagina, productweergavepagina, winkelwagenweergavepagina, etalage, beoordeling en attribuutsociale delen in.',
+                    'info'  => 'Stel gastafrekening, productweergavepagina, winkelwagenweergavepagina, winkelvoorkant, beoordeling en attribuutsociale deling in.',
                     'title' => 'Producten',
 
                     'guest-checkout' => [

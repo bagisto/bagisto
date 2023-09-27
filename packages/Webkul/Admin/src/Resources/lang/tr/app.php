@@ -2678,7 +2678,7 @@ return [
                 ],
 
                 'products' => [
-                    'info'  => 'Misafir ödemesini, ana sayfa, ürün görünüm sayfası, alışveriş sepeti görünüm sayfası, mağaza ön yüzü, inceleme ve özellik sosyal paylaşımını ayarlayın.',
+                    'info'  => 'Misafir ödeme, ürün görünüm sayfası, alışveriş sepeti görünüm sayfası, mağaza ön yüzü, inceleme ve özellik sosyal paylaşımını ayarlayın.',
                     'title' => 'Ürünler',
 
                     'guest-checkout' => [

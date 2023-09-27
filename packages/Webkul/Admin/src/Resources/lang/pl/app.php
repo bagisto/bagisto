@@ -2678,7 +2678,7 @@ return [
                 ],
 
                 'products' => [
-                    'info'  => 'Ustaw gościnny zakup, stronę główną, stronę widoku produktu, widok koszyka, przód sklepu, recenzję i udostępnianie społecznościowe atrybutów.',
+                    'info'  => 'Skonfiguruj gościnne zamówienie, stronę wyświetlania produktów, stronę wyświetlania koszyka, stronę główną sklepu, recenzję i udostępnianie atrybutów społecznościowych.',
                     'title' => 'Produkty',
 
                     'guest-checkout' => [

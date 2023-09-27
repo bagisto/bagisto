@@ -2678,7 +2678,7 @@ return [
                 ],
 
                 'products' => [
-                    'info'  => 'Einrichten von Gastbestellung, Startseite, Produktansichtsseite, Warenkorbansichtsseite, Ladenfront, Bewertung und soziale Freigabe von Attributen.',
+                    'info'  => 'Configurar el pago como invitado, página de vista de productos, página de vista de carrito, frente de la tienda, revisión y compartir atributos en redes sociales.',
                     'title' => 'Produkte',
 
                     'guest-checkout' => [
