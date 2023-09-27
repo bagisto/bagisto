@@ -136,7 +136,7 @@
                                 <div 
                                     class="flex gap-[10px] justify-between py-5 cursor-pointer"
                                     :class="{
-                                        'border-b-[1px] border-slate-300': index < sliders.images.length - 1
+                                        'border-b-[1px] border-slate-300 dark:border-gray-800': index < sliders.images.length - 1
                                     }"
                                 >
                                     <div class="flex gap-[10px]">
@@ -536,7 +536,7 @@
                             <div 
                                 class="flex gap-[10px] justify-between py-5 cursor-pointer"
                                 :class="{
-                                    'border-b-[1px] border-slate-300': index < options.filters.length - 1
+                                    'border-b-[1px] border-slate-300 dark:border-gray-800': index < options.filters.length - 1
                                 }"
                             >
                                 <div class="flex gap-[10px]">
@@ -572,7 +572,7 @@
                             v-else
                         >
                             <img
-                                class="w-[120px] h-[120px] p-2 border border-dashed dark:border-gray-800   rounded-[4px]"
+                                class="w-[120px] h-[120px] p-2 border border-dashed dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
                                 src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
                                 alt="add-product-to-store"
                             >
@@ -884,7 +884,7 @@
                             <div 
                                 class="flex gap-[10px] justify-between py-5 cursor-pointer"
                                 :class="{
-                                    'border-b-[1px] border-slate-300': index < options.filters.length - 1
+                                    'border-b-[1px] border-slate-300 dark:border-gray-800': index < options.filters.length - 1
                                 }"
                             >
                                 <div class="flex gap-[10px]">
@@ -921,7 +921,7 @@
                             v-else
                         >
                             <img
-                                class="w-[120px] h-[120px] p-2 border border-dashed dark:border-gray-800   rounded-[4px]"
+                                class="w-[120px] h-[120px] p-2 border border-dashed dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
                                 src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
                                 alt="add-category-to-store"
                             >
@@ -1398,7 +1398,7 @@
                             >
                                 <!-- Information -->
                                 <div 
-                                    class="grid border-b-[1px] last:border-b-0 border-slate-300"
+                                    class="grid border-b-[1px] last:border-b-0 border-slate-300 dark:border-gray-800"
                                     v-for="(link, key) in footerLink"
                                 >
                                     <!-- Hidden Input -->
@@ -1487,7 +1487,7 @@
                                 class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px] "
                             >
                                 <img
-                                    class="w-[120px] h-[120px] border border-dashed dark:border-gray-800   rounded-[4px]"
+                                    class="w-[120px] h-[120px] border border-dashed dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
                                     src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
                                     alt="add-product-to-store"
                                 >

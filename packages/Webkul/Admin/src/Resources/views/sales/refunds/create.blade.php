@@ -122,7 +122,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="gap-[10px] justify-between pb-[16px] border-b-[1px] border-slate-300">
+                                        <div class="gap-[10px] justify-between pb-[16px] border-b-[1px] border-slate-300 dark:border-gray-800">
                                             <!-- Information -->
                                             <div class="flex justify-between">
                                                 <!-- Quantity to Refund -->
