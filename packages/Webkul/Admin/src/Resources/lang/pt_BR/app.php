@@ -676,14 +676,15 @@ return [
                     ],
 
                     'grouped' => [
-                        'add-btn'     => 'Adicionar Produto',
-                        'delete'      => 'Excluir',
-                        'default-qty' => 'Quantidade Padrão',
-                        'empty-title' => 'Adicionar Produto',
-                        'empty-info'  => 'Para criar várias combinações de produtos rapidamente.',
-                        'info'        => 'Um produto agrupado consiste em itens independentes apresentados como um conjunto, permitindo variações ou coordenação por temporada ou tema. Cada produto pode ser comprado individualmente ou como parte do grupo.',
-                        'sku'         => 'SKU - :sku',
-                        'title'       => 'Produtos Agrupados',
+                        'add-btn'           => 'Adicionar Produto',
+                        'delete'            => 'Excluir',
+                        'default-qty'       => 'Quantidade Padrão',
+                        'empty-title'       => 'Adicionar Produto',
+                        'empty-info'        => 'Para criar várias combinações de produtos rapidamente.',
+                        'image-placeholder' => 'Imagem do Produto',
+                        'info'              => 'Um produto agrupado consiste em itens independentes apresentados como um conjunto, permitindo variações ou coordenação por temporada ou tema. Cada produto pode ser comprado individualmente ou como parte do grupo.',
+                        'sku'               => 'SKU - :sku',
+                        'title'             => 'Produtos Agrupados',
                     ],
 
                     'bundle' => [

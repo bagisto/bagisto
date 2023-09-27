@@ -676,14 +676,15 @@ return [
                     ],
 
                     'grouped' => [
-                        'add-btn'     => 'Ürün Ekle',
-                        'delete'      => 'Sil',
-                        'default-qty' => 'Varsayılan Miktar',
-                        'empty-title' => 'Ürün Ekle',
-                        'empty-info'  => 'Hızlı bir şekilde ürünün farklı kombinasyonlarını oluşturmak için.',
-                        'info'        => 'Gruplu bir ürün, bir takım olarak sunulan bağımsız ürünlerden oluşur ve müşterilere değer ve kolaylık sağlayan özel bir fiyatla birlikte satılır. Her ürün bireysel olarak veya gruba dahil olarak satın alınabilir.',
-                        'sku'         => 'SKU - :sku',
-                        'title'       => 'Grup Ürünler',
+                        'add-btn'           => 'Ürün Ekle',
+                        'delete'            => 'Sil',
+                        'default-qty'       => 'Varsayılan Miktar',
+                        'empty-title'       => 'Ürün Ekle',
+                        'empty-info'        => 'Hızlı bir şekilde ürünün farklı kombinasyonlarını oluşturmak için.',
+                        'image-placeholder' => 'Ürün Resmi',
+                        'info'              => 'Gruplu bir ürün, bir takım olarak sunulan bağımsız ürünlerden oluşur ve müşterilere değer ve kolaylık sağlayan özel bir fiyatla birlikte satılır. Her ürün bireysel olarak veya gruba dahil olarak satın alınabilir.',
+                        'sku'               => 'SKU - :sku',
+                        'title'             => 'Grup Ürünler',
                     ],
 
                     'bundle' => [

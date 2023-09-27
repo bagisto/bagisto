@@ -676,14 +676,15 @@ return [
                     ],
 
                     'grouped' => [
-                        'add-btn'     => 'Produkt hinzufügen',
-                        'delete'      => 'Löschen',
-                        'default-qty' => 'Standardmenge',
-                        'empty-title' => 'Produkt hinzufügen',
-                        'empty-info'  => 'Um verschiedene Kombinationen von Produkten zu erstellen.',
-                        'info'        => 'Ein Gruppenprodukt besteht aus eigenständigen Artikeln, die als Set präsentiert werden und Variationen oder Koordination nach Saison oder Thema ermöglichen. Jedes Produkt kann einzeln oder als Teil der Gruppe gekauft werden.',
-                        'sku'         => 'Artikelnummer (SKU) - :sku',
-                        'title'       => 'Gruppenprodukte',
+                        'add-btn'           => 'Produkt hinzufügen',
+                        'delete'            => 'Löschen',
+                        'default-qty'       => 'Standardmenge',
+                        'empty-title'       => 'Produkt hinzufügen',
+                        'empty-info'        => 'Um verschiedene Kombinatinen von Produkten zu erstellen.',
+                        'image-placeholder' => 'Produktbild',
+                        'info'              => 'Ein Gruppenprodukt besteht aus eigenständigen Artikeln, die als Set präsentiert werden und Variationen oder Koordination nach Saison oder Thema ermöglichen. Jedes Produkt kann einzeln oder als Teil der Gruppe gekauft werden.',
+                        'sku'               => 'Artikelnummer (SKU) - :sku',
+                        'title'             => 'Gruppenprodukte',
                     ],
 
                     'bundle' => [

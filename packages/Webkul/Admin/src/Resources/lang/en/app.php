@@ -676,14 +676,15 @@ return [
                     ],
 
                     'grouped' => [
-                        'add-btn'     => 'Add Product',
-                        'delete'      => 'Delete',
-                        'default-qty' => 'Default Qty',
-                        'empty-title' => 'Add Product',
-                        'empty-info'  => 'To create various combination of product on a go.',
-                        'info'        => 'A grouped product comprises standalone items presented as a set, allowing variations or coordination by season or theme. Each product can be bought individually or as part of the group.',
-                        'sku'         => 'SKU - :sku',
-                        'title'       => 'Group Products',
+                        'add-btn'           => 'Add Product',
+                        'delete'            => 'Delete',
+                        'default-qty'       => 'Default Qty',
+                        'empty-title'       => 'Add Product',
+                        'empty-info'        => 'To create various combination of product on a go.',
+                        'image-placeholder' => 'Product Image',
+                        'info'              => 'A grouped product comprises standalone items presented as a set, allowing variations or coordination by season or theme. Each product can be bought individually or as part of the group.',
+                        'sku'               => 'SKU - :sku',
+                        'title'             => 'Group Products',
                     ],
 
                     'bundle' => [
