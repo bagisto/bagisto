@@ -2678,7 +2678,7 @@ return [
                 ],
 
                 'products' => [
-                    'info'  => 'Configurer la commande en tant qu\'invité, la page d\'accueil, la page de visualisation des produits, la page du panier, la vitrine, les avis et le partage social des attributs.',
+                    'info'  => 'Configurer le paiement en tant qu\'invité, la page de visualisation du produit, la page de visualisation du panier, la page d\'accueil du magasin, la revue et le partage social des attributs.',
                     'title' => 'Produits',
 
                     'guest-checkout' => [

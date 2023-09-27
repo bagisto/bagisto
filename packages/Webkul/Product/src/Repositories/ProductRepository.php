@@ -214,6 +214,7 @@ class ProductRepository extends Repository
         }
 
         $query = $this->with([
+            'attribute_family',
             'images',
             'videos',
             'attribute_values',
@@ -434,6 +435,7 @@ class ProductRepository extends Repository
         ]);
 
         $query = $this->with([
+            'attribute_family',
             'images',
             'videos',
             'attribute_values',

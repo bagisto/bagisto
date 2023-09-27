@@ -2678,7 +2678,7 @@ return [
                 ],
 
                 'products' => [
-                    'info'  => 'Einrichten von Gastbestellung, Startseite, Produktansichtsseite, Warenkorbansichtsseite, Ladenfront, Bewertung und soziale Freigabe von Attributen.',
+                    'info'  => 'Configurar el pago como invitado, página de vista de productos, página de vista de carrito, frente de la tienda, revisión y compartir atributos en redes sociales.',
                     'title' => 'Produkte',
 
                     'guest-checkout' => [
@@ -3081,13 +3081,13 @@ return [
                     'categories'                      => 'Categorías',
                     'customers'                       => 'Clientes',
                     'sku'                             => 'SKU: :sku',
-                    'explore-all-matching-products'   => 'Explorar todos los productos que coinciden con ":query" (:count)',
+                    'explore-all-matching-products'   => 'Explorar todos los productos que coinciden con \":query\" (:count)',
                     'explore-all-products'            => 'Explorar todos los productos',
-                    'explore-all-matching-orders'     => 'Explorar todos los pedidos que coinciden con ":query" (:count)',
+                    'explore-all-matching-orders'     => 'Explorar todos los pedidos que coinciden con \":query\" (:count)',
                     'explore-all-orders'              => 'Explorar todos los pedidos',
-                    'explore-all-matching-categories' => 'Explorar todas las categorías que coinciden con ":query" (:count)',
+                    'explore-all-matching-categories' => 'Explorar todas las categorías que coinciden con \":query\" (:count)',
                     'explore-all-categories'          => 'Explorar todas las categorías',
-                    'explore-all-matching-customers'  => 'Explorar todos los clientes que coinciden con ":query" (:count)',
+                    'explore-all-matching-customers'  => 'Explorar todos los clientes que coinciden con \":query\" (:count)',
                     'explore-all-customers'           => 'Explorar todos los clientes',
                 ],
             ],

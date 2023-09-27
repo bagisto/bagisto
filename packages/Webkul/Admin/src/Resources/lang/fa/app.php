@@ -2678,7 +2678,7 @@ return [
                 ],
 
                 'products' => [
-                    'info'  => 'راه‌اندازی سفارش‌های بازگشتی',
+                    'info'  => ' تنظیم پرداخت به عنوان مهمان، صفحه نمایش محصول، صفحه نمایش سبد خرید، صفحه اصلی فروشگاه، بررسی و به اشتراک گذاری اجتماعی ویژگی را تعیین کنید.',
                     'title' => 'محصولات',
 
                     'guest-checkout' => [
@@ -3081,13 +3081,13 @@ return [
                     'categories'                      => 'دسته‌بندی‌ها',
                     'customers'                       => 'مشتریان',
                     'sku'                             => 'SKU: :sku',
-                    'explore-all-matching-products'   => 'مشاهده تمام محصولات مطابق با ":query" (:count)',
+                    'explore-all-matching-products'   => 'مشاهده تمام محصولات مطابق با \":query\" (:count)',
                     'explore-all-products'            => 'مشاهده تمام محصولات',
-                    'explore-all-matching-orders'     => 'مشاهده تمام سفارش‌ها مطابق با ":query" (:count)',
+                    'explore-all-matching-orders'     => 'مشاهده تمام سفارش‌ها مطابق با \":query\" (:count)',
                     'explore-all-orders'              => 'مشاهده تمام سفارش‌ها',
-                    'explore-all-matching-categories' => 'مشاهده تمام دسته‌بندی‌ها مطابق با ":query" (:count)',
+                    'explore-all-matching-categories' => 'مشاهده تمام دسته‌بندی‌ها مطابق با \":query\" (:count)',
                     'explore-all-categories'          => 'مشاهده تمام دسته‌بندی‌ها',
-                    'explore-all-matching-customers'  => 'مشاهده تمام مشتریان مطابق با ":query" (:count)',
+                    'explore-all-matching-customers'  => 'مشاهده تمام مشتریان مطابق با \":query\" (:count)',
                     'explore-all-customers'           => 'مشاهده تمام مشتریان',
                 ],
             ],

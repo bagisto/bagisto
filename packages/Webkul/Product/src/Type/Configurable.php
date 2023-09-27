@@ -69,6 +69,20 @@ class Configurable extends AbstractType
     protected $hasVariants = true;
 
     /**
+     * Attribute stored bu their code.
+     *
+     * @var bool
+     */
+    protected $attributesByCode = [];
+
+    /**
+     * Attribute stored bu their id.
+     *
+     * @var bool
+     */
+    protected $attributesById = [];
+
+    /**
      * Get default variant.
      *
      * @return \Webkul\Product\Models\Product
@@ -134,7 +148,11 @@ class Configurable extends AbstractType
         $superAttributes = [];
 
         foreach ($data['super_attributes'] as $attributeCode => $attributeOptions) {
-            $attribute = $this->getAttributeByCode($attributeCode);
+            $attribute = $this->attributesByCode[$attributeCode] ?? null;
+
+            if (empty($attribute)) {
+                $attribute = $this->attributeRepository->findOneByField('code', $attributeCode);
+            }
 
             $superAttributes[$attribute->id] = $attributeOptions;
 
@@ -244,19 +262,27 @@ class Configurable extends AbstractType
 
         $attributeValues = [];
 
+        $channels = core()->getAllChannels();
+
+        $locales = core()->getAllLocales();
+
         foreach ($this->fillableTypes as $attributeCode) {
             if (! isset($data[$attributeCode])) {
                 continue;
             }
 
-            $attribute = $this->getAttributeByCode($attributeCode);
+            $attribute = $this->attributesByCode[$attributeCode] ?? null;
+
+            if (empty($attribute)) {
+                $attribute = $this->attributeRepository->findOneByField('code', $attributeCode);
+            }
 
             $attributeTypeFields = $this->getAttributeTypeValues($attribute, $data[$attributeCode]);
 
             if ($attribute->value_per_channel) {
                 if ($attribute->value_per_locale) {
-                    foreach (core()->getAllChannels() as $channel) {
-                        foreach (core()->getAllLocales() as $locale) {
+                    foreach ($channels as $channel) {
+                        foreach ($locales as $locale) {
                             $attributeValues[] = array_merge($attributeTypeFields, [
                                 'product_id'   => $variant->id,
                                 'attribute_id' => $attribute->id,
@@ -266,7 +292,7 @@ class Configurable extends AbstractType
                         }
                     }
                 } else {
-                    foreach (core()->getAllChannels() as $channel) {
+                    foreach ($channels as $channel) {
                         $attributeValues[] = array_merge($attributeTypeFields, [
                             'product_id'   => $variant->id,
                             'attribute_id' => $attribute->id,
@@ -277,7 +303,7 @@ class Configurable extends AbstractType
                 }
             } else {
                 if ($attribute->value_per_locale) {
-                    foreach (core()->getAllLocales() as $locale) {
+                    foreach ($locales as $locale) {
                         $attributeValues[] = array_merge($attributeTypeFields, [
                             'product_id'   => $variant->id,
                             'attribute_id' => $attribute->id,
@@ -297,7 +323,11 @@ class Configurable extends AbstractType
         }
 
         foreach ($permutation as $attributeId => $optionId) {
-            $attribute = $this->getAttributeById($attributeId);
+            $attribute = $this->attributesById[$attributeId] ?? null;
+
+            if (empty($attribute)) {
+                $attribute = $this->attributeRepository->find($attributeId);
+            }
 
             $attributeValues[] = array_merge($this->getAttributeTypeValues($attribute, $optionId), [
                 'product_id'   => $variant->id,
@@ -348,7 +378,11 @@ class Configurable extends AbstractType
                 continue;
             }
 
-            $attribute = $this->getAttributeByCode($attributeCode);
+            $attribute = $this->attributesByCode[$attributeCode] ?? null;
+
+            if (empty($attribute)) {
+                $attribute = $this->attributeRepository->findOneByField('code', $attributeCode);
+            }
 
             if ($attribute->value_per_channel) {
                 if ($attribute->value_per_locale) {

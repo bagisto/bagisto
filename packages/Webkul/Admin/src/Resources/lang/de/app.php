@@ -2678,7 +2678,7 @@ return [
                 ],
 
                 'products' => [
-                    'info'  => 'Gastbestellung, Startseite, Produktansichtsseite, Warenkorbansichtsseite, Ladenfront, Bewertung und soziale Freigabe von Attributen einrichten.',
+                    'info'  => 'Gastkasse einrichten, Produktansichtsseite, Warenkorbansichtsseite, Ladenfront, Bewertung und Attribut-Social-Share festlegen.',
                     'title' => 'Produkte',
 
                     'guest-checkout' => [
@@ -3081,13 +3081,13 @@ return [
                     'categories'                      => 'Kategorien',
                     'customers'                       => 'Kunden',
                     'sku'                             => 'Artikelnummer: :sku',
-                    'explore-all-matching-products'   => 'Erkunden Sie alle Produkte, die zu ":query" passen (:count)',
+                    'explore-all-matching-products'   => 'Erkunden Sie alle Produkte, die zu \":query\" passen (:count)',
                     'explore-all-products'            => 'Alle Produkte erkunden',
-                    'explore-all-matching-orders'     => 'Erkunden Sie alle Bestellungen, die zu ":query" passen (:count)',
+                    'explore-all-matching-orders'     => 'Erkunden Sie alle Bestellungen, die zu \":query\" passen (:count)',
                     'explore-all-orders'              => 'Alle Bestellungen erkunden',
-                    'explore-all-matching-categories' => 'Erkunden Sie alle Kategorien, die zu ":query" passen (:count)',
+                    'explore-all-matching-categories' => 'Erkunden Sie alle Kategorien, die zu \":query\" passen (:count)',
                     'explore-all-categories'          => 'Alle Kategorien erkunden',
-                    'explore-all-matching-customers'  => 'Erkunden Sie alle Kunden, die zu ":query" passen (:count)',
+                    'explore-all-matching-customers'  => 'Erkunden Sie alle Kunden, die zu \":query\" passen (:count)',
                     'explore-all-customers'           => 'Alle Kunden erkunden',
                 ],
             ],

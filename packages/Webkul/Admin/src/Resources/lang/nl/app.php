@@ -2678,7 +2678,7 @@ return [
                 ],
 
                 'products' => [
-                    'info'  => 'Stel gastafrekening, startpagina, productweergavepagina, winkelwagenweergavepagina, etalage, beoordeling en attribuutsociale delen in.',
+                    'info'  => 'Stel gastafrekening, productweergavepagina, winkelwagenweergavepagina, winkelvoorkant, beoordeling en attribuutsociale deling in.',
                     'title' => 'Producten',
 
                     'guest-checkout' => [
@@ -3081,13 +3081,13 @@ return [
                     'categories'                      => 'Categorieën',
                     'customers'                       => 'Klanten',
                     'sku'                             => 'SKU: :sku',
-                    'explore-all-matching-products'   => 'Verken alle producten die overeenkomen met ":query" (:count)',
+                    'explore-all-matching-products'   => 'Verken alle producten die overeenkomen met \":query\" (:count)',
                     'explore-all-products'            => 'Verken alle producten',
-                    'explore-all-matching-orders'     => 'Verken alle bestellingen die overeenkomen met ":query" (:count)',
+                    'explore-all-matching-orders'     => 'Verken alle bestellingen die overeenkomen met \":query\" (:count)',
                     'explore-all-orders'              => 'Verken alle bestellingen',
-                    'explore-all-matching-categories' => 'Verken alle categorieën die overeenkomen met ":query" (:count)',
+                    'explore-all-matching-categories' => 'Verken alle categorieën die overeenkomen met \":query\" (:count)',
                     'explore-all-categories'          => 'Verken alle categorieën',
-                    'explore-all-matching-customers'  => 'Verken alle klanten die overeenkomen met ":query" (:count)',
+                    'explore-all-matching-customers'  => 'Verken alle klanten die overeenkomen met \":query\" (:count)',
                     'explore-all-customers'           => 'Verken alle klanten',
                 ],
             ],

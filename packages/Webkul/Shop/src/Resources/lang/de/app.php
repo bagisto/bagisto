@@ -418,6 +418,7 @@ return [
         'was-this-helpful'       => 'War diese Bewertung hilfreich?',
         'load-more'              => 'Mehr laden',
         'add-image'              => 'Bild hinzufügen',
+        'failed-to-upload'       => 'Das Bild konnte nicht hochgeladen werden',
         'description'            => 'Beschreibung',
         'additional-information' => 'Zusätzliche Informationen',
         'submit-success'         => 'Erfolgreich übermittelt',

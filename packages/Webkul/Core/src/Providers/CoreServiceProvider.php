@@ -32,6 +32,8 @@ class CoreServiceProvider extends ServiceProvider
             dirname(__DIR__) . '/Config/scout.php'   => config_path('scout.php'),
         ]);
 
+        $this->app->register(EventServiceProvider::class);
+
         $this->app->bind(ExceptionHandler::class, Handler::class);
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'core');

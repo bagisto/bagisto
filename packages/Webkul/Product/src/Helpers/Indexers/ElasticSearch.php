@@ -17,6 +17,27 @@ class ElasticSearch extends AbstractIndexer
     private $batchSize;
 
     /**
+     * Attributes
+     *
+     * @var array
+     */
+    protected $attributes;
+
+    /**
+     * Channels
+     *
+     * @var array
+     */
+    protected $channels;
+
+    /**
+     * Customer Groups
+     *
+     * @var array
+     */
+    protected $customerGroups;
+
+    /**
      * Product instance.
      *
      * @var \Webkul\Product\Contracts\Product
@@ -284,13 +305,11 @@ class ElasticSearch extends AbstractIndexer
      */
     public function getAttributes()
     {
-        static $attributes = [];
-
-        if (count($attributes)) {
-            return $attributes;
+        if (count($this->attributes)) {
+            return $this->attributes;
         }
 
-        $attributes = $this->attributeRepository->scopeQuery(function ($query) {
+        $this->attributes = $this->attributeRepository->scopeQuery(function ($query) {
             return $query->where(function ($qb) {
                 return $qb->orWhereIn('code', [
                     'name',
@@ -304,7 +323,7 @@ class ElasticSearch extends AbstractIndexer
             });
         })->get();
 
-        return $attributes;
+        return $this->attributes;
     }
 
     /**
@@ -343,13 +362,11 @@ class ElasticSearch extends AbstractIndexer
      */
     public function getChannels()
     {
-        static $channels;
-
-        if ($channels) {
-            return $channels;
+        if ($this->channels) {
+            return $this->channels;
         }
 
-        return $channels = $this->channelRepository->all();
+        return $this->channels = $this->channelRepository->all();
     }
     
     /**
@@ -359,12 +376,10 @@ class ElasticSearch extends AbstractIndexer
      */
     public function getCustomerGroups()
     {
-        static $customerGroups;
-
-        if ($customerGroups) {
+        if ($this->customerGroups) {
             return $customerGroups;
         }
 
-        return $customerGroups = $this->customerGroupRepository->all();
+        return $this->customerGroups = $this->customerGroupRepository->all();
     }
 }

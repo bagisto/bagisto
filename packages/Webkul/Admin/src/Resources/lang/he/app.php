@@ -2678,7 +2678,7 @@ return [
                 ],
 
                 'products' => [
-                    'info'  => 'הגדרות לרכישה באורח אורח, לדף הבית, לדף התצוגה של המוצר, לדף העגלה, לפרטי החנות, לסקירות ולשיתוף חברתי של תכונות',
+                    'info'  => 'הגדרת קנייה כאורח אורח, דף תצוגת מוצר, דף תצוגת עגלת הקניות, חנות החנות, ביקורת ושיתוף חברתי של התכונה.',
                     'title' => 'מוצרים',
 
                     'guest-checkout' => [
@@ -3081,13 +3081,13 @@ return [
                     'categories'                      => 'קטגוריות',
                     'customers'                       => 'לקוחות',
                     'sku'                             => 'SKU: :sku',
-                    'explore-all-matching-products'   => 'גלה את כל המוצרים התואמים ל-":query" (:count)',
+                    'explore-all-matching-products'   => 'גלה את כל המוצרים התואמים ל-\":query\" (:count)',
                     'explore-all-products'            => 'גלה את כל המוצרים',
-                    'explore-all-matching-orders'     => 'גלה את כל ההזמנות התואמות ל-":query" (:count)',
+                    'explore-all-matching-orders'     => 'גלה את כל ההזמנות התואמות ל-\":query\" (:count)',
                     'explore-all-orders'              => 'גלה את כל ההזמנות',
-                    'explore-all-matching-categories' => 'גלה את כל הקטגוריות התואמות ל-":query" (:count)',
+                    'explore-all-matching-categories' => 'גלה את כל הקטגוריות התואמות ל-\":query\" (:count)',
                     'explore-all-categories'          => 'גלה את כל הקטגוריות',
-                    'explore-all-matching-customers'  => 'גלה את כל הלקוחות התואמים ל-":query" (:count)',
+                    'explore-all-matching-customers'  => 'גלה את כל הלקוחות התואמים ל-\":query\" (:count)',
                     'explore-all-customers'           => 'גלה את כל הלקוחות',
                 ],
             ],

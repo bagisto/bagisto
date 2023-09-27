@@ -2678,7 +2678,7 @@ return [
                 ],
 
                 'products' => [
-                    'info'  => 'Imposta il checkout per gli ospiti, la homepage, la pagina di visualizzazione del prodotto, la pagina di visualizzazione del carrello, il front-end del negozio, la recensione e la condivisione sociale degli attributi.',
+                    'info'  => 'Imposta il checkout per gli ospiti, la pagina di visualizzazione del prodotto, la pagina del carrello, il fronte del negozio, la recensione e la condivisione sociale dell\'attributo.',
                     'title' => 'Prodotti',
 
                     'guest-checkout' => [
@@ -3081,13 +3081,13 @@ return [
                     'categories'                      => 'Categorie',
                     'customers'                       => 'Clienti',
                     'sku'                             => 'SKU: :sku',
-                    'explore-all-matching-products'   => 'Esplora tutti i prodotti corrispondenti a ":query" (:count)',
+                    'explore-all-matching-products'   => 'Esplora tutti i prodotti corrispondenti a \":query\" (:count)',
                     'explore-all-products'            => 'Esplora tutti i prodotti',
-                    'explore-all-matching-orders'     => 'Esplora tutti gli ordini corrispondenti a ":query" (:count)',
+                    'explore-all-matching-orders'     => 'Esplora tutti gli ordini corrispondenti a \":query\" (:count)',
                     'explore-all-orders'              => 'Esplora tutti gli ordini',
-                    'explore-all-matching-categories' => 'Esplora tutte le categorie corrispondenti a ":query" (:count)',
+                    'explore-all-matching-categories' => 'Esplora tutte le categorie corrispondenti a \":query\" (:count)',
                     'explore-all-categories'          => 'Esplora tutte le categorie',
-                    'explore-all-matching-customers'  => 'Esplora tutti i clienti corrispondenti a ":query" (:count)',
+                    'explore-all-matching-customers'  => 'Esplora tutti i clienti corrispondenti a \":query\" (:count)',
                     'explore-all-customers'           => 'Esplora tutti i clienti',
                 ],
             ],

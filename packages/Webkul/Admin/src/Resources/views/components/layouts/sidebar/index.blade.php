@@ -48,14 +48,6 @@
                     class="icon-collapse transition-all text-[24px]"
                     :class="[isCollapsed ? 'ltr:rotate-[180deg] rtl:rotate-[0]' : 'ltr:rotate-[0] rtl:rotate-[180deg]']"
                 ></span>
-
-                <p
-                    class="hidden text-gray-600 dark:text-gray-300 font-semibold transition-all duration-300 select-none"
-                    :class="{'group-[.sidebar-collapsed]/container:invisible': isCollapsed}"
-                    v-show="! isCollapsed"
-                >
-                    @lang('admin::app.components.layouts.sidebar.collapse')
-                </p>
             </div>
         </div>
     </script>

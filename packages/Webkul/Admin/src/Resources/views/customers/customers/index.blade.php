@@ -29,7 +29,7 @@
 
     <x-admin::datagrid src="{{ route('admin.customers.customers.index') }}" ref="customer_data" :isMultiRow="true">
         @php 
-            $hasPermission = core()->getConfigData('customers.customers.mass-update') || core()->getConfigData('customers.customers.mass-delete');
+            $hasPermission = bouncer()->hasPermission('customers.customers.mass-update') || bouncer()->hasPermission('customers.customers.mass-delete');
         @endphp
 
         {{-- Datagrid Header --}}

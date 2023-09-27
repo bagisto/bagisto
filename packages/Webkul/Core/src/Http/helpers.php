@@ -8,7 +8,7 @@ if (! function_exists('core')) {
      */
     function core()
     {
-        return app()->make(\Webkul\Core\Core::class);
+        return app('core');
     }
 }
 
