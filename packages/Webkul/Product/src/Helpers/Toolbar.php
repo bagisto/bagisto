@@ -89,6 +89,12 @@ class Toolbar
      */
     public function getAvailableLimits(): Collection
     {
+        if ($productsPerPage = core()->getConfigData('catalog.products.storefront.products_per_page')) {
+            $pages = explode(',', $productsPerPage);
+
+            return collect($pages);
+        }
+
         return collect([12, 24, 36, 48]);
     }
 
@@ -109,17 +115,10 @@ class Toolbar
     public function getLimit(array $params): int
     {
         /**
-         * Check if limit parameter is specified then return provided limit.
-         */
-        if (! empty($params['limit'])) {
-            return (int) $params['limit'];
-        }
-
-        /**
          * Set a default value for the 'limit' parameter,
          * in case it is not provided or is not a valid integer.
          */
-        $limit = (int) $this->getDefaultLimit();
+        $limit = (int) ($params['limit'] ?? $this->getDefaultLimit());
 
         /**
          * If the 'limit' parameter is present but value not present

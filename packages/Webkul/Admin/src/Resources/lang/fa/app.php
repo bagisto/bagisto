@@ -2568,8 +2568,6 @@ return [
                 'save-btn'                      => 'ذخیره',
                 'filter-title'                  => 'عنوان',
                 'sort'                          => 'مرتب‌سازی',
-                'desc'                          => 'نزولی',
-                'asc'                           => 'صعودی',
                 'limit'                         => 'محدودیت',
                 'key'                           => 'کلید: :key',
                 'value'                         => 'مقدار: :value',

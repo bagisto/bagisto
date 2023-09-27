@@ -2569,8 +2569,6 @@ return [
                 'save-btn'                      => 'حفظ',
                 'filter-title'                  => 'العنوان',
                 'sort'                          => 'فرز',
-                'desc'                          => 'تنازلي',
-                'asc'                           => 'تصاعدي',
                 'limit'                         => 'الحد',
                 'key'                           => 'المفتاح: :key',
                 'value'                         => 'القيمة: :value',

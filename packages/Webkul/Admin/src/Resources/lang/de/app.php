@@ -2568,8 +2568,6 @@ return [
                 'save-btn'                      => 'Thema speichern',
                 'filter-title'                  => 'Titel',
                 'sort'                          => 'Sortieren',
-                'desc'                          => 'Absteigend',
-                'asc'                           => 'Aufsteigend',
                 'limit'                         => 'Limit',
                 'key'                           => 'Schlüssel: :key',
                 'value'                         => 'Wert: :value',

@@ -2568,8 +2568,6 @@ return [
                 'save-btn'                      => 'Guardar',
                 'filter-title'                  => 'Título',
                 'sort'                          => 'Orden',
-                'desc'                          => 'Descendente',
-                'asc'                           => 'Ascendente',
                 'limit'                         => 'Límite',
                 'key'                           => 'Clave: :key',
                 'value'                         => 'Valor: :value',

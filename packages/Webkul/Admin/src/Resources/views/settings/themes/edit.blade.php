@@ -454,8 +454,13 @@
                                     :class="[errors['options[filters][sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 >
                                     <option value="" selected disabled>@lang('admin::app.settings.themes.edit.select')</option>
-                                    <option value="desc">@lang('admin::app.settings.themes.edit.desc')</option>
-                                    <option value="asc">@lang('admin::app.settings.themes.edit.asc')</option>
+                                    
+                                    @foreach (
+                                        product_toolbar()->getAvailableOrders()->pluck('title', 'value') 
+                                        as $key => $availableOrder
+                                    )
+                                        <option value="{{ $key }}">{{ $availableOrder }}</option>
+                                    @endforeach
                                 </select>
                             </v-field>
 
@@ -471,16 +476,27 @@
                             </x-admin::form.control-group.label>
 
                             <v-field
-                                type="text"
+                                type="select"
                                 name="options[filters][limit]"
-                                value="{{ $theme->options['filters']['limit'] ?? '' }}"
-                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
-                                :class="[errors['options[filters][limit]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                v-slot="{ field }"
                                 rules="required|min_value:1"
+                                value="{{ $theme->options['filters']['limit'] ?? '' }}"
                                 label="@lang('admin::app.settings.themes.edit.limit')"
-                                placeholder="@lang('admin::app.settings.themes.edit.limit')"
                             >
+                                <select
+                                    name="options[filters][sort]"
+                                    v-bind="field"
+                                    class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400"
+                                    :class="[errors['options[filters][sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                >
+                                    <option value="" selected disabled>@lang('admin::app.settings.themes.edit.select')</option>
+
+                                    @foreach (product_toolbar()->getAvailableLimits() as $availableLimit)
+                                        <option value="{{ $availableLimit }}">{{ $availableLimit }}</option>
+                                    @endforeach
+                                </select>
                             </v-field>
+
                             
                             <x-admin::form.control-group.error
                                 control-name="options[filters][limit]"

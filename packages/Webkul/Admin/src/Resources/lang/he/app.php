@@ -2568,8 +2568,6 @@ return [
                 'save-btn'                      => 'שמור',
                 'filter-title'                  => 'כותרת',
                 'sort'                          => 'מיון',
-                'desc'                          => 'יורד',
-                'asc'                           => 'עולה',
                 'limit'                         => 'מגבלה',
                 'key'                           => 'מפתח: :key',
                 'value'                         => 'ערך: :value',
