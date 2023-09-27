@@ -127,6 +127,24 @@ class ProductDataGrid extends DataGrid
             'sortable'   => true,
         ]);
 
+        /**
+         * Searchable dropdown sample,
+         *
+         * [
+         *    'type'       => 'dropdown',
+         *      'options'    => [
+         *          'type'  => 'searchable',
+         *          'params'=> [
+         *              'repository' => \Webkul\Attribute\Repositories\AttributeRepository::class,
+         *
+         *              'column' => [
+         *                  'label' => 'code',
+         *                  'value' => 'code',
+         *              ],
+         *          ],
+         *      ],
+         * ]
+         */
         $this->addColumn([
             'index'      => 'attribute_family',
             'label'      => trans('admin::app.catalog.products.index.datagrid.attribute-family'),

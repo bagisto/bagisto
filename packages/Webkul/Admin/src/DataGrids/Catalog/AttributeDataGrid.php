@@ -3,7 +3,6 @@
 namespace Webkul\Admin\DataGrids\Catalog;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\DataGrid\DataGrid;
 
 class AttributeDataGrid extends DataGrid
@@ -108,26 +107,6 @@ class AttributeDataGrid extends DataGrid
             'filterable' => true,
             'sortable'   => true,
         ]);
-
-        // $this->addColumn([
-        //     'index'      => 'code',
-        //     'label'      => trans('admin::app.catalog.attributes.index.datagrid.code'),
-        //     'type'       => 'dropdown',
-        //     'options'    => [
-        //         'type'  => 'searchable',
-        //         'params'=> [
-        //             'repository' => AttributeRepository::class,
-
-        //             'column' => [
-        //                 'label' => 'code',
-        //                 'value' => 'code',
-        //             ],
-        //         ],
-        //     ],
-        //     'searchable' => true,
-        //     'filterable' => true,
-        //     'sortable'   => true,
-        // ]);
     }
 
     /**

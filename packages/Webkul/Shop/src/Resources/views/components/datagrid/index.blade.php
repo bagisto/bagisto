@@ -62,6 +62,8 @@
                     isLoading: false,
 
                     available: {
+                        id: null,
+
                         columns: [],
 
                         actions: [],
@@ -183,12 +185,15 @@
                              * Precisely taking all the keys to the data prop to avoid adding any extra keys from the response.
                              */
                             const {
+                                id,
                                 columns,
                                 actions,
                                 mass_actions,
                                 records,
                                 meta
                             } = response.data;
+
+                            this.available.id = id;
 
                             this.available.columns = columns;
 

@@ -134,7 +134,8 @@
 
                 <div class="mb-[8px] mt-[5px]">
                     <v-datagrid-searchable-dropdown
-                        :options="column.options"
+                        :datagrid-id="available.id"
+                        :column="column"
                         @select-option="filterPage($event, column)"
                     >
                     </v-datagrid-searchable-dropdown>
@@ -181,7 +182,7 @@
 
             <div class="mt-[5px] grid grid-cols-2 gap-[5px]">
                 <p
-                    class="cursor-pointer rounded-[6px] border dark:border-gray-800   px-[8px] py-[6px] text-center text-[14px] font-medium leading-[24px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                    class="cursor-pointer rounded-[6px] border px-[8px] py-[6px] text-center text-[14px] font-medium leading-[24px] text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:text-gray-300"
                     v-for="option in column.options"
                     v-text="option.label"
                     @click="filterPage(
@@ -195,7 +196,7 @@
                 <x-admin::flat-picker.date ::allow-input="false">
                     <input
                         value=""
-                        class="flex min-h-[39px] w-full rounded-[6px] border dark:border-gray-800 px-3 py-2 text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900"
+                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         :type="column.input_type"
                         :name="`${column.index}[from]`"
                         :placeholder="column.label"
@@ -212,7 +213,7 @@
                     <input
                         type="column.input_type"
                         value=""
-                        class="flex min-h-[39px] w-full rounded-[6px] border dark:border-gray-800 px-3 py-2 text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900"
+                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         :name="`${column.index}[to]`"
                         :placeholder="column.label"
                         :ref="`${column.index}[from]`"
@@ -245,7 +246,7 @@
         <div v-else-if="column.type === 'datetime_range'">
             <div class="flex items-center justify-between">
                 <p
-                    class="text-[14px] font-medium leading-[24px]  dark:text-white"
+                    class="text-[14px] font-medium leading-[24px] dark:text-white"
                     v-text="column.label"
                 >
                 </p>
@@ -265,7 +266,7 @@
 
             <div class="my-[16px] grid grid-cols-2 gap-[5px]">
                 <p
-                    class="cursor-pointer rounded-[6px] border dark:border-gray-800   px-[8px] py-[6px] text-center text-[14px] font-medium leading-[24px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                    class="cursor-pointer rounded-[6px] border px-[8px] py-[6px] text-center text-[14px] font-medium leading-[24px] text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:text-gray-300"
                     v-for="option in column.options"
                     v-text="option.label"
                     @click="filterPage(
@@ -279,7 +280,7 @@
                 <x-admin::flat-picker.datetime ::allow-input="false">
                     <input
                         value=""
-                        class="flex min-h-[39px] w-full rounded-[6px] border dark:border-gray-800 px-3 py-2 text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900"
+                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         :type="column.input_type"
                         :name="`${column.index}[from]`"
                         :placeholder="column.label"
@@ -296,7 +297,7 @@
                     <input
                         type="column.input_type"
                         value=""
-                        class="flex min-h-[39px] w-full rounded-[6px] border dark:border-gray-800 px-3 py-2 text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900"
+                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         :name="`${column.index}[to]`"
                         :placeholder="column.label"
                         :ref="`${column.index}[from]`"
@@ -329,7 +330,7 @@
         <div v-else>
             <div class="flex items-center justify-between">
                 <p
-                    class="text-[14px] font-medium leading-[24px]  dark:text-white"
+                    class="text-[14px] font-medium leading-[24px] dark:text-white"
                     v-text="column.label"
                 >
                 </p>
@@ -350,7 +351,7 @@
             <div class="mb-[8px] mt-[5px] grid">
                 <input
                     type="text"
-                    class="block w-full rounded-[6px] border dark:border-gray-800   bg-white dark:bg-gray-900  px-[8px] py-[6px] text-[14px] leading-[24px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400"
+                    class="block w-full rounded-[6px] border bg-white px-[8px] py-[6px] text-[14px] leading-[24px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                     :name="column.index"
                     :placeholder="column.label"
                     @keyup.enter="filterPage($event, column)"
@@ -425,7 +426,7 @@
         app.component('v-datagrid-searchable-dropdown', {
             template: '#v-datagrid-searchable-dropdown-template',
 
-            props: ['options'],
+            props: ['datagridId', 'column'],
 
             data() {
                 return {
@@ -437,11 +438,13 @@
 
             methods: {
                 lookUp($event) {
-                    let params = this.options.params;
+                    let params = {
+                        datagrid_id: this.datagridId,
+                        column: this.column.index,
+                        search: $event.target.value,
+                    };
 
-                    params['search'] = $event.target.value;
-
-                    if (! (params['search'].length > 1)) {
+                    if (!(params['search'].length > 1)) {
                         this.searchedOptions = [];
 
                         this.isMinimumCharacters = false;

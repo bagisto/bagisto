@@ -24,7 +24,7 @@
 
             <div class="mb-[8px] mt-[5px]">
                 <select
-                    class="custom-select block w-full py-2 px-3 shadow bg-white border border-[#E9E9E9] rounded-lg text-[16px] transition-all hover:border-gray-400 focus:border-gray-400"
+                    class="custom-select block w-full rounded-lg border border-[#E9E9E9] bg-white px-3 py-2 text-[16px] shadow transition-all hover:border-gray-400 focus:border-gray-400"
                     @change="filterPage($event, column)"
                 >
                     <option value="">@lang('admin::app.components.datagrid.filters.select')</option>
@@ -80,7 +80,7 @@
 
                 <div class="mb-[8px] mt-[5px]">
                     <select
-                        class="custom-select block w-full py-2 px-3 shadow bg-white border border-[#E9E9E9] rounded-lg text-[16px] transition-all hover:border-gray-400 focus:border-gray-400"
+                        class="custom-select block w-full rounded-lg border border-[#E9E9E9] bg-white px-3 py-2 text-[16px] shadow transition-all hover:border-gray-400 focus:border-gray-400"
                         @change="filterPage($event, column)"
                     >
                         <option value="">@lang('admin::app.components.datagrid.filters.select')</option>
@@ -134,7 +134,8 @@
 
                 <div class="mb-[8px] mt-[5px]">
                     <v-datagrid-searchable-dropdown
-                        :options="column.options"
+                        :datagrid-id="available.id"
+                        :column="column"
                         @select-option="filterPage($event, column)"
                     >
                     </v-datagrid-searchable-dropdown>
@@ -350,7 +351,7 @@
             <div class="mb-[8px] mt-[5px] grid">
                 <input
                     type="text"
-                    class="w-full mb-3 py-2 px-3 shadow border rounded text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                    class="mb-3 w-full rounded border px-3 py-2 text-[14px] text-gray-600 shadow transition-all hover:border-gray-400 focus:border-gray-400"
                     :name="column.index"
                     :placeholder="column.label"
                     @keyup.enter="filterPage($event, column)"
@@ -425,7 +426,7 @@
         app.component('v-datagrid-searchable-dropdown', {
             template: '#v-datagrid-searchable-dropdown-template',
 
-            props: ['options'],
+            props: ['datagridId', 'column'],
 
             data() {
                 return {
@@ -437,11 +438,13 @@
 
             methods: {
                 lookUp($event) {
-                    let params = this.options.params;
+                    let params = {
+                        datagrid_id: this.datagridId,
+                        column: this.column.index,
+                        search: $event.target.value,
+                    };
 
-                    params['search'] = $event.target.value;
-
-                    if (! (params['search'].length > 1)) {
+                    if (!(params['search'].length > 1)) {
                         this.searchedOptions = [];
 
                         this.isMinimumCharacters = false;

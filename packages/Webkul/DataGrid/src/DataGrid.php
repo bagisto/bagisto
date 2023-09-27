@@ -3,6 +3,7 @@
 namespace Webkul\DataGrid;
 
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Webkul\Admin\Exports\DataGridExport;
@@ -96,6 +97,30 @@ abstract class DataGrid
      */
     public function prepareMassActions()
     {
+    }
+
+    /**
+     * Get columns.
+     */
+    public function getColumns(): array
+    {
+        return $this->columns;
+    }
+
+    /**
+     * Get actions.
+     */
+    public function getActions(): array
+    {
+        return $this->actions;
+    }
+
+    /**
+     * Get mass actions.
+     */
+    public function getMassActions(): array
+    {
+        return $this->massActions;
     }
 
     /**
@@ -350,6 +375,7 @@ abstract class DataGrid
         }
 
         return [
+            'id'           => Crypt::encryptString(get_called_class()),
             'columns'      => $this->columns,
             'actions'      => $this->actions,
             'mass_actions' => $this->massActions,

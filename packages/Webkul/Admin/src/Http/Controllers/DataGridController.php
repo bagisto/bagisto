@@ -2,6 +2,8 @@
 
 namespace Webkul\Admin\Http\Controllers;
 
+use Illuminate\Support\Facades\Crypt;
+
 class DataGridController extends Controller
 {
     /**
@@ -9,19 +11,32 @@ class DataGridController extends Controller
      */
     public function lookUp()
     {
+        /**
+         * Validation for parameters.
+         */
         $params = $this->validate(request(), [
-            'search' => ['required', 'min:2'],
-
-            'repository' => ['required'],
-
-            'column'       => ['required', 'array'],
-            'column.label' => ['required'],
-            'column.value' => ['required'],
+            'datagrid_id' => ['required'],
+            'column'      => ['required'],
+            'search'      => ['required', 'min:2'],
         ]);
 
-        return app($params['repository'])
-            ->select([$params['column']['label'] . ' as label', $params['column']['value'] . ' as value'])
-            ->where($params['column']['label'], 'LIKE', '%' . $params['search'] . '%')
+        /**
+         * Preparing the datagrid instance and only columns.
+         */
+        $datagrid = app(Crypt::decryptString($params['datagrid_id']));
+        $datagrid->prepareColumns();
+
+        /**
+         * Finding the first column from the collection.
+         */
+        $column = collect($datagrid->getColumns())->where('index', $params['column'])->firstOrFail();
+
+        /**
+         * Fetching on the basis of column options.
+         */
+        return app($column->options['params']['repository'])
+            ->select([$column->options['params']['column']['label'] . ' as label', $column->options['params']['column']['value'] . ' as value'])
+            ->where($column->options['params']['column']['label'], 'LIKE', '%' . $params['search'] . '%')
             ->get();
     }
 }
