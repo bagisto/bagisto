@@ -54,13 +54,6 @@ class Product extends Model implements ProductContract
     protected $typeInstance;
 
     /**
-     * Loaded attribute values.
-     *
-     * @var array
-     */
-    public static $loadedAttributeValues = [];
-
-    /**
      * Get the product flat entries that are associated with product.
      * May be one for each locale and each channel.
      *
@@ -491,15 +484,9 @@ class Product extends Model implements ProductContract
             return;
         }
 
-        $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
-        $channel = core()->getRequestedChannelCode();
+        $locale = core()->getRequestedLocaleCodeInRequestedChannel();
 
-        if (
-            array_key_exists($this->id, self::$loadedAttributeValues)
-            && array_key_exists($attribute->id, self::$loadedAttributeValues[$this->id])
-        ) {
-            return self::$loadedAttributeValues[$this->id][$attribute->id];
-        }
+        $channel = core()->getRequestedChannelCode();
 
         if (empty($this->attribute_values->count())) {
             $this->load('attribute_values');
@@ -546,7 +533,7 @@ class Product extends Model implements ProductContract
             }
         }
 
-        return self::$loadedAttributeValues[$this->id][$attribute->id] = $attributeValue[$attribute->column_name] ?? $attribute->default_value;
+        return $attributeValue[$attribute->column_name] ?? $attribute->default_value;
     }
 
     /**
@@ -582,14 +569,7 @@ class Product extends Model implements ProductContract
      */
     public function checkInLoadedFamilyAttributes(): object
     {
-        static $loadedFamilyAttributes = [];
-
-        if (array_key_exists($this->attribute_family_id, $loadedFamilyAttributes)) {
-            return $loadedFamilyAttributes[$this->attribute_family_id];
-        }
-
-        return $loadedFamilyAttributes[$this->attribute_family_id] = core()
-            ->getSingletonInstance(AttributeRepository::class)
+        return core()->getSingletonInstance(AttributeRepository::class)
             ->getFamilyAttributes($this->attribute_family);
     }
 
@@ -602,16 +582,6 @@ class Product extends Model implements ProductContract
     public function newEloquentBuilder($query)
     {
         return new Builder($query);
-    }
-
-    /**
-     * Refresh the loaded attribute values.
-     *
-     * @return void
-     */
-    public function refreshLoadedAttributeValues(): void
-    {
-        self::$loadedAttributeValues = [];
     }
 
     /**

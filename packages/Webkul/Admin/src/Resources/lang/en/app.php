@@ -676,22 +676,24 @@ return [
                     ],
 
                     'grouped' => [
-                        'add-btn'     => 'Add Product',
-                        'delete'      => 'Delete',
-                        'default-qty' => 'Default Qty',
-                        'empty-title' => 'Add Product',
-                        'empty-info'  => 'To create various combination of product on a go.',
-                        'info'        => 'A grouped product comprises standalone items presented as a set, allowing variations or coordination by season or theme. Each product can be bought individually or as part of the group.',
-                        'sku'         => 'SKU - :sku',
-                        'title'       => 'Group Products',
+                        'add-btn'           => 'Add Product',
+                        'delete'            => 'Delete',
+                        'default-qty'       => 'Default Qty',
+                        'empty-title'       => 'Add Product',
+                        'empty-info'        => 'To create various combination of product on a go.',
+                        'image-placeholder' => 'Product Image',
+                        'info'              => 'A grouped product comprises standalone items presented as a set, allowing variations or coordination by season or theme. Each product can be bought individually or as part of the group.',
+                        'sku'               => 'SKU - :sku',
+                        'title'             => 'Group Products',
                     ],
 
                     'bundle' => [
-                        'add-btn'     => 'Add Option',
-                        'empty-title' => 'Add Option',
-                        'empty-info'  => 'To create bundle options on a go.',
-                        'info'        => 'A bundle product is a package of multiple items or services sold together at a special price, providing value and convenience to customers.',
-                        'title'       => 'Bundle Items',
+                        'add-btn'           => 'Add Option',
+                        'empty-title'       => 'Add Option',
+                        'empty-info'        => 'To create bundle options on a go.',
+                        'image-placeholder' => 'Product Image',
+                        'info'              => 'A bundle product is a package of multiple items or services sold together at a special price, providing value and convenience to customers.',
+                        'title'             => 'Bundle Items',
 
                         'update-create' => [
                             'checkbox'    => 'Checkbox',
@@ -2678,7 +2680,7 @@ return [
                 ],
 
                 'products' => [
-                    'info'  => 'Set guest checkout, homepage, product view page, cart view page, store front, review and attribute social share.',
+                    'info'  => 'Set guest checkout, product view page, cart view page, store front, review and attribute social share.',
                     'title' => 'Products',
 
                     'guest-checkout' => [

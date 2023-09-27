@@ -1,4 +1,4 @@
-<div class="flex gap-[6px] px-[16px] py-[8px] border-b border-gray-300">
+<div class="flex gap-[6px] px-[16px] py-[8px] border-b dark:border-gray-800  ">
     {{-- Date Filter --}}
     <div class="mb-[5px] flex-1">
         <div class="shimmer w-[160px] h-[17px] my-[5px]"></div>
@@ -15,7 +15,7 @@
     </div>
 </div>
 
-<div class="h-[301px] w-full grid gap-[16px] px-[16px] py-[8px] border-b border-gray-300">
+<div class="h-[301px] w-full grid gap-[16px] px-[16px] py-[8px] border-b dark:border-gray-800  ">
     {{-- Total Sales --}}
     <div class="w-full h-[38px] flex gap-[8px] justify-between">
         <div class="flex flex-col gap-[4px] justify-between">

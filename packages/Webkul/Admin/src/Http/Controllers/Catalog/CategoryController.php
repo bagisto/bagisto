@@ -152,7 +152,7 @@ class CategoryController extends Controller
     {
         $category = $this->categoryRepository->findOrFail($id);
 
-        if ($this->isCategoryDeletable($category)) {
+        if (! $this->isCategoryDeletable($category)) {
             return new JsonResponse(['message' => trans('admin::app.catalog.categories.delete-category-root')], 400);
         }
 
@@ -190,7 +190,7 @@ class CategoryController extends Controller
             $category = $this->categoryRepository->find($categoryId);
 
             if (isset($category)) {
-                if ($this->isCategoryDeletable($category)) {
+                if (! $this->isCategoryDeletable($category)) {
                     $suppressFlash = false;
 
                     session()->flash('warning', trans('admin::app.response.delete-category-root', ['name' => 'admin::app.catalog.categories.category']));
@@ -269,13 +269,11 @@ class CategoryController extends Controller
      */
     private function isCategoryDeletable($category)
     {
-        static $channelRootCategoryIds;
-
-        if (! $channelRootCategoryIds) {
-            $channelRootCategoryIds = $this->channelRepository->pluck('root_category_id');
+        if ($category->id === 1) {
+            return false;
         }
 
-        return $category->id === 1 || $channelRootCategoryIds->contains($category->id);
+        return ! $this->channelRepository->pluck('root_category_id')->contains($category->id);
     }
 
     /**

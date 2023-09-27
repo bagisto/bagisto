@@ -15,11 +15,11 @@
                 :checked="isActive"
             >
 
-            <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600">
+            <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600 ">
             </span>
 
             <div
-                class="text-[14px] text-gray-600 cursor-pointer hover:text-gray-800"
+                class="text-[14px] text-gray-600 dark:text-gray-300 cursor-pointer hover:text-gray-800 dark:hover:text-white"
                 v-text="label"
             >
             </div>

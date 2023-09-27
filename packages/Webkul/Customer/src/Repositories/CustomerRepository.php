@@ -6,26 +6,10 @@ use Carbon\Carbon;
 use Illuminate\Container\Container;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Sales\Models\Order;
 
 class CustomerRepository extends Repository
 {
-    /**
-     * Create a new repository instance.
-     *
-     * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository
-     * @param  \Illuminate\Container\Container  $container
-     * @return void
-     */
-    public function __construct(
-        protected CustomerGroupRepository $customerGroupRepository,
-        Container $container
-    )
-    {
-        parent::__construct($container);
-    }
-
     /**
      * Specify model class name.
      *
@@ -60,7 +44,7 @@ class CustomerRepository extends Repository
             return $customer->group;
         }
 
-        return $this->customerGroupRepository->getCustomerGuestGroup();
+        return core()->getGuestCustomerGroup();
     }
 
     /**

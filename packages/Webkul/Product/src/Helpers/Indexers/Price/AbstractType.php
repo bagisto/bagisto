@@ -146,7 +146,7 @@ abstract class AbstractType
     public function getCustomerGroupPrice($qty)
     {
         $customerGroupPrices = $this->productCustomerGroupPriceRepository
-            ->checkInLoadedCustomerGroupPrice($this->product, $this->customerGroup->id);
+            ->prices($this->product, $this->customerGroup->id);
 
         if ($customerGroupPrices->isEmpty()) {
             return $this->product->price;

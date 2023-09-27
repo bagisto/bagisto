@@ -68,6 +68,17 @@ return [
             'home'      => 'Home',
 
             'profile'   => [
+                'title'                   => 'Profile',
+                'first-name'              => 'First Name',
+                'last-name'               => 'Last Name',
+                'gender'                  => 'Gender',
+                'dob'                     => 'Date of Birth',
+                'email'                   => 'Email',
+                'delete-profile'          => 'Delete Profile',
+                'edit-profile'            => 'Edit Profile',
+                'edit'                    => 'Edit',
+                'edit-success'            => 'Profile Updated Successfully',
+                'phone'                   => 'Phone',
                 'current-password'        => 'Current Password',
                 'confirm-password'        => 'Confirm Password',
                 'dob'                     => 'Date of Birth',

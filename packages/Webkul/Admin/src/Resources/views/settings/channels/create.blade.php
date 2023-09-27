@@ -6,7 +6,7 @@
 
     <x-admin::form  action="{{ route('admin.settings.channels.store') }}" enctype="multipart/form-data">
         <div class="flex justify-between items-center">
-            <p class="text-[20px] text-gray-800 font-bold">
+            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.settings.channels.create.title')
             </p>
 
@@ -14,7 +14,7 @@
                 {{-- Cancel Button --}}
                 <a
                     href="{{ route('admin.settings.channels.index') }}"
-                    class="transparent-button hover:bg-gray-200"
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
                 >
                     @lang('admin::app.settings.channels.create.cancel')
                 </a>
@@ -33,8 +33,8 @@
             {{-- Left sub-component --}}
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                 {{-- General Information --}}
-                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                         @lang('admin::app.settings.channels.create.general')
                     </p>
                     <div class="mb-[10px]">
@@ -104,7 +104,7 @@
                         </x-admin::form.control-group>
 
                         <div class="mb-[10px]">
-                            <p class="required block leading-[24px] text-[12px] text-gray-800 font-medium">
+                            <p class="required block leading-[24px] text-[12px] text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.settings.channels.create.inventory-sources')
                             </p>
 
@@ -192,8 +192,8 @@
                 </div>
 
                 {{-- Logo and Design --}}
-                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                         @lang('admin::app.settings.channels.create.design')
                     </p>
 
@@ -241,7 +241,7 @@
                                     >
                                     </x-admin::media.images>
                                 </x-admin::form.control-group>
-                                <p class="text-[12px] text-gray-600">
+                                <p class="text-[12px] text-gray-600 dark:text-gray-300">
                                     @lang('admin::app.settings.channels.create.logo-size')
                                 </p>
                             </div>
@@ -258,7 +258,7 @@
                                     >
                                     </x-admin::media.images>
                                 </x-admin::form.control-group>
-                                <p class="text-[12px] text-gray-600">
+                                <p class="text-[12px] text-gray-600 dark:text-gray-300">
                                     @lang('admin::app.settings.channels.create.favicon-size')
                                 </p>
                             </div>
@@ -267,8 +267,8 @@
                 </div>
 
                 {{-- Home Page SEO --}} 
-                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                         @lang('admin::app.settings.channels.create.seo')
                     </p>
 
@@ -350,7 +350,7 @@
                 <x-admin::accordion>
                     <x-slot:header>
                         <div class="flex items-center justify-between">
-                            <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                            <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                                 @lang('admin::app.settings.channels.create.currencies-and-locales')
                             </p>
                         </div>
@@ -360,7 +360,7 @@
                         {{-- Locale  --}}
                         <div class="mb-[10px]">
                             <div class="mb-[10px]">
-                                <p class="required block leading-[24px] text-gray-800 font-medium">
+                                <p class="required block leading-[24px] text-gray-800 dark:text-white font-medium">
                                     @lang('admin::app.settings.channels.create.locales')
                                 </p>
                             
@@ -425,7 +425,7 @@
                             </x-admin::form.control-group>
 
                             <div class="mb-[10px]">
-                                <p class="required block leading-[24px] text-gray-800 font-medium">
+                                <p class="required block leading-[24px] text-gray-800 dark:text-white font-medium">
                                     @lang('admin::app.settings.channels.create.currencies')
                                 </p>
                             
@@ -497,7 +497,7 @@
                 <x-admin::accordion>
                     <x-slot:header>
                         <div class="flex items-center justify-between">
-                            <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                            <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                                 @lang('admin::app.settings.channels.create.settings')
                             </p>
                         </div>

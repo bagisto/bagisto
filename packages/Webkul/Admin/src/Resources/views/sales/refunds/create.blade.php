@@ -1,5 +1,5 @@
 <v-create-refund>
-    <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
+    <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800  hover:rounded-[6px]">
         <span class="icon-cancel text-[24px]"></span> 
 
         @lang('admin::app.sales.orders.view.refund')     
@@ -10,7 +10,7 @@
     <script type="text/x-template" id="v-create-refund-template">
         <div>
             <div
-                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
+                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800  hover:rounded-[6px]"
                 @click="$refs.refund.open()"
             >
                 <span class="icon-cancel text-[24px]"></span> 
@@ -28,14 +28,14 @@
                     <x-slot:header>
                         <div class="grid gap-[12px]">
                             <div class="flex justify-between items-center">
-                                <p class="text-[20px] font-medium">
+                                <p class="text-[20px] font-medium dark:text-white">
                                     @lang('admin::app.sales.refunds.create.title')
                                 </p>
 
                                 <div class="flex gap-x-[10px]">
                                     <!-- Update Quantity Button -->
                                     <div 
-                                        class="transparent-button text-red-600 hover:bg-gray-200"
+                                        class="transparent-button text-red-600 hover:bg-gray-200 dark:hover:bg-gray-800 "
                                         @click="updateQty"
                                     >
                                         @lang('admin::app.sales.refunds.create.update-quantity-btn')
@@ -68,7 +68,7 @@
                                                         src="{{ $item->product->base_image_url }}"
                                                     >
                                                 @else
-                                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px]">
+                                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion">
                                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                                         
                                                         <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
@@ -79,12 +79,12 @@
                 
                                                 <div class="grid gap-[6px] place-content-start">
                                                     <!-- Item Additional Attributes -->
-                                                    <p class="text-[16x] text-gray-800 font-semibold">
+                                                    <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                                         {{ $item->name }}
                                                     </p>
                 
                                                     <div class="flex flex-col gap-[6px] place-items-start">
-                                                        <p class="text-gray-600">
+                                                        <p class="text-gray-600 dark:text-gray-300">
                                                             @lang('admin::app.sales.refunds.create.amount-per-unit', [
                                                                 'amount' => core()->formatBasePrice($item->base_price),
                                                                 'qty'    => $item->qty_ordered,
@@ -93,7 +93,7 @@
 
                                                         <!-- Item Additional Attributes -->
                                                         @if (isset($item->additional['attributes']))
-                                                            <p class="text-gray-600">
+                                                            <p class="text-gray-600 dark:text-gray-300">
                                                                 @foreach ($item->additional['attributes'] as $attribute)
                                                                     {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
                                                                 @endforeach
@@ -101,12 +101,12 @@
                                                         @endif
                 
                                                         <!-- Item SKU -->
-                                                        <p class="text-gray-600">
+                                                        <p class="text-gray-600 dark:text-gray-300">
                                                             @lang('admin::app.sales.refunds.create.sku', ['sku' => Webkul\Product\Helpers\ProductType::hasVariants($item->type) ? $item->child->sku : $item->sku])
                                                         </p>
 
                                                         <!-- Item Status -->
-                                                        <p class="text-gray-600">
+                                                        <p class="text-gray-600 dark:text-gray-300">
                                                             {{ $item->qty_ordered ? trans('admin::app.sales.refunds.create.item-ordered', ['qty_ordered' => $item->qty_ordered]) : '' }}
 
                                                             {{ $item->qty_invoiced ? trans('admin::app.sales.refunds.create.item-invoice', ['qty_invoiced' => $item->qty_invoiced]) : '' }}
@@ -152,49 +152,49 @@
                                                 <!-- Item Order Summary -->
                                                 <div class="flex w-full gap-[20px] justify-end item">
                                                     <div class="flex flex-col gap-y-[6px]">
-                                                        <p class="text-gray-600">
+                                                        <p class="text-gray-600 dark:text-gray-300">
                                                             @lang('admin::app.sales.refunds.create.price')
                                                         </p>
 
-                                                        <p class="text-gray-600">
+                                                        <p class="text-gray-600 dark:text-gray-300">
                                                             @lang('admin::app.sales.refunds.create.subtotal')
                                                         </p>
 
-                                                        <p class="text-gray-600">
+                                                        <p class="text-gray-600 dark:text-gray-300">
                                                             @lang('admin::app.sales.refunds.create.tax-amount')
                                                         </p>
 
                                                         @if ($order->base_discount_amount > 0)
-                                                            <p class="text-gray-600"> 
+                                                            <p class="text-gray-600 dark:text-gray-300"> 
                                                                 @lang('admin::app.sales.refunds.create.discount-amount')
                                                             </p>
                                                         @endif
 
-                                                        <p class="text-gray-600 font-semibold">
+                                                        <p class="text-gray-600 dark:text-gray-300  font-semibold">
                                                             @lang('admin::app.sales.refunds.create.grand-total')
                                                         </p>
                                                     </div>
 
                                                     <div class="flex flex-col gap-y-[6px]">
-                                                        <p class="text-gray-600">
+                                                        <p class="text-gray-600 dark:text-gray-300">
                                                             {{ core()->formatBasePrice($item->base_price) }}
                                                         </p>
 
-                                                        <p class="text-gray-600">
+                                                        <p class="text-gray-600 dark:text-gray-300">
                                                             {{ core()->formatBasePrice($item->base_total) }} 
                                                         </p>
 
-                                                        <p class="text-gray-600"> 
+                                                        <p class="text-gray-600 dark:text-gray-300"> 
                                                             {{ core()->formatBasePrice($item->base_tax_amount) }} 
                                                         </p>
 
                                                         @if ($order->base_discount_amount > 0)
-                                                            <p class="text-gray-600"> 
+                                                            <p class="text-gray-600 dark:text-gray-300"> 
                                                                 {{ core()->formatBasePrice($item->base_discount_amount) }}
                                                             </p>
                                                         @endif 
 
-                                                        <p class="text-gray-600 font-semibold"> 
+                                                        <p class="text-gray-600 dark:text-gray-300  font-semibold"> 
                                                             {{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }} 
                                                         </p>
                                                     </div>
@@ -274,37 +274,37 @@
                                 <!-- Order Summary -->
                                 <div class="flex w-full gap-[20px] justify-end">
                                     <div class="flex flex-col gap-y-[6px]">
-                                        <p class="text-gray-600">
+                                        <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.sales.refunds.create.subtotal')
                                         </p>
 
-                                        <p class="text-gray-600"> 
+                                        <p class="text-gray-600 dark:text-gray-300"> 
                                             @lang('admin::app.sales.refunds.create.discount-amount')
                                         </p>
 
-                                        <p class="text-gray-600">
+                                        <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.sales.refunds.create.tax-amount')
                                         </p>
 
-                                        <p class="text-gray-600 font-semibold">
+                                        <p class="text-gray-600 dark:text-gray-300  font-semibold">
                                             @lang('admin::app.sales.refunds.create.grand-total')
                                         </p>
                                     </div>
 
                                     <div class="flex flex-col gap-y-[6px]">
-                                        <p class="text-gray-600"> 
+                                        <p class="text-gray-600 dark:text-gray-300"> 
                                             @{{ refund.summary.subtotal.formatted_price }} 
                                         </p>
 
-                                        <p class="text-gray-600"> 
+                                        <p class="text-gray-600 dark:text-gray-300"> 
                                             @{{ refund.summary.discount.formatted_price }} 
                                         </p>
 
-                                        <p class="text-gray-600"> 
+                                        <p class="text-gray-600 dark:text-gray-300"> 
                                             @{{ refund.summary.tax.formatted_price }} 
                                         </p>
 
-                                        <p class="text-gray-600"> 
+                                        <p class="text-gray-600 dark:text-gray-300"> 
                                             @{{ refund.summary.grand_total.formatted_price }} 
                                         </p>
                                     </div>

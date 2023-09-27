@@ -4,14 +4,13 @@ namespace Webkul\Core\Repositories;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
-use Prettus\Repository\Traits\CacheableRepository;
 use Webkul\Core\Contracts\CoreConfig;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Core\Traits\CoreConfigField;
 
 class CoreConfigRepository extends Repository
 {
-    use CoreConfigField, CacheableRepository;
+    use CoreConfigField;
 
     /**
      * Specify model class name.
@@ -92,7 +91,7 @@ class CoreConfigRepository extends Repository
                 }
 
                 if (! count($coreConfigValue)) {
-                    $this->model->create([
+                    parent::create([
                         'code'         => $fieldName,
                         'value'        => $value,
                         'locale_code'  => $localeBased ? $locale : null,
@@ -105,14 +104,14 @@ class CoreConfigRepository extends Repository
                         }
 
                         if (isset($value['delete'])) {
-                            $this->model->destroy($coreConfig['id']);
+                            parent::delete($coreConfig['id']);
                         } else {
-                            $coreConfig->update([
+                            parent::update([
                                 'code'         => $fieldName,
                                 'value'        => $value,
                                 'locale_code'  => $localeBased ? $locale : null,
                                 'channel_code' => $channelBased ? $channel : null,
-                            ]);
+                            ], $coreConfig->id);
                         }
                     }
                 }

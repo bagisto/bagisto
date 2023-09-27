@@ -28,15 +28,15 @@ class Currency
     {
         if ($currencyCode = request()->get('currency')) {
             if ($this->currencyRepository->findOneByField('code', $currencyCode)) {
-                core()->setCurrency($currencyCode);
+                core()->setCurrentCurrency($currencyCode);
 
                 session()->put('currency', $currencyCode);
             }
         } else {
             if ($currencyCode = session()->get('currency')) {
-                core()->setCurrency($currencyCode);
+                core()->setCurrentCurrency($currencyCode);
             } else {
-                core()->setCurrency(core()->getChannelBaseCurrencyCode());
+                core()->setCurrentCurrency(core()->getChannelBaseCurrencyCode());
             }
         }
 

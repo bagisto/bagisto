@@ -4,7 +4,7 @@
     </x-slot:title>
 
     <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-        <p class="text-[20px] text-gray-800 font-bold">
+        <p class="text-[20px] text-gray-800 dark:text-white font-bold">
             @lang('admin::app.catalog.products.index.title')
         </p>
 
@@ -12,21 +12,21 @@
             <!-- Dropdown -->
             <x-admin::dropdown position="bottom-right">
                 <x-slot:toggle>
-                    <span class="flex icon-setting p-[6px] rounded-[6px] text-[24px]  cursor-pointer transition-all hover:bg-gray-200"></span>
+                    <span class="flex icon-setting p-[6px] rounded-[6px] text-[24px]  cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 "></span>
                 </x-slot:toggle>
 
-                <x-slot:content class="w-[174px] max-w-full !p-[8PX] border border-gray-300 rounded-[4px] z-10 bg-white shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)]">
+                <x-slot:content class="w-[174px] max-w-full !p-[8PX] border dark:border-gray-800   rounded-[4px] z-10 bg-white dark:bg-gray-900  shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)]">
                     <div class="grid gap-[2px]">
                         <!-- Current Channel -->
-                        <div class="p-[6px] items-center cursor-pointer transition-all hover:bg-gray-100 hover:rounded-[6px]">
-                            <p class="text-gray-600 font-semibold leading-[24px]">
+                        <div class="p-[6px] items-center cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950  hover:rounded-[6px]">
+                            <p class="text-gray-600 dark:text-gray-300  font-semibold leading-[24px]">
                                 Channel - {{ core()->getCurrentChannel()->name }}
                             </p>
                         </div>
 
                         <!-- Current Locale -->
-                        <div class="p-[6px] items-center cursor-pointer transition-all hover:bg-gray-100 hover:rounded-[6px]">
-                            <p class="text-gray-600 font-semibold leading-[24px]">
+                        <div class="p-[6px] items-center cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950  hover:rounded-[6px]">
+                            <p class="text-gray-600 dark:text-gray-300  font-semibold leading-[24px]">
                                 Language - {{ core()->getCurrentLocale()->name }}
                             </p>
                         </div>
@@ -65,7 +65,7 @@
 
         <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
             <template v-if="! isLoading">
-                <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
                     <div
                         class="flex gap-[10px] items-center select-none"
                         v-for="(columnGroup, index) in [['name', 'sku', 'attribute_family'], ['base_image', 'price', 'quantity', 'product_id'], ['status', 'category_name', 'type']]"
@@ -97,14 +97,14 @@
                             </label>
                         @endif
 
-                        <p class="text-gray-600">
+                        <p class="text-gray-600 dark:text-gray-300">
                             <span class="[&>*]:after:content-['_/_']">
                                 <template v-for="column in columnGroup">
                                     <span
                                         class="after:content-['/'] last:after:content-['']"
                                         :class="{
-                                            'text-gray-800 font-medium': applied.sort.column == column,
-                                            'cursor-pointer hover:text-gray-800': columns.find(columnTemp => columnTemp.index === column)?.sortable,
+                                            'text-gray-800 dark:text-white font-medium': applied.sort.column == column,
+                                            'cursor-pointer hover:text-gray-800 dark:hover:text-white': columns.find(columnTemp => columnTemp.index === column)?.sortable,
                                         }"
                                         @click="
                                             columns.find(columnTemp => columnTemp.index === column)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === column)): {}
@@ -116,7 +116,7 @@
                             </span>
 
                             <i
-                                class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 align-text-bottom"
+                                class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 dark:text-white align-text-bottom"
                                 :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                 v-if="columnGroup.includes(applied.sort.column)"
                             ></i>
@@ -135,7 +135,7 @@
         <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
             <template v-if="! isLoading">
                 <div
-                    class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 px-[16px] py-[10px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-50"
+                    class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 px-[16px] py-[10px] border-b-[1px] dark:border-gray-800   transition-all hover:bg-gray-50 dark:hover:bg-gray-950  "
                     v-for="record in records"
                 >
                     {{-- Name, SKU, Attribute Family Columns --}}
@@ -159,19 +159,19 @@
 
                         <div class="flex flex-col gap-[6px]">
                             <p
-                                class="text-[16px] text-gray-800 font-semibold"
+                                class="text-[16px] text-gray-800 dark:text-white font-semibold"
                                 v-text="record.name"
                             >
                             </p>
 
                             <p
-                                class="text-gray-600"
+                                class="text-gray-600 dark:text-gray-300"
                             >
                                 @{{ "@lang('admin::app.catalog.products.index.datagrid.sku-value')".replace(':sku', record.sku) }}
                             </p>
 
                             <p
-                                class="text-gray-600"
+                                class="text-gray-600 dark:text-gray-300"
                             >
                                 @{{ "@lang('admin::app.catalog.products.index.datagrid.attribute-family-value')".replace(':attribute_family', record.attribute_family) }}
                             </p>
@@ -196,7 +196,10 @@
 
                             <template v-else>
                                 <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
-                                    <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+                                    <img 
+                                        src="{{ bagisto_asset('images/product-placeholders/front.svg')}}" 
+                                        class="dark:invert dark:mix-blend-exclusion"
+                                    >
 
                                     <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                                         @lang('admin::app.catalog.products.index.datagrid.product-image')
@@ -207,21 +210,21 @@
 
                         <div class="flex flex-col gap-[6px]">
                             <p
-                                class="text-[16px] text-gray-800 font-semibold"
+                                class="text-[16px] text-gray-800 dark:text-white font-semibold"
                                 v-text="$admin.formatPrice(record.price)"
                             >
                             </p>
 
                             <!-- Parent Product Quantity -->
                             <div  v-if="['configurable', 'bundle', 'grouped'].includes(record.type)">
-                                <p class="text-gray-600">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     <span class="text-red-600" v-text="'N/A'"></span>
                                 </p>
                             </div>
 
                             <div v-else>
                                 <p
-                                    class="text-gray-600"
+                                    class="text-gray-600 dark:text-gray-300"
                                     v-if="record.quantity > 0"
                                 >
                                     <span class="text-green-600">
@@ -230,7 +233,7 @@
                                 </p>
 
                                 <p
-                                    class="text-gray-600"
+                                    class="text-gray-600 dark:text-gray-300"
                                     v-else
                                 >
                                     <span class="text-red-600">
@@ -239,7 +242,7 @@
                                 </p>
                             </div>
 
-                            <p class="text-gray-600">
+                            <p class="text-gray-600 dark:text-gray-300">
                                 @{{ "@lang('admin::app.catalog.products.index.datagrid.id-value')".replace(':id', record.product_id) }}
                             </p> 
                         </div>
@@ -253,20 +256,20 @@
                             </p>
 
                             <p
-                                class="text-gray-600"
+                                class="text-gray-600 dark:text-gray-300"
                                 v-text="record.category_name ?? 'N/A'"
                             >
                             </p>
 
                             <p
-                                class="text-gray-600"
+                                class="text-gray-600 dark:text-gray-300"
                                 v-text="record.type"
                             >
                             </p>
                         </div>
 
                         <a :href=`{{ route('admin.catalog.products.edit', '') }}/${record.product_id}`>
-                            <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"></span>
+                            <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 "></span>
                         </a>
 
                     </div>
@@ -306,14 +309,14 @@
                             <x-slot:header>
                                 <!-- Modal Header -->
                                 <p
-                                    class="text-[18px] text-gray-800 font-bold"
+                                    class="text-[18px] text-gray-800 dark:text-white font-bold"
                                     v-if="! attributes.length"
                                 >
                                     @lang('admin::app.catalog.products.index.create.title')
                                 </p>
 
                                 <p
-                                    class="text-[18px] text-gray-800 font-bold"
+                                    class="text-[18px] text-gray-800 dark:text-white font-bold"
                                     v-else
                                 >
                                     @lang('admin::app.catalog.products.index.create.configurable-attributes')
@@ -322,7 +325,7 @@
 
                             <x-slot:content>
                                 <!-- Modal Content -->
-                                <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
                                     <div v-show="! attributes.length">
                                         {!! view_render_event('bagisto.admin.catalog.products.create_form.general.controls.before') !!}
 
@@ -394,11 +397,11 @@
                                             class="mb-[10px]"
                                             v-for="attribute in attributes"
                                         >
-                                            <label class="block leading-[24px] text-[12px] text-gray-800 font-medium">
+                                            <label class="block leading-[24px] text-[12px] text-gray-800 dark:text-white font-medium">
                                                 @{{ attribute.name }}
                                             </label>
 
-                                            <div class="flex gap-[4px] min-h-[38px] p-[6px] border border-gray-300 rounded-[6px]">
+                                            <div class="flex gap-[4px] min-h-[38px] p-[6px] border dark:border-gray-800   rounded-[6px]">
                                                 <p
                                                     class="flex items-center py-[3px] px-[8px] bg-gray-600 rounded-[4px] text-white font-semibold"
                                                     v-for="option in attribute.options"
@@ -423,7 +426,7 @@
                                 <div class="flex gap-x-[10px] items-center">
                                     <button
                                         type="button"
-                                        class="transparent-button hover:bg-gray-200"
+                                        class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
                                         v-if="attributes.length"
                                         @click="attributes = []"
                                     >

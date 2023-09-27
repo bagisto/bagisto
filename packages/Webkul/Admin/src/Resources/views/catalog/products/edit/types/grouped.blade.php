@@ -6,15 +6,15 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-group-products-template">
-        <div class="relative bg-white rounded-[4px] box-shadow">
+        <div class="relative bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
             <!-- Panel Header -->
             <div class="flex gap-[20px] justify-between mb-[10px] p-[16px]">
                 <div class="flex flex-col gap-[8px]">
-                    <p class="text-[16px] text-gray-800 font-semibold">
+                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.products.edit.types.grouped.title')
                     </p>
 
-                    <p class="text-[12px] text-gray-500 font-medium">
+                    <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
                         @lang('admin::app.catalog.products.edit.types.grouped.info')
                     </p>
                 </div>
@@ -47,28 +47,33 @@
                             <!-- Information -->
                             <div class="flex gap-[10px]">
                                 <!-- Drag Icon -->
-                                <i class="icon-drag text-[20px] text-gray-600 transition-all pointer-events-none"></i>
+                                <i class="icon-drag text-[20px] text-gray-600 dark:text-gray-300 transition-all pointer-events-none"></i>
                                 
                                 <!-- Image -->
-                                <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                                <div
+                                    class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px] overflow-hidden"
+                                    :class="{'border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion overflow-hidden': ! element.associated_product.images.length}"
+                                >
                                     <template v-if="! element.associated_product.images.length">
                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                                    
+                                        <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
+                                            @lang('admin::app.catalog.products.edit.types.grouped.image-placeholder')
+                                        </p>
                                     </template>
 
                                     <template v-else>
                                         <img :src="element.associated_product.images[0].url">
                                     </template>
-                                    
-                                    <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">Product Image</p>
                                 </div>
 
                                 <!-- Details -->
                                 <div class="grid gap-[6px] place-content-start">
-                                    <p class="text-[16x] text-gray-800 font-semibold">
+                                    <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                         @{{ element.associated_product.name }}
                                     </p>
 
-                                    <p class="text-gray-600">
+                                    <p class="text-gray-600 dark:text-gray-300">
                                         @{{ "@lang('admin::app.catalog.products.edit.types.grouped.sku')".replace(':sku', element.associated_product.sku) }}
                                     </p>
                                 </div>
@@ -76,7 +81,7 @@
 
                             <!-- Actions -->
                             <div class="grid gap-[4px] place-content-start text-right">
-                                <p class="text-gray-800 font-semibold">
+                                <p class="text-gray-800 font-semibold dark:text-white">
                                     @{{ $admin.formatPrice(element.associated_product.price) }}    
                                 </p>
 
@@ -103,7 +108,7 @@
                                         type="text"
                                         :name="'links[' + (element.id ? element.id : 'link_' + index) + '][qty]'"
                                         v-model="element.qty"
-                                        class="flex w-[86px] min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                                        class="flex w-[86px] min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                         :class="[errors['links[' + (element.id ? element.id : 'link_' + index) + '][qty]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         rules="required|numeric|min_value:1"
                                     ></v-field>
@@ -129,7 +134,7 @@
                 <!-- Placeholder Image -->
                 <img
                     src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                    class="w-[80px] h-[80px]"
+                    class="w-[80px] h-[80px] dark:invert dark:mix-blend-exclusion"
                 />
 
                 <!-- Add Variants Information -->

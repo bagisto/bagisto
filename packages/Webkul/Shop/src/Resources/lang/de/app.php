@@ -68,6 +68,17 @@ return [
             'home'      => 'Startseite',
 
             'profile'   => [
+                'title'                   => 'Profil',
+                'first-name'              => 'Vorname',
+                'last-name'               => 'Nachname',
+                'gender'                  => 'Geschlecht',
+                'dob'                     => 'Geburtsdatum',
+                'email'                   => 'E-Mail',
+                'delete-profile'          => 'Profil löschen',
+                'edit-profile'            => 'Profil bearbeiten',
+                'edit'                    => 'Bearbeiten',
+                'edit-success'            => 'Profil erfolgreich aktualisiert',
+                'phone'                   => 'Telefon',
                 'current-password'        => 'Aktuelles Passwort',
                 'confirm-password'        => 'Passwort bestätigen',
                 'dob'                     => 'Geburtsdatum',
@@ -401,16 +412,42 @@ return [
     ],
 
     'products' => [
-        'prices' => [
-            'grouped' => [
-                'starting-at' => 'Beginnend ab',
-            ],
-    
-            'configurable' => [
-                'as-low-as' => 'Ab',
-            ],
-        ],
-    
+        'reviews'                => 'Bewertungen',
+        'add-to-cart'            => 'In den Warenkorb legen',
+        'add-to-compare'         => 'Produkt zur Vergleichsliste hinzugefügt.',
+        'already-in-compare'     => 'Produkt ist bereits in der Vergleichsliste.',
+        'buy-now'                => 'Jetzt kaufen',
+        'compare'                => 'Vergleichen',
+        'rating'                 => 'Bewertung',
+        'title'                  => 'Titel',
+        'comment'                => 'Kommentar',
+        'submit-review'          => 'Bewertung absenden',
+        'customer-review'        => 'Kundenbewertungen',
+        'write-a-review'         => 'Eine Bewertung schreiben',
+        'stars'                  => 'Sterne',
+        'share'                  => 'Teilen',
+        'empty-review'           => 'Keine Bewertungen gefunden. Seien Sie der Erste, der dieses Produkt bewertet.',
+        'was-this-helpful'       => 'War diese Bewertung hilfreich?',
+        'load-more'              => 'Mehr laden',
+        'add-image'              => 'Bild hinzufügen',
+        'failed-to-upload'       => 'Das Bild konnte nicht hochgeladen werden',
+        'description'            => 'Beschreibung',
+        'additional-information' => 'Zusätzliche Informationen',
+        'submit-success'         => 'Erfolgreich übermittelt',
+        'something-went-wrong'   => 'Etwas ist schiefgelaufen',
+        'in-stock'               => 'Auf Lager',
+        'available-for-order'    => 'Bestellbar',
+        'out-of-stock'           => 'Nicht auf Lager',
+        'related-product-title'  => 'Ähnliche Produkte',
+        'up-sell-title'          => 'Wir haben auch folgende Produkte gefunden!',
+        'new'                    => 'Neu',
+        'as-low-as'              => 'Ab',
+        'starting-at'            => 'Beginnend ab',
+        'name'                   => 'Name',
+        'qty'                    => 'Menge',
+        'offers'                 => 'Kaufen Sie :qty zum Preis von :price pro Stück und sparen Sie :discount%',
+        'tax-inclusive'          => 'Inklusive aller Steuern',
+
         'sort-by' => [
             'title'   => 'Sortieren nach',
             'options' => [
