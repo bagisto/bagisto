@@ -44,14 +44,10 @@
     <div class="flex gap-[10px] items-center">
         {{-- Dark mode Switcher --}}
         <v-dark>
-            <div class="text-[16px] text-gray-800 dark:text-white cursor-pointer">
-                <label class="relative inline-flex items-center cursor-pointer">
-                    <label
-                        class="rounded-full w-[36px] h-[20px] bg-gray-200 cursor-pointer peer-focus:ring-blue-300 after:bg-white dark:after:bg-white  after:border-gray-300 dark:after:border-white peer-checked:bg-blue-600 dark:peer-checked:bg-gray-950 peer peer-checked:after:border-white peer-checked:after:ltr:translate-x-full peer-checked:after:rtl:-translate-x-full after:content-[''] after:absolute after:top-[2px] after:ltr:left-[2px] after:rtl:right-[2px] peer-focus:outline-none after:border after:rounded-full after:h-[16px] after:w-[16px] after:transition-all dark:bg-gray-800"
-                        for="dark_mode"
-                    ></label>
-                </label>
-            </div>
+            <span
+                class=" transition-all text-[24px]"
+                :class="[isDarkMode ? 'icon-light' : 'icon-dark']"
+            ></span>
         </v-dark>
 
         <a 
@@ -696,14 +692,11 @@
 
     <script type="text/x-template" id="v-dark-template">
         <div class="text-[16px] text-gray-800 dark:text-white cursor-pointer">
-            <x-admin::form.control-group.control
-                type="switch"
-                name="dark_mode"
-                ::checked="isDarkMode"
-                v-model="isDarkMode"
-                @change="toggle"
-            >
-            </x-admin::form.control-group.control>
+            <span
+                class=" transition-all text-[24px]"
+                :class="[isDarkMode ? 'icon-light' : 'icon-dark']"
+                @click="toggle"
+            ></span>
         </div>
     </script>
 
