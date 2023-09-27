@@ -418,6 +418,7 @@ return [
         'was-this-helpful'       => 'এই পর্যালোচনা সাহায্যকর ছিল কি?',
         'load-more'              => 'আরো দেখুন',
         'add-image'              => 'চিত্র যোগ করুন',
+        'failed-to-upload'       => 'চিত্রটি আপলোড হয়নি',
         'description'            => 'বর্ণনা',
         'additional-information' => 'অতিরিক্ত তথ্য',
         'submit-success'         => 'সাফল্যের সাথে জমা দেওয়া হয়েছে',

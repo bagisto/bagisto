@@ -418,6 +418,7 @@ return [
         'was-this-helpful'       => 'האם הביקורת הייתה מועילה?',
         'load-more'              => 'טען עוד',
         'add-image'              => 'הוסף תמונה',
+        'failed-to-upload'       => 'התמונה לא הצליחה להיטען',
         'description'            => 'תיאור',
         'additional-information' => 'מידע נוסף',
         'submit-success'         => 'נשלח בהצלחה',

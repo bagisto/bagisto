@@ -353,20 +353,38 @@
                                         >
                                         </p>
                                     </div>
-                
-                                    <div class="w-full" v-if="review.images.length">
+
+                                    <div
+                                        class="w-full"
+                                        v-if="review.images.length"
+                                    >
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.customers.reviews.index.edit.images')     
                                         </x-admin::form.control-group.label>
-            
-                                        <div class="flex gap-4">   
-                                            <img
-                                                class="h-[60px] w-[60px] rounded-[4px]" 
-                                                v-for="image in review.images"
-                                                :src="image.url"
-                                            >
+                                    
+                                        <div class="flex gap-4">
+                                            <div v-for="image in review.images" :key="image.id">
+                                                <img
+                                                    v-if="image.type === 'image'"
+                                                    class="h-[60px] w-[60px] rounded-[4px]"
+                                                    :src="image.url"
+                                                    alt="Image"
+                                                />
+
+                                                <video
+                                                    v-else
+                                                    class="h-[60px] w-[60px] rounded-[4px]"
+                                                    controls
+                                                    autoplay
+                                                >
+                                                    <source
+                                                        :src="image.url"
+                                                        type="video/mp4"
+                                                    ></source>
+                                                </video>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </div>                                    
                                 </div>
                             </x-slot:content>
                         </x-admin::drawer>
