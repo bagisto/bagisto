@@ -2570,8 +2570,6 @@ return [
                 'save-btn'                      => '保存',
                 'filter-title'                  => 'タイトル',
                 'sort'                          => 'ソート',
-                'desc'                          => '降順',
-                'asc'                           => '昇順',
                 'limit'                         => '制限',
                 'key'                           => 'キー: :key',
                 'value'                         => '値: :value',

@@ -663,7 +663,7 @@
                                     <x-admin::form.control-group.control
                                         type="hidden"
                                         name="value_per_locale"
-                                        :value="$selectedOption"
+                                        :value="(boolean) $selectedOption"
                                     >
                                     </x-admin::form.control-group.control>
                                 </x-admin::form.control-group>
@@ -690,7 +690,7 @@
                                     <x-admin::form.control-group.control
                                         type="hidden"
                                         name="value_per_channel"
-                                        :value="$selectedOption"
+                                        :value="(boolean) $selectedOption"
                                     >
                                     </x-admin::form.control-group.control>
                                 </x-admin::form.control-group>
@@ -721,7 +721,7 @@
                                     <x-admin::form.control-group.control
                                         type="hidden"
                                         name="is_filterable"
-                                        :value="$selectedOption"
+                                        :value="(boolean) $selectedOption"
                                     >
                                     </x-admin::form.control-group.control>
                                 </x-admin::form.control-group>
@@ -752,7 +752,7 @@
                                     <x-admin::form.control-group.control
                                         type="hidden"
                                         name="is_configurable"
-                                        :value="$selectedOption"
+                                        :value="(boolean) $selectedOption"
                                     >
                                     </x-admin::form.control-group.control>
                                 </x-admin::form.control-group>
@@ -783,7 +783,7 @@
                                     <x-admin::form.control-group.control
                                         type="hidden"
                                         name="is_visible_on_front"
-                                        :value="$selectedOption"
+                                        :value="(boolean) $selectedOption"
                                     >
                                     </x-admin::form.control-group.control>
                                 </x-admin::form.control-group>
@@ -814,7 +814,7 @@
                                     <x-admin::form.control-group.control
                                         type="hidden"
                                         name="is_comparable"
-                                        :value="$selectedOption"
+                                        :value="(boolean) $selectedOption"
                                     >
                                     </x-admin::form.control-group.control>
                                 </x-admin::form.control-group>

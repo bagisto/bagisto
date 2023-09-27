@@ -2570,8 +2570,6 @@ return [
                 'save-btn'                      => 'सहेजें',
                 'filter-title'                  => 'शीर्षक',
                 'sort'                          => 'क्रम',
-                'desc'                          => 'उतरता हुआ',
-                'asc'                           => 'आरोही',
                 'limit'                         => 'सीमा',
                 'key'                           => 'कुंजी: :key',
                 'value'                         => 'मूल्य: :value',

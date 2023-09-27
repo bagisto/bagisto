@@ -2570,8 +2570,6 @@ return [
                 'save-btn'                      => 'Opslaan',
                 'filter-title'                  => 'Titel',
                 'sort'                          => 'Sorteren',
-                'desc'                          => 'Aflopend',
-                'asc'                           => 'Oplopend',
                 'limit'                         => 'Limiet',
                 'key'                           => 'Sleutel: :key',
                 'value'                         => 'Waarde: :value',

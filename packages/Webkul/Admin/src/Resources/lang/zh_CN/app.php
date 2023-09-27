@@ -2570,8 +2570,6 @@ return [
                 'save-btn'                      => '保存',
                 'filter-title'                  => '标题',
                 'sort'                          => '排序',
-                'desc'                          => '降序',
-                'asc'                           => '升序',
                 'limit'                         => '限制',
                 'key'                           => '键：:key',
                 'value'                         => '值：:value',
