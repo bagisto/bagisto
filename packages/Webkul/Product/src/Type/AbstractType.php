@@ -13,7 +13,6 @@ use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductVideoRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
-use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Models\ProductFlat;
 use Webkul\Product\Facades\ProductImage;
@@ -111,7 +110,6 @@ abstract class AbstractType
      * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
      * @param  \Webkul\Product\Repositories\ProductVideoRepository  $productVideoRepository
      * @param  \Webkul\Product\Repositories\ProductCustomerGroupPriceRepository  $productCustomerGroupPriceRepository
-     * @param  \Webkul\Tax\Repositories\TaxCategoryRepository  $taxCategoryRepository
      * @return void
      */
     public function __construct(
@@ -122,8 +120,7 @@ abstract class AbstractType
         protected ProductInventoryRepository $productInventoryRepository,
         protected ProductImageRepository $productImageRepository,
         protected ProductVideoRepository $productVideoRepository,
-        protected ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository,
-        protected TaxCategoryRepository $taxCategoryRepository
+        protected ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository
     )
     {
     }
@@ -450,28 +447,6 @@ abstract class AbstractType
     }
 
     /**
-     * @param  string  $code
-     * @return mixed
-     */
-    public function getAttributeByCode($code)
-    {
-        return core()
-            ->getSingletonInstance(AttributeRepository::class)
-            ->getAttributeByCode($code);
-    }
-
-    /**
-     * @param  integer  $id
-     * @return mixed
-     */
-    public function getAttributeById($id)
-    {
-        return core()
-            ->getSingletonInstance(AttributeRepository::class)
-            ->getAttributeById($id);
-    }
-
-    /**
      * Returns children ids.
      *
      * @return array
@@ -757,20 +732,14 @@ abstract class AbstractType
      */
     public function getPriceIndex()
     {
-        static $indices = [];
-
-        if (array_key_exists($this->product->id, $indices)) {
-            return $indices[$this->product->id];
-        }
-
         $customerGroup = $this->customerRepository->getCurrentGroup();
 
-        $indices[$this->product->id] = $this->product
+        $indices = $this->product
             ->price_indices
             ->where('customer_group_id', $customerGroup->id)
             ->first();
 
-        return $indices[$this->product->id];
+        return $indices;
     }
 
     /**
@@ -780,18 +749,12 @@ abstract class AbstractType
      */
     public function getInventoryIndex()
     {
-        static $indices = [];
-
-        if (array_key_exists($this->product->id, $indices)) {
-            return $indices[$this->product->id];
-        }
-
-        $indices[$this->product->id] = $this->product
+        $indices = $this->product
             ->inventory_indices
             ->where('channel_id', core()->getCurrentChannel()->id)
             ->first();
 
-        return $indices[$this->product->id];
+        return $indices;
     }
 
     /**
@@ -878,13 +841,7 @@ abstract class AbstractType
             ? $this->product->parent->tax_category_id
             : $this->product->tax_category_id;
 
-        static $taxCategories = [];
-
-        if (array_key_exists($taxCategoryId, $taxCategories)) {
-            return $taxCategories[$taxCategoryId];
-        }
-
-        return $taxCategories[$taxCategoryId] = $this->taxCategoryRepository->find($taxCategoryId);
+        core()->getTaxCategoryById($taxCategoryId);
     }
 
     /**
@@ -1169,7 +1126,7 @@ abstract class AbstractType
 
         $customerGroup = $this->customerRepository->getCurrentGroup();
 
-        $customerGroupPrices = $this->productCustomerGroupPriceRepository->checkInLoadedCustomerGroupPrice($product, $customerGroup->id);
+        $customerGroupPrices = $this->productCustomerGroupPriceRepository->prices($product, $customerGroup->id);
 
         if ($customerGroupPrices->isEmpty()) {
             return $product->price;
@@ -1224,21 +1181,5 @@ abstract class AbstractType
         }
 
         return $lastPrice;
-    }
-
-    /**
-     * Check in loaded saleable.
-     *
-     * @return object
-     */
-    public function checkInLoadedSaleableChecks($product, $callback)
-    {
-        static $loadedSaleableChecks = [];
-
-        if (array_key_exists($product->id, $loadedSaleableChecks)) {
-            return $loadedSaleableChecks[$product->id];
-        }
-
-        return $loadedSaleableChecks[$product->id] = $callback($product);
     }
 }

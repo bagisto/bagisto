@@ -676,22 +676,24 @@ return [
                     ],
 
                     'grouped' => [
-                        'add-btn'     => 'Product Toevoegen',
-                        'delete'      => 'Verwijderen',
-                        'default-qty' => 'Standaard Hoeveelheid',
-                        'empty-title' => 'Product Toevoegen',
-                        'empty-info'  => 'Om verschillende combinaties van producten snel te maken.',
-                        'info'        => 'Een gegroepeerd product bestaat uit op zichzelf staande items die als een set worden gepresenteerd, waardoor variaties of coördinatie per seizoen of thema mogelijk zijn. Elk product kan afzonderlijk worden gekocht of als onderdeel van de groep.',
-                        'sku'         => 'SKU - :sku',
-                        'title'       => 'Gegroepeerde Producten',
+                        'add-btn'           => 'Product Toevoegen',
+                        'delete'            => 'Verwijderen',
+                        'default-qty'       => 'Standaard Hoeveelheid',
+                        'empty-title'       => 'Product Toevoegen',
+                        'empty-info'        => 'Om verschillende combinaties van producten snel te maken.',
+                        'image-placeholder' => 'Product Afbeelding',
+                        'info'              => 'Een gegroepeerd product bestaat uit op zichzelf staande items die als een set worden gepresenteerd, waardoor variaties of coördinatie per seizoen of thema mogelijk zijn. Elk product kan afzonderlijk worden gekocht of als onderdeel van de groep.',
+                        'sku'               => 'SKU - :sku',
+                        'title'             => 'Gegroepeerde Producten',
                     ],
 
                     'bundle' => [
-                        'add-btn'     => 'Optie Toevoegen',
-                        'empty-title' => 'Optie Toevoegen',
-                        'empty-info'  => 'Om bundelopties snel te maken.',
-                        'info'        => 'Een bundelproduct is een pakket van meerdere items of diensten die samen worden verkocht tegen een speciale prijs, waardoor waarde en gemak voor klanten worden geboden.',
-                        'title'       => 'Bundelopties',
+                        'add-btn'           => 'Optie Toevoegen',
+                        'empty-title'       => 'Optie Toevoegen',
+                        'empty-info'        => 'Om bundelopties snel te maken.',
+                        'image-placeholder' => 'Product Afbeelding',
+                        'info'              => 'Een bundelproduct is een pakket van meerdere items of diensten die samen worden verkocht tegen een speciale prijs, waardoor waarde en gemak voor klanten worden geboden.',
+                        'title'             => 'Bundelopties',
 
                         'update-create' => [
                             'checkbox'    => 'Aankruisvak',
@@ -2568,8 +2570,6 @@ return [
                 'save-btn'                      => 'Opslaan',
                 'filter-title'                  => 'Titel',
                 'sort'                          => 'Sorteren',
-                'desc'                          => 'Aflopend',
-                'asc'                           => 'Oplopend',
                 'limit'                         => 'Limiet',
                 'key'                           => 'Sleutel: :key',
                 'value'                         => 'Waarde: :value',
@@ -2678,7 +2678,7 @@ return [
                 ],
 
                 'products' => [
-                    'info'  => 'Stel gastafrekening, startpagina, productweergavepagina, winkelwagenweergavepagina, etalage, beoordeling en attribuutsociale delen in.',
+                    'info'  => 'Stel gastafrekening, productweergavepagina, winkelwagenweergavepagina, winkelvoorkant, beoordeling en attribuutsociale deling in.',
                     'title' => 'Producten',
 
                     'guest-checkout' => [
@@ -3081,13 +3081,13 @@ return [
                     'categories'                      => 'Categorieën',
                     'customers'                       => 'Klanten',
                     'sku'                             => 'SKU: :sku',
-                    'explore-all-matching-products'   => 'Verken alle producten die overeenkomen met ":query" (:count)',
+                    'explore-all-matching-products'   => 'Verken alle producten die overeenkomen met \":query\" (:count)',
                     'explore-all-products'            => 'Verken alle producten',
-                    'explore-all-matching-orders'     => 'Verken alle bestellingen die overeenkomen met ":query" (:count)',
+                    'explore-all-matching-orders'     => 'Verken alle bestellingen die overeenkomen met \":query\" (:count)',
                     'explore-all-orders'              => 'Verken alle bestellingen',
-                    'explore-all-matching-categories' => 'Verken alle categorieën die overeenkomen met ":query" (:count)',
+                    'explore-all-matching-categories' => 'Verken alle categorieën die overeenkomen met \":query\" (:count)',
                     'explore-all-categories'          => 'Verken alle categorieën',
-                    'explore-all-matching-customers'  => 'Verken alle klanten die overeenkomen met ":query" (:count)',
+                    'explore-all-matching-customers'  => 'Verken alle klanten die overeenkomen met \":query\" (:count)',
                     'explore-all-customers'           => 'Verken alle klanten',
                 ],
             ],

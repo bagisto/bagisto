@@ -425,6 +425,7 @@ return [
         'was-this-helpful'       => 'Was deze beoordeling nuttig?',
         'load-more'              => 'Meer laden',
         'add-image'              => 'Afbeelding toevoegen',
+        'failed-to-upload'       => 'De afbeelding kon niet worden geüpload',
         'description'            => 'Beschrijving',
         'additional-information' => 'Aanvullende informatie',
         'submit-success'         => 'Succesvol ingediend',

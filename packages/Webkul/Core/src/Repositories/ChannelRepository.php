@@ -3,13 +3,10 @@
 namespace Webkul\Core\Repositories;
 
 use Illuminate\Support\Facades\Storage;
-use Prettus\Repository\Traits\CacheableRepository;
 use Webkul\Core\Eloquent\Repository;
 
 class ChannelRepository extends Repository
 {
-    use CacheableRepository;
-
     /**
      * Specify model class name.
      *

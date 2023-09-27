@@ -425,6 +425,7 @@ return [
         'was-this-helpful'       => 'Czy ta recenzja była pomocna?',
         'load-more'              => 'Wczytaj więcej',
         'add-image'              => 'Dodaj obraz',
+        'failed-to-upload'       => 'Nie udało się przesłać obrazu',
         'description'            => 'Opis',
         'additional-information' => 'Dodatkowe informacje',
         'submit-success'         => 'Przesłano pomyślnie',

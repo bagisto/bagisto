@@ -425,6 +425,7 @@ return [
         'was-this-helpful'       => 'Cet avis vous a-t-il été utile ?',
         'load-more'              => 'Charger plus',
         'add-image'              => 'Ajouter une image',
+        'failed-to-upload'       => 'L\'image n\'a pas pu être téléchargée',
         'description'            => 'Description',
         'additional-information' => 'Informations supplémentaires',
         'submit-success'         => 'Soumis avec succès',

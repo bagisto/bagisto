@@ -28,6 +28,27 @@ class Flat
     protected $flatColumns = [];
 
     /**
+     * Channels
+     *
+     * @var array
+     */
+    protected $channels = [];
+
+    /**
+     * Super Attribute Codes
+     *
+     * @var array
+     */
+    protected $superAttributeCodes = [];
+
+    /**
+     * Family Attributes
+     *
+     * @var array
+     */
+    protected $familyAttributes = [];
+
+    /**
      * Create a new listener instance.
      *
      * @param  \Webkul\Core\Repositories\ChannelRepository  $channelRepository
@@ -170,13 +191,11 @@ class Flat
      */
     public function getCachedFamilyAttributes($product)
     {
-        static $attributes = [];
-
-        if (array_key_exists($product->attribute_family_id, $attributes)) {
-            return $attributes[$product->attribute_family_id];
+        if (array_key_exists($product->attribute_family_id, $this->familyAttributes)) {
+            return $this->familyAttributes[$product->attribute_family_id];
         }
 
-        return $attributes[$product->attribute_family_id] = $product->attribute_family->custom_attributes;
+        return $this->familyAttributes[$product->attribute_family_id] = $product->attribute_family->custom_attributes;
     }
 
     /**
@@ -189,13 +208,11 @@ class Flat
             return [];
         }
 
-        static $attributeCodes = [];
-
-        if (array_key_exists($product->id, $attributeCodes)) {
-            return $attributeCodes[$product->id];
+        if (array_key_exists($product->id, $this->superAttributeCodes)) {
+            return $this->superAttributeCodes[$product->id];
         }
 
-        return $attributeCodes[$product->id] = $product->super_attributes()->pluck('code')->toArray();
+        return $this->superAttributeCodes[$product->id] = $product->super_attributes()->pluck('code')->toArray();
     }
 
     /**
@@ -204,12 +221,10 @@ class Flat
      */
     public function getCachedChannel($id)
     {
-        static $channels = [];
-
-        if (isset($channels[$id])) {
-            return $channels[$id];
+        if (isset($this->channels[$id])) {
+            return $this->channels[$id];
         }
 
-        return $channels[$id] = $this->channelRepository->findOrFail($id);
+        return $this->channels[$id] = $this->channelRepository->findOrFail($id);
     }
 }

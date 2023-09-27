@@ -676,22 +676,24 @@ return [
                     ],
 
                     'grouped' => [
-                        'add-btn'     => 'Dodaj produkt',
-                        'delete'      => 'Usuń',
-                        'default-qty' => 'Domyślna ilość',
-                        'empty-title' => 'Dodaj produkt',
-                        'empty-info'  => 'Aby tworzyć różne kombinacje produktów, wystarczy to zrobić.',
-                        'info'        => 'Produkt grupowy składa się z samodzielnych pozycji prezentowanych jako zestaw, umożliwiający zmiany lub koordynację ze względu na sezon lub motyw. Każdy produkt można kupić indywidualnie lub jako część grupy.',
-                        'sku'         => 'SKU - :sku',
-                        'title'       => 'Produkty grupowe',
+                        'add-btn'           => 'Dodaj produkt',
+                        'delete'            => 'Usuń',
+                        'default-qty'       => 'Domyślna ilość',
+                        'empty-title'       => 'Dodaj produkt',
+                        'empty-info'        => 'Aby tworzyć różne kombinacje produktów, wystarczy to zrobić.',
+                        'image-placeholder' => 'Obraz produktu',
+                        'info'              => 'Produkt grupowy składa się z samodzielnych pozycji prezentowanych jako zestaw, umożliwiający zmiany lub koordynację ze względu na sezon lub motyw. Każdy produkt można kupić indywidualnie lub jako część grupy.',
+                        'sku'               => 'SKU - :sku',
+                        'title'             => 'Produkty grupowe',
                     ],
 
                     'bundle' => [
-                        'add-btn'     => 'Dodaj opcję',
-                        'empty-title' => 'Dodaj opcję',
-                        'empty-info'  => 'Aby tworzyć opcje pakietu, wystarczy to zrobić.',
-                        'info'        => 'Produkt wiązany to zestaw wielu produktów lub usług sprzedawanych razem w specjalnej cenie, zapewniający wartość i wygodę klientom.',
-                        'title'       => 'Pozycje pakietu',
+                        'add-btn'           => 'Dodaj opcję',
+                        'empty-title'       => 'Dodaj opcję',
+                        'empty-info'        => 'Aby tworzyć opcje pakietu, wystarczy to zrobić.',
+                        'image-placeholder' => 'Obraz produktu',
+                        'info'              => 'Produkt wiązany to zestaw wielu produktów lub usług sprzedawanych razem w specjalnej cenie, zapewniający wartość i wygodę klientom.',
+                        'title'             => 'Pozycje pakietu',
 
                         'update-create' => [
                             'checkbox'    => 'Pole wyboru',
@@ -2568,8 +2570,6 @@ return [
                 'save-btn'                      => 'Zapisz',
                 'filter-title'                  => 'Tytuł',
                 'sort'                          => 'Sortuj',
-                'desc'                          => 'Malejąco',
-                'asc'                           => 'Rosnąco',
                 'limit'                         => 'Limit',
                 'key'                           => 'Klucz: :key',
                 'value'                         => 'Wartość: :value',
@@ -2678,7 +2678,7 @@ return [
                 ],
 
                 'products' => [
-                    'info'  => 'Ustaw gościnny zakup, stronę główną, stronę widoku produktu, widok koszyka, przód sklepu, recenzję i udostępnianie społecznościowe atrybutów.',
+                    'info'  => 'Skonfiguruj gościnne zamówienie, stronę wyświetlania produktów, stronę wyświetlania koszyka, stronę główną sklepu, recenzję i udostępnianie atrybutów społecznościowych.',
                     'title' => 'Produkty',
 
                     'guest-checkout' => [
@@ -3081,13 +3081,13 @@ return [
                     'categories'                      => 'Kategorie',
                     'customers'                       => 'Klienci',
                     'sku'                             => 'SKU: :sku',
-                    'explore-all-matching-products'   => 'Przeglądaj wszystkie produkty pasujące do ":query" (:count)',
+                    'explore-all-matching-products'   => 'Przeglądaj wszystkie produkty pasujące do \":query\" (:count)',
                     'explore-all-products'            => 'Przeglądaj wszystkie produkty',
-                    'explore-all-matching-orders'     => 'Przeglądaj wszystkie zamówienia pasujące do ":query" (:count)',
+                    'explore-all-matching-orders'     => 'Przeglądaj wszystkie zamówienia pasujące do \":query\" (:count)',
                     'explore-all-orders'              => 'Przeglądaj wszystkie zamówienia',
-                    'explore-all-matching-categories' => 'Przeglądaj wszystkie kategorie pasujące do ":query" (:count)',
+                    'explore-all-matching-categories' => 'Przeglądaj wszystkie kategorie pasujące do \":query\" (:count)',
                     'explore-all-categories'          => 'Przeglądaj wszystkie kategorie',
-                    'explore-all-matching-customers'  => 'Przeglądaj wszystkich klientów pasujących do ":query" (:count)',
+                    'explore-all-matching-customers'  => 'Przeglądaj wszystkich klientów pasujących do \":query\" (:count)',
                     'explore-all-customers'           => 'Przeglądaj wszystkich klientów',
                 ],
             ],

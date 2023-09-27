@@ -5,7 +5,7 @@
     </x-slot:title>
 
     <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-        <p class="text-[20px] text-gray-800 font-bold">
+        <p class="text-[20px] text-gray-800 dark:text-white font-bold">
             @lang('admin::app.settings.inventory-sources.index.title')
         </p>
 

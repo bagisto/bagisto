@@ -676,22 +676,24 @@ return [
                     ],
 
                     'grouped' => [
-                        'add-btn'     => 'Ajouter un produit',
-                        'delete'      => 'Supprimer',
-                        'default-qty' => 'Qté par défaut',
-                        'empty-title' => 'Ajouter un produit',
-                        'empty-info'  => 'Créer diverses combinaisons de produits en un instant.',
-                        'info'        => 'Un produit groupé comprend des articles autonomes présentés comme un ensemble, permettant des variations ou une coordination en fonction de la saison ou du thème. Chaque produit peut être acheté individuellement ou en tant que partie du groupe.',
-                        'sku'         => 'SKU - :sku',
-                        'title'       => 'Produits groupés',
+                        'add-btn'           => 'Ajouter un produit',
+                        'delete'            => 'Supprimer',
+                        'default-qty'       => 'Qté par défaut',
+                        'empty-title'       => 'Ajouter un produit',
+                        'empty-info'        => 'Créer diverses combinaisons de produits en un instant.',
+                        'image-placeholder' => 'Image du produit',
+                        'info'              => 'Un produit groupé comprend des articles autonomes présentés comme un ensemble, permettant des variations ou une coordination en fonction de la saison ou du thème. Chaque produit peut être acheté individuellement ou en tant que partie du groupe.',
+                        'sku'               => 'SKU - :sku',
+                        'title'             => 'Produits groupés',
                     ],
 
                     'bundle' => [
-                        'add-btn'     => 'Ajouter une option',
-                        'empty-title' => 'Ajouter une option',
-                        'empty-info'  => 'Créer des options de bundle en un instant.',
-                        'info'        => 'Un produit en bundle est un ensemble de plusieurs articles ou services vendus ensemble à un prix spécial, offrant une valeur et une commodité aux clients.',
-                        'title'       => 'Articles du bundle',
+                        'add-btn'           => 'Ajouter une option',
+                        'empty-title'       => 'Ajouter une option',
+                        'empty-info'        => 'Créer des options de bundle en un instant.',
+                        'image-placeholder' => 'Image du produit',
+                        'info'              => 'Un produit en bundle est un ensemble de plusieurs articles ou services vendus ensemble à un prix spécial, offrant une valeur et une commodité aux clients.',
+                        'title'             => 'Articles du bundle',
 
                         'update-create' => [
                             'checkbox'    => 'Case à cocher',
@@ -2568,8 +2570,6 @@ return [
                 'save-btn'                      => 'Enregistrer',
                 'filter-title'                  => 'Titre',
                 'sort'                          => 'Trier',
-                'desc'                          => 'Descendant',
-                'asc'                           => 'Ascendant',
                 'limit'                         => 'Limite',
                 'key'                           => 'Clé : :key',
                 'value'                         => 'Valeur : :value',
@@ -2678,7 +2678,7 @@ return [
                 ],
 
                 'products' => [
-                    'info'  => 'Configurer la commande en tant qu\'invité, la page d\'accueil, la page de visualisation des produits, la page du panier, la vitrine, les avis et le partage social des attributs.',
+                    'info'  => 'Configurer le paiement en tant qu\'invité, la page de visualisation du produit, la page de visualisation du panier, la page d\'accueil du magasin, la revue et le partage social des attributs.',
                     'title' => 'Produits',
 
                     'guest-checkout' => [

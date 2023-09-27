@@ -38,7 +38,7 @@ class CartRuleDataGrid extends DataGrid
      */
     public function __construct()
     {
-        $this->customer_group = core()->getRequestedCustomerGroupCode() ?? 'all';
+        $this->customer_group = request()->get('customer_group') ?? 'all';
 
         $this->channel = core()->getRequestedChannelCode(false) ?? 'all';
     }

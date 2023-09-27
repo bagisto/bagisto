@@ -15,6 +15,13 @@ class Price extends AbstractIndexer
     private $batchSize;
 
     /**
+     * Customer Groups
+     *
+     * @var array
+     */
+    protected $customerGroups;
+
+    /**
      * Create a new indexer instance.
      *
      * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository
@@ -188,12 +195,10 @@ class Price extends AbstractIndexer
      */
     public function getCustomerGroups()
     {
-        static $customerGroups;
-
-        if ($customerGroups) {
-            return $customerGroups;
+        if ($this->customerGroups) {
+            return $this->customerGroups;
         }
 
-        return $customerGroups = $this->customerGroupRepository->all();
+        return $this->customerGroups = $this->customerGroupRepository->all();
     }
 }

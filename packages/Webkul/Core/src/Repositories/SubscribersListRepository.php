@@ -3,12 +3,9 @@
 namespace Webkul\Core\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
-use Prettus\Repository\Traits\CacheableRepository;
 
 class SubscribersListRepository extends Repository
 {
-    use CacheableRepository;
-
     /**
      * Specify Model class name
      *

@@ -425,6 +425,7 @@ return [
         'was-this-helpful'       => 'آیا این نقد و بررسی به شما کمک کرد؟',
         'load-more'              => 'بارگذاری بیشتر',
         'add-image'              => 'افزودن تصویر',
+        'failed-to-upload'       => 'تصویر بارگذاری نشد',
         'description'            => 'توضیحات',
         'additional-information' => 'اطلاعات تکمیلی',
         'submit-success'         => 'با موفقیت ثبت شد',

@@ -425,6 +425,7 @@ return [
         'was-this-helpful'       => 'Esta avaliação foi útil?',
         'load-more'              => 'Carregar Mais',
         'add-image'              => 'Adicionar Imagem',
+        'failed-to-upload'       => 'A imagem não pôde ser carregada',
         'description'            => 'Descrição',
         'additional-information' => 'Informações Adicionais',
         'submit-success'         => 'Enviado com sucesso',

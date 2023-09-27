@@ -28,6 +28,13 @@ class Inventory extends AbstractIndexer
     protected $channel;
 
     /**
+     * Channels
+     *
+     * @var array
+     */
+    protected $channels;
+
+    /**
      * Create a new indexer instance.
      *
      * @param  \Webkul\Core\Repositories\ChannelRepository  $channelRepository
@@ -201,12 +208,10 @@ class Inventory extends AbstractIndexer
      */
     public function getChannels()
     {
-        static $channels;
-
-        if ($channels) {
-            return $channels;
+        if ($this->channels) {
+            return $this->channels;
         }
 
-        return $channels = $this->channelRepository->all();
+        return $this->channels = $this->channelRepository->all();
     }
 }

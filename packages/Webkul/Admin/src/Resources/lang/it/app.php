@@ -676,22 +676,24 @@ return [
                     ],
 
                     'grouped' => [
-                        'add-btn'     => 'Aggiungi Prodotto',
-                        'delete'      => 'Elimina',
-                        'default-qty' => 'Qtà Predefinita',
-                        'empty-title' => 'Aggiungi Prodotto',
-                        'empty-info'  => 'Per creare varie combinazioni di prodotti rapidamente.',
-                        'info'        => 'Un prodotto raggruppato è composto da articoli autonomi presentati come un set, consentendo variazioni o coordinamenti per stagione o tema. Ogni prodotto può essere acquistato singolarmente o come parte del gruppo.',
-                        'sku'         => 'SKU - :sku',
-                        'title'       => 'Prodotti Raggruppati',
+                        'add-btn'           => 'Aggiungi Prodotto',
+                        'delete'            => 'Elimina',
+                        'default-qty'       => 'Qtà Predefinita',
+                        'empty-title'       => 'Aggiungi Prodotto',
+                        'empty-info'        => 'Per creare varie combinazioni di prodotti rapidamente.',
+                        'image-placeholder' => 'Immagine Prodotto',
+                        'info'              => 'Un prodotto raggruppato è composto da articoli autonomi presentati come un set, consentendo variazioni o coordinamenti per stagione o tema. Ogni prodotto può essere acquistato singolarmente o come parte del gruppo.',
+                        'sku'               => 'SKU - :sku',
+                        'title'             => 'Prodotti Raggruppati',
                     ],
 
                     'bundle' => [
-                        'add-btn'     => 'Aggiungi Opzione',
-                        'empty-title' => 'Aggiungi Opzione',
-                        'empty-info'  => 'Per creare opzioni bundle rapidamente.',
-                        'info'        => 'Un prodotto bundle è un pacchetto di articoli o servizi multipli venduti insieme a un prezzo speciale, offrendo valore e comodità ai clienti.',
-                        'title'       => 'Elementi del Bundle',
+                        'add-btn'           => 'Aggiungi Opzione',
+                        'empty-title'       => 'Aggiungi Opzione',
+                        'empty-info'        => 'Per creare opzioni bundle rapidamente.',
+                        'image-placeholder' => 'Immagine Prodotto',
+                        'info'              => 'Un prodotto bundle è un pacchetto di articoli o servizi multipli venduti insieme a un prezzo speciale, offrendo valore e comodità ai clienti.',
+                        'title'             => 'Elementi del Bundle',
 
                         'update-create' => [
                             'checkbox'    => 'Casella di Controllo',
@@ -2568,8 +2570,6 @@ return [
                 'save-btn'                      => 'Guardar',
                 'filter-title'                  => 'Título',
                 'sort'                          => 'Ordenar',
-                'desc'                          => 'Descendente',
-                'asc'                           => 'Ascendente',
                 'limit'                         => 'Límite',
                 'key'                           => 'Clave: :key',
                 'value'                         => 'Valor: :value',
@@ -2678,7 +2678,7 @@ return [
                 ],
 
                 'products' => [
-                    'info'  => 'Imposta il checkout per gli ospiti, la homepage, la pagina di visualizzazione del prodotto, la pagina di visualizzazione del carrello, il front-end del negozio, la recensione e la condivisione sociale degli attributi.',
+                    'info'  => 'Imposta il checkout per gli ospiti, la pagina di visualizzazione del prodotto, la pagina del carrello, il fronte del negozio, la recensione e la condivisione sociale dell\'attributo.',
                     'title' => 'Prodotti',
 
                     'guest-checkout' => [
@@ -3081,13 +3081,13 @@ return [
                     'categories'                      => 'Categorie',
                     'customers'                       => 'Clienti',
                     'sku'                             => 'SKU: :sku',
-                    'explore-all-matching-products'   => 'Esplora tutti i prodotti corrispondenti a ":query" (:count)',
+                    'explore-all-matching-products'   => 'Esplora tutti i prodotti corrispondenti a \":query\" (:count)',
                     'explore-all-products'            => 'Esplora tutti i prodotti',
-                    'explore-all-matching-orders'     => 'Esplora tutti gli ordini corrispondenti a ":query" (:count)',
+                    'explore-all-matching-orders'     => 'Esplora tutti gli ordini corrispondenti a \":query\" (:count)',
                     'explore-all-orders'              => 'Esplora tutti gli ordini',
-                    'explore-all-matching-categories' => 'Esplora tutte le categorie corrispondenti a ":query" (:count)',
+                    'explore-all-matching-categories' => 'Esplora tutte le categorie corrispondenti a \":query\" (:count)',
                     'explore-all-categories'          => 'Esplora tutte le categorie',
-                    'explore-all-matching-customers'  => 'Esplora tutti i clienti corrispondenti a ":query" (:count)',
+                    'explore-all-matching-customers'  => 'Esplora tutti i clienti corrispondenti a \":query\" (:count)',
                     'explore-all-customers'           => 'Esplora tutti i clienti',
                 ],
             ],

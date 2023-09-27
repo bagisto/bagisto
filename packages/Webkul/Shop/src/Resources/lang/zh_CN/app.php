@@ -425,6 +425,7 @@ return [
         'was-this-helpful'       => '此评论是否有帮助？',
         'load-more'              => '加载更多',
         'add-image'              => '添加图片',
+        'failed-to-upload'       => '图片上传失败',
         'description'            => '描述',
         'additional-information' => '附加信息',
         'submit-success'         => '提交成功',

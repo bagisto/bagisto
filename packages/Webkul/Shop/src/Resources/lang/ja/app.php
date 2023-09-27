@@ -425,6 +425,7 @@ return [
         'was-this-helpful'       => 'このレビューは役に立ちましたか？',
         'load-more'              => 'もっと読み込む',
         'add-image'              => '画像を追加',
+        'failed-to-upload'       => '画像のアップロードに失敗しました',
         'description'            => '説明',
         'additional-information' => '追加情報',
         'submit-success'         => '正常に送信されました',

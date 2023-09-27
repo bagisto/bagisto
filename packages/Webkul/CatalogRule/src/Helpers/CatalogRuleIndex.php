@@ -135,12 +135,6 @@ class CatalogRuleIndex
      */
     public function getCatalogRules()
     {
-        static $catalogRules;
-
-        if ($catalogRules) {
-            return $catalogRules;
-        }
-
         $catalogRules = $this->catalogRuleRepository->scopeQuery(function($query) {
             return $query->where(function ($query1) {
                 $query1->where('catalog_rules.starts_from', '<=', Carbon::now()->format('Y-m-d'))

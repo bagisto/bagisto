@@ -6,13 +6,10 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\Repository;
-use Prettus\Repository\Traits\CacheableRepository;
 use Webkul\Core\Contracts\Locale;
 
 class LocaleRepository extends Repository
 {
-    use CacheableRepository;
-
     /**
      * Specify model class name.
      *

@@ -425,6 +425,7 @@ return [
         'was-this-helpful'       => 'Bu İnceleme Yardımcı Oldu mu?',
         'load-more'              => 'Daha Fazla Yükle',
         'add-image'              => 'Resim Ekle',
+        'failed-to-upload'       => 'Resim yüklenemedi',
         'description'            => 'Açıklama',
         'additional-information' => 'Ek Bilgiler',
         'submit-success'         => 'Başarıyla Gönderildi',

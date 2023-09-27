@@ -425,6 +425,7 @@ return [
         'was-this-helpful'       => 'क्या यह समीक्षा मददगार थी?',
         'load-more'              => 'और दिखाएं',
         'add-image'              => 'छवि जोड़ें',
+        'failed-to-upload'       => 'छवि अपलोड नहीं हो सकी',
         'description'            => 'विवरण',
         'additional-information' => 'अतिरिक्त जानकारी',
         'submit-success'         => 'सफलतापूर्वक सबमिट किया गया',

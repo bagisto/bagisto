@@ -425,6 +425,7 @@ return [
         'was-this-helpful'       => 'Цей відгук був корисним?',
         'load-more'              => 'Завантажити ще',
         'add-image'              => 'Додати зображення',
+        'failed-to-upload'       => 'Не вдалося завантажити зображення',
         'description'            => 'Опис',
         'additional-information' => 'Додаткова інформація',
         'submit-success'         => 'Успішно надіслано',
