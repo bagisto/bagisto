@@ -147,15 +147,17 @@
                         <h3 class="font-dmserif text-[30px] max-sm:text-[22px]">
                             @lang('shop::app.products.customer-review')
                         </h3>
+                        
+                        @if(core()->getConfigData('catalog.products.review.guest_review'))
+                            <div
+                                class="flex gap-x-[15px] items-center px-[15px] py-[10px] border border-navyBlue rounded-[12px] cursor-pointer"
+                                @click="canReview = true"
+                            >
+                                <span class="icon-pen text-[24px]"></span>
 
-                        <div
-                            class="flex gap-x-[15px] items-center px-[15px] py-[10px] border border-navyBlue rounded-[12px] cursor-pointer"
-                            @click="canReview = true"
-                        >
-                            <span class="icon-pen text-[24px]"></span>
-
-                            @lang('shop::app.products.write-a-review')
-                        </div>
+                                @lang('shop::app.products.write-a-review')
+                            </div>
+                        @endif
                     </div>
 
                     <template v-if="reviews.length">
