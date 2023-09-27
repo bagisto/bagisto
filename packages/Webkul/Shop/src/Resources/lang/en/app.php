@@ -289,39 +289,39 @@ return [
 
         'layouts' => [
             'header' => [
+                'account'       => 'Account',
+                'compare'       => 'Compare',
+                'cart'          => 'Cart',
+                'dropdown-text' => 'Manage Cart, Orders & Wishlist',
+                'logout'        => 'Logout',
+                'orders'        => 'Orders',
+                'profile'       => 'Profile',
+                'sign-in'       => 'Sign In',
+                'sign-up'       => 'Sign Up',
+                'search-text'   => 'Search products here',
+                'search'        => 'Search',
                 'title'         => 'Account',
                 'welcome'       => 'Welcome',
                 'welcome-guest' => 'Welcome Guest',
-                'dropdown-text' => 'Manage Cart, Orders & Wishlist',
-                'sign-in'       => 'Sign In',
-                'sign-up'       => 'Sign Up',
-                'account'       => 'Account',
-                'cart'          => 'Cart',
-                'profile'       => 'Profile',
                 'wishlist'      => 'Wishlist',
-                'compare'       => 'Compare',
-                'orders'        => 'Orders',
-                'logout'        => 'Logout',
-                'search-text'   => 'Search products here',
-                'search'        => 'Search',
             ],
 
             'footer' => [
+                'about-us'               => 'About Us',
+                'customer-service'       => 'Customer Service',
+                'contact-us'             => 'Contact Us',
+                'currency'               => 'Currency',
+                'footer-text'            => '© Copyright 2010 - 2023, Webkul Software (Registered in India). All rights reserved.',
+                'locale'                 => 'Locale',
                 'newsletter-text'        => 'Get Ready for our Fun Newsletter!',
+                'order-return'           => 'Order and Returns',
+                'payment-policy'         => 'Payment Policy',
+                'privacy-cookies-policy' => 'Privacy and Cookies Policy',
                 'subscribe-stay-touch'   => 'Subscribe to stay in touch.',
                 'subscribe-newsletter'   => 'Subscribe Newsletter',
                 'subscribe'              => 'Subscribe',
-                'footer-text'            => '© Copyright 2010 - 2023, Webkul Software (Registered in India). All rights reserved.',
-                'locale'                 => 'Locale',
-                'currency'               => 'Currency',
-                'about-us'               => 'About Us',
-                'customer-service'       => 'Customer Service',
-                'whats-new'              => 'What’s New',
-                'contact-us'             => 'Contact Us',
-                'order-return'           => 'Order and Returns',
-                'payment-policy'         => 'Payment Policy',
                 'shipping-policy'        => 'Shipping Policy',
-                'privacy-cookies-policy' => 'Privacy and Cookies Policy',
+                'whats-new'              => 'What’s New',
             ],
         ],
 
@@ -346,19 +346,19 @@ return [
                 'title' => 'Apply Filters',
 
                 'custom-filters' => [
-                    'title'     => 'Custom Filters',
                     'clear-all' => 'Clear All',
+                    'title'     => 'Custom Filters',
                 ],
 
                 'date-options' => [
-                    'today'             => 'Today',
-                    'yesterday'         => 'Yesterday',
-                    'this-week'         => 'This Week',
-                    'this-month'        => 'This Month',
+                    'last-six-months'   => 'Last 6 Months',
                     'last-month'        => 'Last Month',
                     'last-three-months' => 'Last 3 Months',
-                    'last-six-months'   => 'Last 6 Months',
+                    'today'             => 'Today',
+                    'this-week'         => 'This Week',
+                    'this-month'        => 'This Month',
                     'this-year'         => 'This Year',
+                    'yesterday'         => 'Yesterday',
                 ],
             ],
 
@@ -373,21 +373,21 @@ return [
             'default-header'  => 'Default Header',
 
             'confirm' => [
-                'title'        => 'Are you sure?',
-                'message'      => 'Are you sure you want to perform this action?',
                 'agree-btn'    => 'Agree',
                 'disagree-btn' => 'Disagree',
+                'message'      => 'Are you sure you want to perform this action?',
+                'title'        => 'Are you sure?',
             ],
         ],
 
         'products'   => [
             'card' => [
-                'new'                => 'New',
-                'sale'               => 'Sale',
-                'review-description' => 'Be the first to review this product',
                 'add-to-compare'     => 'Item added successfully to compare list.',
                 'already-in-compare' => 'Item is already added to compare list.',
                 'add-to-cart'        => 'Add To Cart',
+                'new'                => 'New',
+                'review-description' => 'Be the first to review this product',
+                'sale'               => 'Sale',
             ],
 
             'carousel' => [
@@ -414,12 +414,12 @@ return [
         'sort-by' => [
             'title'   => 'Sort By',
             'options' => [
+                'cheapest-first'  => 'Cheapest First',
+                'expensive-first' => 'Expensive First',
                 'from-a-z'        => 'From A-Z',
                 'from-z-a'        => 'From Z-A',
                 'latest-first'    => 'Newest First',
                 'oldest-first'    => 'Oldest First',
-                'cheapest-first'  => 'Cheapest First',
-                'expensive-first' => 'Expensive First',
             ],
         ],
 
@@ -435,9 +435,9 @@ return [
                 ],
 
                 'downloadable' => [
-                    'samples' => 'Samples',
                     'links'   => 'Links',
                     'sample'  => 'Sample',
+                    'samples' => 'Samples',
                 ],
 
                 'grouped' => [
@@ -446,36 +446,36 @@ return [
             ],
 
             'gallery' => [
-                'thumbnail-image' => 'Thumbnail Image',
                 'product-image'   => 'Product Image',
+                'thumbnail-image' => 'Thumbnail Image',
             ],
 
             'reviews' => [
-                'cancel'      => 'Cancel',
-                'rating'      => 'Rating',
-                'success'     => 'Review submitted successfully.',
                 'attachments' => 'Attachments',
-                'title'       => 'Title',
                 'comment'     => 'Comment',
                 'customer-review'        => 'Customer Reviews',
-                'submit-review'          => 'Submit Review',
-                'write-a-review'         => 'Write a Review',
+                'cancel'      => 'Cancel',
                 'empty-review'           => 'No Review found, be the first to review this product',
-                'load-more'              => 'Load More',
                 'failed-to-upload'       => 'The image failed to upload',
+                'load-more'              => 'Load More',
+                'rating'      => 'Rating',
+                'success'     => 'Review submitted successfully.',
+                'submit-review'          => 'Submit Review',
+                'title'       => 'Title',
+                'write-a-review'         => 'Write a Review',
             ],
 
-            'description'            => 'Description',
-            'additional-information' => 'Additional Information',
-            'review'                 => 'Reviews',
-            'related-product-title'  => 'Related Products',
-            'up-sell-title'          => 'We found other products you might like!',
-            'tax-inclusive'          => 'Inclusive of all taxes',
             'add-to-cart'            => 'Add To Cart',
-            'buy-now'                => 'Buy Now',
-            'compare'                => 'Compare',
             'add-to-compare'         => 'Product added in compare.',
             'already-in-compare'     => 'Product is already added in compare.',
+            'additional-information' => 'Additional Information',
+            'buy-now'                => 'Buy Now',
+            'compare'                => 'Compare',
+            'description'            => 'Description',
+            'review'                 => 'Reviews',
+            'related-product-title'  => 'Related Products',
+            'tax-inclusive'          => 'Inclusive of all taxes',
+            'up-sell-title'          => 'We found other products you might like!',
         ],
 
         'type' => [
@@ -487,10 +487,10 @@ return [
 
     'categories' => [
         'filters' => [
+            'clear-all' => 'Clear All',
             'filters'   => 'Filters:',
             'filter'    => 'Filter',
             'sort'      => 'Sort',
-            'clear-all' => 'Clear All',
         ],
 
         'toolbar' => [
@@ -508,41 +508,41 @@ return [
     ],
 
     'compare' => [
-        'product-compare'    => 'Product Compare',
+        'already-added'      => 'Item is already added to compare list',
         'delete-all'         => 'Delete All',
         'empty-text'         => 'You have no items in your compare list',
-        'title'              => 'Product Compare',
-        'already-added'      => 'Item is already added to compare list',
         'item-add-success'   => 'Item added successfully to compare list',
+        'product-compare'    => 'Product Compare',
         'remove-success'     => 'Item removed successfully.',
         'remove-all-success' => 'All items removed successfully.',
         'remove-error'       => 'Something went wrong, please try again later.',
+        'title'              => 'Product Compare',
     ],
 
     'checkout' => [
         'success' => [
+            'info'          => 'We will email you, your order details and tracking information',
+            'order-id-info' => 'Your order id is #:order_id',
             'title'         => 'Order successfully placed',
             'thanks'        => 'Thank you for your order!',
-            'order-id-info' => 'Your order id is #:order_id',
-            'info'          => 'We will email you, your order details and tracking information',
         ],
 
         'cart' => [
-            'item-add-to-cart'          => 'Item Added Successfully',
-            'return-to-shop'            => 'Return To Shop',
             'continue-to-checkout'      => 'Continue to Checkout',
-            'rule-applied'              => 'Cart rule applied',
-            'minimum-order-message'     => 'Minimum order amount is :amount',
-            'suspended-account-message' => 'Your account has been suspended.',
-            'missing-fields'            => 'Some required fields missing for this product.',
-            'missing-options'           => 'Options are missing for this product.',
-            'missing-links'             => 'Downloadable links are missing for this product.',
-            'select-hourly-duration'    => 'Select a slot duration of one hour.',
-            'qty-missing'               => 'At least one product should have more than 1 quantity.',
-            'success-remove'            => 'Item is successfully removed from the cart.',
+            'item-add-to-cart'          => 'Item Added Successfully',
             'inventory-warning'         => 'The requested quantity is not available, please try again later.',
             'illegal'                   => 'Quantity cannot be lesser than one.',
             'inactive'                  => 'The item has been deactivated and subsequently removed from the cart.',
+            'missing-fields'            => 'Some required fields missing for this product.',
+            'missing-options'           => 'Options are missing for this product.',
+            'missing-links'             => 'Downloadable links are missing for this product.',
+            'minimum-order-message'     => 'Minimum order amount is :amount',
+            'return-to-shop'            => 'Return To Shop',
+            'rule-applied'              => 'Cart rule applied',
+            'suspended-account-message' => 'Your account has been suspended.',
+            'select-hourly-duration'    => 'Select a slot duration of one hour.',
+            'success-remove'            => 'Item is successfully removed from the cart.',
+            'qty-missing'               => 'At least one product should have more than 1 quantity.',
 
             'index' => [
                 'home'                     => 'Home',
