@@ -25,14 +25,14 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-accordion-template">
-        <div {{ $attributes->merge(['class' => 'bg-white rounded-[4px] box-shadow']) }}>
+        <div {{ $attributes->merge(['class' => 'bg-white dark:bg-gray-900 rounded-[4px] box-shadow']) }}>
             <div :class="`flex items-center justify-between p-[6px] ${isOpen ? 'active' : ''}`">
                 <slot name="header">
                     Default Header
                 </slot>
 
                 <span 
-                    :class="`text-[24px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 ${isOpen ? 'icon-arrow-up' : 'icon-arrow-down'}`"
+                    :class="`text-[24px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950  ${isOpen ? 'icon-arrow-up' : 'icon-arrow-down'}`"
                     @click="toggle"
                 ></span>
             </div>

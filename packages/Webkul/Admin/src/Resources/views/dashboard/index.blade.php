@@ -10,11 +10,11 @@
     {{-- User Detailes Section --}}
     <div class="flex gap-[16px] justify-between items-center mb-[20px] max-sm:flex-wrap">
         <div class="grid gap-[6px]">
-            <p class="pt-[6px] text-[20px] text-gray-800 font-bold leading-[24px]">
+            <p class="pt-[6px] text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
                 @lang('admin::app.dashboard.index.user-name', ['user_name' => $admin->name])
             </p>
 
-            <p class="text-gray-600">
+            <p class="text-gray-600 dark:text-gray-300">
                 @lang('admin::app.dashboard.index.user-info')
             </p>
         </div>
@@ -25,16 +25,16 @@
         {{-- Left Component --}}
         <div class=" flex flex-col gap-[30px] flex-1 max-xl:flex-auto">
             {{-- Overall Detailes --}}
-            <div class="flex flex-col gap-[8px] ">
-                <p class="text-[16px] text-gray-600 font-semibold">
+            <div class="flex flex-col gap-[8px]   ">
+                <p class="text-[16px] text-gray-600 dark:text-gray-300 font-semibold">
                     @lang('admin::app.dashboard.index.overall-details')
                 </p>
 
-                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                <div class="p-[16px] rounded-[4px]  bg-white  dark:bg-gray-900 box-shadow">
                     <div class="flex gap-[16px] flex-wrap ">
                         {{-- Total Sales --}}
                         <div class="flex gap-[10px] flex-1 min-w-[200px]">
-                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion">
                                 <img
                                     src="{{ bagisto_asset('images/total-sales.svg')}}"
                                     title="@lang('admin::app.dashboard.index.total-sales')"
@@ -43,11 +43,11 @@
 
                             {{-- Sales Stats --}}
                             <div class="grid gap-[4px] place-content-start">
-                                <p class="text-[16px] text-gray-800 font-semibold">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                     {{ core()->formatBasePrice($statistics['total_sales']['current']) }}
                                 </p>
 
-                                <p class="text-[12px] text-gray-600 font-semibold">
+                                <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                     @lang('admin::app.dashboard.index.total-sales')
                                 </p>
 
@@ -76,7 +76,7 @@
 
                         {{-- Total Orders --}}
                         <div class="flex gap-[10px] flex-1 min-w-[200px]">
-                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion">
                                 <img
                                     src="{{ bagisto_asset('images/total-orders.svg')}}"
                                     title="@lang('admin::app.dashboard.index.total-orders')"
@@ -85,11 +85,11 @@
 
                             {{-- Orders Stats --}}
                             <div class="grid gap-[4px] place-content-start">
-                                <p class="text-[16px] text-gray-800 font-semibold">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                     {{ $statistics['total_orders']['current'] }}
                                 </p>
 
-                                <p class="text-[12px] text-gray-600 font-semibold">
+                                <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                     @lang('admin::app.dashboard.index.total-orders')
                                 </p>
 
@@ -118,7 +118,7 @@
 
                         {{-- Total Customers --}}
                         <div class="flex gap-[10px] flex-1 min-w-[200px]">
-                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion">
                                 <img
                                     src="{{ bagisto_asset('images/customers.svg')}}"
                                     title="@lang('admin::app.dashboard.index.total-customers')"
@@ -127,11 +127,11 @@
 
                             {{-- Customers Stats --}}
                             <div class="grid gap-[4px] place-content-start">
-                                <p class="text-[16px] text-gray-800 font-semibold">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                     {{ $statistics['total_customers']['current'] }}
                                 </p>
 
-                                <p class="text-[12px] text-gray-600 font-semibold">
+                                <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                     @lang('admin::app.dashboard.index.total-customers')
                                 </p>
 
@@ -160,7 +160,7 @@
 
                         {{-- Average sales --}}
                         <div class="flex gap-[10px] flex-1 min-w-[200px]">
-                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion">
                                 <img
                                     src="{{ bagisto_asset('images/average-orders.svg')}}"
                                     title="@lang('admin::app.dashboard.index.average-sale')"
@@ -169,11 +169,11 @@
 
                             {{-- Sales Stats --}}
                             <div class="grid gap-[4px] place-content-start">
-                                <p class="text-[16px] text-gray-800 font-semibold">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                     {{ core()->formatBasePrice($statistics['avg_sales']['current']) }}
                                 </p>
 
-                                <p class="text-[12px] text-gray-600 font-semibold">
+                                <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                     @lang('admin::app.dashboard.index.average-sale')
                                 </p>
 
@@ -201,7 +201,7 @@
 
                         {{-- Unpaid Invoices --}}
                         <div class="flex gap-[10px] flex-1 min-w-[200px]">
-                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion">
                                 <img
                                     src="{{ bagisto_asset('images/unpaid-invoices.svg')}}"
                                     title="@lang('admin::app.dashboard.index.total-unpaid-invoices')"
@@ -209,11 +209,11 @@
                             </div>
 
                             <div class="grid gap-[4px] place-content-start">
-                                <p class="text-[16px] text-gray-800 font-semibold">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                     {{ core()->formatBasePrice($statistics['total_unpaid_invoices']) }}
                                 </p>
 
-                                <p class="text-[12px] text-gray-600 font-semibold">
+                                <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                     @lang('admin::app.dashboard.index.total-unpaid-invoices')
                                 </p>
                             </div>
@@ -222,29 +222,29 @@
                 </div>
             </div>
 
-            {{-- Todays Deatiles --}}
-            <div class="flex flex-col gap-[8px]">
-                <p class="text-[16px] text-gray-600 font-semibold">
+            {{-- Todays Details --}}
+            <div class="flex flex-col gap-[8px]  ">
+                <p class="text-[16px] text-gray-600 dark:text-gray-300 font-semibold">
                     @lang('admin::app.dashboard.index.today-details')
                 </p>
 
-                <div class="bg-white rounded-[4px] box-shadow">
-                    <div class="flex gap-[16px] flex-wrap p-[16px] border-b-[1px] border-gray-300">
+                <div class="rounded-[4px] box-shadow">
+                    <div class="flex gap-[16px] flex-wrap p-[16px] bg-white dark:bg-gray-900 border-b-[1px] dark:border-gray-800  ">
                         {{-- Today's Sales --}}
                         <div class="flex gap-[10px] flex-1">
                             <img
-                                class="w-full h-[60px] max-w-[60px] max-h-[60px]"
+                                class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion"
                                 src="{{ bagisto_asset('images/total-sales.svg')}}"
                                 title="@lang('admin::app.dashboard.index.today-sales')"
                             >
 
                             {{-- Sales Stats --}}
                             <div class="grid gap-[4px] place-content-start">
-                                <p class="text-[16px] text-gray-800 font-semibold">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                     {{ core()->formatBasePrice($statistics['today_details']['today_sales']['current']) }}
                                 </p>
 
-                                <p class="text-[12px] text-gray-600 font-semibold">
+                                <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                     @lang('admin::app.dashboard.index.today-sales')
                                 </p>
 
@@ -274,18 +274,18 @@
                         {{-- Today's Orders --}}
                         <div class="flex gap-[10px] flex-1">
                             <img
-                                class="w-full h-[60px] max-w-[60px] max-h-[60px]"
+                                class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion"
                                 src="{{ bagisto_asset('images/total-orders.svg')}}"
                                 title="@lang('admin::app.dashboard.index.today-orders')"
                             >
 
                             {{-- Orders Stats --}}
                             <div class="grid gap-[4px] place-content-start">
-                                <p class="text-[16px] text-gray-800 font-semibold">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                     {{ $statistics['today_details']['today_orders']['current']->count() }}
                                 </p>
 
-                                <p class="text-[12px] text-gray-600 font-semibold">
+                                <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                     @lang('admin::app.dashboard.index.today-orders')
                                 </p>
 
@@ -315,18 +315,18 @@
                         {{-- Today's Customers --}}
                         <div class="flex gap-[10px] flex-1">
                             <img
-                                class="w-full h-[60px] max-w-[60px] max-h-[60px]"
+                                class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion"
                                 src="{{ bagisto_asset('images/customers.svg')}}"
                                 title="@lang('admin::app.dashboard.index.today-customers')"
                             >
 
                             {{-- Customers Stats --}}
                             <div class="grid gap-[4px] place-content-start">
-                                <p class="text-[16px] text-gray-800 font-semibold">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                     {{ $statistics['today_details']['today_customers']['current'] }}
                                 </p>
 
-                                <p class="text-[12px] text-gray-600 font-semibold">
+                                <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                     @lang('admin::app.dashboard.index.today-customers')
                                 </p>
 
@@ -354,18 +354,18 @@
                         </div>
                     </div>
 
-                    <!-- Today Orders Detailes -->
+                    <!-- Today Orders Details -->
                     @foreach ($statistics['today_details']['today_orders']['current'] as $item)
-                        <div class="row grid grid-cols-4  gap-y-[24px] p-[16px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-50 max-1580:grid-cols-3 max-sm:grid-cols-1">
+                        <div class="row grid grid-cols-4  gap-y-[24px] p-[16px]  bg-white dark:bg-gray-900  dark:bg-gray-900 border-b-[1px] dark:border-gray-800   transition-all hover:bg-gray-50 dark:hover:bg-gray-950   max-1580:grid-cols-3 max-sm:grid-cols-1">
                             {{-- Order ID, Status, Created --}}
                             <div class="flex gap-[10px]">
                                 <div class="flex flex-col gap-[6px]">
                                     {{-- Order Id --}}
-                                    <p class="text-[16px] text-gray-800 font-semibold">
+                                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                         @lang('admin::app.dashboard.index.order-id', ['id' => $item->id])
                                     </p>
 
-                                    <p class="text-gray-600">
+                                    <p class="text-gray-600 dark:text-gray-300">
                                         {{ $item->created_at}}
                                     </p>
 
@@ -408,35 +408,35 @@
                             {{-- Payment And Channel Detailes --}}
                             <div class="flex flex-col gap-[6px]">
                                 {{-- Grand Total --}}
-                                <p class="text-[16px] text-gray-800 font-semibold">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                     {{ core()->formatBasePrice($item->grand_total)}}
                                 </p>
 
                                 {{-- Payment Mode --}}
-                                <p class="text-gray-600">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     @lang('admin::app.dashboard.index.pay-by', ['method' => core()->getConfigData('sales.payment_methods.' . $item->payment->method . '.title')])
                                 </p>
 
                                 {{-- Channel Name --}}
-                                <p class="text-gray-600">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     {{ $item->channel_name }}
                                 </p>
                             </div>
 
                             <div class="flex flex-col gap-[6px]">
                                 {{-- Customer Detailes --}}
-                                <p class="text-[16px] text-gray-800">
+                                <p class="text-[16px] text-gray-800 dark:text-white">
                                     {{ $item->customer_first_name }} {{ $item->customer_last_name }}
                                 </p>
 
-                                <p class="text-gray-600">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     {{ $item->customer_email }}
                                 </p>
 
                                 {{-- Order Address --}}
                                 @foreach ($item->addresses as $address)
                                     @if ($address->address_type == 'order_billing')
-                                        <p class="text-gray-600">
+                                        <p class="text-gray-600 dark:text-gray-300">
                                             {{ $address->city . ($address->country ? ', ' . core()->country_name($address->country) : '') }}
                                         </p>
                                     @endif
@@ -461,7 +461,7 @@
                                                         src="{{ $orderItem->product->base_image_url }}"
                                                     />
                                                 @else
-                                                    <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                                                    <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed dark:border-gray-800 rounded-[4px] overflow-hidden dark:invert dark:mix-blend-exclusion">
                                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
 
                                                         <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
@@ -484,7 +484,7 @@
                                         )
                                             <a href="{{ route('admin.sales.orders.view', $item->id) }}">
                                                 <div class="flex items-center w-[65px] h-[65px] bg-gray-50 rounded-[4px]">
-                                                    <p class="text-[12px] text-gray-600 text-center font-bold px-[6px] py-[6px]">
+                                                    <p class="text-[12px] text-gray-600 dark:text-gray-300 text-center font-bold px-[6px] py-[6px]">
                                                         @lang('admin::app.dashboard.index.more-products', ['product_count' => $item->items->count() - 3 ])
                                                     </p>
                                                 </div>
@@ -494,7 +494,7 @@
 
                                     {{-- View More Icon --}}
                                     <a href="{{ route('admin.sales.orders.view', $item->id) }}">
-                                        <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"></span>
+                                        <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800  hover:rounded-[6px]"></span>
                                     </a>
                                 </div>
                             </div>
@@ -504,18 +504,18 @@
             </div>
 
             {{-- Stock Thereshold --}}
-            <div class="flex flex-col gap-[8px]">
-                <p class="text-[16px] text-gray-600 font-semibold">
+            <div class="flex flex-col gap-[8px]  ">
+                <p class="text-[16px] text-gray-600 dark:text-gray-300 font-semibold">
                     @lang('admin::app.dashboard.index.stock-threshold')
                 </p>
 
                 {{-- Products List --}}
                 @if(! $statistics['stock_threshold']->isEmpty())
-                    <div class="bg-white rounded-[4px] box-shadow">
+                    <div class="rounded-[4px] box-shadow">
                         @foreach ($statistics['stock_threshold'] as $item)
                             <!-- Single Product -->
                             <div class="relative">
-                                <div class="row grid grid-cols-2 gap-y-[24px] p-[16px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-50 max-sm:grid-cols-[1fr_auto]">
+                                <div class="row grid grid-cols-2 gap-y-[24px] p-[16px]  bg-white dark:bg-gray-900  dark:bg-gray-900 border-b-[1px] dark:border-gray-800   transition-all hover:bg-gray-50 dark:hover:bg-gray-950   max-sm:grid-cols-[1fr_auto]">
                                     <div class="flex gap-[10px]">
                                         @if ($item->product?->base_image_url)
                                             <div class="">
@@ -525,7 +525,7 @@
                                                 >
                                             </div>
                                         @else
-                                            <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                                            <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed dark:border-gray-800 rounded-[4px] overflow-hidden dark:invert dark:mix-blend-exclusion">
                                                 <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
 
                                                 <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
@@ -536,19 +536,19 @@
 
                                         <div class="flex flex-col gap-[6px]">
                                             {{-- Product Name --}}
-                                            <p class="text-[16px] text-gray-800 font-semibold">
+                                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                                 @if (isset($item->product->name))
                                                     {{ $item->product->name }}
                                                 @endif
                                             </p>
 
                                             {{-- Product SKU --}}
-                                            <p class="text-gray-600">
+                                            <p class="text-gray-600 dark:text-gray-300">
                                                 @lang('admin::app.dashboard.index.sku', ['sku' => $item->product->sku])
                                             </p>
 
                                             {{-- Product Number --}}
-                                            <p class="text-gray-600">
+                                            <p class="text-gray-600 dark:text-gray-300">
                                                 @if (
                                                     isset($item->product->product_number)
                                                     && ! empty($item->product->product_number)
@@ -562,7 +562,7 @@
                                     <div class="flex gap-[6px] items-center justify-between">
                                         <div class="flex flex-col gap-[6px]">
                                             {{-- Product Price --}}
-                                            <p class="text-[16px] text-gray-800 font-semibold">
+                                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                                 @if (isset($item->product->price))
                                                     {{ core()->formatBasePrice($item->product->price) }}
                                                 @endif
@@ -576,7 +576,7 @@
 
                                         {{-- View More Icon --}}
                                         <a href="{{ route('admin.catalog.products.edit', $item->product_id) }}">
-                                            <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"></span>
+                                            <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800  hover:rounded-[6px]"></span>
                                         </a>
                                     </div>
                                 </div>
@@ -584,9 +584,9 @@
                         @endforeach
                     </div>
                 @else
-                    <div class="bg-white rounded-[4px] box-shadow">
-                        <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
-                            <img src="{{ bagisto_asset('images/icon-add-product.svg') }}" class="w-[80px] h-[80px]">
+                    <div class="rounded-[4px] box-shadow">
+                        <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px] ">
+                            <img src="{{ bagisto_asset('images/icon-add-product.svg') }}" class="w-[80px] h-[80px] dark:invert dark:mix-blend-exclusion">
                             <div class="flex flex-col items-center">
                                 <p class="text-[16px] text-gray-400 font-semibold">
                                     @lang('admin::app.dashboard.index.empty-threshold')
@@ -603,9 +603,9 @@
         </div>
 
         {{-- Right Component --}}
-        <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+        <div class="flex flex-col gap-[8px] w-[360px] max-w-full   max-sm:w-full">
             {{-- First Component --}}
-            <p class="text-[16px] text-gray-600 font-semibold">
+            <p class="text-[16px] text-gray-600 dark:text-gray-300 font-semibold">
                 @lang('admin::app.dashboard.index.store-stats')
             </p>
 
@@ -621,7 +621,7 @@
 
         <script type="text/x-template" id="v-store-stats-template">
             <x-admin::form :action="route('admin.catalog.categories.store')">
-                <div class="bg-white rounded-[4px] box-shadow box-shadow">
+                <div class="rounded-[4px]  bg-white dark:bg-gray-900  dark:bg-gray-900 box-shadow">
                     <!-- Total Sales Shimmer -->
                     <template v-if="isLoading">
                         <x-admin::shimmer.dashboard.right.total-sales/>
@@ -629,10 +629,10 @@
 
                     <template v-else>
                         <!-- Date Filter -->
-                        <div class="flex gap-[6px] px-[16px] py-[8px] border-b border-gray-300">
+                        <div class="flex gap-[6px] px-[16px] py-[8px] border-b dark:border-gray-800  ">
                             <!-- Start Date Filter -->
                             <x-admin::form.control-group class="flex-1 mb-[10px]">
-                                <x-admin::form.control-group.label class="!text-gray-800 font-medium">
+                                <x-admin::form.control-group.label class="!text-gray-800 dark:!text-white font-medium">
                                     @lang('admin::app.dashboard.index.start-date')
                                 </x-admin::form.control-group.label>
     
@@ -648,7 +648,7 @@
     
                             <!-- End Date Filter -->
                             <x-admin::form.control-group class="flex-1 mb-[10px]">
-                                <x-admin::form.control-group.label class="!text-gray-800 font-medium">
+                                <x-admin::form.control-group.label class="!text-gray-800 dark:!text-white font-medium">
                                     @lang('admin::app.dashboard.index.end-date')
                                 </x-admin::form.control-group.label>
     
@@ -664,27 +664,27 @@
                         </div>
     
                         <!-- Total Sales Detailes -->
-                        <div class="grid gap-[16px] px-[16px] py-[8px] border-b border-gray-300">
+                        <div class="grid gap-[16px] px-[16px] py-[8px] border-b dark:border-gray-800  ">
                             <div class="flex gap-[8px] justify-between">
                                 <div class="flex flex-col gap-[4px] justify-between">
-                                    <p class="text-[12px] text-gray-600 font-semibold">
+                                    <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                         @lang('admin::app.dashboard.index.total-sales')
                                     </p>
     
                                     <!-- Total Order Revenue -->
-                                    <p class="text-[18px] text-gray-800 font-bold">
+                                    <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                         @{{ statistics.total_sales?.formatted_total }}
                                     </p>
                                 </div>
     
                                 <div class="flex flex-col gap-[4px] justify-between">
                                     <!-- Orders Time Duration -->
-                                    <p class="text-[12px] text-gray-400 font-semibold text-right">
+                                    <p class="text-[12px] text-gray-400 font-semibold text-right dark:text-white">
                                         @{{ "@lang('admin::app.dashboard.index.date-duration')".replace(':start', formatStart ?? 0).replace(':end', formatEnd ?? 0) }}
                                     </p>
     
                                     <!-- Total Orders -->
-                                    <p class="text-[12px] text-gray-400 font-semibold text-right">
+                                    <p class="text-[12px] text-gray-400 font-semibold text-right dark:text-white">
                                         @{{ "@lang('admin::app.dashboard.index.order')".replace(':total_orders', statistics.total_orders?.current ?? 0) }}
                                     </p>
                                 </div>
@@ -700,9 +700,9 @@
                     </template>
 
                     <!-- Top Selling Products -->
-                    <div class="border-b border-gray-300">
+                    <div class="border-b dark:border-gray-800  ">
                         <div class="flex items-center justify-between p-[16px]">
-                            <p class="text-gray-600 text-[16px] font-semibold">
+                            <p class="text-gray-600 dark:text-gray-300  text-[16px] font-semibold">
                                 @lang('admin::app.dashboard.index.top-selling-products')
                             </p>
 
@@ -724,7 +724,7 @@
                             >
                                 <a
                                     :href="`{{route('admin.catalog.products.edit', '')}}/${item.product_id}`"
-                                    class="flex gap-[10px] p-[16px] border-b-[1px] border-gray-300 last:border-b-0 transition-all hover:bg-gray-50"
+                                    class="flex gap-[10px] p-[16px] border-b-[1px] dark:border-gray-800   last:border-b-0 transition-all hover:bg-gray-50 dark:hover:bg-gray-950  "
                                     v-for="item in statistics.top_selling_products"
                                 >
                                     <!-- Product Item -->
@@ -736,7 +736,7 @@
 
                                     <div
                                         v-else
-                                        class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden"
+                                        class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed dark:border-gray-800 rounded-[4px] overflow-hidden dark:invert dark:mix-blend-exclusion"
                                     >
                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
                                         
@@ -748,20 +748,20 @@
                                     <!-- Product Detailes -->
                                     <div class="flex flex-col gap-[6px] w-full">
                                         <p
-                                            class="text-gray-600"
+                                            class="text-gray-600 dark:text-gray-300"
                                             v-text="item.name"
                                         >
                                         </p>
 
                                         <div class="flex justify-between">
                                             <p
-                                                class="text-gray-600 font-semibold"
+                                                class="text-gray-600 dark:text-gray-300  font-semibold"
                                                 v-text="item.formatted_price"
                                             >
                                             </p>
 
                                             <p
-                                                class="text-[16px] text-gray-800 font-semibold"
+                                                class="text-[16px] text-gray-800 dark:text-white font-semibold"
                                                 v-text="item.formatted_total"
                                             >
                                             </p>
@@ -779,7 +779,7 @@
                                     <!-- Placeholder Image -->
                                     <img
                                         src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                                        class="w-[80px] h-[80px]"
+                                        class="w-[80px] h-[80px] dark:invert dark:mix-blend-exclusion"
                                     >
     
                                     <!-- Add Variants Information -->
@@ -799,7 +799,7 @@
 
                     <!-- Top Customers -->
                     <div class="flex items-center justify-between p-[16px]">
-                        <p class="text-gray-600 text-[16px] font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300  text-[16px] font-semibold">
                             @lang('admin::app.dashboard.index.customer-with-most-sales')
                         </p>
 
@@ -817,7 +817,7 @@
                     <template v-else>
                         <!-- Customers Lists -->
                         <div
-                            class="flex flex-col gap-[32px] p-[16px] border-b-[1px] border-gray-300 last:border-b-0 transition-all hover:bg-gray-50"
+                            class="flex flex-col gap-[32px] p-[16px] border-b-[1px] dark:border-gray-800   last:border-b-0 transition-all hover:bg-gray-50 dark:hover:bg-gray-950  "
                             v-if="statistics?.customer_with_most_sales?.length"
                             v-for="item in statistics.customer_with_most_sales"
                         >
@@ -828,13 +828,13 @@
                                 <div class="flex justify-between gap-[6px]">
                                     <div class="flex flex-col">
                                         <p
-                                            class="text-gray-600 font-semibold"
+                                            class="text-gray-600 dark:text-gray-300  font-semibold"
                                             v-text="item.customer_first_name + ' ' + item.customer_last_name"
                                         >
                                         </p>
 
                                         <p
-                                            class="text-gray-600"
+                                            class="text-gray-600 dark:text-gray-300"
                                             v-text="item.customer_email ?? item.customer_address_email"
                                         >
                                         </p>
@@ -842,12 +842,12 @@
 
                                     <div class="flex flex-col">
                                         <p
-                                            class="text-gray-800 font-semibold"
+                                            class="text-gray-800 font-semibold dark:text-white"
                                             v-text="item.formatted_total_base_grand_total"
                                         >
                                         </p>
 
-                                        <p class="text-gray-600" v-if="item.order_count">
+                                        <p class="text-gray-600 dark:text-gray-300" v-if="item.order_count">
                                             @{{ "@lang('admin::app.dashboard.index.order-count')".replace(':count', item.order_count) }}
                                         </p>
                                     </div>
@@ -860,13 +860,13 @@
                             >
                                 <div class="flex flex-col">
                                     <p
-                                        class="text-gray-600 font-semibold"
+                                        class="text-gray-600 dark:text-gray-300  font-semibold"
                                         v-text="item.customer_first_name + ' ' + item.customer_last_name"
                                     >
                                     </p>
 
                                     <p
-                                        class="text-gray-600"
+                                        class="text-gray-600 dark:text-gray-300"
                                         v-text="item.customer_email ?? item.customer_address_email"
                                     >
                                     </p>
@@ -874,12 +874,12 @@
 
                                 <div class="flex flex-col">
                                     <p
-                                        class="text-gray-800 font-semibold"
+                                        class="text-gray-800 font-semibold dark:text-white"
                                         v-text="item.formatted_total_base_grand_total"
                                     >
                                     </p>
 
-                                    <p class="text-gray-600" v-if="item.order_count">
+                                    <p class="text-gray-600 dark:text-gray-300" v-if="item.order_count">
                                         @{{ "@lang('admin::app.dashboard.index.order-count')".replace(':count', item.order_count) }}
                                     </p>
                                 </div>
@@ -894,7 +894,7 @@
                                 <!-- Placeholder Image -->
                                 <img
                                     src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                                    class="w-[80px] h-[80px]"
+                                    class="w-[80px] h-[80px] dark:invert dark:mix-blend-exclusion"
                                 />
 
                                 <!-- Add Variants Information -->

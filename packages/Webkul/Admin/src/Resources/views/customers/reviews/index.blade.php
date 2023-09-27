@@ -4,7 +4,7 @@
     </x-slot:title>
 
     <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
-        <p class="py-[11px] text-[20px] text-gray-800 font-bold">
+        <p class="py-[11px] text-[20px] text-gray-800 dark:text-white font-bold">
             @lang('admin::app.customers.reviews.index.title')
         </p>
     </div>
@@ -25,7 +25,7 @@
                 <!-- Datagrid Header -->
                 <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading }">
                     <template v-if="! isLoading">
-                        <div class="row grid grid-rows-1 grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] items-center px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                        <div class="row grid grid-rows-1 grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
                             <div
                                 class="flex gap-[10px] items-center"
                                 v-for="(columnGroup, index) in [['name', 'product_name', 'product_review_status'], ['rating', 'created_at', 'product_review_id'], ['title', 'comment']]"
@@ -58,14 +58,14 @@
                                 @endif
 
                                 <!-- Product Name, Review Status -->
-                                <p class="text-gray-600">
+                                <p class="text-gray-600 dark:text-gray-300">
                                     <span class="[&>*]:after:content-['_/_']">
                                         <template v-for="column in columnGroup">
                                             <span
                                                 class="after:content-['/'] last:after:content-['']"
                                                 :class="{
-                                                    'text-gray-800 font-medium': applied.sort.column == column,
-                                                    'cursor-pointer hover:text-gray-800': columns.find(columnTemp => columnTemp.index === column)?.sortable,
+                                                    'text-gray-800 dark:text-white font-medium': applied.sort.column == column,
+                                                    'cursor-pointer hover:text-gray-800 dark:hover:text-white': columns.find(columnTemp => columnTemp.index === column)?.sortable,
                                                 }"
                                                 @click="
                                                     columns.find(columnTemp => columnTemp.index === column)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === column)): {}
@@ -77,7 +77,7 @@
                                     </span>
 
                                     <i
-                                        class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 align-text-bottom"
+                                        class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 dark:text-white align-text-bottom"
                                         :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                         v-if="columnGroup.includes(applied.sort.column)"
                                     ></i>
@@ -95,7 +95,7 @@
                 <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading, performAction }">
                     <template v-if="! isLoading">
                         <div
-                            class="row grid grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] px-[16px] py-[10px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-50"
+                            class="row grid grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800   transition-all hover:bg-gray-50 dark:hover:bg-gray-950  "
                             v-for="record in records"
                         >
                             <!-- Name, Product, Description -->
@@ -119,12 +119,12 @@
 
                                 <div class="flex flex-col gap-[6px]">
                                     <p
-                                        class="text-[16px] text-gray-800 font-semibold"
+                                        class="text-[16px] text-gray-800 dark:text-white font-semibold"
                                         v-text="record.customer_full_name"
                                     >
                                     </p>
                                     <p
-                                        class="text-gray-600"
+                                        class="text-gray-600 dark:text-gray-300"
                                         v-text="record.product_name"
                                     >
                                     </p>
@@ -144,13 +144,13 @@
                                 </div>
 
                                 <p
-                                    class="text-gray-600"
+                                    class="text-gray-600 dark:text-gray-300"
                                     v-text="record.created_at"
                                 >
                                 </p>
 
                                 <p
-                                    class="text-gray-600"
+                                    class="text-gray-600 dark:text-gray-300"
                                 >
                                     @{{ "@lang('admin::app.customers.reviews.index.datagrid.review-id')".replace(':review_id', record.product_review_id) }}
                                 </p>
@@ -159,13 +159,13 @@
                             <!-- Title, Description -->
                             <div class="flex flex-col gap-[6px]">
                                 <p
-                                    class="text-[16px] text-gray-800 font-semibold"
+                                    class="text-[16px] text-gray-800 dark:text-white font-semibold"
                                     v-text="record.title"
                                 >
                                 </p>
 
                                 <p
-                                    class="text-gray-600"
+                                    class="text-gray-600 dark:text-gray-300"
                                     v-text="record.comment"
                                 >
                                 </p>
@@ -176,7 +176,7 @@
                                 <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
                                     <span
                                         :class="record.actions.find(action => action.method === 'DELETE')?.icon"
-                                        class="text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"
+                                        class="text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
                                     >
                                     </span>
                                 </a>
@@ -186,7 +186,7 @@
                                     v-if="record.actions.find(action => action.title === 'Edit')"
                                     @click="edit(record.actions.find(action => action.title === 'Edit')?.url)"
                                 >
-                                    <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200">
+                                    <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800">
                                     </span>
                                 </a>
                             </div>
@@ -214,7 +214,7 @@
                             <!-- Drawer Header -->
                             <x-slot:header>
                                 <div class="flex justify-between items-center">
-                                    <p class="text-[20px] font-medium">
+                                    <p class="text-[20px] font-medium dark:text-white">
                                         @lang('admin::app.customers.reviews.index.edit.title')
                                     </p>
                 
@@ -230,48 +230,48 @@
                                     <div class="grid grid-cols-2 gap-[16px]">
                                         <div class="">
                                             <!-- Customer Name -->
-                                            <p class="text-[12px] text-gray-600 font-semibold">
+                                            <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                                 @lang('admin::app.customers.reviews.index.edit.customer')
                                             </p>
 
                                             <p 
-                                                class="text-gray-800 font-semibold" 
+                                                class="text-gray-800 font-semibold dark:text-white" 
                                                 v-text="review.name !== '' ? review.name : 'N/A'"
                                             >
                                             </p>
                                         </div>
 
                                         <div class="">
-                                            <p class="text-[12px] text-gray-600 font-semibold">
+                                            <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                                 @lang('admin::app.customers.reviews.index.edit.product')
                                             </p>
 
                                             <p 
-                                                class="text-gray-800 font-semibold" 
+                                                class="text-gray-800 font-semibold dark:text-white" 
                                                 v-text="review.product.name"
                                             >
                                             </p>
                                         </div>
                 
                                         <div class="">
-                                            <p class="text-[12px] text-gray-600 font-semibold">
+                                            <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                                 @lang('admin::app.customers.reviews.index.edit.id')
                                             </p>
 
                                             <p 
-                                                class="text-gray-800 font-semibold" 
+                                                class="text-gray-800 font-semibold dark:text-white" 
                                                 v-text="review.id"
                                             >
                                             </p>
                                         </div>
                 
                                         <div class="">
-                                            <p class="text-[12px] text-gray-600 font-semibold">
+                                            <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                                 @lang('admin::app.customers.reviews.index.edit.date')
                                             </p>
 
                                             <p 
-                                                class="text-gray-800 font-semibold" 
+                                                class="text-gray-800 font-semibold dark:text-white" 
                                                 v-text="review.date"
                                             >
                                             </p>
@@ -317,7 +317,7 @@
                                     </div>
                 
                                     <div class="w-full ">
-                                        <p class="text-gray-600 font-semibold">
+                                        <p class="text-gray-600 dark:text-gray-300  font-semibold">
                                             @lang('admin::app.customers.reviews.index.edit.rating') 
                                         </p>
 
@@ -331,24 +331,24 @@
                                     </div>
                 
                                     <div class="w-full">
-                                        <p class="block text-[12px] text-gray-800 font-medium leading-[24px]">
+                                        <p class="block text-[12px] text-gray-800 dark:text-white font-medium leading-[24px]">
                                             @lang('admin::app.customers.reviews.index.edit.review-title') 
                                         </p>
 
                                         <p 
-                                            class="text-gray-800 font-semibold" 
+                                            class="text-gray-800 font-semibold dark:text-white" 
                                             v-text="review.title"
                                         >
                                         </p>
                                     </div>
                 
                                     <div class="w-full">
-                                        <p class="block text-[12px]  text-gray-600 font-semibold leading-[24px]">
+                                        <p class="block text-[12px]  text-gray-600 dark:text-gray-300 font-semibold leading-[24px]">
                                             @lang('admin::app.customers.reviews.index.edit.review-comment')     
                                         </p>
 
                                         <p 
-                                            class="text-gray-800" 
+                                            class="text-gray-800 dark:text-white" 
                                             v-text="review.comment"
                                         >
                                         </p>

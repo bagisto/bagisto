@@ -23,7 +23,7 @@
                 method="PUT"
             >
                 <div class="flex justify-between items-center">
-                    <p class="text-[20px] text-gray-800 font-bold">
+                    <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                         @lang('admin::app.catalog.attributes.edit.title')
                     </p>
         
@@ -31,7 +31,7 @@
                         <!-- Cancel Button -->
                         <a
                             href="{{ route('admin.catalog.attributes.index') }}"
-                            class="transparent-button hover:bg-gray-200"
+                            class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
                         >
                             @lang('admin::app.catalog.attributes.edit.back-btn')
                         </a>
@@ -54,8 +54,8 @@
                         {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.attributes.before', ['attribute' => $attribute]) !!}
 
                         <!-- Label -->
-                        <div class="p-[16px] bg-white box-shadow rounded-[4px]">
-                            <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                        <div class="p-[16px] bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
+                            <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @lang('admin::app.catalog.attributes.edit.label')
                             </p>
 
@@ -108,11 +108,11 @@
 
                         <!-- Options -->
                         <div
-                            class="p-[16px] bg-white box-shadow rounded-[4px] {{ in_array($attribute->type, ['select', 'multiselect', 'checkbox', 'price']) ?: 'hidden' }}"
+                            class="p-[16px] bg-white dark:bg-gray-900 box-shadow rounded-[4px] {{ in_array($attribute->type, ['select', 'multiselect', 'checkbox', 'price']) ?: 'hidden' }}"
                             v-if="showSwatch"
                         >
                             <div class="flex justify-between items-center mb-3">
-                                <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                                <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.catalog.attributes.edit.title')
                                 </p>
 
@@ -181,13 +181,13 @@
 
                                             <label
                                                 for="empty_option"
-                                                class="icon-uncheckbox text-[24px] rounded-[6px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                                                class="icon-uncheckbox text-[24px] rounded-[6px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600 "
                                             >
                                             </label>
 
                                             <label
                                                 for="empty_option"
-                                                class="text-[14px] text-gray-600 font-semibold cursor-pointer"
+                                                class="text-[14px] text-gray-600 dark:text-gray-300 font-semibold cursor-pointer"
                                             >
                                                 @lang('admin::app.catalog.attributes.edit.create-empty-option')
                                             </label>
@@ -316,13 +316,13 @@
                                                     <!-- Actions Button -->
                                                     <x-admin::table.td class="!px-0">
                                                         <span
-                                                            class="icon-edit p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 max-sm:place-self-center"
+                                                            class="icon-edit p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950  max-sm:place-self-center"
                                                             @click="editOptions(element)"
                                                         >
                                                         </span>
                                                         
                                                         <span
-                                                            class="icon-delete p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 max-sm:place-self-center"
+                                                            class="icon-delete p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950  max-sm:place-self-center"
                                                             @click="removeOption(element.id)"
                                                         >
                                                         </span>
@@ -338,7 +338,7 @@
                                     <div class="grid gap-[14px] justify-items-center py-[40px] px-[10px]">
                                         <!-- Attribute Option Image -->
                                         <img 
-                                            class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]" 
+                                            class="w-[120px] h-[120px] border border-dashed dark:border-gray-800   rounded-[4px]" 
                                             src="{{ bagisto_asset('images/icon-add-product.svg') }}" 
                                             alt="{{ trans('admin::app.catalog.attributes.edit.add-attribute-options') }}"
                                         >
@@ -373,9 +373,9 @@
                         {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.general.before', ['attribute' => $attribute]) !!}
 
                         <!-- General -->
-                        <div class="bg-white box-shadow rounded-[4px]">
+                        <div class="bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
                             <div class="flex justify-between items-center p-[6px]">
-                                <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                <p class="p-[10px] text-gray-800 dark:text-white text-[16px] font-semibold">
                                     @lang('admin::app.catalog.attributes.edit.general')
                                 </p>
                             </div>
@@ -516,7 +516,7 @@
                         <!-- Validations -->
                         <x-admin::accordion>
                             <x-slot:header>
-                                <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                <p class="p-[10px] text-gray-800 dark:text-white text-[16px] font-semibold">
                                     @lang('admin::app.catalog.attributes.edit.validations')
                                 </p>
                             </x-slot:header>
@@ -588,7 +588,7 @@
 
                                     <x-admin::form.control-group.label
                                         for="is_required"
-                                        class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer"
+                                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-required')
                                     </x-admin::form.control-group.label>
@@ -614,7 +614,7 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label class="!text-[14px] !font-semibold !text-gray-600 cursor-not-allowed">
+                                    <x-admin::form.control-group.label class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-not-allowed">
                                         @lang('admin::app.catalog.attributes.edit.is-unique')
                                     </x-admin::form.control-group.label>
 
@@ -635,7 +635,7 @@
                         <!-- Configurations -->
                         <x-admin::accordion>
                             <x-slot:header>
-                                <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                <p class="p-[10px] text-gray-800 dark:text-white text-[16px] font-semibold">
                                     @lang('admin::app.catalog.attributes.edit.configuration')
                                 </p>
                             </x-slot:header>
@@ -656,7 +656,7 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label class="!text-[14px] !font-semibold !text-gray-600 cursor-not-allowed">
+                                    <x-admin::form.control-group.label class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-not-allowed">
                                         @lang('admin::app.catalog.attributes.edit.value-per-locale')
                                     </x-admin::form.control-group.label>
 
@@ -683,7 +683,7 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label class="!text-[14px] !font-semibold !text-gray-600 cursor-not-allowed">
+                                    <x-admin::form.control-group.label class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-not-allowed">
                                         @lang('admin::app.catalog.attributes.edit.value-per-channel')
                                     </x-admin::form.control-group.label>
 
@@ -713,7 +713,7 @@
 
                                     <x-admin::form.control-group.label
                                         for="is_filterable"
-                                        class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer" 
+                                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer" 
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-filterable')
                                     </x-admin::form.control-group.label>
@@ -744,7 +744,7 @@
 
                                     <x-admin::form.control-group.label
                                         for="is_configurable"
-                                        class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer" 
+                                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer" 
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-configurable')
                                     </x-admin::form.control-group.label>
@@ -775,7 +775,7 @@
 
                                     <x-admin::form.control-group.label
                                         for="is_visible_on_front"
-                                        class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer" 
+                                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer" 
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-visible-on-front')
                                     </x-admin::form.control-group.label>
@@ -806,7 +806,7 @@
 
                                     <x-admin::form.control-group.label
                                         for="is_comparable"
-                                        class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer" 
+                                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer" 
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-comparable')
                                     </x-admin::form.control-group.label>
@@ -838,7 +838,7 @@
                         ref="addOptionsRow"
                     >
                         <x-slot:header>
-                            <p class="text-[18px] text-gray-800 font-bold">
+                            <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.catalog.attributes.edit.add-option')
                             </p>
                         </x-slot:header>
@@ -890,7 +890,7 @@
                                 </x-admin::form.control-group>
                             </div>
 
-                            <div class="grid grid-cols-3 gap-[16px] px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                            <div class="grid grid-cols-3 gap-[16px] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
                                 <!-- Hidden Id Input -->
                                 <x-admin::form.control-group.control
                                     type="hidden"
