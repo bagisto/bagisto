@@ -2570,8 +2570,6 @@ return [
                 'save-btn'                      => 'Enregistrer',
                 'filter-title'                  => 'Titre',
                 'sort'                          => 'Trier',
-                'desc'                          => 'Descendant',
-                'asc'                           => 'Ascendant',
                 'limit'                         => 'Limite',
                 'key'                           => 'Clé : :key',
                 'value'                         => 'Valeur : :value',

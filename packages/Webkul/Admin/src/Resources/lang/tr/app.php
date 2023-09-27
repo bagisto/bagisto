@@ -2571,8 +2571,6 @@ return [
                 'save-btn'                      => 'Kaydet',
                 'filter-title'                  => 'Başlık',
                 'sort'                          => 'Sırala',
-                'desc'                          => 'Azalan',
-                'asc'                           => 'Artan',
                 'limit'                         => 'Sınırla',
                 'key'                           => 'Anahtar: :key',
                 'value'                         => 'Değer: :value',
