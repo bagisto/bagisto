@@ -616,11 +616,11 @@ return [
                         'title'      => 'Prodotti Cross-Sell',
                     ],
 
-                    'add-btn'     => 'Aggiungi Prodotto',
-                    'delete'      => 'Elimina',
-                    'empty-title' => 'Aggiungi Prodotto',
-                    'empty-info'  => 'Per aggiungere prodotti :type in un colpo solo.',
-                    'sku'         => 'SKU - :sku',
+                    'add-btn'           => 'Aggiungi Prodotto',
+                    'delete'            => 'Elimina',
+                    'empty-title'       => 'Aggiungi Prodotto',
+                    'empty-info'        => 'Per aggiungere prodotti :type in un colpo solo.',
+                    'sku'               => 'SKU - :sku',
                     'image-placeholder' => 'Immagine Prodotto',
                 ],
 
@@ -688,11 +688,12 @@ return [
                     ],
 
                     'bundle' => [
-                        'add-btn'     => 'Aggiungi Opzione',
-                        'empty-title' => 'Aggiungi Opzione',
-                        'empty-info'  => 'Per creare opzioni bundle rapidamente.',
-                        'info'        => 'Un prodotto bundle è un pacchetto di articoli o servizi multipli venduti insieme a un prezzo speciale, offrendo valore e comodità ai clienti.',
-                        'title'       => 'Elementi del Bundle',
+                        'add-btn'           => 'Aggiungi Opzione',
+                        'empty-title'       => 'Aggiungi Opzione',
+                        'empty-info'        => 'Per creare opzioni bundle rapidamente.',
+                        'image-placeholder' => 'Immagine Prodotto',
+                        'info'              => 'Un prodotto bundle è un pacchetto di articoli o servizi multipli venduti insieme a un prezzo speciale, offrendo valore e comodità ai clienti.',
+                        'title'             => 'Elementi del Bundle',
 
                         'update-create' => [
                             'checkbox'    => 'Casella di Controllo',

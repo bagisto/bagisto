@@ -688,11 +688,12 @@ return [
                     ],
 
                     'bundle' => [
-                        'add-btn'     => 'Add Option',
-                        'empty-title' => 'Add Option',
-                        'empty-info'  => 'To create bundle options on a go.',
-                        'info'        => 'A bundle product is a package of multiple items or services sold together at a special price, providing value and convenience to customers.',
-                        'title'       => 'Bundle Items',
+                        'add-btn'           => 'Add Option',
+                        'empty-title'       => 'Add Option',
+                        'empty-info'        => 'To create bundle options on a go.',
+                        'image-placeholder' => 'Product Image',
+                        'info'              => 'A bundle product is a package of multiple items or services sold together at a special price, providing value and convenience to customers.',
+                        'title'             => 'Bundle Items',
 
                         'update-create' => [
                             'checkbox'    => 'Checkbox',

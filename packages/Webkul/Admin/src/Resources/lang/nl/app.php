@@ -688,11 +688,12 @@ return [
                     ],
 
                     'bundle' => [
-                        'add-btn'     => 'Optie Toevoegen',
-                        'empty-title' => 'Optie Toevoegen',
-                        'empty-info'  => 'Om bundelopties snel te maken.',
-                        'info'        => 'Een bundelproduct is een pakket van meerdere items of diensten die samen worden verkocht tegen een speciale prijs, waardoor waarde en gemak voor klanten worden geboden.',
-                        'title'       => 'Bundelopties',
+                        'add-btn'           => 'Optie Toevoegen',
+                        'empty-title'       => 'Optie Toevoegen',
+                        'empty-info'        => 'Om bundelopties snel te maken.',
+                        'image-placeholder' => 'Product Afbeelding',
+                        'info'              => 'Een bundelproduct is een pakket van meerdere items of diensten die samen worden verkocht tegen een speciale prijs, waardoor waarde en gemak voor klanten worden geboden.',
+                        'title'             => 'Bundelopties',
 
                         'update-create' => [
                             'checkbox'    => 'Aankruisvak',

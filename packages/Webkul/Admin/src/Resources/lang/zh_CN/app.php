@@ -688,11 +688,12 @@ return [
                     ],
 
                     'bundle' => [
-                        'add-btn'     => '添加选项',
-                        'empty-title' => '添加选项',
-                        'empty-info'  => '随时创建捆绑选项。',
-                        'info'        => '捆绑产品是一组多个项目或服务，以特价一起销售，为客户提供价值和便利。',
-                        'title'       => '捆绑项目',
+                        'add-btn'           => '添加选项',
+                        'empty-title'       => '添加选项',
+                        'empty-info'        => '随时创建捆绑选项。',
+                        'image-placeholder' => '产品图片',
+                        'info'              => '捆绑产品是一组多个项目或服务，以特价一起销售，为客户提供价值和便利。',
+                        'title'             => '捆绑项目',
 
                         'update-create' => [
                             'checkbox'    => '复选框',

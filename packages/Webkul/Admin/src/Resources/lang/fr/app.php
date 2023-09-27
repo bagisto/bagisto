@@ -688,11 +688,12 @@ return [
                     ],
 
                     'bundle' => [
-                        'add-btn'     => 'Ajouter une option',
-                        'empty-title' => 'Ajouter une option',
-                        'empty-info'  => 'Créer des options de bundle en un instant.',
-                        'info'        => 'Un produit en bundle est un ensemble de plusieurs articles ou services vendus ensemble à un prix spécial, offrant une valeur et une commodité aux clients.',
-                        'title'       => 'Articles du bundle',
+                        'add-btn'           => 'Ajouter une option',
+                        'empty-title'       => 'Ajouter une option',
+                        'empty-info'        => 'Créer des options de bundle en un instant.',
+                        'image-placeholder' => 'Image du produit',
+                        'info'              => 'Un produit en bundle est un ensemble de plusieurs articles ou services vendus ensemble à un prix spécial, offrant une valeur et une commodité aux clients.',
+                        'title'             => 'Articles du bundle',
 
                         'update-create' => [
                             'checkbox'    => 'Case à cocher',

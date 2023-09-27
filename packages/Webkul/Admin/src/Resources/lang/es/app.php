@@ -688,11 +688,12 @@ return [
                     ],
 
                     'bundle' => [
-                        'add-btn'     => 'Agregar Opción',
-                        'empty-title' => 'Agregar Opción',
-                        'empty-info'  => 'Para crear opciones de paquetes de forma rápida.',
-                        'info'        => 'Un producto de paquete es un paquete de varios artículos o servicios que se venden juntos a un precio especial, ofreciendo valor y comodidad a los clientes.',
-                        'title'       => 'Artículos del Paquete',
+                        'add-btn'           => 'Agregar Opción',
+                        'empty-title'       => 'Agregar Opción',
+                        'empty-info'        => 'Para crear opciones de paquetes de forma rápida.',
+                        'image-placeholder' => 'Imagen del Producto',
+                        'info'              => 'Un producto de paquete es un paquete de varios artículos o servicios que se venden juntos a un precio especial, ofreciendo valor y comodidad a los clientes.',
+                        'title'             => 'Artículos del Paquete',
 
                         'update-create' => [
                             'checkbox'    => 'Casilla de Verificación',

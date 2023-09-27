@@ -688,11 +688,12 @@ return [
                     ],
 
                     'bundle' => [
-                        'add-btn'     => 'Dodaj opcję',
-                        'empty-title' => 'Dodaj opcję',
-                        'empty-info'  => 'Aby tworzyć opcje pakietu, wystarczy to zrobić.',
-                        'info'        => 'Produkt wiązany to zestaw wielu produktów lub usług sprzedawanych razem w specjalnej cenie, zapewniający wartość i wygodę klientom.',
-                        'title'       => 'Pozycje pakietu',
+                        'add-btn'           => 'Dodaj opcję',
+                        'empty-title'       => 'Dodaj opcję',
+                        'empty-info'        => 'Aby tworzyć opcje pakietu, wystarczy to zrobić.',
+                        'image-placeholder' => 'Obraz produktu',
+                        'info'              => 'Produkt wiązany to zestaw wielu produktów lub usług sprzedawanych razem w specjalnej cenie, zapewniający wartość i wygodę klientom.',
+                        'title'             => 'Pozycje pakietu',
 
                         'update-create' => [
                             'checkbox'    => 'Pole wyboru',

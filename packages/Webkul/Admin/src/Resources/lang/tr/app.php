@@ -688,11 +688,12 @@ return [
                     ],
 
                     'bundle' => [
-                        'add-btn'     => 'Seçenek Ekle',
-                        'empty-title' => 'Seçenek Ekle',
-                        'empty-info'  => 'Hızlı bir şekilde paketleme seçenekleri oluşturmak için.',
-                        'info'        => 'Bir paketleme ürünü, bir arada satılan birden fazla ürün veya hizmetin özel bir fiyatla sunulduğu bir pakettir ve müşterilere değer ve kolaylık sağlar.',
-                        'title'       => 'Paketleme Ürünleri',
+                        'add-btn'           => 'Seçenek Ekle',
+                        'empty-title'       => 'Seçenek Ekle',
+                        'empty-info'        => 'Hızlı bir şekilde paketleme seçenekleri oluşturmak için.',
+                        'image-placeholder' => 'Ürün Resmi',
+                        'info'              => 'Bir paketleme ürünü, bir arada satılan birden fazla ürün veya hizmetin özel bir fiyatla sunulduğu bir pakettir ve müşterilere değer ve kolaylık sağlar.',
+                        'title'             => 'Paketleme Ürünleri',
 
                         'update-create' => [
                             'checkbox'    => 'Onay Kutusu',
