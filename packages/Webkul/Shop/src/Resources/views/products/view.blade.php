@@ -91,11 +91,11 @@
                 :is-selected="false"
             >
                 <div class="container mt-[60px] max-1180:px-[20px]">
-                    <p class="text-[#6E6E6E] text-[18px] max-1180:text-[14px]">
+                    <div class="grid gap-[15px] grid-cols-[auto_1fr] max-w-max mt-[30px]">
                         @foreach ($customAttributeValues as $customAttributeValue)
                             <div class="grid">
                                 <p class="text-[16px] text-black">
-                                    {{ $customAttributeValue['label'] }}
+                                    {!! $customAttributeValue['label'] !!}
                                 </p>
                             </div>
 
@@ -124,13 +124,13 @@
                                 </a>
                             @else 
                                 <div class="grid">
-                                    <p class="text-[16px] text-[#6E6E6E]">
-                                        {{ $customAttributeValue['value'] ? $customAttributeValue['value'] : '-' }}
+                                    <p class="text-[16px] text-[#7D7D7D]">
+                                        {!! $customAttributeValue['value'] ? $customAttributeValue['value'] : '-' !!}
                                     </p>
                                 </div>
                             @endif
                         @endforeach
-                    </p>
+                    </div>
                 </div>
             </x-shop::tabs.item>
 
