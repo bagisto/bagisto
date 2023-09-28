@@ -106,7 +106,11 @@
 
                                             queryString = localStorage.searchedTerms = analysedResult.join('_');
 
-                                            window.location.href = `${'{{ route('shop.search.index') }}'}?query=${queryString}&image-search=1`;
+                                            queryString = localStorage.searchedTerms.split('_').map(term => {
+                                                return term.split(' ').join('+');
+                                            });
+
+                                            window.location.href = `${'{{ route('shop.search.index') }}'}?query=${queryString[0]}&image-search=1`;
                                         }
 
                                         app();

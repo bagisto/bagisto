@@ -7,19 +7,19 @@
                 <span class="shimmer w-[200px] h-[36px]"></span>
 
                 <div class="flex gap-2 flex-wrap">
-                    <div class="flex m-1 py-1 px-2 rounded-full">
+                    <div class="flex justify-center items-center m-1 font-medium py-1 px-2 rounded-full border cursor-pointer">
                         <span class="shimmer w-[80px] h-[36px] rounded-full"></span>
                     </div>
                     
-                    <div class="flex m-1 py-1 px-2 rounded-full">
+                    <div class="flex justify-center items-center m-1 font-medium py-1 px-2 rounded-full border cursor-pointer">
                         <span class="shimmer w-[80px] h-[36px] rounded-full"></span>
                     </div>
 
-                    <div class="flex m-1 py-1 px-2 rounded-full">
+                    <div class="flex justify-center items-center m-1 font-medium py-1 px-2 rounded-full border cursor-pointer">
                         <span class="shimmer w-[80px] h-[36px] rounded-full"></span>
                     </div>
 
-                    <div class="flex m-1 py-1 px-2 rounded-full">
+                    <div class="flex justify-center items-center m-1 font-medium py-1 px-2 rounded-full border cursor-pointer">
                         <span class="shimmer w-[80px] h-[36px] rounded-full"></span>
                     </div>
                 </div>
@@ -42,21 +42,21 @@
 
                 <div class="flex flex-col gap-[15px]">
                     <h2 class="text-[26px] font-medium">
-                        Filter By Category
+                        Analysed Keywords: 
                     </h2>
 
                     <div class="flex gap-2 flex-wrap">
-                        <a 
-                            class="flex justify-center items-center m-1 font-medium py-1 px-2 bg-white rounded-full text-red-100 border border-blue-700"
+                        <span 
+                            class="flex justify-center items-center m-1 font-medium py-1 px-2 bg-white rounded-full text-red-100 border cursor-pointer"
                             v-for="term in searchedTerms"
-                            :href="'{{ route('shop.search.index') }}?query=' + term.slug"
+                            @click="search(term)"
                         >
                             <span
                                 class="p-[10px] text-xs font-normal leading-none max-w-full flex-initial"
                                 v-text="term.name"
                             >
                             </span>
-                        </a>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -85,7 +85,17 @@
                         }
                     });
                 }
-            }
+            },
+
+            methods: {
+                search(term) {
+                    let url = new URL(window.location.href);
+
+                    url.searchParams.set('query', term.name);
+
+                    window.location.href = url.href;
+                }
+            },
         });
     </script>
 @endPushOnce
