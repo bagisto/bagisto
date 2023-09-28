@@ -730,8 +730,8 @@ return [
 
     'layouts' => [
         'address'               => 'Address',
-        'my-account'            => 'My Account',
         'downloadable-products' => 'Downloadable Products',
+        'my-account'            => 'My Account',
         'orders'                => 'Orders',
         'profile'               => 'Profile',
         'reviews'               => 'Reviews',
