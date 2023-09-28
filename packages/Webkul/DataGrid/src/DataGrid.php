@@ -113,7 +113,6 @@ abstract class DataGrid
             sortable: $column['sortable'],
             closure: $column['closure'] ?? null,
         );
-       // echo "<pre>";print_r($this->columns);exit;
     }
 
     /**
