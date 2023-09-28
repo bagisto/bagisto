@@ -109,9 +109,11 @@ abstract class DataGrid
             type: $column['type'],
             searchable: $column['searchable'],
             filterable: $column['filterable'],
+            filter_options: (isset($column['filter_options'])) ? $column['filter_options'] : [],
             sortable: $column['sortable'],
             closure: $column['closure'] ?? null,
         );
+       // echo "<pre>";print_r($this->columns);exit;
     }
 
     /**
@@ -210,7 +212,12 @@ abstract class DataGrid
                         });
 
                         break;
+                    case ColumnTypeEnum::SELECT->value:
+                        $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
+                            $scopeQueryBuilder->where($column->getDatabaseColumnName(), $requestedValues);
+                        });
 
+                        break;    
                     default:
                         $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
                             foreach ($requestedValues as $value) {

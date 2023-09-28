@@ -95,9 +95,13 @@ class CategoryDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'status',
             'label'      => trans('admin::app.catalog.categories.index.datagrid.status'),
-            'type'       => 'boolean',
+            'type'       => 'select',
             'searchable' => false,
             'filterable' => true,
+            'filter_options' => [
+                0 => trans('admin::app.catalog.categories.index.datagrid.inactive'),
+                1 => trans('admin::app.catalog.categories.index.datagrid.active')
+            ],
             'sortable'   => true,
             'closure'    => function ($value) {
                 if ($value->status) {

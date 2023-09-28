@@ -34,6 +34,7 @@ class Column
         public string $type,
         public bool $searchable = false,
         public bool $filterable = false,
+        public array $filter_options = [],
         public bool $sortable = false,
         public mixed $closure = null,
     ) {

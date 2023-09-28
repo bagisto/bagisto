@@ -8,6 +8,11 @@ enum ColumnTypeEnum: string
      * Boolean.
      */
     case BOOLEAN = 'boolean';
+        
+    /**
+     * Select.
+     */
+    case SELECT = 'select';    
 
     /**
      * Date range.

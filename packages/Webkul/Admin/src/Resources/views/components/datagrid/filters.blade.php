@@ -167,7 +167,44 @@
                 </div>
             </div>
         </div>
+        <!-- Select -->
+        <div v-else-if="column.type === 'select'">
+            <div class="flex items-center justify-between">
+                <p
+                    class="text-[14px] font-medium leading-[24px]  dark:text-white"
+                    v-text="column.label"
+                >
+                </p>
 
+                <div
+                    class="flex items-center gap-x-[5px]"
+                    @click="removeAppliedColumnAllValues(column.index)"
+                >
+                    <p
+                        class="cursor-pointer text-[12px] font-medium leading-[24px] text-blue-600"
+                        v-if="hasAnyAppliedColumnValues(column.index)"
+                    >
+                        @lang('admin::app.components.datagrid.filters.custom-filters.clear-all')
+                    </p>
+                </div>
+            </div>
+
+            <div class="mb-[8px] mt-[5px] grid">
+                   <select
+                        :name="column.index"
+                        class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                        @change="filterPage($event, column)"
+                        
+                    >
+                        <option>Select</option>
+                        <option v-for='(label, index) in column.filter_options' :value="index" :selected="index == getAppliedColumnValues(column.index)[0]">
+                            @{{ label }}
+                        </option>
+                    </select>
+            </div>
+
+            
+        </div>
         <!-- Rest -->
         <div v-else>
             <div class="flex items-center justify-between">

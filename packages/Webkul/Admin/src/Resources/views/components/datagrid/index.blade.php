@@ -349,6 +349,7 @@
                 },
 
                 applyFilter(column, requestedValue, additional = {}) {
+                    console.log(column);
                     let appliedColumn = this.findAppliedColumn(column?.index);
 
                     /**
@@ -422,7 +423,16 @@
                                 }
 
                                 break;
-
+                            case 'select':
+                                if (appliedColumn) {
+                                    appliedColumn.value = requestedValue
+                                } else {
+                                    this.applied.filters.columns.push({
+                                        ...column,
+                                        value: requestedValue
+                                    });
+                                }
+                                break;
                             default:
                                 if (appliedColumn) {
                                     appliedColumn.value.push(requestedValue);
@@ -454,7 +464,7 @@
 
                 getAppliedColumnValues(columnIndex) {
                     let appliedColumn = this.findAppliedColumn(columnIndex);
-
+                
                     return appliedColumn?.value ?? [];
                 },
 
