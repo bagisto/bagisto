@@ -380,7 +380,7 @@ return [
             ],
         ],
 
-        'products'   => [
+        'products' => [
             'card' => [
                 'add-to-compare'     => 'Item added successfully to compare list.',
                 'already-in-compare' => 'Item is already added to compare list.',
@@ -740,8 +740,8 @@ return [
 
     'subscription' => [
         'already'             => 'You are already subscribed to our newsletter.',
-        'unsubscribe-success' => 'You have successfully unsubscribed to our newsletter.',
         'subscribe-success'   => 'You have successfully subscribed to our newsletter.',
+        'unsubscribe-success' => 'You have successfully unsubscribed to our newsletter.',
     ],
 
     'emails' => [

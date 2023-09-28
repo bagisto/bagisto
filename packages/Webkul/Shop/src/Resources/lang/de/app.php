@@ -68,17 +68,6 @@ return [
             'home'      => 'Startseite',
 
             'profile'   => [
-                'title'                   => 'Profil',
-                'first-name'              => 'Vorname',
-                'last-name'               => 'Nachname',
-                'gender'                  => 'Geschlecht',
-                'dob'                     => 'Geburtsdatum',
-                'email'                   => 'E-Mail',
-                'delete-profile'          => 'Profil löschen',
-                'edit-profile'            => 'Profil bearbeiten',
-                'edit'                    => 'Bearbeiten',
-                'edit-success'            => 'Profil erfolgreich aktualisiert',
-                'phone'                   => 'Telefon',
                 'current-password'        => 'Aktuelles Passwort',
                 'confirm-password'        => 'Passwort bestätigen',
                 'dob'                     => 'Geburtsdatum',
@@ -300,39 +289,39 @@ return [
         
         'layouts' => [
             'header' => [
+                'account'       => 'Konto',
+                'compare'       => 'Vergleichen',
+                'cart'          => 'Warenkorb',
+                'dropdown-text' => 'Warenkorb, Bestellungen & Wunschliste verwalten',
+                'logout'        => 'Abmelden',
+                'orders'        => 'Bestellungen',
+                'profile'       => 'Profil',
+                'sign-in'       => 'Anmelden',
+                'sign-up'       => 'Registrieren',
+                'search-text'   => 'Produkte hier suchen',
+                'search'        => 'Suche',
                 'title'         => 'Konto',
                 'welcome'       => 'Willkommen',
                 'welcome-guest' => 'Willkommen Gast',
-                'dropdown-text' => 'Warenkorb, Bestellungen & Wunschliste verwalten',
-                'sign-in'       => 'Anmelden',
-                'sign-up'       => 'Registrieren',
-                'account'       => 'Konto',
-                'cart'          => 'Warenkorb',
-                'profile'       => 'Profil',
                 'wishlist'      => 'Wunschliste',
-                'compare'       => 'Vergleichen',
-                'orders'        => 'Bestellungen',
-                'logout'        => 'Abmelden',
-                'search-text'   => 'Produkte hier suchen',
-                'search'        => 'Suche',
             ],
 
             'footer' => [
+                'about-us'               => 'Über uns',
+                'customer-service'       => 'Kundenservice',
+                'contact-us'             => 'Kontaktiere uns',
+                'currency'               => 'Währung',
+                'footer-text'            => '© Copyright 2010 - 2023, Webkul Software (registriert in Indien). Alle Rechte vorbehalten.',
+                'locale'                 => 'Sprache',
                 'newsletter-text'        => 'Bereiten Sie sich auf unseren unterhaltsamen Newsletter vor!',
+                'order-return'           => 'Bestellung und Rückgabe',
+                'payment-policy'         => 'Zahlungsrichtlinie',
+                'privacy-cookies-policy' => 'Datenschutz- und Cookie-Richtlinie',
                 'subscribe-stay-touch'   => 'Abonnieren Sie, um in Kontakt zu bleiben.',
                 'subscribe-newsletter'   => 'Newsletter abonnieren',
                 'subscribe'              => 'Abonnieren',
-                'footer-text'            => '© Copyright 2010 - 2023, Webkul Software (registriert in Indien). Alle Rechte vorbehalten.',
-                'locale'                 => 'Sprache',
-                'currency'               => 'Währung',
-                'about-us'               => 'Über uns',
-                'customer-service'       => 'Kundenservice',
-                'whats-new'              => 'Was gibt es Neues',
-                'contact-us'             => 'Kontaktiere uns',
-                'order-return'           => 'Bestellung und Rückgabe',
-                'payment-policy'         => 'Zahlungsrichtlinie',
                 'shipping-policy'        => 'Versandrichtlinie',
-                'privacy-cookies-policy' => 'Datenschutz- und Cookie-Richtlinie',
+                'whats-new'              => 'Was gibt es Neues',
             ],
         ],
 
@@ -357,19 +346,19 @@ return [
                 'title' => 'Filter anwenden',
 
                 'custom-filters' => [
-                    'title'     => 'Benutzerdefinierte Filter',
                     'clear-all' => 'Alles löschen',
+                    'title'     => 'Benutzerdefinierte Filter',
                 ],
 
                 'date-options' => [
+                    'last-three-months' => 'Letzte 3 Monate',
+                    'last-six-months'   => 'Letzte 6 Monate',
                     'today'             => 'Heute',
-                    'yesterday'         => 'Gestern',
                     'this-week'         => 'Diese Woche',
                     'this-month'        => 'Dieser Monat',
                     'last-month'        => 'Letzter Monat',
-                    'last-three-months' => 'Letzte 3 Monate',
-                    'last-six-months'   => 'Letzte 6 Monate',
                     'this-year'         => 'Dieses Jahr',
+                    'yesterday'         => 'Gestern',
                 ],
             ],
 
@@ -384,21 +373,21 @@ return [
             'default-header'  => 'Standardüberschrift',
 
             'confirm' => [
-                'title'        => 'Sind Sie sicher?',
-                'message'      => 'Sind Sie sicher, dass Sie diese Aktion ausführen möchten?',
                 'agree-btn'    => 'Zustimmen',
                 'disagree-btn' => 'Nicht zustimmen',
+                'message'      => 'Sind Sie sicher, dass Sie diese Aktion ausführen möchten?',
+                'title'        => 'Sind Sie sicher?',
             ],
         ],
 
         'products' => [
             'card' => [
-                'new'                => 'Neu',
-                'sale'               => 'Verkauf',
-                'review-description' => 'Seien Sie der Erste, der dieses Produkt bewertet',
                 'add-to-compare'     => 'Artikel erfolgreich zur Vergleichsliste hinzugefügt.',
                 'already-in-compare' => 'Artikel ist bereits zur Vergleichsliste hinzugefügt.',
                 'add-to-cart'        => 'In den Warenkorb legen',
+                'new'                => 'Neu',
+                'review-description' => 'Seien Sie der Erste, der dieses Produkt bewertet',
+                'sale'               => 'Verkauf',
             ],
 
             'carousel' => [
@@ -412,59 +401,33 @@ return [
     ],
 
     'products' => [
-        'reviews'                => 'Bewertungen',
-        'add-to-cart'            => 'In den Warenkorb legen',
-        'add-to-compare'         => 'Produkt zur Vergleichsliste hinzugefügt.',
-        'already-in-compare'     => 'Produkt ist bereits in der Vergleichsliste.',
-        'buy-now'                => 'Jetzt kaufen',
-        'compare'                => 'Vergleichen',
-        'rating'                 => 'Bewertung',
-        'title'                  => 'Titel',
-        'comment'                => 'Kommentar',
-        'submit-review'          => 'Bewertung absenden',
-        'customer-review'        => 'Kundenbewertungen',
-        'write-a-review'         => 'Eine Bewertung schreiben',
-        'stars'                  => 'Sterne',
-        'share'                  => 'Teilen',
-        'empty-review'           => 'Keine Bewertungen gefunden. Seien Sie der Erste, der dieses Produkt bewertet.',
-        'was-this-helpful'       => 'War diese Bewertung hilfreich?',
-        'load-more'              => 'Mehr laden',
-        'add-image'              => 'Bild hinzufügen',
-        'failed-to-upload'       => 'Das Bild konnte nicht hochgeladen werden',
-        'description'            => 'Beschreibung',
-        'additional-information' => 'Zusätzliche Informationen',
-        'submit-success'         => 'Erfolgreich übermittelt',
-        'something-went-wrong'   => 'Etwas ist schiefgelaufen',
-        'in-stock'               => 'Auf Lager',
-        'available-for-order'    => 'Bestellbar',
-        'out-of-stock'           => 'Nicht auf Lager',
-        'related-product-title'  => 'Ähnliche Produkte',
-        'up-sell-title'          => 'Wir haben auch folgende Produkte gefunden!',
-        'new'                    => 'Neu',
-        'as-low-as'              => 'Ab',
-        'starting-at'            => 'Beginnend ab',
-        'name'                   => 'Name',
-        'qty'                    => 'Menge',
-        'offers'                 => 'Kaufen Sie :qty zum Preis von :price pro Stück und sparen Sie :discount%',
-        'tax-inclusive'          => 'Inklusive aller Steuern',
-
+        'prices' => [
+            'grouped' => [
+                'starting-at' => 'Ab',
+            ],
+    
+            'configurable' => [
+                'as-low-as' => 'Ab',
+            ],
+        ],
+    
         'sort-by' => [
             'title'   => 'Sortieren nach',
             'options' => [
-                'from-a-z'        => 'Von A-Z',
-                'from-z-a'        => 'Von Z-A',
-                'latest-first'    => 'Neueste zuerst',
-                'oldest-first'    => 'Älteste zuerst',
                 'cheapest-first'  => 'Günstigste zuerst',
                 'expensive-first' => 'Teuerste zuerst',
+                'from-a-z'        => 'A-Z',
+                'from-z-a'        => 'Z-A',
+                'latest-first'    => 'Neueste zuerst',
+                'oldest-first'    => 'Älteste zuerst',
             ],
         ],
     
         'view' => [
             'type' => [
                 'configurable' => [
-                    'select-options'       => 'Bitte wählen Sie eine Option',
-                    'select-above-options' => 'Bitte wählen Sie die oben stehenden Optionen',
+                    'select-options'       => 'Bitte wählen Sie eine Option aus',
+                    'select-above-options' => 'Bitte wählen Sie die oben stehenden Optionen aus',
                 ],
     
                 'bundle' => [
@@ -472,9 +435,9 @@ return [
                 ],
     
                 'downloadable' => [
-                    'samples' => 'Beispiele',
                     'links'   => 'Links',
                     'sample'  => 'Beispiel',
+                    'samples' => 'Beispiele',
                 ],
     
                 'grouped' => [
@@ -483,51 +446,51 @@ return [
             ],
     
             'gallery' => [
-                'thumbnail-image' => 'Miniaturbild',
                 'product-image'   => 'Produktbild',
+                'thumbnail-image' => 'Vorschaubild',
             ],
     
             'reviews' => [
-                'cancel'      => 'Abbrechen',
-                'rating'      => 'Bewertung',
-                'success'     => 'Bewertung erfolgreich übermittelt.',
                 'attachments' => 'Anhänge',
-                'title'       => 'Titel',
                 'comment'     => 'Kommentar',
                 'customer-review'        => 'Kundenbewertungen',
-                'submit-review'          => 'Bewertung absenden',
-                'write-a-review'         => 'Eine Bewertung schreiben',
-                'empty-review'           => 'Keine Bewertungen gefunden. Seien Sie der Erste, der dieses Produkt bewertet.',
-                'load-more'              => 'Mehr laden',
+                'cancel'      => 'Abbrechen',
+                'empty-review'           => 'Keine Bewertungen gefunden, sei der erste, der dieses Produkt bewertet',
                 'failed-to-upload'       => 'Das Bild konnte nicht hochgeladen werden',
+                'load-more'              => 'Mehr laden',
+                'rating'      => 'Bewertung',
+                'success'     => 'Bewertung erfolgreich übermittelt.',
+                'submit-review'          => 'Bewertung absenden',
+                'title'       => 'Titel',
+                'write-a-review'         => 'Eine Bewertung schreiben',
             ],
     
-            'description'            => 'Beschreibung',
-            'additional-information' => 'Zusätzliche Informationen',
-            'review'                 => 'Bewertungen',
-            'related-product-title'  => 'Ähnliche Produkte',
-            'up-sell-title'          => 'Wir haben weitere Produkte gefunden, die Ihnen gefallen könnten!',
-            'tax-inclusive'          => 'Inklusive aller Steuern',
             'add-to-cart'            => 'In den Warenkorb legen',
+            'add-to-compare'         => 'Produkt zur Vergleichsliste hinzugefügt.',
+            'already-in-compare'     => 'Das Produkt ist bereits in der Vergleichsliste enthalten.',
+            'additional-information' => 'Zusätzliche Informationen',
             'buy-now'                => 'Jetzt kaufen',
             'compare'                => 'Vergleichen',
-            'add-to-compare'         => 'Produkt zur Vergleichsliste hinzugefügt.',
-            'already-in-compare'     => 'Produkt ist bereits in der Vergleichsliste.',
+            'description'            => 'Beschreibung',
+            'review'                 => 'Bewertungen',
+            'related-product-title'  => 'Ähnliche Produkte',
+            'tax-inclusive'          => 'Inklusive aller Steuern',
+            'up-sell-title'          => 'Wir haben auch andere Produkte, die Ihnen gefallen könnten!',
         ],
     
         'type' => [
             'abstract' => [
-                'offers' => 'Kaufen Sie :qty für je :price und sparen Sie :discount%',
+                'offers' => 'Kaufen Sie :qty für :price je Stück und sparen Sie :discount%',
             ],
         ],
-    ],    
+    ],      
 
     'categories' => [
         'filters' => [
+            'clear-all' => 'Alles löschen',
             'filters'   => 'Filter:',
             'filter'    => 'Filter',
             'sort'      => 'Sortieren',
-            'clear-all' => 'Alles löschen',
         ],
 
         'toolbar' => [
@@ -545,185 +508,185 @@ return [
     ],
 
     'compare' => [
-        'product-compare'    => 'Produktvergleich',
+        'already-added'      => 'Artikel ist bereits zur Vergleichsliste hinzugefügt',
         'delete-all'         => 'Alle löschen',
         'empty-text'         => 'Sie haben keine Artikel in Ihrer Vergleichsliste',
-        'title'              => 'Produktvergleich',
-        'already-added'      => 'Artikel ist bereits zur Vergleichsliste hinzugefügt',
         'item-add-success'   => 'Artikel erfolgreich zur Vergleichsliste hinzugefügt',
+        'product-compare'    => 'Produktvergleich',
         'remove-success'     => 'Artikel erfolgreich entfernt.',
         'remove-all-success' => 'Alle Artikel erfolgreich entfernt.',
         'remove-error'       => 'Etwas ist schiefgelaufen. Bitte versuchen Sie es später erneut.',
+        'title'              => 'Produktvergleich',
     ],
 
     'checkout' => [
         'success' => [
+            'info'          => 'Wir werden Ihnen Ihre Bestelldetails und Tracking-Informationen per E-Mail senden',
+            'order-id-info' => 'Ihre Bestellnummer lautet #:order_id',
             'title'         => 'Bestellung erfolgreich platziert',
             'thanks'        => 'Vielen Dank für Ihre Bestellung!',
-            'order-id-info' => 'Ihre Bestellnummer lautet #:order_id',
-            'info'          => 'Wir senden Ihnen Ihre Bestelldetails und Tracking-Informationen per E-Mail.',
         ],
-
+    
         'cart' => [
-            'item-add-to-cart'          => 'Artikel erfolgreich hinzugefügt',
-            'return-to-shop'            => 'Zurück zum Shop',
             'continue-to-checkout'      => 'Weiter zur Kasse',
-            'rule-applied'              => 'Warenkorbregel angewendet',
-            'minimum-order-message'     => 'Mindestbestellmenge beträgt :amount',
-            'suspended-account-message' => 'Ihr Konto wurde gesperrt.',
-            'missing-fields'            => 'Für dieses Produkt fehlen einige Pflichtfelder.',
-            'missing-options'           => 'Für dieses Produkt fehlen Optionen.',
-            'missing-links'             => 'Für dieses Produkt fehlen Download-Links.',
-            'select-hourly-duration'    => 'Wählen Sie eine Zeitdauer von einer Stunde aus.',
-            'qty-missing'               => 'Mindestens ein Produkt sollte eine Menge von mehr als 1 haben.',
-            'success-remove'            => 'Artikel wurde erfolgreich aus dem Warenkorb entfernt.',
-            'inventory-warning'         => 'Die angeforderte Menge ist nicht verfügbar. Bitte versuchen Sie es später erneut.',
+            'item-add-to-cart'          => 'Artikel erfolgreich hinzugefügt',
+            'inventory-warning'         => 'Die angeforderte Menge ist nicht verfügbar, bitte versuchen Sie es später erneut.',
             'illegal'                   => 'Die Menge darf nicht weniger als eins sein.',
-            'inactive'                  => 'Der Artikel wurde deaktiviert und aus dem Warenkorb entfernt.',
-
+            'inactive'                  => 'Der Artikel wurde deaktiviert und wurde daher aus dem Warenkorb entfernt.',
+            'missing-fields'            => 'Einige erforderliche Felder fehlen für dieses Produkt.',
+            'missing-options'           => 'Optionen fehlen für dieses Produkt.',
+            'missing-links'             => 'Download-Links fehlen für dieses Produkt.',
+            'minimum-order-message'     => 'Mindestbestellmenge beträgt :amount',
+            'qty-missing'               => 'Mindestens ein Produkt sollte eine Menge von mehr als 1 haben.',
+            'return-to-shop'            => 'Zurück zum Shop',
+            'rule-applied'              => 'Warenkorbregel angewendet',
+            'suspended-account-message' => 'Ihr Konto wurde gesperrt.',
+            'select-hourly-duration'    => 'Wählen Sie eine Stundendauer von einer Stunde aus.',
+            'success-remove'            => 'Artikel wurde erfolgreich aus dem Warenkorb entfernt.',
+    
             'index' => [
-                'home'                     => 'Startseite',
                 'cart'                     => 'Warenkorb',
-                'view-cart'                => 'Warenkorb anzeigen',
+                'continue-shopping'        => 'Einkauf fortsetzen',
+                'empty-product'            => 'Sie haben kein Produkt in Ihrem Warenkorb.',
+                'home'                     => 'Startseite',
+                'items-selected'           => ':count Artikel ausgewählt',
+                'move-to-wishlist-success' => 'Ausgewählte Artikel wurden erfolgreich in die Wunschliste verschoben.',
+                'move-to-wishlist'         => 'In die Wunschliste verschieben',
                 'product-name'             => 'Produktname',
-                'remove'                   => 'Entfernen',
-                'quantity'                 => 'Menge',
                 'price'                    => 'Preis',
+                'quantity'                 => 'Menge',
+                'quantity-update'          => 'Menge erfolgreich aktualisiert',
+                'remove'                   => 'Entfernen',
+                'remove-selected-success'  => 'Ausgewählte Artikel wurden erfolgreich aus dem Warenkorb entfernt.',
+                'see-details'              => 'Details anzeigen',
                 'tax'                      => 'Steuer',
                 'total'                    => 'Gesamt',
-                'continue-shopping'        => 'Einkauf fortsetzen',
                 'update-cart'              => 'Warenkorb aktualisieren',
-                'move-to-wishlist-success' => 'Ausgewählte Artikel erfolgreich in die Wunschliste verschoben.',
-                'remove-selected-success'  => 'Ausgewählte Artikel erfolgreich aus dem Warenkorb entfernt.',
-                'empty-product'            => 'Sie haben kein Produkt in Ihrem Warenkorb.',
-                'quantity-update'          => 'Menge erfolgreich aktualisiert',
-                'see-details'              => 'Details anzeigen',
-                'move-to-wishlist'         => 'In die Wunschliste verschieben',
-                'items-selected'           => ':count ausgewählte Artikel',
+                'view-cart'                => 'Warenkorb anzeigen',
             ],
-
+    
             'coupon'   => [
-                'code'            => 'Gutscheincode',
                 'applied'         => 'Gutschein angewendet',
                 'apply'           => 'Gutschein anwenden',
-                'error'           => 'Etwas ist schiefgelaufen',
-                'remove'          => 'Gutschein entfernen',
-                'invalid'         => 'Gutscheincode ist ungültig.',
-                'discount'        => 'Gutscheinrabatt',
                 'apply-issue'     => 'Der Gutscheincode kann nicht angewendet werden.',
-                'success-apply'   => 'Gutscheincode erfolgreich angewendet.',
                 'already-applied' => 'Gutscheincode wurde bereits angewendet.',
-                'enter-your-code' => 'Geben Sie Ihren Code ein',
-                'subtotal'        => 'Zwischensumme',
                 'button-title'    => 'Anwenden',
+                'code'            => 'Gutscheincode',
+                'discount'        => 'Gutscheinrabatt',
+                'error'           => 'Etwas ist schiefgelaufen',
+                'enter-your-code' => 'Geben Sie Ihren Code ein',
+                'invalid'         => 'Gutscheincode ist ungültig.',
+                'remove'          => 'Gutschein entfernen',
+                'success-apply'   => 'Gutscheincode erfolgreich angewendet.',
+                'subtotal'        => 'Zwischensumme',
             ],
-
+    
             'mini-cart' => [
-                'see-details'          => 'Details anzeigen',
-                'shopping-cart'        => 'Warenkorb',
+                'continue-to-checkout' => 'Weiter zur Kasse',
+                'empty-cart'           => 'Ihr Warenkorb ist leer',
                 'offer-on-orders'      => 'Erhalten Sie bis zu 30% Rabatt auf Ihre 1. Bestellung',
                 'remove'               => 'Entfernen',
-                'empty-cart'           => 'Ihr Warenkorb ist leer',
+                'see-details'          => 'Details anzeigen',
+                'shopping-cart'        => 'Warenkorb',
                 'subtotal'             => 'Zwischensumme',
-                'continue-to-checkout' => 'Weiter zur Kasse',
                 'view-cart'            => 'Warenkorb anzeigen',
             ],
-
+    
             'summary' => [
                 'cart-summary'        => 'Warenkorbzusammenfassung',
-                'sub-total'           => 'Zwischensumme',
-                'tax'                 => 'Steuer',
                 'delivery-charges'    => 'Liefergebühren',
                 'discount-amount'     => 'Rabattbetrag',
                 'grand-total'         => 'Gesamtsumme',
                 'place-order'         => 'Bestellung aufgeben',
                 'proceed-to-checkout' => 'Zur Kasse gehen',
+                'sub-total'           => 'Zwischensumme',
+                'tax'                 => 'Steuer',
             ],
         ],
-
+    
         'onepage' => [
             'addresses' => [
                 'billing' => [
-                    'billing-address'      => 'Rechnungsadresse',
                     'add-new-address'      => 'Neue Adresse hinzufügen',
-                    'same-billing-address' => 'Adresse ist identisch mit meiner Rechnungsadresse',
+                    'billing-address'      => 'Rechnungsadresse',
                     'back'                 => 'Zurück',
                     'company-name'         => 'Firmenname',
+                    'country'              => 'Land',
+                    'city'                 => 'Stadt',
+                    'confirm'              => 'Bestätigen',
+                    'email'                => 'E-Mail',
                     'first-name'           => 'Vorname',
                     'last-name'            => 'Nachname',
-                    'email'                => 'E-Mail',
+                    'postcode'             => 'PLZ/Postleitzahl',
+                    'same-billing-address' => 'Adresse entspricht meiner Rechnungsadresse',
                     'street-address'       => 'Straßenadresse',
-                    'country'              => 'Land',
                     'state'                => 'Bundesland',
                     'select-state'         => 'Bundesland auswählen',
-                    'city'                 => 'Stadt',
-                    'postcode'             => 'PLZ',
-                    'telephone'            => 'Telefon',
                     'save-address'         => 'Diese Adresse speichern',
-                    'confirm'              => 'Bestätigen',
+                    'telephone'            => 'Telefon',
                 ],
-
+    
                 'index' => [
                     'confirm' => 'Bestätigen',
                 ],
-
+    
                 'shipping' => [
-                    'shipping-address' => 'Lieferadresse',
                     'add-new-address'  => 'Neue Adresse hinzufügen',
                     'back'             => 'Zurück',
                     'company-name'     => 'Firmenname',
+                    'country'          => 'Land',
+                    'city'             => 'Stadt',
+                    'confirm'          => 'Bestätigen',
+                    'email'            => 'E-Mail',
                     'first-name'       => 'Vorname',
                     'last-name'        => 'Nachname',
-                    'email'            => 'E-Mail',
+                    'postcode'         => 'PLZ/Postleitzahl',
                     'street-address'   => 'Straßenadresse',
-                    'country'          => 'Land',
                     'state'            => 'Bundesland',
                     'select-state'     => 'Bundesland auswählen',
                     'select-country'   => 'Land auswählen',
-                    'city'             => 'Stadt',
-                    'postcode'         => 'PLZ',
-                    'telephone'        => 'Telefon',
                     'save-address'     => 'Diese Adresse speichern',
-                    'confirm'          => 'Bestätigen',
+                    'shipping-address' => 'Lieferadresse',
+                    'telephone'        => 'Telefon',
                 ],
             ],
-
+    
             'coupon' => [
-                'discount'        => 'Gutscheinrabatt',
-                'code'            => 'Gutscheincode',
                 'applied'         => 'Gutschein angewendet',
                 'applied-coupon'  => 'Angewendeter Gutschein',
                 'apply'           => 'Gutschein anwenden',
-                'remove'          => 'Gutschein entfernen',
                 'apply-issue'     => 'Der Gutscheincode kann nicht angewendet werden.',
-                'sub-total'       => 'Zwischensumme',
                 'button-title'    => 'Anwenden',
+                'code'            => 'Gutscheincode',
+                'discount'        => 'Gutscheinrabatt',
                 'enter-your-code' => 'Geben Sie Ihren Code ein',
+                'remove'          => 'Gutschein entfernen',
+                'sub-total'       => 'Zwischensumme',
                 'subtotal'        => 'Zwischensumme',
             ],
-
+    
             'index' => [
+                'checkout' => 'Zur Kasse',
                 'home'     => 'Startseite',
-                'checkout' => 'Kasse',
             ],
-
+    
             'payment' => [
                 'payment-method' => 'Zahlungsmethode',
             ],
-
+    
             'shipping' => [
-                'shipping-method' => 'Versandmethode',
+                'shipping-method' => 'Versandart',
             ],
-
+    
             'summary' => [
                 'cart-summary'     => 'Warenkorbzusammenfassung',
-                'sub-total'        => 'Zwischensumme',
-                'tax'              => 'Steuer',
                 'delivery-charges' => 'Liefergebühren',
                 'discount-amount'  => 'Rabattbetrag',
                 'grand-total'      => 'Gesamtsumme',
                 'place-order'      => 'Bestellung aufgeben',
                 'processing'       => 'Verarbeitung',
+                'sub-total'        => 'Zwischensumme',
+                'tax'              => 'Steuer',
             ],
         ],
     ],
@@ -731,8 +694,8 @@ return [
     'home' => [
         'index' => [
             'offer'               => 'Erhalten Sie BIS ZU 40% RABATT auf Ihre 1. Bestellung. JETZT EINKAUFEN',
-            'verify-email'        => 'Bestätigen Sie Ihre E-Mail-Adresse',
             'resend-verify-email' => 'Bestätigungs-E-Mail erneut senden',
+            'verify-email'        => 'Bestätigen Sie Ihre E-Mail-Adresse',
         ],
     ],
 
@@ -740,39 +703,39 @@ return [
         'go-to-home'   => 'Zur Startseite gehen',
 
         '404' => [
-            'title'       => '404 Seite nicht gefunden',
             'description' => 'Hoppla! Die Seite, die Sie suchen, ist im Urlaub. Es scheint, dass wir nicht finden konnten, wonach Sie gesucht haben.',
+            'title'       => '404 Seite nicht gefunden',
         ],
 
         '401' => [
-            'title'       => '401 Nicht autorisiert',
             'description' => 'Hoppla! Es sieht so aus, als hätten Sie keine Berechtigung, auf diese Seite zuzugreifen. Es scheint, dass Ihnen die erforderlichen Zugangsdaten fehlen.',
+            'title'       => '401 Nicht autorisiert',
         ],
 
         '403' => [
-            'title'       => '403 Verboten',
             'description' => 'Hoppla! Diese Seite ist tabu. Es sieht so aus, als hätten Sie nicht die erforderlichen Berechtigungen, um diesen Inhalt anzuzeigen.',
+            'title'       => '403 Verboten',
         ],
 
         '500' => [
-            'title'       => '500 Interner Serverfehler',
             'description' => 'Hoppla! Etwas ist schiefgelaufen. Es scheint, dass wir Probleme haben, die Seite, nach der Sie suchen, zu laden.',
+            'title'       => '500 Interner Serverfehler',
         ],
 
         '503' => [
-            'title'       => '503 Dienst nicht verfügbar',
             'description' => 'Hoppla! Es sieht so aus, als wären wir vorübergehend wegen Wartungsarbeiten nicht erreichbar. Bitte kommen Sie später wieder vorbei.',
+            'title'       => '503 Dienst nicht verfügbar',
         ],
     ],
 
     'layouts' => [
-        'my-account'            => 'Mein Konto',
-        'profile'               => 'Profil',
         'address'               => 'Adresse',
+        'downloadable-products' => 'Downloadbare Produkte',
+        'my-account'            => 'Mein Konto',
+        'orders'                => 'Bestellungen',
+        'profile'               => 'Profil',
         'reviews'               => 'Bewertungen',
         'wishlist'              => 'Wunschliste',
-        'orders'                => 'Bestellungen',
-        'downloadable-products' => 'Downloadbare Produkte',
     ],
 
     'subscription' => [
@@ -787,79 +750,79 @@ return [
 
         'customers' => [
             'registration' => [
-                'subject'     => 'Neue Kundenregistrierung',
-                'greeting'    => 'Willkommen und vielen Dank für Ihre Registrierung bei uns!',
                 'description' => 'Ihr Konto wurde erfolgreich erstellt und Sie können sich jetzt mit Ihren E-Mail-Adresse und Passwort anmelden. Nach der Anmeldung haben Sie Zugriff auf weitere Dienste wie das Überprüfen vergangener Bestellungen, Wunschlisten und das Bearbeiten Ihrer Kontoinformationen.',
+                'greeting'    => 'Willkommen und vielen Dank für Ihre Registrierung bei uns!',
+                'subject'     => 'Neue Kundenregistrierung',
                 'sign-in'     => 'Anmelden',
             ],
 
             'forgot-password' => [
-                'subject'        => 'E-Mail zum Zurücksetzen des Passworts',
-                'greeting'       => 'Passwort vergessen!',
                 'description'    => 'Sie erhalten diese E-Mail, weil wir eine Anfrage zum Zurücksetzen des Passworts für Ihr Konto erhalten haben.',
+                'greeting'       => 'Passwort vergessen!',
                 'reset-password' => 'Passwort zurücksetzen',
+                'subject'        => 'E-Mail zum Zurücksetzen des Passworts',
             ],
 
             'update-password' => [
-                'subject'     => 'Passwort aktualisiert',
-                'greeting'    => 'Passwort aktualisiert!',
                 'description' => 'Sie erhalten diese E-Mail, weil Sie Ihr Passwort aktualisiert haben.',
+                'greeting'    => 'Passwort aktualisiert!',
+                'subject'     => 'Passwort aktualisiert',
             ],
 
             'verification' => [
-                'subject'      => 'E-Mail zur Kontobestätigung',
-                'greeting'     => 'Willkommen!',
                 'description'  => 'Bitte klicken Sie auf die Schaltfläche unten, um Ihre E-Mail-Adresse zu bestätigen.',
+                'greeting'     => 'Willkommen!',
+                'subject'      => 'E-Mail zur Kontobestätigung',
                 'verify-email' => 'E-Mail-Adresse bestätigen',
             ],
 
             'commented' => [
-                'subject'     => 'Neuer Kommentar hinzugefügt',
                 'description' => 'Notiz lautet - :note',
+                'subject'     => 'Neuer Kommentar hinzugefügt',
             ],
 
             'subscribed' => [
-                'subject'     => 'Sie! Abonnement unseres Newsletters',
-                'greeting'    => 'Willkommen in unserem Newsletter!',
                 'description' => 'Herzlichen Glückwunsch und willkommen in unserer Newsletter-Community! Wir freuen uns, Sie an Bord zu haben und Sie über die neuesten Nachrichten, Trends und exklusive Angebote auf dem Laufenden zu halten.',
+                'greeting'    => 'Willkommen in unserem Newsletter!',
+                'subject'     => 'Sie! Abonnement unseres Newsletters',
                 'unsubscribe' => 'Abmelden',
             ],
         ],
 
         'orders' => [
             'created' => [
-                'subject'  => 'Neue Bestellbestätigung',
-                'title'    => 'Bestellbestätigung!',
                 'greeting' => 'Vielen Dank für Ihre Bestellung :order_id, aufgegeben am :created_at',
+                'subject'  => 'Neue Bestellbestätigung',
                 'summary'  => 'Zusammenfassung der Bestellung',
+                'title'    => 'Bestellbestätigung!',
             ],
 
             'invoiced' => [
-                'subject'  => 'Neue Rechnungsbestätigung',
-                'title'    => 'Rechnungsbestätigung!',
                 'greeting' => 'Ihre Rechnung #:invoice_id für die Bestellung :order_id, erstellt am :created_at',
+                'subject'  => 'Neue Rechnungsbestätigung',
                 'summary'  => 'Zusammenfassung der Rechnung',
+                'title'    => 'Rechnungsbestätigung!',
             ],
 
             'shipped' => [
-                'subject'  => 'Neue Versandbestätigung',
-                'title'    => 'Bestellung versendet!',
                 'greeting' => 'Ihre Bestellung :order_id, aufgegeben am :created_at, wurde versendet',
+                'subject'  => 'Neue Versandbestätigung',
                 'summary'  => 'Zusammenfassung des Versands',
+                'title'    => 'Bestellung versendet!',
             ],
 
             'refunded' => [
-                'subject'  => 'Neue Rückerstattungsbestätigung',
-                'title'    => 'Bestellung zurückerstattet!',
                 'greeting' => 'Die Rückerstattung wurde für die Bestellung :order_id, aufgegeben am :created_at, initiiert',
+                'subject'  => 'Neue Rückerstattungsbestätigung',
                 'summary'  => 'Zusammenfassung der Rückerstattung',
+                'title'    => 'Bestellung zurückerstattet!',
             ],
 
             'canceled' => [
-                'subject'  => 'Neue Bestellstornierungsbestätigung',
-                'title'    => 'Bestellung storniert!',
                 'greeting' => 'Ihre Bestellung :order_id, aufgegeben am :created_at, wurde storniert',
+                'subject'  => 'Neue Bestellstornierungsbestätigung',
                 'summary'  => 'Zusammenfassung der Bestellung',
+                'title'    => 'Bestellung storniert!',
             ],
 
             'commented' => [
@@ -867,22 +830,22 @@ return [
                 'title'   => 'Neuer Kommentar zu Ihrer Bestellung :order_id, aufgegeben am :created_at, hinzugefügt',
             ],
 
-            'shipping-address'  => 'Versandadresse',
-            'carrier'           => 'Versandunternehmen',
-            'tracking-number'   => 'Trackingnummer: :tracking_number',
             'billing-address'   => 'Rechnungsadresse',
             'contact'           => 'Kontakt',
-            'shipping'          => 'Versand',
+            'carrier'           => 'Versandunternehmen',
+            'discount'          => 'Rabatt',
+            'grand-total'       => 'Gesamtsumme',
             'payment'           => 'Zahlung',
-            'sku'               => 'Artikelnummer',
             'name'              => 'Name',
             'price'             => 'Preis',
             'qty'               => 'Menge',
+            'shipping-address'  => 'Versandadresse',
+            'shipping'          => 'Versand',
+            'sku'               => 'Artikelnummer',
             'subtotal'          => 'Zwischensumme',
             'shipping-handling' => 'Versandkosten',
+            'tracking-number'   => 'Trackingnummer: :tracking_number',
             'tax'               => 'Steuer',
-            'discount'          => 'Rabatt',
-            'grand-total'       => 'Gesamtsumme',
         ],
     ],
 ];
