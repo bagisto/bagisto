@@ -101,8 +101,7 @@
 
                                 formData.append('image', imageInput.files[0]);
 
-                                axios
-                                    .post('{{ route('shop.search.upload') }}', formData, {
+                                this.$axios.post('{{ route('shop.search.upload') }}', formData, {
                                         headers: {
                                             'Content-Type': 'multipart/form-data'
                                         }
