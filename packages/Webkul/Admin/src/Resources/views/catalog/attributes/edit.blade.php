@@ -26,7 +26,7 @@
                     <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                         @lang('admin::app.catalog.attributes.edit.title')
                     </p>
-        
+
                     <div class="flex gap-x-[10px] items-center">
                         <!-- Cancel Button -->
                         <a
@@ -100,7 +100,7 @@
                                         :control-name="$locale->code . '[name]'"
                                     >
                                     </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>    
+                                </x-admin::form.control-group>
                             @endforeach
                         </div>
 
@@ -169,7 +169,7 @@
                                         </x-admin::form.control-group.label>
 
                                         <div class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
-                                            <input 
+                                            <input
                                                 type="checkbox"
                                                 name="empty_option"
                                                 id="empty_option"
@@ -256,12 +256,12 @@
                                                             :value="index"
                                                         />
                                                     </x-admin::table.td>
- 
+
                                                     <!-- Swatch Type Image / Color -->
                                                     <x-admin::table.td v-if="showSwatch && (swatchType == 'color' || swatchType == 'image')">
                                                         <!-- Swatch Image -->
                                                         <div v-if="swatchType == 'image'">
-                                                            <img 
+                                                            <img
                                                                 :src="element.swatch_value_url"
                                                                 :ref="'image_' + element.id"
                                                                 class="h-[50px] w-[50px]"
@@ -272,7 +272,7 @@
                                                                 :name="'options[' + element.id + '][swatch_value]'"
                                                                 class="hidden"
                                                                 :ref="'imageInput_' + element.id"
-                                                            /> 
+                                                            />
                                                         </div>
 
                                                         <!-- Swatch Color -->
@@ -282,7 +282,7 @@
                                                                 :style="{ background: element.swatch_value }"
                                                             >
                                                             </div>
-                    
+
                                                             <input
                                                                 type="hidden"
                                                                 :name="'options[' + element.id + '][swatch_value]'"
@@ -305,7 +305,7 @@
                                                     <!-- Loacles -->
                                                      <x-admin::table.td v-for="locale in allLocales">
                                                         <p v-text="element['locales'][locale.code]"></p>
-                                                        
+
                                                         <input
                                                             type="hidden"
                                                             :name="'options[' + element.id + '][' + locale.code + '][label]'"
@@ -320,7 +320,7 @@
                                                             @click="editOptions(element)"
                                                         >
                                                         </span>
-                                                        
+
                                                         <span
                                                             class="icon-delete p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950  max-sm:place-self-center"
                                                             @click="removeOption(element.id)"
@@ -337,9 +337,9 @@
                                 <template>
                                     <div class="grid gap-[14px] justify-items-center py-[40px] px-[10px]">
                                         <!-- Attribute Option Image -->
-                                        <img 
-                                            class="w-[120px] h-[120px] border border-dashed dark:border-gray-800   rounded-[4px]" 
-                                            src="{{ bagisto_asset('images/icon-add-product.svg') }}" 
+                                        <img
+                                            class="w-[120px] h-[120px] border border-dashed dark:border-gray-800   rounded-[4px]"
+                                            src="{{ bagisto_asset('images/icon-add-product.svg') }}"
                                             alt="{{ trans('admin::app.catalog.attributes.edit.add-attribute-options') }}"
                                         >
 
@@ -355,7 +355,7 @@
                                         </div>
 
                                         <!-- Add Row Button -->
-                                        <div 
+                                        <div
                                             class="secondary-button text-[14px]"
                                             @click="$refs.addOptionsRow.toggle()"
                                         >
@@ -475,7 +475,7 @@
                                             @lang('admin::app.catalog.attributes.edit.enable-wysiwyg')
                                         </x-admin::form.control-group.label>
 
-                                        <input 
+                                        <input
                                             type="hidden"
                                             name="enable_wysiwyg"
                                             value="0"
@@ -520,7 +520,7 @@
                                     @lang('admin::app.catalog.attributes.edit.validations')
                                 </p>
                             </x-slot:header>
-                        
+
                             <x-slot:content>
                                 <!-- Input Validation -->
                                 @if($attribute->type == 'text')
@@ -582,7 +582,7 @@
                                         for="is_required"
                                         value="1"
                                         :checked="(boolean) $attribute->is_required"
-                                        :disabled="(boolean) !$attribute->is_required"
+                                        {{--:disabled="(boolean) !$attribute->is_required"--}}
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -596,7 +596,7 @@
                                     <x-admin::form.control-group.control
                                         type="hidden"
                                         name="is_required"
-                                        :value="$attribute->is_required"
+                                        value="0"
                                     >
                                     </x-admin::form.control-group.control>
                                 </x-admin::form.control-group>
@@ -639,7 +639,7 @@
                                     @lang('admin::app.catalog.attributes.edit.configuration')
                                 </p>
                             </x-slot:header>
-                        
+
                             <x-slot:content>
                                 <!-- Value Per Locale -->
                                 <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] opacity-70 select-none ">
@@ -713,7 +713,7 @@
 
                                     <x-admin::form.control-group.label
                                         for="is_filterable"
-                                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer" 
+                                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-filterable')
                                     </x-admin::form.control-group.label>
@@ -744,7 +744,7 @@
 
                                     <x-admin::form.control-group.label
                                         for="is_configurable"
-                                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer" 
+                                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-configurable')
                                     </x-admin::form.control-group.label>
@@ -775,7 +775,7 @@
 
                                     <x-admin::form.control-group.label
                                         for="is_visible_on_front"
-                                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer" 
+                                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-visible-on-front')
                                     </x-admin::form.control-group.label>
@@ -806,7 +806,7 @@
 
                                     <x-admin::form.control-group.label
                                         for="is_comparable"
-                                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer" 
+                                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-comparable')
                                     </x-admin::form.control-group.label>
@@ -920,7 +920,7 @@
                                         :placeholder="trans('admin::app.catalog.attributes.edit.admin')"
                                     >
                                     </x-admin::form.control-group.control>
-        
+
                                     <x-admin::form.control-group.error
                                         control-name="admin_name"
                                     >
@@ -942,7 +942,7 @@
                                             :placeholder="$locale->name"
                                         >
                                         </x-admin::form.control-group.control>
-            
+
                                         <x-admin::form.control-group.error
                                             control-name="locales.{{ $locale->code }}"
                                         >
@@ -951,11 +951,11 @@
                                 @endforeach
                             </div>
                         </x-slot:content>
-                        
+
                         <x-slot:footer>
                             <!-- Save Button -->
                             <button
-                                type="submit" 
+                                type="submit"
                                 class="primary-button"
                             >
                                 @lang('admin::app.catalog.attributes.edit.option.save-btn')
@@ -1042,7 +1042,7 @@
 
                     listenModel(event) {
                         if (! event.isActive) {
-                            this.isNullOptionChecked = false;                            
+                            this.isNullOptionChecked = false;
                         }
                     },
 
