@@ -362,8 +362,12 @@
                         })
                         .catch(error => {
                             setErrors({'attachments': ["@lang('shop::app.products.failed-to-upload')"]});
-                            
-                            this.$refs.reviewImages.uploadedFiles = [];
+
+                            this.$refs.reviewImages.uploadedFiles.forEach(element => {
+                                setTimeout(() => {
+                                    this.$refs.reviewImages.removeFile();
+                                }, 0);
+                            });
                         });
                 },
 
