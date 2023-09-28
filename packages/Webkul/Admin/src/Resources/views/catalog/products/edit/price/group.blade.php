@@ -75,7 +75,7 @@
                 >
                     <img
                         src="{{ bagisto_asset('images/icon-discount.svg') }}"
-                        class="w-[80px] h-[80px] border border-dashed dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
+                        class="w-[80px] h-[80px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
                     />
 
                     <div class="flex flex-col gap-[6px]">

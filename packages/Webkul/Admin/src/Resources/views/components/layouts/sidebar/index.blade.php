@@ -39,7 +39,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-sidebar-collapse-template">
         <div
-            class="bg-white dark:bg-gray-900  fixed w-full max-w-[270px] bottom-0 px-[16px] hover:bg-gray-100 dark:hover:bg-gray-950  border-t-[1px] border-gray-200 transition-all duration-300 cursor-pointer"
+            class="bg-white dark:bg-gray-900  fixed w-full max-w-[270px] bottom-0 px-[16px] hover:bg-gray-100 dark:hover:bg-gray-950 border-t-[1px] border-gray-200 dark:border-gray-800 transition-all duration-300 cursor-pointer"
             :class="{'max-w-[70px]': isCollapsed}"
             @click="toggle"
         >

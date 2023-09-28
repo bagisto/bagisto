@@ -192,7 +192,7 @@
                                 v-else
                             >
                                 <img    
-                                    class="w-[120px] h-[120px] border border-dashed dark:border-gray-800   rounded-[4px]"
+                                    class="w-[120px] h-[120px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
                                     src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
                                     alt="add-product-to-store"
                                 >
@@ -572,7 +572,7 @@
                             v-else
                         >
                             <img
-                                class="w-[120px] h-[120px] p-2 border border-dashed dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
+                                class="w-[120px] h-[120px] p-2 border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
                                 src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
                                 alt="add-product-to-store"
                             >
@@ -921,7 +921,7 @@
                             v-else
                         >
                             <img
-                                class="w-[120px] h-[120px] p-2 border border-dashed dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
+                                class="w-[120px] h-[120px] p-2 border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
                                 src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
                                 alt="add-category-to-store"
                             >
@@ -1487,7 +1487,7 @@
                                 class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px] "
                             >
                                 <img
-                                    class="w-[120px] h-[120px] border border-dashed dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
+                                    class="w-[120px] h-[120px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
                                     src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
                                     alt="add-product-to-store"
                                 >
