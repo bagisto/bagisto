@@ -437,13 +437,6 @@
                                         :disabled="(boolean) $selectedOption"
                                         :label="trans('admin::app.catalog.attributes.edit.type')"
                                     >
-                                        <!-- Default Option -->
-                                        <option value="">
-                                            <span class="text-gray-400">
-                                                @lang('admin::app.catalog.attributes.edit.select')
-                                            </span>
-                                        </option>
-
                                         <!-- Here! All Needed types are defined -->
                                         @foreach(['text', 'textarea', 'price', 'boolean', 'select', 'multiselect', 'datetime', 'date', 'image', 'file', 'checkbox'] as $type)
                                             <option
@@ -502,11 +495,16 @@
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="default-value"
-                                        value="{{ old('default-value') ?: $attribute->default_value }}"
+                                        name="default_value"
+                                        value="{{ old('default_value') ?: $attribute->default_value }}"
                                         :label="trans('admin::app.catalog.attributes.edit.default-value')"
                                     >
                                     </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="default_value"
+                                    >
+                                    </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
                             </div>
                         </div>
@@ -536,11 +534,6 @@
                                             class="cursor-pointer"
                                             v-model="validationType"
                                         >
-                                            <!-- Default Option -->
-                                            <option value="">
-                                                @lang('admin::app.catalog.attributes.edit.select')
-                                            </option>
-
                                             <!-- Here! All Needed types are defined -->
                                             @foreach(['number', 'email', 'decimal', 'url', 'regex'] as $type)
                                             <option value="{{ $type }}">
@@ -575,14 +568,24 @@
 
                                 <!-- Is Required -->
                                 <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] select-none">
+                                    @php
+                                        $selectedOption = old('is_required') ?? $attribute->is_required
+                                    @endphp
+
+                                    <x-admin::form.control-group.control
+                                        type="hidden"
+                                        name="is_required"
+                                        :value="(boolean) $selectedOption"
+                                    >
+                                    </x-admin::form.control-group.control>
+
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         name="is_required"
                                         id="is_required"
                                         for="is_required"
                                         value="1"
-                                        :checked="(boolean) $attribute->is_required"
-                                        :disabled="(boolean) !$attribute->is_required"
+                                        :checked="(boolean) $selectedOption"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -592,13 +595,6 @@
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-required')
                                     </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.control
-                                        type="hidden"
-                                        name="is_required"
-                                        :value="$attribute->is_required"
-                                    >
-                                    </x-admin::form.control-group.control>
                                 </x-admin::form.control-group>
 
                                 <!-- Is Unique -->

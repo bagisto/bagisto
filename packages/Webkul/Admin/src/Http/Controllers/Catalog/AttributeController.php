@@ -57,14 +57,21 @@ class AttributeController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'code'       => ['required', 'not_in:type,attribute_family_id', 'unique:attributes,code', new Code()],
-            'admin_name' => 'required',
-            'type'       => 'required',
+            'code'          => ['required', 'not_in:type,attribute_family_id', 'unique:attributes,code', new Code()],
+            'admin_name'    => 'required',
+            'type'          => 'required',
+            'default_value' => 'integer',
         ]);
+
+        $requestData =  request()->input();
+
+        if (! $requestData['default_value']) {
+            $requestData['default_value'] = Null;
+        }
 
         Event::dispatch('catalog.attribute.create.before');
 
-        $attribute = $this->attributeRepository->create(array_merge(request()->input()));
+        $attribute = $this->attributeRepository->create($requestData);
 
         Event::dispatch('catalog.attribute.create.after', $attribute);
 
@@ -108,14 +115,22 @@ class AttributeController extends Controller
     public function update($id)
     {
         $this->validate(request(), [
-            'code'       => ['required', 'unique:attributes,code,' . $id, new Code],
-            'admin_name' => 'required',
-            'type'       => 'required',
+            'code'          => ['required', 'unique:attributes,code,' . $id, new Code],
+            'admin_name'    => 'required',
+            'type'          => 'required',
+            'default_value' => 'integer',
         ]);
+
+
+        $requestData =  request()->input();
+
+        if (! $requestData['default_value']) {
+            $requestData['default_value'] = Null;
+        }
 
         Event::dispatch('catalog.attribute.update.before', $id);
 
-        $attribute = $this->attributeRepository->update(request()->all(), $id);
+        $attribute = $this->attributeRepository->update($requestData, $id);
 
         Event::dispatch('catalog.attribute.update.after', $attribute);
 

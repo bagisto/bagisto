@@ -141,11 +141,6 @@
                                             v-model="swatchType"
                                             @change="showSwatch=true"
                                         >
-                                            <!-- Default Option -->
-                                            <option value="">
-                                                @lang('admin::app.catalog.attributes.create.select')
-                                            </option>
-
                                             @foreach (['dropdown', 'color', 'image', 'text'] as $type)
                                                 <option value="{{ $type }}">
                                                     @lang('admin::app.catalog.attributes.create.option.' . $type)
@@ -412,14 +407,12 @@
                                         v-model="attributeType"
                                         @change="swatchAttribute=true"
                                     >
-                                        <!-- Default Option -->
-                                        <option value="">
-                                            @lang('admin::app.catalog.attributes.create.select')
-                                        </option>
-
                                         <!-- Here! All Needed types are defined -->
                                         @foreach(['text', 'textarea', 'price', 'boolean', 'select', 'multiselect', 'datetime', 'date', 'image', 'file', 'checkbox'] as $type)
-                                            <option value="{{ $type }}">
+                                            <option
+                                                value="{{ $type }}"
+                                                {{ $type === 'text' ? "selected" : '' }}
+                                            >
                                                 @lang('admin::app.catalog.attributes.create.'. $type)
                                             </option>
                                         @endforeach
@@ -491,11 +484,6 @@
                                         v-model="validationType"
                                         @change="inputValidation=true"
                                     >
-                                        <!-- Default Option -->
-                                        <option value="">
-                                            @lang('admin::app.catalog.attributes.create.select')
-                                        </option>
-
                                         <!-- Here! All Needed types are defined -->
                                         @foreach(['number', 'email', 'decimal', 'url', 'regex'] as $type)
                                             <option value="{{ $type }}">
