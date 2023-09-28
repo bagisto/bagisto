@@ -10,8 +10,10 @@ class SearchRepository extends ProductRepository
     use Sanitizer;
 
     /**
+     * Upload provided image
+     * 
      * @param  array  $data
-     * @return void
+     * @return string
      */
     public function uploadSearchImage($data)
     {

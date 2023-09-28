@@ -65,13 +65,8 @@
                     required
                 >
 
-                @if (core()->getConfigData('general.content.shop.image_search')) 
-                    <button
-                        type="button"
-                        class="icon-camera flex items-center absolute top-[10px] ltr:right-[12px] rtl:left-[12px] pr-3 text-[22px]"
-                        aria-label="Search"
-                    >
-                    </button>
+                @if (core()->getConfigData('general.content.shop.image_search'))
+                    @include('shop::search.images.index')
                 @endif
             </div>
         </form>
