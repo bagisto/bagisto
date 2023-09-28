@@ -190,7 +190,7 @@
 
             <input 
                 type="text" 
-                class="bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-lg block w-full px-[40px] py-[5px] leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 peer"
+                class="bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-lg block w-full px-[40px] py-[5px] leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:hover:border-gray-400  focus:border-gray-400  dark:focus:border-gray-400  dark:focus:border-gray-400 peer"
                 :class="{'border-gray-400': isDropdownOpen}"
                 placeholder="@lang('admin::app.components.layouts.header.mega-search.title')"
                 v-model.lazy="searchTerm"
