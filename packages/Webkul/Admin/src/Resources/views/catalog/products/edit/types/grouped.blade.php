@@ -43,7 +43,7 @@
                     item-key="id"
                 >
                     <template #item="{ element, index }">
-                        <div class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300 cursor-pointer">
+                        <div class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300 dark:border-gray-800 cursor-pointer">
                             <!-- Information -->
                             <div class="flex gap-[10px]">
                                 <!-- Drag Icon -->
