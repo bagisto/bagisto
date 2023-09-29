@@ -361,11 +361,13 @@
                             this.canReview = false;
                         })
                         .catch(error => {
-                            if (error.response.status == 422) {
-                                setErrors({'attachments': ["@lang('shop::app.products.view.reviews.failed-to-upload')"]});
-                            }
-                            
-                            this.$refs.reviewImages.removeFile();
+                            setErrors({'attachments': ["@lang('shop::app.products.view.reviews.failed-to-upload')"]});
+
+                            this.$refs.reviewImages.uploadedFiles.forEach(element => {
+                                setTimeout(() => {
+                                    this.$refs.reviewImages.removeFile();
+                                }, 0);
+                            });
                         });
                 },
 
