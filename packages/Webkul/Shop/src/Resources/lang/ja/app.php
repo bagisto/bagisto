@@ -66,6 +66,7 @@ return [
 
         'account' => [
             'home'      => 'ホーム',
+
             'profile'   => [
                 'title'                   => 'プロフィール',
                 'first-name'              => '名',
@@ -400,83 +401,89 @@ return [
     ],
 
     'products' => [
-        'reviews'                => 'レビュー',
-        'add-to-cart'            => 'カートに追加',
-        'add-to-compare'         => '比較に追加されました。',
-        'already-in-compare'     => 'アイテムはすでに比較に追加されています。',
-        'buy-now'                => '今すぐ購入',
-        'compare'                => '比較',
-        'rating'                 => '評価',
-        'title'                  => 'タイトル',
-        'comment'                => 'コメント',
-        'submit-review'          => 'レビューを投稿',
-        'customer-review'        => '顧客のレビュー',
-        'write-a-review'         => 'レビューを書く',
-        'stars'                  => 'スター',
-        'share'                  => '共有',
-        'empty-review'           => 'レビューが見つかりませんでした。最初のレビュアーになってください。',
-        'was-this-helpful'       => 'このレビューは役に立ちましたか？',
-        'load-more'              => 'もっと読み込む',
-        'add-image'              => '画像を追加',
-        'failed-to-upload'       => '画像のアップロードに失敗しました',
-        'description'            => '説明',
-        'additional-information' => '追加情報',
-        'submit-success'         => '正常に送信されました',
-        'something-went-wrong'   => '何かがうまくいかなかった',
-        'in-stock'               => '在庫あり',
-        'available-for-order'    => '注文可能',
-        'out-of-stock'           => '在庫切れ',
-        'related-product-title'  => '関連商品',
-        'up-sell-title'          => '他のおすすめ商品も見つけました！',
-        'new'                    => '新着',
-        'as-low-as'              => '最低価格',
-        'starting-at'            => '開始価格',
-        'name'                   => '名前',
-        'qty'                    => '数量',
-        'offers'                 => ':qty個購入で1個あたり:priceで購入し、:discount%を節約',
-        'tax-inclusive'          => 'すべての税金込み',
-
+        'prices' => [
+            'grouped' => [
+                'starting-at' => '最低価格',
+            ],
+    
+            'configurable' => [
+                'as-low-as' => '最低価格',
+            ],
+        ],
+    
         'sort-by' => [
-            'title'   => '並び替え',
+            'title'   => 'ソート順',
             'options' => [
-                'from-a-z'        => 'A-Z',
-                'from-z-a'        => 'Z-A',
+                'from-a-z'        => 'AからZへ',
+                'from-z-a'        => 'ZからAへ',
                 'latest-first'    => '新着順',
                 'oldest-first'    => '古い順',
                 'cheapest-first'  => '価格が安い順',
                 'expensive-first' => '価格が高い順',
             ],
         ],
-
+    
         'view' => [
             'type' => [
                 'configurable' => [
                     'select-options'       => 'オプションを選択してください',
                     'select-above-options' => '上記のオプションを選択してください',
                 ],
-
+    
                 'bundle' => [
                     'none' => 'なし',
                 ],
-
+    
                 'downloadable' => [
                     'samples' => 'サンプル',
                     'links'   => 'リンク',
                     'sample'  => 'サンプル',
                 ],
-
+    
                 'grouped' => [
                     'name' => '名前',
                 ],
             ],
-
+    
+            'gallery' => [
+                'thumbnail-image' => 'サムネイル画像',
+                'product-image'   => '商品画像',
+            ],
+    
             'reviews' => [
                 'cancel'      => 'キャンセル',
-                'success'     => 'レビューが正常に投稿されました。',
+                'rating'      => '評価',
+                'success'     => 'レビューが正常に送信されました。',
                 'attachments' => '添付ファイル',
+                'title'       => 'タイトル',
+                'comment'     => 'コメント',
+                'customer-review'        => '顧客レビュー',
+                'submit-review'          => 'レビューを送信',
+                'write-a-review'         => 'レビューを書く',
+                'empty-review'           => 'レビューが見つかりませんでした。最初のレビューアになってください。',
+                'load-more'              => 'もっと読み込む',
+                'failed-to-upload'       => '画像のアップロードに失敗しました',
+            ],
+    
+            'description'            => '説明',
+            'additional-information' => '追加情報',
+            'review'                 => 'レビュー',
+            'related-product-title'  => '関連製品',
+            'up-sell-title'          => '興味があるかもしれない他の製品を見つけました！',
+            'tax-inclusive'          => '税込み',
+            'add-to-cart'            => 'カートに追加',
+            'buy-now'                => '今すぐ購入',
+            'compare'                => '比較',
+            'add-to-compare'         => '製品が比較に追加されました。',
+            'already-in-compare'     => '製品はすでに比較に追加されています。',
+        ],
+    
+        'type' => [
+            'abstract' => [
+                'offers' => ':qty 個を :price で購入し、:discount% 節約',
             ],
         ],
-    ],
+    ],    
 
     'categories' => [
         'filters' => [
