@@ -88,7 +88,7 @@
                                     <x-admin::form.control-group.control
                                         type="text"
                                         :name="$locale->code . '[name]'"
-                                        :value="old($locale->code)"
+                                        :value="old($locale->code . '[name]')"
                                         :placeholder="$locale->name"
                                     >
                                     </x-admin::form.control-group.control>
@@ -141,11 +141,6 @@
                                             v-model="swatchType"
                                             @change="showSwatch=true"
                                         >
-                                            <!-- Default Option -->
-                                            <option value="">
-                                                @lang('admin::app.catalog.attributes.create.select')
-                                            </option>
-
                                             @foreach (['dropdown', 'color', 'image', 'text'] as $type)
                                                 <option value="{{ $type }}">
                                                     @lang('admin::app.catalog.attributes.create.option.' . $type)
@@ -383,7 +378,7 @@
                                             id="code"
                                             v-bind="field"
                                             :class="[errors['{{ 'code' }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                            class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                            class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:focus:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                             placeholder="{{ trans('admin::app.catalog.attributes.create.code') }}"
                                             v-code
                                         >
@@ -412,14 +407,12 @@
                                         v-model="attributeType"
                                         @change="swatchAttribute=true"
                                     >
-                                        <!-- Default Option -->
-                                        <option value="">
-                                            @lang('admin::app.catalog.attributes.create.select')
-                                        </option>
-
                                         <!-- Here! All Needed types are defined -->
                                         @foreach(['text', 'textarea', 'price', 'boolean', 'select', 'multiselect', 'datetime', 'date', 'image', 'file', 'checkbox'] as $type)
-                                            <option value="{{ $type }}">
+                                            <option
+                                                value="{{ $type }}"
+                                                {{ $type === 'text' ? "selected" : '' }}
+                                            >
                                                 @lang('admin::app.catalog.attributes.create.'. $type)
                                             </option>
                                         @endforeach
@@ -491,11 +484,6 @@
                                         v-model="validationType"
                                         @change="inputValidation=true"
                                     >
-                                        <!-- Default Option -->
-                                        <option value="">
-                                            @lang('admin::app.catalog.attributes.create.select')
-                                        </option>
-
                                         <!-- Here! All Needed types are defined -->
                                         @foreach(['number', 'email', 'decimal', 'url', 'regex'] as $type)
                                             <option value="{{ $type }}">

@@ -50,6 +50,12 @@
                 }
             },
 
+            watch: {
+                value() {
+                    this.quantity = this.value;
+                },
+            },
+
             methods: {
                 increase() {
                     this.$emit('change', ++this.quantity);

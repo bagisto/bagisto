@@ -123,7 +123,7 @@
             },
 
             methods: {
-                applyCoupon(params) {
+                applyCoupon(params, { resetForm }) {
                     this.$axios.post("{{ route('shop.api.checkout.cart.coupon.apply') }}", params)
                         .then((response) => {
                             this.$parent.$parent.getOrderSummary();
@@ -131,6 +131,8 @@
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
                             this.$refs.couponModel.toggle();
+
+                            resetForm();
                         })
                         .catch((error) => {
                             if ([400, 422].includes(error.response.request.status)) {

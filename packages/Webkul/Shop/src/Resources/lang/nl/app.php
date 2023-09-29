@@ -66,6 +66,7 @@ return [
 
         'account' => [
             'home'      => 'Home',
+
             'profile'   => [
                 'title'                   => 'Profiel',
                 'first-name'              => 'Voornaam',
@@ -399,45 +400,19 @@ return [
         ],
     ],
 
-    'products'  => [
-        'reviews'                => 'Beoordelingen',
-        'add-to-cart'            => 'Toevoegen aan winkelwagen',
-        'add-to-compare'         => 'Product toegevoegd aan vergelijking.',
-        'already-in-compare'     => 'Product staat al in vergelijking.',
-        'buy-now'                => 'Nu kopen',
-        'compare'                => 'Vergelijken',
-        'rating'                 => 'Beoordeling',
-        'title'                  => 'Titel',
-        'comment'                => 'Opmerking',
-        'submit-review'          => 'Beoordeling indienen',
-        'customer-review'        => 'Klantbeoordelingen',
-        'write-a-review'         => 'Schrijf een beoordeling',
-        'stars'                  => 'Sterren',
-        'share'                  => 'Delen',
-        'empty-review'           => 'Geen beoordelingen gevonden, wees de eerste om dit product te beoordelen',
-        'was-this-helpful'       => 'Was deze beoordeling nuttig?',
-        'load-more'              => 'Meer laden',
-        'add-image'              => 'Afbeelding toevoegen',
-        'failed-to-upload'       => 'De afbeelding kon niet worden geüpload',
-        'description'            => 'Beschrijving',
-        'additional-information' => 'Aanvullende informatie',
-        'submit-success'         => 'Succesvol ingediend',
-        'something-went-wrong'   => 'Er is iets misgegaan',
-        'in-stock'               => 'Op voorraad',
-        'available-for-order'    => 'Beschikbaar om te bestellen',
-        'out-of-stock'           => 'Niet op voorraad',
-        'related-product-title'  => 'Gerelateerde producten',
-        'up-sell-title'          => 'We hebben andere producten gevonden die je misschien leuk vindt!',
-        'new'                    => 'Nieuw',
-        'as-low-as'              => 'Vanaf',
-        'starting-at'            => 'Beginnend bij',
-        'name'                   => 'Naam',
-        'qty'                    => 'Aantal',
-        'offers'                 => 'Koop :qty voor :price per stuk en bespaar :discount%',
-        'tax-inclusive'          => 'Inclusief alle belastingen',
-
-        'sort-by'                => [
-            'title'   => 'Sorteer op',
+    'products' => [
+        'prices' => [
+            'grouped' => [
+                'starting-at' => 'Vanaf',
+            ],
+    
+            'configurable' => [
+                'as-low-as' => 'Zo laag als',
+            ],
+        ],
+    
+        'sort-by' => [
+            'title'   => 'Sorteren op',
             'options' => [
                 'from-a-z'        => 'Van A-Z',
                 'from-z-a'        => 'Van Z-A',
@@ -447,36 +422,68 @@ return [
                 'expensive-first' => 'Duurste eerst',
             ],
         ],
-
+    
         'view' => [
             'type' => [
                 'configurable' => [
                     'select-options'       => 'Selecteer een optie',
                     'select-above-options' => 'Selecteer bovenstaande opties',
                 ],
-
+    
                 'bundle' => [
                     'none' => 'Geen',
                 ],
-
+    
                 'downloadable' => [
                     'samples' => 'Voorbeelden',
                     'links'   => 'Links',
                     'sample'  => 'Voorbeeld',
                 ],
-
+    
                 'grouped' => [
                     'name' => 'Naam',
                 ],
             ],
-
+    
+            'gallery' => [
+                'thumbnail-image' => 'Miniatuurafbeelding',
+                'product-image'   => 'Productafbeelding',
+            ],
+    
             'reviews' => [
                 'cancel'      => 'Annuleren',
+                'rating'      => 'Beoordeling',
                 'success'     => 'Beoordeling succesvol ingediend.',
                 'attachments' => 'Bijlagen',
+                'title'       => 'Titel',
+                'comment'     => 'Opmerking',
+                'customer-review'        => 'Klantbeoordelingen',
+                'submit-review'          => 'Beoordeling indienen',
+                'write-a-review'         => 'Schrijf een beoordeling',
+                'empty-review'           => 'Geen beoordelingen gevonden, wees de eerste om dit product te beoordelen',
+                'load-more'              => 'Meer laden',
+                'failed-to-upload'       => 'De afbeelding kon niet worden geüpload',
+            ],
+    
+            'description'            => 'Beschrijving',
+            'additional-information' => 'Aanvullende informatie',
+            'review'                 => 'Beoordelingen',
+            'related-product-title'  => 'Gerelateerde producten',
+            'up-sell-title'          => 'We hebben andere producten gevonden die je misschien leuk vindt!',
+            'tax-inclusive'          => 'Inclusief alle belastingen',
+            'add-to-cart'            => 'Toevoegen aan winkelwagen',
+            'buy-now'                => 'Koop nu',
+            'compare'                => 'Vergelijk',
+            'add-to-compare'         => 'Product toegevoegd aan vergelijking.',
+            'already-in-compare'     => 'Product is al toegevoegd aan vergelijking.',
+        ],
+    
+        'type' => [
+            'abstract' => [
+                'offers' => 'Koop :qty voor :price per stuk en bespaar :discount%',
             ],
         ],
-    ],
+    ],    
 
     'categories' => [
         'filters' => [

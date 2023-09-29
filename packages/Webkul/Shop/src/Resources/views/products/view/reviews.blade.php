@@ -51,7 +51,7 @@
                         <div>
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="mt-[0] required">
-                                    @lang('shop::app.products.rating')
+                                    @lang('shop::app.products.view.reviews.rating')
                                 </x-shop::form.control-group.label>
 
                                 <x-shop::products.star-rating
@@ -59,7 +59,7 @@
                                     :value="old('rating') ?? 5"
                                     :disabled="false"
                                     rules="required"
-                                    :label="trans('shop::app.products.rating')"
+                                    :label="trans('shop::app.products.view.reviews.rating')"
                                 >
                                 </x-shop::products.star-rating>
 
@@ -71,7 +71,7 @@
 
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="required">
-                                    @lang('shop::app.products.title')
+                                    @lang('shop::app.products.view.reviews.title')
                                 </x-shop::form.control-group.label>
 
                                 <x-shop::form.control-group.control
@@ -79,8 +79,8 @@
                                     name="title"
                                     :value="old('title')"
                                     rules="required"
-                                    :label="trans('shop::app.products.title')"
-                                    :placeholder="trans('shop::app.products.title')"
+                                    :label="trans('shop::app.products.view.reviews.title')"
+                                    :placeholder="trans('shop::app.products.view.reviews.title')"
                                 >
                                 </x-shop::form.control-group.control>
 
@@ -92,7 +92,7 @@
 
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="required">
-                                    @lang('shop::app.products.comment')
+                                    @lang('shop::app.products.view.reviews.comment')
                                 </x-shop::form.control-group.label>
 
                                 <x-shop::form.control-group.control
@@ -101,8 +101,8 @@
                                     name="comment"
                                     :value="old('comment')"
                                     rules="required"
-                                    :label="trans('shop::app.products.comment')"
-                                    :placeholder="trans('shop::app.products.comment')"
+                                    :label="trans('shop::app.products.view.reviews.comment')"
+                                    :placeholder="trans('shop::app.products.view.reviews.comment')"
                                 >
                                 </x-shop::form.control-group.control>
 
@@ -118,7 +118,7 @@
                                     class="primary-button w-full max-w-[374px] py-[16px] px-[43px] rounded-[18px] text-center"
                                     type='submit'
                                 >
-                                    @lang('shop::app.products.submit-review')
+                                    @lang('shop::app.products.view.reviews.submit-review')
                                 </button>
                                 
                                 <button
@@ -145,7 +145,7 @@
                     <!-- Review Section Header -->
                     <div class="flex gap-[15px] items-center justify-between  max-sm:flex-wrap">
                         <h3 class="font-dmserif text-[30px] max-sm:text-[22px]">
-                            @lang('shop::app.products.customer-review')
+                            @lang('shop::app.products.view.reviews.customer-review')
                         </h3>
 
                         <div
@@ -154,7 +154,7 @@
                         >
                             <span class="icon-pen text-[24px]"></span>
 
-                            @lang('shop::app.products.write-a-review')
+                            @lang('shop::app.products.view.reviews.write-a-review')
                         </div>
                     </div>
 
@@ -166,7 +166,7 @@
                             <x-shop::products.star-rating :value="$avgRatings"></x-shop::products.star-rating>
 
                             <p class="text-[12px] text-[#858585]">
-                                (@{{ meta.total }} @lang('shop::app.products.customer-review'))
+                                (@{{ meta.total }} @lang('shop::app.products.view.reviews.customer-review'))
                             </p>
                         </div>
 
@@ -197,7 +197,7 @@
                             v-if="links?.next"
                             @click="get()"
                         >
-                            @lang('shop::app.products.load-more')
+                            @lang('shop::app.products.view.reviews.load-more')
                         </button>
                     </template>
 
@@ -207,7 +207,7 @@
                             <img class="" src="{{ bagisto_asset('images/review.png') }}" alt="" title="">
 
                             <p class="text-[20px]">
-                                @lang('shop::app.products.empty-review')
+                                @lang('shop::app.products.view.reviews.empty-review')
                             </p>
                         </div>
                     </template>
@@ -361,11 +361,13 @@
                             this.canReview = false;
                         })
                         .catch(error => {
-                            if (error.response.status == 422) {
-                                setErrors({'attachments': ["@lang('shop::app.products.failed-to-upload')"]});
-                            }
-                            
-                            this.$refs.reviewImages.removeFile();
+                            setErrors({'attachments': ["@lang('shop::app.products.view.reviews.failed-to-upload')"]});
+
+                            this.$refs.reviewImages.uploadedFiles.forEach(element => {
+                                setTimeout(() => {
+                                    this.$refs.reviewImages.removeFile();
+                                }, 0);
+                            });
                         });
                 },
 

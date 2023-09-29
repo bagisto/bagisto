@@ -21,12 +21,12 @@
                     </div>
                 </div>
 
-                <div class="flex flex-col justify-between max-w-max bg-white dark:bg-gray-900  rounded-[6px] box-shadow h-[calc(100vh-179px)]">
+                <div class="flex flex-col justify-between max-w-max bg-white dark:bg-gray-900 rounded-[6px] box-shadow h-[calc(100vh-179px)]">
                     <div class="">
-                        <div class="flex border-b-[1px] dark:border-gray-800   overflow-auto journal-scroll">
+                        <div class="flex border-b-[1px] dark:border-gray-800 overflow-auto journal-scroll">
                             <div
-                                class="flex py-[15px] px-[15px] gap-[4px] border-b-[2px] hover:bg-gray-100 dark:hover:bg-gray-950  cursor-pointer"
-                                :class="{'border-blue-600': status == data.status}"
+                                class="flex py-[15px] px-[15px] gap-[4px] border-b-[2px] dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
+                                :class="{'border-blue-600 dark:border-blue-600': status == data.status}"
                                 ref="tabs"
                                 v-for="data in orderType"
                                 @click="status = data.status; getNotification()"
@@ -88,14 +88,14 @@
                     <!-- Pagination -->
                     <div class="flex gap-x-[8px] items-center p-[24px] border-t-[1px] dark:border-gray-800  ">
                         <div
-                            class="inline-flex gap-x-[4px] items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 py-[6px] px-[8px] leading-[24px] text-center w-full max-w-max bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400 max-sm:hidden" v-text="pagination.per_page"
+                            class="inline-flex gap-x-[4px] items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 py-[6px] px-[8px] leading-[24px] text-center w-full max-w-max bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black max-sm:hidden" v-text="pagination.per_page"
                         >
                         </div>
 
-                        <span class="text-gray-600 dark:text-gray-300  whitespace-nowrap">of</span>
+                        <span class="text-gray-600 dark:text-gray-300 whitespace-nowrap">of</span>
 
                         <p
-                            class="text-gray-600 dark:text-gray-300  whitespace-nowrap"
+                            class="text-gray-600 dark:text-gray-300 whitespace-nowrap"
                             v-text="pagination.current_page"
                         >
                         </p>
@@ -103,14 +103,14 @@
                         <!-- Prev & Next Page Button -->
                         <div class="flex gap-[4px] items-center">
                             <a @click="getResults()">
-                                <div class="inline-flex gap-x-[4px] items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 p-[6px] text-center w-full max-w-max bg-white dark:bg-gray-900  border rounded-[6px] dark:border-gray-800   cursor-pointer transition-all hover:border hover:bg-gray-100 dark:hover:bg-gray-950  marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
+                                <div class="inline-flex gap-x-[4px] items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 p-[6px] text-center w-full max-w-max bg-white dark:bg-gray-900 border rounded-[6px] dark:border-gray-800 cursor-pointer transition-all hover:border hover:bg-gray-100 dark:hover:bg-gray-950 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
                                     <span class="icon-sort-left text-[24px]"></span>
                                 </div>
                             </a>
 
                             <a @click="getResults(pagination.last_page)">
                                 <div
-                                    class="inline-flex gap-x-[4px] items-center justify-between text-gray-600 dark:text-gray-300 p-[6px] text-center w-full max-w-max rounded-[6px] border border-transparent cursor-pointer transition-all active:border-gray-300 hover:bg-gray-100 dark:hover:bg-gray-950  marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
+                                    class="inline-flex gap-x-[4px] items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 p-[6px] text-center w-full max-w-max bg-white dark:bg-gray-900 border rounded-[6px] dark:border-gray-800 cursor-pointer transition-all hover:border hover:bg-gray-100 dark:hover:bg-gray-950 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
                                     <span class="icon-sort-right text-[24px]"></span>
                                 </div>
                             </a>

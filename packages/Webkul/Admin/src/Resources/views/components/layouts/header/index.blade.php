@@ -190,7 +190,7 @@
 
             <input 
                 type="text" 
-                class="bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-lg block w-full px-[40px] py-[5px] leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 peer"
+                class="bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-lg block w-full px-[40px] py-[5px] leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:hover:border-gray-400  focus:border-gray-400  dark:focus:border-gray-400  dark:focus:border-gray-400 peer"
                 :class="{'border-gray-400': isDropdownOpen}"
                 placeholder="@lang('admin::app.components.layouts.header.mega-search.title')"
                 v-model.lazy="searchTerm"
@@ -231,13 +231,15 @@
                                 <div class="flex gap-[10px]">
                                     <!-- Image -->
                                     <div
-                                        class="w-full h-[46px] max-w-[46px] max-h-[46px] relative rounded-[4px] overflow-hidden"
-                                        :class="{'border border-dashed dark:border-gray-800  ': ! product.images.length}"
+                                        class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px] overflow-hidden"
+                                        :class="{'border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion overflow-hidden': ! product.images.length}"
                                     >
                                         <template v-if="! product.images.length">
                                             <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                         
-                                            <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">Product Image</p>
+                                            <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
+                                                @lang('admin::app.catalog.products.edit.types.grouped.image-placeholder')
+                                            </p>
                                         </template>
 
                                         <template v-else>
@@ -373,7 +375,7 @@
                         <div class="grid max-h-[400px] overflow-y-auto">
                             <a
                                 :href="'{{ route('admin.customers.customers.view', ':id') }}'.replace(':id', customer.id)"
-                                class="grid gap-[6px] place-content-start p-[16px] border-b-[1px] border-slate-300 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950  last:border-b-0"
+                                class="grid gap-[6px] place-content-start p-[16px] border-b-[1px] border-slate-300 dark:border-gray-800 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950  last:border-b-0"
                                 v-for="customer in searchedResults.customers.data"
                             >
                                 <p class="text-[16x] text-gray-600 dark:text-gray-300 font-semibold">
