@@ -6,27 +6,31 @@
 
     <div class="grid">
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-            <p class="text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
-                {{ $customer->first_name . " " . $customer->last_name }}
+            <div class="flex gap-[10px] items-center">
+                <p class="text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
+                    {{ $customer->first_name . " " . $customer->last_name }}
+                </p>
+                
+                <div>
+                    {{-- Customer Status --}}
+                    @if ($customer->status == 1)
+                        <span class="label-active text-[14px] mx-[5px]">
+                            @lang('admin::app.customers.customers.view.active')
+                        </span>
+                    @else    
+                        <span class="label-cancelled text-[14px] mx-[5px]">
+                            @lang('admin::app.customers.customers.view.inactive')
+                        </span>
+                    @endif
 
-                {{-- Customer Status --}}
-                @if ($customer->status == 1)
-                    <span class="label-active text-[14px] mx-[5px]">
-                        @lang('admin::app.customers.customers.view.active')
-                    </span>
-                @else    
-                    <span class="label-cancelled text-[14px] mx-[5px]">
-                        @lang('admin::app.customers.customers.view.inactive')
-                    </span>
-                @endif
-
-                {{-- Customer Suspended Status --}}
-                @if ($customer->is_suspended == 1)
-                    <span class="label-pending text-[14px]">
-                        @lang('admin::app.customers.customers.view.suspended')
-                    </span>
-                @endif
-            </p>
+                    {{-- Customer Suspended Status --}}
+                    @if ($customer->is_suspended == 1)
+                        <span class="label-cancelled text-[14px]">
+                            @lang('admin::app.customers.customers.view.suspended')
+                        </span>
+                    @endif
+                </div>
+            </div>    
 
             {{-- Back Button --}}
             <a
