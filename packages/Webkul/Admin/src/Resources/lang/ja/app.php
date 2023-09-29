@@ -2597,6 +2597,7 @@ return [
                 'back'                          => '戻る',
                 'preview'                       => 'プレビュー',
                 'channels'                      => 'チャンネル',
+                'image-size'                    => '画像の解像度は(1920px X 700px)である必要があります。',
             ],
 
             'create-success' => 'テーマは正常に作成されました',

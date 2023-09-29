@@ -2597,6 +2597,7 @@ return [
                 'back'                          => 'Voltar',
                 'preview'                       => 'Prévia',
                 'channels'                      => 'Canais',
+                'image-size'                    => 'A resolução da imagem deve ser (1920px X 700px).',
             ],
 
             'create-success' => 'Tema criado com sucesso',

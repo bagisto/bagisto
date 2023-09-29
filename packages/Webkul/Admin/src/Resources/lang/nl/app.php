@@ -2597,6 +2597,7 @@ return [
                 'back'                          => 'Terug',
                 'preview'                       => 'Voorbeeld',
                 'channels'                      => 'kanalen',
+                'image-size'                    => 'De afbeeldingsresolutie moet (1920px X 700px) zijn.',
             ],
 
             'create-success' => 'Thema succesvol aangemaakt',
