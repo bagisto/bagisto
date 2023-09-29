@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Webkul\Admin\Http\Controllers\DashboardController;
+use Webkul\Admin\Http\Controllers\DataGridController;
 use Webkul\Admin\Http\Controllers\TinyMCEController;
 use Webkul\Admin\Http\Controllers\User\AccountController;
 use Webkul\Admin\Http\Controllers\User\SessionController;
@@ -14,6 +15,11 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
      * Dashboard routes.
      */
     Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard.index');
+
+    /**
+     * Datagrid routes.
+     */
+    Route::get('datagrid/look-up', [DataGridController::class, 'lookUp'])->name('admin.datagrid.look_up');
 
     /**
      * Tinymce file upload handler.

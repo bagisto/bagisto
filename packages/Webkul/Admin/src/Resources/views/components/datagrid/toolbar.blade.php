@@ -16,7 +16,7 @@
                     <!-- Dropdown Toggler -->
                     <x-slot:toggle>
                         <button
-                            type="button" 
+                            type="button"
                             class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border dark:border-gray-800   bg-white dark:bg-gray-900  px-[10px] py-[6px] text-center leading-[24px] text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400  focus:border-gray-400  dark:focus:border-gray-400  focus:ring-black"
                         >
                             <span>
@@ -57,7 +57,7 @@
                                         <a
                                             class="whitespace-no-wrap block rounded-t px-4 py-2 text-[14px] text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-950 "
                                             href="javascript:void(0);"
-                                            v-text="option.name"
+                                            v-text="option.label"
                                             @click="performMassAction(massAction, option)"
                                         >
                                         </a>
@@ -173,7 +173,7 @@
                     <!-- Dropdown Toggler -->
                     <x-slot:toggle>
                         <button
-                            type="button" 
+                            type="button"
                             class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border dark:border-gray-800   bg-white dark:bg-gray-900  px-[10px] py-[6px] text-center leading-[24px] text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400  focus:border-gray-400  dark:focus:border-gray-400 "
                         >
                             <span v-text="applied.pagination.perPage"></span>

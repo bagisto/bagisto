@@ -227,7 +227,7 @@ return [
                 'processing'            => 'Procesando',
                 'canceled'              => 'Cancelado',
                 'closed'                => 'Cerrado',
-                'completed'             => 'Completado'
+                'completed'             => 'Completado',
             ],
         ],
 
@@ -938,7 +938,7 @@ return [
                 'value-per-locale'       => 'Valor por Localización',
                 'value-per-channel'      => 'Valor por Canal',
                 'yes'                    => 'Sí',
-                'default-value'         => 'Valor predeterminado',
+                'default-value'          => 'Valor predeterminado',
 
                 'option'                 => [
                     'color'     => 'Muestra de Color',
@@ -1263,7 +1263,7 @@ return [
                 'title'                       => 'Vista del Cliente',
                 'note-placeholder'            => 'Escribe tu Nota aquí',
                 'order-pending'               => 'No se puede eliminar la cuenta porque algunos pedidos están pendientes o en estado de procesamiento.',
-                'account-delete-confirmation' =>'¿Estás seguro de que deseas eliminar esta cuenta?',
+                'account-delete-confirmation' => '¿Estás seguro de que deseas eliminar esta cuenta?',
                 'address-delete-confirmation' => '¿Estás seguro de que quieres eliminar esta dirección?',
             ],
         ],
@@ -1893,7 +1893,7 @@ return [
                 'delete-success'              => 'Cupón de regla del carrito eliminado con éxito',
                 'mass-delete-success'         => 'Elementos seleccionados eliminados con éxito',
                 'success'                     => ':name creado con éxito',
-            
+
                 'datagrid' => [
                     'coupon-code'     => 'Código de cupón',
                     'created-date'    => 'Fecha de creación',
@@ -1986,19 +1986,19 @@ return [
         ],
 
         'edit' => [
-            'title'            => 'Editar Página',
-            'preview-btn'      => 'Vista Previa de la Página',
-            'save-btn'         => 'Guardar Página',
-            'general'          => 'General',
-            'page-title'       => 'Título de la Página',
-            'back-btn'         => 'Volver',
-            'channels'         => 'Canales',
-            'content'          => 'Contenido',
-            'seo'              => 'SEO',
-            'meta-keywords'    => 'Meta Palabras Clave',
-            'meta-description' => 'Meta Descripción',
-            'meta-title'       => 'Meta Título',
-            'url-key'          => 'Clave de URL',
+            'title'             => 'Editar Página',
+            'preview-btn'       => 'Vista Previa de la Página',
+            'save-btn'          => 'Guardar Página',
+            'general'           => 'General',
+            'page-title'        => 'Título de la Página',
+            'back-btn'          => 'Volver',
+            'channels'          => 'Canales',
+            'content'           => 'Contenido',
+            'seo'               => 'SEO',
+            'meta-keywords'     => 'Meta Palabras Clave',
+            'meta-description'  => 'Meta Descripción',
+            'meta-title'        => 'Meta Título',
+            'url-key'           => 'Clave de URL',
             'description'       => 'Descripción',
         ],
 
@@ -2464,7 +2464,7 @@ return [
             'delete-warning'     => '¿Estás seguro de que quieres realizar esta acción?',
             'login-error'        => 'Por favor, verifica tus credenciales e intenta nuevamente.',
             'activate-warning'   => 'Tu cuenta aún no ha sido activada, por favor, contacta al administrador.',
-            'last-delete-error'  => 'Error al eliminar el último usuario.'
+            'last-delete-error'  => 'Error al eliminar el último usuario.',
         ],
 
         'roles' => [
@@ -2593,10 +2593,10 @@ return [
                 'add-link'                      => 'Agregar Enlace',
                 'column'                        => 'Columna',
                 'path'                           => 'Ruta',
-                'edit'                          => 'Editar',
-                'back'                          => 'Volver',
-                'preview'                       => 'Vista previa',
-                'channels'                      => 'Canales',
+                'edit'                           => 'Editar',
+                'back'                           => 'Volver',
+                'preview'                        => 'Vista previa',
+                'channels'                       => 'Canales',
             ],
 
             'create-success' => 'Tema creado exitosamente',
@@ -3160,11 +3160,24 @@ return [
             ],
 
             'filters' => [
-                'title' => 'Aplicar Filtros',
+                'title'  => 'Aplicar Filtros',
+                'select' => 'Seleccionar.',
+
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'Escribe al menos 2 caracteres...',
+                        'no-results'        => 'No se encontraron resultados...',
+                    ],
+                ],
 
                 'custom-filters' => [
                     'title'     => 'Filtros Personalizados',
                     'clear-all' => 'Limpiar Todo',
+                ],
+
+                'boolean-options' => [
+                    'true'  => 'Verdadero',
+                    'false' => 'Falso',
                 ],
 
                 'date-options' => [

@@ -4,7 +4,7 @@ return [
     'customers' => [
         'forgot-password' => [
             'back'                 => 'Zurück zur Anmeldung?',
-            'email-not-exist'      => "Wir konnten keinen Benutzer mit dieser E-Mail-Adresse finden.",
+            'email-not-exist'      => 'Wir konnten keinen Benutzer mit dieser E-Mail-Adresse finden.',
             'email'                => 'E-Mail',
             'forgot-password-text' => 'Wenn Sie Ihr Passwort vergessen haben, stellen Sie es wieder her, indem Sie Ihre E-Mail-Adresse eingeben.',
             'footer'               => '© Copyright 2010 - 2022, Webkul Software (in Indien registriert). Alle Rechte vorbehalten.',
@@ -257,7 +257,7 @@ return [
                 'delete-all'         => 'Alle löschen',
                 'empty'              => 'Es wurden keine Produkte zur Wunschliste hinzugefügt.',
                 'move-to-cart'       => 'In den Warenkorb legen',
-                'moved-success'      => 'Artikel erfolgreich in den Warenkorb verschoben',    
+                'moved-success'      => 'Artikel erfolgreich in den Warenkorb verschoben',
                 'moved'              => 'Artikel erfolgreich in den Warenkorb verschoben',
                 'page-title'         => 'Wunschliste',
                 'profile'            => 'Profil',
@@ -278,15 +278,15 @@ return [
             'default-content' => 'Standardinhalt',
             'default-header'  => 'Standardüberschrift',
         ],
-        
+
         'drawer' => [
-           'default-toggle'  => 'Standardumschaltung',
+            'default-toggle'  => 'Standardumschaltung',
         ],
-        
+
         'media' => [
             'add-attachments' => 'Anhänge hinzufügen',
         ],
-        
+
         'layouts' => [
             'header' => [
                 'account'       => 'Konto',
@@ -345,6 +345,13 @@ return [
             'filters' => [
                 'title' => 'Filter anwenden',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'Mindestens 2 Zeichen eingeben...',
+                        'no-results'        => 'Keine Ergebnisse gefunden...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'clear-all' => 'Alles löschen',
                     'title'     => 'Benutzerdefinierte Filter',
@@ -367,7 +374,7 @@ return [
                 'no-records-available' => 'Keine Datensätze verfügbar.',
             ],
         ],
-        
+
         'modal' => [
             'default-content' => 'Standardinhalt',
             'default-header'  => 'Standardüberschrift',
