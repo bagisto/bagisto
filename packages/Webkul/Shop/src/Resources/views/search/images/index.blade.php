@@ -8,10 +8,6 @@
 </v-image-search>
 
 @pushOnce('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/tensorflow-models-mobilenet-patch@2.1.1/dist/mobilenet.min.js"></script>
-
     <script type="text/x-template" id="v-image-search-template">
         <div>
             <label
@@ -57,7 +53,7 @@
                 class="hidden"
                 ref="imageSearchInput"
                 id="v-image-search"
-                @change="analyzeImage()"
+                @change="loadLibrary()"
             />
 
             <img
@@ -85,9 +81,28 @@
 
             methods: {
                 /**
+                 * This method will dynamically load the scripts. Because image search library
+                 * only used when someone clicks or interact with the image button. This will
+                 * reduce some data usage for mobile user.
+                 * 
+                 * @return {void}
+                 */
+                loadLibrary() {
+                    this.$shop.loadDynamicScript(
+                        'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js', () => {
+                            this.$shop.loadDynamicScript(
+                                'https://cdn.jsdelivr.net/npm/tensorflow-models-mobilenet-patch@2.1.1/dist/mobilenet.min.js', () => {
+                                    this.analyzeImage();
+                                }
+                            );
+                        }
+                    );
+                },
+
+                /**
                  * This method will analyze the image and load the sets on the bases of trained model.
                  * 
-                 * @return void
+                 * @return {void}
                  */
                 analyzeImage() {
                     this.isSearching = true;
@@ -163,8 +178,8 @@
                             this.$emitter.emit('add-flash', { type: 'error', message: '@lang('shop::app.search.images.index.only-images-allowed')'});
                         }
                     }
-                }
-            }
-        })
+                },
+            },
+        });
     </script>
 @endPushOnce
