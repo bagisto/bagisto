@@ -156,6 +156,7 @@ return [
                     'status'           => 'ස්ථානය',
                     'success'          => 'සාර්ථකයි',
                     'view'             => 'දර්ශකයට',
+                    'product-count'    => ':count + වැඩි නිෂ්පාදන'
                 ],
             ],
 

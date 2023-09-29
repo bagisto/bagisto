@@ -156,6 +156,7 @@ return [
                     'status'           => 'Durum',
                     'success'          => 'Başarılı',
                     'view'             => 'Görüntüle',
+                    'product-count'    => ':count + Daha Fazla Ürün'
                 ],
             ],
 
