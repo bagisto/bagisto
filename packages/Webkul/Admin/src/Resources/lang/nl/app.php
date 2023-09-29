@@ -156,6 +156,7 @@ return [
                     'status'           => 'Status',
                     'success'          => 'Succes',
                     'view'             => 'Bekijken',
+                    'product-count'    => ':count + Meer producten'
                 ],
             ],
 
@@ -2463,7 +2464,7 @@ return [
             'delete-warning'     => 'Weet u zeker dat u deze actie wilt uitvoeren?',
             'login-error'        => 'Controleer uw inloggegevens en probeer het opnieuw.',
             'activate-warning'   => 'Uw account is nog niet geactiveerd, neem contact op met de beheerder.',
-            'last-delete-error'  => 'Laatste gebruiker kon niet worden verwijderd.'
+            'last-delete-error'  => 'Laatste gebruiker kon niet worden verwijderd.',
         ],
 
         'roles' => [
@@ -3159,11 +3160,24 @@ return [
             ],
 
             'filters' => [
-                'title' => 'Filters Toepassen',
+                'title'  => 'Filters Toepassen',
+                'select' => 'Selecteren.',
+
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'Typ minimaal 2 tekens...',
+                        'no-results'        => 'Geen resultaten gevonden...',
+                    ],
+                ],
 
                 'custom-filters' => [
                     'title'     => 'Aangepaste Filters',
                     'clear-all' => 'Alles Wissen',
+                ],
+
+                'boolean-options' => [
+                    'true'  => 'Waar',
+                    'false' => 'Onwaar',
                 ],
 
                 'date-options' => [

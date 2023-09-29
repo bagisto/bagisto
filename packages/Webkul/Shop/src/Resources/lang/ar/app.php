@@ -345,6 +345,13 @@ return [
             'filters' => [
                 'title'          => 'تطبيق الفلاتر',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'اكتب ما لا يقل عن حرفين...',
+                        'no-results'        => 'لم يتم العثور على نتائج...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'clear-all' => 'امسح الكل',
                     'title'     => 'تصفيات مخصصة',
@@ -555,7 +562,7 @@ return [
             'suspended-account-message' => 'تم تعليق حسابك.',
             'select-hourly-duration'    => 'حدد مدة الفترة بساعة واحدة.',
             'success-remove'            => 'تمت إزالة العنصر بنجاح من السلة.',
-        
+
             'index' => [
                 'cart'                     => 'عربة التسوق',
                 'continue-shopping'        => 'متابعة التسوق',
@@ -576,7 +583,7 @@ return [
                 'update-cart'              => 'تحديث عربة التسوق',
                 'view-cart'                => 'عرض عربة التسوق',
             ],
-            
+
             'coupon'   => [
                 'applied'         => 'تم تطبيق الكوبون',
                 'apply'           => 'تطبيق الكوبون',
@@ -592,7 +599,7 @@ return [
                 'success-apply'   => 'تم تطبيق كود الكوبون بنجاح.',
                 'subtotal'        => 'المجموع الفرعي',
             ],
-            
+
             'mini-cart' => [
                 'continue-to-checkout' => 'متابعة للسداد',
                 'empty-cart'           => 'سلة التسوق الخاصة بك فارغة',
@@ -603,7 +610,7 @@ return [
                 'subtotal'             => 'المجموع الفرعي',
                 'view-cart'            => 'عرض عربة التسوق',
             ],
-            
+
             'summary' => [
                 'cart-summary'        => 'ملخص السلة',
                 'delivery-charges'    => 'رسوم التوصيل',
@@ -614,7 +621,7 @@ return [
                 'sub-total'           => 'المجموع الفرعي',
                 'tax'                 => 'الضريبة',
             ],
-        ],            
+        ],
 
         'onepage' => [
             'addresses' => [
@@ -637,11 +644,11 @@ return [
                     'save-address'         => 'حفظ هذا العنوان',
                     'telephone'            => 'رقم الهاتف',
                 ],
-        
+
                 'index' => [
                     'confirm' => 'تأكيد',
                 ],
-        
+
                 'shipping' => [
                     'add-new-address'  => 'إضافة عنوان جديد',
                     'back'             => 'رجوع',
@@ -662,7 +669,7 @@ return [
                     'telephone'        => 'رقم الهاتف',
                 ],
             ],
-        
+
             'coupon' => [
                 'applied'         => 'تم تطبيق الكوبون',
                 'applied-coupon'  => 'الكوبون المُطبق',
@@ -676,20 +683,20 @@ return [
                 'sub-total'       => 'المجموع الفرعي',
                 'subtotal'        => 'المجموع الفرعي',
             ],
-        
+
             'index' => [
                 'checkout' => 'الدفع',
                 'home'     => 'الصفحة الرئيسية',
             ],
-        
+
             'payment' => [
                 'payment-method' => 'طريقة الدفع',
             ],
-        
+
             'shipping' => [
                 'shipping-method' => 'طريقة الشحن',
             ],
-        
+
             'summary' => [
                 'cart-summary'     => 'ملخص السلة',
                 'delivery-charges' => 'رسوم التوصيل',

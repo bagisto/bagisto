@@ -257,7 +257,7 @@ return [
                 'delete-all'         => 'Tout supprimer',
                 'empty'              => 'Aucun produit n\'a été ajouté à la liste de souhaits.',
                 'move-to-cart'       => 'Déplacer vers le panier',
-                'moved-success'      => 'Article déplacé avec succès dans le panier',    
+                'moved-success'      => 'Article déplacé avec succès dans le panier',
                 'moved'              => 'Article déplacé avec succès dans le panier',
                 'page-title'         => 'Liste de souhaits',
                 'profile'            => 'Profil',
@@ -278,15 +278,15 @@ return [
             'default-content' => 'Contenu par défaut',
             'default-header'  => 'En-tête par défaut',
         ],
-        
+
         'drawer' => [
-           'default-toggle'  => 'Basculer par défaut',
+            'default-toggle'  => 'Basculer par défaut',
         ],
-        
+
         'media' => [
             'add-attachments' => 'Ajouter des pièces jointes',
         ],
-        
+
         'layouts' => [
             'header' => [
                 'title'         => 'Compte',
@@ -345,6 +345,13 @@ return [
             'filters' => [
                 'title' => 'Appliquer des filtres',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'Tapez au moins 2 caractères...',
+                        'no-results'        => 'Aucun résultat trouvé...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'title'     => 'Filtres personnalisés',
                     'clear-all' => 'Tout effacer',
@@ -371,7 +378,7 @@ return [
         'modal' => [
             'default-content' => 'Contenu par défaut',
             'default-header'  => 'En-tête par défaut',
-            
+
             'confirm' => [
                 'title'        => 'Êtes-vous sûr ?',
                 'message'      => 'Êtes-vous sûr de vouloir effectuer cette action ?',

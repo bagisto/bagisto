@@ -3,6 +3,7 @@
 namespace Webkul\Admin\DataGrids\Catalog;
 
 use Illuminate\Support\Facades\DB;
+use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Models\Locale;
 use Webkul\DataGrid\DataGrid;
@@ -12,15 +13,19 @@ use Webkul\Product\Repositories\ProductRepository;
 class ProductDataGrid extends DataGrid
 {
     /**
-     * Constructor for the class
+     * Primary column.
      *
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
-     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySourceRepository
-     * @return void
+     * @var string
      */
     protected $primaryColumn = 'product_id';
 
+    /**
+     * Constructor for the class.
+     *
+     * @return void
+     */
     public function __construct(
+        protected AttributeFamilyRepository $attributeFamilyRepository,
         protected ProductRepository $productRepository,
         protected InventorySourceRepository $inventorySourceRepository
     ) {
@@ -98,7 +103,7 @@ class ProductDataGrid extends DataGrid
     }
 
     /**
-     * Add columns.
+     * Prepare columns.
      *
      * @return void
      */
@@ -122,10 +127,35 @@ class ProductDataGrid extends DataGrid
             'sortable'   => true,
         ]);
 
+        /**
+         * Searchable dropdown sample,
+         *
+         * [
+         *    'type'       => 'dropdown',
+         *      'options'    => [
+         *          'type'  => 'searchable',
+         *          'params'=> [
+         *              'repository' => \Webkul\Attribute\Repositories\AttributeRepository::class,
+         *
+         *              'column' => [
+         *                  'label' => 'code',
+         *                  'value' => 'code',
+         *              ],
+         *          ],
+         *      ],
+         * ]
+         */
         $this->addColumn([
             'index'      => 'attribute_family',
             'label'      => trans('admin::app.catalog.products.index.datagrid.attribute-family'),
-            'type'       => 'string',
+            'type'       => 'dropdown',
+            'options'    => [
+                'type' => 'basic',
+
+                'params' => [
+                    'options' => $this->attributeFamilyRepository->all(['name as label', 'name'])->toArray(),
+                ],
+            ],
             'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
@@ -240,11 +270,11 @@ class ProductDataGrid extends DataGrid
                 'method'  => 'POST',
                 'options' => [
                     [
-                        'name' => trans('admin::app.catalog.products.index.datagrid.active'),
+                        'label' => trans('admin::app.catalog.products.index.datagrid.active'),
                         'value' => 1,
                     ],
                     [
-                        'name' => trans('admin::app.catalog.products.index.datagrid.disable'),
+                        'label' => trans('admin::app.catalog.products.index.datagrid.disable'),
                         'value' => 0,
                     ],
                 ],

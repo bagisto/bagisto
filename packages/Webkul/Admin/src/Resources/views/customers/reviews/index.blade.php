@@ -343,7 +343,7 @@
                                     </div>
                 
                                     <div class="w-full">
-                                        <p class="block text-[12px]  text-gray-600 dark:text-gray-300 font-semibold leading-[24px]">
+                                        <p class="block text-[12px] text-gray-600 dark:text-gray-300 font-semibold leading-[24px]">
                                             @lang('admin::app.customers.reviews.index.edit.review-comment')     
                                         </p>
 
@@ -362,7 +362,7 @@
                                             @lang('admin::app.customers.reviews.index.edit.images')     
                                         </x-admin::form.control-group.label>
                                     
-                                        <div class="flex gap-4">
+                                        <div class="flex flex-wrap gap-4">
                                             <div v-for="image in review.images" :key="image.id">
                                                 <img
                                                     v-if="image.type === 'image'"
@@ -380,7 +380,7 @@
                                                     <source
                                                         :src="image.url"
                                                         type="video/mp4"
-                                                    ></source>
+                                                    >
                                                 </video>
                                             </div>
                                         </div>

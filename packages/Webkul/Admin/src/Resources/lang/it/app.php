@@ -156,6 +156,7 @@ return [
                     'status'          => 'Stato',
                     'success'         => 'Successo',
                     'view'            => 'Vedi',
+                    'product-count'   => ':count + Altri prodotti'
                 ],
             ],
 
@@ -2463,7 +2464,7 @@ return [
             'delete-warning'     => 'Sei sicuro di voler eseguire questa azione?',
             'login-error'        => 'Controlla le tue credenziali e riprova.',
             'activate-warning'   => 'Il tuo account non è ancora attivato, contatta l\'amministratore.',
-            'last-delete-error'  => 'Eliminazione dell\'ultimo utente non riuscita.'
+            'last-delete-error'  => 'Eliminazione dell\'ultimo utente non riuscita.',
         ],
 
         'roles' => [
@@ -3159,11 +3160,24 @@ return [
             ],
 
             'filters' => [
-                'title' => 'Applica Filtri',
+                'title'  => 'Applica Filtri',
+                'select' => 'Seleziona.',
+
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'Digita almeno 2 caratteri...',
+                        'no-results'        => 'Nessun risultato trovato...',
+                    ],
+                ],
 
                 'custom-filters' => [
                     'title'     => 'Filtri Personalizzati',
                     'clear-all' => 'Cancella Tutto',
+                ],
+
+                'boolean-options' => [
+                    'true'  => 'Vero',
+                    'false' => 'Falso',
                 ],
 
                 'date-options' => [

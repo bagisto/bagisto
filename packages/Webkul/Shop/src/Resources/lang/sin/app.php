@@ -257,7 +257,7 @@ return [
                 'delete-all'         => 'සියල්ල ඉවත් කරන්න',
                 'empty'              => 'රේඩයට කිසිදු නිෂ්පාදනයක් එකතු කර නැත.',
                 'move-to-cart'       => 'කරතමට ගෙන යන්න',
-                'moved-success'      => 'අයිතමය සාර්ථකව කරට ගෙන ඇත',    
+                'moved-success'      => 'අයිතමය සාර්ථකව කරට ගෙන ඇත',
                 'moved'              => 'අයිතකය සාර්ථකව කරතමට ගෙන යන ලදි',
                 'page-title'         => 'රේඩය',
                 'profile'            => 'පැතිකඩ',
@@ -278,15 +278,15 @@ return [
             'default-content' => 'පෙරනිමැති අන්තරජනනීයය',
             'default-header'  => 'පෙරනිමැති ශීර්ෂය',
         ],
-        
+
         'drawer' => [
-           'default-toggle'  => 'පෙරනිමැති ස්ථවාදය',
+            'default-toggle'  => 'පෙරනිමැති ස්ථවාදය',
         ],
-        
+
         'media' => [
             'add-attachments' => 'ඇණවුම් එකතු කරන්න',
         ],
-        
+
         'layouts' => [
             'header' => [
                 'title'         => 'ගිණුම',
@@ -345,6 +345,13 @@ return [
             'filters' => [
                 'title' => 'පෙරදසුන් අයදුම් කිරීම',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'අයක්කු අකුරු 2 කට ටයිප් කරන්න...',
+                        'no-results'        => 'කිසිද ප්‍රතිඵලයක් හමු නොවීය...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'title'     => 'අභියස පෙරදසුන්',
                     'clear-all' => 'සියලුමයි ඉවත් කරන්න',
@@ -371,14 +378,14 @@ return [
         'modal' => [
             'default-content' => 'පෙරනිමැති අන්තරජනනීයය',
             'default-header'  => 'පෙරනිමැති ශීර්ෂය',
-            
+
             'confirm' => [
                 'title'        => 'ඔබට සැමට විශ්ලේෂණයක් තිබේද?',
                 'message'      => 'ඔබට මෙම ක්‍රියාව කියවන්ද?',
                 'agree-btn'    => 'එකඟයි',
                 'disagree-btn' => 'නැත',
             ],
-        ],        
+        ],
 
         'products'   => [
             'card' => [
