@@ -1,99 +1,171 @@
-<x-accordion title="Test Accordion">
-    <x-slot:header>Accordion Header</x-slot:header>
+{{--Flash message --}}
+<x-flash-group></x-flash-group>
 
-    <x-slot:body>Accordion Body</x-slot:body>
-</x-accordion>
+<x-panel>
+    <x-slot:header>Panel Title</x-slot:header>
 
-<x-table>
-    <x-table.thead>
-        <x-table.tr>
-            <x-table.th>Column 1</x-table.th>
-            <x-table.th>Column 2</x-table.th>
-            <x-table.th class="action">Column 3</x-table.th>
-        </x-table.tr>
-    </x-table.thead>
+    <x-slot:body>Panel Body</x-slot:body>
+</x-panel>
 
-    <x-table.tbody>
-        <x-table.tr>
-            <x-table.td>Row 1 Value 1</x-table.td>
-            <x-table.td>Row 1 Value 3</x-table.td>
-            <x-table.td class="w-[50px]">Row 1 Value 3</x-table.td>
-        </x-table.tr>
+{{-- Form Control Group --}}
 
-        <x-table.tr>
-            <x-table.td>Row 2 Value 1</x-table.td>
-            <x-table.td>Row 2 Value 3</x-table.td>
-            <x-table.td class="action">Row 2 Value 3</x-table.td>
-        </x-table.tr>
-    </x-table.tbody>
-</x-table>
+{{-- Type Text --}}
+<x-admin::form.control-group>
+    <x-admin::form.control-group.label class="required">
+        @lang('name')
+    </x-admin::form.control-group.label>
 
-<x-tabs>
-    <x-tabs.item name="Tab 1" is-selected="true">Tab 1 Content</x-tabs.item>
-    <x-tabs.item name="Tab 2">Tab 2 Content</x-tabs.item>
-</x-tabs>
+    <x-admin::form.control-group.control
+        type="text"
+        name="name"
+        :value=""
+        rules="required"
+        label="name"
+        placeholder="name"
+    >
+    </x-admin::form.control-group.control>
 
-<x-form.control>
-    <x-slot:label class="required">Input Control</x-slot:label>
+    <x-admin::form.control-group.error
+        control-name="name"
+    >
+    </x-admin::form.control-group.error>
+</x-admin::form.control-group>
 
-    <x-slot:control
-        type="input"
-        name="input"
-        class="just-checking"
-        value="Input Value"
-        v-validate="'required'"
-    ></x-slot:control>
-</x-form.control>
+{{-- Type Select --}}
+<x-admin::form.control-group>
+    <x-admin::form.control-group.label>
+        @lang('admin::app.catalog.families.create.column')
+    </x-admin::form.control-group.label>
 
-<x-form.control>
-    <x-slot:control type="select" name="select" v-validate="'required'">
-        <option value=""></option>
-        <option value="1">Option 1</option>
-    </x-slot:control>
-
-    <x-slot:error class="custom-error-class"></x-slot:error>
-</x-form.control>
-
-<x-form.control>
-    <x-slot:label class="required">Multi Select Control</x-slot:label>
-
-    <x-slot:control
+    <x-admin::form.control-group.control
         type="select"
-        name="multiselect"
-        v-validate="'required'"
-        multiple
+        name="column"
+        rules="required"
+        :label="trans('admin::app.catalog.families.create.column')"
     >
-        <option value="1" selected>Option 1</option>
-        <option value="2">Option 2</option>
-        <option value="3">Option 3</option>
-    </x-slot:control>
-</x-form.control>
+        <!-- Default Option -->
+        <option value="">
+            @lang('admin::app.catalog.families.create.select-group')
+        </option>
 
-<x-form.control>
-    <x-slot:label class="required">Checkbox Control</x-slot:label>
+        <option value="1">
+            @lang('admin::app.catalog.families.create.main-column')
+        </option>
 
-    <x-slot:control
+        <option value="2">
+            @lang('admin::app.catalog.families.create.right-column')
+        </option>
+    </x-admin::form.control-group.control>
+
+    <x-admin::form.control-group.error 
+        control-name="column"
+    >
+    </x-admin::form.control-group.error>
+</x-admin::form.control-group>
+
+{{--Type Checkbox --}}
+<x-admin::form.control-group>
+    <x-admin::form.control-group.control
         type="checkbox"
-        name="checkbox"
+        name="is_unique"
+        id="is_unique"
+        for="is_unique"
         value="1"
-        checked
     >
-        Checkbox Label
-    </x-slot:control>
-</x-form.control>
+    </x-admin::form.control-group.control>
 
-<x-form.control>
-    <x-slot:label class="required">Radio Control</x-slot:label>
+    <x-admin::form.control-group.label
+        for="is_unique"
+    >
+        @lang('admin::app.catalog.attributes.edit.is-unique')
+    </x-admin::form.control-group.label>
+</x-admin::form.control-group>
 
-    <x-slot:control
+{{--Type Radio --}}
+<x-admin::form.control-group>
+    <x-admin::form.control-group.control
         type="radio"
-        name="radio[]"
+        name="is_unique"
+        id="is_unique"
+        for="is_unique"
         value="1"
     >
-        Radio Label
-    </x-slot:control>
-</x-form.control>
+    </x-admin::form.control-group.control>
 
+    <x-admin::form.control-group.label
+        for="is_unique"
+    >
+        @lang('admin::app.catalog.attributes.edit.is-unique')
+    </x-admin::form.control-group.label>
+</x-admin::form.control-group>
+
+{{-- basic/traditional form  --}}
+<x-admin::form action="">
+    <x-admin::form.control-group>
+        <x-admin::form.control-group.label>
+            Email
+        </x-admin::form.control-group.label>
+
+        <x-admin::form.control-group.control
+            type="email"
+            name="email"
+            value=""
+            rules="required|email"
+            label="Email"
+            placeholder="email@example.com"
+        >
+        </x-admin::form.control-group.control>
+
+        <x-admin::form.control-group.error
+            control-name="email"
+        >
+        </x-admin::form.control-group.error>
+    </x-admin::form.control-group>
+</x-admin::form>
+
+{{-- customized/ajax form --}}
+<x-admin::form
+    v-slot="{ meta, errors, handleSubmit }"
+    as="div"
+>
+    <form @submit="handleSubmit($event, callMethodInComponent)">
+        <x-admin::form.control-group>
+            <x-admin::form.control-group.label>
+                Email
+            </x-admin::form.control-group.label>
+
+            <x-admin::form.control-group.control
+                type="email"
+                name="email"
+                :value="old('email')"
+                rules="required"
+                label="Email"
+                placeholder="email@example.com"
+            >
+            </x-admin::form.control-group.control>
+
+            <x-admin::form.control-group.error
+                control-name="email"
+            >
+            </x-admin::form.control-group.error>
+        </x-admin::form.control-group>
+
+        <button>Submit</button>
+    </form>
+</x-admin::form>
+
+{{-- Accordion Component --}}
+<x-admin::accordion title="Test Accordion">
+    <x-slot:header>
+        Accordion Header
+    </x-slot:header>
+
+    <x-slot:content>
+        Accordion Content
+    </x-slot:content>
+</x-admin::accordion>
+
+{{-- Modal Component --}}
 <x-admin::modal>
     <x-slot:toggle>
         Modal Toggle
@@ -105,21 +177,109 @@
 
     <x-slot:content>
         Modal Content
-
     </x-slot:content>
-
-    <x-slot:footer>
-        Modal Footer
-    </x-slot:footer>
 </x-admin::modal>
 
-<x-flash-group></x-flash-group>
+{{-- Drawer Component --}}
+<x-admin::drawer>
+    <x-slot:toggle>
+        Drawer Toggle
+    </x-slot:toggle>
 
+    <x-slot:header>
+        Drawer Header
+    </x-slot:header>
 
+    <x-slot:content>
+        Drawer Content
+    </x-slot:content>
+</x-admin::drawer>
 
+{{-- Dropdown Component--}}
+<x-admin::dropdown>
+    <x-slot:toggle>
+        Toogle
+    </x-slot:toggle>
 
-<x-panel>
-    <x-slot:header>Panel Title</x-slot:header>
+    <x-slot:content>
+        Content
+    </x-slot:content>
+</x-admin::dropdown>
 
-    <x-slot:body>Panel Body</x-slot:body>
-</x-panel>
+{{-- Tinymce Component --}}
+<x-admin::form.control-group>
+    <x-admin::form.control-group.label>
+        Content
+    </x-admin::form.control-group.label>
+
+    <x-admin::form.control-group.control
+        type="textarea"
+        name="html_content"
+        :value="old('html_content')"
+        id="content"
+        rules="required"
+        label="Content"
+        placeholder="Content"
+        :tinymce="true"
+    >
+    </x-admin::form.control-group.control>
+
+    <x-admin::form.control-group.error
+        control-name="html_content"
+    >
+    </x-admin::form.control-group.error>
+</x-admin::form.control-group>
+
+{{-- SEO Title & Description Blade Componnet --}}
+<x-admin::seo/>
+
+{{-- Star Rating Component --}}
+<x-admin::star-rating 
+    :is-editable="false"
+    :value="$review->rating"
+>
+</x-admin::star-rating>
+
+{{-- Exportdatagrid Component--}}
+<x-admin::datagrid.export 
+    src=""
+>
+</x-admin::datagrid.export>
+
+{{-- Datagrid Component --}}
+<x-admin::datagrid 
+    :src="route('admin.sales.orders.index')" 
+    :isMultiRow="true"
+>
+</x-admin::datagrid>
+
+{{-- Image Blade Component --}}
+<x-admin::media.images
+    name="images[files]"
+    allow-multiple="true"
+    show-placeholders="true"
+    :uploaded-images="$product->images"
+>
+</x-admin::media.images>
+
+{{-- Video Blade Component --}}
+<x-admin::media.videos
+    name="videos[files]"
+    :allow-multiple="true"
+    :uploaded-videos="$product->videos"
+>
+</x-admin::media.videos>
+
+{{-- Tree Component --}}
+
+<x-admin::tree.view
+    input-type="checkbox"
+    name-field="categories"
+    id-field="id"
+    value-field="id"
+    ::items="categories"
+    :value="json_encode($product->categories->pluck('id'))"
+    behavior="no"
+    :fallback-locale="config('app.fallback_locale')"
+>
+</x-admin::tree.view>

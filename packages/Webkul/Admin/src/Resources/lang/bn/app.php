@@ -156,6 +156,7 @@ return [
                     'status'           => 'স্থিতি',
                     'success'          => 'সাফল্য',
                     'view'             => 'দেখুন',
+                    'product-count'    => ':count + আরও পণ্য'
                 ],
             ],
 

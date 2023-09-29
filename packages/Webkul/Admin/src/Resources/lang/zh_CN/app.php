@@ -156,6 +156,7 @@ return [
                     'status'           => '状态',
                     'success'          => '成功',
                     'view'             => '查看',
+                    'product-count'    => ':count + 更多产品'
                 ],
             ],
 

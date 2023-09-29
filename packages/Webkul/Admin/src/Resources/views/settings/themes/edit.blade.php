@@ -136,7 +136,7 @@
                                 <div 
                                     class="flex gap-[10px] justify-between py-5 cursor-pointer"
                                     :class="{
-                                        'border-b-[1px] border-slate-300': index < sliders.images.length - 1
+                                        'border-b-[1px] border-slate-300 dark:border-gray-800': index < sliders.images.length - 1
                                     }"
                                 >
                                     <div class="flex gap-[10px]">
@@ -192,7 +192,7 @@
                                 v-else
                             >
                                 <img    
-                                    class="w-[120px] h-[120px] border border-dashed dark:border-gray-800   rounded-[4px]"
+                                    class="w-[120px] h-[120px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
                                     src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
                                     alt="add-product-to-store"
                                 >
@@ -232,7 +232,7 @@
                                         name="name"
                                         value="{{ $theme->name }}"
                                         rules="required"
-                                        class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                        class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400  focus:border-gray-400  dark:focus:border-gray-400  dark:bg-gray-900 dark:border-gray-800"
                                         :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         label="@lang('admin::app.settings.themes.edit.name')"
                                         placeholder="@lang('admin::app.settings.themes.edit.name')"
@@ -254,7 +254,7 @@
                                         name="sort_order"
                                         rules="required|min_value:1"
                                         value="{{ $theme->sort_order }}"
-                                        class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                        class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400  focus:border-gray-400  dark:focus:border-gray-400  dark:bg-gray-900 dark:border-gray-800"
                                         :class="[errors['sort_order'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         label="@lang('admin::app.settings.themes.edit.sort-order')"
                                         placeholder="@lang('admin::app.settings.themes.edit.sort-order')"
@@ -421,7 +421,7 @@
                                 type="text"
                                 name="options[title]"
                                 value="{{ $theme->options['title'] ?? '' }}"
-                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400  focus:border-gray-400  dark:focus:border-gray-400  dark:bg-gray-900 dark:border-gray-800"
                                 :class="[errors['options[title]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 rules="required"
                                 label="@lang('admin::app.settings.themes.edit.filter-title')"
@@ -536,7 +536,7 @@
                             <div 
                                 class="flex gap-[10px] justify-between py-5 cursor-pointer"
                                 :class="{
-                                    'border-b-[1px] border-slate-300': index < options.filters.length - 1
+                                    'border-b-[1px] border-slate-300 dark:border-gray-800': index < options.filters.length - 1
                                 }"
                             >
                                 <div class="flex gap-[10px]">
@@ -572,7 +572,7 @@
                             v-else
                         >
                             <img
-                                class="w-[120px] h-[120px] p-2 border border-dashed dark:border-gray-800   rounded-[4px]"
+                                class="w-[120px] h-[120px] p-2 border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
                                 src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
                                 alt="add-product-to-store"
                             >
@@ -612,7 +612,7 @@
                                     name="name"
                                     value="{{ $theme->name }}"
                                     rules="required"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400  focus:border-gray-400  dark:focus:border-gray-400  dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     label="@lang('admin::app.settings.themes.edit.name')"
                                     placeholder="@lang('admin::app.settings.themes.edit.name')"
@@ -635,7 +635,7 @@
                                     name="sort_order"
                                     value="{{ $theme->sort_order }}"
                                     rules="required|min_value:1"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400  focus:border-gray-400  dark:focus:border-gray-400  dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['sort_order'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     label="@lang('admin::app.settings.themes.edit.sort-order')"
                                     placeholder="@lang('admin::app.settings.themes.edit.sort-order')"
@@ -837,7 +837,7 @@
                                 type="text"
                                 name="options[filters][limit]"
                                 value="{{ $theme->options['filters']['limit'] ?? '' }}"
-                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400  focus:border-gray-400  dark:focus:border-gray-400  dark:bg-gray-900 dark:border-gray-800"
                                 :class="[errors['options[filters][limit]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 rules="required|min_value:1"
                                 label="@lang('admin::app.settings.themes.edit.limit')"
@@ -884,7 +884,7 @@
                             <div 
                                 class="flex gap-[10px] justify-between py-5 cursor-pointer"
                                 :class="{
-                                    'border-b-[1px] border-slate-300': index < options.filters.length - 1
+                                    'border-b-[1px] border-slate-300 dark:border-gray-800': index < options.filters.length - 1
                                 }"
                             >
                                 <div class="flex gap-[10px]">
@@ -921,7 +921,7 @@
                             v-else
                         >
                             <img
-                                class="w-[120px] h-[120px] p-2 border border-dashed dark:border-gray-800   rounded-[4px]"
+                                class="w-[120px] h-[120px] p-2 border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
                                 src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
                                 alt="add-category-to-store"
                             >
@@ -968,7 +968,7 @@
                                     type="text"
                                     name="name"
                                     value="{{ $theme->name }}"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400  focus:border-gray-400  dark:focus:border-gray-400  dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     rules="required"
                                     label="@lang('admin::app.settings.themes.edit.name')"
@@ -991,7 +991,7 @@
                                     type="text"
                                     name="sort_order"
                                     value="{{ $theme->sort_order }}"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400  focus:border-gray-400  dark:focus:border-gray-400  dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['sort_order'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     rules="required|min_value:1"
                                     label="@lang('admin::app.settings.themes.edit.sort-order')"
@@ -1246,7 +1246,7 @@
                                     type="text"
                                     name="name"
                                     value="{{ $theme->name }}"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400  focus:border-gray-400  dark:focus:border-gray-400  dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     rules="required"
                                     label="@lang('admin::app.settings.themes.edit.name')"
@@ -1270,7 +1270,7 @@
                                     name="sort_order"
                                     value="{{ $theme->sort_order }}"
                                     rules="required|min_value:1"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400  focus:border-gray-400  dark:focus:border-gray-400  dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['sort_order'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     label="@lang('admin::app.settings.themes.edit.sort-order')"
                                     placeholder="@lang('admin::app.settings.themes.edit.sort-order')"
@@ -1398,7 +1398,7 @@
                             >
                                 <!-- Information -->
                                 <div 
-                                    class="grid border-b-[1px] last:border-b-0 border-slate-300"
+                                    class="grid border-b-[1px] last:border-b-0 border-slate-300 dark:border-gray-800"
                                     v-for="(link, key) in footerLink"
                                 >
                                     <!-- Hidden Input -->
@@ -1487,7 +1487,7 @@
                                 class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px] "
                             >
                                 <img
-                                    class="w-[120px] h-[120px] border border-dashed dark:border-gray-800   rounded-[4px]"
+                                    class="w-[120px] h-[120px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
                                     src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
                                     alt="add-product-to-store"
                                 >
@@ -1531,7 +1531,7 @@
                                         type="text"
                                         name="name"
                                         value="{{ $theme->name }}"
-                                        class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                        class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400  focus:border-gray-400  dark:focus:border-gray-400  dark:bg-gray-900 dark:border-gray-800"
                                         :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         rules="required"
                                         label="@lang('admin::app.settings.themes.edit.name')"
@@ -1554,7 +1554,7 @@
                                         type="text"
                                         name="sort_order"
                                         value="{{ $theme->sort_order }}"
-                                        class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                        class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400  focus:border-gray-400  dark:focus:border-gray-400  dark:bg-gray-900 dark:border-gray-800"
                                         :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         rules="required"
                                         label="@lang('admin::app.settings.themes.edit.sort-order')"

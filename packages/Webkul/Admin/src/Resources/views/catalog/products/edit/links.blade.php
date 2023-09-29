@@ -40,7 +40,7 @@
                     v-if="addedProducts[type.key].length"
                 >
                     <div
-                        class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300"
+                        class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300 dark:border-gray-800"
                         v-for="product in addedProducts[type.key]"
                     >
                         <!-- Hidden Input -->
@@ -55,7 +55,7 @@
                             <!-- Image -->
                             <div
                                 class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px] overflow-hidden"
-                                :class="{'border border-dashed dark:border-gray-800 dark:invert dark:mix-blend-exclusion': ! product.images.length}"
+                                :class="{'border border-dashed border-gray-300 dark:border-gray-800 dark:invert dark:mix-blend-exclusion': ! product.images.length}"
                             >
                                 <template v-if="! product.images.length">
                                     <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">

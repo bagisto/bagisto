@@ -351,7 +351,7 @@
             <div class="mb-[8px] mt-[5px] grid">
                 <input
                     type="text"
-                    class="block w-full rounded-[6px] border bg-white px-[8px] py-[6px] text-[14px] leading-[24px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                    class="block w-full rounded-[6px] border dark:border-gray-800   bg-white dark:bg-gray-900  px-[8px] py-[6px] text-[14px] leading-[24px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400  focus:border-gray-400  dark:focus:border-gray-400 "
                     :name="column.index"
                     :placeholder="column.label"
                     @keyup.enter="filterPage($event, column)"

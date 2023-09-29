@@ -58,7 +58,7 @@ class ReviewController extends APIController
             'comment'       => 'required',
             'rating'        => 'required|numeric|min:1|max:5',
             'attachments'   => 'array',
-            'attachments.*' => 'file|mimetypes:video/*',
+            'attachments.*' => 'file|mimetypes:image/*,video/*',
         ]);
 
         $data = array_merge(request()->only([

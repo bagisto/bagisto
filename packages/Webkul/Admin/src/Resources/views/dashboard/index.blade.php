@@ -461,7 +461,7 @@
                                                         src="{{ $orderItem->product->base_image_url }}"
                                                     />
                                                 @else
-                                                    <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed dark:border-gray-800 rounded-[4px] overflow-hidden dark:invert dark:mix-blend-exclusion">
+                                                    <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] overflow-hidden dark:invert dark:mix-blend-exclusion">
                                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
 
                                                         <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
@@ -525,7 +525,7 @@
                                                 >
                                             </div>
                                         @else
-                                            <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed dark:border-gray-800 rounded-[4px] overflow-hidden dark:invert dark:mix-blend-exclusion">
+                                            <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] overflow-hidden dark:invert dark:mix-blend-exclusion">
                                                 <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
 
                                                 <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
@@ -736,7 +736,7 @@
 
                                     <div
                                         v-else
-                                        class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed dark:border-gray-800 rounded-[4px] overflow-hidden dark:invert dark:mix-blend-exclusion"
+                                        class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] overflow-hidden dark:invert dark:mix-blend-exclusion"
                                     >
                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
                                         

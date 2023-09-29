@@ -17,7 +17,7 @@
                     <x-slot:toggle>
                         <button
                             type="button"
-                            class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border dark:border-gray-800   bg-white dark:bg-gray-900  px-[10px] py-[6px] text-center leading-[24px] text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black"
+                            class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border dark:border-gray-800   bg-white dark:bg-gray-900  px-[10px] py-[6px] text-center leading-[24px] text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400  focus:border-gray-400  dark:focus:border-gray-400  focus:ring-black"
                         >
                             <span>
                                 @lang('admin::app.components.datagrid.toolbar.mass-actions.select-action')
@@ -105,7 +105,7 @@
                             type="text"
                             name="search"
                             :value="getAppliedColumnValues('all')"
-                            class="block w-full rounded-lg border dark:border-gray-800   bg-white dark:bg-gray-900  py-[6px] ltr:pl-[12px] rtl:pr-[12px] ltr:pr-[40px] rtl:pl-[40px] leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 focus:border-gray-400"
+                            class="block w-full rounded-lg border dark:border-gray-800   bg-white dark:bg-gray-900  py-[6px] ltr:pl-[12px] rtl:pr-[12px] ltr:pr-[40px] rtl:pl-[40px] leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400  focus:border-gray-400  dark:focus:border-gray-400 "
                             placeholder="@lang('admin::app.components.datagrid.toolbar.search.title')"
                             autocomplete="off"
                             @keyup.enter="filterPage"
@@ -174,7 +174,7 @@
                     <x-slot:toggle>
                         <button
                             type="button"
-                            class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border dark:border-gray-800   bg-white dark:bg-gray-900  px-[10px] py-[6px] text-center leading-[24px] text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400"
+                            class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border dark:border-gray-800   bg-white dark:bg-gray-900  px-[10px] py-[6px] text-center leading-[24px] text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400  focus:border-gray-400  dark:focus:border-gray-400 "
                         >
                             <span v-text="applied.pagination.perPage"></span>
 
@@ -197,7 +197,7 @@
 
                 <input
                     type="text"
-                    class="ltr:ml-[8px] rtl:mr-[8px] inline-flex min-h-[38px] max-w-[40px] appearance-none items-center justify-center gap-x-[4px] rounded-[6px] border dark:border-gray-800   bg-white dark:bg-gray-900  px-[12px] py-[6px] text-center leading-[24px] text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:border-gray-400 max-sm:hidden"
+                    class="ltr:ml-[8px] rtl:mr-[8px] inline-flex min-h-[38px] max-w-[40px] appearance-none items-center justify-center gap-x-[4px] rounded-[6px] border dark:border-gray-800 bg-white dark:bg-gray-900 px-[12px] py-[6px] text-center leading-[24px] text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:outline-none focus:border-gray-400 dark:focus:border-gray-400 max-sm:hidden"
                     :value="available.meta.current_page"
                     @change="changePage(parseInt($event.target.value))"
                 >
