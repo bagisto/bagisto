@@ -29,7 +29,6 @@ class ReviewDataGrid extends DataGrid
                 'pr.title',
                 'pr.comment',
                 'pr.name as customer_full_name',
-                'pr.customer_id as customer_id',
                 'pf.name as product_name',
                 'pr.status as product_review_status',
                 'pr.rating',
