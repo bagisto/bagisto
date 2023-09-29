@@ -505,6 +505,18 @@ return [
 
     'search' => [
         'title' => '搜索结果：:query',
+
+        'images' => [
+            'index' => [
+                'something-went-wrong' => '出了点问题，请稍后重试。',
+                'size-limit-error'     => '尺寸限制错误',
+                'only-images-allowed'  => '仅允许图片（.jpeg、.jpg、.png 等）。',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => '分析关键字：',
+            ],
+        ],
     ],
 
     'compare'  => [

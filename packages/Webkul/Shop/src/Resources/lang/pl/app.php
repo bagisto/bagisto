@@ -505,6 +505,18 @@ return [
 
     'search' => [
         'title' => 'Wyniki wyszukiwania dla : :query',
+    
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'Coś poszło nie tak, spróbuj ponownie później.',
+                'size-limit-error'     => 'Błąd limitu rozmiaru',
+                'only-images-allowed'  => 'Dozwolone są tylko obrazy (.jpeg, .jpg, .png, ..).',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => 'Zanalizowane słowa kluczowe:',
+            ],
+        ],
     ],
 
     'compare'  => [

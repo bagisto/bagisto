@@ -32,7 +32,7 @@
 
                 <div class="flex flex-col gap-[15px]">
                     <h2 class="text-[26px] font-medium">
-                        Analysed Keywords: 
+                        @lang('shop::app.search.images.results.analysed-keywords')
                     </h2>
 
                     <div class="flex gap-2 flex-wrap">

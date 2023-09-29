@@ -504,7 +504,19 @@ return [
     ],
 
     'search' => [
-        'title' => ':queryの検索結果',
+        'title' => ':query の検索結果',
+    
+        'images' => [
+            'index' => [
+                'something-went-wrong' => '申し訳ありません、何か問題が発生しました。後で再試行してください。',
+                'size-limit-error'     => 'サイズ制限エラー',
+                'only-images-allowed'  => '画像のみ (.jpeg, .jpg, .png, ..) が許可されています。',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => '解析されたキーワード:',
+            ],
+        ],
     ],
 
     'compare' => [

@@ -505,6 +505,18 @@ return [
 
     'search' => [
         'title' => 'खोज परिणाम : :query',
+
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'कुछ गलत हो गया, कृपया बाद में पुनः प्रयास करें।',
+                'size-limit-error'     => 'साइज़ सीमा त्रुटि',
+                'only-images-allowed'  => 'केवल छवियाँ (.jpeg, .jpg, .png, ..) अनुमति दी गई हैं।',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => 'विश्लेषित की गई कीवर्ड:',
+            ],
+        ],
     ],
 
     'compare' => [

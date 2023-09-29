@@ -504,9 +504,21 @@ return [
     ],
 
     'search' => [
-        'title' => 'Zoekresultaten voor: :query',
+        'title' => 'Zoekresultaten voor : :query',
+    
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'Er is iets misgegaan, probeer het later opnieuw.',
+                'size-limit-error'     => 'Formaatlimietfout',
+                'only-images-allowed'  => 'Alleen afbeeldingen (.jpeg, .jpg, .png, ..) zijn toegestaan.',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => 'Geanalyseerde trefwoorden:',
+            ],
+        ],
     ],
-
+    
     'compare'  => [
         'product-compare'    => 'Producten Vergelijken',
         'delete-all'         => 'Alles Verwijderen',
