@@ -2597,6 +2597,7 @@ return [
                 'back'                          => 'Retour',
                 'preview'                       => 'Aperçu',
                 'channels'                      => 'Chaînes',
+                'image-size'                    => 'La résolution de l\'image doit être (1920px X 700px).',
             ],
 
             'create-success' => 'Thème créé avec succès',

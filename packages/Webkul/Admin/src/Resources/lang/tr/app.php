@@ -2598,6 +2598,7 @@ return [
                 'back'                          => 'Geri',
                 'preview'                       => 'Önizleme',
                 'channels'                      => 'kanallar',
+                'image-size'                    => 'Resim çözünürlüğü (1920px X 700px) olmalıdır.',
             ],
 
             'create-success' => 'Tema başarıyla oluşturuldu',

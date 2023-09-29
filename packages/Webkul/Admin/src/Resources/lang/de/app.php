@@ -2597,6 +2597,7 @@ return [
                 'back'                          => 'Zurück',
                 'preview'                       => 'Vorschau',
                 'channels'                      => 'Kanäle',
+                'image-size'                    => 'Die Bildauflösung sollte (1920px X 700px) sein.',
             ],
 
             'create-success' => 'Thema erfolgreich erstellt',
