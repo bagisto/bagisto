@@ -156,6 +156,7 @@ return [
                     'status'          => 'ステータス',
                     'success'         => '成功',
                     'view'            => '表示',
+                    'product-count'   => ':count + 他の製品'
                 ],
             ],
 

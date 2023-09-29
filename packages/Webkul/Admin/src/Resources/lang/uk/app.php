@@ -156,6 +156,7 @@ return [
                     'status'           => 'Статус',
                     'success'          => 'Успішно',
                     'view'             => 'Перегляд',
+                    'product-count'    => ':count + Ще більше продуктів'
                 ],
             ],
 

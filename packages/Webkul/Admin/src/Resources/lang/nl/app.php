@@ -156,6 +156,7 @@ return [
                     'status'           => 'Status',
                     'success'          => 'Succes',
                     'view'             => 'Bekijken',
+                    'product-count'    => ':count + Meer producten'
                 ],
             ],
 

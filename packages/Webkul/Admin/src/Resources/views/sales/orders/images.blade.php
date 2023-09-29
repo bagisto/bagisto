@@ -8,12 +8,11 @@
     @foreach ($items as $item)
         @php
             $imageCount = optional($item->product)->images->count();
-            $hasImage = $imageCount > 0;
         @endphp
 
         <div class="relative">
             <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relativerounded-[4px]">
-                @if ($hasImage)
+                @if ($imageCount > 0)
                     <img 
                         class="w-full h-full rounded-[4px]" 
                         src="{{ $item->product->base_image_url }}"
@@ -35,7 +34,7 @@
         @if ($restCount >= 1)
             <a href="{{ route('admin.sales.orders.view', $order->id) }}">
                 <div class="flex items-center w-[65px] h-[65px] bg-gray-50 rounded-[4px]">
-                    <p class="text-[12px] text-gray-600 text-center font-bold px-[6px] py-[6px]">{{ $restCount }}+ More Products</p>
+                    <p class="text-[12px] text-gray-600 text-center font-bold px-[6px] py-[6px]">@lang('admin::app.sales.orders.index.datagrid.product-count', ['count' => $restCount])</p>
                 </div>
             </a>
         @endif
