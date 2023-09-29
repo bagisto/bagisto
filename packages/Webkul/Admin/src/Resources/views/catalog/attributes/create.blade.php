@@ -88,7 +88,7 @@
                                     <x-admin::form.control-group.control
                                         type="text"
                                         :name="$locale->code . '[name]'"
-                                        :value="old($locale->code)"
+                                        :value="old($locale->code . '[name]')"
                                         :placeholder="$locale->name"
                                     >
                                     </x-admin::form.control-group.control>
