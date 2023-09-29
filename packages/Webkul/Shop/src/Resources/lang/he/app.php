@@ -66,6 +66,7 @@ return [
 
         'account' => [
             'home'    => 'בית',
+
             'profile' => [
                 'title'                   => 'פרופיל',
                 'first-name'              => 'שם פרטי',
@@ -399,84 +400,90 @@ return [
         ],
     ],
 
-    'products'  => [
-        'reviews'                => 'ביקורות',
-        'add-to-cart'            => 'הוסף לעגלה',
-        'add-to-compare'         => 'המוצר התווסף לרשימת ההשוואה.',
-        'already-in-compare'     => 'המוצר כבר נמצא ברשימת ההשוואה.',
-        'buy-now'                => 'קנה עכשיו',
-        'compare'                => 'השווה',
-        'rating'                 => 'דירוג',
-        'title'                  => 'כותרת',
-        'comment'                => 'תגובה',
-        'submit-review'          => 'שלח ביקורת',
-        'customer-review'        => 'ביקורות מלקוחות',
-        'write-a-review'         => 'כתוב ביקורת',
-        'stars'                  => 'כוכבים',
-        'share'                  => 'שתף',
-        'empty-review'           => 'לא נמצאו ביקורות, היה הראשון לכתוב ביקורת על המוצר הזה',
-        'was-this-helpful'       => 'האם הביקורת הייתה מועילה?',
-        'load-more'              => 'טען עוד',
-        'add-image'              => 'הוסף תמונה',
-        'failed-to-upload'       => 'התמונה לא הצליחה להיטען',
-        'description'            => 'תיאור',
-        'additional-information' => 'מידע נוסף',
-        'submit-success'         => 'נשלח בהצלחה',
-        'something-went-wrong'   => 'משהו השתבש',
-        'in-stock'               => 'במלאי',
-        'available-for-order'    => 'זמין להזמנה',
-        'out-of-stock'           => 'אזל מהמלאי',
-        'related-product-title'  => 'מוצרים דומים',
-        'up-sell-title'          => 'מצאנו מוצרים נוספים שעשויים לעניין אותך!',
-        'new'                    => 'חדש',
-        'as-low-as'              => 'החל מ',
-        'starting-at'            => 'התחל ב',
-        'name'                   => 'שם',
-        'qty'                    => 'כמות',
-        'offers'                 => 'קנה :qty במחיר של :price לכל יחידה וחסוך :discount%',
-        'tax-inclusive'          => 'כולל כל המסים',
-
-        'sort-by'                => [
-            'title'   => 'מיין לפי',
-            'options' => [
-                'from-a-z'        => 'מהאות A ל-Z',
-                'from-z-a'        => 'מהאות Z ל-A',
-                'latest-first'    => 'החדש ביותר ראשון',
-                'oldest-first'    => 'הישן ביותר ראשון',
-                'cheapest-first'  => 'הזול ביותר ראשון',
-                'expensive-first' => 'היקר ביותר ראשון',
+    'products' => [
+        'prices' => [
+            'grouped' => [
+                'starting-at' => 'החל מ-',
+            ],
+    
+            'configurable' => [
+                'as-low-as' => 'מחיר החל מ-',
             ],
         ],
-
+    
+        'sort-by' => [
+            'title'   => 'מיין לפי',
+            'options' => [
+                'from-a-z'        => 'מהא לת',
+                'from-z-a'        => 'מהת לא',
+                'latest-first'    => 'החדש ביותר תחילה',
+                'oldest-first'    => 'הישן ביותר תחילה',
+                'cheapest-first'  => 'הזול ביותר תחילה',
+                'expensive-first' => 'היקר ביותר תחילה',
+            ],
+        ],
+    
         'view' => [
             'type' => [
                 'configurable' => [
                     'select-options'       => 'אנא בחר אפשרות',
-                    'select-above-options' => 'אנא בחר אפשרויות מעלה',
+                    'select-above-options' => 'אנא בחר באפשרויות למעלה',
                 ],
-
+    
                 'bundle' => [
                     'none' => 'אין',
                 ],
-
+    
                 'downloadable' => [
                     'samples' => 'דוגמאות',
                     'links'   => 'קישורים',
                     'sample'  => 'דוגמה',
                 ],
-
+    
                 'grouped' => [
                     'name' => 'שם',
                 ],
             ],
-
+    
+            'gallery' => [
+                'thumbnail-image' => 'תמונה ממוזערת',
+                'product-image'   => 'תמונת מוצר',
+            ],
+    
             'reviews' => [
                 'cancel'      => 'ביטול',
-                'success'     => 'ביקורת נשלחה בהצלחה.',
+                'rating'      => 'דירוג',
+                'success'     => 'סקירה נשלחה בהצלחה.',
                 'attachments' => 'קבצים מצורפים',
+                'title'       => 'כותרת',
+                'comment'     => 'תגובה',
+                'customer-review'        => 'סקירות לקוח',
+                'submit-review'          => 'שליחה',
+                'write-a-review'         => 'כתיבת סקירה',
+                'empty-review'           => 'לא נמצאו סקירות, היה הראשון לרשום סקירה על מוצר זה.',
+                'load-more'              => 'טען עוד',
+                'failed-to-upload'       => 'העלאת התמונה נכשלה',
+            ],
+    
+            'description'            => 'תיאור',
+            'additional-information' => 'מידע נוסף',
+            'review'                 => 'סקירות',
+            'related-product-title'  => 'מוצרים קשורים',
+            'up-sell-title'          => 'מצאנו מוצרים נוספים שעשויים לעניין אותך!',
+            'tax-inclusive'          => 'כולל מע"מ',
+            'add-to-cart'            => 'הוסף לעגלת הקניות',
+            'buy-now'                => 'קנה עכשיו',
+            'compare'                => 'השווה',
+            'add-to-compare'         => 'המוצר הוסר לרשימת ההשוואה.',
+            'already-in-compare'     => 'המוצר כבר נמצא ברשימת ההשוואה.',
+        ],
+    
+        'type' => [
+            'abstract' => [
+                'offers' => 'קנה :qty במחיר :price לכל אחד וחסוך :discount%',
             ],
         ],
-    ],
+    ],    
 
     'categories' => [
         'filters' => [
