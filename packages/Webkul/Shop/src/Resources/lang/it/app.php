@@ -279,17 +279,13 @@ return [
             'default-header'  => 'Intestazione predefinita',
         ],
 
-
         'drawer' => [
             'default-toggle'  => 'Attivazione predefinita',
-            'default-toggle'  => 'Attivazione predefinita',
         ],
-
 
         'media' => [
             'add-attachments' => 'Aggiungi allegati',
         ],
-
 
         'layouts' => [
             'header' => [
@@ -349,6 +345,13 @@ return [
             'filters' => [
                 'title' => 'Applica filtri',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'Digita almeno 2 caratteri...',
+                        'no-results'        => 'Nessun risultato trovato...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'clear-all' => 'Cancella tutto',
                     'title'     => 'Filtri personalizzati',
@@ -375,7 +378,6 @@ return [
         'modal' => [
             'default-content' => 'Contenuto predefinito',
             'default-header'  => 'Intestazione predefinita',
-
 
             'confirm' => [
                 'agree-btn'    => 'Concordo',
