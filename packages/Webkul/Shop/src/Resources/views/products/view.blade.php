@@ -71,7 +71,7 @@
 
             <x-shop::tabs.item
                 class="container mt-[60px] !p-0 max-1180:hidden"
-                :title="trans('shop::app.products.description')"
+                :title="trans('shop::app.products.view.description')"
                 :is-selected="true"
             >
                 <div class="container mt-[60px] max-1180:px-[20px]">
@@ -87,7 +87,7 @@
             {{-- Additional Information Tab --}}
             <x-shop::tabs.item
                 class="container mt-[60px] !p-0 max-1180:hidden"
-                :title="trans('shop::app.products.additional-information')"
+                :title="trans('shop::app.products.view.additional-information')"
                 :is-selected="false"
             >
                 <div class="container mt-[60px] max-1180:px-[20px]">
@@ -137,7 +137,7 @@
             {{-- Reviews Tab --}}
             <x-shop::tabs.item
                 class="container mt-[60px] !p-0 max-1180:hidden"
-                :title="trans('shop::app.products.reviews')"
+                :title="trans('shop::app.products.view.review')"
                 :is-selected="false"
             >
                 @include('shop::products.view.reviews')
@@ -152,7 +152,7 @@
             <x-slot:header>
                 <div class="flex justify-between mb-[20px] mt-[20px]">
                     <p class="text-[16px] font-medium 1180:hidden">
-                        @lang('shop::app.products.description')
+                        @lang('shop::app.products.view.description')
                     </p>
                 </div>
             </x-slot:header>
@@ -169,7 +169,7 @@
             <x-slot:header>
                 <div class="flex justify-between mb-[20px] mt-[20px]">
                     <p class="text-[16px] font-medium 1180:hidden">
-                        @lang('shop::app.products.additional-information')
+                        @lang('shop::app.products.view.additional-information')
                     </p>
                 </div>
             </x-slot:header>
@@ -214,7 +214,7 @@
             <x-slot:header>
                 <div class="flex justify-between mb-[20px] mt-[20px]">
                     <p class="text-[16px] font-medium 1180:hidden">
-                        @lang('shop::app.products.reviews')
+                        @lang('shop::app.products.view.review')
                     </p>
                 </div>
             </x-slot:header>
@@ -227,14 +227,14 @@
 
     {{-- Featured Products --}}
     <x-shop::products.carousel
-        :title="trans('shop::app.products.related-product-title')"
+        :title="trans('shop::app.products.view.related-product-title')"
         :src="route('shop.api.products.related.index', ['id' => $product->id])"
     >
     </x-shop::products.carousel>
 
     {{-- Upsell Products --}}
     <x-shop::products.carousel
-        :title="trans('shop::app.products.up-sell-title')"
+        :title="trans('shop::app.products.view.up-sell-title')"
         :src="route('shop.api.products.up-sell.index', ['id' => $product->id])"
     >
     </x-shop::products.carousel>
@@ -325,7 +325,7 @@
                                             (bool) core()->getConfigData('taxes.catalogue.pricing.tax_inclusive') 
                                             && $product->getTypeInstance()->getTaxCategory()
                                         )
-                                            @lang('shop::app.products.tax-inclusive')
+                                            @lang('shop::app.products.view.tax-inclusive')
                                         @endif
                                     </span>
                                 </p>
@@ -373,7 +373,7 @@
                                         class="secondary-button w-full max-w-full"
                                         {{ ! $product->isSaleable(1) ? 'disabled' : '' }}
                                     >
-                                        @lang('shop::app.products.add-to-cart')
+                                        @lang('shop::app.products.view.add-to-cart')
                                     </button>
 
                                     {!! view_render_event('bagisto.shop.products.view.add_to_cart.after', ['product' => $product]) !!}
@@ -389,7 +389,7 @@
                                         @click="is_buy_now=1;"
                                         {{ ! $product->isSaleable(1) ? 'disabled' : '' }}
                                     >
-                                        @lang('shop::app.products.buy-now')
+                                        @lang('shop::app.products.view.buy-now')
                                     </button>
                                 @endif
 
@@ -406,7 +406,7 @@
                                         @if (core()->getConfigData('general.content.shop.compare_option'))
                                             <span class="icon-compare text-[24px]"></span>
 
-                                            @lang('shop::app.products.compare')
+                                            @lang('shop::app.products.view.compare')
                                         @endif
                                     </div>
 
@@ -511,14 +511,14 @@
 
                                 this.setStorageValue(this.getCompareItemsStorageKey(), existingItems);
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: "@lang('shop::app.products.add-to-compare')" });
+                                this.$emitter.emit('add-flash', { type: 'success', message: "@lang('shop::app.products.view.add-to-compare')" });
                             } else {
-                                this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('shop::app.products.already-in-compare')" });
+                                this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('shop::app.products.view.already-in-compare')" });
                             }
                         } else {
                             this.setStorageValue(this.getCompareItemsStorageKey(), [productId]);
 
-                            this.$emitter.emit('add-flash', { type: 'success', message: "@lang('shop::app.products.add-to-compare')" });
+                            this.$emitter.emit('add-flash', { type: 'success', message: "@lang('shop::app.products.view.add-to-compare')" });
                         }
                     },
 
