@@ -257,7 +257,7 @@ return [
                 'delete-all'         => 'Delete All',
                 'empty'              => 'No products were added to the wishlist page.',
                 'move-to-cart'       => 'Move To Cart',
-                'moved-success'      => 'Item Successfully Moved to Cart',    
+                'moved-success'      => 'Item Successfully Moved to Cart',
                 'moved'              => 'Item successfully moved To cart',
                 'page-title'         => 'Wishlist',
                 'profile'            => 'Profile',
@@ -280,7 +280,7 @@ return [
         ],
 
         'drawer' => [
-           'default-toggle'  => 'Default Toggle',
+            'default-toggle'  => 'Default Toggle',
         ],
 
         'media' => [
@@ -344,6 +344,13 @@ return [
 
             'filters' => [
                 'title' => 'Apply Filters',
+
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'Type atleast 2 characters...',
+                        'no-results'        => 'No result found...',
+                    ],
+                ],
 
                 'custom-filters' => [
                     'clear-all' => 'Clear All',

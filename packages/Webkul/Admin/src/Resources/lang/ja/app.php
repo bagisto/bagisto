@@ -156,6 +156,7 @@ return [
                     'status'          => 'ステータス',
                     'success'         => '成功',
                     'view'            => '表示',
+                    'product-count'   => ':count + 他の製品'
                 ],
             ],
 
@@ -1207,7 +1208,7 @@ return [
                 'title'                 => '顧客を編集',
             ],
 
-            'view' => [   
+            'view' => [
                 'address'                     => '住所',
                 'back-btn'                    => '戻る',
                 'add-note'                    => 'ノートを追加',
@@ -2463,7 +2464,7 @@ return [
             'delete-warning'     => 'このアクションを実行してもよろしいですか？',
             'login-error'        => '資格情報を確認して、もう一度試してください。',
             'activate-warning'   => 'アカウントはまだ有効になっていません。管理者に連絡してください。',
-            'last-delete-error'  => '最後のユーザーの削除に失敗しました。'
+            'last-delete-error'  => '最後のユーザーの削除に失敗しました。',
         ],
 
         'roles' => [
@@ -2595,7 +2596,7 @@ return [
                 'edit'                          => '編集',
                 'back'                          => '戻る',
                 'preview'                       => 'プレビュー',
-                'channels'                      => 'チャンネル'
+                'channels'                      => 'チャンネル',
             ],
 
             'create-success' => 'テーマは正常に作成されました',
@@ -3159,11 +3160,24 @@ return [
             ],
 
             'filters' => [
-                'title' => 'フィルターを適用',
+                'title'  => 'フィルターを適用',
+                'select' => '選択',
+
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => '少なくとも2文字を入力してください...',
+                        'no-results'        => '結果が見つかりませんでした...',
+                    ],
+                ],
 
                 'custom-filters' => [
                     'title'     => 'カスタムフィルター',
                     'clear-all' => 'すべてクリア',
+                ],
+
+                'boolean-options' => [
+                    'true'  => '真',
+                    'false' => '偽',
                 ],
 
                 'date-options' => [

@@ -345,6 +345,13 @@ return [
             'filters' => [
                 'title' => 'Filter anwenden',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'Escribe al menos 2 caracteres...',
+                        'no-results'        => 'No se encontraron resultados...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'clear-all' => 'Alle löschen',
                     'title'     => 'Benutzerdefinierte Filter',
