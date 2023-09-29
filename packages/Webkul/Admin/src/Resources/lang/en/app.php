@@ -2597,6 +2597,7 @@ return [
                 'back'                          => 'Back',
                 'preview'                       => 'Preview',
                 'channels'                      => 'Channels',
+                'image-size'                    => 'Image resolution should be (1920px X 700px)',
             ],
 
             'create-success' => 'Theme created successfully',

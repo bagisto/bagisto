@@ -2597,6 +2597,7 @@ return [
                 'back'                          => 'Atrás',
                 'preview'                       => 'Anteprima',
                 'channels'                      => 'canali',
+                'image-size'                    => 'La risoluzione dell\'immagine deve essere (1920px X 700px).',
             ],
 
             'create-success' => 'Tema creado exitosamente',

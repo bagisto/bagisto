@@ -2597,6 +2597,7 @@ return [
                 'back'                          => 'Wróć',
                 'preview'                       => 'Podgląd',
                 'channels'                      => 'kanały',
+                'image-size'                    => 'Rozdzielczość obrazu powinna wynosić (1920px X 700px).',
             ],
 
             'create-success' => 'Motyw został pomyślnie utworzony',

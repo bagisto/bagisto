@@ -2597,6 +2597,7 @@ return [
                 'back'                          => '返回',
                 'preview'                       => '预览',
                 'channels'                      => '频道',
+                'image-size'                    => '圖片解析度應為（1920px X 700px）'
             ],
 
             'create-success' => '主题创建成功',
