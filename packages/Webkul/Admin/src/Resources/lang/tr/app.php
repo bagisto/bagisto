@@ -2455,7 +2455,7 @@ return [
                 'status'           => 'Durum',
                 'save-btn'         => 'Kullanıcıyı Kaydet',
             ],
-            
+
             'delete-failed'      => 'Kullanıcı silme başarısız.',
             'cannot-change'      => 'Kullanıcı değiştirilemez.',
             'update-success'     => 'Kullanıcı başarıyla güncellendi.',
@@ -2465,7 +2465,7 @@ return [
             'delete-warning'     => 'Bu işlemi gerçekleştirmek istediğinizden emin misiniz?',
             'login-error'        => 'Kimlik bilgilerinizi kontrol edin ve yeniden deneyin.',
             'activate-warning'   => 'Hesabınız henüz etkinleştirilmedi, lütfen yöneticiyle iletişime geçin.',
-            'last-delete-error'  => 'Son kullanıcıyı silme başarısız.'
+            'last-delete-error'  => 'Son kullanıcıyı silme başarısız.',
         ],
 
         'roles' => [
@@ -3160,11 +3160,24 @@ return [
             ],
 
             'filters' => [
-                'title' => 'Filtreleri Uygula',
+                'title'  => 'Filtreleri Uygula',
+                'select' => 'Seçiniz',
+
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'En az 2 karakter girin...',
+                        'no-results'        => 'Sonuç bulunamadı...',
+                    ],
+                ],
 
                 'custom-filters' => [
                     'title'     => 'Özel Filtreler',
                     'clear-all' => 'Hepsini Temizle',
+                ],
+
+                'boolean-options' => [
+                    'true'  => 'Doğru',
+                    'false' => 'Yanlış',
                 ],
 
                 'date-options' => [

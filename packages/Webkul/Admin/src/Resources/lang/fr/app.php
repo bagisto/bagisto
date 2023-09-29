@@ -227,7 +227,7 @@ return [
                 'processing'            => 'En cours de traitement',
                 'canceled'              => 'Annulé',
                 'closed'                => 'Fermé',
-                'completed'             => 'Terminé'
+                'completed'             => 'Terminé',
             ],
         ],
 
@@ -1893,7 +1893,7 @@ return [
                 'delete-success'              => 'Coupon de règle du panier supprimé avec succès',
                 'mass-delete-success'         => 'Éléments sélectionnés supprimés avec succès',
                 'success'                     => ':name créé avec succès',
-            
+
                 'datagrid' => [
                     'coupon-code'     => 'Code coupon',
                     'created-date'    => 'Date de création',
@@ -2464,7 +2464,7 @@ return [
             'delete-warning'     => 'Êtes-vous sûr de vouloir effectuer cette action ?',
             'login-error'        => 'Veuillez vérifier vos identifiants et réessayer.',
             'activate-warning'   => 'Votre compte n\'est pas encore activé, veuillez contacter l\'administrateur.',
-            'last-delete-error'  => 'Échec de la suppression du dernier utilisateur.'
+            'last-delete-error'  => 'Échec de la suppression du dernier utilisateur.',
         ],
 
         'roles' => [
@@ -3160,11 +3160,24 @@ return [
             ],
 
             'filters' => [
-                'title' => 'Appliquer les filtres',
+                'title'  => 'Appliquer les filtres',
+                'select' => 'Sélectionner.',
+
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'Tapez au moins 2 caractères...',
+                        'no-results'        => 'Aucun résultat trouvé...',
+                    ],
+                ],
 
                 'custom-filters' => [
                     'title'     => 'Filtres personnalisés',
                     'clear-all' => 'Tout effacer',
+                ],
+
+                'boolean-options' => [
+                    'true'  => 'Vrai',
+                    'false' => 'Faux',
                 ],
 
                 'date-options' => [

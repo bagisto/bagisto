@@ -32,6 +32,7 @@ class Column
         public string $index,
         public string $label,
         public string $type,
+        public ?array $options = null,
         public bool $searchable = false,
         public bool $filterable = false,
         public bool $sortable = false,
@@ -48,6 +49,16 @@ class Column
         $this->setDatabaseColumnName();
 
         switch ($this->type) {
+            case ColumnTypeEnum::BOOLEAN->value:
+                $this->setFormOptions($this->getBooleanOptions());
+
+                break;
+
+            case ColumnTypeEnum::DROPDOWN->value:
+                $this->setFormOptions($this->options);
+
+                break;
+
             case ColumnTypeEnum::DATE_RANGE->value:
                 $this->setFormInputType(FormInputTypeEnum::DATE->value);
 
@@ -111,6 +122,23 @@ class Column
     public function getFormOptions(): ?array
     {
         return $this->formOptions;
+    }
+
+    /**
+     * Get boolean options.
+     */
+    public function getBooleanOptions(): array
+    {
+        return [
+            [
+                'label' => trans('admin::app.components.datagrid.filters.boolean-options.true'),
+                'value' => 1,
+            ],
+            [
+                'label' => trans('admin::app.components.datagrid.filters.boolean-options.false'),
+                'value' => 0,
+            ],
+        ];
     }
 
     /**

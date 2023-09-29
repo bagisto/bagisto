@@ -257,7 +257,7 @@ return [
                 'delete-all'         => 'Elimina Tutto',
                 'empty'              => 'Non sono stati aggiunti prodotti alla pagina dei desideri.',
                 'move-to-cart'       => 'Sposta Nel Carrello',
-                'moved-success'      => 'Articolo spostato con successo nel carrello',    
+                'moved-success'      => 'Articolo spostato con successo nel carrello',
                 'moved'              => 'Elemento spostato con successo nel carrello',
                 'page-title'         => 'Lista dei Desideri',
                 'profile'            => 'Profilo',
@@ -278,15 +278,15 @@ return [
             'default-content' => 'Contenuto predefinito',
             'default-header'  => 'Intestazione predefinita',
         ],
-        
+
         'drawer' => [
-           'default-toggle'  => 'Attivazione predefinita',
+            'default-toggle'  => 'Attivazione predefinita',
         ],
-        
+
         'media' => [
             'add-attachments' => 'Aggiungi allegati',
         ],
-        
+
         'layouts' => [
             'header' => [
                 'title'         => 'Account',
@@ -345,6 +345,13 @@ return [
             'filters' => [
                 'title' => 'Applica Filtri',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'Digita almeno 2 caratteri...',
+                        'no-results'        => 'Nessun risultato trovato...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'title'     => 'Filtri Personalizzati',
                     'clear-all' => 'Cancella Tutto',
@@ -371,7 +378,7 @@ return [
         'modal' => [
             'default-content' => 'Contenuto predefinito',
             'default-header'  => 'Intestazione predefinita',
-            
+
             'confirm' => [
                 'title'        => 'Sei sicuro?',
                 'message'      => 'Sei sicuro di voler eseguire questa azione?',

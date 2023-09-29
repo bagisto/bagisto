@@ -345,6 +345,13 @@ return [
             'filters' => [
                 'title' => 'اعمال فیلترها',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'حداقل 2 حرف را تایپ کنید...',
+                        'no-results'        => 'هیچ نتیجه‌ای یافت نشد...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'title'     => 'فیلترهای سفارشی',
                     'clear-all' => 'پاک کردن همه',

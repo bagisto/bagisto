@@ -10,6 +10,7 @@ use Webkul\Shop\Http\Controllers\Customer\ForgotPasswordController;
 use Webkul\Shop\Http\Controllers\Customer\RegistrationController;
 use Webkul\Shop\Http\Controllers\Customer\ResetPasswordController;
 use Webkul\Shop\Http\Controllers\Customer\SessionController;
+use Webkul\Shop\Http\Controllers\DataGridController;
 
 Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
 
@@ -64,6 +65,11 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
          * if customer is authenticated.
          */
         Route::group(['middleware' => ['customer']], function () {
+            /**
+             * Datagrid routes.
+             */
+            Route::get('datagrid/look-up', [DataGridController::class, 'lookUp'])->name('shop.customer.datagrid.look_up');
+
             /**
              * Logout.
              */
