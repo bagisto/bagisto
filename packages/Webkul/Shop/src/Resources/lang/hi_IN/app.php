@@ -258,6 +258,7 @@ return [
                 'empty'              => 'इच्छा सूची पेज पर कोई उत्पाद नहीं जोड़े गए हैं।',
                 'move-to-cart'       => 'कार्ट में डालें',
                 'moved-success'      => 'आइटम सफलतापूर्वक कार्ट में स्थानांतरित हुआ',
+                'moved-success'      => 'आइटम सफलतापूर्वक कार्ट में स्थानांतरित हुआ',
                 'moved'              => 'आइटम सफलतापूर्वक कार्ट में ले जाया गया',
                 'page-title'         => 'इच्छा सूची',
                 'profile'            => 'प्रोफ़ाइल',
@@ -279,13 +280,17 @@ return [
             'default-header'  => 'डिफ़ॉल्ट हैडर',
         ],
 
+
         'drawer' => [
             'default-toggle'  => 'डिफ़ॉल्ट टॉगल',
+            'default-toggle'  => 'डिफ़ॉल्ट टॉगल',
         ],
+
 
         'media' => [
             'add-attachments' => 'अटैचमेंट जोड़ें',
         ],
+
 
         'layouts' => [
             'header' => [
@@ -344,6 +349,13 @@ return [
 
             'filters' => [
                 'title' => 'फ़िल्टर लागू करें',
+
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'कम से कम 2 अक्षर लिखें...',
+                        'no-results'        => 'कोई परिणाम नहीं मिला...',
+                    ],
+                ],
 
                 'custom-filters' => [
                     'clear-all' => 'सभी को हटाएँ',

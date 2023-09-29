@@ -1208,7 +1208,7 @@ return [
                 'title'                 => 'Edytuj Klienta',
             ],
 
-            'view' => [   
+            'view' => [
                 'address'                     => 'Adres',
                 'back-btn'                    => 'Powrót',
                 'add-note'                    => 'Dodaj Notatkę',
@@ -2464,7 +2464,7 @@ return [
             'delete-warning'     => 'Czy na pewno chcesz wykonać tę akcję?',
             'login-error'        => 'Sprawdź swoje dane logowania i spróbuj ponownie.',
             'activate-warning'   => 'Twoje konto nie zostało jeszcze aktywowane, skontaktuj się z administratorem.',
-            'last-delete-error'  => 'Usuwanie ostatniego użytkownika nie powiodło się.'
+            'last-delete-error'  => 'Usuwanie ostatniego użytkownika nie powiodło się.',
         ],
 
         'roles' => [
@@ -3160,11 +3160,24 @@ return [
             ],
 
             'filters' => [
-                'title' => 'Zastosuj Filtry',
+                'title'  => 'Zastosuj Filtry',
+                'select' => 'Wybierz.',
+
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'Wprowadź co najmniej 2 znaki...',
+                        'no-results'        => 'Nie znaleziono wyników...',
+                    ],
+                ],
 
                 'custom-filters' => [
                     'title'     => 'Niestandardowe Filtry',
                     'clear-all' => 'Wyczyść Wszystko',
+                ],
+
+                'boolean-options' => [
+                    'true'  => 'Prawda',
+                    'false' => 'Fałsz',
                 ],
 
                 'date-options' => [

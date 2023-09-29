@@ -278,15 +278,15 @@ return [
             'default-content' => 'תוכן ברירת מחדל',
             'default-header'  => 'כותרת ברירת מחדל',
         ],
-        
+
         'drawer' => [
-           'default-toggle'  => 'מתג ברירת מחדל',
+            'default-toggle'  => 'מתג ברירת מחדל',
         ],
-        
+
         'media' => [
             'add-attachments' => 'הוסף קבצים מצורפים',
         ],
-        
+
         'layouts' => [
             'header' => [
                 'account'       => 'חשבון',
@@ -345,6 +345,13 @@ return [
             'filters' => [
                 'title' => 'החל מסננים',
 
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'הקלד לפחות 2 תווים...',
+                        'no-results'        => 'לא נמצאו תוצאות...',
+                    ],
+                ],
+
                 'custom-filters' => [
                     'clear-all' => 'נקה הכל',
                     'title'     => 'סננים מותאמים אישית',
@@ -371,7 +378,7 @@ return [
         'modal' => [
             'default-content' => 'תוכן ברירת מחדל',
             'default-header'  => 'כותרת ברירת מחדל',
-            
+
             'confirm' => [
                 'agree-btn'    => 'הסכם',
                 'disagree-btn' => 'אי הסכמה',

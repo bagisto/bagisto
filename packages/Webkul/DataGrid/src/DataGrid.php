@@ -3,6 +3,7 @@
 namespace Webkul\DataGrid;
 
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Webkul\Admin\Exports\DataGridExport;
@@ -99,6 +100,30 @@ abstract class DataGrid
     }
 
     /**
+     * Get columns.
+     */
+    public function getColumns(): array
+    {
+        return $this->columns;
+    }
+
+    /**
+     * Get actions.
+     */
+    public function getActions(): array
+    {
+        return $this->actions;
+    }
+
+    /**
+     * Get mass actions.
+     */
+    public function getMassActions(): array
+    {
+        return $this->massActions;
+    }
+
+    /**
      * Add column.
      */
     public function addColumn(array $column): void
@@ -107,6 +132,7 @@ abstract class DataGrid
             index: $column['index'],
             label: $column['label'],
             type: $column['type'],
+            options: $column['options'] ?? null,
             searchable: $column['searchable'],
             filterable: $column['filterable'],
             sortable: $column['sortable'],
@@ -201,6 +227,15 @@ abstract class DataGrid
                 $column = collect($this->columns)->first(fn ($c) => $c->index === $requestedColumn);
 
                 switch ($column->type) {
+                    case ColumnTypeEnum::DROPDOWN->value:
+                        $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
+                            foreach ($requestedValues as $value) {
+                                $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), $value);
+                            }
+                        });
+
+                        break;
+
                     case ColumnTypeEnum::DATE_RANGE->value:
                     case ColumnTypeEnum::DATE_TIME_RANGE->value:
                         $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
@@ -340,6 +375,7 @@ abstract class DataGrid
         }
 
         return [
+            'id'           => Crypt::encryptString(get_called_class()),
             'columns'      => $this->columns,
             'actions'      => $this->actions,
             'mass_actions' => $this->massActions,

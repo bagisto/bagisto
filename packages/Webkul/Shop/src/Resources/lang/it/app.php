@@ -279,13 +279,17 @@ return [
             'default-header'  => 'Intestazione predefinita',
         ],
 
+
         'drawer' => [
             'default-toggle'  => 'Attivazione predefinita',
+            'default-toggle'  => 'Attivazione predefinita',
         ],
+
 
         'media' => [
             'add-attachments' => 'Aggiungi allegati',
         ],
+
 
         'layouts' => [
             'header' => [
@@ -371,6 +375,7 @@ return [
         'modal' => [
             'default-content' => 'Contenuto predefinito',
             'default-header'  => 'Intestazione predefinita',
+
 
             'confirm' => [
                 'agree-btn'    => 'Concordo',

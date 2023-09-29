@@ -427,10 +427,10 @@ return [
                 'amount-per-unit' => ':amount Per Unit x :qty Quantity',
                 'sku'             => 'SKU - :sku',
                 'qty-to-invoiced' => 'Qty. to invoiced',
-                'creation-error' => 'Order invoice creation is not allowed.',
-                'create-success' => 'Invoice created successfully',
-                'invalid-qty'    => 'We found an invalid quantity to invoice items.',
-                'product-error'  => 'Invoice can not be created without products.',
+                'creation-error'  => 'Order invoice creation is not allowed.',
+                'create-success'  => 'Invoice created successfully',
+                'invalid-qty'     => 'We found an invalid quantity to invoice items.',
+                'product-error'   => 'Invoice can not be created without products.',
             ],
 
             'invoice-pdf' => [
@@ -647,18 +647,18 @@ return [
                         ],
 
                         'edit' => [
-                            'disabled'        => 'Disabled',
-                            'edit-info'       => 'If you want to update product information in detail, then go to the',
-                            'edit-link-title' => 'Product Details Page',
-                            'enabled'         => 'Enabled',
-                            'title'           => 'Product',
-                            'name'            => 'Name',
-                            'price'           => 'Price',
-                            'quantities'      => 'Quantities',
-                            'save-btn'        => 'Save',
-                            'sku'             => 'SKU',
-                            'status'          => 'Status',
-                            'weight'          => 'Weight',
+                            'disabled'         => 'Disabled',
+                            'edit-info'        => 'If you want to update product information in detail, then go to the',
+                            'edit-link-title'  => 'Product Details Page',
+                            'enabled'          => 'Enabled',
+                            'title'            => 'Product',
+                            'name'             => 'Name',
+                            'price'            => 'Price',
+                            'quantities'       => 'Quantities',
+                            'save-btn'         => 'Save',
+                            'sku'              => 'SKU',
+                            'status'           => 'Status',
+                            'weight'           => 'Weight',
                             'images'           => 'Images',
                         ],
 
@@ -1894,11 +1894,11 @@ return [
                 'mass-delete-success'         => 'Selected items Delete Successfully',
                 'success'                     => ':name Successfully Created',
 
-                'datagrid' =>[
+                'datagrid' => [
                     'coupon-code'     => 'Coupon Code',
                     'created-date'    => 'Created Date',
                     'expiration-date' => 'Expiration Date',
-                    'delete'          => 'Delete', 
+                    'delete'          => 'Delete',
                     'id'              => 'ID',
                     'times-used'      => 'Times Used',
                 ],
@@ -3160,11 +3160,24 @@ return [
             ],
 
             'filters' => [
-                'title' => 'Apply Filters',
+                'title'  => 'Apply Filters',
+                'select' => 'Select',
+
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'Type atleast 2 characters...',
+                        'no-results'        => 'No result found...',
+                    ],
+                ],
 
                 'custom-filters' => [
                     'title'     => 'Custom Filters',
                     'clear-all' => 'Clear All',
+                ],
+
+                'boolean-options' => [
+                    'true'  => 'True',
+                    'false' => 'False',
                 ],
 
                 'date-options' => [

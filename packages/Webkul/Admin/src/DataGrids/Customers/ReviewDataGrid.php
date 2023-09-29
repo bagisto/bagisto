@@ -81,9 +81,9 @@ class ReviewDataGrid extends DataGrid
             'closure'    => function ($value) {
                 if ($value->product_review_status == 'approved') {
                     return '<p class="label-active">' . trans('admin::app.customers.reviews.index.datagrid.approved') . '</p>';
-                } elseif ($value->product_review_status == "pending") {
+                } elseif ($value->product_review_status == 'pending') {
                     return '<p class="label-pending">' . trans('admin::app.customers.reviews.index.datagrid.pending') . '</p>';
-                } elseif ($value->product_review_status == "disapproved") {  
+                } elseif ($value->product_review_status == 'disapproved') {
                     return '<p class="label-cancelled">' . trans('admin::app.customers.reviews.index.datagrid.disapproved') . '</p>';
                 }
             },
@@ -187,15 +187,15 @@ class ReviewDataGrid extends DataGrid
                 'url'     => route('admin.customers.customers.review.mass_update'),
                 'options' => [
                     [
-                        'name' => trans('admin::app.customers.reviews.index.datagrid.pending'),
+                        'label' => trans('admin::app.customers.reviews.index.datagrid.pending'),
                         'value' => 'pending',
                     ],
                     [
-                        'name' => trans('admin::app.customers.reviews.index.datagrid.approved'),
+                        'label' => trans('admin::app.customers.reviews.index.datagrid.approved'),
                         'value' => 'approved',
                     ],
                     [
-                        'name' => trans('admin::app.customers.reviews.index.datagrid.disapproved'),
+                        'label' => trans('admin::app.customers.reviews.index.datagrid.disapproved'),
                         'value' => 'disapproved',
                     ],
                 ],

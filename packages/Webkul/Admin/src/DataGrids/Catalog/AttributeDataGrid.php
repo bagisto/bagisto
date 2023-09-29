@@ -15,8 +15,7 @@ class AttributeDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('attributes')
-            ->select('id')
-            ->addSelect('id', 'code', 'admin_name', 'type', 'is_required', 'is_unique', 'value_per_locale', 'value_per_channel', 'created_at');
+            ->select('id', 'code', 'admin_name', 'type', 'is_required', 'is_unique', 'value_per_locale', 'value_per_channel', 'created_at');
 
         return $queryBuilder;
     }
