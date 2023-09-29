@@ -451,7 +451,7 @@
                     
                                 <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600 "></span>
                     
-                                <p class="flex gap-x-[4px] items-center cursor-pointer dark:text-white">
+                                <p class="flex gap-x-[4px] items-center cursor-pointer text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 font-semibold">
                                     @lang('admin::app.customers.customers.view.notify-customer')
                                 </p>
                             </label>
@@ -477,11 +477,15 @@
                         </p>
 
                         {{-- Notes List Title and Time --}}
-                        <p class="text-gray-600 dark:text-gray-300">  
+                        <p class="flex gap-2 text-gray-600 dark:text-gray-300 items-center">
                             @if ($note->customer_notified)
-                                @lang('admin::app.customers.customers.view.customer-notified', ['created_at' => $note->created_at])
+                                <span class="h-fit text-[24px] rounded-full icon-done text-blue-600 bg-blue-100"></span>  
+
+                                @lang('admin::app.customers.customers.view.customer-notified', ['date' => core()->formatDate($note->created_at, 'Y-m-d H:i:s a')])
                             @else
-                                @lang('admin::app.customers.customers.view.customer-not-notified', ['created_at' => $note->created_at])
+                                <span class="h-fit text-[24px] rounded-full icon-cancel-1 text-red-600 bg-red-100"></span>
+
+                                @lang('admin::app.customers.customers.view.customer-not-notified', ['date' => core()->formatDate($note->created_at, 'Y-m-d H:i:s a')])
                             @endif
                         </p>
                     </div>
