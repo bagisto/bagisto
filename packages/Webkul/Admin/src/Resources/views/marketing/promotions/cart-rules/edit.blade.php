@@ -17,6 +17,7 @@
                     :action="route('admin.marketing.promotions.cart_rules.update', $cartRule->id)"
                     method="PUT"
                     enctype="multipart/form-data"
+                    id="update-cart-rule"
                 >
                     <div class="flex gap-[16px] justify-between items-center mt-3 max-sm:flex-wrap">
                         <p class="text-[20px] text-gray-800 dark:text-white font-bold">
@@ -24,7 +25,7 @@
                         </p>
                 
                         <div class="flex gap-x-[10px] items-center">
-                            <!-- Cancel Button -->
+                            <!-- Back Button -->
                             <a
                                 href="{{ route('admin.marketing.promotions.cart_rules.index') }}"
                                 class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
@@ -34,8 +35,9 @@
 
                             <!-- Save buton -->
                             <button 
-                                type="submit"
+                                type="button"
                                 class="primary-button"
+                                onclick="document.getElementById('update-cart-rule').submit()"
                             >
                                 @lang('admin::app.marketing.promotions.cart-rules.edit.save-btn')
                             </button>

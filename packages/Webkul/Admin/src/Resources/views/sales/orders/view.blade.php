@@ -334,7 +334,7 @@
                         
                                     <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600 "></span>
                         
-                                    <p class="flex gap-x-[4px] items-center cursor-pointer dark:text-white">
+                                    <p class="flex gap-x-[4px] items-center cursor-pointer text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 font-semibold">
                                         @lang('admin::app.sales.orders.view.notify-customer')
                                     </p>
                                 </label>
@@ -358,16 +358,21 @@
                                 {{ $comment->comment }}
                             </p>
 
-                            <p class="text-gray-600 dark:text-gray-300">  
+                            {{-- Notes List Title and Time --}}
+                            <p class="flex gap-2 text-gray-600 dark:text-gray-300 items-center">  
                                 @if ($comment->customer_notified)
+                                    <span class="h-fit text-[24px] rounded-full icon-done text-blue-600 bg-blue-100"></span> 
+
                                     @lang('admin::app.sales.orders.view.customer-notified', ['date' => core()->formatDate($comment->created_at, 'Y-m-d H:i:s a')])
                                 @else
+                                    <span class="h-fit text-[24px] rounded-full icon-cancel-1 text-red-600 bg-red-100"></span>
+
                                     @lang('admin::app.sales.orders.view.customer-not-notified', ['date' => core()->formatDate($comment->created_at, 'Y-m-d H:i:s a')])
                                 @endif
                             </p>
                         </div>
 
-                        <span class="block w-full border-b-[1px] dark:border-gray-800  "></span>
+                        <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
                     @endforeach
                 </div>
             </div>
