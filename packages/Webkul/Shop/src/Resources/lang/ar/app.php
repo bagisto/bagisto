@@ -470,6 +470,7 @@ return [
                 'submit-review'    => 'إرسال المراجعة',
                 'title'            => 'العنوان',
                 'write-a-review'   => 'كتابة مراجعة',
+                'name'             => 'الاسم',
             ],
 
             'add-to-cart'            => 'أضف إلى السلة',

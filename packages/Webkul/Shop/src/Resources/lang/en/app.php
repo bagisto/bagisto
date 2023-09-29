@@ -470,6 +470,7 @@ return [
                 'submit-review'    => 'Submit Review',
                 'title'            => 'Title',
                 'write-a-review'   => 'Write a Review',
+                'name'             => 'Name',
             ],
 
             'add-to-cart'            => 'Add To Cart',

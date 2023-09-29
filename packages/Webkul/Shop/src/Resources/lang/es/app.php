@@ -470,6 +470,7 @@ return [
                 'submit-review'          => 'Enviar reseña',
                 'title'                  => 'Título',
                 'write-a-review'         => 'Escribir una reseña',
+                'name'                   => 'Nombre',
             ],
 
             'add-to-cart'            => 'Agregar al carrito',

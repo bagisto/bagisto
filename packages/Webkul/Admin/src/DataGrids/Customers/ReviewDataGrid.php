@@ -28,11 +28,12 @@ class ReviewDataGrid extends DataGrid
                 'pr.id as product_review_id',
                 'pr.title',
                 'pr.comment',
+                'pr.name as customer_full_name',
+                'pr.customer_id as customer_id',
                 'pf.name as product_name',
                 'pr.status as product_review_status',
                 'pr.rating',
                 'pr.created_at',
-                DB::raw('CONCAT(' . DB::getTablePrefix() . 'c.first_name, " ", ' . DB::getTablePrefix() . 'c.last_name) as customer_full_name')
             )
             ->where('channel', core()->getCurrentChannelCode())
             ->where('locale', app()->getLocale());
@@ -54,7 +55,7 @@ class ReviewDataGrid extends DataGrid
     {
         // Customer Name
         $this->addColumn([
-            'index'      => 'name',
+            'index'      => 'customer_full_name',
             'label'      => trans('admin::app.customers.reviews.index.datagrid.customer-names'),
             'type'       => 'string',
             'searchable' => false,
