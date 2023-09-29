@@ -1992,8 +1992,19 @@
                     },
 
                     storeImage($event) {
-                        this.$refs.editor.storeImage($event)
-                    }
+                        const file = $event.target.files[0];
+
+                        const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+
+                        const fileExtension = file.name.split('.').pop().toLowerCase();
+
+                        if (allowedExtensions.includes(fileExtension)) {
+                            this.$refs.editor.storeImage($event);
+                        } else {
+                            this.$emitter.emit('add-flash', { type: 'error', message: 'Invalid Image Type' })
+                        }
+                    },
+
                 },
             });
         </script>
