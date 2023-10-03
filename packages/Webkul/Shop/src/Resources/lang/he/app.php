@@ -512,6 +512,18 @@ return [
 
     'search' => [
         'title' => 'תוצאות חיפוש עבור : :query',
+
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'משהו השתבש, נסה שוב מאוחר יותר.',
+                'size-limit-error'     => 'שגיאת הגבלת גודל',
+                'only-images-allowed'  => 'מותרות רק תמונות (.jpeg, .jpg, .png, ..).',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => 'מילות מפתח שנבדקו:',
+            ],
+        ],
     ],
 
     'compare'  => [

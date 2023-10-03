@@ -512,6 +512,18 @@ return [
 
     'search' => [
         'title' => 'نتایج جستجو برای : :query',
+
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'مشکلی پیش آمده است، لطفاً بعداً دوباره تلاش کنید.',
+                'size-limit-error'     => 'خطای محدودیت اندازه',
+                'only-images-allowed'  => 'تنها تصاویر (.jpeg، .jpg، .png، ..) مجاز هستند.',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => 'کلمات کلیدی تجزیه و تحلیل شده:',
+            ],
+        ],
     ],
 
     'compare'  => [

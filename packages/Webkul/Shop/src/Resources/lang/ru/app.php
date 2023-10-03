@@ -511,7 +511,19 @@ return [
     ],
 
     'search' => [
-        'title' => 'Результаты поиска для: :query',
+        'title' => 'Результаты поиска для : :query',
+    
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'Что-то пошло не так, попробуйте еще раз позже.',
+                'size-limit-error'     => 'Ошибка размера',
+                'only-images-allowed'  => 'Разрешены только изображения (.jpeg, .jpg, .png, ..).',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => 'Анализированные ключевые слова:',
+            ],
+        ],
     ],
 
     'compare'  => [

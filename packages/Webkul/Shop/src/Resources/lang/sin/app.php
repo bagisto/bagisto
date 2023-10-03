@@ -512,6 +512,18 @@ return [
 
     'search' => [
         'title' => 'සෙවීම ප්රතිඵල : :query',
+
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'මමද පැරණියයි, කරන්නට පසුතිබව උත්සහ කරන්න.',
+                'size-limit-error'     => 'ප්‍රමාණුකාරකවෙක් හෝ විශාල කවේද අ෩ු වෙයි (.jpeg, .jpg, .png, ..) වනුයි.',
+                'only-images-allowed'  => 'ප්‍රමාණුකාරකවෙක් හෝ විශාල කවේද අ෩ු වෙයි (.jpeg, .jpg, .png, ..) වනුයි.',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => 'ප්‍රභේද කතා:',
+            ],
+        ],
     ],
 
     'compare'  => [

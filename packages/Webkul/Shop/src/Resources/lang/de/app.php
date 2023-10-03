@@ -511,9 +511,21 @@ return [
     ],
 
     'search' => [
-        'title' => 'Suchergebnisse für : :query',
+        'title' => 'Suchergebnisse für: :query',
+    
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'Etwas ist schiefgelaufen, bitte versuchen Sie es später erneut.',
+                'size-limit-error'     => 'Größenbeschränkungsfehler',
+                'only-images-allowed'  => 'Nur Bilder (.jpeg, .jpg, .png, ..) sind erlaubt.',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => 'Analysierte Schlüsselwörter:',
+            ],
+        ],
     ],
-
+    
     'compare' => [
         'already-added'      => 'Artikel ist bereits zur Vergleichsliste hinzugefügt',
         'delete-all'         => 'Alle löschen',

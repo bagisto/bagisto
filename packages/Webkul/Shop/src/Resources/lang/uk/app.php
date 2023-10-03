@@ -512,6 +512,18 @@ return [
 
     'search' => [
         'title' => 'Результати пошуку для: :query',
+
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'Сталася помилка, будь ласка, спробуйте ще раз пізніше.',
+                'size-limit-error'     => 'Помилка обмеження розміру',
+                'only-images-allowed'  => 'Дозволені тільки зображення (.jpeg, .jpg, .png, ..).',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => 'Аналізовані ключові слова:',
+            ],
+        ],
     ],
 
     'compare'  => [

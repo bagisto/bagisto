@@ -512,8 +512,20 @@ return [
 
     'search' => [
         'title' => ':query এর জন্য অনুসন্ধান ফলাফল',
+    
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'কিছু ভুল হয়েছে, দয়া করে পরে আবার চেষ্টা করুন।',
+                'size-limit-error'     => 'সাইজ সীমা পার',
+                'only-images-allowed'  => 'শুধুমাত্র চিত্র (.jpeg, .jpg, .png, ..) অনুমোদিত।',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => 'বিশ্লেষণ করা শব্দ:',
+            ],
+        ],
     ],
-
+    
     'compare'  => [
         'already-added'      => 'আইটেম ইতিমধ্যে তুলনা তালিকায় যোগ করা হয়েছে',
         'delete-all'         => 'সব মুছুন',

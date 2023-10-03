@@ -512,6 +512,18 @@ return [
 
     'search' => [
         'title' => ':query için arama sonuçları',
+
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'Bir şeyler ters gitti, lütfen daha sonra tekrar deneyin.',
+                'size-limit-error'     => 'Boyut Sınırı Hatası',
+                'only-images-allowed'  => 'Sadece resimler (.jpeg, .jpg, .png, ..) izin verilir.',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => 'Analiz Edilen Anahtar Kelimeler:',
+            ],
+        ],
     ],
 
     'compare' => [
