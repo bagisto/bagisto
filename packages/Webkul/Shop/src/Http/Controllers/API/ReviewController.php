@@ -71,10 +71,8 @@ class ReviewController extends APIController
             'product_id'  => $id,
         ]);
 
-        if ($customer = auth()->guard('customer')->user()) {
-            $data['name']        = $customer->name;
-            $data['customer_id'] = $customer->id;
-        }
+        $data['name'] = auth()->guard('customer')->user()?->name ?? request()->input('name');
+        $data['customer_id'] = auth()->guard('customer')->id() ?? null;
 
         $review = $this->productReviewRepository->create($data);
 

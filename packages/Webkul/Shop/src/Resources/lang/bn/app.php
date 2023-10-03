@@ -470,6 +470,7 @@ return [
                 'submit-review'    => 'রিভিউ জমা দিন',
                 'title'            => 'শিরোনাম',
                 'write-a-review'   => 'রিভিউ লিখুন',
+                'name'             => 'নাম',
             ],
 
             'add-to-cart'            => 'কার্টে যোগ করুন',
