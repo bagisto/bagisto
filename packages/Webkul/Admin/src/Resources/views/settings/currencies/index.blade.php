@@ -109,11 +109,11 @@
                         <!-- Id -->
                         <p v-text="record.id"></p>
 
-                        <!-- Status -->
-                        <p v-text="record.name"></p>
-
-                        <!-- Email -->
+                        <!-- Code -->
                         <p v-text="record.code"></p>
+
+                        <!-- Name -->
+                        <p v-text="record.name"></p>
 
                         <!-- Actions -->
                         <div class="flex justify-end">

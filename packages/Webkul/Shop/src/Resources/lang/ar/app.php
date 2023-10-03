@@ -470,6 +470,7 @@ return [
                 'submit-review'    => 'إرسال المراجعة',
                 'title'            => 'العنوان',
                 'write-a-review'   => 'كتابة مراجعة',
+                'name'             => 'الاسم',
             ],
 
             'add-to-cart'            => 'أضف إلى السلة',
@@ -512,8 +513,20 @@ return [
 
     'search' => [
         'title' => 'نتائج البحث عن: :query',
-    ],
 
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'حدث خطأ ما، يُرجى المحاولة مرة أخرى في وقت لاحق.',
+                'size-limit-error'     => 'خطأ في حد الحجم',
+                'only-images-allowed'  => 'يُسمح فقط بالصور (.jpeg، .jpg، .png، ..).',
+            ],  
+
+            'results' => [
+                'analysed-keywords' => 'الكلمات المفحوصة:',
+            ],
+        ],
+    ],
+    
     'compare' => [
         'already-added'      => 'العنصر مضاف بالفعل إلى قائمة المقارنة',
         'delete-all'         => 'مسح الكل',

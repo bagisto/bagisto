@@ -69,6 +69,32 @@
                                 </x-shop::form.control-group.error>
                             </x-shop::form.control-group>
 
+                            @if (
+                                core()->getConfigData('catalog.products.review.guest_review')
+                                && ! auth()->guard('customer')->user()
+                            )
+                                <x-shop::form.control-group>
+                                    <x-shop::form.control-group.label class="required">
+                                        @lang('shop::app.products.view.reviews.name')
+                                    </x-shop::form.control-group.label>
+
+                                    <x-shop::form.control-group.control
+                                        type="text"
+                                        name="name"
+                                        :value="old('name')"
+                                        rules="required"
+                                        :label="trans('shop::app.products.view.reviews.name')"
+                                        :placeholder="trans('shop::app.products.view.reviews.name')"
+                                    >
+                                    </x-shop::form.control-group.control>
+
+                                    <x-shop::form.control-group.error
+                                        control-name="name"
+                                    >
+                                    </x-shop::form.control-group.error>
+                                </x-shop::form.control-group>
+                            @endif
+
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="required">
                                     @lang('shop::app.products.view.reviews.title')
@@ -277,7 +303,6 @@
                             target="_blank"
                             v-if="file.type == 'image'"
                         >
-
                             <img
                                 class="min-w-[50px] max-h-[50px] rounded-[12px] cursor-pointer"
                                 :src="file.url"
@@ -321,7 +346,7 @@
                     reviews: [],
 
                     links: {
-                        next: '{{ route("shop.api.products.reviews.index", $product->id) }}',
+                        next: '{{ route('shop.api.products.reviews.index', $product->id) }}',
                     },
 
                     meta: {},
@@ -350,7 +375,7 @@
                 },
 
                 store(params, { resetForm, setErrors }) {
-                    this.$axios.post('{{ route("shop.api.products.reviews.store", $product->id) }}', params, {
+                    this.$axios.post('{{ route('shop.api.products.reviews.store', $product->id) }}', params, {
                             headers: {
                                 'Content-Type': 'multipart/form-data'
                             }
