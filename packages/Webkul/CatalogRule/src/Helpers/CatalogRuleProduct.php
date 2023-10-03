@@ -127,6 +127,10 @@ class CatalogRuleProduct
                 $query->where('products.id', $product->id);
             }
 
+            if (! $rule->conditions) {
+                return $query;
+            }
+
             $appliedAttributes = [];
 
             foreach ($rule->conditions as $condition) {
