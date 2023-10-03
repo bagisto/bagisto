@@ -2016,7 +2016,6 @@
                             this.$refs.editor.storeImage($event);
                         });
                     },
-
                 },
             });
         </script>
