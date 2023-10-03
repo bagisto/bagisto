@@ -1175,8 +1175,9 @@
                                     name="static_image"
                                     id="static_image"
                                     class="hidden"
-                                    @change="storeImage($event)"
                                     accept="image/*"
+                                    ref="static_image"
+                                    @change="storeImage($event)"
                                 >
                             </div>
                         </div>
@@ -1992,17 +1993,28 @@
                     },
 
                     storeImage($event) {
-                        const file = $event.target.files[0];
+                        let imageInput = this.$refs.static_image;
 
-                        const allowedExtensions = ['jpg', 'jpeg', 'png', 'webp'];
-
-                        const fileExtension = file.name.split('.').pop().toLowerCase();
-
-                        if (allowedExtensions.includes(fileExtension)) {
-                            this.$refs.editor.storeImage($event);
-                        } else {
-                            this.$emitter.emit('add-flash', { type: 'error', message: '@lang('admin::app.settings.themes.edit.image-upload-message')' })
+                        if (imageInput.files == undefined) {
+                            return;
                         }
+
+                        const validFiles = Array.from(imageInput.files).every(file => file.type.includes('image/'));
+
+                        if (! validFiles) {
+                            this.$emitter.emit('add-flash', {
+                                type: 'warning',
+                                message: "@lang('admin::app.settings.themes.edit.image-upload-message')"
+                            });
+
+                            imageInput.value = '';
+
+                            return;
+                        }
+
+                        imageInput.files.forEach((file, index) => {
+                            this.$refs.editor.storeImage($event);
+                        });
                     },
 
                 },
