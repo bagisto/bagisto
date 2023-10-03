@@ -470,6 +470,7 @@ return [
                 'submit-review'          => 'ثبت نقد و بررسی',
                 'title'                  => 'عنوان',
                 'write-a-review'         => 'نوشتن یک نقد و بررسی',
+                'name'                   => 'نام',
             ],
 
             'add-to-cart'            => 'افزودن به سبد خرید',
@@ -512,6 +513,18 @@ return [
 
     'search' => [
         'title' => 'نتایج جستجو برای : :query',
+
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'مشکلی پیش آمده است، لطفاً بعداً دوباره تلاش کنید.',
+                'size-limit-error'     => 'خطای محدودیت اندازه',
+                'only-images-allowed'  => 'تنها تصاویر (.jpeg، .jpg، .png، ..) مجاز هستند.',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => 'کلمات کلیدی تجزیه و تحلیل شده:',
+            ],
+        ],
     ],
 
     'compare'  => [

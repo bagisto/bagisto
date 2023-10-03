@@ -1215,8 +1215,8 @@ return [
                 'active'                      => 'Attivo',
                 'address-delete-success'      => 'Indirizzo Eliminato con Successo',
                 'customer'                    => 'Cliente',
-                'customer-notified'           => 'Cliente Notificato',
-                'customer-not-notified'       => 'Cliente Non Notificato',
+                'customer-notified'           => ':date | Cliente <b>Avvisato</b>',
+                'customer-not-notified'       => ':date | Cliente <b>Non Avvisato</b>',
                 'delete-account'              => 'Elimina Account',
                 'delete'                      => 'Elimina',
                 'date-of-birth'               => 'Data di Nascita - :dob',
@@ -2597,6 +2597,7 @@ return [
                 'back'                          => 'Atrás',
                 'preview'                       => 'Anteprima',
                 'channels'                      => 'canali',
+                'image-size'                    => 'La risoluzione dell\'immagine deve essere (1920px X 700px).',
             ],
 
             'create-success' => 'Tema creado exitosamente',

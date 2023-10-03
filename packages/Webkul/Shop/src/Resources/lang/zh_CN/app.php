@@ -458,18 +458,19 @@ return [
             ],
     
             'reviews' => [
-                'cancel'      => '取消',
-                'rating'      => '评分',
-                'success'     => '评论提交成功。',
-                'attachments' => '附件',
-                'title'       => '标题',
-                'comment'     => '评论',
-                'customer-review'        => '客户评论',
-                'submit-review'          => '提交评论',
-                'write-a-review'         => '撰写评论',
-                'empty-review'           => '没有找到评论，成为第一个评论这个产品的人',
-                'load-more'              => '加载更多',
-                'failed-to-upload'       => '图片上传失败',
+                'cancel'           => '取消',
+                'rating'           => '评分',
+                'success'          => '评论提交成功。',
+                'attachments'      => '附件',
+                'title'            => '标题',
+                'comment'          => '评论',
+                'customer-review'  => '客户评论',
+                'submit-review'    => '提交评论',
+                'write-a-review'   => '撰写评论',
+                'empty-review'     => '没有找到评论，成为第一个评论这个产品的人',
+                'load-more'        => '加载更多',
+                'failed-to-upload' => '图片上传失败',
+                'name'             => '名称',
             ],
     
             'description'            => '描述',
@@ -512,6 +513,18 @@ return [
 
     'search' => [
         'title' => '搜索结果：:query',
+
+        'images' => [
+            'index' => [
+                'something-went-wrong' => '出了点问题，请稍后重试。',
+                'size-limit-error'     => '尺寸限制错误',
+                'only-images-allowed'  => '仅允许图片（.jpeg、.jpg、.png 等）。',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => '分析关键字：',
+            ],
+        ],
     ],
 
     'compare'  => [

@@ -458,18 +458,19 @@ return [
             ],
     
             'reviews' => [
-                'cancel'      => 'Annuler',
-                'rating'      => 'Évaluation',
-                'success'     => 'Avis soumis avec succès.',
-                'attachments' => 'Pièces jointes',
-                'title'       => 'Titre',
-                'comment'     => 'Commentaire',
-                'customer-review'        => 'Avis clients',
-                'submit-review'          => 'Envoyer un avis',
-                'write-a-review'         => 'Rédiger un avis',
-                'empty-review'           => 'Aucun avis trouvé, soyez le premier à évaluer ce produit.',
-                'load-more'              => 'Charger plus',
-                'failed-to-upload'       => 'Échec du téléchargement de l\'image',
+                'cancel'           => 'Annuler',
+                'rating'           => 'Évaluation',
+                'success'          => 'Avis soumis avec succès.',
+                'attachments'      => 'Pièces jointes',
+                'title'            => 'Titre',
+                'comment'          => 'Commentaire',
+                'customer-review'  => 'Avis clients',
+                'submit-review'    => 'Envoyer un avis',
+                'write-a-review'   => 'Rédiger un avis',
+                'empty-review'     => 'Aucun avis trouvé, soyez le premier à évaluer ce produit.',
+                'load-more'        => 'Charger plus',
+                'failed-to-upload' => 'Échec du téléchargement de l\'image',
+                'name'             => 'Nom',
             ],
     
             'description'            => 'Description',
@@ -512,6 +513,18 @@ return [
 
     'search' => [
         'title' => 'Résultats de recherche pour : :query',
+    
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'Quelque chose s\'est mal passé, veuillez réessayer ultérieurement.',
+                'size-limit-error'     => 'Erreur de limite de taille',
+                'only-images-allowed'  => 'Seules les images (.jpeg, .jpg, .png, ..) sont autorisées.',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => 'Mots-clés analysés :',
+            ],
+        ],
     ],
 
     'compare' => [

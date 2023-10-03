@@ -1214,8 +1214,8 @@ return [
                 'active'                      => '活跃',
                 'address-delete-success'      => '地址删除成功',
                 'customer'                    => '顾客',
-                'customer-notified'           => '顾客已通知',
-                'customer-not-notified'       => '顾客未通知',
+                'customer-notified'           => ':date | 客户 <b>已通知</b>',
+                'customer-not-notified'       => ':date | 客户 <b>未通知</b>',
                 'delete-account'              => '删除账户',
                 'delete'                      => '删除',
                 'date-of-birth'               => '出生日期 - :dob',
@@ -2597,6 +2597,7 @@ return [
                 'back'                          => '返回',
                 'preview'                       => '预览',
                 'channels'                      => '频道',
+                'image-size'                    => '圖片解析度應為（1920px X 700px）'
             ],
 
             'create-success' => '主题创建成功',

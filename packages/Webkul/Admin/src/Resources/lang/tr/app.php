@@ -1215,8 +1215,8 @@ return [
                 'active'                      => 'Aktif',
                 'address-delete-success'      => 'Adres Başarıyla Silindi',
                 'customer'                    => 'Müşteri',
-                'customer-notified'           => 'Müşteri Bilgilendirildi',
-                'customer-not-notified'       => 'Müşteri Bilgilendirilmedi',
+                'customer-notified'           => ':date | Müşteri <b>Bilgilendirildi</b>',
+                'customer-not-notified'       => ':date | Müşteri <b>Bilgilendirilmedi</b>',
                 'delete-account'              => 'Hesabı Sil',
                 'delete'                      => 'Sil',
                 'date-of-birth'               => 'Doğum Tarihi - :dob',
@@ -2598,6 +2598,7 @@ return [
                 'back'                          => 'Geri',
                 'preview'                       => 'Önizleme',
                 'channels'                      => 'kanallar',
+                'image-size'                    => 'Resim çözünürlüğü (1920px X 700px) olmalıdır.',
             ],
 
             'create-success' => 'Tema başarıyla oluşturuldu',

@@ -1215,8 +1215,8 @@ return [
                 'active'                      => 'Actif',
                 'address-delete-success'      => 'Adresse supprimée avec succès',
                 'customer'                    => 'Client',
-                'customer-notified'           => 'Client notifié',
-                'customer-not-notified'       => 'Client non notifié',
+                'customer-notified'           => ':date | Client <b>notifié</b>',
+                'customer-not-notified'       => ':date | Client <b>non notifié</b>',
                 'delete-account'              => 'Supprimer le compte',
                 'delete'                      => 'Supprimer',
                 'date-of-birth'               => 'DOB - :dob',
@@ -2597,6 +2597,7 @@ return [
                 'back'                          => 'Retour',
                 'preview'                       => 'Aperçu',
                 'channels'                      => 'Chaînes',
+                'image-size'                    => 'La résolution de l\'image doit être (1920px X 700px).',
             ],
 
             'create-success' => 'Thème créé avec succès',

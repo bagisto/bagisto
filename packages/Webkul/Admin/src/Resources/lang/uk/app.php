@@ -1215,8 +1215,8 @@ return [
                 'active'                      => 'Активний',
                 'address-delete-success'      => 'Адресу успішно видалено',
                 'customer'                    => 'Клієнт',
-                'customer-notified'           => 'Клієнт сповіщений',
-                'customer-not-notified'       => 'Клієнт не сповіщений',
+                'customer-notified'           => ':date | Клієнт <b>повідомлений</b>',
+                'customer-not-notified'       => ':date | Клієнт <b>не повідомлений</b>',
                 'delete-account'              => 'Видалити обліковий запис',
                 'delete'                      => 'Видалити',
                 'date-of-birth'               => 'Дата народження - :dob',
@@ -2597,6 +2597,9 @@ return [
                 'back'                          => 'Назад',
                 'preview'                       => 'Попередній перегляд',
                 'channels'                      => 'канали',
+                'image-size'                    => 'Роздільна здатність зображення повинна бути (1920px X 700px)',
+
+
             ],
 
             'create-success' => 'Тему створено успішно',

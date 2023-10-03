@@ -1215,8 +1215,8 @@ return [
                 'active'                      => 'Active',
                 'address-delete-success'      => 'Address Deleted Successfully',
                 'customer'                    => 'Customer',
-                'customer-notified'           => 'Customer Notified',
-                'customer-not-notified'       => 'Customer Not Notified',
+                'customer-notified'           => ':date | Customer <b>Notified</b>',
+                'customer-not-notified'       => ':date | Customer <b>Not Notified</b>',
                 'delete-account'              => 'Delete Account',
                 'delete'                      => 'Delete',
                 'date-of-birth'               => 'DOB - :dob',
@@ -2597,6 +2597,7 @@ return [
                 'back'                          => 'Back',
                 'preview'                       => 'Preview',
                 'channels'                      => 'Channels',
+                'image-size'                    => 'Image resolution should be (1920px X 700px)',
             ],
 
             'create-success' => 'Theme created successfully',

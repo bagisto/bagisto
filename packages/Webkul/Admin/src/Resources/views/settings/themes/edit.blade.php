@@ -157,7 +157,7 @@
 
                                                     <span class="text-gray-600 dark:text-gray-300  transition-all">
                                                         <a 
-                                                            :href="image.image"
+                                                            :href="'{{ config('app.url') }}' + image.image"
                                                             :ref="'image_' + index"
                                                             target="_blank"
                                                             class="ltr:ml-2 rtl:mr-2 text-blue-600 transition-all hover:underline"
@@ -345,19 +345,19 @@
                             <x-slot:content>
                                 <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group class="mb-[10px]">
-                                            <x-admin::form.control-group.label>
-                                                @lang('admin::app.settings.themes.edit.link')
-                                            </x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.settings.themes.edit.link')
+                                        </x-admin::form.control-group.label>
 
-                                            <x-admin::form.control-group.control
-                                                type="text"
-                                                name="{{ $currentLocale->code }}[link]"
-                                                :placeholder="trans('admin::app.settings.themes.edit.link')"
-                                            >
-                                            </x-admin::form.control-group.control>
-                                        </x-admin::form.control-group>
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="{{ $currentLocale->code }}[link]"
+                                            :placeholder="trans('admin::app.settings.themes.edit.link')"
+                                        >
+                                        </x-admin::form.control-group.control>
+                                    </x-admin::form.control-group>
 
+                                    <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.themes.edit.slider-image')
                                         </x-admin::form.control-group.label>
@@ -375,6 +375,10 @@
                                         >
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
+
+                                    <p class="text-[12px] text-gray-600 dark:text-gray-300">
+                                        @lang('admin::app.settings.themes.edit.image-size')
+                                    </p>
                                 </div>
                             </x-slot:content>
         

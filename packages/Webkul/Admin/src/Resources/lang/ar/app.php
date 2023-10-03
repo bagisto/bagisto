@@ -1215,8 +1215,8 @@ return [
                 'active'                      => 'نشط',
                 'address-delete-success'      => 'تم حذف العنوان بنجاح',
                 'customer'                    => 'العميل',
-                'customer-notified'           => 'تم إبلاغ العميل',
-                'customer-not-notified'       => 'لم يتم إبلاغ العميل',
+                'customer-notified'           => ':date | العميل <b>تم إعلامه</b>',
+                'customer-not-notified'       => ':date | العميل <b>لم يتم إعلامه</b>',
                 'delete-account'              => 'حذف الحساب',
                 'delete'                      => 'حذف',
                 'date-of-birth'               => 'تاريخ الميلاد - :dob',
@@ -2598,6 +2598,7 @@ return [
                 'back'                          => 'رجوع',
                 'preview'                       => 'معاينة',
                 'channels'                      => 'القنوات',
+                'image-size'                    => 'دقة الصورة يجب أن تكون (١٩٢٠ بيكسل × ٧٠٠ بيكسل)',
             ],
 
             'create-success' => 'تم إنشاء السمة بنجاح',

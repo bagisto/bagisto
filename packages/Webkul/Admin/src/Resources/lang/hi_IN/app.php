@@ -1215,8 +1215,8 @@ return [
                 'active'                      => 'सक्रिय',
                 'address-delete-success'      => 'पता सफलतापूर्वक हटा दिया गया है',
                 'customer'                    => 'ग्राहक',
-                'customer-notified'           => 'ग्राहक को सूचित किया गया',
-                'customer-not-notified'       => 'ग्राहक को सूचित नहीं किया गया',
+                'customer-notified'           => ':date | ग्राहक <b>सूचित</b>',
+                'customer-not-notified'       => ':date | ग्राहक <b>सूचित नहीं</b>',
                 'delete-account'              => 'खाता हटाएं',
                 'delete'                      => 'हटाएं',
                 'date-of-birth'               => 'जन्म तिथि - :dob',
@@ -2597,6 +2597,7 @@ return [
                 'back'                          => 'वापस',
                 'preview'                       => 'पूर्वावलोकन',
                 'channels'                      => 'चैनल',
+                'image-size'                    => 'चित्र का संकलन (1920px X 700px) होना चाहिए।',
             ],
 
             'create-success' => 'थीम सफलतापूर्वक बनाई गई',

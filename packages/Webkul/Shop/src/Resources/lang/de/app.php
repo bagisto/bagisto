@@ -458,18 +458,19 @@ return [
             ],
     
             'reviews' => [
-                'attachments' => 'Anhänge',
-                'comment'     => 'Kommentar',
-                'customer-review'        => 'Kundenbewertungen',
-                'cancel'      => 'Abbrechen',
-                'empty-review'           => 'Keine Bewertungen gefunden, sei der erste, der dieses Produkt bewertet',
-                'failed-to-upload'       => 'Das Bild konnte nicht hochgeladen werden',
-                'load-more'              => 'Mehr laden',
-                'rating'      => 'Bewertung',
-                'success'     => 'Bewertung erfolgreich übermittelt.',
-                'submit-review'          => 'Bewertung absenden',
-                'title'       => 'Titel',
-                'write-a-review'         => 'Eine Bewertung schreiben',
+                'attachments'      => 'Anhänge',
+                'comment'          => 'Kommentar',
+                'customer-review'  => 'Kundenbewertungen',
+                'cancel'           => 'Abbrechen',
+                'empty-review'     => 'Keine Bewertungen gefunden, sei der erste, der dieses Produkt bewertet',
+                'failed-to-upload' => 'Das Bild konnte nicht hochgeladen werden',
+                'load-more'        => 'Mehr laden',
+                'rating'           => 'Bewertung',
+                'success'          => 'Bewertung erfolgreich übermittelt.',
+                'submit-review'    => 'Bewertung absenden',
+                'title'            => 'Titel',
+                'write-a-review'   => 'Eine Bewertung schreiben',
+                'name'             => 'Name',
             ],
     
             'add-to-cart'            => 'In den Warenkorb legen',
@@ -511,9 +512,21 @@ return [
     ],
 
     'search' => [
-        'title' => 'Suchergebnisse für : :query',
+        'title' => 'Suchergebnisse für: :query',
+    
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'Etwas ist schiefgelaufen, bitte versuchen Sie es später erneut.',
+                'size-limit-error'     => 'Größenbeschränkungsfehler',
+                'only-images-allowed'  => 'Nur Bilder (.jpeg, .jpg, .png, ..) sind erlaubt.',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => 'Analysierte Schlüsselwörter:',
+            ],
+        ],
     ],
-
+    
     'compare' => [
         'already-added'      => 'Artikel ist bereits zur Vergleichsliste hinzugefügt',
         'delete-all'         => 'Alle löschen',

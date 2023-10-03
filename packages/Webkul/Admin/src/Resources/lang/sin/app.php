@@ -1215,8 +1215,8 @@ return [
                 'active'                      => 'ක්‍රස්පති',
                 'address-delete-success'      => 'ලිපිනය සාර්ථකව මකා දමා ඇත',
                 'customer'                    => 'පාරිභෝගික',
-                'customer-notified'           => 'පාරිභෝගික දැනුම් ලැබී',
-                'customer-not-notified'       => 'පාරිභෝගික දැනුම් ලැබෙනවා නැත',
+                'customer-notified'           => ':date | පාරිභෝගිකයා <b> කටින් කියාපාදුනා</b>',
+                'customer-not-notified'       => ':date | පාරිභෝගිකයා <b> කියාපාදීමට කියානා</b>',
                 'delete-account'              => 'ගිණුම මකා දමන්න',
                 'delete'                      => 'මකා දමන්න',
                 'date-of-birth'               => 'උපන්දින - :dob',
@@ -2597,6 +2597,7 @@ return [
                 'back'                          => 'ආපසු',
                 'preview'                       => 'පෙරදසුන',
                 'channels'                      => 'චැනල්',
+                'image-size'                    => 'පින්කම් ප්‍රස්තායක් (1920px X 700px) විය යුතුයි.',
             ],
 
             'create-success' => 'රේඛා සාර්ථකයිද එකඟද?',

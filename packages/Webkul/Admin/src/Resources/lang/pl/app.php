@@ -1215,8 +1215,8 @@ return [
                 'active'                      => 'Aktywny',
                 'address-delete-success'      => 'Adres Pomyślnie Usunięty',
                 'customer'                    => 'Klient',
-                'customer-notified'           => 'Powiadomiony Klient',
-                'customer-not-notified'       => 'Klient Niepowiadomiony',
+                'customer-notified'           => ':date | Klient <b>powiadomiony</b>',
+                'customer-not-notified'       => ':date | Klient <b>nie powiadomiony</b>',
                 'delete-account'              => 'Usuń Konto',
                 'delete'                      => 'Usuń',
                 'date-of-birth'               => 'Data Urodzenia - :dob',
@@ -2597,6 +2597,7 @@ return [
                 'back'                          => 'Wróć',
                 'preview'                       => 'Podgląd',
                 'channels'                      => 'kanały',
+                'image-size'                    => 'Rozdzielczość obrazu powinna wynosić (1920px X 700px).',
             ],
 
             'create-success' => 'Motyw został pomyślnie utworzony',

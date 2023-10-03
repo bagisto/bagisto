@@ -1215,8 +1215,8 @@ return [
                 'active'                      => 'Actief',
                 'address-delete-success'      => 'Adres Succesvol Verwijderd',
                 'customer'                    => 'Klant',
-                'customer-notified'           => 'Klant Geïnformeerd',
-                'customer-not-notified'       => 'Klant Niet Geïnformeerd',
+                'customer-notified'           => ':date | Klant <b>Geïnformeerd</b>',
+                'customer-not-notified'       => ':date | Klant <b>Niet Geïnformeerd</b>',
                 'delete-account'              => 'Account Verwijderen',
                 'delete'                      => 'Verwijderen',
                 'date-of-birth'               => 'Geboortedatum - :dob',
@@ -2597,6 +2597,7 @@ return [
                 'back'                          => 'Terug',
                 'preview'                       => 'Voorbeeld',
                 'channels'                      => 'kanalen',
+                'image-size'                    => 'De afbeeldingsresolutie moet (1920px X 700px) zijn.',
             ],
 
             'create-success' => 'Thema succesvol aangemaakt',

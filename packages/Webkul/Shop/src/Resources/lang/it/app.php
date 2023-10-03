@@ -458,18 +458,19 @@ return [
             ],
     
             'reviews' => [
-                'cancel'      => 'Annulla',
-                'rating'      => 'Valutazione',
-                'success'     => 'Recensione inviata con successo.',
-                'attachments' => 'Allegati',
-                'title'       => 'Titolo',
-                'comment'     => 'Commento',
-                'customer-review'        => 'Recensioni dei Clienti',
-                'submit-review'          => 'Invia Recensione',
-                'write-a-review'         => 'Scrivi una Recensione',
-                'empty-review'           => 'Nessuna Recensione trovata, sii il primo a recensire questo prodotto',
-                'load-more'              => 'Carica Altro',
-                'failed-to-upload'       => 'Caricamento dell\'immagine fallito',
+                'cancel'           => 'Annulla',
+                'rating'           => 'Valutazione',
+                'success'          => 'Recensione inviata con successo.',
+                'attachments'      => 'Allegati',
+                'title'            => 'Titolo',
+                'comment'          => 'Commento',
+                'customer-review'  => 'Recensioni dei Clienti',
+                'submit-review'    => 'Invia Recensione',
+                'write-a-review'   => 'Scrivi una Recensione',
+                'empty-review'     => 'Nessuna Recensione trovata, sii il primo a recensire questo prodotto',
+                'load-more'        => 'Carica Altro',
+                'failed-to-upload' => 'Caricamento dell\'immagine fallito',
+                'name'             => 'Nome',
             ],
     
             'description'            => 'Descrizione',
@@ -512,6 +513,18 @@ return [
 
     'search' => [
         'title' => 'Risultati della Ricerca per : :query',
+
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'Qualcosa è andato storto, per favore riprova più tardi.',
+                'size-limit-error'     => 'Errore limite dimensioni',
+                'only-images-allowed'  => 'Sono consentite solo immagini (.jpeg, .jpg, .png, ..).',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => 'Parole chiave analizzate:',
+            ],
+        ],
     ],
 
     'compare'  => [

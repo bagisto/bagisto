@@ -1215,8 +1215,8 @@ return [
                 'active'                      => 'פעיל',
                 'address-delete-success'      => 'כתובת נמחקה בהצלחה',
                 'customer'                    => 'לקוח',
-                'customer-notified'           => 'הלקוח התראה',
-                'customer-not-notified'       => 'הלקוח לא התראה',
+                'customer-notified'           => ':date | <b>הלקוח התראה</b>',
+                'customer-not-notified'       => ':date | <b>הלקוח לא התראה</b>',
                 'delete-account'              => 'מחק את החשבון',
                 'delete'                      => 'מחק',
                 'date-of-birth'               => 'תאריך לידה - :dob',
@@ -2597,6 +2597,7 @@ return [
                 'back'                          => 'חזור',
                 'preview'                       => 'תצוגה מקדימה',
                 'channels'                      => 'ערוצים',
+                'image-size'                    => 'רזולוציית התמונה צריכה להיות (1920 פיקסלים X 700 פיקסלים).',
             ],
 
             'create-success' => 'ערכת הנושא נוצרה בהצלחה',

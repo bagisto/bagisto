@@ -458,18 +458,19 @@ return [
             ],
     
             'reviews' => [
-                'cancel'      => 'අවලංගු කරන්න',
-                'rating'      => 'අගය',
-                'success'     => 'අදම සටහනක් එවන්නේ සාර්ථකයි.',
-                'attachments' => 'ඇමිලුම්',
-                'title'       => 'සිරැසි',
-                'comment'     => 'අදහස්',
-                'customer-review'        => 'පාරිභෝගික විකාශන',
-                'submit-review'          => 'සටහනක් එවන්න',
-                'write-a-review'         => 'සටහනක් ලියන්න',
-                'empty-review'           => 'ගවේෂණයක් හමුවුනේ නෑ, මෙම නිෂ්පාදනය සටහනක් ලියන්නේ පළමු කෙනෙක් බව',
-                'load-more'              => 'බැලීම් කරන්න',
-                'failed-to-upload'       => 'රූපය උඩුගත කිරීම අසාර්ථකයි',
+                'cancel'           => 'අවලංගු කරන්න',
+                'rating'           => 'අගය',
+                'success'          => 'අදම සටහනක් එවන්නේ සාර්ථකයි.',
+                'attachments'      => 'ඇමිලුම්',
+                'title'            => 'සිරැසි',
+                'comment'          => 'අදහස්',
+                'customer-review'  => 'පාරිභෝගික විකාශන',
+                'submit-review'    => 'සටහනක් එවන්න',
+                'write-a-review'   => 'සටහනක් ලියන්න',
+                'empty-review'     => 'ගවේෂණයක් හමුවුනේ නෑ, මෙම නිෂ්පාදනය සටහනක් ලියන්නේ පළමු කෙනෙක් බව',
+                'load-more'        => 'බැලීම් කරන්න',
+                'failed-to-upload' => 'රූපය උඩුගත කිරීම අසාර්ථකයි',
+                'name'             => 'නම',
             ],
     
             'description'            => 'විස්තර',
@@ -512,6 +513,18 @@ return [
 
     'search' => [
         'title' => 'සෙවීම ප්රතිඵල : :query',
+
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'මමද පැරණියයි, කරන්නට පසුතිබව උත්සහ කරන්න.',
+                'size-limit-error'     => 'ප්‍රමාණුකාරකවෙක් හෝ විශාල කවේද අ෩ු වෙයි (.jpeg, .jpg, .png, ..) වනුයි.',
+                'only-images-allowed'  => 'ප්‍රමාණුකාරකවෙක් හෝ විශාල කවේද අ෩ු වෙයි (.jpeg, .jpg, .png, ..) වනුයි.',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => 'ප්‍රභේද කතා:',
+            ],
+        ],
     ],
 
     'compare'  => [

@@ -458,18 +458,19 @@ return [
             ],
     
             'reviews' => [
-                'cancel'      => 'キャンセル',
-                'rating'      => '評価',
-                'success'     => 'レビューが正常に送信されました。',
-                'attachments' => '添付ファイル',
-                'title'       => 'タイトル',
-                'comment'     => 'コメント',
-                'customer-review'        => '顧客レビュー',
-                'submit-review'          => 'レビューを送信',
-                'write-a-review'         => 'レビューを書く',
-                'empty-review'           => 'レビューが見つかりませんでした。最初のレビューアになってください。',
-                'load-more'              => 'もっと読み込む',
-                'failed-to-upload'       => '画像のアップロードに失敗しました',
+                'cancel'           => 'キャンセル',
+                'rating'           => '評価',
+                'success'          => 'レビューが正常に送信されました。',
+                'attachments'      => '添付ファイル',
+                'title'            => 'タイトル',
+                'comment'          => 'コメント',
+                'customer-review'  => '顧客レビュー',
+                'submit-review'    => 'レビューを送信',
+                'write-a-review'   => 'レビューを書く',
+                'empty-review'     => 'レビューが見つかりませんでした。最初のレビューアになってください。',
+                'load-more'        => 'もっと読み込む',
+                'failed-to-upload' => '画像のアップロードに失敗しました',
+                'name'             => '名前',
             ],
     
             'description'            => '説明',
@@ -511,7 +512,19 @@ return [
     ],
 
     'search' => [
-        'title' => ':queryの検索結果',
+        'title' => ':query の検索結果',
+    
+        'images' => [
+            'index' => [
+                'something-went-wrong' => '申し訳ありません、何か問題が発生しました。後で再試行してください。',
+                'size-limit-error'     => 'サイズ制限エラー',
+                'only-images-allowed'  => '画像のみ (.jpeg, .jpg, .png, ..) が許可されています。',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => '解析されたキーワード:',
+            ],
+        ],
     ],
 
     'compare' => [

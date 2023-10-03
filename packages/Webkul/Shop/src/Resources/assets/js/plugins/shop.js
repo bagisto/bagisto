@@ -2,6 +2,24 @@ export default {
     install(app) {
         app.config.globalProperties.$shop = {
             /**
+             * Load the dynamic scripts
+             * 
+             * @param {string} src 
+             * @param {callback} onScriptLoaded 
+             * 
+             * @returns {void}.
+             */
+            loadDynamicScript: (src, onScriptLoaded) => {
+                let dynamicScript = document.createElement('script');
+            
+                dynamicScript.setAttribute('src', src);
+
+                document.body.appendChild(dynamicScript);
+            
+                dynamicScript.addEventListener('load', onScriptLoaded, false);
+            },
+
+            /**
              * Generates a formatted price string using the provided price, localeCode, and currencyCode.
              *
              * @param {number} price - The price value to be formatted.

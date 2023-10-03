@@ -458,18 +458,19 @@ return [
             ],
     
             'reviews' => [
-                'cancel'      => 'Anuluj',
-                'rating'      => 'Ocena',
-                'success'     => 'Recenzja została pomyślnie przesłana.',
-                'attachments' => 'Załączniki',
-                'title'       => 'Tytuł',
-                'comment'     => 'Komentarz',
-                'customer-review'        => 'Opinie klientów',
-                'submit-review'          => 'Prześlij recenzję',
-                'write-a-review'         => 'Napisz recenzję',
-                'empty-review'           => 'Nie znaleziono recenzji, bądź pierwszy i napisz recenzję tego produktu',
-                'load-more'              => 'Wczytaj więcej',
-                'failed-to-upload'       => 'Nie udało się przesłać obrazu',
+                'cancel'           => 'Anuluj',
+                'rating'           => 'Ocena',
+                'success'          => 'Recenzja została pomyślnie przesłana.',
+                'attachments'      => 'Załączniki',
+                'title'            => 'Tytuł',
+                'comment'          => 'Komentarz',
+                'customer-review'  => 'Opinie klientów',
+                'submit-review'    => 'Prześlij recenzję',
+                'write-a-review'   => 'Napisz recenzję',
+                'empty-review'     => 'Nie znaleziono recenzji, bądź pierwszy i napisz recenzję tego produktu',
+                'load-more'        => 'Wczytaj więcej',
+                'failed-to-upload' => 'Nie udało się przesłać obrazu',
+                'name'             => 'Imię',
             ],
     
             'description'            => 'Opis',
@@ -512,6 +513,18 @@ return [
 
     'search' => [
         'title' => 'Wyniki wyszukiwania dla : :query',
+    
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'Coś poszło nie tak, spróbuj ponownie później.',
+                'size-limit-error'     => 'Błąd limitu rozmiaru',
+                'only-images-allowed'  => 'Dozwolone są tylko obrazy (.jpeg, .jpg, .png, ..).',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => 'Zanalizowane słowa kluczowe:',
+            ],
+        ],
     ],
 
     'compare'  => [

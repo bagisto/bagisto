@@ -458,18 +458,19 @@ return [
             ],
     
             'reviews' => [
-                'cancel'      => 'ביטול',
-                'rating'      => 'דירוג',
-                'success'     => 'סקירה נשלחה בהצלחה.',
-                'attachments' => 'קבצים מצורפים',
-                'title'       => 'כותרת',
-                'comment'     => 'תגובה',
-                'customer-review'        => 'סקירות לקוח',
-                'submit-review'          => 'שליחה',
-                'write-a-review'         => 'כתיבת סקירה',
-                'empty-review'           => 'לא נמצאו סקירות, היה הראשון לרשום סקירה על מוצר זה.',
-                'load-more'              => 'טען עוד',
-                'failed-to-upload'       => 'העלאת התמונה נכשלה',
+                'cancel'           => 'ביטול',
+                'rating'           => 'דירוג',
+                'success'          => 'סקירה נשלחה בהצלחה.',
+                'attachments'      => 'קבצים מצורפים',
+                'title'            => 'כותרת',
+                'comment'          => 'תגובה',
+                'customer-review'  => 'סקירות לקוח',
+                'submit-review'    => 'שליחה',
+                'write-a-review'   => 'כתיבת סקירה',
+                'empty-review'     => 'לא נמצאו סקירות, היה הראשון לרשום סקירה על מוצר זה.',
+                'load-more'        => 'טען עוד',
+                'failed-to-upload' => 'העלאת התמונה נכשלה',
+                'name'             => 'שם',
             ],
     
             'description'            => 'תיאור',
@@ -512,6 +513,18 @@ return [
 
     'search' => [
         'title' => 'תוצאות חיפוש עבור : :query',
+
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'משהו השתבש, נסה שוב מאוחר יותר.',
+                'size-limit-error'     => 'שגיאת הגבלת גודל',
+                'only-images-allowed'  => 'מותרות רק תמונות (.jpeg, .jpg, .png, ..).',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => 'מילות מפתח שנבדקו:',
+            ],
+        ],
     ],
 
     'compare'  => [

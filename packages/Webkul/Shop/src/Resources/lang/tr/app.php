@@ -458,18 +458,19 @@ return [
             ],
     
             'reviews' => [
-                'cancel'      => 'İptal Et',
-                'rating'      => 'Değerlendirme',
-                'success'     => 'İnceleme başarıyla gönderildi.',
-                'attachments' => 'Ekler',
-                'title'       => 'Başlık',
-                'comment'     => 'Yorum',
-                'customer-review'        => 'Müşteri İncelemeleri',
-                'submit-review'          => 'İnceleme Gönder',
-                'write-a-review'         => 'İnceleme Yaz',
-                'empty-review'           => 'İnceleme bulunamadı, bu ürünü değerlendiren ilk kişi olun',
-                'load-more'              => 'Daha Fazla Yükle',
-                'failed-to-upload'       => 'Resim yüklenemedi',
+                'cancel'            => 'İptal Et',
+                'rating'            => 'Değerlendirme',
+                'success'           => 'İnceleme başarıyla gönderildi.',
+                'attachments'       => 'Ekler',
+                'title'             => 'Başlık',
+                'comment'           => 'Yorum',
+                'customer-review'   => 'Müşteri İncelemeleri',
+                'submit-review'     => 'İnceleme Gönder',
+                'write-a-review'    => 'İnceleme Yaz',
+                'empty-review'      => 'İnceleme bulunamadı, bu ürünü değerlendiren ilk kişi olun',
+                'load-more'         => 'Daha Fazla Yükle',
+                'failed-to-upload'  => 'Resim yüklenemedi',
+                'name'              => 'Adı'
             ],
     
             'description'            => 'Açıklama',
@@ -512,6 +513,18 @@ return [
 
     'search' => [
         'title' => ':query için arama sonuçları',
+
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'Bir şeyler ters gitti, lütfen daha sonra tekrar deneyin.',
+                'size-limit-error'     => 'Boyut Sınırı Hatası',
+                'only-images-allowed'  => 'Sadece resimler (.jpeg, .jpg, .png, ..) izin verilir.',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => 'Analiz Edilen Anahtar Kelimeler:',
+            ],
+        ],
     ],
 
     'compare' => [

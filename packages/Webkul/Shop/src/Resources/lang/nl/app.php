@@ -458,18 +458,19 @@ return [
             ],
     
             'reviews' => [
-                'cancel'      => 'Annuleren',
-                'rating'      => 'Beoordeling',
-                'success'     => 'Beoordeling succesvol ingediend.',
-                'attachments' => 'Bijlagen',
-                'title'       => 'Titel',
-                'comment'     => 'Opmerking',
-                'customer-review'        => 'Klantbeoordelingen',
-                'submit-review'          => 'Beoordeling indienen',
-                'write-a-review'         => 'Schrijf een beoordeling',
-                'empty-review'           => 'Geen beoordelingen gevonden, wees de eerste om dit product te beoordelen',
-                'load-more'              => 'Meer laden',
-                'failed-to-upload'       => 'De afbeelding kon niet worden geüpload',
+                'cancel'           => 'Annuleren',
+                'rating'           => 'Beoordeling',
+                'success'          => 'Beoordeling succesvol ingediend.',
+                'attachments'      => 'Bijlagen',
+                'title'            => 'Titel',
+                'comment'          => 'Opmerking',
+                'customer-review'  => 'Klantbeoordelingen',
+                'submit-review'    => 'Beoordeling indienen',
+                'write-a-review'   => 'Schrijf een beoordeling',
+                'empty-review'     => 'Geen beoordelingen gevonden, wees de eerste om dit product te beoordelen',
+                'load-more'        => 'Meer laden',
+                'failed-to-upload' => 'De afbeelding kon niet worden geüpload',
+                'name'             => 'Naam',
             ],
     
             'description'            => 'Beschrijving',
@@ -511,9 +512,21 @@ return [
     ],
 
     'search' => [
-        'title' => 'Zoekresultaten voor: :query',
+        'title' => 'Zoekresultaten voor : :query',
+    
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'Er is iets misgegaan, probeer het later opnieuw.',
+                'size-limit-error'     => 'Formaatlimietfout',
+                'only-images-allowed'  => 'Alleen afbeeldingen (.jpeg, .jpg, .png, ..) zijn toegestaan.',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => 'Geanalyseerde trefwoorden:',
+            ],
+        ],
     ],
-
+    
     'compare'  => [
         'product-compare'    => 'Producten Vergelijken',
         'delete-all'         => 'Alles Verwijderen',

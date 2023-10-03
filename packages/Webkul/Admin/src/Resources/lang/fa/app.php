@@ -1215,8 +1215,8 @@ return [
                 'active'                      => 'فعال',
                 'address-delete-success'      => 'آدرس با موفقیت حذف شد',
                 'customer'                    => 'مشتری',
-                'customer-notified'           => 'مشتری مطلع شد',
-                'customer-not-notified'       => 'مشتری مطلع نشد',
+                'customer-notified'           => ':date | مشتری <b>آگاه شد</b>',
+                'customer-not-notified'       => ':date | مشتری <b>آگاه نشد</b>',
                 'delete-account'              => 'حذف حساب',
                 'delete'                      => 'حذف',
                 'date-of-birth'               => 'تاریخ تولد - :dob',
@@ -2597,6 +2597,7 @@ return [
                 'back'                          => 'بازگشت',
                 'preview'                       => 'پیش‌نمایش',
                 'channels'                      => 'کانال‌ها',
+                'image-size'                    => 'رزولوشن تصویر باید (۱۹۲۰ پیکسل در ۷۰۰ پیکسل) باشد.',
             ],
 
             'create-success' => 'پوسته با موفقیت ایجاد شد',
