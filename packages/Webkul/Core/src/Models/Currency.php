@@ -23,6 +23,9 @@ class Currency extends Model implements CurrencyContract
         'name',
         'symbol',
         'decimal',
+        'thousand_seprator',
+        'decimal_seprator',
+        'currency_position',
     ];
 
     /**

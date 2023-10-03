@@ -29,21 +29,20 @@
                     >
                         <img
                             class="max-w-[90px] max-h-[90px] w-[90px] h-[90px] rounded-md"
-                            :src="item.base_image.small_image_url"
+                            :src="item.base_image.medium_image_url"
+                            :title="item.name"
                             :alt="item.name"
-                            width="110"
-                            height="110"
                         />
 
                         <div>
                             <p 
                                 class="text-[16px] text-navyBlue max-sm:text-[14px] max-sm:font-medium" 
-                                v-text="item.name"
+                                v-html="item.name"
                             >
                             </p>
 
                             <p class="mt-[10px] text-[18px] font-medium max-sm:text-[14px] max-sm:font-normal">
-                                @{{ item.formatted_price }} X @{{ item.quantity }}
+                                <span v-html="item.formatted_price"> </span> X @{{ item.quantity }}
                             </p>
                         </div>
                     </div>
@@ -57,7 +56,7 @@
 
                         <p 
                             class="text-[16px] font-medium max-sm:text-[14px]"
-                            v-text="cart.base_sub_total"
+                            v-html="cart.base_sub_total"
                         >
                         </p>
                     </div>
@@ -73,7 +72,7 @@
 
                         <p 
                             class="text-[16px] font-medium max-sm:text-[14px]"
-                            v-text="amount"
+                            v-html="amount"
                         >
                         </p>
                     </div>
@@ -88,7 +87,7 @@
 
                         <p 
                             class="text-[16px] font-medium"
-                            v-text="cart.selected_shipping_rate"
+                            v-html="cart.selected_shipping_rate"
                         >
                         </p>
                     </div>
@@ -103,7 +102,7 @@
 
                         <p 
                             class="text-[16px] font-medium"
-                            v-text="cart.formatted_base_discount_amount"
+                            v-html="cart.formatted_base_discount_amount"
                         >
                         </p>
                     </div>
@@ -117,7 +116,7 @@
 
                         <p 
                             class="text-[18px] font-semibold"
-                            v-text="cart.base_grand_total"
+                            v-html="cart.base_grand_total"
                         >
                         </p>
                     </div>

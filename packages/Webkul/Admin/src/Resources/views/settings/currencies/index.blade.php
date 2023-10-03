@@ -5,20 +5,18 @@
 
     <v-currencies>
         <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
-            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+            <p class="text-[20px] text-gray-800 font-bold">
                 @lang('admin::app.settings.currencies.index.title')
             </p>
 
             <div class="flex gap-x-[10px] items-center">
                 <!-- Craete currency Button -->
-                @if (bouncer()->hasPermission('settings.currencies.create'))
-                    <button 
-                        type="button"
-                        class="primary-button"
-                    >
-                        @lang('admin::app.settings.currencies.index.create-btn')
-                    </button>
-                @endif
+                <button 
+                    type="button"
+                    class="primary-button"
+                >
+                    @lang('admin::app.settings.currencies.index.create-btn')
+                </button>
             </div>
         </div>
 
@@ -31,22 +29,20 @@
             type="text/x-template"
             id="v-currencies-template"
         >
-            <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-                <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+        <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
+                <p class="text-[20px] text-gray-800 font-bold">
                     @lang('admin::app.settings.currencies.index.title')
                 </p>
 
                 <div class="flex gap-x-[10px] items-center">
                     <!-- Craete currency Button -->
-                    @if (bouncer()->hasPermission('settings.currencies.create'))
-                        <button 
-                            type="button"
-                            class="primary-button"
-                            @click="id=0; selectedCurrency={}; $refs.currencyUpdateOrCreateModal.toggle()"
-                        >
-                            @lang('admin::app.settings.currencies.index.create-btn')
-                        </button>
-                    @endif
+                    <button 
+                        type="button"
+                        class="primary-button"
+                        @click="selectedCurrency={}; $refs.currencyUpdateOrCreateModal.toggle()"
+                    >
+                        @lang('admin::app.settings.currencies.index.create-btn')
+                    </button>
                 </div>
             </div>
     
@@ -54,24 +50,20 @@
                 :src="route('admin.settings.currencies.index')"
                 ref="datagrid"
             >
-                @php
-                    $hasPermission = bouncer()->hasPermission('settings.currencies.edit') || bouncer()->hasPermission('settings.currencies.delete');
-                @endphp
-
                 <!-- DataGrid Header -->
                 <template #header="{ columns, records, sortPage, applied}">
-                    <div class="row grid grid-cols-{{ $hasPermission ? '4' : '3' }} grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800   text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold ">
+                    <div class="row grid grid-cols-4 grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] border-gray-300 text-gray-600 bg-gray-50 font-semibold">
                         <div
                             class="flex gap-[10px] cursor-pointer"
-                            v-for="(columnGroup, index) in ['id', 'code', 'name']"
+                            v-for="(columnGroup, index) in ['id', 'name', 'code']"
                         >
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600">
                                 <span class="[&>*]:after:content-['_/_']">
                                     <span
                                         class="after:content-['/'] last:after:content-['']"
                                         :class="{
-                                            'text-gray-800 dark:text-white font-medium': applied.sort.column == columnGroup,
-                                            'cursor-pointer hover:text-gray-800 dark:hover:text-white': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
+                                            'text-gray-800 font-medium': applied.sort.column == columnGroup,
+                                            'cursor-pointer hover:text-gray-800': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
                                         }"
                                         @click="
                                             columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === columnGroup)): {}
@@ -83,7 +75,7 @@
 
                                 <!-- Filter Arrow Icon -->
                                 <i
-                                    class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 dark:text-white align-text-bottom"
+                                    class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 align-text-bottom"
                                     :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                     v-if="columnGroup.includes(applied.sort.column)"
                                 ></i>
@@ -91,20 +83,18 @@
                         </div>
 
                         <!-- Actions -->
-                        @if ($hasPermission)
-                            <p class="flex gap-[10px] justify-end">
-                                @lang('admin::app.components.datagrid.table.actions')
-                            </p>
-                        @endif
+                        <p class="flex gap-[10px] justify-end">
+                            @lang('admin::app.components.datagrid.table.actions')
+                        </p>
                     </div>
                 </template>
 
                 <!-- DataGrid Body -->
-                <template #body="{ columns, records, performAction }">
+                <template #body="{ columns, records }">
                     <div
                         v-for="record in records"
-                        class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800   text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950  "
-                        :style="'grid-template-columns: repeat(' + (record.actions.length ? 4 : 3) + ', 1fr);'"
+                        class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600 transition-all hover:bg-gray-50"
+                        style="grid-template-columns: repeat(4, 1fr);"
                     >
                         <!-- Id -->
                         <p v-text="record.id"></p>
@@ -117,18 +107,20 @@
 
                         <!-- Actions -->
                         <div class="flex justify-end">
-                            <a @click="id=1; editModal(record.actions.find(action => action.title === 'Edit')?.url)">
+                            <a @click="editModal(record.id)">
                                 <span
-                                    :class="record.actions.find(action => action.title === 'Edit')?.icon"
-                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                    :class="record.actions['0'].icon"
+                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
+                                    :title="record.actions['0'].title"
                                 >
                                 </span>
                             </a>
 
-                            <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
+                            <a @click="deleteModal(record.actions['1']?.url)">
                                 <span
-                                    :class="record.actions.find(action => action.method === 'DELETE')?.icon"
-                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                    :class="record.actions['1'].icon"
+                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
+                                    :title="record.actions['1'].title"
                                 >
                                 </span>
                             </a>
@@ -150,14 +142,14 @@
                     <x-admin::modal ref="currencyUpdateOrCreateModal">
                         <x-slot:header>
                             <p
-                                class="text-[18px] text-gray-800 dark:text-white font-bold"
-                                v-if="id"
+                                class="text-[18px] text-gray-800 font-bold"
+                                v-if="Object.keys(selectedCurrency).length"
                             >
                                 @lang('admin::app.settings.currencies.index.edit.title')
                             </p>
 
-                            <p 
-                                class="text-[18px] text-gray-800 dark:text-white font-bold"
+                            <p
+                                class="text-[18px] text-gray-800 font-bold"
                                 v-else
                             >
                                 @lang('admin::app.settings.currencies.index.create.title')
@@ -165,7 +157,7 @@
                         </x-slot:header>
 
                         <x-slot:content>
-                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
+                            <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
                                 {!! view_render_event('bagisto.admin.settings.currencies.create.before') !!}
 
                                 <x-admin::form.control-group.control
@@ -260,6 +252,85 @@
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
+                                    <!-- Thousand Seprator -->
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.currencies.index.create.thousand-seprator')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="thousand_seprator"
+                                        :value="old('thousand_seprator')"
+                                        v-model="selectedCurrency.thousand_seprator"
+                                        :label="trans('admin::app.settings.currencies.index.create.thousand-seprator')"
+                                        :placeholder="trans('admin::app.settings.currencies.index.create.thousand-seprator')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="thousand_seprator"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <!-- Decimal Seprator -->
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.currencies.index.create.decimal-seprator')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="decimal_seprator"
+                                        :value="old('decimal_seprator')"
+                                        v-model="selectedCurrency.decimal_seprator"
+                                        :label="trans('admin::app.settings.currencies.index.create.decimal-seprator')"
+                                        :placeholder="trans('admin::app.settings.currencies.index.create.decimal-seprator')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="decimal_seprator"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <!-- Position Drop Down (CurrencyPosition)-->
+                                
+                                <x-admin::form.control-group class="flex-1 w-full mb-[10px]">
+                                        <x-admin::form.control-group.label class="required">
+                                            @lang('admin::app.settings.currencies.index.create.currency-position')
+                                        </x-admin::form.control-group.label>
+
+                                        <v-field
+                                            name="currency_position"
+                                            
+                                            label="@lang('admin::app.settings.currencies.index.create.currency-position')"
+                                            v-model="selectedCurrency.currency_position"
+                                        >
+                                            <select
+                                                name="currency_position"
+                                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                                :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                            >
+                                                <option value="" disabled>@lang('admin::app.settings.taxes.categories.index.create.select')</option>
+
+                                                <option 
+                                                v-for="position,key in positions"
+                                                    :value="key"
+                                                    :text="position"
+                                                    :selected="key == selectedCurrency.currency_position">
+                                                    
+                                                </option>
+                                            </select>
+                                        </v-field>
+            
+                                        <x-admin::form.control-group.error
+                                            control-name="currency_position"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
                                 {!! view_render_event('bagisto.admin.settings.currencies.create.after') !!}
                             </div>
@@ -280,25 +351,26 @@
             </x-admin::form>
         </script>
 
-        <script type="module">
-            app.component('v-currencies', {
-                template: '#v-currencies-template',
+    <script type="module">
+        app.component('v-currencies', {
+            template: '#v-currencies-template',
 
-                data() {
-                    return {
-                        selectedCurrency: {},
-                    }
-                },
+            data() {
+                return {
+                    selectedCurrency: {},
+                    positions: @json($currencyPosition)
+                }
+            },
 
-                methods: {
+            methods: {
                     updateOrCreate(params, { resetForm, setErrors  }) {
-                        let formData = new FormData(this.$refs.currencyCreateForm);
+                    let formData = new FormData(this.$refs.currencyCreateForm);
 
-                        if (params.id) {
-                            formData.append('_method', 'put');
-                        }
+                    if (params.id) {
+                        formData.append('_method', 'put');
+                    }
 
-                        this.$axios.post(params.id ? "{{ route('admin.settings.currencies.update') }}" : "{{ route('admin.settings.currencies.store') }}", formData)
+                    this.$axios.post(params.id ? "{{ route('admin.settings.currencies.update') }}" : "{{ route('admin.settings.currencies.store') }}", formData)
                         .then((response) => {
                             this.$refs.currencyUpdateOrCreateModal.close();
 
@@ -313,21 +385,44 @@
                                 setErrors(error.response.data.errors);
                             }
                         });
-                    },
+                },
 
-                    editModal(url) {
-                        this.$axios.get(url)
-                            .then((response) => {
-                                this.selectedCurrency = response.data;
+                editModal(id) {
+                    this.$axios.get(`{{ route('admin.settings.currencies.edit', '') }}/${id}`)
+                        .then((response) => {
+                            this.selectedCurrency = response.data;
 
-                                this.$refs.currencyUpdateOrCreateModal.toggle();
-                            })
-                            .catch(error => {
-                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message })
-                            });
-                    },
+                            this.$refs.currencyUpdateOrCreateModal.toggle();
+                        })
+                        .catch(error => {
+                                if (error.response.status ==422) {
+                                setErrors(error.response.data.errors);
+                            }
+                        });
+
+                },
+
+                deleteModal(url) {
+                        if (! confirm("@lang('admin::app.settings.currencies.index.create.delete-warning')")) {
+                        return;
+                    }
+
+                    this.$axios.post(url, {
+                            '_method': 'DELETE'
+                        })
+                        .then((response) => {
+                            this.$refs.datagrid.get();
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                        })
+                        .catch(error => {
+                                if (error.response.status ==422) {
+                                setErrors(error.response.data.errors);
+                            }
+                        });
                 }
-            })
-        </script>
+            }
+        })
+    </script>
     @endPushOnce
 </x-admin::layouts>

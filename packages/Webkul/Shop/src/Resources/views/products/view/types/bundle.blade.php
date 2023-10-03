@@ -21,8 +21,9 @@
                         @lang('Total Amount')
                     </p>
 
-                    <p class="text-[18px] font-medium">
-                        @{{ formattedTotalPrice }}
+                    <p class="text-[18px] font-medium" 
+                    v-html="displayFormattedTotalPrice">
+                        <!-- @{{ displayFormattedTotalPrice }} -->
                     </p>
                 </div>
 
@@ -74,11 +75,11 @@
                                 v-for="product in option.products"
                                 :value="product.id"
                             >
-                                @{{ product.name + ' + ' + product.price.final.formatted_price }}
+                                @{{ product.name + ' + '}} <span v-html="product.price.final.formatted_price"></span>
                             </option>
                         </v-field>
                     </div>
-
+    
                     <div v-if="option.type == 'radio'">
                         <div class="grid gap-[10px]">
                             <span
@@ -137,7 +138,7 @@
                                     @{{ product.name }}
 
                                     <span class="text-black">
-                                        @{{ '+ ' + product.price.final.formatted_price }}
+                                    @{{ '+ ' }} <span v-html="product.price.final.formatted_price"></span>
                                     </span>
                                 </label>
                             </span>
@@ -182,7 +183,8 @@
                                     @{{ product.name }}
 
                                     <span class="text-black">
-                                        @{{ '+ ' + product.price.final.formatted_price }}
+                                        
+                                        @{{ '+ ' }} <span v-html="product.price.final.formatted_price"></span>
                                     </span>
                                 </label>
                             </div>
@@ -211,10 +213,9 @@
                                 v-for="(product, index2) in option.products"
                                 :value="product.id"
                             >
-                                @{{ product.name }}
+                                @{{ product.name + '+ ' }}
 
-                                <span class="text-black">
-                                    @{{ '+ ' + product.price.final.formatted_price }}
+                                <span v-html="product.price.final.formatted_price" class="text-black">
                                 </span>
                             </option>
                         </v-field>
@@ -255,34 +256,58 @@
                         config: @json(app('Webkul\Product\Helpers\BundleOption')->getBundleConfig($product)),
 
                         options: [],
-
+                        isLoading: true,
+                        formattedTotalAmount: '',
                     }
                 },
 
-                computed: {
-                    formattedTotalPrice: function() {
-                        var total = 0;
-
-                        for (var key in this.options) {
-                            for (var key1 in this.options[key].products) {
-                                if (! this.options[key].products[key1].is_default)
-                                    continue;
-
-                                total += this.options[key].products[key1].qty * this.options[key].products[key1].price.final.price;
-                            }
-                        }
-
-                        return this.$shop.formatPrice(total);
-                    }
+                computed: {                    
+                    displayFormattedTotalPrice() {
+                        this.formattedTotalPrice()
+                        return this.formattedTotalAmount;
+                    },
                 },
-
+                
                 created: function() {
                     for (var key in this.config.options) {
                         this.options.push(this.config.options[key]);
                     }
                 },
-
+                mounted() {
+                    this.formattedTotalPrice;
+                },
                 methods: {
+                        formattedTotalPrice: async function () { 
+                        
+                            this.isLoading = true;
+                            var total = 0;
+                            
+                            for (var key in this.options) {
+                                for (var key1 in this.options[key].products) {
+                                    if (! this.options[key].products[key1].is_default)
+                                        continue;
+
+                                    total += this.options[key].products[key1].qty * this.options[key].products[key1].price.final.price;
+
+                                }
+                            }
+                            var currencyCode = document.querySelector('meta[name="currency-code"]').content ?? "USD";
+
+                            var route = `/api/formatPrice/${total}/${currencyCode}`
+                            // this.formattedTotalAmount  = this.$shop.formatPrice(total)
+
+                            // Call API to format the price also can do it inside shop.js
+                            this.formattedTotalAmount = await this.$axios.get(route).then((response)=> {
+                                this.isLoading = false;
+                                return response.data;
+                            }).catch(error => {
+                                console.log(error);
+                                throw error;
+                            })
+                        },
+                    
+                
+            
                     productSelected: function(option, value) {
                         var selectedProductIds = Array.isArray(value) ? value : [value];
 

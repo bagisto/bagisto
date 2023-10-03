@@ -11,7 +11,7 @@
 
             <p 
                 class="text-[16px] font-medium"
-                v-text="cart.formatted_sub_total"
+                v-html="cart.formatted_sub_total"
             >
             </p>
         </div>
@@ -27,7 +27,7 @@
 
             <p 
                 class="text-[16px] font-medium max-sm:text-[14px] max-sm:font-medium"
-                v-text="amount"
+                v-html="amount"
             >
             </p>
         </div>
@@ -42,7 +42,7 @@
 
             <p 
                 class="text-[16px] font-medium"
-                v-text="cart.formatted_base_discount_amount"
+                v-html="cart.formatted_base_discount_amount"
             >
             </p>
         </div>
@@ -56,7 +56,7 @@
 
             <p 
                 class="text-[18px] font-semibold" 
-                v-text="cart.formatted_grand_total"
+                v-html="cart.formatted_grand_total"
             >
             </p>
         </div>

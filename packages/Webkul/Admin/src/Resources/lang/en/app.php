@@ -2079,6 +2079,9 @@ return [
                     'save-btn'       => 'Save Currency',
                     'symbol'         => 'Symbol',
                     'title'          => 'Create New Currency',
+                    'thousand-seprator' => 'Thousands Separator',
+                    'decimal-seprator' => 'Desimal Seprator',
+                    'currency-position' => 'Currency Position',
                 ],
 
                 'edit' => [
@@ -2440,6 +2443,8 @@ return [
                 'edit'  => [
                     'title'    => 'Edit User',
                 ],
+
+
             ],
 
             'edit'  => [

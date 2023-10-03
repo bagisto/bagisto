@@ -28,8 +28,11 @@ class CurrencyController extends Controller
         if (request()->ajax()) {
             return app(CurrencyDataGrid::class)->toJson();
         }
-
-        return view('admin::settings.currencies.index');
+        $currencyPosition = [
+            'left' => 'Left', 'left_with_space' => 'Left With Space',
+            'right' => 'Right', 'right_with_space' => 'Right With Space',
+        ];
+        return view('admin::settings.currencies.index', compact('currencyPosition'));
     }
 
     /**
@@ -48,7 +51,10 @@ class CurrencyController extends Controller
             'code',
             'name',
             'symbol',
-            'decimal'
+            'decimal',
+            'thousand_seprator',
+            'decimal_seprator',
+            'currency_position',
         ]);
 
         $this->currencyRepository->create($data);
@@ -89,7 +95,10 @@ class CurrencyController extends Controller
             'code',
             'name',
             'symbol',
-            'decimal'
+            'decimal',
+            'thousand_seprator',
+            'decimal_seprator',
+            'currency_position',
         ]);
 
         $this->currencyRepository->update($data, $id);

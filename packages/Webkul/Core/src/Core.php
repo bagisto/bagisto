@@ -161,7 +161,7 @@ class Core
             'https://' . request()->getHttpHost(),
         ])->first();
 
-        if (! $this->currentChannel) {
+        if (!$this->currentChannel) {
             $this->currentChannel = $this->channelRepository->first();
         }
 
@@ -252,7 +252,7 @@ class Core
     {
         $channelCode = request()->get('channel');
 
-        if (! $fallback) {
+        if (!$fallback) {
             return $channelCode;
         }
 
@@ -292,7 +292,7 @@ class Core
 
         $this->currentLocale = $this->localeRepository->findOneByField('code', app()->getLocale());
 
-        if (! $this->currentLocale) {
+        if (!$this->currentLocale) {
             $this->currentLocale = $this->localeRepository->findOneByField('code', config('app.fallback_locale'));
         }
 
@@ -327,7 +327,7 @@ class Core
     {
         $localeCode = request()->get($localeKey);
 
-        if (! $fallback) {
+        if (!$fallback) {
             return $localeCode;
         }
 
@@ -376,7 +376,7 @@ class Core
 
         $this->baseCurrency = $this->currencyRepository->findOneByField('code', config('app.currency'));
 
-        if (! $this->baseCurrency) {
+        if (!$this->baseCurrency) {
             $this->baseCurrency = $this->currencyRepository->first();
         }
 
@@ -482,12 +482,12 @@ class Core
      */
     public function convertPrice($amount, $targetCurrencyCode = null, $orderCurrencyCode = null)
     {
-        if (! isset($this->lastCurrencyCode)) {
+        if (!isset($this->lastCurrencyCode)) {
             $this->lastCurrencyCode = $this->getBaseCurrency()->code;
         }
 
         if ($orderCurrencyCode) {
-            if (! isset($this->lastOrderCode)) {
+            if (!isset($this->lastOrderCode)) {
                 $this->lastOrderCode = $orderCurrencyCode;
             }
 
@@ -500,17 +500,17 @@ class Core
             }
         }
 
-        $targetCurrency = ! $targetCurrencyCode
+        $targetCurrency = !$targetCurrencyCode
             ? $this->getCurrentCurrency()
             : $this->currencyRepository->findOneByField('code', $targetCurrencyCode);
 
-        if (! $targetCurrency) {
+        if (!$targetCurrency) {
             return $amount;
         }
 
         $exchangeRate = $this->getExchangeRate($targetCurrency->id);
 
-        if (! $exchangeRate) {
+        if (!$exchangeRate) {
             return $amount;
         }
 
@@ -532,11 +532,11 @@ class Core
      */
     public function convertToBasePrice($amount, $targetCurrencyCode = null)
     {
-        $targetCurrency = ! $targetCurrencyCode
+        $targetCurrency = !$targetCurrencyCode
             ? $this->getCurrentCurrency()
             : $this->currencyRepository->findOneByField('code', $targetCurrencyCode);
 
-        if (! $targetCurrency) {
+        if (!$targetCurrency) {
             return $amount;
         }
 
@@ -546,7 +546,7 @@ class Core
 
         if (
             null === $exchangeRate
-            || ! $exchangeRate->rate
+            || !$exchangeRate->rate
         ) {
             return $amount;
         }
@@ -605,21 +605,81 @@ class Core
 
         $formatter->setAttribute(\NumberFormatter::FRACTION_DIGITS, $currency->decimal ?? 2);
 
-        if (! $currency) {
+        if (!$currency) {
             return $formatter->formatCurrency($price, $currencyCode);
         }
 
         if ($symbol = $currency->symbol) {
             if ($this->currencySymbol($currency) == $symbol) {
-                return $formatter->formatCurrency($price, $currency->code);
-            }
 
+                return $this->formatPriceWithSymbol($price, $currency, $currency->symbol, $formatter);
+                // _________________________________________
+
+                // return $formatter->formatCurrency($price, $currency->code);
+            }
             $formatter->setSymbol(\NumberFormatter::CURRENCY_SYMBOL, $symbol);
 
-            return $formatter->format($this->convertPrice($price));
+            return $this->formatPriceWithSymbol($price, $currency, $currency->symbol, $formatter);
+            // _______________________
+            // $formatter->format($this->convertPrice($price));
+
+        }
+        return $this->formatPriceWithSymbol($price, $currency, $currency->code, $formatter);
+        // _______________________________________
+        // return $formatter->formatCurrency($price, $currency->code);
+    }
+
+    /**
+     *
+     * customize the thousand separator and decimal separator.
+     * Additionally, repositioning of the currency symbol and the inclusion of an HTML tag for further styling.
+     * @param  float  $price
+     * @param Webkul\Core\Models\Currency $currency
+     * @param string $symbol
+     * @param \NumberFormatter $formatter 
+     */
+    public function formatPriceWithSymbol($price, $currency, $symbol, $formatter)
+    {
+        //Use a space when no separator is provided; otherwise, use the provided separator.
+        $formattedCurrency = str_replace(
+            ',',
+            $currency->thousand_seprator == '' ? ' ' : $currency->thousand_seprator,
+            $formatter->formatCurrency($price, $currency->code)
+        );
+
+        if ($currency->decimal > 0) {
+            $decimalPointPos = strrpos($formattedCurrency, '.');
+            $formattedCurrency = substr_replace(
+                $formattedCurrency,
+                $currency->decimal_seprator == '' ? ' ' : $currency->decimal_seprator,
+                $decimalPointPos,
+                1
+            );
         }
 
-        return $formatter->formatCurrency($price, $currency->code);
+        // For render this html tag in blade files we have to use {!! !!} or v-html
+        $currencyStyle = "<span class='currency-symbol-style'>$symbol</span>";
+        
+
+        $formattedCurrency = ltrim($formattedCurrency, "$symbol $currency->code");
+
+        // positioning the symbol
+        switch ($currency->currency_position) {
+            case 'left':
+                $formattedCurrency = $currencyStyle . $formattedCurrency;
+                break;
+            case 'right':
+                $formattedCurrency = $formattedCurrency . $currencyStyle;
+                break;
+            case 'left_with_space':
+                $formattedCurrency = $currencyStyle . ' ' . $formattedCurrency;
+                break;
+            case 'right_with_space':
+                $formattedCurrency = $formattedCurrency . ' ' . $currencyStyle;
+                break;
+        }
+
+        return $formattedCurrency;
     }
 
     /**
@@ -650,7 +710,7 @@ class Core
             $content = $formatter->formatCurrency($price, $this->getBaseCurrencyCode());
         }
 
-        return ! $isEncoded ? $content : htmlentities($content);
+        return !$isEncoded ? $content : htmlentities($content);
     }
 
     /**
@@ -676,12 +736,12 @@ class Core
         }
 
         if (
-            ! $this->is_empty_date($dateFrom)
+            !$this->is_empty_date($dateFrom)
             && $channelTimeStamp < $fromTimeStamp
         ) {
             $result = false;
         } elseif (
-            ! $this->is_empty_date($dateTo)
+            !$this->is_empty_date($dateTo)
             && $channelTimeStamp > $toTimeStamp
         ) {
             $result = false;
@@ -768,7 +828,7 @@ class Core
 
         $coreConfig = $this->getCoreConfig($field, $channel, $locale);
 
-        if (! $coreConfig) {
+        if (!$coreConfig) {
             return $this->getDefaultConfig($field);
         }
 
@@ -957,7 +1017,7 @@ class Core
     {
         $ts = strtotime($date);
 
-        if (! $day) {
+        if (!$day) {
             $start = (date('D', $ts) == 'Sun') ? $ts : strtotime('last sunday', $ts);
 
             return date('Y-m-d', $start);
@@ -1002,7 +1062,7 @@ class Core
     public function getConfigField($fieldName)
     {
         foreach (config('core') as $coreData) {
-            if (! isset($coreData['fields'])) {
+            if (!isset($coreData['fields'])) {
                 continue;
             }
 
@@ -1029,7 +1089,7 @@ class Core
 
             $items[$level1['key']] = $level1;
 
-            if (! count($level1['children'])) {
+            if (!count($level1['children'])) {
                 continue;
             }
 
@@ -1042,7 +1102,7 @@ class Core
 
                 $items[$level1['key']]['children'][$finalKey2] = $level2;
 
-                if (! count($level2['children'])) {
+                if (!count($level2['children'])) {
                     continue;
                 }
 
@@ -1082,8 +1142,8 @@ class Core
             $key = array_shift($keys);
 
             if (
-                ! isset($array[$key])
-                || ! is_array($array[$key])
+                !isset($array[$key])
+                || !is_array($array[$key])
             ) {
                 $array[$key] = [];
             }
@@ -1157,7 +1217,7 @@ class Core
         if (empty($id)) {
             return;
         }
-        
+
         if (array_key_exists($id, $this->taxCategoriesById)) {
             return $this->taxCategoriesById[$id];
         }
@@ -1191,7 +1251,7 @@ class Core
     {
         $adminName = $this->getConfigData('emails.configure.email_settings.admin_name')
             ?: (config('mail.admin.name')
-            ?: config('mail.from.name'));
+                ?: config('mail.from.name'));
 
         $adminEmail = $this->getConfigData('emails.configure.email_settings.admin_email')
             ?: config('mail.admin.address');
@@ -1240,8 +1300,8 @@ class Core
     {
         $fields = $this->getConfigField($field);
 
-        if (! empty($fields['channel_based'])) {
-            if (! empty($fields['locale_based'])) {
+        if (!empty($fields['channel_based'])) {
+            if (!empty($fields['locale_based'])) {
                 $coreConfigValue = $this->coreConfigRepository->findOneWhere([
                     'code'         => $field,
                     'channel_code' => $channel,
@@ -1254,7 +1314,7 @@ class Core
                 ]);
             }
         } else {
-            if (! empty($fields['locale_based'])) {
+            if (!empty($fields['locale_based'])) {
                 $coreConfigValue = $this->coreConfigRepository->findOneWhere([
                     'code'        => $field,
                     'locale_code' => $locale,

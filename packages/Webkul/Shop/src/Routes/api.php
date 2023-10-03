@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Webkul\Core\Core;
 use Webkul\Shop\Http\Controllers\API\CoreController;
 use Webkul\Shop\Http\Controllers\API\CategoryController;
 use Webkul\Shop\Http\Controllers\API\ProductController;
@@ -103,4 +104,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
             Route::delete('{id}', 'destroy')->name('shop.api.customers.account.wishlist.destroy');
         });
     });
+
+    // for formatting total price in bundle product
+    Route::get('/formatPrice/{slug1}/{slug2}/', [Core::class, 'formatPrice'])->name('shop.api.format_price');
 });

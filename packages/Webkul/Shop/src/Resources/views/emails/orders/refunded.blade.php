@@ -126,7 +126,7 @@
                             @endif
                         </td>
 
-                        <td style="text-align: left;padding: 15px">{{ core()->formatPrice($item->price, $refund->order_currency_code) }}
+                        <td style="text-align: left;padding: 15px">{!! core()->formatPrice($item->price, $refund->order_currency_code) !!}
                         </td>
 
                         <td style="text-align: left;padding: 15px">{{ $item->qty }}</td>
@@ -143,7 +143,7 @@
             </span>
 
             <span style="text-align: right;">
-                {{ core()->formatPrice($refund->sub_total, $refund->order_currency_code) }}
+                {!! core()->formatPrice($refund->sub_total, $refund->order_currency_code) !!}
             </span>
         </div>
 
@@ -154,7 +154,7 @@
                 </span>
 
                 <span style="text-align: right;">
-                    {{ core()->formatPrice($refund->shipping_amount, $refund->order_currency_code) }}
+                    {!! core()->formatPrice($refund->shipping_amount, $refund->order_currency_code) !!}
                 </span>
             </div>
         @endif
@@ -166,7 +166,7 @@
                 </span>
 
                 <span style="text-align: right;">
-                    {{ core()->formatPrice($refund->tax_amount, $refund->order_currency_code) }}
+                    {!! core()->formatPrice($refund->tax_amount, $refund->order_currency_code) !!}
                 </span>
             </div>
         @endforeach
@@ -178,7 +178,7 @@
                 </span>
 
                 <span style="text-align: right;">
-                    {{ core()->formatPrice($refund->discount_amount, $refund->order_currency_code) }}
+                    {!! core()->formatPrice($refund->discount_amount, $refund->order_currency_code) !!}
                 </span>
             </div>
         @endif
@@ -189,7 +189,7 @@
             </span>
 
             <span style="text-align: right;">
-                {{ core()->formatPrice($refund->grand_total, $refund->order_currency_code) }}
+                {!! core()->formatPrice($refund->grand_total, $refund->order_currency_code) !!}
             </span>
         </div>
     </div>

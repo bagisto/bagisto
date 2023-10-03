@@ -399,15 +399,15 @@
                                         @endif
                                     </td>
 
-                                    <td class="text-center">{{ core()->formatPrice($item->price, $invoice->order->order_currency_code) }}</td>
+                                    <td class="text-center">{!! core()->formatPrice($item->price, $invoice->order->order_currency_code) !!}</td>
 
                                     <td class="text-center">{{ $item->qty }}</td>
 
-                                    <td class="text-center">{{ core()->formatPrice($item->total, $invoice->order->order_currency_code) }}</td>
+                                    <td class="text-center">{!! core()->formatPrice($item->total, $invoice->order->order_currency_code) !!}</td>
 
-                                    <td class="text-center">{{ core()->formatPrice($item->tax_amount, $invoice->order->order_currency_code) }}</td>
+                                    <td class="text-center">{!! core()->formatPrice($item->tax_amount, $invoice->order->order_currency_code) !!}</td>
 
-                                    <td class="text-center">{{ core()->formatPrice(($item->total + $item->tax_amount), $invoice->order->order_currency_code) }}</td>
+                                    <td class="text-center">{!! core()->formatPrice(($item->total + $item->tax_amount), $invoice->order->order_currency_code) !!}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -423,7 +423,7 @@
                         <td>-</td>
 
                         <td>
-                            {{ core()->formatPrice($invoice->sub_total, $invoice->order->order_currency_code) }}
+                            {!! core()->formatPrice($invoice->sub_total, $invoice->order->order_currency_code) !!}
                         </td>
                     </tr>
 
@@ -435,7 +435,7 @@
                         <td>-</td>
 
                         <td>
-                            {{ core()->formatPrice($invoice->shipping_amount, $invoice->order->order_currency_code) }}
+                            {!! core()->formatPrice($invoice->shipping_amount, $invoice->order->order_currency_code) !!}
                         </td>
                     </tr>
 
@@ -448,7 +448,7 @@
                             <td>-</td>
 
                             <td>
-                                {{ core()->formatPrice($invoice->discount_amount, $invoice->order_currency_code) }}
+                                {!! core()->formatPrice($invoice->discount_amount, $invoice->order_currency_code) !!}
                             </td>
                         </tr>
                     @endif
@@ -461,7 +461,7 @@
                         <td>-</td>
 
                         <td>
-                            {{ core()->formatPrice($invoice->tax_amount, $invoice->order->order_currency_code) }}
+                            {!! core()->formatPrice($invoice->tax_amount, $invoice->order->order_currency_code) !!}
                         </td>
                     </tr>
 
@@ -479,7 +479,7 @@
                         <td>-</td>
 
                         <td>
-                            {{ core()->formatPrice($invoice->grand_total, $invoice->order->order_currency_code) }}
+                            {!! core()->formatPrice($invoice->grand_total, $invoice->order->order_currency_code) !!}
                         </td>
                     </tr>
                 </table>
