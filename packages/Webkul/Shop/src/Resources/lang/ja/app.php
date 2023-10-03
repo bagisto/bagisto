@@ -465,6 +465,7 @@ return [
                 'empty-review'     => 'レビューが見つかりません。最初のレビューを投稿してください',
                 'failed-to-upload' => '画像のアップロードに失敗しました',
                 'load-more'        => 'さらに読み込む',
+                'name'             => '名前',
                 'rating'           => '評価',
                 'success'          => 'レビューが正常に送信されました。',
                 'submit-review'    => 'レビューを送信',
@@ -511,7 +512,7 @@ return [
     ],
 
     'search' => [
-        'title' => ':query の検索結果',
+        'title' => ':queryの検索結果',
     ],
 
     'compare' => [

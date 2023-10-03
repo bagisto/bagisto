@@ -458,18 +458,19 @@ return [
             ],
     
             'reviews' => [
-                'attachments'         => 'Pièces jointes',
-                'comment'             => 'Commentaire',
-                'customer-review'     => 'Avis clients',
-                'cancel'              => 'Annuler',
-                'empty-review'        => 'Aucun avis trouvé, soyez le premier à évaluer ce produit.',
-                'failed-to-upload'    => 'Échec du téléchargement de l\'image',
-                'load-more'           => 'Charger plus',
-                'rating'              => 'Évaluation',
-                'success'             => 'Avis soumis avec succès.',
-                'submit-review'       => 'Envoyer un avis',
-                'title'               => 'Titre',
-                'write-a-review'      => 'Rédiger un avis',
+                'attachments'      => 'Pièces jointes',
+                'comment'          => 'Commentaire',
+                'customer-review'  => 'Avis clients',
+                'cancel'           => 'Annuler',
+                'empty-review'     => 'Aucun avis trouvé, soyez le premier à évaluer ce produit.',
+                'failed-to-upload' => 'Échec du téléchargement de l\'image',
+                'load-more'        => 'Charger plus',
+                'name'             => 'Nom',
+                'rating'           => 'Évaluation',
+                'success'          => 'Avis soumis avec succès.',
+                'submit-review'    => 'Envoyer un avis',
+                'title'            => 'Titre',
+                'write-a-review'   => 'Rédiger un avis',
             ],
             
             'add-to-cart'            => 'Ajouter au panier',
@@ -512,6 +513,18 @@ return [
 
     'search' => [
         'title' => 'Résultats de recherche pour : :query',
+    
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'Quelque chose s\'est mal passé, veuillez réessayer ultérieurement.',
+                'size-limit-error'     => 'Erreur de limite de taille',
+                'only-images-allowed'  => 'Seules les images (.jpeg, .jpg, .png, ..) sont autorisées.',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => 'Mots-clés analysés :',
+            ],
+        ],
     ],
 
     'compare' => [

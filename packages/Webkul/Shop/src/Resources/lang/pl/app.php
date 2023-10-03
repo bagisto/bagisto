@@ -465,6 +465,7 @@ return [
                 'empty-review'     => 'Nie znaleziono recenzji, bądź pierwszym, który oceni ten produkt',
                 'failed-to-upload' => 'Nie udało się przesłać obrazka',
                 'load-more'        => 'Wczytaj więcej',
+                'name'             => 'Imię',
                 'rating'           => 'Ocena',
                 'success'          => 'Recenzja została pomyślnie przesłana.',
                 'submit-review'    => 'Prześlij recenzję',
@@ -511,7 +512,7 @@ return [
     ],
 
     'search' => [
-        'title' => 'Wyniki wyszukiwania dla: :query',
+        'title' => 'Wyniki wyszukiwania dla : :query',
     ],
 
     'compare' => [

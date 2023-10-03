@@ -42,7 +42,7 @@ class SearchController extends Controller
     /**
      * Upload image for product search with machine learning.
      *
-     * @return \Illuminate\Http\Response
+     * @return string
      */
     public function upload()
     {

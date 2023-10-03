@@ -465,6 +465,7 @@ return [
                 'empty-review'     => 'לא נמצאו ביקורות, היה הראשון לכתוב ביקורת על מוצר זה',
                 'failed-to-upload' => 'התמונה נכשלה בהעלאה',
                 'load-more'        => 'טען עוד',
+                'name'             => 'שם',
                 'rating'           => 'דירוג',
                 'success'          => 'ביקורת נשלחה בהצלחה.',
                 'submit-review'    => 'שלח ביקורת',
@@ -512,6 +513,18 @@ return [
 
     'search' => [
         'title' => 'תוצאות חיפוש עבור : :query',
+
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'משהו השתבש, נסה שוב מאוחר יותר.',
+                'size-limit-error'     => 'שגיאת הגבלת גודל',
+                'only-images-allowed'  => 'מותרות רק תמונות (.jpeg, .jpg, .png, ..).',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => 'מילות מפתח שנבדקו:',
+            ],
+        ],
     ],
 
     'compare'  => [

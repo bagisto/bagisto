@@ -465,6 +465,7 @@ return [
                 'empty-review'     => 'Geen beoordeling gevonden, wees de eerste om dit product te beoordelen',
                 'failed-to-upload' => 'Het uploaden van de afbeelding is mislukt',
                 'load-more'        => 'Meer laden',
+                'name'             => 'Naam',
                 'rating'           => 'Beoordeling',
                 'success'          => 'Beoordeling succesvol ingediend.',
                 'submit-review'    => 'Beoordeling indienen',
@@ -511,12 +512,12 @@ return [
     ],
 
     'search' => [
-        'title' => 'Zoekresultaten voor : :query',
+        'title' => 'Zoekresultaten voor: :query',
     ],
 
-    'compare' => [
-        'already-added'      => 'Dit item is al toegevoegd aan de vergelijkingslijst',
-        'delete-all'         => 'Alles verwijderen',
+    'compare'  => [
+        'product-compare'    => 'Producten Vergelijken',
+        'delete-all'         => 'Alles Verwijderen',
         'empty-text'         => 'Je hebt geen items in je vergelijkingslijst',
         'item-add-success'   => 'Item succesvol toegevoegd aan de vergelijkingslijst',
         'product-compare'    => 'Product Vergelijking',

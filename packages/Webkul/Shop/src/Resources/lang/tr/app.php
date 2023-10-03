@@ -465,6 +465,7 @@ return [
                 'empty-review'     => 'Henüz yorum bulunamadı, ilk yorumu siz yapın',
                 'failed-to-upload' => 'Resim yüklemesi başarısız oldu',
                 'load-more'        => 'Daha Fazla Yükle',
+                'name'              => 'Adı',
                 'rating'           => 'Derecelendirme',
                 'success'          => 'Yorum başarıyla gönderildi.',
                 'submit-review'    => 'Yorumu Gönder',
@@ -511,7 +512,7 @@ return [
     ],
 
     'search' => [
-        'title' => ':query için Arama Sonuçları',
+        'title' => ':query için arama sonuçları',
     ],
 
     'compare' => [

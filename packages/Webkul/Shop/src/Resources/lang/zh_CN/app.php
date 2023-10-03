@@ -465,6 +465,7 @@ return [
                 'empty-review'     => '未找到评论，成为第一个评论此产品的人',
                 'failed-to-upload' => '图片上传失败',
                 'load-more'        => '加载更多',
+                'name'             => '名称',
                 'rating'           => '评分',
                 'success'          => '评论成功提交。',
                 'submit-review'    => '提交评论',
@@ -512,6 +513,18 @@ return [
 
     'search' => [
         'title' => '搜索结果：:query',
+
+        'images' => [
+            'index' => [
+                'something-went-wrong' => '出了点问题，请稍后重试。',
+                'size-limit-error'     => '尺寸限制错误',
+                'only-images-allowed'  => '仅允许图片（.jpeg、.jpg、.png 等）。',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => '分析关键字：',
+            ],
+        ],
     ],
 
     'compare' => [

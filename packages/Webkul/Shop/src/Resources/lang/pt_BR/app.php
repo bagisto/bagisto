@@ -465,6 +465,7 @@ return [
                 'empty-review'     => 'Nenhuma avaliação encontrada, seja o primeiro a avaliar este produto',
                 'failed-to-upload' => 'A imagem falhou ao carregar',
                 'load-more'        => 'Carregar Mais',
+                'name'             => 'Nome',
                 'rating'           => 'Avaliação',
                 'success'          => 'Avaliação enviada com sucesso.',
                 'submit-review'    => 'Enviar Avaliação',
@@ -511,7 +512,7 @@ return [
     ],
 
     'search' => [
-        'title' => 'Resultados da busca por : :query',
+        'title' => 'Resultados da pesquisa para : :query',
     ],
 
     'compare' => [

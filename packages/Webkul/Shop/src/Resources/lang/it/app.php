@@ -465,6 +465,7 @@ return [
                 'empty-review'     => 'Nessuna recensione trovata, sii il primo a recensire questo prodotto',
                 'failed-to-upload' => 'Impossibile caricare l\'immagine',
                 'load-more'        => 'Carica altro',
+                'name'             => 'Nome',
                 'rating'           => 'Valutazione',
                 'success'          => 'Recensione inviata con successo.',
                 'submit-review'    => 'Invia recensione',
@@ -511,7 +512,7 @@ return [
     ],
 
     'search' => [
-        'title' => 'Risultati della ricerca per : :query',
+        'title' => 'Risultati della Ricerca per : :query',
     ],
 
     'compare' => [

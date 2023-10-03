@@ -470,6 +470,7 @@ return [
                 'submit-review'    => 'Submit Review',
                 'title'            => 'Title',
                 'write-a-review'   => 'Write a Review',
+                'name'             => 'Name',
             ],
 
             'add-to-cart'            => 'Add To Cart',
@@ -512,6 +513,18 @@ return [
 
     'search' => [
         'title' => 'Search results for : :query',
+
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'Something went wrong, please try again later.',
+                'size-limit-error'     => 'Size Limit Error',
+                'only-images-allowed'  => 'Only images (.jpeg, .jpg, .png, ..) are allowed.',
+            ],  
+
+            'results' => [
+                'analysed-keywords' => 'Analysed Keywords:',
+            ],
+        ],
     ],
 
     'compare' => [

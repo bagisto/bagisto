@@ -465,6 +465,7 @@ return [
                 'empty-review'     => 'कोई समीक्षा नहीं मिली, पहले से ही इस प्रोडक्ट की समीक्षा करें',
                 'failed-to-upload' => 'छवि अपलोड करने में विफल रही',
                 'load-more'        => 'और लोड करें',
+                'name'             => 'नाम',
                 'rating'           => 'रेटिंग',
                 'success'          => 'समीक्षा सफलतापूर्वक प्रस्तुत की गई।',
                 'submit-review'    => 'समीक्षा प्रस्तुत करें',
@@ -512,6 +513,18 @@ return [
 
     'search' => [
         'title' => 'खोज परिणाम : :query',
+
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'कुछ गलत हो गया, कृपया बाद में पुनः प्रयास करें।',
+                'size-limit-error'     => 'साइज़ सीमा त्रुटि',
+                'only-images-allowed'  => 'केवल छवियाँ (.jpeg, .jpg, .png, ..) अनुमति दी गई हैं।',
+            ],  
+    
+            'results' => [
+                'analysed-keywords' => 'विश्लेषित की गई कीवर्ड:',
+            ],
+        ],
     ],
 
     'compare' => [
