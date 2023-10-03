@@ -19,7 +19,7 @@
                 <x-slot:toggle>
                     <span class="icon-hamburger text-[24px] cursor-pointer"></span>
                 </x-slot:toggle>
-                
+
                 <x-slot:header>
                     <div class="flex justify-between items-center">
                         <a href="{{ route('shop.home.index') }}">
@@ -63,6 +63,54 @@
                         @endauth
                     </div>
 
+                    <div class="flex  items-center gap-x-[20px]">
+                        <x-shop::dropdown position="bottom-left">
+                            <!-- Dropdown Toggler -->
+                            <x-slot:toggle>
+                                <div class="flex gap-[10px] cursor-pointer">
+                                    <span>
+                                        {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
+                                    </span>
+
+                                    <span class="text-[24px] icon-arrow-down"></span>
+                                </div>
+                            </x-slot:toggle>
+
+                            <!-- Dropdown Content -->
+                            <x-slot:content class="!p-[0px]">
+                                <v-currency-switcher></v-currency-switcher>
+                            </x-slot:content>
+                        </x-shop::dropdown>
+                        <x-shop::dropdown position="bottom-right">
+                            <x-slot:toggle>
+                                {{-- Dropdown Toggler --}}
+                                <div class="flex items-center gap-[10px] cursor-pointer">
+                                    <img
+                                        src="{{ ! empty(core()->getCurrentLocale()->logo_url)
+                                                ? core()->getCurrentLocale()->logo_url
+                                                : bagisto_asset('images/default-language.svg')
+                                            }}"
+                                        class="h-full"
+                                        alt="Default locale"
+                                        width="24"
+                                        height="16"
+                                    />
+
+                                    <span>
+                                        {{ core()->getCurrentChannel()->locales()->orderBy('name')->where('code', app()->getLocale())->value('name') }}
+                                    </span>
+
+                                    <span class="icon-arrow-down text-[24px]"></span>
+                                </div>
+                            </x-slot:toggle>
+
+                            <!-- Dropdown Content -->
+                            <x-slot:content class="!p-[0px]">
+                                <v-locale-switcher></v-locale-switcher>
+                            </x-slot:content>
+                        </x-shop::dropdown>
+                    </div>
+
                     {{-- Mobile category view --}}
                     <v-mobile-category></v-mobile-category>
                 </x-slot:content>
@@ -70,8 +118,8 @@
                 <x-slot:footer></x-slot:footer>
             </x-shop::drawer>
 
-            <a 
-                href="{{ route('shop.home.index') }}" 
+            <a
+                href="{{ route('shop.home.index') }}"
                 class="max-h-[30px]"
                 aria-label="Bagisto "
             >
@@ -95,14 +143,14 @@
                         <span class="icon-compare text-[24px] cursor-pointer"></span>
                     </a>
                 @endif
-                
+
                 @include('shop::checkout.cart.mini-cart')
 
                 <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                     <x-slot:toggle>
                         <span class="icon-users text-[24px] cursor-pointer"></span>
                     </x-slot:toggle>
-    
+
                     {{-- Guest Dropdown --}}
                     @guest('customer')
                         <x-slot:content>
@@ -110,14 +158,14 @@
                                 <p class="text-[20px] font-dmserif">
                                     @lang('shop::app.components.layouts.header.welcome-guest')
                                 </p>
-    
+
                                 <p class="text-[14px]">
                                     @lang('shop::app.components.layouts.header.dropdown-text')
                                 </p>
                             </div>
-    
+
                             <p class="w-full mt-[12px] py-2px border border-[#E9E9E9]"></p>
-    
+
                             <div class="flex gap-[16px] mt-[25px]">
                                 <a
                                     href="{{ route('shop.customer.session.create') }}"
@@ -125,7 +173,7 @@
                                 >
                                     @lang('shop::app.components.layouts.header.sign-in')
                                 </a>
-    
+
                                 <a
                                     href="{{ route('shop.customers.register.index') }}"
                                     class="block w-max mx-auto m-0 ml-[0px] py-[14px] px-[29px] bg-white border-2 border-navyBlue rounded-[18px] text-navyBlue text-base font-medium  text-center cursor-pointer"
@@ -135,7 +183,7 @@
                             </div>
                         </x-slot:content>
                     @endguest
-    
+
                     {{-- Customers Dropdown --}}
                     @auth('customer')
                         <x-slot:content class="!p-[0px]">
@@ -144,14 +192,14 @@
                                     @lang('shop::app.components.layouts.header.welcome')’
                                     {{ auth()->guard('customer')->user()->first_name }}
                                 </p>
-    
+
                                 <p class="text-[14px]">
                                     @lang('shop::app.components.layouts.header.dropdown-text')
                                 </p>
                             </div>
-    
+
                             <p class="w-full mt-[12px] py-2px border border-[#E9E9E9]"></p>
-    
+
                             <div class="grid gap-[4px] mt-[10px] pb-[10px]">
                                 <a
                                     class="px-5 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
@@ -159,14 +207,14 @@
                                 >
                                     @lang('shop::app.components.layouts.header.profile')
                                 </a>
-    
+
                                 <a
                                     class="px-5 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
                                     href="{{ route('shop.customers.account.orders.index') }}"
                                 >
                                     @lang('shop::app.components.layouts.header.orders')
                                 </a>
-    
+
                                 @if ($showWishlist)
                                     <a
                                         class="px-5 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
@@ -175,7 +223,7 @@
                                         @lang('shop::app.components.layouts.header.wishlist')
                                     </a>
                                 @endif
-    
+
                                 {{--Customers logout--}}
                                 @auth('customer')
                                     <x-shop::form
@@ -184,7 +232,7 @@
                                         id="customerLogout"
                                     >
                                     </x-shop::form>
-    
+
                                     <a
                                         class="px-5 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
                                         href="{{ route('shop.customer.session.destroy') }}"
@@ -210,12 +258,12 @@
                 class="icon-search flex items-center absolute left-[12px] top-[12px] text-[25px] pointer-events-none">
             </div>
 
-            <input 
+            <input
                 type="text"
                 class="block w-full px-11 py-3.5 border border-['#E3E3E3'] rounded-xl text-gray-900 text-xs font-medium"
                 name="query"
                 value="{{ request('query') }}"
-                placeholder="Search for products" 
+                placeholder="Search for products"
                 required
             >
 
@@ -249,7 +297,7 @@
                     </span>
                 </div>
 
-                <div 
+                <div
                     class="grid gap-[8px]"
                     v-if="category.isOpen"
                 >
@@ -288,7 +336,7 @@
                                     </li>
                                 </ul>
 
-                                <span 
+                                <span
                                     class="ml-2"
                                     v-else
                                 >
@@ -298,7 +346,7 @@
                         </li>
                     </ul>
 
-                    <span 
+                    <span
                         class="ml-2"
                         v-else
                     >
