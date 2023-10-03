@@ -1,16 +1,4 @@
-{{--
-    This code needs to be refactored to reduce the amount of PHP in the Blade
-    template as much as possible.
---}}
-@php
-    $showCompare = (bool) core()->getConfigData('general.content.shop.compare_option');
-
-    $showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
-@endphp
-
-<div
-    class="w-full flex justify-between min-h-[78px] px-[60px] border border-t-0 border-b-[1px] border-l-0 border-r-0 max-1180:px-[30px]"
->
+<div class="w-full flex justify-between min-h-[78px] px-[60px] border border-t-0 border-b-[1px] border-l-0 border-r-0 max-1180:px-[30px]">
     {{--
         This section will provide categories for the first, second, and third levels. If
         additional levels are required, users can customize them according to their needs.
@@ -74,7 +62,7 @@
         {{-- Right Navigation Links --}}
         <div class="flex gap-x-[35px] mt-[5px] max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px]">
             {{-- Compare --}}
-            @if($showCompare)
+            @if((bool) core()->getConfigData('general.content.shop.compare_option'))
                 <a
                     href="{{ route('shop.compare.index') }}"
                     aria-label="Compare "
@@ -156,7 +144,7 @@
                                 @lang('shop::app.components.layouts.header.orders')
                             </a>
 
-                            @if ($showWishlist)
+                            @if ((bool) core()->getConfigData('general.content.shop.wishlist_option'))
                                 <a
                                     class="px-5 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
                                     href="{{ route('shop.customers.account.wishlist.index') }}"
