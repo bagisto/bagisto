@@ -2080,7 +2080,7 @@ return [
                     'symbol'         => 'Symbol',
                     'title'          => 'Create New Currency',
                     'thousand-seprator' => 'Thousands Separator',
-                    'decimal-seprator' => 'Desimal Seprator',
+                    'decimal-seprator' => 'Decimal Seprator',
                     'currency-position' => 'Currency Position',
                 ],
 

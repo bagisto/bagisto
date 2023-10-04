@@ -23,7 +23,6 @@
 
                     <p class="text-[18px] font-medium" 
                     v-html="displayFormattedTotalPrice">
-                        <!-- @{{ displayFormattedTotalPrice }} -->
                     </p>
                 </div>
 
