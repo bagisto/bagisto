@@ -2563,7 +2563,7 @@ return [
                 'css'                           => 'CSS',
                 'column'                        => 'カラム',
                 'channels'                      => 'チャンネル',
-                'desc'                           => '降順',
+                'desc'                          => '降順',
                 'delete'                        => '削除',
                 'edit'                          => '編集',
                 'footer-title'                  => 'タイトル',

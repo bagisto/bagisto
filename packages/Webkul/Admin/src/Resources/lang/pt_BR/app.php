@@ -2563,7 +2563,7 @@ return [
                 'css'                           => 'CSS',
                 'column'                        => 'Coluna',
                 'channels'                      => 'Canais',
-                'desc'                           => 'decrescente',
+                'desc'                          => 'decrescente',
                 'delete'                        => 'Excluir',
                 'edit'                          => 'Editar',
                 'footer-title'                  => 'Título',
