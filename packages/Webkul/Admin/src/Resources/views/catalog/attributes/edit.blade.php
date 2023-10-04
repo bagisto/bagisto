@@ -828,7 +828,11 @@
                 as="div"
                 ref="modelForm"
             >
-                <form @submit.prevent="handleSubmit($event, storeOptions)" enctype="multipart/form-data">
+                <form
+                    @submit.prevent="handleSubmit($event, storeOptions)"
+                    enctype="multipart/form-data"
+                    ref="editOptionsForm"
+                >
                     <x-admin::modal
                         @toggle="listenModel"
                         ref="addOptionsRow"
@@ -1010,6 +1014,12 @@
                         } else {
                             this.optionsData.push(params);
                         }
+
+                        let formData = new FormData(this.$refs.editOptionsForm);
+
+                        const sliderImage = formData.get("swatch_value[]");
+
+                        params.swatch_value = sliderImage;
 
                         this.$refs.addOptionsRow.toggle();
 
