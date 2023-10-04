@@ -1175,8 +1175,9 @@
                                     name="static_image"
                                     id="static_image"
                                     class="hidden"
-                                    @change="storeImage($event)"
                                     accept="image/*"
+                                    ref="static_image"
+                                    @change="storeImage($event)"
                                 >
                             </div>
                         </div>
@@ -1992,8 +1993,29 @@
                     },
 
                     storeImage($event) {
-                        this.$refs.editor.storeImage($event)
-                    }
+                        let imageInput = this.$refs.static_image;
+
+                        if (imageInput.files == undefined) {
+                            return;
+                        }
+
+                        const validFiles = Array.from(imageInput.files).every(file => file.type.includes('image/'));
+
+                        if (! validFiles) {
+                            this.$emitter.emit('add-flash', {
+                                type: 'warning',
+                                message: "@lang('admin::app.settings.themes.edit.image-upload-message')"
+                            });
+
+                            imageInput.value = '';
+
+                            return;
+                        }
+
+                        imageInput.files.forEach((file, index) => {
+                            this.$refs.editor.storeImage($event);
+                        });
+                    },
                 },
             });
         </script>
