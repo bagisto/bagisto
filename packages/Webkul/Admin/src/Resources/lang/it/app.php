@@ -33,10 +33,10 @@ return [
     ],
 
     'notifications' => [
-        'no-record'      => 'Nessun record trovato',
-        'title'          => 'Notifiche',
         'marked-success' => 'Notifica contrassegnata con successo',
+        'no-record'      => 'Nessun record trovato',
         'read-all'       => 'Segna come Letto',
+        'title'          => 'Notifiche',
         'view-all'       => 'Visualizza Tutte',
 
         'order-status-messages' => [
@@ -50,11 +50,11 @@ return [
 
         'status'  => [
             'all'        => 'Tutti',
-            'pending'    => 'In sospeso',
-            'processing' => 'In lavorazione',
             'canceled'   => 'Annullato',
             'closed'     => 'Chiuso',
             'completed'  => 'Completato',
+            'pending'    => 'In sospeso',
+            'processing' => 'In lavorazione',
         ],
     ],
 
@@ -64,9 +64,9 @@ return [
             'confirm-password'  => 'Conferma Password',
             'change-password'   => 'Cambia Password',
             'current-password'  => 'Password Attuale',
-            'invalid-password'  => 'La password attuale inserita non è corretta.',
             'email'             => 'Email',
             'general'           => 'Generale',
+            'invalid-password'  => 'La password attuale inserita non è corretta.',
             'name'              => 'Nome',
             'profile-image'     => 'Immagine del Profilo',
             'password'          => 'Password',
@@ -96,6 +96,8 @@ return [
             'more-products'               => ':product_count+ Altre Immagini',
             'order-count'                 => ':count Ordini',
             'order'                       => ':total_orders Ordini',
+            'order-id'                    => '#:id',
+            'overall-details'             => 'Dettagli Generali',
             'product-count'               => ':count Prodotti',
             'product-number'              => 'Prodotto - :product_number',
             'product-image'               => 'Immagine Prodotto',
@@ -110,8 +112,6 @@ return [
             'store-stats'                 => 'Statistiche del Negozio',
             'to'                          => 'A',
             'title'                       => 'Dashboard',
-            'order-id'                    => '#:id',
-            'overall-details'             => 'Dettagli Generali',
             'top-performing-categories'   => 'Categorie più Performanti',
             'top-selling-products'        => 'Prodotti più Venduti',
             'total-customers'             => 'Clienti Totali',
@@ -3298,33 +3298,33 @@ return [
     ],
 
     'errors' => [
-        'go-back'   => 'Torna Indietro',
         'dashboard' => 'Dashboard',
+        'go-back'   => 'Torna Indietro',
         'support'   => 'Se il problema persiste, contattaci su <a href=":link" class=":class">:email</a> per assistenza.',
 
         '404' => [
-            'title'       => '404 Pagina Non Trovata',
             'description' => 'Ops! La pagina che stai cercando è in vacanza. Sembra che non siamo riusciti a trovare ciò che cercavi.',
+            'title'       => '404 Pagina Non Trovata',
         ],
 
         '401' => [
-            'title'       => '401 Non Autorizzato',
             'description' => 'Ops! Sembra che tu non abbia il permesso di accedere a questa pagina. Sembra che tu stia mancando le credenziali necessarie.',
+            'title'       => '401 Non Autorizzato',
         ],
 
         '403' => [
-            'title'       => '403 Accesso Negato',
             'description' => 'Ops! Questa pagina è fuori limite. Sembra che tu non abbia le autorizzazioni necessarie per visualizzare questo contenuto.',
+            'title'       => '403 Accesso Negato',
         ],
 
         '500' => [
-            'title'       => '500 Errore Interno del Server',
             'description' => 'Ops! Qualcosa è andato storto. Sembra che stiamo avendo problemi nel caricare la pagina che stai cercando.',
+            'title'       => '500 Errore Interno del Server',
         ],
 
         '503' => [
-            'title'       => '503 Servizio Non Disponibile',
             'description' => 'Ops! Sembra che siamo temporaneamente offline per manutenzione. Ti preghiamo di tornare più tardi.',
+            'title'       => '503 Servizio Non Disponibile',
         ],
     ],
 
@@ -3412,20 +3412,20 @@ return [
                 'summary'  => 'Riepilogo dell\'Ordine',
             ],
 
-            'shipping-address'  => 'Indirizzo di Spedizione',
             'billing-address'   => 'Indirizzo di Fatturazione',
             'contact'           => 'Contatto',
-            'shipping'          => 'Spedizione',
-            'payment'           => 'Pagamento',
-            'sku'               => 'SKU',
+            'discount'          => 'Sconto',
+            'grand-total'       => 'Totale Generale',
             'name'              => 'Nome',
+            'payment'           => 'Pagamento',
             'price'             => 'Prezzo',
             'qty'               => 'Qtà',
+            'shipping-address'  => 'Indirizzo di Spedizione',
+            'shipping'          => 'Spedizione',
+            'sku'               => 'SKU',
             'subtotal'          => 'Subtotale',
             'shipping-handling' => 'Spedizione e Gestione',
             'tax'               => 'Tassa',
-            'discount'          => 'Sconto',
-            'grand-total'       => 'Totale Generale',
         ],
     ],
 ];

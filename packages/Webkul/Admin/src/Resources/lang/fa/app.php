@@ -33,10 +33,10 @@ return [
     ],
 
     'notifications' => [
-        'no-record'      => 'هیچ رکوردی یافت نشد',
-        'title'          => 'اعلان‌ها',
         'marked-success' => 'اعلان با موفقیت علامت‌گذاری شد',
+        'no-record'      => 'هیچ رکوردی یافت نشد',
         'read-all'       => 'علامت خوانده شده',
+        'title'          => 'اعلان‌ها',
         'view-all'       => 'مشاهده همه',
 
         'order-status-messages' => [
@@ -50,11 +50,11 @@ return [
 
         'status'  => [
             'all'        => 'همه',
-            'pending'    => 'در انتظار',
-            'processing' => 'در حال پردازش',
             'canceled'   => 'کنسل شده',
             'closed'     => 'بسته شده',
             'completed'  => 'تکمیل شده',
+            'pending'    => 'در انتظار',
+            'processing' => 'در حال پردازش',
         ],
     ],
 
@@ -64,9 +64,9 @@ return [
             'confirm-password'  => 'تأیید رمز عبور',
             'change-password'   => 'تغییر رمز عبور',
             'current-password'  => 'رمز عبور فعلی',
-            'invalid-password'  => 'رمز عبور فعلی اشتباه است.',
             'email'             => 'ایمیل',
             'general'           => 'عمومی',
+            'invalid-password'  => 'رمز عبور فعلی اشتباه است.',
             'name'              => 'نام',
             'profile-image'     => 'تصویر پروفایل',
             'password'          => 'رمز عبور',
@@ -96,6 +96,8 @@ return [
             'more-products'               => ':product_count+ تصویر دیگر',
             'order-count'                 => ':count سفارش',
             'order'                       => ':total_orders سفارش',
+            'order-id'                    => '#:id',
+            'overall-details'             => 'جزئیات کلی',
             'product-count'               => ':count محصول',
             'product-number'              => 'محصول - :product_number',
             'product-image'               => 'تصویر محصول',
@@ -110,8 +112,6 @@ return [
             'store-stats'                 => 'آمار فروشگاه',
             'to'                          => 'تا',
             'title'                       => 'داشبورد',
-            'order-id'                    => '#:id',
-            'overall-details'             => 'جزئیات کلی',
             'top-performing-categories'   => 'بالاترین دسته‌های عملکرد',
             'top-selling-products'        => 'بالاترین محصولات فروش',
             'total-customers'             => 'کل مشتریان',
@@ -3298,33 +3298,33 @@ return [
     ],
 
     'errors' => [
-        'go-back'   => 'بازگشت به عقب',
         'dashboard' => 'داشبورد',
+        'go-back'   => 'بازگشت به عقب',
         'support'   => 'اگر مشکل همچنان ادامه داشت، با ما تماس بگیرید به آدرس <a href=":link" class=":class">:email</a> برای کمک.',
 
         '404' => [
-            'title'       => '404 صفحه پیدا نشد',
             'description' => 'اوه! صفحه‌ای که به دنبالش بودید در تعطیلات است. به نظر می‌آید ما نتوانسته‌ایم آنچه را که به دنبال آن بودید پیدا کنیم.',
+            'title'       => '404 صفحه پیدا نشد',
         ],
 
         '401' => [
-            'title'       => '401 عدم مجوز',
             'description' => 'اوه! به نظر می‌آید نمی‌توانید به این صفحه دسترسی داشته باشید. به نظر می‌آید شما دسترسی لازم را ندارید.',
+            'title'       => '401 عدم مجوز',
         ],
 
         '403' => [
-            'title'       => '403 ممنوع',
             'description' => 'اوه! این صفحه ممنوع است. به نظر می‌آید شما مجوز لازم برای مشاهده این محتوا را ندارید.',
+            'title'       => '403 ممنوع',
         ],
 
         '500' => [
-            'title'       => '500 خطای داخلی سرور',
             'description' => 'اوه! مشکلی پیش آمده است. به نظر می‌آید ما مشکلی در بارگذاری صفحه‌ای که به دنبال آن می‌گردید داریم.',
+            'title'       => '500 خطای داخلی سرور',
         ],
 
         '503' => [
-            'title'       => '503 خدمات در دسترس نیست',
             'description' => 'اوه! به نظر می‌آید ما موقتاً برای تعمیرات پایین هستیم. لطفاً بعداً مراجعه کنید.',
+            'title'       => '503 خدمات در دسترس نیست',
         ],
     ],
 
@@ -3412,20 +3412,20 @@ return [
                 'summary'  => 'خلاصه سفارش',
             ],
 
-            'shipping-address'  => 'آدرس ارسال',
             'billing-address'   => 'آدرس صورتحساب',
             'contact'           => 'تماس',
-            'shipping'          => 'ارسال',
-            'payment'           => 'پرداخت',
-            'sku'               => 'کد SKU',
+            'discount'          => 'تخفیف',
+            'grand-total'       => 'مجموع کل',
             'name'              => 'نام',
             'price'             => 'قیمت',
+            'payment'           => 'پرداخت',
             'qty'               => 'تعداد',
+            'shipping-address'  => 'آدرس ارسال',
+            'shipping'          => 'ارسال',
+            'sku'               => 'کد SKU',
             'subtotal'          => 'جمع جزء',
             'shipping-handling' => 'هزینه ارسال و بسته‌بندی',
             'tax'               => 'مالیات',
-            'discount'          => 'تخفیف',
-            'grand-total'       => 'مجموع کل',
         ],
     ],
 ];

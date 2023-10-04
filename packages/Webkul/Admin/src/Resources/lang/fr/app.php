@@ -33,10 +33,10 @@ return [
     ],
 
     'notifications' => [
-        'no-record'      => 'Aucun enregistrement trouvé',
-        'title'          => 'Notifications',
         'marked-success' => 'Notification marquée avec succès',
+        'no-record'      => 'Aucun enregistrement trouvé',
         'read-all'       => 'Marquer comme lu',
+        'title'          => 'Notifications',
         'view-all'       => 'Voir tout',
 
         'order-status-messages' => [
@@ -50,11 +50,11 @@ return [
 
         'status'  => [
             'all'        => 'Tous',
-            'pending'    => 'En attente',
-            'processing' => 'En cours de traitement',
             'canceled'   => 'Annulée',
             'closed'     => 'Fermée',
             'completed'  => 'Terminée',
+            'pending'    => 'En attente',
+            'processing' => 'En cours de traitement',
         ],
     ],
 
@@ -64,9 +64,9 @@ return [
             'confirm-password'  => 'Confirmer le mot de passe',
             'change-password'   => 'Modifier le mot de passe',
             'current-password'  => 'Mot de passe actuel',
-            'invalid-password'  => 'Le mot de passe actuel que vous avez saisi est incorrect.',
             'email'             => 'Email',
             'general'           => 'Général',
+            'invalid-password'  => 'Le mot de passe actuel que vous avez saisi est incorrect.',
             'name'              => 'Nom',
             'profile-image'     => 'Image de profil',
             'password'          => 'Mot de passe',
@@ -96,6 +96,8 @@ return [
             'more-products'               => ':product_count+ autres images',
             'order-count'                 => ':count commandes',
             'order'                       => ':total_orders commandes',
+            'order-id'                    => '#:id',
+            'overall-details'             => 'Détails globaux',
             'product-count'               => ':count produits',
             'product-number'              => 'Produit - :product_number',
             'product-image'               => 'Image du produit',
@@ -110,8 +112,6 @@ return [
             'store-stats'                 => 'Statistiques du magasin',
             'to'                          => 'À',
             'title'                       => 'Tableau de bord',
-            'order-id'                    => '#:id',
-            'overall-details'             => 'Détails globaux',
             'top-performing-categories'   => 'Catégories les plus performantes',
             'top-selling-products'        => 'Produits les plus vendus',
             'total-customers'             => 'Total des clients',
@@ -3298,33 +3298,33 @@ return [
     ],
 
     'errors' => [
-        'go-back'   => 'Retour',
         'dashboard' => 'Tableau de bord',
+        'go-back'   => 'Retour',
         'support'   => 'Si le problème persiste, contactez-nous à <a href=":link" class=":class">:email</a> pour obtenir de l\'aide.',
 
         '404' => [
-            'title'       => '404 Page non trouvée',
             'description' => 'Oups ! La page que vous recherchez est en vacances. Il semble que nous n\'ayons pas pu trouver ce que vous cherchiez.',
+            'title'       => '404 Page non trouvée',
         ],
 
         '401' => [
-            'title'       => '401 Non autorisé',
             'description' => 'Oups ! Il semble que vous n\'ayez pas le droit d\'accéder à cette page. Vous semblez manquer des informations d\'identification nécessaires.',
+            'title'       => '401 Non autorisé',
         ],
 
         '403' => [
-            'title'       => '403 Interdit',
             'description' => 'Oups ! Cette page est interdite. Il semble que vous n\'ayez pas les autorisations nécessaires pour voir ce contenu.',
+            'title'       => '403 Interdit',
         ],
 
         '500' => [
-            'title'       => '500 Erreur interne du serveur',
             'description' => 'Oups ! Quelque chose s\'est mal passé. Il semble que nous ayons des problèmes pour charger la page que vous recherchez.',
+            'title'       => '500 Erreur interne du serveur',
         ],
 
         '503' => [
-            'title'       => '503 Service indisponible',
             'description' => 'Oups ! Il semble que nous soyons temporairement en maintenance. Veuillez revenir dans un moment.',
+            'title'       => '503 Service indisponible',
         ],
     ],
 
@@ -3412,20 +3412,20 @@ return [
                 'summary'  => 'Résumé de la commande',
             ],
 
-            'shipping-address'  => 'Adresse de livraison',
             'billing-address'   => 'Adresse de facturation',
             'contact'           => 'Contact',
-            'shipping'          => 'Expédition',
-            'payment'           => 'Paiement',
-            'sku'               => 'SKU',
+            'discount'          => 'Réduction',
+            'grand-total'       => 'Total général',
             'name'              => 'Nom',
+            'payment'           => 'Paiement',
             'price'             => 'Prix',
             'qty'               => 'Qté',
+            'shipping-address'  => 'Adresse de livraison',
+            'shipping'          => 'Expédition',
+            'sku'               => 'SKU',
             'subtotal'          => 'Sous-total',
             'shipping-handling' => 'Frais de port et de manutention',
             'tax'               => 'Taxe',
-            'discount'          => 'Réduction',
-            'grand-total'       => 'Total général',
         ],
     ],
 ];
