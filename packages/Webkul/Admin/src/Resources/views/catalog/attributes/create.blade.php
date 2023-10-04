@@ -703,6 +703,7 @@
                 <form
                     @submit.prevent="handleSubmit($event, storeOptions)"
                     enctype="multipart/form-data"
+                    ref="createOptionsForm"
                 >
                     <x-admin::modal
                         @toggle="listenModal"
@@ -875,6 +876,12 @@
                                 params
                             });
                         }
+
+                        let formData = new FormData(this.$refs.createOptionsForm);
+
+                        const sliderImage = formData.get("swatch_value[]");
+
+                        params.swatch_value = sliderImage;
 
                         this.$refs.addOptionsRow.toggle();
 

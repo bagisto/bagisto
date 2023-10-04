@@ -63,7 +63,7 @@ class AttributeController extends Controller
             'default_value' => 'integer',
         ]);
 
-        $requestData =  request()->input();
+        $requestData =  request()->all();
 
         if (! $requestData['default_value']) {
             $requestData['default_value'] = Null;
@@ -122,7 +122,7 @@ class AttributeController extends Controller
         ]);
 
 
-        $requestData =  request()->input();
+        $requestData =  request()->all();
 
         if (! $requestData['default_value']) {
             $requestData['default_value'] = Null;
