@@ -305,7 +305,7 @@ class ElasticSearch extends AbstractIndexer
      */
     public function getAttributes()
     {
-        if (count($this->attributes)) {
+        if ($this->attributes) {
             return $this->attributes;
         }
 
@@ -377,7 +377,7 @@ class ElasticSearch extends AbstractIndexer
     public function getCustomerGroups()
     {
         if ($this->customerGroups) {
-            return $customerGroups;
+            return $this->customerGroups;
         }
 
         return $this->customerGroups = $this->customerGroupRepository->all();
