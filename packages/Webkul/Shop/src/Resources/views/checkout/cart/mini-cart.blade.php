@@ -4,8 +4,8 @@
 </v-mini-cart>
 
 @pushOnce('scripts')
-<script type="text/x-template" id="v-mini-cart-template">
-    <x-shop::drawer>
+    <script type="text/x-template" id="v-mini-cart-template">
+        <x-shop::drawer>
             <!-- Drawer Toggler -->
             <x-slot:toggle>
                 <span class="relative">
@@ -175,78 +175,67 @@
         </x-shop::drawer>
     </script>
 
-<script type="module">
-    app.component("v-mini-cart", {
-        template: '#v-mini-cart-template',
+    <script type="module">
+        app.component("v-mini-cart", {
+            template: '#v-mini-cart-template',
 
-        data() {
-            return {
-                cart: null,
-            }
-        },
-
-        mounted() {
-            this.getCart();
-
-            /**
-             * To Do: Implement this.
-             *
-             * Action.
-             */
-            this.$emitter.on('update-mini-cart', (cart) => {
-                this.cart = cart;
-            });
-        },
-
-        methods: {
-            getCart() {
-                this.$axios.get('{{ route('
-                        shop.api.checkout.cart.index ') }}')
-                    .then(response => {
-                        this.cart = response.data.data;
-                    })
-                    .catch(error => {});
+            data() {
+                return  {
+                    cart: null,
+                }
             },
 
-            updateItem(quantity, item) {
-                let qty = {};
+           mounted() {
+                this.getCart();
 
-                qty[item.id] = quantity;
+                /**
+                 * To Do: Implement this.
+                 *
+                 * Action.
+                 */
+                this.$emitter.on('update-mini-cart', (cart) => {
+                    this.cart = cart;
+                });
+           },
 
-                this.$axios.put('{{ route('
-                        shop.api.checkout.cart.update ') }}', {
-                            qty
-                        })
-                    .then(response => {
-                        if (response.data.message) {
+           methods: {
+                getCart() {
+                    this.$axios.get('{{ route('shop.api.checkout.cart.index') }}')
+                        .then(response => {
                             this.cart = response.data.data;
-                        } else {
-                            this.$emitter.emit('add-flash', {
-                                type: 'warning',
-                                message: response.data.data.message
-                            });
-                        }
-                    })
-                    .catch(error => {});
-            },
+                        })
+                        .catch(error => {});
+                },
 
-            removeItem(itemId) {
-                this.$axios.post('{{ route('
-                        shop.api.checkout.cart.destroy ') }}', {
+                updateItem(quantity, item) {
+                    let qty = {};
+
+                    qty[item.id] = quantity;
+
+                    this.$axios.put('{{ route('shop.api.checkout.cart.update') }}', { qty })
+                        .then(response => {
+                            if (response.data.message) {
+                                this.cart = response.data.data;
+                            } else {
+                                this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
+                            }
+                        })
+                        .catch(error => {});
+                },
+
+                removeItem(itemId) {
+                    this.$axios.post('{{ route('shop.api.checkout.cart.destroy') }}', {
                             '_method': 'DELETE',
                             'cart_item_id': itemId,
                         })
-                    .then(response => {
-                        this.cart = response.data.data;
+                        .then(response => {
+                            this.cart = response.data.data;
 
-                        this.$emitter.emit('add-flash', {
-                            type: 'success',
-                            message: response.data.message
-                        });
-                    })
-                    .catch(error => {});
-            },
-        }
-    });
-</script>
+                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                        })
+                        .catch(error => {});
+                },
+            }
+        });
+    </script>
 @endpushOnce
