@@ -1084,7 +1084,7 @@
                 optionName: function (attribute, optionId) {
                     return attribute.options.find(function (option) {
                         return option.id == optionId;
-                    }).admin_name;
+                    })?.admin_name;
                 },
             }
         });
@@ -1155,7 +1155,7 @@
                 optionName: function (attribute, optionId) {
                     return attribute.options.find(function (option) {
                         return option.id == optionId;
-                    }).admin_name;
+                    })?.admin_name;
                 },
 
                 update(params) {
