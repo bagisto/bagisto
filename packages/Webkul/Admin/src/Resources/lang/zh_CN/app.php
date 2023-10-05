@@ -33,10 +33,10 @@ return [
     ],
 
     'notifications' => [
-        'no-record'      => '未找到记录',
-        'title'          => '通知',
         'marked-success' => '通知标记成功',
+        'no-record'      => '未找到记录',
         'read-all'       => '标记为已读',
+        'title'          => '通知',
         'view-all'       => '查看全部',
 
         'order-status-messages' => [
@@ -50,11 +50,11 @@ return [
 
         'status'  => [
             'all'        => '全部',
-            'pending'    => '待处理',
-            'processing' => '处理中',
             'canceled'   => '已取消',
             'closed'     => '已关闭',
             'completed'  => '已完成',
+            'pending'    => '待处理',
+            'processing' => '处理中',
         ],
     ],
 
@@ -64,9 +64,9 @@ return [
             'confirm-password'  => '确认密码',
             'change-password'   => '修改密码',
             'current-password'  => '当前密码',
-            'invalid-password'  => '您输入的当前密码不正确。',
             'email'             => '电子邮件',
             'general'           => '通用',
+            'invalid-password'  => '您输入的当前密码不正确。',
             'name'              => '姓名',
             'profile-image'     => '个人资料图片',
             'password'          => '密码',
@@ -96,6 +96,8 @@ return [
             'more-products'               => ':product_count+ 更多图片',
             'order-count'                 => ':count 订单',
             'order'                       => ':total_orders 订单',
+            'order-id'                    => '#:id',
+            'overall-details'             => '总体详情',
             'product-count'               => ':count 产品',
             'product-number'              => '产品 - :product_number',
             'product-image'               => '产品图片',
@@ -110,8 +112,6 @@ return [
             'store-stats'                 => '商店统计',
             'to'                          => '至',
             'title'                       => '仪表盘',
-            'order-id'                    => '#:id',
-            'overall-details'             => '总体详情',
             'top-performing-categories'   => '表现最佳的类别',
             'top-selling-products'        => '畅销产品',
             'total-customers'             => '总客户数',
@@ -3298,33 +3298,33 @@ return [
     ],
 
     'errors' => [
-        'go-back'   => '返回', // Translated "Go Back" to "返回"
         'dashboard' => '仪表盘',
+        'go-back'   => '返回', // Translated "Go Back" to "返回"
         'support'   => '如果问题持续存在，请通过<a href=":link" class=":class">:email</a>联系我们以寻求帮助。',
 
         '404' => [
-            'title'       => '404 页面未找到',
             'description' => '哎呀！您正在寻找的页面似乎在度假。似乎我们无法找到您正在搜索的内容。',
+            'title'       => '404 页面未找到',
         ],
 
         '401' => [
-            'title'       => '401 未经授权',
             'description' => '哎呀！看起来您无权访问此页面。似乎您缺少必要的凭证。',
+            'title'       => '401 未经授权',
         ],
 
         '403' => [
-            'title'       => '403 禁止访问',
             'description' => '哎呀！此页面受限制。似乎您没有查看此内容所需的权限。',
+            'title'       => '403 禁止访问',
         ],
 
         '500' => [
-            'title'       => '500 内部服务器错误',
             'description' => '哎呀！出了些问题。似乎我们在加载您所寻找的页面时遇到了问题。',
+            'title'       => '500 内部服务器错误',
         ],
 
         '503' => [
-            'title'       => '503 服务不可用',
             'description' => '哎呀！看起来我们暂时停机进行维护。请稍后再查看。',
+            'title'       => '503 服务不可用',
         ],
     ],
 
@@ -3412,20 +3412,20 @@ return [
                 'summary'  => '订单摘要',
             ],
 
-            'shipping-address'  => '送货地址',
             'billing-address'   => '账单地址',
             'contact'           => '联系方式',
-            'shipping'          => '配送',
-            'payment'           => '付款',
-            'sku'               => 'SKU',
+            'discount'          => '折扣',
+            'grand-total'       => '总计',
             'name'              => '名称',
+            'payment'           => '付款',
             'price'             => '价格',
             'qty'               => '数量',
+            'shipping-address'  => '送货地址',
+            'shipping'          => '配送',
+            'sku'               => 'SKU',
             'subtotal'          => '小计',
             'shipping-handling' => '运费及处理费',
             'tax'               => '税金',
-            'discount'          => '折扣',
-            'grand-total'       => '总计',
         ],
     ],
 ];

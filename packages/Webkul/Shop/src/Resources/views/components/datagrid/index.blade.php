@@ -326,6 +326,18 @@
                                 break;
                         }
                     } else {
+                        /**
+                         * Here, either a real event will come or a string value. If a string value is present, then
+                         * we create a similar event-like structure to avoid any breakage and make it easy to use.
+                         */
+                        if ($event?.target?.value === undefined) {
+                            $event = {
+                                target: {
+                                    value: $event,
+                                }
+                            };
+                        }
+
                         this.applyFilter(column, $event.target.value, additional);
 
                         if (column) {
@@ -366,9 +378,13 @@
                          * Else, we will look into the sidebar filters and update the value accordingly.
                          */
                     } else {
-                        if (
-                            !requestedValue ||
-                            requestedValue == appliedColumn?.value
+                        /**
+                         * Here if value already exists, we will not do anything.
+                         */
+                         if (
+                            requestedValue === undefined ||
+                            requestedValue === '' ||
+                            appliedColumn?.value.includes(requestedValue)
                         ) {
                             return;
                         }

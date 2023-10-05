@@ -74,6 +74,20 @@ Vue Storefront 2 integration for Bagisto: [https://github.com/bagisto/vuestorefr
 
 Develop and deploy your next headless commerce storefronts with Next JS and Bagisto: [https://github.com/bagisto/nextjs-commerce](https://github.com/bagisto/nextjs-commerce)
 
+# AI Powered eCommerce
+
+You can integrate popular large language models like GPT, BERT, Llama etc. to build AI-powered eCommerce applications with bagisto. Some of the popular use cases where you can make use of LLMs to build AI apps are chatbots, automated product descriptions, customer support, search and recommendations. 
+
+[<img src="https://i.ibb.co/jWwngPg/29-bagisto-chatbot-thumbnail.png" width="100%">](https://www.youtube.com/watch?v=OoTHJmQxvJM "Bagisto AI Powered eCommerce Chatbot")
+
+You can incorporate LLM API with your bagisto applications to send and receive queries and ensure proper error handling and rate limiting to prevent overuse of the API
+
+# Decentralised eCommerce
+
+Build decentralised applications with Bagisto on popular blockchains like Ethereum and Solana by integrating smart contracts with the eCommerce platform. You can have decentralised marketplaces, NFT marketplaces, and decentralised e-signing with the laravel eCommerce system.
+
+<img src="https://bagisto.com/wp-content/themes/bagisto/images/services/blockchain-for-eCommerce.png" width="100%">
+
 # Commerce For Every Need
 
 ![enter image description here](https://raw.githubusercontent.com/bagisto/temp-media/master/every-need.png)

@@ -33,10 +33,10 @@ return [
     ],
 
     'notifications' => [
-        'no-record'      => 'Kayıt Bulunamadı',
-        'title'          => 'Bildirimler',
         'marked-success' => 'Bildirim Başarıyla İşaretlendi',
+        'no-record'      => 'Kayıt Bulunamadı',
         'read-all'       => 'Tümünü Okundu Olarak İşaretle',
+        'title'          => 'Bildirimler',
         'view-all'       => 'Tümünü Görüntüle',
 
         'order-status-messages' => [
@@ -50,11 +50,11 @@ return [
 
         'status'  => [
             'all'        => 'Tümü',
-            'pending'    => 'Bekliyor',
-            'processing' => 'İşleniyor',
             'canceled'   => 'İptal Edildi',
             'closed'     => 'Kapatıldı',
             'completed'  => 'Tamamlandı',
+            'pending'    => 'Bekliyor',
+            'processing' => 'İşleniyor',
         ],
     ],
 
@@ -64,9 +64,9 @@ return [
             'confirm-password'  => 'Şifreyi Onayla',
             'change-password'   => 'Şifre Değiştir',
             'current-password'  => 'Mevcut Şifre',
-            'invalid-password'  => 'Girdiğiniz mevcut şifre yanlış.',
             'email'             => 'E-posta',
             'general'           => 'Genel',
+            'invalid-password'  => 'Girdiğiniz mevcut şifre yanlış.',
             'name'              => 'Ad',
             'profile-image'     => 'Profil Resmi',
             'password'          => 'Şifre',
@@ -96,6 +96,8 @@ return [
             'more-products'               => ':product_count+ Daha Fazla Ürün',
             'order-count'                 => ':count Sipariş',
             'order'                       => ':total_orders Sipariş',
+            'order-id'                    => '#:id',
+            'overall-details'             => 'Genel Detaylar',
             'product-count'               => ':count Ürün',
             'product-number'              => 'Ürün - :product_number',
             'product-image'               => 'Ürün Resmi',
@@ -110,8 +112,6 @@ return [
             'store-stats'                 => 'Mağaza İstatistikleri',
             'to'                          => 'Bitiş',
             'title'                       => 'Yönetim Paneli',
-            'order-id'                    => '#:id',
-            'overall-details'             => 'Genel Detaylar',
             'top-performing-categories'   => 'En İyi Performans Gösteren Kategoriler',
             'top-selling-products'        => 'En Çok Satılan Ürünler',
             'total-customers'             => 'Toplam Müşteri',
@@ -3298,33 +3298,33 @@ return [
     ],
 
     'errors' => [
-        'go-back'   => 'Geri Git',
         'dashboard' => 'Kontrol Paneli',
+        'go-back'   => 'Geri Git',
         'support'   => 'Sorun devam ederse, yardım için <a href=":link" class=":class">:email</a> adresinden bizimle iletişime geçin.',
 
         '404' => [
-            'title'       => '404 Sayfa Bulunamadı',
             'description' => 'Oops! Aradığınız sayfa tatile çıkmış gibi görünüyor. Aradığınızı bulamıyor gibi görünüyoruz.',
+            'title'       => '404 Sayfa Bulunamadı',
         ],
 
         '401' => [
-            'title'       => '401 Yetkisiz Erişim',
             'description' => 'Oops! Bu sayfaya erişiminiz izin verilmiyor gibi görünüyor. Gerekli kimlik bilgilerini eksik gördük.',
+            'title'       => '401 Yetkisiz Erişim',
         ],
 
         '403' => [
-            'title'       => '403 Yasak',
             'description' => 'Oops! Bu sayfa erişime kapalı gibi görünüyor. İçeriği görüntülemek için gereken izinlere sahip olmadığınız görünüyor.',
+            'title'       => '403 Yasak',
         ],
 
         '500' => [
-            'title'       => '500 İç Sunucu Hatası',
             'description' => 'Oops! Bir şeyler ters gitti. Aradığınız sayfayı yüklerken sorun yaşadığımız görünüyor.',
+            'title'       => '500 İç Sunucu Hatası',
         ],
 
         '503' => [
-            'title'       => '503 Hizmet Kullanılamıyor',
             'description' => 'Oops! Geçici olarak bakım için kapalı gibi görünüyoruz. Lütfen biraz sonra tekrar deneyin.',
+            'title'       => '503 Hizmet Kullanılamıyor',
         ],
     ],
 
@@ -3412,20 +3412,20 @@ return [
                 'summary'  => 'Sipariş Özeti',
             ],
 
-            'shipping-address'  => 'Teslimat Adresi',
             'billing-address'   => 'Fatura Adresi',
             'contact'           => 'İletişim',
-            'shipping'          => 'Teslimat',
-            'payment'           => 'Ödeme',
-            'sku'               => 'Stok Kodu',
+            'discount'          => 'İndirim',
+            'grand-total'       => 'Genel Toplam',
             'name'              => 'Ad',
+            'payment'           => 'Ödeme',
             'price'             => 'Fiyat',
             'qty'               => 'Miktar',
+            'shipping-address'  => 'Teslimat Adresi',
+            'shipping'          => 'Teslimat',
+            'sku'               => 'Stok Kodu',
             'subtotal'          => 'Ara Toplam',
             'shipping-handling' => 'Kargo ve Taşıma',
             'tax'               => 'Vergi',
-            'discount'          => 'İndirim',
-            'grand-total'       => 'Genel Toplam',
         ],
     ],
 ];

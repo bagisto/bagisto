@@ -37,17 +37,14 @@ class Requirement {
 
         $results = [];
 
-        foreach($requirements as $type => $requirement)
-        {
+        foreach($requirements as $type => $requirement) {
             switch ($type) {
                 // check php requirements
                 case 'php':
-                    foreach($requirements[$type] as $requirement)
-                    {
+                    foreach($requirements[$type] as $requirement) {
                         $results['requirements'][$type][$requirement] = true;
 
-                        if(!extension_loaded($requirement))
-                        {
+                        if(! extension_loaded($requirement)) {
                             $results['requirements'][$type][$requirement] = false;
 
                             $results['errors'] = true;
@@ -93,6 +90,7 @@ class Requirement {
         $_minPhpVersion = '8.1';
 
         $currentPhpVersion = $this->getPhpVersionInfo();
+
         $supported = false;
 
         if (version_compare((str_pad($currentPhpVersion['version'], 6, "0")), $_minPhpVersion) >= 0) {
@@ -115,7 +113,9 @@ class Requirement {
     private static function getPhpVersionInfo(): array
     {
         $currentVersionFull = PHP_VERSION;
+
         preg_match("#^\d+(\.\d+)*#", $currentVersionFull, $filtered);
+        
         $currentVersion = $filtered[0];
 
         return [

@@ -33,10 +33,10 @@ return [
     ],
 
     'notifications' => [
-        'no-record'      => 'Geen Records Gevonden',
-        'title'          => 'Meldingen',
         'marked-success' => 'Melding Succesvol Gemarkeerd',
+        'no-record'      => 'Geen Records Gevonden',
         'read-all'       => 'Markeer als Gelezen',
+        'title'          => 'Meldingen',
         'view-all'       => 'Alles Bekijken',
 
         'order-status-messages' => [
@@ -50,11 +50,11 @@ return [
 
         'status'  => [
             'all'        => 'Alle',
-            'pending'    => 'In Afwachting',
-            'processing' => 'In Verwerking',
             'canceled'   => 'Geannuleerd',
             'closed'     => 'Gesloten',
             'completed'  => 'Voltooid',
+            'pending'    => 'In Afwachting',
+            'processing' => 'In Verwerking',
         ],
     ],
 
@@ -64,9 +64,9 @@ return [
             'confirm-password'  => 'Bevestig Wachtwoord',
             'change-password'   => 'Wachtwoord Wijzigen',
             'current-password'  => 'Huidig Wachtwoord',
-            'invalid-password'  => 'Het huidige wachtwoord dat u heeft ingevoerd, is onjuist.',
             'email'             => 'E-mail',
             'general'           => 'Algemeen',
+            'invalid-password'  => 'Het huidige wachtwoord dat u heeft ingevoerd, is onjuist.',
             'name'              => 'Naam',
             'profile-image'     => 'Profiel Afbeelding',
             'password'          => 'Wachtwoord',
@@ -96,6 +96,8 @@ return [
             'more-products'               => ':product_count+ Meer Afbeeldingen',
             'order-count'                 => ':count Bestellingen',
             'order'                       => ':total_orders Bestellingen',
+            'order-id'                    => '#:id',
+            'overall-details'             => 'Algemene Details',
             'product-count'               => ':count Producten',
             'product-number'              => 'Product - :product_number',
             'product-image'               => 'Product Afbeelding',
@@ -110,8 +112,6 @@ return [
             'store-stats'                 => 'Winkelstatistieken',
             'to'                          => 'Tot',
             'title'                       => 'Dashboard',
-            'order-id'                    => '#:id',
-            'overall-details'             => 'Algemene Details',
             'top-performing-categories'   => 'Best Presterende Categorieën',
             'top-selling-products'        => 'Top Verkopende Producten',
             'total-customers'             => 'Totaal Klanten',
@@ -3298,33 +3298,33 @@ return [
     ],
 
     'errors' => [
-        'go-back'   => 'Ga Terug',
         'dashboard' => 'Dashboard',
+        'go-back'   => 'Ga Terug',
         'support'   => 'Als het probleem aanhoudt, neem dan contact met ons op via <a href=":link" class=":class">:email</a> voor hulp.',
 
         '404' => [
-            'title'       => '404 Pagina Niet Gevonden',
             'description' => 'Oeps! De pagina die je zoekt, is met vakantie. Het lijkt erop dat we niet kunnen vinden wat je zocht.',
+            'title'       => '404 Pagina Niet Gevonden',
         ],
 
         '401' => [
-            'title'       => '401 Niet Geautoriseerd',
             'description' => 'Oeps! Het lijkt erop dat je geen toegang hebt tot deze pagina. Je lijkt de benodigde referenties te missen.',
+            'title'       => '401 Niet Geautoriseerd',
         ],
 
         '403' => [
-            'title'       => '403 Verboden Toegang',
             'description' => 'Oeps! Deze pagina is verboden terrein. Het lijkt erop dat je niet over de vereiste rechten beschikt om deze inhoud te bekijken.',
+            'title'       => '403 Verboden Toegang',
         ],
 
         '500' => [
-            'title'       => '500 Interne Serverfout',
             'description' => 'Oeps! Er is iets misgegaan. Het lijkt erop dat we moeite hebben met het laden van de pagina die je zoekt.',
+            'title'       => '500 Interne Serverfout',
         ],
 
         '503' => [
-            'title'       => '503 Service Niet Beschikbaar',
             'description' => 'Oeps! Het lijkt erop dat we tijdelijk niet beschikbaar zijn voor onderhoud. Kom over een tijdje terug.',
+            'title'       => '503 Service Niet Beschikbaar',
         ],
     ],
 
@@ -3412,20 +3412,20 @@ return [
                 'summary'  => 'Samenvatting van de bestelling',
             ],
 
-            'shipping-address'  => 'Verzendadres',
             'billing-address'   => 'Factuuradres',
             'contact'           => 'Contact',
-            'shipping'          => 'Verzending',
-            'payment'           => 'Betaling',
-            'sku'               => 'SKU',
+            'discount'          => 'Korting',
+            'grand-total'       => 'Totaalbedrag',
             'name'              => 'Naam',
             'price'             => 'Prijs',
+            'payment'           => 'Betaling',
             'qty'               => 'Aantal',
+            'shipping-address'  => 'Verzendadres',
+            'shipping'          => 'Verzending',
+            'sku'               => 'SKU',
             'subtotal'          => 'Subtotaal',
             'shipping-handling' => 'Verzending en verwerking',
             'tax'               => 'Belasting',
-            'discount'          => 'Korting',
-            'grand-total'       => 'Totaalbedrag',
         ],
     ],
 ];
