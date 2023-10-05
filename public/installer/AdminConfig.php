@@ -67,42 +67,50 @@ if (! empty($errors)) {
     $connection = $envDBParams['DB_CONNECTION'] ?? '';
 
     if ($connection == 'mysql' ) {
-        @$conn = new mysqli(
-            $envDBParams['DB_HOST'] ?? '',
-            $envDBParams['DB_USERNAME'] ?? '',
-            $envDBParams['DB_PASSWORD'],
-            $envDBParams['DB_DATABASE'],
-            (int) $envDBParams['DB_PORT']
-        );
+        try {
+            @$conn = new mysqli(
+                $envDBParams['DB_HOST'] ?? '',
+                $envDBParams['DB_USERNAME'] ?? '',
+                $envDBParams['DB_PASSWORD'],
+                $envDBParams['DB_DATABASE'],
+                (int) $envDBParams['DB_PORT']
+            );
 
-        if ($conn->connect_error) {
-            $data['connection'] = $conn->connect_error;
+            if ($conn->connect_error) {
+                $data['connection'] = $conn->connect_error;
+            }
+
+            $email = $_POST['admin_email'];
+
+            $name = $_POST['admin_name'];
+
+            $password = password_hash($_POST['admin_password'], PASSWORD_BCRYPT, ['cost' => 10]);
+
+            /**
+             * Deleting migrated admin
+             */
+            $conn->query("DELETE FROM admins WHERE id=1");
+
+            /**
+             * Query for insertion
+             */
+            $sql = "INSERT INTO admins (name, email, password, role_id, status)
+            VALUES ('".$name."', '".$email."', '".$password."', '1', '1')";
+
+            if ($conn->query($sql) === TRUE) {
+                $data['insert_success'] = 'Data Successfully inserted into database';
+            } else {
+                $data['insert_fail'] = "Error: " . $sql . "<br>" . $conn->error;
+            }
+
+            $conn->close();
+        } catch (\Exception $e) {
+            $data['errors'] = [
+                'database_error' => $e->getMessage(),
+            ];
+
+            $data['success'] = false;
         }
-
-        $email = $_POST['admin_email'];
-
-        $name = $_POST['admin_name'];
-
-        $password = password_hash($_POST['admin_password'], PASSWORD_BCRYPT, ['cost' => 10]);
-
-        /**
-         * Deleting migrated admin
-         */
-        $conn->query("DELETE FROM admins WHERE id=1");
-
-        /**
-         * Query for insertion
-         */
-        $sql = "INSERT INTO admins (name, email, password, role_id, status)
-        VALUES ('".$name."', '".$email."', '".$password."', '1', '1')";
-
-        if ($conn->query($sql) === TRUE) {
-            $data['insert_success'] = 'Data Successfully inserted into database';
-        } else {
-            $data['insert_fail'] = "Error: " . $sql . "<br>" . $conn->error;
-        }
-
-        $conn->close();
     } else {
         $data['support_error'] = 'Bagisto currently support MySQL only. Press OK to still continue or change you DB connection to MySQL';
     }

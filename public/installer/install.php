@@ -1,7 +1,7 @@
 <?php
     declare(strict_types = 0);
 
-    $envFile = '../../.env';
+    $envFile = '../.env';
 
     $installed = false;
 
