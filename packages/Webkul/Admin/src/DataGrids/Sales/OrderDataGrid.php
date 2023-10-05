@@ -3,8 +3,8 @@
 namespace Webkul\Admin\DataGrids\Sales;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Sales\Models\OrderAddress;
 use Webkul\DataGrid\DataGrid;
+use Webkul\Sales\Models\OrderAddress;
 use Webkul\Sales\Repositories\OrderRepository;
 
 class OrderDataGrid extends DataGrid
@@ -143,10 +143,23 @@ class OrderDataGrid extends DataGrid
             'sortable'   => true,
         ]);
 
+        /**
+         * Searchable dropdown sample. In testing phase.
+         */
         $this->addColumn([
             'index'      => 'customer_email',
             'label'      => trans('admin::app.sales.orders.index.datagrid.email'),
-            'type'       => 'string',
+            'type'       => 'dropdown',
+            'options'    => [
+                'type'   => 'searchable',
+                'params' => [
+                    'repository' => \Webkul\Customer\Repositories\CustomerRepository::class,
+                    'column'     => [
+                        'label' => 'email',
+                        'value' => 'email',
+                    ],
+                ],
+            ],
             'searchable' => true,
             'filterable' => true,
             'sortable'   => false,
