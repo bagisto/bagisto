@@ -33,10 +33,10 @@ return [
     ],
 
     'notifications' => [
-        'no-record'      => 'Kein Datensatz gefunden',
-        'title'          => 'Benachrichtigungen',
         'marked-success' => 'Benachrichtigung erfolgreich markiert',
+        'no-record'      => 'Kein Datensatz gefunden',
         'read-all'       => 'Als gelesen markieren',
+        'title'          => 'Benachrichtigungen',
         'view-all'       => 'Alle anzeigen',
 
         'order-status-messages' => [
@@ -50,11 +50,11 @@ return [
 
         'status'  => [
             'all'        => 'Alle',
-            'pending'    => 'Ausstehend',
-            'processing' => 'In Bearbeitung',
             'canceled'   => 'Storniert',
             'closed'     => 'Geschlossen',
             'completed'  => 'Abgeschlossen',
+            'pending'    => 'Ausstehend',
+            'processing' => 'In Bearbeitung',
         ],
     ],
 
@@ -96,6 +96,8 @@ return [
             'more-products'               => ':product_count+ weitere Bilder',
             'order-count'                 => ':count Bestellungen',
             'order'                       => ':total_orders Bestellungen',
+            'order-id'                    => 'Bestellnummer #:id',
+            'overall-details'             => 'Gesamtdetails',
             'product-count'               => ':count Produkte',
             'product-number'              => 'Produkt - :product_number',
             'product-image'               => 'Produktbild',
@@ -110,8 +112,6 @@ return [
             'store-stats'                 => 'Geschäftsstatistiken',
             'to'                          => 'Bis',
             'title'                       => 'Dashboard',
-            'order-id'                    => 'Bestellnummer #:id',
-            'overall-details'             => 'Gesamtdetails',
             'top-performing-categories'   => 'Top-Kategorien',
             'top-selling-products'        => 'Bestverkaufte Produkte',
             'total-customers'             => 'Gesamtkunden',
@@ -3298,33 +3298,33 @@ return [
     ],
 
     'errors' => [
-        'go-back'   => 'Zurück',
         'dashboard' => 'Dashboard',
+        'go-back'   => 'Zurück',
         'support'   => 'Wenn das Problem weiterhin besteht, erreichen Sie uns unter <a href=":link" class=":class">:email</a> für Unterstützung.',
 
         '404' => [
-            'title'       => '404 Seite nicht gefunden',
             'description' => 'Hoppla! Die Seite, die Sie suchen, macht gerade Urlaub. Es scheint, als könnten wir nicht finden, wonach Sie gesucht haben.',
+            'title'       => '404 Seite nicht gefunden',
         ],
 
         '401' => [
-            'title'       => '401 Nicht autorisiert',
             'description' => 'Hoppla! Es sieht so aus, als hätten Sie keine Berechtigung, auf diese Seite zuzugreifen. Es scheint, als fehlten Ihnen die erforderlichen Zugangsdaten.',
+            'title'       => '401 Nicht autorisiert',
         ],
 
         '403' => [
-            'title'       => '403 Zugriff verweigert',
             'description' => 'Hoppla! Diese Seite ist tabu. Es sieht so aus, als hätten Sie nicht die erforderlichen Berechtigungen, um diesen Inhalt anzuzeigen.',
+            'title'       => '403 Zugriff verweigert',
         ],
 
         '500' => [
-            'title'       => '500 Interner Serverfehler',
             'description' => 'Hoppla! Etwas ist schiefgelaufen. Es scheint, als hätten wir Probleme beim Laden der von Ihnen gesuchten Seite.',
+            'title'       => '500 Interner Serverfehler',
         ],
 
         '503' => [
-            'title'       => '503 Dienst nicht verfügbar',
             'description' => 'Hoppla! Es sieht so aus, als wären wir vorübergehend wegen Wartungsarbeiten nicht erreichbar. Bitte versuchen Sie es später erneut.',
+            'title'       => '503 Dienst nicht verfügbar',
         ],
     ],
 
@@ -3412,20 +3412,20 @@ return [
                 'summary'  => 'Zusammenfassung der Bestellung',
             ],
 
-            'shipping-address'  => 'Lieferadresse',
             'billing-address'   => 'Rechnungsadresse',
             'contact'           => 'Kontakt',
-            'shipping'          => 'Versand',
-            'payment'           => 'Zahlung',
-            'sku'               => 'SKU',
+            'discount'          => 'Rabatt',
+            'grand-total'       => 'Gesamtsumme',
             'name'              => 'Name',
+            'payment'           => 'Zahlung',
             'price'             => 'Preis',
             'qty'               => 'Menge',
+            'shipping-address'  => 'Lieferadresse',
+            'shipping'          => 'Versand',
+            'sku'               => 'SKU',
             'subtotal'          => 'Zwischensumme',
             'shipping-handling' => 'Versand und Bearbeitung',
             'tax'               => 'Steuer',
-            'discount'          => 'Rabatt',
-            'grand-total'       => 'Gesamtsumme',
         ],
     ],
 ];

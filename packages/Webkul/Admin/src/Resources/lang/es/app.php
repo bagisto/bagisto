@@ -33,10 +33,10 @@ return [
     ],
 
     'notifications' => [
-        'no-record'      => 'No se Encontraron Registros',
-        'title'          => 'Notificaciones',
         'marked-success' => 'Notificación Marcada Exitosamente',
+        'no-record'      => 'No se Encontraron Registros',
         'read-all'       => 'Marcar como Leído',
+        'title'          => 'Notificaciones',
         'view-all'       => 'Ver Todas',
 
         'order-status-messages' => [
@@ -50,11 +50,11 @@ return [
 
         'status'  => [
             'all'        => 'Todos',
-            'pending'    => 'Pendiente',
-            'processing' => 'Procesando',
             'canceled'   => 'Cancelado',
             'closed'     => 'Cerrado',
             'completed'  => 'Completado',
+            'pending'    => 'Pendiente',
+            'processing' => 'Procesando',
         ],
     ],
 
@@ -64,9 +64,9 @@ return [
             'confirm-password'  => 'Confirmar Contraseña',
             'change-password'   => 'Cambiar Contraseña',
             'current-password'  => 'Contraseña Actual',
-            'invalid-password'  => 'La contraseña actual que ingresaste es incorrecta.',
             'email'             => 'Correo Electrónico',
             'general'           => 'General',
+            'invalid-password'  => 'La contraseña actual que ingresaste es incorrecta.',
             'name'              => 'Nombre',
             'profile-image'     => 'Imagen de Perfil',
             'password'          => 'Contraseña',
@@ -96,6 +96,8 @@ return [
             'more-products'               => ':product_count+ Más Imágenes',
             'order-count'                 => ':count Pedidos',
             'order'                       => ':total_orders Pedidos',
+            'order-id'                    => '#:id',
+            'overall-details'             => 'Detalles Generales',
             'product-count'               => ':count Productos',
             'product-number'              => 'Producto - :product_number',
             'product-image'               => 'Imagen de Producto',
@@ -110,8 +112,6 @@ return [
             'store-stats'                 => 'Estadísticas de la Tienda',
             'to'                          => 'Hasta',
             'title'                       => 'Panel de Control',
-            'order-id'                    => '#:id',
-            'overall-details'             => 'Detalles Generales',
             'top-performing-categories'   => 'Categorías Más Destacadas',
             'top-selling-products'        => 'Productos Más Vendidos',
             'total-customers'             => 'Total de Clientes',
@@ -3298,33 +3298,33 @@ return [
     ],
 
     'errors' => [
-        'go-back'   => 'Regresar',
         'dashboard' => 'Tablero',
+        'go-back'   => 'Regresar',
         'support'   => 'Si el problema persiste, contáctenos en <a href=":link" class=":class">:email</a> para obtener ayuda.',
 
         '404' => [
-            'title'       => '404 Página no Encontrada',
             'description' => '¡Ups! La página que estás buscando está de vacaciones. Parece que no pudimos encontrar lo que buscabas.',
+            'title'       => '404 Página no Encontrada',
         ],
 
         '401' => [
-            'title'       => '401 No Autorizado',
             'description' => '¡Ups! Parece que no tienes permiso para acceder a esta página. Parece que te faltan las credenciales necesarias.',
+            'title'       => '401 No Autorizado',
         ],
 
         '403' => [
-            'title'       => '403 Prohibido',
             'description' => '¡Ups! Esta página está fuera de límites. Parece que no tienes los permisos necesarios para ver este contenido.',
+            'title'       => '403 Prohibido',
         ],
 
         '500' => [
-            'title'       => '500 Error Interno del Servidor',
             'description' => '¡Ups! Algo salió mal. Parece que tenemos problemas para cargar la página que estás buscando.',
+            'title'       => '500 Error Interno del Servidor',
         ],
 
         '503' => [
-            'title'       => '503 Servicio No Disponible',
             'description' => '¡Ups! Parece que estamos temporalmente fuera de servicio por mantenimiento. Por favor, vuelve a intentarlo en un momento.',
+            'title'       => '503 Servicio No Disponible',
         ],
     ],
 
@@ -3412,20 +3412,20 @@ return [
                 'summary'  => 'Resumen del Pedido',
             ],
 
-            'shipping-address'  => 'Dirección de Envío',
             'billing-address'   => 'Dirección de Facturación',
             'contact'           => 'Contacto',
-            'shipping'          => 'Envío',
-            'payment'           => 'Pago',
-            'sku'               => 'SKU',
+            'discount'          => 'Descuento',
+            'grand-total'       => 'Total General',
             'name'              => 'Nombre',
             'price'             => 'Precio',
+            'payment'           => 'Pago',
             'qty'               => 'Cantidad',
+            'shipping-address'  => 'Dirección de Envío',
+            'shipping'          => 'Envío',
+            'sku'               => 'SKU',
             'subtotal'          => 'Subtotal',
             'shipping-handling' => 'Envío y Manipulación',
             'tax'               => 'Impuesto',
-            'discount'          => 'Descuento',
-            'grand-total'       => 'Total General',
         ],
     ],
 ];

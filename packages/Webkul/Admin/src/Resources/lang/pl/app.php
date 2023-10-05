@@ -33,10 +33,10 @@ return [
     ],
 
     'notifications' => [
-        'no-record'      => 'Brak dostępnych powiadomień',
-        'title'          => 'Powiadomienia',
         'marked-success' => 'Powiadomienie oznaczone jako przeczytane',
+        'no-record'      => 'Brak dostępnych powiadomień',
         'read-all'       => 'Oznacz jako przeczytane',
+        'title'          => 'Powiadomienia',
         'view-all'       => 'Zobacz wszystkie',
 
         'order-status-messages' => [
@@ -50,11 +50,11 @@ return [
 
         'status'  => [
             'all'        => 'Wszystkie',
-            'pending'    => 'Oczekujące',
-            'processing' => 'W trakcie',
             'canceled'   => 'Anulowane',
             'closed'     => 'Zamknięte',
             'completed'  => 'Zakończone',
+            'pending'    => 'Oczekujące',
+            'processing' => 'W trakcie',
         ],
     ],
 
@@ -64,9 +64,9 @@ return [
             'confirm-password'  => 'Potwierdź hasło',
             'change-password'   => 'Zmień hasło',
             'current-password'  => 'Aktualne hasło',
-            'invalid-password'  => 'Wprowadzone aktualne hasło jest nieprawidłowe.',
             'email'             => 'Email',
             'general'           => 'Ogólne',
+            'invalid-password'  => 'Wprowadzone aktualne hasło jest nieprawidłowe.',
             'name'              => 'Imię',
             'profile-image'     => 'Zdjęcie profilowe',
             'password'          => 'Hasło',
@@ -96,6 +96,8 @@ return [
             'more-products'               => ':product_count+ Więcej Produktów',
             'order-count'                 => ':count Zamówienia',
             'order'                       => ':total_orders Zamówienia',
+            'order-id'                    => '#:id',
+            'overall-details'             => 'Ogólne Informacje',
             'product-count'               => ':count Produkty',
             'product-number'              => 'Produkt - :product_number',
             'product-image'               => 'Zdjęcie Produktu',
@@ -110,8 +112,6 @@ return [
             'store-stats'                 => 'Statystyki Sklepu',
             'to'                          => 'Do',
             'title'                       => 'Panel Sterowania',
-            'order-id'                    => '#:id',
-            'overall-details'             => 'Ogólne Informacje',
             'top-performing-categories'   => 'Najlepiej Sprzedające się Kategorie',
             'top-selling-products'        => 'Najlepiej Sprzedające się Produkty',
             'total-customers'             => 'Łącznie Klienci',
@@ -3298,33 +3298,33 @@ return [
     ],
 
     'errors' => [
-        'go-back'   => 'Wróć',
         'dashboard' => 'Panel główny',
+        'go-back'   => 'Wróć',
         'support'   => 'Jeśli problem nadal występuje, skontaktuj się z nami pod adresem <a href=":link" class=":class">:email</a> w celu uzyskania pomocy.',
 
         '404' => [
-            'title'       => '404 Strona nie znaleziona',
             'description' => 'Ups! Strona, którą próbujesz odwiedzić, jest na wakacjach. Wygląda na to, że nie możemy znaleźć tego, czego szukasz.',
+            'title'       => '404 Strona nie znaleziona',
         ],
 
         '401' => [
-            'title'       => '401 Brak autoryzacji',
             'description' => 'Ups! Wygląda na to, że nie masz uprawnień do dostępu do tej strony. Wydaje się, że brakuje Ci odpowiednich danych uwierzytelniających.',
+            'title'       => '401 Brak autoryzacji',
         ],
 
         '403' => [
-            'title'       => '403 Dostęp zabroniony',
             'description' => 'Ups! Ta strona jest dostępna tylko dla uprawnionych użytkowników. Wygląda na to, że nie masz wymaganych uprawnień do wyświetlenia tego zasobu.',
+            'title'       => '403 Dostęp zabroniony',
         ],
 
         '500' => [
-            'title'       => '500 Wewnętrzny błąd serwera',
             'description' => 'Ups! Coś poszło nie tak. Wydaje się, że mamy problem z załadowaniem strony, której szukasz.',
+            'title'       => '500 Wewnętrzny błąd serwera',
         ],
 
         '503' => [
-            'title'       => '503 Usługa niedostępna',
             'description' => 'Ups! Wygląda na to, że jesteśmy tymczasowo niedostępni z powodu prac konserwacyjnych. Proszę wrócić za chwilę.',
+            'title'       => '503 Usługa niedostępna',
         ],
     ],
 
@@ -3412,20 +3412,20 @@ return [
                 'summary'  => 'Podsumowanie zamówienia',
             ],
 
-            'shipping-address'  => 'Adres dostawy',
             'billing-address'   => 'Adres rozliczeniowy',
             'contact'           => 'Kontakt',
-            'shipping'          => 'Dostawa',
-            'payment'           => 'Płatność',
-            'sku'               => 'SKU',
+            'discount'          => 'Rabat',
+            'grand-total'       => 'Łącznie',
             'name'              => 'Nazwa',
+            'payment'           => 'Płatność',
             'price'             => 'Cena',
             'qty'               => 'Ilość',
+            'shipping-address'  => 'Adres dostawy',
+            'shipping'          => 'Dostawa',
+            'sku'               => 'SKU',
             'subtotal'          => 'Suma częściowa',
             'shipping-handling' => 'Obsługa dostawy',
             'tax'               => 'Podatek',
-            'discount'          => 'Rabat',
-            'grand-total'       => 'Łącznie',
         ],
     ],
 ];

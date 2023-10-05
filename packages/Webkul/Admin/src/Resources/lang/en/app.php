@@ -33,10 +33,10 @@ return [
     ],
 
     'notifications' => [
-        'no-record'      => 'No Record Found',
-        'title'          => 'Notifications',
         'marked-success' => 'Notification Marked Successfully',
+        'no-record'      => 'No Record Found',
         'read-all'       => 'Mark as Read',
+        'title'          => 'Notifications',
         'view-all'       => 'View All',
 
         'order-status-messages' => [
@@ -50,11 +50,11 @@ return [
 
         'status'  => [
             'all'        => 'All',
-            'pending'    => 'Pending',
-            'processing' => 'Processing',
             'canceled'   => 'Canceled',
             'closed'     => 'Closed',
             'completed'  => 'Completed',
+            'pending'    => 'Pending',
+            'processing' => 'Processing',
         ],
     ],
 
@@ -64,9 +64,9 @@ return [
             'confirm-password'  => 'Confirm Password',
             'change-password'   => 'Change Password',
             'current-password'  => 'Current Password',
-            'invalid-password'  => 'The current password you entered is incorrect.',
             'email'             => 'Email',
             'general'           => 'General',
+            'invalid-password'  => 'The current password you entered is incorrect.',
             'name'              => 'Name',
             'profile-image'     => 'Profile Image',
             'password'          => 'Password',
@@ -96,6 +96,8 @@ return [
             'more-products'               => ':product_count+ More Images',
             'order-count'                 => ':count Orders',
             'order'                       => ':total_orders Orders',
+            'order-id'                    => '#:id',
+            'overall-details'             => 'Overall Details',
             'product-count'               => ':count Products',
             'product-number'              => 'Product - :product_number',
             'product-image'               => 'Product Image',
@@ -110,8 +112,6 @@ return [
             'store-stats'                 => 'Store Stats',
             'to'                          => 'To',
             'title'                       => 'Dashboard',
-            'order-id'                    => '#:id',
-            'overall-details'             => 'Overall Details',
             'top-performing-categories'   => 'Top Performing Categories',
             'top-selling-products'        => 'Top Selling Products',
             'total-customers'             => 'Total Customers',
@@ -3298,33 +3298,33 @@ return [
     ],
 
     'errors' => [
-        'go-back'   => 'Go Back',
         'dashboard' => 'Dashboard',
+        'go-back'   => 'Go Back',
         'support'   => 'If the problem persists, reach out to us at <a href=":link" class=":class">:email</a> for assistance.',
 
         '404' => [
-            'title'       => '404 Page Not Found',
             'description' => 'Oops! The page you\'re looking for is on vacation. It seems we couldn\'t find what you were searching for.',
+            'title'       => '404 Page Not Found',
         ],
 
         '401' => [
-            'title'       => '401 Unauthorized',
             'description' => 'Oops! Looks like you\'re not allowed to access this page. It seems you\'re missing the necessary credentials.',
+            'title'       => '401 Unauthorized',
         ],
 
         '403' => [
-            'title'       => '403 Forbidden',
             'description' => 'Oops! This page is off-limits. It appears you don\'t have the required permissions to view this content.',
+            'title'       => '403 Forbidden',
         ],
 
         '500' => [
-            'title'       => '500 Internal Server Error',
             'description' => 'Oops! Something went wrong. It seems we\'re having trouble loading the page you\'re looking for.',
+            'title'       => '500 Internal Server Error',
         ],
 
         '503' => [
-            'title'       => '503 Service Unavailable',
             'description' => 'Oops! Looks like we\'re temporarily down for maintenance. Please check back in a bit.',
+            'title'       => '503 Service Unavailable',
         ],
     ],
 
@@ -3412,20 +3412,20 @@ return [
                 'summary'  => 'Summary of Order',
             ],
 
-            'shipping-address'  => 'Shipping Address',
             'billing-address'   => 'Billing Address',
             'contact'           => 'Contact',
-            'shipping'          => 'Shipping',
-            'payment'           => 'Payment',
-            'sku'               => 'SKU',
+            'discount'          => 'Discount',
+            'grand-total'       => 'Grand Total',
             'name'              => 'Name',
+            'payment'           => 'Payment',
             'price'             => 'Price',
             'qty'               => 'Qty',
+            'shipping-address'  => 'Shipping Address',
+            'shipping'          => 'Shipping',
+            'sku'               => 'SKU',
             'subtotal'          => 'Subtotal',
             'shipping-handling' => 'Shipping Handling',
             'tax'               => 'Tax',
-            'discount'          => 'Discount',
-            'grand-total'       => 'Grand Total',
         ],
     ],
 ];

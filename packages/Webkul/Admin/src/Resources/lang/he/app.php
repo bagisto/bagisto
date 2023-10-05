@@ -33,10 +33,10 @@ return [
     ],
 
     'notifications' => [
-        'no-record'      => 'לא נמצאו רשומות',
-        'title'          => 'התראות',
         'marked-success' => 'התראה סומנה בהצלחה',
+        'no-record'      => 'לא נמצאו רשומות',
         'read-all'       => 'סמן כנקרא',
+        'title'          => 'התראות',
         'view-all'       => 'הצג הכל',
 
         'order-status-messages' => [
@@ -50,11 +50,11 @@ return [
 
         'status'  => [
             'all'        => 'הכל',
-            'pending'    => 'ממתין',
-            'processing' => 'בעיבוד',
             'canceled'   => 'בוטל',
             'closed'     => 'נסגר',
             'completed'  => 'הושלם',
+            'pending'    => 'ממתין',
+            'processing' => 'בעיבוד',
         ],
     ],
 
@@ -64,9 +64,9 @@ return [
             'confirm-password'  => 'אשר סיסמה',
             'change-password'   => 'שנה סיסמה',
             'current-password'  => 'סיסמה נוכחית',
-            'invalid-password'  => 'הסיסמה הנוכחית שהזנת אינה נכונה.',
             'email'             => 'אימייל',
             'general'           => 'כללי',
+            'invalid-password'  => 'הסיסמה הנוכחית שהזנת אינה נכונה.',
             'name'              => 'שם',
             'profile-image'     => 'תמונת פרופיל',
             'password'          => 'סיסמה',
@@ -96,6 +96,8 @@ return [
             'more-products'               => ':product_count+ תמונות נוספות',
             'order-count'                 => ':count הזמנות',
             'order'                       => ':total_orders הזמנות',
+            'order-id'                    => '#:id',
+            'overall-details'             => 'פרטים כלליים',
             'product-count'               => ':count מוצרים',
             'product-number'              => 'מוצר - :product_number',
             'product-image'               => 'תמונת המוצר',
@@ -110,8 +112,6 @@ return [
             'store-stats'                 => 'סטטיסטיקות החנות',
             'to'                          => 'עד לתאריך',
             'title'                       => 'לוח בקרה',
-            'order-id'                    => '#:id',
-            'overall-details'             => 'פרטים כלליים',
             'top-performing-categories'   => 'קטגוריות המובילות',
             'top-selling-products'        => 'המוצרים המובילים',
             'total-customers'             => 'סה"כ לקוחות',
@@ -3298,33 +3298,33 @@ return [
     ],
 
     'errors' => [
-        'go-back'   => 'חזור אחורה',
         'dashboard' => 'לוח מחוונים',
+        'go-back'   => 'חזור אחורה',
         'support'   => 'אם הבעיה נמשכת, פנה אלינו ב-<a href=":link" class=":class">:email</a> לעזרה.',
 
         '404' => [
-            'title'       => '404 הדף לא נמצא',
             'description' => 'אופס! הדף שאתה מחפש בחופשה. נראה כי לא הצלחנו למצוא את מה שחיפשת.',
+            'title'       => '404 הדף לא נמצא',
         ],
 
         '401' => [
-            'title'       => '401 אין הרשאה',
             'description' => 'אופס! נראה שאין לך הרשאה לגשת לדף זה. נראה שחסרות לך את הכרטיסיות הנדרשות.',
+            'title'       => '401 אין הרשאה',
         ],
 
         '403' => [
-            'title'       => '403 אסור',
             'description' => 'אופס! עמוד זה אסור. נראה כי אין לך את ההרשאות הנדרשות לצפות בתוכן זה.',
+            'title'       => '403 אסור',
         ],
 
         '500' => [
-            'title'       => '500 שגיאת שרת פנימית',
             'description' => 'אופס! משהו השתבש. נראה שיש לנו בעיה בטעינת הדף שאתה מחפש.',
+            'title'       => '500 שגיאת שרת פנימית',
         ],
 
         '503' => [
-            'title'       => '503 שירות לא זמין',
             'description' => 'אופס! נראה כי אנחנו לא זמינים זמנית בשביל תחזוקה. בבקשה לחזור במהרה.',
+            'title'       => '503 שירות לא זמין',
         ],
     ],
 
@@ -3412,20 +3412,20 @@ return [
                 'summary'  => 'סיכום ההזמנה',
             ],
 
-            'shipping-address'  => 'כתובת משלוח',
             'billing-address'   => 'כתובת לחיוב',
             'contact'           => 'צור קשר',
-            'shipping'          => 'משלוח',
-            'payment'           => 'תשלום',
-            'sku'               => 'קוד מוצר',
+            'discount'          => 'הנחה',
+            'grand-total'       => 'סכום כולל',
             'name'              => 'שם',
+            'payment'           => 'תשלום',
             'price'             => 'מחיר',
             'qty'               => 'כמות',
+            'shipping-address'  => 'כתובת משלוח',
+            'shipping'          => 'משלוח',
+            'sku'               => 'קוד מוצר',
             'subtotal'          => 'סכום חלקי',
             'shipping-handling' => 'משלוח וטיפול',
             'tax'               => 'מס',
-            'discount'          => 'הנחה',
-            'grand-total'       => 'סכום כולל',
         ],
     ],
 ];

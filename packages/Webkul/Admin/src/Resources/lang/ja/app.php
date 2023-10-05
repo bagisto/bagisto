@@ -33,10 +33,10 @@ return [
     ],
 
     'notifications' => [
-        'no-record'      => '記録が見つかりません',
-        'title'          => 'お知らせ',
         'marked-success' => 'お知らせが正常にマークされました',
+        'no-record'      => '記録が見つかりません',
         'read-all'       => 'すべてを既読にする',
+        'title'          => 'お知らせ',
         'view-all'       => 'すべて表示',
 
         'order-status-messages' => [
@@ -50,11 +50,11 @@ return [
 
         'status'  => [
             'all'        => 'すべて',
-            'pending'    => '保留中',
-            'processing' => '処理中',
             'canceled'   => 'キャンセル済み',
             'closed'     => '終了済み',
             'completed'  => '完了済み',
+            'pending'    => '保留中',
+            'processing' => '処理中',
         ],
     ],
 
@@ -64,9 +64,9 @@ return [
             'confirm-password'  => 'パスワードを確認',
             'change-password'   => 'パスワードを変更',
             'current-password'  => '現在のパスワード',
-            'invalid-password'  => '入力した現在のパスワードが正しくありません。',
             'email'             => 'メールアドレス',
             'general'           => '一般',
+            'invalid-password'  => '入力した現在のパスワードが正しくありません。',
             'name'              => '名前',
             'profile-image'     => 'プロフィール画像',
             'password'          => 'パスワード',
@@ -96,6 +96,8 @@ return [
             'more-products'               => ':product_count+ 画像以上',
             'order-count'                 => ':count 注文',
             'order'                       => ':total_orders 注文',
+            'order-id'                    => '#:id',
+            'overall-details'             => '全体の詳細',
             'product-count'               => ':count 製品',
             'product-number'              => '製品 - :product_number',
             'product-image'               => '製品画像',
@@ -110,8 +112,6 @@ return [
             'store-stats'                 => 'ストア統計',
             'to'                          => '終了',
             'title'                       => 'ダッシュボード',
-            'order-id'                    => '#:id',
-            'overall-details'             => '全体の詳細',
             'top-performing-categories'   => 'トップパフォーマンスのカテゴリ',
             'top-selling-products'        => 'トップセリング製品',
             'total-customers'             => '顧客総数',
@@ -3298,33 +3298,33 @@ return [
     ],
 
     'errors' => [
-        'go-back'   => '戻る',
         'dashboard' => 'ダッシュボード',
+        'go-back'   => '戻る',
         'support'   => '問題が解決しない場合、<a href=":link" class=":class">:email</a> までお問い合わせください。',
 
         '404' => [
-            'title'       => '404 ページが見つかりません',
             'description' => 'おっと！探しているページは休暇中のようです。お探しのものが見つからないようです。',
+            'title'       => '404 ページが見つかりません',
         ],
 
         '401' => [
-            'title'       => '401 認証エラー',
             'description' => 'おっと！このページにアクセスする権限がありません。必要な資格情報が不足しているようです。',
+            'title'       => '401 認証エラー',
         ],
 
         '403' => [
-            'title'       => '403 アクセス拒否',
             'description' => 'おっと！このページへのアクセスは制限されています。必要なアクセス権限がないようです。',
+            'title'       => '403 アクセス拒否',
         ],
 
         '500' => [
-            'title'       => '500 サーバーエラー',
             'description' => 'おっと！何か問題が発生しました。お探しのページを読み込むのに問題があるようです。',
+            'title'       => '500 サーバーエラー',
         ],
 
         '503' => [
-            'title'       => '503 サービス利用不可',
             'description' => 'おっと！一時的にメンテナンス中のようです。少し後で再度ご確認ください。',
+            'title'       => '503 サービス利用不可',
         ],
     ],
 
@@ -3412,20 +3412,20 @@ return [
                 'summary'  => '注文の要約',
             ],
 
-            'shipping-address'  => '配送先住所',
             'billing-address'   => '請求先住所',
             'contact'           => '連絡先',
-            'shipping'          => '配送',
-            'payment'           => '支払い',
-            'sku'               => 'SKU',
+            'discount'          => '割引',
+            'grand-total'       => '合計',
             'name'              => '名前',
+            'payment'           => '支払い',
             'price'             => '価格',
             'qty'               => '数量',
+            'shipping-address'  => '配送先住所',
+            'shipping'          => '配送',
+            'sku'               => 'SKU',
             'subtotal'          => '小計',
             'shipping-handling' => '送料と手数料',
             'tax'               => '税金',
-            'discount'          => '割引',
-            'grand-total'       => '合計',
         ],
     ],
 ];
