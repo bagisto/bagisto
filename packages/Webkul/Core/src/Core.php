@@ -457,6 +457,16 @@ class Core
     }
 
     /**
+     * Returns current channel's currency symbol.
+     *
+     * @return string
+     */
+    public function getCurrentCurrencySymbol()
+    {
+        return $this->getCurrentCurrency()?->symbol;
+    }
+
+    /**
      * Returns exchange rates.
      *
      * @return object
