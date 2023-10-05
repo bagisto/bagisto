@@ -419,45 +419,45 @@ return [
                 'tax'                    => 'סכום מס - :tax',
             ],
 
-            'create' => [
+            'create'   => [
+                'amount-per-unit' => ':amount ליחידה x :qty כמות',
+                'create-invoice'  => 'צור חשבונית',
+                'creation-error'  => 'אין תרשום ליצירת חשבונית הזמנה.',
+                'create-success'  => 'חשבונית נוצרה בהצלחה',
                 'invoice'         => 'חשבונית',
-                'create-invoice'  => 'יצירת חשבונית',
+                'invalid-qty'     => 'גילינו כמות לא תקנית לחיוב מוצרים.',
                 'new-invoice'     => 'חשבונית חדשה',
                 'product-image'   => 'תמונת המוצר',
-                'amount-per-unit' => ':amount ליחידה x :qty כמות',
+                'product-error'   => 'לא ניתן ליצור חשבונית בלעדי מוצרים.',
+                'qty-to-invoiced' => 'כמות לחיוב',
                 'sku'             => 'SKU - :sku',
-                'qty-to-invoiced' => 'כמות לחשבונית',
-                'creation-error'  => 'אי אפשר ליצור חשבונית הזמנה.',
-                'create-success'  => 'חשבונית נוצרה בהצלחה',
-                'invalid-qty'     => 'נמצאה כמות לא תקינה לפריטים לחשבונית.',
-                'product-error'   => 'אי אפשר ליצור חשבונית בלעדי מוצרים.',
             ],
 
             'invoice-pdf' => [
-                'invoice'           => 'חשבונית',
+                'bill-to'           => 'קבל חשבונית אל',
+                'bank-details'      => 'פרטי הבנק',
+                'contact'           => 'צור קשר',
+                'contact-number'    => 'מספר טלפון ליצירת קשר',
+                'discount'          => 'הנחה',
                 'date'              => 'תאריך החשבונית',
+                'grand-total'       => 'סכום כולל',
+                'invoice'           => 'חשבונית',
                 'invoice-id'        => 'מספר חשבונית',
                 'order-id'          => 'מספר הזמנה',
                 'order-date'        => 'תאריך הזמנה',
-                'bill-to'           => 'חשבון ל',
-                'ship-to'           => 'משלוח ל',
-                'contact'           => 'איש קשר',
                 'payment-method'    => 'אמצעי תשלום',
-                'shipping-method'   => 'אמצעי משלוח',
-                'contact-number'    => 'מספר טלפון ליצירת קשר',
-                'vat-number'        => 'מספר מע"מ',
                 'payment-terms'     => 'תנאי תשלום',
-                'bank-details'      => 'פרטי הבנק',
-                'sku'               => 'קוד SKU',
                 'product-name'      => 'שם המוצר',
                 'price'             => 'מחיר',
                 'qty'               => 'כמות',
-                'subtotal'          => 'סכום חלקי',
-                'tax-amount'        => 'סכום מס',
-                'grand-total'       => 'סכום כולל',
+                'ship-to'           => 'משלח ל',
+                'shipping-method'   => 'אמצעי משלוח',
+                'sku'               => 'SKU',
+                'subtotal'          => 'סיכום חלקי',
                 'shipping-handling' => 'משלוח וטיפול',
+                'tax-amount'        => 'סכום מס',
                 'tax'               => 'מס',
-                'discount'          => 'הנחה',
+                'vat-number'        => 'מספר מע"מ',
             ],
         ],
 
@@ -497,17 +497,17 @@ return [
     'catalog' => [
         'products' => [
             'index' => [
+                'already-taken' => 'ה-:name כבר תפוס.',
                 'create-btn'    => 'צור מוצר',
                 'title'         => 'מוצרים',
-                'already-taken' => ':name כבר תפוס.',
 
-                'create'     => [
-                    'back-btn'                => 'חזרה',
-                    'bundle'                  => 'אוסף',
-                    'configurable'            => 'מתקנים',
-                    'configurable-attributes' => 'מאפיינים מתקנים',
+                'create' => [
+                    'back-btn'                => 'חזור',
+                    'bundle'                  => 'ארגון',
+                    'configurable'            => 'ניתן להגדרה',
+                    'configurable-attributes' => 'מאפיינים להגדרה',
                     'create-btn'              => 'צור מוצר',
-                    'downloadable'            => 'הורדה',
+                    'downloadable'            => 'ניתן להורדה',
                     'family'                  => 'משפחה',
                     'grouped'                 => 'קבוצה',
                     'simple'                  => 'פשוט',
@@ -518,9 +518,9 @@ return [
                     'virtual'                 => 'וירטואלי',
                 ],
 
-                'datagrid'   => [
-                    'attribute-family'       => 'משפחת תכונות',
-                    'attribute-family-value' => 'משפחת תכונות - :attribute_family',
+                'datagrid' => [
+                    'attribute-family'       => 'משפחת מאפיינים',
+                    'attribute-family-value' => 'משפחת מאפיינים - :attribute_family',
                     'active'                 => 'פעיל',
                     'category'               => 'קטגוריה',
                     'copy-of'                => ':value',
@@ -528,21 +528,21 @@ return [
                     'disable'                => 'השבת',
                     'delete'                 => 'מחק',
                     'image'                  => 'תמונה',
-                    'id'                     => 'מספר זיהוי',
-                    'id-value'               => 'מספר זיהוי - :id',
+                    'id'                     => 'מזהה',
+                    'id-value'               => 'מזהה - :id',
+                    'mass-update-success'    => 'מוצרים שנבחרו עודכנו בהצלחה',
+                    'mass-delete-success'    => 'מוצרים שנבחרו נמחקו בהצלחה',
                     'name'                   => 'שם',
                     'out-of-stock'           => 'אזל מהמלאי',
                     'price'                  => 'מחיר',
                     'product-image'          => 'תמונת המוצר',
                     'qty'                    => 'כמות',
-                    'qty-value'              => ':qty זמין',
+                    'qty-value'              => ':qty זמינים',
                     'sku-value'              => 'SKU - :sku',
                     'sku'                    => 'SKU',
-                    'status'                 => 'סטטוס',
+                    'status'                 => 'מצב',
                     'type'                   => 'סוג',
-                    'update-status'          => 'עדכן סטטוס',
-                    'mass-update-success'    => 'המוצרים שנבחרו עודכנו בהצלחה',
-                    'mass-delete-success'    => 'המוצרים שנבחרו נמחקו בהצלחה',
+                    'update-status'          => 'עדכן מצב',
                 ],
             ],
 
@@ -553,19 +553,19 @@ return [
 
                 'price' => [
                     'group' => [
-                        'title'                     => 'מחיר קבוצת לקוח',
-                        'create-btn'                => 'הוסף חדש',
-                        'edit-btn'                  => 'ערוך',
                         'add-group-price'           => 'הוסף מחיר קבוצתי',
                         'all-groups'                => 'כל הקבוצות',
+                        'create-btn'                => 'הוסף חדש',
+                        'discount-group-price-info' => 'עבור כמות :price בהנחה של :qty',
+                        'edit-btn'                  => 'ערוך',
+                        'empty-info'                => 'מחיר מיוחד ללקוחות שנמצאים בקבוצה ספציפית.',
                         'fixed-group-price-info'    => 'עבור :qty יחידות במחיר קבוע של :price',
-                        'discount-group-price-info' => 'עבור :qty יחידות בהנחה של :price',
-                        'empty-info'                => 'הגדרת מחיר מיוחד ללקוחות שנמצאים בקבוצה מסוימת.',
-
+                        'title'                     => 'מחיר לקבוצת לקוחות',
+            
                         'create' => [
-                            'create-title'   => 'צור מחיר קבוצתי ללקוח',
-                            'customer-group' => 'קבוצת לקוח',
                             'all-groups'     => 'כל הקבוצות',
+                            'create-title'   => 'צור מחיר לקבוצת לקוחות',
+                            'customer-group' => 'קבוצת לקוח',
                             'discount'       => 'הנחה',
                             'delete-btn'     => 'מחק',
                             'fixed'          => 'קבוע',
@@ -573,29 +573,29 @@ return [
                             'price'          => 'מחיר',
                             'qty'            => 'כמות',
                             'save-btn'       => 'שמור',
-                            'update-title'   => 'עדכן מחיר קבוצתי ללקוח',
+                            'update-title'   => 'עדכן מחיר לקבוצת לקוחות',
                         ],
                     ],
                 ],
 
                 'inventories' => [
-                    'pending-ordered-qty'      => 'כמות הזמנה ממתינה: :qty',
-                    'pending-ordered-qty-info' => 'כמות ההזמנה הממתינה תופחד ממשאבי המלאי הרלוונטיים לאחר השליחה. במקרה של ביטול, הכמות הממתינה תהיה זמינה למכירה.',
+                    'pending-ordered-qty'      => 'כמות ממתינה להזמנה: :qty',
+                    'pending-ordered-qty-info' => 'כמות הממתינה להזמנה תוחתם ממקור המלאי הרלוונטי לאחר השילוח. במקרה של ביטול, הכמות הממתינה תהיה זמינה למכירה מחדש.',
                     'title'                    => 'מלאי',
                 ],
-
+            
                 'categories' => [
                     'title' => 'קטגוריות',
                 ],
-
+            
                 'images' => [
+                    'info'  => 'רזולוציה של התמונה צריכה להיות כמו 609px X 560px',
                     'title' => 'תמונות',
-                    'info'  => 'רזולוציית התמונה צריכה להיות כמו 609 פיקסלים על 560 פיקסלים',
                 ],
-
+            
                 'videos' => [
+                    'info'  => 'גודל הווידאו המרבי צריך להיות כמו :size',
                     'title' => 'וידאו',
-                    'info'  => 'הגודל המרבי לווידאו צריך להיות כמו :size',
                 ],
 
                 'links' => [
@@ -621,8 +621,8 @@ return [
                     'delete'            => 'מחק',
                     'empty-title'       => 'הוסף מוצר',
                     'empty-info'        => 'כדי להוסיף מוצרים מסוג :type ברגע.',
-                    'sku'               => 'SKU - :sku',
                     'image-placeholder' => 'תמונת המוצר',
+                    'sku'               => 'SKU - :sku',
                 ],
 
                 'types' => [
