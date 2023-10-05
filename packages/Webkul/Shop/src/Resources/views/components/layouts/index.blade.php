@@ -15,6 +15,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="base-url" content="{{ url()->to('/') }}">
         <meta name="currency-code" content="{{ core()->getCurrentCurrencyCode() }}">
+        <meta name="currency-symbol" content="{{ core()->getCurrentCurrencySymbol() }}">
         <meta http-equiv="content-language" content="{{ app()->getLocale() }}">
 
         @stack('meta')
