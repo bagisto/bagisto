@@ -1,5 +1,8 @@
 <?php
 
+ini_set('display_startup_errors', 1);
+ini_set('display_errors', 1);
+error_reporting(-1);
 // array to hold validation errors
 $errors = [];
 
@@ -126,24 +129,32 @@ if (! empty($errors)) {
      * Checking database connection(mysql only)
      */
     if ($envDBParams['DB_CONNECTION'] == 'mysql') {
-        @$conn = new mysqli(
-            $envDBParams['DB_HOST'] ?? '',
-            $envDBParams['DB_USERNAME'] ?? '',
-            $envDBParams['DB_PASSWORD'],
-            $envDBParams['DB_DATABASE'],
-            (int) $envDBParams['DB_PORT']
-        );
+        try {
+            @$conn = new mysqli(
+                $envDBParams['DB_HOST'] ?? '',
+                $envDBParams['DB_USERNAME'] ?? '',
+                $envDBParams['DB_PASSWORD'],
+                $envDBParams['DB_DATABASE'],
+                (int) $envDBParams['DB_PORT']
+            );
 
-        if ($conn->connect_error) {
-            $errors['database_error'] = $conn->connect_error;
+            if ($conn->connect_error) {
+                $errors['database_error'] = $conn->connect_error;
 
-            $data['errors'] = $errors;
+                $data['errors'] = $errors;
+
+                $data['success'] = false;
+            } else {
+                $data['success'] = true;
+
+                $data['message'] = 'Success!';
+            }
+        } catch (\Exception $e) {
+            $data['errors'] = [
+                'database_error' => $e->getMessage(),
+            ];
 
             $data['success'] = false;
-        } else {
-            $data['success'] = true;
-
-            $data['message'] = 'Success!';
         }
     } else {
         $data['success'] = true;
