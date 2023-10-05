@@ -185,9 +185,11 @@
                                         if (data['seeder']) {
                                             $('#install-details').append(data['seeder']);
                                         }
+                                        
                                         if (data['publish']) {
                                             $('#install-details').append(data['publish']);
                                         }
+
                                         if (data['key']) {
                                             $('#install-details').append(data['key']);
                                         }

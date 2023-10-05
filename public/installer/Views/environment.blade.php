@@ -177,40 +177,48 @@
             })
             // using the done promise callback
             .done(function(data) {
-                if (!data.success) {
+                if (! data.success) {
                     // handle errors
                     if (data.errors.app_name) {
                         $('#app_name').addClass('has-error');
                         $('#app_name').append('<div class="form-error">' + data.errors.app_name + '</div>');
                     }
+
                     if (data.errors.app_url) {
                         $('#app_url').addClass('has-error');
                         $('#app_url').append('<div class="form-error">' + data.errors.app_url + '</div>');
                     }
+
                     if (data.errors.app_timezone) {
                         $('#app_timezone').addClass('has-error');
                         $('#app_timezone').append('<div class="form-error">' + data.errors.app_timezone + '</div>');
                     }
+
                     if (data.errors.host_name) {
                         $('#host_name').addClass('has-error');
                         $('#host_name').append('<div class="form-error">' + data.errors.host_name + '</div>');
                     }
+
                     if (data.errors.port_name) {
                         $('#port_name').addClass('has-error');
                         $('#port_name').append('<div class="form-error">' + data.errors.port_name + '</div>');
                     }
+
                     if (data.errors.user_name) {
                         $('#user_name').addClass('has-error');
                         $('#user_name').append('<div class="form-error">' + data.errors.user_name + '</div>');
                     }
+
                     if (data.errors.database_name) {
                         $('#database_name').addClass('has-error');
                         $('#database_name').append('<div class="form-error">' + data.errors.database_name + '</div>');
                     }
+
                     if (data.errors.user_password) {
                         $('#user_password').addClass('has-error');
                         $('#user_password').append('<div class="form-error">' + data.errors.user_password + '</div>');
                     }
+
                     if (data.errors.app_url_space) {
                         $('#app_url').addClass('has-error');
                         $('#app_url').append('<div class="form-error">' + data.errors.app_url_space + '</div>');
@@ -219,30 +227,37 @@
                         $('#app_name').addClass('has-error');
                         $('#app_name').append('<div class="form-error">' + data.errors.app_name_space + '</div>');
                     }
+
                     if (data.errors.host_name_space) {
                         $('#host_name').addClass('has-error');
                         $('#host_name').append('<div class="form-error">' + data.errors.host_name_space + '</div>');
                     }
+                    
                     if (data.errors.port_name_space) {
                         $('#port_name').addClass('has-error');
                         $('#port_name').append('<div class="form-error">' + data.errors.port_name_space + '</div>');
                     }
+
                     if (data.errors.user_name_space) {
                         $('#user_name').addClass('has-error');
                         $('#user_name').append('<div class="form-error">' + data.errors.user_name_space + '</div>');
                     }
+
                     if (data.errors.database_name_space) {
                         $('#database_name').addClass('has-error');
                         $('#database_name').append('<div class="form-error">' + data.errors.database_name_space + '</div>');
                     }
+
                     if (data.errors.database_prefix_space) {
                         $('#database_prefix').addClass('has-error');
                         $('#database_prefix').append('<div class="form-error">' + data.errors.database_prefix_space + '</div>');
                     }
+
                     if (data.errors.user_password_space) {
                         $('#user_password').addClass('has-error');
                         $('#user_password').append('<div class="form-error">' + data.errors.user_password_space + '</div>');
                     }
+                    
                     if (data.errors.database_error) {
                         $('#database_error').append('<div class="form-error">' + data.errors.database_error + '</div>');
                     }

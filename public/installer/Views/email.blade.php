@@ -82,7 +82,7 @@
 
             $.ajax({type : 'POST', url :  EmailTarget, data : mailformData, dataType : 'json', encode : true})
             .done(function(data) {
-                if (!data.success) {
+                if (! data.success) {
                     // handle errors
                     if (data.errors.mail_driver) {
                         $('#mail_driver').addClass('has-error');
@@ -119,6 +119,7 @@
                     $('#finish').show();
 
                     var removeInstaller = window.location.href.concat('/Cleanup.php');
+                    
                     $.ajax({
                         type        : 'POST',
                         url         : removeInstaller,
