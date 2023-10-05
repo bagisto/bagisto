@@ -12,6 +12,10 @@
     </x-slot>
 
     <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
+        @if (request()->has('image-search'))
+            @include('shop::search.images.results')
+        @endif
+
         <div class="flex justify-between items-center mt-[30px]">
             <h2 class="text-[26px] font-medium">
                 @lang('shop::app.search.title', ['query' => request()->query('query')])
