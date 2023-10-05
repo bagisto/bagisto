@@ -63,7 +63,6 @@ class OrderController extends Controller
     {
         $invoice = $this->invoiceRepository->findOneWhere([
             'id'          => $id,
-            'customer_id' => auth()->guard('customer')->id(),
         ]);
 
         if (! $invoice) {
