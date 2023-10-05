@@ -3,19 +3,19 @@ export default {
         app.config.globalProperties.$shop = {
             /**
              * Load the dynamic scripts
-             * 
-             * @param {string} src 
-             * @param {callback} onScriptLoaded 
-             * 
+             *
+             * @param {string} src
+             * @param {callback} onScriptLoaded
+             *
              * @returns {void}.
              */
             loadDynamicScript: (src, onScriptLoaded) => {
                 let dynamicScript = document.createElement('script');
-            
+
                 dynamicScript.setAttribute('src', src);
 
                 document.body.appendChild(dynamicScript);
-            
+
                 dynamicScript.addEventListener('load', onScriptLoaded, false);
             },
 
@@ -27,7 +27,7 @@ export default {
              * @param {string} currencyCode - The currency code specifying the desired currency symbol.
              * @returns {string} - The formatted price string.
              */
-            formatPrice: (price, localeCode = null, currencyCode = null) => {
+            formatPrice: (price, localeCode = null, currencyCode = null, currencySymbol = null) => {
                 if (!localeCode) {
                     localeCode =
                         document.querySelector(
@@ -41,8 +41,15 @@ export default {
                             .content ?? "USD";
                 }
 
+                if(! currencySymbol)
+                {
+                    currencySymbol =
+                    document.querySelector('meta[name="currency-symbol"]')
+                        .content ?? "";
+                }
+
                 return new Intl.NumberFormat(localeCode, {
-                    style: "currency",
+                    style: currencySymbol ? "currency" : "decimal",
                     currency: currencyCode,
                 }).format(price);
             },
