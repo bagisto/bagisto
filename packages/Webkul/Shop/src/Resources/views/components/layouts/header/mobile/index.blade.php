@@ -263,7 +263,7 @@
                 class="block w-full px-11 py-3.5 border border-['#E3E3E3'] rounded-xl text-gray-900 text-xs font-medium"
                 name="query"
                 value="{{ request('query') }}"
-                placeholder="Search for products"
+                placeholder="@lang('shop::app.components.layouts.header.search-text')"
                 required
             >
 
