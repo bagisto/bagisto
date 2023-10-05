@@ -64,6 +64,7 @@
                     </div>
 
                     <div class="flex  items-center gap-x-[20px]">
+
                         <x-shop::dropdown position="bottom-left">
                             <!-- Dropdown Toggler -->
                             <x-slot:toggle>
@@ -81,6 +82,7 @@
                                 <v-currency-switcher></v-currency-switcher>
                             </x-slot:content>
                         </x-shop::dropdown>
+
                         <x-shop::dropdown position="bottom-right">
                             <x-slot:toggle>
                                 {{-- Dropdown Toggler --}}
@@ -109,6 +111,7 @@
                                 <v-locale-switcher></v-locale-switcher>
                             </x-slot:content>
                         </x-shop::dropdown>
+
                     </div>
 
                     {{-- Mobile category view --}}
