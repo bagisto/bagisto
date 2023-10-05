@@ -1,7 +1,9 @@
 <?php
-    $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-    $greenCheck = $actual_link .'/'. 'Images/green-check.svg';
-    $redCheck = $actual_link .'/'. 'Images/red-check.svg';
+    $host = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+    $greenCheck = $host .'/'. 'Images/green-check.svg';
+
+    $redCheck = $host .'/'. 'Images/red-check.svg';
 ?>
 
 <div class="container requirement" id="requirement">
@@ -18,9 +20,13 @@
                             <?php if($phpVersion['supported'] ? $src = $greenCheck : $src = $redCheck): ?>
                                 <img src="<?php echo $src ?>">
                             <?php endif; ?>
+                            
                             <span><b>PHP</b></span>
+
                             <small>(<?php echo $phpVersion['minimum'] ?> or higher)</small>
+
                             <br>
+
                             <?php if(!($phpVersion['supported'] == 1)): ?>
                                 <small style="color: red;">
                                     Bagisto has detected that your PHP version (<?php echo $phpVersion['current']; ?>) is not supported.<br>
@@ -35,6 +41,7 @@
                                     <?php if($enabled ? $src = $greenCheck : $src = $redCheck ): ?>
                                         <img src="<?php echo $src ?>">
                                     <?php endif; ?>
+
                                     <span><b><?php echo $extention ?></b></span>
                                 </li>
                             <?php endforeach; ?>
@@ -45,7 +52,9 @@
                                 <img src="<?php echo $src ?>">
                                 <span><b>composer</b></span>
                             <?php endif; ?>
-                            <br>                            
+
+                            <br>           
+
                             <?php if(!($composerInstall['composer_install'] == 0)): ?>
                                 <small style="color: red;">
                                     <?php echo $composerInstall['composer'] ?>
@@ -55,9 +64,13 @@
                     </ul>
 
                     <?php if(!isset($requirements['errors']) && ($phpVersion['supported'] && $composerInstall['composer_install'] == 0)): ?>
-                        <div class="text-center"><button type="button" class="btn btn-primary" id="requirement-check">Continue</button></div>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-primary" id="requirement-check">Continue</button>
+                        </div>
                     <?php elseif(!($phpVersion['supported'] && $composerInstall['composer_install'] == 0)): ?>
-                        <div class="text-center"><button type="button" class="btn btn-primary" id="requirements-refresh">Refresh</button></div>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-primary" id="requirements-refresh">Refresh</button>
+                        </div>
                     <?php endif; ?>
                 </div>
             </div>
