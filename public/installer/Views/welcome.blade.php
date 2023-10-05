@@ -1,7 +1,5 @@
 <html>
-
     <body>
-
         <div class="container welcome" id="welcome">
             <div class="initial-display">
                 <p>Welcome to Bagisto</p>
@@ -27,9 +25,7 @@
                 </div>
             </div>
         </div>
-
     </body>
-
 </html>
 
 

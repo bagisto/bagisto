@@ -59,85 +59,100 @@ if (preg_match('/\s/', $_POST['port_name']))
 if (! empty($errors)) {
     // if there are items in our errors array, return those errors
     $data['success'] = false;
+    
     $data['errors']  = $errors;
 } else {
-    // if there are no errors process our form, then return a message
-    // getting env file location
-    $location = str_replace('\\', '/', getcwd());
-    $currentLocation = explode("/", $location);
-    array_pop($currentLocation);
-    array_pop($currentLocation);
-    $desiredLocation = implode("/", $currentLocation);
-    $envFile = $desiredLocation . '/' . '.env';
-
-    $envExampleFile = $desiredLocation . '/' . '.env.example';
+    $envFile = '../../.env';
 
     if (! file_exists($envFile)) {
-        if (file_exists($envExampleFile)) {
-            copy($envExampleFile, $envFile);
+        if (file_exists('../../.env.example')) {
+            copy('../../.env.example', $envFile);
         } else {
             touch($envFile);
         }
     }
 
-    // reading env content
     $data = file($envFile);
-    $keyValueData = [];
+
+    $envDBParams = [];
 
     if ($data) {
         foreach ($data as $line) {
             $line = preg_replace('/\s+/', '', $line);
+
             $rowValues = explode('=', $line);
 
-            if (strlen($line) !== 0) {
-                $keyValueData[$rowValues[0]] = $rowValues[1];
+            if (! strlen($line)) {
+                continue;
             }
+
+            $envDBParams[$rowValues[0]] = $rowValues[1];
         }
     }
 
-    // inserting form data to empty array
-    $keyValueData['DB_HOST'] = $_POST["host_name"];
-    $keyValueData['DB_DATABASE'] = $_POST["database_name"];
-    $keyValueData['DB_PREFIX'] = $_POST["database_prefix"];
-    $keyValueData['DB_USERNAME'] = $_POST["user_name"];
-    $keyValueData['DB_PASSWORD'] = $_POST["user_password"];
-    $keyValueData['APP_NAME'] = $_POST["app_name"];
-    $keyValueData['APP_URL'] = $_POST["app_url"];
-    $keyValueData['APP_CURRENCY'] = $_POST["app_currency"];
-    $keyValueData['APP_LOCALE'] = $_POST["app_locale"];
-    $keyValueData['APP_TIMEZONE'] = $_POST["app_timezone"];
-    $keyValueData['DB_CONNECTION'] = $_POST["database_connection"];
-    $keyValueData['DB_PORT'] = $_POST["port_name"];
+    /**
+     * Update params with form-data
+     */
+    $envDBParams['DB_HOST'] = $_POST["host_name"];
+    $envDBParams['DB_DATABASE'] = $_POST["database_name"];
+    $envDBParams['DB_PREFIX'] = $_POST["database_prefix"];
+    $envDBParams['DB_USERNAME'] = $_POST["user_name"];
+    $envDBParams['DB_PASSWORD'] = $_POST["user_password"];
+    $envDBParams['APP_NAME'] = $_POST["app_name"];
+    $envDBParams['APP_URL'] = $_POST["app_url"];
+    $envDBParams['APP_CURRENCY'] = $_POST["app_currency"];
+    $envDBParams['APP_LOCALE'] = $_POST["app_locale"];
+    $envDBParams['APP_TIMEZONE'] = $_POST["app_timezone"];
+    $envDBParams['DB_CONNECTION'] = $_POST["database_connection"];
+    $envDBParams['DB_PORT'] = $_POST["port_name"];
 
-    // making key/value pair with form-data for env
-    $changedData = [];
-    foreach ($keyValueData as $key => $value) {
-        $changedData[] = $key . '=' . $value;
+    /**
+     * Making key/value pair with form-data for env
+     */
+    $updatedEnvDBParams = [];
+
+    foreach ($envDBParams as $key => $value) {
+        $updatedEnvDBParams[] = $key . '=' . $value;
     }
 
-    // inserting new form-data to env
-    $changedData = implode(PHP_EOL, $changedData);
-    file_put_contents($envFile, $changedData);
+    /**
+     * Inserting new form-data to env
+     */
+    $updatedEnvDBParams = implode(PHP_EOL, $updatedEnvDBParams);
 
-    // checking database connection(mysql only)
-    if ($_POST["database_connection"] == 'mysql') {
-        // create connection
-        @$conn = new mysqli($_POST["host_name"], $_POST["user_name"], $_POST["user_password"], $_POST["database_name"], $_POST['port_name']);
+    file_put_contents($envFile, $updatedEnvDBParams);
 
-        // check connection
+    /**
+     * Checking database connection(mysql only)
+     */
+    if ($envDBParams['DB_CONNECTION'] == 'mysql') {
+        @$conn = new mysqli(
+            $envDBParams['DB_HOST'] ?? '',
+            $envDBParams['DB_USERNAME'] ?? '',
+            $envDBParams['DB_PASSWORD'],
+            $envDBParams['DB_DATABASE'],
+            (int) $envDBParams['DB_PORT']
+        );
+
         if ($conn->connect_error) {
             $errors['database_error'] = $conn->connect_error;
+
             $data['errors'] = $errors;
+
             $data['success'] = false;
         } else {
             $data['success'] = true;
+
             $data['message'] = 'Success!';
         }
     } else {
         $data['success'] = true;
+
         $data['message'] = 'Success!';
     }
 }
 
-// return all our data to an AJAX call
+/**
+ * Return all our data to an AJAX call
+ */
 echo json_encode($data);
