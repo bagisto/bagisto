@@ -619,6 +619,13 @@ class Core
             return $formatter->format($this->convertPrice($price));
         }
 
+        if(empty($currency->symbol))
+        {
+            $formatter->setTextAttribute(\NumberFormatter::CURRENCY_CODE, $currencyCode);
+            $formatter->setSymbol(\NumberFormatter::CURRENCY_SYMBOL, '');
+            return $formatter->format($this->convertPrice($price));
+        }
+
         return $formatter->formatCurrency($price, $currency->code);
     }
 
@@ -1157,7 +1164,7 @@ class Core
         if (empty($id)) {
             return;
         }
-        
+
         if (array_key_exists($id, $this->taxCategoriesById)) {
             return $this->taxCategoriesById[$id];
         }
