@@ -548,24 +548,24 @@ return [
 
             'edit' => [
                 'save-btn' => 'उत्पाद सहेजें',
-                'title'    => 'उत्पाद संपादित करें',
                 'remove'   => 'हटाएं',
+                'title'    => 'उत्पाद संपादित करें',
 
                 'price' => [
                     'group' => [
-                        'title'                     => 'ग्राहक समूह मूल्य',
-                        'create-btn'                => 'नया जोड़ें',
-                        'edit-btn'                  => 'संपादित करें',
                         'add-group-price'           => 'समूह मूल्य जोड़ें',
                         'all-groups'                => 'सभी समूह',
-                        'fixed-group-price-info'    => 'मूल्य :qty मात्र के लिए स्थिर मूल्य पर :price',
+                        'create-btn'                => 'नया जोड़ें',
                         'discount-group-price-info' => 'मूल्य पर qty मात्र के लिए :price की छूट',
+                        'edit-btn'                  => 'संपादित करें',
                         'empty-info'                => 'विशेष मूल्यवान ग्राहकों के लिए विशिष्ट मूल्यनिर्धारण।',
-
+                        'fixed-group-price-info'    => 'मूल्य :qty मात्र के लिए स्थिर मूल्य पर :price',
+                        'title'                     => 'ग्राहक समूह मूल्य',
+                        
                         'create' => [
+                            'all-groups'     => 'सभी समूह',
                             'create-title'   => 'ग्राहक समूह मूल्य बनाएं',
                             'customer-group' => 'ग्राहक समूह',
-                            'all-groups'     => 'सभी समूह',
                             'discount'       => 'छूट',
                             'delete-btn'     => 'हटाएं',
                             'fixed'          => 'स्थिर',
@@ -589,13 +589,13 @@ return [
                 ],
 
                 'images' => [
-                    'title' => 'छवियाँ',
                     'info'  => 'छवि का निर्धारण 609px X 560px की तरह होना चाहिए',
+                    'title' => 'छवियाँ',
                 ],
 
                 'videos' => [
-                    'title' => 'वीडियो',
                     'info'  => 'अधिकतम वीडियो आकार का होना चाहिए :size की तरह',
+                    'title' => 'वीडियो',
                 ],
 
                 'links' => [
