@@ -9,7 +9,7 @@
 
     $validations = $coreConfigRepository->getValidations($field);
 
-    $is_required = Str::contains($validations, 'required') ? 'required' : '';
+    $isRequired = Str::contains($validations, 'required') ? 'required' : '';
 
     $channelLocaleInfo = $coreConfigRepository->getChannelLocaleInfo($field, $currentChannel->code, $currentLocale->code);
 @endphp
@@ -21,7 +21,7 @@
         {{-- Title of the input field --}}
         <div class="flex justify-between">
             <x-admin::form.control-group.label
-                :for="$name" :class="$is_required"
+                :for="$name" :class="$isRequired"
             >
                 @lang($field['title'])
             </x-admin::form.control-group.label>
