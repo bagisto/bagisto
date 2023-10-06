@@ -123,9 +123,10 @@ return [
             'today-sales'                 => 'فروش‌های امروز',
             'today-customers'             => 'مشتریان امروز',
             'today-details'               => 'جزئیات امروز',
+            'unique-visitors'             => ':count یکتا',
             'user-name'                   => '! سلام :user_name',
             'user-info'                   => 'سریعاً نگاهی به وضعیت فروشگاه خود بیندازید',
-            'visitor'                     => 'بازدیدکننده',
+            'visitors'                    => 'بازدیدکننده',
         ],
     ],
 

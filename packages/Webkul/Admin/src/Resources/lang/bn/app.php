@@ -123,9 +123,10 @@ return [
             'today-sales'                 => 'আজকের বিক্রয়',
             'today-customers'             => 'আজকের গ্রাহক',
             'today-details'               => 'আজকের বিশদ বিবরণ',
+            'unique-visitors'             => ':count অনন্য',
             'user-name'                   => 'হায়! :user_name',
             'user-info'                   => 'আপনার দোকানে কী ঘটছে তা দ্রুত পর্যালোচনা করুন',
-            'visitor'                     => 'দর্শক',
+            'visitors'                    => 'দর্শক',
         ],
     ],
 

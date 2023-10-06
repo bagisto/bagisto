@@ -123,9 +123,10 @@ return [
             'today-sales'                 => 'Vendite di Oggi',
             'today-customers'             => 'Clienti di Oggi',
             'today-details'               => 'Dettagli di Oggi',
+            'unique-visitors'             => ':count Unico',
             'user-name'                   => 'Ciao ! :user_name',
             'user-info'                   => 'Rivedi rapidamente cosa sta succedendo nel tuo negozio',
-            'visitor'                     => 'Visitatore',
+            'visitors'                    => 'Visitatore',
         ],
     ],
 

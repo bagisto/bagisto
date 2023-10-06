@@ -123,9 +123,10 @@ return [
             'today-sales'                 => 'आज की बिक्री',
             'today-customers'             => 'आज के ग्राहक',
             'today-details'               => 'आज का विवरण',
+            'unique-visitors'             => ':count अद्वितीय',
             'user-name'                   => 'नमस्ते! :user_name',
             'user-info'                   => 'आपके स्टोर में क्या हो रहा है, उसे तेजी से समीक्षा करें',
-            'visitor'                     => 'आगंतुक',
+            'visitors'                    => 'आगंतुक',
         ],
     ],
 

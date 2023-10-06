@@ -123,9 +123,10 @@ return [
             'today-sales'                 => 'අදහස් වාර්ෂික',
             'today-customers'             => 'අදහස් සාමාජිකයන්',
             'today-details'               => 'අදහස් විස්තර',
+            'unique-visitors'             => ':count ළඟයි',
             'user-name'                   => 'හෙලෝ! :user_name',
             'user-info'                   => 'ඔබගේ ෆාස්බුක් එකෙන් ඇය හොඳින් හේතුවක් කුමුද?',
-            'visitor'                     => 'පැනදුම්',
+            'visitors'                    => 'පැනදුම්',
         ],
     ],
 

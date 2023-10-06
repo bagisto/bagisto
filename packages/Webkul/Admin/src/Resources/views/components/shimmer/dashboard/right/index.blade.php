@@ -1,4 +1,10 @@
 <div class="bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+    <!-- Date Filters Shimmer -->
+    <x-admin::shimmer.dashboard.right.date-filters/>
+
+    <!-- Total Sales Shimmer -->
+    <x-admin::shimmer.dashboard.right.total-sales/>
+
     <!-- Total Sales Shimmer -->
     <x-admin::shimmer.dashboard.right.total-sales/>
 
