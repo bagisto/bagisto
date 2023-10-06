@@ -356,7 +356,7 @@
 
                     <!-- Today Orders Details -->
                     @foreach ($statistics['today_details']['today_orders']['current'] as $item)
-                        <div class="row grid grid-cols-4  gap-y-[24px] p-[16px]  bg-white dark:bg-gray-900  dark:bg-gray-900 border-b-[1px] dark:border-gray-800   transition-all hover:bg-gray-50 dark:hover:bg-gray-950   max-1580:grid-cols-3 max-sm:grid-cols-1">
+                        <div class="row grid grid-cols-4  gap-y-[24px] p-[16px]  bg-white dark:bg-gray-900 border-b-[1px] dark:border-gray-800   transition-all hover:bg-gray-50 dark:hover:bg-gray-950   max-1580:grid-cols-3 max-sm:grid-cols-1">
                             {{-- Order ID, Status, Created --}}
                             <div class="flex gap-[10px]">
                                 <div class="flex flex-col gap-[6px]">
@@ -515,7 +515,7 @@
                         @foreach ($statistics['stock_threshold'] as $item)
                             <!-- Single Product -->
                             <div class="relative">
-                                <div class="row grid grid-cols-2 gap-y-[24px] p-[16px]  bg-white dark:bg-gray-900  dark:bg-gray-900 border-b-[1px] dark:border-gray-800   transition-all hover:bg-gray-50 dark:hover:bg-gray-950   max-sm:grid-cols-[1fr_auto]">
+                                <div class="row grid grid-cols-2 gap-y-[24px] p-[16px] bg-white dark:bg-gray-900 border-b-[1px] dark:border-gray-800   transition-all hover:bg-gray-50 dark:hover:bg-gray-950   max-sm:grid-cols-[1fr_auto]">
                                     <div class="flex gap-[10px]">
                                         @if ($item->product?->base_image_url)
                                             <div class="">
@@ -621,9 +621,13 @@
 
         <script type="text/x-template" id="v-store-stats-template">
             <x-admin::form :action="route('admin.catalog.categories.store')">
-                <div class="rounded-[4px]  bg-white dark:bg-gray-900  dark:bg-gray-900 box-shadow">
+                <div class="rounded-[4px]  bg-white dark:bg-gray-900 box-shadow">
                     <!-- Total Sales Shimmer -->
                     <template v-if="isLoading">
+                        <x-admin::shimmer.dashboard.right.date-filters/>
+
+                        <x-admin::shimmer.dashboard.right.total-sales/>
+
                         <x-admin::shimmer.dashboard.right.total-sales/>
                     </template>
 
@@ -692,7 +696,42 @@
     
                             <!-- Sales Graph -->
                             <canvas
-                                id="myChart"
+                                id="totalSalesChart"
+                                style="width: 100%; height: 230px"
+                            >
+                            </canvas>
+                        </div>
+    
+                        <!-- Total Visitors Detailes -->
+                        <div class="grid gap-[16px] px-[16px] py-[8px] border-b dark:border-gray-800  ">
+                            <div class="flex gap-[8px] justify-between">
+                                <div class="flex flex-col gap-[4px] justify-between">
+                                    <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
+                                        @lang('admin::app.dashboard.index.visitors')
+                                    </p>
+    
+                                    <!-- Total Order Revenue -->
+                                    <p class="text-[18px] text-gray-800 dark:text-white font-bold">
+                                        @{{ statistics.total_visitors.current }}
+                                    </p>
+                                </div>
+    
+                                <div class="flex flex-col gap-[4px] justify-between">
+                                    <!-- Orders Time Duration -->
+                                    <p class="text-[12px] text-gray-400 font-semibold text-right dark:text-white">
+                                        @{{ "@lang('admin::app.dashboard.index.date-duration')".replace(':start', formatStart ?? 0).replace(':end', formatEnd ?? 0) }}
+                                    </p>
+    
+                                    <!-- Total Orders -->
+                                    <p class="text-[12px] text-gray-400 font-semibold text-right dark:text-white">
+                                        @{{ "@lang('admin::app.dashboard.index.unique-visitors')".replace(':count', statistics.unique_visitors?.current ?? 0) }}
+                                    </p>
+                                </div>
+                            </div>
+    
+                            <!-- Visitors Graph -->
+                            <canvas
+                                id="totalVisitorsChart"
                                 style="width: 100%; height: 230px"
                             >
                             </canvas>
@@ -700,7 +739,7 @@
                     </template>
 
                     <!-- Top Selling Products -->
-                    <div class="border-b dark:border-gray-800  ">
+                    <div class="border-b dark:border-gray-800">
                         <div class="flex items-center justify-between p-[16px]">
                             <p class="text-gray-600 dark:text-gray-300  text-[16px] font-semibold">
                                 @lang('admin::app.dashboard.index.top-selling-products')
@@ -933,7 +972,9 @@
 
                         statistics: {},
 
-                        _chart: undefined,
+                        salesChart: undefined,
+
+                        visitorsChart: undefined,
                     }
                 },
 
@@ -954,7 +995,9 @@
                                 this.statistics = statistics;
 
                                 setTimeout(() => {
-                                    this.graphChart();
+                                    this.salesGraphChart();
+
+                                    this.visitorsGraphChart();
                                 }, 0);
 
                                 this.isLoading = false;
@@ -966,16 +1009,16 @@
                             });
                     },
 
-                    graphChart () {
-                        const ctx = document.getElementById('myChart');
+                    salesGraphChart () {
+                        const ctx = document.getElementById('totalSalesChart');
 
                         const data = this.statistics.sale_graph;
 
-                        if (this._chart) {
-                           this._chart.destroy();
+                        if (this.salesChart) {
+                           this.salesChart.destroy();
                         }
 
-                        this._chart = new Chart(ctx, {
+                        this.salesChart = new Chart(ctx, {
                             type: 'bar',
                             
                             data: {
@@ -984,6 +1027,45 @@
                                     data: data['total'],
                                     barThickness: 6,
                                     backgroundColor: '#598de6',
+                                }]
+                            },
+                    
+                            options: {
+                                plugins: {
+                                    legend: {
+                                        display: false
+                                    }
+                                },
+
+                                scales: {
+                                    x: {
+                                        grid: {
+                                            display: false
+                                        },
+                                    },
+                                }
+                            }
+                        });
+                    },
+
+                    visitorsGraphChart () {
+                        const ctx = document.getElementById('totalVisitorsChart');
+
+                        const data = this.statistics.visitor_graph;
+
+                        if (this.visitorsChart) {
+                           this.visitorsChart.destroy();
+                        }
+
+                        this.visitorsChart = new Chart(ctx, {
+                            type: 'bar',
+                            
+                            data: {
+                                labels: data['label'],
+                                datasets: [{
+                                    data: data['total'],
+                                    barThickness: 6,
+                                    backgroundColor: '#f87171',
                                 }]
                             },
                     

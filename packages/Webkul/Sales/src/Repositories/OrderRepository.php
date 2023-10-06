@@ -2,12 +2,12 @@
 
 namespace Webkul\Sales\Repositories;
 
-use Carbon\Carbon;
 use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Generators\OrderSequencer;
 use Webkul\Sales\Models\Order as OrderModel;

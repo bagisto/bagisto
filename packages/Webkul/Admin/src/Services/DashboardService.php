@@ -13,6 +13,7 @@ use Webkul\Sales\Models\OrderItem;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Core\Repositories\VisitRepository;
 
 class DashboardService
 {
@@ -56,6 +57,7 @@ class DashboardService
         protected CustomerRepository $customerRepository,
         protected ProductInventoryRepository $productInventoryRepository,
         protected ProductRepository $productRepository,
+        protected VisitRepository $visitRepository,
     ) {
         $this->setLastStartDate();
         $this->setLastEndDate();
@@ -69,17 +71,20 @@ class DashboardService
     public function getStatistics(): array
     {
         return [
-            'total_customers' => $this->getTotalCustomers(),
-            'total_orders' => $this->getTotalOrders(),
-            'total_sales' => $this->getTotalSales(),
-            'avg_sales' => $this->getAvgSales(),
-            'total_unpaid_invoices' => $this->getTotalAmountOfPendingInvoices(),
-            'top_selling_categories' => $this->getTopSellingCategories(),
-            'top_selling_products' => $this->getTopSellingProducts(),
+            'total_customers'          => $this->getTotalCustomers(),
+            'total_orders'             => $this->getTotalOrders(),
+            'total_sales'              => $this->getTotalSales(),
+            'total_visitors'           => $this->getTotalVisitors(),
+            'avg_sales'                => $this->getAvgSales(),
+            'unique_visitors'          => $this->getUniqueVisitors(),
+            'total_unpaid_invoices'    => $this->getTotalAmountOfPendingInvoices(),
+            'top_selling_categories'   => $this->getTopSellingCategories(),
+            'top_selling_products'     => $this->getTopSellingProducts(),
             'customer_with_most_sales' => $this->getCustomerWithMostSales(),
-            'stock_threshold' => $this->getStockThreshold(),
-            'sale_graph' => $this->generateSaleGraphData(),
-            'today_details' => $this->getTodayDetails(),
+            'stock_threshold'          => $this->getStockThreshold(),
+            'sale_graph'               => $this->generateSaleGraph(),
+            'visitor_graph'            => $this->generateVisitorGraph(),
+            'today_details'            => $this->getTodayDetails(),
         ];
     }
 
@@ -325,25 +330,84 @@ class DashboardService
 
     /**
      * Generates sale graph data.
+     * 
+     * @return array
      */
-    private function generateSaleGraphData(): array
+    private function generateSaleGraph(): array
     {
-        $saleGraphData = [];
+        $data = [];
 
         foreach (core()->getTimeInterval($this->startDate, $this->endDate) as $interval) {
             $total = $this->orderRepository->calculateSaleAmountByDate($interval['start'], $interval['end']);
 
-            $saleGraphData['label'][] = $interval['start']->format('d M');
-            $saleGraphData['total'][] = $total;
-            $saleGraphData['formatted_total'][] = core()->formatBasePrice($total);
+            $data['label'][] = $interval['start']->format('d M');
+            $data['total'][] = $total;
+            $data['formatted_total'][] = core()->formatBasePrice($total);
         }
 
-        return $saleGraphData;
+        return $data;
     }
 
+    /**
+     * Retrieves total visitors and their progress.
+     */
+    private function getTotalVisitors($todayStartOfDay = null, $todayEndOfDay = null)
+    {
+        if ($todayStartOfDay && $todayEndOfDay) {
+            return [
+                'previous' => $previous = $this->visitRepository->getTotalCountByDate($this->yesterdayEndDate, $this->yesterdayStartDate),
+                'current'  => $current = $this->visitRepository->getTotalCountByDate($todayStartOfDay, $todayEndOfDay),
+                'progress' => $this->getPercentageChange($previous, $current),
+            ];
+        }
+
+        return [
+            'previous' => $previous = $this->visitRepository->getTotalCountByDate($this->lastStartDate, $this->lastEndDate),
+            'current'  => $current = $this->visitRepository->getTotalCountByDate($this->startDate, $this->endDate),
+            'progress' => $this->getPercentageChange($previous, $current),
+        ];
+    }
+
+    /**
+     * Retrieves unique visitors and their progress.
+     */
+    private function getUniqueVisitors(): array
+    {
+        return [
+            'previous' => $previous = $this->visitRepository->getTotalUniqueCountByDate($this->lastStartDate, $this->lastEndDate),
+            'current'  => $current = $this->visitRepository->getTotalUniqueCountByDate($this->startDate, $this->endDate),
+            'progress' => $this->getPercentageChange($previous, $current),
+        ];
+    }
+
+    /**
+     * Generates visitor graph data.
+     * 
+     * @return array
+     */
+    private function generateVisitorGraph(): array
+    {
+        $data = [];
+
+        foreach (core()->getTimeInterval($this->startDate, $this->endDate) as $interval) {
+            $total = $this->visitRepository->getTotalCountByDate($interval['start'], $interval['end']);
+
+            $data['label'][] = $interval['start']->format('d M');
+            $data['total'][] = $total;
+        }
+
+        return $data;
+    }
+
+    /**
+     * Returns today's details
+     * 
+     * @return array
+     */
     private function getTodayDetails(): array
     {
         $todayStartOfDay = now()->today();
+
         $todayEndOfDay = now()->endOfDay();
 
         return [

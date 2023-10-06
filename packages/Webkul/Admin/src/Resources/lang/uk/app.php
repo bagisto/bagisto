@@ -123,9 +123,10 @@ return [
             'today-sales'                 => 'Продажі сьогодні',
             'today-customers'             => 'Клієнти сьогодні',
             'today-details'               => 'Деталі сьогодні',
+            'unique-visitors'             => ':count Унікальний',
             'user-name'                   => 'Привіт! :user_name',
             'user-info'                   => 'Швидкий перегляд подій в вашому магазині',
-            'visitor'                     => 'Відвідувач',
+            'visitors'                    => 'Відвідувач',
         ],
     ],
 

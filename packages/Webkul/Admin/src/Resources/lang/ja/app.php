@@ -123,9 +123,10 @@ return [
             'today-sales'                 => '今日の売上',
             'today-customers'             => '今日の顧客',
             'today-details'               => '今日の詳細',
+            'unique-visitors'             => ':count ユニーク',
             'user-name'                   => 'こんにちは！ :user_name さん',
             'user-info'                   => 'ストアで何が起こっているかをすばやく確認',
-            'visitor'                     => '訪問者',
+            'visitors'                    => '訪問者',
         ],
     ],
 
