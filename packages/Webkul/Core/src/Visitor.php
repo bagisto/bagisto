@@ -26,6 +26,16 @@ class Visitor extends BaseVisitor
     }
 
     /**
+     * Retrieve request's url
+     *
+     * @return string
+     */
+    public function url() : string
+    {
+        return $this->request->url();
+    }
+
+    /**
      * Returns logs
      *
      * @return array
