@@ -2,7 +2,6 @@
  
 namespace Webkul\Product\Jobs;
  
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -24,16 +23,6 @@ class UpdateCreatePriceIndex implements ShouldQueue
     public function __construct(protected $productIds)
     {
         $this->productIds = $productIds;
-    }
-
-    /**
-     * Get the cache driver for the unique job lock.
-     *
-     * @return \Illuminate\Contracts\Cache\Repository
-     */
-    public function uniqueVia()
-    {
-        return Cache::driver('redis');
     }
  
     /**
