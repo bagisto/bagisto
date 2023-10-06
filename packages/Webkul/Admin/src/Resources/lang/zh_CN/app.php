@@ -123,9 +123,10 @@ return [
             'today-sales'                 => '今日销售',
             'today-customers'             => '今日客户',
             'today-details'               => '今日详情',
+            'unique-visitors'             => ':count 唯一',
             'user-name'                   => '你好！:user_name',
             'user-info'                   => '快速查看商店的最新情况',
-            'visitor'                     => '访客',
+            'visitors'                    => '访客',
         ],
     ],
 

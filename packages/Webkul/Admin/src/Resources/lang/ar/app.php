@@ -123,9 +123,10 @@ return [
             'today-sales'                 => 'مبيعات اليوم',
             'today-customers'             => 'عملاء اليوم',
             'today-details'               => 'تفاصيل اليوم',
+            'unique-visitors'             => ':count فريد',
             'user-name'                   => 'مرحبًا! :user_name',
             'user-info'                   => 'استعراض سريع لما يحدث في متجرك',
-            'visitor'                     => 'زائر',
+            'visitors'                    => 'زائر',
         ],
     ],
 

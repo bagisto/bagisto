@@ -123,9 +123,10 @@ return [
             'today-sales'                 => 'Verkopen van Vandaag',
             'today-customers'             => 'Klanten van Vandaag',
             'today-details'               => 'Details van Vandaag',
+            'unique-visitors'             => ':count Uniek',
             'user-name'                   => 'Hallo! :user_name',
             'user-info'                   => 'Bekijk snel wat er gebeurt in je winkel',
-            'visitor'                     => 'Bezoeker',
+            'visitors'                    => 'Bezoeker',
         ],
     ],
 

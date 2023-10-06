@@ -123,9 +123,10 @@ return [
             'today-sales'                 => 'Bugünkü Satışlar',
             'today-customers'             => 'Bugünkü Müşteriler',
             'today-details'               => 'Bugünkü Detaylar',
+            'unique-visitors'             => ':count Benzersiz',
             'user-name'                   => 'Merhaba! :user_name',
             'user-info'                   => 'Mağazanızda neler olup bittiğini hızlıca gözden geçirin',
-            'visitor'                     => 'Ziyaretçi',
+            'visitors'                    => 'Ziyaretçi',
         ],
     ],
 
