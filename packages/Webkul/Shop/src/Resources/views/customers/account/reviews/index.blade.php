@@ -29,7 +29,8 @@
                                 <div class="min-h-[100px] min-w-[100px] max-sm:hidden">
                                     <img 
                                         src="{{ $image[0]['small_image_url'] ?? bagisto_asset('images/small-product-placeholder.png') }}" 
-                                        class="rounded-[12px]" 
+                                        class="rounded-[12px]"
+                                        alt="Review Image"
                                     >
                                 </div>
 
