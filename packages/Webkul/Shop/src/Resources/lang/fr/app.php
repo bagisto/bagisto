@@ -202,6 +202,32 @@ return [
                         'shipping-handling'  => 'Livraison et manutention',
                         'tax-amount'         => 'Montant de la taxe',
                         'tax'                => 'Taxe',
+                        'invoice-pdf' => [
+                            'invoice'           => 'Facture',
+                            'date'              => 'Date de la facture',
+                            'invoice-id'        => 'ID de la facture',
+                            'order-id'          => 'ID de la commande',
+                            'order-date'        => 'Date de la commande',
+                            'bill-to'           => 'Destinataire',
+                            'ship-to'           => 'Livré à',
+                            'contact'           => 'Contact',
+                            'payment-method'    => 'Moyen de paiement',
+                            'shipping-method'   => 'Moyen de livraison',
+                            'contact-number'    => 'Numéro de contact',
+                            'vat-number'        => 'Numéro de TVA',
+                            'payment-terms'     => 'Conditions de paiement',
+                            'bank-details'      => 'Coordonnées bancaires',
+                            'sku'               => 'SKU',
+                            'product-name'      => 'Nom du produit',
+                            'price'             => 'Prix',
+                            'qty'               => 'Quantité',
+                            'subtotal'          => 'Sous-total',
+                            'tax-amount'        => 'Montant de la taxe',
+                            'grand-total'       => 'Total général',
+                            'shipping-handling' => 'Expédition et manutention',
+                            'tax'               => 'Taxe',
+                            'discount'          => 'Réduction',
+                        ],
                     ],
 
                     'shipments' => [
@@ -412,12 +438,12 @@ return [
             'grouped' => [
                 'starting-at' => 'À partir de',
             ],
-    
+
             'configurable' => [
                 'as-low-as' => 'À partir de',
             ],
         ],
-    
+
         'sort-by' => [
             'title'   => 'Trier par',
             'options' => [
@@ -429,34 +455,34 @@ return [
                 'oldest-first'    => 'Plus ancien en premier',
             ],
         ],
-    
+
         'view' => [
             'type' => [
                 'configurable' => [
                     'select-options'       => 'Veuillez sélectionner une option',
                     'select-above-options' => 'Veuillez sélectionner les options ci-dessus',
                 ],
-    
+
                 'bundle' => [
                     'none' => 'Aucun',
                 ],
-    
+
                 'downloadable' => [
                     'links'   => 'Liens',
                     'samples' => 'Échantillons',
                     'sample'  => 'Échantillon',
                 ],
-    
+
                 'grouped' => [
                     'name' => 'Nom',
                 ],
             ],
-    
+
             'gallery' => [
                 'product-image'   => 'Image du produit',
                 'thumbnail-image' => 'Image miniature',
             ],
-    
+
             'reviews' => [
                 'attachments'      => 'Pièces jointes',
                 'comment'          => 'Commentaire',
@@ -472,7 +498,7 @@ return [
                 'title'            => 'Titre',
                 'write-a-review'   => 'Rédiger un avis',
             ],
-            
+
             'add-to-cart'            => 'Ajouter au panier',
             'add-to-compare'         => 'Produit ajouté à la liste de comparaison.',
             'already-in-compare'     => 'Le produit est déjà ajouté à la liste de comparaison.',
@@ -485,13 +511,13 @@ return [
             'tax-inclusive'          => 'Taxes incluses',
             'up-sell-title'          => 'Nous avons trouvé d\'autres produits qui pourraient vous plaire !',
         ],
-    
+
         'type' => [
             'abstract' => [
                 'offers' => 'Achetez :qty pour :price chacun et économisez :discount%',
             ],
         ],
-    ],    
+    ],
 
     'categories' => [
         'filters' => [
@@ -513,14 +539,14 @@ return [
 
     'search' => [
         'title' => 'Résultats de recherche pour : :query',
-    
+
         'images' => [
             'index' => [
                 'something-went-wrong' => 'Quelque chose s\'est mal passé, veuillez réessayer ultérieurement.',
                 'size-limit-error'     => 'Erreur de limite de taille',
                 'only-images-allowed'  => 'Seules les images (.jpeg, .jpg, .png, ..) sont autorisées.',
-            ],  
-    
+            ],
+
             'results' => [
                 'analysed-keywords' => 'Mots-clés analysés :',
             ],

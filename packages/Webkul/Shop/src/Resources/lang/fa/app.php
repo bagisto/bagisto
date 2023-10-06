@@ -202,6 +202,32 @@ return [
                         'shipping-handling'  => 'هزینه ارسال و بسته‌بندی',
                         'tax-amount'         => 'مبلغ مالیات',
                         'tax'                => 'مالیات',
+                        'invoice-pdf' => [
+                            'invoice'           => 'صورتحساب',
+                            'date'              => 'تاریخ صورتحساب',
+                            'invoice-id'        => 'شماره صورتحساب',
+                            'order-id'          => 'شماره سفارش',
+                            'order-date'        => 'تاریخ سفارش',
+                            'bill-to'           => 'صورتحساب به',
+                            'ship-to'           => 'ارسال به',
+                            'contact'           => 'تماس',
+                            'payment-method'    => 'روش پرداخت',
+                            'shipping-method'   => 'روش حمل و نقل',
+                            'contact-number'    => 'شماره تماس',
+                            'vat-number'        => 'شماره مالیاتی',
+                            'payment-terms'     => 'شرایط پرداخت',
+                            'bank-details'      => 'جزئیات بانکی',
+                            'sku'               => 'کد SKU',
+                            'product-name'      => 'نام محصول',
+                            'price'             => 'قیمت',
+                            'qty'               => 'تعداد',
+                            'subtotal'          => 'جمع جزئی',
+                            'tax-amount'        => 'مقدار مالیات',
+                            'grand-total'       => 'جمع کل',
+                            'shipping-handling' => 'حمل و نقل و بسته‌بندی',
+                            'tax'               => 'مالیات',
+                            'discount'          => 'تخفیف',
+                        ],
                     ],
 
                     'shipments' => [
@@ -519,8 +545,8 @@ return [
                 'something-went-wrong' => 'مشکلی پیش آمده است، لطفاً بعداً دوباره تلاش کنید.',
                 'size-limit-error'     => 'خطای محدودیت اندازه',
                 'only-images-allowed'  => 'تنها تصاویر (.jpeg، .jpg، .png، ..) مجاز هستند.',
-            ],  
-    
+            ],
+
             'results' => [
                 'analysed-keywords' => 'کلمات کلیدی تجزیه و تحلیل شده:',
             ],

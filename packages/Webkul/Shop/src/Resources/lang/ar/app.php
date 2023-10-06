@@ -202,6 +202,32 @@ return [
                         'shipping-handling'  => 'الشحن والمعالجة',
                         'tax-amount'         => 'مبلغ الضريبة',
                         'tax'                => 'الضريبة',
+                        'invoice-pdf' => [
+                            'invoice'           => 'الفاتورة',
+                            'date'              => 'تاريخ الفاتورة',
+                            'invoice-id'        => 'رقم الفاتورة',
+                            'order-id'          => 'رقم الطلب',
+                            'order-date'        => 'تاريخ الطلب',
+                            'bill-to'           => 'فوترة لصالح',
+                            'ship-to'           => 'شحن إلى',
+                            'contact'           => 'الاتصال',
+                            'payment-method'    => 'طريقة الدفع',
+                            'shipping-method'   => 'طريقة الشحن',
+                            'contact-number'    => 'رقم الاتصال',
+                            'vat-number'        => 'رقم ضريبة القيمة المضافة',
+                            'payment-terms'     => 'شروط الدفع',
+                            'bank-details'      => 'تفاصيل البنك',
+                            'sku'               => 'رمز المنتج',
+                            'product-name'      => 'اسم المنتج',
+                            'price'             => 'السعر',
+                            'qty'               => 'الكمية',
+                            'subtotal'          => 'المجموع الفرعي',
+                            'tax-amount'        => 'مبلغ الضريبة',
+                            'grand-total'       => 'المجموع الكلي',
+                            'shipping-handling' => 'الشحن والتسليم',
+                            'tax'               => 'الضريبة',
+                            'discount'          => 'الخصم',
+                        ],
                     ],
 
                     'shipments' => [
@@ -519,14 +545,14 @@ return [
                 'something-went-wrong' => 'حدث خطأ ما، يُرجى المحاولة مرة أخرى في وقت لاحق.',
                 'size-limit-error'     => 'خطأ في حد الحجم',
                 'only-images-allowed'  => 'يُسمح فقط بالصور (.jpeg، .jpg، .png، ..).',
-            ],  
+            ],
 
             'results' => [
                 'analysed-keywords' => 'الكلمات المفحوصة:',
             ],
         ],
     ],
-    
+
     'compare' => [
         'already-added'      => 'العنصر مضاف بالفعل إلى قائمة المقارنة',
         'delete-all'         => 'مسح الكل',

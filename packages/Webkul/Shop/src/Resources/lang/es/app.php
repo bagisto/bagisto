@@ -202,6 +202,32 @@ return [
                         'shipping-handling'  => 'Envío & Manejo',
                         'tax-amount'         => 'Cantidad de Impuesto',
                         'tax'                => 'Impuesto',
+                        'invoice-pdf' => [
+                            'invoice'           => 'Factura',
+                            'date'              => 'Fecha de la Factura',
+                            'invoice-id'        => 'ID de la Factura',
+                            'order-id'          => 'ID de Pedido',
+                            'order-date'        => 'Fecha del Pedido',
+                            'bill-to'           => 'Facturar a',
+                            'ship-to'           => 'Enviar a',
+                            'contact'           => 'Contacto',
+                            'payment-method'    => 'Método de Pago',
+                            'shipping-method'   => 'Método de Envío',
+                            'contact-number'    => 'Número de Contacto',
+                            'vat-number'        => 'Número de IVA',
+                            'payment-terms'     => 'Términos de Pago',
+                            'bank-details'      => 'Detalles Bancarios',
+                            'sku'               => 'SKU',
+                            'product-name'      => 'Nombre del Producto',
+                            'price'             => 'Precio',
+                            'qty'               => 'Cantidad',
+                            'subtotal'          => 'Subtotal',
+                            'tax-amount'        => 'Monto de Impuestos',
+                            'grand-total'       => 'Total General',
+                            'shipping-handling' => 'Envío y Manipulación',
+                            'tax'               => 'Impuestos',
+                            'discount'          => 'Descuento',
+                        ],
                     ],
 
                     'shipments' => [
@@ -519,8 +545,8 @@ return [
                 'something-went-wrong' => 'Algo salió mal, por favor inténtelo de nuevo más tarde.',
                 'size-limit-error'     => 'Error de límite de tamaño',
                 'only-images-allowed'  => 'Solo se permiten imágenes (.jpeg, .jpg, .png, ..).',
-            ],  
-    
+            ],
+
             'results' => [
                 'analysed-keywords' => 'Palabras clave analizadas:',
             ],

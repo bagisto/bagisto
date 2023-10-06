@@ -202,6 +202,32 @@ return [
                         'shipping-handling'  => 'Versand & Bearbeitung',
                         'tax-amount'         => 'Steuerbetrag',
                         'tax'                => 'Steuer',
+                        'invoice-pdf' => [
+                            'invoice'           => 'Rechnung',
+                            'date'              => 'Rechnungsdatum',
+                            'invoice-id'        => 'Rechnungsnummer',
+                            'order-id'          => 'Bestellnummer',
+                            'order-date'        => 'Bestelldatum',
+                            'bill-to'           => 'Rechnungsadresse',
+                            'ship-to'           => 'Lieferadresse',
+                            'contact'           => 'Kontakt',
+                            'payment-method'    => 'Zahlungsmethode',
+                            'shipping-method'   => 'Versandmethode',
+                            'contact-number'    => 'Kontakt-Nummer',
+                            'vat-number'        => 'Umsatzsteuer-Identifikationsnummer',
+                            'payment-terms'     => 'Zahlungsbedingungen',
+                            'bank-details'      => 'Bankverbindung',
+                            'sku'               => 'Artikelnummer',
+                            'product-name'      => 'Produktname',
+                            'price'             => 'Preis',
+                            'qty'               => 'Menge',
+                            'subtotal'          => 'Zwischensumme',
+                            'tax-amount'        => 'Steuersumme',
+                            'grand-total'       => 'Gesamtsumme',
+                            'shipping-handling' => 'Versand und Bearbeitung',
+                            'tax'               => 'Steuer',
+                            'discount'          => 'Rabatt',
+                        ],
                     ],
 
                     'shipments' => [
@@ -412,12 +438,12 @@ return [
             'grouped' => [
                 'starting-at' => 'Ab',
             ],
-    
+
             'configurable' => [
                 'as-low-as' => 'Ab',
             ],
         ],
-    
+
         'sort-by' => [
             'title'   => 'Sortieren nach',
             'options' => [
@@ -429,34 +455,34 @@ return [
                 'oldest-first'    => 'Älteste zuerst',
             ],
         ],
-    
+
         'view' => [
             'type' => [
                 'configurable' => [
                     'select-options'       => 'Bitte wählen Sie eine Option aus',
                     'select-above-options' => 'Bitte wählen Sie die oben stehenden Optionen aus',
                 ],
-    
+
                 'bundle' => [
                     'none' => 'Keine',
                 ],
-    
+
                 'downloadable' => [
                     'links'   => 'Links',
                     'sample'  => 'Beispiel',
                     'samples' => 'Beispiele',
                 ],
-    
+
                 'grouped' => [
                     'name' => 'Name',
                 ],
             ],
-    
+
             'gallery' => [
                 'product-image'   => 'Produktbild',
                 'thumbnail-image' => 'Vorschaubild',
             ],
-    
+
             'reviews' => [
                 'attachments'      => 'Anhänge',
                 'comment'          => 'Kommentar',
@@ -472,7 +498,7 @@ return [
                 'write-a-review'   => 'Eine Bewertung schreiben',
                 'name'             => 'Name',
             ],
-    
+
             'add-to-cart'            => 'In den Warenkorb legen',
             'add-to-compare'         => 'Produkt zur Vergleichsliste hinzugefügt.',
             'already-in-compare'     => 'Das Produkt ist bereits in der Vergleichsliste enthalten.',
@@ -485,13 +511,13 @@ return [
             'tax-inclusive'          => 'Inklusive aller Steuern',
             'up-sell-title'          => 'Wir haben auch andere Produkte, die Ihnen gefallen könnten!',
         ],
-    
+
         'type' => [
             'abstract' => [
                 'offers' => 'Kaufen Sie :qty für :price je Stück und sparen Sie :discount%',
             ],
         ],
-    ],      
+    ],
 
     'categories' => [
         'filters' => [
@@ -513,20 +539,20 @@ return [
 
     'search' => [
         'title' => 'Suchergebnisse für: :query',
-    
+
         'images' => [
             'index' => [
                 'something-went-wrong' => 'Etwas ist schiefgelaufen, bitte versuchen Sie es später erneut.',
                 'size-limit-error'     => 'Größenbeschränkungsfehler',
                 'only-images-allowed'  => 'Nur Bilder (.jpeg, .jpg, .png, ..) sind erlaubt.',
-            ],  
-    
+            ],
+
             'results' => [
                 'analysed-keywords' => 'Analysierte Schlüsselwörter:',
             ],
         ],
     ],
-    
+
     'compare' => [
         'already-added'      => 'Artikel ist bereits zur Vergleichsliste hinzugefügt',
         'delete-all'         => 'Alle löschen',
@@ -546,7 +572,7 @@ return [
             'title'         => 'Bestellung erfolgreich platziert',
             'thanks'        => 'Vielen Dank für Ihre Bestellung!',
         ],
-    
+
         'cart' => [
             'continue-to-checkout'      => 'Weiter zur Kasse',
             'item-add-to-cart'          => 'Artikel erfolgreich hinzugefügt',
@@ -563,7 +589,7 @@ return [
             'suspended-account-message' => 'Ihr Konto wurde gesperrt.',
             'select-hourly-duration'    => 'Wählen Sie eine Stundendauer von einer Stunde aus.',
             'success-remove'            => 'Artikel wurde erfolgreich aus dem Warenkorb entfernt.',
-    
+
             'index' => [
                 'cart'                     => 'Warenkorb',
                 'continue-shopping'        => 'Einkauf fortsetzen',
@@ -584,7 +610,7 @@ return [
                 'update-cart'              => 'Warenkorb aktualisieren',
                 'view-cart'                => 'Warenkorb anzeigen',
             ],
-    
+
             'coupon'   => [
                 'applied'         => 'Gutschein angewendet',
                 'apply'           => 'Gutschein anwenden',
@@ -600,7 +626,7 @@ return [
                 'success-apply'   => 'Gutscheincode erfolgreich angewendet.',
                 'subtotal'        => 'Zwischensumme',
             ],
-    
+
             'mini-cart' => [
                 'continue-to-checkout' => 'Weiter zur Kasse',
                 'empty-cart'           => 'Ihr Warenkorb ist leer',
@@ -611,7 +637,7 @@ return [
                 'subtotal'             => 'Zwischensumme',
                 'view-cart'            => 'Warenkorb anzeigen',
             ],
-    
+
             'summary' => [
                 'cart-summary'        => 'Warenkorbzusammenfassung',
                 'delivery-charges'    => 'Liefergebühren',
@@ -623,7 +649,7 @@ return [
                 'tax'                 => 'Steuer',
             ],
         ],
-    
+
         'onepage' => [
             'addresses' => [
                 'billing' => [
@@ -645,11 +671,11 @@ return [
                     'save-address'         => 'Diese Adresse speichern',
                     'telephone'            => 'Telefon',
                 ],
-    
+
                 'index' => [
                     'confirm' => 'Bestätigen',
                 ],
-    
+
                 'shipping' => [
                     'add-new-address'  => 'Neue Adresse hinzufügen',
                     'back'             => 'Zurück',
@@ -670,7 +696,7 @@ return [
                     'telephone'        => 'Telefon',
                 ],
             ],
-    
+
             'coupon' => [
                 'applied'         => 'Gutschein angewendet',
                 'applied-coupon'  => 'Angewendeter Gutschein',
@@ -684,20 +710,20 @@ return [
                 'sub-total'       => 'Zwischensumme',
                 'subtotal'        => 'Zwischensumme',
             ],
-    
+
             'index' => [
                 'checkout' => 'Zur Kasse',
                 'home'     => 'Startseite',
             ],
-    
+
             'payment' => [
                 'payment-method' => 'Zahlungsmethode',
             ],
-    
+
             'shipping' => [
                 'shipping-method' => 'Versandart',
             ],
-    
+
             'summary' => [
                 'cart-summary'     => 'Warenkorbzusammenfassung',
                 'delivery-charges' => 'Liefergebühren',

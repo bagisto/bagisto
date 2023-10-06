@@ -202,6 +202,32 @@ return [
                         'shipping-handling'  => 'শিপিং এবং হ্যান্ডলিং',
                         'tax-amount'         => 'ট্যাক্স পরিমাণ',
                         'tax'                => 'ট্যাক্স',
+                        'invoice-pdf' => [
+                            'invoice'           => 'চালান',
+                            'date'              => 'চালানের তারিখ',
+                            'invoice-id'        => 'চালান আইডি',
+                            'order-id'          => 'অর্ডার আইডি',
+                            'order-date'        => 'অর্ডারের তারিখ',
+                            'bill-to'           => 'বিল করা',
+                            'ship-to'           => 'প্রেরণ করুন',
+                            'contact'           => 'যোগাযোগ',
+                            'payment-method'    => 'পেমেন্ট পদ্ধতি',
+                            'shipping-method'   => 'প্রেরণ পদ্ধতি',
+                            'contact-number'    => 'যোগাযোগ নম্বর',
+                            'vat-number'        => 'ভ্যাট নম্বর',
+                            'payment-terms'     => 'পেমেন্ট শর্তাবলী',
+                            'bank-details'      => 'ব্যাঙ্ক বিশদ',
+                            'sku'               => 'SKU',
+                            'product-name'      => 'প্রোডাক্ট নাম',
+                            'price'             => 'মূল্য',
+                            'qty'               => 'পরিমাণ',
+                            'subtotal'          => 'সাবটোটাল',
+                            'tax-amount'        => 'করের পরিমাণ',
+                            'grand-total'       => 'মোট টোটাল',
+                            'shipping-handling' => 'শিপিং হ্যান্ডলিং',
+                            'tax'               => 'কর',
+                            'discount'          => 'ডিসকাউন্ট',
+                        ],
                     ],
 
                     'shipments' => [
@@ -513,20 +539,20 @@ return [
 
     'search' => [
         'title' => ':query এর জন্য অনুসন্ধান ফলাফল',
-    
+
         'images' => [
             'index' => [
                 'something-went-wrong' => 'কিছু ভুল হয়েছে, দয়া করে পরে আবার চেষ্টা করুন।',
                 'size-limit-error'     => 'সাইজ সীমা পার',
                 'only-images-allowed'  => 'শুধুমাত্র চিত্র (.jpeg, .jpg, .png, ..) অনুমোদিত।',
-            ],  
-    
+            ],
+
             'results' => [
                 'analysed-keywords' => 'বিশ্লেষণ করা শব্দ:',
             ],
         ],
     ],
-    
+
     'compare'  => [
         'already-added'      => 'আইটেম ইতিমধ্যে তুলনা তালিকায় যোগ করা হয়েছে',
         'delete-all'         => 'সব মুছুন',

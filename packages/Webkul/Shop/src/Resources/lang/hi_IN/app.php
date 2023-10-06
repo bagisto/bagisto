@@ -202,6 +202,32 @@ return [
                         'shipping-handling'  => 'Shipping & Handling',
                         'tax-amount'         => 'Tax Amount',
                         'tax'                => 'Tax',
+                        'invoice-pdf' => [
+                            'invoice'           => 'चालान',
+                            'date'              => 'चालान तिथि',
+                            'invoice-id'        => 'चालान आईडी',
+                            'order-id'          => 'आदेश आईडी',
+                            'order-date'        => 'आदेश तिथि',
+                            'bill-to'           => 'बिल करने वाले',
+                            'ship-to'           => 'शिप करने वाले',
+                            'contact'           => 'संपर्क',
+                            'payment-method'    => 'भुगतान विधि',
+                            'shipping-method'   => 'शिपिंग विधि',
+                            'contact-number'    => 'संपर्क नंबर',
+                            'vat-number'        => 'वैट नंबर',
+                            'payment-terms'     => 'भुगतान शर्तें',
+                            'bank-details'      => 'बैंक विवरण',
+                            'sku'               => 'एसकेयू',
+                            'product-name'      => 'उत्पाद नाम',
+                            'price'             => 'मूल्य',
+                            'qty'               => 'मात्रा',
+                            'subtotal'          => 'उपकुल',
+                            'tax-amount'        => 'कर राशि',
+                            'grand-total'       => 'कुल योग',
+                            'shipping-handling' => 'शिपिंग हैंडलिंग',
+                            'tax'               => 'कर',
+                            'discount'          => 'डिस्काउंट',
+                        ],
                     ],
 
                     'shipments' => [
@@ -519,8 +545,8 @@ return [
                 'something-went-wrong' => 'कुछ गलत हो गया, कृपया बाद में पुनः प्रयास करें।',
                 'size-limit-error'     => 'साइज़ सीमा त्रुटि',
                 'only-images-allowed'  => 'केवल छवियाँ (.jpeg, .jpg, .png, ..) अनुमति दी गई हैं।',
-            ],  
-    
+            ],
+
             'results' => [
                 'analysed-keywords' => 'विश्लेषित की गई कीवर्ड:',
             ],

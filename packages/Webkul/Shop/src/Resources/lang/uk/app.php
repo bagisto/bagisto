@@ -202,6 +202,32 @@ return [
                         'shipping-handling'  => 'Доставка и обработка',
                         'tax-amount'         => 'Сумма налога',
                         'tax'                => 'Налог',
+                        'invoice-pdf' => [
+                            'invoice'           => 'Рахунок',
+                            'date'              => 'Дата рахунку',
+                            'invoice-id'        => 'ID рахунку',
+                            'order-id'          => 'ID замовлення',
+                            'order-date'        => 'Дата замовлення',
+                            'bill-to'           => 'Виставлено на',
+                            'ship-to'           => 'Доставлено на',
+                            'contact'           => 'Контакт',
+                            'payment-method'    => 'Спосіб оплати',
+                            'shipping-method'   => 'Спосіб доставки',
+                            'contact-number'    => 'Номер контакту',
+                            'vat-number'        => 'ПДВ номер',
+                            'payment-terms'     => 'Умови оплати',
+                            'bank-details'      => 'Банківські реквізити',
+                            'sku'               => 'SKU',
+                            'product-name'      => 'Назва продукту',
+                            'price'             => 'Ціна',
+                            'qty'               => 'Кількість',
+                            'subtotal'          => 'Підсумок',
+                            'tax-amount'        => 'Сума податку',
+                            'grand-total'       => 'Загальна сума',
+                            'shipping-handling' => 'Доставка та обробка',
+                            'tax'               => 'Податок',
+                            'discount'          => 'Знижка',
+                        ],
                     ],
 
                     'shipments' => [
@@ -519,8 +545,8 @@ return [
                 'something-went-wrong' => 'Сталася помилка, будь ласка, спробуйте ще раз пізніше.',
                 'size-limit-error'     => 'Помилка обмеження розміру',
                 'only-images-allowed'  => 'Дозволені тільки зображення (.jpeg, .jpg, .png, ..).',
-            ],  
-    
+            ],
+
             'results' => [
                 'analysed-keywords' => 'Аналізовані ключові слова:',
             ],

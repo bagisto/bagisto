@@ -190,7 +190,7 @@ return [
                     'invoices'  => [
                         'invoices'           => '发票',
                         'individual-invoice' => '发票 #:invoice_id',
-                        'sku'                => 'SKU',
+                        'sku'                => '存貨單位',
                         'product-name'       => '产品名称',
                         'price'              => '价格',
                         'products-ordered'   => '订购的产品',
@@ -202,6 +202,32 @@ return [
                         'discount'           => '折扣',
                         'tax'                => '税金',
                         'print'              => '打印',
+                        'invoice-pdf' => [
+                            'invoice'           => '发票',
+                            'date'              => '发票日期',
+                            'invoice-id'        => '发票编号',
+                            'order-id'          => '订单编号',
+                            'order-date'        => '订单日期',
+                            'bill-to'           => '账单给',
+                            'ship-to'           => '发货至',
+                            'contact'           => '联系方式',
+                            'payment-method'    => '付款方式',
+                            'shipping-method'   => '发货方式',
+                            'contact-number'    => '联系电话',
+                            'vat-number'        => 'VAT号码',
+                            'payment-terms'     => '付款条款',
+                            'bank-details'      => '银行信息',
+                            'sku'               => '存貨單位',
+                            'product-name'      => '产品名称',
+                            'price'             => '价格',
+                            'qty'               => '数量',
+                            'subtotal'          => '小计',
+                            'tax-amount'        => '税额',
+                            'grand-total'       => '总计',
+                            'shipping-handling' => '运输和处理',
+                            'tax'               => '税',
+                            'discount'          => '折扣',
+                        ],
                     ],
 
                     'shipments' => [
@@ -519,8 +545,8 @@ return [
                 'something-went-wrong' => '出了点问题，请稍后重试。',
                 'size-limit-error'     => '尺寸限制错误',
                 'only-images-allowed'  => '仅允许图片（.jpeg、.jpg、.png 等）。',
-            ],  
-    
+            ],
+
             'results' => [
                 'analysed-keywords' => '分析关键字：',
             ],
