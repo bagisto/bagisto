@@ -2,11 +2,13 @@
 
 namespace Webkul\Core\Providers;
 
-use Illuminate\Contracts\Debug\ExceptionHandler;
-use Illuminate\Foundation\AliasLoader;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\AliasLoader;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Contracts\Debug\ExceptionHandler;
 use Webkul\Core\Core;
+use Webkul\Core\Visitor;
 use Webkul\Core\Exceptions\Handler;
 use Webkul\Core\Facades\Core as CoreFacade;
 use Webkul\Core\View\Compilers\BladeCompiler;
@@ -83,6 +85,15 @@ class CoreServiceProvider extends ServiceProvider
 
         $this->app->singleton('core', function () {
             return app()->make(Core::class);
+        });
+
+        /**
+         * Bind to service container.
+         */
+        $this->app->singleton('shetabit-visitor', function () {
+            $request = app(Request::class);
+
+            return new Visitor($request, config('visitor'));
         });
     }
 
