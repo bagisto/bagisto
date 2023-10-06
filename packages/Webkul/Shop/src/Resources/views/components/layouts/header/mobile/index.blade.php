@@ -34,41 +34,13 @@
                 </x-slot:header>
 
                 <x-slot:content>
-                    {{-- Account Profile Hero Section --}}
-                    <div class="grid grid-cols-[auto_1fr] gap-[15px] items-center mb-[30px] p-[10px] border border-[#E9E9E9] rounded-[12px]">
-                        <div class="">
-                            <img
-                                src="{{ auth()->user()?->image_url ??  bagisto_asset('images/user-placeholder.png') }}"
-                                class="w-[60px] h-[60px] rounded-full"
-                            >
-                        </div>
-
-                        @guest('customer')
-                            <a
-                                href="{{ route('shop.customer.session.create') }}"
-                                class="flex text-[16px] font-medium"
-                            >
-                                @lang('Sign up or Login')
-
-                                <i class="icon-double-arrow text-[24px] ml-[10px]"></i>
-                            </a>
-                        @endguest
-
-                        @auth('customer')
-                            <div class="flex flex-col gap-[10px] justify-between">
-                                <p class="text-[25px] font-mediums">Hello! {{ auth()->user()?->first_name }}</p>
-
-                                <p class="text-[#6E6E6E] ">{{ auth()->user()?->email }}</p>
-                            </div>
-                        @endauth
-                    </div>
-
-                    <div class="flex  items-center gap-x-[20px]">
+                    {{-- Localization & Currency Section --}}
+                    <div class="flex w-full items-center mb-[15px] gap-x-[20px] justify-between">
 
                         <x-shop::dropdown position="bottom-left">
                             <!-- Dropdown Toggler -->
-                            <x-slot:toggle>
-                                <div class="flex gap-[10px] cursor-pointer">
+                            <x-slot:toggle >
+                                <div class="flex items-center justify-between w-full gap-[10px] cursor-pointer">
                                     <span>
                                         {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
                                     </span>
@@ -112,6 +84,35 @@
                             </x-slot:content>
                         </x-shop::dropdown>
 
+                    </div>
+
+                    {{-- Account Profile Hero Section --}}
+                    <div class="grid grid-cols-[auto_1fr] gap-[15px] items-center mb-[15px] p-[10px] border border-[#E9E9E9] rounded-[12px]">
+                        <div class="">
+                            <img
+                                src="{{ auth()->user()?->image_url ??  bagisto_asset('images/user-placeholder.png') }}"
+                                class="w-[60px] h-[60px] rounded-full"
+                            >
+                        </div>
+
+                        @guest('customer')
+                            <a
+                                href="{{ route('shop.customer.session.create') }}"
+                                class="flex text-[16px] font-medium"
+                            >
+                                @lang('Sign up or Login')
+
+                                <i class="icon-double-arrow text-[24px] ml-[10px]"></i>
+                            </a>
+                        @endguest
+
+                        @auth('customer')
+                            <div class="flex flex-col gap-[10px] justify-between">
+                                <p class="text-[25px] font-mediums">Hello! {{ auth()->user()?->first_name }}</p>
+
+                                <p class="text-[#6E6E6E] ">{{ auth()->user()?->email }}</p>
+                            </div>
+                        @endauth
                     </div>
 
                     {{-- Mobile category view --}}
