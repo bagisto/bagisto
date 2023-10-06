@@ -53,6 +53,8 @@ class ProductsCategoriesProxyController extends Controller
         $category = $this->categoryRepository->findByPath($slugOrPath);
 
         if ($category) {
+            visitor()->visit($category);
+
             return view('shop::categories.view', [
                 'category' => $category,
                 'params'   => [
@@ -73,6 +75,8 @@ class ProductsCategoriesProxyController extends Controller
         ) {
             abort(404);
         }
+
+        visitor()->visit($product);
 
         return view('shop::products.view', compact('product'));
     }
