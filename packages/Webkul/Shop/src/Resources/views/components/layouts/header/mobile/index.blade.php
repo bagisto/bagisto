@@ -35,12 +35,12 @@
 
                 <x-slot:content>
                     {{-- Localization & Currency Section --}}
-                    <div class="flex w-full items-center mb-[15px] gap-x-[20px] justify-between">
+                    <div class="flex w-full justify-between items-center mb-[15px] gap-x-[20px]">
 
                         <x-shop::dropdown position="bottom-left">
                             <!-- Dropdown Toggler -->
-                            <x-slot:toggle >
-                                <div class="flex items-center justify-between w-full gap-[10px] cursor-pointer">
+                            <x-slot:toggle>
+                                <div class="flex w-full justify-between items-center gap-[10px] cursor-pointer">
                                     <span>
                                         {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
                                     </span>
@@ -74,7 +74,7 @@
                                         {{ core()->getCurrentChannel()->locales()->orderBy('name')->where('code', app()->getLocale())->value('name') }}
                                     </span>
 
-                                    <span class="icon-arrow-down text-[24px]"></span>
+                                    <span class="text-[24px] icon-arrow-down"></span>
                                 </div>
                             </x-slot:toggle>
 
