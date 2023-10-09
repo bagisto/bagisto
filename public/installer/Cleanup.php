@@ -2,6 +2,7 @@
     function delete_files($target) {
         if(is_dir($target)){
             $files = glob( $target . '*', GLOB_MARK );
+
             foreach( $files as $file ){
                 delete_files( $file );
             }
@@ -14,6 +15,7 @@
     
     $data['success'] = true;
     $data['message'] = 'Success!';
+    
     echo json_encode($data);
     sleep(2);
     

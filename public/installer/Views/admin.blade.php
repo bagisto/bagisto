@@ -64,24 +64,28 @@
             })
                 // using the done promise callback
             .done(function(data) {
-                if (!data.success) {
+                if (! data.success) {
                     // handle errors
                     if (data.errors.admin_email) {
                         $('#admin_email').addClass('has-error');
                         $('#admin_email').append('<div class="form-error">' + data.errors.admin_email + '</div>');
                     }
+
                     if (data.errors.admin_name) {
                         $('#admin_name').addClass('has-error');
                         $('#admin_name').append('<div class="form-error">' + data.errors.admin_name + '</div>');
                     }
+
                     if (data.errors.admin_password) {
                         $('#admin_password').addClass('has-error');
                         $('#admin_password').append('<div class="form-error">' + data.errors.admin_password + '</div>');
                     }
+
                     if (data.errors.admin_re_password) {
                         $('#admin_re_password').addClass('has-error');
                         $('#admin_re_password').append('<div class="form-error">' + data.errors.admin_re_password + '</div>');
                     }
+
                     if (data.errors.password_match) {
                         $('#admin_re_password').addClass('has-error');
                         $('#admin_password').addClass('has-error');
@@ -101,12 +105,13 @@
                     // Database support error
                     if (data['support_error']) {
                         result = confirm(data['support_error']);
+                        
                         if (result) {
                             $('#admin').hide();
                             $('#email').show();
                         }
                     }
-                    if (!data['connection'] && !data['insert_fail'] && !data['support_error']) {
+                    if (! data['connection'] && ! data['insert_fail'] && ! data['support_error']) {
                         $('#admin').hide();
                         $('#email').show();
                     }
