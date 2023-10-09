@@ -200,7 +200,17 @@ class ProductDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'type',
             'label'      => trans('admin::app.catalog.products.index.datagrid.type'),
-            'type'       => 'string',
+            'type'       => 'dropdown',
+            'options'    => [
+                'type' => 'basic',
+
+                'params' => [
+                    'options' => collect(config('product_types'))
+                        ->map(fn ($type) => ['label' => $type['name'], 'value' => trans('admin::app.catalog.products.index.create.' . $type['key'])])
+                        ->values()
+                        ->toArray(),
+                ],
+            ],
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
