@@ -106,7 +106,7 @@
         </div>
 
         <p class="mt-[30px] mb-[15px] text-[#6E6E6E] text-xs text-center">
-            {{ trans('shop::app.customers.forgot-password.footer',['currentYear'=> date('Y') ]) }}
+            {{ trans('shop::app.customers.forgot-password.footer',['current_year'=> date('Y') ]) }}
         </p>
     </div>
 
