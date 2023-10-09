@@ -46,7 +46,7 @@ class UpdateCreateVisitIndex implements ShouldQueue
             'visitor_type',
         ]))->latest()->first();
 
-        if ($lastVisit && $lastVisit->created_at->isToday()) {
+        if ($lastVisit?->created_at->isToday()) {
             return;
         }
 
