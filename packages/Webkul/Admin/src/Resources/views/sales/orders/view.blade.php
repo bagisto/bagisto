@@ -39,7 +39,7 @@
                             @break
 
                         @case('canceled')
-                            <span class="label-canceled text-[14px] mx-[5px]">
+                            <span class="label-cancelled text-[14px] mx-[5px]">
                                 @lang('admin::app.sales.orders.view.canceled')    
                             </span>
                             @break

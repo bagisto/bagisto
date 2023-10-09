@@ -40,7 +40,7 @@
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
 
                 {{--Content --}}
-                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                         @lang('admin::app.cms.create.description')
                     </p>
@@ -70,7 +70,7 @@
                 </div>
 
                 {{-- SEO Input Fields --}}
-                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                         @lang('admin::app.cms.create.seo')
                     </p>
