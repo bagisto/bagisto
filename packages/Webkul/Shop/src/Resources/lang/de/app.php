@@ -7,7 +7,7 @@ return [
             'email-not-exist'      => 'Wir konnten keinen Benutzer mit dieser E-Mail-Adresse finden.',
             'email'                => 'E-Mail',
             'forgot-password-text' => 'Wenn Sie Ihr Passwort vergessen haben, stellen Sie es wieder her, indem Sie Ihre E-Mail-Adresse eingeben.',
-            'footer'               => '© Copyright 2010 - 2022, Webkul Software (in Indien registriert). Alle Rechte vorbehalten.',
+            'footer'               => '© Copyright 2010 - :currentYear, Webkul Software (in Indien registriert). Alle Rechte vorbehalten.',
             'page-title'           => 'Passwort vergessen?',
             'reset-link-sent'      => 'Wir haben Ihnen den Link zum Zurücksetzen Ihres Passworts per E-Mail gesendet.',
             'submit'               => 'Passwort zurücksetzen',
@@ -19,7 +19,7 @@ return [
             'back-link-title'  => 'Zurück zur Anmeldung',
             'confirm-password' => 'Passwort bestätigen',
             'email'            => 'Registrierte E-Mail',
-            'footer'           => '© Copyright 2010 - 2022, Webkul Software (in Indien registriert). Alle Rechte vorbehalten.',
+            'footer'           => '© Copyright 2010 - :currentYear, Webkul Software (in Indien registriert). Alle Rechte vorbehalten.',
             'password'         => 'Passwort',
             'submit-btn-title' => 'Passwort zurücksetzen',
             'title'            => 'Passwort zurücksetzen',
@@ -30,7 +30,7 @@ return [
             'create-your-account' => 'Erstellen Sie Ihr Konto',
             'email'               => 'E-Mail',
             'form-login-text'     => 'Wenn Sie bereits ein Konto haben, melden Sie sich mit Ihrer E-Mail-Adresse an.',
-            'footer'              => '© Copyright 2010 - 2022, Webkul Software (in Indien registriert). Alle Rechte vorbehalten.',
+            'footer'              => '© Copyright 2010 - :currentYear, Webkul Software (in Indien registriert). Alle Rechte vorbehalten.',
             'forgot-pass'         => 'Passwort vergessen?',
             'invalid-credentials' => 'Bitte überprüfen Sie Ihre Anmeldedaten und versuchen Sie es erneut.',
             'not-activated'       => 'Ihre Aktivierung erfordert die Zustimmung des Administrators',
@@ -48,7 +48,7 @@ return [
             'confirm-pass'                => 'Passwort bestätigen',
             'email'                       => 'E-Mail',
             'first-name'                  => 'Vorname',
-            'footer'                      => '© Copyright 2010 - 2022, Webkul Software (in Indien registriert). Alle Rechte vorbehalten.',
+            'footer'                      => '© Copyright 2010 - :currentYear, Webkul Software (in Indien registriert). Alle Rechte vorbehalten.',
             'form-signup-text'            => 'Wenn Sie neu in unserem Geschäft sind, freuen wir uns, Sie als Mitglied begrüßen zu dürfen.',
             'last-name'                   => 'Nachname',
             'page-title'                  => 'Benutzer werden',
@@ -412,12 +412,12 @@ return [
             'grouped' => [
                 'starting-at' => 'Ab',
             ],
-    
+
             'configurable' => [
                 'as-low-as' => 'Ab',
             ],
         ],
-    
+
         'sort-by' => [
             'title'   => 'Sortieren nach',
             'options' => [
@@ -429,34 +429,34 @@ return [
                 'oldest-first'    => 'Älteste zuerst',
             ],
         ],
-    
+
         'view' => [
             'type' => [
                 'configurable' => [
                     'select-options'       => 'Bitte wählen Sie eine Option aus',
                     'select-above-options' => 'Bitte wählen Sie die oben stehenden Optionen aus',
                 ],
-    
+
                 'bundle' => [
                     'none' => 'Keine',
                 ],
-    
+
                 'downloadable' => [
                     'links'   => 'Links',
                     'sample'  => 'Beispiel',
                     'samples' => 'Beispiele',
                 ],
-    
+
                 'grouped' => [
                     'name' => 'Name',
                 ],
             ],
-    
+
             'gallery' => [
                 'product-image'   => 'Produktbild',
                 'thumbnail-image' => 'Vorschaubild',
             ],
-    
+
             'reviews' => [
                 'attachments'      => 'Anhänge',
                 'comment'          => 'Kommentar',
@@ -472,7 +472,7 @@ return [
                 'write-a-review'   => 'Eine Bewertung schreiben',
                 'name'             => 'Name',
             ],
-    
+
             'add-to-cart'            => 'In den Warenkorb legen',
             'add-to-compare'         => 'Produkt zur Vergleichsliste hinzugefügt.',
             'already-in-compare'     => 'Das Produkt ist bereits in der Vergleichsliste enthalten.',
@@ -485,13 +485,13 @@ return [
             'tax-inclusive'          => 'Inklusive aller Steuern',
             'up-sell-title'          => 'Wir haben auch andere Produkte, die Ihnen gefallen könnten!',
         ],
-    
+
         'type' => [
             'abstract' => [
                 'offers' => 'Kaufen Sie :qty für :price je Stück und sparen Sie :discount%',
             ],
         ],
-    ],      
+    ],
 
     'categories' => [
         'filters' => [
@@ -513,20 +513,20 @@ return [
 
     'search' => [
         'title' => 'Suchergebnisse für: :query',
-    
+
         'images' => [
             'index' => [
                 'something-went-wrong' => 'Etwas ist schiefgelaufen, bitte versuchen Sie es später erneut.',
                 'size-limit-error'     => 'Größenbeschränkungsfehler',
                 'only-images-allowed'  => 'Nur Bilder (.jpeg, .jpg, .png, ..) sind erlaubt.',
-            ],  
-    
+            ],
+
             'results' => [
                 'analysed-keywords' => 'Analysierte Schlüsselwörter:',
             ],
         ],
     ],
-    
+
     'compare' => [
         'already-added'      => 'Artikel ist bereits zur Vergleichsliste hinzugefügt',
         'delete-all'         => 'Alle löschen',
@@ -546,7 +546,7 @@ return [
             'title'         => 'Bestellung erfolgreich platziert',
             'thanks'        => 'Vielen Dank für Ihre Bestellung!',
         ],
-    
+
         'cart' => [
             'continue-to-checkout'      => 'Weiter zur Kasse',
             'item-add-to-cart'          => 'Artikel erfolgreich hinzugefügt',
@@ -563,7 +563,7 @@ return [
             'suspended-account-message' => 'Ihr Konto wurde gesperrt.',
             'select-hourly-duration'    => 'Wählen Sie eine Stundendauer von einer Stunde aus.',
             'success-remove'            => 'Artikel wurde erfolgreich aus dem Warenkorb entfernt.',
-    
+
             'index' => [
                 'cart'                     => 'Warenkorb',
                 'continue-shopping'        => 'Einkauf fortsetzen',
@@ -584,7 +584,7 @@ return [
                 'update-cart'              => 'Warenkorb aktualisieren',
                 'view-cart'                => 'Warenkorb anzeigen',
             ],
-    
+
             'coupon'   => [
                 'applied'         => 'Gutschein angewendet',
                 'apply'           => 'Gutschein anwenden',
@@ -600,7 +600,7 @@ return [
                 'success-apply'   => 'Gutscheincode erfolgreich angewendet.',
                 'subtotal'        => 'Zwischensumme',
             ],
-    
+
             'mini-cart' => [
                 'continue-to-checkout' => 'Weiter zur Kasse',
                 'empty-cart'           => 'Ihr Warenkorb ist leer',
@@ -611,7 +611,7 @@ return [
                 'subtotal'             => 'Zwischensumme',
                 'view-cart'            => 'Warenkorb anzeigen',
             ],
-    
+
             'summary' => [
                 'cart-summary'        => 'Warenkorbzusammenfassung',
                 'delivery-charges'    => 'Liefergebühren',
@@ -623,7 +623,7 @@ return [
                 'tax'                 => 'Steuer',
             ],
         ],
-    
+
         'onepage' => [
             'addresses' => [
                 'billing' => [
@@ -645,11 +645,11 @@ return [
                     'save-address'         => 'Diese Adresse speichern',
                     'telephone'            => 'Telefon',
                 ],
-    
+
                 'index' => [
                     'confirm' => 'Bestätigen',
                 ],
-    
+
                 'shipping' => [
                     'add-new-address'  => 'Neue Adresse hinzufügen',
                     'back'             => 'Zurück',
@@ -670,7 +670,7 @@ return [
                     'telephone'        => 'Telefon',
                 ],
             ],
-    
+
             'coupon' => [
                 'applied'         => 'Gutschein angewendet',
                 'applied-coupon'  => 'Angewendeter Gutschein',
@@ -684,20 +684,20 @@ return [
                 'sub-total'       => 'Zwischensumme',
                 'subtotal'        => 'Zwischensumme',
             ],
-    
+
             'index' => [
                 'checkout' => 'Zur Kasse',
                 'home'     => 'Startseite',
             ],
-    
+
             'payment' => [
                 'payment-method' => 'Zahlungsmethode',
             ],
-    
+
             'shipping' => [
                 'shipping-method' => 'Versandart',
             ],
-    
+
             'summary' => [
                 'cart-summary'     => 'Warenkorbzusammenfassung',
                 'delivery-charges' => 'Liefergebühren',

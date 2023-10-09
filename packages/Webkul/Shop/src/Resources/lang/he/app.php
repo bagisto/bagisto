@@ -7,7 +7,7 @@ return [
             'email-not-exist'      => 'אנחנו לא מוצאים משתמש עם כתובת הדוא"ל הזו.',
             'email'                => 'אימייל',
             'forgot-password-text' => 'אם שכחת את הסיסמה שלך, ניתן לשחזר אותה על ידי הזנת כתובת האימייל שלך.',
-            'footer'               => '© זכויות יוצרים 2010 - 2022, Webkul Software (רשומה בהודו). כל הזכויות שמורות.',
+            'footer'               => '© זכויות יוצרים 2010 - :currentYear, Webkul Software (רשומה בהודו). כל הזכויות שמורות.',
             'page-title'           => 'שכחת את הסיסמה שלך?',
             'reset-link-sent'      => 'שלחנו לך את הקישור לאיפוס הסיסמה באמצעות האימייל שלך.',
             'submit'               => 'איפוס סיסמה',
@@ -19,7 +19,7 @@ return [
             'back-link-title'  => 'חזרה להתחברות',
             'confirm-password' => 'אימות סיסמה',
             'email'            => 'אימייל רשום',
-            'footer'           => '© זכויות יוצרים 2010 - 2022, Webkul Software (רשומה בהודו). כל הזכויות שמורות.',
+            'footer'           => '© זכויות יוצרים 2010 - :currentYear, Webkul Software (רשומה בהודו). כל הזכויות שמורות.',
             'password'         => 'סיסמה',
             'submit-btn-title' => 'איפוס סיסמה',
             'title'            => 'איפוס סיסמה',
@@ -30,7 +30,7 @@ return [
             'create-your-account' => 'צור את החשבון שלך',
             'email'               => 'אימייל',
             'form-login-text'     => 'אם יש לך חשבון, התחבר עם כתובת האימייל שלך.',
-            'footer'              => '© זכויות יוצרים 2010 - 2022, Webkul Software (רשומה בהודו). כל הזכויות שמורות.',
+            'footer'              => '© זכויות יוצרים 2010 - :currentYear, Webkul Software (רשומה בהודו). כל הזכויות שמורות.',
             'forgot-pass'         => 'שכחת סיסמה?',
             'invalid-credentials' => 'אנא בדוק את הפרטים שלך ונסה שוב.',
             'not-activated'       => 'הפעלת החשבון שלך מחכה לאישור מנהל',
@@ -48,7 +48,7 @@ return [
             'confirm-pass'                => 'אימות סיסמה',
             'email'                       => 'אימייל',
             'first-name'                  => 'שם פרטי',
-            'footer'                      => '© זכויות יוצרים 2010 - 2022, Webkul Software (רשומה בהודו). כל הזכויות שמורות.',
+            'footer'                      => '© זכויות יוצרים 2010 - :currentYear, Webkul Software (רשומה בהודו). כל הזכויות שמורות.',
             'form-signup-text'            => 'אם אתה חדש בחנות שלנו, אנחנו שמחים לראותך כחבר.',
             'last-name'                   => 'שם משפחה',
             'page-title'                  => 'הצטרף כלקוח',
@@ -66,7 +66,7 @@ return [
 
         'account' => [
             'home' => 'בית',
-        
+
             'profile' => [
                 'current-password'        => 'סיסמה נוכחית',
                 'confirm-password'        => 'אימות סיסמה',
@@ -95,7 +95,7 @@ return [
                 'unmatch'                 => 'הסיסמה הישנה אינה תואמת.',
                 'wrong-password'          => 'סיסמה שגויה!',
             ],
-        
+
             'addresses' => [
                 'add-address'      => 'הוסף כתובת',
                 'address-1'        => 'כתובת 1',
@@ -125,17 +125,17 @@ return [
                 'title'            => 'כתובת',
                 'vat-id'           => 'מזהה מס ערך (VAT ID)',
             ],
-        
+
             'orders' => [
                 'order-id'   => 'מספר הזמנה',
                 'order'      => 'הזמנה',
                 'order-date' => 'תאריך הזמנה',
                 'title'      => 'הזמנות',
                 'total'      => 'סכום כולל',
-        
+
                 'status' => [
                     'title' => 'סטטוס',
-        
+
                     'options' => [
                         'completed'       => 'הושלם',
                         'canceled'        => 'בוטל',
@@ -146,10 +146,10 @@ return [
                         'pending-payment' => 'ממתין לתשלום',
                     ],
                 ],
-        
+
                 'action'      => 'פעולה',
                 'empty-order' => 'טרם ביצעת הזמנה',
-        
+
                 'view' => [
                     'billing-address'    => 'כתובת לחיוב',
                     'cancel-btn-title'   => 'בטל',
@@ -162,7 +162,7 @@ return [
                     'shipping-method'    => 'שיטת משלוח',
                     'total'              => 'סכום כולל',
                     'title'              => 'צפייה',
-        
+
                     'information' => [
                         'discount'          => 'הנחה',
                         'grand-total'       => 'סכום כולל',
@@ -186,7 +186,7 @@ return [
                         'total-refunded'    => 'סך הכל הוחזר',
                         'total-due'         => 'סכום לתשלום',
                     ],
-        
+
                     'invoices' => [
                         'discount'           => 'הנחה',
                         'grand-total'        => 'סכום כולל',
@@ -203,7 +203,7 @@ return [
                         'tax-amount'         => 'סכום המע"מ',
                         'tax'                => 'מע"מ',
                     ],
-        
+
                     'shipments' => [
                         'individual-shipment' => 'שליחה #:shipment_id',
                         'product-name'        => 'שם המוצר',
@@ -213,7 +213,7 @@ return [
                         'subtotal'            => 'סכום חלקי',
                         'tracking-number'     => 'מספר מעקב',
                     ],
-        
+
                     'refunds' => [
                         'adjustment-refund' => 'החזר התאמה',
                         'adjustment-fee'    => 'עמלת התאמה',
@@ -233,12 +233,12 @@ return [
                     ],
                 ],
             ],
-        
+
             'reviews' => [
                 'empty-review' => 'טרם כתבת ביקורת על מוצר.',
                 'title'        => 'ביקורות',
             ],
-        
+
             'downloadable-products' => [
                 'date'                => 'תאריך',
                 'download-error'      => 'קישור הורדה פג תוקף.',
@@ -251,7 +251,7 @@ return [
                 'status'              => 'סטטוס',
                 'title'               => 'כותרת',
             ],
-        
+
             'wishlist' => [
                 'color'              => 'צבע',
                 'delete-all'         => 'מחק הכל',
@@ -270,7 +270,7 @@ return [
                 'see-details'        => 'ראה פרטים',
                 'title'              => 'רשימת משאלות',
             ],
-        ],        
+        ],
     ],
 
     'components' => [
@@ -412,12 +412,12 @@ return [
             'grouped' => [
                 'starting-at' => 'החל מ-',
             ],
-    
+
             'configurable' => [
                 'as-low-as' => 'החל מ-',
             ],
         ],
-    
+
         'sort-by' => [
             'title'   => 'מיין לפי',
             'options' => [
@@ -429,34 +429,34 @@ return [
                 'oldest-first'    => 'הישן ביותר תחילה',
             ],
         ],
-    
+
         'view' => [
             'type' => [
                 'configurable' => [
                     'select-options'       => 'אנא בחר אפשרות',
                     'select-above-options' => 'אנא בחר אפשרויות למעלה',
                 ],
-    
+
                 'bundle' => [
                     'none' => 'אין',
                 ],
-    
+
                 'downloadable' => [
                     'links'   => 'קישורים',
                     'sample'  => 'דוגמה',
                     'samples' => 'דוגמאות',
                 ],
-    
+
                 'grouped' => [
                     'name' => 'שם',
                 ],
             ],
-    
+
             'gallery' => [
                 'product-image'   => 'תמונת המוצר',
                 'thumbnail-image' => 'תמונה ממוזערת',
             ],
-    
+
             'reviews' => [
                 'attachments'      => 'קבצים מצורפים',
                 'comment'          => 'תגובה',
@@ -472,7 +472,7 @@ return [
                 'title'            => 'כותרת',
                 'write-a-review'   => 'כתוב ביקורת',
             ],
-    
+
             'add-to-cart'            => 'הוסף לעגלת הקניות',
             'add-to-compare'         => 'המוצר התווסף להשוואה.',
             'already-in-compare'     => 'המוצר כבר נמצא בהשוואה.',
@@ -485,13 +485,13 @@ return [
             'tax-inclusive'          => 'כולל מס',
             'up-sell-title'          => 'מצאנו מוצרים אחרים שעשויים לעניין אותך!',
         ],
-    
+
         'type' => [
             'abstract' => [
                 'offers' => 'קנה :qty במחיר של :price לכל יחידה וחסוך :discount%',
             ],
         ],
-    ],       
+    ],
 
     'categories' => [
         'filters' => [
@@ -519,8 +519,8 @@ return [
                 'something-went-wrong' => 'משהו השתבש, נסה שוב מאוחר יותר.',
                 'size-limit-error'     => 'שגיאת הגבלת גודל',
                 'only-images-allowed'  => 'מותרות רק תמונות (.jpeg, .jpg, .png, ..).',
-            ],  
-    
+            ],
+
             'results' => [
                 'analysed-keywords' => 'מילות מפתח שנבדקו:',
             ],
@@ -563,7 +563,7 @@ return [
             'suspended-account-message' => 'החשבון שלך הושבת.',
             'select-hourly-duration'    => 'בחר משך זמן של שעה אחת.',
             'success-remove'            => 'הפריט הוסר בהצלחה מהעגלה.',
-        
+
             'index' => [
                 'cart'                     => 'עגלת קניות',
                 'continue-shopping'        => 'המשך לקנות',
@@ -584,7 +584,7 @@ return [
                 'update-cart'              => 'עדכון עגלת הקניות',
                 'view-cart'                => 'צפה בעגלת הקניות',
             ],
-        
+
             'coupon'   => [
                 'applied'         => 'הקופון הוחל',
                 'apply'           => 'החל קופון',
@@ -600,7 +600,7 @@ return [
                 'success-apply'   => 'קוד הקופון הוחל בהצלחה.',
                 'subtotal'        => 'סכום ביניים',
             ],
-        
+
             'mini-cart' => [
                 'continue-to-checkout' => 'המשך לתשלום',
                 'empty-cart'           => 'עגלת הקניות שלך ריקה',
@@ -611,7 +611,7 @@ return [
                 'subtotal'             => 'סכום ביניים',
                 'view-cart'            => 'צפה בעגלת הקניות',
             ],
-        
+
             'summary' => [
                 'cart-summary'        => 'סיכום העגלה',
                 'delivery-charges'    => 'דמי משלוח',
@@ -622,7 +622,7 @@ return [
                 'sub-total'           => 'סכום ביניים',
                 'tax'                 => 'מס',
             ],
-        ],        
+        ],
 
         'onepage' => [
             'addresses' => [
@@ -718,36 +718,36 @@ return [
             'verify-email'        => 'אמת את חשבון האימייל שלך',
         ],
     ],
-    
+
     'errors' => [
         'go-to-home' => 'עבור לדף הבית',
-    
+
         '404' => [
             'description' => 'אופס! הדף שאתה מחפש בחופשה. נראה שלא הצלחנו למצוא את מה שחיפשת.',
             'title'       => 'דף לא נמצא 404',
         ],
-    
+
         '401' => [
             'description' => 'אופס! נראה שאין לך הרשאה לגשת לדף זה. נראה שיש לך חוסר באישורים הנדרשים.',
             'title'       => 'אין אישור 401',
         ],
-    
+
         '403' => [
             'description' => 'אופס! דף זה אסור. נראה שאין לך הרשאות הדרושות להצגת התוכן הזה.',
             'title'       => 'הוגן 403',
         ],
-    
+
         '500' => [
             'description' => 'אופס! משהו השתבש. נראה שיש לנו בעיות בטעינת הדף שאתה מחפש.',
             'title'       => 'שגיאת שרת פנימית 500',
         ],
-    
+
         '503' => [
             'description' => 'אופס! נראה שאנחנו מועדפים למטה לתחזוקה זמנית. אנא נסה שוב מאוחר יותר.',
             'title'       => 'שירות לא זמין 503',
         ],
     ],
-    
+
     'layouts' => [
         'address'               => 'כתובת',
         'downloadable-products' => 'מוצרים להורדה',
@@ -757,17 +757,17 @@ return [
         'reviews'               => 'ביקורות',
         'wishlist'              => 'רשימת משאלות',
     ],
-    
+
     'subscription' => [
         'already'             => 'כבר רשום לניוזלטר שלנו.',
         'subscribe-success'   => 'נרשמת בהצלחה לניוזלטר שלנו.',
         'unsubscribe-success' => 'בוצע הסרה מהניוזלטר שלנו בהצלחה.',
     ],
-    
+
     'emails' => [
         'dear'   => 'יקר :customer_name',
         'thanks' => 'אם אתה זקוק לעזרה בכל סוג שהוא, אנא פנה אלינו ב-<a href=":link" style=":style">:email</a>.<br/>תודה!',
-    
+
         'customers' => [
             'registration' => [
                 'description' => 'חשבונך נוצר כעת בהצלחה ואתה יכול להתחבר באמצעות כתובת האימייל ופרטי הסיסמה שלך. לאחר ההתחברות, תוכל לגשת לשירותים נוספים, כולל בדיקת הזמנות קודמות, רשימת המשאלות ועריכת פרטי החשבון שלך.',
@@ -775,32 +775,32 @@ return [
                 'subject'     => 'רישום לקוח חדש',
                 'sign-in'     => 'התחבר',
             ],
-    
+
             'forgot-password' => [
                 'description'    => 'אתה מקבל אימייל זה מכיוון שקיבלנו בקשה לאיפוס סיסמה עבור החשבון שלך.',
                 'greeting'       => 'שכחת סיסמה!',
                 'reset-password' => 'איפוס סיסמה',
                 'subject'        => 'אימייל איפוס סיסמה',
             ],
-    
+
             'update-password' => [
                 'description' => 'אתה מקבל אימייל זה מכיוון שעדכנת את הסיסמה שלך.',
                 'greeting'    => 'סיסמה עודכנה בהצלחה!',
                 'subject'     => 'עדכון סיסמה',
             ],
-    
+
             'verification' => [
                 'description'  => 'אנא לחץ על הלחצן למטה כדי לאמת את כתובת האימייל שלך.',
                 'greeting'     => 'ברוך הבא!',
                 'subject'      => 'אימייל אימות לחשבון',
                 'verify-email' => 'אמת כתובת אימייל',
             ],
-    
+
             'commented' => [
                 'description' => 'ההודעה היא - :note',
                 'subject'     => 'הוספת הערה חדשה',
             ],
-    
+
             'subscribed' => [
                 'description' => 'מזל טוב וברוך הבא לקהילת הניוזלטר שלנו. תהנה מהעדכונים והדילים האחרונים שלנו!',
                 'greeting'    => 'ברוך הבא לניוזלטר שלנו!',
@@ -808,7 +808,7 @@ return [
                 'unsubscribe' => 'הסר מהרשימה',
             ],
         ],
-    
+
         'orders' => [
             'created' => [
                 'greeting' => 'תודה על ההזמנה שלך :order_id שנעשתה בתאריך :created_at',
@@ -816,40 +816,40 @@ return [
                 'summary'  => 'סיכום ההזמנה',
                 'title'    => 'אישור הזמנה!',
             ],
-    
+
             'invoiced' => [
                 'greeting' => 'החשבונית שלך מס #:invoice_id עבור ההזמנה :order_id נוצרה בתאריך :created_at',
                 'subject'  => 'אישור חשבונית חדשה',
                 'summary'  => 'סיכום החשבונית',
                 'title'    => 'אישור חשבונית!',
             ],
-    
+
             'shipped' => [
                 'greeting' => 'ההזמנה שלך :order_id שנעשתה בתאריך :created_at נשלחה',
                 'subject'  => 'אישור משלוח חדש',
                 'summary'  => 'סיכום המשלוח',
                 'title'    => 'הזמנה שנשלחה!',
             ],
-    
+
             'refunded' => [
                 'greeting' => 'ההחזר נפתח עבור :order_id שנעשתה בתאריך :created_at',
                 'subject'  => 'אישור החזר חדש',
                 'summary'  => 'סיכום ההחזר',
                 'title'    => 'הזמנה מוחזרת!',
             ],
-    
+
             'canceled' => [
                 'greeting' => 'ההזמנה שלך :order_id שנעשתה בתאריך :created_at בוטלה',
                 'subject'  => 'הזמנה מבוטלת חדשה',
                 'summary'  => 'סיכום ההזמנה',
                 'title'    => 'הזמנה בוטלה!',
             ],
-    
+
             'commented' => [
                 'subject' => 'הוספת הערה חדשה',
                 'title'   => 'הוספת הערה חדשה להזמנתך :order_id שנעשתה בתאריך :created_at',
             ],
-    
+
             'billing-address'   => 'כתובת לחיוב',
             'contact'           => 'פרטי יצירת קשר',
             'carrier'           => 'ספק שילוח',
@@ -867,5 +867,5 @@ return [
             'tracking-number'   => 'מספר מעקב: :tracking_number',
             'tax'               => 'מעמ',
         ],
-    ],    
+    ],
 ];

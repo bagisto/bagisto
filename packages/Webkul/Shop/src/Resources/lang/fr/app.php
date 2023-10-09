@@ -7,7 +7,7 @@ return [
             'email-not-exist'      => 'Nous ne pouvons pas trouver d\'utilisateur avec cette adresse e-mail',
             'email'                => 'E-mail',
             'forgot-password-text' => 'Si vous avez oublié votre mot de passe, récupérez-le en entrant votre adresse e-mail.',
-            'footer'               => '© Droits d’auteur 2010 - 2022, Webkul Software (enregistré en Inde). Tous droits réservés.',
+            'footer'               => '© Droits d’auteur 2010 - :currentYear, Webkul Software (enregistré en Inde). Tous droits réservés.',
             'page-title'           => 'Vous avez oublié votre mot de passe ?',
             'reset-link-sent'      => 'Nous vous avons envoyé par e-mail le lien de réinitialisation de votre mot de passe.',
             'submit'               => 'Réinitialiser le mot de passe',
@@ -19,7 +19,7 @@ return [
             'back-link-title'  => 'Retour à la connexion',
             'confirm-password' => 'Confirmer le mot de passe',
             'email'            => 'E-mail enregistré',
-            'footer'           => '© Droits d’auteur 2010 - 2022, Webkul Software (enregistré en Inde). Tous droits réservés.',
+            'footer'           => '© Droits d’auteur 2010 - :currentYear, Webkul Software (enregistré en Inde). Tous droits réservés.',
             'password'         => 'Mot de passe',
             'submit-btn-title' => 'Réinitialiser le mot de passe',
             'title'            => 'Réinitialiser le mot de passe',
@@ -30,7 +30,7 @@ return [
             'create-your-account' => 'Créez votre compte',
             'email'               => 'E-mail',
             'form-login-text'     => 'Si vous avez un compte, connectez-vous avec votre adresse e-mail.',
-            'footer'              => '© Droits d’auteur 2010 - 2022, Webkul Software (enregistré en Inde). Tous droits réservés.',
+            'footer'              => '© Droits d’auteur 2010 - :currentYear, Webkul Software (enregistré en Inde). Tous droits réservés.',
             'forgot-pass'         => 'Mot de passe oublié ?',
             'invalid-credentials' => "Veuillez vérifier vos informations d'identification et réessayer.",
             'not-activated'       => "Votre activation nécessite l'approbation de l'administrateur",
@@ -48,7 +48,7 @@ return [
             'confirm-pass'                => 'Confirmer le mot de passe',
             'email'                       => 'E-mail',
             'first-name'                  => 'Prénom',
-            'footer'                      => '© Droits d’auteur 2010 - 2022, Webkul Software (enregistré en Inde). Tous droits réservés.',
+            'footer'                      => '© Droits d’auteur 2010 - :currentYear, Webkul Software (enregistré en Inde). Tous droits réservés.',
             'form-signup-text'            => 'Si vous êtes nouveau dans notre magasin, nous sommes ravis de vous avoir comme membre.',
             'last-name'                   => 'Nom de famille',
             'page-title'                  => 'Devenir utilisateur',
@@ -412,12 +412,12 @@ return [
             'grouped' => [
                 'starting-at' => 'À partir de',
             ],
-    
+
             'configurable' => [
                 'as-low-as' => 'À partir de',
             ],
         ],
-    
+
         'sort-by' => [
             'title'   => 'Trier par',
             'options' => [
@@ -429,34 +429,34 @@ return [
                 'oldest-first'    => 'Plus ancien en premier',
             ],
         ],
-    
+
         'view' => [
             'type' => [
                 'configurable' => [
                     'select-options'       => 'Veuillez sélectionner une option',
                     'select-above-options' => 'Veuillez sélectionner les options ci-dessus',
                 ],
-    
+
                 'bundle' => [
                     'none' => 'Aucun',
                 ],
-    
+
                 'downloadable' => [
                     'links'   => 'Liens',
                     'samples' => 'Échantillons',
                     'sample'  => 'Échantillon',
                 ],
-    
+
                 'grouped' => [
                     'name' => 'Nom',
                 ],
             ],
-    
+
             'gallery' => [
                 'product-image'   => 'Image du produit',
                 'thumbnail-image' => 'Image miniature',
             ],
-    
+
             'reviews' => [
                 'attachments'      => 'Pièces jointes',
                 'comment'          => 'Commentaire',
@@ -472,7 +472,7 @@ return [
                 'title'            => 'Titre',
                 'write-a-review'   => 'Rédiger un avis',
             ],
-            
+
             'add-to-cart'            => 'Ajouter au panier',
             'add-to-compare'         => 'Produit ajouté à la liste de comparaison.',
             'already-in-compare'     => 'Le produit est déjà ajouté à la liste de comparaison.',
@@ -485,13 +485,13 @@ return [
             'tax-inclusive'          => 'Taxes incluses',
             'up-sell-title'          => 'Nous avons trouvé d\'autres produits qui pourraient vous plaire !',
         ],
-    
+
         'type' => [
             'abstract' => [
                 'offers' => 'Achetez :qty pour :price chacun et économisez :discount%',
             ],
         ],
-    ],    
+    ],
 
     'categories' => [
         'filters' => [
@@ -513,14 +513,14 @@ return [
 
     'search' => [
         'title' => 'Résultats de recherche pour : :query',
-    
+
         'images' => [
             'index' => [
                 'something-went-wrong' => 'Quelque chose s\'est mal passé, veuillez réessayer ultérieurement.',
                 'size-limit-error'     => 'Erreur de limite de taille',
                 'only-images-allowed'  => 'Seules les images (.jpeg, .jpg, .png, ..) sont autorisées.',
-            ],  
-    
+            ],
+
             'results' => [
                 'analysed-keywords' => 'Mots-clés analysés :',
             ],
