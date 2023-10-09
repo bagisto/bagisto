@@ -8,7 +8,8 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Arr;
-use Shetabit\Visitor\Models\Visit;
+use Carbon\Carbon;
+use Webkul\Core\Repositories\VisitRepository;
  
 class UpdateCreateVisitIndex implements ShouldQueue
 {
@@ -19,7 +20,6 @@ class UpdateCreateVisitIndex implements ShouldQueue
      *
      * @param  \Illuminate\Database\Eloquent\Model  $model
      * @param  array  $log
-     * @param  boolean  $cacheHit
      * @return void
      */
     public function __construct(
@@ -36,16 +36,24 @@ class UpdateCreateVisitIndex implements ShouldQueue
      */
     public function handle()
     {
+        $visitRepository = app(VisitRepository::class);
+
+        $lastVisit = $visitRepository->where(Arr::only($this->log, [
+            'method',
+            'url',
+            'ip',
+            'visitor_id',
+            'visitor_type',
+        ]))->latest()->first();
+
+        if ($lastVisit && $lastVisit->created_at->isToday()) {
+            return;
+        }
+
         if (null !== $this->model && method_exists($this->model, 'visitLogs')) {
-            $this->model->visitLogs()->updateOrCreate(
-                Arr::only($this->log, ['method', 'url', 'ip', 'visitor_id', 'visitor_type']),
-                Arr::only($this->log, ['request', 'headers', 'referer', 'useragent', 'device', 'platform', 'browser', 'languages'])
-            );
+            $this->model->visitLogs()->create($this->log);
         } else {
-            Visit::updateOrCreate(
-                Arr::only($this->log, ['method', 'url', 'ip', 'visitor_id', 'visitor_type']),
-                Arr::only($this->log, ['request', 'headers', 'referer', 'useragent', 'device', 'platform', 'browser', 'languages'])
-            );
+            $visitRepository->create($this->log);
         }
     }
 }

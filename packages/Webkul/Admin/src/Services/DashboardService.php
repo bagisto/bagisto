@@ -61,6 +61,7 @@ class DashboardService
     ) {
         $this->setLastStartDate();
         $this->setLastEndDate();
+        
         $this->yesterdayStartDate = now()->subDay()->startOfDay();
         $this->yesterdayEndDate = now()->subDay()->endOfDay();
     }
