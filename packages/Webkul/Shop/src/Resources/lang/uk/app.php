@@ -201,6 +201,7 @@ return [
                         'subtotal'           => 'Промежуточный итог',
                         'shipping-handling'  => 'Доставка и обработка',
                         'tax-amount'         => 'Сумма налога',
+                        'tax'               => 'Налог',
                     ],
 
                     'shipments' => [
