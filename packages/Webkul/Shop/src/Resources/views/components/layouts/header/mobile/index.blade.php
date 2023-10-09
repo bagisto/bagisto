@@ -74,7 +74,7 @@
                                         {{ core()->getCurrentChannel()->locales()->orderBy('name')->where('code', app()->getLocale())->value('name') }}
                                     </span>
 
-                                    <span class="text-[24px] icon-arrow-down"></span>
+                                    <span class="icon-arrow-down text-[24px]"></span>
                                 </div>
                             </x-slot:toggle>
 
