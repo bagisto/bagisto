@@ -35,7 +35,7 @@
 
                 <x-slot:content>
                     {{-- Localization & Currency Section --}}
-                    <div class="w-full flex gap-x-[20px] justify-between items-center mb-[15px] ">
+                    <div class="w-full flex gap-x-[20px] justify-between items-center mb-[15px]">
 
                         <x-shop::dropdown position="bottom-left">
                             <!-- Dropdown Toggler -->
@@ -45,7 +45,7 @@
                                         {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
                                     </span>
 
-                                    <span class="text-[24px] icon-arrow-down"></span>
+                                    <span class="icon-arrow-down text-[24px]"></span>
                                 </div>
                             </x-slot:toggle>
 
