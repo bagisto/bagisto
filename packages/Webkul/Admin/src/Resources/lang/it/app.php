@@ -33,11 +33,12 @@ return [
     ],
 
     'notifications' => [
-        'marked-success' => 'Notifica contrassegnata con successo',
-        'no-record'      => 'Nessun record trovato',
-        'read-all'       => 'Segna come Letto',
-        'title'          => 'Notifiche',
-        'view-all'       => 'Visualizza Tutte',
+        'description-text' => 'Elenca tutte le notifiche',
+        'marked-success'   => 'Notifica contrassegnata con successo',
+        'no-record'        => 'Nessun record trovato',
+        'read-all'         => 'Segna come Letto',
+        'title'            => 'Notifiche',
+        'view-all'         => 'Visualizza Tutte',
 
         'order-status-messages' => [
             'completed'       => 'Ordine Completato',

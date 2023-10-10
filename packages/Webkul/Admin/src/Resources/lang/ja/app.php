@@ -33,11 +33,12 @@ return [
     ],
 
     'notifications' => [
-        'marked-success' => 'お知らせが正常にマークされました',
-        'no-record'      => '記録が見つかりません',
-        'read-all'       => 'すべてを既読にする',
-        'title'          => 'お知らせ',
-        'view-all'       => 'すべて表示',
+        'description-text' => 'すべての通知をリストアップ',
+        'marked-success'   => 'お知らせが正常にマークされました',
+        'no-record'        => '記録が見つかりません',
+        'read-all'         => 'すべてを既読にする',
+        'title'            => 'お知らせ',
+        'view-all'         => 'すべて表示',
 
         'order-status-messages' => [
             'completed'       => '注文完了',
