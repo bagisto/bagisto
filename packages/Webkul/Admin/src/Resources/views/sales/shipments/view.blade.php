@@ -17,7 +17,7 @@
                 {{-- Cancel Button --}}
                 <a
                     href="{{ route('admin.sales.shipments.index') }}"
-                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
                 >
                     @lang('admin::app.account.edit.back-btn')
                 </a>
@@ -29,7 +29,7 @@
         {{-- Left sub-component --}}
         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
             {{-- General --}}
-            <div class="bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+            <div class="bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px] p-[16px]">
                     @lang('admin::app.sales.shipments.view.ordered-items') ({{count($shipment->items)}})
                 </p>
@@ -81,7 +81,7 @@
                         </div>
 
                         @if ($index < count($shipment->items) - 1)
-                            <span class="block w-full border-b-[1px] dark:border-gray-800  "></span>
+                            <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
                         @endif
                     @endforeach
                 </div>
@@ -93,7 +93,7 @@
             {{-- component 1 --}}
             <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 dark:text-gray-300  text-[16px] p-[10px] font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
                         @lang('admin::app.sales.shipments.view.customer')
                     </p>
                 </x-slot:header>
@@ -111,13 +111,13 @@
                         </p>
                     </div>
 
-                    <span class="block w-full border-b-[1px] dark:border-gray-800  "></span>
+                    <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
 
                     @if ($order->billing_address || $order->shipping_address)
                         {{-- Billing Address --}}
                         @if ($order->billing_address)
                             <div class="flex items-center justify-between">
-                                <p class="text-gray-600 dark:text-gray-300  text-[16px] py-[16px] font-semibold">
+                                <p class="text-gray-600 dark:text-gray-300 text-[16px] py-[16px] font-semibold">
                                     @lang('admin::app.sales.shipments.view.billing-address')
                                 </p>
                             </div>
@@ -128,10 +128,10 @@
 
                         {{-- Shipping Address --}}
                         @if ($order->shipping_address)
-                            <span class="block w-full mt-[16px] border-b-[1px] dark:border-gray-800  "></span>
+                            <span class="block w-full mt-[16px] border-b-[1px] dark:border-gray-800"></span>
 
                             <div class="flex items-center justify-between">
-                                <p class="text-gray-600 dark:text-gray-300  text-[16px] py-[16px] font-semibold">
+                                <p class="text-gray-600 dark:text-gray-300 text-[16px] py-[16px] font-semibold">
                                     @lang('admin::app.sales.shipments.view.shipping-address')
                                 </p>
                             </div>
@@ -146,7 +146,7 @@
             {{-- component 2 --}}
             <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 dark:text-gray-300  text-[16px] p-[10px] font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
                         @lang('admin::app.sales.shipments.view.order-information')
                     </p>
                 </x-slot:header>
@@ -199,7 +199,7 @@
             {{-- Component 3 --}}
             <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 dark:text-gray-300  text-[16px] p-[10px] font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
                         @lang('admin::app.sales.shipments.view.payment-and-shipping')
                     </p>
                 </x-slot:header>
@@ -226,7 +226,7 @@
                     </div>
 
                     {{-- Horizontal Line --}}
-                    <span class="block w-full border-b-[1px] dark:border-gray-800  "></span>
+                    <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
                 
                     <div class="pt-[16px]">
                         {{-- Shipping Menthod --}}

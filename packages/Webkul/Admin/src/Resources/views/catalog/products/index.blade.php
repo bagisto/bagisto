@@ -400,7 +400,7 @@
                                                 @{{ attribute.name }}
                                             </label>
 
-                                            <div class="flex gap-[4px] min-h-[38px] p-[6px] border dark:border-gray-800   rounded-[6px]">
+                                            <div class="flex gap-[4px] min-h-[38px] p-[6px] border dark:border-gray-800 rounded-[6px]">
                                                 <p
                                                     class="flex items-center py-[3px] px-[8px] bg-gray-600 rounded-[4px] text-white font-semibold"
                                                     v-for="option in attribute.options"

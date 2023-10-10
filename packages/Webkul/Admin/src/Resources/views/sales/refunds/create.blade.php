@@ -1,5 +1,5 @@
 <v-create-refund>
-    <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800  hover:rounded-[6px]">
+    <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]">
         <span class="icon-cancel text-[24px]"></span> 
 
         @lang('admin::app.sales.orders.view.refund')     
@@ -10,7 +10,7 @@
     <script type="text/x-template" id="v-create-refund-template">
         <div>
             <div
-                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800  hover:rounded-[6px]"
+                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
                 @click="$refs.refund.open()"
             >
                 <span class="icon-cancel text-[24px]"></span> 
@@ -35,7 +35,7 @@
                                 <div class="flex gap-x-[10px]">
                                     <!-- Update Quantity Button -->
                                     <div 
-                                        class="transparent-button text-red-600 hover:bg-gray-200 dark:hover:bg-gray-800 "
+                                        class="transparent-button text-red-600 hover:bg-gray-200 dark:hover:bg-gray-800"
                                         @click="updateQty"
                                     >
                                         @lang('admin::app.sales.refunds.create.update-quantity-btn')
@@ -170,7 +170,7 @@
                                                             </p>
                                                         @endif
 
-                                                        <p class="text-gray-600 dark:text-gray-300  font-semibold">
+                                                        <p class="text-gray-600 dark:text-gray-300 font-semibold">
                                                             @lang('admin::app.sales.refunds.create.grand-total')
                                                         </p>
                                                     </div>
@@ -194,7 +194,7 @@
                                                             </p>
                                                         @endif 
 
-                                                        <p class="text-gray-600 dark:text-gray-300  font-semibold"> 
+                                                        <p class="text-gray-600 dark:text-gray-300 font-semibold"> 
                                                             {{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }} 
                                                         </p>
                                                     </div>
@@ -286,7 +286,7 @@
                                             @lang('admin::app.sales.refunds.create.tax-amount')
                                         </p>
 
-                                        <p class="text-gray-600 dark:text-gray-300  font-semibold">
+                                        <p class="text-gray-600 dark:text-gray-300 font-semibold">
                                             @lang('admin::app.sales.refunds.create.grand-total')
                                         </p>
                                     </div>

@@ -41,7 +41,7 @@
                     <input type="hidden" :name="'customer_group_prices[' + item.id + '][value]'" :value="item.value"/>
 
                     <div class="flex justify-between">
-                        <p class="text-gray-600 dark:text-gray-300  font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300 font-semibold">
                             @{{ getGroupNameById(item.customer_group_id) }}
                         </p>
 
@@ -117,7 +117,7 @@
         
                         <x-slot:content>
                             <!-- Modal Content -->
-                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
+                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
                                 {!! view_render_event('bagisto.admin.catalog.products.create_form.general.controls.before') !!}
 
                                 <x-admin::form.control-group>
@@ -213,7 +213,7 @@
                             <div class="flex gap-x-[10px] items-center">
                                 <button
                                     type="button"
-                                    class="text-red-600 font-semibold whitespace-nowrap px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] transition-all hover:bg-gray-100 dark:hover:bg-gray-950  cursor-pointer"
+                                    class="text-red-600 font-semibold whitespace-nowrap px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] transition-all hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
                                     @click="remove"
                                     v-if="selectedPrice.id"
                                 >

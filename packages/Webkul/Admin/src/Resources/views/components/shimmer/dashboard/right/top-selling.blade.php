@@ -1,6 +1,6 @@
 <div class="flex flex-col">
     @for ($i = 1; $i <= 3; $i++)
-        <div class="flex gap-[10px] p-[16px] border-b-[1px] dark:border-gray-800   last:border-b-0">
+        <div class="flex gap-[10px] p-[16px] border-b-[1px] dark:border-gray-800 last:border-b-0">
             {{-- Product Image --}}
             <div class="shimmer w-[65px] h-[65px] rounded-[4px]"></div>
 

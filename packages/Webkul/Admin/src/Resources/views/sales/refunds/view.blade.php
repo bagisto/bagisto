@@ -17,7 +17,7 @@
             <div class="flex gap-x-[10px] items-center">
                 <a
                     href="{{ route('admin.sales.refunds.index') }}"
-                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
                 >
                     @lang('admin::app.account.edit.back-btn')
                 </a>
@@ -30,7 +30,7 @@
         <!-- Left sub-component -->
         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
             <!-- General -->
-            <div class=" bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+            <div class=" bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px] p-[16px]">
                     @lang('admin::app.sales.refunds.view.product-ordered') ({{ $refund->items->count() ?? 0 }})
                 </p>
@@ -121,7 +121,7 @@
                 {{-- Subtotal / Grand Total od the page --}}
                 <div class="flex w-full gap-[10px] justify-end mt-[16px] p-[16px]">
                     <div class="flex flex-col gap-y-[6px]">
-                        <p class="text-gray-600 dark:text-gray-300  font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300 font-semibold">
                             @lang('admin::app.sales.refunds.view.sub-total')
                         </p>
 
@@ -158,7 +158,7 @@
 
                     <div class="flex  flex-col gap-y-[6px]">
                         {{-- Base Sub Total --}}
-                        <p class="text-gray-600 dark:text-gray-300  font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300 font-semibold">
                             {{ core()->formatBasePrice($refund->base_sub_total) }}
                         </p>
 
@@ -211,7 +211,7 @@
             )
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="text-gray-600 dark:text-gray-300  text-[16px] p-[10px] font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
                             @lang('admin::app.sales.refunds.view.account-information')
                         </p>
                     </x-slot:header>
@@ -232,11 +232,11 @@
 
                         {{-- Billing Address --}}
                         @if ($order->billing_address)
-                            <span class="block w-full border-b-[1px] dark:border-gray-800  "></span>
+                            <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
 
                             {{-- Billing Address --}}
                             <div class="flex items-center justify-between">
-                                <p class="text-gray-600 dark:text-gray-300  text-[16px] py-[16px] font-semibold">
+                                <p class="text-gray-600 dark:text-gray-300 text-[16px] py-[16px] font-semibold">
                                     @lang('admin::app.sales.refunds.view.billing-address')
                                 </p>
                             </div>
@@ -246,7 +246,7 @@
 
                         {{-- Shipping Address --}}
                         @if ($order->shipping_address)
-                            <span class="block w-full mt-[16px] border-b-[1px] dark:border-gray-800  "></span>
+                            <span class="block w-full mt-[16px] border-b-[1px] dark:border-gray-800"></span>
 
                             <div class="flex items-center justify-between">
                                 <p class="text-gray-600 dark:text-gray-300  text-[16px] py-[16px] font-semibold">
@@ -263,7 +263,7 @@
             {{-- Order Information --}}
             <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 dark:text-gray-300  text-[16px] p-[10px] font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
                         @lang('admin::app.sales.refunds.view.order-information')
                     </p>
                 </x-slot:header>
@@ -273,7 +273,7 @@
                         {{-- Order Info Left Section  --}}
                         <div class="flex flex-col gap-y-[6px]">
                             @foreach (['order-id', 'order-date', 'order-status', 'order-channel'] as $item)
-                                <p class="text-gray-600 dark:text-gray-300  font-semibold">
+                                <p class="text-gray-600 dark:text-gray-300 font-semibold">
                                     @lang('admin::app.sales.refunds.view.' . $item)
                                 </p>
                             @endforeach    
@@ -281,7 +281,7 @@
 
                         {{-- Order Info Right Section  --}}
                         <div class="flex flex-col gap-y-[6px]">
-                            <p class="text-gray-600 dark:text-gray-300  font-semibold">
+                            <p class="text-gray-600 dark:text-gray-300 font-semibold">
                                 <a
                                     href="{{ route('admin.sales.orders.view', $order->id) }}"
                                     class="text-blue-600"
@@ -309,7 +309,7 @@
              {{-- Payment Information --}}
              <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 dark:text-gray-300  text-[16px] p-[10px] font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
                         @lang('admin::app.sales.refunds.view.payment-information')
                     </p>
                 </x-slot:header>
@@ -319,7 +319,7 @@
                         {{-- Payment Information Left Section  --}}
                         <div class="flex flex-col gap-y-[6px]">
                             @foreach (['payment-method', 'shipping-method', 'currency', 'shipping-price'] as $item)
-                                <p class="text-gray-600 dark:text-gray-300  font-semibold">
+                                <p class="text-gray-600 dark:text-gray-300 font-semibold">
                                     @lang('admin::app.sales.refunds.view.' . $item)
                                 </p>
                             @endforeach

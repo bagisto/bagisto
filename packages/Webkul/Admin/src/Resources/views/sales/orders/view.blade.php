@@ -39,7 +39,7 @@
                             @break
 
                         @case('canceled')
-                            <span class="label-canceled text-[14px] mx-[5px]">
+                            <span class="label-cancelled text-[14px] mx-[5px]">
                                 @lang('admin::app.sales.orders.view.canceled')    
                             </span>
                             @break
@@ -53,7 +53,7 @@
             {{-- Back Button --}}
             <a
                 href="{{ route('admin.sales.orders.index') }}"
-                class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
+                class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
             >
                 @lang('admin::app.account.edit.back-btn')
             </a>
@@ -118,7 +118,7 @@
         <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
             {{-- Left Component --}}
             <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                <div class="bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                <div class="bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <div class="flex justify-between p-[16px]">
                         <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                             @lang('Order Items') ({{ count($order->items) }})
@@ -292,7 +292,7 @@
                 </div>
             
                 {{-- Customer's comment form --}}
-                <div class="bg-white dark:bg-gray-900  rounded box-shadow">
+                <div class="bg-white dark:bg-gray-900 rounded box-shadow">
                     <p class="p-[16px] pb-0 text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.sales.orders.view.comments')
                     </p>
@@ -349,7 +349,7 @@
                         </div>
                     </x-admin::form> 
 
-                    <span class="block w-full border-b-[1px] dark:border-gray-800  "></span>
+                    <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
 
                     {{-- Comment List --}}
                     @foreach ($order->comments()->orderBy('id', 'desc')->get() as $comment)
@@ -384,7 +384,7 @@
                 {{-- Customer and address information --}}
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="text-gray-600 dark:text-gray-300  text-[16px] p-[10px] font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
                             @lang('admin::app.sales.orders.view.customer')
                         </p>
                     </x-slot:header>
@@ -414,7 +414,7 @@
                         
                         {{-- Billing Address --}}
                         @if ($order->billing_address)
-                            <span class="block w-full border-b-[1px] dark:border-gray-800  "></span>
+                            <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
 
                             <div class="{{ $order->shipping_address ? 'pb-[16px]' : '' }}">
 
@@ -432,10 +432,10 @@
 
                         {{-- Shipping Address --}}
                         @if ($order->shipping_address)
-                            <span class="block w-full border-b-[1px] dark:border-gray-800  "></span>
+                            <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
 
                             <div class="flex items-center justify-between">
-                                <p class="text-gray-600 dark:text-gray-300  text-[16px] py-[16px] font-semibold">
+                                <p class="text-gray-600 dark:text-gray-300 text-[16px] py-[16px] font-semibold">
                                     @lang('admin::app.sales.orders.view.shipping-address')
                                 </p>
                             </div>
@@ -450,7 +450,7 @@
                 {{-- Order Information --}}
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="text-gray-600 dark:text-gray-300  text-[16px] p-[10px] font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
                             @lang('admin::app.sales.orders.view.order-information')
                         </p>
                     </x-slot:header>
@@ -502,7 +502,7 @@
                 {{-- Payment and Shipping Information--}}    
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="text-gray-600 dark:text-gray-300  text-[16px] p-[10px] font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
                             @lang('admin::app.sales.orders.view.payment-and-shipping')
                         </p>
                     </x-slot:header>
@@ -572,7 +572,7 @@
                 {{-- Invoice Information--}}    
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="text-gray-600 dark:text-gray-300  text-[16px] p-[10px] font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
                             @lang('admin::app.sales.orders.view.invoices') ({{ count($order->invoices) }})
                         </p>
                     </x-slot:header>
@@ -621,7 +621,7 @@
                 {{-- Shipment Information--}}    
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="text-gray-600 dark:text-gray-300  text-[16px] p-[10px] font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
                             @lang('admin::app.sales.orders.view.shipments') ({{ count($order->shipments) }})
                         </p>
                     </x-slot:header>
@@ -661,7 +661,7 @@
                 {{-- Refund Information--}}    
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="text-gray-600 dark:text-gray-300  text-[16px] p-[10px] font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
                             @lang('admin::app.sales.orders.view.refund')
                         </p>
                     </x-slot:header>
