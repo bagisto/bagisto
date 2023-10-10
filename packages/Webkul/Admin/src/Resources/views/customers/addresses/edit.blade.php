@@ -361,7 +361,7 @@
 
                                         <x-admin::form.control-group.label 
                                             for="default_address"
-                                            class="text-gray-600 dark:text-gray-300  font-semibold cursor-pointer" 
+                                            class="text-gray-600 dark:text-gray-300 font-semibold cursor-pointer" 
                                         >
                                             @lang('admin::app.customers.addresses.edit.default-address')
                                         </x-admin::form.control-group.label>

@@ -373,7 +373,7 @@
                         {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.general.before', ['attribute' => $attribute]) !!}
 
                         <!-- General -->
-                        <div class="bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
+                        <div class="bg-white dark:bg-gray-900 box-shadow rounded-[4px]">
                             <div class="flex justify-between items-center p-[6px]">
                                 <p class="p-[10px] text-gray-800 dark:text-white text-[16px] font-semibold">
                                     @lang('admin::app.catalog.attributes.edit.general')

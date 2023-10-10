@@ -281,7 +281,7 @@
                         class: [
                             this.isActive ? 'icon-sort-right' : 
                             this.hasChildren ? 'icon-sort-down' : '',
-                            'text-[20px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950 '
+                            'text-[20px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950'
                         ],
                         
                         onClick: (selection) => {

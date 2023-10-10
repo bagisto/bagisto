@@ -30,7 +30,7 @@
                     @lang('admin::app.dashboard.index.overall-details')
                 </p>
 
-                <div class="p-[16px] rounded-[4px]  bg-white  dark:bg-gray-900 box-shadow">
+                <div class="p-[16px] rounded-[4px] bg-white dark:bg-gray-900 box-shadow">
                     <div class="flex gap-[16px] flex-wrap ">
                         {{-- Total Sales --}}
                         <div class="flex gap-[10px] flex-1 min-w-[200px]">
@@ -229,7 +229,7 @@
                 </p>
 
                 <div class="rounded-[4px] box-shadow">
-                    <div class="flex gap-[16px] flex-wrap p-[16px] bg-white dark:bg-gray-900 border-b-[1px] dark:border-gray-800  ">
+                    <div class="flex gap-[16px] flex-wrap p-[16px] bg-white dark:bg-gray-900 border-b-[1px] dark:border-gray-800">
                         {{-- Today's Sales --}}
                         <div class="flex gap-[10px] flex-1">
                             <img
@@ -356,7 +356,7 @@
 
                     <!-- Today Orders Details -->
                     @foreach ($statistics['today_details']['today_orders']['current'] as $item)
-                        <div class="row grid grid-cols-4  gap-y-[24px] p-[16px]  bg-white dark:bg-gray-900 border-b-[1px] dark:border-gray-800   transition-all hover:bg-gray-50 dark:hover:bg-gray-950   max-1580:grid-cols-3 max-sm:grid-cols-1">
+                        <div class="row grid grid-cols-4 gap-y-[24px] p-[16px] bg-white dark:bg-gray-900 border-b-[1px] dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950 max-1580:grid-cols-3 max-sm:grid-cols-1">
                             {{-- Order ID, Status, Created --}}
                             <div class="flex gap-[10px]">
                                 <div class="flex flex-col gap-[6px]">
@@ -494,7 +494,7 @@
 
                                     {{-- View More Icon --}}
                                     <a href="{{ route('admin.sales.orders.view', $item->id) }}">
-                                        <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800  hover:rounded-[6px]"></span>
+                                        <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"></span>
                                     </a>
                                 </div>
                             </div>
@@ -515,7 +515,7 @@
                         @foreach ($statistics['stock_threshold'] as $item)
                             <!-- Single Product -->
                             <div class="relative">
-                                <div class="row grid grid-cols-2 gap-y-[24px] p-[16px] bg-white dark:bg-gray-900 border-b-[1px] dark:border-gray-800   transition-all hover:bg-gray-50 dark:hover:bg-gray-950   max-sm:grid-cols-[1fr_auto]">
+                                <div class="row grid grid-cols-2 gap-y-[24px] p-[16px] bg-white dark:bg-gray-900 border-b-[1px] dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950 max-sm:grid-cols-[1fr_auto]">
                                     <div class="flex gap-[10px]">
                                         @if ($item->product?->base_image_url)
                                             <div class="">
@@ -576,7 +576,7 @@
 
                                         {{-- View More Icon --}}
                                         <a href="{{ route('admin.catalog.products.edit', $item->product_id) }}">
-                                            <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800  hover:rounded-[6px]"></span>
+                                            <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"></span>
                                         </a>
                                     </div>
                                 </div>
@@ -621,7 +621,7 @@
 
         <script type="text/x-template" id="v-store-stats-template">
             <x-admin::form :action="route('admin.catalog.categories.store')">
-                <div class="rounded-[4px]  bg-white dark:bg-gray-900 box-shadow">
+                <div class="rounded-[4px] bg-white dark:bg-gray-900 box-shadow">
                     <!-- Total Sales Shimmer -->
                     <template v-if="isLoading">
                         <x-admin::shimmer.dashboard.right.date-filters/>
@@ -633,7 +633,7 @@
 
                     <template v-else>
                         <!-- Date Filter -->
-                        <div class="flex gap-[6px] px-[16px] py-[8px] border-b dark:border-gray-800  ">
+                        <div class="flex gap-[6px] px-[16px] py-[8px] border-b dark:border-gray-800">
                             <!-- Start Date Filter -->
                             <x-admin::form.control-group class="flex-1 mb-[10px]">
                                 <x-admin::form.control-group.label class="!text-gray-800 dark:!text-white font-medium">
@@ -668,7 +668,7 @@
                         </div>
     
                         <!-- Total Sales Detailes -->
-                        <div class="grid gap-[16px] px-[16px] py-[8px] border-b dark:border-gray-800  ">
+                        <div class="grid gap-[16px] px-[16px] py-[8px] border-b dark:border-gray-800">
                             <div class="flex gap-[8px] justify-between">
                                 <div class="flex flex-col gap-[4px] justify-between">
                                     <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
@@ -703,7 +703,7 @@
                         </div>
     
                         <!-- Total Visitors Detailes -->
-                        <div class="grid gap-[16px] px-[16px] py-[8px] border-b dark:border-gray-800  ">
+                        <div class="grid gap-[16px] px-[16px] py-[8px] border-b dark:border-gray-800">
                             <div class="flex gap-[8px] justify-between">
                                 <div class="flex flex-col gap-[4px] justify-between">
                                     <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
@@ -741,7 +741,7 @@
                     <!-- Top Selling Products -->
                     <div class="border-b dark:border-gray-800">
                         <div class="flex items-center justify-between p-[16px]">
-                            <p class="text-gray-600 dark:text-gray-300  text-[16px] font-semibold">
+                            <p class="text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                                 @lang('admin::app.dashboard.index.top-selling-products')
                             </p>
 
@@ -763,7 +763,7 @@
                             >
                                 <a
                                     :href="`{{route('admin.catalog.products.edit', '')}}/${item.product_id}`"
-                                    class="flex gap-[10px] p-[16px] border-b-[1px] dark:border-gray-800   last:border-b-0 transition-all hover:bg-gray-50 dark:hover:bg-gray-950  "
+                                    class="flex gap-[10px] p-[16px] border-b-[1px] dark:border-gray-800 last:border-b-0 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                                     v-for="item in statistics.top_selling_products"
                                 >
                                     <!-- Product Item -->
@@ -794,7 +794,7 @@
 
                                         <div class="flex justify-between">
                                             <p
-                                                class="text-gray-600 dark:text-gray-300  font-semibold"
+                                                class="text-gray-600 dark:text-gray-300 font-semibold"
                                                 v-text="item.formatted_price"
                                             >
                                             </p>
@@ -838,7 +838,7 @@
 
                     <!-- Top Customers -->
                     <div class="flex items-center justify-between p-[16px]">
-                        <p class="text-gray-600 dark:text-gray-300  text-[16px] font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                             @lang('admin::app.dashboard.index.customer-with-most-sales')
                         </p>
 
@@ -856,7 +856,7 @@
                     <template v-else>
                         <!-- Customers Lists -->
                         <div
-                            class="flex flex-col gap-[32px] p-[16px] border-b-[1px] dark:border-gray-800   last:border-b-0 transition-all hover:bg-gray-50 dark:hover:bg-gray-950  "
+                            class="flex flex-col gap-[32px] p-[16px] border-b-[1px] dark:border-gray-800 last:border-b-0 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                             v-if="statistics?.customer_with_most_sales?.length"
                             v-for="item in statistics.customer_with_most_sales"
                         >
@@ -867,7 +867,7 @@
                                 <div class="flex justify-between gap-[6px]">
                                     <div class="flex flex-col">
                                         <p
-                                            class="text-gray-600 dark:text-gray-300  font-semibold"
+                                            class="text-gray-600 dark:text-gray-300 font-semibold"
                                             v-text="item.customer_first_name + ' ' + item.customer_last_name"
                                         >
                                         </p>

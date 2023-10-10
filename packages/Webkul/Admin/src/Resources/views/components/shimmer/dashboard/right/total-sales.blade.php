@@ -1,4 +1,4 @@
-<div class="h-[301px] w-full grid gap-[16px] px-[16px] py-[8px] border-b dark:border-gray-800  ">
+<div class="h-[301px] w-full grid gap-[16px] px-[16px] py-[8px] border-b dark:border-gray-800">
     {{-- Total Sales --}}
     <div class="w-full h-[38px] flex gap-[8px] justify-between">
         <div class="flex flex-col gap-[4px] justify-between">

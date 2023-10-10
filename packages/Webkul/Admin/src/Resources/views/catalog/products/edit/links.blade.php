@@ -9,7 +9,7 @@
         <div class="grid gap-[10px]">
             <!-- Panel -->
             <div
-                class="relative bg-white dark:bg-gray-900  rounded-[4px] box-shadow"
+                class="relative bg-white dark:bg-gray-900 rounded-[4px] box-shadow"
                 v-for="type in types"
             >
                 <div class="flex gap-[20px] justify-between mb-[10px] p-[16px]">

@@ -22,7 +22,7 @@
                         <!-- Cancel Button -->
                         <a
                             href="{{ route('admin.settings.taxes.rates.index') }}"
-                            class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
+                            class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
                         >
                             @lang('admin::app.settings.taxes.rates.edit.back-btn')
                         </a>
@@ -41,7 +41,7 @@
                 <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                     <!-- Left component -->
                     <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                        <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                        <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                             <div class="mb-[10px]">
                                 <!-- Identifier -->
                                 <x-admin::form.control-group class="mb-[10px]">
