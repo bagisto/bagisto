@@ -52,7 +52,7 @@
                         >
                             <a
                                 :href="'{{ route('admin.notification.viewed_notification', ':orderId') }}'.replace(':orderId', notification.order_id)"
-                                class="flex  gap-[5px] p-[16px] items-start hover:bg-gray-50 dark:hover:bg-gray-950  "
+                                class="flex gap-[5px] p-[16px] items-start hover:bg-gray-50 dark:hover:bg-gray-950"
                                 v-for="notification in notifications"
                                 :class="notification.read ? 'opacity-50' : ''"
                             >
@@ -86,9 +86,10 @@
                     </div>
 
                     <!-- Pagination -->
-                    <div class="flex gap-x-[8px] items-center p-[24px] border-t-[1px] dark:border-gray-800  ">
+                    <div class="flex gap-x-[8px] items-center p-[24px] border-t-[1px] dark:border-gray-800">
                         <div
-                            class="inline-flex gap-x-[4px] items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 py-[6px] px-[8px] leading-[24px] text-center w-full max-w-max bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black max-sm:hidden" v-text="pagination.per_page"
+                            class="inline-flex gap-x-[4px] items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 py-[6px] px-[8px] leading-[24px] text-center w-full max-w-max bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black max-sm:hidden" 
+                            v-text="pagination.per_page"
                         >
                         </div>
 

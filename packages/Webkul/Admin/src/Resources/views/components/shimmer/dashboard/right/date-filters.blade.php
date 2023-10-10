@@ -1,4 +1,4 @@
-<div class="flex gap-[6px] px-[16px] py-[8px] border-b dark:border-gray-800  ">
+<div class="flex gap-[6px] px-[16px] py-[8px] border-b dark:border-gray-800">
     {{-- Date Filter --}}
     <div class="mb-[5px] flex-1">
         <div class="shimmer w-[160px] h-[17px] my-[5px]"></div>

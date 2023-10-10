@@ -24,7 +24,7 @@
                         <!-- Cancel Button -->
                         <a
                             href="{{ route('admin.settings.roles.index') }}"
-                            class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
+                            class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
                         >
                             @lang('admin::app.settings.roles.edit.back-btn')
                         </a>
@@ -44,7 +44,7 @@
                     <!-- Left sub-component -->
                     <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                         <!-- Access Control Input Fields -->
-                        <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                        <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                                 @lang('admin::app.settings.roles.edit.access-control')
                             </p>

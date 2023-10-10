@@ -1,4 +1,4 @@
-<div class="bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+<div class="bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
     <!-- Date Filters Shimmer -->
     <x-admin::shimmer.dashboard.right.date-filters/>
 
@@ -9,7 +9,7 @@
     <x-admin::shimmer.dashboard.right.total-sales/>
 
     <!-- Top Selling Products -->
-    <div class="border-b dark:border-gray-800  ">
+    <div class="border-b dark:border-gray-800">
         <div class="flex items-center justify-between p-[16px]">
             <div class="shimmer w-[157px] h-[17px]"></div>
 

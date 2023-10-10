@@ -25,7 +25,7 @@
             <div class="flex gap-x-[10px] items-center">
                 <a
                     href="{{ route('admin.settings.channels.index') }}"
-                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
                 >
                     @lang('admin::app.settings.channels.edit.back-btn')
                 </a>
@@ -43,7 +43,7 @@
         <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                 {{-- General Information --}}
-                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                         @lang('admin::app.settings.channels.edit.general')
                     </p>
@@ -137,7 +137,7 @@
                                         :for="'inventory_sources_' . $inventorySource->id"
                                         class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
                                     >
-                                        <span class="text-gray-600 dark:text-gray-300  font-semibold cursor-pointer">
+                                        <span class="text-gray-600 dark:text-gray-300 font-semibold cursor-pointer">
                                             {{ $inventorySource->name }}
                                         </span>
                                     </x-admin::form.control-group.label>
@@ -201,7 +201,7 @@
                 </div>
 
                 {{-- Logo and Design --}}
-                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                         @lang('admin::app.settings.channels.edit.design')
                     </p>
@@ -282,7 +282,7 @@
                 </div>
 
                 {{-- Home Page SEO --}} 
-                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                         @lang('admin::app.settings.channels.edit.seo')
                     </p>
@@ -396,7 +396,7 @@
                                         :for="'locales_' . $locale->id"
                                         class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
                                     >
-                                        <span class="text-gray-600 dark:text-gray-300  font-semibold cursor-pointer">
+                                        <span class="text-gray-600 dark:text-gray-300 font-semibold cursor-pointer">
                                             {{ $locale->name }} 
                                         </span>
                                     </x-admin::form.control-group.label>
@@ -460,7 +460,7 @@
                                         :for="'currencies_' . $currency->id"
                                         class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
                                     >
-                                        <span class="text-gray-600 dark:text-gray-300  font-semibold cursor-pointer">
+                                        <span class="text-gray-600 dark:text-gray-300 font-semibold cursor-pointer">
                                             {{ $currency->name }} 
                                         </span>
                                     </x-admin::form.control-group.label>
