@@ -67,57 +67,54 @@
                     <v-mobile-category></v-mobile-category>
 
                     {{-- Localization & Currency Section --}}
-                    <div class="w-full fixed bottom-0 left-0 bg-white shadow-lg p-4">
-                        <div class="w-full flex gap-x-[20px] justify-between items-center mb-[15px]">
+                    <div class="absolute w-full flex bottom-0 left-0 bg-white shadow-lg p-4 gap-x-[20px] justify-between items-center mb-[15px]">
+                        <x-shop::dropdown position="top-left">
+                            <!-- Dropdown Toggler -->
+                            <x-slot:toggle>
+                                <div class="w-full flex gap-[10px] justify-between items-center cursor-pointer">
+                                    <span>
+                                        {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
+                                    </span>
 
-                            <x-shop::dropdown position="top-left">
-                                <!-- Dropdown Toggler -->
-                                <x-slot:toggle>
-                                    <div class="w-full flex gap-[10px] justify-between items-center cursor-pointer">
-                                        <span>
-                                            {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
-                                        </span>
+                                    <span class="icon-arrow-down text-[24px]"></span>
+                                </div>
+                            </x-slot:toggle>
 
-                                        <span class="icon-arrow-down text-[24px]"></span>
-                                    </div>
-                                </x-slot:toggle>
+                            <!-- Dropdown Content -->
+                            <x-slot:content class="!p-[0px]">
+                                <v-currency-switcher></v-currency-switcher>
+                            </x-slot:content>
+                        </x-shop::dropdown>
 
-                                <!-- Dropdown Content -->
-                                <x-slot:content class="!p-[0px]">
-                                    <v-currency-switcher></v-currency-switcher>
-                                </x-slot:content>
-                            </x-shop::dropdown>
+                        <x-shop::dropdown position="top-right">
+                            <x-slot:toggle>
+                                {{-- Dropdown Toggler --}}
+                                <div class="w-full flex gap-[10px] justify-between items-center cursor-pointer">
+                                    <img
+                                        src="{{ ! empty(core()->getCurrentLocale()->logo_url)
+                                                ? core()->getCurrentLocale()->logo_url
+                                                : bagisto_asset('images/default-language.svg')
+                                            }}"
+                                        class="h-full"
+                                        alt="Default locale"
+                                        width="24"
+                                        height="16"
+                                    />
 
-                            <x-shop::dropdown position="top-right">
-                                <x-slot:toggle>
-                                    {{-- Dropdown Toggler --}}
-                                    <div class="w-full flex gap-[10px] justify-between items-center cursor-pointer">
-                                        <img
-                                            src="{{ ! empty(core()->getCurrentLocale()->logo_url)
-                                                    ? core()->getCurrentLocale()->logo_url
-                                                    : bagisto_asset('images/default-language.svg')
-                                                }}"
-                                            class="h-full"
-                                            alt="Default locale"
-                                            width="24"
-                                            height="16"
-                                        />
+                                    <span>
+                                        {{ core()->getCurrentChannel()->locales()->orderBy('name')->where('code', app()->getLocale())->value('name') }}
+                                    </span>
 
-                                        <span>
-                                            {{ core()->getCurrentChannel()->locales()->orderBy('name')->where('code', app()->getLocale())->value('name') }}
-                                        </span>
+                                    <span class="icon-arrow-down text-[24px]"></span>
+                                </div>
+                            </x-slot:toggle>
 
-                                        <span class="icon-arrow-down text-[24px]"></span>
-                                    </div>
-                                </x-slot:toggle>
+                            <!-- Dropdown Content -->
+                            <x-slot:content class="!p-[0px]">
+                                <v-locale-switcher></v-locale-switcher>
+                            </x-slot:content>
+                        </x-shop::dropdown>
 
-                                <!-- Dropdown Content -->
-                                <x-slot:content class="!p-[0px]">
-                                    <v-locale-switcher></v-locale-switcher>
-                                </x-slot:content>
-                            </x-shop::dropdown>
-
-                        </div>
                     </div>
                 </x-slot:content>
 
