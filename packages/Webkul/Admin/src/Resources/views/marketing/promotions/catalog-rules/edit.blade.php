@@ -95,7 +95,7 @@
                             </div>
         
                             <!-- Conditions -->
-                            <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                            <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                                 <div class="flex gap-[16px] items-center justify-between">
                                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                         @lang('admin::app.marketing.promotions.catalog-rules.edit.conditions')
