@@ -2070,15 +2070,18 @@ return [
                 ],
 
                 'create' => [
-                    'create-btn'     => 'Créer une devise',
-                    'code'           => 'Code',
-                    'decimal'        => 'Décimal',
-                    'delete-warning' => 'Êtes-vous sûr de vouloir effectuer cette action ?',
-                    'general'        => 'Général',
-                    'name'           => 'Nom',
-                    'save-btn'       => 'Enregistrer la devise',
-                    'symbol'         => 'Symbole',
-                    'title'          => 'Créer une nouvelle devise',
+                    'code'               => 'Code',
+                    'create-btn'         => 'Créer une devise',
+                    'currency-position'  => 'Position de la devise',
+                    'decimal'            => 'Décimal',
+                    'decimal-separator'  => 'Séparateur décimal',
+                    'delete-warning'     => 'Êtes-vous sûr de vouloir effectuer cette action ?',
+                    'general'            => 'Général',
+                    'name'               => 'Nom',
+                    'save-btn'           => 'Enregistrer la devise',
+                    'symbol'             => 'Symbole',
+                    'thousand-separator' => 'Séparateur des milliers',
+                    'title'              => 'Créer une nouvelle devise',
                 ],
 
                 'edit' => [

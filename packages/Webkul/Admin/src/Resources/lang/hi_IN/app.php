@@ -2070,15 +2070,18 @@ return [
                 ],
 
                 'create' => [
-                    'create-btn'     => 'मुद्रा बनाएं',
-                    'code'           => 'कोड',
-                    'decimal'        => 'दशमलव',
-                    'delete-warning' => 'क्या आप वाकई इस क्रिया को करना चाहते हैं?',
-                    'general'        => 'सामान्य',
-                    'name'           => 'नाम',
-                    'save-btn'       => 'मुद्रा सहेजें',
-                    'symbol'         => 'प्रतीक',
-                    'title'          => 'नई मुद्रा बनाएं',
+                    'code'               => 'कोड',
+                    'create-btn'         => 'मुद्रा बनाएं',
+                    'currency-position'  => 'मुद्रा स्थिति',
+                    'decimal'            => 'दशमलव',
+                    'decimal-separator'  => 'दशमलव विभाजक',
+                    'delete-warning'     => 'क्या आप वाकई इस क्रिया को करना चाहते हैं?',
+                    'general'            => 'सामान्य',
+                    'name'               => 'नाम',
+                    'save-btn'           => 'मुद्रा सहेजें',
+                    'symbol'             => 'प्रतीक',
+                    'thousand-separator' => 'हजारों का विभाजक',
+                    'title'              => 'नई मुद्रा बनाएं',
                 ],
 
                 'edit' => [

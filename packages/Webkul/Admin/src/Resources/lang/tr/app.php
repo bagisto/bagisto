@@ -2071,15 +2071,18 @@ return [
                 ],
 
                 'create' => [
-                    'create-btn'     => 'Para Birimi Oluştur',
-                    'code'           => 'Kodu',
-                    'decimal'        => 'Ondalık',
-                    'delete-warning' => 'Emin misiniz, bu işlemi gerçekleştirmek istediğinize?',
-                    'general'        => 'Genel',
-                    'name'           => 'Adı',
-                    'save-btn'       => 'Para Birimini Kaydet',
-                    'symbol'         => 'Sembol',
-                    'title'          => 'Yeni Para Birimi Oluştur',
+                    'create-btn'         => 'Para Birimi Oluştur',
+                    'code'               => 'Kodu',
+                    'currency-position'  => 'Döviz Pozisyonu',
+                    'decimal'            => 'Ondalık',
+                    'decimal-seprator'   => 'Ondalık Ayırıcı',
+                    'delete-warning'     => 'Emin misiniz, bu işlemi gerçekleştirmek istediğinize?',
+                    'general'            => 'Genel',
+                    'name'               => 'Adı',
+                    'save-btn'           => 'Para Birimini Kaydet',
+                    'symbol'             => 'Sembol',
+                    'thousand-separator' => 'Binlik Ayırıcı',
+                    'title'              => 'Yeni Para Birimi Oluştur',
                 ],
 
                 'edit' => [

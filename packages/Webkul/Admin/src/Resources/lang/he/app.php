@@ -2070,15 +2070,18 @@ return [
                 ],
 
                 'create' => [
-                    'create-btn'     => 'צור מטבע',
-                    'code'           => 'קוד',
-                    'decimal'        => 'עשרוני',
-                    'delete-warning' => 'האם אתה בטוח שברצונך לבצע פעולה זו?',
-                    'general'        => 'כללי',
-                    'name'           => 'שם',
-                    'save-btn'       => 'שמור מטבע',
-                    'symbol'         => 'סמל',
-                    'title'          => 'צור מטבע חדש',
+                    'code'               => 'קוד',
+                    'create-btn'         => 'צור מטבע',
+                    'currency-position'  => 'מיקום המטבע',
+                    'decimal'            => 'עשרוני',
+                    'decimal-separator'  => 'מפריד עשרוני',
+                    'delete-warning'     => 'האם אתה בטוח שברצונך לבצע פעולה זו?',
+                    'general'            => 'כללי',
+                    'name'               => 'שם',
+                    'save-btn'           => 'שמור מטבע',
+                    'symbol'             => 'סמל',
+                    'thousand-separator' => 'מפריד אלפים',
+                    'title'              => 'צור מטבע חדש',
                 ],
 
                 'edit' => [

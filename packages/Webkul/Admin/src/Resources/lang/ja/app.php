@@ -2070,15 +2070,18 @@ return [
                 ],
 
                 'create' => [
-                    'create-btn'     => '通貨を作成',
-                    'code'           => 'コード',
-                    'decimal'        => '小数点',
-                    'delete-warning' => '本当にこのアクションを実行しますか？',
-                    'general'        => '一般',
-                    'name'           => '名前',
-                    'save-btn'       => '通貨を保存',
-                    'symbol'         => '記号',
-                    'title'          => '新しい通貨を作成',
+                    'create-btn'         => '通貨を作成',
+                    'code'               => 'コード',
+                    'currency-position'  => '通貨ポジション',
+                    'decimal'            => '小数点',
+                    'decimal-seprator'   => '小数点区切り文字',
+                    'delete-warning'     => '本当にこのアクションを実行しますか？',
+                    'general'            => '一般',
+                    'name'               => '名前',
+                    'save-btn'           => '通貨を保存',
+                    'symbol'             => '記号',
+                    'thousand-separator' => '千の区切り文字',
+                    'title'              => '新しい通貨を作成',
                 ],
 
                 'edit' => [

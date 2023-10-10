@@ -2070,15 +2070,18 @@ return [
                 ],
 
                 'create' => [
-                    'create-btn'     => '创建货币',
-                    'code'           => '代码',
-                    'decimal'        => '小数',
-                    'delete-warning' => '确定要执行此操作吗？',
-                    'general'        => '常规',
-                    'name'           => '名称',
-                    'save-btn'       => '保存货币',
-                    'symbol'         => '符号',
-                    'title'          => '创建新货币',
+                    'create-btn'         => '创建货币',
+                    'code'               => '代码',
+                    'currency-position'  => '货币头寸',
+                    'decimal'            => '小数',
+                    'decimal-seprator'   => '小数点分隔符',
+                    'delete-warning'     => '确定要执行此操作吗？',
+                    'general'            => '常规',
+                    'name'               => '名称',
+                    'save-btn'           => '保存货币',
+                    'symbol'             => '符号',
+                    'thousand-separator' => '千位分隔符',
+                    'title'              => '创建新货币',
                 ],
 
                 'edit' => [
