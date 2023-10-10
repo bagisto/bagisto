@@ -1,5 +1,5 @@
 <v-create-customer-address>
-    <div class="inline-flex gap-x-[8px] mr-[4px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800  hover:rounded-[6px]">
+    <div class="inline-flex gap-x-[8px] mr-[4px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]">
         <span class="icon-location text-[24px]"></span>
 
         @lang('admin::app.customers.addresses.create.create-address-btn')
@@ -16,7 +16,7 @@
         <!-- Address Create Button -->
         @if (bouncer()->hasPermission('customers.addresses.create'))
             <div 
-                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800  hover:rounded-[6px]"
+                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
                 @click="$refs.CustomerAddress.toggle()"
             >
                 <span class="icon-location text-[24px]"></span>
@@ -52,7 +52,7 @@
                             </x-admin::form.control-group.control>
                         </x-admin::form.control-group>
 
-                        <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
+                        <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
                             <div class="flex gap-[16px] max-sm:flex-wrap">
                                 <!-- Company Name -->
                                 <x-admin::form.control-group class="w-full mb-[10px]">
@@ -342,7 +342,7 @@
 
                                     <x-admin::form.control-group.label 
                                         for="default_address"
-                                        class="text-gray-600 dark:text-gray-300  font-semibold cursor-pointer" 
+                                        class="text-gray-600 dark:text-gray-300 font-semibold cursor-pointer" 
                                     >
                                         @lang('admin::app.customers.addresses.create.default-address')
                                     </x-admin::form.control-group.label>

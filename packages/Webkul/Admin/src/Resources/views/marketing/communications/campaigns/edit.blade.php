@@ -18,7 +18,7 @@
                 {{-- Cancel Button --}}
                 <a
                     href="{{ route('admin.marketing.communications.campaigns.index') }}"
-                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
                 >
                     @lang('admin::app.marketing.communications.campaigns.edit.back-btn')
                 </a>
@@ -38,7 +38,7 @@
             {{-- Left Section --}}
             <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                 {{-- General Section --}}
-                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.marketing.communications.campaigns.edit.general')
                     </p>

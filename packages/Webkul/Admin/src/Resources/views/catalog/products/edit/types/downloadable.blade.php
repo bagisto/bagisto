@@ -8,7 +8,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-downloadable-links-template">
-        <div class="relative bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+        <div class="relative bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
             <!-- Panel Header -->
             <div class="flex gap-[20px] justify-between mb-[10px] p-[16px]">
                 <div class="flex flex-col gap-[8px]">
@@ -489,7 +489,7 @@
     </script>
 
     <script type="text/x-template" id="v-downloadable-samples-template">
-        <div class="relative bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+        <div class="relative bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
             <!-- Panel Header -->
             <div class="flex gap-[20px] justify-between mb-[10px] p-[16px]">
                 <div class="flex flex-col gap-[8px]">

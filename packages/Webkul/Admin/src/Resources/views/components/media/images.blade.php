@@ -102,19 +102,19 @@
                 :style="{'width': this.width, 'height': this.height}"
             />
 
-            <div class="flex flex-col justify-between invisible w-full p-[11px] bg-white dark:bg-gray-900  absolute top-0 bottom-0 opacity-80 transition-all group-hover:visible">
+            <div class="flex flex-col justify-between invisible w-full p-[11px] bg-white dark:bg-gray-900 absolute top-0 bottom-0 opacity-80 transition-all group-hover:visible">
                 <!-- Image Name -->
                 <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold break-all"></p>
 
                 <!-- Actions -->
                 <div class="flex justify-between">
                     <span
-                        class="icon-delete text-[24px] p-[6px]  rounded-[6px] cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 "
+                        class="icon-delete text-[24px] p-[6px] rounded-[6px] cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800"
                         @click="remove"
                     ></span>
 
                     <label
-                        class="icon-edit text-[24px] p-[6px]  rounded-[6px] cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 "
+                        class="icon-edit text-[24px] p-[6px] rounded-[6px] cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800"
                         :for="$.uid + '_imageInput_' + index"
                     ></label>
 

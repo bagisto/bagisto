@@ -24,7 +24,7 @@
                             <!-- Cancel Button -->
                             <a
                                 href="{{ route('admin.settings.inventory_sources.index') }}"
-                                class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
+                                class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
                             >
                                 @lang('admin::app.settings.inventory-sources.edit.back-btn')
                             </a>
@@ -49,7 +49,7 @@
                         <!-- Left Section -->
                         <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                             <!-- General -->
-                            <div class="p-[16px] bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
+                            <div class="p-[16px] bg-white dark:bg-gray-900 box-shadow rounded-[4px]">
                                 <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.inventory-sources.edit.general')
                                 </p>
@@ -111,7 +111,7 @@
                                         name="description"
                                         :value="old('description') ?? $inventorySource->description"
                                         id="description"
-                                        class="text-gray-600 dark:text-gray-300  "
+                                        class="text-gray-600 dark:text-gray-300"
                                         :label="trans('admin::app.settings.inventory-sources.edit.description')"
                                         :placeholder="trans('admin::app.settings.inventory-sources.edit.description')"
                                     >
@@ -125,7 +125,7 @@
                             </div>
 
                             <!-- Contact Information -->
-                            <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                            <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                                 <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.inventory-sources.edit.contact-info')
                                 </p>
@@ -223,7 +223,7 @@
                             </div>
 
                             <!-- Source Address -->
-                            <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                            <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                                 <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.inventory-sources.edit.source-address')
                                 </p>

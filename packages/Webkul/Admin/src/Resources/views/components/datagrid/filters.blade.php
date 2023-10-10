@@ -381,7 +381,7 @@
             <div class="mb-[8px] mt-[5px] grid">
                 <input
                     type="text"
-                    class="block w-full rounded-[6px] border dark:border-gray-800   bg-white dark:bg-gray-900  px-[8px] py-[6px] text-[14px] leading-[24px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400  focus:border-gray-400  dark:focus:border-gray-400 "
+                    class="block w-full rounded-[6px] border dark:border-gray-800 bg-white dark:bg-gray-900 px-[8px] py-[6px] text-[14px] leading-[24px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400"
                     :name="column.index"
                     :placeholder="column.label"
                     @keyup.enter="filterPage($event, column)"
@@ -413,7 +413,7 @@
             <x-slot:toggle>
                 <button
                     type="button"
-                    class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border dark:border-gray-800   bg-white dark:bg-gray-900  px-[10px] py-[6px] text-center leading-[24px] text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400  focus:border-gray-400  dark:focus:border-gray-400 "
+                    class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border dark:border-gray-800 bg-white dark:bg-gray-900 px-[10px] py-[6px] text-center leading-[24px] text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 "
                 >
                     <span
                         class="text-[14px] text-gray-400 dark:text-gray-400" 
