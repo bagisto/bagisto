@@ -494,7 +494,7 @@ class OrderRepository extends Repository
     /**
      * Calculate average sale amount by date.
      */
-    public function GetAvgSaleAmountByDate(?Carbon $from = null, ?Carbon $to = null): ?float
+    public function getAvgSaleAmountByDate(?Carbon $from = null, ?Carbon $to = null): ?float
     {
         if ($from && $to) {
             return $this->getModel()
@@ -520,7 +520,7 @@ class OrderRepository extends Repository
     /**
      * Get customer with most sales by date.
      */
-    public function getCustomerWithMostSalesByDate(?Carbon $from = null, ?Carbon $to = null): Collection
+    public function getCustomersWithMostSalesByDate(?Carbon $from = null, ?Carbon $to = null): Collection
     {
         $tablePrefix = DB::getTablePrefix();
 

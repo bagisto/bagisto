@@ -22,7 +22,7 @@
 
     {{-- Body Component --}}
     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
-        {{-- Left Component --}}
+        {{-- Left Section --}}
         <div class=" flex flex-col gap-[30px] flex-1 max-xl:flex-auto">
             {{-- Overall Detailes --}}
             <div class="flex flex-col gap-[8px]   ">
@@ -44,7 +44,7 @@
                             {{-- Sales Stats --}}
                             <div class="grid gap-[4px] place-content-start">
                                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
-                                    {{ core()->formatBasePrice($statistics['total_sales']['current']) }}
+                                    {{ core()->formatBasePrice($statistics['over_all']['total_sales']['current']) }}
                                 </p>
 
                                 <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
@@ -53,12 +53,12 @@
 
                                 {{-- Sales Percentage --}}
                                 <div class="flex gap-[2px] items-center">
-                                    @if ($statistics['total_sales']['progress'] < 0)
+                                    @if ($statistics['over_all']['total_sales']['progress'] < 0)
                                         <span class="icon-down-stat text-[16px] text-red-500"></span>
 
                                         <p class="text-[12px] text-red-500 font-semibold">
                                             @lang('admin::app.dashboard.index.decreased', [
-                                                'progress' => -number_format($statistics['total_sales']['progress'], 1),
+                                                'progress' => -number_format($statistics['over_all']['total_sales']['progress'], 1),
                                             ])
                                         </p>
                                     @else
@@ -66,7 +66,7 @@
 
                                         <p class="text-[12px] text-emerald-500 font-semibold">
                                             @lang('admin::app.dashboard.index.increased', [
-                                                'progress' => number_format($statistics['total_sales']['progress'], 1),
+                                                'progress' => number_format($statistics['over_all']['total_sales']['progress'], 1),
                                             ])
                                         </p>
                                     @endif
@@ -86,7 +86,7 @@
                             {{-- Orders Stats --}}
                             <div class="grid gap-[4px] place-content-start">
                                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
-                                    {{ $statistics['total_orders']['current'] }}
+                                    {{ $statistics['over_all']['total_orders']['current'] }}
                                 </p>
 
                                 <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
@@ -95,12 +95,12 @@
 
                                 {{-- Order Percentage --}}
                                 <div class="flex gap-[2px] items-center">
-                                    @if ($statistics['total_orders']['progress'] < 0)
+                                    @if ($statistics['over_all']['total_orders']['progress'] < 0)
                                         <span class="icon-down-stat text-[16px] text-red-500"></span>
 
                                         <p class="text-[12px] text-red-500 font-semibold">
                                             @lang('admin::app.dashboard.index.decreased', [
-                                                'progress' => -number_format($statistics['total_orders']['progress'], 1),
+                                                'progress' => -number_format($statistics['over_all']['total_orders']['progress'], 1),
                                             ])
                                         </p>
                                     @else
@@ -108,7 +108,7 @@
 
                                         <p class="text-[12px] text-emerald-500 font-semibold">
                                             @lang('admin::app.dashboard.index.increased', [
-                                                'progress' => number_format($statistics['total_orders']['progress'], 1),
+                                                'progress' => number_format($statistics['over_all']['total_orders']['progress'], 1),
                                             ])
                                         </p>
                                     @endif
@@ -128,7 +128,7 @@
                             {{-- Customers Stats --}}
                             <div class="grid gap-[4px] place-content-start">
                                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
-                                    {{ $statistics['total_customers']['current'] }}
+                                    {{ $statistics['over_all']['total_customers']['current'] }}
                                 </p>
 
                                 <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
@@ -137,12 +137,12 @@
 
                                 {{-- Customers Percentage --}}
                                 <div class="flex gap-[2px] items-center">
-                                    @if ($statistics['total_customers']['progress'] < 0)
+                                    @if ($statistics['over_all']['total_customers']['progress'] < 0)
                                         <span class="icon-down-stat text-[16px] text-red-500"></span>
 
                                         <p class="text-[12px] text-red-500 font-semibold">
                                             @lang('admin::app.dashboard.index.decreased', [
-                                                    'progress' => -number_format($statistics['total_customers']['progress'], 1)
+                                                    'progress' => -number_format($statistics['over_all']['total_customers']['progress'], 1)
                                             ])
                                         </p>
                                     @else
@@ -150,7 +150,7 @@
 
                                         <p class="text-[12px] text-emerald-500 font-semibold">
                                             @lang('admin::app.dashboard.index.increased', [
-                                                'progress' => number_format($statistics['total_customers']['progress'], 1)
+                                                'progress' => number_format($statistics['over_all']['total_customers']['progress'], 1)
                                             ])
                                         </p>
                                     @endif
@@ -170,7 +170,7 @@
                             {{-- Sales Stats --}}
                             <div class="grid gap-[4px] place-content-start">
                                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
-                                    {{ core()->formatBasePrice($statistics['avg_sales']['current']) }}
+                                    {{ core()->formatBasePrice($statistics['over_all']['avg_sales']['current']) }}
                                 </p>
 
                                 <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
@@ -179,19 +179,19 @@
 
                                 {{-- Sales Percentage --}}
                                 <div class="flex gap-[2px] items-center">
-                                    @if ($statistics['avg_sales']['progress'] < 0)
+                                    @if ($statistics['over_all']['avg_sales']['progress'] < 0)
                                         <span class="icon-down-stat text-[16px] text-red-500"></span>
 
                                         <p class="text-[12px] text-red-500 font-semibold">
                                             @lang('admin::app.dashboard.index.decreased', [
-                                                'progress' => -number_format($statistics['avg_sales']['progress'], 1),
+                                                'progress' => -number_format($statistics['over_all']['avg_sales']['progress'], 1),
                                             ])
                                         </p>
                                     @else
                                         <span class="icon-up-stat text-[16px] text-emerald-500"></span>
                                         <p class="text-[12px] text-emerald-500 font-semibold">
                                             @lang('admin::app.dashboard.index.increased', [
-                                                'progress' => number_format($statistics['avg_sales']['progress'], 1),
+                                                'progress' => number_format($statistics['over_all']['avg_sales']['progress'], 1),
                                             ])
                                         </p>
                                     @endif
@@ -210,7 +210,7 @@
 
                             <div class="grid gap-[4px] place-content-start">
                                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
-                                    {{ core()->formatBasePrice($statistics['total_unpaid_invoices']) }}
+                                    {{ core()->formatBasePrice($statistics['over_all']['total_unpaid_invoices']) }}
                                 </p>
 
                                 <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
@@ -241,7 +241,7 @@
                             {{-- Sales Stats --}}
                             <div class="grid gap-[4px] place-content-start">
                                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
-                                    {{ core()->formatBasePrice($statistics['today_details']['today_sales']['current']) }}
+                                    {{ core()->formatBasePrice($statistics['today']['total_sales']['current']) }}
                                 </p>
 
                                 <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
@@ -250,12 +250,12 @@
 
                                 {{-- Percentage Of Sales --}}
                                 <div class="flex gap-[2px] items-center">
-                                    @if ($statistics['today_details']['today_sales']['progress'] < 0)
+                                    @if ($statistics['today']['total_sales']['progress'] < 0)
                                         <span class="icon-down-stat text-[16px] text-red-500"></span>
 
                                         <p class="text-[12px] text-red-500 font-semibold">
                                             @lang('admin::app.dashboard.index.decreased', [
-                                                'progress' => -number_format($statistics['today_details']['today_sales']['progress'], 1),
+                                                'progress' => -number_format($statistics['today']['total_sales']['progress'], 1),
                                             ])
                                         </p>
                                     @else
@@ -263,7 +263,7 @@
 
                                         <p class="text-[12px] text-emerald-500 font-semibold">
                                             @lang('admin::app.dashboard.index.increased', [
-                                                'progress' => number_format($statistics['today_details']['today_sales']['progress'], 1),
+                                                'progress' => number_format($statistics['today']['total_sales']['progress'], 1),
                                             ])
                                         </p>
                                     @endif
@@ -282,7 +282,7 @@
                             {{-- Orders Stats --}}
                             <div class="grid gap-[4px] place-content-start">
                                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
-                                    {{ $statistics['today_details']['today_orders']['current']->count() }}
+                                    {{ $statistics['today']['total_orders']['current'] }}
                                 </p>
 
                                 <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
@@ -291,12 +291,12 @@
 
                                 {{-- Orders Percentage --}}
                                 <div class="flex gap-[2px] items-center">
-                                    @if ($statistics['today_details']['today_orders']['progress'] < 0)
+                                    @if ($statistics['today']['total_orders']['progress'] < 0)
                                         <span class="icon-down-stat text-[16px] text-red-500"></span>
 
                                         <p class="text-[12px] text-red-500 font-semibold">
                                             @lang('admin::app.dashboard.index.decreased', [
-                                                'progress' => -number_format($statistics['today_details']['today_orders']['progress'], 1),
+                                                'progress' => -number_format($statistics['today']['total_orders']['progress'], 1),
                                             ])
                                         </p>
                                     @else
@@ -304,7 +304,7 @@
 
                                         <p class="text-[12px] text-emerald-500 font-semibold">
                                             @lang('admin::app.dashboard.index.increased', [
-                                                'progress' => number_format($statistics['today_details']['today_orders']['progress'], 1),
+                                                'progress' => number_format($statistics['today']['total_orders']['progress'], 1),
                                             ])
                                         </p>
                                     @endif
@@ -323,7 +323,7 @@
                             {{-- Customers Stats --}}
                             <div class="grid gap-[4px] place-content-start">
                                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
-                                    {{ $statistics['today_details']['today_customers']['current'] }}
+                                    {{ $statistics['today']['total_customers']['current'] }}
                                 </p>
 
                                 <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
@@ -332,12 +332,12 @@
 
                                 {{-- Customers Percentage --}}
                                 <div class="flex gap-[2px] items-center">
-                                    @if ($statistics['today_details']['today_customers']['progress'] < 0)
+                                    @if ($statistics['today']['total_customers']['progress'] < 0)
                                         <span class="icon-down-stat text-[16px] text-red-500"></span>
 
                                         <p class="text-[12px] text-red-500 font-semibold">
                                             @lang('admin::app.dashboard.index.decreased', [
-                                                'progress' => -number_format($statistics['today_details']['today_customers']['progress'], 1),
+                                                'progress' => -number_format($statistics['today']['total_customers']['progress'], 1),
                                             ])
                                         </p>
                                     @else
@@ -345,7 +345,7 @@
 
                                         <p class="text-[12px] text-emerald-500 font-semibold">
                                             @lang('admin::app.dashboard.index.increased', [
-                                                'progress' => number_format($statistics['today_details']['today_customers']['progress'], 1),
+                                                'progress' => number_format($statistics['today']['total_customers']['progress'], 1),
                                             ])
                                         </p>
                                     @endif
@@ -355,7 +355,7 @@
                     </div>
 
                     <!-- Today Orders Details -->
-                    @foreach ($statistics['today_details']['today_orders']['current'] as $item)
+                    @foreach ($statistics['today']['orders'] as $item)
                         <div class="row grid grid-cols-4  gap-y-[24px] p-[16px]  bg-white dark:bg-gray-900 border-b-[1px] dark:border-gray-800   transition-all hover:bg-gray-50 dark:hover:bg-gray-950   max-1580:grid-cols-3 max-sm:grid-cols-1">
                             {{-- Order ID, Status, Created --}}
                             <div class="flex gap-[10px]">
@@ -602,7 +602,7 @@
             </div>
         </div>
 
-        {{-- Right Component --}}
+        {{-- Right Section --}}
         <div class="flex flex-col gap-[8px] w-[360px] max-w-full   max-sm:w-full">
             {{-- First Component --}}
             <p class="text-[16px] text-gray-600 dark:text-gray-300 font-semibold">
@@ -677,7 +677,7 @@
     
                                     <!-- Total Order Revenue -->
                                     <p class="text-[18px] text-gray-800 dark:text-white font-bold">
-                                        @{{ statistics.total_sales?.formatted_total }}
+                                        @{{ statistics.sales.total_sales?.formatted_total }}
                                     </p>
                                 </div>
     
@@ -712,7 +712,7 @@
     
                                     <!-- Total Order Revenue -->
                                     <p class="text-[18px] text-gray-800 dark:text-white font-bold">
-                                        @{{ statistics.total_visitors.current }}
+                                        @{{ statistics.visitors.total_visitors.current }}
                                     </p>
                                 </div>
     
@@ -759,12 +759,12 @@
                         <template v-else>
                             <div
                                 class="flex flex-col"
-                                v-if="statistics?.top_selling_products?.length"
+                                v-if="statistics?.products?.length"
                             >
                                 <a
                                     :href="`{{route('admin.catalog.products.edit', '')}}/${item.product_id}`"
                                     class="flex gap-[10px] p-[16px] border-b-[1px] dark:border-gray-800   last:border-b-0 transition-all hover:bg-gray-50 dark:hover:bg-gray-950  "
-                                    v-for="item in statistics.top_selling_products"
+                                    v-for="item in statistics.products"
                                 >
                                     <!-- Product Item -->
                                     <img
@@ -848,7 +848,6 @@
                     </div>
 
                     <!-- Customers Shimmer -->
-                    
                     <template v-if="isLoading">
                         <x-admin::shimmer.dashboard.right.most-customer-sales/>
                     </template>
@@ -857,8 +856,8 @@
                         <!-- Customers Lists -->
                         <div
                             class="flex flex-col gap-[32px] p-[16px] border-b-[1px] dark:border-gray-800   last:border-b-0 transition-all hover:bg-gray-50 dark:hover:bg-gray-950  "
-                            v-if="statistics?.customer_with_most_sales?.length"
-                            v-for="item in statistics.customer_with_most_sales"
+                            v-if="statistics?.customers?.length"
+                            v-for="item in statistics.customers"
                         >
                             <a
                                 :href="`{{ route('admin.customers.customers.view', '') }}/${item.customer_id}`"
@@ -991,7 +990,9 @@
                                 const { startDate, endDate, statistics } = response.data;
 
                                 this.formatStart = startDate;
+
                                 this.formatEnd = endDate;
+
                                 this.statistics = statistics;
 
                                 setTimeout(() => {
@@ -1012,7 +1013,7 @@
                     salesGraphChart () {
                         const ctx = document.getElementById('totalSalesChart');
 
-                        const data = this.statistics.sale_graph;
+                        const data = this.statistics.sales.sales_over_time;
 
                         if (this.salesChart) {
                            this.salesChart.destroy();
@@ -1051,7 +1052,7 @@
                     visitorsGraphChart () {
                         const ctx = document.getElementById('totalVisitorsChart');
 
-                        const data = this.statistics.visitor_graph;
+                        const data = this.statistics.visitors.visitors_over_time;
 
                         if (this.visitorsChart) {
                            this.visitorsChart.destroy();
