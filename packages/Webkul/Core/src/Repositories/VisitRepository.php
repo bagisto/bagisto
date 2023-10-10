@@ -20,62 +20,87 @@ class VisitRepository extends Repository
 
     /**
      * Calculate sale amount by date.
+     * 
+     * @param  \Carbon\Carbon|null  $from
+     * @param  \Carbon\Carbon|null  $to
+     * @return int
      */
     public function getTotalCountByDate(?Carbon $from = null, ?Carbon $to = null): ?int
     {
+        $qb = $this->whereNull('visitable_id');
+
         if ($from && $to) {
-            return $this->whereNull('visitable_id')
-                ->whereBetween('created_at', [$from, $to])
-                ->count();
+            return $qb->whereBetween('created_at', [$from, $to])->count();
         }
 
         if ($from) {
-            return $this->whereNull('visitable_id')
-                ->where('created_at', '>=', $from)
-                ->count();
+            return $qb->where('created_at', '>=', $from)->count();
         }
 
         if ($to) {
-            return $this->whereNull('visitable_id')
-                ->where('created_at', '<=', $to)
-                ->count();
+            return $qb->where('created_at', '<=', $to)->count();
         }
 
         return $this->model->whereNull('visitable_id')->count();
     }
 
     /**
-     * Calculate sale amount by date.
+     * Returns per day total count by date.
+     * 
+     * @param  \Carbon\Carbon|null  $from
+     * @param  \Carbon\Carbon|null  $to
+     * @return \Illuminate\Support\Collection
      */
-    public function getTotalUniqueCountByDate(?Carbon $from = null, ?Carbon $to = null): ?int
+    public function getPerDayTotalCountDate(?Carbon $from = null, ?Carbon $to = null)
     {
+        $qb = $this->select(
+                DB::raw('DATE(created_at) AS date'),
+                DB::raw('COUNT(*) AS count')
+            )
+            ->whereNull('visitable_id')
+            ->whereBetween('created_at', [$from, $to])
+            ->groupBy(DB::raw('DATE(created_at)'));
+
         if ($from && $to) {
-            return $this->whereNull('visitable_id')
-                ->whereBetween('created_at', [$from, $to])
-                ->groupBy(DB::raw('CONCAT(ip, "-", visitor_id)'))
-                ->get()
-                ->count();
+            return $qb->whereBetween('created_at', [$from, $to])->get();
         }
 
         if ($from) {
-            return $this->whereNull('visitable_id')
-                ->where('created_at', '>=', $from)
-                ->groupBy(DB::raw('CONCAT(ip, "-", visitor_id)'))
-                ->get()
-                ->count();
+            return $qb->where('created_at', '<=', $to)->get();
         }
 
         if ($to) {
-            return $this->whereNull('visitable_id')
-                ->where('created_at', '<=', $to)
-                ->groupBy(DB::raw('CONCAT(ip, "-", visitor_id)'))
-                ->get()
-                ->count();
+            return $qb->where('created_at', '>=', $from)->get();
         }
 
-        return $this->whereNull('visitable_id')
-            ->groupBy(DB::raw('CONCAT(ip, "-", visitor_id)'))
-            ->get()
-            ->count();
+        return $qb->get();
+    }
+
+    /**
+     * Calculate sale amount by date.
+     * 
+     * @param  \Carbon\Carbon|null  $from
+     * @param  \Carbon\Carbon|null  $to
+     * @return int
+     */
+    public function getTotalUniqueCountByDate(?Carbon $from = null, ?Carbon $to = null): ?int
+    {
+        $qb = $this->whereNull('visitable_id')
+            ->whereBetween('created_at', [$from, $to])
+            ->groupBy(DB::raw('CONCAT(ip, "-", visitor_id)'));
+
+        if ($from && $to) {
+            return $qb->whereBetween('created_at', [$from, $to])->get()->count();
+        }
+
+        if ($from) {
+            return $qb->whereBetween('created_at', [$from, $to])->get()->count();
+        }
+
+        if ($to) {
+            return $qb->whereBetween('created_at', [$from, $to])->get()->count();
+        }
+
+        return $qb->whereBetween('created_at', [$from, $to])->get()->count();
     }
 }

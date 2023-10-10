@@ -1,7 +1,8 @@
 <?php
 
-namespace Webkul\Admin\Services;
+namespace Webkul\Admin\Helpers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection as SupportCollection;
@@ -15,40 +16,61 @@ use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Core\Repositories\VisitRepository;
 
-class DashboardService
+class Reporting
 {
     /**
      * The starting date for a given period.
+     * 
+     * @var \Carbon\Carbon
      */
     protected Carbon $startDate;
 
     /**
      * The ending date for a given period.
+     * 
+     * @var \Carbon\Carbon
      */
     protected Carbon $endDate;
 
     /**
      * The starting date for the previous period.
+     * 
+     * @var \Carbon\Carbon
      */
     protected Carbon $lastStartDate;
 
     /**
      * The ending date for the previous period.
+     * 
+     * @var \Carbon\Carbon
      */
     protected Carbon $lastEndDate;
 
     /**
      * The start date for the previous day.
+     * 
+     * @var \Carbon\Carbon
      */
     protected Carbon $yesterdayStartDate;
 
     /**
      * The end date for the previous day.
+     * 
+     * @var \Carbon\Carbon
      */
     protected Carbon $yesterdayEndDate;
 
     /**
-     * Create a service instance.
+     * Create a helper instance.
+     * 
+     * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
+     * @param  \Webkul\Sales\Repositories\OrderItemRepository  $orderItemRepository
+     * @param  \Webkul\Sales\Repositories\InvoiceRepository  $invoiceRepository
+     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
+     * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Core\Repositories\VisitRepository  $visitRepository
+     * @return void
      */
     public function __construct(
         protected OrderRepository $orderRepository,
@@ -60,37 +82,18 @@ class DashboardService
         protected VisitRepository $visitRepository,
     ) {
         $this->setLastStartDate();
+
         $this->setLastEndDate();
         
         $this->yesterdayStartDate = now()->subDay()->startOfDay();
+
         $this->yesterdayEndDate = now()->subDay()->endOfDay();
     }
 
     /**
-     * Gets statistics for various metrics.
-     */
-    public function getStatistics(): array
-    {
-        return [
-            'total_customers'          => $this->getTotalCustomers(),
-            'total_orders'             => $this->getTotalOrders(),
-            'total_sales'              => $this->getTotalSales(),
-            'total_visitors'           => $this->getTotalVisitors(),
-            'avg_sales'                => $this->getAvgSales(),
-            'unique_visitors'          => $this->getUniqueVisitors(),
-            'total_unpaid_invoices'    => $this->getTotalAmountOfPendingInvoices(),
-            'top_selling_categories'   => $this->getTopSellingCategories(),
-            'top_selling_products'     => $this->getTopSellingProducts(),
-            'customer_with_most_sales' => $this->getCustomerWithMostSales(),
-            'stock_threshold'          => $this->getStockThreshold(),
-            'sale_graph'               => $this->generateSaleGraph(),
-            'visitor_graph'            => $this->generateVisitorGraph(),
-            'today_details'            => $this->getTodayDetails(),
-        ];
-    }
-
-    /**
      * Get the start date.
+     * 
+     * @return \Carbon\Carbon
      */
     public function getStartDate(): Carbon
     {
@@ -99,6 +102,8 @@ class DashboardService
 
     /**
      * Get the end date.
+     * 
+     * @return \Carbon\Carbon
      */
     public function getEndDate(): Carbon
     {
@@ -107,8 +112,11 @@ class DashboardService
 
     /**
      * Set the start date or default to 30 days ago if not provided.
+     * 
+     * @param  \Carbon\Carbon|null  $startDate
+     * @return void
      */
-    public function setStartDate(?Carbon $startDate = null): DashboardService
+    public function setStartDate(?Carbon $startDate = null): self
     {
         $this->startDate = $startDate ? $startDate->startOfDay() : now()->subDays(30)->startOfDay();
 
@@ -118,8 +126,11 @@ class DashboardService
     /**
      * Sets the end date to the provided date's end of day, or to the current 
      * date if not provided or if the provided date is in the future.
+     * 
+     * @param  \Carbon\Carbon|null  $endDate
+     * @return void
      */
-    public function setEndDate(?Carbon $endDate = null): DashboardService
+    public function setEndDate(?Carbon $endDate = null): self
     {
         $this->endDate = ($endDate && $endDate->endOfDay() <= now()) ? $endDate->endOfDay() : now();
 
@@ -128,14 +139,16 @@ class DashboardService
 
     /**
      * Sets the start date for the last period.
+     * 
+     * @return void
      */
     private function setLastStartDate(): void
     {
-        if (!isset($this->startDate)) {
+        if (! isset($this->startDate)) {
             $this->setStartDate();
         }
 
-        if (!isset($this->endDate)) {
+        if (! isset($this->endDate)) {
             $this->setEndDate();
         }
 
@@ -144,6 +157,8 @@ class DashboardService
 
     /**
      * Sets the end date for the last period.
+     * 
+     * @return void
      */
     private function setLastEndDate(): void
     {
@@ -155,6 +170,7 @@ class DashboardService
      *
      * @param  float|int  $previous
      * @param  float|int  $current
+     * @return float|int
      */
     private function getPercentageChange($previous, $current): float|int
     {
@@ -167,93 +183,112 @@ class DashboardService
 
     /**
      * Retrieves total customers and their progress.
+     * 
+     * @param  \Carbon\Carbon|null  $todayStartOfDay
+     * @param  \Carbon\Carbon|null  $todayEndOfDay
+     * @return array
      */
-    private function getTotalCustomers($todayStartOfDay = null, $todayEndOfDay = null): array
+    public function getTotalCustomers($todayStartOfDay = null, $todayEndOfDay = null): array
     {
         if ($todayStartOfDay && $todayEndOfDay) {
             return [
                 'previous' => $previous = $this->customerRepository->getCustomersCountByDate($this->yesterdayEndDate, $this->yesterdayStartDate),
-                'current' => $current = $this->customerRepository->getCustomersCountByDate($todayStartOfDay, $todayEndOfDay),
+                'current'  => $current = $this->customerRepository->getCustomersCountByDate($todayStartOfDay, $todayEndOfDay),
                 'progress' => $this->getPercentageChange($previous, $current)
             ];
         }
 
         return [
             'previous' => $previous = $this->customerRepository->getCustomersCountByDate($this->lastStartDate, $this->lastEndDate),
-            'current' => $current = $this->customerRepository->getCustomersCountByDate($this->startDate, $this->endDate),
+            'current'  => $current = $this->customerRepository->getCustomersCountByDate($this->startDate, $this->endDate),
             'progress' => $this->getPercentageChange($previous, $current)
         ];
     }
 
     /**
      * Retrieves total orders and their progress.
+     * 
+     * @param  \Carbon\Carbon|null  $todayStartOfDay
+     * @param  \Carbon\Carbon|null  $todayEndOfDay
+     * @return array
      */
-    private function getTotalOrders($todayStartOfDay = null, $todayEndOfDay = null)
+    public function getTotalOrders($todayStartOfDay = null, $todayEndOfDay = null)
     {
         if ($todayStartOfDay && $todayEndOfDay) {
             return [
                 'previous' => $previous = $this->orderRepository->getOrdersCountByDate($this->yesterdayEndDate, $this->yesterdayStartDate),
-                'current' => $current = $this->orderRepository->getOrdersByDate($todayStartOfDay, $todayEndOfDay),
+                'current'  => $current = $this->orderRepository->getOrdersByDate($todayStartOfDay, $todayEndOfDay),
                 'progress' => $this->getPercentageChange($previous, count($current))
             ];
         }
 
         return [
             'previous' => $previous = $this->orderRepository->getOrdersCountByDate($this->lastStartDate, $this->lastEndDate),
-            'current' => $current = $this->orderRepository->getOrdersCountByDate($this->startDate, $this->endDate),
+            'current'  => $current = $this->orderRepository->getOrdersCountByDate($this->startDate, $this->endDate),
             'progress' => $this->getPercentageChange($previous, $current)
         ];
     }
 
     /**
      * Retrieves total sales and their progress.
+     * 
+     * @param  \Carbon\Carbon|null  $todayStartOfDay
+     * @param  \Carbon\Carbon|null  $todayEndOfDay
+     * @return array
      */
-    private function getTotalSales($todayStartOfDay = null, $todayEndOfDay = null): array
+    public function getTotalSales($todayStartOfDay = null, $todayEndOfDay = null): array
     {
         if ($todayStartOfDay && $todayEndOfDay) {
             return [
-                'previous' => $previous = $this->orderRepository->calculateSaleAmountByDate($this->yesterdayEndDate, $this->yesterdayStartDate),
-                'current' => $current = $this->orderRepository->calculateSaleAmountByDate($todayStartOfDay, $todayEndOfDay),
+                'previous' => $previous = $this->orderRepository->getTotalSaleAmountByDate($this->yesterdayEndDate, $this->yesterdayStartDate),
+                'current'  => $current = $this->orderRepository->getTotalSaleAmountByDate($todayStartOfDay, $todayEndOfDay),
                 'progress' => $this->getPercentageChange($previous, $current)
             ];
         }
 
-        $getTotalSales = $this->orderRepository->calculateSaleAmountByDate($this->startDate, $this->endDate);
+        $getTotalSales = $this->orderRepository->getTotalSaleAmountByDate($this->startDate, $this->endDate);
 
         return [
-            'previous' => $previous = $this->orderRepository->calculateSaleAmountByDate($this->lastStartDate, $this->lastEndDate),
-            'current' => $current = $getTotalSales,
+            'previous'        => $previous = $this->orderRepository->getTotalSaleAmountByDate($this->lastStartDate, $this->lastEndDate),
+            'current'         => $current = $getTotalSales,
             'formatted_total' => core()->formatBasePrice($getTotalSales),
-            'progress' => $this->getPercentageChange($previous, $current)
+            'progress'        => $this->getPercentageChange($previous, $current)
         ];
     }
 
     /**
      * Retrieves average sales and their progress.
+     * 
+     * @return array
      */
-    private function getAvgSales(): array
+    public function getAvgSales(): array
     {
         return [
-            'previous' => $previous = $this->orderRepository->calculateAvgSaleAmountByDate($this->lastStartDate, $this->lastEndDate),
-            'current' => $current = $this->orderRepository->calculateAvgSaleAmountByDate($this->startDate, $this->endDate),
+            'previous' => $previous = $this->orderRepository->GetAvgSaleAmountByDate($this->lastStartDate, $this->lastEndDate),
+            'current'  => $current = $this->orderRepository->GetAvgSaleAmountByDate($this->startDate, $this->endDate),
             'progress' => $this->getPercentageChange($previous, $current)
         ];
     }
 
     /**
      * Gets the total amount of pending invoices.
+     * 
+     * @return float
      */
-    private function getTotalAmountOfPendingInvoices(): float
+    public function getTotalAmountOfPendingInvoices(): float
     {
         return $this->invoiceRepository->getTotalAmountOfPendingInvoices();
     }
 
     /**
      * Gets the top-selling categories.
+     * 
+     * @return \Illuminate\Support\Collection
      */
-    private function getTopSellingCategories(): SupportCollection
+    public function getTopSellingCategories(): SupportCollection
     {
         $orderItems = $this->orderItemRepository->getTopSellingOrderItemsByDate($this->startDate, $this->endDate);
+
         $categories = $this->getCategoryStats($orderItems)->collapse()->unique('category_id')->values();
 
         return $categories->map(fn (array $category) => (object) $category);
@@ -261,11 +296,13 @@ class DashboardService
 
     /**
      * Calculates category statistics from order items.
+     * 
+     * @param  \Illuminate\Database\Eloquent\Collection  $orderItems
+     * @return \Illuminate\Support\Collection
      */
     private function getCategoryStats(Collection $orderItems): SupportCollection
     {
-        $productIds = $orderItems->pluck('product_id');
-        $products = $this->productRepository->whereIn('id', $productIds)->with('categories')->get();
+        $products = $this->productRepository->whereIn('id', $orderItems->pluck('product_id'))->with('categories')->get();
 
         return $orderItems->map(function ($orderItem) use ($products) {
             $product = $products->firstWhere('id', $orderItem->product_id);
@@ -278,28 +315,35 @@ class DashboardService
 
     /**
      * Gets category details.
+     * 
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  \Webkul\Sales\Contracts\OrderItem  $orderItem
+     * @return \Illuminate\Support\Collection
      */
     private function getCategoryDetails(Product $product, OrderItem $orderItem): SupportCollection
     {
         return $product->categories->map(function ($category) use ($orderItem) {
             return [
                 'total_qty_invoiced' => $orderItem->total_qty_invoiced,
-                'total_products' => $category->products->count(),
-                'category_id' => $category->id,
-                'name' => $category->translations->where('locale', app()->getLocale())->first()?->name,
+                'total_products'     => $category->products->count(),
+                'category_id'        => $category->id,
+                'name'               => $category->translations->where('locale', app()->getLocale())->first()?->name,
             ];
         });
     }
 
     /**
      * Gets top-selling products.
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection
      */
-    private function getTopSellingProducts(): collection
+    public function getTopSellingProducts(): collection
     {
         $topSellingProducts = $this->orderItemRepository->getTopSellingProductsByDate($this->startDate, $this->endDate);
 
         foreach ($topSellingProducts as $orderItem) {
             $orderItem->formatted_total = core()->formatBasePrice($orderItem->total);
+
             $orderItem->formatted_price = core()->formatBasePrice($orderItem->price);
         }
 
@@ -308,10 +352,11 @@ class DashboardService
 
     /**
      * Gets customer with most sales.
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection
      */
-    private function getCustomerWithMostSales(): Collection
+    public function getCustomerWithMostSales(): Collection
     {
-
         $customerWithMostSales = $this->orderRepository->getCustomerWithMostSalesByDate($this->startDate, $this->endDate);
 
         foreach ($customerWithMostSales as $order) {
@@ -323,8 +368,10 @@ class DashboardService
 
     /**
      * Gets stock threshold.
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection
      */
-    private function getStockThreshold(): Collection
+    public function getStockThreshold(): Collection
     {
         return $this->productInventoryRepository->getStockThreshold();
     }
@@ -334,16 +381,18 @@ class DashboardService
      * 
      * @return array
      */
-    private function generateSaleGraph(): array
+    public function generateSaleGraph(): array
     {
         $data = [];
 
-        foreach (core()->getTimeInterval($this->startDate, $this->endDate) as $interval) {
-            $total = $this->orderRepository->calculateSaleAmountByDate($interval['start'], $interval['end']);
+        $sales = $this->orderRepository->getPerDayTotalSaleAmountByDate($this->startDate, $this->endDate);
+
+        foreach ($this->getTimeInterval() as $interval) {
+            $total = $sales->where('date', $interval['start']->format('Y-m-d'))->first();
 
             $data['label'][] = $interval['start']->format('d M');
-            $data['total'][] = $total;
-            $data['formatted_total'][] = core()->formatBasePrice($total);
+            $data['total'][] = $total?->total ?? 0;
+            $data['formatted_total'][] = core()->formatBasePrice($total?->total ?? 0);
         }
 
         return $data;
@@ -351,8 +400,12 @@ class DashboardService
 
     /**
      * Retrieves total visitors and their progress.
+     * 
+     * @param  \Carbon\Carbon|null  $todayStartOfDay
+     * @param  \Carbon\Carbon|null  $todayEndOfDay
+     * @return array
      */
-    private function getTotalVisitors($todayStartOfDay = null, $todayEndOfDay = null)
+    public function getTotalVisitors($todayStartOfDay = null, $todayEndOfDay = null)
     {
         if ($todayStartOfDay && $todayEndOfDay) {
             return [
@@ -371,8 +424,10 @@ class DashboardService
 
     /**
      * Retrieves unique visitors and their progress.
+     * 
+     * @return array
      */
-    private function getUniqueVisitors(): array
+    public function getUniqueVisitors(): array
     {
         return [
             'previous' => $previous = $this->visitRepository->getTotalUniqueCountByDate($this->lastStartDate, $this->lastEndDate),
@@ -386,15 +441,17 @@ class DashboardService
      * 
      * @return array
      */
-    private function generateVisitorGraph(): array
+    public function generateVisitorGraph(): array
     {
         $data = [];
 
-        foreach (core()->getTimeInterval($this->startDate, $this->endDate) as $interval) {
-            $total = $this->visitRepository->getTotalCountByDate($interval['start'], $interval['end']);
+        $visits = $this->visitRepository->getPerDayTotalCountDate($this->startDate, $this->endDate);
+        
+        foreach ($this->getTimeInterval() as $interval) {
+            $total = $visits->where('date', $interval['start']->format('Y-m-d'))->first();
 
             $data['label'][] = $interval['start']->format('d M');
-            $data['total'][] = $total;
+            $data['total'][] = $total?->count ?? 0;
         }
 
         return $data;
@@ -405,7 +462,7 @@ class DashboardService
      * 
      * @return array
      */
-    private function getTodayDetails(): array
+    public function getTodayDetails(): array
     {
         $todayStartOfDay = now()->today();
 
@@ -416,5 +473,86 @@ class DashboardService
             'today_sales'     => $this->getTotalSales($todayStartOfDay, $todayEndOfDay),
             'today_orders'    => $this->getTotalOrders($todayStartOfDay, $todayEndOfDay),
         ];
+    }
+
+    /**
+     * Returns time intervals.
+     *
+     * @return array
+     */
+    public function getTimeInterval()
+    {
+        $timeIntervals = [];
+
+        $totalMonths = $this->startDate->diffInMonths($this->endDate) + 1;
+
+        /**
+         * If the difference between the start and end date is more than 5 months
+         */
+        if ($totalMonths > 5) {
+            for ($i = 0; $i < $totalMonths; $i++) {
+                $date = clone $this->startDate;
+
+                $date->addMonths($i);
+
+                $start = Carbon::createFromTimeString($date->format('Y-m-d') . ' 00:00:01');
+
+                $end = $totalMonths - 1 == $i
+                    ? $this->endDate
+                    : Carbon::createFromTimeString($date->addMonth()->subDay()->format('Y-m-d') . ' 23:59:59');
+
+                $timeIntervals[] = ['start' => $start, 'end' => $end, 'formattedDate' => $date->format('M')];
+            }
+
+            return $timeIntervals;
+        }
+        
+        $startWeekDay = Carbon::createFromTimeString(core()->xWeekRange($this->startDate, 0) . ' 00:00:01');
+
+        $endWeekDay = Carbon::createFromTimeString(core()->xWeekRange($this->endDate, 1) . ' 23:59:59');
+
+        $totalWeeks = $startWeekDay->diffInWeeks($endWeekDay);
+
+        /**
+         * If the difference between the start and end date is more than 6 weeks
+         */
+        if ($totalWeeks > 6) {
+            for ($i = 0; $i < $totalWeeks; $i++) {
+                $date = clone $this->startDate;
+
+                $date->addWeeks($i);
+
+                $start = $i == 0
+                    ? $this->startDate
+                    : Carbon::createFromTimeString(core()->xWeekRange($date, 0) . ' 00:00:01');
+
+                $end = $totalWeeks - 1 == $i
+                    ? $this->endDate
+                    : Carbon::createFromTimeString(core()->xWeekRange($date->subDay(), 1) . ' 23:59:59');
+
+                $timeIntervals[] = ['start' => $start, 'end' => $end, 'formattedDate' => $date->format('d M')];
+            }
+
+            return $timeIntervals;
+        }
+
+        /**
+         * If the difference between the start and end date is less than 6 weeks
+         */
+        $totalDays = $this->startDate->diffInDays($this->endDate) + 1;
+
+        for ($i = 0; $i < $totalDays; $i++) {
+            $date = clone $this->startDate;
+
+            $date->addDays($i);
+
+            $start = Carbon::createFromTimeString($date->format('Y-m-d') . ' 00:00:01');
+
+            $end = Carbon::createFromTimeString($date->format('Y-m-d') . ' 23:59:59');
+
+            $timeIntervals[] = ['start' => $start, 'end' => $end, 'formattedDate' => $date->format('d M')];
+        }
+
+        return $timeIntervals;
     }
 }

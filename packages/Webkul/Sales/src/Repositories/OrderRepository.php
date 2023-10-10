@@ -437,7 +437,7 @@ class OrderRepository extends Repository
     /**
      * Calculate sale amount by date.
      */
-    public function calculateSaleAmountByDate(?Carbon $from = null, ?Carbon $to = null): ?float
+    public function getTotalSaleAmountByDate(?Carbon $from = null, ?Carbon $to = null): ?float
     {
         if ($from && $to) {
             return $this->getModel()
@@ -461,9 +461,40 @@ class OrderRepository extends Repository
     }
 
     /**
+     * Calculate per day sale amount by date.
+     * 
+     * @param  \Carbon\Carbon|null  $from
+     * @param  \Carbon\Carbon|null  $to
+     * @return \Illuminate\Support\Collection
+     */
+    public function getPerDayTotalSaleAmountByDate(?Carbon $from = null, ?Carbon $to = null)
+    {
+        $qb = $this->select(
+                DB::raw('DATE(created_at) AS date'),
+                DB::raw('SUM(base_grand_total_invoiced - base_grand_total_refunded) AS total')
+            )
+            ->whereBetween('created_at', [$from, $to])
+            ->groupBy(DB::raw('DATE(created_at)'));
+
+        if ($from && $to) {
+            return $qb->whereBetween('created_at', [$from, $to])->get();
+        }
+
+        if ($from) {
+            return $qb->where('created_at', '>=', $from)->get();
+        }
+
+        if ($to) {
+            return $qb->where('created_at', '<=', $to)->get();
+        }
+
+        return $qb->get();
+    }
+
+    /**
      * Calculate average sale amount by date.
      */
-    public function calculateAvgSaleAmountByDate(?Carbon $from = null, ?Carbon $to = null): ?float
+    public function GetAvgSaleAmountByDate(?Carbon $from = null, ?Carbon $to = null): ?float
     {
         if ($from && $to) {
             return $this->getModel()
