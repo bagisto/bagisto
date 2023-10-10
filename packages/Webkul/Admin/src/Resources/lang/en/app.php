@@ -1396,6 +1396,7 @@ return [
             'create-success'      => 'Address Created Successfully',
             'update-success'      => 'Address Updated Successfully',
             'success-mass-delete' => 'Address Mass Delete Successfully',
+            'invalid-format'      => 'Invalid Vat Format',
         ],
     ],
 

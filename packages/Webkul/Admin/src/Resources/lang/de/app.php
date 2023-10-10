@@ -1396,6 +1396,7 @@ return [
             'create-success'      => 'Adresse erfolgreich erstellt',
             'update-success'      => 'Adresse erfolgreich aktualisiert',
             'success-mass-delete' => 'Adressen erfolgreich massenweise gelöscht',
+            'invalid-format'      => 'Ungültiges USt-Format',
         ],
     ],
 

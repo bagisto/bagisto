@@ -1396,6 +1396,7 @@ return [
             'create-success'      => 'Адреса успішно створено',
             'update-success'      => 'Адреса успішно оновлено',
             'success-mass-delete' => 'Адреси успішно видалено масово',
+            'invalid-format'      => 'Невірний формат ПДВ',
         ],
     ],
 
