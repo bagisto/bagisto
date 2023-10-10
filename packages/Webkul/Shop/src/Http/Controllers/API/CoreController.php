@@ -31,4 +31,19 @@ class CoreController extends APIController
             'data' => core()->groupedStatesByCountries(),
         ]);
     }
+
+    /**
+     * Generates a formatted price string using the provided price, currencyCode and currenct localeCode.
+     *
+     * @return string
+     */
+    public function getFormattedPrice()
+    {
+        $price = request()->input('price');
+        $currencyCode = request()->input('currencyCode');
+        
+        return response()->json([
+            'data' => core()->formatPrice($price, $currencyCode),
+        ]);
+    }
 }

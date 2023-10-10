@@ -255,12 +255,11 @@
                         config: @json(app('Webkul\Product\Helpers\BundleOption')->getBundleConfig($product)),
 
                         options: [],
-                        isLoading: true,
                         formattedTotalAmount: '',
                     }
                 },
 
-                computed: {                    
+                computed: {
                     displayFormattedTotalPrice() {
                         this.formattedTotalPrice()
                         return this.formattedTotalAmount;
@@ -277,28 +276,28 @@
                 },
                 methods: {
                         formattedTotalPrice: async function () { 
-                        
-                            this.isLoading = true;
                             var total = 0;
                             
                             for (var key in this.options) {
                                 for (var key1 in this.options[key].products) {
-                                    if (! this.options[key].products[key1].is_default)
+                                    if (! this.options[key].products[key1].is_default){
                                         continue;
+                                    }
 
-                                    total += this.options[key].products[key1].qty * this.options[key].products[key1].price.final.price;
-
+                                    total += this.options[key].products[key1].qty * 
+                                                this.options[key].products[key1].price.final.price;
                                 }
                             }
                             var currencyCode = document.querySelector('meta[name="currency-code"]').content ?? "USD";
 
-                            var route = `/api/formatPrice/${total}/${currencyCode}`
-                            // this.formattedTotalAmount  = this.$shop.formatPrice(total)
-
-                            // Call API to format the price also can do it inside shop.js
-                            this.formattedTotalAmount = await this.$axios.get(route).then((response)=> {
-                                this.isLoading = false;
-                                return response.data;
+                            this.formattedTotalAmount = await this.$axios.get("{{route('shop.api.format_price')}}",{
+                                params: {
+                                    price: total,
+                                    currencyCode: currencyCode
+                                },
+                            })
+                            .then((response)=> {
+                                return response.data.data;
                             }).catch(error => {
                                 console.log(error);
                                 throw error;

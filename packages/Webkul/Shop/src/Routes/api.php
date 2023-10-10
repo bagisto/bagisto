@@ -17,6 +17,8 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
         Route::get('countries', 'getCountries')->name('shop.api.core.countries');
 
         Route::get('states', 'getStates')->name('shop.api.core.states');
+
+        Route::get('formatPrice', 'getFormattedPrice')->name('shop.api.format_price');
     });
 
     Route::controller(CategoryController::class)->prefix('categories')->group(function () {
@@ -104,7 +106,4 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
             Route::delete('{id}', 'destroy')->name('shop.api.customers.account.wishlist.destroy');
         });
     });
-
-    // for formatting total price in bundle product
-    Route::get('/formatPrice/{slug1}/{slug2}/', [Core::class, 'formatPrice'])->name('shop.api.format_price');
 });

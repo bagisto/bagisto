@@ -71,7 +71,7 @@
                                         <div class="flex gap-[30px] items-center flex-auto flex-wrap">
                                             <p 
                                                 class="text-[30px] font-semibold max-sm:text-[22px]"
-                                                v-text="subTotal"
+                                                v-html="subTotal"
                                             >
                                             </p>
 

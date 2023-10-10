@@ -28,10 +28,14 @@ class CurrencyController extends Controller
         if (request()->ajax()) {
             return app(CurrencyDataGrid::class)->toJson();
         }
+
         $currencyPosition = [
-            'left' => 'Left', 'left_with_space' => 'Left With Space',
-            'right' => 'Right', 'right_with_space' => 'Right With Space',
+            'left'             => 'Left',
+            'left_with_space'  => 'Left With Space',
+            'right'            => 'Right',
+            'right_with_space' => 'Right With Space',
         ];
+
         return view('admin::settings.currencies.index', compact('currencyPosition'));
     }
 
