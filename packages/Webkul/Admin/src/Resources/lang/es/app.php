@@ -1396,7 +1396,6 @@ return [
             'create-success'       => 'Dirección creada con éxito',
             'update-success'       => 'Dirección actualizada con éxito',
             'success-mass-delete'  => 'Eliminación Masiva de Direcciones Exitosa',
-
         ],
     ],
 
