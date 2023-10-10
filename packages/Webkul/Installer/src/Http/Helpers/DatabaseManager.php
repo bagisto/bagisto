@@ -3,7 +3,6 @@
 namespace Webkul\Installer\Http\Helpers;
 
 use Exception;
-use Illuminate\Database\SQLiteConnection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
@@ -26,17 +25,17 @@ class DatabaseManager
     public function getEnvironment($params = [])
     {
         $connection = [
-            'DB_HOST'       => $params['DB_HOST'] ?? env('DB_HOST'),
-            'DB_DATABASE'   => $params['DB_DATABASE'] ?? env('DB_DATABASE'),
-            'DB_USERNAME'   => $params['DB_USERNAME'] ?? env('DB_USERNAME'),
-            'DB_PASSWORD'   => $params['DB_PASSWORD'] ?? env('DB_PASSWORD'),
-            'DB_CONNECTION' => $params['DB_CONNECTION'] ?? env('DB_CONNECTION'),
-            'DB_PORT'       => $params['DB_PORT'] ?? env('DB_PORT'),
-            'DB_PREFIX'     => $params['DB_PREFIX'] ?? env('DB_PREFIX'),
+            'DB_HOST'       => $params['db_hostname'] ?? env('DB_HOST'),
+            'DB_DATABASE'   => $params['db_name'] ?? env('DB_DATABASE'),
+            'DB_USERNAME'   => $params['db_username'] ?? env('DB_USERNAME'),
+            'DB_PASSWORD'   => $params['db_password'] ?? env('DB_PASSWORD'),
+            'DB_CONNECTION' => $params['db_connection'] ?? env('DB_CONNECTION'),
+            'DB_PORT'       => $params['db_port'] ?? env('DB_PORT'),
+            // 'DB_PREFIX'     => $params['db_prefix'] ?? env('DB_PREFIX'),
         ];
 
         try {
-            DB::connection()->getPdo();
+            $data = DB::connection()->getPdo();
             if (DB::connection()->getDatabaseName()) {
                 echo 'Database connection established successfully.';
             } else {
@@ -50,6 +49,7 @@ class DatabaseManager
                 }
             }
         } catch (\Exception $e) {
+            dd($e);
         }
     }
 

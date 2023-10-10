@@ -2,8 +2,9 @@
 
 namespace Webkul\Installer\Http\Controllers;
 
-use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Webkul\Installer\Http\Helpers\DatabaseManager;
 use Webkul\Installer\Http\Helpers\EnvironmentManager;
 use Webkul\Installer\Http\Helpers\RequirementsChecker;
 
@@ -19,13 +20,19 @@ class InstallerController extends Controller
      */
     protected $EnvironmentManager;
 
+    /**
+     * @var DatabaseManager
+     */
+    protected $databaseManager;
+
     public function __construct(
         RequirementsChecker $checker,
-        EnvironmentManager $environmentManager
-    )
-    {
+        EnvironmentManager $environmentManager,
+        DatabaseManager $databaseManager,
+    ) {
         $this->requirements = $checker;
         $this->EnvironmentManager = $environmentManager;
+        $this->databaseManager = $databaseManager;
     }
 
     /**
@@ -44,9 +51,15 @@ class InstallerController extends Controller
         return view('installer::installer.installer', compact('requirements', 'phpVersion'));
     }
 
-    public function storeEnvironment()
+    public function envFileSetup(Request $request): JsonResponse
     {
+        $message = $this->EnvironmentManager->saveFileClassic($request);
 
+        $this->databaseManager->getEnvironment($request->all());
+
+        return new JsonResponse([
+            'message' => $message,
+        ]);
     }
 
     /**
