@@ -163,7 +163,7 @@
         </div>
 
         <p class="mt-[30px] mb-[15px] text-center text-[#6E6E6E] text-xs">
-            @lang('shop::app.customers.login-form.footer',['current_year'=> date('Y') ])
+            @lang('shop::app.customers.login-form.footer', ['current_year'=> date('Y') ])
         </p>
     </div>
 
