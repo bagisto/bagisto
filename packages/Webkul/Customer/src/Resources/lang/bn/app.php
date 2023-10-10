@@ -11,4 +11,10 @@ return [
             ],
         ],
     ],
+
+    'customers' => [
+        'addresses' => [
+                'invalid-format' => 'অবৈধ ভ্যাট ফরম্যাট',
+            ],
+        ],
 ];

@@ -1395,7 +1395,6 @@ return [
             'create-success'      => '地址创建成功',
             'update-success'      => '地址成功更新',
             'success-mass-delete' => '地址批量删除成功',
-            'invalid-format'      => '无效的增值税格式',
         ],
     ],
 

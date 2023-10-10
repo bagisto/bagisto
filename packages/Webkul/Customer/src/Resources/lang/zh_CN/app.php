@@ -11,4 +11,10 @@ return [
             ],
         ],
     ],
+                                                        
+    'customers' => [
+        'addresses' => [
+                'invalid-format' => '无效的增值税格式',
+            ],
+        ], 
 ];

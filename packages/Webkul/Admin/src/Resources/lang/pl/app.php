@@ -1396,7 +1396,6 @@ return [
             'create-success'      => 'Adres utworzony pomyślnie',
             'update-success'      => 'Adres zaktualizowany pomyślnie',
             'success-mass-delete' => 'Usunięto Masywnie Adresy Pomyślnie',
-            'invalid-format'      => 'Nieprawidłowy format numeru VAT',
         ],
     ],
 

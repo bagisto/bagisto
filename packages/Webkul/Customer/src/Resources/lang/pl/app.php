@@ -10,5 +10,11 @@ return [
                 ],
             ],
         ],
-    ],    
+    ],
+                                
+    'customers' => [
+        'addresses' => [
+                'invalid-format' => 'Nieprawidłowy format numeru VAT',
+            ],
+        ],     
 ];

@@ -10,5 +10,11 @@ return [
                 ],
             ],
         ],
-    ],    
+    ],
+                                            
+    'customers' => [
+        'addresses' => [
+                'invalid-format' => 'වලංගු එක්වර්තකයක් නොවේ',
+            ],
+        ],     
 ];

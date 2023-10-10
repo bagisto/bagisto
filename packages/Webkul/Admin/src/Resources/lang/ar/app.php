@@ -1396,7 +1396,6 @@ return [
             'create-success'      => 'تم إنشاء العنوان بنجاح',
             'update-success'      => 'تم تحديث العنوان بنجاح',
             'success-mass-delete' => 'حذف العناوين بنجاح',
-            'invalid-format'      => 'تنسيق الضريبة المضافة غير صحيح',
         ],
     ],
 

@@ -1396,7 +1396,6 @@ return [
             'create-success'      => 'Adres succesvol aangemaakt',
             'update-success'      => 'Adres succesvol bijgewerkt',
             'success-mass-delete' => 'Adressen succesvol verwijderd',
-            'invalid-format'      => 'Ongeldige BTW-indeling',
         ],
     ],
 

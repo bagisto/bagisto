@@ -10,5 +10,11 @@ return [
                 ],
             ],
         ],
-    ],    
+    ],  
+                
+    'customers' => [
+        'addresses' => [
+                'invalid-format' => 'अमान्य वीएट प्रारूप',
+            ],
+        ],    
 ];

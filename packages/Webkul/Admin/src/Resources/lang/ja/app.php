@@ -1396,7 +1396,6 @@ return [
             'create-success'      => 'アドレスが正常に作成されました',
             'update-success'      => 'アドレスが正常に更新されました',
             'success-mass-delete' => '住所の一括削除に成功しました',
-            'invalid-format'      => '無効な消費税形式',
         ],
     ],
 

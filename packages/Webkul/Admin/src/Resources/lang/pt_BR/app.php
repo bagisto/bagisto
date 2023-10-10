@@ -1396,7 +1396,6 @@ return [
             'create-success'      => 'Endereço criado com sucesso',
             'update-success'      => 'Endereço atualizado com sucesso',
             'success-mass-delete' => 'Exclusão em Massa de Endereços com Sucesso',
-            'invalid-format'      => 'Formato inválido de VAT',
         ],
     ],
 

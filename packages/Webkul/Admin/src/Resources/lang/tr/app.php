@@ -1396,7 +1396,6 @@ return [
             'create-success'      => 'Adres başarıyla oluşturuldu',
             'update-success'      => 'Adres başarıyla güncellendi',
             'success-mass-delete' => 'Adresler Topluca Silindi',
-            'invalid-format'      => 'Geçersiz KDV Formatı',
         ],
     ],
 

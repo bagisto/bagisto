@@ -10,5 +10,11 @@ return [
                 ],
             ],
         ],
-    ],    
+    ], 
+    
+    'customers' => [
+        'addresses' => [
+                'invalid-format' => 'فرمت معتبر مالیات بر ارزش افزوده',
+            ],
+        ],   
 ];

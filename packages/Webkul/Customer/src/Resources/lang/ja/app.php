@@ -10,5 +10,11 @@ return [
                 ],
             ],
         ],
-    ],    
+    ], 
+                        
+    'customers' => [
+        'addresses' => [
+                'invalid-format' => '無効な消費税形式',
+            ],
+        ],    
 ];
