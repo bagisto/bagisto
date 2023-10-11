@@ -193,7 +193,7 @@ class CategoryController extends Controller
                 if (! $this->isCategoryDeletable($category)) {
                     $suppressFlash = false;
 
-                    session()->flash('warning', trans('admin::app.catalog.categories.delete-category-root'));
+                    return new JsonResponse(['message' => trans('admin::app.catalog.categories.delete-category-root')], 400);
                 } else {
                     try {
                         $suppressFlash = true;
