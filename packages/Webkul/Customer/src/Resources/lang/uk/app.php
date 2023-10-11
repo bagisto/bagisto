@@ -14,7 +14,7 @@ return [
                                                     
     'customers' => [
         'addresses' => [
-                'invalid-format' => 'Невірний формат ПДВ',
-            ],
-        ],    
+            'invalid-format' => 'Невірний формат ПДВ',
+        ],
+    ],    
 ];

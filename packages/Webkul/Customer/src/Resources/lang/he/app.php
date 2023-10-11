@@ -14,7 +14,7 @@ return [
             
     'customers' => [
         'addresses' => [
-                'invalid-format' => 'תבנית מע"מ לא תקפה',
-            ],
-        ],     
+            'invalid-format' => 'תבנית מע"מ לא תקפה',
+        ],
+    ],     
 ];

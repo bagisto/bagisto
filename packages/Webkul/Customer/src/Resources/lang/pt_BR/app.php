@@ -14,7 +14,7 @@ return [
                                     
     'customers' => [
         'addresses' => [
-                'invalid-format' => 'Formato inválido de VAT',
-            ],
-        ], 
+            'invalid-format' => 'Formato inválido de VAT',
+        ],
+    ], 
 ];

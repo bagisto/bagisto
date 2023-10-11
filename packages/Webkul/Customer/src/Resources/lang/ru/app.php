@@ -14,7 +14,7 @@ return [
                                         
     'customers' => [
         'addresses' => [
-                'invalid-format' => 'Недопустимый формат НДС',
-            ],
-        ],    
+            'invalid-format' => 'Недопустимый формат НДС',
+        ],
+    ],    
 ];

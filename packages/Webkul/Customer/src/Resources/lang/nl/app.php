@@ -14,7 +14,7 @@ return [
                             
     'customers' => [
         'addresses' => [
-                'invalid-format' => 'Ongeldige BTW-indeling',
-            ],
-        ], 
+            'invalid-format' => 'Ongeldige BTW-indeling',
+        ],
+    ], 
 ];

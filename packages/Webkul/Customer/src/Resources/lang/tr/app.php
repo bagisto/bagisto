@@ -15,7 +15,7 @@ return [
                                                 
     'customers' => [
         'addresses' => [
-                'invalid-format' => 'Geçersiz KDV Formatı',
-            ],
-        ],  
+            'invalid-format' => 'Geçersiz KDV Formatı',
+        ],
+    ],  
 ];

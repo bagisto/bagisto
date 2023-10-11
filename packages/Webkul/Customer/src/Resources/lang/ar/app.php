@@ -11,10 +11,10 @@ return [
             ],
         ],
     ],
-    
+
     'customers' => [
         'addresses' => [
-                'invalid-format' => 'تنسيق الضريبة المضافة غير صحيح',
-            ],
+            'invalid-format' => 'تنسيق الضريبة المضافة غير صحيح',
         ],
+    ],
 ];
