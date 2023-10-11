@@ -82,7 +82,11 @@ class EnvironmentManager
         }
 
         try {
-            $this->saveFileWizard($request->all());
+            $response = $this->saveFileWizard($request->all());
+
+            if ($response) {
+                $this->install();
+            }
         } catch (Exception $e) {
             $message = trans('Error');
         }
@@ -149,34 +153,27 @@ class EnvironmentManager
 
         try {
             file_put_contents($this->envPath, $updatedEnvDBParams);
-
-            if ($envDBParams['DB_CONNECTION'] === 'mysql') {
-                try {
-                    $conn = new mysqli(
-                        $envDBParams['DB_HOST'],
-                        $envDBParams['DB_USERNAME'],
-                        $envDBParams['DB_PASSWORD'],
-                        $envDBParams['DB_DATABASE'],
-                        $envDBParams['DB_PORT']
-                    );
-
-                    if ($conn->connect_error) {
-                        $errors['database_error'] = $conn->connect_error;
-        
-                        echo "Error: " . $conn->connect_error;
-                    } else {
-                        echo "Successfully connected";
-                    }
-                } catch (\Exception $e) {
-                    dd($e);
-                }
-            } else {
-                dd('Not Mysql Connection  Request');
-            }
         } catch (Exception $e) {
             $message = trans('installer_messages.environment.errors');
         }
 
         return $message;
+    }
+
+    private function install() {
+        ini_set('max_execution_time', 900);
+
+        $phpBin = PHP_BINDIR . '/php';
+
+        // array to pass back data
+        $data = [];
+
+        $command = 'cd ../.. && '. $phpBin .' artisan config:cache && '. $phpBin.' artisan migrate:fresh --force';
+
+        /**
+         * Run migration command on terminal
+         */
+        $data['last_line'] = exec($command, $data['migrate'], $data['results']);
+
     }
 }

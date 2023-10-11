@@ -693,7 +693,6 @@
                         class="w-full max-w-[568px] bg-white rounded-[8px] shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)] border-[1px] border-gray-300"
                         v-if="currentStep == 'installationLog'"
                     >
-
                     </div>
 
                     <!-- Create Administrator -->
@@ -1065,21 +1064,36 @@
                                 ],
                             }
                         },
+
+                        mounted() {
+                            let sessionValue = sessionStorage.getItem('currentStep');
+
+                            if (sessionValue) { 
+                                this.currentStep = sessionValue;
+                            }
+                        },
         
                         methods: {
                             FormSubmit(params) {
                                 const stepActions = {
                                     environment: () => {
+                                        sessionStorage.setItem('currentStep', 'environment');
+
                                         this.currentStep = 'envSetup';
                                     },
 
                                     envSetup: () => {
                                         this.envData = { ...params };
+
+                                        sessionStorage.setItem('currentStep', 'envSetup');
+
                                         this.currentStep = 'envDatabase';
                                     },
 
                                     envDatabase: () => {
                                         this.envData = { ...this.envData, ...params };
+                                        
+                                        sessionStorage.setItem('currentStep', 'envDatabase');
 
                                         this.currentStep = 'readyForInstallation';
                                     },
