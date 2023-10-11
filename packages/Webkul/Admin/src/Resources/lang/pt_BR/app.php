@@ -33,11 +33,12 @@ return [
     ],
 
     'notifications' => [
-        'marked-success' => 'Notificação Marcada com Sucesso',
-        'no-record'      => 'Nenhum Registro Encontrado',
-        'read-all'       => 'Marcar como Lido',
-        'title'          => 'Notificações',
-        'view-all'       => 'Ver Todas',
+        'description-text' => 'Listar todas as notificações',
+        'marked-success'   => 'Notificação Marcada com Sucesso',
+        'no-record'        => 'Nenhum Registro Encontrado',
+        'read-all'         => 'Marcar como Lido',
+        'title'            => 'Notificações',
+        'view-all'         => 'Ver Todas',
 
         'order-status-messages' => [
             'completed'       => 'Pedido Concluído',

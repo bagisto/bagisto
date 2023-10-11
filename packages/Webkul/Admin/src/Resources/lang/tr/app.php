@@ -33,11 +33,12 @@ return [
     ],
 
     'notifications' => [
-        'marked-success' => 'Bildirim Başarıyla İşaretlendi',
-        'no-record'      => 'Kayıt Bulunamadı',
-        'read-all'       => 'Tümünü Okundu Olarak İşaretle',
-        'title'          => 'Bildirimler',
-        'view-all'       => 'Tümünü Görüntüle',
+        'description-text' => 'Tüm Bildirimleri Listele',
+        'marked-success'   => 'Bildirim Başarıyla İşaretlendi',
+        'no-record'        => 'Kayıt Bulunamadı',
+        'read-all'         => 'Tümünü Okundu Olarak İşaretle',
+        'title'            => 'Bildirimler',
+        'view-all'         => 'Tümünü Görüntüle',
 
         'order-status-messages' => [
             'completed'       => 'Sipariş Tamamlandı',

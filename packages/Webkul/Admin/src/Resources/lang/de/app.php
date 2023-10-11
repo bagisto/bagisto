@@ -33,11 +33,12 @@ return [
     ],
 
     'notifications' => [
-        'marked-success' => 'Benachrichtigung erfolgreich markiert',
-        'no-record'      => 'Kein Datensatz gefunden',
-        'read-all'       => 'Als gelesen markieren',
-        'title'          => 'Benachrichtigungen',
-        'view-all'       => 'Alle anzeigen',
+        'description-text' => 'Alle Benachrichtigungen auflisten',
+        'marked-success'   => 'Benachrichtigung erfolgreich markiert',
+        'no-record'        => 'Kein Datensatz gefunden',
+        'read-all'         => 'Als gelesen markieren',
+        'title'            => 'Benachrichtigungen',
+        'view-all'         => 'Alle anzeigen',
 
         'order-status-messages' => [
             'completed'       => 'Bestellung abgeschlossen',
