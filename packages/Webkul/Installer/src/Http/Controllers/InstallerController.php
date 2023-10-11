@@ -55,8 +55,6 @@ class InstallerController extends Controller
     {
         $message = $this->EnvironmentManager->saveFileClassic($request);
 
-        $this->databaseManager->getEnvironment($request->all());
-
         return new JsonResponse([
             'message' => $message,
         ]);

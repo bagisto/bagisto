@@ -2,6 +2,7 @@
 
 namespace Webkul\Installer\Http\Helpers;
 
+use mysqli;
 use Exception;
 
 class EnvironmentManager
@@ -130,7 +131,7 @@ class EnvironmentManager
         $envDBParams['APP_LOCALE'] = $request['app_locale'];
         $envDBParams['APP_TIMEZONE'] = $request['app_timezone'];
         $envDBParams['DB_CONNECTION'] = $request['db_connection'];
-        $envDBParams['DB_PORT'] = $request['db_port'];
+        $envDBParams['DB_PORT'] = (int) ($request['db_port']);
 
         /**
          * Making key/value pair with form-data for env
@@ -148,6 +149,30 @@ class EnvironmentManager
 
         try {
             file_put_contents($this->envPath, $updatedEnvDBParams);
+
+            if ($envDBParams['DB_CONNECTION'] === 'mysql') {
+                try {
+                    $conn = new mysqli(
+                        $envDBParams['DB_HOST'],
+                        $envDBParams['DB_USERNAME'],
+                        $envDBParams['DB_PASSWORD'],
+                        $envDBParams['DB_DATABASE'],
+                        $envDBParams['DB_PORT']
+                    );
+
+                    if ($conn->connect_error) {
+                        $errors['database_error'] = $conn->connect_error;
+        
+                        echo "Error: " . $conn->connect_error;
+                    } else {
+                        echo "Successfully connected";
+                    }
+                } catch (\Exception $e) {
+                    dd($e);
+                }
+            } else {
+                dd('Not Mysql Connection  Request');
+            }
         } catch (Exception $e) {
             $message = trans('installer_messages.environment.errors');
         }
