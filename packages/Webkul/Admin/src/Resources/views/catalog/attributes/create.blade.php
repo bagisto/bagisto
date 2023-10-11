@@ -31,7 +31,7 @@
                         <!-- Cancel Button -->
                         <a
                             href="{{ route('admin.catalog.attributes.index') }}"
-                            class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
+                            class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
                         >
                             @lang('admin::app.catalog.attributes.create.back-btn')
                         </a>
@@ -51,7 +51,7 @@
                     <!-- Left sub Component -->
                     <div class="flex flex-col gap-[8px] flex-1">
                         <!-- Label -->
-                        <div class="p-[16px] bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
+                        <div class="p-[16px] bg-white dark:bg-gray-900 box-shadow rounded-[4px]">
                             <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @lang('admin::app.catalog.attributes.create.label')
                             </p>
@@ -103,7 +103,7 @@
 
                         <!-- Options -->
                         <div 
-                            class="p-[16px] bg-white dark:bg-gray-900  box-shadow rounded-[4px]"
+                            class="p-[16px] bg-white dark:bg-gray-900 box-shadow rounded-[4px]"
                             v-if="swatchAttribute && (
                                     attributeType == 'select' 
                                     || attributeType == 'multiselect' 
@@ -191,7 +191,7 @@
                                 <!-- Table Information -->
                                 <div class="mt-[15px] overflow-auto">
                                     <x-admin::table class="w-full text-left">
-                                        <x-admin::table.thead class="text-[14px] font-medium">
+                                        <x-admin::table.thead class="text-[14px] font-medium dark:bg-gray-800">
                                             <x-admin::table.thead.tr>
                                                 <x-admin::table.th class="!p-0"></x-admin::table.th>
 
@@ -226,7 +226,7 @@
                                             item-key="id"
                                         >
                                             <template #item="{ element, index }">
-                                                <x-admin::table.thead.tr>
+                                                <x-admin::table.thead.tr class="hover:bg-gray-50 dark:hover:bg-gray-950">
                                                     <!-- Draggable Icon -->
                                                     <x-admin::table.td class="!px-0">
                                                         <i class="icon-drag text-[20px] transition-all group-hover:text-gray-700"></i>
@@ -274,7 +274,7 @@
 
                                                     <!-- Admin-->
                                                     <x-admin::table.td>
-                                                        <p v-text="element.params.admin_name"></p>
+                                                        <p class="dark:text-white" v-text="element.params.admin_name"></p>
 
                                                         <input
                                                             type="hidden"
@@ -284,7 +284,7 @@
                                                     </x-admin::table.td>
 
                                                     <x-admin::table.td v-for="locale in allLocales">
-                                                        <p v-text="element.params[locale.code]"></p>
+                                                        <p class="dark:text-white" v-text="element.params[locale.code]"></p>
 
                                                         <input
                                                             type="hidden"
@@ -296,13 +296,13 @@
                                                     <!-- Actions button -->
                                                     <x-admin::table.td class="!px-0">
                                                         <span
-                                                            class="icon-edit p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950  max-sm:place-self-center"
+                                                            class="icon-edit p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                                             @click="editModal(element)"
                                                         >
                                                         </span> 
 
                                                         <span
-                                                            class="icon-delete p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950  max-sm:place-self-center"
+                                                            class="icon-delete p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                                             @click="removeOption(element.id)"
                                                         >
                                                         </span> 
@@ -350,7 +350,7 @@
                     <!-- Right sub-component -->
                     <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
                         <!-- General -->
-                        <div class="bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
+                        <div class="bg-white dark:bg-gray-900 box-shadow rounded-[4px]">
                             <div class="flex justify-between items-center p-[6px]">
                                 <p class="p-[10px] text-gray-800 dark:text-white text-[16px] font-semibold">
                                     @lang('admin::app.catalog.attributes.create.general')

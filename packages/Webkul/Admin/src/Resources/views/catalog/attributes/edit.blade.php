@@ -54,7 +54,7 @@
                         {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.attributes.before', ['attribute' => $attribute]) !!}
 
                         <!-- Label -->
-                        <div class="p-[16px] bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
+                        <div class="p-[16px] bg-white dark:bg-gray-900 box-shadow rounded-[4px]">
                             <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @lang('admin::app.catalog.attributes.edit.label')
                             </p>
@@ -198,7 +198,7 @@
                                 <!-- Table Information -->
                                 <div class="mt-[15px] overflow-auto">
                                     <x-admin::table class="w-full text-left">
-                                        <x-admin::table.thead class="text-[14px] font-medium">
+                                        <x-admin::table.thead class="text-[14px] font-medium dark:bg-gray-800">
                                             <x-admin::table.thead.tr>
                                                 <x-admin::table.th class="!p-0"></x-admin::table.th>
 
@@ -233,13 +233,12 @@
                                             item-key="id"
                                         >
                                             <template #item="{ element, index }" v-show="! element.isDelete">
-                                                <x-admin::table.thead.tr class="text-center">
+                                                <x-admin::table.thead.tr class="text-center hover:bg-gray-50 dark:hover:bg-gray-950">
                                                     <input
                                                         type="hidden"
                                                         :name="'options[' + element.id + '][isNew]'"
                                                         :value="element.isNew"
                                                     >
-
                                                     <input
                                                         type="hidden"
                                                         :name="'options[' + element.id + '][isDelete]'"
@@ -293,7 +292,7 @@
 
                                                     <!-- Admin-->
                                                     <x-admin::table.td>
-                                                        <p v-text="element.admin_name"></p>
+                                                        <p class="dark:text-white" v-text="element.admin_name"></p>
 
                                                         <input
                                                             type="hidden"
@@ -304,7 +303,7 @@
 
                                                     <!-- Loacles -->
                                                      <x-admin::table.td v-for="locale in allLocales">
-                                                        <p v-text="element['locales'][locale.code]"></p>
+                                                        <p class="dark:text-white" v-text="element['locales'][locale.code]"></p>
                                                         
                                                         <input
                                                             type="hidden"
@@ -316,13 +315,13 @@
                                                     <!-- Actions Button -->
                                                     <x-admin::table.td class="!px-0">
                                                         <span
-                                                            class="icon-edit p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950  max-sm:place-self-center"
+                                                            class="icon-edit p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                                             @click="editOptions(element)"
                                                         >
                                                         </span>
                                                         
                                                         <span
-                                                            class="icon-delete p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950  max-sm:place-self-center"
+                                                            class="icon-delete p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-800  max-sm:place-self-center"
                                                             @click="removeOption(element.id)"
                                                         >
                                                         </span>
@@ -638,7 +637,7 @@
                         
                             <x-slot:content>
                                 <!-- Value Per Locale -->
-                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] opacity-70 select-none ">
+                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] opacity-70 select-none">
                                     @php
                                         $selectedOption = old('value_per_locale') ?? $attribute->value_per_locale
                                     @endphp
@@ -665,7 +664,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Value Per Channel -->
-                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] opacity-70 select-none ">
+                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] opacity-70 select-none">
                                     @php
                                         $selectedOption = old('value_per_channel') ?? $attribute->value_per_channel
                                     @endphp
