@@ -86,7 +86,7 @@ You can incorporate LLM API with your bagisto applications to send and receive q
 
 Build decentralised applications with Bagisto on popular blockchains like Ethereum and Solana by integrating smart contracts with the eCommerce platform. You can have decentralised marketplaces, NFT marketplaces, and decentralised e-signing with the laravel eCommerce system.
 
-![enter image description here](https://raw.githubusercontent.com/bagisto/temp-media/master/decentralised_ecommerce.png)
+![enter image description here](https://raw.githubusercontent.com/bagisto/temp-media/master/decentralised-ecommerce.png)
 
 # Commerce For Every Need
 
