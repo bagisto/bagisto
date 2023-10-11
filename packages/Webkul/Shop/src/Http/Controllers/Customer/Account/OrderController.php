@@ -61,9 +61,11 @@ class OrderController extends Controller
      */
     public function printInvoice($id)
     {
-        $invoice = $this->invoiceRepository->findOneWhere([
-            'id'          => $id,
-        ]);
+        $invoice = $this->invoiceRepository->where('id', $id)
+            ->whereHas('order', function ($query) {
+                $query->where('customer_id', auth()->guard('customer')->id());
+            })
+            ->first();
 
         if (! $invoice) {
             abort(404);
