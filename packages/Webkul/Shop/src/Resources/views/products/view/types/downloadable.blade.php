@@ -3,9 +3,9 @@
 
     @if ($product->downloadable_samples->count())
         <div class="sample-list mb-[25px] mt-[30px]">
-            <h3 class="mb-[15px] font-medium">
+            <label class="mb-[15px] font-medium">
                 @lang('shop::app.products.view.type.downloadable.samples')
-            </h3>
+            </label>
 
             <ul>
                 @foreach ($product->downloadable_samples as $sample)
@@ -24,9 +24,9 @@
     @endif
 
     @if ($product->downloadable_links->count())
-        <h3 class="mt-[30px] mb-[15px] font-medium">
+        <label class="flex mt-[30px] mb-[15px] font-medium">
             @lang('shop::app.products.view.type.downloadable.links')
-        </h3>
+        </label>
 
         <div class="grid gap-[15px]">
             @foreach ($product->downloadable_links as $link)
@@ -52,7 +52,7 @@
                             for="{{ $link->id }}"
                             class="ml-1 cursor-pointer"
                         >
-                            {{ $link->title . ' + ' }} {!! core()->currency($link->price) !!}
+                            {{ $link->title . ' + ' . core()->currency($link->price) }}
                         </label>
 
                         @if (

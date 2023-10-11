@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('currencies', function (Blueprint $table) {
-            $table->string('thousand_seprator')->default(',')->after('decimal');
-            $table->string('decimal_seprator')->default('.')->after('thousand_seprator');
-            $table->string('currency_position')->default('Right')->after('decimal_seprator');
+            $table->string('thousand_separator')->default(',')->after('decimal');
+            $table->string('decimal_separator')->default('.')->after('thousand_separator');
+            $table->string('currency_position')->default('left')->after('decimal_separator');
         });
     }
 

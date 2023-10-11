@@ -63,7 +63,7 @@
 
                                 <p
                                     class="text-[18px]"
-                                    v-html="item.formatted_price"
+                                    v-text="item.formatted_price"
                                 >
                                 </p>
                             </div>
@@ -150,7 +150,7 @@
 
                         <p
                             class="text-[30px] font-semibold"
-                            v-html="cart.formatted_grand_total"
+                            v-text="cart.formatted_grand_total"
                         >
                         </p>
                     </div>

@@ -2074,7 +2074,7 @@ return [
                     'code'               => 'コード',
                     'currency-position'  => '通貨ポジション',
                     'decimal'            => '小数点',
-                    'decimal-seprator'   => '小数点区切り文字',
+                    'decimal-separator'  => '小数点区切り文字',
                     'delete-warning'     => '本当にこのアクションを実行しますか？',
                     'general'            => '一般',
                     'name'               => '名前',

@@ -2074,7 +2074,7 @@ return [
                     'code'               => 'Code',
                     'currency-position'  => 'Valutapositie',
                     'decimal'            => 'Decimalen',
-                    'decimal-seprator'   => 'Decimaalscheidingsteken',
+                    'decimal-separator'  => 'Decimaalscheidingsteken',
                     'delete-warning'     => 'Weet je zeker dat je deze actie wilt uitvoeren?',
                     'general'            => 'Algemeen',
                     'name'               => 'Naam',

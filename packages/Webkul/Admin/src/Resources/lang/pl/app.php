@@ -2074,7 +2074,7 @@ return [
                     'code'               => 'Kod',
                     'currency-position'  => 'Pozycja walutowa',
                     'decimal'            => 'Miejsca dziesiętne',
-                    'decimal-seprator'   => 'Separator liczb dziesiętnych',
+                    'decimal-separator'  => 'Separator liczb dziesiętnych',
                     'delete-warning'     => 'Czy na pewno chcesz wykonać tę operację?',
                     'general'            => 'Ogólne',
                     'name'               => 'Nazwa',

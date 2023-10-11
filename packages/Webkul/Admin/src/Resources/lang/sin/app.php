@@ -2074,7 +2074,7 @@ return [
                     'code'               => 'කේතය',
                     'currency-position'  => 'මුදල් තත්ත්වය',
                     'decimal'            => 'දශක',
-                    'decimal-seprator'   => 'දශම බෙදුම්කරු',
+                    'decimal-separator'  => 'දශම බෙදුම්කරු',
                     'delete-warning'     => 'ඔබට මෙම ක්‍රියාකාරකම කිරීමට යන අවිස්සාවක් සුදුසුදක්ද?',
                     'general'            => 'සාමාන්ය',
                     'name'               => 'නම',

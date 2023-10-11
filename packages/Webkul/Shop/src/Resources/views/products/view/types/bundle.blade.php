@@ -21,8 +21,8 @@
                         @lang('Total Amount')
                     </p>
 
-                    <p class="text-[18px] font-medium" 
-                    v-html="displayFormattedTotalPrice">
+                    <p class="text-[18px] font-medium"> 
+                        @{{displayFormattedTotalPrice}}
                     </p>
                 </div>
 
@@ -74,11 +74,11 @@
                                 v-for="product in option.products"
                                 :value="product.id"
                             >
-                                @{{ product.name + ' + '}} <span v-html="product.price.final.formatted_price"></span>
+                                @{{ product.name + ' + ' + product.price.final.formatted_price }}
                             </option>
                         </v-field>
                     </div>
-    
+
                     <div v-if="option.type == 'radio'">
                         <div class="grid gap-[10px]">
                             <span
@@ -137,7 +137,7 @@
                                     @{{ product.name }}
 
                                     <span class="text-black">
-                                    @{{ '+ ' }} <span v-html="product.price.final.formatted_price"></span>
+                                        @{{ '+ ' + product.price.final.formatted_price }}
                                     </span>
                                 </label>
                             </span>
@@ -182,8 +182,7 @@
                                     @{{ product.name }}
 
                                     <span class="text-black">
-                                        
-                                        @{{ '+ ' }} <span v-html="product.price.final.formatted_price"></span>
+                                        @{{ '+ ' + product.price.final.formatted_price }}
                                     </span>
                                 </label>
                             </div>
@@ -212,9 +211,10 @@
                                 v-for="(product, index2) in option.products"
                                 :value="product.id"
                             >
-                                @{{ product.name + '+ ' }}
+                                @{{ product.name }}
 
-                                <span v-html="product.price.final.formatted_price" class="text-black">
+                                <span class="text-black">
+                                    @{{ '+ ' + product.price.final.formatted_price }}
                                 </span>
                             </option>
                         </v-field>

@@ -2074,7 +2074,7 @@ return [
                     'code'               => 'Код',
                     'currency-position'  => 'Валютна позиція',
                     'decimal'            => 'Десятковий роздільник',
-                    'decimal-seprator'   => 'Десятковий роздільник',
+                    'decimal-separator'  => 'Десятковий роздільник',
                     'delete-warning'     => 'Ви впевнені, що хочете виконати цю дію?',
                     'general'            => 'Загальне',
                     'name'               => 'Назва',

@@ -17,16 +17,24 @@
         </div>
 
         @if ($order->canCancel())
-            <x-shop::form
-                id="cancelOrderForm"
+            <form
+                method="POST"
+                ref="cancelOrderForm"
                 action="{{ route('shop.customers.account.orders.cancel', $order->id) }}"
             >
-            </x-shop::form>
+                @csrf
+            </form>
 
             <a
                 class="secondary-button flex items-center gap-x-[10px] py-[12px] px-[20px] border-[#E9E9E9] font-normal"
                 href="javascript:void(0);"
-                onclick="cancelOrder('@lang('shop::app.customers.account.orders.view.cancel-confirm-msg')')"
+                @click="$emitter.emit('open-confirm-modal', {
+                    message: '@lang('shop::app.customers.account.orders.view.cancel-confirm-msg')',
+
+                    agree: () => {
+                        this.$refs['cancelOrderForm'].submit()
+                    }
+                })"
             >
                 @lang('shop::app.customers.account.orders.view.cancel-btn-title')
             </a>
@@ -134,7 +142,7 @@
                                         @if (isset($item->additional['attributes']))
                                             <div>
                                                 @foreach ($item->additional['attributes'] as $attribute)
-                                                    <b>{{ $attribute['attribute_name'] }} : </b>{!! $attribute['option_label'] !!}<br>
+                                                    <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}<br>
                                                 @endforeach
                                             </div>
                                         @endif
@@ -144,7 +152,7 @@
                                         class="px-6 py-[16px] text-black font-medium"
                                         data-value="@lang('shop::app.customers.account.orders.view.information.price')"
                                     >
-                                        {!! core()->formatPrice($item->price, $order->order_currency_code) !!}
+                                        {{ core()->formatPrice($item->price, $order->order_currency_code) }}
                                     </td>
 
                                     <td
@@ -176,7 +184,7 @@
                                         class="px-6 py-[16px] text-black font-medium"
                                         data-value="@lang('shop::app.customers.account.orders.view.information.subtotal')"
                                     >
-                                        {!! core()->formatPrice($item->total, $order->order_currency_code) !!}
+                                        {{ core()->formatPrice($item->total, $order->order_currency_code) }}
                                     </td>
 
                                     <td
@@ -190,14 +198,14 @@
                                         class="px-6 py-[16px] text-black font-medium"
                                         data-value="@lang('shop::app.customers.account.orders.view.information.tax-amount')"
                                     >
-                                        {!! core()->formatPrice($item->tax_amount, $order->order_currency_code) !!}
+                                        {{ core()->formatPrice($item->tax_amount, $order->order_currency_code) }}
                                     </td>
 
                                     <td
                                         class="px-6 py-[16px] text-black font-medium"
                                         data-value="@lang('shop::app.customers.account.orders.view.information.grand-total')"
                                     >
-                                        {!! core()->formatPrice($item->total + $item->tax_amount - $item->discount_amount, $order->order_currency_code) !!}
+                                        {{ core()->formatPrice($item->total + $item->tax_amount - $item->discount_amount, $order->order_currency_code) }}
                                     </td>
                                 </tr>
                             @endforeach
@@ -218,7 +226,7 @@
                                         <p class="text-[14px]">-</p>
 
                                         <p class="text-[14px]">
-                                            {!! core()->formatPrice($order->sub_total, $order->order_currency_code) !!}
+                                            {{ core()->formatPrice($order->sub_total, $order->order_currency_code) }}
                                         </p>
                                     </div>
                                 </div>
@@ -233,7 +241,7 @@
                                             <p class="text-[14px]">-</p>
 
                                             <p class="text-[14px]">
-                                                {!! core()->formatPrice($order->shipping_amount, $order->order_currency_code) !!}
+                                                {{ core()->formatPrice($order->shipping_amount, $order->order_currency_code) }}
                                             </p>
                                         </div>
                                     </div>
@@ -253,7 +261,7 @@
                                             <p class="text-[14px]">-</p>
 
                                             <p class="text-[14px]">
-                                                {!! core()->formatPrice($order->discount_amount, $order->order_currency_code) !!}
+                                                {{ core()->formatPrice($order->discount_amount, $order->order_currency_code) }}
                                             </p>
                                         </div>
                                     </div>
@@ -268,7 +276,7 @@
                                         <p class="text-[14px]">-</p>
 
                                         <p class="text-[14px]">
-                                            {!! core()->formatPrice($order->tax_amount, $order->order_currency_code) !!}
+                                            {{ core()->formatPrice($order->tax_amount, $order->order_currency_code) }}
                                         </p>
                                     </div>
                                 </div>
@@ -282,7 +290,7 @@
                                         <p class="text-[14px]">-</p>
 
                                         <p class="text-[14px]">
-                                            {!! core()->formatPrice($order->grand_total, $order->order_currency_code) !!}
+                                            {{ core()->formatPrice($order->grand_total, $order->order_currency_code) }}
                                         </p>
                                     </div>
                                 </div>
@@ -296,7 +304,7 @@
                                         <p class="text-[14px]">-</p>
 
                                         <p class="text-[14px]">
-                                            {!! core()->formatPrice($order->grand_total_invoiced, $order->order_currency_code) !!}
+                                            {{ core()->formatPrice($order->grand_total_invoiced, $order->order_currency_code) }}
                                         </p>
                                     </div>
                                 </div>
@@ -310,7 +318,7 @@
                                         <p class="text-[14px]">-</p>
 
                                         <p class="text-[14px]">
-                                            {!! core()->formatPrice($order->grand_total_refunded, $order->order_currency_code) !!}
+                                            {{ core()->formatPrice($order->grand_total_refunded, $order->order_currency_code) }}
                                         </p>
                                     </div>
                                 </div>
@@ -324,9 +332,9 @@
 
                                         <p class="text-[14px]">
                                             @if($order->status !== 'canceled')
-                                                {!! core()->formatPrice($order->total_due, $order->order_currency_code) !!}
+                                                {{ core()->formatPrice($order->total_due, $order->order_currency_code) }}
                                             @else
-                                                {!! core()->formatPrice(0.00, $order->order_currency_code) !!}
+                                                {{ core()->formatPrice(0.00, $order->order_currency_code) }}
                                             @endif
                                         </p>
                                     </div>
@@ -430,7 +438,7 @@
                                                 class="px-6 py-[16px] text-black font-medium"
                                                 data-value="@lang('shop::app.customers.account.orders.view.invoices.price')"
                                             >
-                                                {!! core()->formatPrice($item->price, $order->order_currency_code) !!}
+                                                {{ core()->formatPrice($item->price, $order->order_currency_code) }}
                                             </td>
 
                                             <td
@@ -444,21 +452,21 @@
                                                 class="px-6 py-[16px] text-black font-medium"
                                                 data-value="@lang('shop::app.customers.account.orders.view.invoices.subtotal')"
                                             >
-                                                {!! core()->formatPrice($item->total, $order->order_currency_code) !!}
+                                                {{ core()->formatPrice($item->total, $order->order_currency_code) }}
                                             </td>
 
                                             <td
                                                 class="px-6 py-[16px] text-black font-medium"
                                                 data-value="@lang('shop::app.customers.account.orders.view.invoices.tax-amount')"
                                             >
-                                                {!! core()->formatPrice($item->tax_amount, $order->order_currency_code) !!}
+                                                {{ core()->formatPrice($item->tax_amount, $order->order_currency_code) }}
                                             </td>
 
                                             <td
                                                 class="px-6 py-[16px] text-black font-medium"
                                                 data-value="@lang('shop::app.customers.account.orders.view.invoices.grand-total')"
                                             >
-                                                {!! core()->formatPrice($item->total + $item->tax_amount, $order->order_currency_code) !!}
+                                                {{ core()->formatPrice($item->total + $item->tax_amount, $order->order_currency_code) }}
                                             </td>
                                         </tr>
                                     @endforeach
@@ -479,7 +487,7 @@
                                                 <p class="text-[14px]">-</p>
 
                                                 <p class="text-[14px]">
-                                                    {!! core()->formatPrice($invoice->sub_total, $order->order_currency_code) !!}
+                                                    {{ core()->formatPrice($invoice->sub_total, $order->order_currency_code) }}
                                                 </p>
                                             </div>
                                         </div>
@@ -493,7 +501,7 @@
                                                 <p class="text-[14px]">-</p>
 
                                                 <p class="text-[14px]">
-                                                    {!! core()->formatPrice($invoice->shipping_amount, $order->order_currency_code) !!}
+                                                    {{ core()->formatPrice($invoice->shipping_amount, $order->order_currency_code) }}
                                                 </p>
                                             </div>
                                         </div>
@@ -508,10 +516,10 @@
                                                     <p class="text-[14px]">-</p>
 
                                                     <p class="text-[14px]">
-                                                        {!! core()->formatPrice($invoice->discount_amount, $order->order_currency_code) !!}
+                                                        {{ core()->formatPrice($invoice->discount_amount, $order->order_currency_code) }}
                                                     </p>
                                                 </div>
-                                            </div>  
+                                            </div>
                                         @endif
 
                                         <div class="flex gap-x-[20px] justify-between w-full">
@@ -523,7 +531,7 @@
                                                 <p class="text-[14px]">-</p>
 
                                                 <p class="text-[14px]">
-                                                    {!! core()->formatPrice($invoice->tax_amount, $order->order_currency_code) !!}
+                                                    {{ core()->formatPrice($invoice->tax_amount, $order->order_currency_code) }}
                                                 </p>
                                             </div>
                                         </div>
@@ -537,7 +545,7 @@
                                                 <p class="text-[14px]">-</p>
 
                                                 <p class="text-[14px]">
-                                                    {!! core()->formatPrice($invoice->grand_total, $order->order_currency_code) !!}
+                                                    {{ core()->formatPrice($invoice->grand_total, $order->order_currency_code) }}
                                                 </p>
                                             </div>
                                         </div>
@@ -716,7 +724,7 @@
                                                 class="px-6 py-[16px] text-black font-medium"
                                                 data-value="@lang('shop::app.customers.account.orders.view.refunds.price')"
                                             >
-                                                {!! core()->formatPrice($item->price, $order->order_currency_code) !!}
+                                                {{ core()->formatPrice($item->price, $order->order_currency_code) }}
                                             </td>
 
                                             <td
@@ -730,21 +738,21 @@
                                                 class="px-6 py-[16px] text-black font-medium"
                                                 data-value="@lang('shop::app.customers.account.orders.view.refunds.subtotal')"
                                             >
-                                                {!! core()->formatPrice($item->total, $order->order_currency_code) !!}
+                                                {{ core()->formatPrice($item->total, $order->order_currency_code) }}
                                             </td>
 
                                             <td
                                                 class="px-6 py-[16px] text-black font-medium"
                                                 data-value="@lang('shop::app.customers.account.orders.view.refunds.tax-amount')"
                                             >
-                                                {!! core()->formatPrice($item->tax_amount, $order->order_currency_code) !!}
+                                                {{ core()->formatPrice($item->tax_amount, $order->order_currency_code) }}
                                             </td>
 
                                             <td
                                                 class="px-6 py-[16px] text-black font-medium"
                                                 data-value="@lang('shop::app.customers.account.orders.view.refunds.grand-total')"
                                             >
-                                                {!! core()->formatPrice($item->total + $item->tax_amount, $order->order_currency_code) !!}
+                                                {{ core()->formatPrice($item->total + $item->tax_amount, $order->order_currency_code) }}
                                             </td>
                                         </tr>
                                     @endforeach
@@ -771,7 +779,7 @@
                                                 <p class="text-[14px]">-</p>
 
                                                 <p class="text-[14px]">
-                                                    {!! core()->formatPrice($refund->sub_total, $order->order_currency_code) !!}
+                                                    {{ core()->formatPrice($refund->sub_total, $order->order_currency_code) }}
                                                 </p>
                                             </div>
                                         </div>
@@ -785,7 +793,7 @@
                                                 <p class="text-[14px]">-</p>
 
                                                 <p class="text-[14px]">
-                                                    {!! core()->formatPrice($refund->shipping_amount, $order->order_currency_code) !!}
+                                                    {{ core()->formatPrice($refund->shipping_amount, $order->order_currency_code) }}
                                                 </p>
                                             </div>
                                         </div>
@@ -800,7 +808,7 @@
                                                     <p class="text-[14px]">-</p>
 
                                                     <p class="text-[14px]">
-                                                        {!! core()->formatPrice($order->discount_amount, $order->order_currency_code) !!}
+                                                        {{ core()->formatPrice($order->discount_amount, $order->order_currency_code) }}
                                                     </p>
                                                 </div>
                                             </div>
@@ -816,7 +824,7 @@
                                                     <p class="text-[14px]">-</p>
 
                                                     <p class="text-[14px]">
-                                                        {!! core()->formatPrice($refund->tax_amount, $order->order_currency_code) !!}
+                                                        {{ core()->formatPrice($refund->tax_amount, $order->order_currency_code) }}
                                                     </p>
                                                 </div>
                                             </div>
@@ -831,7 +839,7 @@
                                                 <p class="text-[14px]">-</p>
 
                                                 <p class="text-[14px]">
-                                                    {!! core()->formatPrice($refund->adjustment_refund, $order->order_currency_code) !!}
+                                                    {{ core()->formatPrice($refund->adjustment_refund, $order->order_currency_code) }}
                                                 </p>
                                             </div>
                                         </div>
@@ -845,7 +853,7 @@
                                                 <p class="text-[14px]">-</p>
 
                                                 <p class="text-[14px]">
-                                                    {!! core()->formatPrice($refund->adjustment_fee, $order->order_currency_code) !!}
+                                                    {{ core()->formatPrice($refund->adjustment_fee, $order->order_currency_code) }}
                                                 </p>
                                             </div>
                                         </div>
@@ -859,7 +867,7 @@
                                                 <p class="text-[14px]">-</p>
 
                                                 <p class="text-[14px]">
-                                                    {!! core()->formatPrice($refund->grand_total, $order->order_currency_code) !!}
+                                                    {{ core()->formatPrice($refund->grand_total, $order->order_currency_code) }}
                                                 </p>
                                             </div>
                                         </div>
@@ -877,7 +885,7 @@
             {{-- Biiling Address --}}
             @if ($order->billing_address)
                 <div class="grid gap-[15px] max-w-[200px] max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
-                    <p class="text-[16px] text-[#7D7D7D]">
+                    <p class="text-[16px] text-[#6E6E6E]">
                         @lang('shop::app.customers.account.orders.view.billing-address')
                     </p>
 
@@ -894,7 +902,7 @@
             {{-- Shipping Address --}}
             @if ($order->shipping_address)
                 <div class="grid gap-[15px] max-w-[200px] max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
-                    <p class="text-[16px] text-[#7D7D7D]">
+                    <p class="text-[16px] text-[#6E6E6E]">
                         @lang('shop::app.customers.account.orders.view.shipping-address')
                     </p>
 
@@ -909,7 +917,7 @@
 
                 {{-- Shipping Method --}}
                 <div class="grid gap-[15px] max-w-[200px] place-content-baseline max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
-                    <p class="text-[16px] text-[#7D7D7D]">
+                    <p class="text-[16px] text-[#6E6E6E]">
                         @lang('shop::app.customers.account.orders.view.shipping-method')
                     </p>
 
@@ -924,7 +932,7 @@
 
             {{-- Billing Method --}}
             <div class="grid gap-[15px] place-content-baseline max-w-[200px] max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
-                <p class="text-[16px] text-[#7D7D7D]">
+                <p class="text-[16px] text-[#6E6E6E]">
                     @lang('shop::app.customers.account.orders.view.payment-method')
                 </p>
 
@@ -939,19 +947,7 @@
                 @endif
 
                 {!! view_render_event('bagisto.shop.customers.account.orders.view.payment-method.after', ['order' => $order]) !!}
-
             </div>
         </div>
     </div>
-
-    <script>
-        function cancelOrder(message) {
-            if (! confirm(message)) {
-                return;
-            }
-
-            const form = document.getElementById('cancelOrderForm');
-            form.submit();
-        }
-    </script>
 </x-shop::layouts.account>

@@ -8,8 +8,8 @@
 {!! view_render_event('bagisto.shop.checkout.shipping.method.after') !!}
 
 @pushOnce('scripts')
-<script type="text/x-template" id="v-shipping-method-template">
-    <div class="mt-[30px]">
+    <script type="text/x-template" id="v-shipping-method-template">
+        <div class="mt-[30px]">
             <template v-if="! isShowShippingMethod && isShippingMethodLoading">
                 <!-- Shipping Method Shimmer Effect -->
                 <x-shop::shimmer.checkout.onepage.shipping-method/>
@@ -53,9 +53,9 @@
                                     >
                                         <span class="icon-flate-rate text-[60px] text-navyBlue"></span>
 
-                                        <p class="text-[25px] mt-[5px] font-semibold max-sm:text-[20px]" v-html="rate.base_formatted_price">
+                                        <p class="text-[25px] mt-[5px] font-semibold max-sm:text-[20px]">
+                                            @{{ rate.base_formatted_price }}
                                         </p>
-                                            <!-- @{{ rate.base_formatted_price }} use v-html instend -->
                                         
                                         <p class="text-[12px] mt-[10px] font-medium">
                                             <span class="font-medium">@{{ rate.method_title }}</span> - @{{ rate.method_description }}
@@ -70,43 +70,43 @@
         </div>
     </script>
 
-<script type="module">
-    app.component('v-shipping-method', {
-        template: '#v-shipping-method-template',
+    <script type="module">
+        app.component('v-shipping-method', {
+            template: '#v-shipping-method-template',
 
-        data() {
-            return {
-                shippingMethods: [],
+            data() {
+                return {
+                    shippingMethods: [],
 
-                isShowShippingMethod: false,
+                    isShowShippingMethod: false,
 
-                isShippingMethodLoading: false,
-            }
-        },
-
-        methods: {
-            store(selectedShippingMethod) {
-                this.$parent.$refs.vCartSummary.canPlaceOrder = false;
-
-                this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
-
-                this.$parent.$refs.vPaymentMethod.isPaymentMethodLoading = true;
-
-                this.$axios.post("{{ route('shop.checkout.onepage.shipping_methods.store') }}", {
-                        shipping_method: selectedShippingMethod,
-                    })
-                    .then(response => {
-                        this.$parent.getOrderSummary();
-
-                        this.$parent.$refs.vPaymentMethod.payment_methods = response.data.payment_methods;
-
-                        this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = true;
-
-                        this.$parent.$refs.vPaymentMethod.isPaymentMethodLoading = false;
-                    })
-                    .catch(error => {});
+                    isShippingMethodLoading: false,
+                }
             },
-        },
-    });
-</script>
+
+            methods: {
+                store(selectedShippingMethod) {
+                    this.$parent.$refs.vCartSummary.canPlaceOrder = false;
+
+                    this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
+
+                    this.$parent.$refs.vPaymentMethod.isPaymentMethodLoading = true;
+
+                    this.$axios.post("{{ route('shop.checkout.onepage.shipping_methods.store') }}", {    
+                            shipping_method: selectedShippingMethod,
+                        })
+                        .then(response => {
+                            this.$parent.getOrderSummary();
+
+                            this.$parent.$refs.vPaymentMethod.payment_methods = response.data.payment_methods;
+                                
+                            this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = true;
+
+                            this.$parent.$refs.vPaymentMethod.isPaymentMethodLoading = false;
+                        })
+                        .catch(error => {});
+                },
+            },
+        });
+    </script>
 @endPushOnce

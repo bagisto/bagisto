@@ -637,41 +637,39 @@ class Core
         $formatter->setSymbol(\NumberFormatter::CURRENCY_SYMBOL, '');
 
         $groupingSeparator = $formatter->getSymbol(\NumberFormatter::GROUPING_SEPARATOR_SYMBOL);
-        $decimalSeprator = $formatter->getSymbol(\NumberFormatter::DECIMAL_SEPARATOR_SYMBOL);
+        $decimalSeparator = $formatter->getSymbol(\NumberFormatter::DECIMAL_SEPARATOR_SYMBOL);
 
         $formattedCurrency = $formatter->format($price);
         $formattedCurrency = preg_replace('/^\s+|\s+$/u', '', $formattedCurrency);
 
         $formattedCurrency = str_replace(
             $groupingSeparator,
-            $currency->thousand_seprator == '' ? ' ' : $currency->thousand_seprator,
+            $currency->thousand_separator == '' ? ' ' : $currency->thousand_separator,
             $formattedCurrency
         );
 
         if ($currency->decimal > 0) {
-            $decimalPointPos = strrpos($formattedCurrency, $decimalSeprator);
+            $decimalPointPos = strrpos($formattedCurrency, $decimalSeparator);
             $formattedCurrency = substr_replace(
                 $formattedCurrency,
-                $currency->decimal_seprator == '' ? ' ' : $currency->decimal_seprator,
+                $currency->decimal_separator == '' ? ' ' : $currency->decimal_separator,
                 $decimalPointPos,
                 1
             );
         }
 
-        $currencyStyle = "<span class='currency-symbol-style'>$symbol</span>";
-
         switch ($currency->currency_position) {
             case 'left':
-                $formattedCurrency = $currencyStyle . $formattedCurrency;
+                $formattedCurrency = $symbol . $formattedCurrency;
                 break;
             case 'right':
-                $formattedCurrency = $formattedCurrency . $currencyStyle;
+                $formattedCurrency = $formattedCurrency . $symbol;
                 break;
             case 'left_with_space':
-                $formattedCurrency = $currencyStyle . ' ' . $formattedCurrency;
+                $formattedCurrency = $symbol . ' ' . $formattedCurrency;
                 break;
             case 'right_with_space':
-                $formattedCurrency = $formattedCurrency . ' ' . $currencyStyle;
+                $formattedCurrency = $formattedCurrency . ' ' . $symbol;
                 break;
         }
 

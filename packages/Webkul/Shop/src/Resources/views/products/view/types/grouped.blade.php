@@ -16,8 +16,8 @@
                                     @lang('shop::app.products.view.type.grouped.name')
                                 </p>
 
-                                <p class="text-[#7D7D7D] mt-[5px]">
-                                    {{ $groupedProduct->associated_product->name . ' + ' }} {!! core()->currency($groupedProduct->associated_product->getTypeInstance()->getFinalPrice()) !!}
+                                <p class="text-[#6E6E6E] mt-[5px]">
+                                    {{ $groupedProduct->associated_product->name . ' + ' . core()->currency($groupedProduct->associated_product->getTypeInstance()->getFinalPrice()) }}
                                 </p>
 
                             </div>

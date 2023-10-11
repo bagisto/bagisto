@@ -127,7 +127,7 @@
                             @endif
                         </td>
 
-                        <td style="text-align: left;padding: 15px">{!! core()->formatPrice($item->price, $order->order_currency_code) !!}
+                        <td style="text-align: left;padding: 15px">{{ core()->formatPrice($item->price, $order->order_currency_code) }}
                         </td>
 
                         <td style="text-align: left;padding: 15px">{{ $item->qty_canceled }}</td>
@@ -142,7 +142,7 @@
             <span>@lang('shop::app.emails.orders.subtotal')</span>
 
             <span style="text-align: right;">
-                {!! core()->formatPrice($order->sub_total, $order->order_currency_code) !!}
+                {{ core()->formatPrice($order->sub_total, $order->order_currency_code) }}
             </span>
         </div>
 
@@ -151,7 +151,7 @@
                 <span>@lang('shop::app.emails.orders.shipping-handling')</span>
 
                 <span style="text-align: right;">
-                    {!! core()->formatPrice($order->shipping_amount, $order->order_currency_code) !!}
+                    {{ core()->formatPrice($order->shipping_amount, $order->order_currency_code) }}
                 </span>
             </div>
         @endif
@@ -163,7 +163,7 @@
                 </span>
 
                 <span style="text-align: right;">
-                    {!! core()->formatPrice($taxAmount, $order->order_currency_code) !!}
+                    {{ core()->formatPrice($taxAmount, $order->order_currency_code) }}
                 </span>
             </div>
         @endforeach
@@ -173,7 +173,7 @@
                 <span>@lang('shop::app.emails.orders.discount')</span>
 
                 <span style="text-align: right;">
-                    {!! core()->formatPrice($order->discount_amount, $order->order_currency_code) !!}
+                    {{ core()->formatPrice($order->discount_amount, $order->order_currency_code) }}
                 </span>
             </div>
         @endif
@@ -182,7 +182,7 @@
             <span>@lang('shop::app.emails.orders.grand-total')</span>
 
             <span style="text-align: right;">
-                {!! core()->formatPrice($order->grand_total, $order->order_currency_code) !!}
+                {{ core()->formatPrice($order->grand_total, $order->order_currency_code) }}
             </span>
         </div>
     </div>

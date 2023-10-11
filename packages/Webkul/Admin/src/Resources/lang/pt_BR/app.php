@@ -2074,7 +2074,7 @@ return [
                     'code'               => 'Código',
                     'currency-position'  => 'Posição da moeda',
                     'decimal'            => 'Casas Decimais',
-                    'decimal-seprator'   => 'Separador decimal',
+                    'decimal-separator'  => 'Separador decimal',
                     'delete-warning'     => 'Tem certeza de que deseja executar esta ação?',
                     'general'            => 'Geral',
                     'name'               => 'Nome',

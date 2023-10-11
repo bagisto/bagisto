@@ -2075,7 +2075,7 @@ return [
                     'code'               => 'Kodu',
                     'currency-position'  => 'Döviz Pozisyonu',
                     'decimal'            => 'Ondalık',
-                    'decimal-seprator'   => 'Ondalık Ayırıcı',
+                    'decimal-separator'  => 'Ondalık Ayırıcı',
                     'delete-warning'     => 'Emin misiniz, bu işlemi gerçekleştirmek istediğinize?',
                     'general'            => 'Genel',
                     'name'               => 'Adı',

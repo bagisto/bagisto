@@ -32,8 +32,7 @@
 
         <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" as="style">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap">
-        <!-- link currency-symbol-style.css for adding styling on currency symbol  -->
-        <link href="{{ asset('css/currency-symbol-style.css') }}" rel="stylesheet">
+
         @stack('styles')
 
         <style>

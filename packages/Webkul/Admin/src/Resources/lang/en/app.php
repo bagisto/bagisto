@@ -2074,7 +2074,7 @@ return [
                     'create-btn'         => 'Create Currency',
                     'currency-position'  => 'Currency Position',
                     'decimal'            => 'Decimal',
-                    'decimal-seprator'   => 'Decimal Separator',
+                    'decimal-separator'  => 'Decimal Separator',
                     'delete-warning'     => 'Are you sure you want to perform this action?',
                     'general'            => 'General',
                     'name'               => 'Name',

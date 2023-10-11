@@ -56,8 +56,8 @@ class CurrencyController extends Controller
             'name',
             'symbol',
             'decimal',
-            'thousand_seprator',
-            'decimal_seprator',
+            'thousand_separator',
+            'decimal_separator',
             'currency_position',
         ]);
 
@@ -100,8 +100,8 @@ class CurrencyController extends Controller
             'name',
             'symbol',
             'decimal',
-            'thousand_seprator',
-            'decimal_seprator',
+            'thousand_separator',
+            'decimal_separator',
             'currency_position',
         ]);
 

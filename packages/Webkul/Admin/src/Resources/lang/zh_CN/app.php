@@ -2074,7 +2074,7 @@ return [
                     'code'               => '代码',
                     'currency-position'  => '货币头寸',
                     'decimal'            => '小数',
-                    'decimal-seprator'   => '小数点分隔符',
+                    'decimal-separator'  => '小数点分隔符',
                     'delete-warning'     => '确定要执行此操作吗？',
                     'general'            => '常规',
                     'name'               => '名称',

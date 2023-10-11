@@ -177,7 +177,8 @@
                                                             @{{ option.attribute_name + ':' }}
                                                         </p>
 
-                                                        <p class="text-[14px]" v-html="option.option_label">
+                                                        <p class="text-[14px]">
+                                                            @{{ option.option_label }}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -186,7 +187,7 @@
                                             <div class="sm:hidden">
                                                 <p 
                                                     class="text-[18px] font-semibold" 
-                                                    v-html="item.formatted_total"
+                                                    v-text="item.formatted_total"
                                                 >
                                                 </p>
                                                 
@@ -211,7 +212,7 @@
                                     <div class="max-sm:hidden text-right">
                                         <p 
                                             class="text-[18px] font-semibold" 
-                                            v-html="item.formatted_total"
+                                            v-text="item.formatted_total"
                                         >
                                         </p>
                                         

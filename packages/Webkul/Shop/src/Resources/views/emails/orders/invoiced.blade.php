@@ -128,7 +128,7 @@
                             @endif
                         </td>
 
-                        <td style="text-align: left;padding: 15px">{!! core()->formatPrice($item->price, $invoice->order_currency_code) !!}
+                        <td style="text-align: left;padding: 15px">{{ core()->formatPrice($item->price, $invoice->order_currency_code) }}
                         </td>
 
                         <td style="text-align: left;padding: 15px">{{ $item->qty }}</td>
@@ -145,7 +145,7 @@
             </span>
 
             <span style="text-align: right;">
-                {!! core()->formatPrice($invoice->sub_total, $invoice->order_currency_code) !!}
+                {{ core()->formatPrice($invoice->sub_total, $invoice->order_currency_code) }}
             </span>
         </div>
 
@@ -156,7 +156,7 @@
                 </span>
 
                 <span style="text-align: right;">
-                    {!! core()->formatPrice($invoice->shipping_amount, $invoice->order_currency_code) !!}
+                    {{ core()->formatPrice($invoice->shipping_amount, $invoice->order_currency_code) }}
                 </span>
             </div>
         @endif
@@ -168,7 +168,7 @@
                 </span>
 
                 <span style="text-align: right;">
-                    {!! core()->formatPrice($invoice->tax_amount, $invoice->order_currency_code) !!}
+                    {{ core()->formatPrice($invoice->tax_amount, $invoice->order_currency_code) }}
                 </span>
             </div>
         @endforeach
@@ -180,7 +180,7 @@
                 </span>
 
                 <span style="text-align: right;">
-                    {!! core()->formatPrice($invoice->discount_amount, $invoice->order_currency_code) !!}
+                    {{ core()->formatPrice($invoice->discount_amount, $invoice->order_currency_code) }}
                 </span>
             </div>
         @endif
@@ -191,7 +191,7 @@
             </span>
 
             <span style="text-align: right;">
-                {!! core()->formatPrice($invoice->grand_total, $invoice->order_currency_code) !!}
+                {{ core()->formatPrice($invoice->grand_total, $invoice->order_currency_code) }}
             </span>
         </div>
     </div>
