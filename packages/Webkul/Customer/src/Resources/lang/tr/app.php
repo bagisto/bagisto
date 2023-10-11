@@ -3,14 +3,13 @@
 
 return [
     'validations' => [
-        'captcha'=> [
-            'required'=> 'Lütfen CAPTCHA\'yı seçin',
-            'captcha' => 'Bir şeyler yanlış gitti! Lütfen tekrar deneyin.',
+        'captcha' => [
+            'captcha'  => 'Bir şeyler yanlış gitti! Lütfen tekrar deneyin.',
+            'required' => 'Lütfen CAPTCHA\'yı seçin',
         ],
-    
-        'vat-id'=> [
-            'invalid-format'=> 'Geçersiz KDV Formatı',
+
+        'vat-id' => [
+            'invalid-format' => 'Geçersiz KDV Formatı',
         ],
-    
-    ],  
+    ],
 ];

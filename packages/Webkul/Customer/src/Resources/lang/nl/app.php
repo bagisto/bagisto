@@ -2,14 +2,13 @@
 
 return [
     'validations' => [
-        'captcha'=> [
-            'required'=> 'Selecteer CAPTCHA',
-            'captcha' => 'Er is iets fout gegaan! Probeer het opnieuw.',
+        'captcha' => [
+            'captcha'  => 'Er is iets fout gegaan! Probeer het opnieuw.',
+            'required' => 'Selecteer CAPTCHA',
         ],
-    
-        'vat-id'=> [
-            'invalid-format'=> 'Ongeldige BTW-indeling',
+
+        'vat-id' => [
+            'invalid-format' => 'Ongeldige BTW-indeling',
         ],
-    
-    ], 
+    ],
 ];

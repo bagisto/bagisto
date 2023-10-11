@@ -2,14 +2,13 @@
 
 return [
     'validations' => [
-        'captcha'=> [
-            'required'=> 'Please select CAPTCHA',
-            'captcha' => 'Something went wrong! Please try again.',
+        'captcha' => [
+            'captcha'  => 'Something went wrong! Please try again.',
+            'required' => 'Please select CAPTCHA',
         ],
-    
-        'vat-id'=> [
-            'invalid-format'=> 'Invalid Vat Format',
+
+        'vat-id' => [
+            'invalid-format' => 'Invalid Vat Format',
         ],
-    
     ],
 ];

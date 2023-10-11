@@ -2,14 +2,13 @@
 
 return [
     'validations' => [
-        'captcha'=> [
-            'required'=> 'Пожалуйста, выберите CAPTCHA',
-            'captcha' => 'Произошла ошибка! Попробуйте еще раз.',
+        'captcha' => [
+            'captcha'  => 'Произошла ошибка! Попробуйте еще раз.',
+            'required' => 'Пожалуйста, выберите CAPTCHA',
         ],
-    
-        'vat-id'=> [
-            'invalid-format'=> 'Недопустимый формат НДС',
+
+        'vat-id' => [
+            'invalid-format' => 'Недопустимый формат НДС',
         ],
-    
-    ],     
+    ],
 ];

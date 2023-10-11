@@ -2,14 +2,13 @@
 
 return [
     'validations' => [
-        'captcha'=> [
-            'required'=> 'Seleccione CAPTCHA',
-            'captcha' => '¡Algo salió mal! Inténtalo de nuevo.',
+        'captcha' => [
+            'captcha'  => '¡Algo salió mal! Inténtalo de nuevo.',
+            'required' => 'Seleccione CAPTCHA',
         ],
-    
-        'vat-id'=> [
-            'invalid-format'=> 'Formato de IVA inválido',
+
+        'vat-id' => [
+            'invalid-format' => 'Formato de IVA inválido',
         ],
-    
     ],
 ];
