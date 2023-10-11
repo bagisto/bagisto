@@ -193,7 +193,7 @@ class CategoryController extends Controller
                 if (! $this->isCategoryDeletable($category)) {
                     $suppressFlash = false;
 
-                    session()->flash('warning', trans('admin::app.response.delete-category-root', ['name' => 'admin::app.catalog.categories.category']));
+                    session()->flash('warning', trans('admin::app.catalog.categories.delete-category-root'));
                 } else {
                     try {
                         $suppressFlash = true;
@@ -205,7 +205,7 @@ class CategoryController extends Controller
                         Event::dispatch('catalog.category.delete.after', $categoryId);
                     } catch (\Exception $e) {
                         return new JsonResponse([
-                            'message' => trans('admin::app.catalog.categories.delete-failed', ['name' => 'admin::app.catalog.categories.category'])
+                            'message' => trans('admin::app.catalog.categories.delete-failed')
                         ], 500);
                     }
                 }
@@ -217,7 +217,7 @@ class CategoryController extends Controller
             || $suppressFlash == true
         ) {
             return new JsonResponse([
-                'message' => trans('admin::app.catalog.categories.index.datagrid.delete-success', ['resource' => 'admin::app.catalog.categories.category'])
+                'message' => trans('admin::app.catalog.categories.delete-success')
             ]);
         }
 
