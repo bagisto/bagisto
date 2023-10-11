@@ -33,11 +33,12 @@ return [
     ],
 
     'notifications' => [
-        'marked-success' => 'सूचना सफलतापूर्वक मार्क की गई',
-        'no-record'      => 'कोई रिकॉर्ड नहीं मिला',
-        'read-all'       => 'पढ़ा गया मार्क करें',
-        'title'          => 'सूचनाएँ',
-        'view-all'       => 'सभी देखें',
+        'description-text' => 'सभी सूचनाएँ सूचीबद्ध करें',
+        'marked-success'   => 'सूचना सफलतापूर्वक मार्क की गई',
+        'no-record'        => 'कोई रिकॉर्ड नहीं मिला',
+        'read-all'         => 'पढ़ा गया मार्क करें',
+        'title'            => 'सूचनाएँ',
+        'view-all'         => 'सभी देखें',
 
         'order-status-messages' => [
             'completed'       => 'ऑर्डर पूरा हुआ',
