@@ -1233,7 +1233,7 @@ return [
                 'gender'                      => 'লিঙ্গ - :gender',
                 'group'                       => 'গ্রুপ - :group_code',
                 'inactive'                    => 'নিষ্ক্রিয়',
-                'id'                          => 'আইডি',
+                'id'                          => 'আইডি - :id',
                 'increment-id'                => '# :increment_id',
                 'invoice-id'                  => 'চালান ID',
                 'invoice-id-prefix'           => '# :invoice_id',
