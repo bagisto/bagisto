@@ -2,20 +2,15 @@
 <?php
 
 return [
-    'admin' => [
-        'system' => [
-            'captcha' => [
-                'validations' => [
-                    'required' => 'Lütfen CAPTCHA\'yı seçin',
-                    'captcha'  => 'Bir şeyler yanlış gitti! Lütfen tekrar deneyin.',
-                ],
-            ],
+    'validations' => [
+        'captcha'=> [
+            'required'=> 'Lütfen CAPTCHA\'yı seçin',
+            'captcha' => 'Bir şeyler yanlış gitti! Lütfen tekrar deneyin.',
         ],
-    ],
-                                                
-    'customers' => [
-        'addresses' => [
-            'invalid-format' => 'Geçersiz KDV Formatı',
+    
+        'vat-id'=> [
+            'invalid-format'=> 'Geçersiz KDV Formatı',
         ],
+    
     ],  
 ];

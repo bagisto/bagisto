@@ -37,6 +37,6 @@ class VatIdRule implements Rule
      */
     public function message()
     {
-        return trans('customer::app.customers.addresses.invalid-format');
+        return trans('customer::app.validations.vat-id.invalid-format');
     }
 }

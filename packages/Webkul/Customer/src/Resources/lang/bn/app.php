@@ -1,20 +1,16 @@
 <?php
 
 return [
-    'admin' => [
-        'system' => [
-            'captcha' => [
-                'validations' => [
-                    'required' => 'ক্যাপচা নির্বাচন করুন',
-                    'captcha'  => 'কিছু ভুল হয়েছে! অনুগ্রহপূর্বক আবার চেষ্টা করুন.',
-                ],
-            ],
+    'validations' => [
+        'captcha'=> [
+            'required'=> 'ক্যাপচা নির্বাচন করুন',
+            'captcha' => 'কিছু ভুল হয়েছে! অনুগ্রহপূর্বক আবার চেষ্টা করুন.',
         ],
-    ],
-
-    'customers' => [
-        'addresses' => [
-            'invalid-format' => 'অবৈধ ভ্যাট ফরম্যাট',
+    
+        'vat-id'=> [
+            'invalid-format'=> 'অবৈধ ভ্যাট ফরম্যাট',
         ],
+    
     ],
 ];
+
