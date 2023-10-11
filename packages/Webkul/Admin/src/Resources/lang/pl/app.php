@@ -33,11 +33,12 @@ return [
     ],
 
     'notifications' => [
-        'marked-success' => 'Powiadomienie oznaczone jako przeczytane',
-        'no-record'      => 'Brak dostępnych powiadomień',
-        'read-all'       => 'Oznacz jako przeczytane',
-        'title'          => 'Powiadomienia',
-        'view-all'       => 'Zobacz wszystkie',
+        'description-text' => 'Wypisz wszystkie powiadomienia',
+        'marked-success'   => 'Powiadomienie oznaczone jako przeczytane',
+        'no-record'        => 'Brak dostępnych powiadomień',
+        'read-all'         => 'Oznacz jako przeczytane',
+        'title'            => 'Powiadomienia',
+        'view-all'         => 'Zobacz wszystkie',
 
         'order-status-messages' => [
             'completed'       => 'Zamówienie zakończone',

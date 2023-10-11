@@ -33,11 +33,12 @@ return [
     ],
 
     'notifications' => [
-        'marked-success' => 'اعلان با موفقیت علامت‌گذاری شد',
-        'no-record'      => 'هیچ رکوردی یافت نشد',
-        'read-all'       => 'علامت خوانده شده',
-        'title'          => 'اعلان‌ها',
-        'view-all'       => 'مشاهده همه',
+        'description-text' => 'لیست کل اعلان‌ها',
+        'marked-success'   => 'اعلان با موفقیت علامت‌گذاری شد',
+        'no-record'        => 'هیچ رکوردی یافت نشد',
+        'read-all'         => 'علامت خوانده شده',
+        'title'            => 'اعلان‌ها',
+        'view-all'         => 'مشاهده همه',
 
         'order-status-messages' => [
             'completed'       => 'سفارش تکمیل شده',

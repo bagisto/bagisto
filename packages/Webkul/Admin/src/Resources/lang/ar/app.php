@@ -33,11 +33,12 @@ return [
     ],
 
     'notifications' => [
-        'marked-success' => 'تم وضع علامة على الإشعار بنجاح',
-        'no-record'      => 'لم يتم العثور على سجلات',
-        'read-all'       => 'وضع علامة كمقروء',
-        'title'          => 'الإشعارات',
-        'view-all'       => 'عرض الكل',
+        'description-text' => 'قائمة جميع الإشعارات',
+        'marked-success'   => 'تم وضع علامة على الإشعار بنجاح',
+        'no-record'        => 'لم يتم العثور على سجلات',
+        'read-all'         => 'وضع علامة كمقروء',
+        'title'            => 'الإشعارات',
+        'view-all'         => 'عرض الكل',
 
         'order-status-messages' => [
             'completed'       => 'تم الانتهاء من الطلب',

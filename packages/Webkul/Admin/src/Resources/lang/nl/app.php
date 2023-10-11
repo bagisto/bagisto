@@ -33,11 +33,12 @@ return [
     ],
 
     'notifications' => [
-        'marked-success' => 'Melding Succesvol Gemarkeerd',
-        'no-record'      => 'Geen Records Gevonden',
-        'read-all'       => 'Markeer als Gelezen',
-        'title'          => 'Meldingen',
-        'view-all'       => 'Alles Bekijken',
+        'description-text' => 'Alle meldingen weergeven',
+        'marked-success'   => 'Melding Succesvol Gemarkeerd',
+        'no-record'        => 'Geen Records Gevonden',
+        'read-all'         => 'Markeer als Gelezen',
+        'title'            => 'Meldingen',
+        'view-all'         => 'Alles Bekijken',
 
         'order-status-messages' => [
             'completed'       => 'Bestelling Voltooid',
