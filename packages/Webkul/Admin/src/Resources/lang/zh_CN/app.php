@@ -33,11 +33,12 @@ return [
     ],
 
     'notifications' => [
-        'marked-success' => '通知标记成功',
-        'no-record'      => '未找到记录',
-        'read-all'       => '标记为已读',
-        'title'          => '通知',
-        'view-all'       => '查看全部',
+        'description-text' => '列出所有通知',
+        'marked-success'   => '通知标记成功',
+        'no-record'        => '未找到记录',
+        'read-all'         => '标记为已读',
+        'title'            => '通知',
+        'view-all'         => '查看全部',
 
         'order-status-messages' => [
             'completed'       => '订单已完成',
