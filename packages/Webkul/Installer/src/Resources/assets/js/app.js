@@ -66,11 +66,8 @@ window.app = createApp({
  * Global plugins registration.
  */
 import Axios from "./plugins/axios";
-import Emitter from "./plugins/emitter";
-
 [
     Axios,
-    Emitter,
 ].forEach((plugin) => app.use(plugin));
 
 

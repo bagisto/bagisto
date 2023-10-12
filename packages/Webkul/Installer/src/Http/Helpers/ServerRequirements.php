@@ -2,7 +2,7 @@
 
 namespace Webkul\Installer\Http\Helpers;
 
-class RequirementsChecker
+class ServerRequirements
 {
     /**
      * Minimum PHP Version Supported (Override is in installer.php config file).
@@ -14,9 +14,9 @@ class RequirementsChecker
     /**
      * Check for the server requirements.
      *
-     * @param  array  $requirements
+     * @return array
      */
-    public function check(): array
+    public function validate(): array
     {
         // Server Requirements
         $requirements = [
@@ -44,18 +44,14 @@ class RequirementsChecker
         $results = [];
 
         foreach ($requirements as $type => $requirement) {
-            switch ($type) {
-                case 'php':
-                    foreach ($requirements[$type] as $requirement) {
-                        $results['requirements'][$type][$requirement] = true;
+            foreach ($requirement as $item) {
+                $results['requirements'][$type][$item] = true;
 
-                        if (! extension_loaded($requirement)) {
-                            $results['requirements'][$type][$requirement] = false;
+                if (! extension_loaded($item)) {
+                    $results['requirements'][$type][$item] = false;
 
-                            $results['errors'] = true;
-                        }
-                    }
-                    break;
+                    $results['errors'] = true;
+                }
             }
         }
 
@@ -69,27 +65,20 @@ class RequirementsChecker
      */
     public function checkPHPversion(string $minPhpVersion = null)
     {
-        $minVersionPhp = $minPhpVersion;
+        $minVersionPhp = $minPhpVersion ?? $this->minPhpVersion;
+
         $currentPhpVersion = $this->getPhpVersionInfo();
-        $supported = false;
 
-        if ($minPhpVersion == null) {
-            $minVersionPhp = $this->getMinPhpVersion();
-        }
+        $supported = version_compare($currentPhpVersion['version'], $minVersionPhp) >= 0;
 
-        if (version_compare($currentPhpVersion['version'], $minVersionPhp) >= 0) {
-            $supported = true;
-        }
-
-        $phpStatus = [
-            'full'      => $currentPhpVersion['full'],
-            'current'   => $currentPhpVersion['version'],
-            'minimum'   => $minVersionPhp,
+        return [
+            'full' => $currentPhpVersion['full'],
+            'current' => $currentPhpVersion['version'],
+            'minimum' => $minVersionPhp,
             'supported' => $supported,
         ];
-
-        return $phpStatus;
     }
+
 
     /**
      * Get current Php version information.
@@ -100,21 +89,10 @@ class RequirementsChecker
     {
         $currentVersionFull = PHP_VERSION;
         preg_match("#^\d+(\.\d+)*#", $currentVersionFull, $filtered);
-        $currentVersion = $filtered[0];
 
         return [
-            'full'    => $currentVersionFull,
-            'version' => $currentVersion,
+            'full' => $currentVersionFull,
+            'version' => $filtered[0] ?? $currentVersionFull,
         ];
-    }
-
-    /**
-     * Get minimum PHP version ID.
-     *
-     * @return string _minPhpVersion
-     */
-    protected function getMinPhpVersion()
-    {
-        return $this->minPhpVersion;
     }
 }

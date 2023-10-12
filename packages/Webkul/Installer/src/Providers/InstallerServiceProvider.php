@@ -24,8 +24,6 @@ class InstallerServiceProvider extends ServiceProvider
     {
         $this->loadRoutesFrom(__DIR__.'/../Routes/web.php');
 
-        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'installer');
-
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'installer');    
     }
 

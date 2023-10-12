@@ -3,88 +3,39 @@
 namespace Webkul\Installer\Http\Helpers;
 
 use Exception;
-use Illuminate\Support\Facades\Artisan;
+use Webkul\Installer\Http\Helpers\DatabaseManager;
 
 class EnvironmentManager
 {
-    /**
-     * @var string
-     */
-    private $envPath;
-
-    /**
-     * @var string
-     */
-    private $envExamplePath;
-
-    /**
-     * Set the .env and .env.example paths.
-     */
-    public function __construct()
+    public function __construct(protected DatabaseManager $databaseManager)
     {
-        $this->envPath = base_path('.env');
-        $this->envExamplePath = base_path('.env.example');
     }
 
     /**
-     * Get the content of the .env file.
-     *
-     * @return string
-     */
-    public function getEnvContent()
-    {
-        if (! file_exists($this->envPath)) {
-            if (file_exists($this->envExamplePath)) {
-                copy($this->envExamplePath, $this->envPath);
-            } else {
-                touch($this->envPath);
-            }
-        }
-
-        return file_get_contents($this->envPath);
-    }
-
-    /**
-     * Get the the .env file path.
-     *
-     * @return string
-     */
-    public function getEnvPath()
-    {
-        return base_path('.env');
-    }
-
-    /**
-     * Get the the .env.example file path.
-     *
-     * @return string
-     */
-    public function getEnvExamplePath()
-    {
-        return $this->envExamplePath;
-    }
-
-    /**
-     * Save the edited content to the .env file.
+     * Generate ENV File and Installation.
      *
      * @param [object] $request
      * @return string
      */
-    public function saveFileClassic($request)
+    public function generateEnv($request)
     {
-        if (! file_exists($this->envPath)) {
-            if (file_exists($this->envExamplePath)) {
-                copy($this->envExamplePath, $this->envPath);
+        $envExamplePath = base_path('.env.example');
+
+        $envPath = base_path('.env');
+
+        if (! file_exists($envPath)) {
+            if (file_exists($envExamplePath)) {
+                copy($envExamplePath, $envPath);
             } else {
-                touch($this->envPath);
+                touch($envPath);
             }
         }
 
         try {
-            $response = $this->saveFileWizard($request->all());
+            $response = $this->setEnvConfiguration($request->all());
 
             if ($response) {
-                $installation = $this->install();
+                $installation = $this->databaseManager->migration();
 
                 return $installation;
             }
@@ -96,15 +47,15 @@ class EnvironmentManager
     }
 
     /**
-     * Save the form content to the .env file.
+     * Set the ENV file configuration.
      *
      * @return string
      */
-    public function saveFileWizard($request)
+    public function setEnvConfiguration($request)
     {
         $message = trans('success');
 
-        $data = file($this->envPath);
+        $data = file(base_path('.env'));
 
         $envDBParams = [];
 
@@ -165,40 +116,11 @@ class EnvironmentManager
         $updatedEnvDBParams = implode(PHP_EOL, $updatedEnvDBParams);
 
         try {
-            file_put_contents($this->envPath, $updatedEnvDBParams);
+            file_put_contents(base_path('.env'), $updatedEnvDBParams);
         } catch (Exception $e) {
             $message = trans('installer_messages.environment.errors');
         }
 
         return $message;
-    }
-
-    public function install()
-    {
-        try {
-            Artisan::call('migrate:fresh', ['--force'=> true]);
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
-
-        return $this->seed();
-    }
-
-    /**
-     * Seed the database.
-     *
-     * @return string
-     */
-    private function seed()
-    {
-        try {
-            Artisan::call('db:seed', ['--force' => true]);
-
-            $seederLog = Artisan::output();
-        } catch (Exception $e) {
-            dd($e);
-        }
-
-        return $seederLog;
     }
 }

@@ -5,35 +5,18 @@ namespace Webkul\Installer\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Webkul\Installer\Http\Helpers\DatabaseManager;
 use Webkul\Installer\Http\Helpers\EnvironmentManager;
-use Webkul\Installer\Http\Helpers\RequirementsChecker;
+use Webkul\Installer\Http\Helpers\ServerRequirements;
 
 class InstallerController extends Controller
 {
-    /**
-     * @var RequirementsChecker
-     */
-    protected $requirements;
-
-    /**
-     * @var EnvironmentManager
-     */
-    protected $EnvironmentManager;
-
-    /**
-     * @var DatabaseManager
-     */
-    protected $databaseManager;
+    const MIN_PHP_VERSION = '8.1.0';
 
     public function __construct(
-        RequirementsChecker $checker,
-        EnvironmentManager $environmentManager,
-        DatabaseManager $databaseManager,
-    ) {
-        $this->requirements = $checker;
-        $this->EnvironmentManager = $environmentManager;
-        $this->databaseManager = $databaseManager;
+        protected ServerRequirements $serverRequirements,
+        protected EnvironmentManager $environmentManager,
+    )
+    {
     }
 
     /**
@@ -43,11 +26,9 @@ class InstallerController extends Controller
      */
     public function index()
     {
-        $phpVersion = $this->requirements->checkPHPversion(
-            config('installer.core.minPhpVersion')
-        );
+        $phpVersion = $this->serverRequirements->checkPHPversion(self::MIN_PHP_VERSION);
 
-        $requirements = $this->requirements->check();
+        $requirements = $this->serverRequirements->validate();
 
         return view('installer::installer.installer', compact('requirements', 'phpVersion'));
     }
@@ -60,23 +41,11 @@ class InstallerController extends Controller
      */
     public function envFileSetup(Request $request): JsonResponse
     {
-        $message = $this->EnvironmentManager->saveFileClassic($request);
+        $message = $this->environmentManager->generateEnv($request);
 
         return new JsonResponse([
             'data' => $message,
         ]);
-    }
-
-    /**
-     * Display the Environment page.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function environmentWizard()
-    {
-        $envConfig = $this->EnvironmentManager->getEnvContent();
-
-        return view('vendor.installer.environment-wizard', compact('envConfig'));
     }
 
     /**
@@ -116,6 +85,6 @@ class InstallerController extends Controller
      */
     public function smtpConfigSetup()
     {
-        $this->EnvironmentManager->saveFileWizard(request()->input());
+        $this->environmentManager->setEnvConfiguration(request()->input());
     }
 }
