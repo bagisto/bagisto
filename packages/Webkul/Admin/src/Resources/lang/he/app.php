@@ -2538,7 +2538,7 @@ return [
 
             'create' => [
                 'name'       => 'שם',
-                'save-btn'   => 'שמור',
+                'save-btn'   => 'שמור ערכת נושא',
                 'sort-order' => 'סדר מיון',
                 'title'      => 'צור ערכת עיצוב',
 

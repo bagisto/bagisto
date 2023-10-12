@@ -2538,7 +2538,7 @@ return [
 
             'create' => [
                 'name'       => 'Nom',
-                'save-btn'   => 'Enregistrer',
+                'save-btn'   => 'Enregistrer le thème',
                 'sort-order' => 'Ordre de tri',
                 'title'      => 'Créer un thème',
 

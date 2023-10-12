@@ -2538,7 +2538,7 @@ return [
 
             'create' => [
                 'name'       => 'نام',
-                'save-btn'   => 'ذخیره',
+                'save-btn'   => 'ذخیره تم',
                 'sort-order' => 'ترتیب مرتب‌سازی',
                 'title'      => 'ایجاد تم',
 

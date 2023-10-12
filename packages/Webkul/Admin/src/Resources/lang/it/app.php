@@ -2538,7 +2538,7 @@ return [
 
             'create' => [
                 'name'       => 'Nome',
-                'save-btn'   => 'Salva',
+                'save-btn'   => 'Salva tema',
                 'sort-order' => 'Ordinamento',
                 'title'      => 'Crea Tema',
 

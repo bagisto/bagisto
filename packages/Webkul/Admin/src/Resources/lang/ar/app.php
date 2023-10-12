@@ -2538,7 +2538,7 @@ return [
 
             'create' => [
                 'name'       => 'الاسم',
-                'save-btn'   => 'حفظ',
+                'save-btn'   => 'حفظ السمة',
                 'sort-order' => 'ترتيب الفرز',
                 'title'      => 'إنشاء موضوع',
 

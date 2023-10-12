@@ -2538,7 +2538,7 @@ return [
 
             'create' => [
                 'name'       => 'Nazwa',
-                'save-btn'   => 'Zapisz',
+                'save-btn'   => 'Zapisz motyw',
                 'sort-order' => 'Kolejność sortowania',
                 'title'      => 'Utwórz motyw',
 
