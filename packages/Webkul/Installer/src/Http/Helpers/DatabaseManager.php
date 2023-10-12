@@ -37,7 +37,7 @@ class DatabaseManager
         try {
             $data = DB::connection()->getPdo();
             if (DB::connection()->getDatabaseName()) {
-                echo 'Database connection established successfully.';
+                return true;
             } else {
                 $database = DB::connection()->getDatabaseName();
 
@@ -49,7 +49,6 @@ class DatabaseManager
                 }
             }
         } catch (\Exception $e) {
-            // dd($e);
         }
     }
 

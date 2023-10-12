@@ -9,4 +9,14 @@ Route::middleware(Illuminate\Session\Middleware\StartSession::class)->prefix('in
         'uses' => 'Webkul\Installer\Http\Controllers\InstallerController@envFileSetup',
         'as'   => 'installer.envFileSetup',
     ]);
+
+    Route::post('admin-config-setup', [
+        'uses' => 'Webkul\Installer\Http\Controllers\InstallerController@adminConfigSetup',
+        'as'   => 'installer.adminConfigSetup',
+    ]);
+
+    Route::post('smtp-config-setup', [
+        'uses' => 'Webkul\Installer\Http\Controllers\InstallerController@smtpConfigSetup',
+        'as'   => 'installer.smtpConfigSetup',
+    ]);
 });

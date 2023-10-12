@@ -2,8 +2,8 @@
 
 namespace Webkul\Installer\Http\Helpers;
 
-use mysqli;
 use Exception;
+use Illuminate\Support\Facades\Artisan;
 
 class EnvironmentManager
 {
@@ -67,12 +67,11 @@ class EnvironmentManager
     /**
      * Save the edited content to the .env file.
      *
+     * @param [object] $request
      * @return string
      */
     public function saveFileClassic($request)
     {
-        $message = trans('Success');
-
         if (! file_exists($this->envPath)) {
             if (file_exists($this->envExamplePath)) {
                 copy($this->envExamplePath, $this->envPath);
@@ -85,13 +84,15 @@ class EnvironmentManager
             $response = $this->saveFileWizard($request->all());
 
             if ($response) {
-                $this->install();
-            }
-        } catch (Exception $e) {
-            $message = trans('Error');
-        }
+                $installation = $this->install();
 
-        return $message;
+                return $installation;
+            }
+
+            return 'Something went wrong in your Environment Update. Please try again';
+        } catch (Exception $e) {
+            return $e;
+        }
     }
 
     /**
@@ -101,7 +102,7 @@ class EnvironmentManager
      */
     public function saveFileWizard($request)
     {
-        $message = trans('installer_messages.environment.success');
+        $message = trans('success');
 
         $data = file($this->envPath);
 
@@ -124,18 +125,30 @@ class EnvironmentManager
         /**
          * Update params with form-data
          */
-        $envDBParams['DB_HOST'] = $request['db_hostname'];
-        $envDBParams['DB_DATABASE'] = $request['db_name'];
-        // $envDBParams['DB_PREFIX'] = $request["db_prefix"];
-        $envDBParams['DB_USERNAME'] = $request['db_username'];
-        $envDBParams['DB_PASSWORD'] = $request['db_password'];
-        $envDBParams['APP_NAME'] = $request['app_name'];
-        $envDBParams['APP_URL'] = $request['app_url'];
-        $envDBParams['APP_CURRENCY'] = $request['app_currency'];
-        $envDBParams['APP_LOCALE'] = $request['app_locale'];
-        $envDBParams['APP_TIMEZONE'] = $request['app_timezone'];
-        $envDBParams['DB_CONNECTION'] = $request['db_connection'];
-        $envDBParams['DB_PORT'] = (int) ($request['db_port']);
+        if (isset($request['db_hostname'])) {
+            $envDBParams['DB_HOST'] = $request['db_hostname'];
+            $envDBParams['DB_DATABASE'] = $request['db_name'];
+            $envDBParams['DB_PREFIX'] = $request['db_prefix'] ?? '';
+            $envDBParams['DB_USERNAME'] = $request['db_username'];
+            $envDBParams['DB_PASSWORD'] = $request['db_password'];
+            $envDBParams['APP_NAME'] = $request['app_name'];
+            $envDBParams['APP_URL'] = $request['app_url'];
+            $envDBParams['APP_CURRENCY'] = $request['app_currency'];
+            $envDBParams['APP_LOCALE'] = $request['app_locale'];
+            $envDBParams['APP_TIMEZONE'] = $request['app_timezone'];
+            $envDBParams['DB_CONNECTION'] = $request['db_connection'];
+            $envDBParams['DB_PORT'] = (int) ($request['db_port']);
+        }
+
+        if (isset($request['mail_host'])) {
+            $envDBParams['MAIL_MAILER'] = 'smtp';
+            $envDBParams['MAIL_HOST'] = $request['mail_host'];
+            $envDBParams['MAIL_PORT'] = $request['mail_port'];
+            $envDBParams['MAIL_USERNAME'] = $request['mail_username'];
+            $envDBParams['MAIL_PASSWORD'] = $request['mail_password'];
+            $envDBParams['MAIL_ENCRYPTION'] = $request['mail_encryption'];
+            $envDBParams['MAIL_FROM_ADDRESS'] = $request['mail_from_address'];
+        }
 
         /**
          * Making key/value pair with form-data for env
@@ -160,20 +173,32 @@ class EnvironmentManager
         return $message;
     }
 
-    private function install() {
-        ini_set('max_execution_time', 900);
+    public function install()
+    {
+        try {
+            Artisan::call('migrate:fresh', ['--force'=> true]);
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
 
-        $phpBin = PHP_BINDIR . '/php';
+        return $this->seed();
+    }
 
-        // array to pass back data
-        $data = [];
+    /**
+     * Seed the database.
+     *
+     * @return string
+     */
+    private function seed()
+    {
+        try {
+            Artisan::call('db:seed', ['--force' => true]);
 
-        $command = 'cd ../.. && '. $phpBin .' artisan config:cache && '. $phpBin.' artisan migrate:fresh --force';
+            $seederLog = Artisan::output();
+        } catch (Exception $e) {
+            dd($e);
+        }
 
-        /**
-         * Run migration command on terminal
-         */
-        $data['last_line'] = exec($command, $data['migrate'], $data['results']);
-
+        return $seederLog;
     }
 }

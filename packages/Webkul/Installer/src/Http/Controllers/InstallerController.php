@@ -4,6 +4,7 @@ namespace Webkul\Installer\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Webkul\Installer\Http\Helpers\DatabaseManager;
 use Webkul\Installer\Http\Helpers\EnvironmentManager;
 use Webkul\Installer\Http\Helpers\RequirementsChecker;
@@ -51,12 +52,18 @@ class InstallerController extends Controller
         return view('installer::installer.installer', compact('requirements', 'phpVersion'));
     }
 
+    /**
+     * ENV File Setup
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function envFileSetup(Request $request): JsonResponse
     {
         $message = $this->EnvironmentManager->saveFileClassic($request);
 
         return new JsonResponse([
-            'message' => $message,
+            'data' => $message,
         ]);
     }
 
@@ -70,5 +77,45 @@ class InstallerController extends Controller
         $envConfig = $this->EnvironmentManager->getEnvContent();
 
         return view('vendor.installer.environment-wizard', compact('envConfig'));
+    }
+
+    /**
+     * Admin Configuration Setup
+     *
+     * @return void
+     */
+    public function adminConfigSetup()
+    {
+        $admin = DB::table('admins')->find(1);
+
+        $password = password_hash(request()->input('password'), PASSWORD_BCRYPT, ['cost' => 10]);
+
+        $data = [
+            'name'     => request()->input('admin'),
+            'email'    => request()->input('email'),
+            'password' => $password,
+            'role_id'  => 1,
+            'status'   => 1,
+        ];
+
+        try {
+            if ($admin) {
+                DB::table('admins')->where('id', 1)->update($data);
+            } else {
+                DB::table('admins')->insert($data);
+            }
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+    }
+
+    /**
+     * SMTP connection setup for Mail
+     *
+     * @return void
+     */
+    public function smtpConfigSetup()
+    {
+        $this->EnvironmentManager->saveFileWizard(request()->input());
     }
 }
