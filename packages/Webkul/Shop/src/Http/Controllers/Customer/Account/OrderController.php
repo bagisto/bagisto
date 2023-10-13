@@ -65,11 +65,7 @@ class OrderController extends Controller
             ->whereHas('order', function ($query) {
                 $query->where('customer_id', auth()->guard('customer')->id());
             })
-            ->first();
-
-        if (! $invoice) {
-            abort(404);
-        }
+            ->firstOrFail();
 
         return $this->downloadPDF(
             view('shop::customers.account.orders.pdf', compact('invoice'))->render(),
