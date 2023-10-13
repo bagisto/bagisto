@@ -82,7 +82,7 @@
                     <div v-if="option.type == 'radio'">
                         <div class="grid gap-[10px]">
                             <span
-                                class="flex"
+                                class="flex gap-x-[15px]"
                                 v-if="! option.is_required"
                             >
                                 <input
