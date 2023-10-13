@@ -4,16 +4,19 @@ namespace Webkul\Admin\Helpers;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
+use Webkul\Admin\Helpers\Reporting\Cart;
 use Webkul\Admin\Helpers\Reporting\Sale;
 use Webkul\Admin\Helpers\Reporting\Product;
 use Webkul\Admin\Helpers\Reporting\Customer;
 use Webkul\Admin\Helpers\Reporting\Visitor;
+use Webkul\Product\Models\Product as ProductModel;
 
 class Reporting
 {
     /**
      * Create a controller instance.
      * 
+     * @param  \Webkul\Admin\Helpers\Reporting\Cart  $cartReporting
      * @param  \Webkul\Admin\Helpers\Reporting\Sale  $saleReporting
      * @param  \Webkul\Admin\Helpers\Reporting\Product  $productReporting
      * @param  \Webkul\Admin\Helpers\Reporting\Customer  $customerReporting
@@ -21,124 +24,252 @@ class Reporting
      * @return void
      */
     public function __construct(
+        protected Cart $cartReporting,
         protected Sale $saleReporting,
         protected Product $productReporting,
         protected Customer $customerReporting,
-        protected Visitor $visitorReporting,
+        protected Visitor $visitorReporting
     )
     {
     }
 
     /**
-     * Returns the overall statistics.
+     * Returns the sales statistics.
      * 
      * @return array
      */
-    public function getOverAllStats(): array
+    public function getTotalSalesStats(): array
     {
         return [
-            'total_customers'       => $this->customerReporting->getTotalCustomersProgress(),
-            'total_orders'          => $this->saleReporting->getTotalOrdersProgress(),
-            'total_sales'           => $this->saleReporting->getTotalSalesProgress(),
-            'avg_sales'             => $this->saleReporting->getAvgSalesProgress(),
-            'total_unpaid_invoices' => $this->saleReporting->getTotalPendingInvoicesAmount(),
+            'sales'     => $this->saleReporting->getTotalSalesProgress(),
+
+            'over_time' => [
+                'previous' => $this->saleReporting->getPreviousTotalSalesOverTime(),
+                'current'  => $this->saleReporting->getCurrentTotalSalesOverTime(),
+            ],
         ];
     }
 
     /**
-     * Returns the today statistics.
+     * Returns the sales statistics.
      * 
      * @return array
      */
-    public function getTodayStats(): array
+    public function getAverageSalesStats(): array
     {
-        $todayStartDate = now()->today();
-
-        $todayEndDate = now()->endOfDay();
-
         return [
-            'total_sales'     => $this->saleReporting->getTotalSalesProgress($todayStartDate, $todayEndDate),
-            'total_orders'    => $this->saleReporting->getTotalOrdersProgress($todayStartDate, $todayEndDate),
-            'total_customers' => $this->customerReporting->getTotalCustomersProgress($todayStartDate, $todayEndDate),
-            'orders'          => $this->saleReporting->getOrders($todayStartDate, $todayEndDate),
+            'sales'     => $this->saleReporting->getAverageSalesProgress(),
+
+            'over_time' => [
+                'previous' => $this->saleReporting->getPreviousAverageSalesOverTime(),
+                'current'  => $this->saleReporting->getCurrentAverageSalesOverTime(),
+            ],
         ];
     }
 
     /**
-     * Returns the today statistics.
+     * Returns the total orders statistics.
+     * 
+     * @return array
+     */
+    public function getTotalOrdersStats(): array
+    {
+        return [
+            'orders'     => $this->saleReporting->getTotalOrdersProgress(),
+
+            'over_time' => [
+                'previous' => $this->saleReporting->getPreviousTotalOrdersOverTime(),
+                'current'  => $this->saleReporting->getCurrentTotalOrdersOverTime(),
+            ],
+        ];
+    }
+
+    /**
+     * Returns the purchase funnel statistics.
+     * 
+     * @return array
+     */
+    public function getPurchaseFunnelStats(): array
+    {
+        $startDate = $this->visitorReporting->getStartDate();
+
+        $endDate = $this->visitorReporting->getEndDate();
+
+        return [
+            'visitors'         => [
+                'total'    => $totalVisitors = $this->visitorReporting->getTotalUniqueVisitors($startDate, $endDate),
+                'progress' => 100,
+            ],
+
+            'product_visitors' => [
+                'total'    => $totalProductVisitors = $this->visitorReporting->getTotalUniqueVisitors($startDate, $endDate, ProductModel::class),
+                'progress' => ($totalProductVisitors * 100) / $totalVisitors,
+            ],
+
+            'carts' => [
+                'total'    => $totalCarts = $this->cartReporting->getTotalUniqueCartsUsers($startDate, $endDate),
+                'progress' => ($totalCarts * 100) / $totalVisitors,
+            ],
+
+            'orders' => [
+                'total'    => $totalOrders = $this->saleReporting->getTotalUniqueOrdersUsers($startDate, $endDate),
+                'progress' => ($totalOrders * 100) / $totalVisitors,
+            ],
+        ];
+    }
+
+    /**
+     * Returns the abandoned carts statistics.
+     * 
+     * @return array
+     */
+    public function getAbandonedCartsStats(): array
+    {
+        $totalAbandonedProducts = $this->cartReporting->getTotalAbandonedCartProducts();
+
+        $products = $this->cartReporting->getAbandonedCartProducts();
+
+        $products->map(function($product) use ($totalAbandonedProducts) {
+            if (! $totalAbandonedProducts) {
+                $product->progress = 0;
+            } else {
+                $product->progress = ($product->count * 100) / $totalAbandonedProducts;
+            }
+
+            return $product;
+        });
+
+        return [
+            'sales'    => $this->cartReporting->getTotalAbandonedSalesProgress(),
+            'carts'    => $this->cartReporting->getTotalAbandonedCartsProgress(),
+            'rate'     => $this->cartReporting->getTotalAbandonedCartRateProgress(),
+            'products' => $products,
+        ];
+    }
+
+    /**
+     * Returns the sales statistics.
+     * 
+     * @return array
+     */
+    public function getRefundsStats(): array
+    {
+        return [
+            'refunds'     => $this->saleReporting->getRefundsProgress(),
+
+            'over_time' => [
+                'previous' => $this->saleReporting->getPreviousRefundsOverTime(),
+                'current'  => $this->saleReporting->getCurrentRefundsOverTime(),
+            ],
+        ];
+    }
+
+    /**
+     * Returns the tax collected statistics.
+     * 
+     * @return array
+     */
+    public function getTaxCollectedStats(): array
+    {
+        $taxCollected = $this->saleReporting->getTaxCollectedProgress();
+
+        $taxCategories = $this->saleReporting->getTopTaxCategories();
+
+        $taxCategories->map(function($taxCategory) use ($taxCollected) {
+            if (! $taxCollected['current']) {
+                $taxCategory->progress = 0;
+            } else {
+                $taxCategory->progress = ($taxCategory->total * 100) / $taxCollected['current'];
+            }
+
+            $taxCategory->formatted_total = core()->formatBasePrice($taxCategory->total);
+
+            return $taxCategory;
+        });
+
+        return [
+            'tax_collected'  => $taxCollected,
+            'top_categories' => $taxCategories,
+
+            'over_time'      => [
+                'previous' => $this->saleReporting->getPreviousTaxCollectedOverTime(),
+                'current'  => $this->saleReporting->getCurrentTaxCollectedOverTime(),
+            ],
+        ];
+    }
+
+    /**
+     * Returns the shipping collected statistics.
+     * 
+     * @return array
+     */
+    public function getShippingCollectedStats(): array
+    {
+        $shippingCollected = $this->saleReporting->getShippingCollectedProgress();
+
+        $shippingMethods = $this->saleReporting->getTopShippingMethods();
+
+        $shippingMethods->map(function($shippingMethod) use($shippingCollected) {
+            if (! $shippingCollected['current']) {
+                $shippingMethod->progress = 0;
+            } else {
+                $shippingMethod->progress = ($shippingMethod->total * 100) / $shippingCollected['current'];
+            }
+
+            $shippingMethod->formatted_total = core()->formatBasePrice($shippingMethod->total);
+
+            $shippingMethod->title = current(explode(' - ', $shippingMethod->title));
+
+            return $shippingMethod;
+        });
+
+        return [
+            'shipping_collected' => $shippingCollected,
+            'top_methods'        => $shippingMethods,
+
+            'over_time'          => [
+                'previous' => $this->saleReporting->getPreviousShippingCollectedOverTime(),
+                'current'  => $this->saleReporting->getCurrentShippingCollectedOverTime(),
+            ],
+        ];
+    }
+
+    /**
+     * Returns the shipping collected statistics.
      * 
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getStockThresholdStats(): Collection
+    public function getTopPaymentMethods(): Collection
     {
-        return $this->productReporting->getStockThreshold();
+        $totalOrders = $this->saleReporting->getTotalOrdersProgress();
+
+        $paymentMethods = $this->saleReporting->getTopPaymentMethods();
+
+        $paymentMethods->map(function($paymentMethod) use($totalOrders) {
+            if (! $totalOrders['current']) {
+                $paymentMethod->progress = 0;
+            } else {
+                $paymentMethod->progress = ($paymentMethod->total * 100) / $totalOrders['current'];
+            }
+
+            $paymentMethod->formatted_total = core()->formatBasePrice($paymentMethod->total);
+
+            $paymentMethod->title = $paymentMethod->title ?? core()->getConfigData('sales.payment_methods.' . $paymentMethod->method . '.title');
+        });
+
+        return $paymentMethods;
     }
 
     /**
-     * Returns sales statistics.
+     * Returns date range
      * 
      * @return array
      */
-    public function getSalesStats(): array
+    public function getDateRange(): array
     {
         return [
-            'total_orders'    => $this->saleReporting->getTotalOrdersProgress(),
-            'total_sales'     => $this->saleReporting->getTotalSalesProgress(),
-            'sales_over_time' => $this->saleReporting->getSalesOverTime(),
+            'previous' => $this->saleReporting->getLastStartDate()->format('d M Y') . ' - ' . $this->saleReporting->getLastEndDate()->format('d M Y'),
+            'current'  => $this->saleReporting->getStartDate()->format('d M Y') . ' - ' . $this->saleReporting->getEndDate()->format('d M Y'),
         ];
-    }
-
-    /**
-     * Returns visitors statistics.
-     * 
-     * @return array
-     */
-    public function getVisitorStats(): array
-    {
-        return [
-            'total_visitors'     => $this->visitorReporting->getTotalVisitorsProgress(),
-            'unique_visitors'    => $this->visitorReporting->getTotalUniqueVisitorsProcess(),
-            'visitors_over_time' => $this->visitorReporting->getVisitorsOverTime(),
-        ];
-    }
-
-    /**
-     * Returns top products statistics.
-     * 
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public function getTopProductsStats(): Collection
-    {
-        return $this->saleReporting->getTopSellingProducts();
-    }
-
-    /**
-     * Returns top customers statistics.
-     * 
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public function getTopCustomersStats(): Collection
-    {
-        return $this->saleReporting->getCustomersWithMostSales();
-    }
-
-    /**
-     * Get the start date.
-     * 
-     * @return \Carbon\Carbon
-     */
-    public function getStartDate(): Carbon
-    {
-        return $this->saleReporting->getStartDate();
-    }
-
-    /**
-     * Get the end date.
-     * 
-     * @return \Carbon\Carbon
-     */
-    public function getEndDate(): Carbon
-    {
-        return $this->saleReporting->getEndDate();
     }
 }

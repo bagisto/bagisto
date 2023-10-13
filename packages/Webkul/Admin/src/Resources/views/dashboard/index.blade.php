@@ -689,7 +689,7 @@
     
                                     <!-- Total Orders -->
                                     <p class="text-[12px] text-gray-400 font-semibold text-right dark:text-white">
-                                        @{{ "@lang('admin::app.dashboard.index.order')".replace(':total_orders', statistics.total_orders?.current ?? 0) }}
+                                        @{{ "@lang('admin::app.dashboard.index.order')".replace(':total_orders', statistics.sales.total_orders?.current ?? 0) }}
                                     </p>
                                 </div>
                             </div>
@@ -712,7 +712,7 @@
     
                                     <!-- Total Order Revenue -->
                                     <p class="text-[18px] text-gray-800 dark:text-white font-bold">
-                                        @{{ statistics.visitors.total_visitors.current }}
+                                        @{{ statistics.visitors.total.current }}
                                     </p>
                                 </div>
     
@@ -724,7 +724,7 @@
     
                                     <!-- Total Orders -->
                                     <p class="text-[12px] text-gray-400 font-semibold text-right dark:text-white">
-                                        @{{ "@lang('admin::app.dashboard.index.unique-visitors')".replace(':count', statistics.unique_visitors?.current ?? 0) }}
+                                        @{{ "@lang('admin::app.dashboard.index.unique-visitors')".replace(':count', statistics.visitors.unique_?.current ?? 0) }}
                                     </p>
                                 </div>
                             </div>
@@ -1052,7 +1052,7 @@
                     visitorsGraphChart () {
                         const ctx = document.getElementById('totalVisitorsChart');
 
-                        const data = this.statistics.visitors.visitors_over_time;
+                        const data = this.statistics.visitors.over_time;
 
                         if (this.visitorsChart) {
                            this.visitorsChart.destroy();

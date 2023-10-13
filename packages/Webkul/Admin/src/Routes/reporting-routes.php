@@ -29,6 +29,8 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
          */
         Route::controller(SaleController::class)->prefix('sales')->group(function () {
             Route::get('', 'index')->name('admin.reporting.sales.index');
+
+            Route::get('stats', 'stats')->name('admin.reporting.sales.stats');
         });
     });
 });

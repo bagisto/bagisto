@@ -2,17 +2,17 @@
 
 namespace Webkul\Admin\Http\Controllers;
 
-use Webkul\Admin\Helpers\Reporting;
+use Webkul\Admin\Helpers\Dashboard;
 
 class DashboardController extends Controller
 {
     /**
      * Create a controller instance.
      * 
-     * @param  \Webkul\Admin\Helpers\Reporting  $reportingHelper
+     * @param  \Webkul\Admin\Helpers\Dashboard  $dashboardHelper
      * @return void
      */
-    public function __construct(protected Reporting $reportingHelper)
+    public function __construct(protected Dashboard $dashboardHelper)
     {
     }
 
@@ -26,25 +26,25 @@ class DashboardController extends Controller
         if (request()->ajax()) {
             return response()->json([
                 'statistics' => [
-                    'sales'     => $this->reportingHelper->getSalesStats(),
-                    'visitors'  => $this->reportingHelper->getVisitorStats(),
-                    'products'  => $this->reportingHelper->getTopProductsStats(),
-                    'customers' => $this->reportingHelper->getTopCustomersStats(),
+                    'sales'     => $this->dashboardHelper->getSalesStats(),
+                    'visitors'  => $this->dashboardHelper->getVisitorStats(),
+                    'products'  => $this->dashboardHelper->getTopProducts(),
+                    'customers' => $this->dashboardHelper->getTopCustomers(),
                 ],
-                'startDate' => $this->reportingHelper->getStartDate()->format('d M'),
-                'endDate'   => $this->reportingHelper->getEndDate()->format('d M'),
+                'startDate' => $this->dashboardHelper->getStartDate()->format('d M'),
+                'endDate'   => $this->dashboardHelper->getEndDate()->format('d M'),
             ]);
         }
 
         return view('admin::dashboard.index')
             ->with([
                 'statistics' => [
-                    'over_all'        => $this->reportingHelper->getOverAllStats(),
-                    'today'           => $this->reportingHelper->getTodayStats(),
-                    'stock_threshold' => $this->reportingHelper->getStockThresholdStats(),
+                    'over_all'        => $this->dashboardHelper->getOverAllStats(),
+                    'today'           => $this->dashboardHelper->getTodayStats(),
+                    'stock_threshold' => $this->dashboardHelper->getStockThresholdProducts(),
                 ],
-                'startDate' => $this->reportingHelper->getStartDate(),
-                'endDate'   => $this->reportingHelper->getEndDate(),
+                'startDate' => $this->dashboardHelper->getStartDate(),
+                'endDate'   => $this->dashboardHelper->getEndDate(),
             ]);
     }
 }

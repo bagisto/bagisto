@@ -447,6 +447,7 @@ class Cart
         $cartPayment = new CartPayment;
 
         $cartPayment->method = $payment['method'];
+        $cartPayment->method_title = core()->getConfigData('sales.payment_methods.' . $payment['method'] . '.title');
         $cartPayment->cart_id = $cart->id;
         $cartPayment->save();
 
