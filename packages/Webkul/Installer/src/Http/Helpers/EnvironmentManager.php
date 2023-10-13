@@ -3,7 +3,6 @@
 namespace Webkul\Installer\Http\Helpers;
 
 use Exception;
-use Webkul\Installer\Http\Helpers\DatabaseManager;
 
 class EnvironmentManager
 {
@@ -15,7 +14,7 @@ class EnvironmentManager
      * Generate ENV File and Installation.
      *
      * @param [object] $request
-     * @return string
+     * @return
      */
     public function generateEnv($request)
     {
@@ -34,13 +33,9 @@ class EnvironmentManager
         try {
             $response = $this->setEnvConfiguration($request->all());
 
-            if ($response) {
-                $installation = $this->databaseManager->migration();
+            $this->databaseManager->generateKey();
 
-                return $installation;
-            }
-
-            return 'Something went wrong in your Environment Update. Please try again';
+            return $response;
         } catch (Exception $e) {
             return $e;
         }
@@ -53,8 +48,6 @@ class EnvironmentManager
      */
     public function setEnvConfiguration($request)
     {
-        $message = trans('success');
-
         $data = file(base_path('.env'));
 
         $envDBParams = [];
@@ -118,9 +111,9 @@ class EnvironmentManager
         try {
             file_put_contents(base_path('.env'), $updatedEnvDBParams);
         } catch (Exception $e) {
-            $message = trans('installer_messages.environment.errors');
+            return false;
         }
 
-        return $message;
+        return true;
     }
 }

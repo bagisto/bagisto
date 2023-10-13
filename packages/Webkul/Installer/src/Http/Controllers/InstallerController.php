@@ -2,19 +2,21 @@
 
 namespace Webkul\Installer\Http\Controllers;
 
-use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
+use Webkul\Installer\Http\Helpers\DatabaseManager;
 use Webkul\Installer\Http\Helpers\EnvironmentManager;
 use Webkul\Installer\Http\Helpers\ServerRequirements;
 
 class InstallerController extends Controller
 {
-    const MIN_PHP_VERSION = '8.1.0';
-
+    const minPhpVersion = '8.1.0';
     public function __construct(
         protected ServerRequirements $serverRequirements,
         protected EnvironmentManager $environmentManager,
+        protected DatabaseManager $databaseManager
     )
     {
     }
@@ -26,7 +28,7 @@ class InstallerController extends Controller
      */
     public function index()
     {
-        $phpVersion = $this->serverRequirements->checkPHPversion(self::MIN_PHP_VERSION);
+        $phpVersion = $this->serverRequirements->checkPHPversion(self::minPhpVersion);
 
         $requirements = $this->serverRequirements->validate();
 
@@ -46,6 +48,13 @@ class InstallerController extends Controller
         return new JsonResponse([
             'data' => $message,
         ]);
+    }
+
+    public function runMigration()
+    {        
+        $migration = $this->databaseManager->migration();
+
+        return $migration;
     }
 
     /**
@@ -81,10 +90,16 @@ class InstallerController extends Controller
     /**
      * SMTP connection setup for Mail
      *
-     * @return void
+     * @return
      */
     public function smtpConfigSetup()
     {
         $this->environmentManager->setEnvConfiguration(request()->input());
+
+        $filePath = storage_path('installed');
+        
+        File::put($filePath, 'Your Bagisto App is Successfully Installed');
+
+        return $filePath;
     }
 }

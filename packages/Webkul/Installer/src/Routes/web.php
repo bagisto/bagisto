@@ -10,6 +10,11 @@ Route::middleware(Illuminate\Session\Middleware\StartSession::class)->prefix('in
         'as'   => 'installer.envFileSetup',
     ]);
 
+    Route::post('run-migration', [
+        'uses' => 'Webkul\Installer\Http\Controllers\InstallerController@runMigration',
+        'as'   => 'installer.runMigration',
+    ]);
+
     Route::post('admin-config-setup', [
         'uses' => 'Webkul\Installer\Http\Controllers\InstallerController@adminConfigSetup',
         'as'   => 'installer.adminConfigSetup',

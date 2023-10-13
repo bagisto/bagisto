@@ -30,6 +30,6 @@ class CanInstall
      */
     public function isAlreadyInstalled()
     {
-        return file_exists(storage_path('installed')) || app('Webkul\Installer\Http\Helpers\DatabaseManager')->getEnvironment();
+        return file_exists(storage_path('installed'));
     }
 }

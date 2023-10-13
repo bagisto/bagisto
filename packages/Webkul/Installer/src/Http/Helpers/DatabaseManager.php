@@ -12,12 +12,10 @@ class DatabaseManager
     /**
      * Check Database Connection.
      *
-     * @param array $params
      * @return 
      */
-    public function getEnvironment($params = [])
+    public function getEnvironment()
     {
-
         if (! file_exists(base_path('.env'))) {
             return false;
         }
@@ -33,9 +31,9 @@ class DatabaseManager
         ];
 
         try {
-            $pdo = DB::connection()->getPdo();
+            DB::connection()->getPDO();
 
-            if ($pdo) {
+            if ($name = DB::connection()->getDatabaseName()) {
                 return true;
             } else {
                 $database = DB::connection()->getDatabaseName();
@@ -61,25 +59,11 @@ class DatabaseManager
     {
         try {
             Artisan::call('migrate:fresh', ['--force'=> true]);
-            
-            $seederLog = $this->seeder();
         } catch (Exception $e) {
+            return $e->getMessage();
         }
 
-        return $seederLog;
-    }
-
-    /**
-     * Generate New Application Key
-     *
-     * @return void
-     */
-    private function generateKey()
-    {
-        try {
-            Artisan::call('key:generate', ['--force'=> true]);
-        } catch (Exception $e) {
-        }
+        return $this->seeder();
     }
 
     /**
@@ -93,12 +77,23 @@ class DatabaseManager
             Artisan::call('db:seed', ['--force' => true]);
 
             $seederLog = Artisan::output();
+
+            return $seederLog;
         } catch (Exception $e) {
-            dd($e);
+            return $e->getMessage();
         }
+    }
 
-        $this->generateKey();
-
-        return $seederLog;
+    /**
+     * Generate New Application Key
+     *
+     * @return
+     */
+    public function generateKey()
+    {
+        try {
+            Artisan::call('key:generate', ['--force'=> true]);
+        } catch (Exception $e) {
+        }
     }
 }

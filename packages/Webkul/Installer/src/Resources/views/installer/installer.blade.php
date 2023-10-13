@@ -1235,11 +1235,21 @@
                         complete() {
                             this.$axios.post("{{ route('installer.envFileSetup') }}", this.envData)
                                 .then((response) => {
-                                    this.seederLog = response.data.data;
+                                    this.runMigartion();
+                                })
+                                .catch(error => {
+                                    if (error.response.status == 422) {
+                                        setErrors(error.response.data.errors);
+                                    }
+                                });
+                        },
+
+                        runMigartion() {
+                            this.$axios.post("{{ route('installer.runMigration') }}")
+                                .then((response) => {
+                                    this.seederLog = response.data;
 
                                     this.currentStep = 'installationLog';
-
-                                    // this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                                 })
                                 .catch(error => {
                                     if (error.response.status == 422) {
