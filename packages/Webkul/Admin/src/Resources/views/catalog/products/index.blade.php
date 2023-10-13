@@ -59,7 +59,7 @@
     {{-- Datagrid --}}
     <x-admin::datagrid src="{{ route('admin.catalog.products.index') }}" :isMultiRow="true">
         {{-- Datagrid Header --}}
-        @php 
+        @php
             $hasPermission = bouncer()->hasPermission('catalog.products.mass-update') || bouncer()->hasPermission('catalog.products.mass-delete');
         @endphp
 
@@ -196,8 +196,8 @@
 
                             <template v-else>
                                 <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion">
-                                    <img 
-                                        src="{{ bagisto_asset('images/product-placeholders/front.svg')}}" 
+                                    <img
+                                        src="{{ bagisto_asset('images/product-placeholders/front.svg')}}"
                                     >
 
                                     <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
@@ -243,7 +243,7 @@
 
                             <p class="text-gray-600 dark:text-gray-300">
                                 @{{ "@lang('admin::app.catalog.products.index.datagrid.id-value')".replace(':id', record.product_id) }}
-                            </p> 
+                            </p>
                         </div>
                     </div>
 
@@ -400,7 +400,7 @@
                                                 @{{ attribute.name }}
                                             </label>
 
-                                            <div class="flex gap-[4px] min-h-[38px] p-[6px] border dark:border-gray-800 rounded-[6px]">
+                                            <div class="flex flex-wrap gap-[4px] min-h-[38px] p-[6px] border dark:border-gray-800 rounded-[6px]">
                                                 <p
                                                     class="flex items-center py-[3px] px-[8px] bg-gray-600 rounded-[4px] text-white font-semibold"
                                                     v-for="option in attribute.options"
