@@ -2538,7 +2538,7 @@ return [
 
             'create' => [
                 'name'       => '名称',
-                'save-btn'   => '保存',
+                'save-btn'   => '保存主题',
                 'sort-order' => '排序顺序',
                 'title'      => '创建主题',
 

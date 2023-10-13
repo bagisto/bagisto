@@ -139,7 +139,7 @@
                                         type="submit"
                                         class="primary-button"
                                     >
-                                        @lang('admin::app.catalog.products.index.create.save-btn')
+                                        @lang('admin::app.settings.themes.create.save-btn')
                                     </button>
                                 </div>
                             </x-slot:footer>

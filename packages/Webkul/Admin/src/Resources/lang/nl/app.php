@@ -2538,7 +2538,7 @@ return [
 
             'create' => [
                 'name'       => 'Naam',
-                'save-btn'   => 'Opslaan',
+                'save-btn'   => 'Thema opslaan',
                 'sort-order' => 'Sorteervolgorde',
                 'title'      => 'Thema aanmaken',
 

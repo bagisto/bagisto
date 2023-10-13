@@ -2539,7 +2539,7 @@ return [
 
             'create' => [
                 'name'       => 'Ad',
-                'save-btn'   => 'Kaydet',
+                'save-btn'   => 'Tema kaydet',
                 'sort-order' => 'Sıralama Sırası',
                 'title'      => 'Tema Oluştur',
 
