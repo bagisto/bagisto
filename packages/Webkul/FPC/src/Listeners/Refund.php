@@ -4,7 +4,7 @@ namespace Webkul\FPC\Listeners;
 
 use Spatie\ResponseCache\Facades\ResponseCache;
 
-class Refund
+class Refund extends Product
 {
     /**
      * After refund is created
