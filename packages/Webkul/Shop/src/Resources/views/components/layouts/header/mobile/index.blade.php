@@ -114,7 +114,6 @@
                                 <v-locale-switcher></v-locale-switcher>
                             </x-slot:content>
                         </x-shop::dropdown>
-
                     </div>
                 </x-slot:content>
 
@@ -124,7 +123,7 @@
             <a
                 href="{{ route('shop.home.index') }}"
                 class="max-h-[30px]"
-                aria-label="Bagisto "
+                aria-label="Bagisto"
             >
                 <img
                     src="{{ bagisto_asset('images/logo.svg') }}"
