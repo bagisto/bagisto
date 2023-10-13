@@ -13,7 +13,9 @@
     </div>
 
     {{-- Sales Stats Vue Component --}}
-    <v-sales-stats></v-sales-stats>
+    <v-sales-stats>
+        <x-admin::shimmer.reporting.sales/>
+    </v-sales-stats>
 
     @pushOnce('scripts')
         <script type="module" src="{{ bagisto_asset('js/chart.js') }}"></script>
@@ -28,7 +30,7 @@
                     </p>
 
                     <template v-if="isLoading.getTotalSalesStats">
-                        <!-- Shimmer -->
+                        <x-admin::shimmer.reporting.graph/>
                     </template>
 
                     <template v-else>
@@ -59,9 +61,12 @@
                             </p>
 
                             <!-- Line Chart -->
-                            <canvas id="getTotalSalesStats"></canvas>
+                            <canvas
+                                id="getTotalSalesStats"
+                                class="flex items-end w-full aspect-[3.17/1]"
+                            ></canvas>
 
-                            <!-- Chart Legends -->
+                            <!-- Date Range Section -->
                             <div class="flex gap-[20px] justify-center">
                                 <div class="flex gap-[4px] items-center">
                                     <span class="w-[14px] h-[14px] rounded-[3px] bg-emerald-400"></span>
@@ -83,6 +88,7 @@
                     </template>
                 </div>
 
+                <!-- Purchase Funnel and Abandoned Carts Sections Container -->
                 <div class="flex justify-between gap-[15px] flex-1 max-xl:flex-auto">
                     <!-- Purchase Funnel Section -->
                     <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
@@ -92,12 +98,13 @@
                         </p>
 
                         <template v-if="isLoading.getPurchaseFunnelStats">
-                            <!-- Shimmer -->
+                            <x-admin::shimmer.reporting.sales.purchase-funnel/>
                         </template>
 
                         <template v-else>
                             <!-- Content -->
                             <div class="grid grid-cols-4 gap-[24px]">
+                                <!-- Total Visits -->
                                 <div class="grid gap-[16px]">
                                     <div class="grid gap-[2px]">
                                         <p class="text-[16px] text-gray-800 font-semibold">
@@ -119,6 +126,7 @@
                                     </p>
                                 </div>
 
+                                <!-- Total Product Visits -->
                                 <div class="grid gap-[16px]">
                                     <div class="grid gap-[2px]">
                                         <p class="text-[16px] text-gray-800 font-semibold">
@@ -140,6 +148,7 @@
                                     </p>
                                 </div>
 
+                                <!-- Total Added To Cart -->
                                 <div class="grid gap-[16px]">
                                     <div class="grid gap-[2px]">
                                         <p class="text-[16px] text-gray-800 font-semibold">
@@ -161,6 +170,7 @@
                                     </p>
                                 </div>
 
+                                <!-- Total Purchased -->
                                 <div class="grid gap-[16px]">
                                     <div class="grid gap-[2px]">
                                         <p class="text-[16px] text-gray-800 font-semibold">
@@ -183,6 +193,7 @@
                                 </div>
                             </div>
 
+                            <!-- Date Range Section -->
                             <div class="flex gap-[20px] justify-end mt-[24px]">
                                 <div class="flex gap-[4px] items-center">
                                     <span class="w-[14px] h-[14px] rounded-[3px] bg-emerald-400"></span>
@@ -203,7 +214,7 @@
                         </p>
 
                         <template v-if="isLoading.getAbandonedCartsStats">
-                            <!-- Shimmer -->
+                            <x-admin::shimmer.reporting.sales.abandoned-carts/>
                         </template>
 
                         <template v-else>
@@ -211,6 +222,7 @@
                             <div class="grid gap-[16px]">
                                 <!-- Stats -->
                                 <div class="flex gap-[16px] justify-between">
+                                    <!-- Abandoned Revenue -->
                                     <div class="grid gap-[4px]">
                                         <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                             @{{ reports.getAbandonedCartsStats.statistics.sales.formatted_total }}
@@ -233,6 +245,7 @@
                                         </div>
                                     </div>
 
+                                    <!-- Abandoned Cart -->
                                     <div class="grid gap-[4px]">
                                         <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                             @{{ reports.getAbandonedCartsStats.statistics.carts.current }}
@@ -255,6 +268,7 @@
                                         </div>
                                     </div>
 
+                                    <!-- Abandoned Rate -->
                                     <div class="grid gap-[4px]">
                                         <div class="flex gap-[2px]">
                                             <p
@@ -293,7 +307,7 @@
                                     Abandoned Products
                                 </p>
 
-                                <!-- Products -->
+                                <!-- Abandoned Products -->
                                 <div class="grid gap-[27px]">
                                     <div
                                         class="grid"
@@ -316,6 +330,7 @@
                                     </div>
                                 </div>
 
+                                <!-- Date Range -->
                                 <div class="flex gap-[20px] justify-end">
                                     <div class="flex gap-[4px] items-center">
                                         <span class="w-[14px] h-[14px] rounded-[3px] bg-blue-500"></span>
@@ -330,6 +345,7 @@
                     </div>
                 </div>
 
+                <!-- Total Orders and Average Order Value Sections Container -->
                 <div class="flex justify-between gap-[15px] flex-1 max-xl:flex-auto">
                     <!-- Total Orders Section -->
                     <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
@@ -339,7 +355,7 @@
                         </p>
 
                         <template v-if="isLoading.getTotalOrdersStats">
-                            <!-- Shimmer -->
+                            <x-admin::shimmer.reporting.graph/> 
                         </template>
 
                         <template v-else>
@@ -370,9 +386,12 @@
                                 </p>
 
                                 <!-- Line Chart -->
-                                <canvas id="getTotalOrdersStats"></canvas>
+                                <canvas
+                                    id="getTotalOrdersStats"
+                                    class="flex items-end w-full aspect-[3.23/1]"
+                                ></canvas>
 
-                                <!-- Chart Legends -->
+                                <!-- Date Range -->
                                 <div class="flex gap-[20px] justify-center">
                                     <div class="flex gap-[4px] items-center">
                                         <span class="w-[14px] h-[14px] rounded-[3px] bg-emerald-400"></span>
@@ -402,7 +421,7 @@
                         </p>
 
                         <template v-if="isLoading.getAverageSalesStats">
-                            <!-- Shimmer -->
+                            <x-admin::shimmer.reporting.graph/>
                         </template>
 
                         <template v-else>
@@ -433,9 +452,12 @@
                                 </p>
 
                                 <!-- Line Chart -->
-                                <canvas id="getAverageSalesStats"></canvas>
+                                <canvas
+                                    id="getAverageSalesStats"
+                                    class="flex items-end w-full aspect-[3.23/1]"
+                                ></canvas>
 
-                                <!-- Chart Legends -->
+                                <!-- Date Range -->
                                 <div class="flex gap-[20px] justify-center">
                                     <div class="flex gap-[4px] items-center">
                                         <span class="w-[14px] h-[14px] rounded-[3px] bg-emerald-400"></span>
@@ -458,6 +480,7 @@
                     </div>
                 </div>
 
+                <!-- Tax Collected and Shipping Collected Sections Container -->
                 <div class="flex justify-between gap-[15px] flex-1 max-xl:flex-auto">
                     <!-- Tax Collected Section -->
                     <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
@@ -467,7 +490,13 @@
                         </p>
 
                         <template v-if="isLoading.getTaxCollectedStats">
-                            <!-- Shimmer -->
+                            <div class="grid gap-[16px]">
+                                <x-admin::shimmer.reporting.graph/>
+
+                                <div class="shimmer w-[150px] h-[17px] mb-[16px]"></div>
+
+                                <x-admin::shimmer.reporting.progress-bar/>
+                            </div>
                         </template>
 
                         <template v-else>
@@ -498,9 +527,12 @@
                                 </p>
 
                                 <!-- Line Chart -->
-                                <canvas id="getTaxCollectedStats"></canvas>
+                                <canvas
+                                    id="getTaxCollectedStats"
+                                    class="flex items-end w-full aspect-[3.23/1]"
+                                ></canvas>
 
-                                <!-- Chart Legends -->
+                                <!-- Date Range -->
                                 <div class="flex gap-[20px] justify-center">
                                     <div class="flex gap-[4px] items-center">
                                         <span class="w-[14px] h-[14px] rounded-[3px] bg-emerald-400"></span>
@@ -526,7 +558,7 @@
                                         Top Tax Categories
                                     </p>
 
-                                    <!-- Products -->
+                                    <!-- Categories -->
                                     <div class="grid gap-[27px]">
                                         <div
                                             class="grid"
@@ -550,7 +582,7 @@
                                     </div>
                                 </template>
 
-                                <!-- Chart Legends -->
+                                <!-- Date Range -->
                                 <div class="flex gap-[20px] justify-end">
                                     <div class="flex gap-[4px] items-center">
                                         <span class="w-[14px] h-[14px] rounded-[3px] bg-sky-400"></span>
@@ -572,7 +604,13 @@
                         </p>
 
                         <template v-if="isLoading.getShippingCollectedStats">
-                            <!-- Shimmer -->
+                            <div class="grid gap-[16px]">
+                                <x-admin::shimmer.reporting.graph/>
+
+                                <div class="shimmer w-[150px] h-[17px] mb-[16px]"></div>
+
+                                <x-admin::shimmer.reporting.progress-bar/>
+                            </div>
                         </template>
 
                         <template v-else>
@@ -603,9 +641,12 @@
                                 </p>
 
                                 <!-- Line Chart -->
-                                <canvas id="getShippingCollectedStats"></canvas>
+                                <canvas
+                                    id="getShippingCollectedStats"
+                                    class="flex items-end w-full aspect-[3.23/1]"
+                                ></canvas>
 
-                                <!-- Chart Legends -->
+                                <!-- Chart Date Range -->
                                 <div class="flex gap-[20px] justify-center">
                                     <div class="flex gap-[4px] items-center">
                                         <span class="w-[14px] h-[14px] rounded-[3px] bg-emerald-400"></span>
@@ -624,14 +665,14 @@
                                     </div>
                                 </div>
 
-                                <!-- Tax Categories -->
+                                <!-- Top Shipping Methods -->
                                 <template v-if="reports.getShippingCollectedStats.statistics.top_methods.length">
                                     <!-- Header -->
                                     <p class="py-[10px] text-[16px] text-gray-600 dark:text-white font-semibold">
                                         Top Shipping Methods
                                     </p>
 
-                                    <!-- Products -->
+                                    <!-- Methods -->
                                     <div class="grid gap-[27px]">
                                         <div
                                             class="grid"
@@ -655,7 +696,7 @@
                                     </div>
                                 </template>
 
-                                <!-- Chart Legends -->
+                                <!-- Date Range -->
                                 <div class="flex gap-[20px] justify-end">
                                     <div class="flex gap-[4px] items-center">
                                         <span class="w-[14px] h-[14px] rounded-[3px] bg-emerald-400"></span>
@@ -670,8 +711,9 @@
                     </div>
                 </div>
 
+                <!-- Refunds and Top Payment Methods Sections Container -->
                 <div class="flex justify-between gap-[15px] flex-1 max-xl:flex-auto">
-                    <!-- Refund Section -->
+                    <!-- Refunds Section -->
                     <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                         <!-- Header -->
                         <p class="text-[16px] text-gray-600 dark:text-white font-semibold mb-[16px]">
@@ -679,7 +721,7 @@
                         </p>
 
                         <template v-if="isLoading.getRefundsStats">
-                            <!-- Shimmer -->
+                            <x-admin::shimmer.reporting.graph/>
                         </template>
 
                         <template v-else>
@@ -710,9 +752,12 @@
                                 </p>
 
                                 <!-- Line Chart -->
-                                <canvas id="getRefundsStats"></canvas>
+                                <canvas
+                                    id="getRefundsStats"
+                                    class="flex items-end w-full aspect-[3.23/1]"
+                                ></canvas>
 
-                                <!-- Chart Legends -->
+                                <!-- Date Range -->
                                 <div class="flex gap-[20px] justify-center">
                                     <div class="flex gap-[4px] items-center">
                                         <span class="w-[14px] h-[14px] rounded-[3px] bg-emerald-400"></span>
@@ -742,7 +787,7 @@
                         </p>
 
                         <template v-if="isLoading.getTopPaymentMethods">
-                            <!-- Shimmer -->
+                            <x-admin::shimmer.reporting.progress-bar/>
                         </template>
 
                         <template v-else>
@@ -774,7 +819,7 @@
                                     </div>
                                 </template>
 
-                                <!-- Chart Legends -->
+                                <!-- Date Range -->
                                 <div class="flex gap-[20px] justify-end">
                                     <div class="flex gap-[4px] items-center">
                                         <span class="w-[14px] h-[14px] rounded-[3px] bg-sky-400"></span>
@@ -843,8 +888,6 @@
                             .then(response => {
                                 this.reports[type] = response.data;
 
-                                this.isLoading[type] = false;
-
                                 if (
                                     [
                                         'getTotalSalesStats',
@@ -859,6 +902,8 @@
                                         this.prepareChart(type, response.data.statistics.over_time);
                                     }, 0);
                                 }
+
+                                this.isLoading[type] = false;
                             })
                             .catch(error => {});
                     },
