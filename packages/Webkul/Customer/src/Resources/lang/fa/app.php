@@ -1,14 +1,14 @@
 <?php
 
 return [
-    'admin' => [
-        'system' => [
-            'captcha' => [
-                'validations' => [
-                    'required' => 'لطفاً CAPTCHA را انتخاب کنید',
-                    'captcha'  => 'خطایی رخ داده است! دوباره تلاش کنید.',
-                ],
-            ],
+    'validations' => [
+        'captcha' => [
+            'captcha'  => 'خطایی رخ داده است! دوباره تلاش کنید.',
+            'required' => 'لطفاً CAPTCHA را انتخاب کنید',
         ],
-    ],    
+
+        'vat-id' => [
+            'invalid-format' => 'فرمت معتبر مالیات بر ارزش افزوده',
+        ],
+    ],
 ];

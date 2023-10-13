@@ -1,14 +1,14 @@
 <?php
 
 return [
-    'admin' => [
-        'system' => [
-            'captcha' => [
-                'validations' => [
-                    'required' => 'Seleziona CAPTCHA',
-                    'captcha'  => 'Qualcosa è andato storto! Per favore riprova.',
-                ],
-            ],
+    'validations' => [
+        'captcha' => [
+            'captcha'  => 'Qualcosa è andato storto! Per favore riprova.',
+            'required' => 'Seleziona CAPTCHA',
+        ],
+
+        'vat-id' => [
+            'invalid-format' => 'Formato IVA non valido',
         ],
     ],
 ];

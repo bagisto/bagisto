@@ -1,14 +1,14 @@
 <?php
 
 return [
-    'admin' => [
-        'system' => [
-            'captcha' => [
-                'validations' => [
-                    'required' => 'אנא בחר CAPTCHA',
-                    'captcha'  => 'קרתה שגיאה מהסוג המסוים! נסה שוב.',
-                ],
-            ],
+    'validations' => [
+        'captcha' => [
+            'captcha'  => 'קרתה שגיאה מהסוג המסוים! נסה שוב.',
+            'required' => 'אנא בחר CAPTCHA',
         ],
-    ],    
+
+        'vat-id' => [
+            'invalid-format' => 'תבנית מע"מ לא תקפה',
+        ],
+    ],
 ];
