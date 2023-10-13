@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-f3a8afa6.css",
+    "file": "assets/app-b3f2cee1.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -13,7 +13,7 @@
     "src": "src/Resources/assets/images/bagisto-logo.svg"
   },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-5a177ef2.js",
+    "file": "assets/app-b4c1ff6e.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   }

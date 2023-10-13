@@ -61,28 +61,25 @@ class DatabaseManager
     {
         try {
             Artisan::call('migrate:fresh', ['--force'=> true]);
+            
+            $seederLog = $this->seeder();
         } catch (Exception $e) {
-            return $e->getMessage();
         }
 
-        return $this->generateKey();
+        return $seederLog;
     }
 
     /**
      * Generate New Application Key
      *
-     * @return string
+     * @return void
      */
     private function generateKey()
     {
         try {
-            if (config('installer.final.key')) {
-                Artisan::call('key:generate', ['--force'=> true]);
-            }
+            Artisan::call('key:generate', ['--force'=> true]);
         } catch (Exception $e) {
         }
-
-        return $this->seeder();
     }
 
     /**
@@ -99,6 +96,8 @@ class DatabaseManager
         } catch (Exception $e) {
             dd($e);
         }
+
+        $this->generateKey();
 
         return $seederLog;
     }

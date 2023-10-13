@@ -84,7 +84,7 @@
                                         <span class="icon-checkbox text-[20px]"></span>
                                     </span>
 
-                                    <span v-else-if="stepStates.environment == 'active'">
+                                    <span v-else-if="stepStates.environment === 'active'">
                                         <span class="icon-processing text-[20px]"></span>
                                     </span>
 
@@ -97,14 +97,14 @@
                                 </div>
 
                                 <div
-                                    class="flex gap-[4px] text-[14px] text-gray-600"
-                                    :class="[stepStates.envSetup == 'active' ? 'font-bold' : '', 'text-gray-600']">
+                                    class="flex gap-[4px] text-[14px]"
+                                    :class="[stepStates.envSetup == 'active' ? 'font-bold' : '', 'text-gray-600']"
                                 >
-                                    <span v-if="stepStates.envSetup == 'pending'">
+                                    <span v-if="stepStates.envSetup === 'pending'">
                                         <span class="icon-checkbox text-[20px]"></span>
                                     </span>
 
-                                    <span v-else-if="stepStates.envSetup == 'active'">
+                                    <span v-else-if="stepStates.envSetup === 'active'">
                                         <span class="icon-processing text-[20px]"></span>
                                     </span>
 
@@ -118,7 +118,7 @@
 
                                 <div
                                     class="flex gap-[4px] text-[14px] text-gray-600"
-                                    :class="[stepStates.readyForInstallation == 'active' ? 'font-bold' : '', 'text-gray-600']">
+                                    :class="[stepStates.readyForInstallation == 'active' ? 'font-bold' : '', 'text-gray-600']"
                                 >
                                     <span v-if="stepStates.readyForInstallation == 'pending'">
                                         <span class="icon-checkbox text-[20px]"></span>
@@ -138,7 +138,7 @@
 
                                 <div
                                     class="flex gap-[4px] text-[14px] text-gray-600"
-                                    :class="[stepStates.createAdmin == 'active' ? 'font-bold' : '', 'text-gray-600']">
+                                    :class="[stepStates.createAdmin == 'active' ? 'font-bold' : '', 'text-gray-600']"
                                 >
                                     <span v-if="stepStates.createAdmin == 'pending'">
                                         <span class="icon-checkbox text-[20px]"></span>
@@ -158,7 +158,7 @@
 
                                 <div
                                     class="flex gap-[4px] text-[14px] text-gray-600"
-                                    :class="[stepStates.emailConfiguration == 'active' ? 'font-bold' : '', 'text-gray-600']">
+                                    :class="[stepStates.emailConfiguration == 'active' ? 'font-bold' : '', 'text-gray-600']"
                                 >
                                     <span v-if="stepStates.emailConfiguration == 'pending'">
                                         <span class="icon-checkbox text-[20px]"></span>
@@ -179,7 +179,7 @@
                                 <!-- Installation Completed -->
                                 <div
                                     class="flex gap-[4px] text-[14px] text-gray-600"
-                                    :class="[stepStates.installationCompleted == 'active' ? 'font-bold' : '', 'text-gray-600']">
+                                    :class="[stepStates.installationCompleted == 'active' ? 'font-bold' : '', 'text-gray-600']"
                                 >
                                     <span v-if="stepStates.installationCompleted == 'pending'">
                                         <span class="icon-checkbox text-[20px]"></span>
@@ -1171,8 +1171,8 @@
 
                     methods: {
                         FormSubmit(params) {
-                            const stepActions = {
-                                environment() {
+                            let stepActions = {
+                                environment: () => {
                                     this.stepStates.environment = 'complete';
 
                                     this.currentStep = 'envSetup';
@@ -1180,13 +1180,13 @@
                                     this.stepStates.envSetup = 'active';
                                 },
 
-                                envSetup() {
+                                envSetup: () => {
                                     this.envData = { ...params };
 
                                     this.currentStep = 'envDatabase';
                                 },
 
-                                envDatabase() {
+                                envDatabase: () => {
                                     this.stepStates.envSetup = 'complete';
 
                                     this.envData = { ...this.envData, ...params };
@@ -1196,13 +1196,13 @@
                                     this.stepStates.readyForInstallation = 'active';
                                 },
 
-                                readyForInstallation() {
+                                readyForInstallation: () => {
                                     this.currentStep = 'installProgress';
                                     
                                     this.complete();
                                 },
                                 
-                                installationLog() {
+                                installationLog: () => {
                                     this.stepStates.readyForInstallation = 'complete';
 
                                     this.currentStep = 'createAdmin';
@@ -1210,7 +1210,7 @@
                                     this.stepStates.createAdmin = 'active';
                                 },
 
-                                createAdmin() {
+                                createAdmin: () => {
                                     this.stepStates.createAdmin = 'complete';
 
                                     this.saveAdmin(params);
@@ -1218,7 +1218,7 @@
                                     this.stepStates.emailConfiguration = 'active';
                                 },
 
-                                emailConfiguration() {
+                                emailConfiguration: () => {
                                     this.saveSmtp(params);
 
                                     this.stepStates.emailConfiguration = 'complete';
@@ -1239,7 +1239,7 @@
 
                                     this.currentStep = 'installationLog';
 
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                    // this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                                 })
                                 .catch(error => {
                                     if (error.response.status == 422) {
