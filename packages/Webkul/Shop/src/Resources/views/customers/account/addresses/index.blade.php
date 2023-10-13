@@ -54,7 +54,9 @@
                                 <x-slot:menu>
                                     <x-shop::dropdown.menu.item>
                                         <a href="{{ route('shop.customers.account.addresses.edit', $address->id) }}">
-                                            @lang('shop::app.customers.account.addresses.edit')
+                                            <p class="w-full">
+                                                @lang('shop::app.customers.account.addresses.edit')
+                                            </p>
                                         </a>    
                                     </x-shop::dropdown.menu.item>
 
@@ -62,10 +64,16 @@
                                         <x-shop::form
                                             :action="route('shop.customers.account.addresses.delete', $address->id)"
                                             method="DELETE"
+                                            id="addressDelete"
                                         >
-                                            <button>
-                                                @lang('shop::app.customers.account.addresses.delete')
-                                            </button>
+                                            <a 
+                                                onclick="event.preventDefault(); document.getElementById('addressDelete').submit();"
+                                                href="{{ route('shop.customers.account.addresses.delete', $address->id) }}"
+                                            >
+                                                <p class="w-full">
+                                                    @lang('shop::app.customers.account.addresses.delete')
+                                                </p>
+                                            </a>
                                         </x-shop::form>
                                     </x-shop::dropdown.menu.item>
 
