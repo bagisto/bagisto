@@ -146,8 +146,8 @@ class Captcha implements CaptchaContract
     {
         return $this->isActive()
             ? array_merge($messages, [
-                'g-recaptcha-response.required' => __('customer::app.validations.captcha.required'),
-                'g-recaptcha-response.captcha' => __('customer::app.validations.captcha.captcha')
+                'g-recaptcha-response.required' => trans('customer::app.validations.captcha.required'),
+                'g-recaptcha-response.captcha' => trans('customer::app.validations.captcha.captcha')
             ])
             : $messages;
     }
