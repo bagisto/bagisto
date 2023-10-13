@@ -61,7 +61,7 @@ class DashboardService
     ) {
         $this->setLastStartDate();
         $this->setLastEndDate();
-        
+
         $this->yesterdayStartDate = now()->subDay()->startOfDay();
         $this->yesterdayEndDate = now()->subDay()->endOfDay();
     }
@@ -116,7 +116,7 @@ class DashboardService
     }
 
     /**
-     * Sets the end date to the provided date's end of day, or to the current 
+     * Sets the end date to the provided date's end of day, or to the current
      * date if not provided or if the provided date is in the future.
      */
     public function setEndDate(?Carbon $endDate = null): DashboardService
@@ -284,7 +284,7 @@ class DashboardService
         return $product->categories->map(function ($category) use ($orderItem) {
             return [
                 'total_qty_invoiced' => $orderItem->total_qty_invoiced,
-                'total_products' => $category->products->count(),
+                'total_products' => $category->products()->count(),
                 'category_id' => $category->id,
                 'name' => $category->translations->where('locale', app()->getLocale())->first()?->name,
             ];
@@ -331,7 +331,7 @@ class DashboardService
 
     /**
      * Generates sale graph data.
-     * 
+     *
      * @return array
      */
     private function generateSaleGraph(): array
@@ -383,7 +383,7 @@ class DashboardService
 
     /**
      * Generates visitor graph data.
-     * 
+     *
      * @return array
      */
     private function generateVisitorGraph(): array
@@ -402,7 +402,7 @@ class DashboardService
 
     /**
      * Returns today's details
-     * 
+     *
      * @return array
      */
     private function getTodayDetails(): array
