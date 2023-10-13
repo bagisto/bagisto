@@ -33,11 +33,12 @@ return [
     ],
 
     'notifications' => [
-        'marked-success' => 'התראה סומנה בהצלחה',
-        'no-record'      => 'לא נמצאו רשומות',
-        'read-all'       => 'סמן כנקרא',
-        'title'          => 'התראות',
-        'view-all'       => 'הצג הכל',
+        'description-text' => 'לרשום את כל ההתראות',
+        'marked-success'   => 'התראה סומנה בהצלחה',
+        'no-record'        => 'לא נמצאו רשומות',
+        'read-all'         => 'סמן כנקרא',
+        'title'            => 'התראות',
+        'view-all'         => 'הצג הכל',
 
         'order-status-messages' => [
             'completed'       => 'הזמנה הושלמה',
@@ -2537,7 +2538,7 @@ return [
 
             'create' => [
                 'name'       => 'שם',
-                'save-btn'   => 'שמור',
+                'save-btn'   => 'שמור ערכת נושא',
                 'sort-order' => 'סדר מיון',
                 'title'      => 'צור ערכת עיצוב',
 
@@ -2556,6 +2557,7 @@ return [
                 'add-filter-btn'                => 'הוסף מסנן',
                 'add-footer-link-btn'           => 'הוסף קישור לתחתית',
                 'add-link'                      => 'הוסף קישור',
+                'asc'                           => 'עולה',
                 'back'                          => 'חזור',
                 'category-carousel-description' => 'הצג קטגוריות באופן מושך באמצעות קרוסלת קטגוריות רספונסיבית.',
                 'category-carousel'             => 'קרוסלת קטגוריות',
@@ -2563,6 +2565,7 @@ return [
                 'css'                           => 'CSS',
                 'column'                        => 'עמודה',
                 'channels'                      => 'ערוצים',
+                'desc'                          => 'יורד',
                 'delete'                        => 'מחק',
                 'edit'                          => 'ערוך',
                 'footer-title'                  => 'כותרת',

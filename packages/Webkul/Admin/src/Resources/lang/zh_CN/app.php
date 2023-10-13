@@ -33,11 +33,12 @@ return [
     ],
 
     'notifications' => [
-        'marked-success' => '通知标记成功',
-        'no-record'      => '未找到记录',
-        'read-all'       => '标记为已读',
-        'title'          => '通知',
-        'view-all'       => '查看全部',
+        'description-text' => '列出所有通知',
+        'marked-success'   => '通知标记成功',
+        'no-record'        => '未找到记录',
+        'read-all'         => '标记为已读',
+        'title'            => '通知',
+        'view-all'         => '查看全部',
 
         'order-status-messages' => [
             'completed'       => '订单已完成',
@@ -2537,7 +2538,7 @@ return [
 
             'create' => [
                 'name'       => '名称',
-                'save-btn'   => '保存',
+                'save-btn'   => '保存主题',
                 'sort-order' => '排序顺序',
                 'title'      => '创建主题',
 
@@ -2556,6 +2557,7 @@ return [
                 'add-filter-btn'                => '添加过滤器',
                 'add-footer-link-btn'           => '添加页脚链接',
                 'add-link'                      => '添加链接',
+                'asc'                           => '升序',
                 'back'                          => '返回',
                 'category-carousel-description' => '使用响应式类别轮播以引人注目的方式展示动态类别。',
                 'category-carousel'             => '类别轮播',
@@ -2563,6 +2565,7 @@ return [
                 'css'                           => 'CSS',
                 'column'                        => '列',
                 'channels'                      => '频道',
+                'desc'                          => '降序',
                 'delete'                        => '删除',
                 'edit'                          => '编辑',
                 'footer-title'                  => '标题',

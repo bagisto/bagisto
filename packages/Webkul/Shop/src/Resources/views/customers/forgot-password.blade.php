@@ -19,7 +19,7 @@
         {{-- Company Logo --}}
         <div class="flex gap-x-[54px] items-center max-[1180px]:gap-x-[35px]">
             <a
-                href="{{ route('shop.home.index') }}" 
+                href="{{ route('shop.home.index') }}"
                 class="m-[0_auto_20px_auto]"
                 aria-label="Bagisto "
             >
@@ -31,7 +31,7 @@
                 >
             </a>
         </div>
-        
+
         {{-- Form Container --}}
         <div
             class="w-full max-w-[870px] m-auto px-[90px] py-[60px] border border-[#E9E9E9] rounded-[12px] max-md:px-[30px] max-md:py-[30px]"
@@ -91,8 +91,8 @@
 
                     <p class="mt-[20px] text-[#6E6E6E] font-medium">
                         @lang('shop::app.customers.forgot-password.back')
-                        
-                        <a class="text-navyBlue" 
+
+                        <a class="text-navyBlue"
                             href="{{ route('shop.customer.session.index') }}"
                         >
                             @lang('shop::app.customers.forgot-password.sign-in-button')
@@ -106,13 +106,13 @@
         </div>
 
         <p class="mt-[30px] mb-[15px] text-[#6E6E6E] text-xs text-center">
-            @lang('shop::app.customers.forgot-password.footer')
+            @lang('shop::app.customers.forgot-password.footer', ['current_year'=> date('Y') ])
         </p>
     </div>
 
     @push('scripts')
 
         {!! Captcha::renderJS() !!}
-    
+
     @endpush
 </x-shop::layouts>

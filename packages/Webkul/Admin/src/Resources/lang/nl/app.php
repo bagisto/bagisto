@@ -33,11 +33,12 @@ return [
     ],
 
     'notifications' => [
-        'marked-success' => 'Melding Succesvol Gemarkeerd',
-        'no-record'      => 'Geen Records Gevonden',
-        'read-all'       => 'Markeer als Gelezen',
-        'title'          => 'Meldingen',
-        'view-all'       => 'Alles Bekijken',
+        'description-text' => 'Alle meldingen weergeven',
+        'marked-success'   => 'Melding Succesvol Gemarkeerd',
+        'no-record'        => 'Geen Records Gevonden',
+        'read-all'         => 'Markeer als Gelezen',
+        'title'            => 'Meldingen',
+        'view-all'         => 'Alles Bekijken',
 
         'order-status-messages' => [
             'completed'       => 'Bestelling Voltooid',
@@ -2537,7 +2538,7 @@ return [
 
             'create' => [
                 'name'       => 'Naam',
-                'save-btn'   => 'Opslaan',
+                'save-btn'   => 'Thema opslaan',
                 'sort-order' => 'Sorteervolgorde',
                 'title'      => 'Thema aanmaken',
 
@@ -2556,6 +2557,7 @@ return [
                 'add-filter-btn'                => 'Filter toevoegen',
                 'add-footer-link-btn'           => 'Voettekstlink toevoegen',
                 'add-link'                      => 'Link toevoegen',
+                'asc'                           => 'oplopend',
                 'back'                          => 'Terug',
                 'category-carousel-description' => 'Toon dynamische categorieën aantrekkelijk met een responsieve categoriecarrousel.',
                 'category-carousel'             => 'Categorie Carrousel',
@@ -2563,6 +2565,7 @@ return [
                 'css'                           => 'CSS',
                 'column'                        => 'Kolom',
                 'channels'                      => 'Kanalen',
+                'desc'                          => 'aflopend',
                 'delete'                        => 'Verwijderen',
                 'edit'                          => 'Bewerken',
                 'footer-title'                  => 'Titel',

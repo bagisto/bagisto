@@ -33,11 +33,12 @@ return [
     ],
 
     'notifications' => [
-        'marked-success' => 'Bildirim Başarıyla İşaretlendi',
-        'no-record'      => 'Kayıt Bulunamadı',
-        'read-all'       => 'Tümünü Okundu Olarak İşaretle',
-        'title'          => 'Bildirimler',
-        'view-all'       => 'Tümünü Görüntüle',
+        'description-text' => 'Tüm Bildirimleri Listele',
+        'marked-success'   => 'Bildirim Başarıyla İşaretlendi',
+        'no-record'        => 'Kayıt Bulunamadı',
+        'read-all'         => 'Tümünü Okundu Olarak İşaretle',
+        'title'            => 'Bildirimler',
+        'view-all'         => 'Tümünü Görüntüle',
 
         'order-status-messages' => [
             'completed'       => 'Sipariş Tamamlandı',
@@ -2538,7 +2539,7 @@ return [
 
             'create' => [
                 'name'       => 'Ad',
-                'save-btn'   => 'Kaydet',
+                'save-btn'   => 'Tema kaydet',
                 'sort-order' => 'Sıralama Sırası',
                 'title'      => 'Tema Oluştur',
 
@@ -2557,6 +2558,7 @@ return [
                 'add-filter-btn'                => 'Filtre Ekle',
                 'add-footer-link-btn'           => 'Alt Bağlantı Ekle',
                 'add-link'                      => 'Bağlantı Ekle',
+                'asc'                           => 'artarak',
                 'back'                          => 'Geri',
                 'category-carousel-description' => 'Dinamik kategorileri çekici bir şekilde göstermek için duyarlı bir kategori karuseli kullanın.',
                 'category-carousel'             => 'Kategori Karuseli',
@@ -2564,6 +2566,7 @@ return [
                 'css'                           => 'CSS',
                 'column'                        => 'Sütun',
                 'channels'                      => 'Kanallar',
+                'desc'                          => 'azalarak',
                 'delete'                        => 'Sil',
                 'edit'                          => 'Düzenle',
                 'footer-title'                  => 'Başlık',

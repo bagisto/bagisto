@@ -33,11 +33,12 @@ return [
     ],
 
     'notifications' => [
-        'marked-success' => 'Benachrichtigung erfolgreich markiert',
-        'no-record'      => 'Kein Datensatz gefunden',
-        'read-all'       => 'Als gelesen markieren',
-        'title'          => 'Benachrichtigungen',
-        'view-all'       => 'Alle anzeigen',
+        'description-text' => 'Alle Benachrichtigungen auflisten',
+        'marked-success'   => 'Benachrichtigung erfolgreich markiert',
+        'no-record'        => 'Kein Datensatz gefunden',
+        'read-all'         => 'Als gelesen markieren',
+        'title'            => 'Benachrichtigungen',
+        'view-all'         => 'Alle anzeigen',
 
         'order-status-messages' => [
             'completed'       => 'Bestellung abgeschlossen',
@@ -2537,7 +2538,7 @@ return [
 
             'create' => [
                 'name'       => 'Name',
-                'save-btn'   => 'Speichern',
+                'save-btn'   => 'Thema speichern',
                 'sort-order' => 'Sortierreihenfolge',
                 'title'      => 'Thema erstellen',
 
@@ -2556,6 +2557,7 @@ return [
                 'add-filter-btn'                => 'Filter hinzufügen',
                 'add-footer-link-btn'           => 'Fußzeilen-Link hinzufügen',
                 'add-link'                      => 'Link hinzufügen',
+                'asc'                           => 'aufsteigend',
                 'back'                          => 'Zurück',
                 'category-carousel-description' => 'Dynamische Kategorien attraktiv mit einem responsiven Kategorie-Karussell anzeigen.',
                 'category-carousel'             => 'Kategorie Karussell',
@@ -2563,6 +2565,7 @@ return [
                 'css'                           => 'CSS',
                 'column'                        => 'Spalte',
                 'channels'                      => 'Kanäle',
+                'desc'                          => 'absteigend',
                 'delete'                        => 'Löschen',
                 'edit'                          => 'Bearbeiten',
                 'footer-title'                  => 'Titel',

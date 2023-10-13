@@ -85,7 +85,7 @@
                 <source :src="video.url" type="video/mp4">
             </video>
 
-            <div class="flex flex-col justify-between invisible w-full p-[11px] bg-white dark:bg-gray-900  absolute top-0 bottom-0 opacity-80  transition-all group-hover:visible">
+            <div class="flex flex-col justify-between invisible w-full p-[11px] bg-white dark:bg-gray-900 absolute top-0 bottom-0 opacity-80 transition-all group-hover:visible">
                 <!-- Video Name -->
                 <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold break-all"></p>
 
@@ -93,20 +93,20 @@
                 <div class="flex justify-between">
                     <!-- Remove Button -->
                     <span
-                        class="icon-delete text-[24px] p-[6px] rounded-[6px] cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 "
+                        class="icon-delete text-[24px] p-[6px] rounded-[6px] cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800"
                         @click="remove"
                     ></span>
 
                     <!-- Play Pause Button -->
                     <span
-                        class="text-[24px] p-[6px] rounded-[6px] cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 "
+                        class="text-[24px] p-[6px] rounded-[6px] cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800"
                         :class="[isPlaying ? 'icon-pause': 'icon-play']"
                         @click="playPause"
                     ></span>
 
                     <!-- Edit Button -->
                     <label
-                        class="icon-edit text-[24px] p-[6px] rounded-[6px] cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 "
+                        class="icon-edit text-[24px] p-[6px] rounded-[6px] cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800"
                         :for="$.uid + '_videoInput_' + index"
                     ></label>
 

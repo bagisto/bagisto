@@ -6,7 +6,7 @@
     {{-- Left Nagivation Section --}}
     <div class="flex items-center gap-x-[40px] pt-[28px] max-[1180px]:gap-x-[20px]">
         <a
-            href="{{ route('shop.home.index') }}" 
+            href="{{ route('shop.home.index') }}"
             class="place-self-start -mt-[4px]"
             aria-label="Bagisto "
         >
@@ -30,8 +30,8 @@
     {{-- Right Nagivation Section --}}
     <div class="flex gap-x-[35px] items-center max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px]">
         {{-- Search Bar Container --}}
-        <form 
-            action="{{ route('shop.search.index') }}" 
+        <form
+            action="{{ route('shop.search.index') }}"
             class="flex items-center max-w-[445px]"
         >
             <label
@@ -49,7 +49,7 @@
                     name="query"
                     value="{{ request('query') }}"
                     class="block w-full px-[44px] py-[13px] bg-[#F5F5F5] rounded-lg text-gray-900 text-xs font-medium transition-all border border-transparent hover:border-gray-400 focus:border-gray-400"
-                    placeholder="Search for products"
+                    placeholder="@lang('shop::app.components.layouts.header.search-text')"
                     required
                 >
 

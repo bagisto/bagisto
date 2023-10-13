@@ -1,14 +1,14 @@
 <?php
 
 return [
-    'admin' => [
-        'system' => [
-            'captcha' => [
-                'validations' => [
-                    'required' => 'Veuillez sélectionner CAPTCHA',
-                    'captcha'  => 'Quelque chose s\'est mal passé ! Veuillez réessayer.',
-                ],
-            ],
+    'validations' => [
+        'captcha' => [
+            'captcha'  => 'Quelque chose s\'est mal passé ! Veuillez réessayer.',
+            'required' => 'Veuillez sélectionner CAPTCHA',
+        ],
+
+        'vat-id' => [
+            'invalid-format' => 'Format de TVA invalide',
         ],
     ],
 ];

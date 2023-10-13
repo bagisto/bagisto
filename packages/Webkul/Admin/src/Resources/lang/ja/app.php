@@ -33,11 +33,12 @@ return [
     ],
 
     'notifications' => [
-        'marked-success' => 'お知らせが正常にマークされました',
-        'no-record'      => '記録が見つかりません',
-        'read-all'       => 'すべてを既読にする',
-        'title'          => 'お知らせ',
-        'view-all'       => 'すべて表示',
+        'description-text' => 'すべての通知をリストアップ',
+        'marked-success'   => 'お知らせが正常にマークされました',
+        'no-record'        => '記録が見つかりません',
+        'read-all'         => 'すべてを既読にする',
+        'title'            => 'お知らせ',
+        'view-all'         => 'すべて表示',
 
         'order-status-messages' => [
             'completed'       => '注文完了',
@@ -2537,7 +2538,7 @@ return [
 
             'create' => [
                 'name'       => '名前',
-                'save-btn'   => '保存',
+                'save-btn'   => 'テーマを保存する',
                 'sort-order' => '並び替え順',
                 'title'      => 'テーマを作成',
 
@@ -2556,6 +2557,7 @@ return [
                 'add-filter-btn'                => 'フィルターを追加',
                 'add-footer-link-btn'           => 'フッターリンクを追加',
                 'add-link'                      => 'リンクを追加',
+                'asc'                           => '昇順',
                 'back'                          => '戻る',
                 'category-carousel-description' => 'レスポンシブなカテゴリーカルーセルを使用して、動的なカテゴリーを魅力的に表示します。',
                 'category-carousel'             => 'カテゴリーカルーセル',
@@ -2563,6 +2565,7 @@ return [
                 'css'                           => 'CSS',
                 'column'                        => 'カラム',
                 'channels'                      => 'チャンネル',
+                'desc'                          => '降順',
                 'delete'                        => '削除',
                 'edit'                          => '編集',
                 'footer-title'                  => 'タイトル',

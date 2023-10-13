@@ -33,11 +33,12 @@ return [
     ],
 
     'notifications' => [
-        'marked-success' => 'Notification Marked Successfully',
-        'no-record'      => 'No Record Found',
-        'read-all'       => 'Mark as Read',
-        'title'          => 'Notifications',
-        'view-all'       => 'View All',
+        'description-text'      => 'List all the Notifications',
+        'marked-success'        => 'Notification Marked Successfully',
+        'no-record'             => 'No Record Found',
+        'read-all'              => 'Mark as Read',
+        'title'                 => 'Notifications',
+        'view-all'              => 'View All',
 
         'order-status-messages' => [
             'completed'       => 'Order Completed',
@@ -2537,7 +2538,7 @@ return [
 
             'create' => [
                 'name'       => 'Name',
-                'save-btn'   => 'Save',
+                'save-btn'   => 'Save Theme',
                 'sort-order' => 'Sort Order',
                 'title'      => 'Create Theme',
 
@@ -2556,6 +2557,7 @@ return [
                 'add-filter-btn'                => 'Add Filter',
                 'add-footer-link-btn'           => 'Add Footer Link',
                 'add-link'                      => 'Add Link',
+                'asc'                           => 'Asc',
                 'back'                          => 'Back',
                 'category-carousel-description' => 'Display dynamic categories attractively using a responsive category carousel.',
                 'category-carousel'             => 'Category Carousel',
@@ -2563,6 +2565,7 @@ return [
                 'css'                           => 'CSS',
                 'column'                        => 'Column',
                 'channels'                      => 'Channels',
+                'desc'                          => 'Desc',
                 'delete'                        => 'Delete',
                 'edit'                          => 'Edit',
                 'footer-title'                  => 'Title',

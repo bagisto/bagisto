@@ -226,7 +226,7 @@
 
                         <x-admin::form.control-group.label 
                             for="status"
-                            class="text-gray-600 dark:text-gray-300  font-semibold cursor-pointer"
+                            class="text-gray-600 dark:text-gray-300 font-semibold cursor-pointer"
                         >
                             @lang('admin::app.customers.customers.edit.status')
                         </x-admin::form.control-group.label>
@@ -251,7 +251,7 @@
 
                         <x-admin::form.control-group.label 
                             for="isSuspended"
-                            class="text-gray-600 dark:text-gray-300  font-semibold cursor-pointer"
+                            class="text-gray-600 dark:text-gray-300 font-semibold cursor-pointer"
                         >
                             @lang('admin::app.customers.customers.edit.suspended')
                         </x-admin::form.control-group.label>

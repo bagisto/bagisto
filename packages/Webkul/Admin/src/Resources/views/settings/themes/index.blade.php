@@ -54,7 +54,7 @@
 
                             <x-slot:content>
                                 <!-- Modal Content -->
-                                <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
+                                <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.themes.create.name')
@@ -139,7 +139,7 @@
                                         type="submit"
                                         class="primary-button"
                                     >
-                                        @lang('admin::app.catalog.products.index.create.save-btn')
+                                        @lang('admin::app.settings.themes.create.save-btn')
                                     </button>
                                 </div>
                             </x-slot:footer>

@@ -33,11 +33,12 @@ return [
     ],
 
     'notifications' => [
-        'marked-success' => 'Powiadomienie oznaczone jako przeczytane',
-        'no-record'      => 'Brak dostępnych powiadomień',
-        'read-all'       => 'Oznacz jako przeczytane',
-        'title'          => 'Powiadomienia',
-        'view-all'       => 'Zobacz wszystkie',
+        'description-text' => 'Wypisz wszystkie powiadomienia',
+        'marked-success'   => 'Powiadomienie oznaczone jako przeczytane',
+        'no-record'        => 'Brak dostępnych powiadomień',
+        'read-all'         => 'Oznacz jako przeczytane',
+        'title'            => 'Powiadomienia',
+        'view-all'         => 'Zobacz wszystkie',
 
         'order-status-messages' => [
             'completed'       => 'Zamówienie zakończone',
@@ -2537,7 +2538,7 @@ return [
 
             'create' => [
                 'name'       => 'Nazwa',
-                'save-btn'   => 'Zapisz',
+                'save-btn'   => 'Zapisz motyw',
                 'sort-order' => 'Kolejność sortowania',
                 'title'      => 'Utwórz motyw',
 
@@ -2556,6 +2557,7 @@ return [
                 'add-filter-btn'                => 'Dodaj filtr',
                 'add-footer-link-btn'           => 'Dodaj link stopki',
                 'add-link'                      => 'Dodaj link',
+                'asc'                           => 'rosnąco',
                 'back'                          => 'Powrót',
                 'category-carousel-description' => 'Wyświetl dynamiczne kategorie w atrakcyjny sposób za pomocą responsywnej karuzeli kategorii.',
                 'category-carousel'             => 'Karuzela kategorii',
@@ -2563,6 +2565,7 @@ return [
                 'css'                           => 'CSS',
                 'column'                        => 'Kolumna',
                 'channels'                      => 'Kanały',
+                'desc'                          => 'malejąco',
                 'delete'                        => 'Usuń',
                 'edit'                          => 'Edytuj',
                 'footer-title'                  => 'Tytuł',

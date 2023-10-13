@@ -33,11 +33,12 @@ return [
     ],
 
     'notifications' => [
-        'marked-success' => 'اعلان با موفقیت علامت‌گذاری شد',
-        'no-record'      => 'هیچ رکوردی یافت نشد',
-        'read-all'       => 'علامت خوانده شده',
-        'title'          => 'اعلان‌ها',
-        'view-all'       => 'مشاهده همه',
+        'description-text' => 'لیست کل اعلان‌ها',
+        'marked-success'   => 'اعلان با موفقیت علامت‌گذاری شد',
+        'no-record'        => 'هیچ رکوردی یافت نشد',
+        'read-all'         => 'علامت خوانده شده',
+        'title'            => 'اعلان‌ها',
+        'view-all'         => 'مشاهده همه',
 
         'order-status-messages' => [
             'completed'       => 'سفارش تکمیل شده',
@@ -2537,7 +2538,7 @@ return [
 
             'create' => [
                 'name'       => 'نام',
-                'save-btn'   => 'ذخیره',
+                'save-btn'   => 'ذخیره تم',
                 'sort-order' => 'ترتیب مرتب‌سازی',
                 'title'      => 'ایجاد تم',
 
@@ -2556,6 +2557,7 @@ return [
                 'add-filter-btn'                => 'افزودن فیلتر',
                 'add-footer-link-btn'           => 'افزودن لینک پاورقی',
                 'add-link'                      => 'افزودن لینک',
+                'asc'                           => 'صعودی',
                 'back'                          => 'بازگشت',
                 'category-carousel-description' => 'نمایش دسته‌بندی‌ها به شکل جذاب با استفاده از کاروسل دسته‌بندی واکنش‌گرا.',
                 'category-carousel'             => 'کاروسل دسته‌بندی',
@@ -2563,6 +2565,7 @@ return [
                 'css'                           => 'CSS',
                 'column'                        => 'ستون',
                 'channels'                      => 'کانال‌ها',
+                'desc'                          => 'نزولی',
                 'delete'                        => 'حذف',
                 'edit'                          => 'ویرایش',
                 'footer-title'                  => 'عنوان',

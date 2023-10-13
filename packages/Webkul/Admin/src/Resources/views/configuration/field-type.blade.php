@@ -9,6 +9,8 @@
 
     $validations = $coreConfigRepository->getValidations($field);
 
+    $isRequired = Str::contains($validations, 'required') ? 'required' : '';
+
     $channelLocaleInfo = $coreConfigRepository->getChannelLocaleInfo($field, $currentChannel->code, $currentLocale->code);
 @endphp
 
@@ -19,11 +21,11 @@
         {{-- Title of the input field --}}
         <div class="flex justify-between">
             <x-admin::form.control-group.label
-                :for="$name"
+                :for="$name" :class="$isRequired"
             >
                 @lang($field['title'])
             </x-admin::form.control-group.label>
-            
+
             <x-admin::form.control-group.label
                 :for="$name"
             >
@@ -120,7 +122,7 @@
             >
                 @if (isset($field['repository']))
                     @foreach ($value as $key => $option)
-                        <option 
+                        <option
                             value="{{ $key }}"
                             {{ $key == $selectedOption ? 'selected' : ''}}
                         >
@@ -210,11 +212,11 @@
 
             <div class="flex justify-center items-center">
                 @if ($result)
-                    <a 
+                    <a
                         href="{{ $src }}"
                         target="_blank"
                     >
-                        <img 
+                        <img
                             src="{{ $src }}"
                             class="relative mr-5 h-[33px] w-[33px] top-15 rounded-3 border-3 border-gray-500"
                         />
@@ -259,7 +261,7 @@
             @endphp
 
             @if ($result)
-                <a 
+                <a
                     href="{{ route('admin.configuration.download', [request()->route('slug'), request()->route('slug2'), $path]) }}"
                 >
                     <i class="icon sort-down-icon download"></i>
@@ -320,7 +322,7 @@
         {{-- State select Vue component --}}
         @elseif ($field['type'] == 'state')
             <v-state ref="stateRef">
-                <template 
+                <template
                     v-slot:default="{ countryStates, country, haveStates, isStateComponenetLoaded }"
                 >
                     <div v-if="isStateComponenetLoaded">
@@ -334,7 +336,7 @@
                                     :rules="$validations"
                                     :label="trans($field['title'])"
                                 >
-                                    <option 
+                                    <option
                                         v-for='(state, index) in countryStates[country]'
                                         :value="state.code"
                                         v-text="state.default_name"
@@ -365,7 +367,7 @@
     @endif
 
     @if (isset($field['info']))
-        <label 
+        <label
             class="block leading-[20px] text-[12px] text-gray-600 dark:text-gray-300 font-medium"
         >
             {!! trans($field['info']) !!}
@@ -373,7 +375,7 @@
     @endif
 
     {{-- Input field validaitons error message --}}
-    <x-admin::form.control-group.error 
+    <x-admin::form.control-group.error
         :control-name="$name"
     >
     </x-admin::form.control-group.error>
@@ -383,7 +385,7 @@
     @pushOnce('scripts')
         <script type="text/x-template" id="v-country-template">
             <div>
-                <slot 
+                <slot
                     :changeCountry="changeCountry"
                 >
                 </slot>
@@ -414,7 +416,7 @@
 
         <script type="text/x-template" id="v-state-template">
             <div>
-                <slot 
+                <slot
                     :country="country"
                     :country-states="countryStates"
                     :have-states="haveStates"
@@ -443,7 +445,7 @@
                         this.isStateComponenetLoaded = true;
                     }, 0);
                 },
-                
+
                 methods: {
                     haveStates() {
                         /*

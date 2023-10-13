@@ -33,11 +33,12 @@ return [
     ],
 
     'notifications' => [
-        'marked-success' => 'सूचना सफलतापूर्वक मार्क की गई',
-        'no-record'      => 'कोई रिकॉर्ड नहीं मिला',
-        'read-all'       => 'पढ़ा गया मार्क करें',
-        'title'          => 'सूचनाएँ',
-        'view-all'       => 'सभी देखें',
+        'description-text' => 'सभी सूचनाएँ सूचीबद्ध करें',
+        'marked-success'   => 'सूचना सफलतापूर्वक मार्क की गई',
+        'no-record'        => 'कोई रिकॉर्ड नहीं मिला',
+        'read-all'         => 'पढ़ा गया मार्क करें',
+        'title'            => 'सूचनाएँ',
+        'view-all'         => 'सभी देखें',
 
         'order-status-messages' => [
             'completed'       => 'ऑर्डर पूरा हुआ',
@@ -2537,7 +2538,7 @@ return [
 
             'create' => [
                 'name'       => 'नाम',
-                'save-btn'   => 'सहेजें',
+                'save-btn'   => 'थीम सहेजें',
                 'sort-order' => 'क्रमबद्ध करें',
                 'title'      => 'थीम बनाएं',
 
@@ -2556,6 +2557,7 @@ return [
                 'add-filter-btn'                => 'फ़िल्टर जोड़ें',
                 'add-footer-link-btn'           => 'फ़ुटर लिंक जोड़ें',
                 'add-link'                      => 'लिंक जोड़ें',
+                'asc'                           => 'उन्नति',
                 'back'                          => 'वापस',
                 'category-carousel-description' => 'एक प्रतिस्थापनीय श्रेणी कैरोसल का उपयोग करके डायनामिक श्रेणियों को प्रासंगिक रूप से प्रदर्शित करें।',
                 'category-carousel'             => 'श्रेणी कैरोसल',
@@ -2563,6 +2565,7 @@ return [
                 'css'                           => 'सीएसएस',
                 'column'                        => 'स्तंभ',
                 'channels'                      => 'चैनल्स',
+                'desc'                          => 'अवरोही',
                 'delete'                        => 'हटाएँ',
                 'edit'                          => 'संपादित करें',
                 'footer-title'                  => 'शीर्षक',

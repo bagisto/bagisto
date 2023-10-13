@@ -33,11 +33,12 @@ return [
     ],
 
     'notifications' => [
-        'marked-success' => 'Notification marquée avec succès',
-        'no-record'      => 'Aucun enregistrement trouvé',
-        'read-all'       => 'Marquer comme lu',
-        'title'          => 'Notifications',
-        'view-all'       => 'Voir tout',
+        'description-text' => 'Lister toutes les notifications',
+        'marked-success'   => 'Notification marquée avec succès',
+        'no-record'        => 'Aucun enregistrement trouvé',
+        'read-all'         => 'Marquer comme lu',
+        'title'            => 'Notifications',
+        'view-all'         => 'Voir tout',
 
         'order-status-messages' => [
             'completed'       => 'Commande terminée',
@@ -2537,7 +2538,7 @@ return [
 
             'create' => [
                 'name'       => 'Nom',
-                'save-btn'   => 'Enregistrer',
+                'save-btn'   => 'Enregistrer le thème',
                 'sort-order' => 'Ordre de tri',
                 'title'      => 'Créer un thème',
 
@@ -2556,6 +2557,7 @@ return [
                 'add-filter-btn'                => 'Ajouter un filtre',
                 'add-footer-link-btn'           => 'Ajouter un lien de pied de page',
                 'add-link'                      => 'Ajouter un lien',
+                'Asc'                           => 'Asc',
                 'back'                          => 'Retour',
                 'category-carousel-description' => 'Affichez les catégories de manière attrayante à l\'aide d\'un carrousel de catégories réactif.',
                 'category-carousel'             => 'Carrousel de catégorie',
@@ -2563,6 +2565,7 @@ return [
                 'css'                           => 'CSS',
                 'column'                        => 'Colonne',
                 'channels'                      => 'Canaux',
+                'desc'                          => 'Desc',
                 'delete'                        => 'Supprimer',
                 'edit'                          => 'Éditer',
                 'footer-title'                  => 'Titre',

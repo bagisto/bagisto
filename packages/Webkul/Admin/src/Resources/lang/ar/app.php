@@ -33,11 +33,12 @@ return [
     ],
 
     'notifications' => [
-        'marked-success' => 'تم وضع علامة على الإشعار بنجاح',
-        'no-record'      => 'لم يتم العثور على سجلات',
-        'read-all'       => 'وضع علامة كمقروء',
-        'title'          => 'الإشعارات',
-        'view-all'       => 'عرض الكل',
+        'description-text' => 'قائمة جميع الإشعارات',
+        'marked-success'   => 'تم وضع علامة على الإشعار بنجاح',
+        'no-record'        => 'لم يتم العثور على سجلات',
+        'read-all'         => 'وضع علامة كمقروء',
+        'title'            => 'الإشعارات',
+        'view-all'         => 'عرض الكل',
 
         'order-status-messages' => [
             'completed'       => 'تم الانتهاء من الطلب',
@@ -2537,7 +2538,7 @@ return [
 
             'create' => [
                 'name'       => 'الاسم',
-                'save-btn'   => 'حفظ',
+                'save-btn'   => 'حفظ السمة',
                 'sort-order' => 'ترتيب الفرز',
                 'title'      => 'إنشاء موضوع',
 
@@ -2556,6 +2557,7 @@ return [
                 'add-filter-btn'                => 'إضافة مرشح',
                 'add-footer-link-btn'           => 'إضافة رابط التذييل',
                 'add-link'                      => 'إضافة رابط',
+                'asc'                           => 'تصاعدي',
                 'back'                          => 'رجوع',
                 'category-carousel-description' => 'عرض الفئات الديناميكية بشكل جذاب باستخدام شريط الفئات المتجاوب.',
                 'category-carousel'             => 'شريط الفئات',
@@ -2563,6 +2565,7 @@ return [
                 'css'                           => 'نمط التنسيق',
                 'column'                        => 'عمود',
                 'channels'                      => 'القنوات',
+                'desc'                          => 'تنازلي',
                 'delete'                        => 'حذف',
                 'edit'                          => 'تعديل',
                 'footer-title'                  => 'العنوان',

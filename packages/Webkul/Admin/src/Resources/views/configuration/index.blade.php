@@ -17,7 +17,7 @@
             <div>
                 <div class="grid gap-[4px]">
                     {{-- Title of the Main Card --}}
-                    <p class="text-gray-600 dark:text-gray-300  font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300 font-semibold">
                         @lang($item['name'] ?? '')
                     </p>
 
@@ -27,7 +27,7 @@
                     </p>
                 </div>
 
-                <div class="grid grid-cols-4 gap-[48px] flex-wrap justify-between p-[16px] mt-[8px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow max-1580:grid-cols-3 max-xl:grid-cols-2 max-sm:grid-cols-1">
+                <div class="grid grid-cols-4 gap-[48px] flex-wrap justify-between p-[16px] mt-[8px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow max-1580:grid-cols-3 max-xl:grid-cols-2 max-sm:grid-cols-1">
                     {{-- Menus cards --}}
                     @foreach ($item['children'] as $childKey =>  $child)
                         <a 

@@ -24,10 +24,10 @@
             {!! view_render_event('sales.invoice.title.after', ['order' => $order]) !!}
 
             <div class="flex gap-x-[10px] items-center">
-                {{-- Cancel Button --}}
+                {{-- Back Button --}}
                 <a
                     href="{{ route('admin.sales.invoices.index') }}"
-                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
                 >
                     @lang('admin::app.account.edit.back-btn')
                 </a>
@@ -42,7 +42,7 @@
 
             <a
                 href="{{ route('admin.sales.invoices.print', $invoice->id) }}"
-                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800  hover:rounded-[6px]"
+                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
             >
                 <span class="icon-printer text-[24px] "></span> 
 
@@ -53,7 +53,7 @@
             <div>
                 <button
                     type="button"
-                    class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800  hover:rounded-[6px]"
+                    class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
                     @click="$refs.groupCreateModal.open()"
                 >
                     <span class="icon-mail text-[24px] "></span>
@@ -73,7 +73,7 @@
 
                         <x-slot:content>
                             <!-- Modal Content -->
-                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
+                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.sales.invoices.view.email')
@@ -122,7 +122,7 @@
         {{-- Left sub-component --}}
         <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
             {{-- Invoice Item Section --}}
-            <div class="bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+            <div class="bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px] p-[16px]">
                     @lang('admin::app.sales.invoices.view.invoice-items') ({{ count($invoice->items) }})
                 </p>
@@ -221,7 +221,7 @@
                 {{--Sale Summary --}}
                 <div class="flex w-full gap-[10px] justify-end mt-[16px] p-[16px]">
                     <div class="flex flex-col gap-y-[6px]">
-                        <p class="text-gray-600 dark:text-gray-300  font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300 font-semibold">
                             @lang('admin::app.sales.invoices.view.sub-total-summary')
                         </p>
 
@@ -246,7 +246,7 @@
 
                     <div class="flex flex-col gap-y-[6px]">
                         {{-- Subtotal --}}
-                        <p class="text-gray-600 dark:text-gray-300  font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300 font-semibold">
                             {{ core()->formatBasePrice($invoice->base_sub_total) }}
                         </p>
 
@@ -281,7 +281,7 @@
             {{-- component 1 --}}
             <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 dark:text-gray-300  text-[16px] p-[10px] font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
                         @lang('admin::app.sales.invoices.view.customer')
                     </p>
                 </x-slot:header>
@@ -308,7 +308,7 @@
                                 <span class="block w-full border-b-[1px] dark:border-gray-800  "></span>
 
                                 <div class="flex items-center justify-between">
-                                    <p class="text-gray-600 dark:text-gray-300  text-[16px] py-[16px] font-semibold">
+                                    <p class="text-gray-600 dark:text-gray-300 text-[16px] py-[16px] font-semibold">
                                         @lang('Billing Address')
                                     </p>
                                 </div>
@@ -321,10 +321,10 @@
 
                         {{-- Shipping Address --}}
                         @if ($order->shipping_address)
-                            <span class="block w-full border-b-[1px] dark:border-gray-800  "></span>
+                            <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
 
                             <div class="flex items-center justify-between">
-                                <p class="text-gray-600 dark:text-gray-300  text-[16px] py-[16px] font-semibold">
+                                <p class="text-gray-600 dark:text-gray-300 text-[16px] py-[16px] font-semibold">
                                     @lang('Shipping Address')
                                 </p>
                             </div>
@@ -340,7 +340,7 @@
             {{-- component 2 --}}
             <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 dark:text-gray-300  text-[16px] p-[10px] font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
                         @lang('admin::app.sales.invoices.view.order-information') 
                     </p>
                 </x-slot:header>

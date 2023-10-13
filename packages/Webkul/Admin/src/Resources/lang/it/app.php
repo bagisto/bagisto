@@ -33,11 +33,12 @@ return [
     ],
 
     'notifications' => [
-        'marked-success' => 'Notifica contrassegnata con successo',
-        'no-record'      => 'Nessun record trovato',
-        'read-all'       => 'Segna come Letto',
-        'title'          => 'Notifiche',
-        'view-all'       => 'Visualizza Tutte',
+        'description-text' => 'Elenca tutte le notifiche',
+        'marked-success'   => 'Notifica contrassegnata con successo',
+        'no-record'        => 'Nessun record trovato',
+        'read-all'         => 'Segna come Letto',
+        'title'            => 'Notifiche',
+        'view-all'         => 'Visualizza Tutte',
 
         'order-status-messages' => [
             'completed'       => 'Ordine Completato',
@@ -2537,7 +2538,7 @@ return [
 
             'create' => [
                 'name'       => 'Nome',
-                'save-btn'   => 'Salva',
+                'save-btn'   => 'Salva tema',
                 'sort-order' => 'Ordinamento',
                 'title'      => 'Crea Tema',
 
@@ -2556,6 +2557,7 @@ return [
                 'add-filter-btn'                => 'Aggiungi Filtro',
                 'add-footer-link-btn'           => 'Aggiungi Link del Piè di Pagina',
                 'add-link'                      => 'Aggiungi Link',
+                'asc'                           => 'crescente',
                 'back'                          => 'Indietro',
                 'category-carousel-description' => 'Mostra le categorie in modo accattivante utilizzando un carosello delle categorie reattivo.',
                 'category-carousel'             => 'Carosello delle Categorie',
@@ -2563,6 +2565,7 @@ return [
                 'css'                           => 'CSS',
                 'column'                        => 'Colonna',
                 'channels'                      => 'Canali',
+                'desc'                          => 'decrescente',
                 'delete'                        => 'Elimina',
                 'edit'                          => 'Modifica',
                 'footer-title'                  => 'Titolo',
