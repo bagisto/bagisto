@@ -10,6 +10,5 @@ return [
         'vat-id' => [
             'invalid-format' => 'अमान्य वीएट प्रारूप',
         ],
-
     ],
 ];
