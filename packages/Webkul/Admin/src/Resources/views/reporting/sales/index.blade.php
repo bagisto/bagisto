@@ -25,9 +25,18 @@
                 <!-- Sales Section -->
                 <div class="relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <!-- Header -->
-                    <p class="text-[16px] text-gray-600 dark:text-white font-semibold mb-[16px]">
-                        Sales
-                    </p>
+                    <div class="flex items-center justify-between mb-[16px]">
+                        <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
+                            @lang('admin::app.reporting.sales.index.total-sales')
+                        </p>
+
+                        <a
+                            href="#"
+                            class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
+                        >
+                            @lang('admin::app.reporting.sales.index.view-details')
+                        </a>
+                    </div>
 
                     <template v-if="isLoading.getTotalSalesStats">
                         <x-admin::shimmer.reporting.graph/>
@@ -57,7 +66,7 @@
                             </div>
 
                             <p class="text-[16px] text-gray-600 font-semibold">
-                                Sales over time
+                                @lang('admin::app.reporting.sales.index.sales-over-time')
                             </p>
 
                             <!-- Line Chart -->
@@ -94,7 +103,7 @@
                     <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                         <!-- Header -->
                         <p class="text-[16px] text-gray-600 dark:text-white font-semibold mb-[16px]">
-                            Purchase Funnel
+                            @lang('admin::app.reporting.sales.index.purchase-funnel')
                         </p>
 
                         <template v-if="isLoading.getPurchaseFunnelStats">
@@ -111,7 +120,9 @@
                                             @{{ reports.getPurchaseFunnelStats.statistics.visitors.total }}
                                         </p>
 
-                                        <p class="text-[12px] text-gray-600 font-semibold">Total Visits</p>
+                                        <p class="text-[12px] text-gray-600 font-semibold">
+                                            @lang('admin::app.reporting.sales.index.total-visits')
+                                        </p>
                                     </div>
 
                                     <div class="w-full relative bg-slate-100 aspect-[0.5/1]">
@@ -122,7 +133,7 @@
                                     </div>
 
                                     <p class="text-gray-600">
-                                        Total visitors on store
+                                        @lang('admin::app.reporting.sales.index.total-visits-info')
                                     </p>
                                 </div>
 
@@ -133,7 +144,9 @@
                                             @{{ reports.getPurchaseFunnelStats.statistics.product_visitors.total }}
                                         </p>
 
-                                        <p class="text-[12px] text-gray-600 font-semibold">Product Views</p>
+                                        <p class="text-[12px] text-gray-600 font-semibold">
+                                            @lang('admin::app.reporting.sales.index.product-views')
+                                        </p>
                                     </div>
 
                                     <div class="w-full relative bg-slate-100 aspect-[0.5/1]">
@@ -143,9 +156,10 @@
                                         ></div>
                                     </div>
 
-                                    <p class="text-gray-600">
-                                        Only <span class="text-emerald-400 font-semibold">@{{ reports.getPurchaseFunnelStats.statistics.product_visitors.progress }}%</span> visitors view products
-                                    </p>
+                                    <p
+                                        class="text-gray-600"
+                                        v-html="'@lang('admin::app.reporting.sales.index.product-views-info')'.replace(':progress', '<span class=\'text-emerald-400 font-semibold\'>' + reports.getPurchaseFunnelStats.statistics.product_visitors.progress + '%</span>')"
+                                    ></p>
                                 </div>
 
                                 <!-- Total Added To Cart -->
@@ -155,7 +169,9 @@
                                             @{{ reports.getPurchaseFunnelStats.statistics.carts.total }}
                                         </p>
 
-                                        <p class="text-[12px] text-gray-600 font-semibold">Add to Cart</p>
+                                        <p class="text-[12px] text-gray-600 font-semibold">
+                                            @lang('admin::app.reporting.sales.index.added-to-cart')
+                                        </p>
                                     </div>
 
                                     <div class="w-full relative bg-slate-100 aspect-[0.5/1]">
@@ -165,9 +181,10 @@
                                         ></div>
                                     </div>
 
-                                    <p class="text-gray-600">
-                                        Only <span class="text-emerald-400 font-semibold">@{{ reports.getPurchaseFunnelStats.statistics.carts.progress }}%</span> visitors added product in cart
-                                    </p>
+                                    <p
+                                        class="text-gray-600"
+                                        v-html="'@lang('admin::app.reporting.sales.index.added-to-cart-info')'.replace(':progress', '<span class=\'text-emerald-400 font-semibold\'>' + reports.getPurchaseFunnelStats.statistics.carts.progress + '%</span>')"
+                                    ></p>
                                 </div>
 
                                 <!-- Total Purchased -->
@@ -177,7 +194,9 @@
                                             @{{ reports.getPurchaseFunnelStats.statistics.orders.total }}
                                         </p>
 
-                                        <p class="text-[12px] text-gray-600 font-semibold">Purchased</p>
+                                        <p class="text-[12px] text-gray-600 font-semibold">
+                                            @lang('admin::app.reporting.sales.index.purchased')
+                                        </p>
                                     </div>
 
                                     <div class="w-full relative bg-slate-100 aspect-[0.5/1]">
@@ -187,9 +206,10 @@
                                         ></div>
                                     </div>
 
-                                    <p class="text-gray-600">
-                                        Only <span class="text-emerald-400 font-semibold">@{{ reports.getPurchaseFunnelStats.statistics.orders.progress }}%</span> visitors do purchasing
-                                    </p>
+                                    <p
+                                        class="text-gray-600"
+                                        v-html="'@lang('admin::app.reporting.sales.index.purchased-info')'.replace(':progress', '<span class=\'text-emerald-400 font-semibold\'>' + reports.getPurchaseFunnelStats.statistics.orders.progress + '%</span>')"
+                                    ></p>
                                 </div>
                             </div>
 
@@ -208,10 +228,18 @@
 
                     <!-- Abandoned Carts Section -->
                     <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                        <!-- Header -->
-                        <p class="text-[16px] text-gray-600 dark:text-white font-semibold mb-[16px]">
-                            Abandoned Carts
-                        </p>
+                        <div class="flex items-center justify-between mb-[16px]">
+                            <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
+                                @lang('admin::app.reporting.sales.index.abandoned-carts')
+                            </p>
+
+                            <a
+                                href="#"
+                                class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
+                            >
+                                @lang('admin::app.reporting.sales.index.view-details')
+                            </a>
+                        </div>
 
                         <template v-if="isLoading.getAbandonedCartsStats">
                             <x-admin::shimmer.reporting.sales.abandoned-carts/>
@@ -228,7 +256,9 @@
                                             @{{ reports.getAbandonedCartsStats.statistics.sales.formatted_total }}
                                         </p>
 
-                                        <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold"> Abandoned Revenue </p>
+                                        <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
+                                            @lang('admin::app.reporting.sales.index.abandoned-revenue')
+                                        </p>
                                         
                                         <div class="flex gap-[2px] items-center">
                                             <span
@@ -251,7 +281,9 @@
                                             @{{ reports.getAbandonedCartsStats.statistics.carts.current }}
                                         </p>
 
-                                        <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold"> Abandoned Cart </p>
+                                        <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
+                                            @lang('admin::app.reporting.sales.index.abandoned-carts')
+                                        </p>
                                         
                                         <div class="flex gap-[2px] items-center">
                                             <span
@@ -284,7 +316,9 @@
                                             ></span>
                                         </div>
 
-                                        <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold"> Abandoned Rate </p>
+                                        <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
+                                            @lang('admin::app.reporting.sales.index.abandoned-rate')
+                                        </p>
                                         
                                         <div class="flex gap-[2px] items-center">
                                             <p
@@ -304,7 +338,7 @@
 
                                 <!-- Header -->
                                 <p class="py-[10px] text-[16px] text-gray-600 dark:text-white font-semibold mt-[16px]">
-                                    Abandoned Products
+                                    @lang('admin::app.reporting.sales.index.abandoned-products')
                                 </p>
 
                                 <!-- Abandoned Products -->
@@ -350,9 +384,18 @@
                     <!-- Total Orders Section -->
                     <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                         <!-- Header -->
-                        <p class="text-[16px] text-gray-600 dark:text-white font-semibold mb-[16px]">
-                            Total Orders
-                        </p>
+                        <div class="flex items-center justify-between mb-[16px]">
+                            <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
+                                @lang('admin::app.reporting.sales.index.total-orders')
+                            </p>
+
+                            <a
+                                href="#"
+                                class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
+                            >
+                                @lang('admin::app.reporting.sales.index.view-details')
+                            </a>
+                        </div>
 
                         <template v-if="isLoading.getTotalOrdersStats">
                             <x-admin::shimmer.reporting.graph/> 
@@ -382,7 +425,7 @@
                                 </div>
 
                                 <p class="text-[16px] text-gray-600 font-semibold">
-                                    Orders over time
+                                    @lang('admin::app.reporting.sales.index.orders-over-time')
                                 </p>
 
                                 <!-- Line Chart -->
@@ -416,9 +459,18 @@
                     <!-- Average Order Value Section -->
                     <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                         <!-- Header -->
-                        <p class="text-[16px] text-gray-600 dark:text-white font-semibold mb-[16px]">
-                            Average Order Value
-                        </p>
+                        <div class="flex items-center justify-between mb-[16px]">
+                            <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
+                                @lang('admin::app.reporting.sales.index.average-order-value')
+                            </p>
+
+                            <a
+                                href="#"
+                                class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
+                            >
+                                @lang('admin::app.reporting.sales.index.view-details')
+                            </a>
+                        </div>
 
                         <template v-if="isLoading.getAverageSalesStats">
                             <x-admin::shimmer.reporting.graph/>
@@ -448,7 +500,7 @@
                                 </div>
 
                                 <p class="text-[16px] text-gray-600 font-semibold">
-                                    Average Order Value over time
+                                    @lang('admin::app.reporting.sales.index.average-order-value-over-time')
                                 </p>
 
                                 <!-- Line Chart -->
@@ -485,9 +537,18 @@
                     <!-- Tax Collected Section -->
                     <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                         <!-- Header -->
-                        <p class="text-[16px] text-gray-600 dark:text-white font-semibold mb-[16px]">
-                            Tax Collected
-                        </p>
+                        <div class="flex items-center justify-between mb-[16px]">
+                            <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
+                                @lang('admin::app.reporting.sales.index.tax-collected')
+                            </p>
+
+                            <a
+                                href="#"
+                                class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
+                            >
+                                @lang('admin::app.reporting.sales.index.view-details')
+                            </a>
+                        </div>
 
                         <template v-if="isLoading.getTaxCollectedStats">
                             <div class="grid gap-[16px]">
@@ -523,7 +584,7 @@
                                 </div>
 
                                 <p class="text-[16px] text-gray-600 font-semibold">
-                                    Tax Collected over time
+                                    @lang('admin::app.reporting.sales.index.tax-collected-over-time')
                                 </p>
 
                                 <!-- Line Chart -->
@@ -555,7 +616,7 @@
                                 <template v-if="reports.getTaxCollectedStats.statistics.top_categories.length">
                                     <!-- Header -->
                                     <p class="py-[10px] text-[16px] text-gray-600 dark:text-white font-semibold">
-                                        Top Tax Categories
+                                        @lang('admin::app.reporting.sales.index.top-tax-categories')
                                     </p>
 
                                     <!-- Categories -->
@@ -599,9 +660,18 @@
                     <!-- Shipping Collected Section -->
                     <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                         <!-- Header -->
-                        <p class="text-[16px] text-gray-600 dark:text-white font-semibold mb-[16px]">
-                            Shipping Collected
-                        </p>
+                        <div class="flex items-center justify-between mb-[16px]">
+                            <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
+                                @lang('admin::app.reporting.sales.index.shipping-collected')
+                            </p>
+
+                            <a
+                                href="#"
+                                class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
+                            >
+                                @lang('admin::app.reporting.sales.index.view-details')
+                            </a>
+                        </div>
 
                         <template v-if="isLoading.getShippingCollectedStats">
                             <div class="grid gap-[16px]">
@@ -637,7 +707,7 @@
                                 </div>
 
                                 <p class="text-[16px] text-gray-600 font-semibold">
-                                    Shipping Collected over time
+                                    @lang('admin::app.reporting.sales.index.shipping-collected-over-time')
                                 </p>
 
                                 <!-- Line Chart -->
@@ -669,7 +739,7 @@
                                 <template v-if="reports.getShippingCollectedStats.statistics.top_methods.length">
                                     <!-- Header -->
                                     <p class="py-[10px] text-[16px] text-gray-600 dark:text-white font-semibold">
-                                        Top Shipping Methods
+                                        @lang('admin::app.reporting.sales.index.top-shipping-methods')
                                     </p>
 
                                     <!-- Methods -->
@@ -716,9 +786,18 @@
                     <!-- Refunds Section -->
                     <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                         <!-- Header -->
-                        <p class="text-[16px] text-gray-600 dark:text-white font-semibold mb-[16px]">
-                            Refunds
-                        </p>
+                        <div class="flex items-center justify-between mb-[16px]">
+                            <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
+                                @lang('admin::app.reporting.sales.index.refunds')
+                            </p>
+
+                            <a
+                                href="#"
+                                class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
+                            >
+                                @lang('admin::app.reporting.sales.index.view-details')
+                            </a>
+                        </div>
 
                         <template v-if="isLoading.getRefundsStats">
                             <x-admin::shimmer.reporting.graph/>
@@ -748,7 +827,7 @@
                                 </div>
 
                                 <p class="text-[16px] text-gray-600 font-semibold">
-                                    Refunds over time
+                                    @lang('admin::app.reporting.sales.index.refunds-over-time')
                                 </p>
 
                                 <!-- Line Chart -->
@@ -782,9 +861,18 @@
                     <!-- Top Payment Methods Section -->
                     <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                         <!-- Header -->
-                        <p class="text-[16px] text-gray-600 dark:text-white font-semibold mb-[32px]">
-                            Top Payment Methods
-                        </p>
+                        <div class="flex items-center justify-between mb-[16px]">
+                            <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
+                                @lang('admin::app.reporting.sales.index.top-payment-methods')
+                            </p>
+
+                            <a
+                                href="#"
+                                class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
+                            >
+                                @lang('admin::app.reporting.sales.index.view-details')
+                            </a>
+                        </div>
 
                         <template v-if="isLoading.getTopPaymentMethods">
                             <x-admin::shimmer.reporting.progress-bar/>

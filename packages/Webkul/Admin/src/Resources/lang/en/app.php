@@ -2612,6 +2612,43 @@ return [
         ],
     ],
 
+    'reporting' => [
+        'sales' => [
+            'index' => [
+                'title'                         => 'Sales',
+                'view-details'                  => 'View Details',
+                'total-sales'                   => 'Total Sales',
+                'sales-over-time'               => 'Sales Over Time',
+                'purchase-funnel'               => 'Purchase Funnel',
+                'total-visits'                  => 'Total visits',
+                'total-visits-info'             => 'Total visitors on store',
+                'product-views'                 => 'Product Views',
+                'product-views-info'            => 'Only :progress visitors view products',
+                'added-to-cart'                 => 'Added to Cart',
+                'added-to-cart-info'            => 'Only :progress visitors added products to cart',
+                'purchased'                     => 'Purchased',
+                'purchased-info'                => 'Only :progress visitors do the purchasing',
+                'abandoned-carts'               => 'Abandoned Carts',
+                'abandoned-revenue'             => 'Abandoned Revenue',
+                'abandoned-rate'                => 'Abandoned Rate',
+                'abandoned-products'            => 'Abandoned Products',
+                'total-orders'                  => 'Total Orders',
+                'orders-over-time'              => 'Orders Over Time',
+                'average-order-value'           => 'Average Order Value',
+                'average-order-value-over-time' => 'Average Order Value Over Time',
+                'tax-collected'                 => 'Tax Collected',
+                'tax-collected-over-time'       => 'Tax Collected Over Time',
+                'top-tax-categories'            => 'Top Tax Categories',
+                'shipping-collected'            => 'Shipping Collected',
+                'shipping-collected-over-time'  => 'Shipping Collected Over Time',
+                'top-shipping-methods'          => 'Top Shipping Methods',
+                'refunds'                       => 'Refunds',
+                'refunds-over-time'             => 'Refunds Over Time',
+                'top-payment-methods'           => 'Top Payment Methods',
+            ]
+        ],
+    ],
+
     'configuration' => [
         'index' => [
             'delete'                       => 'Delete',

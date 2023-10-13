@@ -2,7 +2,11 @@
     <!-- Sales Section -->
     <div class="relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
         <!-- Header -->
-        <div class="shimmer w-[150px] h-[17px] mb-[16px]"></div>
+        <div class="flex items-center justify-between mb-[16px]">
+            <div class="shimmer w-[150px] h-[17px]"></div>
+
+            <div class="shimmer w-[79px] h-[21px]"></div>
+        </div>
 
         <x-admin::shimmer.reporting.graph/>
     </div>
@@ -20,7 +24,11 @@
         <!-- Abandoned Carts Section -->
         <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
             <!-- Header -->
-            <div class="shimmer w-[150px] h-[17px] mb-[16px]"></div>
+            <div class="flex items-center justify-between mb-[16px]">
+                <div class="shimmer w-[150px] h-[17px]"></div>
+
+                <div class="shimmer w-[79px] h-[21px]"></div>
+            </div>
 
             <x-admin::shimmer.reporting.sales.abandoned-carts/>
         </div>
@@ -31,7 +39,11 @@
         <!-- Total Orders Section -->
         <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
             <!-- Header -->
-            <div class="shimmer w-[150px] h-[17px] mb-[16px]"></div>
+            <div class="flex items-center justify-between mb-[16px]">
+                <div class="shimmer w-[150px] h-[17px]"></div>
+
+                <div class="shimmer w-[79px] h-[21px]"></div>
+            </div>
             
             <x-admin::shimmer.reporting.graph/>
         </div>
@@ -39,7 +51,11 @@
         <!-- Average Order Value Section -->
         <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
             <!-- Header -->
-            <div class="shimmer w-[150px] h-[17px] mb-[16px]"></div>
+            <div class="flex items-center justify-between mb-[16px]">
+                <div class="shimmer w-[150px] h-[17px]"></div>
+
+                <div class="shimmer w-[79px] h-[21px]"></div>
+            </div>
             
             <x-admin::shimmer.reporting.graph/>
         </div>
@@ -50,7 +66,11 @@
         <!-- Tax Collected Section -->
         <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
             <!-- Header -->
-            <div class="shimmer w-[150px] h-[17px] mb-[16px]"></div>
+            <div class="flex items-center justify-between mb-[16px]">
+                <div class="shimmer w-[150px] h-[17px]"></div>
+
+                <div class="shimmer w-[79px] h-[21px]"></div>
+            </div>
             
             <div class="grid gap-[16px]">
                 <x-admin::shimmer.reporting.graph/>
@@ -64,7 +84,11 @@
         <!-- Shipping Collected Section -->
         <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
             <!-- Header -->
-            <div class="shimmer w-[150px] h-[17px] mb-[16px]"></div>
+            <div class="flex items-center justify-between mb-[16px]">
+                <div class="shimmer w-[150px] h-[17px]"></div>
+
+                <div class="shimmer w-[79px] h-[21px]"></div>
+            </div>
             
             <div class="grid gap-[16px]">
                 <x-admin::shimmer.reporting.graph/>
@@ -81,7 +105,11 @@
         <!-- Refunds Section -->
         <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
             <!-- Header -->
-            <div class="shimmer w-[150px] h-[17px] mb-[16px]"></div>
+            <div class="flex items-center justify-between mb-[16px]">
+                <div class="shimmer w-[150px] h-[17px]"></div>
+
+                <div class="shimmer w-[79px] h-[21px]"></div>
+            </div>
             
             <x-admin::shimmer.reporting.graph/>
         </div>
@@ -89,7 +117,11 @@
         <!-- Top Payment Methods Section -->
         <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
             <!-- Header -->
-            <div class="shimmer w-[150px] h-[17px] mb-[16px]"></div>
+            <div class="flex items-center justify-between mb-[16px]">
+                <div class="shimmer w-[150px] h-[17px]"></div>
+
+                <div class="shimmer w-[79px] h-[21px]"></div>
+            </div>
             
             <x-admin::shimmer.reporting.progress-bar/>
         </div>
