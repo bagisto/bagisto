@@ -967,7 +967,7 @@ return [
                     'id'             => 'شناسه',
                     'name'           => 'نام',
                     'position'       => 'موقعیت',
-                    'status'         => 'وضعیت',
+                    'status'         => 'قابل مشاهده در منو',
                     'active'         => 'فعال',
                     'inactive'       => 'غیرفعال',
                     'no-of-products' => 'تعداد محصولات',

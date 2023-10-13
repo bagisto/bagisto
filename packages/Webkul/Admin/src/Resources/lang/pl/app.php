@@ -967,7 +967,7 @@ return [
                     'id'             => 'ID',
                     'name'           => 'Nazwa',
                     'position'       => 'Pozycja',
-                    'status'         => 'Status',
+                    'status'         => 'Widoczne w menu',
                     'active'         => 'Aktywna',
                     'inactive'       => 'Nieaktywna',
                     'no-of-products' => 'Liczba Produktów',

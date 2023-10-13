@@ -967,7 +967,7 @@ return [
                     'id'             => 'ID',
                     'name'           => '名前',
                     'position'       => '位置',
-                    'status'         => 'ステータス',
+                    'status'         => 'メニューで表示',
                     'active'         => 'アクティブ',
                     'inactive'       => '非アクティブ',
                     'no-of-products' => '製品数',

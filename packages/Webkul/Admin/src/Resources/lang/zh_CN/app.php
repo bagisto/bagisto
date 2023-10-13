@@ -967,7 +967,7 @@ return [
                     'id'             => 'ID',
                     'name'           => '名称',
                     'position'       => '位置',
-                    'status'         => '状态',
+                    'status'         => '菜单可见',
                     'active'         => '激活',
                     'inactive'       => '禁用',
                     'no-of-products' => '产品数量',

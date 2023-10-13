@@ -970,7 +970,7 @@ return [
                     'status'         => 'Statut',
                     'active'         => 'Actif',
                     'inactive'       => 'Inactif',
-                    'no-of-products' => 'Nombre de produits',
+                    'no-of-products' => 'Visible dans le menu',
                     'edit'           => 'Modifier',
                     'delete'         => 'Supprimer',
                     'update-status'  => 'Mettre à jour le statut',
