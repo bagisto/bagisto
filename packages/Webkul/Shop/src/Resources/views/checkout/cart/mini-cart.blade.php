@@ -55,11 +55,16 @@
                         <!-- Cart Item Information -->
                         <div class="grid flex-1 gap-y-[10px] place-content-start justify-stretch">
                             <div class="flex flex-wrap justify-between">
+                                
+                                {!! view_render_event('bagisto.shop.checkout.cart-mini.item.name.before') !!}
+                                
                                 <p
                                     class="text-[16px] font-medium max-w-[80%]"
                                     v-text="item.name"
                                 >
                                 </p>
+
+                                {!! view_render_event('bagisto.shop.checkout.cart-mini.item.name.after') !!}
 
                                 <p
                                     class="text-[18px]"
@@ -67,6 +72,8 @@
                                 >
                                 </p>
                             </div>
+
+                            {!! view_render_event('bagisto.shop.checkout.cart-mini.item.options.before') !!}
 
                             <!-- Cart Item Options Container -->
                             <div
@@ -103,7 +110,12 @@
                                 </div>
                             </div>
 
+                            {!! view_render_event('bagisto.shop.checkout.cart-mini.item.options.after') !!}
+
                             <div class="flex gap-[20px] items-center flex-wrap">
+
+                                {!! view_render_event('bagisto.shop.checkout.cart-mini.item.quantity.before') !!}
+
                                 <!-- Cart Item Quantity Changer -->
                                 <x-shop::quantity-changer
                                     name="quantity"
@@ -112,6 +124,8 @@
                                     @change="updateItem($event, item)"
                                 >
                                 </x-shop::quantity-changer>
+
+                                {!! view_render_event('bagisto.shop.checkout.cart-mini.item.quantity.after') !!}
 
                                 <!-- Cart Item Remove Button -->
                                 <button

@@ -32,6 +32,9 @@
     @pushOnce('scripts')
         <script type="text/x-template" id="v-compare-template">
             <div>
+
+                {!! view_render_event('bagisto.shop.customers.account.compare.view.before') !!}
+
                 <div v-if="! isLoading">
                     <div class="flex justify-between items-center">
                         <h2 class="text-[26px] font-medium">
@@ -124,6 +127,9 @@
                     >
                     </x-shop::shimmer.compare>
                 </div>
+
+                {!! view_render_event('bagisto.shop.customers.account.compare.view.after') !!}
+
             </div>
         </script>
 

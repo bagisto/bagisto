@@ -13,12 +13,17 @@
         @lang('shop::app.customers.account.profile.edit-profile')
     </h2>
 
+    {!! view_render_event('bagisto.shop.customers.account.profile.edit.before', ['customer' => $customer]) !!}
+
     {{-- Profile Edit Form --}}
     <x-shop::form
         :action="route('shop.customers.account.profile.store')"
         class="rounded mt-[30px]"
         enctype="multipart/form-data"
     >
+
+        {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.before', ['customer' => $customer]) !!}
+
         <x-shop::form.control-group class="mt-[15px]">
             <x-shop::form.control-group.control
                 type="image"
@@ -58,6 +63,8 @@
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
+        {!! view_render_event('bagisto.shop.customers.account.profile.edit.first_name.after') !!}
+
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.profile.last-name')
@@ -78,6 +85,8 @@
             >
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
+
+        {!! view_render_event('bagisto.shop.customers.account.profile.edit.last_name.after') !!}
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label class="required">
@@ -100,6 +109,8 @@
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
+        {!! view_render_event('bagisto.shop.customers.account.profile.edit.email.after') !!}
+
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.profile.phone')
@@ -120,6 +131,8 @@
             >
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
+
+        {!! view_render_event('bagisto.shop.customers.account.profile.edit.phone.after') !!}
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label class="required">
@@ -146,6 +159,8 @@
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
+        {!! view_render_event('bagisto.shop.customers.account.profile.edit.gender.after') !!}
+
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
                 @lang('shop::app.customers.account.profile.dob')
@@ -166,6 +181,8 @@
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
+        {!! view_render_event('bagisto.shop.customers.account.profile.edit.date_of_birth.after') !!}
+
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
                 @lang('shop::app.customers.account.profile.current-password')
@@ -185,6 +202,8 @@
             >
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
+
+        {!! view_render_event('bagisto.shop.customers.account.profile.edit.oldpassword.after') !!}
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
@@ -255,4 +274,7 @@
             @lang('shop::app.customers.account.profile.save')
         </button>
     </x-shop::form>
+
+    {!! view_render_event('bagisto.shop.customers.account.profile.edit.after', ['customer' => $customer]) !!}
+    
 </x-shop::layouts.account>

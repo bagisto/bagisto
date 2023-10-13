@@ -9,6 +9,8 @@
         <x-shop::breadcrumbs name="reviews"></x-shop::breadcrumbs>
     @endSection
 
+    {!! view_render_event('bagisto.shop.customers.account.reviews.list.before', ['reviews' => $reviews]) !!}
+
     <div class="flex-auto">
         <div class="max-md:max-w-full">
             <h2 class="text-[26px] font-medium">
@@ -71,4 +73,6 @@
             @endif
         </div>
     </div>
+
+    {!! view_render_event('bagisto.shop.customers.account.reviews.list.after', ['reviews' => $reviews]) !!}
 </x-shop::layouts.account>

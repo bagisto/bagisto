@@ -31,6 +31,9 @@
                                     class="relative max-sm:max-w-full max-sm:flex-auto cursor-pointer"
                                     v-for="(payment, index) in payment_methods"
                                 >
+
+                                    {!! view_render_event('bagisto.shop.checkout.payment-method.before') !!}
+
                                     <input 
                                         type="radio" 
                                         name="payment[method]" 
@@ -67,6 +70,8 @@
                                             @{{ payment.description }}
                                         </p>
                                     </label>
+
+                                    {!! view_render_event('bagisto.shop.checkout.payment-method.after') !!}
 
                                     <!-- Todo implement the additionalDetails -->
                                     {{-- \Webkul\Payment\Payment::getAdditionalDetails($payment['method'] --}}

@@ -144,12 +144,19 @@
 
                                         <!-- Cart Item Options Container -->
                                         <div class="grid place-content-start gap-y-[10px]">
+
+                                            {!! view_render_event('bagisto.shop.checkout.cart.item.name.before') !!}
+
                                             <p 
                                                 class="text-[16px] font-medium" 
                                                 v-text="item.name"
                                             >
                                             </p>
+
+                                            {!! view_render_event('bagisto.shop.checkout.cart.item.name.after') !!}
                                     
+                                            {!! view_render_event('bagisto.shop.checkout.cart.item.options.before') !!}
+
                                             <!-- Cart Item Options Container -->
                                             <div
                                                 class="grid gap-x-[10px] gap-y-[6px] select-none"
@@ -184,6 +191,8 @@
                                                 </div>
                                             </div>
 
+                                            {!! view_render_event('bagisto.shop.checkout.cart.item.options.after') !!}
+
                                             <div class="sm:hidden">
                                                 <p 
                                                     class="text-[18px] font-semibold" 
@@ -198,6 +207,8 @@
                                                     @lang('shop::app.checkout.cart.index.remove')
                                                 </span>
                                             </div>
+
+                                            {!! view_render_event('bagisto.shop.checkout.cart.item.quantity.after') !!}
 
                                             <x-shop::quantity-changer
                                                 name="quantity"
@@ -226,6 +237,8 @@
                                     </div>
                                 </div>
                             </div>
+
+                            {!! view_render_event('bagisto.shop.checkout.cart.controls.before') !!}
         
                             <!-- Cart Item Actions -->
                             <div class="flex flex-wrap gap-[30px] justify-end">
@@ -243,10 +256,18 @@
                                     @lang('shop::app.checkout.cart.index.update-cart')
                                 </button>
                             </div>
+
+                            {!! view_render_event('bagisto.shop.checkout.cart.controls.after') !!}
+                            
                         </div>
+
+                        {!! view_render_event('bagisto.shop.checkout.cart.summary.after') !!}
 
                         <!-- Cart Summary -->
                         @include('shop::checkout.cart.summary')
+
+                        {!! view_render_event('bagisto.shop.checkout.cart.summary.after') !!}
+
                     </div>
 
                     <!-- Empty Cart Section -->

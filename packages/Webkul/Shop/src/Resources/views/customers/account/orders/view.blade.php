@@ -950,4 +950,6 @@
             </div>
         </div>
     </div>
+
+    {!! view_render_event('bagisto.shop.customers.account.orders.view.after', ['order' => $order]) !!}
 </x-shop::layouts.account>
