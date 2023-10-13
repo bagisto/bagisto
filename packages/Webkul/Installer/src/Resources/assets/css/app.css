@@ -61,6 +61,10 @@
 		content: "\e905";
 	}
 
+	.required:after {
+        @apply content-['*'];
+    }
+
 	progress[value] {
 		/* Reset the default appearance */
 		-webkit-appearance: none;

@@ -41,14 +41,9 @@
     </head>
 
     <body>
-        <div
-            id="app"
-            class="h-full"
-        >
-            <div class="container">
-                <div class="flex [&amp;>*]:w-[50%] justify-center items-center">
-                    <v-server-requirements></v-server-requirements>
-                </div>
+        <div id="app" class="container">
+            <div class="flex [&amp;>*]:w-[50%] justify-center items-center">
+                <v-server-requirements></v-server-requirements>
             </div>
         </div>
 
@@ -279,6 +274,7 @@
                     <x-installer::form
                         v-slot="{ meta, errors, handleSubmit }"
                         as="div"
+                        ref="envSetup"
                     >
                         <form
                             @submit.prevent="handleSubmit($event, FormSubmit)"
@@ -300,7 +296,7 @@
                                     <x-installer::form.control-group.control
                                         type="text"
                                         name="app_name"
-                                        value="Bagisto"
+                                        ::value="envData.app_name ?? 'Bagisto'"
                                         rules="required"
                                         label="Application Name"
                                         placeholder="Bagisto"
@@ -322,7 +318,7 @@
                                     <x-installer::form.control-group.control
                                         type="text"
                                         name="app_url"
-                                        value="https://localhost"
+                                        ::value="envData.app_url ??' https://localhost'"
                                         rules="required"
                                         label="Default URL"
                                         placeholder="https://localhost"
@@ -344,7 +340,7 @@
                                     <x-installer::form.control-group.control
                                         type="select"
                                         name="app_currency"
-                                        value="USD"
+                                        ::value="envData.app_currency ?? 'USD'"
                                         rules="required"
                                         label="Default Currency"
                                     >
@@ -375,7 +371,7 @@
                                     <x-installer::form.control-group.control
                                         type="select"
                                         name="app_timezone"
-                                        :value="$current"
+                                        ::value="envData.app_timezone ?? $current"
                                         rules="required"
                                         label="Default Timezone"
                                         >
@@ -404,7 +400,7 @@
                                     <x-installer::form.control-group.control
                                         type="select"
                                         name="app_locale"
-                                        value="en"
+                                        ::value="envData.app_locale ?? 'en'"
                                         rules="required"
                                         label="Default Locale"
                                     >
@@ -450,6 +446,7 @@
                     <x-installer::form
                         v-slot="{ meta, errors, handleSubmit }"
                         as="div"
+                        ref="envDatabase"
                     >
                         <form
                             @submit.prevent="handleSubmit($event, FormSubmit)"
@@ -471,7 +468,7 @@
                                     <x-installer::form.control-group.control
                                         type="select"
                                         name="db_connection"
-                                        value="mysql"
+                                        ::value="envData.db_connection ?? 'mysql'"
                                         rules="required"
                                         label="Database Connection"
                                         placeholder="Database Connection"
@@ -505,7 +502,7 @@
                                     <x-installer::form.control-group.control
                                         type="text"
                                         name="db_hostname"
-                                        value="127.0.0.1"
+                                        ::value="envData.db_hostname ?? '127.0.0.1'"
                                         rules="required"
                                         label="Database Hostname"
                                         placeholder="Database Hostname"
@@ -527,7 +524,7 @@
                                     <x-installer::form.control-group.control
                                         type="text"
                                         name="db_port"
-                                        value="3306"
+                                        ::value="envData.db_port ?? '3306'"
                                         rules="required"
                                         label="Database Port"
                                         placeholder="Database Port"
@@ -549,7 +546,7 @@
                                     <x-installer::form.control-group.control
                                         type="text"
                                         name="db_name"
-                                        :value="old('db_name')"
+                                        ::value="envData.db_name"
                                         rules="required"
                                         label="Database Name"
                                         placeholder="Database Name"
@@ -571,7 +568,7 @@
                                     <x-installer::form.control-group.control
                                         type="text"
                                         name="db_prefix"
-                                        :value="old('db_prefix')"
+                                        ::value="envData.db_prefix"
                                         label="Database Prefix"
                                         placeholder="Database Prefix"
                                     >
@@ -592,7 +589,7 @@
                                     <x-installer::form.control-group.control
                                         type="text"
                                         name="db_username"
-                                        :value="old('db_username')"
+                                        ::value="envData.db_username"
                                         rules="required"
                                         label="Database Username"
                                         placeholder="Database Username"
@@ -614,7 +611,7 @@
                                     <x-installer::form.control-group.control
                                         type="password"
                                         name="db_password"
-                                        :value="old('db_password')"
+                                        ::value="envData.db_password"
                                         rules="required"
                                         label="Database Password"
                                         placeholder="Database Password"
@@ -788,6 +785,7 @@
                     <x-installer::form
                         v-slot="{ meta, errors, handleSubmit }"
                         as="div"
+                        ref="createAdmin"
                     >
                         <form
                             @submit.prevent="handleSubmit($event, FormSubmit)"
@@ -853,7 +851,7 @@
                                     <x-installer::form.control-group.control
                                         type="password"
                                         name="password"
-                                        value="admin123"
+                                        :value="old('password')"
                                         rules="required"
                                         label="Password"
                                     >
@@ -908,6 +906,7 @@
                     <x-installer::form
                         v-slot="{ meta, errors, handleSubmit }"
                         as="div"
+                        ref="emailConfiguration"
                     >
                         <form
                             @submit.prevent="handleSubmit($event, FormSubmit)"
@@ -1281,6 +1280,10 @@
                         },
 
                         back() {
+                            if (this.$refs[this.currentStep] && this.$refs[this.currentStep].setValues) {
+                                this.$refs[this.currentStep].setValues(this.envData);
+                            }
+
                             let index = this.steps.indexOf(this.currentStep);
 
                             if (index >0) {

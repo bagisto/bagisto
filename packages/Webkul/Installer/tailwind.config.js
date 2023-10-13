@@ -5,13 +5,16 @@ module.exports = {
     theme: {
         container: {
             center: true,
+
             screens: {
                 'xl': '1366px',
             },
+
             padding: {
                 DEFAULT: '16px',
-            }
+            },
         },
+
         screens: {
             sm: '525px',
             xl: '1366',
@@ -20,11 +23,13 @@ module.exports = {
         extend: {
             colors: {
             },
+
             fontFamily: {
-                'inter': ['Inter'],
+                inter: ['Inter'],
             }
         },
     },
+
     plugins: [],
 }
 
