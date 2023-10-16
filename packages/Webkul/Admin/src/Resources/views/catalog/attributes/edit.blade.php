@@ -49,7 +49,7 @@
                 <!-- body content -->
                 <div class="flex gap-[10px] mt-[14px]">
                     <!-- Left sub Component -->
-                    <div class="flex flex-col gap-[8px] flex-1">
+                    <div class="flex flex-col flex-1 gap-[8px] overflow-auto">
 
                         {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.attributes.before', ['attribute' => $attribute]) !!}
 
@@ -196,8 +196,8 @@
                                 </div>
 
                                 <!-- Table Information -->
-                                <div class="mt-[15px] overflow-auto">
-                                    <x-admin::table class="w-full text-left">
+                                <div class="mt-[15px] overflow-x-auto">
+                                    <x-admin::table>
                                         <x-admin::table.thead class="text-[14px] font-medium dark:bg-gray-800">
                                             <x-admin::table.thead.tr>
                                                 <x-admin::table.th class="!p-0"></x-admin::table.th>
@@ -239,6 +239,7 @@
                                                         :name="'options[' + element.id + '][isNew]'"
                                                         :value="element.isNew"
                                                     >
+
                                                     <input
                                                         type="hidden"
                                                         :name="'options[' + element.id + '][isDelete]'"
@@ -292,7 +293,11 @@
 
                                                     <!-- Admin-->
                                                     <x-admin::table.td>
-                                                        <p class="dark:text-white" v-text="element.admin_name"></p>
+                                                        <p
+                                                            class="dark:text-white"
+                                                            v-text="element.admin_name"
+                                                        >
+                                                        </p>
 
                                                         <input
                                                             type="hidden"
@@ -303,7 +308,11 @@
 
                                                     <!-- Loacles -->
                                                      <x-admin::table.td v-for="locale in allLocales">
-                                                        <p class="dark:text-white" v-text="element['locales'][locale.code]"></p>
+                                                        <p
+                                                            class="dark:text-white"
+                                                            v-text="element['locales'][locale.code]"
+                                                        >
+                                                        </p>
                                                         
                                                         <input
                                                             type="hidden"
