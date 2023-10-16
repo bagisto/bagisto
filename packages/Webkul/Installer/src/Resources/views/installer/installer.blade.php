@@ -561,7 +561,7 @@
 
                                 <!-- Database Prefix-->
                                 <x-installer::form.control-group class="mb-[10px]">
-                                    <x-installer::form.control-group.label class="required">
+                                    <x-installer::form.control-group.label>
                                         Database Prefix
                                     </x-installer::form.control-group.label>
 
@@ -1169,7 +1169,7 @@
                     },
 
                     methods: {
-                        FormSubmit(params) {
+                        FormSubmit(params, setErrors) {
                             let stepActions = {
                                 environment: () => {
                                     this.stepStates.environment = 'complete';
@@ -1186,13 +1186,19 @@
                                 },
 
                                 envDatabase: () => {
-                                    this.stepStates.envSetup = 'complete';
-
-                                    this.envData = { ...this.envData, ...params };
-                                    
-                                    this.currentStep = 'readyForInstallation';
-
-                                    this.stepStates.readyForInstallation = 'active';
+                                    if (params.db_connection === 'mysql') {
+                                        this.stepStates.envSetup = 'complete';
+    
+                                        this.envData = { ...this.envData, ...params };
+                                        
+                                        this.currentStep = 'readyForInstallation';
+    
+                                        this.stepStates.readyForInstallation = 'active';
+                                    } else {
+                                        setErrors({
+                                            'db_connection': ["@lang('Bagisto currently supports MySQL only.')"]
+                                        });
+                                    }
                                 },
 
                                 readyForInstallation: () => {
@@ -1243,7 +1249,7 @@
                                 });
                         },
 
-                        runMigartion() {
+                        runMigartion(setErrors) {
                             this.$axios.post("{{ route('installer.runMigration') }}")
                                 .then((response) => {
                                     this.seederLog = response.data;
@@ -1251,9 +1257,9 @@
                                     this.currentStep = 'installationLog';
                                 })
                                 .catch(error => {
-                                    if (error.response.status == 422) {
-                                        setErrors(error.response.data.errors);
-                                    }
+                                    this.currentStep = 'envDatabase';
+
+                                    setErrors(error.response.data.errors);
                                 });
                         },
 

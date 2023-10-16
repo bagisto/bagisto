@@ -60,7 +60,9 @@ class DatabaseManager
         try {
             Artisan::call('migrate:fresh', ['--force'=> true]);
         } catch (Exception $e) {
-            return $e->getMessage();
+            return response()->json([
+                'error' => $e->getMessage()
+            ], 500);
         }
 
         return $this->seeder();
