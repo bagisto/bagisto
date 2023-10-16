@@ -558,7 +558,7 @@ return [
                         'add-group-price'           => 'افزودن قیمت گروهی',
                         'all-groups'                => 'تمام گروه‌ها',
                         'create-btn'                => 'افزودن جدید',
-                        'discount-group-price-info' => 'برای تعداد :qty تا تخفیف :price',
+                        'discount-group-price-info' => 'برای :qty تعداد با تخفیف :price',
                         'edit-btn'                  => 'ویرایش',
                         'empty-info'                => 'قیمت‌گذاری ویژه برای مشتریان تعلق گرفته به گروه‌های خاص.',
                         'fixed-group-price-info'    => 'برای تعداد :qty با قیمت ثابت :price',
