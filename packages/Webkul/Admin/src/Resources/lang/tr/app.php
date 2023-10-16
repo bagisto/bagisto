@@ -967,7 +967,7 @@ return [
                     'id'                => 'ID',
                     'name'              => 'Adı',
                     'position'          => 'Pozisyon',
-                    'status'            => 'Durum',
+                    'status'            => 'Menüde Görünür',
                     'active'            => 'Aktif',
                     'inactive'          => 'Pasif',
                     'no-of-products'    => 'Ürün Sayısı',

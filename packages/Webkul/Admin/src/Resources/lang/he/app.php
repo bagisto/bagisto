@@ -967,7 +967,7 @@ return [
                     'id'             => 'מזהה',
                     'name'           => 'שם',
                     'position'       => 'מיקום',
-                    'status'         => 'סטטוס',
+                    'status'         => 'נראה בתפריט',
                     'active'         => 'פעיל',
                     'inactive'       => 'לא פעיל',
                     'no-of-products' => 'מספר מוצרים',
