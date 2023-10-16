@@ -1233,7 +1233,7 @@ return [
                 'gender'                      => 'Płeć - :gender',
                 'group'                       => 'Grupa - :group_code',
                 'inactive'                    => 'Nieaktywny',
-                'id'                          => 'ID',
+                'id'                          => 'ID - :id',
                 'increment-id'                => 'Nr :increment_id',
                 'invoice-id'                  => 'Nr Faktury',
                 'invoice-id-prefix'           => 'Nr :invoice_id',

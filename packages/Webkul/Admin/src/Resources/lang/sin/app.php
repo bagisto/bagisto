@@ -1233,7 +1233,7 @@ return [
                 'gender'                      => 'පුරුෂ භාවය - :gender',
                 'group'                       => 'කණ්ඩායම - :group_code',
                 'inactive'                    => 'අක්‍රීය',
-                'id'                          => 'හැඳුනුම්පත',
+                'id'                          => 'හැඳුනුම්පත - :id',
                 'increment-id'                => '# :increment_id',
                 'invoice-id'                  => 'ප්‍රවාහන හැඳුනුම්පත',
                 'invoice-id-prefix'           => '# :invoice_id',

@@ -1233,7 +1233,7 @@ return [
                 'gender'                      => 'מגדר - :gender',
                 'group'                       => 'קבוצה - :group_code',
                 'inactive'                    => 'לא פעיל',
-                'id'                          => 'מזהה',
+                'id'                          => 'מספר זיהוי - :id',
                 'increment-id'                => '# :increment_id',
                 'invoice-id'                  => 'מזהה חשבונית',
                 'invoice-id-prefix'           => '# :invoice_id',

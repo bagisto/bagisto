@@ -1233,7 +1233,7 @@ return [
                 'gender'                      => 'جنسیت - :gender',
                 'group'                       => 'گروه - :group_code',
                 'inactive'                    => 'غیرفعال',
-                'id'                          => 'شناسه',
+                'id'                          => 'شناسه - :id',
                 'increment-id'                => '# :increment_id',
                 'invoice-id'                  => 'شناسه فاکتور',
                 'invoice-id-prefix'           => '# :invoice_id',

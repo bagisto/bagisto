@@ -1232,7 +1232,7 @@ return [
                 'gender'                      => '性别 - :gender',
                 'group'                       => '分组 - :group_code',
                 'inactive'                    => '不活跃',
-                'id'                          => 'ID',
+                'id'                          => 'ID - :id',
                 'increment-id'                => '# :increment_id',
                 'invoice-id'                  => '发票ID',
                 'invoice-id-prefix'           => '# :invoice_id',

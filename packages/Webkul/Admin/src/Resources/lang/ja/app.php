@@ -1233,7 +1233,7 @@ return [
                 'gender'                      => '性別 - :gender',
                 'group'                       => 'グループ - :group_code',
                 'inactive'                    => '非アクティブ',
-                'id'                          => 'ID',
+                'id'                          => 'ID - :id',
                 'increment-id'                => '# :increment_id',
                 'invoice-id'                  => '請求書 ID',
                 'invoice-id-prefix'           => '# :invoice_id',

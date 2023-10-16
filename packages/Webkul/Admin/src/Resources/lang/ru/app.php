@@ -1233,7 +1233,7 @@ return [
                 'gender'                      => 'Пол - :gender',
                 'group'                       => 'Группа - :group_code',
                 'inactive'                    => 'Неактивен',
-                'id'                          => 'ID',
+                'id'                          => 'ИД - :id',
                 'increment-id'                => '# :increment_id',
                 'invoice-id'                  => 'ID счета',
                 'invoice-id-prefix'           => '# :invoice_id',

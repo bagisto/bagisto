@@ -1233,7 +1233,7 @@ return [
                 'gender'                      => 'Cinsiyet - :gender',
                 'group'                       => 'Grup - :group_code',
                 'inactive'                    => 'Pasif',
-                'id'                          => 'Kimlik',
+                'id'                          => 'Kimlik - :id',
                 'increment-id'                => '# :artış_id',
                 'invoice-id'                  => 'Fatura ID',
                 'invoice-id-prefix'           => '# :fatura_id',
