@@ -3,11 +3,9 @@
 namespace Webkul\Sales\Repositories;
 
 use Illuminate\Container\Container;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
-use Carbon\Carbon;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Generators\OrderSequencer;
 use Webkul\Sales\Models\Order as OrderModel;
@@ -384,52 +382,6 @@ class OrderRepository extends Repository
         $order->save();
 
         return $order;
-    }
-
-    /**
-     * Get customer with most sales by date.
-     */
-    public function getCustomersWithMostSalesByDate(?Carbon $from = null, ?Carbon $to = null): Collection
-    {
-        $tablePrefix = DB::getTablePrefix();
-
-        $query = $this->getModel()
-            ->leftJoin(
-                DB::raw("
-                    (SELECT order_id, MAX(first_name) as first_name, MAX(last_name) as last_name, MAX(email) as email
-                    FROM ". $tablePrefix ."addresses GROUP BY order_id) as address"
-                ),
-
-                function ($join) {
-                    $join->on('orders.id', '=', DB::raw('address.order_id'));
-                }
-            )
-            ->whereNotIn("orders.status", ['closed', 'canceled'])
-            ->select(
-                'orders.customer_id',
-                'customer_email',
-                'customer_first_name',
-                'customer_last_name',
-                DB::raw("(
-                SUM(base_grand_total) -
-                SUM(
-                    IFNULL(
-                        (SELECT SUM(base_grand_total) FROM {$tablePrefix}refunds WHERE {$tablePrefix}refunds.order_id = {$tablePrefix}orders.id),
-                        0)
-                    )
-                ) as total_base_grand_total"),
-                DB::raw('COUNT(DISTINCT '. $tablePrefix .'orders.id) as order_count')
-            );
-
-        if ($from && $to) {
-            $query->whereBetween("orders.created_at", [$from, $to]);
-        } elseif ($from) {
-            $query->where("orders.created_at", '>=', $from);
-        } elseif ($to) {
-            $query->where("orders.created_at", '<=', $to);
-        }
-
-        return $query->groupBy('customer_email')->orderBy('total_base_grand_total', 'DESC')->limit(5)->get();
     }
 
     /**

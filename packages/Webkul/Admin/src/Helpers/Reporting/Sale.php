@@ -539,40 +539,6 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Gets top-selling products.
-     * 
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public function getTopSellingProducts(): collection
-    {
-        $topSellingProducts = $this->orderItemRepository->getTopSellingProductsByDate($this->startDate, $this->endDate);
-
-        foreach ($topSellingProducts as $orderItem) {
-            $orderItem->formatted_total = core()->formatBasePrice($orderItem->total);
-
-            $orderItem->formatted_price = core()->formatBasePrice($orderItem->price);
-        }
-
-        return $topSellingProducts;
-    }
-
-    /**
-     * Gets customer with most sales.
-     * 
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public function getCustomersWithMostSales(): Collection
-    {
-        $customerWithMostSales = $this->orderRepository->getCustomersWithMostSalesByDate($this->startDate, $this->endDate);
-
-        foreach ($customerWithMostSales as $order) {
-            $order->formatted_total_base_grand_total = core()->formatBasePrice($order->total_base_grand_total);
-        }
-
-        return $customerWithMostSales;
-    }
-
-    /**
      * Returns over time stats.
      * 
      * @param  \Carbon\Carbon  $startDate

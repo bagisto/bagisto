@@ -105,7 +105,7 @@ class Dashboard
      */
     public function getTopProducts(): Collection
     {
-        return $this->saleReporting->getTopSellingProducts();
+        return $this->productReporting->getTopSellingProducts();
     }
 
     /**
@@ -115,7 +115,13 @@ class Dashboard
      */
     public function getTopCustomers(): Collection
     {
-        return $this->saleReporting->getCustomersWithMostSales();
+        $customers = $this->customerReporting->getCustomersWithMostSales();
+
+        $customers->map(function($customer) {
+            $customer->formatted_total = core()->formatBasePrice($customer->total);
+        });
+
+        return $customers;
     }
 
     /**

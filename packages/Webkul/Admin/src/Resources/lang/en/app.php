@@ -2647,6 +2647,24 @@ return [
                 'top-payment-methods'           => 'Top Payment Methods',
             ]
         ],
+
+        'customers' => [
+            'index' => [
+                'title'                => 'Customers',
+                'view-details'         => 'View Details',
+                'total-customers'      => 'Total Customers',
+                'customers-over-time'  => 'Customers Over Time',
+                'customers-traffic'    => 'Customers Traffic',
+                'total-visitors'       => 'Total Visitors',
+                'unique-visitors'      => 'Unique Visitors',
+                'traffic-over-week'    => 'Traffic Over Week',
+                'most-orders'          => 'Customers With Most Orders',
+                'most-sales'           => 'Customers With Most Sales',
+                'most-reviews'         => 'Customers With Most Reviews',
+                'top-customer-groups'  => 'Top Customer Groups',
+                
+            ]
+        ]
     ],
 
     'configuration' => [

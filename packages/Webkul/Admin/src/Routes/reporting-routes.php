@@ -15,6 +15,8 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
          */
         Route::controller(CustomerController::class)->prefix('customers')->group(function () {
             Route::get('', 'index')->name('admin.reporting.customers.index');
+
+            Route::get('stats', 'stats')->name('admin.reporting.customers.stats');
         });
 
         /**

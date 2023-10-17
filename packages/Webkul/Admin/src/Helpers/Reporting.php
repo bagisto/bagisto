@@ -75,7 +75,7 @@ class Reporting
     public function getTotalOrdersStats(): array
     {
         return [
-            'orders'     => $this->saleReporting->getTotalOrdersProgress(),
+            'orders'    => $this->saleReporting->getTotalOrdersProgress(),
 
             'over_time' => [
                 'previous' => $this->saleReporting->getPreviousTotalOrdersOverTime(),
@@ -155,7 +155,7 @@ class Reporting
     public function getRefundsStats(): array
     {
         return [
-            'refunds'     => $this->saleReporting->getRefundsProgress(),
+            'refunds'   => $this->saleReporting->getRefundsProgress(),
 
             'over_time' => [
                 'previous' => $this->saleReporting->getPreviousRefundsOverTime(),
@@ -258,6 +258,131 @@ class Reporting
         });
 
         return $paymentMethods;
+    }
+
+    /**
+     * Returns the total customers statistics.
+     * 
+     * @return array
+     */
+    public function getTotalCustomersStats(): array
+    {
+        return [
+            'customers' => $this->customerReporting->getTotalCustomersProgress(),
+
+            'over_time' => [
+                'previous' => $this->customerReporting->getPreviousTotalCustomersOverTime(),
+                'current'  => $this->customerReporting->getCurrentTotalCustomersOverTime(),
+            ],
+        ];
+    }
+
+    /**
+     * Returns the total customers statistics.
+     * 
+     * @return array
+     */
+    public function getCustomersTrafficStats(): array
+    {
+        return [
+            'total'     => $this->visitorReporting->getTotalVisitorsProgress(),
+            'unique'    => $this->visitorReporting->getTotalUniqueVisitorsProgress(),
+
+            'over_time' => [
+                'previous' => $this->visitorReporting->getPreviousTotalVisitorsOverWeek(),
+                'current'  => $this->visitorReporting->getCurrentTotalVisitorsOverWeek(),
+            ],
+        ];
+    }
+
+    /**
+     * Returns the customers with most sales
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getCustomersWithMostSales(): Collection
+    {
+        $totalSales = $this->saleReporting->getTotalSalesProgress();
+
+        $customers = $this->customerReporting->getCustomersWithMostSales();
+
+        $customers->map(function($customer) use($totalSales) {
+            if (! $totalSales['current']) {
+                $customer->progress = 0;
+            } else {
+                $customer->progress = ($customer->total * 100) / $totalSales['current'];
+            }
+
+            $customer->formatted_total = core()->formatBasePrice($customer->total);
+        });
+
+        return $customers;
+    }
+
+    /**
+     * Returns the customers with most orders
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getCustomersWithMostOrders(): Collection
+    {
+        $totalOrders = $this->saleReporting->getTotalOrdersProgress();
+
+        $customers = $this->customerReporting->getCustomersWithMostSales();
+
+        $customers->map(function($customer) use($totalOrders) {
+            if (! $totalOrders['current']) {
+                $customer->progress = 0;
+            } else {
+                $customer->progress = ($customer->orders * 100) / $totalOrders['current'];
+            }
+        });
+
+        return $customers;
+    }
+
+    /**
+     * Returns the customers with most reviews
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getCustomersWithMostReviews(): Collection
+    {
+        $totalReviews = $this->customerReporting->getTotalReviewsProgress();
+
+        $customers = $this->customerReporting->getCustomersWithMostReviews();
+
+        $customers->map(function($customer) use($totalReviews) {
+            if (! $totalReviews['current']) {
+                $customer->progress = 0;
+            } else {
+                $customer->progress = ($customer->reviews * 100) / $totalReviews['current'];
+            }
+        });
+
+        return $customers;
+    }
+
+    /**
+     * Returns the top customers
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getTopCustomerGroups(): Collection
+    {
+        $totalCustomers = $this->customerReporting->getTotalCustomersProgress();
+
+        $groups = $this->customerReporting->getGroupsWithMostCustomers();
+
+        $groups->map(function($group) use($totalCustomers) {
+            if (! $totalCustomers['current']) {
+                $group->progress = 0;
+            } else {
+                $group->progress = ($group->total * 100) / $totalCustomers['current'];
+            }
+        });
+
+        return $groups;
     }
 
     /**

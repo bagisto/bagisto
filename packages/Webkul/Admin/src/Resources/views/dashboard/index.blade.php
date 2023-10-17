@@ -856,24 +856,21 @@
                         <!-- Customers Lists -->
                         <div
                             class="flex flex-col gap-[32px] p-[16px] border-b-[1px] dark:border-gray-800 last:border-b-0 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
-                            v-if="statistics?.customers?.length"
-                            v-for="item in statistics.customers"
+                            v-if="statistics?.customers.length"
+                            v-for="customer in statistics.customers"
                         >
-                            <a
-                                :href="`{{ route('admin.customers.customers.view', '') }}/${item.customer_id}`"
-                                v-if="item.customer_id"
-                            >
+                            <a :href="customer.id ? `{{ route('admin.customers.customers.view', '') }}/${customer.id}` : '#'">
                                 <div class="flex justify-between gap-[6px]">
                                     <div class="flex flex-col">
                                         <p
                                             class="text-gray-600 dark:text-gray-300 font-semibold"
-                                            v-text="item.customer_first_name + ' ' + item.customer_last_name"
+                                            v-text="customer.full_name"
                                         >
                                         </p>
 
                                         <p
                                             class="text-gray-600 dark:text-gray-300"
-                                            v-text="item.customer_email ?? item.customer_address_email"
+                                            v-text="customer.email"
                                         >
                                         </p>
                                     </div>
@@ -881,47 +878,16 @@
                                     <div class="flex flex-col">
                                         <p
                                             class="text-gray-800 font-semibold dark:text-white"
-                                            v-text="item.formatted_total_base_grand_total"
+                                            v-text="customer.formatted_total"
                                         >
                                         </p>
 
-                                        <p class="text-gray-600 dark:text-gray-300" v-if="item.order_count">
-                                            @{{ "@lang('admin::app.dashboard.index.order-count')".replace(':count', item.order_count) }}
+                                        <p class="text-gray-600 dark:text-gray-300" v-if="customer.orders">
+                                            @{{ "@lang('admin::app.dashboard.index.order-count')".replace(':count', customer.orders) }}
                                         </p>
                                     </div>
                                 </div>
                             </a>
-
-                            <div
-                                v-else
-                                class="flex justify-between gap-[6px]"
-                            >
-                                <div class="flex flex-col">
-                                    <p
-                                        class="text-gray-600 dark:text-gray-300  font-semibold"
-                                        v-text="item.customer_first_name + ' ' + item.customer_last_name"
-                                    >
-                                    </p>
-
-                                    <p
-                                        class="text-gray-600 dark:text-gray-300"
-                                        v-text="item.customer_email ?? item.customer_address_email"
-                                    >
-                                    </p>
-                                </div>
-
-                                <div class="flex flex-col">
-                                    <p
-                                        class="text-gray-800 font-semibold dark:text-white"
-                                        v-text="item.formatted_total_base_grand_total"
-                                    >
-                                    </p>
-
-                                    <p class="text-gray-600 dark:text-gray-300" v-if="item.order_count">
-                                        @{{ "@lang('admin::app.dashboard.index.order-count')".replace(':count', item.order_count) }}
-                                    </p>
-                                </div>
-                            </div>
                         </div>
 
                         <div

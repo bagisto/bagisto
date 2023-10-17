@@ -125,6 +125,28 @@ class Visitor extends AbstractReporting
     }
 
     /**
+     * Returns previous sales over week
+     * 
+     * @param  string  $visitableType
+     * @return array
+     */
+    public function getPreviousTotalVisitorsOverWeek($visitableType = null): array
+    {
+        return $this->getTotalVisitorsOverWeek($this->lastStartDate, $this->lastEndDate, $visitableType);
+    }
+
+    /**
+     * Returns current sales over week
+     * 
+     * @param  string  $visitableType
+     * @return array
+     */
+    public function getCurrentTotalVisitorsOverWeek($visitableType = null): array
+    {
+        return $this->getTotalVisitorsOverWeek($this->startDate, $this->endDate, $visitableType);
+    }
+
+    /**
      * Generates visitor graph data.
      * 
      * @param  \Carbon\Carbon  $startDate
@@ -154,6 +176,41 @@ class Visitor extends AbstractReporting
             $total = $visits->where('date', $interval['start']->{$timeIntervals['type']})->first();
 
             $stats['label'][] = $interval['start']->format('d M');
+            $stats['total'][] = $total?->count ?? 0;
+        }
+
+        return $stats;
+    }
+
+    /**
+     * Generates visitor over week graph data.
+     * 
+     * @param  \Carbon\Carbon  $startDate
+     * @param  \Carbon\Carbon  $endDate
+     * @param  string  $visitableType
+     * @return array
+     */
+    public function getTotalVisitorsOverWeek($startDate, $endDate, $visitableType = null): array
+    {
+        $stats = [];
+
+        $weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+        $visits = $this->visitRepository
+            ->select(
+                DB::raw('DAYNAME(created_at) AS day'),
+                DB::raw('COUNT(*) AS count')
+            )
+            ->whereNull('visitable_id')
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->groupBy(DB::raw('DAYNAME(created_at)'))
+            ->get();
+
+
+        foreach ($weekDays as $day) {
+            $total = $visits->where('day', $day)->first();
+
+            $stats['label'][] = $day;
             $stats['total'][] = $total?->count ?? 0;
         }
 

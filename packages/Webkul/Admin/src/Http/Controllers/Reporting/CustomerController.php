@@ -26,4 +26,19 @@ class CustomerController extends Controller
     {
         return view('admin::reporting.customers.index');
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function stats()
+    {
+        $stats = $this->reportingHelper->{request()->query('type')}();
+
+        return response()->json([
+            'statistics' => $stats,
+            'date_range' => $this->reportingHelper->getDateRange(),
+        ]);
+    }
 }
