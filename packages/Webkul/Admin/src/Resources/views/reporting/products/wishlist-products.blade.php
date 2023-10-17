@@ -101,7 +101,7 @@
                 getStats() {
                     this.isLoading = true;
 
-                    this.$axios.get("{{ route('admin.reporting.sales.stats') }}", {
+                    this.$axios.get("{{ route('admin.reporting.products.stats') }}", {
                             params: {
                                 type: 'getTotalProductsAddedToWishlistStats'
                             }
