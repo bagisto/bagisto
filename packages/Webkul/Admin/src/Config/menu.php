@@ -218,9 +218,9 @@ return [
         'sort'       => 2,
         'icon'       => '',
     ], [
-        'key'        => 'reporting.catalog',
-        'name'       => 'admin::app.components.layouts.sidebar.catalog',
-        'route'      => 'admin.reporting.catalog.index',
+        'key'        => 'reporting.products',
+        'name'       => 'admin::app.components.layouts.sidebar.products',
+        'route'      => 'admin.reporting.products.index',
         'sort'       => 3,
         'icon'       => '',
     ],

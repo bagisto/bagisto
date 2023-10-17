@@ -5,7 +5,7 @@ namespace Webkul\Admin\Helpers;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
 use Webkul\Admin\Helpers\Reporting\Sale;
-use Webkul\Admin\Helpers\Reporting\Catalog;
+use Webkul\Admin\Helpers\Reporting\Product;
 use Webkul\Admin\Helpers\Reporting\Customer;
 use Webkul\Admin\Helpers\Reporting\Visitor;
 
@@ -15,14 +15,14 @@ class Dashboard
      * Create a controller instance.
      * 
      * @param  \Webkul\Admin\Helpers\Reporting\Sale  $saleReporting
-     * @param  \Webkul\Admin\Helpers\Reporting\Catalog  $catalogReporting
+     * @param  \Webkul\Admin\Helpers\Reporting\Product  $productReporting
      * @param  \Webkul\Admin\Helpers\Reporting\Customer  $customerReporting
      * @param  \Webkul\Admin\Helpers\Reporting\Visitor  $visitorReporting
      * @return void
      */
     public function __construct(
         protected Sale $saleReporting,
-        protected Catalog $catalogReporting,
+        protected Product $productReporting,
         protected Customer $customerReporting,
         protected Visitor $visitorReporting
     )
@@ -67,7 +67,7 @@ class Dashboard
      */
     public function getStockThresholdProducts(): Collection
     {
-        return $this->catalogReporting->getStockThreshold();
+        return $this->productReporting->getStockThreshold();
     }
 
     /**
@@ -78,9 +78,9 @@ class Dashboard
     public function getSalesStats(): array
     {
         return [
-            'total_orders'    => $this->saleReporting->getTotalOrdersProgress(),
-            'total_sales'     => $this->saleReporting->getTotalSalesProgress(),
-            'sales_over_time' => $this->saleReporting->getCurrentTotalSalesOverTime(),
+            'total_orders' => $this->saleReporting->getTotalOrdersProgress(),
+            'total_sales'  => $this->saleReporting->getTotalSalesProgress(),
+            'over_time'    => $this->saleReporting->getCurrentTotalSalesOverTime(),
         ];
     }
 
@@ -105,7 +105,7 @@ class Dashboard
      */
     public function getTopProducts(): Collection
     {
-        return $this->catalogReporting->getTopSellingProducts();
+        return $this->productReporting->getTopProductsByRevenue();
     }
 
     /**

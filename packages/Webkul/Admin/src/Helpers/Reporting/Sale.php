@@ -410,6 +410,7 @@ class Sale extends AbstractReporting
             ->whereNotNull('tax_category_id')
             ->groupBy('tax_category_id')
             ->orderByDesc('total')
+            ->limit(5)
             ->get();
     }
 
@@ -492,6 +493,7 @@ class Sale extends AbstractReporting
             ->whereNotNull('shipping_method')
             ->groupBy('shipping_method')
             ->orderByDesc('total')
+            ->limit(5)
             ->get();
     }
 
@@ -509,6 +511,7 @@ class Sale extends AbstractReporting
             ->whereBetween('orders.created_at', [$this->startDate, $this->endDate])
             ->groupBy('method')
             ->orderByDesc('total')
+            ->limit(5)
             ->get();
     }
 

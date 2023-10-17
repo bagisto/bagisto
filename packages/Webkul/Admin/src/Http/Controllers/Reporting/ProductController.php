@@ -5,7 +5,7 @@ namespace Webkul\Admin\Http\Controllers\Reporting;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Helpers\Reporting;
 
-class CatalogController extends Controller
+class ProductController extends Controller
 {
     /**
      * Create a controller instance.

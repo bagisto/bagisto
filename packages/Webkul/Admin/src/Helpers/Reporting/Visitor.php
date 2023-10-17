@@ -3,6 +3,7 @@
 namespace Webkul\Admin\Helpers\Reporting;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Collection;
 use Webkul\Core\Repositories\VisitRepository;
 
 class Visitor extends AbstractReporting
@@ -144,6 +145,35 @@ class Visitor extends AbstractReporting
     public function getCurrentTotalVisitorsOverWeek($visitableType = null): array
     {
         return $this->getTotalVisitorsOverWeek($this->startDate, $this->endDate, $visitableType);
+    }
+
+    /**
+     * Gets visitable with most visits.
+     * 
+     * @param  string  $visitableType
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getVisitableWithMostVisits($visitableType = null): Collection
+    {
+        $visits = $this->visitRepository
+            ->addSelect(
+                'id',
+                'visitable_type',
+                'visitable_id',
+                DB::raw('COUNT(*) as visits')
+            )
+            ->where('visitable_type', $visitableType)
+            ->whereBetween('created_at', [$this->startDate, $this->endDate])
+            ->groupBy('visitable_id')
+            ->orderByDesc('visits')
+            ->limit(5)
+            ->get();
+
+        $visits->map(function ($visit) {
+            $visit->name = $visit->visitable->name;
+        });
+
+        return $visits;
     }
 
     /**

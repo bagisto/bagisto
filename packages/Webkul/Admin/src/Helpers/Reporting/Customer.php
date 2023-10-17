@@ -136,6 +136,7 @@ class Customer extends AbstractReporting
             ->whereBetween('created_at', [$this->startDate, $this->endDate])
             ->groupBy(DB::raw('CONCAT(customer_email, "-", customer_id)'))
             ->orderByDesc('total')
+            ->limit(5)
             ->get();
     }
 
@@ -158,6 +159,7 @@ class Customer extends AbstractReporting
             ->whereBetween('created_at', [$this->startDate, $this->endDate])
             ->groupBy(DB::raw('CONCAT(customer_email, "-", customer_id)'))
             ->orderByDesc('orders')
+            ->limit(5)
             ->get();
     }
 
@@ -183,6 +185,7 @@ class Customer extends AbstractReporting
             ->whereNotNull('customer_id')
             ->groupBy(DB::raw('CONCAT(email, "-", customers.id)'))
             ->orderByDesc('reviews')
+            ->limit(5)
             ->get();
     }
 
@@ -200,6 +203,7 @@ class Customer extends AbstractReporting
             ->whereBetween('customers.created_at', [$this->startDate, $this->endDate])
             ->groupBy('customer_group_id')
             ->orderByDesc('total')
+            ->limit(5)
             ->get();
     }
 

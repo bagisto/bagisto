@@ -536,9 +536,9 @@ return [
         'route' => 'admin.reporting.customers.index',
         'sort'  => 2,
     ], [
-        'key'   => 'reporting.catalog',
-        'name'  => 'admin::app.acl.catalog',
-        'route' => 'admin.reporting.catalog.index',
+        'key'   => 'reporting.products',
+        'name'  => 'admin::app.acl.products',
+        'route' => 'admin.reporting.products.index',
         'sort'  => 3,
     ],
 

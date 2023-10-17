@@ -759,7 +759,7 @@
                         <template v-else>
                             <div
                                 class="flex flex-col"
-                                v-if="statistics?.products?.length"
+                                v-if="statistics?.products.length"
                             >
                                 <a
                                     :href="`{{route('admin.catalog.products.edit', '')}}/${item.product_id}`"
@@ -801,7 +801,7 @@
 
                                             <p
                                                 class="text-[16px] text-gray-800 dark:text-white font-semibold"
-                                                v-text="item.formatted_total"
+                                                v-text="item.formatted_revenue"
                                             >
                                             </p>
                                         </div>
@@ -979,7 +979,7 @@
                     salesGraphChart () {
                         const ctx = document.getElementById('totalSalesChart');
 
-                        const data = this.statistics.sales.sales_over_time;
+                        const data = this.statistics.sales.over_time;
 
                         if (this.salesChart) {
                            this.salesChart.destroy();

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
 use Webkul\Admin\Helpers\Reporting\Cart;
 use Webkul\Admin\Helpers\Reporting\Sale;
-use Webkul\Admin\Helpers\Reporting\Catalog;
+use Webkul\Admin\Helpers\Reporting\Product;
 use Webkul\Admin\Helpers\Reporting\Customer;
 use Webkul\Admin\Helpers\Reporting\Visitor;
 use Webkul\Product\Models\Product as ProductModel;
@@ -18,7 +18,7 @@ class Reporting
      * 
      * @param  \Webkul\Admin\Helpers\Reporting\Cart  $cartReporting
      * @param  \Webkul\Admin\Helpers\Reporting\Sale  $saleReporting
-     * @param  \Webkul\Admin\Helpers\Reporting\Catalog  $catalogReporting
+     * @param  \Webkul\Admin\Helpers\Reporting\Product  $productReporting
      * @param  \Webkul\Admin\Helpers\Reporting\Customer  $customerReporting
      * @param  \Webkul\Admin\Helpers\Reporting\Visitor  $visitorReporting
      * @return void
@@ -26,7 +26,7 @@ class Reporting
     public function __construct(
         protected Cart $cartReporting,
         protected Sale $saleReporting,
-        protected Catalog $catalogReporting,
+        protected Product $productReporting,
         protected Customer $customerReporting,
         protected Visitor $visitorReporting
     )
@@ -383,6 +383,104 @@ class Reporting
         });
 
         return $groups;
+    }
+
+    /**
+     * Returns the total sold quantities statistics.
+     * 
+     * @return array
+     */
+    public function getTotalSoldQuantitiesStats(): array
+    {
+        return [
+            'sales'     => $this->productReporting->getTotalSoldQuantitiesProgress(),
+
+            'over_time' => [
+                'previous' => $this->productReporting->getPreviousTotalSoldQuantitiesOverTime(),
+                'current'  => $this->productReporting->getCurrentTotalSoldQuantitiesOverTime(),
+            ],
+        ];
+    }
+
+    /**
+     * Returns top selling products by revenue statistics.
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getTopProductsByRevenue(): Collection
+    {
+        return $this->productReporting->getTopProductsByRevenue();
+    }
+
+    /**
+     * Returns top selling products by quantity statistics.
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getTopProductsByQuantity(): Collection
+    {
+        return $this->productReporting->getTopProductsByQuantity();
+    }
+
+    /**
+     * Returns the total products added to wishlist statistics.
+     * 
+     * @return array
+     */
+    public function getTotalProductsAddedToWishlistStats(): array
+    {
+        return [
+            'sales'     => $this->productReporting->getTotalProductsAddedToWishlistProgress(),
+
+            'over_time' => [
+                'previous' => $this->productReporting->getPreviousTotalProductsAddedToWishlistOverTime(),
+                'current'  => $this->productReporting->getCurrentTotalProductsAddedToWishlistOverTime(),
+            ],
+        ];
+    }
+
+    /**
+     * Returns the products with most reviews
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getProductsWithMostReviews(): Collection
+    {
+        $totalReviews = $this->productReporting->getTotalReviewsProgress();
+
+        $products = $this->productReporting->getProductsWithMostReviews();
+
+        $products->map(function($product) use($totalReviews) {
+            if (! $totalReviews['current']) {
+                $product->progress = 0;
+            } else {
+                $product->progress = ($product->reviews * 100) / $totalReviews['current'];
+            }
+        });
+
+        return $products;
+    }
+
+    /**
+     * Returns the products with most visits
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getProductsWithMostVisits(): Collection
+    {
+        $totalVisits = $this->visitorReporting->getTotalVisitorsProgress();
+
+        $products = $this->visitorReporting->getVisitableWithMostVisits(ProductModel::class);
+
+        $products->map(function($product) use($totalVisits) {
+            if (! $totalVisits['current']) {
+                $product->progress = 0;
+            } else {
+                $product->progress = ($product->visits * 100) / $totalVisits['current'];
+            }
+        });
+
+        return $products;
     }
 
     /**

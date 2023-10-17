@@ -2664,7 +2664,13 @@ return [
                 'top-customer-groups'  => 'Top Customer Groups',
                 
             ]
-        ]
+            ],
+
+        'products' => [
+            'index' => [
+                'title' => 'Products',
+            ],
+        ],
     ],
 
     'configuration' => [
