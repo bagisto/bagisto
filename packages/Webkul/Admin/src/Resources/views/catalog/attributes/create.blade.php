@@ -49,7 +49,7 @@
                 <!-- body content -->
                 <div class="flex gap-[10px] mt-[14px]">
                     <!-- Left sub Component -->
-                    <div class="flex flex-col gap-[8px] flex-1">
+                    <div class="flex flex-col gap-[8px] flex-1 overflow-auto">
                         <!-- Label -->
                         <div class="p-[16px] bg-white dark:bg-gray-900 box-shadow rounded-[4px]">
                             <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
@@ -189,8 +189,8 @@
                                 </div>
 
                                 <!-- Table Information -->
-                                <div class="mt-[15px] overflow-auto">
-                                    <x-admin::table class="w-full text-left">
+                                <div class="mt-[15px] overflow-x-auto">
+                                    <x-admin::table>
                                         <x-admin::table.thead class="text-[14px] font-medium dark:bg-gray-800">
                                             <x-admin::table.thead.tr>
                                                 <x-admin::table.th class="!p-0"></x-admin::table.th>
@@ -274,7 +274,11 @@
 
                                                     <!-- Admin-->
                                                     <x-admin::table.td>
-                                                        <p class="dark:text-white" v-text="element.params.admin_name"></p>
+                                                        <p
+                                                            class="dark:text-white"
+                                                            v-text="element.params.admin_name"
+                                                        >
+                                                        </p>
 
                                                         <input
                                                             type="hidden"
@@ -284,7 +288,11 @@
                                                     </x-admin::table.td>
 
                                                     <x-admin::table.td v-for="locale in allLocales">
-                                                        <p class="dark:text-white" v-text="element.params[locale.code]"></p>
+                                                        <p
+                                                            class="dark:text-white"
+                                                            v-text="element.params[locale.code]"
+                                                        >
+                                                        </p>
 
                                                         <input
                                                             type="hidden"
