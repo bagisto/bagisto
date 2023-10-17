@@ -49,7 +49,7 @@ class CustomerAddressRepository extends Repository
     {
         $address = $this->find($id);
 
-        $data['default_address'] = isset($data['default_address']) ? $data['default_address'] : $address->default_address;
+        $data['default_address'] = $data['default_address'] ?? $address->default_address;
 
         $default_address = $this
             ->findWhere(['customer_id' => $address->customer_id, 'default_address' => 1])
