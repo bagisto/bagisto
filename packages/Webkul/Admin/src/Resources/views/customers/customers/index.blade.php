@@ -38,7 +38,7 @@
                 <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
                     <div
                         class="flex gap-[10px] items-center select-none"
-                        v-for="(columnGroup, index) in [['full_name', 'email', 'phone'], ['status', 'gender', 'group'], ['total_base_grand_total', 'order_count', 'address_count']]"
+                        v-for="(columnGroup, index) in [['full_name', 'email', 'phone'], ['status', 'gender', 'group'], ['revenue', 'order_count', 'address_count']]"
                     >
                         @if ($hasPermission)
                             <label
@@ -185,7 +185,7 @@
                         <div class="flex flex-col gap-[6px]">
                             <p
                                 class="text-[16px] text-gray-800 dark:text-white font-semibold"
-                                v-text="$admin.formatPrice(record.total_base_grand_total)"
+                                v-text="$admin.formatPrice(record.revenue)"
                             >
                             </p>
 
