@@ -8,14 +8,14 @@
                     </h2>
                 </div>
             </x-slot:header>
-        
+
             <x-slot:content>
-                <v-form 
-                    @submit.preventDefault 
+                <v-form
+                    @submit.preventDefault
                     v-slot="{ meta, errors }"
                 >
                     <div class="grid gap-[20px] grid-cols-2 mt-[30px] max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-[15px]">
-                        <div 
+                        <div
                             class="relative max-w-[414px] p-[0px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap select-none cursor-pointer"
                             v-for="(address, index) in addresses"
                         >
@@ -32,20 +32,20 @@
                                 @change="resetPaymentAndShippingMethod"
                             />
 
-                            <label 
+                            <label
                                 class="icon-radio-unselect absolute ltr:right-[20px] rtl:left-[20px] top-[20px] text-[24px] text-navyBlue peer-checked:icon-radio-select cursor-pointer"
                                 :for="'billing_address_id_' + address.id"
                             >
                             </label>
 
-                            <label 
+                            <label
                                 :for="'billing_address_id_' + address.id"
                                 class="block p-[20px] rounded-[12px] cursor-pointer"
                             >
                                 <div class="flex justify-between items-center">
                                     <p class="text-[16px] font-medium">
                                         @{{ address.first_name }} @{{ address.last_name }}
-                                        
+
                                         <span v-if="address.company_name">(@{{ address.company_name }})</span>
                                     </p>
                                 </div>
@@ -63,14 +63,14 @@
                                         @{{ address.address2 }},
                                     </template>
 
-                                    @{{ address.city }}, 
-                                    @{{ address.state }}, @{{ address.country }}, 
+                                    @{{ address.city }},
+                                    @{{ address.state }}, @{{ address.country }},
                                     @{{ address.postcode }}
                                 </p>
                             </label>
                         </div>
 
-                        <div 
+                        <div
                             class="flex justify-center items-center max-w-[414px] p-[20px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap"
                             @click="showNewBillingAddressForm"
                         >
@@ -96,14 +96,14 @@
                             class="hidden peer"
                             v-model="forms.billing.isUsedForShipping"
                         />
-                
-                        <label 
+
+                        <label
                             class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
                             for="isUsedForShipping"
                         >
                         </label>
-                        
-                        <label 
+
+                        <label
                             for="isUsedForShipping"
                             class="cursor-pointer"
                         >
@@ -136,7 +136,7 @@
                                 </button>
                             </div>
                         </div>
-                    </template> 
+                    </template>
                 </v-form>
             </x-slot:content>
         </x-shop::accordion>
@@ -151,12 +151,12 @@
                     </h2>
                 </div>
             </x-slot:header>
-        
+
             <x-slot:content>
                 <div>
-                    <a 
+                    <a
                         class="flex justify-end"
-                        href="javascript:void(0)" 
+                        href="javascript:void(0)"
                         v-if="addresses.length > 0"
                         @click="forms.billing.isNew = ! forms.billing.isNew"
                     >
@@ -176,7 +176,7 @@
                             <x-shop::form.control-group.label>
                                 @lang('shop::app.checkout.onepage.addresses.billing.company-name')
                             </x-shop::form.control-group.label>
-                
+
                             <x-shop::form.control-group.control
                                 type="text"
                                 name="billing[company_name]"
@@ -185,20 +185,20 @@
                                 v-model="forms.billing.address.company_name"
                             >
                             </x-shop::form.control-group.control>
-    
+
                             <x-shop::form.control-group.error
                                 control-name="billing[company_name]"
                             >
                             </x-shop::form.control-group.error>
                         </x-shop::form.control-group>
-    
+
 
                         <div class="grid grid-cols-2 gap-x-[20px]">
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="!mt-[0px] required">
                                     @lang('shop::app.checkout.onepage.addresses.billing.first-name')
                                 </x-shop::form.control-group.label>
-        
+
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="billing[first_name]"
@@ -208,7 +208,7 @@
                                     v-model="forms.billing.address.first_name"
                                 >
                                 </x-shop::form.control-group.control>
-        
+
                                 <x-shop::form.control-group.error
                                     control-name="billing[first_name]"
                                 >
@@ -219,7 +219,7 @@
                                 <x-shop::form.control-group.label class="!mt-[0px] required">
                                     @lang('shop::app.checkout.onepage.addresses.billing.last-name')
                                 </x-shop::form.control-group.label>
-        
+
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="billing[last_name]"
@@ -229,19 +229,19 @@
                                     v-model="forms.billing.address.last_name"
                                 >
                                 </x-shop::form.control-group.control>
-        
+
                                 <x-shop::form.control-group.error
                                     control-name="billing[last_name]"
                                 >
                                 </x-shop::form.control-group.error>
                             </x-shop::form.control-group>
                         </div>
-    
+
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label class="!mt-[0px] required">
                                 @lang('shop::app.checkout.onepage.addresses.billing.email')
                             </x-shop::form.control-group.label>
-    
+
                             <x-shop::form.control-group.control
                                 type="email"
                                 name="billing[email]"
@@ -251,18 +251,18 @@
                                 v-model="forms.billing.address.email"
                             >
                             </x-shop::form.control-group.control>
-    
+
                             <x-shop::form.control-group.error
                                 control-name="billing[email]"
                             >
                             </x-shop::form.control-group.error>
                         </x-shop::form.control-group>
-    
+
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label class="!mt-[0px] required">
                                 @lang('shop::app.checkout.onepage.addresses.billing.street-address')
                             </x-shop::form.control-group.label>
-    
+
                             <x-shop::form.control-group.control
                                 type="text"
                                 name="billing[address1][]"
@@ -292,7 +292,7 @@
                                 @endfor
                             @endif
                         </x-shop::form.control-group>
-    
+
 
                         <div class="grid grid-cols-2 gap-x-[20px]">
                             <x-shop::form.control-group
@@ -301,7 +301,7 @@
                                 <x-shop::form.control-group.label class="!mt-[0px] required">
                                     @lang('shop::app.checkout.onepage.addresses.billing.country')
                                 </x-shop::form.control-group.label>
-        
+
                                 <x-shop::form.control-group.control
                                     type="select"
                                     name="billing[country]"
@@ -318,18 +318,18 @@
                                     >
                                     </option>
                                 </x-shop::form.control-group.control>
-        
+
                                 <x-shop::form.control-group.error
                                     control-name="billing[country]"
                                 >
                                 </x-shop::form.control-group.error>
                             </x-shop::form.control-group>
-    
+
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="!mt-[0px] required">
                                     @lang('shop::app.checkout.onepage.addresses.billing.state')
                                 </x-shop::form.control-group.label>
-        
+
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="billing[state]"
@@ -353,27 +353,27 @@
                                 >
                                     <option value="">@lang('shop::app.checkout.onepage.addresses.billing.select-state')</option>
 
-                                    <option 
-                                        v-for='(state, index) in states[forms.billing.address.country]' 
-                                        :value="state.code" 
+                                    <option
+                                        v-for='(state, index) in states[forms.billing.address.country]'
+                                        :value="state.code"
                                     >
                                         @{{ state.default_name }}
                                     </option>
                                 </x-shop::form.control-group.control>
-        
+
                                 <x-shop::form.control-group.error
                                     control-name="billing[state]"
                                 >
                                 </x-shop::form.control-group.error>
                             </x-shop::form.control-group>
                         </div>
-    
+
                         <div class="grid grid-cols-2 gap-x-[20px]">
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="!mt-[0px] required">
                                     @lang('shop::app.checkout.onepage.addresses.billing.city')
                                 </x-shop::form.control-group.label>
-    
+
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="billing[city]"
@@ -383,28 +383,28 @@
                                     v-model="forms.billing.address.city"
                                 >
                                 </x-shop::form.control-group.control>
-    
+
                                 <x-shop::form.control-group.error
                                     control-name="billing[city]"
                                 >
                                 </x-shop::form.control-group.error>
                             </x-shop::form.control-group>
-        
+
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="!mt-[0px] required">
                                     @lang('shop::app.checkout.onepage.addresses.billing.postcode')
                                 </x-shop::form.control-group.label>
-        
+
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="billing[postcode]"
-                                    rules="required"
+                                    rules="required|integer"
                                     :label="trans('shop::app.checkout.onepage.addresses.billing.postcode')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.billing.postcode')"
                                     v-model="forms.billing.address.postcode"
                                 >
                                 </x-shop::form.control-group.control>
-        
+
                                 <x-shop::form.control-group.error
                                     control-name="billing[postcode]"
                                 >
@@ -416,8 +416,8 @@
                             <x-shop::form.control-group.label class="!mt-[0px] required">
                                 @lang('shop::app.checkout.onepage.addresses.billing.telephone')
                             </x-shop::form.control-group.label>
-    
-                            
+
+
                             <x-shop::form.control-group.control
                                 type="text"
                                 name="billing[phone]"
@@ -427,7 +427,7 @@
                                 v-model="forms.billing.address.phone"
                             >
                             </x-shop::form.control-group.control>
-    
+
                             <x-shop::form.control-group.error
                                 control-name="billing[phone]"
                             >
@@ -438,7 +438,7 @@
                             <div class="grid gap-[10px]">
                                 @auth('customer')
                                     <div class="select-none flex gap-x-[15px]">
-                                        <input 
+                                        <input
                                             type="checkbox"
                                             name="billing[default_address]"
                                             id="billing[default_address]"
