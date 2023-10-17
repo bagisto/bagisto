@@ -36,7 +36,7 @@ class AddressRequest extends FormRequest
             'country'      => [new AlphaNumericSpace],
             'state'        => [new AlphaNumericSpace],
             'city'         => ['required', 'string'],
-            'postcode'     => ['required', 'numeric'],
+            'postcode'     => ['required','regex:/^[A-Za-z0-9\-]+$/'],
             'phone'        => ['required', new PhoneNumber],
             'vat_id'       => [new VatIdRule()],
         ];
