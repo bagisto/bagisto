@@ -514,6 +514,36 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Reporting
+    |--------------------------------------------------------------------------
+    |
+    | All Reporting related to reporting will be placed here.
+    |
+    */
+    [
+        'key'   => 'reporting',
+        'name'  => 'admin::app.acl.reporting',
+        'route' => 'admin.reporting.sales.index',
+        'sort'  => 6,
+    ], [
+        'key'   => 'reporting.sales',
+        'name'  => 'admin::app.acl.sales',
+        'route' => 'admin.reporting.sales.index',
+        'sort'  => 1,
+    ], [
+        'key'   => 'reporting.customers',
+        'name'  => 'admin::app.acl.customers',
+        'route' => 'admin.reporting.customers.index',
+        'sort'  => 2,
+    ], [
+        'key'   => 'reporting.catalog',
+        'name'  => 'admin::app.acl.catalog',
+        'route' => 'admin.reporting.catalog.index',
+        'sort'  => 3,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | CMS
     |--------------------------------------------------------------------------
     |
