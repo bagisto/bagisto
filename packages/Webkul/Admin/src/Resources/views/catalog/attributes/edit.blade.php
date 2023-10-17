@@ -261,8 +261,8 @@
                                                     <x-admin::table.td v-if="showSwatch && (swatchType == 'color' || swatchType == 'image')">
                                                         <!-- Swatch Image -->
                                                         <div v-if="swatchType == 'image'">
-                                                            <img 
-                                                                :src="element.swatch_value_url"
+                                                            <img
+                                                                :src="element.swatch_value_url || '{{ bagisto_asset('images/product-placeholders/front.svg') }}'"
                                                                 :ref="'image_' + element.id"
                                                                 class="h-[50px] w-[50px]"
                                                             >
@@ -1097,6 +1097,7 @@
                     },
 
                     setFile(event) {
+                        console.log(event);
                         let dataTransfer = new DataTransfer();
 
                         dataTransfer.items.add(event.swatch_value);
