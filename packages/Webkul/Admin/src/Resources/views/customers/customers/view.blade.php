@@ -379,7 +379,11 @@
                                     </p>
                                 </div>
 
-                                <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
+                                <a 
+                                    href="{{ route('admin.catalog.products.edit', $review->product->id) }}"
+                                    class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
+                                >
+                                </a>
                             </div>
                         </div>
 

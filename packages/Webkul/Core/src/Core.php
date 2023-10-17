@@ -79,7 +79,7 @@ class Core
      *
      * @var array
      */
-    protected $taxCategoriesById;
+    protected $taxCategoriesById = [];
 
     /**
      * Stores singleton instances

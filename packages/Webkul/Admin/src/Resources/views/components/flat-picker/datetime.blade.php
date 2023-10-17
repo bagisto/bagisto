@@ -4,7 +4,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-datetime-picker-template">
-        <span class="relative">
+        <span class="w-full relative inline-block">
             <slot></slot>
 
             <i class="icon-calendar text-[24px] text-gray-400 absolute ltr:right-[8px] rtl:left-[8px] top-[50%] -translate-y-[50%]"></i>

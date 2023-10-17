@@ -841,7 +841,7 @@ abstract class AbstractType
             ? $this->product->parent->tax_category_id
             : $this->product->tax_category_id;
 
-        core()->getTaxCategoryById($taxCategoryId);
+        return core()->getTaxCategoryById($taxCategoryId);
     }
 
     /**

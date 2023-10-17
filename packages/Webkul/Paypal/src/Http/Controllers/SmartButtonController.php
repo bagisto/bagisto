@@ -4,25 +4,21 @@ namespace Webkul\Paypal\Http\Controllers;
 
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Paypal\Payment\SmartButton;
-use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
+use Webkul\Sales\Repositories\OrderRepository;
 
 class SmartButtonController extends Controller
 {
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Paypal\Payment\SmartButton  $smartButton
-     * @param  \Webkul\Attribute\Repositories\OrderRepository  $orderRepository
-     * @param  \Webkul\Sales\Repositories\InvoiceRepository  $invoiceRepository
      * @return void
      */
     public function __construct(
         protected SmartButton $smartButton,
         protected OrderRepository $orderRepository,
         protected InvoiceRepository $invoiceRepository
-    )
-    {
+    ) {
     }
 
     /**
@@ -48,6 +44,7 @@ class SmartButtonController extends Controller
     {
         try {
             $this->smartButton->captureOrder(request()->input('orderData.orderID'));
+
             return $this->saveOrder();
         } catch (\Exception $e) {
             return response()->json(json_decode($e->getMessage()), 400);
@@ -84,18 +81,10 @@ class SmartButtonController extends Controller
                 ],
 
                 'email_address' => $cart->billing_address->email,
-
-                'phone' => [
-                    'phone_type'   => 'MOBILE',
-
-                    'phone_number' => [
-                        'national_number' => $this->smartButton->formatPhone($cart->billing_address->phone),
-                    ],
-                ],
             ],
 
             'application_context' => [
-                'shipping_preference' => 'SET_PROVIDED_ADDRESS',
+                'shipping_preference' => 'NO_SHIPPING',
             ],
 
             'purchase_units' => [
@@ -129,13 +118,25 @@ class SmartButtonController extends Controller
 
                     'items'    => $this->getLineItems($cart),
                 ],
-            ]
+            ],
         ];
+
+        if (! empty($cart->billing_address->phone)) {
+            $data['payer']['phone'] = [
+                'phone_type'   => 'MOBILE',
+
+                'phone_number' => [
+                    'national_number' => $this->smartButton->formatPhone($cart->billing_address->phone),
+                ],
+            ];
+        }
 
         if (
             $cart->haveStockableItems()
             && $cart->shipping_address
         ) {
+            $data['application_context']['shipping_preference'] = 'SET_PROVIDED_ADDRESS';
+
             $data['purchase_units'][0] = array_merge($data['purchase_units'][0], [
                 'shipping' => [
                     'address' => [
@@ -246,7 +247,7 @@ class SmartButtonController extends Controller
      */
     protected function prepareInvoiceData($order)
     {
-        $invoiceData = ["order_id" => $order->id,];
+        $invoiceData = ['order_id' => $order->id];
 
         foreach ($order->items as $item) {
             $invoiceData['invoice']['items'][$item->id] = $item->qty_to_invoice;

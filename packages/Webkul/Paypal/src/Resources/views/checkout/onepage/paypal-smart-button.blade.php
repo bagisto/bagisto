@@ -1,12 +1,16 @@
 @if (
     request()->routeIs('shop.checkout.onepage.index')
     && (bool) core()->getConfigData('sales.payment_methods.paypal_smart_button.active')
-    && $clientId = core()->getConfigData('sales.payment_methods.paypal_smart_button.client_id')
-    && $acceptedCurrency = core()->getConfigData('sales.payment_methods.paypal_smart_button.accepted_currencies')
 )
+    @php
+        $clientId = core()->getConfigData('sales.payment_methods.paypal_smart_button.client_id');
+
+        $acceptedCurrency = core()->getConfigData('sales.payment_methods.paypal_smart_button.accepted_currencies');
+    @endphp
+
     @pushOnce('scripts')
-        <script 
-            src="https://www.paypal.com/sdk/js?client-id={{ $clientId }}&currency={{ $acceptedCurrency }}" 
+        <script
+            src="https://www.paypal.com/sdk/js?client-id={{ $clientId }}&currency={{ $acceptedCurrency }}"
             data-partner-attribution-id="Bagisto_Cart"
         >
         </script>
@@ -40,15 +44,15 @@
                                 layout:  'vertical',
                                 shape:   'rect',
                             },
-    
+
                             authorizationFailed: false,
-    
+
                             enableStandardCardFields: false,
-    
+
                             alertBox: (message) => {
                                 this.$emitter.emit('add-flash', { type: 'error', message: message });
                             },
-    
+
                             createOrder: (data, actions) => {
                                 return this.$axios.get("{{ route('paypal.smart-button.create-order') }}")
                                     .then(response => response.data.result)
@@ -56,14 +60,14 @@
                                     .catch(error => {
                                         if (error.response.data.error === 'invalid_client') {
                                             options.authorizationFailed = true;
-                                            
+
                                             options.alertBox('@lang('Something went wrong.')');
                                         }
-    
+
                                         return error;
                                     });
                             },
-    
+
                             onApprove: (data, actions) => {
                                 this.$axios.post("{{ route('paypal.smart-button.capture-order') }}", {
                                     _token: "{{ csrf_token() }}",
@@ -80,7 +84,7 @@
                                 })
                                 .catch(error => window.location.href = "{{ route('shop.checkout.cart.index') }}");
                             },
-    
+
                             onError: (error) => {
                                 if (! options.authorizationFailed) {
                                     options.alertBox('@lang('Something went wrong.')');

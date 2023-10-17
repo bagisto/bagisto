@@ -59,7 +59,7 @@ class ReviewDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => false,
             'filterable' => false,
-            'sortable'   => false,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -120,9 +120,9 @@ class ReviewDataGrid extends DataGrid
             'index'      => 'comment',
             'label'      => trans('admin::app.customers.reviews.index.datagrid.comment'),
             'type'       => 'string',
-            'searchable' => true,
-            'filterable' => true,
-            'sortable'   => true,
+            'searchable' => false,
+            'filterable' => false,
+            'sortable'   => false,
         ]);
 
         $this->addColumn([
