@@ -1,16 +1,16 @@
-{{-- Total Customer Vue Component --}}
+{{-- Product Added to Wishlist Vue Component --}}
 <v-reporting-products-wishlist-products>
     <x-admin::shimmer.reporting.graph/> 
 </v-reporting-products-wishlist-products>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-reporting-products-wishlist-products-template">
-        <!-- Total Customer Section -->
+        <!-- Product Added to Wishlist Section -->
         <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
             <!-- Header -->
             <div class="flex items-center justify-between mb-[16px]">
                 <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
-                    @lang('admin::app.reporting.products.index.sold-products-quantity')
+                    @lang('admin::app.reporting.products.index.products-added-to-wishlist')
                 </p>
 
                 <a

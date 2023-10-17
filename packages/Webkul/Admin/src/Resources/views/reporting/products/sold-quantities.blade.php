@@ -1,11 +1,11 @@
-{{-- Total Customer Vue Component --}}
+{{-- Sold Products Quantity Vue Component --}}
 <v-reporting-products-total-sold-quantity>
     <x-admin::shimmer.reporting.graph/> 
 </v-reporting-products-total-sold-quantity>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-reporting-products-total-sold-quantity-template">
-        <!-- Total Customer Section -->
+        <!-- Sold Products Quantity Section -->
         <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
             <!-- Header -->
             <div class="flex items-center justify-between mb-[16px]">

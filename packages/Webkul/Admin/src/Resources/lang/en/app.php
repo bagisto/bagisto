@@ -2672,6 +2672,7 @@ return [
                 'view-details'         => 'View Details',
                 'sold-products-quantity' => 'Sold Products Quantity',
                 'quantities-sold-over-time' => 'Quantities Sold Over Time',
+                'products-added-to-wishlist' => 'Products Added To Wishlist',
                 'products-added-over-time' => 'Products Added Over Time',
                 'top-selling-by-quantity' => 'Top Selling Products By Quantity',
                 'top-selling-by-revenue' => 'Top Selling Products By Revenue',

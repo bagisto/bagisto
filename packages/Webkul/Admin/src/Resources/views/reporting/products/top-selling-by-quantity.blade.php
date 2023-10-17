@@ -1,11 +1,11 @@
-{{-- Customers with Most Orders Vue Component --}}
+{{-- Top Selling Products By Quantity Vue Component --}}
 <v-reporting-product-top-selling-by-quantity>
     <x-admin::shimmer.reporting.progress-bar/>
 </v-reporting-product-top-selling-by-quantity>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-reporting-product-top-selling-by-quantity-template">
-        <!-- Customers with Most Orders Section -->
+        <!-- Top Selling Products By Quantity Section -->
         <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
             <!-- Header -->
             <div class="flex items-center justify-between mb-[16px]">
@@ -28,7 +28,7 @@
             <template v-else>
                 <!-- Content -->
                 <div class="grid gap-[16px]">
-                    <!-- Customers with Most Orders -->
+                    <!-- Top Selling Products By Quantity -->
                     <template v-if="report.statistics">
                         <!-- Customers -->
                         <div class="grid gap-[27px]">
