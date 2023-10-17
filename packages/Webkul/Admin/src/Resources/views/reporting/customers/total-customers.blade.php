@@ -36,7 +36,7 @@
                         <div class="flex gap-[2px] items-center">
                             <span
                                 class="text-[16px] text-emerald-500"
-                                :class="[report.statistics.customers.progress < 0 ? 'icon-down-stat text-red-500' : 'icon-up-stat text-emerald-500']"
+                                :class="[report.statistics.customers.progress < 0 ? 'icon-down-stat text-red-500 dark:!text-red-500' : 'icon-up-stat text-emerald-500 dark:!text-emerald-500']"
                             ></span>
 
                             <p
