@@ -259,7 +259,7 @@
                     <div class="flex px-[16px] py-[10px] justify-end items-center">
                         <div 
                             class="{{ $hasRequirement ? 'opacity-50 cursor-not-allowed' : ''}} px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer {{ $hasRequirement ?: 'hover:opacity-90' }}"
-                            @click="FormSubmit"
+                            @click="nextForm"
                         >
                             Continue
                         </div>
@@ -277,7 +277,7 @@
                         ref="envSetup"
                     >
                         <form
-                            @submit.prevent="handleSubmit($event, FormSubmit)"
+                            @submit.prevent="handleSubmit($event, nextForm)"
                             enctype="multipart/form-data"
                         >
                             <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
@@ -649,61 +649,72 @@
                     class="w-full max-w-[568px] bg-white rounded-[8px] shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)] border-[1px] border-gray-300"
                     v-if="currentStep == 'readyForInstallation'"
                 >
-                    <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
-                        <p class="text-[20px] text-gray-800 font-bold">
-                            Installation
-                        </p>
-                    </div>
+                    <x-installer::form
+                        v-slot="{ meta, errors, handleSubmit }"
+                        as="div"
+                        ref="envDatabase"
+                    >
+                        <form
+                            @submit.prevent="handleSubmit($event, FormSubmit)"
+                            enctype="multipart/form-data"
+                        >
+                            <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
+                                <p class="text-[20px] text-gray-800 font-bold">
+                                    Installation
+                                </p>
+                            </div>
 
-                    <div class="flex flex-col gap-[15px] justify-center px-[30px] py-[16px] border-b-[1px] border-gray-300 h-[484px] overflow-y-auto">
-                        <div class="flex flex-col gap-[16px]">
-                            <p class="text-[18px] text-gray-800 font-semibold">
-                                Bagisto for Installation
-                            </p>
+                            <div class="flex flex-col gap-[15px] justify-center px-[30px] py-[16px] border-b-[1px] border-gray-300 h-[484px] overflow-y-auto">
+                                <div class="flex flex-col gap-[16px]">
+                                    <p class="text-[18px] text-gray-800 font-semibold">
+                                        Bagisto for Installation
+                                    </p>
 
-                            <div class="grid gap-[10px]">
-                                <label class="text-[14px] text-gray-600">
-                                    Click the button below to
-                                </label>
+                                    <div class="grid gap-[10px]">
+                                        <label class="text-[14px] text-gray-600">
+                                            Click the button below to
+                                        </label>
 
-                                <div class="grid gap-[12px]">
-                                    <div class="flex gap-[4px] text-[14px] text-gray-600">
-                                        <span class="icon-processing text-[20px]"></span>
+                                        <div class="grid gap-[12px]">
+                                            <div class="flex gap-[4px] text-[14px] text-gray-600">
+                                                <span class="icon-processing text-[20px]"></span>
 
-                                        <p>Create the database table</p>
-                                    </div>
+                                                <p>Create the database table</p>
+                                            </div>
 
-                                    <div class="flex gap-[4px] text-[14px] text-gray-600">
-                                        <span class="icon-processing text-[20px]"></span>
+                                            <div class="flex gap-[4px] text-[14px] text-gray-600">
+                                                <span class="icon-processing text-[20px]"></span>
 
-                                        <p>Populate the database tables</p>
-                                    </div>
+                                                <p>Populate the database tables</p>
+                                            </div>
 
-                                    <div class="flex gap-[4px] text-[14px] text-gray-600">
-                                        <span class="icon-processing text-[20px]"></span>
+                                            <div class="flex gap-[4px] text-[14px] text-gray-600">
+                                                <span class="icon-processing text-[20px]"></span>
 
-                                        <p>Publishing the vendor files</p>
+                                                <p>Publishing the vendor files</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="flex px-[16px] py-[10px] justify-between items-center">
-                        <div
-                            class="text-[12px] text-blue-600 font-semibold cursor-pointer"
-                            @click="back"
-                        >
-                            Back
-                        </div>
+                            <div class="flex px-[16px] py-[10px] justify-between items-center">
+                                <div
+                                    class="text-[12px] text-blue-600 font-semibold cursor-pointer"
+                                    @click="back"
+                                >
+                                    Back
+                                </div>
 
-                        <div
-                            class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
-                            @click="FormSubmit"
-                        >
-                            Start Installation
-                        </div>
-                    </div>
+                                <button
+                                    type="submit"
+                                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
+                                >
+                                    Start Installation
+                                </button>
+                            </div>
+                        </form>
+                    </x-installer::form>
                 </div>
 
                 <!-- Installation Processing -->
@@ -770,7 +781,7 @@
                         <button 
                             type="submit"
                             class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
-                            @click="FormSubmit"
+                            @click="nextForm"
                         >
                             Continue
                         </button>
@@ -1169,61 +1180,31 @@
                     },
 
                     methods: {
-                        FormSubmit(params, setErrors) {
-                            let stepActions = {
-                                environment: () => {
-                                    this.stepStates.environment = 'complete';
-
-                                    this.currentStep = 'envSetup';
-
-                                    this.stepStates.envSetup = 'active';
-                                },
-
-                                envSetup: () => {
-                                    this.envData = { ...params };
-
-                                    this.currentStep = 'envDatabase';
-                                },
-
+                        FormSubmit(params, { setErrors }) {
+                            const stepActions = {
                                 envDatabase: () => {
                                     if (params.db_connection === 'mysql') {
-                                        this.stepStates.envSetup = 'complete';
-    
+                                        this.completeStep('envSetup', 'readyForInstallation', 'envSetup', 'active', setErrors);
+
                                         this.envData = { ...this.envData, ...params };
-                                        
-                                        this.currentStep = 'readyForInstallation';
-    
-                                        this.stepStates.readyForInstallation = 'active';
                                     } else {
-                                        setErrors({
-                                            'db_connection': ["@lang('Bagisto currently supports MySQL only.')"]
-                                        });
+                                        setErrors({ 'db_connection': ["Bagisto currently supports MySQL only."] });
                                     }
                                 },
 
-                                readyForInstallation: () => {
+                                readyForInstallation: (setErrors) => {
                                     this.currentStep = 'installProgress';
-                                    
-                                    this.complete();
-                                },
-                                
-                                installationLog: () => {
-                                    this.stepStates.readyForInstallation = 'complete';
 
-                                    this.currentStep = 'createAdmin';
-                                    
-                                    this.stepStates.createAdmin = 'active';
+                                    this.startInstallation(setErrors);
                                 },
 
-                                createAdmin: () => {
-                                    this.stepStates.createAdmin = 'complete';
+                                createAdmin: (setErrors) => {
+                                    this.completeStep('createAdmin', 'emailConfiguration', 'active', 'complete', setErrors);
 
-                                    this.saveAdmin(params);
-
-                                    this.stepStates.emailConfiguration = 'active';
+                                    this.saveAdmin(params, setErrors);
                                 },
 
-                                emailConfiguration: () => {
+                                emailConfiguration: (setErrors) => {
                                     this.saveSmtp(params);
 
                                     this.stepStates.emailConfiguration = 'complete';
@@ -1237,15 +1218,45 @@
                             }
                         },
 
-                        complete() {
+                        nextForm(params) {
+                            const stepActions = {
+                                environment: () => {
+                                    this.completeStep('environment', 'envSetup', 'active', 'complete');
+                                },
+
+                                envSetup: () => {
+                                    this.envData = { ...params };
+
+                                    this.currentStep = 'envDatabase';
+                                },
+
+                                installationLog: () => {
+                                    this.completeStep('readyForInstallation', 'createAdmin', 'active', 'complete');
+                                },
+                            };
+
+                            const index = this.steps.find(step => step === this.currentStep);
+
+                            if (stepActions[index]) {
+                                stepActions[index]();
+                            }
+                        },
+
+                        completeStep(fromStep, toStep, toState, nextState, setErrors) {
+                            this.stepStates[fromStep] = nextState;
+
+                            this.currentStep = toStep;
+
+                            this.stepStates[toStep] = toState;
+                        },
+
+                        startInstallation(setErrors) {
                             this.$axios.post("{{ route('installer.envFileSetup') }}", this.envData)
                                 .then((response) => {
-                                    this.runMigartion();
+                                    this.runMigartion(setErrors);
                                 })
                                 .catch(error => {
-                                    if (error.response.status == 422) {
-                                        setErrors(error.response.data.errors);
-                                    }
+                                    setErrors(error.response.data.errors);
                                 });
                         },
 
@@ -1259,7 +1270,7 @@
                                 .catch(error => {
                                     this.currentStep = 'envDatabase';
 
-                                    setErrors(error.response.data.errors);
+                                    alert(error.response.data.error);
                                 });
                         },
 

@@ -51,7 +51,7 @@ class InstallerController extends Controller
     }
 
     public function runMigration()
-    {        
+    {
         $migration = $this->databaseManager->migration();
 
         return $migration;
