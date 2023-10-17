@@ -724,7 +724,7 @@
     
                                     <!-- Total Orders -->
                                     <p class="text-[12px] text-gray-400 font-semibold text-right dark:text-white">
-                                        @{{ "@lang('admin::app.dashboard.index.unique-visitors')".replace(':count', statistics.visitors.unique_?.current ?? 0) }}
+                                        @{{ "@lang('admin::app.dashboard.index.unique-visitors')".replace(':count', statistics.visitors.unique?.current ?? 0) }}
                                     </p>
                                 </div>
                             </div>

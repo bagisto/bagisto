@@ -173,7 +173,7 @@ class Product extends AbstractReporting
      * 
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getTopProductsByRevenue(): collection
+    public function getTopSellingProductsByRevenue(): collection
     {
         $products = $this->orderItemRepository
             ->with(['product', 'product.images'])
@@ -200,7 +200,7 @@ class Product extends AbstractReporting
      * 
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getTopProductsByQuantity(): collection
+    public function getTopSellingProductsByQuantity(): collection
     {
         $products = $this->orderItemRepository
             ->with(['product', 'product.images'])

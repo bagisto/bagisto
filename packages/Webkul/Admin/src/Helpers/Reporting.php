@@ -393,33 +393,13 @@ class Reporting
     public function getTotalSoldQuantitiesStats(): array
     {
         return [
-            'sales'     => $this->productReporting->getTotalSoldQuantitiesProgress(),
+            'quantities' => $this->productReporting->getTotalSoldQuantitiesProgress(),
 
-            'over_time' => [
+            'over_time'  => [
                 'previous' => $this->productReporting->getPreviousTotalSoldQuantitiesOverTime(),
                 'current'  => $this->productReporting->getCurrentTotalSoldQuantitiesOverTime(),
             ],
         ];
-    }
-
-    /**
-     * Returns top selling products by revenue statistics.
-     * 
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public function getTopProductsByRevenue(): Collection
-    {
-        return $this->productReporting->getTopProductsByRevenue();
-    }
-
-    /**
-     * Returns top selling products by quantity statistics.
-     * 
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public function getTopProductsByQuantity(): Collection
-    {
-        return $this->productReporting->getTopProductsByQuantity();
     }
 
     /**
@@ -430,13 +410,59 @@ class Reporting
     public function getTotalProductsAddedToWishlistStats(): array
     {
         return [
-            'sales'     => $this->productReporting->getTotalProductsAddedToWishlistProgress(),
+            'wishlist'  => $this->productReporting->getTotalProductsAddedToWishlistProgress(),
 
             'over_time' => [
                 'previous' => $this->productReporting->getPreviousTotalProductsAddedToWishlistOverTime(),
                 'current'  => $this->productReporting->getCurrentTotalProductsAddedToWishlistOverTime(),
             ],
         ];
+    }
+
+    /**
+     * Returns top selling products by revenue statistics.
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getTopSellingProductsByRevenue(): Collection
+    {
+        $totalSales = $this->saleReporting->getTotalSalesProgress();
+
+        $products = $this->productReporting->getTopSellingProductsByRevenue();
+
+        $products->map(function($product) use($totalSales) {
+            if (! $totalSales['current']) {
+                $product->progress = 0;
+            } else {
+                $product->progress = ($product->revenue * 100) / $totalSales['current'];
+            }
+
+            $product->formatted_revenue = core()->formatBasePrice($product->revenue);
+        });
+
+        return $products;
+    }
+
+    /**
+     * Returns top selling products by quantity statistics.
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getTopSellingProductsByQuantity(): Collection
+    {
+        $totalSoldQuantities = $this->productReporting->getTotalSoldQuantitiesProgress();
+
+        $products = $this->productReporting->getTopSellingProductsByQuantity();
+
+        $products->map(function($product) use($totalSoldQuantities) {
+            if (! $totalSoldQuantities['current']) {
+                $product->progress = 0;
+            } else {
+                $product->progress = ($product->total_qty_ordered * 100) / $totalSoldQuantities['current'];
+            }
+        });
+
+        return $products;
     }
 
     /**
@@ -468,7 +494,7 @@ class Reporting
      */
     public function getProductsWithMostVisits(): Collection
     {
-        $totalVisits = $this->visitorReporting->getTotalVisitorsProgress();
+        $totalVisits = $this->visitorReporting->getTotalVisitorsProgress(ProductModel::class);
 
         $products = $this->visitorReporting->getVisitableWithMostVisits(ProductModel::class);
 

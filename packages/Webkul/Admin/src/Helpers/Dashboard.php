@@ -105,7 +105,7 @@ class Dashboard
      */
     public function getTopProducts(): Collection
     {
-        return $this->productReporting->getTopProductsByRevenue();
+        return $this->productReporting->getTopSellingProductsByRevenue();
     }
 
     /**

@@ -45,10 +45,9 @@ class Visitor extends AbstractReporting
     public function getTotalVisitors($startDate, $endDate, $visitableType = null): int
     {
         if ($visitableType) {
-            $this->visitRepository
-                ->whereNull('visitable_id')
+            return $this->visitRepository
+                ->where('visitable_type', $visitableType)
                 ->whereBetween('created_at', [$startDate, $endDate])
-                ->groupBy(DB::raw('CONCAT(ip, "-", visitor_id, "-", visitable_type)'))
                 ->get()
                 ->count();
         }
@@ -56,7 +55,6 @@ class Visitor extends AbstractReporting
         return $this->visitRepository
             ->whereNull('visitable_id')
             ->whereBetween('created_at', [$startDate, $endDate])
-            ->groupBy(DB::raw('CONCAT(ip, "-", visitor_id)'))
             ->get()
             ->count();
     }

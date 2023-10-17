@@ -24,6 +24,6 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('admin::reporting.catalog.index');
+        return view('admin::reporting.products.index');
     }
 }
