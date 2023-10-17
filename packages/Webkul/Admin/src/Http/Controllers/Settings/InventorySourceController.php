@@ -31,7 +31,7 @@ class InventorySourceController extends Controller
             return app(InventorySourcesDataGrid::class)->toJson();
         }
 
-        return view('admin::settings.inventory_sources.index');
+        return view('admin::settings.inventory-sources.index');
     }
 
     /**
@@ -41,7 +41,7 @@ class InventorySourceController extends Controller
      */
     public function create()
     {
-        return view('admin::settings.inventory_sources.create');
+        return view('admin::settings.inventory-sources.create');
     }
 
     /**
@@ -91,7 +91,7 @@ class InventorySourceController extends Controller
     {
         $inventorySource = $this->inventorySourceRepository->findOrFail($id);
 
-        return view('admin::settings.inventory_sources.edit', compact('inventorySource'));
+        return view('admin::settings.inventory-sources.edit', compact('inventorySource'));
     }
 
     /**
