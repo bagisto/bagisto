@@ -21,11 +21,11 @@
                     <!-- Total Visits -->
                     <div class="grid gap-[16px]">
                         <div class="grid gap-[2px]">
-                            <p class="text-[16px] text-gray-800 font-semibold">
+                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @{{ report.statistics.visitors.total }}
                             </p>
 
-                            <p class="text-[12px] text-gray-600 font-semibold">
+                            <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                 @lang('admin::app.reporting.sales.index.total-visits')
                             </p>
                         </div>
@@ -37,7 +37,7 @@
                             ></div>
                         </div>
 
-                        <p class="text-gray-600">
+                        <p class="text-gray-600 dark:text-gray-300">
                             @lang('admin::app.reporting.sales.index.total-visits-info')
                         </p>
                     </div>
@@ -45,11 +45,11 @@
                     <!-- Total Product Visits -->
                     <div class="grid gap-[16px]">
                         <div class="grid gap-[2px]">
-                            <p class="text-[16px] text-gray-800 font-semibold">
+                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @{{ report.statistics.product_visitors.total }}
                             </p>
 
-                            <p class="text-[12px] text-gray-600 font-semibold">
+                            <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                 @lang('admin::app.reporting.sales.index.product-views')
                             </p>
                         </div>
@@ -62,7 +62,7 @@
                         </div>
 
                         <p
-                            class="text-gray-600"
+                            class="text-gray-600 dark:text-gray-300"
                             v-html="'@lang('admin::app.reporting.sales.index.product-views-info')'.replace(':progress', '<span class=\'text-emerald-400 font-semibold\'>' + report.statistics.product_visitors.progress + '%</span>')"
                         ></p>
                     </div>
@@ -70,11 +70,11 @@
                     <!-- Total Added To Cart -->
                     <div class="grid gap-[16px]">
                         <div class="grid gap-[2px]">
-                            <p class="text-[16px] text-gray-800 font-semibold">
+                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @{{ report.statistics.carts.total }}
                             </p>
 
-                            <p class="text-[12px] text-gray-600 font-semibold">
+                            <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                 @lang('admin::app.reporting.sales.index.added-to-cart')
                             </p>
                         </div>
@@ -87,7 +87,7 @@
                         </div>
 
                         <p
-                            class="text-gray-600"
+                            class="text-gray-600 dark:text-gray-300"
                             v-html="'@lang('admin::app.reporting.sales.index.added-to-cart-info')'.replace(':progress', '<span class=\'text-emerald-400 font-semibold\'>' + report.statistics.carts.progress + '%</span>')"
                         ></p>
                     </div>
@@ -95,16 +95,16 @@
                     <!-- Total Purchased -->
                     <div class="grid gap-[16px]">
                         <div class="grid gap-[2px]">
-                            <p class="text-[16px] text-gray-800 font-semibold">
+                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @{{ report.statistics.orders.total }}
                             </p>
 
-                            <p class="text-[12px] text-gray-600 font-semibold">
+                            <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                                 @lang('admin::app.reporting.sales.index.purchased')
                             </p>
                         </div>
 
-                        <div class="w-full relative bg-slate-100 aspect-[0.5/1]">
+                        <div class="w-full relative bg-slate-100 dark:text-gray-300 aspect-[0.5/1]">
                             <div
                                 class="w-full absolute bottom-0 bg-emerald-400"
                                 :style="{ 'height': report.statistics.orders.progress + '%' }"
@@ -112,7 +112,7 @@
                         </div>
 
                         <p
-                            class="text-gray-600"
+                            class="text-gray-600 dark:text-gray-300"
                             v-html="'@lang('admin::app.reporting.sales.index.purchased-info')'.replace(':progress', '<span class=\'text-emerald-400 font-semibold\'>' + report.statistics.orders.progress + '%</span>')"
                         ></p>
                     </div>
@@ -123,7 +123,7 @@
                     <div class="flex gap-[4px] items-center">
                         <span class="w-[14px] h-[14px] rounded-[3px] bg-emerald-400"></span>
 
-                        <p class="text-[12px]">
+                        <p class="text-[12px] dark:text-gray-300">
                             @{{ report.date_range.current }}
                         </p>
                     </div>

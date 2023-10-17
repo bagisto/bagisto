@@ -126,7 +126,7 @@
                             class="grid"
                             v-for="product in report.statistics.products"
                         >
-                            <p>@{{ product.name }}</p>
+                            <p class="dark:text-white">@{{ product.name }}</p>
 
                             <div class="flex gap-[20px] items-center">
                                 <div class="w-full h-[8px] relative bg-slate-100">
@@ -136,7 +136,7 @@
                                     ></div>
                                 </div>
 
-                                <p class="text-[14px] text-gray-600 font-semibold">
+                                <p class="text-[14px] text-gray-600 dark:text-gray-300 font-semibold">
                                     @{{ product.count }}
                                 </p>
                             </div>
@@ -148,7 +148,7 @@
                         <div class="flex gap-[4px] items-center">
                             <span class="w-[14px] h-[14px] rounded-[3px] bg-blue-500"></span>
 
-                            <p class="text-[12px]">
+                            <p class="text-[12px] dark:text-gray-300">
                                 @{{ report.date_range.current }}
                             </p>
                         </div>

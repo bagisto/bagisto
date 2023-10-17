@@ -36,7 +36,7 @@
                                 class="grid"
                                 v-for="customer in report.statistics"
                             >
-                                <p>@{{ customer.group_name }}</p>
+                                <p class="dark:text-white">@{{ customer.group_name }}</p>
 
                                 <div class="flex gap-[20px] items-center">
                                     <div class="w-full h-[8px] relative bg-slate-100">
@@ -46,7 +46,7 @@
                                         ></div>
                                     </div>
 
-                                    <p class="text-[14px] text-gray-600 font-semibold">
+                                    <p class="text-[14px] text-gray-600 dark:text-gray-300 font-semibold">
                                         @{{ customer.total }}
                                     </p>
                                 </div>
@@ -59,7 +59,7 @@
                         <div class="flex gap-[4px] items-center">
                             <span class="w-[14px] h-[14px] rounded-[3px] bg-emerald-400"></span>
 
-                            <p class="text-[12px]">
+                            <p class="text-[12px] dark:text-gray-300">
                                 @{{ report.date_range.current }}
                             </p>
                         </div>
