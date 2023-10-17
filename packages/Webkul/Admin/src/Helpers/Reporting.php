@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
 use Webkul\Admin\Helpers\Reporting\Cart;
 use Webkul\Admin\Helpers\Reporting\Sale;
-use Webkul\Admin\Helpers\Reporting\Product;
+use Webkul\Admin\Helpers\Reporting\Catalog;
 use Webkul\Admin\Helpers\Reporting\Customer;
 use Webkul\Admin\Helpers\Reporting\Visitor;
 use Webkul\Product\Models\Product as ProductModel;
@@ -18,7 +18,7 @@ class Reporting
      * 
      * @param  \Webkul\Admin\Helpers\Reporting\Cart  $cartReporting
      * @param  \Webkul\Admin\Helpers\Reporting\Sale  $saleReporting
-     * @param  \Webkul\Admin\Helpers\Reporting\Product  $productReporting
+     * @param  \Webkul\Admin\Helpers\Reporting\Catalog  $catalogReporting
      * @param  \Webkul\Admin\Helpers\Reporting\Customer  $customerReporting
      * @param  \Webkul\Admin\Helpers\Reporting\Visitor  $visitorReporting
      * @return void
@@ -26,7 +26,7 @@ class Reporting
     public function __construct(
         protected Cart $cartReporting,
         protected Sale $saleReporting,
-        protected Product $productReporting,
+        protected Catalog $catalogReporting,
         protected Customer $customerReporting,
         protected Visitor $visitorReporting
     )

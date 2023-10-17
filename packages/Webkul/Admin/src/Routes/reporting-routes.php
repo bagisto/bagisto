@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Webkul\Admin\Http\Controllers\Reporting\CustomerController;
-use Webkul\Admin\Http\Controllers\Reporting\ProductController;
+use Webkul\Admin\Http\Controllers\Reporting\CatalogController;
 use Webkul\Admin\Http\Controllers\Reporting\SaleController;
 
 /**
@@ -20,10 +20,10 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         });
 
         /**
-         * Product routes.
+         * Catalog routes.
          */
-        Route::controller(ProductController::class)->prefix('products')->group(function () {
-            Route::get('', 'index')->name('admin.reporting.products.index');
+        Route::controller(CatalogController::class)->prefix('catalog')->group(function () {
+            Route::get('', 'index')->name('admin.reporting.catalog.index');
         });
 
         /**

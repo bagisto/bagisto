@@ -5,7 +5,7 @@ namespace Webkul\Admin\Http\Controllers\Reporting;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Helpers\Reporting;
 
-class ProductController extends Controller
+class CatalogController extends Controller
 {
     /**
      * Create a controller instance.
@@ -24,6 +24,6 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('admin::reporting.products.index');
+        return view('admin::reporting.catalog.index');
     }
 }

@@ -7,7 +7,7 @@ use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Sales\Repositories\OrderItemRepository;
 
-class Product extends AbstractReporting
+class Catalog extends AbstractReporting
 {
     /**
      * Create a helper instance.
