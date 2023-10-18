@@ -64,7 +64,7 @@ class AddressController extends Controller
             'country'      => ['required', new AlphaNumericSpace],
             'state'        => ['required', new AlphaNumericSpace],
             'city'         => ['required', 'string'],
-            'postcode'     => ['required', 'numeric'],
+            'postcode'     => ['required'],
             'phone'        => ['required', new PhoneNumber],
             'vat_id'       => [new VatIdRule()],
         ]);
@@ -125,7 +125,7 @@ class AddressController extends Controller
             'country'      => ['required', new AlphaNumericSpace],
             'state'        => ['required', new AlphaNumericSpace],
             'city'         => ['required', 'string'],
-            'postcode'     => ['required', 'numeric'],
+            'postcode'     => ['required'],
             'phone'        => ['required', new PhoneNumber],
             'vat_id'       => [new VatIdRule()],
         ]);
