@@ -6,7 +6,7 @@
         <div>
             <!-- Address Edit Button -->
             @if (bouncer()->hasPermission('customers.addresses.edit'))
-                <p 
+                <p
                     class="text-blue-600 cursor-pointer transition-all hover:underline"
                     @click="$refs.CustomerAddressEdit.toggle()"
                 >
@@ -16,7 +16,7 @@
 
             <x-admin::form
                 v-slot="{ meta, errors, handleSubmit }"
-                as="div"     
+                as="div"
             >
                 <x-admin::form.control-group class="mb-[10px]">
                     <x-admin::form.control-group.control
@@ -47,7 +47,7 @@
                             <!-- Modal Header -->
                             <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.customers.addresses.edit.title')
-                            </p>    
+                            </p>
                         </x-slot:header>
 
                         <x-slot:content>
@@ -81,7 +81,7 @@
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.customers.addresses.edit.vat-id')
                                         </x-admin::form.control-group.label>
-    
+
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="vat_id"
@@ -90,7 +90,7 @@
                                             :placeholder="trans('admin::app.customers.addresses.edit.vat-id')"
                                         >
                                         </x-admin::form.control-group.control>
-    
+
                                         <x-admin::form.control-group.error
                                             control-name="vat_id"
                                         >
@@ -126,7 +126,7 @@
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.customers.addresses.edit.last-name')
                                         </x-admin::form.control-group.label>
-    
+
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="last_name"
@@ -136,7 +136,7 @@
                                             :placeholder="trans('admin::app.customers.addresses.edit.last-name')"
                                         >
                                         </x-admin::form.control-group.control>
-    
+
                                         <x-admin::form.control-group.error
                                             control-name="last_name"
                                         >
@@ -196,7 +196,7 @@
                                             :placeholder="trans('admin::app.customers.addresses.edit.street-address')"
                                         >
                                         </x-admin::form.control-group.control>
-                                
+
                                         <x-admin::form.control-group.error
                                             ::control-name="'address1[' + index + ']'"
                                         >
@@ -232,17 +232,17 @@
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.customers.addresses.edit.post-code')
                                         </x-admin::form.control-group.label>
-    
+
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="postcode"
                                             v-model="addressData.postcode"
-                                            rules="required|integer"
+                                            rules="required"
                                             :label="trans('admin::app.customers.addresses.edit.post-code')"
                                             :placeholder="trans('admin::app.customers.addresses.edit.post-code')"
                                         >
                                         </x-admin::form.control-group.control>
-    
+
                                         <x-admin::form.control-group.error
                                             control-name="postcode"
                                         >
@@ -265,8 +265,8 @@
                                             :label="trans('admin::app.customers.addresses.edit.country')"
                                         >
                                             @foreach (core()->countries() as $country)
-                                                <option 
-                                                    {{ $country->code === config('app.default_country') ? 'selected' : '' }}  
+                                                <option
+                                                    {{ $country->code === config('app.default_country') ? 'selected' : '' }}
                                                     value="{{ $country->code }}"
                                                 >
                                                     {{ $country->name }}
@@ -297,7 +297,7 @@
                                                 :placeholder="trans('admin::app.customers.addresses.create.state')"
                                                 v-model="addressData.state"
                                             >
-                                                <option 
+                                                <option
                                                     v-for='(state, index) in countryStates[addressData.country]'
                                                     :value="state.code"
                                                     v-text="state.default_name"
@@ -359,9 +359,9 @@
                                         >
                                         </x-admin::form.control-group.control>
 
-                                        <x-admin::form.control-group.label 
+                                        <x-admin::form.control-group.label
                                             for="default_address"
-                                            class="text-gray-600 dark:text-gray-300 font-semibold cursor-pointer" 
+                                            class="text-gray-600 dark:text-gray-300 font-semibold cursor-pointer"
                                         >
                                             @lang('admin::app.customers.addresses.edit.default-address')
                                         </x-admin::form.control-group.label>
@@ -376,15 +376,15 @@
 
                             {!! view_render_event('bagisto.admin.customers.edit.after') !!}
                         </x-slot:content>
-        
+
                         <x-slot:footer>
                             <!-- Modal Submission -->
                             <div class="flex gap-x-[10px] items-center">
-                                <button 
+                                <button
                                     type="submit"
                                     class="primary-button"
                                 >
-                                    @lang('admin::app.customers.addresses.edit.save-btn-title') 
+                                    @lang('admin::app.customers.addresses.edit.save-btn-title')
                                 </button>
                             </div>
                         </x-slot:footer>
@@ -433,7 +433,7 @@
                     })
                     .then((response) => {
                         this.$refs.CustomerAddressEdit.toggle();
-                        
+
                         this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
                         window.location.reload();
