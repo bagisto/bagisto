@@ -30,6 +30,16 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @return \Illuminate\View\View
+     */
+    public function view()
+    {
+        return view('admin::reporting.view');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function stats()

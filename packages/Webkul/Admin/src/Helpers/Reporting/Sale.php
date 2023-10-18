@@ -89,8 +89,7 @@ class Sale extends AbstractReporting
         return $this->getOverTimeStats(
             $startDate,
             $endDate,
-            'COUNT(*)',
-            false
+            'COUNT(*)'
         );
     }
 
@@ -197,6 +196,22 @@ class Sale extends AbstractReporting
             $startDate,
             $endDate,
             'SUM(base_grand_total_invoiced - base_grand_total_refunded)'
+        );
+    }
+
+    /**
+     * Returns orders over time
+     * 
+     * @param  string  $period
+     * @return array
+     */
+    public function getAllSalesOverTime($period = 'day', $includeEmpty = true): array
+    {
+        return $this->getOverTimeStats(
+            $this->startDate,
+            $this->endDate,
+            'SUM(base_grand_total_invoiced - base_grand_total_refunded)',
+            $period
         );
     }
 
@@ -546,36 +561,34 @@ class Sale extends AbstractReporting
      * 
      * @param  \Carbon\Carbon  $startDate
      * @param  \Carbon\Carbon  $endDate
-     * @param  string  $endDate
-     * @param  string  $formatPrice
+     * @param  string  $valueColumn
+     * @param  string  $period
      * @return array
      */
-    public function getOverTimeStats($startDate, $endDate, $column, $formatPrice = true): array
+    public function getOverTimeStats($startDate, $endDate, $valueColumn, $period = 'auto'): array
     {
-        $stats = [];
+        $config = $this->getTimeInterval($startDate, $endDate, $period);
 
-        $timeIntervals = $this->getTimeInterval($startDate, $endDate);
+        $groupColumn = $config['group_column'];
 
-        $formatter = strtoupper($timeIntervals['type']) . '(created_at)';
-
-        $sales = $this->orderRepository
+        $results = $this->orderRepository
             ->select(
-                DB::raw("$formatter AS date"),
-                DB::raw("$column AS total")
+                DB::raw("$groupColumn AS date"),
+                DB::raw("$valueColumn AS total"),
+                DB::raw("COUNT(*) AS count")
             )
             ->whereBetween('created_at', [$startDate, $endDate])
-            ->groupBy(DB::raw($formatter))
+            ->groupBy(DB::raw($groupColumn))
             ->get();
 
-        foreach ($timeIntervals['intervals'] as $interval) {
-            $total = $sales->where('date', $interval['start']->{$timeIntervals['type']})->first();
+        foreach ($config['intervals'] as $interval) {
+            $total = $results->where('date', $interval['filter'])->first();
 
-            $stats['label'][] = $interval['start']->format('d M');
-            $stats['total'][] = $total?->total ?? 0;
-
-            if ($formatPrice) {
-                $stats['formatted_total'][] = core()->formatBasePrice($total?->total ?? 0);
-            }
+            $stats[] = [
+                'label' => $interval['start'],
+                'total' => $total?->total ?? 0,
+                'count' => $total?->count ?? 0,
+            ];
         }
 
         return $stats;

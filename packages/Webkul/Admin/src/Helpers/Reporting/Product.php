@@ -248,30 +248,33 @@ class Product extends AbstractReporting
      * 
      * @param  \Carbon\Carbon  $startDate
      * @param  \Carbon\Carbon  $endDate
+     * @param  string  $period
      * @return array
      */
-    public function getTotalSoldQuantitiesOverTime($startDate, $endDate): array
+    public function getTotalSoldQuantitiesOverTime($startDate, $endDate, $period = 'auto'): array
     {
-        $stats = [];
+        $config = $this->getTimeInterval($startDate, $endDate, $period);
 
-        $timeIntervals = $this->getTimeInterval($startDate, $endDate);
+        $groupColumn = $config['group_column'];
 
-        $formatter = strtoupper($timeIntervals['type']) . '(created_at)';
-
-        $quantities = $this->orderItemRepository
+        $results = $this->orderItemRepository
             ->select(
-                DB::raw("$formatter AS date"),
-                DB::raw('SUM(qty_ordered) AS total')
+                DB::raw("$groupColumn AS date"),
+                DB::raw('COUNT(*) AS total')
             )
             ->whereBetween('created_at', [$startDate, $endDate])
-            ->groupBy(DB::raw($formatter))
+            ->groupBy(DB::raw($groupColumn))
             ->get();
 
-        foreach ($timeIntervals['intervals'] as $interval) {
-            $total = $quantities->where('date', $interval['start']->{$timeIntervals['type']})->first();
+        $stats = [];
 
-            $stats['label'][] = $interval['start']->format('d M');
-            $stats['total'][] = $total?->total ?? 0;
+        foreach ($config['intervals'] as $interval) {
+            $total = $results->where('date', $interval['filter'])->first();
+
+            $stats[] = [
+                'label' => $interval['start'],
+                'total' => $total?->total ?? 0,
+            ];
         }
 
         return $stats;
@@ -282,30 +285,33 @@ class Product extends AbstractReporting
      * 
      * @param  \Carbon\Carbon  $startDate
      * @param  \Carbon\Carbon  $endDate
+     * @param  string  $period
      * @return array
      */
-    public function getTotalProductsAddedToWishlistOverTime($startDate, $endDate): array
+    public function getTotalProductsAddedToWishlistOverTime($startDate, $endDate, $period = 'auto'): array
     {
-        $stats = [];
+        $config = $this->getTimeInterval($startDate, $endDate, $period);
 
-        $timeIntervals = $this->getTimeInterval($startDate, $endDate);
+        $groupColumn = $config['group_column'];
 
-        $formatter = strtoupper($timeIntervals['type']) . '(created_at)';
-
-        $wishlist = $this->wishlistRepository
+        $results = $this->wishlistRepository
             ->select(
-                DB::raw("$formatter AS date"),
+                DB::raw("$groupColumn AS date"),
                 DB::raw('COUNT(*) AS total')
             )
             ->whereBetween('created_at', [$startDate, $endDate])
-            ->groupBy(DB::raw($formatter))
+            ->groupBy(DB::raw($groupColumn))
             ->get();
 
-        foreach ($timeIntervals['intervals'] as $interval) {
-            $total = $wishlist->where('date', $interval['start']->{$timeIntervals['type']})->first();
+        $stats = [];
 
-            $stats['label'][] = $interval['start']->format('d M');
-            $stats['total'][] = $total?->total ?? 0;
+        foreach ($config['intervals'] as $interval) {
+            $total = $results->where('date', $interval['filter'])->first();
+
+            $stats[] = [
+                'label' => $interval['start'],
+                'total' => $total?->total ?? 0,
+            ];
         }
 
         return $stats;

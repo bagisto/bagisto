@@ -83,10 +83,10 @@
                             type: 'line',
                             
                             data: {
-                                labels: stats['current']['label'],
+                                labels: stats['current'].map(({ label }) => label),
 
                                 datasets: [{
-                                    data: stats['current']['total'],
+                                    data: stats['current'].map(({ total }) => total),
                                     lineTension: 0.2,
                                     pointStyle: false,
                                     borderWidth: 2,
@@ -94,7 +94,7 @@
                                     backgroundColor: 'rgba(14, 156, 255, 0.3)',
                                     fill: true,
                                 }, {
-                                    data: stats['previous']['total'],
+                                    data: stats['previous'].map(({ total }) => total),
                                     lineTension: 0.2,
                                     pointStyle: false,
                                     borderWidth: 2,

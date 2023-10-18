@@ -989,9 +989,9 @@
                             type: 'bar',
                             
                             data: {
-                                labels: data['label'],
+                                labels: data.map(({ label }) => label),
                                 datasets: [{
-                                    data: data['total'],
+                                    data: data.map(({ total }) => total),
                                     barThickness: 6,
                                     backgroundColor: '#598de6',
                                 }]
@@ -1028,9 +1028,9 @@
                             type: 'bar',
                             
                             data: {
-                                labels: data['label'],
+                                labels: data.map(({ label }) => label),
                                 datasets: [{
-                                    data: data['total'],
+                                    data: data.map(({ total }) => total),
                                     barThickness: 6,
                                     backgroundColor: '#f87171',
                                 }]

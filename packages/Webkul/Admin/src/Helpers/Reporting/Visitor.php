@@ -109,7 +109,7 @@ class Visitor extends AbstractReporting
      */
     public function getPreviousTotalVisitorsOverTime($visitableType = null): array
     {
-        return $this->getTotalVisitorsOverTime($this->lastStartDate, $this->lastEndDate, $visitableType);
+        return $this->getTotalVisitorsOverTime($this->lastStartDate, $this->lastEndDate, 'auto', $visitableType);
     }
 
     /**
@@ -120,7 +120,7 @@ class Visitor extends AbstractReporting
      */
     public function getCurrentTotalVisitorsOverTime($visitableType = null): array
     {
-        return $this->getTotalVisitorsOverTime($this->startDate, $this->endDate, $visitableType);
+        return $this->getTotalVisitorsOverTime($this->startDate, $this->endDate, 'auto', $visitableType);
     }
 
     /**
@@ -179,32 +179,35 @@ class Visitor extends AbstractReporting
      * 
      * @param  \Carbon\Carbon  $startDate
      * @param  \Carbon\Carbon  $endDate
+     * @param  string  $period
      * @param  string  $visitableType
      * @return array
      */
-    public function getTotalVisitorsOverTime($startDate, $endDate, $visitableType = null): array
+    public function getTotalVisitorsOverTime($startDate, $endDate, $period = 'auto', $visitableType = null): array
     {
-        $stats = [];
+        $config = $this->getTimeInterval($startDate, $endDate, $period);
 
-        $timeIntervals = $this->getTimeInterval($startDate, $endDate);
+        $groupColumn = $config['group_column'];
 
-        $formatter = strtoupper($timeIntervals['type']) . '(created_at)';
-
-        $visits = $this->visitRepository
+        $results = $this->visitRepository
             ->select(
-                DB::raw("$formatter AS date"),
-                DB::raw('COUNT(*) AS count')
+                DB::raw("$groupColumn AS date"),
+                DB::raw('COUNT(*) AS total')
             )
             ->whereNull('visitable_id')
             ->whereBetween('created_at', [$startDate, $endDate])
-            ->groupBy(DB::raw($formatter))
+            ->groupBy(DB::raw($groupColumn))
             ->get();
 
-        foreach ($timeIntervals['intervals'] as $interval) {
-            $total = $visits->where('date', $interval['start']->{$timeIntervals['type']})->first();
+        $stats = [];
 
-            $stats['label'][] = $interval['start']->format('d M');
-            $stats['total'][] = $total?->count ?? 0;
+        foreach ($config['intervals'] as $interval) {
+            $total = $results->where('date', $interval['filter'])->first();
+
+            $stats[] = [
+                'label' => $interval['start'],
+                'total' => $total?->total ?? 0,
+            ];
         }
 
         return $stats;

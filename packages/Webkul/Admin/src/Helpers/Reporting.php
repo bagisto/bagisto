@@ -55,6 +55,39 @@ class Reporting
      * 
      * @return array
      */
+    public function getAllSalesStats(): array
+    {
+        $sales = collect($this->saleReporting->getAllSalesOverTime(request()->query('period') ?? 'day'));
+
+        $sales = $sales->map(function($sale) {
+            $sale['formatted_total'] = core()->formatBasePrice($sale['total']);
+
+            return $sale;
+        });
+
+        return [
+            'columns' => [
+                [
+                    'key'   => 'label',
+                    'label' => 'Interval'
+                ], [
+                    'key'   => 'count',
+                    'label' => 'Orders'
+                ], [
+                    'key'   => 'formatted_total',
+                    'label' => 'Total'
+                ],
+            ],
+
+            'records' => $sales,
+        ];
+    }
+
+    /**
+     * Returns the sales statistics.
+     * 
+     * @return array
+     */
     public function getAverageSalesStats(): array
     {
         return [
