@@ -2,7 +2,7 @@
     {{-- Page Title --}}
     <x-slot:title>
         @lang('shop::app.customers.account.addresses.edit')
-        @lang('shop::app.customers.account.addresses.title') 
+        @lang('shop::app.customers.account.addresses.title')
     </x-slot>
 
     {{-- Breadcrumbs --}}
@@ -159,8 +159,8 @@
                 </option>
 
                 @foreach (core()->countries() as $country)
-                    <option 
-                        {{ $country->code === config('app.default_country') ? 'selected' : '' }}  
+                    <option
+                        {{ $country->code === config('app.default_country') ? 'selected' : '' }}
                         value="{{ $country->code }}"
                     >
                         {{ $country->name }}
@@ -225,7 +225,7 @@
                 type="text"
                 name="postcode"
                 :value="old('postal-code') ?? $address->postcode"
-                rules="required|integer"
+                rules="required"
                 :label="trans('shop::app.customers.account.addresses.post-code')"
                 :placeholder="trans('shop::app.customers.account.addresses.post-code')"
             >
