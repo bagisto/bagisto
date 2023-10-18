@@ -149,9 +149,10 @@ class Visitor extends AbstractReporting
      * Gets visitable with most visits.
      * 
      * @param  string  $visitableType
+     * @param  integer  $limit
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getVisitableWithMostVisits($visitableType = null): Collection
+    public function getVisitableWithMostVisits($visitableType = null, $limit = null): Collection
     {
         $visits = $this->visitRepository
             ->addSelect(
@@ -164,7 +165,7 @@ class Visitor extends AbstractReporting
             ->whereBetween('created_at', [$this->startDate, $this->endDate])
             ->groupBy('visitable_id')
             ->orderByDesc('visits')
-            ->limit(5)
+            ->limit($limit)
             ->get();
 
         $visits->map(function ($visit) {

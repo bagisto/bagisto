@@ -10,11 +10,11 @@
             <!-- Header -->
             <div class="flex items-center justify-between mb-[16px]">
                 <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
-                    @lang('admin::app.reporting.products.index.products-added-to-wishlist')
+                    @lang('admin::app.reporting.products.index.total-products-added-to-wishlist')
                 </p>
 
                 <a
-                    href="#"
+                    href="{{ route('admin.reporting.products.view', ['type' => 'total-products-added-to-wishlist']) }}"
                     class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
                 >
                     @lang('admin::app.reporting.products.index.view-details')
@@ -54,7 +54,7 @@
 
                     <!-- Line Chart -->
                     <canvas
-                        id="getTotalProductsAddedToWishlistStats"
+                        id="total-products-added-to-wishlist"
                         class="flex items-end w-full aspect-[3.23/1]"
                     ></canvas>
 
@@ -103,14 +103,14 @@
 
                     this.$axios.get("{{ route('admin.reporting.products.stats') }}", {
                             params: {
-                                type: 'getTotalProductsAddedToWishlistStats'
+                                type: 'total-products-added-to-wishlist'
                             }
                         })
                         .then(response => {
                             this.report = response.data;
 
                             setTimeout(() => {
-                                this.$parent.prepareChart('getTotalProductsAddedToWishlistStats', response.data.statistics.over_time);
+                                this.$parent.prepareChart('total-products-added-to-wishlist', response.data.statistics.over_time);
                             }, 0);
 
                             this.isLoading = false;

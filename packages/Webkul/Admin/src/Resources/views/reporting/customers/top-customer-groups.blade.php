@@ -14,7 +14,7 @@
                 </p>
 
                 <a
-                    href="#"
+                    href="{{ route('admin.reporting.customers.view', ['type' => 'top-customer-groups']) }}"
                     class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
                 >
                     @lang('admin::app.reporting.customers.index.view-details')
@@ -91,7 +91,7 @@
 
                     this.$axios.get("{{ route('admin.reporting.customers.stats') }}", {
                             params: {
-                                type: 'getTopCustomerGroups'
+                                type: 'top-customer-groups'
                             }
                         })
                         .then(response => {

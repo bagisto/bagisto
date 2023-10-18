@@ -44,21 +44,25 @@ class Customer extends AbstractReporting
     /**
      * Returns previous customers over time
      * 
+     * @param  string  $period
+     * @param  bool  $includeEmpty
      * @return array
      */
-    public function getPreviousTotalCustomersOverTime(): array
+    public function getPreviousTotalCustomersOverTime($period = 'auto', $includeEmpty = true): array
     {
-        return $this->getTotalCustomersOverTime($this->lastStartDate, $this->lastEndDate);
+        return $this->getTotalCustomersOverTime($this->lastStartDate, $this->lastEndDate, $period);
     }
 
     /**
      * Returns current customers over time
      * 
+     * @param  string  $period
+     * @param  bool  $includeEmpty
      * @return array
      */
-    public function getCurrentTotalCustomersOverTime(): array
+    public function getCurrentTotalCustomersOverTime($period = 'auto', $includeEmpty = true): array
     {
-        return $this->getTotalCustomersOverTime($this->startDate, $this->endDate);
+        return $this->getTotalCustomersOverTime($this->startDate, $this->endDate, $period);
     }
 
     /**
@@ -119,9 +123,10 @@ class Customer extends AbstractReporting
     /**
      * Gets customer with most sales.
      * 
+     * @param  integer  $limit
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getCustomersWithMostSales(): Collection
+    public function getCustomersWithMostSales($limit = null): Collection
     {
         $tablePrefix = DB::getTablePrefix();
 
@@ -136,16 +141,17 @@ class Customer extends AbstractReporting
             ->whereBetween('created_at', [$this->startDate, $this->endDate])
             ->groupBy(DB::raw('CONCAT(customer_email, "-", customer_id)'))
             ->orderByDesc('total')
-            ->limit(5)
+            ->limit($limit)
             ->get();
     }
 
     /**
      * Gets customer with most orders.
      * 
+     * @param  integer  $limit
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getCustomersWithMostOrders(): Collection
+    public function getCustomersWithMostOrders($limit = null): Collection
     {
         $tablePrefix = DB::getTablePrefix();
 
@@ -159,16 +165,17 @@ class Customer extends AbstractReporting
             ->whereBetween('created_at', [$this->startDate, $this->endDate])
             ->groupBy(DB::raw('CONCAT(customer_email, "-", customer_id)'))
             ->orderByDesc('orders')
-            ->limit(5)
+            ->limit($limit)
             ->get();
     }
 
     /**
      * Gets customer with most orders.
      * 
+     * @param  integer  $limit
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getCustomersWithMostReviews(): Collection
+    public function getCustomersWithMostReviews($limit = null): Collection
     {
         $tablePrefix = DB::getTablePrefix();
 
@@ -185,16 +192,17 @@ class Customer extends AbstractReporting
             ->whereNotNull('customer_id')
             ->groupBy(DB::raw('CONCAT(email, "-", customers.id)'))
             ->orderByDesc('reviews')
-            ->limit(5)
+            ->limit($limit)
             ->get();
     }
 
     /**
      * Gets customer with most sales.
      * 
+     * @param  integer  $limit
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getGroupsWithMostCustomers(): Collection
+    public function getGroupsWithMostCustomers($limit = null): Collection
     {
         return $this->customerRepository
             ->leftJoin('customer_groups', 'customers.customer_group_id', '=', 'customer_groups.id')
@@ -203,7 +211,7 @@ class Customer extends AbstractReporting
             ->whereBetween('customers.created_at', [$this->startDate, $this->endDate])
             ->groupBy('customer_group_id')
             ->orderByDesc('total')
-            ->limit(5)
+            ->limit($limit)
             ->get();
     }
 

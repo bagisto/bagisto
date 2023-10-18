@@ -16,9 +16,11 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         Route::controller(CustomerController::class)->prefix('customers')->group(function () {
             Route::get('', 'index')->name('admin.reporting.customers.index');
 
+            Route::get('stats', 'stats')->name('admin.reporting.customers.stats');
+
             Route::get('view', 'view')->name('admin.reporting.customers.view');
 
-            Route::get('stats', 'stats')->name('admin.reporting.customers.stats');
+            Route::get('view/stats', 'viewStats')->name('admin.reporting.customers.view.stats');
         });
 
         /**
@@ -27,9 +29,11 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         Route::controller(ProductController::class)->prefix('products')->group(function () {
             Route::get('', 'index')->name('admin.reporting.products.index');
 
+            Route::get('stats', 'stats')->name('admin.reporting.products.stats');
+
             Route::get('view', 'view')->name('admin.reporting.products.view');
 
-            Route::get('stats', 'stats')->name('admin.reporting.products.stats');
+            Route::get('view/stats', 'viewStats')->name('admin.reporting.products.view.stats');
         });
 
         /**
@@ -38,9 +42,11 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         Route::controller(SaleController::class)->prefix('sales')->group(function () {
             Route::get('', 'index')->name('admin.reporting.sales.index');
 
+            Route::get('stats', 'stats')->name('admin.reporting.sales.stats');
+
             Route::get('view', 'view')->name('admin.reporting.sales.view');
 
-            Route::get('stats', 'stats')->name('admin.reporting.sales.stats');
+            Route::get('view/stats', 'viewStats')->name('admin.reporting.sales.view.stats');
         });
     });
 });

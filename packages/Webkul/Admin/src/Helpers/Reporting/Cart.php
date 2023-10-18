@@ -159,9 +159,10 @@ class Cart extends AbstractReporting
     /**
      * Retrieves abandoned cart products
      * 
+     * @param  integer  $limit
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getAbandonedCartProducts(): Collection
+    public function getAbandonedCartProducts($limit = null): Collection
     {
         return $this->cartItemRepository
             ->select('product_id as id', 'name')
@@ -170,7 +171,7 @@ class Cart extends AbstractReporting
             ->where('is_active', 1)
             ->whereBetween('cart.created_at', [$this->startDate, $this->endDate->subDays(2)])
             ->groupBy('product_id')
-            ->limit(5)
+            ->limit($limit)
             ->orderByDesc('count')
             ->get();
     }

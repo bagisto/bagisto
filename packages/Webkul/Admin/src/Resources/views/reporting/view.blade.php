@@ -1,6 +1,6 @@
 <x-admin::layouts>
     <x-slot:title>
-        @lang('admin::app.reporting.sales.index.title')
+        @lang('admin::app.reporting.' . $entity . '.index.' . request()->query('type'))
     </x-slot:title>
 
     {{-- Page Header --}}
@@ -79,9 +79,9 @@
                     getStats() {
                         this.isLoading = true;
 
-                        this.$axios.get("{{ route('admin.reporting.sales.stats') }}", {
+                        this.$axios.get("{{ route('admin.reporting.' . $entity . '.view.stats') }}", {
                                 params: {
-                                    type: 'getAllSalesStats'
+                                    type: "{{ request()->query('type') }}",
                                 }
                             })
                             .then(response => {

@@ -10,11 +10,11 @@
             <!-- Header -->
             <div class="flex items-center justify-between mb-[16px]">
                 <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
-                    @lang('admin::app.reporting.sales.index.average-order-value')
+                    @lang('admin::app.reporting.sales.index.average-sales')
                 </p>
 
                 <a
-                    href="#"
+                    href="{{ route('admin.reporting.sales.view', ['type' => 'average-sales']) }}"
                     class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
                 >
                     @lang('admin::app.reporting.sales.index.view-details')
@@ -54,7 +54,7 @@
 
                     <!-- Line Chart -->
                     <canvas
-                        id="getAverageSalesStats"
+                        id="average-sales"
                         class="flex items-end w-full aspect-[3.23/1]"
                     ></canvas>
 
@@ -103,14 +103,14 @@
 
                     this.$axios.get("{{ route('admin.reporting.sales.stats') }}", {
                             params: {
-                                type: 'getAverageSalesStats'
+                                type: 'average-sales'
                             }
                         })
                         .then(response => {
                             this.report = response.data;
 
                             setTimeout(() => {
-                                this.$parent.prepareChart('getAverageSalesStats', response.data.statistics.over_time);
+                                this.$parent.prepareChart('average-sales', response.data.statistics.over_time);
                             }, 0);
 
                             this.isLoading = false;

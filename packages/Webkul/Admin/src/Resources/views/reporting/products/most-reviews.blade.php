@@ -10,11 +10,11 @@
             <!-- Header -->
             <div class="flex items-center justify-between mb-[16px]">
                 <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
-                    @lang('admin::app.reporting.products.index.most-reviews')
+                    @lang('admin::app.reporting.products.index.products-with-most-reviews')
                 </p>
 
                 <a
-                    href="#"
+                    href="{{ route('admin.reporting.products.view', ['type' => 'products-with-most-reviews']) }}"
                     class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
                 >
                     @lang('admin::app.reporting.products.index.view-details')
@@ -91,7 +91,7 @@
 
                     this.$axios.get("{{ route('admin.reporting.products.stats') }}", {
                             params: {
-                                type: 'getProductsWithMostReviews'
+                                type: 'products-with-most-reviews'
                             }
                         })
                         .then(response => {

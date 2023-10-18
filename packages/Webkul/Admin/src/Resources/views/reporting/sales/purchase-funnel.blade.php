@@ -154,7 +154,7 @@
 
                     this.$axios.get("{{ route('admin.reporting.sales.stats') }}", {
                             params: {
-                                type: 'getPurchaseFunnelStats'
+                                type: 'purchase-funnel'
                             }
                         })
                         .then(response => {

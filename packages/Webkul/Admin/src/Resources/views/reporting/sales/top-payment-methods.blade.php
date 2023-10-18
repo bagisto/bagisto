@@ -14,7 +14,7 @@
                 </p>
 
                 <a
-                    href="#"
+                    href="{{ route('admin.reporting.sales.view', ['type' => 'top-payment-methods']) }}"
                     class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
                 >
                     @lang('admin::app.reporting.sales.index.view-details')
@@ -91,7 +91,7 @@
 
                     this.$axios.get("{{ route('admin.reporting.sales.stats') }}", {
                             params: {
-                                type: 'getTopPaymentMethods'
+                                type: 'top-payment-methods'
                             }
                         })
                         .then(response => {

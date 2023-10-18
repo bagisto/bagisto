@@ -50,21 +50,25 @@ class Product extends AbstractReporting
     /**
      * Returns previous sold quantities over time
      * 
+     * @param  string  $period
+     * @param  bool  $includeEmpty
      * @return array
      */
-    public function getPreviousTotalSoldQuantitiesOverTime(): array
+    public function getPreviousTotalSoldQuantitiesOverTime($period = 'auto', $includeEmpty = true): array
     {
-        return $this->getTotalSoldQuantitiesOverTime($this->lastStartDate, $this->lastEndDate);
+        return $this->getTotalSoldQuantitiesOverTime($this->lastStartDate, $this->lastEndDate, $period);
     }
 
     /**
      * Returns current sold quantities over time
      * 
+     * @param  string  $period
+     * @param  bool  $includeEmpty
      * @return array
      */
-    public function getCurrentTotalSoldQuantitiesOverTime(): array
+    public function getCurrentTotalSoldQuantitiesOverTime($period = 'auto', $includeEmpty = true): array
     {
-        return $this->getTotalSoldQuantitiesOverTime($this->startDate, $this->endDate);
+        return $this->getTotalSoldQuantitiesOverTime($this->startDate, $this->endDate, $period);
     }
 
     /**
@@ -98,21 +102,25 @@ class Product extends AbstractReporting
     /**
      * Returns previous products added to wishlist over time
      * 
+     * @param  string  $period
+     * @param  bool  $includeEmpty
      * @return array
      */
-    public function getPreviousTotalProductsAddedToWishlistOverTime(): array
+    public function getPreviousTotalProductsAddedToWishlistOverTime($period = 'auto', $includeEmpty = true): array
     {
-        return $this->getTotalProductsAddedToWishlistOverTime($this->lastStartDate, $this->lastEndDate);
+        return $this->getTotalProductsAddedToWishlistOverTime($this->lastStartDate, $this->lastEndDate, $period);
     }
 
     /**
      * Returns current products added to wishlist over time
      * 
+     * @param  string  $period
+     * @param  bool  $includeEmpty
      * @return array
      */
-    public function getCurrentTotalProductsAddedToWishlistOverTime(): array
+    public function getCurrentTotalProductsAddedToWishlistOverTime($period = 'auto', $includeEmpty = true): array
     {
-        return $this->getTotalProductsAddedToWishlistOverTime($this->startDate, $this->endDate);
+        return $this->getTotalProductsAddedToWishlistOverTime($this->startDate, $this->endDate, $period);
     }
 
     /**
@@ -171,9 +179,10 @@ class Product extends AbstractReporting
     /**
      * Gets top-selling products by revenue.
      * 
+     * @param  integer  $limit
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getTopSellingProductsByRevenue(): collection
+    public function getTopSellingProductsByRevenue($limit = null): collection
     {
         $products = $this->orderItemRepository
             ->with(['product', 'product.images'])
@@ -182,7 +191,7 @@ class Product extends AbstractReporting
             ->whereBetween('order_items.created_at', [$this->startDate, $this->endDate])
             ->groupBy('product_id')
             ->orderBy('revenue', 'DESC')
-            ->limit(5)
+            ->limit($limit)
             ->get();
         
 
@@ -198,9 +207,10 @@ class Product extends AbstractReporting
     /**
      * Gets top-selling products by quantity.
      * 
+     * @param  integer  $limit
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getTopSellingProductsByQuantity(): collection
+    public function getTopSellingProductsByQuantity($limit = null): collection
     {
         $products = $this->orderItemRepository
             ->with(['product', 'product.images'])
@@ -209,7 +219,7 @@ class Product extends AbstractReporting
             ->whereBetween('order_items.created_at', [$this->startDate, $this->endDate])
             ->groupBy('product_id')
             ->orderBy('total_qty_ordered', 'DESC')
-            ->limit(5)
+            ->limit($limit)
             ->get();
 
         return $products;
@@ -218,9 +228,10 @@ class Product extends AbstractReporting
     /**
      * Gets products with most orders.
      * 
+     * @param  integer  $limit
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getProductsWithMostReviews(): Collection
+    public function getProductsWithMostReviews($limit = null): Collection
     {
         $tablePrefix = DB::getTablePrefix();
 
@@ -233,7 +244,7 @@ class Product extends AbstractReporting
             ->where('status', 'approved')
             ->groupBy('product_id')
             ->orderByDesc('reviews')
-            ->limit(5)
+            ->limit($limit)
             ->get();
 
         $products->map(function ($product) {

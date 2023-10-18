@@ -12,13 +12,6 @@
                 <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
                     @lang('admin::app.reporting.customers.index.customers-traffic')
                 </p>
-
-                <a
-                    href="#"
-                    class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
-                >
-                    @lang('admin::app.reporting.customers.index.view-details')
-                </a>
             </div>
 
             <template v-if="isLoading">
@@ -86,7 +79,7 @@
 
                     <!-- Line Chart -->
                     <canvas
-                        id="getCustomersTrafficStats"
+                        id="customers-traffic"
                         class="flex items-end w-full aspect-[3.23/1]"
                     ></canvas>
 
@@ -137,7 +130,7 @@
 
                     this.$axios.get("{{ route('admin.reporting.customers.stats') }}", {
                             params: {
-                                type: 'getCustomersTrafficStats'
+                                type: 'customers-traffic'
                             }
                         })
                         .then(response => {
@@ -157,7 +150,7 @@
                         this.chart.destroy();
                     }
 
-                    this.chart = new Chart(document.getElementById('getCustomersTrafficStats'), {
+                    this.chart = new Chart(document.getElementById('customers-traffic'), {
                         type: 'bar',
                         
                         data: {

@@ -8,6 +8,18 @@ use Webkul\Admin\Helpers\Reporting;
 class CustomerController extends Controller
 {
     /**
+     * Request param functions
+     */
+    protected $typeFunctions = [
+        'total-customers'             => 'getTotalCustomersStats',
+        'customers-traffic'           => 'getCustomersTrafficStats',
+        'customers-with-most-sales'   => 'getCustomersWithMostSales',
+        'customers-with-most-orders'  => 'getCustomersWithMostOrders',
+        'customers-with-most-reviews' => 'getCustomersWithMostReviews',
+        'top-customer-groups'         => 'getTopCustomerGroups',
+    ];
+
+    /**
      * Create a controller instance.
      * 
      * @param  \Webkul\Admin\Helpers\Reporting  $reportingHelper
@@ -34,7 +46,9 @@ class CustomerController extends Controller
      */
     public function view()
     {
-        return view('admin::reporting.view');
+        $entity = 'customers';
+
+        return view('admin::reporting.view', compact('entity'));
     }
 
     /**
@@ -44,7 +58,22 @@ class CustomerController extends Controller
      */
     public function stats()
     {
-        $stats = $this->reportingHelper->{request()->query('type')}();
+        $stats = $this->reportingHelper->{$this->typeFunctions[request()->query('type')]}();
+
+        return response()->json([
+            'statistics' => $stats,
+            'date_range' => $this->reportingHelper->getDateRange(),
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function viewStats()
+    {
+        $stats = $this->reportingHelper->{$this->typeFunctions[request()->query('type')]}('table');
 
         return response()->json([
             'statistics' => $stats,

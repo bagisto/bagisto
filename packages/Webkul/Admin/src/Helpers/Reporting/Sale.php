@@ -46,21 +46,25 @@ class Sale extends AbstractReporting
     /**
      * Returns previous orders over time
      * 
+     * @param  string  $period
+     * @param  bool  $includeEmpty
      * @return array
      */
-    public function getPreviousTotalOrdersOverTime(): array
+    public function getPreviousTotalOrdersOverTime($period = 'auto', $includeEmpty = true): array
     {
-        return $this->getTotalOrdersOverTime($this->lastStartDate, $this->lastEndDate);
+        return $this->getTotalOrdersOverTime($this->lastStartDate, $this->lastEndDate, $period, $includeEmpty);
     }
 
     /**
      * Returns current orders over time
      * 
+     * @param  string  $period
+     * @param  bool  $includeEmpty
      * @return array
      */
-    public function getCurrentTotalOrdersOverTime(): array
+    public function getCurrentTotalOrdersOverTime($period = 'auto', $includeEmpty = true): array
     {
-        return $this->getTotalOrdersOverTime($this->startDate, $this->endDate);
+        return $this->getTotalOrdersOverTime($this->startDate, $this->endDate, $period, $includeEmpty);
     }
 
     /**
@@ -82,14 +86,17 @@ class Sale extends AbstractReporting
      * 
      * @param  \Carbon\Carbon  $startDate
      * @param  \Carbon\Carbon  $endDate
+     * @param  string  $period
+     * @param  bool  $includeEmpty
      * @return array
      */
-    public function getTotalOrdersOverTime($startDate, $endDate): array
+    public function getTotalOrdersOverTime($startDate, $endDate, $period, $includeEmpty): array
     {
         return $this->getOverTimeStats(
             $startDate,
             $endDate,
-            'COUNT(*)'
+            'COUNT(*)',
+            $period
         );
     }
 
@@ -166,21 +173,25 @@ class Sale extends AbstractReporting
     /**
      * Returns previous sales over time
      * 
+     * @param  string  $period
+     * @param  bool  $includeEmpty
      * @return array
      */
-    public function getPreviousTotalSalesOverTime(): array
+    public function getPreviousTotalSalesOverTime($period = 'auto', $includeEmpty = true): array
     {
-        return $this->getTotalSalesOverTime($this->lastStartDate, $this->lastEndDate);
+        return $this->getTotalSalesOverTime($this->lastStartDate, $this->lastEndDate, $period, $includeEmpty);
     }
 
     /**
      * Returns current sales over time
      * 
+     * @param  string  $period
+     * @param  bool  $includeEmpty
      * @return array
      */
-    public function getCurrentTotalSalesOverTime(): array
+    public function getCurrentTotalSalesOverTime($period = 'auto', $includeEmpty = true): array
     {
-        return $this->getTotalSalesOverTime($this->startDate, $this->endDate);
+        return $this->getTotalSalesOverTime($this->startDate, $this->endDate, $period, $includeEmpty);
     }
 
     /**
@@ -188,28 +199,15 @@ class Sale extends AbstractReporting
      * 
      * @param  \Carbon\Carbon  $startDate
      * @param  \Carbon\Carbon  $endDate
+     * @param  string  $period
+     * @param  bool  $includeEmpty
      * @return array
      */
-    public function getTotalSalesOverTime($startDate, $endDate): array
+    public function getTotalSalesOverTime($startDate, $endDate, $period, $includeEmpty): array
     {
         return $this->getOverTimeStats(
             $startDate,
             $endDate,
-            'SUM(base_grand_total_invoiced - base_grand_total_refunded)'
-        );
-    }
-
-    /**
-     * Returns orders over time
-     * 
-     * @param  string  $period
-     * @return array
-     */
-    public function getAllSalesOverTime($period = 'day', $includeEmpty = true): array
-    {
-        return $this->getOverTimeStats(
-            $this->startDate,
-            $this->endDate,
             'SUM(base_grand_total_invoiced - base_grand_total_refunded)',
             $period
         );
@@ -247,21 +245,25 @@ class Sale extends AbstractReporting
     /**
      * Returns previous average sales over time
      * 
+     * @param  string  $period
+     * @param  bool  $includeEmpty
      * @return array
      */
-    public function getPreviousAverageSalesOverTime(): array
+    public function getPreviousAverageSalesOverTime($period = 'auto', $includeEmpty = true): array
     {
-        return $this->getAverageSalesOverTime($this->lastStartDate, $this->lastEndDate);
+        return $this->getAverageSalesOverTime($this->lastStartDate, $this->lastEndDate, $period, $includeEmpty);
     }
 
     /**
      * Returns current average sales over time
      * 
+     * @param  string  $period
+     * @param  bool  $includeEmpty
      * @return array
      */
-    public function getCurrentAverageSalesOverTime(): array
+    public function getCurrentAverageSalesOverTime($period = 'auto', $includeEmpty = true): array
     {
-        return $this->getAverageSalesOverTime($this->startDate, $this->endDate);
+        return $this->getAverageSalesOverTime($this->startDate, $this->endDate, $period, $includeEmpty);
     }
 
     /**
@@ -269,14 +271,17 @@ class Sale extends AbstractReporting
      * 
      * @param  \Carbon\Carbon  $startDate
      * @param  \Carbon\Carbon  $endDate
+     * @param  string  $period
+     * @param  bool  $includeEmpty
      * @return array
      */
-    public function getAverageSalesOverTime($startDate, $endDate): array
+    public function getAverageSalesOverTime($startDate, $endDate, $period, $includeEmpty): array
     {
         return $this->getOverTimeStats(
             $startDate,
             $endDate,
-            'AVG(base_grand_total_invoiced - base_grand_total_refunded)'
+            'AVG(base_grand_total_invoiced - base_grand_total_refunded)',
+            $period
         );
     }
 
@@ -312,21 +317,25 @@ class Sale extends AbstractReporting
     /**
      * Returns previous refunds over time
      * 
+     * @param  string  $period
+     * @param  bool  $includeEmpty
      * @return array
      */
-    public function getPreviousRefundsOverTime(): array
+    public function getPreviousRefundsOverTime($period = 'auto', $includeEmpty = true): array
     {
-        return $this->getRefundsOverTime($this->lastStartDate, $this->lastEndDate);
+        return $this->getRefundsOverTime($this->lastStartDate, $this->lastEndDate, $period, $includeEmpty);
     }
 
     /**
      * Returns current refunds over time
      * 
+     * @param  string  $period
+     * @param  bool  $includeEmpty
      * @return array
      */
-    public function getCurrentRefundsOverTime(): array
+    public function getCurrentRefundsOverTime($period = 'auto', $includeEmpty = true): array
     {
-        return $this->getRefundsOverTime($this->startDate, $this->endDate);
+        return $this->getRefundsOverTime($this->startDate, $this->endDate, $period, $includeEmpty);
     }
 
     /**
@@ -334,14 +343,17 @@ class Sale extends AbstractReporting
      * 
      * @param  \Carbon\Carbon  $startDate
      * @param  \Carbon\Carbon  $endDate
+     * @param  string  $period
+     * @param  bool  $includeEmpty
      * @return array
      */
-    public function getRefundsOverTime($startDate, $endDate): array
+    public function getRefundsOverTime($startDate, $endDate, $period, $includeEmpty): array
     {
         return $this->getOverTimeStats(
             $startDate,
             $endDate,
-            'SUM(base_grand_total_refunded)'
+            'SUM(base_grand_total_refunded)',
+            $period
         );
     }
 
@@ -377,21 +389,25 @@ class Sale extends AbstractReporting
     /**
      * Returns previous tax collected over time
      * 
+     * @param  string  $period
+     * @param  bool  $includeEmpty
      * @return array
      */
-    public function getPreviousTaxCollectedOverTime(): array
+    public function getPreviousTaxCollectedOverTime($period = 'auto', $includeEmpty = true): array
     {
-        return $this->getTaxCollectedOverTime($this->lastStartDate, $this->lastEndDate);
+        return $this->getTaxCollectedOverTime($this->lastStartDate, $this->lastEndDate, $period, $includeEmpty);
     }
 
     /**
      * Returns current tax collected over time
      * 
+     * @param  string  $period
+     * @param  bool  $includeEmpty
      * @return array
      */
-    public function getCurrentTaxCollectedOverTime(): array
+    public function getCurrentTaxCollectedOverTime($period = 'auto', $includeEmpty = true): array
     {
-        return $this->getTaxCollectedOverTime($this->startDate, $this->endDate);
+        return $this->getTaxCollectedOverTime($this->startDate, $this->endDate, $period, $includeEmpty);
     }
 
     /**
@@ -399,23 +415,27 @@ class Sale extends AbstractReporting
      * 
      * @param  \Carbon\Carbon  $startDate
      * @param  \Carbon\Carbon  $endDate
+     * @param  string  $period
+     * @param  bool  $includeEmpty
      * @return array
      */
-    public function getTaxCollectedOverTime($startDate, $endDate): array
+    public function getTaxCollectedOverTime($startDate, $endDate, $period, $includeEmpty): array
     {
         return $this->getOverTimeStats(
             $startDate,
             $endDate,
-            'SUM(base_tax_amount_invoiced - base_tax_amount_refunded)'
+            'SUM(base_tax_amount_invoiced - base_tax_amount_refunded)',
+            $period
         );
     }
 
     /**
      * Returns top tax categories
      * 
+     * @param  integer  $limit
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getTopTaxCategories(): Collection
+    public function getTopTaxCategories($limit = null): Collection
     {
         return $this->orderItemRepository
             ->leftJoin('tax_categories', 'order_items.tax_category_id', '=', 'tax_categories.id')
@@ -425,7 +445,7 @@ class Sale extends AbstractReporting
             ->whereNotNull('tax_category_id')
             ->groupBy('tax_category_id')
             ->orderByDesc('total')
-            ->limit(5)
+            ->limit($limit)
             ->get();
     }
 
@@ -461,21 +481,25 @@ class Sale extends AbstractReporting
     /**
      * Returns previous shipping collected over time
      * 
+     * @param  string  $period
+     * @param  bool  $includeEmpty
      * @return array
      */
-    public function getPreviousShippingCollectedOverTime(): array
+    public function getPreviousShippingCollectedOverTime($period = 'auto', $includeEmpty = true): array
     {
-        return $this->getShippingCollectedOverTime($this->lastStartDate, $this->lastEndDate);
+        return $this->getShippingCollectedOverTime($this->lastStartDate, $this->lastEndDate, $period, $includeEmpty);
     }
 
     /**
      * Returns current shipping collected over time
      * 
+     * @param  string  $period
+     * @param  bool  $includeEmpty
      * @return array
      */
-    public function getCurrentShippingCollectedOverTime(): array
+    public function getCurrentShippingCollectedOverTime($period = 'auto', $includeEmpty = true): array
     {
-        return $this->getShippingCollectedOverTime($this->startDate, $this->endDate);
+        return $this->getShippingCollectedOverTime($this->startDate, $this->endDate, $period, $includeEmpty);
     }
 
     /**
@@ -483,23 +507,27 @@ class Sale extends AbstractReporting
      * 
      * @param  \Carbon\Carbon  $startDate
      * @param  \Carbon\Carbon  $endDate
+     * @param  string  $period
+     * @param  bool  $includeEmpty
      * @return array
      */
-    public function getShippingCollectedOverTime($startDate, $endDate): array
+    public function getShippingCollectedOverTime($startDate, $endDate, $period, $includeEmpty): array
     {
         return $this->getOverTimeStats(
             $startDate,
             $endDate,
-            'SUM(base_shipping_invoiced - base_shipping_refunded)'
+            'SUM(base_shipping_invoiced - base_shipping_refunded)',
+            $period
         );
     }
 
     /**
      * Returns top shipping methods
      * 
+     * @param  integer  $limit
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getTopShippingMethods(): Collection
+    public function getTopShippingMethods($limit = null): Collection
     {
         return $this->orderRepository
             ->select('shipping_title as title')
@@ -508,16 +536,17 @@ class Sale extends AbstractReporting
             ->whereNotNull('shipping_method')
             ->groupBy('shipping_method')
             ->orderByDesc('total')
-            ->limit(5)
+            ->limit($limit)
             ->get();
     }
 
     /**
      * Returns top payment methods
      * 
+     * @param  integer  $limit
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getTopPaymentMethods(): Collection
+    public function getTopPaymentMethods($limit = null): Collection
     {
         return $this->orderRepository
             ->leftJoin('order_payment', 'orders.id', '=', 'order_payment.order_id')
@@ -526,7 +555,7 @@ class Sale extends AbstractReporting
             ->whereBetween('orders.created_at', [$this->startDate, $this->endDate])
             ->groupBy('method')
             ->orderByDesc('total')
-            ->limit(5)
+            ->limit($limit)
             ->get();
     }
 

@@ -14,7 +14,7 @@
                 </p>
 
                 <a
-                    href="#"
+                    href="{{ route('admin.reporting.customers.view', ['type' => 'total-customers']) }}"
                     class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
                 >
                     @lang('admin::app.reporting.customers.index.view-details')
@@ -54,7 +54,7 @@
 
                     <!-- Line Chart -->
                     <canvas
-                        id="getTotalCustomersStats"
+                        id="total-customers"
                         class="flex items-end w-full aspect-[3.23/1]"
                     ></canvas>
 
@@ -103,14 +103,14 @@
 
                     this.$axios.get("{{ route('admin.reporting.customers.stats') }}", {
                             params: {
-                                type: 'getTotalCustomersStats'
+                                type: 'total-customers'
                             }
                         })
                         .then(response => {
                             this.report = response.data;
 
                             setTimeout(() => {
-                                this.$parent.prepareChart('getTotalCustomersStats', response.data.statistics.over_time);
+                                this.$parent.prepareChart('total-customers', response.data.statistics.over_time);
                             }, 0);
 
                             this.isLoading = false;
