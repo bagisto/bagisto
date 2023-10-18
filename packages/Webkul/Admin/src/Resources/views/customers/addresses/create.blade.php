@@ -15,7 +15,7 @@
     >
         <!-- Address Create Button -->
         @if (bouncer()->hasPermission('customers.addresses.create'))
-            <div 
+            <div
                 class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
                 @click="$refs.CustomerAddress.toggle()"
             >
@@ -36,9 +36,9 @@
                         <!-- Modal Header -->
                         <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                             @lang('admin::app.customers.addresses.create.title')
-                        </p>    
+                        </p>
                     </x-slot:header>
-    
+
                     <x-slot:content>
                         <!-- Modal Content -->
                         {!! view_render_event('admin.customer.addresses.create.before') !!}
@@ -185,7 +185,7 @@
                                         :placeholder="trans('admin::app.customers.addresses.create.street-address')"
                                     >
                                     </x-admin::form.control-group.control>
-                            
+
                                     <x-admin::form.control-group.error
                                         ::control-name="'address1[' + index + ']'"
                                     >
@@ -224,7 +224,7 @@
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="postcode"
-                                        rules="required|integer"
+                                        rules="required"
                                         :label="trans('admin::app.customers.addresses.create.post-code')"
                                         :placeholder="trans('admin::app.customers.addresses.create.post-code')"
                                     >
@@ -278,7 +278,7 @@
                                             :placeholder="trans('admin::app.customers.addresses.create.state')"
                                             v-model="state"
                                         >
-                                            <option 
+                                            <option
                                                 v-for='(state, index) in countryStates[country]'
                                                 :value="state.code"
                                                 v-text="state.default_name"
@@ -326,7 +326,7 @@
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
-                                
+
                                 <!-- Default Address -->
                                 <x-admin::form.control-group class="flex gap-[10px] w-full mt-[20px]">
                                     <x-admin::form.control-group.control
@@ -340,9 +340,9 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label 
+                                    <x-admin::form.control-group.label
                                         for="default_address"
-                                        class="text-gray-600 dark:text-gray-300 font-semibold cursor-pointer" 
+                                        class="text-gray-600 dark:text-gray-300 font-semibold cursor-pointer"
                                     >
                                         @lang('admin::app.customers.addresses.create.default-address')
                                     </x-admin::form.control-group.label>
@@ -357,15 +357,15 @@
 
                         {!! view_render_event('bagisto.admin.customers.create.after') !!}
                     </x-slot:content>
-    
+
                     <x-slot:footer>
                         <!-- Modal Submission -->
                         <div class="flex gap-x-[10px] items-center">
-                            <button 
+                            <button
                                 type="submit"
                                 class="primary-button"
                             >
-                                @lang('admin::app.customers.addresses.create.save-btn-title') 
+                                @lang('admin::app.customers.addresses.create.save-btn-title')
                             </button>
                         </div>
                     </x-slot:footer>
@@ -385,7 +385,7 @@
                     state: "",
 
                     countryStates: @json(core()->groupedStatesByCountries()),
-                    
+
                     streetLineCount: 0,
                 }
             },
@@ -398,7 +398,7 @@
                                 'Content-Type': 'multipart/form-data'
                             }
                         })
-                    
+
                         .then((response) => {
                             this.$refs.CustomerAddress.toggle();
 
