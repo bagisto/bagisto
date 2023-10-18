@@ -398,7 +398,7 @@
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="billing[postcode]"
-                                    rules="required|integer"
+                                    rules="required"
                                     :label="trans('shop::app.checkout.onepage.addresses.billing.postcode')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.billing.postcode')"
                                     v-model="forms.billing.address.postcode"
