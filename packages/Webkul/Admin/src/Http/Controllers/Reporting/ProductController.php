@@ -2,7 +2,6 @@
 
 namespace Webkul\Admin\Http\Controllers\Reporting;
 
-use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Helpers\Reporting;
 
 class ProductController extends Controller
