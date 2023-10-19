@@ -36,7 +36,7 @@ class ExchangeRateController extends Controller
 
         $currencies = $this->currencyRepository->with('exchange_rate')->all();
 
-        return view('admin::settings.exchange_rates.index', compact('currencies'));
+        return view('admin::settings.exchange-rates.index', compact('currencies'));
     }
 
     /**
