@@ -69,104 +69,106 @@
                             </div>
 
                             <p class="text-gray-600 text-[14px]">
-                                Bagisto installation typically involves several steps. Here\'s a general outline of the installation process for Bagisto:
+                                Bagisto installation typically involves several steps. Here's a general outline of the installation process for Bagisto:
                             </p>
 
                             <div class="grid gap-[12px]">
-                                <div class="flex gap-[4px] text-[14px]"
-                                    :class="[stepStates.environment == 'active' ? 'font-bold' : '', 'text-gray-600']">
-                                    <span v-if="stepStates.environment === 'pending'">
-                                        <span class="icon-checkbox text-[20px]"></span>
+                                <!-- Server Environment -->
+                                <div
+                                    class="flex gap-[4px] text-[14px] text-gray-600"
+                                    :class="[stepStates.environment == 'active' ? 'font-bold' : '', 'text-gray-600']"
+                                >
+                                    <span v-if="stepStates.environment !== 'complete'">
+                                        <span
+                                            class="text-[20px]"
+                                            :class="stepStates.environment === 'pending' ? 'icon-checkbox' : 'icon-processing'"
+                                        >
+                                        </span>
                                     </span>
 
-                                    <span v-else-if="stepStates.environment === 'active'">
-                                        <span class="icon-processing text-[20px]"></span>
+                                    <span v-else>
+                                        <span class="icon-tick text-green-500"></span>
                                     </span>
-
-                                    <span
-                                        v-else
-                                        class="icon-tick text-[20px] text-green-500"
-                                    ></span>
 
                                     <p>Server Requirements</p>
                                 </div>
 
+                                <!-- ENV Setup -->
                                 <div
-                                    class="flex gap-[4px] text-[14px]"
+                                    class="flex gap-[4px] text-[14px] text-gray-600"
                                     :class="[stepStates.envSetup == 'active' ? 'font-bold' : '', 'text-gray-600']"
                                 >
-                                    <span v-if="stepStates.envSetup === 'pending'">
-                                        <span class="icon-checkbox text-[20px]"></span>
+                                    <span v-if="stepStates.envSetup !== 'complete'">
+                                        <span
+                                            class="text-[20px]"
+                                            :class="stepStates.envSetup === 'pending' ? 'icon-checkbox' : 'icon-processing'"
+                                        >
+                                        </span>
                                     </span>
 
-                                    <span v-else-if="stepStates.envSetup === 'active'">
-                                        <span class="icon-processing text-[20px]"></span>
+                                    <span v-else>
+                                        <span class="icon-tick text-green-500"></span>
                                     </span>
-
-                                    <span
-                                        v-else
-                                        class="icon-tick text-[20px] text-green-500"
-                                    ></span>
 
                                     <p>Environment Configuration</p>
                                 </div>
 
+                                <!-- Ready For Installation -->
                                 <div
                                     class="flex gap-[4px] text-[14px] text-gray-600"
                                     :class="[stepStates.readyForInstallation == 'active' ? 'font-bold' : '', 'text-gray-600']"
                                 >
-                                    <span v-if="stepStates.readyForInstallation == 'pending'">
-                                        <span class="icon-checkbox text-[20px]"></span>
+                                    <span v-if="stepStates.readyForInstallation !== 'complete'">
+                                        <span
+                                            class="text-[20px]"
+                                            :class="stepStates.readyForInstallation === 'pending' ? 'icon-checkbox' : 'icon-processing'"
+                                        >
+                                        </span>
                                     </span>
 
-                                    <span v-if="stepStates.readyForInstallation == 'active'">
-                                        <span class="icon-processing text-[20px]"></span>
+                                    <span v-else>
+                                        <span class="icon-tick text-green-500"></span>
                                     </span>
-
-                                    <span
-                                        v-if="stepStates.readyForInstallation == 'complete'"
-                                        class="icon-tick text-[20px] text-green-500"
-                                    ></span>
 
                                     <p>Ready for Installation</p>
                                 </div>
 
+                                <!-- Create Admin Configuration -->
                                 <div
                                     class="flex gap-[4px] text-[14px] text-gray-600"
                                     :class="[stepStates.createAdmin == 'active' ? 'font-bold' : '', 'text-gray-600']"
                                 >
-                                    <span v-if="stepStates.createAdmin == 'pending'">
-                                        <span class="icon-checkbox text-[20px]"></span>
+                                    <span v-if="stepStates.createAdmin !== 'complete'">
+                                        <span
+                                            class="text-[20px]"
+                                            :class="stepStates.createAdmin === 'pending' ? 'icon-checkbox' : 'icon-processing'"
+                                        >
+                                        </span>
                                     </span>
 
-                                    <span v-if="stepStates.createAdmin == 'active'">
-                                        <span class="icon-processing text-[20px]"></span>
+                                    <span v-else>
+                                        <span class="icon-tick text-green-500"></span>
                                     </span>
 
-                                    <span
-                                        v-if="stepStates.createAdmin == 'complete'"
-                                        class="icon-tick text-[20px] text-green-500"
-                                    ></span>
-                                    
                                     <p>Create Administrator</p>
                                 </div>
 
+                                <!-- Email Configuration -->
                                 <div
                                     class="flex gap-[4px] text-[14px] text-gray-600"
                                     :class="[stepStates.emailConfiguration == 'active' ? 'font-bold' : '', 'text-gray-600']"
                                 >
-                                    <span v-if="stepStates.emailConfiguration == 'pending'">
-                                        <span class="icon-checkbox text-[20px]"></span>
+                                    <span v-if="stepStates.emailConfiguration !== 'complete'">
+                                        <span
+                                            class="text-[20px]"
+                                            :class="stepStates.emailConfiguration === 'pending' ? 'icon-checkbox' : 'icon-processing'"
+                                        >
+                                        </span>
                                     </span>
 
-                                    <span v-if="stepStates.emailConfiguration == 'active'">
-                                        <span class="icon-processing text-[20px]"></span>
+                                    <span v-else>
+                                        <span class="icon-tick text-green-500"></span>
                                     </span>
-
-                                    <span
-                                        v-if="stepStates.emailConfiguration == 'complete'"
-                                        class="icon-tick text-[20px] text-green-500"
-                                    ></span>
 
                                     <p>Email Configuration</p>
                                 </div>
@@ -176,21 +178,21 @@
                                     class="flex gap-[4px] text-[14px] text-gray-600"
                                     :class="[stepStates.installationCompleted == 'active' ? 'font-bold' : '', 'text-gray-600']"
                                 >
-                                    <span v-if="stepStates.installationCompleted == 'pending'">
-                                        <span class="icon-checkbox text-[20px]"></span>
+                                    <span v-if="stepStates.installationCompleted !== 'complete'">
+                                        <span
+                                            class="text-[20px]"
+                                            :class="stepStates.installationCompleted === 'pending' ? 'icon-checkbox' : 'icon-processing'"
+                                        >
+                                        </span>
                                     </span>
 
-                                    <span v-if="stepStates.installationCompleted == 'active'">
-                                        <span class="icon-processing text-[20px]"></span>
+                                    <span v-else>
+                                        <span class="icon-tick text-green-500"></span>
                                     </span>
 
-                                    <span
-                                        v-if="stepStates.installationCompleted == 'complete'"
-                                        class="icon-tick text-[20px] text-green-500"
-                                    ></span>
-                                    
                                     <p>Installation Completed</p>
                                 </div>
+
                             </div>
                         </div>
 
@@ -318,7 +320,7 @@
                                     <x-installer::form.control-group.control
                                         type="text"
                                         name="app_url"
-                                        ::value="envData.app_url ??' https://localhost'"
+                                        ::value="envData.app_url ?? 'https://localhost'"
                                         rules="required"
                                         label="Default URL"
                                         placeholder="https://localhost"
@@ -404,11 +406,15 @@
                                         rules="required"
                                         label="Default Locale"
                                     >
-                                        <option value="ar">Arabic</option>
-                                        <option value="nl">Dutch</option>
                                         <option value="en" selected>English</option>
                                         <option value="fr">French</option>
+                                        <option value="nl">Dutch</option>
+                                        <option value="es">Türkçe</option>
                                         <option value="es">Espanol</option>
+                                        <option value="fr">German</option>
+                                        <option value="en">Italian</option>
+                                        <option value="ar">Russian</option>
+                                        <option value="nl">Ukrainian</option>
                                     </x-installer::form.control-group.control>
 
                                     <x-installer::form.control-group.error
@@ -1184,7 +1190,7 @@
                             const stepActions = {
                                 envDatabase: () => {
                                     if (params.db_connection === 'mysql') {
-                                        this.completeStep('envSetup', 'readyForInstallation', 'envSetup', 'active', setErrors);
+                                        this.completeStep('envSetup', 'readyForInstallation', 'active', 'complete', setErrors);
 
                                         this.envData = { ...this.envData, ...params };
                                     } else {
@@ -1205,9 +1211,10 @@
                                 },
 
                                 emailConfiguration: (setErrors) => {
-                                    this.saveSmtp(params);
+                                    this.completeStep('emailConfiguration', 'installationCompleted', 'active', 'complete', setErrors);
 
-                                    this.stepStates.emailConfiguration = 'complete';
+
+                                    this.saveSmtp(params, setErrors);
                                 },
                             };
 
@@ -1281,7 +1288,7 @@
                                 });
                         },
 
-                        saveAdmin(params) {
+                        saveAdmin(params, setErrors) {
                             this.$axios.post("{{ route('installer.adminConfigSetup') }}", params)
                                 .then((response) => {
                                     this.currentStep = 'emailConfiguration';
@@ -1291,12 +1298,9 @@
                                 });
                         },
 
-                        saveSmtp(params) {
+                        saveSmtp(params, setErrors) {
                             this.$axios.post("{{ route('installer.smtpConfigSetup') }}", params)
                                 .then((response) => {
-                                    this.currentStep = 'installationCompleted';
-
-                                    this.stepStates.installationCompleted == 'active';
                                 })
                                 .catch(error => {
                                     setErrors(error.response.data.errors);

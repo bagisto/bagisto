@@ -80,10 +80,21 @@ class DatabaseManager
 
             $seederLog = Artisan::output();
 
+            $this->storageLink();
+
             return $seederLog;
         } catch (Exception $e) {
             return $e->getMessage();
         }
+    }
+
+    /**
+     * Storage Link.
+     *
+     */
+    private function storageLink()
+    {
+        Artisan::call('storage:link');
     }
 
     /**
