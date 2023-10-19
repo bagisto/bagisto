@@ -84,17 +84,21 @@
             },
 
             mounted() {
-                this.getStats();
+                this.getStats({});
+
+                this.$emitter.on('reporting-filter-updated', this.getStats);
             },
 
             methods: {
-                getStats() {
+                getStats(filtets) {
                     this.isLoading = true;
 
+                    var filtets = Object.assign({}, filtets);
+
+                    filtets.type = 'customers-with-most-orders';
+
                     this.$axios.get("{{ route('admin.reporting.customers.stats') }}", {
-                            params: {
-                                type: 'customers-with-most-orders'
-                            }
+                            params: filtets
                         })
                         .then(response => {
                             this.report = response.data;

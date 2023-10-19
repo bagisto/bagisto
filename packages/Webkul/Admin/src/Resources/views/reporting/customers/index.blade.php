@@ -10,6 +10,9 @@
                 @lang('admin::app.reporting.customers.index.title')
             </p>
         </div>
+
+        <!-- Actions -->
+        <v-reporting-filters></v-reporting-filters>
     </div>
 
     {{-- Customers Stats Vue Component --}}
@@ -41,5 +44,52 @@
 
     @pushOnce('scripts')
         <script type="module" src="{{ bagisto_asset('js/chart.js') }}"></script>
+
+        <script type="text/x-template" id="v-reporting-filters-template">
+            <div class="flex gap-[6px]">
+                <x-admin::flat-picker.date class="w-[140px]" ::allow-input="false">
+                    <input
+                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                        v-model="filters.start"
+                        placeholder="@lang('Start Date')"
+                    />
+                </x-admin::flat-picker.date>
+
+                <x-admin::flat-picker.date class="w-[140px]" ::allow-input="false">
+                    <input
+                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                        v-model="filters.end"
+                        placeholder="@lang('End Date')"
+                    />
+                </x-admin::flat-picker.date>
+            </div>
+        </script>
+
+        <script type="module">
+            app.component('v-reporting-filters', {
+                template: '#v-reporting-filters-template',
+
+                data() {
+                    return {
+                        filters: {
+                            start: "{{ $startDate->format('Y-m-d') }}",
+                            
+                            end: "{{ $endDate->format('Y-m-d') }}",
+                        }
+                    }
+                },
+
+                watch: {
+                    filters: {
+                        handler() {
+                            console.log(111)
+                            this.$emitter.emit('reporting-filter-updated', this.filters);
+                        },
+
+                        deep: true
+                    }
+                },
+            });
+        </script>
     @endPushOnce
 </x-admin::layouts>

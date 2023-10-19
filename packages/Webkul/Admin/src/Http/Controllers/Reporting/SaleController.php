@@ -39,7 +39,10 @@ class SaleController extends Controller
      */
     public function index()
     {
-        return view('admin::reporting.sales.index');
+        return view('admin::reporting.sales.index')->with([
+            'startDate' => $this->reportingHelper->getStartDate(),
+            'endDate'   => $this->reportingHelper->getEndDate(),
+        ]);
     }
 
     /**
@@ -49,9 +52,11 @@ class SaleController extends Controller
      */
     public function view()
     {
-        $entity = 'sales';
-
-        return view('admin::reporting.view', compact('entity'));
+        return view('admin::reporting.view')->with([
+            'entity'    => 'sales',
+            'startDate' => $this->reportingHelper->getStartDate(),
+            'endDate'   => $this->reportingHelper->getEndDate(),
+        ]);
     }
 
     /**

@@ -84,17 +84,21 @@
             },
 
             mounted() {
-                this.getStats();
+                this.getStats({});
+
+                this.$emitter.on('reporting-filter-updated', this.getStats);
             },
 
             methods: {
-                getStats() {
+                getStats(filtets) {
                     this.isLoading = true;
 
+                    var filtets = Object.assign({}, filtets);
+
+                    filtets.type = 'top-payment-methods';
+
                     this.$axios.get("{{ route('admin.reporting.sales.stats') }}", {
-                            params: {
-                                type: 'top-payment-methods'
-                            }
+                            params: filtets
                         })
                         .then(response => {
                             this.report = response.data;

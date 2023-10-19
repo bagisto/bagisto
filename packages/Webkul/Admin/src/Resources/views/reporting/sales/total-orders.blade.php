@@ -122,17 +122,21 @@
             },
 
             mounted() {
-                this.getStats();
+                this.getStats({});
+
+                this.$emitter.on('reporting-filter-updated', this.getStats);
             },
 
             methods: {
-                getStats() {
+                getStats(filtets) {
                     this.isLoading = true;
 
+                    var filtets = Object.assign({}, filtets);
+
+                    filtets.type = 'total-orders';
+
                     this.$axios.get("{{ route('admin.reporting.sales.stats') }}", {
-                            params: {
-                                type: 'total-orders'
-                            }
+                            params: filtets
                         })
                         .then(response => {
                             this.report = response.data;

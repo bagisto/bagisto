@@ -36,7 +36,10 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return view('admin::reporting.customers.index');
+        return view('admin::reporting.customers.index')->with([
+            'startDate' => $this->reportingHelper->getStartDate(),
+            'endDate'   => $this->reportingHelper->getEndDate(),
+        ]);
     }
 
     /**
@@ -46,9 +49,11 @@ class CustomerController extends Controller
      */
     public function view()
     {
-        $entity = 'customers';
-
-        return view('admin::reporting.view', compact('entity'));
+        return view('admin::reporting.view')->with([
+            'entity'    => 'customers',
+            'startDate' => $this->reportingHelper->getStartDate(),
+            'endDate'   => $this->reportingHelper->getEndDate(),
+        ]);
     }
 
     /**

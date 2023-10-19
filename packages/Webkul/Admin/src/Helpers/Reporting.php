@@ -969,4 +969,24 @@ class Reporting
             'current'  => $this->saleReporting->getStartDate()->format('d M Y') . ' - ' . $this->saleReporting->getEndDate()->format('d M Y'),
         ];
     }
+
+    /**
+     * Get the start date.
+     * 
+     * @return \Carbon\Carbon
+     */
+    public function getStartDate(): Carbon
+    {
+        return $this->saleReporting->getStartDate();
+    }
+
+    /**
+     * Get the end date.
+     * 
+     * @return \Carbon\Carbon
+     */
+    public function getEndDate(): Carbon
+    {
+        return $this->saleReporting->getEndDate();
+    }
 }
