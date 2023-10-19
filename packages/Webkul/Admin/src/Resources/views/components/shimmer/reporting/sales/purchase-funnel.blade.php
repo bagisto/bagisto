@@ -1,6 +1,6 @@
-<!-- Purchase Funnel Section -->
+{{-- Purchase Funnel Section --}}
 <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-    <!-- Header -->
+    {{-- Header --}}
     <div class="shimmer w-[150px] h-[17px] mb-[16px]"></div>
 
     <div class="grid grid-cols-4 gap-[24px]">

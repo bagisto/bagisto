@@ -1,6 +1,6 @@
-<!-- Total Orders Section -->
+{{-- Average Order Value Shimmer --}}
 <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-    <!-- Header -->
+    {{-- Header --}}
     <div class="flex items-center justify-between mb-[16px]">
         <div class="shimmer w-[150px] h-[17px]"></div>
 
@@ -15,6 +15,7 @@
 
         <div class="shimmer w-[120px] h-[20px]"></div>
     
+        {{-- Progress Bar Shimmer --}}
         <x-admin::shimmer.reporting.graph/>
     </div>
 </div>
