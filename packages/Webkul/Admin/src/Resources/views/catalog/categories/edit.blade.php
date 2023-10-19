@@ -14,6 +14,9 @@
         enctype="multipart/form-data"
         method="PUT"
     >
+
+        {!! view_render_event('bagisto.admin.catalog.categories.edit.edit_form_controls.before', ['category' => $category]) !!}
+
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.catalog.categories.edit.title')
@@ -79,7 +82,7 @@
             {{-- Left Section --}}
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
 
-                {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.general.before', ['category' => $category]) !!}
+                {!! view_render_event('bagisto.admin.catalog.categories.edit.card.general.before', ['category' => $category]) !!}
 
                 <!-- General -->
                 <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
@@ -143,9 +146,9 @@
                     @endif
                 </div>
 
-                {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.general.after', ['category' => $category]) !!}
+                {!! view_render_event('bagisto.admin.catalog.categories.edit.card.general.after', ['category' => $category]) !!}
 
-                {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.description_images.before', ['category' => $category]) !!}
+                {!! view_render_event('bagisto.admin.catalog.categories.edit.card.description_images.before', ['category' => $category]) !!}
 
                 <!-- Description and images -->
                 <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
@@ -217,9 +220,9 @@
                     </div>
                 </div>
 
-                {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.description_images.after', ['category' => $category]) !!}
+                {!! view_render_event('bagisto.admin.catalog.categories.edit.card.description_images.after', ['category' => $category]) !!}
 
-                {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.seo.before', ['category' => $category]) !!}
+                {!! view_render_event('bagisto.admin.catalog.categories.edit.card.seo.before', ['category' => $category]) !!}
 
                 {{-- SEO Deatils --}}
                 <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
@@ -315,12 +318,15 @@
                     </div>
                 </div>
 
-                {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.seo.after', ['category' => $category]) !!}
+                {!! view_render_event('bagisto.admin.catalog.categories.edit.card.seo.after', ['category' => $category]) !!}
             </div>
 
             {{-- Right Section --}}
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
                 {{-- Settings --}}
+
+                {!! view_render_event('bagisto.admin.catalog.categories.edit.card.accordion.settings.bedore', ['category' => $category]) !!}
+
                 <x-admin::accordion>
                     <x-slot:header>
                         <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
@@ -410,6 +416,10 @@
                     </x-slot:content>
                 </x-admin::accordion>
 
+                {!! view_render_event('bagisto.admin.catalog.categories.edit.card.accordion.settings.after', ['category' => $category]) !!}
+
+                {!! view_render_event('bagisto.admin.catalog.categories.edit.card.accordion.filterable_attributes.before', ['category' => $category]) !!}
+
                 {{-- Filterable Attributes --}}
                 <x-admin::accordion>
                     <x-slot:header>
@@ -451,8 +461,14 @@
                         </x-admin::form.control-group.error>
                     </x-slot:content>
                 </x-admin::accordion>
+
+                {!! view_render_event('bagisto.admin.catalog.categories.edit.card.accordion.filterable_attributes.after', ['category' => $category]) !!}
+
             </div>
         </div>
+
+        {!! view_render_event('bagisto.admin.catalog.categories.edit.edit_form_controls.after', ['category' => $category]) !!}
+
     </x-admin::form>
 
     @pushOnce('scripts')

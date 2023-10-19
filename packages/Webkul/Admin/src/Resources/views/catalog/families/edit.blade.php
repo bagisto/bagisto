@@ -8,6 +8,9 @@
         method="PUT"
         :action="route('admin.catalog.families.update', $attributeFamily->id)"
     >
+
+        {!! view_render_event('bagisto.admin.catalog.families.edit.edit_form_accordian.before', ['attributeFamily' => $attributeFamily]) !!}
+
         {{-- Page Header --}}
         <div class="flex justify-between items-center">
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
@@ -34,11 +37,18 @@
         {{-- Container --}}
         <div class="flex gap-[10px] mt-[14px]">
             {{-- Left Container --}}
+
+            {!! view_render_event('bagisto.admin.catalog.families.edit.card.attributes-panel.before', ['attributeFamily' => $attributeFamily]) !!}
+
             <div class="flex flex-col gap-[8px] flex-1 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                 <v-family-attributes>
                     <x-admin::shimmer.families.attributes-panel/>
                 </v-family-attributes>
             </div>
+
+            {!! view_render_event('bagisto.admin.catalog.families.edit.card.attributes-panel.after', ['attributeFamily' => $attributeFamily]) !!}
+
+            {!! view_render_event('bagisto.admin.catalog.families.edit.card.accordion.general.before', ['attributeFamily' => $attributeFamily]) !!}
 
             {{-- Right Container --}}
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
@@ -102,7 +112,13 @@
                     </div>
                 </div>
             </div>
+
+            {!! view_render_event('bagisto.admin.catalog.families.edit.card.accordion.general.after', ['attributeFamily' => $attributeFamily]) !!}
+
         </div>
+
+        {!! view_render_event('bagisto.admin.catalog.families.edit.edit_form_accordian.after', ['attributeFamily' => $attributeFamily]) !!}
+
     </x-admin::form>
 
     @pushOnce('scripts')
