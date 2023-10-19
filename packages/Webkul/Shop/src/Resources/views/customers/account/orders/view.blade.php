@@ -1,7 +1,7 @@
 <x-shop::layouts.account>
     {{-- Page Title --}}
     <x-slot:title>
-        @lang('shop::app.customers.account.orders.view.page-title', ['order_id' => $order->id])
+        @lang('shop::app.customers.account.orders.view.page-title', ['order_id' => $order->increment_id])
     </x-slot:title>
     
     {{-- Breadcrumbs --}}
@@ -12,7 +12,7 @@
     <div class="flex justify-between items-center">
         <div class="">
             <h2 class="text-[26px] font-medium">
-                @lang('shop::app.customers.account.orders.view.page-title', ['order_id' => $order->id])
+                @lang('shop::app.customers.account.orders.view.page-title', ['order_id' => $order->increment_id])
             </h2>
         </div>
 

@@ -2,44 +2,49 @@
 
 namespace Webkul\Admin\Http\Controllers;
 
-use Webkul\Admin\Services\DashboardService;
+use Webkul\Admin\Helpers\Dashboard;
 
 class DashboardController extends Controller
 {
     /**
      * Create a controller instance.
+     * 
+     * @param  \Webkul\Admin\Helpers\Dashboard  $dashboardHelper
+     * @return void
      */
-    public function __construct(protected DashboardService $dashboardService)
+    public function __construct(protected Dashboard $dashboardHelper)
     {
     }
 
     /**
      * Dashboard page.
+     * 
+     * @return \Illuminate\View\View|\Illuminate\Http\JsonResponse
      */
     public function index()
     {
         if (request()->ajax()) {
-            $statistics = $this->dashboardService
-                ->setStartDate(request()->date('start'))
-                ->setEndDate(request()->date('end'))
-                ->getStatistics();
-
             return response()->json([
-                'statistics' => $statistics,
-                'startDate'  => $this->dashboardService->getStartDate()->format('d M'),
-                'endDate'    => $this->dashboardService->getEndDate()->format('d M'),
+                'statistics' => [
+                    'sales'     => $this->dashboardHelper->getSalesStats(),
+                    'visitors'  => $this->dashboardHelper->getVisitorStats(),
+                    'products'  => $this->dashboardHelper->getTopProducts(),
+                    'customers' => $this->dashboardHelper->getTopCustomers(),
+                ],
+                'startDate' => $this->dashboardHelper->getStartDate()->format('d M'),
+                'endDate'   => $this->dashboardHelper->getEndDate()->format('d M'),
             ]);
         }
 
-        $statistics = $this->dashboardService
-            ->setStartDate(request()->date('start'))
-            ->setEndDate(request()->date('end'))
-            ->getStatistics();
-
-        return view('admin::dashboard.index', compact('statistics'))
+        return view('admin::dashboard.index')
             ->with([
-                'startDate' => $this->dashboardService->getStartDate(),
-                'endDate'   => $this->dashboardService->getEndDate(),
+                'statistics' => [
+                    'over_all'        => $this->dashboardHelper->getOverAllStats(),
+                    'today'           => $this->dashboardHelper->getTodayStats(),
+                    'stock_threshold' => $this->dashboardHelper->getStockThresholdProducts(),
+                ],
+                'startDate' => $this->dashboardHelper->getStartDate(),
+                'endDate'   => $this->dashboardHelper->getEndDate(),
             ]);
     }
 }
