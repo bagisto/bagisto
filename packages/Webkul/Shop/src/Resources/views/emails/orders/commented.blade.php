@@ -5,7 +5,7 @@
         </p>
 
         <p style="font-size: 16px;color: #384860;line-height: 24px;">
-            @lang('shop::app.emails.sales.order.commented.title', [
+            @lang('shop::app.emails.orders.commented.title', [
                 'order_id'   => '<a href="' . route('shop.customers.account.orders.view', $comment->order_id) . '" style="color: #2969FF;">#' . $comment->order->increment_id . '</a>',
                 'created_at' => core()->formatDate($comment->order->created_at, 'Y-m-d H:i:s')
             ])
