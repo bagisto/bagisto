@@ -2016,6 +2016,7 @@ return [
                 'title'      => 'Lokalizacje',
                 'locale'     => 'Lokalizacja',
                 'create-btn' => 'Utwórz Lokalizację',
+                'logo-size'  => 'Rozdzielczość obrazu powinna być jak 24px x 16px',
 
                 'datagrid' => [
                     'actions'   => 'Akcje',

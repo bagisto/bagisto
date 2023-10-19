@@ -2017,6 +2017,7 @@ return [
                 'title'      => 'Yereller',
                 'locale'     => 'Yerel',
                 'create-btn' => 'Yerel Oluştur',
+                'logo-size'  => 'Resim çözünürlüğü 24px x 16px gibi olmalıdır',
 
                 'datagrid' => [
                     'actions'   => 'İşlemler',

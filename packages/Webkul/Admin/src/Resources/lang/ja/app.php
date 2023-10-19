@@ -2016,6 +2016,7 @@ return [
                 'title'      => 'ロケール',
                 'locale'     => 'ロケール',
                 'create-btn' => 'ロケールを作成',
+                'logo-size'  => '画像の解像度は24px × 16pxのようである必要があります',
 
                 'datagrid' => [
                     'actions'   => 'アクション',

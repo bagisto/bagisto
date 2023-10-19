@@ -2016,6 +2016,7 @@ return [
                 'title'      => 'Localidades',
                 'locale'     => 'Localidad',
                 'create-btn' => 'Crear Localidad',
+                'logo-size' => 'La risoluzione dell\'immagine dovrebbe essere come 24px x 16px',
 
                 'datagrid' => [
                     'actions'   => 'Acciones',

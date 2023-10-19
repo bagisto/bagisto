@@ -2016,6 +2016,7 @@ return [
                 'title'      => 'Idiomas',
                 'locale'     => 'Idioma',
                 'create-btn' => 'Criar Idioma',
+                'logo-size'  => 'A resolução da imagem deve ser de 24px x 16px',
 
                 'datagrid' => [
                     'actions'   => 'Ações',

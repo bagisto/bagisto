@@ -2016,6 +2016,7 @@ return [
                 'title'      => 'Sprachversionen',
                 'locale'     => 'Sprachversion',
                 'create-btn' => 'Sprachversion erstellen',
+                'logo-size'  => 'Bildauflösung sollte wie 24px x 16px sein',
 
                 'datagrid' => [
                     'actions'   => 'Aktionen',

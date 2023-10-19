@@ -2016,6 +2016,7 @@ return [
                 'title'      => 'Locales',
                 'locale'     => 'Locale',
                 'create-btn' => 'Create Locale',
+                'logo-size'  => 'Image resolution should be like 24px X 16px',
 
                 'datagrid' => [
                     'actions'   => 'Actions',
