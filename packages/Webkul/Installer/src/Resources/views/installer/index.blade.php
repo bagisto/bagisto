@@ -54,7 +54,7 @@
                     <div class="grid items-end max-w-[362px] m-auto h-[100vh]">
                         <div class="grid gap-[16px]">
                             <img
-                                src="{{ asset('images/bagisto-logo.svg') }}"
+                                src="{{ bagisto_asset('images/bagisto-logo.svg', 'installer') }}"
                                 alt="Bagisto Logo"
                             >
 
