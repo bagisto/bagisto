@@ -1,24 +1,26 @@
 {{-- Total Customer Vue Component --}}
 <v-reporting-customers-total-traffic>
-    <x-admin::shimmer.reporting.graph/> 
+    {{-- Shimmer --}}
+    <x-admin::shimmer.reporting.customers.total-traffic/> 
 </v-reporting-customers-total-traffic>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-reporting-customers-total-traffic-template">
+        <!-- Shimmer -->
+        <template v-if="isLoading">
+            <x-admin::shimmer.reporting.customers.total-traffic/> 
+        </template>
+
         <!-- Total Customer Section -->
-        <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-            <!-- Header -->
-            <div class="flex items-center justify-between mb-[16px]">
-                <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
-                    @lang('admin::app.reporting.customers.index.customers-traffic')
-                </p>
-            </div>
-
-            <template v-if="isLoading">
-                <x-admin::shimmer.reporting.graph/> 
-            </template>
-
-            <template v-else>
+        <template v-else>
+            <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                <!-- Header -->
+                <div class="flex items-center justify-between mb-[16px]">
+                    <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
+                        @lang('admin::app.reporting.customers.index.customers-traffic')
+                    </p>
+                </div>
+                
                 <!-- Content -->
                 <div class="grid gap-[16px]">
                     <div class="flex gap-[16px] justify-between">
@@ -77,11 +79,11 @@
                         @lang('admin::app.reporting.customers.index.traffic-over-week')
                     </p>
 
-                    <!-- Line Chart -->
-                    <canvas
-                        id="customers-traffic"
-                        class="flex items-end w-full aspect-[3.23/1]"
-                    ></canvas>
+                    <!-- Bar Chart -->
+                    <x-admin::charts.bar
+                        ::labels="chartLabels"
+                        ::datasets="chartDatasets"
+                    />
 
                     <!-- Date Range -->
                     <div class="flex gap-[20px] justify-center">
@@ -102,8 +104,8 @@
                         </div>
                     </div>
                 </div>
-            </template>
-        </div>
+            </div>
+        </template>
     </script>
 
     <script type="module">
@@ -115,8 +117,26 @@
                     report: [],
 
                     isLoading: true,
+                }
+            },
 
-                    chart: undefined,
+            computed: {
+                chartLabels() {
+                    return this.report.statistics.over_time.previous['label'];
+                },
+
+                chartDatasets() {
+                    return [{
+                        data: this.report.statistics.over_time.previous['total'],
+                        pointStyle: false,
+                        backgroundColor: '#34D399',
+                        fill: true,
+                    }, {
+                        data: this.report.statistics.over_time.current['total'],
+                        pointStyle: false,
+                        backgroundColor: '#0E9CFF',
+                        fill: true,
+                    }];
                 }
             },
 
@@ -136,70 +156,9 @@
                         .then(response => {
                             this.report = response.data;
 
-                            setTimeout(() => {
-                                this.prepareChart(response.data.statistics.over_time);
-                            }, 0);
-
                             this.isLoading = false;
                         })
                         .catch(error => {});
-                },
-
-                prepareChart(stats) {
-                    if (this.chart) {
-                        this.chart.destroy();
-                    }
-
-                    this.chart = new Chart(document.getElementById('customers-traffic'), {
-                        type: 'bar',
-                        
-                        data: {
-                            labels: stats['current']['label'],
-
-                            datasets: [{
-                                data: stats['previous']['total'],
-                                pointStyle: false,
-                                backgroundColor: '#34D399',
-                                fill: true,
-                            }, {
-                                data: stats['current']['total'],
-                                pointStyle: false,
-                                backgroundColor: '#0E9CFF',
-                                fill: true,
-                            }],
-                        },
-                
-                        options: {
-                            aspectRatio: 3.17,
-                            
-                            plugins: {
-                                legend: {
-                                    display: false
-                                },
-
-                                {{-- tooltip: {
-                                    enabled: false,
-                                } --}}
-                            },
-                            
-                            scales: {
-                                x: {
-                                    beginAtZero: true,
-
-                                    border: {
-                                        dash: [8, 4],
-                                    }
-                                },
-
-                                y: {
-                                    beginAtZero: true,
-                                    border: {
-                                        dash: [8, 4],
-                                    }
-                                }
-                            }
-                        }
-                    });
                 },
             }
         });

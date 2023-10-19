@@ -72,21 +72,8 @@ class Reporting
             'sales'     => $this->saleReporting->getTotalSalesProgress(),
 
             'over_time' => [
-                'columns' => [
-                    [
-                        'key'   => 'label',
-                        'label' => 'Interval'
-                    ], [
-                        'key'   => 'count',
-                        'label' => 'Orders'
-                    ], [
-                        'key'   => 'formatted_total',
-                        'label' => 'Total'
-                    ],
-                ],
-
-                'previous' => $this->saleReporting->getPreviousTotalSalesOverTime(request()->query('period') ?? 'day'),
-                'current'  => $this->saleReporting->getCurrentTotalSalesOverTime(request()->query('period') ?? 'day'),
+                'previous' => $this->saleReporting->getPreviousTotalSalesOverTime(),
+                'current'  => $this->saleReporting->getCurrentTotalSalesOverTime(),
             ],
         ];
     }

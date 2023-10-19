@@ -1,31 +1,32 @@
 {{-- Refunds Vue Component --}}
 <v-reporting-sales-total-refunds>
-    <x-admin::shimmer.reporting.sales/>
+    <x-admin::shimmer.reporting.sales.total-refunds/>
 </v-reporting-sales-total-refunds>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-reporting-sales-total-refunds-template">
+        <!-- Shimmer -->
+        <template v-if="isLoading">
+            <x-admin::shimmer.reporting.sales.total-refunds/>
+        </template>
+
         <!-- Refunds Section -->
-        <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-            <!-- Header -->
-            <div class="flex items-center justify-between mb-[16px]">
-                <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
-                    @lang('admin::app.reporting.sales.index.refunds')
-                </p>
+        <template v-else>
+            <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                <!-- Header -->
+                <div class="flex items-center justify-between mb-[16px]">
+                    <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
+                        @lang('admin::app.reporting.sales.index.refunds')
+                    </p>
 
-                <a
-                    href="{{ route('admin.reporting.sales.view', ['type' => 'refunds']) }}"
-                    class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
-                >
-                    @lang('admin::app.reporting.sales.index.view-details')
-                </a>
-            </div>
+                    <a
+                        href="{{ route('admin.reporting.sales.view', ['type' => 'refunds']) }}"
+                        class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
+                    >
+                        @lang('admin::app.reporting.sales.index.view-details')
+                    </a>
+                </div>
 
-            <template v-if="isLoading">
-                <x-admin::shimmer.reporting.graph/>
-            </template>
-
-            <template v-else>
                 <!-- Content -->
                 <div class="grid gap-[16px]">
                     <div class="flex gap-[16px] justify-between">
@@ -53,10 +54,10 @@
                     </p>
 
                     <!-- Line Chart -->
-                    <canvas
-                        id="refunds"
-                        class="flex items-end w-full aspect-[3.23/1]"
-                    ></canvas>
+                    <x-admin::charts.line
+                        ::labels="chartLabels"
+                        ::datasets="chartDatasets"
+                    />
 
                     <!-- Date Range -->
                     <div class="flex gap-[20px] justify-center">
@@ -77,8 +78,8 @@
                         </div>
                     </div>
                 </div>
-            </template>
-        </div>
+            </div>
+        </template>
     </script>
 
     <script type="module">
@@ -90,6 +91,32 @@
                     report: [],
 
                     isLoading: true,
+                }
+            },
+
+            computed: {
+                chartLabels() {
+                    return this.report.statistics.over_time.current.map(({ label }) => label);
+                },
+
+                chartDatasets() {
+                    return [{
+                        data: this.report.statistics.over_time.current.map(({ total }) => total),
+                        lineTension: 0.2,
+                        pointStyle: false,
+                        borderWidth: 2,
+                        borderColor: '#0E9CFF',
+                        backgroundColor: 'rgba(14, 156, 255, 0.3)',
+                        fill: true,
+                    }, {
+                        data: this.report.statistics.over_time.previous.map(({ total }) => total),
+                        lineTension: 0.2,
+                        pointStyle: false,
+                        borderWidth: 2,
+                        borderColor: '#34D399',
+                        backgroundColor: 'rgba(52, 211, 153, 0.3)',
+                        fill: true,
+                    }];
                 }
             },
 
@@ -108,10 +135,6 @@
                         })
                         .then(response => {
                             this.report = response.data;
-
-                            setTimeout(() => {
-                                this.$parent.prepareChart('refunds', response.data.statistics.over_time);
-                            }, 0);
 
                             this.isLoading = false;
                         })

@@ -1,31 +1,33 @@
 {{-- Total Customer Vue Component --}}
 <v-reporting-customers-total-customers>
-    <x-admin::shimmer.reporting.graph/> 
+    {{-- Shimmer --}}
+    <x-admin::shimmer.reporting.customers.total-customers/> 
 </v-reporting-customers-total-customers>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-reporting-customers-total-customers-template">
+        <!-- Shimmer -->
+        <template v-if="isLoading">
+            <x-admin::shimmer.reporting.customers.total-customers/>
+        </template>
+
         <!-- Total Customer Section -->
-        <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-            <!-- Header -->
-            <div class="flex items-center justify-between mb-[16px]">
-                <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
-                    @lang('admin::app.reporting.customers.index.total-customers')
-                </p>
+        <template v-else>
+            <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                <!-- Header -->
+                <div class="flex items-center justify-between mb-[16px]">
+                    <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
+                        @lang('admin::app.reporting.customers.index.total-customers')
+                    </p>
 
-                <a
-                    href="{{ route('admin.reporting.customers.view', ['type' => 'total-customers']) }}"
-                    class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
-                >
-                    @lang('admin::app.reporting.customers.index.view-details')
-                </a>
-            </div>
-
-            <template v-if="isLoading">
-                <x-admin::shimmer.reporting.graph/> 
-            </template>
-
-            <template v-else>
+                    <a
+                        href="{{ route('admin.reporting.customers.view', ['type' => 'total-customers']) }}"
+                        class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
+                    >
+                        @lang('admin::app.reporting.customers.index.view-details')
+                    </a>
+                </div>
+                
                 <!-- Content -->
                 <div class="grid gap-[16px]">
                     <div class="flex gap-[16px]">
@@ -53,10 +55,10 @@
                     </p>
 
                     <!-- Line Chart -->
-                    <canvas
-                        id="total-customers"
-                        class="flex items-end w-full aspect-[3.23/1]"
-                    ></canvas>
+                    <x-admin::charts.line
+                        ::labels="chartLabels"
+                        ::datasets="chartDatasets"
+                    />
 
                     <!-- Date Range -->
                     <div class="flex gap-[20px] justify-center">
@@ -77,8 +79,8 @@
                         </div>
                     </div>
                 </div>
-            </template>
-        </div>
+            </div>
+        </template>
     </script>
 
     <script type="module">
@@ -90,6 +92,32 @@
                     report: [],
 
                     isLoading: true,
+                }
+            },
+
+            computed: {
+                chartLabels() {
+                    return this.report.statistics.over_time.current.map(({ label }) => label);
+                },
+
+                chartDatasets() {
+                    return [{
+                        data: this.report.statistics.over_time.current.map(({ total }) => total),
+                        lineTension: 0.2,
+                        pointStyle: false,
+                        borderWidth: 2,
+                        borderColor: '#0E9CFF',
+                        backgroundColor: 'rgba(14, 156, 255, 0.3)',
+                        fill: true,
+                    }, {
+                        data: this.report.statistics.over_time.previous.map(({ total }) => total),
+                        lineTension: 0.2,
+                        pointStyle: false,
+                        borderWidth: 2,
+                        borderColor: '#34D399',
+                        backgroundColor: 'rgba(52, 211, 153, 0.3)',
+                        fill: true,
+                    }];
                 }
             },
 
@@ -108,10 +136,6 @@
                         })
                         .then(response => {
                             this.report = response.data;
-
-                            setTimeout(() => {
-                                this.$parent.prepareChart('total-customers', response.data.statistics.over_time);
-                            }, 0);
 
                             this.isLoading = false;
                         })

@@ -1,21 +1,24 @@
 {{-- Purchase Funnel Vue Component --}}
 <v-reporting-sales-purchase-funnel>
+    {{-- Shimmer --}}
     <x-admin::shimmer.reporting.sales.purchase-funnel/>
 </v-reporting-sales-purchase-funnel>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-reporting-sales-purchase-funnel-template">
-        <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-            <!-- Header -->
-            <p class="text-[16px] text-gray-600 dark:text-white font-semibold mb-[16px]">
-                @lang('admin::app.reporting.sales.index.purchase-funnel')
-            </p>
+        <!-- Shimmer -->
+        <template v-if="isLoading">
+            <x-admin::shimmer.reporting.sales.purchase-funnel/>
+        </template>
 
-            <template v-if="isLoading">
-                <x-admin::shimmer.reporting.sales.purchase-funnel/>
-            </template>
-
-            <template v-else>
+        <!-- Purchase Funnel Section -->
+        <template v-else>
+            <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                <!-- Header -->
+                <p class="text-[16px] text-gray-600 dark:text-white font-semibold mb-[16px]">
+                    @lang('admin::app.reporting.sales.index.purchase-funnel')
+                </p>
+                
                 <!-- Content -->
                 <div class="grid grid-cols-4 gap-[24px]">
                     <!-- Total Visits -->
@@ -128,8 +131,8 @@
                         </p>
                     </div>
                 </div>
-            </template>
-        </div>
+            </div>
+        </template>
     </script>
 
     <script type="module">

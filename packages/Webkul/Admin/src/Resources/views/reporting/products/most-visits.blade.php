@@ -1,31 +1,33 @@
 {{-- Products with Most Visits Vue Component --}}
 <v-reporting-products-with-most-visits>
-    <x-admin::shimmer.reporting.progress-bar/>
+    {{-- Shimmer --}}
+    <x-admin::shimmer.reporting.products.most-visits/>
 </v-reporting-products-with-most-visits>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-reporting-products-with-most-visits-template">
+        <!-- Shimmer -->
+        <template v-if="isLoading">
+            <x-admin::shimmer.reporting.products.most-visits/>
+        </template>
+
         <!-- Products with Most Visits Section -->
-        <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-            <!-- Header -->
-            <div class="flex items-center justify-between mb-[16px]">
-                <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
-                    @lang('admin::app.reporting.products.index.products-with-most-visits')
-                </p>
+        <template v-else>
+            <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                <!-- Header -->
+                <div class="flex items-center justify-between mb-[16px]">
+                    <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
+                        @lang('admin::app.reporting.products.index.products-with-most-visits')
+                    </p>
 
-                <a
-                    href="{{ route('admin.reporting.products.view', ['type' => 'products-with-most-visits']) }}"
-                    class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
-                >
-                    @lang('admin::app.reporting.products.index.view-details')
-                </a>
-            </div>
-
-            <template v-if="isLoading">
-                <x-admin::shimmer.reporting.progress-bar/>
-            </template>
-
-            <template v-else>
+                    <a
+                        href="{{ route('admin.reporting.products.view', ['type' => 'products-with-most-visits']) }}"
+                        class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
+                    >
+                        @lang('admin::app.reporting.products.index.view-details')
+                    </a>
+                </div>
+                
                 <!-- Content -->
                 <div class="grid gap-[16px]">
                     <!-- Products with Most Visits -->
@@ -65,8 +67,8 @@
                         </div>
                     </div>
                 </div>
-            </template>
-        </div>
+            </div>
+        </template>
     </script>
 
     <script type="module">

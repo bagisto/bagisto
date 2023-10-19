@@ -1,31 +1,33 @@
 {{-- Top Selling Products By Quantity Vue Component --}}
 <v-reporting-product-top-selling-by-quantity>
-    <x-admin::shimmer.reporting.progress-bar/>
+    {{-- Shimmer --}}
+    <x-admin::shimmer.reporting.products.top-selling-by-quantity/>
 </v-reporting-product-top-selling-by-quantity>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-reporting-product-top-selling-by-quantity-template">
+        <!-- Shimmer --> 
+        <template v-if="isLoading">
+            <x-admin::shimmer.reporting.products.top-selling-by-quantity/>
+        </template>
+        
         <!-- Top Selling Products By Quantity Section -->
-        <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-            <!-- Header -->
-            <div class="flex items-center justify-between mb-[16px]">
-                <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
-                    @lang('admin::app.reporting.products.index.top-selling-products-by-quantity')
-                </p>
+        <template v-else>
+            <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                <!-- Header -->
+                <div class="flex items-center justify-between mb-[16px]">
+                    <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
+                        @lang('admin::app.reporting.products.index.top-selling-products-by-quantity')
+                    </p>
 
-                <a
-                    href="{{ route('admin.reporting.products.view', ['type' => 'top-selling-products-by-quantity']) }}"
-                    class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
-                >
-                    @lang('admin::app.reporting.products.index.view-details')
-                </a>
-            </div>
-
-            <template v-if="isLoading">
-                <x-admin::shimmer.reporting.progress-bar/>
-            </template>
-
-            <template v-else>
+                    <a
+                        href="{{ route('admin.reporting.products.view', ['type' => 'top-selling-products-by-quantity']) }}"
+                        class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
+                    >
+                        @lang('admin::app.reporting.products.index.view-details')
+                    </a>
+                </div>
+                
                 <!-- Content -->
                 <div class="grid gap-[16px]">
                     <!-- Top Selling Products By Quantity -->
@@ -65,8 +67,8 @@
                         </div>
                     </div>
                 </div>
-            </template>
-        </div>
+            </div>
+        </template>
     </script>
 
     <script type="module">

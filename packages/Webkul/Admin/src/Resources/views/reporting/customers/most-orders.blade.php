@@ -1,31 +1,33 @@
 {{-- Customers with Most Orders Vue Component --}}
 <v-reporting-customers-with-most-orders>
-    <x-admin::shimmer.reporting.progress-bar/>
+    {{-- Shimmer --}}
+    <x-admin::shimmer.reporting.customers.most-orders/>
 </v-reporting-customers-with-most-orders>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-reporting-customers-with-most-orders-template">
+        <!-- Shimmer -->
+        <template v-if="isLoading">
+            <x-admin::shimmer.reporting.customers.most-orders/>
+        </template>
+
         <!-- Customers with Most Orders Section -->
-        <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-            <!-- Header -->
-            <div class="flex items-center justify-between mb-[16px]">
-                <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
-                    @lang('admin::app.reporting.customers.index.customers-with-most-orders')
-                </p>
+        <template v-else>
+            <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                <!-- Header -->
+                <div class="flex items-center justify-between mb-[16px]">
+                    <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
+                        @lang('admin::app.reporting.customers.index.customers-with-most-orders')
+                    </p>
 
-                <a
-                    href="{{ route('admin.reporting.customers.view', ['type' => 'customers-with-most-orders']) }}"
-                    class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
-                >
-                    @lang('admin::app.reporting.customers.index.view-details')
-                </a>
-            </div>
-
-            <template v-if="isLoading">
-                <x-admin::shimmer.reporting.progress-bar/>
-            </template>
-
-            <template v-else>
+                    <a
+                        href="{{ route('admin.reporting.customers.view', ['type' => 'customers-with-most-orders']) }}"
+                        class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
+                    >
+                        @lang('admin::app.reporting.customers.index.view-details')
+                    </a>
+                </div>
+                
                 <!-- Content -->
                 <div class="grid gap-[16px]">
                     <!-- Customers with Most Orders -->
@@ -65,8 +67,8 @@
                         </div>
                     </div>
                 </div>
-            </template>
-        </div>
+            </div>
+        </template>
     </script>
 
     <script type="module">

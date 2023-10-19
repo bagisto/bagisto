@@ -1,31 +1,33 @@
 {{-- Customers with Most Reviews Vue Component --}}
 <v-reporting-customers-with-most-reviews>
-    <x-admin::shimmer.reporting.progress-bar/>
+    {{-- Shimmer --}}
+    <x-admin::shimmer.reporting.customers.most-reviews/>
 </v-reporting-customers-with-most-reviews>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-reporting-customers-with-most-reviews-template">
+        <!-- Shimmer -->
+        <template v-if="isLoading">
+            <x-admin::shimmer.reporting.customers.most-reviews/>
+        </template>
+
         <!-- Customers with Most Reviews Section -->
-        <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-            <!-- Header -->
-            <div class="flex items-center justify-between mb-[16px]">
-                <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
-                    @lang('admin::app.reporting.customers.index.customers-with-most-reviews')
-                </p>
+        <template v-else>
+            <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                <!-- Header -->
+                <div class="flex items-center justify-between mb-[16px]">
+                    <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
+                        @lang('admin::app.reporting.customers.index.customers-with-most-reviews')
+                    </p>
 
-                <a
-                    href="{{ route('admin.reporting.customers.view', ['type' => 'customers-with-most-reviews']) }}"
-                    class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
-                >
-                    @lang('admin::app.reporting.customers.index.view-details')
-                </a>
-            </div>
+                    <a
+                        href="{{ route('admin.reporting.customers.view', ['type' => 'customers-with-most-reviews']) }}"
+                        class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
+                    >
+                        @lang('admin::app.reporting.customers.index.view-details')
+                    </a>
+                </div>
 
-            <template v-if="isLoading">
-                <x-admin::shimmer.reporting.progress-bar/>
-            </template>
-
-            <template v-else>
                 <!-- Content -->
                 <div class="grid gap-[16px]">
                     <!-- Customers with Most Reviews -->
@@ -65,8 +67,8 @@
                         </div>
                     </div>
                 </div>
-            </template>
-        </div>
+            </div>
+        </template>
     </script>
 
     <script type="module">

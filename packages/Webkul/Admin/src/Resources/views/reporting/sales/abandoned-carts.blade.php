@@ -1,30 +1,32 @@
 {{-- Abandoned Carts Vue Component --}}
 <v-reporting-sales-abandoned-carts>
+    {{-- Shimmer --}}
     <x-admin::shimmer.reporting.sales.abandoned-carts/>
 </v-reporting-sales-abandoned-carts>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-reporting-sales-abandoned-carts-template">
+        <!-- Shimmer -->
+        <template v-if="isLoading">
+            <x-admin::shimmer.reporting.sales.abandoned-carts/>
+        </template>
+
         <!-- Abandoned Carts Section -->
-        <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-            <div class="flex items-center justify-between mb-[16px]">
-                <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
-                    @lang('admin::app.reporting.sales.index.abandoned-carts')
-                </p>
+        <template v-else>
+            <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                <div class="flex items-center justify-between mb-[16px]">
+                    <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
+                        @lang('admin::app.reporting.sales.index.abandoned-carts')
+                    </p>
 
-                <a
-                    href="{{ route('admin.reporting.sales.view', ['type' => 'abandoned-carts']) }}"
-                    class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
-                >
-                    @lang('admin::app.reporting.sales.index.view-details')
-                </a>
-            </div>
+                    <a
+                        href="{{ route('admin.reporting.sales.view', ['type' => 'abandoned-carts']) }}"
+                        class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
+                    >
+                        @lang('admin::app.reporting.sales.index.view-details')
+                    </a>
+                </div>
 
-            <template v-if="isLoading">
-                <x-admin::shimmer.reporting.sales.abandoned-carts/>
-            </template>
-
-            <template v-else>
                 <!-- Content -->
                 <div class="grid gap-[16px]">
                     <!-- Stats -->
@@ -154,8 +156,8 @@
                         </div>
                     </div>
                 </div>
-            </template>
-        </div>
+            </div>
+        </template>
     </script>
 
     <script type="module">
