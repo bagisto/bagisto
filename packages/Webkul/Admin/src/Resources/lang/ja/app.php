@@ -3362,7 +3362,7 @@ return [
     ],
 
     'emails' => [
-        'dear'   => '尊敬する :customer_name さん',
+        'dear'   => '尊敬する :admin_name さん',
         'thanks' => '何かお手伝いが必要な場合は、<a href=":link" style=":style">:email</a> でお問い合わせいただくか、ご連絡ください。<br/>ありがとうございます！',
 
         'admin' => [

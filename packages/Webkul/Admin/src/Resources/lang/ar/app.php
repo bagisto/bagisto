@@ -3360,7 +3360,7 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'عزيزي :customer_name',
+        'dear'   => 'عزيزي :admin_name',
         'thanks' => 'إذا كنت بحاجة إلى أي نوع من المساعدة، يرجى الاتصال بنا على <a href=":link" style=":style">:email</a>.<br/>شكرًا لك!',
 
         'admin' => [

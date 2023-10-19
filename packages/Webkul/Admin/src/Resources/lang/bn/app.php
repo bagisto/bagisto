@@ -3361,7 +3361,7 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'প্রিয় :customer_name',
+        'dear'   => 'প্রিয় :admin_name',
         'thanks' => 'আপনি যদি কোনও সাহায্যের দরকার হয়, তবে আমাদের সাথে যোগাযোগ করুন <a href=":link" style=":style">:email</a>।<br/>ধন্যবাদ!',
 
         'admin' => [

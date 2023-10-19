@@ -3362,7 +3362,7 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'Estimado :customer_name',
+        'dear'   => 'Estimado :admin_name',
         'thanks' => 'Si necesitas cualquier tipo de ayuda, por favor contáctanos en <a href=":link" style=":style">:email</a>.<br/>¡Gracias!',
 
         'admin' => [

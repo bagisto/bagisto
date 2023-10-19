@@ -3349,7 +3349,7 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'Уважаемый :customer_name',
+        'dear'   => 'Уважаемый :admin_name',
         'thanks' => 'Если вам нужна какая-либо помощь, пожалуйста, свяжитесь с нами по адресу <a href=":link" style=":style">:email</a>.<br/>Спасибо!',
 
         'admin' => [

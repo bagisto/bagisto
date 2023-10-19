@@ -3362,7 +3362,7 @@ return [
     ],
 
     'emails' => [
-        'dear'   => '尊敬的 :customer_name',
+        'dear'   => '尊敬的 :admin_name',
         'thanks' => '如果您需要任何帮助，请联系我们：<a href=":link" style=":style">:email</a>。<br/>谢谢！',
 
         'admin' => [
