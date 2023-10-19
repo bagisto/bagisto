@@ -66,6 +66,17 @@ class InstallerController extends Controller
         ]);
     }
 
+    /**
+     * Undocumented function
+     *
+     * @return
+     */
+    public function envFileDelete() {
+        $response  = File::delete(base_path('.env')); 
+
+        return $response;
+    }
+
     public function runMigration()
     {
         $migration = $this->databaseManager->migration();
