@@ -7,7 +7,7 @@
 
     @foreach ($items as $item)
         @php
-            $imageCount = $item->product?->images?->count();
+            $imageCount = $item->product?->images->count();
         @endphp
 
         <div class="relative">
