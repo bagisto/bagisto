@@ -1270,7 +1270,14 @@
                                 .catch(error => {
                                     this.currentStep = 'envDatabase';
 
-                                    alert(error.response.data.error ?? error.response.data);
+                                    this.$axios.post("{{ route('installer.deleteEnvFile') }}")
+                                        .then((response) => {
+                                            alert(error.response.data.error ?? error.response.data);
+                                        })
+                                        .catch((deleteError) => {
+                                            alert('Error deleting .env file:', deleteError);
+                                        });
+
                                 });
                         },
 

@@ -1,27 +1,21 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Webkul\Installer\Http\Controllers\InstallerController;
 
-Route::get('install', [Webkul\Installer\Http\Controllers\InstallerController::class, 'index'])->name('installer.index');
 
-Route::middleware(Illuminate\Session\Middleware\StartSession::class)->prefix('install/api')->group(function () {
-    Route::post('env-file-setup', [
-        'uses' => 'Webkul\Installer\Http\Controllers\InstallerController@envFileSetup',
-        'as'   => 'installer.envFileSetup',
-    ]);
+Route::controller(InstallerController::class)->group(function () {
+    Route::get('install', 'index')->name('installer.index');
 
-    Route::post('run-migration', [
-        'uses' => 'Webkul\Installer\Http\Controllers\InstallerController@runMigration',
-        'as'   => 'installer.runMigration',
-    ]);
-
-    Route::post('admin-config-setup', [
-        'uses' => 'Webkul\Installer\Http\Controllers\InstallerController@adminConfigSetup',
-        'as'   => 'installer.adminConfigSetup',
-    ]);
-
-    Route::post('smtp-config-setup', [
-        'uses' => 'Webkul\Installer\Http\Controllers\InstallerController@smtpConfigSetup',
-        'as'   => 'installer.smtpConfigSetup',
-    ]);
+    Route::middleware(Illuminate\Session\Middleware\StartSession::class)->prefix('install/api')->group(function () {
+        Route::post('env-file-setup', 'envFileSetup')->name('installer.envFileSetup');
+        
+        Route::post('env-file-delete', 'envFileDelete')->name('installer.deleteEnvFile');
+        
+        Route::post('run-migration', 'runMigration')->name('installer.runMigration');
+    
+        Route::post('admin-config-setup', 'adminConfigSetup')->name('installer.adminConfigSetup');
+    
+        Route::post('smtp-config-setup', 'smtpConfigSetup')->name('installer.smtpConfigSetup');
+    });
 });

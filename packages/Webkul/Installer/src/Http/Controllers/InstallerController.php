@@ -12,7 +12,23 @@ use Webkul\Installer\Http\Helpers\ServerRequirements;
 
 class InstallerController extends Controller
 {
+    /**
+     * Const Variable For Min PHP Version
+     */
     const minPhpVersion = '8.1.0';
+
+    /**
+     * Const Variable for Static Customer Id 
+     */
+    const customerId = '1';
+
+    /**
+     * Create a new controller instance
+     *
+     * @param ServerRequirements $serverRequirements
+     * @param EnvironmentManager $environmentManager
+     * @param DatabaseManager $databaseManager
+     */
     public function __construct(
         protected ServerRequirements $serverRequirements,
         protected EnvironmentManager $environmentManager,
@@ -32,7 +48,7 @@ class InstallerController extends Controller
 
         $requirements = $this->serverRequirements->validate();
 
-        return view('installer::installer.installer', compact('requirements', 'phpVersion'));
+        return view('installer::installer.index', compact('requirements', 'phpVersion'));
     }
 
     /**
@@ -58,14 +74,12 @@ class InstallerController extends Controller
     }
 
     /**
-     * Admin Configuration Setup
+     * Admin Configuration Setup.
      *
      * @return void
      */
     public function adminConfigSetup()
     {
-        $admin = DB::table('admins')->find(1);
-
         $password = password_hash(request()->input('password'), PASSWORD_BCRYPT, ['cost' => 10]);
 
         $data = [
@@ -77,11 +91,10 @@ class InstallerController extends Controller
         ];
 
         try {
-            if ($admin) {
-                DB::table('admins')->where('id', 1)->update($data);
-            } else {
-                DB::table('admins')->insert($data);
-            }
+            DB::table('admins')->updateOrInsert(
+                ['id' => self::customerId],
+                $data
+            );
         } catch (\Throwable $th) {
             dd($th);
         }

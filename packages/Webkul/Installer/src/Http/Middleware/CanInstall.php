@@ -8,6 +8,13 @@ use Illuminate\Support\Str;
 
 class CanInstall
 {
+    /**
+     * Handles Requests for Installer middleware. 
+     *
+     * @param Request $request
+     * @param Closure $next
+     * @return void
+     */
     public function handle(Request $request, Closure $next)
     {
         if (Str::contains($request->getPathInfo(), '/install')) {
@@ -24,7 +31,7 @@ class CanInstall
     }
 
     /**
-     * If application is already installed.
+     * Application Already Installed.
      *
      * @return bool
      */
