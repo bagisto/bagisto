@@ -2016,6 +2016,7 @@ return [
                 'title'             => 'Языки',
                 'locale'            => 'Локаль',
                 'create-btn'        => 'Создать локаль',
+                'logo-size'         => 'Разрешение изображения должно быть 24px x 16px',
 
                 'datagrid' => [
                     'actions'   => 'Действия',
@@ -3348,7 +3349,7 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'Уважаемый :customer_name',
+        'dear'   => 'Уважаемый :admin_name',
         'thanks' => 'Если вам нужна какая-либо помощь, пожалуйста, свяжитесь с нами по адресу <a href=":link" style=":style">:email</a>.<br/>Спасибо!',
 
         'admin' => [

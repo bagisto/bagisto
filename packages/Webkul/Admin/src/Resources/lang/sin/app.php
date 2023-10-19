@@ -2016,6 +2016,7 @@ return [
                 'title'      => 'මාතෘකාවන්',
                 'locale'     => 'භාෂාව',
                 'create-btn' => 'මාතෘකාවක් සාදන්න',
+                'logo-size'  => 'ඡායාරූප නිශ්චිත විස්තර සහිත 24px X 16px වේ ය',
 
                 'datagrid' => [
                     'actions'   => 'ක්‍රියා',
@@ -3361,7 +3362,7 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'මහේෂ් :customer_name',
+        'dear'   => 'මහේෂ් :admin_name',
         'thanks' => 'ඔබට කුමු උපකාර අවශ්‍යයිද? කරුණාකර <a href=":link" style=":style">:email</a> අමතන්න.<br/>ස්තූති!',
 
         'admin' => [

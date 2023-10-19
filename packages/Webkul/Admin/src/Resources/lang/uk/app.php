@@ -2016,6 +2016,7 @@ return [
                 'title'      => 'Локалі',
                 'locale'     => 'Локаль',
                 'create-btn' => 'Створити Локаль',
+                'logo-size'  => 'Роздільна здатність зображення повинна бути 24px x 16px',
 
                 'datagrid' => [
                     'actions'   => 'Дії',
@@ -3361,7 +3362,7 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'Шановний :customer_name',
+        'dear'   => 'Шановний :admin_name',
         'thanks' => 'Якщо вам потрібна будь-яка допомога, будь ласка, зв\'яжіться з нами за адресою <a href=":link" style=":style">:email</a>.<br/>Дякуємо!',
 
         'admin' => [

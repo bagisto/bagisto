@@ -2016,6 +2016,7 @@ return [
                 'title'      => 'زبان‌ها',
                 'locale'     => 'زبان',
                 'create-btn' => 'ایجاد زبان',
+                'logo-size'  => 'وضوح تصویر باید مانند 24px × 16px باشد',
 
                 'datagrid' => [
                     'actions'   => 'عملیات',
@@ -3361,7 +3362,7 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'عزیز :customer_name',
+        'dear'   => 'عزیز :admin_name',
         'thanks' => 'اگر نیاز به هر نوع کمک دارید، لطفاً با ما تماس بگیرید به آدرس <a href=":link" style=":style">:email</a>.<br/>با تشکر!',
 
         'admin' => [

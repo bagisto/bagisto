@@ -2016,6 +2016,7 @@ return [
                 'title'      => 'Idiomas',
                 'locale'     => 'Idioma',
                 'create-btn' => 'Criar Idioma',
+                'logo-size'  => 'A resolução da imagem deve ser de 24px x 16px',
 
                 'datagrid' => [
                     'actions'   => 'Ações',
@@ -3361,7 +3362,7 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'Estimado/a :customer_name',
+        'dear'   => 'Estimado/a :admin_name',
         'thanks' => 'Si necesita cualquier tipo de ayuda, por favor contáctenos en <a href=":link" style=":style">:email</a>.<br/>¡Gracias!',
 
         'admin' => [

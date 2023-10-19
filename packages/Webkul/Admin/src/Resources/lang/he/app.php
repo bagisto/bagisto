@@ -2016,6 +2016,7 @@ return [
                 'title'      => 'אזורים',
                 'locale'     => 'אזור',
                 'create-btn' => 'צור אזור',
+                'logo-size'  => 'רזולוציית התמונה צריכה להיות כ-24px X 16px',
 
                 'datagrid' => [
                     'actions'   => 'פעולות',
@@ -3361,7 +3362,7 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'יקר :customer_name',
+        'dear'   => 'יקר :admin_name',
         'thanks' => 'אם תזדקק לעזרה בכל סוג שהוא, אנא פנה אלינו ב-<a href=":link" style=":style">:email</a>.<br/>תודה!',
 
         'admin' => [

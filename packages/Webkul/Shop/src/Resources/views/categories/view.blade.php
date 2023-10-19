@@ -88,7 +88,10 @@
                                 <!-- Empty Products Container -->
                                 <template v-else>
                                     <div class="grid items-center justify-items-center place-content-center w-[100%] m-auto h-[476px] text-center">
-                                        <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
+                                        <img 
+                                            src="{{ bagisto_asset('images/thank-you.png') }}"
+                                            alt="placeholder"
+                                        />
                                   
                                         <p class="text-[20px]">
                                             @lang('shop::app.categories.view.empty')
@@ -99,10 +102,10 @@
                         </div>
 
                         <!-- Product Grid Card Container -->
-                        <div v-else>
+                        <div v-else class="mt-[30px]">
                             <!-- Product Card Shimmer Effect -->
                             <template v-if="isLoading">
-                                <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-sm:justify-items-center max-sm:gap-[16px]">
+                                <div class="grid grid-cols-3 gap-8 max-1060:grid-cols-2 max-sm:justify-items-center max-sm:gap-[16px]">
                                     <x-shop::shimmer.products.cards.grid count="12"></x-shop::shimmer.products.cards.grid>
                                 </div>
                             </template>
@@ -110,7 +113,7 @@
                             <!-- Product Card Listing -->
                             <template v-else>
                                 <template v-if="products.length">
-                                    <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-sm:justify-items-center max-sm:gap-[16px]">
+                                    <div class="grid grid-cols-3 gap-8 max-1060:grid-cols-2 max-sm:justify-items-center max-sm:gap-[16px]">
                                         <x-shop::products.card
                                             ::mode="'grid'"
                                             v-for="product in products"
@@ -122,7 +125,10 @@
                                 <!-- Empty Products Container -->
                                 <template v-else>
                                     <div class="grid items-center justify-items-center place-content-center w-[100%] m-auto h-[476px] text-center">
-                                        <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
+                                        <img 
+                                            src="{{ bagisto_asset('images/thank-you.png') }}"
+                                            alt="placeholder"
+                                        />
                                         
                                         <p class="text-[20px]">
                                             @lang('shop::app.categories.view.empty')
