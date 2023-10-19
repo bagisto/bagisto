@@ -50,7 +50,7 @@
 
         <script type="text/x-template" id="v-reporting-filters-template">
             <div class="flex gap-[6px]">
-                <x-admin::flat-picker.date class="w-[140px]" ::allow-input="false">
+                <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
                     <input
                         class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         v-model="filters.start"
@@ -58,7 +58,7 @@
                     />
                 </x-admin::flat-picker.date>
 
-                <x-admin::flat-picker.date class="w-[140px]" ::allow-input="false">
+                <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
                     <input
                         class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         v-model="filters.end"

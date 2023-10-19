@@ -25,13 +25,14 @@
                     <div class="flex gap-[6px]">
                         <select
                             class="custom-select flex w-fit min-h-[39px] rounded-[6px] border px-3 pl-2 pr-[35px] text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                            v-model="filters.period"
                         >
-                            <option value="">Day</option>
-                            <option value="">Month</option>
-                            <option value="">Year</option>
+                            <option value="day">Day</option>
+                            <option value="month">Month</option>
+                            <option value="year">Year</option>
                         </select>
 
-                        <x-admin::flat-picker.date class="w-[140px]" ::allow-input="false">
+                        <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
                             <input
                                 class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                 v-model="filters.start"
@@ -39,7 +40,7 @@
                             />
                         </x-admin::flat-picker.date>
 
-                        <x-admin::flat-picker.date class="w-[140px]" ::allow-input="false">
+                        <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
                             <input
                                 class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                 v-model="filters.end"
@@ -94,6 +95,8 @@
                 data() {
                     return {
                         filters: {
+                            type: "{{ request()->query('type') }}",
+                            period: 'day',
                             start: "{{ $startDate->format('Y-m-d') }}",
                             end: "{{ $endDate->format('Y-m-d') }}",
                         },
@@ -108,14 +111,22 @@
                     this.getStats();
                 },
 
+                watch: {
+                    filters: {
+                        handler() {
+                            this.getStats();
+                        },
+
+                        deep: true
+                    }
+                },
+
                 methods: {
                     getStats() {
                         this.isLoading = true;
 
                         this.$axios.get("{{ route('admin.reporting.' . $entity . '.view.stats') }}", {
-                                params: {
-                                    type: "{{ request()->query('type') }}",
-                                }
+                                params: this.filters
                             })
                             .then(response => {
                                 this.reporing = response.data;
