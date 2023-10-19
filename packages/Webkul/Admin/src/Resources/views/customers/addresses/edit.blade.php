@@ -237,7 +237,7 @@
                                             type="text"
                                             name="postcode"
                                             v-model="addressData.postcode"
-                                            rules="required"
+                                            ::rules="{ required: true, regex: /^[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$/ }"
                                             :label="trans('admin::app.customers.addresses.edit.post-code')"
                                             :placeholder="trans('admin::app.customers.addresses.edit.post-code')"
                                         >
