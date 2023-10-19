@@ -2016,6 +2016,7 @@ return [
                 'title'      => 'स्थान (Locales)',
                 'locale'     => 'स्थान (Locale)',
                 'create-btn' => 'स्थान बनाएं (Create Locale)',
+                'logo-size'  => 'चित्र संकल्प 24px x 16px की तरह होना चाहिए',
 
                 'datagrid' => [
                     'actions'   => 'क्रियाएँ',
@@ -3361,7 +3362,7 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'प्रिय :customer_name',
+        'dear'   => 'प्रिय :admin_name',
         'thanks' => 'यदि आपको किसी प्रकार की मदद चाहिए, तो कृपया हमसे <a href=":link" style=":style">:email</a> पर संपर्क करें।<br/>धन्यवाद!',
 
         'admin' => [

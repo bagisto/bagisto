@@ -266,6 +266,10 @@
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
+                                
+                                <p class="text-[12px] text-gray-600 dark:text-gray-300">
+                                    @lang('admin::app.settings.locales.index.logo-size')
+                                </p>
 
                                 {!! view_render_event('bagisto.admin.settings.locale.create.after') !!}
                             </div>

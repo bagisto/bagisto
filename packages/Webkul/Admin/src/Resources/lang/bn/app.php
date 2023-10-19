@@ -2016,6 +2016,7 @@ return [
                 'title'      => 'লোকেলসমূহ',
                 'locale'     => 'লোকেল',
                 'create-btn' => 'নতুন লোকাল তৈরি করুন',
+                'logo-size'  => 'চিত্র নির্দিষ্টভাবে 24পিএক্স × 16পিএক্স হতে হবে',
 
                 'datagrid' => [
                     'actions'   => 'ক্রিয়া',
@@ -3360,7 +3361,7 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'প্রিয় :customer_name',
+        'dear'   => 'প্রিয় :admin_name',
         'thanks' => 'আপনি যদি কোনও সাহায্যের দরকার হয়, তবে আমাদের সাথে যোগাযোগ করুন <a href=":link" style=":style">:email</a>।<br/>ধন্যবাদ!',
 
         'admin' => [

@@ -2016,6 +2016,7 @@ return [
                 'title'      => '区域',
                 'locale'     => '区域',
                 'create-btn' => '创建区域',
+                'logo-size'  => '图像分辨率应该为24px x 16px',
 
                 'datagrid' => [
                     'actions'   => '操作',
@@ -3361,7 +3362,7 @@ return [
     ],
 
     'emails' => [
-        'dear'   => '尊敬的 :customer_name',
+        'dear'   => '尊敬的 :admin_name',
         'thanks' => '如果您需要任何帮助，请联系我们：<a href=":link" style=":style">:email</a>。<br/>谢谢！',
 
         'admin' => [
