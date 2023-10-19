@@ -607,7 +607,7 @@ class Sale extends AbstractReporting
                 DB::raw("COUNT(*) AS count")
             )
             ->whereBetween('created_at', [$startDate, $endDate])
-            ->groupBy(DB::raw($groupColumn))
+            ->groupBy('date')
             ->get();
 
         foreach ($config['intervals'] as $interval) {
