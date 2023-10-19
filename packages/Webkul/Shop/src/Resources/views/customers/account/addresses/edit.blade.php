@@ -46,7 +46,7 @@
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
-        {!! view_render_event('bagisto.shop.customers.account.address.edit_form_controls.company_name.after') !!}
+        {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.company_name.after', ['address' => $address]) !!}
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label class="required">
@@ -69,7 +69,7 @@
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
-        {!! view_render_event('bagisto.shop.customers.account.address.edit_form_controls.first_name.after') !!}
+        {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.first_name.after', ['address' => $address]) !!}
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label class="required">
@@ -92,7 +92,7 @@
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
-        {!! view_render_event('bagisto.shop.customers.account.address.edit_form_controls.last_name.after') !!}
+        {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.last_name.after', ['address' => $address]) !!}
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
@@ -114,7 +114,7 @@
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
-        {!! view_render_event('bagisto.shop.customers.account.address.edit_form_controls.vat_id.after') !!}
+        {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.vat_id.after', ['address' => $address]) !!}
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label class="required">
@@ -153,7 +153,7 @@
             @endfor
         @endif
 
-        {!! view_render_event('bagisto.shop.customers.account.address.edit_form_controls.street-addres.after') !!}
+        {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.street-addres.after', ['address' => $address]) !!}
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label class="required">
@@ -189,6 +189,8 @@
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
+        {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.country.after', ['address' => $address]) !!}
+
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.addresses.state')
@@ -210,7 +212,7 @@
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
-        {!! view_render_event('bagisto.shop.customers.account.address.edit_form_controls.country-state.after') !!}
+        {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.state.after', ['address' => $address]) !!}
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label class="required">
@@ -233,6 +235,8 @@
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
+        {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.city.after', ['address' => $address]) !!}
+
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.addresses.post-code')
@@ -254,7 +258,7 @@
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
-        {!! view_render_event('bagisto.shop.customers.account.address.edit_form_controls.postcode.after') !!}
+        {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.postcode.after', ['address' => $address]) !!}
 
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label class="required">
@@ -277,6 +281,8 @@
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
+        {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.phone.after', ['address' => $address]) !!}
+
         <button
             type="submit"
             class="primary-button m-0 block text-base w-max py-[11px] px-[43px] rounded-[18px] text-center"
@@ -287,4 +293,7 @@
         {!! view_render_event('bagisto.shop.customers.account.address.edit_form_controls.after', ['address' => $address]) !!}
 
     </x-shop::form>
+
+    {!! view_render_event('bagisto.shop.customers.account.address.edit.after', ['address' => $address]) !!}
+
 </x-shop::layouts.account>

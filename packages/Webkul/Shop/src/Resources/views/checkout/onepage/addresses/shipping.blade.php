@@ -3,6 +3,9 @@
         class="mt-[30px]"
         v-if="! forms.shipping.isNew"
     >
+
+        {!! view_render_event('bagisto.shop.checkout.onepage.shipping.accordion.before') !!}
+
         <x-shop::accordion class="!border-b-[0px]">
             <x-slot:header>
                 <div class="flex justify-between items-center">
@@ -122,6 +125,9 @@
                 </x-shop::form>
             </x-slot:content>
         </x-shop::accordion>
+
+        {!! view_render_event('bagisto.shop.checkout.onepage.shipping.accordion.after') !!}
+
     </div>
 
     <div 
@@ -138,6 +144,9 @@
             </x-slot:header>
         
             <x-slot:content>
+
+                {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.before') !!}
+
                 {{-- Shipping address form --}}
                 <x-shop::form
                     v-slot="{ meta, errors, handleSubmit }"
@@ -156,6 +165,8 @@
                                 <span>@lang('shop::app.checkout.onepage.addresses.shipping.back')</span>
                             </a>
                         </div>
+
+                        {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.control.before') !!}
 
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label>
@@ -176,6 +187,8 @@
                             >
                             </x-shop::form.control-group.error>
                         </x-shop::form.control-group>
+
+                        {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.company_name.after') !!}
 
                         <div class="grid grid-cols-2 gap-x-[20px]">
                             <x-shop::form.control-group>
@@ -198,6 +211,8 @@
                                 >
                                 </x-shop::form.control-group.error>
                             </x-shop::form.control-group>
+
+                            {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.first_name.after') !!}
                             
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="!mt-[0px] required">
@@ -219,6 +234,9 @@
                                 >
                                 </x-shop::form.control-group.error>
                             </x-shop::form.control-group>
+
+                            {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.last_name.after') !!}
+
                         </div>
                         
                         <x-shop::form.control-group>
@@ -241,6 +259,8 @@
                             >
                             </x-shop::form.control-group.error>
                         </x-shop::form.control-group>
+
+                        {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.email.after') !!}
                         
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label class="!mt-[0px] required">
@@ -276,6 +296,8 @@
                                 @endfor
                             @endif
                         </x-shop::form.control-group>
+
+                        {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.street_address.after') !!}
                         
                         <div class="grid grid-cols-2 gap-x-[20px]">
                             <x-shop::form.control-group
@@ -309,6 +331,8 @@
                                 >
                                 </x-shop::form.control-group.error>
                             </x-shop::form.control-group>
+
+                            {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.country.after') !!}
                             
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="!mt-[0px] required">
@@ -351,6 +375,9 @@
                                 >
                                 </x-shop::form.control-group.error>
                             </x-shop::form.control-group>
+
+                            {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.state.after') !!}
+
                         </div>
 
                         <div class="grid grid-cols-2 gap-x-[20px]">
@@ -374,6 +401,8 @@
                                 >
                                 </x-shop::form.control-group.error>
                             </x-shop::form.control-group>
+
+                            {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.city.after') !!}
                             
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="!mt-[0px] required">
@@ -395,13 +424,15 @@
                                 >
                                 </x-shop::form.control-group.error>
                             </x-shop::form.control-group>
+
+                            {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.postcode.after') !!}
+
                         </div>
 
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label class="!mt-[0px] required">
                                 @lang('shop::app.checkout.onepage.addresses.shipping.telephone')
                             </x-shop::form.control-group.label>
-                        
                             
                             <x-shop::form.control-group.control
                                 type="text"
@@ -418,6 +449,8 @@
                             >
                             </x-shop::form.control-group.error>
                         </x-shop::form.control-group>
+
+                        {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.phone.after') !!}
 
                         <div class="mt-[30px] pb-[15px]">
                             <div class="grid gap-[10px]">
@@ -456,7 +489,13 @@
                             </button>
                         </div>
                     </form>
+
+                    {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.control.after') !!}
+
                 </x-shop::form>
+
+                {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.after') !!}
+
             </x-slot:content>
         </x-shop::accordion>
     </div>
