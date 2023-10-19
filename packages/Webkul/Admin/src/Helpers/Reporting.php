@@ -54,13 +54,13 @@ class Reporting
                 'columns' => [
                     [
                         'key'   => 'label',
-                        'label' => 'Interval'
+                        'label' => trans('admin::app.reporting.sales.index.interval'),
                     ], [
                         'key'   => 'count',
-                        'label' => 'Orders'
+                        'label' => trans('admin::app.reporting.sales.index.orders'),
                     ], [
                         'key'   => 'formatted_total',
-                        'label' => 'Total'
+                        'label' => trans('admin::app.reporting.sales.index.total'),
                     ],
                 ],
 
@@ -99,13 +99,13 @@ class Reporting
                 'columns' => [
                     [
                         'key'   => 'label',
-                        'label' => 'Interval'
+                        'label' => trans('admin::app.reporting.sales.index.interval'),
                     ], [
                         'key'   => 'count',
-                        'label' => 'Orders'
+                        'label' => trans('admin::app.reporting.sales.index.orders'),
                     ], [
                         'key'   => 'formatted_total',
-                        'label' => 'Total'
+                        'label' => trans('admin::app.reporting.sales.index.total'),
                     ],
                 ],
 
@@ -136,10 +136,10 @@ class Reporting
                 'columns' => [
                     [
                         'key'   => 'label',
-                        'label' => 'Interval'
+                        'label' => trans('admin::app.reporting.sales.index.interval'),
                     ], [
                         'key'   => 'count',
-                        'label' => 'Orders'
+                        'label' => trans('admin::app.reporting.sales.index.orders'),
                     ]
                 ],
 
@@ -206,13 +206,13 @@ class Reporting
                 'columns' => [
                     [
                         'key'   => 'id',
-                        'label' => 'Id'
+                        'label' => trans('admin::app.reporting.sales.index.id'),
                     ], [
                         'key'   => 'name',
-                        'label' => 'Name'
+                        'label' => trans('admin::app.reporting.sales.index.name'),
                     ], [
                         'key'   => 'count',
-                        'label' => 'Count'
+                        'label' => trans('admin::app.reporting.sales.index.count'),
                     ],
                 ],
 
@@ -263,13 +263,13 @@ class Reporting
                 'columns' => [
                     [
                         'key'   => 'label',
-                        'label' => 'Interval'
+                        'label' => trans('admin::app.reporting.sales.index.interval'),
                     ], [
                         'key'   => 'count',
-                        'label' => 'Orders'
+                        'label' => trans('admin::app.reporting.sales.index.orders'),
                     ], [
                         'key'   => 'formatted_total',
-                        'label' => 'Total'
+                        'label' => trans('admin::app.reporting.sales.index.total'),
                     ],
                 ],
 
@@ -308,13 +308,13 @@ class Reporting
                 'columns' => [
                     [
                         'key'   => 'label',
-                        'label' => 'Interval'
+                        'label' => trans('admin::app.reporting.sales.index.interval'),
                     ], [
                         'key'   => 'count',
-                        'label' => 'Orders'
+                        'label' => trans('admin::app.reporting.sales.index.orders'),
                     ], [
                         'key'   => 'formatted_total',
-                        'label' => 'Total'
+                        'label' => trans('admin::app.reporting.sales.index.total'),
                     ],
                 ],
 
@@ -370,13 +370,13 @@ class Reporting
                 'columns' => [
                     [
                         'key'   => 'label',
-                        'label' => 'Interval'
+                        'label' => trans('admin::app.reporting.sales.index.interval'),
                     ], [
                         'key'   => 'count',
-                        'label' => 'Orders'
+                        'label' => trans('admin::app.reporting.sales.index.orders'),
                     ], [
                         'key'   => 'formatted_total',
-                        'label' => 'Total'
+                        'label' => trans('admin::app.reporting.sales.index.total'),
                     ],
                 ],
 
@@ -436,13 +436,13 @@ class Reporting
                 'columns' => [
                     [
                         'key'   => 'title',
-                        'label' => 'Payment Method',
+                        'label' => trans('admin::app.reporting.sales.index.payment-method'),
                     ], [
                         'key'   => 'total',
-                        'label' => 'Orders',
+                        'label' => trans('admin::app.reporting.sales.index.orders'),
                     ], [
                         'key'   => 'formatted_total',
-                        'label' => 'Total',
+                        'label' => trans('admin::app.reporting.sales.index.total'),
                     ],
                 ],
 
@@ -482,10 +482,10 @@ class Reporting
                 'columns' => [
                     [
                         'key'   => 'label',
-                        'label' => 'Interval'
+                        'label' => trans('admin::app.reporting.customers.index.interval'),
                     ], [
                         'key'   => 'total',
-                        'label' => 'Customers'
+                        'label' => trans('admin::app.reporting.customers.index.customers'),
                     ]
                 ],
 
@@ -542,13 +542,13 @@ class Reporting
                 'columns' => [
                     [
                         'key'   => 'full_name',
-                        'label' => 'Name'
+                        'label' => trans('admin::app.reporting.customers.index.name'),
                     ], [
                         'key'   => 'email',
-                        'label' => 'Email'
+                        'label' => trans('admin::app.reporting.customers.index.email'),
                     ], [
                         'key'   => 'formatted_total',
-                        'label' => 'Total'
+                        'label' => trans('admin::app.reporting.customers.index.total'),
                     ]
                 ],
 
@@ -588,13 +588,13 @@ class Reporting
                 'columns' => [
                     [
                         'key'   => 'full_name',
-                        'label' => 'Name'
+                        'label' => trans('admin::app.reporting.customers.index.name'),
                     ], [
                         'key'   => 'email',
-                        'label' => 'Email'
+                        'label' => trans('admin::app.reporting.customers.index.email'),
                     ], [
                         'key'   => 'orders',
-                        'label' => 'Orders'
+                        'label' => trans('admin::app.reporting.customers.index.orders'),
                     ]
                 ],
 
@@ -632,13 +632,13 @@ class Reporting
                 'columns' => [
                     [
                         'key'   => 'full_name',
-                        'label' => 'Name'
+                        'label' => trans('admin::app.reporting.customers.index.name'),
                     ], [
                         'key'   => 'email',
-                        'label' => 'Email'
+                        'label' => trans('admin::app.reporting.customers.index.email'),
                     ], [
                         'key'   => 'reviews',
-                        'label' => 'Reviews'
+                        'label' => trans('admin::app.reporting.customers.index.reviews'),
                     ]
                 ],
 
@@ -676,10 +676,10 @@ class Reporting
                 'columns' => [
                     [
                         'key'   => 'group_name',
-                        'label' => 'Name'
+                        'label' => trans('admin::app.reporting.customers.index.name'),
                     ], [
                         'key'   => 'total',
-                        'label' => 'Customers'
+                        'label' => trans('admin::app.reporting.customers.index.customers'),
                     ]
                 ],
 
@@ -715,10 +715,10 @@ class Reporting
                 'columns' => [
                     [
                         'key'   => 'label',
-                        'label' => 'Interval'
+                        'label' => trans('admin::app.reporting.products.index.interval'),
                     ], [
                         'key'   => 'total',
-                        'label' => 'Quantities'
+                        'label' => trans('admin::app.reporting.products.index.quantities'),
                     ]
                 ],
 
@@ -749,10 +749,10 @@ class Reporting
                 'columns' => [
                     [
                         'key'   => 'label',
-                        'label' => 'Interval'
+                        'label' => trans('admin::app.reporting.products.index.interval'),
                     ], [
                         'key'   => 'total',
-                        'label' => 'Total'
+                        'label' => trans('admin::app.reporting.products.index.total'),
                     ]
                 ],
 
@@ -791,16 +791,16 @@ class Reporting
                 'columns' => [
                     [
                         'key'   => 'id',
-                        'label' => 'Id'
+                        'label' => trans('admin::app.reporting.products.index.id'),
                     ], [
                         'key'   => 'name',
-                        'label' => 'Name'
+                        'label' => trans('admin::app.reporting.products.index.name'),
                     ], [
                         'key'   => 'formatted_price',
-                        'label' => 'Price'
+                        'label' => trans('admin::app.reporting.products.index.price'),
                     ], [
                         'key'   => 'formatted_revenue',
-                        'label' => 'Revenue'
+                        'label' => trans('admin::app.reporting.products.index.revenue'),
                     ]
                 ],
 
@@ -840,13 +840,13 @@ class Reporting
                 'columns' => [
                     [
                         'key'   => 'id',
-                        'label' => 'Id'
+                        'label' => trans('admin::app.reporting.products.index.id'),
                     ], [
                         'key'   => 'name',
-                        'label' => 'Name'
+                        'label' => trans('admin::app.reporting.products.index.name'),
                     ], [
                         'key'   => 'total_qty_ordered',
-                        'label' => 'Quantities'
+                        'label' => trans('admin::app.reporting.products.index.quantities'),
                     ]
                 ],
 
@@ -884,13 +884,13 @@ class Reporting
                 'columns' => [
                     [
                         'key'   => 'product_id',
-                        'label' => 'Id'
+                        'label' => trans('admin::app.reporting.products.index.id'),
                     ], [
                         'key'   => 'product_name',
-                        'label' => 'Name'
+                        'label' => trans('admin::app.reporting.products.index.name'),
                     ], [
                         'key'   => 'reviews',
-                        'label' => 'Reviews'
+                        'label' => trans('admin::app.reporting.products.index.reviews'),
                     ]
                 ],
 
@@ -928,13 +928,13 @@ class Reporting
                 'columns' => [
                     [
                         'key'   => 'visitable_id',
-                        'label' => 'Id'
+                        'label' => trans('admin::app.reporting.products.index.id'),
                     ], [
                         'key'   => 'name',
-                        'label' => 'Name'
+                        'label' => trans('admin::app.reporting.products.index.name'),
                     ], [
                         'key'   => 'visits',
-                        'label' => 'Visits'
+                        'label' => trans('admin::app.reporting.products.index.visits'),
                     ]
                 ],
 

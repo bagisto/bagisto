@@ -2616,6 +2616,8 @@ return [
         'sales' => [
             'index' => [
                 'title'                         => 'Sales',
+                'start-date'                    => 'Start Date',
+                'end-date'                      => 'End Date',
                 'view-details'                  => 'View Details',
                 'total-sales'                   => 'Total Sales',
                 'sales-over-time'               => 'Sales Over Time',
@@ -2645,12 +2647,22 @@ return [
                 'refunds'                       => 'Refunds',
                 'refunds-over-time'             => 'Refunds Over Time',
                 'top-payment-methods'           => 'Top Payment Methods',
+                'interval'                      => 'Interval',
+                'orders'                        => 'Orders',
+                'id'                            => 'Id',
+                'name'                          => 'Name',
+                'count'                         => 'Count',
+                'total'                         => 'Total',
+                'payment-method'                => 'Payment Method',
+
             ]
         ],
 
         'customers' => [
             'index' => [
                 'title'                       => 'Customers',
+                'start-date'                  => 'Start Date',
+                'end-date'                    => 'End Date',
                 'view-details'                => 'View Details',
                 'total-customers'             => 'Total Customers',
                 'customers-over-time'         => 'Customers Over Time',
@@ -2662,6 +2674,15 @@ return [
                 'customers-with-most-sales'   => 'Customers With Most Sales',
                 'customers-with-most-reviews' => 'Customers With Most Reviews',
                 'top-customer-groups'         => 'Top Customer Groups',
+                'interval'                    => 'Interval',
+                'customers'                   => 'Customers',
+                'orders'                      => 'Orders',
+                'reviews'                     => 'Reviews',
+                'id'                          => 'Id',
+                'name'                        => 'Name',
+                'email'                       => 'Email',
+                'count'                       => 'Count',
+                'total'                       => 'Total',
                 
             ]
         ],
@@ -2669,6 +2690,8 @@ return [
         'products' => [
             'index' => [
                 'title'                            => 'Products',
+                'start-date'                       => 'Start Date',
+                'end-date'                         => 'End Date',
                 'view-details'                     => 'View Details',
                 'total-sold-quantities'            => 'Sold Products Quantity',
                 'quantities-sold-over-time'        => 'Quantities Sold Over Time',
@@ -2678,7 +2701,25 @@ return [
                 'top-selling-products-by-revenue'  => 'Top Selling Products By Revenue',
                 'products-with-most-reviews'       => 'Products With Most Reviews',
                 'products-with-most-visits'        => 'Products With Most Visits',
+                'interval'                         => 'Interval',
+                'orders'                           => 'Orders',
+                'quantities'                       => 'Quantities',
+                'reviews'                          => 'Reviews',
+                'visits'                           => 'Visits',
+                'id'                               => 'Id',
+                'name'                             => 'Name',
+                'price'                            => 'price',
+                'revenue'                          => 'Revenue',
+                'total'                            => 'Total',
             ],
+        ],
+
+        'view' => [
+            'day'        => 'Day',
+            'month'      => 'Month',
+            'year'       => 'Year',
+            'start-date' => 'Start Date',
+            'end-date'   => 'End Date',
         ],
     ],
 

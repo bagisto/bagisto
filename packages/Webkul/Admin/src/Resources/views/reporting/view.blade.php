@@ -27,16 +27,24 @@
                             class="custom-select flex w-fit min-h-[39px] rounded-[6px] border px-3 pl-2 pr-[35px] text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                             v-model="filters.period"
                         >
-                            <option value="day">Day</option>
-                            <option value="month">Month</option>
-                            <option value="year">Year</option>
+                            <option value="day">
+                                @lang('admin::app.reporting.view.day')
+                            </option>
+
+                            <option value="month">
+                                @lang('admin::app.reporting.view.month')
+                            </option>
+
+                            <option value="year">
+                                @lang('admin::app.reporting.view.year')
+                            </option>
                         </select>
 
                         <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
                             <input
                                 class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                 v-model="filters.start"
-                                placeholder="@lang('Start Date')"
+                                placeholder="@lang('admin::app.reporting.view.start-date')"
                             />
                         </x-admin::flat-picker.date>
 
@@ -44,7 +52,7 @@
                             <input
                                 class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                 v-model="filters.end"
-                                placeholder="@lang('End Date')"
+                                placeholder="@lang('admin::app.reporting.view.end-date')"
                             />
                         </x-admin::flat-picker.date>
                     </div>
