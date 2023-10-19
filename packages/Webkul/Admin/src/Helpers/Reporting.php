@@ -181,12 +181,12 @@ class Reporting
 
             'carts' => [
                 'total'    => $totalCarts = $this->cartReporting->getTotalUniqueCartsUsers($startDate, $endDate),
-                'progress' => ($totalCarts * 100) / $totalVisitors,
+                'progress' => ($progress = ($totalCarts * 100) / $totalVisitors) <= 100 ? $progress : 100,
             ],
 
             'orders' => [
                 'total'    => $totalOrders = $this->saleReporting->getTotalUniqueOrdersUsers($startDate, $endDate),
-                'progress' => ($totalOrders * 100) / $totalVisitors,
+                'progress' => ($progress = ($totalOrders * 100) / $totalVisitors) <= 100 ? $progress : 100,
             ],
         ];
     }
