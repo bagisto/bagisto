@@ -169,11 +169,18 @@ class Product extends AbstractReporting
     /**
      * Gets stock threshold.
      * 
+     * @param  integer  $limit
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getStockThreshold(): Collection
+    public function getStockThresholdProducts($limit = null): Collection
     {
-        return $this->productInventoryRepository->getStockThreshold();
+        return $this->productInventoryRepository
+            ->with('product', 'product.attribute_family', 'product.attribute_values', 'product.images')
+            ->select('*', DB::raw('SUM(qty) as total_qty'))
+            ->groupBy('product_id')
+            ->orderBy('total_qty', 'ASC')
+            ->limit($limit)
+            ->get();
     }
 
     /**
