@@ -2016,6 +2016,7 @@ return [
                 'title'      => '区域',
                 'locale'     => '区域',
                 'create-btn' => '创建区域',
+                'logo-size'  => '图像分辨率应该为24px x 16px',
 
                 'datagrid' => [
                     'actions'   => '操作',

@@ -2016,6 +2016,7 @@ return [
                 'title'      => 'स्थान (Locales)',
                 'locale'     => 'स्थान (Locale)',
                 'create-btn' => 'स्थान बनाएं (Create Locale)',
+                'logo-size'  => 'चित्र संकल्प 24px x 16px की तरह होना चाहिए',
 
                 'datagrid' => [
                     'actions'   => 'क्रियाएँ',

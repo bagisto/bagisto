@@ -2016,6 +2016,7 @@ return [
                 'title'      => 'Talen',
                 'locale'     => 'Taal',
                 'create-btn' => 'Taal Aanmaken',
+                'logo-size'  => 'Beeldresolutie moet zoals 24px x 16px zijn',
 
                 'datagrid' => [
                     'actions'   => 'Acties',

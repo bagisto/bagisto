@@ -2016,6 +2016,7 @@ return [
                 'title'      => 'אזורים',
                 'locale'     => 'אזור',
                 'create-btn' => 'צור אזור',
+                'logo-size'  => 'רזולוציית התמונה צריכה להיות כ-24px X 16px',
 
                 'datagrid' => [
                     'actions'   => 'פעולות',
