@@ -210,6 +210,10 @@ class OrderItem extends Model implements OrderItemContract
     {
         $array = parent::toArray();
 
+        if (! $this->id) {
+            return $array;
+        }
+
         $array['qty_to_ship'] = $this->qty_to_ship;
 
         $array['qty_to_invoice'] = $this->qty_to_invoice;

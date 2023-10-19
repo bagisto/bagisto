@@ -424,8 +424,7 @@ class Product extends Model implements ProductContract
      */
     public function getBaseImageUrlAttribute()
     {
-        $image = $this->images()
-            ->first();
+        $image = $this->images->first();
 
         return $image->url ?? null;
     }

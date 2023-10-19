@@ -31,6 +31,11 @@ require 'marketing-routes.php';
 require 'cms-routes.php';
 
 /**
+ * Reporting routes.
+ */
+require 'reporting-routes.php';
+
+/**
  * Settings routes.
  */
 require 'settings-routes.php';
