@@ -2715,6 +2715,8 @@ return [
         ],
 
         'view' => [
+            'export-csv' => 'Export CSV',
+            'export-xls' => 'Export XLS',
             'day'        => 'Day',
             'month'      => 'Month',
             'year'       => 'Year',

@@ -4,11 +4,8 @@
     </x-slot:title>
 
     <v-reporting-stats-table>
-        <div class="table-responsive grid w-full box-shadow rounded-[4px] bg-white dark:bg-gray-900 overflow-hidden">
-            <x-admin::shimmer.datagrid.table.head></x-admin::shimmer.datagrid.table.head>
-
-            <x-admin::shimmer.datagrid.table.body></x-admin::shimmer.datagrid.table.body>
-        </div>
+        {{-- Shimmer --}}
+        <x-admin::shimmer.reporting.view/>
     </v-reporting-stats-table>
 
     @pushOnce('scripts')
@@ -16,13 +13,35 @@
             <div>
                 <!-- Page Header -->
                 <div class="flex gap-[16px] justify-between items-center mb-[20px] max-sm:flex-wrap">
+                    <!-- Title -->
                     <div class="grid gap-[6px]">
-                        <p class="pt-[6px] text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
-                            @lang('admin::app.reporting.sales.index.title')
+                        <p class="text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
+                            @lang('admin::app.reporting.' . $entity . '.index.' . request()->query('type'))
                         </p>
                     </div>
 
+                    <!-- Actions -->
                     <div class="flex gap-[6px]">
+                        <x-admin::dropdown position="bottom-right">
+                            <x-slot:toggle>
+                                <span class="flex icon-setting p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 "></span>
+                            </x-slot:toggle>
+
+                            <x-slot:menu class="!p-0 shadow-[0_5px_20px_rgba(0,0,0,0.15)] dark:border-gray-800">
+                                <x-admin::dropdown.menu.item>
+                                    <span @click="exportReporting('csv')">
+                                        @lang('admin::app.reporting.view.export-csv')
+                                    </span>
+                                </x-admin::dropdown.menu.item>
+
+                                <x-admin::dropdown.menu.item>
+                                    <span @click="exportReporting('xls')">
+                                        @lang('admin::app.reporting.view.export-xls')
+                                    </span>
+                                </x-admin::dropdown.menu.item>
+                            </x-slot:menu>
+                        </x-admin::dropdown>
+
                         <select
                             class="custom-select flex w-fit min-h-[39px] rounded-[6px] border px-3 pl-2 pr-[35px] text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                             v-model="filters.period"
@@ -60,9 +79,9 @@
 
                 <div class="table-responsive grid w-full box-shadow rounded-[4px] bg-white dark:bg-gray-900 overflow-hidden">
                     <template v-if="isLoading">
-                        <x-admin::shimmer.datagrid.table.head></x-admin::shimmer.datagrid.table.head>
+                        <x-admin::shimmer.datagrid.table.head/>
 
-                        <x-admin::shimmer.datagrid.table.body></x-admin::shimmer.datagrid.table.body>
+                        <x-admin::shimmer.datagrid.table.body/>
                     </template>
 
                     <template v-else>
@@ -142,6 +161,17 @@
                                 this.isLoading = false;
                             })
                             .catch(error => {});
+                    },
+
+                    exportReporting(format) {
+                        let filters = this.filters;
+
+                        filters.format = format;
+
+                        window.open(
+                            "{{ route('admin.reporting.' . $entity . '.export') }}?"  + new URLSearchParams(filters).toString(),
+                            '_blank'
+                        );
                     }
                 }
             });

@@ -55,34 +55,4 @@ class ProductController extends Controller
             'endDate'   => $this->reportingHelper->getEndDate(),
         ]);
     }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function stats()
-    {
-        $stats = $this->reportingHelper->{$this->typeFunctions[request()->query('type')]}();
-
-        return response()->json([
-            'statistics' => $stats,
-            'date_range' => $this->reportingHelper->getDateRange(),
-        ]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function viewStats()
-    {
-        $stats = $this->reportingHelper->{$this->typeFunctions[request()->query('type')]}('table');
-
-        return response()->json([
-            'statistics' => $stats,
-            'date_range' => $this->reportingHelper->getDateRange(),
-        ]);
-    }
 }
