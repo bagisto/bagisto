@@ -886,13 +886,13 @@
 
                                     <x-admin::form.control-group.control
                                         type="color"
-                                        name="swatch_value"
+                                        name="swatch_value[]"
                                         :placeholder="trans('admin::app.catalog.attributes.edit.color')"
                                     >
                                     </x-admin::form.control-group.control>
 
                                     <x-admin::form.control-group.error
-                                        control-name="swatch_value"
+                                        control-name="swatch_value[]"
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>

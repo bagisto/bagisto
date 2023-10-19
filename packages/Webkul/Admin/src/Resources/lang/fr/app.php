@@ -2016,6 +2016,7 @@ return [
                 'title'      => 'Paramètres régionaux',
                 'locale'     => 'Locale',
                 'create-btn' => 'Créer une locale',
+                'logo-size'  => 'La résolution de l\'image doit être de 24px x 16px',
 
                 'datagrid' => [
                     'actions'   => 'Actions',
@@ -3361,7 +3362,7 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'Cher :customer_name',
+        'dear'   => 'Cher :admin_name',
         'thanks' => 'Si vous avez besoin d\'aide, veuillez nous contacter à <a href=":link" style=":style">:email</a>.<br/>Merci !',
 
         'admin' => [

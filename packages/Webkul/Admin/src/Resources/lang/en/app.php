@@ -2016,6 +2016,7 @@ return [
                 'title'      => 'Locales',
                 'locale'     => 'Locale',
                 'create-btn' => 'Create Locale',
+                'logo-size'  => 'Image resolution should be like 24px X 16px',
 
                 'datagrid' => [
                     'actions'   => 'Actions',
@@ -3361,7 +3362,7 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'Dear :customer_name',
+        'dear'   => 'Dear :admin_name',
         'thanks' => 'If you need any kind of help please contact us at <a href=":link" style=":style">:email</a>.<br/>Thanks!',
 
         'admin' => [

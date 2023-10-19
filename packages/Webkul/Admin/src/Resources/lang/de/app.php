@@ -2016,6 +2016,7 @@ return [
                 'title'      => 'Sprachversionen',
                 'locale'     => 'Sprachversion',
                 'create-btn' => 'Sprachversion erstellen',
+                'logo-size'  => 'Bildauflösung sollte wie 24px x 16px sein',
 
                 'datagrid' => [
                     'actions'   => 'Aktionen',
@@ -3361,7 +3362,7 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'Liebe:r :customer_name',
+        'dear'   => 'Liebe:r :admin_name',
         'thanks' => 'Wenn Sie irgendwelche Hilfe benötigen, kontaktieren Sie uns bitte unter <a href=":link" style=":style">:email</a>.<br/>Vielen Dank!',
 
         'admin' => [

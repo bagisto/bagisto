@@ -2015,6 +2015,7 @@ return [
                 'title'         => 'اللغات',
                 'locale'        => 'اللغة',
                 'create-btn'    => 'إنشاء لغة',
+                'logo-size'     => 'يجب أن تكون دقة الصورة 24 بكسل × 16 بكسل',
 
                 'datagrid' => [
                     'actions'   => 'الإجراءات',
@@ -3359,7 +3360,7 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'عزيزي :customer_name',
+        'dear'   => 'عزيزي :admin_name',
         'thanks' => 'إذا كنت بحاجة إلى أي نوع من المساعدة، يرجى الاتصال بنا على <a href=":link" style=":style">:email</a>.<br/>شكرًا لك!',
 
         'admin' => [

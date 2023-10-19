@@ -4,12 +4,12 @@ return [
     'customers' => [
         'forgot-password' => [
             'back'                 => 'Back to sign In ?',
-            'email-not-exist'      => 'No podemos encontrar un usuario con esa dirección de correo electrónico.',
+            'email-not-exist'      => 'We cannot find a user with that email address.',
             'email'                => 'Email',
             'forgot-password-text' => 'If you forgot your password, recover it by entering your email address.',
             'footer'               => '© Copyright 2010 - :current_year, Webkul Software (Registered in India). All rights reserved.',
             'page-title'           => 'Forgot your password ?',
-            'reset-link-sent'      => 'Hemos enviado por correo electrónico el enlace para restablecer su contraseña.',
+            'reset-link-sent'      => 'We have e-mailed your reset password link.',
             'submit'               => 'Reset Password',
             'sign-in-button'       => 'Sign In',
             'title'                => 'Recover Password',

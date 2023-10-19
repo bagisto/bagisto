@@ -2016,6 +2016,7 @@ return [
                 'title'      => 'Localidades',
                 'locale'     => 'Localidad',
                 'create-btn' => 'Crear Localidad',
+                'logo-size' => 'La risoluzione dell\'immagine dovrebbe essere come 24px x 16px',
 
                 'datagrid' => [
                     'actions'   => 'Acciones',
@@ -3361,7 +3362,7 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'Caro :customer_name',
+        'dear'   => 'Caro :admin_name',
         'thanks' => 'Se hai bisogno di assistenza, ti preghiamo di contattarci su <a href=":link" style=":style">:email</a>.<br/>Grazie!',
 
         'admin' => [
