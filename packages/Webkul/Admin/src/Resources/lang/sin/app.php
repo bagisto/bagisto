@@ -3355,7 +3355,7 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'මහේෂ් :customer_name',
+        'dear'   => 'මහේෂ් :admin_name',
         'thanks' => 'ඔබට කුමු උපකාර අවශ්‍යයිද? කරුණාකර <a href=":link" style=":style">:email</a> අමතන්න.<br/>ස්තූති!',
 
         'admin' => [

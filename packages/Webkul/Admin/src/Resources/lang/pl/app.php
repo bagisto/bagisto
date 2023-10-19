@@ -3355,7 +3355,7 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'Szanowny(a) :customer_name',
+        'dear'   => 'Szanowny(a) :admin_name',
         'thanks' => 'Jeśli potrzebujesz pomocy, skontaktuj się z nami pod adresem <a href=":link" style=":style">:email</a>.<br/>Dziękujemy!',
 
         'admin' => [

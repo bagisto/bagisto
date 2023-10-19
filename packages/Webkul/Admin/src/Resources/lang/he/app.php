@@ -3355,7 +3355,7 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'יקר :customer_name',
+        'dear'   => 'יקר :admin_name',
         'thanks' => 'אם תזדקק לעזרה בכל סוג שהוא, אנא פנה אלינו ב-<a href=":link" style=":style">:email</a>.<br/>תודה!',
 
         'admin' => [
