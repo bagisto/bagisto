@@ -13,7 +13,13 @@
         </div>
 
         <!-- Actions -->
-        <v-reporting-filters></v-reporting-filters>
+        <v-reporting-filters>
+            {{-- Shimmer --}}
+            <div class="flex gap-[6px]">
+                <div class="shimmer w-[140px] h-[39px] rounded-[6px]"></div>
+                <div class="shimmer w-[140px] h-[39px] rounded-[6px]"></div>
+            </div>
+        </v-reporting-filters>
     </div>
 
     {{-- Sales Stats Vue Component --}}
