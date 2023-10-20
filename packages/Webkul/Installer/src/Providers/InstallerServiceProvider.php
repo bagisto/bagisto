@@ -2,8 +2,9 @@
 
 namespace Webkul\Installer\Providers;
 
-use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Event;
 use Webkul\Installer\Http\Middleware\CanInstall;
 
 class InstallerServiceProvider extends ServiceProvider
@@ -24,7 +25,11 @@ class InstallerServiceProvider extends ServiceProvider
     {
         $this->loadRoutesFrom(__DIR__.'/../Routes/web.php');
 
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'installer');    
+        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'installer');
+
+        Event::listen('installer.installed', 'Webkul\Installer\Listeners\Installer@installed');
+
+        Event::listen('installer.updates.check', 'Webkul\Installer\Listeners\Installer@getUpdates');
     }
 
     /**

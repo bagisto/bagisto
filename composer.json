@@ -109,7 +109,7 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi",
-            "Webkul\\Core\\Events\\ComposerEvents::postCreateProject"
+            "Webkul\\Installer\\Events\\ComposerEvents::postCreateProject"
         ]
     },
     "extra": {
