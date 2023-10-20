@@ -4,15 +4,12 @@ namespace Webkul\Installer\Http\Helpers;
 
 use Exception;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
 class DatabaseManager
 {
     /**
      * Check Database Connection.
-     *
-     * @return 
      */
     public function checkConnection()
     {
@@ -37,10 +34,10 @@ class DatabaseManager
     public function migration()
     {
         try {
-            Artisan::call('migrate:fresh', ['--force'=> true]);
+            Artisan::call('migrate:fresh');
         } catch (Exception $e) {
             return response()->json([
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
 
@@ -55,7 +52,7 @@ class DatabaseManager
     private function seeder()
     {
         try {
-            Artisan::call('db:seed', ['--force' => true]);
+            Artisan::call('db:seed');
 
             $seederLog = Artisan::output();
 
@@ -69,7 +66,6 @@ class DatabaseManager
 
     /**
      * Storage Link.
-     *
      */
     private function storageLink()
     {
@@ -78,13 +74,11 @@ class DatabaseManager
 
     /**
      * Generate New Application Key
-     *
-     * @return
      */
     public function generateKey()
     {
         try {
-            Artisan::call('key:generate', ['--force'=> true]);
+            Artisan::call('key:generate');
         } catch (Exception $e) {
         }
     }
