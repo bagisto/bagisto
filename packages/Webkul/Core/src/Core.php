@@ -463,7 +463,7 @@ class Core
      */
     public function getExchangeRate($targetCurrencyId)
     {
-        if (isset($this->exchangeRates[$targetCurrencyId])) {
+        if (array_key_exists($targetCurrencyId, $this->exchangeRates)) {
             return $this->exchangeRates[$targetCurrencyId];
         }
 
