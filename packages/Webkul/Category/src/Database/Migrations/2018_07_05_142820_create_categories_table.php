@@ -17,10 +17,10 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('position')->default(0);
-            $table->string('logo_path')->nullable();
+            $table->string('image')->nullable();
+            $table->string('category_banner')->nullable();
             $table->boolean('status')->default(0);
             $table->string('display_mode')->default('products_and_description')->nullable();
-            $table->string('banner_path')->nullable();
             NestedSet::columns($table);
             $table->json('additional')->nullable();
             $table->timestamps();
