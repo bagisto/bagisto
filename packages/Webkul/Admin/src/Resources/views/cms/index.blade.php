@@ -50,5 +50,10 @@
         </div>
     </div>
 
+    {!! view_render_event('bagisto.admin.cms.pages.list.before') !!}
+
     <x-admin::datagrid src="{{ route('admin.cms.index') }}"></x-admin::datagrid>
+    
+    {!! view_render_event('bagisto.admin.cms.pages.list.after') !!}
+
 </x-admin::layouts>

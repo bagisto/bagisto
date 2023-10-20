@@ -552,6 +552,7 @@ class Sale extends AbstractReporting
             ->leftJoin('order_payment', 'orders.id', '=', 'order_payment.order_id')
             ->select('method', 'method_title as title')
             ->addSelect(DB::raw('COUNT(*) as total'))
+            ->addSelect(DB::raw('SUM(base_grand_total) as base_total'))
             ->whereBetween('orders.created_at', [$this->startDate, $this->endDate])
             ->groupBy('method')
             ->orderByDesc('total')

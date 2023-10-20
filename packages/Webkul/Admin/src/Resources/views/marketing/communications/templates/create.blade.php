@@ -3,8 +3,13 @@
         @lang('admin::app.marketing.communications.templates.create.title')
     </x-slot:title>
 
+    {!! view_render_event('bagisto.admin.marketing.communications.templates.create.before') !!}
+
     {{-- Input Form --}}
     <x-admin::form :action="route('admin.marketing.communications.email_templates.store')">
+
+        {!! view_render_event('bagisto.admin.marketing.communications.templates.create.create_form_controls.before') !!}
+
         <div class="flex justify-between items-center">
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.marketing.communications.templates.create.title')
@@ -33,6 +38,9 @@
         <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
             {{-- Left sub-component --}}
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+
+                {!! view_render_event('bagisto.admin.marketing.communications.templates.create.card.content.before') !!}
+
                 {{--Content --}}
                 <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <div class="mb-[10px]">
@@ -61,12 +69,18 @@
                         </x-admin::form.control-group>
                     </div>
                 </div>
+
+                {!! view_render_event('bagisto.admin.marketing.communications.templates.create.card.content.after') !!}
+
             </div>
 
             {{-- Right sub-component --}}
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
                 {{-- General --}}
                 <div class="bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+
+                    {!! view_render_event('bagisto.admin.marketing.communications.templates.create.card.accordion.general.before') !!}
+
                     <x-admin::accordion>
                         <x-slot:header>
                             <div class="flex items-center justify-between">
@@ -135,8 +149,17 @@
                             </div>
                         </x-slot:content>
                     </x-admin::accordion>
+
+                    {!! view_render_event('bagisto.admin.marketing.communications.templates.create.card.accordion.general.after') !!}
+
                 </div>
             </div>
         </div>
+
+        {!! view_render_event('bagisto.admin.marketing.communications.templates.create.create_form_controls.after') !!}
+
     </x-admin::form>
+
+    {!! view_render_event('bagisto.admin.marketing.communications.templates.create.after') !!}
+
 </x-admin::layouts>

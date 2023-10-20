@@ -8,12 +8,12 @@
 		@lang('shop::app.checkout.success.thanks')
     </x-slot>
 
-	<div class="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">
+	<div class="absolute top-[60%] left-[50%] -translate-x-[50%] -translate-y-[60%]">
 		<div class="grid gap-y-[20px] place-items-center">
 			<img 
 				class="" 
 				src="{{ bagisto_asset('images/thank-you.png') }}" 
-				alt="" 
+				alt="thankyou" 
 				title=""
 			>
 

@@ -15,6 +15,8 @@
                 @lang('shop::app.customers.account.downloadable-products.name')
             </h2>
 
+            {!! view_render_event('bagisto.shop.customers.account.downloadable_products.list.before') !!}
+
             @if (! $downloadableLinkPurchased->isEmpty())
                 {{-- Downloadable Products Information --}}
                 <div class="relative overflow-x-auto border border-b-0  rounded-[12px] mt-[30px]">
@@ -145,6 +147,9 @@
                     </p>
                 </div>
             @endif
+
+            {!! view_render_event('bagisto.shop.customers.account.downloadable_products.list.after') !!}
+
         </div>
     </div>
 </x-shop::layouts.account>

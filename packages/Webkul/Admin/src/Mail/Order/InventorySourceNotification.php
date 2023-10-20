@@ -33,7 +33,7 @@ class InventorySourceNotification extends Mailable
         $inventory = $this->shipment->inventory_source;
 
         return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
-            ->to($inventory->contact_email, $inventory->name)
+            ->to($inventory->contact_email, $inventory->contact_name)
             ->subject(trans('admin::app.emails.orders.inventory-source.subject'))
             ->view('admin::emails.orders.inventory-source');
     }

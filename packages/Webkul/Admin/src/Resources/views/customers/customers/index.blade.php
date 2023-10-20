@@ -15,6 +15,9 @@
 
             <div class="flex gap-x-[10px] items-center">
                 {{-- Customer Create Vue Component --}}
+
+                {!! view_render_event('admin.customers.customers.create.before') !!}
+
                 <v-create-customer-form>
                     <button
                         type="button"
@@ -23,9 +26,14 @@
                         @lang('admin::app.customers.customers.index.create.create-btn')
                     </button>
                 </v-create-customer-form>
+
+                {!! view_render_event('admin.customers.customers.create.after') !!}
+
             </div>
         </div>
     </div>
+
+    {!! view_render_event('bagisto.admin.customers.customers.list.before') !!}
 
     <x-admin::datagrid src="{{ route('admin.customers.customers.index') }}" ref="customer_data" :isMultiRow="true">
         @php 
@@ -222,6 +230,8 @@
             </template>
         </template>
     </x-admin::datagrid>
+
+    {!! view_render_event('bagisto.admin.customers.customers.list.after') !!}
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-create-customer-form-template">

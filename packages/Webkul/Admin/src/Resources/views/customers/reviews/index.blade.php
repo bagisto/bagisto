@@ -9,10 +9,17 @@
         </p>
     </div>
 
+    {!! view_render_event('admin.customers.reviews.edit.before') !!}
+
     <v-review-edit-drawer></v-review-edit-drawer>
+
+    {!! view_render_event('admin.customers.groups.edit.after') !!}
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-review-edit-drawer-template">
+
+            {!! view_render_event('admin.customers.reviews.list.before') !!}
+
             <x-admin::datagrid
                 src="{{ route('admin.customers.customers.review.index') }}"
                 :isMultiRow="true"
@@ -199,6 +206,8 @@
                     </template>
                 </template>
             </x-admin::datagrid>
+
+            {!! view_render_event('admin.customers.reviews.list.after') !!}
 
             <!-- Drawer content -->
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">

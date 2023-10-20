@@ -74,6 +74,8 @@
             </p>
         </div>
 
+        {!! view_render_event('bagisto.shop.customers.account.profile.delete.before') !!}
+
         {{-- Profile Delete modal --}}
         <x-shop::modal>
             <x-slot:toggle>
@@ -123,5 +125,8 @@
                 </x-shop::form>
             </x-slot:content>
         </x-shop::modal>
+
+        {!! view_render_event('bagisto.shop.customers.account.profile.delete.after') !!}
+
     </div>
 </x-shop::layouts.account>

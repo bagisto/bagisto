@@ -144,6 +144,7 @@
 
                                         <!-- Cart Item Options Container -->
                                         <div class="grid place-content-start gap-y-[10px]">
+
                                             <p 
                                                 class="text-[16px] font-medium" 
                                                 v-text="item.name"
@@ -226,6 +227,8 @@
                                     </div>
                                 </div>
                             </div>
+
+                            {!! view_render_event('bagisto.shop.checkout.cart.controls.before') !!}
         
                             <!-- Cart Item Actions -->
                             <div class="flex flex-wrap gap-[30px] justify-end">
@@ -243,10 +246,18 @@
                                     @lang('shop::app.checkout.cart.index.update-cart')
                                 </button>
                             </div>
+
+                            {!! view_render_event('bagisto.shop.checkout.cart.controls.after') !!}
+                            
                         </div>
+
+                        {!! view_render_event('bagisto.shop.checkout.cart.summary.before') !!}
 
                         <!-- Cart Summary -->
                         @include('shop::checkout.cart.summary')
+
+                        {!! view_render_event('bagisto.shop.checkout.cart.summary.after') !!}
+
                     </div>
 
                     <!-- Empty Cart Section -->

@@ -121,7 +121,7 @@
                         </x-shop::form.control-group.error>
                     </x-shop::form.control-group>
 
-                    {!! view_render_event('bagisto.shop.customers.reset_password_form_controls.before') !!}
+                    {!! view_render_event('bagisto.shop.customers.reset_password_form_controls.after') !!}
 
                     <div class="flex gap-[36px] flex-wrap mt-[30px] items-center">
                         <button
@@ -135,7 +135,7 @@
                 </x-shop::form>
             </div>
 
-            {!! view_render_event('bagisto.shop.customers.reset_password.before') !!}
+            {!! view_render_event('bagisto.shop.customers.reset_password.after') !!}
 
         </div>
 
