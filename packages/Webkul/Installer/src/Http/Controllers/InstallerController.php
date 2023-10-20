@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Event;
 use Webkul\Installer\Http\Helpers\ServerRequirements;
 use Webkul\Installer\Http\Helpers\EnvironmentManager;
 use Webkul\Installer\Http\Helpers\DatabaseManager;
@@ -130,6 +131,8 @@ class InstallerController extends Controller
         $filePath = storage_path('installed');
         
         File::put($filePath, 'Your Bagisto App is Successfully Installed');
+
+        Event::dispatch('installer.installed');
 
         return $filePath;
     }

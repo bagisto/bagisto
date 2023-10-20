@@ -49,18 +49,13 @@ class UpdateNotification implements ShouldQueue
         $httpClient = new Client();
 
         try {
-            $response = $httpClient->request('POST', self::API_ENDPOINTS[$this->data['api']], [
+            $httpClient->request('POST', self::API_ENDPOINTS[$this->data['api']], [
                 'headers' => [
                     'Accept' => 'application/json',
                 ],
                 'json'    => $this->data['params'],
             ]);
-
-            $result = json_decode($response->getBody()->getContents(), true);
-
-            \Log::info('Server Response: ', $result ?? []);
         } catch (\Exception $e) {
-            \Log::error($e->getMessage());
             /**
              * Skip the error
              */

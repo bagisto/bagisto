@@ -32,11 +32,11 @@ class Installer
             'params' => [
                 'shopDomain'       => config('app.url'),
                 'shopDomainSsl'    => config('app.url'),
-                'physicalUri'      => config('app.url'),
+                'physicalUri'      => '/',
                 'email'            => $admin->email,
                 'firstname'        => $admin->name,
-                'lastname'         => '',
-                'countryCode'      => config('app.default_country'),
+                'lastname'         => ' ',
+                'countryCode'      => config('app.default_country') ?? 'in',
                 'marketingConsent' => FALSE,
                 'project'          => 'bagisto',
             ],
@@ -50,8 +50,6 @@ class Installer
      */
     public function getUpdates()
     {
-        Cache::forget('new-updates');
-
         $alreadyUpdated = Cache::get('new-updates');
 
         if ($alreadyUpdated) {
@@ -67,11 +65,11 @@ class Installer
             'params' => [
                 'shopDomain'       => config('app.url'),
                 'shopDomainSsl'    => config('app.url'),
-                'physicalUri'      => config('app.url'),
+                'physicalUri'      => '/',
                 'email'            => $admin->email,
                 'firstname'        => $admin->name,
-                'lastname'         => '',
-                'countryCode'      => config('app.default_country'),
+                'lastname'         => ' ',
+                'countryCode'      => config('app.default_country') ?? 'in',
                 'marketingConsent' => FALSE,
                 'project'          => 'bagisto',
             ],
