@@ -2722,6 +2722,11 @@ return [
             'start-date' => 'Start Date',
             'year'       => 'Year',
         ],
+
+        'empty' => [
+            'title' => 'No Data Available',
+            'info'  => 'No data available for selected interval',
+        ],
     ],
 
     'configuration' => [
