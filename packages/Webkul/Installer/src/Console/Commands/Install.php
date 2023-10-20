@@ -92,7 +92,7 @@ class Install extends Command
         $this->info('Password: admin123');
         $this->info('Cheers!');
         
-        Event::dispatch('installer.installed');
+        Event::dispatch('bagisto.installed');
     }
 
     /**

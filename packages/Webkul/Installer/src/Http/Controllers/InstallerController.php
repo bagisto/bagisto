@@ -132,7 +132,7 @@ class InstallerController extends Controller
         
         File::put($filePath, 'Your Bagisto App is Successfully Installed');
 
-        Event::dispatch('installer.installed');
+        Event::dispatch('bagisto.installed');
 
         return $filePath;
     }
