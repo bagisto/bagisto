@@ -1258,7 +1258,7 @@
                         },
 
                         startInstallation(setErrors) {
-                            this.$axios.post("{{ route('installer.envFileSetup') }}", this.envData)
+                            this.$axios.post("{{ route('installer.env_file_setup') }}", this.envData)
                                 .then((response) => {
                                     this.runMigartion(setErrors);
                                 })
@@ -1268,7 +1268,7 @@
                         },
 
                         runMigartion(setErrors) {
-                            this.$axios.post("{{ route('installer.runMigration') }}")
+                            this.$axios.post("{{ route('installer.run_migration') }}")
                                 .then((response) => {
                                     this.seederLog = response.data;
 
@@ -1277,7 +1277,7 @@
                                 .catch(error => {
                                     this.currentStep = 'envDatabase';
 
-                                    this.$axios.post("{{ route('installer.deleteEnvFile') }}")
+                                    this.$axios.post("{{ route('installer.delete_env_file') }}")
                                         .then((response) => {
                                             alert(error.response.data.error ?? error.response.data);
                                         })
@@ -1289,7 +1289,7 @@
                         },
 
                         saveAdmin(params, setErrors) {
-                            this.$axios.post("{{ route('installer.adminConfigSetup') }}", params)
+                            this.$axios.post("{{ route('installer.admin_config_setup') }}", params)
                                 .then((response) => {
                                     this.currentStep = 'emailConfiguration';
                                 })
@@ -1299,7 +1299,7 @@
                         },
 
                         saveSmtp(params, setErrors) {
-                            this.$axios.post("{{ route('installer.smtpConfigSetup') }}", params)
+                            this.$axios.post("{{ route('installer.smtp_config_setup') }}", params)
                                 .then((response) => {
                                 })
                                 .catch(error => {
