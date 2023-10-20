@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Core\Console\Commands;
+namespace Webkul\Installer\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;

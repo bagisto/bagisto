@@ -17,12 +17,24 @@ class InstallerServiceProvider extends ServiceProvider
     protected $defer = false;
 
     /**
+     * Bootstrap the application events.
+     *
+     * @param \Illuminate\Routing\Router $router
+     */
+    public function boot(Router $router)
+    {
+        $router->middlewareGroup('install', [CanInstall::class]);
+    }
+
+    /**
      * Register the service provider
      *
      * @return void
      */
     public function register()
     {
+        $this->registerCommands();
+
         $this->loadRoutesFrom(__DIR__.'/../Routes/web.php');
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'installer');
@@ -33,12 +45,16 @@ class InstallerServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bootstrap the application events.
+     * Register the Installer Commands of this package.
      *
-     * @param \Illuminate\Routing\Router $router
+     * @return void
      */
-    public function boot(Router $router)
+    protected function registerCommands(): void
     {
-        $router->middlewareGroup('install', [CanInstall::class]);
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                \Webkul\Installer\Console\Commands\Install::class,
+            ]);
+        }
     }
 }
