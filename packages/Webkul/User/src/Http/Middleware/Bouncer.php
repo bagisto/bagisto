@@ -21,7 +21,7 @@ class Bouncer
             return redirect()->route('admin.session.create');
         }
 
-        Event::dispatch('installer.updates.check');
+        Event::dispatch('bagisto.updates.check');
 
         /**
          * If user status is changed by admin. Then session should be
