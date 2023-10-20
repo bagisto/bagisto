@@ -2723,6 +2723,11 @@ return [
             'start-date' => 'Start Date',
             'end-date'   => 'End Date',
         ],
+
+        'empty' => [
+            'title' => 'No Data Available',
+            'info'  => 'No data available for selected interval',
+        ],
     ],
 
     'configuration' => [
