@@ -4,6 +4,8 @@
         @lang('admin::app.marketing.sitemaps.index.title')
     </x-slot:title>
 
+    {!! view_render_event('bagisto.admin.marketing.sitemaps.create.before') !!}
+
     {{-- Create Sitemap Vue Component --}}
     <v-create-sitemaps>
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
@@ -22,6 +24,8 @@
         {{-- Added For Shimmer --}}
         <x-admin::shimmer.datagrid/>
     </v-create-sitemaps>
+
+    {!! view_render_event('bagisto.admin.marketing.sitemaps.create.after') !!}
     
     @pushOnce('scripts')
         <script 
@@ -43,6 +47,8 @@
                     </div>
                 @endif
             </div>
+
+            {!! view_render_event('admin.marketing.sitemaps.list.before') !!}
 
             <x-admin::datagrid
                 src="{{ route('admin.marketing.promotions.sitemaps.index') }}"
@@ -140,6 +146,8 @@
                     </div>
                 </template>
             </x-admin::datagrid>
+
+            {!! view_render_event('admin.marketing.sitemaps.list.after') !!}
 
             <!-- Model Form -->
             <x-admin::form

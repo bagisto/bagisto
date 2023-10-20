@@ -4,7 +4,11 @@
         @lang('admin::app.customers.groups.index.title')
     </x-slot:title>
 
+    {!! view_render_event('admin.customers.groups.create.before') !!}
+
     <v-create-group></v-create-group>
+
+    {!! view_render_event('admin.customers.groups.create.after') !!}
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-create-group-template">
@@ -29,6 +33,8 @@
                         </div>
                     </div>
                 </div>
+
+                {!! view_render_event('admin.customers.groups.list.before') !!}
 
                 <!-- DataGrid -->
                 <x-admin::datagrid src="{{ route('admin.customers.groups.index') }}" ref="datagrid">
@@ -116,6 +122,8 @@
                         </div>
                     </template>
                 </x-admin::datagrid>
+
+                {!! view_render_event('admin.customers.groups.list.after') !!}
 
                 <!-- Modal Form -->
                 <x-admin::form

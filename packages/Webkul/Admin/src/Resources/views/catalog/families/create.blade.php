@@ -5,6 +5,9 @@
 
     {{-- Input Form --}}
     <x-admin::form :action="route('admin.catalog.families.store')">
+
+        {!! view_render_event('bagisto.admin.catalog.families.create.create_form_controls.before') !!}
+
         {{-- Page Header --}}
         <div class="flex justify-between items-center">
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
@@ -98,6 +101,9 @@
                 </div>
             </div>
         </div>
+
+        {!! view_render_event('bagisto.admin.catalog.families.create.create_form_controls.after') !!}
+        
     </x-admin::form>
 
     @pushOnce('scripts')

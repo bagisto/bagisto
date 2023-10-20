@@ -70,7 +70,7 @@
                         </x-shop::form.control-group.error>
                     </x-shop::form.control-group>
 
-                    {!! view_render_event('bagisto.shop.customers.signup_form_controls.firstname.after') !!}
+                    {!! view_render_event('bagisto.shop.customers.signup_form_controls.first_name.after') !!}
 
                     <x-shop::form.control-group class="mb-4">
                         <x-shop::form.control-group.label class="required">
@@ -94,7 +94,7 @@
                         </x-shop::form.control-group.error>
                     </x-shop::form.control-group>
 
-                    {!! view_render_event('bagisto.shop.customers.signup_form_controls.lastname.after') !!}
+                    {!! view_render_event('bagisto.shop.customers.signup_form_controls.last_name.after') !!}
 
                     <x-shop::form.control-group class="mb-4">
                         <x-shop::form.control-group.label class="required">
@@ -214,6 +214,9 @@
                             {!! view_render_event('bagisto.shop.customers.login_form_controls.before') !!}
                         </div>
                     </div>
+
+                    {!! view_render_event('bagisto.shop.customers.signup_form_controls.after') !!}
+
                 </x-shop::form>
             </div>
 

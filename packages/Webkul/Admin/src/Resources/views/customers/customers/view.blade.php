@@ -42,6 +42,8 @@
         </div>
     </div>
 
+    {!! view_render_event('bagisto.admin.customers.customers.view.filters.before') !!}
+
     {{-- Filters --}}
     <div class="flex gap-x-[4px] gap-y-[8px] items-center flex-wrap mt-[28px]">
         {{-- Address Create component --}}
@@ -75,10 +77,15 @@
         @endif
     </div>
 
+    {!! view_render_event('bagisto.admin.customers.customers.view.filters.after') !!}
+
     {{-- Content --}}
     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
         {{-- Left Component --}}
         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+
+            {!! view_render_event('bagisto.admin.customers.customers.view.card.orders.before') !!}
+
             {{-- Orders --}}
             <div class=" bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                 @if ($totalOrderCount = count($customer->orders))
@@ -229,6 +236,10 @@
                 @endif
             </div>
 
+            {!! view_render_event('bagisto.admin.customers.customers.view.card.orders.after') !!}
+
+            {!! view_render_event('bagisto.admin.customers.customers.view.card.invoices.before') !!}
+
             {{-- Invoices --}}
             <div class="bg-white dark:bg-gray-900 rounded box-shadow">
                 @if ($totalInvoiceCount = count($customer->invoices))
@@ -299,6 +310,10 @@
                     </div>
                 @endif
             </div>
+
+            {!! view_render_event('bagisto.admin.customers.customers.view.card.invoices.after') !!}
+
+            {!! view_render_event('bagisto.admin.customers.customers.view.card.reviews.before') !!}
 
             {{-- Reviews --}}
             <div class="bg-white dark:bg-gray-900 rounded box-shadow">
@@ -415,6 +430,10 @@
                 @endif
             </div>
           
+            {!! view_render_event('bagisto.admin.customers.customers.view.card.reviews.after') !!}
+
+            {!! view_render_event('bagisto.admin.customers.customers.view.card.notes.before') !!}
+
             {{-- Notes Form --}}
             <div class="bg-white dark:bg-gray-900  rounded box-shadow">
                 <p class="p-[16px] pb-0 text-[16px] text-gray-800 dark:text-white font-semibold">
@@ -501,10 +520,16 @@
                     <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
                 @endforeach
             </div>
+
+            {!! view_render_event('bagisto.admin.customers.customers.view.card.notes.after') !!}
+
         </div>
 
         {{-- Right Component --}}
         <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+
+            {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.customer.before') !!}
+
             {{-- Information --}}
             <x-admin::accordion>
                 <x-slot:header>
@@ -546,6 +571,10 @@
                     </div>
                 </x-slot:content>
             </x-admin::accordion> 
+
+            {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.customer.after') !!}
+
+            {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.address.before') !!}
 
             {{-- Addresses listing--}}
             <x-admin::accordion>
@@ -672,6 +701,9 @@
                     @endif
                 </x-slot:content>
             </x-admin::accordion>
+
+            {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.address.after') !!}
+
         </div>
     </div>
 </x-admin::layouts>

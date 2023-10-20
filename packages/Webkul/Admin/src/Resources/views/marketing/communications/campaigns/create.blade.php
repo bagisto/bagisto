@@ -4,8 +4,14 @@
         @lang('admin::app.marketing.communications.campaigns.create.title')
     </x-slot:title>
     
+
+    {!! view_render_event('bagisto.admin.marketing.communications.campaigns.create.before') !!}
+
     {{-- Input Form --}}
     <x-admin::form :action="route('admin.marketing.communications.campaigns.store')">
+
+        {!! view_render_event('bagisto.admin.marketing.communications.campaigns.create.create_form_controls.before') !!}
+
         <div class="flex justify-between items-center">
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.marketing.communications.campaigns.create.title')
@@ -33,6 +39,9 @@
         <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
             {{-- Left Section --}}
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+
+                {!! view_render_event('bagisto.admin.marketing.communications.campaigns.create.card.general.before') !!}
+
                 {{-- General Section --}}
                 <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
@@ -153,10 +162,16 @@
                         </x-admin::form.control-group>
                     </div>
                 </div>
+
+                {!! view_render_event('bagisto.admin.marketing.communications.campaigns.create.card.general.after') !!}
+
             </div>
 
             {{-- Right Section --}}
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-md:w-full">
+
+                {!! view_render_event('bagisto.admin.marketing.communications.campaigns.create.card.accordion.setting.before') !!}
+
                 {{-- Setting --}}
                 <x-admin::accordion>
                     <x-slot:header>
@@ -256,7 +271,16 @@
                         </x-admin::form.control-group>
                     </x-slot:content>
                 </x-admin::accordion>
+
+                {!! view_render_event('bagisto.admin.marketing.communications.campaigns.create.card.accordion.setting.after') !!}
+
             </div>
         </div>
+
+        {!! view_render_event('bagisto.admin.marketing.communications.campaigns.create.create_form_controls.after') !!}
+
     </x-admin::form>
+
+    {!! view_render_event('bagisto.admin.marketing.communications.campaigns.create.after') !!}
+
 </x-admin::layouts>

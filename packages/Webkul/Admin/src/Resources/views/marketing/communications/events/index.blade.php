@@ -47,6 +47,8 @@
                 </div>
             </div>
 
+            {!! view_render_event('admin.marketing.communications.events.list.before') !!}
+
             <!-- Datagrid -->
             <x-admin::datagrid
                 src="{{ route('admin.marketing.communications.events.index') }}"
@@ -137,6 +139,10 @@
                 </template>
             </x-admin::datagrid>
 
+            {!! view_render_event('admin.marketing.communications.events.list.after') !!}
+
+            {!! view_render_event('admin.marketing.communications.events.create.before') !!}
+
             <!-- Email Events form -->
             <x-admin::form
                 v-slot="{ meta, errors, handleSubmit }"
@@ -147,6 +153,9 @@
                     @submit="handleSubmit($event, updateOrCreate)"
                     ref="eventCreateForm"
                 >
+
+                    {!! view_render_event('bagisto.admin.marketing.communications.events.create_form_controls.before') !!}
+
                     <x-admin::modal ref="emailEvents">
                         <x-slot:header>
                             <p
@@ -255,8 +264,14 @@
                             </button>
                         </x-slot:footer>
                     </x-admin::modal>
+
+                    {!! view_render_event('bagisto.admin.marketing.communications.events.create_form_controls.after') !!}
+
                 </form>
             </x-admin::form>
+
+            {!! view_render_event('admin.marketing.communications.events.create.after') !!}
+
         </script>
 
         <script type="module">
