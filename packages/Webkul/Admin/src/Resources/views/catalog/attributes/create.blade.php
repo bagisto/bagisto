@@ -52,8 +52,6 @@
                     </div>
                 </div>
 
-                {!! view_render_event('bagisto.admin.catalog.attributes.create.card.before') !!}
-
                 <!-- body content -->
                 <div class="flex gap-[10px] mt-[14px]">
 

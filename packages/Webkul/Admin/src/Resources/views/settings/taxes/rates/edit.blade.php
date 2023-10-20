@@ -272,7 +272,7 @@
                     </div>
                 </div>
 
-                {!! view_render_event('admin.settings.taxes.rates.edit.edit_form_controls.before') !!}
+                {!! view_render_event('admin.settings.taxes.rates.edit.edit_form_controls.after') !!}
 
             </x-admin::form>
 

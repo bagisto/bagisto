@@ -107,6 +107,8 @@
                             @endforeach
                         </div>
 
+                        {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.label.after', ['attribute' => $attribute]) !!}
+
                         <!-- Options -->
                         <div
                             class="p-[16px] bg-white dark:bg-gray-900 box-shadow rounded-[4px] {{ in_array($attribute->type, ['select', 'multiselect', 'checkbox', 'price']) ?: 'hidden' }}"
@@ -375,8 +377,6 @@
                             @endif
                         </div>
                     </div>
-
-                    {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.label.after', ['attribute' => $attribute]) !!}
 
                     <!-- Right sub-component -->
                     <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
@@ -977,6 +977,9 @@
                     </x-admin::modal>
                 </form>
             </x-admin::form>
+
+            {!! view_render_event('bagisto.admin.catalog.attributes.edit.after') !!}
+
         </script>
 
         <script type="module">

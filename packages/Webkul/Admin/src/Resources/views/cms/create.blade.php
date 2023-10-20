@@ -256,5 +256,8 @@
 
             </div>
         </div>
+
+        {!! view_render_event('bagisto.admin.cms.pages.create.create_form_controls.after') !!}
+
     </x-admin::form>
 </x-admin::layouts>

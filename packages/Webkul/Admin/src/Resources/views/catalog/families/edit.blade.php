@@ -9,7 +9,7 @@
         :action="route('admin.catalog.families.update', $attributeFamily->id)"
     >
 
-        {!! view_render_event('bagisto.admin.catalog.families.edit.edit_form_accordian.before', ['attributeFamily' => $attributeFamily]) !!}
+        {!! view_render_event('bagisto.admin.catalog.families.edit.edit_form_control.before', ['attributeFamily' => $attributeFamily]) !!}
 
         {{-- Page Header --}}
         <div class="flex justify-between items-center">
@@ -117,7 +117,7 @@
 
         </div>
 
-        {!! view_render_event('bagisto.admin.catalog.families.edit.edit_form_accordian.after', ['attributeFamily' => $attributeFamily]) !!}
+        {!! view_render_event('bagisto.admin.catalog.families.edit.edit_form_control.after', ['attributeFamily' => $attributeFamily]) !!}
 
     </x-admin::form>
 

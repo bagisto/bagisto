@@ -251,7 +251,7 @@
                             
                         </div>
 
-                        {!! view_render_event('bagisto.shop.checkout.cart.summary.after') !!}
+                        {!! view_render_event('bagisto.shop.checkout.cart.summary.before') !!}
 
                         <!-- Cart Summary -->
                         @include('shop::checkout.cart.summary')

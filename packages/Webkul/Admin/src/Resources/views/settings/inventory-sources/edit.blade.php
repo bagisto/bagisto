@@ -23,7 +23,7 @@
                     method="PUT"
                 >
 
-                    {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.create_form_controls.before') !!}
+                    {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.edit_form_controls.before') !!}
 
                     <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
                         <p class="text-[20px] text-gray-800 dark:text-white font-bold">
@@ -506,7 +506,7 @@
                         </div>
                     </div>
 
-                    {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.create_form_controls.after') !!}
+                    {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.edit_form_controls.after') !!}
                 </x-admin::form>
 
                 {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.after') !!}

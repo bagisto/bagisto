@@ -278,6 +278,6 @@
 
     </x-admin::form>
 
-    {!! view_render_event('bagisto.admin.marketing.communications.campaigns.edit.before') !!}
+    {!! view_render_event('bagisto.admin.marketing.communications.campaigns.edit.after') !!}
 
 </x-admin::layouts>

@@ -489,7 +489,7 @@
                         </div>
                     </div>
 
-                    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.create.create_form_controls.before') !!}
+                    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.create.create_form_controls.after') !!}
 
                 </x-admin::form>
             </div>

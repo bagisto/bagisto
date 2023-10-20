@@ -8,6 +8,8 @@
         $currentLocale = core()->getRequestedLocale();
     @endphp
 
+    {!! view_render_event('bagisto.admin.catalog.categories.edit.before') !!}
+
     {{-- Category Edit Form --}}
     <x-admin::form
         :action="route('admin.catalog.categories.update', $category->id)"
@@ -325,7 +327,7 @@
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
                 {{-- Settings --}}
 
-                {!! view_render_event('bagisto.admin.catalog.categories.edit.card.accordion.settings.bedore', ['category' => $category]) !!}
+                {!! view_render_event('bagisto.admin.catalog.categories.edit.card.accordion.settings.before', ['category' => $category]) !!}
 
                 <x-admin::accordion>
                     <x-slot:header>
@@ -470,6 +472,8 @@
         {!! view_render_event('bagisto.admin.catalog.categories.edit.edit_form_controls.after', ['category' => $category]) !!}
 
     </x-admin::form>
+
+    {!! view_render_event('bagisto.admin.catalog.categories.edit.after') !!}
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-description-template">

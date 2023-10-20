@@ -287,3 +287,5 @@
     {!! view_render_event('admin.customers.customers.edit.create_form_controls.after') !!}
 
 </x-admin::form>
+
+{!! view_render_event('admin.customers.customers.edit.after') !!}

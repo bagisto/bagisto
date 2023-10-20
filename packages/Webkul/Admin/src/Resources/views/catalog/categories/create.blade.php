@@ -428,6 +428,8 @@
 
     </x-admin::form>
 
+    {!! view_render_event('bagisto.admin.catalog.categories.create.after') !!}
+
     @pushOnce('scripts')
         <script type="text/x-template" id="v-description-template">
             <div>

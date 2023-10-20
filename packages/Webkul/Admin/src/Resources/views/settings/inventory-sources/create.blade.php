@@ -509,7 +509,7 @@
 
                 </x-admin::form>
 
-                {!! view_render_event('bagisto.admin.settings.inventory_sources.create.create.after') !!}
+                {!! view_render_event('bagisto.admin.settings.inventory_sources.create.after') !!}
             </div>
         </script>
 

@@ -9,7 +9,7 @@
     {{-- Create Catalog form --}}
     <v-catalog-rule-create-form></v-catalog-rule-create-form>
 
-    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.create.before') !!}
+    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.create.after') !!}
 
     @pushOnce('scripts')
         {{-- v catalog rule create form template --}}
@@ -156,6 +156,8 @@
                                 </div>
         
                             </div>
+
+                            {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.create.card.conditions.after') !!}
 
                             {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.create.card.actions.before') !!}
         
