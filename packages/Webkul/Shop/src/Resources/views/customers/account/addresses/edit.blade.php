@@ -225,7 +225,7 @@
                 type="text"
                 name="postcode"
                 :value="old('postal-code') ?? $address->postcode"
-                rules="required"
+                ::rules="{ required: true, regex: /^[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$/ }"
                 :label="trans('shop::app.customers.account.addresses.post-code')"
                 :placeholder="trans('shop::app.customers.account.addresses.post-code')"
             >
