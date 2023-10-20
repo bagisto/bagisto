@@ -2722,6 +2722,11 @@ return [
             'start-date' => 'Data rozpoczęcia',
             'year'       => 'Rok',
         ],
+
+        'empty' => [
+            'info'  => 'Brak danych dla wybranego okresu',
+            'title' => 'Brak dostępnych danych',
+        ],
     ],
 
     'configuration' => [

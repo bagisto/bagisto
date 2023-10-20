@@ -2723,6 +2723,11 @@ return [
             'start-date' => 'Başlangıç Tarihi',
             'year'       => 'Yıl',
         ],
+
+        'empty' => [
+            'info'  => 'Seçilen aralık için veri mevcut değil',
+            'title' => 'Veri Mevcut Değil',
+        ],
     ],
 
     'configuration' => [

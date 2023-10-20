@@ -2722,6 +2722,11 @@ return [
             'start-date' => '开始日期',
             'year'       => '年',
         ],
+
+        'empty' => [
+            'info'  => '所选时间段内暂无数据',
+            'title' => '暂无数据',
+        ],
     ],
 
     'configuration' => [

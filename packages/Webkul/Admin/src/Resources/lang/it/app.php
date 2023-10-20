@@ -2722,6 +2722,10 @@ return [
             'start-date' => 'Data di Inizio',
             'year'       => 'Anno',
         ],
+        'empty' => [
+            'info'  => 'Nessun dato disponibile per l\'intervallo selezionato',
+            'title' => 'Nessun dato disponibile',
+        ],
     ],
 
     'configuration' => [

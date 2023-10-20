@@ -2722,6 +2722,11 @@ return [
             'start-date' => '開始日',
             'year'       => '年',
         ],
+
+        'empty' => [
+            'info'  => '選択した期間のデータはありません',
+            'title' => 'データは利用できません',
+        ],
     ],
 
     'configuration' => [
