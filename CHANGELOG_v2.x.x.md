@@ -61,6 +61,11 @@ This changelog consists of the bug & security fixes and new features being inclu
 
   * Introduced Products With Most Visits report, providing insights into products visited most frequently.
 
+  **Installer Package:**
+
+  * Introduced a separate installer package, providing users with a standalone tool to set up and configure the application easily through a user-friendly installation process.
+
+
 * #8623 [enhancement] - Footer Copyright Year Displays Previous Year Instead of Current Year
 
 * #8493 [enhancement] - we can remove the homepage configuration from the configuration.
