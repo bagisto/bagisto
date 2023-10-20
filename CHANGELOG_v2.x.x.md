@@ -6,6 +6,15 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ### Features:
 
+**Theme:**
+
+  * Added Dark theme support, providing users with the option to switch to a darker color scheme for improved visibility in 
+  low-light environments.
+
+**Dashboard:**
+
+  * Added Visitors graph feature, allowing users to visualize website traffic and visitor trends over time.
+
 **Sales Reports** 
 
   * Added Total Sales graph feature, allowing users to visualize sales data over time.
@@ -51,7 +60,6 @@ This changelog consists of the bug & security fixes and new features being inclu
   * Implemented Products With Most Reviews report, showing products that received the most reviews.
 
   * Introduced Products With Most Visits report, providing insights into products visited most frequently.
-
 
 * #8623 [enhancement] - Footer Copyright Year Displays Previous Year Instead of Current Year
 
