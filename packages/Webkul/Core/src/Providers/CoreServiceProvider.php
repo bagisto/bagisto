@@ -108,7 +108,7 @@ class CoreServiceProvider extends ServiceProvider
             $this->commands([
                 \Webkul\Core\Console\Commands\BagistoPublish::class,
                 \Webkul\Core\Console\Commands\BagistoVersion::class,
-                \Webkul\Core\Console\Commands\Install::class,
+                \Webkul\Installer\Console\Commands\Install::class,
                 \Webkul\Core\Console\Commands\ExchangeRateUpdate::class,
                 \Webkul\Core\Console\Commands\InvoiceOverdueCron::class,
             ]);
