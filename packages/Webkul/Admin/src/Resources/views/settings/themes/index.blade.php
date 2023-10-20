@@ -10,6 +10,8 @@
         
         <div class="flex gap-x-[10px] items-center">
             <div class="flex gap-x-[10px] items-center">
+                {!! view_render_event('bagisto.admin.settings.themes.create.before') !!}
+
                 <v-create-theme-form>
                     <button
                         type="button"
@@ -18,11 +20,18 @@
                         @lang('admin::app.settings.themes.index.create-btn')
                     </button>  
                 </v-create-theme-form>
+
+                {!! view_render_event('bagisto.admin.settings.themes.create.after') !!}
+
             </div>
         </div>
     </div>
     
+    {!! view_render_event('bagisto.admin.settings.themes.list.before') !!}
+
     <x-admin::datagrid :src="route('admin.settings.themes.index')"></x-admin::datagrid>
+
+    {!! view_render_event('bagisto.admin.settings.themes.list.after') !!}
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-create-theme-form-template">

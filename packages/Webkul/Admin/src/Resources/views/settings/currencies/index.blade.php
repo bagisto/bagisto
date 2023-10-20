@@ -3,6 +3,8 @@
         @lang('admin::app.settings.currencies.index.title')
     </x-slot:title>
 
+    {!! view_render_event('bagisto.admin.settings.currencies.create.before') !!}
+
     <v-currencies>
         <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
@@ -25,6 +27,8 @@
         {{-- DataGrid Shimmer --}}
         <x-admin::shimmer.datagrid/>
     </v-currencies>
+
+    {!! view_render_event('bagisto.admin.settings.currencies.create.after') !!}
 
     @pushOnce('scripts')
         <script

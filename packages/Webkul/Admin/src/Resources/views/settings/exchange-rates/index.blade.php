@@ -4,6 +4,8 @@
         @lang('admin::app.settings.exchange-rates.index.title')
     </x-slot:title>
 
+    {!! view_render_event('bagisto.admin.settings.exchange_rates.create.before') !!}
+
     <v-exchange-rates>
         <div class="flex justify-between items-center">
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
@@ -34,6 +36,8 @@
         {{-- DataGrid Shimmer --}}
         <x-admin::shimmer.datagrid/>
     </v-exchange-rates>
+
+    {!! view_render_event('bagisto.admin.settings.exchange_rates.create.after') !!}
 
     @pushOnce('scripts')
         <script

@@ -11,7 +11,13 @@
             type="text/x-template"
             id="v-create-taxrate-template"
         >
+
+            {!! view_render_event('bagisto.admin.settings.taxes.rates.create.before') !!}
+
             <x-admin::form :action="route('admin.settings.taxes.rates.store')">
+
+                {!! view_render_event('admin.settings.taxes.rates.create.create_form_controls.before') !!}
+
                 <div class="flex justify-between items-center">
                     <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                         @lang('admin::app.settings.taxes.rates.create.title')
@@ -271,7 +277,13 @@
                         </x-admin::accordion>
                     </div>
                 </div>
+
+                {!! view_render_event('admin.settings.taxes.rates.create.create_form_controls.after') !!}
+
             </x-admin::form>
+
+            {!! view_render_event('bagisto.admin.settings.taxes.rates.create.after') !!}
+
         </script>
 
         <script type="module">

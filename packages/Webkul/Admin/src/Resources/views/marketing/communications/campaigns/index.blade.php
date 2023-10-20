@@ -20,5 +20,10 @@
         </div>
     </div>
 
+    {!! view_render_event('admin.marketing.communications.campaigns.list.before') !!}
+
     <x-admin::datagrid src="{{ route('admin.marketing.communications.campaigns.index') }}"></x-admin::datagrid>
+
+    {!! view_render_event('admin.marketing.communications.campaigns.list.after') !!}
+
 </x-admin::layouts>

@@ -9,12 +9,16 @@
     </button>
 @endif
 
+{!! view_render_event('admin.customers.customers.edit.before') !!}
+
 <!-- Modal Form -->
 <x-admin::form 
     :action="route('admin.customers.customers.update', $customer->id)"
     method="post"
 >
     @method('PUT')
+
+    {!! view_render_event('admin.customers.customers.edit.create_form_controls.before') !!}
 
     <!-- Customer Edit Modal -->
     <x-admin::modal ref="customerEditModal">
@@ -27,7 +31,7 @@
 
         <x-slot:content>
             <!-- Modal Content -->
-            {!! view_render_event('bagisto.admin.customers.edit.before') !!}
+            {!! view_render_event('bagisto.admin.customers.customers.edit.before') !!}
 
             <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
                 <div class="flex gap-[16px] max-sm:flex-wrap">
@@ -263,7 +267,7 @@
                     </x-admin::form.control-group>
                 </div>
 
-                {!! view_render_event('bagisto.admin.customers.edit.after') !!}
+                {!! view_render_event('bagisto.admin.customers.customers.edit.after') !!}
             </div>
         </x-slot:content>
 
@@ -279,4 +283,7 @@
             </div>
         </x-slot:footer>
     </x-admin::modal>
+
+    {!! view_render_event('admin.customers.customers.edit.create_form_controls.after') !!}
+
 </x-admin::form>

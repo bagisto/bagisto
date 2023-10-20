@@ -4,16 +4,24 @@
         @lang('admin::app.settings.inventory-sources.create.add-title')
     </x-slot:title>
 
+    {!! view_render_event('bagisto.admin.settings.inventory_sources.create.before') !!}
+
     {{-- Create Inventory --}}
     <v-inventory-create-form></v-inventory-create-form>
+
+    {!! view_render_event('bagisto.admin.settings.inventory_sources.create.after') !!}
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-inventory-create-form-template">
             <div>
+                {!! view_render_event('bagisto.admin.settings.inventory_sources.create.before') !!}
+
                 <x-admin::form 
                     :action="route('admin.settings.inventory_sources.store')"
                     enctype="multipart/form-data"
                 >
+                    {!! view_render_event('bagisto.admin.settings.inventory_sources.create.create_form_controls.before') !!}
+
                     <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
                         <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                             @lang('admin::app.settings.inventory-sources.create.add-title')
@@ -40,9 +48,11 @@
                 
                     <!-- Full Pannel -->
                     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
-                
                         <!-- Left Section -->
                         <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+
+                            {!! view_render_event('bagisto.admin.settings.inventory_sources.create.card.general.before') !!}
+
                             <!-- General -->
                             <div class="p-[16px] bg-white dark:bg-gray-900 box-shadow rounded-[4px]">
                                 <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
@@ -118,6 +128,10 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
                             </div>
+
+                            {!! view_render_event('bagisto.admin.settings.inventory_sources.create.card.general.after') !!}
+
+                            {!! view_render_event('bagisto.admin.settings.inventory_sources.create.card.contact_info.before') !!}
 
                             <!-- Contact Information -->
                             <div class="p-[16px] bg-white dark:bg-gray-900 box-shadow rounded-[4px]">
@@ -216,6 +230,10 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
                             </div>
+
+                            {!! view_render_event('bagisto.admin.settings.inventory_sources.create.card.contact_info.after') !!}
+
+                            {!! view_render_event('bagisto.admin.settings.inventory_sources.create.card.address.before') !!}
 
                             <!-- Source Address -->
                             <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
@@ -371,10 +389,16 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
                             </div>
+
+                            {!! view_render_event('bagisto.admin.settings.inventory_sources.create.card.address.after') !!}
+
                         </div>
                 
                         <!-- Right Section -->
                         <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
+
+                            {!! view_render_event('bagisto.admin.settings.inventory_sources.create.card.accordion.settings.before') !!}
+
                             <!-- Settings -->
                             <x-admin::accordion>
                                 <x-slot:header>
@@ -475,11 +499,17 @@
                                     </x-admin::form.control-group>
                                 </x-slot:content>
                             </x-admin::accordion>
+
+                            {!! view_render_event('bagisto.admin.settings.inventory_sources.create.card.accordion.settings.after') !!}
+
                         </div>
                     </div>
             
-                    {!! view_render_event('bagisto.admin.settings.inventory.create.after') !!}
+                    {!! view_render_event('bagisto.admin.settings.inventory_sources.create.create_form_controls.after') !!}
+
                 </x-admin::form>
+
+                {!! view_render_event('bagisto.admin.settings.inventory_sources.create.create.after') !!}
             </div>
         </script>
 

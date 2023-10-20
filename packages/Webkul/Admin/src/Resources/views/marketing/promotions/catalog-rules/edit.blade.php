@@ -4,8 +4,12 @@
         @lang('admin::app.marketing.promotions.catalog-rules.edit.title')
     </x-slot:title>
 
+    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.before') !!}
+
     {{-- edit Catalog form --}}
     <v-catalog-rule-edit-form></v-catalog-rule-edit-form>
+
+    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.after') !!}
 
     @pushOnce('scripts')
         {{-- v catalog rule edit form template --}}
@@ -16,6 +20,9 @@
                     method="PUT"
                     enctype="multipart/form-data"
                 >
+
+                    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.create.create_form_controls.before') !!}
+
                     <div class="flex gap-[16px] justify-between items-center mt-3 max-sm:flex-wrap">
                         <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                             @lang('admin::app.marketing.promotions.catalog-rules.edit.title')
@@ -42,9 +49,11 @@
         
                     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                            <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
 
-                                <!-- General Form -->
+                            {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.general.before') !!}
+
+                            <!-- General Form -->
+                            <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                                     @lang('admin::app.marketing.promotions.catalog-rules.edit.general')
                                 </p>
@@ -93,7 +102,11 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
                             </div>
+
+                            {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.general.after') !!}
         
+                            {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.conditions.before') !!}
+
                             <!-- Conditions -->
                             <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                                 <div class="flex gap-[16px] items-center justify-between">
@@ -145,6 +158,10 @@
         
                             </div>
         
+                            {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.conditions.after') !!}
+
+                            {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.actions.before') !!}
+
                             <!-- Actions -->
                             <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                                 <div class="grid gap-[6px]">
@@ -256,10 +273,16 @@
                                     </div>
                                 </div>
                             </div>
+
+                            {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.actions.after') !!}
+
                         </div>
 
                         <!-- Rightsub components -->
                         <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+
+                            {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.accordion.settings.before') !!}
+
                             <!-- Settings -->
                             <x-admin::accordion>
                                 <x-slot:header>
@@ -399,7 +422,11 @@
                                     </div>
                                 </x-slot:content>
                             </x-admin::accordion>
-                                
+
+                            {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.accordion.settings.after') !!}
+                             
+                            {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.accordion.marketing_time.before') !!}
+                            
                             <!-- Marketing Time -->
                             <x-admin::accordion>
                                 <x-slot:header>
@@ -456,8 +483,14 @@
                                     </div>
                                 </x-slot:content>
                             </x-admin::accordion>
+
+                            {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.accordion.marketing_time.after') !!}
+
                         </div>
                     </div>
+
+                    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.create.create_form_controls.before') !!}
+
                 </x-admin::form>
             </div>
         </script>

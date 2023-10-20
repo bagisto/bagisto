@@ -20,5 +20,10 @@
         </div>
     </div>
     
+    {!! view_render_event('admin.marketing.promotions.cart-rules.list.before') !!}
+
     <x-admin::datagrid src="{{ route('admin.marketing.promotions.cart_rules.index') }}"></x-admin::datagrid>
+
+    {!! view_render_event('admin.marketing.promotions.cart-rules.list.after') !!}
+
 </x-admin::layouts>

@@ -8,11 +8,17 @@
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-edit-taxrate-template">
+
+            {!! view_render_event('bagisto.admin.settings.taxes.rates.edit.before') !!}
+
             <!-- Input Form -->
             <x-admin::form
                 :action="route('admin.settings.taxes.rates.update', $taxRate->id)"
                 method="PUT"
             >
+
+                {!! view_render_event('admin.settings.taxes.rates.edit.edit_form_controls.before') !!}
+
                 <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
                     <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                         @lang('admin::app.settings.taxes.rates.edit.title')
@@ -169,6 +175,9 @@
                 
                     <!-- Right sub-component -->
                     <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+
+                        {!! view_render_event('admin.settings.taxes.rates.edit.card.accordion.basic_settings.before') !!}
+
                         <!-- Basic Settings -->
                         <x-admin::accordion>
                             <x-slot:header>
@@ -257,9 +266,18 @@
                                 @endif
                             </x-slot:content>
                         </x-admin::accordion>
+
+                        {!! view_render_event('admin.settings.taxes.rates.edit.card.accordion.basic_settings.after') !!}
+
                     </div>
                 </div>
+
+                {!! view_render_event('admin.settings.taxes.rates.edit.edit_form_controls.before') !!}
+
             </x-admin::form>
+
+            {!! view_render_event('bagisto.admin.settings.taxes.rates.edit.after') !!}
+
         </script>
 
         <script type="module">
