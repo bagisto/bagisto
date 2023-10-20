@@ -398,8 +398,7 @@
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="billing[postcode]"
-                                    rules="required"
-                                    {{-- ::rules="{ required: true, regex: /^[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$/ }" --}}
+                                    ::rules="{ required: true, regex: /^[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$/ }"
                                     :label="trans('shop::app.checkout.onepage.addresses.billing.postcode')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.billing.postcode')"
                                     v-model="forms.billing.address.postcode"
