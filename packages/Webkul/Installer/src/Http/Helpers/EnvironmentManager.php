@@ -54,23 +54,7 @@ class EnvironmentManager
      */
     public function setEnvConfiguration($request)
     {
-        $data = file(base_path('.env'));
-
         $envDBParams = [];
-
-        if ($data) {
-            foreach ($data as $line) {
-                $line = preg_replace('/\s+/', '', $line);
-
-                $rowValues = explode('=', $line);
-
-                if (! strlen($line)) {
-                    continue;
-                }
-
-                $envDBParams[$rowValues[0]] = $rowValues[1];
-            }
-        }
 
         /**
          * Update params with form-data
@@ -87,7 +71,7 @@ class EnvironmentManager
             $envDBParams['APP_LOCALE'] = $request['app_locale'];
             $envDBParams['APP_TIMEZONE'] = $request['app_timezone'];
             $envDBParams['DB_CONNECTION'] = $request['db_connection'];
-            $envDBParams['DB_PORT'] = (int) ($request['db_port']);
+            $envDBParams['DB_PORT'] = (int) $request['db_port'];
         }
 
         if (isset($request['mail_host'])) {
@@ -100,22 +84,14 @@ class EnvironmentManager
             $envDBParams['MAIL_FROM_ADDRESS'] = $request['mail_from_address'];
         }
 
-        /**
-         * Making key/value pair with form-data for env
-         */
-        $updatedEnvDBParams = [];
+        $data = file_get_contents(base_path('.env'));
 
         foreach ($envDBParams as $key => $value) {
-            $updatedEnvDBParams[] = $key . '=' . $value;
+            $data = preg_replace("/$key=(.*)/", "$key=$value", $data);
         }
 
-        /**
-         * Inserting new form-data to env
-         */
-        $updatedEnvDBParams = implode(PHP_EOL, $updatedEnvDBParams);
-
         try {
-            file_put_contents(base_path('.env'), $updatedEnvDBParams);
+            file_put_contents(base_path('.env'), $data);
         } catch (Exception $e) {
             return false;
         }
