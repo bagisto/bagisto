@@ -206,6 +206,7 @@ return [
         Webkul\DataGrid\Providers\DataGridServiceProvider::class,
         Webkul\DebugBar\Providers\DebugBarServiceProvider::class,
         Webkul\FPC\Providers\FPCServiceProvider::class,
+        Webkul\Installer\Providers\InstallerServiceProvider::class,
         Webkul\Inventory\Providers\InventoryServiceProvider::class,
         Webkul\Marketing\Providers\MarketingServiceProvider::class,
         Webkul\Notification\Providers\NotificationServiceProvider::class,
