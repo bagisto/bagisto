@@ -22,7 +22,7 @@
                 <!-- Content -->
                 <div class="grid grid-cols-4 gap-[24px]">
                     <!-- Total Visits -->
-                    <div class="grid gap-[16px]">
+                    <div class="flex flex-col gap-[16px]">
                         <div class="grid gap-[2px]">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @{{ report.statistics.visitors.total }}
@@ -46,7 +46,7 @@
                     </div>
 
                     <!-- Total Product Visits -->
-                    <div class="grid gap-[16px]">
+                    <div class="flex flex-col gap-[16px]">
                         <div class="grid gap-[2px]">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @{{ report.statistics.product_visitors.total }}
@@ -71,7 +71,7 @@
                     </div>
 
                     <!-- Total Added To Cart -->
-                    <div class="grid gap-[16px]">
+                    <div class="flex flex-col gap-[16px]">
                         <div class="grid gap-[2px]">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @{{ report.statistics.carts.total }}
@@ -96,7 +96,7 @@
                     </div>
 
                     <!-- Total Purchased -->
-                    <div class="grid gap-[16px]">
+                    <div class="flex flex-col gap-[16px]">
                         <div class="grid gap-[2px]">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @{{ report.statistics.orders.total }}

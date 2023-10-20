@@ -91,7 +91,6 @@
                 watch: {
                     filters: {
                         handler() {
-                            console.log(111)
                             this.$emitter.emit('reporting-filter-updated', this.filters);
                         },
 

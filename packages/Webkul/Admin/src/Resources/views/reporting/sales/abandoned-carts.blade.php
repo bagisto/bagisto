@@ -123,27 +123,34 @@
                     </p>
 
                     <!-- Abandoned Products -->
-                    <div class="grid gap-[27px]">
-                        <div
-                            class="grid"
-                            v-for="product in report.statistics.products"
-                        >
-                            <p class="dark:text-white">@{{ product.name }}</p>
+                    <template v-if="report.statistics.products.length">
+                        <div class="grid gap-[27px]">
+                            <div
+                                class="grid"
+                                v-for="product in report.statistics.products"
+                            >
+                                <p class="dark:text-white">@{{ product.name }}</p>
 
-                            <div class="flex gap-[20px] items-center">
-                                <div class="w-full h-[8px] relative bg-slate-100">
-                                    <div
-                                        class="h-[8px] absolute left-0 bg-blue-500"
-                                        :style="{ 'width': product.progress + '%' }"
-                                    ></div>
+                                <div class="flex gap-[20px] items-center">
+                                    <div class="w-full h-[8px] relative bg-slate-100">
+                                        <div
+                                            class="h-[8px] absolute left-0 bg-blue-500"
+                                            :style="{ 'width': product.progress + '%' }"
+                                        ></div>
+                                    </div>
+
+                                    <p class="text-[14px] text-gray-600 dark:text-gray-300 font-semibold">
+                                        @{{ product.count }}
+                                    </p>
                                 </div>
-
-                                <p class="text-[14px] text-gray-600 dark:text-gray-300 font-semibold">
-                                    @{{ product.count }}
-                                </p>
                             </div>
                         </div>
-                    </div>
+                    </template>
+
+                    <!-- Empty State -->
+                    <template v-else>
+                        @include('admin::reporting.empty')
+                    </template>
 
                     <!-- Date Range -->
                     <div class="flex gap-[20px] justify-end">

@@ -183,6 +183,15 @@
                         <x-slot:content>
                             <!-- Modal Content -->
                             <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
+                                {!! view_render_event('bagisto.admin.settings.exchangerate.create.before') !!}
+
+                                <x-admin::form.control-group.control
+                                    type="hidden"
+                                    name="id"
+                                    v-model="selectedExchangeRate.id"
+                                >
+                                </x-admin::form.control-group.control>
+
                                 <!-- Currency Code -->
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>

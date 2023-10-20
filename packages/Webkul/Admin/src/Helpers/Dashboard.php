@@ -67,7 +67,7 @@ class Dashboard
      */
     public function getStockThresholdProducts(): Collection
     {
-        return $this->productReporting->getStockThreshold();
+        return $this->productReporting->getStockThresholdProducts(5);
     }
 
     /**

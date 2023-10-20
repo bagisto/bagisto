@@ -72,7 +72,7 @@ class Core
      *
      * @var array
      */
-    protected $exchangeRates;
+    protected $exchangeRates = [];
 
     /**
      * Exchange rates
@@ -463,11 +463,11 @@ class Core
      */
     public function getExchangeRate($targetCurrencyId)
     {
-        if (isset($this->exchangeRates[$targetCurrencyId])) {
+        if (array_key_exists($targetCurrencyId, $this->exchangeRates)) {
             return $this->exchangeRates[$targetCurrencyId];
         }
 
-        $this->exchangeRates[$targetCurrencyId] = $this->exchangeRateRepository->findOneWhere([
+        return $this->exchangeRates[$targetCurrencyId] = $this->exchangeRateRepository->findOneWhere([
             'target_currency' => $targetCurrencyId,
         ]);
     }
@@ -477,29 +477,10 @@ class Core
      *
      * @param  float  $amount
      * @param  string  $targetCurrencyCode
-     * @param  string  $orderCurrencyCode
      * @return string
      */
-    public function convertPrice($amount, $targetCurrencyCode = null, $orderCurrencyCode = null)
+    public function convertPrice($amount, $targetCurrencyCode = null)
     {
-        if (! isset($this->lastCurrencyCode)) {
-            $this->lastCurrencyCode = $this->getBaseCurrency()->code;
-        }
-
-        if ($orderCurrencyCode) {
-            if (! isset($this->lastOrderCode)) {
-                $this->lastOrderCode = $orderCurrencyCode;
-            }
-
-            if (($targetCurrencyCode != $this->lastOrderCode)
-                && ($targetCurrencyCode != $orderCurrencyCode)
-                && ($orderCurrencyCode != $this->getBaseCurrencyCode())
-                && ($orderCurrencyCode != $this->lastCurrencyCode)
-            ) {
-                $amount = $this->convertToBasePrice($amount, $orderCurrencyCode);
-            }
-        }
-
         $targetCurrency = ! $targetCurrencyCode
             ? $this->getCurrentCurrency()
             : $this->currencyRepository->findOneByField('code', $targetCurrencyCode);
@@ -514,13 +495,7 @@ class Core
             return $amount;
         }
 
-        $result = (float) $amount * (float) ($this->lastCurrencyCode == $targetCurrency->code ? 1.0 : $exchangeRate->rate);
-
-        if ($this->lastCurrencyCode != $targetCurrency->code) {
-            $this->lastCurrencyCode = $targetCurrency->code;
-        }
-
-        return $result;
+        return (float) $amount * $exchangeRate->rate;
     }
 
     /**
@@ -616,7 +591,7 @@ class Core
 
             $formatter->setSymbol(\NumberFormatter::CURRENCY_SYMBOL, $symbol);
 
-            return $formatter->format($this->convertPrice($price));
+            return $formatter->format($price);
         }
 
         return $formatter->formatCurrency($price, $currency->code);

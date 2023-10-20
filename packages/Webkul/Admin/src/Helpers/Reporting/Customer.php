@@ -235,7 +235,7 @@ class Customer extends AbstractReporting
                 DB::raw('COUNT(*) AS total')
             )
             ->whereBetween('created_at', [$startDate, $endDate])
-            ->groupBy(DB::raw($groupColumn))
+            ->groupBy('date')
             ->get();
 
         $stats = [];

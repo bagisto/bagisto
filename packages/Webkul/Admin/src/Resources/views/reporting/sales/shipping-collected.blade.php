@@ -80,13 +80,12 @@
                     </div>
 
                     <!-- Top Shipping Methods -->
-                    <template v-if="report.statistics.top_methods.length">
-                        <!-- Header -->
-                        <p class="py-[10px] text-[16px] text-gray-600 dark:text-white font-semibold">
-                            @lang('admin::app.reporting.sales.index.top-shipping-methods')
-                        </p>
+                    <p class="py-[10px] text-[16px] text-gray-600 dark:text-white font-semibold">
+                        @lang('admin::app.reporting.sales.index.top-shipping-methods')
+                    </p>
 
-                        <!-- Methods -->
+                    <!-- Methods -->
+                    <template v-if="report.statistics.top_methods.length">
                         <div class="grid gap-[27px]">
                             <div
                                 class="grid"
@@ -108,6 +107,11 @@
                                 </div>
                             </div>
                         </div>
+                    </template>
+
+                    <!-- Empty State -->
+                    <template v-else>
+                        @include('admin::reporting.empty')
                     </template>
 
                     <!-- Date Range -->

@@ -197,7 +197,7 @@ class Visitor extends AbstractReporting
             )
             ->whereNull('visitable_id')
             ->whereBetween('created_at', [$startDate, $endDate])
-            ->groupBy(DB::raw($groupColumn))
+            ->groupBy('date')
             ->get();
 
         $stats = [];
@@ -235,7 +235,7 @@ class Visitor extends AbstractReporting
             )
             ->whereNull('visitable_id')
             ->whereBetween('created_at', [$startDate, $endDate])
-            ->groupBy(DB::raw('DAYNAME(created_at)'))
+            ->groupBy('day')
             ->get();
 
 
