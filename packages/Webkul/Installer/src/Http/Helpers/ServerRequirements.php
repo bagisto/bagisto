@@ -72,13 +72,12 @@ class ServerRequirements
         $supported = version_compare($currentPhpVersion['version'], $minVersionPhp) >= 0;
 
         return [
-            'full' => $currentPhpVersion['full'],
-            'current' => $currentPhpVersion['version'],
-            'minimum' => $minVersionPhp,
+            'full'      => $currentPhpVersion['full'],
+            'current'   => $currentPhpVersion['version'],
+            'minimum'   => $minVersionPhp,
             'supported' => $supported,
         ];
     }
-
 
     /**
      * Get current Php version information.
@@ -88,10 +87,11 @@ class ServerRequirements
     private static function getPhpVersionInfo()
     {
         $currentVersionFull = PHP_VERSION;
+
         preg_match("#^\d+(\.\d+)*#", $currentVersionFull, $filtered);
 
         return [
-            'full' => $currentVersionFull,
+            'full'    => $currentVersionFull,
             'version' => $filtered[0] ?? $currentVersionFull,
         ];
     }

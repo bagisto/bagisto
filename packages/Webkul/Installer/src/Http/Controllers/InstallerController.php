@@ -2,13 +2,13 @@
 
 namespace Webkul\Installer\Http\Controllers;
 
-use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
-use Webkul\Installer\Http\Helpers\DatabaseManager;
-use Webkul\Installer\Http\Helpers\EnvironmentManager;
+use Illuminate\Support\Facades\File;
 use Webkul\Installer\Http\Helpers\ServerRequirements;
+use Webkul\Installer\Http\Helpers\EnvironmentManager;
+use Webkul\Installer\Http\Helpers\DatabaseManager;
 
 class InstallerController extends Controller
 {
@@ -25,9 +25,10 @@ class InstallerController extends Controller
     /**
      * Create a new controller instance
      *
-     * @param ServerRequirements $serverRequirements
-     * @param EnvironmentManager $environmentManager
-     * @param DatabaseManager $databaseManager
+     * @param  \Webkul\Installer\Http\Helpers\ServerRequirements  $serverRequirements
+     * @param  \Webkul\Installer\Http\Helpers\EnvironmentManager  $environmentManager
+     * @param  \Webkul\Installer\Http\Helpers\DatabaseManager  $databaseManager
+     * @return void
      */
     public function __construct(
         protected ServerRequirements $serverRequirements,
@@ -71,12 +72,18 @@ class InstallerController extends Controller
      *
      * @return
      */
-    public function envFileDelete() {
+    public function envFileDelete()
+    {
         $response  = File::delete(base_path('.env')); 
 
         return $response;
     }
 
+    /**
+     * Run Migration
+     *
+     * @return
+     */
     public function runMigration()
     {
         $migration = $this->databaseManager->migration();

@@ -5,6 +5,7 @@ namespace Webkul\Installer\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Webkul\Installer\Http\Helpers\DatabaseManager;
 
 class CanInstall
 {
@@ -37,6 +38,16 @@ class CanInstall
      */
     public function isAlreadyInstalled()
     {
-        return file_exists(storage_path('installed'));
+        if (file_exists(storage_path('installed'))) {
+            return true;
+        }
+
+        if (app(DatabaseManager::class)->checkConnection()) {
+            touch(storage_path('installed'));
+
+            return true;
+        }
+
+        return false;
     }
 }

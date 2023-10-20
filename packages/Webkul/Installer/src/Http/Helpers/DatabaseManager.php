@@ -14,39 +14,18 @@ class DatabaseManager
      *
      * @return 
      */
-    public function getEnvironment()
+    public function checkConnection()
     {
         if (! file_exists(base_path('.env'))) {
             return false;
         }
 
-        $defaultParams = [
-            'DB_HOST'       => env('DB_HOST'),
-            'DB_DATABASE'   => env('DB_DATABASE'),
-            'DB_USERNAME'   => env('DB_USERNAME'),
-            'DB_PASSWORD'   => env('DB_PASSWORD'),
-            'DB_CONNECTION' => env('DB_CONNECTION'),
-            'DB_PORT'       => env('DB_PORT'),
-            'DB_PREFIX'     => env('DB_PREFIX'),
-        ];
-
         try {
             DB::connection()->getPDO();
 
-            if ($name = DB::connection()->getDatabaseName()) {
-                return true;
-            } else {
-                $database = DB::connection()->getDatabaseName();
-
-                if (! file_exists($database)) {
-                    touch($database);
-
-                    DB::reconnect(Config::get('database.default'));
-
-                    return $defaultParams;
-                }
-            }
+            return (bool) DB::connection()->getDatabaseName();
         } catch (Exception $e) {
+            return false;
         }
     }
 
