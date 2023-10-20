@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v2.0.0-ALFA-1 (21st of October 2023)** - *Release*
+## **v2.0.0 (21st of October 2023)** - *Release*
 
 ### Features:
 
@@ -65,6 +65,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 
   * Introduced a separate installer package, providing users with a standalone tool to set up and configure the application easily through a user-friendly installation process.
 
+  * Redesigned Installer UI: Revamped the user interface of the installer for a more intuitive and visually appealing installation experience.
+
+
+* Removed the **Booking Product Package**, discontinuing support for booking-related features in the application. Users will no longer be able to utilize booking functionality through this package.
 
 * #8623 [enhancement] - Footer Copyright Year Displays Previous Year Instead of Current Year
 
