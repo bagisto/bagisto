@@ -1,12 +1,16 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-2e4e202c.css",
+    "file": "assets/app-de506919.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
   "src/Resources/assets/fonts/velicon.woff": {
     "file": "assets/velicon-2b79b97c.woff",
     "src": "src/Resources/assets/fonts/velicon.woff"
+  },
+  "src/Resources/assets/images/cash-on-delivery.png": {
+    "file": "assets/cash-on-delivery-73061c49.png",
+    "src": "src/Resources/assets/images/cash-on-delivery.png"
   },
   "src/Resources/assets/images/default-language.svg": {
     "file": "assets/default-language-6ef0ef70.svg",
@@ -39,6 +43,10 @@
   "src/Resources/assets/images/medium-product-placeholder.webp": {
     "file": "assets/medium-product-placeholder-3b1a7b7d.webp",
     "src": "src/Resources/assets/images/medium-product-placeholder.webp"
+  },
+  "src/Resources/assets/images/money-transfer.png": {
+    "file": "assets/money-transfer-115da55a.png",
+    "src": "src/Resources/assets/images/money-transfer.png"
   },
   "src/Resources/assets/images/no-address.png": {
     "file": "assets/no-address-740c7843.png",

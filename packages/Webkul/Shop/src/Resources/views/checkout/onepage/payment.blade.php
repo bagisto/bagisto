@@ -48,17 +48,18 @@
                                         class="absolute ltr:right-[20px] rtl:left-[20px] top-[20px] icon-radio-unselect text-[24px] text-navyBlue peer-checked:icon-radio-select cursor-pointer"
                                     >
                                     </label>
-        
+
                                     <label 
                                         :for="payment.method" 
                                         class="w-[190px] p-[20px] block border border-[#E9E9E9] rounded-[12px] max-sm:w-full cursor-pointer"
                                     >
-                                        <img 
-                                            class="max-w-[55px] max-h-[45px]" 
-                                            src="{{ bagisto_asset('images/paypal.png') }}"
+
+                                        <img
+                                            class="max-w-[55px] max-h-[45px]"
+                                            :src="paymentImages[payment.method] || '{{ bagisto_asset('images/paypal.png') }}'"
                                             width="55"
                                             height="55"
-                                            :alt="payment.method_title" 
+                                            :alt="payment.method_title"
                                             :title="payment.method_title"
                                         >
                                         
@@ -92,13 +93,18 @@
                 return {
                     paymentMethods: [],
 
+                    paymentImages: {
+                        moneytransfer: "{{ bagisto_asset('images/money-transfer.png') }}",
+                        cashondelivery: "{{ bagisto_asset('images/cash-on-delivery.png') }}",
+                    },
+
                     isShowPaymentMethod: false,
 
                     isPaymentMethodLoading: false,
                 }
             },
 
-            methods: {
+            methods: { 
                 store(selectedPaymentMethod) {
                     this.$axios.post("{{ route('shop.checkout.onepage.payment_methods.store') }}", {
                             payment: selectedPaymentMethod
