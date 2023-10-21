@@ -60,7 +60,7 @@
                         <div class="w-full relative bg-slate-100 aspect-[0.5/1]">
                             <div
                                 class="w-full absolute bottom-0 bg-emerald-400"
-                                :style="{ 'height': report.statistics.product_visitors.progress + '%' }"
+                                :style="{ 'height': (report.statistics.product_visitors.progress).toFixed(2) + '%' }"
                             ></div>
                         </div>
 
@@ -85,7 +85,7 @@
                         <div class="w-full relative bg-slate-100 aspect-[0.5/1]">
                             <div
                                 class="w-full absolute bottom-0 bg-emerald-400"
-                                :style="{ 'height': report.statistics.carts.progress + '%' }"
+                                :style="{ 'height': (report.statistics.carts.progress).toFixed(2) + '%' }"
                             ></div>
                         </div>
 
