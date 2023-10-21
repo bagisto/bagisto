@@ -6,6 +6,15 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ### Features:
 
+
+**Full Page Cache Support**
+
+* Implemented Full Page Cache support to improve performance.
+
+**Octane Support**
+
+* Added support of Laravel Octane to enhance application speed and efficiency.
+
 **Theme:**
 
   * Added Dark theme support, providing users with the option to switch to a darker color scheme for improved visibility in 
