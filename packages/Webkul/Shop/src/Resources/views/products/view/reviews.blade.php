@@ -13,8 +13,8 @@
     <script type="text/x-template" id="v-product-review-template">
         <div class="container max-1180:px-[20px]">
             <!-- Create Review Form Container -->
-            <div 
-                class="w-full" 
+            <div
+                class="w-full"
                 v-if="canReview"
             >
                 <x-shop::form
@@ -37,6 +37,7 @@
                                     ref="reviewImages"
                                     :label="trans('shop::app.products.view.reviews.attachments')"
                                     :is-multiple="true"
+                                    @change="onFileChange"
                                 >
                                 </x-shop::form.control-group.control>
 
@@ -47,7 +48,7 @@
                                 </x-shop::form.control-group.error>
                             </x-shop::form.control-group>
                         </div>
-                        
+
                         <div>
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="mt-[0] required">
@@ -146,7 +147,7 @@
                                 >
                                     @lang('shop::app.products.view.reviews.submit-review')
                                 </button>
-                                
+
                                 <button
                                     type="button"
                                     class="secondary-button items-center px-[30px] py-[10px] rounded-[18px] max-sm:w-full max-sm:max-w-[374px]"
@@ -173,11 +174,11 @@
                         <h3 class="font-dmserif text-[30px] max-sm:text-[22px]">
                             @lang('shop::app.products.view.reviews.customer-review')
                         </h3>
-                        
-                        @if (
+
+                        {{-- @if (
                             core()->getConfigData('catalog.products.review.guest_review')
                             || auth()->guard('customer')->user()
-                        )
+                        ) --}}
                             <div
                                 class="flex gap-x-[15px] items-center px-[15px] py-[10px] border border-navyBlue rounded-[12px] cursor-pointer"
                                 @click="canReview = true"
@@ -186,7 +187,7 @@
 
                                 @lang('shop::app.products.view.reviews.write-a-review')
                             </div>
-                        @endif
+                        {{-- @endif --}}
                     </div>
 
                     <template v-if="reviews.length">
@@ -272,8 +273,8 @@
                     </p>
 
                     <div class="flex items-center">
-                        <x-shop::products.star-rating 
-                            ::name="review.name" 
+                        <x-shop::products.star-rating
+                            ::name="review.name"
                             ::value="review.rating"
                         >
                         </x-shop::products.star-rating>
@@ -348,6 +349,8 @@
 
                     reviews: [],
 
+                    uploadedFiles: [],
+
                     links: {
                         next: '{{ route('shop.api.products.reviews.index', $product->id) }}',
                     },
@@ -377,8 +380,22 @@
                     }
                 },
 
+                onFileChange(event) {
+                    this.uploadedFiles.push(event.target.files[0]);
+                },
+
                 store(params, { resetForm, setErrors }) {
-                    this.$axios.post('{{ route('shop.api.products.reviews.store', $product->id) }}', params, {
+                    let formData = new FormData();
+                    for (const key in params) {
+                        if (key === 'attachments') {
+                            this.uploadedFiles.forEach((file, index) => {
+                                formData.append('attachments[]', file);
+                            });
+                        } else {
+                            formData.append(key, params[key]);
+                        }
+                    }
+                    this.$axios.post('{{ route('shop.api.products.reviews.store', $product->id) }}', formData, {
                             headers: {
                                 'Content-Type': 'multipart/form-data'
                             }
@@ -392,7 +409,6 @@
                         })
                         .catch(error => {
                             setErrors({'attachments': ["@lang('shop::app.products.view.reviews.failed-to-upload')"]});
-
                             this.$refs.reviewImages.uploadedFiles.forEach(element => {
                                 setTimeout(() => {
                                     this.$refs.reviewImages.removeFile();
@@ -406,7 +422,7 @@
                 },
             },
         });
-        
+
         app.component('v-product-review-item', {
             template: '#v-product-review-item-template',
 
