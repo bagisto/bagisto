@@ -175,10 +175,10 @@
                             @lang('shop::app.products.view.reviews.customer-review')
                         </h3>
 
-                        {{-- @if (
+                        @if (
                             core()->getConfigData('catalog.products.review.guest_review')
                             || auth()->guard('customer')->user()
-                        ) --}}
+                        )
                             <div
                                 class="flex gap-x-[15px] items-center px-[15px] py-[10px] border border-navyBlue rounded-[12px] cursor-pointer"
                                 @click="canReview = true"
@@ -187,7 +187,7 @@
 
                                 @lang('shop::app.products.view.reviews.write-a-review')
                             </div>
-                        {{-- @endif --}}
+                        @endif
                     </div>
 
                     <template v-if="reviews.length">
