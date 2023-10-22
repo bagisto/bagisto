@@ -4,6 +4,8 @@
         @lang('admin::app.settings.exchange-rates.index.title')
     </x-slot:title>
 
+    {!! view_render_event('bagisto.admin.settings.exchange_rates.create.before') !!}
+
     <v-exchange-rates>
         <div class="flex justify-between items-center">
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
@@ -34,6 +36,8 @@
         {{-- DataGrid Shimmer --}}
         <x-admin::shimmer.datagrid/>
     </v-exchange-rates>
+
+    {!! view_render_event('bagisto.admin.settings.exchange_rates.create.after') !!}
 
     @pushOnce('scripts')
         <script
@@ -180,6 +184,14 @@
                             <!-- Modal Content -->
                             <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
                                 {!! view_render_event('bagisto.admin.settings.exchangerate.create.before') !!}
+
+                                <x-admin::form.control-group.control
+                                    type="hidden"
+                                    name="id"
+                                    v-model="selectedExchangeRate.id"
+                                >
+                                </x-admin::form.control-group.control>
+
                                 <!-- Currency Code -->
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>

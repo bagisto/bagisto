@@ -31,8 +31,8 @@
                 <!-- Content -->
                 <div class="grid gap-[16px]">
                     <!-- Products with Most Reviews -->
-                    <template v-if="report.statistics">
-                        <!-- Customers -->
+                    <template v-if="report.statistics.length">
+                        <!-- Products -->
                         <div class="grid gap-[27px]">
                             <div
                                 class="grid"
@@ -54,6 +54,11 @@
                                 </div>
                             </div>
                         </div>
+                    </template>
+
+                    <!-- Empty State -->
+                    <template v-else>
+                        @include('admin::reporting.empty')
                     </template>
 
                     <!-- Date Range -->

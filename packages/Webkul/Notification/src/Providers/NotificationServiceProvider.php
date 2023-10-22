@@ -3,8 +3,6 @@
 namespace Webkul\Notification\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Broadcast;
 
 class NotificationServiceProvider extends ServiceProvider
 {
@@ -15,8 +13,10 @@ class NotificationServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+
         $this->app->register(EventServiceProvider::class);
 
-        $this->app->register(ModuleServiceProvider::class);  
+        $this->app->register(ModuleServiceProvider::class);
     }
 }

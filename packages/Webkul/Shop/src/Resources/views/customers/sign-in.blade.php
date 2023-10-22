@@ -48,6 +48,9 @@
 
             <div class="mt-[60px] rounded max-sm:mt-[30px]">
                 <x-shop::form :action="route('shop.customer.session.create')">
+
+                    {!! view_render_event('bagisto.shop.customers.login_form_controls.before') !!}
+
                     <x-shop::form.control-group class="mb-4">
                         <x-shop::form.control-group.label class="required">
                             @lang('shop::app.customers.login-form.email')

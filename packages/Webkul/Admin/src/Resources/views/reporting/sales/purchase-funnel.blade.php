@@ -22,7 +22,7 @@
                 <!-- Content -->
                 <div class="grid grid-cols-4 gap-[24px]">
                     <!-- Total Visits -->
-                    <div class="grid gap-[16px]">
+                    <div class="flex flex-col gap-[16px]">
                         <div class="grid gap-[2px]">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @{{ report.statistics.visitors.total }}
@@ -46,7 +46,7 @@
                     </div>
 
                     <!-- Total Product Visits -->
-                    <div class="grid gap-[16px]">
+                    <div class="flex flex-col gap-[16px]">
                         <div class="grid gap-[2px]">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @{{ report.statistics.product_visitors.total }}
@@ -60,7 +60,7 @@
                         <div class="w-full relative bg-slate-100 aspect-[0.5/1]">
                             <div
                                 class="w-full absolute bottom-0 bg-emerald-400"
-                                :style="{ 'height': report.statistics.product_visitors.progress + '%' }"
+                                :style="{ 'height': (report.statistics.product_visitors.progress).toFixed(2) + '%' }"
                             ></div>
                         </div>
 
@@ -71,7 +71,7 @@
                     </div>
 
                     <!-- Total Added To Cart -->
-                    <div class="grid gap-[16px]">
+                    <div class="flex flex-col gap-[16px]">
                         <div class="grid gap-[2px]">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @{{ report.statistics.carts.total }}
@@ -85,7 +85,7 @@
                         <div class="w-full relative bg-slate-100 aspect-[0.5/1]">
                             <div
                                 class="w-full absolute bottom-0 bg-emerald-400"
-                                :style="{ 'height': report.statistics.carts.progress + '%' }"
+                                :style="{ 'height': (report.statistics.carts.progress).toFixed(2) + '%' }"
                             ></div>
                         </div>
 
@@ -96,7 +96,7 @@
                     </div>
 
                     <!-- Total Purchased -->
-                    <div class="grid gap-[16px]">
+                    <div class="flex flex-col gap-[16px]">
                         <div class="grid gap-[2px]">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @{{ report.statistics.orders.total }}

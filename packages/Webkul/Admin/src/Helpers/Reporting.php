@@ -425,7 +425,7 @@ class Reporting
             $records = collect($this->saleReporting->getTopPaymentMethods());
 
             $records = $records->map(function($paymentMethod) {
-                $paymentMethod->formatted_total = core()->formatBasePrice($paymentMethod->total);
+                $paymentMethod->formatted_total = core()->formatBasePrice($paymentMethod->base_total);
 
                 $paymentMethod->title = $paymentMethod->title ?? core()->getConfigData('sales.payment_methods.' . $paymentMethod->method . '.title');
 
@@ -461,7 +461,7 @@ class Reporting
                 $paymentMethod->progress = ($paymentMethod->total * 100) / $totalOrders['current'];
             }
 
-            $paymentMethod->formatted_total = core()->formatBasePrice($paymentMethod->total);
+            $paymentMethod->formatted_total = core()->formatBasePrice($paymentMethod->base_total);
 
             $paymentMethod->title = $paymentMethod->title ?? core()->getConfigData('sales.payment_methods.' . $paymentMethod->method . '.title');
         });

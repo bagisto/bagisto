@@ -22,6 +22,11 @@
             @endif
         </div>
     </div>
+
+    {!! view_render_event('bagisto.admin.settings.roles.list.before') !!}
     
     <x-admin::datagrid src="{{ route('admin.settings.roles.index') }}"></x-admin::datagrid>
+
+    {!! view_render_event('bagisto.admin.settings.roles.list.after') !!}
+
 </x-admin::layouts>

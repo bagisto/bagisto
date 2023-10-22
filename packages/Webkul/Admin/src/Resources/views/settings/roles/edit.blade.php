@@ -5,8 +5,12 @@
         @lang('admin::app.settings.roles.edit.title')
     </x-slot:title>
     
+    {!! view_render_event('bagisto.admin.settings.roles.edit.before') !!}
+
     {{-- Edit Role for  --}}
     <v-edit-user-role></v-edit-user-role>
+
+    {!! view_render_event('bagisto.admin.settings.roles.edit.after') !!}
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-edit-user-role-template">
@@ -15,6 +19,9 @@
                     method="PUT" 
                     :action="route('admin.settings.roles.update', $role->id)"
                 >
+
+                {!! view_render_event('admin.settings.roles.edit.edit_form_controls.before') !!}
+
                 <div class="flex justify-between items-center">
                     <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                         @lang('admin::app.settings.roles.edit.title')
@@ -43,6 +50,9 @@
                 <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                     <!-- Left sub-component -->
                     <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+
+                        {!! view_render_event('bagisto.admin.settings.roles.edit.card.access-control.before') !!}
+    
                         <!-- Access Control Input Fields -->
                         <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
@@ -88,9 +98,16 @@
                                 </x-admin::tree.view>
                             </div>
                         </div>
+
+                        {!! view_render_event('bagisto.admin.settings.roles.edit.card.access-control.after') !!}
+
                     </div>
+
                     <!-- Right sub-component -->
                     <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+
+                        {!! view_render_event('bagisto.admin.settings.roles.edit.card.accordion.general.before') !!}
+
                         <x-admin::accordion>
                             <x-slot:header>
                                 <div class="flex items-center justify-between p-[6px]">
@@ -148,8 +165,14 @@
                                 </div>
                             </x-slot:content>
                         </x-admin::accordion>
+
+                        {!! view_render_event('bagisto.admin.settings.roles.edit.card.accordion.general.after') !!}
+
                     </div>
                 </div>
+
+                {!! view_render_event('admin.settings.roles.edit.edit_form_controls.after') !!}
+
                 </x-admin::form>
             </div>
         </script>

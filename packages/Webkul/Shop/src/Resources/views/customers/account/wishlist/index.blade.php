@@ -23,6 +23,8 @@
                     <x-shop::shimmer.customers.account.wishlist :count="4"></x-shop::shimmer.customers.account.wishlist>
                 </template>
 
+                {!! view_render_event('bagisto.shop.customers.account.wishlist.list.before') !!}
+
                 <!-- Wishlist Information -->
                 <template v-else>
                     <div class="flex justify-between items-center overflow-auto journal-scroll">
@@ -178,6 +180,9 @@
                         </p>
                     </div>
                 </template>
+
+                {!! view_render_event('bagisto.shop.customers.account.wishlist.list.after') !!}
+
             </div>
         </script>
 

@@ -16,6 +16,9 @@
             type="text/x-template"
             id="v-edit-attributes-template"
         >
+
+            {!! view_render_event('bagisto.admin.catalog.attributes.edit.before') !!}
+
             <!-- Input Form -->
             <x-admin::form
                 :action="route('admin.catalog.attributes.update', $attribute->id)"
@@ -51,7 +54,7 @@
                     <!-- Left sub Component -->
                     <div class="flex flex-col flex-1 gap-[8px] overflow-auto">
 
-                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.attributes.before', ['attribute' => $attribute]) !!}
+                        {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.label.before', ['attribute' => $attribute]) !!}
 
                         <!-- Label -->
                         <div class="p-[16px] bg-white dark:bg-gray-900 box-shadow rounded-[4px]">
@@ -104,7 +107,7 @@
                             @endforeach
                         </div>
 
-                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.attributes.after', ['attribute' => $attribute]) !!}
+                        {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.label.after', ['attribute' => $attribute]) !!}
 
                         <!-- Options -->
                         <div
@@ -378,7 +381,7 @@
                     <!-- Right sub-component -->
                     <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
 
-                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.general.before', ['attribute' => $attribute]) !!}
+                        {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.general.before', ['attribute' => $attribute]) !!}
 
                         <!-- General -->
                         <div class="bg-white dark:bg-gray-900 box-shadow rounded-[4px]">
@@ -517,7 +520,9 @@
                             </div>
                         </div>
 
-                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.general.after', ['attribute' => $attribute]) !!}
+                        {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.general.after', ['attribute' => $attribute]) !!}
+
+                        {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.validations.before', ['attribute' => $attribute]) !!}
 
                         <!-- Validations -->
                         <x-admin::accordion>
@@ -632,9 +637,9 @@
                             </x-slot:content>
                         </x-admin::accordion>
 
-                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.validations.controls.after', ['attribute' => $attribute]) !!}
+                        {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.validations.after', ['attribute' => $attribute]) !!}
 
-                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.configuration.before', ['attribute' => $attribute]) !!}
+                        {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.configuration.before', ['attribute' => $attribute]) !!}
 
                         <!-- Configurations -->
                         <x-admin::accordion>
@@ -825,7 +830,7 @@
                             </x-slot:content>
                         </x-admin::accordion>
 
-                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.configuration.controls.after', ['attribute' => $attribute]) !!}
+                        {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.configuration.configuration.after', ['attribute' => $attribute]) !!}
                     </div>
                 </div>
             </x-admin::form>
@@ -972,6 +977,9 @@
                     </x-admin::modal>
                 </form>
             </x-admin::form>
+
+            {!! view_render_event('bagisto.admin.catalog.attributes.edit.after') !!}
+
         </script>
 
         <script type="module">

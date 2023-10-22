@@ -4,17 +4,27 @@
         @lang('admin::app.settings.inventory-sources.edit.title')
     </x-slot:title>
 
+    {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.before') !!}
+
     {{-- Create Inventory --}}
     <v-inventory-edit-form></v-inventory-edit-form>
+
+    {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.after') !!}
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-inventory-edit-form-template">
             <div>
+
+                {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.before') !!}
+
                 <x-admin::form 
                     :action="route('admin.settings.inventory_sources.update', $inventorySource->id)"
                     enctype="multipart/form-data"
                     method="PUT"
                 >
+
+                    {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.edit_form_controls.before') !!}
+
                     <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
                         <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                             @lang('admin::app.settings.inventory-sources.edit.title')
@@ -41,13 +51,14 @@
                         </div>
                     </div>
 
-                    {!! view_render_event('bagisto.admin.settings.inventory.edit.before') !!}
-                
                     <!-- Full Pannel -->
                     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                 
                         <!-- Left Section -->
                         <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+
+                            {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.card.general.before') !!}
+
                             <!-- General -->
                             <div class="p-[16px] bg-white dark:bg-gray-900 box-shadow rounded-[4px]">
                                 <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
@@ -123,6 +134,10 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
                             </div>
+
+                            {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.card.general.after') !!}
+
+                            {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.card.contact_info.before') !!}
 
                             <!-- Contact Information -->
                             <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
@@ -221,6 +236,10 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
                             </div>
+
+                            {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.card.contact_info.after') !!}
+
+                            {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.card.source_address.before') !!}
 
                             <!-- Source Address -->
                             <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
@@ -370,10 +389,15 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
                             </div>
+
+                            {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.card.source_address.after') !!}
                         </div>
                 
                         <!-- Right Section -->
                         <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
+
+                            {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.card.accordion.settings.before') !!}
+
                             <!-- Settings -->
                             <x-admin::accordion>
                                 <x-slot:header>
@@ -476,11 +500,17 @@
                                     </x-admin::form.control-group>
                                 </x-slot:content>
                             </x-admin::accordion>
+
+                            {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.card.accordion.settings.after') !!}
+
                         </div>
                     </div>
 
-                    {!! view_render_event('bagisto.admin.settings.inventory.edit.after') !!}
+                    {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.edit_form_controls.after') !!}
                 </x-admin::form>
+
+                {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.after') !!}
+
             </div>
         </script>
         
