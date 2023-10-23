@@ -100,14 +100,16 @@
                         <div class="p-[16px] bg-white dark:bg-gray-900 rounded box-shadow">
                             <div class="flex gap-x-[10px] justify-between items-center">
                                 <div class="flex flex-col gap-[4px]">
-                                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold">@lang('admin::app.settings.themes.edit.slider')</p>
-                                    
+                                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                                        @lang('admin::app.settings.themes.edit.slider')
+                                    </p>
+
                                     <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
                                         @lang('admin::app.settings.themes.edit.slider-description')
                                     </p>
                                 </div>
                 
-                                
+                                <!-- Add Sldier Button -->
                                 <div class="flex gap-[10px]">
                                     <div
                                         class="secondary-button"
@@ -119,7 +121,11 @@
                             </div>
 
                             <template v-for="(deletedSlider, index) in deletedSliders">
-                                <input type="hidden" :name="'deleted_sliders['+ index +'][image]'" :value="deletedSlider.image" />
+                                <input
+                                    type="hidden"
+                                    :name="'deleted_sliders['+ index +'][image]'"
+                                    :value="deletedSlider.image"
+                                />
                             </template>
 
                             <div
@@ -128,9 +134,24 @@
                                 v-for="(image, index) in sliders.images"
                             >
                                 <!-- Hidden Input -->
-                                <input type="file" class="hidden" :name="'options['+ index +'][image]'" :ref="'imageInput_' + index" />
-                                <input type="hidden" :name="'options['+ index +'][link]'" :value="image.link" />
-                                <input type="hidden" :name="'options['+ index +'][image]'" :value="image.image" />
+                                <input
+                                    type="file"
+                                    class="hidden" 
+                                    :name="'options['+ index +'][image]'"
+                                    :ref="'imageInput_' + index"
+                                />
+
+                                <input
+                                    type="hidden"
+                                    :name="'options['+ index +'][link]'"
+                                    :value="image.link"
+                                />
+
+                                <input
+                                    type="hidden"
+                                    :name="'options['+ index +'][image]'"
+                                    :value="image.image"
+                                />
                             
                                 <!-- Details -->
                                 <div 
@@ -156,8 +177,8 @@
                                                     @lang('admin::app.settings.themes.edit.image'): 
 
                                                     <span class="text-gray-600 dark:text-gray-300 transition-all">
-                                                        <a 
-                                                            :href="'{{ config('app.url') }}' + image.image"
+                                                        <a
+                                                            :href="'{{ config('app.url') }}/' + image.image"
                                                             :ref="'image_' + index"
                                                             target="_blank"
                                                             class="ltr:ml-2 rtl:mr-2 text-blue-600 transition-all hover:underline"
@@ -187,6 +208,7 @@
                                 </div>
                             </div>
 
+                            <!-- Empty Page -->
                             <div    
                                 class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
                                 v-else
@@ -197,7 +219,7 @@
                                     alt="add-product-to-store"
                                 >
                 
-                                <div class="flex flex-col items-center">
+                                <div class="flex flex-col gap-[5px] items-center">
                                     <p class="text-[16px] text-gray-400 font-semibold">
                                         @lang('admin::app.settings.themes.edit.slider-add-btn')
                                     </p>
@@ -220,7 +242,11 @@
                             </x-slot:header>
                         
                             <x-slot:content>
-                                <input type="hidden" name="type" value="image_carousel">
+                                <input
+                                    type="hidden"
+                                    name="type"
+                                    value="image_carousel"
+                                />
     
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
