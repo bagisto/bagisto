@@ -1,7 +1,7 @@
 <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
     <img
         class="w-[120px] h-[120px] p-2 dark:invert dark:mix-blend-exclusion"
-        src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
+        src="{{ bagisto_asset('images/empty-placeholders/report-empty.svg') }}"
     >
 
     <div class="flex flex-col gap-[5px] items-center">
