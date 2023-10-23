@@ -15,14 +15,30 @@
         app.component('v-tinymce', {
             props: ['selector', 'field'],
 
-            render() {},
+            data() {
+                return {
+                    currentSkin: document.documentElement.classList.contains('dark') ? 'oxide-dark' : 'oxide',
+                    currentContentCSS: document.documentElement.classList.contains('dark') ? 'dark' : 'default',
+                };
+            },
 
             mounted() {
                 this.init();
+
+                this.$emitter.on('change-theme', (theme) => {
+                    tinymce.activeEditor.destroy();
+                  
+                    this.currentSkin = (theme === 'dark') ? 'oxide-dark' : 'oxide';
+                    this.currentContentCSS = (theme === 'dark') ? 'dark' : 'default';
+
+                    this.init();
+                });
             },
 
             methods: {
                 init() {
+                    let tinymceSelf = this;
+
                     // TODO (@devansh-webkul): Need to refactor this full method.
                     let tinyMCEHelper = {
                         initTinyMCE: function(extraConfiguration) {
@@ -36,6 +52,8 @@
                                 uploadRoute: '{{ route('admin.tinymce.upload') }}',
                                 csrfToken: '{{ csrf_token() }}',
                                 ...extraConfiguration,
+                                skin: tinymceSelf.currentSkin,
+                                content_css: tinymceSelf.currentContentCSS,
                             };
 
                             tinymce.init({
