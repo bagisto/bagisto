@@ -20,9 +20,9 @@
     "file": "assets/dark-logo-ea7984e7.svg",
     "src": "src/Resources/assets/images/dark-logo.svg"
   },
-  "src/Resources/assets/images/empty-placeholders/customer.svg": {
-    "file": "assets/customer-57f8166b.svg",
-    "src": "src/Resources/assets/images/empty-placeholders/customer.svg"
+  "src/Resources/assets/images/empty-placeholders/customers.svg": {
+    "file": "assets/customers-57f8166b.svg",
+    "src": "src/Resources/assets/images/empty-placeholders/customers.svg"
   },
   "src/Resources/assets/images/empty-placeholders/default.svg": {
     "file": "assets/default-2c56169a.svg",
