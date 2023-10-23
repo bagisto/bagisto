@@ -1,0 +1,17 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="180" height="180" fill="white"/>
+<ellipse cx="89" cy="151.5" rx="52" ry="2.5" fill="#E5E7EB"/>
+<path d="M117.5 57H79.4C60.2517 57 50.6775 57 44.1417 62.1524C42.6597 63.3207 41.3207 64.6597 40.1524 66.1417C35 72.6775 35 82.285 35 101.5V101.5C35 120.715 35 130.322 40.1524 136.858C41.3207 138.34 42.6597 139.679 44.1417 140.848C50.6775 146 60.2517 146 79.4 146H97.6C116.748 146 126.322 146 132.858 140.848C134.34 139.679 135.679 138.34 136.848 136.858C142 130.322 142 120.748 142 101.6V85.5" stroke="#6B7280" stroke-width="6"/>
+<rect width="13" height="36" rx="6.5" transform="matrix(-1 0 0 1 122 96)" fill="#E5E7EB" stroke="#6B7280" stroke-width="6"/>
+<rect width="13" height="48" rx="6.5" transform="matrix(-1 0 0 1 95 84)" fill="#E5E7EB" stroke="#6B7280" stroke-width="6"/>
+<rect width="13" height="57" rx="6.5" transform="matrix(-1 0 0 1 68 75)" fill="#E5E7EB" stroke="#6B7280" stroke-width="6"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M40 39C40 39.5523 40.4477 40 41 40C41.5523 40 42 39.5523 42 39V34H47C47.5523 34 48 33.5523 48 33C48 32.4477 47.5523 32 47 32L42 32V27C42 26.4477 41.5523 26 41 26C40.4477 26 40 26.4477 40 27V32L35 32C34.4477 32 34 32.4477 34 33C34 33.5523 34.4477 34 35 34H40V39Z" fill="#E5E7EB"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M156 108C156 108.552 156.448 109 157 109C157.552 109 158 108.552 158 108V105H161C161.552 105 162 104.552 162 104C162 103.448 161.552 103 161 103H158V100C158 99.4477 157.552 99 157 99C156.448 99 156 99.4477 156 100V103H153C152.448 103 152 103.448 152 104C152 104.552 152.448 105 153 105H156V108Z" fill="#E5E7EB"/>
+<circle cx="83" cy="38" r="2" stroke="#E5E7EB" stroke-width="2"/>
+<circle cx="22.5" cy="142.5" r="2.5" stroke="#E5E7EB" stroke-width="2"/>
+<circle cx="157" cy="136" r="2" stroke="#E5E7EB" stroke-width="2"/>
+<circle cx="20.5" cy="79.5" r="2.5" stroke="#E5E7EB" stroke-width="2"/>
+<rect x="116" y="40" width="44" height="44" rx="22" fill="#E5E7EB" stroke="#6B7280" stroke-width="6"/>
+<circle cx="138" cy="71" r="4" fill="#6B7280"/>
+<path d="M138 63L138 50" stroke="#6B7280" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
