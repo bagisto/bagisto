@@ -2714,13 +2714,14 @@ return [
         ],
 
         'view' => [
-            'day'        => 'יום',
-            'end-date'   => 'תאריך סיום',
-            'export-csv' => 'ייצוא ל־CSV',
-            'export-xls' => 'ייצוא ל־XLS',
-            'month'      => 'חודש',
-            'start-date' => 'תאריך התחלה',
-            'year'       => 'שנה',
+            'day'           => 'יום',
+            'end-date'      => 'תאריך סיום',
+            'export-csv'    => 'ייצוא ל־CSV',
+            'export-xls'    => 'ייצוא ל־XLS',
+            'month'         => 'חודש',
+            'not-available' => 'אין רשומות זמינות.',
+            'start-date'    => 'תאריך התחלה',
+            'year'          => 'שנה',
         ],
 
         'empty' => [
