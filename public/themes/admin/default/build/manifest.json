@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-179333af.css",
+    "file": "assets/app-8a53e15e.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -20,17 +20,21 @@
     "file": "assets/dark-logo-ea7984e7.svg",
     "src": "src/Resources/assets/images/dark-logo.svg"
   },
-  "src/Resources/assets/images/empty-placeholders/default-empty.svg": {
-    "file": "assets/default-empty-2c56169a.svg",
-    "src": "src/Resources/assets/images/empty-placeholders/default-empty.svg"
+  "src/Resources/assets/images/empty-placeholders/customer.svg": {
+    "file": "assets/customer-57f8166b.svg",
+    "src": "src/Resources/assets/images/empty-placeholders/customer.svg"
   },
-  "src/Resources/assets/images/empty-placeholders/orders-empty.svg": {
-    "file": "assets/orders-empty-5dd62d9d.svg",
-    "src": "src/Resources/assets/images/empty-placeholders/orders-empty.svg"
+  "src/Resources/assets/images/empty-placeholders/default.svg": {
+    "file": "assets/default-2c56169a.svg",
+    "src": "src/Resources/assets/images/empty-placeholders/default.svg"
   },
-  "src/Resources/assets/images/empty-placeholders/reviews-empty.svg": {
-    "file": "assets/reviews-empty-17309002.svg",
-    "src": "src/Resources/assets/images/empty-placeholders/reviews-empty.svg"
+  "src/Resources/assets/images/empty-placeholders/orders.svg": {
+    "file": "assets/orders-5dd62d9d.svg",
+    "src": "src/Resources/assets/images/empty-placeholders/orders.svg"
+  },
+  "src/Resources/assets/images/empty-placeholders/reviews.svg": {
+    "file": "assets/reviews-17309002.svg",
+    "src": "src/Resources/assets/images/empty-placeholders/reviews.svg"
   },
   "src/Resources/assets/images/error.svg": {
     "file": "assets/error-4179d5c7.svg",
@@ -152,7 +156,7 @@
     "css": [
       "assets/app-c04ede37.css"
     ],
-    "file": "assets/app-cadfd1c4.js",
+    "file": "assets/app-d820a7ad.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   },

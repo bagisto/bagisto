@@ -932,7 +932,7 @@
                             <div class="grid gap-[14px] justify-center justify-items-center py-[10px]">
                                 <!-- Placeholder Image -->
                                 <img
-                                    src="{{ bagisto_asset('images/icon-add-product.svg') }}"
+                                    src="{{ bagisto_asset('images/empty-placeholders/customer.svg') }}"
                                     class="w-[80px] h-[80px] dark:invert dark:mix-blend-exclusion"
                                 />
 

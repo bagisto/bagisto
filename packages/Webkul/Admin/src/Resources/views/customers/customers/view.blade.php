@@ -215,7 +215,7 @@
                         <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
                             <!-- Placeholder Image -->
                             <img
-                                src="{{ bagisto_asset('images/empty-placeholders/orders-empty.svg') }}"
+                                src="{{ bagisto_asset('images/empty-placeholders/orders.svg') }}"
                                 class="w-[80px] h-[80px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
                             />
 
@@ -401,7 +401,7 @@
                         <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
                             {{-- Placeholder Image --}}
                             <img
-                                src="{{ bagisto_asset('images/empty-placeholders/reviews-empty.svg') }}"
+                                src="{{ bagisto_asset('images/empty-placeholders/reviews.svg') }}"
                                 class="w-[80px] h-[80px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
                             />
 
