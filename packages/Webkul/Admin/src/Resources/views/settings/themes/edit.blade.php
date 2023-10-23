@@ -55,7 +55,11 @@
 
                             {{ $currentLocale->name }}
                             
-                            <input type="hidden" name="locale" value="{{ $currentLocale->code }}"/>
+                            <input
+                                type="hidden"
+                                name="locale"
+                                value="{{ $currentLocale->code }}"
+                            />
 
                             <span class="icon-sort-down text-[24px]"></span>
                         </button>
@@ -103,7 +107,7 @@
                                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                         @lang('admin::app.settings.themes.edit.slider')
                                     </p>
-
+                                    
                                     <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
                                         @lang('admin::app.settings.themes.edit.slider-description')
                                     </p>
@@ -136,7 +140,7 @@
                                 <!-- Hidden Input -->
                                 <input
                                     type="file"
-                                    class="hidden" 
+                                    class="hidden"
                                     :name="'options['+ index +'][image]'"
                                     :ref="'imageInput_' + index"
                                 />
@@ -483,7 +487,9 @@
                                     class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 dark:hover:border-gray-400"
                                     :class="[errors['options[filters][sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 >
-                                    <option value="" selected disabled>@lang('admin::app.settings.themes.edit.select')</option>
+                                    <option value="" selected disabled>
+                                        @lang('admin::app.settings.themes.edit.select')
+                                    </option>
                                     
                                     @foreach (
                                         product_toolbar()->getAvailableOrders()->pluck('title', 'value') 
@@ -527,7 +533,6 @@
                                 </select>
                             </v-field>
 
-                            
                             <x-admin::form.control-group.error
                                 control-name="options[filters][limit]"
                             >
@@ -560,7 +565,11 @@
                             v-for="(filter, index) in options.filters"
                         >
                             <!-- Hidden Input -->
-                            <input type="hidden" :name="'options[filters][' + filter.key +']'" :value="filter.value"> 
+                            <input
+                                type="hidden"
+                                :name="'options[filters][' + filter.key +']'"
+                                :value="filter.value"
+                            /> 
                         
                             <!-- Details -->
                             <div 
@@ -846,9 +855,17 @@
                                     class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                     :class="[errors['options[filters][sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 >
-                                    <option value="" selected disabled>@lang('admin::app.settings.themes.edit.select')</option>
-                                    <option value="desc">@lang('admin::app.settings.themes.edit.desc')</option>
-                                    <option value="asc">@lang('admin::app.settings.themes.edit.asc')</option>
+                                    <option value="" selected disabled>
+                                        @lang('admin::app.settings.themes.edit.select')
+                                    </option>
+
+                                    <option value="desc">
+                                        @lang('admin::app.settings.themes.edit.desc')
+                                    </option>
+
+                                    <option value="asc">
+                                        @lang('admin::app.settings.themes.edit.asc')
+                                    </option>
                                 </select>
                             </v-field>
 
@@ -880,7 +897,6 @@
                             >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
-
 
                         <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] dark:border-gray-800"></span>
 
@@ -1211,6 +1227,7 @@
                         <div class="text-sm font-medium text-center pt-[16px] text-gray-500">
                             <div class="tabs">
                                 <div class="flex gap-[15px] mb-[15px] pt-[8px] border-b-[2px] max-sm:hidden">
+                                    <!-- HTML Tab Header -->
                                     <p @click="switchEditor('v-html-editor-theme', 1)">
                                         <div
                                             class="transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
@@ -1220,6 +1237,7 @@
                                         </div>
                                     </p>
 
+                                    <!-- CSS TAb Editor -->
                                     <p @click="switchEditor('v-css-editor-theme', 0);">
                                         <div
                                             class="transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
@@ -1229,6 +1247,7 @@
                                         </div>
                                     </p>
 
+                                    <!-- Preview Tab Editor -->
                                     <p @click="switchEditor('v-static-content-previewer', 0);">
                                         <div
                                             class="transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
@@ -1241,8 +1260,17 @@
                             </div>
                         </div>
 
-                        <input type="hidden" name="{{ $currentLocale->code }}[options][html]" v-model="options.html">
-                        <input type="hidden" name="{{ $currentLocale->code }}[options][css]" v-model="options.css">
+                        <input
+                            type="hidden"
+                            name="{{ $currentLocale->code }}[options][html]"
+                            v-model="options.html"
+                        />
+
+                        <input
+                            type="hidden"
+                            name="{{ $currentLocale->code }}[options][css]"
+                            v-model="options.css"
+                        />
 
                         <KeepAlive>
                             <component 

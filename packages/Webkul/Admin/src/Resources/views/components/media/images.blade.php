@@ -54,7 +54,6 @@
                     </div>
                 </label>
 
-
                 <!-- Uploaded Images -->
                 <draggable
                     class="flex flex-wrap gap-[4px]"
