@@ -141,7 +141,10 @@
             <!-- Filters Activation Button -->
             <x-shop::drawer width="350px">
                 <x-slot:toggle>
-                    <button class="flex justify-between items-center gap-[15px] max-w-[200px] w-full pl-[12px] pr-[15px] py-[7px] rounded-lg bg-white border border-[#E9E9E9] text-[14px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-[10px] max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer">
+                    <button 
+                        class="flex justify-between items-center gap-[15px] max-w-[200px] w-full pl-[12px] pr-[15px] py-[7px] rounded-lg bg-white border border-[#E9E9E9] text-[14px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-[10px] max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer"
+                        :class="{'[&>*]:text-blue-600': applied.filters.columns.length > 1}"
+                    >
                         <span class="flex justify-between items-center gap-[5px]">
                             <span class="icon-filter text-[24px]"></span>
 

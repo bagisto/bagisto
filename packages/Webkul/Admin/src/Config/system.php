@@ -1001,14 +1001,14 @@ return [
                 'locale_based'  => true,
             ], [
                 'name'          => 'generate_invoice',
-                'title'         => 'admin::app.configuration.index.sales.payment-methods.pending',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.generate-invoice',
                 'type'          => 'boolean',
                 'default_value' => false,
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
                 'name'    => 'invoice_status',
-                'title'   => 'admin::app.configuration.index.sales.payment-methods.pending',
+                'title'   => 'admin::app.configuration.index.sales.payment-methods.set-invoice-status',
                 'type'    => 'select',
                 'options' => [
                     [
@@ -1024,7 +1024,7 @@ return [
                 'locale_based'  => false,
             ], [
                 'name'    => 'order_status',
-                'title'   => 'admin::app.configuration.index.sales.payment-methods.pending',
+                'title'   => 'admin::app.configuration.index.sales.payment-methods.set-order-status',
                 'type'    => 'select',
                 'options' => [
                     [

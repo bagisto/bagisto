@@ -21,7 +21,7 @@
                     </div>
 
                     <!-- Actions -->
-                    <div class="flex gap-[6px]">
+                    <div class="flex gap-[6px] items-center">
                         <x-admin::dropdown position="bottom-right">
                             <x-slot:toggle>
                                 <span class="flex icon-setting p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 "></span>
