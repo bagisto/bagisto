@@ -16,7 +16,7 @@
         <div class="shimmer w-[120px] h-[20px]"></div>
     
         {{-- Graph Shimmer --}}
-        <x-admin::shimmer.reporting.graph/>
+        <x-admin::shimmer.reporting.graph :count=15/>
 
         <div class="shimmer w-[150px] h-[17px] mb-[16px]"></div>
 
