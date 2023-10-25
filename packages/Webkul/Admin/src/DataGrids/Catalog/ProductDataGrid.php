@@ -127,24 +127,6 @@ class ProductDataGrid extends DataGrid
             'sortable'   => true,
         ]);
 
-        /**
-         * Searchable dropdown sample,
-         *
-         * [
-         *    'type'       => 'dropdown',
-         *      'options'    => [
-         *          'type'  => 'searchable',
-         *          'params'=> [
-         *              'repository' => \Webkul\Attribute\Repositories\AttributeRepository::class,
-         *
-         *              'column' => [
-         *                  'label' => 'code',
-         *                  'value' => 'code',
-         *              ],
-         *          ],
-         *      ],
-         * ]
-         */
         $this->addColumn([
             'index'      => 'attribute_family',
             'label'      => trans('admin::app.catalog.products.index.datagrid.attribute-family'),
@@ -153,7 +135,7 @@ class ProductDataGrid extends DataGrid
                 'type' => 'basic',
 
                 'params' => [
-                    'options' => $this->attributeFamilyRepository->all(['name as label', 'name'])->toArray(),
+                    'options' => $this->attributeFamilyRepository->all(['name as label', 'name as value'])->toArray(),
                 ],
             ],
             'searchable' => false,
@@ -218,7 +200,17 @@ class ProductDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'type',
             'label'      => trans('admin::app.catalog.products.index.datagrid.type'),
-            'type'       => 'string',
+            'type'       => 'dropdown',
+            'options'    => [
+                'type' => 'basic',
+
+                'params' => [
+                    'options' => collect(config('product_types'))
+                        ->map(fn ($type) => ['label' => $type['name'], 'value' => trans('admin::app.catalog.products.index.create.' . $type['key'])])
+                        ->values()
+                        ->toArray(),
+                ],
+            ],
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,

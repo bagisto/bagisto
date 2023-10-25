@@ -31,6 +31,9 @@
                                     class="relative max-sm:max-w-full max-sm:flex-auto cursor-pointer"
                                     v-for="(payment, index) in payment_methods"
                                 >
+
+                                    {!! view_render_event('bagisto.shop.checkout.payment-method.before') !!}
+
                                     <input 
                                         type="radio" 
                                         name="payment[method]" 
@@ -45,17 +48,18 @@
                                         class="absolute ltr:right-[20px] rtl:left-[20px] top-[20px] icon-radio-unselect text-[24px] text-navyBlue peer-checked:icon-radio-select cursor-pointer"
                                     >
                                     </label>
-        
+
                                     <label 
                                         :for="payment.method" 
                                         class="w-[190px] p-[20px] block border border-[#E9E9E9] rounded-[12px] max-sm:w-full cursor-pointer"
                                     >
-                                        <img 
-                                            class="max-w-[55px] max-h-[45px]" 
-                                            src="{{ bagisto_asset('images/paypal.png') }}"
+
+                                        <img
+                                            class="max-w-[55px] max-h-[45px]"
+                                            :src="paymentImages[payment.method] || '{{ bagisto_asset('images/paypal.png') }}'"
                                             width="55"
                                             height="55"
-                                            :alt="payment.method_title" 
+                                            :alt="payment.method_title"
                                             :title="payment.method_title"
                                         >
                                         
@@ -67,6 +71,8 @@
                                             @{{ payment.description }}
                                         </p>
                                     </label>
+
+                                    {!! view_render_event('bagisto.shop.checkout.payment-method.after') !!}
 
                                     <!-- Todo implement the additionalDetails -->
                                     {{-- \Webkul\Payment\Payment::getAdditionalDetails($payment['method'] --}}
@@ -86,6 +92,11 @@
             data() {
                 return {
                     paymentMethods: [],
+
+                    paymentImages: {
+                        moneytransfer: "{{ bagisto_asset('images/money-transfer.png') }}",
+                        cashondelivery: "{{ bagisto_asset('images/cash-on-delivery.png') }}",
+                    },
 
                     isShowPaymentMethod: false,
 

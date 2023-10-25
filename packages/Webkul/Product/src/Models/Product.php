@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
+use Shetabit\Visitor\Traits\Visitable;
 use Webkul\Attribute\Models\AttributeFamilyProxy;
 use Webkul\Attribute\Models\AttributeProxy;
 use Webkul\Attribute\Repositories\AttributeRepository;
@@ -23,7 +24,7 @@ use Webkul\Product\Type\AbstractType;
 
 class Product extends Model implements ProductContract
 {
-    use HasFactory;
+    use HasFactory, Visitable;
 
     /**
      * The attributes that are mass assignable.
@@ -423,8 +424,7 @@ class Product extends Model implements ProductContract
      */
     public function getBaseImageUrlAttribute()
     {
-        $image = $this->images()
-            ->first();
+        $image = $this->images->first();
 
         return $image->url ?? null;
     }

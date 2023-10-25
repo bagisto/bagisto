@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+	* {
+		@apply box-border font-inter;
+	}
+
+	body {
+		@apply bg-gray-50;
+	}
+
+	@font-face {
+		font-family: 'bagisto-installer';
+		src: url('../fonts/bagisto-installer.woff') format('woff');
+		font-weight: normal;
+		font-style: normal;
+		font-display: block;
+	}
+
+	[class^="icon-"],
+	[class*=" icon-"] {
+		/* use !important to prevent issues with browser extensions that change fonts */
+		font-family: 'bagisto-installer' !important;
+		speak: never;
+		font-style: normal;
+		font-weight: normal;
+		font-variant: normal;
+		text-transform: none;
+		line-height: 1;
+		color: #6B7280;
+
+		/* Better Font Rendering =========== */
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	.icon-cross:before {
+		content: "\e900";
+	}
+
+	.icon-arrow-down:before {
+		content: "\e901";
+	}
+
+	.icon-processing:before {
+		content: "\e902";
+	}
+
+	.icon-checkbox:before {
+		content: "\e903";
+	}
+
+	.icon-tick:before {
+		content: "\e904";
+	}
+
+	.icon-view:before {
+		content: "\e905";
+	}
+
+	.required:after {
+        @apply content-['*'];
+    }
+
+	progress[value] {
+		/* Reset the default appearance */
+		-webkit-appearance: none;
+		appearance: none;
+		max-width: 342px;
+		width: 100%;
+		height: 6px;
+	}
+
+	progress[value]::-webkit-progress-bar {
+		background-color: #D1D5DB;
+	}
+
+	progress[value]::-webkit-progress-value {
+		background-color: #3B82F6;
+	}
+}

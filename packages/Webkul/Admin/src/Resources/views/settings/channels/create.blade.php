@@ -4,7 +4,12 @@
         @lang('admin::app.settings.channels.create.title')
     </x-slot:title>
 
+    {!! view_render_event('bagisto.admin.settings.channels.create.before') !!}
+
     <x-admin::form  action="{{ route('admin.settings.channels.store') }}" enctype="multipart/form-data">
+
+        {!! view_render_event('admin.settings.channels.create.create_form_controls.before') !!}
+
         <div class="flex justify-between items-center">
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.settings.channels.create.title')
@@ -14,7 +19,7 @@
                 {{-- Cancel Button --}}
                 <a
                     href="{{ route('admin.settings.channels.index') }}"
-                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
                 >
                     @lang('admin::app.settings.channels.create.cancel')
                 </a>
@@ -28,12 +33,16 @@
                 </button>
             </div>
         </div>
+
         {{-- body content --}}
         <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
             {{-- Left sub-component --}}
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+
+                {!! view_render_event('bagisto.admin.settings.channels.create.card.general.before') !!}
+
                 {{-- General Information --}}
-                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                         @lang('admin::app.settings.channels.create.general')
                     </p>
@@ -191,8 +200,12 @@
                     </div>
                 </div>
 
+                {!! view_render_event('bagisto.admin.settings.channels.create.card.general.after') !!}
+
+                {!! view_render_event('bagisto.admin.settings.channels.create.card.design.before') !!}
+
                 {{-- Logo and Design --}}
-                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                         @lang('admin::app.settings.channels.create.design')
                     </p>
@@ -265,6 +278,10 @@
                         </div>
                     </div>    
                 </div>
+
+                {!! view_render_event('bagisto.admin.settings.channels.create.card.design.after') !!}
+
+                {!! view_render_event('bagisto.admin.settings.channels.create.card.seo.before') !!}
 
                 {{-- Home Page SEO --}} 
                 <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
@@ -343,10 +360,16 @@
                         </x-admin::form.control-group>
                     </div>
                 </div>
+
+                {!! view_render_event('bagisto.admin.settings.channels.create.card.seo.after') !!}
+
             </div>
             {{-- Right sub-component --}}
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
-                {{-- component 1 --}}
+
+                {!! view_render_event('bagisto.admin.settings.channels.create.card.accordion.currencies_and_locales.before') !!}
+
+                {{-- Currencies and Locales --}}
                 <x-admin::accordion>
                     <x-slot:header>
                         <div class="flex items-center justify-between">
@@ -493,7 +516,11 @@
                     </x-slot:content>
                 </x-admin::accordion>
 
-                {{-- component 2 --}}
+                {!! view_render_event('bagisto.admin.settings.channels.create.card.accordion.currencies_and_locales.after') !!}
+
+                {!! view_render_event('bagisto.admin.settings.channels.create.card.accordion.settings.before') !!}
+
+                {{-- settings --}}
                 <x-admin::accordion>
                     <x-slot:header>
                         <div class="flex items-center justify-between">
@@ -569,7 +596,16 @@
                         </div>
                     </x-slot:content>
                 </x-admin::accordion>
+
+                {!! view_render_event('bagisto.admin.settings.channels.create.card.accordion.settings.after') !!}
+
             </div>
         </div>
+
+        {!! view_render_event('admin.settings.channels.create.create_form_controls.after') !!}
+
     </x-admin::form> 
+
+    {!! view_render_event('bagisto.admin.settings.channels.create.after') !!}
+
 </x-admin::layouts>

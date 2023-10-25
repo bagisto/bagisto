@@ -19,5 +19,10 @@
         </div>        
     </div>
 
+    {!! view_render_event('bagisto.admin.catalog.categories.list.before') !!}
+
     <x-admin::datagrid src="{{ route('admin.catalog.categories.index') }}"></x-admin::datagrid>
+
+    {!! view_render_event('bagisto.admin.catalog.categories.list.after') !!}
+
 </x-admin::layouts>

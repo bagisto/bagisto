@@ -3,6 +3,8 @@
         @lang('admin::app.settings.locales.index.title')
     </x-slot:title>
 
+    {!! view_render_event('bagisto.admin.settings.locales.create.before') !!}
+
     <v-locales>
         <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
@@ -24,6 +26,8 @@
         {{-- DataGrid Shimmer --}}
         <x-admin::shimmer.datagrid/>
     </v-locales>
+
+    {!! view_render_event('bagisto.admin.settings.locales.create.after') !!}
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-locales-template">
@@ -99,7 +103,7 @@
                 <template #body="{ columns, records, performAction }">
                     <div
                         v-for="record in records"
-                        class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800   text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950  "
+                        class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                         :style="'grid-template-columns: repeat(' + (record.actions.length ? 5 : 4) + ', 1fr);'"
                     >
                         <!-- Id -->
@@ -145,6 +149,9 @@
                     @submit="handleSubmit($event, updateOrCreate)"
                     ref="createLocaleForm"
                 >
+
+                    {!! view_render_event('admin.settings.locales.create_form_controls.before') !!}
+
                     <x-admin::modal ref="localeUpdateOrCreateModal">
                         <x-slot:header>
                             <p class="text-[18px] text-gray-800 dark:text-white font-bold">
@@ -159,7 +166,7 @@
                         </x-slot:header>
 
                         <x-slot:content>
-                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
+                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
                                 {!! view_render_event('bagisto.admin.settings.locale.create.before') !!}
 
                                 <x-admin::form.control-group.control
@@ -266,6 +273,10 @@
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
+                                
+                                <p class="text-[12px] text-gray-600 dark:text-gray-300">
+                                    @lang('admin::app.settings.locales.index.logo-size')
+                                </p>
 
                                 {!! view_render_event('bagisto.admin.settings.locale.create.after') !!}
                             </div>
@@ -282,6 +293,9 @@
                             </div>
                         </x-slot:footer>
                     </x-admin::modal>
+
+                    {!! view_render_event('admin.settings.locales.create_form_controls.after') !!}
+
                 </form>
             </x-admin::form>
         </script>

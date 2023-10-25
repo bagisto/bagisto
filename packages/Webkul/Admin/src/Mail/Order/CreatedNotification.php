@@ -29,7 +29,7 @@ class CreatedNotification extends Mailable
     public function build()
     {
         return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
-            ->to($this->order->customer_email, $this->order->customer_full_name)
+            ->to(core()->getAdminEmailDetails()['email'], core()->getAdminEmailDetails()['name'])
             ->subject(trans('admin::app.emails.orders.created.subject'))
             ->view('admin::emails.orders.created');
     }

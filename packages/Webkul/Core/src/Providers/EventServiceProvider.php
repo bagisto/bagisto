@@ -20,6 +20,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         'Prettus\Repository\Events\RepositoryEntityDeleted' => [
             'Webkul\Core\Listeners\CleanCacheRepository'
-        ]
+        ],
+        'Spatie\ResponseCache\Events\ResponseCacheHit' => [
+            'Webkul\Core\Listeners\ResponseCacheHit'
+        ],
     ];
 }

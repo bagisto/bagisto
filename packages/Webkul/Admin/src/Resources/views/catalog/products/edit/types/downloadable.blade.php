@@ -8,7 +8,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-downloadable-links-template">
-        <div class="relative bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+        <div class="relative bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
             <!-- Panel Header -->
             <div class="flex gap-[20px] justify-between mb-[10px] p-[16px]">
                 <div class="flex flex-col gap-[8px]">
@@ -194,7 +194,7 @@
                 />
 
                 <!-- Add Variants Information -->
-                <div class="flex flex-col items-center">
+                <div class="flex flex-col gap-[5px] items-center">
                     <p class="text-[16px] text-gray-400 font-semibold">
                         @lang('admin::app.catalog.products.edit.types.downloadable.links.empty-title')
                     </p>
@@ -489,7 +489,7 @@
     </script>
 
     <script type="text/x-template" id="v-downloadable-samples-template">
-        <div class="relative bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+        <div class="relative bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
             <!-- Panel Header -->
             <div class="flex gap-[20px] justify-between mb-[10px] p-[16px]">
                 <div class="flex flex-col gap-[8px]">
@@ -623,7 +623,7 @@
                 />
 
                 <!-- Add Variants Information -->
-                <div class="flex flex-col items-center">
+                <div class="flex flex-col gap-[5px] items-center">
                     <p class="text-[16px] text-gray-400 font-semibold">
                         @lang('admin::app.catalog.products.edit.types.downloadable.samples.empty-title')
                     </p>

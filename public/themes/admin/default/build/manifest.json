@@ -1,11 +1,11 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-304d6f0a.css",
+    "file": "assets/app-f117ce88.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
   "src/Resources/assets/fonts/bagisto-admin.woff": {
-    "file": "assets/bagisto-admin-0137177d.woff",
+    "file": "assets/bagisto-admin-f12b0c7d.woff",
     "src": "src/Resources/assets/fonts/bagisto-admin.woff"
   },
   "src/Resources/assets/images/average-orders.svg": {
@@ -20,17 +20,25 @@
     "file": "assets/dark-logo-ea7984e7.svg",
     "src": "src/Resources/assets/images/dark-logo.svg"
   },
-  "src/Resources/assets/images/empty-placeholders/default-empty.svg": {
-    "file": "assets/default-empty-2c56169a.svg",
-    "src": "src/Resources/assets/images/empty-placeholders/default-empty.svg"
+  "src/Resources/assets/images/empty-placeholders/customers.svg": {
+    "file": "assets/customers-57f8166b.svg",
+    "src": "src/Resources/assets/images/empty-placeholders/customers.svg"
   },
-  "src/Resources/assets/images/empty-placeholders/orders-empty.svg": {
-    "file": "assets/orders-empty-5dd62d9d.svg",
-    "src": "src/Resources/assets/images/empty-placeholders/orders-empty.svg"
+  "src/Resources/assets/images/empty-placeholders/default.svg": {
+    "file": "assets/default-2c56169a.svg",
+    "src": "src/Resources/assets/images/empty-placeholders/default.svg"
   },
-  "src/Resources/assets/images/empty-placeholders/reviews-empty.svg": {
-    "file": "assets/reviews-empty-17309002.svg",
-    "src": "src/Resources/assets/images/empty-placeholders/reviews-empty.svg"
+  "src/Resources/assets/images/empty-placeholders/orders.svg": {
+    "file": "assets/orders-5dd62d9d.svg",
+    "src": "src/Resources/assets/images/empty-placeholders/orders.svg"
+  },
+  "src/Resources/assets/images/empty-placeholders/report-empty.svg": {
+    "file": "assets/report-empty-c3bb4a01.svg",
+    "src": "src/Resources/assets/images/empty-placeholders/report-empty.svg"
+  },
+  "src/Resources/assets/images/empty-placeholders/reviews.svg": {
+    "file": "assets/reviews-17309002.svg",
+    "src": "src/Resources/assets/images/empty-placeholders/reviews.svg"
   },
   "src/Resources/assets/images/error.svg": {
     "file": "assets/error-4179d5c7.svg",
@@ -104,6 +112,10 @@
     "file": "assets/payment-method-10ea91e1.svg",
     "src": "src/Resources/assets/images/settings/payment-method.svg"
   },
+  "src/Resources/assets/images/settings/product.svg": {
+    "file": "assets/product-357134fb.svg",
+    "src": "src/Resources/assets/images/settings/product.svg"
+  },
   "src/Resources/assets/images/settings/settings.svg": {
     "file": "assets/settings-26b93165.svg",
     "src": "src/Resources/assets/images/settings/settings.svg"
@@ -157,7 +169,7 @@
     "src": "src/Resources/assets/js/app.js"
   },
   "src/Resources/assets/js/chart.js": {
-    "file": "assets/chart-c63d8872.js",
+    "file": "assets/chart-1d2144fe.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/chart.js"
   }

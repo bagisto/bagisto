@@ -8,6 +8,9 @@
         method="PUT"
         :action="route('admin.catalog.families.update', $attributeFamily->id)"
     >
+
+        {!! view_render_event('bagisto.admin.catalog.families.edit.edit_form_control.before', ['attributeFamily' => $attributeFamily]) !!}
+
         {{-- Page Header --}}
         <div class="flex justify-between items-center">
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
@@ -17,7 +20,7 @@
             <div class="flex gap-x-[10px] items-center">
                 <a
                     href="{{ route('admin.catalog.families.index') }}"
-                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
                 >
                     @lang('admin::app.catalog.families.edit.back-btn')
                 </a>
@@ -34,16 +37,23 @@
         {{-- Container --}}
         <div class="flex gap-[10px] mt-[14px]">
             {{-- Left Container --}}
-            <div class="flex flex-col gap-[8px] flex-1 bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+
+            {!! view_render_event('bagisto.admin.catalog.families.edit.card.attributes-panel.before', ['attributeFamily' => $attributeFamily]) !!}
+
+            <div class="flex flex-col gap-[8px] flex-1 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                 <v-family-attributes>
                     <x-admin::shimmer.families.attributes-panel/>
                 </v-family-attributes>
             </div>
 
+            {!! view_render_event('bagisto.admin.catalog.families.edit.card.attributes-panel.after', ['attributeFamily' => $attributeFamily]) !!}
+
+            {!! view_render_event('bagisto.admin.catalog.families.edit.card.accordion.general.before', ['attributeFamily' => $attributeFamily]) !!}
+
             {{-- Right Container --}}
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
                 {{-- General Pannel --}}
-                <div class="bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                <div class="bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     {{-- Panel Header --}}
                     <div class="flex items-center justify-between p-[6px]">
                         <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
@@ -102,7 +112,13 @@
                     </div>
                 </div>
             </div>
+
+            {!! view_render_event('bagisto.admin.catalog.families.edit.card.accordion.general.after', ['attributeFamily' => $attributeFamily]) !!}
+
         </div>
+
+        {!! view_render_event('bagisto.admin.catalog.families.edit.edit_form_control.after', ['attributeFamily' => $attributeFamily]) !!}
+
     </x-admin::form>
 
     @pushOnce('scripts')
@@ -147,7 +163,7 @@
                     <div v-for="(groups, column) in columnGroups">
                         <!-- Attributes Groups Header -->
                         <div class="flex flex-col mb-[16px]">
-                            <p class="text-gray-600 dark:text-gray-300  font-semibold leading-[24px]">
+                            <p class="text-gray-600 dark:text-gray-300 font-semibold leading-[24px]">
                                 @{{
                                     column == 1
                                     ? "@lang('admin::app.catalog.families.edit.main-column')"
@@ -175,7 +191,7 @@
                                     <div class="flex items-center group">
                                         <!-- Toggle -->
                                         <i
-                                            class="icon-sort-down text-[20px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950  group-hover:text-gray-800"
+                                            class="icon-sort-down text-[20px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950 group-hover:text-gray-800"
                                             @click="element.hide = ! element.hide"
                                         ></i>
 
@@ -272,7 +288,7 @@
                     <div class="">
                         <!-- Unassigned Attributes Header -->
                         <div class="flex flex-col mb-[16px]">
-                            <p class="text-gray-600 dark:text-gray-300  font-semibold leading-[24px]">
+                            <p class="text-gray-600 dark:text-gray-300 font-semibold leading-[24px]">
                                 @lang('admin::app.catalog.families.edit.unassigned-attributes')
                             </p>
 

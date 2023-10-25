@@ -27,6 +27,9 @@
 
     @if (! $addresses->isEmpty())
         {{-- Address Information --}}
+
+        {!! view_render_event('bagisto.shop.customers.account.addresses.list.before', ['addresses' => $addresses]) !!}
+
         <div class="grid grid-cols-2 gap-[20px] mt-[60px] max-1060:grid-cols-[1fr]">
             @foreach ($addresses as $address)
                 <div class="p-[20px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap">
@@ -54,7 +57,9 @@
                                 <x-slot:menu>
                                     <x-shop::dropdown.menu.item>
                                         <a href="{{ route('shop.customers.account.addresses.edit', $address->id) }}">
-                                            @lang('shop::app.customers.account.addresses.edit')
+                                            <p class="w-full">
+                                                @lang('shop::app.customers.account.addresses.edit')
+                                            </p>
                                         </a>    
                                     </x-shop::dropdown.menu.item>
 
@@ -62,10 +67,16 @@
                                         <x-shop::form
                                             :action="route('shop.customers.account.addresses.delete', $address->id)"
                                             method="DELETE"
+                                            id="addressDelete"
                                         >
-                                            <button>
-                                                @lang('shop::app.customers.account.addresses.delete')
-                                            </button>
+                                            <a 
+                                                onclick="event.preventDefault(); document.getElementById('addressDelete').submit();"
+                                                href="{{ route('shop.customers.account.addresses.delete', $address->id) }}"
+                                            >
+                                                <p class="w-full">
+                                                    @lang('shop::app.customers.account.addresses.delete')
+                                                </p>
+                                            </a>
                                         </x-shop::form>
                                     </x-shop::dropdown.menu.item>
 
@@ -98,6 +109,9 @@
                 </div>    
             @endforeach
         </div>
+
+        {!! view_render_event('bagisto.shop.customers.account.addresses.list.after', ['addresses' => $addresses]) !!}
+
     @else
         {{-- Address Empty Page --}}
         <div class="grid items-center justify-items-center place-content-center w-[100%] m-auto h-[476px] text-center">

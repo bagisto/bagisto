@@ -31,6 +31,9 @@
                                 class="relative max-w-[218px] max-sm:max-w-full max-sm:flex-auto select-none"
                                 v-for="shippingMethod in shippingMethods"
                             >
+
+                                {!! view_render_event('bagisto.shop.checkout.shipping-method.before') !!}
+
                                 <div v-for="rate in shippingMethod.rates">
                                     <input 
                                         type="radio"
@@ -62,6 +65,9 @@
                                         </p>
                                     </label>
                                 </div>
+
+                                {!! view_render_event('bagisto.shop.checkout.shipping-method.after') !!}
+
                             </div>
                         </div>
                     </x-slot:content>

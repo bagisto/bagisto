@@ -48,6 +48,7 @@ class AddressController extends APIController
             'state',
             'city',
             'postcode',
+            'phone',
             'default_address'
         ]), [
             'customer_id'     => $customer->id,

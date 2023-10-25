@@ -22,7 +22,11 @@
             @endif
         </div>
     </div>
+
+    {!! view_render_event('bagisto.settings.channels.list.before') !!}
     
     <x-admin::datagrid src="{{ route('admin.settings.channels.index') }}"></x-admin::datagrid>
+
+    {!! view_render_event('bagisto.settings.channels.list.after') !!}
 
 </x-admin::layouts>

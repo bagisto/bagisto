@@ -166,6 +166,8 @@
                     </a>
                 </div>
 
+                {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.before') !!}
+
                 {{-- Billing address form --}}
                 <x-shop::form
                     v-slot="{ meta, errors, handleSubmit }"
@@ -191,7 +193,8 @@
                             >
                             </x-shop::form.control-group.error>
                         </x-shop::form.control-group>
-    
+
+                        {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.company_name.after') !!}
 
                         <div class="grid grid-cols-2 gap-x-[20px]">
                             <x-shop::form.control-group>
@@ -215,6 +218,9 @@
                                 </x-shop::form.control-group.error>
                             </x-shop::form.control-group>
 
+                            {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.first_name.after') !!}
+
+
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="!mt-[0px] required">
                                     @lang('shop::app.checkout.onepage.addresses.billing.last-name')
@@ -235,6 +241,8 @@
                                 >
                                 </x-shop::form.control-group.error>
                             </x-shop::form.control-group>
+
+                            {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.last_name.after') !!}
                         </div>
     
                         <x-shop::form.control-group>
@@ -257,6 +265,8 @@
                             >
                             </x-shop::form.control-group.error>
                         </x-shop::form.control-group>
+
+                        {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.email.after') !!}
     
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label class="!mt-[0px] required">
@@ -293,6 +303,7 @@
                             @endif
                         </x-shop::form.control-group>
     
+                        {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.address1.after') !!}
 
                         <div class="grid grid-cols-2 gap-x-[20px]">
                             <x-shop::form.control-group
@@ -324,6 +335,8 @@
                                 >
                                 </x-shop::form.control-group.error>
                             </x-shop::form.control-group>
+
+                            {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.country.after') !!}
     
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="!mt-[0px] required">
@@ -366,6 +379,9 @@
                                 >
                                 </x-shop::form.control-group.error>
                             </x-shop::form.control-group>
+
+                            {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.state.after') !!}
+
                         </div>
     
                         <div class="grid grid-cols-2 gap-x-[20px]">
@@ -389,6 +405,8 @@
                                 >
                                 </x-shop::form.control-group.error>
                             </x-shop::form.control-group>
+
+                            {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.city.after') !!}
         
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="!mt-[0px] required">
@@ -410,13 +428,15 @@
                                 >
                                 </x-shop::form.control-group.error>
                             </x-shop::form.control-group>
+
+                            {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.postcode.after') !!}
+
                         </div>
 
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label class="!mt-[0px] required">
                                 @lang('shop::app.checkout.onepage.addresses.billing.telephone')
                             </x-shop::form.control-group.label>
-    
                             
                             <x-shop::form.control-group.control
                                 type="text"
@@ -433,6 +453,8 @@
                             >
                             </x-shop::form.control-group.error>
                         </x-shop::form.control-group>
+
+                        {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.phone.after') !!}
 
                         <div class="mt-[30px] pb-[15px]">
                             <div class="grid gap-[10px]">
@@ -470,6 +492,9 @@
                         </div>
                     </form>
                 </x-shop::form>
+
+                {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.after') !!}
+
             </x-slot:content>
         </x-shop::accordion>
     </div>

@@ -1,6 +1,6 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.images.before', ['product' => $product]) !!}
 
-<div class="relative p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+<div class="relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
     <!-- Panel Header -->
     <div class="flex gap-[20px] justify-between mb-[16px]">
         <div class="flex flex-col gap-[8px]">

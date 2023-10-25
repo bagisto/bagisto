@@ -26,7 +26,7 @@
                     <div class="relative w-full">
                         <input
                             type="text"
-                            class="bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-lg block w-full ltr:pl-[12px] rtl:pr-[12px] ltr:pr-[40px] rtl:pl-[40px] py-[5px] leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                            class="bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-lg block w-full ltr:pl-[12px] rtl:pr-[12px] ltr:pr-[40px] rtl:pl-[40px] py-[5px] leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                             placeholder="Search by name"
                             v-model.lazy="searchTerm"
                             v-debounce="500"
@@ -118,7 +118,7 @@
                     />
 
                     <!-- Add Variants Information -->
-                    <div class="flex flex-col items-center">
+                    <div class="flex flex-col gap-[5px] items-center">
                         <p class="text-[16px] text-gray-400 font-semibold">
                             @lang('admin::app.components.products.search.empty-title')
                         </p>

@@ -17,5 +17,10 @@
         </div>
     </div>
 
+    {!! view_render_event('bagisto.shop.customers.account.orders.list.before') !!}
+
     <x-shop::datagrid :src="route('shop.customers.account.orders.index')"></x-shop::datagrid>
+    
+    {!! view_render_event('bagisto.shop.customers.account.orders.list.after') !!}
+
 </x-shop::layouts.account>

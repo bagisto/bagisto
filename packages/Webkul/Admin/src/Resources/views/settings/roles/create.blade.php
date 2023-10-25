@@ -5,13 +5,19 @@
         @lang('admin::app.settings.roles.create.title')
     </x-slot:title>
     
+    {!! view_render_event('bagisto.admin.settings.roles.create.before') !!}
+
     {{-- Create Role for  --}}
     <v-create-user-role></v-create-user-role>
+
+    {!! view_render_event('bagisto.admin.settings.roles.create.after') !!}
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-create-user-role-template">
             <div>
                 <x-admin::form :action="route('admin.settings.roles.store')">
+                    {!! view_render_event('admin.settings.roles.create.create_form_controls.before') !!}
+
                     <div class="flex justify-between items-center">
                         <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                             @lang('admin::app.settings.roles.create.title')
@@ -21,7 +27,7 @@
                             <!-- Cancel Button -->
                             <a
                                 href="{{ route('admin.settings.roles.index') }}"
-                                class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
+                                class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
                             >
                                 @lang('admin::app.settings.roles.create.back-btn')
                             </a>
@@ -40,8 +46,11 @@
                     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                         <!-- Left sub-component -->
                         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+
+                            {!! view_render_event('bagisto.admin.settings.roles.create.card.access_control.before') !!}
+
                             <!-- Access Control Input Fields -->
-                            <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                            <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                                     @lang('admin::app.settings.roles.create.access-control')
                                 </p>
@@ -85,9 +94,15 @@
                                     </x-admin::tree.view>
                                 </div>
                             </div>
+
+                            {!! view_render_event('bagisto.admin.settings.roles.create.card.access_control.after') !!}
+
                         </div>
                         <!-- Right sub-component -->
                         <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+
+                            {!! view_render_event('bagisto.admin.settings.roles.create.card.accordion.general.before') !!}
+
                             <x-admin::accordion>
                                 <x-slot:header>
                                     <div class="flex items-center justify-between p-[6px]">
@@ -145,8 +160,14 @@
                                     </div>
                                 </x-slot:content>
                             </x-admin::accordion>
+
+                            {!! view_render_event('bagisto.admin.settings.roles.create.card.accordion.general.after') !!}
+
                         </div>
                     </div>
+
+                    {!! view_render_event('admin.settings.roles.create.create_form_controls.after') !!}
+
                 </x-admin::form>
             </div>
         </script>

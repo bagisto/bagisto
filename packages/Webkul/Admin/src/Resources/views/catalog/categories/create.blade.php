@@ -4,11 +4,15 @@
         @lang('admin::app.catalog.categories.create.title')
     </x-slot:title>
 
+    {!! view_render_event('bagisto.admin.catalog.categories.create.before') !!}
+
     {{-- Category Create Form --}}
     <x-admin::form
         :action="route('admin.catalog.categories.store')"
         enctype="multipart/form-data"
     >
+        {!! view_render_event('bagisto.admin.catalog.categories.create.create_form_controls.before') !!}
+
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.catalog.categories.create.title')
@@ -35,10 +39,14 @@
 
         {{-- Full Pannel --}}
         <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+
             {{-- Left Section --}}
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+
+                {!! view_render_event('bagisto.admin.catalog.categories.create.card.general.before') !!}
+
                 <!-- General -->
-                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.categories.create.general')
                     </p>
@@ -71,7 +79,7 @@
                                 id="name"
                                 v-bind="field"
                                 :class="[errors['{{ 'name' }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:hover:border-gray-400  focus:border-gray-400  dark:focus:border-gray-400  dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                 placeholder="{{ trans('admin::app.catalog.categories.create.name') }}"
                                 v-slugify-target:slug="setValues"
                             >
@@ -105,8 +113,12 @@
                     </div>
                 </div>
 
+                {!! view_render_event('bagisto.admin.catalog.categories.create.card.general.after') !!}
+
+                {!! view_render_event('bagisto.admin.catalog.categories.create.card.description_images.before') !!}
+
                 <!-- Description and images -->
-                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.categories.create.description-and-images')
                     </p>
@@ -170,8 +182,12 @@
                     </div>
                 </div>
 
+                {!! view_render_event('bagisto.admin.catalog.categories.create.card.description_images.after') !!}
+
+                {!! view_render_event('bagisto.admin.catalog.categories.create.card.seo.before') !!}
+
                 {{-- SEO Deatils --}}
-                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                         @lang('admin::app.catalog.categories.create.seo-details')
                     </p>
@@ -217,7 +233,7 @@
                                     id="slug"
                                     v-bind="field"
                                     :class="[errors['{{ 'slug' }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400  focus:border-gray-400  dark:focus:border-gray-400  dark:bg-gray-900 dark:border-gray-800"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                     placeholder="{{ trans('admin::app.catalog.categories.create.slug') }}"
                                     v-slugify-target:slug
                                 >
@@ -263,11 +279,17 @@
                         </x-admin::form.control-group>
                     </div>
                 </div>
+
+                {!! view_render_event('bagisto.admin.catalog.categories.create.card.seo.after') !!}
+
             </div>
 
             {{-- Right Section --}}
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
                 {{-- Settings --}}
+
+                {!! view_render_event('bagisto.admin.catalog.categories.create.card.accordion.settings.before') !!}
+
                 <x-admin::accordion>
                     <x-slot:header>
                         <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
@@ -353,6 +375,10 @@
                     </x-slot:content>
                 </x-admin::accordion>
 
+                {!! view_render_event('bagisto.admin.catalog.categories.create.card.accordion.settings.after') !!}
+
+                {!! view_render_event('bagisto.admin.catalog.categories.create.card.accordion.filterable_attributes.before') !!}
+
                 {{-- Filterable Attributes --}}
                 <x-admin::accordion>
                     <x-slot:header>
@@ -392,9 +418,17 @@
                         </x-admin::form.control-group.error>
                     </x-slot:content>
                 </x-admin::accordion>
+
+                {!! view_render_event('bagisto.admin.catalog.categories.create.card.accordion.filterable_attributes.after') !!}
+
             </div>
         </div>
+
+        {!! view_render_event('bagisto.admin.catalog.categories.create.create_form_controls.after') !!}
+
     </x-admin::form>
+
+    {!! view_render_event('bagisto.admin.catalog.categories.create.after') !!}
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-description-template">

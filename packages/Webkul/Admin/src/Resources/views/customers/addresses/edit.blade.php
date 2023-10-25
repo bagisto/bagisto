@@ -14,10 +14,15 @@
                 </p>
             @endif
 
+            {!! view_render_event('admin.customers.addresses.edit.before') !!}
+
             <x-admin::form
                 v-slot="{ meta, errors, handleSubmit }"
                 as="div"     
             >
+
+                {!! view_render_event('admin.customers.addresses.edit.edit_form_controls.before') !!}
+
                 <x-admin::form.control-group class="mb-[10px]">
                     <x-admin::form.control-group.control
                         type="hidden"
@@ -361,7 +366,7 @@
 
                                         <x-admin::form.control-group.label 
                                             for="default_address"
-                                            class="text-gray-600 dark:text-gray-300  font-semibold cursor-pointer" 
+                                            class="text-gray-600 dark:text-gray-300 font-semibold cursor-pointer" 
                                         >
                                             @lang('admin::app.customers.addresses.edit.default-address')
                                         </x-admin::form.control-group.label>
@@ -390,7 +395,13 @@
                         </x-slot:footer>
                     </x-admin::modal>
                 </form>
+
+                {!! view_render_event('admin.customers.addresses.edit.edit_form_controls.after') !!}
+
             </x-admin::form>
+
+            {!! view_render_event('admin.customers.addresses.edit.after') !!}
+
         </div>
     </script>
 

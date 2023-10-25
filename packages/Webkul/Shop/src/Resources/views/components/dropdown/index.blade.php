@@ -3,7 +3,7 @@
 <v-dropdown position="{{ $position }}" {{ $attributes->merge(['class' => 'relative']) }}>
     @isset($toggle)
         {{ $toggle }}
-        
+
         <template v-slot:toggle>
             {{ $toggle }}
         </template>
@@ -28,7 +28,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-dropdown-template">
-        <div>   
+        <div>
             <div
                 class="select-none"
                 ref="toggleBlock"
@@ -66,6 +66,12 @@
 
             props: {
                 position: String,
+
+                closeOnClick: {
+                    type: Boolean,
+                    required: false,
+                    default: true
+                },
             },
 
             data() {
@@ -73,7 +79,7 @@
                     toggleBlockWidth: 0,
 
                     toggleBlockHeight: 0,
-                    
+
                     isActive: false,
                 };
             },
@@ -135,11 +141,25 @@
 
             methods: {
                 toggle() {
+                    /**
+                     * If still somehow width is zero then this will check for width one more time.
+                     */
+                    if (this.toggleBlockWidth === 0) {
+                        this.toggleBlockWidth = this.$refs.toggleBlock.clientWidth;
+                    }
+
+                    /**
+                     * If still somehow height is zero then this will check for height one more time.
+                     */
+                    if (this.toggleBlockHeight === 0) {
+                        this.toggleBlockHeight = this.$refs.toggleBlock.clientHeight;
+                    }
+
                     this.isActive = ! this.isActive;
                 },
 
                 handleFocusOut(e) {
-                    if (! this.$el.contains(e.target) || this.$el.children[1].contains(e.target)) {
+                    if (! this.$el.contains(e.target) || (this.closeOnClick && this.$el.children[1].contains(e.target))) {
                         this.isActive = false;
                     }
                 },

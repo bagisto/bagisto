@@ -21,6 +21,7 @@
                             class="rounded-[12px] object-cover"
                             :src="uploadedFiles.url"
                             :class="{'opacity-25' : uploadedFiles.showDeleteButton}"
+                            alt="Uploaded Image"
                         >
 
                         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">

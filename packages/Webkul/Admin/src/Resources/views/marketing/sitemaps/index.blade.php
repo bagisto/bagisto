@@ -4,6 +4,8 @@
         @lang('admin::app.marketing.sitemaps.index.title')
     </x-slot:title>
 
+    {!! view_render_event('bagisto.admin.marketing.sitemaps.create.before') !!}
+
     {{-- Create Sitemap Vue Component --}}
     <v-create-sitemaps>
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
@@ -22,6 +24,8 @@
         {{-- Added For Shimmer --}}
         <x-admin::shimmer.datagrid/>
     </v-create-sitemaps>
+
+    {!! view_render_event('bagisto.admin.marketing.sitemaps.create.after') !!}
     
     @pushOnce('scripts')
         <script 
@@ -43,6 +47,8 @@
                     </div>
                 @endif
             </div>
+
+            {!! view_render_event('admin.marketing.sitemaps.list.before') !!}
 
             <x-admin::datagrid
                 src="{{ route('admin.marketing.promotions.sitemaps.index') }}"
@@ -100,7 +106,7 @@
                 <template #body="{ columns, records, performAction }">
                     <div
                         v-for="record in records"
-                        class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800   text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950  "
+                        class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                         :style="'grid-template-columns: repeat(' + (record.actions.length ? 5 : 4) + ', 1fr);'"
                     >
                         <!-- Id -->
@@ -141,6 +147,8 @@
                 </template>
             </x-admin::datagrid>
 
+            {!! view_render_event('admin.marketing.sitemaps.list.after') !!}
+
             <!-- Model Form -->
             <x-admin::form
                 v-slot="{ meta, errors, handleSubmit }"
@@ -174,7 +182,7 @@
 
                         <!-- Modal Content -->
                         <x-slot:content>
-                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
+                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
                                 <!-- Id -->
                                 <x-admin::form.control-group.control
                                     type="hidden"

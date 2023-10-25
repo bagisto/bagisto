@@ -8,12 +8,17 @@
         $currentLocale = core()->getRequestedLocale();
     @endphp
 
+    {!! view_render_event('bagisto.admin.catalog.categories.edit.before') !!}
+
     {{-- Category Edit Form --}}
     <x-admin::form
         :action="route('admin.catalog.categories.update', $category->id)"
         enctype="multipart/form-data"
         method="PUT"
     >
+
+        {!! view_render_event('bagisto.admin.catalog.categories.edit.edit_form_controls.before', ['category' => $category]) !!}
+
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.catalog.categories.edit.title')
@@ -64,7 +69,7 @@
                         @foreach (core()->getAllLocales() as $locale)
                             <a
                                 href="?{{ Arr::query(['locale' => $locale->code]) }}"
-                                class="flex gap-[10px] px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white   {{ $locale->code == $currentLocale->code ? 'bg-gray-100 dark:bg-gray-950' : ''}}"
+                                class="flex gap-[10px] px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white {{ $locale->code == $currentLocale->code ? 'bg-gray-100 dark:bg-gray-950' : ''}}"
                             >
                                 {{ $locale->name }}
                             </a>
@@ -79,10 +84,10 @@
             {{-- Left Section --}}
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
 
-                {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.general.before', ['category' => $category]) !!}
+                {!! view_render_event('bagisto.admin.catalog.categories.edit.card.general.before', ['category' => $category]) !!}
 
                 <!-- General -->
-                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.categories.edit.general')
                     </p>
@@ -107,7 +112,7 @@
                                 id="{{$currentLocale->code}}[name]"
                                 v-bind="field"
                                 :class="[errors['{{ $currentLocale->code }}[name]'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400  focus:border-gray-400  dark:focus:border-gray-400  dark:bg-gray-900 dark:border-gray-800"
+                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                 placeholder="{{ trans('admin::app.catalog.categories.edit.name') }}"
                                 v-slugify-target:{{$currentLocale->code . '[slug]'}}="setValues"
                             >
@@ -143,12 +148,12 @@
                     @endif
                 </div>
 
-                {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.general.after', ['category' => $category]) !!}
+                {!! view_render_event('bagisto.admin.catalog.categories.edit.card.general.after', ['category' => $category]) !!}
 
-                {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.description_images.before', ['category' => $category]) !!}
+                {!! view_render_event('bagisto.admin.catalog.categories.edit.card.description_images.before', ['category' => $category]) !!}
 
                 <!-- Description and images -->
-                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.categories.edit.description-and-images')
                     </p>
@@ -217,12 +222,12 @@
                     </div>
                 </div>
 
-                {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.description_images.after', ['category' => $category]) !!}
+                {!! view_render_event('bagisto.admin.catalog.categories.edit.card.description_images.after', ['category' => $category]) !!}
 
-                {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.seo.before', ['category' => $category]) !!}
+                {!! view_render_event('bagisto.admin.catalog.categories.edit.card.seo.before', ['category' => $category]) !!}
 
                 {{-- SEO Deatils --}}
-                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                         @lang('admin::app.catalog.categories.edit.seo-details')
                     </p>
@@ -268,7 +273,7 @@
                                     id="{{$currentLocale->code}}[slug]"
                                     v-bind="field"
                                     :class="[errors['{{$currentLocale->code}}[slug]'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400  focus:border-gray-400  dark:focus:border-gray-400  dark:bg-gray-900 dark:border-gray-800"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                     placeholder="{{ trans('admin::app.catalog.categories.edit.slug') }}"
                                     v-slugify-target:slug
                                 >
@@ -315,12 +320,15 @@
                     </div>
                 </div>
 
-                {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.seo.after', ['category' => $category]) !!}
+                {!! view_render_event('bagisto.admin.catalog.categories.edit.card.seo.after', ['category' => $category]) !!}
             </div>
 
             {{-- Right Section --}}
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
                 {{-- Settings --}}
+
+                {!! view_render_event('bagisto.admin.catalog.categories.edit.card.accordion.settings.before', ['category' => $category]) !!}
+
                 <x-admin::accordion>
                     <x-slot:header>
                         <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
@@ -410,6 +418,10 @@
                     </x-slot:content>
                 </x-admin::accordion>
 
+                {!! view_render_event('bagisto.admin.catalog.categories.edit.card.accordion.settings.after', ['category' => $category]) !!}
+
+                {!! view_render_event('bagisto.admin.catalog.categories.edit.card.accordion.filterable_attributes.before', ['category' => $category]) !!}
+
                 {{-- Filterable Attributes --}}
                 <x-admin::accordion>
                     <x-slot:header>
@@ -451,9 +463,17 @@
                         </x-admin::form.control-group.error>
                     </x-slot:content>
                 </x-admin::accordion>
+
+                {!! view_render_event('bagisto.admin.catalog.categories.edit.card.accordion.filterable_attributes.after', ['category' => $category]) !!}
+
             </div>
         </div>
+
+        {!! view_render_event('bagisto.admin.catalog.categories.edit.edit_form_controls.after', ['category' => $category]) !!}
+
     </x-admin::form>
+
+    {!! view_render_event('bagisto.admin.catalog.categories.edit.after') !!}
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-description-template">

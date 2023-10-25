@@ -343,12 +343,29 @@
                                 break;
                         }
                     } else {
+                        /**
+                         * Here, either a real event will come or a string value. If a string value is present, then
+                         * we create a similar event-like structure to avoid any breakage and make it easy to use.
+                         */
+                        if ($event?.target?.value === undefined) {
+                            $event = {
+                                target: {
+                                    value: $event,
+                                }
+                            };
+                        }
+
                         this.applyFilter(column, $event.target.value, additional);
 
                         if (column) {
                             $event.target.value = '';
                         }
                     }
+
+                    /**
+                     * We need to reset the page on filtering.
+                     */
+                    this.applied.pagination.page = 1;
 
                     this.get();
                 },
@@ -383,9 +400,13 @@
                          * Else, we will look into the sidebar filters and update the value accordingly.
                          */
                     } else {
+                        /**
+                         * Here if value already exists, we will not do anything.
+                         */
                         if (
-                            !requestedValue ||
-                            requestedValue == appliedColumn?.value
+                            requestedValue === undefined ||
+                            requestedValue === '' ||
+                            appliedColumn?.value.includes(requestedValue)
                         ) {
                             return;
                         }

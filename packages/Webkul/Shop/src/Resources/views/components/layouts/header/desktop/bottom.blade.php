@@ -6,12 +6,12 @@
     {{-- Left Nagivation Section --}}
     <div class="flex items-center gap-x-[40px] pt-[28px] max-[1180px]:gap-x-[20px]">
         <a
-            href="{{ route('shop.home.index') }}" 
+            href="{{ route('shop.home.index') }}"
             class="place-self-start -mt-[4px]"
             aria-label="Bagisto "
         >
             <img
-                src="{{ bagisto_asset('images/logo.svg') }}"
+                src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
                 width="131"
                 height="29"
                 alt="Bagisto"
@@ -30,8 +30,8 @@
     {{-- Right Nagivation Section --}}
     <div class="flex gap-x-[35px] items-center max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px]">
         {{-- Search Bar Container --}}
-        <form 
-            action="{{ route('shop.search.index') }}" 
+        <form
+            action="{{ route('shop.search.index') }}"
             class="flex items-center max-w-[445px]"
         >
             <label
@@ -49,7 +49,7 @@
                     name="query"
                     value="{{ request('query') }}"
                     class="block w-full px-[44px] py-[13px] bg-[#F5F5F5] rounded-lg text-gray-900 text-xs font-medium transition-all border border-transparent hover:border-gray-400 focus:border-gray-400"
-                    placeholder="Search for products"
+                    placeholder="@lang('shop::app.components.layouts.header.search-text')"
                     required
                 >
 
@@ -62,10 +62,10 @@
         {{-- Right Navigation Links --}}
         <div class="flex gap-x-[35px] mt-[5px] max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px]">
             {{-- Compare --}}
-            @if((bool) core()->getConfigData('general.content.shop.compare_option'))
+            @if(core()->getConfigData('general.content.shop.compare_option'))
                 <a
                     href="{{ route('shop.compare.index') }}"
-                    aria-label="Compare "
+                    aria-label="Compare"
                 >
                     <span class="icon-compare inline-block text-[24px] cursor-pointer"></span>
                 </a>
@@ -144,7 +144,7 @@
                                 @lang('shop::app.components.layouts.header.orders')
                             </a>
 
-                            @if ((bool) core()->getConfigData('general.content.shop.wishlist_option'))
+                            @if (core()->getConfigData('general.content.shop.wishlist_option'))
                                 <a
                                     class="px-5 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
                                     href="{{ route('shop.customers.account.wishlist.index') }}"
@@ -201,8 +201,8 @@
                     <a
                         :href="category.url"
                         class="inline-block pb-[21px] px-[20px] uppercase"
+                        v-text="category.name"
                     >
-                        @{{ category.name }}
                     </a>
                 </span>
 
@@ -217,8 +217,10 @@
                         >
                             <template v-for="secondLevelCategory in pairCategoryChildren">
                                 <p class="text-navyBlue font-medium">
-                                    <a :href="secondLevelCategory.url">
-                                        @{{ secondLevelCategory.name }}
+                                    <a
+                                        :href="secondLevelCategory.url"
+                                        v-text="secondLevelCategory.name"
+                                    >
                                     </a>
                                 </p>
 
@@ -230,8 +232,10 @@
                                         class="text-[14px] font-medium text-[#6E6E6E]"
                                         v-for="thirdLevelCategory in secondLevelCategory.children"
                                     >
-                                        <a :href="thirdLevelCategory.url">
-                                            @{{ thirdLevelCategory.name }}
+                                        <a
+                                            :href="thirdLevelCategory.url"
+                                            v-text="thirdLevelCategory.name"
+                                        >
                                         </a>
                                     </li>
                                 </ul>

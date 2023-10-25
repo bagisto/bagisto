@@ -19,7 +19,7 @@
         {{-- Company Logo --}}
         <div class="flex gap-x-[54px] items-center max-[1180px]:gap-x-[35px]">
             <a
-                href="{{ route('shop.home.index') }}" 
+                href="{{ route('shop.home.index') }}"
                 class="m-[0_auto_20px_auto]"
                 aria-label="Bagisto "
             >
@@ -31,7 +31,7 @@
                 >
             </a>
         </div>
-        
+
         {{-- Form Container --}}
         <div
             class="w-full max-w-[870px] m-auto px-[90px] py-[60px] border border-[#E9E9E9] rounded-[12px] max-md:px-[30px] max-md:py-[30px]"
@@ -48,6 +48,10 @@
 
             <div class="mt-[60px] rounded max-sm:mt-[30px]">
                 <x-shop::form :action="route('shop.customer.session.create')">
+
+                    {!! view_render_event('bagisto.shop.customers.login_form_controls.before') !!}
+
+                    {{-- Email --}}
                     <x-shop::form.control-group class="mb-4">
                         <x-shop::form.control-group.label class="required">
                             @lang('shop::app.customers.login-form.email')
@@ -70,6 +74,7 @@
                         </x-shop::form.control-group.error>
                     </x-shop::form.control-group>
 
+                    {{-- Password --}}
                     <x-shop::form.control-group class="mb-4">
                         <x-shop::form.control-group.label class="required">
                             @lang('shop::app.customers.login-form.password')
@@ -127,14 +132,14 @@
                         </div>
                     </div>
 
-                    {!! view_render_event('bagisto.shop.customers.login_form_controls.after') !!}
-
+                    {{-- Captcha --}}
                     @if (core()->getConfigData('customer.captcha.credentials.status'))
                         <div class="flex mt-[20px]">
                             {!! Captcha::render() !!}
                         </div>
                     @endif
 
+                    {{-- Submit Button --}}
                     <div class="flex gap-[36px] flex-wrap mt-[30px] items-center">
                         <button
                             class="primary-button block w-full max-w-[374px] py-[16px] px-[43px] m-0 ml-[0px] mx-auto rounded-[18px] text-[16px] text-center"
@@ -143,9 +148,7 @@
                             @lang('shop::app.customers.login-form.button-title')
                         </button>
 
-                        {!! view_render_event('bagisto.shop.customers.login.after') !!}
-
-                        {!! view_render_event('bagisto.shop.customers.login_form_controls.before') !!}
+                        {!! view_render_event('bagisto.shop.customers.login_form_controls.after') !!}
                     </div>
                 </x-shop::form>
             </div>
@@ -163,7 +166,7 @@
         </div>
 
         <p class="mt-[30px] mb-[15px] text-center text-[#6E6E6E] text-xs">
-            @lang('shop::app.customers.login-form.footer')
+            @lang('shop::app.customers.login-form.footer', ['current_year'=> date('Y') ])
         </p>
     </div>
 

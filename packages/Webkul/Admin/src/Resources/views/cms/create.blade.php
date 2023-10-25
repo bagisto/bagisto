@@ -9,6 +9,9 @@
         :action="route('admin.cms.store')"
         enctype="multipart/form-data"
     >
+
+        {!! view_render_event('bagisto.admin.cms.pages.create.create_form_controls.before') !!}
+
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.cms.create.title')
@@ -39,8 +42,10 @@
             {{-- Left sub-component --}}
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
 
+                {!! view_render_event('bagisto.admin.cms.pages.create.card.description.before') !!}
+
                 {{--Content --}}
-                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                         @lang('admin::app.cms.create.description')
                     </p>
@@ -69,8 +74,12 @@
                     </x-admin::form.control-group>
                 </div>
 
+                {!! view_render_event('bagisto.admin.cms.pages.create.card.description.after') !!}
+
+                {!! view_render_event('bagisto.admin.cms.pages.create.card.seo.before') !!}
+
                 {{-- SEO Input Fields --}}
-                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                         @lang('admin::app.cms.create.seo')
                     </p>
@@ -165,11 +174,16 @@
                         </x-admin::form.control-group>
                     </div>
                 </div>
+
+                {!! view_render_event('bagisto.admin.cms.pages.create.card.seo.after') !!}
             </div>
 
             {{-- Right sub-component --}}
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
                 {{-- General --}}
+
+                {!! view_render_event('bagisto.admin.cms.pages.create.card.accordion.general.before') !!}
+
                 <x-admin::accordion>
                     <x-slot:header>
                         <div class="flex items-center justify-between">
@@ -237,7 +251,13 @@
                         </div>
                     </x-slot:content>
                 </x-admin::accordion>
+
+                {!! view_render_event('bagisto.admin.cms.pages.create.card.accordion.general.after') !!}
+
             </div>
         </div>
+
+        {!! view_render_event('bagisto.admin.cms.pages.create.create_form_controls.after') !!}
+
     </x-admin::form>
 </x-admin::layouts>

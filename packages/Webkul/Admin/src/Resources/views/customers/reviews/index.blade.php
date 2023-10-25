@@ -9,10 +9,17 @@
         </p>
     </div>
 
+    {!! view_render_event('admin.customers.reviews.edit.before') !!}
+
     <v-review-edit-drawer></v-review-edit-drawer>
+
+    {!! view_render_event('admin.customers.groups.edit.after') !!}
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-review-edit-drawer-template">
+
+            {!! view_render_event('admin.customers.reviews.list.before') !!}
+
             <x-admin::datagrid
                 src="{{ route('admin.customers.customers.review.index') }}"
                 :isMultiRow="true"
@@ -25,10 +32,10 @@
                 <!-- Datagrid Header -->
                 <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading }">
                     <template v-if="! isLoading">
-                        <div class="row grid grid-rows-1 grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
+                        <div class="row grid grid-rows-1 grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
                             <div
                                 class="flex gap-[10px] items-center"
-                                v-for="(columnGroup, index) in [['name', 'product_name', 'product_review_status'], ['rating', 'created_at', 'product_review_id'], ['title', 'comment']]"
+                                v-for="(columnGroup, index) in [['customer_full_name', 'product_name', 'product_review_status'], ['rating', 'created_at', 'product_review_id'], ['title', 'comment']]"
                             >
                                 @if ($hasPermission)
                                     <label
@@ -95,7 +102,7 @@
                 <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading, performAction }">
                     <template v-if="! isLoading">
                         <div
-                            class="row grid grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800   transition-all hover:bg-gray-50 dark:hover:bg-gray-950  "
+                            class="row grid grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                             v-for="record in records"
                         >
                             <!-- Name, Product, Description -->
@@ -199,6 +206,8 @@
                     </template>
                 </template>
             </x-admin::datagrid>
+
+            {!! view_render_event('admin.customers.reviews.list.after') !!}
 
             <!-- Drawer content -->
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
@@ -317,7 +326,7 @@
                                     </div>
                 
                                     <div class="w-full ">
-                                        <p class="text-gray-600 dark:text-gray-300  font-semibold">
+                                        <p class="text-gray-600 dark:text-gray-300 font-semibold">
                                             @lang('admin::app.customers.reviews.index.edit.rating') 
                                         </p>
 

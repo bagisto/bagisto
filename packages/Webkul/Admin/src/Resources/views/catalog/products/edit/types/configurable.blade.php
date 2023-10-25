@@ -63,7 +63,7 @@
                     />
 
                     <!-- Add Variants Information -->
-                    <div class="flex flex-col items-center">
+                    <div class="flex flex-col gap-[5px] items-center">
                         <p class="text-[16px] text-gray-400 font-semibold">
                             @lang('admin::app.catalog.products.edit.types.configurable.empty-title')
                         </p>
@@ -765,7 +765,7 @@
                                                         type="text"
                                                         :name="'inventories[' + inventorySource.id + ']'"
                                                         v-model="variant.inventories[inventorySource.id]"
-                                                        class="flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                        class="flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                         :class="[errors['inventories[' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
                                                         rules="numeric|min:0"
                                                         :label="inventorySource.name"
@@ -1084,7 +1084,7 @@
                 optionName: function (attribute, optionId) {
                     return attribute.options.find(function (option) {
                         return option.id == optionId;
-                    }).admin_name;
+                    })?.admin_name;
                 },
             }
         });
@@ -1155,7 +1155,7 @@
                 optionName: function (attribute, optionId) {
                     return attribute.options.find(function (option) {
                         return option.id == optionId;
-                    }).admin_name;
+                    })?.admin_name;
                 },
 
                 update(params) {

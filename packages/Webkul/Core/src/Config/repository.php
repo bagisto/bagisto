@@ -62,7 +62,7 @@ return [
          | Time of expiration cache
          |
          */
-        'minutes'    => 30,
+        'minutes'    => 10080,
 
         /*
          |--------------------------------------------------------------------------
@@ -146,7 +146,7 @@ return [
             'Webkul\Core\Repositories\CoreConfigRepository' => [
                 'enabled' => true,
 
-                // 'minutes'    => 30,
+                // 'minutes'    => 10080,
                 
                 // 'clean'      => [
                 //     'enabled' => true,

@@ -58,6 +58,7 @@ class AddressController extends Controller
             'state',
             'city',
             'postcode',
+            'phone',
             'default_address',
         ]), [
             'customer_id' => $customer->id,

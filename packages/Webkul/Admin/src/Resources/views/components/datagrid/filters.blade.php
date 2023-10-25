@@ -4,7 +4,7 @@
         <div v-if="column.type === 'boolean'">
             <div class="flex items-center justify-between">
                 <p
-                    class="text-[14px] font-medium leading-[24px] text-gray-800"
+                    class="text-[14px] font-medium leading-[24px] dark:text-white text-gray-800"
                     v-text="column.label"
                 >
                 </p>
@@ -23,27 +23,42 @@
             </div>
 
             <div class="mb-[8px] mt-[5px]">
-                <select
-                    class="custom-select flex min-h-[39px] w-full rounded-[6px] border border-gray-300 bg-white px-[12px] py-[6px] text-[14px] font-normal text-gray-600 transition-all hover:border-gray-400"
-                    @change="filterPage($event, column)"
-                >
-                    <option value="">@lang('admin::app.components.datagrid.filters.select')</option>
+                <x-admin::dropdown>
+                    <!-- Dropdown Toggler -->
+                    <x-slot:toggle>
+                        <button
+                            type="button"
+                            class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border dark:border-gray-800 bg-white dark:bg-gray-900 px-[10px] py-[6px] text-center leading-[24px] text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400"
+                        >
+                            <span 
+                                class="text-[14px] text-gray-400 dark:text-gray-400" 
+                                v-text="'@lang('admin::app.components.datagrid.filters.select')'"
+                            >
+                            </span>
 
-                    <option
-                        :value="option.value"
-                        v-for="option in column.options"
-                        v-text="option.label"
-                    >
-                    </option>
-                </select>
+                            <span class="icon-sort-down text-[24px]"></span>
+                        </button>
+                    </x-slot:toggle>
+
+                    <!-- Dropdown Content -->
+                    <x-slot:menu>
+                        <x-admin::dropdown.menu.item
+                            v-for="option in column.options"
+                            v-text="option.label"
+                            @click="filterPage(option.value, column)"
+                        >
+                        </x-admin::dropdown.menu.item>
+                    </x-slot:menu>
+                </x-admin::dropdown>
             </div>
 
-            <div class="mb-[16px] flex gap-2">
+            <div class="mb-[16px] flex gap-2 flex-wrap">
                 <p
                     class="flex items-center rounded-[4px] bg-gray-600 px-[8px] py-[4px] font-semibold text-white"
                     v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                 >
-                    <span v-text="appliedColumnValue"></span>
+                    <!-- Retrieving the label from the options based on the applied column value. -->
+                    <span v-text="column.options.find((option => option.value == appliedColumnValue)).label"></span>
 
                     <span
                         class="icon-cross cursor-pointer text-[18px] text-white ltr:ml-[5px] rtl:mr-[5px]"
@@ -60,7 +75,7 @@
             <div v-if="column.options.type === 'basic'">
                 <div class="flex items-center justify-between">
                     <p
-                        class="text-[14px] font-medium leading-[24px] text-gray-800"
+                        class="text-[14px] font-medium leading-[24px] dark:text-white text-gray-800"
                         v-text="column.label"
                     >
                     </p>
@@ -79,27 +94,42 @@
                 </div>
 
                 <div class="mb-[8px] mt-[5px]">
-                    <select
-                        class="custom-select flex min-h-[39px] w-full rounded-[6px] border border-gray-300 bg-white px-[12px] py-[6px] text-[14px] font-normal text-gray-600 transition-all hover:border-gray-400"
-                        @change="filterPage($event, column)"
-                    >
-                        <option value="">@lang('admin::app.components.datagrid.filters.select')</option>
+                    <x-admin::dropdown>
+                        <!-- Dropdown Toggler -->
+                        <x-slot:toggle>
+                            <button
+                                type="button"
+                                class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border dark:border-gray-800 bg-white dark:bg-gray-900 px-[10px] py-[6px] text-center leading-[24px] text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 "
+                            >
+                                <span 
+                                    class="text-[14px] text-gray-400 dark:text-gray-400" 
+                                    v-text="'@lang('admin::app.components.datagrid.filters.select')'"
+                                >
+                                </span>
 
-                        <option
-                            :value="option.value"
-                            v-for="option in column.options.params.options"
-                            v-text="option.label"
-                        >
-                        </option>
-                    </select>
+                                <span class="icon-sort-down text-[24px]"></span>
+                            </button>
+                        </x-slot:toggle>
+
+                        <!-- Dropdown Content -->
+                        <x-slot:menu>
+                            <x-admin::dropdown.menu.item
+                                v-for="option in column.options.params.options"
+                                v-text="option.label"
+                                @click="filterPage(option.value, column)"
+                            >
+                            </x-admin::dropdown.menu.item>
+                        </x-slot:menu>
+                    </x-admin::dropdown>
                 </div>
 
-                <div class="mb-[16px] flex gap-2">
+                <div class="mb-[16px] flex gap-2 flex-wrap">
                     <p
                         class="flex items-center rounded-[4px] bg-gray-600 px-[8px] py-[4px] font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                     >
-                        <span v-text="appliedColumnValue"></span>
+                        <!-- Retrieving the label from the options based on the applied column value. -->
+                        <span v-text="column.options.params.options.find((option => option.value == appliedColumnValue)).label"></span>
 
                         <span
                             class="icon-cross cursor-pointer text-[18px] text-white ltr:ml-[5px] rtl:mr-[5px]"
@@ -114,7 +144,7 @@
             <div v-else-if="column.options.type === 'searchable'">
                 <div class="flex items-center justify-between">
                     <p
-                        class="text-[14px] font-medium leading-[24px] text-gray-800"
+                        class="text-[14px] font-medium leading-[24px] dark:text-white text-gray-800"
                         v-text="column.label"
                     >
                     </p>
@@ -141,7 +171,7 @@
                     </v-datagrid-searchable-dropdown>
                 </div>
 
-                <div class="mb-[16px] flex gap-2">
+                <div class="mb-[16px] flex gap-2 flex-wrap">
                     <p
                         class="flex items-center rounded-[4px] bg-gray-600 px-[8px] py-[4px] font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
@@ -225,7 +255,7 @@
                     />
                 </x-admin::flat-picker.date>
 
-                <div class="mb-[16px] flex gap-2">
+                <div class="mb-[16px] flex gap-2 flex-wrap">
                     <p
                         class="flex items-center rounded-[4px] bg-gray-600 px-[8px] py-[3px] font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
@@ -309,7 +339,7 @@
                     />
                 </x-admin::flat-picker.datetime>
 
-                <div class="mb-[16px] flex gap-2">
+                <div class="mb-[16px] flex gap-2 flex-wrap">
                     <p
                         class="flex items-center rounded-[4px] bg-gray-600 px-[8px] py-[3px] font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
@@ -351,14 +381,14 @@
             <div class="mb-[8px] mt-[5px] grid">
                 <input
                     type="text"
-                    class="block w-full rounded-[6px] border dark:border-gray-800   bg-white dark:bg-gray-900  px-[8px] py-[6px] text-[14px] leading-[24px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400  focus:border-gray-400  dark:focus:border-gray-400 "
+                    class="block w-full rounded-[6px] border dark:border-gray-800 bg-white dark:bg-gray-900 px-[8px] py-[6px] text-[14px] leading-[24px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400"
                     :name="column.index"
                     :placeholder="column.label"
                     @keyup.enter="filterPage($event, column)"
                 />
             </div>
 
-            <div class="mb-[16px] flex gap-2">
+            <div class="mb-[16px] flex gap-2 flex-wrap">
                 <p
                     class="flex items-center rounded-[4px] bg-gray-600 px-[8px] py-[4px] font-semibold text-white"
                     v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
@@ -378,48 +408,69 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-datagrid-searchable-dropdown-template">
-        <div class="relative">
-            <div class="relative my-2 rounded border-2">
-                <ul class="list-reset">
-                    <li class="p-2">
-                        <input
-                            class="block w-full rounded-[6px] border border-gray-300 bg-white px-[8px] py-[6px] text-[14px] leading-[24px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
-                            @keyup="lookUp($event)"
-                        >
-                    </li>
+        <x-admin::dropdown ::close-on-click="false">
+            <!-- Dropdown Toggler -->
+            <x-slot:toggle>
+                <button
+                    type="button"
+                    class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border dark:border-gray-800 bg-white dark:bg-gray-900 px-[10px] py-[6px] text-center leading-[24px] text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 "
+                >
+                    <span
+                        class="text-[14px] text-gray-400 dark:text-gray-400" 
+                        v-text="'@lang('admin::app.components.datagrid.filters.select')'"
+                    >
+                    </span>
 
-                    <ul>
-                        <li v-if="!isMinimumCharacters">
-                            <p
-                                class="hover:bg-grey-light block cursor-pointer p-2 text-black"
-                                v-text="'@lang('admin::app.components.datagrid.filters.dropdown.searchable.atleast-two-chars')'"
-                            >
-                            </p>
-                        </li>
+                    <span class="icon-sort-down text-[24px]"></span>
+                </button>
+            </x-slot:toggle>
 
-                        <li v-else-if="!searchedOptions.length">
-                            <p
-                                class="hover:bg-grey-light block cursor-pointer p-2 text-black"
-                                v-text="'@lang('admin::app.components.datagrid.filters.dropdown.searchable.no-results')'"
-                            >
-                            </p>
-                        </li>
+            <!-- Dropdown Content -->
+            <x-slot:menu>
+                <div class="relative">
+                    <div class="relative rounded">
+                        <ul class="list-reset">
+                            <li class="p-2">
+                                <input
+                                    class="block w-full rounded-[6px] border dark:border-gray-800 bg-white dark:bg-gray-900 px-[8px] py-[6px] text-[14px] leading-[24px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400"
+                                    @keyup="lookUp($event)"
+                                >
+                            </li>
 
-                        <li
-                            v-for="option in searchedOptions"
-                            v-else
-                        >
-                            <p
-                                class="hover:bg-grey-light block cursor-pointer p-2 text-black"
-                                v-text="option.label"
-                                @click="selectOption(option)"
-                            >
-                            </p>
-                        </li>
-                    </ul>
-                </ul>
-            </div>
-        </div>
+                            <ul class="p-2">
+                                <li v-if="!isMinimumCharacters">
+                                    <p
+                                        class="block p-2 text-gray-600 dark:text-gray-300"
+                                        v-text="'@lang('admin::app.components.datagrid.filters.dropdown.searchable.atleast-two-chars')'"
+                                    >
+                                    </p>
+                                </li>
+
+                                <li v-else-if="!searchedOptions.length">
+                                    <p
+                                        class="block p-2 text-gray-600 dark:text-gray-300"
+                                        v-text="'@lang('admin::app.components.datagrid.filters.dropdown.searchable.no-results')'"
+                                    >
+                                    </p>
+                                </li>
+
+                                <li
+                                    v-for="option in searchedOptions"
+                                    v-else
+                                >
+                                    <p
+                                        class="text-[14px] text-gray-600 dark:text-gray-300 p-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950"
+                                        v-text="option.label"
+                                        @click="selectOption(option)"
+                                    >
+                                    </p>
+                                </li>
+                            </ul>
+                        </ul>
+                    </div>
+                </div>
+            </x-slot:menu>
+        </x-admin::dropdown>
     </script>
 
     <script type="module">

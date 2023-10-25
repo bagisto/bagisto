@@ -4,7 +4,11 @@
         @lang('admin::app.customers.groups.index.title')
     </x-slot:title>
 
+    {!! view_render_event('admin.customers.groups.create.before') !!}
+
     <v-create-group></v-create-group>
+
+    {!! view_render_event('admin.customers.groups.create.after') !!}
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-create-group-template">
@@ -30,6 +34,8 @@
                     </div>
                 </div>
 
+                {!! view_render_event('admin.customers.groups.list.before') !!}
+
                 <!-- DataGrid -->
                 <x-admin::datagrid src="{{ route('admin.customers.groups.index') }}" ref="datagrid">
                     @php
@@ -38,7 +44,7 @@
 
                     <!-- DataGrid Header -->
                     <template #header="{ columns, records, sortPage, applied}">
-                        <div class="row grid grid-cols-{{ $hasPermission ? '4' : '3' }} grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800   text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold ">
+                        <div class="row grid grid-cols-{{ $hasPermission ? '4' : '3' }} grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold">
                             <div
                                 class="flex gap-[10px] cursor-pointer"
                                 v-for="(columnGroup, index) in ['id', 'code', 'name']"
@@ -81,7 +87,7 @@
                     <template #body="{ columns, records, performAction }">
                         <div
                             v-for="record in records"
-                            class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800   text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950  "
+                            class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                             :style="'grid-template-columns: repeat(' + (record.actions.length ? 4 : 3) + ', 1fr);'"
                         >
                             <!-- Id -->
@@ -117,6 +123,8 @@
                     </template>
                 </x-admin::datagrid>
 
+                {!! view_render_event('admin.customers.groups.list.after') !!}
+
                 <!-- Modal Form -->
                 <x-admin::form
                     v-slot="{ meta, errors, handleSubmit }"
@@ -144,7 +152,7 @@
             
                             <x-slot:content>
                                 <!-- Modal Content -->
-                                <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
+                                <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.customers.groups.index.create.code')

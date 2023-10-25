@@ -47,6 +47,8 @@
                 </div>
             </div>
 
+            {!! view_render_event('admin.marketing.communications.events.list.before') !!}
+
             <!-- Datagrid -->
             <x-admin::datagrid
                 src="{{ route('admin.marketing.communications.events.index') }}"
@@ -58,7 +60,7 @@
 
                 <!-- Datagrid Header -->
                 <template #header="{ columns, records, sortPage, applied}">
-                    <div class="row grid grid-cols-{{ $hasPermission ? '4' : '3' }} grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800   text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold ">
+                    <div class="row grid grid-cols-{{ $hasPermission ? '4' : '3' }} grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold">
                         <div
                             class="flex gap-[10px] cursor-pointer"
                             v-for="(columnGroup, index) in ['id', 'name', 'date']"
@@ -101,7 +103,7 @@
                  <template #body="{ columns, records, performAction }">
                     <div
                         v-for="record in records"
-                        class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800   text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950  "
+                        class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                         :style="'grid-template-columns: repeat(' + (record.actions.length ? 4 : 3) + ', 1fr);'"
                     >
                         <!-- Id -->
@@ -137,6 +139,10 @@
                 </template>
             </x-admin::datagrid>
 
+            {!! view_render_event('admin.marketing.communications.events.list.after') !!}
+
+            {!! view_render_event('admin.marketing.communications.events.create.before') !!}
+
             <!-- Email Events form -->
             <x-admin::form
                 v-slot="{ meta, errors, handleSubmit }"
@@ -147,6 +153,9 @@
                     @submit="handleSubmit($event, updateOrCreate)"
                     ref="eventCreateForm"
                 >
+
+                    {!! view_render_event('bagisto.admin.marketing.communications.events.create_form_controls.before') !!}
+
                     <x-admin::modal ref="emailEvents">
                         <x-slot:header>
                             <p
@@ -165,7 +174,7 @@
                         </x-slot:header>
 
                         <x-slot:content>
-                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
+                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
 
                                 <!-- Id -->
                                 <x-admin::form.control-group.control
@@ -255,8 +264,14 @@
                             </button>
                         </x-slot:footer>
                     </x-admin::modal>
+
+                    {!! view_render_event('bagisto.admin.marketing.communications.events.create_form_controls.after') !!}
+
                 </form>
             </x-admin::form>
+
+            {!! view_render_event('admin.marketing.communications.events.create.after') !!}
+
         </script>
 
         <script type="module">

@@ -4,11 +4,16 @@
         @lang('admin::app.marketing.communications.templates.edit.title')
     </x-slot:title>
 
+    {!! view_render_event('bagisto.admin.marketing.communications.templates.edit.before') !!}
+
     {{-- Input Form --}}
     <x-admin::form
         :action="route('admin.marketing.communications.email_templates.update', $template->id)"
         method="PUT"
     >
+
+        {!! view_render_event('bagisto.admin.marketing.communications.templates.edit.edit_form_controls.before') !!}
+
         <div class="flex justify-between items-center">
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.marketing.communications.templates.edit.title')
@@ -18,7 +23,7 @@
                 {{-- Cancel Button --}}
                 <a
                     href="{{ route('admin.marketing.communications.email_templates.index') }}"
-                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
                 >
                     @lang('admin::app.marketing.communications.templates.edit.back-btn')
                 </a>
@@ -37,8 +42,11 @@
         <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
             {{-- Left sub-component --}}
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+
+                {!! view_render_event('bagisto.admin.marketing.communications.templates.edit.card.content.before') !!}
+
                 {{--Content --}}
-                <div class="p-[16px] bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <div class="w-full">
                         {{-- Template Textarea --}}
                         <x-admin::form.control-group>
@@ -65,12 +73,18 @@
                         </x-admin::form.control-group>
                     </div>
                 </div>
+
+                {!! view_render_event('bagisto.admin.marketing.communications.templates.edit.card.content.after') !!}
+
             </div>
 
             {{-- Right sub-component --}}
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
                 {{-- General --}}
-                <div class="bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+
+                {!! view_render_event('bagisto.admin.marketing.communications.templates.edit.card.accordion.general.before') !!}
+
+                <div class="bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <x-admin::accordion>
                         <x-slot:header>
                             <div class="flex items-center justify-between">
@@ -136,7 +150,17 @@
                         </x-slot:content>
                     </x-admin::accordion>
                 </div>
+                
+                {!! view_render_event('bagisto.admin.marketing.communications.templates.edit.card.accordion.general.after') !!}
+
             </div>
         </div>
+
+
+        {!! view_render_event('bagisto.admin.marketing.communications.templates.edit.edit_form_controls.before') !!}
+
     </x-admin::form>
+
+    {!! view_render_event('bagisto.admin.marketing.communications.templates.edit.after') !!}
+
 </x-admin::layouts>

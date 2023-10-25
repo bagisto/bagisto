@@ -31,6 +31,8 @@ class SubscriptionNotification extends Mailable
         return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
             ->to($this->customer->email)
             ->subject(trans('shop::app.emails.customers.subscribed.subject'))
-            ->view('shop::emails.customers.subscribed');
+            ->view('shop::emails.customers.subscribed', [
+                'fullName' => $this->customer->first_name . ' ' . $this->customer->last_name,
+            ]);
     }
 }

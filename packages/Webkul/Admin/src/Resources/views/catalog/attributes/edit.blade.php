@@ -16,6 +16,9 @@
             type="text/x-template"
             id="v-edit-attributes-template"
         >
+
+            {!! view_render_event('bagisto.admin.catalog.attributes.edit.before') !!}
+
             <!-- Input Form -->
             <x-admin::form
                 :action="route('admin.catalog.attributes.update', $attribute->id)"
@@ -49,12 +52,12 @@
                 <!-- body content -->
                 <div class="flex gap-[10px] mt-[14px]">
                     <!-- Left sub Component -->
-                    <div class="flex flex-col gap-[8px] flex-1">
+                    <div class="flex flex-col flex-1 gap-[8px] overflow-auto">
 
-                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.attributes.before', ['attribute' => $attribute]) !!}
+                        {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.label.before', ['attribute' => $attribute]) !!}
 
                         <!-- Label -->
-                        <div class="p-[16px] bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
+                        <div class="p-[16px] bg-white dark:bg-gray-900 box-shadow rounded-[4px]">
                             <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @lang('admin::app.catalog.attributes.edit.label')
                             </p>
@@ -104,7 +107,7 @@
                             @endforeach
                         </div>
 
-                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.attributes.after', ['attribute' => $attribute]) !!}
+                        {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.label.after', ['attribute' => $attribute]) !!}
 
                         <!-- Options -->
                         <div
@@ -196,9 +199,9 @@
                                 </div>
 
                                 <!-- Table Information -->
-                                <div class="mt-[15px] overflow-auto">
-                                    <x-admin::table class="w-full text-left">
-                                        <x-admin::table.thead class="text-[14px] font-medium">
+                                <div class="mt-[15px] overflow-x-auto">
+                                    <x-admin::table>
+                                        <x-admin::table.thead class="text-[14px] font-medium dark:bg-gray-800">
                                             <x-admin::table.thead.tr>
                                                 <x-admin::table.th class="!p-0"></x-admin::table.th>
 
@@ -233,7 +236,7 @@
                                             item-key="id"
                                         >
                                             <template #item="{ element, index }" v-show="! element.isDelete">
-                                                <x-admin::table.thead.tr class="text-center">
+                                                <x-admin::table.thead.tr class="text-center hover:bg-gray-50 dark:hover:bg-gray-950">
                                                     <input
                                                         type="hidden"
                                                         :name="'options[' + element.id + '][isNew]'"
@@ -293,7 +296,11 @@
 
                                                     <!-- Admin-->
                                                     <x-admin::table.td>
-                                                        <p v-text="element.admin_name"></p>
+                                                        <p
+                                                            class="dark:text-white"
+                                                            v-text="element.admin_name"
+                                                        >
+                                                        </p>
 
                                                         <input
                                                             type="hidden"
@@ -304,7 +311,11 @@
 
                                                     <!-- Loacles -->
                                                      <x-admin::table.td v-for="locale in allLocales">
-                                                        <p v-text="element['locales'][locale.code]"></p>
+                                                        <p
+                                                            class="dark:text-white"
+                                                            v-text="element['locales'][locale.code]"
+                                                        >
+                                                        </p>
                                                         
                                                         <input
                                                             type="hidden"
@@ -316,13 +327,13 @@
                                                     <!-- Actions Button -->
                                                     <x-admin::table.td class="!px-0">
                                                         <span
-                                                            class="icon-edit p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950  max-sm:place-self-center"
+                                                            class="icon-edit p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                                             @click="editOptions(element)"
                                                         >
                                                         </span>
                                                         
                                                         <span
-                                                            class="icon-delete p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950  max-sm:place-self-center"
+                                                            class="icon-delete p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-800  max-sm:place-self-center"
                                                             @click="removeOption(element.id)"
                                                         >
                                                         </span>
@@ -344,7 +355,7 @@
                                         >
 
                                         <!-- Add Attribute Options Information -->
-                                        <div class="flex flex-col items-center">
+                                        <div class="flex flex-col gap-[5px] items-center">
                                             <p class="text-[16px] text-gray-400 font-semibold">
                                                 @lang('admin::app.catalog.attributes.edit.add-attribute-options')
                                             </p>
@@ -370,10 +381,10 @@
                     <!-- Right sub-component -->
                     <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
 
-                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.general.before', ['attribute' => $attribute]) !!}
+                        {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.general.before', ['attribute' => $attribute]) !!}
 
                         <!-- General -->
-                        <div class="bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
+                        <div class="bg-white dark:bg-gray-900 box-shadow rounded-[4px]">
                             <div class="flex justify-between items-center p-[6px]">
                                 <p class="p-[10px] text-gray-800 dark:text-white text-[16px] font-semibold">
                                     @lang('admin::app.catalog.attributes.edit.general')
@@ -509,7 +520,9 @@
                             </div>
                         </div>
 
-                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.general.after', ['attribute' => $attribute]) !!}
+                        {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.general.after', ['attribute' => $attribute]) !!}
+
+                        {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.validations.before', ['attribute' => $attribute]) !!}
 
                         <!-- Validations -->
                         <x-admin::accordion>
@@ -624,9 +637,9 @@
                             </x-slot:content>
                         </x-admin::accordion>
 
-                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.validations.controls.after', ['attribute' => $attribute]) !!}
+                        {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.validations.after', ['attribute' => $attribute]) !!}
 
-                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.configuration.before', ['attribute' => $attribute]) !!}
+                        {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.configuration.before', ['attribute' => $attribute]) !!}
 
                         <!-- Configurations -->
                         <x-admin::accordion>
@@ -638,7 +651,7 @@
                         
                             <x-slot:content>
                                 <!-- Value Per Locale -->
-                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] opacity-70 select-none ">
+                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] opacity-70 select-none">
                                     @php
                                         $selectedOption = old('value_per_locale') ?? $attribute->value_per_locale
                                     @endphp
@@ -665,7 +678,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Value Per Channel -->
-                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] opacity-70 select-none ">
+                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] opacity-70 select-none">
                                     @php
                                         $selectedOption = old('value_per_channel') ?? $attribute->value_per_channel
                                     @endphp
@@ -817,7 +830,7 @@
                             </x-slot:content>
                         </x-admin::accordion>
 
-                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.configuration.controls.after', ['attribute' => $attribute]) !!}
+                        {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.configuration.configuration.after', ['attribute' => $attribute]) !!}
                     </div>
                 </div>
             </x-admin::form>
@@ -828,7 +841,11 @@
                 as="div"
                 ref="modelForm"
             >
-                <form @submit.prevent="handleSubmit($event, storeOptions)" enctype="multipart/form-data">
+                <form
+                    @submit.prevent="handleSubmit($event, storeOptions)"
+                    enctype="multipart/form-data"
+                    ref="editOptionsForm"
+                >
                     <x-admin::modal
                         @toggle="listenModel"
                         ref="addOptionsRow"
@@ -874,13 +891,13 @@
 
                                     <x-admin::form.control-group.control
                                         type="color"
-                                        name="swatch_value"
+                                        name="swatch_value[]"
                                         :placeholder="trans('admin::app.catalog.attributes.edit.color')"
                                     >
                                     </x-admin::form.control-group.control>
 
                                     <x-admin::form.control-group.error
-                                        control-name="swatch_value"
+                                        control-name="swatch_value[]"
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
@@ -960,6 +977,9 @@
                     </x-admin::modal>
                 </form>
             </x-admin::form>
+
+            {!! view_render_event('bagisto.admin.catalog.attributes.edit.after') !!}
+
         </script>
 
         <script type="module">
@@ -1010,6 +1030,12 @@
                         } else {
                             this.optionsData.push(params);
                         }
+
+                        let formData = new FormData(this.$refs.editOptionsForm);
+
+                        const sliderImage = formData.get("swatch_value[]");
+
+                        params.swatch_value = sliderImage;
 
                         this.$refs.addOptionsRow.toggle();
 

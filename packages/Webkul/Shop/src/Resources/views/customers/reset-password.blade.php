@@ -121,7 +121,7 @@
                         </x-shop::form.control-group.error>
                     </x-shop::form.control-group>
 
-                    {!! view_render_event('bagisto.shop.customers.reset_password_form_controls.before') !!}
+                    {!! view_render_event('bagisto.shop.customers.reset_password_form_controls.after') !!}
 
                     <div class="flex gap-[36px] flex-wrap mt-[30px] items-center">
                         <button
@@ -135,12 +135,12 @@
                 </x-shop::form>
             </div>
 
-            {!! view_render_event('bagisto.shop.customers.reset_password.before') !!}
+            {!! view_render_event('bagisto.shop.customers.reset_password.after') !!}
 
         </div>
 
         <p class="mt-[30px] mb-[15px] text-center text-[#6E6E6E] text-xs">
-            @lang('shop::app.customers.reset_password.footer')
+            @lang('shop::app.customers.reset_password.footer', ['current_year'=> date('Y') ])
         </p>
     </div>
 </x-shop::layouts>

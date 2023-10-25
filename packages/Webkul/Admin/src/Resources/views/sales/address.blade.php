@@ -7,7 +7,7 @@
         {{ $address->name }}
     </p>
     
-    <p class="text-gray-600 dark:text-gray-300  leading-6">
+    <p class="text-gray-600 dark:text-gray-300 leading-6">
         {{ $address->address1 }}<br>
 
         @if ($address->address2)

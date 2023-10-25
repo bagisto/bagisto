@@ -2,44 +2,60 @@
 
 namespace Webkul\Admin\Http\Controllers;
 
-use Webkul\Admin\Services\DashboardService;
+use Webkul\Admin\Helpers\Dashboard;
 
 class DashboardController extends Controller
 {
     /**
-     * Create a controller instance.
+     * Request param functions
+     * 
+     * @var array
      */
-    public function __construct(protected DashboardService $dashboardService)
+    protected $typeFunctions = [
+        'over-all'                 => 'getOverAllStats',
+        'today'                    => 'getTodayStats',
+        'stock-threshold-products' => 'getStockThresholdProducts',
+        'total-sales'              => 'getSalesStats',
+        'total-visitors'           => 'getVisitorStats',
+        'top-selling-products'     => 'getTopSellingProducts',
+        'top-customers'            => 'getTopCustomers',
+    ];
+
+    /**
+     * Create a controller instance.
+     * 
+     * @param  \Webkul\Admin\Helpers\Dashboard  $dashboardHelper
+     * @return void
+     */
+    public function __construct(protected Dashboard $dashboardHelper)
     {
     }
 
     /**
      * Dashboard page.
+     * 
+     * @return \Illuminate\View\View|\Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        if (request()->ajax()) {
-            $statistics = $this->dashboardService
-                ->setStartDate(request()->date('start'))
-                ->setEndDate(request()->date('end'))
-                ->getStatistics();
+        return view('admin::dashboard.index')->with([
+            'startDate' => $this->dashboardHelper->getStartDate(),
+            'endDate'   => $this->dashboardHelper->getEndDate(),
+        ]);
+    }
 
-            return response()->json([
-                'statistics' => $statistics,
-                'startDate'  => $this->dashboardService->getStartDate()->format('d M'),
-                'endDate'    => $this->dashboardService->getEndDate()->format('d M'),
-            ]);
-        }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function stats()
+    {
+        $stats = $this->dashboardHelper->{$this->typeFunctions[request()->query('type')]}();
 
-        $statistics = $this->dashboardService
-            ->setStartDate(request()->date('start'))
-            ->setEndDate(request()->date('end'))
-            ->getStatistics();
-
-        return view('admin::dashboard.index', compact('statistics'))
-            ->with([
-                'startDate' => $this->dashboardService->getStartDate(),
-                'endDate'   => $this->dashboardService->getEndDate(),
-            ]);
+        return response()->json([
+            'statistics' => $stats,
+            'date_range' => $this->dashboardHelper->getDateRange(),
+        ]);
     }
 }

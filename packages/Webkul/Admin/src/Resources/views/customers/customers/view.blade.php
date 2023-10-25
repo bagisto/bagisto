@@ -35,12 +35,14 @@
             {{-- Back Button --}}
             <a
                 href="{{ route('admin.customers.customers.index') }}"
-                class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
+                class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
             >
                 @lang('admin::app.customers.customers.view.back-btn')
             </a>
         </div>
     </div>
+
+    {!! view_render_event('bagisto.admin.customers.customers.view.filters.before') !!}
 
     {{-- Filters --}}
     <div class="flex gap-x-[4px] gap-y-[8px] items-center flex-wrap mt-[28px]">
@@ -50,7 +52,7 @@
         {{-- Account Delete button --}}
         @if (bouncer()->hasPermission('customers.customers.delete'))
             <div 
-                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800  hover:rounded-[6px]"
+                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
                 @click="$emitter.emit('open-confirm-modal', {
                     message: '@lang('admin::app.customers.customers.view.account-delete-confirmation')',
 
@@ -75,12 +77,17 @@
         @endif
     </div>
 
+    {!! view_render_event('bagisto.admin.customers.customers.view.filters.after') !!}
+
     {{-- Content --}}
     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
         {{-- Left Component --}}
         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+
+            {!! view_render_event('bagisto.admin.customers.customers.view.card.orders.before') !!}
+
             {{-- Orders --}}
-            <div class=" bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+            <div class=" bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                 @if ($totalOrderCount = count($customer->orders))
                     <div class=" p-[16px] flex justify-between">
                         {{-- Total Order Count --}}
@@ -95,14 +102,14 @@
                         @endphp
 
                         <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
-                            @lang('admin::app.customers.customers.view.total-revenue', ['revenue' =>  $revenue])
+                            @lang('admin::app.customers.customers.view.total-revenue', ['revenue' => $revenue])
                         </p>
                     </div>
 
                     {{-- Order Details --}}
                     <div class="table-responsive grid w-full">
                         @foreach ($customer->orders as $order)
-                            <div class="flex justify-between items-center px-[16px] py-[16px] transition-all hover:bg-gray-50 dark:hover:bg-gray-950  ">
+                            <div class="flex justify-between items-center px-[16px] py-[16px] transition-all hover:bg-gray-50 dark:hover:bg-gray-950">
                                 <div class="row grid grid-cols-3 w-full">
                                     <div class="flex gap-[10px]">
                                         <div class="flex flex-col gap-[6px]">
@@ -194,12 +201,12 @@
 
                                 <a 
                                     href="{{ route('admin.sales.orders.view', $order->id) }}" 
-                                    class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 "
+                                    class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
                                 >
                                 </a>
                             </div>
 
-                            <span class="block w-full border-b-[1px] dark:border-gray-800  "></span>
+                            <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
                         @endforeach
                     </div>
                 @else
@@ -215,7 +222,7 @@
                         <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
                             <!-- Placeholder Image -->
                             <img
-                                src="{{ bagisto_asset('images/empty-placeholders/orders-empty.svg') }}"
+                                src="{{ bagisto_asset('images/empty-placeholders/orders.svg') }}"
                                 class="w-[80px] h-[80px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
                             />
 
@@ -229,11 +236,15 @@
                 @endif
             </div>
 
+            {!! view_render_event('bagisto.admin.customers.customers.view.card.orders.after') !!}
+
+            {!! view_render_event('bagisto.admin.customers.customers.view.card.invoices.before') !!}
+
             {{-- Invoices --}}
-            <div class="bg-white dark:bg-gray-900  rounded box-shadow">
+            <div class="bg-white dark:bg-gray-900 rounded box-shadow">
                 @if ($totalInvoiceCount = count($customer->invoices))
                     {{--Invoice Count --}}
-                    <p class=" p-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
+                    <p class="p-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.customers.customers.view.invoice', ['invoice_count' => $totalInvoiceCount])
                     </p>
 
@@ -253,7 +264,7 @@
                             @foreach ($customer->invoices as $invoice)
                                 <tbody>
                                     {{-- Invoice Details --}}
-                                    <tr class="bg-white dark:bg-gray-900  border-b transition-all hover:bg-gray-50 dark:hover:bg-gray-950 dark:border-gray-800">
+                                    <tr class="bg-white dark:bg-gray-900 border-b transition-all hover:bg-gray-50 dark:hover:bg-gray-950 dark:border-gray-800">
                                         <td class="px-6 py-[16px] text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.customers.customers.view.invoice-id-prefix', ['invoice_id' => $invoice->id] )
                                         </td>
@@ -300,8 +311,12 @@
                 @endif
             </div>
 
+            {!! view_render_event('bagisto.admin.customers.customers.view.card.invoices.after') !!}
+
+            {!! view_render_event('bagisto.admin.customers.customers.view.card.reviews.before') !!}
+
             {{-- Reviews --}}
-            <div class="bg-white dark:bg-gray-900  rounded box-shadow">
+            <div class="bg-white dark:bg-gray-900 rounded box-shadow">
                 @if($totalReviewsCount = count($customer->reviews) )
                     {{-- Reviews Count --}}
                     <p class=" p-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
@@ -310,7 +325,7 @@
 
                     @foreach($customer->reviews as $review)
                         {{-- Reviews Details --}}
-                        <div class="grid gap-y-[16px] p-[16px] transition-all hover:bg-gray-50 dark:hover:bg-gray-950  ">
+                        <div class="grid gap-y-[16px] p-[16px] transition-all hover:bg-gray-50 dark:hover:bg-gray-950">
                             <div class="flex justify-start [&amp;>*]:flex-1">
                                 <div class="flex flex-col gap-[6px]">
                                     {{-- Review Name --}}
@@ -379,11 +394,15 @@
                                     </p>
                                 </div>
 
-                                <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 "></span>
+                                <a 
+                                    href="{{ route('admin.catalog.products.edit', $review->product->id) }}"
+                                    class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
+                                >
+                                </a>
                             </div>
                         </div>
 
-                        <span class="block w-full border-b-[1px] dark:border-gray-800  "></span>
+                        <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
                     @endforeach    
                 @else
                     {{-- Empty Invoice Container --}}
@@ -397,7 +416,7 @@
                         <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
                             {{-- Placeholder Image --}}
                             <img
-                                src="{{ bagisto_asset('images/empty-placeholders/reviews-empty.svg') }}"
+                                src="{{ bagisto_asset('images/empty-placeholders/reviews.svg') }}"
                                 class="w-[80px] h-[80px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
                             />
 
@@ -411,9 +430,13 @@
                 @endif
             </div>
           
+            {!! view_render_event('bagisto.admin.customers.customers.view.card.reviews.after') !!}
+
+            {!! view_render_event('bagisto.admin.customers.customers.view.card.notes.before') !!}
+
             {{-- Notes Form --}}
             <div class="bg-white dark:bg-gray-900  rounded box-shadow">
-                <p class=" p-[16px] pb-0 text-[16px] text-gray-800 dark:text-white font-semibold">
+                <p class="p-[16px] pb-0 text-[16px] text-gray-800 dark:text-white font-semibold">
                     @lang('admin::app.customers.customers.view.add-note')
                 </p>
 
@@ -472,7 +495,7 @@
                 </x-admin::form> 
 
                 {{-- Notes List --}}
-                <span class="block w-full border-b-[1px] dark:border-gray-800  "></span>
+                <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
 
                 @foreach ($customer->notes as $note)
                     <div class="grid gap-[6px] p-[16px]">
@@ -494,13 +517,19 @@
                         </p>
                     </div>
 
-                    <span class="block w-full border-b-[1px] dark:border-gray-800  "></span>
+                    <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
                 @endforeach
             </div>
+
+            {!! view_render_event('bagisto.admin.customers.customers.view.card.notes.after') !!}
+
         </div>
 
         {{-- Right Component --}}
         <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+
+            {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.customer.before') !!}
+
             {{-- Information --}}
             <x-admin::accordion>
                 <x-slot:header>
@@ -542,6 +571,10 @@
                     </div>
                 </x-slot:content>
             </x-admin::accordion> 
+
+            {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.customer.after') !!}
+
+            {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.address.before') !!}
 
             {{-- Addresses listing--}}
             <x-admin::accordion>
@@ -644,7 +677,7 @@
                             </div>
                             
                             @if ($index < count($customer->addresses) - 1)
-                                <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] dark:border-gray-800  "></span>
+                                <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] dark:border-gray-800"></span>
                             @endif
                         @endforeach
                     @else    
@@ -668,6 +701,9 @@
                     @endif
                 </x-slot:content>
             </x-admin::accordion>
+
+            {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.address.after') !!}
+
         </div>
     </div>
 </x-admin::layouts>
