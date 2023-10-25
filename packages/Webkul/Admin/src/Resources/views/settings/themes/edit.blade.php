@@ -197,7 +197,7 @@
                                     alt="add-product-to-store"
                                 >
                 
-                                <div class="flex flex-col items-center">
+                                <div class="flex flex-col gap-[5px] items-center">
                                     <p class="text-[16px] text-gray-400 font-semibold">
                                         @lang('admin::app.settings.themes.edit.slider-add-btn')
                                     </p>
@@ -581,7 +581,7 @@
                                 alt="add-product-to-store"
                             >
             
-                            <div class="flex flex-col items-center">
+                            <div class="flex flex-col gap-[5px] items-center">
                                 <p class="text-[16px] text-gray-400 font-semibold">
                                     @lang('admin::app.settings.themes.edit.product-carousel')
                                 </p>
@@ -930,7 +930,7 @@
                                 alt="add-category-to-store"
                             >
             
-                            <div class="flex flex-col items-center">
+                            <div class="flex flex-col gap-[5px] items-center">
                                 <p class="text-[16px] text-gray-400 font-semibold">
                                     @lang('admin::app.settings.themes.edit.category-carousel')
                                 </p>
@@ -1497,7 +1497,7 @@
                                     alt="add-product-to-store"
                                 >
                 
-                                <div class="flex flex-col items-center">
+                                <div class="flex flex-col gap-[5px] items-center">
                                     <p class="text-[16px] text-gray-400 font-semibold">
                                         @lang('admin::app.settings.themes.edit.footer-link')
                                         
