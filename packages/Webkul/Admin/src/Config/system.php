@@ -372,7 +372,7 @@ return [
                 'name'  => 'whatsapp',
                 'title' => 'admin::app.configuration.index.catalog.products.social-share.enable-share-whatsapp',
                 'type'  => 'boolean',
-                'info'  => 'What\'s App share link just will appear to mobile devices.'
+                'info'  => 'What\'s App share link just will appear to mobile devices.',
             ], [
                 'name'  => 'linkedin',
                 'title' => 'admin::app.configuration.index.catalog.products.social-share.enable-share-linkedin',
@@ -597,7 +597,7 @@ return [
                 'title'         => 'admin::app.configuration.index.customer.settings.social-login.enable-github',
                 'type'          => 'boolean',
                 'channel_based' => true,
-            ]
+            ],
         ],
     ],
 
@@ -724,11 +724,11 @@ return [
         'info' => 'admin::app.configuration.index.sales.info',
         'sort' => 5,
     ], [
-       'key'  => 'sales.shipping',
-       'name' => 'admin::app.configuration.index.sales.shipping.title',
-       'info' => 'admin::app.configuration.index.sales.shipping.info',
-       'icon' => 'settings/shipping.svg',
-       'sort' => 1,
+        'key'  => 'sales.shipping',
+        'name' => 'admin::app.configuration.index.sales.shipping.title',
+        'info' => 'admin::app.configuration.index.sales.shipping.info',
+        'icon' => 'settings/shipping.svg',
+        'sort' => 1,
     ], [
         'key'    => 'sales.shipping.origin',
         'name'   => 'admin::app.configuration.index.sales.shipping.origin.title',
@@ -1133,8 +1133,8 @@ return [
                         'value' => 4,
                     ],
                 ],
-            ]
-        ]
+            ],
+        ],
     ], [
         'key'    => 'sales.payment_methods.paypal_smart_button',
         'name'   => 'admin::app.configuration.index.sales.payment-methods.paypal-smart-button',
@@ -1213,8 +1213,8 @@ return [
                         'value' => 4,
                     ],
                 ],
-            ]
-        ]
+            ],
+        ],
     ], [
         'key'  => 'sales.order_settings',
         'name' => 'admin::app.configuration.index.sales.order-settings.title',

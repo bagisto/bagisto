@@ -5,7 +5,6 @@ namespace Webkul\Shop\Mail\Customer;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class NoteNotification extends Mailable
 {

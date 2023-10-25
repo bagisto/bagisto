@@ -2,9 +2,9 @@
 
 namespace Webkul\Product\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductDownloadableLink;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProductDownloadableLinkFactory extends Factory
 {
@@ -17,12 +17,10 @@ class ProductDownloadableLinkFactory extends Factory
 
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
     public function definition(): array
     {
-        $now = date("Y-m-d H:i:s");
+        $now = date('Y-m-d H:i:s');
 
         $filename = 'ProductImageExampleForUpload.jpg';
 

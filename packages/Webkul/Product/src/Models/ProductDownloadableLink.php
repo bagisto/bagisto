@@ -3,11 +3,11 @@
 namespace Webkul\Product\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Webkul\Core\Eloquent\TranslatableModel;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Webkul\Product\Database\Factories\ProductDownloadableLinkFactory;
+use Illuminate\Support\Facades\Storage;
+use Webkul\Core\Eloquent\TranslatableModel;
 use Webkul\Product\Contracts\ProductDownloadableLink as ProductDownloadableLinkContract;
+use Webkul\Product\Database\Factories\ProductDownloadableLinkFactory;
 
 class ProductDownloadableLink extends TranslatableModel implements ProductDownloadableLinkContract
 {
@@ -73,9 +73,6 @@ class ProductDownloadableLink extends TranslatableModel implements ProductDownlo
         return $this->sample_file_url();
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = parent::toArray();
@@ -93,8 +90,6 @@ class ProductDownloadableLink extends TranslatableModel implements ProductDownlo
 
     /**
      * Create a new factory instance for the model.
-     *
-     * @return Factory
      */
     protected static function newFactory(): Factory
     {

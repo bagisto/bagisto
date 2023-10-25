@@ -35,7 +35,7 @@ class BundleOption
     {
         $options = [];
 
-        # eager load all inventories for bundle options
+        // eager load all inventories for bundle options
         $this->product->bundle_options->load('bundle_option_products.product.inventories');
 
         foreach ($this->product->bundle_options as $option) {
@@ -51,7 +51,7 @@ class BundleOption
             $options[$option->id] = $data;
         }
 
-        usort ($options, function($a, $b) {
+        usort($options, function ($a, $b) {
             if ($a['sort_order'] == $b['sort_order']) {
                 return 0;
             }
@@ -108,7 +108,7 @@ class BundleOption
             ];
         }
 
-        usort ($products, function($a, $b) {
+        usort($products, function ($a, $b) {
             if ($a['sort_order'] == $b['sort_order']) {
                 return 0;
             }

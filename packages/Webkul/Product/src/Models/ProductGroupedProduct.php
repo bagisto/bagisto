@@ -8,7 +8,7 @@ use Webkul\Product\Contracts\ProductGroupedProduct as ProductGroupedProductContr
 class ProductGroupedProduct extends Model implements ProductGroupedProductContract
 {
     public $timestamps = false;
-    
+
     protected $fillable = [
         'qty',
         'sort_order',

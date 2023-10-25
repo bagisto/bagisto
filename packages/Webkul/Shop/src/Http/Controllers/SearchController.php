@@ -15,8 +15,7 @@ class SearchController extends Controller
     public function __construct(
         protected ProductRepository $productRepository,
         protected SearchRepository $searchRepository
-    )
-    {
+    ) {
     }
 
     /**

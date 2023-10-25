@@ -8,7 +8,7 @@ use Webkul\Product\Contracts\ProductBundleOptionProduct as ProductBundleOptionPr
 class ProductBundleOptionProduct extends Model implements ProductBundleOptionProductContract
 {
     public $timestamps = false;
-    
+
     protected $fillable = [
         'qty',
         'is_user_defined',

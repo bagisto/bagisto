@@ -16,8 +16,6 @@ class ProductServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap services.
-     *
-     * @return void
      */
     public function boot(): void
     {
@@ -32,8 +30,6 @@ class ProductServiceProvider extends ServiceProvider
 
     /**
      * Register services.
-     *
-     * @return void
      */
     public function register(): void
     {
@@ -46,8 +42,6 @@ class ProductServiceProvider extends ServiceProvider
 
     /**
      * Register configuration.
-     *
-     * @return void
      */
     public function registerConfig(): void
     {
@@ -56,8 +50,6 @@ class ProductServiceProvider extends ServiceProvider
 
     /**
      * Register the console commands of this package.
-     *
-     * @return void
      */
     protected function registerCommands(): void
     {
@@ -68,8 +60,6 @@ class ProductServiceProvider extends ServiceProvider
 
     /**
      * Register Bouncer as a singleton.
-     *
-     * @return void
      */
     protected function registerFacades(): void
     {

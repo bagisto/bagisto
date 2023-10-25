@@ -4,10 +4,10 @@ namespace Webkul\Admin\Http\Controllers\Marketing\Communications;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
+use Webkul\Admin\DataGrids\Marketing\Communications\CampaignDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Marketing\Repositories\CampaignRepository;
 use Webkul\Marketing\Repositories\TemplateRepository;
-use Webkul\Admin\DataGrids\Marketing\Communications\CampaignDataGrid;
 
 class CampaignController extends Controller
 {
@@ -19,8 +19,7 @@ class CampaignController extends Controller
     public function __construct(
         protected CampaignRepository $campaignRepository,
         protected TemplateRepository $templateRepository,
-    )
-    {
+    ) {
     }
 
     /**
@@ -125,7 +124,7 @@ class CampaignController extends Controller
             'marketing_template_id',
             'status',
             'channel_id',
-            'customer_group_id'
+            'customer_group_id',
         ]), $id);
 
         Event::dispatch('marketing.campaigns.update.after', $campaign);
@@ -138,8 +137,7 @@ class CampaignController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return \Illuminate\Http\JsonResponse
+     * @param  int  $id
      */
     public function destroy($id): JsonResponse
     {

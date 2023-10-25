@@ -2,9 +2,9 @@
 
 namespace Webkul\Shop\Repositories;
 
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Intervention\Image\ImageManager;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Shop\Contracts\ThemeCustomization;
@@ -24,7 +24,6 @@ class ThemeCustomizationRepository extends Repository
      *
      * @param  array  $imageOptions
      * @param  \Webkul\Shop\Contracts\ThemeCustomization  $theme
-     * 
      * @return void|string
      */
     public function uploadImage($imageOptions, $theme, $deletedSliderImages = [])
@@ -39,13 +38,13 @@ class ThemeCustomizationRepository extends Repository
             foreach ($imageOptions['options'] as $image) {
                 if ($image['image'] instanceof UploadedFile) {
                     $manager = new ImageManager();
-    
+
                     $path = 'theme/' . $theme->id . '/' . Str::random(40) . '.webp';
-    
+
                     Storage::put($path, $manager->make($image['image'])->encode('webp'));
 
                     if (
-                        isset($imageOptions['type']) 
+                        isset($imageOptions['type'])
                         && $imageOptions['type'] == 'static_content'
                     ) {
                         return Storage::url($path);
@@ -62,7 +61,7 @@ class ThemeCustomizationRepository extends Repository
         }
 
         $theme->options = $options ?? [];
-    
+
         $theme->save();
     }
 }

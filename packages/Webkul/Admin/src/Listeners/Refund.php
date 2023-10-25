@@ -2,8 +2,8 @@
 
 namespace Webkul\Admin\Listeners;
 
-use Webkul\Paypal\Payment\SmartButton;
 use Webkul\Admin\Mail\Order\RefundedNotification;
+use Webkul\Paypal\Payment\SmartButton;
 
 class Refund extends Base
 {

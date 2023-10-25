@@ -3,10 +3,10 @@
 namespace Webkul\Tax\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Model;
-use Webkul\Tax\Database\Factories\TaxMapFactory;
-use Webkul\Tax\Contracts\TaxMap as TaxMapContract;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Webkul\Tax\Contracts\TaxMap as TaxMapContract;
+use Webkul\Tax\Database\Factories\TaxMapFactory;
 
 class TaxMap extends Model implements TaxMapContract
 {
@@ -17,18 +17,15 @@ class TaxMap extends Model implements TaxMapContract
      *
      * @var array
      */
-
     protected $table = 'tax_categories_tax_rates';
 
     protected $fillable = [
-       'tax_category_id',
-       'tax_rate_id',
+        'tax_category_id',
+        'tax_rate_id',
     ];
 
     /**
      * Create a new factory instance for the model.
-     *
-     * @return Factory
      */
     protected static function newFactory(): Factory
     {

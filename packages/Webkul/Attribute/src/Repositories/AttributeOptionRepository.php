@@ -9,16 +9,13 @@ class AttributeOptionRepository extends Repository
 {
     /**
      * Specify Model class name
-     *
-     * @return string
      */
-    function model(): string
+    public function model(): string
     {
         return 'Webkul\Attribute\Contracts\AttributeOption';
     }
 
     /**
-     * @param  array  $data
      * @return  \Webkul\Attribute\Contracts\AttributeOption
      */
     public function create(array $data)
@@ -31,12 +28,11 @@ class AttributeOptionRepository extends Repository
     }
 
     /**
-     * @param  array   $data
-     * @param  int     $id
+     * @param  int  $id
      * @param  string  $attribute
      * @return  \Webkul\Attribute\Contracts\AttributeOption
      */
-    public function update(array $data, $id, $attribute = "id")
+    public function update(array $data, $id, $attribute = 'id')
     {
         $option = parent::update($data, $id);
 

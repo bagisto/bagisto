@@ -3,17 +3,15 @@
 namespace Webkul\Product\Repositories;
 
 use Illuminate\Support\Facades\Storage;
-use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Str;
+use Webkul\Core\Eloquent\Repository;
 
 class ProductDownloadableSampleRepository extends Repository
 {
     /**
      * Specify Model class name
-     *
-     * @return string
      */
-    function model(): string
+    public function model(): string
     {
         return 'Webkul\Product\Contracts\ProductDownloadableSample';
     }
@@ -37,7 +35,6 @@ class ProductDownloadableSampleRepository extends Repository
     }
 
     /**
-     * @param  array  $data
      * @param  Webkul\Product\Contracts\Product  $product
      * @return void
      */

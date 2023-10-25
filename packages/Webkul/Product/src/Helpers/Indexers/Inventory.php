@@ -3,8 +3,8 @@
 namespace Webkul\Product\Helpers\Indexers;
 
 use Webkul\Core\Repositories\ChannelRepository;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductInventoryIndexRepository;
+use Webkul\Product\Repositories\ProductRepository;
 
 class Inventory extends AbstractIndexer
 {
@@ -37,17 +37,13 @@ class Inventory extends AbstractIndexer
     /**
      * Create a new indexer instance.
      *
-     * @param  \Webkul\Core\Repositories\ChannelRepository  $channelRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
-     * @param  \Webkul\Product\Repositories\ProductInventoryIndexRepository  $productInventoryIndexRepository
      * @return void
      */
     public function __construct(
         protected ChannelRepository $channelRepository,
         protected ProductRepository $productRepository,
         protected ProductInventoryIndexRepository $productInventoryIndexRepository
-    )
-    {
+    ) {
         $this->batchSize = self::BATCH_SIZE;
     }
 
@@ -93,19 +89,19 @@ class Inventory extends AbstractIndexer
                 ])
                 ->whereIn('type', ['simple', 'virtual'])
                 ->cursorPaginate($this->batchSize);
- 
+
             $this->reindexBatch($paginator->items());
- 
+
             if (! $cursor = $paginator->nextCursor()) {
                 break;
             }
- 
+
             request()->query->add(['cursor' => $cursor->encode()]);
         }
 
         request()->query->remove('cursor');
     }
-    
+
     /**
      * Reindex products by batch size
      *
@@ -153,11 +149,11 @@ class Inventory extends AbstractIndexer
     /**
      * Check if index value changed
      *
-     * @return boolean
+     * @return bool
      */
     public function isIndexChanged($oldIndex, $newIndex)
     {
-        return (boolean) count(array_diff_assoc($oldIndex, $newIndex));
+        return (bool) count(array_diff_assoc($oldIndex, $newIndex));
     }
 
     /**
@@ -177,7 +173,7 @@ class Inventory extends AbstractIndexer
     /**
      * Returns product remaining quantity
      *
-     * @return integer
+     * @return int
      */
     public function getQuantity()
     {
@@ -200,7 +196,7 @@ class Inventory extends AbstractIndexer
 
         return $qty;
     }
-    
+
     /**
      * Returns all channels
      *

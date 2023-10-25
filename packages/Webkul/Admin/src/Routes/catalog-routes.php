@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Webkul\Admin\Http\Controllers\Catalog\CategoryController;
-use Webkul\Admin\Http\Controllers\Catalog\AttributeFamilyController;
 use Webkul\Admin\Http\Controllers\Catalog\AttributeController;
+use Webkul\Admin\Http\Controllers\Catalog\AttributeFamilyController;
+use Webkul\Admin\Http\Controllers\Catalog\CategoryController;
 use Webkul\Admin\Http\Controllers\Catalog\ProductController;
 
 /**
@@ -73,7 +73,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
             Route::post('mass-update', 'massUpdate')->name('admin.catalog.categories.mass_update');
 
             Route::get('search', 'search')->name('admin.catalog.categories.search');
-            
+
             Route::get('tree', 'tree')->name('admin.catalog.categories.tree');
         });
 
@@ -109,7 +109,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
             Route::post('mass-action', 'massUpdate')->name('admin.catalog.products.mass_action');
 
             Route::post('mass-update', 'massUpdate')->name('admin.catalog.products.mass_update');
-            
+
             Route::post('mass-delete', 'massDestroy')->name('admin.catalog.products.mass_delete');
 
             Route::get('search', 'search')->name('admin.catalog.products.search');

@@ -1,29 +1,26 @@
 <?php
+
 namespace Webkul\Payment\Listeners;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
+use Webkul\Sales\Repositories\OrderRepository;
 
 /**
  * Generate Invoice Event handler
- *
  */
 class GenerateInvoice
 {
     /**
      * Create the event listener.
      *
-     * @param  Webkul\Sales\Repositories\OrderRepository $orderRepository
+     * @param  Webkul\Sales\Repositories\OrderRepository  $orderRepository
      * @param \Webkul\Sales\Repositories\InvoiceRepository invoiceRepository
      * @return void
      */
     public function __construct(
         protected OrderRepository $orderRepository,
         protected InvoiceRepository $invoiceRepository
-    )
-    {
+    ) {
     }
 
     /**

@@ -2,12 +2,12 @@
 
 namespace Webkul\Core\Exceptions;
 
+use App\Exceptions\Handler as BaseHandler;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Support\Facades\Request;
-use App\Exceptions\Handler as BaseHandler;
 use PDOException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
 
 class Handler extends BaseHandler
@@ -16,7 +16,6 @@ class Handler extends BaseHandler
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $exception
      * @return \Illuminate\Http\Response
      */
     public function render($request, Throwable $exception)
@@ -32,7 +31,6 @@ class Handler extends BaseHandler
      * Convert an authentication exception into a response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Auth\AuthenticationException  $exception
      * @return \Illuminate\Http\Response
      */
     protected function unauthenticated($request, AuthenticationException $exception)
@@ -53,7 +51,7 @@ class Handler extends BaseHandler
     /**
      * Is admin uri.
      *
-     * @return boolean
+     * @return bool
      */
     private function isAdminUri()
     {
@@ -64,7 +62,6 @@ class Handler extends BaseHandler
      * Render custom HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $exception
      * @return \Illuminate\Http\Response|null
      */
     private function renderCustomResponse($request, Throwable $exception)

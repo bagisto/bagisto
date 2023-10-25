@@ -2,9 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Admin\Http\Controllers\User\SessionController;
 use Webkul\Admin\Http\Controllers\User\ForgetPasswordController;
 use Webkul\Admin\Http\Controllers\User\ResetPasswordController;
+use Webkul\Admin\Http\Controllers\User\SessionController;
 
 /**
  * Auth routes.

@@ -11,10 +11,9 @@ use Webkul\Customer\Models\Customer;
 /**
  * Address class.
  *
- * @package Webkul\Core\Models
  *
  * @property string $address_type
- * @property integer $customer_id
+ * @property int $customer_id
  * @property Customer $customer
  * @property string $first_name
  * @property string $last_name
@@ -28,10 +27,9 @@ use Webkul\Customer\Models\Customer;
  * @property string $country
  * @property string $email
  * @property string $phone
- * @property boolean $default_address
+ * @property bool $default_address
  * @property array $additional
- *
- * @property-read integer $id
+ * @property-read int $id
  * @property-read string $name
  * @property-read Carbon $created_at
  * @property-read Carbon $updated_at
@@ -95,8 +93,6 @@ abstract class Address extends Model implements AddressContract
 
     /**
      * Get all the attributes for the attribute groups.
-     *
-     * @return string
      */
     public function getNameAttribute(): string
     {
@@ -105,8 +101,6 @@ abstract class Address extends Model implements AddressContract
 
     /**
      * Get the customer record associated with the address.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function customer(): BelongsTo
     {

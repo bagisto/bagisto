@@ -2,12 +2,12 @@
 
 namespace Webkul\Admin\Http\Controllers\Settings;
 
-use Illuminate\Support\Facades\Event;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Admin\DataGrids\Theme\ThemeDatagrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Shop\Repositories\ThemeCustomizationRepository;
-use Webkul\Admin\DataGrids\Theme\ThemeDatagrid;
 
 class ThemeController extends Controller
 {
@@ -36,7 +36,7 @@ class ThemeController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * 
+     *
      * @return \Illuminate\Http\JsonResponse|string
      */
     public function store()
@@ -51,7 +51,7 @@ class ThemeController extends Controller
             'name'       => 'required',
             'sort_order' => 'required|numeric',
             'type'       => 'in:product_carousel,category_carousel,static_content,image_carousel,footer_links',
-            'channel_id' => 'required|in:'.implode(',', (core()->getAllChannels()->pluck("id")->toArray())),
+            'channel_id' => 'required|in:' . implode(',', (core()->getAllChannels()->pluck('id')->toArray())),
         ]);
 
         Event::dispatch('theme_customization.create.before');
@@ -73,7 +73,7 @@ class ThemeController extends Controller
     /**
      * Edit the theme
      *
-     * @param integer $id
+     * @param  int  $id
      * @return \Illuminate\View\View
      */
     public function edit($id)
@@ -86,7 +86,7 @@ class ThemeController extends Controller
     /**
      * Update the specified resource
      *
-     * @param integer $id
+     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update($id)
@@ -96,8 +96,8 @@ class ThemeController extends Controller
         $data = request()->all();
 
         if ($data['type'] == 'static_content') {
-            $data[$locale]['options']['html'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $data[$locale]['options']['html']); 
-            $data[$locale]['options']['css'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $data[$locale]['options']['css']); 
+            $data[$locale]['options']['html'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $data[$locale]['options']['html']);
+            $data[$locale]['options']['css'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $data[$locale]['options']['css']);
         }
 
         $data['status'] = request()->input('status') == 'on';
@@ -112,7 +112,7 @@ class ThemeController extends Controller
 
         if ($data['type'] == 'image_carousel') {
             $this->themeCustomizationRepository->uploadImage(
-                request()->all('options'), 
+                request()->all('options'),
                 $theme,
                 request()->input('deleted_sliders', [])
             );
@@ -128,7 +128,7 @@ class ThemeController extends Controller
     /**
      * Delete a specified theme.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
@@ -139,7 +139,7 @@ class ThemeController extends Controller
 
         $theme?->delete();
 
-        Storage::deleteDirectory('theme/'. $theme->id);
+        Storage::deleteDirectory('theme/' . $theme->id);
 
         Event::dispatch('theme_customization.delete.after', $id);
 

@@ -11,7 +11,7 @@ class CmsPage extends BaseCmsPage implements Sitemapable
     /**
      * @return mixed
      */
-    public function toSitemapTag(): Url | string | array
+    public function toSitemapTag(): Url|string|array
     {
         if (! $this->url_key) {
             return [];

@@ -10,7 +10,6 @@ class Review
     /**
      * Create a new listener instance.
      *
-     * @param  \Webkul\Product\Repositories\ProductReviewRepository  $productReviewRepository
      * @return void
      */
     public function __construct(protected ProductReviewRepository $productReviewRepository)
@@ -25,7 +24,7 @@ class Review
      */
     public function afterUpdate($review)
     {
-        ResponseCache::forget('/' .  $review->product->url_key);
+        ResponseCache::forget('/' . $review->product->url_key);
     }
 
     /**
@@ -38,6 +37,6 @@ class Review
     {
         $review = $this->productReviewRepository->find($reviewId);
 
-        ResponseCache::forget('/' .  $review->product->url_key);
+        ResponseCache::forget('/' . $review->product->url_key);
     }
 }

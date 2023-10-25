@@ -8,16 +8,13 @@ class ProductInventoryRepository extends Repository
 {
     /**
      * Specify Model class name.
-     *
-     * @return string
      */
-    function model(): string
+    public function model(): string
     {
         return 'Webkul\Product\Contracts\ProductInventory';
     }
 
     /**
-     * @param  array  $data
      * @param  Webkul\Product\Contracts\Product  $product
      * @return void
      */

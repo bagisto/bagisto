@@ -2,15 +2,14 @@
 
 namespace Webkul\Shop\Http\Controllers\CMS;
 
-use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\CMS\Repositories\CmsRepository;
+use Webkul\Shop\Http\Controllers\Controller;
 
 class PagePresenterController extends Controller
 {
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\CMS\Repositories\CmsRepository  $cmsRepository
      * @return void
      */
     public function __construct(protected CmsRepository $cmsRepository)

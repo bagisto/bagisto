@@ -1,19 +1,19 @@
 <?php
- 
+
 namespace Webkul\Product\Jobs\ElasticSearch;
- 
+
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Helpers\Indexers\ElasticSearch;
- 
+use Webkul\Product\Repositories\ProductRepository;
+
 class UpdateCreateIndex implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
- 
+
     /**
      * Create a new job instance.
      *
@@ -24,7 +24,7 @@ class UpdateCreateIndex implements ShouldQueue
     {
         $this->productIds = $productIds;
     }
- 
+
     /**
      * Execute the job.
      *
@@ -42,7 +42,7 @@ class UpdateCreateIndex implements ShouldQueue
             ->whereIn('id', $this->productIds)
             ->orderByRaw("FIELD(id, $ids)")
             ->get();
-        
+
         app(ElasticSearch::class)->reindexRows($products);
     }
 }

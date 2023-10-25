@@ -19,7 +19,7 @@ class ReportingExport implements FromCollection
 
     /**
      * function to create a blade view for export.
-     * 
+     *
      * @return Collection
      */
     public function collection()

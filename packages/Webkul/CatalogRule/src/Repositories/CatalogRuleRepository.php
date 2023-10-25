@@ -3,10 +3,10 @@
 namespace Webkul\CatalogRule\Repositories;
 
 use Illuminate\Container\Container;
-use Webkul\Core\Eloquent\Repository;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Core\Eloquent\Repository;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 class CatalogRuleRepository extends Repository
@@ -14,11 +14,6 @@ class CatalogRuleRepository extends Repository
     /**
      * Create a new repository instance.
      *
-     * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamilyRepository
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
-     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
-     * @param  \Webkul\Tax\Repositories\TaxCategoryRepository  $taxCategoryRepository
-     * @param  \Illuminate\Container\Container  $container
      * @return void
      */
     public function __construct(
@@ -27,15 +22,12 @@ class CatalogRuleRepository extends Repository
         protected CategoryRepository $categoryRepository,
         protected TaxCategoryRepository $taxCategoryRepository,
         Container $container
-    )
-    {
+    ) {
         parent::__construct($container);
     }
 
     /**
      * Specify model class name.
-     *
-     * @return string
      */
     public function model(): string
     {
@@ -45,7 +37,6 @@ class CatalogRuleRepository extends Repository
     /**
      * Create.
      *
-     * @param  array  $data
      * @return \Webkul\CatalogRule\Contracts\CatalogRule
      */
     public function create(array $data)
@@ -68,7 +59,6 @@ class CatalogRuleRepository extends Repository
     /**
      * Update.
      *
-     * @param  array  $data
      * @param  int  $id
      * @param  string  $attribute
      * @return \Webkul\CatalogRule\Contracts\CatalogRule

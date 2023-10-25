@@ -2,16 +2,16 @@
 
 namespace Webkul\Admin\Http\Controllers\Customers;
 
-use Illuminate\Support\Facades\Event;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
-use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\Customer\Repositories\CustomerGroupRepository;
+use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\Customers\CustomerDataGrid;
-use Webkul\Admin\Http\Requests\MassUpdateRequest;
+use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\MassDestroyRequest;
+use Webkul\Admin\Http\Requests\MassUpdateRequest;
+use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Customer\Repositories\CustomerNoteRepository;
+use Webkul\Customer\Repositories\CustomerRepository;
 
 class CustomerController extends Controller
 {
@@ -22,8 +22,7 @@ class CustomerController extends Controller
         protected CustomerRepository $customerRepository,
         protected CustomerGroupRepository $customerGroupRepository,
         protected CustomerNoteRepository $customerNoteRepository
-    )
-    {
+    ) {
     }
 
     /**
@@ -44,8 +43,6 @@ class CustomerController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
     public function store(): JsonResponse
     {
@@ -168,8 +165,8 @@ class CustomerController extends Controller
 
     /**
      * Login as customer
-     * 
-     * @param int $id
+     *
+     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function login_as_customer($id)
@@ -214,7 +211,6 @@ class CustomerController extends Controller
      * View all details of customer.
      *
      * @param  int  $id
-     * @return
      */
     public function show($id)
     {
@@ -224,7 +220,7 @@ class CustomerController extends Controller
             'invoices',
             'reviews',
             'notes',
-            'addresses'
+            'addresses',
         ])->findOrFail($id);
 
         $groups = $this->customerGroupRepository->findWhere([['code', '<>', 'guest']]);
@@ -250,14 +246,11 @@ class CustomerController extends Controller
 
     /**
      * To mass update the customer.
-     *
-     * @param MassUpdateRequest $massUpdateRequest
-     * @return \Illuminate\Http\JsonResponse
      */
     public function massUpdate(MassUpdateRequest $massUpdateRequest): JsonResponse
     {
         $selectedCustomerIds = $massUpdateRequest->input('indices');
-    
+
         foreach ($selectedCustomerIds as $customerId) {
             Event::dispatch('customer.update.before', $customerId);
 
@@ -269,15 +262,12 @@ class CustomerController extends Controller
         }
 
         return new JsonResponse([
-            'message' => trans('admin::app.customers.customers.index.datagrid.update-success')
+            'message' => trans('admin::app.customers.customers.index.datagrid.update-success'),
         ]);
     }
 
     /**
      * To mass delete the customer.
-     *
-     * @param MassDestroyRequest $massDestroyRequest
-     * @return \Illuminate\Http\JsonResponse
      */
     public function massDestroy(MassDestroyRequest $massDestroyRequest): JsonResponse
     {
@@ -287,18 +277,18 @@ class CustomerController extends Controller
             try {
                 foreach ($customerIds as $customerId) {
                     Event::dispatch('customer.delete.before', $customerId);
-    
+
                     $this->customerRepository->delete($customerId);
-    
+
                     Event::dispatch('customer.delete.after', $customerId);
                 }
-    
+
                 return new JsonResponse([
-                    'message' => trans('admin::app.customers.customers.index.datagrid.delete-success')
+                    'message' => trans('admin::app.customers.customers.index.datagrid.delete-success'),
                 ]);
             } catch (\Exception $e) {
                 return new JsonResponse([
-                    'message' => $e->getMessage()
+                    'message' => $e->getMessage(),
                 ]);
             }
         }
