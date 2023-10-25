@@ -2715,13 +2715,14 @@ return [
         ],
 
         'view' => [
-            'day'        => 'Gün',
-            'end-date'   => 'Bitiş Tarihi',
-            'export-csv' => 'CSV Olarak Dışa Aktar',
-            'export-xls' => 'XLS Olarak Dışa Aktar',
-            'month'      => 'Ay',
-            'start-date' => 'Başlangıç Tarihi',
-            'year'       => 'Yıl',
+            'day'           => 'Gün',
+            'end-date'      => 'Bitiş Tarihi',
+            'export-csv'    => 'CSV Olarak Dışa Aktar',
+            'export-xls'    => 'XLS Olarak Dışa Aktar',
+            'month'         => 'Ay',
+            'not-available' => 'Kayıt bulunamadı.',
+            'start-date'    => 'Başlangıç Tarihi',
+            'year'          => 'Yıl',
         ],
 
         'empty' => [

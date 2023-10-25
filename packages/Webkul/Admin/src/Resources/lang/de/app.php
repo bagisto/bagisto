@@ -2714,13 +2714,14 @@ return [
         ],
 
         'view' => [
-            'day'        => 'Tag',
-            'end-date'   => 'Enddatum',
-            'export-csv' => 'CSV exportieren',
-            'export-xls' => 'XLS exportieren',
-            'month'      => 'Monat',
-            'start-date' => 'Startdatum',
-            'year'       => 'Jahr',
+            'day'           => 'Tag',
+            'end-date'      => 'Enddatum',
+            'export-csv'    => 'CSV exportieren',
+            'export-xls'    => 'XLS exportieren',
+            'month'         => 'Monat',
+            'not-available' => 'Keine Datensätze verfügbar.',
+            'start-date'    => 'Startdatum',
+            'year'          => 'Jahr',
         ],
 
         'empty' => [

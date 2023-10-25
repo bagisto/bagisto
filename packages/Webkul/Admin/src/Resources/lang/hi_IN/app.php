@@ -2714,13 +2714,14 @@ return [
         ],
 
         'view' => [
-            'day'        => 'दिन',
-            'end-date'   => 'समापन तिथि',
-            'export-csv' => 'CSV पर्याप्त',
-            'export-xls' => 'XLS पर्याप्त',
-            'month'      => 'महीना',
-            'start-date' => 'प्रारंभ तिथि',
-            'year'       => 'साल',
+            'day'           => 'दिन',
+            'end-date'      => 'समापन तिथि',
+            'export-csv'    => 'CSV पर्याप्त',
+            'export-xls'    => 'XLS पर्याप्त',
+            'month'         => 'महीना',
+            'not-available' => 'कोई रिकॉर्ड उपलब्ध नहीं है।',
+            'start-date'    => 'प्रारंभ तिथि',
+            'year'          => 'साल',
         ],
 
         'empty' => [
