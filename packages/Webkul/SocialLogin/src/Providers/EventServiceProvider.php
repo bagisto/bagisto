@@ -2,9 +2,8 @@
 
 namespace Webkul\SocialLogin\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -15,7 +14,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Event::listen('bagisto.shop.customers.login_form_controls.before', function($viewRenderEventManager) {
+        Event::listen('bagisto.shop.customers.login_form_controls.after', function ($viewRenderEventManager) {
             $viewRenderEventManager->addTemplate('social_login::shop.customers.session.social-links');
         });
     }

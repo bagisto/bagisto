@@ -211,7 +211,7 @@
                         </button>
 
                         <div class="flex gap-[15px] flex-wrap">
-                            {!! view_render_event('bagisto.shop.customers.login_form_controls.before') !!}
+                            {!! view_render_event('bagisto.shop.customers.login_form_controls.after') !!}
                         </div>
                     </div>
 
