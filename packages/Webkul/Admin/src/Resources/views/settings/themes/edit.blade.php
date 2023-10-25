@@ -577,7 +577,7 @@
                         >
                             <img
                                 class="w-[120px] h-[120px] p-2 dark:invert dark:mix-blend-exclusion"
-                                src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
+                                src="{{ bagisto_asset('images/empty-placeholders/default.svg') }}"
                                 alt="add-product-to-store"
                             >
             
@@ -926,7 +926,7 @@
                         >
                             <img
                                 class="w-[120px] h-[120px] p-2 dark:invert dark:mix-blend-exclusion"
-                                src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
+                                src="{{ bagisto_asset('images/empty-placeholders/default.svg') }}"
                                 alt="add-category-to-store"
                             >
             
@@ -1493,7 +1493,7 @@
                             >
                                 <img
                                     class="w-[120px] h-[120px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
-                                    src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
+                                    src="{{ bagisto_asset('images/empty-placeholders/default.svg') }}"
                                     alt="add-product-to-store"
                                 >
                 
