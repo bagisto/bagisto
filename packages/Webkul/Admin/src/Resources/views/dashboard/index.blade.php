@@ -93,7 +93,7 @@
                     <input
                         class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         v-model="filters.start"
-                        placeholder="@lang('admin::app.reporting.sales.index.start-date')"
+                        placeholder="@lang('admin::app.dashboard.index.start-date')"
                     />
                 </x-admin::flat-picker.date>
 
@@ -101,7 +101,7 @@
                     <input
                         class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         v-model="filters.end"
-                        placeholder="@lang('admin::app.reporting.sales.index.end-date')"
+                        placeholder="@lang('admin::app.dashboard.index.end-date')"
                     />
                 </x-admin::flat-picker.date>
             </div>
