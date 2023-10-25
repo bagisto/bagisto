@@ -3,13 +3,14 @@
 namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Webkul\Payment\Facades\Payment;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\ShipmentRepository;
 use Webkul\Sales\Repositories\OrderTransactionRepository;
 use Webkul\Admin\DataGrids\Sales\OrderTransactionsDataGrid;
-use Webkul\Payment\Facades\Payment;
 
 class TransactionController extends Controller
 {
@@ -38,19 +39,9 @@ class TransactionController extends Controller
             return app(OrderTransactionsDataGrid::class)->toJson();
         }
 
-        return view('admin::sales.transactions.index');
-    }
+        $paymentMethods = Payment::getSupportedPaymentMethods();
 
-    /**
-     * Display a form to save the transaction.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create()
-    {
-        $payment_methods = Payment::getSupportedPaymentMethods();
-
-        return view('admin::sales.transactions.create', compact('payment_methods'));
+        return view('admin::sales.transactions.index', compact('paymentMethods'));
     }
 
     /**
@@ -69,7 +60,7 @@ class TransactionController extends Controller
         $invoice = $this->invoiceRepository->where('increment_id', $request->invoice_id)->first();
 
         if (! $invoice) {
-            session()->flash('error', trans('admin::app.sales.transactions.edit.invoice-missing'));
+            session()->flash('error', trans('admin::app.sales.transactions.index.create.invoice-missing'));
 
             return redirect()->back();
         }
@@ -79,19 +70,19 @@ class TransactionController extends Controller
         $transactionAmtFinal = $request->amount + $transactionAmtBefore;
 
         if ($invoice->state == 'paid') {
-            session()->flash('info', trans('admin::app.sales.transactions.edit.already-paid'));
+            session()->flash('info', trans('admin::app.sales.transactions.index.create.already-paid'));
 
             return redirect(route('admin.sales.transactions.index'));
         }
 
         if ($transactionAmtFinal > $invoice->base_grand_total) {
-            session()->flash('info', trans('admin::app.sales.transactions.edit.transaction-amount-exceeds'));
+            session()->flash('info', trans('admin::app.sales.transactions.index.create.transaction-amount-exceeds'));
 
             return redirect(route('admin.sales.transactions.create'));
         }
 
         if ($request->amount <= 0) {
-            session()->flash('info', trans('admin::app.sales.transactions.edit.transaction-amount-zero'));
+            session()->flash('info', trans('admin::app.sales.transactions.index.create.transaction-amount-zero'));
 
             return redirect(route('admin.sales.transactions.create'));
         }
@@ -127,7 +118,7 @@ class TransactionController extends Controller
             $this->invoiceRepository->updateState($invoice, 'paid');
         }
 
-        session()->flash('success', trans('admin::app.sales.transactions.edit.transaction-saved'));
+        session()->flash('success', trans('admin::app.sales.transactions.index.create.transaction-saved'));
 
         return redirect(route('admin.sales.transactions.index'));
     }
@@ -136,7 +127,7 @@ class TransactionController extends Controller
      * Show the view for the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Http\JsonResponse
      */
     public function view($id)
     {
@@ -146,7 +137,12 @@ class TransactionController extends Controller
 
         $transactionDetailsData = $this->convertIntoSingleDimArray($transData);
 
-        return view('admin::sales.transactions.view', compact('transaction', 'transactionDetailsData'));
+        return new JsonResponse([
+            'data' => [
+                'transaction' => $transaction,
+                'transactionDetailsData' => $transactionDetailsData,
+            ]
+        ]);
     }
 
     /**
@@ -157,7 +153,7 @@ class TransactionController extends Controller
      */
     public function convertIntoSingleDimArray($transData)
     {
-        $data = [];
+        $detailsData = [];
 
         foreach ($transData as $key => $data) {
             if (is_array($data)) {
@@ -169,10 +165,10 @@ class TransactionController extends Controller
                     continue;
                 }
 
-                $data[$key] = $data;
+                $detailsData[$key] = $data;
             }
         }
 
-        return $data;
+        return $detailsData;
     }
 }
