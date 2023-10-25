@@ -134,38 +134,38 @@
                         <div class="flex flex-col gap-[16px] px-[5px] py-[10px]">
                             <div class="">
                                 <p class="text-[18px] text-gray-600 dark:text-gray-300 font-semibold">
-                                    Transaction Data
+                                    @lang('admin::app.sales.transactions.index.view.transaction-data')
                                 </p>
 
                                 <div class="flex w-full justify-between p-[16px]">
                                     <div class="flex flex-col gap-y-[6px]">
-                                        <p class="text-gray-600 dark:text-gray-300"> 
-                                            Transaction ID 
+                                        <p class="text-gray-600 dark:text-gray-300">
+                                            @lang('admin::app.sales.transactions.index.view.transaction-id')
                                         </p>
 
-                                        <p class="text-gray-600 dark:text-gray-300"> 
-                                            Order ID  
+                                        <p class="text-gray-600 dark:text-gray-300">
+                                            @lang('admin::app.sales.transactions.index.view.order-id') 
                                         </p>
 
                                         <p 
                                             v-if="data.transaction.invoice_id" 
                                             class="text-gray-600 dark:text-gray-300"
                                         > 
-                                            Invoice ID 
+                                            @lang('admin::app.sales.transactions.index.view.invoice-id') 
                                         </p>
 
                                         <p class="text-gray-600 dark:text-gray-300">
-                                            Payment method  
+                                            @lang('admin::app.sales.transactions.index.view.payment-method') 
                                         </p>
 
                                         <p 
                                             class="text-gray-600 dark:text-gray-300"
                                         > 
-                                            Status  
+                                            @lang('admin::app.sales.transactions.index.view.status') 
                                         </p>
 
-                                        <p class="text-gray-600 dark:text-gray-300"> 
-                                            Created At  
+                                        <p class="text-gray-600 dark:text-gray-300">
+                                            @lang('admin::app.sales.transactions.index.view.created-at') 
                                         </p>
                                     </div>
 
@@ -213,7 +213,7 @@
                             
                             <div class="">
                                 <p class="text-[18px] text-gray-600 dark:text-gray-300 font-semibold">
-                                    Transaction Details
+                                    @lang('admin::app.sales.transactions.index.view.payment-details') 
                                 </p>
 
                                 <div  v-for="(data, key) in data.transactionDetailsData" :key="key" class="flex w-full justify-between p-[16px]">
@@ -276,7 +276,7 @@
                     class="primary-button"
                     @click="$refs.transactionCreateModal.toggle()"
                 >
-                    @lang('Create Transaction')
+                    @lang('admin::app.sales.transactions.index.create.create-btn')
                 </button>
 
                 <!-- Transaction Create Form -->
@@ -290,7 +290,7 @@
                             <x-slot:header>
                                 <!-- Modal Header -->
                                 <p class="text-[18px] text-gray-800 dark:text-white font-bold">
-                                    @lang('Create Transaction')New
+                                    @lang('admin::app.sales.transactions.index.create.title')
                                 </p>
                             </x-slot:header>
 
@@ -324,7 +324,7 @@
                                     <!-- Payment Method -->
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
-                                            @lang('Payment Method')
+                                            @lang('admin::app.sales.transactions.index.create.payment-method')
                                         </x-admin::form.control-group.label>
                                     
                                         <x-admin::form.control-group.control
@@ -332,10 +332,9 @@
                                             name="payment_method"
                                             id="payment-method"
                                             rules="required"
-                                            label="Payment Method"
-                                            placeholder="Payment Method"
+                                            :label="trans('admin::app.sales.transactions.index.create.payment-method')"
                                         >
-                                            <option value="">Select option</option>
+                                            <option value="">@lang('admin::app.sales.transactions.index.create.select-option')</option>
 
                                             @foreach ($paymentMethods["payment_methods"] as $paymentMethod)
                                                 @if(in_array($paymentMethod["method"], ["cashondelivery", "moneytransfer"]))
@@ -354,7 +353,7 @@
                                     <!-- Amount -->
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
-                                            @lang('Amount')
+                                            @lang('admin::app.sales.transactions.index.create.amount')
                                         </x-admin::form.control-group.label>
                                     
                                         <x-admin::form.control-group.control
@@ -363,8 +362,8 @@
                                             value="{{ old('amount') }}"
                                             id="transaction-amount" 
                                             rules="required"
-                                            label="Amount"
-                                            placeholder="Amount"
+                                            :label="trans('admin::app.sales.transactions.index.create.amount')"
+                                            :placeholder="trans('admin::app.sales.transactions.index.create.amount')"
                                         >
                                         </x-admin::form.control-group.control>
                                     
@@ -384,7 +383,7 @@
                                         type="submit"
                                         class="primary-button"
                                     >
-                                        @lang('Save Transaction')
+                                        @lang('admin::app.sales.transactions.index.create.save-btn')
                                     </button>
                                 </div>
                             </x-slot:footer>
