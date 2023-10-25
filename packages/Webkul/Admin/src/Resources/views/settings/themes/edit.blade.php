@@ -113,7 +113,7 @@
                                     </p>
                                 </div>
                 
-                                <!-- Add Sldier Button -->
+                                <!-- Add Slider Button -->
                                 <div class="flex gap-[10px]">
                                     <div
                                         class="secondary-button"
@@ -1237,7 +1237,7 @@
                                         </div>
                                     </p>
 
-                                    <!-- CSS TAb Editor -->
+                                    <!-- CSS Tab Editor -->
                                     <p @click="switchEditor('v-css-editor-theme', 0);">
                                         <div
                                             class="transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
