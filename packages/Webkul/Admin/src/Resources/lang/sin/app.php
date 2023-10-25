@@ -2714,13 +2714,14 @@ return [
         ],
 
         'view' => [
-            'day'        => 'දිනය',
-            'end-date'   => 'අවසන් දිනය',
-            'export-csv' => 'CSV අපනයය',
-            'export-xls' => 'XLS අපනයය',
-            'month'      => 'මාසය',
-            'start-date' => 'ආරම්භදාය',
-            'year'       => 'වර්ෂය',
+            'day'           => 'දිනය',
+            'end-date'      => 'අවසන් දිනය',
+            'export-csv'    => 'CSV අපනයය',
+            'export-xls'    => 'XLS අපනයය',
+            'month'         => 'මාසය',
+            'not-available' => 'ලබා ගත නැත.',
+            'start-date'    => 'ආරම්භදාය',
+            'year'          => 'වර්ෂය',
         ],
 
         'empty' => [

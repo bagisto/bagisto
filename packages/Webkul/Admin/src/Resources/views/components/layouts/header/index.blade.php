@@ -730,9 +730,13 @@
                     document.documentElement.classList.toggle('dark', this.isDarkMode === 1);
 
                     if (this.isDarkMode) {
-                        document.getElementById('logo-image').src= this.dark_logo;
+                        this.$emitter.emit('change-theme', 'dark');
+
+                        document.getElementById('logo-image').src = this.dark_logo;
                     } else {
-                        document.getElementById('logo-image').src=this.logo;
+                        this.$emitter.emit('change-theme', 'light');
+
+                        document.getElementById('logo-image').src = this.logo;
                     }
                 },
 

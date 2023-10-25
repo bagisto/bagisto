@@ -2714,13 +2714,14 @@ return [
         ],
 
         'view' => [
-            'day'        => 'День',
-            'end-date'   => 'Дата окончания',
-            'export-csv' => 'Экспорт в CSV',
-            'export-xls' => 'Экспорт в XLS',
-            'month'      => 'Месяц',
-            'start-date' => 'Дата начала',
-            'year'       => 'Год',
+            'day'           => 'День',
+            'end-date'      => 'Дата окончания',
+            'export-csv'    => 'Экспорт в CSV',
+            'export-xls'    => 'Экспорт в XLS',
+            'month'         => 'Месяц',
+            'not-available' => 'Нет доступных записей.',
+            'start-date'    => 'Дата начала',
+            'year'          => 'Год',
         ],
 
         'empty' => [

@@ -2714,13 +2714,14 @@ return [
         ],
 
         'view' => [
-            'day'        => 'Dzień',
-            'end-date'   => 'Data zakończenia',
-            'export-csv' => 'Eksportuj do formatu CSV',
-            'export-xls' => 'Eksportuj do formatu XLS',
-            'month'      => 'Miesiąc',
-            'start-date' => 'Data rozpoczęcia',
-            'year'       => 'Rok',
+            'day'           => 'Dzień',
+            'end-date'      => 'Data zakończenia',
+            'export-csv'    => 'Eksportuj do formatu CSV',
+            'export-xls'    => 'Eksportuj do formatu XLS',
+            'month'         => 'Miesiąc',
+            'not-available' => 'Brak dostępnych rekordów.',
+            'start-date'    => 'Data rozpoczęcia',
+            'year'          => 'Rok',
         ],
 
         'empty' => [

@@ -12,6 +12,7 @@
             <div class="flex gap-x-[10px] items-center">
                 {!! view_render_event('bagisto.admin.settings.themes.create.before') !!}
 
+                <!-- Create Button -->
                 <v-create-theme-form>
                     <button
                         type="button"
@@ -22,7 +23,6 @@
                 </v-create-theme-form>
 
                 {!! view_render_event('bagisto.admin.settings.themes.create.after') !!}
-
             </div>
         </div>
     </div>
@@ -47,6 +47,7 @@
                     </button>
                 @endif
 
+                <!-- Modal Form -->
                 <x-admin::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
@@ -64,6 +65,7 @@
                             <x-slot:content>
                                 <!-- Modal Content -->
                                 <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
+                                    <!-- Name -->
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.themes.create.name')
@@ -81,6 +83,7 @@
                                         <x-admin::form.control-group.error control-name="name"></x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
 
+                                    <!-- Sort Order -->
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.themes.create.sort-order')
@@ -98,6 +101,7 @@
                                         <x-admin::form.control-group.error control-name="sort_order"></x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
 
+                                    <!-- Type -->
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.themes.create.type.title')
@@ -120,6 +124,7 @@
                                         <x-admin::form.control-group.error control-name="type"></x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
 
+                                    <!-- Channels -->
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.themes.edit.channels')
