@@ -150,9 +150,10 @@ class Sale extends AbstractReporting
     public function getTodaySalesProgress(): array
     {
         return [
-            'previous' => $previous = $this->getTotalSales(now()->subDay()->startOfDay(), now()->subDay()->endOfDay()),
-            'current'  => $current = $this->getTotalSales(now()->today(), now()->endOfDay()),
-            'progress' => $this->getPercentageChange($previous, $current),
+            'previous'        => $previous = $this->getTotalSales(now()->subDay()->startOfDay(), now()->subDay()->endOfDay()),
+            'current'         => $current = $this->getTotalSales(now()->today(), now()->endOfDay()),
+            'formatted_total' => core()->formatBasePrice($current),
+            'progress'        => $this->getPercentageChange($previous, $current),
         ];
     }
 
