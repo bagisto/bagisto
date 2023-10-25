@@ -14,7 +14,11 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
     /**
      * Dashboard routes.
      */
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard.index');
+    Route::controller(DashboardController::class)->prefix('dashboard')->group(function () {
+        Route::get('', 'index')->name('admin.dashboard.index');
+
+        Route::get('stats', 'stats')->name('admin.dashboard.stats');
+    });
 
     /**
      * Datagrid routes.

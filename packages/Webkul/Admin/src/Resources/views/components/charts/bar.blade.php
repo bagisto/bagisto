@@ -5,7 +5,9 @@
     <script type="text/x-template" id="v-charts-bar-template">
         <canvas
             :id="$.uid + '_chart'"
-            class="flex items-end w-full aspect-[3.23/1]"
+            class="flex items-end w-full"
+            :style="'aspect-ratio:' + aspectRatio + '/1'"
+            style=""
         ></canvas>
     </script>
 
@@ -13,7 +15,22 @@
         app.component('v-charts-bar', {
             template: '#v-charts-bar-template',
 
-            props: ['labels', 'datasets'],
+            props: {
+                labels: {
+                    type: Array, 
+                    default: [],
+                },
+
+                datasets: {
+                    type: Array, 
+                    default: true,
+                },
+
+                aspectRatio: {
+                    type: Number, 
+                    default: 3.23,
+                },
+            },
 
             data() {
                 return {
@@ -41,16 +58,12 @@
                         },
                 
                         options: {
-                            aspectRatio: 3.17,
+                            aspectRatio: this.aspectRatio,
                             
                             plugins: {
                                 legend: {
                                     display: false
                                 },
-
-                                {{-- tooltip: {
-                                    enabled: false,
-                                } --}}
                             },
                             
                             scales: {
