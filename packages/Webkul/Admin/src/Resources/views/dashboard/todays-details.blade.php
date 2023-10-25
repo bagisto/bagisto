@@ -139,7 +139,7 @@
                             </p>
 
                             <!-- Order Status -->
-                            <p class="label-active">
+                            <p :class="'label-' + order.status">
                                 @{{ order.status_label }}
                             </p>
                         </div>
