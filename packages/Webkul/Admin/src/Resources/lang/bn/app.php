@@ -2714,13 +2714,14 @@ return [
         ],
 
         'view' => [
-            'day'        => 'দিন',
-            'end-date'   => 'শেষ তারিখ',
-            'export-csv' => 'CSV রপ্যার্ট করুন',
-            'export-xls' => 'XLS রপ্যার্ট করুন',
-            'month'      => 'মাস',
-            'start-date' => 'শুরুর তারিখ',
-            'year'       => 'বছর',
+            'day'           => 'দিন',
+            'end-date'      => 'শেষ তারিখ',
+            'export-csv'    => 'CSV রপ্যার্ট করুন',
+            'export-xls'    => 'XLS রপ্যার্ট করুন',
+            'month'         => 'মাস',
+            'not-available' => 'রেকর্ড উপলব্ধ নেই।',
+            'start-date'    => 'শুরুর তারিখ',
+            'year'          => 'বছর',
         ],
 
         'empty' => [

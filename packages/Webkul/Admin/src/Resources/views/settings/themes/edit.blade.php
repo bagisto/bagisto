@@ -55,7 +55,11 @@
 
                             {{ $currentLocale->name }}
                             
-                            <input type="hidden" name="locale" value="{{ $currentLocale->code }}"/>
+                            <input
+                                type="hidden"
+                                name="locale"
+                                value="{{ $currentLocale->code }}"
+                            />
 
                             <span class="icon-sort-down text-[24px]"></span>
                         </button>
@@ -100,14 +104,16 @@
                         <div class="p-[16px] bg-white dark:bg-gray-900 rounded box-shadow">
                             <div class="flex gap-x-[10px] justify-between items-center">
                                 <div class="flex flex-col gap-[4px]">
-                                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold">@lang('admin::app.settings.themes.edit.slider')</p>
+                                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                                        @lang('admin::app.settings.themes.edit.slider')
+                                    </p>
                                     
                                     <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
                                         @lang('admin::app.settings.themes.edit.slider-description')
                                     </p>
                                 </div>
                 
-                                
+                                <!-- Add Slider Button -->
                                 <div class="flex gap-[10px]">
                                     <div
                                         class="secondary-button"
@@ -119,7 +125,11 @@
                             </div>
 
                             <template v-for="(deletedSlider, index) in deletedSliders">
-                                <input type="hidden" :name="'deleted_sliders['+ index +'][image]'" :value="deletedSlider.image" />
+                                <input
+                                    type="hidden"
+                                    :name="'deleted_sliders['+ index +'][image]'"
+                                    :value="deletedSlider.image"
+                                />
                             </template>
 
                             <div
@@ -128,9 +138,24 @@
                                 v-for="(image, index) in sliders.images"
                             >
                                 <!-- Hidden Input -->
-                                <input type="file" class="hidden" :name="'options['+ index +'][image]'" :ref="'imageInput_' + index" />
-                                <input type="hidden" :name="'options['+ index +'][link]'" :value="image.link" />
-                                <input type="hidden" :name="'options['+ index +'][image]'" :value="image.image" />
+                                <input
+                                    type="file"
+                                    class="hidden"
+                                    :name="'options['+ index +'][image]'"
+                                    :ref="'imageInput_' + index"
+                                />
+
+                                <input
+                                    type="hidden"
+                                    :name="'options['+ index +'][link]'"
+                                    :value="image.link"
+                                />
+
+                                <input
+                                    type="hidden"
+                                    :name="'options['+ index +'][image]'"
+                                    :value="image.image"
+                                />
                             
                                 <!-- Details -->
                                 <div 
@@ -156,8 +181,8 @@
                                                     @lang('admin::app.settings.themes.edit.image'): 
 
                                                     <span class="text-gray-600 dark:text-gray-300 transition-all">
-                                                        <a 
-                                                            :href="'{{ config('app.url') }}' + image.image"
+                                                        <a
+                                                            :href="'{{ config('app.url') }}/' + image.image"
                                                             :ref="'image_' + index"
                                                             target="_blank"
                                                             class="ltr:ml-2 rtl:mr-2 text-blue-600 transition-all hover:underline"
@@ -187,6 +212,7 @@
                                 </div>
                             </div>
 
+                            <!-- Empty Page -->
                             <div    
                                 class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
                                 v-else
@@ -197,7 +223,7 @@
                                     alt="add-product-to-store"
                                 >
                 
-                                <div class="flex flex-col items-center">
+                                <div class="flex flex-col gap-[5px] items-center">
                                     <p class="text-[16px] text-gray-400 font-semibold">
                                         @lang('admin::app.settings.themes.edit.slider-add-btn')
                                     </p>
@@ -220,7 +246,11 @@
                             </x-slot:header>
                         
                             <x-slot:content>
-                                <input type="hidden" name="type" value="image_carousel">
+                                <input
+                                    type="hidden"
+                                    name="type"
+                                    value="image_carousel"
+                                />
     
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
@@ -457,7 +487,9 @@
                                     class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 dark:hover:border-gray-400"
                                     :class="[errors['options[filters][sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 >
-                                    <option value="" selected disabled>@lang('admin::app.settings.themes.edit.select')</option>
+                                    <option value="" selected disabled>
+                                        @lang('admin::app.settings.themes.edit.select')
+                                    </option>
                                     
                                     @foreach (
                                         product_toolbar()->getAvailableOrders()->pluck('title', 'value') 
@@ -501,7 +533,6 @@
                                 </select>
                             </v-field>
 
-                            
                             <x-admin::form.control-group.error
                                 control-name="options[filters][limit]"
                             >
@@ -534,7 +565,11 @@
                             v-for="(filter, index) in options.filters"
                         >
                             <!-- Hidden Input -->
-                            <input type="hidden" :name="'options[filters][' + filter.key +']'" :value="filter.value"> 
+                            <input
+                                type="hidden"
+                                :name="'options[filters][' + filter.key +']'"
+                                :value="filter.value"
+                            /> 
                         
                             <!-- Details -->
                             <div 
@@ -577,11 +612,11 @@
                         >
                             <img
                                 class="w-[120px] h-[120px] p-2 dark:invert dark:mix-blend-exclusion"
-                                src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
+                                src="{{ bagisto_asset('images/empty-placeholders/default.svg') }}"
                                 alt="add-product-to-store"
                             >
             
-                            <div class="flex flex-col items-center">
+                            <div class="flex flex-col gap-[5px] items-center">
                                 <p class="text-[16px] text-gray-400 font-semibold">
                                     @lang('admin::app.settings.themes.edit.product-carousel')
                                 </p>
@@ -820,9 +855,17 @@
                                     class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                     :class="[errors['options[filters][sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 >
-                                    <option value="" selected disabled>@lang('admin::app.settings.themes.edit.select')</option>
-                                    <option value="desc">@lang('admin::app.settings.themes.edit.desc')</option>
-                                    <option value="asc">@lang('admin::app.settings.themes.edit.asc')</option>
+                                    <option value="" selected disabled>
+                                        @lang('admin::app.settings.themes.edit.select')
+                                    </option>
+
+                                    <option value="desc">
+                                        @lang('admin::app.settings.themes.edit.desc')
+                                    </option>
+
+                                    <option value="asc">
+                                        @lang('admin::app.settings.themes.edit.asc')
+                                    </option>
                                 </select>
                             </v-field>
 
@@ -854,7 +897,6 @@
                             >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
-
 
                         <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] dark:border-gray-800"></span>
 
@@ -926,11 +968,11 @@
                         >
                             <img
                                 class="w-[120px] h-[120px] p-2 dark:invert dark:mix-blend-exclusion"
-                                src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
+                                src="{{ bagisto_asset('images/empty-placeholders/default.svg') }}"
                                 alt="add-category-to-store"
                             >
             
-                            <div class="flex flex-col items-center">
+                            <div class="flex flex-col gap-[5px] items-center">
                                 <p class="text-[16px] text-gray-400 font-semibold">
                                     @lang('admin::app.settings.themes.edit.category-carousel')
                                 </p>
@@ -1185,6 +1227,7 @@
                         <div class="text-sm font-medium text-center pt-[16px] text-gray-500">
                             <div class="tabs">
                                 <div class="flex gap-[15px] mb-[15px] pt-[8px] border-b-[2px] max-sm:hidden">
+                                    <!-- HTML Tab Header -->
                                     <p @click="switchEditor('v-html-editor-theme', 1)">
                                         <div
                                             class="transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
@@ -1194,6 +1237,7 @@
                                         </div>
                                     </p>
 
+                                    <!-- CSS Tab Editor -->
                                     <p @click="switchEditor('v-css-editor-theme', 0);">
                                         <div
                                             class="transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
@@ -1203,6 +1247,7 @@
                                         </div>
                                     </p>
 
+                                    <!-- Preview Tab Editor -->
                                     <p @click="switchEditor('v-static-content-previewer', 0);">
                                         <div
                                             class="transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
@@ -1215,8 +1260,17 @@
                             </div>
                         </div>
 
-                        <input type="hidden" name="{{ $currentLocale->code }}[options][html]" v-model="options.html">
-                        <input type="hidden" name="{{ $currentLocale->code }}[options][css]" v-model="options.css">
+                        <input
+                            type="hidden"
+                            name="{{ $currentLocale->code }}[options][html]"
+                            v-model="options.html"
+                        />
+
+                        <input
+                            type="hidden"
+                            name="{{ $currentLocale->code }}[options][css]"
+                            v-model="options.css"
+                        />
 
                         <KeepAlive>
                             <component 
@@ -1493,11 +1547,11 @@
                             >
                                 <img
                                     class="w-[120px] h-[120px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
-                                    src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
+                                    src="{{ bagisto_asset('images/empty-placeholders/default.svg') }}"
                                     alt="add-product-to-store"
                                 >
                 
-                                <div class="flex flex-col items-center">
+                                <div class="flex flex-col gap-[5px] items-center">
                                     <p class="text-[16px] text-gray-400 font-semibold">
                                         @lang('admin::app.settings.themes.edit.footer-link')
                                         

@@ -2733,13 +2733,14 @@ return [
         ],
 
         'view' => [
-            'day'        => 'Day',
-            'end-date'   => 'End Date',
-            'export-csv' => 'Export CSV',
-            'export-xls' => 'Export XLS',
-            'month'      => 'Month',
-            'start-date' => 'Start Date',
-            'year'       => 'Year',
+            'day'           => 'Day',
+            'end-date'      => 'End Date',
+            'export-csv'    => 'Export CSV',
+            'export-xls'    => 'Export XLS',
+            'month'         => 'Month',
+            'not-available' => 'No Records Available.',
+            'start-date'    => 'Start Date',
+            'year'          => 'Year',
         ],
 
         'empty' => [

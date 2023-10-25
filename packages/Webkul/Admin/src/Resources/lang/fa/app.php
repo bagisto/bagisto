@@ -2714,13 +2714,14 @@ return [
         ],
 
         'view' => [
-            'day'        => 'روز',
-            'end-date'   => 'تاریخ پایان',
-            'export-csv' => 'خروجی CSV',
-            'export-xls' => 'خروجی XLS',
-            'month'      => 'ماه',
-            'start-date' => 'تاریخ شروع',
-            'year'       => 'سال',
+            'day'           => 'روز',
+            'end-date'      => 'تاریخ پایان',
+            'export-csv'    => 'خروجی CSV',
+            'export-xls'    => 'خروجی XLS',
+            'month'         => 'ماه',
+            'not-available' =>  'رکوردی موجود نیست.',
+            'start-date'    => 'تاریخ شروع',
+            'year'          => 'سال',
         ],
 
         'empty' => [

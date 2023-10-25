@@ -2714,13 +2714,14 @@ return [
         ],
 
         'view' => [
-            'day'        => 'Giorno',
-            'end-date'   => 'Data di Fine',
-            'export-csv' => 'Esporta in CSV',
-            'export-xls' => 'Esporta in XLS',
-            'month'      => 'Mese',
-            'start-date' => 'Data di Inizio',
-            'year'       => 'Anno',
+            'day'           => 'Giorno',
+            'end-date'      => 'Data di Fine',
+            'export-csv'    => 'Esporta in CSV',
+            'export-xls'    => 'Esporta in XLS',
+            'month'         => 'Mese',
+            'not-available' => 'Nessun record disponibile.',
+            'start-date'    => 'Data di Inizio',
+            'year'          => 'Anno',
         ],
         'empty' => [
             'info'  => 'Nessun dato disponibile per l\'intervallo selezionato',
