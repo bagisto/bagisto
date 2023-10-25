@@ -12,10 +12,10 @@
             <!-- Dropdown -->
             <x-admin::dropdown position="bottom-right">
                 <x-slot:toggle>
-                    <span class="flex icon-setting p-[6px] rounded-[6px] text-[24px]  cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 "></span>
+                    <span class="flex icon-setting p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 "></span>
                 </x-slot:toggle>
 
-                <x-slot:content class="w-[174px] max-w-full !p-[8PX] border dark:border-gray-800   rounded-[4px] z-10 bg-white dark:bg-gray-900  shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)]">
+                <x-slot:content class="w-[174px] max-w-full !p-[8PX] border dark:border-gray-800 rounded-[4px] z-10 bg-white dark:bg-gray-900  shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)]">
                     <div class="grid gap-[2px]">
                         <!-- Current Channel -->
                         <div class="p-[6px] items-center cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950  hover:rounded-[6px]">
@@ -196,9 +196,7 @@
 
                             <template v-else>
                                 <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion">
-                                    <img
-                                        src="{{ bagisto_asset('images/product-placeholders/front.svg')}}"
-                                    >
+                                    <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
 
                                     <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                                         @lang('admin::app.catalog.products.index.datagrid.product-image')
@@ -215,7 +213,7 @@
                             </p>
 
                             <!-- Parent Product Quantity -->
-                            <div  v-if="['configurable', 'bundle', 'grouped'].includes(record.type)">
+                            <div v-if="['configurable', 'bundle', 'grouped'].includes(record.type)">
                                 <p class="text-gray-600 dark:text-gray-300">
                                     <span class="text-red-600" v-text="'N/A'"></span>
                                 </p>
@@ -267,10 +265,15 @@
                             </p>
                         </div>
 
-                        <a :href=`{{ route('admin.catalog.products.edit', '') }}/${record.product_id}`>
-                            <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 "></span>
-                        </a>
-
+                        <div class="flex gap-[5px] items-center">
+                            <a :href=`{{ route('admin.catalog.products.copy', '') }}/${record.product_id}`>
+                                <span class="icon-copy text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
+                            </a>
+                            
+                            <a :href=`{{ route('admin.catalog.products.edit', '') }}/${record.product_id}`>
+                                <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </template>
@@ -324,10 +327,11 @@
 
                             <x-slot:content>
                                 <!-- Modal Content -->
-                                <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
+                                <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
                                     <div v-show="! attributes.length">
                                         {!! view_render_event('bagisto.admin.catalog.products.create_form.general.controls.before') !!}
 
+                                        <!-- Product Type -->
                                         <x-admin::form.control-group>
                                             <x-admin::form.control-group.label class="required">
                                                 @lang('admin::app.catalog.products.index.create.type')
@@ -349,6 +353,7 @@
                                             <x-admin::form.control-group.error control-name="type"></x-admin::form.control-group.error>
                                         </x-admin::form.control-group>
 
+                                        <!-- Attribute Family Id -->
                                         <x-admin::form.control-group>
                                             <x-admin::form.control-group.label class="required">
                                                 @lang('admin::app.catalog.products.index.create.family')
@@ -370,6 +375,7 @@
                                             <x-admin::form.control-group.error control-name="attribute_family_id"></x-admin::form.control-group.error>
                                         </x-admin::form.control-group>
 
+                                        <!-- SKU -->
                                         <x-admin::form.control-group class="mb-[10px]">
                                             <x-admin::form.control-group.label class="required">
                                                 @lang('admin::app.catalog.products.index.create.sku')
@@ -396,8 +402,10 @@
                                             class="mb-[10px]"
                                             v-for="attribute in attributes"
                                         >
-                                            <label class="block leading-[24px] text-[12px] text-gray-800 dark:text-white font-medium">
-                                                @{{ attribute.name }}
+                                            <label
+                                                class="block leading-[24px] text-[12px] text-gray-800 dark:text-white font-medium"
+                                                v-text="attribute.name"
+                                            >
                                             </label>
 
                                             <div class="flex flex-wrap gap-[4px] min-h-[38px] p-[6px] border dark:border-gray-800 rounded-[6px]">
@@ -410,7 +418,8 @@
                                                     <span
                                                         class="icon-cross text-white text-[18px] ltr:ml-[5px] rtl:mr-[5px] cursor-pointer"
                                                         @click="removeOption(option)"
-                                                    ></span>
+                                                    >
+                                                    </span>
                                                 </p>
                                             </div>
                                         </div>

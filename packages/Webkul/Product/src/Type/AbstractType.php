@@ -319,11 +319,19 @@ abstract class AbstractType
      */
     protected function copyAttributeValues($product): void
     {
-        $productFlat = $this->product->product_flats[0]?->replicate() ?? new ProductFlat();
+        $productFlat = $this->product->product_flats->first()?->replicate() ?? new ProductFlat();
 
         $productFlat->product_id = $product->id;
 
         $attributesToSkip = config('products.skipAttributesOnCopy') ?? [];
+
+        $copyAttributes = [
+            'name'           => trans('admin::app.catalog.products.index.datagrid.copy-of', ['value' => $this->product->name]),
+            'url_key'        => trans('admin::app.catalog.products.index.datagrid.copy-of-slug', ['value' => $this->product->url_key]),
+            'sku'            => $product->sku,
+            'product_number' => ! empty($this->product->product_number) ? trans('admin::app.catalog.products.index.datagrid.copy-of-slug', ['value' => $this->product->product_number]) : null,
+            'status'         => 0,
+        ];
 
         foreach ($this->product->attribute_values as $attributeValue) {
             $attribute = $attributeValue->attribute;
@@ -332,27 +340,12 @@ abstract class AbstractType
                 continue;
             }
 
-            $value = null;
-
-            if ($attribute->code == 'name') {
-                $value = trans('admin::app.catalog.products.index.datagrid.copy-of', ['value' => $this->product->name]);
-            } elseif ($attribute->code == 'url_key') {
-                $value = trans('admin::app.catalog.products.index.datagrid.copy-of-slug', ['value' => $this->product->url_key]);
-            } elseif ($attribute->code == 'sku') {
-                $value = $product->sku;
-            } elseif ($attribute->code === 'product_number') {
-                if (!empty($this->product->product_number)) {
-                    $value = trans('admin::app.catalog.products.index.datagrid.copy-of-slug', ['value' => $this->product->product_number]);
-                }
-            } elseif ($attribute->code == 'status') {
-                $value = 0;
-            }
+            $value = $copyAttributes[$attribute->code] ?? null;
 
             $newAttributeValue = $attributeValue->replicate();
 
             if (! is_null($value)) {
                 $newAttributeValue->{$attribute->column_name} = $value;
-
                 $productFlat->{$attribute->code} = $value;
             }
 

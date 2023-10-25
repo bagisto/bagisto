@@ -80,33 +80,17 @@ class ProductRepository extends Repository
      */
     public function copy($id)
     {
-        $product = $this->with([
-            'attribute_family',
-            'categories',
-            'customer_group_prices',
-            'inventories',
-            'inventory_sources',
-        ])->findOrFail($id);
+        $product = $this->findOrFail($id);
 
         if ($product->parent_id) {
             throw new \Exception(trans('admin::app.catalog.products.variant-already-exist-message'));
         }
 
-        DB::beginTransaction();
-
-        try {
+        return DB::transaction(function () use ($product) {
             $copiedProduct = $product->getTypeInstance()->copy();
-        } catch (\Exception $e) {
-            DB::rollBack();
 
-            report($e);
-
-            throw $e;
-        }
-
-        DB::commit();
-
-        return $copiedProduct;
+            return $copiedProduct;
+        });
     }
 
     /**
@@ -187,9 +171,9 @@ class ProductRepository extends Repository
     {
         if (core()->getConfigData('catalog.products.storefront.search_mode') == 'elastic') {
             return $this->searchFromElastic();
-        } else {
-            return $this->searchFromDatabase();
         }
+
+        return $this->searchFromDatabase();
     }
 
     /**

@@ -3,7 +3,6 @@
         @lang('admin::app.catalog.products.edit.title')
     </x-slot:title>
 
-
     {!! view_render_event('bagisto.admin.catalog.product.edit.before', ['product' => $product]) !!}
 
     <x-admin::form
@@ -22,6 +21,7 @@
                 </div>
 
                 <div class="flex gap-x-[10px] items-center">
+                    <!-- Back Button -->
                     <a
                         href="{{ route('admin.catalog.products.index') }}"
                         class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
@@ -29,6 +29,7 @@
                         @lang('admin::app.account.edit.back-btn')
                     </a>
 
+                    <!-- Save Button -->
                     <button class="primary-button">
                         @lang('admin::app.catalog.products.edit.save-btn')
                     </button>
