@@ -51,6 +51,7 @@
 
                     {!! view_render_event('bagisto.shop.customers.login_form_controls.before') !!}
 
+                    {{-- Email --}}
                     <x-shop::form.control-group class="mb-4">
                         <x-shop::form.control-group.label class="required">
                             @lang('shop::app.customers.login-form.email')
@@ -73,6 +74,7 @@
                         </x-shop::form.control-group.error>
                     </x-shop::form.control-group>
 
+                    {{-- Password --}}
                     <x-shop::form.control-group class="mb-4">
                         <x-shop::form.control-group.label class="required">
                             @lang('shop::app.customers.login-form.password')
@@ -130,14 +132,14 @@
                         </div>
                     </div>
 
-                    {!! view_render_event('bagisto.shop.customers.login_form_controls.after') !!}
-
+                    {{-- Captcha --}}
                     @if (core()->getConfigData('customer.captcha.credentials.status'))
                         <div class="flex mt-[20px]">
                             {!! Captcha::render() !!}
                         </div>
                     @endif
 
+                    {{-- Submit Button --}}
                     <div class="flex gap-[36px] flex-wrap mt-[30px] items-center">
                         <button
                             class="primary-button block w-full max-w-[374px] py-[16px] px-[43px] m-0 ml-[0px] mx-auto rounded-[18px] text-[16px] text-center"
@@ -146,9 +148,7 @@
                             @lang('shop::app.customers.login-form.button-title')
                         </button>
 
-                        {!! view_render_event('bagisto.shop.customers.login.after') !!}
-
-                        {!! view_render_event('bagisto.shop.customers.login_form_controls.before') !!}
+                        {!! view_render_event('bagisto.shop.customers.login_form_controls.after') !!}
                     </div>
                 </x-shop::form>
             </div>
