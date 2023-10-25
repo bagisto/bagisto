@@ -2714,13 +2714,14 @@ return [
         ],
 
         'view' => [
-            'day'        => '日',
-            'end-date'   => '終了日',
-            'export-csv' => 'CSVエクスポート',
-            'export-xls' => 'XLSエクスポート',
-            'month'      => '月',
-            'start-date' => '開始日',
-            'year'       => '年',
+            'day'           => '日',
+            'end-date'      => '終了日',
+            'export-csv'    => 'CSVエクスポート',
+            'export-xls'    => 'XLSエクスポート',
+            'month'         => '月',
+            'not-available' => '利用可能なレコードはありません。',
+            'start-date'    => '開始日',
+            'year'          => '年',
         ],
 
         'empty' => [

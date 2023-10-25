@@ -2714,13 +2714,14 @@ return [
         ],
 
         'view' => [
-            'day'        => '日',
-            'end-date'   => '结束日期',
-            'export-csv' => '导出CSV',
-            'export-xls' => '导出XLS',
-            'month'      => '月',
-            'start-date' => '开始日期',
-            'year'       => '年',
+            'day'           => '日',
+            'end-date'      => '结束日期',
+            'export-csv'    => '导出CSV',
+            'export-xls'    => '导出XLS',
+            'month'         => '月',
+            'not-available' => '没有可用的记录。',
+            'start-date'    => '开始日期',
+            'year'          => '年',
         ],
 
         'empty' => [

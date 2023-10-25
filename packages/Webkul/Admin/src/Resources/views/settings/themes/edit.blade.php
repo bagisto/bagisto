@@ -612,11 +612,11 @@
                         >
                             <img
                                 class="w-[120px] h-[120px] p-2 dark:invert dark:mix-blend-exclusion"
-                                src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
+                                src="{{ bagisto_asset('images/empty-placeholders/default.svg') }}"
                                 alt="add-product-to-store"
                             >
             
-                            <div class="flex flex-col items-center">
+                            <div class="flex flex-col gap-[5px] items-center">
                                 <p class="text-[16px] text-gray-400 font-semibold">
                                     @lang('admin::app.settings.themes.edit.product-carousel')
                                 </p>
@@ -968,11 +968,11 @@
                         >
                             <img
                                 class="w-[120px] h-[120px] p-2 dark:invert dark:mix-blend-exclusion"
-                                src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
+                                src="{{ bagisto_asset('images/empty-placeholders/default.svg') }}"
                                 alt="add-category-to-store"
                             >
             
-                            <div class="flex flex-col items-center">
+                            <div class="flex flex-col gap-[5px] items-center">
                                 <p class="text-[16px] text-gray-400 font-semibold">
                                     @lang('admin::app.settings.themes.edit.category-carousel')
                                 </p>
@@ -1547,11 +1547,11 @@
                             >
                                 <img
                                     class="w-[120px] h-[120px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
-                                    src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
+                                    src="{{ bagisto_asset('images/empty-placeholders/default.svg') }}"
                                     alt="add-product-to-store"
                                 >
                 
-                                <div class="flex flex-col items-center">
+                                <div class="flex flex-col gap-[5px] items-center">
                                     <p class="text-[16px] text-gray-400 font-semibold">
                                         @lang('admin::app.settings.themes.edit.footer-link')
                                         

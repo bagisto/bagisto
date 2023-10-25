@@ -586,8 +586,12 @@
                 @else
                     <div class="rounded-[4px] box-shadow">
                         <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px] ">
-                            <img src="{{ bagisto_asset('images/icon-add-product.svg') }}" class="w-[80px] h-[80px] dark:invert dark:mix-blend-exclusion">
-                            <div class="flex flex-col items-center">
+                            <img
+                                src="{{ bagisto_asset('images/icon-add-product.svg') }}"
+                                class="w-[80px] h-[80px] dark:invert dark:mix-blend-exclusion"
+                            />
+
+                            <div class="flex flex-col gap-[5px] items-center">
                                 <p class="text-[16px] text-gray-400 font-semibold">
                                     @lang('admin::app.dashboard.index.empty-threshold')
                                 </p>
@@ -822,7 +826,7 @@
                                     >
     
                                     <!-- Add Variants Information -->
-                                    <div class="flex flex-col items-center">
+                                    <div class="flex flex-col gap-[5px] items-center">
                                         <p class="text-[16px] text-gray-400 font-semibold">
                                             @lang('admin::app.dashboard.index.add-product')
                                         </p>
@@ -897,12 +901,12 @@
                             <div class="grid gap-[14px] justify-center justify-items-center py-[10px]">
                                 <!-- Placeholder Image -->
                                 <img
-                                    src="{{ bagisto_asset('images/icon-add-product.svg') }}"
+                                    src="{{ bagisto_asset('images/empty-placeholders/customers.svg') }}"
                                     class="w-[80px] h-[80px] dark:invert dark:mix-blend-exclusion"
                                 />
 
                                 <!-- Add Variants Information -->
-                                <div class="flex flex-col items-center">
+                                <div class="flex flex-col gap-[5px] items-center">
                                     <p class="text-[16px] text-gray-400 font-semibold">
                                         @lang('admin::app.dashboard.index.add-customer')
                                     </p>

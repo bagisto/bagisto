@@ -2713,13 +2713,14 @@ return [
         ],
 
         'view' => [
-            'day'        => 'يوم',
-            'end-date'   => 'تاريخ الانتهاء',
-            'export-csv' => 'تصدير كملف CSV',
-            'export-xls' => 'تصدير كملف XLS',
-            'month'      => 'شهر',
-            'start-date' => 'تاريخ البدء',
-            'year'       => 'سنة',
+            'day'           => 'يوم',
+            'end-date'      => 'تاريخ الانتهاء',
+            'export-csv'    => 'تصدير كملف CSV',
+            'export-xls'    => 'تصدير كملف XLS',
+            'month'         => 'شهر',
+            'not-available' =>  'غير متاح أي سجلات.',
+            'start-date'    => 'تاريخ البدء',
+            'year'          => 'سنة',
         ],
 
         'empty' => [

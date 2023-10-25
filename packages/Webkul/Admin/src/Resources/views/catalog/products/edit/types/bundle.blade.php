@@ -63,7 +63,7 @@
                 />
 
                 <!-- Add Variants Information -->
-                <div class="flex flex-col items-center">
+                <div class="flex flex-col gap-[5px] items-center">
                     <p class="text-[16px] text-gray-400 font-semibold">
                         @lang('admin::app.catalog.products.edit.types.bundle.empty-title')
                     </p>
@@ -372,7 +372,7 @@
                 />
 
                 <!-- Add Variants Information -->
-                <div class="flex flex-col items-center">
+                <div class="flex flex-col gap-[5px] items-center">
                     <p class="text-[16px] text-gray-400 font-semibold">
                         @lang('admin::app.catalog.products.edit.types.bundle.option.empty-title')
                     </p>
