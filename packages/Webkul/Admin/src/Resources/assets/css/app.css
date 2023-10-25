@@ -427,7 +427,9 @@
 		@apply bg-yellow-500;
 	}
 
-	.label-processing,  .label-active {
+	.label-processing,
+	.label-completed,
+    .label-active {
 		@apply bg-darkGreen;
 	}
 

@@ -8,6 +8,8 @@ class CustomerController extends Controller
 {
     /**
      * Request param functions
+     * 
+     * @var array
      */
     protected $typeFunctions = [
         'total-customers'             => 'getTotalCustomersStats',

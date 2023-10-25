@@ -16,6 +16,19 @@
         <div class="shimmer w-[120px] h-[20px]"></div>
     
         {{-- Graph Shimmer --}}
-        <x-admin::shimmer.reporting.graph :count=15/>
+        <x-admin::shimmer.reporting.graph/>
+
+        {{-- Date Range --}}
+        <div class="flex gap-[20px] justify-center">
+            <div class="flex gap-[4px] items-center">
+                <div class="shimmer w-[14px] h-[14px] rounded-[3px]"></div>
+                <div class="shimmer w-[143px] h-[17px]"></div>
+            </div>
+            
+            <div class="flex gap-[4px] items-center">
+                <div class="shimmer w-[14px] h-[14px] rounded-[3px]"></div>
+                <div class="shimmer w-[143px] h-[17px]"></div>
+            </div>
+        </div>
     </div>
 </div>

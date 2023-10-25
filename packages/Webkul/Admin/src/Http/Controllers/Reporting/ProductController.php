@@ -8,6 +8,8 @@ class ProductController extends Controller
 {
     /**
      * Request param functions
+     * 
+     * @var array
      */
     protected $typeFunctions = [
         'total-sold-quantities'            => 'getTotalSoldQuantitiesStats',

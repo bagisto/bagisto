@@ -151,7 +151,7 @@ return [
         'key'  => 'catalog.products',
         'name' => 'admin::app.configuration.index.catalog.products.title',
         'info' => 'admin::app.configuration.index.catalog.products.info',
-        'icon' => 'settings/store-information.svg',
+        'icon' => 'settings/product.svg',
         'sort' => 2,
     ], [
         'key'    => 'catalog.products.guest_checkout',
