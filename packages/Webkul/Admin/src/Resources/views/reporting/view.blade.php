@@ -104,11 +104,21 @@
                         <div
                             class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950" style="grid-template-columns: repeat(4, 1fr);"
                             :style="`grid-template-columns: repeat(${reporing.statistics.columns.length}, 1fr)`"
+                            v-if="reporing.statistics.records.length"
                             v-for="record in reporing.statistics.records"
                         >
-                            <p v-for="column in reporing.statistics.columns">
+                            <p
+                                v-for="column in reporing.statistics.columns"
+                            >
                                 @{{ record[column.key] }}
                             </p>
+                        </div>
+
+                        <div
+                            v-else
+                            class="row grid gap-[10px] text-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                        >
+                            <p>@lang('admin::app.reporting.view.not-available')</p>
                         </div>
                     </template>
                 </div>
