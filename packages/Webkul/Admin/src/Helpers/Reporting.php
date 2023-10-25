@@ -176,17 +176,17 @@ class Reporting
 
             'product_visitors' => [
                 'total'    => $totalProductVisitors = $this->visitorReporting->getTotalUniqueVisitors($startDate, $endDate, ProductModel::class),
-                'progress' => number_format($totalVisitors > 0 ? ($totalProductVisitors * 100) / $totalVisitors : 0, 1),
+                'progress' => round($totalVisitors > 0 ? ($totalProductVisitors * 100) / $totalVisitors : 0, 1),
             ],
 
             'carts' => [
                 'total'    => $totalCarts = $this->cartReporting->getTotalUniqueCartsUsers($startDate, $endDate),
-                'progress' => number_format(min($totalVisitors > 0 ? ($totalCarts * 100) / $totalVisitors : 0, 100), 1),
+                'progress' => round(min($totalVisitors > 0 ? ($totalCarts * 100) / $totalVisitors : 0, 100), 1),
             ],
 
             'orders' => [
                 'total' => $totalOrders = $this->saleReporting->getTotalUniqueOrdersUsers($startDate, $endDate),
-                'progress' => number_format(min($totalVisitors > 0 ? ($totalOrders * 100) / $totalVisitors : 0, 100), 1),
+                'progress' => round(min($totalVisitors > 0 ? ($totalOrders * 100) / $totalVisitors : 0, 100), 1),
             ],
         ];
     }
