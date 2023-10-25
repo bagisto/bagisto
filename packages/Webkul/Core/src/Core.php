@@ -23,7 +23,7 @@ class Core
      *
      * @var string
      */
-    const BAGISTO_VERSION = '2.0.0-BETA-1';
+    const BAGISTO_VERSION = '2.0.0';
 
     /**
      * Current Channel.
@@ -72,7 +72,7 @@ class Core
      *
      * @var array
      */
-    protected $exchangeRates;
+    protected $exchangeRates = [];
 
     /**
      * Exchange rates
@@ -463,11 +463,11 @@ class Core
      */
     public function getExchangeRate($targetCurrencyId)
     {
-        if (isset($this->exchangeRates[$targetCurrencyId])) {
+        if (array_key_exists($targetCurrencyId, $this->exchangeRates)) {
             return $this->exchangeRates[$targetCurrencyId];
         }
 
-        $this->exchangeRates[$targetCurrencyId] = $this->exchangeRateRepository->findOneWhere([
+        return $this->exchangeRates[$targetCurrencyId] = $this->exchangeRateRepository->findOneWhere([
             'target_currency' => $targetCurrencyId,
         ]);
     }
@@ -477,29 +477,10 @@ class Core
      *
      * @param  float  $amount
      * @param  string  $targetCurrencyCode
-     * @param  string  $orderCurrencyCode
      * @return string
      */
-    public function convertPrice($amount, $targetCurrencyCode = null, $orderCurrencyCode = null)
+    public function convertPrice($amount, $targetCurrencyCode = null)
     {
-        if (! isset($this->lastCurrencyCode)) {
-            $this->lastCurrencyCode = $this->getBaseCurrency()->code;
-        }
-
-        if ($orderCurrencyCode) {
-            if (! isset($this->lastOrderCode)) {
-                $this->lastOrderCode = $orderCurrencyCode;
-            }
-
-            if (($targetCurrencyCode != $this->lastOrderCode)
-                && ($targetCurrencyCode != $orderCurrencyCode)
-                && ($orderCurrencyCode != $this->getBaseCurrencyCode())
-                && ($orderCurrencyCode != $this->lastCurrencyCode)
-            ) {
-                $amount = $this->convertToBasePrice($amount, $orderCurrencyCode);
-            }
-        }
-
         $targetCurrency = ! $targetCurrencyCode
             ? $this->getCurrentCurrency()
             : $this->currencyRepository->findOneByField('code', $targetCurrencyCode);
@@ -514,13 +495,7 @@ class Core
             return $amount;
         }
 
-        $result = (float) $amount * (float) ($this->lastCurrencyCode == $targetCurrency->code ? 1.0 : $exchangeRate->rate);
-
-        if ($this->lastCurrencyCode != $targetCurrency->code) {
-            $this->lastCurrencyCode = $targetCurrency->code;
-        }
-
-        return $result;
+        return (float) $amount * $exchangeRate->rate;
     }
 
     /**
@@ -616,7 +591,7 @@ class Core
 
             $formatter->setSymbol(\NumberFormatter::CURRENCY_SYMBOL, $symbol);
 
-            return $formatter->format($this->convertPrice($price));
+            return $formatter->format($price);
         }
 
         return $formatter->formatCurrency($price, $currency->code);
@@ -885,65 +860,6 @@ class Core
     public function isPostCodeRequired()
     {
         return (bool) $this->getConfigData('customer.address.requirements.postcode');
-    }
-
-    /**
-     * Returns time intervals.
-     *
-     * @param  \Illuminate\Support\Carbon  $startDate
-     * @param  \Illuminate\Support\Carbon  $endDate
-     * @return array
-     */
-    public function getTimeInterval($startDate, $endDate)
-    {
-        $timeIntervals = [];
-
-        $totalDays = $startDate->diffInDays($endDate) + 1;
-        $totalMonths = $startDate->diffInMonths($endDate) + 1;
-
-        $startWeekDay = Carbon::createFromTimeString($this->xWeekRange($startDate, 0) . ' 00:00:01');
-        $endWeekDay = Carbon::createFromTimeString($this->xWeekRange($endDate, 1) . ' 23:59:59');
-        $totalWeeks = $startWeekDay->diffInWeeks($endWeekDay);
-
-        if ($totalMonths > 5) {
-            for ($i = 0; $i < $totalMonths; $i++) {
-                $date = clone $startDate;
-                $date->addMonths($i);
-
-                $start = Carbon::createFromTimeString($date->format('Y-m-d') . ' 00:00:01');
-                $end = $totalMonths - 1 == $i
-                    ? $endDate
-                    : Carbon::createFromTimeString($date->addMonth()->subDay()->format('Y-m-d') . ' 23:59:59');
-
-                $timeIntervals[] = ['start' => $start, 'end' => $end, 'formattedDate' => $date->format('M')];
-            }
-        } elseif ($totalWeeks > 6) {
-            for ($i = 0; $i < $totalWeeks; $i++) {
-                $date = clone $startDate;
-                $date->addWeeks($i);
-
-                $start = $i == 0
-                    ? $startDate
-                    : Carbon::createFromTimeString($this->xWeekRange($date, 0) . ' 00:00:01');
-                $end = $totalWeeks - 1 == $i
-                    ? $endDate
-                    : Carbon::createFromTimeString($this->xWeekRange($date->subDay(), 1) . ' 23:59:59');
-
-                $timeIntervals[] = ['start' => $start, 'end' => $end, 'formattedDate' => $date->format('d M')];
-            }
-        } else {
-            for ($i = 0; $i < $totalDays; $i++) {
-                $date = clone $startDate;
-                $date->addDays($i);
-
-                $start = Carbon::createFromTimeString($date->format('Y-m-d') . ' 00:00:01');
-                $end = Carbon::createFromTimeString($date->format('Y-m-d') . ' 23:59:59');
-
-                $timeIntervals[] = ['start' => $start, 'end' => $end, 'formattedDate' => $date->format('d M')];
-            }
-        }
-
-        return $timeIntervals;
     }
 
     /**

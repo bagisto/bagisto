@@ -47,7 +47,7 @@ class OrderDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'created_at',
             'label'      => trans('shop::app.customers.account.orders.order-date'),
-            'type'       => 'datetime_range',
+            'type'       => 'date_range',
             'searchable' => true,
             'sortable'   => true,
             'filterable' => true,

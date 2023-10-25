@@ -25,11 +25,16 @@
             </div>
         @endif
 
+        {!! view_render_event('admin.customers.addresses.create.before') !!}
+
         <x-admin::form
             v-slot="{ meta, errors, handleSubmit }"
             as="div"
         >
             <form @submit="handleSubmit($event, create)">
+
+                {!! view_render_event('admin.customers.addresses.create.create_form_controls.before') !!}
+
                 <!-- Address Create Modal -->
                 <x-admin::modal ref="CustomerAddress">
                     <x-slot:header>
@@ -41,7 +46,7 @@
     
                     <x-slot:content>
                         <!-- Modal Content -->
-                        {!! view_render_event('admin.customer.addresses.create.before') !!}
+                        {!! view_render_event('admin.customers.addresses.create.before') !!}
 
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.control
@@ -370,8 +375,14 @@
                         </div>
                     </x-slot:footer>
                 </x-admin::modal>
+
+                {!! view_render_event('admin.customers.addresses.create.create_form_controls.after') !!}
+
             </form>
         </x-admin::form>
+
+        {!! view_render_event('admin.customers.addresses.create.after') !!}
+
     </script>
 
     <script type="module">

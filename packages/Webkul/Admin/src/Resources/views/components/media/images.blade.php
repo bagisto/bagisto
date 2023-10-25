@@ -57,7 +57,7 @@
 
                 <!-- Uploaded Images -->
                 <draggable
-                    class="flex gap-[4px]"
+                    class="flex flex-wrap gap-[4px]"
                     ghost-class="draggable-ghost"
                     v-bind="{animation: 200}"
                     :list="images"

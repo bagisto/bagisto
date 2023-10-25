@@ -72,7 +72,7 @@
                         </x-shop::form.control-group.error>
                     </x-shop::form.control-group>
 
-                    {!! view_render_event('bagisto.shop.customers.forget_password_form_controls.before') !!}
+                    {!! view_render_event('bagisto.shop.customers.forget_password_form_controls.email.after') !!}
 
                     <div>
 

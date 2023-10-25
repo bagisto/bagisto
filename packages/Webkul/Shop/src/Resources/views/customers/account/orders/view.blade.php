@@ -1,7 +1,7 @@
 <x-shop::layouts.account>
     {{-- Page Title --}}
     <x-slot:title>
-        @lang('shop::app.customers.account.orders.view.page-title', ['order_id' => $order->id])
+        @lang('shop::app.customers.account.orders.view.page-title', ['order_id' => $order->increment_id])
     </x-slot:title>
     
     {{-- Breadcrumbs --}}
@@ -12,7 +12,7 @@
     <div class="flex justify-between items-center">
         <div class="">
             <h2 class="text-[26px] font-medium">
-                @lang('shop::app.customers.account.orders.view.page-title', ['order_id' => $order->id])
+                @lang('shop::app.customers.account.orders.view.page-title', ['order_id' => $order->increment_id])
             </h2>
         </div>
 
@@ -894,7 +894,7 @@
                             @include ('admin::sales.address', ['address' => $order->billing_address])
                         </p>
 
-                        {!! view_render_event('bagisto.shop.customers.account.orders.view.billing-address.after', ['order' => $order]) !!}
+                        {!! view_render_event('bagisto.shop.customers.account.orders.view.billing_address.after', ['order' => $order]) !!}
                     </div>
                 </div>
             @endif
@@ -910,7 +910,7 @@
                         <p class="text-[14px]">
                             @include ('admin::sales.address', ['address' => $order->shipping_address])
 
-                            {!! view_render_event('bagisto.shop.customers.account.orders.view.shipping-address.after', ['order' => $order]) !!}
+                            {!! view_render_event('bagisto.shop.customers.account.orders.view.shipping_address.after', ['order' => $order]) !!}
                         </p>
                     </div>
                 </div>
@@ -926,7 +926,7 @@
                     </p>
                 </div>
 
-                {!! view_render_event('bagisto.shop.customers.account.orders.view.shipping-method.after', ['order' => $order]) !!}
+                {!! view_render_event('bagisto.shop.customers.account.orders.view.shipping_method.after', ['order' => $order]) !!}
 
             @endif
 
@@ -946,8 +946,10 @@
                     </div>
                 @endif
 
-                {!! view_render_event('bagisto.shop.customers.account.orders.view.payment-method.after', ['order' => $order]) !!}
+                {!! view_render_event('bagisto.shop.customers.account.orders.view.payment_method.after', ['order' => $order]) !!}
             </div>
         </div>
     </div>
+
+    {!! view_render_event('bagisto.shop.customers.account.orders.view.after', ['order' => $order]) !!}
 </x-shop::layouts.account>

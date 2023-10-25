@@ -36,30 +36,20 @@ jobs:
           php-version: ${{ matrix.php-versions }}
           extensions: curl, fileinfo, gd, intl, mbstring, openssl, pdo, pdo_mysql, tokenizer, zip
 
-      - name: Composer Install
+      - name: Running Composer Install
         run: composer install
 
-      - name: Set Testing Environment
+      - name: Setting Environment
         run: |
-          cp .env.example .env.testing
-          sed -i "s|^\(APP_ENV=\s*\).*$|\1testing|" .env.testing
-          sed -i "s|^\(DB_HOST=\s*\).*$|\1127.0.0.1|" .env.testing
-          sed -i "s|^\(DB_PORT=\s*\).*$|\1${{ job.services.mysql.ports['3306'] }}|" .env.testing
-          sed -i "s|^\(DB_DATABASE=\s*\).*$|\1bagisto|" .env.testing
-          sed -i "s|^\(DB_USERNAME=\s*\).*$|\1root|" .env.testing
-          sed -i "s|^\(DB_PASSWORD=\s*\).*$|\1root|" .env.testing
+          cp .env.example .env
+          sed -i "s|^\(DB_HOST=\s*\).*$|\1127.0.0.1|" .env
+          sed -i "s|^\(DB_PORT=\s*\).*$|\1${{ job.services.mysql.ports['3306'] }}|" .env
+          sed -i "s|^\(DB_DATABASE=\s*\).*$|\1bagisto|" .env
+          sed -i "s|^\(DB_USERNAME=\s*\).*$|\1root|" .env
+          sed -i "s|^\(DB_PASSWORD=\s*\).*$|\1root|" .env
 
-      - name: Key Generate
-        run: php artisan key:generate --env=testing
-
-      - name: Optimize Stuffs
-        run: php artisan optimize --env=testing
-
-      - name: Migrate And Seed Database
-        run: php artisan migrate:fresh --seed --env=testing
-
-      - name: Vendor Publish
-        run: php artisan bagisto:publish --force
+      - name: Running Bagisto Installer
+        run: php artisan bagisto:install
 
       - name: Running Test
         run: vendor/bin/pest --colors=always

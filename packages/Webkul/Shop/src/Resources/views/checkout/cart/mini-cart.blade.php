@@ -55,6 +55,7 @@
                         <!-- Cart Item Information -->
                         <div class="grid flex-1 gap-y-[10px] place-content-start justify-stretch">
                             <div class="flex flex-wrap justify-between">
+                                
                                 <p
                                     class="text-[16px] font-medium max-w-[80%]"
                                     v-text="item.name"
@@ -104,6 +105,7 @@
                             </div>
 
                             <div class="flex gap-[20px] items-center flex-wrap">
+
                                 <!-- Cart Item Quantity Changer -->
                                 <x-shop::quantity-changer
                                     name="quantity"

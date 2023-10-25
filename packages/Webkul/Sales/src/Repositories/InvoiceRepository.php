@@ -301,7 +301,7 @@ class InvoiceRepository extends Repository
     /**
      * Get total amount of pending invoices.
      */
-    public function getTotalAmountOfPendingInvoices(): float
+    public function getTotalPendingInvoicesAmount(): float
     {
         return $this->where('state', 'pending')->sum('grand_total');
     }

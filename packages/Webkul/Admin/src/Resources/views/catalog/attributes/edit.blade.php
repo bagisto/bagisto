@@ -16,6 +16,9 @@
             type="text/x-template"
             id="v-edit-attributes-template"
         >
+
+            {!! view_render_event('bagisto.admin.catalog.attributes.edit.before') !!}
+
             <!-- Input Form -->
             <x-admin::form
                 :action="route('admin.catalog.attributes.update', $attribute->id)"
@@ -49,9 +52,9 @@
                 <!-- body content -->
                 <div class="flex gap-[10px] mt-[14px]">
                     <!-- Left sub Component -->
-                    <div class="flex flex-col gap-[8px] flex-1">
+                    <div class="flex flex-col flex-1 gap-[8px] overflow-auto">
 
-                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.attributes.before', ['attribute' => $attribute]) !!}
+                        {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.label.before', ['attribute' => $attribute]) !!}
 
                         <!-- Label -->
                         <div class="p-[16px] bg-white dark:bg-gray-900 box-shadow rounded-[4px]">
@@ -104,7 +107,7 @@
                             @endforeach
                         </div>
 
-                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.attributes.after', ['attribute' => $attribute]) !!}
+                        {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.label.after', ['attribute' => $attribute]) !!}
 
                         <!-- Options -->
                         <div
@@ -196,8 +199,8 @@
                                 </div>
 
                                 <!-- Table Information -->
-                                <div class="mt-[15px] overflow-auto">
-                                    <x-admin::table class="w-full text-left">
+                                <div class="mt-[15px] overflow-x-auto">
+                                    <x-admin::table>
                                         <x-admin::table.thead class="text-[14px] font-medium dark:bg-gray-800">
                                             <x-admin::table.thead.tr>
                                                 <x-admin::table.th class="!p-0"></x-admin::table.th>
@@ -239,6 +242,7 @@
                                                         :name="'options[' + element.id + '][isNew]'"
                                                         :value="element.isNew"
                                                     >
+
                                                     <input
                                                         type="hidden"
                                                         :name="'options[' + element.id + '][isDelete]'"
@@ -292,7 +296,11 @@
 
                                                     <!-- Admin-->
                                                     <x-admin::table.td>
-                                                        <p class="dark:text-white" v-text="element.admin_name"></p>
+                                                        <p
+                                                            class="dark:text-white"
+                                                            v-text="element.admin_name"
+                                                        >
+                                                        </p>
 
                                                         <input
                                                             type="hidden"
@@ -303,7 +311,11 @@
 
                                                     <!-- Loacles -->
                                                      <x-admin::table.td v-for="locale in allLocales">
-                                                        <p class="dark:text-white" v-text="element['locales'][locale.code]"></p>
+                                                        <p
+                                                            class="dark:text-white"
+                                                            v-text="element['locales'][locale.code]"
+                                                        >
+                                                        </p>
                                                         
                                                         <input
                                                             type="hidden"
@@ -369,7 +381,7 @@
                     <!-- Right sub-component -->
                     <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
 
-                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.general.before', ['attribute' => $attribute]) !!}
+                        {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.general.before', ['attribute' => $attribute]) !!}
 
                         <!-- General -->
                         <div class="bg-white dark:bg-gray-900 box-shadow rounded-[4px]">
@@ -508,7 +520,9 @@
                             </div>
                         </div>
 
-                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.general.after', ['attribute' => $attribute]) !!}
+                        {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.general.after', ['attribute' => $attribute]) !!}
+
+                        {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.validations.before', ['attribute' => $attribute]) !!}
 
                         <!-- Validations -->
                         <x-admin::accordion>
@@ -623,9 +637,9 @@
                             </x-slot:content>
                         </x-admin::accordion>
 
-                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.validations.controls.after', ['attribute' => $attribute]) !!}
+                        {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.validations.after', ['attribute' => $attribute]) !!}
 
-                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.configuration.before', ['attribute' => $attribute]) !!}
+                        {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.configuration.before', ['attribute' => $attribute]) !!}
 
                         <!-- Configurations -->
                         <x-admin::accordion>
@@ -816,7 +830,7 @@
                             </x-slot:content>
                         </x-admin::accordion>
 
-                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.configuration.controls.after', ['attribute' => $attribute]) !!}
+                        {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.configuration.configuration.after', ['attribute' => $attribute]) !!}
                     </div>
                 </div>
             </x-admin::form>
@@ -877,13 +891,13 @@
 
                                     <x-admin::form.control-group.control
                                         type="color"
-                                        name="swatch_value"
+                                        name="swatch_value[]"
                                         :placeholder="trans('admin::app.catalog.attributes.edit.color')"
                                     >
                                     </x-admin::form.control-group.control>
 
                                     <x-admin::form.control-group.error
-                                        control-name="swatch_value"
+                                        control-name="swatch_value[]"
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
@@ -963,6 +977,9 @@
                     </x-admin::modal>
                 </form>
             </x-admin::form>
+
+            {!! view_render_event('bagisto.admin.catalog.attributes.edit.after') !!}
+
         </script>
 
         <script type="module">

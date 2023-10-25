@@ -23,6 +23,8 @@
                     <x-shop::shimmer.customers.account.reviews :count="4"></x-shop::shimmer.customers.account.reviews>
                 </template>
 
+                {!! view_render_event('bagisto.shop.customers.account.reviews.list.before', ['reviews' => $reviews]) !!}
+
                 <!-- Reviews Information -->
                 <template v-else>
                     <div class="flex-auto">
@@ -85,6 +87,9 @@
                         </div>
                     </div>
                 </template>
+
+                {!! view_render_event('bagisto.shop.customers.account.reviews.list.after', ['reviews' => $reviews]) !!}
+
             </div>
         </script>
 

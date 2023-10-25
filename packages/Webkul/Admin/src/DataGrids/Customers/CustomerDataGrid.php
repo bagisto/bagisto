@@ -145,7 +145,7 @@ class CustomerDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'       => 'total_base_grand_total',
+            'index'       => 'revenue',
             'label'       => trans('admin::app.customers.customers.index.datagrid.revenue'),
             'type'        => 'integer',
             'searchable'  => false,
@@ -155,7 +155,7 @@ class CustomerDataGrid extends DataGrid
                 return app(OrderRepository::class)->scopeQuery(function ($q) use ($row) {
                     return $q->whereNotIn('status', ['canceled', 'closed'])
                         ->where('customer_id', $row->customer_id);
-                })->sum('grand_total');
+                })->sum('grand_total_invoiced');
             },
         ]);
 

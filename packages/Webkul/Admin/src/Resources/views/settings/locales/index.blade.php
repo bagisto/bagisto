@@ -3,6 +3,8 @@
         @lang('admin::app.settings.locales.index.title')
     </x-slot:title>
 
+    {!! view_render_event('bagisto.admin.settings.locales.create.before') !!}
+
     <v-locales>
         <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
@@ -24,6 +26,8 @@
         {{-- DataGrid Shimmer --}}
         <x-admin::shimmer.datagrid/>
     </v-locales>
+
+    {!! view_render_event('bagisto.admin.settings.locales.create.after') !!}
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-locales-template">
@@ -145,6 +149,9 @@
                     @submit="handleSubmit($event, updateOrCreate)"
                     ref="createLocaleForm"
                 >
+
+                    {!! view_render_event('admin.settings.locales.create_form_controls.before') !!}
+
                     <x-admin::modal ref="localeUpdateOrCreateModal">
                         <x-slot:header>
                             <p class="text-[18px] text-gray-800 dark:text-white font-bold">
@@ -266,6 +273,10 @@
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
+                                
+                                <p class="text-[12px] text-gray-600 dark:text-gray-300">
+                                    @lang('admin::app.settings.locales.index.logo-size')
+                                </p>
 
                                 {!! view_render_event('bagisto.admin.settings.locale.create.after') !!}
                             </div>
@@ -282,6 +293,9 @@
                             </div>
                         </x-slot:footer>
                     </x-admin::modal>
+
+                    {!! view_render_event('admin.settings.locales.create_form_controls.after') !!}
+
                 </form>
             </x-admin::form>
         </script>

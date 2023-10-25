@@ -454,7 +454,7 @@
                                 <select
                                     name="options[filters][sort]"
                                     v-bind="field"
-                                    class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                    class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 dark:hover:border-gray-400"
                                     :class="[errors['options[filters][sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 >
                                     <option value="" selected disabled>@lang('admin::app.settings.themes.edit.select')</option>
@@ -490,7 +490,7 @@
                                 <select
                                     name="options[filters][limit]"
                                     v-bind="field"
-                                    class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400"
+                                    class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 dark:hover:border-gray-400"
                                     :class="[errors['options[filters][limit]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 >
                                     <option value="" selected disabled>@lang('admin::app.settings.themes.edit.select')</option>
@@ -576,7 +576,7 @@
                             v-else
                         >
                             <img
-                                class="w-[120px] h-[120px] p-2 border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
+                                class="w-[120px] h-[120px] p-2 dark:invert dark:mix-blend-exclusion"
                                 src="{{ bagisto_asset('images/empty-placeholders/default.svg') }}"
                                 alt="add-product-to-store"
                             >
@@ -925,8 +925,13 @@
                             v-else
                         >
                             <img
+<<<<<<< HEAD
                                 class="w-[120px] h-[120px] p-2 border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
                                 src="{{ bagisto_asset('images/empty-placeholders/default.svg') }}"
+=======
+                                class="w-[120px] h-[120px] p-2 dark:invert dark:mix-blend-exclusion"
+                                src="{{ bagisto_asset('images/empty-placeholders/default-empty.svg') }}"
+>>>>>>> upstream/master
                                 alt="add-category-to-store"
                             >
             

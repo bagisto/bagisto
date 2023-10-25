@@ -22,5 +22,11 @@ return [
             'build_directory'          => 'themes/shop/default/build',
             'package_assets_directory' => 'src/Resources/assets',
         ],
+
+        'installer' => [
+            'hot_file'                 => 'installer-default-vite.hot',
+            'build_directory'          => 'themes/installer/default/build',
+            'package_assets_directory' => 'src/Resources/assets',
+        ],
     ],
 ];

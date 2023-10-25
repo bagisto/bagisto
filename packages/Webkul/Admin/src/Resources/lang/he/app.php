@@ -563,7 +563,7 @@ return [
                         'empty-info'                => 'מחיר מיוחד ללקוחות שנמצאים בקבוצה ספציפית.',
                         'fixed-group-price-info'    => 'עבור :qty יחידות במחיר קבוע של :price',
                         'title'                     => 'מחיר לקבוצת לקוחות',
-            
+
                         'create' => [
                             'all-groups'     => 'כל הקבוצות',
                             'create-title'   => 'צור מחיר לקבוצת לקוחות',
@@ -585,16 +585,16 @@ return [
                     'pending-ordered-qty-info' => 'כמות הממתינה להזמנה תוחתם ממקור המלאי הרלוונטי לאחר השילוח. במקרה של ביטול, הכמות הממתינה תהיה זמינה למכירה מחדש.',
                     'title'                    => 'מלאי',
                 ],
-            
+
                 'categories' => [
                     'title' => 'קטגוריות',
                 ],
-            
+
                 'images' => [
                     'info'  => 'רזולוציה של התמונה צריכה להיות כמו 609px X 560px',
                     'title' => 'תמונות',
                 ],
-            
+
                 'videos' => [
                     'info'  => 'גודל הווידאו המרבי צריך להיות כמו :size',
                     'title' => 'וידאו',
@@ -2016,6 +2016,7 @@ return [
                 'title'      => 'אזורים',
                 'locale'     => 'אזור',
                 'create-btn' => 'צור אזור',
+                'logo-size'  => 'רזולוציית התמונה צריכה להיות כ-24px X 16px',
 
                 'datagrid' => [
                     'actions'   => 'פעולות',
@@ -2612,6 +2613,122 @@ return [
         ],
     ],
 
+    'reporting' => [
+        'sales' => [
+            'index' => [
+                'abandoned-carts'               => 'עגלות נטושות',
+                'abandoned-products'            => 'מוצרים נטושים',
+                'abandoned-rate'                => 'שיעור נטישה',
+                'abandoned-revenue'             => 'רווח נטוש',
+                'average-order-value-over-time' => 'ערך הזמנה ממוצע במהלך הזמן',
+                'average-sales'                 => 'ערך הזמנה ממוצע',
+                'added-to-cart'                 => 'נוסף לעגלה',
+                'added-to-cart-info'            => 'רק :progress מבקרים הוסיפו מוצרים לעגלה',
+                'count'                         => 'מספר',
+                'end-date'                      => 'תאריך סיום',
+                'id'                            => 'מזהה',
+                'interval'                      => 'מרווח זמן',
+                'name'                          => 'שם',
+                'orders'                        => 'הזמנות',
+                'orders-over-time'              => 'הזמנות לפי זמן',
+                'purchased'                     => 'נרכש',
+                'purchased-info'                => 'רק :progress מבקרים ביצעו רכישות',
+                'payment-method'                => 'אמצעי תשלום',
+                'product-views'                 => 'צפיות במוצרים',
+                'product-views-info'            => 'רק :progress מבקרים צופים במוצרים',
+                'purchase-funnel'               => 'משפך רכישה',
+                'refunds'                       => 'החזרים',
+                'refunds-over-time'             => 'החזרים לפי זמן',
+                'sales-over-time'               => 'מכירות לפי זמן',
+                'start-date'                    => 'תאריך התחלה',
+                'shipping-collected'            => 'איסוף משלוח',
+                'shipping-collected-over-time'  => 'איסוף משלוח לפי זמן',
+                'tax-collected'                 => 'אוסף מס',
+                'tax-collected-over-time'       => 'אוסף מס לפי זמן',
+                'title'                         => 'מכירות',
+                'top-payment-methods'           => 'שיטות תשלום מובילות',
+                'top-shipping-methods'          => 'שיטות משלוח מובילות',
+                'top-tax-categories'            => 'קטגוריות מס מובילות',
+                'total'                         => 'סה"כ',
+                'total-orders'                  => 'סה"כ הזמנות',
+                'total-sales'                   => 'סה"כ מכירות',
+                'total-visits'                  => 'סה"כ ביקורים',
+                'total-visits-info'             => 'סה"כ מבקרים בחנות',
+                'view-details'                  => 'הצג פרטים',
+            ],
+        ],
+
+        'customers' => [
+            'index' => [
+                'count'                       => 'כמות',
+                'customers'                   => 'לקוחות',
+                'customers-over-time'         => 'לקוחות לפי זמן',
+                'customers-traffic'           => 'תנועת לקוחות',
+                'customers-with-most-orders'  => 'לקוחות עם הכי הרבה הזמנות',
+                'customers-with-most-reviews' => 'לקוחות עם הכי הרבה ביקורות',
+                'customers-with-most-sales'   => 'לקוחות עם הכי הרבה מכירות',
+                'email'                       => 'אימייל',
+                'end-date'                    => 'תאריך סיום',
+                'id'                          => 'מזהה',
+                'interval'                    => 'מרווח זמן',
+                'name'                        => 'שם',
+                'orders'                      => 'הזמנות',
+                'reviews'                     => 'ביקורות',
+                'start-date'                  => 'תאריך התחלה',
+                'title'                       => 'לקוחות',
+                'top-customer-groups'         => 'קבוצות לקוחות מובילות',
+                'total'                       => 'סה"כ',
+                'total-customers'             => 'סה"כ לקוחות',
+                'total-visitors'              => 'סה"כ מבקרים',
+                'traffic-over-week'           => 'תנועה במשך השבוע',
+                'unique-visitors'             => 'מבקרים ייחודיים',
+                'view-details'                => 'הצג פרטים',
+            ],
+        ],
+
+        'products' => [
+            'index' => [
+                'end-date'                         => 'תאריך סיום',
+                'id'                               => 'מזהה',
+                'interval'                         => 'מרווח זמן',
+                'name'                             => 'שם',
+                'orders'                           => 'הזמנות',
+                'price'                            => 'מחיר',
+                'products-added-over-time'         => 'מוצרים שנוספו לאורך הזמן',
+                'products-with-most-reviews'       => 'מוצרים עם הכי הרבה ביקורות',
+                'products-with-most-visits'        => 'מוצרים עם הכי הרבה ביקורים',
+                'quantities'                       => 'כמויות',
+                'quantities-sold-over-time'        => 'כמויות שנמכרו לאורך הזמן',
+                'revenue'                          => 'רווח',
+                'reviews'                          => 'ביקורות',
+                'start-date'                       => 'תאריך התחלה',
+                'title'                            => 'מוצרים',
+                'top-selling-products-by-quantity' => 'המוצרים הנמכרים בכמות הגבוהה ביותר',
+                'top-selling-products-by-revenue'  => 'המוצרים הנמכרים ברווח הגבוה ביותר',
+                'total'                            => 'סה"כ',
+                'total-products-added-to-wishlist' => 'סה"כ מוצרים שנוספו לרשימת המשאלות',
+                'total-sold-quantities'            => 'כמויות שנמכרו של המוצרים',
+                'view-details'                     => 'הצג פרטים',
+                'visits'                           => 'ביקורים',
+            ],
+        ],
+
+        'view' => [
+            'day'        => 'יום',
+            'end-date'   => 'תאריך סיום',
+            'export-csv' => 'ייצוא ל־CSV',
+            'export-xls' => 'ייצוא ל־XLS',
+            'month'      => 'חודש',
+            'start-date' => 'תאריך התחלה',
+            'year'       => 'שנה',
+        ],
+
+        'empty' => [
+            'info'  => 'אין נתונים זמינים עבור הטווח הנבחר',
+            'title' => 'אין נתונים זמינים',
+        ],
+    ],
+
     'configuration' => [
         'index' => [
             'delete'                       => 'מחק',
@@ -3128,6 +3245,7 @@ return [
                 'orders'                   => 'הזמנות',
                 'products'                 => 'מוצרים',
                 'promotions'               => 'קידום מכירות',
+                'reporting'                => 'דיווח',
                 'refunds'                  => 'החזרים',
                 'reviews'                  => 'ביקורות',
                 'roles'                    => 'תפקידים',
@@ -3361,7 +3479,7 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'יקר :customer_name',
+        'dear'   => 'יקר :admin_name',
         'thanks' => 'אם תזדקק לעזרה בכל סוג שהוא, אנא פנה אלינו ב-<a href=":link" style=":style">:email</a>.<br/>תודה!',
 
         'admin' => [
