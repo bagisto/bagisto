@@ -3,9 +3,22 @@
 namespace Webkul\Admin\Listeners;
 
 use Webkul\Admin\Mail\Order\InvoicedNotification;
+use Webkul\Sales\Repositories\OrderTransactionRepository;
 
 class Invoice extends Base
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct(
+        protected OrderTransactionRepository $orderTransactionRepository,
+    )
+    {
+    }
+
     /**
      * After order is created
      *
@@ -13,6 +26,15 @@ class Invoice extends Base
      * @return void
      */
     public function afterCreated($invoice)
+    {
+        $this->sendMail($invoice);
+
+        if ($invoice->can_create_transaction) {
+            $this->createTransaction($invoice);
+        }
+    }
+
+    public function sendMail($invoice)
     {
         if ($invoice->email_sent) {
             return;
@@ -27,5 +49,22 @@ class Invoice extends Base
         } catch (\Exception $e) {
             report($e);
         }
+    }
+
+    public function createTransaction($invoice)
+    {
+        $transactionId = md5(uniqid());
+    
+        $transactionData = [
+            'transaction_id' => $transactionId,
+            'status'         => $invoice->state,
+            'type'           => $invoice->order->payment->method,
+            'payment_method' => $invoice->order->payment->method,
+            'order_id'       => $invoice->order->id,
+            'invoice_id'     => $invoice->id,
+            'amount'         => $invoice->grand_total,
+        ];
+
+        $this->orderTransactionRepository->create($transactionData);
     }
 }

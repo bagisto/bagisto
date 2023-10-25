@@ -151,21 +151,23 @@ class TransactionController extends Controller
      * @param  array  $data
      * @return array
      */
-    public function convertIntoSingleDimArray($transData)
+    public function convertIntoSingleDimArray($transData = [])
     {
         $detailsData = [];
 
-        foreach ($transData as $key => $data) {
-            if (is_array($data)) {
-                $this->convertIntoSingleDimArray($data);
-            } else {
-                $skipAttributes = ['sku', 'name', 'category', 'quantity'];
-
-                if (gettype($key) == 'integer' || in_array($key, $skipAttributes)) {
-                    continue;
+        if ($transData) {
+            foreach ($transData as $key => $data) {
+                if (is_array($data)) {
+                    $this->convertIntoSingleDimArray($data);
+                } else {
+                    $skipAttributes = ['sku', 'name', 'category', 'quantity'];
+    
+                    if (gettype($key) == 'integer' || in_array($key, $skipAttributes)) {
+                        continue;
+                    }
+    
+                    $detailsData[$key] = $data;
                 }
-
-                $detailsData[$key] = $data;
             }
         }
 
