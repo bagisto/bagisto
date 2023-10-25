@@ -80,7 +80,13 @@ class ProductRepository extends Repository
      */
     public function copy($id)
     {
-        $product = $this->findOrFail($id);
+        $product = $this->with([
+            'attribute_family',
+            'categories',
+            'customer_group_prices',
+            'inventories',
+            'inventory_sources',
+        ])->findOrFail($id);
 
         if ($product->parent_id) {
             throw new \Exception(trans('admin::app.catalog.products.variant-already-exist-message'));
