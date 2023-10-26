@@ -102,7 +102,7 @@ class AttributeController extends Controller
     {
         $attribute = $this->attributeRepository->findOrFail($id);
 
-        return $attribute->options()->get();
+        return $attribute->options()->orderBy('sort_order')->get();
     }
 
     /**
