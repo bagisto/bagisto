@@ -14,7 +14,7 @@ afterEach(function () {
 });
 
 it('returns a new products listing', function () {
-    // Prepare
+    // Arrange
     $newProductOptions = [
         'attributes' => [
             5 => 'new',
@@ -39,7 +39,7 @@ it('returns a new products listing', function () {
 });
 
 it('returns a featured products listing', function () {
-    // Prepare
+    // Arrange
     $featuredProductOptions = [
         'attributes' => [
             6 => 'featured',
@@ -64,7 +64,7 @@ it('returns a featured products listing', function () {
 });
 
 it('returns all products listing', function () {
-    // Prepare
+    // Arrange
     $product = (new Product())->create(1, 'simple')->first();
 
     // Act & Assert
