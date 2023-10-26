@@ -515,7 +515,7 @@ return [
 
         'type' => [
             'abstract' => [
-                'offers' => ':qty 個を :price で購入し、:discount% 節約',
+                'offers' => ':qty 個を :price で購入し、:discount 節約',
             ],
         ],
     ],
