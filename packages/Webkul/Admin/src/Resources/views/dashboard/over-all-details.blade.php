@@ -135,7 +135,7 @@
                         <!-- Sales Stats -->
                         <div class="grid gap-[4px] place-content-start">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
-                                @{{ report.statistics.avg_sales.current }}
+                                @{{ report.statistics.avg_sales.formatted_total }}
                             </p>
 
                             <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
