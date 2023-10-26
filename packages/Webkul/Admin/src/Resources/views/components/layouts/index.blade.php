@@ -25,6 +25,8 @@
             rel="stylesheet"
         />
 
+        <link rel="preload" as="image" href="{{ url('cache/logo/bagisto.png') }}">
+
         @if ($favicon = core()->getConfigData('general.design.admin_logo.favicon', core()->getCurrentChannelCode()))
             <link 
                 type="image/x-icon"
