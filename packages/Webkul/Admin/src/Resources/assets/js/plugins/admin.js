@@ -10,18 +10,26 @@ export default {
              * @returns {string} - The formatted price string.
              */
             formatPrice: (price, localeCode = null, currencyCode = null) => {
-                if (!localeCode) {
+                const localeMappings = {
+                    'hi_IN': 'hi',
+                    'pt_BR': 'pt',
+                    'zh_CN': 'zh',
+                };
+
+                if (! localeCode) {
                     localeCode =
                         document.querySelector(
                             'meta[http-equiv="content-language"]'
                         ).content ?? "en";
                 }
 
-                if (!currencyCode) {
+                if (! currencyCode) {
                     currencyCode =
                         document.querySelector('meta[name="currency-code"]')
                             .content ?? "USD";
                 }
+
+                localeCode = localeMappings[localeCode] ?? localeCode;
 
                 return new Intl.NumberFormat(localeCode, {
                     style: "currency",
