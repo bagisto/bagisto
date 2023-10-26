@@ -526,7 +526,7 @@ return [
                     'active'                 => 'सक्रिय',
                     'category'               => 'श्रेणी',
                     'copy-of'                => ':value की प्रतिलिपि',
-                    'copy-of-slug'           => ':value',
+                    'copy-of-slug'           => ':value-की-प्रतिलिपि',
                     'disable'                => 'अक्षम करें',
                     'delete'                 => 'हटाएं',
                     'image'                  => 'छवि',

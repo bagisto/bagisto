@@ -526,7 +526,7 @@ return [
                     'active'                 => 'Attivo',
                     'category'               => 'Categoria',
                     'copy-of'                => 'Copia di :value',
-                    'copy-of-slug'           => 'Copia di :value',
+                    'copy-of-slug'           => 'copia-di-:value',
                     'disable'                => 'Disabilita',
                     'delete'                 => 'Elimina',
                     'image'                  => 'Immagine',

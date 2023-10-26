@@ -526,7 +526,7 @@ return [
                     'active'                 => 'Активний',
                     'category'               => 'Категорія',
                     'copy-of'                => 'Копія :value',
-                    'copy-of-slug'           => 'Копія :value',
+                    'copy-of-slug'           => 'копія-:value',
                     'disable'                => 'Відключити',
                     'delete'                 => 'Видалити',
                     'image'                  => 'Зображення',
