@@ -30,7 +30,9 @@ it('returns a new products listing', function () {
     (new Product($newProductOptions))->create(1, 'simple');
 
     // Act
-    $response = getJson(route('shop.api.products.index', ['new' => 1]))->collect();
+    $response = getJson(route('shop.api.products.index', ['new' => 1]))
+        ->assertOk()
+        ->collect();
 
     // Assert
     expect($response['data'])->each(function (Expectation $product) {
@@ -55,7 +57,9 @@ it('returns a featured products listing', function () {
     (new Product($featuredProductOptions))->create(1, 'simple');
 
     // Act
-    $response = getJson(route('shop.api.products.index', ['featured' => 1]))->collect();
+    $response = getJson(route('shop.api.products.index', ['featured' => 1]))
+        ->assertOk()
+        ->collect();
 
     // Assert
     expect($response['data'])->each(function (Expectation $product) {
@@ -69,6 +73,7 @@ it('returns all products listing', function () {
 
     // Act & Assert
     getJson(route('shop.api.products.index'))
+        ->assertOk()
         ->assertJsonIsArray('data')
         ->assertJsonFragment([
             'id' => $product->id,
