@@ -1,7 +1,7 @@
 <?php
 
 use Pest\Expectation;
-use Webkul\Faker\Helpers\Product;
+use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product as ProductModel;
 
 use function Pest\Laravel\getJson;
@@ -27,7 +27,7 @@ it('returns a new products listing', function () {
         ],
     ];
 
-    (new Product($newProductOptions))->create(1, 'simple');
+    (new ProductFaker($newProductOptions))->create(1, 'simple');
 
     // Act
     $response = getJson(route('shop.api.products.index', ['new' => 1]))
@@ -54,7 +54,7 @@ it('returns a featured products listing', function () {
         ],
     ];
 
-    (new Product($featuredProductOptions))->create(1, 'simple');
+    (new ProductFaker($featuredProductOptions))->create(1, 'simple');
 
     // Act
     $response = getJson(route('shop.api.products.index', ['featured' => 1]))
@@ -69,7 +69,7 @@ it('returns a featured products listing', function () {
 
 it('returns all products listing', function () {
     // Arrange
-    $product = (new Product())->create(1, 'simple')->first();
+    $product = (new ProductFaker())->create(1, 'simple')->first();
 
     // Act & Assert
     getJson(route('shop.api.products.index'))
