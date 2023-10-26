@@ -3,8 +3,8 @@
 namespace Webkul\Core\ImageCache;
 
 use Config;
-use Intervention\Image\ImageCacheController;
 use Illuminate\Http\Response as IlluminateResponse;
+use Intervention\Image\ImageCacheController;
 
 class Controller extends ImageCacheController
 {
@@ -26,8 +26,8 @@ class Controller extends ImageCacheController
      * Get HTTP response of either original image file or
      * template applied file.
      *
-     * @param  string $template
-     * @param  string $filename
+     * @param  string  $template
+     * @param  string  $filename
      * @return Illuminate\Http\Response
      */
     public function getResponse($template, $filename)
@@ -47,8 +47,8 @@ class Controller extends ImageCacheController
     /**
      * Get HTTP response of template applied image file
      *
-     * @param  string $template
-     * @param  string $filename
+     * @param  string  $template
+     * @param  string  $filename
      * @return Illuminate\Http\Response
      */
     public function getImage($template, $filename)
@@ -90,7 +90,7 @@ class Controller extends ImageCacheController
             if ($template != 'logo') {
                 abort(404);
             }
-            
+
             $content = '';
         }
 
@@ -100,7 +100,7 @@ class Controller extends ImageCacheController
     /**
      * Builds HTTP response from given image data
      *
-     * @param  string $content
+     * @param  string  $content
      * @return Illuminate\Http\Response
      */
     protected function buildResponse($content)
@@ -130,7 +130,7 @@ class Controller extends ImageCacheController
             'Content-Type'   => $mime,
             'Cache-Control'  => 'max-age=' . $maxAge . ', public',
             'Content-Length' => strlen($content),
-            'Etag'           => $eTag
+            'Etag'           => $eTag,
         ]);
     }
 }

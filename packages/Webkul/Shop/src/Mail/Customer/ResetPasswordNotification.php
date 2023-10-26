@@ -2,8 +2,8 @@
 
 namespace Webkul\Shop\Mail\Customer;
 
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Notifications\Messages\MailMessage;
 
 class ResetPasswordNotification extends ResetPassword
 {
@@ -21,7 +21,7 @@ class ResetPasswordNotification extends ResetPassword
 
         return (new MailMessage)
             ->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
-            ->subject(__('shop::app.emails.customers.forgot-password.subject') )
+            ->subject(__('shop::app.emails.customers.forgot-password.subject'))
             ->view('shop::emails.customers.forgot-password', [
                 'userName' => $notifiable->name,
                 'token'    => $this->token,

@@ -2,8 +2,8 @@
 
 namespace Webkul\Admin\Mail\Admin;
 
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Notifications\Messages\MailMessage;
 
 class ResetPasswordNotification extends ResetPassword
 {
@@ -22,7 +22,7 @@ class ResetPasswordNotification extends ResetPassword
         return (new MailMessage)
             ->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
             ->view('admin::emails.admin.forget-password', [
-                'userName' => $notifiable->name,
+                'userName'  => $notifiable->name,
                 'token'     => $this->token,
             ]);
     }

@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Admin\Mail\Admin\ResetPasswordNotification;
 use Webkul\User\Contracts\Admin as AdminContract;
 use Webkul\User\Database\Factories\AdminFactory;
-use Webkul\Admin\Mail\Admin\ResetPasswordNotification;
 
 class Admin extends Authenticatable implements AdminContract
 {
@@ -114,8 +114,6 @@ class Admin extends Authenticatable implements AdminContract
 
     /**
      * Create a new factory instance for the model.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
     protected static function newFactory(): Factory
     {

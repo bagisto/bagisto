@@ -10,7 +10,6 @@ class ThemeCustomization
     /**
      * Create a new listener instance.
      *
-     * @param  \Webkul\Shop\Repositories\ThemeCustomizationRepository  $themeCustomizationRepository
      * @return void
      */
     public function __construct(protected ThemeCustomizationRepository $themeCustomizationRepository)
@@ -54,7 +53,7 @@ class ThemeCustomization
     /**
      * Before theme customization delete
      *
-     * @param  integer  $themeCustomizationId
+     * @param  int  $themeCustomizationId
      * @return void
      */
     public function beforeDelete($themeCustomizationId)

@@ -8,7 +8,7 @@ class DashboardController extends Controller
 {
     /**
      * Request param functions
-     * 
+     *
      * @var array
      */
     protected $typeFunctions = [
@@ -23,8 +23,7 @@ class DashboardController extends Controller
 
     /**
      * Create a controller instance.
-     * 
-     * @param  \Webkul\Admin\Helpers\Dashboard  $dashboardHelper
+     *
      * @return void
      */
     public function __construct(protected Dashboard $dashboardHelper)
@@ -33,7 +32,7 @@ class DashboardController extends Controller
 
     /**
      * Dashboard page.
-     * 
+     *
      * @return \Illuminate\View\View|\Illuminate\Http\JsonResponse
      */
     public function index()

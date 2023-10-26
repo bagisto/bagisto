@@ -52,7 +52,7 @@ return [
         'sort'       => 5,
         'icon'       => '',
     ],
-    
+
     /**
      * Catalog.
      */
@@ -116,7 +116,7 @@ return [
         'sort'       => 3,
         'icon'       => '',
     ],
-    
+
     /**
      * CMS.
      */
@@ -127,7 +127,6 @@ return [
         'sort'       => 5,
         'icon'       => 'icon-cms',
     ],
-    
 
     /**
      * Marketing.
@@ -194,7 +193,7 @@ return [
         'sort'       => 3,
         'icon'       => '',
     ],
-    
+
     /**
      * Reporting.
      */
@@ -312,5 +311,5 @@ return [
         'route'      => 'admin.configuration.index',
         'sort'       => 9,
         'icon'       => 'icon-configuration',
-    ]
+    ],
 ];

@@ -3,8 +3,8 @@
 namespace Webkul\Core\Listeners;
 
 use Spatie\ResponseCache\Events\ResponseCacheHit as ResponseCacheHitEvent;
-use Webkul\Core\Jobs\UpdateCreateVisitIndex;
 use Webkul\Core\Jobs\UpdateCreateVisitableIndex;
+use Webkul\Core\Jobs\UpdateCreateVisitIndex;
 
 class ResponseCacheHit
 {

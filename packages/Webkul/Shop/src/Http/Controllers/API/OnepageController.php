@@ -2,15 +2,15 @@
 
 namespace Webkul\Shop\Http\Controllers\API;
 
-use Illuminate\Http\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Customer\Repositories\CustomerRepository;
+use Illuminate\Http\Response;
 use Webkul\Checkout\Facades\Cart;
+use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Payment\Facades\Payment;
+use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shipping\Facades\Shipping;
-use Webkul\Shop\Http\Resources\CartResource;
 use Webkul\Shop\Http\Requests\Customer\CustomerAddressForm;
+use Webkul\Shop\Http\Resources\CartResource;
 
 class OnepageController extends APIController
 {
@@ -22,8 +22,7 @@ class OnepageController extends APIController
     public function __construct(
         protected OrderRepository $orderRepository,
         protected CustomerRepository $customerRepository
-    )
-    {
+    ) {
     }
 
     /**

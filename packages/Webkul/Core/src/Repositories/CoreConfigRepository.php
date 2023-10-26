@@ -4,7 +4,6 @@ namespace Webkul\Core\Repositories;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
-use Webkul\Core\Contracts\CoreConfig;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Core\Traits\CoreConfigField;
 
@@ -14,8 +13,6 @@ class CoreConfigRepository extends Repository
 
     /**
      * Specify model class name.
-     *
-     * @return string
      */
     public function model(): string
     {
@@ -25,7 +22,6 @@ class CoreConfigRepository extends Repository
     /**
      * Create.
      *
-     * @param  array  $data
      * @return \Webkul\Core\Contracts\CoreConfig
      */
     public function create(array $data)
@@ -54,7 +50,7 @@ class CoreConfigRepository extends Repository
                 $localeBased = ! empty($field['locale_based']);
 
                 if (
-                    getType($value) == 'array'
+                    gettype($value) == 'array'
                     && ! isset($value['delete'])
                 ) {
                     $value = implode(',', $value);
@@ -124,7 +120,6 @@ class CoreConfigRepository extends Repository
     /**
      * Recursive array.
      *
-     * @param  array  $formData
      * @param  string  $method
      * @return array
      */

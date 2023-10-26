@@ -3,7 +3,6 @@
 namespace Webkul\Admin\Listeners;
 
 use Illuminate\Support\Facades\Mail;
-use Webkul\Admin\Mail\Admin\UpdatePasswordNotification;
 
 class Admin
 {
@@ -15,6 +14,6 @@ class Admin
      */
     public function afterPasswordUpdated($admin)
     {
-        return;
+
     }
 }

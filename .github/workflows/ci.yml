@@ -51,5 +51,8 @@ jobs:
       - name: Running Bagisto Installer
         run: php artisan bagisto:install
 
+      - name: Running Code Style Test
+        run: vendor/bin/pint --test
+
       - name: Running Test
         run: vendor/bin/pest --colors=always

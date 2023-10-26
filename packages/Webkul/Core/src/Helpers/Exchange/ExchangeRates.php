@@ -2,7 +2,6 @@
 
 namespace Webkul\Core\Helpers\Exchange;
 
-use Webkul\Core\Helpers\Exchange\ExchangeRate;
 use Webkul\Core\Repositories\CurrencyRepository;
 use Webkul\Core\Repositories\ExchangeRateRepository;
 
@@ -25,15 +24,12 @@ class ExchangeRates extends ExchangeRate
     /**
      * Create a new helper instance.
      *
-     * @param  \Webkul\Core\Repositories\CurrencyRepository  $currencyRepository
-     * @param  \Webkul\Core\Repositories\ExchangeRateRepository  $exchangeRateRepository
      * @return  void
      */
-    public function  __construct(
+    public function __construct(
         protected CurrencyRepository $currencyRepository,
         protected ExchangeRateRepository $exchangeRateRepository
-    )
-    {
+    ) {
         $this->apiEndPoint = config('services.exchange_api.exchange_rates.url');
 
         $this->apiKey = config('services.exchange_api.exchange_rates.key');
@@ -57,14 +53,14 @@ class ExchangeRates extends ExchangeRate
                 'GET',
                 $this->apiEndPoint, [
                     'headers' => [
-                        'Content-Type' => "text/plain",
+                        'Content-Type' => 'text/plain',
                         'apikey'       => $this->apiKey,
-                    ], 
+                    ],
                     'query' => [
-                        'to'     => $currency->code, 
+                        'to'     => $currency->code,
                         'from'   => config('app.currency'),
-                        'amount' => 1
-                    ]
+                        'amount' => 1,
+                    ],
                 ]
             );
 

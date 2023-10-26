@@ -2,9 +2,9 @@
 
 namespace Webkul\User\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Routing\Router;
+use Illuminate\Support\ServiceProvider;
 use Webkul\User\Bouncer;
 use Webkul\User\Facades\Bouncer as BouncerFacade;
 use Webkul\User\Http\Middleware\Bouncer as BouncerMiddleware;

@@ -7,6 +7,6 @@ use Konekt\Concord\BaseModuleServiceProvider;
 class ModuleServiceProvider extends BaseModuleServiceProvider
 {
     protected $models = [
-        \Webkul\Notification\Models\Notification::class
+        \Webkul\Notification\Models\Notification::class,
     ];
 }

@@ -4,10 +4,10 @@ namespace Webkul\Admin\Http\Controllers\Settings;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\User\Repositories\RoleRepository;
-use Webkul\User\Repositories\AdminRepository;
 use Webkul\Admin\DataGrids\Settings\RolesDataGrid;
+use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\User\Repositories\AdminRepository;
+use Webkul\User\Repositories\RoleRepository;
 
 class RoleController extends Controller
 {
@@ -19,8 +19,7 @@ class RoleController extends Controller
     public function __construct(
         protected RoleRepository $roleRepository,
         protected AdminRepository $adminRepository
-    )
-    {
+    ) {
     }
 
     /**
@@ -62,10 +61,10 @@ class RoleController extends Controller
         Event::dispatch('user.role.create.before');
 
         $data = request()->only([
-            "name",
-            "description",
-            "permission_type",
-            "permissions"
+            'name',
+            'description',
+            'permission_type',
+            'permissions',
         ]);
 
         $role = $this->roleRepository->create($data);
@@ -118,9 +117,9 @@ class RoleController extends Controller
         }
 
         $data = array_merge(request()->only([
-            "name",
-            "description",
-            "permission_type",
+            'name',
+            'description',
+            'permission_type',
         ]), [
             'permissions' => request()->has('permissions') ? request('permissions') : [],
         ]);
@@ -139,8 +138,7 @@ class RoleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return \Illuminate\Http\JsonResponse
+     * @param  int  $id
      */
     public function destroy($id): JsonResponse
     {
@@ -149,7 +147,7 @@ class RoleController extends Controller
         if ($role->admins->count() >= 1) {
             return new JsonResponse(['message' => trans('admin::app.settings.roles.being-used', [
                 'name'   => 'admin::app.settings.roles.index.title',
-                'source' => 'admin::app.settings.roles.index.admin-user'
+                'source' => 'admin::app.settings.roles.index.admin-user',
             ])], 400);
         }
 
@@ -157,7 +155,7 @@ class RoleController extends Controller
             return new JsonResponse([
                 'message' => trans(
                     'admin::app.settings.roles.last-delete-error'
-                )
+                ),
             ], 400);
         }
 
@@ -175,7 +173,7 @@ class RoleController extends Controller
         return new JsonResponse([
             'message' => trans(
                 'admin::app.settings.roles.delete-failed'
-            )
+            ),
         ], 500);
     }
 }

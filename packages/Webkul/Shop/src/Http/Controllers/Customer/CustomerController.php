@@ -5,10 +5,10 @@ namespace Webkul\Shop\Http\Controllers\Customer;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-use Webkul\Shop\Http\Controllers\Controller;
+use Webkul\Core\Repositories\SubscribersListRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
-use Webkul\Core\Repositories\SubscribersListRepository;
+use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Shop\Http\Requests\Customer\ProfileRequest;
 
 class CustomerController extends Controller
@@ -22,8 +22,7 @@ class CustomerController extends Controller
         protected CustomerRepository $customerRepository,
         protected ProductReviewRepository $productReviewRepository,
         protected SubscribersListRepository $subscriptionRepository
-    )
-    {
+    ) {
     }
 
     /**
@@ -130,15 +129,14 @@ class CustomerController extends Controller
             } else {
                 if (isset($data['image'])) {
                     if (! empty($data['image'])) {
-                        Storage::delete((string)$customer->image);
+                        Storage::delete((string) $customer->image);
                     }
-                
+
                     $customer->image = null;
 
                     $customer->save();
                 }
             }
-
 
             session()->flash('success', trans('shop::app.customers.account.profile.edit-success'));
 

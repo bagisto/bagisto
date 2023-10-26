@@ -425,12 +425,12 @@ return [
             ],
 
             'carousel' => [
-                'view-all' => 'عرض الكل'
+                'view-all' => 'عرض الكل',
             ],
         ],
 
         'range-slider' => [
-            'range' => 'النطاق:'
+            'range' => 'النطاق:',
         ],
     ],
 
@@ -575,7 +575,7 @@ return [
         ],
 
         'cart' => [
-            'continue-to-checkout' => 'Continue to Checkout',
+            'continue-to-checkout'      => 'Continue to Checkout',
             'item-add-to-cart'          => 'تمت إضافة العنصر بنجاح',
             'inventory-warning'         => 'الكمية المطلوبة غير متوفرة، يرجى المحاولة مرة أخرى لاحقًا.',
             'illegal'                   => 'الكمية لا يمكن أن تكون أقل من واحدة.',

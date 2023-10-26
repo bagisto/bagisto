@@ -3,16 +3,15 @@
 namespace Webkul\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Webkul\Checkout\Contracts\CartItem as CartItemContract;
+use Webkul\Checkout\Database\Factories\CartItemFactory;
 use Webkul\Product\Models\ProductProxy;
 use Webkul\Product\Type\AbstractType;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Webkul\Checkout\Database\Factories\CartItemFactory;
-use Webkul\Checkout\Contracts\CartItem as CartItemContract;
-
 
 class CartItem extends Model implements CartItemContract
 {
@@ -34,8 +33,6 @@ class CartItem extends Model implements CartItemContract
 
     /**
      * Retrieve type instance
-     *
-     * @return AbstractType
      */
     public function getTypeInstance(): AbstractType
     {
@@ -88,8 +85,6 @@ class CartItem extends Model implements CartItemContract
 
     /**
      * Create a new factory instance for the model
-     *
-     * @return Factory
      */
     protected static function newFactory(): Factory
     {

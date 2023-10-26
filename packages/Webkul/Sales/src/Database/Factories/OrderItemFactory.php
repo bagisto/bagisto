@@ -2,10 +2,10 @@
 
 namespace Webkul\Sales\Database\Factories;
 
-use Webkul\Sales\Models\Order;
-use Webkul\Product\Models\Product;
-use Webkul\Sales\Models\OrderItem;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Webkul\Product\Models\Product;
+use Webkul\Sales\Models\Order;
+use Webkul\Sales\Models\OrderItem;
 
 class OrderItemFactory extends Factory
 {
@@ -18,12 +18,10 @@ class OrderItemFactory extends Factory
 
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
     public function definition(): array
     {
-        $now = date("Y-m-d H:i:s");
+        $now = date('Y-m-d H:i:s');
 
         if (isset($attributes['product_id'])) {
             $product = Product::query()

@@ -121,7 +121,7 @@ class ThemeDatagrid extends DataGrid
                 },
             ]);
         }
-    
+
         if (bouncer()->hasPermission('settings.themes.delete')) {
             $this->addAction([
                 'icon'   => 'icon-delete',

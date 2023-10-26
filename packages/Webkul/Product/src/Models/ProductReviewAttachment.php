@@ -10,9 +10,9 @@ use Webkul\Product\Contracts\ProductReviewAttachment as ProductReviewAttachmentC
 class ProductReviewAttachment extends Model implements ProductReviewAttachmentContract
 {
     /**
-     * Timestamp false 
+     * Timestamp false
      *
-     * @var boolean
+     * @var bool
      */
     public $timestamps = false;
 

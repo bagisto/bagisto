@@ -4,12 +4,12 @@ use Illuminate\Support\Facades\Route;
 use Webkul\Admin\Http\Controllers\Settings\ChannelController;
 use Webkul\Admin\Http\Controllers\Settings\CurrencyController;
 use Webkul\Admin\Http\Controllers\Settings\ExchangeRateController;
-use Webkul\Admin\Http\Controllers\Settings\LocaleController;
 use Webkul\Admin\Http\Controllers\Settings\InventorySourceController;
+use Webkul\Admin\Http\Controllers\Settings\LocaleController;
+use Webkul\Admin\Http\Controllers\Settings\RoleController;
 use Webkul\Admin\Http\Controllers\Settings\Tax\TaxCategoryController;
 use Webkul\Admin\Http\Controllers\Settings\Tax\TaxRateController;
 use Webkul\Admin\Http\Controllers\Settings\ThemeController;
-use Webkul\Admin\Http\Controllers\Settings\RoleController;
 use Webkul\Admin\Http\Controllers\Settings\UserController;
 
 /**

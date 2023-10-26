@@ -3,8 +3,8 @@
 namespace Webkul\Paypal\Helpers;
 
 use Webkul\Paypal\Payment\Standard;
-use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
+use Webkul\Sales\Repositories\OrderRepository;
 
 class Ipn
 {
@@ -21,20 +21,17 @@ class Ipn
      * @var \Webkul\Sales\Contracts\Order
      */
     protected $order;
+
     /**
      * Create a new helper instance.
      *
-     * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
-     * @param  \Webkul\Sales\Repositories\InvoiceRepository  $invoiceRepository
-     * @param  \Webkul\Paypal\Payment\Standard  $paypalStandard
      * @return void
      */
     public function __construct(
         protected Standard $paypalStandard,
         protected OrderRepository $orderRepository,
         protected InvoiceRepository $invoiceRepository
-    )
-    {
+    ) {
     }
 
     /**
@@ -54,7 +51,7 @@ class Ipn
         try {
             if (
                 isset($this->post['txn_type'])
-                && 'recurring_payment' == $this->post['txn_type']
+                && $this->post['txn_type'] == 'recurring_payment'
             ) {
 
             } else {
@@ -128,10 +125,10 @@ class Ipn
 
         curl_setopt_array($request, [
             CURLOPT_URL            => $url,
-            CURLOPT_POST           => TRUE,
+            CURLOPT_POST           => true,
             CURLOPT_POSTFIELDS     => http_build_query(['cmd' => '_notify-validate'] + $this->post),
-            CURLOPT_RETURNTRANSFER => TRUE,
-            CURLOPT_HEADER         => FALSE,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HEADER         => false,
         ]);
 
         $response = curl_exec($request);

@@ -105,12 +105,10 @@ class Sequencer implements SequencerContract
 
     /**
      * Create and return the next sequence number for e.g. an order.
-     *
-     * @return string
      */
     public function generate(): string
     {
-        return ($this->prefix) . sprintf(
+        return $this->prefix . sprintf(
             "%0{$this->length}d",
             ($this->lastId + 1)
         ) . ($this->suffix);

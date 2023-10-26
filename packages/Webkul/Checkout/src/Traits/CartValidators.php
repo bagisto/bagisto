@@ -15,7 +15,6 @@ trait CartValidators
      * Check whether cart has product.
      *
      * @param  \Webkul\Product\Models\Product  $product
-     * @return bool
      */
     public function hasProduct($product): bool
     {
@@ -32,8 +31,6 @@ trait CartValidators
 
     /**
      * Checks if cart has any error.
-     *
-     * @return bool
      */
     public function hasError(): bool
     {
@@ -49,8 +46,6 @@ trait CartValidators
 
     /**
      * Checks if all cart items have sufficient quantity.
-     *
-     * @return bool
      */
     public function isItemsHaveSufficientQuantity(): bool
     {
@@ -72,8 +67,7 @@ trait CartValidators
     /**
      * Checks if all cart items have sufficient quantity.
      *
-     * @param \Webkul\Checkout\Contracts\CartItem  $item
-     * @return bool
+     * @param  \Webkul\Checkout\Contracts\CartItem  $item
      */
     public function isItemHaveQuantity($item): bool
     {
@@ -82,8 +76,6 @@ trait CartValidators
 
     /**
      * Check minimum order.
-     *
-     * @return boolean
      */
     public function checkMinimumOrder(): bool
     {

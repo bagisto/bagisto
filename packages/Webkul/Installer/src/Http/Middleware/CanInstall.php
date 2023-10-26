@@ -10,10 +10,8 @@ use Webkul\Installer\Http\Helpers\DatabaseManager;
 class CanInstall
 {
     /**
-     * Handles Requests for Installer middleware. 
+     * Handles Requests for Installer middleware.
      *
-     * @param Request $request
-     * @param Closure $next
      * @return void
      */
     public function handle(Request $request, Closure $next)

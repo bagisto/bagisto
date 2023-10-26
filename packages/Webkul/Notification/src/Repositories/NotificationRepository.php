@@ -2,17 +2,15 @@
 
 namespace Webkul\Notification\Repositories;
 
-use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Facades\DB;
+use Webkul\Core\Eloquent\Repository;
 
 class NotificationRepository extends Repository
 {
     /**
      * Specify Model class name
-     *
-     * @return string
      */
-    function model(): string
+    public function model(): string
     {
         return 'Webkul\Notification\Contracts\Notification';
     }

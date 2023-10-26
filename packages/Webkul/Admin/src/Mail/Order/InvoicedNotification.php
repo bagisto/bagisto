@@ -5,7 +5,6 @@ namespace Webkul\Admin\Mail\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class InvoicedNotification extends Mailable
 {
@@ -21,8 +20,7 @@ class InvoicedNotification extends Mailable
     public function __construct(
         public $invoice,
         public $email = null
-    )
-    {
+    ) {
     }
 
     /**
