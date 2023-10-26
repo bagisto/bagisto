@@ -28,30 +28,6 @@ class ChannelTableSeeder extends Seeder
                 'locale'            => 'en',
                 'name'              => 'Default',
                 'home_seo'          => '{"meta_title": "Demo store", "meta_keywords": "Demo store meta keyword", "meta_description": "Demo store meta description"}',
-            ], [
-                'id'                => 2,
-                'channel_id'        => 1,
-                'locale'            => 'fr',
-                'name'              => 'Default',
-                'home_seo'          => '{"meta_title": "Demo store", "meta_keywords": "Demo store meta keyword", "meta_description": "Demo store meta description"}',
-            ], [
-                'id'                => 3,
-                'channel_id'        => 1,
-                'locale'            => 'nl',
-                'name'              => 'Default',
-                'home_seo'          => '{"meta_title": "Demo store", "meta_keywords": "Demo store meta keyword", "meta_description": "Demo store meta description"}',
-            ], [
-                'id'                => 4,
-                'channel_id'        => 1,
-                'locale'            => 'tr',
-                'name'              => 'Default',
-                'home_seo'          => '{"meta_title": "Demo store", "meta_keywords": "Demo store meta keyword", "meta_description": "Demo store meta description"}',
-            ], [
-                'id'                => 5,
-                'channel_id'        => 1,
-                'locale'            => 'es',
-                'name'              => 'Default',
-                'home_seo'          => '{"meta_title": "Demo store", "meta_keywords": "Demo store meta keyword", "meta_description": "Demo store meta description"}',
             ],
         ]);
 
