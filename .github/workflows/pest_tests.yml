@@ -1,4 +1,4 @@
-name: CI
+name: Pest Tests
 
 on: [push, pull_request]
 
@@ -6,7 +6,7 @@ permissions:
   contents: read
 
 jobs:
-  tests:
+  pest_tests:
     runs-on: ${{ matrix.operating-systems }}
 
     strategy:
@@ -28,13 +28,15 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
           extensions: curl, fileinfo, gd, intl, mbstring, openssl, pdo, pdo_mysql, tokenizer, zip
+          ini-values: error_reporting=E_ALL
+          tools: composer:v2
 
       - name: Running Composer Install
         run: composer install
@@ -51,8 +53,5 @@ jobs:
       - name: Running Bagisto Installer
         run: php artisan bagisto:install
 
-      - name: Running Code Style Test
-        run: vendor/bin/pint --test
-
-      - name: Running Test
+      - name: Running Pest Test
         run: vendor/bin/pest --colors=always
