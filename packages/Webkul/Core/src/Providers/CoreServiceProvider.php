@@ -32,8 +32,7 @@ class CoreServiceProvider extends ServiceProvider
         $this->publishes([
             dirname(__DIR__) . '/Config/concord.php'    => config_path('concord.php'),
             dirname(__DIR__) . '/Config/repository.php' => config_path('repository.php'),
-            dirname(__DIR__) . '/Config/scout.php'      => config_path('scout.php'),
-            dirname(__DIR__) . '/Config/visitor.php'      => config_path('visitor.php'),
+            dirname(__DIR__) . '/Config/visitor.php'    => config_path('visitor.php'),
         ]);
 
         $this->app->register(EventServiceProvider::class);

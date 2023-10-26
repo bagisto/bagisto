@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Event;
 use Webkul\Installer\Http\Helpers\ServerRequirements;
 use Webkul\Installer\Http\Helpers\EnvironmentManager;
 use Webkul\Installer\Http\Helpers\DatabaseManager;
@@ -15,13 +14,17 @@ class InstallerController extends Controller
 {
     /**
      * Const Variable For Min PHP Version
+     * 
+     * @var string
      */
-    const minPhpVersion = '8.1.0';
+    const MIN_PHP_VERSION = '8.1.0';
 
     /**
      * Const Variable for Static Customer Id 
+     * 
+     * @var integer
      */
-    const customerId = '1';
+    const USER_ID = 1;
 
     /**
      * Create a new controller instance
@@ -46,7 +49,7 @@ class InstallerController extends Controller
      */
     public function index()
     {
-        $phpVersion = $this->serverRequirements->checkPHPversion(self::minPhpVersion);
+        $phpVersion = $this->serverRequirements->checkPHPversion(self::MIN_PHP_VERSION);
 
         $requirements = $this->serverRequirements->validate();
 
@@ -63,9 +66,7 @@ class InstallerController extends Controller
     {
         $message = $this->environmentManager->generateEnv($request);
 
-        return new JsonResponse([
-            'data' => $message,
-        ]);
+        return new JsonResponse(['data' => $message]);
     }
 
     /**
@@ -101,18 +102,17 @@ class InstallerController extends Controller
     {
         $password = password_hash(request()->input('password'), PASSWORD_BCRYPT, ['cost' => 10]);
 
-        $data = [
-            'name'     => request()->input('admin'),
-            'email'    => request()->input('email'),
-            'password' => $password,
-            'role_id'  => 1,
-            'status'   => 1,
-        ];
-
         try {
             DB::table('admins')->updateOrInsert(
-                ['id' => self::customerId],
-                $data
+                [
+                    'id' => self::USER_ID
+                ], [
+                    'name'     => request()->input('admin'),
+                    'email'    => request()->input('email'),
+                    'password' => $password,
+                    'role_id'  => 1,
+                    'status'   => 1,
+                ]
             );
         } catch (\Throwable $th) {
             dd($th);
@@ -131,8 +131,6 @@ class InstallerController extends Controller
         $filePath = storage_path('installed');
         
         File::put($filePath, 'Your Bagisto App is Successfully Installed');
-
-        Event::dispatch('bagisto.installed');
 
         return $filePath;
     }

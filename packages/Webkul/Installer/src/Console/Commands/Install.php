@@ -5,7 +5,6 @@ namespace Webkul\Installer\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Event;
 
 class Install extends Command
 {
@@ -38,43 +37,61 @@ class Install extends Command
      */
     public function handle()
     {
-        // check for .env
+        /**
+         * Check for .env
+         */
         $this->checkForEnvFile();
 
-        // loading values at runtime
+        /**
+         * Loading values at runtime
+         */
         $this->loadEnvConfigAtRuntime();
 
-        // running `php artisan migrate`
+        /**
+         * Running `php artisan migrate`
+         */
         $this->warn('Step: Migrating all tables into database...');
         $migrate = $this->call('migrate:fresh');
         $this->info($migrate);
 
-        // running `php artisan db:seed`
+        /**
+         * Running `php artisan db:seed`
+         */
         $this->warn('Step: Seeding basic data for Bagisto kickstart...');
         $result = $this->call('db:seed');
         $this->info($result);
 
-        // running `php artisan bagisto:publish --force`
+        /**
+         * Running `php artisan bagisto:publish --force`
+         */
         $this->warn('Step: Publishing assets and configurations...');
         $result = $this->call('bagisto:publish', ['--force' => true]);
         $this->info($result);
 
-        // running `php artisan storage:link`
+        /**
+         * Running `php artisan storage:link`
+         */
         $this->warn('Step: Linking storage directory...');
         $result = $this->call('storage:link');
         $this->info($result);
 
-        // optimizing stuffs
+        /**
+         * Optimizing stuffs
+         */
         $this->warn('Step: Optimizing...');
         $result = $this->call('optimize');
         $this->info($result);
 
-        // running `composer dump-autoload`
+        /**
+         * Running `composer dump-autoload`
+         */
         $this->warn('Step: Composer autoload...');
         $result = shell_exec('composer dump-autoload');
         $this->info($result);
 
-        // removing the installer directory
+        /**
+         * Removing the installer directory
+         */
         if (is_dir('public/installer')) {
             if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
                 shell_exec('rmdir /s/q public\\installer');
@@ -83,7 +100,9 @@ class Install extends Command
             }
         }
 
-        // final information
+        /**
+         * Final information
+         */
         $this->info('-----------------------------');
         $this->info('Congratulations!');
         $this->info('The installation has been finished and you can now use Bagisto.');
@@ -91,8 +110,6 @@ class Install extends Command
         $this->info('Email: admin@example.com');
         $this->info('Password: admin123');
         $this->info('Cheers!');
-        
-        Event::dispatch('bagisto.installed');
     }
 
     /**
@@ -122,19 +139,19 @@ class Install extends Command
         try {
             File::copy('.env.example', '.env');
 
-            $default_app_url = 'http://localhost:8000';
-            $input_app_url = $this->ask('Please Enter the APP URL : ');
-            $this->envUpdate('APP_URL=', $input_app_url ? $input_app_url : $default_app_url);
+            $defaultAppUrl = 'http://localhost:8000';
+            $inputAppUrl = $this->ask('Please Enter the APP URL : ');
+            $this->envUpdate('APP_URL=', $inputAppUrl ? $inputAppUrl : $defaultAppUrl);
 
-            $default_admin_url = 'admin';
-            $input_admin_url = $this->ask('Please Enter the Admin URL : ');
-            $this->envUpdate('APP_ADMIN_URL=', $input_admin_url ?: $default_admin_url);
+            $defaultAdminUrl = 'admin';
+            $inputAdminUrl = $this->ask('Please Enter the Admin URL : ');
+            $this->envUpdate('APP_ADMIN_URL=', $inputAdminUrl ?: $defaultAdminUrl);
 
             $locale = $this->choice('Please select the default locale or press enter to continue', ['ar', 'en', 'es', 'fa', 'nl', 'pt_BR'], 1);
             $this->envUpdate('APP_LOCALE=', $locale);
 
-            $TimeZones = timezone_identifiers_list();
-            $timezone = $this->anticipate('Please enter the default timezone', $TimeZones, date_default_timezone_get());
+            $timeZones = timezone_identifiers_list();
+            $timezone = $this->anticipate('Please enter the default timezone', $timeZones, date_default_timezone_get());
             $this->envUpdate('APP_TIMEZONE=', $timezone);
 
             $currency = $this->choice('Please enter the default currency', ['USD', 'EUR'], 'USD');
@@ -168,10 +185,12 @@ class Install extends Command
     {
         $this->warn('Loading configs...');
 
-        /* environment directly checked from `.env` so changing in config won't reflect */
+        /**
+         * Environment directly checked from `.env` so changing in config won't reflect
+         */
         app()['env'] = $this->getEnvAtRuntime('APP_ENV');
 
-        /* setting for the first time and then `.env` values will be incharged */
+        /* setting for the first time and then `.env` values will be in charge */
         config(['database.connections.mysql.database' => $this->getEnvAtRuntime('DB_DATABASE')]);
         config(['database.connections.mysql.username' => $this->getEnvAtRuntime('DB_USERNAME')]);
         config(['database.connections.mysql.password' => $this->getEnvAtRuntime('DB_PASSWORD')]);
@@ -182,6 +201,9 @@ class Install extends Command
 
     /**
      * Check key in `.env` file because it will help to find values at runtime.
+     * 
+     * @param  string  $key
+     * @return string|boolean
      */
     protected static function getEnvAtRuntime($key)
     {
@@ -206,16 +228,23 @@ class Install extends Command
 
     /**
      * Update the .env values.
+     * 
+     * @param  string  $key
+     * @param  string  $value
+     * @return string
      */
     protected static function envUpdate($key, $value)
     {
         $path = base_path() . '/.env';
+        
         $data = file($path);
+
         $keyValueData = $changedData = [];
 
         if ($data) {
             foreach ($data as $line) {
                 $line = preg_replace('/\s+/', '', $line);
+
                 $rowValues = explode('=', $line);
 
                 if (strlen($line) !== 0) {
