@@ -15,8 +15,6 @@ class Column
 
     /**
      * Form input type.
-     *
-     * @var string
      */
     protected ?string $formInputType = null;
 

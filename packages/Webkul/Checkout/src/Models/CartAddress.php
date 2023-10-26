@@ -4,21 +4,19 @@ namespace Webkul\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Webkul\Checkout\Database\Factories\CartAddressFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Webkul\Checkout\Contracts\CartAddress as CartAddressContract;
+use Webkul\Checkout\Database\Factories\CartAddressFactory;
 use Webkul\Core\Models\Address;
 
 /**
  * Class CartAddress
  *
- * @package Webkul\Checkout\Models
  *
- * @property integer $cart_id
+ * @property int $cart_id
  * @property Cart $cart
- *
  */
 class CartAddress extends Address implements CartAddressContract
 {
@@ -37,8 +35,6 @@ class CartAddress extends Address implements CartAddressContract
 
     /**
      * The "booted" method of the model.
-     *
-     * @return void
      */
     protected static function boot(): void
     {
@@ -70,8 +66,6 @@ class CartAddress extends Address implements CartAddressContract
 
     /**
      * Create a new factory instance for the model
-     *
-     * @return Factory
      */
     protected static function newFactory(): Factory
     {

@@ -2,9 +2,9 @@
 
 namespace Webkul\Shop\Listeners;
 
-use Webkul\Shop\Mail\Order\CreatedNotification;
 use Webkul\Shop\Mail\Order\CanceledNotification;
 use Webkul\Shop\Mail\Order\CommentedNotification;
+use Webkul\Shop\Mail\Order\CreatedNotification;
 
 class Order extends Base
 {

@@ -2,9 +2,9 @@
 
 namespace Webkul\Core\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Webkul\Core\Contracts\Currency as CurrencyContract;
 use Webkul\Core\Database\Factories\CurrencyFactory;
@@ -27,10 +27,6 @@ class Currency extends Model implements CurrencyContract
 
     /**
      * Set currency code in capital
-     *
-     * @param $code
-     *
-     * @return void
      */
     public function setCodeAttribute($code): void
     {
@@ -47,8 +43,6 @@ class Currency extends Model implements CurrencyContract
 
     /**
      * Create a new factory instance for the model.
-     *
-     * @return Factory
      */
     protected static function newFactory(): Factory
     {

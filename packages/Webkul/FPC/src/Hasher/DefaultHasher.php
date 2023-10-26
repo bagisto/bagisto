@@ -9,9 +9,6 @@ class DefaultHasher extends BaseDefaultHasher
 {
     /**
      * Get the hash for the given request.
-     * 
-     * @param \Illuminate\Http\Request $request
-     * @return string
      */
     protected function getNormalizedRequestUri(Request $request): string
     {
@@ -20,9 +17,6 @@ class DefaultHasher extends BaseDefaultHasher
 
     /**
      * Get the cache name suffix for the given request.
-     * 
-     * @param \Illuminate\Http\Request $request
-     * @return string
      */
     protected function getCacheNameSuffix(Request $request): string
     {

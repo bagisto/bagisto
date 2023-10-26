@@ -18,7 +18,7 @@ class Cart
 
     /**
      * Apply valid cart rules to cart
-     * 
+     *
      * @param  \Webkul\Checkout\Contracts\Cart  $cart
      * @return void
      */

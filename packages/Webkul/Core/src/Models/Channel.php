@@ -3,15 +3,15 @@
 namespace Webkul\Core\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Category\Models\CategoryProxy;
+use Webkul\Core\Contracts\Channel as ChannelContract;
+use Webkul\Core\Database\Factories\ChannelFactory;
 use Webkul\Core\Eloquent\TranslatableModel;
 use Webkul\Inventory\Models\InventorySourceProxy;
-use Webkul\Core\Database\Factories\ChannelFactory;
-use Webkul\Core\Contracts\Channel as ChannelContract;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Channel extends TranslatableModel implements ChannelContract
 {
@@ -73,8 +73,6 @@ class Channel extends TranslatableModel implements ChannelContract
 
     /**
      * Get the base currency.
-     * 
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function base_currency(): BelongsTo
     {
@@ -83,8 +81,6 @@ class Channel extends TranslatableModel implements ChannelContract
 
     /**
      * Get the root category.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function root_category(): BelongsTo
     {
@@ -133,8 +129,6 @@ class Channel extends TranslatableModel implements ChannelContract
 
     /**
      * Create a new factory instance for the model
-     *
-     * @return Factory
      */
     protected static function newFactory(): Factory
     {

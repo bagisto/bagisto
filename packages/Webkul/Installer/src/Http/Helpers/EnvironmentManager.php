@@ -8,8 +8,7 @@ class EnvironmentManager
 {
     /**
      * Create a helper instance.
-     * 
-     * @param  \Webkul\Installer\Http\Helpers\DatabaseManager  $databaseManager
+     *
      * @return void
      */
     public function __construct(protected DatabaseManager $databaseManager)
@@ -20,7 +19,6 @@ class EnvironmentManager
      * Generate ENV File and Installation.
      *
      * @param [object] $request
-     * @return
      */
     public function generateEnv($request)
     {

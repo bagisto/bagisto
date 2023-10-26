@@ -3,7 +3,6 @@
 namespace Webkul\CMS\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Webkul\CMS\Providers\ModuleServiceProvider;
 
 class CMSServiceProvider extends ServiceProvider
 {

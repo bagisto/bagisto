@@ -2719,7 +2719,7 @@ return [
             'export-csv'    => 'خروجی CSV',
             'export-xls'    => 'خروجی XLS',
             'month'         => 'ماه',
-            'not-available' =>  'رکوردی موجود نیست.',
+            'not-available' => 'رکوردی موجود نیست.',
             'start-date'    => 'تاریخ شروع',
             'year'          => 'سال',
         ],

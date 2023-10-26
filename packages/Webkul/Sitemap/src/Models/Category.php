@@ -11,7 +11,7 @@ class Category extends BaseCategory implements Sitemapable
     /**
      * @return mixed
      */
-    public function toSitemapTag(): Url | string | array
+    public function toSitemapTag(): Url|string|array
     {
         if (
             ! $this->slug

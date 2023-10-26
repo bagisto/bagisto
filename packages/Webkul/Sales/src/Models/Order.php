@@ -266,8 +266,6 @@ class Order extends Model implements OrderContract
 
     /**
      * Checks if cart have stockable items
-     *
-     * @return boolean
      */
     public function haveStockableItems(): bool
     {
@@ -282,8 +280,6 @@ class Order extends Model implements OrderContract
 
     /**
      * Checks if new shipment is allow or not
-     *
-     * @return bool
      */
     public function canShip(): bool
     {
@@ -305,8 +301,6 @@ class Order extends Model implements OrderContract
 
     /**
      * Checks if new invoice is allow or not
-     *
-     * @return bool
      */
     public function canInvoice(): bool
     {
@@ -328,8 +322,6 @@ class Order extends Model implements OrderContract
 
     /**
      * Verify if a invoice is still unpaid
-     *
-     * @return bool
      */
     public function hasOpenInvoice(): bool
     {
@@ -346,8 +338,6 @@ class Order extends Model implements OrderContract
 
     /**
      * Checks if order can be canceled or not
-     *
-     * @return bool
      */
     public function canCancel(): bool
     {
@@ -390,8 +380,6 @@ class Order extends Model implements OrderContract
 
     /**
      * Checks if order can be refunded or not
-     *
-     * @return bool
      */
     public function canRefund(): bool
     {
@@ -424,8 +412,6 @@ class Order extends Model implements OrderContract
 
     /**
      * Create a new factory instance for the model.
-     *
-     * @return Factory
      */
     protected static function newFactory(): Factory
     {

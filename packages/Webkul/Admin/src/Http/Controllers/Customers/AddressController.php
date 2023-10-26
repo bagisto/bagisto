@@ -4,12 +4,12 @@ namespace Webkul\Admin\Http\Controllers\Customers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
+use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Rules\AlphaNumericSpace;
 use Webkul\Core\Rules\PhoneNumber;
-use Webkul\Customer\Rules\VatIdRule;
-use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
+use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Customer\Rules\VatIdRule;
 
 class AddressController extends Controller
 {
@@ -21,8 +21,7 @@ class AddressController extends Controller
     public function __construct(
         protected CustomerRepository $customerRepository,
         protected CustomerAddressRepository $customerAddressRepository
-    )
-    {
+    ) {
     }
 
     /**
@@ -53,8 +52,6 @@ class AddressController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
     public function store(): JsonResponse
     {
@@ -115,7 +112,6 @@ class AddressController extends Controller
      * Edit's the pre made resource of customer called address.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
      */
     public function update($id): JsonResponse
     {
@@ -173,7 +169,7 @@ class AddressController extends Controller
 
         $address = $this->customerAddressRepository->findOneWhere([
             'id'              => request('set_as_default'),
-            'customer_id'     => $id
+            'customer_id'     => $id,
         ]);
 
         if ($address) {

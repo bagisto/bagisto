@@ -31,7 +31,7 @@ return new class extends Migration
 
         Schema::table('product_review_images', function (Blueprint $table) {
             $table->string('type')->nullable()->change();
-            
+
             $table->dropColumn('mime_type');
         });
     }

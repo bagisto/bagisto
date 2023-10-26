@@ -4,10 +4,10 @@ namespace Webkul\Admin\Http\Controllers\Settings;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Inventory\Repositories\InventorySourceRepository;
 use Webkul\Admin\DataGrids\Settings\InventorySourcesDataGrid;
+use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\InventorySourceRequest;
+use Webkul\Inventory\Repositories\InventorySourceRepository;
 
 class InventorySourceController extends Controller
 {
@@ -139,8 +139,7 @@ class InventorySourceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return \Illuminate\Http\JsonResponse
+     * @param  int  $id
      */
     public function destroy($id): JsonResponse
     {
@@ -158,14 +157,14 @@ class InventorySourceController extends Controller
             Event::dispatch('inventory.inventory_source.delete.after', $id);
 
             return new JsonResponse([
-                'message' => trans('admin::app.settings.inventory-sources.delete-success')
+                'message' => trans('admin::app.settings.inventory-sources.delete-success'),
             ]);
         } catch (\Exception $e) {
             report($e);
         }
 
         return new JsonResponse([
-            'message' => trans('admin::app.settings.inventory-sources.delete-failed', ['name' => 'admin::app.settings.inventory_sources.index.title'])
+            'message' => trans('admin::app.settings.inventory-sources.delete-failed', ['name' => 'admin::app.settings.inventory_sources.index.title']),
         ], 500);
     }
 }

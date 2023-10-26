@@ -11,8 +11,8 @@ class ProductsCategoriesProxyController extends Controller
 {
     /**
      * Using const variable for status
-     * 
-     * @var integer Status
+     *
+     * @var int Status
      */
     const STATUS = 1;
 
@@ -25,8 +25,7 @@ class ProductsCategoriesProxyController extends Controller
         protected CategoryRepository $categoryRepository,
         protected ProductRepository $productRepository,
         protected ThemeCustomizationRepository $themeCustomizationRepository
-    )
-    {
+    ) {
     }
 
     /**
@@ -43,12 +42,12 @@ class ProductsCategoriesProxyController extends Controller
          */
         if (! preg_match('/^([\x{0621}-\x{064A}\x{4e00}-\x{9fa5}\x{3402}-\x{FA6D}\x{3041}-\x{30A0}\x{30A0}-\x{31FF}_a-z0-9-]+\/?)+$/u', $slugOrPath)) {
             visitor()->visit();
-            
+
             $customizations = $this->themeCustomizationRepository->orderBy('sort_order')->findWhere([
                 'status'     => self::STATUS,
-                'channel_id' => core()->getCurrentChannel()->id
+                'channel_id' => core()->getCurrentChannel()->id,
             ]);
-    
+
             return view('shop::home.index', compact('customizations'));
         }
 

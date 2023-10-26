@@ -2,9 +2,9 @@
 
 namespace Webkul\Core\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Webkul\CartRule\Models\CartRule;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CartRuleFactory extends Factory
 {
@@ -17,13 +17,11 @@ class CartRuleFactory extends Factory
 
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
     public function definition(): array
     {
         return [
-            'name' => Str::uuid(),
+            'name'                      => Str::uuid(),
             'description'               => $this->faker->sentence(),
             'starts_from'               => null,
             'ends_till'                 => null,

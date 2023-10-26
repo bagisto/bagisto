@@ -3,24 +3,20 @@
 namespace Webkul\Product\Listeners;
 
 use Illuminate\Support\Facades\Bus;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
-use Webkul\Product\Repositories\ProductGroupedProductRepository;
 use Webkul\Product\Helpers\Indexers\Flat as FlatIndexer;
+use Webkul\Product\Jobs\ElasticSearch\DeleteIndex as DeleteElasticSearchIndexJob;
+use Webkul\Product\Jobs\ElasticSearch\UpdateCreateIndex as UpdateCreateElasticSearchIndexJob;
 use Webkul\Product\Jobs\UpdateCreateInventoryIndex as UpdateCreateInventoryIndexJob;
 use Webkul\Product\Jobs\UpdateCreatePriceIndex as UpdateCreatePriceIndexJob;
-use Webkul\Product\Jobs\ElasticSearch\UpdateCreateIndex as UpdateCreateElasticSearchIndexJob;
-use Webkul\Product\Jobs\ElasticSearch\DeleteIndex as DeleteElasticSearchIndexJob;
+use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
+use Webkul\Product\Repositories\ProductGroupedProductRepository;
+use Webkul\Product\Repositories\ProductRepository;
 
 class Product
 {
     /**
      * Create a new listener instance.
      *
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
-     * @param  \Webkul\Product\Repositories\ProductBundleOptionProductRepository  $productBundleOptionProductRepository
-     * @param  \Webkul\Product\Repositories\ProductGroupedProductRepository  $productGroupedProductRepository
-     * @param  \Webkul\Product\Helpers\Indexers\Flat  $flatIndexer
      * @return void
      */
     public function __construct(
@@ -28,8 +24,7 @@ class Product
         protected ProductBundleOptionProductRepository $productBundleOptionProductRepository,
         protected ProductGroupedProductRepository $productGroupedProductRepository,
         protected FlatIndexer $flatIndexer
-    )
-    {
+    ) {
     }
 
     /**
@@ -65,7 +60,7 @@ class Product
     /**
      * Delete product indices
      *
-     * @param  integer  $productId
+     * @param  int  $productId
      * @return void
      */
     public function beforeDelete($productId)
@@ -100,7 +95,7 @@ class Product
         } elseif ($product->type == 'configurable') {
             $productIds = [
                 ...$product->variants->pluck('id')->toArray(),
-                ...$productIds
+                ...$productIds,
             ];
         }
 

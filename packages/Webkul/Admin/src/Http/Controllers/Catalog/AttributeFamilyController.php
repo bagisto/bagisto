@@ -4,10 +4,10 @@ namespace Webkul\Admin\Http\Controllers\Catalog;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Admin\DataGrids\Catalog\AttributeFamilyDataGrid;
+use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Attribute\Repositories\AttributeFamilyRepository;
+use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Rules\Code;
 
 class AttributeFamilyController extends Controller
@@ -20,8 +20,7 @@ class AttributeFamilyController extends Controller
     public function __construct(
         protected AttributeFamilyRepository $attributeFamilyRepository,
         protected AttributeRepository $attributeRepository
-    )
-    {
+    ) {
     }
 
     /**
@@ -125,8 +124,7 @@ class AttributeFamilyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return \Illuminate\Http\JsonResponse
+     * @param  int  $id
      */
     public function destroy($id): JsonResponse
     {
@@ -158,7 +156,6 @@ class AttributeFamilyController extends Controller
             report($e);
         }
 
-        
         return new JsonResponse([
             'message' => trans('admin::app.catalog.families.delete-failed', ['name' => 'admin::app.catalog.families.family']),
         ], 500);

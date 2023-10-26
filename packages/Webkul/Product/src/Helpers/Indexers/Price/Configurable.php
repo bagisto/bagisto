@@ -49,7 +49,7 @@ class Configurable extends AbstractType
 
         return min($minPrices);
     }
-    
+
     /**
      * Get product regular minimal price.
      *

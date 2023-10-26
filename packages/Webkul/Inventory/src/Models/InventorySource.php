@@ -3,10 +3,10 @@
 namespace Webkul\Inventory\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Webkul\Inventory\Database\Factories\InventorySourceFactory;
+use Illuminate\Database\Eloquent\Model;
 use Webkul\Inventory\Contracts\InventorySource as InventorySourceContract;
+use Webkul\Inventory\Database\Factories\InventorySourceFactory;
 
 class InventorySource extends Model implements InventorySourceContract
 {
@@ -16,8 +16,6 @@ class InventorySource extends Model implements InventorySourceContract
 
     /**
      * Create a new factory instance for the model.
-     *
-     * @return Factory
      */
     protected static function newFactory(): Factory
     {

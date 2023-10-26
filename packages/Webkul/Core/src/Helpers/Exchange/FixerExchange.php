@@ -2,7 +2,6 @@
 
 namespace Webkul\Core\Helpers\Exchange;
 
-use Webkul\Core\Helpers\Exchange\ExchangeRate;
 use Webkul\Core\Repositories\CurrencyRepository;
 use Webkul\Core\Repositories\ExchangeRateRepository;
 
@@ -10,30 +9,27 @@ class FixerExchange extends ExchangeRate
 {
     /**
      * API key
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $apiKey;
 
     /**
      * API endpoint
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $apiEndPoint;
 
     /**
      * Create a new helper instance.
      *
-     * @param  \Webkul\Core\Repositories\CurrencyRepository  $currencyRepository
-     * @param  \Webkul\Core\Repositories\ExchangeRateRepository  $exchangeRateRepository
      * @return void
      */
-    public function  __construct(
+    public function __construct(
         protected CurrencyRepository $currencyRepository,
         protected ExchangeRateRepository $exchangeRateRepository
-    )
-    {
+    ) {
         $this->apiEndPoint = 'http://data.fixer.io/api';
 
         $this->apiKey = config('services.exchange_api')['fixer']['key'];
@@ -41,7 +37,7 @@ class FixerExchange extends ExchangeRate
 
     /**
      * Fetch rates and updates in currency_exchange_rates table
-     * 
+     *
      * @return \Exception|void
      */
     public function updateRates()
@@ -53,7 +49,7 @@ class FixerExchange extends ExchangeRate
                 continue;
             }
 
-            $result = $client->request('GET', $this->apiEndPoint . '/' . date('Y-m-d') . '?access_key=' . $this->apiKey .'&base=' . config('app.currency') . '&symbols=' . $currency->code);
+            $result = $client->request('GET', $this->apiEndPoint . '/' . date('Y-m-d') . '?access_key=' . $this->apiKey . '&base=' . config('app.currency') . '&symbols=' . $currency->code);
 
             $result = json_decode($result->getBody()->getContents(), true);
 

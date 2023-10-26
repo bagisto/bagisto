@@ -90,7 +90,7 @@ class CartRuleCouponDataGrid extends DataGrid
             },
         ]);
     }
-    
+
     /**
      * Prepare mass actions.
      *

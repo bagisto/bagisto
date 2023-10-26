@@ -2,7 +2,6 @@
 
 namespace Webkul\Sales\Models;
 
-use Webkul\Checkout\Models\CartProxy;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Sales\Contracts\OrderComment as OrderCommentContract;
 

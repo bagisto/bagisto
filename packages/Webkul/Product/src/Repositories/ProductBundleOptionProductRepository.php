@@ -2,15 +2,13 @@
 
 namespace Webkul\Product\Repositories;
 
-use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Str;
+use Webkul\Core\Eloquent\Repository;
 
 class ProductBundleOptionProductRepository extends Repository
 {
     /**
      * Specify Model class name
-     *
-     * @return string
      */
     public function model(): string
     {
@@ -18,7 +16,7 @@ class ProductBundleOptionProductRepository extends Repository
     }
 
     /**
-     * @param array  $data
+     * @param  array  $data
      * @param  \Webkul\Product\Contracts\ProductBundleOption  $productBundleOption
      * @return void
      */

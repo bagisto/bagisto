@@ -3,20 +3,17 @@
 namespace Webkul\Core\Listeners;
 
 use Illuminate\Support\Facades\Log;
-use Prettus\Repository\Listeners\CleanCacheRepository as BaseCleanCacheRepository;
 use Prettus\Repository\Events\RepositoryEventBase;
 use Prettus\Repository\Helpers\CacheKeys;
+use Prettus\Repository\Listeners\CleanCacheRepository as BaseCleanCacheRepository;
 
 class CleanCacheRepository extends BaseCleanCacheRepository
 {
-    /**
-     * @param RepositoryEventBase $event
-     */
     public function handle(RepositoryEventBase $event)
     {
         try {
             $this->repository = $event->getRepository();
-            
+
             $cleanEnabled = $this->repository->allowedClean();
 
             if ($cleanEnabled) {

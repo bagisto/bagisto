@@ -2,11 +2,9 @@
 
 namespace Webkul\Product\Repositories;
 
-use Illuminate\Support\Facades\MimeType;
-use Webkul\Product\Contracts\ProductReviewAttachment;
-use Webkul\Product\Contracts\ProductReview;
 use Webkul\Core\Eloquent\Repository;
-
+use Webkul\Product\Contracts\ProductReview;
+use Webkul\Product\Contracts\ProductReviewAttachment;
 
 class ProductReviewAttachmentRepository extends Repository
 {
@@ -20,8 +18,6 @@ class ProductReviewAttachmentRepository extends Repository
 
     /**
      * Upload.
-     * 
-     * @return void
      */
     public function upload(array $attachments, ProductReview $review): void
     {

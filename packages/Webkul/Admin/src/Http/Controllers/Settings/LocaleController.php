@@ -3,9 +3,9 @@
 namespace Webkul\Admin\Http\Controllers\Settings;
 
 use Illuminate\Http\JsonResponse;
+use Webkul\Admin\DataGrids\Settings\LocalesDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\LocaleRepository;
-use Webkul\Admin\DataGrids\Settings\LocalesDataGrid;
 
 class LocaleController extends Controller
 {
@@ -34,8 +34,6 @@ class LocaleController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
     public function store(): JsonResponse
     {
@@ -50,7 +48,7 @@ class LocaleController extends Controller
             'name',
             'direction',
         ]);
-        
+
         $data['logo_path'] = request()->file('logo_path');
 
         $this->localeRepository->create($data);
@@ -63,8 +61,7 @@ class LocaleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
-     * @return \Illuminate\Http\JsonResponse
+     * @param  int  $id
      */
     public function edit($id): JsonResponse
     {
@@ -77,8 +74,6 @@ class LocaleController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
     public function update(): JsonResponse
     {
@@ -106,7 +101,7 @@ class LocaleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)

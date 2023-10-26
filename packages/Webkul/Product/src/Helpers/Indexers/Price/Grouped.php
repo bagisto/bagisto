@@ -20,7 +20,7 @@ class Grouped extends AbstractType
             'customer_group_id' => $this->customerGroup->id,
         ];
     }
-    
+
     /**
      * Get product minimal price.
      *

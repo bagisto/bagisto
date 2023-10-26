@@ -3,8 +3,8 @@
 namespace Webkul\Product\Repositories;
 
 use Illuminate\Container\Container;
-use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Str;
+use Webkul\Core\Eloquent\Repository;
 
 class ProductBundleOptionRepository extends Repository
 {
@@ -12,21 +12,17 @@ class ProductBundleOptionRepository extends Repository
      * Create a new repository instance.
      *
      * @param  Webkul\Product\Repositories\ProductBundleOptionProductRepository  $productBundleOptionProductRepository
-     * @param  \Illuminate\Container\Container  $container
      * @return void
      */
     public function __construct(
         protected ProductBundleOptionProductRepository $productBundleOptionProductRepository,
         Container $container
-    )
-    {
+    ) {
         parent::__construct($container);
     }
 
     /**
      * Specify Model class name
-     *
-     * @return string
      */
     public function model(): string
     {

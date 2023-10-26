@@ -15,7 +15,6 @@ return new class extends Migration
             $table->integer('column')->default(1)->after('name');
         });
 
-
         $families = DB::table('attribute_families')->get();
 
         foreach ($families as $family) {
@@ -27,17 +26,17 @@ return new class extends Migration
                     'position'            => 3,
                     'attribute_family_id' => $family->id,
                 ]);
-            
+
             $generalGroup = DB::table('attribute_groups')
                 ->where('name', 'General')
                 ->where('attribute_family_id', $family->id)
                 ->first();
-            
+
             $settingGroup = DB::table('attribute_groups')
                 ->where('name', 'Settings')
                 ->where('attribute_family_id', $family->id)
                 ->first();
-            
+
             DB::table('attribute_group_mappings')
                 ->where('attribute_group_id', $generalGroup->id)
                 ->whereIn('attribute_id', [5, 6, 7, 8, 26])
