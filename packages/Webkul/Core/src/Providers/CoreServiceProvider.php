@@ -10,7 +10,6 @@ use Webkul\Core\Core;
 use Webkul\Core\Exceptions\Handler;
 use Webkul\Core\Facades\Core as CoreFacade;
 use Webkul\Core\View\Compilers\BladeCompiler;
-use Webkul\Core\Visitor;
 use Webkul\Theme\ViewRenderEventManager;
 
 class CoreServiceProvider extends ServiceProvider
