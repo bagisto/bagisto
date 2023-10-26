@@ -114,7 +114,9 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "shetabit/visitor"
+            ]
         }
     },
     "config": {
