@@ -485,12 +485,25 @@ return [
                     'transaction-amount' => 'Сумма',
                 ],
 
-                'edit'  => [
+                'create'  => [
                     'already-paid'               => 'Уже оплачено',
                     'invoice-missing'            => 'Счет отсутствует',
                     'transaction-amount-zero'    => 'Сумма транзакции равна нулю',
                     'transaction-amount-exceeds' => 'Сумма транзакции превышает',
                     'transaction-saved'          => 'Транзакция успешно сохранена',
+                ],
+
+                'view' => [
+                    'title'            => 'Детали транзакции',
+                    'transaction-data' => 'Данные транзакции',
+                    'transaction-id'   => 'Идентификатор транзакции',
+                    'order-id'         => 'Идентификатор заказа',
+                    'invoice-id'       => 'Идентификатор счета',
+                    'payment-method'   => 'Метод оплаты',
+                    'created-at'       => 'Создано',
+                    'status'           => 'Статус',
+                    'payment-details'  => 'Детали оплаты',
+                    'amount'           => 'Сумма',
                 ],
             ],
         ],

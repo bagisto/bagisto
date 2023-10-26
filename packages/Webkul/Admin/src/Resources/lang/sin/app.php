@@ -485,12 +485,25 @@ return [
                     'transaction-amount' => 'මුදල',
                 ],
 
-                'edit'  => [
+                'create'  => [
                     'already-paid'               => 'දැක්කාක් ගෙවිය යුතුය',
                     'invoice-missing'            => 'ක්රෙඩිට් නොපවතියි',
                     'transaction-amount-zero'    => 'ක්රෙඩිට් මුදල වෙනස් විය',
                     'transaction-amount-exceeds' => 'ක්රෙඩිට් මුදල වඩාත් විය',
                     'transaction-saved'          => 'ක්රෙඩිට් සුරකින්න සාර්ථකව',
+                ],
+
+                'view' => [
+                    'title'            => 'සාමාජික විස්තර',
+                    'transaction-data' => 'සාමාජික දත්ත',
+                    'transaction-id'   => 'සාමාජික හැඳුනුම් අංකය',
+                    'order-id'         => 'ඇණවුම් හැඳුනුම් අංකය',
+                    'invoice-id'       => 'ඉන්වෝයිස් හැඳුනුම් අංකය',
+                    'payment-method'   => 'ගෙවීමේ ක්‍රමය',
+                    'created-at'       => 'සෑදීමේ දිනය',
+                    'status'           => 'ස්ථානය',
+                    'payment-details'  => 'ගෙවීමේ විස්තර',
+                    'amount'           => 'මුදල්',
                 ],
             ],
         ],

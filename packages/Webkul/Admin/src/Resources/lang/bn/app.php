@@ -485,12 +485,25 @@ return [
                     'transaction-amount' => 'পরিমাণ',
                 ],
 
-                'edit' => [
+                'create' => [
                     'already-paid'               => 'ইতিমধ্যে পেইড',
                     'invoice-missing'            => 'চালান অনুপস্থিত',
                     'transaction-amount-zero'    => 'লেনদেন পরিমাণ শূন্য',
                     'transaction-amount-exceeds' => 'লেনদেন পরিমাণ অধিক',
                     'transaction-saved'          => 'লেনদেন সফলভাবে সংরক্ষিত',
+                ],
+
+                'view' => [
+                    'title'            => 'লেনদেনের বিস্তারিত',
+                    'transaction-data' => 'লেনদেনের তথ্য',
+                    'transaction-id'   => 'লেনদেন আইডি',
+                    'order-id'         => 'অর্ডার আইডি',
+                    'invoice-id'       => 'ইনভয়েস আইডি',
+                    'payment-method'   => 'পেমেন্ট মেথড',
+                    'created-at'       => 'তৈরির তারিখ',
+                    'status'           => 'অবস্থা',
+                    'payment-details'  => 'পেমেন্ট বিবরণ',
+                    'amount'           => 'মৌল্য',
                 ],
             ],
         ],

@@ -33,6 +33,12 @@ class Invoice extends Base
         }
     }
 
+    /**
+     * Send Transaction mail.
+     *
+     * @param  \Webkul\Sale\Contracts\Invoice  $invoice
+     * @return void
+     */
     public function sendMail($invoice)
     {
         if ($invoice->email_sent) {
@@ -50,6 +56,12 @@ class Invoice extends Base
         }
     }
 
+    /**
+     * Create the transaction data for Money-transfer and Cash-on-delivery.
+     *
+     * @param  \Webkul\Sale\Contracts\Invoice  $invoice
+     * @return void
+     */
     public function createTransaction($invoice)
     {
         $transactionId = md5(uniqid());
