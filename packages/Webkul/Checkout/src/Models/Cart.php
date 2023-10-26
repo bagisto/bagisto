@@ -3,10 +3,10 @@
 namespace Webkul\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Checkout\Contracts\Cart as CartContract;
 use Webkul\Checkout\Database\Factories\CartFactory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Cart extends Model implements CartContract
 {
@@ -115,8 +115,6 @@ class Cart extends Model implements CartContract
 
     /**
      * Checks if cart have stockable items
-     *
-     * @return boolean
      */
     public function haveStockableItems(): bool
     {
@@ -131,8 +129,6 @@ class Cart extends Model implements CartContract
 
     /**
      * Checks if cart has downloadable items
-     *
-     * @return boolean
      */
     public function hasDownloadableItems(): bool
     {
@@ -142,8 +138,6 @@ class Cart extends Model implements CartContract
     /**
      * Returns true if cart contains one or many products with quantity box.
      * (for example: simple, configurable, virtual)
-     *
-     * @return bool
      */
     public function hasProductsWithQuantityBox(): bool
     {
@@ -158,8 +152,6 @@ class Cart extends Model implements CartContract
 
     /**
      * Checks if cart has items that allow guest checkout
-     *
-     * @return boolean
      */
     public function hasGuestCheckoutItems(): bool
     {
@@ -174,22 +166,18 @@ class Cart extends Model implements CartContract
 
     /**
      * Check minimum order.
-     *
-     * @return boolean
      */
     public function checkMinimumOrder(): bool
     {
-        $minimumOrderAmount = (float)(core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: 0);
+        $minimumOrderAmount = (float) (core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: 0);
 
-        $cartBaseSubTotal = (float)$this->base_sub_total;
+        $cartBaseSubTotal = (float) $this->base_sub_total;
 
         return $cartBaseSubTotal >= $minimumOrderAmount;
     }
 
     /**
      * Create a new factory instance for the model
-     *
-     * @return Factory
      */
     protected static function newFactory(): Factory
     {

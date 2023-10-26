@@ -29,7 +29,7 @@ class CategoryBulkTableSeeder extends Seeder
 
     public function run()
     {
-        for ($i = 0; $i < $this->numberOfParentCategories; ++$i) {
+        for ($i = 0; $i < $this->numberOfParentCategories; $i++) {
             $createdCategory = $this->categoryRepository->create([
                 'slug'        => $this->faker->slug,
                 'name'        => $this->faker->firstName,
@@ -39,14 +39,14 @@ class CategoryBulkTableSeeder extends Seeder
             ]);
 
             if ($createdCategory) {
-                for ($j = 0; $j < $this->numberOfChildCategories; ++$j) {
+                for ($j = 0; $j < $this->numberOfChildCategories; $j++) {
 
                     $this->categoryRepository->create([
                         'slug'        => $this->faker->slug,
                         'name'        => $this->faker->firstName,
                         'description' => $this->faker->text(),
                         'parent_id'   => $createdCategory->id,
-                        'status'      => 1
+                        'status'      => 1,
                     ]);
                 }
             }

@@ -5,7 +5,6 @@ namespace Webkul\Shop\Mail\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class ShippedNotification extends Mailable
 {

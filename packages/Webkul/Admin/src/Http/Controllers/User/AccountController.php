@@ -2,9 +2,9 @@
 
 namespace Webkul\Admin\Http\Controllers\User;
 
+use Hash;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
-use Hash;
 use Webkul\Admin\Http\Controllers\Controller;
 
 class AccountController extends Controller
@@ -35,7 +35,7 @@ class AccountController extends Controller
             'email'            => 'email|unique:admins,email,' . $user->id,
             'password'         => 'nullable|min:6|confirmed',
             'current_password' => 'required|min:6',
-            'image.*'          => 'nullable|mimes:bmp,jpeg,jpg,png,webp'
+            'image.*'          => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
         ]);
 
         $data = request()->only([
@@ -44,7 +44,7 @@ class AccountController extends Controller
             'password',
             'password_confirmation',
             'current_password',
-            'image'
+            'image',
         ]);
 
         if (! Hash::check($data['current_password'], $user->password)) {

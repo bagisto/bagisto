@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Shop\Contracts\ThemeCustomizationTranslation as ThemeCustomizationTranslationContract;
 
-
 class ThemeCustomizationTranslation extends Model implements ThemeCustomizationTranslationContract
 {
     use HasFactory;
@@ -14,7 +13,7 @@ class ThemeCustomizationTranslation extends Model implements ThemeCustomizationT
     /**
      * Timestamp false of the model
      *
-     * @var boolean
+     * @var bool
      */
     public $timestamps = false;
 

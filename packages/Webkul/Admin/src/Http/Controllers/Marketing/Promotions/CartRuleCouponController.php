@@ -3,10 +3,10 @@
 namespace Webkul\Admin\Http\Controllers\Marketing\Promotions;
 
 use Illuminate\Http\JsonResponse;
+use Webkul\Admin\DataGrids\Marketing\Promotions\CartRuleCouponDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\MassDestroyRequest;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
-use Webkul\Admin\DataGrids\Marketing\Promotions\CartRuleCouponDataGrid;
 
 class CartRuleCouponController extends Controller
 {
@@ -33,10 +33,9 @@ class CartRuleCouponController extends Controller
     /**
      * Generate coupon code for cart rule.
      *
-     * @param int $id
-     * @return \Illuminate\Http\JsonResponse
+     * @param  int  $id
      */
-    public function store($id):JsonResponse
+    public function store($id): JsonResponse
     {
         $this->validate(request(), [
             'coupon_qty'  => 'required|integer|min:1',
@@ -44,24 +43,23 @@ class CartRuleCouponController extends Controller
             'code_format' => 'required',
         ]);
 
-        if (!request('id')) {
+        if (! request('id')) {
             return new JsonResponse([
                 'message' => trans('admin::app.promotions.cart-rules-coupons.cart-rule-not-defined-error'
-            )], 400);
+                )], 400);
         }
 
         $this->cartRuleCouponRepository->generateCoupons(request()->all(), request('id'));
 
         return new JsonResponse([
             'message' => trans('admin::app.marketing.promotions.cart-rules-coupons.success', ['name' => 'Cart rule coupons']
-        )]);
+            )]);
     }
 
     /**
      * Delete Generated coupon code
      *
-     * @param int $id
-     * @return \Illuminate\Http\JsonResponse
+     * @param  int  $id
      */
     public function destroy($id): JsonResponse
     {

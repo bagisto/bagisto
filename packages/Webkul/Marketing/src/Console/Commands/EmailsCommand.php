@@ -24,7 +24,6 @@ class EmailsCommand extends Command
     /**
      * Create a new command instance.
      *
-     * @param  \Webkul\Marketing\Helpers\Campaign  $campaignHelper
      * @return void
      */
     public function __construct(protected Campaign $campaignHelper)

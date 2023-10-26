@@ -3,23 +3,20 @@
 namespace Webkul\CMS\Repositories;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Webkul\Core\Eloquent\Repository;
 use Webkul\CMS\Models\CmsPageTranslationProxy;
+use Webkul\Core\Eloquent\Repository;
 
 class CmsRepository extends Repository
 {
     /**
      * Specify Model class name
-     *
-     * @return string
      */
-    function model(): string
+    public function model(): string
     {
         return 'Webkul\CMS\Contracts\CmsPage';
     }
 
     /**
-     * @param  array  $data
      * @return \Webkul\CMS\Contracts\CmsPage
      */
     public function create(array $data)
@@ -44,12 +41,11 @@ class CmsRepository extends Repository
     }
 
     /**
-     * @param  array  $data
      * @param  int  $id
      * @param  string  $attribute
      * @return \Webkul\CMS\Contracts\CmsPage
      */
-    public function update(array $data, $id, $attribute = "id")
+    public function update(array $data, $id, $attribute = 'id')
     {
         $page = $this->find($id);
 

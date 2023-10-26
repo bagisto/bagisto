@@ -25,7 +25,7 @@ class View
 
             if ($attribute->type == 'boolean') {
                 $value = $value ? 'Yes' : 'No';
-            } elseif($value) {
+            } elseif ($value) {
                 if ($attribute->type == 'select') {
                     $attributeOption = $attributeOptionRepository->find($value);
 
@@ -42,7 +42,7 @@ class View
                 ) {
                     $labels = [];
 
-                    $attributeOptions = $attributeOptionRepository->findWhereIn('id', explode(",", $value));
+                    $attributeOptions = $attributeOptionRepository->findWhereIn('id', explode(',', $value));
 
                     foreach ($attributeOptions as $attributeOption) {
                         if ($label = $attributeOption->label) {
@@ -50,7 +50,7 @@ class View
                         }
                     }
 
-                    $value = implode(", ", $labels);
+                    $value = implode(', ', $labels);
                 }
             }
 

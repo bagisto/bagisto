@@ -15,24 +15,18 @@ class OrderRepository extends Repository
     /**
      * Create a new repository instance.
      *
-     * @param  \Webkul\Sales\Repositories\OrderItemRepository  $orderItemRepository
-     * @param  \Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository  $downloadableLinkPurchasedRepository
-     * @param  \Illuminate\Container\Container  $container
      * @return void
      */
     public function __construct(
         protected OrderItemRepository $orderItemRepository,
         protected DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository,
         Container $container
-    )
-    {
+    ) {
         parent::__construct($container);
     }
 
     /**
      * Specify model class name.
-     *
-     * @return string
      */
     public function model(): string
     {
@@ -124,7 +118,6 @@ class OrderRepository extends Repository
     /**
      * Create order.
      *
-     * @param  array  $data
      * @return \Webkul\Sales\Contracts\Order
      */
     public function create(array $data)
@@ -272,7 +265,7 @@ class OrderRepository extends Repository
     /**
      * Is order in closed state.
      *
-     * @param mixed $order
+     * @param  mixed  $order
      * @return void
      */
     public function isInClosedState($order)
@@ -292,7 +285,7 @@ class OrderRepository extends Repository
      * Update order status.
      *
      * @param  \Webkul\Sales\Contracts\Order  $order
-     * @param  string $orderState
+     * @param  string  $orderState
      * @return void
      */
     public function updateOrderStatus($order, $orderState = null)
@@ -302,7 +295,7 @@ class OrderRepository extends Repository
         if (! empty($orderState)) {
             $status = $orderState;
         } else {
-            $status = "processing";
+            $status = 'processing';
 
             if ($this->isInCompletedState($order)) {
                 $status = 'completed';

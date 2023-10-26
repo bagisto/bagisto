@@ -2,8 +2,8 @@
 
 namespace Webkul\Admin\Listeners;
 
-use Webkul\Admin\Mail\Order\ShippedNotification;
 use Webkul\Admin\Mail\Order\InventorySourceNotification;
+use Webkul\Admin\Mail\Order\ShippedNotification;
 
 class Shipment extends Base
 {
@@ -25,7 +25,6 @@ class Shipment extends Base
             }
 
             $this->prepareMail($shipment, new ShippedNotification($shipment));
-
 
             if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.new_inventory_source')) {
                 return;

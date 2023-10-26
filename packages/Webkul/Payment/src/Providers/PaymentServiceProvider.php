@@ -2,10 +2,10 @@
 
 namespace Webkul\Payment\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
-use Webkul\Payment\Payment;
+use Illuminate\Support\ServiceProvider;
 use Webkul\Payment\Facades\Payment as PaymentFacade;
+use Webkul\Payment\Payment;
 
 class PaymentServiceProvider extends ServiceProvider
 {
@@ -17,7 +17,7 @@ class PaymentServiceProvider extends ServiceProvider
     public function boot()
     {
         include __DIR__ . '/../Http/helpers.php';
-        
+
         $this->app->register(EventServiceProvider::class);
     }
 
@@ -32,6 +32,7 @@ class PaymentServiceProvider extends ServiceProvider
 
         $this->registerConfig();
     }
+
     /**
      * Register Bouncer as a singleton.
      *

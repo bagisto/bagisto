@@ -8,7 +8,7 @@ class CustomerController extends Controller
 {
     /**
      * Request param functions
-     * 
+     *
      * @var array
      */
     protected $typeFunctions = [
@@ -22,8 +22,7 @@ class CustomerController extends Controller
 
     /**
      * Create a controller instance.
-     * 
-     * @param  \Webkul\Admin\Helpers\Reporting  $reportingHelper
+     *
      * @return void
      */
     public function __construct(protected Reporting $reportingHelper)

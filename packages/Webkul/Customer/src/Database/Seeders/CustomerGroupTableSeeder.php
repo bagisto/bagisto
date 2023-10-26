@@ -2,8 +2,8 @@
 
 namespace Webkul\Customer\Database\Seeders;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class CustomerGroupTableSeeder extends Seeder
 {
@@ -27,7 +27,7 @@ class CustomerGroupTableSeeder extends Seeder
                 'code'            => 'wholesale',
                 'name'            => 'Wholesale',
                 'is_user_defined' => 0,
-            ]
+            ],
         ]);
     }
 }

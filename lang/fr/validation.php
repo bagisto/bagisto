@@ -126,7 +126,6 @@ return [
     'uploaded'             => 'Le chargement du champ :attribute a échoué.',
     'url'                  => 'Le format du champ :attribute est invalide.',
 
-
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

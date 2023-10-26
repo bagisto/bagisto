@@ -2,9 +2,9 @@
 
 namespace Webkul\Installer\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\ServiceProvider;
 use Webkul\Installer\Http\Middleware\CanInstall;
 
 class InstallerServiceProvider extends ServiceProvider
@@ -18,8 +18,6 @@ class InstallerServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap the application events.
-     *
-     * @param \Illuminate\Routing\Router $router
      */
     public function boot(Router $router)
     {
@@ -35,19 +33,15 @@ class InstallerServiceProvider extends ServiceProvider
     {
         $this->registerCommands();
 
-        $this->loadRoutesFrom(__DIR__.'/../Routes/web.php');
+        $this->loadRoutesFrom(__DIR__ . '/../Routes/web.php');
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'installer');
 
         Event::listen('bagisto.installed', 'Webkul\Installer\Listeners\Installer@installed');
-
-        Event::listen('bagisto.updates.check', 'Webkul\Installer\Listeners\Installer@getUpdates');
     }
 
     /**
      * Register the Installer Commands of this package.
-     *
-     * @return void
      */
     protected function registerCommands(): void
     {

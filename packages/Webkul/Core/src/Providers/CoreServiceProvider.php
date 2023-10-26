@@ -2,24 +2,22 @@
 
 namespace Webkul\Core\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Contracts\Debug\ExceptionHandler;
+use Illuminate\Support\ServiceProvider;
 use Webkul\Core\Core;
-use Webkul\Core\Visitor;
 use Webkul\Core\Exceptions\Handler;
 use Webkul\Core\Facades\Core as CoreFacade;
 use Webkul\Core\View\Compilers\BladeCompiler;
+use Webkul\Core\Visitor;
 use Webkul\Theme\ViewRenderEventManager;
 
 class CoreServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap services.
-     *
-     * @return void
      */
     public function boot(): void
     {
@@ -30,9 +28,9 @@ class CoreServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'core');
 
         $this->publishes([
-            dirname(__DIR__) . '/Config/concord.php'    => config_path('concord.php'),
-            dirname(__DIR__) . '/Config/repository.php' => config_path('repository.php'),
-            dirname(__DIR__) . '/Config/scout.php'      => config_path('scout.php'),
+            dirname(__DIR__) . '/Config/concord.php'      => config_path('concord.php'),
+            dirname(__DIR__) . '/Config/repository.php'   => config_path('repository.php'),
+            dirname(__DIR__) . '/Config/scout.php'        => config_path('scout.php'),
             dirname(__DIR__) . '/Config/visitor.php'      => config_path('visitor.php'),
         ]);
 
@@ -57,12 +55,25 @@ class CoreServiceProvider extends ServiceProvider
         $this->app->extend('command.up', function () {
             return new \Webkul\Core\Console\Commands\UpCommand;
         });
+
+        /**
+         * Image Cache route
+         */
+        if (is_string(config('imagecache.route'))) {
+            $filenamePattern = '[ \w\\.\\/\\-\\@\(\)\=]+';
+
+            /**
+             * Route to access template applied image file
+             */
+            $this->app['router']->get(config('imagecache.route') . '/{template}/{filename}', [
+                'uses' => 'Webkul\Core\ImageCache\Controller@getResponse',
+                'as'   => 'imagecache',
+            ])->where(['filename' => $filenamePattern]);
+        }
     }
 
     /**
      * Register services.
-     *
-     * @return void
      */
     public function register(): void
     {
@@ -75,8 +86,6 @@ class CoreServiceProvider extends ServiceProvider
 
     /**
      * Register Bouncer as a singleton.
-     *
-     * @return void
      */
     protected function registerFacades(): void
     {
@@ -99,8 +108,6 @@ class CoreServiceProvider extends ServiceProvider
 
     /**
      * Register the console commands of this package.
-     *
-     * @return void
      */
     protected function registerCommands(): void
     {
@@ -121,8 +128,6 @@ class CoreServiceProvider extends ServiceProvider
 
     /**
      * Register the Blade compiler implementation.
-     *
-     * @return void
      */
     public function registerBladeCompiler(): void
     {

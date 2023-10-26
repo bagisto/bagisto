@@ -8,8 +8,6 @@ class ExchangeRateRepository extends Repository
 {
     /**
      * Specify model class name.
-     *
-     * @return string
      */
     public function model(): string
     {

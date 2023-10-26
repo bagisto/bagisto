@@ -29,7 +29,7 @@ class ExchangeRateUpdate extends Command
     {
         try {
             app(config('services.exchange_api.' . config('services.exchange_api.default') . '.class'))->updateRates();
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
 
         }
     }

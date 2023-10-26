@@ -10,7 +10,6 @@ class Currency
     /**
      * Create a middleware instance.
      *
-     * @param  \Webkul\Core\Repositories\CurrencyRepository  $currencyRepository
      * @return void
      */
     public function __construct(protected CurrencyRepository $currencyRepository)
@@ -21,7 +20,6 @@ class Currency
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
      * @return mixed
      */
     public function handle($request, Closure $next)

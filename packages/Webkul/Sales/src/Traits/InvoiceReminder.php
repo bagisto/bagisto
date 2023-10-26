@@ -78,11 +78,11 @@ trait InvoiceReminder
     public function scopeInOverdueAndRemindersLimit($query)
     {
         $query->where('state', '=', 'overdue');
-        
+
         // Filter by next_reminder_date
-        $query->where(function($query) {
+        $query->where(function ($query) {
             $query->where('next_reminder_at', '<=', now())
-            ->orWhereNull('next_reminder_at');
+                ->orWhereNull('next_reminder_at');
         });
 
         // If the core config have maximum limit of reminders

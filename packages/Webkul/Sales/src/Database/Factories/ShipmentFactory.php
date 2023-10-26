@@ -2,10 +2,10 @@
 
 namespace Webkul\Sales\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Inventory\Models\InventorySource;
 use Webkul\Sales\Models\OrderAddress;
 use Webkul\Sales\Models\Shipment;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ShipmentFactory extends Factory
 {
@@ -18,8 +18,6 @@ class ShipmentFactory extends Factory
 
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
     public function definition(): array
     {
@@ -33,4 +31,3 @@ class ShipmentFactory extends Factory
         ];
     }
 }
-

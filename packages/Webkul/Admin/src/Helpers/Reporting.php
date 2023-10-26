@@ -5,9 +5,9 @@ namespace Webkul\Admin\Helpers;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
 use Webkul\Admin\Helpers\Reporting\Cart;
-use Webkul\Admin\Helpers\Reporting\Sale;
-use Webkul\Admin\Helpers\Reporting\Product;
 use Webkul\Admin\Helpers\Reporting\Customer;
+use Webkul\Admin\Helpers\Reporting\Product;
+use Webkul\Admin\Helpers\Reporting\Sale;
 use Webkul\Admin\Helpers\Reporting\Visitor;
 use Webkul\Product\Models\Product as ProductModel;
 
@@ -15,12 +15,7 @@ class Reporting
 {
     /**
      * Create a controller instance.
-     * 
-     * @param  \Webkul\Admin\Helpers\Reporting\Cart  $cartReporting
-     * @param  \Webkul\Admin\Helpers\Reporting\Sale  $saleReporting
-     * @param  \Webkul\Admin\Helpers\Reporting\Product  $productReporting
-     * @param  \Webkul\Admin\Helpers\Reporting\Customer  $customerReporting
-     * @param  \Webkul\Admin\Helpers\Reporting\Visitor  $visitorReporting
+     *
      * @return void
      */
     public function __construct(
@@ -29,15 +24,13 @@ class Reporting
         protected Product $productReporting,
         protected Customer $customerReporting,
         protected Visitor $visitorReporting
-    )
-    {
+    ) {
     }
 
     /**
      * Returns the sales statistics.
-     * 
+     *
      * @param  string  $type
-     * @return array
      */
     public function getTotalSalesStats($type = 'graph'): array
     {
@@ -80,9 +73,8 @@ class Reporting
 
     /**
      * Returns the sales statistics.
-     * 
+     *
      * @param  string  $type
-     * @return array
      */
     public function getAverageSalesStats($type = 'graph'): array
     {
@@ -125,9 +117,8 @@ class Reporting
 
     /**
      * Returns the total orders statistics.
-     * 
+     *
      * @param  string  $type
-     * @return array
      */
     public function getTotalOrdersStats($type = 'graph'): array
     {
@@ -140,7 +131,7 @@ class Reporting
                     ], [
                         'key'   => 'count',
                         'label' => trans('admin::app.reporting.sales.index.orders'),
-                    ]
+                    ],
                 ],
 
                 'records'  => $this->saleReporting->getCurrentTotalOrdersOverTime(request()->query('period') ?? 'day'),
@@ -159,8 +150,6 @@ class Reporting
 
     /**
      * Returns the purchase funnel statistics.
-     * 
-     * @return array
      */
     public function getPurchaseFunnelStats(): array
     {
@@ -185,7 +174,7 @@ class Reporting
             ],
 
             'orders' => [
-                'total' => $totalOrders = $this->saleReporting->getTotalUniqueOrdersUsers($startDate, $endDate),
+                'total'    => $totalOrders = $this->saleReporting->getTotalUniqueOrdersUsers($startDate, $endDate),
                 'progress' => round(min($totalVisitors > 0 ? ($totalOrders * 100) / $totalVisitors : 0, 100), 1),
             ],
         ];
@@ -193,9 +182,8 @@ class Reporting
 
     /**
      * Returns the abandoned carts statistics.
-     * 
+     *
      * @param  string  $type
-     * @return array
      */
     public function getAbandonedCartsStats($type = 'graph'): array
     {
@@ -224,7 +212,7 @@ class Reporting
 
         $products = $this->cartReporting->getAbandonedCartProducts(5);
 
-        $products->map(function($product) use ($totalAbandonedProducts) {
+        $products->map(function ($product) use ($totalAbandonedProducts) {
             if (! $totalAbandonedProducts) {
                 $product->progress = 0;
             } else {
@@ -244,9 +232,8 @@ class Reporting
 
     /**
      * Returns the sales statistics.
-     * 
+     *
      * @param  string  $type
-     * @return array
      */
     public function getRefundsStats($type = 'graph'): array
     {
@@ -289,9 +276,8 @@ class Reporting
 
     /**
      * Returns the tax collected statistics.
-     * 
+     *
      * @param  string  $type
-     * @return array
      */
     public function getTaxCollectedStats($type = 'graph'): array
     {
@@ -326,7 +312,7 @@ class Reporting
 
         $taxCategories = $this->saleReporting->getTopTaxCategories(5);
 
-        $taxCategories->map(function($taxCategory) use ($taxCollected) {
+        $taxCategories->map(function ($taxCategory) use ($taxCollected) {
             if (! $taxCollected['current']) {
                 $taxCategory->progress = 0;
             } else {
@@ -351,9 +337,8 @@ class Reporting
 
     /**
      * Returns the shipping collected statistics.
-     * 
+     *
      * @param  string  $type
-     * @return array
      */
     public function getShippingCollectedStats($type = 'graph'): array
     {
@@ -388,7 +373,7 @@ class Reporting
 
         $shippingMethods = $this->saleReporting->getTopShippingMethods(5);
 
-        $shippingMethods->map(function($shippingMethod) use($shippingCollected) {
+        $shippingMethods->map(function ($shippingMethod) use ($shippingCollected) {
             if (! $shippingCollected['current']) {
                 $shippingMethod->progress = 0;
             } else {
@@ -415,16 +400,15 @@ class Reporting
 
     /**
      * Returns the shipping collected statistics.
-     * 
+     *
      * @param  string  $type
-     * @return \Illuminate\Database\Eloquent\Collection|array
      */
     public function getTopPaymentMethods($type = 'graph'): Collection|array
     {
         if ($type == 'table') {
             $records = collect($this->saleReporting->getTopPaymentMethods());
 
-            $records = $records->map(function($paymentMethod) {
+            $records = $records->map(function ($paymentMethod) {
                 $paymentMethod->formatted_total = core()->formatBasePrice($paymentMethod->base_total);
 
                 $paymentMethod->title = $paymentMethod->title ?? core()->getConfigData('sales.payment_methods.' . $paymentMethod->method . '.title');
@@ -454,7 +438,7 @@ class Reporting
 
         $paymentMethods = $this->saleReporting->getTopPaymentMethods(5);
 
-        $paymentMethods->map(function($paymentMethod) use($totalOrders) {
+        $paymentMethods->map(function ($paymentMethod) use ($totalOrders) {
             if (! $totalOrders['current']) {
                 $paymentMethod->progress = 0;
             } else {
@@ -471,9 +455,8 @@ class Reporting
 
     /**
      * Returns the total customers statistics.
-     * 
+     *
      * @param  string  $type
-     * @return array
      */
     public function getTotalCustomersStats($type = 'graph'): array
     {
@@ -486,7 +469,7 @@ class Reporting
                     ], [
                         'key'   => 'total',
                         'label' => trans('admin::app.reporting.customers.index.customers'),
-                    ]
+                    ],
                 ],
 
                 'records'  => $this->customerReporting->getCurrentTotalCustomersOverTime(request()->query('period') ?? 'day'),
@@ -505,8 +488,6 @@ class Reporting
 
     /**
      * Returns the total customers statistics.
-     * 
-     * @return array
      */
     public function getCustomersTrafficStats(): array
     {
@@ -523,9 +504,8 @@ class Reporting
 
     /**
      * Returns the customers with most sales
-     * 
+     *
      * @param  string  $type
-     * @return \Illuminate\Database\Eloquent\Collection|array
      */
     public function getCustomersWithMostSales($type = 'graph'): Collection|array
     {
@@ -549,7 +529,7 @@ class Reporting
                     ], [
                         'key'   => 'formatted_total',
                         'label' => trans('admin::app.reporting.customers.index.total'),
-                    ]
+                    ],
                 ],
 
                 'records'  => $records,
@@ -560,7 +540,7 @@ class Reporting
 
         $customers = $this->customerReporting->getCustomersWithMostSales(5);
 
-        $customers->map(function($customer) use($totalSales) {
+        $customers->map(function ($customer) use ($totalSales) {
             if (! $totalSales['current']) {
                 $customer->progress = 0;
             } else {
@@ -575,9 +555,8 @@ class Reporting
 
     /**
      * Returns the customers with most orders
-     * 
+     *
      * @param  string  $type
-     * @return \Illuminate\Database\Eloquent\Collection|array
      */
     public function getCustomersWithMostOrders($type = 'graph'): Collection|array
     {
@@ -595,7 +574,7 @@ class Reporting
                     ], [
                         'key'   => 'orders',
                         'label' => trans('admin::app.reporting.customers.index.orders'),
-                    ]
+                    ],
                 ],
 
                 'records'  => $records,
@@ -606,7 +585,7 @@ class Reporting
 
         $customers = $this->customerReporting->getCustomersWithMostOrders(5);
 
-        $customers->map(function($customer) use($totalOrders) {
+        $customers->map(function ($customer) use ($totalOrders) {
             if (! $totalOrders['current']) {
                 $customer->progress = 0;
             } else {
@@ -619,9 +598,8 @@ class Reporting
 
     /**
      * Returns the customers with most reviews
-     * 
+     *
      * @param  string  $type
-     * @return \Illuminate\Database\Eloquent\Collection|array
      */
     public function getCustomersWithMostReviews($type = 'graph'): Collection|array
     {
@@ -639,7 +617,7 @@ class Reporting
                     ], [
                         'key'   => 'reviews',
                         'label' => trans('admin::app.reporting.customers.index.reviews'),
-                    ]
+                    ],
                 ],
 
                 'records'  => $records,
@@ -650,7 +628,7 @@ class Reporting
 
         $customers = $this->customerReporting->getCustomersWithMostReviews(5);
 
-        $customers->map(function($customer) use($totalReviews) {
+        $customers->map(function ($customer) use ($totalReviews) {
             if (! $totalReviews['current']) {
                 $customer->progress = 0;
             } else {
@@ -663,9 +641,8 @@ class Reporting
 
     /**
      * Returns the top customers
-     * 
+     *
      * @param  string  $type
-     * @return \Illuminate\Database\Eloquent\Collection|array
      */
     public function getTopCustomerGroups($type = 'graph'): Collection|array
     {
@@ -680,7 +657,7 @@ class Reporting
                     ], [
                         'key'   => 'total',
                         'label' => trans('admin::app.reporting.customers.index.customers'),
-                    ]
+                    ],
                 ],
 
                 'records'  => $records,
@@ -691,7 +668,7 @@ class Reporting
 
         $groups = $this->customerReporting->getGroupsWithMostCustomers(5);
 
-        $groups->map(function($group) use($totalCustomers) {
+        $groups->map(function ($group) use ($totalCustomers) {
             if (! $totalCustomers['current']) {
                 $group->progress = 0;
             } else {
@@ -704,9 +681,8 @@ class Reporting
 
     /**
      * Returns the total sold quantities statistics.
-     * 
+     *
      * @param  string  $type
-     * @return array
      */
     public function getTotalSoldQuantitiesStats($type = 'graph'): array
     {
@@ -719,7 +695,7 @@ class Reporting
                     ], [
                         'key'   => 'total',
                         'label' => trans('admin::app.reporting.products.index.quantities'),
-                    ]
+                    ],
                 ],
 
                 'records'  => $this->productReporting->getCurrentTotalSoldQuantitiesOverTime(request()->query('period') ?? 'day'),
@@ -738,9 +714,8 @@ class Reporting
 
     /**
      * Returns the total products added to wishlist statistics.
-     * 
+     *
      * @param  string  $type
-     * @return array
      */
     public function getTotalProductsAddedToWishlistStats($type = 'graph'): array
     {
@@ -753,13 +728,13 @@ class Reporting
                     ], [
                         'key'   => 'total',
                         'label' => trans('admin::app.reporting.products.index.total'),
-                    ]
+                    ],
                 ],
 
                 'records'  => $this->productReporting->getCurrentTotalProductsAddedToWishlistOverTime(request()->query('period') ?? 'day'),
             ];
         }
-        
+
         return [
             'wishlist'  => $this->productReporting->getTotalProductsAddedToWishlistProgress(),
 
@@ -772,9 +747,8 @@ class Reporting
 
     /**
      * Returns top selling products by revenue statistics.
-     * 
+     *
      * @param  string  $type
-     * @return \Illuminate\Database\Eloquent\Collection|array
      */
     public function getTopSellingProductsByRevenue($type = 'graph'): Collection|array
     {
@@ -801,7 +775,7 @@ class Reporting
                     ], [
                         'key'   => 'formatted_revenue',
                         'label' => trans('admin::app.reporting.products.index.revenue'),
-                    ]
+                    ],
                 ],
 
                 'records'  => $records,
@@ -812,7 +786,7 @@ class Reporting
 
         $products = $this->productReporting->getTopSellingProductsByRevenue(5);
 
-        $products->map(function($product) use($totalSales) {
+        $products->map(function ($product) use ($totalSales) {
             if (! $totalSales['current']) {
                 $product->progress = 0;
             } else {
@@ -827,9 +801,8 @@ class Reporting
 
     /**
      * Returns top selling products by quantity statistics.
-     * 
+     *
      * @param  string  $type
-     * @return \Illuminate\Database\Eloquent\Collection|array
      */
     public function getTopSellingProductsByQuantity($type = 'graph'): Collection|array
     {
@@ -847,7 +820,7 @@ class Reporting
                     ], [
                         'key'   => 'total_qty_ordered',
                         'label' => trans('admin::app.reporting.products.index.quantities'),
-                    ]
+                    ],
                 ],
 
                 'records'  => $records,
@@ -858,7 +831,7 @@ class Reporting
 
         $products = $this->productReporting->getTopSellingProductsByQuantity(5);
 
-        $products->map(function($product) use($totalSoldQuantities) {
+        $products->map(function ($product) use ($totalSoldQuantities) {
             if (! $totalSoldQuantities['current']) {
                 $product->progress = 0;
             } else {
@@ -871,9 +844,8 @@ class Reporting
 
     /**
      * Returns the products with most reviews
-     * 
+     *
      * @param  string  $type
-     * @return \Illuminate\Database\Eloquent\Collection|array
      */
     public function getProductsWithMostReviews($type = 'graph'): Collection|array
     {
@@ -891,7 +863,7 @@ class Reporting
                     ], [
                         'key'   => 'reviews',
                         'label' => trans('admin::app.reporting.products.index.reviews'),
-                    ]
+                    ],
                 ],
 
                 'records'  => $records,
@@ -902,7 +874,7 @@ class Reporting
 
         $products = $this->productReporting->getProductsWithMostReviews(5);
 
-        $products->map(function($product) use($totalReviews) {
+        $products->map(function ($product) use ($totalReviews) {
             if (! $totalReviews['current']) {
                 $product->progress = 0;
             } else {
@@ -915,9 +887,8 @@ class Reporting
 
     /**
      * Returns the products with most visits
-     * 
+     *
      * @param  string  $type
-     * @return \Illuminate\Database\Eloquent\Collection|array
      */
     public function getProductsWithMostVisits($type = 'graph'): Collection|array
     {
@@ -935,7 +906,7 @@ class Reporting
                     ], [
                         'key'   => 'visits',
                         'label' => trans('admin::app.reporting.products.index.visits'),
-                    ]
+                    ],
                 ],
 
                 'records'  => $records,
@@ -946,7 +917,7 @@ class Reporting
 
         $products = $this->visitorReporting->getVisitableWithMostVisits(ProductModel::class, 5);
 
-        $products->map(function($product) use($totalVisits) {
+        $products->map(function ($product) use ($totalVisits) {
             if (! $totalVisits['current']) {
                 $product->progress = 0;
             } else {
@@ -959,8 +930,6 @@ class Reporting
 
     /**
      * Returns date range
-     * 
-     * @return array
      */
     public function getDateRange(): array
     {
@@ -972,7 +941,7 @@ class Reporting
 
     /**
      * Get the start date.
-     * 
+     *
      * @return \Carbon\Carbon
      */
     public function getStartDate(): Carbon
@@ -982,7 +951,7 @@ class Reporting
 
     /**
      * Get the end date.
-     * 
+     *
      * @return \Carbon\Carbon
      */
     public function getEndDate(): Carbon

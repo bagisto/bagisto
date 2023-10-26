@@ -3,15 +3,15 @@
 namespace Webkul\Sales\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Webkul\Sales\Database\Factories\OrderItemFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Webkul\Product\Type\AbstractType;
 use Webkul\Sales\Contracts\OrderItem as OrderItemContract;
+use Webkul\Sales\Database\Factories\OrderItemFactory;
 
 class OrderItem extends Model implements OrderItemContract
 {
@@ -33,8 +33,6 @@ class OrderItem extends Model implements OrderItemContract
 
     /**
      * Retrieve type instance
-     *
-     * @return AbstractType
      */
     public function getTypeInstance(): AbstractType
     {
@@ -51,9 +49,6 @@ class OrderItem extends Model implements OrderItemContract
         return $this->typeInstance;
     }
 
-    /**
-     * @return bool
-     */
     public function isStockable(): bool
     {
         return $this->getTypeInstance()->isStockable();
@@ -203,9 +198,6 @@ class OrderItem extends Model implements OrderItemContract
         return $this->hasMany(DownloadableLinkPurchasedProxy::modelClass());
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $array = parent::toArray();
@@ -229,8 +221,6 @@ class OrderItem extends Model implements OrderItemContract
 
     /**
      * Create a new factory instance for the model.
-     *
-     * @return Factory
      */
     protected static function newFactory(): Factory
     {

@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\DB;
 
 class AttributeOptionTableSeeder extends Seeder
 {
-
     public function run()
     {
         DB::table('attribute_options')->delete();
@@ -60,7 +59,7 @@ class AttributeOptionTableSeeder extends Seeder
                 'admin_name'   => 'XL',
                 'sort_order'   => 4,
                 'attribute_id' => 24,
-            ]
+            ],
         ]);
 
         DB::table('attribute_option_translations')->insert([
@@ -109,7 +108,7 @@ class AttributeOptionTableSeeder extends Seeder
                 'locale'              => 'en',
                 'label'               => 'XL',
                 'attribute_option_id' => 9,
-            ]
+            ],
         ]);
     }
 }

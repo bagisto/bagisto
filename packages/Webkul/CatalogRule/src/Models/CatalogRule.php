@@ -42,7 +42,7 @@ class CatalogRule extends Model implements CatalogRuleContract
     {
         return $this->belongsToMany(CustomerGroupProxy::modelClass(), 'catalog_rule_customer_groups');
     }
-    
+
     /**
      * Get the Catalog rule Product that owns the catalog rule.
      */

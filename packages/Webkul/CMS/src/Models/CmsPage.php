@@ -2,9 +2,8 @@
 
 namespace Webkul\CMS\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Webkul\Core\Eloquent\TranslatableModel;
 use Webkul\CMS\Contracts\CmsPage as CmsPageContract;
+use Webkul\Core\Eloquent\TranslatableModel;
 use Webkul\Core\Models\ChannelProxy;
 
 class CmsPage extends TranslatableModel implements CmsPageContract
@@ -40,7 +39,7 @@ class CmsPage extends TranslatableModel implements CmsPageContract
 
     /**
      * Get the channels.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany;
      */
     public function channels()

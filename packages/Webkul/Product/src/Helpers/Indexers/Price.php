@@ -4,8 +4,8 @@ namespace Webkul\Product\Helpers\Indexers;
 
 use Illuminate\Support\Carbon;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductPriceIndexRepository;
+use Webkul\Product\Repositories\ProductRepository;
 
 class Price extends AbstractIndexer
 {
@@ -24,17 +24,13 @@ class Price extends AbstractIndexer
     /**
      * Create a new indexer instance.
      *
-     * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
-     * @param  \Webkul\Product\Repositories\ProductPriceIndexRepository  $productPriceIndexRepository
      * @return void
      */
     public function __construct(
         protected CustomerGroupRepository $customerGroupRepository,
         protected ProductRepository $productRepository,
         protected ProductPriceIndexRepository $productPriceIndexRepository
-    )
-    {
+    ) {
         $this->batchSize = self::BATCH_SIZE;
     }
 
@@ -59,13 +55,13 @@ class Price extends AbstractIndexer
                     'variants.catalog_rule_prices',
                 ])
                 ->cursorPaginate($this->batchSize);
- 
+
             $this->reindexBatch($paginator->items());
- 
+
             if (! $cursor = $paginator->nextCursor()) {
                 break;
             }
- 
+
             request()->query->add(['cursor' => $cursor->encode()]);
         }
 
@@ -101,24 +97,24 @@ class Price extends AbstractIndexer
                     $join->on('products.id', '=', 'special_price_to_pav.product_id')
                         ->where('special_price_to_pav.attribute_id', self::SPECIAL_PRICE_TO_ATTRIBUTE_ID);
                 })
-                ->where(function($query) {
+                ->where(function ($query) {
                     return $query->orWhere('special_price_from_pav.date_value', Carbon::now()->format('Y-m-d'))
                         ->orWhere('special_price_to_pav.date_value', Carbon::now()->subDays(1)->format('Y-m-d'));
                 })
                 ->cursorPaginate($this->batchSize);
- 
+
             $this->reindexBatch($paginator->items());
- 
+
             if (! $cursor = $paginator->nextCursor()) {
                 break;
             }
- 
+
             request()->query->add(['cursor' => $cursor->encode()]);
         }
 
         request()->query->remove('cursor');
     }
-    
+
     /**
      * Reindex products by batch size
      *
@@ -165,11 +161,11 @@ class Price extends AbstractIndexer
     /**
      * Check if index value changed
      *
-     * @return boolean
+     * @return bool
      */
     public function isIndexChanged($oldIndex, $newIndex)
     {
-        return (boolean) count(array_diff_assoc($oldIndex, $newIndex));
+        return (bool) count(array_diff_assoc($oldIndex, $newIndex));
     }
 
     /**
@@ -187,7 +183,7 @@ class Price extends AbstractIndexer
 
         return $typeIndexers[$product->type] = $product->getTypeInstance()->getPriceIndexer();
     }
-    
+
     /**
      * Returns all customer groups
      *

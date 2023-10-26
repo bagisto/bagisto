@@ -9,7 +9,7 @@ class Standard extends Paypal
      *
      * @var string
      */
-    protected $code  = 'paypal_standard';
+    protected $code = 'paypal_standard';
 
     /**
      * Line items fields mapping.
@@ -45,7 +45,6 @@ class Standard extends Paypal
             : 'https://ipnpb.paypal.com/cgi-bin/webscr';
     }
 
-
     /**
      * Return form field array.
      *
@@ -72,15 +71,16 @@ class Standard extends Paypal
         ];
 
         if ($this->getIsLineItemsEnabled()) {
-            $fields = array_merge($fields, array(
+            $fields = array_merge($fields, [
                 'cmd'    => '_cart',
                 'upload' => 1,
-            ));
+            ]);
 
             $this->addLineItemsFields($fields);
 
-            if ($cart->selected_shipping_rate)
+            if ($cart->selected_shipping_rate) {
                 $this->addShippingAsLineItems($fields, $cart->items()->count() + 1);
+            }
 
             if (isset($fields['tax'])) {
                 $fields['tax_cart'] = $fields['tax'];
@@ -90,10 +90,10 @@ class Standard extends Paypal
                 $fields['discount_amount_cart'] = $fields['discount_amount'];
             }
         } else {
-            $fields = array_merge($fields, array(
+            $fields = array_merge($fields, [
                 'cmd'           => '_ext-enter',
                 'redirect_cmd'  => '_xclick',
-            ));
+            ]);
         }
 
         $this->addAddressFields($fields);
@@ -105,7 +105,7 @@ class Standard extends Paypal
      * Add shipping as item.
      *
      * @param  array  $fields
-     * @param  int    $i
+     * @param  int  $i
      * @return void
      */
     protected function addShippingAsLineItems(&$fields, $i)

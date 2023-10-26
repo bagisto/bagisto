@@ -16,8 +16,6 @@ class CartItemValidationResult
 
     /**
      * Function to check if cart is invalid
-     *
-     * @return bool
      */
     public function isCartInvalid(): bool
     {
@@ -26,8 +24,6 @@ class CartItemValidationResult
 
     /**
      * Function to check if item is inactive
-     *
-     * @return bool
      */
     public function isItemInactive(): bool
     {
@@ -36,8 +32,6 @@ class CartItemValidationResult
 
     /**
      * Function to set if item is inactive
-     * 
-     * @return void
      */
     public function itemIsInactive(): void
     {
@@ -46,8 +40,6 @@ class CartItemValidationResult
 
     /**
      * Function to set if cart is invalid
-     * 
-     * @return void
      */
     public function cartIsInvalid(): void
     {

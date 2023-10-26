@@ -3,11 +3,11 @@
 namespace Webkul\Tax\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Model;
-use Webkul\Tax\Database\Factories\TaxCategoryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Webkul\Tax\Contracts\TaxCategory as TaxCategoryContract;
+use Webkul\Tax\Database\Factories\TaxCategoryFactory;
 
 class TaxCategory extends Model implements TaxCategoryContract
 {
@@ -18,7 +18,6 @@ class TaxCategory extends Model implements TaxCategoryContract
      *
      * @var array
      */
-
     protected $table = 'tax_categories';
 
     protected $fillable = [
@@ -36,8 +35,6 @@ class TaxCategory extends Model implements TaxCategoryContract
 
     /**
      * Create a new factory instance for the model.
-     *
-     * @return Factory
      */
     protected static function newFactory(): Factory
     {

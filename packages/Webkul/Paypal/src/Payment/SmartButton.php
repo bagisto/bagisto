@@ -3,11 +3,11 @@
 namespace Webkul\Paypal\Payment;
 
 use PayPalCheckoutSdk\Core\PayPalHttpClient;
-use PayPalCheckoutSdk\Core\SandboxEnvironment;
-use PayPalCheckoutSdk\Orders\OrdersGetRequest;
 use PayPalCheckoutSdk\Core\ProductionEnvironment;
-use PayPalCheckoutSdk\Orders\OrdersCreateRequest;
+use PayPalCheckoutSdk\Core\SandboxEnvironment;
 use PayPalCheckoutSdk\Orders\OrdersCaptureRequest;
+use PayPalCheckoutSdk\Orders\OrdersCreateRequest;
+use PayPalCheckoutSdk\Orders\OrdersGetRequest;
 use PayPalCheckoutSdk\Payments\CapturesRefundRequest;
 
 class SmartButton extends Paypal
@@ -31,7 +31,7 @@ class SmartButton extends Paypal
      *
      * @var string
      */
-    protected $code  = 'paypal_smart_button';
+    protected $code = 'paypal_smart_button';
 
     /**
      * Paypal partner attribution id.
@@ -59,7 +59,6 @@ class SmartButton extends Paypal
     {
         return new PayPalHttpClient($this->environment());
     }
-
 
     /**
      * Create order for approval of client.
@@ -128,7 +127,7 @@ class SmartButton extends Paypal
 
         $request->headers['PayPal-Partner-Attribution-Id'] = $this->paypalPartnerAttributionId;
         $request->body = $body;
-        
+
         return $this->client()->execute($request);
     }
 
