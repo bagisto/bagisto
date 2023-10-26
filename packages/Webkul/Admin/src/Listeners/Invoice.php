@@ -7,7 +7,6 @@ use Webkul\Sales\Repositories\OrderTransactionRepository;
 
 class Invoice extends Base
 {
-
     /**
      * Create a new controller instance.
      *

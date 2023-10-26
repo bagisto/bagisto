@@ -156,14 +156,16 @@
                                             @lang('admin::app.sales.transactions.index.view.payment-method') 
                                         </p>
 
-                                        <p 
-                                            class="text-gray-600 dark:text-gray-300"
-                                        > 
+                                        <p class="text-gray-600 dark:text-gray-300"> 
                                             @lang('admin::app.sales.transactions.index.view.status') 
                                         </p>
 
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.sales.transactions.index.view.created-at') 
+                                        </p>
+
+                                        <p class="text-gray-600 dark:text-gray-300">
+                                            @lang('admin::app.sales.transactions.index.view.amount') 
                                         </p>
                                     </div>
 
@@ -205,29 +207,15 @@
                                             v-text="data.transaction.created_at"
                                         >
                                         </p>
+
+                                        <p 
+                                            class="text-gray-600 dark:text-gray-300" 
+                                            v-text="data.transaction.amount"
+                                        >
+                                        </p>    
                                     </div>
                                 </div>
                             </div> 
-                            
-                            <div v-if="data.transactionDetailsData" class="">
-                                <p class="text-[18px] text-gray-600 dark:text-gray-300 font-semibold">
-                                    @lang('admin::app.sales.transactions.index.view.payment-details') 
-                                </p>
-
-                                <div v-for="(data, key) in data.transactionDetailsData" :key="key" class="flex w-full justify-between p-[16px]">
-                                    <div class="flex flex-col gap-y-[6px]">
-                                        <p class="text-gray-600 dark:text-gray-300"> 
-                                            @{{ key }}
-                                        </p>
-                                    </div>
-
-                                    <div class="flex flex-col gap-y-[6px]">
-                                        <p class="text-gray-600 dark:text-gray-300"> 
-                                            @{{ data }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </x-slot:content>
                 </x-admin::drawer>

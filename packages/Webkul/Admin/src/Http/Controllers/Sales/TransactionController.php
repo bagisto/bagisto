@@ -133,44 +133,10 @@ class TransactionController extends Controller
     {
         $transaction = $this->orderTransactionRepository->findOrFail($id);
 
-        $transData = json_decode(json_encode(json_decode($transaction['data'])), true);
-
-        $transactionDetailsData = $this->convertIntoSingleDimArray($transData);
-
         return new JsonResponse([
             'data' => [
                 'transaction' => $transaction,
-                'transactionDetailsData' => $transactionDetailsData,
             ]
         ]);
-    }
-
-    /**
-     * Convert transaction details data into single dim array.
-     *
-     * @param  array  $data
-     * @return array
-     */
-    public function convertIntoSingleDimArray($transData = [])
-    {
-        $detailsData = [];
-
-        if ($transData) {
-            foreach ($transData as $key => $data) {
-                if (is_array($data)) {
-                    $this->convertIntoSingleDimArray($data);
-                } else {
-                    $skipAttributes = ['sku', 'name', 'category', 'quantity'];
-    
-                    if (gettype($key) == 'integer' || in_array($key, $skipAttributes)) {
-                        continue;
-                    }
-    
-                    $detailsData[$key] = $data;
-                }
-            }
-        }
-
-        return $detailsData;
     }
 }

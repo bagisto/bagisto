@@ -491,13 +491,6 @@ return [
                     'invoice-missing'            => 'Invoice Missing',
                     'transaction-amount-zero'    => 'Transaction Amount zero',
                     'transaction-amount-exceeds' => 'Transaction Amount exceeds',
-                    'transaction-saved'          => 'Transaction Saved successfully',
-                    'create-btn'                 => 'Create Transaction',
-                    'title'                      => 'Create New Transaction',
-                    'payment-method'             => 'Payment Method',
-                    'select-option'              => 'Select Option',
-                    'amount'                     => 'Amount',
-                    'save-btn'                   => 'Save Transaction',
                 ],
 
                 'view' => [
@@ -510,6 +503,7 @@ return [
                     'created-at'       => 'Created At',
                     'status'           => 'Status',
                     'payment-details'  => 'Payment Details',
+                    'amount'           => 'Amount',
                 ],
             ],
         ],
