@@ -35,6 +35,8 @@ class CoreServiceProvider extends ServiceProvider
 
         $this->app->register(EventServiceProvider::class);
 
+        $this->app->register(VisitorServiceProvider::class);
+
         $this->app->bind(ExceptionHandler::class, Handler::class);
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'core');
