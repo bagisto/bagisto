@@ -121,10 +121,7 @@
             @foreach ($product->attribute_family->attribute_groups->groupBy('column') as $column => $groups)
                 {!! view_render_event('bagisto.admin.catalog.product.edit.form.column_' . $column . '.before', ['product' => $product]) !!}
 
-                <div
-                    @if ($column == 1) class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto" @endif
-                    @if ($column == 2) class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full" @endif
-                >
+                <div class="flex flex-col gap-[8px] @if ($column == 1) flex-1 max-xl:flex-auto @elseif ($column == 2) w-[360px] max-w-full max-sm:w-full @endif">
                     @foreach ($groups as $group)
                         @php
                             $customAttributes = $product->getEditableAttributes($group);

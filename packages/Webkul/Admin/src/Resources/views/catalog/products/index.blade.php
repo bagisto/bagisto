@@ -31,9 +31,9 @@
 
     {!! view_render_event('bagisto.admin.catalog.products.list.before') !!}
 
-    {{-- Datagrid --}}
+    <!-- Datagrid -->
     <x-admin::datagrid src="{{ route('admin.catalog.products.index') }}" :isMultiRow="true">
-        {{-- Datagrid Header --}}
+        <!-- Datagrid Header -->
         @php
             $hasPermission = bouncer()->hasPermission('catalog.products.mass-update') || bouncer()->hasPermission('catalog.products.mass-delete');
         @endphp
@@ -100,20 +100,20 @@
                 </div>
             </template>
 
-            {{-- Datagrid Head Shimmer --}}
+            <!-- Datagrid Head Shimmer -->
             <template v-else>
                 <x-admin::shimmer.datagrid.table.head :isMultiRow="true"></x-admin::shimmer.datagrid.table.head>
             </template>
         </template>
 
-        {{-- Datagrid Body --}}
+        <!-- Datagrid Body -->
         <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
             <template v-if="! isLoading">
                 <div
                     class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 px-[16px] py-[10px] border-b-[1px] dark:border-gray-800   transition-all hover:bg-gray-50 dark:hover:bg-gray-950  "
                     v-for="record in records"
                 >
-                    {{-- Name, SKU, Attribute Family Columns --}}
+                    <!-- Name, SKU, Attribute Family Columns -->
                     <div class="flex gap-[10px]">
                         @if ($hasPermission)
                             <input
@@ -153,7 +153,7 @@
                         </div>
                     </div>
 
-                    {{-- Image, Price, Id, Stock Columns --}}
+                    <!-- Image, Price, Id, Stock Columns -->
                     <div class="flex gap-[6px]">
                         <div class="relative">
                             <template v-if="record.base_image">
@@ -220,7 +220,7 @@
                         </div>
                     </div>
 
-                    {{-- Status, Category, Type Columns --}}
+                    <!-- Status, Category, Type Columns -->
                     <div class="flex gap-x-[16px] justify-between items-center">
                         <div class="flex flex-col gap-[6px]">
                             <p :class="[record.status ? 'label-active': 'label-info']">
@@ -253,7 +253,7 @@
                 </div>
             </template>
 
-            {{-- Datagrid Body Shimmer --}}
+            <!-- Datagrid Body Shimmer -->
             <template v-else>
                 <x-admin::shimmer.datagrid.table.body :isMultiRow="true"></x-admin::shimmer.datagrid.table.body>
             </template>
