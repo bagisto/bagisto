@@ -549,9 +549,12 @@ return [
         'sort'   => 2,
         'fields' => [
             [
-                'name'  => 'subscription',
-                'title' => 'admin::app.configuration.index.customer.settings.newsletter.subscription',
-                'type'  => 'boolean',
+                'name'         => 'subscription',
+                'title'        => 'admin::app.configuration.index.customer.settings.newsletter.subscription',
+                'type'         => 'boolean',
+                'default'      => true,
+                'locale_based' => true,
+                'chanel_based' => true,
             ],
         ],
     ], [
