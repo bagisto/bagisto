@@ -140,6 +140,8 @@
 
                                 this.$refs.couponModel.toggle();
 
+                                resetForm();
+
                                 return;
                             }
 
