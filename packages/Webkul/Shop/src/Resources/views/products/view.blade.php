@@ -330,6 +330,14 @@
                                     </span>
                                 </p>
 
+                                @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()))
+                                    <div class="discount-offers">
+                                        @foreach ($product->getTypeInstance()->getCustomerGroupPricingOffers() as $offer)
+                                            <p> {{ $offer }} </p>
+                                        @endforeach
+                                    </div>
+                                @endif
+
                                 {!! view_render_event('bagisto.shop.products.price.after', ['product' => $product]) !!}
 
                                 {!! view_render_event('bagisto.shop.products.short_description.before', ['product' => $product]) !!}
