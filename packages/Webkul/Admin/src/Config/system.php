@@ -552,7 +552,7 @@ return [
                 'name'         => 'subscription',
                 'title'        => 'admin::app.configuration.index.customer.settings.newsletter.subscription',
                 'type'         => 'boolean',
-                'default'      => true,
+                'default'      => 1,
                 'locale_based' => true,
                 'chanel_based' => true,
             ],
