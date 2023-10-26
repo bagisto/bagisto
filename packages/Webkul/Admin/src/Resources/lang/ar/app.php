@@ -2721,7 +2721,7 @@ return [
             'export-csv'    => 'تصدير كملف CSV',
             'export-xls'    => 'تصدير كملف XLS',
             'month'         => 'شهر',
-            'not-available' =>  'غير متاح أي سجلات.',
+            'not-available' => 'غير متاح أي سجلات.',
             'start-date'    => 'تاريخ البدء',
             'year'          => 'سنة',
         ],

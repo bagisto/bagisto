@@ -2,10 +2,10 @@
 
 namespace Webkul\Product\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Inventory\Models\InventorySource;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductInventory;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProductInventoryFactory extends Factory
 {
@@ -18,8 +18,6 @@ class ProductInventoryFactory extends Factory
 
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
     public function definition(): array
     {

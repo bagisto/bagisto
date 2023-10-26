@@ -39,7 +39,7 @@ class Base
 
         try {
             Mail::queue($notification);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             \Log::error('Error in Sending Email' . $e->getMessage());
         }
 

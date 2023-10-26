@@ -6,30 +6,25 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Webkul\Core\Models\SubscribersList;
 use Webkul\Marketing\Mail\NewsletterMail;
-use Webkul\Marketing\Repositories\EventRepository;
 use Webkul\Marketing\Repositories\CampaignRepository;
+use Webkul\Marketing\Repositories\EventRepository;
 
 class Campaign
 {
     /**
      * Create a new helper instance.
      *
-     * @param  \Webkul\Marketing\Repositories\EventRepository  $eventRepository
-     * @param  \Webkul\Marketing\Repositories\CampaignRepository  $campaignRepository
      *
      * @return void
      */
     public function __construct(
         protected EventRepository $eventRepository,
         protected CampaignRepository $campaignRepository
-    )
-    {
+    ) {
     }
 
     /**
      * Process the email.
-     *
-     * @return void
      */
     public function process(): void
     {

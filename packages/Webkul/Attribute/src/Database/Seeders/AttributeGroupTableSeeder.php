@@ -107,7 +107,7 @@ class AttributeGroupTableSeeder extends Seeder
                 'attribute_group_id'  => 1,
                 'position'            => 8,
             ],
-            
+
             /**
              * Description Group Attributes
              */
@@ -120,7 +120,7 @@ class AttributeGroupTableSeeder extends Seeder
                 'attribute_group_id'  => 2,
                 'position'            => 2,
             ],
-            
+
             /**
              * Meta Description Group Attributes
              */
@@ -145,7 +145,7 @@ class AttributeGroupTableSeeder extends Seeder
                 'attribute_group_id'  => 4,
                 'position'            => 5,
             ],
-            
+
             /**
              * Price Group Attributes
              */
@@ -162,7 +162,7 @@ class AttributeGroupTableSeeder extends Seeder
                 'attribute_group_id'  => 3,
                 'position'            => 3,
             ],
-            
+
             /**
              * Shipping Group Attributes
              */
@@ -216,7 +216,7 @@ class AttributeGroupTableSeeder extends Seeder
                 'attribute_id'        => 28,
                 'attribute_group_id'  => 7,
                 'position'            => 1,
-            ]
+            ],
         ]);
 
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');

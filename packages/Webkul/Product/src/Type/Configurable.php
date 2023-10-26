@@ -3,7 +3,6 @@
 namespace Webkul\Product\Type;
 
 use Illuminate\Support\Str;
-use Illuminate\Support\Arr;
 use Webkul\Admin\Validations\ConfigurableUniqueSku;
 use Webkul\Checkout\Models\CartItem as CartItemModel;
 use Webkul\Product\DataTypes\CartItemValidationResult;
@@ -134,7 +133,6 @@ class Configurable extends AbstractType
     /**
      * Create configurable product.
      *
-     * @param  array  $data
      * @return \Webkul\Product\Contracts\Product
      */
     public function create(array $data)
@@ -169,7 +167,6 @@ class Configurable extends AbstractType
     /**
      * Update configurable product.
      *
-     * @param  array  $data
      * @param  int  $id
      * @param  string  $attribute
      * @return \Webkul\Product\Contracts\Product
@@ -363,7 +360,6 @@ class Configurable extends AbstractType
     /**
      * Update variant.
      *
-     * @param  array  $data
      * @param  int  $id
      * @return \Webkul\Product\Contracts\Product
      */
@@ -687,7 +683,6 @@ class Configurable extends AbstractType
      * Validate cart item product price.
      *
      * @param  \Webkul\Product\Type\CartItem  $item
-     * @return \Webkul\Product\DataTypes\CartItemValidationResult
      */
     public function validateCartItem(CartItemModel $item): CartItemValidationResult
     {
@@ -718,9 +713,6 @@ class Configurable extends AbstractType
 
     /**
      * Is product have sufficient quantity.
-     *
-     * @param  int  $qty
-     * @return bool
      */
     public function haveSufficientQuantity(int $qty): bool
     {

@@ -11,7 +11,7 @@ class SearchRepository extends ProductRepository
 
     /**
      * Upload provided image
-     * 
+     *
      * @param  array  $data
      * @return string
      */

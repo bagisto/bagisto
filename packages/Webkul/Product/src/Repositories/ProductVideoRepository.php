@@ -6,8 +6,6 @@ class ProductVideoRepository extends ProductMediaRepository
 {
     /**
      * Specify model class name.
-     *
-     * @return string
      */
     public function model(): string
     {

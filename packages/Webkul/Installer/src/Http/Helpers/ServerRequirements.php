@@ -13,8 +13,6 @@ class ServerRequirements
 
     /**
      * Check for the server requirements.
-     *
-     * @return array
      */
     public function validate(): array
     {

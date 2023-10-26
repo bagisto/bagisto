@@ -17,7 +17,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
             Route::get('', 'index')->name('admin.reporting.customers.index');
 
             Route::get('stats', 'stats')->name('admin.reporting.customers.stats');
-            
+
             Route::get('export', 'export')->name('admin.reporting.customers.export');
 
             Route::get('view', 'view')->name('admin.reporting.customers.view');
@@ -32,7 +32,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
             Route::get('', 'index')->name('admin.reporting.products.index');
 
             Route::get('stats', 'stats')->name('admin.reporting.products.stats');
-            
+
             Route::get('export', 'export')->name('admin.reporting.products.export');
 
             Route::get('view', 'view')->name('admin.reporting.products.view');
@@ -47,7 +47,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
             Route::get('', 'index')->name('admin.reporting.sales.index');
 
             Route::get('stats', 'stats')->name('admin.reporting.sales.stats');
-            
+
             Route::get('export', 'export')->name('admin.reporting.sales.export');
 
             Route::get('view', 'view')->name('admin.reporting.sales.view');

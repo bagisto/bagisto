@@ -3,16 +3,13 @@
 namespace Webkul\Sales\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Sales\Contracts\RefundItem;
 
 class RefundItemRepository extends Repository
 {
     /**
      * Specify Model class name
-     *
-     * @return string
      */
-    function model(): string
+    public function model(): string
     {
         return 'Webkul\Sales\Contracts\RefundItem';
     }
@@ -52,7 +49,6 @@ class RefundItemRepository extends Repository
                         continue;
                     }
 
-
                     if ($orderItem->parent) {
                         $shippedQty = $orderItem->qty_ordered
                             ? ($orderItem->qty_ordered / $orderItem->parent->qty_ordered) * $shipmentItem->qty
@@ -60,7 +56,7 @@ class RefundItemRepository extends Repository
                     } else {
                         $shippedQty = $shipmentItem->qty;
                     }
-                    
+
                     $shippedQtyToRefund = $totalShippedQtyToRefund > $shippedQty ? $shippedQty : $totalShippedQtyToRefund;
 
                     $totalShippedQtyToRefund = $totalShippedQtyToRefund > $shippedQty ? $totalShippedQtyToRefund - $shippedQty : 0;
@@ -69,7 +65,7 @@ class RefundItemRepository extends Repository
                         //  ->where('vendor_id', $data['vendor_id'])
                         ->where('inventory_source_id', $shipmentItem->shipment->inventory_source_id)
                         ->first();
-            
+
                     $inventory->update(['qty' => $inventory->qty + $shippedQtyToRefund]);
                 }
 

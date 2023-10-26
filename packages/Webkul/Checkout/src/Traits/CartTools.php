@@ -46,8 +46,6 @@ trait CartTools
 
     /**
      * This method handles when guest has some of cart products and then logs in.
-     *
-     * @return void
      */
     public function mergeCart(): void
     {
@@ -97,8 +95,6 @@ trait CartTools
     /**
      * This method will merge deactivated cart, when a user suddenly navigates away
      * from the checkout after click the buy now button.
-     *
-     * @return void
      */
     public function mergeDeactivatedCart(): void
     {
@@ -140,8 +136,6 @@ trait CartTools
 
     /**
      * This method will reactivate the cart which is deactivated at the the time of buy now functionality.
-     *
-     * @return void
      */
     public function activateCartIfSessionHasDeactivatedCartId(): void
     {
@@ -156,8 +150,6 @@ trait CartTools
 
     /**
      * Deactivates current cart.
-     *
-     * @return void
      */
     public function deActivateCart(): void
     {
@@ -176,7 +168,6 @@ trait CartTools
      * Activate the cart by id.
      *
      * @param  int  $cartId
-     * @return void
      */
     public function activateCart($cartId): void
     {

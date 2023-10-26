@@ -5,15 +5,13 @@ namespace Webkul\Core\Repositories;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
-use Webkul\Core\Eloquent\Repository;
 use Webkul\Core\Contracts\Locale;
+use Webkul\Core\Eloquent\Repository;
 
 class LocaleRepository extends Repository
 {
     /**
      * Specify model class name.
-     *
-     * @return string
      */
     public function model(): string
     {
@@ -23,7 +21,6 @@ class LocaleRepository extends Repository
     /**
      * Create.
      *
-     * @param  array  $attributes
      * @return mixed
      */
     public function create(array $attributes)
@@ -42,8 +39,6 @@ class LocaleRepository extends Repository
     /**
      * Update.
      *
-     * @param  array  $attributes
-     * @param  $id
      * @return mixed
      */
     public function update(array $attributes, $id)
@@ -98,14 +93,14 @@ class LocaleRepository extends Repository
 
             return;
         }
-        
+
         foreach ($localeImages['logo_path'] as $image) {
             if ($image instanceof UploadedFile) {
                 $locale->logo_path = $image->storeAs(
                     'locales',
                     $locale->code . '.' . $image->getClientOriginalExtension()
                 );
-    
+
                 $locale->save();
             }
         }

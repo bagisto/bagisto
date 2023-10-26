@@ -50,7 +50,7 @@ class OrderShipmentsDataGrid extends DataGrid
         return $queryBuilder;
     }
 
-     /**
+    /**
      * Add Columns.
      *
      * @return void
@@ -121,7 +121,7 @@ class OrderShipmentsDataGrid extends DataGrid
         ]);
     }
 
-     /**
+    /**
      * Prepare actions.
      *
      * @return void

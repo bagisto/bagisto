@@ -8,16 +8,13 @@ class CustomerAddressRepository extends Repository
 {
     /**
      * Specify Model class name
-     *
-     * @return string
      */
-    function model(): string
+    public function model(): string
     {
         return 'Webkul\Customer\Contracts\CustomerAddress';
     }
 
     /**
-     * @param  array  $data
      * @return \Webkul\Customer\Contracts\CustomerAddress
      */
     public function create(array $data)
@@ -41,7 +38,6 @@ class CustomerAddressRepository extends Repository
     }
 
     /**
-     * @param  array  $data
      * @param  int  $id
      * @return \Webkul\Customer\Contracts\CustomerAddress
      */

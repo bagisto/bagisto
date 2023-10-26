@@ -95,7 +95,7 @@ return [
         'name'  => 'admin::app.acl.transactions',
         'route' => 'admin.sales.transactions.index',
         'sort'  => 5,
-    ],[
+    ], [
         'key'   => 'sales.transactions.view',
         'name'  => 'admin::app.acl.view',
         'route' => 'admin.sales.transactions.view',
@@ -810,5 +810,5 @@ return [
         'name'  => 'admin::app.acl.configure',
         'route' => 'admin.configuration.index',
         'sort'  => 9,
-    ]
+    ],
 ];

@@ -3,9 +3,9 @@
 namespace Webkul\Admin\Http\Controllers\Marketing\Communications;
 
 use Illuminate\Http\JsonResponse;
+use Webkul\Admin\DataGrids\Marketing\Communications\NewsLetterDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\SubscribersListRepository;
-use Webkul\Admin\DataGrids\Marketing\Communications\NewsLetterDataGrid;
 
 class SubscriptionController extends Controller
 {
@@ -36,14 +36,13 @@ class SubscriptionController extends Controller
      * Subscriber Details
      *
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
      */
     public function edit($id): JsonResponse
     {
         $subscriber = $this->subscribersListRepository->findOrFail($id);
 
         return new JsonResponse([
-            'data'  =>  $subscriber,
+            'data'  => $subscriber,
         ]);
     }
 
@@ -80,7 +79,7 @@ class SubscriptionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return void
      */
     public function destroy($id)

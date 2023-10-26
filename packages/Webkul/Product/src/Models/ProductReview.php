@@ -3,13 +3,13 @@
 namespace Webkul\Product\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Model;
-use Webkul\Customer\Models\CustomerProxy;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Webkul\Product\Database\Factories\ProductReviewFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Webkul\Customer\Models\CustomerProxy;
 use Webkul\Product\Contracts\ProductReview as ProductReviewContract;
+use Webkul\Product\Database\Factories\ProductReviewFactory;
 
 class ProductReview extends Model implements ProductReviewContract
 {
@@ -51,8 +51,6 @@ class ProductReview extends Model implements ProductReviewContract
 
     /**
      * Create a new factory instance for the model.
-     *
-     * @return Factory
      */
     protected static function newFactory(): Factory
     {

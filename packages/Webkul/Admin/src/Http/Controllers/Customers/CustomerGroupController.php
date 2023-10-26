@@ -2,12 +2,12 @@
 
 namespace Webkul\Admin\Http\Controllers\Customers;
 
-use Illuminate\Support\Facades\Event;
 use Illuminate\Http\JsonResponse;
-use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Customer\Repositories\CustomerGroupRepository;
+use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\Customers\GroupDataGrid;
+use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Rules\Code;
+use Webkul\Customer\Repositories\CustomerGroupRepository;
 
 class CustomerGroupController extends Controller
 {
@@ -37,8 +37,6 @@ class CustomerGroupController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
     public function store(): JsonResponse
     {
@@ -51,7 +49,7 @@ class CustomerGroupController extends Controller
 
         $data = array_merge(request()->only([
             'code',
-            'name'
+            'name',
         ]), [
             'is_user_defined' => 1,
         ]);
@@ -67,8 +65,6 @@ class CustomerGroupController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
     public function update(): JsonResponse
     {
@@ -83,7 +79,7 @@ class CustomerGroupController extends Controller
 
         $data = request()->only([
             'code',
-            'name'
+            'name',
         ]);
 
         $customerGroup = $this->customerGroupRepository->update($data, $id);
@@ -98,14 +94,13 @@ class CustomerGroupController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return \Illuminate\Http\JsonResponse
+     * @param  int  $id
      */
     public function destroy($id): JsonResponse
     {
         $customerGroup = $this->customerGroupRepository->findOrFail($id);
 
-        if (!$customerGroup->is_user_defined) {
+        if (! $customerGroup->is_user_defined) {
             return new JsonResponse([
                 'message' => trans('admin::app.customers.groups.index.edit.group-default'),
             ], 400);

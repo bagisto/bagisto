@@ -2,9 +2,8 @@
 
 namespace Webkul\Core\Database\Factories;
 
-use Faker\Generator as Faker;
-use Webkul\Core\Models\Currency;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Webkul\Core\Models\Currency;
 
 class CurrencyFactory extends Factory
 {
@@ -17,8 +16,6 @@ class CurrencyFactory extends Factory
 
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
     public function definition(): array
     {

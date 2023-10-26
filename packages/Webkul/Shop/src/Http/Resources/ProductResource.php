@@ -9,7 +9,7 @@ class ProductResource extends JsonResource
 {
     /**
      * Create a new resource instance.
-     * 
+     *
      * @param  mixed  $resource
      * @return void
      */
@@ -19,7 +19,6 @@ class ProductResource extends JsonResource
 
         parent::__construct($resource);
     }
-    
 
     /**
      * Transform the resource into an array.

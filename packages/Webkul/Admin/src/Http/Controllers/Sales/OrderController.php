@@ -2,12 +2,12 @@
 
 namespace Webkul\Admin\Http\Controllers\Sales;
 
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\DB;
-use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Sales\Repositories\OrderCommentRepository;
+use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\Sales\OrderDataGrid;
+use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Sales\Repositories\OrderCommentRepository;
+use Webkul\Sales\Repositories\OrderRepository;
 
 class OrderController extends Controller
 {
@@ -19,8 +19,7 @@ class OrderController extends Controller
     public function __construct(
         protected OrderRepository $orderRepository,
         protected OrderCommentRepository $orderCommentRepository
-    )
-    {
+    ) {
     }
 
     /**
@@ -81,7 +80,7 @@ class OrderController extends Controller
 
         $data = array_merge(request()->only([
             'comment',
-            'customer_notified'
+            'customer_notified',
         ]), [
             'order_id'          => $id,
             'customer_notified' => request()->has('customer_notified'),
@@ -105,7 +104,7 @@ class OrderController extends Controller
     {
         $results = [];
 
-        $orders = $this->orderRepository->scopeQuery(function($query) {
+        $orders = $this->orderRepository->scopeQuery(function ($query) {
             return $query->where('customer_email', 'like', '%' . urldecode(request()->input('query')) . '%')
                 ->orWhere('status', 'like', '%' . urldecode(request()->input('query')) . '%')
                 ->orWhere(DB::raw('CONCAT(' . DB::getTablePrefix() . 'customer_first_name, " ", ' . DB::getTablePrefix() . 'customer_last_name)'), 'like', '%' . urldecode(request()->input('query')) . '%')

@@ -3,9 +3,9 @@
 namespace Webkul\Admin\Http\Controllers\Settings;
 
 use Illuminate\Http\JsonResponse;
+use Webkul\Admin\DataGrids\Settings\CurrencyDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\CurrencyRepository;
-use Webkul\Admin\DataGrids\Settings\CurrencyDataGrid;
 
 class CurrencyController extends Controller
 {
@@ -41,8 +41,6 @@ class CurrencyController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
     public function store(): JsonResponse
     {
@@ -72,7 +70,6 @@ class CurrencyController extends Controller
      * Currency Details
      *
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
      */
     public function edit($id): JsonResponse
     {
@@ -83,8 +80,6 @@ class CurrencyController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
     public function update(): JsonResponse
     {
@@ -115,7 +110,7 @@ class CurrencyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return void
      */
     public function destroy($id)
@@ -124,7 +119,7 @@ class CurrencyController extends Controller
 
         if ($this->currencyRepository->count() == 1) {
             return response()->json([
-                'message' => trans('admin::app.settings.currencies.index.last-delete-error')
+                'message' => trans('admin::app.settings.currencies.index.last-delete-error'),
             ], 400);
         }
 
@@ -139,7 +134,7 @@ class CurrencyController extends Controller
         }
 
         return response()->json([
-            'message' => trans('admin::app.settings.currencies.index.delete-failed')
+            'message' => trans('admin::app.settings.currencies.index.delete-failed'),
         ], 500);
     }
 }

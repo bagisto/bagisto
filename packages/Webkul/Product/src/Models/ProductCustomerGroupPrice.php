@@ -3,9 +3,8 @@
 namespace Webkul\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
-use Webkul\Product\Contracts\ProductCustomerGroupPrice as ProductCustomerGroupPriceContract;
 use Webkul\Customer\Models\CustomerGroupProxy;
+use Webkul\Product\Contracts\ProductCustomerGroupPrice as ProductCustomerGroupPriceContract;
 
 class ProductCustomerGroupPrice extends Model implements ProductCustomerGroupPriceContract
 {
