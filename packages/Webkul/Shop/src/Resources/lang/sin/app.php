@@ -515,7 +515,7 @@ return [
 
         'type' => [
             'abstract' => [
-                'offers' => ':qty සඳහා :price ටයිකල් කරන්න සහ :discount% සුදුසු',
+                'offers' => ':qty සඳහා :price ටයිකල් කරන්න සහ :discount සුදුසු',
             ],
         ],
     ],

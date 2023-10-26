@@ -331,9 +331,11 @@
                                 </p>
 
                                 @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()))
-                                    <div class="discount-offers">
+                                    <div class="grid gap-[5px] mt-[10px]">
                                         @foreach ($product->getTypeInstance()->getCustomerGroupPricingOffers() as $offer)
-                                            <p> {{ $offer }} </p>
+                                            <p class="text-[#6E6E6E] [&>*]:text-black">
+                                                {!! $offer !!}
+                                            </p>
                                         @endforeach
                                     </div>
                                 @endif
