@@ -5,6 +5,7 @@ namespace Webkul\Installer\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Event;
 
 class Install extends Command
 {
@@ -90,6 +91,8 @@ class Install extends Command
         $this->info('Email: admin@example.com');
         $this->info('Password: admin123');
         $this->info('Cheers!');
+        
+        Event::dispatch('bagisto.installed');
     }
 
     /**
