@@ -17,11 +17,12 @@ it('returns a successful response', function () {
         ->assertOk();
 });
 
-it('displays the "Sign In" button when the customer is not logged in', function () {
+it('displays the "Sign In" and "Sign Up" buttons when the customer is not logged in', function () {
     // Act & Assert
     get(route('shop.home.index'))
         ->assertOk()
-        ->assertSeeText(trans('shop::app.components.layouts.header.sign-in'));
+        ->assertSeeText(trans('shop::app.components.layouts.header.sign-in'))
+        ->assertSeeText(trans('shop::app.components.layouts.header.sign-up'));
 });
 
 it('displays navigation buttons when the customer is logged in', function () {
