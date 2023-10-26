@@ -52,11 +52,11 @@ Bagisto can help you cut down your time, cost, and workforce for building online
 
 ![enter image description here](https://raw.githubusercontent.com/bagisto/temp-media/master/geting-starded.png)
 
-**[Install Bagisto](https://webkul.com/blog/laravel-ecommerce-website/)** with or without Composer (Check **[Requirement Details](https://bagisto.com/en/download/)**)
+[Install Bagisto](https://webkul.com/blog/laravel-ecommerce-website/) with or without Composer (Check [Requirement Details](https://bagisto.com/en/download/))
 
-Follow the **[Getting Started with Bagisto](https://www.youtube.com/watch?v=s_DhQrjK8Tw&list=PLe30vg_FG4OS3BU8rHUKQZ2mnX45xwSMc)** Tutorial
+Follow the [Getting Started with Bagisto](https://www.youtube.com/watch?v=s_DhQrjK8Tw&list=PLe30vg_FG4OS3BU8rHUKQZ2mnX45xwSMc) Tutorial
 
-You can browse through the Free **[Live Demo](https://demo.bagisto.com/)**
+You can browse through the Free [Live Demo](https://demo.bagisto.com/)
 
 # Headless Commerce
 
@@ -76,7 +76,7 @@ Develop and deploy your next headless commerce storefronts with Next JS and Bagi
 
 # AI Powered eCommerce
 
-You can integrate popular large language models like GPT, BERT, Llama etc. to build AI-powered eCommerce applications with bagisto. Some of the popular use cases where you can make use of LLMs to build AI apps are chatbots, automated product descriptions, customer support, search and recommendations. 
+You can integrate popular large language models like GPT, BERT, Llama etc. to build [AI-powered eCommerce](https://bagisto.com/en/extensions/laravel-chatbot-using-openai-chatgpt-llm/) applications with bagisto. Some of the popular use cases where you can make use of LLMs to build AI apps are chatbots, automated product descriptions, customer support, search and recommendations. 
 
 ![enter image description here](https://raw.githubusercontent.com/bagisto/temp-media/master/ai_powered_ecommerce.png)
 
@@ -84,7 +84,7 @@ You can incorporate LLM API with your bagisto applications to send and receive q
 
 # Decentralised eCommerce
 
-Build decentralised applications with Bagisto on popular blockchains like Ethereum and Solana by integrating smart contracts with the eCommerce platform. You can have decentralised marketplaces, NFT marketplaces, and decentralised e-signing with the laravel eCommerce system.
+Build [decentralised applications](https://bagisto.com/en/services/blockchain-commerce/) with Bagisto on popular blockchains like Ethereum and Solana by integrating smart contracts with the eCommerce platform. You can have decentralised marketplaces, [NFT marketplaces](https://bagisto.com/en/nft-marketplace/), and decentralised e-signing with the laravel eCommerce system.
 
 ![enter image description here](https://raw.githubusercontent.com/bagisto/temp-media/master/decentralised-ecommerce.png)
 

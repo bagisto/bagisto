@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-b8468297.css",
+    "file": "assets/app-f117ce88.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -111,6 +111,10 @@
   "src/Resources/assets/images/settings/payment-method.svg": {
     "file": "assets/payment-method-10ea91e1.svg",
     "src": "src/Resources/assets/images/settings/payment-method.svg"
+  },
+  "src/Resources/assets/images/settings/product.svg": {
+    "file": "assets/product-357134fb.svg",
+    "src": "src/Resources/assets/images/settings/product.svg"
   },
   "src/Resources/assets/images/settings/settings.svg": {
     "file": "assets/settings-26b93165.svg",

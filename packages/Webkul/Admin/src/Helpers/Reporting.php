@@ -169,24 +169,24 @@ class Reporting
         $endDate = $this->visitorReporting->getEndDate();
 
         return [
-            'visitors'         => [
+            'visitors' => [
                 'total'    => $totalVisitors = $this->visitorReporting->getTotalUniqueVisitors($startDate, $endDate),
                 'progress' => 100,
             ],
 
             'product_visitors' => [
                 'total'    => $totalProductVisitors = $this->visitorReporting->getTotalUniqueVisitors($startDate, $endDate, ProductModel::class),
-                'progress' => ($totalProductVisitors * 100) / $totalVisitors,
+                'progress' => round($totalVisitors > 0 ? ($totalProductVisitors * 100) / $totalVisitors : 0, 1),
             ],
 
             'carts' => [
                 'total'    => $totalCarts = $this->cartReporting->getTotalUniqueCartsUsers($startDate, $endDate),
-                'progress' => ($progress = ($totalCarts * 100) / $totalVisitors) <= 100 ? $progress : 100,
+                'progress' => round(min($totalVisitors > 0 ? ($totalCarts * 100) / $totalVisitors : 0, 100), 1),
             ],
 
             'orders' => [
-                'total'    => $totalOrders = $this->saleReporting->getTotalUniqueOrdersUsers($startDate, $endDate),
-                'progress' => ($progress = ($totalOrders * 100) / $totalVisitors) <= 100 ? $progress : 100,
+                'total' => $totalOrders = $this->saleReporting->getTotalUniqueOrdersUsers($startDate, $endDate),
+                'progress' => round(min($totalVisitors > 0 ? ($totalOrders * 100) / $totalVisitors : 0, 100), 1),
             ],
         ];
     }
