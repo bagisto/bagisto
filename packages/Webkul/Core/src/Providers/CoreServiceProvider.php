@@ -57,6 +57,21 @@ class CoreServiceProvider extends ServiceProvider
         $this->app->extend('command.up', function () {
             return new \Webkul\Core\Console\Commands\UpCommand;
         });
+
+        /**
+         * Image Cache route
+         */
+        if (is_string(config('imagecache.route'))) {
+            $filenamePattern = '[ \w\\.\\/\\-\\@\(\)\=]+';
+
+            /**
+             * Route to access template applied image file
+             */
+            $this->app['router']->get(config('imagecache.route').'/{template}/{filename}', [
+                'uses' => 'Webkul\Core\ImageCache\Controller@getResponse',
+                'as' => 'imagecache'
+            ])->where(['filename' => $filenamePattern]);
+        }
     }
 
     /**
