@@ -2,15 +2,15 @@
 
 namespace Webkul\Admin\Http\Controllers\Sales;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Webkul\Payment\Facades\Payment;
-use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Sales\Repositories\InvoiceRepository;
-use Webkul\Sales\Repositories\ShipmentRepository;
-use Webkul\Sales\Repositories\OrderTransactionRepository;
+use Illuminate\Http\Request;
 use Webkul\Admin\DataGrids\Sales\OrderTransactionsDataGrid;
+use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Payment\Facades\Payment;
+use Webkul\Sales\Repositories\InvoiceRepository;
+use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\OrderTransactionRepository;
+use Webkul\Sales\Repositories\ShipmentRepository;
 
 class TransactionController extends Controller
 {
@@ -24,8 +24,7 @@ class TransactionController extends Controller
         protected InvoiceRepository $invoiceRepository,
         protected ShipmentRepository $shipmentRepository,
         protected OrderTransactionRepository $orderTransactionRepository
-    )
-    {
+    ) {
     }
 
     /**
@@ -136,7 +135,7 @@ class TransactionController extends Controller
         return new JsonResponse([
             'data' => [
                 'transaction' => $transaction,
-            ]
+            ],
         ]);
     }
 }

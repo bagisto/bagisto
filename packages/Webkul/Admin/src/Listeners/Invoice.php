@@ -14,8 +14,7 @@ class Invoice extends Base
      */
     public function __construct(
         protected OrderTransactionRepository $orderTransactionRepository,
-    )
-    {
+    ) {
     }
 
     /**
@@ -65,7 +64,7 @@ class Invoice extends Base
     public function createTransaction($invoice)
     {
         $transactionId = md5(uniqid());
-    
+
         $transactionData = [
             'transaction_id' => $transactionId,
             'status'         => $invoice->state,
