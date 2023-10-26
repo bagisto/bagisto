@@ -40,8 +40,6 @@ class InstallerServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'installer');
 
         Event::listen('bagisto.installed', 'Webkul\Installer\Listeners\Installer@installed');
-
-        Event::listen('bagisto.updates.check', 'Webkul\Installer\Listeners\Installer@getUpdates');
     }
 
     /**

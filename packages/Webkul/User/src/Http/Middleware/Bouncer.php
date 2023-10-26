@@ -3,7 +3,6 @@
 namespace Webkul\User\Http\Middleware;
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Event;
 
 class Bouncer
 {
@@ -20,8 +19,6 @@ class Bouncer
         if (! auth()->guard($guard)->check()) {
             return redirect()->route('admin.session.create');
         }
-
-        Event::dispatch('bagisto.updates.check');
 
         /**
          * If user status is changed by admin. Then session should be
