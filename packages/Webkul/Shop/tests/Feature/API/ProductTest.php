@@ -1,7 +1,7 @@
 <?php
 
 use Pest\Expectation;
-use Webkul\Faker\Helpers\Product;
+use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product as ProductModel;
 
 use function Pest\Laravel\getJson;
@@ -14,7 +14,7 @@ afterEach(function () {
 });
 
 it('returns a new products listing', function () {
-    // Prepare
+    // Arrange
     $newProductOptions = [
         'attributes' => [
             5 => 'new',
@@ -27,10 +27,12 @@ it('returns a new products listing', function () {
         ],
     ];
 
-    (new Product($newProductOptions))->create(1, 'simple');
+    (new ProductFaker($newProductOptions))->create(1, 'simple');
 
     // Act
-    $response = getJson(route('shop.api.products.index', ['new' => 1]))->collect();
+    $response = getJson(route('shop.api.products.index', ['new' => 1]))
+        ->assertOk()
+        ->collect();
 
     // Assert
     expect($response['data'])->each(function (Expectation $product) {
@@ -39,7 +41,7 @@ it('returns a new products listing', function () {
 });
 
 it('returns a featured products listing', function () {
-    // Prepare
+    // Arrange
     $featuredProductOptions = [
         'attributes' => [
             6 => 'featured',
@@ -52,10 +54,12 @@ it('returns a featured products listing', function () {
         ],
     ];
 
-    (new Product($featuredProductOptions))->create(1, 'simple');
+    (new ProductFaker($featuredProductOptions))->create(1, 'simple');
 
     // Act
-    $response = getJson(route('shop.api.products.index', ['featured' => 1]))->collect();
+    $response = getJson(route('shop.api.products.index', ['featured' => 1]))
+        ->assertOk()
+        ->collect();
 
     // Assert
     expect($response['data'])->each(function (Expectation $product) {
@@ -64,11 +68,12 @@ it('returns a featured products listing', function () {
 });
 
 it('returns all products listing', function () {
-    // Prepare
-    $product = (new Product())->create(1, 'simple')->first();
+    // Arrange
+    $product = (new ProductFaker())->create(1, 'simple')->first();
 
     // Act & Assert
     getJson(route('shop.api.products.index'))
+        ->assertOk()
         ->assertJsonIsArray('data')
         ->assertJsonFragment([
             'id' => $product->id,
