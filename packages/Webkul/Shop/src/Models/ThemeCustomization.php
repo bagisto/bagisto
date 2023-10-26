@@ -4,9 +4,7 @@ namespace Webkul\Shop\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Webkul\Core\Eloquent\TranslatableModel;
-use Webkul\Core\Models\ChannelProxy;
 use Webkul\Shop\Contracts\ThemeCustomization as ThemeCustomizationContract;
-
 
 class ThemeCustomization extends TranslatableModel implements ThemeCustomizationContract
 {

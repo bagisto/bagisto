@@ -40,7 +40,7 @@ class OrderRefundDataGrid extends DataGrid
         return $queryBuilder;
     }
 
-     /**
+    /**
      * Add Columns.
      *
      * @return void
@@ -93,7 +93,7 @@ class OrderRefundDataGrid extends DataGrid
         ]);
     }
 
-     /**
+    /**
      * Prepare actions.
      *
      * @return void

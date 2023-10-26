@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Webkul\Admin\Mail\Order;
 
 use Illuminate\Bus\Queueable;

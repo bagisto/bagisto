@@ -4,7 +4,6 @@ namespace Webkul\Category\Observers;
 
 use Illuminate\Support\Facades\Storage;
 use Webkul\Category\Models\Category;
-use Carbon\Carbon;
 
 class CategoryObserver
 {

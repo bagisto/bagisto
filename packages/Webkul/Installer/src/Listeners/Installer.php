@@ -17,7 +17,6 @@ class Installer
     /**
      * Create a new listener instance.
      *
-     * @param  \Webkul\User\Repositories\AdminRepository  $adminRepository
      * @return void
      */
     public function __construct(protected AdminRepository $adminRepository)

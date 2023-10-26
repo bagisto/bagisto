@@ -3,9 +3,9 @@
 namespace Webkul\Product\Helpers\Indexers\Price;
 
 use Illuminate\Support\Carbon;
+use Webkul\CatalogRule\Repositories\CatalogRuleProductPriceRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
-use Webkul\CatalogRule\Repositories\CatalogRuleProductPriceRepository;
 
 abstract class AbstractType
 {
@@ -26,17 +26,13 @@ abstract class AbstractType
     /**
      * Create a new command instance.
      *
-     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
-     * @param  \Webkul\Product\Repositories\ProductCustomerGroupPriceRepository  $productCustomerGroupPriceRepository
-     * @param  \Webkul\CatalogRule\Repositories\CatalogRuleProductPriceRepository  $catalogRuleProductPriceRepository
      * @return void
      */
     public function __construct(
         protected CustomerRepository $customerRepository,
         protected ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository,
         protected CatalogRuleProductPriceRepository $catalogRuleProductPriceRepository
-    )
-    {
+    ) {
     }
 
     /**
@@ -85,7 +81,7 @@ abstract class AbstractType
     /**
      * Get product minimal price.
      *
-     * @param  integer  $qty
+     * @param  int  $qty
      * @return float
      */
     public function getMinimalPrice($qty = null)
@@ -140,7 +136,7 @@ abstract class AbstractType
     /**
      * Get product group price.
      *
-     * @param  integer  $qty
+     * @param  int  $qty
      * @return float
      */
     public function getCustomerGroupPrice($qty)

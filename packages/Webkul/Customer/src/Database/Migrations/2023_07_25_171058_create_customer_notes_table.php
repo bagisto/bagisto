@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('note');
             $table->boolean('customer_notified')->default(0);
             $table->timestamps();
-            
+
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
         });
     }

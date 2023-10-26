@@ -3,7 +3,6 @@
 namespace Webkul\Marketing\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -21,8 +20,7 @@ class NewsletterMail extends Mailable
     public function __construct(
         public $email,
         public $campaign
-    )
-    {
+    ) {
     }
 
     /**

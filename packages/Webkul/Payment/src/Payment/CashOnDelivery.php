@@ -9,10 +9,10 @@ class CashOnDelivery extends Payment
      *
      * @var string
      */
-    protected $code  = 'cashondelivery';
+    protected $code = 'cashondelivery';
 
     public function getRedirectUrl()
     {
-        
+
     }
 }

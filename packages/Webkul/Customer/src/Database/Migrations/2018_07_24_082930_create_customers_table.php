@@ -33,7 +33,7 @@ return new class extends Migration
             $table->text('notes')->nullable();
             $table->rememberToken();
             $table->timestamps();
-            
+
             $table->foreign('customer_group_id')->references('id')->on('customer_groups')->onDelete('set null');
         });
     }

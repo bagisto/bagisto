@@ -2,12 +2,11 @@
 
 namespace Webkul\Core\Database\Factories;
 
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Category\Models\Category;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Models\Currency;
 use Webkul\Core\Models\Locale;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ChannelFactory extends Factory
 {
@@ -21,7 +20,6 @@ class ChannelFactory extends Factory
     /**
      * Define the model's default state.
      *
-     * @return array
      * @throws \JsonException
      */
     public function definition(): array

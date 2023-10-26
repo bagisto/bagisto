@@ -3,29 +3,23 @@
 namespace Webkul\Product\Repositories;
 
 use Illuminate\Container\Container;
-use Webkul\Product\Repositories\ProductRepository;
 
 class ProductImageRepository extends ProductMediaRepository
 {
     /**
      * Create a new repository instance.
      *
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
-     * @param  \Illuminate\Container\Container  $container
      * @return void
      */
     public function __construct(
         protected ProductRepository $productRepository,
         Container $container
-    )
-    {
+    ) {
         parent::__construct($container);
     }
 
     /**
      * Specify model class name.
-     *
-     * @return string
      */
     public function model(): string
     {
@@ -37,7 +31,6 @@ class ProductImageRepository extends ProductMediaRepository
      *
      * @param  array  $data
      * @param  \Webkul\Product\Models\Product  $product
-     * @return void
      */
     public function uploadImages($data, $product): void
     {
@@ -51,8 +44,7 @@ class ProductImageRepository extends ProductMediaRepository
     /**
      * Upload variant images.
      *
-     * @param  array $variants
-     * @return void
+     * @param  array  $variants
      */
     public function uploadVariantImages($variants): void
     {

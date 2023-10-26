@@ -3,7 +3,6 @@
 namespace Webkul\Product;
 
 use Illuminate\Support\Facades\Storage;
-use Webkul\Product\Helpers\AbstractProduct;
 
 class ProductVideo
 {

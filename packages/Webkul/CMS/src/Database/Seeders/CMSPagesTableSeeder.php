@@ -58,7 +58,7 @@ class CMSPagesTableSeeder extends Seeder
                 'id'         => 11,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ] 
+            ],
         ]);
 
         DB::table('cms_page_translations')->insert([
@@ -161,7 +161,7 @@ class CMSPagesTableSeeder extends Seeder
                 'meta_title'       => 'Privacy Policy',
                 'meta_description' => '',
                 'meta_keywords'    => 'privacy, policy',
-            ] 
+            ],
         ]);
     }
 }

@@ -11,12 +11,6 @@ class RefundRepository extends Repository
 {
     /**
      * Create a new repository instance.
-     *
-     * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
-     * @param  \Webkul\Sales\Repositories\OrderItemRepository  $orderItemRepository
-     * @param  \Webkul\Sales\Repositories\RefundItemRepository   $refundItemRepository
-     * @param  \Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository  $downloadableLinkPurchasedRepository
-     * @param  \Illuminate\Container\Container  $container
      */
     public function __construct(
         protected OrderRepository $orderRepository,
@@ -24,15 +18,12 @@ class RefundRepository extends Repository
         protected RefundItemRepository $refundItemRepository,
         protected DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository,
         Container $container
-    )
-    {
+    ) {
         parent::__construct($container);
     }
 
     /**
      * Specify model class name.
-     *
-     * @return string
      */
     public function model(): string
     {
@@ -42,7 +33,6 @@ class RefundRepository extends Repository
     /**
      * Create refund.
      *
-     * @param  array  $data
      * @return \Webkul\Sales\Contracts\Refund
      */
     public function create(array $data)
@@ -206,7 +196,7 @@ class RefundRepository extends Repository
      * Get order items refund summary.
      *
      * @param  array  $data
-     * @param  integer  $orderId
+     * @param  int  $orderId
      * @return array|bool
      */
     public function getOrderItemsRefundSummary($data, $orderId)

@@ -2,43 +2,43 @@
 
 namespace Webkul\Admin\Helpers\Reporting;
 
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-use Illuminate\Support\Carbon;
 use Carbon\CarbonPeriod;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 
 abstract class AbstractReporting
 {
     /**
      * The starting date for a given period.
-     * 
+     *
      * @var \Carbon\Carbon
      */
     protected Carbon $startDate;
 
     /**
      * The ending date for a given period.
-     * 
+     *
      * @var \Carbon\Carbon
      */
     protected Carbon $endDate;
 
     /**
      * The starting date for the previous period.
-     * 
+     *
      * @var \Carbon\Carbon
      */
     protected Carbon $lastStartDate;
 
     /**
      * The ending date for the previous period.
-     * 
+     *
      * @var \Carbon\Carbon
      */
     protected Carbon $lastEndDate;
+
     /**
      * Create a helper instance.
-     * 
+     *
      * @return void
      */
     public function __construct()
@@ -50,11 +50,11 @@ abstract class AbstractReporting
 
     /**
      * Set the start date or default to 30 days ago if not provided.
-     * 
+     *
      * @param  \Carbon\Carbon|null  $startDate
      * @return void
      */
-    public function setStartDate(?Carbon $startDate = null): self
+    public function setStartDate(Carbon $startDate = null): self
     {
         $this->startDate = $startDate ? $startDate->startOfDay() : now()->subDays(30)->startOfDay();
 
@@ -64,13 +64,13 @@ abstract class AbstractReporting
     }
 
     /**
-     * Sets the end date to the provided date's end of day, or to the current 
+     * Sets the end date to the provided date's end of day, or to the current
      * date if not provided or if the provided date is in the future.
-     * 
+     *
      * @param  \Carbon\Carbon|null  $endDate
      * @return void
      */
-    public function setEndDate(?Carbon $endDate = null): self
+    public function setEndDate(Carbon $endDate = null): self
     {
         $this->endDate = ($endDate && $endDate->endOfDay() <= now()) ? $endDate->endOfDay() : now();
 
@@ -81,7 +81,7 @@ abstract class AbstractReporting
 
     /**
      * Get the start date.
-     * 
+     *
      * @return \Carbon\Carbon
      */
     public function getStartDate(): Carbon
@@ -91,7 +91,7 @@ abstract class AbstractReporting
 
     /**
      * Get the end date.
-     * 
+     *
      * @return \Carbon\Carbon
      */
     public function getEndDate(): Carbon
@@ -101,8 +101,6 @@ abstract class AbstractReporting
 
     /**
      * Sets the start date for the last period.
-     * 
-     * @return void
      */
     private function setLastStartDate(): void
     {
@@ -119,8 +117,6 @@ abstract class AbstractReporting
 
     /**
      * Sets the end date for the last period.
-     * 
-     * @return void
      */
     private function setLastEndDate(): void
     {
@@ -129,7 +125,7 @@ abstract class AbstractReporting
 
     /**
      * Get the last start date.
-     * 
+     *
      * @return \Carbon\Carbon
      */
     public function getLastStartDate(): Carbon
@@ -139,7 +135,7 @@ abstract class AbstractReporting
 
     /**
      * Get the last end date.
-     * 
+     *
      * @return \Carbon\Carbon
      */
     public function getLastEndDate(): Carbon
@@ -152,7 +148,6 @@ abstract class AbstractReporting
      *
      * @param  float|int  $previous
      * @param  float|int  $current
-     * @return float|int
      */
     public function getPercentageChange($previous, $current): float|int
     {
@@ -221,7 +216,7 @@ abstract class AbstractReporting
             $groupColumn = 'DATE_FORMAT(created_at, "' . Str::replaceArray('?', ['%Y', '%m', '%d'], $formatter) . '")';
 
             $intervals = [];
-            
+
             foreach ($datePeriod as $date) {
                 $formattedDate = $date->format(Str::replaceArray('?', ['Y', 'm', 'd'], $formatter));
 
@@ -336,7 +331,7 @@ abstract class AbstractReporting
     public function getDaysInterval($startDate, $endDate)
     {
         $intervals = [];
-        
+
         $totalDays = $startDate->diffInDays($endDate) + 1;
 
         for ($i = 0; $i < $totalDays; $i++) {

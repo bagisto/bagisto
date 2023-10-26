@@ -201,9 +201,9 @@ class Install extends Command
 
     /**
      * Check key in `.env` file because it will help to find values at runtime.
-     * 
+     *
      * @param  string  $key
-     * @return string|boolean
+     * @return string|bool
      */
     protected static function getEnvAtRuntime($key)
     {
@@ -228,7 +228,7 @@ class Install extends Command
 
     /**
      * Update the .env values.
-     * 
+     *
      * @param  string  $key
      * @param  string  $value
      * @return string
@@ -236,7 +236,7 @@ class Install extends Command
     protected static function envUpdate($key, $value)
     {
         $path = base_path() . '/.env';
-        
+
         $data = file($path);
 
         $keyValueData = $changedData = [];

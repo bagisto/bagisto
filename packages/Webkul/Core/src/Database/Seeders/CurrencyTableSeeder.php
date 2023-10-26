@@ -2,8 +2,8 @@
 
 namespace Webkul\Core\Database\Seeders;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class CurrencyTableSeeder extends Seeder
 {
@@ -14,7 +14,7 @@ class CurrencyTableSeeder extends Seeder
         DB::table('currencies')->delete();
 
         DB::table('currencies')->insert([
-            [ 
+            [
                 'id'     => 1,
                 'code'   => 'USD',
                 'name'   => 'US Dollar',
@@ -24,7 +24,7 @@ class CurrencyTableSeeder extends Seeder
                 'code'   => 'EUR',
                 'name'   => 'Euro',
                 'symbol' => '€',
-            ]
+            ],
         ]);
     }
 }

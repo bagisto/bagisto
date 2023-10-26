@@ -2,44 +2,40 @@
 
 namespace Webkul\Installer\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Webkul\Installer\Http\Helpers\ServerRequirements;
-use Webkul\Installer\Http\Helpers\EnvironmentManager;
 use Webkul\Installer\Http\Helpers\DatabaseManager;
+use Webkul\Installer\Http\Helpers\EnvironmentManager;
+use Webkul\Installer\Http\Helpers\ServerRequirements;
 
 class InstallerController extends Controller
 {
     /**
      * Const Variable For Min PHP Version
-     * 
+     *
      * @var string
      */
     const MIN_PHP_VERSION = '8.1.0';
 
     /**
-     * Const Variable for Static Customer Id 
-     * 
-     * @var integer
+     * Const Variable for Static Customer Id
+     *
+     * @var int
      */
     const USER_ID = 1;
 
     /**
      * Create a new controller instance
      *
-     * @param  \Webkul\Installer\Http\Helpers\ServerRequirements  $serverRequirements
-     * @param  \Webkul\Installer\Http\Helpers\EnvironmentManager  $environmentManager
-     * @param  \Webkul\Installer\Http\Helpers\DatabaseManager  $databaseManager
      * @return void
      */
     public function __construct(
         protected ServerRequirements $serverRequirements,
         protected EnvironmentManager $environmentManager,
         protected DatabaseManager $databaseManager
-    )
-    {
+    ) {
     }
 
     /**
@@ -58,9 +54,6 @@ class InstallerController extends Controller
 
     /**
      * ENV File Setup
-     *
-     * @param Request $request
-     * @return JsonResponse
      */
     public function envFileSetup(Request $request): JsonResponse
     {
@@ -71,20 +64,16 @@ class InstallerController extends Controller
 
     /**
      * Undocumented function
-     *
-     * @return
      */
     public function envFileDelete()
     {
-        $response  = File::delete(base_path('.env')); 
+        $response = File::delete(base_path('.env'));
 
         return $response;
     }
 
     /**
      * Run Migration
-     *
-     * @return
      */
     public function runMigration()
     {
@@ -105,7 +94,7 @@ class InstallerController extends Controller
         try {
             DB::table('admins')->updateOrInsert(
                 [
-                    'id' => self::USER_ID
+                    'id' => self::USER_ID,
                 ], [
                     'name'     => request()->input('admin'),
                     'email'    => request()->input('email'),
@@ -121,15 +110,13 @@ class InstallerController extends Controller
 
     /**
      * SMTP connection setup for Mail
-     *
-     * @return
      */
     public function smtpConfigSetup()
     {
         $this->environmentManager->setEnvConfiguration(request()->input());
 
         $filePath = storage_path('installed');
-        
+
         File::put($filePath, 'Your Bagisto App is Successfully Installed');
 
         return $filePath;
