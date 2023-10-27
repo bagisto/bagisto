@@ -120,7 +120,11 @@
                         @lang('shop::app.categories.filters.filters')
                     </p>
 
-                    <p class="text-[12px] font-medium cursor-pointer" @click='clear()'>
+                    <p
+                        class="text-[12px] font-medium cursor-pointer"
+                        tabindex="0"
+                        @click="clear()"
+                    >
                         @lang('shop::app.categories.filters.clear-all')
                     </p>
                 </div>
@@ -185,6 +189,9 @@
 
                                 <label
                                     class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                                    role="button"
+                                    :aria-label="option.name"
+                                    tabindex="0"
                                     :for="'option_' + option.id"
                                 >
                                 </label>
@@ -192,6 +199,8 @@
                                 <label
                                     :for="'option_' + option.id"
                                     class="w-full p-2 pl-0 text-[16px] text-gray-900 cursor-pointer"
+                                    role="button"
+                                    tabindex="0"
                                     v-text="option.name"
                                 >
                                 </label>

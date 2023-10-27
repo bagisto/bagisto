@@ -18,6 +18,8 @@
                 href="#" 
                 @click="openSharePopup"
                 aria-label="Linkedin"
+                role="button"
+                tabindex="0"
             >
                 @include('social_share::icons.linkedin')
             </a>

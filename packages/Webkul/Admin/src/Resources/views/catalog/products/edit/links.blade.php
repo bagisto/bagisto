@@ -14,12 +14,16 @@
             >
                 <div class="flex gap-[20px] justify-between mb-[10px] p-[16px]">
                     <div class="flex flex-col gap-[8px]">
-                        <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
-                            @{{ type.title }}
+                        <p
+                            class="text-[16px] text-gray-800 dark:text-white font-semibold"
+                            v-text="type.title"
+                        >
                         </p>
 
-                        <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
-                            @{{ type.info }}
+                        <p
+                            class="text-[12px] text-gray-500 dark:text-gray-300 font-medium"
+                            v-text="type.info"
+                        >
                         </p>
                     </div>
                     
@@ -72,8 +76,10 @@
 
                             <!-- Details -->
                             <div class="grid gap-[6px] place-content-start">
-                                <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
-                                    @{{ product.name }}
+                                <p
+                                    class="text-[16x] text-gray-800 dark:text-white font-semibold"
+                                    v-text="product.name"
+                                >
                                 </p>
 
                                 <p class="text-gray-600 dark:text-gray-300">
@@ -115,8 +121,10 @@
                             @lang('admin::app.catalog.products.edit.links.empty-title')
                         </p>
 
-                        <p class="text-gray-400">
-                            @{{ type.empty_info }}
+                        <p
+                            class="text-gray-400"
+                            v-text="type.empty_info"
+                        >
                         </p>
                     </div>
                 </div>

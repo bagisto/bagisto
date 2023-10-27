@@ -3,7 +3,6 @@
         @lang('admin::app.catalog.products.edit.title')
     </x-slot:title>
 
-
     {!! view_render_event('bagisto.admin.catalog.product.edit.before', ['product' => $product]) !!}
 
     <x-admin::form
@@ -22,6 +21,7 @@
                 </div>
 
                 <div class="flex gap-x-[10px] items-center">
+                    <!-- Back Button -->
                     <a
                         href="{{ route('admin.catalog.products.index') }}"
                         class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
@@ -29,6 +29,7 @@
                         @lang('admin::app.account.edit.back-btn')
                     </a>
 
+                    <!-- Save Button -->
                     <button class="primary-button">
                         @lang('admin::app.catalog.products.edit.save-btn')
                     </button>
@@ -120,10 +121,7 @@
             @foreach ($product->attribute_family->attribute_groups->groupBy('column') as $column => $groups)
                 {!! view_render_event('bagisto.admin.catalog.product.edit.form.column_' . $column . '.before', ['product' => $product]) !!}
 
-                <div
-                    @if ($column == 1) class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto" @endif
-                    @if ($column == 2) class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full" @endif
-                >
+                <div class="flex flex-col gap-[8px] @if ($column == 1) flex-1 max-xl:flex-auto @elseif ($column == 2) w-[360px] max-w-full max-sm:w-full @endif">
                     @foreach ($groups as $group)
                         @php
                             $customAttributes = $product->getEditableAttributes($group);

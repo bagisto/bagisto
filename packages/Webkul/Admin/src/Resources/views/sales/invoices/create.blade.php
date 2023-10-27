@@ -50,7 +50,7 @@
                             <div class="p-[16px] !pt-0">
                                 <div class="grid">
                                     @foreach ($order->items as $item)
-                                        <div class="flex gap-[10px] justify-between py-[16px]">
+                                        <div class="flex gap-[10px] justify-between py-[16px] border-b-[1px] border-slate-300 dark:border-gray-800">
                                             <div class="flex gap-[10px]">
                                                 @if ($item->product?->base_image_url)
                                                     <img
@@ -117,6 +117,24 @@
                                             </x-admin::form.control-group>
                                         </div>
                                     @endforeach
+
+                                    <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                        <x-admin::form.control-group.control
+                                            type="checkbox"
+                                            name="can_create_transaction"
+                                            id="can_create_transaction"
+                                            for="can_create_transaction"
+                                            value="1"
+                                        >
+                                        </x-admin::form.control-group.control>
+    
+                                        <x-admin::form.control-group.label
+                                            for="can_create_transaction"
+                                            class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
+                                        >
+                                            @lang('Create Transaction')
+                                        </x-admin::form.control-group.label>
+                                    </x-admin::form.control-group>
                                 </div>
                             </div>
                         </div>

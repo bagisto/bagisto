@@ -485,12 +485,25 @@ return [
                     'transaction-amount' => 'Bedrag',
                 ],
 
-                'edit'  => [
+                'create'  => [
                     'already-paid'               => 'Al betaald',
                     'invoice-missing'            => 'Factuur ontbreekt',
                     'transaction-amount-zero'    => 'Transactiebedrag is nul',
                     'transaction-amount-exceeds' => 'Transactiebedrag overschrijdt',
                     'transaction-saved'          => 'Transactie succesvol opgeslagen',
+                ],
+
+                'view' => [
+                    'title'            => 'Transactiegegevens',
+                    'transaction-data' => 'Transactiegegevens',
+                    'transaction-id'   => 'Transactie-ID',
+                    'order-id'         => 'Bestel-ID',
+                    'invoice-id'       => 'Factuur-ID',
+                    'payment-method'   => 'Betalingsmethode',
+                    'created-at'       => 'Aangemaakt op',
+                    'status'           => 'Status',
+                    'payment-details'  => 'Betalingsgegevens',
+                    'amount'           => 'Bedrag',
                 ],
             ],
         ],
@@ -525,8 +538,8 @@ return [
                     'attribute-family-value' => 'Attribuutfamilie - :attribute_family',
                     'active'                 => 'Actief',
                     'category'               => 'Categorie',
-                    'copy-of'                => ':value',
-                    'copy-of-slug'           => ':value',
+                    'copy-of'                => 'Kopie van :value',
+                    'copy-of-slug'           => 'kopie-van-:value',
                     'disable'                => 'Uitschakelen',
                     'delete'                 => 'Verwijderen',
                     'image'                  => 'Afbeelding',

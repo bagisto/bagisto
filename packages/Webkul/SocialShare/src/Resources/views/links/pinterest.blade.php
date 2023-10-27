@@ -19,6 +19,8 @@
                 href="#" 
                 @click="openSharePopup"
                 aria-label="Pinterest"
+                role="button"
+                tabindex="0"
             >
                 @include('social_share::icons.pinterest')
             </a>
