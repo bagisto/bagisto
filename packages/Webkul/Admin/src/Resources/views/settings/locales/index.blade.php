@@ -13,7 +13,7 @@
 
             <div class="flex gap-x-[10px] items-center">
                 @if (bouncer()->hasPermission('settings.locales.create'))
-                    <button 
+                    <button
                         type="button"
                         class="primary-button"
                     >
@@ -49,7 +49,7 @@
                     @endif
                 </div>
             </div>
-    
+
             <x-admin::datagrid :src="route('admin.settings.locales.index')" ref="datagrid">
                 @php
                     $hasPermission = bouncer()->hasPermission('settings.locales.edit') || bouncer()->hasPermission('settings.locales.delete');
@@ -59,7 +59,7 @@
                 <template #header="{ columns, records, sortPage, applied}">
                     <div
                         class="row grid grid-cols-{{ $hasPermission ? '5' : '4' }} grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold"
-                        :style="'grid-template-columns: repeat({{ $hasPermission ? '5' : '4' }} , 1fr);'"
+                        :style="'grid-template-columns: repeat({{ $hasPermission ? '5' : '4' }} , minmax(0, 1fr));'"
                     >
                         <div
                             class="flex gap-[10px] cursor-pointer"
@@ -104,7 +104,7 @@
                     <div
                         v-for="record in records"
                         class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
-                        :style="'grid-template-columns: repeat(' + (record.actions.length ? 5 : 4) + ', 1fr);'"
+                        :style="'grid-template-columns: repeat(' + (record.actions.length ? 5 : 4) + ', minmax(0, 1fr));'"
                     >
                         <!-- Id -->
                         <p v-text="record.id"></p>
@@ -145,7 +145,7 @@
                 as="div"
                 ref="modalForm"
             >
-                <form 
+                <form
                     @submit="handleSubmit($event, updateOrCreate)"
                     ref="createLocaleForm"
                 >
@@ -219,7 +219,7 @@
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
-                    
+
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.locales.index.create.direction')
@@ -239,7 +239,7 @@
                                         </option>
 
                                         <option value="ltr" selected title="Text direction left to right">LTR</option>
-                    
+
                                         <option value="rtl" title="Text direction right to left">RTL</option>
                                     </x-admin::form.control-group.control>
 
@@ -273,7 +273,7 @@
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
-                                
+
                                 <p class="text-[12px] text-gray-600 dark:text-gray-300">
                                     @lang('admin::app.settings.locales.index.logo-size')
                                 </p>
@@ -284,7 +284,7 @@
 
                         <x-slot:footer>
                             <div class="flex gap-x-[10px] items-center">
-                                <button 
+                                <button
                                     type="submit"
                                     class="primary-button"
                                 >
@@ -333,7 +333,7 @@
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
                             this.isUpdating = false;
-                            
+
                             this.$refs.datagrid.get();
 
                             resetForm();
