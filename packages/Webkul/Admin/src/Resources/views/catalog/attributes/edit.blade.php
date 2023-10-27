@@ -3,12 +3,12 @@
 @endphp
 
 <x-admin::layouts>
-    {{-- Title of the page --}}
+    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.catalog.attributes.edit.title')
     </x-slot:title>
 
-    {{-- Edit Attributes Vue Components --}}
+    <!-- Edit Attributes Vue Components -->
     <v-edit-attributes :all-locales="{{ $allLocales->toJson() }}"></v-edit-attributes>
 
     @pushOnce('scripts')
@@ -122,7 +122,7 @@
                                 <!-- Add Row Button -->
                                 <div
                                     class="secondary-button text-[14px]"
-                                    @click="$refs.addOptionsRow.toggle()"
+                                    @click="$refs.addOptionsRow.toggle(), swatchValue=''"
                                 >
                                     @lang('admin::app.catalog.attributes.edit.add-row')
                                 </div>
@@ -267,8 +267,8 @@
                                                     <x-admin::table.td v-if="showSwatch && (swatchType == 'color' || swatchType == 'image')">
                                                         <!-- Swatch Image -->
                                                         <div v-if="swatchType == 'image'">
-                                                            <img 
-                                                                :src="element.swatch_value_url"
+                                                            <img
+                                                                :src="element.swatch_value_url || '{{ bagisto_asset('images/product-placeholders/front.svg') }}'"
                                                                 :ref="'image_' + element.id"
                                                                 class="h-[50px] w-[50px]"
                                                             >
@@ -572,7 +572,7 @@
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="regex"
-                                        v-model="regexValue"
+                                        v-model="validationType"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -870,12 +870,19 @@
                                         @lang('admin::app.catalog.attributes.edit.image')
                                     </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
-                                        type="image"
+                                    <div class="hidden">
+                                        <x-admin::media.images
+                                            name="swatch_value[]"
+                                            ::uploaded-images='swatchValue.image'
+                                        >
+                                        </x-admin::media.images>
+                                    </div>
+
+                                    <v-media-images
                                         name="swatch_value"
-                                        :placeholder="trans('admin::app.catalog.attributes.edit.image')"
+                                        :uploaded-images='swatchValue.image'
                                     >
-                                    </x-admin::form.control-group.control>
+                                    </v-media-images>
 
                                     <x-admin::form.control-group.error
                                         control-name="swatch_value"
@@ -894,7 +901,7 @@
 
                                     <x-admin::form.control-group.control
                                         type="color"
-                                        name="swatch_value[]"
+                                        name="swatch_value"
                                         :placeholder="trans('admin::app.catalog.attributes.edit.color')"
                                     >
                                     </x-admin::form.control-group.control>
@@ -993,17 +1000,19 @@
 
                 data: function() {
                     return {
-                        optionRowCount: 1,
-
                         showSwatch: {{ in_array($attribute->type, ['select', 'checkbox', 'price', 'multiselect']) ? 'true' : 'false' }},
 
                         swatchType: "{{ $attribute->swatch_type == '' ? 'dropdown' : $attribute->swatch_type }}",
 
                         validationType: "{{ $attribute->validation }}",
 
-                        regexValue: '{{ $attribute->validation }}',
-
                         isNullOptionChecked: false,
+
+                        swatchValue: [
+                            {
+                                image: [],
+                            }
+                        ],
 
                         optionsData: [],
 
@@ -1043,7 +1052,7 @@
                         this.$refs.addOptionsRow.toggle();
 
                         if (params.swatch_value instanceof File) {
-                            this.setFile(params);
+                            this.setFile(sliderImage, params.id);
                         }
 
                         resetForm();
@@ -1051,6 +1060,12 @@
 
                     editOptions(value) {
                         this.optionIsNew = false;
+
+                        this.swatchValue = {
+                            image: value.swatch_value_url
+                            ? [{ url: value.swatch_value_url }]
+                            : [],
+                        };
 
                         this.$refs.modelForm.setValues(value);
 
@@ -1079,9 +1094,8 @@
                         this.$axios.get(`${this.src}`)
                             .then(response => {
                                 let options = response.data;
-                                options.forEach((option) => {
-                                    this.optionRowCount++;
 
+                                options.forEach((option) => {
                                     let row = {
                                         'id': option.id,
                                         'admin_name': option.admin_name,
@@ -1111,17 +1125,17 @@
                             });
                     },
 
-                    setFile(event) {
+                    setFile(file, id) {
                         let dataTransfer = new DataTransfer();
 
-                        dataTransfer.items.add(event.swatch_value);
+                        dataTransfer.items.add(file);
 
-                        // use settimeout because need to wait for render dom before set the src or get the ref value
+                        // Use Set timeout because need to wait for render dom before set the src or get the ref value
                         setTimeout(() => {
-                            this.$refs['image_' + event.id].src =  URL.createObjectURL(event.swatch_value);
+                            this.$refs['image_' + id].src =  URL.createObjectURL(file);
+                            
+                            this.$refs['imageInput_' + id].files = dataTransfer.files;
                         }, 0);
-
-                        this.$refs['imageInput_' + event.id].files = dataTransfer.files;
                     }
                 },
             });
