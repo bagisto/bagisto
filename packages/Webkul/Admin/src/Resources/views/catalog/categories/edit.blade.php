@@ -1,5 +1,5 @@
 <x-admin::layouts>
-    {{-- Title of the page --}}
+    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.catalog.categories.edit.title')
     </x-slot:title>
@@ -10,7 +10,7 @@
 
     {!! view_render_event('bagisto.admin.catalog.categories.edit.before') !!}
 
-    {{-- Category Edit Form --}}
+    <!-- Category Edit Form -->
     <x-admin::form
         :action="route('admin.catalog.categories.update', $category->id)"
         enctype="multipart/form-data"
@@ -46,9 +46,9 @@
         <!-- Filter Row -->
         <div class="flex  gap-[16px] justify-between items-center mt-[28px] max-md:flex-wrap">
             <div class="flex gap-x-[4px] items-center">
-                {{-- Locale Switcher --}}
+                <!-- Locale Switcher -->
                 <x-admin::dropdown>
-                    {{-- Dropdown Toggler --}}
+                    <!-- Dropdown Toggler -->
                     <x-slot:toggle>
                         <button
                             type="button"
@@ -64,7 +64,7 @@
                         </button>
                     </x-slot:toggle>
 
-                    {{-- Dropdown Content --}}
+                    <!-- Dropdown Content -->
                     <x-slot:content class="!p-[0px]">
                         @foreach (core()->getAllLocales() as $locale)
                             <a
@@ -79,9 +79,9 @@
             </div>
         </div>
 
-        {{-- Full Pannel --}}
+        <!-- Full Pannel -->
         <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
-            {{-- Left Section --}}
+            <!-- Left Section -->
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
 
                 {!! view_render_event('bagisto.admin.catalog.categories.edit.card.general.before', ['category' => $category]) !!}
@@ -92,7 +92,7 @@
                         @lang('admin::app.catalog.categories.edit.general')
                     </p>
 
-                    {{-- Name --}}
+                    <!-- Name -->
                     <x-admin::form.control-group class="mb-[10px]">
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.catalog.categories.edit.name')
@@ -126,12 +126,12 @@
 
                     @if ($categories->count())
                         <div class="mb-[10px]">
-                            {{-- Parent category --}}
+                            <!-- Parent category -->
                             <label class="block mb-[10px] text-[12px] text-gray-800 dark:text-white font-medium leading-[24px]">
                                 @lang('admin::app.catalog.categories.edit.select-parent-category')
                             </label>
 
-                            {{-- Radio select button --}}
+                            <!-- Radio select button -->
                             <div class="flex flex-col gap-[12px]">
                                 <x-admin::tree.view
                                     input-type="radio"
@@ -185,7 +185,7 @@
                     </v-description>
 
                     <div class="flex gap-[50px]">
-                        {{-- Add Logo --}}
+                        <!-- Add Logo -->
                         <div class="flex flex-col gap-[8px] w-[40%] mt-5">
                             <p class="text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.catalog.categories.edit.logo')
@@ -202,7 +202,7 @@
                             </x-admin::media.images>
                         </div>
 
-                        {{-- Add Banner --}}
+                        <!-- Add Banner -->
                         <div class="flex flex-col gap-[8px] w-[40%] mt-5">
                             <p class="text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.catalog.categories.edit.banner')
@@ -226,17 +226,17 @@
 
                 {!! view_render_event('bagisto.admin.catalog.categories.edit.card.seo.before', ['category' => $category]) !!}
 
-                {{-- SEO Deatils --}}
+                <!-- SEO Deatils -->
                 <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                         @lang('admin::app.catalog.categories.edit.seo-details')
                     </p>
                     
-                    {{-- SEO Title & Description Blade Componnet --}}
+                    <!-- SEO Title & Description Blade Componnet -->
                     <x-admin::seo/>
 
                     <div class="mt-[30px]">
-                        {{-- Meta Title --}}
+                        <!-- Meta Title -->
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.catalog.categories.edit.meta-title')
@@ -253,7 +253,7 @@
                             </x-admin::form.control-group.control>
                         </x-admin::form.control-group>
 
-                        {{-- Slug --}}
+                        <!-- Slug -->
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.catalog.categories.edit.slug')
@@ -285,7 +285,7 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
-                        {{-- Meta Keywords --}}
+                        <!-- Meta Keywords -->
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.catalog.categories.edit.meta-keywords')
@@ -301,7 +301,7 @@
                             </x-admin::form.control-group.control>
                         </x-admin::form.control-group>
 
-                        {{-- Meta Description --}}
+                        <!-- Meta Description -->
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.catalog.categories.edit.meta-description')
@@ -323,9 +323,9 @@
                 {!! view_render_event('bagisto.admin.catalog.categories.edit.card.seo.after', ['category' => $category]) !!}
             </div>
 
-            {{-- Right Section --}}
+            <!-- Right Section -->
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
-                {{-- Settings --}}
+                <!-- Settings -->
 
                 {!! view_render_event('bagisto.admin.catalog.categories.edit.card.accordion.settings.before', ['category' => $category]) !!}
 
@@ -337,7 +337,7 @@
                     </x-slot:header>
 
                     <x-slot:content>
-                        {{-- Position --}}
+                        <!-- Position -->
                         <div class="mb-[10px]">
                             <x-admin::form.control-group class="mb-[10px]">
                                 <x-admin::form.control-group.label class="required">
@@ -361,7 +361,7 @@
                             </x-admin::form.control-group>
                         </div>
 
-                        {{-- Display Mode  --}}
+                        <!-- Display Mode  -->
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label class="text-gray-800 dark:text-white font-medium required">
                                 @lang('admin::app.catalog.categories.edit.display-mode')
@@ -397,7 +397,16 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
-                        {{-- Visible in menu --}}
+                         <!-- Visible in Hidden fielld -->
+                        <x-admin::form.control-group.control
+                            type="hidden"
+                            name="status"
+                            class="cursor-pointer"
+                            :checked="(boolean) $selectedValue"
+                        >
+                        </x-admin::form.control-group.control>
+
+                        <!-- Visible in menu -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.catalog.categories.edit.visible-in-menu')
@@ -422,7 +431,7 @@
 
                 {!! view_render_event('bagisto.admin.catalog.categories.edit.card.accordion.filterable_attributes.before', ['category' => $category]) !!}
 
-                {{-- Filterable Attributes --}}
+                <!-- Filterable Attributes -->
                 <x-admin::accordion>
                     <x-slot:header>
                         <p class="required text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
