@@ -61,6 +61,8 @@
                             rules="required"
                             :label="trans('shop::app.customers.signup-form.first-name')"
                             :placeholder="trans('shop::app.customers.signup-form.first-name')"
+                            aria-label="@lang('shop::app.customers.signup-form.first-name')"
+                            aria-required="true"
                         >
                         </x-shop::form.control-group.control>
 
@@ -85,6 +87,8 @@
                             rules="required"
                             :label="trans('shop::app.customers.signup-form.last-name')"
                             :placeholder="trans('shop::app.customers.signup-form.last-name')"
+                            aria-label="@lang('shop::app.customers.signup-form.last-name')"
+                            aria-required="true"
                         >
                         </x-shop::form.control-group.control>
 
@@ -109,6 +113,8 @@
                             rules="required|email"
                             :label="trans('shop::app.customers.signup-form.email')"
                             placeholder="email@example.com"
+                            aria-label="@lang('shop::app.customers.signup-form.email')"
+                            aria-required="true"
                         >
                         </x-shop::form.control-group.control>
 
@@ -134,6 +140,8 @@
                             ref="password"
                             :label="trans('shop::app.customers.signup-form.password')"
                             :placeholder="trans('shop::app.customers.signup-form.password')"
+                            aria-label="@lang('shop::app.customers.signup-form.password')"
+                            aria-required="true"
                         >
                         </x-shop::form.control-group.control>
 
@@ -158,6 +166,8 @@
                             rules="confirmed:@password"
                             :label="trans('shop::app.customers.signup-form.password')"
                             :placeholder="trans('shop::app.customers.signup-form.confirm-pass')"
+                            aria-label="@lang('shop::app.customers.signup-form.confirm-pass')"
+                            aria-required="true"
                         >
                         </x-shop::form.control-group.control>
 
