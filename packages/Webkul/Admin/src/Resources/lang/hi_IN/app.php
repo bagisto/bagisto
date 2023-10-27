@@ -485,12 +485,25 @@ return [
                     'transaction-amount' => 'राशि',
                 ],
 
-                'edit'  => [
+                'create'  => [
                     'already-paid'               => 'पहले ही भुगतान किया गया',
                     'invoice-missing'            => 'चालान गायब है',
                     'transaction-amount-zero'    => 'लेन-देन राशि शून्य है',
                     'transaction-amount-exceeds' => 'लेन-देन राशि की सीमा पार हो गई है',
                     'transaction-saved'          => 'लेन-देन सफलतापूर्वक सहेजा गया है',
+                ],
+
+                'view' => [
+                    'title'            => 'लेन-देन का विवरण',
+                    'transaction-data' => 'लेन-देन डेटा',
+                    'transaction-id'   => 'लेन-देन आईडी',
+                    'order-id'         => 'आदेश आईडी',
+                    'invoice-id'       => 'चालान आईडी',
+                    'payment-method'   => 'भुगतान का तरीका',
+                    'created-at'       => 'निर्मित किया गया',
+                    'status'           => 'स्थिति',
+                    'payment-details'  => 'भुगतान विवरण',
+                    'amount'           => 'राशि',
                 ],
             ],
         ],

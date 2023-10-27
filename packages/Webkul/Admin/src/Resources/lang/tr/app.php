@@ -485,12 +485,25 @@ return [
                     'transaction-amount' => 'Tutar',
                 ],
 
-                'edit'  => [
+                'create'  => [
                     'already-paid'               => 'Zaten ödendi',
                     'invoice-missing'            => 'Fatura eksik',
                     'transaction-amount-zero'    => 'İşlem tutarı sıfır',
                     'transaction-amount-exceeds' => 'İşlem tutarı aşılıyor',
                     'transaction-saved'          => 'İşlem başarıyla kaydedildi',
+                ],
+
+                'view' => [
+                    'title'            => 'İşlem Detayları',
+                    'transaction-data' => 'İşlem Verileri',
+                    'transaction-id'   => 'İşlem ID',
+                    'order-id'         => 'Sipariş ID',
+                    'invoice-id'       => 'Fatura ID',
+                    'payment-method'   => 'Ödeme Yöntemi',
+                    'created-at'       => 'Oluşturulma Tarihi',
+                    'status'           => 'Durum',
+                    'payment-details'  => 'Ödeme Detayları',
+                    'amount'           => 'Miktar',
                 ],
             ],
         ],

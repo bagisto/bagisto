@@ -485,12 +485,25 @@ return [
                     'transaction-amount' => 'المبلغ',
                 ],
 
-                'edit'  => [
+                'create'  => [
                     'already-paid'               => 'تم الدفع بالفعل',
                     'invoice-missing'            => 'الفاتورة مفقودة',
                     'transaction-amount-zero'    => 'مبلغ العملية صفر',
                     'transaction-amount-exceeds' => 'مبلغ العملية يتجاوز الحد المسموح به',
                     'transaction-saved'          => 'تم حفظ العملية بنجاح',
+                ],
+
+                'view' => [
+                    'title'            => 'تفاصيل العملية',
+                    'transaction-data' => 'بيانات العملية',
+                    'transaction-id'   => 'رقم العملية',
+                    'order-id'         => 'رقم الطلب',
+                    'invoice-id'       => 'رقم الفاتورة',
+                    'payment-method'   => 'طريقة الدفع',
+                    'created-at'       => 'تاريخ الإنشاء',
+                    'status'           => 'الحالة',
+                    'payment-details'  => 'تفاصيل الدفع',
+                    'amount'           => 'المبلغ',
                 ],
             ],
         ],

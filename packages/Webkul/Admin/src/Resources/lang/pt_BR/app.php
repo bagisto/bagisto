@@ -485,12 +485,25 @@ return [
                     'transaction-amount' => 'Valor',
                 ],
 
-                'edit'  => [
+                'create'  => [
                     'already-paid'               => 'Já Pago',
                     'invoice-missing'            => 'Fatura Ausente',
                     'transaction-amount-zero'    => 'Valor da Transação Zero',
                     'transaction-amount-exceeds' => 'Valor da Transação Excede',
                     'transaction-saved'          => 'Transação Salva com Sucesso',
+                ],
+
+                'view' => [
+                    'title'            => 'Detalhes da Transação',
+                    'transaction-data' => 'Dados da Transação',
+                    'transaction-id'   => 'ID da Transação',
+                    'order-id'         => 'ID do Pedido',
+                    'invoice-id'       => 'ID da Fatura',
+                    'payment-method'   => 'Método de Pagamento',
+                    'created-at'       => 'Criado em',
+                    'status'           => 'Status',
+                    'payment-details'  => 'Detalhes do Pagamento',
+                    'amount'           => 'Valor',
                 ],
             ],
         ],

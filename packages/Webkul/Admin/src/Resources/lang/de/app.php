@@ -485,12 +485,25 @@ return [
                     'transaction-amount' => 'Betrag',
                 ],
 
-                'edit'  => [
+                'create'  => [
                     'already-paid'               => 'Bereits bezahlt',
                     'invoice-missing'            => 'Rechnung fehlt',
                     'transaction-amount-zero'    => 'Transaktionsbetrag ist null',
                     'transaction-amount-exceeds' => 'Transaktionsbetrag überschreitet den Betrag',
                     'transaction-saved'          => 'Transaktion erfolgreich gespeichert',
+                ],
+
+                'view' => [
+                    'title'            => 'Transaktionsdetails',
+                    'transaction-data' => 'Transaktionsdaten',
+                    'transaction-id'   => 'Transaktions-ID',
+                    'order-id'         => 'Bestellnummer',
+                    'invoice-id'       => 'Rechnungsnummer',
+                    'payment-method'   => 'Zahlungsmethode',
+                    'created-at'       => 'Erstellt am',
+                    'status'           => 'Status',
+                    'payment-details'  => 'Zahlungsdetails',
+                    'amount'           => 'Betrag',
                 ],
             ],
         ],

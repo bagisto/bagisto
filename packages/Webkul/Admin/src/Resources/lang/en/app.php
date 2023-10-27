@@ -483,14 +483,27 @@ return [
                     'transaction-id'     => 'Transaction ID',
                     'transaction-date'   => 'Date',
                     'transaction-amount' => 'Amount',
+                    'view'               => 'View',
                 ],
 
-                'edit'  => [
+                'create'  => [
                     'already-paid'               => 'Already paid',
                     'invoice-missing'            => 'Invoice Missing',
                     'transaction-amount-zero'    => 'Transaction Amount zero',
                     'transaction-amount-exceeds' => 'Transaction Amount exceeds',
-                    'transaction-saved'          => 'Transaction Saved successfully',
+                ],
+
+                'view' => [
+                    'title'            => 'Transaction Details',
+                    'transaction-data' => 'Transaction Data',
+                    'transaction-id'   => 'Transaction ID ',
+                    'order-id'         => 'Order ID',
+                    'invoice-id'       => 'Invoice ID',
+                    'payment-method'   => 'Payment Method',
+                    'created-at'       => 'Created At',
+                    'status'           => 'Status',
+                    'payment-details'  => 'Payment Details',
+                    'amount'           => 'Amount',
                 ],
             ],
         ],

@@ -485,12 +485,25 @@ return [
                     'transaction-amount' => 'Bedrag',
                 ],
 
-                'edit'  => [
+                'create'  => [
                     'already-paid'               => 'Al betaald',
                     'invoice-missing'            => 'Factuur ontbreekt',
                     'transaction-amount-zero'    => 'Transactiebedrag is nul',
                     'transaction-amount-exceeds' => 'Transactiebedrag overschrijdt',
                     'transaction-saved'          => 'Transactie succesvol opgeslagen',
+                ],
+
+                'view' => [
+                    'title'            => 'Transactiegegevens',
+                    'transaction-data' => 'Transactiegegevens',
+                    'transaction-id'   => 'Transactie-ID',
+                    'order-id'         => 'Bestel-ID',
+                    'invoice-id'       => 'Factuur-ID',
+                    'payment-method'   => 'Betalingsmethode',
+                    'created-at'       => 'Aangemaakt op',
+                    'status'           => 'Status',
+                    'payment-details'  => 'Betalingsgegevens',
+                    'amount'           => 'Bedrag',
                 ],
             ],
         ],

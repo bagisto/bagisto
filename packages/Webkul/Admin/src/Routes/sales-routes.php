@@ -80,8 +80,6 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         Route::controller(TransactionController::class)->prefix('transactions')->group(function () {
             Route::get('', 'index')->name('admin.sales.transactions.index');
 
-            Route::get('create', 'create')->name('admin.sales.transactions.create');
-
             Route::post('create', 'store')->name('admin.sales.transactions.store');
 
             Route::get('view/{id}', 'view')->name('admin.sales.transactions.view');
