@@ -21,7 +21,7 @@
                     ::lazy="false"
                     ::src="image.image"
                     ::srcset="image.image + ' 1920w, ' + image.image.replace('storage', 'cache/large') + ' 1280w,' + image.image.replace('storage', 'cache/medium') + ' 1024w, ' + image.image.replace('storage', 'cache/small') + ' 525w'"
-                    alt="Slide Image"
+                    ::alt="image?.title"
                 ></x-shop::media.images.lazy>
             </a>
 
