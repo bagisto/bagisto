@@ -62,7 +62,7 @@
             {!! view_render_event('bagisto.shop.layout.content.before') !!}
 
             {{-- Page Content Blade Component --}}
-            <main id="main">
+            <main id="main" class="bg-white">
                 {{ $slot }}
             </main>
 

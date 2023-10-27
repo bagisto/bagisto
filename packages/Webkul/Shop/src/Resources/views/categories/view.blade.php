@@ -90,10 +90,13 @@
                                     <div class="grid items-center justify-items-center place-content-center w-[100%] m-auto h-[476px] text-center">
                                         <img 
                                             src="{{ bagisto_asset('images/thank-you.png') }}"
-                                            alt="placeholder"
+                                            alt="@lang('shop::app.categories.view.empty')"
                                         />
                                   
-                                        <p class="text-[20px]">
+                                        <p
+                                            class="text-[20px]"
+                                            role="heading"
+                                        >
                                             @lang('shop::app.categories.view.empty')
                                         </p>
                                     </div>
@@ -127,10 +130,13 @@
                                     <div class="grid items-center justify-items-center place-content-center w-[100%] m-auto h-[476px] text-center">
                                         <img 
                                             src="{{ bagisto_asset('images/thank-you.png') }}"
-                                            alt="placeholder"
+                                            alt="@lang('shop::app.categories.view.empty')"
                                         />
                                         
-                                        <p class="text-[20px]">
+                                        <p
+                                            class="text-[20px]"
+                                            role="heading"
+                                        >
                                             @lang('shop::app.categories.view.empty')
                                         </p>
                                     </div>
