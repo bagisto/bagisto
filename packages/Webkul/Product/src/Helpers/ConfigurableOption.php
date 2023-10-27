@@ -154,7 +154,7 @@ class ConfigurableOption
     protected function getAttributeOptionsData($attribute, $options)
     {
         $attributeOptionsData = [];
-        
+
         foreach ($attribute->options->sortBy('sort_order') as $attributeOption) {
             $optionId = $attributeOption->id;
 
