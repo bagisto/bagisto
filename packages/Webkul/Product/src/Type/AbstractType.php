@@ -1075,7 +1075,7 @@ abstract class AbstractType
         $offerLines = trans('shop::app.products.type.abstract.offers', [
             'qty'      => $customerGroupPrice->qty,
             'price'    => core()->currency($price),
-            'discount' => $discount,
+            'discount' => '<span>' . $discount . '%</span>',
         ]);
 
         return $offerLines;

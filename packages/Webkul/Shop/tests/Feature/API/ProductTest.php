@@ -27,7 +27,9 @@ it('returns a new products listing', function () {
         ],
     ];
 
-    (new ProductFaker($newProductOptions))->create(1, 'simple');
+    (new ProductFaker($newProductOptions))
+        ->getSimpleProductFactory()
+        ->create();
 
     // Act
     $response = getJson(route('shop.api.products.index', ['new' => 1]))
@@ -54,7 +56,9 @@ it('returns a featured products listing', function () {
         ],
     ];
 
-    (new ProductFaker($featuredProductOptions))->create(1, 'simple');
+    (new ProductFaker($featuredProductOptions))
+        ->getSimpleProductFactory()
+        ->create();
 
     // Act
     $response = getJson(route('shop.api.products.index', ['featured' => 1]))
@@ -69,7 +73,9 @@ it('returns a featured products listing', function () {
 
 it('returns all products listing', function () {
     // Arrange
-    $product = (new ProductFaker())->create(1, 'simple')->first();
+    $product = (new ProductFaker())
+        ->getSimpleProductFactory()
+        ->create();
 
     // Act & Assert
     getJson(route('shop.api.products.index'))

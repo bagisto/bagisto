@@ -515,7 +515,7 @@ return [
 
         'type' => [
             'abstract' => [
-                'offers' => 'Acquista :qty per :price ciascuno e risparmia :discount%',
+                'offers' => 'Acquista :qty per :price ciascuno e risparmia :discount',
             ],
         ],
     ],
