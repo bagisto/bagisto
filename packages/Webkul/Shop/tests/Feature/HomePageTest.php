@@ -1,9 +1,9 @@
 <?php
 
-use function Pest\Laravel\get;
-
 use Illuminate\Support\Str;
 use Webkul\Customer\Models\Customer as CustomerModel;
+
+use function Pest\Laravel\get;
 
 afterEach(function () {
     /**
