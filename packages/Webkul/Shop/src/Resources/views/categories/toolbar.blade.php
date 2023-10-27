@@ -18,7 +18,10 @@
                         <button class="flex justify-between items-center gap-[15px] max-w-[200px] w-full p-[14px] rounded-lg bg-white border border-[#E9E9E9] text-[16px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-[10px] max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer">
                             @{{ sortLabel ?? "@lang('shop::app.products.sort-by.title')" }}
 
-                            <span class="icon-arrow-down text-[24px]"></span>
+                            <span
+                                class="text-[24px] icon-arrow-down"
+                                role="presentation"
+                            ></span>
                         </button>
                     </x-slot:toggle>
                 
@@ -66,6 +69,9 @@
                     <div class="flex gap-[20px] items-center">
                         <span
                             class="text-[24px] cursor-pointer"
+                            role="button"
+                            aria-label="List"
+                            tabindex="0"
                             :class="(filters.applied.mode === 'list') ? 'icon-listing-fill' : 'icon-listing'"
                             @click="changeMode('list')"
                         >
@@ -73,6 +79,9 @@
 
                         <span
                             class="text-[24px] cursor-pointer"
+                            role="button"
+                            aria-label="Grid"
+                            tabindex="0"
                             :class="(filters.applied.mode === 'grid') ? 'icon-grid-view-fill' : 'icon-grid-view'"
                             @click="changeMode()"
                         >

@@ -76,7 +76,10 @@
                                         {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
                                     </span>
 
-                                    <span class="icon-arrow-down text-[24px]"></span>
+                                    <span
+                                        class="icon-arrow-down text-[24px]"
+                                        role="presentation"
+                                    ></span>
                                 </div>
                             </x-slot:toggle>
 
@@ -105,7 +108,10 @@
                                         {{ core()->getCurrentChannel()->locales()->orderBy('name')->where('code', app()->getLocale())->value('name') }}
                                     </span>
 
-                                    <span class="icon-arrow-down text-[24px]"></span>
+                                    <span
+                                        class="icon-arrow-down text-[24px]"
+                                        role="presentation"
+                                    ></span>
                                 </div>
                             </x-slot:toggle>
 
