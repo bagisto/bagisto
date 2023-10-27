@@ -2618,6 +2618,7 @@ return [
                 'update-slider'                 => 'ස්ලයිඩරය යාවත්කාලීන කරන්න',
                 'value-input'                   => 'අගය',
                 'value'                         => 'අගය: :value',
+                'image-title'                   => 'පින්තූර සිටුවක්',
             ],
 
             'create-success' => 'තේමා සාර්ථකයි',

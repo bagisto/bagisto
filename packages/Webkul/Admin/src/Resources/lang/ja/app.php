@@ -2618,6 +2618,7 @@ return [
                 'update-slider'                 => 'スライダーを更新',
                 'value-input'                   => '値',
                 'value'                         => '値：:value',
+                'image-title'                   => '画像のタイトル',
             ],
 
             'create-success' => 'テーマが正常に作成されました',

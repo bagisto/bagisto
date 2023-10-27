@@ -2618,6 +2618,7 @@ return [
                 'update-slider'                 => 'स्लाइडर अपडेट करें',
                 'value-input'                   => 'मूल्य',
                 'value'                         => 'मूल्य: :value',
+                'image-title'                   => 'चित्र शीर्षक',
             ],
 
             'create-success' => 'थीम सफलतापूर्वक बनाई गई',

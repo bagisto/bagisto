@@ -2618,6 +2618,7 @@ return [
                 'update-slider'                 => 'Schuifregelaar bijwerken',
                 'value-input'                   => 'Waarde',
                 'value'                         => 'Waarde: :value',
+                'image-title'                   => 'Afbeeldingstitel',
             ],
 
             'create-success' => 'Thema is succesvol aangemaakt',

@@ -235,7 +235,7 @@
                             >
                                 <img    
                                     class="w-[120px] h-[120px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
-                                    src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
+                                    src="{{ bagisto_asset('images/empty-placeholders/default.svg') }}"
                                     alt="add-product-to-store"
                                 >
                 
@@ -399,7 +399,8 @@
                                             type="text"
                                             name="{{ $currentLocale->code }}[title]"
                                             rules="required"
-                                            :placeholder="trans('admin::app.settings.themes.edit.title')"
+                                            :placeholder="trans('admin::app.settings.themes.edit.image-title')"
+                                            :label="trans('admin::app.settings.themes.edit.image-title')"
                                         >
                                         </x-admin::form.control-group.control>
         

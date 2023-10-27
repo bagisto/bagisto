@@ -2618,6 +2618,7 @@ return [
                 'update-slider'                 => 'Aktualizuj suwak',
                 'value-input'                   => 'Wartość',
                 'value'                         => 'Wartość: :value',
+                'image-title'                   => 'Tytuł obrazu',
             ],
 
             'create-success' => 'Motyw został pomyślnie utworzony',

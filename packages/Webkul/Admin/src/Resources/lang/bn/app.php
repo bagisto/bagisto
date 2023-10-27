@@ -2618,6 +2618,7 @@ return [
                 'update-slider'                 => 'স্লাইডার আপডেট করুন',
                 'value-input'                   => 'মান',
                 'value'                         => 'মান: :value',
+                'image-title'                   => 'চিত্র শিরোনাম',
             ],
 
             'create-success' => 'থিমটি সফলভাবে তৈরি হয়েছে',

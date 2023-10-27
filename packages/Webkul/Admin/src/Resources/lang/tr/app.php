@@ -2619,6 +2619,7 @@ return [
                 'update-slider'                 => 'Slider\'ı Güncelle',
                 'value-input'                   => 'Değer',
                 'value'                         => 'Değer: :value',
+                'image-title'                   => 'Resim Başlığı',
             ],
 
             'create-success' => 'Tema başarıyla oluşturuldu',
