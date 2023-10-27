@@ -17,6 +17,8 @@
                     <x-slot:toggle>
                         <span
                             class="text-[#0A49A7] cursor-pointer"
+                            role="button"
+                            tabindex="0"
                             v-if="! isCouponApplied"
                         >
                             @lang('shop::app.checkout.onepage.coupon.apply')
