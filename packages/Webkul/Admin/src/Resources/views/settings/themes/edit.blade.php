@@ -147,6 +147,12 @@
 
                                 <input
                                     type="hidden"
+                                    :name="'options['+ index +'][title]'"
+                                    :value="image.title"
+                                />
+
+                                <input
+                                    type="hidden"
                                     :name="'options['+ index +'][link]'"
                                     :value="image.link"
                                 />
@@ -166,6 +172,16 @@
                                 >
                                     <div class="flex gap-[10px]">
                                         <div class="grid gap-[6px] place-content-start">
+                                            <p class="text-gray-600 dark:text-gray-300">
+                                                <div> 
+                                                    @lang('admin::app.settings.themes.edit.image-title'): 
+
+                                                    <span class="text-gray-600 dark:text-gray-300 transition-all">
+                                                        @{{ image.title }}
+                                                    </span>
+                                                </div>
+                                            </p>
+
                                             <p class="text-gray-600 dark:text-gray-300">
                                                 <div> 
                                                     @lang('admin::app.settings.themes.edit.link'): 
@@ -374,6 +390,25 @@
         
                             <x-slot:content>
                                 <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label class="required">
+                                            @lang('admin::app.settings.themes.edit.image-title')
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="{{ $currentLocale->code }}[title]"
+                                            rules="required"
+                                            :placeholder="trans('admin::app.settings.themes.edit.title')"
+                                        >
+                                        </x-admin::form.control-group.control>
+        
+                                        <x-admin::form.control-group.error
+                                            control-name="{{ $currentLocale->code }}[title]"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.settings.themes.edit.link')
@@ -1868,8 +1903,9 @@
                             }
 
                             this.sliders.images.push({
-                                slider_image: sliderImage,
+                                title: formData.get("{{ $currentLocale->code }}[title]"),
                                 link: formData.get("{{ $currentLocale->code }}[link]"),
+                                slider_image: sliderImage,
                             });
 
                             if (sliderImage instanceof File) {
@@ -1903,6 +1939,7 @@
                         
                         this.sliders.images = this.sliders.images.filter(item => {
                             return (
+                                item.title !== image.title || 
                                 item.link !== image.link || 
                                 item.image !== image.image
                             );

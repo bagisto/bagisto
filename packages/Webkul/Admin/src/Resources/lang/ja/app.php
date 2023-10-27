@@ -485,12 +485,25 @@ return [
                     'transaction-amount' => '金額',
                 ],
 
-                'edit'  => [
+                'create'  => [
                     'already-paid'               => '既に支払済み',
                     'invoice-missing'            => '請求書が不足しています',
                     'transaction-amount-zero'    => '取引金額がゼロです',
                     'transaction-amount-exceeds' => '取引金額が超過しています',
                     'transaction-saved'          => '取引が正常に保存されました',
+                ],
+
+                'view' => [
+                    'title'            => '取引の詳細',
+                    'transaction-data' => '取引データ',
+                    'transaction-id'   => '取引ID',
+                    'order-id'         => '注文ID',
+                    'invoice-id'       => '請求書ID',
+                    'payment-method'   => '支払い方法',
+                    'created-at'       => '作成日時',
+                    'status'           => 'ステータス',
+                    'payment-details'  => '支払い詳細',
+                    'amount'           => '金額',
                 ],
             ],
         ],
@@ -525,8 +538,8 @@ return [
                     'attribute-family-value' => '属性ファミリー - :attribute_family',
                     'active'                 => 'アクティブ',
                     'category'               => 'カテゴリー',
-                    'copy-of'                => ':value',
-                    'copy-of-slug'           => ':value',
+                    'copy-of'                => 'コピー :value',
+                    'copy-of-slug'           => 'コピー-:value',
                     'disable'                => '無効',
                     'delete'                 => '削除',
                     'image'                  => '画像',

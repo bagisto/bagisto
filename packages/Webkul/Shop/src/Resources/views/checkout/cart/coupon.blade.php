@@ -18,7 +18,9 @@
                     <!-- Modal Toggler -->
                     <x-slot:toggle>
                         <span 
-                            class="text-[#0A49A7] cursor-pointer" 
+                            class="text-[#0A49A7] cursor-pointer"
+                            role="button"
+                            tabindex="0"
                             v-if="! isCouponApplied"
                         >
                             @lang('shop::app.checkout.cart.coupon.apply')
@@ -143,6 +145,8 @@
                                 this.$emitter.emit('add-flash', { type: 'warning', message: error.response.data.message });
 
                                 this.$refs.couponModel.toggle();
+
+                                resetForm();
 
                                 return;
                             }
