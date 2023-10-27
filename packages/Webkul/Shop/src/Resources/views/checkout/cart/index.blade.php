@@ -76,10 +76,16 @@
                                     <label
                                         class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
                                         for="select-all"
+                                        role="button"
+                                        tabindex="0"
+                                        aria-label="Select All"
                                     >
                                     </label>
 
-                                    <span class="text-[20px] max-md:text-[22px] max-sm:text-[18px] ml-[10px]">
+                                    <span
+                                        class="text-[20px] max-md:text-[22px] max-sm:text-[18px] ml-[10px]"
+                                        role="heading"
+                                    >
                                         @{{ "@lang('shop::app.checkout.cart.index.items-selected')".replace(':count', selectedItemsCount) }}
                                     </span>
                                 </div>
@@ -90,6 +96,8 @@
                                 >
                                     <span
                                         class="text-[16px] text-[#0A49A7] cursor-pointer" 
+                                        role="button"
+                                        tabindex="0"
                                         @click="removeSelectedItems"
                                     >
                                         @lang('shop::app.checkout.cart.index.remove')
@@ -100,6 +108,8 @@
 
                                         <span
                                             class="text-[16px] text-[#0A49A7] cursor-pointer" 
+                                            role="button"
+                                            tabindex="0"
                                             @click="moveToWishlistSelectedItems"
                                         >
                                             @lang('shop::app.checkout.cart.index.move-to-wishlist')
@@ -127,6 +137,9 @@
                                             <label
                                                 class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
                                                 :for="'item_' + item.id"
+                                                role="button"
+                                                tabindex="0"
+                                                aria-label="Select Cart Item"
                                             ></label>
                                         </div>
 
@@ -193,7 +206,9 @@
                                                 </p>
                                                 
                                                 <span
-                                                    class="text-[16px] text-[#0A49A7] cursor-pointer" 
+                                                    class="text-[16px] text-[#0A49A7] cursor-pointer"
+                                                    role="button"
+                                                    tabindex="0"
                                                     @click="removeItem(item.id)"
                                                 >
                                                     @lang('shop::app.checkout.cart.index.remove')
@@ -220,6 +235,8 @@
                                         <!-- Cart Item Remove Button -->
                                         <span
                                             class="text-[16px] text-[#0A49A7] cursor-pointer" 
+                                            role="button"
+                                            tabindex="0"
                                             @click="removeItem(item.id)"
                                         >
                                             @lang('shop::app.checkout.cart.index.remove')
