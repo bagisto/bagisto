@@ -234,23 +234,24 @@
             </div>
 
             @if ($result)
-                <div class="flex gap-[10px] cursor-pointer">
+                <x-admin::form.control-group class="flex gap-[5px] w-max  mt-[5px] cursor-pointer select-none">
                     <x-admin::form.control-group.control
                         type="checkbox"
                         :name="$name.'[delete]'"
                         :id="$name.'[delete]'"
                         value="1"
                         class="hidden peer"
+                        :for="$name.'[delete]'"
                     >
                     </x-admin::form.control-group.control>
 
                     <x-admin::form.control-group.label
-                        class="cursor-pointer"
                         :for="$name.'[delete]'"
+                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                     >
                         @lang('admin::app.configuration.index.delete')
                     </x-admin::form.control-group.label>
-                </div>
+                </x-admin::form.control-group>
             @endif
 
         @elseif ($field['type'] == 'file')
