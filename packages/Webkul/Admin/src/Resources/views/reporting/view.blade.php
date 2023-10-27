@@ -88,7 +88,7 @@
                         <!-- Table Header -->
                         <div
                             class="row grid grid-cols-4 grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold"
-                            :style="`grid-template-columns: repeat(${reporing.statistics.columns.length}, 1fr)`"
+                            :style="`grid-template-columns: repeat(${reporing.statistics.columns.length}, minmax(0, 1fr))`"
                         >
                             <div
                                 class="flex gap-[10px] cursor-pointer"
@@ -102,8 +102,8 @@
 
                         <!-- Table Body -->
                         <div
-                            class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950" style="grid-template-columns: repeat(4, 1fr);"
-                            :style="`grid-template-columns: repeat(${reporing.statistics.columns.length}, 1fr)`"
+                            class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950" style="grid-template-columns: repeat(4, minmax(0, 1fr));"
+                            :style="`grid-template-columns: repeat(${reporing.statistics.columns.length}, minmax(0, 1fr))`"
                             v-if="reporing.statistics.records.length"
                             v-for="record in reporing.statistics.records"
                         >

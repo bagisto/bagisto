@@ -26,7 +26,7 @@
                 :isMultiRow="true"
                 ref="transaction_data"
             >
-                @php 
+                @php
                     $hasPermission = bouncer()->hasPermission('sales.transactions.view');
                 @endphp
 
@@ -34,7 +34,7 @@
                 <template #header="{ columns, records, sortPage, applied}">
                     <div
                         class="row grid grid-cols-{{ $hasPermission ? '8' : '7' }} grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold"
-                        :style="'grid-template-columns: repeat({{ $hasPermission ? '8' : '7' }} , 1fr);'"
+                        :style="'grid-template-columns: repeat({{ $hasPermission ? '8' : '7' }} , minmax(0, 1fr));'"
                     >
                         <div
                             class="flex gap-[10px] cursor-pointer"
@@ -79,28 +79,56 @@
                     <div
                         v-for="record in records"
                         class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
-                        :style="'grid-template-columns: repeat(' + (record.actions.length ? 8 : 7) + ', 1fr);'"
+                        :style="'grid-template-columns: repeat(' + (record.actions.length ? 8 : 7) + ', minmax(0, 1fr));'"
                     >
                         <!-- Id -->
-                        <p v-text="record.id"></p>
+                        <p
+                            class="break-words"
+                            v-text="record.id"
+                        >
+                        </p>
 
                         <!-- Transaction ID-->
-                        <p v-text="record.transaction_id"></p>
+                        <p
+                            class="break-words"
+                            v-text="record.transaction_id"
+                        >
+                        </p>
 
                         <!-- Amount -->
-                        <p v-text="record.amount"></p>
+                        <p
+                            class="break-words"
+                            v-text="record.amount"
+                        >
+                        </p>
 
                         <!-- Invoice Id -->
-                        <p v-text="record.invoice_id"></p>
+                        <p
+                            class="break-words"
+                            v-text="record.invoice_id"
+                        >
+                        </p>
 
                         <!-- Order Id -->
-                        <p v-text="record.order_id"></p>
+                        <p
+                            class="break-words"
+                            v-text="record.order_id"
+                        >
+                        </p>
 
                         <!-- Status -->
-                        <p v-text="record.status"></p>
+                        <p
+                            class="break-words"
+                            v-text="record.status"
+                        >
+                        </p>
 
                         <!-- Date -->
-                        <p v-text="record.created_at"></p>
+                        <p
+                            class="break-words"
+                            v-text="record.created_at"
+                        >
+                        </p>
 
                         <!-- Actions -->
                         <div class="flex justify-end">
@@ -142,80 +170,80 @@
                                         </p>
 
                                         <p class="text-gray-600 dark:text-gray-300">
-                                            @lang('admin::app.sales.transactions.index.view.order-id') 
+                                            @lang('admin::app.sales.transactions.index.view.order-id')
                                         </p>
 
-                                        <p 
-                                            v-if="data.transaction.invoice_id" 
+                                        <p
+                                            v-if="data.transaction.invoice_id"
                                             class="text-gray-600 dark:text-gray-300"
-                                        > 
-                                            @lang('admin::app.sales.transactions.index.view.invoice-id') 
+                                        >
+                                            @lang('admin::app.sales.transactions.index.view.invoice-id')
                                         </p>
 
                                         <p class="text-gray-600 dark:text-gray-300">
-                                            @lang('admin::app.sales.transactions.index.view.payment-method') 
-                                        </p>
-
-                                        <p class="text-gray-600 dark:text-gray-300"> 
-                                            @lang('admin::app.sales.transactions.index.view.status') 
+                                            @lang('admin::app.sales.transactions.index.view.payment-method')
                                         </p>
 
                                         <p class="text-gray-600 dark:text-gray-300">
-                                            @lang('admin::app.sales.transactions.index.view.created-at') 
+                                            @lang('admin::app.sales.transactions.index.view.status')
                                         </p>
 
                                         <p class="text-gray-600 dark:text-gray-300">
-                                            @lang('admin::app.sales.transactions.index.view.amount') 
+                                            @lang('admin::app.sales.transactions.index.view.created-at')
+                                        </p>
+
+                                        <p class="text-gray-600 dark:text-gray-300">
+                                            @lang('admin::app.sales.transactions.index.view.amount')
                                         </p>
                                     </div>
 
                                     <div class="flex flex-col gap-y-[6px]">
-                                        <p 
-                                            class="text-gray-600 dark:text-gray-300" 
+                                        <p
+                                            class="text-gray-600 dark:text-gray-300"
                                             v-text="data.transaction.transaction_id"
                                         >
                                         </p>
 
-                                        <p 
-                                            class="text-gray-600 dark:text-gray-300" 
+                                        <p
+                                            class="text-gray-600 dark:text-gray-300"
                                             v-text="data.transaction.order_id"
                                         >
                                         </p>
 
-                                        <p 
-                                            v-if="data.transaction.invoice_id" 
-                                            class="text-gray-600 dark:text-gray-300" 
+                                        <p
+                                            v-if="data.transaction.invoice_id"
+                                            class="text-gray-600 dark:text-gray-300"
                                             v-text="data.transaction.invoice_id"
                                         >
                                         </p>
 
-                                        <p 
-                                            class="text-gray-600 dark:text-gray-300" 
+                                        <p
+                                            class="text-gray-600 dark:text-gray-300"
                                             v-text="data.transaction.payment_method"
                                         >
                                         </p>
-                                        
 
-                                        <p 
-                                            class="text-gray-600 dark:text-gray-300" 
+
+                                        <p
+                                            class="text-gray-600 dark:text-gray-300"
                                             v-text="data.transaction.status"
                                         >
                                         </p>
 
-                                        <p 
-                                            class="text-gray-600 dark:text-gray-300" 
+                                        <p
+                                            class="text-gray-600 dark:text-gray-300"
                                             v-text="data.transaction.created_at"
                                         >
                                         </p>
 
-                                        <p 
-                                            class="text-gray-600 dark:text-gray-300" 
+                                        <p
+                                            class="text-gray-600 dark:text-gray-300"
                                             v-text="data.transaction.amount"
                                         >
-                                        </p>    
+                                        </p>
                                     </div>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
                     </x-slot:content>
                 </x-admin::drawer>
