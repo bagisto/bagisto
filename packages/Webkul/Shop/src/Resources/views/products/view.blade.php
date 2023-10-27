@@ -330,6 +330,16 @@
                                     </span>
                                 </p>
 
+                                @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()))
+                                    <div class="grid gap-[5px] mt-[10px]">
+                                        @foreach ($product->getTypeInstance()->getCustomerGroupPricingOffers() as $offer)
+                                            <p class="text-[#6E6E6E] [&>*]:text-black">
+                                                {!! $offer !!}
+                                            </p>
+                                        @endforeach
+                                    </div>
+                                @endif
+
                                 {!! view_render_event('bagisto.shop.products.price.after', ['product' => $product]) !!}
 
                                 {!! view_render_event('bagisto.shop.products.short_description.before', ['product' => $product]) !!}

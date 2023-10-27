@@ -515,7 +515,7 @@ return [
 
         'type' => [
             'abstract' => [
-                'offers' => '购买 :qty 件，每件 :price，节省 :discount%',
+                'offers' => '购买 :qty 件，每件 :price，节省 :discount',
             ],
         ],
     ],

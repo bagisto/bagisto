@@ -515,7 +515,7 @@ return [
 
         'type' => [
             'abstract' => [
-                'offers' => 'প্রতি একক মূল্যে কিনুন :qty এবং :discount% সেভ করুন',
+                'offers' => 'প্রতি একক মূল্যে কিনুন :qty এবং :discount সেভ করুন',
             ],
         ],
     ],
