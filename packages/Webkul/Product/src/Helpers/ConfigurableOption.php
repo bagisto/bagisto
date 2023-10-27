@@ -154,10 +154,8 @@ class ConfigurableOption
     protected function getAttributeOptionsData($attribute, $options)
     {
         $attributeOptionsData = [];
-
-        $attributeOptions = $attribute->options()->orderBy('sort_order')->get();
-
-        foreach ($attributeOptions as $attributeOption) {
+        
+        foreach ($attribute->options->sortBy('sort_order') as $attributeOption) {
             $optionId = $attributeOption->id;
 
             if (! isset($options[$attribute->id][$optionId])) {
