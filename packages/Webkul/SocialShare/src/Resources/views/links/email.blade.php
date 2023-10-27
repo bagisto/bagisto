@@ -15,6 +15,8 @@
                 href="{{ $emailURL }}" 
                 target="_blank"
                 aria-label="Email"
+                role="button"
+                tabindex="0"
             >
                 @include('social_share::icons.email')
             </a>

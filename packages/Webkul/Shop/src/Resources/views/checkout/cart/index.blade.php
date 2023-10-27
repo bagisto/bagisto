@@ -265,9 +265,15 @@
                         class="grid items-center justify-items-center w-[100%] m-auto h-[476px] place-content-center text-center"
                         v-else
                     >
-                        <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
+                        <img
+                            src="{{ bagisto_asset('images/thank-you.png') }}"
+                            alt="@lang('shop::app.checkout.cart.index.empty-product')"
+                        />
                         
-                        <p class="text-[20px]">
+                        <p
+                            class="text-[20px]"
+                            role="heading"
+                        >
                             @lang('shop::app.checkout.cart.index.empty-product')
                         </p>
                     </div>

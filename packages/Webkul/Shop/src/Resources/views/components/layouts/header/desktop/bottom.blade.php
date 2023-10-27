@@ -33,6 +33,7 @@
         <form
             action="{{ route('shop.search.index') }}"
             class="flex items-center max-w-[445px]"
+            role="search"
         >
             <label
                 for="organic-search"
@@ -50,8 +51,12 @@
                     value="{{ request('query') }}"
                     class="block w-full px-[44px] py-[13px] bg-[#F5F5F5] rounded-lg text-gray-900 text-xs font-medium transition-all border border-transparent hover:border-gray-400 focus:border-gray-400"
                     placeholder="@lang('shop::app.components.layouts.header.search-text')"
+                    aria-label="@lang('shop::app.components.layouts.header.search-text')"
+                    aria-required="true"
                     required
                 >
+
+                <button type="submit" class="hidden" aria-lebel="Submit"></button
 
                 @if (core()->getConfigData('general.content.shop.image_search'))
                     @include('shop::search.images.index')
@@ -67,7 +72,10 @@
                     href="{{ route('shop.compare.index') }}"
                     aria-label="Compare"
                 >
-                    <span class="icon-compare inline-block text-[24px] cursor-pointer"></span>
+                    <span
+                        class="icon-compare inline-block text-[24px] cursor-pointer"
+                        role="presentation"
+                    ></span>
                 </a>
             @endif
 
@@ -77,7 +85,12 @@
             {{-- user profile --}}
             <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                 <x-slot:toggle>
-                    <span class="icon-users inline-block text-[24px] cursor-pointer"></span>
+                    <span
+                        class="icon-users inline-block text-[24px] cursor-pointer"
+                        role="button"
+                        aria-label="@lang('shop::app.components.layouts.header.profile')"
+                        tabindex="0"
+                    ></span>
                 </x-slot:toggle>
 
                 {{-- Guest Dropdown --}}

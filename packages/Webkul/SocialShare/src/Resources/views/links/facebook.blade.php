@@ -13,6 +13,8 @@
                 href="#"
                 @click="openSharePopup"
                 aria-label="Facebook"
+                role="button"
+                tabindex="0"
             >
                 @include('social_share::icons.facebook')
             </a>

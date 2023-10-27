@@ -3,12 +3,18 @@
     <x-shop::dropdown>
         <!-- Dropdown Toggler -->
         <x-slot:toggle>
-            <div class="flex gap-[10px] cursor-pointer">
+            <div
+                class="flex gap-[10px] cursor-pointer" role="button"
+                tabindex="0"
+            >
                 <span>
                     {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
                 </span>
 
-                <span class="text-[24px] icon-arrow-down"></span>
+                <span
+                    class="text-[24px] icon-arrow-down"
+                    role="presentation"
+                ></span>
             </div>
         </x-slot:toggle>
 
@@ -18,13 +24,19 @@
         </x-slot:content>
     </x-shop::dropdown>
 
-    <p class="text-xs font-medium">Get UPTO 40% OFF on your 1st order <a href="#" class="underline">SHOP NOW</a></p>
+    <p class="text-xs font-medium">
+        Get UPTO 40% OFF on your 1st order <a href="{{ route('shop.home.index') }}" class="underline">SHOP NOW</a>
+    </p>
 
     {{-- Locales Switcher --}}
     <x-shop::dropdown position="bottom-right">
         <x-slot:toggle>
             {{-- Dropdown Toggler --}}
-            <div class="flex items-center gap-[10px] cursor-pointer">
+            <div
+                class="flex items-center gap-[10px] cursor-pointer"
+                role="button"
+                tabindex="0"
+            >
                 <img 
                     src="{{ ! empty(core()->getCurrentLocale()->logo_url) 
                             ? core()->getCurrentLocale()->logo_url 
@@ -40,7 +52,10 @@
                     {{ core()->getCurrentChannel()->locales()->orderBy('name')->where('code', app()->getLocale())->value('name') }}
                 </span>
 
-                <span class="icon-arrow-down text-[24px]"></span>
+                <span
+                    class="icon-arrow-down text-[24px]"
+                    role="presentation"
+                ></span>
             </div>
         </x-slot:toggle>
     
