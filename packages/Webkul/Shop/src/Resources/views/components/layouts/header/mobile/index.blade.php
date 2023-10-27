@@ -71,7 +71,7 @@
                         <x-shop::dropdown position="top-left">
                             <!-- Dropdown Toggler -->
                             <x-slot:toggle>
-                                <div class="w-full flex gap-[10px] justify-between items-center cursor-pointer">
+                                <div class="w-full flex gap-[10px] justify-between items-center cursor-pointer" role="button">
                                     <span>
                                         {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
                                     </span>
@@ -89,7 +89,7 @@
                         <x-shop::dropdown position="top-right">
                             <x-slot:toggle>
                                 {{-- Dropdown Toggler --}}
-                                <div class="w-full flex gap-[10px] justify-between items-center cursor-pointer">
+                                <div class="w-full flex gap-[10px] justify-between items-center cursor-pointer" role="button">
                                     <img
                                         src="{{ ! empty(core()->getCurrentLocale()->logo_url)
                                                 ? core()->getCurrentLocale()->logo_url

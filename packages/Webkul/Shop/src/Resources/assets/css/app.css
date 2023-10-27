@@ -451,4 +451,12 @@
     .required:after {
         content: "*";
     }
+
+    .skip-to-main-content-link {
+        @apply absolute left-[-9999px] z-[999] p-[1em] bg-black text-white opacity-0;
+    }
+
+    .skip-to-main-content-link:focus {
+        @apply left-[50%] translate-x-[50%] opacity-100;
+    }
 }

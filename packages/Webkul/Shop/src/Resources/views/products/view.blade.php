@@ -286,6 +286,7 @@
                                     @if (core()->getConfigData('general.content.shop.wishlist_option'))
                                         <div
                                             class="flex items-center justify-center min-w-[46px] min-h-[46px] max-h-[46px] bg-white border border-black rounded-full text-[24px] transition-all hover:opacity-[0.8] cursor-pointer"
+                                            role="button"
                                             :class="isWishlist ? 'icon-heart-fill' : 'icon-heart'"
                                             @click="addToWishlist"
                                         >
