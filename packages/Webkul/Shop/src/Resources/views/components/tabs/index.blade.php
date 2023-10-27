@@ -15,6 +15,8 @@
                 :style="positionStyles"
             >
                 <div
+                    role="button"
+                    tabindex="0"
                     v-for="tab in tabs"
                     class="pb-[18px] px-[30px] text-[20px] font-medium text-[#6E6E6E] cursor-pointer"
                     :class="{'text-black border-navyBlue border-b-[2px] transition': tab.isActive }"

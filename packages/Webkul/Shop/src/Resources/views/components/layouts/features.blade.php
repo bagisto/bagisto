@@ -3,8 +3,11 @@
 <!-- Features -->
 <div class="container mt-20 max-lg:px-[30px] max-sm:mt-[30px]">
     <div class="flex gap-[25px] justify-center max-lg:flex-wrap">
-        <div class="flex items-center gap-[20px]">
-            <span class="icon-truck flex items-center justify-center w-[60px] h-[60px] bg-white border border-black rounded-full text-[42px] text-navyBlue p-[10px]"></span>
+        <div class="flex items-center gap-[20px] bg-white">
+            <span
+                class="icon-truck flex items-center justify-center w-[60px] h-[60px] bg-white border border-black rounded-full text-[42px] text-navyBlue p-[10px]"
+                role="presentation"
+            ></span>
 
             <div class="">
                 <p class="text-[16px] font-medium font-dmserif">Free Shipping</p>
@@ -15,8 +18,11 @@
             </div>
         </div>
 
-        <div class="flex items-center gap-[20px]">
-            <span class="icon-support flex items-center w-[60px] h-[60px] bg-white p-[10px] justify-center border border-black rounded-full text-[42px] text-navyBlue"></span>
+        <div class="flex items-center gap-[20px] bg-white">
+            <span
+                class="icon-support flex items-center w-[60px] h-[60px] bg-white p-[10px] justify-center border border-black rounded-full text-[42px] text-navyBlue"
+                role="presentation"
+            ></span>
 
             <div class="">
                 <p class="text-[16px] font-medium font-dmserif">Product Replace</p>
@@ -27,8 +33,11 @@
             </div>
         </div>
 
-        <div class="flex items-center gap-[20px]">
-            <span class="icon-dollar-sign flex items-center rounded-full w-[60px] h-[60px] p-[10px] justify-center border border-black bg-white text-[42px] text-navyBlue"></span>
+        <div class="flex items-center gap-[20px] bg-white">
+            <span
+                class="icon-dollar-sign flex items-center rounded-full w-[60px] h-[60px] p-[10px] justify-center border border-black bg-white text-[42px] text-navyBlue"
+                role="presentation"
+            ></span>
 
             <div class="">
                 <p class="text-[16px] font-medium font-dmserif">Emi Available</p>
@@ -39,8 +48,11 @@
             </div>
         </div>
 
-        <div class="flex items-center gap-[20px]">
-            <span class="icon-product flex items-center w-[60px] h-[60px] bg-white p-[10px] justify-center border border-black rounded-full text-[42px] text-navyBlue"></span>
+        <div class="flex items-center gap-[20px] bg-white">
+            <span
+                class="icon-product flex items-center w-[60px] h-[60px] bg-white p-[10px] justify-center border border-black rounded-full text-[42px] text-navyBlue"
+                role="presentation"
+            ></span>
 
             <div class="">
                 <p class="text-[16px] font-medium font-dmserif">24/7 Support</p>

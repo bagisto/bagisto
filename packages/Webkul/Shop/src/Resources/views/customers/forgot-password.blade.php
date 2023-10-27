@@ -63,6 +63,8 @@
                             rules="required|email"
                             :label="trans('shop::app.customers.login-form.email')"
                             placeholder="email@example.com"
+                            aria-label="@lang('shop::app.customers.login-form.email')"
+                            aria-required="true"
                         >
                         </x-shop::form.control-group.control>
 
