@@ -27,22 +27,21 @@
         </v-desktop-category>
     </div>
 
-    {{-- Right Nagivation Section --}}
+    <!-- Right Nagivation Section -->
     <div class="flex gap-x-[35px] items-center max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px]">
-        {{-- Search Bar Container --}}
-        <form
-            action="{{ route('shop.search.index') }}"
-            class="flex items-center max-w-[445px]"
-            role="search"
-        >
-            <label
-                for="organic-search"
-                class="sr-only"
+        <!-- Search Bar Container -->
+        <div class="relative w-full">
+            <form
+                action="{{ route('shop.search.index') }}"
+                class="flex items-center max-w-[445px]"
+                role="search"
             >
-                @lang('shop::app.components.layouts.header.search')
-            </label>
-
-            <div class="relative w-full">
+                <label
+                    for="organic-search"
+                    class="sr-only"
+                >
+                    @lang('shop::app.components.layouts.header.search')
+                </label>
                 <div class="icon-search flex items-center  absolute ltr:left-[12px] rtl:right-[12px] top-[10px] text-[22px] pointer-events-none"></div>
 
                 <input
@@ -61,12 +60,12 @@
                 @if (core()->getConfigData('general.content.shop.image_search'))
                     @include('shop::search.images.index')
                 @endif
-            </div>
-        </form>
+            </form>
+        </div>
 
-        {{-- Right Navigation Links --}}
+        <!-- Right Navigation Links -->
         <div class="flex gap-x-[35px] mt-[5px] max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px]">
-            {{-- Compare --}}
+            <!-- Compare -->
             @if(core()->getConfigData('general.content.shop.compare_option'))
                 <a
                     href="{{ route('shop.compare.index') }}"
@@ -79,10 +78,10 @@
                 </a>
             @endif
 
-            {{-- Mini cart --}}
+            <!-- Mini cart -->
             @include('shop::checkout.cart.mini-cart')
 
-            {{-- user profile --}}
+            <!-- user profile -->
             <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                 <x-slot:toggle>
                     <span
@@ -93,7 +92,7 @@
                     ></span>
                 </x-slot:toggle>
 
-                {{-- Guest Dropdown --}}
+                <!-- Guest Dropdown -->
                 @guest('customer')
                     <x-slot:content>
                         <div class="grid gap-[10px]">
@@ -126,7 +125,7 @@
                     </x-slot:content>
                 @endguest
 
-                {{-- Customers Dropdown --}}
+                <!-- Customers Dropdown -->
                 @auth('customer')
                     <x-slot:content class="!p-[0px]">
                         <div class="grid gap-[10px] p-[20px] pb-0">
@@ -166,7 +165,7 @@
                                 </a>
                             @endif
 
-                            {{--Customers logout--}}
+                            <!--Customers logout-->
                             @auth('customer')
                                 <x-shop::form
                                     method="DELETE"
