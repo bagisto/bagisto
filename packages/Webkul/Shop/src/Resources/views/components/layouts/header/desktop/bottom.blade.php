@@ -33,6 +33,7 @@
         <form
             action="{{ route('shop.search.index') }}"
             class="flex items-center max-w-[445px]"
+            role="search"
         >
             <label
                 for="organic-search"
@@ -55,7 +56,7 @@
                     required
                 >
 
-                <button type="submit" class="hidden" aria-lebel="Submit"></button>
+                <button type="submit" class="hidden" aria-lebel="Submit"></button
 
                 @if (core()->getConfigData('general.content.shop.image_search'))
                     @include('shop::search.images.index')
@@ -71,7 +72,10 @@
                     href="{{ route('shop.compare.index') }}"
                     aria-label="Compare"
                 >
-                    <span class="icon-compare inline-block text-[24px] cursor-pointer"></span>
+                    <span
+                        class="icon-compare inline-block text-[24px] cursor-pointer"
+                        role="presentation"
+                    ></span>
                 </a>
             @endif
 

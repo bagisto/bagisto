@@ -287,6 +287,8 @@
                                         <div
                                             class="flex items-center justify-center min-w-[46px] min-h-[46px] max-h-[46px] bg-white border border-black rounded-full text-[24px] transition-all hover:opacity-[0.8] cursor-pointer"
                                             role="button"
+                                            aria-label="Add To Wishlist"
+                                            tabindex="0"
                                             :class="isWishlist ? 'icon-heart-fill' : 'icon-heart'"
                                             @click="addToWishlist"
                                         >
@@ -412,10 +414,15 @@
 
                                     <div
                                         class="flex gap-[10px] justify-center items-center cursor-pointer"
+                                        role="button"
+                                        tabindex="0"
                                         @click="is_buy_now=0; addToCompare({{ $product->id }})"
                                     >
                                         @if (core()->getConfigData('general.content.shop.compare_option'))
-                                            <span class="icon-compare text-[24px]"></span>
+                                            <span
+                                                class="icon-compare text-[24px]"
+                                                role="presentation"
+                                            ></span>
 
                                             @lang('shop::app.products.view.compare')
                                         @endif
