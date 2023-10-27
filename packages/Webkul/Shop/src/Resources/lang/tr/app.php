@@ -515,7 +515,7 @@ return [
 
         'type' => [
             'abstract' => [
-                'offers' => ':qty adet için :price her biri ve %:discount tasarruf edin',
+                'offers' => ':qty adet için :price her biri ve :discount tasarruf edin',
             ],
         ],
     ],

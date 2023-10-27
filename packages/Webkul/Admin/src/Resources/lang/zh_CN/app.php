@@ -485,12 +485,25 @@ return [
                     'transaction-amount' => '金额',
                 ],
 
-                'edit'  => [
+                'create'  => [
                     'already-paid'               => '已支付',
                     'invoice-missing'            => '缺少发票',
                     'transaction-amount-zero'    => '交易金额为零',
                     'transaction-amount-exceeds' => '交易金额超过限制',
                     'transaction-saved'          => '交易保存成功',
+                ],
+
+                'view' => [
+                    'title'            => '交易详情',
+                    'transaction-data' => '交易数据',
+                    'transaction-id'   => '交易 ID',
+                    'order-id'         => '订单 ID',
+                    'invoice-id'       => '发票 ID',
+                    'payment-method'   => '付款方式',
+                    'created-at'       => '创建时间',
+                    'status'           => '状态',
+                    'payment-details'  => '付款详情',
+                    'amount'           => '金额',
                 ],
             ],
         ],
@@ -525,8 +538,8 @@ return [
                     'attribute-family-value' => '属性家族 - :attribute_family',
                     'active'                 => '激活',
                     'category'               => '类别',
-                    'copy-of'                => ':value',
-                    'copy-of-slug'           => ':value',
+                    'copy-of'                => '复制 :value',
+                    'copy-of-slug'           => '复制-:value',
                     'disable'                => '禁用',
                     'delete'                 => '删除',
                     'image'                  => '图像',

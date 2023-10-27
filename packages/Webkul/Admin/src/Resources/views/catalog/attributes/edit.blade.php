@@ -258,7 +258,7 @@
 
                                                         <input
                                                             type="hidden"
-                                                            :name="'options[' + element.id + '][position]'"
+                                                            :name="'options[' + element.id + '][sort_order]'"
                                                             :value="index"
                                                         />
                                                     </x-admin::table.td>

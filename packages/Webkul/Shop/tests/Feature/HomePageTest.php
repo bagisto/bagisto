@@ -17,6 +17,16 @@ it('returns a successful response', function () {
         ->assertOk();
 });
 
+it('displays the current currency code and channel code', function () {
+    // Act & Assert
+    get(route('shop.home.index'))
+        ->assertOk()
+        ->assertSee([
+            core()->getCurrentChannelCode(),
+            core()->getCurrentCurrencyCode(),
+        ]);
+});
+
 it('displays the "Sign In" and "Sign Up" buttons when the customer is not logged in', function () {
     // Act & Assert
     get(route('shop.home.index'))

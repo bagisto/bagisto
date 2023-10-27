@@ -515,7 +515,7 @@ return [
 
         'type' => [
             'abstract' => [
-                'offers' => 'Koop :qty voor :price per stuk en bespaar :discount%',
+                'offers' => 'Koop :qty voor :price per stuk en bespaar :discount',
             ],
         ],
     ],

@@ -14,6 +14,8 @@
                 href="#" 
                 @click="openSharePopup"
                 aria-label="Twitter"
+                role="button"
+                tabindex="0"
             >
                 @include('social_share::icons.twitter')
             </a>
