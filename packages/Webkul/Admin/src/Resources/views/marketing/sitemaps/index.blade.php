@@ -26,10 +26,10 @@
     </v-create-sitemaps>
 
     {!! view_render_event('bagisto.admin.marketing.sitemaps.create.after') !!}
-    
+
     @pushOnce('scripts')
-        <script 
-            type="text/x-template" 
+        <script
+            type="text/x-template"
             id="v-create-sitemaps-template"
         >
             <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
@@ -39,7 +39,7 @@
 
                 <!-- Create Button -->
                 @if (bouncer()->hasPermission('marketing.sitemaps.create'))
-                    <div 
+                    <div
                         class="primary-button"
                         @click="selectedSitemap=0; $refs.sitemap.toggle()"
                     >
@@ -62,7 +62,7 @@
                 <template #header="{ columns, records, sortPage, applied }">
                     <div
                         class="row grid grid-cols-{{ $hasPermission ? '5' : '4' }} grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold"
-                        :style="'grid-template-columns: repeat({{ $hasPermission ? '5' : '4' }}, 1fr);'"
+                        :style="'grid-template-columns: repeat({{ $hasPermission ? '5' : '4' }}, minmax(0, 1fr));'"
                     >
                         <div
                             class="flex gap-[10px] cursor-pointer"
@@ -107,7 +107,7 @@
                     <div
                         v-for="record in records"
                         class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
-                        :style="'grid-template-columns: repeat(' + (record.actions.length ? 5 : 4) + ', 1fr);'"
+                        :style="'grid-template-columns: repeat(' + (record.actions.length ? 5 : 4) + ', minmax(0, 1fr));'"
                     >
                         <!-- Id -->
                         <p v-text="record.id"></p>
@@ -172,7 +172,7 @@
                             </p>
 
                             <!-- Edit Modal title -->
-                            <p 
+                            <p
                                 class="text-[18px] text-gray-800 dark:text-white font-bold"
                                 v-else
                             >
@@ -195,7 +195,7 @@
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.sitemaps.index.create.file-name')
                                     </x-admin::form.control-group.label>
-        
+
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="file_name"
@@ -205,7 +205,7 @@
                                         :placeholder="trans('admin::app.marketing.sitemaps.index.create.file-name')"
                                     >
                                     </x-admin::form.control-group.control>
-        
+
                                     <x-admin::form.control-group.error
                                         control-name="file_name"
                                     >
@@ -216,13 +216,13 @@
                                     </p>
 
                                 </x-admin::form.control-group>
-        
+
                                 <!-- File Path -->
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.sitemaps.index.create.path')
                                     </x-admin::form.control-group.label>
-        
+
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="path"
@@ -232,7 +232,7 @@
                                         :placeholder="trans('admin::app.marketing.sitemaps.index.create.path')"
                                     >
                                     </x-admin::form.control-group.control>
-        
+
                                     <x-admin::form.control-group.error
                                         control-name="path"
                                     >
@@ -244,7 +244,7 @@
                                 </x-admin::form.control-group>
                             </div>
                         </x-slot:content>
-                        
+
                         <x-slot:footer>
                             <!-- Save Button -->
                             <button class="primary-button">

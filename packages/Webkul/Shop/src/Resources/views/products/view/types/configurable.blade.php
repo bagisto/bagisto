@@ -25,10 +25,10 @@
                         v-if="! attribute.swatch_type || attribute.swatch_type == '' || attribute.swatch_type == 'dropdown'"
                     >
                         <!-- Dropdown Label -->
-                        <h3
+                        <h2
                             class="mb-[15px] text-[20px] max-sm:text-[16px]"
                             v-text="attribute.label"
-                        ></h3>
+                        ></h2>
                         
                         <!-- Dropdown Options -->
                         <v-field
@@ -39,6 +39,7 @@
                             :id="'attribute_' + attribute.id"
                             rules="required"
                             :label="attribute.label"
+                            :aria-label="attribute.label"
                             :disabled="attribute.disabled"
                             @change="configure(attribute, $event.target.value)"
                         >
@@ -55,10 +56,10 @@
                     <!-- Swatch Options Container -->
                     <template v-else>
                         <!-- Option Label -->
-                        <h3
+                        <h2
                             class="mb-[15px] text-[20px] max-sm:text-[16px]"
                             v-text="attribute.label"
-                        ></h3>
+                        ></h2>
 
                         <!-- Swatch Options -->
                         <div class="flex items-center space-x-3">
@@ -78,6 +79,7 @@
                                             v-slot="{ field }"
                                             rules="required"
                                             :label="attribute.label"
+                                            :aria-label="attribute.label"
                                         >
                                             <input
                                                 type="radio"
@@ -111,6 +113,7 @@
                                             v-slot="{ field }"
                                             rules="required"
                                             :label="attribute.label"
+                                            :aria-label="attribute.label"
                                         >
                                             <input
                                                 type="radio"
@@ -144,6 +147,7 @@
                                             v-slot="{ field }"
                                             rules="required"
                                             :label="attribute.label"
+                                            :aria-label="attribute.label"
                                         >
                                             <input
                                                 type="radio"

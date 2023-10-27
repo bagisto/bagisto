@@ -44,6 +44,8 @@
 
     <body>
         {!! view_render_event('bagisto.shop.layout.body.before') !!}
+        
+        <a href="#main" class="skip-to-main-content-link">Skip to main content</a>
 
         <div id="app">
             {{-- Flash Message Blade Component --}}
@@ -60,7 +62,9 @@
             {!! view_render_event('bagisto.shop.layout.content.before') !!}
 
             {{-- Page Content Blade Component --}}
-            {{ $slot }}
+            <main id="main" class="bg-white">
+                {{ $slot }}
+            </main>
 
             {!! view_render_event('bagisto.shop.layout.content.after') !!}
 

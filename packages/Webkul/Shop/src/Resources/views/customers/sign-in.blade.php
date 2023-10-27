@@ -65,6 +65,8 @@
                             rules="required|email"
                             :label="trans('shop::app.customers.login-form.email')"
                             placeholder="email@example.com"
+                            aria-label="@lang('shop::app.customers.login-form.email')"
+                            aria-required="true"
                         >
                         </x-shop::form.control-group.control>
 
@@ -89,6 +91,8 @@
                             rules="required|min:6"
                             :label="trans('shop::app.customers.login-form.password')"
                             :placeholder="trans('shop::app.customers.login-form.password')"
+                            aria-label="@lang('shop::app.customers.login-form.password')"
+                            aria-required="true"
                         >
                         </x-shop::form.control-group.control>
 
