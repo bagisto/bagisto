@@ -148,7 +148,7 @@
                         <button
                             class="secondary-button block mx-auto w-max py-[11px] mt-[60px] px-[43px] rounded-[18px] text-base text-center"
                             @click="loadMoreProducts"
-                            v-if="links.next &&  loader"
+                            v-if="links.next && ! loader"
                         >
                             @lang('shop::app.categories.view.load-more')
                         </button>

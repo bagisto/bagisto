@@ -64,6 +64,10 @@
     "file": "assets/small-product-placeholder-64b7f208.webp",
     "src": "src/Resources/assets/images/small-product-placeholder.webp"
   },
+  "src/Resources/assets/images/spinner.svg": {
+    "file": "assets/spinner-51c5cf50.svg",
+    "src": "src/Resources/assets/images/spinner.svg"
+  },
   "src/Resources/assets/images/thank-you.png": {
     "file": "assets/thank-you-aa4a2b62.png",
     "src": "src/Resources/assets/images/thank-you.png"
