@@ -4,6 +4,7 @@ return [
     'customers' => [
         'forgot-password' => [
             'back'                 => 'সাইন ইনে ফিরে যেতে?',
+            'bagisto'              => 'বাগিস্তো', 
             'email-not-exist'      => 'আমরা ঐ ইমেইল ঠিকানার সাথে কোনও ব্যবহারকারী খুঁজে পেতে পারি নি।',
             'email'                => 'ইমেইল',
             'forgot-password-text' => 'আপনি যদি আপনার পাসওয়ার্ড ভুলে গিয়েছেন, তাহলে আপনি আপনার ইমেইল ঠিকানা দিয়ে এটি পুনরুদ্ধার করতে পারেন।',
@@ -17,6 +18,7 @@ return [
 
         'reset-password' => [
             'back-link-title'  => 'সাইন ইনে ফিরে যেতে',
+            'bagisto'          => 'বাগিস্তো', 
             'email'            => 'রেজিস্টারড ইমেইল',
             'confirm-password' => 'পাসওয়ার্ড নিশ্চিত করুন',
             'footer'           => '© কপিরাইট 2010 - :current_year, ওয়েবকুল সফটওয়্যার (ভারতে নিবন্ধিত)। সব অধিকার সংরক্ষিত।',
@@ -27,6 +29,7 @@ return [
 
         'login-form' => [
             'button-title'        => 'সাইন ইন করুন',
+            'bagisto'             => 'বাগিস্তো', 
             'create-your-account' => 'আপনার একাউন্ট তৈরি করুন',
             'email'               => 'ইমেইল',
             'form-login-text'     => 'আপনি যদি আপনার একাউন্ট আছে তবে আপনি আপনার ইমেইল ঠিকানা দিয়ে সাইন ইন করতে পারেন।',
@@ -43,6 +46,7 @@ return [
         ],
 
         'signup-form' => [
+            'bagisto'                     => 'বাগিস্তো', 
             'account-exists'              => 'ইতিমধ্যে একটি অ্যাকাউন্ট আছে?',
             'button-title'                => 'রেজিস্টার করুন',
             'confirm-pass'                => 'পাসওয়ার্ড নিশ্চিত করুন',
@@ -91,6 +95,7 @@ return [
                 'phone'                   => 'ফোন',
                 'save'                    => 'সংরক্ষণ করুন',
                 'subscribe-to-newsletter' => 'নিউজলেটারে সাবস্ক্রাইব করুন',
+                'select-gender'           => 'লিঙ্গ নির্বাচন করুন',
                 'title'                   => 'প্রোফাইল',
                 'unmatch'                 => 'পুরানো পাসওয়ার্ড মেলে না।',
                 'wrong-password'          => 'ভুল পাসওয়ার্ড!',
@@ -315,26 +320,9 @@ return [
         ],
 
         'layouts' => [
-            'footer' => [
-                'about-us'               => 'আমাদের সম্পর্কে',
-                'contact-us'             => 'যোগাযোগ করুন',
-                'currency'               => 'মুদ্রা',
-                'customer-service'       => 'গ্রাহক সেবা',
-                'locale'                 => 'লোকেল',
-                'newsletter-text'        => 'আমাদের মজাদার নিউজলেটারের জন্য প্রস্তুত থাকুন!',
-                'order-return'           => 'অর্ডার এবং রিটার্ন',
-                'payment-policy'         => 'পেমেন্ট নীতি',
-                'privacy-cookies-policy' => 'গোপনীয়তা এবং কুকিজ নীতি',
-                'shipping-policy'        => 'শিপিং নীতি',
-                'subscribe'              => 'সাবস্ক্রাইব',
-                'subscribe-newsletter'   => 'নিউজলেটার সাবস্ক্রাইব করুন',
-                'subscribe-stay-touch'   => 'যোগাযোগে থাকতে সাবস্ক্রাইব করুন।',
-                'whats-new'              => 'নতুন কি',
-                'footer-text'            => '© কপিরাইট 2010 - ২০২৩, ওয়েবকুল সফটওয়্যার (ভারতে নিবন্ধিত)। সমস্ত অধিকার সংরক্ষিত।',
-            ],
-
             'header' => [
                 'account'       => 'অ্যাকাউন্ট',
+                'bagisto'       => 'বাগিস্তো', 
                 'cart'          => 'কার্ট',
                 'compare'       => 'তুলনা করুন',
                 'dropdown-text' => 'কার্ট, অর্ডার এবং ইচ্ছেসূচি পরিচালনা করুন',
@@ -349,6 +337,25 @@ return [
                 'welcome'       => 'স্বাগতম',
                 'welcome-guest' => 'স্বাগতম অতিথি',
                 'wishlist'      => 'ইচ্ছেসূচি',
+            ],
+
+            'footer' => [
+                'about-us'               => 'আমাদের সম্পর্কে',
+                'contact-us'             => 'যোগাযোগ করুন',
+                'currency'               => 'মুদ্রা',
+                'customer-service'       => 'গ্রাহক সেবা',
+                'email'                  => 'ইমেইল',
+                'locale'                 => 'লোকেল',
+                'newsletter-text'        => 'আমাদের মজাদার নিউজলেটারের জন্য প্রস্তুত থাকুন!',
+                'order-return'           => 'অর্ডার এবং রিটার্ন',
+                'payment-policy'         => 'পেমেন্ট নীতি',
+                'privacy-cookies-policy' => 'গোপনীয়তা এবং কুকিজ নীতি',
+                'shipping-policy'        => 'শিপিং নীতি',
+                'subscribe'              => 'সাবস্ক্রাইব',
+                'subscribe-newsletter'   => 'নিউজলেটার সাবস্ক্রাইব করুন',
+                'subscribe-stay-touch'   => 'যোগাযোগে থাকতে সাবস্ক্রাইব করুন।',
+                'whats-new'              => 'নতুন কি',
+                'footer-text'            => '© কপিরাইট 2010 - ২০২৩, ওয়েবকুল সফটওয়্যার (ভারতে নিবন্ধিত)। সমস্ত অধিকার সংরক্ষিত।',
             ],
         ],
 
@@ -397,8 +404,12 @@ return [
             ],
 
             'table' => [
-                'actions'              => 'ক্রিয়া',
-                'no-records-available' => 'রেকর্ড পাওয়া যায়নি।',
+                'actions'              => 'প্রক্রিয়াসমূহ',
+                'no-records-available' => 'কোন রেকর্ড পাওয়া যায়নি।',
+                'next-page'            => 'পরবর্তী পৃষ্ঠা',
+                'page-navigation'      => 'পৃষ্ঠা নেভিগেশন',
+                'previous-page'        => 'পূর্ববর্তী পৃষ্ঠা',
+                'page-number'          => 'পৃষ্ঠা নম্বর',
             ],
         ],
 
@@ -416,21 +427,38 @@ return [
 
         'products' => [
             'card' => [
-                'add-to-compare'     => 'আইটেম সফলভাবে তুলনা তালিকায় যোগ করা হয়েছে।',
-                'already-in-compare' => 'আইটেমটি ইতিমধ্যে তুলনা তালিকায় যোগ করা হয়েছে।',
-                'add-to-cart'        => 'কার্টে যোগ করুন',
-                'new'                => 'নতুন',
-                'review-description' => 'এই পণ্যটি সমীক্ষা করতে প্রথম হোন',
-                'sale'               => 'বিশেষ ছাড়',
+                'card.add-to-compare-success' => 'আইটেমটি তৈরি হয়েছে তুলনা তালিকায় সফলভাবে যোগ করা হয়েছে।',
+                'already-in-compare'          => 'আইটেমটি ইতিমধ্যে তুলনা তালিকায় যোগ করা হয়েছে।',
+                'add-to-cart'                 => 'কার্টে যোগ করুন',
+                'add-to-wishlist'             => 'ইচ্ছেতালিকা যোগ করুন',
+                'add-to-compare'              => 'তুলনা তালিকায় যোগ করুন',
+                'new'                         => 'নতুন',
+                'review-description'          => 'এই পণ্যটি প্রথম পর্যালোচনা করুন',
+                'sale'                        => 'বিক্রয়',
             ],
-
+        
             'carousel' => [
+                'next'     => 'পরবর্তী',
+                'previous' => 'পূর্ববর্তী',
                 'view-all' => 'সব দেখুন',
             ],
         ],
-
+        
         'range-slider' => [
-            'range' => 'ব্যাপ্তি:',
+            'min-range' => 'ন্যূনতম পরিসীমা',
+            'max-range' => 'সর্বাধিক পরিসীমা',
+            'range'     => 'পরিসীমা:',
+        ],
+        
+        'carousel' => [
+            'image-slide' => 'চিত্র স্লাইড',
+            'next'        => 'পরবর্তী',
+            'previous'    => 'পূর্ববর্তী',
+        ],
+        
+        'quantity-changer' => [
+            'decrease-quantity' => 'পরিমাণ হ্রাস',
+            'increase-quantity' => 'পরিমাণ বৃদ্ধি',
         ],
     ],
 
@@ -501,6 +529,7 @@ return [
             ],
 
             'add-to-cart'            => 'কার্টে যোগ করুন',
+            'add-to-wishlist'        => 'ইচ্ছেতালিকা যোগ করুন',
             'add-to-compare'         => 'পণ্য তুলনা তালিকায় যোগ করা হয়েছে।',
             'already-in-compare'     => 'পণ্যটি ইতিমধ্যে তুলনা তালিকায় যোগ করা হয়েছে।',
             'additional-information' => 'অতিরিক্ত তথ্য',
@@ -529,7 +558,9 @@ return [
         ],
 
         'toolbar' => [
-            'show' => 'দেখাও',
+            'grid' => 'Cuadrícula',
+            'list' => 'Lista',
+            'show' => 'Mostrar',
         ],
 
         'view' => [
@@ -545,6 +576,7 @@ return [
             'index' => [
                 'something-went-wrong' => 'কিছু ভুল হয়েছে, দয়া করে পরে আবার চেষ্টা করুন।',
                 'size-limit-error'     => 'সাইজ সীমা পার',
+                'search'               => 'খুঁজুন',
                 'only-images-allowed'  => 'শুধুমাত্র চিত্র (.jpeg, .jpg, .png, ..) অনুমোদিত।',
             ],
 
@@ -592,6 +624,7 @@ return [
             'success-remove'            => 'পণ্য সফলভাবে কার্ট থেকে সরানো হয়েছে।',
 
             'index' => [
+                'bagisto'                  => 'বাগিস্তো', 
                 'cart'                     => 'কার্ট',
                 'continue-shopping'        => 'কেনাকাটা চালিয়ে যান',
                 'empty-product'            => 'আপনার কার্টে কোনও পণ্য নেই।',
@@ -606,6 +639,8 @@ return [
                 'remove'                   => 'সরান',
                 'remove-selected-success'  => 'নির্বাচিত আইটেমগুলি সফলভাবে কার্ট থেকে সরানো হয়েছে।',
                 'see-details'              => 'বিশদ দেখুন',
+                'select-all'               => 'সব চেক করুন',
+                'select-cart-item'         => 'কার্ট আইটেম চেক করুন',    
                 'tax'                      => 'কর',
                 'total'                    => 'মোট',
                 'update-cart'              => 'কার্ট আপডেট করুন',
@@ -674,6 +709,7 @@ return [
                 ],
 
                 'index' => [
+                    'bagisto' => 'বাগিস্তো', 
                     'confirm' => 'কনফার্ম',
                 ],
 

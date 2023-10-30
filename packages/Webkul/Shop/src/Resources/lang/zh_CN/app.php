@@ -4,6 +4,7 @@ return [
     'customers' => [
         'forgot-password' => [
             'back'                 => '返回登录？',
+            'bagisto'              => '巴基斯托', 
             'email-not-exist'      => '我们找不到使用该电子邮件地址的用户。',
             'email'                => '电子邮件',
             'forgot-password-text' => '如果您忘记了密码，请通过输入您的电子邮件地址来找回密码。',
@@ -17,6 +18,7 @@ return [
 
         'reset-password' => [
             'back-link-title'  => '返回登录',
+            'bagisto'          => '巴基斯托', 
             'confirm-password' => '确认密码',
             'email'            => '注册电子邮件',
             'footer'           => '© 版权 2010 - :current_year，Webkul Software（注册于印度）。保留所有权利。',
@@ -27,6 +29,7 @@ return [
 
         'login-form' => [
             'button-title'        => '登录',
+            'bagisto'             => '巴基斯托', 
             'create-your-account' => '创建您的帐户',
             'email'               => '电子邮件',
             'form-login-text'     => '如果您已经有帐户，请使用您的电子邮件登录。',
@@ -44,6 +47,7 @@ return [
 
         'signup-form' => [
             'account-exists'              => '已经有账户？',
+            'bagisto'                     => '巴基斯托', 
             'button-title'                => '注册',
             'confirm-pass'                => '确认密码',
             'email'                       => '电子邮件',
@@ -67,33 +71,34 @@ return [
         'account' => [
             'home'      => '主页',
 
-            'profile'   => [
-                'title'                   => '个人资料',
-                'first-name'              => '名字',
-                'last-name'               => '姓氏',
-                'gender'                  => '性别',
+            'profile' => [
+                'current-password'        => '当前密码',
+                'confirm-password'        => '确认密码',
                 'dob'                     => '出生日期',
-                'email'                   => '电子邮件',
                 'delete-profile'          => '删除个人资料',
+                'delete-success'          => '成功删除用户',
+                'delete-failed'           => '删除用户时出错。',
+                'delete'                  => '删除',
+                'email'                   => '邮箱',
                 'edit-profile'            => '编辑个人资料',
                 'edit'                    => '编辑',
-                'edit-success'            => '成功更新个人资料',
-                'phone'                   => '电话',
-                'current-password'        => '当前密码',
+                'edit-success'            => '个人资料已成功更新',
+                'enter-password'          => '请输入您的密码',
+                'first-name'              => '名字',
+                'female'                  => '女',
+                'gender'                  => '性别',
+                'last-name'               => '姓氏',
+                'male'                    => '男',
                 'new-password'            => '新密码',
-                'confirm-password'        => '确认密码',
-                'delete-success'          => '成功删除客户',
-                'wrong-password'          => '密码错误！',
-                'delete-failed'           => '删除客户时出现错误。',
-                'order-pending'           => '无法删除客户帐户，因为有未完成或处理中的订单。',
-                'subscribe-to-newsletter' => '订阅通讯',
-                'delete'                  => '删除',
-                'enter-password'          => '输入您的密码',
-                'male'                    => '男性',
-                'female'                  => '女性',
                 'other'                   => '其他',
+                'order-pending'           => '无法删除用户帐户，因为有待处理的订单。',
+                'phone'                   => '电话',
                 'save'                    => '保存',
+                'subscribe-to-newsletter' => '订阅通讯',
+                'select-gender'           => '选择性别',
+                'title'                   => '个人资料',
                 'unmatch'                 => '旧密码不匹配。',
+                'wrong-password'          => '密码错误！',
             ],
 
             'addresses' => [
@@ -317,6 +322,7 @@ return [
         'layouts' => [
             'header' => [
                 'account'       => '账户',
+                'bagisto'       => '巴基斯托', 
                 'compare'       => '比较',
                 'cart'          => '购物车',
                 'dropdown-text' => '管理购物车、订单和心愿单',
@@ -338,6 +344,7 @@ return [
                 'customer-service'       => '客户服务',
                 'contact-us'             => '联系我们',
                 'currency'               => '货币',
+                'email'                  => '电子邮件',
                 'footer-text'            => '© 版权所有 2010 - 2023，Webkul Software（印度注册）。 保留所有权利。',
                 'locale'                 => '语言',
                 'newsletter-text'        => '准备好我们有趣的新闻通讯！',
@@ -399,6 +406,10 @@ return [
             'table' => [
                 'actions'              => '操作',
                 'no-records-available' => '没有可用记录。',
+                'next-page'            => '下一页',
+                'page-navigation'      => '页面导航',
+                'previous-page'        => '上一页',
+                'page-number'          => '页码',
             ],
         ],
 
@@ -416,21 +427,38 @@ return [
 
         'products' => [
             'card' => [
-                'add-to-compare'     => '成功添加到比较列表。',
-                'already-in-compare' => '该项目已添加到比较列表。',
-                'add-to-cart'        => '加入购物车',
-                'new'                => '新',
-                'review-description' => '成为第一个评论此产品的人',
-                'sale'               => '折扣',
+                'card.add-to-compare-success' => '商品已成功添加到比较列表。',
+                'already-in-compare'          => '商品已经在比较列表中。',
+                'add-to-cart'                 => '添加到购物车',
+                'add-to-wishlist'             => '添加到愿望清单',
+                'add-to-compare'              => '添加到比较列表',
+                'new'                         => '新品',
+                'review-description'          => '成为第一个评价这个产品的人',
+                'sale'                        => '特卖',
             ],
-
+        
             'carousel' => [
+                'next'     => '下一个',
+                'previous' => '上一个',
                 'view-all' => '查看全部',
             ],
         ],
-
+        
         'range-slider' => [
-            'range' => '范围：',
+            'min-range' => '最小范围',
+            'max-range' => '最大范围',
+            'range'     => '范围：',
+        ],
+        
+        'carousel' => [
+            'image-slide' => '图片幻灯片',
+            'next'        => '下一个',
+            'previous'    => '上一个',
+        ],
+        
+        'quantity-changer' => [
+            'decrease-quantity' => '减少数量',
+            'increase-quantity' => '增加数量',
         ],
     ],
 
@@ -501,6 +529,7 @@ return [
             ],
 
             'add-to-cart'            => '加入购物车',
+            'add-to-wishlist'        => '添加到愿望清单',
             'add-to-compare'         => '已添加到比较。',
             'already-in-compare'     => '产品已经添加到比较列表中。',
             'additional-information' => '附加信息',
@@ -529,6 +558,8 @@ return [
         ],
 
         'toolbar' => [
+            'grid' => '网格',
+            'list' => '列表',
             'show' => '显示',
         ],
 
@@ -539,21 +570,22 @@ return [
     ],
 
     'search' => [
-        'title' => '搜索结果：:query',
-
+        'title' => '搜索结果为：:query',
+    
         'images' => [
             'index' => [
                 'something-went-wrong' => '出了点问题，请稍后重试。',
-                'size-limit-error'     => '尺寸限制错误',
-                'only-images-allowed'  => '仅允许图片（.jpeg、.jpg、.png 等）。',
+                'size-limit-error'     => '大小限制错误',
+                'search'               => '搜索',
+                'only-images-allowed'  => '只允许图像（.jpeg，.jpg，.png，..）。',
             ],
-
+    
             'results' => [
-                'analysed-keywords' => '分析关键字：',
+                'analysed-keywords' => '分析关键词：',
             ],
         ],
     ],
-
+    
     'compare' => [
         'already-added'      => '产品已经添加到比较列表中',
         'delete-all'         => '删除所有',
@@ -591,7 +623,8 @@ return [
             'select-hourly-duration'    => '选择一小时的时段。',
             'success-remove'            => '项目已成功从购物车中移除。',
 
-            'index'                     => [
+            'index'  => [
+                'bagisto'                  => '巴基斯托', 
                 'cart'                     => '购物车',
                 'continue-shopping'        => '继续购物',
                 'empty-product'            => '您的购物车中没有产品。',
@@ -606,6 +639,8 @@ return [
                 'remove'                   => '删除',
                 'remove-selected-success'  => '已成功从购物车中删除选定的项目。',
                 'see-details'              => '查看详情',
+                'select-all'               => '全选',
+                'select-cart-item'         => '选择购物车项目',
                 'tax'                      => '税',
                 'total'                    => '总计',
                 'update-cart'              => '更新购物车',
@@ -674,6 +709,7 @@ return [
                 ],
 
                 'index' => [
+                    'bagisto' => '巴基斯托', 
                     'confirm' => '确认',
                 ],
 

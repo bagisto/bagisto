@@ -87,7 +87,7 @@
                             rules="required"
                             :label="trans('shop::app.customers.signup-form.last-name')"
                             :placeholder="trans('shop::app.customers.signup-form.last-name')"
-                            aria-label="@lang('shop::app.customers.signup-form.last-name')"
+                            :aria-label="trans('shop::app.customers.signup-form.last-name')"
                             aria-required="true"
                         >
                         </x-shop::form.control-group.control>

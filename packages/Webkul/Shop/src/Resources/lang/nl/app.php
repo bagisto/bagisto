@@ -4,6 +4,7 @@ return [
     'customers' => [
         'forgot-password' => [
             'back'                 => 'Terug naar Aanmelden?',
+            'bagisto'              => 'Bagisto', 
             'email-not-exist'      => 'We kunnen geen gebruiker vinden met dat e-mailadres.',
             'email'                => 'E-mail',
             'forgot-password-text' => 'Als u uw wachtwoord bent vergeten, kunt u het herstellen door uw e-mailadres in te voeren.',
@@ -17,6 +18,7 @@ return [
 
         'reset-password' => [
             'back-link-title'  => 'Terug naar Aanmelden',
+            'bagisto'          => 'Bagisto', 
             'confirm-password' => 'Bevestig Wachtwoord',
             'email'            => 'Geregistreerde E-mail',
             'footer'           => '© Auteursrecht 2010 - :current_year, Webkul Software (geregistreerd in India). Alle rechten voorbehouden.',
@@ -27,6 +29,7 @@ return [
 
         'login-form' => [
             'button-title'        => 'Aanmelden',
+            'bagisto'             => 'Bagisto', 
             'create-your-account' => 'Maak uw account aan',
             'email'               => 'E-mail',
             'form-login-text'     => 'Als u een account heeft, meld u dan aan met uw e-mailadres.',
@@ -44,6 +47,7 @@ return [
 
         'signup-form' => [
             'account-exists'              => 'Heeft u al een account?',
+            'bagisto'                     => 'Bagisto', 
             'button-title'                => 'Registreren',
             'confirm-pass'                => 'Bevestig Wachtwoord',
             'email'                       => 'E-mail',
@@ -91,6 +95,7 @@ return [
                 'phone'                   => 'Telefoon',
                 'save'                    => 'Opslaan',
                 'subscribe-to-newsletter' => 'Abonneer op nieuwsbrief',
+                'select-gender'           => 'Geslacht selecteren',
                 'title'                   => 'Profiel',
                 'unmatch'                 => 'Het oude wachtwoord komt niet overeen.',
                 'wrong-password'          => 'Verkeerd Wachtwoord!',
@@ -316,6 +321,7 @@ return [
 
         'layouts' => [
             'header' => [
+                'bagisto'       => 'Bagisto', 
                 'account'       => 'Account',
                 'compare'       => 'Vergelijken',
                 'cart'          => 'Winkelwagen',
@@ -338,6 +344,7 @@ return [
                 'customer-service'       => 'Klantenservice',
                 'contact-us'             => 'Neem contact met ons op',
                 'currency'               => 'Valuta',
+                'email'                  => 'E-mail',
                 'footer-text'            => '© Auteursrecht 2010 - 2023, Webkul Software (geregistreerd in India). Alle rechten voorbehouden.',
                 'locale'                 => 'Taal',
                 'newsletter-text'        => 'Maak je klaar voor onze leuke nieuwsbrief!',
@@ -399,6 +406,10 @@ return [
             'table' => [
                 'actions'              => 'Acties',
                 'no-records-available' => 'Geen records beschikbaar.',
+                'next-page'            => 'Volgende Pagina',
+                'page-navigation'      => 'Pagina Navigatie',
+                'previous-page'        => 'Vorige Pagina',
+                'page-number'          => 'Paginanummer',
             ],
         ],
 
@@ -416,21 +427,38 @@ return [
 
         'products' => [
             'card' => [
-                'add-to-compare'     => 'Item succesvol toegevoegd aan vergelijkingslijst.',
-                'already-in-compare' => 'Item is al toegevoegd aan de vergelijkingslijst.',
-                'add-to-cart'        => 'Toevoegen aan winkelwagen',
-                'new'                => 'Nieuw',
-                'review-description' => 'Wees de eerste om dit product te beoordelen',
-                'sale'               => 'Aanbieding',
+                'card.add-to-compare-success' => 'Item succesvol toegevoegd aan vergelijkingslijst.',
+                'already-in-compare'          => 'Item is al toegevoegd aan vergelijkingslijst.',
+                'add-to-cart'                 => 'Toevoegen aan winkelwagen',
+                'add-to-wishlist'             => 'Toevoegen aan verlanglijstje',
+                'add-to-compare'              => 'Toevoegen aan vergelijkingslijst',
+                'new'                         => 'Nieuw',
+                'review-description'          => 'Wees de eerste om dit product te beoordelen',
+                'sale'                        => 'Uitverkoop',
             ],
-
+        
             'carousel' => [
+                'next'     => 'Volgende',
+                'previous' => 'Vorige',
                 'view-all' => 'Alles bekijken',
             ],
         ],
-
+        
         'range-slider' => [
-            'range' => 'Bereik:',
+            'min-range' => 'Minimale Bereik',
+            'max-range' => 'Maximale Bereik',
+            'range'     => 'Bereik:',
+        ],
+        
+        'carousel' => [
+            'image-slide' => 'Afbeeldingslide',
+            'next'        => 'Volgende',
+            'previous'    => 'Vorige',
+        ],
+        
+        'quantity-changer' => [
+            'decrease-quantity' => 'Hoeveelheid verminderen',
+            'increase-quantity' => 'Hoeveelheid verhogen',
         ],
     ],
 
@@ -501,6 +529,7 @@ return [
             ],
 
             'add-to-cart'            => 'Toevoegen aan winkelwagen',
+            'add-to-wishlist'        => 'Toevoegen aan verlanglijstje',
             'add-to-compare'         => 'Product toegevoegd aan vergelijking.',
             'already-in-compare'     => 'Product staat al in de vergelijking.',
             'additional-information' => 'Aanvullende informatie',
@@ -529,6 +558,8 @@ return [
         ],
 
         'toolbar' => [
+            'grid' => 'Raster',
+            'list' => 'Lijst',
             'show' => 'Tonen',
         ],
 
@@ -539,7 +570,20 @@ return [
     ],
 
     'search' => [
-        'title' => 'Zoekresultaten voor: :query',
+        'title' => 'Zoekresultaten voor : :query',
+    
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'Er is iets misgegaan, probeer het later opnieuw.',
+                'size-limit-error'     => 'Grootte Limiet Fout',
+                'search'               => 'Zoeken',
+                'only-images-allowed'  => 'Alleen afbeeldingen (.jpeg, .jpg, .png, ..) zijn toegestaan.',
+            ],
+    
+            'results' => [
+                'analysed-keywords' => 'Geanalyseerde Trefwoorden:',
+            ],
+        ],
     ],
 
     'compare'  => [
@@ -547,7 +591,6 @@ return [
         'delete-all'         => 'Alles Verwijderen',
         'empty-text'         => 'Je hebt geen items in je vergelijkingslijst',
         'item-add-success'   => 'Item succesvol toegevoegd aan de vergelijkingslijst',
-        'product-compare'    => 'Product Vergelijking',
         'remove-success'     => 'Item succesvol verwijderd.',
         'remove-all-success' => 'Alle items succesvol verwijderd.',
         'remove-error'       => 'Er is iets misgegaan, probeer het later opnieuw.',
@@ -580,6 +623,7 @@ return [
             'success-remove'            => 'Item is succesvol verwijderd uit de winkelwagen.',
 
             'index' => [
+                'bagisto'                  => 'Bagisto', 
                 'cart'                     => 'Winkelwagen',
                 'continue-shopping'        => 'Doorgaan met winkelen',
                 'empty-product'            => 'U heeft geen product in uw winkelwagen.',
@@ -594,6 +638,8 @@ return [
                 'remove'                   => 'Verwijderen',
                 'remove-selected-success'  => 'Geselecteerde items succesvol uit de winkelwagen verwijderd.',
                 'see-details'              => 'Details bekijken',
+                'select-all'               => 'Alles selecteren',
+                'select-cart-item'         => 'Selecteer winkelwagenitem',
                 'tax'                      => 'Belasting',
                 'total'                    => 'Totaal',
                 'update-cart'              => 'Winkelwagen bijwerken',
@@ -663,6 +709,7 @@ return [
 
                 'index' => [
                     'confirm' => 'Bevestigen',
+                    'bagisto' => 'Bagisto', 
                 ],
 
                 'shipping' => [

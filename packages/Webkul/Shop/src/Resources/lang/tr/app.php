@@ -4,6 +4,7 @@ return [
     'customers' => [
         'forgot-password' => [
             'back'                 => 'Girişe geri dön?',
+            'bagisto'              => 'Bagisto', 
             'email-not-exist'      => 'Bu e-posta adresiyle kullanıcı bulunamadı.',
             'email'                => 'E-posta',
             'forgot-password-text' => 'Parolanızı unuttuysanız, e-posta adresinizi girerek kurtarabilirsiniz.',
@@ -17,6 +18,7 @@ return [
 
         'reset-password' => [
             'back-link-title'  => 'Girişe Geri Dön',
+            'bagisto'          => 'Bagisto', 
             'confirm-password' => 'Parolayı Onayla',
             'email'            => 'Kayıtlı E-posta',
             'footer'           => '© Telif Hakkı 2010 - :current_year, Webkul Software (Hindistan\'da kayıtlı). Tüm hakları saklıdır.',
@@ -27,6 +29,7 @@ return [
 
         'login-form' => [
             'button-title'        => 'Oturum Aç',
+            'bagisto'             => 'Bagisto', 
             'create-your-account' => 'Hesabınızı oluşturun',
             'email'               => 'E-posta',
             'form-login-text'     => 'Bir hesabınız varsa, e-posta adresinizle oturum açın.',
@@ -44,6 +47,7 @@ return [
 
         'signup-form' => [
             'account-exists'              => 'Zaten bir hesabınız var mı?',
+            'bagisto'                     => 'Bagisto', 
             'button-title'                => 'Kaydol',
             'confirm-pass'                => 'Parolayı Onayla',
             'email'                       => 'E-posta',
@@ -91,6 +95,7 @@ return [
                 'phone'                   => 'Telefon',
                 'save'                    => 'Kaydet',
                 'subscribe-to-newsletter' => 'Bültenimize Abone Ol',
+                'select-gender'           => 'Cinsiyet Seçin',
                 'title'                   => 'Profil',
                 'unmatch'                 => 'Eski şifre uyuşmuyor.',
                 'wrong-password'          => 'Yanlış Şifre!',
@@ -317,6 +322,7 @@ return [
         'layouts' => [
             'header' => [
                 'account'       => 'Hesap',
+                'bagisto'       => 'Bagisto', 
                 'compare'       => 'Karşılaştır',
                 'cart'          => 'Sepet',
                 'dropdown-text' => 'Sepeti Yönet, Siparişleri ve İstek Listesini Görüntüle',
@@ -338,6 +344,7 @@ return [
                 'customer-service'       => 'Müşteri Hizmetleri',
                 'contact-us'             => 'Bizimle İletişime Geçin',
                 'currency'               => 'Para Birimi',
+                'email'                  => 'E-posta',
                 'footer-text'            => '© Telif Hakkı 2010 - 2023, Webkul Software (Hindistan\'da kayıtlı). Tüm hakları saklıdır.',
                 'locale'                 => 'Yerel Ayar',
                 'newsletter-text'        => 'Eğlenceli Bültenimize Hazır Olun!',
@@ -398,7 +405,11 @@ return [
 
             'table' => [
                 'actions'              => 'Eylemler',
-                'no-records-available' => 'Kayıt Bulunamadı.',
+                'no-records-available' => 'Uygun kayıt bulunamadı.',
+                'next-page'            => 'Sonraki Sayfa',
+                'page-navigation'      => 'Sayfa Gezinme',
+                'previous-page'        => 'Önceki Sayfa',
+                'page-number'          => 'Sayfa Numarası',
             ],
         ],
 
@@ -416,21 +427,38 @@ return [
 
         'products' => [
             'card' => [
-                'add-to-compare'     => 'Ürün karşılaştırmaya başarıyla eklendi.',
-                'already-in-compare' => 'Ürün zaten karşılaştırmaya eklenmiş.',
-                'add-to-cart'        => 'Sepete Ekle',
-                'new'                => 'Yeni',
-                'review-description' => 'Bu ürünü inceleyen ilk kişi olun',
-                'sale'               => 'Satış',
+                'card.add-to-compare-success' => 'Öğe karşılaştırma listesine başarıyla eklendi.',
+                'already-in-compare'          => 'Öğe zaten karşılaştırma listesine eklenmiş.',
+                'add-to-cart'                 => 'Sepete Ekle',
+                'add-to-wishlist'             => 'Dilek Listesine Ekle',
+                'add-to-compare'              => 'Karşılaştırma Listesine Ekle',
+                'new'                         => 'Yeni',
+                'review-description'          => 'Bu ürünü değerlendiren ilk kişi olun',
+                'sale'                        => 'Satış',
             ],
-
+        
             'carousel' => [
-                'view-all' => 'Hepsini Görüntüle',
+                'next'     => 'Sonraki',
+                'previous' => 'Önceki',
+                'view-all' => 'Tümünü Görüntüle',
             ],
         ],
-
+        
         'range-slider' => [
-            'range' => 'Aralık:',
+            'min-range' => 'Minimum Aralık',
+            'max-range' => 'Maksimum Aralık',
+            'range'     => 'Aralık:',
+        ],
+        
+        'carousel' => [
+            'image-slide' => 'Resim Slaytı',
+            'next'        => 'Sonraki',
+            'previous'    => 'Önceki',
+        ],
+        
+        'quantity-changer' => [
+            'decrease-quantity' => 'Miktarı Azalt',
+            'increase-quantity' => 'Miktarı Artır',
         ],
     ],
 
@@ -501,6 +529,7 @@ return [
             ],
 
             'add-to-cart'            => 'Sepete Ekle',
+            'add-to-wishlist'        => 'Dilek Listesine Ekle',
             'add-to-compare'         => 'Ürün karşılaştırmada',
             'already-in-compare'     => 'Ürün zaten karşılaştırmada',
             'additional-information' => 'Ek Bilgiler',
@@ -529,7 +558,9 @@ return [
         ],
 
         'toolbar' => [
-            'show' => 'Göster',
+            'grid' => 'Сітка',
+            'list' => 'Список',
+            'show' => 'Показати',
         ],
 
         'view' => [
@@ -539,7 +570,20 @@ return [
     ],
 
     'search' => [
-        'title' => ':query için arama sonuçları',
+        'title' => ': :query için arama sonuçları',
+    
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'Bir şeyler yanlış gitti, lütfen daha sonra tekrar deneyin.',
+                'size-limit-error'     => 'Boyut Sınırı Hatası',
+                'search'               => 'Ara',
+                'only-images-allowed'  => 'Yalnızca resimler (.jpeg, .jpg, .png, ..) izin verilmiştir.',
+            ],
+    
+            'results' => [
+                'analysed-keywords' => 'Analiz Edilen Anahtar Kelimeler:',
+            ],
+        ],
     ],
 
     'compare' => [
@@ -580,6 +624,7 @@ return [
             'success-remove'            => 'Ürün başarıyla sepetten kaldırıldı.',
 
             'index' => [
+                'bagisto'                  => 'Bagisto', 
                 'cart'                     => 'Sepet',
                 'continue-shopping'        => 'Alışverişe Devam Et',
                 'empty-product'            => 'Sepetinizde ürün bulunmuyor.',
@@ -594,6 +639,8 @@ return [
                 'remove'                   => 'Kaldır',
                 'remove-selected-success'  => 'Seçilen ürünler başarıyla sepetten kaldırıldı.',
                 'see-details'              => 'Detayları Gör',
+                'select-all'               => 'Hepsini Seç',
+                'select-cart-item'         => 'Alışveriş Sepeti Öğesini Seç',
                 'tax'                      => 'Vergi',
                 'total'                    => 'Toplam',
                 'update-cart'              => 'Sepeti Güncelle',
@@ -662,6 +709,7 @@ return [
                 ],
 
                 'index' => [
+                    'bagisto' => 'Bagisto', 
                     'confirm' => 'Onayla',
                 ],
 
