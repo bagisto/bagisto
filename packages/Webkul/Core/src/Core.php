@@ -140,16 +140,20 @@ class Core
      *
      * @return \Webkul\Core\Contracts\Channel
      */
-    public function getCurrentChannel()
+    public function getCurrentChannel(string $hostname = null)
     {
+        if (! $hostname) {
+            $hostname = request()->getHttpHost();
+        }
+
         if ($this->currentChannel) {
             return $this->currentChannel;
         }
 
         $this->currentChannel = $this->channelRepository->findWhereIn('hostname', [
-            request()->getHttpHost(),
-            'http://' . request()->getHttpHost(),
-            'https://' . request()->getHttpHost(),
+            $hostname,
+            'http://' . $hostname,
+            'https://' . $hostname,
         ])->first();
 
         if (! $this->currentChannel) {
@@ -164,7 +168,7 @@ class Core
      */
     public function setCurrentChannel(Channel $channel): void
     {
-        $this->currentChannel = $currentChannel;
+        $this->currentChannel = $channel;
     }
 
     /**
