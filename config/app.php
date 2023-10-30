@@ -195,6 +195,7 @@ return [
          */
         Webkul\Admin\Providers\AdminServiceProvider::class,
         Webkul\Attribute\Providers\AttributeServiceProvider::class,
+        Webkul\BookingProduct\Providers\BookingProductServiceProvider::class,
         Webkul\CartRule\Providers\CartRuleServiceProvider::class,
         Webkul\CatalogRule\Providers\CatalogRuleServiceProvider::class,
         Webkul\Category\Providers\CategoryServiceProvider::class,

@@ -1,0 +1,296 @@
+@import "icons";
+
+.booking-information {
+    .booking-info-row {
+        padding-left: 32px;
+        margin-bottom: 20px;
+        position: relative;
+        
+        .icon {
+            position: absolute;
+            left: 0;
+            top: -4px;
+        }
+
+        .title {
+            color: #5E5E5E;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .value {
+            display: block;
+            margin-bottom: 5px;
+
+            .text-danger {
+                color: #ff5656;
+            }
+        }
+
+        .toggle {
+            color: #0041FF;
+            cursor: pointer;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+
+            .icon {
+                position: relative;
+                display: inline-block;
+                width: 8px;
+                height: 8px;
+                margin-left: 5px;
+                top: -1px;
+
+                &.arrow-down-icon {
+                    background-image: url(../images/arrow-down.svg) !important;
+                }
+
+                &.arrow-up-icon {
+                    background-image: url(../images/arrow-up.svg) !important;
+                }
+            }
+        }
+
+        .days-availability {
+            table {
+                margin-top: 10px;
+                border-collapse: collapse;
+
+                tr {
+                    td {
+                        padding: 5px;
+                        vertical-align: top;
+
+                        &:first-child {
+                            padding-left: 0;
+                        }
+
+                        &:last-child {
+                            font-size: 14px;
+                            padding-left: 15px;
+                            padding-right: 0;
+                            color: #5E5E5E;
+                        }
+
+                        .text-danger {
+                            color: #ff5656;
+                        }
+                    }    
+                }
+            }
+        }
+    }
+
+    .book-slots {
+        display: inline-block;
+        width: 100%;
+
+        h3 {
+            font-weight: 600;
+            font-size: 16px;
+            color: #242424;
+            margin-top: 0;
+        }
+        
+        label {
+            color: #3a3a3a;
+        }
+
+        .control-group, .form-group {
+            label {
+                font-size: 16px;
+            }
+
+            .radio {
+                display: inline-block;
+            }
+
+            .control-error {
+                float: left;
+            }
+        }
+
+        .control-group-container {
+            width: 100%;
+            float: left;
+
+
+            span {
+                position: relative;
+
+                .icon {
+                    position: absolute;
+                    right: 30px;
+                    top: 10px !important;
+                }
+            }
+
+            .control-group:not(.quantity), .form-group:not(.quantity) {
+                width: 50%;
+                float: left;
+
+                .control, .form-style {
+                    width: 100%;
+                }
+
+                &.date {
+                    padding-right: 5px;
+
+                    &::after {
+                        position: absolute;
+                        top: 14px;
+                        right: 10px;
+                    }
+
+                    .cross-icon {
+                        margin-left: -48px;
+                        top: 20px;
+                    }
+                }
+
+                &.has-error {
+                    &.date {
+                        &::after {
+                            margin-top: 0px;
+                        }
+                    }
+                }
+
+                &.slots {
+                    &:first-child {
+                        padding-right: 5px;
+                    }
+
+                    &:last-child {
+                        padding-left: 5px;
+                    }
+                }
+            }
+        }
+
+        .ticket-list {
+
+            .ticket-item {
+                width: 100%;
+                display: inline-block;
+                padding: 16px 0;
+                border-bottom: solid 1px #e8e8e8;
+                
+                &:last-child {
+                    border-bottom: 0;
+                }
+
+                .ticket-info {
+                    width: 50%;
+                    float: left;
+
+                    .ticket-name {
+                        color: #242424;
+                        margin-bottom: 12px;
+                    }
+
+                    .ticket-price {
+                        color: #5E5E5E;
+                    }
+                }
+
+                .ticket-quantity {
+                    width: 50%;
+                    display: inline-block;
+                    text-align: right;
+
+                    .control-group, .form-group {
+                        margin: 0;
+
+                        &.quantity {
+                            max-width: initial;
+                            width: auto;
+                            text-align: center;
+                            margin-bottom: 0;
+                            border-top: 0;
+                            padding-top: 0;
+                            
+                            label {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+
+                p {
+                    color: #242424;
+                    margin-bottom: 0;
+                    font-weight: 400;
+                }
+            }
+        }
+
+        .ticket-total {
+            font-size: 16px;
+            font-weight: 600;
+            color: #242424;
+            padding-top: 16px;
+
+            > div {
+                margin-bottom: 12px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                p {
+                    color: #242424;
+                    font-weight: 400;
+                    margin-top: 4px;
+                }
+            }
+        }
+    }
+}
+
+.form-group {
+    position: relative;
+
+    &.date, &.datetime {
+        &::after {
+            background-image: url("../images/Icon-Calendar.svg");
+            width: 24px;
+            height: 24px;
+            content: '';
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: -34px;
+            margin-top: 2px;
+            top: 3px !important;
+            pointer-events: none;
+        }
+    }
+}
+
+body {
+        &.rtl {
+        .booking-information {
+            .cross-icon {
+                left: 80px !important;
+                right: inherit !important;
+            }
+
+            .icon {
+                position: absolute;
+                top: -4px;
+            }
+
+            .bp-location-icon {
+                right: 60px;
+            }
+
+            .bp-slot-icon {
+                right: 140px;
+            }
+       }
+    }
+} 
