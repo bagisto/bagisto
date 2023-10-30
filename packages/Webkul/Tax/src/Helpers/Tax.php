@@ -112,7 +112,7 @@ class Tax
     public static function isTaxApplicableInCurrentAddress($taxCategory, $address, $operation)
     {
         $taxRates = $taxCategory->tax_rates()->where([
-            'country' => $address->country,
+            'country' => $address?->country,
         ])->orderBy('tax_rate', 'desc')->get();
 
         if (! $taxRates->count()) {

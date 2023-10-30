@@ -148,9 +148,21 @@
                         <button
                             class="secondary-button block mx-auto w-max py-[11px] mt-[60px] px-[43px] rounded-[18px] text-base text-center"
                             @click="loadMoreProducts"
-                            v-if="links.next"
+                            v-if="links.next && ! loader"
                         >
                             @lang('shop::app.categories.view.load-more')
+                        </button>
+
+                        <button
+                            v-else-if="links.next"
+                            class="secondary-button block w-max mx-auto py-[13px] mt-[60px] px-[74.5px] rounded-[18px] text-base text-center"
+                        >
+                            <!-- Spinner -->
+                            <img
+                                class="animate-spin h-5 w-5 text-navyBlue"
+                                src="{{ bagisto_asset('images/spinner.svg') }}"
+                                alt="Loading"
+                            />
                         </button>
                     </div>
                 </div>
@@ -182,6 +194,8 @@
                         products: [],
 
                         links: {},
+
+                        loader: false,
                     }
                 },
 
@@ -239,13 +253,18 @@
 
                     loadMoreProducts() {
                         if (this.links.next) {
-                            this.$axios.get(this.links.next).then(response => {
-                                this.products = [...this.products, ...response.data.data];
+                            this.loader = true;
 
-                                this.links = response.data.links;
-                            }).catch(error => {
-                                console.log(error);
-                            });
+                            this.$axios.get(this.links.next)
+                                .then(response => {
+                                    this.loader = false;
+
+                                    this.products = [...this.products, ...response.data.data];
+
+                                    this.links = response.data.links;
+                                }).catch(error => {
+                                    console.log(error);
+                                });
                         }
                     },
 
