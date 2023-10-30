@@ -202,6 +202,14 @@ class Core
     }
 
     /**
+     * Set the default channel.
+     */
+    public function setDefaultChannel(Channel $channel): void
+    {
+        $this->defaultChannel = $channel;
+    }
+
+    /**
      * Returns the default channel code configured in `config/app.php`.
      */
     public function getDefaultChannelCode(): string

@@ -30,7 +30,7 @@ it('returns the current channel', function () {
 
     // Assert
     expect($channel->id)->toBe($expectedChannel->id);
-    expect($channel->hostname)->toBe($expectedChannel->hostname);
+    expect($channel->code)->toBe($expectedChannel->code);
 });
 
 it('returns the current channel when set via setter', function () {
@@ -44,7 +44,7 @@ it('returns the current channel when set via setter', function () {
 
     // Assert
     expect($channel->id)->toBe($expectedChannel->id);
-    expect($channel->hostname)->toBe($expectedChannel->hostname);
+    expect($channel->code)->toBe($expectedChannel->code);
 });
 
 it('returns the current channel code', function () {
@@ -55,6 +55,61 @@ it('returns the current channel code', function () {
     core()->setCurrentChannel($expectedChannel);
 
     $channelCode = core()->getCurrentChannelCode();
+
+    // Assert
+    expect($channelCode)->toBe($expectedChannel->code);
+});
+
+it('returns the default channel', function () {
+    // Arrange
+    $expectedChannel = Channel::factory()->create();
+
+    config()->set('app.channel', $expectedChannel->code);
+
+    // Act
+    $channel = core()->getDefaultChannel();
+
+    // Assert
+    expect($channel->id)->toBe($expectedChannel->id);
+    expect($channel->code)->toBe($expectedChannel->code);
+});
+
+it('returns the first channel if the default channel is not found', function () {
+    // Arrange
+    $expectedChannel = Channel::first();
+
+    config()->set('app.channel', 'wrong_channel_code');
+
+    // Act
+    $channel = core()->getDefaultChannel();
+
+    // Assert
+    expect($channel->id)->toBe($expectedChannel->id);
+    expect($channel->code)->toBe($expectedChannel->code);
+});
+
+it('returns the default channel when set via setter', function () {
+    // Arrange
+    $expectedChannel = Channel::factory()->create();
+
+    // Act
+    core()->setDefaultChannel($expectedChannel);
+
+    $channel = core()->getDefaultChannel();
+
+    // Assert
+    expect($channel->id)->toBe($expectedChannel->id);
+    expect($channel->code)->toBe($expectedChannel->code);
+});
+
+it('returns the default channel code', function () {
+    // Arrange
+    $expectedChannel = Channel::factory()->create();
+
+    // Act
+    core()->setDefaultChannel($expectedChannel);
+
+    $channelCode = core()->getDefaultChannelCode();
 
     // Assert
     expect($channelCode)->toBe($expectedChannel->code);
