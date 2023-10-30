@@ -4,7 +4,7 @@ return [
     'customers' => [
         'forgot-password' => [
             'back'                 => 'साइन इन पर वापस जाएं?',
-            'bagisto'              => 'बागिस्तो', 
+            'bagisto'              => 'बागिस्तो',
             'email-not-exist'      => 'हम उस ईमेल पते के साथ कोई उपयोगकर्ता नहीं ढूंढ सकते।',
             'email'                => 'ईमेल',
             'forgot-password-text' => 'अगर आप अपना पासवर्ड भूल गए हैं, तो अपना ईमेल पता दर्ज करके इसे पुनः प्राप्त करें।',
@@ -18,7 +18,7 @@ return [
 
         'reset-password' => [
             'back-link-title'  => 'साइन इन पर वापस जाएं',
-            'bagisto'          => 'बागिस्तो', 
+            'bagisto'          => 'बागिस्तो',
             'confirm-password' => 'पासवर्ड की पुष्टि करें',
             'email'            => 'पंजीकृत ईमेल',
             'footer'           => '© कॉपीराइट 2010 - :current_year, वेबकुल सॉफ़्टवेयर (भारत में पंजीकृत)। सभी अधिकार सुरक्षित हैं।',
@@ -29,7 +29,7 @@ return [
 
         'login-form' => [
             'button-title'        => 'साइन इन करें',
-            'bagisto'             => 'बागिस्तो', 
+            'bagisto'             => 'बागिस्तो',
             'create-your-account' => 'अपना खाता बनाएं',
             'email'               => 'ईमेल',
             'form-login-text'     => 'यदि आपका खाता है, तो अपने ईमेल पते के साथ साइन इन करें।',
@@ -47,7 +47,7 @@ return [
 
         'signup-form' => [
             'account-exists'              => 'पहले से ही खाता है?',
-            'bagisto'                     => 'बागिस्तो', 
+            'bagisto'                     => 'बागिस्तो',
             'button-title'                => 'रजिस्टर करें',
             'confirm-pass'                => 'पासवर्ड की पुष्टि करें',
             'email'                       => 'ईमेल',
@@ -322,7 +322,7 @@ return [
         'layouts' => [
             'header' => [
                 'account'       => 'खाता',
-                'bagisto'       => 'बागिस्तो', 
+                'bagisto'       => 'बागिस्तो',
                 'compare'       => 'तुलन करें',
                 'cart'          => 'कार्ट',
                 'dropdown-text' => 'कार्ट, आर्डर और विशलिस्ट प्रबंधित करें',
@@ -436,26 +436,26 @@ return [
                 'review-description'          => 'इस उत्पाद की समीक्षा करने का पहला मौका',
                 'sale'                        => 'बिक्री',
             ],
-        
+
             'carousel' => [
                 'next'     => 'अगला',
                 'previous' => 'पिछला',
                 'view-all' => 'सभी देखें',
             ],
         ],
-        
+
         'range-slider' => [
             'min-range' => 'न्यूनतम सीमा',
             'max-range' => 'अधिकतम सीमा',
             'range'     => 'सीमा:',
         ],
-        
+
         'carousel' => [
             'image-slide' => 'चित्र स्लाइड',
             'next'        => 'अगला',
             'previous'    => 'पिछला',
         ],
-        
+
         'quantity-changer' => [
             'decrease-quantity' => 'मात्रा को कम करें',
             'increase-quantity' => 'मात्रा बढ़ाएँ',
@@ -624,7 +624,7 @@ return [
             'success-remove'            => 'आइटम को कार्ट से सफलतापूर्वक हटा दिया गया है।',
 
             'index' => [
-                'bagisto'                  => 'बागिस्तो', 
+                'bagisto'                  => 'बागिस्तो',
                 'cart'                     => 'कार्ट',
                 'continue-shopping'        => 'खरीदारी जारी रखें',
                 'empty-product'            => 'आपके पास आपके कार्ट में कोई उत्पाद नहीं है।',
@@ -709,7 +709,7 @@ return [
                 ],
 
                 'index' => [
-                    'bagisto' => 'बागिस्तो', 
+                    'bagisto' => 'बागिस्तो',
                     'confirm' => 'कन्फर्म करें',
                 ],
 

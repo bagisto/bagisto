@@ -4,7 +4,7 @@ return [
     'customers' => [
         'forgot-password' => [
             'back'                 => 'Girişe geri dön?',
-            'bagisto'              => 'Bagisto', 
+            'bagisto'              => 'Bagisto',
             'email-not-exist'      => 'Bu e-posta adresiyle kullanıcı bulunamadı.',
             'email'                => 'E-posta',
             'forgot-password-text' => 'Parolanızı unuttuysanız, e-posta adresinizi girerek kurtarabilirsiniz.',
@@ -18,7 +18,7 @@ return [
 
         'reset-password' => [
             'back-link-title'  => 'Girişe Geri Dön',
-            'bagisto'          => 'Bagisto', 
+            'bagisto'          => 'Bagisto',
             'confirm-password' => 'Parolayı Onayla',
             'email'            => 'Kayıtlı E-posta',
             'footer'           => '© Telif Hakkı 2010 - :current_year, Webkul Software (Hindistan\'da kayıtlı). Tüm hakları saklıdır.',
@@ -29,7 +29,7 @@ return [
 
         'login-form' => [
             'button-title'        => 'Oturum Aç',
-            'bagisto'             => 'Bagisto', 
+            'bagisto'             => 'Bagisto',
             'create-your-account' => 'Hesabınızı oluşturun',
             'email'               => 'E-posta',
             'form-login-text'     => 'Bir hesabınız varsa, e-posta adresinizle oturum açın.',
@@ -47,7 +47,7 @@ return [
 
         'signup-form' => [
             'account-exists'              => 'Zaten bir hesabınız var mı?',
-            'bagisto'                     => 'Bagisto', 
+            'bagisto'                     => 'Bagisto',
             'button-title'                => 'Kaydol',
             'confirm-pass'                => 'Parolayı Onayla',
             'email'                       => 'E-posta',
@@ -322,7 +322,7 @@ return [
         'layouts' => [
             'header' => [
                 'account'       => 'Hesap',
-                'bagisto'       => 'Bagisto', 
+                'bagisto'       => 'Bagisto',
                 'compare'       => 'Karşılaştır',
                 'cart'          => 'Sepet',
                 'dropdown-text' => 'Sepeti Yönet, Siparişleri ve İstek Listesini Görüntüle',
@@ -436,26 +436,26 @@ return [
                 'review-description'          => 'Bu ürünü değerlendiren ilk kişi olun',
                 'sale'                        => 'Satış',
             ],
-        
+
             'carousel' => [
                 'next'     => 'Sonraki',
                 'previous' => 'Önceki',
                 'view-all' => 'Tümünü Görüntüle',
             ],
         ],
-        
+
         'range-slider' => [
             'min-range' => 'Minimum Aralık',
             'max-range' => 'Maksimum Aralık',
             'range'     => 'Aralık:',
         ],
-        
+
         'carousel' => [
             'image-slide' => 'Resim Slaytı',
             'next'        => 'Sonraki',
             'previous'    => 'Önceki',
         ],
-        
+
         'quantity-changer' => [
             'decrease-quantity' => 'Miktarı Azalt',
             'increase-quantity' => 'Miktarı Artır',
@@ -571,7 +571,7 @@ return [
 
     'search' => [
         'title' => ': :query için arama sonuçları',
-    
+
         'images' => [
             'index' => [
                 'something-went-wrong' => 'Bir şeyler yanlış gitti, lütfen daha sonra tekrar deneyin.',
@@ -579,7 +579,7 @@ return [
                 'search'               => 'Ara',
                 'only-images-allowed'  => 'Yalnızca resimler (.jpeg, .jpg, .png, ..) izin verilmiştir.',
             ],
-    
+
             'results' => [
                 'analysed-keywords' => 'Analiz Edilen Anahtar Kelimeler:',
             ],
@@ -624,7 +624,7 @@ return [
             'success-remove'            => 'Ürün başarıyla sepetten kaldırıldı.',
 
             'index' => [
-                'bagisto'                  => 'Bagisto', 
+                'bagisto'                  => 'Bagisto',
                 'cart'                     => 'Sepet',
                 'continue-shopping'        => 'Alışverişe Devam Et',
                 'empty-product'            => 'Sepetinizde ürün bulunmuyor.',
@@ -709,7 +709,7 @@ return [
                 ],
 
                 'index' => [
-                    'bagisto' => 'Bagisto', 
+                    'bagisto' => 'Bagisto',
                     'confirm' => 'Onayla',
                 ],
 

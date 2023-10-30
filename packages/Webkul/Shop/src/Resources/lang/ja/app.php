@@ -4,7 +4,7 @@ return [
     'customers' => [
         'forgot-password' => [
             'back'                 => 'サインインに戻る？',
-            'bagisto'              => 'バギスト', 
+            'bagisto'              => 'バギスト',
             'email-not-exist'      => 'そのメールアドレスを持つユーザーが見つかりません。',
             'email'                => 'メール',
             'forgot-password-text' => 'パスワードを忘れた場合は、メールアドレスを入力して回復してください。',
@@ -18,7 +18,7 @@ return [
 
         'reset-password' => [
             'back-link-title'  => 'サインインに戻る',
-            'bagisto'          => 'バギスト', 
+            'bagisto'          => 'バギスト',
             'confirm-password' => 'パスワードの確認',
             'email'            => '登録済みのメール',
             'footer'           => '© 2010 - :current_year、Webkul Software（インドで登録）。全著作権所有。',
@@ -29,7 +29,7 @@ return [
 
         'login-form' => [
             'button-title'        => 'サインイン',
-            'bagisto'             => 'バギスト', 
+            'bagisto'             => 'バギスト',
             'create-your-account' => 'アカウントを作成',
             'email'               => 'メール',
             'form-login-text'     => 'アカウントをお持ちの場合、メールアドレスでサインインしてください。',
@@ -47,7 +47,7 @@ return [
 
         'signup-form' => [
             'account-exists'              => 'すでにアカウントをお持ちですか？',
-            'bagisto'                     => 'バギスト', 
+            'bagisto'                     => 'バギスト',
             'button-title'                => '登録',
             'confirm-pass'                => 'パスワードの確認',
             'email'                       => 'メール',
@@ -322,7 +322,7 @@ return [
         'layouts' => [
             'header' => [
                 'account'       => 'アカウント',
-                'bagisto'       => 'バギスト', 
+                'bagisto'       => 'バギスト',
                 'compare'       => '比較',
                 'cart'          => 'カート',
                 'dropdown-text' => 'カート、注文、ウィッシュリストの管理',
@@ -436,26 +436,26 @@ return [
                 'review-description'          => 'この製品の最初のレビュアになる',
                 'sale'                        => 'セール',
             ],
-        
+
             'carousel' => [
                 'next'     => '次へ',
                 'previous' => '前へ',
                 'view-all' => 'すべて表示',
             ],
         ],
-        
+
         'range-slider' => [
             'min-range' => '最小範囲',
             'max-range' => '最大範囲',
             'range'     => '範囲:',
         ],
-        
+
         'carousel' => [
             'image-slide' => '画像スライド',
             'next'        => '次へ',
             'previous'    => '前へ',
         ],
-        
+
         'quantity-changer' => [
             'decrease-quantity' => '数量を減らす',
             'increase-quantity' => '数量を増やす',
@@ -611,7 +611,7 @@ return [
             'success-remove'            => 'アイテムはカートから正常に削除されました。',
 
             'index' => [
-                'bagisto'                  => 'バギスト', 
+                'bagisto'                  => 'バギスト',
                 'cart'                     => 'カート',
                 'continue-shopping'        => 'ショッピングを続ける',
                 'empty-product'            => 'カートに製品がありません。',
@@ -696,7 +696,7 @@ return [
                 ],
 
                 'index' => [
-                    'bagisto' => 'バギスト', 
+                    'bagisto' => 'バギスト',
                     'confirm' => '確認',
                 ],
 

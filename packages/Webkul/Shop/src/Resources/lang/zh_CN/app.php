@@ -4,7 +4,7 @@ return [
     'customers' => [
         'forgot-password' => [
             'back'                 => '返回登录？',
-            'bagisto'              => '巴基斯托', 
+            'bagisto'              => '巴基斯托',
             'email-not-exist'      => '我们找不到使用该电子邮件地址的用户。',
             'email'                => '电子邮件',
             'forgot-password-text' => '如果您忘记了密码，请通过输入您的电子邮件地址来找回密码。',
@@ -18,7 +18,7 @@ return [
 
         'reset-password' => [
             'back-link-title'  => '返回登录',
-            'bagisto'          => '巴基斯托', 
+            'bagisto'          => '巴基斯托',
             'confirm-password' => '确认密码',
             'email'            => '注册电子邮件',
             'footer'           => '© 版权 2010 - :current_year，Webkul Software（注册于印度）。保留所有权利。',
@@ -29,7 +29,7 @@ return [
 
         'login-form' => [
             'button-title'        => '登录',
-            'bagisto'             => '巴基斯托', 
+            'bagisto'             => '巴基斯托',
             'create-your-account' => '创建您的帐户',
             'email'               => '电子邮件',
             'form-login-text'     => '如果您已经有帐户，请使用您的电子邮件登录。',
@@ -47,7 +47,7 @@ return [
 
         'signup-form' => [
             'account-exists'              => '已经有账户？',
-            'bagisto'                     => '巴基斯托', 
+            'bagisto'                     => '巴基斯托',
             'button-title'                => '注册',
             'confirm-pass'                => '确认密码',
             'email'                       => '电子邮件',
@@ -322,7 +322,7 @@ return [
         'layouts' => [
             'header' => [
                 'account'       => '账户',
-                'bagisto'       => '巴基斯托', 
+                'bagisto'       => '巴基斯托',
                 'compare'       => '比较',
                 'cart'          => '购物车',
                 'dropdown-text' => '管理购物车、订单和心愿单',
@@ -436,26 +436,26 @@ return [
                 'review-description'          => '成为第一个评价这个产品的人',
                 'sale'                        => '特卖',
             ],
-        
+
             'carousel' => [
                 'next'     => '下一个',
                 'previous' => '上一个',
                 'view-all' => '查看全部',
             ],
         ],
-        
+
         'range-slider' => [
             'min-range' => '最小范围',
             'max-range' => '最大范围',
             'range'     => '范围：',
         ],
-        
+
         'carousel' => [
             'image-slide' => '图片幻灯片',
             'next'        => '下一个',
             'previous'    => '上一个',
         ],
-        
+
         'quantity-changer' => [
             'decrease-quantity' => '减少数量',
             'increase-quantity' => '增加数量',
@@ -571,7 +571,7 @@ return [
 
     'search' => [
         'title' => '搜索结果为：:query',
-    
+
         'images' => [
             'index' => [
                 'something-went-wrong' => '出了点问题，请稍后重试。',
@@ -579,13 +579,13 @@ return [
                 'search'               => '搜索',
                 'only-images-allowed'  => '只允许图像（.jpeg，.jpg，.png，..）。',
             ],
-    
+
             'results' => [
                 'analysed-keywords' => '分析关键词：',
             ],
         ],
     ],
-    
+
     'compare' => [
         'already-added'      => '产品已经添加到比较列表中',
         'delete-all'         => '删除所有',
@@ -624,7 +624,7 @@ return [
             'success-remove'            => '项目已成功从购物车中移除。',
 
             'index'  => [
-                'bagisto'                  => '巴基斯托', 
+                'bagisto'                  => '巴基斯托',
                 'cart'                     => '购物车',
                 'continue-shopping'        => '继续购物',
                 'empty-product'            => '您的购物车中没有产品。',
@@ -709,7 +709,7 @@ return [
                 ],
 
                 'index' => [
-                    'bagisto' => '巴基斯托', 
+                    'bagisto' => '巴基斯托',
                     'confirm' => '确认',
                 ],
 

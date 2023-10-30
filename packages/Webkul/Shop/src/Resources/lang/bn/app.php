@@ -4,7 +4,7 @@ return [
     'customers' => [
         'forgot-password' => [
             'back'                 => 'সাইন ইনে ফিরে যেতে?',
-            'bagisto'              => 'বাগিস্তো', 
+            'bagisto'              => 'বাগিস্তো',
             'email-not-exist'      => 'আমরা ঐ ইমেইল ঠিকানার সাথে কোনও ব্যবহারকারী খুঁজে পেতে পারি নি।',
             'email'                => 'ইমেইল',
             'forgot-password-text' => 'আপনি যদি আপনার পাসওয়ার্ড ভুলে গিয়েছেন, তাহলে আপনি আপনার ইমেইল ঠিকানা দিয়ে এটি পুনরুদ্ধার করতে পারেন।',
@@ -18,7 +18,7 @@ return [
 
         'reset-password' => [
             'back-link-title'  => 'সাইন ইনে ফিরে যেতে',
-            'bagisto'          => 'বাগিস্তো', 
+            'bagisto'          => 'বাগিস্তো',
             'email'            => 'রেজিস্টারড ইমেইল',
             'confirm-password' => 'পাসওয়ার্ড নিশ্চিত করুন',
             'footer'           => '© কপিরাইট 2010 - :current_year, ওয়েবকুল সফটওয়্যার (ভারতে নিবন্ধিত)। সব অধিকার সংরক্ষিত।',
@@ -29,7 +29,7 @@ return [
 
         'login-form' => [
             'button-title'        => 'সাইন ইন করুন',
-            'bagisto'             => 'বাগিস্তো', 
+            'bagisto'             => 'বাগিস্তো',
             'create-your-account' => 'আপনার একাউন্ট তৈরি করুন',
             'email'               => 'ইমেইল',
             'form-login-text'     => 'আপনি যদি আপনার একাউন্ট আছে তবে আপনি আপনার ইমেইল ঠিকানা দিয়ে সাইন ইন করতে পারেন।',
@@ -46,7 +46,7 @@ return [
         ],
 
         'signup-form' => [
-            'bagisto'                     => 'বাগিস্তো', 
+            'bagisto'                     => 'বাগিস্তো',
             'account-exists'              => 'ইতিমধ্যে একটি অ্যাকাউন্ট আছে?',
             'button-title'                => 'রেজিস্টার করুন',
             'confirm-pass'                => 'পাসওয়ার্ড নিশ্চিত করুন',
@@ -322,7 +322,7 @@ return [
         'layouts' => [
             'header' => [
                 'account'       => 'অ্যাকাউন্ট',
-                'bagisto'       => 'বাগিস্তো', 
+                'bagisto'       => 'বাগিস্তো',
                 'cart'          => 'কার্ট',
                 'compare'       => 'তুলনা করুন',
                 'dropdown-text' => 'কার্ট, অর্ডার এবং ইচ্ছেসূচি পরিচালনা করুন',
@@ -436,26 +436,26 @@ return [
                 'review-description'          => 'এই পণ্যটি প্রথম পর্যালোচনা করুন',
                 'sale'                        => 'বিক্রয়',
             ],
-        
+
             'carousel' => [
                 'next'     => 'পরবর্তী',
                 'previous' => 'পূর্ববর্তী',
                 'view-all' => 'সব দেখুন',
             ],
         ],
-        
+
         'range-slider' => [
             'min-range' => 'ন্যূনতম পরিসীমা',
             'max-range' => 'সর্বাধিক পরিসীমা',
             'range'     => 'পরিসীমা:',
         ],
-        
+
         'carousel' => [
             'image-slide' => 'চিত্র স্লাইড',
             'next'        => 'পরবর্তী',
             'previous'    => 'পূর্ববর্তী',
         ],
-        
+
         'quantity-changer' => [
             'decrease-quantity' => 'পরিমাণ হ্রাস',
             'increase-quantity' => 'পরিমাণ বৃদ্ধি',
@@ -624,7 +624,7 @@ return [
             'success-remove'            => 'পণ্য সফলভাবে কার্ট থেকে সরানো হয়েছে।',
 
             'index' => [
-                'bagisto'                  => 'বাগিস্তো', 
+                'bagisto'                  => 'বাগিস্তো',
                 'cart'                     => 'কার্ট',
                 'continue-shopping'        => 'কেনাকাটা চালিয়ে যান',
                 'empty-product'            => 'আপনার কার্টে কোনও পণ্য নেই।',
@@ -640,7 +640,7 @@ return [
                 'remove-selected-success'  => 'নির্বাচিত আইটেমগুলি সফলভাবে কার্ট থেকে সরানো হয়েছে।',
                 'see-details'              => 'বিশদ দেখুন',
                 'select-all'               => 'সব চেক করুন',
-                'select-cart-item'         => 'কার্ট আইটেম চেক করুন',    
+                'select-cart-item'         => 'কার্ট আইটেম চেক করুন',
                 'tax'                      => 'কর',
                 'total'                    => 'মোট',
                 'update-cart'              => 'কার্ট আপডেট করুন',
@@ -709,7 +709,7 @@ return [
                 ],
 
                 'index' => [
-                    'bagisto' => 'বাগিস্তো', 
+                    'bagisto' => 'বাগিস্তো',
                     'confirm' => 'কনফার্ম',
                 ],
 

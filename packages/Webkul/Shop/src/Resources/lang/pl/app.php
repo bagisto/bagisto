@@ -4,7 +4,7 @@ return [
     'customers' => [
         'forgot-password' => [
             'back'                 => 'Powrót do logowania?',
-            'bagisto'              => 'Bagisto', 
+            'bagisto'              => 'Bagisto',
             'email-not-exist'      => 'Nie możemy znaleźć użytkownika z tym adresem e-mail.',
             'email'                => 'Email',
             'forgot-password-text' => 'Jeśli zapomniałeś hasła, odzyskaj je, wpisując swój adres e-mail.',
@@ -18,7 +18,7 @@ return [
 
         'reset-password' => [
             'back-link-title'  => 'Powrót do logowania',
-            'bagisto'          => 'Bagisto', 
+            'bagisto'          => 'Bagisto',
             'confirm-password' => 'Potwierdź hasło',
             'email'            => 'Zarejestrowany adres e-mail',
             'footer'           => '© Prawa autorskie 2010 - :current_year, Webkul Software (zarejestrowane w Indiach). Wszelkie prawa zastrzeżone.',
@@ -29,7 +29,7 @@ return [
 
         'login-form' => [
             'button-title'        => 'Zaloguj się',
-            'bagisto'             => 'Bagisto', 
+            'bagisto'             => 'Bagisto',
             'create-your-account' => 'Stwórz swoje konto',
             'email'               => 'Email',
             'form-login-text'     => 'Jeśli masz konto, zaloguj się za pomocą swojego adresu e-mail.',
@@ -47,7 +47,7 @@ return [
 
         'signup-form' => [
             'account-exists'              => 'Masz już konto?',
-            'bagisto'                     => 'Bagisto', 
+            'bagisto'                     => 'Bagisto',
             'button-title'                => 'Zarejestruj',
             'confirm-pass'                => 'Potwierdź hasło',
             'email'                       => 'Email',
@@ -321,7 +321,7 @@ return [
 
         'layouts' => [
             'header' => [
-                'bagisto'       => 'Bagisto', 
+                'bagisto'       => 'Bagisto',
                 'account'       => 'Konto',
                 'compare'       => 'Porównaj',
                 'cart'          => 'Koszyk',
@@ -436,26 +436,26 @@ return [
                 'review-description'          => 'Bądź pierwszym, który oceni ten produkt',
                 'sale'                        => 'Wyprzedaż',
             ],
-        
+
             'carousel' => [
                 'next'     => 'Następny',
                 'previous' => 'Poprzedni',
                 'view-all' => 'Pokaż Wszystko',
             ],
         ],
-        
+
         'range-slider' => [
             'min-range' => 'Minimalny Zakres',
             'max-range' => 'Maksymalny Zakres',
             'range'     => 'Zakres:',
         ],
-        
+
         'carousel' => [
             'image-slide' => 'Obrazek Slajdu',
             'next'        => 'Następny',
             'previous'    => 'Poprzedni',
         ],
-        
+
         'quantity-changer' => [
             'decrease-quantity' => 'Zmniejsz Ilość',
             'increase-quantity' => 'Zwiększ Ilość',
@@ -571,7 +571,7 @@ return [
 
     'search' => [
         'title' => 'Wyniki wyszukiwania dla: :query',
-    
+
         'images' => [
             'index' => [
                 'something-went-wrong' => 'Coś poszło nie tak, spróbuj ponownie później.',
@@ -579,7 +579,7 @@ return [
                 'search'               => 'Szukaj',
                 'only-images-allowed'  => 'Dozwolone są tylko obrazy (.jpeg, .jpg, .png, ..).',
             ],
-    
+
             'results' => [
                 'analysed-keywords' => 'Zanalizowane Słowa Kluczowe:',
             ],
@@ -624,7 +624,7 @@ return [
             'success-remove'            => 'Produkt został pomyślnie usunięty z koszyka',
 
             'index' => [
-                'bagisto'                  => 'Bagisto', 
+                'bagisto'                  => 'Bagisto',
                 'cart'                     => 'Koszyk',
                 'continue-shopping'        => 'Kontynuuj zakupy',
                 'empty-product'            => 'Nie masz produktu w koszyku',
@@ -709,7 +709,7 @@ return [
                 ],
 
                 'index' => [
-                    'bagisto' => 'Bagisto', 
+                    'bagisto' => 'Bagisto',
                     'confirm' => 'Potwierdź',
                 ],
 

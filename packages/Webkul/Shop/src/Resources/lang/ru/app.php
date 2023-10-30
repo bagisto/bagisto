@@ -4,7 +4,7 @@ return [
     'customers' => [
         'forgot-password' => [
             'back'                 => 'Вернуться к входу?',
-            'bagisto'              => 'Багисто', 
+            'bagisto'              => 'Багисто',
             'email-not-exist'      => 'Мы не можем найти пользователя с этим адресом электронной почты.',
             'email'                => 'Электронная почта',
             'forgot-password-text' => 'Если вы забыли свой пароль, восстановите его, введя свой адрес электронной почты.',
@@ -18,7 +18,7 @@ return [
 
         'reset-password' => [
             'back-link-title'  => 'Вернуться к входу',
-            'bagisto'          => 'Багисто', 
+            'bagisto'          => 'Багисто',
             'confirm-password' => 'Подтвердите пароль',
             'email'            => 'Зарегистрированная почта',
             'footer'           => '© Авторское право 2010 - :current_year, Webkul Software (зарегистрировано в Индии). Все права защищены.',
@@ -29,7 +29,7 @@ return [
 
         'login-form' => [
             'button-title'        => 'Войти',
-            'bagisto'             => 'Багисто', 
+            'bagisto'             => 'Багисто',
             'create-your-account' => 'Создайте свой аккаунт',
             'email'               => 'Электронная почта',
             'form-login-text'     => 'Если у вас есть аккаунт, войдите, используя свой адрес электронной почты.',
@@ -47,7 +47,7 @@ return [
 
         'signup-form' => [
             'account-exists'              => 'Уже есть аккаунт?',
-            'bagisto'                     => 'Багисто', 
+            'bagisto'                     => 'Багисто',
             'button-title'                => 'Зарегистрироваться',
             'confirm-pass'                => 'Подтвердите пароль',
             'email'                       => 'Электронная почта',
@@ -321,7 +321,7 @@ return [
 
         'layouts' => [
             'header' => [
-                'bagisto'       => 'Багисто', 
+                'bagisto'       => 'Багисто',
                 'account'       => 'Аккаунт',
                 'compare'       => 'Сравнить',
                 'cart'          => 'Корзина',
@@ -436,26 +436,26 @@ return [
                 'review-description'          => 'Будьте первым, кто оставит отзыв о продукте',
                 'sale'                        => 'Распродажа',
             ],
-        
+
             'carousel' => [
                 'next'     => 'Следующий',
                 'previous' => 'Предыдущий',
                 'view-all' => 'Показать Все',
             ],
         ],
-        
+
         'range-slider' => [
             'min-range' => 'Минимальный Диапазон',
             'max-range' => 'Максимальный Диапазон',
             'range'     => 'Диапазон:',
         ],
-        
+
         'carousel' => [
             'image-slide' => 'Изображение Слайда',
             'next'        => 'Следующий',
             'previous'    => 'Предыдущий',
         ],
-        
+
         'quantity-changer' => [
             'decrease-quantity' => 'Уменьшить Количество',
             'increase-quantity' => 'Увеличить Количество',
@@ -571,7 +571,7 @@ return [
 
     'search' => [
         'title' => 'Результаты поиска для : :query',
-    
+
         'images' => [
             'index' => [
                 'something-went-wrong' => 'Что-то пошло не так, пожалуйста, попробуйте позже.',
@@ -579,7 +579,7 @@ return [
                 'search'               => 'Поиск',
                 'only-images-allowed'  => 'Разрешены только изображения (.jpeg, .jpg, .png, ..).',
             ],
-    
+
             'results' => [
                 'analysed-keywords' => 'Проанализированные ключевые слова:',
             ],
@@ -624,7 +624,7 @@ return [
             'success-remove'            => 'Товар успешно удален из корзины.',
 
             'index' => [
-                'bagisto'                  => 'Багисто', 
+                'bagisto'                  => 'Багисто',
                 'cart'                     => 'Корзина',
                 'continue-shopping'        => 'Продолжить покупки',
                 'empty-product'            => 'В вашей корзине нет товаров.',
@@ -709,7 +709,7 @@ return [
                 ],
 
                 'index' => [
-                    'bagisto' => 'Багисто', 
+                    'bagisto' => 'Багисто',
                     'confirm' => 'Подтвердить',
                 ],
 

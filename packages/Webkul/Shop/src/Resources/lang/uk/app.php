@@ -4,7 +4,7 @@ return [
     'customers' => [
         'forgot-password' => [
             'back'                 => 'Повернутися до входу?',
-            'bagisto'              => 'Багісто', 
+            'bagisto'              => 'Багісто',
             'email-not-exist'      => 'Ми не можемо знайти користувача за цією адресою електронної пошти.',
             'email'                => 'Електронна пошта',
             'forgot-password-text' => 'Якщо ви забули свій пароль, відновіть його, введіть свою електронну адресу.',
@@ -18,7 +18,7 @@ return [
 
         'reset-password' => [
             'back-link-title'  => 'Повернутися до входу',
-            'bagisto'          => 'Багісто', 
+            'bagisto'          => 'Багісто',
             'confirm-password' => 'Підтвердити пароль',
             'email'            => 'Зареєстрована електронна пошта',
             'footer'           => '© Копірайт 2010 - :current_year, Webkul Software (зареєстрована в Індії). Всі права захищені.',
@@ -29,7 +29,7 @@ return [
 
         'login-form' => [
             'button-title'        => 'Увійти',
-            'bagisto'             => 'Багісто', 
+            'bagisto'             => 'Багісто',
             'create-your-account' => 'Створити свій обліковий запис',
             'email'               => 'Електронна пошта',
             'form-login-text'     => 'Якщо у вас є обліковий запис, увійдіть за допомогою своєї електронної адреси.',
@@ -47,7 +47,7 @@ return [
 
         'signup-form' => [
             'account-exists'              => 'Вже є обліковий запис?',
-            'bagisto'                     => 'Багісто', 
+            'bagisto'                     => 'Багісто',
             'button-title'                => 'Зареєструватися',
             'confirm-pass'                => 'Підтвердіть пароль',
             'email'                       => 'Електронна пошта',
@@ -322,7 +322,7 @@ return [
         'layouts' => [
             'header' => [
                 'account'       => 'Обліковий запис',
-                'bagisto'       => 'Багісто', 
+                'bagisto'       => 'Багісто',
                 'compare'       => 'Порівняння',
                 'cart'          => 'Кошик',
                 'dropdown-text' => 'Керування кошиком, замовленнями та списком бажань',
@@ -436,26 +436,26 @@ return [
                 'review-description'          => 'Будьте першим, хто оцінить цей товар',
                 'sale'                        => 'Розпродаж',
             ],
-        
+
             'carousel' => [
                 'next'     => 'Наступний',
                 'previous' => 'Попередній',
                 'view-all' => 'Переглянути Всі',
             ],
         ],
-        
+
         'range-slider' => [
             'min-range' => 'Мінімальний Діапазон',
             'max-range' => 'Максимальний Діапазон',
             'range'     => 'Діапазон:',
         ],
-        
+
         'carousel' => [
             'image-slide' => 'Зображення Слайду',
             'next'        => 'Наступний',
             'previous'    => 'Попередній',
         ],
-        
+
         'quantity-changer' => [
             'decrease-quantity' => 'Зменшити Кількість',
             'increase-quantity' => 'Збільшити Кількість',
@@ -571,7 +571,7 @@ return [
 
     'search' => [
         'title' => 'Результати пошуку для : :query',
-    
+
         'images' => [
             'index' => [
                 'something-went-wrong' => 'Щось пішло не так, будь ласка, спробуйте пізніше.',
@@ -579,7 +579,7 @@ return [
                 'search'               => 'Пошук',
                 'only-images-allowed'  => 'Дозволені лише зображення (.jpeg, .jpg, .png, ..).',
             ],
-    
+
             'results' => [
                 'analysed-keywords' => 'Аналізовані ключові слова:',
             ],
@@ -624,7 +624,7 @@ return [
             'success-remove'            => 'Товар успішно видалено з кошика.',
 
             'index' => [
-                'bagisto'                  => 'Багісто', 
+                'bagisto'                  => 'Багісто',
                 'cart'                     => 'Кошик',
                 'continue-shopping'        => 'Продовжити покупки',
                 'empty-product'            => 'У вас немає товарів у кошику.',
@@ -709,7 +709,7 @@ return [
                 ],
 
                 'index' => [
-                    'bagisto' => 'Багісто', 
+                    'bagisto' => 'Багісто',
                     'confirm' => 'Підтвердити',
                 ],
 

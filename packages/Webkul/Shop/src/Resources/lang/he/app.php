@@ -4,7 +4,7 @@ return [
     'customers' => [
         'forgot-password' => [
             'back'                 => 'חזרה להתחברות?',
-            'bagisto'              => 'בַּגִּיסְטוֹ', 
+            'bagisto'              => 'בַּגִּיסְטוֹ',
             'email-not-exist'      => 'אנחנו לא מוצאים משתמש עם כתובת הדוא"ל הזו.',
             'email'                => 'אימייל',
             'forgot-password-text' => 'אם שכחת את הסיסמה שלך, ניתן לשחזר אותה על ידי הזנת כתובת האימייל שלך.',
@@ -18,7 +18,7 @@ return [
 
         'reset-password' => [
             'back-link-title'  => 'חזרה להתחברות',
-            'bagisto'          => 'בַּגִּיסְטוֹ', 
+            'bagisto'          => 'בַּגִּיסְטוֹ',
             'confirm-password' => 'אימות סיסמה',
             'email'            => 'אימייל רשום',
             'footer'           => '© זכויות יוצרים 2010 - :current_year, Webkul Software (רשומה בהודו). כל הזכויות שמורות.',
@@ -29,7 +29,7 @@ return [
 
         'login-form' => [
             'button-title'        => 'התחברות',
-            'bagisto'             => 'בַּגִּיסְטוֹ', 
+            'bagisto'             => 'בַּגִּיסְטוֹ',
             'create-your-account' => 'צור את החשבון שלך',
             'email'               => 'אימייל',
             'form-login-text'     => 'אם יש לך חשבון, התחבר עם כתובת האימייל שלך.',
@@ -47,7 +47,7 @@ return [
 
         'signup-form' => [
             'account-exists'              => 'כבר יש לך חשבון?',
-            'bagisto'                     => 'בַּגִּיסְטוֹ', 
+            'bagisto'                     => 'בַּגִּיסְטוֹ',
             'button-title'                => 'הירשם',
             'confirm-pass'                => 'אימות סיסמה',
             'email'                       => 'אימייל',
@@ -322,7 +322,7 @@ return [
         'layouts' => [
             'header' => [
                 'account'       => 'חשבון',
-                'bagisto'       => 'בַּגִּיסְטוֹ', 
+                'bagisto'       => 'בַּגִּיסְטוֹ',
                 'cart'          => 'עגלה',
                 'compare'       => 'השוואה',
                 'dropdown-text' => 'ניהול עגלה, הזמנות ורשימת משאלות',
@@ -436,26 +436,26 @@ return [
                 'review-description'          => 'הפוך לראשון שמבקר במוצר זה',
                 'sale'                        => 'מבצע',
             ],
-        
+
             'carousel' => [
                 'next'     => 'הבא',
                 'previous' => 'הקודם',
                 'view-all' => 'צפה בהכול',
             ],
         ],
-        
+
         'range-slider' => [
             'min-range' => 'טווח מינימלי',
             'max-range' => 'טווח מרבי',
             'range'     => 'טווח:',
         ],
-        
+
         'carousel' => [
             'image-slide' => 'שקופית תמונה',
             'next'        => 'הבא',
             'previous'    => 'הקודם',
         ],
-        
+
         'quantity-changer' => [
             'decrease-quantity' => 'הפחת כמות',
             'increase-quantity' => 'הגדל כמות',
@@ -624,7 +624,7 @@ return [
             'success-remove'            => 'הפריט הוסר בהצלחה מהעגלה.',
 
             'index' => [
-                'bagisto'                  => 'בַּגִּיסְטוֹ', 
+                'bagisto'                  => 'בַּגִּיסְטוֹ',
                 'cart'                     => 'עגלת קניות',
                 'continue-shopping'        => 'המשך לקנות',
                 'empty-product'            => 'אין לך מוצר בעגלה שלך.',
@@ -709,7 +709,7 @@ return [
                 ],
 
                 'index' => [
-                    'bagisto' => 'בַּגִּיסְטוֹ', 
+                    'bagisto' => 'בַּגִּיסְטוֹ',
                     'confirm' => 'אשר',
                 ],
 

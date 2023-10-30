@@ -4,7 +4,7 @@ return [
     'customers' => [
         'forgot-password' => [
             'back'                 => 'Back to sign In ?',
-            'bagisto'              => 'Bagisto', 
+            'bagisto'              => 'Bagisto',
             'email-not-exist'      => 'We cannot find a user with that email address.',
             'email'                => 'Email',
             'forgot-password-text' => 'If you forgot your password, recover it by entering your email address.',
@@ -18,7 +18,7 @@ return [
 
         'reset-password' => [
             'back-link-title'  => 'Back to Sign In',
-            'bagisto'          => 'Bagisto', 
+            'bagisto'          => 'Bagisto',
             'confirm-password' => 'Confirm Password',
             'email'            => 'Registered Email',
             'footer'           => '© Copyright 2010 - :current_year, Webkul Software (Registered in India). All rights reserved.',
@@ -29,7 +29,7 @@ return [
 
         'login-form' => [
             'button-title'        => 'Sign In',
-            'bagisto'             => 'Bagisto', 
+            'bagisto'             => 'Bagisto',
             'create-your-account' => 'Create your account',
             'email'               => 'Email',
             'form-login-text'     => 'If you have an account, sign in with your email address.',
@@ -47,7 +47,7 @@ return [
 
         'signup-form' => [
             'account-exists'              => 'Already have an account ?',
-            'bagisto'                     => 'Bagisto', 
+            'bagisto'                     => 'Bagisto',
             'button-title'                => 'Register',
             'confirm-pass'                => 'Confirm Password',
             'email'                       => 'Email',
@@ -576,7 +576,7 @@ return [
             'index' => [
                 'something-went-wrong' => 'Something went wrong, please try again later.',
                 'size-limit-error'     => 'Size Limit Error',
-                'search'               => 'Search', 
+                'search'               => 'Search',
                 'only-images-allowed'  => 'Only images (.jpeg, .jpg, .png, ..) are allowed.',
             ],
 

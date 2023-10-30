@@ -4,7 +4,7 @@ return [
     'customers' => [
         'forgot-password' => [
             'back'                 => 'Terug naar Aanmelden?',
-            'bagisto'              => 'Bagisto', 
+            'bagisto'              => 'Bagisto',
             'email-not-exist'      => 'We kunnen geen gebruiker vinden met dat e-mailadres.',
             'email'                => 'E-mail',
             'forgot-password-text' => 'Als u uw wachtwoord bent vergeten, kunt u het herstellen door uw e-mailadres in te voeren.',
@@ -18,7 +18,7 @@ return [
 
         'reset-password' => [
             'back-link-title'  => 'Terug naar Aanmelden',
-            'bagisto'          => 'Bagisto', 
+            'bagisto'          => 'Bagisto',
             'confirm-password' => 'Bevestig Wachtwoord',
             'email'            => 'Geregistreerde E-mail',
             'footer'           => '© Auteursrecht 2010 - :current_year, Webkul Software (geregistreerd in India). Alle rechten voorbehouden.',
@@ -29,7 +29,7 @@ return [
 
         'login-form' => [
             'button-title'        => 'Aanmelden',
-            'bagisto'             => 'Bagisto', 
+            'bagisto'             => 'Bagisto',
             'create-your-account' => 'Maak uw account aan',
             'email'               => 'E-mail',
             'form-login-text'     => 'Als u een account heeft, meld u dan aan met uw e-mailadres.',
@@ -47,7 +47,7 @@ return [
 
         'signup-form' => [
             'account-exists'              => 'Heeft u al een account?',
-            'bagisto'                     => 'Bagisto', 
+            'bagisto'                     => 'Bagisto',
             'button-title'                => 'Registreren',
             'confirm-pass'                => 'Bevestig Wachtwoord',
             'email'                       => 'E-mail',
@@ -321,7 +321,7 @@ return [
 
         'layouts' => [
             'header' => [
-                'bagisto'       => 'Bagisto', 
+                'bagisto'       => 'Bagisto',
                 'account'       => 'Account',
                 'compare'       => 'Vergelijken',
                 'cart'          => 'Winkelwagen',
@@ -436,26 +436,26 @@ return [
                 'review-description'          => 'Wees de eerste om dit product te beoordelen',
                 'sale'                        => 'Uitverkoop',
             ],
-        
+
             'carousel' => [
                 'next'     => 'Volgende',
                 'previous' => 'Vorige',
                 'view-all' => 'Alles bekijken',
             ],
         ],
-        
+
         'range-slider' => [
             'min-range' => 'Minimale Bereik',
             'max-range' => 'Maximale Bereik',
             'range'     => 'Bereik:',
         ],
-        
+
         'carousel' => [
             'image-slide' => 'Afbeeldingslide',
             'next'        => 'Volgende',
             'previous'    => 'Vorige',
         ],
-        
+
         'quantity-changer' => [
             'decrease-quantity' => 'Hoeveelheid verminderen',
             'increase-quantity' => 'Hoeveelheid verhogen',
@@ -571,7 +571,7 @@ return [
 
     'search' => [
         'title' => 'Zoekresultaten voor : :query',
-    
+
         'images' => [
             'index' => [
                 'something-went-wrong' => 'Er is iets misgegaan, probeer het later opnieuw.',
@@ -579,7 +579,7 @@ return [
                 'search'               => 'Zoeken',
                 'only-images-allowed'  => 'Alleen afbeeldingen (.jpeg, .jpg, .png, ..) zijn toegestaan.',
             ],
-    
+
             'results' => [
                 'analysed-keywords' => 'Geanalyseerde Trefwoorden:',
             ],
@@ -623,7 +623,7 @@ return [
             'success-remove'            => 'Item is succesvol verwijderd uit de winkelwagen.',
 
             'index' => [
-                'bagisto'                  => 'Bagisto', 
+                'bagisto'                  => 'Bagisto',
                 'cart'                     => 'Winkelwagen',
                 'continue-shopping'        => 'Doorgaan met winkelen',
                 'empty-product'            => 'U heeft geen product in uw winkelwagen.',
@@ -709,7 +709,7 @@ return [
 
                 'index' => [
                     'confirm' => 'Bevestigen',
-                    'bagisto' => 'Bagisto', 
+                    'bagisto' => 'Bagisto',
                 ],
 
                 'shipping' => [

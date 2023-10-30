@@ -4,7 +4,7 @@ return [
     'customers' => [
         'forgot-password' => [
             'back'                 => 'ආපසු සන්නියට ආරයැකිනන්න ?',
-            'bagisto'              => 'බගිස්ටෝ', 
+            'bagisto'              => 'බගිස්ටෝ',
             'email-not-exist'      => 'අපි මෙම විද්‍යුත් ලිපිනය සහිතව පරීක්ෂා කරනවානම් අපි යවනවායි.',
             'email'                => 'ඊමේල්',
             'forgot-password-text' => 'ඔබට ඔබගේ මුර අමතකය අපට ඇතුලු වීමෙන් එකක් සලස්වන්න.',
@@ -18,7 +18,7 @@ return [
 
         'reset-password' => [
             'back-link-title'  => 'ආරයැකින්න',
-            'bagisto'          => 'බගිස්ටෝ', 
+            'bagisto'          => 'බගිස්ටෝ',
             'confirm-password' => 'මුරපදය තහවුර',
             'email'            => 'ලියාපදිංචි ඊමේල්',
             'footer'           => '© වෙබ්කල් මෘදුකාංග 2010 - :current_year, ඉන්දියාවේ ලියාපදිංචි. සියලු අයිතියන්ගේ අනුමානය වෙනස් වේ.',
@@ -29,7 +29,7 @@ return [
 
         'login-form' => [
             'button-title'        => 'ඇතුල් වන්න',
-            'bagisto'             => 'බගිස්ටෝ', 
+            'bagisto'             => 'බගිස්ටෝ',
             'create-your-account' => 'ඔබගේ ගිණුමක් තනා කරන්න',
             'email'               => 'ඊමේල්',
             'form-login-text'     => 'ඔබට ගවේෂකරුට ස්තුතියි, ඔබගේ ඊමේල් ලියාපදිංචි අංකය සහිත අත්සන්යයේ ඇතුලත් කරන්න.',
@@ -47,7 +47,7 @@ return [
 
         'signup-form' => [
             'account-exists'              => 'දැනටමත් ගිණුමක් තිබේද?',
-            'bagisto'                     => 'බගිස්ටෝ', 
+            'bagisto'                     => 'බගිස්ටෝ',
             'button-title'                => 'ලියාපදිංචි කරන්න',
             'confirm-pass'                => 'මුරපදය තහවුර',
             'email'                       => 'ඊමේල්',
@@ -322,7 +322,7 @@ return [
         'layouts' => [
             'header' => [
                 'account'       => 'ගිණුම',
-                'bagisto'       => 'බගිස්ටෝ', 
+                'bagisto'       => 'බගිස්ටෝ',
                 'compare'       => 'සංස්ථාගත කරන්න',
                 'cart'          => 'කර්තෘ',
                 'dropdown-text' => 'කර්තෘ, ඇණවුම්, සහ උපාංග කළමනාකරණ කරන්න',
@@ -436,26 +436,26 @@ return [
                 'review-description'          => 'මෙම නිෂ්පාදනය සඳහා පළිගෙන යයි මේය හරියට දැක්කාය',
                 'sale'                        => 'විකිණීම',
             ],
-        
+
             'carousel' => [
                 'next'     => 'ඊළඟ',
                 'previous' => 'පෙර',
                 'view-all' => 'සියලු දක්වන්න',
             ],
         ],
-        
+
         'range-slider' => [
             'min-range' => 'අවමෝදයේ ක්ෂේත්වය',
             'max-range' => 'උපරිම ක්ෂේත්වය',
             'range'     => 'ක්ෂේත්වය:',
         ],
-        
+
         'carousel' => [
             'image-slide' => 'රූප ස්ලයිඩ්',
             'next'        => 'ඊළඟ',
             'previous'    => 'පෙර',
         ],
-        
+
         'quantity-changer' => [
             'decrease-quantity' => 'ප්‍රමුඛතාව හොඳින්න',
             'increase-quantity' => 'ප්‍රමුඛතාව වැඩියෙන්න',
@@ -571,7 +571,7 @@ return [
 
     'search' => [
         'title' => 'සෙවුම් සහිත ප්‍රතිඵල: :query',
-    
+
         'images' => [
             'index' => [
                 'something-went-wrong' => 'දැනටමත් ක්‍රියා කරමින් හඳුන්වන්න, කරුණාකර වෙනත් කාලයක් පවත්වන්න.',
@@ -579,7 +579,7 @@ return [
                 'search'               => 'සොයන්න',
                 'only-images-allowed'  => 'සමහර රූපවාහිනී (.jpeg, .jpg, .png, ..) පෙන්වීමට ඉඩ දෙයි.',
             ],
-    
+
             'results' => [
                 'analysed-keywords' => 'විශ්වාසීය නිවේදන:',
             ],
@@ -624,7 +624,7 @@ return [
             'success-remove'            => 'අයිතමය සාර්ථකයි, සාර්ථකයි ඉවත් කරන ලදි.',
 
             'index' => [
-                'bagisto'                  => 'බගිස්ටෝ', 
+                'bagisto'                  => 'බගිස්ටෝ',
                 'cart'                     => 'කර්තෘ',
                 'continue-shopping'        => 'කාර්තෘ පෙරවරු',
                 'empty-product'            => 'ඔබේ කර්තෘක්කයේ නිෂ්පාදනයක් නැත.',
@@ -709,7 +709,7 @@ return [
                 ],
 
                 'index' => [
-                    'bagisto' => 'බගිස්ටෝ', 
+                    'bagisto' => 'බගිස්ටෝ',
                     'confirm' => 'තහවුරු',
                 ],
 

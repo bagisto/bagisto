@@ -4,7 +4,7 @@ return [
     'customers' => [
         'forgot-password' => [
             'back'                 => 'بازگشت به صفحه ورود؟',
-            'bagisto'              => 'بگیستو', 
+            'bagisto'              => 'بگیستو',
             'email-not-exist'      => 'ما نمی‌توانیم کاربری با این آدرس ایمیل پیدا کنیم.',
             'email'                => 'ایمیل',
             'forgot-password-text' => 'اگر رمز عبور خود را فراموش کرده‌اید، با وارد کردن آدرس ایمیل خود آن را بازیابی کنید.',
@@ -18,7 +18,7 @@ return [
 
         'reset-password' => [
             'back-link-title'  => 'بازگشت به صفحه ورود',
-            'bagisto'          => 'بگیستو', 
+            'bagisto'          => 'بگیستو',
             'confirm-password' => 'تأیید رمز عبور',
             'email'            => 'ایمیل ثبت‌شده',
             'footer'           => '© حق تألیف 2010 - :current_year، نرم‌افزار وب‌کول (ثبت شده در هند). تمامی حقوق محفوظ است.',
@@ -29,7 +29,7 @@ return [
 
         'login-form' => [
             'button-title'        => 'ورود',
-            'bagisto'             => 'بگیستو', 
+            'bagisto'             => 'بگیستو',
             'create-your-account' => 'حساب کاربری خود را ایجاد کنید',
             'email'               => 'ایمیل',
             'form-login-text'     => 'اگر حساب کاربری دارید، با آدرس ایمیل خود وارد شوید.',
@@ -47,7 +47,7 @@ return [
 
         'signup-form' => [
             'account-exists'              => 'قبلاً حساب دارید؟',
-            'bagisto'                     => 'بگیستو', 
+            'bagisto'                     => 'بگیستو',
             'button-title'                => 'ثبت نام',
             'confirm-pass'                => 'تأیید رمز عبور',
             'email'                       => 'ایمیل',
@@ -322,7 +322,7 @@ return [
         'layouts' => [
             'header' => [
                 'account'       => 'حساب کاربری',
-                'bagisto'       => 'بگیستو', 
+                'bagisto'       => 'بگیستو',
                 'compare'       => 'مقایسه',
                 'cart'          => 'سبد خرید',
                 'dropdown-text' => 'مدیریت سبد خرید، سفارشات و لیست علاقه‌مندی',
@@ -436,26 +436,26 @@ return [
                 'review-description'          => 'اولین نفری باشید که این محصول را مورد بررسی قرار دهید',
                 'sale'                        => 'حراج',
             ],
-        
+
             'carousel' => [
                 'next'     => 'بعدی',
                 'previous' => 'قبلی',
                 'view-all' => 'نمایش همه',
             ],
         ],
-        
+
         'range-slider' => [
             'min-range' => 'حداقل محدوده',
             'max-range' => 'حداکثر محدوده',
             'range'     => 'محدوده:',
         ],
-        
+
         'carousel' => [
             'image-slide' => 'اسلاید تصویر',
             'next'        => 'بعدی',
             'previous'    => 'قبلی',
         ],
-        
+
         'quantity-changer' => [
             'decrease-quantity' => 'کاهش تعداد',
             'increase-quantity' => 'افزایش تعداد',
@@ -624,7 +624,7 @@ return [
             'success-remove'            => 'کالا با موفقیت از سبد خرید حذف شد.',
 
             'index' => [
-                'bagisto'                  => 'بگیستو', 
+                'bagisto'                  => 'بگیستو',
                 'cart'                     => 'سبد خرید',
                 'continue-shopping'        => 'ادامه خرید',
                 'home'                     => 'خانه',
@@ -640,7 +640,7 @@ return [
                 'remove-selected-success'  => 'موارد انتخاب شده با موفقیت از سبد خرید حذف شدند.',
                 'see-details'              => 'مشاهده جزئیات',
                 'select-all'               => 'انتخاب همه',
-                'select-cart-item'         => 'انتخاب مورد سبد خرید',   
+                'select-cart-item'         => 'انتخاب مورد سبد خرید',
                 'tax'                      => 'مالیات',
                 'total'                    => 'مجموع',
                 'update-cart'              => 'به‌روزرسانی سبد خرید',
@@ -709,7 +709,7 @@ return [
                 ],
 
                 'index' => [
-                    'bagisto' => 'بگیستو', 
+                    'bagisto' => 'بگیستو',
                     'confirm' => 'تأیید',
                 ],
 

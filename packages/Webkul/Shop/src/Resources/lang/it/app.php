@@ -4,7 +4,7 @@ return [
     'customers' => [
         'forgot-password' => [
             'back'                 => 'Torna al Login ?',
-            'bagisto'              => 'Bagisto', 
+            'bagisto'              => 'Bagisto',
             'email-not-exist'      => 'Non possiamo trovare un utente con quell\'indirizzo email.',
             'email'                => 'Email',
             'forgot-password-text' => 'Se hai dimenticato la tua password, recuperala inserendo il tuo indirizzo email.',
@@ -18,7 +18,7 @@ return [
 
         'reset-password' => [
             'back-link-title'  => 'Torna al Login',
-            'bagisto'          => 'Bagisto', 
+            'bagisto'          => 'Bagisto',
             'confirm-password' => 'Conferma Password',
             'email'            => 'Email Registrata',
             'footer'           => '© Copyright 2010 - :current_year, Webkul Software (Registrato in India). Tutti i diritti riservati.',
@@ -29,7 +29,7 @@ return [
 
         'login-form' => [
             'button-title'        => 'Accedi',
-            'bagisto'             => 'Bagisto', 
+            'bagisto'             => 'Bagisto',
             'create-your-account' => 'Crea il tuo account',
             'email'               => 'Email',
             'form-login-text'     => 'Se hai un account, accedi con il tuo indirizzo email.',
@@ -47,7 +47,7 @@ return [
 
         'signup-form' => [
             'account-exists'              => 'Hai già un account ?',
-            'bagisto'                     => 'Bagisto', 
+            'bagisto'                     => 'Bagisto',
             'button-title'                => 'Registrati',
             'confirm-pass'                => 'Conferma Password',
             'email'                       => 'Email',
@@ -322,7 +322,7 @@ return [
         'layouts' => [
             'header' => [
                 'account'       => 'Account',
-                'bagisto'       => 'Bagisto', 
+                'bagisto'       => 'Bagisto',
                 'compare'       => 'Confronta',
                 'cart'          => 'Carrello',
                 'dropdown-text' => 'Gestisci carrello, ordini e lista dei desideri',
@@ -436,26 +436,26 @@ return [
                 'review-description'          => 'Sii il primo a recensire questo prodotto',
                 'sale'                        => 'Sconto',
             ],
-        
+
             'carousel' => [
                 'next'     => 'Successivo',
                 'previous' => 'Precedente',
                 'view-all' => 'Visualizza tutto',
             ],
         ],
-        
+
         'range-slider' => [
             'min-range' => 'Intervallo minimo',
             'max-range' => 'Intervallo massimo',
             'range'     => 'Intervallo:',
         ],
-        
+
         'carousel' => [
             'image-slide' => 'Diapositiva immagine',
             'next'        => 'Successivo',
             'previous'    => 'Precedente',
         ],
-        
+
         'quantity-changer' => [
             'decrease-quantity' => 'Diminuisci quantità',
             'increase-quantity' => 'Aumenta quantità',
@@ -571,7 +571,7 @@ return [
 
     'search' => [
         'title' => 'Risultati della ricerca: :query',
-    
+
         'images' => [
             'index' => [
                 'something-went-wrong' => 'Qualcosa è andato storto, si prega di riprovare più tardi.',
@@ -579,7 +579,7 @@ return [
                 'search'               => 'Cerca',
                 'only-images-allowed'  => 'Sono ammesse solo immagini (.jpeg, .jpg, .png, ..).',
             ],
-    
+
             'results' => [
                 'analysed-keywords' => 'Parole chiave analizzate:',
             ],
@@ -624,7 +624,7 @@ return [
             'success-remove'            => 'Articolo rimosso con successo dal carrello.',
 
             'index' => [
-                'bagisto'                  => 'Bagisto', 
+                'bagisto'                  => 'Bagisto',
                 'cart'                     => 'Carrello',
                 'continue-shopping'        => 'Continua a fare acquisti',
                 'empty-product'            => 'Il carrello è vuoto.',
@@ -709,7 +709,7 @@ return [
                 ],
 
                 'index' => [
-                    'bagisto' => 'Bagisto', 
+                    'bagisto' => 'Bagisto',
                     'confirm' => 'Conferma',
                 ],
 

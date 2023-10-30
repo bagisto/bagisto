@@ -4,7 +4,7 @@ return [
     'customers' => [
         'forgot-password' => [
             'back'                 => 'Zurück zur Anmeldung?',
-            'bagisto'              => 'Bagisto', 
+            'bagisto'              => 'Bagisto',
             'email-not-exist'      => 'Wir konnten keinen Benutzer mit dieser E-Mail-Adresse finden.',
             'email'                => 'E-Mail',
             'forgot-password-text' => 'Wenn Sie Ihr Passwort vergessen haben, stellen Sie es wieder her, indem Sie Ihre E-Mail-Adresse eingeben.',
@@ -18,7 +18,7 @@ return [
 
         'reset-password' => [
             'back-link-title'  => 'Zurück zur Anmeldung',
-            'bagisto'          => 'Bagisto', 
+            'bagisto'          => 'Bagisto',
             'confirm-password' => 'Passwort bestätigen',
             'email'            => 'Registrierte E-Mail',
             'footer'           => '© Copyright 2010 - :current_year, Webkul Software (in Indien registriert). Alle Rechte vorbehalten.',
@@ -29,7 +29,7 @@ return [
 
         'login-form' => [
             'button-title'        => 'Anmelden',
-            'bagisto'             => 'Bagisto', 
+            'bagisto'             => 'Bagisto',
             'create-your-account' => 'Erstellen Sie Ihr Konto',
             'email'               => 'E-Mail',
             'form-login-text'     => 'Wenn Sie bereits ein Konto haben, melden Sie sich mit Ihrer E-Mail-Adresse an.',
@@ -47,7 +47,7 @@ return [
 
         'signup-form' => [
             'account-exists'              => 'Bereits ein Konto?',
-            'bagisto'                     => 'Bagisto', 
+            'bagisto'                     => 'Bagisto',
             'button-title'                => 'Registrieren',
             'confirm-pass'                => 'Passwort bestätigen',
             'email'                       => 'E-Mail',
@@ -322,7 +322,7 @@ return [
         'layouts' => [
             'header' => [
                 'account'       => 'Konto',
-                'bagisto'       => 'Bagisto', 
+                'bagisto'       => 'Bagisto',
                 'compare'       => 'Vergleichen',
                 'cart'          => 'Warenkorb',
                 'dropdown-text' => 'Warenkorb, Bestellungen & Wunschliste verwalten',
@@ -436,26 +436,26 @@ return [
                 'review-description'          => 'Seien Sie der Erste, der dieses Produkt bewertet',
                 'sale'                        => 'Verkauf',
             ],
-        
+
             'carousel' => [
                 'next'     => 'Nächster',
                 'previous' => 'Vorheriger',
                 'view-all' => 'Alle anzeigen',
             ],
         ],
-        
+
         'range-slider' => [
             'min-range' => 'Mindestbereich',
             'max-range' => 'Höchstbereich',
             'range'     => 'Bereich:',
         ],
-        
+
         'carousel' => [
             'image-slide' => 'Bildrutsche',
             'next'        => 'Nächster',
             'previous'    => 'Vorheriger',
         ],
-        
+
         'quantity-changer' => [
             'decrease-quantity' => 'Menge verringern',
             'increase-quantity' => 'Menge erhöhen',
@@ -624,7 +624,7 @@ return [
             'success-remove'            => 'Artikel wurde erfolgreich aus dem Warenkorb entfernt.',
 
             'index' => [
-                'bagisto'                  => 'Bagisto', 
+                'bagisto'                  => 'Bagisto',
                 'cart'                     => 'Warenkorb',
                 'continue-shopping'        => 'Einkauf fortsetzen',
                 'empty-product'            => 'Sie haben kein Produkt in Ihrem Warenkorb.',
@@ -709,7 +709,7 @@ return [
                 ],
 
                 'index' => [
-                    'bagisto' => 'باغيستو', 
+                    'bagisto' => 'باغيستو',
                     'confirm' => 'Bestätigen',
                 ],
 
