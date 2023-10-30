@@ -3417,6 +3417,7 @@ return [
         'orders'                   => 'Siparişler',
         'products'                 => 'Ürünler',
         'promotions'               => 'Promosyonlar',
+        'reporting'                => 'Raporlama',
         'refunds'                  => 'İade İşlemleri',
         'reviews'                  => 'Yorumlar',
         'roles'                    => 'Roller',

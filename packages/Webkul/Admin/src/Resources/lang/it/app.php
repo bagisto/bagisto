@@ -3416,6 +3416,7 @@ return [
         'orders'                   => 'Ordini',
         'products'                 => 'Prodotti',
         'promotions'               => 'Promozioni',
+        'reporting'                => 'Report',
         'refunds'                  => 'Rimborsi',
         'reviews'                  => 'Recensioni',
         'roles'                    => 'Ruoli',

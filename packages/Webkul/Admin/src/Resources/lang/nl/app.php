@@ -3417,6 +3417,7 @@ return [
         'orders'                   => 'Bestellingen',
         'products'                 => 'Producten',
         'promotions'               => 'Promoties',
+        'reporting'                => 'Rapportage',
         'refunds'                  => 'Terugbetalingen',
         'reviews'                  => 'Beoordelingen',
         'roles'                    => 'Rollen',

@@ -3417,6 +3417,7 @@ return [
         'orders'                   => '注文',
         'products'                 => '製品',
         'promotions'               => 'プロモーション',
+        'reporting'                => '報告',
         'refunds'                  => '返金',
         'reviews'                  => 'レビュー',
         'roles'                    => '役割',

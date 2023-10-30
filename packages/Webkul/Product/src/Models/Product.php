@@ -443,7 +443,7 @@ class Product extends Model implements ProductContract
                 if (empty($attributeValue[$attribute->column_name])) {
                     $attributeValue = $this->attribute_values
                         ->where('channel', core()->getDefaultChannelCode())
-                        ->where('locale', core()->getDefaultChannelLocaleCode())
+                        ->where('locale', core()->getDefaultLocaleCodeFromDefaultChannel())
                         ->where('attribute_id', $attribute->id)
                         ->first();
                 }
@@ -462,7 +462,7 @@ class Product extends Model implements ProductContract
 
                 if (empty($attributeValue[$attribute->column_name])) {
                     $attributeValue = $this->attribute_values
-                        ->where('locale', core()->getDefaultChannelLocaleCode())
+                        ->where('locale', core()->getDefaultLocaleCodeFromDefaultChannel())
                         ->where('attribute_id', $attribute->id)
                         ->first();
                 }

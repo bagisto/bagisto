@@ -3417,6 +3417,7 @@ return [
         'orders'                   => 'ඇණවුම්',
         'products'                 => 'නිෂ්පාදන',
         'promotions'               => 'වෙළඳ',
+        'reporting'                => 'වාර්තා',
         'refunds'                  => 'ආපසු',
         'reviews'                  => 'සටහන්',
         'roles'                    => 'භූමිකවරු',

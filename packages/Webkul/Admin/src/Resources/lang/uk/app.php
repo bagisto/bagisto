@@ -3417,6 +3417,7 @@ return [
         'orders'                   => 'Замовлення',
         'products'                 => 'Товари',
         'promotions'               => 'Акції',
+        'reporting'                => 'Звітність',
         'refunds'                  => 'Повернення',
         'reviews'                  => 'Відгуки',
         'roles'                    => 'Ролі',

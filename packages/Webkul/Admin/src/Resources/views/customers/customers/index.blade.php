@@ -160,7 +160,7 @@
                         <div class="flex gap-[6px]">
                             <span
                                 :class="{
-                                    'label-cancelled': record.status == '',
+                                    'label-canceled': record.status == '',
                                     'label-active': record.status === 1,
                                 }"
                             >
@@ -169,7 +169,7 @@
 
                             <span
                                 :class="{
-                                    'label-cancelled': record.is_suspended === 1,
+                                    'label-canceled': record.is_suspended === 1,
                                 }"
                             >
                                 @{{ record.is_suspended ?  'Suspended' : '' }}

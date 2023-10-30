@@ -3417,6 +3417,7 @@ return [
         'orders'                   => 'הזמנות',
         'products'                 => 'מוצרים',
         'promotions'               => 'קידומות',
+        'reporting'                => 'דיווח',
         'refunds'                  => 'החזרים',
         'reviews'                  => 'ביקורות',
         'roles'                    => 'תפקידים',

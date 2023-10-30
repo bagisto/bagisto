@@ -18,14 +18,14 @@
                             @lang('admin::app.customers.customers.view.active')
                         </span>
                     @else    
-                        <span class="label-cancelled text-[14px] mx-[5px]">
+                        <span class="label-canceled text-[14px] mx-[5px]">
                             @lang('admin::app.customers.customers.view.inactive')
                         </span>
                     @endif
 
                     {{-- Customer Suspended Status --}}
                     @if ($customer->is_suspended == 1)
-                        <span class="label-cancelled text-[14px]">
+                        <span class="label-canceled text-[14px]">
                             @lang('admin::app.customers.customers.view.suspended')
                         </span>
                     @endif
@@ -141,7 +141,7 @@
                                                     @break
 
                                                 @case('canceled')
-                                                    <p class="label-cancelled">
+                                                    <p class="label-canceled">
                                                         @lang('admin::app.customers.customers.view.canceled')
                                                     </p>
                                                     @break
@@ -353,7 +353,7 @@
                                             @break
 
                                         @case('disapproved')
-                                            <p class="label-cancelled">
+                                            <p class="label-canceled">
                                                 @lang('admin::app.customers.customers.view.disapproved')
                                             </p>
                                             @break
