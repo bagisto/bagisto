@@ -3416,6 +3416,7 @@ return [
         'orders'                   => 'आदेश',
         'products'                 => 'उत्पाद',
         'promotions'               => 'प्रमोशन',
+        'reporting'                => 'रिपोर्टिंग',
         'refunds'                  => 'वापसी',
         'reviews'                  => 'समीक्षा',
         'roles'                    => 'भूमिकाएँ',

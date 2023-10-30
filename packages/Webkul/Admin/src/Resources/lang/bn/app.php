@@ -3415,6 +3415,7 @@ return [
         'orders'                   => 'অর্ডার',
         'products'                 => 'পণ্য',
         'promotions'               => 'প্রচারণা',
+        'reporting'                => 'প্রতিবেদন',
         'refunds'                  => 'ফেরত',
         'reviews'                  => 'পর্যালোচনা',
         'roles'                    => 'ভূমিকা',

@@ -3414,6 +3414,7 @@ return [
         'orders'                   => 'الطلبيات',
         'products'                 => 'المنتجات',
         'promotions'               => 'العروض',
+        'reporting'                => 'التقرير',
         'refunds'                  => 'المرتجعات',
         'reviews'                  => 'التقييمات',
         'roles'                    => 'الأدوار',
