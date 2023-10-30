@@ -22,7 +22,7 @@
                 <a
                     href="{{ route('shop.home.index') }}"
                     class="flex min-h-[30px]"
-                    aria-label="Bagisto "
+                    aria-label="@lang('shop::app.checkout.cart.index.bagisto')"
                 >
                     <img
                         src="{{ bagisto_asset('images/logo.svg') }}"
@@ -78,7 +78,7 @@
                                         for="select-all"
                                         role="button"
                                         tabindex="0"
-                                        aria-label="Select All"
+                                        aria-label="@lang('shop::app.checkout.cart.index.select-all')"
                                     >
                                     </label>
 
@@ -139,7 +139,7 @@
                                                 :for="'item_' + item.id"
                                                 role="button"
                                                 tabindex="0"
-                                                aria-label="Select Cart Item"
+                                                aria-label="@lang('shop::app.checkout.cart.index.select-cart-item')"
                                             ></label>
                                         </div>
 

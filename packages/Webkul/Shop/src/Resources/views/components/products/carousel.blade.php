@@ -16,7 +16,7 @@
                     <span
                         class="icon-arrow-left-stylish rtl:icon-arrow-right-stylish inline-block text-[24px] cursor-pointer"
                         role="button"
-                        aria-label="Previous"
+                        aria-label="@lang('shop::app.components.products.carousel.previous')"
                         tabindex="0"
                         @click="swipeLeft"
                     >
@@ -25,7 +25,7 @@
                     <span
                         class="icon-arrow-right-stylish rtl:icon-arrow-left-stylish inline-block text-[24px] cursor-pointer"
                         role="button"
-                        aria-label="Next"
+                        aria-label="@lang('shop::app.components.products.carousel.next')"
                         tabindex="0"
                         @click="swipeRight"
                     >

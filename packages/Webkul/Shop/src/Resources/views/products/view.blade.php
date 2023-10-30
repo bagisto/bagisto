@@ -287,7 +287,7 @@
                                         <div
                                             class="flex items-center justify-center min-w-[46px] min-h-[46px] max-h-[46px] bg-white border border-black rounded-full text-[24px] transition-all hover:opacity-[0.8] cursor-pointer"
                                             role="button"
-                                            aria-label="Add To Wishlist"
+                                            aria-label="@lang('shop::app.products.view.add-to-wishlist')"
                                             tabindex="0"
                                             :class="isWishlist ? 'icon-heart-fill' : 'icon-heart'"
                                             @click="addToWishlist"

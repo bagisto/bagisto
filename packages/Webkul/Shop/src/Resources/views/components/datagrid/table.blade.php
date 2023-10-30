@@ -155,13 +155,13 @@
                                         </div>
                                     </div>
 
-                                    <nav aria-label="Page Navigation">
+                                    <nav aria-label="@lang('shop::app.components.datagrid.table.page-navigation')">
                                         <ul class="inline-flex items-center -space-x-px">
                                             <li @click="$parent.changePage('previous')">
                                                 <a
                                                     href="javascript:void(0);"
                                                     class="flex items-center justify-center w-[35px] h-[37px] border border-[#E9E9E9] rounded-l-lg leading-normal font-medium hover:bg-gray-100"
-                                                    aria-label="Previous Page"
+                                                    aria-label="@lang('shop::app.components.datagrid.table.previous-page')"
                                                 >
                                                     <span class="icon-arrow-left text-[24px]"></span>
                                                 </a>
@@ -173,7 +173,7 @@
                                                     :value="$parent.available.meta.current_page"
                                                     class="px-[15px] pt-[6px] pb-[5px] max-w-[42px] border border-[#E9E9E9] leading-normal text-black font-medium text-center hover:bg-gray-100"
                                                     @change="$parent.changePage(parseInt($event.target.value))"
-                                                    aria-label="Page Number"
+                                                    aria-label="@lang('shop::app.components.datagrid.table.page-number')"
                                                 >
                                             </li>
 
@@ -181,7 +181,7 @@
                                                 <a
                                                     href="javascript:void(0);"
                                                     class="flex items-center justify-center w-[35px] h-[37px] border border-[#E9E9E9] rounded-r-lg leading-normal font-medium hover:bg-gray-100"
-                                                    aria-label="Next Page"
+                                                    aria-label="@lang('shop::app.components.datagrid.table.next-page')"
                                                 >
                                                     <span class="icon-arrow-right text-[24px]"></span>
                                                 </a>

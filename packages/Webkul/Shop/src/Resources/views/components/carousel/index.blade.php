@@ -14,7 +14,7 @@
                 :href="image.link || '#'"
                 ref="slides"
                 :key="index"
-                aria-label="Image Slide "
+                aria-label="@lang('shop::components.carousel.image-slide')"
             >
                 <x-shop::media.images.lazy
                     class="w-full aspect-[2.743/1]"
@@ -28,7 +28,7 @@
             <span
                 class="icon-arrow-left text-[24px] font-bold text-white w-auto -mt-[22px] p-[12px] absolute top-1/2 left-[10px] bg-[rgba(0,0,0,0.8)] transition-all opacity-30 rounded-full hover:opacity-100 cursor-pointer"
                 role="button"
-                aria-label="Previous"
+                aria-label="@lang('shop::components.carousel.previous')"
                 tabindex="0"
                 v-if="images?.length >= 2"
                 @click="navigate(currentIndex -= 1)"
@@ -38,7 +38,7 @@
             <span
                 class="icon-arrow-right text-[24px] font-bold text-white w-auto -mt-[22px] p-[12px] absolute top-1/2 right-[10px] bg-[rgba(0,0,0,0.8)] transition-all opacity-30 rounded-full hover:opacity-100 cursor-pointer"
                 role="button"
-                aria-label="Next"
+                aria-label="@lang('shop::components.carousel.next')"
                 tabindex="0"
                 v-if="images?.length >= 2"
                 @click="navigate(currentIndex += 1)"

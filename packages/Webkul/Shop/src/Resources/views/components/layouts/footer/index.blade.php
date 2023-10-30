@@ -71,7 +71,7 @@
                             class=" blockw-[420px] max-w-full px-[20px] py-[20px] pr-[110px] bg-[#F1EADF] border-[2px] border-[#E9DECC] rounded-[12px] text-xs font-medium max-1060:w-full"
                             rules="required|email"
                             label="Email"
-                            aria-label="Email"
+                            :aria-label="trans('shop::app.components.layouts.footer.email')"
                             placeholder="email@example.com"
                         >
                         </x-shop::form.control-group.control>
