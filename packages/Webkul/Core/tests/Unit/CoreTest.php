@@ -114,3 +114,61 @@ it('returns the default channel code', function () {
     // Assert
     expect($channelCode)->toBe($expectedChannel->code);
 });
+
+it('returns the requested channel', function () {
+    // Arrange
+    $expectedChannel = Channel::factory()->create();
+
+    request()->merge([
+        'channel' => $expectedChannel->code,
+    ]);
+
+    // Act
+    $channel = core()->getRequestedChannel();
+
+    // Assert
+    expect($channel->id)->toBe($expectedChannel->id);
+    expect($channel->code)->toBe($expectedChannel->code);
+});
+
+it('returns the current channel if the requested channel code is not provided', function () {
+    // Arrange
+    $expectedChannel = Channel::factory()->create();
+
+    core()->setCurrentChannel($expectedChannel);
+
+    // Act
+    $channel = core()->getRequestedChannel();
+
+    // Assert
+    expect($channel->id)->toBe($expectedChannel->id);
+    expect($channel->code)->toBe($expectedChannel->code);
+});
+
+it('returns the requested channel code', function () {
+    // Arrange
+    $expectedChannel = Channel::factory()->create();
+
+    request()->merge([
+        'channel' => $expectedChannel->code,
+    ]);
+
+    // Act
+    $channelCode = core()->getRequestedChannelCode();
+
+    // Assert
+    expect($channelCode)->toBe($expectedChannel->code);
+});
+
+it('returns the current channel code if requested channel code is not provided', function () {
+    // Arrange
+    $expectedChannel = Channel::factory()->create();
+
+    core()->setCurrentChannel($expectedChannel);
+
+    // Act
+    $channelCode = core()->getRequestedChannelCode();
+
+    // Assert
+    expect($channelCode)->toBe($expectedChannel->code);
+});
