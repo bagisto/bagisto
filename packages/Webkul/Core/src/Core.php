@@ -228,7 +228,7 @@ class Core
     /**
      * Get channel code from request.
      *
-     * @return string
+     * @return \Webkul\Core\Contracts\Channel
      */
     public function getRequestedChannel()
     {
