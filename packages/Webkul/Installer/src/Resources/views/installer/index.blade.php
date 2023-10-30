@@ -6,16 +6,15 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="base-url" content="{{ url()->to('/') }}">
 
         @stack('meta')
 
         @bagistoVite(['src/Resources/assets/css/app.css', 'src/Resources/assets/js/app.js'], 'installer')
 
-        {{-- <link 
+        {{-- <link
             type="image/x-icon"
-            href="{{ Storage::url($favicon) }}" 
+            href="{{ Storage::url($favicon) }}"
             rel="shortcut icon"
             sizes="16x16"
         > --}}
@@ -30,13 +29,13 @@
             rel="stylesheet"
         />
 
-        <link 
+        <link
             type="image/x-icon"
-            href="{{ asset('images/logo.svg') }}" 
+            href="{{ asset('images/logo.svg') }}"
             rel="shortcut icon"
             sizes="16x16"
         />
-        
+
         @stack('styles')
     </head>
 
@@ -202,8 +201,8 @@
                                 href="https://bagisto.com/en/"
                             >
                                 Bagisto
-                            </a> 
-                            
+                            </a>
+
                             a Community Project by
 
                             <a
@@ -242,7 +241,7 @@
                                     <p class="text-[14px] text-gray-600 font-semibold">
                                         {{ $key }}
                                     </p>
-                                </div>    
+                                </div>
                             @endforeach
                         @endforeach
                     </div>
@@ -259,7 +258,7 @@
                     @endphp
 
                     <div class="flex px-[16px] py-[10px] justify-end items-center">
-                        <div 
+                        <div
                             class="{{ $hasRequirement ? 'opacity-50 cursor-not-allowed' : ''}} px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer {{ $hasRequirement ?: 'hover:opacity-90' }}"
                             @click="nextForm"
                         >
@@ -361,7 +360,7 @@
                                     <x-installer::form.control-group.label class="required">
                                         Default Timezone
                                     </x-installer::form.control-group.label>
-                                    
+
                                     @php
                                         date_default_timezone_set('UTC');
 
@@ -423,7 +422,7 @@
                                     </x-installer::form.control-group.error>
                                 </x-installer::form.control-group>
                             </div>
-                            
+
                             <div class="flex px-[16px] py-[10px] justify-between items-center">
                                 <div
                                     class="text-[12px] text-blue-600 font-semibold cursor-pointer"
@@ -432,14 +431,14 @@
                                     Back
                                 </div>
 
-                                <button 
+                                <button
                                     type="submit"
                                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
                                 >
                                     Continue
                                 </button>
                             </div>
-                            
+
                         </form>
                     </x-installer::form>
                 </div>
@@ -463,7 +462,7 @@
                                     Environment Configuration
                                 </p>
                             </div>
-    
+
                             <div class="flex flex-col gap-[12px] px-[30px] py-[16px] border-b-[1px] border-gray-300 h-[484px] overflow-y-auto">
                                 <!-- Database Connection-->
                                 <x-installer::form.control-group class="mb-[10px]">
@@ -638,7 +637,7 @@
                                 >
                                     Back
                                 </div>
-    
+
                                 <button
                                     type="submit"
                                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
@@ -647,7 +646,7 @@
                                 </button>
                             </div>
                         </form>
-                    </x-installer::form>      
+                    </x-installer::form>
                 </div>
 
                 <!-- Ready For Installation -->
@@ -739,7 +738,7 @@
                             <p class="text-[18px] text-gray-800 font-bold">
                                 Installing Bagisto
                             </p>
-                            
+
                             <div class="grid gap-[10px]">
                                 <svg class="animate-spin h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                     <circle
@@ -751,7 +750,7 @@
                                         stroke-width="4"
                                     >
                                     </circle>
-        
+
                                     <path
                                         class="opacity-75"
                                         fill="currentColor"
@@ -784,7 +783,7 @@
                     </div>
 
                     <div class="flex px-[16px] py-[10px] justify-end items-center">
-                        <button 
+                        <button
                             type="submit"
                             class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
                             @click="nextForm"
@@ -901,16 +900,16 @@
                                     </x-installer::form.control-group.error>
                                 </x-installer::form.control-group>
                             </div>
-                            
+
                             <div class="flex px-[16px] py-[10px] justify-end items-center">
-                                <button 
+                                <button
                                     type="submit"
                                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
                                 >
                                     Continue
                                 </button>
                             </div>
-                            
+
                         </form>
                     </x-installer::form>
                 </div>
@@ -1071,16 +1070,16 @@
                                     </x-installer::form.control-group.error>
                                 </x-installer::form.control-group>
                             </div>
-                            
+
                             <div class="flex px-[16px] py-[10px] justify-end items-center">
-                                <button 
+                                <button
                                     type="submit"
                                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
                                 >
                                     Save configuration
                                 </button>
                             </div>
-                            
+
                         </form>
                     </x-installer::form>
                 </div>
@@ -1151,7 +1150,7 @@
             <script type="module">
                 app.component('v-server-requirements', {
                     template: '#v-server-requirements-template',
-            
+
                     data() {
                         return {
                             step: '',
@@ -1168,7 +1167,7 @@
                                 emailConfiguration: 'pending',
                                 installationCompleted: 'pending',
                             },
-                            
+
                             steps: [
                                 'environment',
                                 'envSetup',
