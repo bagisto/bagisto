@@ -202,6 +202,14 @@ class Core
     }
 
     /**
+     * Set the default channel.
+     */
+    public function setDefaultChannel(Channel $channel): void
+    {
+        $this->defaultChannel = $channel;
+    }
+
+    /**
      * Returns the default channel code configured in `config/app.php`.
      */
     public function getDefaultChannelCode(): string
@@ -210,9 +218,9 @@ class Core
     }
 
     /**
-     * Returns default channel locale code.
+     * Returns default locale code from default channel.
      */
-    public function getDefaultChannelLocaleCode(): string
+    public function getDefaultLocaleCodeFromDefaultChannel(): string
     {
         return $this->getDefaultChannel()->default_locale->code;
     }
