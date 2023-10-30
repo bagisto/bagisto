@@ -100,7 +100,7 @@
 
                         <v-field
                             type="text"
-                            name="{{$currentLocale->code}}[name]"
+                            name="{{ $currentLocale->code }}[name]"
                             value="{{ old($currentLocale->code)['name'] ?? ($category->translate($currentLocale->code)['name'] ?? '') }}"
                             label="{{ trans('admin::app.catalog.categories.edit.name') }}"
                             rules="required"
@@ -108,8 +108,8 @@
                         >
                             <input
                                 type="text"
-                                name="{{$currentLocale->code}}[name]"
-                                id="{{$currentLocale->code}}[name]"
+                                name="{{ $currentLocale->code }}[name]"
+                                id="{{ $currentLocale->code }}[name]"
                                 v-bind="field"
                                 :class="[errors['{{ $currentLocale->code }}[name]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
@@ -167,7 +167,7 @@
         
                             <x-admin::form.control-group.control
                                 type="textarea"
-                                name="description"
+                                name="{{ $currentLocale->code }}[description]"
                                 id="description"
                                 class="description"
                                 :value="old($currentLocale->code)['description'] ?? ($category->translate($currentLocale->code)['description'] ?? '')"
@@ -244,7 +244,7 @@
 
                             <x-admin::form.control-group.control
                                 type="text"
-                                name="{{$currentLocale->code}}[meta_title]"
+                                name="{{ $currentLocale->code }}[meta_title]"
                                 id="meta_title"
                                 :value="old($currentLocale->code)['meta_title'] ?? ($category->translate($currentLocale->code)['meta_title'] ?? '')"
                                 :label="trans('admin::app.catalog.categories.edit.meta-title')"
@@ -293,7 +293,7 @@
 
                             <x-admin::form.control-group.control
                                 type="text"
-                                name="{{$currentLocale->code}}[meta_keywords]"
+                                name="{{ $currentLocale->code }}[meta_keywords]"
                                 :value="old($currentLocale->code)['meta_keywords'] ?? ($category->translate($currentLocale->code)['meta_keywords'] ?? '')"
                                 :label="trans('admin::app.catalog.categories.edit.meta-keywords')"
                                 :placeholder="trans('admin::app.catalog.categories.edit.meta-keywords')"
@@ -309,7 +309,7 @@
 
                             <x-admin::form.control-group.control
                                 type="textarea"
-                                name="{{$currentLocale->code}}[meta_description]"
+                                name="{{ $currentLocale->code }}[meta_description]"
                                 id="meta_description"
                                 :value="old($currentLocale->code)['meta_description'] ?? ($category->translate($currentLocale->code)['meta_description'] ?? '')"
                                 :label="trans('admin::app.catalog.categories.edit.meta-description')"
