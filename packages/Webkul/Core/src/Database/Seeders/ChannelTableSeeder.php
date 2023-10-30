@@ -19,39 +19,19 @@ class ChannelTableSeeder extends Seeder
             'root_category_id'  => 1,
             'default_locale_id' => 1,
             'base_currency_id'  => 1,
+            'created_at'        => now(),
+            'updated_at'        => now(),
         ]);
 
         DB::table('channel_translations')->insert([
             [
-                'id'                => 1,
-                'channel_id'        => 1,
-                'locale'            => 'en',
-                'name'              => 'Default',
-                'home_seo'          => '{"meta_title": "Demo store", "meta_keywords": "Demo store meta keyword", "meta_description": "Demo store meta description"}',
-            ], [
-                'id'                => 2,
-                'channel_id'        => 1,
-                'locale'            => 'fr',
-                'name'              => 'Default',
-                'home_seo'          => '{"meta_title": "Demo store", "meta_keywords": "Demo store meta keyword", "meta_description": "Demo store meta description"}',
-            ], [
-                'id'                => 3,
-                'channel_id'        => 1,
-                'locale'            => 'nl',
-                'name'              => 'Default',
-                'home_seo'          => '{"meta_title": "Demo store", "meta_keywords": "Demo store meta keyword", "meta_description": "Demo store meta description"}',
-            ], [
-                'id'                => 4,
-                'channel_id'        => 1,
-                'locale'            => 'tr',
-                'name'              => 'Default',
-                'home_seo'          => '{"meta_title": "Demo store", "meta_keywords": "Demo store meta keyword", "meta_description": "Demo store meta description"}',
-            ], [
-                'id'                => 5,
-                'channel_id'        => 1,
-                'locale'            => 'es',
-                'name'              => 'Default',
-                'home_seo'          => '{"meta_title": "Demo store", "meta_keywords": "Demo store meta keyword", "meta_description": "Demo store meta description"}',
+                'id'         => 1,
+                'channel_id' => 1,
+                'locale'     => 'en',
+                'name'       => 'Default',
+                'home_seo'   => '{"meta_title": "Demo store", "meta_keywords": "Demo store meta keyword", "meta_description": "Demo store meta description"}',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ]);
 

@@ -58,7 +58,7 @@
                                     ></i>
                                 </p>
                             </div>
-    
+
                             <!-- Actions -->
                             @if ($hasPermission)
                                 <p class="flex gap-[10px] justify-end">
@@ -67,23 +67,23 @@
                             @endif
                         </div>
                     </template>
-        
+
                     <!-- DataGrid Body -->
                     <template #body="{ columns, records, performAction }">
                         <div
                             v-for="record in records"
                             class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
-                            :style="'grid-template-columns: repeat(' + (record.actions.length ? 4 : 3) + ', 1fr);'"
+                            :style="'grid-template-columns: repeat(' + (record.actions.length ? 4 : 3) + ', minmax(0, 1fr));'"
                         >
                             <!-- Id -->
                             <p v-text="record.id"></p>
-            
+
                             <!-- Status -->
                             <p v-text="record.status"></p>
-            
+
                             <!-- Email -->
                             <p v-text="record.email"></p>
-            
+
                             <!-- Actions -->
                             <div class="flex justify-end">
                                 <a @click="id=1; editModal(record.actions.find(action => action.title === 'Edit')?.url)">
@@ -93,7 +93,7 @@
                                     >
                                     </span>
                                 </a>
-    
+
                                 <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
                                     <span
                                         :class="record.actions.find(action => action.method === 'DELETE')?.icon"
@@ -116,14 +116,14 @@
                         ref="subscriberCreateForm"
                     >
                         <!-- Create Group Modal -->
-                        <x-admin::modal ref="groupCreateModal">          
+                        <x-admin::modal ref="groupCreateModal">
                             <x-slot:header>
                                 <!-- Modal Header -->
                                 <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                     @lang('admin::app.marketing.communications.subscribers.index.edit.title')
-                                </p>    
+                                </p>
                             </x-slot:header>
-            
+
                             <x-slot:content>
                                 <!-- Modal Content -->
                                 <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
@@ -139,7 +139,7 @@
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.marketing.communications.subscribers.index.edit.email')
                                         </x-admin::form.control-group.label>
-            
+
                                         <x-admin::form.control-group.control
                                             type="hidden"
                                             name="id"
@@ -158,7 +158,7 @@
                                             disabled
                                         >
                                         </x-admin::form.control-group.control>
-            
+
                                         <x-admin::form.control-group.error
                                             control-name="email"
                                         >
@@ -171,7 +171,7 @@
                                             @lang('admin::app.marketing.communications.subscribers.index.edit.subscribed')
                                         </x-admin::form.control-group.label>
 
-                                        @php 
+                                        @php
                                             $selectedOption = old('status');
                                         @endphp
 
@@ -184,14 +184,14 @@
                                             :label="trans('admin::app.marketing.communications.subscribers.index.edit.subscribed')"
                                         >
                                             @foreach (['true', 'false'] as $state)
-                                                <option 
+                                                <option
                                                     value="{{ $state == 'true' ? 1 : 0 }}"
                                                 >
                                                     @lang('admin::app.marketing.communications.subscribers.index.edit.' . $state)
                                                 </option>
                                             @endforeach
                                         </x-admin::form.control-group.control>
-            
+
                                         <x-admin::form.control-group.error
                                             control-name="is_subscribed"
                                         >
@@ -199,11 +199,11 @@
                                     </x-admin::form.control-group>
                                 </div>
                             </x-slot:content>
-            
+
                             <x-slot:footer>
                                 <!-- Modal Submission -->
                                 <div class="flex gap-x-[10px] items-center">
-                                    <button 
+                                    <button
                                         type="submit"
                                         class="primary-button"
                                     >

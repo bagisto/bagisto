@@ -17,6 +17,11 @@ class Channel extends TranslatableModel implements ChannelContract
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'code',
         'name',
@@ -32,6 +37,11 @@ class Channel extends TranslatableModel implements ChannelContract
         'allowed_ips',
     ];
 
+    /**
+     * Translated attributes.
+     *
+     * @var array
+     */
     public $translatedAttributes = [
         'name',
         'description',

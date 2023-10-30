@@ -1,6 +1,10 @@
 {{-- Mini Cart Vue Component --}}
 <v-mini-cart>
-    <span class="icon-cart text-[24px] cursor-pointer"></span>
+    <span
+        class="icon-cart text-[24px] cursor-pointer"
+        role="button"
+        aria-label="@lang('shop::app.checkout.cart.mini-cart.shopping-cart')"
+    ></span>
 </v-mini-cart>
 
 @pushOnce('scripts')
@@ -9,7 +13,12 @@
             <!-- Drawer Toggler -->
             <x-slot:toggle>
                 <span class="relative">
-                    <span class="icon-cart text-[24px] cursor-pointer"></span>
+                    <span
+                        class="icon-cart text-[24px] cursor-pointer"
+                        role="button"
+                        aria-label="@lang('shop::app.checkout.cart.mini-cart.shopping-cart')"
+                        tabindex="0"
+                    ></span>
 
                     <span
                         class="absolute  px-[7px] top-[-15px] left-[18px] py-[5px] bg-[#060C3B] rounded-[44px] text-white text-[10px] font-semibold leading-[9px]"

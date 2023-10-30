@@ -17,9 +17,9 @@
         @endif
 
         <div class="flex justify-between items-center mt-[30px]">
-            <h2 class="text-[26px] font-medium">
+            <h1 class="text-[26px] font-medium">
                 @lang('shop::app.search.title', ['query' => request()->query('query')])
-            </h2>
+            </h1>
         </div>
     </div>
         

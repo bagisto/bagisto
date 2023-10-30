@@ -16,7 +16,5 @@ class NotificationServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
         $this->app->register(EventServiceProvider::class);
-
-        $this->app->register(ModuleServiceProvider::class);
     }
 }

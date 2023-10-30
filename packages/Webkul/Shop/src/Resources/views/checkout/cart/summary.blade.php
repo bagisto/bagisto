@@ -1,5 +1,8 @@
 <div class="w-[418px] max-w-full">
-    <p class="text-[26px] font-medium">
+    <p
+        class="text-[26px] font-medium"
+        role="heading"
+    >
         @lang('shop::app.checkout.cart.summary.cart-summary')
     </p>
 

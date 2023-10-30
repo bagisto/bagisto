@@ -1,0 +1,22 @@
+name: Linting Tests
+
+on: [push, pull_request]
+
+jobs:
+  linting_tests:
+    runs-on: ${{ matrix.operating-systems }}
+
+    strategy:
+      matrix:
+        operating-systems: [ubuntu-latest]
+        php-versions: ['8.1']
+
+    name: PHP ${{ matrix.php-versions }} test on ${{ matrix.operating-systems }}
+
+    steps:
+        - uses: actions/checkout@v1
+        - name: Running Pint Test
+          uses: aglipanci/laravel-pint-action@2.0.0
+          with:
+            testMode: true
+            verboseMode: true

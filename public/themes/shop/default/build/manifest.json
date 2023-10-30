@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-de506919.css",
+    "file": "assets/app-1b955b16.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -64,6 +64,10 @@
     "file": "assets/small-product-placeholder-64b7f208.webp",
     "src": "src/Resources/assets/images/small-product-placeholder.webp"
   },
+  "src/Resources/assets/images/spinner.svg": {
+    "file": "assets/spinner-51c5cf50.svg",
+    "src": "src/Resources/assets/images/spinner.svg"
+  },
   "src/Resources/assets/images/thank-you.png": {
     "file": "assets/thank-you-aa4a2b62.png",
     "src": "src/Resources/assets/images/thank-you.png"
@@ -84,7 +88,7 @@
     "css": [
       "assets/app-05f8acf7.css"
     ],
-    "file": "assets/app-b6c8e5aa.js",
+    "file": "assets/app-aa4b60e6.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   }

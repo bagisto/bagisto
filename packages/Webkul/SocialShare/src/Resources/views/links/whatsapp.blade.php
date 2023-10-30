@@ -16,6 +16,8 @@
                 data-action="share/whatsapp/share" 
                 target="_blank"
                 aria-label="Whatsapp"
+                role="button"
+                tabindex="0"
             >
                 @include('social_share::icons.whatsapp')
             </a>

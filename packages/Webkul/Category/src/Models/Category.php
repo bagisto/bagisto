@@ -155,7 +155,7 @@ class Category extends TranslatableModel implements CategoryContract
             return url($categoryTranslation->url_path);
         }
 
-        return url($this->translate(core()->getDefaultChannelLocaleCode())->url_path);
+        return url($this->translate(core()->getDefaultLocaleCodeFromDefaultChannel())->url_path);
     }
 
     /**
@@ -199,7 +199,7 @@ class Category extends TranslatableModel implements CategoryContract
      */
     protected function getFallbackLocale(string $locale = null): ?string
     {
-        if ($fallback = core()->getDefaultChannelLocaleCode()) {
+        if ($fallback = core()->getDefaultLocaleCodeFromDefaultChannel()) {
             return $fallback;
         }
 
