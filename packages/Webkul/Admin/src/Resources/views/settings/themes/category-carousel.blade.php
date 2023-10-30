@@ -1,4 +1,4 @@
-<!-- Todays Details Vue Component -->
+<!-- Category Carousel Component -->
 <v-category-theme></v-category-theme>
 
 @pushOnce('scripts')
