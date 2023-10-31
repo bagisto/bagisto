@@ -109,7 +109,7 @@
         @include('admin::settings.themes.static-content')
    
         <!-- Footer Template -->
-        @include('admin::settings.themes.footer-link')
+        @include('admin::settings.themes.footer-links')
 
         <!-- Parent Theme Customizer Component -->
         <script type="module">
@@ -127,7 +127,7 @@
                             category_carousel: 'v-category-carousel',
                             static_content: 'v-static-content',
                             image_carousel: 'v-image-carousel',
-                            footer_links: 'v-footer-link',
+                            footer_links: 'v-footer-links',
                         } 
                     };
                 },
