@@ -25,10 +25,10 @@
 
                         <v-field
                             type="text"
-                            name="options[title]"
-                            value="{{ $theme->options['title'] ?? '' }}"
+                            name="{{ $currentLocale->code }}[options][title]"
+                            value="{{ $theme->translate($currentLocale->code)->options['title'] ?? '' }}"
                             class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
-                            :class="[errors['options[title]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                            :class="[errors['{{ $currentLocale->code }}[options][title]'] ? 'border border-red-600 hover:border-red-600' : '']"
                             rules="required"
                             label="@lang('admin::app.settings.themes.edit.filter-title')"
                             placeholder="@lang('admin::app.settings.themes.edit.filter-title')"
@@ -36,7 +36,7 @@
                         </v-field>
 
                         <x-admin::form.control-group.error
-                            control-name="options[title]"
+                            control-name="{{ $currentLocale->code }}[options][title]"
                         >
                         </x-admin::form.control-group.error>
                     </x-admin::form.control-group>
@@ -47,17 +47,17 @@
                         </x-admin::form.control-group.label>
 
                         <v-field
-                            name="options[filters][sort]"
+                            name="{{ $currentLocale->code }}[options][filters][sort]"
                             v-slot="{ field }"
                             rules="required"
-                            value="{{ $theme->options['filters']['sort'] ?? '' }}"
+                            value="{{ $theme->translate($currentLocale->code)->options['filters']['sort'] ?? '' }}"
                             label="@lang('admin::app.settings.themes.edit.sort')"
                         >
                             <select
-                                name="options[filters][sort]"
+                                name="{{ $currentLocale->code }}[options][filters][sort]"
                                 v-bind="field"
                                 class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 dark:hover:border-gray-400"
-                                :class="[errors['options[filters][sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                :class="[errors['{{ $currentLocale->code }}[options][filters][sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                             >
                                 <option value="" selected disabled>
                                     @lang('admin::app.settings.themes.edit.select')
@@ -73,7 +73,7 @@
                         </v-field>
 
                         <x-admin::form.control-group.error
-                            control-name="options[filters][sort]"
+                            control-name="{{ $currentLocale->code }}[options][filters][sort]"
                         >
                         </x-admin::form.control-group.error>
                     </x-admin::form.control-group>
@@ -85,10 +85,10 @@
 
                         <v-field
                             type="select"
-                            name="options[filters][limit]"
+                            name="{{ $currentLocale->code }}[options][filters][limit]"
                             v-slot="{ field }"
                             rules="required"
-                            value="{{ $theme->options['filters']['limit'] ?? '' }}"
+                            value="{{ $theme->translate($currentLocale->code)->options['filters']['limit'] ?? '' }}"
                             label="@lang('admin::app.settings.themes.edit.limit')"
                         >
                             <select
@@ -106,7 +106,7 @@
                         </v-field>
 
                         <x-admin::form.control-group.error
-                            control-name="options[filters][limit]"
+                            control-name="{{ $currentLocale->code }}[options][filters][limit]"
                         >
                         </x-admin::form.control-group.error>
                     </x-admin::form.control-group>
@@ -139,7 +139,7 @@
                         <!-- Hidden Input -->
                         <input
                             type="hidden"
-                            :name="'options[filters][' + filter.key +']'"
+                            :name="'{{ $currentLocale->code }}[options][filters][' + filter.key +']'"
                             :value="filter.value"
                         /> 
                     
@@ -400,7 +400,7 @@
 
             data() {
                 return {
-                    options: @json($theme->options),
+                    options: @json($theme->translate($currentLocale->code)['options'] ?? null),
                 };
             },
 
