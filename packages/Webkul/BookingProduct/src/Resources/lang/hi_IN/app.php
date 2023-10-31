@@ -65,26 +65,26 @@ return [
                 'open'                      => 'खुला हुआ',
                 'close'                     => 'बंद करना',
                 'time-error'                => 'समय को समय से बड़ा होना चाहिए।',
-            ]
+            ],
         ],
 
         'sales' => [
             'bookings' => [
-                'title' => 'बुकिंग के',
-                'table-view' => "तालिका दृश्य",
-                'calender-view' => "कैलेंडर दृश्य",
-            ]
+                'title'         => 'बुकिंग के',
+                'table-view'    => 'तालिका दृश्य',
+                'calender-view' => 'कैलेंडर दृश्य',
+            ],
         ],
 
         'datagrid' => [
             'from' => 'से',
-            'to' => 'प्रति'
-        ] 
+            'to'   => 'प्रति',
+        ],
     ],
 
     'shop' => [
         'products' => [
-            'booking-information' => 'बुकिंग जानकारी',
+            'booking-information'       => 'बुकिंग जानकारी',
             'location'                  => 'स्थान',
             'contact'                   => 'संपर्क करें',
             'email'                     => 'ईमेल',
@@ -103,7 +103,7 @@ return [
             'book-an-appointment'       => 'एक अपॉइंटमेंट बुक करें',
             'date'                      => 'तारीख',
             'slot'                      => 'स्लॉट',
-            'no-slots-available' => 'No slots available',
+            'no-slots-available'        => 'No slots available',
             'rent-an-item'              => 'एक वस्तु किराए पर लें',
             'choose-rent-option'        => 'किराया विकल्प चुनें',
             'daily-basis'               => 'दैनिक आधार पर',
@@ -123,7 +123,7 @@ return [
             'total-tickets'             => 'कुल टिकट',
             'base-price'                => 'आधार मूल्य',
             'total-price'               => 'कुल कीमत',
-            'base-price-info'           => '(यह प्रत्येक मात्रा के लिए प्रत्येक प्रकार के टिकट पर लागू होगा)'
+            'base-price-info'           => '(यह प्रत्येक मात्रा के लिए प्रत्येक प्रकार के टिकट पर लागू होगा)',
         ],
 
         'cart' => [
@@ -139,6 +139,6 @@ return [
             'booking-from'  => 'बुकिंग फ्रॉम',
             'booking-till'  => 'बुकिंग टिल',
             'special-note'  => 'विशेष अनुरोध/नोट्स',
-        ]
-    ]
+        ],
+    ],
 ];
