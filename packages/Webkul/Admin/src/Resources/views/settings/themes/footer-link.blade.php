@@ -1,8 +1,8 @@
 <!-- Todays Details Vue Component -->
-<v-footer-link-theme></v-footer-link-theme>
+<v-footer-link></v-footer-link>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-footer-link-theme-template">
+    <script type="text/x-template" id="v-footer-link-template">
         <div>
             <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                 <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
@@ -385,8 +385,8 @@
     </script>
 
     <script type="module">
-        app.component('v-footer-link-theme', {
-            template: '#v-footer-link-theme-template',
+        app.component('v-footer-link', {
+            template: '#v-footer-link-template',
 
             props: ['errors'],
 

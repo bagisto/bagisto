@@ -120,14 +120,14 @@
 
                 data() {
                     return {
-                        componentName: 'v-slider-theme',
+                        componentName: 'v-image-carousel',
 
                         themeType: {
-                            product_carousel: 'v-product-theme',
-                            category_carousel: 'v-category-theme',
-                            static_content: 'v-static-theme',
-                            image_carousel: 'v-slider-theme',
-                            footer_links: 'v-footer-link-theme',
+                            product_carousel: 'v-product-carousel',
+                            category_carousel: 'v-category-carousel',
+                            static_content: 'v-static-content',
+                            image_carousel: 'v-image-carousel',
+                            footer_links: 'v-footer-link',
                         } 
                     };
                 },

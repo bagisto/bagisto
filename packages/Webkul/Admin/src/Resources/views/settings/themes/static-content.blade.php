@@ -1,8 +1,8 @@
 <!-- Static-Content Component -->
-<v-static-theme></v-static-theme>
+<v-static-content></v-static-content>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-static-theme-template">
+    <script type="text/x-template" id="v-static-content-template">
         <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
             <div class="flex flex-col gap-[8px] flex-1 min-w-[931px] max-xl:flex-auto">
                 <div class="p-[16px] bg-white dark:bg-gray-900 rounded box-shadow">
@@ -240,8 +240,8 @@
     </script>
 
     <script type="module">
-        app.component('v-static-theme', {
-            template: '#v-static-theme-template',
+        app.component('v-static-content', {
+            template: '#v-static-content-template',
 
             props: ['errors'],
 

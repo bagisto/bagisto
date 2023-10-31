@@ -1,8 +1,8 @@
 <!-- Image-Carousel Component -->
-<v-product-theme></v-product-theme>
+<v-product-carousel></v-product-carousel>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-product-theme-template">
+    <script type="text/x-template" id="v-product-carousel-template">
         <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                 <div class="p-[16px] bg-white dark:bg-gray-900 rounded box-shadow">
@@ -393,8 +393,8 @@
     </script>
 
     <script type="module">
-        app.component('v-product-theme', {
-            template: '#v-product-theme-template',
+        app.component('v-product-carousel', {
+            template: '#v-product-carousel-template',
 
             props: ['errors'],
 

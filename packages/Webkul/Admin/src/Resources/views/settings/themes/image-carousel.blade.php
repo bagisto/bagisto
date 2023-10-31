@@ -1,8 +1,8 @@
 <!-- Image-Carousel Component -->
-<v-slider-theme></v-slider-theme>
+<v-image-carousel></v-image-carousel>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-slider-theme-template">
+    <script type="text/x-template" id="v-image-carousel-template">
         <div>
             <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                 <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
@@ -370,8 +370,8 @@
     </script>
 
     <script type="module">
-        app.component('v-slider-theme', {
-            template: '#v-slider-theme-template',
+        app.component('v-image-carousel', {
+            template: '#v-image-carousel-template',
 
             props: ['errors'],
 

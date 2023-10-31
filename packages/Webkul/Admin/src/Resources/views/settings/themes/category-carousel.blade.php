@@ -1,8 +1,8 @@
 <!-- Category Carousel Component -->
-<v-category-theme></v-category-theme>
+<v-category-carousel></v-category-carousel>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-category-theme-template">
+    <script type="text/x-template" id="v-category-carousel-template">
         <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                 <div class="p-[16px] bg-white dark:bg-gray-900 rounded box-shadow">
@@ -366,8 +366,8 @@
     </script>
 
     <script type="module">
-        app.component('v-category-theme', {
-            template: '#v-category-theme-template',
+        app.component('v-category-carousel', {
+            template: '#v-category-carousel-template',
 
             props: ['errors'],
 
