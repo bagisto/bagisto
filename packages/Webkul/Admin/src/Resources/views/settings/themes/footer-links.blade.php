@@ -40,10 +40,10 @@
                                 v-for="(link, key) in footerLink"
                             >
                                 <!-- Hidden Input -->
-                                <input type="hidden" :name="'options['+ link.column +'][' + key +']'" :value="link.column"> 
-                                <input type="hidden" :name="'options['+ link.column +'][' + key +'][url]'" :value="link.url"> 
-                                <input type="hidden" :name="'options['+ link.column +'][' + key +'][title]'" :value="link.title"> 
-                                <input type="hidden" :name="'options['+ link.column +'][' + key +'][sort_order]'" :value="link.sort_order"> 
+                                <input type="hidden" :name="'{{ $currentLocale->code }}[options][' + link.column + '][' + key + ']'" :value="link.column"> 
+                                <input type="hidden" :name="'{{ $currentLocale->code }}[options][' + link.column + '][' + key + '][url]'" :value="link.url"> 
+                                <input type="hidden" :name="'{{ $currentLocale->code }}[options][' + link.column + '][' + key + '][title]'" :value="link.title"> 
+                                <input type="hidden" :name="'{{ $currentLocale->code }}[options][' + link.column + '][' + key + '][sort_order]'" :value="link.sort_order"> 
                                 
                                 <div class="flex gap-[10px] justify-between py-5 cursor-pointer">
                                     <div class="flex gap-[10px] ">
@@ -392,7 +392,7 @@
 
             data() {
                 return {
-                    footerLinks: @json($theme->options),
+                    footerLinks: @json($theme->translate($currentLocale->code)['options'] ?? null),
 
                     isUpdating: false,
                 };

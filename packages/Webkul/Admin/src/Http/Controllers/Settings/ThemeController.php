@@ -100,6 +100,10 @@ class ThemeController extends Controller
             $data[$locale]['options']['css'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $data[$locale]['options']['css']);
         }
 
+        if ($data['type'] == 'footer_links') {
+            $data[$locale]['options'];
+        }
+
         $data['status'] = request()->input('status') == 'on';
 
         if ($data['type'] == 'image_carousel') {
