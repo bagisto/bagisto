@@ -10,7 +10,7 @@ class BookingProductDefaultSlot extends Model implements BookingProductDefaultSl
     protected $table = 'booking_product_default_slots';
 
     public $timestamps = false;
-    
+
     protected $casts = ['slots' => 'array'];
 
     protected $fillable = [
@@ -18,7 +18,7 @@ class BookingProductDefaultSlot extends Model implements BookingProductDefaultSl
         'duration',
         'break_time',
         'slots',
-        'booking_product_id'
+        'booking_product_id',
     ];
 
     /**

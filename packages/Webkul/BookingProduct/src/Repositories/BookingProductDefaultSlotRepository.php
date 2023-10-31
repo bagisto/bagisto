@@ -8,10 +8,8 @@ class BookingProductDefaultSlotRepository extends Repository
 {
     /**
      * Specify Model class name
-     *
-     * @return string
      */
-    function model(): string
+    public function model(): string
     {
         return 'Webkul\BookingProduct\Contracts\BookingProductDefaultSlot';
     }

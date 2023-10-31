@@ -2,8 +2,8 @@
 
 namespace Webkul\BookingProduct\Helpers;
 
-use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Product\DataTypes\CartItemValidationResult;
@@ -28,7 +28,7 @@ class RentalSlot extends Booking
             return [];
         }
 
-        $requestedDate = Carbon::createFromTimeString($date . " 00:00:00");
+        $requestedDate = Carbon::createFromTimeString($date . ' 00:00:00');
 
         $currentTime = Carbon::now();
 
@@ -142,13 +142,13 @@ class RentalSlot extends Booking
             ->leftJoin('order_items', 'bookings.order_item_id', '=', 'order_items.id')
             ->addSelect(DB::raw('SUM(qty_ordered - qty_canceled - qty_refunded) as total_qty_booked'))
             ->where('bookings.product_id', $data['product_id'])
-            ->where(function ($query) use($from, $to) {
-                $query->where(function ($query) use($from) {
+            ->where(function ($query) use ($from, $to) {
+                $query->where(function ($query) use ($from) {
                     $query->where('bookings.from', '<=', $from)->where('bookings.to', '>=', $from);
                 })
-                ->orWhere(function($query) use($to) {
-                    $query->where('bookings.from', '<=', $to)->where('bookings.to', '>=', $to);
-                });
+                    ->orWhere(function ($query) use ($to) {
+                        $query->where('bookings.from', '<=', $to)->where('bookings.to', '>=', $to);
+                    });
             })
             ->first();
 
@@ -182,9 +182,9 @@ class RentalSlot extends Booking
         } else {
             $currentTime = Carbon::now();
 
-            $requestedFromDate = Carbon::createFromTimeString($cartItem['additional']['booking']['date_from'] . " 00:00:00");
+            $requestedFromDate = Carbon::createFromTimeString($cartItem['additional']['booking']['date_from'] . ' 00:00:00');
 
-            $requestedToDate = Carbon::createFromTimeString($cartItem['additional']['booking']['date_to'] . " 23:59:59");
+            $requestedToDate = Carbon::createFromTimeString($cartItem['additional']['booking']['date_to'] . ' 23:59:59');
 
             $availableFrom = ! $bookingProduct->available_every_week && $bookingProduct->available_from
                 ? Carbon::createFromTimeString($bookingProduct->available_from->format('Y-m-d') . ' 00:00:00')
@@ -220,8 +220,8 @@ class RentalSlot extends Booking
         $rentingType = $products[0]['additional']['booking']['renting_type'] ?? $bookingProduct->rental_slot->renting_type;
 
         if ($rentingType == 'daily') {
-            $from = Carbon::createFromTimeString($products[0]['additional']['booking']['date_from'] . " 00:00:00");
-            $to = Carbon::createFromTimeString($products[0]['additional']['booking']['date_to'] . " 24:00:00");
+            $from = Carbon::createFromTimeString($products[0]['additional']['booking']['date_from'] . ' 00:00:00');
+            $to = Carbon::createFromTimeString($products[0]['additional']['booking']['date_to'] . ' 24:00:00');
 
             $price = $bookingProduct->rental_slot->daily_price * $to->diffInDays($from);
         } else {
@@ -241,10 +241,6 @@ class RentalSlot extends Booking
 
     /**
      * Validate cart item product price
-     *
-     * @param \Webkul\Checkout\Models\CartItem $item
-     *
-     * @return \Webkul\Product\DataTypes\CartItemValidationResult
      */
     public function validateCartItem(CartItem $item): CartItemValidationResult
     {
@@ -272,8 +268,8 @@ class RentalSlot extends Booking
                 return $result;
             }
 
-            $from = Carbon::createFromTimeString($item->additional['booking']['date_from'] . " 00:00:00");
-            $to = Carbon::createFromTimeString($item->additional['booking']['date_to'] . " 24:00:00");
+            $from = Carbon::createFromTimeString($item->additional['booking']['date_from'] . ' 00:00:00');
+            $to = Carbon::createFromTimeString($item->additional['booking']['date_to'] . ' 24:00:00');
 
             $price += $bookingProduct->rental_slot->daily_price * $to->diffInDays($from);
         } else {

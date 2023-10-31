@@ -9,7 +9,6 @@ class Order
     /**
      * Create a new listener instance.
      *
-     * @param  \Webkul\BookingProduct\Repositories\BookingRepository  $bookingRepository
      * @return void
      */
     public function __construct(protected BookingRepository $bookingRepository)

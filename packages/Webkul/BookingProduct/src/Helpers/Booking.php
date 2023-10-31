@@ -2,19 +2,18 @@
 
 namespace Webkul\BookingProduct\Helpers;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Arr;
 use Carbon\Carbon;
-use Webkul\BookingProduct\Repositories\BookingProductRepository;
-use Webkul\BookingProduct\Repositories\BookingProductDefaultSlotRepository;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Webkul\BookingProduct\Repositories\BookingProductAppointmentSlotRepository;
+use Webkul\BookingProduct\Repositories\BookingProductDefaultSlotRepository;
 use Webkul\BookingProduct\Repositories\BookingProductEventTicketRepository;
 use Webkul\BookingProduct\Repositories\BookingProductRentalSlotRepository;
+use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\BookingProduct\Repositories\BookingProductTableSlotRepository;
 use Webkul\BookingProduct\Repositories\BookingRepository;
-use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Checkout\Models\CartItem;
-
+use Webkul\Product\DataTypes\CartItemValidationResult;
 
 class Booking
 {
@@ -50,13 +49,6 @@ class Booking
     /**
      * Create a new helper instance.
      *
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductRepository  $bookingProductRepository
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductDefaultSlotRepository  $bookingProductDefaultSlotRepository
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductAppointmentSlotRepository  $bookingProductAppointmentSlotRepository
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductEventTicketRepository  $bookingProductEventTicketRepository
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductRentalSlotRepository  $bookingProductRentalSlotRepository
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductTableSlotRepository  $bookingProductTableSlotRepository
-     * @param  \Webkul\BookingProduct\Repositories\BookingRepository  $bookingRepository
      * @return void
      */
     public function __construct(
@@ -67,8 +59,7 @@ class Booking
         BookingProductEventTicketRepository $bookingProductEventTicketRepository,
         BookingProductRentalSlotRepository $bookingProductRentalSlotRepository,
         BookingProductTableSlotRepository $bookingProductTableSlotRepository,
-    )
-    {
+    ) {
         $this->typeRepositories['default'] = $bookingProductDefaultSlotRepository;
 
         $this->typeRepositories['appointment'] = $bookingProductAppointmentSlotRepository;
@@ -206,7 +197,7 @@ class Booking
         foreach ($days as $day) {
             $key = array_search($day, $this->daysOfWeek);
 
-            if ($key !== FALSE) {
+            if ($key !== false) {
                 $daysAux[$key] = $day;
             }
         }
@@ -229,9 +220,9 @@ class Booking
         }
 
         foreach ($slots as $index => $slot) {
-            $slots[$index]['from']  = Carbon::createFromTimeString($slot['from'])->format("h:i a");
-            
-            $slots[$index]['to']  = Carbon::createFromTimeString($slot['to'])->format("h:i a");
+            $slots[$index]['from'] = Carbon::createFromTimeString($slot['from'])->format('h:i a');
+
+            $slots[$index]['to'] = Carbon::createFromTimeString($slot['to'])->format('h:i a');
         }
 
         return $slots;
@@ -257,7 +248,7 @@ class Booking
 
         $currentTime = Carbon::now();
 
-        $requestedDate = Carbon::createFromTimeString($date . " 00:00:00");
+        $requestedDate = Carbon::createFromTimeString($date . ' 00:00:00');
 
         $availableFrom = ! $bookingProduct->available_every_week && $bookingProduct->available_from
             ? Carbon::createFromTimeString($bookingProduct->available_from)
@@ -450,7 +441,7 @@ class Booking
                         'attribute_name' => trans('bookingproduct::app.shop.cart.event-till'),
                         'option_id'      => 0,
                         'option_label'   => Carbon::createFromTimeString($bookingProduct->available_to)->format('d F, Y'),
-                    ]
+                    ],
                 ];
 
                 break;
@@ -459,9 +450,9 @@ class Booking
                 $rentingType = $data['booking']['renting_type'] ?? $bookingProduct->rental_slot->renting_type;
 
                 if ($rentingType == 'daily') {
-                    $from = Carbon::createFromTimeString($data['booking']['date_from'] . " 00:00:01")->format('d F, Y');
+                    $from = Carbon::createFromTimeString($data['booking']['date_from'] . ' 00:00:01')->format('d F, Y');
 
-                    $to = Carbon::createFromTimeString($data['booking']['date_to'] . " 23:59:59")->format('d F, Y');
+                    $to = Carbon::createFromTimeString($data['booking']['date_to'] . ' 23:59:59')->format('d F, Y');
                 } else {
                     $from = Carbon::createFromTimestamp($data['booking']['slot']['from'])->format('d F, Y h:i A');
 
@@ -481,7 +472,7 @@ class Booking
                         'attribute_name' => trans('bookingproduct::app.shop.cart.rent-till'),
                         'option_id'      => 0,
                         'option_label'   => $to,
-                    ]
+                    ],
                 ];
 
                 break;
@@ -498,7 +489,7 @@ class Booking
                         'attribute_name' => trans('bookingproduct::app.shop.cart.booking-till'),
                         'option_id'      => 0,
                         'option_label'   => Carbon::createFromTimestamp($timestamps[1])->format('d F, Y h:i A'),
-                    ]
+                    ],
                 ];
 
                 if ($data['booking']['note'] != '') {
@@ -523,7 +514,7 @@ class Booking
                         'attribute_name' => trans('bookingproduct::app.shop.cart.booking-till'),
                         'option_id'      => 0,
                         'option_label'   => Carbon::createFromTimestamp($timestamps[1])->format('d F, Y h:i A'),
-                    ]
+                    ],
                 ];
 
                 break;
@@ -545,10 +536,6 @@ class Booking
 
     /**
      * Validate cart item product price
-     *
-     * @param \Webkul\Checkout\Models\CartItem $item
-     *
-     * @return \Webkul\Product\DataTypes\CartItemValidationResult
      */
     public function validateCartItem(CartItem $item): CartItemValidationResult
     {
@@ -579,10 +566,6 @@ class Booking
 
     /**
      * Returns true, if cart item is inactive
-     *
-     * @param \Webkul\Checkout\Contracts\CartItem $item
-     *
-     * @return bool
      */
     public function isCartItemInactive(\Webkul\Checkout\Contracts\CartItem $item): bool
     {

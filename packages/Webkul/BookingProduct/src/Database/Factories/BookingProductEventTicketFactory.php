@@ -2,8 +2,8 @@
 
 namespace Webkul\BookingProduct\Database\Factories;
 
-use Webkul\BookingProduct\Models\BookingProduct;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Webkul\BookingProduct\Models\BookingProduct;
 use Webkul\BookingProduct\Models\BookingProductEventTicket;
 
 class BookingProductEventTicketFactory extends Factory
@@ -17,8 +17,6 @@ class BookingProductEventTicketFactory extends Factory
 
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
     public function definition(): array
     {

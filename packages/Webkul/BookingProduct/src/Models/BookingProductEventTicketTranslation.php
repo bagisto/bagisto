@@ -8,7 +8,7 @@ use Webkul\BookingProduct\Contracts\BookingProductEventTicketTranslation as Book
 class BookingProductEventTicketTranslation extends Model implements BookingProductEventTicketTranslationContract
 {
     public $timestamps = false;
-    
+
     protected $fillable = [
         'name',
         'description',

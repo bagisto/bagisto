@@ -3,11 +3,11 @@
 namespace Webkul\BookingProduct\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Model;
-use Webkul\Product\Models\ProductProxy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Webkul\BookingProduct\Database\Factories\BookingProductFactory;
+use Illuminate\Database\Eloquent\Model;
 use Webkul\BookingProduct\Contracts\BookingProduct as BookingProductContract;
+use Webkul\BookingProduct\Database\Factories\BookingProductFactory;
+use Webkul\Product\Models\ProductProxy;
 
 class BookingProduct extends Model implements BookingProductContract
 {
@@ -79,8 +79,6 @@ class BookingProduct extends Model implements BookingProductContract
 
     /**
      * Create a new factory instance for the model.
-     *
-     * @return Factory
      */
     protected static function newFactory(): Factory
     {

@@ -4,8 +4,8 @@ namespace Webkul\BookingProduct\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Webkul\BookingProduct\Contracts\Booking as BookingContract;
-use Webkul\Sales\Models\OrderProxy;
 use Webkul\Sales\Models\OrderItemProxy;
+use Webkul\Sales\Models\OrderProxy;
 
 class Booking extends Model implements BookingContract
 {

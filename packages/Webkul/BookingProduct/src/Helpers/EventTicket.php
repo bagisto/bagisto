@@ -2,11 +2,11 @@
 
 namespace Webkul\BookingProduct\Helpers;
 
-use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Webkul\Checkout\Facades\Cart;
-use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Checkout\Models\CartItem;
+use Webkul\Product\DataTypes\CartItemValidationResult;
 
 class EventTicket extends Booking
 {
@@ -68,7 +68,7 @@ class EventTicket extends Booking
     }
 
     /**
-     * @param \Webkul\Checkout\Contracts\CartItem|array  $cartItem
+     * @param  \Webkul\Checkout\Contracts\CartItem|array  $cartItem
      * @return bool
      */
     public function isItemHaveQuantity($cartItem)
@@ -114,7 +114,7 @@ class EventTicket extends Booking
             $ticket = $bookingProduct->event_tickets()->find($product['additional']['booking']['ticket_id']);
 
             $price = $ticket->price;
-            
+
             if ($this->isInSale($ticket)) {
                 $price = $ticket->special_price;
             }
@@ -130,10 +130,6 @@ class EventTicket extends Booking
 
     /**
      * Validate cart item product price
-     *
-     * @param \Webkul\Checkout\Models\CartItem $item
-     *
-     * @return \Webkul\Product\DataTypes\CartItemValidationResult
      */
     public function validateCartItem(CartItem $item): CartItemValidationResult
     {
@@ -180,8 +176,6 @@ class EventTicket extends Booking
 
     /**
      * Determines whether a single ticket is in Sale, i.e. has a valid sale price
-     *
-     * @return bool
      */
     public function isInSale($ticket): bool
     {

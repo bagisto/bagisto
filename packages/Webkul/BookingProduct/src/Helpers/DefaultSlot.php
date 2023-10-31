@@ -18,7 +18,7 @@ class DefaultSlot extends Booking
         'Friday',
         'Saturday',
     ];
-    
+
     /**
      * Returns slots for a particular day
      *
@@ -82,7 +82,7 @@ class DefaultSlot extends Booking
             }
 
             $startDate = clone $requestedDate->modify('this ' . $this->daysOfWeek[$timeDuration['from_day']]);
-            
+
             $endDate = clone $requestedDate->modify('this ' . $this->daysOfWeek[$timeDuration['to_day']]);
 
             $startDate = Carbon::createFromTimeString($startDate->format('Y-m-d') . ' ' . $timeDuration['from'] . ':00');
@@ -184,10 +184,10 @@ class DefaultSlot extends Booking
                     && $currentTime <= $from
                 ) {
                     $slots[] = [
-                        'from'      => $from->format('h:i A'), 
-                        'to'        => $to->format('h:i A'), 
-                        'timestamp' => $from->getTimestamp() . '-' . $to->getTimestamp(), 
-                        'qty'       => $qty, 
+                        'from'      => $from->format('h:i A'),
+                        'to'        => $to->format('h:i A'),
+                        'timestamp' => $from->getTimestamp() . '-' . $to->getTimestamp(),
+                        'qty'       => $qty,
                     ];
                 }
             } else {

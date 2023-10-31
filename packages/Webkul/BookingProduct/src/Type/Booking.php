@@ -2,23 +2,23 @@
 
 namespace Webkul\BookingProduct\Type;
 
-use Illuminate\Support\Arr;
 use Carbon\Carbon;
-use Webkul\Product\Type\Virtual;
-use Webkul\Customer\Repositories\CustomerRepository;
+use Illuminate\Support\Arr;
 use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductAttributeValueRepository;
-use Webkul\Product\Repositories\ProductInventoryRepository;
-use Webkul\Product\Repositories\ProductImageRepository;
-use Webkul\Product\Repositories\ProductVideoRepository;
-use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
-use Webkul\Tax\Repositories\TaxCategoryRepository;
-use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\BookingProduct\Helpers\Booking as BookingHelper;
+use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\Checkout\Models\CartItem;
+use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Helpers\Indexers\Price\Virtual as VirtualIndexer;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
+use Webkul\Product\Repositories\ProductImageRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductVideoRepository;
+use Webkul\Product\Type\Virtual;
+use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 class Booking extends Virtual
 {
@@ -36,7 +36,7 @@ class Booking extends Virtual
         'admin::catalog.products.accordians.images',
         'admin::catalog.products.accordians.categories',
         'admin::catalog.products.accordians.channels',
-        'bookingproduct::admin.catalog.products.accordians.booking',
+        'booking_product::admin.catalog.products.accordians.booking',
         'admin::catalog.products.accordians.product-links',
         'admin::catalog.products.accordians.videos',
     ];
@@ -44,17 +44,6 @@ class Booking extends Virtual
     /**
      * Create a new product type instance.
      *
-     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
-     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
-     * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
-     * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
-     * @param  \Webkul\Product\Repositories\ProductVideoRepository  $productVideoRepository
-     * @param  \Webkul\Product\Repositories\ProductCustomerGroupPriceRepository  $productCustomerGroupPriceRepository
-     * @param  \Webkul\Tax\Repositories\TaxCategoryRepository  $taxCategoryRepository
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductRepository  $bookingProductRepository
-     * @param  \Webkul\BookingProduct\Helpers\BookingHelper  $bookingHelper
      * @return void
      */
     public function __construct(
@@ -69,8 +58,7 @@ class Booking extends Virtual
         TaxCategoryRepository $taxCategoryRepository,
         protected BookingProductRepository $bookingProductRepository,
         protected BookingHelper $bookingHelper
-    )
-    {
+    ) {
         parent::__construct(
             $customerRepository,
             $attributeRepository,
@@ -85,12 +73,11 @@ class Booking extends Virtual
     }
 
     /**
-     * @param  array  $data
      * @param  int  $id
      * @param  string  $attribute
      * @return \Webkul\Product\Contracts\Product
      */
-    public function update(array $data, $id, $attribute = "id")
+    public function update(array $data, $id, $attribute = 'id')
     {
         $product = parent::update($data, $id, $attribute);
 
@@ -157,10 +144,6 @@ class Booking extends Virtual
         return app($this->bookingHelper->getTypeHelper($bookingProduct->type))->isItemHaveQuantity($cartItem);
     }
 
-    /**
-     * @param  int  $qty
-     * @return bool
-     */
     public function haveSufficientQuantity(int $qty): bool
     {
         return true;
@@ -184,7 +167,6 @@ class Booking extends Virtual
         $products = [];
 
         $bookingProduct = $this->getBookingProduct($data['product_id']);
-
 
         if ($bookingProduct->type == 'rental') {
             if (isset($data['booking']['slot']['from'])) {
@@ -249,10 +231,9 @@ class Booking extends Virtual
     }
 
     /**
-     *
      * @param  array  $options1
      * @param  array  $options2
-     * @return boolean
+     * @return bool
      */
     public function compareOptions($options1, $options2)
     {
@@ -284,10 +265,6 @@ class Booking extends Virtual
 
     /**
      * Validate cart item product price
-     *
-     * @param \Webkul\Checkout\Models\CartItem $item
-     *
-     * @return \Webkul\Product\DataTypes\CartItemValidationResult
      */
     public function validateCartItem(CartItem $item): CartItemValidationResult
     {
@@ -303,6 +280,7 @@ class Booking extends Virtual
 
         if (! $bookingProduct) {
             $result->cartIsInvalid();
+
             return $result;
         }
 

@@ -2,8 +2,8 @@
 
 namespace Webkul\BookingProduct\Repositories;
 
-use Illuminate\Container\Container;
 use Carbon\Carbon;
+use Illuminate\Container\Container;
 use Webkul\Core\Eloquent\Repository;
 
 class BookingProductRepository extends Repository
@@ -16,12 +16,6 @@ class BookingProductRepository extends Repository
     /**
      * Create a new repository instance.
      *
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductDefaultSlotRepository  $bookingProductDefaultSlotRepository
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductAppointmentSlotRepository  $bookingProductAppointmentSlotRepository
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductEventTicketRepository  $bookingProductEventTicketRepository
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductRentalSlotRepository  $bookingProductRentalSlotRepository
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductTableSlotRepository  $bookingProductTableSlotRepository
-     * @param  \Illuminate\Container\Container  $container
      * @return void
      */
     public function __construct(
@@ -31,8 +25,7 @@ class BookingProductRepository extends Repository
         BookingProductRentalSlotRepository $bookingProductRentalSlotRepository,
         BookingProductTableSlotRepository $bookingProductTableSlotRepository,
         Container $container
-    )
-    {
+    ) {
         parent::__construct($container);
 
         $this->typeRepositories['default'] = $bookingProductDefaultSlotRepository;
@@ -48,16 +41,13 @@ class BookingProductRepository extends Repository
 
     /**
      * Specify Model class name
-     *
-     * @return string
      */
-    function model(): string
+    public function model(): string
     {
         return 'Webkul\BookingProduct\Contracts\BookingProduct';
     }
 
     /**
-     * @param  array  $data
      * @return \Webkul\BookingProduct\Contracts\BookingProduct
      */
     public function create(array $data)
@@ -74,12 +64,11 @@ class BookingProductRepository extends Repository
     }
 
     /**
-     * @param  array  $data
      * @param  int  $id
      * @param  string  $attribute
      * @return \Webkul\BookingProduct\Contracts\BookingProduct
      */
-    public function update(array $data, $id, $attribute = "id")
+    public function update(array $data, $id, $attribute = 'id')
     {
         $bookingProduct = parent::update($data, $id, $attribute);
 
@@ -130,7 +119,7 @@ class BookingProductRepository extends Repository
 
                     foreach ($data['slots'][$i] as $slot) {
                         $slots[] = array_merge($slot, ['id' => $i . '_slot_' . $count]);
-                        
+
                         $count++;
                     }
 
@@ -180,7 +169,7 @@ class BookingProductRepository extends Repository
 
             if ($from > $to) {
                 unset($slots[$key]);
-                
+
                 continue;
             }
 

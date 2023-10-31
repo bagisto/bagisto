@@ -2,23 +2,21 @@
 
 namespace Webkul\BookingProduct\Repositories;
 
-use Illuminate\Support\Facades\Event;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
 
 class BookingRepository extends Repository
 {
     /**
      * Specify Model class name
-     *
      */
-    function model(): string
+    public function model(): string
     {
         return 'Webkul\BookingProduct\Contracts\Booking';
     }
 
     /**
-     * @param  array  $data
      * @return \Webkul\BookingProduct\Contracts\Booking
      */
     public function create(array $data)
@@ -79,12 +77,12 @@ class BookingRepository extends Repository
     public function getBookings($dateRange)
     {
         return $this->select(
-                'bookings.id',
-                'bookings.order_id',
-                'order_items.name as title',
-                'bookings.from as start',
-                'bookings.to as end',
-            )
+            'bookings.id',
+            'bookings.order_id',
+            'order_items.name as title',
+            'bookings.from as start',
+            'bookings.to as end',
+        )
             ->leftJoin('order_items', 'bookings.order_item_id', '=', 'order_items.id')
             ->whereBetween('bookings.from', $dateRange)
             ->distinct()

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Webkul\BookingProduct\Http\Controllers\Admin\BookingController;
+
 /**
  * Sales routes.
  */

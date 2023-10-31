@@ -3,17 +3,15 @@
 namespace Webkul\BookingProduct\Repositories;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Str;
+use Webkul\Core\Eloquent\Repository;
 
 class BookingProductEventTicketRepository extends Repository
 {
     /**
      * Specify Model class name
-     *
-     * @return string
      */
-    function model(): string
+    public function model(): string
     {
         return 'Webkul\BookingProduct\Contracts\BookingProductEventTicket';
     }
@@ -21,7 +19,7 @@ class BookingProductEventTicketRepository extends Repository
     /**
      * @param  array  $data
      * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
-     * @return void
+     *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
     public function saveEventTickets($data, $bookingProduct): void

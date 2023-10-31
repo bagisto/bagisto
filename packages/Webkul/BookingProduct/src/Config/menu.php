@@ -7,5 +7,5 @@ return [
         'route'      => 'admin.sales.bookings.index',
         'sort'       => 6,
         'icon-class' => '',
-    ]
+    ],
 ];

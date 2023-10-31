@@ -15,7 +15,6 @@ class BookingProductController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\BookingProduct\Repositories\BookingProductRepository  $bookingProductRepository
      * @return void
      */
     public function __construct(protected BookingProductRepository $bookingProductRepository)

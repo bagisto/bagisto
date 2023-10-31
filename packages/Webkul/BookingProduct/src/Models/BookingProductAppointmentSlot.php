@@ -8,7 +8,7 @@ use Webkul\BookingProduct\Contracts\BookingProductAppointmentSlot as BookingProd
 class BookingProductAppointmentSlot extends Model implements BookingProductAppointmentSlotContract
 {
     public $timestamps = false;
-    
+
     protected $casts = ['slots' => 'array'];
 
     protected $fillable = [

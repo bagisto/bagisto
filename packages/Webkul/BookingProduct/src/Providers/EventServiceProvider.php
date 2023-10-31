@@ -2,9 +2,9 @@
 
 namespace Webkul\BookingProduct\Providers;
 
-use Illuminate\Support\Facades\View;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\View;
 use Webkul\Theme\ViewRenderEventManager;
 
 class EventServiceProvider extends ServiceProvider
@@ -16,7 +16,7 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         'checkout.order.save.after' => [
-            'Webkul\BookingProduct\Listeners\Order@afterPlaceOrder'
+            'Webkul\BookingProduct\Listeners\Order@afterPlaceOrder',
         ],
     ];
 
@@ -29,7 +29,7 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        Event::listen('bagisto.shop.products.view.short_description.after', static function(ViewRenderEventManager $viewRenderEventManager) {
+        Event::listen('bagisto.shop.products.view.short_description.after', static function (ViewRenderEventManager $viewRenderEventManager) {
             if (View::exists('booking_product::shop.' . core()->getCurrentChannel()->theme . '.products.view.booking')) {
                 $viewRenderEventManager->addTemplate('booking_product::shop.' . core()->getCurrentChannel()->theme . '.products.view.booking');
             }
