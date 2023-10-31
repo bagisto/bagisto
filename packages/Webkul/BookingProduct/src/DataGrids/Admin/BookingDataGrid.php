@@ -2,8 +2,8 @@
 
 namespace Webkul\BookingProduct\DataGrids\Admin;
 
-use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
 
 class BookingDataGrid extends DataGrid
@@ -19,7 +19,7 @@ class BookingDataGrid extends DataGrid
      * Prepare query builder.
      *
      * @return \Illuminate\Database\Query\Builder
-     */ 
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('bookings')
@@ -77,7 +77,7 @@ class BookingDataGrid extends DataGrid
             'filterable' => false,
             'closure'    => function ($value) {
                 return Carbon::createFromTimestamp($value->from)->format('d F, Y H:iA');
-            }
+            },
         ]);
 
         $this->addColumn([
@@ -87,9 +87,9 @@ class BookingDataGrid extends DataGrid
             'searchable' => true,
             'sortable'   => true,
             'filterable' => false,
-            'closure'    => function ($value) {                
+            'closure'    => function ($value) {
                 return Carbon::createFromTimestamp($value->to)->format('d F, Y H:iA');
-            }
+            },
         ]);
 
         $this->addColumn([
