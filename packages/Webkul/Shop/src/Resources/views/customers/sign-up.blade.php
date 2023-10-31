@@ -57,7 +57,7 @@
                             type="text"
                             name="first_name"
                             class="!p-[20px_25px] rounded-lg"
-                            :value="old('last_name')"
+                            :value="old('first_name')"
                             rules="required"
                             :label="trans('shop::app.customers.signup-form.first-name')"
                             :placeholder="trans('shop::app.customers.signup-form.first-name')"
