@@ -21,7 +21,7 @@
         >
             <div class="relative bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                 <!-- Panel Header -->
-                <div class="flex gap-[20px] justify-between mb-[10px] p-[16px]">
+                <div class="flex gap-[20px] justify-between p-[16px]">
                     <div class="flex flex-col gap-[8px]">
                         <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                             @lang('Booking Information')
@@ -29,14 +29,14 @@
                     </div>
 
                     <!-- Add Button -->
-                    <div class="flex gap-x-[4px] items-center">
+                    {{-- <div class="flex gap-x-[4px] items-center">
                         <div
                             class="secondary-button"
                             @click="resetForm(); $refs.updateCreateOptionModal.open()"
                         >
                             @lang('Add Slot')
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <!-- Panel Content -->
@@ -54,9 +54,10 @@
                             type="select"
                             name="booking[type]"
                             rules="required"
-                            :value="'default'"
+                            ::value="booking_type"
                             :label="trans('Booking Type')"
-                            @change="swatchAttribute=true"
+                            v-model="booking_type"
+                            @change="bookingSwatch=true"
                         >
                             <option value="default" selected>@lang('Default')</option>
                             <option value="appointment">@lang('Appointment Booking')</option>
@@ -92,7 +93,14 @@
                     </x-booking::form.control-group>
 
                     <!-- Quantity -->
-                    <x-admin::form.control-group class="w-full mb-[10px]">
+                    <x-admin::form.control-group
+                        class="w-full mb-[10px]"
+                        v-if="(
+                            booking_type == 'default'
+                            || booking_type == 'appointment'
+                            || booking_type == 'rental'
+                        )"
+                    >
                         <x-booking::form.control-group.label class="required">
                             @lang('Qty')
                         </x-booking::form.control-group.label>
@@ -113,7 +121,14 @@
                     </x-booking::form.control-group>
 
                     <!-- Available Every Week  -->
-                    <x-admin::form.control-group v-if="bookingSwatch && booking_type == appointment" class="w-full mb-[10px]">
+                    <x-admin::form.control-group
+                        v-if="bookingSwatch && (
+                            booking_type == 'appointment' 
+                            || booking_type == 'rental'
+                            || booking_type == 'table'
+                        )"
+                        class="w-full mb-[10px]"
+                    >
                         <x-booking::form.control-group.label class="required">
                             @lang('Available Every Week')
                         </x-booking::form.control-group.label>
@@ -176,7 +191,10 @@
                     </x-booking::form.control-group>
 
                     <!-- Renting Type -->
-                    <x-admin::form.control-group class="w-full mb-[10px]">
+                    <x-admin::form.control-group
+                        v-if="bookingSwatch && booking_type == 'rental'"
+                        class="w-full mb-[10px]"
+                    >
                         <x-booking::form.control-group.label class="required">
                             @lang('Renting Type')
                         </x-booking::form.control-group.label>
@@ -201,7 +219,10 @@
                     </x-booking::form.control-group>
 
                     <!-- Daily Price -->
-                    <x-admin::form.control-group class="w-full mb-[10px]">
+                    <x-admin::form.control-group
+                        v-if="bookingSwatch && booking_type == 'rental'"
+                        class="w-full mb-[10px]"
+                    >
                         <x-booking::form.control-group.label class="required">
                             @lang('Daily Price')
                         </x-booking::form.control-group.label>
@@ -222,7 +243,10 @@
                     </x-booking::form.control-group>
 
                     <!-- Type -->
-                    <x-admin::form.control-group class="w-full mb-[10px]">
+                    <x-admin::form.control-group
+                        class="w-full mb-[10px]"
+                        v-if="booking_type == 'default'"
+                    >
                         <x-booking::form.control-group.label class="required">
                             @lang('Type')
                         </x-booking::form.control-group.label>
@@ -234,6 +258,8 @@
                             :value="'one'"
                             :label="trans('Type')"
                             :placeholder="trans('Type')"
+                            v-model="bookingSubType"
+                            @change="bookingSwatchType=true"
                         >
                             <option value="many" selected>{{ __('Many Bookings for one day') }}</option>
                             <option value="one">{{ __('One Booking for many days') }}</option>
@@ -246,7 +272,10 @@
                     </x-booking::form.control-group>
 
                      <!-- Slot Duration -->
-                     <x-admin::form.control-group class="w-full mb-[10px]">
+                    <x-admin::form.control-group
+                        v-if="bookingSwatch && booking_type == 'appointment'"
+                        class="w-full mb-[10px]"
+                    >
                         <x-booking::form.control-group.label class="required">
                             @lang('Slot Duration')
                         </x-booking::form.control-group.label>
@@ -266,8 +295,13 @@
                         </x-booking::form.control-group.error>
                     </x-booking::form.control-group>
 
-                     <!-- Quantity -->
-                     <x-admin::form.control-group class="w-full mb-[10px]">
+                    <!-- Break Duration -->
+                    <x-admin::form.control-group
+                        v-if="bookingSwatchType && (
+                            bookingSubType == 'many'
+                        )"
+                        class="w-full mb-[10px]"
+                    >
                         <x-booking::form.control-group.label class="required">
                             @lang('Break Duration')
                         </x-booking::form.control-group.label>
@@ -288,7 +322,13 @@
                     </x-booking::form.control-group>
 
                      <!-- Same Slot For All days -->
-                    <x-admin::form.control-group class="w-full mb-[10px]">
+                    <x-admin::form.control-group
+                        v-if="bookingSwatch && (
+                            booking_type == 'appointment'
+                            || booking_type == 'table'
+                        )"
+                        class="w-full mb-[10px]"
+                    >
                         <x-booking::form.control-group.label class="required">
                             @lang('Same Slot For All days')
                         </x-booking::form.control-group.label>
@@ -311,17 +351,17 @@
                         </x-booking::form.control-group.error>
                     </x-booking::form.control-group>
                 </div>
-                
+                    
                 <!-- For Empty Option -->
                 <div
                     class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
-                    {{-- v-else --}}
+                    v-else
                 >
                     <!-- Placeholder Image -->
-                    {{-- <img
+                    <img
                         src="{{ bagisto_asset('images/icon-options.svg') }}"
                         class="w-[80px] h-[80px] border border-dashed dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
-                    /> --}}
+                    />
 
                     <!-- Add Variants Information -->
                     <div class="flex flex-col gap-[5px] items-center">
@@ -329,7 +369,7 @@
                             @lang('Add Slot')
                         </p>
 
-                        <p class="text-gray-400">
+                        <p class="text-gray-400 text-red">
                             @lang('Add booking slot on the go.')
                         </p>
                     </div>
@@ -339,7 +379,7 @@
                         {{-- @click="resetForm(); $refs.updateCreateOptionModal.open()" --}}
                     >
                         @lang('Add Slot')
-                    </div>
+                    </div> 
                 </div>
             </div>
         </x-admin::form>
@@ -364,9 +404,13 @@
                         available_to: '',
                     },
 
-                    booking_type: '',
+                    booking_type: 'default',
+
+                    bookingSubType: '',
 
                     bookingSwatch: false,
+
+                    bookingSwatchType: false,
                 };
             },
 

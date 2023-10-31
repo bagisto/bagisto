@@ -66,10 +66,11 @@ window.app = createApp({
  * Global plugins registration.
  */
 import Axios from "./plugins/axios";
+import CreateElement from "./plugins/createElement";
 [
     Axios,
+    CreateElement,
 ].forEach((plugin) => app.use(plugin));
-
 
 /**
  * Global components registration;
