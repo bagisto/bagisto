@@ -642,8 +642,9 @@ class Core
                 break;
             case 'right_with_space':
                 $formattedCurrency = $formattedCurrency . ' ' . $symbol;
-                break;       
+                break;
         }
+
         return $formattedCurrency;
     }
 

@@ -2458,10 +2458,8 @@ return [
                 ],
 
                 'edit'  => [
-                    'title'    => 'Edit User',
+                    'title'  => 'Edit User',
                 ],
-
-
             ],
 
             'edit'  => [
