@@ -1,6 +1,6 @@
 import { defineConfig, loadEnv } from "vite";
-import vue from "@vitejs/plugin-vue";
 import laravel from "laravel-vite-plugin";
+import vue from "@vitejs/plugin-vue";
 import path from "path";
 
 export default defineConfig(({ mode }) => {
@@ -26,11 +26,10 @@ export default defineConfig(({ mode }) => {
             laravel({
                 hotFile: "../../../public/booking-default-vite.hot",
                 publicDirectory: "../../../public",
-                buildDirectory: "themes/admin/default/build",
+                buildDirectory: "themes/booking/default/build",
                 input: [
                     "src/Resources/assets/css/app.css",
                     "src/Resources/assets/js/app.js",
-                    "src/Resources/assets/js/chart.js",
                 ],
                 refresh: true,
             }),

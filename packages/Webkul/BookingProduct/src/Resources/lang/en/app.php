@@ -70,15 +70,20 @@ return [
 
         'sales' => [
             'bookings' => [
-                'title'         => 'Bookings',
-                'table-view'    => 'Table View',
-                'calender-view' => 'Calender View',
-            ],
-        ],
+                'index' => [
+                    'title' => 'Booking Products',
 
-        'datagrid' => [
-            'from' => 'From',
-            'to'   => 'To',
+                    'datagrid' => [
+                        'created-date' => 'Created Date',
+                        'from'         => 'From',
+                        'id'           => 'ID',
+                        'order-id'     => 'Order ID',
+                        'qty'          => 'QTY',
+                        'to'           => 'To',
+                        'view'         => 'View',
+                    ],
+                ],
+            ],
         ],
     ],
 

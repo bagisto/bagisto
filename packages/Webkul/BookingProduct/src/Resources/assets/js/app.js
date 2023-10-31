@@ -24,50 +24,6 @@ Object.keys(AllRules).forEach(rule => {
     defineRule(rule, AllRules[rule]);
 });
 
-/**
- * This regular expression allows phone numbers with the following conditions:
- * - The phone number can start with an optional "+" sign.
- * - After the "+" sign, there should be one or more digits.
- *
- * This validation is sufficient for global-level phone number validation. If
- * someone wants to customize it, they can override this rule.
- */
-defineRule("phone", (value) => {
-    if (!value || !value.length) {
-        return true;
-    }
-
-    if (!/^\+?\d+$/.test(value)) {
-        return false;
-    }
-
-    return true;
-});
-
-defineRule("decimal", (value, { decimals = '*', separator = '.' } = {}) => {
-    if (value === null || value === undefined || value === '') {
-        return true;
-    }
-
-    if (Number(decimals) === 0) {
-        return /^-?\d*$/.test(value);
-    }
-
-    const regexPart = decimals === '*' ? '+' : `{1,${decimals}}`;
-    const regex = new RegExp(`^[-+]?\\d*(\\${separator}\\d${regexPart})?([eE]{1}[-]?\\d+)?$`);
-
-    return regex.test(value);
-});
-
-defineRule("required_if", (value, { condition = true } = {}) => {
-    if (condition) {
-        if (value === null || value === undefined || value === '') {
-            return false;
-        }
-    }
-
-    return true;
-});
 
 defineRule("", () => true);
 
@@ -106,23 +62,24 @@ window.app = createApp({
     },
 });
 
+/**
+ * Global plugins registration.
+ */
+import Axios from "./plugins/axios";
 [
     Axios,
-    CreateElement,
-    Emitter,
-    Admin
 ].forEach((plugin) => app.use(plugin));
+
 
 /**
  * Global components registration;
  */
 import { Field, Form, ErrorMessage } from "vee-validate";
-import Draggable from 'vuedraggable';
 
 app.component("VForm", Form);
 app.component("VField", Field);
 app.component("VErrorMessage", ErrorMessage);
-app.component("draggable", Draggable);
+
 
 /**
  * Load event, the purpose of using the event is to mount the application

@@ -1,19 +1,20 @@
-<x-admin::layouts>
+<x-booking::layouts>
+    <!-- Page Title -->
     <x-slot:title>
-        @lang('admin::app.catalog.attributes.index.title')
+        @lang('booking::app.admin.sales.bookings.index.title')
     </x-slot:title>
 
     <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
         <p class="py-[11px] text-[20px] text-gray-800 dark:text-white font-bold">
-            @lang('Booking Products')
+            @lang('booking::app.admin.sales.bookings.index.title')
         </p>
 
         <div class="flex gap-x-[10px] items-center">
             <!-- Export Modal -->
-            <x-admin::datagrid.export src="{{ route('admin.sales.shipments.index') }}"></x-admin::datagrid.export>
+            <x-booking::datagrid.export src="{{ route('admin.sales.bookings.index') }}"></x-booking::datagrid.export>
         </div>
     </div>
 
-    <x-admin::datagrid src="{{ route('admin.sales.shipments.index') }}"></x-admin::datagrid>
+    <x-booking::datagrid src="{{ route('admin.sales.bookings.index') }}"></x-booking::datagrid>
 
-</x-admin::layouts>
+</x-booking::layouts>

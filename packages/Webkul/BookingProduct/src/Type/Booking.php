@@ -30,18 +30,6 @@ class Booking extends Virtual
     protected $canBeCopied = false;
 
     /**
-     * @var array
-     */
-    protected $additionalViews = [
-        'admin::catalog.products.accordians.images',
-        'admin::catalog.products.accordians.categories',
-        'admin::catalog.products.accordians.channels',
-        'booking_product::admin.catalog.products.accordians.booking',
-        'admin::catalog.products.accordians.product-links',
-        'admin::catalog.products.accordians.videos',
-    ];
-
-    /**
      * Create a new product type instance.
      *
      * @return void

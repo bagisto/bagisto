@@ -25,7 +25,7 @@ class BookingController extends Controller
      */
     public function index()
     {
-        return view('booking_product::admin.sales.bookings.index');
+        return view('booking::admin.sales.bookings.index');
     }
 
     /**

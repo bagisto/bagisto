@@ -17,9 +17,9 @@ class BookingProductServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
-        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'booking_product');
+        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'booking');
 
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'booking_product');
+        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'booking');
 
         $this->app->register(EventServiceProvider::class);
 
