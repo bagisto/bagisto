@@ -2600,7 +2600,7 @@ return [
                 'name'                          => 'Nome',
                 'product-carousel'              => 'Carrossel de Produtos',
                 'product-carousel-description'  => 'Apresente produtos de forma elegante com um carrossel de produtos dinâmico e responsivo.',
-                'path'                          => 'Caminho',
+                'url'                           => 'URL',
                 'preview'                       => 'Visualização',
                 'slider'                        => 'Slider',
                 'static-content-description'    => 'Melhore o engajamento com conteúdo estático conciso e informativo para seu público.',

@@ -2600,7 +2600,7 @@ return [
                 'name'                          => 'Naam',
                 'product-carousel'              => 'Product Carrousel',
                 'product-carousel-description'  => 'Toon producten elegant met een dynamische en responsieve productcarrousel.',
-                'path'                          => 'Pad',
+                'url'                           => 'URL',
                 'preview'                       => 'Voorbeeld',
                 'slider'                        => 'Schuifregelaar',
                 'static-content-description'    => 'Verbeter de betrokkenheid met beknopte, informatieve statische inhoud voor uw publiek.',

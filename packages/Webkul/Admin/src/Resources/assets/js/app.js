@@ -44,6 +44,18 @@ defineRule("phone", (value) => {
     return true;
 });
 
+defineRule("url", (value) => {
+    if (!value || !value.length) {
+        return true;
+    }
+
+    if (/^(https?:\/\/)?(www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/[a-zA-Z0-9%_.-]*)*$/.test(value)) {
+        return false;
+    }
+
+    return true;
+});
+
 defineRule("decimal", (value, { decimals = '*', separator = '.' } = {}) => {
     if (value === null || value === undefined || value === '') {
         return true;

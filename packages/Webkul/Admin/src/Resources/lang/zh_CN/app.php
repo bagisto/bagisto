@@ -2600,7 +2600,7 @@ return [
                 'name'                          => '名称',
                 'product-carousel'              => '产品轮播',
                 'product-carousel-description'  => '使用动态和响应式产品轮播优雅地展示产品。',
-                'path'                          => '路径',
+                'url'                          => '网址',
                 'preview'                       => '预览',
                 'slider'                        => '滑块',
                 'static-content-description'    => '为您的受众提供简洁、信息丰富的静态内容，提高参与度。',
