@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\File;
-use Webkul\Installer\Http\Helpers\DatabaseManager;
-use Webkul\Installer\Http\Helpers\EnvironmentManager;
-use Webkul\Installer\Http\Helpers\ServerRequirements;
+use Webkul\Installer\Helpers\DatabaseManager;
+use Webkul\Installer\Helpers\EnvironmentManager;
+use Webkul\Installer\Helpers\ServerRequirements;
 
 class InstallerController extends Controller
 {

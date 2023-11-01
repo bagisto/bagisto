@@ -45,7 +45,7 @@ class RegistrationController extends Controller
      */
     public function store(RegistrationRequest $registrationRequest)
     {
-        $data = array_merge(request()->only([
+        $data = array_merge($registrationRequest->only([
             'first_name',
             'last_name',
             'email',

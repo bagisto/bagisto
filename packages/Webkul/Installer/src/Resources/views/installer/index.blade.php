@@ -345,8 +345,19 @@
                                         rules="required"
                                         label="Default Currency"
                                     >
-                                        <option value="USD" selected>US Dollar</option>
-                                        <option value="EUR">Euro</option>
+                                        <option value="CNY">Chinese Yuan (CNY)</option>
+                                        <option value="AED">Dirham (AED)</option>
+                                        <option value="EUR">Euro (EUR)</option>
+                                        <option value="INR">Indian Rupee (INR)</option>
+                                        <option value="IRR">Iranian Rial (IRR)</option>
+                                        <option value="ILS">Israeli Shekel (ILS)</option>
+                                        <option value="JPY">Japanese Yen (JPY)</option>
+                                        <option value="GBP">Pound Sterling (GBP)</option>
+                                        <option value="RUB">Russian Ruble (RUB)</option>
+                                        <option value="SAR">Saudi Riyal (SAR)</option>
+                                        <option value="TRY">Turkish Lira (TRY)</option>
+                                        <option value="USD" selected>US Dollar (USD)</option>
+                                        <option value="UAH">Ukrainian Hryvnia (UAH)</option>
                                     </x-installer::form.control-group.control>
 
                                     <x-installer::form.control-group.error
@@ -405,15 +416,25 @@
                                         rules="required"
                                         label="Default Locale"
                                     >
+                                        <option value="ar">Arabic</option>
+                                        <option value="bn">Bengali</option>
+                                        <option value="pt_BR">Brazilian Portuguese</option>
+                                        <option value="zh_CN">Chinese</option>
+                                        <option value="nl">Dutch</option>
                                         <option value="en" selected>English</option>
                                         <option value="fr">French</option>
-                                        <option value="nl">Dutch</option>
-                                        <option value="es">Türkçe</option>
-                                        <option value="es">Espanol</option>
-                                        <option value="fr">German</option>
-                                        <option value="en">Italian</option>
-                                        <option value="ar">Russian</option>
-                                        <option value="nl">Ukrainian</option>
+                                        <option value="de">Dutch</option>
+                                        <option value="he">Hebrew</option>
+                                        <option value="hi_IN">Hindi</option>
+                                        <option value="it">Italian</option>
+                                        <option value="ja">Japanese</option>
+                                        <option value="fa">Persian</option>
+                                        <option value="pl">Polish</option>
+                                        <option value="ru">Russian</option>
+                                        <option value="sin">Sinhala</option>
+                                        <option value="es">Spanish</option>
+                                        <option value="tr">Turkish</option>
+                                        <option value="uk">Ukrainian</option>
                                     </x-installer::form.control-group.control>
 
                                     <x-installer::form.control-group.error
