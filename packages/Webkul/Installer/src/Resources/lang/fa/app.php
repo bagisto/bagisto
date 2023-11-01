@@ -237,7 +237,7 @@ return [
 
                     'content' => [
                         'title'       => 'Get Ready for our new Bold Collections!',
-                        'description' => 'Buy products in groups for bigger discounts. like lorem ipsume is simply text for digital platform',
+                        'description' => 'Introducing Our New Bold Collections! Elevate your style with daring designs and vibrant statements. Explore striking patterns and bold colors that redefine your wardrobe. Get ready to embrace the extraordinary!',
                         'btn-title'   => 'View All',
                     ],
                 ],
@@ -273,7 +273,7 @@ return [
 
                     'content' => [
                         'title'       => 'Get Ready for our new Bold Collections!',
-                        'description' => 'Buy products in groups for bigger discounts. like lorem ipsume is simply text for digital platform',
+                        'description' => 'Introducing Our New Bold Collections! Elevate your style with daring designs and vibrant statements. Explore striking patterns and bold colors that redefine your wardrobe. Get ready to embrace the extraordinary!',
                         'btn-title'   => 'View All',
                     ],
                 ],

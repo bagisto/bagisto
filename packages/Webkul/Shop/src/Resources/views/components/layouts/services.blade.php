@@ -13,7 +13,7 @@
                 <p class="text-[16px] font-medium font-dmserif">Free Shipping</p>
 
                 <p class="text-[14px] font-medium mt-[10px] text-[#6E6E6E] max-w-[217px]">
-                    If goods have problems, Lorem Ipsum is dummy text
+                    Enjoy free shipping on all orders
                 </p>
             </div>
         </div>
@@ -28,7 +28,7 @@
                 <p class="text-[16px] font-medium font-dmserif">Product Replace</p>
 
                 <p class="text-[14px] font-medium mt-[10px] text-[#6E6E6E] max-w-[217px]">
-                    If goods have problems, Lorem Ipsum is dummy text
+                    Easy Product Replacement Available!
                 </p>
             </div>
         </div>
@@ -43,7 +43,7 @@
                 <p class="text-[16px] font-medium font-dmserif">Emi Available</p>
 
                 <p class="text-[14px] font-medium mt-[10px] text-[#6E6E6E] max-w-[217px]">
-                    If goods have problems, Lorem Ipsum is dummy text
+                    No cost EMI available on all major credit cards
                 </p>
             </div>
         </div>
@@ -58,7 +58,7 @@
                 <p class="text-[16px] font-medium font-dmserif">24/7 Support</p>
 
                 <p class="mt-[10px] text-[14px] text-[#6E6E6E] font-medium max-w-[217px]">
-                    If goods have problems, Lorem Ipsum is dummy text
+                    Dedicated 24/7 support via chat and email
                 </p>
             </div>
         </div>
