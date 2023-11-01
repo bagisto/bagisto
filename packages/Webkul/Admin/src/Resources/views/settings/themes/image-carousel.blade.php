@@ -46,25 +46,25 @@
                             <input
                                 type="file"
                                 class="hidden"
-                                :name="'options['+ index +'][image]'"
+                                :name="'{{ $currentLocale->code }}[options]['+ index +'][image]'"
                                 :ref="'imageInput_' + index"
                             />
 
                             <input
                                 type="hidden"
-                                :name="'options['+ index +'][title]'"
+                                :name="'{{ $currentLocale->code }}[options]['+ index +'][title]'"
                                 :value="image.title"
                             />
 
                             <input
                                 type="hidden"
-                                :name="'options['+ index +'][link]'"
+                                :name="'{{ $currentLocale->code }}[options]['+ index +'][link]'"
                                 :value="image.link"
                             />
 
                             <input
                                 type="hidden"
-                                :name="'options['+ index +'][image]'"
+                                :name="'{{ $currentLocale->code }}[options]['+ index +'][image]'"
                                 :value="image.image"
                             />
                         
@@ -377,7 +377,7 @@
 
             data() {
                 return {
-                    sliders: @json($theme->options),
+                    sliders: @json($theme->translate($currentLocale->code)['options'] ?? null),
 
                     deletedSliders: [],
                 };

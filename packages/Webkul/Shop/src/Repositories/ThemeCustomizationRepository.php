@@ -24,7 +24,7 @@ class ThemeCustomizationRepository extends Repository
      *
      * @param  array  $imageOptions
      * @param  \Webkul\Shop\Contracts\ThemeCustomization  $theme
-     * @return void|string
+     * @return void
      */
     public function uploadImage($imageOptions, $theme, $deletedSliderImages = [])
     {
@@ -58,10 +58,12 @@ class ThemeCustomizationRepository extends Repository
                     $options['images'][] = $image;
                 }
             }
+
+            $translatedModel = $theme->translate(core()->getRequestedLocaleCode());
+    
+            $translatedModel->options = $options ?? [];
+    
+            $translatedModel->save();
         }
-
-        $theme->options = $options ?? [];
-
-        $theme->save();
     }
 }
