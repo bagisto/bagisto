@@ -3403,6 +3403,7 @@ return [
         'orders'                   => 'Заказы',
         'products'                 => 'Продукты',
         'promotions'               => 'Акции',
+        'reporting'                => 'Отчетность',
         'refunds'                  => 'Возвраты',
         'reviews'                  => 'Отзывы',
         'roles'                    => 'Роли',

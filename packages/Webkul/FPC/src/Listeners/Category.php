@@ -29,7 +29,7 @@ class Category
                 ResponseCache::forget($categoryTranslation->url_path);
             }
 
-            ResponseCache::forget($category->translate(core()->getDefaultChannelLocaleCode())->url_path);
+            ResponseCache::forget($category->translate(core()->getDefaultLocaleCodeFromDefaultChannel())->url_path);
         }
     }
 
@@ -48,7 +48,7 @@ class Category
                 ResponseCache::forget($categoryTranslation->url_path);
             }
 
-            ResponseCache::forget($category->translate(core()->getDefaultChannelLocaleCode())->url_path);
+            ResponseCache::forget($category->translate(core()->getDefaultLocaleCodeFromDefaultChannel())->url_path);
         }
     }
 }

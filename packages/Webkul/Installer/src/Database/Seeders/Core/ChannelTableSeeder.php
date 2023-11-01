@@ -19,6 +19,8 @@ class ChannelTableSeeder extends Seeder
             'root_category_id'  => 1,
             'default_locale_id' => 1,
             'base_currency_id'  => 1,
+            'created_at'        => now(),
+            'updated_at'        => now(),
         ]);
 
         DB::table('channel_translations')->insert([

@@ -3416,6 +3416,7 @@ return [
         'orders'                   => '订单',
         'products'                 => '产品',
         'promotions'               => '促销活动',
+        'reporting'                => '报告',
         'refunds'                  => '退款',
         'reviews'                  => '评论',
         'roles'                    => '角色',

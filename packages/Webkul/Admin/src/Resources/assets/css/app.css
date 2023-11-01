@@ -417,8 +417,9 @@
     .label-pending,
     .label-processing,
     .label-closed,
-    .label-cancelled,
+    .label-canceled,
     .label-info,
+    .label-completed,
     .label-active {
         @apply text-[12px] text-white font-semibold py-[1px] px-[6px] max-w-max rounded-[35px];
     }
@@ -437,7 +438,7 @@
 		@apply bg-darkBlue;
 	}
 
-    .label-cancelled {
+    .label-canceled {
         @apply bg-darkPink;
     }
 

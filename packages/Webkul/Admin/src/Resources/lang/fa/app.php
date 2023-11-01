@@ -3416,6 +3416,7 @@ return [
         'orders'                   => 'سفارش‌ها',
         'products'                 => 'محصولات',
         'promotions'               => 'تبلیغات',
+        'reporting'                => 'گزارش‌دهی',
         'refunds'                  => 'بازپرداخت‌ها',
         'reviews'                  => 'نقدها',
         'roles'                    => 'نقش‌ها',

@@ -8,18 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 use Webkul\Category\Contracts\CategoryTranslation as CategoryTranslationContract;
 use Webkul\Category\Database\Factories\CategoryTranslationFactory;
 
-/**
- * Class CategoryTranslation
- *
- *
- * @property-read string $url_path maintained by database triggers
- */
 class CategoryTranslation extends Model implements CategoryTranslationContract
 {
     use HasFactory;
 
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
     public $timestamps = false;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'name',
         'description',

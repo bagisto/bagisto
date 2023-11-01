@@ -140,16 +140,20 @@ class Core
      *
      * @return \Webkul\Core\Contracts\Channel
      */
-    public function getCurrentChannel()
+    public function getCurrentChannel(string $hostname = null)
     {
+        if (! $hostname) {
+            $hostname = request()->getHttpHost();
+        }
+
         if ($this->currentChannel) {
             return $this->currentChannel;
         }
 
         $this->currentChannel = $this->channelRepository->findWhereIn('hostname', [
-            request()->getHttpHost(),
-            'http://' . request()->getHttpHost(),
-            'https://' . request()->getHttpHost(),
+            $hostname,
+            'http://' . $hostname,
+            'https://' . $hostname,
         ])->first();
 
         if (! $this->currentChannel) {
@@ -164,7 +168,7 @@ class Core
      */
     public function setCurrentChannel(Channel $channel): void
     {
-        $this->currentChannel = $currentChannel;
+        $this->currentChannel = $channel;
     }
 
     /**
@@ -198,6 +202,14 @@ class Core
     }
 
     /**
+     * Set the default channel.
+     */
+    public function setDefaultChannel(Channel $channel): void
+    {
+        $this->defaultChannel = $channel;
+    }
+
+    /**
      * Returns the default channel code configured in `config/app.php`.
      */
     public function getDefaultChannelCode(): string
@@ -206,9 +218,9 @@ class Core
     }
 
     /**
-     * Returns default channel locale code.
+     * Returns default locale code from default channel.
      */
-    public function getDefaultChannelLocaleCode(): string
+    public function getDefaultLocaleCodeFromDefaultChannel(): string
     {
         return $this->getDefaultChannel()->default_locale->code;
     }
@@ -216,7 +228,7 @@ class Core
     /**
      * Get channel code from request.
      *
-     * @return string
+     * @return \Webkul\Core\Contracts\Channel
      */
     public function getRequestedChannel()
     {
