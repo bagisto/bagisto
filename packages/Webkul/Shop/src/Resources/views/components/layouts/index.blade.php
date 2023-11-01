@@ -67,9 +67,9 @@
 
             {!! view_render_event('bagisto.shop.layout.content.after') !!}
 
-            {{-- Page Features Blade Component --}}
+            {{-- Page Services Blade Component --}}
             @if ($hasFeature)
-                <x-shop::layouts.features />
+                <x-shop::layouts.services />
             @endif
 
             {{-- Page Footer Blade Component --}}
