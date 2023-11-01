@@ -23,6 +23,13 @@ class Installer extends Command
     protected $description = 'Run migrate and seed command, publish assets and config, link storage';
 
     /**
+     * The entity to create.
+     *
+     * @var string
+     */
+    protected $entity = null;
+
+    /**
      * Create a new command instance.
      *
      * @return void
@@ -100,16 +107,7 @@ class Installer extends Command
             }
         }
 
-        /**
-         * Final information
-         */
-        $this->info('-----------------------------');
-        $this->info('Congratulations!');
-        $this->info('The installation has been finished and you can now use Bagisto.');
-        $this->info('Go to ' . url(config('app.admin_url')) . ' and authenticate with:');
-        $this->info('Email: admin@example.com');
-        $this->info('Password: admin123');
-        $this->info('Cheers!');
+        $this->createAdminCredential();
     }
 
     /**
@@ -119,10 +117,9 @@ class Installer extends Command
      */
     protected function checkForEnvFile()
     {
-        $envExists = File::exists(base_path() . '/.env');
-
-        if (! $envExists) {
+        if (! file_exists(base_path('.env'))) {
             $this->info('Creating the environment configuration file.');
+
             $this->createEnvFile();
         } else {
             $this->info('Great! your environment configuration file already exists.');
@@ -139,23 +136,18 @@ class Installer extends Command
         try {
             File::copy('.env.example', '.env');
 
-            $defaultAppUrl = 'http://localhost:8000';
-            $inputAppUrl = $this->ask('Please Enter the APP URL : ');
-            $this->envUpdate('APP_URL=', $inputAppUrl ? $inputAppUrl : $defaultAppUrl);
+            $this->updateEnvVariable('APP_URL', 'Please Enter the APP URL', 'http://localhost:8000');
 
-            $defaultAdminUrl = 'admin';
-            $inputAdminUrl = $this->ask('Please Enter the Admin URL : ');
-            $this->envUpdate('APP_ADMIN_URL=', $inputAdminUrl ?: $defaultAdminUrl);
+            $this->updateEnvVariable('APP_ADMIN_URL', 'Please Enter the Admin Name', 'admin');
 
-            $locale = $this->choice('Please select the default locale or press enter to continue', ['ar', 'en', 'es', 'fa', 'nl', 'pt_BR'], 1);
-            $this->envUpdate('APP_LOCALE=', $locale);
+            $locales = ['ar', 'en', 'es', 'fa', 'nl', 'pt_BR'];
+            $this->updateEnvChoice('APP_LOCALE', 'Please select the default locale', $locales, 'en');
 
             $timeZones = timezone_identifiers_list();
-            $timezone = $this->anticipate('Please enter the default timezone', $timeZones, date_default_timezone_get());
-            $this->envUpdate('APP_TIMEZONE=', $timezone);
+            $this->updateEnvChoice('APP_TIMEZONE', 'Please enter the default timezone', $timeZones, date_default_timezone_get());
 
-            $currency = $this->choice('Please enter the default currency', ['USD', 'EUR'], 'USD');
-            $this->envUpdate('APP_CURRENCY=', $currency);
+            $currencies = ['USD', 'EUR'];
+            $this->updateEnvChoice('APP_CURRENCY', 'Please enter the default currency', $currencies, 'USD');
 
             $this->askForDatabaseDetails();
         } catch (\Exception $e) {
@@ -168,19 +160,47 @@ class Installer extends Command
      */
     protected function askForDatabaseDetails()
     {
-        $dbName = $this->ask('What is the database name to be used by bagisto?');
-        $this->envUpdate('DB_DATABASE=', $dbName);
+        $connectionOptions = ['Mysql', 'SQlite', 'pgSQL', 'SQLSRV'];
+
+        $dbConnection = $this->choice('Please select the default Database Connection or press enter to continue', $connectionOptions, 0);
+
+        if (! in_array($dbConnection, $connectionOptions)) {
+            return $this->askForDatabaseDetails();
+        }
+
+        $dbDetails = [
+            'DB_CONNECTION' => $dbConnection,
+            'DB_HOST'       => $this->ask('Please Enter the Database Hostname or press enter to continue', '127.0.0.1') ?? '127.0.0.1',
+            'DB_PORT'       => $this->ask('Please Enter the Database Port to be used in Bagisto', '3306') ?? '3306',
+        ];
+
+        $dbName = $this->ask('What is the database name to be used by Bagisto?');
+
+        if (! $dbName) {
+            return $this->error('Please Enter the database name.');
+        }
+
+        $dbDetails['DB_DATABASE'] = $dbName;
+
+        $dbPrefix = $this->ask('What is the database prefix name?');
 
         $dbUser = $this->anticipate('What is your database username?', ['root']);
-        $this->envUpdate('DB_USERNAME=', $dbUser);
 
         $dbPass = $this->secret('What is your database password?');
-        $this->envUpdate('DB_PASSWORD=', $dbPass);
+
+        if (! $dbUser || ! $dbPass) {
+            return $this->error('Please Enter the database username and password.');
+        }
+
+        $dbDetails['DB_PREFIX'] = $dbPrefix;
+        $dbDetails['DB_USERNAME'] = $dbUser;
+        $dbDetails['DB_PASSWORD'] = $dbPass;
+
+        foreach ($dbDetails as $key => $value) {
+            $this->envUpdate($key . '=', $value);
+        }
     }
 
-    /**
-     * Load `.env` config at runtime.
-     */
     protected function loadEnvConfigAtRuntime()
     {
         $this->warn('Loading configs...');
@@ -226,6 +246,50 @@ class Installer extends Command
         return false;
     }
 
+    protected function createAdminCredential()
+    {
+        $adminName = $this->ask('Please Enter the Admin for admin User :') ?? 'Admin';
+        $adminEmail = $this->ask('Please Enter the email for admin login:') ?? 'admin@example.com';
+        $adminPassword = $this->ask('Please Enter the password for admin login:') ?? 'admin@123';
+
+        $password = password_hash($adminPassword, PASSWORD_BCRYPT, ['cost' => 10]);
+
+        try {
+            DB::table('admins')->updateOrInsert(
+                ['id' => 1],
+                [
+                    'name'     => $adminName,
+                    'email'    => $adminEmail,
+                    'password' => $password,
+                    'role_id'  => 1,
+                    'status'   => 1,
+                ]
+            );
+
+            $this->info('-----------------------------');
+            $this->info('Congratulations!');
+            $this->info('The installation has been finished and you can now use Bagisto.');
+            $this->info('Go to ' . url(config('app.admin_url')) . ' and authenticate with:');
+            $this->info('Email: ' . $adminEmail);
+            $this->info('Password: ' . $adminPassword);
+            $this->info('Cheers!');
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
+    protected function updateEnvVariable($key, $question, $defaultValue)
+    {
+        $input = $this->ask($question);
+        $this->envUpdate("$key=", $input ?: $defaultValue);
+    }
+
+    protected function updateEnvChoice($key, $question, $choices, $defaultValue)
+    {
+        $choice = $this->choice($question, $choices, array_search($defaultValue, $choices));
+        $this->envUpdate("$key=", $choice);
+    }
+
     /**
      * Update the .env values.
      *
@@ -235,34 +299,18 @@ class Installer extends Command
      */
     protected static function envUpdate($key, $value)
     {
-        $path = base_path() . '/.env';
+        $envFilePath = base_path('.env');
 
-        $data = file($path);
+        $data = file_get_contents($envFilePath);
 
-        $keyValueData = $changedData = [];
+        $pattern = "/^$key=.*/m";
 
-        if ($data) {
-            foreach ($data as $line) {
-                $line = preg_replace('/\s+/', '', $line);
-
-                $rowValues = explode('=', $line);
-
-                if (strlen($line) !== 0) {
-                    $keyValueData[$rowValues[0]] = $rowValues[1];
-
-                    if (strpos($key, $rowValues[0]) !== false) {
-                        $keyValueData[$rowValues[0]] = $value;
-                    }
-                }
-            }
+        if (preg_match($pattern, $data)) {
+            $data = preg_replace($pattern, "$key=$value", $data);
+        } else {
+            $data .= "$key=$value\n";
         }
 
-        foreach ($keyValueData as $key => $value) {
-            $changedData[] = $key . '=' . $value;
-        }
-
-        $changedData = implode(PHP_EOL, $changedData);
-
-        file_put_contents($path, $changedData);
+        file_put_contents($envFilePath, $data);
     }
 }
