@@ -65,7 +65,7 @@ return [
             'categories' => [
                 'name'        => 'Root',
                 'description' => 'Root Category Description',
-            ]
+            ],
         ],
 
         'cms' => [
@@ -74,57 +74,57 @@ return [
                     'title'   => 'About Us',
                     'content' => 'About Us Page Content',
                 ],
-    
+
                 'refund-policy' => [
                     'title'   => 'Refund Policy',
                     'content' => 'Refund Policy Page Content',
                 ],
-    
+
                 'return-policy' => [
                     'title'   => 'Return Policy',
                     'content' => 'Return Policy Page Content',
                 ],
-    
+
                 'terms-conditions' => [
                     'title'   => 'Terms & Conditions',
                     'content' => 'Terms & Conditions Page Content',
                 ],
-    
+
                 'terms-of-use' => [
                     'title'   => 'Terms of Use',
                     'content' => 'Terms of Use Page Content',
                 ],
-    
+
                 'contact-us' => [
                     'title'   => 'Contact Us',
                     'content' => 'Contact Us Page Content',
                 ],
-    
+
                 'customer-service' => [
                     'title'   => 'Customer Service',
                     'content' => 'Customer Service Page Content',
                 ],
-    
+
                 'whats-new' => [
                     'title'   => 'What\'s New',
                     'content' => 'What\'s New page content',
                 ],
-    
+
                 'payment-policy' => [
                     'title'   => 'Payment Policy',
                     'content' => 'Payment Policy Page Content',
                 ],
-    
+
                 'shipping-policy' => [
                     'title'   => 'Shipping Policy',
                     'content' => 'Shipping Policy Page Content',
                 ],
-    
+
                 'privacy-policy' => [
                     'title'   => 'Privacy Policy',
                     'content' => 'Privacy Policy Page Content',
                 ],
-            ]
+            ],
         ],
 
         'core' => [

@@ -9,7 +9,7 @@ class CurrencyTableSeeder extends Seeder
 {
     /**
      * Currency symbols.
-     * 
+     *
      * @var array
      */
     protected $currencySymbols = [

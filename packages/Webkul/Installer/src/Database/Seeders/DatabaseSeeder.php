@@ -9,9 +9,9 @@ use Webkul\Installer\Database\Seeders\CMS\DatabaseSeeder as CMSSeeder;
 use Webkul\Installer\Database\Seeders\Core\DatabaseSeeder as CoreSeeder;
 use Webkul\Installer\Database\Seeders\Customer\DatabaseSeeder as CustomerSeeder;
 use Webkul\Installer\Database\Seeders\Inventory\DatabaseSeeder as InventorySeeder;
+use Webkul\Installer\Database\Seeders\Shop\ThemeCustomizationTableSeeder as ShopSeeder;
 use Webkul\Installer\Database\Seeders\SocialLogin\DatabaseSeeder as SocialLoginSeeder;
 use Webkul\Installer\Database\Seeders\User\DatabaseSeeder as UserSeeder;
-use Webkul\Installer\Database\Seeders\Shop\ThemeCustomizationTableSeeder as ShopSeeder;
 
 class DatabaseSeeder extends Seeder
 {

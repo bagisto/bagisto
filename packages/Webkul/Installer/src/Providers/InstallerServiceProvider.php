@@ -19,8 +19,7 @@ class InstallerServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap the application events.
-     * 
-     * @param  \Illuminate\Routing\Router  $router
+     *
      * @return void
      */
     public function boot(Router $router)
@@ -48,8 +47,6 @@ class InstallerServiceProvider extends ServiceProvider
 
     /**
      * Register the Installer Commands of this package.
-     * 
-     * @return void
      */
     protected function registerCommands(): void
     {
