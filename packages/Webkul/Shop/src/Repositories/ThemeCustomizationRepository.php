@@ -60,9 +60,9 @@ class ThemeCustomizationRepository extends Repository
             }
 
             $translatedModel = $theme->translate(core()->getRequestedLocaleCode());
-    
+
             $translatedModel->options = $options ?? [];
-    
+
             $translatedModel->save();
         }
     }
