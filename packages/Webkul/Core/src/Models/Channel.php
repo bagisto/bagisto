@@ -38,6 +38,15 @@ class Channel extends TranslatableModel implements ChannelContract
     ];
 
     /**
+     * Castable.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'home_seo' => 'array',
+    ];
+
+    /**
      * Translated attributes.
      *
      * @var array

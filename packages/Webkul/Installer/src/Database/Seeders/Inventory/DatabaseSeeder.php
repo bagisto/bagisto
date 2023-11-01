@@ -1,9 +1,8 @@
 <?php
 
-namespace Database\Seeders;
+namespace Webkul\Installer\Database\Seeders\Inventory;
 
 use Illuminate\Database\Seeder;
-use Webkul\Installer\Database\Seeders\DatabaseSeeder as BagistoDatabaseSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,6 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(BagistoDatabaseSeeder::class);
+        $this->call(InventorySourceTableSeeder::class);
     }
 }
