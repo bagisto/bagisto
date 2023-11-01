@@ -32,6 +32,15 @@ class Channel extends TranslatableModel implements ChannelContract
         'allowed_ips',
     ];
 
+    /**
+     * Castable.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'home_seo' => 'array',
+    ];
+
     public $translatedAttributes = [
         'name',
         'description',

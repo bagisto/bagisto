@@ -1,9 +1,8 @@
 <?php
 
-namespace Database\Seeders;
+namespace Webkul\Installer\Database\Seeders\User;
 
 use Illuminate\Database\Seeder;
-use Webkul\Installer\Database\Seeders\DatabaseSeeder as BagistoDatabaseSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,6 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(BagistoDatabaseSeeder::class);
+        $this->call(RolesTableSeeder::class);
+        $this->call(AdminsTableSeeder::class);
     }
 }
