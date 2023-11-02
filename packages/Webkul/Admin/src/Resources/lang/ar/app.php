@@ -2617,6 +2617,7 @@ return [
                 'update-slider'                 => 'تحديث الشريط',
                 'value-input'                   => 'القيمة',
                 'value'                         => 'القيمة: :value',
+                'image-title'                   => 'عنوان الصورة',
             ],
 
             'create-success' => 'تم إنشاء الموضوع بنجاح',

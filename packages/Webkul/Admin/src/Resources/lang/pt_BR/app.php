@@ -2618,6 +2618,7 @@ return [
                 'update-slider'                 => 'Atualizar Slider',
                 'value-input'                   => 'Valor',
                 'value'                         => 'Valor: :value',
+                'image-title'                   => 'Título da imagem',
             ],
 
             'create-success' => 'Tema criado com sucesso',

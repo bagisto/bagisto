@@ -23,17 +23,17 @@
         <div class="flex items-center gap-x-[8px]">
             <div class="shimmer w-[72px] h-[38px] rounded-[6px]"></div>
 
-            <p class="shimmer w-[56px] h-[17px]"></p>
+            <p class="shimmer w-[56px] h-[24px]"></p>
 
-            <div class="shimmer w-[40px] h-[38px]"></div>
+            <div class="shimmer w-[40px] h-[38px] rounded-[6px]"></div>
 
-            <div class="shimmer w-[28px] h-[24px] rounded-[6px]"></div>
+            <div class="shimmer w-[37px] h-[24px]"></div>
 
             <!-- Pagination -->
             <div class="flex items-center gap-[4px]">
-                <div class="shimmer w-[38px] h-[38px]"></div>
+                <div class="shimmer w-[38px] h-[38px] rounded-[6px]"></div>
 
-                <div class="shimmer w-[38px] h-[38px]"></div>
+                <div class="shimmer w-[38px] h-[38px] rounded-[6px]"></div>
             </div>
         </div>
     </div>

@@ -2618,6 +2618,7 @@ return [
                 'update-slider'                 => 'Оновити Слайдер',
                 'value-input'                   => 'Значення',
                 'value'                         => 'Значення: :value',
+                'image-title'                   => 'Заголовок зображення',
             ],
 
             'create-success' => 'Тему успішно створено',

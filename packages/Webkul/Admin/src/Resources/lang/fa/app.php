@@ -2618,6 +2618,7 @@ return [
                 'update-slider'                 => 'به‌روزرسانی اسلایدر',
                 'value-input'                   => 'مقدار',
                 'value'                         => 'مقدار: :value',
+                'image-title'                   => 'عنوان تصویر',
             ],
 
             'create-success' => 'تم با موفقیت ایجاد شد',
