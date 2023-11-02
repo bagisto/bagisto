@@ -192,9 +192,9 @@ class Installer extends Command
     protected function createAdminCredential()
     {
         // Here! Asking for Admin Name, Email and Password
-        $adminName = $this->ask('Please Enter the Name for admin User or press enter to continue', 'Admin');
+        $adminName = $this->ask('Please Enter the Name for admin User or press enter to continue', 'Example');
         $adminEmail = $this->ask('Please Enter the Email for admin login:', 'admin@example.com');
-        $adminPassword = $this->ask('Please Enter the Password for admin login:', 'admin@123');
+        $adminPassword = $this->ask('Please Enter the Password for admin login:', 'admin123');
 
         $password = password_hash($adminPassword, PASSWORD_BCRYPT, ['cost' => 10]);
 
