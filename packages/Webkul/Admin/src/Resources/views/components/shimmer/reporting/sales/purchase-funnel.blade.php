@@ -13,7 +13,7 @@
 
                 <div class="shimmer w-full relative aspect-[0.5/1]"></div>
 
-                <div class="shimmer w-[175px] h-[17px]"></div>
+                <div class="shimmer w-full h-[17px]"></div>
             </div>
         @endforeach
     </div>

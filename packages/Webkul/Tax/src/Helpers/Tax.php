@@ -25,8 +25,6 @@ class Tax
 
     /**
      * Is tax inclusive enabled in backend.
-     *
-     * @return bool
      */
     public static function isTaxInclusive(): bool
     {
@@ -35,10 +33,6 @@ class Tax
 
     /**
      * Returns an array with tax rates and tax amount.
-     *
-     * @param  object $that
-     * @param  bool   $asBase
-     * @return array
      */
     public static function getTaxRatesWithAmount(object $that, bool $asBase = false): array
     {
@@ -64,11 +58,6 @@ class Tax
 
     /**
      * Returns the total tax amount.
-     *
-     * @param object $that
-     * @param bool   $asBase
-     *
-     * @return float
      */
     public static function getTaxTotal(object $that, bool $asBase = false): float
     {
@@ -95,10 +84,10 @@ class Tax
             public $country;
 
             public $state;
-            
+
             public $postcode;
 
-            function __construct()
+            public function __construct()
             {
                 $this->country = core()->getConfigData('taxes.catalogue.default_location_calculation.country') != ''
                     ? core()->getConfigData('taxes.catalogue.default_location_calculation.country')
@@ -115,15 +104,15 @@ class Tax
      * This method will check tax for the current address. If applicable then
      * custom operation can be done.
      *
-     * @param  object    $address
-     * @param  object    $taxCategory
+     * @param  object  $address
+     * @param  object  $taxCategory
      * @param  \Closure  $operation
      * @return void
      */
     public static function isTaxApplicableInCurrentAddress($taxCategory, $address, $operation)
     {
         $taxRates = $taxCategory->tax_rates()->where([
-            'country' => $address->country,
+            'country' => $address?->country,
         ])->orderBy('tax_rate', 'desc')->get();
 
         if (! $taxRates->count()) {
@@ -158,7 +147,7 @@ class Tax
 
             if ($haveTaxRate) {
                 $operation($rate);
-                
+
                 break;
             }
         }

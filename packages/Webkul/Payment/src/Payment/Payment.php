@@ -2,7 +2,6 @@
 
 namespace Webkul\Payment\Payment;
 
-use Illuminate\Support\Facades\Config;
 use Webkul\Checkout\Facades\Cart;
 
 abstract class Payment

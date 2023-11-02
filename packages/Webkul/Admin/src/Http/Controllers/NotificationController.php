@@ -2,7 +2,6 @@
 
 namespace Webkul\Admin\Http\Controllers;
 
-use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Notification\Repositories\NotificationRepository;
 
 class NotificationController extends Controller
@@ -49,7 +48,6 @@ class NotificationController extends Controller
             'total_unread'   => $this->notificationRepository->where('read', 0)->count(),
         ];
     }
-
 
     /**
      * Update the notification is reade or not.

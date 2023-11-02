@@ -2,14 +2,14 @@
 
 namespace Webkul\Shop\Http\Controllers\Customer;
 
+use Cookie;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-use Cookie;
-use Webkul\Shop\Http\Controllers\Controller;
-use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Core\Repositories\SubscribersListRepository;
+use Webkul\Customer\Repositories\CustomerGroupRepository;
+use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Shop\Http\Requests\Customer\RegistrationRequest;
 use Webkul\Shop\Mail\Customer\EmailVerificationNotification;
 
@@ -25,8 +25,7 @@ class RegistrationController extends Controller
         protected CustomerRepository $customerRepository,
         protected CustomerGroupRepository $customerGroupRepository,
         protected SubscribersListRepository $subscriptionRepository
-    )
-    {
+    ) {
     }
 
     /**
@@ -46,7 +45,7 @@ class RegistrationController extends Controller
      */
     public function store(RegistrationRequest $registrationRequest)
     {
-        $data = array_merge(request()->only([
+        $data = array_merge($registrationRequest->only([
             'first_name',
             'last_name',
             'email',
@@ -111,7 +110,7 @@ class RegistrationController extends Controller
         if ($customer) {
             $this->customerRepository->update([
                 'is_verified' => 1,
-                'token'       => NULL,
+                'token'       => null,
             ], $customer->id);
 
             $this->customerRepository->syncNewRegisteredCustomerInformation($customer);

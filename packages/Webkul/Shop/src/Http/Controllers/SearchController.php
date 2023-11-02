@@ -2,7 +2,6 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\SearchRepository;
 
 class SearchController extends Controller
@@ -12,10 +11,7 @@ class SearchController extends Controller
      *
      * @return void
      */
-    public function __construct(
-        protected ProductRepository $productRepository,
-        protected SearchRepository $searchRepository
-    )
+    public function __construct(protected SearchRepository $searchRepository)
     {
     }
 
@@ -26,17 +22,7 @@ class SearchController extends Controller
      */
     public function index()
     {
-        $results = [];
-
-        request()->query->add([
-            'name'  => request('term'),
-            'sort'  => 'created_at',
-            'order' => 'desc',
-        ]);
-
-        $results = $this->productRepository->getAll();
-
-        return view('shop::search.index')->with('results', $results->count() ? $results : null);
+        return view('shop::search.index');
     }
 
     /**

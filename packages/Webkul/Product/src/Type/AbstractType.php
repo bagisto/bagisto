@@ -4,20 +4,19 @@ namespace Webkul\Product\Type;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductAttributeValueRepository;
-use Webkul\Product\Repositories\ProductInventoryRepository;
-use Webkul\Product\Repositories\ProductImageRepository;
-use Webkul\Product\Repositories\ProductVideoRepository;
-use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
-use Webkul\Product\DataTypes\CartItemValidationResult;
-use Webkul\Product\Models\ProductFlat;
-use Webkul\Product\Facades\ProductImage;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\CartItem;
+use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Product\DataTypes\CartItemValidationResult;
+use Webkul\Product\Facades\ProductImage;
+use Webkul\Product\Models\ProductFlat;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
+use Webkul\Product\Repositories\ProductImageRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductVideoRepository;
 use Webkul\Tax\Helpers\Tax;
 
 abstract class AbstractType
@@ -102,14 +101,6 @@ abstract class AbstractType
     /**
      * Create a new product type instance.
      *
-     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository   $productRepository
-     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $attributeValueRepository
-     * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
-     * @param  \Webkul\Product\Repositories\ProductImageRepository  $productImageRepository
-     * @param  \Webkul\Product\Repositories\ProductVideoRepository  $productVideoRepository
-     * @param  \Webkul\Product\Repositories\ProductCustomerGroupPriceRepository  $productCustomerGroupPriceRepository
      * @return void
      */
     public function __construct(
@@ -121,14 +112,12 @@ abstract class AbstractType
         protected ProductImageRepository $productImageRepository,
         protected ProductVideoRepository $productVideoRepository,
         protected ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository
-    )
-    {
+    ) {
     }
 
     /**
      * Create product.
      *
-     * @param  array  $data
      * @return \Webkul\Product\Contracts\Product
      */
     public function create(array $data)
@@ -139,7 +128,6 @@ abstract class AbstractType
     /**
      * Update product.
      *
-     * @param  array  $data
      * @param  int  $id
      * @param  string  $attribute
      * @return \Webkul\Product\Contracts\Product
@@ -243,7 +231,7 @@ abstract class AbstractType
                      * If $data[$attribute->code] is not equal to the previous one, that means someone has
                      * updated the file or image. In that case, we will remove the previous file.
                      */
-                    else if (
+                    elseif (
                         ! empty($previousTextValue)
                         && $data[$attribute->code] != $previousTextValue
                     ) {
@@ -289,6 +277,7 @@ abstract class AbstractType
      * Copy product.
      *
      * @return \Webkul\Product\Contracts\Product
+     *
      * @throws \Exception
      */
     public function copy()
@@ -300,7 +289,6 @@ abstract class AbstractType
         $copiedProduct = $this->product
             ->replicate()
             ->fill(['sku' => 'temporary-sku-' . substr(md5(microtime()), 0, 6)]);
-
 
         $copiedProduct->save();
 
@@ -315,15 +303,22 @@ abstract class AbstractType
      * Copy attribute values.
      *
      * @param  \Webkul\Product\Models\Product  $product
-     * @return void
      */
     protected function copyAttributeValues($product): void
     {
-        $productFlat = $this->product->product_flats[0]?->replicate() ?? new ProductFlat();
+        $productFlat = $this->product->product_flats->first()?->replicate() ?? new ProductFlat();
 
         $productFlat->product_id = $product->id;
 
         $attributesToSkip = config('products.skipAttributesOnCopy') ?? [];
+
+        $copyAttributes = [
+            'name'           => trans('admin::app.catalog.products.index.datagrid.copy-of', ['value' => $this->product->name]),
+            'url_key'        => trans('admin::app.catalog.products.index.datagrid.copy-of-slug', ['value' => $this->product->url_key]),
+            'sku'            => $product->sku,
+            'product_number' => ! empty($this->product->product_number) ? trans('admin::app.catalog.products.index.datagrid.copy-of-slug', ['value' => $this->product->product_number]) : null,
+            'status'         => 0,
+        ];
 
         foreach ($this->product->attribute_values as $attributeValue) {
             $attribute = $attributeValue->attribute;
@@ -332,27 +327,12 @@ abstract class AbstractType
                 continue;
             }
 
-            $value = null;
-
-            if ($attribute->code == 'name') {
-                $value = trans('admin::app.catalog.products.index.datagrid.copy-of', ['value' => $this->product->name]);
-            } elseif ($attribute->code == 'url_key') {
-                $value = trans('admin::app.catalog.products.index.datagrid.copy-of-slug', ['value' => $this->product->url_key]);
-            } elseif ($attribute->code == 'sku') {
-                $value = $product->sku;
-            } elseif ($attribute->code === 'product_number') {
-                if (!empty($this->product->product_number)) {
-                    $value = trans('admin::app.catalog.products.index.datagrid.copy-of-slug', ['value' => $this->product->product_number]);
-                }
-            } elseif ($attribute->code == 'status') {
-                $value = 0;
-            }
+            $value = $copyAttributes[$attribute->code] ?? null;
 
             $newAttributeValue = $attributeValue->replicate();
 
             if (! is_null($value)) {
                 $newAttributeValue->{$attribute->column_name} = $value;
-
                 $productFlat->{$attribute->code} = $value;
             }
 
@@ -414,11 +394,6 @@ abstract class AbstractType
 
     /**
      * Copy product image video.
-     *
-     * @param  $product
-     * @param  $media
-     * @param  $copiedMedia
-     * @return void
      */
     private function copyMedia($product, $media, $copiedMedia): void
     {
@@ -533,8 +508,6 @@ abstract class AbstractType
 
     /**
      * Is the administrator able to copy products of this type in the admin backend?
-     *
-     * @return bool
      */
     public function canBeCopied(): bool
     {
@@ -543,9 +516,6 @@ abstract class AbstractType
 
     /**
      * Have sufficient quantity.
-     *
-     * @param  int  $qty
-     * @return bool
      */
     public function haveSufficientQuantity(int $qty): bool
     {
@@ -899,9 +869,6 @@ abstract class AbstractType
 
     /**
      * Handle quantity.
-     *
-     * @param  int  $quantity
-     * @return int
      */
     public function handleQuantity(int $quantity): int
     {
@@ -970,7 +937,7 @@ abstract class AbstractType
     /**
      * Get actual ordered item.
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem $item
+     * @param  \Webkul\Checkout\Contracts\CartItem  $item
      * @return \Webkul\Checkout\Contracts\CartItem|\Webkul\Sales\Contracts\OrderItem|\Webkul\Sales\Contracts\InvoiceItem|\Webkul\Sales\Contracts\ShipmentItem|\Webkul\Customer\Contracts\Wishlist
      */
     public function getOrderedItem($item)
@@ -981,7 +948,7 @@ abstract class AbstractType
     /**
      * Get product base image.
      *
-     * @param  \Webkul\Customer\Contracts\CartItem|\Webkul\Checkout\Contracts\CartItem $item
+     * @param  \Webkul\Customer\Contracts\CartItem|\Webkul\Checkout\Contracts\CartItem  $item
      * @return array
      */
     public function getBaseImage($item)
@@ -991,9 +958,6 @@ abstract class AbstractType
 
     /**
      * Validate cart item product price and other things.
-     *
-     * @param  \Webkul\Checkout\Models\CartItem  $item
-     * @return \Webkul\Product\DataTypes\CartItemValidationResult
      */
     public function validateCartItem(CartItem $item): CartItemValidationResult
     {
@@ -1024,9 +988,6 @@ abstract class AbstractType
 
     /**
      * Returns true, if cart item is inactive.
-     *
-     * @param  \Webkul\Checkout\Contracts\CartItem  $item
-     * @return bool
      */
     public function isCartItemInactive(\Webkul\Checkout\Contracts\CartItem $item): bool
     {
@@ -1070,9 +1031,9 @@ abstract class AbstractType
         $customerGroup = $this->customerRepository->getCurrentGroup();
 
         $customerGroupPrices = $this->product->customer_group_prices()->where(function ($query) use ($customerGroup) {
-                $query->where('customer_group_id', $customerGroup->id)
-                    ->orWhereNull('customer_group_id');
-            })
+            $query->where('customer_group_id', $customerGroup->id)
+                ->orWhereNull('customer_group_id');
+        })
             ->where('qty', '>', 1)
             ->groupBy('qty')
             ->orderBy('qty')
@@ -1107,7 +1068,7 @@ abstract class AbstractType
         $offerLines = trans('shop::app.products.type.abstract.offers', [
             'qty'      => $customerGroupPrice->qty,
             'price'    => core()->currency($price),
-            'discount' => $discount,
+            'discount' => '<span>' . $discount . '%</span>',
         ]);
 
         return $offerLines;

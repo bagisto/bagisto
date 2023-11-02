@@ -87,7 +87,7 @@ class OrderDataGrid extends DataGrid
                         return '<p class="label-active">' . trans('admin::app.sales.orders.index.datagrid.completed') . '</p>';
 
                     case 'canceled':
-                        return '<p class="label-cancelled">' . trans('admin::app.sales.orders.index.datagrid.canceled') . '</p>';
+                        return '<p class="label-canceled">' . trans('admin::app.sales.orders.index.datagrid.canceled') . '</p>';
 
                     case 'closed':
                         return '<p class="label-closed">' . trans('admin::app.sales.orders.index.datagrid.closed') . '</p>';
@@ -99,7 +99,7 @@ class OrderDataGrid extends DataGrid
                         return '<p class="label-pending">' . trans('admin::app.sales.orders.index.datagrid.pending-payment') . '</p>';
 
                     case 'fraud':
-                        return '<p class="label-cancelled">' . trans('admin::app.sales.orders.index.datagrid.fraud') . '</p>';
+                        return '<p class="label-canceled">' . trans('admin::app.sales.orders.index.datagrid.fraud') . '</p>';
                 }
             },
         ]);

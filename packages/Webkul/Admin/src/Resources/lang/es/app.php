@@ -485,12 +485,25 @@ return [
                     'transaction-amount' => 'Monto',
                 ],
 
-                'edit'  => [
+                'create'  => [
                     'already-paid'               => 'Ya pagado',
                     'invoice-missing'            => 'Factura no encontrada',
                     'transaction-amount-zero'    => 'Monto de Transacción en cero',
                     'transaction-amount-exceeds' => 'Monto de Transacción excede',
                     'transaction-saved'          => 'Transacción guardada exitosamente',
+                ],
+
+                'view' => [
+                    'title'            => 'Detalles de la Transacción',
+                    'transaction-data' => 'Datos de la Transacción',
+                    'transaction-id'   => 'ID de Transacción',
+                    'order-id'         => 'Número de Pedido',
+                    'invoice-id'       => 'Número de Factura',
+                    'payment-method'   => 'Método de Pago',
+                    'created-at'       => 'Fecha de Creación',
+                    'status'           => 'Estado',
+                    'payment-details'  => 'Detalles de Pago',
+                    'amount'           => 'Monto',
                 ],
             ],
         ],
@@ -525,8 +538,8 @@ return [
                     'attribute-family-value' => 'Familia de atributos - :attribute_family',
                     'active'                 => 'Activo',
                     'category'               => 'Categoría',
-                    'copy-of'                => ':value',
-                    'copy-of-slug'           => ':value',
+                    'copy-of'                => 'Copia de :value',
+                    'copy-of-slug'           => 'copia-de-:value',
                     'disable'                => 'Desactivar',
                     'delete'                 => 'Eliminar',
                     'image'                  => 'Imagen',
@@ -2714,13 +2727,14 @@ return [
         ],
 
         'view' => [
-            'day'        => 'Día',
-            'end-date'   => 'Fecha de Finalización',
-            'export-csv' => 'Exportar CSV',
-            'export-xls' => 'Exportar XLS',
-            'month'      => 'Mes',
-            'start-date' => 'Fecha de Inicio',
-            'year'       => 'Año',
+            'day'           => 'Día',
+            'end-date'      => 'Fecha de Finalización',
+            'export-csv'    => 'Exportar CSV',
+            'export-xls'    => 'Exportar XLS',
+            'month'         => 'Mes',
+            'not-available' => 'o hay registros disponibles.',
+            'start-date'    => 'Fecha de Inicio',
+            'year'          => 'Año',
         ],
 
         'empty' => [
@@ -3402,6 +3416,7 @@ return [
         'orders'                   => 'Pedidos',
         'products'                 => 'Productos',
         'promotions'               => 'Promociones',
+        'reporting'                => 'Informes',
         'refunds'                  => 'Reembolsos',
         'reviews'                  => 'Reseñas',
         'roles'                    => 'Roles',

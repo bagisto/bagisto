@@ -155,7 +155,7 @@ class ConfigurableOption
     {
         $attributeOptionsData = [];
 
-        foreach ($attribute->options as $attributeOption) {
+        foreach ($attribute->options->sortBy('sort_order') as $attributeOption) {
             $optionId = $attributeOption->id;
 
             if (! isset($options[$attribute->id][$optionId])) {

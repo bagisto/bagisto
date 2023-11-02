@@ -52,7 +52,7 @@
                 </x-admin::dropdown>
             </div>
 
-            <div class="mb-[16px] flex gap-2">
+            <div class="mb-[16px] flex gap-2 flex-wrap">
                 <p
                     class="flex items-center rounded-[4px] bg-gray-600 px-[8px] py-[4px] font-semibold text-white"
                     v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
@@ -123,7 +123,7 @@
                     </x-admin::dropdown>
                 </div>
 
-                <div class="mb-[16px] flex gap-2">
+                <div class="mb-[16px] flex gap-2 flex-wrap">
                     <p
                         class="flex items-center rounded-[4px] bg-gray-600 px-[8px] py-[4px] font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
@@ -171,7 +171,7 @@
                     </v-datagrid-searchable-dropdown>
                 </div>
 
-                <div class="mb-[16px] flex gap-2">
+                <div class="mb-[16px] flex gap-2 flex-wrap">
                     <p
                         class="flex items-center rounded-[4px] bg-gray-600 px-[8px] py-[4px] font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
@@ -212,7 +212,7 @@
 
             <div class="mt-[5px] grid grid-cols-2 gap-[5px]">
                 <p
-                    class="cursor-pointer rounded-[6px] border px-[8px] py-[6px] text-center text-[14px] font-medium leading-[24px] text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:text-gray-300"
+                    class="cursor-pointer rounded-[6px] border px-[8px] py-[6px] text-center text-[14px] font-medium leading-[24px] text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:text-gray-300"
                     v-for="option in column.options"
                     v-text="option.label"
                     @click="filterPage(
@@ -226,7 +226,7 @@
                 <x-admin::flat-picker.date ::allow-input="false">
                     <input
                         value=""
-                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         :type="column.input_type"
                         :name="`${column.index}[from]`"
                         :placeholder="column.label"
@@ -243,7 +243,7 @@
                     <input
                         type="column.input_type"
                         value=""
-                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         :name="`${column.index}[to]`"
                         :placeholder="column.label"
                         :ref="`${column.index}[from]`"
@@ -255,7 +255,7 @@
                     />
                 </x-admin::flat-picker.date>
 
-                <div class="mb-[16px] flex gap-2">
+                <div class="mb-[16px] flex gap-2 flex-wrap">
                     <p
                         class="flex items-center rounded-[4px] bg-gray-600 px-[8px] py-[3px] font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
@@ -296,7 +296,7 @@
 
             <div class="my-[16px] grid grid-cols-2 gap-[5px]">
                 <p
-                    class="cursor-pointer rounded-[6px] border px-[8px] py-[6px] text-center text-[14px] font-medium leading-[24px] text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:text-gray-300"
+                    class="cursor-pointer rounded-[6px] border px-[8px] py-[6px] text-center text-[14px] font-medium leading-[24px] text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:text-gray-300"
                     v-for="option in column.options"
                     v-text="option.label"
                     @click="filterPage(
@@ -310,7 +310,7 @@
                 <x-admin::flat-picker.datetime ::allow-input="false">
                     <input
                         value=""
-                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         :type="column.input_type"
                         :name="`${column.index}[from]`"
                         :placeholder="column.label"
@@ -327,7 +327,7 @@
                     <input
                         type="column.input_type"
                         value=""
-                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         :name="`${column.index}[to]`"
                         :placeholder="column.label"
                         :ref="`${column.index}[from]`"
@@ -339,7 +339,7 @@
                     />
                 </x-admin::flat-picker.datetime>
 
-                <div class="mb-[16px] flex gap-2">
+                <div class="mb-[16px] flex gap-2 flex-wrap">
                     <p
                         class="flex items-center rounded-[4px] bg-gray-600 px-[8px] py-[3px] font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
@@ -388,7 +388,7 @@
                 />
             </div>
 
-            <div class="mb-[16px] flex gap-2">
+            <div class="mb-[16px] flex gap-2 flex-wrap">
                 <p
                     class="flex items-center rounded-[4px] bg-gray-600 px-[8px] py-[4px] font-semibold text-white"
                     v-for="appliedColumnValue in getAppliedColumnValues(column.index)"

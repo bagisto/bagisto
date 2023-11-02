@@ -80,7 +80,7 @@ class AdminServiceProvider extends ServiceProvider
             $tree = Tree::create();
 
             $permissionType = auth()->guard('admin')->user()->role->permission_type;
-            
+
             $allowedPermissions = auth()->guard('admin')->user()->role->permissions;
 
             foreach (config('menu.admin') as $index => $item) {
@@ -124,7 +124,7 @@ class AdminServiceProvider extends ServiceProvider
 
         view()->composer([
             'admin::settings.roles.create',
-            'admin::settings.roles.edit'
+            'admin::settings.roles.edit',
         ], function ($view) {
             $view->with('acl', $this->createACL());
         });

@@ -8,8 +8,6 @@ class AdminRepository extends Repository
 {
     /**
      * Specify model class name.
-     *
-     * @return string
      */
     public function model(): string
     {
@@ -18,8 +16,6 @@ class AdminRepository extends Repository
 
     /**
      * Count admins with all access.
-     *
-     * @return int
      */
     public function countAdminsWithAllAccess(): int
     {
@@ -32,8 +28,6 @@ class AdminRepository extends Repository
 
     /**
      * Count admins with all access and active status.
-     *
-     * @return int
      */
     public function countAdminsWithAllAccessAndActiveStatus(): int
     {

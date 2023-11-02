@@ -2,8 +2,8 @@
 
 namespace Webkul\Core\Database\Factories;
 
-use Webkul\Core\Models\Locale;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Webkul\Core\Models\Locale;
 
 class LocaleFactory extends Factory
 {
@@ -23,16 +23,14 @@ class LocaleFactory extends Factory
 
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
     public function definition(): array
     {
         do {
             $languageCode = $this->faker->languageCode;
         } while (Locale::query()
-                       ->where('code', $languageCode)
-                       ->exists());
+            ->where('code', $languageCode)
+            ->exists());
 
         return [
             'code'      => $languageCode,

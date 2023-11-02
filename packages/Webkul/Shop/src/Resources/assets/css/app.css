@@ -451,4 +451,12 @@
     .required:after {
         content: "*";
     }
+
+    .skip-to-main-content-link {
+        @apply absolute ltr:left-[-9999px] rtl:right-[-9999px] z-[999] p-[1em] bg-black text-white opacity-0;
+    }
+
+    .skip-to-main-content-link:focus {
+        @apply ltr:left-[50%] rtl:right-[50%] ltr:translate-x-[50%] rtl:translate-x-[-50%] opacity-100;
+    }
 }

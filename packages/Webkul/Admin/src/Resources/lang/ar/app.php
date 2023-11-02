@@ -485,12 +485,25 @@ return [
                     'transaction-amount' => 'المبلغ',
                 ],
 
-                'edit'  => [
+                'create'  => [
                     'already-paid'               => 'تم الدفع بالفعل',
                     'invoice-missing'            => 'الفاتورة مفقودة',
                     'transaction-amount-zero'    => 'مبلغ العملية صفر',
                     'transaction-amount-exceeds' => 'مبلغ العملية يتجاوز الحد المسموح به',
                     'transaction-saved'          => 'تم حفظ العملية بنجاح',
+                ],
+
+                'view' => [
+                    'title'            => 'تفاصيل العملية',
+                    'transaction-data' => 'بيانات العملية',
+                    'transaction-id'   => 'رقم العملية',
+                    'order-id'         => 'رقم الطلب',
+                    'invoice-id'       => 'رقم الفاتورة',
+                    'payment-method'   => 'طريقة الدفع',
+                    'created-at'       => 'تاريخ الإنشاء',
+                    'status'           => 'الحالة',
+                    'payment-details'  => 'تفاصيل الدفع',
+                    'amount'           => 'المبلغ',
                 ],
             ],
         ],
@@ -525,8 +538,8 @@ return [
                     'attribute-family-value' => 'عائلة السمة - :attribute_family',
                     'active'                 => 'نشط',
                     'category'               => 'الفئة',
-                    'copy-of'                => ':value',
-                    'copy-of-slug'           => ':value',
+                    'copy-of'                => 'نسخة من :value',
+                    'copy-of-slug'           => 'نسخة-من-:value',
                     'disable'                => 'تعطيل',
                     'delete'                 => 'حذف',
                     'image'                  => 'صورة',
@@ -2713,13 +2726,14 @@ return [
         ],
 
         'view' => [
-            'day'        => 'يوم',
-            'end-date'   => 'تاريخ الانتهاء',
-            'export-csv' => 'تصدير كملف CSV',
-            'export-xls' => 'تصدير كملف XLS',
-            'month'      => 'شهر',
-            'start-date' => 'تاريخ البدء',
-            'year'       => 'سنة',
+            'day'           => 'يوم',
+            'end-date'      => 'تاريخ الانتهاء',
+            'export-csv'    => 'تصدير كملف CSV',
+            'export-xls'    => 'تصدير كملف XLS',
+            'month'         => 'شهر',
+            'not-available' => 'غير متاح أي سجلات.',
+            'start-date'    => 'تاريخ البدء',
+            'year'          => 'سنة',
         ],
 
         'empty' => [
@@ -3400,6 +3414,7 @@ return [
         'orders'                   => 'الطلبيات',
         'products'                 => 'المنتجات',
         'promotions'               => 'العروض',
+        'reporting'                => 'التقرير',
         'refunds'                  => 'المرتجعات',
         'reviews'                  => 'التقييمات',
         'roles'                    => 'الأدوار',

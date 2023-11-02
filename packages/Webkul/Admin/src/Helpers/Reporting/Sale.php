@@ -2,11 +2,11 @@
 
 namespace Webkul\Admin\Helpers\Reporting;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Collection;
-use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Sales\Repositories\OrderItemRepository;
+use Illuminate\Support\Facades\DB;
 use Webkul\Sales\Repositories\InvoiceRepository;
+use Webkul\Sales\Repositories\OrderItemRepository;
+use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\RefundRepository;
 
 class Sale extends AbstractReporting
@@ -14,10 +14,6 @@ class Sale extends AbstractReporting
     /**
      * Create a helper instance.
      *
-     * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
-     * @param  \Webkul\Sales\Repositories\OrderItemRepository  $orderItemRepository
-     * @param  \Webkul\Sales\Repositories\InvoiceRepository  $invoiceRepository
-     * @param  \Webkul\Sales\Repositories\RefundRepository  $refundRepository
      * @return void
      */
     public function __construct(
@@ -48,7 +44,6 @@ class Sale extends AbstractReporting
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
-     * @return array
      */
     public function getPreviousTotalOrdersOverTime($period = 'auto', $includeEmpty = true): array
     {
@@ -60,7 +55,6 @@ class Sale extends AbstractReporting
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
-     * @return array
      */
     public function getCurrentTotalOrdersOverTime($period = 'auto', $includeEmpty = true): array
     {
@@ -72,7 +66,6 @@ class Sale extends AbstractReporting
      *
      * @param  \Carbon\Carbon  $startDate
      * @param  \Carbon\Carbon  $endDate
-     * @return int
      */
     public function getTotalOrders($startDate, $endDate): int
     {
@@ -88,7 +81,6 @@ class Sale extends AbstractReporting
      * @param  \Carbon\Carbon  $endDate
      * @param  string  $period
      * @param  bool  $includeEmpty
-     * @return array
      */
     public function getTotalOrdersOverTime($startDate, $endDate, $period, $includeEmpty): array
     {
@@ -102,8 +94,6 @@ class Sale extends AbstractReporting
 
     /**
      * Retrieves today orders and their progress.
-     *
-     * @return array
      */
     public function getTodayOrdersProgress(): array
     {
@@ -129,8 +119,6 @@ class Sale extends AbstractReporting
 
     /**
      * Retrieves total sales and their progress.
-     *
-     * @return array
      */
     public function getTotalSalesProgress(): array
     {
@@ -144,15 +132,14 @@ class Sale extends AbstractReporting
 
     /**
      * Retrieves today sales and their progress.
-     *
-     * @return array
      */
     public function getTodaySalesProgress(): array
     {
         return [
-            'previous' => $previous = $this->getTotalSales(now()->subDay()->startOfDay(), now()->subDay()->endOfDay()),
-            'current'  => $current = $this->getTotalSales(now()->today(), now()->endOfDay()),
-            'progress' => $this->getPercentageChange($previous, $current),
+            'previous'        => $previous = $this->getTotalSales(now()->subDay()->startOfDay(), now()->subDay()->endOfDay()),
+            'current'         => $current = $this->getTotalSales(now()->today(), now()->endOfDay()),
+            'formatted_total' => core()->formatBasePrice($current),
+            'progress'        => $this->getPercentageChange($previous, $current),
         ];
     }
 
@@ -161,7 +148,6 @@ class Sale extends AbstractReporting
      *
      * @param  \Carbon\Carbon  $startDate
      * @param  \Carbon\Carbon  $endDate
-     * @return float
      */
     public function getTotalSales($startDate, $endDate): float
     {
@@ -175,7 +161,6 @@ class Sale extends AbstractReporting
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
-     * @return array
      */
     public function getPreviousTotalSalesOverTime($period = 'auto', $includeEmpty = true): array
     {
@@ -187,7 +172,6 @@ class Sale extends AbstractReporting
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
-     * @return array
      */
     public function getCurrentTotalSalesOverTime($period = 'auto', $includeEmpty = true): array
     {
@@ -201,7 +185,6 @@ class Sale extends AbstractReporting
      * @param  \Carbon\Carbon  $endDate
      * @param  string  $period
      * @param  bool  $includeEmpty
-     * @return array
      */
     public function getTotalSalesOverTime($startDate, $endDate, $period, $includeEmpty): array
     {
@@ -215,8 +198,6 @@ class Sale extends AbstractReporting
 
     /**
      * Retrieves average sales and their progress.
-     *
-     * @return array
      */
     public function getAverageSalesProgress(): array
     {
@@ -247,7 +228,6 @@ class Sale extends AbstractReporting
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
-     * @return array
      */
     public function getPreviousAverageSalesOverTime($period = 'auto', $includeEmpty = true): array
     {
@@ -259,7 +239,6 @@ class Sale extends AbstractReporting
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
-     * @return array
      */
     public function getCurrentAverageSalesOverTime($period = 'auto', $includeEmpty = true): array
     {
@@ -273,7 +252,6 @@ class Sale extends AbstractReporting
      * @param  \Carbon\Carbon  $endDate
      * @param  string  $period
      * @param  bool  $includeEmpty
-     * @return array
      */
     public function getAverageSalesOverTime($startDate, $endDate, $period, $includeEmpty): array
     {
@@ -287,8 +265,6 @@ class Sale extends AbstractReporting
 
     /**
      * Retrieves refunds and their progress.
-     *
-     * @return array
      */
     public function getRefundsProgress(): array
     {
@@ -319,7 +295,6 @@ class Sale extends AbstractReporting
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
-     * @return array
      */
     public function getPreviousRefundsOverTime($period = 'auto', $includeEmpty = true): array
     {
@@ -331,7 +306,6 @@ class Sale extends AbstractReporting
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
-     * @return array
      */
     public function getCurrentRefundsOverTime($period = 'auto', $includeEmpty = true): array
     {
@@ -345,7 +319,6 @@ class Sale extends AbstractReporting
      * @param  \Carbon\Carbon  $endDate
      * @param  string  $period
      * @param  bool  $includeEmpty
-     * @return array
      */
     public function getRefundsOverTime($startDate, $endDate, $period, $includeEmpty): array
     {
@@ -359,8 +332,6 @@ class Sale extends AbstractReporting
 
     /**
      * Retrieves tax collected and their progress.
-     *
-     * @return array
      */
     public function getTaxCollectedProgress(): array
     {
@@ -391,7 +362,6 @@ class Sale extends AbstractReporting
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
-     * @return array
      */
     public function getPreviousTaxCollectedOverTime($period = 'auto', $includeEmpty = true): array
     {
@@ -403,7 +373,6 @@ class Sale extends AbstractReporting
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
-     * @return array
      */
     public function getCurrentTaxCollectedOverTime($period = 'auto', $includeEmpty = true): array
     {
@@ -417,7 +386,6 @@ class Sale extends AbstractReporting
      * @param  \Carbon\Carbon  $endDate
      * @param  string  $period
      * @param  bool  $includeEmpty
-     * @return array
      */
     public function getTaxCollectedOverTime($startDate, $endDate, $period, $includeEmpty): array
     {
@@ -432,8 +400,7 @@ class Sale extends AbstractReporting
     /**
      * Returns top tax categories
      *
-     * @param  integer  $limit
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @param  int  $limit
      */
     public function getTopTaxCategories($limit = null): Collection
     {
@@ -451,8 +418,6 @@ class Sale extends AbstractReporting
 
     /**
      * Retrieves shipping collected and their progress.
-     *
-     * @return array
      */
     public function getShippingCollectedProgress(): array
     {
@@ -483,7 +448,6 @@ class Sale extends AbstractReporting
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
-     * @return array
      */
     public function getPreviousShippingCollectedOverTime($period = 'auto', $includeEmpty = true): array
     {
@@ -495,7 +459,6 @@ class Sale extends AbstractReporting
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
-     * @return array
      */
     public function getCurrentShippingCollectedOverTime($period = 'auto', $includeEmpty = true): array
     {
@@ -509,7 +472,6 @@ class Sale extends AbstractReporting
      * @param  \Carbon\Carbon  $endDate
      * @param  string  $period
      * @param  bool  $includeEmpty
-     * @return array
      */
     public function getShippingCollectedOverTime($startDate, $endDate, $period, $includeEmpty): array
     {
@@ -524,8 +486,7 @@ class Sale extends AbstractReporting
     /**
      * Returns top shipping methods
      *
-     * @param  integer  $limit
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @param  int  $limit
      */
     public function getTopShippingMethods($limit = null): Collection
     {
@@ -543,8 +504,7 @@ class Sale extends AbstractReporting
     /**
      * Returns top payment methods
      *
-     * @param  integer  $limit
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @param  int  $limit
      */
     public function getTopPaymentMethods($limit = null): Collection
     {
@@ -562,8 +522,6 @@ class Sale extends AbstractReporting
 
     /**
      * Gets the total amount of pending invoices.
-     *
-     * @return float
      */
     public function getTotalPendingInvoicesAmount(): float
     {
@@ -593,7 +551,6 @@ class Sale extends AbstractReporting
      * @param  \Carbon\Carbon  $endDate
      * @param  string  $valueColumn
      * @param  string  $period
-     * @return array
      */
     public function getOverTimeStats($startDate, $endDate, $valueColumn, $period = 'auto'): array
     {
@@ -605,7 +562,7 @@ class Sale extends AbstractReporting
             ->select(
                 DB::raw("$groupColumn AS date"),
                 DB::raw("$valueColumn AS total"),
-                DB::raw("COUNT(*) AS count")
+                DB::raw('COUNT(*) AS count')
             )
             ->whereBetween('created_at', [$startDate, $endDate])
             ->groupBy('date')

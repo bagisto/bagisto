@@ -485,12 +485,25 @@ return [
                     'transaction-amount' => 'Сумма',
                 ],
 
-                'edit'  => [
+                'create'  => [
                     'already-paid'               => 'Уже оплачено',
                     'invoice-missing'            => 'Счет отсутствует',
                     'transaction-amount-zero'    => 'Сумма транзакции равна нулю',
                     'transaction-amount-exceeds' => 'Сумма транзакции превышает',
                     'transaction-saved'          => 'Транзакция успешно сохранена',
+                ],
+
+                'view' => [
+                    'title'            => 'Детали транзакции',
+                    'transaction-data' => 'Данные транзакции',
+                    'transaction-id'   => 'Идентификатор транзакции',
+                    'order-id'         => 'Идентификатор заказа',
+                    'invoice-id'       => 'Идентификатор счета',
+                    'payment-method'   => 'Метод оплаты',
+                    'created-at'       => 'Создано',
+                    'status'           => 'Статус',
+                    'payment-details'  => 'Детали оплаты',
+                    'amount'           => 'Сумма',
                 ],
             ],
         ],
@@ -525,8 +538,8 @@ return [
                     'attribute-family-value' => 'Семейство атрибутов - :attribute_family',
                     'active'                 => 'Активный',
                     'category'               => 'Категория',
-                    'copy-of'                => ':value',
-                    'copy-of-slug'           => ':value',
+                    'copy-of'                => 'Копия :value',
+                    'copy-of-slug'           => 'копия-:value',
                     'disable'                => 'Отключить',
                     'delete'                 => 'Удалить',
                     'image'                  => 'Изображение',
@@ -2714,13 +2727,14 @@ return [
         ],
 
         'view' => [
-            'day'        => 'День',
-            'end-date'   => 'Дата окончания',
-            'export-csv' => 'Экспорт в CSV',
-            'export-xls' => 'Экспорт в XLS',
-            'month'      => 'Месяц',
-            'start-date' => 'Дата начала',
-            'year'       => 'Год',
+            'day'           => 'День',
+            'end-date'      => 'Дата окончания',
+            'export-csv'    => 'Экспорт в CSV',
+            'export-xls'    => 'Экспорт в XLS',
+            'month'         => 'Месяц',
+            'not-available' => 'Нет доступных записей.',
+            'start-date'    => 'Дата начала',
+            'year'          => 'Год',
         ],
 
         'empty' => [
@@ -3389,6 +3403,7 @@ return [
         'orders'                   => 'Заказы',
         'products'                 => 'Продукты',
         'promotions'               => 'Акции',
+        'reporting'                => 'Отчетность',
         'refunds'                  => 'Возвраты',
         'reviews'                  => 'Отзывы',
         'roles'                    => 'Роли',

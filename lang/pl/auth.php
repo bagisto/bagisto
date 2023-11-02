@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => 'Podane dane uwierzytelniające nie pasują do naszych zapisów.',
+    'failed'   => 'Podane dane uwierzytelniające nie pasują do naszych zapisów.',
     'throttle' => 'Zbyt wiele prób logowania. Proszę spróbować ponownie za :seconds sekund.',
 
 ];

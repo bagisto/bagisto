@@ -18,14 +18,14 @@
                             @lang('admin::app.customers.customers.view.active')
                         </span>
                     @else    
-                        <span class="label-cancelled text-[14px] mx-[5px]">
+                        <span class="label-canceled text-[14px] mx-[5px]">
                             @lang('admin::app.customers.customers.view.inactive')
                         </span>
                     @endif
 
                     {{-- Customer Suspended Status --}}
                     @if ($customer->is_suspended == 1)
-                        <span class="label-cancelled text-[14px]">
+                        <span class="label-canceled text-[14px]">
                             @lang('admin::app.customers.customers.view.suspended')
                         </span>
                     @endif
@@ -141,7 +141,7 @@
                                                     @break
 
                                                 @case('canceled')
-                                                    <p class="label-cancelled">
+                                                    <p class="label-canceled">
                                                         @lang('admin::app.customers.customers.view.canceled')
                                                     </p>
                                                     @break
@@ -222,7 +222,7 @@
                         <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
                             <!-- Placeholder Image -->
                             <img
-                                src="{{ bagisto_asset('images/empty-placeholders/orders-empty.svg') }}"
+                                src="{{ bagisto_asset('images/empty-placeholders/orders.svg') }}"
                                 class="w-[80px] h-[80px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
                             />
 
@@ -353,7 +353,7 @@
                                             @break
 
                                         @case('disapproved')
-                                            <p class="label-cancelled">
+                                            <p class="label-canceled">
                                                 @lang('admin::app.customers.customers.view.disapproved')
                                             </p>
                                             @break
@@ -416,7 +416,7 @@
                         <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
                             {{-- Placeholder Image --}}
                             <img
-                                src="{{ bagisto_asset('images/empty-placeholders/reviews-empty.svg') }}"
+                                src="{{ bagisto_asset('images/empty-placeholders/reviews.svg') }}"
                                 class="w-[80px] h-[80px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
                             />
 

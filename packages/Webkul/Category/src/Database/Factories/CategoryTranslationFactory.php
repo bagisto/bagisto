@@ -2,8 +2,8 @@
 
 namespace Webkul\Category\Database\Factories;
 
-use Webkul\Category\Models\CategoryTranslation;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Webkul\Category\Models\CategoryTranslation;
 
 class CategoryTranslationFactory extends Factory
 {
@@ -16,8 +16,6 @@ class CategoryTranslationFactory extends Factory
 
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
     public function definition(): array
     {

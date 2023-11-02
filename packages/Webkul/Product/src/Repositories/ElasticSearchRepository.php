@@ -11,8 +11,6 @@ class ElasticSearchRepository
     /**
      * Create a new repository instance.
      *
-     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
      * @return void
      */
     public function __construct(
@@ -129,10 +127,8 @@ class ElasticSearchRepository
 
             case 'text':
                 return [
-                    'wildcard' => [
-                        $attribute->code => [
-                            'value' => '*' . $params[$attribute->code] . '*',
-                        ],
+                    'match_phrase' => [
+                        $attribute->code => $params[$attribute->code],
                     ],
                 ];
 

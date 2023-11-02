@@ -2,8 +2,8 @@
 
 namespace Webkul\Product\Models;
 
-use Webkul\Core\Eloquent\TranslatableModel;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Core\Eloquent\TranslatableModel;
 use Webkul\Product\Contracts\ProductDownloadableSample as ProductDownloadableSampleContract;
 
 class ProductDownloadableSample extends TranslatableModel implements ProductDownloadableSampleContract

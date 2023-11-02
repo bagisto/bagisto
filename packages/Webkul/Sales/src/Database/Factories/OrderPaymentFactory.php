@@ -2,8 +2,8 @@
 
 namespace Webkul\Sales\Database\Factories;
 
-use Webkul\Sales\Models\OrderPayment;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Webkul\Sales\Models\OrderPayment;
 
 class OrderPaymentFactory extends Factory
 {
@@ -16,8 +16,6 @@ class OrderPaymentFactory extends Factory
 
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
     public function definition(): array
     {
@@ -26,4 +24,3 @@ class OrderPaymentFactory extends Factory
         ];
     }
 }
-

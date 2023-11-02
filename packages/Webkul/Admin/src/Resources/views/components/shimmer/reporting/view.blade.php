@@ -6,7 +6,8 @@
     </div>
 
     <!-- Actions -->
-    <div class="flex gap-[6px]">
+    <div class="flex gap-[6px] items-center">
+        <div class="shimmer w-[24px] h-[24px] rounded-[6px]"></div>
         <div class="shimmer w-[88px] h-[39px] rounded-[6px]"></div>
         <div class="shimmer w-[140px] h-[39px] rounded-[6px]"></div>
         <div class="shimmer w-[140px] h-[39px] rounded-[6px]"></div>

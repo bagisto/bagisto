@@ -9,7 +9,7 @@
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.marketing.communications.events.index.title')
             </p>
-    
+
             <div class="flex gap-x-[10px] items-center">
                 <!-- Create Button -->
                 @if (bouncer()->hasPermission('marketing.communications.events.create'))
@@ -25,15 +25,15 @@
     </v-events>
 
     @pushOnce('scripts')
-        <script 
-            type="text/x-template" 
+        <script
+            type="text/x-template"
             id="v-events-template"
         >
             <div class="flex gap-[16px] justify-between max-sm:flex-wrap">
                 <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                     @lang('admin::app.marketing.communications.events.index.title')
                 </p>
-        
+
                 <div class="flex gap-x-[10px] items-center">
                     <!-- Create Button -->
                     @if (bouncer()->hasPermission('marketing.communications.events.create'))
@@ -104,17 +104,17 @@
                     <div
                         v-for="record in records"
                         class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
-                        :style="'grid-template-columns: repeat(' + (record.actions.length ? 4 : 3) + ', 1fr);'"
+                        :style="'grid-template-columns: repeat(' + (record.actions.length ? 4 : 3) + ', minmax(0, 1fr));'"
                     >
                         <!-- Id -->
                         <p v-text="record.id"></p>
-        
+
                         <!-- Status -->
                         <p v-text="record.name"></p>
-        
+
                         <!-- Email -->
                         <p v-text="record.date"></p>
-        
+
                         <!-- Actions -->
                         <div class="flex justify-end">
                             <a @click="id=1; editModal(record.actions.find(action => action.title === 'Edit')?.url)">
@@ -165,7 +165,7 @@
                                 @lang('admin::app.marketing.communications.events.index.create.title')
                             </p>
 
-                            <p 
+                            <p
                                 class="text-[18px] text-gray-800 dark:text-white font-bold"
                                 v-else
                             >
@@ -189,7 +189,7 @@
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.communications.events.index.create.name')
                                     </x-admin::form.control-group.label>
-        
+
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="name"
@@ -200,19 +200,19 @@
                                         :placeholder="trans('admin::app.marketing.communications.events.index.create.name')"
                                     >
                                     </x-admin::form.control-group.control>
-        
+
                                     <x-admin::form.control-group.error
                                         control-name="name"
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
-        
+
                                 <!-- Event Description -->
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.communications.events.index.create.description')
                                     </x-admin::form.control-group.label>
-        
+
                                     <x-admin::form.control-group.control
                                         type="textarea"
                                         name="description"
@@ -224,8 +224,8 @@
                                         :label="trans('admin::app.marketing.communications.events.index.create.description')"
                                     >
                                     </x-admin::form.control-group.control>
-        
-                                    <x-admin::form.control-group.error 
+
+                                    <x-admin::form.control-group.error
                                         control-name="description"
                                     >
                                     </x-admin::form.control-group.error>
@@ -236,7 +236,7 @@
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.communications.events.index.create.date')
                                     </x-admin::form.control-group.label>
-        
+
                                     <x-admin::form.control-group.control
                                         type="date"
                                         name="date"
@@ -248,7 +248,7 @@
                                         :placeholder="trans('admin::app.marketing.communications.events.index.create.date')"
                                     >
                                     </x-admin::form.control-group.control>
-        
+
                                     <x-admin::form.control-group.error
                                         control-name="date"
                                     >
@@ -256,7 +256,7 @@
                                 </x-admin::form.control-group>
                             </div>
                         </x-slot:content>
-                        
+
                         <x-slot:footer>
                             <!-- Save Button -->
                             <button class="primary-button">

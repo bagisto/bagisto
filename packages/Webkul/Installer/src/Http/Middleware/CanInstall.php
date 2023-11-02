@@ -4,16 +4,15 @@ namespace Webkul\Installer\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
-use Webkul\Installer\Http\Helpers\DatabaseManager;
+use Webkul\Installer\Helpers\DatabaseManager;
 
 class CanInstall
 {
     /**
-     * Handles Requests for Installer middleware. 
+     * Handles Requests for Installer middleware.
      *
-     * @param Request $request
-     * @param Closure $next
      * @return void
      */
     public function handle(Request $request, Closure $next)
@@ -42,8 +41,10 @@ class CanInstall
             return true;
         }
 
-        if (app(DatabaseManager::class)->checkConnection()) {
+        if (app(DatabaseManager::class)->isInstalled()) {
             touch(storage_path('installed'));
+
+            Event::dispatch('bagisto.installed');
 
             return true;
         }

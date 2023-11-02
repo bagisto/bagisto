@@ -4,11 +4,11 @@ namespace Webkul\Attribute\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Webkul\Core\Eloquent\TranslatableModel;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Webkul\Attribute\Database\Factories\AttributeFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Webkul\Attribute\Contracts\Attribute as AttributeContract;
+use Webkul\Attribute\Database\Factories\AttributeFactory;
+use Webkul\Core\Eloquent\TranslatableModel;
 
 class Attribute extends TranslatableModel implements AttributeContract
 {
@@ -66,9 +66,6 @@ class Attribute extends TranslatableModel implements AttributeContract
 
     /**
      * Scope a query to only include popular users.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeFilterableAttributes(Builder $query): Builder
     {
@@ -79,8 +76,6 @@ class Attribute extends TranslatableModel implements AttributeContract
 
     /**
      * Create a new factory instance for the model
-     *
-     * @return Factory
      */
     protected static function newFactory(): Factory
     {
@@ -105,7 +100,7 @@ class Attribute extends TranslatableModel implements AttributeContract
     protected function getValidationsAttribute()
     {
         $validations = [];
-        
+
         if ($this->is_required) {
             $validations[] = 'required: true';
         }
@@ -136,7 +131,7 @@ class Attribute extends TranslatableModel implements AttributeContract
             $validations[] = $this->validation . ': true';
         }
 
-        $validations = '{ '. implode(', ', array_filter($validations)) . ' }';
+        $validations = '{ ' . implode(', ', array_filter($validations)) . ' }';
 
         return $validations;
     }

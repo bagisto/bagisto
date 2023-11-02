@@ -1,10 +1,11 @@
 <?php
 
 namespace Webkul\Checkout\Listeners;
+
 use Cart;
 
-class CustomerEventsHandler {
-
+class CustomerEventsHandler
+{
     /**
      * Handle Customer login events.
      */

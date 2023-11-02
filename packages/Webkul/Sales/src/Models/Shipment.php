@@ -3,14 +3,14 @@
 namespace Webkul\Sales\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Model;
-use Webkul\Inventory\Models\InventorySource;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Webkul\Sales\Database\Factories\ShipmentFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Webkul\Inventory\Models\InventorySource;
 use Webkul\Sales\Contracts\Shipment as ShipmentContract;
+use Webkul\Sales\Database\Factories\ShipmentFactory;
 
 class Shipment extends Model implements ShipmentContract
 {
@@ -65,8 +65,6 @@ class Shipment extends Model implements ShipmentContract
 
     /**
      * Create a new factory instance for the model.
-     *
-     * @return Factory
      */
     protected static function newFactory(): Factory
     {

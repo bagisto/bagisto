@@ -485,12 +485,25 @@ return [
                     'transaction-amount' => 'Betrag',
                 ],
 
-                'edit'  => [
+                'create'  => [
                     'already-paid'               => 'Bereits bezahlt',
                     'invoice-missing'            => 'Rechnung fehlt',
                     'transaction-amount-zero'    => 'Transaktionsbetrag ist null',
                     'transaction-amount-exceeds' => 'Transaktionsbetrag überschreitet den Betrag',
                     'transaction-saved'          => 'Transaktion erfolgreich gespeichert',
+                ],
+
+                'view' => [
+                    'title'            => 'Transaktionsdetails',
+                    'transaction-data' => 'Transaktionsdaten',
+                    'transaction-id'   => 'Transaktions-ID',
+                    'order-id'         => 'Bestellnummer',
+                    'invoice-id'       => 'Rechnungsnummer',
+                    'payment-method'   => 'Zahlungsmethode',
+                    'created-at'       => 'Erstellt am',
+                    'status'           => 'Status',
+                    'payment-details'  => 'Zahlungsdetails',
+                    'amount'           => 'Betrag',
                 ],
             ],
         ],
@@ -525,8 +538,8 @@ return [
                     'attribute-family-value' => 'Attributfamilie - :attribute_family',
                     'active'                 => 'Aktiv',
                     'category'               => 'Kategorie',
-                    'copy-of'                => ':value',
-                    'copy-of-slug'           => ':value',
+                    'copy-of'                => 'Kopie von :value',
+                    'copy-of-slug'           => 'kopie-von-:value',
                     'disable'                => 'Deaktivieren',
                     'delete'                 => 'Löschen',
                     'image'                  => 'Bild',
@@ -2714,13 +2727,14 @@ return [
         ],
 
         'view' => [
-            'day'        => 'Tag',
-            'end-date'   => 'Enddatum',
-            'export-csv' => 'CSV exportieren',
-            'export-xls' => 'XLS exportieren',
-            'month'      => 'Monat',
-            'start-date' => 'Startdatum',
-            'year'       => 'Jahr',
+            'day'           => 'Tag',
+            'end-date'      => 'Enddatum',
+            'export-csv'    => 'CSV exportieren',
+            'export-xls'    => 'XLS exportieren',
+            'month'         => 'Monat',
+            'not-available' => 'Keine Datensätze verfügbar.',
+            'start-date'    => 'Startdatum',
+            'year'          => 'Jahr',
         ],
 
         'empty' => [
@@ -3402,6 +3416,7 @@ return [
         'orders'                   => 'Bestellungen',
         'products'                 => 'Produkte',
         'promotions'               => 'Promotionen',
+        'reporting'                => 'Berichterstattung',
         'refunds'                  => 'Rückerstattungen',
         'reviews'                  => 'Bewertungen',
         'roles'                    => 'Rollen',

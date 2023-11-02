@@ -11,14 +11,12 @@ class CatalogRuleProductPrice
      * Create a new helper instance.
      *
      * @param  \Webkul\Attribute\Repositories\CatalogRuleProductPriceRepository  $catalogRuleProductPriceRepository
-     * @param  \Webkul\CatalogRule\Helpers\CatalogRuleProduct  $catalogRuleProductHelper
      * @return void
      */
     public function __construct(
         protected CatalogRuleProductPriceRepository $catalogRuleProductPriceRepository,
         protected CatalogRuleProduct $catalogRuleProductHelper
-    )
-    {
+    ) {
     }
 
     /**
@@ -154,7 +152,7 @@ class CatalogRuleProductPrice
             $this->catalogRuleProductPriceRepository->whereIn('product_id', $productIds)->delete();
         } else {
             $this->catalogRuleProductPriceRepository->deleteWhere([
-                ['product_id', 'like', '%%']
+                ['product_id', 'like', '%%'],
             ]);
         }
     }

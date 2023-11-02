@@ -8,8 +8,6 @@ class CoreConvention extends ConcordDefault
 {
     /**
      * Migration folder.
-     *
-     * @return string
      */
     public function migrationsFolder(): string
     {
@@ -18,8 +16,6 @@ class CoreConvention extends ConcordDefault
 
     /**
      * Manifest file.
-     *
-     * @return string
      */
     public function manifestFile(): string
     {

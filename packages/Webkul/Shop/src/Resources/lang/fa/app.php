@@ -515,7 +515,7 @@ return [
 
         'type' => [
             'abstract' => [
-                'offers' => 'خرید کالاهای :qty به قیمت :price هر کدام و صرفه‌جویی :discount%',
+                'offers' => 'خرید کالاهای :qty به قیمت :price هر کدام و صرفه‌جویی :discount',
             ],
         ],
     ],

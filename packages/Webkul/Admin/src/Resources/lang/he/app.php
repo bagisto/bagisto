@@ -485,12 +485,25 @@ return [
                     'transaction-amount' => 'סכום',
                 ],
 
-                'edit'  => [
+                'create'  => [
                     'already-paid'               => 'כבר שולם',
                     'invoice-missing'            => 'חשבונית חסרה',
                     'transaction-amount-zero'    => 'סכום העסקה אפס',
                     'transaction-amount-exceeds' => 'סכום העסקה גבוה מדי',
                     'transaction-saved'          => 'העסקה נשמרה בהצלחה',
+                ],
+
+                'view' => [
+                    'title'            => 'פרטי התשלום',
+                    'transaction-data' => 'נתוני התשלום',
+                    'transaction-id'   => 'מזהה עסקה',
+                    'order-id'         => 'מספר הזמנה',
+                    'invoice-id'       => 'מספר חשבונית',
+                    'payment-method'   => 'אמצעי תשלום',
+                    'created-at'       => 'נוצר בתאריך',
+                    'status'           => 'סטטוס',
+                    'payment-details'  => 'פרטי התשלום',
+                    'amount'           => 'סכום',
                 ],
             ],
         ],
@@ -525,8 +538,8 @@ return [
                     'attribute-family-value' => 'משפחת מאפיינים - :attribute_family',
                     'active'                 => 'פעיל',
                     'category'               => 'קטגוריה',
-                    'copy-of'                => ':value',
-                    'copy-of-slug'           => ':value',
+                    'copy-of'                => 'העתק של :value',
+                    'copy-of-slug'           => 'העתק-של-:value',
                     'disable'                => 'השבת',
                     'delete'                 => 'מחק',
                     'image'                  => 'תמונה',
@@ -2714,13 +2727,14 @@ return [
         ],
 
         'view' => [
-            'day'        => 'יום',
-            'end-date'   => 'תאריך סיום',
-            'export-csv' => 'ייצוא ל־CSV',
-            'export-xls' => 'ייצוא ל־XLS',
-            'month'      => 'חודש',
-            'start-date' => 'תאריך התחלה',
-            'year'       => 'שנה',
+            'day'           => 'יום',
+            'end-date'      => 'תאריך סיום',
+            'export-csv'    => 'ייצוא ל־CSV',
+            'export-xls'    => 'ייצוא ל־XLS',
+            'month'         => 'חודש',
+            'not-available' => 'אין רשומות זמינות.',
+            'start-date'    => 'תאריך התחלה',
+            'year'          => 'שנה',
         ],
 
         'empty' => [
@@ -3402,6 +3416,7 @@ return [
         'orders'                   => 'הזמנות',
         'products'                 => 'מוצרים',
         'promotions'               => 'קידומות',
+        'reporting'                => 'דיווח',
         'refunds'                  => 'החזרים',
         'reviews'                  => 'ביקורות',
         'roles'                    => 'תפקידים',

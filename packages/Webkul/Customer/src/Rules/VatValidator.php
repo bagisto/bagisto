@@ -8,9 +8,10 @@ class VatValidator
      * Regular expression patterns per country code
      *
      * @var array
+     *
      * @link http://ec.europa.eu/taxation_customs/vies/faq.html?locale=en#item_11
      */
-    protected static $pattern_expression = array(
+    protected static $pattern_expression = [
         'AT' => 'U[A-Z\d]{8}',
         'AE' => '\d{15}',
         'BE' => '(0\d{9}|\d{10})',
@@ -42,42 +43,31 @@ class VatValidator
         'SI' => '\d{8}',
         'SK' => '\d{10}',
         'JP' => '\d{12}|\d{13}',
-    );
+    ];
 
     /**
      * Validate a VAT number format.
-     *
-     * @param  string  $vatNumber
-     * @return boolean
      */
     public function validate(string $vatNumber): bool
     {
         $vatNumber = $this->vatCleaner($vatNumber);
 
-        list($country, $number) = $this->splitVat($vatNumber);
+        [$country, $number] = $this->splitVat($vatNumber);
 
         if (! isset(self::$pattern_expression[$country])) {
             return false;
         }
-        
+
         return preg_match('/^' . self::$pattern_expression[$country] . '$/', $number) > 0;
     }
 
-    /**
-     * @param  string  $vatNumber
-     * @return string
-     */
     private function vatCleaner(string $vatNumber): string
     {
         $vatNumber_no_spaces = trim($vatNumber);
-        
+
         return strtoupper($vatNumber_no_spaces);
     }
 
-    /**
-     * @param  string  $vatNumber
-     * @return array
-     */
     private function splitVat(string $vatNumber): array
     {
         return [

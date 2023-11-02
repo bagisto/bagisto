@@ -2,8 +2,8 @@
 
 namespace Webkul\Rule\Helpers;
 
-use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Contracts\Cart as CheckoutContract;
+use Webkul\Checkout\Facades\Cart;
 
 class Validator
 {
@@ -12,7 +12,7 @@ class Validator
      *
      * @param  \Webkul\CartRule\Contracts\CartRule|\Webkul\CatalogRule\Contracts\CatalogRule  $rule
      * @param  \Webkul\Checkout\Contracts\Cart|\Webkul\Checkout\Contracts\CartItem|\Webkul\Product\Contracts\Product  $entity
-     * @return boolean
+     * @return bool
      */
     public function validate($rule, $entity)
     {
@@ -60,7 +60,7 @@ class Validator
      *
      * @param  array  $condition
      * @param  \Webkul\Checkout\Contracts\CartItem|\Webkul\Product\Contracts\Product  $entity
-     * @return boolean
+     * @return bool
      */
     public function getAttributeValue($condition, $entity)
     {
@@ -184,8 +184,8 @@ class Validator
     /**
      * Validate attribute value for condition
      *
-     * @param  array $condition
-     * @param  mixed $attributeValue
+     * @param  array  $condition
+     * @param  mixed  $attributeValue
      * @return bool
      */
     public function validateAttribute($condition, $attributeValue)
@@ -264,18 +264,13 @@ class Validator
 
     /**
      * Validate the condition value against a multi dimensional array recursively
-     *
-     * @param array  $attributeValue
-     * @param string $conditionValue
-     *
-     * @return bool
      */
     private static function validateArrayValues(array $attributeValue, string $conditionValue): bool
     {
         if (in_array($conditionValue, $attributeValue, true) === true) {
             return true;
         }
-        
+
         foreach ($attributeValue as $subValue) {
             if (! is_array($subValue)) {
                 continue;

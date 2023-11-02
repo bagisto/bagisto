@@ -9,11 +9,11 @@ class MoneyTransfer extends Payment
      *
      * @var string
      */
-    protected $code  = 'moneytransfer';
+    protected $code = 'moneytransfer';
 
     public function getRedirectUrl()
     {
-        
+
     }
 
     /**

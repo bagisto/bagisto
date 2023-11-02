@@ -101,8 +101,6 @@ class Toolbar
     /**
      * Returns default limit. By default it will be 12. Leaved a
      * space for the admin configuration and customization.
-     *
-     * @return integer
      */
     public function getDefaultLimit(): int
     {
@@ -140,7 +138,7 @@ class Toolbar
     /**
      * Returns default mode.
      *
-     * @return integer
+     * @return int
      */
     public function getDefaultMode(): string
     {

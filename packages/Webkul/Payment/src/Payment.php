@@ -14,7 +14,7 @@ class Payment
     public function getSupportedPaymentMethods()
     {
         return [
-            'payment_methods'  => $this->getPaymentMethods()
+            'payment_methods'  => $this->getPaymentMethods(),
         ];
     }
 
@@ -40,7 +40,7 @@ class Payment
             }
         }
 
-        usort ($paymentMethods, function($a, $b) {
+        usort($paymentMethods, function ($a, $b) {
             if ($a['sort'] == $b['sort']) {
                 return 0;
             }
@@ -72,8 +72,8 @@ class Payment
      */
     public static function getAdditionalDetails($code)
     {
-        $paymentMethodClass =  app(Config::get('payment_methods.' . $code . '.class'));
-        
+        $paymentMethodClass = app(Config::get('payment_methods.' . $code . '.class'));
+
         return $paymentMethodClass->getAdditionalDetails();
     }
 }

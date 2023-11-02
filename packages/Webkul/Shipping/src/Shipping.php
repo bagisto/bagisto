@@ -17,7 +17,7 @@ class Shipping
     /**
      * Collects rate from available shipping methods.
      *
-     * @return array|boolean
+     * @return array|bool
      */
     public function collectRates()
     {
@@ -147,7 +147,7 @@ class Shipping
      * Is method exist in active shipping methods.
      *
      * @param  string  $shippingMethodCode
-     * @return boolean
+     * @return bool
      */
     public function isMethodCodeExists($shippingMethodCode)
     {

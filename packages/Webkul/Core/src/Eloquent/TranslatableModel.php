@@ -2,8 +2,8 @@
 
 namespace Webkul\Core\Eloquent;
 
-use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
+use Illuminate\Database\Eloquent\Model;
 use Webkul\Core\Helpers\Locales;
 
 class TranslatableModel extends Model
@@ -12,8 +12,6 @@ class TranslatableModel extends Model
 
     /**
      * Get locales helper.
-     *
-     * @return \Webkul\Core\Helpers\Locales
      */
     protected function getLocalesHelper(): Locales
     {
@@ -30,7 +28,7 @@ class TranslatableModel extends Model
     protected function locale()
     {
         if ($this->isChannelBased()) {
-            return core()->getDefaultChannelLocaleCode();
+            return core()->getDefaultLocaleCodeFromDefaultChannel();
         } else {
             if ($this->defaultLocale) {
                 return $this->defaultLocale;

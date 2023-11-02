@@ -485,12 +485,25 @@ return [
                     'transaction-amount' => 'Сума',
                 ],
 
-                'edit' => [
+                'create' => [
                     'already-paid'               => 'Вже сплачено',
                     'invoice-missing'            => 'Відсутній рахунок',
                     'transaction-amount-zero'    => 'Сума транзакції дорівнює нулю',
                     'transaction-amount-exceeds' => 'Сума транзакції перевищує',
                     'transaction-saved'          => 'Транзакція успішно збережена',
+                ],
+
+                'view' => [
+                    'title'            => 'Деталі транзакції',
+                    'transaction-data' => 'Дані транзакції',
+                    'transaction-id'   => 'Ідентифікатор транзакції',
+                    'order-id'         => 'Ідентифікатор замовлення',
+                    'invoice-id'       => 'Ідентифікатор рахунку',
+                    'payment-method'   => 'Спосіб оплати',
+                    'created-at'       => 'Створено',
+                    'status'           => 'Статус',
+                    'payment-details'  => 'Деталі оплати',
+                    'amount'           => 'Сума',
                 ],
             ],
         ],
@@ -526,7 +539,7 @@ return [
                     'active'                 => 'Активний',
                     'category'               => 'Категорія',
                     'copy-of'                => 'Копія :value',
-                    'copy-of-slug'           => 'Копія :value',
+                    'copy-of-slug'           => 'копія-:value',
                     'disable'                => 'Відключити',
                     'delete'                 => 'Видалити',
                     'image'                  => 'Зображення',
@@ -2714,13 +2727,14 @@ return [
         ],
 
         'view' => [
-            'day'        => 'День',
-            'end-date'   => 'Дата закінчення',
-            'export-csv' => 'Експорт у форматі CSV',
-            'export-xls' => 'Експорт у форматі XLS',
-            'month'      => 'Місяць',
-            'start-date' => 'Дата початку',
-            'year'       => 'Рік',
+            'day'           => 'День',
+            'end-date'      => 'Дата закінчення',
+            'export-csv'    => 'Експорт у форматі CSV',
+            'export-xls'    => 'Експорт у форматі XLS',
+            'month'         => 'Місяць',
+            'not-available' => 'Немає доступних записів.',
+            'start-date'    => 'Дата початку',
+            'year'          => 'Рік',
         ],
 
         'empty' => [
@@ -3402,6 +3416,7 @@ return [
         'orders'                   => 'Замовлення',
         'products'                 => 'Товари',
         'promotions'               => 'Акції',
+        'reporting'                => 'Звітність',
         'refunds'                  => 'Повернення',
         'reviews'                  => 'Відгуки',
         'roles'                    => 'Ролі',

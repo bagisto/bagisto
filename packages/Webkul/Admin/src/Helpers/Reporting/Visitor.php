@@ -2,16 +2,15 @@
 
 namespace Webkul\Admin\Helpers\Reporting;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 use Webkul\Core\Repositories\VisitRepository;
 
 class Visitor extends AbstractReporting
 {
     /**
      * Create a helper instance.
-     * 
-     * @param  \Webkul\Core\Repositories\VisitRepository  $visitRepository
+     *
      * @return void
      */
     public function __construct(protected VisitRepository $visitRepository)
@@ -21,9 +20,8 @@ class Visitor extends AbstractReporting
 
     /**
      * Retrieves total visitors and their progress.
-     * 
+     *
      * @param  string  $visitableType
-     * @return array
      */
     public function getTotalVisitorsProgress($visitableType = null): array
     {
@@ -36,7 +34,7 @@ class Visitor extends AbstractReporting
 
     /**
      * Retrieves total visitors and their progress.
-     * 
+     *
      * @param  \Carbon\Carbon  $startDate
      * @param  \Carbon\Carbon  $endDate
      * @param  string  $visitableType
@@ -61,9 +59,8 @@ class Visitor extends AbstractReporting
 
     /**
      * Retrieves unique visitors and their progress.
-     * 
+     *
      * @param  string  $visitableType
-     * @return array
      */
     public function getTotalUniqueVisitorsProgress($visitableType = null): array
     {
@@ -76,7 +73,7 @@ class Visitor extends AbstractReporting
 
     /**
      * Retrieves total unique visitors
-     * 
+     *
      * @param  \Carbon\Carbon  $startDate
      * @param  \Carbon\Carbon  $endDate
      * @param  string  $visitableType
@@ -103,9 +100,8 @@ class Visitor extends AbstractReporting
 
     /**
      * Returns previous sales over time
-     * 
+     *
      * @param  string  $visitableType
-     * @return array
      */
     public function getPreviousTotalVisitorsOverTime($visitableType = null): array
     {
@@ -114,9 +110,8 @@ class Visitor extends AbstractReporting
 
     /**
      * Returns current sales over time
-     * 
+     *
      * @param  string  $visitableType
-     * @return array
      */
     public function getCurrentTotalVisitorsOverTime($visitableType = null): array
     {
@@ -125,9 +120,8 @@ class Visitor extends AbstractReporting
 
     /**
      * Returns previous sales over week
-     * 
+     *
      * @param  string  $visitableType
-     * @return array
      */
     public function getPreviousTotalVisitorsOverWeek($visitableType = null): array
     {
@@ -136,9 +130,8 @@ class Visitor extends AbstractReporting
 
     /**
      * Returns current sales over week
-     * 
+     *
      * @param  string  $visitableType
-     * @return array
      */
     public function getCurrentTotalVisitorsOverWeek($visitableType = null): array
     {
@@ -147,10 +140,9 @@ class Visitor extends AbstractReporting
 
     /**
      * Gets visitable with most visits.
-     * 
+     *
      * @param  string  $visitableType
-     * @param  integer  $limit
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @param  int  $limit
      */
     public function getVisitableWithMostVisits($visitableType = null, $limit = null): Collection
     {
@@ -177,12 +169,11 @@ class Visitor extends AbstractReporting
 
     /**
      * Generates visitor graph data.
-     * 
+     *
      * @param  \Carbon\Carbon  $startDate
      * @param  \Carbon\Carbon  $endDate
      * @param  string  $period
      * @param  string  $visitableType
-     * @return array
      */
     public function getTotalVisitorsOverTime($startDate, $endDate, $period = 'auto', $visitableType = null): array
     {
@@ -216,11 +207,10 @@ class Visitor extends AbstractReporting
 
     /**
      * Generates visitor over week graph data.
-     * 
+     *
      * @param  \Carbon\Carbon  $startDate
      * @param  \Carbon\Carbon  $endDate
      * @param  string  $visitableType
-     * @return array
      */
     public function getTotalVisitorsOverWeek($startDate, $endDate, $visitableType = null): array
     {
@@ -237,7 +227,6 @@ class Visitor extends AbstractReporting
             ->whereBetween('created_at', [$startDate, $endDate])
             ->groupBy('day')
             ->get();
-
 
         foreach ($weekDays as $day) {
             $total = $visits->where('day', $day)->first();

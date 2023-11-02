@@ -4,8 +4,8 @@ namespace Webkul\Product\Helpers\Indexers;
 
 use Illuminate\Support\Facades\Schema;
 use Webkul\Core\Repositories\ChannelRepository;
-use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Product\Helpers\ProductType;
+use Webkul\Product\Repositories\ProductFlatRepository;
 
 class Flat
 {
@@ -51,15 +51,12 @@ class Flat
     /**
      * Create a new listener instance.
      *
-     * @param  \Webkul\Core\Repositories\ChannelRepository  $channelRepository
-     * @param  \Webkul\Product\Repositories\ProductFlatRepository  $productFlatRepository
      * @return void
      */
     public function __construct(
         protected ChannelRepository $channelRepository,
         protected ProductFlatRepository $productFlatRepository
-    )
-    {
+    ) {
         $this->flatColumns = Schema::getColumnListing('product_flat');
     }
 

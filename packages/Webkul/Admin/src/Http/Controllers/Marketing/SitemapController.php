@@ -5,9 +5,9 @@ namespace Webkul\Admin\Http\Controllers\Marketing;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Admin\DataGrids\Marketing\SitemapDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sitemap\Repositories\SitemapRepository;
-use Webkul\Admin\DataGrids\Marketing\SitemapDataGrid;
 
 class SitemapController extends Controller
 {
@@ -36,8 +36,6 @@ class SitemapController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
     public function store(): JsonResponse
     {
@@ -50,7 +48,7 @@ class SitemapController extends Controller
 
         $sitemap = $this->sitemapRepository->create(request()->only([
             'file_name',
-            'path'
+            'path',
         ]));
 
         Event::dispatch('marketing.sitemaps.create.after', $sitemap);
@@ -64,7 +62,6 @@ class SitemapController extends Controller
      * Update the specified resource in storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
      */
     public function update(): JsonResponse
     {
@@ -79,7 +76,7 @@ class SitemapController extends Controller
 
         $sitemap = $this->sitemapRepository->update(request()->only([
             'file_name',
-            'path'
+            'path',
         ]), $id);
 
         Event::dispatch('marketing.sitemaps.update.after', $sitemap);
@@ -92,7 +89,7 @@ class SitemapController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return void
      */
     public function destroy($id)

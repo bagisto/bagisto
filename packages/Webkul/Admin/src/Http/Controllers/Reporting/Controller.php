@@ -3,8 +3,8 @@
 namespace Webkul\Admin\Http\Controllers\Reporting;
 
 use Maatwebsite\Excel\Facades\Excel;
-use Webkul\Admin\Http\Controllers\Controller as BaseController;
 use Webkul\Admin\Exports\ReportingExport;
+use Webkul\Admin\Http\Controllers\Controller as BaseController;
 
 class Controller extends BaseController
 {

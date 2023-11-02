@@ -18,9 +18,9 @@
 
         <template v-else>
             <div class="sticky top-[30px] h-max w-[442px] max-w-full pl-[30px] max-lg:w-auto max-lg:max-w-[442px] max-lg:pl-0 ">
-                <h2 class="text-[26px] font-medium max-sm:text-[20px]">
+                <h1 class="text-[26px] font-medium max-sm:text-[20px]">
                     @lang('shop::app.checkout.onepage.summary.cart-summary')
-                </h2>
+                </h1>
                 
                 <div class="grid mt-[40px] border-b-[1px] border-[#E9E9E9] max-sm:mt-[20px]">
                     <div 

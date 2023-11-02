@@ -2,12 +2,12 @@
 
 namespace Webkul\Admin\Http\Controllers\Settings;
 
-use Illuminate\Support\Facades\Event;
 use Illuminate\Http\JsonResponse;
-use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Core\Repositories\ExchangeRateRepository;
-use Webkul\Core\Repositories\CurrencyRepository;
+use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\Settings\ExchangeRatesDataGrid;
+use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Core\Repositories\CurrencyRepository;
+use Webkul\Core\Repositories\ExchangeRateRepository;
 
 class ExchangeRateController extends Controller
 {
@@ -19,8 +19,7 @@ class ExchangeRateController extends Controller
     public function __construct(
         protected ExchangeRateRepository $exchangeRateRepository,
         protected CurrencyRepository $currencyRepository
-    )
-    {
+    ) {
     }
 
     /**
@@ -41,8 +40,6 @@ class ExchangeRateController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
     public function store(): JsonResponse
     {
@@ -55,7 +52,7 @@ class ExchangeRateController extends Controller
 
         $exchangeRate = $this->exchangeRateRepository->create(request()->only([
             'target_currency',
-            'rate'
+            'rate',
         ]));
 
         Event::dispatch('core.exchange_rate.create.after', $exchangeRate);
@@ -68,8 +65,7 @@ class ExchangeRateController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
-     * @return \Illuminate\Http\JsonResponse
+     * @param  int  $id
      */
     public function edit($id): JsonResponse
     {
@@ -79,16 +75,14 @@ class ExchangeRateController extends Controller
 
         return new JsonResponse([
             'data' => [
-                'currencies' => $currencies,
+                'currencies'   => $currencies,
                 'exchangeRate' => $exchangeRate,
-            ]
+            ],
         ]);
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
     public function update(): JsonResponse
     {
@@ -101,7 +95,7 @@ class ExchangeRateController extends Controller
 
         $exchangeRate = $this->exchangeRateRepository->update(request()->only([
             'target_currency',
-            'rate'
+            'rate',
         ]), request()->id);
 
         Event::dispatch('core.exchange_rate.update.after', $exchangeRate);
@@ -132,7 +126,7 @@ class ExchangeRateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return void
      */
     public function destroy($id)
@@ -156,7 +150,7 @@ class ExchangeRateController extends Controller
         return response()->json([
             'message' => trans(
                 'admin::app.settings.exchange-rates.index.delete-error'
-            )
+            ),
         ], 500);
     }
 }

@@ -3,10 +3,10 @@
 namespace Webkul\Sales\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Webkul\Sales\Database\Factories\OrderPaymentFactory;
+use Illuminate\Database\Eloquent\Model;
 use Webkul\Sales\Contracts\OrderPayment as OrderPaymentContract;
+use Webkul\Sales\Database\Factories\OrderPaymentFactory;
 
 class OrderPayment extends Model implements OrderPaymentContract
 {
@@ -26,8 +26,6 @@ class OrderPayment extends Model implements OrderPaymentContract
 
     /**
      * Create a new factory instance for the model.
-     *
-     * @return Factory
      */
     protected static function newFactory(): Factory
     {

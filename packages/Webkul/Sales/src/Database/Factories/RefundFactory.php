@@ -2,9 +2,9 @@
 
 namespace Webkul\Sales\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\Refund;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class RefundFactory extends Factory
 {
@@ -17,8 +17,6 @@ class RefundFactory extends Factory
 
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
     public function definition(): array
     {
@@ -27,4 +25,3 @@ class RefundFactory extends Factory
         ];
     }
 }
-

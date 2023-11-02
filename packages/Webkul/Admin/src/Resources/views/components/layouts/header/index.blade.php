@@ -93,7 +93,13 @@
 
             {{-- Admin Dropdown --}}
             <x-slot:content class="!p-[0px]">
-                <div class="grid gap-[10px] px-[20px] py-[10px] border border-b-gray-300 dark:border-gray-800">
+                <div class="flex gap-[5px] items-center px-[20px] py-[10px] border border-b-gray-300 dark:border-gray-800">
+                    <img
+                        src="{{ url('cache/logo/bagisto.png') }}"
+                        width="24"
+                        height="24"
+                    />
+
                     {{-- Version --}}
                     <p class="text-gray-400">
                         @lang('admin::app.components.layouts.header.app-version', ['version' => 'v' . core()->version()])
@@ -730,9 +736,13 @@
                     document.documentElement.classList.toggle('dark', this.isDarkMode === 1);
 
                     if (this.isDarkMode) {
-                        document.getElementById('logo-image').src= this.dark_logo;
+                        this.$emitter.emit('change-theme', 'dark');
+
+                        document.getElementById('logo-image').src = this.dark_logo;
                     } else {
-                        document.getElementById('logo-image').src=this.logo;
+                        this.$emitter.emit('change-theme', 'light');
+
+                        document.getElementById('logo-image').src = this.logo;
                     }
                 },
 
