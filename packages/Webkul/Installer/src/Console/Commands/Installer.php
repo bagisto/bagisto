@@ -49,6 +49,8 @@ class Installer extends Command
         $this->warn('Step: Optimizing...');
         $this->info($this->call('optimize'));
 
+        $this->call('key:generate');
+
         $this->createAdminCredential();
     }
 
@@ -92,7 +94,7 @@ class Installer extends Command
             $this->info('Your Default Timezone is ' . date_default_timezone_get());
 
             // Updating App Default Currencies
-            $currencies = ['USD', 'EUR'];
+            $currencies = ['CNY', 'AED', 'EUR', 'INR', 'IRR', 'ILS', 'JPY', 'GBP', 'RUB', 'SAR', 'TRY', 'USD', 'UAH'];
             $this->updateEnvChoice('APP_CURRENCY', 'Please enter the default currency or Press enter to Continue', $currencies, 'USD');
 
             // Updating Database Configuration
@@ -189,8 +191,6 @@ class Installer extends Command
      */
     protected function createAdminCredential()
     {
-        $this->call('key:generate');
-
         // Here! Asking for Admin Name, Email and Password
         $adminName = $this->ask('Please Enter the Name for admin User or press enter to continue', 'Admin');
         $adminEmail = $this->ask('Please Enter the Email for admin login:', 'admin@example.com');
