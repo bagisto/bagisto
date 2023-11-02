@@ -396,7 +396,7 @@
                             >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
-                        
+
                         <!-- Visible in menu -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="text-gray-800 dark:text-white font-medium">
@@ -405,7 +405,7 @@
 
                             @php $selectedValue = old('status') ?: $category->status @endphp
 
-                            <!-- Visible in Hidden fielld -->
+                            <!-- Visible in menu Hidden field -->
                             <x-admin::form.control-group.control
                                 type="hidden"
                                 name="status"
