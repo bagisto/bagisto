@@ -403,12 +403,13 @@
                         .then(response => {
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
-                            resetForm();
                             this.uploadedFiles = [];
+                            resetForm();
                             this.canReview = false;
                         })
                         .catch(error => {
                             setErrors({'attachments': ["@lang('shop::app.products.view.reviews.failed-to-upload')"]});
+                            this.uploadedFiles = [];
                             this.$refs.reviewImages.uploadedFiles.forEach(element => {
                                 setTimeout(() => {
                                     this.$refs.reviewImages.removeFile();
