@@ -1,5 +1,5 @@
 <x-admin::layouts>
-    {{-- Title of the page --}}
+    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.marketing.promotions.cart-rules.create.title')
     </x-slot:title>
@@ -12,7 +12,7 @@
 
 
     @pushOnce('scripts')
-        {{-- v cart rules create form template --}}
+        <!-- v cart rules create form template -->
         <script
             type="text/x-template"
             id="v-cart-rule-create-form-template"
@@ -795,7 +795,7 @@
             });
         </script>
 
-        {{-- v catalog rule condition item form template --}}
+        <!-- v catalog rule condition item form template -->
         <script 
             type="text/x-template"
             id="v-cart-rule-condition-item-template"
@@ -991,7 +991,7 @@
             </div>
         </script>
 
-        {{-- v catalog rule condition item component --}}
+        <!-- v catalog rule condition item component -->
         <script type="module">
             app.component('v-cart-rule-condition-item', {
                 template: "#v-cart-rule-condition-item-template",

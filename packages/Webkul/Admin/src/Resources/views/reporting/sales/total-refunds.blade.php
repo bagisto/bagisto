@@ -1,4 +1,4 @@
-{{-- Refunds Vue Component --}}
+<!-- Refunds Vue Component -->
 <v-reporting-sales-total-refunds>
     <x-admin::shimmer.reporting.sales.total-refunds/>
 </v-reporting-sales-total-refunds>

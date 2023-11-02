@@ -6,7 +6,7 @@
     </div>
 </v-create-customer-address>
 
-{{-- Customer Address Modal --}}
+<!-- Customer Address Modal -->
 @pushOnce('scripts')
     <!-- Customer Address Form -->
     <script

@@ -1,4 +1,5 @@
 <x-admin::layouts>
+    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.settings.taxes.rates.index.title')
     </x-slot:title>
@@ -9,7 +10,7 @@
         </p>
         
         <div class="flex gap-x-[10px] items-center">
-            {{-- Create New Pages Button --}}
+            <!-- Create New Pages Button -->
             @if (bouncer()->hasPermission('settings.taxes.tax-rates.create'))
                 <a 
                     href="{{ route('admin.settings.taxes.rates.create') }}"

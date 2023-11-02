@@ -3,7 +3,7 @@
         @lang('admin::app.reporting.customers.index.title')
     </x-slot:title>
 
-    {{-- Page Header --}}
+    <!-- Page Header -->
     <div class="flex gap-[16px] justify-between items-center mb-[20px] max-sm:flex-wrap">
         <div class="grid gap-[6px]">
             <p class="pt-[6px] text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
@@ -13,7 +13,7 @@
 
         <!-- Actions -->
         <v-reporting-filters>
-            {{-- Shimmer --}}
+            <!-- Shimmer -->
             <div class="flex gap-[6px]">
                 <div class="shimmer w-[140px] h-[39px] rounded-[6px]"></div>
                 <div class="shimmer w-[140px] h-[39px] rounded-[6px]"></div>
@@ -21,7 +21,7 @@
         </v-reporting-filters>
     </div>
 
-    {{-- Customers Stats Vue Component --}}
+    <!-- Customers Stats Vue Component -->
     <div class="flex flex-col gap-[15px] flex-1 max-xl:flex-auto">
         <!-- Customers Section -->
         @include('admin::reporting.customers.total-customers')

@@ -30,19 +30,19 @@
     {{-- Right Nagivation Section --}}
     <div class="flex gap-x-[35px] items-center max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px]">
         {{-- Search Bar Container --}}
-        <form
-            action="{{ route('shop.search.index') }}"
-            class="flex items-center max-w-[445px]"
-            role="search"
-        >
-            <label
-                for="organic-search"
-                class="sr-only"
+        <div class="relative w-full">
+            <form
+                action="{{ route('shop.search.index') }}"
+                class="flex items-center max-w-[445px]"
+                role="search"
             >
-                @lang('shop::app.components.layouts.header.search')
-            </label>
+                <label
+                    for="organic-search"
+                    class="sr-only"
+                >
+                    @lang('shop::app.components.layouts.header.search')
+                </label>
 
-            <div class="relative w-full">
                 <div class="icon-search flex items-center  absolute ltr:left-[12px] rtl:right-[12px] top-[10px] text-[22px] pointer-events-none"></div>
 
                 <input
@@ -61,8 +61,8 @@
                 @if (core()->getConfigData('general.content.shop.image_search'))
                     @include('shop::search.images.index')
                 @endif
-            </div>
-        </form>
+            </form>
+        </div>
 
         {{-- Right Navigation Links --}}
         <div class="flex gap-x-[35px] mt-[5px] max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px]">

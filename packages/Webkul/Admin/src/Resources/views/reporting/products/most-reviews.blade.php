@@ -1,6 +1,6 @@
-{{-- Products with Most Reviews Vue Component --}}
+<!-- Products with Most Reviews Vue Component -->
 <v-reporting-products-with-most-reviews>
-    {{-- Shimmer --}}
+    <!-- Shimmer -->
     <x-admin::shimmer.reporting.products.most-reviews/>
 </v-reporting-products-with-most-reviews>
 
