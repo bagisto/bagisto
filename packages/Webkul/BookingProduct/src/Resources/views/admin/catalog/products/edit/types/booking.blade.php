@@ -453,18 +453,20 @@
                 >
                     <div class="flex gap-[20px] justify-between">
                         <div class="flex flex-col gap-[8px]">
-                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
-                                @lang('Slots')
+                            <p
+                                class="text-[16px] text-gray-800 dark:text-white font-semibold"
+                                v-text="booking_type != 'event' ? '@lang('Slots')' : '@lang('Tickets')'"
+                            >
                             </p>
                         </div>
 
                         <!-- Add Slot Button -->
                         <div class="flex gap-x-[4px] items-center">
                             <div
+                                v-text="booking_type != 'event' ? 'Add Slot' : 'Add Tickets'"
                                 class="secondary-button"
                                 @click="$refs.addOptionsRow.open()"
                             >
-                                @lang('Add Slot')
                             </div>
                         </div>
                     </div>
@@ -475,7 +477,7 @@
                         <div class="mt-[15px] overflow-x-auto">
                             <x-admin::table>
                                 <x-admin::table.thead class="text-[14px] font-medium dark:bg-gray-800">
-                                    <x-admin::table.thead.tr>
+                                    <x-admin::table.thead.tr v-if="booking_type != 'event'">
                                         <x-admin::table.th class="!p-0"></x-admin::table.th>
 
                                         <!-- From Day -->
@@ -512,8 +514,10 @@
                                     item-key="id"
                                 >
                                     <template #item="{ element, index }">
-                                        <x-admin::table.thead.tr class="hover:bg-gray-50 dark:hover:bg-gray-950">
-                                            {{-- @{{ element }} --}}
+                                        <x-admin::table.thead.tr
+                                            class="hover:bg-gray-50 dark:hover:bg-gray-950"
+                                            v-if="booking_type != 'event'"
+                                        >
                                             <!-- Draggable Icon -->
                                             <x-admin::table.td class="!px-0">
                                                 <i class="icon-drag text-[20px] transition-all group-hover:text-gray-700"></i>
@@ -600,6 +604,22 @@
                                                 </span>
                                             </x-admin::table.td>
                                         </x-admin::table.thead.tr>
+
+                                        <x-admin::table.thead.tr
+                                            class="hover:bg-gray-50 dark:hover:bg-gray-950"
+                                            v-else
+                                        >
+                                            <!-- Draggable Icon -->
+                                            <x-admin::table.td class="!px-0">
+                                                <i class="icon-drag text-[20px] transition-all group-hover:text-gray-700"></i>
+
+                                                <input
+                                                    type="hidden"
+                                                    :name="'booking[slots][' + element.id + '][id]'"
+                                                    :value="index"
+                                                />
+                                            </x-admin::table.td>
+                                        </x-admin::table.thead.tr>
                                     </template>
                                 </draggable>
                             </x-admin::table>
@@ -617,12 +637,16 @@
 
                             <!-- Add Slot Information -->
                             <div class="flex flex-col gap-[5px] items-center">
-                                <p class="text-[16px] text-gray-400 font-semibold">
-                                    @lang('Add Slot')
+                                <p
+                                    class="text-[16px] text-gray-400 font-semibold"
+                                    v-text="booking_type != 'event' ? 'Add Slot' : 'Add Tickets'"
+                                >
                                 </p>
-
-                                <p class="text-gray-400 text-red">
-                                    @lang('Add booking slot on the go.')
+                                
+                                <p
+                                    class="text-gray-400 text-red"
+                                    v-text="booking_type != 'event' ? '@lang('Add booking slot on the go.')' : '@lang('Add booking Tickets on the go.')'"
+                                >
                                 </p>
                             </div>
                         </div>
@@ -647,108 +671,256 @@
                     ref="addOptionsRow"
                 >
                     <x-slot:header>
-                        <p class="text-[18px] text-gray-800 dark:text-white font-bold">
-                            @lang('Add Slot')
+                        <p
+                            class="text-[18px] text-gray-800 dark:text-white font-bold"
+                            v-text="booking_type != 'event' ? 'Add Slot' : 'Add Tickets'"
+                        >
                         </p>
                     </x-slot:header>
 
                     <x-slot:content>
-                        <div class="flex gap-[16px] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
-                            <!-- From -->
-                            <x-admin::form.control-group
-                                class="w-full mb-[10px]"
-                                v-if="booking_type == 'default'"
-                            >
-                                <x-admin::form.control-group.label>
-                                    @lang('From')
-                                </x-admin::form.control-group.label>
-
-                                <x-admin::form.control-group.control
-                                    type="select"
-                                    name="from_day"
-                                    :value="'0'"
-                                    :label="trans('admin::app.catalog.attributes.create.admin')"
+                        <div v-if="booking_type != 'event'">
+                            <div class="flex gap-[16px] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
+                                <!-- From -->
+                                <x-admin::form.control-group
+                                    class="w-full mb-[10px]"
+                                    v-if="booking_type == 'default'"
                                 >
-                                    <option value="sunday" selected>Sunday</option>
-                                    <option value="monday">Monday</option>
-                                    <option value="tuesday">Tuesday</option>
-                                    <option value="wednesday">Wednesday</option>
-                                    <option value="thursday">Thursday</option>
-                                    <option value="friday">Friday</option>
-                                    <option value="saturday">Saturday</option>
-                                </x-admin::form.control-group.control>
+                                    <x-admin::form.control-group.label>
+                                        @lang('From')
+                                    </x-admin::form.control-group.label>
 
-                                <x-admin::form.control-group.error
-                                    control-name="from_day"
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="from_day"
+                                        :value="'0'"
+                                        :label="trans('admin::app.catalog.attributes.create.admin')"
+                                    >
+                                        <option value="sunday" selected>Sunday</option>
+                                        <option value="monday">Monday</option>
+                                        <option value="tuesday">Tuesday</option>
+                                        <option value="wednesday">Wednesday</option>
+                                        <option value="thursday">Thursday</option>
+                                        <option value="friday">Friday</option>
+                                        <option value="saturday">Saturday</option>
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="from_day"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::from.control-group>
+
+                                <x-admin::form.control-group class="w-full mb-[10px]">
+                                    <x-admin::form.control-group.label class="none">
+                                        @lang('Time')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="from_time"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="from_time"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+                            </div>
+
+                            <div class="flex gap-[16px] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
+                                <!-- To -->
+                                <x-admin::form.control-group
+                                    class="w-full mb-[10px]"
+                                    v-if="booking_type == 'default'"
                                 >
-                                </x-admin::form.control-group.error>
-                            </x-admin::from.control-group>
+                                    <x-admin::form.control-group.label>
+                                        @lang('To')
+                                    </x-admin::form.control-group.label>
 
-                            <x-admin::form.control-group class="w-full mb-[10px]">
-                                <x-admin::form.control-group.label class="none">
-                                    @lang('Time')
-                                </x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="to_day"
+                                        :value="'0'"
+                                        :label="trans('admin::app.catalog.attributes.create.admin')"
+                                    >
+                                        <option value="sunday" selected>Sunday</option>
+                                        <option value="monday">Monday</option>
+                                        <option value="tuesday">Tuesday</option>
+                                        <option value="wednesday">Wednesday</option>
+                                        <option value="thursday">Thursday</option>
+                                        <option value="friday">Friday</option>
+                                        <option value="saturday">Saturday</option>
+                                    </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.control
-                                    type="text"
-                                    name="from_time"
-                                >
-                                </x-admin::form.control-group.control>
+                                    <x-admin::form.control-group.error
+                                        control-name="to_day"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
-                                <x-admin::form.control-group.error
-                                    control-name="from_time"
-                                >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
+                                <x-admin::form.control-group class="w-full mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('To')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="to_time"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="to_time"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+                            </div>
                         </div>
 
-                        <div class="flex gap-[16px] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
-                            <!-- To -->
-                            <x-admin::form.control-group
-                                class="w-full mb-[10px]"
-                                v-if="booking_type == 'default'"
-                            >
-                                <x-admin::form.control-group.label>
-                                    @lang('To')
-                                </x-admin::form.control-group.label>
+                        <div v-else>
+                            <div class="grid grid-cols-3 gap-[10px] px-[16px] py-[10px]">
+                                <!-- Name -->
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label>
+                                        @lang('Name')
+                                    </x-admin::form.control-group.label>
 
-                                <x-admin::form.control-group.control
-                                    type="select"
-                                    name="to_day"
-                                    :value="'0'"
-                                    :label="trans('admin::app.catalog.attributes.create.admin')"
-                                >
-                                    <option value="sunday" selected>Sunday</option>
-                                    <option value="monday">Monday</option>
-                                    <option value="tuesday">Tuesday</option>
-                                    <option value="wednesday">Wednesday</option>
-                                    <option value="thursday">Thursday</option>
-                                    <option value="friday">Friday</option>
-                                    <option value="saturday">Saturday</option>
-                                </x-admin::form.control-group.control>
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="booking[tickets][ticket_0][en][name]"
+                                        :label="trans('Name')"
+                                        :placeholder="trans('Name')"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error
-                                    control-name="to_day"
-                                >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
+                                    <x-admin::form.control-group.error
+                                        control-name="booking[tickets][ticket_0][en][name]"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::from.control-group>
 
-                            <x-admin::form.control-group class="w-full mb-[10px]">
-                                <x-admin::form.control-group.label>
-                                    @lang('To')
-                                </x-admin::form.control-group.label>
+                                <!-- Price -->
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label>
+                                        @lang('Price')
+                                    </x-admin::form.control-group.label>
 
-                                <x-admin::form.control-group.control
-                                    type="text"
-                                    name="to_time"
-                                >
-                                </x-admin::form.control-group.control>
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="booking[tickets][ticket_0][en][price]"
+                                        :label="trans('Price')"
+                                        :placeholder="trans('Price')"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error
-                                    control-name="to_time"
-                                >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
+                                    <x-admin::form.control-group.error
+                                        control-name="booking[tickets][ticket_0][en][price]"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::from.control-group>
+
+                                <!-- Quantity -->
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label>
+                                        @lang('Quantity')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="booking[tickets][ticket_0][en][quantity]"
+                                        :label="trans('Quantity')"
+                                        :placeholder="trans('Quantity')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="booking[tickets][ticket_0][en][quantity]"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::from.control-group>
+
+                                <!-- Special Price -->
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label>
+                                        @lang('Special Price')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="booking[tickets][ticket_0][en][special_price]"
+                                        :label="trans('Special Price')"
+                                        :placeholder="trans('Special Price')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="booking[tickets][ticket_0][en][special_price]"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::from.control-group>
+
+                                <!-- Valid From -->
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label>
+                                        @lang('Valid From')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="date"
+                                        name="booking[tickets][ticket_0][en][valid_from]"
+                                        :label="trans('Valid From')"
+                                        :placeholder="trans('Valid From')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="booking[tickets][ticket_0][en][valid_from]"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::from.control-group>
+
+                                <!-- Valid Until -->
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label>
+                                        @lang('Valid Until')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="date"
+                                        name="booking[tickets][ticket_0][en][valid_until]"
+                                        :label="trans('Valid Until')"
+                                        :placeholder="trans('Valid Until')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="booking[tickets][ticket_0][en][valid_until]"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::from.control-group>
+
+                                <!-- Valid Until -->
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label>
+                                        @lang('Description')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="booking[tickets][ticket_0][en][description]"
+                                        :label="trans('Description')"
+                                        :placeholder="trans('Description')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="booking[tickets][ticket_0][en][description]"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::from.control-group>
+                            </div>
                         </div>
                     </x-slot:content>
 
