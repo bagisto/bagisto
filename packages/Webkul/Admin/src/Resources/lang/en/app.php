@@ -2619,6 +2619,7 @@ return [
                 'update-slider'                 => 'Update Slider',
                 'value-input'                   => 'Value',
                 'value'                         => 'Value: :value',
+                'image-title'                   => 'Image Title',
             ],
 
             'create-success' => 'Theme created successfully',

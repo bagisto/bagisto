@@ -2618,6 +2618,7 @@ return [
                 'update-slider'                 => '更新滑块',
                 'value-input'                   => '值',
                 'value'                         => '值：:value',
+                'image-title'                   => '图片标题',
             ],
 
             'create-success' => '成功创建主题',

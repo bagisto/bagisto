@@ -8,7 +8,7 @@
         <a
             href="{{ route('shop.home.index') }}"
             class="place-self-start -mt-[4px]"
-            aria-label="Bagisto "
+            aria-label="@lang('shop::app.components.layouts.header.bagisto')"
         >
             <img
                 src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
@@ -70,7 +70,7 @@
             @if(core()->getConfigData('general.content.shop.compare_option'))
                 <a
                     href="{{ route('shop.compare.index') }}"
-                    aria-label="Compare"
+                    aria-label="@lang('shop::app.components.layouts.header.compare')"
                 >
                     <span
                         class="icon-compare inline-block text-[24px] cursor-pointer"

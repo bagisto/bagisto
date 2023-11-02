@@ -21,7 +21,7 @@
             <a
                 href="{{ route('shop.home.index') }}"
                 class="m-[0_auto_20px_auto]"
-                aria-label="Bagisto "
+                aria-label="@lang('shop::app.customers.signup-form.bagisto')"
             >
                 <img
                     src="{{ bagisto_asset('images/logo.svg') }}"
@@ -87,7 +87,7 @@
                             rules="required"
                             :label="trans('shop::app.customers.signup-form.last-name')"
                             :placeholder="trans('shop::app.customers.signup-form.last-name')"
-                            aria-label="@lang('shop::app.customers.signup-form.last-name')"
+                            :aria-label="trans('shop::app.customers.signup-form.last-name')"
                             aria-required="true"
                         >
                         </x-shop::form.control-group.control>

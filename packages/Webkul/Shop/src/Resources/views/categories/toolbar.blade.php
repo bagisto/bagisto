@@ -70,7 +70,7 @@
                         <span
                             class="text-[24px] cursor-pointer"
                             role="button"
-                            aria-label="List"
+                            aria-label="@lang('shop::app.categories.toolbar.list')"
                             tabindex="0"
                             :class="(filters.applied.mode === 'list') ? 'icon-listing-fill' : 'icon-listing'"
                             @click="changeMode('list')"
@@ -80,7 +80,7 @@
                         <span
                             class="text-[24px] cursor-pointer"
                             role="button"
-                            aria-label="Grid"
+                            aria-label="@lang('shop::app.categories.toolbar.grid')"
                             tabindex="0"
                             :class="(filters.applied.mode === 'grid') ? 'icon-grid-view-fill' : 'icon-grid-view'"
                             @click="changeMode()"
