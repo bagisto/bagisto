@@ -2,11 +2,11 @@
 
 namespace Webkul\Core\Providers;
 
+use Elastic\Elasticsearch\Client as ElasticSearchClient;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
-use Elastic\Elasticsearch\Client as ElasticSearchClient;
 use Webkul\Core\Core;
 use Webkul\Core\ElasticSearch;
 use Webkul\Core\Exceptions\Handler;
@@ -103,13 +103,13 @@ class CoreServiceProvider extends ServiceProvider
         /**
          * Register ElasticSearch as a singleton.
          */
-        $this->app->singleton('elasticsearch', function() {
+        $this->app->singleton('elasticsearch', function () {
             return new ElasticSearch;
         });
 
         $loader->alias('elasticsearch', ElasticSearchFacade::class);
 
-        $this->app->singleton(ElasticSearchClient::class, function() {
+        $this->app->singleton(ElasticSearchClient::class, function () {
             return app()->make('elasticsearch')->connection();
         });
     }

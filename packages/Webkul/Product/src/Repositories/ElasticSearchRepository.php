@@ -2,8 +2,8 @@
 
 namespace Webkul\Product\Repositories;
 
-use Webkul\Core\Facades\ElasticSearch;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Core\Facades\ElasticSearch;
 use Webkul\Customer\Repositories\CustomerRepository;
 
 class ElasticSearchRepository

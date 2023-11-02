@@ -13,9 +13,9 @@ return [
     'connections' => [
         'default' => [
             'hosts' => [
-                env('ELASTICSEARCH_HOST', 'http://localhost:9200')
+                env('ELASTICSEARCH_HOST', 'http://localhost:9200'),
             ],
-            
+
             'user'   => env('ELASTICSEARCH_USER', null),
             'pass'   => env('ELASTICSEARCH_PASS', null),
         ],
@@ -26,7 +26,7 @@ return [
          */
         'api' => [
             'hosts' => [
-                env('ELASTICSEARCH_HOST', null)
+                env('ELASTICSEARCH_HOST', null),
             ],
 
             'key'   => env('ELASTICSEARCH_API_KEY', null),
@@ -56,7 +56,7 @@ return [
      *
      * If you have the http_ca.crt certificate copied during the start of Elasticsearch
      * then the path here
-     * 
+     *
      * @see https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/connecting.html#auth-http
      */
     'caBundle' => null,

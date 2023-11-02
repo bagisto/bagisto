@@ -2,9 +2,9 @@
 
 namespace Webkul\Core;
 
-use Illuminate\Support\Arr;
 use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\ClientBuilder;
+use Illuminate\Support\Arr;
 
 class ElasticSearch
 {
@@ -21,7 +21,6 @@ class ElasticSearch
     /**
      * Make a new connection.
      *
-     * @param string|null $name
      *
      * @return \Elasticsearch\Client
      */
@@ -74,8 +73,6 @@ class ElasticSearch
 
     /**
      * Get the default connection.
-     *
-     * @return string
      */
     public function getDefaultConnection(): string
     {
@@ -85,9 +82,9 @@ class ElasticSearch
     /**
      * Get the configuration for a named connection.
      *
-     * @param $name
      *
      * @return mixed
+     *
      * @throws \InvalidArgumentException
      */
     protected function getConnectionConfig(string $name)
@@ -104,8 +101,6 @@ class ElasticSearch
     /**
      * Dynamically pass methods to the default connection.
      *
-     * @param  string  $method
-     * @param  array  $parameters
      * @return mixed
      */
     public function __call(string $method, array $parameters)

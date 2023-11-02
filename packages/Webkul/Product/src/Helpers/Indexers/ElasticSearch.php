@@ -2,8 +2,8 @@
 
 namespace Webkul\Product\Helpers\Indexers;
 
-use Webkul\Core\Facades\ElasticSearch as ElasticSearchClient;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Core\Facades\ElasticSearch as ElasticSearchClient;
 use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Product\Repositories\ProductRepository;
