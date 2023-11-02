@@ -2,7 +2,7 @@
 
 namespace Webkul\Product\Repositories;
 
-use Elasticsearch;
+use Webkul\Core\Facades\ElasticSearch;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
 

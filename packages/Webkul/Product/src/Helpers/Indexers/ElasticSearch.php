@@ -2,7 +2,7 @@
 
 namespace Webkul\Product\Helpers\Indexers;
 
-use Elasticsearch as ElasticsearchClient;
+use Webkul\Core\Facades\ElasticSearch as ElasticSearchClient;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
