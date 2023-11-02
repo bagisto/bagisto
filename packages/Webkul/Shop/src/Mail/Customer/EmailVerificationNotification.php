@@ -30,6 +30,8 @@ class EmailVerificationNotification extends Mailable
         return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
             ->to($this->customer->email)
             ->subject(trans('shop::app.emails.customers.verification.subject'))
-            ->view('shop::emails.customers.email-verification');
+            ->view('shop::emails.customers.email-verification', [
+                'fullName' => $this->customer->first_name . ' ' . $this->customer->last_name,
+            ]);
     }
 }
