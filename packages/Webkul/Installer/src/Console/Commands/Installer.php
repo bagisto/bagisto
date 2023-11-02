@@ -49,6 +49,10 @@ class Installer extends Command
         $this->warn('Step: Optimizing...');
         $this->info($this->call('optimize'));
 
+        $this->warn('Step: Composer autoload...');
+        $result = shell_exec('composer dump-autoload');
+        $this->info($result);
+
         $this->createAdminCredential();
     }
 
