@@ -396,16 +396,7 @@
                             >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
-
-                         <!-- Visible in Hidden fielld -->
-                        <x-admin::form.control-group.control
-                            type="hidden"
-                            name="status"
-                            class="cursor-pointer"
-                            :checked="(boolean) $selectedValue"
-                        >
-                        </x-admin::form.control-group.control>
-
+                        
                         <!-- Visible in menu -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="text-gray-800 dark:text-white font-medium">
@@ -413,6 +404,15 @@
                             </x-admin::form.control-group.label>
 
                             @php $selectedValue = old('status') ?: $category->status @endphp
+
+                            <!-- Visible in Hidden fielld -->
+                            <x-admin::form.control-group.control
+                                type="hidden"
+                                name="status"
+                                class="cursor-pointer"
+                                :checked="(boolean) $selectedValue"
+                            >
+                            </x-admin::form.control-group.control>
 
                             <x-admin::form.control-group.control
                                 type="switch"
