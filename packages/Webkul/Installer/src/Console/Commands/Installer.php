@@ -49,8 +49,6 @@ class Installer extends Command
         $this->warn('Step: Optimizing...');
         $this->info($this->call('optimize'));
 
-        $this->call('key:generate');
-
         $this->createAdminCredential();
     }
 
@@ -68,6 +66,8 @@ class Installer extends Command
         }
 
         $this->createEnvFile();
+
+        $this->call('key:generate');
     }
 
     /**
