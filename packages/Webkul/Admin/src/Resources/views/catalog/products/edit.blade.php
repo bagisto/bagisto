@@ -11,7 +11,7 @@
     >
         {!! view_render_event('bagisto.admin.catalog.product.edit.actions.before', ['product' => $product]) !!}
 
-        {{-- Page Header --}}
+        <!-- Page Header -->
         <div class="grid gap-[10px]">
             <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
                 <div class="grid gap-[6px]">
@@ -45,12 +45,12 @@
             $currentLocale = core()->getRequestedLocale();
         @endphp
 
-        {{-- Channel and Locale Switcher --}}
+        <!-- Channel and Locale Switcher -->
         <div class="flex  gap-[16px] justify-between items-center mt-[28px] max-md:flex-wrap">
             <div class="flex gap-x-[4px] items-center">
-                {{-- Channel Switcher --}}
+                <!-- Channel Switcher -->
                 <x-admin::dropdown :class="$channels->count() <= 1 ? 'hidden' : ''">
-                    {{-- Dropdown Toggler --}}
+                    <!-- Dropdown Toggler -->
                     <x-slot:toggle>
                         <button
                             type="button"
@@ -66,7 +66,7 @@
                         </button>
                     </x-slot:toggle>
 
-                    {{-- Dropdown Content --}}
+                    <!-- Dropdown Content -->
                     <x-slot:content class="!p-[0px]">
                         @foreach ($channels as $channel)
                             <a
@@ -79,9 +79,9 @@
                     </x-slot:content>
                 </x-admin::dropdown>
 
-                {{-- Locale Switcher --}}
+                <!-- Locale Switcher -->
                 <x-admin::dropdown>
-                    {{-- Dropdown Toggler --}}
+                    <!-- Dropdown Toggler -->
                     <x-slot:toggle>
                         <button
                             type="button"
@@ -97,7 +97,7 @@
                         </button>
                     </x-slot:toggle>
 
-                    {{-- Dropdown Content --}}
+                    <!-- Dropdown Content -->
                     <x-slot:content class="!p-[0px]">
                         @foreach ($currentChannel->locales as $locale)
                             <a
@@ -136,7 +136,7 @@
                                 </p>
 
                                 @if ($group->name == 'Meta Description')
-                                    {{-- SEO Title & Description Blade Componnet --}}
+                                    <!-- SEO Title & Description Blade Componnet -->
                                     <x-admin::seo/>
                                 @endif
 
@@ -172,24 +172,24 @@
                     @endforeach
 
                     @if ($column == 1)
-                        {{-- Images View Blade File --}}
+                        <!-- Images View Blade File -->
                         @include('admin::catalog.products.edit.images')
 
-                        {{-- Videos View Blade File --}}
+                        <!-- Videos View Blade File -->
                         @include('admin::catalog.products.edit.videos')
 
-                        {{-- Product Type View Blade File --}}
+                        <!-- Product Type View Blade File -->
                         @includeIf('admin::catalog.products.edit.types.' . $product->type)
 
-                        {{-- Related, Cross Sells, Up Sells View Blade File --}}
+                        <!-- Related, Cross Sells, Up Sells View Blade File -->
                         @include('admin::catalog.products.edit.links')
 
-                        {{-- Include Product Type Additional Blade Files If Any --}}
+                        <!-- Include Product Type Additional Blade Files If Any -->
                         @foreach ($product->getTypeInstance()->getAdditionalViews() as $view)
                             @includeIf($view)
                         @endforeach
                     @else
-                        {{-- Categories View Blade File --}}
+                        <!-- Categories View Blade File -->
                         @include('admin::catalog.products.edit.categories')
                     @endif
                 </div>

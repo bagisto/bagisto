@@ -1,6 +1,6 @@
-{{-- Top Customers Vue Component --}}
+<!-- Top Customers Vue Component -->
 <v-reporting-customers-top-customer-groups>
-    {{-- Shimmer --}}
+    <!-- Shimmer -->
     <x-admin::shimmer.reporting.customers.top-customer-groups/>
 </v-reporting-customers-top-customer-groups>
 

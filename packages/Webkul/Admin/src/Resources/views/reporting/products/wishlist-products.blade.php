@@ -1,6 +1,6 @@
-{{-- Product Added to Wishlist Vue Component --}}
+<!-- Product Added to Wishlist Vue Component -->
 <v-reporting-products-wishlist-products>
-    {{-- Shimmer --}}
+    <!-- Shimmer -->
     <x-admin::shimmer.reporting.products.wishlist-products/>
 </v-reporting-products-wishlist-products>
 

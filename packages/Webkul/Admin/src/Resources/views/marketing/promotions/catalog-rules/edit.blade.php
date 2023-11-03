@@ -1,18 +1,18 @@
 <x-admin::layouts>    
-    {{-- Title of the page --}}
+    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.marketing.promotions.catalog-rules.edit.title')
     </x-slot:title>
 
     {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.before') !!}
 
-    {{-- edit Catalog form --}}
+    <!-- edit Catalog form -->
     <v-catalog-rule-edit-form></v-catalog-rule-edit-form>
 
     {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.after') !!}
 
     @pushOnce('scripts')
-        {{-- v catalog rule edit form template --}}
+        <!-- v catalog rule edit form template -->
         <script type="text/x-template" id="v-catalog-rule-edit-form-template">
             <div>
                 <x-admin::form 
@@ -495,7 +495,7 @@
             </div>
         </script>
 
-        {{-- v catalog rule edit form component --}}
+        <!-- v catalog rule edit form component -->
         <script type="module">
             app.component('v-catalog-rule-edit-form', {
                 template: '#v-catalog-rule-edit-form-template',
@@ -538,7 +538,7 @@
             })
         </script>
 
-        {{-- v catalog rule condition item form template --}}
+        <!-- v catalog rule condition item form template -->
         <script type="text/x-template" id="v-catalog-rule-condition-item-template">
             <div class="flex gap-[16px] justify-between mt-[15px]">
                 <div class="flex gap-[16px] flex-1 max-sm:flex-wrap max-sm:flex-1">
@@ -727,7 +727,7 @@
             </div>
         </script>
 
-        {{-- v catalog rule condition item component --}}
+        <!-- v catalog rule condition item component -->
         <script type="module">
             app.component('v-catalog-rule-condition-item', {
                 template: "#v-catalog-rule-condition-item-template",

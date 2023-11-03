@@ -1,6 +1,6 @@
-{{-- Customers with Most Orders Vue Component --}}
+<!-- Customers with Most Orders Vue Component -->
 <v-reporting-customers-with-most-orders>
-    {{-- Shimmer --}}
+    <!-- Shimmer -->
     <x-admin::shimmer.reporting.customers.most-orders/>
 </v-reporting-customers-with-most-orders>
 

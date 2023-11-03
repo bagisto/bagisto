@@ -3,9 +3,9 @@
         @lang('admin::app.reporting.sales.index.title')
     </x-slot:title>
 
-    {{-- Page Header --}}
+    <!-- Page Header -->
     <div class="flex gap-[16px] justify-between items-center mb-[20px] max-sm:flex-wrap">
-        {{-- Title --}}
+        <!-- Title -->
         <div class="flex gap-[6px]">
             <p class="pt-[6px] text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
                 @lang('admin::app.reporting.sales.index.title')
@@ -14,7 +14,7 @@
 
         <!-- Actions -->
         <v-reporting-filters>
-            {{-- Shimmer --}}
+            <!-- Shimmer -->
             <div class="flex gap-[6px]">
                 <div class="shimmer w-[140px] h-[39px] rounded-[6px]"></div>
                 <div class="shimmer w-[140px] h-[39px] rounded-[6px]"></div>
@@ -22,7 +22,7 @@
         </v-reporting-filters>
     </div>
 
-    {{-- Sales Stats Vue Component --}}
+    <!-- Sales Stats Vue Component -->
     <div class="flex flex-col gap-[15px] flex-1 max-xl:flex-auto">
         <!-- Sales Section -->
         @include('admin::reporting.sales.total-sales')
