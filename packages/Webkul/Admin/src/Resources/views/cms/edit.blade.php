@@ -31,7 +31,7 @@
                     @lang('admin::app.cms.edit.back-btn')
                 </a>
 
-                {{-- Preview Button --}}
+                <!-- Preview Button -->
                 @if ($page->translate($currentLocale->code))
                     <a
                         href="{{ route('shop.cms.page', $page->translate($currentLocale->code)['url_key']) }}"
@@ -42,7 +42,7 @@
                     </a>
                 @endif
 
-                {{--Save Button --}}
+                <!--Save Button -->
                 <button
                     type="submit"
                     class="primary-button"
@@ -54,9 +54,9 @@
 
         <div class="flex  gap-[16px] justify-between items-center mt-[28px] max-md:flex-wrap">
             <div class="flex gap-x-[4px] items-center">
-                {{-- Locale Switcher --}}
+                <!-- Locale Switcher -->
                 <x-admin::dropdown>
-                    {{-- Dropdown Toggler --}}
+                    <!-- Dropdown Toggler -->
                     <x-slot:toggle>
                         <button
                             type="button"
@@ -72,7 +72,7 @@
                         </button>
                     </x-slot:toggle>
 
-                    {{-- Dropdown Content --}}
+                    <!-- Dropdown Content -->
                     <x-slot:content class="!p-[0px]">
                         @foreach (core()->getAllLocales() as $locale)
                             <a
@@ -87,14 +87,14 @@
             </div>
         </div>
 
-          {{-- body content --}}
+          <!-- body content -->
           <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
-            {{-- Left sub-component --}}
+            <!-- Left sub-component -->
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
 
                 {!! view_render_event('bagisto.admin.cms.pages.edit.card.content.before') !!}
 
-                {{--Content --}}
+                <!--Content -->
                 <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                         @lang('admin::app.cms.edit.description')
@@ -128,13 +128,13 @@
 
                 {!! view_render_event('bagisto.admin.cms.pages.edit.card.seo.before') !!}
 
-                {{-- SEO Input Fields --}}
+                <!-- SEO Input Fields -->
                 <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                         @lang('admin::app.cms.edit.seo')
                     </p>
 
-                    {{-- SEO Title & Description Blade Componnet --}}
+                    <!-- SEO Title & Description Blade Componnet -->
                     <x-admin::seo/>
 
                     <div class="mt-[30px]">
@@ -231,9 +231,9 @@
 
             </div>
 
-            {{-- Right sub-component --}}
+            <!-- Right sub-component -->
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
-                {{-- General --}}
+                <!-- General -->
 
                 {!! view_render_event('bagisto.admin.cms.pages.edit.card.accordion.seo.before') !!}
 
@@ -270,7 +270,7 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            {{-- Select Channels --}}
+                            <!-- Select Channels -->
                             <p class="required block leading-[24px] text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.cms.create.channels')
                             </p>

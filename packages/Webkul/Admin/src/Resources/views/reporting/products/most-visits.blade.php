@@ -1,6 +1,6 @@
-{{-- Products with Most Visits Vue Component --}}
+<!-- Products with Most Visits Vue Component -->
 <v-reporting-products-with-most-visits>
-    {{-- Shimmer --}}
+    <!-- Shimmer -->
     <x-admin::shimmer.reporting.products.most-visits/>
 </v-reporting-products-with-most-visits>
 

@@ -4,30 +4,34 @@
 
 <header class="flex justify-between items-center px-[16px] py-[10px] bg-white dark:bg-gray-900  border-b-[1px] dark:border-gray-800 sticky top-0 z-[10001]">
     <div class="flex gap-[6px] items-center">
-        {{-- Hamburger Menu --}}
+        <!-- Hamburger Menu -->
         <i
             class="hidden icon-menu text-[24px] p-[6px] max-lg:block cursor-pointer"
             @click="$refs.sidebarMenuDrawer.open()"
         >
         </i>
 
-        {{-- Logo --}}
+        <!-- Logo -->
         <a
             href="{{ route('admin.dashboard.index') }}" 
             class="place-self-start -mt-[4px]"            
         >
             @if (core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode()))
-                <img src="{{ Storage::url(core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode())) }}" alt="{{ config('app.name') }}" style="height: 40px; width: 110px;"/>
+                <img
+                    class="w-[110px] h-[40px]"
+                    src="{{ Storage::url(core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode())) }}"
+                    alt="{{ config('app.name') }}"
+                />
             @else
-                @if (! request()->cookie('dark_mode'))
-                    <img src="{{ bagisto_asset('images/logo.svg') }}" id="logo-image">
-                @else
-                    <img src="{{ bagisto_asset('images/dark-logo.svg') }}" id="logo-image">
-                @endif
+                <img
+                    src="{{ request()->cookie('dark_mode') ? bagisto_asset('images/dark-logo.svg') : bagisto_asset('images/logo.svg') }}"
+                    id="logo-image"
+                    alt="{{ config('app.name') }}"
+                />
             @endif
         </a>
 
-        {{-- Mega Search Bar Vue Component --}}
+        <!-- Mega Search Bar Vue Component -->
         <v-mega-search>
             <div class="flex items-center relative w-[525px] max-w-[525px] ltr:ml-[10px] rtl:mr-[10px]">
                 <i class="icon-search text-[22px] flex items-center absolute ltr:left-[12px] rtl:right-[12px] top-[6px]"></i>
@@ -42,7 +46,7 @@
     </div>
 
     <div class="flex gap-[10px] items-center">
-        {{-- Dark mode Switcher --}}
+        <!-- Dark mode Switcher -->
         <v-dark>
             <div class="flex">
                 <span
@@ -57,13 +61,13 @@
             class="flex"
         >
             <span 
-                class="icon-store p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950 "
+                class="icon-store p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
                 title="@lang('admin::app.components.layouts.header.visit-shop')"
             >
             </span>
         </a>
 
-       {{-- Notification Component --}}
+       <!-- Notification Component -->
         <v-notifications {{ $attributes }}>
             <span class="flex relative">
                 <span 
@@ -74,7 +78,7 @@
             </span>
         </v-notifications>
 
-        {{-- Admin profile --}}
+        <!-- Admin profile -->
         <x-admin::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
             <x-slot:toggle>
                 @if ($admin->image)
@@ -91,7 +95,7 @@
                 @endif
             </x-slot:toggle>
 
-            {{-- Admin Dropdown --}}
+            <!-- Admin Dropdown -->
             <x-slot:content class="!p-[0px]">
                 <div class="flex gap-[5px] items-center px-[20px] py-[10px] border border-b-gray-300 dark:border-gray-800">
                     <img
@@ -100,7 +104,7 @@
                         height="24"
                     />
 
-                    {{-- Version --}}
+                    <!-- Version -->
                     <p class="text-gray-400">
                         @lang('admin::app.components.layouts.header.app-version', ['version' => 'v' . core()->version()])
                     </p>
@@ -114,7 +118,7 @@
                         @lang('admin::app.components.layouts.header.my-account')
                     </a>
 
-                    {{--Admin logout--}}
+                    <!--Admin logout-->
                     <x-admin::form
                         method="DELETE"
                         action="{{ route('admin.session.destroy') }}"
@@ -145,9 +149,17 @@
     <x-slot:header>
         <div class="flex justify-between items-center">
             @if (core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode()))
-                <img src="{{ Storage::url(core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode())) }}" alt="{{ config('app.name') }}" style="height: 40px; width: 110px;"/>
+                <img
+                    class="w-[110px] h-[40px]"
+                    src="{{ Storage::url(core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode())) }}"
+                    alt="{{ config('app.name') }}"
+                />
             @else
-                <img src="{{ bagisto_asset('images/logo.svg') }}">
+                <img
+                    src="{{ request()->cookie('dark_mode') ? bagisto_asset('images/dark-logo.svg') : bagisto_asset('images/logo.svg') }}"
+                    id="logo-image"
+                    alt="{{ config('app.name') }}"
+                />
             @endif
         </div>
     </x-slot:header>
@@ -156,7 +168,7 @@
     <x-slot:content class="p-[16px]">
         <div class="h-[calc(100vh-100px)] overflow-auto journal-scroll">
             <nav class="grid gap-[7px] w-full">
-                {{-- Navigation Menu --}}
+                <!-- Navigation Menu -->
                 @foreach ($menu->items as $menuItem)
                     <div class="relative group/item">
                         <a
@@ -255,8 +267,10 @@
 
                                     <!-- Details -->
                                     <div class="grid gap-[6px] place-content-start">
-                                        <p class="text-[16x] text-gray-600 dark:text-gray-300 font-semibold">
-                                            @{{ product.name }}
+                                        <p
+                                            class="text-[16x] text-gray-600 dark:text-gray-300 font-semibold"
+                                            v-text="product.name"
+                                        >
                                         </p>
 
                                         <p class="text-gray-500">
@@ -267,8 +281,10 @@
 
                                 <!-- Right Information -->
                                 <div class="grid gap-[4px] place-content-center text-right">
-                                    <p class="text-gray-600 dark:text-gray-300 font-semibold">
-                                        @{{ product.formatted_price }}
+                                    <p
+                                        class="text-gray-600 dark:text-gray-300 font-semibold"
+                                        v-text="product.formatted_price"
+                                    >
                                     </p>
                                 </div>
                             </a>
@@ -570,7 +586,7 @@
                                 @{{ orderTypeMessages[notification.order.status] }}
                             </p>
 
-                            <!-- Craeted Date In humand Readable Format -->
+                            <!-- Created Date In humand Readable Format -->
                             <p class="text-[12px] text-gray-600 dark:text-gray-300">
                                 @{{ notification.order.datetime }}
                             </p>

@@ -1,6 +1,6 @@
-{{-- Top Selling Products By Revenue Vue Component --}}
+<!-- Top Selling Products By Revenue Vue Component -->
 <v-reporting-product-top-selling-by-revenue>
-    {{-- Shimmer --}}
+    <!-- Shimmer -->
     <x-admin::shimmer.reporting.products.top-selling-by-revenue/>
 </v-reporting-product-top-selling-by-revenue>
 

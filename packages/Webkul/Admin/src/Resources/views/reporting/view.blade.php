@@ -4,7 +4,7 @@
     </x-slot:title>
 
     <v-reporting-stats-table>
-        {{-- Shimmer --}}
+        <!-- Shimmer -->
         <x-admin::shimmer.reporting.view/>
     </v-reporting-stats-table>
 

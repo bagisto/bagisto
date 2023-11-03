@@ -1,6 +1,6 @@
-{{-- Average Order Value Vue Component --}}
+<!-- Average Order Value Vue Component -->
 <v-reporting-sales-average-order-value>
-    {{-- Shimmer --}}
+    <!-- Shimmer -->
     <x-admin::shimmer.reporting.sales.average-order-value/> 
 </v-reporting-sales-average-order-value>
 

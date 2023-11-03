@@ -1,6 +1,6 @@
-{{-- Purchase Funnel Vue Component --}}
+<!-- Purchase Funnel Vue Component -->
 <v-reporting-sales-purchase-funnel>
-    {{-- Shimmer --}}
+    <!-- Shimmer -->
     <x-admin::shimmer.reporting.sales.purchase-funnel/>
 </v-reporting-sales-purchase-funnel>
 

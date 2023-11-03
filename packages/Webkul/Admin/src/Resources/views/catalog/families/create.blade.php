@@ -3,12 +3,12 @@
         @lang('admin::app.catalog.families.create.title')
     </x-slot:title>
 
-    {{-- Input Form --}}
+    <!-- Input Form -->
     <x-admin::form :action="route('admin.catalog.families.store')">
 
         {!! view_render_event('bagisto.admin.catalog.families.create.create_form_controls.before') !!}
 
-        {{-- Page Header --}}
+        <!-- Page Header -->
         <div class="flex justify-between items-center">
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.catalog.families.create.title')
@@ -31,29 +31,29 @@
             </div>
         </div>
 
-        {{-- Container --}}
+        <!-- Container -->
         <div class="flex gap-[10px] mt-[14px]">
-            {{-- Left Container --}}
+            <!-- Left Container -->
             <div class="flex flex-col gap-[8px] flex-1 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                 <v-family-attributes>
                     <x-admin::shimmer.families.attributes-panel/>
                 </v-family-attributes>
             </div>
 
-            {{-- Right Container --}}
+            <!-- Right Container -->
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
-                {{-- General Pannel --}}
+                <!-- General Pannel -->
                 <div class="bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
-                    {{-- Settings --}}
+                    <!-- Settings -->
                     <x-admin::accordion>
-                        {{-- Panel Header --}}
+                        <!-- Panel Header -->
                         <x-slot:header>
                             <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                                 @lang('admin::app.catalog.families.create.general')
                             </p>
                         </x-slot:header>
                     
-                        {{-- Panel Content --}}
+                        <!-- Panel Content -->
                         <x-slot:content>
                             <x-admin::form.control-group class="mb-[10px]">
                                 <x-admin::form.control-group.label class="required !text-gray-800 dark:!text-white">

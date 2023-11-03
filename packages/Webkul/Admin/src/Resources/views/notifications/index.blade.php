@@ -5,7 +5,7 @@
 
     {!! view_render_event('bagisto.admin.marketing.notifications.create.before') !!}
 
-    {{-- Vue Component --}}
+    <!-- Vue Component -->
     <v-notification-list></v-notification-list>
 
     {!! view_render_event('bagisto.admin.marketing.notifications.create.after') !!}

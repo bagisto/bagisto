@@ -1,34 +1,34 @@
 <x-admin::layouts>
-    {{-- Title of the page. --}}
+    <!-- Title of the page. -->
     <x-slot:title>
         @lang('admin::app.configuration.index.title')
     </x-slot:title>
 
-    {{-- Heading of the page --}}
+    <!-- Heading of the page -->
     <div class="flex justify-between items-center mb-[26px]">
         <p class="text-[20px] text-gray-800 dark:text-white font-bold">
             @lang('admin::app.configuration.index.title')
         </p>
     </div>
 
-    {{-- Page Content --}}
+    <!-- Page Content -->
     <div class="grid gap-y-[30px]">
         @foreach ($config->items as $itemKey => $item)
             <div>
                 <div class="grid gap-[4px]">
-                    {{-- Title of the Main Card --}}
+                    <!-- Title of the Main Card -->
                     <p class="text-gray-600 dark:text-gray-300 font-semibold">
                         @lang($item['name'] ?? '')
                     </p>
 
-                    {{-- Info of the Main Card --}}
+                    <!-- Info of the Main Card -->
                     <p class="text-gray-600 dark:text-gray-300">
                         @lang($item['info'] ?? '')
                     </p>
                 </div>
 
                 <div class="grid grid-cols-4 gap-[48px] flex-wrap justify-between p-[16px] mt-[8px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow max-1580:grid-cols-3 max-xl:grid-cols-2 max-sm:grid-cols-1">
-                    {{-- Menus cards --}}
+                    <!-- Menus cards -->
                     @foreach ($item['children'] as $childKey =>  $child)
                         <a 
                             class="flex items-center gap-[8px] max-w-[360px] p-[8px] rounded-[8px] transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
