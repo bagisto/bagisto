@@ -247,13 +247,13 @@ class ElasticSearch extends AbstractIndexer
      */
     public function getIndices()
     {
-        $properties = [
+        $properties = array_merge([
             'id'           => $this->product->id,
             'type'         => $this->product->type,
             'sku'          => $this->product->sku,
             'category_ids' => $this->product->categories->pluck('id')->toArray(),
             'created_at'   => $this->product->created_at,
-        ];
+        ], $this->product->additional ?? []);
 
         $attributes = $this->getAttributes();
 

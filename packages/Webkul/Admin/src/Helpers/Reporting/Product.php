@@ -159,7 +159,7 @@ class Product extends AbstractReporting
     public function getStockThresholdProducts($limit = null): Collection
     {
         return $this->productInventoryRepository
-            ->with('product', 'product.attribute_family', 'product.attribute_values', 'product.images')
+            ->with(['product', 'product.attribute_family', 'product.attribute_values', 'product.images'])
             ->select('*', DB::raw('SUM(qty) as total_qty'))
             ->groupBy('product_id')
             ->orderBy('total_qty', 'ASC')
@@ -175,7 +175,7 @@ class Product extends AbstractReporting
     public function getTopSellingProductsByRevenue($limit = null): collection
     {
         $products = $this->orderItemRepository
-            ->with(['product', 'product.images'])
+            ->with(['product', 'product.attribute_family', 'product.attribute_values', 'product.images'])
             ->addSelect('*', DB::raw('SUM(base_total_invoiced - base_discount_refunded) as revenue'))
             ->whereNull('parent_id')
             ->whereBetween('order_items.created_at', [$this->startDate, $this->endDate])
@@ -201,7 +201,7 @@ class Product extends AbstractReporting
     public function getTopSellingProductsByQuantity($limit = null): collection
     {
         $products = $this->orderItemRepository
-            ->with(['product', 'product.images'])
+            ->with(['product', 'product.attribute_family', 'product.attribute_values', 'product.images'])
             ->addSelect('*', DB::raw('SUM(qty_ordered) as total_qty_ordered'))
             ->whereNull('parent_id')
             ->whereBetween('order_items.created_at', [$this->startDate, $this->endDate])
