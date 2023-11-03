@@ -5,7 +5,7 @@
         </span> <br>
 
         <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
-            {{ __('admin::app.emails.dear', ['customer_name' => $invoice->order->customer_full_name]) }},👋
+            {{ __('admin::app.emails.dear', ['admin_name' => $invoice->order->customer_full_name]) }},👋
         </p>
 
         <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
