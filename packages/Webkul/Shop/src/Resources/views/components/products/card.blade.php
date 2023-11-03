@@ -47,7 +47,7 @@
                             <span
                                 class="flex justify-center items-center absolute top-[20px] right-[20px] w-[30px] h-[30px] bg-white rounded-md cursor-pointer text-[25px]"
                                 role="button"
-                                aria-label="Add To Wishlist"
+                                aria-label="@lang('shop::app.components.products.card.add-to-wishlist')"
                                 tabindex="0"
                                 :class="product.is_wishlist ? 'icon-heart-fill' : 'icon-heart'"
                                 @click="addToWishlist()"
@@ -59,7 +59,7 @@
                             <span
                                 class="icon-compare flex justify-center items-center w-[30px] h-[30px] absolute top-[60px] right-[20px] bg-white rounded-md cursor-pointer text-[25px]"
                                 role="button"
-                                aria-label="Add To Compare"
+                                aria-label="@lang('shop::app.components.products.card.add-to-compare')"
                                 tabindex="0"
                                 @click="addToCompare(product.id)"
                             >
@@ -129,7 +129,7 @@
                             <span 
                                 class="flex justify-center items-center absolute top-[20px] right-[20px] w-[30px] h-[30px] bg-white rounded-md text-[25px] cursor-pointer"
                                 role="button"
-                                aria-label="Add To Wishlist"
+                                aria-label="@lang('shop::app.components.products.card.add-to-wishlist')"
                                 tabindex="0"
                                 :class="product.is_wishlist ? 'icon-heart-fill' : 'icon-heart'"
                                 @click="addToWishlist()"
@@ -141,7 +141,7 @@
                             <span 
                                 class="icon-compare flex justify-center items-center absolute top-[60px] right-[20px] w-[30px] h-[30px] bg-white rounded-md text-[25px] cursor-pointer"
                                 role="button"
-                                aria-label="Add To Compare"
+                                aria-label="@lang('shop::app.components.products.card.add-to-compare')"
                                 tabindex="0"
                                 @click="addToCompare(product.id)"
                             >
@@ -259,14 +259,14 @@
 
                             localStorage.setItem('compare_items', JSON.stringify(items));
 
-                            this.$emitter.emit('add-flash', { type: 'success', message: "@lang('shop::app.components.products.card.add-to-compare')" });
+                            this.$emitter.emit('add-flash', { type: 'success', message: "@lang('shop::app.components.products.card.add-to-compare-success')" });
                         } else {
                             this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('shop::app.components.products.card.already-in-compare')" });
                         }
                     } else {
                         localStorage.setItem('compare_items', JSON.stringify([productId]));
                             
-                        this.$emitter.emit('add-flash', { type: 'success', message: "@lang('shop::app.components.products.card.add-to-compare')" });
+                        this.$emitter.emit('add-flash', { type: 'success', message: "@lang('shop::app.components.products.card.add-to-compare-success')" });
 
                     }
                 },

@@ -2,7 +2,7 @@
     <button
         type="button"
         class="icon-camera flex items-center absolute top-[10px] ltr:right-[12px] rtl:left-[12px] pr-3 text-[22px]"
-        aria-label="Search"
+        aria-label="@lang('shop::app.search.images.index.search')"
     >
     </button>
 </v-image-search>
@@ -12,7 +12,7 @@
         <div>
             <label
                 class="icon-camera flex items-center absolute top-[10px] ltr:right-[12px] rtl:left-[12px] pr-3 text-[22px] cursor-pointer"
-                aria-label="Search"
+                aria-label="@lang('shop::app.search.images.index.search')"
                 for="v-image-search"
                 v-if="! isSearching"
             >

@@ -129,7 +129,7 @@
             <a
                 href="{{ route('shop.home.index') }}"
                 class="max-h-[30px]"
-                aria-label="Bagisto"
+                aria-label="@lang('shop::app.components.layouts.header.bagisto')"
             >
                 <img
                     src="{{ bagisto_asset('images/logo.svg') }}"
@@ -146,7 +146,7 @@
                 @if($showCompare)
                     <a
                         href="{{ route('shop.compare.index') }}"
-                        aria-label="Compare "
+                        aria-label="@lang('shop::app.components.layouts.header.compare')"
                     >
                         <span class="icon-compare text-[24px] cursor-pointer"></span>
                     </a>
@@ -278,7 +278,7 @@
             <button
                 type="button"
                 class="icon-camera flex items-center absolute top-[12px] right-[12px] pr-3 text-[22px]"
-                aria-label="Search"
+                aria-label="@lang('shop::app.components.layouts.header.search')"
             >
             </button>
         </div>

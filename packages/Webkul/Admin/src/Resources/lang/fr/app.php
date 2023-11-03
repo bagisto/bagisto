@@ -2618,6 +2618,7 @@ return [
                 'update-slider'                 => 'Mettre à jour le curseur',
                 'value-input'                   => 'Valeur',
                 'value'                         => 'Valeur : :value',
+                'image-title'                   => 'Titre de l\'image',
             ],
 
             'create-success' => 'Thème créé avec succès',

@@ -2618,6 +2618,7 @@ return [
                 'update-slider'                 => 'עדכן מחוון',
                 'value-input'                   => 'ערך',
                 'value'                         => 'ערך: :value',
+                'image-title'                   => 'כותרת התמונה',
             ],
 
             'create-success' => 'ערכת העיצוב נוצרה בהצלחה',

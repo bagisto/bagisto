@@ -147,7 +147,7 @@
                 :value="old('gender') ?? $customer->gender"
                 class="mb-3"
                 rules="required"
-                aria-label="Select Gender"
+                :aria-label="trans('shop::app.customers.account.profile.select-gender')"
                 :label="trans('shop::app.customers.account.profile.gender')"
             >
                 <option value="Other">@lang('shop::app.customers.account.profile.other')</option>

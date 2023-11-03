@@ -22,7 +22,7 @@
                 <a
                     href="{{ route('shop.home.index') }}"
                     class="flex min-h-[30px]"
-                    aria-label="Bagisto "
+                    aria-label="@lang('shop::checkout.onepage.index.bagisto')"
                 >
                     <img
                         src="{{ bagisto_asset('images/logo.svg') }}"
