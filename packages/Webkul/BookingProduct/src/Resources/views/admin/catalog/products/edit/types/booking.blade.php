@@ -47,11 +47,11 @@
                                 v-model="booking_type"
                                 @change="bookingSwatch=true, slots=[]"
                             >
-                                <option value="default" selected>@lang('Default')</option>
-                                <option value="appointment">@lang('Appointment Booking')</option>
-                                <option value="event">@lang('Event Booking')</option>
-                                <option value="rental">@lang('Rental Booking')</option>
-                                <option value="table">@lang('Table Booking')</option>
+                                @foreach (['default', 'appointment', 'event', 'rental', 'table'] as $item)
+                                    <option value={{ $item }}>
+                                        @lang($item)
+                                    </option>
+                                @endforeach
                             </x-booking::form.control-group.control>
 
                             <x-booking::form.control-group.error 
@@ -60,6 +60,7 @@
                             </x-booking::form.control-group.error>
                         </x-booking::form.control-group>
 
+                        @{{ bookingSubType }} , @{{ booking_type }}, @{{ renting_type }}
                         <!-- Location -->
                         <x-admin::form.control-group class="w-full mb-[10px]">
                             <x-booking::form.control-group.label>
@@ -245,6 +246,8 @@
                                 :value="'daily'"
                                 :label="trans('Renting Type')"
                                 :placeholder="trans('Renting Type')"
+                                v-model="renting_type"
+                                @change="rentingSwatch=true, slots=[]"
                             >
                                 <option value="daily" selected>@lang('Daily Basis')</option>
                                 <option value="hourly">@lang('Hourly Basis')</option>
@@ -419,6 +422,7 @@
                             v-if="bookingSwatch && (
                                 booking_type == 'appointment'
                                 || booking_type == 'table'
+                                || renting_type != 'daily'
                             )"
                             class="w-full mb-[10px]"
                         >
@@ -449,7 +453,7 @@
                 <!-- Slots Component -->
                 <div
                     class="p-[16px] bg-white dark:bg-gray-900 box-shadow rounded-[4px]"
-                    v-if="booking_type != 'rental'"
+                    v-if="renting_type != 'daily'"
                 >
                     <div class="flex gap-[20px] justify-between">
                         <div class="flex flex-col gap-[8px]">
@@ -679,7 +683,7 @@
                     </x-slot:header>
 
                     <x-slot:content>
-                        <div v-if="booking_type != 'event'">
+                        <div v-if="(booking_type != 'event')">
                             <div class="flex gap-[16px] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
                                 <!-- From -->
                                 <x-admin::form.control-group
@@ -693,7 +697,7 @@
                                     <x-admin::form.control-group.control
                                         type="select"
                                         name="from_day"
-                                        :value="'0'"
+                                        :value="'sunday'"
                                         :label="trans('admin::app.catalog.attributes.create.admin')"
                                     >
                                         <option value="sunday" selected>Sunday</option>
@@ -742,7 +746,7 @@
                                     <x-admin::form.control-group.control
                                         type="select"
                                         name="to_day"
-                                        :value="'0'"
+                                        :value="'sunday'"
                                         :label="trans('admin::app.catalog.attributes.create.admin')"
                                     >
                                         <option value="sunday" selected>Sunday</option>
@@ -776,6 +780,84 @@
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
+                            </div>
+                        </div>
+
+                        <div v-else-if="bookingSubType == 'many'">
+                            <div class="grid grid-cols-4 gap-[10px] px-[16px] py-[10px]">
+                                @php $count = 0; @endphp
+
+                                @foreach (['sunday', 'monaday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday',] as $item)
+                                    <!-- Day -->
+                                    <x-admin::form.control-group.label>
+                                        {{ $item }}
+                                    </x-admin::form.control-group.label>
+    
+                                    <!-- From -->
+                                    <x-admin::form.control-group>
+                                        <x-admin::form.control-group.label class="hidden">
+                                            @lang('From')
+                                        </x-admin::form.control-group.label>
+    
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="booking[slots][{{ $count }}][from]"
+                                            :label="trans('From')"
+                                            :placeholder="trans('From')"
+                                        >
+                                        </x-admin::form.control-group.control>
+    
+                                        <x-admin::form.control-group.error
+                                            control-name="booking[slots][{{ $count }}][from]"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::from.control-group>
+    
+                                    <!-- To -->
+                                    <x-admin::form.control-group>
+                                        <x-admin::form.control-group.label class="hidden">
+                                            @lang('To')
+                                        </x-admin::form.control-group.label>
+    
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="booking[slots][{{ $count }}][to]"
+                                            :label="trans('To')"
+                                            :placeholder="trans('To')"
+                                        >
+                                        </x-admin::form.control-group.control>
+    
+                                        <x-admin::form.control-group.error
+                                            control-name="booking[slots][{{ $count }}][to]"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::from.control-group>
+    
+                                    <!-- Status -->
+                                    <x-admin::form.control-group>
+                                        <x-admin::form.control-group.label class="hidden">
+                                            @lang('Status')
+                                        </x-admin::form.control-group.label>
+    
+                                        <x-admin::form.control-group.control
+                                            type="select"
+                                            name="booking[slots][{{ $count }}][status]"
+                                            :label="trans('Status')"
+                                            :value="'0'"
+                                            :placeholder="trans('Status')"
+                                        >
+                                            <option value="1">Open</option>
+                                            <option value="0">Close</option>
+                                        </x-admin::form.control-group.control>
+    
+                                        <x-admin::form.control-group.error
+                                            control-name="booking[slots][{{ $count }}][status]"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::from.control-group>
+
+                                    @php $count++; @endphp
+                                @endforeach
                             </div>
                         </div>
 
@@ -868,7 +950,7 @@
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
-                                        type="date"
+                                        type="datetime"
                                         name="booking[tickets][ticket_0][en][valid_from]"
                                         :label="trans('Valid From')"
                                         :placeholder="trans('Valid From')"
@@ -888,7 +970,7 @@
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
-                                        type="date"
+                                        type="datetime"
                                         name="booking[tickets][ticket_0][en][valid_until]"
                                         :label="trans('Valid Until')"
                                         :placeholder="trans('Valid Until')"
@@ -908,7 +990,8 @@
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
-                                        type="text"
+                                        type="textarea"
+                                        class="w-full"
                                         name="booking[tickets][ticket_0][en][description]"
                                         :label="trans('Description')"
                                         :placeholder="trans('Description')"
@@ -929,8 +1012,8 @@
                         <button
                             type="submit"
                             class="primary-button"
+                            v-text="booking_type != 'event' ? '@lang('Save Slot')' : '@lang('Save Tickets')'"
                         >
-                            @lang('admin::app.catalog.attributes.create.option.save-btn')
                         </button>
                     </x-slot:footer>
                 </x-admin::modal>
@@ -955,12 +1038,24 @@
                         available_to: '',
                     },
 
-                    booking_type: 'default',
+                    slots_available: [
+                        'sunday',
+                        'monaday',
+                        'tuesday',
+                        'wednesday',
+                        'thursday',
+                        'friday',
+                        'saturday',
+                    ],
 
-                    bookingSubType: '',
+                    booking_type: 'default',
+                    
+                    renting_type: '',
+
+                    bookingSubType: 'one',
 
                     bookingSwatch: false,
-
+                    
                     bookingSwatchType: false,
 
                     slotRowCount: 1,
