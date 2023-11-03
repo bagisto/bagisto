@@ -1,5 +1,5 @@
 <x-admin::layouts>
-    {{-- Title of the page --}}
+    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.marketing.promotions.cart-rules.edit.title')
     </x-slot:title>
@@ -11,7 +11,7 @@
     {!! view_render_event('bagisto.admin.marketing.promotions.cart_rules.edit.after') !!}
     
     @pushOnce('scripts')
-        {{-- v cart rules edit form template --}}
+        <!-- v cart rules edit form template -->
         <script
             type="text/x-template"
             id="v-cart-rule-edit-form-template"
@@ -301,7 +301,7 @@
                                     :condition="condition"
                                     :key="index"
                                     :index="index"
-                                    {{-- @onRemoveCondition="removeCondition($event)" --}}
+                                    @onRemoveCondition="removeCondition($event)"
                                 >
                                 </v-cart-rule-condition-item>
                       
@@ -793,7 +793,7 @@
            </div>
         </script>
 
-        {{-- v cart rule edit form component --}}
+        <!-- v cart rule edit form component -->
         <script type="module">
             app.component('v-cart-rule-edit-form', {
                 template: '#v-cart-rule-edit-form-template',
@@ -842,7 +842,7 @@
             });
         </script>
 
-        {{-- v catalog rule condition item form template --}}
+        <!-- v catalog rule condition item form template -->
         <script 
             type="text/x-template"
             id="v-cart-rule-condition-item-template"
@@ -1021,7 +1021,7 @@
             </div>
         </script>
 
-        {{-- v catalog rule condition item component --}}
+        <!-- v catalog rule condition item component -->
         <script type="module">
             app.component('v-cart-rule-condition-item', {
                 template: "#v-cart-rule-condition-item-template",
@@ -1221,7 +1221,7 @@
             });
         </script>
 
-        {{-- v create coupon form --}}
+        <!-- v create coupon form -->
         <script 
             type="text/x-template"
             id="v-create-coupon-form-template"

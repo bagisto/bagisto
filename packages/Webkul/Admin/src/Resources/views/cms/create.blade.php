@@ -1,10 +1,10 @@
 <x-admin::layouts>
-    {{--Page title --}}
+    <!--Page title -->
     <x-slot:title>
         @lang('admin::app.cms.create.title')
     </x-slot:title>
 
-    {{--Create Page Form --}}
+    <!--Create Page Form -->
     <x-admin::form
         :action="route('admin.cms.store')"
         enctype="multipart/form-data"
@@ -19,7 +19,7 @@
 
 
             <div class="flex gap-x-[10px] items-center">
-                {{-- Back Button --}}
+                <!-- Back Button -->
                 <a
                     href="{{ route('admin.cms.index') }}"
                     class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
@@ -27,7 +27,7 @@
                     @lang('admin::app.account.edit.back-btn')
                 </a>
 
-                {{--Save Button --}}
+                <!--Save Button -->
                 <button
                     type="submit"
                     class="primary-button"
@@ -37,14 +37,14 @@
             </div>
         </div>
 
-        {{-- body content --}}
+        <!-- body content -->
         <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
-            {{-- Left sub-component --}}
+            <!-- Left sub-component -->
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
 
                 {!! view_render_event('bagisto.admin.cms.pages.create.card.description.before') !!}
 
-                {{--Content --}}
+                <!--Content -->
                 <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                         @lang('admin::app.cms.create.description')
@@ -78,13 +78,13 @@
 
                 {!! view_render_event('bagisto.admin.cms.pages.create.card.seo.before') !!}
 
-                {{-- SEO Input Fields --}}
+                <!-- SEO Input Fields -->
                 <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                         @lang('admin::app.cms.create.seo')
                     </p>
 
-                    {{-- SEO Title & Description Blade Componnet --}}
+                    <!-- SEO Title & Description Blade Componnet -->
                     <x-admin::seo/>
 
                     <div class="mb-[30px]">
@@ -178,9 +178,9 @@
                 {!! view_render_event('bagisto.admin.cms.pages.create.card.seo.after') !!}
             </div>
 
-            {{-- Right sub-component --}}
+            <!-- Right sub-component -->
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
-                {{-- General --}}
+                <!-- General -->
 
                 {!! view_render_event('bagisto.admin.cms.pages.create.card.accordion.general.before') !!}
 
@@ -217,7 +217,7 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            {{-- Select Channels --}}
+                            <!-- Select Channels -->
                             <p class="required block leading-[24px] text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.cms.create.channels')
                             </p>

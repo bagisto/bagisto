@@ -3,7 +3,7 @@
         @lang('admin::app.dashboard.index.title')
     </x-slot:title>
 
-    {{-- User Detailes Section --}}
+    <!-- User Detailes Section -->
     <div class="flex gap-[16px] justify-between items-center mb-[20px] max-sm:flex-wrap">
         <div class="grid gap-[6px]">
             <p class="pt-[6px] text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
@@ -17,7 +17,7 @@
 
         <!-- Actions -->
         <v-dashboard-filters>
-            {{-- Shimmer --}}
+            <!-- Shimmer -->
             <div class="flex gap-[6px]">
                 <div class="shimmer w-[140px] h-[39px] rounded-[6px]"></div>
                 <div class="shimmer w-[140px] h-[39px] rounded-[6px]"></div>
@@ -25,11 +25,11 @@
         </v-dashboard-filters>
     </div>
 
-    {{-- Body Component --}}
+    <!-- Body Component -->
     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
-        {{-- Left Section --}}
+        <!-- Left Section -->
         <div class=" flex flex-col gap-[30px] flex-1 max-xl:flex-auto">
-            {{-- Overall Detailes --}}
+            <!-- Overall Detailes -->
             <div class="flex flex-col gap-[8px]">
                 <p class="text-[16px] text-gray-600 dark:text-gray-300 font-semibold">
                     @lang('admin::app.dashboard.index.overall-details')
@@ -39,7 +39,7 @@
                 @include('admin::dashboard.over-all-details')
             </div>
 
-            {{-- Todays Details --}}
+            <!-- Todays Details -->
             <div class="flex flex-col gap-[8px]  ">
                 <p class="text-[16px] text-gray-600 dark:text-gray-300 font-semibold">
                     @lang('admin::app.dashboard.index.today-details')
@@ -49,25 +49,25 @@
                 @include('admin::dashboard.todays-details')
             </div>
 
-            {{-- Stock Thereshold --}}
+            <!-- Stock Thereshold -->
             <div class="flex flex-col gap-[8px]  ">
                 <p class="text-[16px] text-gray-600 dark:text-gray-300 font-semibold">
                     @lang('admin::app.dashboard.index.stock-threshold')
                 </p>
 
-                {{-- Products List --}}  
+                <!-- Products List -->  
                 @include('admin::dashboard.stock-threshold-products')
             </div>
         </div>
 
-        {{-- Right Section --}}
+        <!-- Right Section -->
         <div class="flex flex-col gap-[8px] w-[360px] max-w-full   max-sm:w-full">
-            {{-- First Component --}}
+            <!-- First Component -->
             <p class="text-[16px] text-gray-600 dark:text-gray-300 font-semibold">
                 @lang('admin::app.dashboard.index.store-stats')
             </p>
 
-            {{-- Store Stats --}}
+            <!-- Store Stats -->
             <div class="rounded-[4px] bg-white dark:bg-gray-900 box-shadow">
                 <!-- Total Sales Detailes -->
                 @include('admin::dashboard.total-sales')

@@ -2,6 +2,7 @@
 
 namespace Webkul\Product\Helpers\Indexers;
 
+use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Facades\ElasticSearch as ElasticSearchClient;
 use Webkul\Core\Repositories\ChannelRepository;
@@ -224,7 +225,7 @@ class ElasticSearch extends AbstractIndexer
 
                 try {
                     ElasticsearchClient::delete($params);
-                } catch (\Exception $e) {
+                } catch (ClientResponseException $e) {
                 }
             }
         }
@@ -281,7 +282,7 @@ class ElasticSearch extends AbstractIndexer
             } elseif ($attribute->type == 'boolean') {
                 $properties[$attribute->code] = intval($attributeValue?->{$attribute->column_name});
             } else {
-                $properties[$attribute->code] = $attributeValue?->{$attribute->column_name};
+                $properties[$attribute->code] = strip_tags($attributeValue?->{$attribute->column_name});
             }
         }
 

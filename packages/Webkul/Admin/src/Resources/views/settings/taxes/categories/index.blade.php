@@ -1,5 +1,5 @@
 <x-admin::layouts>
-    {{-- Page Title --}}
+    <!-- Page Title -->
     <x-slot:title>
         @lang('admin::app.settings.taxes.categories.index.title')
     </x-slot:title>
@@ -12,7 +12,7 @@
 
             <div class="flex gap-x-[10px] items-center">
                 <div class="flex gap-x-[10px] items-center">
-                    {{-- Create Tax Category Button --}}
+                    <!-- Create Tax Category Button -->
                     @if (bouncer()->hasPermission('settings.taxes.tax-categories.create'))
                         <button
                             type="button"
@@ -25,7 +25,7 @@
             </div>
         </div>
 
-        {{-- DataGrid Shimmer --}}
+        <!-- DataGrid Shimmer -->
         <x-admin::shimmer.datagrid/>
     </v-tax-categories>
 

@@ -1,6 +1,6 @@
-{{-- Abandoned Carts Vue Component --}}
+<!-- Abandoned Carts Vue Component -->
 <v-reporting-sales-abandoned-carts>
-    {{-- Shimmer --}}
+    <!-- Shimmer -->
     <x-admin::shimmer.reporting.sales.abandoned-carts/>
 </v-reporting-sales-abandoned-carts>
 
