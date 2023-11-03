@@ -2,6 +2,7 @@
 
 namespace Webkul\Product\Helpers\Indexers;
 
+use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Facades\ElasticSearch as ElasticSearchClient;
 use Webkul\Core\Repositories\ChannelRepository;
@@ -224,7 +225,7 @@ class ElasticSearch extends AbstractIndexer
 
                 try {
                     ElasticsearchClient::delete($params);
-                } catch (\Exception $e) {
+                } catch (ClientResponseException $e) {
                 }
             }
         }
@@ -247,13 +248,13 @@ class ElasticSearch extends AbstractIndexer
      */
     public function getIndices()
     {
-        $properties = [
+        $properties = array_merge([
             'id'           => $this->product->id,
             'type'         => $this->product->type,
             'sku'          => $this->product->sku,
             'category_ids' => $this->product->categories->pluck('id')->toArray(),
             'created_at'   => $this->product->created_at,
-        ];
+        ], $this->product->additional ?? []);
 
         $attributes = $this->getAttributes();
 
@@ -281,7 +282,7 @@ class ElasticSearch extends AbstractIndexer
             } elseif ($attribute->type == 'boolean') {
                 $properties[$attribute->code] = intval($attributeValue?->{$attribute->column_name});
             } else {
-                $properties[$attribute->code] = $attributeValue?->{$attribute->column_name};
+                $properties[$attribute->code] = strip_tags($attributeValue?->{$attribute->column_name});
             }
         }
 

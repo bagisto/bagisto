@@ -30,8 +30,6 @@ class UpdatePasswordNotification extends Mailable
         return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
             ->to($this->customer->email, $this->customer->name)
             ->subject(trans('shop::app.emails.customers.update-password.subject'))
-            ->view('shop::emails.customers.update-password', [
-                'fullName' => $this->customer->first_name . ' ' . $this->customer->last_name,
-            ]);
+            ->view('shop::emails.customers.update-password');
     }
 }

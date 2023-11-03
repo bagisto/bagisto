@@ -97,7 +97,7 @@
             </div>
         </script>
 
-        <!-- Slider Template -->
+        {{-- Slider Template --}}
         <script type="text/x-template" id="v-slider-theme-template">
             <div>
                 <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
@@ -177,10 +177,8 @@
                                                 <div> 
                                                     @lang('admin::app.settings.themes.edit.image-title'): 
 
-                                                    <span
-                                                        class="text-gray-600 dark:text-gray-300 transition-all"
-                                                        v-text="image.title"
-                                                    >
+                                                    <span class="text-gray-600 dark:text-gray-300 transition-all">
+                                                        @{{ image.title }}
                                                     </span>
                                                 </div>
                                             </p>
@@ -189,10 +187,8 @@
                                                 <div> 
                                                     @lang('admin::app.settings.themes.edit.link'): 
 
-                                                    <span
-                                                        class="text-gray-600 dark:text-gray-300 transition-all"
-                                                        v-text="image.link"
-                                                    >
+                                                    <span class="text-gray-600 dark:text-gray-300 transition-all">
+                                                        @{{ image.link }}
                                                     </span>
                                                 </div>
                                             </p>
@@ -272,8 +268,7 @@
                                     name="type"
                                     value="image_carousel"
                                 />
-
-                                <!-- Name -->
+    
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.themes.edit.name')
@@ -295,8 +290,7 @@
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
-
-                                <!-- Sort Order -->
+    
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.themes.edit.sort-order')
@@ -319,8 +313,7 @@
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
-
-                                <!-- Channels -->
+    
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.themes.edit.channels')
@@ -340,7 +333,6 @@
                                     <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <!-- Status -->
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.themes.edit.status')
@@ -375,12 +367,12 @@
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
+
                             </x-slot:content>
                         </x-admin::accordion>
                     </div>
                 </div>
 
-                <!-- Modal Form --> 
                 <x-admin::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
@@ -399,7 +391,6 @@
         
                             <x-slot:content>
                                 <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
-                                    <!-- Title -->
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.themes.edit.image-title')
@@ -420,7 +411,6 @@
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
 
-                                    <!-- Link -->
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.settings.themes.edit.link')
@@ -434,7 +424,6 @@
                                         </x-admin::form.control-group.control>
                                     </x-admin::form.control-group>
 
-                                    <!-- Slider Image -->
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.themes.edit.slider-image')
@@ -477,7 +466,7 @@
             </div>
         </script>
 
-        <!-- Product Template -->
+        {{-- Product Template --}}
         <script type="text/x-template" id="v-product-theme-template">
             <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                 <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
@@ -494,7 +483,6 @@
                             </div>
                         </div>
 
-                        <!-- Title -->
                         <x-admin::form.control-group class="mb-[10px] pt-[16px]">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.filter-title')
@@ -518,7 +506,6 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
-                        <!-- Sorting Select Options -->
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.sort')
@@ -556,7 +543,6 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
-                        <!-- Limit Select Options -->
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.limit')
@@ -692,7 +678,6 @@
                         <x-slot:content>
                             <input type="hidden" name="type" value="product_carousel">
 
-                            <!-- Name -->
                             <x-admin::form.control-group class="mb-[10px]">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.name')
@@ -716,7 +701,6 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <!-- Sort Order -->
                             <x-admin::form.control-group class="mb-[10px]">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.sort-order')
@@ -740,7 +724,6 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <!-- Channels -->
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.channels')
@@ -760,7 +743,6 @@
                                 <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <!-- Status -->
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.status')
@@ -799,7 +781,7 @@
                     </x-admin::accordion>
                 </div>
 
-                <!-- Model For Fitler Form -->
+                <!-- For Fitler Form -->
                 <x-admin::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
@@ -875,7 +857,7 @@
             </div>
         </script>
 
-        <!-- Category Template -->
+        {{-- Category Template --}}
         <script type="text/x-template" id="v-category-theme-template">
             <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                 <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
@@ -892,7 +874,6 @@
                             </div>
                         </div>
 
-                        <!-- Sort Selector Options -->
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.sort')
@@ -931,7 +912,6 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
-                        <!-- Limit Selector Options -->
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.limit')
@@ -1062,7 +1042,6 @@
                         <x-slot:content>
                             <input type="hidden" name="type" value="category_carousel">
 
-                            <!-- Name -->
                             <x-admin::form.control-group class="mb-[10px]">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.name')
@@ -1086,7 +1065,6 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <!-- Sort Order -->
                             <x-admin::form.control-group class="mb-[10px]">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.sort-order')
@@ -1110,7 +1088,6 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <!-- Channels -->
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.channels')
@@ -1130,7 +1107,6 @@
                                 <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <!-- Status -->
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.status')
@@ -1245,7 +1221,7 @@
             </div>
         </script>
 
-        <!-- Static Template -->
+        {{-- Static Template --}}
         <script type="text/x-template" id="v-static-theme-template">
             <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                 <div class="flex flex-col gap-[8px] flex-1 min-w-[931px] max-xl:flex-auto">
@@ -1261,7 +1237,6 @@
                                 </p>
                             </div>
 
-                            <!-- Add Image Button -->
                             <div
                                 class="flex gap-[10px]"
                                 v-if="isHtmlEditorActive"
@@ -1463,28 +1438,28 @@
             </div>
         </script>
 
-        <!-- Html Editor Template -->
+        {{-- Html Editor Template --}}
         <script type="text/x-template" id="v-html-editor-theme-template">
             <div>
                 <div ref="html"></div>
             </div>
         </script>
 
-        <!-- Css Editor Template -->
+        {{-- Css Editor Template --}}
         <script type="text/x-template" id="v-css-editor-theme-template">
             <div>
                 <div ref="css"></div>
             </div>
         </script>
 
-        <!-- Static Content Previewer -->
+        {{-- Static Content Previewer --}}
         <script type="text/x-template" id="v-static-content-previewer-template">
             <div>   
                 <div v-html="getPreviewContent()"></div>
             </div>
         </script>
 
-        <!-- Footer Template -->
+        {{-- Footer Template --}}
         <script type="text/x-template" id="v-footer-link-theme-template">
             <div>
                 <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
@@ -1643,7 +1618,6 @@
                             <x-slot:content>
                                 <input type="hidden" name="type" value="footer_links">
 
-                                <!-- Name -->
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.themes.edit.name')
@@ -1666,8 +1640,7 @@
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
-
-                                <!-- Sprt Order -->
+    
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.themes.edit.sort-order')
@@ -1690,8 +1663,7 @@
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
-
-                                <!-- Channels -->
+    
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.themes.edit.channels')
@@ -1711,7 +1683,6 @@
                                     <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <!-- Status -->
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.themes.edit.status')
@@ -1767,7 +1738,6 @@
         
                             <x-slot:content>
                                 <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
-                                    <!-- Column -->
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.themes.edit.column')
@@ -1791,8 +1761,7 @@
                                         >
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
-
-                                    <!-- Title -->
+        
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.themes.edit.footer-title')
@@ -1812,8 +1781,7 @@
                                         >
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
-
-                                    <!-- Path --> 
+        
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.themes.edit.path')
@@ -1835,7 +1803,6 @@
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
 
-                                    <!-- Sort Order -->
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.themes.edit.sort-order')
@@ -1875,7 +1842,7 @@
             </div>
         </script>
 
-        <!-- Parent Theme Customizer Component -->
+        {{-- Parent Theme Customizer Component --}}
         <script type="module">
             app.component('v-theme-customizer', {
                 template: '#v-theme-customizer-template',
@@ -1884,14 +1851,14 @@
 
                 data() {
                     return {
-                        componentName: 'v-slider-theme',
+                        componentName: 'v-image-carousel',
 
                         themeType: {
-                            product_carousel: 'v-product-theme',
-                            category_carousel: 'v-category-theme',
-                            static_content: 'v-static-theme',
-                            image_carousel: 'v-slider-theme',
-                            footer_links: 'v-footer-link-theme',
+                            product_carousel: 'v-product-carousel',
+                            category_carousel: 'v-category-carousel',
+                            static_content: 'v-static-content',
+                            image_carousel: 'v-image-carousel',
+                            footer_links: 'v-footer-links',
                         } 
                     };
                 },
@@ -1902,7 +1869,7 @@
             });
         </script>
 
-        <!-- Slider Theme Component -->
+        {{-- Slider Theme Component --}}
         <script type="module">
             app.component('v-slider-theme', {
                 template: '#v-slider-theme-template',
@@ -1984,7 +1951,7 @@
             });
         </script>
 
-        <!-- Product Theme Component -->
+        {{-- Product Theme Component --}}
         <script type="module">
             app.component('v-product-theme', {
                 template: '#v-product-theme-template',
@@ -2030,7 +1997,7 @@
             });
         </script>
 
-        <!-- Category Theme Component -->
+        {{-- Category Theme Component --}}
         <script type="module">
             app.component('v-category-theme', {
                 template: '#v-category-theme-template',
@@ -2076,7 +2043,7 @@
             });
         </script>
 
-        <!-- Static Theme component -->
+        {{-- Static Theme component --}}
         <script type="module">
             app.component('v-static-theme', {
                 template: '#v-static-theme-template',
@@ -2146,7 +2113,7 @@
             });
         </script>
 
-        <!-- Html Editor Component -->
+        {{-- Html Editor Component --}}
         <script type="module">
             app.component('v-html-editor-theme', {
                 template: '#v-html-editor-theme-template',
@@ -2227,7 +2194,7 @@
             });
         </script>
 
-        <!-- Css Editor Component -->
+        {{-- Css Editor Component --}}
         <script type="module">
             app.component('v-css-editor-theme', {
                 template: '#v-css-editor-theme-template',
@@ -2268,7 +2235,7 @@
             });
         </script>
 
-        <!-- Static Content Previewer -->
+        {{-- Static Content Previewer --}}
         <script type="module">
             app.component('v-static-content-previewer', {
                 template: '#v-static-content-previewer-template',
@@ -2287,7 +2254,7 @@
             });
         </script>
 
-        <!-- Footer component -->
+        {{-- Footer component --}}
         <script type="module">
             app.component('v-footer-link-theme', {
                 template: '#v-footer-link-theme-template',
@@ -2375,29 +2342,29 @@
             });
         </script>
 
-        <!-- Code mirror script CDN -->
+        {{-- Code mirror script CDN --}}
         <script
             type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/codemirror.js"
         >
         </script>
 
-        <!--
+        {{-- 
             Html mixed and xml cnd both are dependent 
             Used for html and css theme
-        -->
+        --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/mode/xml/xml.js"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/mode/htmlmixed/htmlmixed.js"></script>
 
         <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/mode/css/css.js"></script>
 
-        <!-- Beatutify html and css -->
+        {{-- Beatutify html and css --}}
         <script src="https://cdn.jsdelivr.net/npm/simply-beautiful@latest/dist/index.min.js"></script>
     @endPushOnce
 
     @pushOnce('styles')
-        <!-- Code mirror style cdn -->
+        {{-- Code mirror style cdn --}}
         <link 
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/codemirror.css"
