@@ -31,7 +31,7 @@
                     <div class="">
                         <div class="flex border-b-[1px] dark:border-gray-800 overflow-auto journal-scroll">
                             <div
-                                class="flex py-[15px] px-[15px] gap-[4px] border-b-[2px] dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
+                                class="flex py-[15px] px-[15px] gap-[4px] border-b-[2px] border-gray-100 hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
                                 :class="{'border-blue-600 dark:border-blue-600': status == data.status}"
                                 ref="tabs"
                                 v-for="data in orderType"
