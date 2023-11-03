@@ -1,12 +1,12 @@
 <x-admin::layouts>
-    {{-- Title of the page --}}
+    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.settings.inventory-sources.edit.title')
     </x-slot:title>
 
     {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.before') !!}
 
-    {{-- Create Inventory --}}
+    <!-- Create Inventory -->
     <v-inventory-edit-form></v-inventory-edit-form>
 
     {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.after') !!}

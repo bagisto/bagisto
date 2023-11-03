@@ -1,6 +1,6 @@
-{{-- Tax Collected Vue Component --}}
+<!-- Tax Collected Vue Component -->
 <v-reporting-sales-tax-collected>
-    {{-- Shimmer --}}
+    <!-- Shimmer -->
     <x-admin::shimmer.reporting.sales.tax-collected/>
 </v-reporting-sales-tax-collected>
 

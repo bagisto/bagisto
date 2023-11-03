@@ -1,4 +1,5 @@
 <x-admin::layouts>
+    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.settings.themes.edit.title')
     </x-slot:title>
@@ -40,12 +41,12 @@
             </div>
         </div>
 
-        {{-- Channel and Locale Switcher --}}
+        <!-- Channel and Locale Switcher -->
         <div class="flex  gap-[16px] justify-between items-center mt-[28px] max-md:flex-wrap">
             <div class="flex gap-x-[4px] items-center">
-                {{-- Locale Switcher --}}
+                <!-- Locale Switcher -->
                 <x-admin::dropdown>
-                    {{-- Dropdown Toggler --}}
+                    <!-- Dropdown Toggler -->
                     <x-slot:toggle>
                         <button
                             type="button"
@@ -65,7 +66,7 @@
                         </button>
                     </x-slot:toggle>
 
-                    {{-- Dropdown Content --}}
+                    <!-- Dropdown Content -->
                     <x-slot:content class="!p-[0px]">
                         @foreach ($currentChannel->locales as $locale)
                             <a
@@ -84,7 +85,7 @@
     </x-admin::form>
 
     @pushOnce('scripts')
-        {{-- Customizer Parent Template--}}
+        <!-- Customizer Parent Template-->
         <script type="text/x-template" id="v-theme-customizer-template">
             <div>
                 <component
@@ -1850,14 +1851,14 @@
 
                 data() {
                     return {
-                        componentName: 'v-slider-theme',
+                        componentName: 'v-image-carousel',
 
                         themeType: {
-                            product_carousel: 'v-product-theme',
-                            category_carousel: 'v-category-theme',
-                            static_content: 'v-static-theme',
-                            image_carousel: 'v-slider-theme',
-                            footer_links: 'v-footer-link-theme',
+                            product_carousel: 'v-product-carousel',
+                            category_carousel: 'v-category-carousel',
+                            static_content: 'v-static-content',
+                            image_carousel: 'v-image-carousel',
+                            footer_links: 'v-footer-links',
                         } 
                     };
                 },

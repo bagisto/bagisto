@@ -1,18 +1,18 @@
 <x-admin::layouts>    
-    {{-- Title of the page --}}
+    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.marketing.promotions.catalog-rules.create.title')
     </x-slot:title>
 
     {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.create.before') !!}
 
-    {{-- Create Catalog form --}}
+    <!-- Create Catalog form -->
     <v-catalog-rule-create-form></v-catalog-rule-create-form>
 
     {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.create.after') !!}
 
     @pushOnce('scripts')
-        {{-- v catalog rule create form template --}}
+        <!-- v catalog rule create form template -->
         <script type="text/x-template" id="v-catalog-rule-create-form-template">
             <div>
                 <x-admin::form 
@@ -484,7 +484,7 @@
             </div>
         </script>
 
-        {{-- v catalog rule create form component --}}
+        <!-- v catalog rule create form component -->
         <script type="module">
             app.component('v-catalog-rule-create-form', {
                 template: '#v-catalog-rule-create-form-template',
@@ -527,7 +527,7 @@
             })
         </script>
 
-        {{-- v catalog rule condition item form template --}}
+        <!-- v catalog rule condition item form template -->
         <script type="text/x-template" id="v-catalog-rule-condition-item-template">
             <div class="flex gap-[16px] justify-between mt-[15px]">
                 <div class="flex gap-[16px] flex-1 max-sm:flex-wrap max-sm:flex-1">
@@ -715,7 +715,7 @@
             </div>
         </script>
 
-        {{-- v catalog rule condition item component --}}
+        <!-- v catalog rule condition item component -->
         <script type="module">
             app.component('v-catalog-rule-condition-item', {
                 template: "#v-catalog-rule-condition-item-template",
@@ -907,10 +907,10 @@
             });
         </script>
 
-        {{-- v tree checkbox --}}
+        <!-- v tree checkbox -->
         <x-admin::tree.item></x-admin::tree.item>
 
-        {{-- v tree checkbox --}}
+        <!-- v tree checkbox -->
         <x-admin::tree.checkbox></x-admin::tree.checkbox>
     @endPushOnce
 </x-admin::layouts>

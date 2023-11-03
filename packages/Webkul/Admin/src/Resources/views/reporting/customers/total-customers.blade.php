@@ -1,6 +1,6 @@
-{{-- Total Customer Vue Component --}}
+<!-- Total Customer Vue Component -->
 <v-reporting-customers-total-customers>
-    {{-- Shimmer --}}
+    <!-- Shimmer -->
     <x-admin::shimmer.reporting.customers.total-customers/> 
 </v-reporting-customers-total-customers>
 

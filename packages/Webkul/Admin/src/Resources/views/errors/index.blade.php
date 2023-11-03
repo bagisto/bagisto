@@ -1,10 +1,10 @@
 <x-admin::layouts.anonymous>
-    {{-- Page Title --}}
+    <!-- Page Title -->
     <x-slot:title>
         @lang("admin::app.errors.{$errorCode}.title")
     </x-slot>
 
-    {{-- Error page Information --}}
+    <!-- Error page Information -->
 	<div class="flex justify-center items-center h-[100vh] bg-white dark:bg-gray-900 ">
         <div class="flex gap-[20px] items-center max-w-[745px]">
             <div class="w-full">

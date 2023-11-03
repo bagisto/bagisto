@@ -1,6 +1,6 @@
-{{-- Sold Products Quantity Vue Component --}}
+<!-- Sold Products Quantity Vue Component -->
 <v-reporting-products-total-sold-quantity>
-    {{-- Shimmer --}}
+    <!-- Shimmer -->
     <x-admin::shimmer.reporting.products.sold-quantities/>
 </v-reporting-products-total-sold-quantity>
 

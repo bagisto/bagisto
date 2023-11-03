@@ -1,5 +1,5 @@
 <x-admin::layouts>
-    {{-- Page Title --}}
+    <!-- Page Title -->
     <x-slot:title>
         @lang('admin::app.settings.taxes.rates.edit.title')
     </x-slot:title>

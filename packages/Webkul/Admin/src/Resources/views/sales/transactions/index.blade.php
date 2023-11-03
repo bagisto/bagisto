@@ -1,4 +1,5 @@
 <x-admin::layouts>
+    <!-- Page Title -->
     <x-slot:title>
         @lang('admin::app.sales.transactions.index.title')
     </x-slot:title>
@@ -136,7 +137,12 @@
                                 v-if="record.actions.find(action => action.title === 'View')"
                                 @click="view(record.actions.find(action => action.title === 'View')?.url)"
                             >
-                                <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
+                                <span
+                                    class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
+                                    role="button"
+                                    tabindex="0"
+                                >
+                                </span>
                             </a>
                         </div>
                     </div>
@@ -158,90 +164,88 @@
                     <!-- Drawer Content -->
                     <x-slot:content>
                         <div class="flex flex-col gap-[16px] px-[5px] py-[10px]">
-                            <div class="">
-                                <p class="text-[18px] text-gray-600 dark:text-gray-300 font-semibold">
-                                    @lang('admin::app.sales.transactions.index.view.transaction-data')
-                                </p>
+                            <p class="text-[18px] text-gray-600 dark:text-gray-300 font-semibold">
+                                @lang('admin::app.sales.transactions.index.view.transaction-data')
+                            </p>
 
-                                <div class="flex w-full justify-between p-[16px]">
-                                    <div class="flex flex-col gap-y-[6px]">
-                                        <p class="text-gray-600 dark:text-gray-300">
-                                            @lang('admin::app.sales.transactions.index.view.transaction-id')
-                                        </p>
+                            <div class="flex w-full justify-between p-[16px]">
+                                <div class="flex flex-col gap-y-[6px]">
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        @lang('admin::app.sales.transactions.index.view.transaction-id')
+                                    </p>
 
-                                        <p class="text-gray-600 dark:text-gray-300">
-                                            @lang('admin::app.sales.transactions.index.view.order-id')
-                                        </p>
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        @lang('admin::app.sales.transactions.index.view.order-id')
+                                    </p>
 
-                                        <p
-                                            v-if="data.transaction.invoice_id"
-                                            class="text-gray-600 dark:text-gray-300"
-                                        >
-                                            @lang('admin::app.sales.transactions.index.view.invoice-id')
-                                        </p>
+                                    <p
+                                        v-if="data.transaction.invoice_id"
+                                        class="text-gray-600 dark:text-gray-300"
+                                    >
+                                        @lang('admin::app.sales.transactions.index.view.invoice-id')
+                                    </p>
 
-                                        <p class="text-gray-600 dark:text-gray-300">
-                                            @lang('admin::app.sales.transactions.index.view.payment-method')
-                                        </p>
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        @lang('admin::app.sales.transactions.index.view.payment-method')
+                                    </p>
 
-                                        <p class="text-gray-600 dark:text-gray-300">
-                                            @lang('admin::app.sales.transactions.index.view.status')
-                                        </p>
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        @lang('admin::app.sales.transactions.index.view.status')
+                                    </p>
 
-                                        <p class="text-gray-600 dark:text-gray-300">
-                                            @lang('admin::app.sales.transactions.index.view.created-at')
-                                        </p>
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        @lang('admin::app.sales.transactions.index.view.created-at')
+                                    </p>
 
-                                        <p class="text-gray-600 dark:text-gray-300">
-                                            @lang('admin::app.sales.transactions.index.view.amount')
-                                        </p>
-                                    </div>
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        @lang('admin::app.sales.transactions.index.view.amount')
+                                    </p>
+                                </div>
 
-                                    <div class="flex flex-col gap-y-[6px]">
-                                        <p
-                                            class="text-gray-600 dark:text-gray-300"
-                                            v-text="data.transaction.transaction_id"
-                                        >
-                                        </p>
+                                <div class="flex flex-col gap-y-[6px]">
+                                    <p
+                                        class="text-gray-600 dark:text-gray-300"
+                                        v-text="data.transaction.transaction_id"
+                                    >
+                                    </p>
 
-                                        <p
-                                            class="text-gray-600 dark:text-gray-300"
-                                            v-text="data.transaction.order_id"
-                                        >
-                                        </p>
+                                    <p
+                                        class="text-gray-600 dark:text-gray-300"
+                                        v-text="data.transaction.order_id"
+                                    >
+                                    </p>
 
-                                        <p
-                                            v-if="data.transaction.invoice_id"
-                                            class="text-gray-600 dark:text-gray-300"
-                                            v-text="data.transaction.invoice_id"
-                                        >
-                                        </p>
+                                    <p
+                                        v-if="data.transaction.invoice_id"
+                                        class="text-gray-600 dark:text-gray-300"
+                                        v-text="data.transaction.invoice_id"
+                                    >
+                                    </p>
 
-                                        <p
-                                            class="text-gray-600 dark:text-gray-300"
-                                            v-text="data.transaction.payment_method"
-                                        >
-                                        </p>
+                                    <p
+                                        class="text-gray-600 dark:text-gray-300"
+                                        v-text="data.transaction.payment_method"
+                                    >
+                                    </p>
 
 
-                                        <p
-                                            class="text-gray-600 dark:text-gray-300"
-                                            v-text="data.transaction.status"
-                                        >
-                                        </p>
+                                    <p
+                                        class="text-gray-600 dark:text-gray-300"
+                                        v-text="data.transaction.status"
+                                    >
+                                    </p>
 
-                                        <p
-                                            class="text-gray-600 dark:text-gray-300"
-                                            v-text="data.transaction.created_at"
-                                        >
-                                        </p>
+                                    <p
+                                        class="text-gray-600 dark:text-gray-300"
+                                        v-text="data.transaction.created_at"
+                                    >
+                                    </p>
 
-                                        <p
-                                            class="text-gray-600 dark:text-gray-300"
-                                            v-text="data.transaction.amount"
-                                        >
-                                        </p>
-                                    </div>
+                                    <p
+                                        class="text-gray-600 dark:text-gray-300"
+                                        v-text="data.transaction.amount"
+                                    >
+                                    </p>
                                 </div>
                             </div>
                         </div>

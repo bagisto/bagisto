@@ -4,7 +4,7 @@
     </x-slot:title>
 
     <div class="flex items-center justify-between gap-[16px] max-sm:flex-wrap">
-        {{-- Title --}}
+        <!-- Title -->
         <p class="text-[20px] font-bold text-gray-800 dark:text-white">
             @lang('admin::app.catalog.attributes.index.title')
         </p>

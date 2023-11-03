@@ -3,12 +3,12 @@
 @endphp
 
 <x-admin::layouts>
-    {{-- Title of the page --}}
+    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.catalog.attributes.create.title')
     </x-slot:title>
 
-    {{-- Create Attributes Vue Components --}}
+    <!-- Create Attributes Vue Components -->
     <v-create-attributes :all-locales="{{ $allLocales->toJson() }}"></v-create-attributes>
 
     @pushOnce('scripts')

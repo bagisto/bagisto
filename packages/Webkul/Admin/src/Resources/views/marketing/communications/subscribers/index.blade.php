@@ -1,5 +1,5 @@
 <x-admin::layouts>
-    {{-- Title of the page --}}
+    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.marketing.communications.subscribers.index.title')
     </x-slot:title>
@@ -11,7 +11,7 @@
     </div>
 
     <v-subscribers>
-        {{-- DataGrid Shimmer --}}
+        <!-- DataGrid Shimmer -->
         <x-admin::shimmer.datagrid/>
     </v-subscribers>
 

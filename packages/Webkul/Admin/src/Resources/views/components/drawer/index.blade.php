@@ -77,7 +77,7 @@
                 :leave-to-class="enterFromLeaveToClasses"
             >
                 <div
-                    class="fixed z-[10002] bg-white dark:bg-gray-900 overflow-hidden max-sm:!w-full"
+                    class="fixed z-[10002] bg-white dark:bg-gray-900 max-sm:!w-full"
                     :class="{
                         'inset-x-0 top-0': position == 'top',
                         'inset-x-0 bottom-0': position == 'bottom',

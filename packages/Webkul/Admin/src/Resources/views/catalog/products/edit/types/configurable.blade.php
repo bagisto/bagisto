@@ -5,7 +5,7 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.configurable.after', ['product' => $product]) !!}
 
 @pushOnce('scripts')
-    {{-- Variations Template --}}
+    <!-- Variations Template -->
     <script type="text/x-template" id="v-product-variations-template">
         <div class="relative bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
             <!-- Panel Header -->
@@ -155,7 +155,7 @@
         </div>
     </script>
 
-    {{-- Variations Mass Action Template --}}
+    <!-- Variations Mass Action Template -->
     <script type="text/x-template" id="v-product-variations-mass-action-template">
         <!-- Mass Actions -->
         <div class="flex gap-[5px] items-center px-[16px]">
@@ -469,7 +469,7 @@
         </div>
     </script>
 
-    {{-- Variation Item Template --}}
+    <!-- Variation Item Template -->
     <script type="text/x-template" id="v-product-variation-item-template"> 
         <div class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300 dark:border-gray-800">
 
