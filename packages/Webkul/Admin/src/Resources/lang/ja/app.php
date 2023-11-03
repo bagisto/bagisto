@@ -2600,7 +2600,7 @@ return [
                 'name'                          => '名前',
                 'product-carousel'              => '商品カルーセル',
                 'product-carousel-description'  => '動的でレスポンシブな商品カルーセルを使用して、製品をエレガントにショーケースします。',
-                'path'                          => 'パス',
+                'url'                           => 'URL',
                 'preview'                       => 'プレビュー',
                 'slider'                        => 'スライダー',
                 'static-content-description'    => '観客に向けて簡潔で情報豊かな静的コンテンツでエンゲージメントを向上させます。',

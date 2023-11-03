@@ -112,9 +112,9 @@ class ThemeController extends Controller
 
         if ($data['type'] == 'image_carousel') {
             $this->themeCustomizationRepository->uploadImage(
-                request()->all('options'),
+                $data[$locale],
                 $theme,
-                request()->input('deleted_sliders', [])
+                request()->input('deleted_sliders', []),
             );
         }
 
