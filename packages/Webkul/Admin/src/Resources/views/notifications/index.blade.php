@@ -84,7 +84,7 @@
 
                         <!-- For Empty Data -->
                         <div
-                            class="px-[24px] py-[12px] max-h-[calc(100vh-330px)]"
+                            class="px-[24px] py-[12px] text-gray-600 dark:text-gray-300 max-h-[calc(100vh-330px)]"
                             v-else
                         >
                             @lang('admin::app.notifications.no-record')
