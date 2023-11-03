@@ -64,10 +64,12 @@ class Installer extends Command
         if (! file_exists(base_path('.env'))) {
             $this->info('Creating the environment configuration file.');
 
-            $this->createEnvFile();
+            File::copy('.env.example', '.env');
         } else {
             $this->info('Great! your environment configuration file already exists.');
         }
+
+        $this->createEnvFile();
 
         $this->call('key:generate');
     }
@@ -82,25 +84,22 @@ class Installer extends Command
     protected function createEnvFile()
     {
         try {
-            File::copy('.env.example', '.env');
-
             // Updating App URL
             $this->updateEnvVariable('APP_URL', 'Please Enter the APP URL or Press enter to Continue', 'http://localhost:8000');
 
             // Updating App Name
-            $this->updateEnvVariable('APP_NAME', 'Please Enter the Admin Name', 'admin');
+            $this->updateEnvVariable('APP_NAME', 'Please Enter the Application Name or Press enter to Continue', 'admin');
 
             // Updating App Default Locales
             $locales = ['ar', 'bn', 'de', 'en', 'es', 'fa', 'fr', 'he', 'hi_IN', 'it', 'ja', 'nl', 'pl', 'pt_BR', 'ru', 'sin', 'tr', 'uk', 'zh_CN'];
-            $this->updateEnvChoice('APP_LOCALE', 'Please select the default locale', $locales, 'en');
+            $this->updateEnvChoice('APP_LOCALE', 'Please select the default locale or Press enter to Continue', $locales, 'en');
 
-            // Updating App Default Timezone
-            $timeZones = timezone_identifiers_list();
-            $this->updateEnvChoice('APP_TIMEZONE', 'Please enter the default timezone', $timeZones, date_default_timezone_get());
+            $this->envUpdate('APP_TIMEZONE', date_default_timezone_get());
+            $this->info('Your Default Timezone is ' . date_default_timezone_get());
 
             // Updating App Default Currencies
-            $currencies = ['USD', 'EUR'];
-            $this->updateEnvChoice('APP_CURRENCY', 'Please enter the default currency', $currencies, 'USD');
+            $currencies = ['CNY', 'AED', 'EUR', 'INR', 'IRR', 'ILS', 'JPY', 'GBP', 'RUB', 'SAR', 'TRY', 'USD', 'UAH'];
+            $this->updateEnvChoice('APP_CURRENCY', 'Please enter the default currency or Press enter to Continue', $currencies, 'USD');
 
             // Updating Database Configuration
             $this->askForDatabaseDetails();
@@ -114,9 +113,9 @@ class Installer extends Command
      */
     protected function askForDatabaseDetails()
     {
-        $connectionOptions = ['mysql', 'sqlite', 'pgsql', 'sqlsrv'];
+        $connectionOptions = ['mysql', 'pgsql', 'sqlsrv'];
 
-        $dbConnection = $this->choice('Please select the default Database Connection or press enter to continue', $connectionOptions, 0);
+        $dbConnection = $this->choice('Please select the default Database Connection or Press enter to Continue', $connectionOptions, 0);
 
         if (! in_array($dbConnection, $connectionOptions)) {
             $this->error('Please select the valid Database Connection.');
@@ -126,15 +125,15 @@ class Installer extends Command
 
         $dbDetails = [
             'DB_CONNECTION' => $dbConnection,
-            'DB_HOST'       => $this->ask('Please Enter the Database Hostname or press enter to continue', '127.0.0.1') ?? '127.0.0.1',
-            'DB_PORT'       => $this->ask('Please Enter the Database Port to be used in Bagisto', '3306') ?? '3306',
+            'DB_HOST'       => $this->ask('Please Enter the Database Hostname or Press enter to Continue', '127.0.0.1'),
+            'DB_PORT'       => $this->ask('Please Enter the Database Port number or Press enter to Continue', '3306'),
         ];
 
         // Here Asking Database Name, Prefix, Username, Password.
-        $dbDetails['DB_DATABASE'] = $this->ask('What is the database name to be used by Bagisto?');
-        $dbDetails['DB_PREFIX'] = $this->ask('What is the database prefix name?');
-        $dbDetails['DB_USERNAME'] = $this->anticipate('What is your database username?', ['root']);
-        $dbDetails['DB_PASSWORD'] = $this->secret('What is your database password?');
+        $dbDetails['DB_DATABASE'] = $this->ask('Please Enter the database name to be used by Bagisto?');
+        $dbDetails['DB_PREFIX'] = $this->ask('Please Enter the database prefix name?');
+        $dbDetails['DB_USERNAME'] = $this->anticipate('Please Enter your database username?', ['root']);
+        $dbDetails['DB_PASSWORD'] = $this->secret('Please Enter your database password?');
 
         if (! $dbDetails['DB_DATABASE'] || ! $dbDetails['DB_USERNAME'] || ! $dbDetails['DB_PASSWORD']) {
             return $this->error('Please Enter the database credentials.');
@@ -145,6 +144,11 @@ class Installer extends Command
         }
     }
 
+    /**
+     * Loaded Env variables for config files.
+     *
+     * @return void
+     */
     protected function loadEnvConfigAtRuntime()
     {
         $this->warn('Loading configs...');
@@ -169,12 +173,10 @@ class Installer extends Command
      */
     protected static function getEnvAtRuntime($key)
     {
-        $path = base_path() . '/.env';
-        $data = file($path);
-
-        if ($data) {
+        if ($data = file(base_path('.env'))) {
             foreach ($data as $line) {
                 $line = preg_replace('/\s+/', '', $line);
+
                 $rowValues = explode('=', $line);
 
                 if (strlen($line) !== 0) {
@@ -194,9 +196,9 @@ class Installer extends Command
     protected function createAdminCredential()
     {
         // Here! Asking for Admin Name, Email and Password
-        $adminName = $this->ask('Please Enter the Name for admin User or press enter to continue', '[Admin]');
+        $adminName = $this->ask('Please Enter the Name for admin User or press enter to continue', 'Example');
         $adminEmail = $this->ask('Please Enter the Email for admin login:', 'admin@example.com');
-        $adminPassword = $this->ask('Please Enter the Password for admin login:', 'admin@123');
+        $adminPassword = $this->ask('Please Enter the Password for admin login:', 'admin123');
 
         $password = password_hash($adminPassword, PASSWORD_BCRYPT, ['cost' => 10]);
 
@@ -212,10 +214,14 @@ class Installer extends Command
                 ]
             );
 
+            $filePath = storage_path('installed');
+
+            File::put($filePath, 'Your Bagisto App is Successfully Installed');
+
             $this->info('-----------------------------');
             $this->info('Congratulations!');
             $this->info('The installation has been finished and you can now use Bagisto.');
-            $this->info('Go to ' . url(config('app.admin_url')) . ' and authenticate with:');
+            $this->info('Go to ' . env('APP_URL') . '/admin' . ' and authenticate with:');
             $this->info('Email: ' . $adminEmail);
             $this->info('Password: ' . $adminPassword);
             $this->info('Cheers!');
