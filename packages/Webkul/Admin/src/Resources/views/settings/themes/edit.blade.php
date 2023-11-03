@@ -97,19 +97,19 @@
         </script>
 
         <!-- Image-Carousel Template -->
-        @include('admin::settings.themes.image-carousel')
+        @includeWhen($theme->type === 'image_carousel', 'admin::settings.themes.edit.image-carousel')
 
         <!-- Product-Carousel Template -->
-        @include('admin::settings.themes.product-carousel')
+        @includeWhen($theme->type === 'product_carousel', 'admin::settings.themes.edit.product-carousel')
 
         <!-- Category Template -->
-        @include('admin::settings.themes.category-carousel')
+        @includeWhen($theme->type==='category_carousel', 'admin::settings.themes.edit.category-carousel')
 
         <!-- Static-Content Template -->
-        @include('admin::settings.themes.static-content')
-   
+        @includeWhen($theme->type === 'static_content', 'admin::settings.themes.edit.static-content')
+
         <!-- Footer Template -->
-        @include('admin::settings.themes.footer-links')
+        @includeWhen($theme->type === 'footer_links', 'admin::settings.themes.edit.footer-links')
 
         <!-- Parent Theme Customizer Component -->
         <script type="module">
