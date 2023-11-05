@@ -62,6 +62,14 @@ class ThemeCustomization extends TranslatableModel implements ThemeCustomization
     public const STATIC_CONTENT = 'static_content';
 
     /**
+     * Information Content.
+     *
+     * @var string
+     */
+    public const SERVICES_CONTENT = 'services_content';
+
+
+    /**
      * Castable.
      *
      * @var array

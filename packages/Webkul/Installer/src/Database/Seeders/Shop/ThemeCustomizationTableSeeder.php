@@ -106,6 +106,14 @@ class ThemeCustomizationTableSeeder extends Seeder
                     'status'     => 1,
                     'created_at' => $now,
                     'updated_at' => $now,
+                ], [
+                    'id'         => 12,
+                    'type'       => 'services_content',
+                    'name'       => trans('Services Content'),
+                    'sort_order' => 1,
+                    'status'     => 1,
+                    'created_at' => $now,
+                    'updated_at' => $now,
                 ],
             ]);
 
@@ -272,6 +280,30 @@ class ThemeCustomizationTableSeeder extends Seeder
                                 'url'        => 'http://localhost/page/return-policy',
                                 'title'      => trans('installer::app.seeders.shop.theme-customizations.footer-links.options.return-policy'),
                                 'sort_order' => 5,
+                            ],
+                        ],
+                    ]),
+                ], [
+                    'theme_customization_id' => 12,
+                    'locale'                 => config('app.locale'),
+                    'options'                => json_encode([
+                        'images' => [
+                            [
+                                'title' => trans('Free Shipping'),
+                                'link'  => 'If goods have problems, Lorem Ipsum is dummy text ',
+                                'image' => 'storage/theme/12/1.webp',
+                            ], [
+                                'title' => trans('Product Replace'),
+                                'link'  => 'If goods have problems, Lorem Ipsum is dummy text ',
+                                'image' => 'storage/theme/12/2.webp',
+                            ], [
+                                'title' => trans('Emi Available'),
+                                'link'  => 'If goods have problems, Lorem Ipsum is dummy text ',
+                                'image' => 'storage/theme/12/3.webp',
+                            ], [
+                                'title' => trans('24/7 Support'),
+                                'link'  => 'If goods have problems, Lorem Ipsum is dummy text',
+                                'image' => 'storage/theme/12/4.webp',
                             ],
                         ],
                     ]),
