@@ -14,7 +14,7 @@ class ThemeCustomizationTableSeeder extends Seeder
      * Base path for the images.
      */
     const BASE_PATH = 'packages/Webkul/Installer/src/Resources/assets/images/seeders/theme/';
-      
+
     /**
      * Seed the application's database.
      *
@@ -296,7 +296,7 @@ class ThemeCustomizationTableSeeder extends Seeder
      *
      * @return void
      */
-    public function storeFileIfExists($targetPath, $file, $default = NULL)
+    public function storeFileIfExists($targetPath, $file, $default = null)
     {
         if (file_exists(base_path(self::BASE_PATH . $file))) {
             return 'storage/' . Storage::putFile($targetPath, new File(base_path(self::BASE_PATH . $file)));
@@ -310,6 +310,5 @@ class ThemeCustomizationTableSeeder extends Seeder
             return 'storage/' . Storage::putFile($targetPath, new File(base_path(self::BASE_PATH . $default)));
         }
 
-        return;
     }
 }
