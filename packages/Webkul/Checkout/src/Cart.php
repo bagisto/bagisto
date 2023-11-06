@@ -610,7 +610,9 @@ class Cart
 
             $item->tax_percent = $item->tax_amount = $item->base_tax_amount = 0;
 
-            Tax::isTaxApplicableInCurrentAddress($taxCategories[$taxCategoryId], $address, function ($rate) use ($item) {
+            Tax::isTaxApplicableInCurrentAddress($taxCategories[$taxCategoryId], $address, function ($rate) use ($item, $taxCategoryId) {
+                $item->tax_category_id = $taxCategoryId;
+
                 $item->tax_percent = $rate->tax_rate;
 
                 $item->tax_amount = round(($item->total * $rate->tax_rate) / 100, 4);
@@ -841,6 +843,7 @@ class Cart
             'tax_percent'          => $data['tax_percent'],
             'tax_amount'           => $data['tax_amount'],
             'base_tax_amount'      => $data['base_tax_amount'],
+            'tax_category_id'      => $data['tax_category_id'],
             'discount_percent'     => $data['discount_percent'],
             'discount_amount'      => $data['discount_amount'],
             'base_discount_amount' => $data['base_discount_amount'],
