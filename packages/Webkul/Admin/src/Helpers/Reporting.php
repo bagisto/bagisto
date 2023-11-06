@@ -156,7 +156,7 @@ class Reporting
         $startDate = $this->visitorReporting->getStartDate();
 
         $endDate = $this->visitorReporting->getEndDate();
-        
+
         return [
             'visitors' => [
                 'total'    => $totalVisitors = $this->visitorReporting->getTotalUniqueVisitors($startDate, $endDate),
