@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\File;
+use Webkul\Installer\Events\ComposerEvents;
 
 class Installer extends Command
 {
@@ -55,6 +56,8 @@ class Installer extends Command
         $this->info($result);
 
         $this->createAdminCredential();
+
+        ComposerEvents::postCreateProject();
     }
 
     /**

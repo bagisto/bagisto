@@ -708,13 +708,7 @@
                                             <div class="flex gap-[4px] text-[14px] text-gray-600">
                                                 <span class="icon-processing text-[20px]"></span>
 
-                                                <p>Populate the database tables</p>
-                                            </div>
-
-                                            <div class="flex gap-[4px] text-[14px] text-gray-600">
-                                                <span class="icon-processing text-[20px]"></span>
-
-                                                <p>Publishing the vendor files</p>
+                                                <p>@lang('installer::app.installer.index.populate-database-table')</p>
                                             </div>
                                         </div>
                                     </div>
@@ -725,7 +719,7 @@
                                 <div
                                     class="text-[12px] text-blue-600 font-semibold cursor-pointer"
                                     role="button"
-                                    aria-label="Back"
+                                    :aria-label="@lang('installer::app.installer.index.back')"
                                     tabindex="0"
                                     @click="back"
                                 >
@@ -736,7 +730,7 @@
                                     type="submit"
                                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
                                 >
-                                    Start Installation
+                                    @lang('installer::app.installer.index.start-installation')
                                 </button>
                             </div>
                         </form>
@@ -750,14 +744,14 @@
                 >
                     <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
                         <p class="text-[20px] text-gray-800 font-bold">
-                            Installation
+                            @lang('installer::app.installer.index.installation')
                         </p>
                     </div>
 
                     <div class="flex flex-col gap-[15px] justify-center px-[30px] py-[16px] h-[484px] overflow-y-auto">
                         <div class="flex flex-col gap-[16px]">
                             <p class="text-[18px] text-gray-800 font-bold">
-                                Installing Bagisto
+                                @lang('installer::app.installer.index.installation-bagisto')
                             </p>
 
                             <div class="grid gap-[10px]">
@@ -781,7 +775,7 @@
                                 </svg>
 
                                 <p class="text-[14px] text-gray-600">
-                                    Creating the database tables, this can take a few moments
+                                    @lang('installer::app.installer.index.installation-bagisto-info')
                                 </p>
                             </div>
                         </div>
@@ -809,7 +803,7 @@
                             class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
                             @click="nextForm"
                         >
-                            Continue
+                            @lang('installer::app.installer.index.continue')
                         </button>
                     </div>
                 </div>
@@ -830,7 +824,7 @@
                         >
                             <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
                                 <p class="text-[20px] text-gray-800 font-bold">
-                                    Create Administrator
+                                    @lang('installer::app.installer.index.create-administrator')
                                 </p>
                             </div>
 
@@ -838,7 +832,7 @@
                                 <!-- Admin -->
                                 <x-installer::form.control-group class="mb-[10px]">
                                     <x-installer::form.control-group.label class="required">
-                                        Admin
+                                        @lang('installer::app.installer.index.admin')
                                     </x-installer::form.control-group.label>
 
                                     <x-installer::form.control-group.control
@@ -846,8 +840,8 @@
                                         name="admin"
                                         value="Admin"
                                         rules="required"
-                                        label="Admin"
-                                        placeholder="Bagisto"
+                                        :label="trans('installer::app.installer.index.admin')"
+                                        :placeholder="trans('installer::app.installer.index.bagisto')"
                                     >
                                     </x-installer::form.control-group.control>
 
@@ -860,7 +854,7 @@
                                 <!-- Email -->
                                 <x-installer::form.control-group class="mb-[10px]">
                                     <x-installer::form.control-group.label class="required">
-                                        Email
+                                        @lang('installer::app.installer.index.email')
                                     </x-installer::form.control-group.label>
 
                                     <x-installer::form.control-group.control
@@ -868,8 +862,8 @@
                                         name="email"
                                         value="admin@example.com"
                                         rules="required"
-                                        label="Email"
-                                        placeholder="admin@example.com'"
+                                        :label="trans('installer::app.installer.index.email')"
+                                        :placeholder="trans('installer::app.installer.index.email-address')"
                                     >
                                     </x-installer::form.control-group.control>
 
@@ -882,7 +876,7 @@
                                 <!-- Password -->
                                 <x-installer::form.control-group class="mb-[10px]">
                                     <x-installer::form.control-group.label class="required">
-                                        Password
+                                        @lang('installer::app.installer.index.password')
                                     </x-installer::form.control-group.label>
 
                                     <x-installer::form.control-group.control
@@ -890,7 +884,7 @@
                                         name="password"
                                         :value="old('password')"
                                         rules="required"
-                                        label="Password"
+                                        :label="trans('installer::app.installer.index.password')"
                                     >
                                     </x-installer::form.control-group.control>
 
@@ -903,7 +897,7 @@
                                 <!-- Confirm Password -->
                                 <x-installer::form.control-group class="mb-[10px]">
                                     <x-installer::form.control-group.label class="required">
-                                        Confirm Password
+                                        @lang('installer::app.installer.index.confirm-password')
                                     </x-installer::form.control-group.label>
 
                                     <x-installer::form.control-group.control
@@ -911,7 +905,7 @@
                                         name="confirm_password"
                                         :value="old('confirm_password')"
                                         rules="required|confirmed:@password"
-                                        label="Confirm Password"
+                                        :label="trans('installer::app.installer.index.confirm-password')"
                                     >
                                     </x-installer::form.control-group.control>
 
@@ -927,7 +921,7 @@
                                     type="submit"
                                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
                                 >
-                                    Continue
+                                    @lang('installer::app.installer.index.continue')
                                 </button>
                             </div>
 
@@ -951,7 +945,7 @@
                         >
                             <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
                                 <p class="text-[20px] text-gray-800 font-bold">
-                                    Email Configuration
+                                    @lang('installer::app.installer.index.email-configuration')
                                 </p>
                             </div>
 
@@ -960,7 +954,7 @@
                                 <div class="flex gap-[6px]">
                                     <x-installer::form.control-group class="w-full mb-[10px]">
                                         <x-installer::form.control-group.label class="required">
-                                            Outgoing mail server
+                                            @lang('installer::app.installer.index.outgoing-mail-server')
                                         </x-installer::form.control-group.label>
 
                                         <x-installer::form.control-group.control
@@ -968,8 +962,8 @@
                                             name="mail_host"
                                             value="smpt.mailtrap.io"
                                             rules="required"
-                                            label="Outgoing mail server"
-                                            placeholder="smpt.mailtrap.io"
+                                            :label="trans('installer::app.installer.index.outgoing-mail-server')"
+                                            :placeholder="trans('installer::app.installer.index.outgoing-email')"
                                         >
                                         </x-installer::form.control-group.control>
 
@@ -982,7 +976,7 @@
                                     <!-- Email -->
                                     <x-installer::form.control-group class="w-full mb-[10px]">
                                         <x-installer::form.control-group.label class="required">
-                                            Server port
+                                            @lang('installer::app.installer.index.server-port')
                                         </x-installer::form.control-group.label>
 
                                         <x-installer::form.control-group.control
@@ -990,8 +984,8 @@
                                             name="mail_port"
                                             value="3306"
                                             rules="required"
-                                            label="Server port"
-                                            placeholder="3306"
+                                            :label="trans('installer::app.installer.index.server-port')"
+                                            :placeholder="trans('installer::app.installer.index.server-port-code')"
                                         >
                                         </x-installer::form.control-group.control>
 
@@ -1005,7 +999,7 @@
                                 <!-- Password -->
                                 <x-installer::form.control-group class="mb-[10px]">
                                     <x-installer::form.control-group.label class="required">
-                                        Encryption
+                                        @lang('installer::app.installer.index.encription')
                                     </x-installer::form.control-group.label>
 
                                     <x-installer::form.control-group.control
@@ -1013,7 +1007,7 @@
                                         name="mail_encryption"
                                         value="tls"
                                         rules="required"
-                                        label="Encryption"
+                                        :label="trans('installer::app.installer.index.encryption')"
                                     >
                                         <option value="tls" selected>TLS</option>
                                         <option value="ssl">SSL</option>
@@ -1028,7 +1022,7 @@
                                 <!-- Store Email Address -->
                                 <x-installer::form.control-group class="mb-[10px]">
                                     <x-installer::form.control-group.label class="required">
-                                        Store Email Address
+                                        @lang('installer::app.installer.index.store-email')
                                     </x-installer::form.control-group.label>
 
                                     <x-installer::form.control-group.control
@@ -1036,8 +1030,8 @@
                                         name="mail_from_address"
                                         :value="old('mail_from_address')"
                                         rules="required"
-                                        label="Store Email Address"
-                                        placeholder="store@example.com"
+                                        :label="trans('installer::app.installer.index.store-email')"
+                                        :placeholder="trans('installer::app.installer.index.stored-email-address')"
                                     >
                                     </x-installer::form.control-group.control>
 
@@ -1050,7 +1044,7 @@
                                 <!-- Username -->
                                 <x-installer::form.control-group class="mb-[10px]">
                                     <x-installer::form.control-group.label class="required">
-                                        Username
+                                        @lang('installer::app.installer.index.username')
                                     </x-installer::form.control-group.label>
 
                                     <x-installer::form.control-group.control
