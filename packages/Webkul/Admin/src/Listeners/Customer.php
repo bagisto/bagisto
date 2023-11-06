@@ -7,7 +7,7 @@ use Webkul\Admin\Mail\Customer\RegistrationNotification;
 
 class Customer extends Base
 {
-     /**
+    /**
      * After customer is created
      *
      * @param  \Webkul\Customer\Contracts\Customer  $customer
@@ -25,5 +25,4 @@ class Customer extends Base
             report($e);
         }
     }
-
 }
