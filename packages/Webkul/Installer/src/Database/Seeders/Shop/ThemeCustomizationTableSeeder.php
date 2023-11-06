@@ -110,7 +110,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                     'id'         => 12,
                     'type'       => 'services_content',
                     'name'       => trans('Services Content'),
-                    'sort_order' => 1,
+                    'sort_order' => 12,
                     'status'     => 1,
                     'created_at' => $now,
                     'updated_at' => $now,

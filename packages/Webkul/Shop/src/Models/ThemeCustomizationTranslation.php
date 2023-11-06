@@ -53,7 +53,7 @@ class ThemeCustomizationTranslation extends Model implements ThemeCustomizationT
     public const STATIC_CONTENT = 'static_content';
 
     /**
-     * Information Content.
+     * Services Content.
      *
      * @var string
      */

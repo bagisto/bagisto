@@ -50,23 +50,23 @@ class ThemeCustomizationRepository extends Repository
                         return Storage::url($path);
                     }
 
-                    if($theme->type == 'image_carousel') {
+                    if ($theme->type == 'image_carousel') {
                         $options['images'][] = [
                             'image' => 'storage/' . $path,
                             'link'  => $image['link'],
                         ];
                     } else {
                         $options['services'][] = [
-                            'image' => 'storage/' . $path,
+                            'image'        => 'storage/' . $path,
                             'description'  => $image['description'],
-                            'title'  => $image['title'],
+                            'title'        => $image['title'],
                         ];
                     }
 
                 } else {
-                    if($theme->type == 'image_carousel') {
+                    if ($theme->type == 'image_carousel') {
                         $options['images'][] = $image;
-                    } else{
+                    } else {
                         $options['services'][] = $image;
                     }
                 }

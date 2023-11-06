@@ -102,14 +102,14 @@ class ThemeController extends Controller
 
         $data['status'] = request()->input('status') == 'on';
 
-        if ($data['type'] == 'image_carousel' || $data['type'] =='services_content') {
+        if ($data['type'] == 'image_carousel' || $data['type'] == 'services_content') {
             unset($data['options']);
         }
 
         Event::dispatch('theme_customization.update.before', $id);
 
         $theme = $this->themeCustomizationRepository->update($data, $id);
-        
+
         if ($data['type'] == 'image_carousel' || $data['type'] == 'services_content') {
             $this->themeCustomizationRepository->uploadImage(
                 $data[$locale],

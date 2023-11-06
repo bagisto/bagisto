@@ -10,11 +10,11 @@
                     <div class="flex gap-x-[10px] justify-between items-center">
                         <div class="flex flex-col gap-[4px]">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
-                                @lang('admin::app.settings.themes.edit.slider')
+                                @lang('Services')
                             </p>
                             
                             <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
-                                @lang('admin::app.settings.themes.edit.slider-description')
+                                @lang('Service related theme customization.')
                             </p>
                         </div>
         
@@ -24,7 +24,7 @@
                                 class="secondary-button"
                                 @click="$refs.addSliderModal.toggle()"
                             >
-                                @lang('admin::app.settings.themes.edit.slider-add-btn')
+                                @lang('Add Services')
                             </div>
                         </div>
                     </div>
@@ -289,7 +289,7 @@
                 <x-admin::modal ref="addSliderModal">
                     <x-slot:header>
                         <p class="text-[18px] text-gray-800 dark:text-white font-bold">
-                            @lang('admin::app.settings.themes.edit.update-slider')
+                            @lang('Update Services')
                         </p>
                     </x-slot:header>
 
@@ -329,7 +329,7 @@
 
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
-                                    @lang('admin::app.settings.themes.edit.slider-image')
+                                    @lang('Services Image')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
@@ -347,7 +347,7 @@
                             </x-admin::form.control-group>
 
                             <p class="text-[12px] text-gray-600 dark:text-gray-300">
-                                @lang('admin::app.settings.themes.edit.image-size')
+                                @lang('Image resolution should be (40px X 40px)')
                             </p>
                         </div>
                     </x-slot:content>
