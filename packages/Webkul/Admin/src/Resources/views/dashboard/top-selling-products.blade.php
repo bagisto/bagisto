@@ -36,9 +36,9 @@
                     >
                         <!-- Product Item -->
                         <img
-                            v-if="item.product?.images.length"
+                            v-if="item.images.length"
                             class="w-full h-[65px] max-w-[65px] max-h-[65px] relative rounded-[4px] overflow-hidden"
-                            :src="item.product?.images[0]?.url"
+                            :src="item.images[0]?.url"
                         />
 
                         <div

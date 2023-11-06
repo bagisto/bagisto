@@ -133,6 +133,19 @@ class Sale extends AbstractReporting
     }
 
     /**
+     * Retrieves sub total sales and their progress.
+     */
+    public function getSubTotalSalesProgress(): array
+    {
+        return [
+            'previous'        => $previous = $this->getSubTotalSales($this->lastStartDate, $this->lastEndDate),
+            'current'         => $current = $this->getSubTotalSales($this->startDate, $this->endDate),
+            'formatted_total' => core()->formatBasePrice($current),
+            'progress'        => $this->getPercentageChange($previous, $current),
+        ];
+    }
+
+    /**
      * Retrieves today sales and their progress.
      */
     public function getTodaySalesProgress(): array
@@ -157,6 +170,20 @@ class Sale extends AbstractReporting
             ->resetModel()
             ->whereBetween('created_at', [$startDate, $endDate])
             ->sum(DB::raw('base_grand_total_invoiced - base_grand_total_refunded'));
+    }
+
+    /**
+     * Retrieves sub total sales
+     *
+     * @param  \Carbon\Carbon  $startDate
+     * @param  \Carbon\Carbon  $endDate
+     */
+    public function getSubTotalSales($startDate, $endDate): float
+    {
+        return $this->orderRepository
+            ->resetModel()
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->sum(DB::raw('base_sub_total_invoiced - base_sub_total_refunded'));
     }
 
     /**
