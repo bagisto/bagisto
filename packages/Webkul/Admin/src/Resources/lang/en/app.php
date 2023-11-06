@@ -2708,7 +2708,7 @@ return [
                 'interval'                         => 'Interval',
                 'name'                             => 'Name',
                 'orders'                           => 'Orders',
-                'price'                            => 'price',
+                'price'                            => 'Price',
                 'products-added-over-time'         => 'Products Added Over Time',
                 'products-with-most-reviews'       => 'Products With Most Reviews',
                 'products-with-most-visits'        => 'Products With Most Visits',

@@ -2,7 +2,8 @@
 
 namespace Webkul\Admin\Helpers\Reporting;
 
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
@@ -159,7 +160,7 @@ class Product extends AbstractReporting
      *
      * @param  int  $limit
      */
-    public function getStockThresholdProducts($limit = null): Collection
+    public function getStockThresholdProducts($limit = null): EloquentCollection
     {
         return $this->productInventoryRepository
             ->resetModel()
@@ -176,26 +177,33 @@ class Product extends AbstractReporting
      *
      * @param  int  $limit
      */
-    public function getTopSellingProductsByRevenue($limit = null): collection
+    public function getTopSellingProductsByRevenue($limit = null): Collection
     {
-        $products = $this->orderItemRepository
+        $items = $this->orderItemRepository
             ->resetModel()
             ->with(['product', 'product.attribute_family', 'product.attribute_values', 'product.images'])
-            ->addSelect('*', DB::raw('SUM(base_total_invoiced - base_discount_refunded) as revenue'))
+            ->addSelect('*', DB::raw('SUM(base_total_invoiced - base_amount_refunded) as revenue'))
             ->whereNull('parent_id')
             ->whereBetween('order_items.created_at', [$this->startDate, $this->endDate])
+            ->having(DB::raw('SUM(base_total_invoiced - base_amount_refunded)'), '>', 0)
             ->groupBy('product_id')
             ->orderBy('revenue', 'DESC')
             ->limit($limit)
             ->get();
 
-        $products->map(function ($product) {
-            $product->formatted_revenue = core()->formatBasePrice($product->revenue);
-
-            $product->formatted_price = core()->formatBasePrice($product->price);
+        $items = $items->map(function ($item) {
+            return [
+                'id'                => $item->product_id,
+                'name'              => $item->name,
+                'price'             => $item->product->price,
+                'formatted_price'   => core()->formatBasePrice($item->price),
+                'revenue'           => $item->revenue,
+                'formatted_revenue' => core()->formatBasePrice($item->revenue),
+                'images'            => $item->product->images,
+            ];
         });
 
-        return $products;
+        return $items;
     }
 
     /**
@@ -203,9 +211,9 @@ class Product extends AbstractReporting
      *
      * @param  int  $limit
      */
-    public function getTopSellingProductsByQuantity($limit = null): collection
+    public function getTopSellingProductsByQuantity($limit = null): Collection
     {
-        $products = $this->orderItemRepository
+        $items = $this->orderItemRepository
             ->resetModel()
             ->with(['product', 'product.attribute_family', 'product.attribute_values', 'product.images'])
             ->addSelect('*', DB::raw('SUM(qty_ordered) as total_qty_ordered'))
@@ -216,7 +224,18 @@ class Product extends AbstractReporting
             ->limit($limit)
             ->get();
 
-        return $products;
+        $items = $items->map(function ($item) {
+            return [
+                'id'                => $item->product_id,
+                'name'              => $item->name,
+                'price'             => $item->product->price,
+                'formatted_price'   => core()->formatBasePrice($item->price),
+                'total_qty_ordered' => $item->total_qty_ordered,
+                'images'            => $item->product->images,
+            ];
+        });
+
+        return $items;
     }
 
     /**
@@ -224,7 +243,7 @@ class Product extends AbstractReporting
      *
      * @param  int  $limit
      */
-    public function getProductsWithMostReviews($limit = null): Collection
+    public function getProductsWithMostReviews($limit = null): EloquentCollection
     {
         $tablePrefix = DB::getTablePrefix();
 
