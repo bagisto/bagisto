@@ -29,7 +29,7 @@
                         </div>
                     </div>
 
-                    <template v-for="(deletedSlider, index) in deletedSliders">
+                    <template v-for="(deletedSlider, index) in deletedServices">
                         <input
                             type="hidden"
                             :name="'deleted_sliders['+ index +'][image]'"
@@ -39,8 +39,8 @@
 
                     <div
                         class="grid pt-[16px]"
-                        v-if="sliders.services.length"
-                        v-for="(image, index) in sliders.services"
+                        v-if="servicesContent.services.length"
+                        v-for="(image, index) in servicesContent.services"
                     >
                         <!-- Hidden Input -->
                         <input
@@ -72,7 +72,7 @@
                         <div 
                             class="flex gap-[10px] justify-between py-5 cursor-pointer"
                             :class="{
-                                'border-b-[1px] border-slate-300 dark:border-gray-800': index < sliders.services.length - 1
+                                'border-b-[1px] border-slate-300 dark:border-gray-800': index < servicesContent.services.length - 1
                             }"
                         >
                             <div class="flex gap-[10px]">
@@ -378,20 +378,19 @@
         data() {
             return {
                 
-                sliders: @json($theme->translate($currentLocale->code)['options'] ?? null),
+                servicesContent: @json($theme->translate($currentLocale->code)['options'] ?? null),
 
-                deletedSliders: [],
+                deletedServices: [],
             };
         },
         
         created() {
             if (
-                this.sliders == null 
-                || this.sliders.length == 0
+                this.servicesContent == null 
+                || this.servicesContent.length == 0
             ) {
-                this.sliders = { services: [] };
+                this.servicesContent = { services: [] };
             }  
-            console.log(this.sliders); 
         },
 
         methods: {
@@ -405,14 +404,14 @@
                         throw new Error("{{ trans('admin::app.settings.themes.edit.slider-required') }}");
                     }
 
-                    this.sliders.services.push({
+                    this.servicesContent.services.push({
                         title: formData.get("{{ $currentLocale->code }}[title]"),
                         description: formData.get("{{ $currentLocale->code }}[description]"),
                         slider_image: sliderImage,
                     });
 
                     if (sliderImage instanceof File) {
-                        this.setFile(sliderImage, this.sliders.services.length - 1);
+                        this.setFile(sliderImage, this.servicesContent.services.length - 1);
                     }
 
                     resetForm();
@@ -438,9 +437,9 @@
             },
 
             remove(image) {
-                this.deletedSliders.push(image);
+                this.deletedServices.push(image);
                 
-                this.sliders.services = this.sliders.services.filter(item => {
+                this.servicesContent.services = this.servicesContent.services.filter(item => {
                     return (
                         item.title !== image.title || 
                         item.description !== image.description || 
