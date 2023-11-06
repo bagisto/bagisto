@@ -30,7 +30,7 @@ class LocalesTableSeeder extends Seeder
         $logoPath = null;
 
         if (file_exists(base_path(self::BASE_PATH . $localeCode . '.png'))) {
-            $logoPath = 'storage/' . Storage::putFile('locales', new File(base_path(self::BASE_PATH . $localeCode . '.png')));
+            $logoPath = Storage::putFile('locales', new File(base_path(self::BASE_PATH . $localeCode . '.png')));
         }
 
         DB::table('locales')->insert([
