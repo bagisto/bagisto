@@ -160,7 +160,7 @@ class Reporting
         return [
             'visitors' => [
                 'total'    => $totalVisitors = $this->visitorReporting->getTotalUniqueVisitors($startDate, $endDate),
-                'progress' => 100,
+                'progress' => $totalVisitors ? 100 : 0,
             ],
 
             'product_visitors' => [

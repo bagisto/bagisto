@@ -587,7 +587,7 @@ return [
                             'fixed'          => 'Fixed',
                             'price-type'     => 'Price Type',
                             'price'          => 'Price',
-                            'qty'            => 'Qty',
+                            'qty'            => 'Minimum Qty',
                             'save-btn'       => 'Save',
                             'update-title'   => 'Update Customer Group Price',
                         ],
