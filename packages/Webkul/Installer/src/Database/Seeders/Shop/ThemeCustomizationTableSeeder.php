@@ -287,23 +287,23 @@ class ThemeCustomizationTableSeeder extends Seeder
                     'theme_customization_id' => 12,
                     'locale'                 => config('app.locale'),
                     'options'                => json_encode([
-                        'images' => [
+                        'services' => [
                             [
-                                'title' => trans('Free Shipping'),
-                                'link'  => 'If goods have problems, Lorem Ipsum is dummy text ',
-                                'image' => 'storage/theme/12/1.webp',
+                                'title'        => trans('Free Shipping'),
+                                'description'  => trans('If goods have problems, Lorem Ipsum is dummy text'),
+                                'image'        => 'storage/theme/12/1.webp',
                             ], [
-                                'title' => trans('Product Replace'),
-                                'link'  => 'If goods have problems, Lorem Ipsum is dummy text ',
-                                'image' => 'storage/theme/12/2.webp',
+                                'title'        => trans('Product Replace'),
+                                'description'  => trans('If goods have problems, Lorem Ipsum is dummy text'),
+                                'image'        => 'storage/theme/12/2.webp',
                             ], [
-                                'title' => trans('Emi Available'),
-                                'link'  => 'If goods have problems, Lorem Ipsum is dummy text ',
-                                'image' => 'storage/theme/12/3.webp',
+                                'title'        => trans('Emi Available'),
+                                'description'  => trans('If goods have problems, Lorem Ipsum is dummy text'),
+                                'image'        => 'storage/theme/12/3.webp',
                             ], [
-                                'title' => trans('24/7 Support'),
-                                'link'  => 'If goods have problems, Lorem Ipsum is dummy text',
-                                'image' => 'storage/theme/12/4.webp',
+                                'title'       => trans('24/7 Support'),
+                                'description' => trans('If goods have problems, Lorem Ipsum is dummy text'),
+                                'image'       => 'storage/theme/12/4.webp',
                             ],
                         ],
                     ]),

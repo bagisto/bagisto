@@ -18,22 +18,22 @@
                             </p>
                         </div>
         
-                        <!-- Add Slider Button -->
+                        <!-- Add Services Button -->
                         <div class="flex gap-[10px]">
                             <div
                                 class="secondary-button"
-                                @click="$refs.addSliderModal.toggle()"
+                                @click="$refs.addServiceModal.toggle()"
                             >
                                 @lang('Add Services')
                             </div>
                         </div>
                     </div>
 
-                    <template v-for="(deletedSlider, index) in deletedServices">
+                    <template v-for="(deletedService, index) in deletedServices">
                         <input
                             type="hidden"
-                            :name="'deleted_sliders['+ index +'][image]'"
-                            :value="deletedSlider.image"
+                            :name="'{{ $currentLocale->code }}[deleted_sliders]['+ index +'][image]'"
+                            :value="deletedService.image"
                         />
                     </template>
 
@@ -282,11 +282,11 @@
             as="div"
         >
             <form 
-                @submit="handleSubmit($event, saveSliderImage)"
+                @submit="handleSubmit($event, saveServiceImage)"
                 enctype="multipart/form-data"
-                ref="createSliderForm"
+                ref="createServiceForm"
             >
-                <x-admin::modal ref="addSliderModal">
+                <x-admin::modal ref="addServiceModal">
                     <x-slot:header>
                         <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                             @lang('Update Services')
@@ -334,14 +334,14 @@
 
                                 <x-admin::form.control-group.control
                                     type="image"
-                                    name="slider_image"
+                                    name="service_image"
                                     rules="required"
                                     :is-multiple="false"
                                 >
                                 </x-admin::form.control-group.control>
 
                                 <x-admin::form.control-group.error
-                                    control-name="slider_image"
+                                    control-name="service_image"
                                 >
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
@@ -394,31 +394,31 @@
         },
 
         methods: {
-            saveSliderImage(params, { resetForm ,setErrors }) {
-                let formData = new FormData(this.$refs.createSliderForm);
+            saveServiceImage(params, { resetForm ,setErrors }) {
+                let formData = new FormData(this.$refs.createServiceForm);
 
                 try {
-                    const sliderImage = formData.get("slider_image[]");
+                    const serviceImage = formData.get("service_image[]");
 
-                    if (! sliderImage) {
-                        throw new Error("{{ trans('admin::app.settings.themes.edit.slider-required') }}");
+                    if (! serviceImage) {
+                        throw new Error("{{ trans('Service field is Required.') }}");
                     }
 
                     this.servicesContent.services.push({
                         title: formData.get("{{ $currentLocale->code }}[title]"),
                         description: formData.get("{{ $currentLocale->code }}[description]"),
-                        slider_image: sliderImage,
+                        service_image: serviceImage,
                     });
 
-                    if (sliderImage instanceof File) {
-                        this.setFile(sliderImage, this.servicesContent.services.length - 1);
+                    if (serviceImage instanceof File) {
+                        this.setFile(serviceImage, this.servicesContent.services.length - 1);
                     }
 
                     resetForm();
 
-                    this.$refs.addSliderModal.toggle();
+                    this.$refs.addServiceModal.toggle();
                 } catch (error) {
-                    setErrors({'slider_image': [error.message]});
+                    setErrors({'service_image': [error.message]});
                 }
             },
 

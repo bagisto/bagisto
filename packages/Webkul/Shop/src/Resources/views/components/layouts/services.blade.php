@@ -20,7 +20,7 @@
                         class="flex items-center justify-center w-[60px] h-[60px] bg-white border border-black rounded-full text-[42px] text-navyBlue p-[10px]"
                         role="presentation"
                     >
-                        <img src="{{ $service['image'] }}" alt="service-image" height="38" width="38"> 
+                        <img src="{{ $service['image'] }}" alt="service-image" height="40" width="40"> 
                     </span>
         
                     <div class="">
