@@ -3508,6 +3508,14 @@ return [
             ],
         ],
 
+        'customers' => [
+            'registration' => [
+                'description' => 'A new customer account has been successfully created. They can now log in using their email address and password credentials. Once logged in, they will have access to various services, including the ability to review past orders, manage wishlists, and update their account information.',
+                'greeting'    => 'We extend a warm welcome to the new customer, :customer_name who has just registered with us!',
+                'subject'     => 'New Customer Registration',
+            ],
+        ],
+
         'orders' => [
             'created' => [
                 'greeting' => 'You have a new Order :order_id placed on :created_at',

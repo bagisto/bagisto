@@ -3507,6 +3507,14 @@ return [
             ],
         ],
 
+        'customers' => [
+            'registration' => [
+                'description' => 'Ein neues Kundenkonto wurde erfolgreich erstellt. Sie können sich nun mit ihrer E-Mail-Adresse und ihrem Passwort anmelden. Sobald sie angemeldet sind, haben sie Zugriff auf verschiedene Dienste, einschließlich der Möglichkeit, frühere Bestellungen einzusehen, Wunschlisten zu verwalten und ihre Kontoinformationen zu aktualisieren.',
+                'greeting'    => 'Wir heißen den neuen Kunden :customer_name, der sich gerade bei uns registriert hat, herzlich willkommen!',
+                'subject'     => 'Neukundenregistrierung',
+            ],
+        ],
+
         'orders' => [
             'created' => [
                 'greeting' => 'Sie haben eine neue Bestellung :order_id am :created_at aufgegeben',

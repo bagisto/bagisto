@@ -3507,6 +3507,14 @@ return [
             ],
         ],
 
+        'customers' => [
+            'registration' => [
+                'description' => 'Yeni bir müşteri hesabı başarıyla oluşturuldu. Artık e-posta adreslerini ve şifre bilgilerini kullanarak giriş yapabilirler. Giriş yaptıktan sonra geçmiş siparişleri inceleme, istek listelerini yönetme ve hesap bilgilerini güncelleme dahil olmak üzere çeşitli hizmetlere erişebilecekler.',
+                'greeting'    => 'Aramıza yeni kaydolan yeni müşterimiz :customer_name `e sıcak bir karşılama dileriz!',
+                'subject'     => 'Yeni Müşteri Kaydı',
+            ],
+        ],
+
         'orders' => [
             'created' => [
                 'greeting' => ':created_at tarihinde yerleştirilen yeni bir Siparişiniz var :order_id',
