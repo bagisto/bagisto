@@ -163,7 +163,6 @@ class OrderItemRepository extends Repository
             return;
         }
 
-
         $this->updateProductOrderedInventories($orderItem);
 
         if ($orderItem->getTypeInstance()->isStockable()) {
