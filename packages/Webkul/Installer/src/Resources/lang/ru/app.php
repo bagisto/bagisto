@@ -4,295 +4,285 @@ return [
     'seeders' => [
         'attribute' => [
             'attribute-families' => [
-                'default' => 'Default',
+                'default' => 'По умолчанию',
             ],
 
             'attribute-groups' => [
-                'general'           => 'General',
-                'description'       => 'Description',
-                'meta-description'  => 'Meta Description',
-                'price'             => 'Price',
-                'shipping'          => 'Shipping',
-                'settings'          => 'Settings',
-                'inventories'       => 'Inventories',
+                'description'       => 'Описание',
+                'general'           => 'Общее',
+                'inventories'       => 'Инвентарь',
+                'meta-description'  => 'Мета-описание',
+                'price'             => 'Цена',
+                'shipping'          => 'Доставка',
+                'settings'          => 'Настройки',
             ],
 
             'attributes' => [
-                'sku'                  => 'SKU',
-                'name'                 => 'Name',
-                'url-key'              => 'URL Key',
-                'tax-category'         => 'Tax Category',
-                'new'                  => 'New',
-                'featured'             => 'Featured',
-                'visible-individually' => 'Visible Individually',
-                'status'               => 'Status',
-                'short-description'    => 'Short Description',
-                'description'          => 'Description',
-                'price'                => 'Price',
-                'cost'                 => 'Cost',
-                'special-price'        => 'Special Price',
-                'special-price-from'   => 'Special Price From',
-                'special-price-to'     => 'Special Price To',
-                'meta-title'           => 'Meta Title',
-                'meta-keywords'        => 'Meta Keywords',
-                'meta-description'     => 'Meta Description',
-                'length'               => 'Length',
-                'width'                => 'Width',
-                'height'               => 'Height',
-                'weight'               => 'Weight',
-                'color'                => 'Color',
-                'size'                 => 'Size',
-                'brand'                => 'Brand',
-                'guest-checkout'       => 'Guest Checkout',
-                'product-number'       => 'Product Number',
-                'manage-stock'         => 'Manage Stock',
+                'brand'                => 'Бренд',
+                'color'                => 'Цвет',
+                'cost'                 => 'Стоимость',
+                'description'          => 'Описание',
+                'featured'             => 'Популярный',
+                'guest-checkout'       => 'Гостевой заказ',
+                'height'               => 'Высота',
+                'length'               => 'Длина',
+                'meta-title'           => 'Мета-заголовок',
+                'meta-keywords'        => 'Мета-ключевые слова',
+                'meta-description'     => 'Мета-описание',
+                'manage-stock'         => 'Управление запасами',
+                'new'                  => 'Новый',
+                'name'                 => 'Название',
+                'product-number'       => 'Артикул',
+                'price'                => 'Цена',
+                'sku'                  => 'Артикул товара (SKU)',
+                'status'               => 'Статус',
+                'short-description'    => 'Краткое описание',
+                'special-price'        => 'Специальная цена',
+                'special-price-from'   => 'Специальная цена от',
+                'special-price-to'     => 'Специальная цена до',
+                'size'                 => 'Размер',
+                'tax-category'         => 'Категория налога',
+                'url-key'              => 'Ключ URL',
+                'visible-individually' => 'Видимость по отдельности',
+                'width'                => 'Ширина',
+                'weight'               => 'Вес',
             ],
 
             'attribute-options' => [
-                'red'    => 'Red',
-                'green'  => 'Green',
-                'yellow' => 'Yellow',
-                'black'  => 'Black',
-                'white'  => 'White',
-                's'      => 'S',
-                'm'      => 'M',
+                'black'  => 'Черный',
+                'green'  => 'Зеленый',
                 'l'      => 'L',
+                'm'      => 'M',
+                'red'    => 'Красный',
+                's'      => 'S',
+                'white'  => 'Белый',
                 'xl'     => 'XL',
+                'yellow' => 'Желтый',
             ],
         ],
 
         'category' => [
             'categories' => [
-                'name'        => 'Root',
-                'description' => 'Root Category Description',
+                'description' => 'Описание корневой категории',
+                'name'        => 'Корень',
             ],
         ],
 
         'cms' => [
             'pages' => [
                 'about-us' => [
-                    'title'   => 'About Us',
-                    'content' => 'About Us Page Content',
+                    'content' => 'Содержание страницы "О нас"',
+                    'title'   => 'О нас',
                 ],
 
                 'refund-policy' => [
-                    'title'   => 'Refund Policy',
-                    'content' => 'Refund Policy Page Content',
+                    'content' => 'Содержание страницы "Политика возврата"',
+                    'title'   => 'Политика возврата',
                 ],
 
                 'return-policy' => [
-                    'title'   => 'Return Policy',
-                    'content' => 'Return Policy Page Content',
+                    'content' => 'Содержание страницы "Политика возврата"',
+                    'title'   => 'Политика возврата',
                 ],
 
                 'terms-conditions' => [
-                    'title'   => 'Terms & Conditions',
-                    'content' => 'Terms & Conditions Page Content',
+                    'content' => 'Содержание страницы "Условия и положения"',
+                    'title'   => 'Условия и положения',
                 ],
 
                 'terms-of-use' => [
-                    'title'   => 'Terms of Use',
-                    'content' => 'Terms of Use Page Content',
+                    'content' => 'Содержание страницы "Условия использования"',
+                    'title'   => 'Условия использования',
                 ],
 
                 'contact-us' => [
-                    'title'   => 'Contact Us',
-                    'content' => 'Contact Us Page Content',
+                    'content' => 'Содержание страницы "Свяжитесь с нами"',
+                    'title'   => 'Свяжитесь с нами',
                 ],
 
                 'customer-service' => [
-                    'title'   => 'Customer Service',
-                    'content' => 'Customer Service Page Content',
+                    'content' => 'Содержание страницы "Служба поддержки клиентов"',
+                    'title'   => 'Служба поддержки клиентов',
                 ],
 
                 'whats-new' => [
-                    'title'   => 'What\'s New',
-                    'content' => 'What\'s New page content',
+                    'content' => 'Содержание страницы "Что нового"',
+                    'title'   => 'Что нового',
                 ],
 
                 'payment-policy' => [
-                    'title'   => 'Payment Policy',
-                    'content' => 'Payment Policy Page Content',
+                    'content' => 'Содержание страницы "Политика оплаты"',
+                    'title'   => 'Политика оплаты',
                 ],
 
                 'shipping-policy' => [
-                    'title'   => 'Shipping Policy',
-                    'content' => 'Shipping Policy Page Content',
+                    'content' => 'Содержание страницы "Политика доставки"',
+                    'title'   => 'Политика доставки',
                 ],
 
                 'privacy-policy' => [
-                    'title'   => 'Privacy Policy',
-                    'content' => 'Privacy Policy Page Content',
+                    'content' => 'Содержание страницы "Политика конфиденциальности"',
+                    'title'   => 'Политика конфиденциальности',
                 ],
             ],
         ],
 
         'core' => [
             'channels' => [
-                'name'             => 'Default',
-                'meta-title'       => 'Demo store',
-                'meta-keywords'    => 'Demo store meta keyword',
-                'meta-description' => 'Demo store meta description',
+                'meta-title'       => 'Демонстрационный магазин',
+                'meta-keywords'    => 'Мета-ключевые слова демонстрационного магазина',
+                'meta-description' => 'Мета-описание демонстрационного магазина',
+                'name'             => 'По умолчанию',
             ],
 
             'currencies' => [
-                'CNY' => 'Chinese Yuan',
-                'AED' => 'Dirham',
-                'EUR' => 'EURO',
-                'INR' => 'Indian Rupee',
-                'IRR' => 'Iranian Rial',
-                'ILS' => 'Israeli Shekel',
-                'JPY' => 'Japanese Yen',
-                'GBP' => 'Pound Sterling',
-                'RUB' => 'Russian Ruble',
-                'SAR' => 'Saudi Riyal',
-                'TRY' => 'Turkish Lira',
-                'USD' => 'US Dollar',
-                'UAH' => 'Ukrainian Hryvnia',
+                'CNY' => 'Китайский юань',
+                'AED' => 'Дирхам',
+                'EUR' => 'Евро',
+                'INR' => 'Индийская рупия',
+                'IRR' => 'Иранский риал',
+                'ILS' => 'Израильский шекель',
+                'JPY' => 'Японская йена',
+                'GBP' => 'Фунт стерлингов',
+                'RUB' => 'Российский рубль',
+                'SAR' => 'Саудовский риял',
+                'TRY' => 'Турецкая лира',
+                'USD' => 'Доллар США',
+                'UAH' => 'Украинская гривна',
             ],
 
             'locales' => [
-                'ar'    => 'Arabic',
-                'bn'    => 'Bengali',
-                'pt_BR' => 'Brazilian Portuguese',
-                'zh_CN' => 'Chinese',
-                'nl'    => 'Dutch',
-                'en'    => 'English',
-                'fr'    => 'French',
-                'de'    => 'German',
-                'he'    => 'Hebrew',
-                'hi_IN' => 'Hindi',
-                'it'    => 'Italian',
-                'ja'    => 'Japanese',
-                'fa'    => 'Persian',
-                'pl'    => 'Polish',
-                'ru'    => 'Russian',
-                'sin'   => 'Sinhala',
-                'es'    => 'Spanish',
-                'tr'    => 'Turkish',
-                'uk'    => 'Ukrainian',
+                'ar'    => 'Арабский',
+                'bn'    => 'Бенгальский',
+                'de'    => 'Немецкий',
+                'es'    => 'Испанский',
+                'en'    => 'Английский',
+                'fr'    => 'Французский',
+                'fa'    => 'Персидский',
+                'he'    => 'Иврит',
+                'hi_IN' => 'Хинди',
+                'it'    => 'Итальянский',
+                'ja'    => 'Японский',
+                'nl'    => 'Голландский',
+                'pl'    => 'Польский',
+                'pt_BR' => 'Бразильский португальский',
+                'ru'    => 'Русский',
+                'sin'   => 'Сингальский',
+                'tr'    => 'Турецкий',
+                'uk'    => 'Украинский',
+                'zh_CN' => 'Китайский',
             ],
         ],
 
         'customer' => [
             'customer-groups' => [
-                'guest'     => 'Guest',
-                'general'   => 'General',
-                'wholesale' => 'Wholesale',
+                'guest'     => 'Гость',
+                'general'   => 'Общий',
+                'wholesale' => 'Оптовый',
             ],
         ],
 
         'inventory' => [
             'inventory-sources' => [
-                'name' => 'Default',
+                'name' => 'По умолчанию',
             ],
         ],
 
         'shop' => [
             'theme-customizations' => [
                 'image-carousel' => [
-                    'name'  => 'Image Carousel',
+                    'name'  => 'Карусель изображений',
 
                     'sliders' => [
-                        'title' => 'Get Ready For New Collection',
+                        'title' => 'Готовьтесь к новой коллекции',
                     ],
                 ],
 
                 'offer-information' => [
-                    'name' => 'Offer Information',
+                    'name' => 'Информация о предложениях',
 
                     'content' => [
-                        'title' => 'Get UPTO 40% OFF on your 1st order SHOP NOW',
+                        'title' => 'Скидка до 40% на ваш первый заказ! ПОКУПАЙТЕ СЕЙЧАС',
                     ],
                 ],
 
                 'categories-collections' => [
-                    'name' => 'Categories Collections',
+                    'name' => 'Категории и коллекции',
                 ],
 
                 'new-products' => [
-                    'name' => 'New Products',
+                    'name' => 'Новые товары',
 
                     'options' => [
-                        'title' => 'New Products',
+                        'title' => 'Новые товары',
                     ],
                 ],
 
                 'top-collections' => [
-                    'name' => 'Top Collections',
+                    'name' => 'Лучшие коллекции',
 
                     'content' => [
-                        'title'       => 'The game with our new additions!',
-                        'sub-title-1' => 'Our Collections',
-                        'sub-title-2' => 'Our Collections',
-                        'sub-title-3' => 'Our Collections',
-                        'sub-title-4' => 'Our Collections',
-                        'sub-title-5' => 'Our Collections',
-                        'sub-title-6' => 'Our Collections',
+                        'sub-title-1' => 'Наши коллекции',
+                        'sub-title-2' => 'Наши коллекции',
+                        'sub-title-3' => 'Наши коллекции',
+                        'sub-title-4' => 'Наши коллекции',
+                        'sub-title-5' => 'Наши коллекции',
+                        'sub-title-6' => 'Наши коллекции',
+                        'title'       => 'Игра с нашими новыми добавлениями!',
                     ],
                 ],
 
                 'bold-collections' => [
-                    'name' => 'Bold Collections',
+                    'name' => 'Смелые коллекции',
 
                     'content' => [
-                        'title'       => 'Get Ready for our new Bold Collections!',
-                        'description' => 'Introducing Our New Bold Collections! Elevate your style with daring designs and vibrant statements. Explore striking patterns and bold colors that redefine your wardrobe. Get ready to embrace the extraordinary!',
-                        'btn-title'   => 'View All',
+                        'btn-title'   => 'Посмотреть все',
+                        'description' => 'Представляем наши новые смелые коллекции! Поднимите свой стиль с смелыми дизайнами и яркими заявлениями. Исследуйте выдающиеся узоры и яркие цвета, которые переопределяют ваш гардероб. Готовьтесь встретить нечто необычное!',
+                        'title'       => 'Подготовьтесь к нашим новым смелым коллекциям!',
                     ],
                 ],
 
                 'featured-collections' => [
-                    'name' => 'Featured Collections',
+                    'name' => 'Избранные коллекции',
 
                     'options' => [
-                        'title' => 'Featured Products',
+                        'title' => 'Популярные товары',
                     ],
                 ],
 
                 'game-container' => [
-                    'name' => 'Game Container',
+                    'name' => 'Игровой контейнер',
 
                     'content' => [
-                        'title'       => 'The game with our new additions!',
-                        'sub-title-1' => 'Our Collections',
-                        'sub-title-2' => 'Our Collections',
+                        'sub-title-1' => 'Наши коллекции',
+                        'sub-title-2' => 'Наши коллекции',
+                        'title'       => 'Игра с нашими новыми добавлениями!',
                     ],
                 ],
 
                 'all-products' => [
-                    'name' => 'All Products',
+                    'name' => 'Все товары',
 
                     'options' => [
-                        'title' => 'All Products',
-                    ],
-                ],
-
-                'bold-collections' => [
-                    'name' => 'Bold Collections',
-
-                    'content' => [
-                        'title'       => 'Get Ready for our new Bold Collections!',
-                        'description' => 'Introducing Our New Bold Collections! Elevate your style with daring designs and vibrant statements. Explore striking patterns and bold colors that redefine your wardrobe. Get ready to embrace the extraordinary!',
-                        'btn-title'   => 'View All',
+                        'title' => 'Все товары',
                     ],
                 ],
 
                 'footer-links' => [
-                    'name' => 'Footer Links',
+                    'name' => 'Ссылки внизу страницы',
 
                     'options' => [
-                        'about-us'         => 'About Us',
-                        'contact-us'       => 'Contact Us',
-                        'customer-service' => 'Customer Service',
-                        'whats-new'        => 'What\'s New',
-                        'terms-of-use'     => 'Terms of Use',
-                        'terms-conditions' => 'Terms & Conditions',
-                        'privacy-policy'   => 'Privacy Policy',
-                        'payment-policy'   => 'Payment Policy',
-                        'shipping-policy'  => 'Shipping Policy',
-                        'return-policy'    => 'Return Policy',
-                        'refund-policy'    => 'Refund Policy',
+                        'about-us'         => 'О нас',
+                        'contact-us'       => 'Свяжитесь с нами',
+                        'customer-service' => 'Служба поддержки',
+                        'privacy-policy'   => 'Политика конфиденциальности',
+                        'payment-policy'   => 'Политика оплаты',
+                        'return-policy'    => 'Политика возврата',
+                        'refund-policy'    => 'Политика возврата средств',
+                        'shipping-policy'  => 'Политика доставки',
+                        'terms-of-use'     => 'Условия использования',
+                        'terms-conditions' => 'Условия и положения',
+                        'whats-new'        => 'Что нового',
                     ],
                 ],
             ],
@@ -300,12 +290,12 @@ return [
 
         'user' => [
             'users' => [
-                'name' => 'Example',
+                'name' => 'Пример',
             ],
 
             'roles' => [
-                'name'        => 'Administrator',
-                'description' => 'This role users will have all the access',
+                'description' => 'Эта роль предоставляет пользователям полный доступ',
+                'name'        => 'Администратор',
             ],
         ],
     ],

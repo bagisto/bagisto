@@ -4,295 +4,285 @@ return [
     'seeders' => [
         'attribute' => [
             'attribute-families' => [
-                'default' => 'Default',
+                'default' => 'پیش‌فرض',
             ],
 
             'attribute-groups' => [
-                'general'           => 'General',
-                'description'       => 'Description',
-                'meta-description'  => 'Meta Description',
-                'price'             => 'Price',
-                'shipping'          => 'Shipping',
-                'settings'          => 'Settings',
-                'inventories'       => 'Inventories',
+                'description'       => 'توضیحات',
+                'general'           => 'عمومی',
+                'inventories'       => 'موجودی‌ها',
+                'meta-description'  => 'توضیحات متا',
+                'price'             => 'قیمت',
+                'shipping'          => 'حمل و نقل',
+                'settings'          => 'تنظیمات',
             ],
 
             'attributes' => [
+                'brand'                => 'برند',
+                'color'                => 'رنگ',
+                'cost'                 => 'هزینه',
+                'description'          => 'توضیحات',
+                'featured'             => 'ویژگی‌دار',
+                'guest-checkout'       => 'خرید مهمان',
+                'height'               => 'ارتفاع',
+                'length'               => 'طول',
+                'meta-title'           => 'عنوان متا',
+                'meta-keywords'        => 'کلمات کلیدی متا',
+                'meta-description'     => 'توضیحات متا',
+                'manage-stock'         => 'مدیریت موجودی',
+                'new'                  => 'جدید',
+                'name'                 => 'نام',
+                'product-number'       => 'شماره محصول',
+                'price'                => 'قیمت',
                 'sku'                  => 'SKU',
-                'name'                 => 'Name',
-                'url-key'              => 'URL Key',
-                'tax-category'         => 'Tax Category',
-                'new'                  => 'New',
-                'featured'             => 'Featured',
-                'visible-individually' => 'Visible Individually',
-                'status'               => 'Status',
-                'short-description'    => 'Short Description',
-                'description'          => 'Description',
-                'price'                => 'Price',
-                'cost'                 => 'Cost',
-                'special-price'        => 'Special Price',
-                'special-price-from'   => 'Special Price From',
-                'special-price-to'     => 'Special Price To',
-                'meta-title'           => 'Meta Title',
-                'meta-keywords'        => 'Meta Keywords',
-                'meta-description'     => 'Meta Description',
-                'length'               => 'Length',
-                'width'                => 'Width',
-                'height'               => 'Height',
-                'weight'               => 'Weight',
-                'color'                => 'Color',
-                'size'                 => 'Size',
-                'brand'                => 'Brand',
-                'guest-checkout'       => 'Guest Checkout',
-                'product-number'       => 'Product Number',
-                'manage-stock'         => 'Manage Stock',
+                'status'               => 'وضعیت',
+                'short-description'    => 'توضیح کوتاه',
+                'special-price'        => 'قیمت ویژه',
+                'special-price-from'   => 'قیمت ویژه از',
+                'special-price-to'     => 'قیمت ویژه تا',
+                'size'                 => 'اندازه',
+                'tax-category'         => 'دسته مالیاتی',
+                'url-key'              => 'کلید URL',
+                'visible-individually' => 'نمایش انفرادی',
+                'width'                => 'عرض',
+                'weight'               => 'وزن',
             ],
 
             'attribute-options' => [
-                'red'    => 'Red',
-                'green'  => 'Green',
-                'yellow' => 'Yellow',
-                'black'  => 'Black',
-                'white'  => 'White',
-                's'      => 'S',
-                'm'      => 'M',
+                'black'  => 'سیاه',
+                'green'  => 'سبز',
                 'l'      => 'L',
+                'm'      => 'M',
+                'red'    => 'قرمز',
+                's'      => 'S',
+                'white'  => 'سفید',
                 'xl'     => 'XL',
+                'yellow' => 'زرد',
             ],
         ],
 
         'category' => [
             'categories' => [
-                'name'        => 'Root',
-                'description' => 'Root Category Description',
+                'description' => 'توضیح دسته اصلی',
+                'name'        => 'اصلی',
             ],
         ],
 
         'cms' => [
             'pages' => [
                 'about-us' => [
-                    'title'   => 'About Us',
-                    'content' => 'About Us Page Content',
+                    'content' => 'محتوای درباره ما',
+                    'title'   => 'درباره ما',
                 ],
 
                 'refund-policy' => [
-                    'title'   => 'Refund Policy',
-                    'content' => 'Refund Policy Page Content',
+                    'content' => 'محتوای سیاست بازپرداخت',
+                    'title'   => 'سیاست بازپرداخت',
                 ],
 
                 'return-policy' => [
-                    'title'   => 'Return Policy',
-                    'content' => 'Return Policy Page Content',
+                    'content' => 'محتوای سیاست بازگشت',
+                    'title'   => 'سیاست بازگشت',
                 ],
 
                 'terms-conditions' => [
-                    'title'   => 'Terms & Conditions',
-                    'content' => 'Terms & Conditions Page Content',
+                    'content' => 'محتوای شرایط و مقررات',
+                    'title'   => 'شرایط و مقررات',
                 ],
 
                 'terms-of-use' => [
-                    'title'   => 'Terms of Use',
-                    'content' => 'Terms of Use Page Content',
+                    'content' => 'محتوای شرایط استفاده',
+                    'title'   => 'شرایط استفاده',
                 ],
 
                 'contact-us' => [
-                    'title'   => 'Contact Us',
-                    'content' => 'Contact Us Page Content',
+                    'content' => 'محتوای تماس با ما',
+                    'title'   => 'تماس با ما',
                 ],
 
                 'customer-service' => [
-                    'title'   => 'Customer Service',
-                    'content' => 'Customer Service Page Content',
+                    'content' => 'محتوای خدمات مشتری',
+                    'title'   => 'خدمات مشتری',
                 ],
 
                 'whats-new' => [
-                    'title'   => 'What\'s New',
-                    'content' => 'What\'s New page content',
+                    'content' => 'محتوای جدید چیست',
+                    'title'   => 'جدید چیست',
                 ],
 
                 'payment-policy' => [
-                    'title'   => 'Payment Policy',
-                    'content' => 'Payment Policy Page Content',
+                    'content' => 'محتوای سیاست پرداخت',
+                    'title'   => 'سیاست پرداخت',
                 ],
 
                 'shipping-policy' => [
-                    'title'   => 'Shipping Policy',
-                    'content' => 'Shipping Policy Page Content',
+                    'content' => 'محتوای سیاست حمل و نقل',
+                    'title'   => 'سیاست حمل و نقل',
                 ],
 
                 'privacy-policy' => [
-                    'title'   => 'Privacy Policy',
-                    'content' => 'Privacy Policy Page Content',
+                    'content' => 'محتوای سیاست حفظ حریم خصوصی',
+                    'title'   => 'سیاست حفظ حریم خصوصی',
                 ],
             ],
         ],
 
         'core' => [
             'channels' => [
-                'name'             => 'Default',
-                'meta-title'       => 'Demo store',
-                'meta-keywords'    => 'Demo store meta keyword',
-                'meta-description' => 'Demo store meta description',
+                'meta-title'       => 'فروشگاه نمونه',
+                'meta-keywords'    => 'فروشگاه نمونه کلمات کلیدی متا',
+                'meta-description' => 'فروشگاه نمونه توضیحات متا',
+                'name'             => 'پیش‌فرض',
             ],
 
             'currencies' => [
-                'CNY' => 'Chinese Yuan',
-                'AED' => 'Dirham',
-                'EUR' => 'EURO',
-                'INR' => 'Indian Rupee',
-                'IRR' => 'Iranian Rial',
-                'ILS' => 'Israeli Shekel',
-                'JPY' => 'Japanese Yen',
-                'GBP' => 'Pound Sterling',
-                'RUB' => 'Russian Ruble',
-                'SAR' => 'Saudi Riyal',
-                'TRY' => 'Turkish Lira',
-                'USD' => 'US Dollar',
-                'UAH' => 'Ukrainian Hryvnia',
+                'CNY' => 'یوان چین',
+                'AED' => 'درهم',
+                'EUR' => 'یورو',
+                'INR' => 'روپیه هندی',
+                'IRR' => 'ریال ایران',
+                'ILS' => 'شقل اسرائیلی',
+                'JPY' => 'ین ژاپن',
+                'GBP' => 'پوند استرلینگ',
+                'RUB' => 'روبل روسیه',
+                'SAR' => 'ریال سعودی',
+                'TRY' => 'لیر ترکیه',
+                'USD' => 'دلار آمریکا',
+                'UAH' => 'هریونیا اوکراین',
             ],
 
             'locales' => [
-                'ar'    => 'Arabic',
-                'bn'    => 'Bengali',
-                'pt_BR' => 'Brazilian Portuguese',
-                'zh_CN' => 'Chinese',
-                'nl'    => 'Dutch',
-                'en'    => 'English',
-                'fr'    => 'French',
-                'de'    => 'German',
-                'he'    => 'Hebrew',
-                'hi_IN' => 'Hindi',
-                'it'    => 'Italian',
-                'ja'    => 'Japanese',
-                'fa'    => 'Persian',
-                'pl'    => 'Polish',
-                'ru'    => 'Russian',
-                'sin'   => 'Sinhala',
-                'es'    => 'Spanish',
-                'tr'    => 'Turkish',
-                'uk'    => 'Ukrainian',
+                'ar'    => 'عربی',
+                'bn'    => 'بنگالی',
+                'de'    => 'آلمانی',
+                'es'    => 'اسپانیایی',
+                'en'    => 'انگلیسی',
+                'fr'    => 'فرانسوی',
+                'fa'    => 'فارسی',
+                'he'    => 'عبری',
+                'hi_IN' => 'هندی',
+                'it'    => 'ایتالیایی',
+                'ja'    => 'ژاپنی',
+                'nl'    => 'هلندی',
+                'pl'    => 'لهستانی',
+                'pt_BR' => 'پرتغالی برزیل',
+                'ru'    => 'روسی',
+                'sin'   => 'سینهالی',
+                'tr'    => 'ترکی',
+                'uk'    => 'اوکراینی',
+                'zh_CN' => 'چینی',
             ],
         ],
 
         'customer' => [
             'customer-groups' => [
-                'guest'     => 'Guest',
-                'general'   => 'General',
-                'wholesale' => 'Wholesale',
+                'guest'     => 'مهمان',
+                'general'   => 'عمومی',
+                'wholesale' => 'عمده',
             ],
         ],
 
         'inventory' => [
             'inventory-sources' => [
-                'name' => 'Default',
+                'name' => 'پیش‌فرض',
             ],
         ],
 
         'shop' => [
             'theme-customizations' => [
                 'image-carousel' => [
-                    'name'  => 'Image Carousel',
+                    'name'    => 'اسلایدر تصاویر',
 
                     'sliders' => [
-                        'title' => 'Get Ready For New Collection',
+                        'title' => 'آماده‌اید برای مجموعه جدید',
                     ],
                 ],
 
                 'offer-information' => [
-                    'name' => 'Offer Information',
+                    'name'    => 'اطلاعات پیشنهاد',
 
                     'content' => [
-                        'title' => 'Get UPTO 40% OFF on your 1st order SHOP NOW',
+                        'title' => 'تا 40٪ تخفیف در سفارش اولتان، همین الان سفارش دهید',
                     ],
                 ],
 
                 'categories-collections' => [
-                    'name' => 'Categories Collections',
+                    'name' => 'مجموعه‌های دسته‌بندی',
                 ],
 
                 'new-products' => [
-                    'name' => 'New Products',
+                    'name'    => 'محصولات جدید',
 
                     'options' => [
-                        'title' => 'New Products',
+                        'title' => 'محصولات جدید',
                     ],
                 ],
 
                 'top-collections' => [
-                    'name' => 'Top Collections',
+                    'name'    => 'مجموعه‌های برتر',
 
                     'content' => [
-                        'title'       => 'The game with our new additions!',
-                        'sub-title-1' => 'Our Collections',
-                        'sub-title-2' => 'Our Collections',
-                        'sub-title-3' => 'Our Collections',
-                        'sub-title-4' => 'Our Collections',
-                        'sub-title-5' => 'Our Collections',
-                        'sub-title-6' => 'Our Collections',
+                        'sub-title-1' => 'مجموعه‌های ما',
+                        'sub-title-2' => 'مجموعه‌های ما',
+                        'sub-title-3' => 'مجموعه‌های ما',
+                        'sub-title-4' => 'مجموعه‌های ما',
+                        'sub-title-5' => 'مجموعه‌های ما',
+                        'sub-title-6' => 'مجموعه‌های ما',
+                        'title'       => 'با افزودن‌های جدیدمان بازی کنید!',
                     ],
                 ],
 
                 'bold-collections' => [
-                    'name' => 'Bold Collections',
+                    'name'    => 'مجموعه‌های جسور',
 
                     'content' => [
-                        'title'       => 'Get Ready for our new Bold Collections!',
-                        'description' => 'Introducing Our New Bold Collections! Elevate your style with daring designs and vibrant statements. Explore striking patterns and bold colors that redefine your wardrobe. Get ready to embrace the extraordinary!',
-                        'btn-title'   => 'View All',
+                        'btn-title'   => 'مشاهده همه',
+                        'description' => 'معرفی مجموعه‌های جسور جدید ما! سبک خود را با طراحی‌های جسور و اظهارات جذاب بالا ببرید. الگوها و رنگ‌های جسوری را کشف کنید که لباس‌درمانی‌تان را بازتعریف می‌کنند. برای پذیرش بی‌نظیری آماده شوید!',
+                        'title'       => 'برای مجموعه‌های جسور جدیدمان آماده شوید!',
                     ],
                 ],
 
                 'featured-collections' => [
-                    'name' => 'Featured Collections',
+                    'name'    => 'مجموعه‌های ویژه',
 
                     'options' => [
-                        'title' => 'Featured Products',
+                        'title' => 'محصولات ویژه',
                     ],
                 ],
 
                 'game-container' => [
-                    'name' => 'Game Container',
+                    'name'    => 'ظروف بازی',
 
                     'content' => [
-                        'title'       => 'The game with our new additions!',
-                        'sub-title-1' => 'Our Collections',
-                        'sub-title-2' => 'Our Collections',
+                        'sub-title-1' => 'مجموعه‌های ما',
+                        'sub-title-2' => 'مجموعه‌های ما',
+                        'title'       => 'با افزودن‌های جدیدمان بازی کنید!',
                     ],
                 ],
 
                 'all-products' => [
-                    'name' => 'All Products',
+                    'name'    => 'همه محصولات',
 
                     'options' => [
-                        'title' => 'All Products',
-                    ],
-                ],
-
-                'bold-collections' => [
-                    'name' => 'Bold Collections',
-
-                    'content' => [
-                        'title'       => 'Get Ready for our new Bold Collections!',
-                        'description' => 'Introducing Our New Bold Collections! Elevate your style with daring designs and vibrant statements. Explore striking patterns and bold colors that redefine your wardrobe. Get ready to embrace the extraordinary!',
-                        'btn-title'   => 'View All',
+                        'title' => 'همه محصولات',
                     ],
                 ],
 
                 'footer-links' => [
-                    'name' => 'Footer Links',
+                    'name'    => 'پیوندهای فوتر',
 
                     'options' => [
-                        'about-us'         => 'About Us',
-                        'contact-us'       => 'Contact Us',
-                        'customer-service' => 'Customer Service',
-                        'whats-new'        => 'What\'s New',
-                        'terms-of-use'     => 'Terms of Use',
-                        'terms-conditions' => 'Terms & Conditions',
-                        'privacy-policy'   => 'Privacy Policy',
-                        'payment-policy'   => 'Payment Policy',
-                        'shipping-policy'  => 'Shipping Policy',
-                        'return-policy'    => 'Return Policy',
-                        'refund-policy'    => 'Refund Policy',
+                        'about-us'         => 'درباره ما',
+                        'contact-us'       => 'تماس با ما',
+                        'customer-service' => 'خدمات مشتریان',
+                        'privacy-policy'   => 'سیاست حریم خصوصی',
+                        'payment-policy'   => 'سیاست پرداخت',
+                        'return-policy'    => 'سیاست بازگشت',
+                        'refund-policy'    => 'سیاست بازپرداخت',
+                        'shipping-policy'  => 'سیاست حمل و نقل',
+                        'terms-of-use'     => 'شرایط استفاده',
+                        'terms-conditions' => 'شرایط و مقررات',
+                        'whats-new'        => 'چه خبر است',
                     ],
                 ],
             ],
@@ -300,12 +290,12 @@ return [
 
         'user' => [
             'users' => [
-                'name' => 'Example',
+                'name' => 'مثال',
             ],
 
             'roles' => [
-                'name'        => 'Administrator',
-                'description' => 'This role users will have all the access',
+                'description' => 'این نقش دسترسی‌هایی را برای کاربران فراهم می‌کند',
+                'name'        => 'مدیر سیستم',
             ],
         ],
     ],

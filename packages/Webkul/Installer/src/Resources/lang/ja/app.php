@@ -4,295 +4,285 @@ return [
     'seeders' => [
         'attribute' => [
             'attribute-families' => [
-                'default' => 'Default',
+                'default' => 'デフォルト',
             ],
 
             'attribute-groups' => [
-                'general'           => 'General',
-                'description'       => 'Description',
-                'meta-description'  => 'Meta Description',
-                'price'             => 'Price',
-                'shipping'          => 'Shipping',
-                'settings'          => 'Settings',
-                'inventories'       => 'Inventories',
+                'description'       => '説明',
+                'general'           => '一般',
+                'inventories'       => '在庫',
+                'meta-description'  => 'メタ説明',
+                'price'             => '価格',
+                'shipping'          => '配送',
+                'settings'          => '設定',
             ],
 
             'attributes' => [
+                'brand'                => 'ブランド',
+                'color'                => '色',
+                'cost'                 => 'コスト',
+                'description'          => '説明',
+                'featured'             => '注目',
+                'guest-checkout'       => 'ゲストチェックアウト',
+                'height'               => '高さ',
+                'length'               => '長さ',
+                'meta-title'           => 'メタタイトル',
+                'meta-keywords'        => 'メタキーワード',
+                'meta-description'     => 'メタ説明',
+                'manage-stock'         => '在庫管理',
+                'new'                  => '新規',
+                'name'                 => '名前',
+                'product-number'       => '製品番号',
+                'price'                => '価格',
                 'sku'                  => 'SKU',
-                'name'                 => 'Name',
-                'url-key'              => 'URL Key',
-                'tax-category'         => 'Tax Category',
-                'new'                  => 'New',
-                'featured'             => 'Featured',
-                'visible-individually' => 'Visible Individually',
-                'status'               => 'Status',
-                'short-description'    => 'Short Description',
-                'description'          => 'Description',
-                'price'                => 'Price',
-                'cost'                 => 'Cost',
-                'special-price'        => 'Special Price',
-                'special-price-from'   => 'Special Price From',
-                'special-price-to'     => 'Special Price To',
-                'meta-title'           => 'Meta Title',
-                'meta-keywords'        => 'Meta Keywords',
-                'meta-description'     => 'Meta Description',
-                'length'               => 'Length',
-                'width'                => 'Width',
-                'height'               => 'Height',
-                'weight'               => 'Weight',
-                'color'                => 'Color',
-                'size'                 => 'Size',
-                'brand'                => 'Brand',
-                'guest-checkout'       => 'Guest Checkout',
-                'product-number'       => 'Product Number',
-                'manage-stock'         => 'Manage Stock',
+                'status'               => 'ステータス',
+                'short-description'    => '短い説明',
+                'special-price'        => '特別価格',
+                'special-price-from'   => '特別価格 開始',
+                'special-price-to'     => '特別価格 終了',
+                'size'                 => 'サイズ',
+                'tax-category'         => '税カテゴリー',
+                'url-key'              => 'URLキー',
+                'visible-individually' => '個別に表示',
+                'width'                => '幅',
+                'weight'               => '重さ',
             ],
 
             'attribute-options' => [
-                'red'    => 'Red',
-                'green'  => 'Green',
-                'yellow' => 'Yellow',
-                'black'  => 'Black',
-                'white'  => 'White',
-                's'      => 'S',
-                'm'      => 'M',
+                'black'  => '黒',
+                'green'  => '緑',
                 'l'      => 'L',
+                'm'      => 'M',
+                'red'    => '赤',
+                's'      => 'S',
+                'white'  => '白',
                 'xl'     => 'XL',
+                'yellow' => '黄色',
             ],
         ],
 
         'category' => [
             'categories' => [
-                'name'        => 'Root',
-                'description' => 'Root Category Description',
+                'description' => 'ルートカテゴリの説明',
+                'name'        => 'ルート',
             ],
         ],
 
         'cms' => [
             'pages' => [
                 'about-us' => [
-                    'title'   => 'About Us',
-                    'content' => 'About Us Page Content',
+                    'content' => '会社概要ページのコンテンツ',
+                    'title'   => '会社概要',
                 ],
 
                 'refund-policy' => [
-                    'title'   => 'Refund Policy',
-                    'content' => 'Refund Policy Page Content',
+                    'content' => '返品ポリシー ページのコンテンツ',
+                    'title'   => '返品ポリシー',
                 ],
 
                 'return-policy' => [
-                    'title'   => 'Return Policy',
-                    'content' => 'Return Policy Page Content',
+                    'content' => '返却ポリシー ページのコンテンツ',
+                    'title'   => '返却ポリシー',
                 ],
 
                 'terms-conditions' => [
-                    'title'   => 'Terms & Conditions',
-                    'content' => 'Terms & Conditions Page Content',
+                    'content' => '利用規約ページのコンテンツ',
+                    'title'   => '利用規約',
                 ],
 
                 'terms-of-use' => [
-                    'title'   => 'Terms of Use',
-                    'content' => 'Terms of Use Page Content',
+                    'content' => '利用規約ページのコンテンツ',
+                    'title'   => '利用規約',
                 ],
 
                 'contact-us' => [
-                    'title'   => 'Contact Us',
-                    'content' => 'Contact Us Page Content',
+                    'content' => 'お問い合わせページのコンテンツ',
+                    'title'   => 'お問い合わせ',
                 ],
 
                 'customer-service' => [
-                    'title'   => 'Customer Service',
-                    'content' => 'Customer Service Page Content',
+                    'content' => 'カスタマーサービスページのコンテンツ',
+                    'title'   => 'カスタマーサービス',
                 ],
 
                 'whats-new' => [
-                    'title'   => 'What\'s New',
-                    'content' => 'What\'s New page content',
+                    'content' => '新着情報ページのコンテンツ',
+                    'title'   => '新着情報',
                 ],
 
                 'payment-policy' => [
-                    'title'   => 'Payment Policy',
-                    'content' => 'Payment Policy Page Content',
+                    'content' => '支払いポリシー ページのコンテンツ',
+                    'title'   => '支払いポリシー',
                 ],
 
                 'shipping-policy' => [
-                    'title'   => 'Shipping Policy',
-                    'content' => 'Shipping Policy Page Content',
+                    'content' => '配送ポリシー ページのコンテンツ',
+                    'title'   => '配送ポリシー',
                 ],
 
                 'privacy-policy' => [
-                    'title'   => 'Privacy Policy',
-                    'content' => 'Privacy Policy Page Content',
+                    'content' => 'プライバシーポリシー ページのコンテンツ',
+                    'title'   => 'プライバシーポリシー',
                 ],
             ],
         ],
 
         'core' => [
             'channels' => [
-                'name'             => 'Default',
-                'meta-title'       => 'Demo store',
-                'meta-keywords'    => 'Demo store meta keyword',
-                'meta-description' => 'Demo store meta description',
+                'meta-title'       => 'デモストア',
+                'meta-keywords'    => 'デモストアのメタキーワード',
+                'meta-description' => 'デモストアのメタ説明',
+                'name'             => 'デフォルト',
             ],
 
             'currencies' => [
-                'CNY' => 'Chinese Yuan',
-                'AED' => 'Dirham',
-                'EUR' => 'EURO',
-                'INR' => 'Indian Rupee',
-                'IRR' => 'Iranian Rial',
-                'ILS' => 'Israeli Shekel',
-                'JPY' => 'Japanese Yen',
-                'GBP' => 'Pound Sterling',
-                'RUB' => 'Russian Ruble',
-                'SAR' => 'Saudi Riyal',
-                'TRY' => 'Turkish Lira',
-                'USD' => 'US Dollar',
-                'UAH' => 'Ukrainian Hryvnia',
+                'CNY' => '中国元',
+                'AED' => 'ディルハム',
+                'EUR' => 'ユーロ',
+                'INR' => 'インドルピー',
+                'IRR' => 'イランリアル',
+                'ILS' => 'イスラエルシェケル',
+                'JPY' => '日本円',
+                'GBP' => 'ポンドスターリング',
+                'RUB' => 'ロシアルーブル',
+                'SAR' => 'サウジリヤル',
+                'TRY' => 'トルコリラ',
+                'USD' => '米ドル',
+                'UAH' => 'ウクライナフリブニ',
             ],
 
             'locales' => [
-                'ar'    => 'Arabic',
-                'bn'    => 'Bengali',
-                'pt_BR' => 'Brazilian Portuguese',
-                'zh_CN' => 'Chinese',
-                'nl'    => 'Dutch',
-                'en'    => 'English',
-                'fr'    => 'French',
-                'de'    => 'German',
-                'he'    => 'Hebrew',
-                'hi_IN' => 'Hindi',
-                'it'    => 'Italian',
-                'ja'    => 'Japanese',
-                'fa'    => 'Persian',
-                'pl'    => 'Polish',
-                'ru'    => 'Russian',
-                'sin'   => 'Sinhala',
-                'es'    => 'Spanish',
-                'tr'    => 'Turkish',
-                'uk'    => 'Ukrainian',
+                'ar'    => 'アラビア語',
+                'bn'    => 'ベンガル語',
+                'de'    => 'ドイツ語',
+                'es'    => 'スペイン語',
+                'en'    => '英語',
+                'fr'    => 'フランス語',
+                'fa'    => 'ペルシャ語',
+                'he'    => 'ヘブライ語',
+                'hi_IN' => 'ヒンディー語',
+                'it'    => 'イタリア語',
+                'ja'    => '日本語',
+                'nl'    => 'オランダ語',
+                'pl'    => 'ポーランド語',
+                'pt_BR' => 'ブラジルポルトガル語',
+                'ru'    => 'ロシア語',
+                'sin'   => 'シンハラ語',
+                'tr'    => 'トルコ語',
+                'uk'    => 'ウクライナ語',
+                'zh_CN' => '中国語',
             ],
         ],
 
         'customer' => [
             'customer-groups' => [
-                'guest'     => 'Guest',
-                'general'   => 'General',
-                'wholesale' => 'Wholesale',
+                'guest'     => 'ゲスト',
+                'general'   => '一般',
+                'wholesale' => '卸売',
             ],
         ],
 
         'inventory' => [
             'inventory-sources' => [
-                'name' => 'Default',
+                'name' => 'デフォルト',
             ],
         ],
 
         'shop' => [
             'theme-customizations' => [
                 'image-carousel' => [
-                    'name'  => 'Image Carousel',
+                    'name'  => 'イメージカルーセル',
 
                     'sliders' => [
-                        'title' => 'Get Ready For New Collection',
+                        'title' => '新コレクションに備えて',
                     ],
                 ],
 
                 'offer-information' => [
-                    'name' => 'Offer Information',
+                    'name' => '特売情報',
 
                     'content' => [
-                        'title' => 'Get UPTO 40% OFF on your 1st order SHOP NOW',
+                        'title' => '初回注文で最大40％OFF ショッピングを今すぐ開始',
                     ],
                 ],
 
                 'categories-collections' => [
-                    'name' => 'Categories Collections',
+                    'name' => 'カテゴリーコレクション',
                 ],
 
                 'new-products' => [
-                    'name' => 'New Products',
+                    'name' => '新製品',
 
                     'options' => [
-                        'title' => 'New Products',
+                        'title' => '新製品',
                     ],
                 ],
 
                 'top-collections' => [
-                    'name' => 'Top Collections',
+                    'name' => 'トップコレクション',
 
                     'content' => [
-                        'title'       => 'The game with our new additions!',
-                        'sub-title-1' => 'Our Collections',
-                        'sub-title-2' => 'Our Collections',
-                        'sub-title-3' => 'Our Collections',
-                        'sub-title-4' => 'Our Collections',
-                        'sub-title-5' => 'Our Collections',
-                        'sub-title-6' => 'Our Collections',
+                        'sub-title-1' => '私たちのコレクション',
+                        'sub-title-2' => '私たちのコレクション',
+                        'sub-title-3' => '私たちのコレクション',
+                        'sub-title-4' => '私たちのコレクション',
+                        'sub-title-5' => '私たちのコレクション',
+                        'sub-title-6' => '私たちのコレクション',
+                        'title'       => '新アイテムでゲームを楽しむ！',
                     ],
                 ],
 
                 'bold-collections' => [
-                    'name' => 'Bold Collections',
+                    'name' => 'ボールドコレクション',
 
                     'content' => [
-                        'title'       => 'Get Ready for our new Bold Collections!',
-                        'description' => 'Introducing Our New Bold Collections! Elevate your style with daring designs and vibrant statements. Explore striking patterns and bold colors that redefine your wardrobe. Get ready to embrace the extraordinary!',
-                        'btn-title'   => 'View All',
+                        'btn-title'   => 'すべて表示',
+                        'description' => '新しいボールドコレクションを紹介します！ 大胆なデザインと鮮やかなステートメントでスタイルを引き立てましょう。 ワードローブを再定義する印象的なパターンと大胆な色を探索します。 途方もないものを受け入れる準備をしましょう！',
+                        'title'       => '新しいボールドコレクションに備えて',
                     ],
                 ],
 
                 'featured-collections' => [
-                    'name' => 'Featured Collections',
+                    'name' => '特集コレクション',
 
                     'options' => [
-                        'title' => 'Featured Products',
+                        'title' => '注目製品',
                     ],
                 ],
 
                 'game-container' => [
-                    'name' => 'Game Container',
+                    'name' => 'ゲームコンテナ',
 
                     'content' => [
-                        'title'       => 'The game with our new additions!',
-                        'sub-title-1' => 'Our Collections',
-                        'sub-title-2' => 'Our Collections',
+                        'sub-title-1' => '私たちのコレクション',
+                        'sub-title-2' => '私たちのコレクション',
+                        'title'       => '新アイテムでゲームを楽しむ！',
                     ],
                 ],
 
                 'all-products' => [
-                    'name' => 'All Products',
+                    'name' => 'すべての製品',
 
                     'options' => [
-                        'title' => 'All Products',
-                    ],
-                ],
-
-                'bold-collections' => [
-                    'name' => 'Bold Collections',
-
-                    'content' => [
-                        'title'       => 'Get Ready for our new Bold Collections!',
-                        'description' => 'Introducing Our New Bold Collections! Elevate your style with daring designs and vibrant statements. Explore striking patterns and bold colors that redefine your wardrobe. Get ready to embrace the extraordinary!',
-                        'btn-title'   => 'View All',
+                        'title' => 'すべての製品',
                     ],
                 ],
 
                 'footer-links' => [
-                    'name' => 'Footer Links',
+                    'name' => 'フッターリンク',
 
                     'options' => [
-                        'about-us'         => 'About Us',
-                        'contact-us'       => 'Contact Us',
-                        'customer-service' => 'Customer Service',
-                        'whats-new'        => 'What\'s New',
-                        'terms-of-use'     => 'Terms of Use',
-                        'terms-conditions' => 'Terms & Conditions',
-                        'privacy-policy'   => 'Privacy Policy',
-                        'payment-policy'   => 'Payment Policy',
-                        'shipping-policy'  => 'Shipping Policy',
-                        'return-policy'    => 'Return Policy',
-                        'refund-policy'    => 'Refund Policy',
+                        'about-us'         => '当社について',
+                        'contact-us'       => 'お問い合わせ',
+                        'customer-service' => 'カスタマーサービス',
+                        'privacy-policy'   => 'プライバシーポリシー',
+                        'payment-policy'   => '支払いポリシー',
+                        'return-policy'    => '返品ポリシー',
+                        'refund-policy'    => '返金ポリシー',
+                        'shipping-policy'  => '配送ポリシー',
+                        'terms-of-use'     => '利用規約',
+                        'terms-conditions' => '利用条件',
+                        'whats-new'        => '新着情報',
                     ],
                 ],
             ],
@@ -300,12 +290,12 @@ return [
 
         'user' => [
             'users' => [
-                'name' => 'Example',
+                'name' => '例',
             ],
 
             'roles' => [
-                'name'        => 'Administrator',
-                'description' => 'This role users will have all the access',
+                'description' => 'このロールのユーザーにはすべてのアクセス権があります',
+                'name'        => '管理者',
             ],
         ],
     ],
