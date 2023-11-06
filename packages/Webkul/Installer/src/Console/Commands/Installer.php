@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\File;
+use Webkul\Installer\Events\ComposerEvents;
 
 class Installer extends Command
 {
@@ -55,6 +56,8 @@ class Installer extends Command
         $this->info($result);
 
         $this->createAdminCredential();
+
+        ComposerEvents::postCreateProject();
     }
 
     /**
@@ -92,15 +95,14 @@ class Installer extends Command
             $this->updateEnvVariable('APP_NAME', 'Please Enter the Application Name or Press enter to Continue', 'admin');
 
             // Updating App Default Locales
-            $locales = ['ar', 'bn', 'de', 'en', 'es', 'fa', 'fr', 'he', 'hi_IN', 'it', 'ja', 'nl', 'pl', 'pt_BR', 'ru', 'sin', 'tr', 'uk', 'zh_CN'];
-            $this->updateEnvChoice('APP_LOCALE', 'Please select the default locale or Press enter to Continue', $locales, 'en');
+            $this->updateEnvChoice('APP_LOCALE', 'Please select the default locale.', $this->locales());
 
+            // Updating App Default Timezone
             $this->envUpdate('APP_TIMEZONE', date_default_timezone_get());
             $this->info('Your Default Timezone is ' . date_default_timezone_get());
 
             // Updating App Default Currencies
-            $currencies = ['CNY', 'AED', 'EUR', 'INR', 'IRR', 'ILS', 'JPY', 'GBP', 'RUB', 'SAR', 'TRY', 'USD', 'UAH'];
-            $this->updateEnvChoice('APP_CURRENCY', 'Please enter the default currency or Press enter to Continue', $currencies, 'USD');
+            $this->updateEnvChoice('APP_CURRENCY', 'Please enter the default currency.', $this->currencies());
 
             // Updating Database Configuration
             $this->askForDatabaseDetails();
@@ -136,7 +138,11 @@ class Installer extends Command
         $dbDetails['DB_USERNAME'] = $this->anticipate('Please Enter your database username?', ['root']);
         $dbDetails['DB_PASSWORD'] = $this->secret('Please Enter your database password?');
 
-        if (! $dbDetails['DB_DATABASE'] || ! $dbDetails['DB_USERNAME'] || ! $dbDetails['DB_PASSWORD']) {
+        if (
+            ! $dbDetails['DB_DATABASE']
+            || ! $dbDetails['DB_USERNAME']
+            || ! $dbDetails['DB_PASSWORD']
+        ) {
             return $this->error('Please Enter the database credentials.');
         }
 
@@ -199,6 +205,13 @@ class Installer extends Command
         // Here! Asking for Admin Name, Email and Password
         $adminName = $this->ask('Please Enter the Name for admin User or press enter to continue', 'Example');
         $adminEmail = $this->ask('Please Enter the Email for admin login:', 'admin@example.com');
+
+        if (! filter_var($adminEmail, FILTER_VALIDATE_EMAIL)) {
+            $this->error('The email address you entered is not valid please try again.');
+
+            return $this->createAdminCredential();
+        }
+
         $adminPassword = $this->ask('Please Enter the Password for admin login:', 'admin123');
 
         $password = password_hash($adminPassword, PASSWORD_BCRYPT, ['cost' => 10]);
@@ -257,11 +270,13 @@ class Installer extends Command
      * @param  string  $defaultValue
      * @return void
      */
-    protected function updateEnvChoice($key, $question, $choices, $defaultValue)
+    protected function updateEnvChoice($key, $question, $choices)
     {
-        $choice = $this->choice($question, $choices, array_search($defaultValue, $choices));
+        $choice = $this->choice($question, $choices);
 
-        $this->envUpdate("$key", $choice);
+        preg_match('/\((.*?)\)/', $choice, $matches);
+
+        $this->envUpdate("$key", $matches[1]);
     }
 
     /**
@@ -283,5 +298,59 @@ class Installer extends Command
         $data = preg_replace("/$key=(.*)/", "$key=$value", $data);
 
         file_put_contents(base_path('.env'), $data);
+    }
+
+    /**
+     * Static Locales List
+     *
+     * @return array
+     */
+    protected static function locales()
+    {
+        return [
+            'Arabic (ar)',
+            'Bengali (bn)',
+            'German (de)',
+            'English (en)',
+            'Spanish (es)',
+            'Persian (fa)',
+            'French (fr)',
+            'Hebrew (he)',
+            'Hindi (hi_IN)',
+            'Italian (it)',
+            'Japanese (ja)',
+            'Dutch (nl)',
+            'Polish (pl)',
+            'Brazilian Portuguese (pt_BR)',
+            'Russian (ru)',
+            'Sinhala (sin)',
+            'Turkish (tr)',
+            'Ukrainian (uk)',
+            'Chinese (zh_CN)',
+        ];
+    }
+
+    /**
+     * Static Currencies List
+     *
+     * @return array
+     */
+    protected static function currencies()
+    {
+        return [
+            'Chinese Yuan (CNY)',
+            'Dirham (AED)',
+            'Euro (EUR)',
+            'Indian Rupee (INR)',
+            'Iranian Rial (IRR)',
+            'Israeli Shekel (ILS)',
+            'Japanese Yen (JPY)',
+            'Pound Sterling (GBP)',
+            'Russian Ruble (RUB)',
+            'Saudi Riyal (SAR)',
+            'Turkish Lira (TRY)',
+            'US Dollar (USD)',
+            'Ukrainian Hryvnia (UAH)',
+        ];
     }
 }
