@@ -65,7 +65,7 @@ class Installer extends Command
      */
     protected function checkForEnvFile()
     {
-        if (!file_exists(base_path('.env'))) {
+        if (! file_exists(base_path('.env'))) {
             $this->info('Creating the environment configuration file.');
 
             File::copy('.env.example', '.env');
@@ -120,7 +120,7 @@ class Installer extends Command
 
         $dbConnection = $this->choice('Please select the default Database Connection or Press enter to Continue', $connectionOptions, 0);
 
-        if (!in_array($dbConnection, $connectionOptions)) {
+        if (! in_array($dbConnection, $connectionOptions)) {
             $this->error('Please select the valid Database Connection.');
 
             return $this->askForDatabaseDetails();
@@ -139,9 +139,9 @@ class Installer extends Command
         $dbDetails['DB_PASSWORD'] = $this->secret('Please Enter your database password?');
 
         if (
-            !$dbDetails['DB_DATABASE']
-            || !$dbDetails['DB_USERNAME']
-            || !$dbDetails['DB_PASSWORD']
+            ! $dbDetails['DB_DATABASE']
+            || ! $dbDetails['DB_USERNAME']
+            || ! $dbDetails['DB_PASSWORD']
         ) {
             return $this->error('Please Enter the database credentials.');
         }
@@ -206,7 +206,7 @@ class Installer extends Command
         $adminName = $this->ask('Please Enter the Name for admin User or press enter to continue', 'Example');
         $adminEmail = $this->ask('Please Enter the Email for admin login:', 'admin@example.com');
 
-        if (!filter_var($adminEmail, FILTER_VALIDATE_EMAIL)) {
+        if (! filter_var($adminEmail, FILTER_VALIDATE_EMAIL)) {
             $this->error('The email address you entered is not valid please try again.');
 
             return $this->createAdminCredential();
