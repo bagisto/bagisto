@@ -1,5 +1,5 @@
 <x-admin::layouts>
-    {{-- Title of the page --}}
+    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.marketing.communications.campaigns.create.title')
     </x-slot:title>
@@ -7,7 +7,7 @@
 
     {!! view_render_event('bagisto.admin.marketing.communications.campaigns.create.before') !!}
 
-    {{-- Input Form --}}
+    <!-- Input Form -->
     <x-admin::form :action="route('admin.marketing.communications.campaigns.store')">
 
         {!! view_render_event('bagisto.admin.marketing.communications.campaigns.create.create_form_controls.before') !!}
@@ -18,7 +18,7 @@
             </p>
 
             <div class="flex gap-x-[10px] items-center">
-                {{-- Cancel Button --}}
+                <!-- Cancel Button -->
                 <a
                     href="{{ route('admin.marketing.communications.campaigns.index') }}"
                     class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
@@ -26,7 +26,7 @@
                     @lang('admin::app.marketing.communications.campaigns.create.back-btn')
                 </a>
 
-                {{-- Save Button --}}
+                <!-- Save Button -->
                 <button 
                     type="submit" 
                     class="py-[6px] px-[12px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
@@ -35,21 +35,21 @@
                 </button>
             </div>
         </div>
-        {{-- Informations --}}
+        <!-- Informations -->
         <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
-            {{-- Left Section --}}
+            <!-- Left Section -->
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
 
                 {!! view_render_event('bagisto.admin.marketing.communications.campaigns.create.card.general.before') !!}
 
-                {{-- General Section --}}
+                <!-- General Section -->
                 <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.marketing.communications.campaigns.create.general')
                     </p>
 
                     <div class="mb-[10px]">
-                        {{-- Name --}}
+                        <!-- Name -->
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.communications.campaigns.create.name')
@@ -71,7 +71,7 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
-                        {{-- Subject --}}
+                        <!-- Subject -->
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.communications.campaigns.create.subject')
@@ -93,7 +93,7 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
-                         {{-- Event --}}
+                         <!-- Event -->
                          <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.communications.campaigns.create.event')
@@ -127,7 +127,7 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
-                        {{-- Email Template --}}
+                        <!-- Email Template -->
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.communications.campaigns.create.email-template')
@@ -167,12 +167,12 @@
 
             </div>
 
-            {{-- Right Section --}}
+            <!-- Right Section -->
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-md:w-full">
 
                 {!! view_render_event('bagisto.admin.marketing.communications.campaigns.create.card.accordion.setting.before') !!}
 
-                {{-- Setting --}}
+                <!-- Setting -->
                 <x-admin::accordion>
                     <x-slot:header>
                         <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
@@ -181,7 +181,7 @@
                     </x-slot:header>
                 
                     <x-slot:content>
-                        {{-- Channel --}}
+                        <!-- Channel -->
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.communications.campaigns.create.channel')
@@ -215,7 +215,7 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
-                        {{-- Customer Group --}}
+                        <!-- Customer Group -->
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.communications.campaigns.create.customer-group')
@@ -249,7 +249,7 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
-                         {{-- Status --}}
+                         <!-- Status -->
                          <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.marketing.communications.campaigns.create.status')

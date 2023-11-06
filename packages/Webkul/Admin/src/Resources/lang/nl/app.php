@@ -2600,7 +2600,7 @@ return [
                 'name'                          => 'Naam',
                 'product-carousel'              => 'Product Carrousel',
                 'product-carousel-description'  => 'Toon producten elegant met een dynamische en responsieve productcarrousel.',
-                'path'                          => 'Pad',
+                'url'                           => 'URL',
                 'preview'                       => 'Voorbeeld',
                 'slider'                        => 'Schuifregelaar',
                 'static-content-description'    => 'Verbeter de betrokkenheid met beknopte, informatieve statische inhoud voor uw publiek.',
@@ -2618,6 +2618,7 @@ return [
                 'update-slider'                 => 'Schuifregelaar bijwerken',
                 'value-input'                   => 'Waarde',
                 'value'                         => 'Waarde: :value',
+                'image-title'                   => 'Afbeeldingstitel',
             ],
 
             'create-success' => 'Thema is succesvol aangemaakt',

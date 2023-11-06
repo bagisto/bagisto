@@ -48,11 +48,11 @@
             {!! core()->getConfigData('general.content.custom_scripts.custom_css') !!}
         </style>
 
-        {!! view_render_event('bagisto.shop.layout.head') !!}
+        {!! view_render_event('bagisto.admin.layout.head') !!}
     </head>
 
     <body class="h-full dark:bg-gray-950">
-        {!! view_render_event('bagisto.shop.layout.body.before') !!}
+        {!! view_render_event('bagisto.admin.layout.body.before') !!}
 
         <div id="app" class="h-full">
             {{-- Flash Message Blade Component --}}
@@ -61,7 +61,7 @@
             {{-- Confirm Modal Blade Component --}}
             <x-admin::modal.confirm />
 
-            {!! view_render_event('bagisto.shop.layout.content.before') !!}
+            {!! view_render_event('bagisto.admin.layout.content.before') !!}
 
             {{-- Page Header Blade Component --}}
             <x-admin::layouts.header />
@@ -85,10 +85,10 @@
                 </div>
             </div>
 
-            {!! view_render_event('bagisto.shop.layout.content.after') !!}
+            {!! view_render_event('bagisto.admin.layout.content.after') !!}
         </div>
 
-        {!! view_render_event('bagisto.shop.layout.body.after') !!}
+        {!! view_render_event('bagisto.admin.layout.body.after') !!}
 
         @stack('scripts')
     </body>

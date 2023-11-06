@@ -1,5 +1,5 @@
 <x-admin::layouts>
-    {{-- Title of the page --}}
+    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.sales.invoices.view.title', ['invoice_id' => $invoice->increment_id ?? $invoice->id])
     </x-slot:title>
@@ -8,7 +8,7 @@
         $order = $invoice->order;
     @endphp
 
-    {{-- Main Body --}}
+    <!-- Main Body -->
     <div class="grid">
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
             {!! view_render_event('sales.invoice.title.before', ['order' => $order]) !!}
@@ -24,7 +24,7 @@
             {!! view_render_event('sales.invoice.title.after', ['order' => $order]) !!}
 
             <div class="flex gap-x-[10px] items-center">
-                {{-- Back Button --}}
+                <!-- Back Button -->
                 <a
                     href="{{ route('admin.sales.invoices.index') }}"
                     class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    {{-- Filter row --}}
+    <!-- Filter row -->
     <div class="flex  gap-[16px] justify-between items-center mt-[28px] max-md:flex-wrap">
         <div class="flex gap-x-[4px] gap-y-[8px] items-center flex-wrap">
             {!! view_render_event('sales.invoice.page_action.before', ['order' => $order]) !!}
@@ -49,7 +49,7 @@
                 @lang('admin::app.sales.invoices.view.print')
             </a>
 
-            {{-- Send Duplicate Invoice Modal --}}
+            <!-- Send Duplicate Invoice Modal -->
             <div>
                 <button
                     type="button"
@@ -117,22 +117,22 @@
         </div>
     </div>
 
-    {{-- body content --}}
+    <!-- body content -->
     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
-        {{-- Left sub-component --}}
+        <!-- Left sub-component -->
         <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-            {{-- Invoice Item Section --}}
+            <!-- Invoice Item Section -->
             <div class="bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px] p-[16px]">
                     @lang('admin::app.sales.invoices.view.invoice-items') ({{ count($invoice->items) }})
                 </p>
 
                 <div class="grid">
-                    {{-- Invoice Item Details--}}
+                    <!-- Invoice Item Details-->
                     @foreach($invoice->items as $item)
                         <div class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300 dark:border-gray-800">
                             <div class="flex gap-[10px]">
-                                {{-- Product Image --}}
+                                <!-- Product Image -->
                                 @if ($item->product?->base_image_url)
                                     <img
                                         class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
@@ -149,7 +149,7 @@
                                 @endif
                                 
                                 <div class="grid gap-[6px] place-content-start">
-                                    {{-- Item Name --}}
+                                    <!-- Item Name -->
                                     <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                         {{ $item->name }}
                                     </p>
@@ -163,7 +163,7 @@
 
                                     <div class="flex flex-col gap-[6px] place-items-start">
                                         @if (isset($item->additional['attributes']))
-                                            {{-- Item Additional Details --}} 
+                                            <!-- Item Additional Details -->
                                             <p class="text-gray-600 dark:text-gray-300">
                                                 @foreach ($item->additional['attributes'] as $attribute)
                                                     {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
@@ -171,12 +171,12 @@
                                             </p>
                                         @endif
 
-                                        {{--SKU --}}
+                                        <!--SKU -->
                                         <p class="text-gray-600 dark:text-gray-300">
                                              @lang('admin::app.sales.invoices.view.sku', ['sku' => $item->getTypeInstance()->getOrderedItem($item)->sku])
                                         </p>
 
-                                        {{-- Quantity --}}
+                                        <!-- Quantity -->
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.sales.invoices.view.qty', ['qty' => $item->qty])
                                         </p>
@@ -185,30 +185,30 @@
                             </div>
 
                             <div class="grid gap-[4px] place-content-start">
-                                {{-- Item Grand Total --}}
+                                <!-- Item Grand Total -->
                                 <p class="flex items-center gap-x-[4px] justify-end text-[16px] text-gray-800 dark:text-white font-semibold">
                                     {{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }}
                                 </p>
 
-                                {{-- Item Base Price --}}
+                                <!-- Item Base Price -->
                                 <div class="flex flex-col gap-[6px] items-end place-items-start">
                                     <p class="text-gray-600 dark:text-gray-300">
                                         @lang('admin::app.sales.invoices.view.price', ['price' => core()->formatBasePrice($item->base_price)])
                                     </p>
 
-                                    {{-- Item Tax Amount --}}
+                                    <!-- Item Tax Amount -->
                                     <p class="text-gray-600 dark:text-gray-300">
                                         @lang('admin::app.sales.invoices.view.tax', ['tax' => core()->formatBasePrice($item->base_tax_amount)])
                                     </p>
 
-                                    {{-- Item Discount --}}
+                                    <!-- Item Discount -->
                                     @if ($invoice->base_discount_amount > 0)
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.sales.invoices.view.discount', ['discount' => core()->formatBasePrice($item->base_discount_amount)])
                                         </p>
                                     @endif
 
-                                    {{-- Item Sub-Total --}}
+                                    <!-- Item Sub-Total -->
                                     <p class="text-gray-600 dark:text-gray-300">
                                         @lang('admin::app.sales.invoices.view.sub-total', ['sub_total' => core()->formatBasePrice($item->base_total)])
                                     </p>
@@ -218,7 +218,7 @@
                     @endforeach
                 </div>
 
-                {{--Sale Summary --}}
+                <!--Sale Summary -->
                 <div class="flex w-full gap-[10px] justify-end mt-[16px] p-[16px]">
                     <div class="flex flex-col gap-y-[6px]">
                         <p class="text-gray-600 dark:text-gray-300 font-semibold">
@@ -245,29 +245,29 @@
                     </div>
 
                     <div class="flex flex-col gap-y-[6px]">
-                        {{-- Subtotal --}}
+                        <!-- Subtotal -->
                         <p class="text-gray-600 dark:text-gray-300 font-semibold">
                             {{ core()->formatBasePrice($invoice->base_sub_total) }}
                         </p>
 
-                        {{-- Shipping and Handling --}}
+                        <!-- Shipping and Handling -->
                         <p class="text-gray-600 dark:text-gray-300">
                             {{ core()->formatBasePrice($invoice->base_shipping_amount) }}
                         </p>
 
-                        {{-- Tax --}}
+                        <!-- Tax -->
                         <p class="text-gray-600 dark:text-gray-300">
                             {{ core()->formatBasePrice($invoice->base_tax_amount) }}
                         </p>
 
-                        {{-- Discount --}}
+                        <!-- Discount -->
                         @if ($invoice->base_discount_amount > 0)
                             <p class="text-gray-600 dark:text-gray-300">
                                 {{ core()->formatBasePrice($invoice->base_discount_amount) }}
                             </p>
                         @endif
                         
-                        {{-- Grand Total --}}
+                        <!-- Grand Total -->
                         <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                             {{ core()->formatBasePrice($invoice->base_grand_total) }}
                         </p>
@@ -276,9 +276,9 @@
             </div>
         </div>
 
-        {{-- Right sub-component --}}
+        <!-- Right sub-component -->
         <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
-            {{-- component 1 --}}
+            <!-- component 1 -->
             <x-admin::accordion>
                 <x-slot:header>
                     <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
@@ -302,7 +302,7 @@
                     </div>
 
                     @if ($order->billing_address || $order->shipping_address)
-                        {{-- Billing Address --}}
+                        <!-- Billing Address -->
                         @if ($order->billing_address)
                             <div class="{{ $order->shipping_address ? 'pb-[16px]' : '' }}">
                                 <span class="block w-full border-b-[1px] dark:border-gray-800  "></span>
@@ -319,7 +319,7 @@
                             </div>
                         @endif
 
-                        {{-- Shipping Address --}}
+                        <!-- Shipping Address -->
                         @if ($order->shipping_address)
                             <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
 
@@ -337,7 +337,7 @@
                 </x-slot:content>
             </x-admin::accordion> 
             
-            {{-- component 2 --}}
+            <!-- component 2 -->
             <x-admin::accordion>
                 <x-slot:header>
                     <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
@@ -356,33 +356,33 @@
                         </div>
 
                         <div class="flex  flex-col gap-y-[6px]">
-                            {{-- Order Id --}}
+                            <!-- Order Id -->
                             <p class="text-blue-600 font-semibold transition-all hover:underline">
                                 <a href="{{ route('admin.sales.orders.view', $order->id) }}">#{{ $order->increment_id }}</a>
                             </p>
 
                             {!! view_render_event('sales.invoice.increment_id.after', ['order' => $order]) !!}
 
-                            {{-- Order Date --}}
+                            <!-- Order Date -->
                             <p class="text-gray-600 dark:text-gray-300">
                                 {{ core()->formatDate($order->created_at) }}
                             </p>
 
                             {!! view_render_event('sales.invoice.created_at.after', ['order' => $order]) !!}
 
-                            {{-- Order Status --}}
+                            <!-- Order Status -->
                             <p class="text-gray-600 dark:text-gray-300">
                                 {{ $order->status_label }}
                             </p>
 
                             {!! view_render_event('sales.invoice.status_label.after', ['order' => $order]) !!}
 
-                            {{-- Invoice Status --}}
+                            <!-- Invoice Status -->
                             <p class="text-gray-600 dark:text-gray-300">
                                 {{ $invoice->status_label }}
                             </p>
 
-                            {{-- Order Channel --}}
+                            <!-- Order Channel -->
                             <p class="text-gray-600 dark:text-gray-300">
                                 {{ $order->channel_name }}
                             </p>

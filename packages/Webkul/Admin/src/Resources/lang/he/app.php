@@ -2600,7 +2600,7 @@ return [
                 'name'                          => 'שם',
                 'product-carousel'              => 'קרוסלת מוצרים',
                 'product-carousel-description'  => 'הצגת מוצרים בצורה אלגנטית עם קרוסלת מוצרים דינמית ורספונסיבית.',
-                'path'                          => 'נתיב',
+                'url'                           => 'קישור',
                 'preview'                       => 'תצוגה מקדימה',
                 'slider'                        => 'מחוון',
                 'static-content-description'    => 'שפרו את ההתערבות עם תוכן סטטי כמוי ומידע לקהל שלכם.',
@@ -2618,6 +2618,7 @@ return [
                 'update-slider'                 => 'עדכן מחוון',
                 'value-input'                   => 'ערך',
                 'value'                         => 'ערך: :value',
+                'image-title'                   => 'כותרת התמונה',
             ],
 
             'create-success' => 'ערכת העיצוב נוצרה בהצלחה',

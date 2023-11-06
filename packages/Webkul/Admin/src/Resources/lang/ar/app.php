@@ -2599,7 +2599,7 @@ return [
                 'name'                          => 'الاسم',
                 'product-carousel'              => 'شريط المنتجات',
                 'product-carousel-description'  => 'قدم المنتجات بأناقة باستخدام شريط المنتجات الديناميكي والمتجاوب.',
-                'path'                          => 'المسار',
+                'url'                           => 'رابط الإنترنت',
                 'preview'                       => 'معاينة',
                 'slider'                        => 'شريط',
                 'static-content-description'    => 'زيادة التفاعل مع محتوى ثابت واضح وإعلامي لجمهورك.',
@@ -2617,6 +2617,7 @@ return [
                 'update-slider'                 => 'تحديث الشريط',
                 'value-input'                   => 'القيمة',
                 'value'                         => 'القيمة: :value',
+                'image-title'                   => 'عنوان الصورة',
             ],
 
             'create-success' => 'تم إنشاء الموضوع بنجاح',

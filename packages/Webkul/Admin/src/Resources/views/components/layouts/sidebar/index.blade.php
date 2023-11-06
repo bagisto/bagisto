@@ -1,7 +1,7 @@
 <div class="fixed top-[57px] h-full bg-white dark:bg-gray-900  pt-[8px] w-[270px] shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)] z-[1000] max-lg:hidden transition-all duration-300 group-[.sidebar-collapsed]/container:w-[70px]">
     <div class="h-[calc(100vh-100px)] overflow-auto journal-scroll group-[.sidebar-collapsed]/container:overflow-visible">
         <nav class="grid gap-[7px] w-full">
-            {{-- Navigation Menu --}}
+            <!-- Navigation Menu -->
             @foreach ($menu->items as $menuItem)
                 <div class="relative px-[16px] group/item">
                     <a

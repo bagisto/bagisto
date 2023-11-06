@@ -2601,7 +2601,7 @@ return [
                 'name'                          => 'Ad',
                 'product-carousel'              => 'Ürün Karuseli',
                 'product-carousel-description'  => 'Dinamik ve duyarlı bir ürün karuseli ile ürünleri zarif bir şekilde sergileyin.',
-                'path'                          => 'Yol',
+                'url'                           => 'URL',
                 'preview'                       => 'Önizleme',
                 'slider'                        => 'Slider',
                 'static-content-description'    => 'Kitleniz için özgün, bilgilendirici statik içerikle etkileşimi artırın.',
@@ -2619,6 +2619,7 @@ return [
                 'update-slider'                 => 'Slider\'ı Güncelle',
                 'value-input'                   => 'Değer',
                 'value'                         => 'Değer: :value',
+                'image-title'                   => 'Resim Başlığı',
             ],
 
             'create-success' => 'Tema başarıyla oluşturuldu',

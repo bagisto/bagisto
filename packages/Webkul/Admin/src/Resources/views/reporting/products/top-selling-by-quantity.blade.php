@@ -1,6 +1,6 @@
-{{-- Top Selling Products By Quantity Vue Component --}}
+<!-- Top Selling Products By Quantity Vue Component -->
 <v-reporting-product-top-selling-by-quantity>
-    {{-- Shimmer --}}
+    <!-- Shimmer -->
     <x-admin::shimmer.reporting.products.top-selling-by-quantity/>
 </v-reporting-product-top-selling-by-quantity>
 

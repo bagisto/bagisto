@@ -2600,7 +2600,7 @@ return [
                 'name'                          => 'Nombre',
                 'product-carousel'              => 'Carrusel de Productos',
                 'product-carousel-description'  => 'Muestra productos de forma elegante con un carrusel de productos dinámico y receptivo.',
-                'path'                          => 'Ruta',
+                'url'                           => 'URL',
                 'preview'                       => 'Vista Previa',
                 'slider'                        => 'Deslizador',
                 'static-content-description'    => 'Mejora la interacción con contenido estático conciso e informativo para tu audiencia.',
@@ -2618,6 +2618,7 @@ return [
                 'update-slider'                 => 'Actualizar Deslizador',
                 'value-input'                   => 'Valor',
                 'value'                         => 'Valor: :value',
+                'image-title'                   => 'Título de la imagen',
             ],
 
             'create-success' => 'Tema creado con éxito',

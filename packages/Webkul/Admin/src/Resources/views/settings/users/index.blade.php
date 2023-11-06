@@ -1,5 +1,5 @@
 <x-admin::layouts>
-    {{-- Title of the page --}}
+    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.settings.users.index.title')
     </x-slot:title>
@@ -11,7 +11,7 @@
             </p>
 
             <div class="flex gap-x-[10px] items-center">
-                {{-- Create User Button --}}
+                <!-- Create User Button -->
                 @if (bouncer()->hasPermission('settings.users.users.create'))
                     <button
                         type="button"
@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        {{-- DataGrid Shimmer --}}
+        <!-- DataGrid Shimmer -->
         <x-admin::shimmer.datagrid/>
     </v-users>
 
@@ -109,10 +109,7 @@
 
                         <!-- User Profile -->
                         <p>
-
-                            <div
-                                class="flex gap-[10px] items-center"
-                            >
+                            <div class="flex gap-[10px] items-center">
                                 <div
                                     class="inline-block w-[36px] h-[36px] rounded-full border-3 border-gray-800 align-middle text-center mr-2 overflow-hidden"
                                     v-if="record.user_img"
@@ -129,8 +126,9 @@
                                     v-else
                                 >
                                     <button
-                                        class="flex justify-center items-center w-[36px] h-[36px] bg-blue-400 rounded-full text-[14px] text-white font-semibold cursor-pointer leading-6 transition-all hover:bg-blue-500 focus:bg-blue-500">
-                                        @{{ record.user_name[0].toUpperCase() }}
+                                        class="flex justify-center items-center w-[36px] h-[36px] bg-blue-400 rounded-full text-[14px] text-white font-semibold cursor-pointer leading-6 transition-all hover:bg-blue-500 focus:bg-blue-500"
+                                        v-text="record.user_name[0].toUpperCase()"
+                                    >
                                     </button>
                                 </div>
 

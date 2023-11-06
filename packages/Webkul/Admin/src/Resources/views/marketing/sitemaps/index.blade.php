@@ -1,12 +1,12 @@
 <x-admin::layouts>
-    {{-- Title of the page --}}
+    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.marketing.sitemaps.index.title')
     </x-slot:title>
 
     {!! view_render_event('bagisto.admin.marketing.sitemaps.create.before') !!}
 
-    {{-- Create Sitemap Vue Component --}}
+    <!-- Create Sitemap Vue Component -->
     <v-create-sitemaps>
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
@@ -21,7 +21,7 @@
             @endif
         </div>
 
-        {{-- Added For Shimmer --}}
+        <!-- Added For Shimmer -->
         <x-admin::shimmer.datagrid/>
     </v-create-sitemaps>
 

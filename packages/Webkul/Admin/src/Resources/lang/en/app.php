@@ -2601,7 +2601,7 @@ return [
                 'name'                          => 'Name',
                 'product-carousel'              => 'Product Carousel',
                 'product-carousel-description'  => 'Showcase products elegantly with a dynamic and responsive product carousel.',
-                'path'                          => 'Path',
+                'url'                           => 'URL',
                 'preview'                       => 'Preview',
                 'slider'                        => 'Slider',
                 'static-content-description'    => 'Improve engagement with concise, informative static content for your audience.',
@@ -2619,6 +2619,7 @@ return [
                 'update-slider'                 => 'Update Slider',
                 'value-input'                   => 'Value',
                 'value'                         => 'Value: :value',
+                'image-title'                   => 'Image Title',
             ],
 
             'create-success' => 'Theme created successfully',

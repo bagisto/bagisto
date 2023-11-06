@@ -1,4 +1,4 @@
-{{-- Shipping Collected Vue Component --}}
+<!-- Shipping Collected Vue Component -->
 <v-reporting-sales-shipping-collected>
     <!-- Shimmer -->
     <x-admin::shimmer.reporting.sales.shipping-collected/>

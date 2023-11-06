@@ -2600,7 +2600,7 @@ return [
                 'name'                          => 'Nazwa',
                 'product-carousel'              => 'Karuzela produktów',
                 'product-carousel-description'  => 'Elegancko prezentuj produkty za pomocą dynamicznej i responsywnej karuzeli produktów.',
-                'path'                          => 'Ścieżka',
+                'url'                           => 'URL',
                 'preview'                       => 'Podgląd',
                 'slider'                        => 'Suwak',
                 'static-content-description'    => 'Zwiększ zaangażowanie za pomocą zwięzłej, informacyjnej treści statycznej dla swojej publiczności.',
@@ -2618,6 +2618,7 @@ return [
                 'update-slider'                 => 'Aktualizuj suwak',
                 'value-input'                   => 'Wartość',
                 'value'                         => 'Wartość: :value',
+                'image-title'                   => 'Tytuł obrazu',
             ],
 
             'create-success' => 'Motyw został pomyślnie utworzony',
