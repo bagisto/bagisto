@@ -4,295 +4,285 @@ return [
     'seeders' => [
         'attribute' => [
             'attribute-families' => [
-                'default' => 'Default',
+                'default' => 'الافتراضي',
             ],
 
             'attribute-groups' => [
-                'general'           => 'General',
-                'description'       => 'Description',
-                'meta-description'  => 'Meta Description',
-                'price'             => 'Price',
-                'shipping'          => 'Shipping',
-                'settings'          => 'Settings',
-                'inventories'       => 'Inventories',
+                'description'       => 'الوصف',
+                'general'           => 'عام',
+                'inventories'       => 'المخزونات',
+                'meta-description'  => 'الوصف الواجب',
+                'price'             => 'السعر',
+                'shipping'          => 'الشحن',
+                'settings'          => 'الإعدادات',
             ],
 
             'attributes' => [
-                'sku'                  => 'SKU',
-                'name'                 => 'Name',
-                'url-key'              => 'URL Key',
-                'tax-category'         => 'Tax Category',
-                'new'                  => 'New',
-                'featured'             => 'Featured',
-                'visible-individually' => 'Visible Individually',
-                'status'               => 'Status',
-                'short-description'    => 'Short Description',
-                'description'          => 'Description',
-                'price'                => 'Price',
-                'cost'                 => 'Cost',
-                'special-price'        => 'Special Price',
-                'special-price-from'   => 'Special Price From',
-                'special-price-to'     => 'Special Price To',
-                'meta-title'           => 'Meta Title',
-                'meta-keywords'        => 'Meta Keywords',
-                'meta-description'     => 'Meta Description',
-                'length'               => 'Length',
-                'width'                => 'Width',
-                'height'               => 'Height',
-                'weight'               => 'Weight',
-                'color'                => 'Color',
-                'size'                 => 'Size',
-                'brand'                => 'Brand',
-                'guest-checkout'       => 'Guest Checkout',
-                'product-number'       => 'Product Number',
-                'manage-stock'         => 'Manage Stock',
+                'brand'                => 'العلامة التجارية',
+                'color'                => 'اللون',
+                'cost'                 => 'التكلفة',
+                'description'          => 'الوصف',
+                'featured'             => 'مميز',
+                'guest-checkout'       => 'الدفع كضيف',
+                'height'               => 'الارتفاع',
+                'length'               => 'الطول',
+                'meta-title'           => 'العنوان الواجب',
+                'meta-keywords'        => 'الكلمات الرئيسية الواجبة',
+                'meta-description'     => 'الوصف الواجب',
+                'manage-stock'         => 'إدارة المخزون',
+                'new'                  => 'جديد',
+                'name'                 => 'الاسم',
+                'product-number'       => 'رقم المنتج',
+                'price'                => 'السعر',
+                'sku'                  => 'رمز المنتج',
+                'status'               => 'الحالة',
+                'short-description'    => 'وصف مختصر',
+                'special-price'        => 'السعر الخاص',
+                'special-price-from'   => 'السعر الخاص من',
+                'special-price-to'     => 'السعر الخاص حتى',
+                'size'                 => 'الحجم',
+                'tax-category'         => 'فئة الضريبة',
+                'url-key'              => 'الرابط المميز',
+                'visible-individually' => 'مرئي بشكل فردي',
+                'width'                => 'العرض',
+                'weight'               => 'الوزن',
             ],
 
             'attribute-options' => [
-                'red'    => 'Red',
-                'green'  => 'Green',
-                'yellow' => 'Yellow',
-                'black'  => 'Black',
-                'white'  => 'White',
-                's'      => 'S',
-                'm'      => 'M',
-                'l'      => 'L',
-                'xl'     => 'XL',
+                'black'  => 'أسود',
+                'green'  => 'أخضر',
+                'l'      => 'كبير',
+                'm'      => 'وسط',
+                'red'    => 'أحمر',
+                's'      => 'صغير',
+                'white'  => 'أبيض',
+                'xl'     => 'كبير جداً',
+                'yellow' => 'أصفر',
             ],
         ],
 
         'category' => [
             'categories' => [
-                'name'        => 'Root',
-                'description' => 'Root Category Description',
+                'description' => 'وصف الفئة الرئيسية',
+                'name'        => 'الرئيسية',
             ],
         ],
 
         'cms' => [
             'pages' => [
                 'about-us' => [
-                    'title'   => 'About Us',
-                    'content' => 'About Us Page Content',
+                    'content' => 'محتوى صفحة من نحن',
+                    'title'   => 'من نحن',
                 ],
 
                 'refund-policy' => [
-                    'title'   => 'Refund Policy',
-                    'content' => 'Refund Policy Page Content',
+                    'content' => 'محتوى صفحة سياسة الاسترداد',
+                    'title'   => 'سياسة الاسترداد',
                 ],
 
                 'return-policy' => [
-                    'title'   => 'Return Policy',
-                    'content' => 'Return Policy Page Content',
+                    'content' => 'محتوى صفحة سياسة الإرجاع',
+                    'title'   => 'سياسة الإرجاع',
                 ],
 
                 'terms-conditions' => [
-                    'title'   => 'Terms & Conditions',
-                    'content' => 'Terms & Conditions Page Content',
+                    'content' => 'محتوى صفحة الشروط والأحكام',
+                    'title'   => 'الشروط والأحكام',
                 ],
 
                 'terms-of-use' => [
-                    'title'   => 'Terms of Use',
-                    'content' => 'Terms of Use Page Content',
+                    'content' => 'محتوى صفحة شروط الاستخدام',
+                    'title'   => 'شروط الاستخدام',
                 ],
 
                 'contact-us' => [
-                    'title'   => 'Contact Us',
-                    'content' => 'Contact Us Page Content',
+                    'content' => 'محتوى صفحة اتصل بنا',
+                    'title'   => 'اتصل بنا',
                 ],
 
                 'customer-service' => [
-                    'title'   => 'Customer Service',
-                    'content' => 'Customer Service Page Content',
+                    'content' => 'محتوى صفحة خدمة العملاء',
+                    'title'   => 'خدمة العملاء',
                 ],
 
                 'whats-new' => [
-                    'title'   => 'What\'s New',
-                    'content' => 'What\'s New page content',
+                    'content' => 'محتوى صفحة ما الجديد',
+                    'title'   => 'ما الجديد',
                 ],
 
                 'payment-policy' => [
-                    'title'   => 'Payment Policy',
-                    'content' => 'Payment Policy Page Content',
+                    'content' => 'محتوى صفحة سياسة الدفع',
+                    'title'   => 'سياسة الدفع',
                 ],
 
                 'shipping-policy' => [
-                    'title'   => 'Shipping Policy',
-                    'content' => 'Shipping Policy Page Content',
+                    'content' => 'محتوى صفحة سياسة الشحن',
+                    'title'   => 'سياسة الشحن',
                 ],
 
                 'privacy-policy' => [
-                    'title'   => 'Privacy Policy',
-                    'content' => 'Privacy Policy Page Content',
+                    'content' => 'محتوى صفحة سياسة الخصوصية',
+                    'title'   => 'سياسة الخصوصية',
                 ],
             ],
         ],
 
         'core' => [
             'channels' => [
-                'name'             => 'Default',
-                'meta-title'       => 'Demo store',
-                'meta-keywords'    => 'Demo store meta keyword',
-                'meta-description' => 'Demo store meta description',
+                'meta-title'       => 'متجر تجريبي',
+                'meta-keywords'    => 'الكلمات الرئيسية للمتجر التجريبي',
+                'meta-description' => 'وصف متجر تجريبي',
+                'name'             => 'افتراضي',
             ],
 
             'currencies' => [
-                'CNY' => 'Chinese Yuan',
-                'AED' => 'Dirham',
-                'EUR' => 'EURO',
-                'INR' => 'Indian Rupee',
-                'IRR' => 'Iranian Rial',
-                'ILS' => 'Israeli Shekel',
-                'JPY' => 'Japanese Yen',
-                'GBP' => 'Pound Sterling',
-                'RUB' => 'Russian Ruble',
-                'SAR' => 'Saudi Riyal',
-                'TRY' => 'Turkish Lira',
-                'USD' => 'US Dollar',
-                'UAH' => 'Ukrainian Hryvnia',
+                'CNY' => 'اليوان الصيني',
+                'AED' => 'الدرهم',
+                'EUR' => 'اليورو',
+                'INR' => 'الروبية الهندية',
+                'IRR' => 'الريال الإيراني',
+                'ILS' => 'الشيكل الإسرائيلي',
+                'JPY' => 'الين الياباني',
+                'GBP' => 'الجنيه الاسترليني',
+                'RUB' => 'الروبل الروسي',
+                'SAR' => 'الريال السعودي',
+                'TRY' => 'الليرة التركية',
+                'USD' => 'الدولار الأمريكي',
+                'UAH' => 'الهريفنا الأوكرانية',
             ],
 
             'locales' => [
-                'ar'    => 'Arabic',
-                'bn'    => 'Bengali',
-                'pt_BR' => 'Brazilian Portuguese',
-                'zh_CN' => 'Chinese',
-                'nl'    => 'Dutch',
-                'en'    => 'English',
-                'fr'    => 'French',
-                'de'    => 'German',
-                'he'    => 'Hebrew',
-                'hi_IN' => 'Hindi',
-                'it'    => 'Italian',
-                'ja'    => 'Japanese',
-                'fa'    => 'Persian',
-                'pl'    => 'Polish',
-                'ru'    => 'Russian',
-                'sin'   => 'Sinhala',
-                'es'    => 'Spanish',
-                'tr'    => 'Turkish',
-                'uk'    => 'Ukrainian',
+                'ar'    => 'العربية',
+                'bn'    => 'البنغالية',
+                'de'    => 'الألمانية',
+                'es'    => 'الإسبانية',
+                'en'    => 'الإنجليزية',
+                'fr'    => 'الفرنسية',
+                'fa'    => 'الفارسية',
+                'he'    => 'العبرية',
+                'hi_IN' => 'الهندية',
+                'it'    => 'الإيطالية',
+                'ja'    => 'اليابانية',
+                'nl'    => 'الهولندية',
+                'pl'    => 'البولندية',
+                'pt_BR' => 'البرتغالية البرازيلية',
+                'ru'    => 'الروسية',
+                'sin'   => 'السينهالية',
+                'tr'    => 'التركية',
+                'uk'    => 'الأوكرانية',
+                'zh_CN' => 'الصينية',
             ],
         ],
 
         'customer' => [
             'customer-groups' => [
-                'guest'     => 'Guest',
-                'general'   => 'General',
-                'wholesale' => 'Wholesale',
+                'guest'     => 'زائر',
+                'general'   => 'عام',
+                'wholesale' => 'جملة',
             ],
         ],
 
         'inventory' => [
             'inventory-sources' => [
-                'name' => 'Default',
+                'name' => 'افتراضي',
             ],
         ],
 
         'shop' => [
             'theme-customizations' => [
                 'image-carousel' => [
-                    'name'  => 'Image Carousel',
+                    'name' => 'عرض الصور',
 
                     'sliders' => [
-                        'title' => 'Get Ready For New Collection',
+                        'title' => 'استعد للمجموعة الجديدة',
                     ],
                 ],
 
                 'offer-information' => [
-                    'name' => 'Offer Information',
+                    'name' => 'معلومات العرض',
 
                     'content' => [
-                        'title' => 'Get UPTO 40% OFF on your 1st order SHOP NOW',
+                        'title' => 'احصل على خصم يصل إلى 40% على طلبك الأول. تسوق الآن',
                     ],
                 ],
 
                 'categories-collections' => [
-                    'name' => 'Categories Collections',
+                    'name' => 'تصنيفات المجموعات',
                 ],
 
                 'new-products' => [
-                    'name' => 'New Products',
+                    'name' => 'منتجات جديدة',
 
                     'options' => [
-                        'title' => 'New Products',
+                        'title' => 'منتجات جديدة',
                     ],
                 ],
 
                 'top-collections' => [
-                    'name' => 'Top Collections',
+                    'name' => 'أفضل المجموعات',
 
                     'content' => [
-                        'title'       => 'The game with our new additions!',
-                        'sub-title-1' => 'Our Collections',
-                        'sub-title-2' => 'Our Collections',
-                        'sub-title-3' => 'Our Collections',
-                        'sub-title-4' => 'Our Collections',
-                        'sub-title-5' => 'Our Collections',
-                        'sub-title-6' => 'Our Collections',
+                        'sub-title-1' => 'مجموعاتنا',
+                        'sub-title-2' => 'مجموعاتنا',
+                        'sub-title-3' => 'مجموعاتنا',
+                        'sub-title-4' => 'مجموعاتنا',
+                        'sub-title-5' => 'مجموعاتنا',
+                        'sub-title-6' => 'مجموعاتنا',
+                        'title'       => 'اللعبة مع إضافاتنا الجديدة!',
                     ],
                 ],
 
                 'bold-collections' => [
-                    'name' => 'Bold Collections',
+                    'name' => 'مجموعات بارزة',
 
                     'content' => [
-                        'title'       => 'Get Ready for our new Bold Collections!',
-                        'description' => 'Introducing Our New Bold Collections! Elevate your style with daring designs and vibrant statements. Explore striking patterns and bold colors that redefine your wardrobe. Get ready to embrace the extraordinary!',
-                        'btn-title'   => 'View All',
+                        'btn-title'   => 'عرض الكل',
+                        'description' => 'نقدم لك مجموعاتنا البارزة الجديدة! قم بتحسين أناقتك مع تصاميم جريئة وعبارات حيوية. استكشف أنماطًا بارزة وألوانًا جريئة تعيد تعريف خزانتك. استعد لاعتناق الاستثنائية!',
+                        'title'       => 'استعد لمجموعاتنا البارزة الجديدة!',
                     ],
                 ],
 
                 'featured-collections' => [
-                    'name' => 'Featured Collections',
+                    'name' => 'مجموعات مميزة',
 
                     'options' => [
-                        'title' => 'Featured Products',
+                        'title' => 'منتجات مميزة',
                     ],
                 ],
 
                 'game-container' => [
-                    'name' => 'Game Container',
+                    'name' => 'حاوية اللعبة',
 
                     'content' => [
-                        'title'       => 'The game with our new additions!',
-                        'sub-title-1' => 'Our Collections',
-                        'sub-title-2' => 'Our Collections',
+                        'sub-title-1' => 'مجموعاتنا',
+                        'sub-title-2' => 'مجموعاتنا',
+                        'title'       => 'اللعبة مع إضافاتنا الجديدة!',
                     ],
                 ],
 
                 'all-products' => [
-                    'name' => 'All Products',
+                    'name' => 'جميع المنتجات',
 
                     'options' => [
-                        'title' => 'All Products',
-                    ],
-                ],
-
-                'bold-collections' => [
-                    'name' => 'Bold Collections',
-
-                    'content' => [
-                        'title'       => 'Get Ready for our new Bold Collections!',
-                        'description' => 'Introducing Our New Bold Collections! Elevate your style with daring designs and vibrant statements. Explore striking patterns and bold colors that redefine your wardrobe. Get ready to embrace the extraordinary!',
-                        'btn-title'   => 'View All',
+                        'title' => 'جميع المنتجات',
                     ],
                 ],
 
                 'footer-links' => [
-                    'name' => 'Footer Links',
+                    'name' => 'روابط الذيل',
 
                     'options' => [
-                        'about-us'         => 'About Us',
-                        'contact-us'       => 'Contact Us',
-                        'customer-service' => 'Customer Service',
-                        'whats-new'        => 'What\'s New',
-                        'terms-of-use'     => 'Terms of Use',
-                        'terms-conditions' => 'Terms & Conditions',
-                        'privacy-policy'   => 'Privacy Policy',
-                        'payment-policy'   => 'Payment Policy',
-                        'shipping-policy'  => 'Shipping Policy',
-                        'return-policy'    => 'Return Policy',
-                        'refund-policy'    => 'Refund Policy',
+                        'about-us'         => 'معلومات عنا',
+                        'contact-us'       => 'اتصل بنا',
+                        'customer-service' => 'خدمة العملاء',
+                        'privacy-policy'   => 'سياسة الخصوصية',
+                        'payment-policy'   => 'سياسة الدفع',
+                        'return-policy'    => 'سياسة الإرجاع',
+                        'refund-policy'    => 'سياسة الاسترداد',
+                        'shipping-policy'  => 'سياسة الشحن',
+                        'terms-of-use'     => 'شروط الاستخدام',
+                        'terms-conditions' => 'الشروط والأحكام',
+                        'whats-new'        => 'ما الجديد',
                     ],
                 ],
             ],
@@ -300,12 +290,12 @@ return [
 
         'user' => [
             'users' => [
-                'name' => 'Example',
+                'name' => 'مثال',
             ],
 
             'roles' => [
-                'name'        => 'Administrator',
-                'description' => 'This role users will have all the access',
+                'description' => 'سيكون لدى مستخدمي هذا الدور وصولًا كاملاً',
+                'name'        => 'مدير',
             ],
         ],
     ],

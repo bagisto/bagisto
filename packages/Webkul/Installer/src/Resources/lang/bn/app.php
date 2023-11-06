@@ -4,295 +4,285 @@ return [
     'seeders' => [
         'attribute' => [
             'attribute-families' => [
-                'default' => 'Default',
+                'default' => 'ডিফল্ট',
             ],
 
             'attribute-groups' => [
-                'general'           => 'General',
-                'description'       => 'Description',
-                'meta-description'  => 'Meta Description',
-                'price'             => 'Price',
-                'shipping'          => 'Shipping',
-                'settings'          => 'Settings',
-                'inventories'       => 'Inventories',
+                'description'       => 'বর্ণনা',
+                'general'           => 'সাধারণ',
+                'inventories'       => 'মালামালের মৌলিক বিশেষত্ব',
+                'meta-description'  => 'মেটা বর্ণনা',
+                'price'             => 'মূল্য',
+                'shipping'          => 'শিপিং',
+                'settings'          => 'সেটিংস',
             ],
 
             'attributes' => [
+                'brand'                => 'ব্র্যান্ড',
+                'color'                => 'রঙ',
+                'cost'                 => 'মূল্য',
+                'description'          => 'বর্ণনা',
+                'featured'             => 'নির্বাচিত',
+                'guest-checkout'       => 'অতিথি চেকআউট',
+                'height'               => 'উচ্চতা',
+                'length'               => 'দৈর্ঘ্য',
+                'meta-title'           => 'মেটা শিরোনাম',
+                'meta-keywords'        => 'মেটা কীওয়ার্ড',
+                'meta-description'     => 'মেটা বর্ণনা',
+                'manage-stock'         => 'স্টক পরিচালনা করুন',
+                'new'                  => 'নতুন',
+                'name'                 => 'নাম',
+                'product-number'       => 'পণ্য নম্বর',
+                'price'                => 'মূল্য',
                 'sku'                  => 'SKU',
-                'name'                 => 'Name',
-                'url-key'              => 'URL Key',
-                'tax-category'         => 'Tax Category',
-                'new'                  => 'New',
-                'featured'             => 'Featured',
-                'visible-individually' => 'Visible Individually',
-                'status'               => 'Status',
-                'short-description'    => 'Short Description',
-                'description'          => 'Description',
-                'price'                => 'Price',
-                'cost'                 => 'Cost',
-                'special-price'        => 'Special Price',
-                'special-price-from'   => 'Special Price From',
-                'special-price-to'     => 'Special Price To',
-                'meta-title'           => 'Meta Title',
-                'meta-keywords'        => 'Meta Keywords',
-                'meta-description'     => 'Meta Description',
-                'length'               => 'Length',
-                'width'                => 'Width',
-                'height'               => 'Height',
-                'weight'               => 'Weight',
-                'color'                => 'Color',
-                'size'                 => 'Size',
-                'brand'                => 'Brand',
-                'guest-checkout'       => 'Guest Checkout',
-                'product-number'       => 'Product Number',
-                'manage-stock'         => 'Manage Stock',
+                'status'               => 'অবস্থা',
+                'short-description'    => 'সংক্ষিপ্ত বর্ণনা',
+                'special-price'        => 'বিশেষ মূল্য',
+                'special-price-from'   => 'বিশেষ মূল্য থেকে',
+                'special-price-to'     => 'বিশেষ মূল্য প্রায়',
+                'size'                 => 'আকার',
+                'tax-category'         => 'কর বিভাগ',
+                'url-key'              => 'URL কী',
+                'visible-individually' => 'একে একে দেখা যাবে',
+                'width'                => 'প্রস্থ',
+                'weight'               => 'ওজন',
             ],
 
             'attribute-options' => [
-                'red'    => 'Red',
-                'green'  => 'Green',
-                'yellow' => 'Yellow',
-                'black'  => 'Black',
-                'white'  => 'White',
-                's'      => 'S',
-                'm'      => 'M',
+                'black'  => 'কালো',
+                'green'  => 'সবুজ',
                 'l'      => 'L',
+                'm'      => 'M',
+                'red'    => 'লাল',
+                's'      => 'S',
+                'white'  => 'সাদা',
                 'xl'     => 'XL',
+                'yellow' => 'হলুদ',
             ],
         ],
 
         'category' => [
             'categories' => [
-                'name'        => 'Root',
-                'description' => 'Root Category Description',
+                'description' => 'মূল বর্গের বর্ণনা',
+                'name'        => 'মূল',
             ],
         ],
 
         'cms' => [
             'pages' => [
                 'about-us' => [
-                    'title'   => 'About Us',
-                    'content' => 'About Us Page Content',
+                    'content' => 'আমাদের সম্পর্কে পাতা সামগ্রী',
+                    'title'   => 'আমাদের সম্পর্কে',
                 ],
 
                 'refund-policy' => [
-                    'title'   => 'Refund Policy',
-                    'content' => 'Refund Policy Page Content',
+                    'content' => 'ফেরত নেওয়া নীতি পাতা সামগ্রী',
+                    'title'   => 'ফেরত নেওয়া নীতি',
                 ],
 
                 'return-policy' => [
-                    'title'   => 'Return Policy',
-                    'content' => 'Return Policy Page Content',
+                    'content' => 'ফেরত নেওয়া নীতি পাতা সামগ্রী',
+                    'title'   => 'ফেরত নেওয়া নীতি',
                 ],
 
                 'terms-conditions' => [
-                    'title'   => 'Terms & Conditions',
-                    'content' => 'Terms & Conditions Page Content',
+                    'content' => 'শর্তাবলী পাতা সামগ্রী',
+                    'title'   => 'শর্তাবলী',
                 ],
 
                 'terms-of-use' => [
-                    'title'   => 'Terms of Use',
-                    'content' => 'Terms of Use Page Content',
+                    'content' => 'ব্যবহারের শর্ত পাতা সামগ্রী',
+                    'title'   => 'ব্যবহারের শর্ত',
                 ],
 
                 'contact-us' => [
-                    'title'   => 'Contact Us',
-                    'content' => 'Contact Us Page Content',
+                    'content' => 'যোগাযোগ করুন পাতা সামগ্রী',
+                    'title'   => 'যোগাযোগ করুন',
                 ],
 
                 'customer-service' => [
-                    'title'   => 'Customer Service',
-                    'content' => 'Customer Service Page Content',
+                    'content' => 'গ্রাহক সেবা পাতা সামগ্রী',
+                    'title'   => 'গ্রাহক সেবা',
                 ],
 
                 'whats-new' => [
-                    'title'   => 'What\'s New',
-                    'content' => 'What\'s New page content',
+                    'content' => 'আমাদের নতুন জিনিস পাতা সামগ্রী',
+                    'title'   => 'কি নতুন',
                 ],
 
                 'payment-policy' => [
-                    'title'   => 'Payment Policy',
-                    'content' => 'Payment Policy Page Content',
+                    'content' => 'পেমেন্ট নীতি পাতা সামগ্রী',
+                    'title'   => 'পেমেন্ট নীতি',
                 ],
 
                 'shipping-policy' => [
-                    'title'   => 'Shipping Policy',
-                    'content' => 'Shipping Policy Page Content',
+                    'content' => 'পরিবহন নীতি পাতা সামগ্রী',
+                    'title'   => 'পরিবহন নীতি',
                 ],
 
                 'privacy-policy' => [
-                    'title'   => 'Privacy Policy',
-                    'content' => 'Privacy Policy Page Content',
+                    'content' => 'গোপনীয়তা নীতি পাতা সামগ্রী',
+                    'title'   => 'গোপনীয়তা নীতি',
                 ],
             ],
         ],
 
         'core' => [
             'channels' => [
-                'name'             => 'Default',
-                'meta-title'       => 'Demo store',
-                'meta-keywords'    => 'Demo store meta keyword',
-                'meta-description' => 'Demo store meta description',
+                'meta-title'       => 'ডেমো স্টোর',
+                'meta-keywords'    => 'ডেমো স্টোর মেটা কীওয়ার্ড',
+                'meta-description' => 'ডেমো স্টোর মেটা বর্ণনা',
+                'name'             => 'ডিফল্ট',
             ],
 
             'currencies' => [
-                'CNY' => 'Chinese Yuan',
-                'AED' => 'Dirham',
-                'EUR' => 'EURO',
-                'INR' => 'Indian Rupee',
-                'IRR' => 'Iranian Rial',
-                'ILS' => 'Israeli Shekel',
-                'JPY' => 'Japanese Yen',
-                'GBP' => 'Pound Sterling',
-                'RUB' => 'Russian Ruble',
-                'SAR' => 'Saudi Riyal',
-                'TRY' => 'Turkish Lira',
-                'USD' => 'US Dollar',
-                'UAH' => 'Ukrainian Hryvnia',
+                'CNY' => 'চীনা ইউয়ান',
+                'AED' => 'দিরহাম',
+                'EUR' => 'ইউরো',
+                'INR' => 'ভারতীয় টাকা',
+                'IRR' => 'ইরানী রিয়াল',
+                'ILS' => 'ইস্রায়েলি শেকেল',
+                'JPY' => 'জাপানি ইয়েন',
+                'GBP' => 'ব্রিটিশ পাউন্ড',
+                'RUB' => 'রাশিয়ান রুবল',
+                'SAR' => 'সৌদি রিয়াল',
+                'TRY' => 'তুর্কি লিরা',
+                'USD' => 'মার্কিন ডলার',
+                'UAH' => 'ইউক্রেনিয়ান হৃব্র',
             ],
 
             'locales' => [
-                'ar'    => 'Arabic',
-                'bn'    => 'Bengali',
-                'pt_BR' => 'Brazilian Portuguese',
-                'zh_CN' => 'Chinese',
-                'nl'    => 'Dutch',
-                'en'    => 'English',
-                'fr'    => 'French',
-                'de'    => 'German',
-                'he'    => 'Hebrew',
-                'hi_IN' => 'Hindi',
-                'it'    => 'Italian',
-                'ja'    => 'Japanese',
-                'fa'    => 'Persian',
-                'pl'    => 'Polish',
-                'ru'    => 'Russian',
-                'sin'   => 'Sinhala',
-                'es'    => 'Spanish',
-                'tr'    => 'Turkish',
-                'uk'    => 'Ukrainian',
+                'ar'    => 'আরবি',
+                'bn'    => 'বাংলা',
+                'de'    => 'জার্মান',
+                'es'    => 'স্পেনী',
+                'en'    => 'ইংরেজি',
+                'fr'    => 'ফরাসি',
+                'fa'    => 'ফারসি',
+                'he'    => 'হিব্রু',
+                'hi_IN' => 'হিন্দি',
+                'it'    => 'ইতালীয়',
+                'ja'    => 'জাপানি',
+                'nl'    => 'ডাচ',
+                'pl'    => 'পোলিশ',
+                'pt_BR' => 'ব্রাজিলিয়ান পর্তুগিজ',
+                'ru'    => 'রাশিয়ান',
+                'sin'   => 'সিংহলা',
+                'tr'    => 'তুর্কি',
+                'uk'    => 'ইউক্রেনীয়',
+                'zh_CN' => 'চীনা',
             ],
         ],
 
         'customer' => [
             'customer-groups' => [
-                'guest'     => 'Guest',
-                'general'   => 'General',
-                'wholesale' => 'Wholesale',
+                'guest'     => 'অতিথি',
+                'general'   => 'সাধারণ',
+                'wholesale' => 'থোক',
             ],
         ],
 
         'inventory' => [
             'inventory-sources' => [
-                'name' => 'Default',
+                'name' => 'ডিফল্ট',
             ],
         ],
 
         'shop' => [
             'theme-customizations' => [
                 'image-carousel' => [
-                    'name'  => 'Image Carousel',
+                    'name'  => 'চিত্র ক্যারোসেল',
 
                     'sliders' => [
-                        'title' => 'Get Ready For New Collection',
+                        'title' => 'নতুন সংগ্রহের জন্য প্রস্তুত হোন',
                     ],
                 ],
 
                 'offer-information' => [
-                    'name' => 'Offer Information',
+                    'name' => 'অফার তথ্য',
 
                     'content' => [
-                        'title' => 'Get UPTO 40% OFF on your 1st order SHOP NOW',
+                        'title' => 'আপনার 1টি মান অর্ডারে 40% ছাড় পেতে SHOP NOW',
                     ],
                 ],
 
                 'categories-collections' => [
-                    'name' => 'Categories Collections',
+                    'name' => 'বিভাগ সংগ্রহ',
                 ],
 
                 'new-products' => [
-                    'name' => 'New Products',
+                    'name' => 'নতুন পণ্য',
 
                     'options' => [
-                        'title' => 'New Products',
+                        'title' => 'নতুন পণ্য',
                     ],
                 ],
 
                 'top-collections' => [
-                    'name' => 'Top Collections',
+                    'name' => 'শীর্ষ সংগ্রহ',
 
                     'content' => [
-                        'title'       => 'The game with our new additions!',
-                        'sub-title-1' => 'Our Collections',
-                        'sub-title-2' => 'Our Collections',
-                        'sub-title-3' => 'Our Collections',
-                        'sub-title-4' => 'Our Collections',
-                        'sub-title-5' => 'Our Collections',
-                        'sub-title-6' => 'Our Collections',
+                        'sub-title-1' => 'আমাদের সংগ্রহ',
+                        'sub-title-2' => 'আমাদের সংগ্রহ',
+                        'sub-title-3' => 'আমাদের সংগ্রহ',
+                        'sub-title-4' => 'আমাদের সংগ্রহ',
+                        'sub-title-5' => 'আমাদের সংগ্রহ',
+                        'sub-title-6' => 'আমাদের সংগ্রহ',
+                        'title'       => 'আমাদের নতুন যোগাযোগে খেলা!',
                     ],
                 ],
 
                 'bold-collections' => [
-                    'name' => 'Bold Collections',
+                    'name' => 'বোল্ড সংগ্রহ',
 
                     'content' => [
-                        'title'       => 'Get Ready for our new Bold Collections!',
-                        'description' => 'Introducing Our New Bold Collections! Elevate your style with daring designs and vibrant statements. Explore striking patterns and bold colors that redefine your wardrobe. Get ready to embrace the extraordinary!',
-                        'btn-title'   => 'View All',
+                        'btn-title'   => 'সব দেখুন',
+                        'description' => 'আমাদের নতুন বোল্ড সংগ্রহ পরিচিত করার জন্য আপনার শৈলীকে ধৈর্যশীল ডিজাইন এবং জীবন্ত বক্তব্যগুলি দিয়ে আপনার গার্ডরোব পরিভ্রান্ত করুন। আকর্ষণীয় মোটীর্দে প্যাটার্ন এবং বোল্ড রঙের অনুসন্ধান করুন, যা আপনার সাড়াদে পরিভ্রান্ত করে। অসাধারণ দেখার জন্য প্রস্তুত হোন!',
+                        'title'       => 'আমাদের নতুন বোল্ড সংগ্রহের জন্য প্রস্তুত হোন!',
                     ],
                 ],
 
                 'featured-collections' => [
-                    'name' => 'Featured Collections',
+                    'name' => 'নির্দেশিত সংগ্রহ',
 
                     'options' => [
-                        'title' => 'Featured Products',
+                        'title' => 'নির্দেশিত পণ্য',
                     ],
                 ],
 
                 'game-container' => [
-                    'name' => 'Game Container',
+                    'name' => 'খেলা সংগ্রহ',
 
                     'content' => [
-                        'title'       => 'The game with our new additions!',
-                        'sub-title-1' => 'Our Collections',
-                        'sub-title-2' => 'Our Collections',
+                        'sub-title-1' => 'আমাদের সংগ্রহ',
+                        'sub-title-2' => 'আমাদের সংগ্রহ',
+                        'title'       => 'আমাদের নতুন যোগাযোগে খেলা!',
                     ],
                 ],
 
                 'all-products' => [
-                    'name' => 'All Products',
+                    'name' => 'সব পণ্য',
 
                     'options' => [
-                        'title' => 'All Products',
-                    ],
-                ],
-
-                'bold-collections' => [
-                    'name' => 'Bold Collections',
-
-                    'content' => [
-                        'title'       => 'Get Ready for our new Bold Collections!',
-                        'description' => 'Introducing Our New Bold Collections! Elevate your style with daring designs and vibrant statements. Explore striking patterns and bold colors that redefine your wardrobe. Get ready to embrace the extraordinary!',
-                        'btn-title'   => 'View All',
+                        'title' => 'সমস্ত পণ্য',
                     ],
                 ],
 
                 'footer-links' => [
-                    'name' => 'Footer Links',
+                    'name' => 'পাদচরণ লিঙ্কস',
 
                     'options' => [
-                        'about-us'         => 'About Us',
-                        'contact-us'       => 'Contact Us',
-                        'customer-service' => 'Customer Service',
-                        'whats-new'        => 'What\'s New',
-                        'terms-of-use'     => 'Terms of Use',
-                        'terms-conditions' => 'Terms & Conditions',
-                        'privacy-policy'   => 'Privacy Policy',
-                        'payment-policy'   => 'Payment Policy',
-                        'shipping-policy'  => 'Shipping Policy',
-                        'return-policy'    => 'Return Policy',
-                        'refund-policy'    => 'Refund Policy',
+                        'about-us'         => 'আমাদের সম্পর্কে',
+                        'contact-us'       => 'যোগাযোগ করুন',
+                        'customer-service' => 'গ্রাহক সেবা',
+                        'privacy-policy'   => 'গোপনীয়তা নীতি',
+                        'payment-policy'   => 'মূল্য নীতি',
+                        'return-policy'    => 'প্রত্যাশ্য নীতি',
+                        'refund-policy'    => 'প্রতিপূর্তি নীতি',
+                        'shipping-policy'  => 'প্রেরণা নীতি',
+                        'terms-of-use'     => 'ব্যবহারের শর্তাবলি',
+                        'terms-conditions' => 'শর্ত এবং শর্তাদি',
+                        'whats-new'        => 'নতুন কি আছে',
                     ],
                 ],
             ],
@@ -300,12 +290,12 @@ return [
 
         'user' => [
             'users' => [
-                'name' => 'Example',
+                'name' => 'উদাহরণ',
             ],
 
             'roles' => [
-                'name'        => 'Administrator',
-                'description' => 'This role users will have all the access',
+                'description' => 'এই ভূমিকা ব্যবহারকারীদের সমস্ত অ্যাক্সেস থাকবে',
+                'name'        => 'প্রশাসক',
             ],
         ],
     ],

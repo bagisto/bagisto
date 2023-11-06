@@ -4,194 +4,194 @@ return [
     'seeders' => [
         'attribute' => [
             'attribute-families' => [
-                'default' => 'Default',
+                'default' => 'Varsayılan',
             ],
 
             'attribute-groups' => [
-                'general'           => 'General',
-                'description'       => 'Description',
-                'meta-description'  => 'Meta Description',
-                'price'             => 'Price',
-                'shipping'          => 'Shipping',
-                'settings'          => 'Settings',
-                'inventories'       => 'Inventories',
+                'description'       => 'Açıklama',
+                'general'           => 'Genel',
+                'inventories'       => 'Envanterler',
+                'meta-description'  => 'Meta Açıklama',
+                'price'             => 'Fiyat',
+                'shipping'          => 'Nakliye',
+                'settings'          => 'Ayarlar',
             ],
 
             'attributes' => [
-                'sku'                  => 'SKU',
-                'name'                 => 'Name',
-                'url-key'              => 'URL Key',
-                'tax-category'         => 'Tax Category',
-                'new'                  => 'New',
-                'featured'             => 'Featured',
-                'visible-individually' => 'Visible Individually',
-                'status'               => 'Status',
-                'short-description'    => 'Short Description',
-                'description'          => 'Description',
-                'price'                => 'Price',
-                'cost'                 => 'Cost',
-                'special-price'        => 'Special Price',
-                'special-price-from'   => 'Special Price From',
-                'special-price-to'     => 'Special Price To',
-                'meta-title'           => 'Meta Title',
-                'meta-keywords'        => 'Meta Keywords',
-                'meta-description'     => 'Meta Description',
-                'length'               => 'Length',
-                'width'                => 'Width',
-                'height'               => 'Height',
-                'weight'               => 'Weight',
-                'color'                => 'Color',
-                'size'                 => 'Size',
-                'brand'                => 'Brand',
-                'guest-checkout'       => 'Guest Checkout',
-                'product-number'       => 'Product Number',
-                'manage-stock'         => 'Manage Stock',
+                'brand'                => 'Marka',
+                'color'                => 'Renk',
+                'cost'                 => 'Maliyet',
+                'description'          => 'Açıklama',
+                'featured'             => 'Öne Çıkan',
+                'guest-checkout'       => 'Misafir Ödeme',
+                'height'               => 'Yükseklik',
+                'length'               => 'Uzunluk',
+                'meta-title'           => 'Meta Başlık',
+                'meta-keywords'        => 'Meta Anahtar Kelimeler',
+                'meta-description'     => 'Meta Açıklama',
+                'manage-stock'         => 'Stoğu Yönet',
+                'new'                  => 'Yeni',
+                'name'                 => 'Ad',
+                'product-number'       => 'Ürün Numarası',
+                'price'                => 'Fiyat',
+                'sku'                  => 'Stok Kodu',
+                'status'               => 'Durum',
+                'short-description'    => 'Kısa Açıklama',
+                'special-price'        => 'Özel Fiyat',
+                'special-price-from'   => 'Özel Fiyat Başlangıç',
+                'special-price-to'     => 'Özel Fiyat Bitiş',
+                'size'                 => 'Boyut',
+                'tax-category'         => 'Vergi Kategorisi',
+                'url-key'              => 'URL Anahtarı',
+                'visible-individually' => 'Tek Tek Görünür',
+                'width'                => 'Genişlik',
+                'weight'               => 'Ağırlık',
             ],
 
             'attribute-options' => [
-                'red'    => 'Red',
-                'green'  => 'Green',
-                'yellow' => 'Yellow',
-                'black'  => 'Black',
-                'white'  => 'White',
-                's'      => 'S',
-                'm'      => 'M',
+                'black'  => 'Siyah',
+                'green'  => 'Yeşil',
                 'l'      => 'L',
+                'm'      => 'M',
+                'red'    => 'Kırmızı',
+                's'      => 'S',
+                'white'  => 'Beyaz',
                 'xl'     => 'XL',
+                'yellow' => 'Sarı',
             ],
         ],
 
         'category' => [
             'categories' => [
-                'name'        => 'Root',
-                'description' => 'Root Category Description',
+                'description' => 'Kök Kategori Açıklaması',
+                'name'        => 'Kök',
             ],
         ],
 
         'cms' => [
             'pages' => [
                 'about-us' => [
-                    'title'   => 'About Us',
-                    'content' => 'About Us Page Content',
+                    'content' => 'Hakkımızda Sayfası İçeriği',
+                    'title'   => 'Hakkımızda',
                 ],
 
                 'refund-policy' => [
-                    'title'   => 'Refund Policy',
-                    'content' => 'Refund Policy Page Content',
+                    'content' => 'İade Politikası Sayfa İçeriği',
+                    'title'   => 'İade Politikası',
                 ],
 
                 'return-policy' => [
-                    'title'   => 'Return Policy',
-                    'content' => 'Return Policy Page Content',
+                    'content' => 'İade Politikası Sayfa İçeriği',
+                    'title'   => 'İade Politikası',
                 ],
 
                 'terms-conditions' => [
-                    'title'   => 'Terms & Conditions',
-                    'content' => 'Terms & Conditions Page Content',
+                    'content' => 'Şartlar ve Koşullar Sayfa İçeriği',
+                    'title'   => 'Şartlar ve Koşullar',
                 ],
 
                 'terms-of-use' => [
-                    'title'   => 'Terms of Use',
-                    'content' => 'Terms of Use Page Content',
+                    'content' => 'Kullanım Koşulları Sayfa İçeriği',
+                    'title'   => 'Kullanım Koşulları',
                 ],
 
                 'contact-us' => [
-                    'title'   => 'Contact Us',
-                    'content' => 'Contact Us Page Content',
+                    'content' => 'Bize Ulaşın Sayfa İçeriği',
+                    'title'   => 'Bize Ulaşın',
                 ],
 
                 'customer-service' => [
-                    'title'   => 'Customer Service',
-                    'content' => 'Customer Service Page Content',
+                    'content' => 'Müşteri Hizmetleri Sayfa İçeriği',
+                    'title'   => 'Müşteri Hizmetleri',
                 ],
 
                 'whats-new' => [
-                    'title'   => 'What\'s New',
-                    'content' => 'What\'s New page content',
+                    'content' => 'Yenilikler Sayfa İçeriği',
+                    'title'   => 'Yenilikler',
                 ],
 
                 'payment-policy' => [
-                    'title'   => 'Payment Policy',
-                    'content' => 'Payment Policy Page Content',
+                    'content' => 'Ödeme Politikası Sayfa İçeriği',
+                    'title'   => 'Ödeme Politikası',
                 ],
 
                 'shipping-policy' => [
-                    'title'   => 'Shipping Policy',
-                    'content' => 'Shipping Policy Page Content',
+                    'content' => 'Kargo Politikası Sayfa İçeriği',
+                    'title'   => 'Kargo Politikası',
                 ],
 
                 'privacy-policy' => [
-                    'title'   => 'Privacy Policy',
-                    'content' => 'Privacy Policy Page Content',
+                    'content' => 'Gizlilik Politikası Sayfa İçeriği',
+                    'title'   => 'Gizlilik Politikası',
                 ],
             ],
         ],
 
         'core' => [
             'channels' => [
-                'name'             => 'Default',
-                'meta-title'       => 'Demo store',
-                'meta-keywords'    => 'Demo store meta keyword',
-                'meta-description' => 'Demo store meta description',
+                'meta-title'       => 'Demo Mağaza',
+                'meta-keywords'    => 'Demo Mağaza Meta Anahtar Kelimeler',
+                'meta-description' => 'Demo Mağaza Meta Açıklama',
+                'name'             => 'Varsayılan',
             ],
 
             'currencies' => [
-                'CNY' => 'Chinese Yuan',
-                'AED' => 'Dirham',
+                'CNY' => 'Çin Yuanı',
+                'AED' => 'Dirhem',
                 'EUR' => 'EURO',
-                'INR' => 'Indian Rupee',
-                'IRR' => 'Iranian Rial',
-                'ILS' => 'Israeli Shekel',
-                'JPY' => 'Japanese Yen',
-                'GBP' => 'Pound Sterling',
-                'RUB' => 'Russian Ruble',
-                'SAR' => 'Saudi Riyal',
-                'TRY' => 'Turkish Lira',
-                'USD' => 'US Dollar',
-                'UAH' => 'Ukrainian Hryvnia',
+                'INR' => 'Hindistan Rupisi',
+                'IRR' => 'İran Riyali',
+                'ILS' => 'İsrail Şekeli',
+                'JPY' => 'Japon Yeni',
+                'GBP' => 'İngiliz Sterlini',
+                'RUB' => 'Rus Rublesi',
+                'SAR' => 'Suudi Riyal',
+                'TRY' => 'Türk Lirası',
+                'USD' => 'ABD Doları',
+                'UAH' => 'Ukrayna Grivnası',
             ],
 
             'locales' => [
-                'ar'    => 'Arabic',
+                'ar'    => 'Arapça',
                 'bn'    => 'Bengali',
-                'pt_BR' => 'Brazilian Portuguese',
-                'zh_CN' => 'Chinese',
-                'nl'    => 'Dutch',
-                'en'    => 'English',
-                'fr'    => 'French',
-                'de'    => 'German',
-                'he'    => 'Hebrew',
-                'hi_IN' => 'Hindi',
-                'it'    => 'Italian',
-                'ja'    => 'Japanese',
-                'fa'    => 'Persian',
-                'pl'    => 'Polish',
-                'ru'    => 'Russian',
+                'de'    => 'Almanca',
+                'es'    => 'İspanyolca',
+                'en'    => 'İngilizce',
+                'fr'    => 'Fransızca',
+                'fa'    => 'Farsça',
+                'he'    => 'İbranice',
+                'hi_IN' => 'Hintçe',
+                'it'    => 'İtalyanca',
+                'ja'    => 'Japonca',
+                'nl'    => 'Felemenkçe',
+                'pl'    => 'Lehçe',
+                'pt_BR' => 'Brezilya Portekizcesi',
+                'ru'    => 'Rusça',
                 'sin'   => 'Sinhala',
-                'es'    => 'Spanish',
-                'tr'    => 'Turkish',
-                'uk'    => 'Ukrainian',
+                'tr'    => 'Türkçe',
+                'uk'    => 'Ukraynaca',
+                'zh_CN' => 'Çince',
             ],
         ],
 
         'customer' => [
             'customer-groups' => [
-                'guest'     => 'Guest',
-                'general'   => 'General',
-                'wholesale' => 'Wholesale',
+                'guest'     => 'Misafir',
+                'general'   => 'Genel',
+                'wholesale' => 'Toptan',
             ],
         ],
 
         'inventory' => [
             'inventory-sources' => [
-                'name' => 'Default',
+                'name' => 'Varsayılan',
             ],
         ],
 
         'shop' => [
             'theme-customizations' => [
                 'image-carousel' => [
-                    'name'  => 'Image Carousel',
+                    'name' => 'Image Carousel',
 
                     'sliders' => [
                         'title' => 'Get Ready For New Collection',
@@ -202,7 +202,7 @@ return [
                     'name' => 'Offer Information',
 
                     'content' => [
-                        'title' => 'Get UPTO 40% OFF on your 1st order SHOP NOW',
+                        'title' => 'Get UP TO 40% OFF on your 1st order SHOP NOW',
                     ],
                 ],
 
@@ -222,13 +222,13 @@ return [
                     'name' => 'Top Collections',
 
                     'content' => [
-                        'title'       => 'The game with our new additions!',
                         'sub-title-1' => 'Our Collections',
                         'sub-title-2' => 'Our Collections',
                         'sub-title-3' => 'Our Collections',
                         'sub-title-4' => 'Our Collections',
                         'sub-title-5' => 'Our Collections',
                         'sub-title-6' => 'Our Collections',
+                        'title'       => 'The game with our new additions!',
                     ],
                 ],
 
@@ -236,9 +236,9 @@ return [
                     'name' => 'Bold Collections',
 
                     'content' => [
-                        'title'       => 'Get Ready for our new Bold Collections!',
-                        'description' => 'Introducing Our New Bold Collections! Elevate your style with daring designs and vibrant statements. Explore striking patterns and bold colors that redefine your wardrobe. Get ready to embrace the extraordinary!',
                         'btn-title'   => 'View All',
+                        'description' => 'Introducing Our New Bold Collections! Elevate your style with daring designs and vibrant statements. Explore striking patterns and bold colors that redefine your wardrobe. Get ready to embrace the extraordinary!',
+                        'title'       => 'Get Ready for our new Bold Collections!',
                     ],
                 ],
 
@@ -254,9 +254,9 @@ return [
                     'name' => 'Game Container',
 
                     'content' => [
-                        'title'       => 'The game with our new additions!',
                         'sub-title-1' => 'Our Collections',
                         'sub-title-2' => 'Our Collections',
+                        'title'       => 'The game with our new additions!',
                     ],
                 ],
 
@@ -268,16 +268,6 @@ return [
                     ],
                 ],
 
-                'bold-collections' => [
-                    'name' => 'Bold Collections',
-
-                    'content' => [
-                        'title'       => 'Get Ready for our new Bold Collections!',
-                        'description' => 'Introducing Our New Bold Collections! Elevate your style with daring designs and vibrant statements. Explore striking patterns and bold colors that redefine your wardrobe. Get ready to embrace the extraordinary!',
-                        'btn-title'   => 'View All',
-                    ],
-                ],
-
                 'footer-links' => [
                     'name' => 'Footer Links',
 
@@ -285,14 +275,14 @@ return [
                         'about-us'         => 'About Us',
                         'contact-us'       => 'Contact Us',
                         'customer-service' => 'Customer Service',
-                        'whats-new'        => 'What\'s New',
-                        'terms-of-use'     => 'Terms of Use',
-                        'terms-conditions' => 'Terms & Conditions',
                         'privacy-policy'   => 'Privacy Policy',
                         'payment-policy'   => 'Payment Policy',
-                        'shipping-policy'  => 'Shipping Policy',
                         'return-policy'    => 'Return Policy',
                         'refund-policy'    => 'Refund Policy',
+                        'shipping-policy'  => 'Shipping Policy',
+                        'terms-of-use'     => 'Terms of Use',
+                        'terms-conditions' => 'Terms & Conditions',
+                        'whats-new'        => 'What\'s New',
                     ],
                 ],
             ],
@@ -304,8 +294,8 @@ return [
             ],
 
             'roles' => [
-                'name'        => 'Administrator',
                 'description' => 'This role users will have all the access',
+                'name'        => 'Administrator',
             ],
         ],
     ],
