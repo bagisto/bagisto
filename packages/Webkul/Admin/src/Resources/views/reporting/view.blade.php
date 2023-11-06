@@ -43,7 +43,7 @@
                         </x-admin::dropdown>
 
                         <select
-                            class="custom-select flex w-fit min-h-[39px] rounded-[6px] border px-3 pl-2 pr-[35px] text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                            class="custom-select flex w-fit min-h-[39px] rounded-[6px] border px-3 pl-2 pr-[35px] text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                             v-model="filters.period"
                         >
                             <option value="day">

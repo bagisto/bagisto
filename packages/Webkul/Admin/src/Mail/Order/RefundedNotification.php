@@ -28,7 +28,7 @@ class RefundedNotification extends Mailable
     public function build()
     {
         return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
-            ->to($this->refund->order->customer_email, $this->refund->order->customer_full_name)
+            ->to(core()->getAdminEmailDetails()['email'], core()->getAdminEmailDetails()['name'])
             ->subject(trans('admin::app.emails.orders.refunded.subject'))
             ->view('admin::emails.orders.refunded');
     }

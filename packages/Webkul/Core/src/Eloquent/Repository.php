@@ -60,6 +60,16 @@ abstract class Repository extends BaseRepository implements CacheableInterface
     }
 
     /**
+     * @throws RepositoryException
+     */
+    public function resetModel()
+    {
+        $this->makeModel();
+
+        return $this;
+    }
+
+    /**
      * Find data by field and value
      *
      * @param  string  $field
