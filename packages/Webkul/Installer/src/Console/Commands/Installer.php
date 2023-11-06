@@ -290,6 +290,11 @@ class Installer extends Command
     {
         $data = file_get_contents(base_path('.env'));
 
+        // Check if $value contains spaces, and if so, add double quotes
+        if (preg_match('/\s/', $value)) {
+            $value = '"' . $value . '"';
+        }
+
         $data = preg_replace("/$key=(.*)/", "$key=$value", $data);
 
         file_put_contents(base_path('.env'), $data);

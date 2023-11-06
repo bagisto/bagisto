@@ -4,295 +4,285 @@ return [
     'seeders' => [
         'attribute' => [
             'attribute-families' => [
-                'default' => 'Default',
+                'default' => 'Predefinito',
             ],
 
             'attribute-groups' => [
-                'general'           => 'General',
-                'description'       => 'Description',
-                'meta-description'  => 'Meta Description',
-                'price'             => 'Price',
-                'shipping'          => 'Shipping',
-                'settings'          => 'Settings',
-                'inventories'       => 'Inventories',
+                'description'       => 'Descrizione',
+                'general'           => 'Generale',
+                'inventories'       => 'Inventario',
+                'meta-description'  => 'Meta Descrizione',
+                'price'             => 'Prezzo',
+                'shipping'          => 'Spedizione',
+                'settings'          => 'Impostazioni',
             ],
 
             'attributes' => [
+                'brand'                => 'Marca',
+                'color'                => 'Colore',
+                'cost'                 => 'Costo',
+                'description'          => 'Descrizione',
+                'featured'             => 'In primo piano',
+                'guest-checkout'       => 'Check-out Ospite',
+                'height'               => 'Altezza',
+                'length'               => 'Lunghezza',
+                'meta-title'           => 'Meta Titolo',
+                'meta-keywords'        => 'Meta Parole chiave',
+                'meta-description'     => 'Meta Descrizione',
+                'manage-stock'         => 'Gestisci Scorte',
+                'new'                  => 'Nuovo',
+                'name'                 => 'Nome',
+                'product-number'       => 'Numero del Prodotto',
+                'price'                => 'Prezzo',
                 'sku'                  => 'SKU',
-                'name'                 => 'Name',
-                'url-key'              => 'URL Key',
-                'tax-category'         => 'Tax Category',
-                'new'                  => 'New',
-                'featured'             => 'Featured',
-                'visible-individually' => 'Visible Individually',
-                'status'               => 'Status',
-                'short-description'    => 'Short Description',
-                'description'          => 'Description',
-                'price'                => 'Price',
-                'cost'                 => 'Cost',
-                'special-price'        => 'Special Price',
-                'special-price-from'   => 'Special Price From',
-                'special-price-to'     => 'Special Price To',
-                'meta-title'           => 'Meta Title',
-                'meta-keywords'        => 'Meta Keywords',
-                'meta-description'     => 'Meta Description',
-                'length'               => 'Length',
-                'width'                => 'Width',
-                'height'               => 'Height',
-                'weight'               => 'Weight',
-                'color'                => 'Color',
-                'size'                 => 'Size',
-                'brand'                => 'Brand',
-                'guest-checkout'       => 'Guest Checkout',
-                'product-number'       => 'Product Number',
-                'manage-stock'         => 'Manage Stock',
+                'status'               => 'Stato',
+                'short-description'    => 'Breve Descrizione',
+                'special-price'        => 'Prezzo Speciale',
+                'special-price-from'   => 'Prezzo Speciale Da',
+                'special-price-to'     => 'Prezzo Speciale A',
+                'size'                 => 'Taglia',
+                'tax-category'         => 'Categoria Fiscale',
+                'url-key'              => 'Chiave URL',
+                'visible-individually' => 'Visibile Individualmente',
+                'width'                => 'Larghezza',
+                'weight'               => 'Peso',
             ],
 
             'attribute-options' => [
-                'red'    => 'Red',
-                'green'  => 'Green',
-                'yellow' => 'Yellow',
-                'black'  => 'Black',
-                'white'  => 'White',
-                's'      => 'S',
-                'm'      => 'M',
+                'black'  => 'Nero',
+                'green'  => 'Verde',
                 'l'      => 'L',
+                'm'      => 'M',
+                'red'    => 'Rosso',
+                's'      => 'S',
+                'white'  => 'Bianco',
                 'xl'     => 'XL',
+                'yellow' => 'Giallo',
             ],
         ],
 
         'category' => [
             'categories' => [
-                'name'        => 'Root',
-                'description' => 'Root Category Description',
+                'description' => 'Descrizione della Categoria Radice',
+                'name'        => 'Radice',
             ],
         ],
 
         'cms' => [
             'pages' => [
                 'about-us' => [
-                    'title'   => 'About Us',
-                    'content' => 'About Us Page Content',
+                    'content' => 'Contenuto della Pagina Chi siamo',
+                    'title'   => 'Chi siamo',
                 ],
 
                 'refund-policy' => [
-                    'title'   => 'Refund Policy',
-                    'content' => 'Refund Policy Page Content',
+                    'content' => 'Contenuto della Pagina Politica di Rimborso',
+                    'title'   => 'Politica di Rimborso',
                 ],
 
                 'return-policy' => [
-                    'title'   => 'Return Policy',
-                    'content' => 'Return Policy Page Content',
+                    'content' => 'Contenuto della Pagina Politica di Reso',
+                    'title'   => 'Politica di Reso',
                 ],
 
                 'terms-conditions' => [
-                    'title'   => 'Terms & Conditions',
-                    'content' => 'Terms & Conditions Page Content',
+                    'content' => 'Contenuto della Pagina Termini e Condizioni',
+                    'title'   => 'Termini e Condizioni',
                 ],
 
                 'terms-of-use' => [
-                    'title'   => 'Terms of Use',
-                    'content' => 'Terms of Use Page Content',
+                    'content' => 'Contenuto della Pagina Termini d\'Uso',
+                    'title'   => 'Termini d\'Uso',
                 ],
 
                 'contact-us' => [
-                    'title'   => 'Contact Us',
-                    'content' => 'Contact Us Page Content',
+                    'content' => 'Contenuto della Pagina Contattaci',
+                    'title'   => 'Contattaci',
                 ],
 
                 'customer-service' => [
-                    'title'   => 'Customer Service',
-                    'content' => 'Customer Service Page Content',
+                    'content' => 'Contenuto della Pagina Assistenza Clienti',
+                    'title'   => 'Assistenza Clienti',
                 ],
 
                 'whats-new' => [
-                    'title'   => 'What\'s New',
-                    'content' => 'What\'s New page content',
+                    'content' => 'Contenuto della Pagina Novità',
+                    'title'   => 'Novità',
                 ],
 
                 'payment-policy' => [
-                    'title'   => 'Payment Policy',
-                    'content' => 'Payment Policy Page Content',
+                    'content' => 'Contenuto della Pagina Politica di Pagamento',
+                    'title'   => 'Politica di Pagamento',
                 ],
 
                 'shipping-policy' => [
-                    'title'   => 'Shipping Policy',
-                    'content' => 'Shipping Policy Page Content',
+                    'content' => 'Contenuto della Pagina Politica di Spedizione',
+                    'title'   => 'Politica di Spedizione',
                 ],
 
                 'privacy-policy' => [
-                    'title'   => 'Privacy Policy',
-                    'content' => 'Privacy Policy Page Content',
+                    'content' => 'Contenuto della Pagina Politica sulla Privacy',
+                    'title'   => 'Politica sulla Privacy',
                 ],
             ],
         ],
 
         'core' => [
             'channels' => [
-                'name'             => 'Default',
-                'meta-title'       => 'Demo store',
-                'meta-keywords'    => 'Demo store meta keyword',
-                'meta-description' => 'Demo store meta description',
+                'meta-title'       => 'Negozio Dimostrativo',
+                'meta-keywords'    => 'Parole chiave meta del Negozio Dimostrativo',
+                'meta-description' => 'Descrizione meta del Negozio Dimostrativo',
+                'name'             => 'Predefinito',
             ],
 
             'currencies' => [
-                'CNY' => 'Chinese Yuan',
+                'CNY' => 'Yuan Cinese',
                 'AED' => 'Dirham',
                 'EUR' => 'EURO',
-                'INR' => 'Indian Rupee',
-                'IRR' => 'Iranian Rial',
-                'ILS' => 'Israeli Shekel',
-                'JPY' => 'Japanese Yen',
-                'GBP' => 'Pound Sterling',
-                'RUB' => 'Russian Ruble',
-                'SAR' => 'Saudi Riyal',
-                'TRY' => 'Turkish Lira',
-                'USD' => 'US Dollar',
-                'UAH' => 'Ukrainian Hryvnia',
+                'INR' => 'Rupia Indiana',
+                'IRR' => 'Rial Iraniano',
+                'ILS' => 'Shekel Israeliano',
+                'JPY' => 'Yen Giapponese',
+                'GBP' => 'Sterlina Inglese',
+                'RUB' => 'Rublo Russo',
+                'SAR' => 'Riyal Saudita',
+                'TRY' => 'Lira Turca',
+                'USD' => 'Dollaro Americano',
+                'UAH' => 'Grivnia Ucraina',
             ],
 
             'locales' => [
-                'ar'    => 'Arabic',
-                'bn'    => 'Bengali',
-                'pt_BR' => 'Brazilian Portuguese',
-                'zh_CN' => 'Chinese',
-                'nl'    => 'Dutch',
-                'en'    => 'English',
-                'fr'    => 'French',
-                'de'    => 'German',
-                'he'    => 'Hebrew',
+                'ar'    => 'Arabo',
+                'bn'    => 'Bengalese',
+                'de'    => 'Tedesco',
+                'es'    => 'Spagnolo',
+                'en'    => 'Inglese',
+                'fr'    => 'Francese',
+                'fa'    => 'Persiano',
+                'he'    => 'Ebraico',
                 'hi_IN' => 'Hindi',
-                'it'    => 'Italian',
-                'ja'    => 'Japanese',
-                'fa'    => 'Persian',
-                'pl'    => 'Polish',
-                'ru'    => 'Russian',
+                'it'    => 'Italiano',
+                'ja'    => 'Giapponese',
+                'nl'    => 'Olandese',
+                'pl'    => 'Polacco',
+                'pt_BR' => 'Portoghese Brasiliano',
+                'ru'    => 'Russo',
                 'sin'   => 'Sinhala',
-                'es'    => 'Spanish',
-                'tr'    => 'Turkish',
-                'uk'    => 'Ukrainian',
+                'tr'    => 'Turco',
+                'uk'    => 'Ucraino',
+                'zh_CN' => 'Cinese',
             ],
         ],
 
         'customer' => [
             'customer-groups' => [
-                'guest'     => 'Guest',
-                'general'   => 'General',
-                'wholesale' => 'Wholesale',
+                'guest'     => 'Ospite',
+                'general'   => 'Generale',
+                'wholesale' => 'Ingrosso',
             ],
         ],
 
         'inventory' => [
             'inventory-sources' => [
-                'name' => 'Default',
+                'name' => 'Predefinito',
             ],
         ],
 
         'shop' => [
             'theme-customizations' => [
                 'image-carousel' => [
-                    'name'  => 'Image Carousel',
+                    'name'  => 'Carosello delle Immagini',
 
                     'sliders' => [
-                        'title' => 'Get Ready For New Collection',
+                        'title' => 'Preparati per la Nuova Collezione',
                     ],
                 ],
 
                 'offer-information' => [
-                    'name' => 'Offer Information',
+                    'name' => 'Informazioni sull\'Offerta',
 
                     'content' => [
-                        'title' => 'Get UPTO 40% OFF on your 1st order SHOP NOW',
+                        'title' => 'Fino al 40% di SCONTO sul tuo primo ordine ACQUISTA ORA',
                     ],
                 ],
 
                 'categories-collections' => [
-                    'name' => 'Categories Collections',
+                    'name' => 'Collezioni per Categorie',
                 ],
 
                 'new-products' => [
-                    'name' => 'New Products',
+                    'name' => 'Nuovi Prodotti',
 
                     'options' => [
-                        'title' => 'New Products',
+                        'title' => 'Nuovi Prodotti',
                     ],
                 ],
 
                 'top-collections' => [
-                    'name' => 'Top Collections',
+                    'name' => 'Collezioni Top',
 
                     'content' => [
-                        'title'       => 'The game with our new additions!',
-                        'sub-title-1' => 'Our Collections',
-                        'sub-title-2' => 'Our Collections',
-                        'sub-title-3' => 'Our Collections',
-                        'sub-title-4' => 'Our Collections',
-                        'sub-title-5' => 'Our Collections',
-                        'sub-title-6' => 'Our Collections',
+                        'sub-title-1' => 'Le Nostre Collezioni',
+                        'sub-title-2' => 'Le Nostre Collezioni',
+                        'sub-title-3' => 'Le Nostre Collezioni',
+                        'sub-title-4' => 'Le Nostre Collezioni',
+                        'sub-title-5' => 'Le Nostre Collezioni',
+                        'sub-title-6' => 'Le Nostre Collezioni',
+                        'title'       => 'Il gioco con le nostre nuove aggiunte!',
                     ],
                 ],
 
                 'bold-collections' => [
-                    'name' => 'Bold Collections',
+                    'name' => 'Collezioni Audaci',
 
                     'content' => [
-                        'title'       => 'Get Ready for our new Bold Collections!',
-                        'description' => 'Introducing Our New Bold Collections! Elevate your style with daring designs and vibrant statements. Explore striking patterns and bold colors that redefine your wardrobe. Get ready to embrace the extraordinary!',
-                        'btn-title'   => 'View All',
+                        'btn-title'   => 'Visualizza Tutto',
+                        'description' => 'Presentiamo le nostre nuove Collezioni Audaci! Elevalo il tuo stile con design audaci e dichiarazioni vibranti. Esplora modelli straordinari e colori audaci che ridefiniscono il tuo guardaroba. Preparati ad abbracciare l\'straordinario!',
+                        'title'       => 'Preparati per le nostre nuove Collezioni Audaci!',
                     ],
                 ],
 
                 'featured-collections' => [
-                    'name' => 'Featured Collections',
+                    'name' => 'Prodotti in Primo Piano',
 
                     'options' => [
-                        'title' => 'Featured Products',
+                        'title' => 'Prodotti in Primo Piano',
                     ],
                 ],
 
                 'game-container' => [
-                    'name' => 'Game Container',
+                    'name' => 'Contenitore del Gioco',
 
                     'content' => [
-                        'title'       => 'The game with our new additions!',
-                        'sub-title-1' => 'Our Collections',
-                        'sub-title-2' => 'Our Collections',
+                        'sub-title-1' => 'Le Nostre Collezioni',
+                        'sub-title-2' => 'Le Nostre Collezioni',
+                        'title'       => 'Il gioco con le nostre nuove aggiunte!',
                     ],
                 ],
 
                 'all-products' => [
-                    'name' => 'All Products',
+                    'name' => 'Tutti i Prodotti',
 
                     'options' => [
-                        'title' => 'All Products',
-                    ],
-                ],
-
-                'bold-collections' => [
-                    'name' => 'Bold Collections',
-
-                    'content' => [
-                        'title'       => 'Get Ready for our new Bold Collections!',
-                        'description' => 'Introducing Our New Bold Collections! Elevate your style with daring designs and vibrant statements. Explore striking patterns and bold colors that redefine your wardrobe. Get ready to embrace the extraordinary!',
-                        'btn-title'   => 'View All',
+                        'title' => 'Tutti i Prodotti',
                     ],
                 ],
 
                 'footer-links' => [
-                    'name' => 'Footer Links',
+                    'name' => 'Link del Piede',
 
                     'options' => [
-                        'about-us'         => 'About Us',
-                        'contact-us'       => 'Contact Us',
-                        'customer-service' => 'Customer Service',
-                        'whats-new'        => 'What\'s New',
-                        'terms-of-use'     => 'Terms of Use',
-                        'terms-conditions' => 'Terms & Conditions',
-                        'privacy-policy'   => 'Privacy Policy',
-                        'payment-policy'   => 'Payment Policy',
-                        'shipping-policy'  => 'Shipping Policy',
-                        'return-policy'    => 'Return Policy',
-                        'refund-policy'    => 'Refund Policy',
+                        'about-us'         => 'Chi Siamo',
+                        'contact-us'       => 'Contattaci',
+                        'customer-service' => 'Servizio Clienti',
+                        'privacy-policy'   => 'Informativa sulla Privacy',
+                        'payment-policy'   => 'Politica di Pagamento',
+                        'return-policy'    => 'Politica di Reso',
+                        'refund-policy'    => 'Politica di Rimborso',
+                        'shipping-policy'  => 'Politica di Spedizione',
+                        'terms-of-use'     => 'Termini di Utilizzo',
+                        'terms-conditions' => 'Termini e Condizioni',
+                        'whats-new'        => 'Novità',
                     ],
                 ],
             ],
@@ -300,12 +290,12 @@ return [
 
         'user' => [
             'users' => [
-                'name' => 'Example',
+                'name' => 'Esempio',
             ],
 
             'roles' => [
-                'name'        => 'Administrator',
-                'description' => 'This role users will have all the access',
+                'description' => 'Questo ruolo consentirà agli utenti di avere tutti gli accessi',
+                'name'        => 'Amministratore',
             ],
         ],
     ],
