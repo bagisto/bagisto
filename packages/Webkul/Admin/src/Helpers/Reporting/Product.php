@@ -72,6 +72,7 @@ class Product extends AbstractReporting
     public function getTotalSoldQuantities($startDate, $endDate): int
     {
         return $this->orderItemRepository
+            ->resetModel()
             ->whereBetween('created_at', [$startDate, $endDate])
             ->sum('qty_ordered');
     }
@@ -121,6 +122,7 @@ class Product extends AbstractReporting
     public function getTotalProductsAddedToWishlist($startDate, $endDate): int
     {
         return $this->wishlistRepository
+            ->resetModel()
             ->whereBetween('created_at', [$startDate, $endDate])
             ->count();
     }
@@ -146,6 +148,7 @@ class Product extends AbstractReporting
     public function getTotalReviews($startDate, $endDate): int
     {
         return $this->reviewRepository
+            ->resetModel()
             ->where('status', 'approved')
             ->whereBetween('created_at', [$startDate, $endDate])
             ->count();
@@ -159,6 +162,7 @@ class Product extends AbstractReporting
     public function getStockThresholdProducts($limit = null): Collection
     {
         return $this->productInventoryRepository
+            ->resetModel()
             ->with(['product', 'product.attribute_family', 'product.attribute_values', 'product.images'])
             ->select('*', DB::raw('SUM(qty) as total_qty'))
             ->groupBy('product_id')
@@ -175,6 +179,7 @@ class Product extends AbstractReporting
     public function getTopSellingProductsByRevenue($limit = null): collection
     {
         $products = $this->orderItemRepository
+            ->resetModel()
             ->with(['product', 'product.attribute_family', 'product.attribute_values', 'product.images'])
             ->addSelect('*', DB::raw('SUM(base_total_invoiced - base_discount_refunded) as revenue'))
             ->whereNull('parent_id')
@@ -201,6 +206,7 @@ class Product extends AbstractReporting
     public function getTopSellingProductsByQuantity($limit = null): collection
     {
         $products = $this->orderItemRepository
+            ->resetModel()
             ->with(['product', 'product.attribute_family', 'product.attribute_values', 'product.images'])
             ->addSelect('*', DB::raw('SUM(qty_ordered) as total_qty_ordered'))
             ->whereNull('parent_id')
@@ -223,6 +229,7 @@ class Product extends AbstractReporting
         $tablePrefix = DB::getTablePrefix();
 
         $products = $this->reviewRepository
+            ->resetModel()
             ->addSelect(
                 'product_id',
                 DB::raw('COUNT(*) as reviews')
@@ -255,6 +262,7 @@ class Product extends AbstractReporting
         $groupColumn = $config['group_column'];
 
         $results = $this->orderItemRepository
+            ->resetModel()
             ->select(
                 DB::raw("$groupColumn AS date"),
                 DB::raw('COUNT(*) AS total')
@@ -291,6 +299,7 @@ class Product extends AbstractReporting
         $groupColumn = $config['group_column'];
 
         $results = $this->wishlistRepository
+            ->resetModel()
             ->select(
                 DB::raw("$groupColumn AS date"),
                 DB::raw('COUNT(*) AS total')
