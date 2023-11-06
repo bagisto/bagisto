@@ -586,7 +586,7 @@ return [
                             'fixed'          => 'Sabit',
                             'price-type'     => 'Fiyat Türü',
                             'price'          => 'Fiyat',
-                            'qty'            => 'Miktar',
+                            'qty'            => 'Minimum Adet',
                             'save-btn'       => 'Kaydet',
                             'update-title'   => 'Müşteri Grubu Fiyatını Güncelle',
                         ],

@@ -586,7 +586,7 @@ return [
                             'fixed'          => '固定',
                             'price-type'     => '价格类型',
                             'price'          => '价格',
-                            'qty'            => '数量',
+                            'qty'            => '最小数量',
                             'save-btn'       => '保存',
                             'update-title'   => '更新客户组价格',
                         ],
