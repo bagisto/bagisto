@@ -96,6 +96,7 @@ class Installer extends Command
 
             // Updating App Default Locales
             $this->updateEnvChoice('APP_LOCALE', 'Please select the <bg=green>Default Locale</>', $this->locales());
+            config(['app.locale' => $this->getEnvAtRuntime('APP_LOCALE')]);
 
             // Updating App Default Timezone
             $this->envUpdate('APP_TIMEZONE', date_default_timezone_get());
@@ -103,6 +104,7 @@ class Installer extends Command
 
             // Updating App Default Currencies
             $this->updateEnvChoice('APP_CURRENCY', 'Please enter the <bg=green>Default Currency</>.', $this->currencies());
+            config(['app.currency' => $this->getEnvAtRuntime('APP_CURRENCY')]);
 
             // Updating Database Configuration
             $this->askForDatabaseDetails();
