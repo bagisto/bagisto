@@ -586,7 +586,7 @@ return [
                             'fixed'          => 'Festpreis',
                             'price-type'     => 'Preistyp',
                             'price'          => 'Preis',
-                            'qty'            => 'Menge',
+                            'qty'            => 'Mindestmenge',
                             'save-btn'       => 'Speichern',
                             'update-title'   => 'Kundengruppenpreis aktualisieren',
                         ],

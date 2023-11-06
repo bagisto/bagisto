@@ -2,8 +2,9 @@
 
 namespace Webkul\Admin\Helpers;
 
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 use Webkul\Admin\Helpers\Reporting\Customer;
 use Webkul\Admin\Helpers\Reporting\Product;
 use Webkul\Admin\Helpers\Reporting\Sale;
@@ -133,7 +134,7 @@ class Dashboard
     /**
      * Returns top customers statistics.
      */
-    public function getTopCustomers(): Collection
+    public function getTopCustomers(): EloquentCollection
     {
         $customers = $this->customerReporting->getCustomersWithMostSales(5);
 
