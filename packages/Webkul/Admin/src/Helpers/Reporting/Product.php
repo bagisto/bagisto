@@ -216,9 +216,10 @@ class Product extends AbstractReporting
         $items = $this->orderItemRepository
             ->resetModel()
             ->with(['product', 'product.attribute_family', 'product.attribute_values', 'product.images'])
-            ->addSelect('*', DB::raw('SUM(qty_ordered) as total_qty_ordered'))
+            ->addSelect('*', DB::raw('SUM(qty_invoiced - qty_refunded) as total_qty_ordered'))
             ->whereNull('parent_id')
             ->whereBetween('order_items.created_at', [$this->startDate, $this->endDate])
+            ->having(DB::raw('SUM(qty_invoiced - qty_refunded)'), '>', 0)
             ->groupBy('product_id')
             ->orderBy('total_qty_ordered', 'DESC')
             ->limit($limit)
