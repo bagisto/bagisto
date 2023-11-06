@@ -18,8 +18,7 @@ class InvoicedNotification extends Mailable
      * @return void
      */
     public function __construct(
-        public $invoice,
-        public $email = null
+        public $invoice
     ) {
     }
 
@@ -31,7 +30,7 @@ class InvoicedNotification extends Mailable
     public function build()
     {
         return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
-            ->to($this->email ?? $this->invoice->order->customer_email, $this->invoice->order->customer_full_name)
+            ->to(core()->getAdminEmailDetails()['email'], core()->getAdminEmailDetails()['name'])
             ->subject(trans('admin::app.emails.orders.invoiced.subject'))
             ->view('admin::emails.orders.invoiced');
     }

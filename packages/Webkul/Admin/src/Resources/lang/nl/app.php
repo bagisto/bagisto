@@ -586,7 +586,7 @@ return [
                             'fixed'          => 'Vast',
                             'price-type'     => 'Prijs Type',
                             'price'          => 'Prijs',
-                            'qty'            => 'Hoeveelheid',
+                            'qty'            => 'Minimum aantal',
                             'save-btn'       => 'Opslaan',
                             'update-title'   => 'Klantengroep Prijs Bijwerken',
                         ],

@@ -586,7 +586,7 @@ return [
                             'fixed'          => 'Fixo',
                             'price-type'     => 'Tipo de Preço',
                             'price'          => 'Preço',
-                            'qty'            => 'Quantidade',
+                            'qty'            => 'Quantidade mínima',
                             'save-btn'       => 'Salvar',
                             'update-title'   => 'Atualizar Preço do Grupo de Clientes',
                         ],

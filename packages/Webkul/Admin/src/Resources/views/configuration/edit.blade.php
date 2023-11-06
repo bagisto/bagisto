@@ -73,8 +73,8 @@
                     </x-slot:content>
                 </x-admin::dropdown>
 
-                <!-- Channel Switcher -->
-                <x-admin::dropdown>
+                <!-- Locale Switcher -->
+                <x-admin::dropdown :class="$currentChannel->locales->count() <= 1 ? 'hidden' : ''">
                     <!-- Dropdown Toggler -->
                     <x-slot:toggle>
                         <button
