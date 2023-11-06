@@ -1,6 +1,6 @@
-{{-- Total Orders Vue Component --}}
+<!-- Total Orders Vue Component -->
 <v-reporting-sales-total-orders>
-    {{-- Shimmer --}}
+    <!-- Shimmer -->
     <x-admin::shimmer.reporting.sales.total-orders/> 
 </v-reporting-sales-total-orders>
 

@@ -1,4 +1,4 @@
-
+<!-- Shipment Vue Components -->
 <v-create-shipment>
     <div
         class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
@@ -16,7 +16,12 @@
                 class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
                 @click="$refs.shipment.open()"
             >
-                <span class="icon-ship text-[24px]"></span> 
+                <span
+                    class="icon-ship text-[24px]"
+                    role="button"
+                    tabindex="0"
+                >
+                </span> 
 
                 @lang('admin::app.sales.orders.view.ship')     
             </div>

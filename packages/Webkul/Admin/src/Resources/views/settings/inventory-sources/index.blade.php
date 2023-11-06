@@ -1,5 +1,5 @@
 <x-admin::layouts>
-    {{-- Title of the page --}}
+    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.settings.inventory-sources.index.title')
     </x-slot:title>
@@ -9,7 +9,7 @@
             @lang('admin::app.settings.inventory-sources.index.title')
         </p>
 
-        {{-- Create Button --}}
+        <!-- Create Button -->
         @if (bouncer()->hasPermission('settings.inventory_sources.create'))
             <a href="{{ route('admin.settings.inventory_sources.create') }}">
                 <div class="primary-button">

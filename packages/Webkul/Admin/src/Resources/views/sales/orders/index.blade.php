@@ -1,4 +1,5 @@
 <x-admin::layouts>
+    <!-- Page Title -->
     <x-slot:title>
         @lang('admin::app.sales.orders.index.title')
     </x-slot:title>
@@ -15,7 +16,7 @@
     </div>
 
     <x-admin::datagrid :src="route('admin.sales.orders.index')" :isMultiRow="true">
-        {{-- Datagrid Header --}}
+        <!-- Datagrid Header -->
         <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
              <template v-if="! isLoading">
                 <div class="row grid grid-cols-[0.5fr_0.5fr_1fr] grid-rows-1 items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
@@ -51,7 +52,7 @@
                 </div>
             </template>
 
-            {{-- Datagrid Head Shimmer --}}
+            <!-- Datagrid Head Shimmer -->
             <template v-else>
                 <x-admin::shimmer.datagrid.table.head :isMultiRow="true"></x-admin::shimmer.datagrid.table.head>
             </template>
@@ -63,7 +64,7 @@
                     class="row grid grid-cols-4 px-[16px] py-[10px] border-b-[1px] dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                     v-for="record in records"
                 >
-                    {{-- Order Id, Created, Status Section --}}
+                    <!-- Order Id, Created, Status Section -->
                     <div class="">
                         <div class="flex gap-[10px]">
                             <div class="flex flex-col gap-[6px]">
@@ -94,7 +95,7 @@
                         </div>
                     </div>
 
-                    {{-- Total Amount, Pay Via, Channel --}}
+                    <!-- Total Amount, Pay Via, Channel -->
                     <div class="">
                         <div class="flex flex-col gap-[6px]">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
@@ -113,7 +114,7 @@
                         </div>
                     </div>
 
-                    {{-- Custoemr, Email, Location Section --}}
+                    <!-- Custoemr, Email, Location Section -->
                     <div class="">
                         <div class="flex flex-col gap-[6px]">
                             <p
@@ -136,7 +137,7 @@
                         </div>
                     </div>
 
-                    {{-- Imgaes Section --}}
+                    <!-- Imgaes Section -->
                     <div class="flex gap-x-[16px] justify-between items-center">
                         <div class="flex flex-col gap-[6px]">
                             <p
@@ -162,7 +163,7 @@
                 </div>
             </template>
 
-            {{-- Datagrid Body Shimmer --}}
+            <!-- Datagrid Body Shimmer -->
             <template v-else>
                 <x-admin::shimmer.datagrid.table.body :isMultiRow="true"></x-admin::shimmer.datagrid.table.body>
             </template>

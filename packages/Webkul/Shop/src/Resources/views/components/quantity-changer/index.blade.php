@@ -17,7 +17,7 @@
                 class="icon-minus text-[24px] cursor-pointer"
                 role="button"
                 tabindex="0"
-                aria-label="Decrease Quantity"
+                aria-label="@lang('shop::app.components.quantity-changer.decrease-quantity')"
                 @click="decrease"
             >
             </span>
@@ -31,7 +31,7 @@
                 class="icon-plus text-[24px] cursor-pointer"
                 role="button"
                 tabindex="0"
-                aria-label="Increase Quantity"
+                aria-label="@lang('shop::app.components.quantity-changer.increase-quantity')"
                 @click="increase"
             >
             </span>

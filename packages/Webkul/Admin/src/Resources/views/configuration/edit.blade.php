@@ -7,7 +7,7 @@
 @endphp
 
 <x-admin::layouts>
-    {{-- Title of the page --}}
+    <!-- Title of the page -->
     <x-slot:title>
         @if ($items = Arr::get($config->items, request()->route('slug') . '.children'))
             @foreach ($items as $key => $item)
@@ -18,18 +18,18 @@
         @endif
     </x-slot:title>
 
-    {{-- Configuration form fields --}}
+    <!-- Configuration form fields -->
     <x-admin::form 
         action="" 
         enctype="multipart/form-data"
     >
-        {{-- Save Inventory --}}
+        <!-- Save Inventory -->
         <div class="flex gap-[16px] justify-between items-center mt-[14px] max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 {{ $title }}
             </p>
 
-            {{-- Save Inventory --}}
+            <!-- Save Inventory -->
             <div class="flex gap-x-[10px] items-center">
                 <button 
                     type="submit"
@@ -42,9 +42,9 @@
 
         <div class="flex  gap-[16px] justify-between items-center mt-[28px] max-md:flex-wrap">
             <div class="flex gap-x-[4px] items-center">
-                {{-- Channel Switcher --}}
+                <!-- Channel Switcher -->
                 <x-admin::dropdown :class="$channels->count() <= 1 ? 'hidden' : ''">
-                    {{-- Dropdown Toggler --}}
+                    <!-- Dropdown Toggler -->
                     <x-slot:toggle>
                         <button
                             type="button"
@@ -60,7 +60,7 @@
                         </button>
                     </x-slot:toggle>
 
-                    {{-- Dropdown Content --}}
+                    <!-- Dropdown Content -->
                     <x-slot:content class="!p-[0px]">
                         @foreach ($channels as $channel)
                             <a
@@ -73,9 +73,9 @@
                     </x-slot:content>
                 </x-admin::dropdown>
 
-                {{-- Channel Switcher --}}
+                <!-- Channel Switcher -->
                 <x-admin::dropdown>
-                    {{-- Dropdown Toggler --}}
+                    <!-- Dropdown Toggler -->
                     <x-slot:toggle>
                         <button
                             type="button"
@@ -91,7 +91,7 @@
                         </button>
                     </x-slot:toggle>
 
-                    {{-- Dropdown Content --}}
+                    <!-- Dropdown Content -->
                     <x-slot:content class="!p-[0px]">
                         @foreach ($currentChannel->locales as $locale)
                             <a

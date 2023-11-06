@@ -47,25 +47,25 @@
         {!! core()->getConfigData('general.content.custom_scripts.custom_css') !!}
     </style>
 
-    {!! view_render_event('bagisto.shop.layout.head') !!}
+    {!! view_render_event('bagisto.admin.layout.head') !!}
 </head>
 
 <body>
-    {!! view_render_event('bagisto.shop.layout.body.before') !!}
+    {!! view_render_event('bagisto.admin.layout.body.before') !!}
 
     <div id="app">
         {{-- Flash Message Blade Component --}}
         <x-admin::flash-group />
 
-        {!! view_render_event('bagisto.shop.layout.content.before') !!}
+        {!! view_render_event('bagisto.admin.layout.content.before') !!}
 
                 {{-- Page Content Blade Component --}}
                 {{ $slot }}
 
-        {!! view_render_event('bagisto.shop.layout.content.after') !!}
+        {!! view_render_event('bagisto.admin.layout.content.after') !!}
     </div>
 
-    {!! view_render_event('bagisto.shop.layout.body.after') !!}
+    {!! view_render_event('bagisto.admin.layout.body.after') !!}
 
     @stack('scripts')
 
