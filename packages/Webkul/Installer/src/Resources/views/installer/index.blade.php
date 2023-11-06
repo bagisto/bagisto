@@ -409,25 +409,25 @@
                                         rules="required"
                                         :label="trans('installer::app.installer.index.default-locale')"
                                     >
-                                        <option value="ar">Arabic</option>
-                                        <option value="bn">Bengali</option>
-                                        <option value="pt_BR">Brazilian Portuguese</option>
-                                        <option value="zh_CN">Chinese</option>
-                                        <option value="nl">Dutch</option>
-                                        <option value="en" selected>English</option>
-                                        <option value="fr">French</option>
-                                        <option value="de">Dutch</option>
-                                        <option value="he">Hebrew</option>
-                                        <option value="hi_IN">Hindi</option>
-                                        <option value="it">Italian</option>
-                                        <option value="ja">Japanese</option>
-                                        <option value="fa">Persian</option>
-                                        <option value="pl">Polish</option>
-                                        <option value="ru">Russian</option>
-                                        <option value="sin">Sinhala</option>
-                                        <option value="es">Spanish</option>
-                                        <option value="tr">Turkish</option>
-                                        <option value="uk">Ukrainian</option>
+                                        <option value="ar">@lang('installer::app.installer.index.arabic')</option>
+                                        <option value="bn">@lang('installer::app.installer.index.bengali')</option>
+                                        <option value="pt_BR">@lang('installer::app.installer.index.portuguese')</option>
+                                        <option value="zh_CN">@lang('installer::app.installer.index.chinese')</option>
+                                        <option value="nl">@lang('installer::app.installer.index.dutch')</option>
+                                        <option value="en" selected>@lang('installer::app.installer.index.english')</option>
+                                        <option value="fr">@lang('installer::app.installer.index.french')</option>
+                                        <option value="de">@lang('installer::app.installer.index.dutch')</option>
+                                        <option value="he">@lang('installer::app.installer.index.hebrew')</option>
+                                        <option value="hi_IN">@lang('installer::app.installer.index.hindi')</option>
+                                        <option value="it">@lang('installer::app.installer.index.italian')</option>
+                                        <option value="ja">@lang('installer::app.installer.index.japanese')</option>
+                                        <option value="fa">@lang('installer::app.installer.index.persian')</option>
+                                        <option value="pl">@lang('installer::app.installer.index.polish')</option>
+                                        <option value="ru">@lang('installer::app.installer.index.russian')</option>
+                                        <option value="sin">@lang('installer::app.installer.index.sinhala')</option>
+                                        <option value="es">@lang('installer::app.installer.index.spanish')</option>
+                                        <option value="tr">@lang('installer::app.installer.index.turkish')</option>
+                                        <option value="uk">@lang('installer::app.installer.index.ukrainian')</option>
                                     </x-installer::form.control-group.control>
 
                                     <x-installer::form.control-group.error
@@ -1066,7 +1066,7 @@
                                 <!-- Password -->
                                 <x-installer::form.control-group class="mb-[10px]">
                                     <x-installer::form.control-group.label class="required">
-                                        Password
+                                        @lang('installer::app.installer.index.password')
                                     </x-installer::form.control-group.label>
 
                                     <x-installer::form.control-group.control
@@ -1074,8 +1074,8 @@
                                         name="mail_password"
                                         :value="old('mail_password')"
                                         rules="required"
-                                        label="Password"
-                                        placeholder="store@example.com"
+                                        :label="trans('installer::app.installer.index.password')"
+                                        :placeholder="trans('installer::app.installer.index.stored-email-address')"
                                     >
                                     </x-installer::form.control-group.control>
 
@@ -1091,18 +1091,18 @@
                                 <div
                                     class="text-[12px] text-blue-600 font-semibold cursor-pointer"
                                     role="button"
-                                    aria-label="Skip"
+                                    :aria-label="@lang('installer::app.installer.index.skip')"
                                     tabindex="0"
                                     @click="skip"
                                 >
-                                    Skip
+                                    @lang('installer::app.installer.index.skip')
                                 </div>
 
                                 <button
                                     type="submit"
                                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
                                 >
-                                    Save configuration
+                                    @lang('installer::app.installer.index.save-configuration')
                                 </button>
                             </div>
 
@@ -1117,7 +1117,7 @@
                 >
                     <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
                         <p class="text-[20px] text-gray-800 font-bold">
-                            Installation
+                            @lang('installer::app.installer.index.installation')
                         </p>
                     </div>
 
@@ -1129,11 +1129,11 @@
 
                             <div class="grid gap-[10px]">
                                 <p class="text-[18px] text-gray-800 font-semibold">
-                                    Installing Completed
+                                    @lang('installer::app.installer.index.installation-completed')
                                 </p>
 
                                 <p class="text-[14px] text-gray-600">
-                                    Bagisto is successfully installed on your system.
+                                    @lang('installer::app.installer.index.installation-completed-info')
                                 </p>
 
                                 <div class="flex justify-between items-center max-w-[288px]">
@@ -1141,14 +1141,14 @@
                                         href="{{ URL('/admin/login')}}"
                                         class="px-[12px] py-[6px] bg-white border border-blue-700 rounded-[6px] text-blue-600 font-semibold cursor-pointer hover:opacity-90"
                                     >
-                                        Admin Panel
+                                        @lang('installer::app.installer.index.admin-panel')
                                     </a>
 
                                     <a
                                         href="{{ URL('/')}}"
                                         class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
                                     >
-                                        Customer Panel
+                                        @lang('installer::app.installer.index.customer-panel')
                                     </a>
                                 </div>
                             </div>
@@ -1160,14 +1160,14 @@
                             href="https://forums.bagisto.com"
                             class="text-[12px] text-blue-600 font-semibold cursor-pointer"
                         >
-                            Bagisto Forums
+                            @lang('installer::app.installer.index.bagisto-forums')
                         </a>
 
                         <a
                             href="https://bagisto.com/en/extensions"
                             class="px-[12px] py-[6px] bg-white border border-blue-700 rounded-[6px] text-blue-600 font-semibold cursor-pointer hover:opacity-90"
                         >
-                            Explore Bagisto Extentions
+                            @lang('installer::app.installer.index.explore-bagisto-extensions')
                         </a>
                     </div>
                 </div>
