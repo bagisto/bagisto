@@ -277,7 +277,7 @@
                             <x-shop::form.control-group.control
                                 type="text"
                                 name="shipping[address1][]"
-                                rules="required"
+                                rules="required|address"
                                 :label="trans('shop::app.checkout.onepage.addresses.shipping.street-address')"
                                 :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.street-address')"
                                 v-model="forms.shipping.address.address1[0]"
