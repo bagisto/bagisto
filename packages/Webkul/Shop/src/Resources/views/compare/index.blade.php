@@ -66,6 +66,7 @@
                                         @{{ attribute.name ?? attribute.admin_name }}
                                     </p>
                                 </div>
+
                                 <div class="flex gap-[12px] border-l-[1px] border-[#E9E9E9] max-sm:border-0">
                                     <div
                                         class="relative group"
@@ -101,8 +102,10 @@
                                             @{{ attribute.name ?? attribute.admin_name }} :
                                         </p>
 
-                                        <p class="text-[14px]">
-                                            @{{ product[attribute.code] ?? 'N/A' }}
+                                        <p
+                                            class="text-[14px]"
+                                            v-html="product[attribute.code] ?? 'N/A'"
+                                        >
                                         </p>
                                     </div>
                                 </div>

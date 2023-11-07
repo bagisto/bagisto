@@ -427,7 +427,7 @@ return [
 
         'products' => [
             'card' => [
-                'card.add-to-compare-success' => '商品已成功添加到比较列表。',
+                'add-to-compare-success'      => '商品已成功添加到比较列表。',
                 'already-in-compare'          => '商品已经在比较列表中。',
                 'add-to-cart'                 => '添加到购物车',
                 'add-to-wishlist'             => '添加到愿望清单',

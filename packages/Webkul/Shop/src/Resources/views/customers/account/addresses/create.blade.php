@@ -131,7 +131,7 @@
                 type="text"
                 name="address1[]"
                 :value="old('address1[]')"
-                rules="required"
+                rules="required|address"
                 :label="trans('shop::app.customers.account.addresses.street-address')"
                 :placeholder="trans('shop::app.customers.account.addresses.street-address')"
             >
