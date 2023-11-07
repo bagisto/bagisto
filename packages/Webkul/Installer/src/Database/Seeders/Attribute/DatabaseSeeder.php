@@ -9,13 +9,14 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      *
+     * @param  array  $parameters
      * @return void
      */
-    public function run()
+    public function run($parameters = [])
     {
-        $this->call(AttributeFamilyTableSeeder::class);
-        $this->call(AttributeGroupTableSeeder::class);
-        $this->call(AttributeTableSeeder::class);
-        $this->call(AttributeOptionTableSeeder::class);
+        $this->call(AttributeFamilyTableSeeder::class, false, ['parameters' => $parameters]);
+        $this->call(AttributeGroupTableSeeder::class, false, ['parameters' => $parameters]);
+        $this->call(AttributeTableSeeder::class, false, ['parameters' => $parameters]);
+        $this->call(AttributeOptionTableSeeder::class, false, ['parameters' => $parameters]);
     }
 }

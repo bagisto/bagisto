@@ -9,15 +9,16 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      *
+     * @param  array  $parameters
      * @return void
      */
-    public function run()
+    public function run($parameters = [])
     {
-        $this->call(LocalesTableSeeder::class);
-        $this->call(CurrencyTableSeeder::class);
-        $this->call(CountriesTableSeeder::class);
-        $this->call(StatesTableSeeder::class);
-        $this->call(ChannelTableSeeder::class);
-        $this->call(ConfigTableSeeder::class);
+        $this->call(LocalesTableSeeder::class, false, ['parameters' => $parameters]);
+        $this->call(CurrencyTableSeeder::class, false, ['parameters' => $parameters]);
+        $this->call(CountriesTableSeeder::class, false, ['parameters' => $parameters]);
+        $this->call(StatesTableSeeder::class, false, ['parameters' => $parameters]);
+        $this->call(ChannelTableSeeder::class, false, ['parameters' => $parameters]);
+        $this->call(ConfigTableSeeder::class, false, ['parameters' => $parameters]);
     }
 }
