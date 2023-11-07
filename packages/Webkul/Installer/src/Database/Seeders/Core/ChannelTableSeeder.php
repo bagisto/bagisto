@@ -7,7 +7,13 @@ use Illuminate\Support\Facades\DB;
 
 class ChannelTableSeeder extends Seeder
 {
-    public function run()
+    /**
+     * Seed the application's database.
+     *
+     * @param  array  $parameters
+     * @return void
+     */
+    public function run($parameters = [])
     {
         DB::table('channels')->delete();
 
@@ -23,33 +29,46 @@ class ChannelTableSeeder extends Seeder
             'updated_at'        => now(),
         ]);
 
-        DB::table('channel_translations')->insert([
-            [
-                'id'                => 1,
-                'channel_id'        => 1,
-                'locale'            => config('app.locale'),
-                'name'              => trans('installer::app.seeders.core.channels.name'),
-                'home_seo'          => json_encode([
-                    'meta_title'       => trans('installer::app.seeders.core.channels.meta-title'),
-                    'meta_description' => trans('installer::app.seeders.core.channels.meta-description'),
-                    'meta_keywords'    => trans('installer::app.seeders.core.channels.meta-keywords'),
-                ]),
-            ],
-        ]);
+        $defaultLocale = $parameters['default_locale'] ?? config('app.locale');
 
-        DB::table('channel_currencies')->insert([
-            [
-                'channel_id'  => 1,
-                'currency_id' => 1,
-            ],
-        ]);
+        $locales = $parameters['allowed_locales'] ?? [$defaultLocale];
 
-        DB::table('channel_locales')->insert([
-            [
-                'channel_id' => 1,
-                'locale_id'  => 1,
-            ],
-        ]);
+        foreach ($locales as $locale) {
+            DB::table('channel_translations')->insert([
+                [
+                    'channel_id' => 1,
+                    'locale'     => $locale,
+                    'name'       => trans('installer::app.seeders.core.channels.name', [], $locale),
+                    'home_seo'   => json_encode([
+                        'meta_title'       => trans('installer::app.seeders.core.channels.meta-title', [], $locale),
+                        'meta_description' => trans('installer::app.seeders.core.channels.meta-description', [], $locale),
+                        'meta_keywords'    => trans('installer::app.seeders.core.channels.meta-keywords', [], $locale),
+                    ]),
+                ],
+            ]);
+        }
+
+        $currencies = DB::table('currencies')->get();
+
+        foreach ($currencies as $currency) {
+            DB::table('channel_currencies')->insert([
+                [
+                    'channel_id'  => 1,
+                    'currency_id' => $currency->id,
+                ],
+            ]);
+        }
+
+        $locales = DB::table('locales')->get();
+
+        foreach ($currencies as $locale) {
+            DB::table('channel_locales')->insert([
+                [
+                    'channel_id' => 1,
+                    'locale_id'  => $locale->id,
+                ],
+            ]);
+        }
 
         DB::table('channel_inventory_sources')->insert([
             'channel_id'          => 1,
