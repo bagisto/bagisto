@@ -427,7 +427,7 @@ return [
 
         'products' => [
             'card' => [
-                'card.add-to-compare-success' => 'Item added successfully to compare list.',
+                'add-to-compare-success'      => 'Item added successfully to compare list.',
                 'already-in-compare'          => 'Item is already added to compare list.',
                 'add-to-cart'                 => 'Add To Cart',
                 'add-to-wishlist'             => 'Add To Wishlist',
