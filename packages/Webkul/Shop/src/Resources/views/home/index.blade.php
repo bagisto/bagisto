@@ -60,7 +60,7 @@
                     {{-- title="Men's Collections" --}}
                     :title="$data['title'] ?? ''"
                     :src="route('shop.api.products.index', $data['filters'] ?? [])"
-                    :navigation-link="route('shop.home.index')"
+                    :navigation-link="route('shop.search.index', $data['filters'] ?? [])"
                 >
                 </x-shop::products.carousel>
 

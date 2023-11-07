@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => 'खोज परिणाम : :query',
+        'title'   => 'खोज परिणाम : :query',
+        'results' => 'खोज परिणाम',
 
         'images' => [
             'index' => [
