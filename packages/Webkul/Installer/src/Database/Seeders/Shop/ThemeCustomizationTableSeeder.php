@@ -121,7 +121,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                 ], [
                     'id'         => 12,
                     'type'       => 'services_content',
-                    'name'       => trans('Services Content'),
+                    'name'       => trans('installer::app.seeders.shop.theme-customizations.services-content.name'),
                     'sort_order' => 12,
                     'status'     => 1,
                     'created_at' => $now,
@@ -301,20 +301,20 @@ class ThemeCustomizationTableSeeder extends Seeder
                     'options'                => json_encode([
                         'services' => [
                             [
-                                'title'        => trans('Free Shipping'),
-                                'description'  => trans('If goods have problems, Lorem Ipsum is dummy text'),
+                                'title'        => trans('installer::app.seeders.shop.theme-customizations.services-content.title.free-shipping'),
+                                'description'  => trans('installer::app.seeders.shop.theme-customizations.services-content.description.free-shipping-info'),
                                 'image'        => 'storage/theme/12/1.webp',
                             ], [
-                                'title'        => trans('Product Replace'),
-                                'description'  => trans('If goods have problems, Lorem Ipsum is dummy text'),
+                                'title'        => trans('installer::app.seeders.shop.theme-customizations.services-content.title.product-replace'),
+                                'description'  => trans('installer::app.seeders.shop.theme-customizations.services-content.description.product-replace-info'),
                                 'image'        => 'storage/theme/12/2.webp',
                             ], [
-                                'title'        => trans('Emi Available'),
-                                'description'  => trans('If goods have problems, Lorem Ipsum is dummy text'),
+                                'title'        => trans('installer::app.seeders.shop.theme-customizations.services-content.title.emi-available'),
+                                'description'  => trans('installer::app.seeders.shop.theme-customizations.services-content.description.emi-available-info'),
                                 'image'        => 'storage/theme/12/3.webp',
                             ], [
-                                'title'       => trans('24/7 Support'),
-                                'description' => trans('If goods have problems, Lorem Ipsum is dummy text'),
+                                'title'       => trans('installer::app.seeders.shop.theme-customizations.services-content.title.time-support'),
+                                'description' => trans('installer::app.seeders.shop.theme-customizations.services-content.description.time-support-info'),
                                 'image'       => 'storage/theme/12/4.webp',
                             ],
                         ],

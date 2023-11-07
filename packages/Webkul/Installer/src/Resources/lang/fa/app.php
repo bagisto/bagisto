@@ -285,6 +285,24 @@ return [
                         'whats-new'        => 'چه خبر است',
                     ],
                 ],
+
+                'services-content' => [
+                    'name'  => 'محتوای خدمات',
+                    
+                    'title' => [
+                        'free-shipping'     => 'ارسال رایگان',
+                        'product-replace'   => 'تعویض محصول',
+                        'emi-available'     => 'EMI در دسترس است',
+                        'time-support'      => 'پشتیبانی 24/7',
+                    ],
+                
+                    'description' => [
+                        'free-shipping-info'     => 'از ارسال رایگان در تمام سفارش‌ها لذت ببرید',
+                        'product-replace-info'   => 'تعویض آسان محصول در دسترس است!',
+                        'emi-available-info'     => 'EMI بدون هزینه در تمام کارت‌های اعتباری اصلی در دسترس است',
+                        'time-support-info'      => 'پشتیبانی اختصاصی 24/7 از طریق چت و ایمیل',
+                    ],
+                ],
             ],
         ],
 

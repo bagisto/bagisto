@@ -285,6 +285,24 @@ return [
                         'whats-new'        => 'What\'s New',
                     ],
                 ],
+
+                'services-content' => [
+                    'name'  => 'Hizmet İçeriği',
+                    
+                    'title' => [
+                        'free-shipping'     => 'Ücretsiz Kargo',
+                        'product-replace'   => 'Ürün Değiştirme',
+                        'emi-available'     => 'EMI Mevcut',
+                        'time-support'      => '7/24 Destek',
+                    ],
+                
+                    'description' => [
+                        'free-shipping-info'     => 'Tüm siparişlerde ücretsiz kargo keyfini çıkarın',
+                        'product-replace-info'   => 'Kolay ürün değiştirme mevcut!',
+                        'emi-available-info'     => 'Tüm ana kredi kartlarında ücretsiz EMI mevcut',
+                        'time-support-info'      => 'Sohbet ve e-posta yoluyla adanmış 7/24 destek',
+                    ],
+                ],
             ],
         ],
 
