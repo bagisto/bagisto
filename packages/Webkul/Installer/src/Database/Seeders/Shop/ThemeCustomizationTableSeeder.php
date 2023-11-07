@@ -124,7 +124,6 @@ class ThemeCustomizationTableSeeder extends Seeder
                 ],
             ]);
 
-
         $locales = $parameters['allowed_locales'] ?? [$defaultLocale];
 
         foreach ($locales as $locale) {
