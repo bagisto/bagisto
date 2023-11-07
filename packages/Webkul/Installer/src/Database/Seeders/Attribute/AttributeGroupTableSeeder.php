@@ -7,7 +7,13 @@ use Illuminate\Support\Facades\DB;
 
 class AttributeGroupTableSeeder extends Seeder
 {
-    public function run()
+    /**
+     * Seed the application's database.
+     *
+     * @param  array  $parameters
+     * @return void
+     */
+    public function run($parameters = [])
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
@@ -17,52 +23,54 @@ class AttributeGroupTableSeeder extends Seeder
 
         DB::table('attribute_groups')->delete();
 
+        $defaultLocale = $parameters['default_locale'] ?? config('app.locale');
+
         DB::table('attribute_groups')->insert([
             [
                 'id'                  => 1,
-                'name'                => trans('installer::app.seeders.attribute.attribute-groups.general'),
+                'name'                => trans('installer::app.seeders.attribute.attribute-groups.general', [], $defaultLocale),
                 'column'              => 1,
                 'is_user_defined'     => 0,
                 'position'            => 1,
                 'attribute_family_id' => 1,
             ], [
                 'id'                  => 2,
-                'name'                => trans('installer::app.seeders.attribute.attribute-groups.description'),
+                'name'                => trans('installer::app.seeders.attribute.attribute-groups.description', [], $defaultLocale),
                 'column'              => 1,
                 'is_user_defined'     => 0,
                 'position'            => 2,
                 'attribute_family_id' => 1,
             ], [
                 'id'                  => 3,
-                'name'                => trans('installer::app.seeders.attribute.attribute-groups.meta-description'),
+                'name'                => trans('installer::app.seeders.attribute.attribute-groups.meta-description', [], $defaultLocale),
                 'column'              => 1,
                 'is_user_defined'     => 0,
                 'position'            => 3,
                 'attribute_family_id' => 1,
             ], [
                 'id'                  => 4,
-                'name'                => trans('installer::app.seeders.attribute.attribute-groups.price'),
+                'name'                => trans('installer::app.seeders.attribute.attribute-groups.price', [], $defaultLocale),
                 'column'              => 2,
                 'is_user_defined'     => 0,
                 'position'            => 1,
                 'attribute_family_id' => 1,
             ], [
                 'id'                  => 5,
-                'name'                => trans('installer::app.seeders.attribute.attribute-groups.shipping'),
+                'name'                => trans('installer::app.seeders.attribute.attribute-groups.shipping', [], $defaultLocale),
                 'column'              => 2,
                 'is_user_defined'     => 0,
                 'position'            => 2,
                 'attribute_family_id' => 1,
             ], [
                 'id'                  => 6,
-                'name'                => trans('installer::app.seeders.attribute.attribute-groups.settings'),
+                'name'                => trans('installer::app.seeders.attribute.attribute-groups.settings', [], $defaultLocale),
                 'column'              => 2,
                 'is_user_defined'     => 0,
                 'position'            => 3,
                 'attribute_family_id' => 1,
             ], [
                 'id'                  => 7,
-                'name'                => trans('installer::app.seeders.attribute.attribute-groups.inventories'),
+                'name'                => trans('installer::app.seeders.attribute.attribute-groups.inventories', [], $defaultLocale),
                 'column'              => 2,
                 'is_user_defined'     => 0,
                 'position'            => 4,
