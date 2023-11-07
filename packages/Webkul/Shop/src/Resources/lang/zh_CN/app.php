@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => '搜索结果为：:query',
+        'title'   => '搜索结果为：:query',
+        'results' => '搜索结果',
 
         'images' => [
             'index' => [

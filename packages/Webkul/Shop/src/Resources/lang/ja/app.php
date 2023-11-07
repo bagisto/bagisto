@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => ':queryの検索結果',
+        'title'   => ':queryの検索結果',
+        'results' => '検索結果',
     ],
 
     'compare' => [

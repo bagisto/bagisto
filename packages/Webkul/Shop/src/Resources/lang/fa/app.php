@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => 'نتایج جستجو برای : :query',
+        'title'   => 'نتایج جستجو برای : :query',
+        'results' => 'نتایج جستجو',
 
         'images' => [
             'index' => [
