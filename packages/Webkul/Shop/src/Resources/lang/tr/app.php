@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => ': :query için arama sonuçları',
+        'title'   => ': :query için arama sonuçları',
+        'results' => 'Arama sonuçları',
 
         'images' => [
             'index' => [

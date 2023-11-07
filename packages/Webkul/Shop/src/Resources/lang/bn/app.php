@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => ':query এর জন্য অনুসন্ধান ফলাফল',
+        'title'   => ':query এর জন্য অনুসন্ধান ফলাফল',
+        'results' => 'অনুসন্ধান ফলাফল',
 
         'images' => [
             'index' => [

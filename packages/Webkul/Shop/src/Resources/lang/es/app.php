@@ -558,7 +558,8 @@ return [
     ],
 
     'search' => [
-        'title' => 'Suchergebnisse für: :query',
+        'title'   => 'Suchergebnisse für: :query',
+        'results' => 'Resultados de búsqueda',
 
         'images' => [
             'index' => [

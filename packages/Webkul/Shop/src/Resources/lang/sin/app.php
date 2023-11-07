@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => 'සෙවුම් සහිත ප්‍රතිඵල: :query',
+        'title'   => 'සෙවුම් සහිත ප්‍රතිඵල: :query',
+        'results' => 'සෙවුම් ප්‍රතිඵල',
 
         'images' => [
             'index' => [
