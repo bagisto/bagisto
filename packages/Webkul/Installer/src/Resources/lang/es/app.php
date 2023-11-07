@@ -288,14 +288,14 @@ return [
 
                 'services-content' => [
                     'name'  => 'Dienstleistungen Inhalt',
-                    
+
                     'title' => [
                         'free-shipping'     => 'Kostenloser Versand',
                         'product-replace'   => 'Produkt ersetzen',
                         'emi-available'     => 'EMI verfügbar',
                         'time-support'      => '24/7 Support',
                     ],
-                
+
                     'description' => [
                         'free-shipping-info'     => 'Kostenloser Versand bei allen Bestellungen',
                         'product-replace-info'   => 'Einfacher Produktersatz verfügbar!',

@@ -288,14 +288,14 @@ return [
 
                 'services-content' => [
                     'name'  => '服务内容',
-                    
+
                     'title' => [
                         'free-shipping'     => '免费送货',
                         'product-replace'   => '产品更换',
                         'emi-available'     => 'EMI 可用',
                         'time-support'      => '24/7 支持',
                     ],
-                
+
                     'description' => [
                         'free-shipping-info'     => '所有订单均可享受免费送货',
                         'product-replace-info'   => '可轻松更换产品！',

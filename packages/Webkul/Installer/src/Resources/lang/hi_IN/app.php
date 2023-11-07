@@ -288,14 +288,14 @@ return [
 
                 'services-content' => [
                     'name'  => 'सेवाओं की सामग्री',
-                    
+
                     'title' => [
                         'free-shipping'     => 'मुफ्त शिपिंग',
                         'product-replace'   => 'उत्पाद बदलें',
                         'emi-available'     => 'EMI उपलब्ध',
                         'time-support'      => '24/7 समर्थन',
                     ],
-                
+
                     'description' => [
                         'free-shipping-info'     => 'सभी आदेशों पर मुफ्त शिपिंग का आनंद लें',
                         'product-replace-info'   => 'आसान उत्पाद बदलाव उपलब्ध!',

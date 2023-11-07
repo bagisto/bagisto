@@ -288,14 +288,14 @@ return [
 
                 'services-content' => [
                     'name'  => 'サービスコンテンツ',
-                    
+
                     'title' => [
                         'free-shipping'     => '送料無料',
                         'product-replace'   => '製品の交換',
                         'emi-available'     => 'EMI利用可能',
                         'time-support'      => '24/7サポート',
                     ],
-                
+
                     'description' => [
                         'free-shipping-info'     => 'すべての注文で送料無料をお楽しみください',
                         'product-replace-info'   => '簡単な製品交換が可能です！',

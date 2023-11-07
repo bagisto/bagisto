@@ -288,7 +288,7 @@ return [
 
                 'services-content' => [
                     'name'  => 'Services Content',
-                    
+
                     'title' => [
                         'free-shipping'     => 'Free Shipping',
                         'product-replace'   => 'Product Replace',

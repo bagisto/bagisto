@@ -288,14 +288,14 @@ return [
 
                 'services-content' => [
                     'name'  => 'محتوى الخدمات',
-                    
+
                     'title' => [
                         'free-shipping'     => 'الشحن المجاني',
                         'product-replace'   => 'استبدال المنتج',
                         'emi-available'     => 'توفر EMI',
                         'time-support'      => 'الدعم على مدار الساعة',
                     ],
-                
+
                     'description' => [
                         'free-shipping-info'     => 'استمتع بالشحن المجاني على جميع الطلبات',
                         'product-replace-info'   => 'استبدال المنتج بسهولة متاح!',

@@ -289,14 +289,14 @@ return [
 
                 'services-content' => [
                     'name'  => 'සේවාවෙන් අනුමත ප්‍රමාණය',
-                    
+
                     'title' => [
                         'free-shipping'     => 'නොමිලේ බෙදාහැරීම',
                         'product-replace'   => 'නිෂ්පාදනය ප්‍රතිශතයක් මාරු කිරීම',
                         'emi-available'     => 'EMI ලබා ගත හැකිය',
                         'time-support'      => '24/7 සහාය',
                     ],
-                
+
                     'description' => [
                         'free-shipping-info'     => 'සියලුම ඇණවුම් මගින් නොමිලේ බෙදාහැරීම ලබා ගත හැකිය',
                         'product-replace-info'   => 'ප්‍රතිශතයක් මාරු කිරීම සුරකින්නේ පහසුවෙන් ලබා ගත හැකිය!',

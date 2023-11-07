@@ -288,14 +288,14 @@ return [
 
                 'services-content' => [
                     'name'  => 'সেবা সামগ্রী',
-                    
+
                     'title' => [
                         'free-shipping'     => 'ফ্রি শিপিং',
                         'product-replace'   => 'পণ্য পরিবর্তন করুন',
                         'emi-available'     => 'ইএমআই উপলব্ধ',
                         'time-support'      => '২৪/৭ সমর্থন',
                     ],
-                
+
                     'description' => [
                         'free-shipping-info'     => 'সমস্ত অর্ডারে ফ্রি শিপিং উপভোগ করুন',
                         'product-replace-info'   => 'সহজ পণ্য পরিবর্তন উপলব্ধ!',

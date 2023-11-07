@@ -288,14 +288,14 @@ return [
 
                 'services-content' => [
                     'name'  => 'Содержание услуг',
-                    
+
                     'title' => [
                         'free-shipping'     => 'Бесплатная доставка',
                         'product-replace'   => 'Замена продукта',
                         'emi-available'     => 'EMI доступно',
                         'time-support'      => 'Поддержка 24/7',
                     ],
-                
+
                     'description' => [
                         'free-shipping-info'     => 'Наслаждайтесь бесплатной доставкой на все заказы',
                         'product-replace-info'   => 'Доступна легкая замена продукта!',

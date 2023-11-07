@@ -288,14 +288,14 @@ return [
 
                 'services-content' => [
                     'name'  => 'Hizmet İçeriği',
-                    
+
                     'title' => [
                         'free-shipping'     => 'Ücretsiz Kargo',
                         'product-replace'   => 'Ürün Değiştirme',
                         'emi-available'     => 'EMI Mevcut',
                         'time-support'      => '7/24 Destek',
                     ],
-                
+
                     'description' => [
                         'free-shipping-info'     => 'Tüm siparişlerde ücretsiz kargo keyfini çıkarın',
                         'product-replace-info'   => 'Kolay ürün değiştirme mevcut!',

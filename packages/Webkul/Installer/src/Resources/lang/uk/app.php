@@ -287,14 +287,14 @@ return [
 
                 'services-content' => [
                     'name'  => 'Вміст послуг',
-                    
+
                     'title' => [
                         'free-shipping'     => 'Безкоштовна доставка',
                         'product-replace'   => 'Заміна продукту',
                         'emi-available'     => 'EMI доступно',
                         'time-support'      => 'Підтримка 24/7',
                     ],
-                
+
                     'description' => [
                         'free-shipping-info'     => 'Насолоджуйтеся безкоштовною доставкою на всі замовлення',
                         'product-replace-info'   => 'Доступна легка заміна продукту!',
