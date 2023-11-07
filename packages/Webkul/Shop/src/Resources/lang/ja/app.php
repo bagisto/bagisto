@@ -427,7 +427,7 @@ return [
 
         'products' => [
             'card' => [
-                'card.add-to-compare-success' => 'アイテムが比較リストに追加されました。',
+                'add-to-compare-success'      => 'アイテムが比較リストに追加されました。',
                 'already-in-compare'          => 'アイテムはすでに比較リストに追加されています。',
                 'add-to-cart'                 => 'カートに追加',
                 'add-to-wishlist'             => 'ウィッシュリストに追加',
