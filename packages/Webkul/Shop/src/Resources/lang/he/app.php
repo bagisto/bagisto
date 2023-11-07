@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => 'תוצאות חיפוש עבור : :query',
+        'title'   => 'תוצאות חיפוש עבור : :query',
+        'results' => 'תוצאות חיפוש',
 
         'images' => [
             'index' => [

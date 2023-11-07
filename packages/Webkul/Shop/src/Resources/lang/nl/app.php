@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => 'Zoekresultaten voor : :query',
+        'title'   => 'Zoekresultaten voor : :query',
+        'results' => 'Zoekresultaten',
 
         'images' => [
             'index' => [
