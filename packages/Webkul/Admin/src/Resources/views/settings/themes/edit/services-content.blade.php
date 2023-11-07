@@ -10,11 +10,11 @@
                     <div class="flex gap-x-[10px] justify-between items-center">
                         <div class="flex flex-col gap-[4px]">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
-                                @lang('Services')
+                                @lang('admin::app.settings.themes.edit.services-content.services')
                             </p>
                             
                             <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
-                                @lang('Service related theme customization.')
+                                @lang('admin::app.settings.themes.edit.services-content.service-info')
                             </p>
                         </div>
         
@@ -24,7 +24,7 @@
                                 class="secondary-button"
                                 @click="$refs.addServiceModal.toggle()"
                             >
-                                @lang('Add Services')
+                                @lang('admin::app.settings.themes.edit.services-content.add-btn')
                             </div>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                                 <div class="grid gap-[6px] place-content-start">
                                     <p class="text-gray-600 dark:text-gray-300">
                                         <div> 
-                                            @lang('Title'): 
+                                            @lang('admin::app.settings.themes.edit.services-content.title'): 
 
                                             <span class="text-gray-600 dark:text-gray-300 transition-all">
                                                 @{{ image.title }}
@@ -89,7 +89,7 @@
 
                                     <p class="text-gray-600 dark:text-gray-300">
                                         <div> 
-                                            @lang('Description'): 
+                                            @lang('admin::app.settings.themes.edit.services-content.description'): 
 
                                             <span class="text-gray-600 dark:text-gray-300 transition-all">
                                                 @{{ image.description }}
@@ -99,7 +99,7 @@
 
                                     <p class="text-gray-600 dark:text-gray-300">
                                         <div class="flex justify-between"> 
-                                            @lang('admin::app.settings.themes.edit.image'): 
+                                            @lang('admin::app.settings.themes.edit.services-content.image'): 
 
                                             <span class="text-gray-600 dark:text-gray-300 transition-all">
                                                 <a
@@ -126,7 +126,7 @@
                                         class="text-red-600 cursor-pointer transition-all hover:underline"
                                         @click="remove(image)"
                                     > 
-                                        @lang('admin::app.settings.themes.edit.delete')
+                                        @lang('admin::app.settings.themes.edit.services-content.delete')
                                     </p>
                                 </div>
                             </div>
@@ -146,11 +146,11 @@
         
                         <div class="flex flex-col gap-[5px] items-center">
                             <p class="text-[16px] text-gray-400 font-semibold">
-                                @lang('admin::app.settings.themes.edit.slider-add-btn')
+                                @lang('admin::app.settings.themes.edit.services-content.add-btn')
                             </p>
                             
                             <p class="text-gray-400">
-                                @lang('admin::app.settings.themes.edit.slider-description')
+                                @lang('admin::app.settings.themes.edit.services-content.service-info')
                             </p>
                         </div>
                     </div>
@@ -162,7 +162,7 @@
                 <x-admin::accordion>
                     <x-slot:header>
                         <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
-                            @lang('admin::app.settings.themes.edit.general')
+                            @lang('admin::app.settings.themes.edit.services-content.general')
                         </p>
                     </x-slot:header>
                 
@@ -175,7 +175,7 @@
 
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label class="required">
-                                @lang('admin::app.settings.themes.edit.name')
+                                @lang('admin::app.settings.themes.edit.services-content.name')
                             </x-admin::form.control-group.label>
 
                             <v-field
@@ -185,8 +185,8 @@
                                 rules="required"
                                 class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                 :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                label="@lang('admin::app.settings.themes.edit.name')"
-                                placeholder="@lang('admin::app.settings.themes.edit.name')"
+                                label="@lang('admin::app.settings.themes.edit.services-content.name')"
+                                placeholder="@lang('admin::app.settings.themes.edit.services-content.name')"
                             ></v-field>
 
                             <x-admin::form.control-group.error
@@ -197,7 +197,7 @@
 
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label class="required">
-                                @lang('admin::app.settings.themes.edit.sort-order')
+                                @lang('admin::app.settings.themes.edit.services-content.sort-order')
                             </x-admin::form.control-group.label>
 
                             <v-field
@@ -207,8 +207,8 @@
                                 value="{{ $theme->sort_order }}"
                                 class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                 :class="[errors['sort_order'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                label="@lang('admin::app.settings.themes.edit.sort-order')"
-                                placeholder="@lang('admin::app.settings.themes.edit.sort-order')"
+                                label="@lang('admin::app.settings.themes.edit.services-content.sort-order')"
+                                placeholder="@lang('admin::app.settings.themes.edit.services-content.sort-order')"
                             >
                             </v-field>
 
@@ -220,7 +220,7 @@
 
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
-                                @lang('admin::app.settings.themes.edit.channels')
+                                @lang('admin::app.settings.themes.edit.services-content.channels')
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
@@ -239,7 +239,7 @@
 
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
-                                @lang('admin::app.settings.themes.edit.status')
+                                @lang('admin::app.settings.themes.edit.services-content.status')
                             </x-admin::form.control-group.label>
 
                             <label class="relative inline-flex items-center cursor-pointer">
@@ -277,6 +277,7 @@
             </div>
         </div>
 
+        <!-- Update Form -->
         <x-admin::form
             v-slot="{ meta, errors, handleSubmit }"
             as="div"
@@ -289,22 +290,24 @@
                 <x-admin::modal ref="addServiceModal">
                     <x-slot:header>
                         <p class="text-[18px] text-gray-800 dark:text-white font-bold">
-                            @lang('Update Services')
+                            @lang('admin::app.settings.themes.edit.services-content.update-service')
                         </p>
                     </x-slot:header>
 
                     <x-slot:content>
                         <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
+                            <!-- Title -->
                             <x-admin::form.control-group class="mb-[10px]">
                                 <x-admin::form.control-group.label class="required">
-                                    @lang('Title')
+                                    @lang('admin::app.settings.themes.edit.services-content.title')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="{{ $currentLocale->code }}[title]"
                                     rules="required"
-                                    :placeholder="trans('Title')"
+                                    :label="trans('admin::app.settings.themes.edit.services-content.title')"
+                                    :placeholder="trans('admin::app.settings.themes.edit.services-content.title')"
                                 >
                                 </x-admin::form.control-group.control>
 
@@ -314,22 +317,30 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
+                            <!-- Description -->
                             <x-admin::form.control-group class="mb-[10px]">
                                 <x-admin::form.control-group.label>
-                                    @lang('Description')
+                                    @lang('admin::app.settings.themes.edit.services-content.description')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
                                     type="textarea"
                                     name="{{ $currentLocale->code }}[description]"
-                                    :placeholder="trans('Description')"
+                                    :label="trans('admin::app.settings.themes.edit.services-content.description')"
+                                    :placeholder="trans('admin::app.settings.themes.edit.services-content.description')"
                                 >
                                 </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error
+                                    control-name="{{ $currentLocale->code }}[description]"
+                                >
+                                </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
+                            <!-- Services Image -->
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
-                                    @lang('Services Image')
+                                    @lang('admin::app.settings.themes.edit.services-content.image')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
@@ -337,6 +348,7 @@
                                     name="service_image"
                                     rules="required"
                                     :is-multiple="false"
+                                    :label="trans('admin::app.settings.themes.edit.services-content.image')"
                                 >
                                 </x-admin::form.control-group.control>
 
@@ -347,7 +359,7 @@
                             </x-admin::form.control-group>
 
                             <p class="text-[12px] text-gray-600 dark:text-gray-300">
-                                @lang('Image resolution should be (40px X 40px)')
+                                @lang('admin::app.settings.themes.edit.services-content.image-size')
                             </p>
                         </div>
                     </x-slot:content>
@@ -359,7 +371,7 @@
                                 type="submit"
                                 class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                             >
-                                @lang('admin::app.settings.themes.edit.save-btn')
+                                @lang('admin::app.settings.themes.edit.services-content.save-btn')
                             </button>
                         </div>
                     </x-slot:footer>
@@ -401,7 +413,7 @@
                     const serviceImage = formData.get("service_image[]");
 
                     if (! serviceImage) {
-                        throw new Error("{{ trans('Service field is Required.') }}");
+                        throw new Error("{{ trans('admin::app.settings.themes.edit.services-content.image-error') }}");
                     }
 
                     this.servicesContent.services.push({
