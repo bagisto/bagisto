@@ -102,7 +102,7 @@ class ThemeController extends Controller
 
         $data['status'] = request()->input('status') == 'on';
 
-        if ($data['type'] == 'image_carousel' || $data['type'] == 'services_content') {
+        if (in_array($data['type'], ['image_carousel', 'services_content'])) {
             unset($data['options']);
         }
 
@@ -110,7 +110,7 @@ class ThemeController extends Controller
 
         $theme = $this->themeCustomizationRepository->update($data, $id);
 
-        if ($data['type'] == 'image_carousel' || $data['type'] == 'services_content') {
+        if (in_array($data['type'], ['image_carousel', 'services_content'])) {
             $this->themeCustomizationRepository->uploadImage(
                 $data[$locale],
                 $theme,
