@@ -1074,18 +1074,18 @@
                                 </x-installer::form.control-group>
                             </div>
 
-                            <div class="flex px-[16px] py-[10px] justify-between items-center">
+                            <div class="flex gap-[10px] justify-end items-center px-[16px] py-[10px]">
                                 <!-- Skip button -->
                                 <div
-                                    class="text-[12px] text-blue-600 font-semibold cursor-pointer"
+                                    class="transparent-button px-[12px] py-[6px] rounded-[6px] text-blue-600 font-semibold cursor-pointer hover:bg-gray-200 "
                                     role="button"
-                                    :aria-label="@lang('installer::app.installer.index.skip')"
+                                    aria-label="@lang('installer::app.installer.index.skip')"
                                     tabindex="0"
                                     @click="skip"
                                 >
                                     @lang('installer::app.installer.index.skip')
                                 </div>
-
+        
                                 <button
                                     type="submit"
                                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
@@ -1093,7 +1093,6 @@
                                     @lang('installer::app.installer.index.save-configuration')
                                 </button>
                             </div>
-
                         </form>
                     </x-installer::form>
                 </div>

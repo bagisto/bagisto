@@ -416,7 +416,6 @@ return [
                 'server-port-code'     => '3306',
                 'title'                => 'Email Configuration',
                 'username'             => 'Username',
-
             ],
 
             'installation-completed' => [
