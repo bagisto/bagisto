@@ -427,7 +427,7 @@ return [
 
         'products' => [
             'card' => [
-                'card.add-to-compare-success' => 'Öğe karşılaştırma listesine başarıyla eklendi.',
+                'add-to-compare-success'      => 'Öğe karşılaştırma listesine başarıyla eklendi.',
                 'already-in-compare'          => 'Öğe zaten karşılaştırma listesine eklenmiş.',
                 'add-to-cart'                 => 'Sepete Ekle',
                 'add-to-wishlist'             => 'Dilek Listesine Ekle',
