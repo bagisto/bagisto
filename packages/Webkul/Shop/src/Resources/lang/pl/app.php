@@ -427,7 +427,7 @@ return [
 
         'products' => [
             'card' => [
-                'card.add-to-compare-success' => 'Przedmiot został pomyślnie dodany do listy porównań.',
+                'add-to-compare-success'      => 'Przedmiot został pomyślnie dodany do listy porównań.',
                 'already-in-compare'          => 'Przedmiot jest już dodany do listy porównań.',
                 'add-to-cart'                 => 'Dodaj do koszyka',
                 'add-to-wishlist'             => 'Dodaj do listy życzeń',
@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => 'Wyniki wyszukiwania dla: :query',
+        'title'   => 'Wyniki wyszukiwania dla: :query',
+        'results' => 'Wyniki wyszukiwania',
 
         'images' => [
             'index' => [

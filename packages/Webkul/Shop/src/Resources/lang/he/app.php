@@ -427,7 +427,7 @@ return [
 
         'products' => [
             'card' => [
-                'card.add-to-compare-success' => 'הפריט נוסף לרשימת ההשוואה בהצלחה.',
+                'add-to-compare-success'      => 'הפריט נוסף לרשימת ההשוואה בהצלחה.',
                 'already-in-compare'          => 'הפריט כבר נמצא ברשימת ההשוואה.',
                 'add-to-cart'                 => 'הוסף לעגלה',
                 'add-to-wishlist'             => 'הוסף לרשימת המשאלות',
@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => 'תוצאות חיפוש עבור : :query',
+        'title'   => 'תוצאות חיפוש עבור : :query',
+        'results' => 'תוצאות חיפוש',
 
         'images' => [
             'index' => [

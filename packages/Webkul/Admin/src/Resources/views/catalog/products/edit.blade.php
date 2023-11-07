@@ -80,7 +80,7 @@
                 </x-admin::dropdown>
 
                 <!-- Locale Switcher -->
-                <x-admin::dropdown>
+                <x-admin::dropdown :class="$currentChannel->locales->count() <= 1 ? 'hidden' : ''">
                     <!-- Dropdown Toggler -->
                     <x-slot:toggle>
                         <button

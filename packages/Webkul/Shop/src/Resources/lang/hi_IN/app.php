@@ -427,7 +427,7 @@ return [
 
         'products' => [
             'card' => [
-                'card.add-to-compare-success' => 'आइटम सफलतापूर्वक तुलना सूची में जोड़ा गया।',
+                'add-to-compare-success'      => 'आइटम सफलतापूर्वक तुलना सूची में जोड़ा गया।',
                 'already-in-compare'          => 'आइटम पहले से ही तुलना सूची में जोड़ा गया है।',
                 'add-to-cart'                 => 'कार्ट में जोड़ें',
                 'add-to-wishlist'             => 'इच्छा सूची में जोड़ें',
@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => 'खोज परिणाम : :query',
+        'title'   => 'खोज परिणाम : :query',
+        'results' => 'खोज परिणाम',
 
         'images' => [
             'index' => [

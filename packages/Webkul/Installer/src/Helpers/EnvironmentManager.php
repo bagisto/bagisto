@@ -72,16 +72,6 @@ class EnvironmentManager
             $envDBParams['DB_PORT'] = (int) $request['db_port'];
         }
 
-        if (isset($request['mail_host'])) {
-            $envDBParams['MAIL_MAILER'] = 'smtp';
-            $envDBParams['MAIL_HOST'] = $request['mail_host'];
-            $envDBParams['MAIL_PORT'] = $request['mail_port'];
-            $envDBParams['MAIL_USERNAME'] = $request['mail_username'];
-            $envDBParams['MAIL_PASSWORD'] = $request['mail_password'];
-            $envDBParams['MAIL_ENCRYPTION'] = $request['mail_encryption'];
-            $envDBParams['MAIL_FROM_ADDRESS'] = $request['mail_from_address'];
-        }
-
         $data = file_get_contents(base_path('.env'));
 
         foreach ($envDBParams as $key => $value) {

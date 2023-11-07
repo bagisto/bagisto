@@ -70,6 +70,7 @@ class Sale extends AbstractReporting
     public function getTotalOrders($startDate, $endDate): int
     {
         return $this->orderRepository
+            ->resetModel()
             ->whereBetween('created_at', [$startDate, $endDate])
             ->count();
     }
@@ -112,6 +113,7 @@ class Sale extends AbstractReporting
     public function getTodayOrders()
     {
         return $this->orderRepository
+            ->resetModel()
             ->with(['addresses', 'payment', 'items'])
             ->whereBetween('orders.created_at', [now()->today(), now()->endOfDay()])
             ->get();
@@ -125,6 +127,19 @@ class Sale extends AbstractReporting
         return [
             'previous'        => $previous = $this->getTotalSales($this->lastStartDate, $this->lastEndDate),
             'current'         => $current = $this->getTotalSales($this->startDate, $this->endDate),
+            'formatted_total' => core()->formatBasePrice($current),
+            'progress'        => $this->getPercentageChange($previous, $current),
+        ];
+    }
+
+    /**
+     * Retrieves sub total sales and their progress.
+     */
+    public function getSubTotalSalesProgress(): array
+    {
+        return [
+            'previous'        => $previous = $this->getSubTotalSales($this->lastStartDate, $this->lastEndDate),
+            'current'         => $current = $this->getSubTotalSales($this->startDate, $this->endDate),
             'formatted_total' => core()->formatBasePrice($current),
             'progress'        => $this->getPercentageChange($previous, $current),
         ];
@@ -152,8 +167,23 @@ class Sale extends AbstractReporting
     public function getTotalSales($startDate, $endDate): float
     {
         return $this->orderRepository
+            ->resetModel()
             ->whereBetween('created_at', [$startDate, $endDate])
             ->sum(DB::raw('base_grand_total_invoiced - base_grand_total_refunded'));
+    }
+
+    /**
+     * Retrieves sub total sales
+     *
+     * @param  \Carbon\Carbon  $startDate
+     * @param  \Carbon\Carbon  $endDate
+     */
+    public function getSubTotalSales($startDate, $endDate): float
+    {
+        return $this->orderRepository
+            ->resetModel()
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->sum(DB::raw('base_sub_total_invoiced - base_sub_total_refunded'));
     }
 
     /**
@@ -219,6 +249,7 @@ class Sale extends AbstractReporting
     public function getAverageSales($startDate, $endDate): ?float
     {
         return $this->orderRepository
+            ->resetModel()
             ->whereBetween('created_at', [$startDate, $endDate])
             ->avg(DB::raw('base_grand_total_invoiced - base_grand_total_refunded'));
     }
@@ -286,6 +317,7 @@ class Sale extends AbstractReporting
     public function getRefunds($startDate, $endDate): float
     {
         return $this->orderRepository
+            ->resetModel()
             ->whereBetween('created_at', [$startDate, $endDate])
             ->sum(DB::raw('base_grand_total_refunded'));
     }
@@ -353,6 +385,7 @@ class Sale extends AbstractReporting
     public function getTaxCollected($startDate, $endDate): float
     {
         return $this->orderRepository
+            ->resetModel()
             ->whereBetween('created_at', [$startDate, $endDate])
             ->sum(DB::raw('base_tax_amount_invoiced - base_tax_amount_refunded'));
     }
@@ -405,6 +438,7 @@ class Sale extends AbstractReporting
     public function getTopTaxCategories($limit = null): Collection
     {
         return $this->orderItemRepository
+            ->resetModel()
             ->leftJoin('tax_categories', 'order_items.tax_category_id', '=', 'tax_categories.id')
             ->select('tax_categories.id as tax_category_id', 'tax_categories.name')
             ->addSelect(DB::raw('SUM(base_tax_amount_invoiced - base_tax_amount_refunded) as total'))
@@ -439,6 +473,7 @@ class Sale extends AbstractReporting
     public function getShippingCollected($startDate, $endDate): float
     {
         return $this->orderRepository
+            ->resetModel()
             ->whereBetween('created_at', [$startDate, $endDate])
             ->sum(DB::raw('base_shipping_invoiced - base_shipping_refunded'));
     }
@@ -491,6 +526,7 @@ class Sale extends AbstractReporting
     public function getTopShippingMethods($limit = null): Collection
     {
         return $this->orderRepository
+            ->resetModel()
             ->select('shipping_title as title')
             ->addSelect(DB::raw('SUM(base_shipping_invoiced - base_shipping_refunded) as total'))
             ->whereBetween('created_at', [$this->startDate, $this->endDate])
@@ -509,6 +545,7 @@ class Sale extends AbstractReporting
     public function getTopPaymentMethods($limit = null): Collection
     {
         return $this->orderRepository
+            ->resetModel()
             ->leftJoin('order_payment', 'orders.id', '=', 'order_payment.order_id')
             ->select('method', 'method_title as title')
             ->addSelect(DB::raw('COUNT(*) as total'))
@@ -538,6 +575,7 @@ class Sale extends AbstractReporting
     public function getTotalUniqueOrdersUsers($startDate, $endDate): int
     {
         return $this->orderRepository
+            ->resetModel()
             ->whereBetween('created_at', [$startDate, $endDate])
             ->groupBy(DB::raw('CONCAT(customer_email, "-", customer_id)'))
             ->get()
@@ -559,6 +597,7 @@ class Sale extends AbstractReporting
         $groupColumn = $config['group_column'];
 
         $results = $this->orderRepository
+            ->resetModel()
             ->select(
                 DB::raw("$groupColumn AS date"),
                 DB::raw("$valueColumn AS total"),

@@ -7,7 +7,13 @@ use Illuminate\Support\Facades\DB;
 
 class StatesTableSeeder extends Seeder
 {
-    public function run()
+    /**
+     * Seed the application's database.
+     *
+     * @param  array  $parameters
+     * @return void
+     */
+    public function run($parameters = [])
     {
         DB::table('country_states')->delete();
 
