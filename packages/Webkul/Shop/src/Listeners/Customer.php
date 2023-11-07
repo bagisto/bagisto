@@ -5,7 +5,6 @@ namespace Webkul\Shop\Listeners;
 use Illuminate\Support\Facades\Mail;
 use Webkul\Shop\Mail\Customer\EmailVerificationNotification;
 use Webkul\Shop\Mail\Customer\NoteNotification;
-use Webkul\Shop\Mail\Customer\RegistrationNotification;
 use Webkul\Shop\Mail\Customer\SubscriptionNotification;
 use Webkul\Shop\Mail\Customer\UpdatePasswordNotification;
 
@@ -32,12 +31,6 @@ class Customer extends Base
                 report($e);
             }
         }
-        try {
-            Mail::queue(new RegistrationNotification($customer));
-        } catch (\Exception $e) {
-            report($e);
-        }
-
     }
 
     /**

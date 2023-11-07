@@ -12,6 +12,7 @@ use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Shop\Http\Requests\Customer\RegistrationRequest;
 use Webkul\Shop\Mail\Customer\EmailVerificationNotification;
+use Webkul\Shop\Mail\Customer\RegistrationNotification;
 
 class RegistrationController extends Controller
 {
@@ -106,13 +107,16 @@ class RegistrationController extends Controller
     public function verifyAccount($token)
     {
         $customer = $this->customerRepository->findOneByField('token', $token);
-
         if ($customer) {
             $this->customerRepository->update([
                 'is_verified' => 1,
                 'token'       => null,
             ], $customer->id);
-
+            try {
+                Mail::queue(new RegistrationNotification($customer));
+            } catch (\Exception $e) {
+                report($e);
+            }
             $this->customerRepository->syncNewRegisteredCustomerInformation($customer);
 
             session()->flash('success', trans('shop::app.customers.signup-form.verified'));
