@@ -14,13 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(BagistoDatabaseSeeder::class, false, [
-            'parameters' => [
-                'default_locale'      => 'en',
-                'allowed_locales'     => ['en', 'ar'],
-                'default_currency'    => 'USD',
-                'allowed_currencies'  => ['USD', 'AED'],
-            ],
-        ]);
+        $this->call(BagistoDatabaseSeeder::class, false);
     }
 }
