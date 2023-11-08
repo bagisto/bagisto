@@ -2,8 +2,10 @@
 
 namespace Webkul\Shop\Http\Controllers\API;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Marketing\Repositories\SearchTermRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Shop\Http\Resources\ProductResource;
 
@@ -16,6 +18,7 @@ class ProductController extends APIController
      */
     public function __construct(
         protected CategoryRepository $categoryRepository,
+        protected SearchTermRepository $searchTermRepository,
         protected ProductRepository $productRepository
     ) {
     }
@@ -25,7 +28,20 @@ class ProductController extends APIController
      */
     public function index(): JsonResource
     {
-        return ProductResource::collection($this->productRepository->getAll());
+        $products = $this->productRepository->getAll();
+
+        if (! empty(request()->query('query'))) {
+            $this->searchTermRepository->updateOrCreate([
+                'term'       => request()->query('query'),
+                'channel_id' => core()->getCurrentChannel()->id,
+                'locale'     => app()->getLocale(),
+            ], [
+                'results' => $products->total(),
+                'uses'    => DB::raw('uses + 1'),
+            ]);
+        }
+
+        return ProductResource::collection($products);
     }
 
     /**
