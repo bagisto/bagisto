@@ -177,7 +177,7 @@ class Customer extends AbstractReporting
             ->whereBetween('product_reviews.created_at', [$this->startDate, $this->endDate])
             ->where('product_reviews.status', 'approved')
             ->whereNotNull('customer_id')
-            ->groupBy(DB::raw('CONCAT(email, "-", customers.id)'))
+            ->groupBy(DB::raw('CONCAT(email, "-", ' . $tablePrefix . 'customers.id)'))
             ->orderByDesc('reviews')
             ->limit($limit)
             ->get();
