@@ -28,32 +28,20 @@ class RegistrationNotification extends Mailable
      */
     public function build()
     {   
-        // Determine email notification configurations
-        $notifyAdmin = core()->getConfigData('emails.general.notifications.emails.general.notifications.customer_registration_confirmation_mail_to_admin');
-        $notifyCustomer = core()->getConfigData('emails.general.notifications.emails.general.notifications.registration');
+        // Retrieve sender and admin email details
+        $senderDetails = core()->getSenderEmailDetails();
+        $adminDetails = core()->getAdminEmailDetails();
 
-        // Initialize the email builder
-        $mailBuilder = $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
-            ->subject(trans('shop::app.emails.customers.registration.subject'))
-            ->view('shop::emails.customers.registration');
+        // Extract necessary sender details
+        $senderEmail = $senderDetails['email'];
+        $senderName = $senderDetails['name'];
 
-        // If both admin and customer notification are enabled
-        if ($notifyAdmin && $notifyCustomer) {
-            return $mailBuilder->to($this->customer->email)
-                ->bcc(core()->getAdminEmailDetails()['email']);
-        }
-
-        // If only customer notification is enabled
-        if ($notifyCustomer) {
-            return $mailBuilder->to($this->customer->email);
-        }
-
-        // If only admin notification is enabled
-        if ($notifyAdmin) {
-            return $mailBuilder->to(core()->getAdminEmailDetails()['email']);
-        }
-
-        // If no specific conditions are met
-        return;
+        // Compose and send the email
+        return  $this->from($senderEmail, $senderName)
+                ->to($this->customer->email)
+                ->bcc($adminDetails['email'])
+                ->subject(trans('shop::app.emails.customers.registration.subject'))
+                ->view('shop::emails.customers.registration');
+                
     }
 }
