@@ -1,10 +1,10 @@
 <?php
 
-namespace Webkul\Shop\Models;
+namespace Webkul\Theme\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Shop\Contracts\ThemeCustomizationTranslation as ThemeCustomizationTranslationContract;
+use Webkul\Theme\Contracts\ThemeCustomizationTranslation as ThemeCustomizationTranslationContract;
 
 class ThemeCustomizationTranslation extends Model implements ThemeCustomizationTranslationContract
 {

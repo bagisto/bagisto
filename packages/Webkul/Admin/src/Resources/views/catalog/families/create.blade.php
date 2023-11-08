@@ -206,6 +206,12 @@
                                             </span>
 
                                             <input
+                                                type="hidden"
+                                                :name="'attribute_groups[' + element.id + '][code]'"
+                                                :value="element.code"
+                                            />
+
+                                            <input
                                                 type="text"
                                                 :name="'attribute_groups[' + element.id + '][name]'"
                                                 class="group_node text-[14px] !text-gray-600 dark:!text-gray-300"
@@ -334,6 +340,24 @@
                             <!--Model Content -->
                             <x-slot:content>
                                 <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
+                                    <!-- Group Code -->
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label class="required">
+                                            @lang('admin::app.catalog.families.create.code')
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="code"
+                                            rules="required"
+                                            :label="trans('admin::app.catalog.families.create.code')"
+                                            :placeholder="trans('admin::app.catalog.families.create.code')"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error control-name="code"></x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+
                                     <!-- Group Name -->
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label class="required">
@@ -409,11 +433,13 @@
                     return {
                         selectedGroup: {
                             id: null,
+                            code: null,
                             name: null,
                         },
 
                         editableGroup: {
                             id: null,
+                            code: null,
                             name: null,
                         },
 
@@ -472,6 +498,7 @@
                                 ? group
                                 : {
                                     id: null,
+                                    code: null,
                                     name: null,
                                 };
                         }
@@ -480,8 +507,18 @@
                     },
 
                     addGroup(params, { resetForm, setErrors }) {
-                        if (this.isGroupAlreadyExists(params.name)) {
-                            setErrors({'name': ["@lang('admin::app.catalog.families.create.group-already-exists')"]});
+                        let isGroupCodeAlreadyExists = this.isGroupCodeAlreadyExists(params.code);
+
+                        let isGroupNameAlreadyExists = this.isGroupNameAlreadyExists(params.name);
+
+                        if (isGroupCodeAlreadyExists || isGroupCodeAlreadyExists) {
+                            if (isGroupCodeAlreadyExists) {
+                                setErrors({'code': ["@lang('admin::app.catalog.families.create.group-code-already-exists')"]});
+                            }
+
+                            if (isGroupNameAlreadyExists) {
+                                setErrors({'name': ["@lang('admin::app.catalog.families.create.group-name-already-exists')"]});
+                            }
 
                             return;
                         }
@@ -501,8 +538,12 @@
 
                         this.$refs.addGroupModal.close();
                     },
+
+                    isGroupCodeAlreadyExists(code) {
+                        return this.columnGroups[1].find(group => group.code == code) || this.columnGroups[2].find(group => group.code == code);
+                    },
                     
-                    isGroupAlreadyExists(name) {
+                    isGroupNameAlreadyExists(name) {
                         return this.columnGroups[1].find(group => group.name == name) || this.columnGroups[2]?.find(group => group.name == name);
                     },
                     
@@ -536,6 +577,7 @@
                         if (! e.target.classList.contains('group_node')) {
                             this.editableGroup = {
                                 id: null,
+                                code: null,
                                 name: null,
                             };
                         }
