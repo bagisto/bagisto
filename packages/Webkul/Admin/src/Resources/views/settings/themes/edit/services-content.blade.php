@@ -64,8 +64,8 @@
 
                         <input
                             type="hidden"
-                            :name="'{{ $currentLocale->code }}[options]['+ index +'][image]'"
-                            :value="image.image"
+                            :name="'{{ $currentLocale->code }}[options]['+ index +'][service_icon]'"
+                            :value="image.service_icon"
                         />
                     
                         <!-- Details -->
@@ -99,20 +99,10 @@
 
                                     <p class="text-gray-600 dark:text-gray-300">
                                         <div class="flex justify-between"> 
-                                            @lang('admin::app.settings.themes.edit.services-content.image'): 
+                                            @lang('Service Icon'): 
 
                                             <span class="text-gray-600 dark:text-gray-300 transition-all">
-                                                <a
-                                                    :href="'{{ config('app.url') }}/' + image.image"
-                                                    :ref="'image_' + index"
-                                                    target="_blank"
-                                                    class="ltr:ml-2 rtl:mr-2 text-blue-600 transition-all hover:underline"
-                                                >
-                                                    <span 
-                                                        :ref="'imageName_' + index"
-                                                        v-text="image.image"
-                                                    ></span>
-                                                </a>
+                                                @{{ image.service_icon }}
                                             </span>
                                         </div>
                                     </p>
@@ -283,7 +273,7 @@
             as="div"
         >
             <form 
-                @submit="handleSubmit($event, saveServiceImage)"
+                @submit="handleSubmit($event, saveServices)"
                 enctype="multipart/form-data"
                 ref="createServiceForm"
             >
@@ -340,27 +330,23 @@
                             <!-- Services Image -->
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
-                                    @lang('admin::app.settings.themes.edit.services-content.image')
+                                    @lang('Service Icon Class')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
-                                    type="image"
-                                    name="service_image"
+                                    type="text"
+                                    name="{{ $currentLocale->code }}[service_icon]"
                                     rules="required"
-                                    :is-multiple="false"
-                                    :label="trans('admin::app.settings.themes.edit.services-content.image')"
+                                    :label="trans('Service Icon Class')"
+                                    :placeholder="trans('Service Icon Class')"
                                 >
                                 </x-admin::form.control-group.control>
 
                                 <x-admin::form.control-group.error
-                                    control-name="service_image"
+                                    control-name="{{ $currentLocale->code }}[service_icon]"
                                 >
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
-
-                            <p class="text-[12px] text-gray-600 dark:text-gray-300">
-                                @lang('admin::app.settings.themes.edit.services-content.image-size')
-                            </p>
                         </div>
                     </x-slot:content>
 
@@ -406,46 +392,24 @@
         },
 
         methods: {
-            saveServiceImage(params, { resetForm ,setErrors }) {
+            saveServices(params, { resetForm ,setErrors }) {
                 let formData = new FormData(this.$refs.createServiceForm);
 
                 try {
-                    const serviceImage = formData.get("service_image[]");
-
-                    if (! serviceImage) {
-                        throw new Error("{{ trans('admin::app.settings.themes.edit.services-content.image-error') }}");
-                    }
+                    const serviceImage = formData.get("service_icon[]");
 
                     this.servicesContent.services.push({
                         title: formData.get("{{ $currentLocale->code }}[title]"),
                         description: formData.get("{{ $currentLocale->code }}[description]"),
-                        service_image: serviceImage,
+                        service_icon: formData.get("{{ $currentLocale->code }}[service_icon]"),
                     });
-
-                    if (serviceImage instanceof File) {
-                        this.setFile(serviceImage, this.servicesContent.services.length - 1);
-                    }
 
                     resetForm();
 
                     this.$refs.addServiceModal.toggle();
                 } catch (error) {
-                    setErrors({'service_image': [error.message]});
+                    setErrors({'service_icon': [error.message]});
                 }
-            },
-
-            setFile(file, index) {
-                let dataTransfer = new DataTransfer();
-
-                dataTransfer.items.add(file);
-
-                setTimeout(() => {
-                    this.$refs['image_' + index][0].href =  URL.createObjectURL(file);
-
-                    this.$refs['imageName_' + index][0].innerHTML = file.name;
-
-                    this.$refs['imageInput_' + index][0].files = dataTransfer.files;
-                }, 0);
             },
 
             remove(image) {
@@ -455,7 +419,7 @@
                     return (
                         item.title !== image.title || 
                         item.description !== image.description || 
-                        item.image !== image.image
+                        item.service_icon !== image.service_icon
                     );
                 });
             },

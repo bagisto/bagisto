@@ -21,17 +21,9 @@
             @foreach ($customization->options['services'] as $service)
                 <div class="flex items-center gap-[20px] bg-white">
                     <span
-                        class="flex items-center justify-center w-[60px] h-[60px] bg-white border border-black rounded-full text-navyBlue p-[10px]"
-                    >
-                        <!-- Service Image -->
-                        <img 
-                            class="min-w-[42px] min-h-[42px]" 
-                            src="{{ $service['image'] }}" 
-                            alt="service-image"
-                            height="42"
-                            width="42"
-                        > 
-                    </span>
+                        class="{{$service['service_icon']}} flex items-center justify-center w-[60px] h-[60px] bg-white border border-black rounded-full text-[42px] text-navyBlue p-[10px]"
+                        role="presentation"
+                    ></span>
         
                     <div class="">
                         <!-- Service Title -->

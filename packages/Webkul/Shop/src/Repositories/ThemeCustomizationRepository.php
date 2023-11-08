@@ -36,7 +36,15 @@ class ThemeCustomizationRepository extends Repository
             $options = [];
 
             foreach ($imageOptions['options'] as $image) {
-                if ($image['image'] instanceof UploadedFile) {
+
+                if (isset($image['service_icon'])) {
+                    $options['services'][] = [
+                        'service_icon' => $image['service_icon'],
+                        'description'  => $image['description'],
+                        'title'        => $image['title'],
+                    ];
+
+                } elseif ($image['image'] instanceof UploadedFile) {
                     $manager = new ImageManager();
 
                     $path = 'theme/' . $theme->id . '/' . Str::random(40) . '.webp';
@@ -50,25 +58,12 @@ class ThemeCustomizationRepository extends Repository
                         return Storage::url($path);
                     }
 
-                    if ($theme->type == 'image_carousel') {
-                        $options['images'][] = [
-                            'image' => 'storage/' . $path,
-                            'link'  => $image['link'],
-                        ];
-                    } else {
-                        $options['services'][] = [
-                            'image'        => 'storage/' . $path,
-                            'description'  => $image['description'],
-                            'title'        => $image['title'],
-                        ];
-                    }
-
+                    $options['images'][] = [
+                        'image' => 'storage/' . $path,
+                        'link'  => $image['link'],
+                    ];
                 } else {
-                    if ($theme->type == 'image_carousel') {
-                        $options['images'][] = $image;
-                    } else {
-                        $options['services'][] = $image;
-                    }
+                    $options['images'][] = $image;
                 }
             }
 

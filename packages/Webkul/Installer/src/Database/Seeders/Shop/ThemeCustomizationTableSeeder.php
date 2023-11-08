@@ -121,6 +121,14 @@ class ThemeCustomizationTableSeeder extends Seeder
                     'status'     => 1,
                     'created_at' => $now,
                     'updated_at' => $now,
+                ], [
+                    'id'         => 12,
+                    'type'       => 'services_content',
+                    'name'       => trans('installer::app.seeders.shop.theme-customizations.services-content.name', [], $defaultLocale),
+                    'sort_order' => 12,
+                    'status'     => 1,
+                    'created_at' => $now,
+                    'updated_at' => $now,
                 ],
             ]);
 
@@ -299,25 +307,25 @@ class ThemeCustomizationTableSeeder extends Seeder
                         'options'                => json_encode([
                             'services' => [
                                 [
-                                    'title'        => trans('installer::app.seeders.shop.theme-customizations.services-content.title.free-shipping'),
-                                    'description'  => trans('installer::app.seeders.shop.theme-customizations.services-content.description.free-shipping-info'),
-                                    'image'        => 'storage/theme/12/1.webp',
+                                    'title'         => trans('installer::app.seeders.shop.theme-customizations.services-content.title.free-shipping', [], $locale),
+                                    'description'   => trans('installer::app.seeders.shop.theme-customizations.services-content.description.free-shipping-info', [], $locale),
+                                    'service_icon'  => 'icon-truck',
                                 ], [
-                                    'title'        => trans('installer::app.seeders.shop.theme-customizations.services-content.title.product-replace'),
-                                    'description'  => trans('installer::app.seeders.shop.theme-customizations.services-content.description.product-replace-info'),
-                                    'image'        => 'storage/theme/12/2.webp',
+                                    'title'         => trans('installer::app.seeders.shop.theme-customizations.services-content.title.product-replace', [], $locale),
+                                    'description'   => trans('installer::app.seeders.shop.theme-customizations.services-content.description.product-replace-info', [], $locale),
+                                    'service_icon'  => 'icon-product',
                                 ], [
-                                    'title'        => trans('installer::app.seeders.shop.theme-customizations.services-content.title.emi-available'),
-                                    'description'  => trans('installer::app.seeders.shop.theme-customizations.services-content.description.emi-available-info'),
-                                    'image'        => 'storage/theme/12/3.webp',
+                                    'title'         => trans('installer::app.seeders.shop.theme-customizations.services-content.title.emi-available', [], $locale),
+                                    'description'   => trans('installer::app.seeders.shop.theme-customizations.services-content.description.emi-available-info', [], $locale),
+                                    'service_icon'  => 'icon-dollar-sign',
                                 ], [
-                                    'title'       => trans('installer::app.seeders.shop.theme-customizations.services-content.title.time-support'),
-                                    'description' => trans('installer::app.seeders.shop.theme-customizations.services-content.description.time-support-info'),
-                                    'image'       => 'storage/theme/12/4.webp',
+                                    'title'         => trans('installer::app.seeders.shop.theme-customizations.services-content.title.time-support', [], $locale),
+                                    'description'   => trans('installer::app.seeders.shop.theme-customizations.services-content.description.time-support-info', [], $locale),
+                                    'service_icon'  => 'icon-support',
                                 ],
                             ],
                         ]),
-                    ]
+                    ],
                 ]);
         }
     }
