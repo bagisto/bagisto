@@ -144,26 +144,29 @@
                                         </div>
 
                                         <!-- Cart Item Image -->
-                                        <x-shop::media.images.lazy
-                                            class="h-[110px] min-w-[110px] max-w[110px] rounded-[12px]"
-                                            ::src="item.base_image.small_image_url"
-                                            ::alt="item.name"
-                                            width="110"
-                                            height="110"
-                                            ::key="item.id"
-                                            ::index="item.id"
-                                        >
-                                        </x-shop::media.images.lazy>
+                                        <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
+                                            <x-shop::media.images.lazy
+                                                class="h-[110px] min-w-[110px] max-w[110px] rounded-[12px]"
+                                                ::src="item.base_image.small_image_url"
+                                                ::alt="item.name"
+                                                width="110"
+                                                height="110"
+                                                ::key="item.id"
+                                                ::index="item.id"
+                                            >
+                                            </x-shop::media.images.lazy>
+                                        </a>
 
                                         <!-- Cart Item Options Container -->
                                         <div class="grid place-content-start gap-y-[10px]">
-
-                                            <p 
-                                                class="text-[16px] font-medium" 
-                                                v-text="item.name"
-                                            >
-                                            </p>
-                                    
+                                            <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
+                                                <p 
+                                                    class="text-[16px] font-medium" 
+                                                    v-text="item.name"
+                                                >
+                                                </p>
+                                            </a>
+                                            
                                             <!-- Cart Item Options Container -->
                                             <div
                                                 class="grid gap-x-[10px] gap-y-[6px] select-none"
