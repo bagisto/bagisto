@@ -60,7 +60,7 @@
 
                             <!-- Actions -->
                             <p
-                                class="col-start-[none]"
+                                class="place-self-end"
                                 v-if="$parent.available.actions.length"
                             >
                                 @lang('admin::app.components.datagrid.table.actions')
@@ -118,7 +118,7 @@
 
                                 <!-- Actions -->
                                 <p
-                                    class="col-start-[none]"
+                                    class="place-self-end"
                                     v-if="$parent.available.actions.length"
                                 >
                                     <span

@@ -45,7 +45,7 @@ class ProductController extends APIController
     }
 
     /**
-     * Upsell product listings.
+     * Up-sell product listings.
      *
      * @param  int  $id
      */
