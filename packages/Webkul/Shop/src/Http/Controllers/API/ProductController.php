@@ -2,10 +2,9 @@
 
 namespace Webkul\Shop\Http\Controllers\API;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Category\Repositories\CategoryRepository;
-use Webkul\Marketing\Repositories\SearchTermRepository;
+use Webkul\Marketing\Jobs\UpdateCreateSearchTerm as UpdateCreateSearchTermJob;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Shop\Http\Resources\ProductResource;
 
@@ -18,7 +17,6 @@ class ProductController extends APIController
      */
     public function __construct(
         protected CategoryRepository $categoryRepository,
-        protected SearchTermRepository $searchTermRepository,
         protected ProductRepository $productRepository
     ) {
     }
@@ -31,14 +29,18 @@ class ProductController extends APIController
         $products = $this->productRepository->getAll();
 
         if (! empty(request()->query('query'))) {
-            $this->searchTermRepository->updateOrCreate([
-                'term'       => request()->query('query'),
-                'channel_id' => core()->getCurrentChannel()->id,
-                'locale'     => app()->getLocale(),
-            ], [
-                'results' => $products->total(),
-                'uses'    => DB::raw('uses + 1'),
-            ]);
+            /**
+             * Update or create search term only if
+             * there is only one filter that is query param
+             */
+            if (count(request()->except(['mode', 'sort', 'limit'])) == 1) {
+                UpdateCreateSearchTermJob::dispatch([
+                    'term'       => request()->query('query'),
+                    'channel_id' => core()->getCurrentChannel()->id,
+                    'locale'     => app()->getLocale(),
+                    'results' => $products->total(),
+                ]);
+            }
         }
 
         return ProductResource::collection($products);
