@@ -7,9 +7,12 @@ use Webkul\Core\Providers\CoreModuleServiceProvider;
 class ModuleServiceProvider extends CoreModuleServiceProvider
 {
     /**
-     * Models.
+     * Define the models
      *
      * @var array
      */
-    protected $models = [];
+    protected $models = [
+        \Webkul\Theme\Models\ThemeCustomization::class,
+        \Webkul\Theme\Models\ThemeCustomizationTranslation::class,
+    ];
 }
