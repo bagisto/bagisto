@@ -49,7 +49,7 @@ class DatabaseManager
     /**
      * Drop all the tables and migrate in the database
      *
-     * @return string
+     * @return void|string
      */
     public function migration()
     {
@@ -61,7 +61,7 @@ class DatabaseManager
             ], 500);
         }
 
-        return $this->seeder();
+        // return $this->seeder();
     }
 
     /**
