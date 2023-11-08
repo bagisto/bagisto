@@ -207,94 +207,105 @@
                     </div>
                 </div>
 
+                @php
+                    $locales = [
+                        'ar'    => 'arabic',
+                        'bn'    => 'bengali',
+                        'pt_BR' => 'portuguese',
+                        'zh_CN' => 'chinese',
+                        'nl'    => 'dutch',
+                        'en'    => 'english',
+                        'fr'    => 'french',
+                        'de'    => 'german',
+                        'he'    => 'hebrew',
+                        'hi_IN' => 'hindi',
+                        'it'    => 'italian',
+                        'ja'    => 'japanese',
+                        'fa'    => 'persian',
+                        'pl'    => 'polish',
+                        'ru'    => 'russian',
+                        'sin'   => 'sinhala',
+                        'es'    => 'spanish',
+                        'tr'    => 'turkish',
+                        'uk'    => 'ukrainian',
+                    ];
+                @endphp
                 <!-- Right Side Components -->
 
                 <!-- Start -->
                 <div class="w-full max-w-[568px] bg-white rounded-[8px] shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)] border-[1px] border-gray-300" v-if="currentStep == 'start'">
-                    <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
-                        <p class="text-[20px] text-gray-800 font-bold">
-                            @lang('Your Bagisto install')
-                        </p>
-                    </div>
-
-                    <div class="flex flex-col gap-[12px] items-center h-[400px] px-[30px] py-[16px] border-b-[1px] border-gray-300 overflow-y-auto">
-                        <img
-                            src="{{ bagisto_asset('images/bagisto-logo.svg', 'installer') }}"
-                            class="w-3/5"
-                            alt="@lang('installer::app.installer.index.bagisto-logo')"
+                    <x-installer::form
+                        v-slot="{ meta, errors, handleSubmit }"
+                        as="div"
+                        ref="start"
+                    >
+                        <form
+                            @submit.prevent="handleSubmit($event, nextForm)"
+                            enctype="multipart/form-data"
                         >
+                            <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
+                                <p class="text-[20px] text-gray-800 font-bold">
+                                    @lang('Your Bagisto install')
+                                </p>
+                            </div>
 
-                        <p class="text-gray-800 text-[20px] font-bold text-center">
-                            @lang('Welcome to Bagisto 2.0.') 
-                        </p>
-
-                        <p class="text-gray-600 text-[14px] text-center">
-                            @lang('installer::app.installer.index.installation-description')
-                        </p>
-
-                        <div class="container bg-dark">
-                            <x-installer::form
-                                v-slot="{ meta, errors, handleSubmit }"
-                                as="div"
-                                ref="envSetup"
-                            >
-                                <form
-                                    @submit.prevent="handleSubmit($event, nextForm)"
-                                    enctype="multipart/form-data"
+                            <div class="flex flex-col gap-[12px] items-center h-[484px] px-[30px] py-[16px] border-b-[1px] border-gray-300 overflow-y-auto">
+                                <img
+                                    src="{{ bagisto_asset('images/bagisto-logo.svg', 'installer') }}"
+                                    class="w-3/5"
+                                    alt="@lang('installer::app.installer.index.bagisto-logo')"
                                 >
-                                    <div class="flex flex-col gap-[12px] px-[30px] py-[16px] border-b-[1px] border-gray-300 h-[484px] overflow-y-auto">
+
+                                <p class="text-gray-800 text-[20px] font-bold text-center">
+                                    @lang('Welcome to Bagisto 2.0.') 
+                                </p>
+
+                                <p class="text-gray-600 text-[14px] text-center">
+                                    @lang('installer::app.installer.index.installation-description')
+                                </p>
+
+                                <div class="container overflow-hidden">
+                                    <div class="flex flex-col gap-[12px] justify-center h-[285px]  px-[30px] py-[16px] border-b-[1px] border-gray-300 overflow-y-auto">
                                         <!-- Application Name -->
                                         <x-installer::form.control-group class="mb-[10px]">
-                                            <x-installer::form.control-group.label class="required">
-                                                @lang('installer::app.installer.index.environment-configuration.application-name')
+                                            <x-installer::form.control-group.label>
+                                                @lang('Installation Wizard language')
                                             </x-installer::form.control-group.label>
-        
+
                                             <x-installer::form.control-group.control
                                                 type="select"
                                                 name="locale"
                                                 rules="required"
                                                 :label="trans('locale')"
                                             >
-                                                <option value="ar">@lang('installer::app.installer.index.environment-configuration.arabic')</option>
-                                                <option value="bn">@lang('installer::app.installer.index.environment-configuration.bengali')</option>
-                                                <option value="pt_BR">@lang('installer::app.installer.index.environment-configuration.portuguese')</option>
-                                                <option value="zh_CN">@lang('installer::app.installer.index.environment-configuration.chinese')</option>
-                                                <option value="nl">@lang('installer::app.installer.index.environment-configuration.dutch')</option>
-                                                <option value="en" selected>@lang('installer::app.installer.index.environment-configuration.english')</option>
-                                                <option value="fr">@lang('installer::app.installer.index.environment-configuration.french')</option>
-                                                <option value="de">@lang('installer::app.installer.index.environment-configuration.dutch')</option>
-                                                <option value="he">@lang('installer::app.installer.index.environment-configuration.hebrew')</option>
-                                                <option value="hi_IN">@lang('installer::app.installer.index.environment-configuration.hindi')</option>
-                                                <option value="it">@lang('installer::app.installer.index.environment-configuration.italian')</option>
-                                                <option value="ja">@lang('installer::app.installer.index.environment-configuration.japanese')</option>
-                                                <option value="fa">@lang('installer::app.installer.index.environment-configuration.persian')</option>
-                                                <option value="pl">@lang('installer::app.installer.index.environment-configuration.polish')</option>
-                                                <option value="ru">@lang('installer::app.installer.index.environment-configuration.russian')</option>
-                                                <option value="sin">@lang('installer::app.installer.index.environment-configuration.sinhala')</option>
-                                                <option value="es">@lang('installer::app.installer.index.environment-configuration.spanish')</option>
-                                                <option value="tr">@lang('installer::app.installer.index.environment-configuration.turkish')</option>
-                                                <option value="uk">@lang('installer::app.installer.index.environment-configuration.ukrainian')</option>
+                                                <option value="" disabled>Select Locale</option>
+
+                                                @foreach ($locales as $value => $label)
+                                                    <option value="{{ $value }}" @if($value == 'en') selected @endif>
+                                                        @lang("installer::app.installer.index.environment-configuration.$label")
+                                                    </option>
+                                                @endforeach
                                             </x-installer::form.control-group.control>
-        
+
                                             <x-installer::form.control-group.error
                                                 control-name="locale"
                                             >
                                             </x-installer::form.control-group.error>
                                         </x-installer::form.control-group>
                                     </div>
-                                </form>
-                            </x-installer::form>
-                        </div>
-                    </div>
-                   
-                    <div class="flex px-[16px] py-[10px] justify-end items-center">
-                        <div
-                            class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
-                            @click="nextForm"
-                        >
-                            @lang('installer::app.installer.index.continue')
-                        </div>
-                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="flex px-[16px] py-[10px] justify-end items-center">
+                                <button
+                                    type="submit"
+                                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
+                                >
+                                    @lang('installer::app.installer.index.continue')
+                                </button>
+                            </div>
+                        </form>
+                    </x-installer::form>
                 </div>
 
                 <!-- Server Requirements -->
@@ -419,6 +430,24 @@
                                         @lang('installer::app.installer.index.environment-configuration.default-currency')
                                     </x-installer::form.control-group.label>
 
+                                    @php
+                                        $currencies = [
+                                            'CNY'    => 'chinese-yuan',
+                                            'AED'    => 'dirham',
+                                            'EUR' => 'euro',
+                                            'INR' => 'rupee',
+                                            'IRR'    => 'iranian',
+                                            'ILS'    => 'israeli',
+                                            'JPY'    => 'japanese-yen',
+                                            'GBP'    => 'pound',
+                                            'RUB'    => 'russian-ruble',
+                                            'SAR' => 'saudi',
+                                            'TRY'    => 'turkish-lira',
+                                            'USD'    => 'usd',
+                                            'UAH'    => 'ukrainian-hryvnia',
+                                        ];
+                                    @endphp
+
                                     <x-installer::form.control-group.control
                                         type="select"
                                         name="app_currency"
@@ -426,19 +455,13 @@
                                         rules="required"
                                         :label="trans('installer::app.installer.index.environment-configuration.default-currency')"
                                     >
-                                        <option value="CNY">@lang('installer::app.installer.index.environment-configuration.chinese-yuan')</option>
-                                        <option value="AED">@lang('installer::app.installer.index.environment-configuration.dirham')</option>
-                                        <option value="EUR">@lang('installer::app.installer.index.environment-configuration.euro')</option>
-                                        <option value="INR">@lang('installer::app.installer.index.environment-configuration.rupee')</option>
-                                        <option value="IRR">@lang('installer::app.installer.index.environment-configuration.iranian')</option>
-                                        <option value="ILS">@lang('installer::app.installer.index.environment-configuration.israeli')</option>
-                                        <option value="JPY">@lang('installer::app.installer.index.environment-configuration.japanese-yen')</option>
-                                        <option value="GBP">@lang('installer::app.installer.index.environment-configuration.pound')</option>
-                                        <option value="RUB">@lang('installer::app.installer.index.environment-configuration.russian-ruble')</option>
-                                        <option value="SAR">@lang('installer::app.installer.index.environment-configuration.saudi')</option>
-                                        <option value="TRY">@lang('installer::app.installer.index.environment-configuration.turkish-lira')</option>
-                                        <option value="USD" selected>@lang('installer::app.installer.index.environment-configuration.usd')</option>
-                                        <option value="UAH">@lang('installer::app.installer.index.environment-configuration.ukrainian-hryvnia')</option>
+                                        <option value="" disabled>Select Currencies</option>
+
+                                        @foreach ($currencies as $value => $label)
+                                            <option value="{{ $value }}" @if($value == 'USD') selected @endif>
+                                                @lang("installer::app.installer.index.environment-configuration.$label")
+                                            </option>
+                                        @endforeach
                                     </x-installer::form.control-group.control>
 
                                     <x-installer::form.control-group.error
@@ -497,25 +520,13 @@
                                         rules="required"
                                         :label="trans('installer::app.installer.index.environment-configuration.default-locale')"
                                     >
-                                        <option value="ar">@lang('installer::app.installer.index.environment-configuration.arabic')</option>
-                                        <option value="bn">@lang('installer::app.installer.index.environment-configuration.bengali')</option>
-                                        <option value="pt_BR">@lang('installer::app.installer.index.environment-configuration.portuguese')</option>
-                                        <option value="zh_CN">@lang('installer::app.installer.index.environment-configuration.chinese')</option>
-                                        <option value="nl">@lang('installer::app.installer.index.environment-configuration.dutch')</option>
-                                        <option value="en" selected>@lang('installer::app.installer.index.environment-configuration.english')</option>
-                                        <option value="fr">@lang('installer::app.installer.index.environment-configuration.french')</option>
-                                        <option value="de">@lang('installer::app.installer.index.environment-configuration.dutch')</option>
-                                        <option value="he">@lang('installer::app.installer.index.environment-configuration.hebrew')</option>
-                                        <option value="hi_IN">@lang('installer::app.installer.index.environment-configuration.hindi')</option>
-                                        <option value="it">@lang('installer::app.installer.index.environment-configuration.italian')</option>
-                                        <option value="ja">@lang('installer::app.installer.index.environment-configuration.japanese')</option>
-                                        <option value="fa">@lang('installer::app.installer.index.environment-configuration.persian')</option>
-                                        <option value="pl">@lang('installer::app.installer.index.environment-configuration.polish')</option>
-                                        <option value="ru">@lang('installer::app.installer.index.environment-configuration.russian')</option>
-                                        <option value="sin">@lang('installer::app.installer.index.environment-configuration.sinhala')</option>
-                                        <option value="es">@lang('installer::app.installer.index.environment-configuration.spanish')</option>
-                                        <option value="tr">@lang('installer::app.installer.index.environment-configuration.turkish')</option>
-                                        <option value="uk">@lang('installer::app.installer.index.environment-configuration.ukrainian')</option>
+                                        <option value="" disabled>Select Currencies</option>
+
+                                        @foreach ($locales as $value => $label)
+                                            <option value="{{ $value }}" @if($value == 'en') selected @endif>
+                                                @lang("installer::app.installer.index.environment-configuration.$label")
+                                            </option>
+                                        @endforeach
                                     </x-installer::form.control-group.control>
 
                                     <x-installer::form.control-group.error
@@ -1006,25 +1017,13 @@
                                         rules="required"
                                         :label="trans('installer::app.installer.index.environment-configuration.default-locale')"
                                     >
-                                        <option value="ar">@lang('installer::app.installer.index.environment-configuration.arabic')</option>
-                                        <option value="bn">@lang('installer::app.installer.index.environment-configuration.bengali')</option>
-                                        <option value="pt_BR">@lang('installer::app.installer.index.environment-configuration.portuguese')</option>
-                                        <option value="zh_CN">@lang('installer::app.installer.index.environment-configuration.chinese')</option>
-                                        <option value="nl">@lang('installer::app.installer.index.environment-configuration.dutch')</option>
-                                        <option value="en" selected>@lang('installer::app.installer.index.environment-configuration.english')</option>
-                                        <option value="fr">@lang('installer::app.installer.index.environment-configuration.french')</option>
-                                        <option value="de">@lang('installer::app.installer.index.environment-configuration.dutch')</option>
-                                        <option value="he">@lang('installer::app.installer.index.environment-configuration.hebrew')</option>
-                                        <option value="hi_IN">@lang('installer::app.installer.index.environment-configuration.hindi')</option>
-                                        <option value="it">@lang('installer::app.installer.index.environment-configuration.italian')</option>
-                                        <option value="ja">@lang('installer::app.installer.index.environment-configuration.japanese')</option>
-                                        <option value="fa">@lang('installer::app.installer.index.environment-configuration.persian')</option>
-                                        <option value="pl">@lang('installer::app.installer.index.environment-configuration.polish')</option>
-                                        <option value="ru">@lang('installer::app.installer.index.environment-configuration.russian')</option>
-                                        <option value="sin">@lang('installer::app.installer.index.environment-configuration.sinhala')</option>
-                                        <option value="es">@lang('installer::app.installer.index.environment-configuration.spanish')</option>
-                                        <option value="tr">@lang('installer::app.installer.index.environment-configuration.turkish')</option>
-                                        <option value="uk">@lang('installer::app.installer.index.environment-configuration.ukrainian')</option>
+                                        <option value="" disabled>Select Currencies</option>
+
+                                        @foreach ($locales as $value => $label)
+                                            <option value="{{ $value }}" @if($value == 'en') selected @endif>
+                                                @lang("installer::app.installer.index.environment-configuration.$label")
+                                            </option>
+                                        @endforeach
                                     </x-installer::form.control-group.control>
 
                                     <x-installer::form.control-group.error
@@ -1307,6 +1306,14 @@
                         }
                     },
 
+                    mounted() {
+                        const url = new URL(window.location.href);
+
+                        if (url.searchParams.has('locale')) {
+                            this.completeStep('start', 'environment', 'active', 'complete');
+                        }
+                    },
+
                     methods: {
                         FormSubmit(params, { setErrors }) {
                             const stepActions = {
@@ -1343,6 +1350,17 @@
                         nextForm(params) {
                             const stepActions = {
                                 start: () => {
+                                    const newLocale = params.locale;
+                                    const url = new URL(window.location.href);
+
+                                    if (! url.searchParams.has('locale')) {
+                                        url.searchParams.set('locale', newLocale);
+
+                                        // Use the pushState method to update the URL without page refresh
+                                        const newURL = url.toString();
+                                        window.history.pushState({ path: newURL }, '', newURL);
+                                    }
+                                    
                                     this.completeStep('start', 'environment', 'active', 'complete');
                                 },
 
