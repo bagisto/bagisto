@@ -195,11 +195,11 @@ class Product extends AbstractReporting
             return [
                 'id'                => $item->product_id,
                 'name'              => $item->name,
-                'price'             => $item->product->price,
+                'price'             => $item->product?->price,
                 'formatted_price'   => core()->formatBasePrice($item->price),
                 'revenue'           => $item->revenue,
                 'formatted_revenue' => core()->formatBasePrice($item->revenue),
-                'images'            => $item->product->images,
+                'images'            => $item->product?->images,
             ];
         });
 
@@ -229,10 +229,10 @@ class Product extends AbstractReporting
             return [
                 'id'                => $item->product_id,
                 'name'              => $item->name,
-                'price'             => $item->product->price,
+                'price'             => $item->product?->price,
                 'formatted_price'   => core()->formatBasePrice($item->price),
                 'total_qty_ordered' => $item->total_qty_ordered,
-                'images'            => $item->product->images,
+                'images'            => $item->product?->images,
             ];
         });
 

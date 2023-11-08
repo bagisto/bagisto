@@ -45,7 +45,7 @@
                                 class="text-[16px] text-emerald-500"
                                 :class="[report.statistics.shipping_collected.progress < 0 ?  'text-red-500' : 'text-emerald-500']"
                             >
-                                @{{ report.statistics.shipping_collected.progress.toFixed(2) }}%
+                                @{{ Math.abs(report.statistics.shipping_collected.progress.toFixed(2)) }}%
                             </p>
                         </div>
                     </div>
