@@ -199,7 +199,7 @@
                             filter: false,
                         };
 
-                        this.$axios.get(("{{ route('shop.api.products.index', ['name' => request('query')]) }}"), { 
+                        this.$axios.get(("{{ route('shop.api.products.index') }}"), { 
                             params: this.queryParams 
                         })
                             .then(response => {
