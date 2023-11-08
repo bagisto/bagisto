@@ -2,20 +2,16 @@
 
 namespace Webkul\CartRule\Listeners;
 
-use Webkul\CartRule\Repositories\CartRuleRepository;
-use Webkul\CartRule\Repositories\CartRuleCustomerRepository;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 use Webkul\CartRule\Repositories\CartRuleCouponUsageRepository;
+use Webkul\CartRule\Repositories\CartRuleCustomerRepository;
+use Webkul\CartRule\Repositories\CartRuleRepository;
 
 class Order
 {
     /**
      * Create a new listener instance.
      *
-     * @param  \Webkul\CartRule\Repositories\CartRuleRepository  $cartRuleRepository
-     * @param  \Webkul\CartRule\Repositories\CartRuleCustomerRepository  $cartRuleCustomerRepository
-     * @param  \Webkul\CartRule\Repositories\CartRuleCouponRepository  $cartRuleCouponRepository
-     * @param  \Webkul\CartRule\Repositories\CartRuleCouponUsageRepository  $cartRuleCouponUsageRepository
      * @return void
      */
     public function __construct(
@@ -23,8 +19,7 @@ class Order
         protected CartRuleCustomerRepository $cartRuleCustomerRepository,
         protected CartRuleCouponRepository $cartRuleCouponRepository,
         protected CartRuleCouponUsageRepository $cartRuleCouponUsageRepository
-    )
-    {
+    ) {
     }
 
     /**

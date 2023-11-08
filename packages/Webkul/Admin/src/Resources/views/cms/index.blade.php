@@ -1,5 +1,5 @@
 <x-admin::layouts>
-    {{-- Title of the page --}}
+    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.cms.index.title')
     </x-slot:title>
@@ -38,7 +38,7 @@
             <!-- Export Modal -->
             <x-admin::datagrid.export src="{{ route('admin.cms.index') }}"></x-admin::datagrid.export>
 
-            {{-- Create New Pages Button --}}
+            <!-- Create New Pages Button -->
             @if (bouncer()->hasPermission('cms.create'))
                 <a
                     href="{{ route('admin.cms.create') }}"

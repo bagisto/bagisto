@@ -17,7 +17,7 @@
                     <template v-else>
                         <div
                             class="row grid gap-[10px] px-6 py-[16px] font-medium border-b-[1px] border-[#E9E9E9] text-[14px] bg-[#F5F5F5] text-black items-center"
-                            :style="`grid-template-columns: repeat(${gridsCount}, 1fr)`"
+                            :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                         >
                             <!-- Mass Actions -->
                             <p v-if="$parent.available.massActions.length">
@@ -81,7 +81,7 @@
                                 <div
                                     class="row grid gap-[10px] items-center px-6 py-[16px] bg-white border-b text-gray-600 transition-all font-medium"
                                     v-for="record in $parent.available.records"
-                                    :style="`grid-template-columns: repeat(${gridsCount}, 1fr)`"
+                                    :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                                 >
                                     <!-- Mass Actions -->
                                     <p v-if="$parent.available.massActions.length">
@@ -155,13 +155,13 @@
                                         </div>
                                     </div>
 
-                                    <nav aria-label="Page Navigation">
+                                    <nav aria-label="@lang('shop::app.components.datagrid.table.page-navigation')">
                                         <ul class="inline-flex items-center -space-x-px">
                                             <li @click="$parent.changePage('previous')">
                                                 <a
                                                     href="javascript:void(0);"
                                                     class="flex items-center justify-center w-[35px] h-[37px] border border-[#E9E9E9] rounded-l-lg leading-normal font-medium hover:bg-gray-100"
-                                                    aria-label="Previous Page"
+                                                    aria-label="@lang('shop::app.components.datagrid.table.previous-page')"
                                                 >
                                                     <span class="icon-arrow-left text-[24px]"></span>
                                                 </a>
@@ -173,7 +173,7 @@
                                                     :value="$parent.available.meta.current_page"
                                                     class="px-[15px] pt-[6px] pb-[5px] max-w-[42px] border border-[#E9E9E9] leading-normal text-black font-medium text-center hover:bg-gray-100"
                                                     @change="$parent.changePage(parseInt($event.target.value))"
-                                                    aria-label="Page Number"
+                                                    aria-label="@lang('shop::app.components.datagrid.table.page-number')"
                                                 >
                                             </li>
 
@@ -181,7 +181,7 @@
                                                 <a
                                                     href="javascript:void(0);"
                                                     class="flex items-center justify-center w-[35px] h-[37px] border border-[#E9E9E9] rounded-r-lg leading-normal font-medium hover:bg-gray-100"
-                                                    aria-label="Next Page"
+                                                    aria-label="@lang('shop::app.components.datagrid.table.next-page')"
                                                 >
                                                     <span class="icon-arrow-right text-[24px]"></span>
                                                 </a>

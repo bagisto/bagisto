@@ -11,7 +11,6 @@ class CustomerServiceProvider extends ServiceProvider
      * Bootstrap application services.
      *
      * @param  \Illuminate\Routing\Router  $router
-     * @return void
      */
     public function boot(): void
     {
@@ -28,8 +27,6 @@ class CustomerServiceProvider extends ServiceProvider
 
     /**
      * Register services.
-     *
-     * @return void
      */
     public function register(): void
     {

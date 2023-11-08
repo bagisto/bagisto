@@ -12,7 +12,6 @@ use Shetabit\Visitor\Traits\Visitable;
 use Webkul\Attribute\Models\AttributeProxy;
 use Webkul\Category\Contracts\Category as CategoryContract;
 use Webkul\Category\Database\Factories\CategoryFactory;
-use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Core\Eloquent\TranslatableModel;
 use Webkul\Product\Models\ProductProxy;
 
@@ -64,8 +63,6 @@ class Category extends TranslatableModel implements CategoryContract
 
     /**
      * The products that belong to the category.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function products(): BelongsToMany
     {
@@ -74,8 +71,6 @@ class Category extends TranslatableModel implements CategoryContract
 
     /**
      * The filterable attributes that belong to the category.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function filterableAttributes(): BelongsToMany
     {
@@ -159,8 +154,8 @@ class Category extends TranslatableModel implements CategoryContract
         if ($categoryTranslation = $this->translate(core()->getCurrentLocale()->code)) {
             return url($categoryTranslation->url_path);
         }
-        
-        return url($this->translate(core()->getDefaultChannelLocaleCode())->url_path);
+
+        return url($this->translate(core()->getDefaultLocaleCodeFromDefaultChannel())->url_path);
     }
 
     /**
@@ -193,8 +188,6 @@ class Category extends TranslatableModel implements CategoryContract
 
     /**
      * Use fallback for category.
-     *
-     * @return bool
      */
     protected function useFallback(): bool
     {
@@ -203,13 +196,10 @@ class Category extends TranslatableModel implements CategoryContract
 
     /**
      * Get fallback locale for category.
-     *
-     * @param  string|null  $locale
-     * @return string|null
      */
-    protected function getFallbackLocale(?string $locale = null): ?string
+    protected function getFallbackLocale(string $locale = null): ?string
     {
-        if ($fallback = core()->getDefaultChannelLocaleCode()) {
+        if ($fallback = core()->getDefaultLocaleCodeFromDefaultChannel()) {
             return $fallback;
         }
 
@@ -218,8 +208,6 @@ class Category extends TranslatableModel implements CategoryContract
 
     /**
      * Create a new factory instance for the model.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
     protected static function newFactory(): Factory
     {

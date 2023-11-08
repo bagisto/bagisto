@@ -3,7 +3,6 @@
         @lang('admin::app.catalog.products.edit.title')
     </x-slot:title>
 
-
     {!! view_render_event('bagisto.admin.catalog.product.edit.before', ['product' => $product]) !!}
 
     <x-admin::form
@@ -12,7 +11,7 @@
     >
         {!! view_render_event('bagisto.admin.catalog.product.edit.actions.before', ['product' => $product]) !!}
 
-        {{-- Page Header --}}
+        <!-- Page Header -->
         <div class="grid gap-[10px]">
             <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
                 <div class="grid gap-[6px]">
@@ -22,6 +21,7 @@
                 </div>
 
                 <div class="flex gap-x-[10px] items-center">
+                    <!-- Back Button -->
                     <a
                         href="{{ route('admin.catalog.products.index') }}"
                         class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
@@ -29,6 +29,7 @@
                         @lang('admin::app.account.edit.back-btn')
                     </a>
 
+                    <!-- Save Button -->
                     <button class="primary-button">
                         @lang('admin::app.catalog.products.edit.save-btn')
                     </button>
@@ -44,12 +45,12 @@
             $currentLocale = core()->getRequestedLocale();
         @endphp
 
-        {{-- Channel and Locale Switcher --}}
+        <!-- Channel and Locale Switcher -->
         <div class="flex  gap-[16px] justify-between items-center mt-[28px] max-md:flex-wrap">
             <div class="flex gap-x-[4px] items-center">
-                {{-- Channel Switcher --}}
+                <!-- Channel Switcher -->
                 <x-admin::dropdown :class="$channels->count() <= 1 ? 'hidden' : ''">
-                    {{-- Dropdown Toggler --}}
+                    <!-- Dropdown Toggler -->
                     <x-slot:toggle>
                         <button
                             type="button"
@@ -65,7 +66,7 @@
                         </button>
                     </x-slot:toggle>
 
-                    {{-- Dropdown Content --}}
+                    <!-- Dropdown Content -->
                     <x-slot:content class="!p-[0px]">
                         @foreach ($channels as $channel)
                             <a
@@ -78,9 +79,9 @@
                     </x-slot:content>
                 </x-admin::dropdown>
 
-                {{-- Locale Switcher --}}
-                <x-admin::dropdown>
-                    {{-- Dropdown Toggler --}}
+                <!-- Locale Switcher -->
+                <x-admin::dropdown :class="$currentChannel->locales->count() <= 1 ? 'hidden' : ''">
+                    <!-- Dropdown Toggler -->
                     <x-slot:toggle>
                         <button
                             type="button"
@@ -96,7 +97,7 @@
                         </button>
                     </x-slot:toggle>
 
-                    {{-- Dropdown Content --}}
+                    <!-- Dropdown Content -->
                     <x-slot:content class="!p-[0px]">
                         @foreach ($currentChannel->locales as $locale)
                             <a
@@ -120,30 +121,27 @@
             @foreach ($product->attribute_family->attribute_groups->groupBy('column') as $column => $groups)
                 {!! view_render_event('bagisto.admin.catalog.product.edit.form.column_' . $column . '.before', ['product' => $product]) !!}
 
-                <div
-                    @if ($column == 1) class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto" @endif
-                    @if ($column == 2) class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full" @endif
-                >
+                <div class="flex flex-col gap-[8px] @if ($column == 1) flex-1 max-xl:flex-auto @elseif ($column == 2) w-[360px] max-w-full max-sm:w-full @endif">
                     @foreach ($groups as $group)
                         @php
                             $customAttributes = $product->getEditableAttributes($group);
                         @endphp
 
                         @if (count($customAttributes))
-                            {!! view_render_event('bagisto.admin.catalog.product.edit.form..' . $group->name . '.before', ['product' => $product]) !!}
+                            {!! view_render_event('bagisto.admin.catalog.product.edit.form..' . $group->code . '.before', ['product' => $product]) !!}
 
                             <div class="relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                                     {{ $group->name }}
                                 </p>
 
-                                @if ($group->name == 'Meta Description')
-                                    {{-- SEO Title & Description Blade Componnet --}}
+                                @if ($group->code == 'meta_description')
+                                    <!-- SEO Title & Description Blade Componnet -->
                                     <x-admin::seo/>
                                 @endif
 
                                 @foreach ($customAttributes as $attribute)
-                                    {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->name . '.controls.before', ['product' => $product]) !!}
+                                    {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->code . '.controls.before', ['product' => $product]) !!}
 
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
@@ -158,40 +156,40 @@
                                         <x-admin::form.control-group.error :control-name="$attribute->code"></x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
 
-                                    {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->name . '.controls.before', ['product' => $product]) !!}
+                                    {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->code . '.controls.before', ['product' => $product]) !!}
                                 @endforeach
 
-                                @includeWhen($group->name == 'Price', 'admin::catalog.products.edit.price.group')
+                                @includeWhen($group->code == 'price', 'admin::catalog.products.edit.price.group')
 
                                 @includeWhen(
-                                    $group->name == 'Inventories' && ! $product->getTypeInstance()->isComposite(),
+                                    $group->code == 'inventories' && ! $product->getTypeInstance()->isComposite(),
                                     'admin::catalog.products.edit.inventories'
                                 )
                             </div>
 
-                            {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->name . '.after', ['product' => $product]) !!}
+                            {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->code . '.after', ['product' => $product]) !!}
                         @endif
                     @endforeach
 
                     @if ($column == 1)
-                        {{-- Images View Blade File --}}
+                        <!-- Images View Blade File -->
                         @include('admin::catalog.products.edit.images')
 
-                        {{-- Videos View Blade File --}}
+                        <!-- Videos View Blade File -->
                         @include('admin::catalog.products.edit.videos')
 
-                        {{-- Product Type View Blade File --}}
+                        <!-- Product Type View Blade File -->
                         @includeIf('admin::catalog.products.edit.types.' . $product->type)
 
-                        {{-- Related, Cross Sells, Up Sells View Blade File --}}
+                        <!-- Related, Cross Sells, Up Sells View Blade File -->
                         @include('admin::catalog.products.edit.links')
 
-                        {{-- Include Product Type Additional Blade Files If Any --}}
+                        <!-- Include Product Type Additional Blade Files If Any -->
                         @foreach ($product->getTypeInstance()->getAdditionalViews() as $view)
                             @includeIf($view)
                         @endforeach
                     @else
-                        {{-- Categories View Blade File --}}
+                        <!-- Categories View Blade File -->
                         @include('admin::catalog.products.edit.categories')
                     @endif
                 </div>

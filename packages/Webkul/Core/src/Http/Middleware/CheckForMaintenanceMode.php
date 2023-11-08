@@ -26,29 +26,27 @@ class CheckForMaintenanceMode extends Original
 
     /**
      * Exclude route names.
-     * 
+     *
      * @var array
      */
     protected $excludedNames = [];
 
     /**
      * Exclude route uris.
-     * 
+     *
      * @var array
      */
     protected $except = [];
 
     /**
      * Exclude IPs.
-     * 
+     *
      * @var array
      */
     protected $excludedIPs = [];
 
     /**
      * Constructor.
-     *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
      */
     public function __construct(Application $app)
     {
@@ -69,7 +67,6 @@ class CheckForMaintenanceMode extends Original
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
      * @return mixed
      *
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
@@ -121,7 +118,7 @@ class CheckForMaintenanceMode extends Original
      * Check for the except routes.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return boolean
+     * @return bool
      */
     protected function shouldPassThrough($request)
     {

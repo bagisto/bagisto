@@ -1,5 +1,5 @@
 <x-admin::layouts>
-    {{-- Title of the page --}}
+    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.settings.users.index.title')
     </x-slot:title>
@@ -9,9 +9,9 @@
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.settings.users.index.title')
             </p>
-    
+
             <div class="flex gap-x-[10px] items-center">
-                {{-- Create User Button --}}
+                <!-- Create User Button -->
                 @if (bouncer()->hasPermission('settings.users.users.create'))
                     <button
                         type="button"
@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        {{-- DataGrid Shimmer --}}
+        <!-- DataGrid Shimmer -->
         <x-admin::shimmer.datagrid/>
     </v-users>
 
@@ -102,18 +102,15 @@
                     <div
                         v-for="record in records"
                         class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
-                        :style="'grid-template-columns: repeat(' + (record.actions.length ? 6 : 5) + ', 1fr);'"
+                        :style="'grid-template-columns: repeat(' + (record.actions.length ? 6 : 5) + ', minmax(0, 1fr));'"
                     >
                         <!-- Id -->
                         <p v-text="record.user_id"></p>
 
                         <!-- User Profile -->
                         <p>
-
-                            <div 
-                                class="flex gap-[10px] items-center"
-                            >
-                                <div 
+                            <div class="flex gap-[10px] items-center">
+                                <div
                                     class="inline-block w-[36px] h-[36px] rounded-full border-3 border-gray-800 align-middle text-center mr-2 overflow-hidden"
                                     v-if="record.user_img"
                                 >
@@ -123,14 +120,15 @@
                                         alt="record.user_name"
                                     />
                                 </div>
-        
-                                <div 
+
+                                <div
                                     class="profile-info-icon"
                                     v-else
                                 >
                                     <button
-                                        class="flex justify-center items-center w-[36px] h-[36px] bg-blue-400 rounded-full text-[14px] text-white font-semibold cursor-pointer leading-6 transition-all hover:bg-blue-500 focus:bg-blue-500">
-                                        @{{ record.user_name[0].toUpperCase() }}
+                                        class="flex justify-center items-center w-[36px] h-[36px] bg-blue-400 rounded-full text-[14px] text-white font-semibold cursor-pointer leading-6 transition-all hover:bg-blue-500 focus:bg-blue-500"
+                                        v-text="record.user_name[0].toUpperCase()"
+                                    >
                                     </button>
                                 </div>
 
@@ -138,7 +136,7 @@
                                     class="text-sm"
                                     v-text="record.user_name"
                                 >
-                                </div> 
+                                </div>
                             </div>
                         </p>
 
@@ -179,7 +177,7 @@
                 as="div"
                 ref="modalForm"
             >
-                <form 
+                <form
                     @submit="handleSubmit($event, updateOrCreate)"
                     ref="userCreateForm"
                 >
@@ -187,22 +185,22 @@
                     <x-admin::modal ref="userUpdateOrCreateModal">
                         <x-slot:header>
                             <!-- Modal Header -->
-                            <p 
+                            <p
                                 class="text-[18px] text-gray-800 dark:text-white font-bold"
                                 v-if="isUpdating"
                             >
                                 @lang('admin::app.settings.users.index.edit.title')
-                            </p>    
+                            </p>
 
-                            <p 
+                            <p
                                 class="text-[18px] text-gray-800 dark:text-white font-bold"
                                 v-else
                             >
                                 @lang('admin::app.settings.users.index.create.title')
-                            </p>    
-                            
+                            </p>
+
                         </x-slot:header>
-        
+
                         <x-slot:content>
                             <!-- Modal Content -->
                             <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
@@ -224,12 +222,12 @@
                                         name="name"
                                         id="name"
                                         rules="required"
-                                        :label="trans('admin::app.settings.users.index.create.name')" 
+                                        :label="trans('admin::app.settings.users.index.create.name')"
                                         :placeholder="trans('admin::app.settings.users.index.create.name')"
                                         v-model="data.user.name"
                                     >
                                     </x-admin::form.control-group.control>
-        
+
                                     <x-admin::form.control-group.error
                                         control-name="name"
                                     >
@@ -241,7 +239,7 @@
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.users.index.create.email')
                                     </x-admin::form.control-group.label>
-        
+
                                     <x-admin::form.control-group.control
                                         type="email"
                                         name="email"
@@ -252,7 +250,7 @@
                                         v-model="data.user.email"
                                     >
                                     </x-admin::form.control-group.control>
-        
+
                                     <x-admin::form.control-group.error
                                         control-name="email"
                                     >
@@ -265,11 +263,11 @@
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.settings.users.index.create.password')
                                         </x-admin::form.control-group.label>
-            
+
                                         <x-admin::form.control-group.control
                                             type="password"
                                             name="password"
-                                            id="password" 
+                                            id="password"
                                             ref="password"
                                             rules="min:6"
                                             :label="trans('admin::app.settings.users.index.create.password')"
@@ -277,30 +275,30 @@
                                             v-model="data.user.password"
                                         >
                                         </x-admin::form.control-group.control>
-            
+
                                         <x-admin::form.control-group.error
                                             control-name="password"
                                         >
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
-    
+
                                     <!-- Confirm Password -->
                                     <x-admin::form.control-group class="flex-1 mb-[10px]">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.settings.users.index.create.confirm-password')
                                         </x-admin::form.control-group.label>
-            
+
                                         <x-admin::form.control-group.control
                                             type="password"
                                             name="password_confirmation"
-                                            id="password_confirmation" 
+                                            id="password_confirmation"
                                             rules="confirmed:@password"
                                             :label="trans('admin::app.settings.users.index.create.password')"
                                             :placeholder="trans('admin::app.settings.users.index.create.confirm-password')"
                                             v-model="data.user.password_confirmation"
                                         >
                                         </x-admin::form.control-group.control>
-            
+
                                         <x-admin::form.control-group.error
                                             control-name="password_confirmation"
                                         >
@@ -317,20 +315,20 @@
                                         </x-admin::form.control-group.label>
 
                                         <v-field
-                                            name="role_id" 
+                                            name="role_id"
                                             rules="required"
                                             label="@lang('admin::app.settings.users.index.create.role')"
                                             v-model="data.user.role_id"
                                         >
                                             <select
-                                                name="role_id" 
+                                                name="role_id"
                                                 class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                                 :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                                 v-model="data.user.role_id"
                                             >
                                                 <option value="" disabled>@lang('admin::app.settings.taxes.categories.index.create.select')</option>
 
-                                                <option 
+                                                <option
                                                     v-for="role in roles"
                                                     :value="role.id"
                                                     :text="role.name"
@@ -338,7 +336,7 @@
                                                 </option>
                                             </select>
                                         </v-field>
-            
+
                                         <x-admin::form.control-group.error
                                             control-name="role_id"
                                         >
@@ -351,7 +349,7 @@
                                                 @lang('admin::app.settings.users.index.create.status')
                                             </x-admin::form.control-group.label>
 
-                                            <div class="gap-[10px] w-full mt-[10px]">    
+                                            <div class="gap-[10px] w-full mt-[10px]">
                                                 <x-admin::form.control-group.control
                                                     type="switch"
                                                     name="status"
@@ -361,7 +359,7 @@
                                                     v-model="data.user.status"
                                                 >
                                                 </x-admin::form.control-group.control>
-                
+
                                                 <x-admin::form.control-group.error
                                                     control-name="status"
                                                 >
@@ -396,11 +394,11 @@
                                 </x-admin::form.control-group>
                             </div>
                         </x-slot:content>
-        
+
                         <x-slot:footer>
                             <!-- Modal Submission -->
                             <div class="flex gap-x-[10px] items-center">
-                                <button 
+                                <button
                                     type="submit"
                                     class="primary-button"
                                 >
@@ -417,7 +415,7 @@
                 v-slot="{ meta, errors, handleSubmit }"
                 as="div"
             >
-                <form 
+                <form
                     @submit="handleSubmit($event, UserConfirmModal)"
                     ref="confirmPassword"
                 >
@@ -426,10 +424,10 @@
                         <x-slot:header>
                             <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                 @lang('Confirm Password Before DELETE')
-                            </p>  
-                            
+                            </p>
+
                         </x-slot:header>
-        
+
                         <x-slot:content>
                             <!-- Modal Content -->
                             <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
@@ -444,11 +442,11 @@
                                         name="password"
                                         id="password"
                                         rules="required"
-                                        :label="trans('Password')" 
+                                        :label="trans('Password')"
                                         :placeholder="trans('Password')"
                                     >
                                     </x-admin::form.control-group.control>
-        
+
                                     <x-admin::form.control-group.error
                                         control-name="password"
                                     >
@@ -456,11 +454,11 @@
                                 </x-admin::form.control-group>
                             </div>
                         </x-slot:content>
-        
+
                         <x-slot:footer>
                             <!-- Modal Submission -->
                             <div class="flex gap-x-[10px] items-center">
-                                <button 
+                                <button
                                     type="submit"
                                     class="primary-button"
                                 >
@@ -480,9 +478,9 @@
                 data() {
                     return {
                         isUpdating: false,
-                        
+
                         roles: @json($roles),
-                        
+
                         data: {
                             user: {},
                             images: [],
@@ -551,7 +549,7 @@
                         let formData = new FormData(this.$refs.confirmPassword);
 
                         formData.append('_method', 'put');
-                        
+
                         this.$axios.post("{{ route('admin.settings.users.destroy')}}", formData)
                             .then((response) => {
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
@@ -567,7 +565,7 @@
 
                     resetForm() {
                         this.isUpdating = false;
-                        
+
                         this.data = {
                             user: {},
                             images: [],

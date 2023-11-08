@@ -1,6 +1,5 @@
 <x-admin::layouts>
-
-    {{-- Page Title --}}
+    <!-- Page Title -->
     <x-slot:title>
         @lang('admin::app.settings.roles.index.title')
     </x-slot:title>
@@ -11,7 +10,7 @@
         </p>
         
         <div class="flex gap-x-[10px] items-center">
-            {{-- Add Role Button --}}
+            <!-- Add Role Button -->
             @if (bouncer()->hasPermission('settings.roles.create')) 
                 <a 
                     href="{{ route('admin.settings.roles.create') }}"

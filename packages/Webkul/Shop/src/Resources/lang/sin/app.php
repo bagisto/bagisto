@@ -4,6 +4,7 @@ return [
     'customers' => [
         'forgot-password' => [
             'back'                 => 'ආපසු සන්නියට ආරයැකිනන්න ?',
+            'bagisto'              => 'බගිස්ටෝ',
             'email-not-exist'      => 'අපි මෙම විද්‍යුත් ලිපිනය සහිතව පරීක්ෂා කරනවානම් අපි යවනවායි.',
             'email'                => 'ඊමේල්',
             'forgot-password-text' => 'ඔබට ඔබගේ මුර අමතකය අපට ඇතුලු වීමෙන් එකක් සලස්වන්න.',
@@ -17,6 +18,7 @@ return [
 
         'reset-password' => [
             'back-link-title'  => 'ආරයැකින්න',
+            'bagisto'          => 'බගිස්ටෝ',
             'confirm-password' => 'මුරපදය තහවුර',
             'email'            => 'ලියාපදිංචි ඊමේල්',
             'footer'           => '© වෙබ්කල් මෘදුකාංග 2010 - :current_year, ඉන්දියාවේ ලියාපදිංචි. සියලු අයිතියන්ගේ අනුමානය වෙනස් වේ.',
@@ -27,6 +29,7 @@ return [
 
         'login-form' => [
             'button-title'        => 'ඇතුල් වන්න',
+            'bagisto'             => 'බගිස්ටෝ',
             'create-your-account' => 'ඔබගේ ගිණුමක් තනා කරන්න',
             'email'               => 'ඊමේල්',
             'form-login-text'     => 'ඔබට ගවේෂකරුට ස්තුතියි, ඔබගේ ඊමේල් ලියාපදිංචි අංකය සහිත අත්සන්යයේ ඇතුලත් කරන්න.',
@@ -44,6 +47,7 @@ return [
 
         'signup-form' => [
             'account-exists'              => 'දැනටමත් ගිණුමක් තිබේද?',
+            'bagisto'                     => 'බගිස්ටෝ',
             'button-title'                => 'ලියාපදිංචි කරන්න',
             'confirm-pass'                => 'මුරපදය තහවුර',
             'email'                       => 'ඊමේල්',
@@ -91,6 +95,7 @@ return [
                 'phone'                   => 'දුරකථන',
                 'save'                    => 'සුරක්ෂිත කරන්න',
                 'subscribe-to-newsletter' => 'නිවේශකරුගේ පුවත් ලිපිනයට දායක වන්ද?',
+                'select-gender'           => 'පිරිසිදු තේරීම',
                 'title'                   => 'පුද්ගලයාව',
                 'unmatch'                 => 'පැරණි මුරපදය නොගැලපෙනුවේ.',
                 'wrong-password'          => 'නොවේෂයෙකු මුරපදය!',
@@ -317,6 +322,7 @@ return [
         'layouts' => [
             'header' => [
                 'account'       => 'ගිණුම',
+                'bagisto'       => 'බගිස්ටෝ',
                 'compare'       => 'සංස්ථාගත කරන්න',
                 'cart'          => 'කර්තෘ',
                 'dropdown-text' => 'කර්තෘ, ඇණවුම්, සහ උපාංග කළමනාකරණ කරන්න',
@@ -338,6 +344,7 @@ return [
                 'customer-service'       => 'ප්‍රශ්නය හා සේවය',
                 'contact-us'             => 'අප හා සම්බන්ධයෙන්',
                 'currency'               => 'මුදල්',
+                'email'                  => 'ඊමේල්',
                 'footer-text'            => '© සියලුම අනුපාතය 2010 - 2023, Webkul Software (රාජ්‍ය කරන අයේෂපායි) විසින් ලිවීම. ස්තූති රථවාහක.',
                 'locale'                 => 'පිටු මාධ්‍ය',
                 'newsletter-text'        => 'අපේ සෙවුම් පනසලේ සම්බන්ධවන්ද බලන්න!',
@@ -397,8 +404,12 @@ return [
             ],
 
             'table' => [
-                'actions'              => 'ක්‍රියාවක්',
-                'no-records-available' => 'ලකුණු ලක් නැත.',
+                'actions'              => 'ක්‍රියාවලිය',
+                'no-records-available' => 'ලකුණු නොපවතියි.',
+                'next-page'            => 'ඊළඟ පිටුව',
+                'page-navigation'      => 'පිටුව නවිකාශය',
+                'previous-page'        => 'පෙර පිටුව',
+                'page-number'          => 'පිටුවේ අංකය',
             ],
         ],
 
@@ -416,21 +427,38 @@ return [
 
         'products' => [
             'card' => [
-                'add-to-compare'     => 'අයිතමයේ සාකච්ඡා කිරීම සාර්ථකව කළා.',
-                'already-in-compare' => 'අයිතමයේ සාකච්ඡා කළා.',
-                'add-to-cart'        => 'කර්තෘකරුකරන්න',
-                'new'                => 'නව',
-                'review-description' => 'මෙම නිෂ්පාදනය කරන්නෙයි',
-                'sale'               => 'විකිණීම',
+                'add-to-compare-success'      => 'අයිතමය සාමාජිකයකු සඳහා සාක්ෂි ලැබුයේ.',
+                'already-in-compare'          => 'අයිතමය සාක්ෂි ලැබුයේ.',
+                'add-to-cart'                 => 'කරත්තයට එක් කරන්න',
+                'add-to-wishlist'             => 'පෙරහුරු සාක්ෂි කිරීම',
+                'add-to-compare'              => 'සාක්ෂි සඳහා එක් කරන්න',
+                'new'                         => 'නව',
+                'review-description'          => 'මෙම නිෂ්පාදනය සඳහා පළිගෙන යයි මේය හරියට දැක්කාය',
+                'sale'                        => 'විකිණීම',
             ],
 
             'carousel' => [
-                'view-all' => 'සියල්ල බලන්න',
+                'next'     => 'ඊළඟ',
+                'previous' => 'පෙර',
+                'view-all' => 'සියලු දක්වන්න',
             ],
         ],
 
         'range-slider' => [
-            'range' => 'පරාවර්ගය:',
+            'min-range' => 'අවමෝදයේ ක්ෂේත්වය',
+            'max-range' => 'උපරිම ක්ෂේත්වය',
+            'range'     => 'ක්ෂේත්වය:',
+        ],
+
+        'carousel' => [
+            'image-slide' => 'රූප ස්ලයිඩ්',
+            'next'        => 'ඊළඟ',
+            'previous'    => 'පෙර',
+        ],
+
+        'quantity-changer' => [
+            'decrease-quantity' => 'ප්‍රමුඛතාව හොඳින්න',
+            'increase-quantity' => 'ප්‍රමුඛතාව වැඩියෙන්න',
         ],
     ],
 
@@ -501,6 +529,7 @@ return [
             ],
 
             'add-to-cart'            => 'කර්තෘකරුකරන්න',
+            'add-to-wishlist'        => 'පෙරහුරු සාක්ෂි කිරීම',
             'add-to-compare'         => 'සාකච්ඡාකරන්න',
             'already-in-compare'     => 'සාකච්ඡාකරන ලද්ද',
             'additional-information' => 'අමතර තොරතුරු',
@@ -515,7 +544,7 @@ return [
 
         'type' => [
             'abstract' => [
-                'offers' => ':qty සඳහා :price ටයිකල් කරන්න සහ :discount% සුදුසු',
+                'offers' => ':qty සඳහා :price ටයිකල් කරන්න සහ :discount සුදුසු',
             ],
         ],
     ],
@@ -529,7 +558,9 @@ return [
         ],
 
         'toolbar' => [
-            'show' => 'පෙන්වන්ද',
+            'grid' => 'ග්‍රිඩ්',
+            'list' => 'ලැයිස්තුව',
+            'show' => 'පෙන්වන්න',
         ],
 
         'view' => [
@@ -539,7 +570,21 @@ return [
     ],
 
     'search' => [
-        'title' => 'සෙවීම ප්රතිඵල : :query',
+        'title'   => 'සෙවුම් සහිත ප්‍රතිඵල: :query',
+        'results' => 'සෙවුම් ප්‍රතිඵල',
+
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'දැනටමත් ක්‍රියා කරමින් හඳුන්වන්න, කරුණාකර වෙනත් කාලයක් පවත්වන්න.',
+                'size-limit-error'     => 'ප්‍රමාණවීමේ සීමාව දෝෂය',
+                'search'               => 'සොයන්න',
+                'only-images-allowed'  => 'සමහර රූපවාහිනී (.jpeg, .jpg, .png, ..) පෙන්වීමට ඉඩ දෙයි.',
+            ],
+
+            'results' => [
+                'analysed-keywords' => 'විශ්වාසීය නිවේදන:',
+            ],
+        ],
     ],
 
     'compare' => [
@@ -580,6 +625,7 @@ return [
             'success-remove'            => 'අයිතමය සාර්ථකයි, සාර්ථකයි ඉවත් කරන ලදි.',
 
             'index' => [
+                'bagisto'                  => 'බගිස්ටෝ',
                 'cart'                     => 'කර්තෘ',
                 'continue-shopping'        => 'කාර්තෘ පෙරවරු',
                 'empty-product'            => 'ඔබේ කර්තෘක්කයේ නිෂ්පාදනයක් නැත.',
@@ -594,6 +640,8 @@ return [
                 'remove'                   => 'ඉවත් කරන්න',
                 'remove-selected-success'  => 'තෝරාගත් අයිතමයන් සාර්ථකව කරාගෙන ඇත.',
                 'see-details'              => 'වැදගත්ද?',
+                'select-all'               => 'සියලු තෝරන්න',
+                'select-cart-item'         => 'කාටු අයිතමය තෝරන්න',
                 'tax'                      => 'බද',
                 'total'                    => 'එකතු',
                 'update-cart'              => 'කර්තෘ යළි කරන්න',
@@ -662,6 +710,7 @@ return [
                 ],
 
                 'index' => [
+                    'bagisto' => 'බගිස්ටෝ',
                     'confirm' => 'තහවුරු',
                 ],
 

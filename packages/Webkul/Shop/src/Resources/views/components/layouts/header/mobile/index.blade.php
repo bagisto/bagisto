@@ -71,12 +71,15 @@
                         <x-shop::dropdown position="top-left">
                             <!-- Dropdown Toggler -->
                             <x-slot:toggle>
-                                <div class="w-full flex gap-[10px] justify-between items-center cursor-pointer">
+                                <div class="w-full flex gap-[10px] justify-between items-center cursor-pointer" role="button">
                                     <span>
                                         {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
                                     </span>
 
-                                    <span class="icon-arrow-down text-[24px]"></span>
+                                    <span
+                                        class="icon-arrow-down text-[24px]"
+                                        role="presentation"
+                                    ></span>
                                 </div>
                             </x-slot:toggle>
 
@@ -89,7 +92,7 @@
                         <x-shop::dropdown position="top-right">
                             <x-slot:toggle>
                                 {{-- Dropdown Toggler --}}
-                                <div class="w-full flex gap-[10px] justify-between items-center cursor-pointer">
+                                <div class="w-full flex gap-[10px] justify-between items-center cursor-pointer" role="button">
                                     <img
                                         src="{{ ! empty(core()->getCurrentLocale()->logo_url)
                                                 ? core()->getCurrentLocale()->logo_url
@@ -105,7 +108,10 @@
                                         {{ core()->getCurrentChannel()->locales()->orderBy('name')->where('code', app()->getLocale())->value('name') }}
                                     </span>
 
-                                    <span class="icon-arrow-down text-[24px]"></span>
+                                    <span
+                                        class="icon-arrow-down text-[24px]"
+                                        role="presentation"
+                                    ></span>
                                 </div>
                             </x-slot:toggle>
 
@@ -123,7 +129,7 @@
             <a
                 href="{{ route('shop.home.index') }}"
                 class="max-h-[30px]"
-                aria-label="Bagisto"
+                aria-label="@lang('shop::app.components.layouts.header.bagisto')"
             >
                 <img
                     src="{{ bagisto_asset('images/logo.svg') }}"
@@ -140,7 +146,7 @@
                 @if($showCompare)
                     <a
                         href="{{ route('shop.compare.index') }}"
-                        aria-label="Compare "
+                        aria-label="@lang('shop::app.components.layouts.header.compare')"
                     >
                         <span class="icon-compare text-[24px] cursor-pointer"></span>
                     </a>
@@ -272,7 +278,7 @@
             <button
                 type="button"
                 class="icon-camera flex items-center absolute top-[12px] right-[12px] pr-3 text-[22px]"
-                aria-label="Search"
+                aria-label="@lang('shop::app.components.layouts.header.search')"
             >
             </button>
         </div>

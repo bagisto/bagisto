@@ -74,8 +74,15 @@
                             class="flex justify-center items-center max-w-[414px] p-[20px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap"
                             @click="showNewBillingAddressForm"
                         >
-                            <div class="flex gap-x-[10px] items-center cursor-pointer">
-                                <span class="icon-plus p-[10px] border border-black rounded-full text-[30px]"></span>
+                            <div
+                                class="flex gap-x-[10px] items-center cursor-pointer"
+                                role="button"
+                                tabindex="0"
+                            >
+                                <span
+                                    class="icon-plus p-[10px] border border-black rounded-full text-[30px]"
+                                    role="presentation"
+                                ></span>
 
                                 <p class="text-[16px]">@lang('shop::app.checkout.onepage.addresses.billing.add-new-address')</p>
                             </div>
@@ -276,7 +283,7 @@
                             <x-shop::form.control-group.control
                                 type="text"
                                 name="billing[address1][]"
-                                rules="required"
+                                rules="required|address"
                                 :label="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
                                 :placeholder="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
                                 v-model="forms.billing.address.address1[0]"

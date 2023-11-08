@@ -2,15 +2,16 @@
 
 namespace Webkul\Core\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Foundation\AliasLoader;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Event;
+use Elastic\Elasticsearch\Client as ElasticSearchClient;
 use Illuminate\Contracts\Debug\ExceptionHandler;
+use Illuminate\Foundation\AliasLoader;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\ServiceProvider;
 use Webkul\Core\Core;
-use Webkul\Core\Visitor;
+use Webkul\Core\ElasticSearch;
 use Webkul\Core\Exceptions\Handler;
 use Webkul\Core\Facades\Core as CoreFacade;
+use Webkul\Core\Facades\ElasticSearch as ElasticSearchFacade;
 use Webkul\Core\View\Compilers\BladeCompiler;
 use Webkul\Theme\ViewRenderEventManager;
 
@@ -18,8 +19,6 @@ class CoreServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap services.
-     *
-     * @return void
      */
     public function boot(): void
     {
@@ -30,13 +29,15 @@ class CoreServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'core');
 
         $this->publishes([
-            dirname(__DIR__) . '/Config/concord.php'    => config_path('concord.php'),
-            dirname(__DIR__) . '/Config/repository.php' => config_path('repository.php'),
-            dirname(__DIR__) . '/Config/scout.php'      => config_path('scout.php'),
-            dirname(__DIR__) . '/Config/visitor.php'      => config_path('visitor.php'),
+            dirname(__DIR__) . '/Config/concord.php'       => config_path('concord.php'),
+            dirname(__DIR__) . '/Config/repository.php'    => config_path('repository.php'),
+            dirname(__DIR__) . '/Config/visitor.php'       => config_path('visitor.php'),
+            dirname(__DIR__) . '/Config/elasticsearch.php' => config_path('elasticsearch.php'),
         ]);
 
         $this->app->register(EventServiceProvider::class);
+
+        $this->app->register(VisitorServiceProvider::class);
 
         $this->app->bind(ExceptionHandler::class, Handler::class);
 
@@ -67,17 +68,15 @@ class CoreServiceProvider extends ServiceProvider
             /**
              * Route to access template applied image file
              */
-            $this->app['router']->get(config('imagecache.route').'/{template}/{filename}', [
+            $this->app['router']->get(config('imagecache.route') . '/{template}/{filename}', [
                 'uses' => 'Webkul\Core\ImageCache\Controller@getResponse',
-                'as' => 'imagecache'
+                'as'   => 'imagecache',
             ])->where(['filename' => $filenamePattern]);
         }
     }
 
     /**
      * Register services.
-     *
-     * @return void
      */
     public function register(): void
     {
@@ -90,12 +89,11 @@ class CoreServiceProvider extends ServiceProvider
 
     /**
      * Register Bouncer as a singleton.
-     *
-     * @return void
      */
     protected function registerFacades(): void
     {
         $loader = AliasLoader::getInstance();
+
         $loader->alias('core', CoreFacade::class);
 
         $this->app->singleton('core', function () {
@@ -103,19 +101,21 @@ class CoreServiceProvider extends ServiceProvider
         });
 
         /**
-         * Bind to service container.
+         * Register ElasticSearch as a singleton.
          */
-        $this->app->singleton('shetabit-visitor', function () {
-            $request = app(Request::class);
+        $this->app->singleton('elasticsearch', function () {
+            return new ElasticSearch;
+        });
 
-            return new Visitor($request, config('visitor'));
+        $loader->alias('elasticsearch', ElasticSearchFacade::class);
+
+        $this->app->singleton(ElasticSearchClient::class, function () {
+            return app()->make('elasticsearch')->connection();
         });
     }
 
     /**
      * Register the console commands of this package.
-     *
-     * @return void
      */
     protected function registerCommands(): void
     {
@@ -136,8 +136,6 @@ class CoreServiceProvider extends ServiceProvider
 
     /**
      * Register the Blade compiler implementation.
-     *
-     * @return void
      */
     public function registerBladeCompiler(): void
     {

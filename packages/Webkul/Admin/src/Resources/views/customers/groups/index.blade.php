@@ -1,5 +1,5 @@
 <x-admin::layouts>
-    {{-- Title of the page --}}
+    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.customers.groups.index.title')
     </x-slot:title>
@@ -17,12 +17,12 @@
                     <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                         @lang('admin::app.customers.groups.index.title')
                     </p>
-            
+
                     <div class="flex gap-x-[10px] items-center">
                         <div class="flex gap-x-[10px] items-center">
                             <!-- Create a new Group -->
                             @if (bouncer()->hasPermission('customers.groups.create'))
-                                <button 
+                                <button
                                     type="button"
                                     class="primary-button"
                                     @click="id=0; $refs.groupUpdateOrCreateModal.open()"
@@ -73,7 +73,7 @@
                                     ></i>
                                 </p>
                             </div>
-    
+
                             <!-- Actions -->
                             @if ($hasPermission)
                                 <p class="flex gap-[10px] justify-end">
@@ -88,7 +88,7 @@
                         <div
                             v-for="record in records"
                             class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
-                            :style="'grid-template-columns: repeat(' + (record.actions.length ? 4 : 3) + ', 1fr);'"
+                            :style="'grid-template-columns: repeat(' + (record.actions.length ? 4 : 3) + ', minmax(0, 1fr));'"
                         >
                             <!-- Id -->
                             <p v-text="record.id"></p>
@@ -136,7 +136,7 @@
                         ref="groupCreateForm"
                     >
                         <!-- Create Group Modal -->
-                        <x-admin::modal ref="groupUpdateOrCreateModal">          
+                        <x-admin::modal ref="groupUpdateOrCreateModal">
                             <x-slot:header>
                                 <!-- Modal Header -->
                                 <p class="text-[18px] text-gray-800 dark:text-white font-bold">
@@ -146,10 +146,10 @@
                                     <span v-else>
                                         @lang('admin::app.customers.groups.index.create.title')
                                     </span>
-                                        
-                                </p>    
+
+                                </p>
                             </x-slot:header>
-            
+
                             <x-slot:content>
                                 <!-- Modal Content -->
                                 <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
@@ -157,13 +157,13 @@
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.customers.groups.index.create.code')
                                         </x-admin::form.control-group.label>
-            
+
                                         <x-admin::form.control-group.control
                                             type="hidden"
                                             name="id"
                                         >
                                         </x-admin::form.control-group.control>
-            
+
 
                                         <x-admin::form.control-group.control
                                             type="text"
@@ -174,18 +174,18 @@
                                             :placeholder="trans('admin::app.customers.groups.index.create.code')"
                                         >
                                         </x-admin::form.control-group.control>
-            
+
                                         <x-admin::form.control-group.error
                                             control-name="code"
                                         >
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
-            
+
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.customers.groups.index.create.name')
                                         </x-admin::form.control-group.label>
-            
+
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="name"
@@ -195,7 +195,7 @@
                                             :placeholder="trans('admin::app.customers.groups.index.create.name')"
                                         >
                                         </x-admin::form.control-group.control>
-            
+
                                         <x-admin::form.control-group.error
                                             control-name="name"
                                         >
@@ -203,11 +203,11 @@
                                     </x-admin::form.control-group>
                                 </div>
                             </x-slot:content>
-            
+
                             <x-slot:footer>
                                 <!-- Modal Submission -->
                                 <div class="flex gap-x-[10px] items-center">
-                                    <button 
+                                    <button
                                         type="submit"
                                         class="primary-button"
                                     >

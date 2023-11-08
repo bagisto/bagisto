@@ -1,12 +1,12 @@
 <x-admin::layouts>
-    {{-- Title of the page --}}
+    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.marketing.communications.templates.edit.title')
     </x-slot:title>
 
     {!! view_render_event('bagisto.admin.marketing.communications.templates.edit.before') !!}
 
-    {{-- Input Form --}}
+    <!-- Input Form -->
     <x-admin::form
         :action="route('admin.marketing.communications.email_templates.update', $template->id)"
         method="PUT"
@@ -20,7 +20,7 @@
             </p>
 
             <div class="flex gap-x-[10px] items-center">
-                {{-- Cancel Button --}}
+                <!-- Cancel Button -->
                 <a
                     href="{{ route('admin.marketing.communications.email_templates.index') }}"
                     class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
@@ -28,7 +28,7 @@
                     @lang('admin::app.marketing.communications.templates.edit.back-btn')
                 </a>
 
-                {{-- Save Button --}}
+                <!-- Save Button -->
                 <button
                     type="submit"
                     class="py-[6px] px-[12px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
@@ -38,17 +38,17 @@
             </div>
         </div>
 
-        {{-- body content --}}
+        <!-- body content -->
         <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
-            {{-- Left sub-component --}}
+            <!-- Left sub-component -->
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
 
                 {!! view_render_event('bagisto.admin.marketing.communications.templates.edit.card.content.before') !!}
 
-                {{--Content --}}
+                <!--Content -->
                 <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <div class="w-full">
-                        {{-- Template Textarea --}}
+                        <!-- Template Textarea -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.communications.templates.create.content')
@@ -78,9 +78,9 @@
 
             </div>
 
-            {{-- Right sub-component --}}
+            <!-- Right sub-component -->
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
-                {{-- General --}}
+                <!-- General -->
 
                 {!! view_render_event('bagisto.admin.marketing.communications.templates.edit.card.accordion.general.before') !!}
 
@@ -96,7 +96,7 @@
 
                         <x-slot:content>
                             <div class="w-full mb-[10px]">
-                                {{-- Template Name --}}
+                                <!-- Template Name -->
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.communications.templates.edit.name')
@@ -117,7 +117,7 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                {{-- Template Status --}}
+                                <!-- Template Status -->
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.communications.templates.edit.status')

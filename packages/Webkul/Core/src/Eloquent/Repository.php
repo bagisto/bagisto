@@ -2,8 +2,6 @@
 
 namespace Webkul\Core\Eloquent;
 
-use Illuminate\Container\Container as Application;
-use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\CacheableInterface;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Traits\CacheableRepository;
@@ -13,27 +11,24 @@ abstract class Repository extends BaseRepository implements CacheableInterface
     use CacheableRepository;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $cacheEnabled = false;
 
     /**
      * @param $method
-     *
      * @return bool
      */
     public function allowedClean()
     {
         if (! isset($this->cleanEnabled)) {
-            return config("repository.cache.clean.enabled", true);
+            return config('repository.cache.clean.enabled', true);
         }
 
         return $this->cleanEnabled;
     }
 
     /**
-     * @param $method
-     *
      * @return bool
      */
     protected function allowedCache($method)
@@ -46,15 +41,15 @@ abstract class Repository extends BaseRepository implements CacheableInterface
             return false;
         }
 
-        $cacheOnly = isset($this->cacheOnly) ? $this->cacheOnly : config("repository.cache.repositories.{$className}.allowed.only", config("repository.cache.allowed.only", null));
-        $cacheExcept = isset($this->cacheExcept) ? $this->cacheExcept : config("repository.cache.repositories.{$className}.allowed.except", config("repository.cache.allowed.only", null));
+        $cacheOnly = isset($this->cacheOnly) ? $this->cacheOnly : config("repository.cache.repositories.{$className}.allowed.only", config('repository.cache.allowed.only', null));
+        $cacheExcept = isset($this->cacheExcept) ? $this->cacheExcept : config("repository.cache.repositories.{$className}.allowed.except", config('repository.cache.allowed.only', null));
 
         if (is_array($cacheOnly)) {
             return in_array($method, $cacheOnly);
         }
 
         if (is_array($cacheExcept)) {
-            return !in_array($method, $cacheExcept);
+            return ! in_array($method, $cacheExcept);
         }
 
         if (is_null($cacheOnly) && is_null($cacheExcept)) {
@@ -62,6 +57,16 @@ abstract class Repository extends BaseRepository implements CacheableInterface
         }
 
         return false;
+    }
+
+    /**
+     * @throws RepositoryException
+     */
+    public function resetModel()
+    {
+        $this->makeModel();
+
+        return $this;
     }
 
     /**
@@ -128,10 +133,9 @@ abstract class Repository extends BaseRepository implements CacheableInterface
         return $this->parserResult($model);
     }
 
-     /**
+    /**
      * Count results of repository
      *
-     * @param  array  $where
      * @param  string  $columns
      * @return int
      */

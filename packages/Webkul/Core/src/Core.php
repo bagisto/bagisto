@@ -2,9 +2,10 @@
 
 namespace Webkul\Core;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Config;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
+use Webkul\Core\Models\Channel;
 use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Core\Repositories\CoreConfigRepository;
 use Webkul\Core\Repositories\CountryRepository;
@@ -14,7 +15,6 @@ use Webkul\Core\Repositories\ExchangeRateRepository;
 use Webkul\Core\Repositories\LocaleRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
-use Webkul\Core\Models\Channel;
 
 class Core
 {
@@ -100,15 +100,6 @@ class Core
     /**
      * Create a new instance.
      *
-     * @param  \Webkul\Core\Repositories\ChannelRepository  $channelRepository
-     * @param  \Webkul\Core\Repositories\CurrencyRepository  $currencyRepository
-     * @param  \Webkul\Core\Repositories\ExchangeRateRepository  $exchangeRateRepository
-     * @param  \Webkul\Core\Repositories\CountryRepository  $countryRepository
-     * @param  \Webkul\Core\Repositories\CountryStateRepository  $countryStateRepository
-     * @param  \Webkul\Core\Repositories\LocaleRepository  $localeRepository
-     * @param  \Webkul\Core\Repositories\CoreConfigRepository  $coreConfigRepository
-     * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository
-     * @param  \Webkul\Tax\Repositories\TaxCategoryRepository  $taxCategoryRepository
      * @return void
      */
     public function __construct(
@@ -149,16 +140,20 @@ class Core
      *
      * @return \Webkul\Core\Contracts\Channel
      */
-    public function getCurrentChannel()
+    public function getCurrentChannel(string $hostname = null)
     {
+        if (! $hostname) {
+            $hostname = request()->getHttpHost();
+        }
+
         if ($this->currentChannel) {
             return $this->currentChannel;
         }
 
         $this->currentChannel = $this->channelRepository->findWhereIn('hostname', [
-            request()->getHttpHost(),
-            'http://' . request()->getHttpHost(),
-            'https://' . request()->getHttpHost(),
+            $hostname,
+            'http://' . $hostname,
+            'https://' . $hostname,
         ])->first();
 
         if (! $this->currentChannel) {
@@ -170,12 +165,10 @@ class Core
 
     /**
      * Set the current channel.
-     *
-     * @param  Channel  $channel
      */
     public function setCurrentChannel(Channel $channel): void
     {
-        $this->currentChannel = $currentChannel;
+        $this->currentChannel = $channel;
     }
 
     /**
@@ -209,9 +202,15 @@ class Core
     }
 
     /**
+     * Set the default channel.
+     */
+    public function setDefaultChannel(Channel $channel): void
+    {
+        $this->defaultChannel = $channel;
+    }
+
+    /**
      * Returns the default channel code configured in `config/app.php`.
-     *
-     * @return string
      */
     public function getDefaultChannelCode(): string
     {
@@ -219,9 +218,9 @@ class Core
     }
 
     /**
-     * Returns default channel locale code.
+     * Returns default locale code from default channel.
      */
-    public function getDefaultChannelLocaleCode(): string
+    public function getDefaultLocaleCodeFromDefaultChannel(): string
     {
         return $this->getDefaultChannel()->default_locale->code;
     }
@@ -229,7 +228,7 @@ class Core
     /**
      * Get channel code from request.
      *
-     * @return string
+     * @return \Webkul\Core\Contracts\Channel
      */
     public function getRequestedChannel()
     {
@@ -261,8 +260,6 @@ class Core
 
     /**
      * Returns the channel name.
-     *
-     * @return string
      */
     public function getChannelName($channel): string
     {
@@ -520,7 +517,7 @@ class Core
         ]);
 
         if (
-            null === $exchangeRate
+            $exchangeRate === null
             || ! $exchangeRate->rate
         ) {
             return $amount;
@@ -1052,15 +1049,11 @@ class Core
 
     /**
      * Returns a string as selector part for identifying elements in views.
-     *
-     * @param  float  $taxRate
-     * @return string
      */
     public static function taxRateAsIdentifier(float $taxRate): string
     {
         return str_replace('.', '_', (string) $taxRate);
     }
-
 
     /**
      * Create singleton object through single facade.
@@ -1073,7 +1066,7 @@ class Core
         if (empty($id)) {
             return;
         }
-        
+
         if (array_key_exists($id, $this->taxCategoriesById)) {
             return $this->taxCategoriesById[$id];
         }
@@ -1121,8 +1114,6 @@ class Core
     /**
      * Array merge.
      *
-     * @param  array  $array1
-     * @param  array  $array2
      * @return array
      */
     protected function arrayMerge(array &$array1, array &$array2)

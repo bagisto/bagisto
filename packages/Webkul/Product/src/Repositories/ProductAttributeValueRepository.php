@@ -8,10 +8,8 @@ class ProductAttributeValueRepository extends Repository
 {
     /**
      * Specify Model class name
-     *
-     * @return string
      */
-    function model(): string
+    public function model(): string
     {
         return 'Webkul\Product\Contracts\ProductAttributeValue';
     }
@@ -21,7 +19,7 @@ class ProductAttributeValueRepository extends Repository
      * @param  int  $attributeId
      * @param  int  $productId
      * @param  string  $value
-     * @return boolean
+     * @return bool
      */
     public function isValueUnique($productId, $attributeId, $column, $value)
     {

@@ -37,9 +37,9 @@
 
                 <div v-if="! isLoading">
                     <div class="flex justify-between items-center">
-                        <h2 class="text-[26px] font-medium">
+                        <h1 class="text-[26px] font-medium">
                             @lang('shop::app.compare.title')
-                        </h2>
+                        </h1>
 
                         <div
                             class="secondary-button flex gap-x-[10px] items-center py-[12px] px-[20px] border-[#E9E9E9] font-normal whitespace-nowrap"
@@ -66,6 +66,7 @@
                                         @{{ attribute.name ?? attribute.admin_name }}
                                     </p>
                                 </div>
+
                                 <div class="flex gap-[12px] border-l-[1px] border-[#E9E9E9] max-sm:border-0">
                                     <div
                                         class="relative group"
@@ -101,8 +102,10 @@
                                             @{{ attribute.name ?? attribute.admin_name }} :
                                         </p>
 
-                                        <p class="text-[14px]">
-                                            @{{ product[attribute.code] ?? 'N/A' }}
+                                        <p
+                                            class="text-[14px]"
+                                            v-html="product[attribute.code] ?? 'N/A'"
+                                        >
                                         </p>
                                     </div>
                                 </div>
@@ -114,9 +117,17 @@
                         class="grid items-center justify-items-center place-content-center w-[100%] m-auto h-[476px] text-center"
                         v-else
                     >
-                        <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
+                        <img
+                            src="{{ bagisto_asset('images/thank-you.png') }}"
+                            alt="@lang('shop::app.compare.empty-text')"
+                        />
                         
-                        <p class="text-[20px]">@lang('shop::app.compare.empty-text')</p>
+                        <p
+                            class="text-[20px]"
+                            role="heading"
+                        >
+                            @lang('shop::app.compare.empty-text')
+                        </p>
                     </div>
                 </div>
 

@@ -4,7 +4,7 @@
     The category repository is injected directly here because there is no way
     to retrieve it from the view composer, as this is an anonymous component.
 --}}
-@inject('themeCustomizationRepository', 'Webkul\Shop\Repositories\ThemeCustomizationRepository')
+@inject('themeCustomizationRepository', 'Webkul\Theme\Repositories\ThemeCustomizationRepository')
 
 {{--
     This code needs to be refactored to reduce the amount of PHP in the Blade
@@ -46,7 +46,10 @@
             {{-- News Letter subscription --}}
             @if(core()->getConfigData('customer.settings.newsletter.subscription'))
                 <div class="grid gap-[10px]">
-                    <p class="max-w-[288px] leading-[45px] text-[30px] italic text-navyBlue">
+                    <p
+                        class="max-w-[288px] leading-[45px] text-[30px] italic text-navyBlue"
+                        role="heading"
+                    >
                         @lang('shop::app.components.layouts.footer.newsletter-text')
                     </p>
 
@@ -68,6 +71,7 @@
                             class=" blockw-[420px] max-w-full px-[20px] py-[20px] pr-[110px] bg-[#F1EADF] border-[2px] border-[#E9DECC] rounded-[12px] text-xs font-medium max-1060:w-full"
                             rules="required|email"
                             label="Email"
+                            :aria-label="trans('shop::app.components.layouts.footer.email')"
                             placeholder="email@example.com"
                         >
                         </x-shop::form.control-group.control>

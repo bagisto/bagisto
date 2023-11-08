@@ -2,16 +2,16 @@
 
 namespace Webkul\Admin\Http\Controllers\Settings;
 
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Webkul\Admin\DataGrids\Settings\UserDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Admin\Http\Requests\UserForm;
 use Webkul\User\Repositories\AdminRepository;
 use Webkul\User\Repositories\RoleRepository;
-use Webkul\Admin\Http\Requests\UserForm;
-use Webkul\Admin\DataGrids\Settings\UserDataGrid;
 
 class UserController extends Controller
 {
@@ -23,8 +23,7 @@ class UserController extends Controller
     public function __construct(
         protected AdminRepository $adminRepository,
         protected RoleRepository $roleRepository
-    )
-    {
+    ) {
     }
 
     /**
@@ -45,9 +44,6 @@ class UserController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param UserForm $request
-     * @return \Illuminate\Http\JsonResponse
      */
     public function store(UserForm $request): JsonResponse
     {
@@ -57,7 +53,7 @@ class UserController extends Controller
             'password',
             'password_confirmation',
             'role_id',
-            'status'
+            'status',
         ]);
 
         if ($data['password'] ?? null) {
@@ -86,8 +82,7 @@ class UserController extends Controller
     /**
      * User Details
      *
-     * @param int $id
-     * @return \Illuminate\Http\JsonResponse
+     * @param  int  $id
      */
     public function edit($id): JsonResponse
     {
@@ -97,15 +92,12 @@ class UserController extends Controller
 
         return new JsonResponse([
             'roles' => $roles,
-            'user' => $user,
+            'user'  => $user,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param UserForm $request
-     * @return \Illuminate\Http\JsonResponse
      */
     public function update(UserForm $request): JsonResponse
     {
@@ -126,7 +118,7 @@ class UserController extends Controller
         } else {
             if (! request()->has('image.image')) {
                 if (! empty(request()->input('image.image'))) {
-                    Storage::delete($admin->image);    
+                    Storage::delete($admin->image);
                 }
 
                 $admin->image = null;
@@ -135,7 +127,7 @@ class UserController extends Controller
 
         $admin->save();
 
-        if (!empty($data['password'])) {
+        if (! empty($data['password'])) {
             Event::dispatch('admin.password.update.after', $admin);
         }
 
@@ -149,8 +141,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return \Illuminate\Http\JsonResponse
+     * @param  int  $id
      */
     public function destroy($id): JsonResponse
     {
@@ -214,7 +205,7 @@ class UserController extends Controller
 
                 return new JsonResponse([
                     'redirectUrl' => route('admin.session.create'),
-                    'message' => trans('admin::app.settings.users.delete-success'),
+                    'message'     => trans('admin::app.settings.users.delete-success'),
                 ]);
             }
         } else {
@@ -239,7 +230,7 @@ class UserController extends Controller
         /**
          * Password check.
          */
-        if (!$data['password']) {
+        if (! $data['password']) {
             unset($data['password']);
         } else {
             $data['password'] = bcrypt($data['password']);
@@ -250,7 +241,7 @@ class UserController extends Controller
          */
         $data['status'] = isset($data['status']);
 
-        $isStatusChangedToInactive = !$data['status'] && (bool) $user->status;
+        $isStatusChangedToInactive = ! $data['status'] && (bool) $user->status;
 
         if (
             $isStatusChangedToInactive

@@ -17,8 +17,7 @@ class ProductController extends APIController
     public function __construct(
         protected CategoryRepository $categoryRepository,
         protected ProductRepository $productRepository
-    )
-    {
+    ) {
     }
 
     /**
@@ -46,7 +45,7 @@ class ProductController extends APIController
     }
 
     /**
-     * Upsell product listings.
+     * Up-sell product listings.
      *
      * @param  int  $id
      */

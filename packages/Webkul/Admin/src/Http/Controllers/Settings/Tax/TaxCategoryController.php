@@ -2,13 +2,13 @@
 
 namespace Webkul\Admin\Http\Controllers\Settings\Tax;
 
-use Illuminate\Support\Facades\Event;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Event;
+use Webkul\Admin\DataGrids\Settings\TaxCategoryDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Admin\Http\Resources\TaxCategoryResource;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Tax\Repositories\TaxRateRepository;
-use Webkul\Admin\DataGrids\Settings\TaxCategoryDataGrid;
-use Webkul\Admin\Http\Resources\TaxCategoryResource;
 
 class TaxCategoryController extends Controller
 {
@@ -57,7 +57,7 @@ class TaxCategoryController extends Controller
             'code',
             'name',
             'description',
-            'taxrates'
+            'taxrates',
         ]);
 
         $taxCategory = $this->taxCategoryRepository->create($data);
@@ -74,7 +74,7 @@ class TaxCategoryController extends Controller
     /**
      * Tax Category Details
      *
-     * @param int $id
+     * @param  int  $id
      */
     public function edit($id): TaxCategoryResource
     {
@@ -85,8 +85,6 @@ class TaxCategoryController extends Controller
 
     /**
      * To update the tax category.
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
     public function update(): JsonResponse
     {
@@ -105,7 +103,7 @@ class TaxCategoryController extends Controller
             'code',
             'name',
             'description',
-            'taxrates'
+            'taxrates',
         ]);
 
         $taxCategory = $this->taxCategoryRepository->update($data, $id);
@@ -122,8 +120,7 @@ class TaxCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return \Illuminate\Http\JsonResponse
+     * @param  int  $id
      */
     public function destroy($id): JsonResponse
     {

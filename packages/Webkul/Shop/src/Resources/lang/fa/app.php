@@ -4,6 +4,7 @@ return [
     'customers' => [
         'forgot-password' => [
             'back'                 => 'بازگشت به صفحه ورود؟',
+            'bagisto'              => 'بگیستو',
             'email-not-exist'      => 'ما نمی‌توانیم کاربری با این آدرس ایمیل پیدا کنیم.',
             'email'                => 'ایمیل',
             'forgot-password-text' => 'اگر رمز عبور خود را فراموش کرده‌اید، با وارد کردن آدرس ایمیل خود آن را بازیابی کنید.',
@@ -17,6 +18,7 @@ return [
 
         'reset-password' => [
             'back-link-title'  => 'بازگشت به صفحه ورود',
+            'bagisto'          => 'بگیستو',
             'confirm-password' => 'تأیید رمز عبور',
             'email'            => 'ایمیل ثبت‌شده',
             'footer'           => '© حق تألیف 2010 - :current_year، نرم‌افزار وب‌کول (ثبت شده در هند). تمامی حقوق محفوظ است.',
@@ -27,6 +29,7 @@ return [
 
         'login-form' => [
             'button-title'        => 'ورود',
+            'bagisto'             => 'بگیستو',
             'create-your-account' => 'حساب کاربری خود را ایجاد کنید',
             'email'               => 'ایمیل',
             'form-login-text'     => 'اگر حساب کاربری دارید، با آدرس ایمیل خود وارد شوید.',
@@ -44,6 +47,7 @@ return [
 
         'signup-form' => [
             'account-exists'              => 'قبلاً حساب دارید؟',
+            'bagisto'                     => 'بگیستو',
             'button-title'                => 'ثبت نام',
             'confirm-pass'                => 'تأیید رمز عبور',
             'email'                       => 'ایمیل',
@@ -91,6 +95,7 @@ return [
                 'phone'                   => 'تلفن',
                 'save'                    => 'ذخیره',
                 'subscribe-to-newsletter' => 'اشتراک در خبرنامه',
+                'select-gender'           => 'جنسیت را انتخاب کنید',
                 'title'                   => 'پروفایل',
                 'unmatch'                 => 'رمز عبور قدیمی مطابقت ندارد.',
                 'wrong-password'          => 'رمز عبور اشتباه است!',
@@ -317,6 +322,7 @@ return [
         'layouts' => [
             'header' => [
                 'account'       => 'حساب کاربری',
+                'bagisto'       => 'بگیستو',
                 'compare'       => 'مقایسه',
                 'cart'          => 'سبد خرید',
                 'dropdown-text' => 'مدیریت سبد خرید، سفارشات و لیست علاقه‌مندی',
@@ -338,6 +344,7 @@ return [
                 'currency'               => 'واحد پول',
                 'customer-service'       => 'خدمات مشتری',
                 'contact-us'             => 'تماس با ما',
+                'email'                  => 'ایمیل',
                 'footer-text'            => '© حق کپی رایت 2010 - 2023، نرم‌افزار وبکول (ثبت‌شده در هند). تمامی حقوق محفوظ است.',
                 'locale'                 => 'زبان و محل',
                 'newsletter-text'        => 'برای دریافت خبرنامه‌ی جذاب ما آماده شوید!',
@@ -397,8 +404,12 @@ return [
             ],
 
             'table' => [
-                'actions'              => 'عملیات',
-                'no-records-available' => 'رکوردی موجود نیست.',
+                'actions'              => 'عملیات‌ها',
+                'no-records-available' => 'رکوردی در دسترس نیست.',
+                'next-page'            => 'صفحه بعدی',
+                'page-navigation'      => 'ناوبری صفحه',
+                'previous-page'        => 'صفحه قبلی',
+                'page-number'          => 'شماره صفحه',
             ],
         ],
 
@@ -416,21 +427,38 @@ return [
 
         'products' => [
             'card' => [
-                'add-to-compare'     => 'مورد با موفقیت به لیست مقایسه افزوده شد.',
-                'already-in-compare' => 'مورد در حال حاضر در لیست مقایسه قرار دارد.',
-                'add-to-cart'        => 'افزودن به سبد خرید',
-                'new'                => 'جدید',
-                'review-description' => 'اولین نفری باشید که این محصول را مورد بررسی قرار داده‌اید',
-                'sale'               => 'حراج',
+                'add-to-compare-success'      => 'مورد با موفقیت به لیست مقایسه اضافه شد.',
+                'already-in-compare'          => 'مورد از قبل به لیست مقایسه اضافه شده است.',
+                'add-to-cart'                 => 'افزودن به سبد خرید',
+                'add-to-wishlist'             => 'افزودن به لیست خرید',
+                'add-to-compare'              => 'افزودن به لیست مقایسه',
+                'new'                         => 'جدید',
+                'review-description'          => 'اولین نفری باشید که این محصول را مورد بررسی قرار دهید',
+                'sale'                        => 'حراج',
             ],
 
             'carousel' => [
-                'view-all' => 'مشاهده همه',
+                'next'     => 'بعدی',
+                'previous' => 'قبلی',
+                'view-all' => 'نمایش همه',
             ],
         ],
 
         'range-slider' => [
-            'range' => 'محدوده:',
+            'min-range' => 'حداقل محدوده',
+            'max-range' => 'حداکثر محدوده',
+            'range'     => 'محدوده:',
+        ],
+
+        'carousel' => [
+            'image-slide' => 'اسلاید تصویر',
+            'next'        => 'بعدی',
+            'previous'    => 'قبلی',
+        ],
+
+        'quantity-changer' => [
+            'decrease-quantity' => 'کاهش تعداد',
+            'increase-quantity' => 'افزایش تعداد',
         ],
     ],
 
@@ -501,6 +529,7 @@ return [
             ],
 
             'add-to-cart'            => 'افزودن به سبد خرید',
+            'add-to-wishlist'        => 'افزودن به لیست خرید',
             'add-to-compare'         => 'محصول به لیست مقایسه اضافه شد.',
             'already-in-compare'     => 'محصول از قبل در لیست مقایسه وجود دارد.',
             'additional-information' => 'اطلاعات اضافی',
@@ -515,7 +544,7 @@ return [
 
         'type' => [
             'abstract' => [
-                'offers' => 'خرید کالاهای :qty به قیمت :price هر کدام و صرفه‌جویی :discount%',
+                'offers' => 'خرید کالاهای :qty به قیمت :price هر کدام و صرفه‌جویی :discount',
             ],
         ],
     ],
@@ -529,6 +558,8 @@ return [
         ],
 
         'toolbar' => [
+            'grid' => 'شبکه',
+            'list' => 'لیست',
             'show' => 'نمایش',
         ],
 
@@ -539,12 +570,14 @@ return [
     ],
 
     'search' => [
-        'title' => 'نتایج جستجو برای : :query',
+        'title'   => 'نتایج جستجو برای : :query',
+        'results' => 'نتایج جستجو',
 
         'images' => [
             'index' => [
                 'something-went-wrong' => 'مشکلی پیش آمده است، لطفاً بعداً دوباره تلاش کنید.',
                 'size-limit-error'     => 'خطای محدودیت اندازه',
+                'search'               => 'جستجو',
                 'only-images-allowed'  => 'تنها تصاویر (.jpeg، .jpg، .png، ..) مجاز هستند.',
             ],
 
@@ -592,6 +625,7 @@ return [
             'success-remove'            => 'کالا با موفقیت از سبد خرید حذف شد.',
 
             'index' => [
+                'bagisto'                  => 'بگیستو',
                 'cart'                     => 'سبد خرید',
                 'continue-shopping'        => 'ادامه خرید',
                 'home'                     => 'خانه',
@@ -606,6 +640,8 @@ return [
                 'remove'                   => 'حذف',
                 'remove-selected-success'  => 'موارد انتخاب شده با موفقیت از سبد خرید حذف شدند.',
                 'see-details'              => 'مشاهده جزئیات',
+                'select-all'               => 'انتخاب همه',
+                'select-cart-item'         => 'انتخاب مورد سبد خرید',
                 'tax'                      => 'مالیات',
                 'total'                    => 'مجموع',
                 'update-cart'              => 'به‌روزرسانی سبد خرید',
@@ -674,6 +710,7 @@ return [
                 ],
 
                 'index' => [
+                    'bagisto' => 'بگیستو',
                     'confirm' => 'تأیید',
                 ],
 

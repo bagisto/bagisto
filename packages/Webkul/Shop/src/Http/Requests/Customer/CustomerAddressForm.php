@@ -17,8 +17,6 @@ class CustomerAddressForm extends FormRequest
 
     /**
      * Determine if the product is authorized to make this request.
-     *
-     * @return bool
      */
     public function authorize(): bool
     {
@@ -27,8 +25,6 @@ class CustomerAddressForm extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array
      */
     public function rules(): array
     {
@@ -55,7 +51,6 @@ class CustomerAddressForm extends FormRequest
     /**
      * Merge existing address rules.
      *
-     * @param  string  $addressType
      * @return void
      */
     private function mergeExistingAddressRules(string $addressType)
@@ -76,7 +71,6 @@ class CustomerAddressForm extends FormRequest
     /**
      * Merge new address rules.
      *
-     * @param  string  $addressType
      * @return void
      */
     private function mergeNewAddressRules(string $addressType)
@@ -97,8 +91,6 @@ class CustomerAddressForm extends FormRequest
 
     /**
      * Merge additional rules.
-     *
-     * @return void
      */
     private function mergeWithRules($additionalRules): void
     {
@@ -107,8 +99,6 @@ class CustomerAddressForm extends FormRequest
 
     /**
      * If customer is placing order then fetching all address ids to check with the request ids.
-     *
-     * @return string
      */
     private function getCustomerAddressIds(): string
     {

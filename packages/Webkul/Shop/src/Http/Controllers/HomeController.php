@@ -2,7 +2,7 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
-use Webkul\Shop\Repositories\ThemeCustomizationRepository;
+use Webkul\Theme\Repositories\ThemeCustomizationRepository;
 
 class HomeController extends Controller
 {
@@ -10,6 +10,7 @@ class HomeController extends Controller
      * Using const variable for status
      */
     const STATUS = 1;
+
     /**
      * Create a new controller instance.
      *
@@ -30,7 +31,7 @@ class HomeController extends Controller
 
         $customizations = $this->themeCustomizationRepository->orderBy('sort_order')->findWhere([
             'status'     => self::STATUS,
-            'channel_id' => core()->getCurrentChannel()->id
+            'channel_id' => core()->getCurrentChannel()->id,
         ]);
 
         return view('shop::home.index', compact('customizations'));

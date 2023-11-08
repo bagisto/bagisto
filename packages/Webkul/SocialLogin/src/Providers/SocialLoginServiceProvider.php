@@ -1,4 +1,5 @@
 <?php
+
 namespace Webkul\SocialLogin\Providers;
 
 use Illuminate\Support\ServiceProvider;

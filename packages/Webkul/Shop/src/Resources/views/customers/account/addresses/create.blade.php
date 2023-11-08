@@ -131,7 +131,7 @@
                 type="text"
                 name="address1[]"
                 :value="old('address1[]')"
-                rules="required"
+                rules="required|address"
                 :label="trans('shop::app.customers.account.addresses.street-address')"
                 :placeholder="trans('shop::app.customers.account.addresses.street-address')"
             >
@@ -175,7 +175,7 @@
                 :value="old('country')"
                 class="mb-4"
                 rules="required"
-                aria-label="trans('shop::app.customers.account.addresses.country')"
+                :aria-label="trans('shop::app.customers.account.addresses.country')"
                 :label="trans('shop::app.customers.account.addresses.country')"
             >
                 <option value="">@lang('Select Country')</option>

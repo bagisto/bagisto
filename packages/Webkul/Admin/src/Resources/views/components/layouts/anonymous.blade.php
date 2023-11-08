@@ -7,7 +7,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="base-url" content="{{ url()->to('/') }}">
     <meta name="currency-code" content="{{ core()->getCurrentCurrencyCode() }}">
     <meta http-equiv="content-language" content="{{ app()->getLocale() }}">
@@ -27,16 +26,16 @@
     />
 
     @if ($favicon = core()->getConfigData('general.design.admin_logo.favicon', core()->getCurrentChannelCode()))
-        <link 
+        <link
             type="image/x-icon"
-            href="{{ Storage::url($favicon) }}" 
+            href="{{ Storage::url($favicon) }}"
             rel="shortcut icon"
             sizes="16x16"
         >
     @else
-        <link 
+        <link
             type="image/x-icon"
-            href="{{ bagisto_asset('images/favicon.ico') }}" 
+            href="{{ bagisto_asset('images/favicon.ico') }}"
             rel="shortcut icon"
             sizes="16x16"
         />
@@ -48,25 +47,25 @@
         {!! core()->getConfigData('general.content.custom_scripts.custom_css') !!}
     </style>
 
-    {!! view_render_event('bagisto.shop.layout.head') !!}
+    {!! view_render_event('bagisto.admin.layout.head') !!}
 </head>
 
 <body>
-    {!! view_render_event('bagisto.shop.layout.body.before') !!}
+    {!! view_render_event('bagisto.admin.layout.body.before') !!}
 
     <div id="app">
         {{-- Flash Message Blade Component --}}
         <x-admin::flash-group />
 
-        {!! view_render_event('bagisto.shop.layout.content.before') !!}
+        {!! view_render_event('bagisto.admin.layout.content.before') !!}
 
                 {{-- Page Content Blade Component --}}
                 {{ $slot }}
 
-        {!! view_render_event('bagisto.shop.layout.content.after') !!}
+        {!! view_render_event('bagisto.admin.layout.content.after') !!}
     </div>
 
-    {!! view_render_event('bagisto.shop.layout.body.after') !!}
+    {!! view_render_event('bagisto.admin.layout.body.after') !!}
 
     @stack('scripts')
 

@@ -13,11 +13,6 @@ class InvoiceRepository extends Repository
     /**
      * Create a new repository instance.
      *
-     * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
-     * @param  \Webkul\Sales\Repositories\OrderItemRepository  $orderItemRepository
-     * @param  \Webkul\Sales\Repositories\InvoiceItemRepository  $invoiceItemRepository
-     * @param  \Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository  $downloadableLinkPurchasedRepository
-     * @param  \Illuminate\Container\Container  $container
      * @return void
      */
     public function __construct(
@@ -26,15 +21,12 @@ class InvoiceRepository extends Repository
         protected InvoiceItemRepository $invoiceItemRepository,
         protected DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository,
         Container $container
-    )
-    {
+    ) {
         parent::__construct($container);
     }
 
     /**
      * Specify model class name.
-     *
-     * @return string
      */
     public function model(): string
     {
@@ -44,9 +36,8 @@ class InvoiceRepository extends Repository
     /**
      * Create invoice.
      *
-     * @param  array  $data
-     * @param  string $invoiceState
-     * @param  string $orderState
+     * @param  string  $invoiceState
+     * @param  string  $orderState
      * @return \Webkul\Sales\Models\Invoice
      */
     public function create(array $data, $invoiceState = null, $orderState = null)
@@ -176,6 +167,11 @@ class InvoiceRepository extends Repository
                 $this->orderRepository->updateOrderStatus($order);
             }
 
+            /**
+             * Temporary property has been used to avoid request helper usage in listener.
+             */
+            $invoice->can_create_transaction = request()->has('can_create_transaction') && request()->input('can_create_transaction') == '1';
+
             Event::dispatch('sales.invoice.save.after', $invoice);
         } catch (\Exception $e) {
             DB::rollBack();
@@ -190,9 +186,6 @@ class InvoiceRepository extends Repository
 
     /**
      * Have product to invoice.
-     *
-     * @param  array  $data
-     * @return bool
      */
     public function haveProductToInvoice(array $data): bool
     {
@@ -207,9 +200,6 @@ class InvoiceRepository extends Repository
 
     /**
      * Is valid quantity.
-     *
-     * @param  array  $data
-     * @return bool
      */
     public function isValidQuantity(array $data): bool
     {
@@ -287,7 +277,7 @@ class InvoiceRepository extends Repository
     /**
      * Update state.
      *
-     * @param  \Webkul\Sales\Models\Invoice $invoice
+     * @param  \Webkul\Sales\Models\Invoice  $invoice
      * @return void
      */
     public function updateState($invoice, $status)

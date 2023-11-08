@@ -77,7 +77,7 @@ class UserDataGrid extends DataGrid
                 if ($row->user_image) {
                     return Storage::url($row->user_image);
                 }
-                
+
                 return null;
             },
         ]);

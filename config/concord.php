@@ -10,9 +10,7 @@ return [
          * Example:
          * VendorA\ModuleX\Providers\ModuleServiceProvider::class,
          * VendorB\ModuleY\Providers\ModuleServiceProvider::class
-         *
          */
-
         \Webkul\Admin\Providers\ModuleServiceProvider::class,
         \Webkul\Attribute\Providers\ModuleServiceProvider::class,
         \Webkul\CartRule\Providers\ModuleServiceProvider::class,
@@ -24,6 +22,7 @@ return [
         \Webkul\Customer\Providers\ModuleServiceProvider::class,
         \Webkul\Inventory\Providers\ModuleServiceProvider::class,
         \Webkul\Marketing\Providers\ModuleServiceProvider::class,
+        \Webkul\Notification\Providers\ModuleServiceProvider::class,
         \Webkul\Payment\Providers\ModuleServiceProvider::class,
         \Webkul\Paypal\Providers\ModuleServiceProvider::class,
         \Webkul\Product\Providers\ModuleServiceProvider::class,

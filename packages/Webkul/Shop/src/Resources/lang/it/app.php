@@ -4,6 +4,7 @@ return [
     'customers' => [
         'forgot-password' => [
             'back'                 => 'Torna al Login ?',
+            'bagisto'              => 'Bagisto',
             'email-not-exist'      => 'Non possiamo trovare un utente con quell\'indirizzo email.',
             'email'                => 'Email',
             'forgot-password-text' => 'Se hai dimenticato la tua password, recuperala inserendo il tuo indirizzo email.',
@@ -17,6 +18,7 @@ return [
 
         'reset-password' => [
             'back-link-title'  => 'Torna al Login',
+            'bagisto'          => 'Bagisto',
             'confirm-password' => 'Conferma Password',
             'email'            => 'Email Registrata',
             'footer'           => '© Copyright 2010 - :current_year, Webkul Software (Registrato in India). Tutti i diritti riservati.',
@@ -27,6 +29,7 @@ return [
 
         'login-form' => [
             'button-title'        => 'Accedi',
+            'bagisto'             => 'Bagisto',
             'create-your-account' => 'Crea il tuo account',
             'email'               => 'Email',
             'form-login-text'     => 'Se hai un account, accedi con il tuo indirizzo email.',
@@ -44,6 +47,7 @@ return [
 
         'signup-form' => [
             'account-exists'              => 'Hai già un account ?',
+            'bagisto'                     => 'Bagisto',
             'button-title'                => 'Registrati',
             'confirm-pass'                => 'Conferma Password',
             'email'                       => 'Email',
@@ -91,6 +95,7 @@ return [
                 'phone'                   => 'Telefono',
                 'save'                    => 'Salva',
                 'subscribe-to-newsletter' => 'Iscriviti alla newsletter',
+                'select-gender'           => 'Seleziona genere',
                 'title'                   => 'Profilo',
                 'unmatch'                 => 'La vecchia password non corrisponde.',
                 'wrong-password'          => 'Password Errata!',
@@ -317,6 +322,7 @@ return [
         'layouts' => [
             'header' => [
                 'account'       => 'Account',
+                'bagisto'       => 'Bagisto',
                 'compare'       => 'Confronta',
                 'cart'          => 'Carrello',
                 'dropdown-text' => 'Gestisci carrello, ordini e lista dei desideri',
@@ -338,6 +344,7 @@ return [
                 'customer-service'       => 'Servizio clienti',
                 'contact-us'             => 'Contattaci',
                 'currency'               => 'Valuta',
+                'email'                  => 'Email',
                 'footer-text'            => '© Copyright 2010 - 2023, Webkul Software (Registrato in India). Tutti i diritti riservati.',
                 'locale'                 => 'Lingua',
                 'newsletter-text'        => 'Iscriviti alla nostra divertente newsletter!',
@@ -399,6 +406,10 @@ return [
             'table' => [
                 'actions'              => 'Azioni',
                 'no-records-available' => 'Nessun record disponibile.',
+                'next-page'            => 'Pagina successiva',
+                'page-navigation'      => 'Navigazione pagina',
+                'previous-page'        => 'Pagina precedente',
+                'page-number'          => 'Numero di pagina',
             ],
         ],
 
@@ -416,21 +427,38 @@ return [
 
         'products' => [
             'card' => [
-                'add-to-compare'     => 'Articolo aggiunto con successo all\'elenco di confronto.',
-                'already-in-compare' => 'L\'articolo è già stato aggiunto all\'elenco di confronto.',
-                'add-to-cart'        => 'Aggiungi al carrello',
-                'new'                => 'Nuovo',
-                'review-description' => 'Sii il primo a recensire questo prodotto',
-                'sale'               => 'Sconto',
+                'add-to-compare-success'      => 'Elemento aggiunto con successo alla lista di confronto.',
+                'already-in-compare'          => 'L\'elemento è già presente nella lista di confronto.',
+                'add-to-cart'                 => 'Aggiungi al carrello',
+                'add-to-wishlist'             => 'Aggiungi alla lista dei desideri',
+                'add-to-compare'              => 'Aggiungi al confronto',
+                'new'                         => 'Nuovo',
+                'review-description'          => 'Sii il primo a recensire questo prodotto',
+                'sale'                        => 'Sconto',
             ],
 
             'carousel' => [
+                'next'     => 'Successivo',
+                'previous' => 'Precedente',
                 'view-all' => 'Visualizza tutto',
             ],
         ],
 
         'range-slider' => [
-            'range' => 'Intervallo:',
+            'min-range' => 'Intervallo minimo',
+            'max-range' => 'Intervallo massimo',
+            'range'     => 'Intervallo:',
+        ],
+
+        'carousel' => [
+            'image-slide' => 'Diapositiva immagine',
+            'next'        => 'Successivo',
+            'previous'    => 'Precedente',
+        ],
+
+        'quantity-changer' => [
+            'decrease-quantity' => 'Diminuisci quantità',
+            'increase-quantity' => 'Aumenta quantità',
         ],
     ],
 
@@ -501,6 +529,7 @@ return [
             ],
 
             'add-to-cart'            => 'Aggiungi al carrello',
+            'add-to-wishlist'        => 'Aggiungi alla lista dei desideri',
             'add-to-compare'         => 'Prodotto aggiunto al confronto.',
             'already-in-compare'     => 'Il prodotto è già stato aggiunto al confronto.',
             'additional-information' => 'Informazioni aggiuntive',
@@ -515,7 +544,7 @@ return [
 
         'type' => [
             'abstract' => [
-                'offers' => 'Acquista :qty per :price ciascuno e risparmia :discount%',
+                'offers' => 'Acquista :qty per :price ciascuno e risparmia :discount',
             ],
         ],
     ],
@@ -529,6 +558,8 @@ return [
         ],
 
         'toolbar' => [
+            'grid' => 'Griglia',
+            'list' => 'Lista',
             'show' => 'Mostra',
         ],
 
@@ -539,7 +570,21 @@ return [
     ],
 
     'search' => [
-        'title' => 'Risultati della Ricerca per : :query',
+        'title'   => 'Risultati della ricerca: :query',
+        'results' => 'Risultati della ricerca',
+
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'Qualcosa è andato storto, si prega di riprovare più tardi.',
+                'size-limit-error'     => 'Errore di limite di dimensione',
+                'search'               => 'Cerca',
+                'only-images-allowed'  => 'Sono ammesse solo immagini (.jpeg, .jpg, .png, ..).',
+            ],
+
+            'results' => [
+                'analysed-keywords' => 'Parole chiave analizzate:',
+            ],
+        ],
     ],
 
     'compare' => [
@@ -580,6 +625,7 @@ return [
             'success-remove'            => 'Articolo rimosso con successo dal carrello.',
 
             'index' => [
+                'bagisto'                  => 'Bagisto',
                 'cart'                     => 'Carrello',
                 'continue-shopping'        => 'Continua a fare acquisti',
                 'empty-product'            => 'Il carrello è vuoto.',
@@ -594,6 +640,8 @@ return [
                 'remove'                   => 'Rimuovi',
                 'remove-selected-success'  => 'Gli articoli selezionati sono stati rimossi con successo dal carrello.',
                 'see-details'              => 'Visualizza dettagli',
+                'select-all'               => 'Seleziona tutto',
+                'select-cart-item'         => 'Seleziona elemento del carrello',
                 'tax'                      => 'Imposta',
                 'total'                    => 'Totale',
                 'update-cart'              => 'Aggiorna carrello',
@@ -662,6 +710,7 @@ return [
                 ],
 
                 'index' => [
+                    'bagisto' => 'Bagisto',
                     'confirm' => 'Conferma',
                 ],
 

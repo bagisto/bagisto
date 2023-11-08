@@ -18,7 +18,7 @@
     @if ($field['type'] == 'depends')
         @include('admin::configuration.dependent-field-type')
     @else
-        {{-- Title of the input field --}}
+        <!-- Title of the input field -->
         <div class="flex justify-between">
             <x-admin::form.control-group.label
                 :for="$name" :class="$isRequired"
@@ -33,7 +33,7 @@
             </x-admin::form.control-group.label>
         </div>
 
-        {{-- Text input --}}
+        <!-- Text input -->
         @if ($field['type'] == 'text')
             <x-admin::form.control-group.control
                 type="text"
@@ -45,7 +45,7 @@
             >
             </x-admin::form.control-group.control>
 
-        {{-- Password input --}}
+        <!-- Password input -->
         @elseif ($field['type'] == 'password')
             <x-admin::form.control-group.control
                 type="password"
@@ -57,7 +57,7 @@
             >
             </x-admin::form.control-group.control>
 
-        {{-- Number input --}}
+        <!-- Number input -->
         @elseif ($field['type'] == 'number')
             <x-admin::form.control-group.control
                 type="number"
@@ -70,7 +70,7 @@
             >
             </x-admin::form.control-group.control>
 
-        {{-- Color Input --}}
+        <!-- Color Input -->
         @elseif ($field['type'] == 'color')
             <x-admin::form.control-group.control
                 type="color"
@@ -82,7 +82,7 @@
             >
             </x-admin::form.control-group.control>
 
-        {{-- Textarea Input --}}
+        <!-- Textarea Input -->
         @elseif ($field['type'] == 'textarea')
             <x-admin::form.control-group.control
                 type="textarea"
@@ -95,9 +95,9 @@
             >
             </x-admin::form.control-group.control>
 
-        {{-- Textarea Input --}}
+        <!-- Textarea Input -->
         @elseif ($field['type'] == 'editor')
-            {{-- (@suraj-webkul) TODO Change textarea to tiny mce --}}
+            <!-- (@suraj-webkul) TODO Change textarea to tiny mce -->
             <x-admin::form.control-group.control
                 type="textarea"
                 :name="$name"
@@ -108,7 +108,7 @@
             >
             </x-admin::form.control-group.control>
 
-        {{-- Select input --}}
+        <!-- Select input -->
         @elseif ($field['type'] == 'select')
             @php $selectedOption = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? ''; @endphp
 
@@ -145,7 +145,7 @@
                 @endif
             </x-admin::form.control-group.control>
 
-        {{-- Multiselect Input --}}
+        <!-- Multiselect Input -->
         @elseif ($field['type'] == 'multiselect')
             @php $selectedOption = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? ''; @endphp
 
@@ -178,7 +178,7 @@
                 @endif
             </x-admin::form.control-group.control>
 
-        {{-- Boolean/Switch input --}}
+        <!-- Boolean/Switch input -->
         @elseif ($field['type'] == 'boolean')
             @php
                 $selectedOption = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? ($field['default_value'] ?? '');
@@ -234,23 +234,24 @@
             </div>
 
             @if ($result)
-                <div class="flex gap-[10px] cursor-pointer">
+                <x-admin::form.control-group class="flex gap-[5px] w-max  mt-[5px] cursor-pointer select-none">
                     <x-admin::form.control-group.control
                         type="checkbox"
                         :name="$name.'[delete]'"
                         :id="$name.'[delete]'"
                         value="1"
                         class="hidden peer"
+                        :for="$name.'[delete]'"
                     >
                     </x-admin::form.control-group.control>
 
                     <x-admin::form.control-group.label
-                        class="cursor-pointer"
                         :for="$name.'[delete]'"
+                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                     >
                         @lang('admin::app.configuration.index.delete')
                     </x-admin::form.control-group.label>
-                </div>
+                </x-admin::form.control-group>
             @endif
 
         @elseif ($field['type'] == 'file')
@@ -297,7 +298,7 @@
                 </div>
             @endif
 
-        {{-- Country select Vue component --}}
+        <!-- Country select Vue component -->
         @elseif ($field['type'] == 'country')
             <v-country ref="countryRef">
                 <template v-slot:default="{ changeCountry }">
@@ -319,7 +320,7 @@
                 </template>
             </v-country>
 
-        {{-- State select Vue component --}}
+        <!-- State select Vue component -->
         @elseif ($field['type'] == 'state')
             <v-state ref="stateRef">
                 <template
@@ -374,7 +375,7 @@
         </label>
     @endif
 
-    {{-- Input field validaitons error message --}}
+    <!-- Input field validaitons error message -->
     <x-admin::form.control-group.error
         :control-name="$name"
     >

@@ -1,5 +1,5 @@
 <x-admin::layouts>
-    {{-- Title of the page --}}
+    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.settings.exchange-rates.index.title')
     </x-slot:title>
@@ -33,7 +33,7 @@
             </div>
         </div>
 
-        {{-- DataGrid Shimmer --}}
+        <!-- DataGrid Shimmer -->
         <x-admin::shimmer.datagrid/>
     </v-exchange-rates>
 
@@ -122,17 +122,17 @@
                     <div
                         v-for="record in records"
                         class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
-                        :style="'grid-template-columns: repeat(' + (record.actions.length ? 4 : 3) + ', 1fr);'"
+                        :style="'grid-template-columns: repeat(' + (record.actions.length ? 4 : 3) + ', minmax(0, 1fr));'"
                     >
                         <!-- Id -->
                         <p v-text="record.currency_exchange_id"></p>
-        
+
                         <!-- Status -->
                         <p v-text="record.currency_name"></p>
-        
+
                         <!-- Email -->
                         <p v-text="record.currency_rate"></p>
-        
+
                         <!-- Actions -->
                         <div class="flex justify-end">
                             <a @click="id=1; editModal(record.actions.find(action => action.title === 'Edit')?.url)">

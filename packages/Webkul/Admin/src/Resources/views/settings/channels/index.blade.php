@@ -1,6 +1,6 @@
 <x-admin::layouts>
 
-    {{-- Page Title --}}
+    <!-- Page Title -->
     <x-slot:title>
         @lang('admin::app.settings.channels.index.title')
     </x-slot:title>
@@ -11,7 +11,7 @@
         </p>
         
         <div class="flex gap-x-[10px] items-center">
-            {{-- Create New Channel Button --}}
+            <!-- Create New Channel Button -->
             @if (bouncer()->hasPermission('settings.channels.create'))
                 <a 
                     href="{{ route('admin.settings.channels.create') }}"

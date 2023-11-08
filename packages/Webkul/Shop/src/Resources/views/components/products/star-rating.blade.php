@@ -18,6 +18,7 @@
         <div class="flex">
             <span
                 class="icon-star-fill text-[24px] cursor-pointer"
+                role="presentation"
                 v-for="rating in availableRatings"
                 v-if="! disabled"
                 :style="[`color: ${appliedRatings >= rating ? '#ffb600' : '#7d7d7d'}`]"
@@ -27,6 +28,7 @@
 
             <span
                 class="icon-star-fill text-[24px]"
+                role="presentation"
                 v-for="rating in availableRatings"
                 :style="[`color: ${appliedRatings >= rating ? '#ffb600' : '#7d7d7d'}`]"
                 v-else

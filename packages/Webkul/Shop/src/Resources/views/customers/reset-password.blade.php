@@ -21,7 +21,7 @@
             <a
                 href="{{ route('shop.home.index') }}"
                 class="m-[0_auto_20px_auto]"
-                aria-label="Bagisto "
+                aria-label="@lang('shop::app.customers.reset-password.bagisto')"
             >
                 <img
                     src="{{ bagisto_asset('images/logo.svg') }}"
@@ -67,6 +67,8 @@
                             rules="required|email"
                             :label="trans('shop::app.customers.reset-password.email')"
                             placeholder="email@example.com"
+                            aria-label="@lang('shop::app.customers.reset-password.email')"
+                            aria-required="true"
                         >
                         </x-shop::form.control-group.control>
 
@@ -90,6 +92,8 @@
                             rules="required|min:6"
                             :label="trans('shop::app.customers.reset-password.password')"
                             :placeholder="trans('shop::app.customers.reset-password.password')"
+                            aria-label="@lang('shop::app.customers.reset-password.password')"
+                            aria-required="true"
                         >
                         </x-shop::form.control-group.control>
 
@@ -112,6 +116,8 @@
                             rules="confirmed:@password"
                             :label="trans('shop::app.customers.reset-password.confirm-password')"
                             :placeholder="trans('shop::app.customers.reset-password.confirm-password')"
+                            aria-label="@lang('shop::app.customers.reset-password.confirm-password')"
+                            aria-required="true"
                         >
                         </x-shop::form.control-group.control>
 

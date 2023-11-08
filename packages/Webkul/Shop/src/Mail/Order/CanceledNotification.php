@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Webkul\Shop\Mail\Order;
 
 use Illuminate\Bus\Queueable;
@@ -24,6 +23,6 @@ class CanceledNotification extends Mailable
         return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
             ->to($this->order->customer_email, $this->order->customer_full_name)
             ->subject(trans('admin::app.emails.orders.canceled.subject'))
-            ->view('shop::shop.orders.canceled');
+            ->view('shop::emails.orders.canceled');
     }
 }

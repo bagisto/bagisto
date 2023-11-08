@@ -2,8 +2,8 @@
 
 namespace Webkul\Product\Repositories;
 
-use Elasticsearch;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Core\Facades\ElasticSearch;
 use Webkul\Customer\Repositories\CustomerRepository;
 
 class ElasticSearchRepository
@@ -11,8 +11,6 @@ class ElasticSearchRepository
     /**
      * Create a new repository instance.
      *
-     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
      * @return void
      */
     public function __construct(
@@ -78,6 +76,10 @@ class ElasticSearchRepository
     {
         $params = request()->input();
 
+        if (! empty($params['query'])) {
+            $params['name'] = $params['query'];
+        }
+
         $filterableAttributes = $this->attributeRepository
             ->getProductDefaultAttributes(array_keys($params));
 
@@ -129,10 +131,8 @@ class ElasticSearchRepository
 
             case 'text':
                 return [
-                    'wildcard' => [
-                        $attribute->code => [
-                            'value' => '*' . $params[$attribute->code] . '*',
-                        ],
+                    'match_phrase' => [
+                        $attribute->code => $params[$attribute->code],
                     ],
                 ];
 

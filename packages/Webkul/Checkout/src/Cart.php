@@ -2,22 +2,22 @@
 
 namespace Webkul\Checkout;
 
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Arr;
-use Webkul\Checkout\Traits\CartValidators;
-use Webkul\Checkout\Traits\CartTools;
-use Webkul\Checkout\Traits\CartCoupons;
-use Webkul\Checkout\Repositories\CartRepository;
-use Webkul\Checkout\Repositories\CartItemRepository;
-use Webkul\Customer\Repositories\CustomerAddressRepository;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Tax\Repositories\TaxCategoryRepository;
-use Webkul\Customer\Repositories\WishlistRepository;
-use Webkul\Checkout\Repositories\CartAddressRepository;
-use Webkul\Shipping\Facades\Shipping;
-use Webkul\Checkout\Models\CartPayment;
+use Illuminate\Support\Facades\Event;
 use Webkul\Checkout\Models\CartAddress;
+use Webkul\Checkout\Models\CartPayment;
+use Webkul\Checkout\Repositories\CartAddressRepository;
+use Webkul\Checkout\Repositories\CartItemRepository;
+use Webkul\Checkout\Repositories\CartRepository;
+use Webkul\Checkout\Traits\CartCoupons;
+use Webkul\Checkout\Traits\CartTools;
+use Webkul\Checkout\Traits\CartValidators;
+use Webkul\Customer\Repositories\CustomerAddressRepository;
+use Webkul\Customer\Repositories\WishlistRepository;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Shipping\Facades\Shipping;
 use Webkul\Tax\Helpers\Tax;
+use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 class Cart
 {
@@ -31,13 +31,6 @@ class Cart
     /**
      * Create a new class instance.
      *
-     * @param  \Webkul\Checkout\Repositories\CartRepository  $cartRepository
-     * @param  \Webkul\Checkout\Repositories\CartItemRepository  $cartItemRepository
-     * @param  \Webkul\Checkout\Repositories\CartAddressRepository  $cartAddressRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
-     * @param  \Webkul\Tax\Repositories\TaxCategoryRepository   $taxCategoryRepository
-     * @param  \Webkul\Customer\Repositories\WishlistRepository  $wishlistRepository
-     * @param  \Webkul\Customer\Repositories\CustomerAddressRepository  $customerAddressRepository
      * @return void
      */
     public function __construct(
@@ -48,8 +41,7 @@ class Cart
         protected TaxCategoryRepository $taxCategoryRepository,
         protected WishlistRepository $wishlistRepository,
         protected CustomerAddressRepository $customerAddressRepository
-    )
-    {
+    ) {
         $this->initCart();
     }
 
@@ -65,10 +57,8 @@ class Cart
 
     /**
      * Returns cart.
-     *
-     * @return \Webkul\Checkout\Contracts\Cart|null
      */
-    public function getCart(): ?\Webkul\Checkout\Contracts\Cart
+    public function getCart(): ?Contracts\Cart
     {
         if ($this->cart) {
             return $this->cart;
@@ -76,9 +66,9 @@ class Cart
 
         if (auth()->guard()->check()) {
             $this->cart = $this->cartRepository->findOneWhere([
-                    'customer_id' => auth()->guard()->user()->id,
-                    'is_active'   => 1,
-                ]);
+                'customer_id' => auth()->guard()->user()->id,
+                'is_active'   => 1,
+            ]);
         } elseif (session()->has('cart')) {
             $this->cart = $this->cartRepository->find(session()->get('cart')->id);
         }
@@ -111,7 +101,7 @@ class Cart
      * Remove the item from the cart.
      *
      * @param  int  $itemId
-     * @return boolean
+     * @return bool
      */
     public function removeItem($itemId)
     {
@@ -120,7 +110,7 @@ class Cart
         if (! $cart) {
             return false;
         }
-        
+
         Event::dispatch('checkout.cart.delete.before', $itemId);
 
         Shipping::removeAllShippingRates();
@@ -184,6 +174,7 @@ class Cart
      * @param  int  $productId
      * @param  array  $data
      * @return \Webkul\Checkout\Contracts\Cart|string|array
+     *
      * @throws Exception
      */
     public function addProduct($productId, $data)
@@ -356,7 +347,7 @@ class Cart
      * Save customer address.
      *
      * @param  array  $data
-     * @return bool
+     *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
     public function saveCustomerAddress($data): bool
@@ -406,7 +397,6 @@ class Cart
      * Save shipping method for cart.
      *
      * @param  string  $shippingMethodCode
-     * @return bool
      */
     public function saveShippingMethod($shippingMethodCode): bool
     {
@@ -456,8 +446,6 @@ class Cart
 
     /**
      * Updates cart totals.
-     *
-     * @return void
      */
     public function collectTotals(): void
     {
@@ -531,8 +519,6 @@ class Cart
 
     /**
      * To validate if the product information is changed by admin and the items have been added to the cart before it.
-     *
-     * @return bool
      */
     public function validateItems(): bool
     {
@@ -581,8 +567,6 @@ class Cart
 
     /**
      * Calculates cart items tax.
-     *
-     * @return void
      */
     public function calculateItemsTax(): void
     {
@@ -600,7 +584,7 @@ class Cart
             if (empty($taxCategoryId)) {
                 continue;
             }
-            
+
             if (! isset($taxCategories[$taxCategoryId])) {
                 $taxCategories[$taxCategoryId] = $this->taxCategoryRepository->find($taxCategoryId);
             }
@@ -626,7 +610,9 @@ class Cart
 
             $item->tax_percent = $item->tax_amount = $item->base_tax_amount = 0;
 
-            Tax::isTaxApplicableInCurrentAddress($taxCategories[$taxCategoryId], $address, function ($rate) use ($cart, $item) {
+            Tax::isTaxApplicableInCurrentAddress($taxCategories[$taxCategoryId], $address, function ($rate) use ($item, $taxCategoryId) {
+                $item->tax_category_id = $taxCategoryId;
+
                 $item->tax_percent = $rate->tax_rate;
 
                 $item->tax_amount = round(($item->total * $rate->tax_rate) / 100, 4);
@@ -644,7 +630,6 @@ class Cart
      * Collect customer address.
      *
      * @param  array  $address
-     * @return array
      */
     private function collectAddress($address): array
     {
@@ -660,8 +645,6 @@ class Cart
 
     /**
      * Fill customer attributes.
-     * 
-     * @return array
      */
     private function fillCustomerAttributes(): array
     {
@@ -681,8 +664,6 @@ class Cart
 
     /**
      * Fill address attributes.
-     * 
-     * @return array
      */
     private function fillAddressAttributes(array $addressAttributes): array
     {
@@ -707,10 +688,11 @@ class Cart
      * @param  \Webkul\Checkout\Cart|null  $cart
      * @param  array  $billingAddressData
      * @param  array  $shippingAddressData
+     *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
     private function updateOrCreateAddress(
-        \Webkul\Checkout\Models\Cart $cart,
+        Models\Cart $cart,
         array $billingAddress,
         array $shippingAddress
     ): void {
@@ -737,8 +719,8 @@ class Cart
                                 ? $billingAddress
                                 : $shippingAddress
                             ), [
-                            'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
-                        ]),
+                                'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
+                            ]),
                         $cart->shipping_address->id
                     );
                 } else {
@@ -752,8 +734,8 @@ class Cart
                                 ? $billingAddress
                                 : $shippingAddress
                             ), [
-                            'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
-                        ])
+                                'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
+                            ])
                     );
                 }
             }
@@ -773,8 +755,8 @@ class Cart
                             ? $billingAddress
                             : $shippingAddress
                         ), [
-                        'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
-                    ])
+                            'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
+                        ])
                 );
             }
         }
@@ -782,8 +764,6 @@ class Cart
 
     /**
      * Prepare data for order.
-     *
-     * @return array
      */
     public function prepareDataForOrder(): array
     {
@@ -845,7 +825,6 @@ class Cart
      * Prepares data for order item.
      *
      * @param  array  $data
-     * @return array
      */
     public function prepareDataForOrderItem($data): array
     {
@@ -864,6 +843,7 @@ class Cart
             'tax_percent'          => $data['tax_percent'],
             'tax_amount'           => $data['tax_amount'],
             'base_tax_amount'      => $data['base_tax_amount'],
+            'tax_category_id'      => $data['tax_category_id'],
             'discount_percent'     => $data['discount_percent'],
             'discount_amount'      => $data['discount_amount'],
             'base_discount_amount' => $data['base_discount_amount'],

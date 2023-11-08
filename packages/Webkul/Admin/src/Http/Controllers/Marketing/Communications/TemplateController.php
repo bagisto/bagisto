@@ -4,9 +4,9 @@ namespace Webkul\Admin\Http\Controllers\Marketing\Communications;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
+use Webkul\Admin\DataGrids\Marketing\Communications\EmailTemplateDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Marketing\Repositories\TemplateRepository;
-use Webkul\Admin\DataGrids\Marketing\Communications\EmailTemplateDataGrid;
 
 class TemplateController extends Controller
 {
@@ -61,7 +61,7 @@ class TemplateController extends Controller
         $template = $this->templateRepository->create(request()->only([
             'name',
             'status',
-            'content'
+            'content',
         ]));
 
         Event::dispatch('marketing.templates.create.after', $template);
@@ -103,7 +103,7 @@ class TemplateController extends Controller
         $template = $this->templateRepository->update(request()->only([
             'name',
             'status',
-            'content'
+            'content',
         ]), $id);
 
         Event::dispatch('marketing.templates.update.after', $template);
@@ -116,8 +116,7 @@ class TemplateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return \Illuminate\Http\JsonResponse
+     * @param  int  $id
      */
     public function destroy($id): JsonResponse
     {
@@ -131,13 +130,13 @@ class TemplateController extends Controller
             Event::dispatch('marketing.templates.delete.after', $id);
 
             return new JsonResponse([
-                'message' => trans('admin::app.marketing.communications.templates.delete-success')
+                'message' => trans('admin::app.marketing.communications.templates.delete-success'),
             ]);
         } catch (\Exception $e) {
         }
 
         return new JsonResponse([
             'message' => trans('admin::app.marketing.communications.templates.delete-failed', ['name' => 'admin::app.marketing.communications.templates.email-template']
-        )], 400);
+            )], 400);
     }
 }

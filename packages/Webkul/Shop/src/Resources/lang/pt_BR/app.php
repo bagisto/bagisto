@@ -4,6 +4,7 @@ return [
     'customers' => [
         'forgot-password' => [
             'back'                 => 'Voltar para Entrar?',
+            'bagisto'              => 'Bagisto',
             'email-not-exist'      => 'Não conseguimos encontrar um usuário com esse endereço de e-mail.',
             'email'                => 'E-mail',
             'forgot-password-text' => 'Se você esqueceu sua senha, recupere-a inserindo seu endereço de e-mail.',
@@ -17,6 +18,7 @@ return [
 
         'reset-password' => [
             'back-link-title'  => 'Voltar para Entrar',
+            'bagisto'          => 'Bagisto',
             'confirm-password' => 'Confirmar Senha',
             'email'            => 'E-mail Registrado',
             'footer'           => '© Copyright 2010 - :current_year, Webkul Software (Registrado na Índia). Todos os direitos reservados.',
@@ -27,6 +29,7 @@ return [
 
         'login-form' => [
             'button-title'        => 'Entrar',
+            'bagisto'             => 'Bagisto',
             'create-your-account' => 'Crie sua conta',
             'email'               => 'E-mail',
             'form-login-text'     => 'Se você tem uma conta, faça login com seu endereço de e-mail.',
@@ -44,6 +47,7 @@ return [
 
         'signup-form' => [
             'account-exists'              => 'Já tem uma conta?',
+            'bagisto'                     => 'Bagisto',
             'button-title'                => 'Registrar',
             'confirm-pass'                => 'Confirmar Senha',
             'email'                       => 'E-mail',
@@ -91,6 +95,7 @@ return [
                 'phone'                   => 'Telefone',
                 'save'                    => 'Salvar',
                 'subscribe-to-newsletter' => 'Assinar boletim informativo',
+                'select-gender'           => 'Selecionar Gênero',
                 'title'                   => 'Perfil',
                 'unmatch'                 => 'A senha antiga não corresponde.',
                 'wrong-password'          => 'Senha Incorreta!',
@@ -317,6 +322,7 @@ return [
         'layouts' => [
             'header' => [
                 'account'       => 'Conta',
+                'bagisto'       => 'Bagisto',
                 'compare'       => 'Comparar',
                 'cart'          => 'Carrinho',
                 'dropdown-text' => 'Gerenciar Carrinho, Pedidos e Lista de Desejos',
@@ -338,6 +344,7 @@ return [
                 'customer-service'       => 'Atendimento ao Cliente',
                 'contact-us'             => 'Fale Conosco',
                 'currency'               => 'Moeda',
+                'email'                  => 'Email',
                 'footer-text'            => '© Direitos Autorais 2010 - 2023, Webkul Software (Registrada na Índia). Todos os direitos reservados.',
                 'locale'                 => 'Localização',
                 'newsletter-text'        => 'Prepare-se para nossa Newsletter divertida!',
@@ -398,7 +405,11 @@ return [
 
             'table' => [
                 'actions'              => 'Ações',
-                'no-records-available' => 'Nenhum Registro Disponível.',
+                'no-records-available' => 'Nenhum registro disponível.',
+                'next-page'            => 'Próxima Página',
+                'page-navigation'      => 'Navegação de Página',
+                'previous-page'        => 'Página Anterior',
+                'page-number'          => 'Número da Página',
             ],
         ],
 
@@ -416,21 +427,38 @@ return [
 
         'products' => [
             'card' => [
-                'add-to-compare'     => 'Item adicionado com sucesso para a lista de comparação.',
-                'already-in-compare' => 'O item já está adicionado à lista de comparação.',
-                'add-to-cart'        => 'Adicionar ao Carrinho',
-                'new'                => 'Novo',
-                'review-description' => 'Seja o primeiro a avaliar este produto',
-                'sale'               => 'Promoção',
+                'add-to-compare-success'      => 'Item adicionado com sucesso à lista de comparação.',
+                'already-in-compare'          => 'O item já está na lista de comparação.',
+                'add-to-cart'                 => 'Adicionar ao Carrinho',
+                'add-to-wishlist'             => 'Adicionar à Lista de Desejos',
+                'add-to-compare'              => 'Adicionar à Lista de Comparação',
+                'new'                         => 'Novo',
+                'review-description'          => 'Seja o primeiro a avaliar este produto',
+                'sale'                        => 'Venda',
             ],
 
             'carousel' => [
-                'view-all' => 'Ver Tudo',
+                'next'     => 'Próximo',
+                'previous' => 'Anterior',
+                'view-all' => 'Ver Todos',
             ],
         ],
 
         'range-slider' => [
-            'range' => 'Faixa:',
+            'min-range' => 'Faixa Mínima',
+            'max-range' => 'Faixa Máxima',
+            'range'     => 'Faixa:',
+        ],
+
+        'carousel' => [
+            'image-slide' => 'Slide de Imagem',
+            'next'        => 'Próximo',
+            'previous'    => 'Anterior',
+        ],
+
+        'quantity-changer' => [
+            'decrease-quantity' => 'Diminuir Quantidade',
+            'increase-quantity' => 'Aumentar Quantidade',
         ],
     ],
 
@@ -501,6 +529,7 @@ return [
             ],
 
             'add-to-cart'            => 'Adicionar ao Carrinho',
+            'add-to-wishlist'        => 'Adicionar à Lista de Desejos',
             'add-to-compare'         => 'Produto adicionado à comparação.',
             'already-in-compare'     => 'Produto já adicionado à comparação.',
             'additional-information' => 'Informações Adicionais',
@@ -515,7 +544,7 @@ return [
 
         'type' => [
             'abstract' => [
-                'offers' => 'Compre :qty por :price cada e economize :discount%',
+                'offers' => 'Compre :qty por :price cada e economize :discount',
             ],
         ],
     ],
@@ -529,6 +558,8 @@ return [
         ],
 
         'toolbar' => [
+            'grid' => 'Grade',
+            'list' => 'Lista',
             'show' => 'Mostrar',
         ],
 
@@ -539,7 +570,21 @@ return [
     ],
 
     'search' => [
-        'title' => 'Resultados da pesquisa para : :query',
+        'title'   => 'Resultados da pesquisa para : :query',
+        'results' => 'Resultados da pesquisa',
+
+        'images' => [
+            'index' => [
+                'something-went-wrong' => 'Algo deu errado, por favor, tente novamente mais tarde.',
+                'size-limit-error'     => 'Erro de Limite de Tamanho',
+                'search'               => 'Pesquisar',
+                'only-images-allowed'  => 'Apenas imagens (.jpeg, .jpg, .png, ..) são permitidas.',
+            ],
+
+            'results' => [
+                'analysed-keywords' => 'Palavras-chave Analisadas:',
+            ],
+        ],
     ],
 
     'compare' => [
@@ -580,6 +625,7 @@ return [
             'success-remove'            => 'Item removido com sucesso do carrinho.',
 
             'index' => [
+                'bagisto'                  => 'Bagisto',
                 'cart'                     => 'Carrinho',
                 'continue-shopping'        => 'Continuar Comprando',
                 'empty-product'            => 'Você não tem um produto no carrinho.',
@@ -594,6 +640,8 @@ return [
                 'remove'                   => 'Remover',
                 'remove-selected-success'  => 'Itens selecionados removidos com sucesso do carrinho.',
                 'see-details'              => 'Ver Detalhes',
+                'select-all'               => 'Selecionar tudo',
+                'select-cart-item'         => 'Selecionar item do carrinho',
                 'tax'                      => 'Imposto',
                 'total'                    => 'Total',
                 'update-cart'              => 'Atualizar Carrinho',
@@ -662,6 +710,7 @@ return [
                 ],
 
                 'index' => [
+                    'bagisto' => 'Bagisto',
                     'confirm' => 'Confirmar',
                 ],
 

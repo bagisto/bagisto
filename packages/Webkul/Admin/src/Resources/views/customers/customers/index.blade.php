@@ -1,5 +1,5 @@
 <x-admin::layouts>
-    {{-- Title of the page --}}
+    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.customers.customers.index.title')
     </x-slot:title>
@@ -14,7 +14,7 @@
             <x-admin::datagrid.export src="{{ route('admin.customers.customers.index') }}"></x-admin::datagrid.export>
 
             <div class="flex gap-x-[10px] items-center">
-                {{-- Customer Create Vue Component --}}
+                <!-- Customer Create Vue Component -->
 
                 {!! view_render_event('admin.customers.customers.create.before') !!}
 
@@ -40,7 +40,7 @@
             $hasPermission = bouncer()->hasPermission('customers.customers.mass-update') || bouncer()->hasPermission('customers.customers.mass-delete');
         @endphp
 
-        {{-- Datagrid Header --}}
+        <!-- Datagrid Header -->
         <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
             <template v-if="! isLoading">
                 <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
@@ -103,13 +103,13 @@
                 </div>
             </template>
 
-            {{-- Datagrid Head Shimmer --}}
+            <!-- Datagrid Head Shimmer -->
             <template v-else>
                 <x-admin::shimmer.datagrid.table.head :isMultiRow="true"></x-admin::shimmer.datagrid.table.head>
             </template>
         </template>
 
-        {{-- Datagrid Body --}}
+        <!-- Datagrid Body -->
         <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
             <template v-if="! isLoading">
                 <div
@@ -160,7 +160,7 @@
                         <div class="flex gap-[6px]">
                             <span
                                 :class="{
-                                    'label-cancelled': record.status == '',
+                                    'label-canceled': record.status == '',
                                     'label-active': record.status === 1,
                                 }"
                             >
@@ -169,7 +169,7 @@
 
                             <span
                                 :class="{
-                                    'label-cancelled': record.is_suspended === 1,
+                                    'label-canceled': record.is_suspended === 1,
                                 }"
                             >
                                 @{{ record.is_suspended ?  'Suspended' : '' }}
@@ -224,7 +224,7 @@
                 </div>
             </template>
 
-            {{-- Datagrid Body Shimmer --}}
+            <!-- Datagrid Body Shimmer -->
             <template v-else>
                 <x-admin::shimmer.datagrid.table.body :isMultiRow="true"></x-admin::shimmer.datagrid.table.body>
             </template>

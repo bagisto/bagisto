@@ -1,3 +1,4 @@
+<!-- Refund Vue Component -->
 <v-create-refund>
     <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]">
         <span class="icon-cancel text-[24px]"></span> 
@@ -13,7 +14,12 @@
                 class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
                 @click="$refs.refund.open()"
             >
-                <span class="icon-cancel text-[24px]"></span> 
+                <span
+                    class="icon-cancel text-[24px]"
+                    role="presentation"
+                    tabindex="0"
+                >
+                </span> 
 
                 @lang('admin::app.sales.orders.view.refund')     
             </div>
@@ -62,7 +68,7 @@
                                     @foreach ($order->items as $item)
                                         <div class="flex gap-[10px] justify-between py-[16px]">
                                             <div class="flex gap-[10px]">
-                                                @if ($item->product->base_image_url)
+                                                @if ($item->product?->base_image_url)
                                                     <img
                                                         class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
                                                         src="{{ $item->product->base_image_url }}"
@@ -203,7 +209,11 @@
                                         </div>
                                     @endforeach
                                 </div>
-                                <div v-if="refund.summary" class="grid grid-cols-3 gap-x-[20px] mt-[10px]">
+
+                                <div
+                                    v-if="refund.summary"
+                                    class="grid grid-cols-3 gap-x-[20px] mt-[10px]"
+                                >
                                     <!-- Refund Shipping -->
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
@@ -292,20 +302,28 @@
                                     </div>
 
                                     <div class="flex flex-col gap-y-[6px]">
-                                        <p class="text-gray-600 dark:text-gray-300"> 
-                                            @{{ refund.summary.subtotal.formatted_price }} 
+                                        <p
+                                            class="text-gray-600 dark:text-gray-300"
+                                            v-text="refund.summary.subtotal.formatted_price"
+                                        >
                                         </p>
 
-                                        <p class="text-gray-600 dark:text-gray-300"> 
-                                            @{{ refund.summary.discount.formatted_price }} 
+                                        <p
+                                            class="text-gray-600 dark:text-gray-300"
+                                            v-text="refund.summary.discount.formatted_price"
+                                        >
                                         </p>
 
-                                        <p class="text-gray-600 dark:text-gray-300"> 
-                                            @{{ refund.summary.tax.formatted_price }} 
+                                        <p
+                                            class="text-gray-600 dark:text-gray-300"
+                                            v-text="refund.summary.tax.formatted_price"
+                                        >
                                         </p>
 
-                                        <p class="text-gray-600 dark:text-gray-300"> 
-                                            @{{ refund.summary.grand_total.formatted_price }} 
+                                        <p
+                                            class="text-gray-600 dark:text-gray-300"
+                                            v-text="refund.summary.grand_total.formatted_price"
+                                        >
                                         </p>
                                     </div>
                                 </div>

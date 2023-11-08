@@ -2,11 +2,11 @@
 
 namespace Webkul\Sales\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderAddress;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class OrderAddressFactory extends Factory
 {
@@ -26,8 +26,6 @@ class OrderAddressFactory extends Factory
 
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
     public function definition(): array
     {

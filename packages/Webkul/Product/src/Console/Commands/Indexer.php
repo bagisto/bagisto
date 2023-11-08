@@ -3,7 +3,9 @@
 namespace Webkul\Product\Console\Commands;
 
 use Illuminate\Console\Command;
-use Webkul\Product\Helpers\Indexers\{Inventory, Price, ElasticSearch};
+use Webkul\Product\Helpers\Indexers\ElasticSearch;
+use Webkul\Product\Helpers\Indexers\Inventory;
+use Webkul\Product\Helpers\Indexers\Price;
 
 class Indexer extends Command
 {
@@ -12,7 +14,7 @@ class Indexer extends Command
         'price'     => Price::class,
         'elastic'   => ElasticSearch::class,
     ];
-    
+
     /**
      * The name and signature of the console command.
      *
@@ -34,8 +36,8 @@ class Indexer extends Command
      */
     public function handle()
     {
-        $start = microtime(TRUE);
-        
+        $start = microtime(true);
+
         $indexerIds = ['inventory', 'price', 'elastic'];
 
         if (! empty($this->option('type'))) {
@@ -55,7 +57,7 @@ class Indexer extends Command
             ) {
                 continue;
             }
-            
+
             $indexer = app($this->indexers[$indexerId]);
 
             if ($mode == 'full') {
@@ -67,8 +69,8 @@ class Indexer extends Command
             }
         }
 
-        $end = microtime(TRUE);
+        $end = microtime(true);
 
-        echo "The code took " . ($end - $start) . " seconds to complete.\n";
+        echo 'The code took ' . ($end - $start) . " seconds to complete.\n";
     }
 }

@@ -1,14 +1,22 @@
+@php
+    if (request()->has('query')) {
+        $title = trans('shop::app.search.title', ['query' => request()->query('query')]);
+    } else {
+        $title = trans('shop::app.search.results');
+    }
+@endphp
+
 {{-- SEO Meta Content --}}
 @push('meta')
-    <meta name="description" content="@lang('shop::app.search.title', ['query' => request()->query('query')])"/>
+    <meta name="description" content="{{ $title }}"/>
 
-    <meta name="keywords" content="@lang('shop::app.search.title', ['query' => request()->query('query')])"/>
+    <meta name="keywords" content="{{ $title }}"/>
 @endPush
 
 <x-shop::layouts>
     {{-- Page Title --}}
     <x-slot:title>
-        @lang('shop::app.search.title', ['query' => request()->query('query')])
+        {{ $title }}
     </x-slot>
 
     <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
@@ -17,9 +25,9 @@
         @endif
 
         <div class="flex justify-between items-center mt-[30px]">
-            <h2 class="text-[26px] font-medium">
-                @lang('shop::app.search.title', ['query' => request()->query('query')])
-            </h2>
+            <h1 class="text-[26px] font-medium">
+                {{ $title }}
+            </h1>
         </div>
     </div>
         
@@ -191,7 +199,7 @@
                             filter: false,
                         };
 
-                        this.$axios.get(("{{ route('shop.api.products.index', ['name' => request('query')]) }}"), { 
+                        this.$axios.get(("{{ route('shop.api.products.index') }}"), { 
                             params: this.queryParams 
                         })
                             .then(response => {

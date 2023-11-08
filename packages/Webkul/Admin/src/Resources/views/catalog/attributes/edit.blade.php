@@ -3,12 +3,12 @@
 @endphp
 
 <x-admin::layouts>
-    {{-- Title of the page --}}
+    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.catalog.attributes.edit.title')
     </x-slot:title>
 
-    {{-- Edit Attributes Vue Components --}}
+    <!-- Edit Attributes Vue Components -->
     <v-edit-attributes :all-locales="{{ $allLocales->toJson() }}"></v-edit-attributes>
 
     @pushOnce('scripts')
@@ -29,7 +29,7 @@
                     <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                         @lang('admin::app.catalog.attributes.edit.title')
                     </p>
-        
+
                     <div class="flex gap-x-[10px] items-center">
                         <!-- Cancel Button -->
                         <a
@@ -103,7 +103,7 @@
                                         :control-name="$locale->code . '[name]'"
                                     >
                                     </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>    
+                                </x-admin::form.control-group>
                             @endforeach
                         </div>
 
@@ -122,7 +122,7 @@
                                 <!-- Add Row Button -->
                                 <div
                                     class="secondary-button text-[14px]"
-                                    @click="$refs.addOptionsRow.toggle()"
+                                    @click="$refs.addOptionsRow.toggle(), swatchValue=''"
                                 >
                                     @lang('admin::app.catalog.attributes.edit.add-row')
                                 </div>
@@ -172,7 +172,7 @@
                                         </x-admin::form.control-group.label>
 
                                         <div class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
-                                            <input 
+                                            <input
                                                 type="checkbox"
                                                 name="empty_option"
                                                 id="empty_option"
@@ -235,8 +235,11 @@
                                             :list="optionsData"
                                             item-key="id"
                                         >
-                                            <template #item="{ element, index }" v-show="! element.isDelete">
-                                                <x-admin::table.thead.tr class="text-center hover:bg-gray-50 dark:hover:bg-gray-950">
+                                            <template #item="{ element, index }">
+                                                <x-admin::table.thead.tr
+                                                    class="hover:bg-gray-50 dark:hover:bg-gray-950"
+                                                    v-show="! element.isDelete"
+                                                >
                                                     <input
                                                         type="hidden"
                                                         :name="'options[' + element.id + '][isNew]'"
@@ -255,17 +258,17 @@
 
                                                         <input
                                                             type="hidden"
-                                                            :name="'options[' + element.id + '][position]'"
+                                                            :name="'options[' + element.id + '][sort_order]'"
                                                             :value="index"
                                                         />
                                                     </x-admin::table.td>
- 
+
                                                     <!-- Swatch Type Image / Color -->
                                                     <x-admin::table.td v-if="showSwatch && (swatchType == 'color' || swatchType == 'image')">
                                                         <!-- Swatch Image -->
                                                         <div v-if="swatchType == 'image'">
-                                                            <img 
-                                                                :src="element.swatch_value_url"
+                                                            <img
+                                                                :src="element.swatch_value_url || '{{ bagisto_asset('images/product-placeholders/front.svg') }}'"
                                                                 :ref="'image_' + element.id"
                                                                 class="h-[50px] w-[50px]"
                                                             >
@@ -275,7 +278,7 @@
                                                                 :name="'options[' + element.id + '][swatch_value]'"
                                                                 class="hidden"
                                                                 :ref="'imageInput_' + element.id"
-                                                            /> 
+                                                            />
                                                         </div>
 
                                                         <!-- Swatch Color -->
@@ -285,7 +288,7 @@
                                                                 :style="{ background: element.swatch_value }"
                                                             >
                                                             </div>
-                    
+
                                                             <input
                                                                 type="hidden"
                                                                 :name="'options[' + element.id + '][swatch_value]'"
@@ -316,7 +319,7 @@
                                                             v-text="element['locales'][locale.code]"
                                                         >
                                                         </p>
-                                                        
+
                                                         <input
                                                             type="hidden"
                                                             :name="'options[' + element.id + '][' + locale.code + '][label]'"
@@ -331,7 +334,7 @@
                                                             @click="editOptions(element)"
                                                         >
                                                         </span>
-                                                        
+
                                                         <span
                                                             class="icon-delete p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-800  max-sm:place-self-center"
                                                             @click="removeOption(element.id)"
@@ -348,9 +351,9 @@
                                 <template>
                                     <div class="grid gap-[14px] justify-items-center py-[40px] px-[10px]">
                                         <!-- Attribute Option Image -->
-                                        <img 
-                                            class="w-[120px] h-[120px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px]" 
-                                            src="{{ bagisto_asset('images/icon-add-product.svg') }}" 
+                                        <img
+                                            class="w-[120px] h-[120px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px]"
+                                            src="{{ bagisto_asset('images/icon-add-product.svg') }}"
                                             alt="{{ trans('admin::app.catalog.attributes.edit.add-attribute-options') }}"
                                         >
 
@@ -366,7 +369,7 @@
                                         </div>
 
                                         <!-- Add Row Button -->
-                                        <div 
+                                        <div
                                             class="secondary-button text-[14px]"
                                             @click="$refs.addOptionsRow.toggle()"
                                         >
@@ -479,7 +482,7 @@
                                             @lang('admin::app.catalog.attributes.edit.enable-wysiwyg')
                                         </x-admin::form.control-group.label>
 
-                                        <input 
+                                        <input
                                             type="hidden"
                                             name="enable_wysiwyg"
                                             value="0"
@@ -531,7 +534,7 @@
                                     @lang('admin::app.catalog.attributes.edit.validations')
                                 </p>
                             </x-slot:header>
-                        
+
                             <x-slot:content>
                                 <!-- Input Validation -->
                                 @if($attribute->type == 'text')
@@ -569,7 +572,7 @@
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="regex"
-                                        v-model="regexValue"
+                                        v-model="validationType"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -648,7 +651,7 @@
                                     @lang('admin::app.catalog.attributes.edit.configuration')
                                 </p>
                             </x-slot:header>
-                        
+
                             <x-slot:content>
                                 <!-- Value Per Locale -->
                                 <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] opacity-70 select-none">
@@ -722,7 +725,7 @@
 
                                     <x-admin::form.control-group.label
                                         for="is_filterable"
-                                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer" 
+                                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-filterable')
                                     </x-admin::form.control-group.label>
@@ -753,7 +756,7 @@
 
                                     <x-admin::form.control-group.label
                                         for="is_configurable"
-                                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer" 
+                                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-configurable')
                                     </x-admin::form.control-group.label>
@@ -784,7 +787,7 @@
 
                                     <x-admin::form.control-group.label
                                         for="is_visible_on_front"
-                                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer" 
+                                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-visible-on-front')
                                     </x-admin::form.control-group.label>
@@ -815,7 +818,7 @@
 
                                     <x-admin::form.control-group.label
                                         for="is_comparable"
-                                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer" 
+                                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-comparable')
                                     </x-admin::form.control-group.label>
@@ -867,12 +870,19 @@
                                         @lang('admin::app.catalog.attributes.edit.image')
                                     </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
-                                        type="image"
+                                    <div class="hidden">
+                                        <x-admin::media.images
+                                            name="swatch_value[]"
+                                            ::uploaded-images='swatchValue.image'
+                                        >
+                                        </x-admin::media.images>
+                                    </div>
+
+                                    <v-media-images
                                         name="swatch_value"
-                                        :placeholder="trans('admin::app.catalog.attributes.edit.image')"
+                                        :uploaded-images='swatchValue.image'
                                     >
-                                    </x-admin::form.control-group.control>
+                                    </v-media-images>
 
                                     <x-admin::form.control-group.error
                                         control-name="swatch_value"
@@ -891,7 +901,7 @@
 
                                     <x-admin::form.control-group.control
                                         type="color"
-                                        name="swatch_value[]"
+                                        name="swatch_value"
                                         :placeholder="trans('admin::app.catalog.attributes.edit.color')"
                                     >
                                     </x-admin::form.control-group.control>
@@ -933,7 +943,7 @@
                                         :placeholder="trans('admin::app.catalog.attributes.edit.admin')"
                                     >
                                     </x-admin::form.control-group.control>
-        
+
                                     <x-admin::form.control-group.error
                                         control-name="admin_name"
                                     >
@@ -943,19 +953,19 @@
                                 <!-- Locales Input -->
                                 @foreach ($allLocales as $locale)
                                     <x-admin::form.control-group class="w-full mb-[10px]">
-                                        <x-admin::form.control-group.label ::class="{ '{{ core()->getDefaultChannelLocaleCode() == $locale->code ? 'required' : '' }}' : ! isNullOptionChecked }">
+                                        <x-admin::form.control-group.label ::class="{ '{{ core()->getDefaultLocaleCodeFromDefaultChannel() == $locale->code ? 'required' : '' }}' : ! isNullOptionChecked }">
                                             {{ $locale->name }} ({{ strtoupper($locale->code) }})
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="locales.{{ $locale->code }}"
-                                            ::rules="{ '{{ core()->getDefaultChannelLocaleCode() == $locale->code ? 'required' : '' }}' : ! isNullOptionChecked }"
+                                            ::rules="{ '{{ core()->getDefaultLocaleCodeFromDefaultChannel() == $locale->code ? 'required' : '' }}' : ! isNullOptionChecked }"
                                             :label="$locale->name"
                                             :placeholder="$locale->name"
                                         >
                                         </x-admin::form.control-group.control>
-            
+
                                         <x-admin::form.control-group.error
                                             control-name="locales.{{ $locale->code }}"
                                         >
@@ -964,11 +974,11 @@
                                 @endforeach
                             </div>
                         </x-slot:content>
-                        
+
                         <x-slot:footer>
                             <!-- Save Button -->
                             <button
-                                type="submit" 
+                                type="submit"
                                 class="primary-button"
                             >
                                 @lang('admin::app.catalog.attributes.edit.option.save-btn')
@@ -990,17 +1000,19 @@
 
                 data: function() {
                     return {
-                        optionRowCount: 1,
-
                         showSwatch: {{ in_array($attribute->type, ['select', 'checkbox', 'price', 'multiselect']) ? 'true' : 'false' }},
 
                         swatchType: "{{ $attribute->swatch_type == '' ? 'dropdown' : $attribute->swatch_type }}",
 
                         validationType: "{{ $attribute->validation }}",
 
-                        regexValue: '{{ $attribute->validation }}',
-
                         isNullOptionChecked: false,
+
+                        swatchValue: [
+                            {
+                                image: [],
+                            }
+                        ],
 
                         optionsData: [],
 
@@ -1040,7 +1052,7 @@
                         this.$refs.addOptionsRow.toggle();
 
                         if (params.swatch_value instanceof File) {
-                            this.setFile(params);
+                            this.setFile(sliderImage, params.id);
                         }
 
                         resetForm();
@@ -1048,6 +1060,12 @@
 
                     editOptions(value) {
                         this.optionIsNew = false;
+
+                        this.swatchValue = {
+                            image: value.swatch_value_url
+                            ? [{ url: value.swatch_value_url }]
+                            : [],
+                        };
 
                         this.$refs.modelForm.setValues(value);
 
@@ -1058,13 +1076,17 @@
                         let foundIndex = this.optionsData.findIndex(item => item.id === id);
 
                         if (foundIndex !== -1) {
-                            this.optionsData.splice(foundIndex, 1);
+                            if (this.optionsData[foundIndex].isNew) {
+                                this.optionsData.splice(foundIndex, 1);
+                            } else {
+                                this.optionsData[foundIndex].isDelete = true;
+                            }
                         }
                     },
 
                     listenModel(event) {
                         if (! event.isActive) {
-                            this.isNullOptionChecked = false;                            
+                            this.isNullOptionChecked = false;
                         }
                     },
 
@@ -1072,9 +1094,8 @@
                         this.$axios.get(`${this.src}`)
                             .then(response => {
                                 let options = response.data;
-                                options.forEach((option) => {
-                                    this.optionRowCount++;
 
+                                options.forEach((option) => {
                                     let row = {
                                         'id': option.id,
                                         'admin_name': option.admin_name,
@@ -1104,17 +1125,17 @@
                             });
                     },
 
-                    setFile(event) {
+                    setFile(file, id) {
                         let dataTransfer = new DataTransfer();
 
-                        dataTransfer.items.add(event.swatch_value);
+                        dataTransfer.items.add(file);
 
-                        // use settimeout because need to wait for render dom before set the src or get the ref value
+                        // Use Set timeout because need to wait for render dom before set the src or get the ref value
                         setTimeout(() => {
-                            this.$refs['image_' + event.id].src =  URL.createObjectURL(event.swatch_value);
-                        }, 0);
+                            this.$refs['image_' + id].src =  URL.createObjectURL(file);
 
-                        this.$refs['imageInput_' + event.id].files = dataTransfer.files;
+                            this.$refs['imageInput_' + id].files = dataTransfer.files;
+                        }, 0);
                     }
                 },
             });

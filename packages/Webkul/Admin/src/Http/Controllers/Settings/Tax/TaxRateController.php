@@ -6,10 +6,10 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Validators\Failure;
-use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Tax\Repositories\TaxRateRepository;
-use Webkul\Admin\Imports\DataGridImport;
 use Webkul\Admin\DataGrids\Settings\TaxRateDataGrid;
+use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Admin\Imports\DataGridImport;
+use Webkul\Tax\Repositories\TaxRateRepository;
 
 class TaxRateController extends Controller
 {
@@ -77,7 +77,6 @@ class TaxRateController extends Controller
             'zip_from',
             'zip_to',
         ]);
-
 
         if ($data['is_zip'] ?? false) {
             $data['is_zip'] = 1;
@@ -150,8 +149,7 @@ class TaxRateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return \Illuminate\Http\JsonResponse
+     * @param  int  $id
      */
     public function destroy($id): JsonResponse
     {
@@ -171,7 +169,7 @@ class TaxRateController extends Controller
         return new JsonResponse([
             'message' => trans(
                 'admin::app.settings.taxes.rates.delete-failed'
-            )
+            ),
         ], 500);
     }
 
@@ -184,7 +182,7 @@ class TaxRateController extends Controller
     {
         $valid_extension = ['xlsx', 'csv', 'xls'];
 
-        if (!in_array(request()->file('file')->getClientOriginalExtension(), $valid_extension)) {
+        if (! in_array(request()->file('file')->getClientOriginalExtension(), $valid_extension)) {
             session()->flash('error', trans('admin::app.export.upload-error'));
         } else {
             try {
@@ -197,8 +195,8 @@ class TaxRateController extends Controller
                         }
 
                         if (
-                            !is_null($uploadData['zip_from'])
-                            && !is_null($uploadData['zip_to'])
+                            ! is_null($uploadData['zip_from'])
+                            && ! is_null($uploadData['zip_to'])
                         ) {
                             $uploadData['is_zip'] = 1;
                         }
@@ -293,8 +291,8 @@ class TaxRateController extends Controller
                                 }
 
                                 if (
-                                    !is_null($uploadData['zip_from'])
-                                    && !is_null($uploadData['zip_to'])
+                                    ! is_null($uploadData['zip_from'])
+                                    && ! is_null($uploadData['zip_to'])
                                 ) {
                                     $uploadData['is_zip'] = 1;
                                     $uploadData['zip_code'] = null;

@@ -12,9 +12,9 @@
             </p>
 
             <div class="flex gap-x-[10px] items-center">
-                <!-- Craete currency Button -->
+                <!-- Create currency Button -->
                 @if (bouncer()->hasPermission('settings.currencies.create'))
-                    <button 
+                    <button
                         type="button"
                         class="primary-button"
                     >
@@ -24,7 +24,7 @@
             </div>
         </div>
 
-        {{-- DataGrid Shimmer --}}
+        <!-- DataGrid Shimmer -->
         <x-admin::shimmer.datagrid/>
     </v-currencies>
 
@@ -41,9 +41,9 @@
                 </p>
 
                 <div class="flex gap-x-[10px] items-center">
-                    <!-- Craete currency Button -->
+                    <!-- Create currency Button -->
                     @if (bouncer()->hasPermission('settings.currencies.create'))
-                        <button 
+                        <button
                             type="button"
                             class="primary-button"
                             @click="id=0; selectedCurrency={}; $refs.currencyUpdateOrCreateModal.toggle()"
@@ -53,7 +53,7 @@
                     @endif
                 </div>
             </div>
-    
+
             <x-admin::datagrid
                 :src="route('admin.settings.currencies.index')"
                 ref="datagrid"
@@ -108,7 +108,7 @@
                     <div
                         v-for="record in records"
                         class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
-                        :style="'grid-template-columns: repeat(' + (record.actions.length ? 4 : 3) + ', 1fr);'"
+                        :style="'grid-template-columns: repeat(' + (record.actions.length ? 4 : 3) + ', minmax(0, 1fr));'"
                     >
                         <!-- Id -->
                         <p v-text="record.id"></p>
@@ -160,7 +160,7 @@
                                 @lang('admin::app.settings.currencies.index.edit.title')
                             </p>
 
-                            <p 
+                            <p
                                 class="text-[18px] text-gray-800 dark:text-white font-bold"
                                 v-else
                             >
@@ -179,6 +179,7 @@
                                 >
                                 </x-admin::form.control-group.control>
 
+                                <!-- Code -->
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.currencies.index.create.code')
@@ -201,8 +202,9 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
+                                <!-- Name -->
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required"> 
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.currencies.index.create.name')
                                     </x-admin::form.control-group.label>
 
@@ -223,6 +225,7 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
+                                <!-- Symbol -->
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.settings.currencies.index.create.symbol')
@@ -244,6 +247,7 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
+                                <!-- Decimal -->
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.settings.currencies.index.create.decimal')
@@ -270,8 +274,9 @@
                         </x-slot:content>
 
                         <x-slot:footer>
+                            <!-- Save Button -->
                             <div class="flex gap-x-[10px] items-center">
-                               <button 
+                               <button
                                     type="submit"
                                     class="primary-button"
                                 >
@@ -313,7 +318,7 @@
                             resetForm();
                         })
                         .catch(error => {
-                            if (error.response.status ==422) {
+                            if (error.response.status == 422) {
                                 setErrors(error.response.data.errors);
                             }
                         });

@@ -16,7 +16,7 @@
                     <template v-else>
                         <div
                             class="row grid gap-[10px] min-h-[47px] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold items-center"
-                            :style="`grid-template-columns: repeat(${gridsCount}, 1fr)`"
+                            :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                         >
                             <!-- Mass Actions -->
                             <p v-if="$parent.available.massActions.length">
@@ -45,7 +45,7 @@
                             <!-- Columns -->
                             <p
                                 v-for="column in $parent.available.columns"
-                                class="flex gap-[5px] items-center"
+                                class="flex gap-[5px] items-center break-words"
                                 :class="{'cursor-pointer select-none hover:text-gray-800 dark:hover:text-white': column.sortable}"
                                 @click="$parent.sortPage(column)"
                             >
@@ -60,7 +60,7 @@
 
                             <!-- Actions -->
                             <p
-                                class="col-start-[none]"
+                                class="place-self-end"
                                 v-if="$parent.available.actions.length"
                             >
                                 @lang('admin::app.components.datagrid.table.actions')
@@ -79,7 +79,7 @@
                             <div
                                 class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                                 v-for="record in $parent.available.records"
-                                :style="`grid-template-columns: repeat(${gridsCount}, 1fr)`"
+                                :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                             >
                                 <!-- Mass Actions -->
                                 <p v-if="$parent.available.massActions.length">
@@ -101,23 +101,25 @@
 
                                 <!-- Columns -->
                                 <p
-                                    v-if="record.is_closure"
+                                    class="break-words"
                                     v-for="column in $parent.available.columns"
                                     v-html="record[column.index]"
+                                    v-if="record.is_closure"
                                 >
                                 </p>
 
                                 <p
-                                    v-else
+                                    class="break-words"
                                     v-for="column in $parent.available.columns"
                                     v-html="record[column.index]"
+                                    v-else
                                 >
                                 </p>
 
                                 <!-- Actions -->
                                 <p
+                                    class="place-self-end"
                                     v-if="$parent.available.actions.length"
-                                    class="col-start-[none]"
                                 >
                                     <span
                                         class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"

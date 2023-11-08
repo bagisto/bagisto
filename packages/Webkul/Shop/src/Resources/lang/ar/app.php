@@ -4,6 +4,7 @@ return [
     'customers' => [
         'forgot-password' => [
             'back'                 => 'العودة إلى تسجيل الدخول؟',
+            'bagisto'              => 'باغيستو',
             'email-not-exist'      => 'لا يمكننا العثور على مستخدم بهذا البريد الإلكتروني',
             'email'                => 'البريد الإلكتروني',
             'forgot-password-text' => 'إذا نسيت كلمة المرور الخاصة بك، يمكنك استعادتها عن طريق إدخال عنوان البريد الإلكتروني الخاص بك.',
@@ -17,6 +18,7 @@ return [
 
         'reset-password' => [
             'back-link-title'  => 'العودة إلى تسجيل الدخول',
+            'bagisto'          => 'باغيستو',
             'confirm-password' => 'تأكيد كلمة المرور',
             'email'            => 'البريد الإلكتروني المسجل',
             'footer'           => '© حقوق الطبع والنشر 2010 - :current_year، Webkul Software (مسجلة في الهند). جميع الحقوق محفوظة.',
@@ -27,6 +29,7 @@ return [
 
         'login-form' => [
             'button-title'        => 'تسجيل الدخول',
+            'bagisto'             => 'باغيستو',
             'create-your-account' => 'إنشاء حسابك',
             'email'               => 'البريد الإلكتروني',
             'form-login-text'     => 'إذا كان لديك حساب، قم بتسجيل الدخول باستخدام عنوان البريد الإلكتروني الخاص بك.',
@@ -44,6 +47,7 @@ return [
 
         'signup-form' => [
             'account-exists'              => 'هل لديك حساب بالفعل؟',
+            'bagisto'                     => 'باغيستو',
             'button-title'                => 'التسجيل',
             'confirm-pass'                => 'تأكيد كلمة المرور',
             'email'                       => 'البريد الإلكتروني',
@@ -91,6 +95,7 @@ return [
                 'phone'                   => 'الهاتف',
                 'save'                    => 'حفظ',
                 'subscribe-to-newsletter' => 'الاشتراك في النشرة الإخبارية',
+                'select-gender'           => 'اختر الجنس',
                 'title'                   => 'الملف الشخصي',
                 'unmatch'                 => 'كلمة المرور القديمة لا تتطابق.',
                 'wrong-password'          => '!كلمة المرور خاطئة',
@@ -317,6 +322,7 @@ return [
         'layouts' => [
             'header' => [
                 'account'       => 'الحساب',
+                'bagisto'       => 'باغيستو',
                 'compare'       => 'قارن',
                 'cart'          => 'العربة',
                 'dropdown-text' => 'إدارة العربة والطلبات والقائمة المفضلة',
@@ -338,6 +344,7 @@ return [
                 'customer-service'       => 'خدمة العملاء',
                 'contact-us'             => 'اتصل بنا',
                 'currency'               => 'العملة',
+                'email'                  => 'البريد الإلكتروني',
                 'footer-text'            => '© حقوق النشر 2010 - 2023 ، Webkul Software (مسجلة في الهند). كل الحقوق محفوظة.',
                 'locale'                 => 'اللغة',
                 'newsletter-text'        => 'احصل على نشرتنا الممتعة!',
@@ -398,7 +405,11 @@ return [
 
             'table' => [
                 'actions'              => 'الإجراءات',
-                'no-records-available' => 'لا توجد سجلات متاحة.',
+                'no-records-available' => 'لا تتوفر سجلات.',
+                'next-page'            => 'الصفحة التالية',
+                'page-navigation'      => 'تنقل الصفحة',
+                'previous-page'        => 'الصفحة السابقة',
+                'page-number'          => 'رقم الصفحة',
             ],
         ],
 
@@ -416,21 +427,38 @@ return [
 
         'products' => [
             'card' => [
-                'add-to-compare'     => 'تمت إضافة العنصر بنجاح إلى قائمة المقارنة.',
-                'already-in-compare' => 'العنصر مضاف بالفعل إلى قائمة المقارنة.',
-                'add-to-cart'        => 'أضف إلى العربة',
-                'new'                => 'جديد',
-                'review-description' => 'كن أول من يقوم بمراجعة هذا المنتج',
-                'sale'               => 'بيع',
+                'add-to-compare-success'      => 'تمت إضافة العنصر بنجاح إلى قائمة المقارنة.',
+                'already-in-compare'          => 'العنصر مضاف بالفعل إلى قائمة المقارنة.',
+                'add-to-cart'                 => 'أضف إلى السلة',
+                'add-to-wishlist'             => 'أضف إلى قائمة الرغبات',
+                'add-to-compare'              => 'أضف إلى قائمة المقارنة',
+                'new'                         => 'جديد',
+                'review-description'          => 'كن أول من يقيم هذا المنتج',
+                'sale'                        => 'تخفيض',
             ],
 
             'carousel' => [
-                'view-all' => 'عرض الكل'
+                'next'     => 'التالي',
+                'previous' => 'السابق',
+                'view-all' => 'عرض الكل',
             ],
         ],
 
         'range-slider' => [
-            'range' => 'النطاق:'
+            'min-range' => 'الحد الأدنى',
+            'max-range' => 'الحد الأقصى',
+            'range'     => 'النطاق:',
+        ],
+
+        'carousel' => [
+            'image-slide' => 'شريحة الصورة',
+            'next'        => 'التالي',
+            'previous'    => 'السابق',
+        ],
+
+        'quantity-changer' => [
+            'decrease-quantity' => 'تقليل الكمية',
+            'increase-quantity' => 'زيادة الكمية',
         ],
     ],
 
@@ -501,6 +529,7 @@ return [
             ],
 
             'add-to-cart'            => 'أضف إلى السلة',
+            'add-to-wishlist'        => 'أضف إلى قائمة الرغبات',
             'add-to-compare'         => 'تمت إضافة المنتج إلى قائمة المقارنة.',
             'already-in-compare'     => 'المنتج مضاف بالفعل إلى قائمة المقارنة.',
             'additional-information' => 'معلومات إضافية',
@@ -515,7 +544,7 @@ return [
 
         'type' => [
             'abstract' => [
-                'offers' => 'اشترِ :qty بسعر :price للوحدة ووفّر :discount%',
+                'offers' => 'اشترِ :qty بسعر :price للوحدة ووفّر :discount',
             ],
         ],
     ],
@@ -529,6 +558,8 @@ return [
         ],
 
         'toolbar' => [
+            'grid' => 'جدول',
+            'list' => 'قائمة',
             'show' => 'عرض',
         ],
 
@@ -539,12 +570,14 @@ return [
     ],
 
     'search' => [
-        'title' => 'نتائج البحث عن: :query',
+        'title'   => 'نتائج البحث عن: :query',
+        'results' => 'نتائج البحث',
 
         'images' => [
             'index' => [
                 'something-went-wrong' => 'حدث خطأ ما، يُرجى المحاولة مرة أخرى في وقت لاحق.',
                 'size-limit-error'     => 'خطأ في حد الحجم',
+                'search'               => 'بحث',
                 'only-images-allowed'  => 'يُسمح فقط بالصور (.jpeg، .jpg، .png، ..).',
             ],
 
@@ -575,7 +608,7 @@ return [
         ],
 
         'cart' => [
-            'continue-to-checkout' => 'Continue to Checkout',
+            'continue-to-checkout'      => 'Continue to Checkout',
             'item-add-to-cart'          => 'تمت إضافة العنصر بنجاح',
             'inventory-warning'         => 'الكمية المطلوبة غير متوفرة، يرجى المحاولة مرة أخرى لاحقًا.',
             'illegal'                   => 'الكمية لا يمكن أن تكون أقل من واحدة.',
@@ -592,6 +625,7 @@ return [
             'success-remove'            => 'تمت إزالة العنصر بنجاح من السلة.',
 
             'index' => [
+                'bagisto'                  => 'باغيستو',
                 'cart'                     => 'عربة التسوق',
                 'continue-shopping'        => 'متابعة التسوق',
                 'empty-product'            => 'ليس لديك منتج في سلة التسوق الخاصة بك.',
@@ -606,6 +640,8 @@ return [
                 'remove'                   => 'إزالة',
                 'remove-selected-success'  => 'تم إزالة العناصر المحددة بنجاح من عربة التسوق.',
                 'see-details'              => 'رؤية التفاصيل',
+                'select-all'               => 'تحديد الكل',
+                'select-cart-item'         => 'تحديد عنصر العربة',
                 'tax'                      => 'الضريبة',
                 'total'                    => 'المجموع',
                 'update-cart'              => 'تحديث عربة التسوق',
@@ -674,6 +710,7 @@ return [
                 ],
 
                 'index' => [
+                    'bagisto' => 'باغيستو',
                     'confirm' => 'تأكيد',
                 ],
 

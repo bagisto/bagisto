@@ -1,9 +1,10 @@
 <x-admin::layouts>
+    <!-- Page Title -->
     <x-slot:title>
         @lang('admin::app.sales.orders.view.title', ['order_id' => $order->increment_id])
     </x-slot:title>
 
-    {{-- Header --}}
+    <!-- Header -->
     <div class="grid">
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
             {!! view_render_event('sales.order.title.before', ['order' => $order]) !!}
@@ -12,45 +13,15 @@
                     @lang('admin::app.sales.orders.view.title', ['order_id' => $order->increment_id])
                 </p>
 
-                <div>
-                    @switch($order->status)
-                        @case('processing')
-                            <span class="label-processing text-[14px] mx-[5px]">
-                                @lang('admin::app.sales.orders.view.processing')    
-                            </span>
-                            @break
-
-                        @case('completed')
-                            <span class="label-closed text-[14px] mx-[5px]">
-                                @lang('admin::app.sales.orders.view.completed')    
-                            </span>
-                            @break
-
-                        @case('pending')
-                            <span class="label-pending text-[14px] mx-[5px]">
-                                @lang('admin::app.sales.orders.view.pending')    
-                            </span>
-                            @break
-
-                        @case('closed')
-                            <span class="label-closed text-[14px] mx-[5px]">
-                                @lang('admin::app.sales.orders.view.closed')    
-                            </span>
-                            @break
-
-                        @case('canceled')
-                            <span class="label-cancelled text-[14px] mx-[5px]">
-                                @lang('admin::app.sales.orders.view.canceled')    
-                            </span>
-                            @break
-
-                    @endswitch
-                </div>
+                <!-- Order Status -->
+                <span class="{{ 'label-' . $order->status }} text-[14px] mx-[5px]">
+                    @lang("admin::app.sales.orders.view.$order->status")
+                </span>
             </div>
 
             {!! view_render_event('sales.order.title.after', ['order' => $order]) !!}
 
-            {{-- Back Button --}}
+            <!-- Back Button -->
             <a
                 href="{{ route('admin.sales.orders.index') }}"
                 class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
@@ -85,7 +56,12 @@
                         }
                     })"
                 >
-                    <span class="icon-cancel text-[24px]"></span>
+                    <span
+                        class="icon-cancel text-[24px]"
+                        role="presentation"
+                        tabindex="0"
+                    >
+                    </span>
 
                     <a
                         href="javascript:void(0);"
@@ -114,9 +90,9 @@
             {!! view_render_event('sales.order.page_action.after', ['order' => $order]) !!}
         </div>
 
-        {{-- Order details --}}
+        <!-- Order details -->
         <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
-            {{-- Left Component --}}
+            <!-- Left Component -->
             <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                 <div class="bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <div class="flex justify-between p-[16px]">
@@ -129,15 +105,15 @@
                         </p>
                     </div>
 
-                    {{-- Order items --}}
+                    <!-- Order items -->
                     <div class="grid">
                         @foreach ($order->items as $item)
                             <div class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300 dark:border-gray-800">
                                 <div class="flex gap-[10px]">
-                                    @if($item->product?->base_image_url)
+                                    @if($item?->product?->base_image_url)
                                         <img
                                             class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
-                                            src="{{ $item->product?->base_image_url }}"
+                                            src="{{ $item?->product->base_image_url }}"
                                         >
                                     @else
                                         <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion">
@@ -159,7 +135,7 @@
                                                 @lang('admin::app.sales.orders.view.amount-per-unit', [
                                                     'amount' => core()->formatBasePrice($item->base_price),
                                                     'qty'    => $item->qty_ordered,
-                                                    ])
+                                                ])
                                             </p>
 
                                             @if (isset($item->additional['attributes']))
@@ -205,6 +181,7 @@
                                             {{ $item->tax_percent }}%
                                             @lang('admin::app.sales.orders.view.tax', ['tax' => core()->formatBasePrice($item->base_tax_amount)])
                                         </p>
+
                                         @if ($order->base_discount_amount > 0)
                                             <p class="text-gray-600 dark:text-gray-300">
                                                 @lang('admin::app.sales.orders.view.discount', ['discount' => core()->formatBasePrice($item->base_discount_amount)])
@@ -251,6 +228,7 @@
                                 @lang('admin::app.sales.orders.view.total-due')
                             </p>
                         </div>
+
                         <div class="flex  flex-col gap-y-[6px]">
                             <p class="text-gray-600 dark:text-gray-300  font-semibold">
                                 {{ core()->formatBasePrice($order->base_sub_total) }}
@@ -291,7 +269,7 @@
                     </div>
                 </div>
             
-                {{-- Customer's comment form --}}
+                <!-- Customer's comment form -->
                 <div class="bg-white dark:bg-gray-900 rounded box-shadow">
                     <p class="p-[16px] pb-0 text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.sales.orders.view.comments')
@@ -320,19 +298,24 @@
                             </div>
 
                             <div class="flex justify-between items-center">
-                                <label 
+                                <label
                                     class="flex gap-[4px] w-max items-center p-[6px] cursor-pointer select-none"
                                     for="customer_notified"
                                 >
-                                    <input 
-                                        type="checkbox" 
+                                    <input
+                                        type="checkbox"
                                         name="customer_notified"
                                         id="customer_notified"
                                         value="1"
                                         class="hidden peer"
                                     >
-                        
-                                    <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600 "></span>
+
+                                    <span
+                                        class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                                        role="button"
+                                        tabindex="0"
+                                    >
+                                    </span>
                         
                                     <p class="flex gap-x-[4px] items-center cursor-pointer text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 font-semibold">
                                         @lang('admin::app.sales.orders.view.notify-customer')
@@ -342,6 +325,7 @@
                                 <button
                                     type="submit"
                                     class="secondary-button"
+                                    aria-label="{{ trans('admin::app.sales.orders.view.submit-comment') }}"
                                 >
                                     @lang('admin::app.sales.orders.view.submit-comment')
                                 </button>
@@ -351,14 +335,14 @@
 
                     <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
 
-                    {{-- Comment List --}}
+                    <!-- Comment List -->
                     @foreach ($order->comments()->orderBy('id', 'desc')->get() as $comment)
                         <div class="grid gap-[6px] p-[16px]">
                             <p class="text-[16px] text-gray-800 dark:text-white leading-6">
                                 {{ $comment->comment }}
                             </p>
 
-                            {{-- Notes List Title and Time --}}
+                            <!-- Notes List Title and Time -->
                             <p class="flex gap-2 text-gray-600 dark:text-gray-300 items-center">  
                                 @if ($comment->customer_notified)
                                     <span class="h-fit text-[24px] rounded-full icon-done text-blue-600 bg-blue-100"></span> 
@@ -379,9 +363,9 @@
 
             {!! view_render_event('sales.order.tabs.before', ['order' => $order]) !!}
 
-            {{-- Right Component --}}
+            <!-- Right Component -->
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
-                {{-- Customer and address information --}}
+                <!-- Customer and address information -->
                 <x-admin::accordion>
                     <x-slot:header>
                         <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
@@ -412,7 +396,7 @@
                             </div>
                         </div>
                         
-                        {{-- Billing Address --}}
+                        <!-- Billing Address -->
                         @if ($order->billing_address)
                             <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
 
@@ -430,7 +414,7 @@
                             </div>
                         @endif
 
-                        {{-- Shipping Address --}}
+                        <!-- Shipping Address -->
                         @if ($order->shipping_address)
                             <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
 
@@ -447,7 +431,7 @@
                     </x-slot:content>
                 </x-admin::accordion> 
 
-                {{-- Order Information --}}
+                <!-- Order Information -->
                 <x-admin::accordion>
                     <x-slot:header>
                         <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
@@ -474,21 +458,21 @@
                             <div class="flex flex-col gap-y-[6px]">
                                 {!! view_render_event('sales.order.created_at.before', ['order' => $order]) !!}
 
-                                {{-- Order Date --}}
+                                <!-- Order Date -->
                                 <p class="text-gray-600 dark:text-gray-300">
                                     {{core()->formatDate($order->created_at) }}
                                 </p>
 
                                 {!! view_render_event('sales.order.created_at.after', ['order' => $order]) !!}
                             
-                                {{-- Order Status --}}
+                                <!-- Order Status -->
                                 <p class="text-gray-600 dark:text-gray-300">
                                     {{$order->status_label}}
                                 </p>
                             
                                 {!! view_render_event('sales.order.status_label.after', ['order' => $order]) !!}
 
-                                {{-- Order Channel --}}
+                                <!-- Order Channel -->
                                 <p class="text-gray-600 dark:text-gray-300">
                                     {{$order->channel_name}}
                                 </p>
@@ -499,7 +483,7 @@
                     </x-slot:content>
                 </x-admin::accordion> 
 
-                {{-- Payment and Shipping Information--}}    
+                <!-- Payment and Shipping Information-->
                 <x-admin::accordion>
                     <x-slot:header>
                         <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
@@ -509,7 +493,7 @@
 
                     <x-slot:content>
                         <div>
-                            {{-- Payment method --}}
+                            <!-- Payment method -->
                             <p class="text-gray-800 font-semibold dark:text-white">
                                 {{ core()->getConfigData('sales.payment_methods.' . $order->payment->method . '.title') }}
                             </p>
@@ -518,7 +502,7 @@
                                 @lang('admin::app.sales.orders.view.payment-method')
                             </p>
 
-                            {{-- Currency --}}
+                            <!-- Currency -->
                             <p class="pt-[16px] text-gray-800 dark:text-white font-semibold">
                                 {{ $order->order_currency_code }}
                             </p>
@@ -529,7 +513,7 @@
 
                             @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($order->payment->method); @endphp
 
-                            {{-- Addtional details --}}
+                            <!-- Addtional details -->
                             @if (! empty($additionalDetails))
                                 <p class="pt-[16px] text-gray-800 dark:text-white font-semibold">
                                     {{ $additionalDetails['title'] }}
@@ -543,9 +527,10 @@
                             {!! view_render_event('sales.order.payment-method.after', ['order' => $order]) !!}
                         </div>
 
-                        {{-- Shipping Method and Price Details --}}
+                        <!-- Shipping Method and Price Details -->
                         @if ($order->shipping_address)
-                            <span class="block w-full mt-[16px] border-b-[1px] dark:border-gray-800  "></span>
+                            <span class="block w-full mt-[16px] border-b-[1px] dark:border-gray-800"></span>
+
                             <div class="pt-[16px]">
                                 <p class="text-gray-800 font-semibold dark:text-white">
                                     {{ $order->shipping_title }}
@@ -569,7 +554,7 @@
                     </x-slot:content>
                 </x-admin::accordion> 
 
-                {{-- Invoice Information--}}    
+                <!-- Invoice Information-->
                 <x-admin::accordion>
                     <x-slot:header>
                         <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
@@ -618,7 +603,7 @@
                     </x-slot:content>
                 </x-admin::accordion> 
 
-                {{-- Shipment Information--}}    
+                <!-- Shipment Information-->
                 <x-admin::accordion>
                     <x-slot:header>
                         <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
@@ -630,12 +615,12 @@
                         @forelse ($order->shipments as $shipment)
                             <div class="grid gap-y-[10px]">
                                 <div>
-                                    {{-- Shipment Id --}}
+                                    <!-- Shipment Id -->
                                     <p class="text-gray-800 font-semibold dark:text-white">
                                         @lang('admin::app.sales.orders.view.shipment', ['shipment' => $shipment->id])
                                     </p>
 
-                                    {{-- Shipment Created --}}
+                                    <!-- Shipment Created -->
                                     <p class="text-gray-600 dark:text-gray-300">
                                         {{ core()->formatDate($shipment->created_at, 'd M, Y H:i:s a') }}
                                     </p>
@@ -658,7 +643,7 @@
                     </x-slot:content>
                 </x-admin::accordion> 
 
-                {{-- Refund Information--}}    
+                <!-- Refund Information-->
                 <x-admin::accordion>
                     <x-slot:header>
                         <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">

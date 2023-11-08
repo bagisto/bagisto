@@ -126,8 +126,6 @@ return [
     'uploaded'             => 'Nie udało się przesłać pliku :attribute.',
     'url'                  => 'Format pola :attribute jest nieprawidłowy.',
 
-
-
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

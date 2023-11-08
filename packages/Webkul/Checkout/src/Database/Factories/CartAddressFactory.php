@@ -2,8 +2,8 @@
 
 namespace Webkul\Checkout\Database\Factories;
 
-use Webkul\Checkout\Models\CartAddress;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Webkul\Checkout\Models\CartAddress;
 
 class CartAddressFactory extends Factory
 {
@@ -16,8 +16,6 @@ class CartAddressFactory extends Factory
 
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
     public function definition(): array
     {

@@ -6,7 +6,6 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="base-url" content="{{ url()->to('/') }}">
         <meta name="currency-code" content="{{ core()->getBaseCurrencyCode() }}">
         <meta http-equiv="content-language" content="{{ app()->getLocale() }}">
@@ -25,33 +24,35 @@
             rel="stylesheet"
         />
 
+        <link rel="preload" as="image" href="{{ url('cache/logo/bagisto.png') }}">
+
         @if ($favicon = core()->getConfigData('general.design.admin_logo.favicon', core()->getCurrentChannelCode()))
-            <link 
+            <link
                 type="image/x-icon"
-                href="{{ Storage::url($favicon) }}" 
+                href="{{ Storage::url($favicon) }}"
                 rel="shortcut icon"
                 sizes="16x16"
             >
         @else
-            <link 
+            <link
                 type="image/x-icon"
-                href="{{ bagisto_asset('images/favicon.ico') }}" 
+                href="{{ bagisto_asset('images/favicon.ico') }}"
                 rel="shortcut icon"
                 sizes="16x16"
             />
         @endif
-        
+
         @stack('styles')
 
         <style>
             {!! core()->getConfigData('general.content.custom_scripts.custom_css') !!}
         </style>
 
-        {!! view_render_event('bagisto.shop.layout.head') !!}
+        {!! view_render_event('bagisto.admin.layout.head') !!}
     </head>
 
     <body class="h-full dark:bg-gray-950">
-        {!! view_render_event('bagisto.shop.layout.body.before') !!}
+        {!! view_render_event('bagisto.admin.layout.body.before') !!}
 
         <div id="app" class="h-full">
             {{-- Flash Message Blade Component --}}
@@ -60,7 +61,7 @@
             {{-- Confirm Modal Blade Component --}}
             <x-admin::modal.confirm />
 
-            {!! view_render_event('bagisto.shop.layout.content.before') !!}
+            {!! view_render_event('bagisto.admin.layout.content.before') !!}
 
             {{-- Page Header Blade Component --}}
             <x-admin::layouts.header />
@@ -84,10 +85,10 @@
                 </div>
             </div>
 
-            {!! view_render_event('bagisto.shop.layout.content.after') !!}
+            {!! view_render_event('bagisto.admin.layout.content.after') !!}
         </div>
 
-        {!! view_render_event('bagisto.shop.layout.body.after') !!}
+        {!! view_render_event('bagisto.admin.layout.body.after') !!}
 
         @stack('scripts')
     </body>

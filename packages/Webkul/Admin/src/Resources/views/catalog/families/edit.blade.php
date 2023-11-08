@@ -3,7 +3,7 @@
         @lang('admin::app.catalog.families.edit.title')
     </x-slot:title>
 
-    {{-- Input Form --}}
+    <!-- Input Form -->
     <x-admin::form
         method="PUT"
         :action="route('admin.catalog.families.update', $attributeFamily->id)"
@@ -11,7 +11,7 @@
 
         {!! view_render_event('bagisto.admin.catalog.families.edit.edit_form_control.before', ['attributeFamily' => $attributeFamily]) !!}
 
-        {{-- Page Header --}}
+        <!-- Page Header -->
         <div class="flex justify-between items-center">
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.catalog.families.edit.title')
@@ -34,9 +34,9 @@
             </div>
         </div>
 
-        {{-- Container --}}
+        <!-- Container -->
         <div class="flex gap-[10px] mt-[14px]">
-            {{-- Left Container --}}
+            <!-- Left Container -->
 
             {!! view_render_event('bagisto.admin.catalog.families.edit.card.attributes-panel.before', ['attributeFamily' => $attributeFamily]) !!}
 
@@ -50,11 +50,11 @@
 
             {!! view_render_event('bagisto.admin.catalog.families.edit.card.accordion.general.before', ['attributeFamily' => $attributeFamily]) !!}
 
-            {{-- Right Container --}}
+            <!-- Right Container -->
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
-                {{-- General Pannel --}}
+                <!-- General Pannel -->
                 <div class="bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                    {{-- Panel Header --}}
+                    <!-- Panel Header -->
                     <div class="flex items-center justify-between p-[6px]">
                         <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                             @lang('General')
@@ -63,7 +63,7 @@
                         <span class="icon-arrow-up p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950 "></span>
                     </div>
 
-                    {{-- Panel Content --}}
+                    <!-- Panel Content -->
                     <div class="px-[16px] pb-[16px]">
                         <x-admin::form.control-group class="mb-4">
                             <x-admin::form.control-group.label class="!text-gray-800 dark:!text-white">
@@ -216,6 +216,12 @@
                                             </span>
 
                                             <input
+                                                type="hidden"
+                                                :name="'attribute_groups[' + element.id + '][code]'"
+                                                :value="element.code"
+                                            />
+
+                                            <input
                                                 type="text"
                                                 :name="'attribute_groups[' + element.id + '][name]'"
                                                 class="group_node text-[14px] !text-gray-600 dark:text-gray-300"
@@ -335,9 +341,26 @@
                             </x-slot:header>
 
                             <x-slot:content>
-                                <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
+                                <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
+                                            @lang('admin::app.catalog.families.edit.code')
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="code"
+                                            rules="required"
+                                            :label="trans('admin::app.catalog.families.edit.code')"
+                                            :placeholder="trans('admin::app.catalog.families.edit.code')"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error control-name="code"></x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.catalog.families.edit.name')
                                         </x-admin::form.control-group.label>
 
@@ -354,7 +377,7 @@
                                     </x-admin::form.control-group>
 
                                     <x-admin::form.control-group class="mb-4">
-                                        <x-admin::form.control-group.label class="!text-gray-800 font-medium">
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.catalog.families.edit.column')
                                         </x-admin::form.control-group.label>
 
@@ -407,11 +430,13 @@
                     return {
                         selectedGroup: {
                             id: null,
+                            code: null,
                             name: null,
                         },
 
                         editableGroup: {
                             id: null,
+                            code: null,
                             name: null,
                         },
 
@@ -470,6 +495,7 @@
                                 ? group
                                 : {
                                     id: null,
+                                    code: null,
                                     name: null,
                                 };
                         }
@@ -478,14 +504,25 @@
                     },
 
                     addGroup(params, { resetForm, setErrors }) {
-                        if (this.isGroupAlreadyExists(params.name)) {
-                            setErrors({'name': ["@lang('admin::app.catalog.families.edit.group-already-exists')"]});
+                        let isGroupCodeAlreadyExists = this.isGroupCodeAlreadyExists(params.code);
+
+                        let isGroupNameAlreadyExists = this.isGroupNameAlreadyExists(params.name);
+
+                        if (isGroupCodeAlreadyExists || isGroupCodeAlreadyExists) {
+                            if (isGroupCodeAlreadyExists) {
+                                setErrors({'code': ["@lang('admin::app.catalog.families.edit.group-code-already-exists')"]});
+                            }
+
+                            if (isGroupNameAlreadyExists) {
+                                setErrors({'name': ["@lang('admin::app.catalog.families.edit.group-name-already-exists')"]});
+                            }
 
                             return;
                         }
 
                         this.columnGroups[params.column].push({
                             'id': 'group_' + params.column + '_' + this.columnGroups[params.column].length,
+                            'code': params.code,
                             'name': params.name,
                             'is_user_defined': 1,
                             'custom_attributes': [],
@@ -496,7 +533,11 @@
                         this.$refs.addGroupModal.close();
                     },
                     
-                    isGroupAlreadyExists(name) {
+                    isGroupCodeAlreadyExists(code) {
+                        return this.columnGroups[1].find(group => group.code == code) || this.columnGroups[2].find(group => group.code == code);
+                    },
+                    
+                    isGroupNameAlreadyExists(name) {
                         return this.columnGroups[1].find(group => group.name == name) || this.columnGroups[2].find(group => group.name == name);
                     },
                     
@@ -534,6 +575,7 @@
                         if (! e.target.classList.contains('group_node')) {
                             this.editableGroup = {
                                 id: null,
+                                code: null,
                                 name: null,
                             };
                         }

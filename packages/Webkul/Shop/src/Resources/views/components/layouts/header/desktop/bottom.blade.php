@@ -8,7 +8,7 @@
         <a
             href="{{ route('shop.home.index') }}"
             class="place-self-start -mt-[4px]"
-            aria-label="Bagisto "
+            aria-label="@lang('shop::app.components.layouts.header.bagisto')"
         >
             <img
                 src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
@@ -30,18 +30,19 @@
     {{-- Right Nagivation Section --}}
     <div class="flex gap-x-[35px] items-center max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px]">
         {{-- Search Bar Container --}}
-        <form
-            action="{{ route('shop.search.index') }}"
-            class="flex items-center max-w-[445px]"
-        >
-            <label
-                for="organic-search"
-                class="sr-only"
+        <div class="relative w-full">
+            <form
+                action="{{ route('shop.search.index') }}"
+                class="flex items-center max-w-[445px]"
+                role="search"
             >
-                @lang('shop::app.components.layouts.header.search')
-            </label>
+                <label
+                    for="organic-search"
+                    class="sr-only"
+                >
+                    @lang('shop::app.components.layouts.header.search')
+                </label>
 
-            <div class="relative w-full">
                 <div class="icon-search flex items-center  absolute ltr:left-[12px] rtl:right-[12px] top-[10px] text-[22px] pointer-events-none"></div>
 
                 <input
@@ -50,14 +51,18 @@
                     value="{{ request('query') }}"
                     class="block w-full px-[44px] py-[13px] bg-[#F5F5F5] rounded-lg text-gray-900 text-xs font-medium transition-all border border-transparent hover:border-gray-400 focus:border-gray-400"
                     placeholder="@lang('shop::app.components.layouts.header.search-text')"
+                    aria-label="@lang('shop::app.components.layouts.header.search-text')"
+                    aria-required="true"
                     required
                 >
+
+                <button type="submit" class="hidden" aria-lebel="Submit"></button
 
                 @if (core()->getConfigData('general.content.shop.image_search'))
                     @include('shop::search.images.index')
                 @endif
-            </div>
-        </form>
+            </form>
+        </div>
 
         {{-- Right Navigation Links --}}
         <div class="flex gap-x-[35px] mt-[5px] max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px]">
@@ -65,9 +70,12 @@
             @if(core()->getConfigData('general.content.shop.compare_option'))
                 <a
                     href="{{ route('shop.compare.index') }}"
-                    aria-label="Compare"
+                    aria-label="@lang('shop::app.components.layouts.header.compare')"
                 >
-                    <span class="icon-compare inline-block text-[24px] cursor-pointer"></span>
+                    <span
+                        class="icon-compare inline-block text-[24px] cursor-pointer"
+                        role="presentation"
+                    ></span>
                 </a>
             @endif
 
@@ -77,7 +85,12 @@
             {{-- user profile --}}
             <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                 <x-slot:toggle>
-                    <span class="icon-users inline-block text-[24px] cursor-pointer"></span>
+                    <span
+                        class="icon-users inline-block text-[24px] cursor-pointer"
+                        role="button"
+                        aria-label="@lang('shop::app.components.layouts.header.profile')"
+                        tabindex="0"
+                    ></span>
                 </x-slot:toggle>
 
                 {{-- Guest Dropdown --}}

@@ -1,4 +1,5 @@
 <x-admin::layouts>
+    <!-- Page Title -->
     <x-slot:title>
         @lang('admin::app.sales.invoices.index.title')
     </x-slot:title>

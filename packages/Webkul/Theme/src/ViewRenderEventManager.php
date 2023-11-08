@@ -49,7 +49,6 @@ class ViewRenderEventManager
     /**
      *  get param
      *
-     * @param  $name
      * @return mixed
      */
     public function getParam($name)
@@ -75,11 +74,11 @@ class ViewRenderEventManager
      */
     public function render()
     {
-        $string = "";
+        $string = '';
 
         foreach ($this->templates as $template) {
             if (view()->exists($template)) {
-                $string .= view($template , $this->params)->render();
+                $string .= view($template, $this->params)->render();
             } elseif (is_string($template)) {
                 $string .= $template;
             }

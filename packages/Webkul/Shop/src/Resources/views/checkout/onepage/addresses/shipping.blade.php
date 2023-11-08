@@ -81,8 +81,15 @@
                                 class="flex justify-center items-center max-w-[414px] p-[20px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap"
                                 @click="showNewShippingAddressForm"
                             >
-                                <div class="flex gap-x-[10px] items-center cursor-pointer">
-                                    <span class="icon-plus p-[10px] text-[30px]  border border-black rounded-full"></span>
+                                <div
+                                    class="flex gap-x-[10px] items-center cursor-pointer"
+                                    role="button"
+                                    tabindex="0"
+                                >
+                                    <span
+                                        class="icon-plus p-[10px] text-[30px]  border border-black rounded-full"
+                                        role="presentation"
+                                    ></span>
 
                                     <p class="text-[16px]">@lang('shop::app.checkout.onepage.addresses.shipping.add-new-address')</p>
                                 </div>
@@ -270,7 +277,7 @@
                             <x-shop::form.control-group.control
                                 type="text"
                                 name="shipping[address1][]"
-                                rules="required"
+                                rules="required|address"
                                 :label="trans('shop::app.checkout.onepage.addresses.shipping.street-address')"
                                 :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.street-address')"
                                 v-model="forms.shipping.address.address1[0]"

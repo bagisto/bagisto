@@ -40,9 +40,9 @@ class InvoiceOverdueCron extends Command
     {
         // Get 'overdue' invoices
         Invoice::inOverdueAndRemindersLimit()
-        ->get()
-        ->each(function (Invoice $invoice) {
-            $invoice->sendInvoiceReminder();
-        });
+            ->get()
+            ->each(function (Invoice $invoice) {
+                $invoice->sendInvoiceReminder();
+            });
     }
 }

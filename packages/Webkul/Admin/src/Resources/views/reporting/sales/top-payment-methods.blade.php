@@ -1,6 +1,6 @@
-{{-- Top Payment Methods Vue Component --}}
+<!-- Top Payment Methods Vue Component -->
 <v-reporting-sales-top-payment-methods>
-    {{-- Shimmer --}}
+    <!-- Shimmer -->
     <x-admin::shimmer.reporting.sales.top-payment-methods/>
 </v-reporting-sales-top-payment-methods>
 

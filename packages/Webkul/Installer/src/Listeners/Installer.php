@@ -17,7 +17,6 @@ class Installer
     /**
      * Create a new listener instance.
      *
-     * @param  \Webkul\User\Repositories\AdminRepository  $adminRepository
      * @return void
      */
     public function __construct(protected AdminRepository $adminRepository)
@@ -42,8 +41,8 @@ class Installer
                 ],
                 'json'    => [
                     'domain'       => config('app.url'),
-                    'email'        => $admin->email,
-                    'name'         => $admin->name,
+                    'email'        => $admin?->email,
+                    'name'         => $admin?->name,
                     'country_code' => config('app.default_country') ?? 'IN',
                 ],
             ]);

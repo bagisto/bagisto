@@ -1,4 +1,4 @@
-{{-- Total Sales Stats Vue Component --}}
+<!-- Total Sales Stats Vue Component -->
 <v-reporting-sales-total-sales>
     <!-- Shimmer -->
     <x-admin::shimmer.reporting.sales.total-sales/>

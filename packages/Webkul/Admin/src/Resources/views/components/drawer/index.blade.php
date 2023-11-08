@@ -77,7 +77,7 @@
                 :leave-to-class="enterFromLeaveToClasses"
             >
                 <div
-                    class="fixed z-[10002] bg-white dark:bg-gray-900 overflow-hidden max-sm:!w-full"
+                    class="fixed z-[10002] bg-white dark:bg-gray-900 max-sm:!w-full"
                     :class="{
                         'inset-x-0 top-0': position == 'top',
                         'inset-x-0 bottom-0': position == 'bottom',
@@ -95,7 +95,7 @@
                                         <!-- Content Slot -->
                                         <slot name="header"></slot>
 
-                                        <div class="absolute top-5 ltr:right-3 rtl:left-3">
+                                        <div class="absolute top-4 ltr:right-3 rtl:left-3">
                                             <span
                                                 class="icon-cross text-[30px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-[6px]"
                                                 @click="close"

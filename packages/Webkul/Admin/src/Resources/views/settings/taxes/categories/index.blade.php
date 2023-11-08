@@ -1,5 +1,5 @@
 <x-admin::layouts>
-    {{-- Page Title --}}
+    <!-- Page Title -->
     <x-slot:title>
         @lang('admin::app.settings.taxes.categories.index.title')
     </x-slot:title>
@@ -9,10 +9,10 @@
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.settings.taxes.categories.index.title')
             </p>
-            
+
             <div class="flex gap-x-[10px] items-center">
                 <div class="flex gap-x-[10px] items-center">
-                    {{-- Create Tax Category Button --}}
+                    <!-- Create Tax Category Button -->
                     @if (bouncer()->hasPermission('settings.taxes.tax-categories.create'))
                         <button
                             type="button"
@@ -25,17 +25,17 @@
             </div>
         </div>
 
-        {{-- DataGrid Shimmer --}}
+        <!-- DataGrid Shimmer -->
         <x-admin::shimmer.datagrid/>
     </v-tax-categories>
-    
+
     @pushOnce('scripts')
         <script type="text/x-template" id="v-tax-categories-template">
             <div class="flex justify-between items-center">
                 <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                     @lang('admin::app.settings.taxes.categories.index.title')
                 </p>
-                
+
                 <div class="flex gap-x-[10px] items-center">
                     <div class="flex gap-x-[10px] items-center">
                         <!-- Create Tax Category Button -->
@@ -107,7 +107,7 @@
                     <div
                         v-for="record in records"
                         class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
-                        :style="'grid-template-columns: repeat(' + (record.actions.length ? 4 : 3) + ', 1fr);'"
+                        :style="'grid-template-columns: repeat(' + (record.actions.length ? 4 : 3) + ', minmax(0, 1fr));'"
                     >
                         <!-- Id -->
                         <p v-text="record.id"></p>
@@ -170,7 +170,7 @@
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.taxes.categories.index.create.code')
                                     </x-admin::form.control-group.label>
-                                    
+
                                     <x-admin::form.control-group.control
                                         type="hidden"
                                         name="id"
@@ -245,19 +245,19 @@
                                 <p class="required block leading-[24px] text-gray-800 dark:text-white font-medium">
                                     @lang('admin::app.settings.taxes.categories.index.create.tax-rates')
                                 </p>
-                                
-                                <x-admin::form.control-group 
+
+                                <x-admin::form.control-group
                                     class="flex gap-[10px] !mb-0 p-[6px]"
                                 >
                                     <v-field
-                                        name="taxrates[]" 
+                                        name="taxrates[]"
                                         rules="required"
                                         label="@lang('admin::app.settings.taxes.categories.index.create.tax-rates')"
                                         v-model="selectedTaxRates.tax_rates"
                                         multiple
                                     >
                                         <select
-                                            name="taxrates[]" 
+                                            name="taxrates[]"
                                             class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                             :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                             multiple
@@ -265,7 +265,7 @@
                                         >
                                             <option value="" disabled>@lang('admin::app.settings.taxes.categories.index.create.select')</option>
 
-                                            <option 
+                                            <option
                                                 v-for="taxRate in taxRates"
                                                 :value="taxRate.id"
                                                 :text="taxRate.identifier"
@@ -273,8 +273,8 @@
                                             </option>
                                         </select>
                                     </v-field>
-                                        
-                                    <x-admin::form.control-group.label 
+
+                                    <x-admin::form.control-group.label
                                         class="!text-[14px] !text-gray-600 cursor-pointer"
                                     >
                                     </x-admin::form.control-group.label>
@@ -291,7 +291,7 @@
                         <x-slot:footer>
                             <div class="flex gap-x-[10px] items-center">
                                 <!-- Save Button -->
-                                <button 
+                                <button
                                     type="submit"
                                     class="primary-button"
                                 >
@@ -333,7 +333,7 @@
                                 this.$refs.taxCategory.toggle();
 
                                 this.$refs.datagrid.get();
-                                
+
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
                                 this.selectedTaxRates = {};

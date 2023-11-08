@@ -10,17 +10,23 @@
     <script type="text/x-template" id="v-products-carousel-template">
         <div class="container mt-20 max-lg:px-[30px] max-sm:mt-[30px]" v-if="! isLoading && products.length">
             <div class="flex justify-between">
-                <h3 class="text-[30px] font-dmserif max-sm:text-[25px]" v-text="title"></h3>
+                <h2 class="text-[30px] font-dmserif max-sm:text-[25px]" v-text="title"></h2>
 
                 <div class="flex gap-8 justify-between items-center">
                     <span
                         class="icon-arrow-left-stylish rtl:icon-arrow-right-stylish inline-block text-[24px] cursor-pointer"
+                        role="button"
+                        aria-label="@lang('shop::app.components.products.carousel.previous')"
+                        tabindex="0"
                         @click="swipeLeft"
                     >
                     </span>
 
                     <span
                         class="icon-arrow-right-stylish rtl:icon-arrow-left-stylish inline-block text-[24px] cursor-pointer"
+                        role="button"
+                        aria-label="@lang('shop::app.components.products.carousel.next')"
+                        tabindex="0"
                         @click="swipeRight"
                     >
                     </span>

@@ -35,11 +35,11 @@ return [
         'class' => 'Webkul\Product\Type\Downloadable',
         'sort'  => 5,
     ],
-    
+
     'bundle'       => [
-        'key'  => 'bundle',
+        'key'   => 'bundle',
         'name'  => 'Bundle',
         'class' => 'Webkul\Product\Type\Bundle',
         'sort'  => 6,
-    ]
+    ],
 ];

@@ -2,22 +2,19 @@
 
 namespace Webkul\Admin\Helpers;
 
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Carbon;
-use Webkul\Admin\Helpers\Reporting\Sale;
-use Webkul\Admin\Helpers\Reporting\Product;
+use Illuminate\Support\Collection;
 use Webkul\Admin\Helpers\Reporting\Customer;
+use Webkul\Admin\Helpers\Reporting\Product;
+use Webkul\Admin\Helpers\Reporting\Sale;
 use Webkul\Admin\Helpers\Reporting\Visitor;
 
 class Dashboard
 {
     /**
      * Create a controller instance.
-     * 
-     * @param  \Webkul\Admin\Helpers\Reporting\Sale  $saleReporting
-     * @param  \Webkul\Admin\Helpers\Reporting\Product  $productReporting
-     * @param  \Webkul\Admin\Helpers\Reporting\Customer  $customerReporting
-     * @param  \Webkul\Admin\Helpers\Reporting\Visitor  $visitorReporting
+     *
      * @return void
      */
     public function __construct(
@@ -25,14 +22,11 @@ class Dashboard
         protected Product $productReporting,
         protected Customer $customerReporting,
         protected Visitor $visitorReporting
-    )
-    {
+    ) {
     }
 
     /**
      * Returns the overall statistics.
-     * 
-     * @return array
      */
     public function getOverAllStats(): array
     {
@@ -42,7 +36,7 @@ class Dashboard
             'total_sales'           => $this->saleReporting->getTotalSalesProgress(),
             'avg_sales'             => $this->saleReporting->getAverageSalesProgress(),
             'total_unpaid_invoices' => [
-                'total'           => $total =$this->saleReporting->getTotalPendingInvoicesAmount(),
+                'total'           => $total = $this->saleReporting->getTotalPendingInvoicesAmount(),
                 'formatted_total' => core()->formatBasePrice($total),
             ],
         ];
@@ -50,14 +44,12 @@ class Dashboard
 
     /**
      * Returns the today statistics.
-     * 
-     * @return array
      */
     public function getTodayStats(): array
     {
         $orders = $this->saleReporting->getTodayOrders();
 
-        $orders = $orders->map(function($order) {
+        $orders = $orders->map(function ($order) {
             return [
                 'id'                         => $order->id,
                 'increment_id'               => $order->id,
@@ -85,14 +77,14 @@ class Dashboard
 
     /**
      * Returns the today statistics.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getStockThresholdProducts()
     {
         $products = $this->productReporting->getStockThresholdProducts(5);
 
-        $products = $products->map(function($product) {
+        $products = $products->map(function ($product) {
             return [
                 'id'              => $product->product_id,
                 'sku'             => $product->product->sku,
@@ -100,7 +92,7 @@ class Dashboard
                 'price'           => $product->product->price,
                 'formatted_price' => core()->formatPrice($product->product->price),
                 'total_qty'       => $product->total_qty,
-                'image'           => $product->product->base_image_url
+                'image'           => $product->product->base_image_url,
             ];
         });
 
@@ -109,8 +101,6 @@ class Dashboard
 
     /**
      * Returns sales statistics.
-     * 
-     * @return array
      */
     public function getSalesStats(): array
     {
@@ -123,8 +113,6 @@ class Dashboard
 
     /**
      * Returns visitors statistics.
-     * 
-     * @return array
      */
     public function getVisitorStats(): array
     {
@@ -137,8 +125,6 @@ class Dashboard
 
     /**
      * Returns top selling products statistics.
-     * 
-     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getTopSellingProducts(): Collection
     {
@@ -147,14 +133,12 @@ class Dashboard
 
     /**
      * Returns top customers statistics.
-     * 
-     * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getTopCustomers(): Collection
+    public function getTopCustomers(): EloquentCollection
     {
         $customers = $this->customerReporting->getCustomersWithMostSales(5);
 
-        $customers->map(function($customer) {
+        $customers->map(function ($customer) {
             $customer->formatted_total = core()->formatBasePrice($customer->total);
         });
 
@@ -163,7 +147,7 @@ class Dashboard
 
     /**
      * Get the start date.
-     * 
+     *
      * @return \Carbon\Carbon
      */
     public function getStartDate(): Carbon
@@ -173,7 +157,7 @@ class Dashboard
 
     /**
      * Get the end date.
-     * 
+     *
      * @return \Carbon\Carbon
      */
     public function getEndDate(): Carbon
@@ -183,8 +167,6 @@ class Dashboard
 
     /**
      * Returns date range
-     * 
-     * @return string
      */
     public function getDateRange(): string
     {

@@ -1,6 +1,6 @@
-{{-- Customers with Most Reviews Vue Component --}}
+<!-- Customers with Most Reviews Vue Component -->
 <v-reporting-customers-with-most-reviews>
-    {{-- Shimmer --}}
+    <!-- Shimmer -->
     <x-admin::shimmer.reporting.customers.most-reviews/>
 </v-reporting-customers-with-most-reviews>
 

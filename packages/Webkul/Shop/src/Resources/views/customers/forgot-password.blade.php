@@ -21,7 +21,7 @@
             <a
                 href="{{ route('shop.home.index') }}"
                 class="m-[0_auto_20px_auto]"
-                aria-label="Bagisto "
+                aria-label="@lang('shop::app.customers.forgot-password.bagisto')"
             >
                 <img
                     src="{{ bagisto_asset('images/logo.svg') }}"
@@ -63,6 +63,8 @@
                             rules="required|email"
                             :label="trans('shop::app.customers.login-form.email')"
                             placeholder="email@example.com"
+                            aria-label="@lang('shop::app.customers.login-form.email')"
+                            aria-required="true"
                         >
                         </x-shop::form.control-group.control>
 
