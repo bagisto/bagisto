@@ -128,20 +128,20 @@
                         @endphp
 
                         @if (count($customAttributes))
-                            {!! view_render_event('bagisto.admin.catalog.product.edit.form..' . $group->name . '.before', ['product' => $product]) !!}
+                            {!! view_render_event('bagisto.admin.catalog.product.edit.form..' . $group->code . '.before', ['product' => $product]) !!}
 
                             <div class="relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                                     {{ $group->name }}
                                 </p>
 
-                                @if ($group->name == 'Meta Description')
+                                @if ($group->code == 'meta_description')
                                     <!-- SEO Title & Description Blade Componnet -->
                                     <x-admin::seo/>
                                 @endif
 
                                 @foreach ($customAttributes as $attribute)
-                                    {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->name . '.controls.before', ['product' => $product]) !!}
+                                    {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->code . '.controls.before', ['product' => $product]) !!}
 
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
@@ -156,18 +156,18 @@
                                         <x-admin::form.control-group.error :control-name="$attribute->code"></x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
 
-                                    {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->name . '.controls.before', ['product' => $product]) !!}
+                                    {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->code . '.controls.before', ['product' => $product]) !!}
                                 @endforeach
 
-                                @includeWhen($group->name == 'Price', 'admin::catalog.products.edit.price.group')
+                                @includeWhen($group->code == 'price', 'admin::catalog.products.edit.price.group')
 
                                 @includeWhen(
-                                    $group->name == 'Inventories' && ! $product->getTypeInstance()->isComposite(),
+                                    $group->code == 'inventories' && ! $product->getTypeInstance()->isComposite(),
                                     'admin::catalog.products.edit.inventories'
                                 )
                             </div>
 
-                            {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->name . '.after', ['product' => $product]) !!}
+                            {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->code . '.after', ['product' => $product]) !!}
                         @endif
                     @endforeach
 
