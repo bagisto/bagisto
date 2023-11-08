@@ -5,9 +5,9 @@ namespace Webkul\Marketing\Jobs;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\DB;
 use Webkul\Marketing\Repositories\SearchTermRepository;
 
 class UpdateCreateSearchTerm implements ShouldQueue

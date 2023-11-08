@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('redirect_url')->nullable();
             $table->boolean('display_in_suggested_terms')->default(0);
             $table->string('locale');
-            
+
             $table->integer('channel_id')->unsigned();
             $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
             $table->timestamps();

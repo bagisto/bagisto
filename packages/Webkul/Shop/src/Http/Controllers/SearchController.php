@@ -10,15 +10,12 @@ class SearchController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Marketing\Repositories\SearchTermRepository  $searchTermRepository
-     * @param  \Webkul\Product\Repositories\SearchRepository  $searchRepository
      * @return void
      */
     public function __construct(
         protected SearchTermRepository $searchTermRepository,
         protected SearchRepository $searchRepository
-    )
-    {
+    ) {
     }
 
     /**
