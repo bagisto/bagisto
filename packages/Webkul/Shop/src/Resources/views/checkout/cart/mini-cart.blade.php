@@ -66,9 +66,9 @@
                         <!-- Cart Item Information -->
                         <div class="grid flex-1 gap-y-[10px] place-content-start justify-stretch">
                             <div class="flex flex-wrap justify-between">
-                                <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
+                                <a  class="max-w-[80%]" :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
                                     <p
-                                        class="text-[16px] font-medium max-w-[80%]"
+                                        class="text-[16px] font-medium"
                                         v-text="item.name"
                                     >
                                     </p>
