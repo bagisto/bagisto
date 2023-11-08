@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Shop\Contracts;
+namespace Webkul\Theme\Contracts;
 
 interface ThemeCustomization
 {

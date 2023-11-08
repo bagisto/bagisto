@@ -1,13 +1,13 @@
 <?php
 
-namespace Webkul\Shop\Repositories;
+namespace Webkul\Theme\Repositories;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManager;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Shop\Contracts\ThemeCustomization;
+use Webkul\Theme\Contracts\ThemeCustomization;
 
 class ThemeCustomizationRepository extends Repository
 {
