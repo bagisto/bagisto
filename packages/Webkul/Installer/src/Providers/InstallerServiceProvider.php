@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Installer\Console\Commands\Installer as InstallerCommand;
 use Webkul\Installer\Http\Middleware\CanInstall;
+use Webkul\Installer\Http\Middleware\Locale;
 
 class InstallerServiceProvider extends ServiceProvider
 {
@@ -31,6 +32,8 @@ class InstallerServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'installer');
 
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'installer');
+
+        $router->aliasMiddleware('installer_locale', Locale::class);
 
         Event::listen('bagisto.installed', 'Webkul\Installer\Listeners\Installer@installed');
     }
