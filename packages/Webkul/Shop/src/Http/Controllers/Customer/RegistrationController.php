@@ -113,7 +113,7 @@ class RegistrationController extends Controller
                 'token'       => null,
             ], $customer->id);
             try {
-                Mail::queue(new RegistrationNotification($customer));
+                Mail::queue(new RegistrationNotification($customer,'customer'));
             } catch (\Exception $e) {
                 report($e);
             }

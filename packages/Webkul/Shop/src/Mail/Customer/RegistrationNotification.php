@@ -11,14 +11,25 @@ class RegistrationNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
+    protected $senderDetails;
+    protected $adminDetails;
+    protected $senderEmail;
+    protected $senderName;
+
     /**
      * Create a new mailable instance.
      *
      * @param  \Webkul\Customer\Contracts\Customer  $customer
+     * @param  string $notify
      * @return void
      */
-    public function __construct(public $customer)
+    public function __construct(public $customer, public $notify)
     {
+        $this->senderDetails = core()->getSenderEmailDetails();
+        $this->adminDetails = core()->getAdminEmailDetails();
+
+        $this->senderEmail = $this->senderDetails['email'];
+        $this->senderName = $this->senderDetails['name'];
     }
 
     /**
@@ -27,21 +38,30 @@ class RegistrationNotification extends Mailable
      * @return $this
      */
     public function build()
-    {   
-        // Retrieve sender and admin email details
-        $senderDetails = core()->getSenderEmailDetails();
-        $adminDetails = core()->getAdminEmailDetails();
+    {
+        if ($this->notify === 'admin') {
+            return $this->sendToAdmin();
+        } elseif ($this->notify === 'customer') {
+            return $this->sendToCustomer();
+        }
 
-        // Extract necessary sender details
-        $senderEmail = $senderDetails['email'];
-        $senderName = $senderDetails['name'];
+        // Default action if $notify value doesn't match 'admin' or 'customer'
+        Log::error('Invalid notification target: ' . $this->notify);
+    }
 
-        // Compose and send the email
-        return  $this->from($senderEmail, $senderName)
-                ->to($this->customer->email)
-                ->bcc($adminDetails['email'])
-                ->subject(trans('shop::app.emails.customers.registration.subject'))
-                ->view('shop::emails.customers.registration');
-                
+    protected function sendToAdmin()
+    {
+        return $this->from($this->senderEmail, $this->senderName)
+            ->to($this->adminDetails['email'])
+            ->subject(trans('shop::app.emails.customers.admin.new_customer_registration_notification.subject'))
+            ->view('shop::emails.customers.notify-admin-about-registration');
+    }
+
+    protected function sendToCustomer()
+    {
+        return $this->from($this->senderEmail, $this->senderName)
+            ->to($this->customer->email)
+            ->subject(trans('shop::app.emails.customers.registration.subject'))
+            ->view('shop::emails.customers.registration');
     }
 }

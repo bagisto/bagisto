@@ -7,6 +7,7 @@ use Webkul\Shop\Mail\Customer\EmailVerificationNotification;
 use Webkul\Shop\Mail\Customer\NoteNotification;
 use Webkul\Shop\Mail\Customer\SubscriptionNotification;
 use Webkul\Shop\Mail\Customer\UpdatePasswordNotification;
+use Webkul\Shop\Mail\Customer\RegistrationNotification;
 
 class Customer extends Base
 {
@@ -19,6 +20,11 @@ class Customer extends Base
     public function afterCreated($customer)
     {   
         if (core()->getConfigData('customer.settings.email.verification')) {
+            try {
+                Mail::queue(new RegistrationNotification($customer,'admin'));
+            } catch (\Exception $e) {
+                report($e);
+            }
             try {
                 if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.verification')) {
                     return;
