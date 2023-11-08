@@ -13,13 +13,21 @@ use Illuminate\Support\Facades\DB;
  */
 class CategoryTableSeeder extends Seeder
 {
-    public function run()
+    /**
+     * Seed the application's database.
+     *
+     * @param  array  $parameters
+     * @return void
+     */
+    public function run($parameters = [])
     {
         DB::table('categories')->delete();
 
         DB::table('category_translations')->delete();
 
         $now = Carbon::now();
+
+        $defaultLocale = $parameters['default_locale'] ?? config('app.locale');
 
         DB::table('categories')->insert([
             [
@@ -36,17 +44,21 @@ class CategoryTableSeeder extends Seeder
             ],
         ]);
 
-        DB::table('category_translations')->insert([
-            [
-                'name'             => trans('installer::app.seeders.category.categories.name'),
-                'slug'             => 'root',
-                'description'      => trans('installer::app.seeders.category.categories.description'),
-                'meta_title'       => '',
-                'meta_description' => '',
-                'meta_keywords'    => '',
-                'category_id'      => '1',
-                'locale'           => config('app.locale'),
-            ],
-        ]);
+        $locales = $parameters['allowed_locales'] ?? [$defaultLocale];
+
+        foreach ($locales as $locale) {
+            DB::table('category_translations')->insert([
+                [
+                    'name'             => trans('installer::app.seeders.category.categories.name', [], $locale),
+                    'slug'             => 'root',
+                    'description'      => trans('installer::app.seeders.category.categories.description', [], $locale),
+                    'meta_title'       => '',
+                    'meta_description' => '',
+                    'meta_keywords'    => '',
+                    'category_id'      => '1',
+                    'locale'           => $locale,
+                ],
+            ]);
+        }
     }
 }

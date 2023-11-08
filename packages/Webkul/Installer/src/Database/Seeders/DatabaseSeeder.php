@@ -18,18 +18,19 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      *
+     * @param  array  $parameters
      * @return void
      */
-    public function run()
+    public function run($parameters = [])
     {
-        $this->call(CategorySeeder::class);
-        $this->call(InventorySeeder::class);
-        $this->call(CoreSeeder::class);
-        $this->call(AttributeSeeder::class);
-        $this->call(UserSeeder::class);
-        $this->call(CustomerSeeder::class);
-        $this->call(CMSSeeder::class);
-        $this->call(SocialLoginSeeder::class);
-        $this->call(ShopSeeder::class);
+        $this->call(CategorySeeder::class, false, ['parameters' => $parameters]);
+        $this->call(InventorySeeder::class, false, ['parameters' => $parameters]);
+        $this->call(CoreSeeder::class, false, ['parameters' => $parameters]);
+        $this->call(AttributeSeeder::class, false, ['parameters' => $parameters]);
+        $this->call(UserSeeder::class, false, ['parameters' => $parameters]);
+        $this->call(CustomerSeeder::class, false, ['parameters' => $parameters]);
+        $this->call(CMSSeeder::class, false, ['parameters' => $parameters]);
+        $this->call(SocialLoginSeeder::class, false, ['parameters' => $parameters]);
+        $this->call(ShopSeeder::class, false, ['parameters' => $parameters]);
     }
 }

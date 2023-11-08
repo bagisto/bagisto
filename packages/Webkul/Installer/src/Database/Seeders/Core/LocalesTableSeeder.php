@@ -17,30 +17,35 @@ class LocalesTableSeeder extends Seeder
     /**
      * Seed the application's database.
      *
+     * @param  array  $parameters
      * @return void
      */
-    public function run()
+    public function run($parameters = [])
     {
         DB::table('channels')->delete();
 
         DB::table('locales')->delete();
 
-        $localeCode = config('app.locale') ?? 'en';
+        $defaultLocale = $parameters['default_locale'] ?? config('app.locale');
 
-        $logoPath = null;
+        $locales = $parameters['allowed_locales'] ?? [$defaultLocale];
 
-        if (file_exists(base_path(self::BASE_PATH . $localeCode . '.png'))) {
-            $logoPath = Storage::putFile('locales', new File(base_path(self::BASE_PATH . $localeCode . '.png')));
+        foreach ($locales as $key => $locale) {
+            $logoPath = null;
+
+            if (file_exists(base_path(self::BASE_PATH . $locale . '.png'))) {
+                $logoPath = Storage::putFile('locales', new File(base_path(self::BASE_PATH . $locale . '.png')));
+            }
+
+            DB::table('locales')->insert([
+                [
+                    'id'        => $key + 1,
+                    'code'      => $locale,
+                    'name'      => trans('installer::app.seeders.core.locales.' . $locale, [], $defaultLocale),
+                    'direction' => in_array($locale, ['ar', 'fa', 'he']) ? 'RTL' : 'LTR',
+                    'logo_path' => $logoPath,
+                ],
+            ]);
         }
-
-        DB::table('locales')->insert([
-            [
-                'id'        => 1,
-                'code'      => $localeCode,
-                'name'      => trans('installer::app.seeders.core.locales.' . $localeCode),
-                'direction' => in_array($localeCode, ['ar', 'fa', 'he']) ? 'RTL' : 'LTR',
-                'logo_path' => $logoPath,
-            ],
-        ]);
     }
 }

@@ -9,11 +9,12 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      *
+     * @param  array  $parameters
      * @return void
      */
-    public function run()
+    public function run($parameters = [])
     {
-        $this->call(RolesTableSeeder::class);
-        $this->call(AdminsTableSeeder::class);
+        $this->call(RolesTableSeeder::class, false, ['parameters' => $parameters]);
+        $this->call(AdminsTableSeeder::class, false, ['parameters' => $parameters]);
     }
 }
