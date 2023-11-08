@@ -59,8 +59,11 @@ class AttributeFamilyController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:attribute_families,code', new Code],
-            'name' => 'required',
+            'code'                      => ['required', 'unique:attribute_families,code', new Code],
+            'name'                      => 'required',
+            'attribute_groups.*.code'   => 'required',
+            'attribute_groups.*.name'   => 'required',
+            'attribute_groups.*.column' => 'required|in:1,2',
         ]);
 
         Event::dispatch('catalog.attribute_family.create.before');
@@ -102,8 +105,11 @@ class AttributeFamilyController extends Controller
     public function update($id)
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:attribute_families,code,' . $id, new Code],
-            'name' => 'required',
+            'code'                      => ['required', 'unique:attribute_families,code,' . $id, new Code],
+            'name'                      => 'required',
+            'attribute_groups.*.code'   => 'required',
+            'attribute_groups.*.name'   => 'required',
+            'attribute_groups.*.column' => 'required|in:1,2',
         ]);
 
         Event::dispatch('catalog.attribute_family.update.before', $id);

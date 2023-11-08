@@ -28,21 +28,33 @@ class CurrencyTableSeeder extends Seeder
         'TRY' => '₺',
     ];
 
-    public function run()
+    /**
+     * Seed the application's database.
+     *
+     * @param  array  $parameters
+     * @return void
+     */
+    public function run($parameters = [])
     {
         DB::table('channels')->delete();
 
         DB::table('currencies')->delete();
 
-        $currencyCode = config('app.currency') ?? 'USD';
+        $defaultLocale = $parameters['default_locale'] ?? config('app.locale');
 
-        DB::table('currencies')->insert([
-            [
-                'id'     => 1,
-                'code'   => $currencyCode,
-                'name'   => trans('installer::app.seeders.core.currencies.' . $currencyCode),
-                'symbol' => $this->currencySymbols[$currencyCode],
-            ],
-        ]);
+        $defaultCurrency = $parameters['default_currency'] ?? config('app.currency');
+
+        $currencies = $parameters['allowed_currencies'] ?? [$defaultCurrency];
+
+        foreach ($currencies as $key => $currency) {
+            DB::table('currencies')->insert([
+                [
+                    'id'     => $key + 1,
+                    'code'   => $currency,
+                    'name'   => trans('installer::app.seeders.core.currencies.' . $currency, [], $defaultLocale),
+                    'symbol' => $this->currencySymbols[$currency],
+                ],
+            ]);
+        }
     }
 }

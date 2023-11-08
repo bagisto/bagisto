@@ -237,7 +237,7 @@
                                         >
                                             <template #item="{ element, index }">
                                                 <x-admin::table.thead.tr
-                                                    class="text-center hover:bg-gray-50 dark:hover:bg-gray-950"
+                                                    class="hover:bg-gray-50 dark:hover:bg-gray-950"
                                                     v-show="! element.isDelete"
                                                 >
                                                     <input

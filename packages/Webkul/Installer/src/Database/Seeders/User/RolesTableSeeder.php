@@ -7,16 +7,24 @@ use Illuminate\Support\Facades\DB;
 
 class RolesTableSeeder extends Seeder
 {
-    public function run()
+    /**
+     * Seed the application's database.
+     *
+     * @param  array  $parameters
+     * @return void
+     */
+    public function run($parameters = [])
     {
         DB::table('admins')->delete();
 
         DB::table('roles')->delete();
 
+        $defaultLocale = $parameters['default_locale'] ?? config('app.locale');
+
         DB::table('roles')->insert([
             'id'              => 1,
-            'name'            => trans('installer::app.seeders.user.roles.name'),
-            'description'     => trans('installer::app.seeders.user.roles.description'),
+            'name'            => trans('installer::app.seeders.user.roles.name', [], $defaultLocale),
+            'description'     => trans('installer::app.seeders.user.roles.description', [], $defaultLocale),
             'permission_type' => 'all',
         ]);
     }
