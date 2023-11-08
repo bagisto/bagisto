@@ -37,8 +37,8 @@ class UpdateCreateSearchTerm implements ShouldQueue
             'channel_id' => $this->data['channel_id'],
             'locale'     => $this->data['locale'],
         ], [
-            'results' => $this->data['results'],
             'uses'    => DB::raw('uses + 1'),
+            'results' => $this->data['results'],
         ]);
     }
 }

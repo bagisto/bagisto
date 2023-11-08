@@ -36,9 +36,9 @@ class ProductController extends APIController
             if (count(request()->except(['mode', 'sort', 'limit'])) == 1) {
                 UpdateCreateSearchTermJob::dispatch([
                     'term'       => request()->query('query'),
+                    'results'    => $products->total(),
                     'channel_id' => core()->getCurrentChannel()->id,
                     'locale'     => app()->getLocale(),
-                    'results' => $products->total(),
                 ]);
             }
         }
