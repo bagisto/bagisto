@@ -1942,11 +1942,21 @@ return [
                     ],
 
                     'create' => [
-
+                        'search-query'   => 'Search Query',
+                        'Channel'        => 'Channel',
+                        'results'        => 'Results',
+                        'uses'           => 'Uses',
+                        'redirect-url'   => 'Redirect Url',
+                        'save-btn'       => 'Save Search Term',
+                        'title'          => 'Create Search Term',
+                        'success'        => 'Search Term created successfully',
+                        'delete-warning' => 'Are you sure, you want to perform this action?',
                     ],
 
                     'edit' => [
-
+                        'title'          => 'Edit Search Term',
+                        'success'        => 'Search Term updated successfully',
+                        'delete-success' => 'Search Term deleted successfully',
                     ],
                 ],
             ],
