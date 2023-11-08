@@ -29,11 +29,12 @@ class Downloadable extends AbstractType
         'height',
         'weight',
         'depth',
+        'manage_stock',
         'guest_checkout',
     ];
 
     /**
-     * Is a stokable product type.
+     * Is a stockable product type.
      *
      * @var bool
      */
