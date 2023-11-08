@@ -199,8 +199,8 @@ class ProductRepository extends Repository
             'url_key'              => null,
         ], request()->input());
 
-        if (! empty($params['search'])) {
-            $params['name'] = $params['search'];
+        if (! empty($params['query'])) {
+            $params['name'] = $params['query'];
         }
 
         $query = $this->with([
