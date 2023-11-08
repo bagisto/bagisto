@@ -39,7 +39,7 @@ class Validator
 
             $totalConditionCount++;
 
-            if ($rule->condition_type) {
+            if ((bool) $rule->condition_type) {
                 if (! $this->validateObject($condition, $entity)) {
                     return false;
                 } else {
