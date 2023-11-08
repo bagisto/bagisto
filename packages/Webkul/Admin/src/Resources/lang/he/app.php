@@ -1922,51 +1922,53 @@ return [
             ],
         ],
 
-        'sitemaps' => [
-            'index' => [
-                'title'      => 'מפות אתר',
-                'create-btn' => 'יצירת מפת אתר',
-                'sitemap'    => 'מפת אתר',
+        'search-seo' => [
+            'sitemaps' => [
+                'index' => [
+                    'title'      => 'מפות אתר',
+                    'create-btn' => 'יצירת מפת אתר',
+                    'sitemap'    => 'מפת אתר',
 
-                'datagrid' => [
-                    'id'              => 'מזהה',
-                    'file-name'       => 'שם קובץ',
-                    'path'            => 'נתיב',
-                    'link-for-google' => 'קישור ל-Google',
-                    'edit'            => 'עריכה',
-                    'delete'          => 'מחיקה',
-                    'actions'         => 'פעולות',
-                ],
+                    'datagrid' => [
+                        'id'              => 'מזהה',
+                        'file-name'       => 'שם קובץ',
+                        'path'            => 'נתיב',
+                        'link-for-google' => 'קישור ל-Google',
+                        'edit'            => 'עריכה',
+                        'delete'          => 'מחיקה',
+                        'actions'         => 'פעולות',
+                    ],
 
-                'create' => [
-                    'file-name'      => 'שם קובץ',
-                    'file-name-info' => 'דוגמה: sitemap.xml',
-                    'path'           => 'נתיב',
-                    'path-info'      => 'דוגמה: "/sitemap/" או "/" לנתיב בסיסי',
-                    'save-btn'       => 'שמור מפת אתר',
-                    'title'          => 'יצירת מפת אתר',
-                    'success'        => 'מפת האתר נוצרה בהצלחה',
-                    'delete-warning' => 'האם אתה בטוח שברצונך לבצע פעולה זו?',
+                    'create' => [
+                        'file-name'      => 'שם קובץ',
+                        'file-name-info' => 'דוגמה: sitemap.xml',
+                        'path'           => 'נתיב',
+                        'path-info'      => 'דוגמה: "/sitemap/" או "/" לנתיב בסיסי',
+                        'save-btn'       => 'שמור מפת אתר',
+                        'title'          => 'יצירת מפת אתר',
+                        'success'        => 'מפת האתר נוצרה בהצלחה',
+                        'delete-warning' => 'האם אתה בטוח שברצונך לבצע פעולה זו?',
+                    ],
+
+                    'edit' => [
+                        'title'          => 'עריכת מפת אתר',
+                        'success'        => 'מפת האתר עודכנה בהצלחה',
+                        'delete-success' => 'מפת האתר נמחקה בהצלחה',
+                    ],
                 ],
 
                 'edit' => [
-                    'title'          => 'עריכת מפת אתר',
-                    'success'        => 'מפת האתר עודכנה בהצלחה',
-                    'delete-success' => 'מפת האתר נמחקה בהצלחה',
+                    'back-btn'       => 'חזור',
+                    'file-name'      => 'שם קובץ',
+                    'file-name-info' => 'דוגמה: sitemap.xml',
+                    'general'        => 'כללי',
+                    'path'           => 'נתיב',
+                    'path-info'      => 'דוגמה: "/sitemap/" או "/" לנתיב בסיסי',
+                    'save-btn'       => 'שמור מפת אתר',
                 ],
-            ],
 
-            'edit' => [
-                'back-btn'       => 'חזור',
-                'file-name'      => 'שם קובץ',
-                'file-name-info' => 'דוגמה: sitemap.xml',
-                'general'        => 'כללי',
-                'path'           => 'נתיב',
-                'path-info'      => 'דוגמה: "/sitemap/" או "/" לנתיב בסיסי',
-                'save-btn'       => 'שמור מפת אתר',
+                'delete-failed' => ':name נמחקה בהצלחה',
             ],
-
-            'delete-failed' => ':name נמחקה בהצלחה',
         ],
     ],
 
@@ -3267,6 +3269,8 @@ return [
                 'reviews'                  => 'ביקורות',
                 'roles'                    => 'תפקידים',
                 'sales'                    => 'מכירות',
+                'search-terms'             => 'מונחים לחיפוש',
+                'search-seo'               => 'חיפוש וקידום אתרים',
                 'shipments'                => 'משלוחים',
                 'settings'                 => 'הגדרות',
                 'sitemaps'                 => 'מפותרכים',
@@ -3424,6 +3428,8 @@ return [
         'reviews'                  => 'ביקורות',
         'roles'                    => 'תפקידים',
         'sales'                    => 'מכירות',
+        'search-terms'             => 'מונחים לחיפוש',
+        'search-seo'               => 'חיפוש וקידום אתרים',
         'shipments'                => 'שליחות',
         'settings'                 => 'הגדרות',
         'subscribers'              => 'מנויים לניוזלטר',

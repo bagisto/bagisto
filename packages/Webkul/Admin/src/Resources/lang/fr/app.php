@@ -1922,51 +1922,53 @@ return [
             ],
         ],
 
-        'sitemaps' => [
-            'index' => [
-                'title'      => 'Sitemaps',
-                'create-btn' => 'Créer une carte du site',
-                'sitemap'    => 'Plan du site',
+        'search-seo' => [
+            'sitemaps' => [
+                'index' => [
+                    'title'      => 'Sitemaps',
+                    'create-btn' => 'Créer une carte du site',
+                    'sitemap'    => 'Plan du site',
 
-                'datagrid' => [
-                    'id'              => 'ID',
-                    'file-name'       => 'Nom de fichier',
-                    'path'            => 'Chemin',
-                    'link-for-google' => 'Lien pour Google',
-                    'edit'            => 'Modifier',
-                    'delete'          => 'Supprimer',
-                    'actions'         => 'Actions',
-                ],
+                    'datagrid' => [
+                        'id'              => 'ID',
+                        'file-name'       => 'Nom de fichier',
+                        'path'            => 'Chemin',
+                        'link-for-google' => 'Lien pour Google',
+                        'edit'            => 'Modifier',
+                        'delete'          => 'Supprimer',
+                        'actions'         => 'Actions',
+                    ],
 
-                'create'  => [
-                    'file-name'      => 'Nom de fichier',
-                    'file-name-info' => 'Exemple : sitemap.xml',
-                    'path'           => 'Chemin',
-                    'path-info'      => 'Exemple : "/sitemap/" ou "/" pour le chemin de base',
-                    'save-btn'       => 'Enregistrer la carte du site',
-                    'title'          => 'Créer une carte du site',
-                    'success'        => 'Plan du site créé avec succès',
-                    'delete-warning' => 'Êtes-vous sûr de vouloir effectuer cette action ?',
+                    'create'  => [
+                        'file-name'      => 'Nom de fichier',
+                        'file-name-info' => 'Exemple : sitemap.xml',
+                        'path'           => 'Chemin',
+                        'path-info'      => 'Exemple : "/sitemap/" ou "/" pour le chemin de base',
+                        'save-btn'       => 'Enregistrer la carte du site',
+                        'title'          => 'Créer une carte du site',
+                        'success'        => 'Plan du site créé avec succès',
+                        'delete-warning' => 'Êtes-vous sûr de vouloir effectuer cette action ?',
+                    ],
+
+                    'edit'  => [
+                        'title'          => 'Modifier la carte du site',
+                        'success'        => 'Plan du site mis à jour avec succès',
+                        'delete-success' => 'Plan du site supprimé avec succès',
+                    ],
                 ],
 
                 'edit'  => [
-                    'title'          => 'Modifier la carte du site',
-                    'success'        => 'Plan du site mis à jour avec succès',
-                    'delete-success' => 'Plan du site supprimé avec succès',
+                    'back-btn'       => 'Retour',
+                    'file-name'      => 'Nom de fichier',
+                    'file-name-info' => 'Exemple : sitemap.xml',
+                    'general'        => 'Général',
+                    'path'           => 'Chemin',
+                    'path-info'      => 'Exemple : "/sitemap/" ou "/" pour le chemin de base',
+                    'save-btn'       => 'Enregistrer la carte du site',
                 ],
-            ],
 
-            'edit'  => [
-                'back-btn'       => 'Retour',
-                'file-name'      => 'Nom de fichier',
-                'file-name-info' => 'Exemple : sitemap.xml',
-                'general'        => 'Général',
-                'path'           => 'Chemin',
-                'path-info'      => 'Exemple : "/sitemap/" ou "/" pour le chemin de base',
-                'save-btn'       => 'Enregistrer la carte du site',
+                'delete-failed' => ':name Suppression Échouée',
             ],
-
-            'delete-failed' => ':name Suppression Échouée',
         ],
     ],
 
@@ -3267,6 +3269,8 @@ return [
                 'reviews'                  => 'Avis',
                 'roles'                    => 'Rôles',
                 'sales'                    => 'Ventes',
+                'search-terms'             => 'Termes de recherche',
+                'search-seo'               => 'Recherche et référencement',
                 'shipments'                => 'Expéditions',
                 'settings'                 => 'Paramètres',
                 'sitemaps'                 => 'Plans du site',
@@ -3424,6 +3428,8 @@ return [
         'reviews'                  => 'Avis',
         'roles'                    => 'Rôles',
         'sales'                    => 'Ventes',
+        'search-terms'             => 'Termes de recherche',
+        'search-seo'               => 'Recherche et référencement',
         'shipments'                => 'Expéditions',
         'settings'                 => 'Paramètres',
         'subscribers'              => 'Abonnés à la newsletter',

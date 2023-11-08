@@ -1922,51 +1922,53 @@ return [
             ],
         ],
 
-        'sitemaps' => [
-            'index' => [
-                'title'      => 'Карты сайта',
-                'create-btn' => 'Создать карту сайта',
-                'sitemap'    => 'Карта сайта',
+        'search-seo' => [
+            'sitemaps' => [
+                'index' => [
+                    'title'      => 'Карты сайта',
+                    'create-btn' => 'Создать карту сайта',
+                    'sitemap'    => 'Карта сайта',
 
-                'datagrid' => [
-                    'id'              => 'ID',
-                    'file-name'       => 'Имя файла',
-                    'path'            => 'Путь',
-                    'link-for-google' => 'Ссылка для Google',
-                    'edit'            => 'Редактировать',
-                    'delete'          => 'Удалить',
-                    'actions'         => 'Действия',
-                ],
+                    'datagrid' => [
+                        'id'              => 'ID',
+                        'file-name'       => 'Имя файла',
+                        'path'            => 'Путь',
+                        'link-for-google' => 'Ссылка для Google',
+                        'edit'            => 'Редактировать',
+                        'delete'          => 'Удалить',
+                        'actions'         => 'Действия',
+                    ],
 
-                'create'  => [
-                    'file-name'      => 'Имя файла',
-                    'file-name-info' => 'Пример: sitemap.xml',
-                    'path'           => 'Путь',
-                    'path-info'      => 'Пример: "/sitemap/" или "/" для базового пути',
-                    'save-btn'       => 'Сохранить карту сайта',
-                    'title'          => 'Создать карту сайта',
-                    'success'        => 'Карта сайта успешно создана',
-                    'delete-warning' => 'Вы уверены, что хотите выполнить это действие?',
+                    'create'  => [
+                        'file-name'      => 'Имя файла',
+                        'file-name-info' => 'Пример: sitemap.xml',
+                        'path'           => 'Путь',
+                        'path-info'      => 'Пример: "/sitemap/" или "/" для базового пути',
+                        'save-btn'       => 'Сохранить карту сайта',
+                        'title'          => 'Создать карту сайта',
+                        'success'        => 'Карта сайта успешно создана',
+                        'delete-warning' => 'Вы уверены, что хотите выполнить это действие?',
+                    ],
+
+                    'edit'  => [
+                        'title'          => 'Редактировать карту сайта',
+                        'success'        => 'Карта сайта успешно обновлена',
+                        'delete-success' => 'Карта сайта успешно удалена',
+                    ],
                 ],
 
                 'edit'  => [
-                    'title'          => 'Редактировать карту сайта',
-                    'success'        => 'Карта сайта успешно обновлена',
-                    'delete-success' => 'Карта сайта успешно удалена',
+                    'back-btn'       => 'Назад',
+                    'file-name'      => 'Имя файла',
+                    'file-name-info' => 'Пример: sitemap.xml',
+                    'general'        => 'Общие',
+                    'path'           => 'Путь',
+                    'path-info'      => 'Пример: "/sitemap/" или "/" для базового пути',
+                    'save-btn'       => 'Сохранить карту сайта',
                 ],
-            ],
 
-            'edit'  => [
-                'back-btn'       => 'Назад',
-                'file-name'      => 'Имя файла',
-                'file-name-info' => 'Пример: sitemap.xml',
-                'general'        => 'Общие',
-                'path'           => 'Путь',
-                'path-info'      => 'Пример: "/sitemap/" или "/" для базового пути',
-                'save-btn'       => 'Сохранить карту сайта',
+                'delete-failed'  => ':name удаление не удалось',
             ],
-
-            'delete-failed'  => ':name удаление не удалось',
         ],
     ],
 
@@ -3267,6 +3269,8 @@ return [
                 'reviews'                  => 'Отзывы',
                 'roles'                    => 'Роли',
                 'sales'                    => 'Продажи',
+                'search-terms'             => 'Поисковые запросы',
+                'search-seo'               => 'Поиск и SEO',
                 'shipments'                => 'Отправки',
                 'settings'                 => 'Настройки',
                 'sitemaps'                 => 'Карты сайта',
@@ -3411,6 +3415,8 @@ return [
         'reviews'                  => 'Отзывы',
         'roles'                    => 'Роли',
         'sales'                    => 'Продажи',
+        'search-terms'             => 'Поисковые запросы',
+        'search-seo'               => 'Поиск и SEO',
         'shipments'                => 'Отгрузки',
         'settings'                 => 'Настройки',
         'subscribers'              => 'Подписчики на рассылку',

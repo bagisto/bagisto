@@ -1922,51 +1922,53 @@ return [
             ],
         ],
 
-        'sitemaps' => [
-            'index' => [
-                'title'      => 'Sitemaps',
-                'create-btn' => 'Create Sitemap',
-                'sitemap'    => 'Sitemap',
+        'search-seo' => [
+            'sitemaps' => [
+                'index' => [
+                    'title'      => 'Sitemaps',
+                    'create-btn' => 'Create Sitemap',
+                    'sitemap'    => 'Sitemap',
 
-                'datagrid' => [
-                    'id'              => 'ID',
-                    'file-name'       => 'File Name',
-                    'path'            => 'Path',
-                    'link-for-google' => 'Link for Google',
-                    'edit'            => 'Edit',
-                    'delete'          => 'Delete',
-                    'actions'         => 'Actions',
+                    'datagrid' => [
+                        'id'              => 'ID',
+                        'file-name'       => 'File Name',
+                        'path'            => 'Path',
+                        'link-for-google' => 'Link for Google',
+                        'edit'            => 'Edit',
+                        'delete'          => 'Delete',
+                        'actions'         => 'Actions',
+                    ],
+
+                    'create'  => [
+                        'file-name'      => 'File Name',
+                        'file-name-info' => 'Example: sitemap.xml',
+                        'path'           => 'Path',
+                        'path-info'      => 'Example: "/sitemap/" or "/" for base path',
+                        'save-btn'       => 'Save Sitemap',
+                        'title'          => 'Create Sitemap',
+                        'success'        => 'Sitemap created successfully',
+                        'delete-warning' => 'Are you sure, you want to perform this action?',
+                    ],
+
+                    'edit'  => [
+                        'title'          => 'Edit Sitemap',
+                        'success'        => 'Sitemap Updated successfully',
+                        'delete-success' => 'Sitemap Deleted successfully',
+                    ],
                 ],
 
-                'create'  => [
-                    'file-name'      => 'File Name',
-                    'file-name-info' => 'Example: sitemap.xml',
-                    'path'           => 'Path',
-                    'path-info'      => 'Example: "/sitemap/" or "/" for base path',
-                    'save-btn'       => 'Save Sitemap',
-                    'title'          => 'Create Sitemap',
-                    'success'        => 'Sitemap created successfully',
-                    'delete-warning' => 'Are you sure, you want to perform this action?',
+                'edit' => [
+                    'back-btn'       => 'पीछे जाएँ',
+                    'file-name'      => 'फ़ाइल का नाम',
+                    'file-name-info' => 'उदाहरण: sitemap.xml',
+                    'general'        => 'सामान्य',
+                    'path'           => 'पथ',
+                    'path-info'      => 'उदाहरण: "/sitemap/" या बेस पथ के लिए "/"',
+                    'save-btn'       => 'साइटमैप सहेजें',
                 ],
 
-                'edit'  => [
-                    'title'          => 'Edit Sitemap',
-                    'success'        => 'Sitemap Updated successfully',
-                    'delete-success' => 'Sitemap Deleted successfully',
-                ],
+                'delete-failed' => ':name हटाने में विफल रहा',
             ],
-
-            'edit' => [
-                'back-btn'       => 'पीछे जाएँ',
-                'file-name'      => 'फ़ाइल का नाम',
-                'file-name-info' => 'उदाहरण: sitemap.xml',
-                'general'        => 'सामान्य',
-                'path'           => 'पथ',
-                'path-info'      => 'उदाहरण: "/sitemap/" या बेस पथ के लिए "/"',
-                'save-btn'       => 'साइटमैप सहेजें',
-            ],
-
-            'delete-failed' => ':name हटाने में विफल रहा',
         ],
     ],
 
@@ -3267,6 +3269,8 @@ return [
                 'reviews'                  => 'समीक्षा',
                 'roles'                    => 'भूमिकाएँ',
                 'sales'                    => 'बिक्री',
+                'search-terms'             => 'खोज शब्द',
+                'search-seo'               => 'खोज और एसईओ',
                 'shipments'                => 'शिपमेंट्स',
                 'settings'                 => 'सेटिंग्स',
                 'sitemaps'                 => 'साइटमैप्स',
@@ -3424,6 +3428,8 @@ return [
         'reviews'                  => 'समीक्षा',
         'roles'                    => 'भूमिकाएँ',
         'sales'                    => 'बिक्री',
+        'search-terms'             => 'खोज शब्द',
+        'search-seo'               => 'खोज और एसईओ',
         'shipments'                => 'शिपमेंट्स',
         'settings'                 => 'सेटिंग्स',
         'subscribers'              => 'समाचार पत्रिका सदस्य',

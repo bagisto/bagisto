@@ -1922,51 +1922,53 @@ return [
             ],
         ],
 
-        'sitemaps' => [
-            'index' => [
-                'title'       => 'Mappa del sito',
-                'create-btn'  => 'Crea mappa del sito',
-                'sitemap'     => 'Mappa del sito',
+        'search-seo' => [
+            'sitemaps' => [
+                'index' => [
+                    'title'       => 'Mappa del sito',
+                    'create-btn'  => 'Crea mappa del sito',
+                    'sitemap'     => 'Mappa del sito',
 
-                'datagrid' => [
-                    'id'              => 'ID',
-                    'file-name'       => 'Nome file',
-                    'path'            => 'Percorso',
-                    'link-for-google' => 'Link per Google',
-                    'edit'            => 'Modifica',
-                    'delete'          => 'Elimina',
-                    'actions'         => 'Azioni',
-                ],
+                    'datagrid' => [
+                        'id'              => 'ID',
+                        'file-name'       => 'Nome file',
+                        'path'            => 'Percorso',
+                        'link-for-google' => 'Link per Google',
+                        'edit'            => 'Modifica',
+                        'delete'          => 'Elimina',
+                        'actions'         => 'Azioni',
+                    ],
 
-                'create'  => [
-                    'file-name'      => 'Nome file',
-                    'file-name-info' => 'Esempio: sitemap.xml',
-                    'path'           => 'Percorso',
-                    'path-info'      => 'Esempio: "/sitemap/" o "/" per il percorso di base',
-                    'save-btn'       => 'Salva mappa del sito',
-                    'title'          => 'Crea mappa del sito',
-                    'success'        => 'Mappa del sito creata con successo',
-                    'delete-warning' => 'Sei sicuro di voler eseguire questa azione?',
+                    'create'  => [
+                        'file-name'      => 'Nome file',
+                        'file-name-info' => 'Esempio: sitemap.xml',
+                        'path'           => 'Percorso',
+                        'path-info'      => 'Esempio: "/sitemap/" o "/" per il percorso di base',
+                        'save-btn'       => 'Salva mappa del sito',
+                        'title'          => 'Crea mappa del sito',
+                        'success'        => 'Mappa del sito creata con successo',
+                        'delete-warning' => 'Sei sicuro di voler eseguire questa azione?',
+                    ],
+
+                    'edit'  => [
+                        'title'          => 'Modifica mappa del sito',
+                        'success'        => 'Mappa del sito aggiornata con successo',
+                        'delete-success' => 'Mappa del sito eliminata con successo',
+                    ],
                 ],
 
                 'edit'  => [
-                    'title'          => 'Modifica mappa del sito',
-                    'success'        => 'Mappa del sito aggiornata con successo',
-                    'delete-success' => 'Mappa del sito eliminata con successo',
+                    'back-btn'       => 'Indietro',
+                    'file-name'      => 'Nome file',
+                    'file-name-info' => 'Esempio: sitemap.xml',
+                    'general'        => 'Generale',
+                    'path'           => 'Percorso',
+                    'path-info'      => 'Esempio: "/sitemap/" o "/" per il percorso di base',
+                    'save-btn'       => 'Salva mappa del sito',
                 ],
-            ],
 
-            'edit'  => [
-                'back-btn'       => 'Indietro',
-                'file-name'      => 'Nome file',
-                'file-name-info' => 'Esempio: sitemap.xml',
-                'general'        => 'Generale',
-                'path'           => 'Percorso',
-                'path-info'      => 'Esempio: "/sitemap/" o "/" per il percorso di base',
-                'save-btn'       => 'Salva mappa del sito',
+                'delete-failed'  => ':name Eliminata con errore',
             ],
-
-            'delete-failed'  => ':name Eliminata con errore',
         ],
     ],
 
@@ -3267,6 +3269,8 @@ return [
                 'roles'                    => 'Ruoli',
                 'sales'                    => 'Vendite',
                 'shipments'                => 'Spedizioni',
+                'search-terms'             => 'Termini di ricerca',
+                'search-seo'               => 'Ricerca e SEO',
                 'settings'                 => 'Impostazioni',
                 'sitemaps'                 => 'Mappe del sito',
                 'taxes'                    => 'Tasse',
@@ -3423,6 +3427,8 @@ return [
         'reviews'                  => 'Recensioni',
         'roles'                    => 'Ruoli',
         'sales'                    => 'Vendite',
+        'search-terms'             => 'Termini di ricerca',
+        'search-seo'               => 'Ricerca e SEO',
         'shipments'                => 'Spedizioni',
         'settings'                 => 'Impostazioni',
         'subscribers'              => 'Iscritti alla newsletter',

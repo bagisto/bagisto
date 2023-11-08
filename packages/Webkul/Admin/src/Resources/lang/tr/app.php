@@ -1922,51 +1922,53 @@ return [
             ],
         ],
 
-        'sitemaps' => [
-            'index' => [
-                'title'      => 'Site Haritaları',
-                'create-btn' => 'Site Haritası Oluştur',
-                'sitemap'    => 'Site Haritası',
+        'search-seo' => [
+            'sitemaps' => [
+                'index' => [
+                    'title'      => 'Site Haritaları',
+                    'create-btn' => 'Site Haritası Oluştur',
+                    'sitemap'    => 'Site Haritası',
 
-                'datagrid' => [
-                    'id'              => 'ID',
-                    'file-name'       => 'Dosya Adı',
-                    'path'            => 'Yol',
-                    'link-for-google' => 'Google için Link',
-                    'edit'            => 'Düzenle',
-                    'delete'          => 'Sil',
-                    'actions'         => 'İşlemler',
-                ],
+                    'datagrid' => [
+                        'id'              => 'ID',
+                        'file-name'       => 'Dosya Adı',
+                        'path'            => 'Yol',
+                        'link-for-google' => 'Google için Link',
+                        'edit'            => 'Düzenle',
+                        'delete'          => 'Sil',
+                        'actions'         => 'İşlemler',
+                    ],
 
-                'create'  => [
-                    'file-name'      => 'Dosya Adı',
-                    'file-name-info' => 'Örnek: sitemap.xml',
-                    'path'           => 'Yol',
-                    'path-info'      => 'Örnek: "/sitemap/" veya "Ana yol için /"',
-                    'save-btn'       => 'Site Haritasını Kaydet',
-                    'title'          => 'Site Haritası Oluştur',
-                    'success'        => 'Site haritası başarıyla oluşturuldu',
-                    'delete-warning' => 'Emin misiniz, bu işlemi gerçekleştirmek istediğinize?',
+                    'create'  => [
+                        'file-name'      => 'Dosya Adı',
+                        'file-name-info' => 'Örnek: sitemap.xml',
+                        'path'           => 'Yol',
+                        'path-info'      => 'Örnek: "/sitemap/" veya "Ana yol için /"',
+                        'save-btn'       => 'Site Haritasını Kaydet',
+                        'title'          => 'Site Haritası Oluştur',
+                        'success'        => 'Site haritası başarıyla oluşturuldu',
+                        'delete-warning' => 'Emin misiniz, bu işlemi gerçekleştirmek istediğinize?',
+                    ],
+
+                    'edit'  => [
+                        'title'          => 'Site Haritasını Düzenle',
+                        'success'        => 'Site haritası başarıyla güncellendi',
+                        'delete-success' => 'Site haritası başarıyla silindi',
+                    ],
                 ],
 
                 'edit'  => [
-                    'title'          => 'Site Haritasını Düzenle',
-                    'success'        => 'Site haritası başarıyla güncellendi',
-                    'delete-success' => 'Site haritası başarıyla silindi',
+                    'back-btn'       => 'Geri',
+                    'file-name'      => 'Dosya Adı',
+                    'file-name-info' => 'Örnek: sitemap.xml',
+                    'general'        => 'Genel',
+                    'path'           => 'Yol',
+                    'path-info'      => 'Örnek: "/sitemap/" veya "Ana yol için /"',
+                    'save-btn'       => 'Site Haritasını Kaydet',
                 ],
-            ],
 
-            'edit'  => [
-                'back-btn'       => 'Geri',
-                'file-name'      => 'Dosya Adı',
-                'file-name-info' => 'Örnek: sitemap.xml',
-                'general'        => 'Genel',
-                'path'           => 'Yol',
-                'path-info'      => 'Örnek: "/sitemap/" veya "Ana yol için /"',
-                'save-btn'       => 'Site Haritasını Kaydet',
+                'delete-failed'  => ':name Silme Başarısız',
             ],
-
-            'delete-failed'  => ':name Silme Başarısız',
         ],
     ],
 
@@ -3267,6 +3269,8 @@ return [
                 'reviews'                  => 'Yorumlar',
                 'roles'                    => 'Roller',
                 'sales'                    => 'Satışlar',
+                'search-terms'             => 'Arama Terimleri',
+                'search-seo'               => 'Arama ve SEO',
                 'shipments'                => 'Gönderiler',
                 'settings'                 => 'Ayarlar',
                 'sitemaps'                 => 'Site Haritaları',
@@ -3424,6 +3428,8 @@ return [
         'reviews'                  => 'Yorumlar',
         'roles'                    => 'Roller',
         'sales'                    => 'Satışlar',
+        'search-terms'             => 'Arama Terimleri',
+        'search-seo'               => 'Arama ve SEO',
         'shipments'                => 'Gönderiler',
         'settings'                 => 'Ayarlar',
         'subscribers'              => 'Bülten Aboneleri',

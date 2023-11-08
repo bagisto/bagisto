@@ -1921,51 +1921,53 @@ return [
             ],
         ],
 
-        'sitemaps' => [
-            'index' => [
-                'title'      => 'خرائط الموقع',
-                'create-btn' => 'إنشاء خريطة الموقع',
-                'sitemap'    => 'خريطة الموقع',
+        'search-seo' => [
+            'sitemaps' => [
+                'index' => [
+                    'title'      => 'خرائط الموقع',
+                    'create-btn' => 'إنشاء خريطة الموقع',
+                    'sitemap'    => 'خريطة الموقع',
 
-                'datagrid' => [
-                    'id'              => 'المعرف',
-                    'file-name'       => 'اسم الملف',
-                    'path'            => 'المسار',
-                    'link-for-google' => 'رابط لجوجل',
-                    'edit'            => 'تعديل',
-                    'delete'          => 'حذف',
-                    'actions'         => 'إجراءات',
-                ],
+                    'datagrid' => [
+                        'id'              => 'المعرف',
+                        'file-name'       => 'اسم الملف',
+                        'path'            => 'المسار',
+                        'link-for-google' => 'رابط لجوجل',
+                        'edit'            => 'تعديل',
+                        'delete'          => 'حذف',
+                        'actions'         => 'إجراءات',
+                    ],
 
-                'create'  => [
-                    'file-name'      => 'اسم الملف',
-                    'file-name-info' => 'مثال: sitemap.xml',
-                    'path'           => 'المسار',
-                    'path-info'      => 'مثال: "/sitemap/" أو "/" للمسار الأساسي',
-                    'save-btn'       => 'حفظ خريطة الموقع',
-                    'title'          => 'إنشاء خريطة الموقع',
-                    'success'        => 'تم إنشاء خريطة الموقع بنجاح',
-                    'delete-warning' => 'هل أنت متأكد أنك تريد القيام بهذا الإجراء؟',
+                    'create'  => [
+                        'file-name'      => 'اسم الملف',
+                        'file-name-info' => 'مثال: sitemap.xml',
+                        'path'           => 'المسار',
+                        'path-info'      => 'مثال: "/sitemap/" أو "/" للمسار الأساسي',
+                        'save-btn'       => 'حفظ خريطة الموقع',
+                        'title'          => 'إنشاء خريطة الموقع',
+                        'success'        => 'تم إنشاء خريطة الموقع بنجاح',
+                        'delete-warning' => 'هل أنت متأكد أنك تريد القيام بهذا الإجراء؟',
+                    ],
+
+                    'edit'  => [
+                        'title'          => 'تعديل خريطة الموقع',
+                        'success'        => 'تم تحديث خريطة الموقع بنجاح',
+                        'delete-success' => 'تم حذف خريطة الموقع بنجاح',
+                    ],
                 ],
 
                 'edit'  => [
-                    'title'          => 'تعديل خريطة الموقع',
-                    'success'        => 'تم تحديث خريطة الموقع بنجاح',
-                    'delete-success' => 'تم حذف خريطة الموقع بنجاح',
+                    'back-btn'       => 'رجوع',
+                    'file-name'      => 'اسم الملف',
+                    'file-name-info' => 'مثال: sitemap.xml',
+                    'general'        => 'عام',
+                    'path'           => 'المسار',
+                    'path-info'      => 'مثال: "/sitemap/" أو "/" للمسار الأساسي',
+                    'save-btn'       => 'حفظ خريطة الموقع',
                 ],
-            ],
 
-            'edit'  => [
-                'back-btn'       => 'رجوع',
-                'file-name'      => 'اسم الملف',
-                'file-name-info' => 'مثال: sitemap.xml',
-                'general'        => 'عام',
-                'path'           => 'المسار',
-                'path-info'      => 'مثال: "/sitemap/" أو "/" للمسار الأساسي',
-                'save-btn'       => 'حفظ خريطة الموقع',
+                'delete-failed'  => ':name تم حذفها بنجاح',
             ],
-
-            'delete-failed'  => ':name تم حذفها بنجاح',
         ],
     ],
 
@@ -3265,6 +3267,8 @@ return [
                 'reviews'                  => 'المراجعات',
                 'roles'                    => 'الأدوار',
                 'sales'                    => 'المبيعات',
+                'search-terms'             => 'مصطلحات البحث',
+                'search-seo'               => 'البحث وتحسين محركات البحث',
                 'shipments'                => 'الشحنات',
                 'settings'                 => 'الإعدادات',
                 'sitemaps'                 => 'خرائط الموقع',
@@ -3422,6 +3426,8 @@ return [
         'reviews'                  => 'التقييمات',
         'roles'                    => 'الأدوار',
         'sales'                    => 'المبيعات',
+        'search-terms'             => 'مصطلحات البحث',
+        'search-seo'               => 'البحث وتحسين محركات البحث',
         'shipments'                => 'الشحنات',
         'settings'                 => 'الإعدادات',
         'subscribers'              => 'مشتركي النشرة الإخبارية',

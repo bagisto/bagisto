@@ -1923,50 +1923,52 @@ return [
 
         ],
 
-        'sitemaps' => [
-            'index' => [
-                'title'      => 'Sitemaps',
-                'create-btn' => 'Maak Sitemap',
-                'sitemap'    => 'Sitemap',
-                'datagrid'   => [
-                    'id'              => 'ID',
-                    'file-name'       => 'Bestandsnaam',
-                    'path'            => 'Pad',
-                    'link-for-google' => 'Link voor Google',
-                    'edit'            => 'Bewerk',
-                    'delete'          => 'Verwijderen',
-                    'actions'         => 'Acties',
-                ],
+        'search-seo' => [
+            'sitemaps' => [
+                'index' => [
+                    'title'      => 'Sitemaps',
+                    'create-btn' => 'Maak Sitemap',
+                    'sitemap'    => 'Sitemap',
+                    'datagrid'   => [
+                        'id'              => 'ID',
+                        'file-name'       => 'Bestandsnaam',
+                        'path'            => 'Pad',
+                        'link-for-google' => 'Link voor Google',
+                        'edit'            => 'Bewerk',
+                        'delete'          => 'Verwijderen',
+                        'actions'         => 'Acties',
+                    ],
 
-                'create' => [
-                    'file-name'      => 'Bestandsnaam',
-                    'file-name-info' => 'Voorbeeld: sitemap.xml',
-                    'path'           => 'Pad',
-                    'path-info'      => 'Voorbeeld: "/sitemap/" of "/" voor basispad',
-                    'save-btn'       => 'Sitemap Opslaan',
-                    'title'          => 'Maak Sitemap',
-                    'success'        => 'Sitemap succesvol aangemaakt',
-                    'delete-warning' => 'Weet je zeker dat je deze actie wilt uitvoeren?',
+                    'create' => [
+                        'file-name'      => 'Bestandsnaam',
+                        'file-name-info' => 'Voorbeeld: sitemap.xml',
+                        'path'           => 'Pad',
+                        'path-info'      => 'Voorbeeld: "/sitemap/" of "/" voor basispad',
+                        'save-btn'       => 'Sitemap Opslaan',
+                        'title'          => 'Maak Sitemap',
+                        'success'        => 'Sitemap succesvol aangemaakt',
+                        'delete-warning' => 'Weet je zeker dat je deze actie wilt uitvoeren?',
+                    ],
+
+                    'edit' => [
+                        'title'          => 'Bewerk Sitemap',
+                        'success'        => 'Sitemap succesvol bijgewerkt',
+                        'delete-success' => 'Sitemap succesvol verwijderd',
+                    ],
                 ],
 
                 'edit' => [
-                    'title'          => 'Bewerk Sitemap',
-                    'success'        => 'Sitemap succesvol bijgewerkt',
-                    'delete-success' => 'Sitemap succesvol verwijderd',
+                    'back-btn'       => 'Terug',
+                    'file-name'      => 'Bestandsnaam',
+                    'file-name-info' => 'Voorbeeld: sitemap.xml',
+                    'general'        => 'Algemeen',
+                    'path'           => 'Pad',
+                    'path-info'      => 'Voorbeeld: "/sitemap/" of "/" voor basispad',
+                    'save-btn'       => 'Sitemap Opslaan',
                 ],
-            ],
 
-            'edit' => [
-                'back-btn'       => 'Terug',
-                'file-name'      => 'Bestandsnaam',
-                'file-name-info' => 'Voorbeeld: sitemap.xml',
-                'general'        => 'Algemeen',
-                'path'           => 'Pad',
-                'path-info'      => 'Voorbeeld: "/sitemap/" of "/" voor basispad',
-                'save-btn'       => 'Sitemap Opslaan',
+                'delete-failed' => ':name Verwijderen Mislukt',
             ],
-
-            'delete-failed' => ':name Verwijderen Mislukt',
         ],
     ],
 
@@ -3267,6 +3269,8 @@ return [
                 'reviews'                  => 'Beoordelingen',
                 'roles'                    => 'Rollen',
                 'sales'                    => 'Verkopen',
+                'search-terms'             => 'Zoektermen',
+                'search-seo'               => 'Zoeken en SEO',
                 'shipments'                => 'Zendingen',
                 'settings'                 => 'Instellingen',
                 'sitemaps'                 => 'Sitemaps',
@@ -3424,6 +3428,8 @@ return [
         'reviews'                  => 'Beoordelingen',
         'roles'                    => 'Rollen',
         'sales'                    => 'Verkoop',
+        'search-terms'             => 'Zoektermen',
+        'search-seo'               => 'Zoeken en SEO',
         'shipments'                => 'Verzendingen',
         'settings'                 => 'Instellingen',
         'subscribers'              => 'Nieuwsbrief Abonnees',

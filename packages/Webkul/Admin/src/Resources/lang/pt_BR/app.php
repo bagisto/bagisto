@@ -1922,51 +1922,53 @@ return [
             ],
         ],
 
-        'sitemaps' => [
-            'index' => [
-                'title'      => 'Mapas do Site',
-                'create-btn' => 'Criar Mapa do Site',
-                'sitemap'    => 'Mapa do Site',
+        'search-seo' => [
+            'sitemaps' => [
+                'index' => [
+                    'title'      => 'Mapas do Site',
+                    'create-btn' => 'Criar Mapa do Site',
+                    'sitemap'    => 'Mapa do Site',
 
-                'datagrid' => [
-                    'id'              => 'ID',
-                    'file-name'       => 'Nome do Arquivo',
-                    'path'            => 'Caminho',
-                    'link-for-google' => 'Link para o Google',
-                    'edit'            => 'Editar',
-                    'delete'          => 'Excluir',
-                    'actions'         => 'Ações',
-                ],
+                    'datagrid' => [
+                        'id'              => 'ID',
+                        'file-name'       => 'Nome do Arquivo',
+                        'path'            => 'Caminho',
+                        'link-for-google' => 'Link para o Google',
+                        'edit'            => 'Editar',
+                        'delete'          => 'Excluir',
+                        'actions'         => 'Ações',
+                    ],
 
-                'create'  => [
-                    'file-name'      => 'Nome do Arquivo',
-                    'file-name-info' => 'Exemplo: sitemap.xml',
-                    'path'           => 'Caminho',
-                    'path-info'      => 'Exemplo: "/sitemap/" ou "/" para o caminho base',
-                    'save-btn'       => 'Salvar Mapa do Site',
-                    'title'          => 'Criar Mapa do Site',
-                    'success'        => 'Mapa do Site criado com sucesso',
-                    'delete-warning' => 'Você tem certeza de que deseja executar esta ação?',
+                    'create'  => [
+                        'file-name'      => 'Nome do Arquivo',
+                        'file-name-info' => 'Exemplo: sitemap.xml',
+                        'path'           => 'Caminho',
+                        'path-info'      => 'Exemplo: "/sitemap/" ou "/" para o caminho base',
+                        'save-btn'       => 'Salvar Mapa do Site',
+                        'title'          => 'Criar Mapa do Site',
+                        'success'        => 'Mapa do Site criado com sucesso',
+                        'delete-warning' => 'Você tem certeza de que deseja executar esta ação?',
+                    ],
+
+                    'edit'  => [
+                        'title'          => 'Editar Mapa do Site',
+                        'success'        => 'Mapa do Site atualizado com sucesso',
+                        'delete-success' => 'Mapa do Site excluído com sucesso',
+                    ],
                 ],
 
                 'edit'  => [
-                    'title'          => 'Editar Mapa do Site',
-                    'success'        => 'Mapa do Site atualizado com sucesso',
-                    'delete-success' => 'Mapa do Site excluído com sucesso',
+                    'back-btn'       => 'Voltar',
+                    'file-name'      => 'Nome do Arquivo',
+                    'file-name-info' => 'Exemplo: sitemap.xml',
+                    'general'        => 'Geral',
+                    'path'           => 'Caminho',
+                    'path-info'      => 'Exemplo: "/sitemap/" ou "/" para o caminho base',
+                    'save-btn'       => 'Salvar Mapa do Site',
                 ],
-            ],
 
-            'edit'  => [
-                'back-btn'       => 'Voltar',
-                'file-name'      => 'Nome do Arquivo',
-                'file-name-info' => 'Exemplo: sitemap.xml',
-                'general'        => 'Geral',
-                'path'           => 'Caminho',
-                'path-info'      => 'Exemplo: "/sitemap/" ou "/" para o caminho base',
-                'save-btn'       => 'Salvar Mapa do Site',
+                'delete-failed'  => ':name Exclusão Falhou',
             ],
-
-            'delete-failed'  => ':name Exclusão Falhou',
         ],
     ],
 
@@ -3267,6 +3269,8 @@ return [
                 'reviews'                  => 'Avaliações',
                 'roles'                    => 'Funções',
                 'sales'                    => 'Vendas',
+                'search-terms'             => 'Termos de Pesquisa',
+                'search-seo'               => 'Busca & SEO',
                 'shipments'                => 'Remessas',
                 'settings'                 => 'Configurações',
                 'sitemaps'                 => 'Mapas do Site',
@@ -3424,6 +3428,8 @@ return [
         'reviews'                  => 'Avaliações',
         'roles'                    => 'Funções',
         'sales'                    => 'Vendas',
+        'search-terms'             => 'Termos de Pesquisa',
+        'search-seo'               => 'Busca & SEO',
         'shipments'                => 'Envios',
         'settings'                 => 'Definições',
         'subscribers'              => 'Subscritores de Newsletter',

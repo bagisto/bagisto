@@ -1922,51 +1922,53 @@ return [
             ],
         ],
 
-        'sitemaps' => [
-            'index' => [
-                'title'      => 'サイトマップ',
-                'create-btn' => 'サイトマップを作成',
-                'sitemap'    => 'サイトマップ',
+        'search-seo' => [
+            'sitemaps' => [
+                'index' => [
+                    'title'      => 'サイトマップ',
+                    'create-btn' => 'サイトマップを作成',
+                    'sitemap'    => 'サイトマップ',
 
-                'datagrid' => [
-                    'id'              => 'ID',
-                    'file-name'       => 'ファイル名',
-                    'path'            => 'パス',
-                    'link-for-google' => 'Googleへのリンク',
-                    'edit'            => '編集',
-                    'delete'          => '削除',
-                    'actions'         => 'アクション',
-                ],
+                    'datagrid' => [
+                        'id'              => 'ID',
+                        'file-name'       => 'ファイル名',
+                        'path'            => 'パス',
+                        'link-for-google' => 'Googleへのリンク',
+                        'edit'            => '編集',
+                        'delete'          => '削除',
+                        'actions'         => 'アクション',
+                    ],
 
-                'create'  => [
-                    'file-name'      => 'ファイル名',
-                    'file-name-info' => '例: sitemap.xml',
-                    'path'           => 'パス',
-                    'path-info'      => '例: "/sitemap/"または"/"（基本パス用）',
-                    'save-btn'       => 'サイトマップを保存',
-                    'title'          => 'サイトマップを作成',
-                    'success'        => 'サイトマップが正常に作成されました',
-                    'delete-warning' => '本当にこのアクションを実行しますか？',
+                    'create'  => [
+                        'file-name'      => 'ファイル名',
+                        'file-name-info' => '例: sitemap.xml',
+                        'path'           => 'パス',
+                        'path-info'      => '例: "/sitemap/"または"/"（基本パス用）',
+                        'save-btn'       => 'サイトマップを保存',
+                        'title'          => 'サイトマップを作成',
+                        'success'        => 'サイトマップが正常に作成されました',
+                        'delete-warning' => '本当にこのアクションを実行しますか？',
+                    ],
+
+                    'edit'  => [
+                        'title'          => 'サイトマップを編集',
+                        'success'        => 'サイトマップが正常に更新されました',
+                        'delete-success' => 'サイトマップが正常に削除されました',
+                    ],
                 ],
 
                 'edit'  => [
-                    'title'          => 'サイトマップを編集',
-                    'success'        => 'サイトマップが正常に更新されました',
-                    'delete-success' => 'サイトマップが正常に削除されました',
+                    'back-btn'       => '戻る',
+                    'file-name'      => 'ファイル名',
+                    'file-name-info' => '例: sitemap.xml',
+                    'general'        => '一般',
+                    'path'           => 'パス',
+                    'path-info'      => '例: "/sitemap/"または"/"（基本パス用）',
+                    'save-btn'       => 'サイトマップを保存',
                 ],
-            ],
 
-            'edit'  => [
-                'back-btn'       => '戻る',
-                'file-name'      => 'ファイル名',
-                'file-name-info' => '例: sitemap.xml',
-                'general'        => '一般',
-                'path'           => 'パス',
-                'path-info'      => '例: "/sitemap/"または"/"（基本パス用）',
-                'save-btn'       => 'サイトマップを保存',
+                'delete-failed'  => ':name 削除に失敗しました',
             ],
-
-            'delete-failed'  => ':name 削除に失敗しました',
         ],
     ],
 
@@ -3267,6 +3269,8 @@ return [
                 'reviews'                  => 'レビュー',
                 'roles'                    => 'ロール',
                 'sales'                    => '販売',
+                'search-terms'             => '検索用語',
+                'search-seo'               => '検索とSEO',
                 'shipments'                => '発送',
                 'settings'                 => '設定',
                 'sitemaps'                 => 'サイトマップ',
@@ -3424,6 +3428,8 @@ return [
         'reviews'                  => 'レビュー',
         'roles'                    => '役割',
         'sales'                    => '販売',
+        'search-terms'             => '検索用語',
+        'search-seo'               => '検索とSEO',
         'shipments'                => '出荷',
         'settings'                 => '設定',
         'subscribers'              => 'ニュースレター購読者',

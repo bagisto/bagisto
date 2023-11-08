@@ -1922,51 +1922,53 @@ return [
             ],
         ],
 
-        'sitemaps' => [
-            'index' => [
-                'title'      => 'Sitemaps',
-                'create-btn' => 'Sitemap erstellen',
-                'sitemap'    => 'Sitemap',
+        'search-seo' => [
+            'sitemaps' => [
+                'index' => [
+                    'title'      => 'Sitemaps',
+                    'create-btn' => 'Sitemap erstellen',
+                    'sitemap'    => 'Sitemap',
 
-                'datagrid' => [
-                    'id'              => 'ID',
-                    'file-name'       => 'Dateiname',
-                    'path'            => 'Pfad',
-                    'link-for-google' => 'Link für Google',
-                    'edit'            => 'Bearbeiten',
-                    'delete'          => 'Löschen',
-                    'actions'         => 'Aktionen',
-                ],
+                    'datagrid' => [
+                        'id'              => 'ID',
+                        'file-name'       => 'Dateiname',
+                        'path'            => 'Pfad',
+                        'link-for-google' => 'Link für Google',
+                        'edit'            => 'Bearbeiten',
+                        'delete'          => 'Löschen',
+                        'actions'         => 'Aktionen',
+                    ],
 
-                'create'  => [
-                    'file-name'      => 'Dateiname',
-                    'file-name-info' => 'Beispiel: sitemap.xml',
-                    'path'           => 'Pfad',
-                    'path-info'      => 'Beispiel: "/sitemap/" oder "/" für den Basispfad',
-                    'save-btn'       => 'Sitemap speichern',
-                    'title'          => 'Sitemap erstellen',
-                    'success'        => 'Sitemap erfolgreich erstellt',
-                    'delete-warning' => 'Sind Sie sicher, dass Sie diese Aktion ausführen möchten?',
+                    'create'  => [
+                        'file-name'      => 'Dateiname',
+                        'file-name-info' => 'Beispiel: sitemap.xml',
+                        'path'           => 'Pfad',
+                        'path-info'      => 'Beispiel: "/sitemap/" oder "/" für den Basispfad',
+                        'save-btn'       => 'Sitemap speichern',
+                        'title'          => 'Sitemap erstellen',
+                        'success'        => 'Sitemap erfolgreich erstellt',
+                        'delete-warning' => 'Sind Sie sicher, dass Sie diese Aktion ausführen möchten?',
+                    ],
+
+                    'edit'  => [
+                        'title'          => 'Sitemap bearbeiten',
+                        'success'        => 'Sitemap erfolgreich aktualisiert',
+                        'delete-success' => 'Sitemap erfolgreich gelöscht',
+                    ],
                 ],
 
                 'edit'  => [
-                    'title'          => 'Sitemap bearbeiten',
-                    'success'        => 'Sitemap erfolgreich aktualisiert',
-                    'delete-success' => 'Sitemap erfolgreich gelöscht',
+                    'back-btn'       => 'Zurück',
+                    'file-name'      => 'Dateiname',
+                    'file-name-info' => 'Beispiel: sitemap.xml',
+                    'general'        => 'Allgemein',
+                    'path'           => 'Pfad',
+                    'path-info'      => 'Beispiel: "/sitemap/" oder "/" für den Basispfad',
+                    'save-btn'       => 'Sitemap speichern',
                 ],
-            ],
 
-            'edit'  => [
-                'back-btn'       => 'Zurück',
-                'file-name'      => 'Dateiname',
-                'file-name-info' => 'Beispiel: sitemap.xml',
-                'general'        => 'Allgemein',
-                'path'           => 'Pfad',
-                'path-info'      => 'Beispiel: "/sitemap/" oder "/" für den Basispfad',
-                'save-btn'       => 'Sitemap speichern',
+                'delete-failed'  => ':name Löschen fehlgeschlagen',
             ],
-
-            'delete-failed'  => ':name Löschen fehlgeschlagen',
         ],
     ],
 
@@ -3267,6 +3269,8 @@ return [
                 'reviews'                  => 'Bewertungen',
                 'roles'                    => 'Rollen',
                 'sales'                    => 'Vertrieb',
+                'search-terms'             => 'Suchbegriffe',
+                'search-seo'               => 'Suche & SEO',
                 'shipments'                => 'Versand',
                 'settings'                 => 'Einstellungen',
                 'sitemaps'                 => 'Sitemaps',
@@ -3424,6 +3428,8 @@ return [
         'reviews'                  => 'Bewertungen',
         'roles'                    => 'Rollen',
         'sales'                    => 'Verkäufe',
+        'search-terms'             => 'Suchbegriffe',
+        'search-seo'               => 'Suche & SEO',
         'shipments'                => 'Lieferungen',
         'settings'                 => 'Einstellungen',
         'subscribers'              => 'Newsletter-Abonnenten',

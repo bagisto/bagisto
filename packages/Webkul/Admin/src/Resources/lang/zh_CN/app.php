@@ -1922,51 +1922,53 @@ return [
             ],
         ],
 
-        'sitemaps' => [
-            'index' => [
-                'title'      => '站点地图',
-                'create-btn' => '创建站点地图',
-                'sitemap'    => '站点地图',
+        'search-seo' => [
+            'sitemaps' => [
+                'index' => [
+                    'title'      => '站点地图',
+                    'create-btn' => '创建站点地图',
+                    'sitemap'    => '站点地图',
 
-                'datagrid' => [
-                    'id'              => 'ID',
-                    'file-name'       => '文件名',
-                    'path'            => '路径',
-                    'link-for-google' => 'Google链接',
-                    'edit'            => '编辑',
-                    'delete'          => '删除',
-                    'actions'         => '操作',
-                ],
+                    'datagrid' => [
+                        'id'              => 'ID',
+                        'file-name'       => '文件名',
+                        'path'            => '路径',
+                        'link-for-google' => 'Google链接',
+                        'edit'            => '编辑',
+                        'delete'          => '删除',
+                        'actions'         => '操作',
+                    ],
 
-                'create'  => [
-                    'file-name'      => '文件名',
-                    'file-name-info' => '示例：sitemap.xml',
-                    'path'           => '路径',
-                    'path-info'      => '示例："/sitemap/" 或 "/" 用于基本路径',
-                    'save-btn'       => '保存站点地图',
-                    'title'          => '创建站点地图',
-                    'success'        => '站点地图创建成功',
-                    'delete-warning' => '您确定要执行此操作吗？',
+                    'create'  => [
+                        'file-name'      => '文件名',
+                        'file-name-info' => '示例：sitemap.xml',
+                        'path'           => '路径',
+                        'path-info'      => '示例："/sitemap/" 或 "/" 用于基本路径',
+                        'save-btn'       => '保存站点地图',
+                        'title'          => '创建站点地图',
+                        'success'        => '站点地图创建成功',
+                        'delete-warning' => '您确定要执行此操作吗？',
+                    ],
+
+                    'edit'  => [
+                        'title'          => '编辑站点地图',
+                        'success'        => '站点地图更新成功',
+                        'delete-success' => '站点地图删除成功',
+                    ],
                 ],
 
                 'edit'  => [
-                    'title'          => '编辑站点地图',
-                    'success'        => '站点地图更新成功',
-                    'delete-success' => '站点地图删除成功',
+                    'back-btn'       => '返回',
+                    'file-name'      => '文件名',
+                    'file-name-info' => '示例：sitemap.xml',
+                    'general'        => '通用',
+                    'path'           => '路径',
+                    'path-info'      => '示例："/sitemap/" 或 "/" 用于基本路径',
+                    'save-btn'       => '保存站点地图',
                 ],
-            ],
 
-            'edit'  => [
-                'back-btn'       => '返回',
-                'file-name'      => '文件名',
-                'file-name-info' => '示例：sitemap.xml',
-                'general'        => '通用',
-                'path'           => '路径',
-                'path-info'      => '示例："/sitemap/" 或 "/" 用于基本路径',
-                'save-btn'       => '保存站点地图',
+                'delete-failed'  => ':name 删除失败',
             ],
-
-            'delete-failed'  => ':name 删除失败',
         ],
     ],
 
@@ -3267,6 +3269,8 @@ return [
                 'reviews'                  => '评论',
                 'roles'                    => '角色',
                 'sales'                    => '销售',
+                'search-terms'             => '搜索词',
+                'search-seo'               => '搜索和SEO',
                 'shipments'                => '发货',
                 'settings'                 => '设置',
                 'sitemaps'                 => '站点地图',
@@ -3424,6 +3428,8 @@ return [
         'reviews'                  => '评论',
         'roles'                    => '角色',
         'sales'                    => '销售',
+        'search-terms'             => '搜索词',
+        'search-seo'               => '搜索和SEO',
         'shipments'                => '发货',
         'settings'                 => '设置',
         'subscribers'              => '电子报订阅者',

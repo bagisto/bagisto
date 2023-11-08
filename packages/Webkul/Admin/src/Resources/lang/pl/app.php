@@ -1922,51 +1922,53 @@ return [
             ],
         ],
 
-        'sitemaps' => [
-            'index' => [
-                'title'      => 'Mapy witryny',
-                'create-btn' => 'Utwórz mapę witryny',
-                'sitemap'    => 'Mapa witryny',
+        'search-seo' => [
+            'sitemaps' => [
+                'index' => [
+                    'title'      => 'Mapy witryny',
+                    'create-btn' => 'Utwórz mapę witryny',
+                    'sitemap'    => 'Mapa witryny',
 
-                'datagrid' => [
-                    'id'              => 'ID',
-                    'file-name'       => 'Nazwa pliku',
-                    'path'            => 'Ścieżka',
-                    'link-for-google' => 'Link do Google',
-                    'edit'            => 'Edytuj',
-                    'delete'          => 'Usuń',
-                    'actions'         => 'Akcje',
-                ],
+                    'datagrid' => [
+                        'id'              => 'ID',
+                        'file-name'       => 'Nazwa pliku',
+                        'path'            => 'Ścieżka',
+                        'link-for-google' => 'Link do Google',
+                        'edit'            => 'Edytuj',
+                        'delete'          => 'Usuń',
+                        'actions'         => 'Akcje',
+                    ],
 
-                'create'  => [
-                    'file-name'      => 'Nazwa pliku',
-                    'file-name-info' => 'Przykład: sitemap.xml',
-                    'path'           => 'Ścieżka',
-                    'path-info'      => 'Przykład: "/sitemap/" lub "/" dla ścieżki podstawowej',
-                    'save-btn'       => 'Zapisz mapę witryny',
-                    'title'          => 'Utwórz mapę witryny',
-                    'success'        => 'Mapa witryny została pomyślnie utworzona',
-                    'delete-warning' => 'Czy na pewno chcesz wykonać tę akcję?',
+                    'create'  => [
+                        'file-name'      => 'Nazwa pliku',
+                        'file-name-info' => 'Przykład: sitemap.xml',
+                        'path'           => 'Ścieżka',
+                        'path-info'      => 'Przykład: "/sitemap/" lub "/" dla ścieżki podstawowej',
+                        'save-btn'       => 'Zapisz mapę witryny',
+                        'title'          => 'Utwórz mapę witryny',
+                        'success'        => 'Mapa witryny została pomyślnie utworzona',
+                        'delete-warning' => 'Czy na pewno chcesz wykonać tę akcję?',
+                    ],
+
+                    'edit'  => [
+                        'title'          => 'Edytuj mapę witryny',
+                        'success'        => 'Mapa witryny została pomyślnie zaktualizowana',
+                        'delete-success' => 'Mapa witryny została pomyślnie usunięta',
+                    ],
                 ],
 
                 'edit'  => [
-                    'title'          => 'Edytuj mapę witryny',
-                    'success'        => 'Mapa witryny została pomyślnie zaktualizowana',
-                    'delete-success' => 'Mapa witryny została pomyślnie usunięta',
+                    'back-btn'       => 'Powrót',
+                    'file-name'      => 'Nazwa pliku',
+                    'file-name-info' => 'Przykład: sitemap.xml',
+                    'general'        => 'Ogólne',
+                    'path'           => 'Ścieżka',
+                    'path-info'      => 'Przykład: "/sitemap/" lub "/" dla ścieżki podstawowej',
+                    'save-btn'       => 'Zapisz mapę witryny',
                 ],
-            ],
 
-            'edit'  => [
-                'back-btn'       => 'Powrót',
-                'file-name'      => 'Nazwa pliku',
-                'file-name-info' => 'Przykład: sitemap.xml',
-                'general'        => 'Ogólne',
-                'path'           => 'Ścieżka',
-                'path-info'      => 'Przykład: "/sitemap/" lub "/" dla ścieżki podstawowej',
-                'save-btn'       => 'Zapisz mapę witryny',
+                'delete-failed'  => ':name Usunięcie nie powiodło się',
             ],
-
-            'delete-failed'  => ':name Usunięcie nie powiodło się',
         ],
     ],
 
@@ -3267,6 +3269,8 @@ return [
                 'reviews'                  => 'Recenzje',
                 'roles'                    => 'Role',
                 'sales'                    => 'Sprzedaż',
+                'search-terms'             => 'Słowa kluczowe',
+                'search-seo'               => 'Wyszukiwanie i SEO',
                 'shipments'                => 'Wysyłki',
                 'settings'                 => 'Ustawienia',
                 'sitemaps'                 => 'Mapy witryny',
@@ -3424,6 +3428,8 @@ return [
         'reviews'                  => 'Recenzje',
         'roles'                    => 'Role',
         'sales'                    => 'Sprzedaż',
+        'search-terms'             => 'Słowa kluczowe',
+        'search-seo'               => 'Wyszukiwanie i SEO',
         'shipments'                => 'Wysyłki',
         'settings'                 => 'Ustawienia',
         'subscribers'              => 'Subskrybenci Newslettera',

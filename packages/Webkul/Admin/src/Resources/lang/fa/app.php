@@ -1922,51 +1922,53 @@ return [
             ],
         ],
 
-        'sitemaps' => [
-            'index' => [
-                'title'      => 'نقشه‌های سایت',
-                'create-btn' => 'ایجاد نقشه‌ی سایت',
-                'sitemap'    => 'نقشه‌ی سایت',
+        'search-seo' => [
+            'sitemaps' => [
+                'index' => [
+                    'title'      => 'نقشه‌های سایت',
+                    'create-btn' => 'ایجاد نقشه‌ی سایت',
+                    'sitemap'    => 'نقشه‌ی سایت',
 
-                'datagrid' => [
-                    'id'              => 'شناسه',
-                    'file-name'       => 'نام فایل',
-                    'path'            => 'مسیر',
-                    'link-for-google' => 'لینک برای گوگل',
-                    'edit'            => 'ویرایش',
-                    'delete'          => 'حذف',
-                    'actions'         => 'عملیات',
-                ],
+                    'datagrid' => [
+                        'id'              => 'شناسه',
+                        'file-name'       => 'نام فایل',
+                        'path'            => 'مسیر',
+                        'link-for-google' => 'لینک برای گوگل',
+                        'edit'            => 'ویرایش',
+                        'delete'          => 'حذف',
+                        'actions'         => 'عملیات',
+                    ],
 
-                'create'  => [
-                    'file-name'      => 'نام فایل',
-                    'file-name-info' => 'مثال: sitemap.xml',
-                    'path'           => 'مسیر',
-                    'path-info'      => 'مثال: "/sitemap/" یا "/" برای مسیر پایه',
-                    'save-btn'       => 'ذخیره نقشه‌ی سایت',
-                    'title'          => 'ایجاد نقشه‌ی سایت',
-                    'success'        => 'نقشه‌ی سایت با موفقیت ایجاد شد',
-                    'delete-warning' => 'آیا از انجام این عملیات مطمئن هستید؟',
+                    'create'  => [
+                        'file-name'      => 'نام فایل',
+                        'file-name-info' => 'مثال: sitemap.xml',
+                        'path'           => 'مسیر',
+                        'path-info'      => 'مثال: "/sitemap/" یا "/" برای مسیر پایه',
+                        'save-btn'       => 'ذخیره نقشه‌ی سایت',
+                        'title'          => 'ایجاد نقشه‌ی سایت',
+                        'success'        => 'نقشه‌ی سایت با موفقیت ایجاد شد',
+                        'delete-warning' => 'آیا از انجام این عملیات مطمئن هستید؟',
+                    ],
+
+                    'edit'  => [
+                        'title'          => 'ویرایش نقشه‌ی سایت',
+                        'success'        => 'نقشه‌ی سایت با موفقیت به‌روزرسانی شد',
+                        'delete-success' => 'نقشه‌ی سایت با موفقیت حذف شد',
+                    ],
                 ],
 
                 'edit'  => [
-                    'title'          => 'ویرایش نقشه‌ی سایت',
-                    'success'        => 'نقشه‌ی سایت با موفقیت به‌روزرسانی شد',
-                    'delete-success' => 'نقشه‌ی سایت با موفقیت حذف شد',
+                    'back-btn'       => 'بازگشت',
+                    'file-name'      => 'نام فایل',
+                    'file-name-info' => 'مثال: sitemap.xml',
+                    'general'        => 'عمومی',
+                    'path'           => 'مسیر',
+                    'path-info'      => 'مثال: "/sitemap/" یا "/" برای مسیر پایه',
+                    'save-btn'       => 'ذخیره نقشه‌ی سایت',
                 ],
-            ],
 
-            'edit'  => [
-                'back-btn'       => 'بازگشت',
-                'file-name'      => 'نام فایل',
-                'file-name-info' => 'مثال: sitemap.xml',
-                'general'        => 'عمومی',
-                'path'           => 'مسیر',
-                'path-info'      => 'مثال: "/sitemap/" یا "/" برای مسیر پایه',
-                'save-btn'       => 'ذخیره نقشه‌ی سایت',
+                'delete-failed'  => ':name حذف نشد',
             ],
-
-            'delete-failed'  => ':name حذف نشد',
         ],
     ],
 
@@ -3267,6 +3269,8 @@ return [
                 'reviews'                  => 'نقد و بررسی‌ها',
                 'roles'                    => 'نقش‌ها',
                 'sales'                    => 'فروش‌ها',
+                'search-terms'             => 'اصطلاحات جستجو',
+                'search-seo'               => 'جستجو و بهینه‌سازی سئو',
                 'shipments'                => 'ارسال‌ها',
                 'settings'                 => 'تنظیمات',
                 'sitemaps'                 => 'نقشه‌های سایت',
@@ -3424,6 +3428,8 @@ return [
         'reviews'                  => 'نقدها',
         'roles'                    => 'نقش‌ها',
         'sales'                    => 'فروش‌ها',
+        'search-terms'             => 'اصطلاحات جستجو',
+        'search-seo'               => 'جستجو و بهینه‌سازی سئو',
         'shipments'                => 'ارسال‌ها',
         'settings'                 => 'تنظیمات',
         'subscribers'              => 'مشترکان خبرنامه',

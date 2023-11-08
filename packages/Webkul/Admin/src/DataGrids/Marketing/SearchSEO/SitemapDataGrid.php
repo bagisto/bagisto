@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Admin\DataGrids\Marketing;
+namespace Webkul\Admin\DataGrids\Marketing\SearchSEO;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -29,7 +29,7 @@ class SitemapDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.marketing.sitemaps.index.datagrid.id'),
+            'label'      => trans('admin::app.marketing.search-seo.sitemaps.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'width'      => '40px',
@@ -39,7 +39,7 @@ class SitemapDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'file_name',
-            'label'      => trans('admin::app.marketing.sitemaps.index.datagrid.file-name'),
+            'label'      => trans('admin::app.marketing.search-seo.sitemaps.index.datagrid.file-name'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -48,7 +48,7 @@ class SitemapDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'path',
-            'label'      => trans('admin::app.marketing.sitemaps.index.datagrid.path'),
+            'label'      => trans('admin::app.marketing.search-seo.sitemaps.index.datagrid.path'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -57,7 +57,7 @@ class SitemapDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'url',
-            'label'      => trans('admin::app.marketing.sitemaps.index.datagrid.link-for-google'),
+            'label'      => trans('admin::app.marketing.search-seo.sitemaps.index.datagrid.link-for-google'),
             'type'       => 'string',
             'searchable' => false,
             'filterable' => false,
@@ -78,11 +78,11 @@ class SitemapDataGrid extends DataGrid
         if (bouncer()->hasPermission('marketing.sitemaps.edit')) {
             $this->addAction([
                 'icon'   => 'icon-edit',
-                'title'  => trans('admin::app.marketing.sitemaps.index.datagrid.edit'),
+                'title'  => trans('admin::app.marketing.search-seo.sitemaps.index.datagrid.edit'),
                 'method' => 'GET',
-                'route'  => 'admin.marketing.promotions.sitemaps.update',
+                'route'  => 'admin.marketing.search_seo.sitemaps.update',
                 'url'    => function ($row) {
-                    return route('admin.marketing.promotions.sitemaps.update', $row->id);
+                    return route('admin.marketing.search_seo.sitemaps.update', $row->id);
                 },
             ]);
         }
@@ -90,10 +90,10 @@ class SitemapDataGrid extends DataGrid
         if (bouncer()->hasPermission('marketing.sitemaps.delete')) {
             $this->addAction([
                 'icon'   => 'icon-delete',
-                'title'  => trans('admin::app.marketing.sitemaps.index.datagrid.delete'),
+                'title'  => trans('admin::app.marketing.search-seo.sitemaps.index.datagrid.delete'),
                 'method' => 'DELETE',
                 'url'    => function ($row) {
-                    return route('admin.marketing.promotions.sitemaps.delete', $row->id);
+                    return route('admin.marketing.search_seo.sitemaps.delete', $row->id);
                 },
             ]);
         }

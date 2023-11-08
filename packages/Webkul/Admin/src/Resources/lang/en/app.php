@@ -1923,51 +1923,80 @@ return [
             ],
         ],
 
-        'sitemaps' => [
-            'index' => [
-                'title'      => 'Sitemaps',
-                'create-btn' => 'Create Sitemap',
-                'sitemap'    => 'Sitemap',
+        'search-seo' => [
+            'search-terms' => [
+                'index' => [
+                    'title'      => 'Search Terms',
+                    'create-btn' => 'Create Search Term',
 
-                'datagrid' => [
-                    'id'              => 'ID',
-                    'file-name'       => 'File Name',
-                    'path'            => 'Path',
-                    'link-for-google' => 'Link for Google',
-                    'edit'            => 'Edit',
-                    'delete'          => 'Delete',
-                    'actions'         => 'Actions',
+                    'datagrid' => [
+                        'id'           => 'ID',
+                        'search-query' => 'Search Query',
+                        'Channel'      => 'Channel',
+                        'results'      => 'Results',
+                        'uses'         => 'Uses',
+                        'redirect-url' => 'Redirect Url',
+                        'edit'         => 'Edit',
+                        'delete'       => 'Delete',
+                        'actions'      => 'Actions',
+                    ],
+
+                    'create' => [
+
+                    ],
+
+                    'edit' => [
+
+                    ],
                 ],
+            ],
 
-                'create'  => [
-                    'file-name'      => 'File Name',
-                    'file-name-info' => 'Example: sitemap.xml',
-                    'path'           => 'Path',
-                    'path-info'      => 'Example: "/sitemap/" or "/" for base path',
-                    'save-btn'       => 'Save Sitemap',
-                    'title'          => 'Create Sitemap',
-                    'success'        => 'Sitemap created successfully',
-                    'delete-warning' => 'Are you sure, you want to perform this action?',
+            'sitemaps' => [
+                'index' => [
+                    'title'      => 'Sitemaps',
+                    'create-btn' => 'Create Sitemap',
+                    'sitemap'    => 'Sitemap',
+
+                    'datagrid' => [
+                        'id'              => 'ID',
+                        'file-name'       => 'File Name',
+                        'path'            => 'Path',
+                        'link-for-google' => 'Link for Google',
+                        'edit'            => 'Edit',
+                        'delete'          => 'Delete',
+                        'actions'         => 'Actions',
+                    ],
+
+                    'create'  => [
+                        'file-name'      => 'File Name',
+                        'file-name-info' => 'Example: sitemap.xml',
+                        'path'           => 'Path',
+                        'path-info'      => 'Example: "/sitemap/" or "/" for base path',
+                        'save-btn'       => 'Save Sitemap',
+                        'title'          => 'Create Sitemap',
+                        'success'        => 'Sitemap created successfully',
+                        'delete-warning' => 'Are you sure, you want to perform this action?',
+                    ],
+
+                    'edit'  => [
+                        'title'          => 'Edit Sitemap',
+                        'success'        => 'Sitemap Updated successfully',
+                        'delete-success' => 'Sitemap Deleted successfully',
+                    ],
                 ],
 
                 'edit'  => [
-                    'title'          => 'Edit Sitemap',
-                    'success'        => 'Sitemap Updated successfully',
-                    'delete-success' => 'Sitemap Deleted successfully',
+                    'back-btn'       => 'Back',
+                    'file-name'      => 'File Name',
+                    'file-name-info' => 'Example: sitemap.xml',
+                    'general'        => 'General',
+                    'path'           => 'Path',
+                    'path-info'      => 'Example: "/sitemap/" or "/" for base path',
+                    'save-btn'       => 'Save Sitemap',
                 ],
-            ],
 
-            'edit'  => [
-                'back-btn'       => 'Back',
-                'file-name'      => 'File Name',
-                'file-name-info' => 'Example: sitemap.xml',
-                'general'        => 'General',
-                'path'           => 'Path',
-                'path-info'      => 'Example: "/sitemap/" or "/" for base path',
-                'save-btn'       => 'Save Sitemap',
+                'delete-failed'  => ':name Deleted Failed',
             ],
-
-            'delete-failed'  => ':name Deleted Failed',
         ],
     ],
 
@@ -3268,6 +3297,8 @@ return [
                 'reviews'                  => 'Reviews',
                 'roles'                    => 'Roles',
                 'sales'                    => 'Sales',
+                'search-terms'             => 'Search Terms',
+                'search-seo'               => 'Search & SEO',
                 'shipments'                => 'Shipments',
                 'settings'                 => 'Settings',
                 'sitemaps'                 => 'Sitemaps',
@@ -3425,6 +3456,8 @@ return [
         'reviews'                  => 'Reviews',
         'roles'                    => 'Roles',
         'sales'                    => 'Sales',
+        'search-terms'             => 'Search Terms',
+        'search-seo'               => 'Search & SEO',
         'shipments'                => 'Shipments',
         'settings'                 => 'Settings',
         'subscribers'              => 'Newsletter Subscribers',
