@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-6e4e2a6a.css",
+    "file": "assets/app-9ffd4e80.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -8,12 +8,16 @@
     "file": "assets/bagisto-installer-9853d847.woff",
     "src": "src/Resources/assets/fonts/bagisto-installer.woff"
   },
-  "src/Resources/assets/images/bagisto-logo.svg": {
+  "src/Resources/assets/images/installer/bagisto-logo.svg": {
     "file": "assets/bagisto-logo-f02a1643.svg",
-    "src": "src/Resources/assets/images/bagisto-logo.svg"
+    "src": "src/Resources/assets/images/installer/bagisto-logo.svg"
+  },
+  "src/Resources/assets/images/installer/spinner.svg": {
+    "file": "assets/spinner-51c5cf50.svg",
+    "src": "src/Resources/assets/images/installer/spinner.svg"
   },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-b4c1ff6e.js",
+    "file": "assets/app-5243dc7a.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   }

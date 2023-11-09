@@ -55,21 +55,24 @@
                     >
                         <!-- Cart Item Image -->
                         <div class="">
-                            <img
-                                :src="item.base_image.small_image_url"
-                                class="max-w-[110px] max-h-[110px] rounded-[12px]"
-                            />
+                            <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
+                                <img
+                                    :src="item.base_image.small_image_url"
+                                    class="max-w-[110px] max-h-[110px] rounded-[12px]"
+                                />
+                            </a>
                         </div>
 
                         <!-- Cart Item Information -->
                         <div class="grid flex-1 gap-y-[10px] place-content-start justify-stretch">
                             <div class="flex flex-wrap justify-between">
-                                
-                                <p
-                                    class="text-[16px] font-medium max-w-[80%]"
-                                    v-text="item.name"
-                                >
-                                </p>
+                                <a  class="max-w-[80%]" :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
+                                    <p
+                                        class="text-[16px] font-medium"
+                                        v-text="item.name"
+                                    >
+                                    </p>
+                                </a>
 
                                 <p
                                     class="text-[18px]"

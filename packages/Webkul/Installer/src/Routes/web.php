@@ -15,6 +15,8 @@ Route::group(['middleware' => ['installer_locale']], function () {
 
             Route::post('run-migration', 'runMigration')->name('installer.run_migration');
 
+            Route::post('run-seeder', 'runSeeder')->name('installer.run_seeder');
+
             Route::post('admin-config-setup', 'adminConfigSetup')->name('installer.admin_config_setup');
 
             Route::post('smtp-config-setup', 'smtpConfigSetup')->name('installer.smtp_config_setup');

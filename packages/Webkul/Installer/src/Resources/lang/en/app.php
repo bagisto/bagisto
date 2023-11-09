@@ -367,6 +367,7 @@ return [
                 'euro'                => 'Euro (EUR)',
                 'english'             => 'English',
                 'french'              => 'French',
+                'german'              => 'German',
                 'hebrew'              => 'Hebrew',
                 'hindi'               => 'Hindi',
                 'iranian'             => 'Iranian Rial (IRR)',

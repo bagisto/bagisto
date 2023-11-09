@@ -61,6 +61,10 @@
 		content: "\e905";
 	}
 
+	.icon-error:before {
+        content: "\e917";
+    }
+
 	.required:after {
         @apply content-['*'];
     }
