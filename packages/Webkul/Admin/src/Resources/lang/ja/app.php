@@ -2016,7 +2016,7 @@ return [
                 'index' => [
                     'title'      => 'URLリライト',
                     'create-btn' => 'URLリライトを作成',
-            
+
                     'datagrid' => [
                         'id'                  => 'ID',
                         'for'                 => '対象',
@@ -2029,7 +2029,7 @@ return [
                         'actions'             => 'アクション',
                         'mass-delete-success' => '選択したURLリライトが正常に削除されました',
                     ],
-            
+
                     'create' => [
                         'for'                => '対象',
                         'product'            => '製品',
@@ -2046,7 +2046,7 @@ return [
                         'success'            => 'URLリライトが正常に作成されました',
                         'delete-warning'     => 'このアクションを実行してもよろしいですか？',
                     ],
-            
+
                     'edit' => [
                         'title'          => 'URLリライトの編集',
                         'success'        => 'URLリライトが正常に更新されました',

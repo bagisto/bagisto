@@ -2016,7 +2016,7 @@ return [
                 'index' => [
                     'title'      => 'Riorganizzazione URL',
                     'create-btn' => 'Crea una riorganizzazione URL',
-            
+
                     'datagrid' => [
                         'id'                  => 'ID',
                         'for'                 => 'Per',
@@ -2029,7 +2029,7 @@ return [
                         'actions'             => 'Azioni',
                         'mass-delete-success' => 'Le riorganizzazioni URL selezionate sono state eliminate con successo.',
                     ],
-            
+
                     'create' => [
                         'for'                => 'Per',
                         'product'            => 'Prodotto',
@@ -2046,7 +2046,7 @@ return [
                         'success'            => 'La riorganizzazione URL è stata creata con successo.',
                         'delete-warning'     => 'Sei sicuro di voler eseguire questa azione?',
                     ],
-            
+
                     'edit' => [
                         'title'          => 'Modifica la riorganizzazione URL',
                         'success'        => 'La riorganizzazione URL è stata aggiornata con successo.',

@@ -2016,7 +2016,7 @@ return [
                 'index' => [
                     'title'      => 'URL Yeniden Yönlendirmeleri',
                     'create-btn' => 'URL Yeniden Yönlendirme Oluştur',
-            
+
                     'datagrid' => [
                         'id'                  => 'ID',
                         'for'                 => 'İçin',
@@ -2029,7 +2029,7 @@ return [
                         'actions'             => 'İşlemler',
                         'mass-delete-success' => 'Seçili URL Yeniden Yönlendirmeleri Başarıyla Silindi',
                     ],
-            
+
                     'create' => [
                         'for'                => 'İçin',
                         'product'            => 'Ürün',
@@ -2046,7 +2046,7 @@ return [
                         'success'            => 'URL Yeniden Yönlendirmesi başarıyla oluşturuldu',
                         'delete-warning'     => 'Bu işlemi gerçekleştirmek istediğinizden emin misiniz?',
                     ],
-            
+
                     'edit' => [
                         'title'          => 'URL Yeniden Yönlendirmeyi Düzenle',
                         'success'        => 'URL Yeniden Yönlendirmesi başarıyla güncellendi',

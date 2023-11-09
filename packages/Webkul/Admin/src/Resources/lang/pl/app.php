@@ -2016,7 +2016,7 @@ return [
                 'index' => [
                     'title'      => 'Zapis URL',
                     'create-btn' => 'Utwórz nowy zapis URL',
-            
+
                     'datagrid' => [
                         'id'                  => 'ID',
                         'for'                 => 'Dla',
@@ -2029,7 +2029,7 @@ return [
                         'actions'             => 'Akcje',
                         'mass-delete-success' => 'Wybrane zapisy URL zostały pomyślnie usunięte.',
                     ],
-            
+
                     'create' => [
                         'for'                => 'Dla',
                         'product'            => 'Produkt',
@@ -2046,7 +2046,7 @@ return [
                         'success'            => 'Zapis URL został pomyślnie utworzony.',
                         'delete-warning'     => 'Czy na pewno chcesz wykonać tę akcję?',
                     ],
-            
+
                     'edit' => [
                         'title'          => 'Edytuj zapis URL',
                         'success'        => 'Zapis URL został pomyślnie zaktualizowany.',

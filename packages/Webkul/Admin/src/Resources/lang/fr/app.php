@@ -2011,12 +2011,12 @@ return [
 
                 'delete-failed' => ':name Suppression Échouée',
             ],
-            
+
             'url-rewrites' => [
                 'index' => [
                     'title'      => 'Réécritures d\'URL',
                     'create-btn' => 'Créer une réécriture d\'URL',
-            
+
                     'datagrid' => [
                         'id'                  => 'ID',
                         'for'                 => 'Pour',
@@ -2029,7 +2029,7 @@ return [
                         'actions'             => 'Actions',
                         'mass-delete-success' => 'Les réécritures d\'URL sélectionnées ont été supprimées avec succès.',
                     ],
-            
+
                     'create' => [
                         'for'                => 'Pour',
                         'product'            => 'Produit',
@@ -2046,7 +2046,7 @@ return [
                         'success'            => 'La réécriture d\'URL a été créée avec succès.',
                         'delete-warning'     => 'Êtes-vous sûr de vouloir effectuer cette action ?',
                     ],
-            
+
                     'edit' => [
                         'title'          => 'Modifier la réécriture d\'URL',
                         'success'        => 'La réécriture d\'URL a été mise à jour avec succès.',

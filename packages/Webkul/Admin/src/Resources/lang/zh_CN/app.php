@@ -2016,7 +2016,7 @@ return [
                 'index' => [
                     'title'      => 'URL 重写',
                     'create-btn' => '创建 URL 重写',
-            
+
                     'datagrid' => [
                         'id'                  => 'ID',
                         'for'                 => '适用对象',
@@ -2029,7 +2029,7 @@ return [
                         'actions'             => '操作',
                         'mass-delete-success' => '已成功删除选定的 URL 重写。',
                     ],
-            
+
                     'create' => [
                         'for'                => '适用对象',
                         'product'            => '产品',
@@ -2046,7 +2046,7 @@ return [
                         'success'            => '已成功创建 URL 重写。',
                         'delete-warning'     => '您确定要执行此操作吗？',
                     ],
-            
+
                     'edit' => [
                         'title'          => '编辑 URL 重写',
                         'success'        => '已成功更新 URL 重写。',

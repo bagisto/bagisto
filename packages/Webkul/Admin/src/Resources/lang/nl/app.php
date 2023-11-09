@@ -2016,7 +2016,7 @@ return [
                 'index' => [
                     'title'      => 'URL-herschrijvingen',
                     'create-btn' => 'URL-herschrijving maken',
-            
+
                     'datagrid' => [
                         'id'                  => 'ID',
                         'for'                 => 'Voor',
@@ -2029,7 +2029,7 @@ return [
                         'actions'             => 'Acties',
                         'mass-delete-success' => 'De geselecteerde URL-herschrijvingen zijn succesvol verwijderd.',
                     ],
-            
+
                     'create' => [
                         'for'                => 'Voor',
                         'product'            => 'Product',
@@ -2046,7 +2046,7 @@ return [
                         'success'            => 'URL-herschrijving succesvol gemaakt',
                         'delete-warning'     => 'Weet u zeker dat u deze actie wilt uitvoeren?',
                     ],
-            
+
                     'edit' => [
                         'title'          => 'URL-herschrijving bewerken',
                         'success'        => 'URL-herschrijving succesvol bijgewerkt',

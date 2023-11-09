@@ -2016,7 +2016,7 @@ return [
                 'index' => [
                     'title'      => 'URL-Weiterleitungen',
                     'create-btn' => 'URL-Weiterleitung erstellen',
-            
+
                     'datagrid' => [
                         'id'                  => 'ID',
                         'for'                 => 'Für',
@@ -2029,7 +2029,7 @@ return [
                         'actions'             => 'Aktionen',
                         'mass-delete-success' => 'Ausgewählte URL-Weiterleitungen erfolgreich gelöscht',
                     ],
-            
+
                     'create' => [
                         'for'                => 'Für',
                         'product'            => 'Produkt',
@@ -2046,7 +2046,7 @@ return [
                         'success'            => 'URL-Weiterleitung erfolgreich erstellt',
                         'delete-warning'     => 'Sind Sie sicher, dass Sie diese Aktion ausführen möchten?',
                     ],
-            
+
                     'edit' => [
                         'title'          => 'URL-Weiterleitung bearbeiten',
                         'success'        => 'URL-Weiterleitung erfolgreich aktualisiert',

@@ -2016,7 +2016,7 @@ return [
                 'index' => [
                     'title'      => 'Reescritas de URL',
                     'create-btn' => 'Criar nova reescrita de URL',
-            
+
                     'datagrid' => [
                         'id'                  => 'ID',
                         'for'                 => 'Para',
@@ -2029,7 +2029,7 @@ return [
                         'actions'             => 'Ações',
                         'mass-delete-success' => 'As reescritas de URL selecionadas foram excluídas com sucesso.',
                     ],
-            
+
                     'create' => [
                         'for'                => 'Para',
                         'product'            => 'Produto',
@@ -2046,7 +2046,7 @@ return [
                         'success'            => 'Reescrita de URL criada com sucesso.',
                         'delete-warning'     => 'Tem certeza de que deseja realizar esta ação?',
                     ],
-            
+
                     'edit' => [
                         'title'          => 'Editar reescrita de URL',
                         'success'        => 'Reescrita de URL atualizada com sucesso.',
