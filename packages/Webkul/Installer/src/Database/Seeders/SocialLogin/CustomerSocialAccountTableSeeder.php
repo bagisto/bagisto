@@ -8,7 +8,13 @@ use Illuminate\Support\Facades\DB;
 
 class CustomerSocialAccountTableSeeder extends Seeder
 {
-    public function run()
+    /**
+     * Seed the application's database.
+     *
+     * @param  array  $parameters
+     * @return void
+     */
+    public function run($parameters = [])
     {
         $now = Carbon::now();
 

@@ -160,7 +160,7 @@ class Reporting
         return [
             'visitors' => [
                 'total'    => $totalVisitors = $this->visitorReporting->getTotalUniqueVisitors($startDate, $endDate),
-                'progress' => 100,
+                'progress' => $totalVisitors ? 100 : 0,
             ],
 
             'product_visitors' => [
@@ -924,6 +924,56 @@ class Reporting
         });
 
         return $products;
+    }
+
+    /**
+     * Returns the last search terms
+     *
+     * @param  string  $type
+     */
+    public function getLastSearchTerms($type = 'graph'): EloquentCollection|array
+    {
+        if ($type == 'table') {
+            $records = $this->productReporting->getLastSearchTerms();
+
+            return [
+                'columns' => [
+                    [
+                        'key'   => 'id',
+                        'label' => trans('admin::app.reporting.products.index.id'),
+                    ], [
+                        'key'   => 'term',
+                        'label' => trans('admin::app.reporting.products.index.search-term'),
+                    ], [
+                        'key'   => 'results',
+                        'label' => trans('admin::app.reporting.products.index.results'),
+                    ], [
+                        'key'   => 'uses',
+                        'label' => trans('admin::app.reporting.products.index.uses'),
+                    ], [
+                        'key'   => 'channel_id',
+                        'label' => trans('admin::app.reporting.products.index.channel'),
+                    ], [
+                        'key'   => 'locale',
+                        'label' => trans('admin::app.reporting.products.index.locale'),
+                    ],
+                ],
+
+                'records'  => $records,
+            ];
+        }
+
+        return $this->productReporting->getLastSearchTerms(5);
+    }
+
+    /**
+     * Returns the top search terms
+     *
+     * @param  string  $type
+     */
+    public function getTopSearchTerms($type = 'graph'): EloquentCollection|array
+    {
+        return $this->productReporting->getTopSearchTerms(5);
     }
 
     /**

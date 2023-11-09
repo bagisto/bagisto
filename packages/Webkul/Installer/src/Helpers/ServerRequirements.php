@@ -19,16 +19,16 @@ class ServerRequirements
         // Server Requirements
         $requirements = [
             'php' => [
-                'Calendar',
-                'cType',
-                'cURL',
+                'calendar',
+                'ctype',
+                'curl',
                 'dom',
                 'fileinfo',
                 'filter',
                 'gd',
                 'hash',
                 'intl',
-                'JSON',
+                'json',
                 'mbstring',
                 'openssl',
                 'pcre',

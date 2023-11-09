@@ -68,6 +68,7 @@
 
                         <button
                             class="absolute bottom-[15px] left-[50%] py-[11px] px-[43px] bg-white rounded-xl text-navyBlue text-xs w-max font-medium cursor-pointer -translate-x-[50%] translate-y-[54px] group-hover:translate-y-0 transition-all duration-300"
+                            :disabled="! product.is_saleable"
                             @click="addToCart()"
                         >
                             @lang('shop::app.components.products.card.add-to-cart')
@@ -104,8 +105,11 @@
                     <x-shop::media.images.lazy
                         class="min-w-[250px] relative after:content-[' '] after:block after:pb-[calc(100%+9px)] bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
                         ::src="product.base_image.medium_image_url"
+                        ::key="product.id"
+                        ::index="product.id"
                         width="291"
                         height="300"
+                        ::alt="product.name"
                     ></x-shop::media.images.lazy>
                 </a>
             

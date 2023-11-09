@@ -76,6 +76,10 @@ class ElasticSearchRepository
     {
         $params = request()->input();
 
+        if (! empty($params['query'])) {
+            $params['name'] = $params['query'];
+        }
+
         $filterableAttributes = $this->attributeRepository
             ->getProductDefaultAttributes(array_keys($params));
 

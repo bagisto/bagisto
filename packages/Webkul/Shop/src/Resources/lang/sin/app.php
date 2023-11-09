@@ -427,7 +427,7 @@ return [
 
         'products' => [
             'card' => [
-                'card.add-to-compare-success' => 'අයිතමය සාමාජිකයකු සඳහා සාක්ෂි ලැබුයේ.',
+                'add-to-compare-success'      => 'අයිතමය සාමාජිකයකු සඳහා සාක්ෂි ලැබුයේ.',
                 'already-in-compare'          => 'අයිතමය සාක්ෂි ලැබුයේ.',
                 'add-to-cart'                 => 'කරත්තයට එක් කරන්න',
                 'add-to-wishlist'             => 'පෙරහුරු සාක්ෂි කිරීම',
@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => 'සෙවුම් සහිත ප්‍රතිඵල: :query',
+        'title'   => 'සෙවුම් සහිත ප්‍රතිඵල: :query',
+        'results' => 'සෙවුම් ප්‍රතිඵල',
 
         'images' => [
             'index' => [

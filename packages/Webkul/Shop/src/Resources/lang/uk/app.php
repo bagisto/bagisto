@@ -427,7 +427,7 @@ return [
 
         'products' => [
             'card' => [
-                'card.add-to-compare-success' => 'Товар успішно додано до списку порівнянь.',
+                'add-to-compare-success'      => 'Товар успішно додано до списку порівнянь.',
                 'already-in-compare'          => 'Товар вже додано до списку порівнянь.',
                 'add-to-cart'                 => 'Додати до Кошика',
                 'add-to-wishlist'             => 'Додати до Списку Бажань',
@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => 'Результати пошуку для : :query',
+        'title'   => 'Результати пошуку для : :query',
+        'results' => 'Результати пошуку',
 
         'images' => [
             'index' => [

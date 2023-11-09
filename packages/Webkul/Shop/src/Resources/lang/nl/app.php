@@ -427,7 +427,7 @@ return [
 
         'products' => [
             'card' => [
-                'card.add-to-compare-success' => 'Item succesvol toegevoegd aan vergelijkingslijst.',
+                'add-to-compare-success'      => 'Item succesvol toegevoegd aan vergelijkingslijst.',
                 'already-in-compare'          => 'Item is al toegevoegd aan vergelijkingslijst.',
                 'add-to-cart'                 => 'Toevoegen aan winkelwagen',
                 'add-to-wishlist'             => 'Toevoegen aan verlanglijstje',
@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => 'Zoekresultaten voor : :query',
+        'title'   => 'Zoekresultaten voor : :query',
+        'results' => 'Zoekresultaten',
 
         'images' => [
             'index' => [

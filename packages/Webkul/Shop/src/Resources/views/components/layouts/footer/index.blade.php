@@ -4,7 +4,7 @@
     The category repository is injected directly here because there is no way
     to retrieve it from the view composer, as this is an anonymous component.
 --}}
-@inject('themeCustomizationRepository', 'Webkul\Shop\Repositories\ThemeCustomizationRepository')
+@inject('themeCustomizationRepository', 'Webkul\Theme\Repositories\ThemeCustomizationRepository')
 
 {{--
     This code needs to be refactored to reduce the amount of PHP in the Blade
