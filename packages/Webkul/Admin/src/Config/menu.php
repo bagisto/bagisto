@@ -189,7 +189,7 @@ return [
     ], [
         'key'        => 'marketing.search_seo',
         'name'       => 'admin::app.components.layouts.sidebar.search-seo',
-        'route'      => 'admin.marketing.search_seo.sitemaps.index',
+        'route'      => 'admin.marketing.search_seo.search_terms.index',
         'sort'       => 3,
         'icon'       => '',
     ], [
