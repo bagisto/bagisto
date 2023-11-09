@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('theme_customizations', function (Blueprint $table) {
+        Schema::create('search_terms', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('type');
-            $table->string('name');
-            $table->integer('sort_order');
-            $table->boolean('status')->default(0);
+            $table->string('term');
+            $table->integer('results')->default(0);
+            $table->integer('uses')->default(0);
+            $table->string('redirect_url')->nullable();
+            $table->boolean('display_in_suggested_terms')->default(0);
+            $table->string('locale');
 
             $table->integer('channel_id')->unsigned();
             $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('theme_customizations');
+        Schema::dropIfExists('search_terms');
     }
 };

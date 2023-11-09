@@ -1,22 +1,22 @@
 <x-admin::layouts>
     <!-- Title of the page -->
     <x-slot:title>
-        @lang('admin::app.marketing.sitemaps.index.title')
+        @lang('admin::app.marketing.search-seo.sitemaps.index.title')
     </x-slot:title>
 
-    {!! view_render_event('bagisto.admin.marketing.sitemaps.create.before') !!}
+    {!! view_render_event('bagisto.admin.marketing.search_seo.sitemaps.create.before') !!}
 
     <!-- Create Sitemap Vue Component -->
     <v-create-sitemaps>
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
-                @lang('admin::app.marketing.sitemaps.index.title')
+                @lang('admin::app.marketing.search-seo.sitemaps.index.title')
             </p>
 
             <!-- Create Button -->
-            @if (bouncer()->hasPermission('marketing.sitemaps.create'))
+            @if (bouncer()->hasPermission('marketing.search_seo.sitemaps.create'))
                 <div class="primary-button">
-                    @lang('admin::app.marketing.sitemaps.index.create-btn')
+                    @lang('admin::app.marketing.search-seo.sitemaps.index.create-btn')
                 </div>
             @endif
         </div>
@@ -25,7 +25,7 @@
         <x-admin::shimmer.datagrid/>
     </v-create-sitemaps>
 
-    {!! view_render_event('bagisto.admin.marketing.sitemaps.create.after') !!}
+    {!! view_render_event('bagisto.admin.marketing.search_seo.sitemaps.create.after') !!}
 
     @pushOnce('scripts')
         <script
@@ -34,28 +34,28 @@
         >
             <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
                 <p class="text-[20px] text-gray-800 dark:text-white font-bold">
-                    @lang('admin::app.marketing.sitemaps.index.title')
+                    @lang('admin::app.marketing.search-seo.sitemaps.index.title')
                 </p>
 
                 <!-- Create Button -->
-                @if (bouncer()->hasPermission('marketing.sitemaps.create'))
+                @if (bouncer()->hasPermission('marketing.search_seo.sitemaps.create'))
                     <div
                         class="primary-button"
                         @click="selectedSitemap=0; $refs.sitemap.toggle()"
                     >
-                        @lang('admin::app.marketing.sitemaps.index.create-btn')
+                        @lang('admin::app.marketing.search-seo.sitemaps.index.create-btn')
                     </div>
                 @endif
             </div>
 
-            {!! view_render_event('admin.marketing.sitemaps.list.before') !!}
+            {!! view_render_event('admin.marketing.search_seo.sitemaps.list.before') !!}
 
             <x-admin::datagrid
-                src="{{ route('admin.marketing.promotions.sitemaps.index') }}"
+                src="{{ route('admin.marketing.search_seo.sitemaps.index') }}"
                 ref="datagrid"
             >
                 @php
-                    $hasPermission = bouncer()->hasPermission('marketing.sitemaps.edit') || bouncer()->hasPermission('marketing.sitemaps.delete');
+                    $hasPermission = bouncer()->hasPermission('marketing.search_seo.sitemaps.edit') || bouncer()->hasPermission('marketing.search_seo.sitemaps.delete');
                 @endphp
 
                 <!-- Datagrid Header -->
@@ -147,7 +147,7 @@
                 </template>
             </x-admin::datagrid>
 
-            {!! view_render_event('admin.marketing.sitemaps.list.after') !!}
+            {!! view_render_event('admin.marketing.search_seo.sitemaps.list.after') !!}
 
             <!-- Model Form -->
             <x-admin::form
@@ -168,7 +168,7 @@
                                 class="text-[18px] text-gray-800 dark:text-white font-bold"
                                 v-if="selectedSitemap"
                             >
-                                @lang('admin::app.marketing.sitemaps.index.edit.title')
+                                @lang('admin::app.marketing.search-seo.sitemaps.index.edit.title')
                             </p>
 
                             <!-- Edit Modal title -->
@@ -176,7 +176,7 @@
                                 class="text-[18px] text-gray-800 dark:text-white font-bold"
                                 v-else
                             >
-                                @lang('admin::app.marketing.sitemaps.index.create.title')
+                                @lang('admin::app.marketing.search-seo.sitemaps.index.create.title')
                             </p>
                         </x-slot:header>
 
@@ -193,7 +193,7 @@
                                 <!-- File Name -->
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.marketing.sitemaps.index.create.file-name')
+                                        @lang('admin::app.marketing.search-seo.sitemaps.index.create.file-name')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -201,8 +201,8 @@
                                         name="file_name"
                                         :value="old('file_name')"
                                         rules="required"
-                                        :label="trans('admin::app.marketing.sitemaps.index.create.file-name')"
-                                        :placeholder="trans('admin::app.marketing.sitemaps.index.create.file-name')"
+                                        :label="trans('admin::app.marketing.search-seo.sitemaps.index.create.file-name')"
+                                        :placeholder="trans('admin::app.marketing.search-seo.sitemaps.index.create.file-name')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -212,7 +212,7 @@
                                     </x-admin::form.control-group.error>
 
                                     <p class="mt-[8px] ltr:ml-[4px] rtl:mr-[4px] text-[12px] text-gray-600 dark:text-gray-300 font-medium">
-                                        @lang('admin::app.marketing.sitemaps.index.create.file-name-info')
+                                        @lang('admin::app.marketing.search-seo.sitemaps.index.create.file-name-info')
                                     </p>
 
                                 </x-admin::form.control-group>
@@ -220,7 +220,7 @@
                                 <!-- File Path -->
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.marketing.sitemaps.index.create.path')
+                                        @lang('admin::app.marketing.search-seo.sitemaps.index.create.path')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -228,8 +228,8 @@
                                         name="path"
                                         :value="old('path')"
                                         rules="required"
-                                        :label="trans('admin::app.marketing.sitemaps.index.create.path')"
-                                        :placeholder="trans('admin::app.marketing.sitemaps.index.create.path')"
+                                        :label="trans('admin::app.marketing.search-seo.sitemaps.index.create.path')"
+                                        :placeholder="trans('admin::app.marketing.search-seo.sitemaps.index.create.path')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -239,7 +239,7 @@
                                     </x-admin::form.control-group.error>
 
                                     <p class="mt-[8px] ltr:ml-[4px] rtl:mr-[4px] text-[12px] text-gray-600 dark:text-gray-300 font-medium">
-                                        @lang('admin::app.marketing.sitemaps.index.create.path-info')
+                                        @lang('admin::app.marketing.search-seo.sitemaps.index.create.path-info')
                                     </p>
                                 </x-admin::form.control-group>
                             </div>
@@ -248,7 +248,7 @@
                         <x-slot:footer>
                             <!-- Save Button -->
                             <button class="primary-button">
-                                @lang('admin::app.marketing.sitemaps.index.create.save-btn')
+                                @lang('admin::app.marketing.search-seo.sitemaps.index.create.save-btn')
                             </button>
                         </x-slot:footer>
                     </x-admin::modal>
@@ -274,7 +274,7 @@
                             formData.append('_method', 'put');
                         }
 
-                        this.$axios.post(params.id ? "{{ route('admin.marketing.promotions.sitemaps.update') }}" : "{{ route('admin.marketing.promotions.sitemaps.store') }}", formData )
+                        this.$axios.post(params.id ? "{{ route('admin.marketing.search_seo.sitemaps.update') }}" : "{{ route('admin.marketing.search_seo.sitemaps.store') }}", formData )
                             .then((response) => {
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 

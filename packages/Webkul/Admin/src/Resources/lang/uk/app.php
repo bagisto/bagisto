@@ -1922,51 +1922,95 @@ return [
             ],
         ],
 
-        'sitemaps' => [
-            'index' => [
-                'title'      => 'Карта сайту',
-                'create-btn' => 'Створити карту сайту',
-                'sitemap'    => 'Карта сайту',
+        'search-seo' => [
+            'search-terms' => [
+                'index' => [
+                    'title'      => 'Терміни пошуку',
+                    'create-btn' => 'Створити новий термін пошуку',
 
-                'datagrid' => [
-                    'id'              => 'ID',
-                    'file-name'       => 'Ім я файлу',
-                    'path'            => 'Шлях',
-                    'link-for-google' => 'Посилання для Google',
-                    'edit'            => 'Редагувати',
-                    'delete'          => 'Видалити',
-                    'actions'         => 'Дії',
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'search-query'        => 'Пошукова фраза',
+                        'Channel'             => 'Канал',
+                        'results'             => 'Результати',
+                        'uses'                => 'Використання',
+                        'redirect-url'        => 'URL переадресації',
+                        'channel'             => 'Канал',
+                        'locale'              => 'Локаль',
+                        'edit'                => 'Редагувати',
+                        'delete'              => 'Видалити',
+                        'actions'             => 'Дії',
+                        'mass-delete-success' => 'Вибрані терміни пошуку успішно видалено',
+                    ],
+
+                    'create' => [
+                        'search-query'   => 'Пошукова фраза',
+                        'Channel'        => 'Канал',
+                        'results'        => 'Результати',
+                        'uses'           => 'Використання',
+                        'redirect-url'   => 'URL переадресації',
+                        'channel'        => 'Канал',
+                        'locale'         => 'Локаль',
+                        'save-btn'       => 'Зберегти термін пошуку',
+                        'title'          => 'Створити новий термін пошуку',
+                        'success'        => 'Термін пошуку успішно створено',
+                        'delete-warning' => 'Ви впевнені, що хочете виконати цю дію?',
+                    ],
+
+                    'edit' => [
+                        'title'          => 'Редагувати термін пошуку',
+                        'success'        => 'Термін пошуку успішно оновлено',
+                        'delete-success' => 'Термін пошуку успішно видалено',
+                    ],
                 ],
+            ],
 
-                'create'  => [
-                    'file-name'      => 'Ім я файлу',
-                    'file-name-info' => 'Приклад: sitemap.xml',
-                    'path'           => 'Шлях',
-                    'path-info'      => 'Приклад: "/sitemap/" або "/" для базового шляху',
-                    'save-btn'       => 'Зберегти карту сайту',
-                    'title'          => 'Створити карту сайту',
-                    'success'        => 'Карта сайту успішно створена',
-                    'delete-warning' => 'Ви впевнені, що хочете виконати цю дію?',
+            'sitemaps' => [
+                'index' => [
+                    'title'      => 'Карта сайту',
+                    'create-btn' => 'Створити карту сайту',
+                    'sitemap'    => 'Карта сайту',
+
+                    'datagrid' => [
+                        'id'              => 'ID',
+                        'file-name'       => 'Ім я файлу',
+                        'path'            => 'Шлях',
+                        'link-for-google' => 'Посилання для Google',
+                        'edit'            => 'Редагувати',
+                        'delete'          => 'Видалити',
+                        'actions'         => 'Дії',
+                    ],
+
+                    'create'  => [
+                        'file-name'      => 'Ім я файлу',
+                        'file-name-info' => 'Приклад: sitemap.xml',
+                        'path'           => 'Шлях',
+                        'path-info'      => 'Приклад: "/sitemap/" або "/" для базового шляху',
+                        'save-btn'       => 'Зберегти карту сайту',
+                        'title'          => 'Створити карту сайту',
+                        'success'        => 'Карта сайту успішно створена',
+                        'delete-warning' => 'Ви впевнені, що хочете виконати цю дію?',
+                    ],
+
+                    'edit'  => [
+                        'title'          => 'Редагувати карту сайту',
+                        'success'        => 'Карта сайту успішно оновлена',
+                        'delete-success' => 'Карта сайту успішно видалена',
+                    ],
                 ],
 
                 'edit'  => [
-                    'title'          => 'Редагувати карту сайту',
-                    'success'        => 'Карта сайту успішно оновлена',
-                    'delete-success' => 'Карта сайту успішно видалена',
+                    'back-btn'       => 'Назад',
+                    'file-name'      => 'Ім я файлу',
+                    'file-name-info' => 'Приклад: sitemap.xml',
+                    'general'        => 'Загальне',
+                    'path'           => 'Шлях',
+                    'path-info'      => 'Приклад: "/sitemap/" або "/" для базового шляху',
+                    'save-btn'       => 'Зберегти карту сайту',
                 ],
-            ],
 
-            'edit'  => [
-                'back-btn'       => 'Назад',
-                'file-name'      => 'Ім я файлу',
-                'file-name-info' => 'Приклад: sitemap.xml',
-                'general'        => 'Загальне',
-                'path'           => 'Шлях',
-                'path-info'      => 'Приклад: "/sitemap/" або "/" для базового шляху',
-                'save-btn'       => 'Зберегти карту сайту',
+                'delete-failed'  => ':name Видалення не вдалося',
             ],
-
-            'delete-failed'  => ':name Видалення не вдалося',
         ],
     ],
 
@@ -2704,28 +2748,36 @@ return [
 
         'products' => [
             'index' => [
+                'channel'                          => 'Канал',
                 'end-date'                         => 'Дата закінчення',
                 'id'                               => 'Ідентифікатор',
                 'interval'                         => 'Інтервал',
+                'last-search-terms'                => 'Останні запити для пошуку',
+                'locale'                           => 'Мова',
                 'name'                             => 'Назва',
                 'orders'                           => 'Замовлення',
                 'price'                            => 'Ціна',
                 'products-added-over-time'         => 'Товари, додані з часом',
                 'products-with-most-reviews'       => 'Товари з найбільшою кількістю відгуків',
                 'products-with-most-visits'        => 'Товари з найбільшою кількістю відвідувань',
-                'quantities'                       => 'Кількість',
                 'quantities-sold-over-time'        => 'Кількість проданих товарів відносно часу',
+                'quantities'                       => 'Кількість',
+                'results'                          => 'Результати',
                 'revenue'                          => 'Дохід',
                 'reviews'                          => 'Відгуки',
+                'search-term'                      => 'Запит для пошуку',
                 'start-date'                       => 'Дата початку',
                 'title'                            => 'Товари',
+                'top-search-terms'                 => 'Найбільш популярні запити для пошуку',
                 'top-selling-products-by-quantity' => 'Топові товари за кількістю',
                 'top-selling-products-by-revenue'  => 'Топові товари за доходом',
-                'total'                            => 'Усього',
                 'total-products-added-to-wishlist' => 'Товари, додані в список бажань',
                 'total-sold-quantities'            => 'Загальна кількість проданих товарів',
+                'total'                            => 'Усього',
+                'uses'                             => 'Використання',
                 'view-details'                     => 'Переглянути деталі',
                 'visits'                           => 'Відвідувань',
+                'visits'                           => 'Візити',
             ],
         ],
 
@@ -3267,6 +3319,8 @@ return [
                 'reviews'                  => 'Відгуки',
                 'roles'                    => 'Ролі',
                 'sales'                    => 'Продажі',
+                'search-terms'             => 'Пошукові терміни',
+                'search-seo'               => 'Пошук та SEO',
                 'shipments'                => 'Відвантаження',
                 'settings'                 => 'Налаштування',
                 'sitemaps'                 => 'Карти сайту',
@@ -3422,6 +3476,8 @@ return [
         'reviews'                  => 'Відгуки',
         'roles'                    => 'Ролі',
         'sales'                    => 'Продажі',
+        'search-terms'             => 'Пошукові терміни',
+        'search-seo'               => 'Пошук та SEO',
         'shipments'                => 'Відправки',
         'settings'                 => 'Налаштування',
         'subscribers'              => 'Підписники на розсилку',

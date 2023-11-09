@@ -1921,52 +1921,96 @@ return [
             ],
         ],
 
-        'sitemaps' => [
-            'index' => [
-                'title'      => 'සයිට්‌මැප්',
-                'create-btn' => 'සයිට්‌මැප් සාදන්න',
-                'sitemap'    => 'සයිට්‌මැප්',
+        'search-seo' => [
+            'search-terms' => [
+                'index' => [
+                    'title'      => 'සෙවුම් නියමයන්',
+                    'create-btn' => 'සෙවුම් පදය සාදන්න',
 
-                'datagrid' => [
-                    'id'              => 'අංකය',
-                    'file-name'       => 'ගොනුවේ නම',
-                    'path'            => 'මාර්ගය',
-                    'link-for-google' => 'ගූගල් සමඟ සබැඳිය',
-                    'edit'            => 'සංස්කරණය',
-                    'delete'          => 'මකාදමන්',
-                    'actions'         => 'ක්‍රියා',
+                    'datagrid' => [
+                        'id'                  => 'හැඳුනුම්පත',
+                        'search-query'        => 'සෙවුම් විමසුම',
+                        'Channel'             => 'නාලිකාව',
+                        'results'             => 'ප්රතිපල',
+                        'uses'                => 'භාවිතා කරයි',
+                        'redirect-url'        => 'හරවා යවන්න Url',
+                        'channel'             => 'නාලිකාව',
+                        'locale'              => 'දේශීය',
+                        'edit'                => 'සංස්කරණය කරන්න',
+                        'delete'              => 'මකන්න',
+                        'actions'             => 'ක්රියාවන්',
+                        'mass-delete-success' => 'තෝරාගත් සෙවුම් නියමයන් සාර්ථකව මකා ඇත',
+                    ],
+
+                    'create' => [
+                        'search-query'   => 'සෙවුම් විමසුම',
+                        'Channel'        => 'නාලිකාව',
+                        'results'        => 'ප්රතිපල',
+                        'uses'           => 'භාවිතා කරයි',
+                        'redirect-url'   => 'හරවා යවන්න Url',
+                        'channel'        => 'නාලිකාව',
+                        'locale'         => 'දේශීය',
+                        'save-btn'       => 'සෙවුම් පදය සුරකින්න',
+                        'title'          => 'සෙවුම් පදය සාදන්න',
+                        'success'        => 'සෙවුම් පදය සාර්ථකව නිර්මාණය කරන ලදී',
+                        'delete-warning' => 'ඔබට මෙම ක්‍රියාව සිදු කිරීමට අවශ්‍ය බව විශ්වාසද?',
+                    ],
+
+                    'edit' => [
+                        'title'          => 'සෙවුම් පදය සංස්කරණය කරන්න',
+                        'success'        => 'සෙවුම් පදය සාර්ථකව යාවත්කාලීන කරන ලදී',
+                        'delete-success' => 'සෙවුම් පදය සාර්ථකව මකා ඇත',
+                    ],
                 ],
+            ],
 
-                'create'  => [
-                    'file-name'      => 'ගොනුවේ නම',
-                    'file-name-info' => 'උදා: sitemap.xml',
-                    'path'           => 'මාර්ගය',
-                    'path-info'      => 'උදාරම: "/sitemap/" හෝ "/" ප්‍රමාණවත් සමූහය සඳහා',
-                    'save-btn'       => 'සයිට්‌මැප් සුරකින්න',
-                    'title'          => 'සයිට්‌මැප් සාදන්න',
-                    'success'        => 'සයිට්‌මැප් සාර්ථකව සාදන ලදි',
-                    'delete-warning' => 'ඔබට මෙම ක්‍රියාන්විය කලමනාකර, මම නිවැරදියියේයයිද?',
+            'sitemaps' => [
+                'index' => [
+                    'title'      => 'සයිට්‌මැප්',
+                    'create-btn' => 'සයිට්‌මැප් සාදන්න',
+                    'sitemap'    => 'සයිට්‌මැප්',
 
+                    'datagrid' => [
+                        'id'              => 'අංකය',
+                        'file-name'       => 'ගොනුවේ නම',
+                        'path'            => 'මාර්ගය',
+                        'link-for-google' => 'ගූගල් සමඟ සබැඳිය',
+                        'edit'            => 'සංස්කරණය',
+                        'delete'          => 'මකාදමන්',
+                        'actions'         => 'ක්‍රියා',
+                    ],
+
+                    'create'  => [
+                        'file-name'      => 'ගොනුවේ නම',
+                        'file-name-info' => 'උදා: sitemap.xml',
+                        'path'           => 'මාර්ගය',
+                        'path-info'      => 'උදාරම: "/sitemap/" හෝ "/" ප්‍රමාණවත් සමූහය සඳහා',
+                        'save-btn'       => 'සයිට්‌මැප් සුරකින්න',
+                        'title'          => 'සයිට්‌මැප් සාදන්න',
+                        'success'        => 'සයිට්‌මැප් සාර්ථකව සාදන ලදි',
+                        'delete-warning' => 'ඔබට මෙම ක්‍රියාන්විය කලමනාකර, මම නිවැරදියියේයයිද?',
+
+                    ],
+
+                    'edit'  => [
+                        'title'          => 'සයිට්‌මැප් සංස්කරණය',
+                        'success'        => 'සයිට්‌මැප් සාර්ථකව යාවත් කළ ලදි',
+                        'delete-success' => 'සයිට්‌මැප් ඉවත් කළ සාර්ථකයි',
+                    ],
                 ],
 
                 'edit'  => [
-                    'title'          => 'සයිට්‌මැප් සංස්කරණය',
-                    'success'        => 'සයිට්‌මැප් සාර්ථකව යාවත් කළ ලදි',
-                    'delete-success' => 'සයිට්‌මැප් ඉවත් කළ සාර්ථකයි',
+                    'back-btn'       => 'ආපසු',
+                    'file-name'      => 'ගොනුවේ නම',
+                    'file-name-info' => 'උදා: sitemap.xml',
+                    'general'        => 'සාමාන්‍ය',
+                    'path'           => 'මාර්ගය',
+                    'path-info'      => 'උදාරම: "/sitemap/" හෝ "/" ප්‍රමාණවත් සමූහය සඳහා',
+                    'save-btn'       => 'සයිට්‌මැප් සුරකින්න',
                 ],
-            ],
 
-            'edit'  => [
-                'back-btn'       => 'ආපසු',
-                'file-name'      => 'ගොනුවේ නම',
-                'file-name-info' => 'උදා: sitemap.xml',
-                'general'        => 'සාමාන්‍ය',
-                'path'           => 'මාර්ගය',
-                'path-info'      => 'උදාරම: "/sitemap/" හෝ "/" ප්‍රමාණවත් සමූහය සඳහා',
-                'save-btn'       => 'සයිට්‌මැප් සුරකින්න',
+                'delete-failed'  => ':name මකාදම් කිරීම අසාර්ථකයි',
             ],
-
-            'delete-failed'  => ':name මකාදම් කිරීම අසාර්ථකයි',
         ],
     ],
 
@@ -2704,28 +2748,36 @@ return [
 
         'products' => [
             'index' => [
+                'channel'                          => 'නාලිකාව',
                 'end-date'                         => 'අවසන් දිනය',
                 'id'                               => 'ID',
                 'interval'                         => 'කවරක',
+                'last-search-terms'                => 'කලින් සොයාගත් යෙදුම්',
+                'locale'                           => 'ස්ථානය',
                 'name'                             => 'නම',
                 'orders'                           => 'ඇණවුම්',
                 'price'                            => 'මිල',
                 'products-added-over-time'         => 'වේවා සහ෷ානය එකතු',
                 'products-with-most-reviews'       => 'වාර්ෂා සහ෷ානය සහ෷ානය',
                 'products-with-most-visits'        => 'වාර්ෂා සහ෷ානය සහ෷ානය',
-                'quantities'                       => 'ප්රමාණ',
                 'quantities-sold-over-time'        => 'කාලය හා ප්රමාණ',
+                'quantities'                       => 'ප්රමාණ',
+                'results'                          => 'ප්‍රතිඵල',
                 'revenue'                          => 'ආදානය',
                 'reviews'                          => 'වාර්ෂා',
+                'search-term'                      => 'සොයාගත් යෙදුම',
                 'start-date'                       => 'ආරම්භදාය',
                 'title'                            => 'නිෂ්පාදන',
+                'top-search-terms'                 => 'ප්‍රධාන සොයාගත් යෙදුම්',
                 'top-selling-products-by-quantity' => 'ප්රමාණ හා ඉසස් කරන නිෂ්පාදන',
                 'top-selling-products-by-revenue'  => 'ආදානය හා ඉසස් කරන නිෂ්පාදන',
-                'total'                            => 'මුළු',
                 'total-products-added-to-wishlist' => 'වේවා සහ෷ානය කරන',
                 'total-sold-quantities'            => 'මිලදී කරන ප්රමාණ',
+                'total'                            => 'මුළු',
+                'uses'                             => 'භාවිතයන්',
                 'view-details'                     => 'අදවොකුණු බැඳ',
                 'visits'                           => 'පිළිබඳවය',
+                'visits'                           => 'සංචාරයන්',
             ],
         ],
 
@@ -3267,6 +3319,8 @@ return [
                 'reviews'                  => 'විභාග',
                 'roles'                    => 'භූමිකා',
                 'sales'                    => 'මිල',
+                'search-terms'             => 'සෙවුම් වචන',
+                'search-seo'               => 'සෙවුම් සහ අන්තර්ගත අධිකරණය',
                 'shipments'                => 'වෙළෙන්දා',
                 'settings'                 => 'සැකසුම්',
                 'sitemaps'                 => 'සටහන්ද',
@@ -3422,6 +3476,8 @@ return [
         'reviews'                  => 'සටහන්',
         'roles'                    => 'භූමිකවරු',
         'sales'                    => 'ගිණුම්',
+        'search-terms'             => 'සෙවුම් වචන',
+        'search-seo'               => 'සෙවුම් සහ අන්තර්ගත අධිකරණය',
         'shipments'                => 'නවතම',
         'settings'                 => 'සැකසුම්',
         'subscribers'              => 'නිළියුක්කාරයාගේ',

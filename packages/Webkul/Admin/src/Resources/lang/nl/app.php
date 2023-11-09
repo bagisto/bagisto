@@ -1923,50 +1923,94 @@ return [
 
         ],
 
-        'sitemaps' => [
-            'index' => [
-                'title'      => 'Sitemaps',
-                'create-btn' => 'Maak Sitemap',
-                'sitemap'    => 'Sitemap',
-                'datagrid'   => [
-                    'id'              => 'ID',
-                    'file-name'       => 'Bestandsnaam',
-                    'path'            => 'Pad',
-                    'link-for-google' => 'Link voor Google',
-                    'edit'            => 'Bewerk',
-                    'delete'          => 'Verwijderen',
-                    'actions'         => 'Acties',
-                ],
+        'search-seo' => [
+            'search-terms' => [
+                'index' => [
+                    'title'      => 'Zoektermen',
+                    'create-btn' => 'Zoekterm maken',
 
-                'create' => [
-                    'file-name'      => 'Bestandsnaam',
-                    'file-name-info' => 'Voorbeeld: sitemap.xml',
-                    'path'           => 'Pad',
-                    'path-info'      => 'Voorbeeld: "/sitemap/" of "/" voor basispad',
-                    'save-btn'       => 'Sitemap Opslaan',
-                    'title'          => 'Maak Sitemap',
-                    'success'        => 'Sitemap succesvol aangemaakt',
-                    'delete-warning' => 'Weet je zeker dat je deze actie wilt uitvoeren?',
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'search-query'        => 'Zoekopdracht',
+                        'Channel'             => 'Kanaal',
+                        'results'             => 'Resultaten',
+                        'uses'                => 'Gebruiken',
+                        'redirect-url'        => 'Omleidings-URL',
+                        'channel'             => 'Kanaal',
+                        'locale'              => 'Lokale instelling',
+                        'edit'                => 'Bewerken',
+                        'delete'              => 'Verwijderen',
+                        'actions'             => 'Acties',
+                        'mass-delete-success' => 'Geselecteerde zoektermen succesvol verwijderd',
+                    ],
+
+                    'create' => [
+                        'search-query'   => 'Zoekopdracht',
+                        'Channel'        => 'Kanaal',
+                        'results'        => 'Resultaten',
+                        'uses'           => 'Gebruiken',
+                        'redirect-url'   => 'Omleidings-URL',
+                        'channel'        => 'Kanaal',
+                        'locale'         => 'Lokale instelling',
+                        'save-btn'       => 'Zoekterm opslaan',
+                        'title'          => 'Zoekterm maken',
+                        'success'        => 'Zoekterm succesvol gemaakt',
+                        'delete-warning' => 'Weet u zeker dat u deze actie wilt uitvoeren?',
+                    ],
+
+                    'edit' => [
+                        'title'          => 'Zoekterm bewerken',
+                        'success'        => 'Zoekterm succesvol bijgewerkt',
+                        'delete-success' => 'Zoekterm succesvol verwijderd',
+                    ],
+                ],
+            ],
+
+            'sitemaps' => [
+                'index' => [
+                    'title'      => 'Sitemaps',
+                    'create-btn' => 'Maak Sitemap',
+                    'sitemap'    => 'Sitemap',
+                    'datagrid'   => [
+                        'id'              => 'ID',
+                        'file-name'       => 'Bestandsnaam',
+                        'path'            => 'Pad',
+                        'link-for-google' => 'Link voor Google',
+                        'edit'            => 'Bewerk',
+                        'delete'          => 'Verwijderen',
+                        'actions'         => 'Acties',
+                    ],
+
+                    'create' => [
+                        'file-name'      => 'Bestandsnaam',
+                        'file-name-info' => 'Voorbeeld: sitemap.xml',
+                        'path'           => 'Pad',
+                        'path-info'      => 'Voorbeeld: "/sitemap/" of "/" voor basispad',
+                        'save-btn'       => 'Sitemap Opslaan',
+                        'title'          => 'Maak Sitemap',
+                        'success'        => 'Sitemap succesvol aangemaakt',
+                        'delete-warning' => 'Weet je zeker dat je deze actie wilt uitvoeren?',
+                    ],
+
+                    'edit' => [
+                        'title'          => 'Bewerk Sitemap',
+                        'success'        => 'Sitemap succesvol bijgewerkt',
+                        'delete-success' => 'Sitemap succesvol verwijderd',
+                    ],
                 ],
 
                 'edit' => [
-                    'title'          => 'Bewerk Sitemap',
-                    'success'        => 'Sitemap succesvol bijgewerkt',
-                    'delete-success' => 'Sitemap succesvol verwijderd',
+                    'back-btn'       => 'Terug',
+                    'file-name'      => 'Bestandsnaam',
+                    'file-name-info' => 'Voorbeeld: sitemap.xml',
+                    'general'        => 'Algemeen',
+                    'path'           => 'Pad',
+                    'path-info'      => 'Voorbeeld: "/sitemap/" of "/" voor basispad',
+                    'save-btn'       => 'Sitemap Opslaan',
                 ],
-            ],
 
-            'edit' => [
-                'back-btn'       => 'Terug',
-                'file-name'      => 'Bestandsnaam',
-                'file-name-info' => 'Voorbeeld: sitemap.xml',
-                'general'        => 'Algemeen',
-                'path'           => 'Pad',
-                'path-info'      => 'Voorbeeld: "/sitemap/" of "/" voor basispad',
-                'save-btn'       => 'Sitemap Opslaan',
+                'delete-failed' => ':name Verwijderen Mislukt',
             ],
-
-            'delete-failed' => ':name Verwijderen Mislukt',
         ],
     ],
 
@@ -2704,28 +2748,36 @@ return [
 
         'products' => [
             'index' => [
+                'channel'                          => 'Kanaal',
                 'end-date'                         => 'Einddatum',
                 'id'                               => 'ID',
                 'interval'                         => 'Interval',
+                'last-search-terms'                => 'Laatste zoektermen',
+                'locale'                           => 'Regio',
                 'name'                             => 'Naam',
                 'orders'                           => 'Bestellingen',
                 'price'                            => 'Prijs',
                 'products-added-over-time'         => 'Producten toegevoegd in de loop der tijd',
                 'products-with-most-reviews'       => 'Producten met de meeste beoordelingen',
                 'products-with-most-visits'        => 'Producten met de meeste bezoeken',
-                'quantities'                       => 'Aantallen',
                 'quantities-sold-over-time'        => 'Verkochte aantallen in de loop der tijd',
+                'quantities'                       => 'Aantallen',
+                'results'                          => 'Resultaten',
                 'revenue'                          => 'Omzet',
                 'reviews'                          => 'Beoordelingen',
+                'search-term'                      => 'Zoekterm',
                 'start-date'                       => 'Startdatum',
                 'title'                            => 'Producten',
+                'top-search-terms'                 => 'Populaire zoektermen',
                 'top-selling-products-by-quantity' => 'Top verkopende producten op basis van aantallen',
                 'top-selling-products-by-revenue'  => 'Top verkopende producten op basis van omzet',
-                'total'                            => 'Totaal',
                 'total-products-added-to-wishlist' => 'Producten toegevoegd aan verlanglijst',
                 'total-sold-quantities'            => 'Totaal aantal verkochte producten',
+                'total'                            => 'Totaal',
+                'uses'                             => 'Gebruiken',
                 'view-details'                     => 'Details weergeven',
                 'visits'                           => 'Bezoeken',
+                'visits'                           => 'Bezoekers',
             ],
         ],
 
@@ -3267,6 +3319,8 @@ return [
                 'reviews'                  => 'Beoordelingen',
                 'roles'                    => 'Rollen',
                 'sales'                    => 'Verkopen',
+                'search-terms'             => 'Zoektermen',
+                'search-seo'               => 'Zoeken en SEO',
                 'shipments'                => 'Zendingen',
                 'settings'                 => 'Instellingen',
                 'sitemaps'                 => 'Sitemaps',
@@ -3422,6 +3476,8 @@ return [
         'reviews'                  => 'Beoordelingen',
         'roles'                    => 'Rollen',
         'sales'                    => 'Verkoop',
+        'search-terms'             => 'Zoektermen',
+        'search-seo'               => 'Zoeken en SEO',
         'shipments'                => 'Verzendingen',
         'settings'                 => 'Instellingen',
         'subscribers'              => 'Nieuwsbrief Abonnees',
