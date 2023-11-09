@@ -83,24 +83,17 @@
                             <!-- Id -->
                             <p v-text="record.id"></p>
 
-                            <!-- Search Query -->
-                            <p v-text="record.term"></p>
+                            <!-- For -->
+                            <p v-text="record.entity_type"></p>
 
-                            <!-- Search Results -->
-                            <p v-text="record.results"></p>
+                            <!-- Request Path -->
+                            <p v-text="record.request_path"></p>
 
-                            <!-- Uses -->
-                            <p v-text="record.uses"></p>
+                            <!-- Target Path -->
+                            <p v-text="record.target_path"></p>
 
-                            <!-- URL -->
-                            <p class="break-all">
-                                <a :href="record.redirect_url" target="_blank">
-                                    @{{ record.redirect_url}}
-                                </a>
-                            </p>
-
-                            <!-- Channel -->
-                            <p v-text="record.channel_name"></p>
+                            <!-- Redirect Type -->
+                            <p v-text="record.redirect_type"></p>
 
                             <!-- Locale -->
                             <p v-text="record.locale"></p>
@@ -190,7 +183,7 @@
 
                                     <x-admin::form.control-group.control
                                         type="select"
-                                        name="type"
+                                        name="entity_type"
                                         rules="required"
                                         :label="trans('admin::app.marketing.search-seo.url-rewrites.index.create.for')"
                                     >
@@ -207,7 +200,7 @@
                                         </option>
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.error control-name="type"></x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="entity_type"></x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
                                 <!-- Request Path -->
