@@ -138,6 +138,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                     'name'       => trans('installer::app.seeders.shop.theme-customizations.services-content.name', [], $defaultLocale),
                     'sort_order' => 12,
                     'status'     => 1,
+                    'channel_id' => 1,
                     'created_at' => $now,
                     'updated_at' => $now,
                 ],
