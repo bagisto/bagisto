@@ -137,7 +137,6 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
             });
         });
 
-
         /**
          * Search and SEO routes.
          */
@@ -156,7 +155,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
                 Route::post('mass-delete', 'massDestroy')->name('admin.marketing.search_seo.search_terms.mass_delete');
             });
-        
+
             /**
              * Sitemaps routes.
              */

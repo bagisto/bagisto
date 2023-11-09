@@ -3,7 +3,6 @@
 namespace Webkul\Admin\DataGrids\Marketing\SearchSEO;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Webkul\DataGrid\DataGrid;
 
 class SearchTermDataGrid extends DataGrid

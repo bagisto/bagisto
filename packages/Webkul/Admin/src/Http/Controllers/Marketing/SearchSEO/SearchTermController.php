@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\DataGrids\Marketing\SearchSEO\SearchTermDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Marketing\Repositories\SearchTermRepository;
 use Webkul\Admin\Http\Requests\MassDestroyRequest;
+use Webkul\Marketing\Repositories\SearchTermRepository;
 
 class SearchTermController extends Controller
 {
