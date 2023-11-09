@@ -285,6 +285,25 @@ return [
                         'whats-new'        => 'מה חדש',
                     ],
                 ],
+
+                'services-content' => [
+                    'name'  => 'תוכן שירותים',
+
+                    'title' => [
+                        'free-shipping'     => 'משלוח חינם',
+                        'product-replace'   => 'החלפת מוצר',
+                        'emi-available'     => 'EMI זמין',
+                        'time-support'      => 'תמיכה 24/7',
+                    ],
+
+                    'description' => [
+                        'free-shipping-info'     => 'תהנו ממשלוח חינם על כל ההזמנות',
+                        'product-replace-info'   => 'החלפת מוצר קלה זמינה!',
+                        'emi-available-info'     => 'EMI ללא עלות זמין על כל כרטיסי האשראי המרכזיים',
+                        'time-support-info'      => 'תמיכה ייעודית 24/7 באמצעות צ\'אט ואימייל',
+                    ],
+                ],
+
             ],
         ],
 

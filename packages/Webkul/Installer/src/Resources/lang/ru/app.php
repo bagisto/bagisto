@@ -285,6 +285,24 @@ return [
                         'whats-new'        => 'Что нового',
                     ],
                 ],
+
+                'services-content' => [
+                    'name'  => 'Содержание услуг',
+
+                    'title' => [
+                        'free-shipping'     => 'Бесплатная доставка',
+                        'product-replace'   => 'Замена продукта',
+                        'emi-available'     => 'EMI доступно',
+                        'time-support'      => 'Поддержка 24/7',
+                    ],
+
+                    'description' => [
+                        'free-shipping-info'     => 'Наслаждайтесь бесплатной доставкой на все заказы',
+                        'product-replace-info'   => 'Доступна легкая замена продукта!',
+                        'emi-available-info'     => 'EMI без затрат доступно на всех основных кредитных картах',
+                        'time-support-info'      => 'Посвященная поддержка 24/7 через чат и электронную почту',
+                    ],
+                ],
             ],
         ],
 

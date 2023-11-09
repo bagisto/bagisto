@@ -132,6 +132,15 @@ class ThemeCustomizationTableSeeder extends Seeder
                     'channel_id' => 1,
                     'created_at' => $now,
                     'updated_at' => $now,
+                ], [
+                    'id'         => 12,
+                    'type'       => 'services_content',
+                    'name'       => trans('installer::app.seeders.shop.theme-customizations.services-content.name', [], $defaultLocale),
+                    'sort_order' => 12,
+                    'status'     => 1,
+                    'channel_id' => 1,
+                    'created_at' => $now,
+                    'updated_at' => $now,
                 ],
             ]);
 
@@ -301,6 +310,30 @@ class ThemeCustomizationTableSeeder extends Seeder
                                     'url'        => 'http://localhost/page/return-policy',
                                     'title'      => trans('installer::app.seeders.shop.theme-customizations.footer-links.options.return-policy', [], $locale),
                                     'sort_order' => 5,
+                                ],
+                            ],
+                        ]),
+                    ], [
+                        'theme_customization_id' => 12,
+                        'locale'                 => config('app.locale'),
+                        'options'                => json_encode([
+                            'services' => [
+                                [
+                                    'title'         => trans('installer::app.seeders.shop.theme-customizations.services-content.title.free-shipping', [], $locale),
+                                    'description'   => trans('installer::app.seeders.shop.theme-customizations.services-content.description.free-shipping-info', [], $locale),
+                                    'service_icon'  => 'icon-truck',
+                                ], [
+                                    'title'         => trans('installer::app.seeders.shop.theme-customizations.services-content.title.product-replace', [], $locale),
+                                    'description'   => trans('installer::app.seeders.shop.theme-customizations.services-content.description.product-replace-info', [], $locale),
+                                    'service_icon'  => 'icon-product',
+                                ], [
+                                    'title'         => trans('installer::app.seeders.shop.theme-customizations.services-content.title.emi-available', [], $locale),
+                                    'description'   => trans('installer::app.seeders.shop.theme-customizations.services-content.description.emi-available-info', [], $locale),
+                                    'service_icon'  => 'icon-dollar-sign',
+                                ], [
+                                    'title'         => trans('installer::app.seeders.shop.theme-customizations.services-content.title.time-support', [], $locale),
+                                    'description'   => trans('installer::app.seeders.shop.theme-customizations.services-content.description.time-support-info', [], $locale),
+                                    'service_icon'  => 'icon-support',
                                 ],
                             ],
                         ]),
