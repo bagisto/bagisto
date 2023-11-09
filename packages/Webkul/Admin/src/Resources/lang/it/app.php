@@ -1927,7 +1927,7 @@ return [
                 'index' => [
                     'title'      => 'Termini di ricerca',
                     'create-btn' => 'Crea termine di ricerca',
-            
+
                     'datagrid' => [
                         'id'                  => 'ID',
                         'search-query'        => 'Query di ricerca',
@@ -1942,7 +1942,7 @@ return [
                         'actions'             => 'Azioni',
                         'mass-delete-success' => 'Termini di ricerca selezionati eliminati correttamente',
                     ],
-            
+
                     'create' => [
                         'search-query'   => 'Query di ricerca',
                         'Channel'        => 'Canale',
@@ -1956,7 +1956,7 @@ return [
                         'success'        => 'Termine di ricerca creato correttamente',
                         'delete-warning' => 'Sei sicuro di voler eseguire questa azione?',
                     ],
-            
+
                     'edit' => [
                         'title'          => 'Modifica termine di ricerca',
                         'success'        => 'Termine di ricerca aggiornato correttamente',
@@ -1964,7 +1964,7 @@ return [
                     ],
                 ],
             ],
-            
+
             'sitemaps' => [
                 'index' => [
                     'title'       => 'Mappa del sito',

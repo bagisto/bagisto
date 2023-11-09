@@ -1963,7 +1963,7 @@ return [
                     ],
                 ],
             ],
-            
+
             'sitemaps' => [
                 'index' => [
                     'title'      => 'සයිට්‌මැප්',

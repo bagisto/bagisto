@@ -1927,7 +1927,7 @@ return [
                 'index' => [
                     'title'      => '検索キーワード',
                     'create-btn' => '新しい検索キーワードを作成',
-            
+
                     'datagrid' => [
                         'id'                  => 'ID',
                         'search-query'        => '検索クエリ',
@@ -1942,7 +1942,7 @@ return [
                         'actions'             => 'アクション',
                         'mass-delete-success' => '選択した検索キーワードを正常に削除しました。',
                     ],
-            
+
                     'create' => [
                         'search-query'   => '検索クエリ',
                         'Channel'        => 'チャンネル',
@@ -1956,7 +1956,7 @@ return [
                         'success'        => '検索キーワードを正常に作成しました。',
                         'delete-warning' => 'この操作を実行してもよろしいですか？',
                     ],
-            
+
                     'edit' => [
                         'title'          => '検索キーワードを編集',
                         'success'        => '検索キーワードを正常に更新しました。',
@@ -1964,7 +1964,7 @@ return [
                     ],
                 ],
             ],
-            
+
             'sitemaps' => [
                 'index' => [
                     'title'      => 'サイトマップ',

@@ -1927,7 +1927,7 @@ return [
                 'index' => [
                     'title'      => 'Suchbegriffe',
                     'create-btn' => 'Suchbegriff erstellen',
-            
+
                     'datagrid' => [
                         'id'                  => 'ID',
                         'search-query'        => 'Suchbegriff',
@@ -1942,7 +1942,7 @@ return [
                         'actions'             => 'Aktionen',
                         'mass-delete-success' => 'Ausgewählte Suchbegriffe erfolgreich gelöscht',
                     ],
-            
+
                     'create' => [
                         'search-query'   => 'Suchbegriff',
                         'Channel'        => 'Kanal',
@@ -1956,7 +1956,7 @@ return [
                         'success'        => 'Suchbegriff erfolgreich erstellt',
                         'delete-warning' => 'Möchten Sie diese Aktion wirklich ausführen?',
                     ],
-            
+
                     'edit' => [
                         'title'          => 'Suchbegriff bearbeiten',
                         'success'        => 'Suchbegriff erfolgreich aktualisiert',
@@ -1964,7 +1964,7 @@ return [
                     ],
                 ],
             ],
-            
+
             'sitemaps' => [
                 'index' => [
                     'title'      => 'Sitemaps',

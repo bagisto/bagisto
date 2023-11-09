@@ -1928,7 +1928,7 @@ return [
                 'index' => [
                     'title'      => 'Zoektermen',
                     'create-btn' => 'Zoekterm maken',
-            
+
                     'datagrid' => [
                         'id'                  => 'ID',
                         'search-query'        => 'Zoekopdracht',
@@ -1943,7 +1943,7 @@ return [
                         'actions'             => 'Acties',
                         'mass-delete-success' => 'Geselecteerde zoektermen succesvol verwijderd',
                     ],
-            
+
                     'create' => [
                         'search-query'   => 'Zoekopdracht',
                         'Channel'        => 'Kanaal',
@@ -1957,7 +1957,7 @@ return [
                         'success'        => 'Zoekterm succesvol gemaakt',
                         'delete-warning' => 'Weet u zeker dat u deze actie wilt uitvoeren?',
                     ],
-            
+
                     'edit' => [
                         'title'          => 'Zoekterm bewerken',
                         'success'        => 'Zoekterm succesvol bijgewerkt',
@@ -1965,7 +1965,7 @@ return [
                     ],
                 ],
             ],
-            
+
             'sitemaps' => [
                 'index' => [
                     'title'      => 'Sitemaps',

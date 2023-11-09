@@ -1927,7 +1927,7 @@ return [
                 'index' => [
                     'title'      => 'Termos de pesquisa',
                     'create-btn' => 'Criar novo termo de pesquisa',
-            
+
                     'datagrid' => [
                         'id'                  => 'ID',
                         'search-query'        => 'Consulta de pesquisa',
@@ -1942,7 +1942,7 @@ return [
                         'actions'             => 'Ações',
                         'mass-delete-success' => 'Termos de pesquisa selecionados excluídos com sucesso',
                     ],
-            
+
                     'create' => [
                         'search-query'   => 'Consulta de pesquisa',
                         'Channel'        => 'Canal',
@@ -1956,7 +1956,7 @@ return [
                         'success'        => 'Termo de pesquisa criado com sucesso',
                         'delete-warning' => 'Tem certeza de que deseja executar esta ação?',
                     ],
-            
+
                     'edit' => [
                         'title'          => 'Editar termo de pesquisa',
                         'success'        => 'Termo de pesquisa atualizado com sucesso',
@@ -1964,7 +1964,7 @@ return [
                     ],
                 ],
             ],
-            
+
             'sitemaps' => [
                 'index' => [
                     'title'      => 'Mapas do Site',

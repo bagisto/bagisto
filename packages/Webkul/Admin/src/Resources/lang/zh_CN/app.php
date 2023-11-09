@@ -1927,7 +1927,7 @@ return [
                 'index' => [
                     'title'      => '搜索词条',
                     'create-btn' => '创建新搜索词条',
-            
+
                     'datagrid' => [
                         'id'                  => 'ID',
                         'search-query'        => '搜索查询',
@@ -1942,7 +1942,7 @@ return [
                         'actions'             => '操作',
                         'mass-delete-success' => '已成功删除选定的搜索词条',
                     ],
-            
+
                     'create' => [
                         'search-query'   => '搜索查询',
                         'Channel'        => '频道',
@@ -1956,7 +1956,7 @@ return [
                         'success'        => '搜索词条已成功创建',
                         'delete-warning' => '您确定要执行此操作吗？',
                     ],
-            
+
                     'edit' => [
                         'title'          => '编辑搜索词条',
                         'success'        => '搜索词条已成功更新',
@@ -1964,7 +1964,7 @@ return [
                     ],
                 ],
             ],
-            
+
             'sitemaps' => [
                 'index' => [
                     'title'      => '站点地图',

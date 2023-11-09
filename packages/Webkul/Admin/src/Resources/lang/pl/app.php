@@ -1927,7 +1927,7 @@ return [
                 'index' => [
                     'title'      => 'Słowa kluczowe wyszukiwania',
                     'create-btn' => 'Utwórz nowe słowo kluczowe wyszukiwania',
-            
+
                     'datagrid' => [
                         'id'                  => 'ID',
                         'search-query'        => 'Wyszukiwanie słów kluczowych',
@@ -1942,7 +1942,7 @@ return [
                         'actions'             => 'Akcje',
                         'mass-delete-success' => 'Wybrane słowa kluczowe wyszukiwania zostały pomyślnie usunięte',
                     ],
-            
+
                     'create' => [
                         'search-query'   => 'Wyszukiwanie słów kluczowych',
                         'Channel'        => 'Kanał',
@@ -1956,7 +1956,7 @@ return [
                         'success'        => 'Słowo kluczowe wyszukiwania zostało pomyślnie utworzone',
                         'delete-warning' => 'Czy na pewno chcesz wykonać tę akcję?',
                     ],
-            
+
                     'edit' => [
                         'title'          => 'Edytuj słowo kluczowe wyszukiwania',
                         'success'        => 'Słowo kluczowe wyszukiwania zostało pomyślnie zaktualizowane',
@@ -1964,7 +1964,7 @@ return [
                     ],
                 ],
             ],
-            
+
             'sitemaps' => [
                 'index' => [
                     'title'      => 'Mapy witryny',

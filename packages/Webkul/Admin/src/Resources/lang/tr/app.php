@@ -1927,7 +1927,7 @@ return [
                 'index' => [
                     'title'      => 'Arama Terimleriniz',
                     'create-btn' => 'Arama Terimi Oluştur',
-            
+
                     'datagrid' => [
                         'id'                  => 'ID',
                         'search-query'        => 'Arama Sorgusu',
@@ -1942,7 +1942,7 @@ return [
                         'actions'             => 'İşlemler',
                         'mass-delete-success' => 'Seçilen Arama Terimleri Başarıyla Silindi',
                     ],
-            
+
                     'create' => [
                         'search-query'   => 'Arama Sorgusu',
                         'Channel'        => 'Kanal',
@@ -1956,7 +1956,7 @@ return [
                         'success'        => 'Arama Terimi Başarıyla Oluşturuldu',
                         'delete-warning' => 'Bu işlemi gerçekleştirmek istediğinizden emin misiniz?',
                     ],
-            
+
                     'edit' => [
                         'title'          => 'Arama Terimini Düzenle',
                         'success'        => 'Arama Terimi Başarıyla Güncellendi',
