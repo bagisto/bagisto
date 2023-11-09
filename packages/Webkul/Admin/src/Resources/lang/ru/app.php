@@ -2634,7 +2634,7 @@ return [
                     'services'           => 'Услуги',
                     'service-info'       => 'Настройка темы, связанной с услугами.',
                     'save-btn'           => 'Сохранить',
-                    'service-icon-class' => 'Класс значка услуги', 
+                    'service-icon-class' => 'Класс значка услуги',
                     'service-icon'       => 'Значок услуги',
                     'update-service'     => 'Обновить услуги',
                     'title'              => 'Заголовок',

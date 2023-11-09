@@ -2634,7 +2634,7 @@ return [
                     'services'           => 'שירותים',
                     'service-info'       => 'התאמת ערכות נושא הקשורות לשירות.',
                     'save-btn'           => 'שמור',
-                    'service-icon-class' => 'מחלקת סמל שירות', 
+                    'service-icon-class' => 'מחלקת סמל שירות',
                     'service-icon'       => 'סמל שירות',
                     'title'              => 'כותרת',
                     'update-service'     => 'עדכן שירותים',

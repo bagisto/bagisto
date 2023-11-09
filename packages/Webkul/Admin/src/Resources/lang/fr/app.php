@@ -2634,7 +2634,7 @@ return [
                     'services'              => 'Services',
                     'service-info'          => 'Personnalisation de thèmes liés au service.',
                     'save-btn'              => 'Enregistrer',
-                    'service-icon-class'    => 'Classe d\'icône de service', 
+                    'service-icon-class'    => 'Classe d\'icône de service',
                     'service-icon'          => 'Icône de service',
                     'title'                 => 'Titre',
                     'update-service'        => 'Mettre à jour les services',

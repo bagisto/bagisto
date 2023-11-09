@@ -2634,7 +2634,7 @@ return [
                     'services'            => 'Usługi',
                     'service-info'        => 'Dostosowanie motywów związanych z usługą.',
                     'save-btn'            => 'Zapisz',
-                    'service-icon-class'  => 'Klasa ikony usługi', 
+                    'service-icon-class'  => 'Klasa ikony usługi',
                     'service-icon'        => 'Ikona usługi',
                     'title'               => 'Tytuł',
                     'update-service'      => 'Aktualizuj usługi',

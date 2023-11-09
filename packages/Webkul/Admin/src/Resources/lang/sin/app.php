@@ -2634,7 +2634,7 @@ return [
                     'services'           => 'සේවාවන්',
                     'service-info'       => 'සේවාවෙන් සංස්කරණය කිරීම පිළිබඳ තේරීම.',
                     'save-btn'           => 'සුරකින්න',
-                    'service-icon-class' => 'සේවා අයිකන පරිමිතිය', 
+                    'service-icon-class' => 'සේවා අයිකන පරිමිතිය',
                     'service-icon'       => 'සේවා අයිකනය',
                     'title'              => 'ශීර්ෂය',
                     'update-service'     => 'සේවාවන් යාවත්කාල කරන්න',

@@ -2634,7 +2634,7 @@ return [
                     'services'           => 'Servicios',
                     'service-info'       => 'Personalización de temas relacionados con el servicio.',
                     'save-btn'           => 'Guardar',
-                    'service-icon-class' => 'Clase de icono de servicio', 
+                    'service-icon-class' => 'Clase de icono de servicio',
                     'service-icon'       => 'Icono de servicio',
                     'title'              => 'Título',
                     'update-service'     => 'Actualizar servicios',

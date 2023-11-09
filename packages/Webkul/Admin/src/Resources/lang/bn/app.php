@@ -2634,7 +2634,7 @@ return [
                     'service-info'       => 'সেবা সম্পর্কিত থিম কাস্টমাইজেশন।',
                     'services'           => 'সেবা',
                     'save-btn'           => 'সংরক্ষণ করুন',
-                    'service-icon-class' => 'সেবা আইকন ক্লাস', 
+                    'service-icon-class' => 'সেবা আইকন ক্লাস',
                     'service-icon'       => 'সেবা আইকন',
                     'title'              => 'শিরোনাম',
                     'update-service'     => 'সেবা আপডেট করুন',

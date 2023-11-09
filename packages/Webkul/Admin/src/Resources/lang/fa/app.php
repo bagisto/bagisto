@@ -2636,7 +2636,7 @@ return [
                     'status'                => 'وضعیت',
                     'update-service'        => 'به روزرسانی خدمات',
                     'save-btn'              => 'ذخیره',
-                    'service-icon-class'    => 'کلاس آیکون سرویس', 
+                    'service-icon-class'    => 'کلاس آیکون سرویس',
                     'service-icon'          => 'آیکون سرویس',
                 ],
             ],

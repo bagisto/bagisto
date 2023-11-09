@@ -2634,7 +2634,7 @@ return [
                     'service-info'       => '与服务相关的主题定制。',
                     'status'             => '状态',
                     'save-btn'           => '保存',
-                    'service-icon-class' => '服务图标类', 
+                    'service-icon-class' => '服务图标类',
                     'service-icon'       => '服务图标',
                     'title'              => '标题',
                     'update-service'     => '更新服务',

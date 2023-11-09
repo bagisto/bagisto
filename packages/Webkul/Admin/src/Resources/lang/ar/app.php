@@ -2634,7 +2634,7 @@ return [
                     'service-info'          => 'تخصيص الموضوع المتعلق بالخدمة.',
                     'services'              => 'خدمات',
                     'save-btn'              => 'يحفظ',
-                    'service-icon-class'    => 'فئة أيقونة الخدمة', 
+                    'service-icon-class'    => 'فئة أيقونة الخدمة',
                     'service-icon'          => 'أيقونة الخدمة',
                     'update-service'        => 'خدمات التحديث',
                 ],

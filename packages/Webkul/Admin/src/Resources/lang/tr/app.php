@@ -2635,7 +2635,7 @@ return [
                     'service-info'       => 'Hizmetle ilgili tema özelleştirme.',
                     'status'             => 'Durum',
                     'save-btn'           => 'Kaydet',
-                    'service-icon-class' => 'Hizmet İkon Sınıfı', 
+                    'service-icon-class' => 'Hizmet İkon Sınıfı',
                     'service-icon'       => 'Hizmet İkonu',
                     'title'              => 'Başlık',
                     'update-service'     => 'Hizmetleri Güncelle',

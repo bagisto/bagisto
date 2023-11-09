@@ -2634,7 +2634,7 @@ return [
                     'sort-order'         => 'Ordine di classificazione',
                     'status'             => 'Stato',
                     'save-btn'           => 'Salva',
-                    'service-icon-class' => 'Classe icona servizio', 
+                    'service-icon-class' => 'Classe icona servizio',
                     'service-icon'       => 'Icona servizio',
                     'title'              => 'Titolo',
                     'update-service'     => 'Aggiorna servizi',
