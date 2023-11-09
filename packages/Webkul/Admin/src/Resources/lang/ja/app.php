@@ -1923,6 +1923,48 @@ return [
         ],
 
         'search-seo' => [
+            'search-terms' => [
+                'index' => [
+                    'title'      => '検索キーワード',
+                    'create-btn' => '新しい検索キーワードを作成',
+            
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'search-query'        => '検索クエリ',
+                        'Channel'             => 'チャンネル',
+                        'results'             => '結果',
+                        'uses'                => '使用',
+                        'redirect-url'        => 'リダイレクトURL',
+                        'channel'             => 'チャンネル',
+                        'locale'              => 'ロケール',
+                        'edit'                => '編集',
+                        'delete'              => '削除',
+                        'actions'             => 'アクション',
+                        'mass-delete-success' => '選択した検索キーワードを正常に削除しました。',
+                    ],
+            
+                    'create' => [
+                        'search-query'   => '検索クエリ',
+                        'Channel'        => 'チャンネル',
+                        'results'        => '結果',
+                        'uses'           => '使用',
+                        'redirect-url'   => 'リダイレクトURL',
+                        'channel'        => 'チャンネル',
+                        'locale'         => 'ロケール',
+                        'save-btn'       => '検索キーワードを保存',
+                        'title'          => '新しい検索キーワードを作成',
+                        'success'        => '検索キーワードを正常に作成しました。',
+                        'delete-warning' => 'この操作を実行してもよろしいですか？',
+                    ],
+            
+                    'edit' => [
+                        'title'          => '検索キーワードを編集',
+                        'success'        => '検索キーワードを正常に更新しました。',
+                        'delete-success' => '検索キーワードを正常に削除しました。',
+                    ],
+                ],
+            ],
+            
             'sitemaps' => [
                 'index' => [
                     'title'      => 'サイトマップ',

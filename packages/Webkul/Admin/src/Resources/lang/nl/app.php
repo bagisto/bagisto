@@ -1924,6 +1924,48 @@ return [
         ],
 
         'search-seo' => [
+            'search-terms' => [
+                'index' => [
+                    'title'      => 'Zoektermen',
+                    'create-btn' => 'Zoekterm maken',
+            
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'search-query'        => 'Zoekopdracht',
+                        'Channel'             => 'Kanaal',
+                        'results'             => 'Resultaten',
+                        'uses'                => 'Gebruiken',
+                        'redirect-url'        => 'Omleidings-URL',
+                        'channel'             => 'Kanaal',
+                        'locale'              => 'Lokale instelling',
+                        'edit'                => 'Bewerken',
+                        'delete'              => 'Verwijderen',
+                        'actions'             => 'Acties',
+                        'mass-delete-success' => 'Geselecteerde zoektermen succesvol verwijderd',
+                    ],
+            
+                    'create' => [
+                        'search-query'   => 'Zoekopdracht',
+                        'Channel'        => 'Kanaal',
+                        'results'        => 'Resultaten',
+                        'uses'           => 'Gebruiken',
+                        'redirect-url'   => 'Omleidings-URL',
+                        'channel'        => 'Kanaal',
+                        'locale'         => 'Lokale instelling',
+                        'save-btn'       => 'Zoekterm opslaan',
+                        'title'          => 'Zoekterm maken',
+                        'success'        => 'Zoekterm succesvol gemaakt',
+                        'delete-warning' => 'Weet u zeker dat u deze actie wilt uitvoeren?',
+                    ],
+            
+                    'edit' => [
+                        'title'          => 'Zoekterm bewerken',
+                        'success'        => 'Zoekterm succesvol bijgewerkt',
+                        'delete-success' => 'Zoekterm succesvol verwijderd',
+                    ],
+                ],
+            ],
+            
             'sitemaps' => [
                 'index' => [
                     'title'      => 'Sitemaps',

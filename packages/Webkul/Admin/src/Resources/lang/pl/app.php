@@ -1923,6 +1923,48 @@ return [
         ],
 
         'search-seo' => [
+            'search-terms' => [
+                'index' => [
+                    'title'      => 'Słowa kluczowe wyszukiwania',
+                    'create-btn' => 'Utwórz nowe słowo kluczowe wyszukiwania',
+            
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'search-query'        => 'Wyszukiwanie słów kluczowych',
+                        'Channel'             => 'Kanał',
+                        'results'             => 'Wyniki',
+                        'uses'                => 'Zastosowania',
+                        'redirect-url'        => 'Adres URL przekierowania',
+                        'channel'             => 'Kanał',
+                        'locale'              => 'Ustawienia regionalne',
+                        'edit'                => 'Edytuj',
+                        'delete'              => 'Usuń',
+                        'actions'             => 'Akcje',
+                        'mass-delete-success' => 'Wybrane słowa kluczowe wyszukiwania zostały pomyślnie usunięte',
+                    ],
+            
+                    'create' => [
+                        'search-query'   => 'Wyszukiwanie słów kluczowych',
+                        'Channel'        => 'Kanał',
+                        'results'        => 'Wyniki',
+                        'uses'           => 'Zastosowania',
+                        'redirect-url'   => 'Adres URL przekierowania',
+                        'channel'        => 'Kanał',
+                        'locale'         => 'Ustawienia regionalne',
+                        'save-btn'       => 'Zapisz słowo kluczowe wyszukiwania',
+                        'title'          => 'Utwórz nowe słowo kluczowe wyszukiwania',
+                        'success'        => 'Słowo kluczowe wyszukiwania zostało pomyślnie utworzone',
+                        'delete-warning' => 'Czy na pewno chcesz wykonać tę akcję?',
+                    ],
+            
+                    'edit' => [
+                        'title'          => 'Edytuj słowo kluczowe wyszukiwania',
+                        'success'        => 'Słowo kluczowe wyszukiwania zostało pomyślnie zaktualizowane',
+                        'delete-success' => 'Słowo kluczowe wyszukiwania zostało pomyślnie usunięte',
+                    ],
+                ],
+            ],
+            
             'sitemaps' => [
                 'index' => [
                     'title'      => 'Mapy witryny',

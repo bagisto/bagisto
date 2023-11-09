@@ -1922,6 +1922,48 @@ return [
         ],
 
         'search-seo' => [
+            'search-terms' => [
+                'index' => [
+                    'title'      => 'Search Terms',
+                    'create-btn' => 'Create Search Term',
+
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'search-query'        => 'Search Query',
+                        'Channel'             => 'Channel',
+                        'results'             => 'Results',
+                        'uses'                => 'Uses',
+                        'redirect-url'        => 'Redirect Url',
+                        'channel'             => 'Channel',
+                        'locale'              => 'Locale',
+                        'edit'                => 'Edit',
+                        'delete'              => 'Delete',
+                        'actions'             => 'Actions',
+                        'mass-delete-success' => 'Selected Search Terms Deleted Successfully',
+                    ],
+
+                    'create' => [
+                        'search-query'   => 'Search Query',
+                        'Channel'        => 'Channel',
+                        'results'        => 'Results',
+                        'uses'           => 'Uses',
+                        'redirect-url'   => 'Redirect Url',
+                        'channel'        => 'Channel',
+                        'locale'         => 'Locale',
+                        'save-btn'       => 'Save Search Term',
+                        'title'          => 'Create Search Term',
+                        'success'        => 'Search Term created successfully',
+                        'delete-warning' => 'Are you sure, you want to perform this action?',
+                    ],
+
+                    'edit' => [
+                        'title'          => 'Edit Search Term',
+                        'success'        => 'Search Term updated successfully',
+                        'delete-success' => 'Search Term deleted successfully',
+                    ],
+                ],
+            ],
+            
             'sitemaps' => [
                 'index' => [
                     'title'      => 'සයිට්‌මැප්',

@@ -1923,6 +1923,48 @@ return [
         ],
 
         'search-seo' => [
+            'search-terms' => [
+                'index' => [
+                    'title'      => 'Termini di ricerca',
+                    'create-btn' => 'Crea termine di ricerca',
+            
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'search-query'        => 'Query di ricerca',
+                        'Channel'             => 'Canale',
+                        'results'             => 'Risultati',
+                        'uses'                => 'Utilizzi',
+                        'redirect-url'        => 'URL di reindirizzamento',
+                        'channel'             => 'Canale',
+                        'locale'              => 'Impostazioni locali',
+                        'edit'                => 'Modifica',
+                        'delete'              => 'Elimina',
+                        'actions'             => 'Azioni',
+                        'mass-delete-success' => 'Termini di ricerca selezionati eliminati correttamente',
+                    ],
+            
+                    'create' => [
+                        'search-query'   => 'Query di ricerca',
+                        'Channel'        => 'Canale',
+                        'results'        => 'Risultati',
+                        'uses'           => 'Utilizzi',
+                        'redirect-url'   => 'URL di reindirizzamento',
+                        'channel'        => 'Canale',
+                        'locale'         => 'Impostazioni locali',
+                        'save-btn'       => 'Salva termine di ricerca',
+                        'title'          => 'Crea termine di ricerca',
+                        'success'        => 'Termine di ricerca creato correttamente',
+                        'delete-warning' => 'Sei sicuro di voler eseguire questa azione?',
+                    ],
+            
+                    'edit' => [
+                        'title'          => 'Modifica termine di ricerca',
+                        'success'        => 'Termine di ricerca aggiornato correttamente',
+                        'delete-success' => 'Termine di ricerca eliminato correttamente',
+                    ],
+                ],
+            ],
+            
             'sitemaps' => [
                 'index' => [
                     'title'       => 'Mappa del sito',

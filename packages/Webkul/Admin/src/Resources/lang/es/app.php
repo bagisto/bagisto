@@ -1923,6 +1923,48 @@ return [
         ],
 
         'search-seo' => [
+            'search-terms' => [
+                'index' => [
+                    'title'      => 'Términos de búsqueda',
+                    'create-btn' => 'Crear término de búsqueda',
+            
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'search-query'        => 'Consulta de búsqueda',
+                        'Channel'             => 'Canal',
+                        'results'             => 'Resultados',
+                        'uses'                => 'Usos',
+                        'redirect-url'        => 'URL de redirección',
+                        'channel'             => 'Canal',
+                        'locale'              => 'Localización',
+                        'edit'                => 'Editar',
+                        'delete'              => 'Eliminar',
+                        'actions'             => 'Acciones',
+                        'mass-delete-success' => 'Términos de búsqueda seleccionados eliminados con éxito',
+                    ],
+            
+                    'create' => [
+                        'search-query'   => 'Consulta de búsqueda',
+                        'Channel'        => 'Canal',
+                        'results'        => 'Resultados',
+                        'uses'           => 'Usos',
+                        'redirect-url'   => 'URL de redirección',
+                        'channel'        => 'Canal',
+                        'locale'         => 'Localización',
+                        'save-btn'       => 'Guardar término de búsqueda',
+                        'title'          => 'Crear término de búsqueda',
+                        'success'        => 'Término de búsqueda creado con éxito',
+                        'delete-warning' => '¿Estás seguro de que quieres realizar esta acción?',
+                    ],
+            
+                    'edit' => [
+                        'title'          => 'Editar término de búsqueda',
+                        'success'        => 'Término de búsqueda actualizado con éxito',
+                        'delete-success' => 'Término de búsqueda eliminado con éxito',
+                    ],
+                ],
+            ],
+            
             'sitemaps' => [
                 'index' => [
                     'title'       => 'Mapas del sitio',

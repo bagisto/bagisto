@@ -1923,6 +1923,48 @@ return [
         ],
 
         'search-seo' => [
+            'search-terms' => [
+                'index' => [
+                    'title'      => 'Suchbegriffe',
+                    'create-btn' => 'Suchbegriff erstellen',
+            
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'search-query'        => 'Suchbegriff',
+                        'Channel'             => 'Kanal',
+                        'results'             => 'Ergebnisse',
+                        'uses'                => 'Verwendungen',
+                        'redirect-url'        => 'Weiterleitungs-URL',
+                        'channel'             => 'Kanal',
+                        'locale'              => 'Lokalisierung',
+                        'edit'                => 'Bearbeiten',
+                        'delete'              => 'Löschen',
+                        'actions'             => 'Aktionen',
+                        'mass-delete-success' => 'Ausgewählte Suchbegriffe erfolgreich gelöscht',
+                    ],
+            
+                    'create' => [
+                        'search-query'   => 'Suchbegriff',
+                        'Channel'        => 'Kanal',
+                        'results'        => 'Ergebnisse',
+                        'uses'           => 'Verwendungen',
+                        'redirect-url'   => 'Weiterleitungs-URL',
+                        'channel'        => 'Kanal',
+                        'locale'         => 'Lokalisierung',
+                        'save-btn'       => 'Suchbegriff speichern',
+                        'title'          => 'Suchbegriff erstellen',
+                        'success'        => 'Suchbegriff erfolgreich erstellt',
+                        'delete-warning' => 'Möchten Sie diese Aktion wirklich ausführen?',
+                    ],
+            
+                    'edit' => [
+                        'title'          => 'Suchbegriff bearbeiten',
+                        'success'        => 'Suchbegriff erfolgreich aktualisiert',
+                        'delete-success' => 'Suchbegriff erfolgreich gelöscht',
+                    ],
+                ],
+            ],
+            
             'sitemaps' => [
                 'index' => [
                     'title'      => 'Sitemaps',

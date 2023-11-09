@@ -1923,6 +1923,48 @@ return [
         ],
 
         'search-seo' => [
+            'search-terms' => [
+                'index' => [
+                    'title'      => 'Arama Terimleriniz',
+                    'create-btn' => 'Arama Terimi Oluştur',
+            
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'search-query'        => 'Arama Sorgusu',
+                        'Channel'             => 'Kanal',
+                        'results'             => 'Sonuçlar',
+                        'uses'                => 'Kullanım',
+                        'redirect-url'        => 'Yönlendirme URL\'si',
+                        'channel'             => 'Kanal',
+                        'locale'              => 'Yerel Ayar',
+                        'edit'                => 'Düzenle',
+                        'delete'              => 'Sil',
+                        'actions'             => 'İşlemler',
+                        'mass-delete-success' => 'Seçilen Arama Terimleri Başarıyla Silindi',
+                    ],
+            
+                    'create' => [
+                        'search-query'   => 'Arama Sorgusu',
+                        'Channel'        => 'Kanal',
+                        'results'        => 'Sonuçlar',
+                        'uses'           => 'Kullanım',
+                        'redirect-url'   => 'Yönlendirme URL\'si',
+                        'channel'        => 'Kanal',
+                        'locale'         => 'Yerel Ayar',
+                        'save-btn'       => 'Arama Terimini Kaydet',
+                        'title'          => 'Arama Terimi Oluştur',
+                        'success'        => 'Arama Terimi Başarıyla Oluşturuldu',
+                        'delete-warning' => 'Bu işlemi gerçekleştirmek istediğinizden emin misiniz?',
+                    ],
+            
+                    'edit' => [
+                        'title'          => 'Arama Terimini Düzenle',
+                        'success'        => 'Arama Terimi Başarıyla Güncellendi',
+                        'delete-success' => 'Arama Terimi Başarıyla Silindi',
+                    ],
+                ],
+            ],
+
             'sitemaps' => [
                 'index' => [
                     'title'      => 'Site Haritaları',

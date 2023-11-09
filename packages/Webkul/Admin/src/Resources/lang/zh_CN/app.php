@@ -1923,6 +1923,48 @@ return [
         ],
 
         'search-seo' => [
+            'search-terms' => [
+                'index' => [
+                    'title'      => '搜索词条',
+                    'create-btn' => '创建新搜索词条',
+            
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'search-query'        => '搜索查询',
+                        'Channel'             => '频道',
+                        'results'             => '结果',
+                        'uses'                => '使用',
+                        'redirect-url'        => '重定向 URL',
+                        'channel'             => '频道',
+                        'locale'              => '本地化',
+                        'edit'                => '编辑',
+                        'delete'              => '删除',
+                        'actions'             => '操作',
+                        'mass-delete-success' => '已成功删除选定的搜索词条',
+                    ],
+            
+                    'create' => [
+                        'search-query'   => '搜索查询',
+                        'Channel'        => '频道',
+                        'results'        => '结果',
+                        'uses'           => '使用',
+                        'redirect-url'   => '重定向 URL',
+                        'channel'        => '频道',
+                        'locale'         => '本地化',
+                        'save-btn'       => '保存搜索词条',
+                        'title'          => '创建新搜索词条',
+                        'success'        => '搜索词条已成功创建',
+                        'delete-warning' => '您确定要执行此操作吗？',
+                    ],
+            
+                    'edit' => [
+                        'title'          => '编辑搜索词条',
+                        'success'        => '搜索词条已成功更新',
+                        'delete-success' => '搜索词条已成功删除',
+                    ],
+                ],
+            ],
+            
             'sitemaps' => [
                 'index' => [
                     'title'      => '站点地图',
