@@ -2020,7 +2020,7 @@ return [
 
                     'datagrid' => [
                         'id'                  => 'ID',
-                        'type'                => 'Type',
+                        'for'                 => 'For',
                         'request-path'        => 'Request Path',
                         'target-path'         => 'Target Path',
                         'redirect-type'       => 'Redirect Type',
@@ -2032,15 +2032,20 @@ return [
                     ],
 
                     'create' => [
-                        'type'           => 'Type',
-                        'request-path'   => 'Request Path',
-                        'target-path'    => 'Target Path',
-                        'redirect-type'  => 'Redirect Type',
-                        'locale'         => 'Locale',
-                        'save-btn'       => 'Save URL Rewrite',
-                        'title'          => 'Create URL Rewrite',
-                        'success'        => 'URL Rewrite created successfully',
-                        'delete-warning' => 'Are you sure, you want to perform this action?',
+                        'for'                => 'For',
+                        'product'            => 'Product',
+                        'category'           => 'Category',
+                        'cms-page'           => 'CMS Page',
+                        'request-path'       => 'Request Path',
+                        'target-path'        => 'Target Path',
+                        'redirect-type'      => 'Redirect Type',
+                        'temporary-redirect' => 'Temporary (302)',
+                        'permanent-redirect' => 'Permanent (301)',
+                        'locale'             => 'Locale',
+                        'save-btn'           => 'Save URL Rewrite',
+                        'title'              => 'Create URL Rewrite',
+                        'success'            => 'URL Rewrite created successfully',
+                        'delete-warning'     => 'Are you sure, you want to perform this action?',
                     ],
 
                     'edit' => [

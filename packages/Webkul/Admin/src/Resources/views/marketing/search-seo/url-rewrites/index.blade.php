@@ -182,107 +182,101 @@
                                 >
                                 </x-admin::form.control-group.control>
 
-                                <!-- Search Term -->
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.marketing.search-seo.url-rewrites.index.create.search-query')
-                                    </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="term"
-                                        rules="required"
-                                        :label="trans('admin::app.marketing.search-seo.url-rewrites.index.create.search-query')"
-                                        :placeholder="trans('admin::app.marketing.search-seo.url-rewrites.index.create.search-query')"
-                                    >
-                                    </x-admin::form.control-group.control>
-
-                                    <x-admin::form.control-group.error
-                                        control-name="term"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-
-                                <template v-if="selectedSitemap">
-                                    <!-- Results -->
-                                    <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.marketing.search-seo.url-rewrites.index.create.results')
-                                        </x-admin::form.control-group.label>
-
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="results"
-                                            rules="required"
-                                            :label="trans('admin::app.marketing.search-seo.url-rewrites.index.create.results')"
-                                            :placeholder="trans('admin::app.marketing.search-seo.url-rewrites.index.create.results')"
-                                        >
-                                        </x-admin::form.control-group.control>
-
-                                        <x-admin::form.control-group.error
-                                            control-name="results"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-
-                                    <!-- Uses -->
-                                    <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.marketing.search-seo.url-rewrites.index.create.uses')
-                                        </x-admin::form.control-group.label>
-
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="uses"
-                                            rules="required"
-                                            :label="trans('admin::app.marketing.search-seo.url-rewrites.index.create.uses')"
-                                            :placeholder="trans('admin::app.marketing.search-seo.url-rewrites.index.create.uses')"
-                                        >
-                                        </x-admin::form.control-group.control>
-
-                                        <x-admin::form.control-group.error
-                                            control-name="uses"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-                                </template>
-
-                                <!-- Uses -->
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
-                                        @lang('admin::app.marketing.search-seo.url-rewrites.index.create.redirect-url')
-                                    </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="redirect_url"
-                                        :label="trans('admin::app.marketing.search-seo.url-rewrites.index.create.redirect-url')"
-                                        :placeholder="trans('admin::app.marketing.search-seo.url-rewrites.index.create.redirect-url')"
-                                    >
-                                    </x-admin::form.control-group.control>
-                                </x-admin::form.control-group>
-
-                                <!-- Channels -->
+                                <!-- Entity Type -->
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.marketing.search-seo.url-rewrites.index.create.channel')
+                                        @lang('admin::app.marketing.search-seo.url-rewrites.index.create.for')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="select"
-                                        name="channel_id"
+                                        name="type"
                                         rules="required"
-                                        :label="trans('admin::app.marketing.search-seo.url-rewrites.index.create.channel')"
+                                        :label="trans('admin::app.marketing.search-seo.url-rewrites.index.create.for')"
                                     >
-                                        @foreach (core()->getAllChannels() as $channel)
-                                            <option value="{{ $channel->id }}">{{ $channel->name }}</option>
-                                        @endforeach 
+                                        <option value="product">
+                                            @lang('admin::app.marketing.search-seo.url-rewrites.index.create.product')
+                                        </option>
+
+                                        <option value="category">
+                                            @lang('admin::app.marketing.search-seo.url-rewrites.index.create.category')
+                                        </option>
+
+                                        <option value="cms_page">
+                                            @lang('admin::app.marketing.search-seo.url-rewrites.index.create.cms-page')
+                                        </option>
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="type"></x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <!-- Channels -->
+                                <!-- Request Path -->
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.marketing.search-seo.url-rewrites.index.create.request-path')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="request_path"
+                                        rules="required"
+                                        :label="trans('admin::app.marketing.search-seo.url-rewrites.index.create.request-path')"
+                                        :placeholder="trans('admin::app.marketing.search-seo.url-rewrites.index.create.request-path')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="request_path"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <!-- Target Path -->
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.marketing.search-seo.url-rewrites.index.create.target-path')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="target_path"
+                                        rules="required"
+                                        :label="trans('admin::app.marketing.search-seo.url-rewrites.index.create.target-path')"
+                                        :placeholder="trans('admin::app.marketing.search-seo.url-rewrites.index.create.target-path')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="target_path"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <!-- Redirect Type -->
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.marketing.search-seo.url-rewrites.index.create.redirect-type')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="redirect_type"
+                                        rules="required"
+                                        :label="trans('admin::app.marketing.search-seo.url-rewrites.index.create.redirect-type')"
+                                    >
+                                        <option value="302">
+                                            @lang('admin::app.marketing.search-seo.url-rewrites.index.create.temporary-redirect')
+                                        </option>
+
+                                        <option value="301">
+                                            @lang('admin::app.marketing.search-seo.url-rewrites.index.create.permanent-redirect')
+                                        </option>
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error control-name="redirect_type"></x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <!-- Locales -->
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.search-seo.url-rewrites.index.create.locale')

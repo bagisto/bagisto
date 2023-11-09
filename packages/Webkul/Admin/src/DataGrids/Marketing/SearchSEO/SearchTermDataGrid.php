@@ -84,7 +84,7 @@ class SearchTermDataGrid extends DataGrid
             'index'      => 'redirect_url',
             'label'      => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.redirect-url'),
             'type'       => 'string',
-            'searchable' => true,
+            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);

@@ -17,6 +17,7 @@ class URLRewriteDataGrid extends DataGrid
         $queryBuilder = DB::table('url_rewrites')
             ->addSelect(
                 'url_rewrites.id',
+                'url_rewrites.entity_type',
                 'url_rewrites.request_path',
                 'url_rewrites.target_path',
                 'url_rewrites.redirect_type',
@@ -41,6 +42,15 @@ class URLRewriteDataGrid extends DataGrid
             'type'       => 'integer',
             'searchable' => false,
             'width'      => '40px',
+            'filterable' => true,
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'entity_type',
+            'label'      => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.for'),
+            'type'       => 'string',
+            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
