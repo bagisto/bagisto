@@ -14,24 +14,16 @@ class URLRewriteDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('search_terms')
+        $queryBuilder = DB::table('url_rewrites')
             ->addSelect(
-                'search_terms.id',
-                'search_terms.term',
-                'search_terms.results',
-                'search_terms.uses',
-                'search_terms.redirect_url',
-                'search_terms.channel_id',
-                'channel_translations.name as channel_name',
-                'search_terms.locale',
-            )
-            ->leftJoin('channel_translations', function ($leftJoin) {
-                $leftJoin->on('search_terms.channel_id', '=', 'channel_translations.channel_id')
-                    ->where('channel_translations.locale', app()->getLocale());
-            });
+                'url_rewrites.id',
+                'url_rewrites.request_path',
+                'url_rewrites.target_path',
+                'url_rewrites.redirect_type',
+                'url_rewrites.locale',
+            );
 
-        $this->addFilter('channel_id', 'search_terms.channel_id');
-        $this->addFilter('locale', 'search_terms.locale');
+        $this->addFilter('locale', 'url_rewrites.locale');
 
         return $queryBuilder;
     }
@@ -45,7 +37,7 @@ class URLRewriteDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.id'),
+            'label'      => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'width'      => '40px',
@@ -54,8 +46,8 @@ class URLRewriteDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'term',
-            'label'      => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.search-query'),
+            'index'      => 'request_path',
+            'label'      => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.request-path'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -63,26 +55,8 @@ class URLRewriteDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'results',
-            'label'      => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.results'),
-            'type'       => 'integer',
-            'searchable' => false,
-            'filterable' => true,
-            'sortable'   => true,
-        ]);
-
-        $this->addColumn([
-            'index'      => 'uses',
-            'label'      => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.uses'),
-            'type'       => 'integer',
-            'searchable' => false,
-            'filterable' => true,
-            'sortable'   => true,
-        ]);
-
-        $this->addColumn([
-            'index'      => 'redirect_url',
-            'label'      => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.redirect-url'),
+            'index'      => 'target_path',
+            'label'      => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.target-path'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -90,19 +64,9 @@ class URLRewriteDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'channel_id',
-            'label'      => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.channel'),
-            'type'       => 'dropdown',
-            'options'    => [
-                'type' => 'basic',
-
-                'params' => [
-                    'options' => core()->getAllChannels()
-                        ->map(fn ($channel) => ['label' => $channel->name, 'value' => $channel->id])
-                        ->values()
-                        ->toArray(),
-                ],
-            ],
+            'index'      => 'redirect_type',
+            'label'      => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.redirect-type'),
+            'type'       => 'string',
             'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
@@ -110,7 +74,7 @@ class URLRewriteDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'locale',
-            'label'      => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.locale'),
+            'label'      => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.locale'),
             'type'       => 'dropdown',
             'options'    => [
                 'type' => 'basic',
@@ -135,25 +99,25 @@ class URLRewriteDataGrid extends DataGrid
      */
     public function prepareActions()
     {
-        if (bouncer()->hasPermission('marketing.search_terms.edit')) {
+        if (bouncer()->hasPermission('marketing.url_rewrites.edit')) {
             $this->addAction([
                 'icon'   => 'icon-edit',
-                'title'  => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.edit'),
+                'title'  => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.edit'),
                 'method' => 'GET',
-                'route'  => 'admin.marketing.search_seo.search_terms.update',
+                'route'  => 'admin.marketing.search_seo.url_rewrites.update',
                 'url'    => function ($row) {
-                    return route('admin.marketing.search_seo.search_terms.update', $row->id);
+                    return route('admin.marketing.search_seo.url_rewrites.update', $row->id);
                 },
             ]);
         }
 
-        if (bouncer()->hasPermission('marketing.search_terms.delete')) {
+        if (bouncer()->hasPermission('marketing.url_rewrites.delete')) {
             $this->addAction([
                 'icon'   => 'icon-delete',
-                'title'  => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.delete'),
+                'title'  => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.delete'),
                 'method' => 'DELETE',
                 'url'    => function ($row) {
-                    return route('admin.marketing.search_seo.search_terms.delete', $row->id);
+                    return route('admin.marketing.search_seo.url_rewrites.delete', $row->id);
                 },
             ]);
         }
@@ -166,11 +130,11 @@ class URLRewriteDataGrid extends DataGrid
      */
     public function prepareMassActions()
     {
-        if (bouncer()->hasPermission('marketing.search_terms.delete')) {
+        if (bouncer()->hasPermission('marketing.url_rewrites.delete')) {
             $this->addMassAction([
-                'title'  => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.delete'),
+                'title'  => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.delete'),
                 'method' => 'POST',
-                'url'    => route('admin.marketing.search_seo.search_terms.mass_delete'),
+                'url'    => route('admin.marketing.search_seo.url_rewrites.mass_delete'),
             ]);
         }
     }
