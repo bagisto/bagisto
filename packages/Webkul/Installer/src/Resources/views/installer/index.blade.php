@@ -1249,12 +1249,7 @@
                                         },
                                     };
 
-                                    var seederResponse = this.startSeeding(data, this.envData);
-
-                                    if (seederResponse) {
-                                        this.completeStep('envConfiguration', 'createAdmin', 'active', 'complete');
-                                        this.currentStep = 'createAdmin';
-                                    }
+                                    this.startSeeding(data, this.envData);
                                 },
 
                             };
@@ -1320,9 +1315,9 @@
                                 'seledParameters': selectedParams
                             })
                                 .then((response) => {
-                                    console.log(response);
-                                    // this.currentStep = 'createAdmin';
-                                })
+                                    this.completeStep('envConfiguration', 'createAdmin', 'active', 'complete');
+                                    this.currentStep = 'createAdmin';
+                            })
                                 .catch(error => {
                                     setErrors(error.response.data.errors);
                                 });
