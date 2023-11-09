@@ -61,7 +61,6 @@ class DatabaseManager
             ], 500);
         }
 
-        // return $this->seeder();
     }
 
     /**
@@ -69,10 +68,10 @@ class DatabaseManager
      *
      * @return void|string
      */
-    private function seeder()
+    public function seeder($data)
     {
         try {
-            app(BagistoDatabaseSeeder::class)->run();
+            app(BagistoDatabaseSeeder::class)->run($data['parameter']);
 
             $this->storageLink();
         } catch (Exception $e) {

@@ -84,6 +84,22 @@ class InstallerController extends Controller
     }
 
     /**
+     * Run Seeder
+     *
+     * @return void|string
+     */
+    public function runSeeder()
+    {
+        $response = $this->environmentManager->setEnvConfiguration(request()->allParameters);
+
+        if ($response) {
+            $seeder = $this->databaseManager->seeder(request()->seledParameters);
+
+            return $seeder;
+        }
+    }
+
+    /**
      * Admin Configuration Setup.
      *
      * @return void
