@@ -1,8 +1,8 @@
-<!-- Image-Carousel Component -->
-<v-image-carousel></v-image-carousel>
+<!-- Todays Details Vue Component -->
+<v-services-content></v-services-content>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-image-carousel-template">
+    <script type="text/x-template" id="v-services-content-template">
         <div>
             <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                 <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
@@ -10,123 +10,120 @@
                         <div class="flex gap-x-[10px] justify-between items-center">
                             <div class="flex flex-col gap-[4px]">
                                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
-                                    @lang('admin::app.settings.themes.edit.slider')
+                                    @lang('admin::app.settings.themes.edit.services-content.services')
                                 </p>
                                 
                                 <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
-                                    @lang('admin::app.settings.themes.edit.slider-description')
+                                    @lang('admin::app.settings.themes.edit.services-content.service-info')
                                 </p>
                             </div>
             
-                            <!-- Add Slider Button -->
+                            <!-- Add Services Button -->
                             <div class="flex gap-[10px]">
                                 <div
                                     class="secondary-button"
-                                    @click="$refs.addSliderModal.toggle()"
+                                    @click="$refs.addServiceModal.toggle()"
                                 >
-                                    @lang('admin::app.settings.themes.edit.slider-add-btn')
+                                    @lang('admin::app.settings.themes.edit.services-content.add-btn')
                                 </div>
                             </div>
                         </div>
 
-                        <template v-for="(deletedSlider, index) in deletedSliders">
+                        <template v-for="(deletedService, index) in deletedServices">
                             <input
                                 type="hidden"
-                                :name="'{{ $currentLocale->code }}[deleted_sliders]['+ index +'][image]'"
-                                :value="deletedSlider.image"
+                                :name="'{{ $currentLocale->code }}[deleted_services]['+ index +'][service_details]'"
+                                :value="deletedService.service_details"
                             />
                         </template>
 
                         <div
                             class="grid pt-[16px]"
-                            v-if="sliders.images.length"
-                            v-for="(image, index) in sliders.images"
+                            v-if="servicesContent.services.length"
+                            v-for="(service_details, index) in servicesContent.services"
                         >
                             <!-- Hidden Input -->
                             <input
                                 type="file"
                                 class="hidden"
-                                :name="'{{ $currentLocale->code }}[options]['+ index +'][image]'"
+                                :name="'{{ $currentLocale->code }}[options]['+ index +'][service_details]'"
                                 :ref="'imageInput_' + index"
                             />
 
                             <input
                                 type="hidden"
                                 :name="'{{ $currentLocale->code }}[options]['+ index +'][title]'"
-                                :value="image.title"
+                                :value="service_details.title"
                             />
 
                             <input
                                 type="hidden"
-                                :name="'{{ $currentLocale->code }}[options]['+ index +'][link]'"
-                                :value="image.link"
+                                :name="'{{ $currentLocale->code }}[options]['+ index +'][description]'"
+                                :value="service_details.description"
                             />
 
                             <input
                                 type="hidden"
-                                :name="'{{ $currentLocale->code }}[options]['+ index +'][image]'"
-                                :value="image.image"
+                                :name="'{{ $currentLocale->code }}[options]['+ index +'][service_icon]'"
+                                :value="service_details.service_icon"
                             />
                         
-                            <!-- Details -->
+                            <!-- Service  Details  Listig -->
                             <div 
                                 class="flex gap-[10px] justify-between py-5 cursor-pointer"
                                 :class="{
-                                    'border-b-[1px] border-slate-300 dark:border-gray-800': index < sliders.images.length - 1
+                                    'border-b-[1px] border-slate-300 dark:border-gray-800': index < servicesContent.services.length - 1
                                 }"
                             >
                                 <div class="flex gap-[10px]">
                                     <div class="grid gap-[6px] place-content-start">
                                         <p class="text-gray-600 dark:text-gray-300">
                                             <div> 
-                                                @lang('admin::app.settings.themes.edit.image-title'): 
+                                                @lang('admin::app.settings.themes.edit.services-content.title'): 
 
                                                 <span class="text-gray-600 dark:text-gray-300 transition-all">
-                                                    @{{ image.title }}
+                                                    @{{ service_details.title }}
                                                 </span>
                                             </div>
                                         </p>
 
                                         <p class="text-gray-600 dark:text-gray-300">
                                             <div> 
-                                                @lang('admin::app.settings.themes.edit.link'): 
+                                                @lang('admin::app.settings.themes.edit.services-content.description'): 
 
                                                 <span class="text-gray-600 dark:text-gray-300 transition-all">
-                                                    @{{ image.link }}
+                                                    @{{ service_details.description }}
                                                 </span>
                                             </div>
                                         </p>
 
                                         <p class="text-gray-600 dark:text-gray-300">
                                             <div class="flex justify-between"> 
-                                                @lang('admin::app.settings.themes.edit.image'): 
+                                                @lang('admin::app.settings.themes.edit.services-content.service-icon'): 
 
                                                 <span class="text-gray-600 dark:text-gray-300 transition-all">
-                                                    <a
-                                                        :href="'{{ config('app.url') }}/' + image.image"
-                                                        :ref="'image_' + index"
-                                                        target="_blank"
-                                                        class="ltr:ml-2 rtl:mr-2 text-blue-600 transition-all hover:underline"
-                                                    >
-                                                        <span 
-                                                            :ref="'imageName_' + index"
-                                                            v-text="image.image"
-                                                        ></span>
-                                                    </a>
+                                                    @{{ service_details.service_icon }}
                                                 </span>
                                             </div>
                                         </p>
                                     </div>
                                 </div>
 
-                                <!-- Actions -->
+                                <!-- Service Actions -->
                                 <div class="grid gap-[4px] place-content-start text-right">
                                     <div class="flex gap-x-[20px] items-center">
                                         <p 
-                                            class="text-red-600 cursor-pointer transition-all hover:underline"
-                                            @click="remove(image)"
+                                            class="text-blue-600 cursor-pointer transition-all hover:underline"
+                                            @click="edit(service_details)"
                                         > 
-                                            @lang('admin::app.settings.themes.edit.delete')
+                                            @lang('admin::app.settings.themes.edit.edit')
+                                        </p>
+
+                                        <p 
+                                            class="text-red-600 cursor-pointer transition-all hover:underline"
+                                            @click="remove(service_details)"
+                                        > 
+                                            @lang('admin::app.settings.themes.edit.services-content.delete')
                                         </p>
                                     </div>
                                 </div>
@@ -146,11 +143,11 @@
             
                             <div class="flex flex-col gap-[5px] items-center">
                                 <p class="text-[16px] text-gray-400 font-semibold">
-                                    @lang('admin::app.settings.themes.edit.slider-add-btn')
+                                    @lang('admin::app.settings.themes.edit.services-content.add-btn')
                                 </p>
                                 
                                 <p class="text-gray-400">
-                                    @lang('admin::app.settings.themes.edit.slider-description')
+                                    @lang('admin::app.settings.themes.edit.services-content.service-info')
                                 </p>
                             </div>
                         </div>
@@ -162,7 +159,7 @@
                     <x-admin::accordion>
                         <x-slot:header>
                             <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
-                                @lang('admin::app.settings.themes.edit.general')
+                                @lang('admin::app.settings.themes.edit.services-content.general')
                             </p>
                         </x-slot:header>
                     
@@ -170,12 +167,13 @@
                             <input
                                 type="hidden"
                                 name="type"
-                                value="image_carousel"
+                                value="services_content"
                             />
 
+                            <!-- Name -->
                             <x-admin::form.control-group class="mb-[10px]">
                                 <x-admin::form.control-group.label class="required">
-                                    @lang('admin::app.settings.themes.edit.name')
+                                    @lang('admin::app.settings.themes.edit.services-content.name')
                                 </x-admin::form.control-group.label>
 
                                 <v-field
@@ -185,8 +183,8 @@
                                     rules="required"
                                     class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                    label="@lang('admin::app.settings.themes.edit.name')"
-                                    placeholder="@lang('admin::app.settings.themes.edit.name')"
+                                    label="@lang('admin::app.settings.themes.edit.services-content.name')"
+                                    placeholder="@lang('admin::app.settings.themes.edit.services-content.name')"
                                 ></v-field>
 
                                 <x-admin::form.control-group.error
@@ -195,9 +193,10 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
+                            <!-- Short Order -->
                             <x-admin::form.control-group class="mb-[10px]">
                                 <x-admin::form.control-group.label class="required">
-                                    @lang('admin::app.settings.themes.edit.sort-order')
+                                    @lang('admin::app.settings.themes.edit.services-content.sort-order')
                                 </x-admin::form.control-group.label>
 
                                 <v-field
@@ -207,8 +206,8 @@
                                     value="{{ $theme->sort_order }}"
                                     class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['sort_order'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                    label="@lang('admin::app.settings.themes.edit.sort-order')"
-                                    placeholder="@lang('admin::app.settings.themes.edit.sort-order')"
+                                    label="@lang('admin::app.settings.themes.edit.services-content.sort-order')"
+                                    placeholder="@lang('admin::app.settings.themes.edit.services-content.sort-order')"
                                 >
                                 </v-field>
 
@@ -218,9 +217,10 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
+                            <!-- Channels -->
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
-                                    @lang('admin::app.settings.themes.edit.channels')
+                                    @lang('admin::app.settings.themes.edit.services-content.channels')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
@@ -239,7 +239,7 @@
 
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
-                                    @lang('admin::app.settings.themes.edit.status')
+                                    @lang('admin::app.settings.themes.edit.services-content.status')
                                 </x-admin::form.control-group.label>
 
                                 <label class="relative inline-flex items-center cursor-pointer">
@@ -277,34 +277,37 @@
                 </div>
             </div>
 
+            <!-- Update Form -->
             <x-admin::form
                 v-slot="{ meta, errors, handleSubmit }"
                 as="div"
             >
                 <form 
-                    @submit="handleSubmit($event, saveSliderImage)"
-                    enctype="multipart/form-data"
-                    ref="createSliderForm"
+                    @submit="handleSubmit($event, saveServices)"
+                    ref="createServiceForm"
                 >
-                    <x-admin::modal ref="addSliderModal">
+                    <x-admin::modal ref="addServiceModal">
                         <x-slot:header>
                             <p class="text-[18px] text-gray-800 dark:text-white font-bold">
-                                @lang('admin::app.settings.themes.edit.update-slider')
+                                @lang('admin::app.settings.themes.edit.services-content.update-service')
                             </p>
                         </x-slot:header>
 
                         <x-slot:content>
                             <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
+                                <!-- Title -->
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.themes.edit.image-title')
+                                        @lang('admin::app.settings.themes.edit.services-content.title')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="{{ $currentLocale->code }}[title]"
                                         rules="required"
-                                        :placeholder="trans('admin::app.settings.themes.edit.title')"
+                                        v-model="selectedService.title"
+                                        :label="trans('admin::app.settings.themes.edit.services-content.title')"
+                                        :placeholder="trans('admin::app.settings.themes.edit.services-content.title')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -314,41 +317,48 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
+                                <!-- Description -->
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.themes.edit.link')
+                                        @lang('admin::app.settings.themes.edit.services-content.description')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
-                                        type="text"
-                                        name="{{ $currentLocale->code }}[link]"
-                                        :placeholder="trans('admin::app.settings.themes.edit.link')"
-                                    >
-                                    </x-admin::form.control-group.control>
-                                </x-admin::form.control-group>
-
-                                <x-admin::form.control-group>
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.themes.edit.slider-image')
-                                    </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.control
-                                        type="image"
-                                        name="slider_image"
-                                        rules="required"
-                                        :is-multiple="false"
+                                        type="textarea"
+                                        name="{{ $currentLocale->code }}[description]"
+                                        v-model="selectedService.description"
+                                        :label="trans('admin::app.settings.themes.edit.services-content.description')"
+                                        :placeholder="trans('admin::app.settings.themes.edit.services-content.description')"
                                     >
                                     </x-admin::form.control-group.control>
 
                                     <x-admin::form.control-group.error
-                                        control-name="slider_image"
+                                        control-name="{{ $currentLocale->code }}[description]"
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <p class="text-[12px] text-gray-600 dark:text-gray-300">
-                                    @lang('admin::app.settings.themes.edit.image-size')
-                                </p>
+                                <!-- Services Icon -->
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.settings.themes.edit.services-content.service-icon-class')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="{{ $currentLocale->code }}[service_icon]"
+                                        rules="required"
+                                        v-model="selectedService.service_icon"
+                                        :label="trans('admin::app.settings.themes.edit.services-content.service-icon-class')"
+                                        :placeholder="trans('admin::app.settings.themes.edit.services-content.service-icon-class')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="{{ $currentLocale->code }}[service_icon]"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
                             </div>
                         </x-slot:content>
 
@@ -359,7 +369,7 @@
                                     type="submit"
                                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                                 >
-                                    @lang('admin::app.settings.themes.edit.save-btn')
+                                    @lang('admin::app.settings.themes.edit.services-content.save-btn')
                                 </button>
                             </div>
                         </x-slot:footer>
@@ -370,81 +380,75 @@
     </script>
 
     <script type="module">
-        app.component('v-image-carousel', {
-            template: '#v-image-carousel-template',
+        app.component('v-services-content', {
+            template: '#v-services-content-template',
 
             props: ['errors'],
 
             data() {
                 return {
-                    sliders: @json($theme->translate($currentLocale->code)['options'] ?? null),
+                    
+                    servicesContent: @json($theme->translate($currentLocale->code)['options'] ?? null),
 
-                    deletedSliders: [],
+                    deletedServices: [],
+
+                    selectedService: [],
+
+                    isUpdating: false
                 };
             },
             
             created() {
                 if (
-                    this.sliders == null 
-                    || this.sliders.length == 0
+                    this.servicesContent == null 
+                    || this.servicesContent.length == 0
                 ) {
-                    this.sliders = { images: [] };
-                }   
+                    this.servicesContent = { services: [] };
+                }  
             },
 
             methods: {
-                saveSliderImage(params, { resetForm ,setErrors }) {
-                    let formData = new FormData(this.$refs.createSliderForm);
+                saveServices(params, { resetForm ,setErrors }) {
+                    let formData = new FormData(this.$refs.createServiceForm);
 
-                    try {
-                        const sliderImage = formData.get("slider_image[]");
+                    if (! this.isUpdating) {
+                        try {
+                            const serviceImage = formData.get("service_icon[]");
 
-                        if (! sliderImage) {
-                            throw new Error("{{ trans('admin::app.settings.themes.edit.slider-required') }}");
+                            this.servicesContent.services.push({
+                                title: formData.get("{{ $currentLocale->code }}[title]"),
+                                description: formData.get("{{ $currentLocale->code }}[description]"),
+                                service_icon: formData.get("{{ $currentLocale->code }}[service_icon]"),
+                            });
+
+                            resetForm();
+                        } catch (error) {
+                            setErrors({'service_icon': [error.message]});
                         }
-
-                        this.sliders.images.push({
-                            title: formData.get("{{ $currentLocale->code }}[title]"),
-                            link: formData.get("{{ $currentLocale->code }}[link]"),
-                            slider_image: sliderImage,
-                        });
-
-                        if (sliderImage instanceof File) {
-                            this.setFile(sliderImage, this.sliders.images.length - 1);
-                        }
-
-                        resetForm();
-
-                        this.$refs.addSliderModal.toggle();
-                    } catch (error) {
-                        setErrors({'slider_image': [error.message]});
+                        this.isUpdating = false;
                     }
+                        
+                    this.$refs.addServiceModal.toggle();
                 },
 
-                setFile(file, index) {
-                    let dataTransfer = new DataTransfer();
-
-                    dataTransfer.items.add(file);
-
-                    setTimeout(() => {
-                        this.$refs['image_' + index][0].href =  URL.createObjectURL(file);
-
-                        this.$refs['imageName_' + index][0].innerHTML = file.name;
-
-                        this.$refs['imageInput_' + index][0].files = dataTransfer.files;
-                    }, 0);
-                },
-
-                remove(image) {
-                    this.deletedSliders.push(image);
+                remove(service_details) {
+                    this.deletedServices.push(service_details);
                     
-                    this.sliders.images = this.sliders.images.filter(item => {
+                    this.servicesContent.services = this.servicesContent.services.filter(item => {
                         return (
-                            item.title !== image.title || 
-                            item.link !== image.link || 
-                            item.image !== image.image
+                            item.title !== service_details.title || 
+                            item.description !== service_details.description || 
+                            item.service_icon !== service_details.service_icon
                         );
                     });
+                },
+
+                edit(service_details) {
+                    this.selectedService = service_details;
+
+                    this.isUpdating = true;
+
+                    this.$refs.addServiceModal.toggle();
                 },
             },
         });

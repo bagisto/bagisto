@@ -285,6 +285,24 @@ return [
                         'whats-new'        => 'What\'s New',
                     ],
                 ],
+
+                'services-content' => [
+                    'name'  => 'Dienstleistungen Inhalt',
+
+                    'title' => [
+                        'free-shipping'     => 'Kostenloser Versand',
+                        'product-replace'   => 'Produkt ersetzen',
+                        'emi-available'     => 'EMI verfügbar',
+                        'time-support'      => '24/7 Support',
+                    ],
+
+                    'description' => [
+                        'free-shipping-info'     => 'Kostenloser Versand bei allen Bestellungen',
+                        'product-replace-info'   => 'Einfacher Produktersatz verfügbar!',
+                        'emi-available-info'     => 'Keine Kosten EMI auf allen gängigen Kreditkarten verfügbar',
+                        'time-support-info'      => 'Dedizierter 24/7 Support per Chat und E-Mail',
+                    ],
+                ],
             ],
         ],
 

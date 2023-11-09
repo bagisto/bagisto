@@ -285,6 +285,24 @@ return [
                         'whats-new'        => 'ما الجديد',
                     ],
                 ],
+
+                'services-content' => [
+                    'name'  => 'محتوى الخدمات',
+
+                    'title' => [
+                        'free-shipping'     => 'الشحن المجاني',
+                        'product-replace'   => 'استبدال المنتج',
+                        'emi-available'     => 'توفر EMI',
+                        'time-support'      => 'الدعم على مدار الساعة',
+                    ],
+
+                    'description' => [
+                        'free-shipping-info'     => 'استمتع بالشحن المجاني على جميع الطلبات',
+                        'product-replace-info'   => 'استبدال المنتج بسهولة متاح!',
+                        'emi-available-info'     => 'توفر EMI بدون تكلفة على جميع بطاقات الائتمان الرئيسية',
+                        'time-support-info'      => 'دعم مخصص على مدار الساعة عبر الدردشة والبريد الإلكتروني',
+                    ],
+                ],
             ],
         ],
 

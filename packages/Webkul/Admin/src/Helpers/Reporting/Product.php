@@ -77,7 +77,7 @@ class Product extends AbstractReporting
         return $this->orderItemRepository
             ->resetModel()
             ->whereBetween('created_at', [$startDate, $endDate])
-            ->value(DB::raw("SUM(qty_invoiced - qty_refunded)")) ?? 0;
+            ->value(DB::raw('SUM(qty_invoiced - qty_refunded)')) ?? 0;
     }
 
     /**
