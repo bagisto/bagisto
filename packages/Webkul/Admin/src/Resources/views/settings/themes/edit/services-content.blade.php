@@ -32,40 +32,40 @@
                     <template v-for="(deletedService, index) in deletedServices">
                         <input
                             type="hidden"
-                            :name="'{{ $currentLocale->code }}[deleted_sliders]['+ index +'][image]'"
-                            :value="deletedService.image"
+                            :name="'{{ $currentLocale->code }}[deleted_services]['+ index +'][service_details]'"
+                            :value="deletedService.service_details"
                         />
                     </template>
 
                     <div
                         class="grid pt-[16px]"
                         v-if="servicesContent.services.length"
-                        v-for="(image, index) in servicesContent.services"
+                        v-for="(service_details, index) in servicesContent.services"
                     >
                         <!-- Hidden Input -->
                         <input
                             type="file"
                             class="hidden"
-                            :name="'{{ $currentLocale->code }}[options]['+ index +'][image]'"
+                            :name="'{{ $currentLocale->code }}[options]['+ index +'][service_details]'"
                             :ref="'imageInput_' + index"
                         />
 
                         <input
                             type="hidden"
                             :name="'{{ $currentLocale->code }}[options]['+ index +'][title]'"
-                            :value="image.title"
+                            :value="service_details.title"
                         />
 
                         <input
                             type="hidden"
                             :name="'{{ $currentLocale->code }}[options]['+ index +'][description]'"
-                            :value="image.description"
+                            :value="service_details.description"
                         />
 
                         <input
                             type="hidden"
                             :name="'{{ $currentLocale->code }}[options]['+ index +'][service_icon]'"
-                            :value="image.service_icon"
+                            :value="service_details.service_icon"
                         />
                     
                         <!-- Details -->
@@ -82,7 +82,7 @@
                                             @lang('admin::app.settings.themes.edit.services-content.title'): 
 
                                             <span class="text-gray-600 dark:text-gray-300 transition-all">
-                                                @{{ image.title }}
+                                                @{{ service_details.title }}
                                             </span>
                                         </div>
                                     </p>
@@ -92,7 +92,7 @@
                                             @lang('admin::app.settings.themes.edit.services-content.description'): 
 
                                             <span class="text-gray-600 dark:text-gray-300 transition-all">
-                                                @{{ image.description }}
+                                                @{{ service_details.description }}
                                             </span>
                                         </div>
                                     </p>
@@ -102,7 +102,7 @@
                                             @lang('Service Icon'): 
 
                                             <span class="text-gray-600 dark:text-gray-300 transition-all">
-                                                @{{ image.service_icon }}
+                                                @{{ service_details.service_icon }}
                                             </span>
                                         </div>
                                     </p>
@@ -113,8 +113,15 @@
                             <div class="grid gap-[4px] place-content-start text-right">
                                 <div class="flex gap-x-[20px] items-center">
                                     <p 
+                                        class="text-blue-600 cursor-pointer transition-all hover:underline"
+                                        @click="edit(service_details)"
+                                    > 
+                                        @lang('admin::app.settings.themes.edit.edit')
+                                    </p>
+
+                                    <p 
                                         class="text-red-600 cursor-pointer transition-all hover:underline"
-                                        @click="remove(image)"
+                                        @click="remove(service_details)"
                                     > 
                                         @lang('admin::app.settings.themes.edit.services-content.delete')
                                     </p>
@@ -271,10 +278,10 @@
         <x-admin::form
             v-slot="{ meta, errors, handleSubmit }"
             as="div"
+            {{-- ref="serviceLinkUpdateOrCreateModal" --}}
         >
             <form 
                 @submit="handleSubmit($event, saveServices)"
-                enctype="multipart/form-data"
                 ref="createServiceForm"
             >
                 <x-admin::modal ref="addServiceModal">
@@ -296,6 +303,7 @@
                                     type="text"
                                     name="{{ $currentLocale->code }}[title]"
                                     rules="required"
+                                    v-model="selectedService.title"
                                     :label="trans('admin::app.settings.themes.edit.services-content.title')"
                                     :placeholder="trans('admin::app.settings.themes.edit.services-content.title')"
                                 >
@@ -316,6 +324,7 @@
                                 <x-admin::form.control-group.control
                                     type="textarea"
                                     name="{{ $currentLocale->code }}[description]"
+                                    v-model="selectedService.description"
                                     :label="trans('admin::app.settings.themes.edit.services-content.description')"
                                     :placeholder="trans('admin::app.settings.themes.edit.services-content.description')"
                                 >
@@ -337,6 +346,7 @@
                                     type="text"
                                     name="{{ $currentLocale->code }}[service_icon]"
                                     rules="required"
+                                    v-model="selectedService.service_icon"
                                     :label="trans('Service Icon Class')"
                                     :placeholder="trans('Service Icon Class')"
                                 >
@@ -379,6 +389,10 @@
                 servicesContent: @json($theme->translate($currentLocale->code)['options'] ?? null),
 
                 deletedServices: [],
+
+                selectedService: [],
+
+                isUpdating: false
             };
         },
         
@@ -395,33 +409,47 @@
             saveServices(params, { resetForm ,setErrors }) {
                 let formData = new FormData(this.$refs.createServiceForm);
 
-                try {
-                    const serviceImage = formData.get("service_icon[]");
+                if (! this.isUpdating) {
+                    try {
+                        const serviceImage = formData.get("service_icon[]");
 
-                    this.servicesContent.services.push({
-                        title: formData.get("{{ $currentLocale->code }}[title]"),
-                        description: formData.get("{{ $currentLocale->code }}[description]"),
-                        service_icon: formData.get("{{ $currentLocale->code }}[service_icon]"),
-                    });
+                        this.servicesContent.services.push({
+                            title: formData.get("{{ $currentLocale->code }}[title]"),
+                            description: formData.get("{{ $currentLocale->code }}[description]"),
+                            service_icon: formData.get("{{ $currentLocale->code }}[service_icon]"),
+                        });
 
-                    resetForm();
-
-                    this.$refs.addServiceModal.toggle();
-                } catch (error) {
-                    setErrors({'service_icon': [error.message]});
+                        resetForm();
+                    } catch (error) {
+                        setErrors({'service_icon': [error.message]});
+                    }
+                    this.isUpdating = false;
                 }
+                    
+                    this.$refs.addServiceModal.toggle();
+                
             },
 
-            remove(image) {
-                this.deletedServices.push(image);
+            remove(service_details) {
+                this.deletedServices.push(service_details);
                 
                 this.servicesContent.services = this.servicesContent.services.filter(item => {
                     return (
-                        item.title !== image.title || 
-                        item.description !== image.description || 
-                        item.service_icon !== image.service_icon
+                        item.title !== service_details.title || 
+                        item.description !== service_details.description || 
+                        item.service_icon !== service_details.service_icon
                     );
                 });
+            },
+
+            edit(service_details) {
+                this.selectedService = service_details;
+                console.log(service_details);
+                this.isUpdating = true;
+
+                this.$refs.addServiceModal.toggle();
+                // this.$refs.addServiceModal.setValues(service_details);
+
             },
         },
     });
