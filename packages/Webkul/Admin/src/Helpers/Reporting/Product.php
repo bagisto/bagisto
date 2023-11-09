@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Webkul\Customer\Repositories\WishlistRepository;
+use Webkul\Marketing\Repositories\SearchTermRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Sales\Repositories\OrderItemRepository;
-use Webkul\Marketing\Repositories\SearchTermRepository;
 
 class Product extends AbstractReporting
 {
