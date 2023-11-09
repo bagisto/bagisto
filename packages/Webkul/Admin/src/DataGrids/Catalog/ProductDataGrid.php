@@ -247,7 +247,7 @@ class ProductDataGrid extends DataGrid
      */
     public function prepareMassActions()
     {
-        if (bouncer()->hasPermission('catalog.products.mass-delete')) {
+        if (bouncer()->hasPermission('catalog.products.delete')) {
             $this->addMassAction([
                 'title'  => trans('admin::app.catalog.products.index.datagrid.delete'),
                 'url'    => route('admin.catalog.products.mass_delete'),
@@ -255,7 +255,7 @@ class ProductDataGrid extends DataGrid
             ]);
         }
 
-        if (bouncer()->hasPermission('catalog.products.mass-update')) {
+        if (bouncer()->hasPermission('catalog.products.edit')) {
             $this->addMassAction([
                 'title'   => trans('admin::app.catalog.products.index.datagrid.update-status'),
                 'url'     => route('admin.catalog.products.mass_update'),

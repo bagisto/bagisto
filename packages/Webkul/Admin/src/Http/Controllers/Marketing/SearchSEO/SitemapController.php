@@ -1,11 +1,11 @@
 <?php
 
-namespace Webkul\Admin\Http\Controllers\Marketing;
+namespace Webkul\Admin\Http\Controllers\Marketing\SearchSEO;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
-use Webkul\Admin\DataGrids\Marketing\SitemapDataGrid;
+use Webkul\Admin\DataGrids\Marketing\SearchSEO\SitemapDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sitemap\Repositories\SitemapRepository;
 
@@ -31,7 +31,7 @@ class SitemapController extends Controller
             return app(SitemapDataGrid::class)->toJson();
         }
 
-        return view('admin::marketing.sitemaps.index');
+        return view('admin::marketing.search-seo.sitemaps.index');
     }
 
     /**
@@ -44,17 +44,17 @@ class SitemapController extends Controller
             'path'      => 'required',
         ]);
 
-        Event::dispatch('marketing.sitemaps.create.before');
+        Event::dispatch('marketing.search_seo.sitemap.create.before');
 
         $sitemap = $this->sitemapRepository->create(request()->only([
             'file_name',
             'path',
         ]));
 
-        Event::dispatch('marketing.sitemaps.create.after', $sitemap);
+        Event::dispatch('marketing.search_seo.sitemap.create.after', $sitemap);
 
         return new JsonResponse([
-            'message' => trans('admin::app.marketing.sitemaps.index.create.success'),
+            'message' => trans('admin::app.marketing.search-seo.sitemaps.index.create.success'),
         ]);
     }
 
@@ -72,17 +72,17 @@ class SitemapController extends Controller
             'path'      => 'required',
         ]);
 
-        Event::dispatch('marketing.sitemaps.update.before', $id);
+        Event::dispatch('marketing.search_seo.sitemap.update.before', $id);
 
         $sitemap = $this->sitemapRepository->update(request()->only([
             'file_name',
             'path',
         ]), $id);
 
-        Event::dispatch('marketing.sitemaps.update.after', $sitemap);
+        Event::dispatch('marketing.search_seo.sitemap.update.after', $sitemap);
 
         return new JsonResponse([
-            'message' => trans('admin::app.marketing.sitemaps.index.edit.success'),
+            'message' => trans('admin::app.marketing.search-seo.sitemaps.index.edit.success'),
         ]);
     }
 
@@ -99,20 +99,20 @@ class SitemapController extends Controller
         Storage::delete($sitemap->path . '/' . $sitemap->file_name);
 
         try {
-            Event::dispatch('marketing.sitemaps.delete.before', $id);
+            Event::dispatch('marketing.search_seo.sitemap.delete.before', $id);
 
             $this->sitemapRepository->delete($id);
 
-            Event::dispatch('marketing.sitemaps.delete.after', $id);
+            Event::dispatch('marketing.search_seo.sitemap.delete.after', $id);
 
             return response()->json([
-                'message' => trans('admin::app.marketing.sitemaps.index.edit.delete-success'),
+                'message' => trans('admin::app.marketing.search-seo.sitemaps.index.edit.delete-success'),
             ], 200);
         } catch (\Exception $e) {
         }
 
         return response()->json([
-            'message' => trans('admin::app.marketing.sitemaps.delete-failed', ['name' => 'admin::app.marketing.sitemaps.index.sitemap']),
+            'message' => trans('admin::app.marketing.search-seo.sitemaps.delete-failed', ['name' => 'admin::app.marketing.search-seo.sitemaps.index.sitemap']),
         ], 500);
     }
 }

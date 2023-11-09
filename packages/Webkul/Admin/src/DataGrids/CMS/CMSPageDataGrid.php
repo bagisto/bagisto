@@ -117,7 +117,7 @@ class CMSPageDataGrid extends DataGrid
      */
     public function prepareMassActions()
     {
-        if (bouncer()->hasPermission('cms.mass-delete')) {
+        if (bouncer()->hasPermission('cms.delete')) {
             $this->addMassAction([
                 'title'  => trans('admin::app.cms.index.datagrid.delete'),
                 'method' => 'POST',
