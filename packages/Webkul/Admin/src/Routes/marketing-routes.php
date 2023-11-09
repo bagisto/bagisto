@@ -153,6 +153,8 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
                 Route::put('edit', 'update')->name('admin.marketing.search_seo.search_terms.update');
 
                 Route::delete('edit/{id}', 'destroy')->name('admin.marketing.search_seo.search_terms.delete');
+
+                Route::post('mass-delete', 'massDestroy')->name('admin.marketing.search_seo.search_terms.mass_delete');
             });
         
             /**

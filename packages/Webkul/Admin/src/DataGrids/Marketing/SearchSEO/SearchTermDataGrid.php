@@ -15,7 +15,24 @@ class SearchTermDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('sitemaps')->addSelect('id', 'file_name', 'path', 'path as url');
+        $queryBuilder = DB::table('search_terms')
+            ->addSelect(
+                'search_terms.id',
+                'search_terms.term',
+                'search_terms.results',
+                'search_terms.uses',
+                'search_terms.redirect_url',
+                'search_terms.channel_id',
+                'channel_translations.name as channel_name',
+                'search_terms.locale',
+            )
+            ->leftJoin('channel_translations', function ($leftJoin) {
+                $leftJoin->on('search_terms.channel_id', '=', 'channel_translations.channel_id')
+                    ->where('channel_translations.locale', app()->getLocale());
+            });
+
+        $this->addFilter('channel_id', 'search_terms.channel_id');
+        $this->addFilter('locale', 'search_terms.locale');
 
         return $queryBuilder;
     }
@@ -29,7 +46,7 @@ class SearchTermDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.marketing.search-seo.sitemaps.index.datagrid.id'),
+            'label'      => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'width'      => '40px',
@@ -38,8 +55,8 @@ class SearchTermDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'file_name',
-            'label'      => trans('admin::app.marketing.search-seo.sitemaps.index.datagrid.file-name'),
+            'index'      => 'term',
+            'label'      => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.search-query'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -47,24 +64,68 @@ class SearchTermDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'path',
-            'label'      => trans('admin::app.marketing.search-seo.sitemaps.index.datagrid.path'),
-            'type'       => 'string',
-            'searchable' => true,
-            'filterable' => true,
-            'sortable'   => true,
-        ]);
-
-        $this->addColumn([
-            'index'      => 'url',
-            'label'      => trans('admin::app.marketing.search-seo.sitemaps.index.datagrid.link-for-google'),
-            'type'       => 'string',
+            'index'      => 'results',
+            'label'      => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.results'),
+            'type'       => 'integer',
             'searchable' => false,
-            'filterable' => false,
-            'sortable'   => false,
-            'closure'    => function ($row) {
-                return Storage::url($row->path . '/' . $row->file_name);
-            },
+            'filterable' => true,
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'uses',
+            'label'      => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.uses'),
+            'type'       => 'integer',
+            'searchable' => false,
+            'filterable' => true,
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'redirect_url',
+            'label'      => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.redirect-url'),
+            'type'       => 'string',
+            'searchable' => true,
+            'filterable' => true,
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'channel_id',
+            'label'      => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.channel'),
+            'type'       => 'dropdown',
+            'options'    => [
+                'type' => 'basic',
+
+                'params' => [
+                    'options' => core()->getAllChannels()
+                        ->map(fn ($channel) => ['label' => $channel->name, 'value' => $channel->id])
+                        ->values()
+                        ->toArray(),
+                ],
+            ],
+            'searchable' => false,
+            'filterable' => true,
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'locale',
+            'label'      => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.locale'),
+            'type'       => 'dropdown',
+            'options'    => [
+                'type' => 'basic',
+
+                'params' => [
+                    'options' => core()->getAllLocales()
+                        ->map(fn ($locale) => ['label' => $locale->name, 'value' => $locale->code])
+                        ->values()
+                        ->toArray(),
+                ],
+            ],
+            'searchable' => false,
+            'filterable' => true,
+            'sortable'   => true,
         ]);
     }
 
@@ -75,26 +136,42 @@ class SearchTermDataGrid extends DataGrid
      */
     public function prepareActions()
     {
-        if (bouncer()->hasPermission('marketing.sitemaps.edit')) {
+        if (bouncer()->hasPermission('marketing.search_terms.edit')) {
             $this->addAction([
                 'icon'   => 'icon-edit',
-                'title'  => trans('admin::app.marketing.search-seo.sitemaps.index.datagrid.edit'),
+                'title'  => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.edit'),
                 'method' => 'GET',
-                'route'  => 'admin.marketing.search_seo.sitemaps.update',
+                'route'  => 'admin.marketing.search_seo.search_terms.update',
                 'url'    => function ($row) {
-                    return route('admin.marketing.search_seo.sitemaps.update', $row->id);
+                    return route('admin.marketing.search_seo.search_terms.update', $row->id);
                 },
             ]);
         }
 
-        if (bouncer()->hasPermission('marketing.sitemaps.delete')) {
+        if (bouncer()->hasPermission('marketing.search_terms.delete')) {
             $this->addAction([
                 'icon'   => 'icon-delete',
-                'title'  => trans('admin::app.marketing.search-seo.sitemaps.index.datagrid.delete'),
+                'title'  => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.delete'),
                 'method' => 'DELETE',
                 'url'    => function ($row) {
-                    return route('admin.marketing.search_seo.sitemaps.delete', $row->id);
+                    return route('admin.marketing.search_seo.search_terms.delete', $row->id);
                 },
+            ]);
+        }
+    }
+
+    /**
+     * Prepare mass actions.
+     *
+     * @return void
+     */
+    public function prepareMassActions()
+    {
+        if (bouncer()->hasPermission('marketing.search_terms.delete')) {
+            $this->addMassAction([
+                'title'  => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.delete'),
+                'method' => 'POST',
+                'url'    => route('admin.marketing.search_seo.search_terms.mass_delete'),
             ]);
         }
     }

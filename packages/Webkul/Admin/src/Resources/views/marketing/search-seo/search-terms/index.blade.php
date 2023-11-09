@@ -54,96 +54,88 @@
                 src="{{ route('admin.marketing.search_seo.search_terms.index') }}"
                 ref="datagrid"
             >
-                @php
-                    $hasPermission = bouncer()->hasPermission('marketing.search_seo.search_terms.edit') || bouncer()->hasPermission('marketing.search_seo.search_terms.delete');
-                @endphp
-
-                <!-- Datagrid Header -->
-                <template #header="{ columns, records, sortPage, applied }">
-                    <div
-                        class="row grid grid-cols-{{ $hasPermission ? '5' : '4' }} grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold"
-                        :style="'grid-template-columns: repeat({{ $hasPermission ? '5' : '4' }}, minmax(0, 1fr));'"
-                    >
-                        <div
-                            class="flex gap-[10px] cursor-pointer"
-                            v-for="(columnGroup, index) in ['id', 'file_name', 'path', 'url']"
-                        >
-                            <p class="text-gray-600 dark:text-gray-300">
-                                <span class="[&>*]:after:content-['_/_']">
-                                    <span
-                                        class="after:content-['/'] last:after:content-['']"
-                                        :class="{
-                                            'text-gray-800 dark:text-white font-medium': applied.sort.column == columnGroup,
-                                            'cursor-pointer hover:text-gray-800 dark:hover:text-white': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
-                                        }"
-                                        @click="
-                                            columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === columnGroup)): {}
-                                        "
-                                    >
-                                        @{{ columns.find(columnTemp => columnTemp.index === columnGroup)?.label }}
-                                    </span>
-                                </span>
-
-                                <!-- Filter Arrow Icon -->
-                                <i
-                                    class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 dark:text-white align-text-bottom"
-                                    :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
-                                    v-if="columnGroup.includes(applied.sort.column)"
-                                ></i>
-                            </p>
-                        </div>
-
-                        <!-- Actions -->
-                        @if ($hasPermission)
-                            <p class="col-start-[none]">
-                                @lang('admin::app.components.datagrid.table.actions')
-                            </p>
-                        @endif
-                    </div>
-                </template>
-
                 <!-- DataGrid Body -->
-                <template #body="{ columns, records, performAction }">
-                    <div
-                        v-for="record in records"
-                        class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
-                        :style="'grid-template-columns: repeat(' + (record.actions.length ? 5 : 4) + ', minmax(0, 1fr));'"
-                    >
-                        <!-- Id -->
-                        <p v-text="record.id"></p>
+                <template #body="{ columns, records, setCurrentSelectionMode, performAction, available, applied, isLoading }">
+                    <template v-if="! isLoading">
+                        <div
+                            v-for="record in records"
+                            class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                                :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
+                        >
+                            <!-- Mass Actions -->
+                            <p v-if="available.massActions.length">
+                                <label :for="`mass_action_select_record_${record[available.meta.primary_column]}`">
+                                    <input
+                                        type="checkbox"
+                                        class="peer hidden"
+                                        :name="`mass_action_select_record_${record[available.meta.primary_column]}`"
+                                        :value="record[available.meta.primary_column]"
+                                        :id="`mass_action_select_record_${record[available.meta.primary_column]}`"
+                                        v-model="applied.massActions.indices"
+                                        @change="setCurrentSelectionMode"
+                                    >
 
-                        <!-- File Name -->
-                        <p v-text="record.file_name"></p>
+                                    <span class="icon-uncheckbox peer-checked:icon-checked peer-checked:text-blue-600 cursor-pointer rounded-[6px] text-[24px]">
+                                    </span>
+                                </label>
+                            </p>
 
-                        <!-- Path -->
-                        <p v-text="record.path"></p>
+                            <!-- Id -->
+                            <p v-text="record.id"></p>
 
-                        <!-- URL -->
-                        <p>
-                            <a :href="record.url" target="_blank">
-                                @{{ record.url}}
-                            </a>
-                        </p>
+                            <!-- Search Query -->
+                            <p v-text="record.term"></p>
 
-                        <!-- Actions -->
-                        <div class="flex justify-end">
-                            <a @click="selectedSitemap=1; editModal(record)">
-                                <span
-                                    :class="record.actions.find(action => action.title === 'Edit')?.icon"
-                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
-                                >
-                                </span>
-                            </a>
+                            <!-- Search Results -->
+                            <p v-text="record.results"></p>
 
-                            <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
-                                <span
-                                    :class="record.actions.find(action => action.method === 'DELETE')?.icon"
-                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
-                                >
-                                </span>
-                            </a>
+                            <!-- Uses -->
+                            <p v-text="record.uses"></p>
+
+                            <!-- URL -->
+                            <p class="break-all">
+                                <a :href="record.redirect_url" target="_blank">
+                                    @{{ record.redirect_url}}
+                                </a>
+                            </p>
+
+                            <!-- Channel -->
+                            <p v-text="record.channel_name"></p>
+
+                            <!-- Locale -->
+                            <p v-text="record.locale"></p>
+
+                            <!-- Actions -->
+                            @if (bouncer()->hasPermission('marketing.search_terms.edit') || bouncer()->hasPermission('marketing.search_terms.delete'))
+                                <div class="flex justify-end">
+                                    @if (bouncer()->hasPermission('marketing.search_terms.edit'))
+                                        <a @click="selectedSitemap=1; editModal(record)">
+                                            <span
+                                                :class="record.actions.find(action => action.title === 'Edit')?.icon"
+                                                class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
+                                            >
+                                            </span>
+                                        </a>
+                                    @endif
+
+                                    @if (bouncer()->hasPermission('marketing.search_terms.delete'))
+                                        <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
+                                            <span
+                                                :class="record.actions.find(action => action.method === 'DELETE')?.icon"
+                                                class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
+                                            >
+                                            </span>
+                                        </a>
+                                    @endif
+                                </div>
+                            @endif
                         </div>
-                    </div>
+                    </template>
+
+                    <!-- Datagrid Body Shimmer -->
+                    <template v-else>
+                        <x-admin::shimmer.datagrid.table.body></x-admin::shimmer.datagrid.table.body>
+                    </template>
                 </template>
             </x-admin::datagrid>
 
@@ -190,57 +182,124 @@
                                 >
                                 </x-admin::form.control-group.control>
 
-                                <!-- File Name -->
+                                <!-- Search Term -->
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.marketing.search-seo.search-terms.index.create.file-name')
+                                        @lang('admin::app.marketing.search-seo.search-terms.index.create.search-query')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="file_name"
-                                        :value="old('file_name')"
+                                        name="term"
                                         rules="required"
-                                        :label="trans('admin::app.marketing.search-seo.search-terms.index.create.file-name')"
-                                        :placeholder="trans('admin::app.marketing.search-seo.search-terms.index.create.file-name')"
+                                        :label="trans('admin::app.marketing.search-seo.search-terms.index.create.search-query')"
+                                        :placeholder="trans('admin::app.marketing.search-seo.search-terms.index.create.search-query')"
                                     >
                                     </x-admin::form.control-group.control>
 
                                     <x-admin::form.control-group.error
-                                        control-name="file_name"
+                                        control-name="term"
                                     >
                                     </x-admin::form.control-group.error>
-
-                                    <p class="mt-[8px] ltr:ml-[4px] rtl:mr-[4px] text-[12px] text-gray-600 dark:text-gray-300 font-medium">
-                                        @lang('admin::app.marketing.search-seo.search-terms.index.create.file-name-info')
-                                    </p>
-
                                 </x-admin::form.control-group>
 
-                                <!-- File Path -->
+                                <template v-if="selectedSitemap">
+                                    <!-- Results -->
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label class="required">
+                                            @lang('admin::app.marketing.search-seo.search-terms.index.create.results')
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="results"
+                                            rules="required"
+                                            :label="trans('admin::app.marketing.search-seo.search-terms.index.create.results')"
+                                            :placeholder="trans('admin::app.marketing.search-seo.search-terms.index.create.results')"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error
+                                            control-name="results"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+
+                                    <!-- Uses -->
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label class="required">
+                                            @lang('admin::app.marketing.search-seo.search-terms.index.create.uses')
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="uses"
+                                            rules="required"
+                                            :label="trans('admin::app.marketing.search-seo.search-terms.index.create.uses')"
+                                            :placeholder="trans('admin::app.marketing.search-seo.search-terms.index.create.uses')"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error
+                                            control-name="uses"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+                                </template>
+
+                                <!-- Uses -->
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.marketing.search-seo.search-terms.index.create.path')
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.marketing.search-seo.search-terms.index.create.redirect-url')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="path"
-                                        :value="old('path')"
-                                        rules="required"
-                                        :label="trans('admin::app.marketing.search-seo.search-terms.index.create.path')"
-                                        :placeholder="trans('admin::app.marketing.search-seo.search-terms.index.create.path')"
+                                        name="redirect_url"
+                                        :label="trans('admin::app.marketing.search-seo.search-terms.index.create.redirect-url')"
+                                        :placeholder="trans('admin::app.marketing.search-seo.search-terms.index.create.redirect-url')"
                                     >
                                     </x-admin::form.control-group.control>
+                                </x-admin::form.control-group>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="path"
+                                <!-- Channels -->
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.marketing.search-seo.search-terms.index.create.channel')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="channel_id"
+                                        rules="required"
+                                        :label="trans('admin::app.marketing.search-seo.search-terms.index.create.channel')"
                                     >
-                                    </x-admin::form.control-group.error>
+                                        @foreach (core()->getAllChannels() as $channel)
+                                            <option value="{{ $channel->id }}">{{ $channel->name }}</option>
+                                        @endforeach 
+                                    </x-admin::form.control-group.control>
 
-                                    <p class="mt-[8px] ltr:ml-[4px] rtl:mr-[4px] text-[12px] text-gray-600 dark:text-gray-300 font-medium">
-                                        @lang('admin::app.marketing.search-seo.search-terms.index.create.path-info')
-                                    </p>
+                                    <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <!-- Channels -->
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.marketing.search-seo.search-terms.index.create.locale')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="locale"
+                                        rules="required"
+                                        :label="trans('admin::app.marketing.search-seo.search-terms.index.create.locale')"
+                                    >
+                                        @foreach (core()->getAllLocales() as $locale)
+                                            <option value="{{ $locale->code }}">{{ $locale->name }}</option>
+                                        @endforeach 
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error control-name="locale"></x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
                             </div>
                         </x-slot:content>
@@ -264,6 +323,22 @@
                     return {
                         selectedSitemap: 0,
                     }
+                },
+
+                computed: {
+                    gridsCount() {
+                        let count = this.$refs.datagrid.available.columns.length;
+
+                        if (this.$refs.datagrid.available.actions.length) {
+                            ++count;
+                        }
+
+                        if (this.$refs.datagrid.available.massActions.length) {
+                            ++count;
+                        }
+
+                        return count;
+                    },
                 },
 
                 methods: {

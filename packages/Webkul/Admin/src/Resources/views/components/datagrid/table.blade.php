@@ -94,7 +94,7 @@
                                             @change="$parent.setCurrentSelectionMode"
                                         >
 
-                                        <span class="icon-uncheckbox peer-checked:icon-checked peer-checked:text-blue-600 cursor-pointer rounded-[6px] text-[24px] peer-checked:text-blue-600">
+                                        <span class="icon-uncheckbox peer-checked:icon-checked peer-checked:text-blue-600 cursor-pointer rounded-[6px] text-[24px]">
                                         </span>
                                     </label>
                                 </p>

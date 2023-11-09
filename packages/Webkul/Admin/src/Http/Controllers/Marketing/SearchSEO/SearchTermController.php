@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\DataGrids\Marketing\SearchSEO\SearchTermDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Marketing\Repositories\SearchTermRepository;
+use Webkul\Admin\Http\Requests\MassDestroyRequest;
 
 class SearchTermController extends Controller
 {
@@ -40,18 +41,22 @@ class SearchTermController extends Controller
     public function store(): JsonResponse
     {
         $this->validate(request(), [
-            'file_name' => 'required',
-            'path'      => 'required',
+            'term'         => 'required',
+            'redirect_url' => 'url:http,https',
+            'channel_id'   => 'required|exists:channels,id',
+            'locale'       => 'required|exists:locales,code',
         ]);
 
-        Event::dispatch('marketing.search_seo.search_terms.create.before');
+        Event::dispatch('marketing.search_seo.search_term.create.before');
 
-        $sitemap = $this->sitemapRepository->create(request()->only([
-            'file_name',
-            'path',
+        $searchTerm = $this->searchTermRepository->create(request()->only([
+            'term',
+            'redirect_url',
+            'channel_id',
+            'locale',
         ]));
 
-        Event::dispatch('marketing.search_seo.search_terms.create.after', $sitemap);
+        Event::dispatch('marketing.search_seo.search_term.create.after', $searchTerm);
 
         return new JsonResponse([
             'message' => trans('admin::app.marketing.search-seo.search-terms.index.create.success'),
@@ -68,18 +73,24 @@ class SearchTermController extends Controller
         $id = request()->id;
 
         $this->validate(request(), [
-            'file_name' => 'required',
-            'path'      => 'required',
+            'term'         => 'required',
+            'redirect_url' => 'url:http,https',
+            'channel_id'   => 'required|exists:channels,id',
+            'locale'       => 'required|exists:locales,code',
         ]);
 
-        Event::dispatch('marketing.search_seo.search_terms.update.before', $id);
+        Event::dispatch('marketing.search_seo.search_term.update.before', $id);
 
-        $sitemap = $this->sitemapRepository->update(request()->only([
-            'file_name',
-            'path',
+        $searchTerm = $this->searchTermRepository->update(request()->only([
+            'term',
+            'results',
+            'uses',
+            'redirect_url',
+            'channel_id',
+            'locale',
         ]), $id);
 
-        Event::dispatch('marketing.search_seo.search_terms.update.after', $sitemap);
+        Event::dispatch('marketing.search_seo.search_term.update.after', $searchTerm);
 
         return new JsonResponse([
             'message' => trans('admin::app.marketing.search-seo.search-terms.index.edit.success'),
@@ -94,16 +105,12 @@ class SearchTermController extends Controller
      */
     public function destroy($id)
     {
-        $sitemap = $this->sitemapRepository->findOrFail($id);
-
-        Storage::delete($sitemap->path . '/' . $sitemap->file_name);
-
         try {
-            Event::dispatch('marketing.search_seo.search_terms.delete.before', $id);
+            Event::dispatch('marketing.search_seo.search_term.delete.before', $id);
 
-            $this->sitemapRepository->delete($id);
+            $this->searchTermRepository->delete($id);
 
-            Event::dispatch('marketing.search_seo.search_terms.delete.after', $id);
+            Event::dispatch('marketing.search_seo.search_term.delete.after', $id);
 
             return response()->json([
                 'message' => trans('admin::app.marketing.search-seo.search-terms.index.edit.delete-success'),
@@ -112,7 +119,37 @@ class SearchTermController extends Controller
         }
 
         return response()->json([
-            'message' => trans('admin::app.marketing.search-seo.search-terms.delete-failed', ['name' => 'admin::app.marketing.search-seo.search-terms.index.sitemap']),
+            'message' => trans('admin::app.marketing.search-seo.search-terms.delete-failed'),
         ], 500);
+    }
+
+    /**
+     * Mass delete the search terms.
+     */
+    public function massDestroy(MassDestroyRequest $massDestroyRequest): JsonResponse
+    {
+        $searchTermIds = $massDestroyRequest->input('indices');
+
+        try {
+            foreach ($searchTermIds as $searchTermId) {
+                $searchTerm = $this->searchTermRepository->find($searchTermId);
+
+                if (isset($searchTerm)) {
+                    Event::dispatch('marketing.search_seo.search_term.delete.before', $searchTermId);
+
+                    $this->searchTermRepository->delete($searchTermId);
+
+                    Event::dispatch('marketing.search_seo.search_term.delete.after', $searchTermId);
+                }
+            }
+
+            return new JsonResponse([
+                'message' => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.mass-delete-success'),
+            ]);
+        } catch (\Exception $e) {
+            return new JsonResponse([
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 }
