@@ -3344,6 +3344,7 @@ return [
                 'tax-categories'           => 'فئات الضرائب',
                 'tax-rates'                => 'معدلات الضرائب',
                 'transactions'             => 'المعاملات',
+                'url-rewrites'             => 'إعادة كتابة عناوين URL',
                 'users'                    => 'المستخدمين',
             ],
         ],
@@ -3504,6 +3505,7 @@ return [
         'tax-rates'                => 'أسعار الضرائب',
         'transactions'             => 'المعاملات',
         'users'                    => 'المستخدمين',
+        'url-rewrites'             => 'إعادة كتابة عناوين URL',
         'view'                     => 'عرض',
     ],
 
