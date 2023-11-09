@@ -17,6 +17,8 @@ class ThemeServiceProvider extends ServiceProvider
     {
         include __DIR__ . '/../Http/helpers.php';
 
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+
         Blade::directive('bagistoVite', function ($expression) {
             return "<?php echo themes()->setBagistoVite({$expression})->toHtml(); ?>";
         });
