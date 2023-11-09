@@ -3410,8 +3410,6 @@ return [
         'invoices'                 => 'চালান',
         'inventory-sources'        => 'মূল্যবান পণ্যের উৎস',
         'locales'                  => 'লোকেল',
-        'mass-delete'              => 'সাময়িক মুছে ফেলুন',
-        'mass-update'              => 'সাময়িক আপডেট',
         'marketing'                => 'মার্কেটিং',
         'newsletter-subscriptions' => 'নিউজলেটার সাবস্ক্রিপশন',
         'note'                     => 'মন্তব্য',

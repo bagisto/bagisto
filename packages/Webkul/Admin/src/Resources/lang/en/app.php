@@ -3412,8 +3412,6 @@ return [
         'invoices'                 => 'Invoices',
         'inventory-sources'        => 'Inventory Sources',
         'locales'                  => 'Locales',
-        'mass-delete'              => 'Mass Delete',
-        'mass-update'              => 'Mass Update',
         'marketing'                => 'Marketing',
         'newsletter-subscriptions' => 'Newsletter Subscriptions',
         'note'                     => 'Note',

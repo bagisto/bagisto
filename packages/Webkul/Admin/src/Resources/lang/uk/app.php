@@ -3411,8 +3411,6 @@ return [
         'invoices'                 => 'Рахунки',
         'inventory-sources'        => 'Джерела інвентаризації',
         'locales'                  => 'Локалізації',
-        'mass-delete'              => 'Масове видалення',
-        'mass-update'              => 'Масове оновлення',
         'marketing'                => 'Маркетинг',
         'newsletter-subscriptions' => 'Підписка на розсилку',
         'note'                     => 'Примітка',

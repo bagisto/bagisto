@@ -3409,8 +3409,6 @@ return [
         'invoices'                 => 'الفواتير',
         'inventory-sources'        => 'مصادر المخزون',
         'locales'                  => 'اللغات',
-        'mass-delete'              => 'حذف جماعي',
-        'mass-update'              => 'تحديث جماعي',
         'marketing'                => 'التسويق',
         'newsletter-subscriptions' => 'اشتراكات النشرة الإخبارية',
         'note'                     => 'ملاحظة',

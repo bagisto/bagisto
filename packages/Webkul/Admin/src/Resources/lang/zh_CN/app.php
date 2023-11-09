@@ -3411,8 +3411,6 @@ return [
         'invoices'                 => '发票',
         'inventory-sources'        => '库存来源',
         'locales'                  => '区域设置',
-        'mass-delete'              => '批量删除',
-        'mass-update'              => '批量更新',
         'marketing'                => '营销',
         'newsletter-subscriptions' => '电子报订阅',
         'note'                     => '备注',

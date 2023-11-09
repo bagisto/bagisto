@@ -3411,8 +3411,6 @@ return [
         'invoices'                 => 'Faturalar',
         'inventory-sources'        => 'Envanter Kaynakları',
         'locales'                  => 'Yerel Ayarlar',
-        'mass-delete'              => 'Toplu Silme',
-        'mass-update'              => 'Toplu Güncelleme',
         'marketing'                => 'Pazarlama',
         'newsletter-subscriptions' => 'Bülten Abonelikleri',
         'note'                     => 'Not',

@@ -3411,8 +3411,6 @@ return [
         'invoices'                 => 'चालान',
         'inventory-sources'        => 'सूची स्रोत',
         'locales'                  => 'स्थान',
-        'mass-delete'              => 'बड़े पैमाने पर हटाएं',
-        'mass-update'              => 'बड़े पैमाने पर अपडेट करें',
         'marketing'                => 'मार्केटिंग',
         'newsletter-subscriptions' => 'समाचार पत्रिका सदस्यता',
         'note'                     => 'टिप्पणी',

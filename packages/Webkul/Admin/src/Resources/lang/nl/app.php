@@ -3411,8 +3411,6 @@ return [
         'invoices'                 => 'Facturen',
         'inventory-sources'        => 'Voorraadbronnen',
         'locales'                  => 'Talen',
-        'mass-delete'              => 'Massa Verwijderen',
-        'mass-update'              => 'Massa Bijwerken',
         'marketing'                => 'Marketing',
         'newsletter-subscriptions' => 'Nieuwsbrief Abonnementen',
         'note'                     => 'Notitie',

@@ -3411,8 +3411,6 @@ return [
         'invoices'                 => 'Faktury',
         'inventory-sources'        => 'Źródła Magazynu',
         'locales'                  => 'Lokalizacje',
-        'mass-delete'              => 'Masowe Usuwanie',
-        'mass-update'              => 'Masowe Aktualizacje',
         'marketing'                => 'Marketing',
         'newsletter-subscriptions' => 'Subskrypcje Newslettera',
         'note'                     => 'Notatka',

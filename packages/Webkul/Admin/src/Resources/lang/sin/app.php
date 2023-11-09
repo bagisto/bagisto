@@ -3411,8 +3411,6 @@ return [
         'invoices'                 => 'ක්‍රියාත්මක',
         'inventory-sources'        => 'අබාරාද',
         'locales'                  => 'ස්ථාන',
-        'mass-delete'              => 'මැස් මකාදැමු',
-        'mass-update'              => 'මැස් යාවත්කාලය',
         'marketing'                => 'නිර්දේශ',
         'newsletter-subscriptions' => 'නිළියුබ්ස් දායකත්ව',
         'note'                     => 'සටහන',
