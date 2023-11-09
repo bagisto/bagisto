@@ -3411,8 +3411,6 @@ return [
         'invoices'                 => 'חשבוניות',
         'inventory-sources'        => 'מקורות מלאי',
         'locales'                  => 'אזורים',
-        'mass-delete'              => 'מחיקה מרובה',
-        'mass-update'              => 'עדכון מרובה',
         'marketing'                => 'שיווק',
         'newsletter-subscriptions' => 'הרשמות לניוזלטר',
         'note'                     => 'הערה',

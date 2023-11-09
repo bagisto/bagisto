@@ -3411,8 +3411,6 @@ return [
         'invoices'                 => '請求書',
         'inventory-sources'        => '在庫ソース',
         'locales'                  => 'ロケール',
-        'mass-delete'              => '一括削除',
-        'mass-update'              => '一括更新',
         'marketing'                => 'マーケティング',
         'newsletter-subscriptions' => 'ニュースレター購読',
         'note'                     => 'メモ',

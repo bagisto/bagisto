@@ -3410,8 +3410,6 @@ return [
         'invoices'                 => 'Fatture',
         'inventory-sources'        => 'Sorgenti inventario',
         'locales'                  => 'Lingue',
-        'mass-delete'              => 'Cancella tutto',
-        'mass-update'              => 'Aggiorna tutto',
         'marketing'                => 'Marketing',
         'newsletter-subscriptions' => 'Iscrizioni alla newsletter',
         'note'                     => 'Nota',

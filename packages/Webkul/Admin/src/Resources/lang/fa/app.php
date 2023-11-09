@@ -3411,8 +3411,6 @@ return [
         'invoices'                 => 'فاکتورها',
         'inventory-sources'        => 'منابع موجودی',
         'locales'                  => 'منطقه‌ها',
-        'mass-delete'              => 'حذف دسته‌ای',
-        'mass-update'              => 'به‌روزرسانی دسته‌ای',
         'marketing'                => 'بازاریابی',
         'newsletter-subscriptions' => 'اشتراک‌های خبرنامه',
         'note'                     => 'یادداشت',

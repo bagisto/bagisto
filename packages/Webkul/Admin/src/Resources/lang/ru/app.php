@@ -3398,8 +3398,6 @@ return [
         'invoices'                 => 'Счета',
         'inventory-sources'        => 'Источники инвентаря',
         'locales'                  => 'Локали',
-        'mass-delete'              => 'Массовое удаление',
-        'mass-update'              => 'Массовое обновление',
         'marketing'                => 'Маркетинг',
         'newsletter-subscriptions' => 'Подписки на рассылку',
         'note'                     => 'Примечание',
