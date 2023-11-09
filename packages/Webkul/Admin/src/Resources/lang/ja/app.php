@@ -2011,6 +2011,49 @@ return [
 
                 'delete-failed'  => ':name 削除に失敗しました',
             ],
+
+            'url-rewrites' => [
+                'index' => [
+                    'title'      => 'URLリライト',
+                    'create-btn' => 'URLリライトを作成',
+            
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'for'                 => '対象',
+                        'request-path'        => 'リクエストパス',
+                        'target-path'         => 'ターゲットパス',
+                        'redirect-type'       => 'リダイレクトタイプ',
+                        'locale'              => 'ロケール',
+                        'edit'                => '編集',
+                        'delete'              => '削除',
+                        'actions'             => 'アクション',
+                        'mass-delete-success' => '選択したURLリライトが正常に削除されました',
+                    ],
+            
+                    'create' => [
+                        'for'                => '対象',
+                        'product'            => '製品',
+                        'category'           => 'カテゴリ',
+                        'cms-page'           => 'CMSページ',
+                        'request-path'       => 'リクエストパス',
+                        'target-path'        => 'ターゲットパス',
+                        'redirect-type'      => 'リダイレクトタイプ',
+                        'temporary-redirect' => '一時的なリダイレクト(302)',
+                        'permanent-redirect' => '恒久的なリダイレクト(301)',
+                        'locale'             => 'ロケール',
+                        'save-btn'           => 'URLリライトを保存',
+                        'title'              => 'URLリライトの作成',
+                        'success'            => 'URLリライトが正常に作成されました',
+                        'delete-warning'     => 'このアクションを実行してもよろしいですか？',
+                    ],
+            
+                    'edit' => [
+                        'title'          => 'URLリライトの編集',
+                        'success'        => 'URLリライトが正常に更新されました',
+                        'delete-success' => 'URLリライトが正常に削除されました',
+                    ],
+                ],
+            ],
         ],
     ],
 

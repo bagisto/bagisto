@@ -2011,6 +2011,49 @@ return [
 
                 'delete-failed'  => ':name حذف نشد',
             ],
+
+            'url-rewrites' => [
+                'index' => [
+                    'title'      => 'بازنویسی URL ها',
+                    'create-btn' => 'ایجاد بازنویسی URL',
+            
+                    'datagrid' => [
+                        'id'                  => 'شناسه',
+                        'for'                 => 'برای',
+                        'request-path'        => 'مسیر درخواست',
+                        'target-path'         => 'مسیر هدف',
+                        'redirect-type'       => 'نوع تغییر مسیر',
+                        'locale'              => 'منطقه',
+                        'edit'                => 'ویرایش',
+                        'delete'              => 'حذف',
+                        'actions'             => 'عملیات',
+                        'mass-delete-success' => 'بازنویسی URL های انتخاب شده با موفقیت حذف شدند',
+                    ],
+            
+                    'create' => [
+                        'for'                => 'برای',
+                        'product'            => 'محصول',
+                        'category'           => 'دسته بندی',
+                        'cms-page'           => 'صفحه CMS',
+                        'request-path'       => 'مسیر درخواست',
+                        'target-path'        => 'مسیر هدف',
+                        'redirect-type'      => 'نوع تغییر مسیر',
+                        'temporary-redirect' => 'موقت (302)',
+                        'permanent-redirect' => 'دائمی (301)',
+                        'locale'             => 'منطقه',
+                        'save-btn'           => 'ذخیره بازنویسی URL',
+                        'title'              => 'ایجاد بازنویسی URL',
+                        'success'            => 'بازنویسی URL با موفقیت ایجاد شد',
+                        'delete-warning'     => 'آیا مطمئن هستید که می خواهید این عمل را انجام دهید؟',
+                    ],
+            
+                    'edit' => [
+                        'title'          => 'ویرایش بازنویسی URL',
+                        'success'        => 'بازنویسی URL با موفقیت به روز شد',
+                        'delete-success' => 'بازنویسی URL با موفقیت حذف شد',
+                    ],
+                ],
+            ],
         ],
     ],
 

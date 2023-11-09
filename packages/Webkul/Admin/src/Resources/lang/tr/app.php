@@ -2011,6 +2011,49 @@ return [
 
                 'delete-failed'  => ':name Silme Başarısız',
             ],
+
+            'url-rewrites' => [
+                'index' => [
+                    'title'      => 'URL Yeniden Yönlendirmeleri',
+                    'create-btn' => 'URL Yeniden Yönlendirme Oluştur',
+            
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'for'                 => 'İçin',
+                        'request-path'        => 'İstek Yolu',
+                        'target-path'         => 'Hedef Yol',
+                        'redirect-type'       => 'Yönlendirme Türü',
+                        'locale'              => 'Yerel',
+                        'edit'                => 'Düzenle',
+                        'delete'              => 'Sil',
+                        'actions'             => 'İşlemler',
+                        'mass-delete-success' => 'Seçili URL Yeniden Yönlendirmeleri Başarıyla Silindi',
+                    ],
+            
+                    'create' => [
+                        'for'                => 'İçin',
+                        'product'            => 'Ürün',
+                        'category'           => 'Kategori',
+                        'cms-page'           => 'CMS Sayfası',
+                        'request-path'       => 'İstek Yolu',
+                        'target-path'        => 'Hedef Yol',
+                        'redirect-type'      => 'Yönlendirme Türü',
+                        'temporary-redirect' => 'Geçici (302)',
+                        'permanent-redirect' => 'Kalıcı (301)',
+                        'locale'             => 'Yerel',
+                        'save-btn'           => 'URL Yeniden Yönlendirmeyi Kaydet',
+                        'title'              => 'URL Yeniden Yönlendirme Oluştur',
+                        'success'            => 'URL Yeniden Yönlendirmesi başarıyla oluşturuldu',
+                        'delete-warning'     => 'Bu işlemi gerçekleştirmek istediğinizden emin misiniz?',
+                    ],
+            
+                    'edit' => [
+                        'title'          => 'URL Yeniden Yönlendirmeyi Düzenle',
+                        'success'        => 'URL Yeniden Yönlendirmesi başarıyla güncellendi',
+                        'delete-success' => 'URL Yeniden Yönlendirmesi başarıyla silindi',
+                    ],
+                ],
+            ],
         ],
     ],
 

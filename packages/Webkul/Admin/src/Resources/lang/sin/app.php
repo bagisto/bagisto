@@ -2011,6 +2011,49 @@ return [
 
                 'delete-failed'  => ':name මකාදම් කිරීම අසාර්ථකයි',
             ],
+
+            'url-rewrites' => [
+                'index' => [
+                    'title'      => 'URL නැවත ලියයි',
+                    'create-btn' => 'URL නැවත ලියන්න සාදන්න',
+
+                    'datagrid' => [
+                        'id'                  => 'හැඳුනුම්පත',
+                        'for'                 => 'සදහා',
+                        'request-path'        => 'ඉල්ලීම් මාර්ගය',
+                        'target-path'         => 'ඉලක්ක මාර්ගය',
+                        'redirect-type'       => 'හරවා යැවීමේ වර්ගය',
+                        'locale'              => 'දේශීය',
+                        'edit'                => 'සංස්කරණය කරන්න',
+                        'delete'              => 'මකන්න',
+                        'actions'             => 'ක්රියාවන්',
+                        'mass-delete-success' => 'තෝරාගත් URL නැවත ලිවීම සාර්ථකව මකා ඇත',
+                    ],
+
+                    'create' => [
+                        'for'                => 'සදහා',
+                        'product'            => 'නිෂ්පාදන',
+                        'category'           => 'වර්ගය',
+                        'cms-page'           => 'CMS පිටුව',
+                        'request-path'       => 'ඉල්ලීම් මාර්ගය',
+                        'target-path'        => 'ඉලක්ක මාර්ගය',
+                        'redirect-type'      => 'හරවා යැවීමේ වර්ගය',
+                        'temporary-redirect' => 'තාවකාලික (302)',
+                        'permanent-redirect' => 'ස්ථිර (301)',
+                        'locale'             => 'දේශීය',
+                        'save-btn'           => 'URL නැවත ලියන්න සුරකින්න',
+                        'title'              => 'URL නැවත ලියන්න සාදන්න',
+                        'success'            => 'URL නැවත ලිවීම සාර්ථකව සාදන ලදී',
+                        'delete-warning'     => 'ඔබට මෙම ක්‍රියාව සිදු කිරීමට අවශ්‍ය බව විශ්වාසද?',
+                    ],
+
+                    'edit' => [
+                        'title'          => 'URL නැවත ලියන්න සංස්කරණය කරන්න',
+                        'success'        => 'URL නැවත ලිවීම සාර්ථකව යාවත්කාලීන කරන ලදී',
+                        'delete-success' => 'URL නැවත ලිවීම සාර්ථකව මකා ඇත',
+                    ],
+                ],
+            ],
         ],
     ],
 

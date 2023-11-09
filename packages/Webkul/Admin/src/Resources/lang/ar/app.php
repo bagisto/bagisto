@@ -2010,6 +2010,49 @@ return [
 
                 'delete-failed'  => ':name تم حذفها بنجاح',
             ],
+
+            'url-rewrites' => [
+                'index' => [
+                    'title'      => 'إعادة كتابة عناوين URL',
+                    'create-btn' => 'إنشاء إعادة كتابة عنوان URL',
+            
+                    'datagrid' => [
+                        'id'                  => 'المعرف',
+                        'for'                 => 'لـ',
+                        'request-path'        => 'مسار الطلب',
+                        'target-path'         => 'مسار الهدف',
+                        'redirect-type'       => 'نوع إعادة التوجيه',
+                        'locale'              => 'محلي',
+                        'edit'                => 'تعديل',
+                        'delete'              => 'حذف',
+                        'actions'             => 'إجراءات',
+                        'mass-delete-success' => 'تم حذف إعادة كتابة عناوين URL المحددة بنجاح',
+                    ],
+            
+                    'create' => [
+                        'for'                => 'لـ',
+                        'product'            => 'المنتج',
+                        'category'           => 'الفئة',
+                        'cms-page'           => 'صفحة CMS',
+                        'request-path'       => 'مسار الطلب',
+                        'target-path'        => 'مسار الهدف',
+                        'redirect-type'      => 'نوع إعادة التوجيه',
+                        'temporary-redirect' => 'مؤقت (302)',
+                        'permanent-redirect' => 'دائم (301)',
+                        'locale'             => 'محلي',
+                        'save-btn'           => 'حفظ إعادة كتابة عنوان URL',
+                        'title'              => 'إنشاء إعادة كتابة عنوان URL',
+                        'success'            => 'تم إنشاء إعادة كتابة عنوان URL بنجاح',
+                        'delete-warning'     => 'هل أنت متأكد أنك تريد تنفيذ هذا الإجراء؟',
+                    ],
+            
+                    'edit' => [
+                        'title'          => 'تعديل إعادة كتابة عنوان URL',
+                        'success'        => 'تم تحديث إعادة كتابة عنوان URL بنجاح',
+                        'delete-success' => 'تم حذف إعادة كتابة عنوان URL بنجاح',
+                    ],
+                ],
+            ],
         ],
     ],
 

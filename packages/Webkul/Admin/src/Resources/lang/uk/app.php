@@ -2011,6 +2011,49 @@ return [
 
                 'delete-failed'  => ':name Видалення не вдалося',
             ],
+
+            'url-rewrites' => [
+                'index' => [
+                    'title'      => 'Переадресації URL',
+                    'create-btn' => 'Створити переадресацію URL',
+
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'for'                 => 'Для',
+                        'request-path'        => 'Шлях запиту',
+                        'target-path'         => 'Цільовий шлях',
+                        'redirect-type'       => 'Тип переадресації',
+                        'locale'              => 'Локаль',
+                        'edit'                => 'Редагувати',
+                        'delete'              => 'Видалити',
+                        'actions'             => 'Дії',
+                        'mass-delete-success' => 'Вибрані переадресації URL успішно видалено',
+                    ],
+
+                    'create' => [
+                        'for'                => 'Для',
+                        'product'            => 'Продукт',
+                        'category'           => 'Категорія',
+                        'cms-page'           => 'Сторінка CMS',
+                        'request-path'       => 'Шлях запиту',
+                        'target-path'        => 'Цільовий шлях',
+                        'redirect-type'      => 'Тип переадресації',
+                        'temporary-redirect' => 'Тимчасова (302)',
+                        'permanent-redirect' => 'Постійна (301)',
+                        'locale'             => 'Локаль',
+                        'save-btn'           => 'Зберегти переадресацію URL',
+                        'title'              => 'Створити переадресацію URL',
+                        'success'            => 'Переадресацію URL створено успішно',
+                        'delete-warning'     => 'Ви впевнені, що хочете виконати цю дію?',
+                    ],
+
+                    'edit' => [
+                        'title'          => 'Редагувати переадресацію URL',
+                        'success'        => 'Переадресацію URL оновлено успішно',
+                        'delete-success' => 'Переадресацію URL видалено успішно',
+                    ],
+                ],
+            ],
         ],
     ],
 

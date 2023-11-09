@@ -2011,6 +2011,49 @@ return [
 
                 'delete-failed'  => ':name Exclusão Falhou',
             ],
+
+            'url-rewrites' => [
+                'index' => [
+                    'title'      => 'Reescritas de URL',
+                    'create-btn' => 'Criar nova reescrita de URL',
+            
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'for'                 => 'Para',
+                        'request-path'        => 'Caminho da solicitação',
+                        'target-path'         => 'Caminho de destino',
+                        'redirect-type'       => 'Tipo de redirecionamento',
+                        'locale'              => 'Localidade',
+                        'edit'                => 'Editar',
+                        'delete'              => 'Excluir',
+                        'actions'             => 'Ações',
+                        'mass-delete-success' => 'As reescritas de URL selecionadas foram excluídas com sucesso.',
+                    ],
+            
+                    'create' => [
+                        'for'                => 'Para',
+                        'product'            => 'Produto',
+                        'category'           => 'Categoria',
+                        'cms-page'           => 'Página CMS',
+                        'request-path'       => 'Caminho da solicitação',
+                        'target-path'        => 'Caminho de destino',
+                        'redirect-type'      => 'Tipo de redirecionamento',
+                        'temporary-redirect' => 'Redirecionamento temporário (302)',
+                        'permanent-redirect' => 'Redirecionamento permanente (301)',
+                        'locale'             => 'Localidade',
+                        'save-btn'           => 'Salvar reescrita de URL',
+                        'title'              => 'Criar nova reescrita de URL',
+                        'success'            => 'Reescrita de URL criada com sucesso.',
+                        'delete-warning'     => 'Tem certeza de que deseja realizar esta ação?',
+                    ],
+            
+                    'edit' => [
+                        'title'          => 'Editar reescrita de URL',
+                        'success'        => 'Reescrita de URL atualizada com sucesso.',
+                        'delete-success' => 'Reescrita de URL excluída com sucesso.',
+                    ],
+                ],
+            ],
         ],
     ],
 

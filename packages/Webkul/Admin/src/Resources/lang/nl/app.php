@@ -2011,6 +2011,49 @@ return [
 
                 'delete-failed' => ':name Verwijderen Mislukt',
             ],
+
+            'url-rewrites' => [
+                'index' => [
+                    'title'      => 'URL-herschrijvingen',
+                    'create-btn' => 'URL-herschrijving maken',
+            
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'for'                 => 'Voor',
+                        'request-path'        => 'Aanvraagpad',
+                        'target-path'         => 'Doelpad',
+                        'redirect-type'       => 'Doorstuurtype',
+                        'locale'              => 'Taal',
+                        'edit'                => 'Bewerken',
+                        'delete'              => 'Verwijderen',
+                        'actions'             => 'Acties',
+                        'mass-delete-success' => 'De geselecteerde URL-herschrijvingen zijn succesvol verwijderd.',
+                    ],
+            
+                    'create' => [
+                        'for'                => 'Voor',
+                        'product'            => 'Product',
+                        'category'           => 'Categorie',
+                        'cms-page'           => 'CMS-pagina',
+                        'request-path'       => 'Aanvraagpad',
+                        'target-path'        => 'Doelpad',
+                        'redirect-type'      => 'Doorstuurtype',
+                        'temporary-redirect' => 'Tijdelijke doorstuur (302)',
+                        'permanent-redirect' => 'Permanente doorstuur (301)',
+                        'locale'             => 'Taal',
+                        'save-btn'           => 'URL-herschrijving opslaan',
+                        'title'              => 'URL-herschrijving maken',
+                        'success'            => 'URL-herschrijving succesvol gemaakt',
+                        'delete-warning'     => 'Weet u zeker dat u deze actie wilt uitvoeren?',
+                    ],
+            
+                    'edit' => [
+                        'title'          => 'URL-herschrijving bewerken',
+                        'success'        => 'URL-herschrijving succesvol bijgewerkt',
+                        'delete-success' => 'URL-herschrijving succesvol verwijderd',
+                    ],
+                ],
+            ],
         ],
     ],
 
