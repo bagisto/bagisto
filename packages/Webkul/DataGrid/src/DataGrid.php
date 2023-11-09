@@ -21,9 +21,9 @@ abstract class DataGrid
     /**
      * Default sort column of datagrid.
      *
-     * @var string
+     * @var ?string
      */
-    protected $sortColumn = 'id';
+    protected $sortColumn;
 
     /**
      * Default sort order of datagrid.
@@ -275,6 +275,10 @@ abstract class DataGrid
      */
     public function processRequestedSorting($requestedSort)
     {
+        if (! $this->sortColumn) {
+            $this->sortColumn = $this->primaryColumn;
+        }
+
         return $this->queryBuilder->orderBy($requestedSort['column'] ?? $this->sortColumn, $requestedSort['order'] ?? $this->sortOrder);
     }
 
