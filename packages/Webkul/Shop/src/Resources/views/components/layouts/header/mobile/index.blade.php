@@ -1,7 +1,7 @@
-{{--
+<!--
     This code needs to be refactored to reduce the amount of PHP in the Blade
     template as much as possible.
---}}
+-->
 @php
     $showCompare = (bool) core()->getConfigData('general.content.shop.compare_option');
 
@@ -10,7 +10,7 @@
 
 <div class="gap-[15px] flex-wrap px-[15px] pt-[25px] hidden max-lg:flex max-lg:mb-[15px]">
     <div class="w-full flex justify-between items-center">
-        {{-- Left Navigation --}}
+        <!-- Left Navigation -->
         <div class="flex items-center gap-x-[5px]">
             <x-shop::drawer
                 position="left"
@@ -140,7 +140,7 @@
             </a>
         </div>
 
-        {{-- Right Navigation --}}
+        <!-- Right Navigation -->
         <div>
             <div class="flex  items-center gap-x-[20px]">
                 @if($showCompare)
@@ -257,9 +257,14 @@
         </div>
     </div>
 
-    {{-- Serach Catalog Form --}}
+    <!-- Serach Catalog Form -->
     <form action="{{ route('shop.search.index') }}" class="flex items-center w-full">
-        <label for="organic-search" class="sr-only">Search</label>
+        <label 
+            for="organic-search" 
+            class="sr-only"
+        >
+            @lang('shop::app.components.layouts.header.search')
+        </label>
 
         <div class="relative w-full">
             <div

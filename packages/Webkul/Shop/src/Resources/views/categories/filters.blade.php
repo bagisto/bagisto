@@ -7,7 +7,7 @@
         @filter-applied="setFilters('filter', $event)"
         @filter-clear="clearFilters('filter', $event)"
     >
-        {{-- Category Filter Shimmer Effect --}}
+        <!-- Category Filter Shimmer Effect -->
         <x-shop::shimmer.categories.filters/>
     </v-filters>
 </div>
@@ -58,7 +58,7 @@
                 @filter-applied="setFilters('filter', $event)"
                 @filter-clear="clearFilters('filter', $event)"
             >
-                {{-- Category Filter Shimmer Effect --}}
+                <!-- Category Filter Shimmer Effect -->
                 <x-shop::shimmer.categories.filters/>
             </v-filters>
         </x-slot:content>
@@ -104,7 +104,7 @@
 {!!view_render_event('bagisto.shop.categories.view.filters.after') !!}
 
 @pushOnce('scripts')
-    {{-- Filters Vue template --}}
+    <!-- Filters Vue template -->
     <script type="text/x-template" id="v-filters-template">
         <!-- Filter Shimmer Effect -->
         <template v-if="isLoading">
@@ -142,7 +142,7 @@
         </template>
     </script>
 
-    {{-- Filter Item Vue template --}}
+    <!-- Filter Item Vue template -->
     <script type="text/x-template" id="v-filter-item-template">
         <template v-if="filter.type === 'price' || filter.options.length">
             <x-shop::accordion>

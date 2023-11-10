@@ -6,7 +6,7 @@
     }
 @endphp
 
-{{-- SEO Meta Content --}}
+<!-- SEO Meta Content -->
 @push('meta')
     <meta name="description" content="{{ $title }}"/>
 
@@ -14,7 +14,7 @@
 @endPush
 
 <x-shop::layouts>
-    {{-- Page Title --}}
+    <!-- Page Title -->
     <x-slot:title>
         {{ $title }}
     </x-slot>
@@ -31,7 +31,7 @@
         </div>
     </div>
         
-    {{-- Product Listing --}}
+    <!-- Product Listing -->
     <v-search>
         <x-shop::shimmer.categories.view/>
     </v-search>

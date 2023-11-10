@@ -1,9 +1,9 @@
 <div class="w-full flex justify-between min-h-[78px] px-[60px] border border-t-0 border-b-[1px] border-l-0 border-r-0 max-1180:px-[30px]">
-    {{--
+    <!--
         This section will provide categories for the first, second, and third levels. If
         additional levels are required, users can customize them according to their needs.
-    --}}
-    {{-- Left Nagivation Section --}}
+    -->
+    <!-- Left Nagivation Section -->
     <div class="flex items-center gap-x-[40px] pt-[28px] max-[1180px]:gap-x-[20px]">
         <a
             href="{{ route('shop.home.index') }}"
@@ -27,9 +27,9 @@
         </v-desktop-category>
     </div>
 
-    {{-- Right Nagivation Section --}}
+    <!-- Right Nagivation Section -->
     <div class="flex gap-x-[35px] items-center max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px]">
-        {{-- Search Bar Container --}}
+        <!-- Search Bar Container -->
         <div class="relative w-full">
             <form
                 action="{{ route('shop.search.index') }}"
@@ -64,9 +64,9 @@
             </form>
         </div>
 
-        {{-- Right Navigation Links --}}
+        <!-- Right Navigation Links -->
         <div class="flex gap-x-[35px] mt-[5px] max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px]">
-            {{-- Compare --}}
+            <!-- Compare -->
             @if(core()->getConfigData('general.content.shop.compare_option'))
                 <a
                     href="{{ route('shop.compare.index') }}"
@@ -79,10 +79,10 @@
                 </a>
             @endif
 
-            {{-- Mini cart --}}
+            <!-- Mini cart -->
             @include('shop::checkout.cart.mini-cart')
 
-            {{-- user profile --}}
+            <!-- user profile -->
             <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                 <x-slot:toggle>
                     <span
@@ -93,7 +93,7 @@
                     ></span>
                 </x-slot:toggle>
 
-                {{-- Guest Dropdown --}}
+                <!-- Guest Dropdown -->
                 @guest('customer')
                     <x-slot:content>
                         <div class="grid gap-[10px]">
@@ -126,7 +126,7 @@
                     </x-slot:content>
                 @endguest
 
-                {{-- Customers Dropdown --}}
+                <!-- Customers Dropdown -->
                 @auth('customer')
                     <x-slot:content class="!p-[0px]">
                         <div class="grid gap-[10px] p-[20px] pb-0">
@@ -166,7 +166,7 @@
                                 </a>
                             @endif
 
-                            {{--Customers logout--}}
+                            <!--Customers logout-->
                             @auth('customer')
                                 <x-shop::form
                                     method="DELETE"
