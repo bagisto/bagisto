@@ -48,11 +48,11 @@ class EventServiceProvider extends ServiceProvider
             'Webkul\FPC\Listeners\Refund@afterCreate',
         ],
 
-        'cms.pages.update.after' => [
+        'cms.page.update.after' => [
             'Webkul\FPC\Listeners\Page@afterUpdate',
         ],
 
-        'cms.pages.delete.before' => [
+        'cms.page.delete.before' => [
             'Webkul\FPC\Listeners\Page@beforeDelete',
         ],
 

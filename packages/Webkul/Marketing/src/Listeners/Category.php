@@ -2,7 +2,7 @@
 
 namespace Webkul\Marketing\Listeners;
 
-use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\CMS\Repositories\CategoryRepository;
 
 class Category
 {
@@ -12,6 +12,36 @@ class Category
      * @return void
      */
     public function __construct(protected CategoryRepository $categoryRepository)
+    {
+    }
+
+    /**
+     * Before category is created
+     *
+     * @param  \Webkul\Category\Contracts\Category  $category
+     * @return void
+     */
+    public function beforeCreate($category)
+    {
+    }
+
+    /**
+     * After category is updated
+     *
+     * @param  \Webkul\Category\Contracts\Category  $category
+     * @return void
+     */
+    public function afterUpdate($category)
+    {
+    }
+
+    /**
+     * Before category is deleted
+     *
+     * @param  integer  $id
+     * @return void
+     */
+    public function beforeDelete($category)
     {
     }
 }

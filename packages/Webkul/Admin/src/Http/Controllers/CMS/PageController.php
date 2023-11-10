@@ -58,7 +58,7 @@ class PageController extends Controller
             'html_content' => 'required',
         ]);
 
-        Event::dispatch('cms.pages.create.before');
+        Event::dispatch('cms.page.create.before');
 
         $data = request()->only([
             'page_title',
@@ -72,7 +72,7 @@ class PageController extends Controller
 
         $page = $this->pageRepository->create($data);
 
-        Event::dispatch('cms.pages.create.after', $page);
+        Event::dispatch('cms.page.create.after', $page);
 
         session()->flash('success', trans('admin::app.cms.create-success'));
 
@@ -113,7 +113,7 @@ class PageController extends Controller
             'channels'                => 'required',
         ]);
 
-        Event::dispatch('cms.pages.update.before', $id);
+        Event::dispatch('cms.page.update.before', $id);
 
         $data = [
             $locale    => request()->input($locale),
@@ -123,7 +123,7 @@ class PageController extends Controller
 
         $page = $this->pageRepository->update($data, $id);
 
-        Event::dispatch('cms.pages.update.after', $page);
+        Event::dispatch('cms.page.update.after', $page);
 
         session()->flash('success', trans('admin::app.cms.update-success'));
 
@@ -137,11 +137,11 @@ class PageController extends Controller
      */
     public function delete($id): JsonResponse
     {
-        Event::dispatch('cms.pages.delete.before', $id);
+        Event::dispatch('cms.page.delete.before', $id);
 
         $this->pageRepository->delete($id);
 
-        Event::dispatch('cms.pages.delete.after', $id);
+        Event::dispatch('cms.page.delete.after', $id);
 
         return new JsonResponse(['message' => trans('admin::app.cms.delete-success')]);
     }
@@ -154,11 +154,11 @@ class PageController extends Controller
         $indices = $massDestroyRequest->input('indices');
 
         foreach ($indices as $index) {
-            Event::dispatch('cms.pages.delete.before', $index);
+            Event::dispatch('cms.page.delete.before', $index);
 
             $this->pageRepository->delete($index);
 
-            Event::dispatch('cms.pages.delete.after', $index);
+            Event::dispatch('cms.page.delete.after', $index);
         }
 
         return new JsonResponse([
