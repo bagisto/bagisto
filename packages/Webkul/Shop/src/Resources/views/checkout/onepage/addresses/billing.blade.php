@@ -175,7 +175,7 @@
 
                 {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.before') !!}
 
-                {{-- Billing address form --}}
+                <!-- Billing address form -->
                 <x-shop::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
@@ -316,7 +316,7 @@
                             <x-shop::form.control-group
                                 class="!mb-4"
                             >
-                                <x-shop::form.control-group.label class="!mt-[0px] required">
+                                <x-shop::form.control-group.label class="{{ core()->isCountryRequired() ? 'required' : '' }} !mt-[0px]">
                                     @lang('shop::app.checkout.onepage.addresses.billing.country')
                                 </x-shop::form.control-group.label>
         
@@ -324,7 +324,7 @@
                                     type="select"
                                     name="billing[country]"
                                     class="py-2 mb-2"
-                                    rules="required"
+                                    rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
                                     :label="trans('shop::app.checkout.onepage.addresses.billing.country')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.billing.country')"
                                     v-model="forms.billing.address.country"
@@ -346,14 +346,14 @@
                             {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.country.after') !!}
     
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="!mt-[0px] required">
+                                <x-shop::form.control-group.label class="{{ core()->isStateRequired() ? 'required' : '' }} !mt-[0px]">
                                     @lang('shop::app.checkout.onepage.addresses.billing.state')
                                 </x-shop::form.control-group.label>
         
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="billing[state]"
-                                    rules="required"
+                                    rules="{{ core()->isStateRequired() ? 'required' : '' }}"
                                     :label="trans('shop::app.checkout.onepage.addresses.billing.state')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.billing.state')"
                                     v-model="forms.billing.address.state"
@@ -416,14 +416,14 @@
                             {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.city.after') !!}
         
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="!mt-[0px] required">
+                                <x-shop::form.control-group.label class="{{ core()->isPostCodeRequired() ? 'required' : '' }} !mt-[0px]">
                                     @lang('shop::app.checkout.onepage.addresses.billing.postcode')
                                 </x-shop::form.control-group.label>
         
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="billing[postcode]"
-                                    rules="required"
+                                    rules="{{ core()->isPostCodeRequired() ? 'required' : '' }}"
                                     :label="trans('shop::app.checkout.onepage.addresses.billing.postcode')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.billing.postcode')"
                                     v-model="forms.billing.address.postcode"

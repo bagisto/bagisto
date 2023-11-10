@@ -256,7 +256,7 @@
                 type="text"
                 name="postcode"
                 :value="old('postcode')"
-                rules="{{ core()->isStateRequired() ? 'required' : '' }}|integer"
+                rules="{{ core()->isPostCodeRequired() ? 'required' : '' }}|numeric"
                 :label="trans('shop::app.customers.account.addresses.post-code')"
                 :placeholder="trans('shop::app.customers.account.addresses.post-code')"
             >

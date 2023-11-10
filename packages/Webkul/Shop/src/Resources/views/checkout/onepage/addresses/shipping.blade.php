@@ -154,7 +154,7 @@
 
                 {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.before') !!}
 
-                {{-- Shipping address form --}}
+                <!-- Shipping address form -->
                 <x-shop::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
@@ -310,7 +310,7 @@
                             <x-shop::form.control-group
                                 class="!mb-4"
                             >
-                                <x-shop::form.control-group.label class="!mt-[0px] required">
+                                <x-shop::form.control-group.label class="{{ core()->isCountryRequired() ? 'required' : '' }} !mt-[0px]">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.country')
                                 </x-shop::form.control-group.label>
                             
@@ -318,7 +318,7 @@
                                     type="select"
                                     name="shipping[country]"
                                     class="py-2 mb-2"
-                                    rules="required"
+                                    rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.country')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.country')"
                                     v-model="forms.shipping.address.country"
@@ -342,14 +342,14 @@
                             {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.country.after') !!}
                             
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="!mt-[0px] required">
+                                <x-shop::form.control-group.label class="{{ core()->isStateRequired() ? 'required' : '' }} !mt-[0px]">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.state')
                                 </x-shop::form.control-group.label>
                             
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="shipping[state]"
-                                    rules="required"
+                                    rules="{{ core()->isStateRequired() ? 'required' : '' }}"
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.state')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.state')"
                                     v-model="forms.shipping.address.state"
@@ -361,7 +361,7 @@
                                     type="select"
                                     name="shipping[state]"
                                     class="py-2 mb-2"
-                                    rules="required"
+                                    rules="{{ core()->isStateRequired() ? 'required' : '' }}"
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.state')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.state')"
                                     v-model="forms.shipping.address.state"
@@ -419,7 +419,7 @@
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="shipping[postcode]"
-                                    rules="required"
+                                    rules="{{ core()->isPostCodeRequired() ? 'required' : '' }}"
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.postcode')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.postcode')"
                                     v-model="forms.shipping.address.postcode"
