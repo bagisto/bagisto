@@ -3,7 +3,7 @@
 namespace Webkul\FPC\Listeners;
 
 use Spatie\ResponseCache\Facades\ResponseCache;
-use Webkul\CMS\Repositories\CmsRepository;
+use Webkul\CMS\Repositories\PageRepository;
 
 class Page
 {
@@ -12,14 +12,14 @@ class Page
      *
      * @return void
      */
-    public function __construct(protected CmsRepository $pageRepository)
+    public function __construct(protected PageRepository $pageRepository)
     {
     }
 
     /**
      * After page update
      *
-     * @param  \Webkul\CMS\Contracts\CmsPage  $page
+     * @param  \Webkul\CMS\Contracts\Page  $page
      * @return void
      */
     public function afterUpdate($page)

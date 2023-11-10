@@ -2,7 +2,7 @@
 
 namespace Webkul\Shop\Http\Controllers\CMS;
 
-use Webkul\CMS\Repositories\CmsRepository;
+use Webkul\CMS\Repositories\PageRepository;
 use Webkul\Shop\Http\Controllers\Controller;
 
 class PagePresenterController extends Controller
@@ -12,7 +12,7 @@ class PagePresenterController extends Controller
      *
      * @return void
      */
-    public function __construct(protected CmsRepository $cmsRepository)
+    public function __construct(protected PageRepository $pageRepository)
     {
     }
 
@@ -24,7 +24,7 @@ class PagePresenterController extends Controller
      */
     public function presenter($urlKey)
     {
-        $page = $this->cmsRepository->findByUrlKeyOrFail($urlKey);
+        $page = $this->pageRepository->findByUrlKeyOrFail($urlKey);
 
         return view('shop::cms.page')->with('page', $page);
     }

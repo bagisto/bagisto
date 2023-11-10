@@ -2,8 +2,8 @@
 
 namespace Webkul\Sitemap\Models;
 
-use Webkul\CMS\Models\CmsPageTranslation as BaseCmsPageTranslation;
+use Webkul\CMS\Models\PageTranslation as BasePageTranslation;
 
-class CmsPageTranslation extends BaseCmsPageTranslation
+class PageTranslation extends BasePageTranslation
 {
 }

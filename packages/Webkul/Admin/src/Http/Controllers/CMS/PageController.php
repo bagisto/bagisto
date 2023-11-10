@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\CMS\CMSPageDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\MassDestroyRequest;
-use Webkul\CMS\Repositories\CmsRepository;
+use Webkul\CMS\Repositories\PageRepository;
 
 class PageController extends Controller
 {
@@ -16,7 +16,7 @@ class PageController extends Controller
      *
      * @return void
      */
-    public function __construct(protected CmsRepository $cmsRepository)
+    public function __construct(protected PageRepository $pageRepository)
     {
     }
 
@@ -70,7 +70,7 @@ class PageController extends Controller
             'meta_description',
         ]);
 
-        $page = $this->cmsRepository->create($data);
+        $page = $this->pageRepository->create($data);
 
         Event::dispatch('cms.pages.create.after', $page);
 
@@ -87,7 +87,7 @@ class PageController extends Controller
      */
     public function edit($id)
     {
-        $page = $this->cmsRepository->findOrFail($id);
+        $page = $this->pageRepository->findOrFail($id);
 
         return view('admin::cms.edit', compact('page'));
     }
@@ -104,7 +104,7 @@ class PageController extends Controller
 
         $this->validate(request(), [
             $locale . '.url_key'      => ['required', new \Webkul\Core\Rules\Slug, function ($attribute, $value, $fail) use ($id) {
-                if (! $this->cmsRepository->isUrlKeyUnique($id, $value)) {
+                if (! $this->pageRepository->isUrlKeyUnique($id, $value)) {
                     $fail(trans('admin::app.cms.index.already-taken', ['name' => 'Page']));
                 }
             }],
@@ -121,7 +121,7 @@ class PageController extends Controller
             'locale'   => $locale,
         ];
 
-        $page = $this->cmsRepository->update($data, $id);
+        $page = $this->pageRepository->update($data, $id);
 
         Event::dispatch('cms.pages.update.after', $page);
 
@@ -139,7 +139,7 @@ class PageController extends Controller
     {
         Event::dispatch('cms.pages.delete.before', $id);
 
-        $this->cmsRepository->delete($id);
+        $this->pageRepository->delete($id);
 
         Event::dispatch('cms.pages.delete.after', $id);
 
@@ -156,7 +156,7 @@ class PageController extends Controller
         foreach ($indices as $index) {
             Event::dispatch('cms.pages.delete.before', $index);
 
-            $this->cmsRepository->delete($index);
+            $this->pageRepository->delete($index);
 
             Event::dispatch('cms.pages.delete.after', $index);
         }

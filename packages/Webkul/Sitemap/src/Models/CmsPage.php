@@ -4,9 +4,9 @@ namespace Webkul\Sitemap\Models;
 
 use Spatie\Sitemap\Contracts\Sitemapable;
 use Spatie\Sitemap\Tags\Url;
-use Webkul\CMS\Models\CmsPage as BaseCmsPage;
+use Webkul\CMS\Models\Page as BasePage;
 
-class CmsPage extends BaseCmsPage implements Sitemapable
+class Page extends BasePage implements Sitemapable
 {
     /**
      * @return mixed

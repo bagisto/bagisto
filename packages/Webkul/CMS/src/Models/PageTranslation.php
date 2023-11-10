@@ -3,10 +3,17 @@
 namespace Webkul\CMS\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\CMS\Contracts\CmsPageTranslation as CmsPageTranslationContract;
+use Webkul\CMS\Contracts\PageTranslation as PageTranslationContract;
 
-class CmsPageTranslation extends Model implements CmsPageTranslationContract
+class PageTranslation extends Model implements PageTranslationContract
 {
+    /**
+     * Table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'cms_page_translations';
+    
     public $timestamps = false;
 
     protected $fillable = [
