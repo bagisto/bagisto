@@ -13,7 +13,7 @@ class PageTranslation extends Model implements PageTranslationContract
      * @var string
      */
     protected $table = 'cms_page_translations';
-    
+
     public $timestamps = false;
 
     protected $fillable = [

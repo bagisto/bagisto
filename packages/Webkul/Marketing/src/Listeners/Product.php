@@ -38,7 +38,7 @@ class Product
     /**
      * Before product is deleted
      *
-     * @param  integer  $id
+     * @param  int  $id
      * @return void
      */
     public function beforeDelete($product)

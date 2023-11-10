@@ -38,7 +38,7 @@ class Category
     /**
      * Before category is deleted
      *
-     * @param  integer  $id
+     * @param  int  $id
      * @return void
      */
     public function beforeDelete($category)

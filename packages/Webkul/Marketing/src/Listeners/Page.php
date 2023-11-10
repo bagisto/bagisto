@@ -38,7 +38,7 @@ class Page
     /**
      * Before page is deleted
      *
-     * @param  integer  $id
+     * @param  int  $id
      * @return void
      */
     public function beforeDelete($page)

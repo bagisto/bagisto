@@ -20,7 +20,7 @@ class MarketingServiceProvider extends ServiceProvider
         $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
             $schedule->command('campaign:process')->daily();
         });
-        
+
         $this->app->register(EventServiceProvider::class);
     }
 

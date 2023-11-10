@@ -15,7 +15,6 @@ class Page extends TranslatableModel implements PageContract
      */
     protected $table = 'cms_pages';
 
-
     /**
      * Translation model foreign key column
      *

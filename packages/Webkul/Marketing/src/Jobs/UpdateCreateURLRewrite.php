@@ -31,13 +31,5 @@ class UpdateCreateURLRewrite implements ShouldQueue
      */
     public function handle()
     {
-        app(URLRewriteRepository::class)->updateOrCreate([
-            'term'       => $this->data['term'],
-            'channel_id' => $this->data['channel_id'],
-            'locale'     => $this->data['locale'],
-        ], [
-            'uses'    => DB::raw('uses + 1'),
-            'results' => $this->data['results'],
-        ]);
     }
 }
