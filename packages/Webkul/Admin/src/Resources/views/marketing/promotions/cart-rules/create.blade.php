@@ -702,14 +702,13 @@
                                 </x-slot:header>
                             
                                 <x-slot:content>
-                                    <div class="flex gap-[16px]">
                                         <x-admin::form.control-group class="mb-[10px]">
                                             <x-admin::form.control-group.label>
                                                 @lang('admin::app.marketing.promotions.cart-rules.create.from')
                                             </x-admin::form.control-group.label>
         
                                             <x-admin::form.control-group.control
-                                                type="date"
+                                                type="datetime"
                                                 name="starts_from"
                                                 :value="old('starts_from')"
                                                 id="starts_from"
@@ -730,7 +729,7 @@
                                             </x-admin::form.control-group.label>
         
                                             <x-admin::form.control-group.control
-                                                type="date"
+                                                type="datetime"
                                                 name="ends_till"
                                                 :value="old('ends_till')"
                                                 id="ends_till"
@@ -744,7 +743,6 @@
                                             >
                                             </x-admin::form.control-group.error>
                                         </x-admin::form.control-group>
-                                    </div>
                                 </x-slot:content>
                             </x-admin::accordion>
 
