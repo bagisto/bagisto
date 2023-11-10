@@ -263,7 +263,7 @@
 
         <div class="relative w-full">
             <div
-                class="icon-search flex items-center absolute left-[12px] top-[12px] text-[25px] pointer-events-none">
+                class="icon-search flex items-center absolute ltr:left-[12px] rtl:right-[12px] top-[12px] text-[25px] pointer-events-none">
             </div>
 
             <input
@@ -277,7 +277,7 @@
 
             <button
                 type="button"
-                class="icon-camera flex items-center absolute top-[12px] right-[12px] pr-3 text-[22px]"
+                class="icon-camera flex items-center absolute top-[12px] ltr:right-[12px] rtl:left-[12px] ltr:pl-3 rtl:pr-3 text-[22px]"
                 aria-label="@lang('shop::app.components.layouts.header.search')"
             >
             </button>
