@@ -18,10 +18,9 @@ class Page
     /**
      * Before page is created
      *
-     * @param  \Webkul\CMS\Contracts\Page  $page
      * @return void
      */
-    public function beforeCreate($page)
+    public function beforeCreate()
     {
     }
 

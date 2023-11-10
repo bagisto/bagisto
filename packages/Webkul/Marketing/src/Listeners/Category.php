@@ -18,10 +18,9 @@ class Category
     /**
      * Before category is created
      *
-     * @param  \Webkul\Category\Contracts\Category  $category
      * @return void
      */
-    public function beforeCreate($category)
+    public function beforeCreate()
     {
     }
 

@@ -18,10 +18,9 @@ class Product
     /**
      * Before product is created
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
      */
-    public function beforeCreate($product)
+    public function beforeCreate()
     {
     }
 
