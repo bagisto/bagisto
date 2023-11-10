@@ -1,4 +1,4 @@
-{{-- SEO Meta Content --}}
+<!-- SEO Meta Content -->
 @push('meta')
     <meta name="description" content="{{ trim($category->meta_description) != "" ? $category->meta_description : \Illuminate\Support\Str::limit(strip_tags($category->description), 120, '') }}"/>
 
@@ -12,12 +12,12 @@
 @endPush
 
 <x-shop::layouts>
-    {{-- Page Title --}}
+    <!-- Page Title -->
     <x-slot:title>
         {{ trim($category->meta_title) != "" ? $category->meta_title : $category->name }}
     </x-slot>
 
-    {{-- Hero Image --}}
+    <!-- Hero Image -->
     @if ($category->banner_path)
         <div class="container mt-[30px] px-[60px] max-lg:px-[30px]">
             <div>
@@ -41,9 +41,9 @@
     @endif
 
     @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
-        {{-- Category Vue Component --}}
+        <!-- Category Vue Component -->
         <v-category>
-            {{-- Category Shimmer Effect --}}
+            <!-- Category Shimmer Effect -->
             <x-shop::shimmer.categories.view/>
         </v-category>
     @endif

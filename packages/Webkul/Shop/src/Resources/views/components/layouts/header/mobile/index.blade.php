@@ -34,7 +34,7 @@
                 </x-slot:header>
 
                 <x-slot:content>
-                    {{-- Account Profile Hero Section --}}
+                    <!-- Account Profile Hero Section -->
                     <div class="grid grid-cols-[auto_1fr] gap-[15px] items-center mb-[15px] p-[10px] border border-[#E9E9E9] rounded-[12px]">
                         <div class="">
                             <img
@@ -63,10 +63,10 @@
                         @endauth
                     </div>
 
-                    {{-- Mobile category view --}}
+                    <!-- Mobile category view -->
                     <v-mobile-category></v-mobile-category>
 
-                    {{-- Localization & Currency Section --}}
+                    <!-- Localization & Currency Section -->
                     <div class="absolute w-full flex bottom-0 left-0 bg-white shadow-lg p-4 gap-x-[20px] justify-between items-center mb-[15px]">
                         <x-shop::dropdown position="top-left">
                             <!-- Dropdown Toggler -->
@@ -91,7 +91,7 @@
 
                         <x-shop::dropdown position="top-right">
                             <x-slot:toggle>
-                                {{-- Dropdown Toggler --}}
+                                <!-- Dropdown Toggler -->
                                 <div class="w-full flex gap-[10px] justify-between items-center cursor-pointer" role="button">
                                     <img
                                         src="{{ ! empty(core()->getCurrentLocale()->logo_url)
@@ -159,7 +159,7 @@
                         <span class="icon-users text-[24px] cursor-pointer"></span>
                     </x-slot:toggle>
 
-                    {{-- Guest Dropdown --}}
+                    <!-- Guest Dropdown -->
                     @guest('customer')
                         <x-slot:content>
                             <div class="grid gap-[10px]">
@@ -192,7 +192,7 @@
                         </x-slot:content>
                     @endguest
 
-                    {{-- Customers Dropdown --}}
+                    <!-- Customers Dropdown -->
                     @auth('customer')
                         <x-slot:content class="!p-[0px]">
                             <div class="grid gap-[10px] p-[20px] pb-0">
@@ -232,7 +232,7 @@
                                     </a>
                                 @endif
 
-                                {{--Customers logout--}}
+                                <!--Customers logout-->
                                 @auth('customer')
                                     <x-shop::form
                                         method="DELETE"
