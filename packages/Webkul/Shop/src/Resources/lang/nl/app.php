@@ -622,6 +622,7 @@ return [
             'suspended-account-message' => 'Uw account is opgeschort.',
             'select-hourly-duration'    => 'Selecteer een slotduur van één uur.',
             'success-remove'            => 'Item is succesvol verwijderd uit de winkelwagen.',
+            'paypal-payment-cancelled'  => 'PayPal-betaling is geannuleerd.',
 
             'index' => [
                 'bagisto'                  => 'Bagisto',

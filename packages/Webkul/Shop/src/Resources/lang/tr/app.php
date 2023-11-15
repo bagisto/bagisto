@@ -623,6 +623,7 @@ return [
             'suspended-account-message' => 'Hesabınız askıya alınmıştır.',
             'select-hourly-duration'    => 'Bir saatlik süre aralığı seçin.',
             'success-remove'            => 'Ürün başarıyla sepetten kaldırıldı.',
+            'paypal-payment-cancelled'  => 'Paypal ödemesi iptal edildi.',
 
             'index' => [
                 'bagisto'                  => 'Bagisto',

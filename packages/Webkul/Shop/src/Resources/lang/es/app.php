@@ -611,6 +611,7 @@ return [
             'suspended-account-message' => 'Tu cuenta ha sido suspendida.',
             'select-hourly-duration'    => 'Selecciona una duración de una hora.',
             'success-remove'            => 'El artículo se ha eliminado correctamente del carrito.',
+            'paypal-payment-cancelled'  => 'El pago de Paypal ha sido cancelado.',
 
             'index' => [
                 'bagisto'                  => 'Bagisto',

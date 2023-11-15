@@ -623,6 +623,7 @@ return [
             'suspended-account-message' => 'Sua conta foi suspensa.',
             'select-hourly-duration'    => 'Selecione uma duração de slot de uma hora.',
             'success-remove'            => 'Item removido com sucesso do carrinho.',
+            'paypal-payment-cancelled'  => 'O pagamento Paypal foi cancelado.',
 
             'index' => [
                 'bagisto'                  => 'Bagisto',
