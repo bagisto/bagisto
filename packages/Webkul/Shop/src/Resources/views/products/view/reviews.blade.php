@@ -251,7 +251,16 @@
     <script type="text/x-template" id="v-product-review-item-template">
         <div class="flex gap-[20px] p-[25px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap max-xl:mb-[20px]">
             <div>
+                <img
+                    v-if="review.profile"
+                    class="flex justify-center items-center min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] rounded-[12px] max-sm:hidden"
+                    :src="review.profile"
+                    :alt="review.name"
+                    :title="review.name"
+                >
+
                 <div
+                    v-else
                     class="flex justify-center items-center min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] rounded-[12px] bg-[#F5F5F5] max-sm:hidden"
                     :title="review.name"
                 >
