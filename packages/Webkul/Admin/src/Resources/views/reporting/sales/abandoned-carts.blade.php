@@ -51,7 +51,7 @@
                                     class="text-[16px] text-emerald-500"
                                     :class="[report.statistics.sales.progress < 0 ?  'text-red-500' : 'text-emerald-500']"
                                 >
-                                    @{{ report.statistics.sales.progress.toFixed(2) }}%
+                                    @{{ Math.abs(report.statistics.sales.progress.toFixed(2)) }}%
                                 </p>
                             </div>
                         </div>
@@ -76,7 +76,7 @@
                                     class="text-[16px] text-emerald-500"
                                     :class="[report.statistics.carts.progress < 0 ?  'text-red-500' : 'text-emerald-500']"
                                 >
-                                    @{{ report.statistics.carts.progress.toFixed(2) }}%
+                                    @{{ Math.abs(report.statistics.carts.progress.toFixed(2)) }}%
                                 </p>
                             </div>
                         </div>
@@ -88,7 +88,7 @@
                                     class="text-[16px] text-emerald-500"
                                     :class="[report.statistics.rate.progress >= 0 ?  'text-red-500' : 'text-emerald-500']"
                                 >
-                                    @{{ report.statistics.rate.current.toFixed(2) }}%
+                                    @{{ Math.abs(report.statistics.rate.current.toFixed(2)) }}%
                                 </p>
 
                                 <span
@@ -106,7 +106,7 @@
                                     class="text-[16px] text-emerald-500"
                                     :class="[report.statistics.rate.progress < 0 ?  'text-red-500' : 'text-emerald-500']"
                                 >
-                                    @{{ report.statistics.rate.progress.toFixed(2) }}%
+                                    @{{ Math.abs(report.statistics.rate.progress.toFixed(2)) }}%
                                 </p>
 
                                 <span
