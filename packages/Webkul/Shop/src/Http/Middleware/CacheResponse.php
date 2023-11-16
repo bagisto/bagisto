@@ -58,7 +58,7 @@ class CacheResponse extends BaseCacheResponseMiddleware
             ]);
 
             if ($categoryURLRewrite) {
-                return redirect()->to($categoryURLRewrite->target_path);
+                return redirect()->to($categoryURLRewrite->target_path, $categoryURLRewrite->redirect_type);
             }
 
             $productURLRewrite = app(URLRewriteRepository::class)->findOneWhere([
@@ -67,7 +67,7 @@ class CacheResponse extends BaseCacheResponseMiddleware
             ]);
 
             if ($productURLRewrite) {
-                return redirect()->to($productURLRewrite->target_path);
+                return redirect()->to($productURLRewrite->target_path, $productURLRewrite->redirect_type);
             }
         }
 

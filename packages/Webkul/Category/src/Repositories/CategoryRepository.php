@@ -233,7 +233,7 @@ class CategoryRepository extends Repository
      */
     public function findByPath(string $urlPath)
     {
-        return $this->model->whereTranslation('url_path', $urlPath)->first();
+        return $this->model->whereTranslation('slug', $urlPath)->first();
     }
 
     /**
