@@ -19,7 +19,7 @@ class InvoicedNotification extends Mailable
      */
     public function __construct(
         public $invoice,
-        public $receiverEmail = ""
+        public $receiverEmail = ''
     ) {
         /**
          * Model extra properties are lost in the build method so using extra optional

@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 use Webkul\Admin\DataGrids\Sales\InvoicesTransactionsDatagrid;
 use Webkul\Admin\DataGrids\Sales\OrderInvoicesDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Shop\Listeners\Invoice as ShopInvoiceListener;
 use Webkul\Core\Traits\PDFHandler;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Shop\Listeners\Invoice as ShopInvoiceListener;
 
 class InvoiceController extends Controller
 {
