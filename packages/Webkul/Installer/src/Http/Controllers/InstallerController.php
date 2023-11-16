@@ -64,16 +64,6 @@ class InstallerController extends Controller
     }
 
     /**
-     * Undocumented function
-     */
-    public function envFileDelete()
-    {
-        $response = File::delete(base_path('.env'));
-
-        return $response;
-    }
-
-    /**
      * Run Migration
      */
     public function runMigration()
@@ -93,7 +83,7 @@ class InstallerController extends Controller
         $response = $this->environmentManager->setEnvConfiguration(request()->allParameters);
 
         if ($response) {
-            $seeder = $this->databaseManager->seeder(request()->seledParameters);
+            $seeder = $this->databaseManager->seeder(request()->selectedParameters);
 
             return $seeder;
         }
