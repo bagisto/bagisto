@@ -1,4 +1,4 @@
-{{-- Mini Cart Vue Component --}}
+<!-- Mini Cart Vue Component -->
 <v-mini-cart>
     <span
         class="icon-cart text-[24px] cursor-pointer"

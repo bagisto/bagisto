@@ -1,5 +1,5 @@
 @pushOnce('scripts')
-    {{-- v-tree-item component --}}
+    <!-- v-tree-item component -->
     <script type="module">
         app.component('v-tree-item', {
             inheritAttrs: false,

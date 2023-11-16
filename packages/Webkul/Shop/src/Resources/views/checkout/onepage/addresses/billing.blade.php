@@ -175,7 +175,7 @@
 
                 {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.before') !!}
 
-                {{-- Billing address form --}}
+                <!-- Billing address form -->
                 <x-shop::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"

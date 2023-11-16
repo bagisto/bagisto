@@ -154,7 +154,7 @@
 
                 {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.before') !!}
 
-                {{-- Shipping address form --}}
+                <!-- Shipping address form -->
                 <x-shop::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"

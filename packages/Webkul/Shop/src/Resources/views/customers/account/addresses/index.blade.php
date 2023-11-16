@@ -1,10 +1,10 @@
 <x-shop::layouts.account>
-    {{-- Page Title --}}
+    <!-- Page Title -->
     <x-slot:title>
         @lang('shop::app.customers.account.addresses.add-address')
     </x-slot>
     
-    {{-- Breadcrumbs --}}
+    <!-- Breadcrumbs -->
     @section('breadcrumbs')
         <x-shop::breadcrumbs name="addresses"></x-shop::breadcrumbs>
     @endSection
@@ -26,7 +26,7 @@
     </div>
 
     @if (! $addresses->isEmpty())
-        {{-- Address Information --}}
+        <!-- Address Information -->
 
         {!! view_render_event('bagisto.shop.customers.account.addresses.list.before', ['addresses' => $addresses]) !!}
 
@@ -48,7 +48,7 @@
                                 </div>
                             @endif
 
-                            {{-- Dropdown Actions --}}
+                            <!-- Dropdown Actions -->
                             <x-shop::dropdown position="bottom-right">
                                 <x-slot:toggle>
                                     <button class="icon-more px-[6px] py-[4px] rounded-[6px] text-[24px] text-[#6E6E6E] cursor-pointer transition-all hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black"></button>
@@ -113,7 +113,7 @@
         {!! view_render_event('bagisto.shop.customers.account.addresses.list.after', ['addresses' => $addresses]) !!}
 
     @else
-        {{-- Address Empty Page --}}
+        <!-- Address Empty Page -->
         <div class="grid items-center justify-items-center place-content-center w-[100%] m-auto h-[476px] text-center">
             <img 
                 class="" 

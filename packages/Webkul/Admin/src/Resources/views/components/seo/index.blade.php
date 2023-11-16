@@ -1,7 +1,7 @@
 <v-seo-helper></v-seo-helper>
 
 @pushOnce('scripts')
-    {{-- SEO Vue Component Template --}}
+    <!-- SEO Vue Component Template -->
     <script type="text/x-template" id="v-seo-helper-template">
         <div class="flex flex-col gap-[3px] mb-[30px]">
             <p 
