@@ -623,6 +623,7 @@ return [
             'suspended-account-message' => 'החשבון שלך הושבת.',
             'select-hourly-duration'    => 'בחר משך זמן של שעה אחת.',
             'success-remove'            => 'הפריט הוסר בהצלחה מהעגלה.',
+            'paypal-payment-cancelled'  => 'התשלום בפייפאל בוטל.',
 
             'index' => [
                 'bagisto'                  => 'בַּגִּיסְטוֹ',

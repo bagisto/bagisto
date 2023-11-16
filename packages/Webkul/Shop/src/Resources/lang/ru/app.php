@@ -623,6 +623,7 @@ return [
             'suspended-account-message' => 'Ваш аккаунт был приостановлен.',
             'select-hourly-duration'    => 'Выберите продолжительность слота в один час.',
             'success-remove'            => 'Товар успешно удален из корзины.',
+            'paypal-payment-cancelled'  => 'Платеж через PayPal был отменен.',
 
             'index' => [
                 'bagisto'                  => 'Багисто',

@@ -623,6 +623,7 @@ return [
             'suspended-account-message' => 'আপনার অ্যাকাউন্ট স্থগিত করা হয়েছে',
             'select-hourly-duration'    => 'এক ঘণ্টা পর্যায়ের একটি স্লট নির্বাচন করুন।',
             'success-remove'            => 'পণ্য সফলভাবে কার্ট থেকে সরানো হয়েছে।',
+            'paypal-payment-cancelled'  => 'পেপ্যাল পেমেন্ট বাতিল করা হয়েছে.',
 
             'index' => [
                 'bagisto'                  => 'বাগিস্তো',
