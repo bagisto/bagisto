@@ -82,6 +82,17 @@ class PageRepository extends Repository
      * Retrieve category from slug
      *
      * @param  string  $urlKey
+     * @return \Webkul\CMS\Contracts\Page
+     */
+    public function findByUrlKey($urlKey)
+    {
+        return $this->model->whereTranslation('url_key', $urlKey)->first();
+    }
+
+    /**
+     * Retrieve category from slug
+     *
+     * @param  string  $urlKey
      * @return \Webkul\CMS\Contracts\Page|\Exception
      */
     public function findByUrlKeyOrFail($urlKey)

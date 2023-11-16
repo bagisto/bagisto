@@ -36,6 +36,9 @@ class CacheResponse extends BaseCacheResponseMiddleware
             return parent::handle($request, $next, ...$args);
         }
 
+        /**
+         * Redirect to the search term redirect url if the search term is found.
+         */
         if ($request->route()->getName() == 'shop.search.index') {
             $searchTerm = app(SearchTermRepository::class)->findOneWhere([
                 'term'       => request()->query('query'),
@@ -48,6 +51,9 @@ class CacheResponse extends BaseCacheResponseMiddleware
             }
         }
 
+        /**
+         * Redirect to the target path if the url rewrite is found.
+         */
         if ($request->route()->getName() == 'shop.product_or_category.index') {
             $slugOrPath = urldecode(trim($request->getPathInfo(), '/'));
 
@@ -68,6 +74,23 @@ class CacheResponse extends BaseCacheResponseMiddleware
 
             if ($productURLRewrite) {
                 return redirect()->to($productURLRewrite->target_path, $productURLRewrite->redirect_type);
+            }
+        }
+
+        /**
+         * Redirect to the target path if the cms page url rewrite is found.
+         */
+        if ($request->route()->getName() == 'shop.cms.page') {
+            $slug = last(explode('/', $request->getPathInfo()));
+
+            $pageURLRewrite = app(URLRewriteRepository::class)->findOneWhere([
+                'entity_type'  => 'cms_page',
+                'request_path' => $slug,
+                'locale'       => app()->getLocale(),
+            ]);
+
+            if ($pageURLRewrite) {
+                return redirect()->to($pageURLRewrite->target_path, $pageURLRewrite->redirect_type);
             }
         }
 

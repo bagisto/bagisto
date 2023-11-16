@@ -227,16 +227,6 @@ class CategoryRepository extends Repository
     }
 
     /**
-     * Find by path.
-     *
-     * @return \Webkul\Category\Contracts\Category
-     */
-    public function findByPath(string $urlPath)
-    {
-        return $this->model->whereTranslation('slug', $urlPath)->first();
-    }
-
-    /**
      * Upload category's images.
      *
      * @param  array  $data
