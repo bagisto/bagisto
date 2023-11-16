@@ -51,12 +51,12 @@ class Product
                 ['entity_type', 'IN', ['category', 'product']],
                 'request_path' => $currentURLKey,
             ]);
-    
+
             foreach ($urlRewrites as $urlRewrite) {
                 Event::dispatch('marketing.search_seo.url_rewrites.delete.before', $urlRewrite->id);
-    
+
                 $this->urlRewriteRepository->delete($urlRewrite->id);
-    
+
                 Event::dispatch('marketing.search_seo.url_rewrites.delete.after', $urlRewrite->id);
             }
 
