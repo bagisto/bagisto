@@ -60,10 +60,6 @@
                                 </p>
                             </div>
 
-                            <p class="text-gray-600 text-[14px]">
-                                @lang('installer::app.installer.index.installation-description')
-                            </p>
-
                             <div class="grid gap-[12px]">
                                 <div
                                     class="flex gap-[4px] text-[14px] text-gray-600"
@@ -122,8 +118,7 @@
                                     </span>
 
                                     <p>
-                                        {{-- @lang('installer::app.installer.index.environment-configuration.title') --}}
-                                        @lang('Environment Database Configuration')
+                                        @lang('installer::app.installer.index.environment-configuration.title')
                                     </p>
                                 </div>
 
@@ -145,30 +140,7 @@
                                     </span>
 
                                     <p>@lang('installer::app.installer.index.ready-for-installation.title')</p>
-                                </div>
-                                 
-                                <!-- ENV Multilocale Configuration  -->
-                                    <div
-                                    class="flex gap-[4px] text-[14px] text-gray-600"
-                                    :class="[stepStates.envConfiguration == 'active' ? 'font-bold' : '', 'text-gray-600']"
-                                >
-                                    <span v-if="stepStates.envConfiguration !== 'complete'">
-                                        <span
-                                            class="text-[20px]"
-                                            :class="stepStates.envConfiguration === 'pending' ? 'icon-checkbox' : 'icon-processing'"
-                                        >
-                                        </span>
-                                    </span>
-
-                                    <span v-else>
-                                        <span class="icon-tick text-green-500"></span>
-                                    </span>
-
-                                    <p>
-                                        {{-- @lang('installer::app.installer.index.environment-configuration.title') --}}
-                                        @lang('Environment Multilocale Configuration')
-                                    </p>
-                                </div>
+                                </div> 
 
                                 <!-- Create Admin Configuration -->
                                 <div
@@ -287,27 +259,17 @@
                         >
                             <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
                                 <p class="text-[20px] text-gray-800 font-bold">
-                                    @lang('installer::app.installer.index.start.title')
+                                    @lang('installer::app.installer.index.start.welcome-title')
                                 </p>
                             </div>
 
-                            <div class="flex flex-col gap-[12px] items-center h-[484px] px-[30px] py-[16px] overflow-y-auto">
-                                <img
-                                    src="{{ bagisto_asset('images/installer/bagisto-logo.svg', 'installer') }}"
-                                    class="w-3/5"
-                                    alt="@lang('installer::app.installer.index.bagisto-logo')"
-                                >
-
-                                <p class="text-gray-800 text-[20px] font-bold text-center">
-                                    @lang('installer::app.installer.index.start.welcome-title')
-                                </p>
-
+                            <div class="flex flex-col gap-[12px] items-center h-[300px] px-[30px] py-[16px] overflow-y-auto">
                                 <p class="text-gray-600 text-[14px] text-center">
                                     @lang('installer::app.installer.index.installation-description')
                                 </p>
 
                                 <div class="container overflow-hidden">
-                                    <div class="flex flex-col gap-[12px] justify-center h-[285px]  px-[30px] py-[16px] border-b-[1px] border-gray-300 overflow-y-auto">
+                                    <div class="flex flex-col gap-[12px] justify-center h-[250px]  px-[30px] py-[16px] overflow-y-auto">
                                         <!-- Application Name -->
                                         <x-installer::form.control-group class="mb-[10px]">
                                             <x-installer::form.control-group.label>
@@ -319,6 +281,7 @@
                                                 name="locale"
                                                 rules="required"
                                                 :label="trans('installer::app.installer.index.start.locale')"
+                                                @change="setLocale"
                                             >
                                                 <option value="" disabled>@lang('installer::app.installer.index.start.select-locale')</option>
 
@@ -1248,14 +1211,6 @@
                         nextForm(params) {
                             const stepActions = {
                                 start: () => {
-                                    const newLocale = params.locale;
-                                    const url = new URL(window.location.href);
-
-                                    if (! url.searchParams.has('locale')) {
-                                        url.searchParams.set('locale', newLocale);
-                                        window.location.href = url.toString();
-                                    }
-
                                     this.completeStep('start', 'serverRequirements', 'active', 'complete');
                                 },
 
@@ -1374,6 +1329,16 @@
                                 .catch(error => {
                                     setErrors(error.response.data.errors);
                                 });
+                        },
+
+                        setLocale(params) {
+                            const newLocale = params.locale;
+                            const url = new URL(window.location.href);
+
+                            if (! url.searchParams.has('locale')) {
+                                url.searchParams.set('locale', newLocale);
+                                window.location.href = url.toString();
+                            }
                         },
 
                         back() {
