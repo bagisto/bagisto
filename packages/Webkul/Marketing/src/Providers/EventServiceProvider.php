@@ -15,12 +15,8 @@ class EventServiceProvider extends ServiceProvider
         /**
          * Product Events
          */
-        'catalog.product.create.before'  => [
-            'Webkul\Marketing\Listeners\Product@beforeCreate',
-        ],
-
-        'catalog.product.update.after'  => [
-            'Webkul\Marketing\Listeners\Product@afterUpdate',
+        'catalog.product.update.before'  => [
+            'Webkul\Marketing\Listeners\Product@beforeUpdate',
         ],
 
         'catalog.product.delete.before' => [
@@ -30,12 +26,12 @@ class EventServiceProvider extends ServiceProvider
         /**
          * Category Events
          */
-        'catalog.category.create.before' => [
-            'Webkul\Marketing\Listeners\Category@beforeCreate',
+        'catalog.category.create.after' => [
+            'Webkul\Marketing\Listeners\Category@afterCreate',
         ],
 
-        'catalog.category.update.after' => [
-            'Webkul\Marketing\Listeners\Category@afterUpdate',
+        'catalog.category.update.before' => [
+            'Webkul\Marketing\Listeners\Category@beforeUpdate',
         ],
 
         'catalog.category.delete.before' => [
@@ -45,12 +41,12 @@ class EventServiceProvider extends ServiceProvider
         /**
          * CMS Page Events
          */
-        'cms.page.create.before' => [
-            'Webkul\Marketing\Listeners\Page@beforeCreate',
+        'cms.page.create.after' => [
+            'Webkul\Marketing\Listeners\Page@afterCreate',
         ],
 
-        'cms.page.update.after' => [
-            'Webkul\Marketing\Listeners\Page@afterUpdate',
+        'cms.page.update.before' => [
+            'Webkul\Marketing\Listeners\Page@beforeUpdate',
         ],
 
         'cms.page.delete.before' => [

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Theme\Repositories\ThemeCustomizationRepository;
+use Webkul\Marketing\Repositories\URLRewriteRepository;
 
 class ProductsCategoriesProxyController extends Controller
 {
@@ -24,7 +25,8 @@ class ProductsCategoriesProxyController extends Controller
     public function __construct(
         protected CategoryRepository $categoryRepository,
         protected ProductRepository $productRepository,
-        protected ThemeCustomizationRepository $themeCustomizationRepository
+        protected ThemeCustomizationRepository $themeCustomizationRepository,
+        protected URLRewriteRepository $urlRewriteRepository
     ) {
     }
 
@@ -68,17 +70,39 @@ class ProductsCategoriesProxyController extends Controller
 
         $product = $this->productRepository->findBySlug($slugOrPath);
 
-        if (
-            ! $product
-            || ! $product->visible_individually
-            || ! $product->url_key
-            || ! $product->status
-        ) {
-            abort(404);
+        if ($product) {
+            if (
+                ! $product->url_key
+                || ! $product->visible_individually
+                || ! $product->status
+            ) {
+                abort(404);
+            }
+
+            visitor()->visit($product);
+
+            return view('shop::products.view', compact('product'));
         }
 
-        visitor()->visit($product);
+        $categoryURLRewrite = $this->urlRewriteRepository->findOneWhere([
+            'entity_type'  => 'category',
+            'request_path' => $slugOrPath,
+            'locale'       => app()->getLocale(),
+        ]);
 
-        return view('shop::products.view', compact('product'));
+        if ($categoryURLRewrite) {
+            return redirect()->to($categoryURLRewrite->target_path);
+        }
+
+        $productURLRewrite = $this->urlRewriteRepository->findOneWhere([
+            'entity_type'  => 'product',
+            'request_path' => $slugOrPath,
+        ]);
+
+        if ($productURLRewrite) {
+            return redirect()->to($productURLRewrite->target_path);
+        }
+
+        abort(404);
     }
 }

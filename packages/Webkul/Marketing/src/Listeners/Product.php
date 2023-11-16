@@ -3,35 +3,75 @@
 namespace Webkul\Marketing\Listeners;
 
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Marketing\Repositories\URLRewriteRepository;
 
 class Product
 {
+    /**
+     * Permanent redirect code
+     * 
+     * @var int
+     */
+    const PERMANENT_REDIRECT_CODE = 301;
+
     /**
      * Create a new listener instance.
      *
      * @return void
      */
-    public function __construct(protected ProductRepository $productRepository)
-    {
-    }
-
-    /**
-     * Before product is created
-     *
-     * @return void
-     */
-    public function beforeCreate()
+    public function __construct(
+        protected ProductRepository $productRepository,
+        protected URLRewriteRepository $urlRewriteRepository
+    )
     {
     }
 
     /**
      * After product is updated
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  integer  $id
      * @return void
      */
-    public function afterUpdate($product)
+    public function beforeUpdate($id)
     {
+        $product = $this->productRepository->find($id);
+
+        $currentURLKey = request()->input('url_key');
+
+        if ($currentURLKey === $product->url_key) {
+            return;
+        }
+
+        if (empty($product->url_key)) {
+            /**
+             * Delete category and product url rewrites
+             * if already exists for the request path
+             */
+            $this->urlRewriteRepository->deleteWhere([
+                ['entity_type', 'IN', ['category', 'product']],
+                'request_path' => $currentURLKey,
+            ]);
+
+            return;
+        }
+
+        /**
+         * Delete category and product url rewrites
+         * if already exists for the request path
+         */
+        $this->urlRewriteRepository->deleteWhere([
+            ['entity_type', 'IN', ['category', 'product']],
+            'target_path' => $product->url_key,
+        ]);
+
+
+        $this->urlRewriteRepository->create([
+            'entity_type'   => 'product',
+            'request_path'  => $product->url_key,
+            'target_path'   => $currentURLKey,
+            'locale'        => app()->getLocale(),
+            'redirect_type' => self::PERMANENT_REDIRECT_CODE,
+        ]);
     }
 
     /**
@@ -40,7 +80,17 @@ class Product
      * @param  int  $id
      * @return void
      */
-    public function beforeDelete($product)
+    public function beforeDelete($id)
     {
+        $product = $this->productRepository->find($id);
+
+        /**
+         * Delete product url rewrites
+         * if already exists for the request path
+         */
+        $this->urlRewriteRepository->deleteWhere([
+            'entity_type'  => 'product',
+            'request_path' => $product->url_key,
+        ]);
     }
 }

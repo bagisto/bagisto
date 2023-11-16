@@ -8,6 +8,7 @@ use Spatie\ResponseCache\Middlewares\CacheResponse as BaseCacheResponseMiddlewar
 use Spatie\ResponseCache\ResponseCache as BaseResponseCache;
 use Symfony\Component\HttpFoundation\Response;
 use Webkul\Marketing\Repositories\SearchTermRepository;
+use Webkul\Marketing\Repositories\URLRewriteRepository;
 
 class CacheResponse extends BaseCacheResponseMiddleware
 {
@@ -44,6 +45,29 @@ class CacheResponse extends BaseCacheResponseMiddleware
 
             if ($searchTerm?->redirect_url) {
                 return redirect()->to($searchTerm->redirect_url);
+            }
+        }
+
+        if ($request->route()->getName() == 'shop.product_or_category.index') {
+            $slugOrPath = urldecode(trim($request->getPathInfo(), '/'));
+
+            $categoryURLRewrite = app(URLRewriteRepository::class)->findOneWhere([
+                'entity_type'  => 'category',
+                'request_path' => $slugOrPath,
+                'locale'       => app()->getLocale(),
+            ]);
+    
+            if ($categoryURLRewrite) {
+                return redirect()->to($categoryURLRewrite->target_path);
+            }
+    
+            $productURLRewrite = app(URLRewriteRepository::class)->findOneWhere([
+                'entity_type'  => 'product',
+                'request_path' => $slugOrPath,
+            ]);
+    
+            if ($productURLRewrite) {
+                return redirect()->to($productURLRewrite->target_path);
             }
         }
 
