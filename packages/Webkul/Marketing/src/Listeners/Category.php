@@ -38,10 +38,18 @@ class Category
          * Delete category and product url rewrites
          * if already exists for the request path
          */
-        $this->urlRewriteRepository->deleteWhere([
+        $urlRewrites = $this->urlRewriteRepository->findWhere([
             ['entity_type', 'IN', ['category', 'product']],
             'request_path' => $category->slug,
         ]);
+
+        foreach ($urlRewrites as $urlRewrite) {
+            Event::dispatch('marketing.search_seo.url_rewrites.delete.before', $urlRewrite->id);
+
+            $this->urlRewriteRepository->delete($urlRewrite->id);
+
+            Event::dispatch('marketing.search_seo.url_rewrites.delete.after', $urlRewrite->id);
+        }
     }
 
     /**
@@ -75,11 +83,19 @@ class Category
          * Delete category and product url rewrites
          * if already exists for the request path
          */
-        $this->urlRewriteRepository->deleteWhere([
+        $urlRewrites = $this->urlRewriteRepository->findWhere([
             ['entity_type', 'IN', ['category', 'product']],
             'target_path' => $translations['slug'],
             'locale'      => $locale,
         ]);
+
+        foreach ($urlRewrites as $urlRewrite) {
+            Event::dispatch('marketing.search_seo.url_rewrites.delete.before', $urlRewrite->id);
+
+            $this->urlRewriteRepository->delete($urlRewrite->id);
+
+            Event::dispatch('marketing.search_seo.url_rewrites.delete.after', $urlRewrite->id);
+        }
 
         Event::dispatch('marketing.search_seo.url_rewrites.create.before');
 
@@ -110,11 +126,19 @@ class Category
         $translations = $category->getTranslationsArray();
 
         foreach ($translations as $locale => $translation) {
-            $this->urlRewriteRepository->deleteWhere([
+            $urlRewrites = $this->urlRewriteRepository->findWhere([
                 'entity_type'  => 'category',
                 'request_path' => $translation['slug'],
                 'locale'       => $locale,
             ]);
+    
+            foreach ($urlRewrites as $urlRewrite) {
+                Event::dispatch('marketing.search_seo.url_rewrites.delete.before', $urlRewrite->id);
+    
+                $this->urlRewriteRepository->delete($urlRewrite->id);
+    
+                Event::dispatch('marketing.search_seo.url_rewrites.delete.after', $urlRewrite->id);
+            }
         }
     }
 }

@@ -37,11 +37,19 @@ class Page
         /**
          * Delete if url rewrite already exists for request path
          */
-        $this->urlRewriteRepository->deleteWhere([
+        $urlRewrites = $this->urlRewriteRepository->findWhere([
             'entity_type'  => 'cms_page',
             'request_path' => $page->url_key,
             'locale'       => app()->getLocale(),
         ]);
+
+        foreach ($urlRewrites as $urlRewrite) {
+            Event::dispatch('marketing.search_seo.url_rewrites.delete.before', $urlRewrite->id);
+
+            $this->urlRewriteRepository->delete($urlRewrite->id);
+
+            Event::dispatch('marketing.search_seo.url_rewrites.delete.after', $urlRewrite->id);
+        }
     }
 
     /**
@@ -109,11 +117,19 @@ class Page
         $translations = $page->getTranslationsArray();
 
         foreach ($translations as $locale => $translation) {
-            $this->urlRewriteRepository->deleteWhere([
+            $urlRewrites = $this->urlRewriteRepository->findWhere([
                 'entity_type'  => 'cms_page',
                 'request_path' => $translation['url_key'],
                 'locale'       => $locale,
             ]);
+
+            foreach ($urlRewrites as $urlRewrite) {
+                Event::dispatch('marketing.search_seo.url_rewrites.delete.before', $urlRewrite->id);
+
+                $this->urlRewriteRepository->delete($urlRewrite->id);
+
+                Event::dispatch('marketing.search_seo.url_rewrites.delete.after', $urlRewrite->id);
+            }
         }
     }
 }
