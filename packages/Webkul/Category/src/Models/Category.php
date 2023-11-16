@@ -109,7 +109,8 @@ class Category extends TranslatableModel implements CategoryContract
          */
         return $categories->map(fn ($category) => $category->translate($localeCode))
             ->filter(fn ($category) => $category)
-            ->pluck('slug')->join('/');
+            ->pluck('slug')
+            ->join('/');
     }
 
     /**
@@ -125,7 +126,7 @@ class Category extends TranslatableModel implements CategoryContract
         $selfAndDescendants = $this->getDescendants()->prepend($this);
 
         /**
-         * This loop will check all the descandant and update all the slug because parent slug got changed.
+         * This loop will check all the descendant and update all the slug because parent slug got changed.
          *
          * To Do (@devansh): Need to monitor this more.
          */
@@ -133,10 +134,10 @@ class Category extends TranslatableModel implements CategoryContract
             foreach (core()->getAllLocales() as $locale) {
                 $categoryFullUrl = $category->getFullSlug($locale->code);
 
-                $transalatedCategory = $category->translate($locale->code);
+                $translatedCategory = $category->translate($locale->code);
 
-                if ($transalatedCategory) {
-                    $transalatedCategory->url_path = $categoryFullUrl;
+                if ($translatedCategory) {
+                    $translatedCategory->url_path = $categoryFullUrl;
                 }
             }
 
