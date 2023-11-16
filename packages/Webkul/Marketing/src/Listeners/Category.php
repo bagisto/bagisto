@@ -40,7 +40,7 @@ class Category
          */
         $this->urlRewriteRepository->deleteWhere([
             ['entity_type', 'IN', ['category', 'product']],
-            'request_path' => $product->url_key,
+            'request_path' => $category->slug,
         ]);
     }
 
