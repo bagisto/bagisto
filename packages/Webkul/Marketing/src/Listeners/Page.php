@@ -2,6 +2,7 @@
 
 namespace Webkul\Marketing\Listeners;
 
+use Illuminate\Support\Facades\Event;
 use Webkul\CMS\Repositories\PageRepository;
 use Webkul\Marketing\Repositories\URLRewriteRepository;
 
@@ -9,7 +10,7 @@ class Page
 {
     /**
      * Permanent redirect code
-     * 
+     *
      * @var int
      */
     const PERMANENT_REDIRECT_CODE = 301;
@@ -22,8 +23,7 @@ class Page
     public function __construct(
         protected PageRepository $pageRepository,
         protected URLRewriteRepository $urlRewriteRepository
-    )
-    {
+    ) {
     }
 
     /**
@@ -47,7 +47,7 @@ class Page
     /**
      * Before page is updated
      *
-     * @param  integer  $id
+     * @param  int  $id
      * @return void
      */
     public function beforeUpdate($id)
@@ -80,13 +80,17 @@ class Page
             'locale'      => $locale,
         ]);
 
-        $this->urlRewriteRepository->create([
+        Event::dispatch('marketing.search_seo.url_rewrites.create.before');
+
+        $urlRewrite = $this->urlRewriteRepository->create([
             'entity_type'   => 'cms_page',
             'request_path'  => $translations['url_key'],
             'target_path'   => $currentURLKey,
             'locale'        => $locale,
             'redirect_type' => self::PERMANENT_REDIRECT_CODE,
         ]);
+
+        Event::dispatch('marketing.search_seo.url_rewrites.create.after', $urlRewrite);
     }
 
     /**

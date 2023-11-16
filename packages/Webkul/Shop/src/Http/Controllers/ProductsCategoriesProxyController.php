@@ -4,9 +4,9 @@ namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Marketing\Repositories\URLRewriteRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Theme\Repositories\ThemeCustomizationRepository;
-use Webkul\Marketing\Repositories\URLRewriteRepository;
 
 class ProductsCategoriesProxyController extends Controller
 {

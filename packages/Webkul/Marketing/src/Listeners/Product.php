@@ -2,14 +2,15 @@
 
 namespace Webkul\Marketing\Listeners;
 
-use Webkul\Product\Repositories\ProductRepository;
+use Illuminate\Support\Facades\Event;
 use Webkul\Marketing\Repositories\URLRewriteRepository;
+use Webkul\Product\Repositories\ProductRepository;
 
 class Product
 {
     /**
      * Permanent redirect code
-     * 
+     *
      * @var int
      */
     const PERMANENT_REDIRECT_CODE = 301;
@@ -22,14 +23,13 @@ class Product
     public function __construct(
         protected ProductRepository $productRepository,
         protected URLRewriteRepository $urlRewriteRepository
-    )
-    {
+    ) {
     }
 
     /**
      * After product is updated
      *
-     * @param  integer  $id
+     * @param  int  $id
      * @return void
      */
     public function beforeUpdate($id)
@@ -64,14 +64,17 @@ class Product
             'target_path' => $product->url_key,
         ]);
 
+        Event::dispatch('marketing.search_seo.url_rewrites.create.before');
 
-        $this->urlRewriteRepository->create([
+        $urlRewrite = $this->urlRewriteRepository->create([
             'entity_type'   => 'product',
             'request_path'  => $product->url_key,
             'target_path'   => $currentURLKey,
             'locale'        => app()->getLocale(),
             'redirect_type' => self::PERMANENT_REDIRECT_CODE,
         ]);
+
+        Event::dispatch('marketing.search_seo.url_rewrites.create.after', $urlRewrite);
     }
 
     /**

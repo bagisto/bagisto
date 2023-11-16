@@ -2,6 +2,7 @@
 
 namespace Webkul\Marketing\Listeners;
 
+use Illuminate\Support\Facades\Event;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Marketing\Repositories\URLRewriteRepository;
 
@@ -9,7 +10,7 @@ class Category
 {
     /**
      * Permanent redirect code
-     * 
+     *
      * @var int
      */
     const PERMANENT_REDIRECT_CODE = 301;
@@ -22,8 +23,7 @@ class Category
     public function __construct(
         protected CategoryRepository $categoryRepository,
         protected URLRewriteRepository $urlRewriteRepository
-    )
-    {
+    ) {
     }
 
     /**
@@ -47,7 +47,7 @@ class Category
     /**
      * Before category is updated
      *
-     * @param  integer  $id
+     * @param  int  $id
      * @return void
      */
     public function beforeUpdate($id)
@@ -81,13 +81,17 @@ class Category
             'locale'      => $locale,
         ]);
 
-        $this->urlRewriteRepository->create([
+        Event::dispatch('marketing.search_seo.url_rewrites.create.before');
+
+        $urlRewrite = $this->urlRewriteRepository->create([
             'entity_type'   => 'category',
             'request_path'  => $translations['slug'],
             'target_path'   => $currentURLKey,
             'locale'        => $locale,
             'redirect_type' => self::PERMANENT_REDIRECT_CODE,
         ]);
+
+        Event::dispatch('marketing.search_seo.url_rewrites.create.after', $urlRewrite);
     }
 
     /**

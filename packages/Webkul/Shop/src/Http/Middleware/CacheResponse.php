@@ -56,16 +56,16 @@ class CacheResponse extends BaseCacheResponseMiddleware
                 'request_path' => $slugOrPath,
                 'locale'       => app()->getLocale(),
             ]);
-    
+
             if ($categoryURLRewrite) {
                 return redirect()->to($categoryURLRewrite->target_path);
             }
-    
+
             $productURLRewrite = app(URLRewriteRepository::class)->findOneWhere([
                 'entity_type'  => 'product',
                 'request_path' => $slugOrPath,
             ]);
-    
+
             if ($productURLRewrite) {
                 return redirect()->to($productURLRewrite->target_path);
             }
