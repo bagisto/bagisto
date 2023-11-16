@@ -3,7 +3,6 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Webkul\CMS\Repositories\PageRepository;
-use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Marketing\Repositories\URLRewriteRepository;
 
 class PageController extends Controller
@@ -16,8 +15,7 @@ class PageController extends Controller
     public function __construct(
         protected PageRepository $pageRepository,
         protected URLRewriteRepository $urlRewriteRepository
-    )
-    {
+    ) {
     }
 
     /**
@@ -36,7 +34,7 @@ class PageController extends Controller
                 'request_path' => $urlKey,
                 'locale'       => app()->getLocale(),
             ]);
-    
+
             if ($urlRewrite) {
                 return redirect()->to($urlRewrite->target_path, $urlRewrite->redirect_type);
             }
