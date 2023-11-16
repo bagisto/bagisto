@@ -435,7 +435,7 @@ return [
             'Hindi'                         => '印地语',
             'Welcome to Installation'       => '欢迎来到安装',
             'We are happy to see you here!' => '我们很高兴在这里见到您！',
-            'Bagisto installation typically involves several steps. Here\'s a general outline of the installation process for Bagisto:'=> 'Bagisto安装通常涉及几个步骤。以下是Bagisto安装过程的概要：',
+            'installation-description'      => 'Bagisto 安装通常涉及几个步骤。以下是 Bagisto 安装过程的概要：',
             'Italian'                       => '意大利语',
             'Japanese'                      => '日语',
             'Persian'                       => '波斯语',
