@@ -322,6 +322,7 @@ return [
         'index' => [
             'start' => [
                 'locale'        => 'Locatie',
+                'main'          => 'Rozpocznij',
                 'select-locale' => 'Selecteer Locatie',
                 'title'         => 'Uw Bagisto-installatie',
                 'welcome-title' => 'Welkom bij Bagisto 2.0.',

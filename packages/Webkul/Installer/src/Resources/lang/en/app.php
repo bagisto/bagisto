@@ -322,6 +322,7 @@ return [
         'index' => [
             'start' => [
                 'locale'        => 'Locale',
+                'main'          => 'Start',
                 'select-locale' => 'Select Locale',
                 'title'         => 'Your Bagisto install',
                 'welcome-title' => 'Welcome to Bagisto 2.0.',

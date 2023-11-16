@@ -322,6 +322,7 @@ return [
         'index' => [
             'start' => [
                 'locale'        => 'स्थान',
+                'main'          => 'शुरू',
                 'select-locale' => 'स्थान चुनें',
                 'title'         => 'आपका Bagisto स्थापित करें',
                 'welcome-title' => 'Bagisto 2.0 में आपका स्वागत है।',

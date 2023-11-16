@@ -322,6 +322,7 @@ return [
         'index' => [
             'start' => [
                 'locale'        => 'දේශීය',
+                'main'          => 'ආරම්භක',
                 'select-locale' => 'Locale තෝරන්න',
                 'title'         => 'ඔබේ Bagisto ස්ථාපනය',
                 'welcome-title' => 'Bagisto 2.0 වෙත සාදරයෙන් පිළිගනිමු.',

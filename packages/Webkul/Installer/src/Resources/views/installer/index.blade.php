@@ -81,7 +81,7 @@
                                         <span class="icon-tick text-green-500"></span>
                                     </span>
 
-                                    <p>@lang('Start')</p>
+                                    <p>@lang('installer::app.installer.index.start.main')</p>
                                 </div>
 
                                 <!-- Server Environment -->

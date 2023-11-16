@@ -322,6 +322,7 @@ return [
         'index' => [
             'start' => [
                 'locale'        => 'Yerel',
+                'main'          => 'Başlangıç',
                 'select-locale' => 'Yerel Seçin',
                 'title'         => 'Bagisto kurulumunuz',
                 'welcome-title' => 'Bagisto 2.0\'a hoş geldiniz.',

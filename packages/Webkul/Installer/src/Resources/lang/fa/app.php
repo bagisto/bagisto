@@ -322,6 +322,7 @@ return [
         'index' => [
             'start' => [
                 'locale'        => 'محلی',
+                'main'          => 'شروع',
                 'select-locale' => 'انتخاب محلی',
                 'title'         => 'نصب Bagisto شما',
                 'welcome-title' => 'خوش آمدید به Bagisto 2.0.',

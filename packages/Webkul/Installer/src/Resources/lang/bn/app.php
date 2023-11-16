@@ -322,6 +322,7 @@ return [
         'index' => [
             'start' => [
                 'locale'        => 'লোকেল',
+                'main'          => 'শুরু',
                 'select-locale' => 'লোকেল নির্বাচন করুন',
                 'title'         => 'আপনার Bagisto ইনস্টলেশন',
                 'welcome-title' => 'Bagisto 2.0-এ আপনাকে স্বাগতম।',

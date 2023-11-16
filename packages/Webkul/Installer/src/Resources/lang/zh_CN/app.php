@@ -322,6 +322,7 @@ return [
         'index' => [
             'start' => [
                 'locale'        => '区域设置',
+                'main'          => '开始',
                 'select-locale' => '选择区域设置',
                 'title'         => '您的 Bagisto 安装',
                 'welcome-title' => '欢迎来到 Bagisto 2.0。',

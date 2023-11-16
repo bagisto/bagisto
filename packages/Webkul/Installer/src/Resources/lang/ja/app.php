@@ -322,6 +322,7 @@ return [
         'index' => [
             'start' => [
                 'locale'        => 'ロケール',
+                'main'          => '開始',
                 'select-locale' => 'ロケールを選択',
                 'title'         => 'Bagistoのインストール',
                 'welcome-title' => 'Bagisto 2.0へようこそ。',
