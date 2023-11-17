@@ -1,22 +1,22 @@
 <x-admin::layouts>
     <!-- Title of the page -->
     <x-slot:title>
-        @lang('admin::app.marketing.search-seo.search-terms.index.title')
+        @lang('admin::app.marketing.search-seo.search-synonyms.index.title')
     </x-slot:title>
 
-    {!! view_render_event('bagisto.admin.marketing.search_seo.search_terms.create.before') !!}
+    {!! view_render_event('bagisto.admin.marketing.search_seo.search_synonyms.create.before') !!}
 
     <!-- Create Sitemap Vue Component -->
     <v-create-sitemaps>
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
-                @lang('admin::app.marketing.search-seo.search-terms.index.title')
+                @lang('admin::app.marketing.search-seo.search-synonyms.index.title')
             </p>
 
             <!-- Create Button -->
-            @if (bouncer()->hasPermission('marketing.search_seo.search_terms.create'))
+            @if (bouncer()->hasPermission('marketing.search_seo.search_synonyms.create'))
                 <div class="primary-button">
-                    @lang('admin::app.marketing.search-seo.search-terms.index.create-btn')
+                    @lang('admin::app.marketing.search-seo.search-synonyms.index.create-btn')
                 </div>
             @endif
         </div>
@@ -25,7 +25,7 @@
         <x-admin::shimmer.datagrid/>
     </v-create-sitemaps>
 
-    {!! view_render_event('bagisto.admin.marketing.search_seo.search_terms.create.after') !!}
+    {!! view_render_event('bagisto.admin.marketing.search_seo.search_synonyms.create.after') !!}
 
     @pushOnce('scripts')
         <script
@@ -34,24 +34,24 @@
         >
             <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
                 <p class="text-[20px] text-gray-800 dark:text-white font-bold">
-                    @lang('admin::app.marketing.search-seo.search-terms.index.title')
+                    @lang('admin::app.marketing.search-seo.search-synonyms.index.title')
                 </p>
 
                 <!-- Create Button -->
-                @if (bouncer()->hasPermission('marketing.search_seo.search_terms.create'))
+                @if (bouncer()->hasPermission('marketing.search_seo.search_synonyms.create'))
                     <div
                         class="primary-button"
                         @click="selectedSitemap=0; $refs.sitemap.toggle()"
                     >
-                        @lang('admin::app.marketing.search-seo.search-terms.index.create-btn')
+                        @lang('admin::app.marketing.search-seo.search-synonyms.index.create-btn')
                     </div>
                 @endif
             </div>
 
-            {!! view_render_event('admin.marketing.search_seo.search_terms.list.before') !!}
+            {!! view_render_event('admin.marketing.search_seo.search_synonyms.list.before') !!}
 
             <x-admin::datagrid
-                src="{{ route('admin.marketing.search_seo.search_terms.index') }}"
+                src="{{ route('admin.marketing.search_seo.search_synonyms.index') }}"
                 ref="datagrid"
             >
                 <!-- DataGrid Body -->
@@ -83,32 +83,16 @@
                             <!-- Id -->
                             <p v-text="record.id"></p>
 
-                            <!-- Search Query -->
-                            <p v-text="record.term"></p>
+                            <!-- Name -->
+                            <p v-text="record.name"></p>
 
-                            <!-- Search Results -->
-                            <p v-text="record.results"></p>
-
-                            <!-- Uses -->
-                            <p v-text="record.uses"></p>
-
-                            <!-- URL -->
-                            <p class="break-all">
-                                <a :href="record.redirect_url" target="_blank">
-                                    @{{ record.redirect_url}}
-                                </a>
-                            </p>
-
-                            <!-- Channel -->
-                            <p v-text="record.channel_name"></p>
-
-                            <!-- Locale -->
-                            <p v-text="record.locale"></p>
+                            <!-- Terms -->
+                            <p v-text="record.terms"></p>
 
                             <!-- Actions -->
-                            @if (bouncer()->hasPermission('marketing.search_terms.edit') || bouncer()->hasPermission('marketing.search_terms.delete'))
+                            @if (bouncer()->hasPermission('marketing.search_synonyms.edit') || bouncer()->hasPermission('marketing.search_synonyms.delete'))
                                 <div class="flex justify-end">
-                                    @if (bouncer()->hasPermission('marketing.search_terms.edit'))
+                                    @if (bouncer()->hasPermission('marketing.search_synonyms.edit'))
                                         <a @click="selectedSitemap=1; editModal(record)">
                                             <span
                                                 :class="record.actions.find(action => action.title === 'Edit')?.icon"
@@ -118,7 +102,7 @@
                                         </a>
                                     @endif
 
-                                    @if (bouncer()->hasPermission('marketing.search_terms.delete'))
+                                    @if (bouncer()->hasPermission('marketing.search_synonyms.delete'))
                                         <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
                                             <span
                                                 :class="record.actions.find(action => action.method === 'DELETE')?.icon"
@@ -139,7 +123,7 @@
                 </template>
             </x-admin::datagrid>
 
-            {!! view_render_event('admin.marketing.search_seo.search_terms.list.after') !!}
+            {!! view_render_event('admin.marketing.search_seo.search_synonyms.list.after') !!}
 
             <!-- Model Form -->
             <x-admin::form
@@ -160,7 +144,7 @@
                                 class="text-[18px] text-gray-800 dark:text-white font-bold"
                                 v-if="selectedSitemap"
                             >
-                                @lang('admin::app.marketing.search-seo.search-terms.index.edit.title')
+                                @lang('admin::app.marketing.search-seo.search-synonyms.index.edit.title')
                             </p>
 
                             <!-- Edit Modal title -->
@@ -168,7 +152,7 @@
                                 class="text-[18px] text-gray-800 dark:text-white font-bold"
                                 v-else
                             >
-                                @lang('admin::app.marketing.search-seo.search-terms.index.create.title')
+                                @lang('admin::app.marketing.search-seo.search-synonyms.index.create.title')
                             </p>
                         </x-slot:header>
 
@@ -182,124 +166,50 @@
                                 >
                                 </x-admin::form.control-group.control>
 
-                                <!-- Search Term -->
+                                <!-- Name -->
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.marketing.search-seo.search-terms.index.create.search-query')
+                                        @lang('admin::app.marketing.search-seo.search-synonyms.index.create.name')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="term"
+                                        name="name"
                                         rules="required"
-                                        :label="trans('admin::app.marketing.search-seo.search-terms.index.create.search-query')"
-                                        :placeholder="trans('admin::app.marketing.search-seo.search-terms.index.create.search-query')"
+                                        :label="trans('admin::app.marketing.search-seo.search-synonyms.index.create.name')"
+                                        :placeholder="trans('admin::app.marketing.search-seo.search-synonyms.index.create.name')"
                                     >
                                     </x-admin::form.control-group.control>
 
                                     <x-admin::form.control-group.error
-                                        control-name="term"
+                                        control-name="name"
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <template v-if="selectedSitemap">
-                                    <!-- Results -->
-                                    <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.marketing.search-seo.search-terms.index.create.results')
-                                        </x-admin::form.control-group.label>
-
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="results"
-                                            rules="required"
-                                            :label="trans('admin::app.marketing.search-seo.search-terms.index.create.results')"
-                                            :placeholder="trans('admin::app.marketing.search-seo.search-terms.index.create.results')"
-                                        >
-                                        </x-admin::form.control-group.control>
-
-                                        <x-admin::form.control-group.error
-                                            control-name="results"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-
-                                    <!-- Uses -->
-                                    <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.marketing.search-seo.search-terms.index.create.uses')
-                                        </x-admin::form.control-group.label>
-
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="uses"
-                                            rules="required"
-                                            :label="trans('admin::app.marketing.search-seo.search-terms.index.create.uses')"
-                                            :placeholder="trans('admin::app.marketing.search-seo.search-terms.index.create.uses')"
-                                        >
-                                        </x-admin::form.control-group.control>
-
-                                        <x-admin::form.control-group.error
-                                            control-name="uses"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-                                </template>
-
-                                <!-- Uses -->
+                                <!-- Terms -->
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
-                                        @lang('admin::app.marketing.search-seo.search-terms.index.create.redirect-url')
-                                    </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="redirect_url"
-                                        :label="trans('admin::app.marketing.search-seo.search-terms.index.create.redirect-url')"
-                                        :placeholder="trans('admin::app.marketing.search-seo.search-terms.index.create.redirect-url')"
-                                    >
-                                    </x-admin::form.control-group.control>
-                                </x-admin::form.control-group>
-
-                                <!-- Channels -->
-                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.marketing.search-seo.search-terms.index.create.channel')
+                                        @lang('admin::app.marketing.search-seo.search-synonyms.index.create.terms')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
-                                        type="select"
-                                        name="channel_id"
+                                        type="textarea"
+                                        name="terms"
                                         rules="required"
-                                        :label="trans('admin::app.marketing.search-seo.search-terms.index.create.channel')"
+                                        :label="trans('admin::app.marketing.search-seo.search-synonyms.index.create.terms')"
+                                        :placeholder="trans('admin::app.marketing.search-seo.search-synonyms.index.create.terms')"
                                     >
-                                        @foreach (core()->getAllChannels() as $channel)
-                                            <option value="{{ $channel->id }}">{{ $channel->name }}</option>
-                                        @endforeach 
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
+                                    <p class="mt-[8px] ltr:ml-[4px] rtl:mr-[4px] text-[12px] text-gray-600 dark:text-gray-300 font-medium">
+                                        @lang('admin::app.marketing.search-seo.search-synonyms.index.create.terms-info')
+                                    </p>
 
-                                <!-- Channels -->
-                                <x-admin::form.control-group>
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.marketing.search-seo.search-terms.index.create.locale')
-                                    </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.control
-                                        type="select"
-                                        name="locale"
-                                        rules="required"
-                                        :label="trans('admin::app.marketing.search-seo.search-terms.index.create.locale')"
+                                    <x-admin::form.control-group.error
+                                        control-name="terms"
                                     >
-                                        @foreach (core()->getAllLocales() as $locale)
-                                            <option value="{{ $locale->code }}">{{ $locale->name }}</option>
-                                        @endforeach 
-                                    </x-admin::form.control-group.control>
-
-                                    <x-admin::form.control-group.error control-name="locale"></x-admin::form.control-group.error>
+                                    </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
                             </div>
                         </x-slot:content>
@@ -307,7 +217,7 @@
                         <x-slot:footer>
                             <!-- Save Button -->
                             <button class="primary-button">
-                                @lang('admin::app.marketing.search-seo.search-terms.index.create.save-btn')
+                                @lang('admin::app.marketing.search-seo.search-synonyms.index.create.save-btn')
                             </button>
                         </x-slot:footer>
                     </x-admin::modal>
@@ -349,7 +259,7 @@
                             formData.append('_method', 'put');
                         }
 
-                        this.$axios.post(params.id ? "{{ route('admin.marketing.search_seo.search_terms.update') }}" : "{{ route('admin.marketing.search_seo.search_terms.store') }}", formData )
+                        this.$axios.post(params.id ? "{{ route('admin.marketing.search_seo.search_synonyms.update') }}" : "{{ route('admin.marketing.search_seo.search_synonyms.store') }}", formData )
                             .then((response) => {
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 

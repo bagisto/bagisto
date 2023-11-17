@@ -1965,6 +1965,39 @@ return [
                 ],
             ],
 
+            'search-synonyms' => [
+                'index' => [
+                    'title'      => '検索の同義語',
+                    'create-btn' => '検索の同義語を作成',
+
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'name'                => '名前',
+                        'terms'               => '用語',
+                        'edit'                => '編集',
+                        'delete'              => '削除',
+                        'actions'             => 'アクション',
+                        'mass-delete-success' => '選択した検索の同義語が正常に削除されました',
+                    ],
+
+                    'create' => [
+                        'name'           => '名前',
+                        'terms'          => '用語',
+                        'terms-info'     => 'シノニムをコンマで区切られたリストとして入力してください、例："靴,履物"。これにより、検索をすべての用語に拡張します。',
+                        'save-btn'       => '検索の同義語を保存',
+                        'title'          => '検索の同義語を作成',
+                        'success'        => '検索の同義語が正常に作成されました',
+                        'delete-warning' => 'このアクションを実行してもよろしいですか？',
+                    ],
+
+                    'edit' => [
+                        'title'          => '検索の同義語を編集',
+                        'success'        => '検索の同義語が正常に更新されました',
+                        'delete-success' => '検索の同義語が正常に削除されました',
+                    ],
+                ],
+            ],
+
             'sitemaps' => [
                 'index' => [
                     'title'      => 'サイトマップ',
@@ -3380,6 +3413,7 @@ return [
                 'reviews'                  => 'レビュー',
                 'roles'                    => 'ロール',
                 'sales'                    => '販売',
+                'search-synonyms'          => '検索の同義語',
                 'search-terms'             => '検索用語',
                 'search-seo'               => '検索とSEO',
                 'shipments'                => '発送',
@@ -3538,6 +3572,7 @@ return [
         'reviews'                  => 'レビュー',
         'roles'                    => '役割',
         'sales'                    => '販売',
+        'search-synonyms'          => '検索の同義語',
         'search-terms'             => '検索用語',
         'search-seo'               => '検索とSEO',
         'shipments'                => '出荷',

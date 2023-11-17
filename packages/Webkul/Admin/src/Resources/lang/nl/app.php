@@ -1966,6 +1966,39 @@ return [
                 ],
             ],
 
+            'search-synonyms' => [
+                'index' => [
+                    'title'      => 'Zoek Synoniemen',
+                    'create-btn' => 'Maak Zoek Synoniem',
+
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'name'                => 'Naam',
+                        'terms'               => 'Termen',
+                        'edit'                => 'Bewerk',
+                        'delete'              => 'Verwijder',
+                        'actions'             => 'Acties',
+                        'mass-delete-success' => 'Geselecteerde Zoek Synoniemen Succesvol Verwijderd',
+                    ],
+
+                    'create' => [
+                        'name'           => 'Naam',
+                        'terms'          => 'Termen',
+                        'terms-info'     => 'Voer synoniemen in als een door komma\'s gescheiden lijst, bijvoorbeeld "schoenen, schoeisel." Hiermee wordt de zoekopdracht uitgebreid om alle termen op te nemen.',
+                        'save-btn'       => 'Bewaar Zoek Synoniem',
+                        'title'          => 'Maak Zoek Synoniem',
+                        'success'        => 'Zoek Synoniem succesvol aangemaakt',
+                        'delete-warning' => 'Weet je zeker dat je deze actie wilt uitvoeren?',
+                    ],
+
+                    'edit' => [
+                        'title'          => 'Bewerk Zoek Synoniem',
+                        'success'        => 'Zoek Synoniem succesvol bijgewerkt',
+                        'delete-success' => 'Zoek Synoniem succesvol verwijderd',
+                    ],
+                ],
+            ],
+
             'sitemaps' => [
                 'index' => [
                     'title'      => 'Sitemaps',
@@ -3380,6 +3413,7 @@ return [
                 'reviews'                  => 'Beoordelingen',
                 'roles'                    => 'Rollen',
                 'sales'                    => 'Verkopen',
+                'search-synonyms'          => 'Zoek Synoniemen',
                 'search-terms'             => 'Zoektermen',
                 'search-seo'               => 'Zoeken en SEO',
                 'shipments'                => 'Zendingen',
@@ -3538,6 +3572,7 @@ return [
         'reviews'                  => 'Beoordelingen',
         'roles'                    => 'Rollen',
         'sales'                    => 'Verkoop',
+        'search-synonyms'          => 'Zoek Synoniemen',
         'search-terms'             => 'Zoektermen',
         'search-seo'               => 'Zoeken en SEO',
         'shipments'                => 'Verzendingen',
