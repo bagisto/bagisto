@@ -836,10 +836,13 @@ return [
 
         'customers' => [
             'registration' => [
-                'description' => 'Votre compte a été créé avec succès et vous pouvez vous connecter en utilisant votre adresse e-mail et vos informations d\'identification par mot de passe. Après vous être connecté, vous pourrez accéder à d\'autres services, y compris la consultation de commandes passées, de listes de souhaits et la modification de vos informations de compte.',
-                'greeting'    => 'Bienvenue et merci de vous être inscrit chez nous !',
-                'subject'     => 'Nouvelle inscription de client',
-                'sign-in'     => 'Se connecter',
+                'subject'                 => 'Nouvelle inscription de client',
+                'description'             => 'Votre compte a été créé avec succès et vous pouvez vous connecter en utilisant votre adresse e-mail et vos informations d\'identification par mot de passe. Après vous être connecté, vous pourrez accéder à d\'autres services, y compris la consultation de commandes passées, de listes de souhaits et la modification de vos informations de compte.',
+                'credentials-description' => 'Votre compte a été créé. Les détails de votre compte sont ci-dessous :',
+                'greeting'                => 'Bienvenue et merci de vous être inscrit chez nous !',
+                'sign-in'                 => 'Se connecter',
+                'username-email'          => 'Nom d\'utilisateur/Email',
+                'password'                => 'Mot de passe',
             ],
 
             'forgot-password' => [

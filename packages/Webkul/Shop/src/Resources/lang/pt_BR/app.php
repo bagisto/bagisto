@@ -836,10 +836,13 @@ return [
 
         'customers' => [
             'registration' => [
-                'description' => 'Sua conta foi criada com sucesso e você pode fazer login usando seu e-mail e senha. Ao fazer o login, você poderá acessar outros serviços, incluindo a revisão de pedidos anteriores, listas de desejos e a edição das informações da sua conta.',
-                'greeting'    => 'Bem-vindo e obrigado por se registrar conosco!',
-                'subject'     => 'Novo Registro de Cliente',
-                'sign-in'     => 'Entrar',
+                'subject'                 => 'Novo Registro de Cliente',
+                'description'             => 'Sua conta foi criada com sucesso e você pode fazer login usando seu e-mail e senha. Ao fazer o login, você poderá acessar outros serviços, incluindo a revisão de pedidos anteriores, listas de desejos e a edição das informações da sua conta.',
+                'credentials-description' => 'Sua conta foi criada. Os detalhes da sua conta estão abaixo:',
+                'greeting'                => 'Bem-vindo e obrigado por se registrar conosco!',
+                'sign-in'                 => 'Entrar',
+                'username-email'          => 'Nome de usuário/Email',
+                'password'                => 'Senha',
             ],
 
             'forgot-password' => [
