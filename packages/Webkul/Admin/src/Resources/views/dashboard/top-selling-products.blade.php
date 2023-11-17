@@ -30,7 +30,7 @@
                     v-if="report.statistics.length"
                 >
                     <a
-                        :href="`{{route('admin.catalog.products.edit', '')}}/${item.product_id}`"
+                        :href="`{{route('admin.catalog.products.edit', '')}}/${item.id}`"
                         class="flex gap-[10px] p-[16px] border-b-[1px] dark:border-gray-800 last:border-b-0 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                         v-for="item in report.statistics"
                     >
