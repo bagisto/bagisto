@@ -194,10 +194,10 @@ class CategoryRepository extends Repository
     public function isSlugUnique($id, $slug)
     {
         $exists = CategoryTranslationProxy::modelClass()::where('category_id', '<>', $id)
-                ->where('slug', $slug)
-                ->limit(1)
-                ->select(DB::raw(1))
-                ->exists();
+            ->where('slug', $slug)
+            ->limit(1)
+            ->select(DB::raw(1))
+            ->exists();
 
         return ! $exists;
     }
