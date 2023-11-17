@@ -282,12 +282,13 @@
                                                 name="locale"
                                                 rules="required"
                                                 :label="trans('installer::app.installer.index.start.locale')"
+                                                value="{{ app()->getLocale() }}"
                                                 @change="$refs.multiLocaleForm.submit();"
                                             >
                                                 <option value="" disabled>@lang('installer::app.installer.index.start.select-locale')</option>
 
                                                 @foreach ($locales as $value => $label)
-                                                    <option value="{{ $value }}" @if($value == 'en') selected @endif>
+                                                    <option value="{{ $value }}">
                                                         @lang("installer::app.installer.index.$label")
                                                     </option>
                                                 @endforeach
