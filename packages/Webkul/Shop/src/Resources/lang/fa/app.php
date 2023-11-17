@@ -770,6 +770,7 @@ return [
                 'grand-total'      => 'جمع کل',
                 'place-order'      => 'ثبت سفارش',
                 'processing'       => 'در حال پردازش',
+                'price_&_qty'      => ':price × :qty',
                 'sub-total'        => 'جمع جزئیات',
                 'tax'              => 'مالیات',
             ],

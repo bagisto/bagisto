@@ -756,6 +756,7 @@ return [
                 'grand-total'      => '合計金額',
                 'place-order'      => '注文する',
                 'processing'       => '処理中',
+                'price_&_qty'      => ':price × :qty',
                 'sub-total'        => '小計',
                 'tax'              => '税金',
             ],

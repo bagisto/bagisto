@@ -770,6 +770,7 @@ return [
                 'grand-total'         => 'महा कुल',
                 'place-order'         => 'आदेश दें',
                 'proceed-to-checkout' => 'चेकआउट करें',
+                'price_&_qty'         => ':price × :qty',
                 'sub-total'           => 'उप-कुल',
                 'tax'                 => 'कर',
             ],

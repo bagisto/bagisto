@@ -770,6 +770,7 @@ return [
                 'grand-total'      => 'විශාල එකතු',
                 'place-order'      => 'ඇණවුමක් කරන්න',
                 'processing'       => 'ප්රගතිය',
+                'price_&_qty'      => ':price × :qty',
                 'sub-total'        => 'උපකරණය',
                 'tax'              => 'බද',
             ],

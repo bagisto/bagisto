@@ -770,6 +770,7 @@ return [
                 'grand-total'      => 'মোট মূল্য',
                 'place-order'      => 'অর্ডার স্থাপন',
                 'processing'       => 'প্রসেসিং',
+                'price_&_qty'      => ':price × :qty',
                 'sub-total'        => 'সাবটোটাল',
                 'tax'              => 'কর',
             ],

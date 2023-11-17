@@ -770,6 +770,7 @@ return [
                 'grand-total'      => 'Загальна сума',
                 'place-order'      => 'Оформити замовлення',
                 'processing'       => 'Обробка',
+                'price_&_qty'      => ':price × :qty',
                 'sub-total'        => 'Підсумок',
                 'tax'              => 'Податок',
             ],
