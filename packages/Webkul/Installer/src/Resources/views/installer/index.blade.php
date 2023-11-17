@@ -34,7 +34,7 @@
 
     <body>
         <div id="app" class="container">
-            <div class="flex [&amp;>*]:w-[50%] justify-center items-center">
+            <div class="flex [&amp;>*]:w-[50%] gap-[50px] justify-center items-center">
                 <v-server-requirements></v-server-requirements>
             </div>
         </div>
@@ -265,12 +265,14 @@
                             </div>
 
                             <div class="flex flex-col gap-[12px] items-center h-[384px] px-[30px] py-[16px] overflow-y-auto">
-                                <p class="text-gray-600 text-[14px] text-center">
-                                    @lang('installer::app.installer.index.installation-description')
-                                </p>
-
                                 <div class="container overflow-hidden">
-                                    <div class="flex flex-col gap-[12px] justify-center h-[284px]  px-[30px] py-[16px] overflow-y-auto">
+                                    <div class="flex flex-col gap-[12px] justify-end h-[100px]">
+                                        <p class="text-gray-600 text-[14px] text-center">
+                                            @lang('installer::app.installer.index.installation-description')
+                                        </p>
+                                    </div>
+
+                                    <div class="flex flex-col gap-[12px] justify-center h-[284px] px-[30px] py-[16px] overflow-y-auto">
                                         <!-- Application Name -->
                                         <x-installer::form.control-group class="mb-[10px]">
                                             <x-installer::form.control-group.label>
@@ -281,6 +283,7 @@
                                                 type="select"
                                                 name="locale"
                                                 rules="required"
+                                                :value="app()->getLocale()"
                                                 :label="trans('installer::app.installer.index.start.locale')"
                                                 value="{{ app()->getLocale() }}"
                                                 @change="$refs.multiLocaleForm.submit();"
@@ -305,9 +308,10 @@
                         
                             <div class="flex px-[16px] py-[10px] justify-end items-center">
                                 <button
-                                    type="submit"
+                                    type="button"
                                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
                                     tabindex="0"
+                                    @click="nextForm"
                                 >
                                     @lang('installer::app.installer.index.continue')
                                 </button>
@@ -795,7 +799,7 @@
                                 <div class="p-[6px] border border-amber-400 bg-amber-100">
                                     <i class="icon-error text-black"></i>
 
-                                    @lang('installer.app.installer.index.environment-configuration.warning-message')
+                                    @lang('installer::app.installer.index.environment-configuration.warning-message')
                                 </div>
 
                                 <div class="flex gap-[10px]">
@@ -946,7 +950,6 @@
                         </form>
                     </x-installer::form>
                 </div>
-
 
                 <!-- Create Administrator -->
                 <div
@@ -1176,14 +1179,6 @@
                         }
                     },
 
-                    mounted() {
-                        const url = new URL(window.location.href);
-
-                        if (url.searchParams.has('locale')) {
-                            this.nextForm();
-                        }
-                    },
-
                     methods: {
                         FormSubmit(params, { setErrors }) {
                             const stepActions = {
@@ -1237,9 +1232,11 @@
                                             default_locales: this.envData.app_locale,
                                             allowed_locales: this.locales.allowed,
                                             default_currency: this.envData.app_currency,
-                                            allowed_currency: this.currencies.allowed,
+                                            allowed_currencies: this.currencies.allowed,
                                         },
                                     };
+
+                                    console.log(data);
 
                                     this.startSeeding(data, this.envData);
                                 },
@@ -1357,16 +1354,7 @@
 
                             let index = this.steps.indexOf(this.currentStep);
 
-                            console.log(this.currentStep, index);
                             if (index > 0) {
-                                if (this.currentStep === 'serverRequirements') {
-                                    const url = new URL(window.location.href);
-
-                                    url.searchParams.delete('locale');
-
-                                    window.location.href = url.toString();
-                                }
-
                                 this.currentStep = this.steps[index - 1];
                             }
                         }
