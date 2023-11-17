@@ -1969,7 +1969,7 @@ return [
                 'index' => [
                     'title'      => '検索の同義語',
                     'create-btn' => '検索の同義語を作成',
-    
+
                     'datagrid' => [
                         'id'                  => 'ID',
                         'name'                => '名前',
@@ -1979,7 +1979,7 @@ return [
                         'actions'             => 'アクション',
                         'mass-delete-success' => '選択した検索の同義語が正常に削除されました',
                     ],
-    
+
                     'create' => [
                         'name'           => '名前',
                         'terms'          => '用語',
@@ -1988,7 +1988,7 @@ return [
                         'success'        => '検索の同義語が正常に作成されました',
                         'delete-warning' => 'このアクションを実行してもよろしいですか？',
                     ],
-    
+
                     'edit' => [
                         'title'          => '検索の同義語を編集',
                         'success'        => '検索の同義語が正常に更新されました',

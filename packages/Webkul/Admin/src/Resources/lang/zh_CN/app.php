@@ -1969,7 +1969,7 @@ return [
                 'index' => [
                     'title'      => '搜索同义词',
                     'create-btn' => '创建搜索同义词',
-    
+
                     'datagrid' => [
                         'id'                  => '标识',
                         'name'                => '名称',
@@ -1979,7 +1979,7 @@ return [
                         'actions'             => '操作',
                         'mass-delete-success' => '成功删除所选的搜索同义词',
                     ],
-    
+
                     'create' => [
                         'name'           => '名称',
                         'terms'          => '术语',
@@ -1988,7 +1988,7 @@ return [
                         'success'        => '成功创建搜索同义词',
                         'delete-warning' => '您确定要执行此操作吗？',
                     ],
-    
+
                     'edit' => [
                         'title'          => '编辑搜索同义词',
                         'success'        => '成功更新搜索同义词',

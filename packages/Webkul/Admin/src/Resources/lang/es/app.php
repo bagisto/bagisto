@@ -1969,7 +1969,7 @@ return [
                 'index' => [
                     'title'      => 'Sinónimos de Búsqueda',
                     'create-btn' => 'Crear Sinónimo de Búsqueda',
-    
+
                     'datagrid' => [
                         'id'                  => 'ID',
                         'name'                => 'Nombre',
@@ -1979,7 +1979,7 @@ return [
                         'actions'             => 'Acciones',
                         'mass-delete-success' => 'Sinónimos de Búsqueda Seleccionados Eliminados con Éxito',
                     ],
-    
+
                     'create' => [
                         'name'           => 'Nombre',
                         'terms'          => 'Términos',
@@ -1988,7 +1988,7 @@ return [
                         'success'        => 'Sinónimo de Búsqueda creado exitosamente',
                         'delete-warning' => '¿Estás seguro de que deseas realizar esta acción?',
                     ],
-    
+
                     'edit' => [
                         'title'          => 'Editar Sinónimo de Búsqueda',
                         'success'        => 'Sinónimo de Búsqueda actualizado exitosamente',

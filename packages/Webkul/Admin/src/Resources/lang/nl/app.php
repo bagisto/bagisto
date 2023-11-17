@@ -1970,7 +1970,7 @@ return [
                 'index' => [
                     'title'      => 'Zoek Synoniemen',
                     'create-btn' => 'Maak Zoek Synoniem',
-    
+
                     'datagrid' => [
                         'id'                  => 'ID',
                         'name'                => 'Naam',
@@ -1980,7 +1980,7 @@ return [
                         'actions'             => 'Acties',
                         'mass-delete-success' => 'Geselecteerde Zoek Synoniemen Succesvol Verwijderd',
                     ],
-    
+
                     'create' => [
                         'name'           => 'Naam',
                         'terms'          => 'Termen',
@@ -1989,7 +1989,7 @@ return [
                         'success'        => 'Zoek Synoniem succesvol aangemaakt',
                         'delete-warning' => 'Weet je zeker dat je deze actie wilt uitvoeren?',
                     ],
-    
+
                     'edit' => [
                         'title'          => 'Bewerk Zoek Synoniem',
                         'success'        => 'Zoek Synoniem succesvol bijgewerkt',

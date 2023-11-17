@@ -1964,12 +1964,12 @@ return [
                     ],
                 ],
             ],
-            
+
             'search-synonyms' => [
                 'index' => [
                     'title'      => 'Suchsynonyme',
                     'create-btn' => 'Suchsynonym erstellen',
-    
+
                     'datagrid' => [
                         'id'                  => 'ID',
                         'name'                => 'Name',
@@ -1979,7 +1979,7 @@ return [
                         'actions'             => 'Aktionen',
                         'mass-delete-success' => 'Ausgewählte Suchsynonyme erfolgreich gelöscht',
                     ],
-    
+
                     'create' => [
                         'name'           => 'Name',
                         'terms'          => 'Begriffe',
@@ -1988,7 +1988,7 @@ return [
                         'success'        => 'Suchsynonym erfolgreich erstellt',
                         'delete-warning' => 'Sind Sie sicher, dass Sie diese Aktion durchführen möchten?',
                     ],
-    
+
                     'edit' => [
                         'title'          => 'Suchsynonym bearbeiten',
                         'success'        => 'Suchsynonym erfolgreich aktualisiert',

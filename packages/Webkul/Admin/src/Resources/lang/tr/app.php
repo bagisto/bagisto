@@ -1969,7 +1969,7 @@ return [
                 'index' => [
                     'title'      => 'Arama Eşanlamlıları',
                     'create-btn' => 'Arama Eşanlamlısı Oluştur',
-    
+
                     'datagrid' => [
                         'id'                  => 'Kimlik',
                         'name'                => 'Adı',
@@ -1979,7 +1979,7 @@ return [
                         'actions'             => 'İşlemler',
                         'mass-delete-success' => 'Seçilen Arama Eşanlamlıları Başarıyla Silindi',
                     ],
-    
+
                     'create' => [
                         'name'           => 'Adı',
                         'terms'          => 'Terimler',
@@ -1988,7 +1988,7 @@ return [
                         'success'        => 'Arama Eşanlamı başarıyla oluşturuldu',
                         'delete-warning' => 'Bu işlemi gerçekleştirmek istediğinizden emin misiniz?',
                     ],
-    
+
                     'edit' => [
                         'title'          => 'Arama Eşanlamı Düzenle',
                         'success'        => 'Arama Eşanlamı başarıyla güncellendi',
