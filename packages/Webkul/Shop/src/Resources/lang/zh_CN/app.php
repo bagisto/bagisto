@@ -623,6 +623,7 @@ return [
             'suspended-account-message' => '您的帐户已被暂停。',
             'select-hourly-duration'    => '选择一小时的时段。',
             'success-remove'            => '项目已成功从购物车中移除。',
+            'paypal-payment-cancelled'  => 'Paypal付款已被取消。',
 
             'index'  => [
                 'bagisto'                  => '巴基斯托',

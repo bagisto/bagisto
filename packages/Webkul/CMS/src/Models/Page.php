@@ -2,12 +2,26 @@
 
 namespace Webkul\CMS\Models;
 
-use Webkul\CMS\Contracts\CmsPage as CmsPageContract;
+use Webkul\CMS\Contracts\Page as PageContract;
 use Webkul\Core\Eloquent\TranslatableModel;
 use Webkul\Core\Models\ChannelProxy;
 
-class CmsPage extends TranslatableModel implements CmsPageContract
+class Page extends TranslatableModel implements PageContract
 {
+    /**
+     * Table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'cms_pages';
+
+    /**
+     * Translation model foreign key column
+     *
+     * @var string
+     */
+    protected $translationForeignKey = 'cms_page_id';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -44,6 +58,6 @@ class CmsPage extends TranslatableModel implements CmsPageContract
      */
     public function channels()
     {
-        return $this->belongsToMany(ChannelProxy::modelClass(), 'cms_page_channels');
+        return $this->belongsToMany(ChannelProxy::modelClass(), 'cms_page_channels', 'cms_page_id');
     }
 }

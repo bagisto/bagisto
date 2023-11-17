@@ -1,4 +1,4 @@
-{{-- SEO Meta Content --}}
+<!-- SEO Meta Content -->
 @push('meta')
     <meta name="description" content="@lang('shop::app.checkout.cart.index.cart')"/>
 
@@ -10,12 +10,12 @@
     :has-feature="false"
     :has-footer="false"
 >
-    {{-- Page Title --}}
+    <!-- Page Title -->
     <x-slot:title>
         @lang('shop::app.checkout.cart.index.cart')
     </x-slot>
 
-    {{-- Page Header --}}
+    <!-- Page Header -->
     <div class="flex flex-wrap">
         <div class="w-full flex justify-between px-[60px] border border-t-0 border-b-[1px] border-l-0 border-r-0 py-[17px] max-lg:px-[30px] max-sm:px-[15px]">
             <div class="flex items-center gap-x-[54px] max-[1180px]:gap-x-[35px]">
@@ -37,11 +37,11 @@
 
     <div class="flex-auto">
         <div class="container px-[60px] max-lg:px-[30px]">
-            {{-- Breadcrumbs --}}
+            <!-- Breadcrumbs -->
             <x-shop::breadcrumbs name="cart"></x-shop::breadcrumbs>
 
             <v-cart ref="vCart">
-                {{-- Cart Shimmer Effect --}}
+                <!-- Cart Shimmer Effect -->
                 <x-shop::shimmer.checkout.cart :count="3"></x-shop::shimmer.checkout.cart>
             </v-cart>
         </div>

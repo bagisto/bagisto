@@ -32,7 +32,7 @@
         </nav>
     </div>
 
-    {{-- Collapse menu --}}
+    <!-- Collapse menu -->
     <v-sidebar-collapse></v-sidebar-collapse>
 </div>
 

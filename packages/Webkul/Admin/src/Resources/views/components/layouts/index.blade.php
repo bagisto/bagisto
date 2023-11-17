@@ -55,32 +55,32 @@
         {!! view_render_event('bagisto.admin.layout.body.before') !!}
 
         <div id="app" class="h-full">
-            {{-- Flash Message Blade Component --}}
+            <!-- Flash Message Blade Component -->
             <x-admin::flash-group />
 
-            {{-- Confirm Modal Blade Component --}}
+            <!-- Confirm Modal Blade Component -->
             <x-admin::modal.confirm />
 
             {!! view_render_event('bagisto.admin.layout.content.before') !!}
 
-            {{-- Page Header Blade Component --}}
+            <!-- Page Header Blade Component -->
             <x-admin::layouts.header />
 
             <div
                 class="flex gap-[16px] group/container {{ (request()->cookie('sidebar_collapsed') ?? 0) ? 'sidebar-collapsed' : '' }}"
                 ref="appLayout"
             >
-                {{-- Page Sidebar Blade Component --}}
+                <!-- Page Sidebar Blade Component -->
                 <x-admin::layouts.sidebar />
 
                 <div class="flex-1 max-w-full px-[16px] pt-[11px] pb-[22px] bg-white dark:bg-gray-950 ltr:pl-[286px] rtl:pr-[286px] max-lg:!px-[16px] transition-all duration-300 group-[.sidebar-collapsed]/container:ltr:pl-[85px] group-[.sidebar-collapsed]/container:rtl:pr-[85px]">
-                    {{-- Added dynamic tabs for third level menus  --}}
-                    {{-- Todo @suraj-webkul need to optimize below statement. --}}
+                    <!-- Added dynamic tabs for third level menus  -->
+                    <!-- Todo @suraj-webkul need to optimize below statement. -->
                     @if (! request()->routeIs('admin.configuration.index'))
                         <x-admin::layouts.tabs />
                     @endif
 
-                    {{-- Page Content Blade Component --}}
+                    <!-- Page Content Blade Component -->
                     {{ $slot }}
                 </div>
             </div>

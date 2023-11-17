@@ -2011,6 +2011,49 @@ return [
 
                 'delete-failed'  => ':name Eliminata con errore',
             ],
+
+            'url-rewrites' => [
+                'index' => [
+                    'title'      => 'Riorganizzazione URL',
+                    'create-btn' => 'Crea una riorganizzazione URL',
+
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'for'                 => 'Per',
+                        'request-path'        => 'Percorso richiesta',
+                        'target-path'         => 'Percorso destinazione',
+                        'redirect-type'       => 'Tipo di reindirizzamento',
+                        'locale'              => 'Locale',
+                        'edit'                => 'Modifica',
+                        'delete'              => 'Elimina',
+                        'actions'             => 'Azioni',
+                        'mass-delete-success' => 'Le riorganizzazioni URL selezionate sono state eliminate con successo.',
+                    ],
+
+                    'create' => [
+                        'for'                => 'Per',
+                        'product'            => 'Prodotto',
+                        'category'           => 'Categoria',
+                        'cms-page'           => 'Pagina CMS',
+                        'request-path'       => 'Percorso richiesta',
+                        'target-path'        => 'Percorso destinazione',
+                        'redirect-type'      => 'Tipo di reindirizzamento',
+                        'temporary-redirect' => 'Reindirizzamento temporaneo (302)',
+                        'permanent-redirect' => 'Reindirizzamento permanente (301)',
+                        'locale'             => 'Locale',
+                        'save-btn'           => 'Salva la riorganizzazione URL',
+                        'title'              => 'Crea una riorganizzazione URL',
+                        'success'            => 'La riorganizzazione URL è stata creata con successo.',
+                        'delete-warning'     => 'Sei sicuro di voler eseguire questa azione?',
+                    ],
+
+                    'edit' => [
+                        'title'          => 'Modifica la riorganizzazione URL',
+                        'success'        => 'La riorganizzazione URL è stata aggiornata con successo.',
+                        'delete-success' => 'La riorganizzazione URL è stata eliminata con successo.',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -3345,6 +3388,7 @@ return [
                 'tax-categories'           => 'Categorie fiscali',
                 'tax-rates'                => 'Aliquote fiscali',
                 'transactions'             => 'Transazioni',
+                'url-rewrites'             => 'Rewriting degli URL',
                 'users'                    => 'Utenti',
             ],
         ],
@@ -3504,6 +3548,7 @@ return [
         'tax-categories'           => 'Categorie fiscali',
         'tax-rates'                => 'Aliquote fiscali',
         'transactions'             => 'Transazioni',
+        'url-rewrites'             => 'Rewriting degli URL',
         'users'                    => 'Utenti',
         'view'                     => 'Visualizza',
     ],

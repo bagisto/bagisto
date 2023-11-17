@@ -1,25 +1,25 @@
 @props(['count' => 30])
 
 <div class="w-full grid gap-[16px] px-[16px] py-[8px] border-b dark:border-gray-800">
-    {{-- Total Sales --}}
+    <!-- Total Sales -->
     <div class="w-full h-[38px] flex gap-[8px] justify-between">
         <div class="flex flex-col gap-[4px] justify-between">
             <div class="shimmer w-[85px] h-[17px]"></div>
 
-            {{-- Total Sales Amount --}}
+            <!-- Total Sales Amount -->
             <div class="shimmer w-[85px] h-[17px]"></div>
         </div>
 
         <div class="flex flex-col gap-[4px] justify-between">
-            {{-- Date --}}
+            <!-- Date -->
             <div class="shimmer w-[83px] h-[17px]"></div>
 
-            {{-- Total Orders --}}
+            <!-- Total Orders -->
             <div class="shimmer w-[56px] h-[17px] self-end"></div>
         </div>
     </div>
 
-    {{-- Graph Chart --}}
+    <!-- Graph Chart -->
 
     <div class="flex gap-[5px]">
         <div class="grid">

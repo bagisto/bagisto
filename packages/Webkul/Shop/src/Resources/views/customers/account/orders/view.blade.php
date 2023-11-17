@@ -1,10 +1,10 @@
 <x-shop::layouts.account>
-    {{-- Page Title --}}
+    <!-- Page Title -->
     <x-slot:title>
         @lang('shop::app.customers.account.orders.view.page-title', ['order_id' => $order->increment_id])
     </x-slot:title>
     
-    {{-- Breadcrumbs --}}
+    <!-- Breadcrumbs -->
     @section('breadcrumbs')
         <x-shop::breadcrumbs name="orders.view" :entity="$order"></x-shop::breadcrumbs>
     @endSection
@@ -43,7 +43,7 @@
 
     {!! view_render_event('bagisto.shop.customers.account.orders.view.before', ['order' => $order]) !!}
 
-    {{-- Order view tabs --}}
+    <!-- Order view tabs -->
     <div>
         <x-shop::tabs class="mt-5">
             <x-shop::tabs.item
@@ -882,7 +882,7 @@
         </x-shop::tabs>
 
         <div class="flex flex-wrap gap-x-[64px] gap-y-[30px] justify-between mt-[42px] pt-[26px] border-t-[1px] border-[#E9E9E9]">
-            {{-- Biiling Address --}}
+            <!-- Biiling Address -->
             @if ($order->billing_address)
                 <div class="grid gap-[15px] max-w-[200px] max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
                     <p class="text-[16px] text-[#6E6E6E]">
@@ -899,7 +899,7 @@
                 </div>
             @endif
 
-            {{-- Shipping Address --}}
+            <!-- Shipping Address -->
             @if ($order->shipping_address)
                 <div class="grid gap-[15px] max-w-[200px] max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
                     <p class="text-[16px] text-[#6E6E6E]">
@@ -915,7 +915,7 @@
                     </div>
                 </div>
 
-                {{-- Shipping Method --}}
+                <!-- Shipping Method -->
                 <div class="grid gap-[15px] max-w-[200px] place-content-baseline max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
                     <p class="text-[16px] text-[#6E6E6E]">
                         @lang('shop::app.customers.account.orders.view.shipping-method')
@@ -930,7 +930,7 @@
 
             @endif
 
-            {{-- Billing Method --}}
+            <!-- Billing Method -->
             <div class="grid gap-[15px] place-content-baseline max-w-[200px] max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
                 <p class="text-[16px] text-[#6E6E6E]">
                     @lang('shop::app.customers.account.orders.view.payment-method')

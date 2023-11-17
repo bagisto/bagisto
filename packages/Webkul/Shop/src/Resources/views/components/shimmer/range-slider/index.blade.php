@@ -5,7 +5,7 @@
         <p class="shimmer w-[112px] h-[21px]"></p>
     </div>
 
-    {{-- Price range slider effect --}}
+    <!-- Price range slider effect -->
     <div class="flex justify-center relative items-center w-full h-20 mx-auto p-2">
 
         <div class="shimmer relative w-full h-[4px] bg-gray-200 rounded-2xl">

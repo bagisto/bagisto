@@ -2011,6 +2011,49 @@ return [
 
                 'delete-failed' => ':name נמחקה בהצלחה',
             ],
+
+            'url-rewrites' => [
+                'index' => [
+                    'title'      => 'כתובות URL משכתבות',
+                    'create-btn' => 'יצירת כתובת URL משכתבת',
+
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'for'                 => 'עבור',
+                        'request-path'        => 'נתיב הבקשה',
+                        'target-path'         => 'נתיב היעד',
+                        'redirect-type'       => 'סוג ההפניה',
+                        'locale'              => 'אזור שפה',
+                        'edit'                => 'עריכה',
+                        'delete'              => 'מחיקה',
+                        'actions'             => 'פעולות',
+                        'mass-delete-success' => 'כתובות URL משכתבות שנבחרו נמחקו בהצלחה.',
+                    ],
+
+                    'create' => [
+                        'for'                => 'עבור',
+                        'product'            => 'מוצר',
+                        'category'           => 'קטגוריה',
+                        'cms-page'           => 'דף CMS',
+                        'request-path'       => 'נתיב הבקשה',
+                        'target-path'        => 'נתיב היעד',
+                        'redirect-type'      => 'סוג ההפניה',
+                        'temporary-redirect' => 'זמני (302)',
+                        'permanent-redirect' => 'קבוע (301)',
+                        'locale'             => 'אזור שפה',
+                        'save-btn'           => 'שמור כתובת URL משכתבת',
+                        'title'              => 'יצירת כתובת URL משכתבת',
+                        'success'            => 'כתובת URL משכתבת נוצרה בהצלחה.',
+                        'delete-warning'     => 'האם אתה בטוח שברצונך לבצע פעולה זו?',
+                    ],
+
+                    'edit' => [
+                        'title'          => 'עריכת כתובת URL משכתבת',
+                        'success'        => 'כתובת URL משכתבת עודכנה בהצלחה.',
+                        'delete-success' => 'כתובת URL משכתבת נמחקה בהצלחה.',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -3338,6 +3381,7 @@ return [
                 'tax-categories'           => 'קטגוריות מס',
                 'tax-rates'                => 'שערי מס',
                 'transactions'             => 'עסקאות',
+                'url-rewrites'             => 'כתיבת URL מחדש',
                 'users'                    => 'משתמשים',
             ],
         ],
@@ -3497,6 +3541,7 @@ return [
         'tax-categories'           => 'קטגוריות מס',
         'tax-rates'                => 'שערי מס',
         'transactions'             => 'עסקאות',
+        'url-rewrites'             => 'כתיבת URL מחדש',
         'users'                    => 'משתמשים',
         'view'                     => 'הצג',
     ],

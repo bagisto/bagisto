@@ -1,5 +1,5 @@
 <div class="flex justify-between items-center w-full py-[11px] px-16 border border-t-0 border-b-[1px] border-l-0 border-r-0">
-    {{-- Currency Switcher --}}
+    <!-- Currency Switcher -->
     <x-shop::dropdown>
         <!-- Dropdown Toggler -->
         <x-slot:toggle>
@@ -28,10 +28,10 @@
         Get UPTO 40% OFF on your 1st order <a href="{{ route('shop.home.index') }}" class="underline">SHOP NOW</a>
     </p>
 
-    {{-- Locales Switcher --}}
+    <!-- Locales Switcher -->
     <x-shop::dropdown position="bottom-right">
         <x-slot:toggle>
-            {{-- Dropdown Toggler --}}
+            <!-- Dropdown Toggler -->
             <div
                 class="flex items-center gap-[10px] cursor-pointer"
                 role="button"

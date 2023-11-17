@@ -3,21 +3,21 @@
 namespace Webkul\CMS\Repositories;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Webkul\CMS\Models\CmsPageTranslationProxy;
+use Webkul\CMS\Models\PageTranslationProxy;
 use Webkul\Core\Eloquent\Repository;
 
-class CmsRepository extends Repository
+class PageRepository extends Repository
 {
     /**
      * Specify Model class name
      */
     public function model(): string
     {
-        return 'Webkul\CMS\Contracts\CmsPage';
+        return 'Webkul\CMS\Contracts\Page';
     }
 
     /**
-     * @return \Webkul\CMS\Contracts\CmsPage
+     * @return \Webkul\CMS\Contracts\Page
      */
     public function create(array $data)
     {
@@ -43,7 +43,7 @@ class CmsRepository extends Repository
     /**
      * @param  int  $id
      * @param  string  $attribute
-     * @return \Webkul\CMS\Contracts\CmsPage
+     * @return \Webkul\CMS\Contracts\Page
      */
     public function update(array $data, $id, $attribute = 'id')
     {
@@ -69,7 +69,7 @@ class CmsRepository extends Repository
      */
     public function isUrlKeyUnique($id, $urlKey)
     {
-        $exists = CmsPageTranslationProxy::modelClass()::where('cms_page_id', '<>', $id)
+        $exists = PageTranslationProxy::modelClass()::where('cms_page_id', '<>', $id)
             ->where('url_key', $urlKey)
             ->limit(1)
             ->select(\DB::raw(1))
@@ -82,7 +82,18 @@ class CmsRepository extends Repository
      * Retrieve category from slug
      *
      * @param  string  $urlKey
-     * @return \Webkul\CMS\Contracts\CmsPage|\Exception
+     * @return \Webkul\CMS\Contracts\Page
+     */
+    public function findByUrlKey($urlKey)
+    {
+        return $this->model->whereTranslation('url_key', $urlKey)->first();
+    }
+
+    /**
+     * Retrieve category from slug
+     *
+     * @param  string  $urlKey
+     * @return \Webkul\CMS\Contracts\Page|\Exception
      */
     public function findByUrlKeyOrFail($urlKey)
     {
