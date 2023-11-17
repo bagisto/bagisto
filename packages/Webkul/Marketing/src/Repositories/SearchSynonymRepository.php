@@ -16,7 +16,7 @@ class SearchSynonymRepository extends Repository
 
     /**
      * Returns synonyms by query
-     * 
+     *
      * @param  string  $query
      * @return array
      */
@@ -24,7 +24,7 @@ class SearchSynonymRepository extends Repository
     {
         $synonyms = [$query];
 
-        $searchSynonyms = $this->whereRaw("FIND_IN_SET(?, terms)", $synonyms)->get();
+        $searchSynonyms = $this->whereRaw('FIND_IN_SET(?, terms)', $synonyms)->get();
 
         foreach ($searchSynonyms as $searchSynonym) {
             $synonyms = array_merge($synonyms, explode(',', $searchSynonym->terms));
