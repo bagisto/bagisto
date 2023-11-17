@@ -352,6 +352,8 @@ return [
             ],
 
             'environment-configuration' => [
+                'allowed-locales'     => 'İzin verilen yerel ayarlar',
+                'allowed-currencies'  => 'İzin verilen para birimleri',
                 'application-name'    => 'Uygulama Adı',
                 'bagisto'             => 'Bagisto',
                 'chinese-yuan'        => 'Çin Yuanı (CNY)',
@@ -383,6 +385,7 @@ return [
                 'turkish-lira'        => 'Türk Lirası (TRY)',
                 'usd'                 => 'ABD Doları (USD)',
                 'ukrainian-hryvnia'   => 'Ukrayna Grivnası (UAH)',
+                'warning-message'     => 'Dikkat! Varsayılan sistem dilleri ve varsayılan para birimi ayarlarınız kalıcıdır ve bir daha asla değiştirilemez.',
             ],
 
             'ready-for-installation' => [

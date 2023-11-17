@@ -254,8 +254,9 @@
                         ref="start"
                     >
                         <form
-                            @submit.prevent="handleSubmit($event, nextForm)"
+                            @submit.prevent="handleSubmit($event, setLocale)"
                             enctype="multipart/form-data"
+                            ref="multiLocaleForm"
                         >
                             <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
                                 <p class="text-[20px] text-gray-800 font-bold">
@@ -263,13 +264,13 @@
                                 </p>
                             </div>
 
-                            <div class="flex flex-col gap-[12px] items-center h-[300px] px-[30px] py-[16px] overflow-y-auto">
+                            <div class="flex flex-col gap-[12px] items-center h-[384px] px-[30px] py-[16px] overflow-y-auto">
                                 <p class="text-gray-600 text-[14px] text-center">
                                     @lang('installer::app.installer.index.installation-description')
                                 </p>
 
                                 <div class="container overflow-hidden">
-                                    <div class="flex flex-col gap-[12px] justify-center h-[250px]  px-[30px] py-[16px] overflow-y-auto">
+                                    <div class="flex flex-col gap-[12px] justify-center h-[284px]  px-[30px] py-[16px] overflow-y-auto">
                                         <!-- Application Name -->
                                         <x-installer::form.control-group class="mb-[10px]">
                                             <x-installer::form.control-group.label>
@@ -281,7 +282,7 @@
                                                 name="locale"
                                                 rules="required"
                                                 :label="trans('installer::app.installer.index.start.locale')"
-                                                @change="setLocale"
+                                                @change="$refs.multiLocaleForm.submit();"
                                             >
                                                 <option value="" disabled>@lang('installer::app.installer.index.start.select-locale')</option>
 
@@ -305,6 +306,7 @@
                                 <button
                                     type="submit"
                                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
+                                    tabindex="0"
                                 >
                                     @lang('installer::app.installer.index.continue')
                                 </button>
@@ -368,6 +370,7 @@
                         <div
                             class="{{ $hasRequirement ? 'opacity-50 cursor-not-allowed' : ''}} px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer {{ $hasRequirement ?: 'hover:opacity-90' }}"
                             @click="nextForm"
+                            tabindex="0"
                         >
                             @lang('installer::app.installer.index.continue')
                         </div>
@@ -390,8 +393,7 @@
                         >
                             <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
                                 <p class="text-[20px] text-gray-800 font-bold">
-                                    {{-- @lang('installer::app.installer.index.environment-configuration.title') --}}
-                                    @lang('Environment Database Configuration')
+                                    @lang('installer::app.installer.index.environment-configuration.title')
                                 </p>
                             </div>
 
@@ -573,6 +575,7 @@
                                 <button
                                     type="submit"
                                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
+                                    tabindex="0"
                                 >
                                     @lang('installer::app.installer.index.continue')
                                 </button>
@@ -700,8 +703,7 @@
                         >
                             <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
                                 <p class="text-[20px] text-gray-800 font-bold">
-                                    {{-- @lang('installer::app.installer.index.environment-configuration.title') --}}
-                                    @lang('Environment Multilocale Configuration')
+                                    @lang('installer::app.installer.index.environment-configuration.title')
                                 </p>
                             </div>
 
@@ -791,8 +793,8 @@
 
                                 <div class="p-[6px] border border-amber-400 bg-amber-100">
                                     <i class="icon-error text-black"></i>
-                                    
-                                    Beware! The settings for your default system languages as well as the default currency are permanent and cannot be changed ever again.
+
+                                    @lang('installer.app.installer.index.environment-configuration.warning-message')
                                 </div>
 
                                 <div class="flex gap-[10px]">
@@ -854,13 +856,12 @@
                                 <div class="flex gap-[10px]">
                                     <x-installer::form.control-group class="w-full">
                                         <x-installer::form.control-group.label class="required">
-                                            @lang('Allowed Locales')
+                                            @lang('installer::app.installer.index.environment-configuration.allowed-locales')
                                         </x-installer::form.control-group.label>
 
                                         <!-- Allowed Locales -->
                                         @foreach ($locales as $key => $locale)
                                             <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
-
                                                 @php
                                                     $selectedOption = ($key == app()->getLocale()) ? 0 : 1;
                                                 @endphp
@@ -888,18 +889,23 @@
 
                                     <x-installer::form.control-group class="w-full">
                                         <x-installer::form.control-group.label class="required">
-                                            @lang('Allowed Currencies')
+                                            @lang('installer::app.installer.index.environment-configuration.allowed-currencies')
                                         </x-installer::form.control-group.label>
     
                                         <!-- Allowed Currencies -->
                                         @foreach ($currencies as $key => $currency)
                                             <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                                @php
+                                                    $selectedOption = ($key == 'USD') ? 0 : 1;
+                                                @endphp
+
                                                 <x-admin::form.control-group.control
                                                     type="checkbox"
                                                     name="{{ $key }}"
                                                     id="currency[{{ $key }}]"
                                                     for="currency[{{ $key }}]"
-                                                    value="1"
+                                                    :value="(boolean) $selectedOption"
+                                                    :disabled="(boolean) ! $selectedOption"
                                                     @change="pushAllowedCurrency"
                                                 >
                                                 </x-admin::form.control-group.control>
@@ -930,6 +936,7 @@
                                 <button
                                     type="submit"
                                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
+                                    tabindex="0"
                                 >
                                     @lang('installer::app.installer.index.continue')
                                 </button>
@@ -1052,6 +1059,7 @@
                                 <button
                                     type="submit"
                                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
+                                    tabindex="0"
                                 >
                                     @lang('installer::app.installer.index.continue')
                                 </button>
@@ -1171,7 +1179,7 @@
                         const url = new URL(window.location.href);
 
                         if (url.searchParams.has('locale')) {
-                            this.completeStep('start', 'serverRequirements', 'active', 'complete');
+                            this.nextForm();
                         }
                     },
 
@@ -1348,8 +1356,9 @@
 
                             let index = this.steps.indexOf(this.currentStep);
 
+                            console.log(this.currentStep, index);
                             if (index > 0) {
-                                if (this.currentStep === 'environment') {
+                                if (this.currentStep === 'serverRequirements') {
                                     const url = new URL(window.location.href);
 
                                     url.searchParams.delete('locale');

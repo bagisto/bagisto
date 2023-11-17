@@ -352,6 +352,8 @@ return [
             ],
 
             'environment-configuration' => [
+                'allowed-locales'     => 'अनुमत भाषाएँ',
+                'allowed-currencies'  => 'अनुमत मुद्राएँ',
                 'application-name'    => 'एप्लिकेशन का नाम',
                 'bagisto'             => 'Bagisto',
                 'chinese-yuan'        => 'चीनी युआन (CNY)',
@@ -383,6 +385,7 @@ return [
                 'turkish-lira'        => 'तुर्की लीरा (TRY)',
                 'usd'                 => 'US डॉलर (USD)',
                 'ukrainian-hryvnia'   => 'यूक्रेनियाई ह्रीवनिया (UAH)',
+                'warning-message'     => 'सावधान! आपकी डिफ़ॉल्ट सिस्टम भाषाओं और डिफ़ॉल्ट मुद्रा की सेटिंग्स स्थायी हैं और कभी भी फिर से बदली नहीं जा सकतीं।',
             ],
 
             'ready-for-installation' => [

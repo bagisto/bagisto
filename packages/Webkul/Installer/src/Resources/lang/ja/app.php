@@ -352,6 +352,8 @@ return [
             ],
 
             'environment-configuration' => [
+                'allowed-locales'     => '許可されたロケール',
+                'allowed-currencies'  => '許可された通貨',
                 'application-name'    => 'アプリケーション名',
                 'bagisto'             => 'Bagisto',
                 'chinese-yuan'        => '中国元（CNY）',
@@ -383,6 +385,7 @@ return [
                 'turkish-lira'        => 'トルコリラ（TRY）',
                 'usd'                 => '米ドル（USD）',
                 'ukrainian-hryvnia'   => 'ウクライナフリブナ（UAH）',
+                'warning-message'     => '警告！デフォルトのシステム言語設定およびデフォルト通貨設定は恒久的で、二度と変更できません。',
             ],
 
             'ready-for-installation' => [

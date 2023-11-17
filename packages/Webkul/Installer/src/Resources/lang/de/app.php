@@ -352,6 +352,8 @@ return [
             ],
 
             'environment-configuration' => [
+                'allowed-locales'     => 'Erlaubte Sprachen',
+                'allowed-currencies'  => 'Erlaubte Währungen',
                 'application-name'    => 'Anwendungsname',
                 'bagisto'             => 'Bagisto',
                 'chinese-yuan'        => 'Chinesischer Yuan (CNY)',
@@ -383,6 +385,7 @@ return [
                 'turkish-lira'        => 'Türkische Lira (TRY)',
                 'usd'                 => 'US-Dollar (USD)',
                 'ukrainian-hryvnia'   => 'Ukrainische Hrywnja (UAH)',
+                'warning-message'     => 'Vorsicht! Die Einstellungen für Ihre Standardsystemsprachen sowie die Standardsystemwährung sind dauerhaft und können niemals wieder geändert werden.',
             ],
 
             'ready-for-installation' => [

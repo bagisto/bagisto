@@ -352,6 +352,8 @@ return [
             ],
 
             'environment-configuration' => [
+                'allowed-locales'     => 'שפות מורשות',
+                'allowed-currencies'  => 'מטבעות מורשים',
                 'application-name'    => 'שם האפליקציה',
                 'bagisto'             => 'Bagisto',
                 'chinese-yuan'        => 'יואן סיני (CNY)',
@@ -383,6 +385,7 @@ return [
                 'turkish-lira'        => 'לירה טורקית (TRY)',
                 'usd'                 => 'דולר אמריקאי (USD)',
                 'ukrainian-hryvnia'   => 'הריבניה האוקראינית (UAH)',
+                'warning-message'     => 'אזהרה! הגדרות שפות המערכת המוגדרות כברירת מחדל והמטבע המוגדר כברירת מחדל הם קבועים ואינם יכולים להשתנות שוב.',
             ],
 
             'ready-for-installation' => [

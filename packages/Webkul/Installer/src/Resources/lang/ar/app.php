@@ -352,6 +352,8 @@ return [
             ],
 
             'environment-configuration' => [
+                'allowed-locales'     => 'اللغات المسموح بها',
+                'allowed-currencies'  => 'العملات المسموح بها',
                 'application-name'    => 'اسم التطبيق',
                 'bagisto'             => 'Bagisto',
                 'chinese-yuan'        => 'اليوان الصيني (CNY)',
@@ -383,6 +385,7 @@ return [
                 'turkish-lira'        => 'ليرة تركية (TRY)',
                 'usd'                 => 'دولار أمريكي (USD)',
                 'ukrainian-hryvnia'   => 'هريفنيا أوكرانية (UAH)',
+                'warning-message'     => 'تنبيه! إعدادات لغات النظام الافتراضية والعملة الافتراضية دائمة ولا يمكن تغييرها مرة أخرى أبدًا.',
             ],
 
             'ready-for-installation' => [

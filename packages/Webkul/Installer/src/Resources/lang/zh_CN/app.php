@@ -352,6 +352,8 @@ return [
             ],
 
             'environment-configuration' => [
+                'allowed-locales'     => '允许的语言环境',
+                'allowed-currencies'  => '允许的货币',
                 'application-name'    => '应用程序名称',
                 'bagisto'             => 'Bagisto',
                 'chinese-yuan'        => '人民币 (CNY)',
@@ -383,6 +385,7 @@ return [
                 'turkish-lira'        => '土耳其里拉 (TRY)',
                 'usd'                 => '美元 (USD)',
                 'ukrainian-hryvnia'   => '乌克兰格里夫纳 (UAH)',
+                'warning-message'     => '警告！您的默认系统语言设置和默认货币设置是永久性的，无',
             ],
 
             'ready-for-installation' => [

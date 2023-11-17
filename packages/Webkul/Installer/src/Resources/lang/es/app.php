@@ -352,6 +352,8 @@ return [
             ],
 
             'environment-configuration' => [
+                'allowed-locales'     => 'Idiomas permitidos',
+                'allowed-currencies'  => 'Monedas permitidas',
                 'application-name'    => 'Nombre de la aplicación',
                 'bagisto'             => 'Bagisto',
                 'chinese-yuan'        => 'Yuan chino (CNY)',
@@ -383,6 +385,7 @@ return [
                 'turkish-lira'        => 'Lira turca (TRY)',
                 'usd'                 => 'Dólar estadounidense (USD)',
                 'ukrainian-hryvnia'   => 'Grivna ucraniana (UAH)',
+                'warning-message'     => '¡Cuidado! La configuración de los idiomas del sistema predeterminados y la moneda predeterminada son permanentes y no se pueden cambiar nunca más.',
             ],
 
             'ready-for-installation' => [

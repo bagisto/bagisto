@@ -352,6 +352,8 @@ return [
             ],
 
             'environment-configuration' => [
+                'allowed-locales'     => 'ඉඩ දෙන භාෂා',
+                'allowed-currencies'  => 'ඉඩ දෙන මුදල්',
                 'application-name'    => 'යෙදුමේ නම',
                 'bagisto'             => 'බැගිස්ටෝ',
                 'chinese-yuan'        => 'චීන යුආන් (CNY)',
@@ -383,6 +385,7 @@ return [
                 'turkish-lira'        => 'තර්කිෂ් ලීර (TRY)',
                 'usd'                 => 'ඇමෙරිකානු ඩොලර් (USD)',
                 'ukrainian-hryvnia'   => 'යුක්රේනියාන් හ්‍රිව්නිය (UAH)',
+                'warning-message'     => 'සක්රියයෙන් දැක්කම්! ඔබේ පෙරනිමි පද්ධතියේ භාෂා ගැන්වීමේ සැකසීම් සහ පෙරනිමි වෙනස් කළ නොහැකි වෙනස්කම් ස්ථාපනය වේ.',
             ],
 
             'ready-for-installation' => [

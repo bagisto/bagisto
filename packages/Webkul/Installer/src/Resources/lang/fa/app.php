@@ -352,6 +352,8 @@ return [
             ],
 
             'environment-configuration' => [
+                'allowed-locales'     => 'زبان‌های مجاز',
+                'allowed-currencies'  => 'ارزهای مجاز',
                 'application-name'    => 'نام برنامه',
                 'bagisto'             => 'Bagisto',
                 'chinese-yuan'        => 'یوان چینی (CNY)',
@@ -383,6 +385,7 @@ return [
                 'turkish-lira'        => 'لیر ترکیه‌ای (TRY)',
                 'usd'                 => 'دلار آمریکا (USD)',
                 'ukrainian-hryvnia'   => 'هریونیای اوکراینی (UAH)',
+                'warning-message'     => 'هشدار! تنظیمات زبان‌های سیستمی پیش‌فرض و ارز پیش‌فرض شما دائمی است و هرگز دیگر قابل تغییر نیست.',
             ],
 
             'ready-for-installation' => [

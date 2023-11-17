@@ -352,6 +352,8 @@ return [
             ],
 
             'environment-configuration' => [
+                'allowed-locales'     => 'Дозволені локалі',
+                'allowed-currencies'  => 'Дозволені валюти',
                 'application-name'    => 'Назва програми',
                 'bagisto'             => 'Bagisto',
                 'chinese-yuan'        => 'Китайський юань (CNY)',
@@ -383,6 +385,7 @@ return [
                 'turkish-lira'        => 'Турецька ліра (TRY)',
                 'usd'                 => 'Долар США (USD)',
                 'ukrainian-hryvnia'   => 'Українська гривня (UAH)',
+                'warning-message'     => 'Увага! Налаштування мов системи за замовчуванням, а також основна валюта є постійними і більше не можуть бути змінені.',
             ],
 
             'ready-for-installation' => [
