@@ -60,7 +60,6 @@
                             </x-booking::form.control-group.error>
                         </x-booking::form.control-group>
 
-                        @{{ bookingSubType }} , @{{ booking_type }}, @{{ renting_type }}
                         <!-- Location -->
                         <x-admin::form.control-group class="w-full mb-[10px]">
                             <x-booking::form.control-group.label>
