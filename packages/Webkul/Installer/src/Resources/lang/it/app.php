@@ -345,7 +345,7 @@ return [
                 'php-version' => '8.1 o superiore',
                 'pcre'        => 'pcre',
                 'pdo'         => 'pdo',
-                'session'     => 'session',
+                'session'     => 'sessione',
                 'title'       => 'Requisiti del server',
                 'tokenizer'   => 'tokenizer',
                 'xml'         => 'XML',

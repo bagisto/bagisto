@@ -336,7 +336,7 @@ return [
                 'fileinfo'    => 'Інформація про файли',
                 'filter'      => 'Фільтр',
                 'gd'          => 'GD',
-                'hash'        => 'Hash',
+                'hash'        => 'Хеш',
                 'intl'        => 'intl',
                 'json'        => 'JSON',
                 'mbstring'    => 'mbstring',
@@ -347,7 +347,7 @@ return [
                 'pdo'         => 'pdo',
                 'session'     => 'сесія',
                 'title'       => 'Вимоги до сервера',
-                'tokenizer'   => 'tokenizer',
+                'tokenizer'   => 'токенізатор',
                 'xml'         => 'XML',
             ],
 
