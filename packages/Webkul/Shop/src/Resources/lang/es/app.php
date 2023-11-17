@@ -822,10 +822,13 @@ return [
 
         'customers' => [
             'registration' => [
-                'description' => 'Ihr Konto wurde erfolgreich erstellt und Sie können sich mit Ihren E-Mail-Adresse und Passwort anmelden. Nach der Anmeldung können Sie auf weitere Dienste zugreifen, einschließlich der Überprüfung früherer Bestellungen, Wunschlisten und der Bearbeitung Ihrer Kontoinformationen.',
-                'greeting'    => 'Willkommen und vielen Dank für Ihre Registrierung bei uns!',
-                'subject'     => 'Neue Kundenregistrierung',
-                'sign-in'     => 'Anmelden',
+                'subject'                 => 'Neue Kundenregistrierung',
+                'description'             => 'Ihr Konto wurde erfolgreich erstellt und Sie können sich mit Ihren E-Mail-Adresse und Passwort anmelden. Nach der Anmeldung können Sie auf weitere Dienste zugreifen, einschließlich der Überprüfung früherer Bestellungen, Wunschlisten und der Bearbeitung Ihrer Kontoinformationen.',
+                'credentials-description' => 'Su cuenta ha sido creada. Los detalles de su cuenta se encuentran a continuación:',
+                'greeting'                => 'Willkommen und vielen Dank für Ihre Registrierung bei uns!',
+                'sign-in'                 => 'Anmelden',
+                'username-email'          => 'Nombre de usuario/Correo electrónico',
+                'password'                => 'Contraseña',
             ],
 
             'forgot-password' => [

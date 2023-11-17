@@ -834,10 +834,13 @@ return [
 
         'customers' => [
             'registration' => [
-                'description' => '您的帐户已成功创建，您可以使用电子邮件地址和密码凭据登录。登录后，您将能够访问其他服务，包括查看过去的订单、愿望清单和编辑您的帐户信息。',
-                'greeting'    => '欢迎并感谢您注册我们的网站！',
-                'subject'     => '新客户注册',
-                'sign-in'     => '登录',
+                'subject'                 => '新客户注册',
+                'description'             => '您的帐户已成功创建，您可以使用电子邮件地址和密码凭据登录。登录后，您将能够访问其他服务，包括查看过去的订单、愿望清单和编辑您的帐户信息。',
+                'credentials-description' => '您的账户已创建。您的账户详细信息如下：',
+                'greeting'                => '欢迎并感谢您注册我们的网站！',
+                'sign-in'                 => '登录',
+                'password'                => '用户名/电子邮件',
+                'username-email'          => '密码',
             ],
 
             'forgot-password' => [

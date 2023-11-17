@@ -834,10 +834,13 @@ return [
 
         'customers' => [
             'registration' => [
-                'description' => 'Twoje konto zostało teraz pomyślnie utworzone, możesz się zalogować za pomocą swojego adresu e-mail i hasła. Po zalogowaniu będziesz mógł korzystać z innych usług, w tym przeglądania wcześniejszych zamówień, list życzeń i edytowania informacji o koncie.',
-                'greeting'    => 'Witamy i dziękujemy za zarejestrowanie się u nas!',
-                'subject'     => 'Rejestracja nowego klienta',
-                'sign-in'     => 'Zaloguj się',
+                'subject'                 => 'Rejestracja nowego klienta',
+                'description'             => 'Twoje konto zostało teraz pomyślnie utworzone, możesz się zalogować za pomocą swojego adresu e-mail i hasła. Po zalogowaniu będziesz mógł korzystać z innych usług, w tym przeglądania wcześniejszych zamówień, list życzeń i edytowania informacji o koncie.',
+                'credentials-description' => 'Sua conta foi criada. Os detalhes da sua conta estão abaixo:',
+                'greeting'                => 'Witamy i dziękujemy za zarejestrowanie się u nas!',
+                'sign-in'                 => 'Zaloguj się',
+                'username'                => 'Nome de usuário/Email',
+                'password'                => 'Senha',
             ],
 
             'forgot-password' => [

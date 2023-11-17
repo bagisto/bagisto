@@ -834,10 +834,13 @@ return [
 
         'customers' => [
             'registration' => [
-                'description' => 'Il tuo account è stato creato con successo e puoi effettuare il login utilizzando il tuo indirizzo email e le tue credenziali password. Una volta effettuato il login, potrai accedere ad altri servizi, tra cui la revisione degli ordini passati, la lista dei desideri e la modifica delle informazioni del tuo account.',
-                'greeting'    => 'Benvenuto e grazie per esserti registrato con noi!',
-                'subject'     => 'Nuova registrazione cliente',
-                'sign-in'     => 'Accedi',
+                'subject'                 => 'Nuova registrazione cliente',
+                'description'             => 'Il tuo account è stato creato con successo e puoi effettuare il login utilizzando il tuo indirizzo email e le tue credenziali password. Una volta effettuato il login, potrai accedere ad altri servizi, tra cui la revisione degli ordini passati, la lista dei desideri e la modifica delle informazioni del tuo account.',
+                'credentials-description' => 'Il tuo account è stato creato. I dettagli del tuo account sono riportati di seguito:',
+                'greeting'                => 'Benvenuto e grazie per esserti registrato con noi!',
+                'sign-in'                 => 'Accedi',
+                'username-email'          => 'Nome utente/Email',
+                'password'                => 'Password',
             ],
 
             'forgot-password' => [

@@ -10,15 +10,15 @@
     </div>
 
     <p style="font-size: 16px;color: #384860;line-height: 24px;">
-        @lang('Your account has been created. Your account details are below:')
+        @lang('shop::app.emails.customers.registration.credentials-description')
     </p>
 
     <p style="font-size: 16px;color: #384860;line-height: 24px;">
-        @lang('Usename/Email') : <span>{{ $customer->email }}</span>
+        @lang('shop::app.emails.customers.registration.username-email') : <span>{{ $customer->email }}</span>
     </p>
 
     <p style="font-size: 16px;color: #384860;line-height: 24px;">
-        @lang('Password') : {{ $password }}
+        @lang('shop::app.emails.customers.registration.password') : {{ $password }}
     </p>
 
     <div style="display: flex;margin-bottom: 95px">

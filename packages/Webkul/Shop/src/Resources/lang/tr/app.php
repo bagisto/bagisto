@@ -834,10 +834,13 @@ return [
 
         'customers' => [
             'registration' => [
-                'description' => 'Hesabınız başarıyla oluşturuldu ve şimdi e-posta adresiniz ve parola bilgilerinizle giriş yapabilirsiniz. Giriş yaptıktan sonra, geçmiş siparişleri inceleme, favorileri gözden geçirme ve hesap bilgilerinizi düzenleme gibi diğer hizmetlere erişebilirsiniz.',
-                'greeting'    => 'Hoş geldiniz ve bize kaydolduğunuz için teşekkür ederiz!',
-                'subject'     => 'Yeni Müşteri Kaydı',
-                'sign-in'     => 'Giriş yap',
+                'subject'                 => 'Yeni Müşteri Kaydı',
+                'description'             => 'Hesabınız başarıyla oluşturuldu ve şimdi e-posta adresiniz ve parola bilgilerinizle giriş yapabilirsiniz. Giriş yaptıktan sonra, geçmiş siparişleri inceleme, favorileri gözden geçirme ve hesap bilgilerinizi düzenleme gibi diğer hizmetlere erişebilirsiniz.',
+                'credentials-description' => 'Hesabınız oluşturuldu. Hesap detaylarınız aşağıdadır.',
+                'greeting'                => 'Hoş geldiniz ve bize kaydolduğunuz için teşekkür ederiz!',
+                'sign-in'                 => 'Giriş yap',
+                'username-email'          => 'Kullanıcı adı/E-posta',
+                'password'                => 'Şifre',
             ],
 
             'forgot-password' => [
