@@ -920,7 +920,7 @@
                                     type="text"
                                     :name="['conditions[' + index + '][value]']"
                                     :id="['conditions[' + index + '][value]']"
-                                    class="border w-full py-2 px-3 appearance-none rounded-[6px] text-[14px] bg-white transition-all hover:border-gray-400 dark:bg-gray-900 text-gray-600 dark:text-gray-300 dark:border-gray-800"
+                                    class="w-full py-2 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 appearance-none rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                                     v-model="condition.value"
                                 />
                             </div>

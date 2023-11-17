@@ -208,7 +208,6 @@ return [
 
                 'categories-collections' => [
                     'name' => 'ප්රෘදාආභර',
-
                 ],
 
                 'new-products' => [
@@ -307,18 +306,28 @@ return [
             ],
         ],
 
-        'users' => [
-            'name' => 'උදාවර',
-        ],
+        'user' => [
+            'users' => [
+                'name' => 'උදාවර',
+            ],
 
-        'roles' => [
-            'description' => 'මෙම භාවිතයට සියල්ලන්ට ප්‍රවේශයට හෝ වෙනස් සහායකට සහාය ඇත',
-            'name'        => 'පරිකෛටවර',
+            'roles' => [
+                'description' => 'මෙම භාවිතයට සියල්ලන්ට ප්‍රවේශයට හෝ වෙනස් සහායකට සහාය ඇත',
+                'name'        => 'පරිකෛටවර',
+            ],
         ],
     ],
 
     'installer' => [
         'index' => [
+            'start' => [
+                'locale'        => 'දේශීය',
+                'main'          => 'ආරම්භක',
+                'select-locale' => 'Locale තෝරන්න',
+                'title'         => 'ඔබේ Bagisto ස්ථාපනය',
+                'welcome-title' => 'Bagisto 2.0 වෙත සාදරයෙන් පිළිගනිමු.',
+            ],
+
             'server-requirements' => [
                 'calendar'    => 'දාර්තකය',
                 'ctype'       => 'ctype',
@@ -343,19 +352,17 @@ return [
             ],
 
             'environment-configuration' => [
+                'allowed-locales'     => 'ඉඩ දෙන භාෂා',
+                'allowed-currencies'  => 'ඉඩ දෙන මුදල්',
                 'application-name'    => 'යෙදුමේ නම',
-                'arabic'              => 'අරාබි',
                 'bagisto'             => 'බැගිස්ටෝ',
-                'bengali'             => 'බෙංගාලි',
                 'chinese-yuan'        => 'චීන යුආන් (CNY)',
-                'chinese'             => 'චීන',
                 'dirham'              => 'ඩිරහාම් (AED)',
                 'default-url'         => 'ස්වභාවය URL',
                 'default-url-link'    => 'https://localhost',
                 'default-currency'    => 'ස්වභාවය වාන්වේ',
                 'default-timezone'    => 'ස්වභාවය කාල කථ',
                 'default-locale'      => 'ස්වභාවය පෙර දේශ',
-                'dutch'               => 'ලන්දේසි',
                 'database-connection' => 'දත්ත සමාපනය',
                 'database-hostname'   => 'දත්ත සරාංගය නම',
                 'database-port'       => 'දත්ත තැරණ',
@@ -364,34 +371,21 @@ return [
                 'database-prefix'     => 'දත්ත උපවේශ්කය',
                 'database-password'   => 'දත්ත මුරපදය',
                 'euro'                => 'යුරෝ (EUR)',
-                'english'             => 'ඉංග්රීසි',
-                'french'              => 'ප්‍රංශ',
-                'hebrew'              => 'රුවනි',
-                'hindi'               => 'හින්දි',
                 'iranian'             => 'ඉරාන රියාල් (IRR)',
                 'israeli'             => 'ඉස්රායාල් ශෙකල් (ILS)',
-                'italian'             => 'ඉතාලි',
                 'japanese-yen'        => 'ජපනීස් යෙන් (JPY)',
-                'japanese'            => 'ජපනීස්',
                 'mysql'               => 'Mysql',
                 'pgsql'               => 'pgSQL',
                 'pound'               => 'බ්‍රිටිස් වෙල්ටින (GBP)',
-                'persian'             => 'පදින',
-                'polish'              => 'පෝලිෂ්',
-                'portuguese'          => 'පෘතුගීස් (බ්‍රසීල්)',
                 'rupee'               => 'ඉන්දියාන රුපිය (INR)',
                 'russian-ruble'       => 'රුසියාන් රූබල් (RUB)',
-                'russian'             => 'රුසියාන්',
                 'sqlsrv'              => 'SQLSRV',
                 'saudi'               => 'සෞඩී රියාල් (SAR)',
-                'spanish'             => 'ස්පාන්',
-                'sinhala'             => 'සිංහල',
                 'title'               => 'පරාමිතාව විකාශනය',
                 'turkish-lira'        => 'තර්කිෂ් ලීර (TRY)',
-                'turkish'             => 'තර්කිෂ්',
                 'usd'                 => 'ඇමෙරිකානු ඩොලර් (USD)',
                 'ukrainian-hryvnia'   => 'යුක්රේනියාන් හ්‍රිව්නිය (UAH)',
-                'ukrainian'           => 'යුක්රේනියාන්',
+                'warning-message'     => 'සක්රියයෙන් දැක්කම්! ඔබේ පෙරනිමි පද්ධතියේ භාෂා ගැන්වීමේ සැකසීම් සහ පෙරනිමි වෙනස් කළ නොහැකි වෙනස්කම් ස්ථාපනය වේ.',
             ],
 
             'ready-for-installation' => [
@@ -420,21 +414,6 @@ return [
                 'title'            => 'පරිපාලකරු නිපුණ',
             ],
 
-            'email-configuration' => [
-                'encryption'           => 'ගුවන්යාකරනය',
-                'enter-username'       => 'පරිශීලකන් ඇතුලත් කරන්න',
-                'enter-password'       => 'මහපදය ඇතුලත් කරන්න',
-                'outgoing-mail-server' => 'නිරෝන තැපැල් සේවාකරනය',
-                'outgoing-email'       => 'smpt.mailtrap.io',
-                'password'             => 'මහපදය',
-                'store-email'          => 'ගබන තැපැල් ලිපිනය',
-                'enter-store-email'    => 'ගබන තැපැල් ලිපිනය ඇතුලත් කරන්න',
-                'server-port'          => 'සේවාකරනය තැපැල්',
-                'server-port-code'     => '3306',
-                'title'                => 'තැපැල් සැකසුම',
-                'username'             => 'පරිශීලක නම',
-            ],
-
             'installation-completed' => [
                 'admin-panel'                => 'පරිපාල පැනල්',
                 'bagisto-forums'             => 'Bagisto සංස්ථාගත',
@@ -444,18 +423,37 @@ return [
                 'title-info'                 => 'Bagisto ඔබගේ පද්ධතියට සහාභයාගීත.',
             ],
 
+            'arabic'                   => 'අරාබි',
+            'bengali'                  => 'බෙංගාලි',
             'bagisto-logo'             => 'Bagisto ලෝගො',
             'back'                     => 'ආපනය',
             'bagisto-info'             => 'සමුදුසමින් ව්‍යාක්රණය',
-            'bagisto'                  => 'Bagisto',
+            'bagisto'                  => 'බැගිස්ටෝ',
+            'chinese'                  => 'චීන',
             'continue'                 => 'ඉදිරිපත්',
+            'dutch'                    => 'ලන්දේසි',
+            'english'                  => 'ඉංග්රීසි',
+            'french'                   => 'ප්රංශ',
+            'german'                   => 'ජර්මානු',
+            'hebrew'                   => 'හෙබ්රෙව්',
+            'hindi'                    => 'හින්දි',
             'installation-title'       => 'ස්තුරාකුල සහාභ',
             'installation-info'        => 'අපට ඔබ මෙතා බලන්නේ සුමුදුසමින්!',
             'installation-description' => 'Bagisto ස්තුරාකුල සහාභයට මෙතා දිගේ ස්තුරාකුල ප්‍රකාරයට වර්ගය වෙනවා:',
+            'italian'                  => 'ඉතාලි',
+            'japanese'                 => 'ජපන්',
+            'persian'                  => 'පර්සියානු',
+            'polish'                   => 'පෝලන්ත',
+            'portuguese'               => 'බ්රසීලියානු පෘතුගීසි',
+            'russian'                  => 'රුසියානු',
+            'spanish'                  => 'ස්පාඤ්ඤ',
+            'sinhala'                  => 'සිංහල',
             'skip'                     => 'අඩභාගනනක්',
             'save-configuration'       => 'සැකසුම සුරක්ෂා',
             'title'                    => 'Bagisto ස්තුරාකුල',
-            'webkul'                   => 'Webkul',
+            'turkish'                  => 'තුර්කි',
+            'ukrainian'                => 'යුක්රේනියානු',
+            'webkul'                   => 'වෙබ්කුල්',
         ],
     ],
 ];
