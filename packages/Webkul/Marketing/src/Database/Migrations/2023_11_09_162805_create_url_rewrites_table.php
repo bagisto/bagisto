@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('entity_type');
             $table->string('request_path');
             $table->string('target_path');
-            $table->string('redirect_type');
+            $table->string('redirect_type')->nullable();
             $table->string('locale');
             $table->timestamps();
         });
