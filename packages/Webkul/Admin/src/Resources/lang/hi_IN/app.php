@@ -2011,6 +2011,49 @@ return [
 
                 'delete-failed' => ':name हटाने में विफल रहा',
             ],
+
+            'url-rewrites' => [
+                'index' => [
+                    'title'      => 'URL अनुकूलन',
+                    'create-btn' => 'नया URL अनुकूलन बनाएँ',
+
+                    'datagrid' => [
+                        'id'                  => 'आईडी',
+                        'for'                 => 'के लिए',
+                        'request-path'        => 'अनुरोध पथ',
+                        'target-path'         => 'लक्ष्य पथ',
+                        'redirect-type'       => 'अनुवर्तन प्रकार',
+                        'locale'              => 'भाषा क्षेत्र',
+                        'edit'                => 'संपादित करें',
+                        'delete'              => 'हटाएं',
+                        'actions'             => 'कार्य',
+                        'mass-delete-success' => 'चुने गए URL अनुकूलन सफलतापूर्वक हटा दिए गए हैं।',
+                    ],
+
+                    'create' => [
+                        'for'                => 'के लिए',
+                        'product'            => 'उत्पाद',
+                        'category'           => 'श्रेणी',
+                        'cms-page'           => 'CMS पृष्ठ',
+                        'request-path'       => 'अनुरोध पथ',
+                        'target-path'        => 'लक्ष्य पथ',
+                        'redirect-type'      => 'अनुवर्तन प्रकार',
+                        'temporary-redirect' => 'अस्थायी (302)',
+                        'permanent-redirect' => 'स्थायी (301)',
+                        'locale'             => 'भाषा क्षेत्र',
+                        'save-btn'           => 'नया URL अनुकूलन सहेजें',
+                        'title'              => 'नया URL अनुकूलन बनाएँ',
+                        'success'            => 'URL अनुकूलन सफलतापूर्वक बनाया गया है।',
+                        'delete-warning'     => 'क्या आप इस कार्य को करना सुनिश्चित हैं?',
+                    ],
+
+                    'edit' => [
+                        'title'          => 'URL अनुकूलन संपादित करें',
+                        'success'        => 'URL अनुकूलन सफलतापूर्वक अपडेट किया गया है।',
+                        'delete-success' => 'URL अनुकूलन सफलतापूर्वक हटा दिया गया है।',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -3346,6 +3389,7 @@ return [
                 'tax-categories'           => 'कर श्रेणियाँ',
                 'tax-rates'                => 'कर दरें',
                 'transactions'             => 'लेन-देन',
+                'url-rewrites'             => 'URL पुनर्लेखन',
                 'users'                    => 'उपयोगकर्ता',
             ],
         ],
@@ -3505,6 +3549,7 @@ return [
         'tax-categories'           => 'कर श्रेणियाँ',
         'tax-rates'                => 'कर दरें',
         'transactions'             => 'लेन-देन',
+        'url-rewrites'             => 'URL पुनर्लेखन',
         'users'                    => 'उपयोगकर्ताओं',
         'view'                     => 'देखें',
     ],

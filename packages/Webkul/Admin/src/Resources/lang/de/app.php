@@ -2011,6 +2011,49 @@ return [
 
                 'delete-failed'  => ':name Löschen fehlgeschlagen',
             ],
+
+            'url-rewrites' => [
+                'index' => [
+                    'title'      => 'URL-Weiterleitungen',
+                    'create-btn' => 'URL-Weiterleitung erstellen',
+
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'for'                 => 'Für',
+                        'request-path'        => 'Anforderungs-Pfad',
+                        'target-path'         => 'Zielpfad',
+                        'redirect-type'       => 'Weiterleitungstyp',
+                        'locale'              => 'Lokalisierung',
+                        'edit'                => 'Bearbeiten',
+                        'delete'              => 'Löschen',
+                        'actions'             => 'Aktionen',
+                        'mass-delete-success' => 'Ausgewählte URL-Weiterleitungen erfolgreich gelöscht',
+                    ],
+
+                    'create' => [
+                        'for'                => 'Für',
+                        'product'            => 'Produkt',
+                        'category'           => 'Kategorie',
+                        'cms-page'           => 'CMS-Seite',
+                        'request-path'       => 'Anforderungs-Pfad',
+                        'target-path'        => 'Zielpfad',
+                        'redirect-type'      => 'Weiterleitungstyp',
+                        'temporary-redirect' => 'Temporär (302)',
+                        'permanent-redirect' => 'Permanent (301)',
+                        'locale'             => 'Lokalisierung',
+                        'save-btn'           => 'URL-Weiterleitung speichern',
+                        'title'              => 'URL-Weiterleitung erstellen',
+                        'success'            => 'URL-Weiterleitung erfolgreich erstellt',
+                        'delete-warning'     => 'Sind Sie sicher, dass Sie diese Aktion ausführen möchten?',
+                    ],
+
+                    'edit' => [
+                        'title'          => 'URL-Weiterleitung bearbeiten',
+                        'success'        => 'URL-Weiterleitung erfolgreich aktualisiert',
+                        'delete-success' => 'URL-Weiterleitung erfolgreich gelöscht',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -3346,6 +3389,7 @@ return [
                 'tax-categories'           => 'Steuerkategorien',
                 'tax-rates'                => 'Steuersätze',
                 'transactions'             => 'Transaktionen',
+                'url-rewrites'             => 'URL-Rewrites',
                 'users'                    => 'Benutzer',
             ],
         ],
@@ -3505,6 +3549,7 @@ return [
         'tax-categories'           => 'Steuerkategorien',
         'tax-rates'                => 'Steuersätze',
         'transactions'             => 'Transaktionen',
+        'url-rewrites'             => 'URL-Rewrites',
         'users'                    => 'Benutzer',
         'view'                     => 'Ansehen',
     ],

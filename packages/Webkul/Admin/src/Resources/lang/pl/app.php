@@ -2011,6 +2011,49 @@ return [
 
                 'delete-failed'  => ':name Usunięcie nie powiodło się',
             ],
+
+            'url-rewrites' => [
+                'index' => [
+                    'title'      => 'Zapis URL',
+                    'create-btn' => 'Utwórz nowy zapis URL',
+
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'for'                 => 'Dla',
+                        'request-path'        => 'Ścieżka żądania',
+                        'target-path'         => 'Ścieżka docelowa',
+                        'redirect-type'       => 'Typ przekierowania',
+                        'locale'              => 'Język',
+                        'edit'                => 'Edytuj',
+                        'delete'              => 'Usuń',
+                        'actions'             => 'Akcje',
+                        'mass-delete-success' => 'Wybrane zapisy URL zostały pomyślnie usunięte.',
+                    ],
+
+                    'create' => [
+                        'for'                => 'Dla',
+                        'product'            => 'Produkt',
+                        'category'           => 'Kategoria',
+                        'cms-page'           => 'Strona CMS',
+                        'request-path'       => 'Ścieżka żądania',
+                        'target-path'        => 'Ścieżka docelowa',
+                        'redirect-type'      => 'Typ przekierowania',
+                        'temporary-redirect' => 'Przejście tymczasowe (302)',
+                        'permanent-redirect' => 'Przejście stałe (301)',
+                        'locale'             => 'Język',
+                        'save-btn'           => 'Utwórz nowy zapis URL',
+                        'title'              => 'Utwórz nowy zapis URL',
+                        'success'            => 'Zapis URL został pomyślnie utworzony.',
+                        'delete-warning'     => 'Czy na pewno chcesz wykonać tę akcję?',
+                    ],
+
+                    'edit' => [
+                        'title'          => 'Edytuj zapis URL',
+                        'success'        => 'Zapis URL został pomyślnie zaktualizowany.',
+                        'delete-success' => 'Zapis URL został pomyślnie usunięty.',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -3346,6 +3389,7 @@ return [
                 'tax-categories'           => 'Kategorie podatków',
                 'tax-rates'                => 'Stawki podatków',
                 'transactions'             => 'Transakcje',
+                'url-rewrites'             => 'Przekierowania URL',
                 'users'                    => 'Użytkownicy',
             ],
         ],
@@ -3505,6 +3549,7 @@ return [
         'tax-categories'           => 'Kategorie Podatków',
         'tax-rates'                => 'Stawki Podatkowe',
         'transactions'             => 'Transakcje',
+        'url-rewrites'             => 'Przekierowania URL',
         'users'                    => 'Użytkownicy',
         'view'                     => 'Pokaż',
     ],

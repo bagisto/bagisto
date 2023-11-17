@@ -227,16 +227,6 @@ class CategoryRepository extends Repository
     }
 
     /**
-     * Find by path.
-     *
-     * @return \Webkul\Category\Contracts\Category
-     */
-    public function findByPath(string $urlPath)
-    {
-        return $this->model->whereTranslation('url_path', $urlPath)->first();
-    }
-
-    /**
      * Upload category's images.
      *
      * @param  array  $data
@@ -249,6 +239,7 @@ class CategoryRepository extends Repository
         if (isset($data[$type])) {
             foreach ($data[$type] as $imageId => $image) {
                 $file = $type . '.' . $imageId;
+
                 $dir = 'category/' . $category->id;
 
                 if (request()->hasFile($file)) {

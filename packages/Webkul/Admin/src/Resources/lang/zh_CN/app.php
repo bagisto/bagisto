@@ -2011,6 +2011,49 @@ return [
 
                 'delete-failed'  => ':name 删除失败',
             ],
+
+            'url-rewrites' => [
+                'index' => [
+                    'title'      => 'URL 重写',
+                    'create-btn' => '创建 URL 重写',
+
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'for'                 => '适用对象',
+                        'request-path'        => '请求路径',
+                        'target-path'         => '目标路径',
+                        'redirect-type'       => '重定向类型',
+                        'locale'              => '语言环境',
+                        'edit'                => '编辑',
+                        'delete'              => '删除',
+                        'actions'             => '操作',
+                        'mass-delete-success' => '已成功删除选定的 URL 重写。',
+                    ],
+
+                    'create' => [
+                        'for'                => '适用对象',
+                        'product'            => '产品',
+                        'category'           => '类别',
+                        'cms-page'           => 'CMS 页面',
+                        'request-path'       => '请求路径',
+                        'target-path'        => '目标路径',
+                        'redirect-type'      => '重定向类型',
+                        'temporary-redirect' => '临时（302）',
+                        'permanent-redirect' => '永久（301）',
+                        'locale'             => '语言环境',
+                        'save-btn'           => '保存 URL 重写',
+                        'title'              => '创建 URL 重写',
+                        'success'            => '已成功创建 URL 重写。',
+                        'delete-warning'     => '您确定要执行此操作吗？',
+                    ],
+
+                    'edit' => [
+                        'title'          => '编辑 URL 重写',
+                        'success'        => '已成功更新 URL 重写。',
+                        'delete-success' => '已成功删除 URL 重写。',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -3346,6 +3389,7 @@ return [
                 'tax-categories'           => '税收分类',
                 'tax-rates'                => '税率',
                 'transactions'             => '交易',
+                'url-rewrites'             => 'URL 重写',
                 'users'                    => '用户',
             ],
         ],
@@ -3505,6 +3549,7 @@ return [
         'tax-categories'           => '税务类别',
         'tax-rates'                => '税率',
         'transactions'             => '交易',
+        'url-rewrites'             => 'URL 重写',
         'users'                    => '用户',
         'view'                     => '查看',
     ],

@@ -2012,6 +2012,49 @@ return [
 
                 'delete-failed'  => ':name Deleted Failed',
             ],
+
+            'url-rewrites' => [
+                'index' => [
+                    'title'      => 'URL Rewrites',
+                    'create-btn' => 'Create URL Rewrite',
+
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'for'                 => 'For',
+                        'request-path'        => 'Request Path',
+                        'target-path'         => 'Target Path',
+                        'redirect-type'       => 'Redirect Type',
+                        'locale'              => 'Locale',
+                        'edit'                => 'Edit',
+                        'delete'              => 'Delete',
+                        'actions'             => 'Actions',
+                        'mass-delete-success' => 'Selected URL Rewrites Deleted Successfully',
+                    ],
+
+                    'create' => [
+                        'for'                => 'For',
+                        'product'            => 'Product',
+                        'category'           => 'Category',
+                        'cms-page'           => 'CMS Page',
+                        'request-path'       => 'Request Path',
+                        'target-path'        => 'Target Path',
+                        'redirect-type'      => 'Redirect Type',
+                        'temporary-redirect' => 'Temporary (302)',
+                        'permanent-redirect' => 'Permanent (301)',
+                        'locale'             => 'Locale',
+                        'save-btn'           => 'Save URL Rewrite',
+                        'title'              => 'Create URL Rewrite',
+                        'success'            => 'URL Rewrite created successfully',
+                        'delete-warning'     => 'Are you sure, you want to perform this action?',
+                    ],
+
+                    'edit' => [
+                        'title'          => 'Edit URL Rewrite',
+                        'success'        => 'URL Rewrite updated successfully',
+                        'delete-success' => 'URL Rewrite deleted successfully',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -3346,6 +3389,7 @@ return [
                 'tax-categories'           => 'Tax Categories',
                 'tax-rates'                => 'Tax Rates',
                 'transactions'             => 'Transactions',
+                'url-rewrites'             => 'URL Rewrites',
                 'users'                    => 'Users',
             ],
         ],
@@ -3505,6 +3549,7 @@ return [
         'tax-categories'           => 'Tax Categories',
         'tax-rates'                => 'Tax Rates',
         'transactions'             => 'Transactions',
+        'url-rewrites'             => 'URL Rewrites',
         'users'                    => 'Users',
         'view'                     => 'View',
     ],
