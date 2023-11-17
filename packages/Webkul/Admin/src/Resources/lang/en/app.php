@@ -1984,6 +1984,7 @@ return [
                     'create' => [
                         'name'           => 'Name',
                         'terms'          => 'Terms',
+                        'terms-info'     => 'Enter synonyms as a comma-separated list, e.g., "shoes,footwear." This expands the search to include both terms.',
                         'save-btn'       => 'Save Search Synonym',
                         'title'          => 'Create Search Synonym',
                         'success'        => 'Search Synonym created successfully',

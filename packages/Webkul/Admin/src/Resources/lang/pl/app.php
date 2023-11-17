@@ -1983,6 +1983,7 @@ return [
                     'create' => [
                         'name'           => 'Nazwa',
                         'terms'          => 'Terminy',
+                        'terms-info'     => 'Wprowadź synonimy jako listę oddzieloną przecinkami, na przykład "buty, obuwie." To rozszerza wyszukiwanie, aby obejmować wszystkie terminy.',
                         'save-btn'       => 'Zapisz Synonim Wyszukiwania',
                         'title'          => 'Utwórz Synonim Wyszukiwania',
                         'success'        => 'Synonim Wyszukiwania utworzony pomyślnie',

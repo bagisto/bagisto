@@ -1984,6 +1984,7 @@ return [
                     'create' => [
                         'name'           => 'Naam',
                         'terms'          => 'Termen',
+                        'terms-info'     => 'Voer synoniemen in als een door komma\'s gescheiden lijst, bijvoorbeeld "schoenen, schoeisel." Hiermee wordt de zoekopdracht uitgebreid om alle termen op te nemen.',
                         'save-btn'       => 'Bewaar Zoek Synoniem',
                         'title'          => 'Maak Zoek Synoniem',
                         'success'        => 'Zoek Synoniem succesvol aangemaakt',

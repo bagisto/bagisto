@@ -205,6 +205,10 @@
                                     >
                                     </x-admin::form.control-group.control>
 
+                                    <p class="mt-[8px] ltr:ml-[4px] rtl:mr-[4px] text-[12px] text-gray-600 dark:text-gray-300 font-medium">
+                                        @lang('admin::app.marketing.search-seo.search-synonyms.index.create.terms-info')
+                                    </p>
+
                                     <x-admin::form.control-group.error
                                         control-name="terms"
                                     >

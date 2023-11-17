@@ -1983,6 +1983,7 @@ return [
                     'create' => [
                         'name'           => 'Adı',
                         'terms'          => 'Terimler',
+                        'terms-info'     => 'Eşanlamlıları virgülle ayrılmış bir liste olarak girin, örneğin "ayakkabı,ayakkabı." Bu, aramayı tüm terimleri içerecek şekilde genişletir.',
                         'save-btn'       => 'Arama Eşanlamı Kaydet',
                         'title'          => 'Arama Eşanlamı Oluştur',
                         'success'        => 'Arama Eşanlamı başarıyla oluşturuldu',

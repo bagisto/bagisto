@@ -1983,6 +1983,7 @@ return [
                     'create' => [
                         'name'           => 'Nome',
                         'terms'          => 'Termos',
+                        'terms-info'     => 'Digite sinônimos como uma lista separada por vírgulas, por exemplo, "sapatos, calçados." Isso amplia a pesquisa para incluir todos os termos.',
                         'save-btn'       => 'Salvar Sinônimo de Pesquisa',
                         'title'          => 'Criar Sinônimo de Pesquisa',
                         'success'        => 'Sinônimo de Pesquisa criado com sucesso',

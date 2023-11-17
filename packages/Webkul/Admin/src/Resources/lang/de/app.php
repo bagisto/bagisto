@@ -1983,6 +1983,7 @@ return [
                     'create' => [
                         'name'           => 'Name',
                         'terms'          => 'Begriffe',
+                        'terms-info'     => 'Geben Sie Synonyme als durch Kommas getrennte Liste ein, z. B. "Schuhe, Schuhwerk." Dies erweitert die Suche, um alle Begriffe einzuschließen.',
                         'save-btn'       => 'Suchsynonym speichern',
                         'title'          => 'Suchsynonym erstellen',
                         'success'        => 'Suchsynonym erfolgreich erstellt',

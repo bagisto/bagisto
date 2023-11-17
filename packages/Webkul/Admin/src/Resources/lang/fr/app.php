@@ -1983,6 +1983,7 @@ return [
                     'create' => [
                         'name'           => 'Nom',
                         'terms'          => 'Termes',
+                        'terms-info'     => 'Saisissez les synonymes sous forme de liste séparée par des virgules, par exemple "chaussures,chaussure." Cela élargit la recherche pour inclure tous les termes.',
                         'save-btn'       => 'Enregistrer le synonyme de recherche',
                         'title'          => 'Créer un synonyme de recherche',
                         'success'        => 'Synonyme de recherche créé avec succès',

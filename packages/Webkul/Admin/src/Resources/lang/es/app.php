@@ -1983,6 +1983,7 @@ return [
                     'create' => [
                         'name'           => 'Nombre',
                         'terms'          => 'Términos',
+                        'terms-info'     => 'Ingrese sinónimos como una lista separada por comas, por ejemplo, "zapatos, calzado." Esto amplía la búsqueda para incluir todos los términos.',
                         'save-btn'       => 'Guardar Sinónimo de Búsqueda',
                         'title'          => 'Crear Sinónimo de Búsqueda',
                         'success'        => 'Sinónimo de Búsqueda creado exitosamente',
