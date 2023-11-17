@@ -49,7 +49,7 @@ class SearchSynonymController extends Controller
 
         $searchSynonym = $this->searchSynonymRepository->create(request()->only([
             'name',
-            'term',
+            'terms',
         ]));
 
         Event::dispatch('marketing.search_seo.search_synonyms.create.after', $searchSynonym);
@@ -77,7 +77,7 @@ class SearchSynonymController extends Controller
 
         $searchSynonym = $this->searchSynonymRepository->update(request()->only([
             'name',
-            'term',
+            'terms',
         ]), $id);
 
         Event::dispatch('marketing.search_seo.search_synonyms.update.after', $searchSynonym);
