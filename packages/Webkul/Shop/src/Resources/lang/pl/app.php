@@ -770,6 +770,7 @@ return [
                 'grand-total'      => 'Łączna suma',
                 'place-order'      => 'Złóż zamówienie',
                 'processing'       => 'Przetwarzanie',
+                'price_&_qty'      => ':price × :qty',
                 'sub-total'        => 'Suma częściowa',
                 'tax'              => 'Podatek',
             ],

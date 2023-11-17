@@ -770,6 +770,7 @@ return [
                 'grand-total'      => 'Genel Toplam',
                 'place-order'      => 'Sipariş Ver',
                 'processing'       => 'İşleniyor',
+                'price_&_qty'      => ':price × :qty',
                 'sub-total'        => 'Ara Toplam',
                 'tax'              => 'Vergi',
             ],

@@ -769,6 +769,7 @@ return [
                 'grand-total'      => 'Eindtotaal',
                 'place-order'      => 'Bestelling plaatsen',
                 'processing'       => 'Verwerken',
+                'price_&_qty'      => ':price × :qty',
                 'sub-total'        => 'Subtotaal',
                 'tax'              => 'Belasting',
             ],

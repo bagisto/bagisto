@@ -770,6 +770,7 @@ return [
                 'grand-total'      => 'Итоговая сумма',
                 'place-order'      => 'Оформить заказ',
                 'processing'       => 'Обработка',
+                'price_&_qty'      => ':price × :qty',
                 'sub-total'        => 'Итого',
                 'tax'              => 'Налог',
             ],

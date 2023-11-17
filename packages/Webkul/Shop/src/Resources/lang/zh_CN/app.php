@@ -770,6 +770,7 @@ return [
                 'grand-total'      => '总计',
                 'place-order'      => '下订单',
                 'processing'       => '处理中',
+                'price_&_qty'      => ':price × :qty',
                 'sub-total'        => '小计',
                 'tax'              => '税',
             ],

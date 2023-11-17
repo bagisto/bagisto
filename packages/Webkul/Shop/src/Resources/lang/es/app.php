@@ -758,6 +758,7 @@ return [
                 'grand-total'      => 'Gran Total',
                 'place-order'      => 'Realizar Pedido',
                 'processing'       => 'Procesando',
+                'price_&_qty'      => ':price × :qty',
                 'sub-total'        => 'Subtotal',
                 'tax'              => 'Impuesto',
             ],

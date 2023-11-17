@@ -770,6 +770,7 @@ return [
                 'grand-total'      => 'סך הכל לתשלום',
                 'place-order'      => 'בצע הזמנה',
                 'processing'       => 'מעבד',
+                'price_&_qty'      => ':price × :qty',
                 'sub-total'        => 'תת סך הכל',
                 'tax'              => 'מס',
             ],

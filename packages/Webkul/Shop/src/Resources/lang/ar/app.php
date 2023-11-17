@@ -769,6 +769,7 @@ return [
                 'discount-amount'  => 'مبلغ الخصم',
                 'grand-total'      => 'المجموع الكلي',
                 'place-order'      => 'تأكيد الطلب',
+                'price_&_qty'      => ':price × :qty',
                 'processing'       => 'معالجة',
                 'sub-total'        => 'المجموع الفرعي',
                 'tax'              => 'الضريبة',
