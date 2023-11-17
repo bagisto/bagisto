@@ -1966,6 +1966,38 @@ return [
                 ],
             ],
 
+            'search-synonyms' => [
+                'index' => [
+                    'title'      => 'Search Synonyms',
+                    'create-btn' => 'Create Search Synonym',
+
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'name'                => 'Name',
+                        'terms'               => 'Terms',
+                        'edit'                => 'Edit',
+                        'delete'              => 'Delete',
+                        'actions'             => 'Actions',
+                        'mass-delete-success' => 'Selected Search Synonyms Deleted Successfully',
+                    ],
+
+                    'create' => [
+                        'name'           => 'Name',
+                        'terms'          => 'Terms',
+                        'save-btn'       => 'Save Search Synonym',
+                        'title'          => 'Create Search Synonym',
+                        'success'        => 'Search Synonym created successfully',
+                        'delete-warning' => 'Are you sure, you want to perform this action?',
+                    ],
+
+                    'edit' => [
+                        'title'          => 'Edit Search Synonym',
+                        'success'        => 'Search Synonym updated successfully',
+                        'delete-success' => 'Search Synonym deleted successfully',
+                    ],
+                ],
+            ],
+
             'sitemaps' => [
                 'index' => [
                     'title'      => 'Sitemaps',
@@ -3380,6 +3412,7 @@ return [
                 'reviews'                  => 'Reviews',
                 'roles'                    => 'Roles',
                 'sales'                    => 'Sales',
+                'search-synonyms'          => 'Search Synonyms',
                 'search-terms'             => 'Search Terms',
                 'search-seo'               => 'Search & SEO',
                 'shipments'                => 'Shipments',
@@ -3538,6 +3571,7 @@ return [
         'reviews'                  => 'Reviews',
         'roles'                    => 'Roles',
         'sales'                    => 'Sales',
+        'search-synonyms'          => 'Search Synonyms',
         'search-terms'             => 'Search Terms',
         'search-seo'               => 'Search & SEO',
         'shipments'                => 'Shipments',

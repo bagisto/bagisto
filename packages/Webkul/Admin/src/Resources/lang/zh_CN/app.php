@@ -1965,6 +1965,38 @@ return [
                 ],
             ],
 
+            'search-synonyms' => [
+                'index' => [
+                    'title'      => '搜索同义词',
+                    'create-btn' => '创建搜索同义词',
+    
+                    'datagrid' => [
+                        'id'                  => '标识',
+                        'name'                => '名称',
+                        'terms'               => '术语',
+                        'edit'                => '编辑',
+                        'delete'              => '删除',
+                        'actions'             => '操作',
+                        'mass-delete-success' => '成功删除所选的搜索同义词',
+                    ],
+    
+                    'create' => [
+                        'name'           => '名称',
+                        'terms'          => '术语',
+                        'save-btn'       => '保存搜索同义词',
+                        'title'          => '创建搜索同义词',
+                        'success'        => '成功创建搜索同义词',
+                        'delete-warning' => '您确定要执行此操作吗？',
+                    ],
+    
+                    'edit' => [
+                        'title'          => '编辑搜索同义词',
+                        'success'        => '成功更新搜索同义词',
+                        'delete-success' => '成功删除搜索同义词',
+                    ],
+                ],
+            ],
+
             'sitemaps' => [
                 'index' => [
                     'title'      => '站点地图',
@@ -3380,6 +3412,7 @@ return [
                 'reviews'                  => '评论',
                 'roles'                    => '角色',
                 'sales'                    => '销售',
+                'search-synonyms'          => '搜索同义词',
                 'search-terms'             => '搜索词',
                 'search-seo'               => '搜索和SEO',
                 'shipments'                => '发货',
@@ -3538,6 +3571,7 @@ return [
         'reviews'                  => '评论',
         'roles'                    => '角色',
         'sales'                    => '销售',
+        'search-synonyms'          => '搜索同义词',
         'search-terms'             => '搜索词',
         'search-seo'               => '搜索和SEO',
         'shipments'                => '发货',

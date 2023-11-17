@@ -1965,6 +1965,38 @@ return [
                 ],
             ],
 
+            'search-synonyms' => [
+                'index' => [
+                    'title'      => 'Arama Eşanlamlıları',
+                    'create-btn' => 'Arama Eşanlamlısı Oluştur',
+    
+                    'datagrid' => [
+                        'id'                  => 'Kimlik',
+                        'name'                => 'Adı',
+                        'terms'               => 'Terimler',
+                        'edit'                => 'Düzenle',
+                        'delete'              => 'Sil',
+                        'actions'             => 'İşlemler',
+                        'mass-delete-success' => 'Seçilen Arama Eşanlamlıları Başarıyla Silindi',
+                    ],
+    
+                    'create' => [
+                        'name'           => 'Adı',
+                        'terms'          => 'Terimler',
+                        'save-btn'       => 'Arama Eşanlamı Kaydet',
+                        'title'          => 'Arama Eşanlamı Oluştur',
+                        'success'        => 'Arama Eşanlamı başarıyla oluşturuldu',
+                        'delete-warning' => 'Bu işlemi gerçekleştirmek istediğinizden emin misiniz?',
+                    ],
+    
+                    'edit' => [
+                        'title'          => 'Arama Eşanlamı Düzenle',
+                        'success'        => 'Arama Eşanlamı başarıyla güncellendi',
+                        'delete-success' => 'Arama Eşanlamı başarıyla silindi',
+                    ],
+                ],
+            ],
+
             'sitemaps' => [
                 'index' => [
                     'title'      => 'Site Haritaları',
@@ -3380,6 +3412,7 @@ return [
                 'reviews'                  => 'Yorumlar',
                 'roles'                    => 'Roller',
                 'sales'                    => 'Satışlar',
+                'search-synonyms'          => 'Arama Eşanlamlıları',
                 'search-terms'             => 'Arama Terimleri',
                 'search-seo'               => 'Arama ve SEO',
                 'shipments'                => 'Gönderiler',
@@ -3538,6 +3571,7 @@ return [
         'reviews'                  => 'Yorumlar',
         'roles'                    => 'Roller',
         'sales'                    => 'Satışlar',
+        'search-synonyms'          => 'Arama Eşanlamlıları',
         'search-terms'             => 'Arama Terimleri',
         'search-seo'               => 'Arama ve SEO',
         'shipments'                => 'Gönderiler',

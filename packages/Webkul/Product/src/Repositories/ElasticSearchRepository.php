@@ -115,6 +115,7 @@ class ElasticSearchRepository
                         $attribute->code => intval($params[$attribute->code]),
                     ],
                 ];
+
             case 'price':
                 $customerGroup = $this->customerRepository->getCurrentGroup();
 
@@ -130,9 +131,14 @@ class ElasticSearchRepository
                 ];
 
             case 'text':
+                $synonyms = array_map(function ($synonym) {
+                    return '"' . $synonym . '"';
+                }, [$params[$attribute->code]]);
+
                 return [
-                    'match_phrase' => [
-                        $attribute->code => $params[$attribute->code],
+                    'query_string' => [
+                        'query'         => implode(' OR ', $synonyms),
+                        'default_field' => $attribute->code,
                     ],
                 ];
 

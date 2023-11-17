@@ -491,10 +491,30 @@ return [
         'route' => 'admin.marketing.search_seo.search_terms.delete',
         'sort'  => 3,
     ], [
+        'key'   => 'marketing.search_seo.search_synonyms',
+        'name'  => 'admin::app.acl.search-synonyms',
+        'route' => 'admin.marketing.search_seo.search_synonyms.index',
+        'sort'  => 3,
+    ], [
+        'key'   => 'marketing.search_seo.search_synonyms.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => 'admin.marketing.search_seo.search_synonyms.update',
+        'sort'  => 1,
+    ], [
+        'key'   => 'marketing.search_seo.search_synonyms.edit',
+        'name'  => 'admin::app.acl.edit',
+        'route' => 'admin.marketing.search_seo.search_synonyms.update',
+        'sort'  => 2,
+    ], [
+        'key'   => 'marketing.search_seo.search_synonyms.delete',
+        'name'  => 'admin::app.acl.delete',
+        'route' => 'admin.marketing.search_seo.search_synonyms.delete',
+        'sort'  => 3,
+    ], [
         'key'   => 'marketing.search_seo.sitemaps',
         'name'  => 'admin::app.acl.sitemaps',
         'route' => 'admin.marketing.search_seo.sitemaps.index',
-        'sort'  => 3,
+        'sort'  => 4,
     ], [
         'key'   => 'marketing.search_seo.sitemaps.create',
         'name'  => 'admin::app.acl.create',

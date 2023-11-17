@@ -1965,6 +1965,38 @@ return [
                 ],
             ],
 
+            'search-synonyms' => [
+                'index' => [
+                    'title'      => 'Synonymes de recherche',
+                    'create-btn' => 'Créer un synonyme de recherche',
+    
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'name'                => 'Nom',
+                        'terms'               => 'Termes',
+                        'edit'                => 'Modifier',
+                        'delete'              => 'Supprimer',
+                        'actions'             => 'Actions',
+                        'mass-delete-success' => 'Les synonymes de recherche sélectionnés ont été supprimés avec succès',
+                    ],
+    
+                    'create' => [
+                        'name'           => 'Nom',
+                        'terms'          => 'Termes',
+                        'save-btn'       => 'Enregistrer le synonyme de recherche',
+                        'title'          => 'Créer un synonyme de recherche',
+                        'success'        => 'Synonyme de recherche créé avec succès',
+                        'delete-warning' => 'Êtes-vous sûr de vouloir effectuer cette action?',
+                    ],
+    
+                    'edit' => [
+                        'title'          => 'Modifier le synonyme de recherche',
+                        'success'        => 'Synonyme de recherche mis à jour avec succès',
+                        'delete-success' => 'Synonyme de recherche supprimé avec succès',
+                    ],
+                ],
+            ],
+
             'sitemaps' => [
                 'index' => [
                     'title'      => 'Sitemaps',
@@ -3380,6 +3412,7 @@ return [
                 'reviews'                  => 'Avis',
                 'roles'                    => 'Rôles',
                 'sales'                    => 'Ventes',
+                'search-synonyms'          => 'Synonymes de recherche',
                 'search-terms'             => 'Termes de recherche',
                 'search-seo'               => 'Recherche et référencement',
                 'shipments'                => 'Expéditions',
@@ -3538,6 +3571,7 @@ return [
         'reviews'                  => 'Avis',
         'roles'                    => 'Rôles',
         'sales'                    => 'Ventes',
+        'search-synonyms'          => 'Synonymes de recherche',
         'search-terms'             => 'Termes de recherche',
         'search-seo'               => 'Recherche et référencement',
         'shipments'                => 'Expéditions',
