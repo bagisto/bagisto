@@ -193,12 +193,11 @@ class CategoryRepository extends Repository
      */
     public function isSlugUnique($id, $slug)
     {
-        $exists = CategoryTranslationProxy::modelClass()
-            ::where('category_id', '<>', $id)
-            ->where('slug', $slug)
-            ->limit(1)
-            ->select(DB::raw(1))
-            ->exists();
+        $exists = CategoryTranslationProxy::modelClass()::where('category_id', '<>', $id)
+                ->where('slug', $slug)
+                ->limit(1)
+                ->select(DB::raw(1))
+                ->exists();
 
         return ! $exists;
     }
@@ -240,7 +239,7 @@ class CategoryRepository extends Repository
         if (isset($data[$type])) {
             foreach ($data[$type] as $imageId => $image) {
                 $file = $type . '.' . $imageId;
-                
+
                 $dir = 'category/' . $category->id;
 
                 if (request()->hasFile($file)) {
