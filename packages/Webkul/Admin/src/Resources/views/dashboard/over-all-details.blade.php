@@ -45,7 +45,7 @@
                                     class="text-[12px] text-emerald-500 font-semibold"
                                     :class="[report.statistics.total_sales.progress < 0 ?  'text-red-500' : 'text-emerald-500']"
                                 >
-                                    @{{ report.statistics.total_sales.progress.toFixed(2) }}%
+                                    @{{ Math.abs(report.statistics.total_sales.progress.toFixed(2)) }}%
                                 </p>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                                     class="text-[12px] text-emerald-500 font-semibold"
                                     :class="[report.statistics.total_orders.progress < 0 ?  'text-red-500' : 'text-emerald-500']"
                                 >
-                                    @{{ report.statistics.total_orders.progress.toFixed(2) }}%
+                                    @{{ Math.abs(report.statistics.total_orders.progress.toFixed(2)) }}%
                                 </p>
                             </div>
                         </div>
@@ -117,7 +117,7 @@
                                     class="text-[12px] text-emerald-500 font-semibold"
                                     :class="[report.statistics.total_customers.progress < 0 ?  'text-red-500' : 'text-emerald-500']"
                                 >
-                                    @{{ report.statistics.total_customers.progress.toFixed(2) }}%
+                                    @{{ Math.abs(report.statistics.total_customers.progress.toFixed(2)) }}%
                                 </p>
                             </div>
                         </div>
@@ -150,11 +150,12 @@
                                 ></span>
 
                                 <p
-                                    class="text-[12px] text-emerald-500 font-semibold"
+                                    class="text-[12px] font-semibold"
                                     :class="[report.statistics.avg_sales.progress < 0 ?  'text-red-500' : 'text-emerald-500']"
                                 >
-                                    @{{ report.statistics.avg_sales.progress.toFixed(2) }}%
+                                    @{{ Math.abs(report.statistics.avg_sales.progress).toFixed(2) }}%
                                 </p>
+
                             </div>
                         </div>
                     </div>

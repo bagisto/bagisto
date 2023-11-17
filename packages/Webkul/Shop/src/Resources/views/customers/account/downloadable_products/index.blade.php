@@ -1,10 +1,10 @@
 <x-shop::layouts.account>
-    {{-- Page Title --}}
+    <!-- Page Title -->
     <x-slot:title>
         @lang('shop::app.customers.account.downloadable-products.name')
     </x-slot>
 
-    {{-- Breadcrumbs --}}
+    <!-- Breadcrumbs -->
     @section('breadcrumbs')
         <x-shop::breadcrumbs name="downloadable-products"></x-shop::breadcrumbs>
     @endSection
@@ -18,7 +18,7 @@
             {!! view_render_event('bagisto.shop.customers.account.downloadable_products.list.before') !!}
 
             @if (! $downloadableLinkPurchased->isEmpty())
-                {{-- Downloadable Products Information --}}
+                <!-- Downloadable Products Information -->
                 <div class="relative overflow-x-auto border border-b-0  rounded-[12px] mt-[30px]">
                     <table class="w-full text-sm text-left">
                         <thead class="border-b-[1px] border-[#E9E9E9] text-[14px] text-black bg-[#F5F5F5]">
@@ -133,7 +133,7 @@
                     @lang('shop::app.customers.account.downloadable-products.records-found')
                 </p>
             @else
-                {{-- Downloadable Empty page --}}
+                <!-- Downloadable Empty page -->
                 <div class="grid items-center justify-items-center place-content-center w-[100%]] m-auto h-[476px] text-center">
                     <img
                         src="{{ bagisto_asset('images/empty-dwn-product.png')}}"

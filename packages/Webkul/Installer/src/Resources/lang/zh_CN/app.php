@@ -285,6 +285,24 @@ return [
                         'whats-new'        => 'What\'s New',
                     ],
                 ],
+
+                'services-content' => [
+                    'name'  => '服务内容',
+
+                    'title' => [
+                        'free-shipping'     => '免费送货',
+                        'product-replace'   => '产品更换',
+                        'emi-available'     => 'EMI 可用',
+                        'time-support'      => '24/7 支持',
+                    ],
+
+                    'description' => [
+                        'free-shipping-info'     => '所有订单均可享受免费送货',
+                        'product-replace-info'   => '可轻松更换产品！',
+                        'emi-available-info'     => '所有主要信用卡均可免费使用 EMI',
+                        'time-support-info'      => '专门的 24/7 支持，通过聊天和电子邮件提供',
+                    ],
+                ],
             ],
         ],
 

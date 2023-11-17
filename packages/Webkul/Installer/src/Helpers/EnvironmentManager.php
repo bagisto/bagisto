@@ -63,13 +63,16 @@ class EnvironmentManager
             $envDBParams['DB_PREFIX'] = $request['db_prefix'] ?? '';
             $envDBParams['DB_USERNAME'] = $request['db_username'];
             $envDBParams['DB_PASSWORD'] = $request['db_password'];
-            $envDBParams['APP_NAME'] = $request['app_name'];
+            $envDBParams['DB_CONNECTION'] = $request['db_connection'];
+            $envDBParams['DB_PORT'] = (int) $request['db_port'];
+        }
+
+        if (isset($request['app_name'])) {
+            $envDBParams['APP_NAME'] = $request['app_name'] ?? null;
             $envDBParams['APP_URL'] = $request['app_url'];
             $envDBParams['APP_CURRENCY'] = $request['app_currency'];
             $envDBParams['APP_LOCALE'] = $request['app_locale'];
             $envDBParams['APP_TIMEZONE'] = $request['app_timezone'];
-            $envDBParams['DB_CONNECTION'] = $request['db_connection'];
-            $envDBParams['DB_PORT'] = (int) $request['db_port'];
         }
 
         $data = file_get_contents(base_path('.env'));

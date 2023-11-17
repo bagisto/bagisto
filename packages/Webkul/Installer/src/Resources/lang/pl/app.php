@@ -285,6 +285,24 @@ return [
                         'whats-new'        => 'Co nowego',
                     ],
                 ],
+
+                'services-content' => [
+                    'name'  => 'Zawartość usług',
+
+                    'title' => [
+                        'free-shipping'     => 'Darmowa wysyłka',
+                        'product-replace'   => 'Zamiana produktu',
+                        'emi-available'     => 'EMI dostępne',
+                        'time-support'      => 'Wsparcie 24/7',
+                    ],
+
+                    'description' => [
+                        'free-shipping-info'     => 'Ciesz się darmową wysyłką na wszystkie zamówienia',
+                        'product-replace-info'   => 'Dostępna łatwa zamiana produktu!',
+                        'emi-available-info'     => 'EMI bez kosztów dostępne na wszystkich głównych kartach kredytowych',
+                        'time-support-info'      => 'Dedykowane wsparcie 24/7 za pośrednictwem czatu i e-maila',
+                    ],
+                ],
             ],
         ],
 

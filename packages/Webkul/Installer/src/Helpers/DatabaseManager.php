@@ -49,7 +49,7 @@ class DatabaseManager
     /**
      * Drop all the tables and migrate in the database
      *
-     * @return string
+     * @return void|string
      */
     public function migration()
     {
@@ -61,7 +61,6 @@ class DatabaseManager
             ], 500);
         }
 
-        return $this->seeder();
     }
 
     /**
@@ -69,10 +68,10 @@ class DatabaseManager
      *
      * @return void|string
      */
-    private function seeder()
+    public function seeder($data)
     {
         try {
-            app(BagistoDatabaseSeeder::class)->run();
+            app(BagistoDatabaseSeeder::class)->run($data['parameter']);
 
             $this->storageLink();
         } catch (Exception $e) {

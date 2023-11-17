@@ -39,6 +39,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                     'name'       => trans('installer::app.seeders.shop.theme-customizations.image-carousel.name', [], $defaultLocale),
                     'sort_order' => 1,
                     'status'     => 1,
+                    'channel_id' => 1,
                     'created_at' => $now,
                     'updated_at' => $now,
                 ], [
@@ -47,6 +48,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                     'name'       => trans('installer::app.seeders.shop.theme-customizations.offer-information.name', [], $defaultLocale),
                     'sort_order' => 2,
                     'status'     => 1,
+                    'channel_id' => 1,
                     'created_at' => $now,
                     'updated_at' => $now,
                 ], [
@@ -55,6 +57,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                     'name'       => trans('installer::app.seeders.shop.theme-customizations.categories-collections.name', [], $defaultLocale),
                     'sort_order' => 3,
                     'status'     => 1,
+                    'channel_id' => 1,
                     'created_at' => $now,
                     'updated_at' => $now,
                 ], [
@@ -63,6 +66,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                     'name'       => trans('installer::app.seeders.shop.theme-customizations.new-products.name', [], $defaultLocale),
                     'sort_order' => 4,
                     'status'     => 1,
+                    'channel_id' => 1,
                     'created_at' => $now,
                     'updated_at' => $now,
                 ], [
@@ -71,6 +75,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                     'name'       => trans('installer::app.seeders.shop.theme-customizations.top-collections.name', [], $defaultLocale),
                     'sort_order' => 5,
                     'status'     => 1,
+                    'channel_id' => 1,
                     'created_at' => $now,
                     'updated_at' => $now,
                 ], [
@@ -79,6 +84,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                     'name'       => trans('installer::app.seeders.shop.theme-customizations.bold-collections.name', [], $defaultLocale),
                     'sort_order' => 6,
                     'status'     => 1,
+                    'channel_id' => 1,
                     'created_at' => $now,
                     'updated_at' => $now,
                 ], [
@@ -87,6 +93,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                     'name'       => trans('installer::app.seeders.shop.theme-customizations.featured-collections.name', [], $defaultLocale),
                     'sort_order' => 7,
                     'status'     => 1,
+                    'channel_id' => 1,
                     'created_at' => $now,
                     'updated_at' => $now,
                 ], [
@@ -95,6 +102,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                     'name'       => trans('installer::app.seeders.shop.theme-customizations.game-container.name', [], $defaultLocale),
                     'sort_order' => 8,
                     'status'     => 1,
+                    'channel_id' => 1,
                     'created_at' => $now,
                     'updated_at' => $now,
                 ], [
@@ -103,6 +111,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                     'name'       => trans('installer::app.seeders.shop.theme-customizations.all-products.name', [], $defaultLocale),
                     'sort_order' => 9,
                     'status'     => 1,
+                    'channel_id' => 1,
                     'created_at' => $now,
                     'updated_at' => $now,
                 ], [
@@ -111,6 +120,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                     'name'       => trans('installer::app.seeders.shop.theme-customizations.bold-collections.name', [], $defaultLocale),
                     'sort_order' => 10,
                     'status'     => 1,
+                    'channel_id' => 1,
                     'created_at' => $now,
                     'updated_at' => $now,
                 ], [
@@ -119,6 +129,16 @@ class ThemeCustomizationTableSeeder extends Seeder
                     'name'       => trans('installer::app.seeders.shop.theme-customizations.footer-links.name', [], $defaultLocale),
                     'sort_order' => 11,
                     'status'     => 1,
+                    'channel_id' => 1,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ], [
+                    'id'         => 12,
+                    'type'       => 'services_content',
+                    'name'       => trans('installer::app.seeders.shop.theme-customizations.services-content.name', [], $defaultLocale),
+                    'sort_order' => 12,
+                    'status'     => 1,
+                    'channel_id' => 1,
                     'created_at' => $now,
                     'updated_at' => $now,
                 ],
@@ -290,6 +310,30 @@ class ThemeCustomizationTableSeeder extends Seeder
                                     'url'        => 'http://localhost/page/return-policy',
                                     'title'      => trans('installer::app.seeders.shop.theme-customizations.footer-links.options.return-policy', [], $locale),
                                     'sort_order' => 5,
+                                ],
+                            ],
+                        ]),
+                    ], [
+                        'theme_customization_id' => 12,
+                        'locale'                 => config('app.locale'),
+                        'options'                => json_encode([
+                            'services' => [
+                                [
+                                    'title'         => trans('installer::app.seeders.shop.theme-customizations.services-content.title.free-shipping', [], $locale),
+                                    'description'   => trans('installer::app.seeders.shop.theme-customizations.services-content.description.free-shipping-info', [], $locale),
+                                    'service_icon'  => 'icon-truck',
+                                ], [
+                                    'title'         => trans('installer::app.seeders.shop.theme-customizations.services-content.title.product-replace', [], $locale),
+                                    'description'   => trans('installer::app.seeders.shop.theme-customizations.services-content.description.product-replace-info', [], $locale),
+                                    'service_icon'  => 'icon-product',
+                                ], [
+                                    'title'         => trans('installer::app.seeders.shop.theme-customizations.services-content.title.emi-available', [], $locale),
+                                    'description'   => trans('installer::app.seeders.shop.theme-customizations.services-content.description.emi-available-info', [], $locale),
+                                    'service_icon'  => 'icon-dollar-sign',
+                                ], [
+                                    'title'         => trans('installer::app.seeders.shop.theme-customizations.services-content.title.time-support', [], $locale),
+                                    'description'   => trans('installer::app.seeders.shop.theme-customizations.services-content.description.time-support-info', [], $locale),
+                                    'service_icon'  => 'icon-support',
                                 ],
                             ],
                         ]),

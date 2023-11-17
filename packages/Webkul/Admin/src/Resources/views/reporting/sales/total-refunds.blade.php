@@ -44,7 +44,7 @@
                                 class="text-[16px] text-emerald-500"
                                 :class="[report.statistics.refunds.progress < 0 ?  'text-red-500' : 'text-emerald-500']"
                             >
-                                @{{ report.statistics.refunds.progress.toFixed(2) }}%
+                                @{{ Math.abs(report.statistics.refunds.progress.toFixed(2)) }}%
                             </p>
                         </div>
                     </div>

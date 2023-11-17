@@ -1,5 +1,5 @@
 <x-shop::layouts.account>
-    {{-- Page Title --}}
+    <!-- Page Title -->
     <x-slot:title>
         @lang('shop::app.customers.account.wishlist.page-title')
     </x-slot>

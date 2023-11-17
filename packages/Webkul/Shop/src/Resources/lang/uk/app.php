@@ -623,6 +623,7 @@ return [
             'suspended-account-message' => 'Ваш обліковий запис призупинено.',
             'select-hourly-duration'    => 'Виберіть тривалість слоту одну годину.',
             'success-remove'            => 'Товар успішно видалено з кошика.',
+            'paypal-payment-cancelled'  => 'Платіж Paypal скасовано.',
 
             'index' => [
                 'bagisto'                  => 'Багісто',

@@ -50,7 +50,7 @@ class ThemeController extends Controller
         $this->validate(request(), [
             'name'       => 'required',
             'sort_order' => 'required|numeric',
-            'type'       => 'in:product_carousel,category_carousel,static_content,image_carousel,footer_links',
+            'type'       => 'in:product_carousel,category_carousel,static_content,image_carousel,footer_links,services_content',
             'channel_id' => 'required|in:' . implode(',', (core()->getAllChannels()->pluck('id')->toArray())),
         ]);
 
@@ -102,7 +102,7 @@ class ThemeController extends Controller
 
         $data['status'] = request()->input('status') == 'on';
 
-        if ($data['type'] == 'image_carousel') {
+        if (in_array($data['type'], ['image_carousel', 'services_content'])) {
             unset($data['options']);
         }
 
@@ -110,7 +110,7 @@ class ThemeController extends Controller
 
         $theme = $this->themeCustomizationRepository->update($data, $id);
 
-        if ($data['type'] == 'image_carousel') {
+        if (in_array($data['type'], ['image_carousel', 'services_content'])) {
             $this->themeCustomizationRepository->uploadImage(
                 $data[$locale],
                 $theme,

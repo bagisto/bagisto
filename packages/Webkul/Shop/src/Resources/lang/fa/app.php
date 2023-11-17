@@ -623,6 +623,7 @@ return [
             'suspended-account-message' => 'حساب کاربری شما مسدود شده است.',
             'select-hourly-duration'    => 'یک مدت زمان ساعتی انتخاب کنید.',
             'success-remove'            => 'کالا با موفقیت از سبد خرید حذف شد.',
+            'paypal-payment-cancelled'  => 'پرداخت پی پال لغو شده است.',
 
             'index' => [
                 'bagisto'                  => 'بگیستو',

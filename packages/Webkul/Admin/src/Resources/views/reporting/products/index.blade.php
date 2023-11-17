@@ -49,6 +49,15 @@
             <!-- Products Wiht Most Visits Section -->
             @include('admin::reporting.products.most-visits')
         </div>
+
+        <!-- Last Search Terms and Top Search Terms Sections Container -->
+        <div class="flex justify-between gap-[15px] flex-1 [&>*]:flex-1 max-xl:flex-auto">
+            <!-- Last Search Terms Section -->
+            @include('admin::reporting.products.last-search-terms')
+
+            <!-- Top Search Terms Section -->
+            @include('admin::reporting.products.top-search-terms')
+        </div>
     </div>
 
     @pushOnce('scripts')
