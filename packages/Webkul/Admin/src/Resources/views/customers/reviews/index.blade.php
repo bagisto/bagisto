@@ -26,7 +26,7 @@
                 ref="review_data"
             >
                 @php 
-                    $hasPermission = bouncer()->hasPermission('customers.reviews.mass-update') || bouncer()->hasPermission('customers.reviews.mass-delete');
+                    $hasPermission = bouncer()->hasPermission('customers.reviews.edit') || bouncer()->hasPermission('customers.reviews.delete');
                 @endphp
 
                 <!-- Datagrid Header -->

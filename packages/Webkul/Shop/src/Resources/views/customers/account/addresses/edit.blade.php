@@ -1,11 +1,11 @@
 <x-shop::layouts.account>
-    {{-- Page Title --}}
+    <!-- Page Title -->
     <x-slot:title>
         @lang('shop::app.customers.account.addresses.edit')
         @lang('shop::app.customers.account.addresses.title') 
     </x-slot>
 
-    {{-- Breadcrumbs --}}
+    <!-- Breadcrumbs -->
     @section('breadcrumbs')
         <x-shop::breadcrumbs name="addresses.edit" :entity="$address"></x-shop::breadcrumbs>
     @endSection
@@ -17,7 +17,7 @@
 
     {!! view_render_event('bagisto.shop.customers.account.address.edit.before', ['address' => $address]) !!}
 
-    {{-- Edit Address Form --}}
+    <!-- Edit Address Form -->
     <x-shop::form
         method="PUT"
         :action="route('shop.customers.account.addresses.update',  $address->id)"
@@ -125,7 +125,7 @@
                 type="text"
                 name="address1[]"
                 :value="old('address1') ?? $address->address1"
-                rules="required"
+                rules="required|address"
                 :label="trans('shop::app.customers.account.addresses.street-address')"
                 :placeholder="trans('shop::app.customers.account.addresses.street-address')"
             >

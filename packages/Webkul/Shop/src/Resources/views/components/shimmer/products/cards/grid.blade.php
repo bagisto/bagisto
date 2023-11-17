@@ -10,7 +10,7 @@
             <p class="shimmer w-[75%] h-[24px]"></p>
             <p class="shimmer w-[55%] h-[24px]"></p>
 
-            {{-- Needs to implement that in future --}}
+            <!-- Needs to implement that in future -->
             <div class="hidden flex gap-4 mt-[12px]">
                 <span class="shimmer w-[30px] h-[30px] block rounded-full"></span>
                 <span class="shimmer w-[30px] h-[30px] block rounded-full"></span>

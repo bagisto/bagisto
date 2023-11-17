@@ -8,13 +8,21 @@ use Illuminate\Support\Str;
 
 class AdminsTableSeeder extends Seeder
 {
-    public function run()
+    /**
+     * Seed the application's database.
+     *
+     * @param  array  $parameters
+     * @return void
+     */
+    public function run($parameters = [])
     {
         DB::table('admins')->delete();
 
+        $defaultLocale = $parameters['default_locale'] ?? config('app.locale');
+
         DB::table('admins')->insert([
             'id'         => 1,
-            'name'       => trans('installer::app.seeders.user.users.name'),
+            'name'       => trans('installer::app.seeders.user.users.name', [], $defaultLocale),
             'email'      => 'admin@example.com',
             'password'   => bcrypt('admin123'),
             'api_token'  => Str::random(80),

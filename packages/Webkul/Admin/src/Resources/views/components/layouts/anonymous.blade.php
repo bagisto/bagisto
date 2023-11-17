@@ -54,12 +54,12 @@
     {!! view_render_event('bagisto.admin.layout.body.before') !!}
 
     <div id="app">
-        {{-- Flash Message Blade Component --}}
+        <!-- Flash Message Blade Component -->
         <x-admin::flash-group />
 
         {!! view_render_event('bagisto.admin.layout.content.before') !!}
 
-                {{-- Page Content Blade Component --}}
+                <!-- Page Content Blade Component -->
                 {{ $slot }}
 
         {!! view_render_event('bagisto.admin.layout.content.after') !!}

@@ -1,4 +1,4 @@
-{{-- SEO Meta Content --}}
+<!-- SEO Meta Content -->
 @push('meta')
     <meta name="title" content="{{ $page->meta_title }}" />
 
@@ -7,14 +7,14 @@
     <meta name="keywords" content="{{ $page->meta_keywords }}" />
 @endPush
 
-{{-- Page Layout --}}
+<!-- Page Layout -->
 <x-shop::layouts>
-    {{-- Page Title --}}
+    <!-- Page Title -->
     <x-slot:title>
         {{ $page->meta_title }}
     </x-slot>
 
-    {{-- Page Content --}}
+    <!-- Page Content -->
     <div class="container mt-[30px] px-[60px] max-lg:px-[30px]">
         {!! Blade::render($page->html_content) !!}
     </div>

@@ -4,309 +4,458 @@ return [
     'seeders' => [
         'attribute' => [
             'attribute-families' => [
-                'default' => 'Default',
+                'default' => 'පෙරනිමවේ',
             ],
 
             'attribute-groups' => [
-                'general'           => 'General',
-                'description'       => 'Description',
-                'meta-description'  => 'Meta Description',
-                'price'             => 'Price',
-                'shipping'          => 'Shipping',
-                'settings'          => 'Settings',
-                'inventories'       => 'Inventories',
+                'description'       => 'විස්තර',
+                'general'           => 'සාමානේඉ',
+                'inventories'       => 'වෘක්ත',
+                'meta-description'  => 'මැටා වෘක්ත',
+                'price'             => 'මිල',
+                'shipping'          => 'නාශීලන',
+                'settings'          => 'සැකසොක්ක',
             ],
 
             'attributes' => [
-                'sku'                  => 'SKU',
-                'name'                 => 'Name',
-                'url-key'              => 'URL Key',
-                'tax-category'         => 'Tax Category',
-                'new'                  => 'New',
-                'featured'             => 'Featured',
-                'visible-individually' => 'Visible Individually',
-                'status'               => 'Status',
-                'short-description'    => 'Short Description',
-                'description'          => 'Description',
-                'price'                => 'Price',
-                'cost'                 => 'Cost',
-                'special-price'        => 'Special Price',
-                'special-price-from'   => 'Special Price From',
-                'special-price-to'     => 'Special Price To',
-                'meta-title'           => 'Meta Title',
-                'meta-keywords'        => 'Meta Keywords',
-                'meta-description'     => 'Meta Description',
-                'length'               => 'Length',
-                'width'                => 'Width',
-                'height'               => 'Height',
-                'weight'               => 'Weight',
-                'color'                => 'Color',
-                'size'                 => 'Size',
-                'brand'                => 'Brand',
-                'guest-checkout'       => 'Guest Checkout',
-                'product-number'       => 'Product Number',
-                'manage-stock'         => 'Manage Stock',
+                'brand'                => 'සීනික',
+                'color'                => 'වර්ණ',
+                'cost'                 => 'පිරතූ',
+                'description'          => 'විස්තර',
+                'featured'             => 'විභඟය',
+                'guest-checkout'       => 'මෘදු වට්ටක්',
+                'height'               => 'උඹට',
+                'length'               => 'දුරක්කට',
+                'meta-title'           => 'මැටා මාළු',
+                'meta-keywords'        => 'මැටා මාළු වල',
+                'meta-description'     => 'මැටා වෘක්ත',
+                'manage-stock'         => 'වෘක්ත කළමනාක්ක',
+                'new'                  => 'නව',
+                'name'                 => 'නම',
+                'product-number'       => 'නිෂ්කල අංකය',
+                'price'                => 'මිල',
+                'sku'                  => 'SKU කේඑ',
+                'status'               => 'තත්ත්වක්',
+                'short-description'    => 'කොදු විස්තර',
+                'special-price'        => 'විාළු මිල',
+                'special-price-from'   => 'විාළු මිල සිට',
+                'special-price-to'     => 'විාළු මිල දක්වා',
+                'size'                 => 'ප්රමාණක්',
+                'tax-category'         => 'බද කටක්',
+                'url-key'              => 'URL යතුර',
+                'visible-individually' => 'ප්රභේදනවක්',
+                'width'                => 'පළල',
+                'weight'               => 'බර',
             ],
 
             'attribute-options' => [
-                'red'    => 'Red',
-                'green'  => 'Green',
-                'yellow' => 'Yellow',
-                'black'  => 'Black',
-                'white'  => 'White',
-                's'      => 'S',
-                'm'      => 'M',
+                'black'  => 'කළු',
+                'green'  => 'කොළ',
                 'l'      => 'L',
+                'm'      => 'M',
+                'red'    => 'රතු',
+                's'      => 'S',
+                'white'  => 'සුව',
                 'xl'     => 'XL',
+                'yellow' => 'කහු',
             ],
         ],
 
         'category' => [
             'categories' => [
-                'name'        => 'Root',
-                'description' => 'Root Category Description',
+                'description' => 'මූලාශ්ර විස්තර',
+                'name'        => 'මූලා',
             ],
         ],
 
         'cms' => [
             'pages' => [
                 'about-us' => [
-                    'title'   => 'About Us',
-                    'content' => 'About Us Page Content',
+                    'content' => 'අපි අපිටාළ විස්තර',
+                    'title'   => 'අපි',
                 ],
 
                 'refund-policy' => [
-                    'title'   => 'Refund Policy',
-                    'content' => 'Refund Policy Page Content',
+                    'content' => 'ණපොක් පොක්ක විස්තර',
+                    'title'   => 'ණපොක් පොක්ක',
                 ],
 
                 'return-policy' => [
-                    'title'   => 'Return Policy',
-                    'content' => 'Return Policy Page Content',
+                    'content' => 'පිාක්ක පොක්ක විස්තර',
+                    'title'   => 'පිාක්ක පොක්ක',
                 ],
 
                 'terms-conditions' => [
-                    'title'   => 'Terms & Conditions',
-                    'content' => 'Terms & Conditions Page Content',
+                    'content' => 'භොක්ක සහේ කොකේකොදත්',
+                    'title'   => 'භොක්ක සහේ කොකේකොදත්',
                 ],
 
                 'terms-of-use' => [
-                    'title'   => 'Terms of Use',
-                    'content' => 'Terms of Use Page Content',
+                    'content' => 'භොක්ක සහේ භොක්කේකොදත්',
+                    'title'   => 'භොක්ක සහේ භොක්කේකොදත්',
                 ],
 
                 'contact-us' => [
-                    'title'   => 'Contact Us',
-                    'content' => 'Contact Us Page Content',
+                    'content' => 'අපි සීමා විස්තර',
+                    'title'   => 'අපි',
                 ],
 
                 'customer-service' => [
-                    'title'   => 'Customer Service',
-                    'content' => 'Customer Service Page Content',
+                    'content' => 'පොක්කභොක්කභොක්ක විස්තර',
+                    'title'   => 'පොක්කභොක්කභොක්ක',
                 ],
 
                 'whats-new' => [
-                    'title'   => 'What\'s New',
-                    'content' => 'What\'s New page content',
+                    'content' => 'නොක්කොදත් පොක්කොදත්',
+                    'title'   => 'නොක්ක',
                 ],
 
                 'payment-policy' => [
-                    'title'   => 'Payment Policy',
-                    'content' => 'Payment Policy Page Content',
+                    'content' => 'ණපොක් පොක්ක විස්තර',
+                    'title'   => 'ණපොක් පොක්ක',
                 ],
 
                 'shipping-policy' => [
-                    'title'   => 'Shipping Policy',
-                    'content' => 'Shipping Policy Page Content',
+                    'content' => 'නාශීලන පොක්ක විස්තර',
+                    'title'   => 'නාශීලන පොක්ක',
                 ],
 
                 'privacy-policy' => [
-                    'title'   => 'Privacy Policy',
-                    'content' => 'Privacy Policy Page Content',
+                    'content' => 'පුරුෂනා පොක්කොදත්',
+                    'title'   => 'පුරුෂනා',
                 ],
             ],
         ],
 
         'core' => [
             'channels' => [
-                'name'             => 'Default',
-                'meta-title'       => 'Demo store',
-                'meta-keywords'    => 'Demo store meta keyword',
-                'meta-description' => 'Demo store meta description',
+                'meta-title'       => 'පෙරනිමවේ සෙදවොව',
+                'meta-keywords'    => 'පෙරනිමවේ සෙදවොව මෙටා මාලු',
+                'meta-description' => 'පෙරනිමවේ සෙදවොව මෙටා වෘක්ත',
+                'name'             => 'පෙරනිමවේ',
             ],
 
             'currencies' => [
-                'CNY' => 'Chinese Yuan',
-                'AED' => 'Dirham',
-                'EUR' => 'EURO',
-                'INR' => 'Indian Rupee',
-                'IRR' => 'Iranian Rial',
-                'ILS' => 'Israeli Shekel',
-                'JPY' => 'Japanese Yen',
-                'GBP' => 'Pound Sterling',
-                'RUB' => 'Russian Ruble',
-                'SAR' => 'Saudi Riyal',
-                'TRY' => 'Turkish Lira',
-                'USD' => 'US Dollar',
-                'UAH' => 'Ukrainian Hryvnia',
+                'CNY' => 'චීනීස් යුවන්',
+                'AED' => 'ඩිර්හඑම්',
+                'EUR' => 'යුරෝ',
+                'INR' => 'ඉන්දියාන රුපිය',
+                'IRR' => 'ඉරානියන් රියාල්',
+                'ILS' => 'ඉස්රායායෙකල්',
+                'JPY' => 'ජපනීස් යෙන්',
+                'GBP' => 'පවන්ඩ් ස්ටර්ලිං',
+                'RUB' => 'රුසියන් රූබල්',
+                'SAR' => 'සවෂවෙක් රියාල්',
+                'TRY' => 'ටර්කිෂ් ලීරා',
+                'USD' => 'එක්සරා ඩොලර්',
+                'UAH' => 'යුක්රෙයාන් හ්රිවීනියා',
             ],
 
             'locales' => [
-                'ar'    => 'Arabic',
-                'bn'    => 'Bengali',
-                'pt_BR' => 'Brazilian Portuguese',
-                'zh_CN' => 'Chinese',
-                'nl'    => 'Dutch',
-                'en'    => 'English',
-                'fr'    => 'French',
-                'de'    => 'German',
-                'he'    => 'Hebrew',
-                'hi_IN' => 'Hindi',
-                'it'    => 'Italian',
-                'ja'    => 'Japanese',
-                'fa'    => 'Persian',
-                'pl'    => 'Polish',
-                'ru'    => 'Russian',
-                'sin'   => 'Sinhala',
-                'es'    => 'Spanish',
-                'tr'    => 'Turkish',
-                'uk'    => 'Ukrainian',
+                'ar'    => 'අරාබි',
+                'bn'    => 'බෙංගාලි',
+                'de'    => 'ජර්මන්',
+                'es'    => 'ස්පෙය්බ්',
+                'en'    => 'ඉංග්රීස්',
+                'fr'    => 'ප්‍රංශ්',
+                'fa'    => 'පජිස්',
+                'he'    => 'හීබෲ',
+                'hi_IN' => 'හින්දි',
+                'it'    => 'ඉතලි',
+                'ja'    => 'ජපනීස්',
+                'nl'    => 'ලංදු',
+                'pl'    => 'පොලිෂ්',
+                'pt_BR' => 'බ්‍රසිලියන් පෙරෙසියන්',
+                'ru'    => 'රුසියන්',
+                'sin'   => 'සිංහල',
+                'tr'    => 'තුර්කි',
+                'uk'    => 'යුක්රේනියා',
+                'zh_CN' => 'චීන අච්චේම',
             ],
         ],
 
         'customer' => [
             'customer-groups' => [
-                'guest'     => 'Guest',
-                'general'   => 'General',
-                'wholesale' => 'Wholesale',
+                'guest'     => 'මාදී',
+                'general'   => 'පෙරනිමවේ',
+                'wholesale' => 'බිලිකාරෙකා',
             ],
         ],
 
         'inventory' => [
             'inventory-sources' => [
-                'name' => 'Default',
+                'name' => 'පෙරනිමවේ',
             ],
         ],
 
         'shop' => [
             'theme-customizations' => [
                 'image-carousel' => [
-                    'name'  => 'Image Carousel',
+                    'name'  => 'රූපය උත්තම් සෙදවොව',
 
                     'sliders' => [
-                        'title' => 'Get Ready For New Collection',
+                        'title' => 'නව සංරච්ඡාතය සදහා වෙරි වෙරොදක්',
                     ],
                 ],
 
                 'offer-information' => [
-                    'name' => 'Offer Information',
+                    'name' => 'පිලිකත් වොදත්',
 
                     'content' => [
-                        'title' => 'Get UPTO 40% OFF on your 1st order SHOP NOW',
+                        'title' => 'ඔබගේ 1 වොහුලේ මාරු කළඹාක් සහා කරනවො',
                     ],
                 ],
 
                 'categories-collections' => [
-                    'name' => 'Categories Collections',
+                    'name' => 'ප්රෘදාආභර',
+
                 ],
 
                 'new-products' => [
-                    'name' => 'New Products',
+                    'name' => 'නව නිෂ්කල',
 
                     'options' => [
-                        'title' => 'New Products',
+                        'title' => 'නව නිෂ්කල',
                     ],
                 ],
 
                 'top-collections' => [
-                    'name' => 'Top Collections',
+                    'name' => 'ඉහල ආභර',
 
                     'content' => [
-                        'title'       => 'The game with our new additions!',
-                        'sub-title-1' => 'Our Collections',
-                        'sub-title-2' => 'Our Collections',
-                        'sub-title-3' => 'Our Collections',
-                        'sub-title-4' => 'Our Collections',
-                        'sub-title-5' => 'Our Collections',
-                        'sub-title-6' => 'Our Collections',
+                        'sub-title-1' => 'අපේ ආභර',
+                        'sub-title-2' => 'අපේ ආභර',
+                        'sub-title-3' => 'අපේ ආභර',
+                        'sub-title-4' => 'අපේ ආභර',
+                        'sub-title-5' => 'අපේ ආභර',
+                        'sub-title-6' => 'අපේ ආභර',
+                        'title'       => 'අපේ නව එම්මොාසා සහා කරනවො',
                     ],
                 ],
 
                 'bold-collections' => [
-                    'name' => 'Bold Collections',
+                    'name' => 'විකාශකභාපකභාපක.',
 
                     'content' => [
-                        'title'       => 'Get Ready for our new Bold Collections!',
-                        'description' => 'Introducing Our New Bold Collections! Elevate your style with daring designs and vibrant statements. Explore striking patterns and bold colors that redefine your wardrobe. Get ready to embrace the extraordinary!',
-                        'btn-title'   => 'View All',
+                        'btn-title'   => 'සියලුම',
+                        'description' => 'අපේ නව තරුණු භාණයම එකට පහළ රචන්ඩ හා ආදාන ශතුර්අංග සහත්දන ආදානයන් සඳහා පරාස්වයක් අනුබැඳතුවනු. රුපුරේව වර්ණ රහුලක් සහ සුවද නැවත ඔබේ ඉඟිපයම නැවත රහුලා කිරීමට හොඳින් ආදානයක්.',
+                        'title'       => 'අපේ නව බෝල්ඩිටම සංයලුමට අයිකරනු ලැබේ!',
                     ],
                 ],
 
                 'featured-collections' => [
-                    'name' => 'Featured Collections',
+                    'name' => 'ප්‍රකාශ සංයලුම',
 
                     'options' => [
-                        'title' => 'Featured Products',
+                        'title' => 'ප්‍රකාශ නිළ භාණයන්',
                     ],
                 ],
 
                 'game-container' => [
-                    'name' => 'Game Container',
+                    'name' => 'ගේම් කොන්ටේනර්',
 
                     'content' => [
-                        'title'       => 'The game with our new additions!',
-                        'sub-title-1' => 'Our Collections',
-                        'sub-title-2' => 'Our Collections',
+                        'sub-title-1' => 'අපේ සංයලුම',
+                        'sub-title-2' => 'අපේ සංයලුම',
+                        'title'       => 'අපේ නව එකට මෙහෙම හේතුව!',
                     ],
                 ],
 
                 'all-products' => [
-                    'name' => 'All Products',
+                    'name' => 'සියලුම භාණයන්',
 
                     'options' => [
-                        'title' => 'All Products',
-                    ],
-                ],
-
-                'bold-collections' => [
-                    'name' => 'Bold Collections',
-
-                    'content' => [
-                        'title'       => 'Get Ready for our new Bold Collections!',
-                        'description' => 'Introducing Our New Bold Collections! Elevate your style with daring designs and vibrant statements. Explore striking patterns and bold colors that redefine your wardrobe. Get ready to embrace the extraordinary!',
-                        'btn-title'   => 'View All',
+                        'title' => 'සියලුම වෙළඳ සංයලුම',
                     ],
                 ],
 
                 'footer-links' => [
-                    'name' => 'Footer Links',
+                    'name' => 'පිටු සබැඳු',
 
                     'options' => [
-                        'about-us'         => 'About Us',
-                        'contact-us'       => 'Contact Us',
-                        'customer-service' => 'Customer Service',
-                        'whats-new'        => 'What\'s New',
-                        'terms-of-use'     => 'Terms of Use',
-                        'terms-conditions' => 'Terms & Conditions',
-                        'privacy-policy'   => 'Privacy Policy',
-                        'payment-policy'   => 'Payment Policy',
-                        'shipping-policy'  => 'Shipping Policy',
-                        'return-policy'    => 'Return Policy',
-                        'refund-policy'    => 'Refund Policy',
+                        'about-us'         => 'අප පිළිබදව',
+                        'contact-us'       => 'සමස්ත කරනවා',
+                        'customer-service' => 'ප්‍රකාශ සේවා',
+                        'privacy-policy'   => 'පෞද්ගලිකත්ව පෞද්ගලිකත්ව',
+                        'payment-policy'   => 'ගොණ පෞද්ගලිකත්ව',
+                        'return-policy'    => 'ආපසුම පෞද්ගලිකත්ව.',
+                        'refund-policy'    => 'හරිනායකින් පෞද්ගලිකත්ව.',
+                        'shipping-policy'  => 'පෞද්ගලිකත්වකයක්ෂපෙරක්ෂ',
+                        'terms-of-use'     => 'භාවිත භාවිත භාවිත',
+                        'terms-conditions' => 'භාවිත සෞවිත',
+                        'whats-new'        => 'අලුත් කුමුගුණපෙරක්ෂ',
+                    ],
+                ],
+
+                'services-content' => [
+                    'name'  => 'සේවාවෙන් අනුමත ප්‍රමාණය',
+
+                    'title' => [
+                        'free-shipping'     => 'නොමිලේ බෙදාහැරීම',
+                        'product-replace'   => 'නිෂ්පාදනය ප්‍රතිශතයක් මාරු කිරීම',
+                        'emi-available'     => 'EMI ලබා ගත හැකිය',
+                        'time-support'      => '24/7 සහාය',
+                    ],
+
+                    'description' => [
+                        'free-shipping-info'     => 'සියලුම ඇණවුම් මගින් නොමිලේ බෙදාහැරීම ලබා ගත හැකිය',
+                        'product-replace-info'   => 'ප්‍රතිශතයක් මාරු කිරීම සුරකින්නේ පහසුවෙන් ලබා ගත හැකිය!',
+                        'emi-available-info'     => 'මූලික ණය නොමැති EMI සහාය සිදු ලබා ගත හැකිය සියලුම ප්‍රමාණයේ ඉතිරි ක්‍රෙඩිට් කාඩ්පත් පමණි',
+                        'time-support-info'      => 'චැට් හා ඊමේල් මගින් ප්‍රමාණය සහාය ලබා ගත හැකි ප්‍රතිශතය 24/7',
                     ],
                 ],
             ],
         ],
 
-        'user' => [
-            'users' => [
-                'name' => 'Example',
+        'users' => [
+            'name' => 'උදාවර',
+        ],
+
+        'roles' => [
+            'description' => 'මෙම භාවිතයට සියල්ලන්ට ප්‍රවේශයට හෝ වෙනස් සහායකට සහාය ඇත',
+            'name'        => 'පරිකෛටවර',
+        ],
+    ],
+
+    'installer' => [
+        'index' => [
+            'server-requirements' => [
+                'calendar'    => 'දාර්තකය',
+                'ctype'       => 'ctype',
+                'curl'        => 'cURL',
+                'dom'         => 'DOM',
+                'fileinfo'    => 'ගොනු තොරතුරු',
+                'filter'      => 'පෙරභාවන',
+                'gd'          => 'GD',
+                'hash'        => 'ඉතුරු',
+                'intl'        => 'Intl',
+                'json'        => 'JSON',
+                'mbstring'    => 'mbstring',
+                'openssl'     => 'OpenSSL',
+                'php'         => 'PHP',
+                'php-version' => '8.1 හෝ ඉහළ',
+                'pcre'        => 'pcre',
+                'pdo'         => 'pdo',
+                'session'     => 'සැසුවේ',
+                'title'       => 'සේවාකාරී අැතශීරී',
+                'tokenizer'   => 'Tokenizer',
+                'xml'         => 'XML',
             ],
 
-            'roles' => [
-                'name'        => 'Administrator',
-                'description' => 'This role users will have all the access',
+            'environment-configuration' => [
+                'application-name'    => 'යෙදුමේ නම',
+                'arabic'              => 'අරාබි',
+                'bagisto'             => 'බැගිස්ටෝ',
+                'bengali'             => 'බෙංගාලි',
+                'chinese-yuan'        => 'චීන යුආන් (CNY)',
+                'chinese'             => 'චීන',
+                'dirham'              => 'ඩිරහාම් (AED)',
+                'default-url'         => 'ස්වභාවය URL',
+                'default-url-link'    => 'https://localhost',
+                'default-currency'    => 'ස්වභාවය වාන්වේ',
+                'default-timezone'    => 'ස්වභාවය කාල කථ',
+                'default-locale'      => 'ස්වභාවය පෙර දේශ',
+                'dutch'               => 'ලන්දේසි',
+                'database-connection' => 'දත්ත සමාපනය',
+                'database-hostname'   => 'දත්ත සරාංගය නම',
+                'database-port'       => 'දත්ත තැරණ',
+                'database-name'       => 'දත්ත නම',
+                'database-username'   => 'දත්ත පරිශීලක නම',
+                'database-prefix'     => 'දත්ත උපවේශ්කය',
+                'database-password'   => 'දත්ත මුරපදය',
+                'euro'                => 'යුරෝ (EUR)',
+                'english'             => 'ඉංග්රීසි',
+                'french'              => 'ප්‍රංශ',
+                'hebrew'              => 'රුවනි',
+                'hindi'               => 'හින්දි',
+                'iranian'             => 'ඉරාන රියාල් (IRR)',
+                'israeli'             => 'ඉස්රායාල් ශෙකල් (ILS)',
+                'italian'             => 'ඉතාලි',
+                'japanese-yen'        => 'ජපනීස් යෙන් (JPY)',
+                'japanese'            => 'ජපනීස්',
+                'mysql'               => 'Mysql',
+                'pgsql'               => 'pgSQL',
+                'pound'               => 'බ්‍රිටිස් වෙල්ටින (GBP)',
+                'persian'             => 'පදින',
+                'polish'              => 'පෝලිෂ්',
+                'portuguese'          => 'පෘතුගීස් (බ්‍රසීල්)',
+                'rupee'               => 'ඉන්දියාන රුපිය (INR)',
+                'russian-ruble'       => 'රුසියාන් රූබල් (RUB)',
+                'russian'             => 'රුසියාන්',
+                'sqlsrv'              => 'SQLSRV',
+                'saudi'               => 'සෞඩී රියාල් (SAR)',
+                'spanish'             => 'ස්පාන්',
+                'sinhala'             => 'සිංහල',
+                'title'               => 'පරාමිතාව විකාශනය',
+                'turkish-lira'        => 'තර්කිෂ් ලීර (TRY)',
+                'turkish'             => 'තර්කිෂ්',
+                'usd'                 => 'ඇමෙරිකානු ඩොලර් (USD)',
+                'ukrainian-hryvnia'   => 'යුක්රේනියාන් හ්‍රිව්නිය (UAH)',
+                'ukrainian'           => 'යුක්රේනියාන්',
             ],
+
+            'ready-for-installation' => [
+                'create-databsae-table'   => 'දත්ත වගකාගකක් තථා කරනවා',
+                'install'                 => 'ස්තුරාකුල',
+                'install-info'            => 'උත්සහාභාවයක් සඳහා Bagisto',
+                'install-info-button'     => 'පහත ඇතුලත් කිරීමට ක්රම කරන්න',
+                'populate-database-table' => 'දත්ත වගකාගකක් සිටුවනවා',
+                'start-installation'      => 'ස්තුරාකුල ආරම්භය',
+                'title'                   => 'ස්තුරාකුල සූදාංශයට',
+            ],
+
+            'installation-processing' => [
+                'bagisto'          => 'Bagisto ස්තුරාකුල',
+                'bagisto-info'     => 'දත්ත වගකාගකක් සාදනු ඇති වී, මෙමගේ කුම වේදයන්ද කතාමතා වේදිය',
+                'title'            => 'ස්තුරාකුල',
+            ],
+
+            'create-administrator' => [
+                'admin'            => 'පරිපාල',
+                'bagisto'          => 'Bagisto',
+                'confirm-password' => 'මහපදය තහවුරු කරන්න',
+                'email'            => 'E-mail',
+                'email-address'    => 'admin@example.com',
+                'password'         => 'මහපදය',
+                'title'            => 'පරිපාලකරු නිපුණ',
+            ],
+
+            'email-configuration' => [
+                'encryption'           => 'ගුවන්යාකරනය',
+                'enter-username'       => 'පරිශීලකන් ඇතුලත් කරන්න',
+                'enter-password'       => 'මහපදය ඇතුලත් කරන්න',
+                'outgoing-mail-server' => 'නිරෝන තැපැල් සේවාකරනය',
+                'outgoing-email'       => 'smpt.mailtrap.io',
+                'password'             => 'මහපදය',
+                'store-email'          => 'ගබන තැපැල් ලිපිනය',
+                'enter-store-email'    => 'ගබන තැපැල් ලිපිනය ඇතුලත් කරන්න',
+                'server-port'          => 'සේවාකරනය තැපැල්',
+                'server-port-code'     => '3306',
+                'title'                => 'තැපැල් සැකසුම',
+                'username'             => 'පරිශීලක නම',
+            ],
+
+            'installation-completed' => [
+                'admin-panel'                => 'පරිපාල පැනල්',
+                'bagisto-forums'             => 'Bagisto සංස්ථාගත',
+                'customer-panel'             => 'ප්‍රභාණ්ඩ පැනල්',
+                'explore-bagisto-extensions' => 'Bagisto ප්‍රභාණ ව්‍යාකරණ',
+                'title'                      => 'ස්තුරාකුල සම්තුදාව',
+                'title-info'                 => 'Bagisto ඔබගේ පද්ධතියට සහාභයාගීත.',
+            ],
+
+            'bagisto-logo'             => 'Bagisto ලෝගො',
+            'back'                     => 'ආපනය',
+            'bagisto-info'             => 'සමුදුසමින් ව්‍යාක්රණය',
+            'bagisto'                  => 'Bagisto',
+            'continue'                 => 'ඉදිරිපත්',
+            'installation-title'       => 'ස්තුරාකුල සහාභ',
+            'installation-info'        => 'අපට ඔබ මෙතා බලන්නේ සුමුදුසමින්!',
+            'installation-description' => 'Bagisto ස්තුරාකුල සහාභයට මෙතා දිගේ ස්තුරාකුල ප්‍රකාරයට වර්ගය වෙනවා:',
+            'skip'                     => 'අඩභාගනනක්',
+            'save-configuration'       => 'සැකසුම සුරක්ෂා',
+            'title'                    => 'Bagisto ස්තුරාකුල',
+            'webkul'                   => 'Webkul',
         ],
     ],
 ];

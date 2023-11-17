@@ -8,7 +8,13 @@ use Illuminate\Support\Facades\DB;
 
 class AttributeTableSeeder extends Seeder
 {
-    public function run()
+    /**
+     * Seed the application's database.
+     *
+     * @param  array  $parameters
+     * @return void
+     */
+    public function run($parameters = [])
     {
         DB::table('attributes')->delete();
 
@@ -16,11 +22,13 @@ class AttributeTableSeeder extends Seeder
 
         $now = Carbon::now();
 
+        $defaultLocale = $parameters['default_locale'] ?? config('app.locale');
+
         DB::table('attributes')->insert([
             [
                 'id'                  => 1,
                 'code'                => 'sku',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.sku'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.sku', [], $defaultLocale),
                 'type'                => 'text',
                 'validation'          => null,
                 'position'            => 1,
@@ -39,7 +47,7 @@ class AttributeTableSeeder extends Seeder
             ], [
                 'id'                  => 2,
                 'code'                => 'name',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.name'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.name', [], $defaultLocale),
                 'type'                => 'text',
                 'validation'          => null,
                 'position'            => 3,
@@ -58,7 +66,7 @@ class AttributeTableSeeder extends Seeder
             ], [
                 'id'                  => 3,
                 'code'                => 'url_key',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.url-key'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.url-key', [], $defaultLocale),
                 'type'                => 'text',
                 'validation'          => null,
                 'position'            => 4,
@@ -77,7 +85,7 @@ class AttributeTableSeeder extends Seeder
             ], [
                 'id'                  => 4,
                 'code'                => 'tax_category_id',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.tax-category'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.tax-category', [], $defaultLocale),
                 'type'                => 'select',
                 'validation'          => null,
                 'position'            => 5,
@@ -96,7 +104,7 @@ class AttributeTableSeeder extends Seeder
             ], [
                 'id'                  => 5,
                 'code'                => 'new',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.new'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.new', [], $defaultLocale),
                 'type'                => 'boolean',
                 'validation'          => null,
                 'position'            => 6,
@@ -115,7 +123,7 @@ class AttributeTableSeeder extends Seeder
             ], [
                 'id'                  => 6,
                 'code'                => 'featured',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.featured'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.featured', [], $defaultLocale),
                 'type'                => 'boolean',
                 'validation'          => null,
                 'position'            => 7,
@@ -134,7 +142,7 @@ class AttributeTableSeeder extends Seeder
             ], [
                 'id'                  => 7,
                 'code'                => 'visible_individually',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.visible-individually'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.visible-individually', [], $defaultLocale),
                 'type'                => 'boolean',
                 'validation'          => null,
                 'position'            => 9,
@@ -153,7 +161,7 @@ class AttributeTableSeeder extends Seeder
             ], [
                 'id'                  => 8,
                 'code'                => 'status',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.status'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.status', [], $defaultLocale),
                 'type'                => 'boolean',
                 'validation'          => null,
                 'position'            => 10,
@@ -172,7 +180,7 @@ class AttributeTableSeeder extends Seeder
             ], [
                 'id'                  => 9,
                 'code'                => 'short_description',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.short-description'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.short-description', [], $defaultLocale),
                 'type'                => 'textarea',
                 'validation'          => null,
                 'position'            => 11,
@@ -191,7 +199,7 @@ class AttributeTableSeeder extends Seeder
             ], [
                 'id'                  => 10,
                 'code'                => 'description',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.description'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.description', [], $defaultLocale),
                 'type'                => 'textarea',
                 'validation'          => null,
                 'position'            => 12,
@@ -210,7 +218,7 @@ class AttributeTableSeeder extends Seeder
             ], [
                 'id'                  => 11,
                 'code'                => 'price',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.price'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.price', [], $defaultLocale),
                 'type'                => 'price',
                 'validation'          => 'decimal',
                 'position'            => 13,
@@ -229,7 +237,7 @@ class AttributeTableSeeder extends Seeder
             ], [
                 'id'                  => 12,
                 'code'                => 'cost',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.cost'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.cost', [], $defaultLocale),
                 'type'                => 'price',
                 'validation'          => 'decimal',
                 'position'            => 14,
@@ -248,7 +256,7 @@ class AttributeTableSeeder extends Seeder
             ], [
                 'id'                  => 13,
                 'code'                => 'special_price',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.special-price'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.special-price', [], $defaultLocale),
                 'type'                => 'price',
                 'validation'          => 'decimal',
                 'position'            => 15,
@@ -267,7 +275,7 @@ class AttributeTableSeeder extends Seeder
             ], [
                 'id'                  => 14,
                 'code'                => 'special_price_from',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.special-price-from'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.special-price-from', [], $defaultLocale),
                 'type'                => 'date',
                 'validation'          => null,
                 'position'            => 16,
@@ -286,7 +294,7 @@ class AttributeTableSeeder extends Seeder
             ], [
                 'id'                  => 15,
                 'code'                => 'special_price_to',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.special-price-to'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.special-price-to', [], $defaultLocale),
                 'type'                => 'date',
                 'validation'          => null,
                 'position'            => 17,
@@ -305,7 +313,7 @@ class AttributeTableSeeder extends Seeder
             ], [
                 'id'                  => 16,
                 'code'                => 'meta_title',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.meta-title'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.meta-title', [], $defaultLocale),
                 'type'                => 'textarea',
                 'validation'          => null,
                 'position'            => 18,
@@ -324,7 +332,7 @@ class AttributeTableSeeder extends Seeder
             ], [
                 'id'                  => 17,
                 'code'                => 'meta_keywords',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.meta-keywords'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.meta-keywords', [], $defaultLocale),
                 'type'                => 'textarea',
                 'validation'          => null,
                 'position'            => 20,
@@ -343,7 +351,7 @@ class AttributeTableSeeder extends Seeder
             ], [
                 'id'                  => 18,
                 'code'                => 'meta_description',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.meta-description'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.meta-description', [], $defaultLocale),
                 'type'                => 'textarea',
                 'validation'          => null,
                 'position'            => 21,
@@ -362,7 +370,7 @@ class AttributeTableSeeder extends Seeder
             ], [
                 'id'                  => 19,
                 'code'                => 'length',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.length'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.length', [], $defaultLocale),
                 'type'                => 'text',
                 'validation'          => 'decimal',
                 'position'            => 22,
@@ -381,7 +389,7 @@ class AttributeTableSeeder extends Seeder
             ], [
                 'id'                  => 20,
                 'code'                => 'width',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.width'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.width', [], $defaultLocale),
                 'type'                => 'text',
                 'validation'          => 'decimal',
                 'position'            => 23,
@@ -400,7 +408,7 @@ class AttributeTableSeeder extends Seeder
             ], [
                 'id'                  => 21,
                 'code'                => 'height',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.height'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.height', [], $defaultLocale),
                 'type'                => 'text',
                 'validation'          => 'decimal',
                 'position'            => 24,
@@ -419,7 +427,7 @@ class AttributeTableSeeder extends Seeder
             ], [
                 'id'                  => 22,
                 'code'                => 'weight',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.weight'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.weight', [], $defaultLocale),
                 'type'                => 'text',
                 'validation'          => 'decimal',
                 'position'            => 25,
@@ -438,7 +446,7 @@ class AttributeTableSeeder extends Seeder
             ], [
                 'id'                  => 23,
                 'code'                => 'color',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.color'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.color', [], $defaultLocale),
                 'type'                => 'select',
                 'validation'          => null,
                 'position'            => 26,
@@ -457,7 +465,7 @@ class AttributeTableSeeder extends Seeder
             ], [
                 'id'                  => 24,
                 'code'                => 'size',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.size'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.size', [], $defaultLocale),
                 'type'                => 'select',
                 'validation'          => null,
                 'position'            => 27,
@@ -476,7 +484,7 @@ class AttributeTableSeeder extends Seeder
             ], [
                 'id'                  => 25,
                 'code'                => 'brand',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.brand'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.brand', [], $defaultLocale),
                 'type'                => 'select',
                 'validation'          => null,
                 'position'            => 28,
@@ -495,7 +503,7 @@ class AttributeTableSeeder extends Seeder
             ], [
                 'id'                  => 26,
                 'code'                => 'guest_checkout',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.guest-checkout'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.guest-checkout', [], $defaultLocale),
                 'type'                => 'boolean',
                 'validation'          => null,
                 'position'            => 8,
@@ -514,7 +522,7 @@ class AttributeTableSeeder extends Seeder
             ], [
                 'id'                  => 27,
                 'code'                => 'product_number',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.product-number'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.product-number', [], $defaultLocale),
                 'type'                => 'text',
                 'validation'          => null,
                 'position'            => 2,
@@ -533,7 +541,7 @@ class AttributeTableSeeder extends Seeder
             ], [
                 'id'                  => 28,
                 'code'                => 'manage_stock',
-                'admin_name'          => trans('installer::app.seeders.attribute.attributes.manage-stock'),
+                'admin_name'          => trans('installer::app.seeders.attribute.attributes.manage-stock', [], $defaultLocale),
                 'type'                => 'boolean',
                 'validation'          => null,
                 'position'            => 1,
@@ -552,143 +560,124 @@ class AttributeTableSeeder extends Seeder
             ],
         ]);
 
-        DB::table('attribute_translations')->insert([
-            [
-                'id'           => 1,
-                'locale'       => config('app.locale'),
-                'name'         => trans('installer::app.seeders.attribute.attributes.sku'),
-                'attribute_id' => 1,
-            ], [
-                'id'           => 2,
-                'locale'       => config('app.locale'),
-                'name'         => trans('installer::app.seeders.attribute.attributes.name'),
-                'attribute_id' => 2,
-            ], [
-                'id'           => 3,
-                'locale'       => config('app.locale'),
-                'name'         => trans('installer::app.seeders.attribute.attributes.url-key'),
-                'attribute_id' => 3,
-            ], [
-                'id'           => 4,
-                'locale'       => config('app.locale'),
-                'name'         => trans('installer::app.seeders.attribute.attributes.tax-category'),
-                'attribute_id' => 4,
-            ], [
-                'id'           => 5,
-                'locale'       => config('app.locale'),
-                'name'         => trans('installer::app.seeders.attribute.attributes.new'),
-                'attribute_id' => 5,
-            ], [
-                'id'           => 6,
-                'locale'       => config('app.locale'),
-                'name'         => trans('installer::app.seeders.attribute.attributes.featured'),
-                'attribute_id' => 6,
-            ], [
-                'id'           => 7,
-                'locale'       => config('app.locale'),
-                'name'         => trans('installer::app.seeders.attribute.attributes.visible-individually'),
-                'attribute_id' => 7,
-            ], [
-                'id'           => 8,
-                'locale'       => config('app.locale'),
-                'name'         => trans('installer::app.seeders.attribute.attributes.status'),
-                'attribute_id' => 8,
-            ], [
-                'id'           => 9,
-                'locale'       => config('app.locale'),
-                'name'         => trans('installer::app.seeders.attribute.attributes.short-description'),
-                'attribute_id' => 9,
-            ], [
-                'id'           => 10,
-                'locale'       => config('app.locale'),
-                'name'         => trans('installer::app.seeders.attribute.attributes.description'),
-                'attribute_id' => 10,
-            ], [
-                'id'           => 11,
-                'locale'       => config('app.locale'),
-                'name'         => trans('installer::app.seeders.attribute.attributes.price'),
-                'attribute_id' => 11,
-            ], [
-                'id'           => 12,
-                'locale'       => config('app.locale'),
-                'name'         => trans('installer::app.seeders.attribute.attributes.cost'),
-                'attribute_id' => 12,
-            ], [
-                'id'           => 13,
-                'locale'       => config('app.locale'),
-                'name'         => trans('installer::app.seeders.attribute.attributes.special-price'),
-                'attribute_id' => 13,
-            ], [
-                'id'           => 14,
-                'locale'       => config('app.locale'),
-                'name'         => trans('installer::app.seeders.attribute.attributes.special-price-from'),
-                'attribute_id' => 14,
-            ], [
-                'id'           => 15,
-                'locale'       => config('app.locale'),
-                'name'         => trans('installer::app.seeders.attribute.attributes.special-price-to'),
-                'attribute_id' => 15,
-            ], [
-                'id'           => 16,
-                'locale'       => config('app.locale'),
-                'name'         => trans('installer::app.seeders.attribute.attributes.meta-title'),
-                'attribute_id' => 16,
-            ], [
-                'id'           => 17,
-                'locale'       => config('app.locale'),
-                'name'         => trans('installer::app.seeders.attribute.attributes.meta-keywords'),
-                'attribute_id' => 17,
-            ], [
-                'id'           => 18,
-                'locale'       => config('app.locale'),
-                'name'         => trans('installer::app.seeders.attribute.attributes.meta-description'),
-                'attribute_id' => 18,
-            ], [
-                'id'           => 19,
-                'locale'       => config('app.locale'),
-                'name'         => trans('installer::app.seeders.attribute.attributes.width'),
-                'attribute_id' => 19,
-            ], [
-                'id'           => 20,
-                'locale'       => config('app.locale'),
-                'name'         => trans('installer::app.seeders.attribute.attributes.height'),
-                'attribute_id' => 20,
-            ], [
-                'id'           => 21,
-                'locale'       => config('app.locale'),
-                'name'         => trans('installer::app.seeders.attribute.attributes.depth'),
-                'attribute_id' => 21,
-            ], [
-                'id'           => 22,
-                'locale'       => config('app.locale'),
-                'name'         => trans('installer::app.seeders.attribute.attributes.weight'),
-                'attribute_id' => 22,
-            ], [
-                'id'           => 23,
-                'locale'       => config('app.locale'),
-                'name'         => trans('installer::app.seeders.attribute.attributes.color'),
-                'attribute_id' => 23,
-            ], [
-                'id'           => 24,
-                'locale'       => config('app.locale'),
-                'name'         => trans('installer::app.seeders.attribute.attributes.size'),
-                'attribute_id' => 24,
-            ], [
-                'id'           => 25,
-                'locale'       => config('app.locale'),
-                'name'         => trans('installer::app.seeders.attribute.attributes.brand'),
-                'attribute_id' => 25,
-            ], [
-                'id'           => 26,
-                'locale'       => config('app.locale'),
-                'name'         => trans('installer::app.seeders.attribute.attributes.guest-checkout'),
-                'attribute_id' => 26,
-            ], [
-                'id'           => 27,
-                'locale'       => config('app.locale'),
-                'name'         => trans('installer::app.seeders.attribute.attributes.product-number'),
-                'attribute_id' => 27,
-            ],
-        ]);
+        $locales = $parameters['allowed_locales'] ?? [$defaultLocale];
+
+        foreach ($locales as $locale) {
+            DB::table('attribute_translations')->insert([
+                [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.sku', [], $locale),
+                    'attribute_id' => 1,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.name', [], $locale),
+                    'attribute_id' => 2,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.url-key', [], $locale),
+                    'attribute_id' => 3,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.tax-category', [], $locale),
+                    'attribute_id' => 4,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.new', [], $locale),
+                    'attribute_id' => 5,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.featured', [], $locale),
+                    'attribute_id' => 6,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.visible-individually', [], $locale),
+                    'attribute_id' => 7,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.status', [], $locale),
+                    'attribute_id' => 8,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.short-description', [], $locale),
+                    'attribute_id' => 9,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.description', [], $locale),
+                    'attribute_id' => 10,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.price', [], $locale),
+                    'attribute_id' => 11,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.cost', [], $locale),
+                    'attribute_id' => 12,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.special-price', [], $locale),
+                    'attribute_id' => 13,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.special-price-from', [], $locale),
+                    'attribute_id' => 14,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.special-price-to', [], $locale),
+                    'attribute_id' => 15,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.meta-title', [], $locale),
+                    'attribute_id' => 16,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.meta-keywords', [], $locale),
+                    'attribute_id' => 17,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.meta-description', [], $locale),
+                    'attribute_id' => 18,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.length', [], $locale),
+                    'attribute_id' => 19,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.width', [], $locale),
+                    'attribute_id' => 20,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.height', [], $locale),
+                    'attribute_id' => 21,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.weight', [], $locale),
+                    'attribute_id' => 22,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.color', [], $locale),
+                    'attribute_id' => 23,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.size', [], $locale),
+                    'attribute_id' => 24,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.brand', [], $locale),
+                    'attribute_id' => 25,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.guest-checkout', [], $locale),
+                    'attribute_id' => 26,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.product-number', [], $locale),
+                    'attribute_id' => 27,
+                ], [
+                    'locale'       => $locale,
+                    'name'         => trans('installer::app.seeders.attribute.attributes.manage-stock', [], $locale),
+                    'attribute_id' => 28,
+                ],
+            ]);
+        }
     }
 }

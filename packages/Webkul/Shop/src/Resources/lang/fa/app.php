@@ -427,7 +427,7 @@ return [
 
         'products' => [
             'card' => [
-                'card.add-to-compare-success' => 'مورد با موفقیت به لیست مقایسه اضافه شد.',
+                'add-to-compare-success'      => 'مورد با موفقیت به لیست مقایسه اضافه شد.',
                 'already-in-compare'          => 'مورد از قبل به لیست مقایسه اضافه شده است.',
                 'add-to-cart'                 => 'افزودن به سبد خرید',
                 'add-to-wishlist'             => 'افزودن به لیست خرید',
@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => 'نتایج جستجو برای : :query',
+        'title'   => 'نتایج جستجو برای : :query',
+        'results' => 'نتایج جستجو',
 
         'images' => [
             'index' => [
@@ -622,6 +623,7 @@ return [
             'suspended-account-message' => 'حساب کاربری شما مسدود شده است.',
             'select-hourly-duration'    => 'یک مدت زمان ساعتی انتخاب کنید.',
             'success-remove'            => 'کالا با موفقیت از سبد خرید حذف شد.',
+            'paypal-payment-cancelled'  => 'پرداخت پی پال لغو شده است.',
 
             'index' => [
                 'bagisto'                  => 'بگیستو',

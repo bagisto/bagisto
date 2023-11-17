@@ -427,7 +427,7 @@ return [
 
         'products' => [
             'card' => [
-                'card.add-to-compare-success' => 'Item succesvol toegevoegd aan vergelijkingslijst.',
+                'add-to-compare-success'      => 'Item succesvol toegevoegd aan vergelijkingslijst.',
                 'already-in-compare'          => 'Item is al toegevoegd aan vergelijkingslijst.',
                 'add-to-cart'                 => 'Toevoegen aan winkelwagen',
                 'add-to-wishlist'             => 'Toevoegen aan verlanglijstje',
@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => 'Zoekresultaten voor : :query',
+        'title'   => 'Zoekresultaten voor : :query',
+        'results' => 'Zoekresultaten',
 
         'images' => [
             'index' => [
@@ -621,6 +622,7 @@ return [
             'suspended-account-message' => 'Uw account is opgeschort.',
             'select-hourly-duration'    => 'Selecteer een slotduur van één uur.',
             'success-remove'            => 'Item is succesvol verwijderd uit de winkelwagen.',
+            'paypal-payment-cancelled'  => 'PayPal-betaling is geannuleerd.',
 
             'index' => [
                 'bagisto'                  => 'Bagisto',

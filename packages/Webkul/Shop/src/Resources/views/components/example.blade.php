@@ -30,7 +30,7 @@
     <x-slot:body>Panel Body</x-slot:body>
 </x-panel>
 
-{{-- default product listing --}}
+<!-- default product listing -->
 <x-shop::products.carousel
     title="Men's Collections"
     :src="route('shop.api.products.index')"
@@ -38,7 +38,7 @@
 >
 </x-shop::products.carousel>
 
-{{-- category product listing --}}
+<!-- category product listing -->
 <x-shop::products.carousel
     title="Men's Collections"
     :src="route('shop.api.products.index', ['category_id' => 1])"
@@ -46,7 +46,7 @@
 >
 </x-shop::products.carousel>
 
-{{-- featured product listing --}}
+<!-- featured product listing -->
 <x-shop::products.carousel
     title="Men's Collections"
     :src="route('shop.api.products.index', ['featured' => 1])"
@@ -54,7 +54,7 @@
 >
 </x-shop::products.carousel>
 
-{{-- new product listing --}}
+<!-- new product listing -->
 <x-shop::products.carousel
     title="Men's Collections"
     :src="route('shop.api.products.index', ['new' => 1])"
@@ -62,7 +62,7 @@
 >
 </x-shop::products.carousel>
 
-{{-- basic/traditional form  --}}
+<!-- basic/traditional form  -->
 <x-shop::form action="">
     <x-shop::form.control-group>
         <x-shop::form.control-group.label>
@@ -86,7 +86,7 @@
     </x-shop::form.control-group>
 </x-shop::form>
 
-{{-- customized/ajax form --}}
+<!-- customized/ajax form -->
 <x-shop::form
     v-slot="{ meta, errors, handleSubmit }"
     as="div"
@@ -117,7 +117,7 @@
     </form>
 </x-shop::form>
 
-{{-- tabs --}}
+<!-- tabs -->
 <x-shop::tabs>
     <x-shop::tabs.item
         title="Tab 1"
@@ -132,7 +132,7 @@
     </x-shop::tabs.item>
 </x-shop::tabs>
 
-{{-- accordion --}}
+<!-- accordion -->
 <x-shop::accordion>
     <x-slot:header>
         Accordion Header
@@ -143,7 +143,7 @@
     </x-slot:content>
 </x-shop::accordion>
 
-{{-- modal --}}
+<!-- modal -->
 <x-shop::modal>
     <x-slot:toggle>
         Modal Toggle
@@ -158,7 +158,7 @@
     </x-slot:content>
 </x-shop::modal>
 
-{{-- drawer --}}
+<!-- drawer -->
 <x-shop::drawer>
     <x-slot:toggle>
         Drawer Toggle
@@ -173,7 +173,7 @@
     </x-slot:content>
 </x-shop::drawer>
 
-{{-- dropdown --}}
+<!-- dropdown -->
 <x-shop::dropdown>
     <x-slot:toggle>
         Toogle

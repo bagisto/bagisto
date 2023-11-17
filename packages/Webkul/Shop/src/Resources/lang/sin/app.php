@@ -427,7 +427,7 @@ return [
 
         'products' => [
             'card' => [
-                'card.add-to-compare-success' => 'අයිතමය සාමාජිකයකු සඳහා සාක්ෂි ලැබුයේ.',
+                'add-to-compare-success'      => 'අයිතමය සාමාජිකයකු සඳහා සාක්ෂි ලැබුයේ.',
                 'already-in-compare'          => 'අයිතමය සාක්ෂි ලැබුයේ.',
                 'add-to-cart'                 => 'කරත්තයට එක් කරන්න',
                 'add-to-wishlist'             => 'පෙරහුරු සාක්ෂි කිරීම',
@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => 'සෙවුම් සහිත ප්‍රතිඵල: :query',
+        'title'   => 'සෙවුම් සහිත ප්‍රතිඵල: :query',
+        'results' => 'සෙවුම් ප්‍රතිඵල',
 
         'images' => [
             'index' => [
@@ -622,6 +623,7 @@ return [
             'suspended-account-message' => 'ඔබගේ ගිණුම නැවත අක්‍රීය කර ඇත.',
             'select-hourly-duration'    => 'පිරවීමේ කාලය එකක් තෝරන්න.',
             'success-remove'            => 'අයිතමය සාර්ථකයි, සාර්ථකයි ඉවත් කරන ලදි.',
+            'paypal-payment-cancelled'  => 'Paypal ගෙවීම අවලංගු කර ඇත.',
 
             'index' => [
                 'bagisto'                  => 'බගිස්ටෝ',

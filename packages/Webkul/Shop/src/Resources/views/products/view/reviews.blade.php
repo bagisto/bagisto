@@ -9,7 +9,7 @@
 {!! view_render_event('bagisto.shop.products.view.reviews.after', ['product' => $product]) !!}
 
 @pushOnce('scripts')
-    {{-- Product Review Template --}}
+    <!-- Product Review Template -->
     <script type="text/x-template" id="v-product-review-template">
         <div class="container max-1180:px-[20px]">
             <!-- Create Review Form Container -->
@@ -247,7 +247,7 @@
         </div>
     </script>
 
-    {{-- Product Review Item Template --}}
+    <!-- Product Review Item Template -->
     <script type="text/x-template" id="v-product-review-item-template">
         <div class="flex gap-[20px] p-[25px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap max-xl:mb-[20px]">
             <div>

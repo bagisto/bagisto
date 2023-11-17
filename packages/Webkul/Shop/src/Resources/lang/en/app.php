@@ -427,7 +427,7 @@ return [
 
         'products' => [
             'card' => [
-                'card.add-to-compare-success' => 'Item added successfully to compare list.',
+                'add-to-compare-success'      => 'Item added successfully to compare list.',
                 'already-in-compare'          => 'Item is already added to compare list.',
                 'add-to-cart'                 => 'Add To Cart',
                 'add-to-wishlist'             => 'Add To Wishlist',
@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => 'Search results for : :query',
+        'title'   => 'Search results for : :query',
+        'results' => 'Search results',
 
         'images' => [
             'index' => [
@@ -622,6 +623,7 @@ return [
             'suspended-account-message' => 'Your account has been suspended.',
             'select-hourly-duration'    => 'Select a slot duration of one hour.',
             'success-remove'            => 'Item is successfully removed from the cart.',
+            'paypal-payment-cancelled'  => 'Paypal payment has been cancelled.',
 
             'index' => [
                 'bagisto'                  => 'Bagisto',

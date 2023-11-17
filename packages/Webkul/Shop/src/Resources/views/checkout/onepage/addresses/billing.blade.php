@@ -175,7 +175,7 @@
 
                 {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.before') !!}
 
-                {{-- Billing address form --}}
+                <!-- Billing address form -->
                 <x-shop::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
@@ -283,7 +283,7 @@
                             <x-shop::form.control-group.control
                                 type="text"
                                 name="billing[address1][]"
-                                rules="required"
+                                rules="required|address"
                                 :label="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
                                 :placeholder="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
                                 v-model="forms.billing.address.address1[0]"

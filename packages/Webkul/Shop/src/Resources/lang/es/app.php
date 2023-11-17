@@ -415,7 +415,7 @@ return [
 
         'products' => [
             'card' => [
-                'card.add-to-compare-success' => 'Elemento añadido correctamente a la lista de comparación.',
+                'add-to-compare-success'      => 'Elemento añadido correctamente a la lista de comparación.',
                 'already-in-compare'          => 'El elemento ya está agregado a la lista de comparación.',
                 'add-to-cart'                 => 'Agregar al carrito',
                 'add-to-wishlist'             => 'Agregar a la lista de deseos',
@@ -558,7 +558,8 @@ return [
     ],
 
     'search' => [
-        'title' => 'Suchergebnisse für: :query',
+        'title'   => 'Suchergebnisse für: :query',
+        'results' => 'Resultados de búsqueda',
 
         'images' => [
             'index' => [
@@ -610,6 +611,7 @@ return [
             'suspended-account-message' => 'Tu cuenta ha sido suspendida.',
             'select-hourly-duration'    => 'Selecciona una duración de una hora.',
             'success-remove'            => 'El artículo se ha eliminado correctamente del carrito.',
+            'paypal-payment-cancelled'  => 'El pago de Paypal ha sido cancelado.',
 
             'index' => [
                 'bagisto'                  => 'Bagisto',

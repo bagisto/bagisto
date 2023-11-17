@@ -427,7 +427,7 @@ return [
 
         'products' => [
             'card' => [
-                'card.add-to-compare-success' => 'आइटम सफलतापूर्वक तुलना सूची में जोड़ा गया।',
+                'add-to-compare-success'      => 'आइटम सफलतापूर्वक तुलना सूची में जोड़ा गया।',
                 'already-in-compare'          => 'आइटम पहले से ही तुलना सूची में जोड़ा गया है।',
                 'add-to-cart'                 => 'कार्ट में जोड़ें',
                 'add-to-wishlist'             => 'इच्छा सूची में जोड़ें',
@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => 'खोज परिणाम : :query',
+        'title'   => 'खोज परिणाम : :query',
+        'results' => 'खोज परिणाम',
 
         'images' => [
             'index' => [
@@ -622,6 +623,7 @@ return [
             'suspended-account-message' => 'आपका खाता निलंबित कर दिया गया है।',
             'select-hourly-duration'    => 'एक घंटे की अवधि का चयन करें।',
             'success-remove'            => 'आइटम को कार्ट से सफलतापूर्वक हटा दिया गया है।',
+            'paypal-payment-cancelled'  => 'पेपैल भुगतान रद्द कर दिया गया है.',
 
             'index' => [
                 'bagisto'                  => 'बागिस्तो',

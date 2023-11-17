@@ -32,7 +32,7 @@
                         <template v-for="(deletedSlider, index) in deletedSliders">
                             <input
                                 type="hidden"
-                                :name="'deleted_sliders['+ index +'][image]'"
+                                :name="'{{ $currentLocale->code }}[deleted_sliders]['+ index +'][image]'"
                                 :value="deletedSlider.image"
                             />
                         </template>

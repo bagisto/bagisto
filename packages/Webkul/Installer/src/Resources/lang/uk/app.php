@@ -4,295 +4,302 @@ return [
     'seeders' => [
         'attribute' => [
             'attribute-families' => [
-                'default' => 'Default',
+                'default' => 'За замовчуванням',
             ],
 
             'attribute-groups' => [
-                'general'           => 'General',
-                'description'       => 'Description',
-                'meta-description'  => 'Meta Description',
-                'price'             => 'Price',
-                'shipping'          => 'Shipping',
-                'settings'          => 'Settings',
-                'inventories'       => 'Inventories',
+                'description'       => 'Опис',
+                'general'           => 'Загальні',
+                'inventories'       => 'Запаси',
+                'meta-description'  => 'Мета-опис',
+                'price'             => 'Ціна',
+                'shipping'          => 'Доставка',
+                'settings'          => 'Налаштування',
             ],
 
             'attributes' => [
-                'sku'                  => 'SKU',
-                'name'                 => 'Name',
-                'url-key'              => 'URL Key',
-                'tax-category'         => 'Tax Category',
-                'new'                  => 'New',
-                'featured'             => 'Featured',
-                'visible-individually' => 'Visible Individually',
-                'status'               => 'Status',
-                'short-description'    => 'Short Description',
-                'description'          => 'Description',
-                'price'                => 'Price',
-                'cost'                 => 'Cost',
-                'special-price'        => 'Special Price',
-                'special-price-from'   => 'Special Price From',
-                'special-price-to'     => 'Special Price To',
-                'meta-title'           => 'Meta Title',
-                'meta-keywords'        => 'Meta Keywords',
-                'meta-description'     => 'Meta Description',
-                'length'               => 'Length',
-                'width'                => 'Width',
-                'height'               => 'Height',
-                'weight'               => 'Weight',
-                'color'                => 'Color',
-                'size'                 => 'Size',
-                'brand'                => 'Brand',
-                'guest-checkout'       => 'Guest Checkout',
-                'product-number'       => 'Product Number',
-                'manage-stock'         => 'Manage Stock',
+                'brand'                => 'Бренд',
+                'color'                => 'Колір',
+                'cost'                 => 'Вартість',
+                'description'          => 'Опис',
+                'featured'             => 'Рекомендовані',
+                'guest-checkout'       => 'Гостьова покупка',
+                'height'               => 'Висота',
+                'length'               => 'Довжина',
+                'meta-title'           => 'Мета-заголовок',
+                'meta-keywords'        => 'Мета-ключові слова',
+                'meta-description'     => 'Мета-опис',
+                'manage-stock'         => 'Управління запасами',
+                'new'                  => 'Новинка',
+                'name'                 => 'Назва',
+                'product-number'       => 'Номер продукту',
+                'price'                => 'Ціна',
+                'sku'                  => 'Артикул',
+                'status'               => 'Статус',
+                'short-description'    => 'Короткий опис',
+                'special-price'        => 'Спеціальна ціна',
+                'special-price-from'   => 'Спеціальна ціна від',
+                'special-price-to'     => 'Спеціальна ціна до',
+                'size'                 => 'Розмір',
+                'tax-category'         => 'Категорія податків',
+                'url-key'              => 'URL-ключ',
+                'visible-individually' => 'Видимий окремо',
+                'width'                => 'Ширина',
+                'weight'               => 'Вага',
             ],
 
             'attribute-options' => [
-                'red'    => 'Red',
-                'green'  => 'Green',
-                'yellow' => 'Yellow',
-                'black'  => 'Black',
-                'white'  => 'White',
-                's'      => 'S',
-                'm'      => 'M',
+                'black'  => 'Чорний',
+                'green'  => 'Зелений',
                 'l'      => 'L',
+                'm'      => 'M',
+                'red'    => 'Червоний',
+                's'      => 'S',
+                'white'  => 'Білий',
                 'xl'     => 'XL',
+                'yellow' => 'Жовтий',
             ],
         ],
 
         'category' => [
             'categories' => [
-                'name'        => 'Root',
-                'description' => 'Root Category Description',
+                'description' => 'Опис кореневої категорії',
+                'name'        => 'Коренева',
             ],
         ],
 
         'cms' => [
             'pages' => [
                 'about-us' => [
-                    'title'   => 'About Us',
-                    'content' => 'About Us Page Content',
+                    'content' => 'Зміст сторінки Про нас',
+                    'title'   => 'Про нас',
                 ],
 
                 'refund-policy' => [
-                    'title'   => 'Refund Policy',
-                    'content' => 'Refund Policy Page Content',
+                    'content' => 'Зміст сторінки Політики повернення',
+                    'title'   => 'Політика повернення',
                 ],
 
                 'return-policy' => [
-                    'title'   => 'Return Policy',
-                    'content' => 'Return Policy Page Content',
+                    'content' => 'Зміст сторінки Політики повернення',
+                    'title'   => 'Політика повернення',
                 ],
 
                 'terms-conditions' => [
-                    'title'   => 'Terms & Conditions',
-                    'content' => 'Terms & Conditions Page Content',
+                    'content' => 'Зміст сторінки Умови та положення',
+                    'title'   => 'Умови та положення',
                 ],
 
                 'terms-of-use' => [
-                    'title'   => 'Terms of Use',
-                    'content' => 'Terms of Use Page Content',
+                    'content' => 'Зміст сторінки Умови використання',
+                    'title'   => 'Умови використання',
                 ],
 
                 'contact-us' => [
-                    'title'   => 'Contact Us',
-                    'content' => 'Contact Us Page Content',
+                    'content' => 'Зміст сторінки Зв\'яжіться з нами',
+                    'title'   => 'Зв\'яжіться з нами',
                 ],
 
                 'customer-service' => [
-                    'title'   => 'Customer Service',
-                    'content' => 'Customer Service Page Content',
+                    'content' => 'Зміст сторінки Обслуговування клієнтів',
+                    'title'   => 'Обслуговування клієнтів',
                 ],
 
                 'whats-new' => [
-                    'title'   => 'What\'s New',
-                    'content' => 'What\'s New page content',
+                    'content' => 'Зміст сторінки Що нового',
+                    'title'   => 'Що нового',
                 ],
 
                 'payment-policy' => [
-                    'title'   => 'Payment Policy',
-                    'content' => 'Payment Policy Page Content',
+                    'content' => 'Зміст сторінки Політика оплати',
+                    'title'   => 'Політика оплати',
                 ],
 
                 'shipping-policy' => [
-                    'title'   => 'Shipping Policy',
-                    'content' => 'Shipping Policy Page Content',
+                    'content' => 'Зміст сторінки Політика доставки',
+                    'title'   => 'Політика доставки',
                 ],
 
                 'privacy-policy' => [
-                    'title'   => 'Privacy Policy',
-                    'content' => 'Privacy Policy Page Content',
+                    'content' => 'Зміст сторінки Політика конфіденційності',
+                    'title'   => 'Політика конфіденційності',
                 ],
             ],
         ],
 
         'core' => [
             'channels' => [
-                'name'             => 'Default',
-                'meta-title'       => 'Demo store',
-                'meta-keywords'    => 'Demo store meta keyword',
-                'meta-description' => 'Demo store meta description',
+                'meta-title'       => 'Демонстраційний магазин',
+                'meta-keywords'    => 'Мета-ключові слова демонстраційного магазину',
+                'meta-description' => 'Мета-опис демонстраційного магазину',
+                'name'             => 'За замовчуванням',
             ],
 
             'currencies' => [
-                'CNY' => 'Chinese Yuan',
-                'AED' => 'Dirham',
-                'EUR' => 'EURO',
-                'INR' => 'Indian Rupee',
-                'IRR' => 'Iranian Rial',
-                'ILS' => 'Israeli Shekel',
-                'JPY' => 'Japanese Yen',
-                'GBP' => 'Pound Sterling',
-                'RUB' => 'Russian Ruble',
-                'SAR' => 'Saudi Riyal',
-                'TRY' => 'Turkish Lira',
-                'USD' => 'US Dollar',
-                'UAH' => 'Ukrainian Hryvnia',
+                'CNY' => 'Китайський юань',
+                'AED' => 'Дирхам',
+                'EUR' => 'Євро',
+                'INR' => 'Індійська рупія',
+                'IRR' => 'Іранський ріал',
+                'ILS' => 'Ізраїльський шекель',
+                'JPY' => 'Японська єна',
+                'GBP' => 'Фунт стерлінгів',
+                'RUB' => 'Російський рубль',
+                'SAR' => 'Саудівський ріял',
+                'TRY' => 'Турецька ліра',
+                'USD' => 'Долар США',
+                'UAH' => 'Українська гривня',
             ],
 
             'locales' => [
-                'ar'    => 'Arabic',
-                'bn'    => 'Bengali',
-                'pt_BR' => 'Brazilian Portuguese',
-                'zh_CN' => 'Chinese',
-                'nl'    => 'Dutch',
-                'en'    => 'English',
-                'fr'    => 'French',
-                'de'    => 'German',
-                'he'    => 'Hebrew',
-                'hi_IN' => 'Hindi',
-                'it'    => 'Italian',
-                'ja'    => 'Japanese',
-                'fa'    => 'Persian',
-                'pl'    => 'Polish',
-                'ru'    => 'Russian',
-                'sin'   => 'Sinhala',
-                'es'    => 'Spanish',
-                'tr'    => 'Turkish',
-                'uk'    => 'Ukrainian',
+                'ar'    => 'Арабська',
+                'bn'    => 'Бенгальська',
+                'de'    => 'Німецька',
+                'es'    => 'Іспанська',
+                'en'    => 'Англійська',
+                'fr'    => 'Французька',
+                'fa'    => 'Перська',
+                'he'    => 'Іврит',
+                'hi_IN' => 'Гінді',
+                'it'    => 'Італійська',
+                'ja'    => 'Японська',
+                'nl'    => 'Нідерландська',
+                'pl'    => 'Польська',
+                'pt_BR' => 'Бразильська португальська',
+                'ru'    => 'Російська',
+                'sin'   => 'Сінгальська',
+                'tr'    => 'Турецька',
+                'uk'    => 'Українська',
+                'zh_CN' => 'Китайська (спрощена)',
             ],
         ],
 
         'customer' => [
             'customer-groups' => [
-                'guest'     => 'Guest',
-                'general'   => 'General',
-                'wholesale' => 'Wholesale',
+                'guest'     => 'Гість',
+                'general'   => 'Загальний',
+                'wholesale' => 'Оптовий',
             ],
         ],
 
         'inventory' => [
             'inventory-sources' => [
-                'name' => 'Default',
+                'name' => 'За замовчуванням',
             ],
         ],
-
         'shop' => [
             'theme-customizations' => [
                 'image-carousel' => [
-                    'name'  => 'Image Carousel',
+                    'name'  => 'Карусель зображень',
 
                     'sliders' => [
-                        'title' => 'Get Ready For New Collection',
+                        'title' => 'Готуйтеся до нової колекції',
                     ],
                 ],
 
                 'offer-information' => [
-                    'name' => 'Offer Information',
+                    'name' => 'Інформація про пропозицію',
 
                     'content' => [
-                        'title' => 'Get UPTO 40% OFF on your 1st order SHOP NOW',
+                        'title' => 'ЗНИЖКА до 40% на ваше 1-ше замовлення ЗАРАЗ',
                     ],
                 ],
 
                 'categories-collections' => [
-                    'name' => 'Categories Collections',
+                    'name' => 'Колекції за категоріями',
                 ],
 
                 'new-products' => [
-                    'name' => 'New Products',
+                    'name' => 'Нові продукти',
 
                     'options' => [
-                        'title' => 'New Products',
+                        'title' => 'Нові продукти',
                     ],
                 ],
 
                 'top-collections' => [
-                    'name' => 'Top Collections',
+                    'name' => 'Топові колекції',
 
                     'content' => [
-                        'title'       => 'The game with our new additions!',
-                        'sub-title-1' => 'Our Collections',
-                        'sub-title-2' => 'Our Collections',
-                        'sub-title-3' => 'Our Collections',
-                        'sub-title-4' => 'Our Collections',
-                        'sub-title-5' => 'Our Collections',
-                        'sub-title-6' => 'Our Collections',
+                        'sub-title-1' => 'Наші колекції',
+                        'sub-title-2' => 'Наші колекції',
+                        'sub-title-3' => 'Наші колекції',
+                        'sub-title-4' => 'Наші колекції',
+                        'sub-title-5' => 'Наші колекції',
+                        'sub-title-6' => 'Наші колекції',
+                        'title'       => 'Гра з нашими новими додатками!',
                     ],
                 ],
 
                 'bold-collections' => [
-                    'name' => 'Bold Collections',
+                    'name' => 'Сміливі колекції',
 
                     'content' => [
-                        'title'       => 'Get Ready for our new Bold Collections!',
-                        'description' => 'Introducing Our New Bold Collections! Elevate your style with daring designs and vibrant statements. Explore striking patterns and bold colors that redefine your wardrobe. Get ready to embrace the extraordinary!',
-                        'btn-title'   => 'View All',
+                        'btn-title'   => 'Переглянути все',
+                        'description' => 'Представляємо наші нові сміливі колекції! Підніміть свій стиль завдяки сміливим дизайнам та яскравим заявам. Відкрийте для себе вишукані малюнки та смілі кольори, які переосмислюють ваш гардероб. Готуйтеся прийняти надзвичайне!',
+                        'title'       => 'Готуйтеся до наших нових сміливих колекцій!',
                     ],
                 ],
 
                 'featured-collections' => [
-                    'name' => 'Featured Collections',
+                    'name' => 'Виділені колекції',
 
                     'options' => [
-                        'title' => 'Featured Products',
+                        'title' => 'Рекомендовані продукти',
                     ],
                 ],
 
                 'game-container' => [
-                    'name' => 'Game Container',
+                    'name' => 'Контейнер з грою',
 
                     'content' => [
-                        'title'       => 'The game with our new additions!',
-                        'sub-title-1' => 'Our Collections',
-                        'sub-title-2' => 'Our Collections',
+                        'sub-title-1' => 'Наші колекції',
+                        'sub-title-2' => 'Наші колекції',
+                        'title'       => 'Гра з нашими новими додатками!',
                     ],
                 ],
 
                 'all-products' => [
-                    'name' => 'All Products',
+                    'name' => 'Усі продукти',
 
                     'options' => [
-                        'title' => 'All Products',
-                    ],
-                ],
-
-                'bold-collections' => [
-                    'name' => 'Bold Collections',
-
-                    'content' => [
-                        'title'       => 'Get Ready for our new Bold Collections!',
-                        'description' => 'Introducing Our New Bold Collections! Elevate your style with daring designs and vibrant statements. Explore striking patterns and bold colors that redefine your wardrobe. Get ready to embrace the extraordinary!',
-                        'btn-title'   => 'View All',
+                        'title' => 'Усі продукти',
                     ],
                 ],
 
                 'footer-links' => [
-                    'name' => 'Footer Links',
+                    'name' => 'Посилання у нижньому колонтитулі',
 
                     'options' => [
-                        'about-us'         => 'About Us',
-                        'contact-us'       => 'Contact Us',
-                        'customer-service' => 'Customer Service',
-                        'whats-new'        => 'What\'s New',
-                        'terms-of-use'     => 'Terms of Use',
-                        'terms-conditions' => 'Terms & Conditions',
-                        'privacy-policy'   => 'Privacy Policy',
-                        'payment-policy'   => 'Payment Policy',
-                        'shipping-policy'  => 'Shipping Policy',
-                        'return-policy'    => 'Return Policy',
-                        'refund-policy'    => 'Refund Policy',
+                        'about-us'         => 'Про нас',
+                        'contact-us'       => 'Зв\'яжіться з нами',
+                        'customer-service' => 'Служба підтримки',
+                        'privacy-policy'   => 'Політика конфіденційності',
+                        'payment-policy'   => 'Політика оплати',
+                        'return-policy'    => 'Політика повернення',
+                        'refund-policy'    => 'Політика повернення коштів',
+                        'shipping-policy'  => 'Політика доставки',
+                        'terms-of-use'     => 'Умови використання',
+                        'terms-conditions' => 'Умови та положення',
+                        'whats-new'        => 'Що нового',
+                    ],
+                ],
+
+                'services-content' => [
+                    'name'  => 'Вміст послуг',
+
+                    'title' => [
+                        'free-shipping'     => 'Безкоштовна доставка',
+                        'product-replace'   => 'Заміна продукту',
+                        'emi-available'     => 'EMI доступно',
+                        'time-support'      => 'Підтримка 24/7',
+                    ],
+
+                    'description' => [
+                        'free-shipping-info'     => 'Насолоджуйтеся безкоштовною доставкою на всі замовлення',
+                        'product-replace-info'   => 'Доступна легка заміна продукту!',
+                        'emi-available-info'     => 'EMI безкоштовно доступно на всіх основних кредитних картках',
+                        'time-support-info'      => 'Присвячена підтримка 24/7 через чат та електронну пошту',
                     ],
                 ],
             ],
@@ -300,13 +307,155 @@ return [
 
         'user' => [
             'users' => [
-                'name' => 'Example',
+                'name' => 'Приклад',
             ],
 
             'roles' => [
-                'name'        => 'Administrator',
-                'description' => 'This role users will have all the access',
+                'description' => 'Ця роль надає користувачам всі права доступу',
+                'name'        => 'Адміністратор',
             ],
+        ],
+    ],
+
+    'installer' => [
+        'index' => [
+            'server-requirements' => [
+                'calendar'    => 'Календар',
+                'ctype'       => 'cType',
+                'curl'        => 'cURL',
+                'dom'         => 'dom',
+                'fileinfo'    => 'fileInfo',
+                'filter'      => 'Фільтр',
+                'gd'          => 'GD',
+                'hash'        => 'Хеш',
+                'intl'        => 'intl',
+                'json'        => 'JSON',
+                'mbstring'    => 'mbstring',
+                'openssl'     => 'openssl',
+                'php'         => 'PHP',
+                'php-version' => '8.1 або вище',
+                'pcre'        => 'pcre',
+                'pdo'         => 'pdo',
+                'session'     => 'сесія',
+                'title'       => 'Вимоги до сервера',
+                'tokenizer'   => 'токенізатор',
+                'xml'         => 'XML',
+            ],
+
+            'environment-configuration' => [
+                'application-name'    => 'Назва додатка',
+                'arabic'              => 'Арабська',
+                'bagisto'             => 'Bagisto',
+                'bengali'             => 'Бенгальська',
+                'chinese-yuan'        => 'Китайський юань (CNY)',
+                'chinese'             => 'Китайська',
+                'dirham'              => 'Дірхам (AED)',
+                'default-url'         => 'За замовчуванням URL',
+                'default-url-link'    => 'https://localhost',
+                'default-currency'    => 'Валюта за замовчуванням',
+                'default-timezone'    => 'Часовий пояс за замовчуванням',
+                'default-locale'      => 'Локаль за замовчуванням',
+                'dutch'               => 'Голландська',
+                'database-connection' => 'Підключення до бази даних',
+                'database-hostname'   => 'Назва хоста бази даних',
+                'database-port'       => 'Порт бази даних',
+                'database-name'       => 'Назва бази даних',
+                'database-username'   => 'Ім\'я користувача бази даних',
+                'database-prefix'     => 'Префікс бази даних',
+                'database-password'   => 'Пароль бази даних',
+                'euro'                => 'Євро (EUR)',
+                'english'             => 'Англійська',
+                'french'              => 'Французька',
+                'hebrew'              => 'Іврит',
+                'hindi'               => 'Гінді',
+                'iranian'             => 'Іранський ріал (IRR)',
+                'israeli'             => 'Ізраїльський шекель (ILS)',
+                'italian'             => 'Італійська',
+                'japanese-yen'        => 'Японська єна (JPY)',
+                'japanese'            => 'Японська',
+                'mysql'               => 'Mysql',
+                'pgsql'               => 'pgSQL',
+                'pound'               => 'Фунт стерлінгів (GBP)',
+                'persian'             => 'Перська',
+                'polish'              => 'Польська',
+                'portuguese'          => 'Португальська (Бразильська)',
+                'rupee'               => 'Індійська рупія (INR)',
+                'russian-ruble'       => 'Російський рубль (RUB)',
+                'russian'             => 'Російська',
+                'sqlsrv'              => 'SQLSRV',
+                'saudi'               => 'Саудівський ріял (SAR)',
+                'spanish'             => 'Іспанська',
+                'sinhala'             => 'Сингальська',
+                'title'               => 'Конфігурація середовища',
+                'turkish-lira'        => 'Турецька ліра (TRY)',
+                'turkish'             => 'Турецька',
+                'usd'                 => 'Долар США (USD)',
+                'ukrainian-hryvnia'   => 'Українська гривня (UAH)',
+                'ukrainian'           => 'Українська',
+            ],
+
+            'ready-for-installation' => [
+                'create-database-table'   => 'Створити таблицю бази даних',
+                'install'                 => 'Установка',
+                'install-info'            => 'Bagisto для установки',
+                'install-info-button'     => 'Клацніть кнопку нижче, щоб',
+                'populate-database-table' => 'Заповнити таблиці бази даних',
+                'start-installation'      => 'Почати установку',
+                'title'                   => 'Готовий до установки',
+            ],
+
+            'installation-processing' => [
+                'bagisto'          => 'Установка Bagisto',
+                'bagisto-info'     => 'Створення таблиць бази даних, це може зайняти кілька хвилин',
+                'title'            => 'Установка',
+            ],
+
+            'create-administrator' => [
+                'admin'            => 'Адміністратор',
+                'bagisto'          => 'Bagisto',
+                'confirm-password' => 'Підтвердіть пароль',
+                'email'            => 'Електронна пошта',
+                'email-address'    => 'admin@example.com',
+                'password'         => 'Пароль',
+                'title'            => 'Створити адміністратора',
+            ],
+
+            'email-configuration' => [
+                'encryption'           => 'Шифрування',
+                'enter-username'       => 'Введіть ім\'я користувача',
+                'enter-password'       => 'Введіть пароль',
+                'outgoing-mail-server' => 'Вихідний поштовий сервер',
+                'outgoing-email'       => 'smpt.mailtrap.io',
+                'password'             => 'Пароль',
+                'store-email'          => 'Адреса електронної пошти магазину',
+                'enter-store-email'    => 'Введіть адресу електронної пошти магазину',
+                'server-port'          => 'Порт сервера',
+                'server-port-code'     => '3306',
+                'title'                => 'Налаштування електронної пошти',
+                'username'             => 'Ім\'я користувача',
+            ],
+
+            'installation-completed' => [
+                'admin-panel'                => 'Панель адміністратора',
+                'bagisto-forums'             => 'Форум Bagisto',
+                'customer-panel'             => 'Панель клієнта',
+                'explore-bagisto-extensions' => 'Досліджуйте розширення Bagisto',
+                'title'                      => 'Установка завершена',
+                'title-info'                 => 'Bagisto успішно встановлено на вашій системі.',
+            ],
+
+            'bagisto-logo'             => 'Логотип Bagisto',
+            'back'                     => 'Назад',
+            'bagisto-info'             => 'Проект спільноти',
+            'bagisto'                  => 'Bagisto',
+            'continue'                 => 'Продовжити',
+            'installation-title'       => 'Ласкаво просимо до установки',
+            'installation-info'        => 'Ми раді бачити вас тут!',
+            'installation-description' => 'Зазвичай установка Bagisto включає кілька кроків. Ось загальний опис процесу установки Bagisto:',
+            'skip'                     => 'Пропустити',
+            'save-configuration'       => 'Зберегти конфігурацію',
+            'title'                    => 'Установник Bagisto',
+            'webkul'                   => 'Webkul',
         ],
     ],
 ];

@@ -427,7 +427,7 @@ return [
 
         'products' => [
             'card' => [
-                'card.add-to-compare-success' => 'تمت إضافة العنصر بنجاح إلى قائمة المقارنة.',
+                'add-to-compare-success'      => 'تمت إضافة العنصر بنجاح إلى قائمة المقارنة.',
                 'already-in-compare'          => 'العنصر مضاف بالفعل إلى قائمة المقارنة.',
                 'add-to-cart'                 => 'أضف إلى السلة',
                 'add-to-wishlist'             => 'أضف إلى قائمة الرغبات',
@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => 'نتائج البحث عن: :query',
+        'title'   => 'نتائج البحث عن: :query',
+        'results' => 'نتائج البحث',
 
         'images' => [
             'index' => [
@@ -622,6 +623,7 @@ return [
             'suspended-account-message' => 'تم تعليق حسابك.',
             'select-hourly-duration'    => 'حدد مدة الفترة بساعة واحدة.',
             'success-remove'            => 'تمت إزالة العنصر بنجاح من السلة.',
+            'paypal-payment-cancelled'  => 'تم إلغاء الدفع باي بال.',
 
             'index' => [
                 'bagisto'                  => 'باغيستو',

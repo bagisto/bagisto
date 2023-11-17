@@ -427,7 +427,7 @@ return [
 
         'products' => [
             'card' => [
-                'card.add-to-compare-success' => '商品已成功添加到比较列表。',
+                'add-to-compare-success'      => '商品已成功添加到比较列表。',
                 'already-in-compare'          => '商品已经在比较列表中。',
                 'add-to-cart'                 => '添加到购物车',
                 'add-to-wishlist'             => '添加到愿望清单',
@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => '搜索结果为：:query',
+        'title'   => '搜索结果为：:query',
+        'results' => '搜索结果',
 
         'images' => [
             'index' => [
@@ -622,6 +623,7 @@ return [
             'suspended-account-message' => '您的帐户已被暂停。',
             'select-hourly-duration'    => '选择一小时的时段。',
             'success-remove'            => '项目已成功从购物车中移除。',
+            'paypal-payment-cancelled'  => 'Paypal付款已被取消。',
 
             'index'  => [
                 'bagisto'                  => '巴基斯托',
