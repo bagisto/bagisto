@@ -47,7 +47,7 @@ class SearchTermController extends Controller
             'locale'       => 'required|exists:locales,code',
         ]);
 
-        Event::dispatch('marketing.search_seo.search_term.create.before');
+        Event::dispatch('marketing.search_seo.search_terms.create.before');
 
         $searchTerm = $this->searchTermRepository->create(request()->only([
             'term',
@@ -56,7 +56,7 @@ class SearchTermController extends Controller
             'locale',
         ]));
 
-        Event::dispatch('marketing.search_seo.search_term.create.after', $searchTerm);
+        Event::dispatch('marketing.search_seo.search_terms.create.after', $searchTerm);
 
         return new JsonResponse([
             'message' => trans('admin::app.marketing.search-seo.search-terms.index.create.success'),
@@ -79,7 +79,7 @@ class SearchTermController extends Controller
             'locale'       => 'required|exists:locales,code',
         ]);
 
-        Event::dispatch('marketing.search_seo.search_term.update.before', $id);
+        Event::dispatch('marketing.search_seo.search_terms.update.before', $id);
 
         $searchTerm = $this->searchTermRepository->update(request()->only([
             'term',
@@ -90,7 +90,7 @@ class SearchTermController extends Controller
             'locale',
         ]), $id);
 
-        Event::dispatch('marketing.search_seo.search_term.update.after', $searchTerm);
+        Event::dispatch('marketing.search_seo.search_terms.update.after', $searchTerm);
 
         return new JsonResponse([
             'message' => trans('admin::app.marketing.search-seo.search-terms.index.edit.success'),
@@ -106,11 +106,11 @@ class SearchTermController extends Controller
     public function destroy($id)
     {
         try {
-            Event::dispatch('marketing.search_seo.search_term.delete.before', $id);
+            Event::dispatch('marketing.search_seo.search_terms.delete.before', $id);
 
             $this->searchTermRepository->delete($id);
 
-            Event::dispatch('marketing.search_seo.search_term.delete.after', $id);
+            Event::dispatch('marketing.search_seo.search_terms.delete.after', $id);
 
             return response()->json([
                 'message' => trans('admin::app.marketing.search-seo.search-terms.index.edit.delete-success'),
@@ -135,11 +135,11 @@ class SearchTermController extends Controller
                 $searchTerm = $this->searchTermRepository->find($searchTermId);
 
                 if (isset($searchTerm)) {
-                    Event::dispatch('marketing.search_seo.search_term.delete.before', $searchTermId);
+                    Event::dispatch('marketing.search_seo.search_terms.delete.before', $searchTermId);
 
                     $this->searchTermRepository->delete($searchTermId);
 
-                    Event::dispatch('marketing.search_seo.search_term.delete.after', $searchTermId);
+                    Event::dispatch('marketing.search_seo.search_terms.delete.after', $searchTermId);
                 }
             }
 

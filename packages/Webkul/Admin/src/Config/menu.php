@@ -205,10 +205,16 @@ return [
         'sort'       => 2,
         'icon'       => '',
     ], [
+        'key'        => 'marketing.search_seo.search_synonyms',
+        'name'       => 'admin::app.components.layouts.sidebar.search-synonyms',
+        'route'      => 'admin.marketing.search_seo.search_synonyms.index',
+        'sort'       => 3,
+        'icon'       => '',
+    ], [
         'key'        => 'marketing.search_seo.sitemaps',
         'name'       => 'admin::app.components.layouts.sidebar.sitemaps',
         'route'      => 'admin.marketing.search_seo.sitemaps.index',
-        'sort'       => 3,
+        'sort'       => 4,
         'icon'       => '',
     ],
 
