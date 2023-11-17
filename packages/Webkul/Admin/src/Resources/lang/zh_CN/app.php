@@ -1965,6 +1965,39 @@ return [
                 ],
             ],
 
+            'search-synonyms' => [
+                'index' => [
+                    'title'      => '搜索同义词',
+                    'create-btn' => '创建搜索同义词',
+
+                    'datagrid' => [
+                        'id'                  => '标识',
+                        'name'                => '名称',
+                        'terms'               => '术语',
+                        'edit'                => '编辑',
+                        'delete'              => '删除',
+                        'actions'             => '操作',
+                        'mass-delete-success' => '成功删除所选的搜索同义词',
+                    ],
+
+                    'create' => [
+                        'name'           => '名称',
+                        'terms'          => '术语',
+                        'terms-info'     => '将同义词输入为以逗号分隔的列表，例如“鞋子，鞋类”。这扩展了搜索以包括所有术语。',
+                        'save-btn'       => '保存搜索同义词',
+                        'title'          => '创建搜索同义词',
+                        'success'        => '成功创建搜索同义词',
+                        'delete-warning' => '您确定要执行此操作吗？',
+                    ],
+
+                    'edit' => [
+                        'title'          => '编辑搜索同义词',
+                        'success'        => '成功更新搜索同义词',
+                        'delete-success' => '成功删除搜索同义词',
+                    ],
+                ],
+            ],
+
             'sitemaps' => [
                 'index' => [
                     'title'      => '站点地图',
@@ -2010,6 +2043,49 @@ return [
                 ],
 
                 'delete-failed'  => ':name 删除失败',
+            ],
+
+            'url-rewrites' => [
+                'index' => [
+                    'title'      => 'URL 重写',
+                    'create-btn' => '创建 URL 重写',
+
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'for'                 => '适用对象',
+                        'request-path'        => '请求路径',
+                        'target-path'         => '目标路径',
+                        'redirect-type'       => '重定向类型',
+                        'locale'              => '语言环境',
+                        'edit'                => '编辑',
+                        'delete'              => '删除',
+                        'actions'             => '操作',
+                        'mass-delete-success' => '已成功删除选定的 URL 重写。',
+                    ],
+
+                    'create' => [
+                        'for'                => '适用对象',
+                        'product'            => '产品',
+                        'category'           => '类别',
+                        'cms-page'           => 'CMS 页面',
+                        'request-path'       => '请求路径',
+                        'target-path'        => '目标路径',
+                        'redirect-type'      => '重定向类型',
+                        'temporary-redirect' => '临时（302）',
+                        'permanent-redirect' => '永久（301）',
+                        'locale'             => '语言环境',
+                        'save-btn'           => '保存 URL 重写',
+                        'title'              => '创建 URL 重写',
+                        'success'            => '已成功创建 URL 重写。',
+                        'delete-warning'     => '您确定要执行此操作吗？',
+                    ],
+
+                    'edit' => [
+                        'title'          => '编辑 URL 重写',
+                        'success'        => '已成功更新 URL 重写。',
+                        'delete-success' => '已成功删除 URL 重写。',
+                    ],
+                ],
             ],
         ],
     ],
@@ -3337,6 +3413,7 @@ return [
                 'reviews'                  => '评论',
                 'roles'                    => '角色',
                 'sales'                    => '销售',
+                'search-synonyms'          => '搜索同义词',
                 'search-terms'             => '搜索词',
                 'search-seo'               => '搜索和SEO',
                 'shipments'                => '发货',
@@ -3346,6 +3423,7 @@ return [
                 'tax-categories'           => '税收分类',
                 'tax-rates'                => '税率',
                 'transactions'             => '交易',
+                'url-rewrites'             => 'URL 重写',
                 'users'                    => '用户',
             ],
         ],
@@ -3494,6 +3572,7 @@ return [
         'reviews'                  => '评论',
         'roles'                    => '角色',
         'sales'                    => '销售',
+        'search-synonyms'          => '搜索同义词',
         'search-terms'             => '搜索词',
         'search-seo'               => '搜索和SEO',
         'shipments'                => '发货',
@@ -3505,6 +3584,7 @@ return [
         'tax-categories'           => '税务类别',
         'tax-rates'                => '税率',
         'transactions'             => '交易',
+        'url-rewrites'             => 'URL 重写',
         'users'                    => '用户',
         'view'                     => '查看',
     ],

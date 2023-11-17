@@ -3,7 +3,7 @@
     :has-feature="false"
     :has-footer="false"
 >
-    {{-- Page Title --}}
+    <!-- Page Title -->
     <x-slot:title>
 		@lang('shop::app.checkout.success.thanks')
     </x-slot>

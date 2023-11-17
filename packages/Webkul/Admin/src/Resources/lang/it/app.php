@@ -1965,6 +1965,39 @@ return [
                 ],
             ],
 
+            'search-synonyms' => [
+                'index' => [
+                    'title'      => 'Sinonimi di Ricerca',
+                    'create-btn' => 'Crea Sinonimo di Ricerca',
+
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'name'                => 'Nome',
+                        'terms'               => 'Termini',
+                        'edit'                => 'Modifica',
+                        'delete'              => 'Elimina',
+                        'actions'             => 'Azioni',
+                        'mass-delete-success' => 'Sinonimi di Ricerca Selezionati Eliminati con Successo',
+                    ],
+
+                    'create' => [
+                        'name'           => 'Nome',
+                        'terms'          => 'Termini',
+                        'terms-info'     => 'Inserisci i sinonimi come una lista separata da virgole, ad esempio "scarpe,calzature." Ciò espande la ricerca per includere tutti i termini.',
+                        'save-btn'       => 'Salva Sinonimo di Ricerca',
+                        'title'          => 'Crea Sinonimo di Ricerca',
+                        'success'        => 'Sinonimo di Ricerca creato con successo',
+                        'delete-warning' => 'Sei sicuro di voler eseguire questa azione?',
+                    ],
+
+                    'edit' => [
+                        'title'          => 'Modifica Sinonimo di Ricerca',
+                        'success'        => 'Sinonimo di Ricerca aggiornato con successo',
+                        'delete-success' => 'Sinonimo di Ricerca eliminato con successo',
+                    ],
+                ],
+            ],
+
             'sitemaps' => [
                 'index' => [
                     'title'       => 'Mappa del sito',
@@ -2010,6 +2043,49 @@ return [
                 ],
 
                 'delete-failed'  => ':name Eliminata con errore',
+            ],
+
+            'url-rewrites' => [
+                'index' => [
+                    'title'      => 'Riorganizzazione URL',
+                    'create-btn' => 'Crea una riorganizzazione URL',
+
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'for'                 => 'Per',
+                        'request-path'        => 'Percorso richiesta',
+                        'target-path'         => 'Percorso destinazione',
+                        'redirect-type'       => 'Tipo di reindirizzamento',
+                        'locale'              => 'Locale',
+                        'edit'                => 'Modifica',
+                        'delete'              => 'Elimina',
+                        'actions'             => 'Azioni',
+                        'mass-delete-success' => 'Le riorganizzazioni URL selezionate sono state eliminate con successo.',
+                    ],
+
+                    'create' => [
+                        'for'                => 'Per',
+                        'product'            => 'Prodotto',
+                        'category'           => 'Categoria',
+                        'cms-page'           => 'Pagina CMS',
+                        'request-path'       => 'Percorso richiesta',
+                        'target-path'        => 'Percorso destinazione',
+                        'redirect-type'      => 'Tipo di reindirizzamento',
+                        'temporary-redirect' => 'Reindirizzamento temporaneo (302)',
+                        'permanent-redirect' => 'Reindirizzamento permanente (301)',
+                        'locale'             => 'Locale',
+                        'save-btn'           => 'Salva la riorganizzazione URL',
+                        'title'              => 'Crea una riorganizzazione URL',
+                        'success'            => 'La riorganizzazione URL è stata creata con successo.',
+                        'delete-warning'     => 'Sei sicuro di voler eseguire questa azione?',
+                    ],
+
+                    'edit' => [
+                        'title'          => 'Modifica la riorganizzazione URL',
+                        'success'        => 'La riorganizzazione URL è stata aggiornata con successo.',
+                        'delete-success' => 'La riorganizzazione URL è stata eliminata con successo.',
+                    ],
+                ],
             ],
         ],
     ],
@@ -3337,6 +3413,7 @@ return [
                 'roles'                    => 'Ruoli',
                 'sales'                    => 'Vendite',
                 'shipments'                => 'Spedizioni',
+                'search-synonyms'          => 'Sinonimi di Ricerca',
                 'search-terms'             => 'Termini di ricerca',
                 'search-seo'               => 'Ricerca e SEO',
                 'settings'                 => 'Impostazioni',
@@ -3345,6 +3422,7 @@ return [
                 'tax-categories'           => 'Categorie fiscali',
                 'tax-rates'                => 'Aliquote fiscali',
                 'transactions'             => 'Transazioni',
+                'url-rewrites'             => 'Rewriting degli URL',
                 'users'                    => 'Utenti',
             ],
         ],
@@ -3493,6 +3571,7 @@ return [
         'reviews'                  => 'Recensioni',
         'roles'                    => 'Ruoli',
         'sales'                    => 'Vendite',
+        'search-synonyms'          => 'Sinonimi di Ricerca',
         'search-terms'             => 'Termini di ricerca',
         'search-seo'               => 'Ricerca e SEO',
         'shipments'                => 'Spedizioni',
@@ -3504,6 +3583,7 @@ return [
         'tax-categories'           => 'Categorie fiscali',
         'tax-rates'                => 'Aliquote fiscali',
         'transactions'             => 'Transazioni',
+        'url-rewrites'             => 'Rewriting degli URL',
         'users'                    => 'Utenti',
         'view'                     => 'Visualizza',
     ],

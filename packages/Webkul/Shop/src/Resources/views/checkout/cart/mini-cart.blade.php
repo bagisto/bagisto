@@ -1,4 +1,4 @@
-{{-- Mini Cart Vue Component --}}
+<!-- Mini Cart Vue Component -->
 <v-mini-cart>
     <span
         class="icon-cart text-[24px] cursor-pointer"
@@ -158,7 +158,7 @@
             <!-- Drawer Footer -->
             <x-slot:footer>
                 <div v-if="cart?.items?.length">
-                    <div class="flex justify-between items-center mt-[60px] mb-[30px] px-[25px] pb-[8px] border-b-[1px] border-[#E9E9E9]">
+                    <div class="flex justify-between items-center mt-[30px] mb-[30px] px-[25px] pb-[8px] border-b-[1px] border-[#E9E9E9]">
                         <p class="text-[14px] font-medium text-[#6E6E6E]">
                             @lang('shop::app.checkout.cart.mini-cart.subtotal')
                         </p>
@@ -171,15 +171,15 @@
                     </div>
 
                     <!-- Cart Action Container -->
-                    <div class="px-[25px]">
+                    <div class="grid gap-[10px] px-[25px]">
                         <a
                             href="{{ route('shop.checkout.onepage.index') }}"
-                            class="block w-full mx-auto m-0 ml-[0px] py-[15px] px-[43px] bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer max-sm:px-[20px]"
+                            class="block w-full mx-auto py-[15px] px-[43px] bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer max-sm:px-[20px]"
                         >
                             @lang('shop::app.checkout.cart.mini-cart.continue-to-checkout')
                         </a>
 
-                        <div class="block m-0 ml-[0px] py-[15px] text-base text-center font-medium cursor-pointer">
+                        <div class="block text-base text-center font-medium cursor-pointer">
                             <a href="{{ route('shop.checkout.cart.index') }}">
                                 @lang('shop::app.checkout.cart.mini-cart.view-cart')
                             </a>

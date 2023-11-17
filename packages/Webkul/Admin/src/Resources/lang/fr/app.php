@@ -1965,6 +1965,39 @@ return [
                 ],
             ],
 
+            'search-synonyms' => [
+                'index' => [
+                    'title'      => 'Synonymes de recherche',
+                    'create-btn' => 'Créer un synonyme de recherche',
+
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'name'                => 'Nom',
+                        'terms'               => 'Termes',
+                        'edit'                => 'Modifier',
+                        'delete'              => 'Supprimer',
+                        'actions'             => 'Actions',
+                        'mass-delete-success' => 'Les synonymes de recherche sélectionnés ont été supprimés avec succès',
+                    ],
+
+                    'create' => [
+                        'name'           => 'Nom',
+                        'terms'          => 'Termes',
+                        'terms-info'     => 'Saisissez les synonymes sous forme de liste séparée par des virgules, par exemple "chaussures,chaussure." Cela élargit la recherche pour inclure tous les termes.',
+                        'save-btn'       => 'Enregistrer le synonyme de recherche',
+                        'title'          => 'Créer un synonyme de recherche',
+                        'success'        => 'Synonyme de recherche créé avec succès',
+                        'delete-warning' => 'Êtes-vous sûr de vouloir effectuer cette action?',
+                    ],
+
+                    'edit' => [
+                        'title'          => 'Modifier le synonyme de recherche',
+                        'success'        => 'Synonyme de recherche mis à jour avec succès',
+                        'delete-success' => 'Synonyme de recherche supprimé avec succès',
+                    ],
+                ],
+            ],
+
             'sitemaps' => [
                 'index' => [
                     'title'      => 'Sitemaps',
@@ -2010,6 +2043,49 @@ return [
                 ],
 
                 'delete-failed' => ':name Suppression Échouée',
+            ],
+
+            'url-rewrites' => [
+                'index' => [
+                    'title'      => 'Réécritures d\'URL',
+                    'create-btn' => 'Créer une réécriture d\'URL',
+
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'for'                 => 'Pour',
+                        'request-path'        => 'Chemin de requête',
+                        'target-path'         => 'Chemin de destination',
+                        'redirect-type'       => 'Type de redirection',
+                        'locale'              => 'Localisation',
+                        'edit'                => 'Modifier',
+                        'delete'              => 'Supprimer',
+                        'actions'             => 'Actions',
+                        'mass-delete-success' => 'Les réécritures d\'URL sélectionnées ont été supprimées avec succès.',
+                    ],
+
+                    'create' => [
+                        'for'                => 'Pour',
+                        'product'            => 'Produit',
+                        'category'           => 'Catégorie',
+                        'cms-page'           => 'Page CMS',
+                        'request-path'       => 'Chemin de requête',
+                        'target-path'        => 'Chemin de destination',
+                        'redirect-type'      => 'Type de redirection',
+                        'temporary-redirect' => 'Temporaire (302)',
+                        'permanent-redirect' => 'Permanent (301)',
+                        'locale'             => 'Localisation',
+                        'save-btn'           => 'Sauvegarder la réécriture d\'URL',
+                        'title'              => 'Créer une réécriture d\'URL',
+                        'success'            => 'La réécriture d\'URL a été créée avec succès.',
+                        'delete-warning'     => 'Êtes-vous sûr de vouloir effectuer cette action ?',
+                    ],
+
+                    'edit' => [
+                        'title'          => 'Modifier la réécriture d\'URL',
+                        'success'        => 'La réécriture d\'URL a été mise à jour avec succès.',
+                        'delete-success' => 'La réécriture d\'URL a été supprimée avec succès.',
+                    ],
+                ],
             ],
         ],
     ],
@@ -3337,6 +3413,7 @@ return [
                 'reviews'                  => 'Avis',
                 'roles'                    => 'Rôles',
                 'sales'                    => 'Ventes',
+                'search-synonyms'          => 'Synonymes de recherche',
                 'search-terms'             => 'Termes de recherche',
                 'search-seo'               => 'Recherche et référencement',
                 'shipments'                => 'Expéditions',
@@ -3346,6 +3423,7 @@ return [
                 'tax-categories'           => 'Catégories de taxes',
                 'tax-rates'                => 'Taux de taxes',
                 'transactions'             => 'Transactions',
+                'url-rewrites'             => 'Réécritures d\'URL',
                 'users'                    => 'Utilisateurs',
             ],
         ],
@@ -3494,6 +3572,7 @@ return [
         'reviews'                  => 'Avis',
         'roles'                    => 'Rôles',
         'sales'                    => 'Ventes',
+        'search-synonyms'          => 'Synonymes de recherche',
         'search-terms'             => 'Termes de recherche',
         'search-seo'               => 'Recherche et référencement',
         'shipments'                => 'Expéditions',
@@ -3505,6 +3584,7 @@ return [
         'tax-categories'           => 'Catégories de taxes',
         'tax-rates'                => 'Taux de taxes',
         'transactions'             => 'Transactions',
+        'url-rewrites'             => 'Réécritures d\'URL',
         'users'                    => 'Utilisateurs',
         'view'                     => 'Voir',
     ],

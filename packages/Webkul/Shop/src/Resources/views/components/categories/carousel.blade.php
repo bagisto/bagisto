@@ -22,7 +22,7 @@
                         v-for="category in categories"
                     >
                         <a
-                            :href="category.url_path"
+                            :href="category.slug"
                             class="w-[110px] h-[110px] bg-[#F5F5F5] rounded-full"
                             :aria-label="category.name"
                         >
@@ -38,7 +38,7 @@
                         </a>
 
                         <a
-                            :href="category.url_path"
+                            :href="category.slug"
                             class=""
                         >
                             <p

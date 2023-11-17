@@ -1,16 +1,16 @@
-{{--
+<!--
     If a component has the `as` attribute, it indicates that it uses
     the ajaxified form or some customized slot form.
---}}
+-->
 @if ($attributes->has('as'))
     <v-form {{ $attributes }}>
         {{ $slot }}
     </v-form>
 
-{{--
+<!--
     Otherwise, a traditional form will be provided with a minimal
     set of configurations.
---}}
+-->
 @else
     @props([
         'method' => 'POST',

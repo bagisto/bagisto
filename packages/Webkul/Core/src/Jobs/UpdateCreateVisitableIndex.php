@@ -31,18 +31,18 @@ class UpdateCreateVisitableIndex implements ShouldQueue
      */
     public function handle()
     {
-        $slugOrPath = urldecode(trim($this->log['path_info'], '/'));
+        $slugOrURLKey = urldecode(trim($this->log['path_info'], '/'));
 
         /**
          * Support url for chinese, japanese, arabic and english with numbers.
          */
-        if (! preg_match('/^([\x{0621}-\x{064A}\x{4e00}-\x{9fa5}\x{3402}-\x{FA6D}\x{3041}-\x{30A0}\x{30A0}-\x{31FF}_a-z0-9-]+\/?)+$/u', $slugOrPath)) {
+        if (! preg_match('/^([\x{0621}-\x{064A}\x{4e00}-\x{9fa5}\x{3402}-\x{FA6D}\x{3041}-\x{30A0}\x{30A0}-\x{31FF}_a-z0-9-]+\/?)+$/u', $slugOrURLKey)) {
             UpdateCreateVisitIndex::dispatch(null, $this->log);
 
             return;
         }
 
-        $category = app(CategoryRepository::class)->findByPath($slugOrPath);
+        $category = app(CategoryRepository::class)->findBySlug($slugOrURLKey);
 
         if ($category) {
             UpdateCreateVisitIndex::dispatch($category, $this->log);
@@ -50,7 +50,7 @@ class UpdateCreateVisitableIndex implements ShouldQueue
             return;
         }
 
-        $product = app(ProductRepository::class)->findBySlug($slugOrPath);
+        $product = app(ProductRepository::class)->findBySlug($slugOrURLKey);
 
         if (
             ! $product

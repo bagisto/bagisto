@@ -623,6 +623,7 @@ return [
             'suspended-account-message' => 'ඔබගේ ගිණුම නැවත අක්‍රීය කර ඇත.',
             'select-hourly-duration'    => 'පිරවීමේ කාලය එකක් තෝරන්න.',
             'success-remove'            => 'අයිතමය සාර්ථකයි, සාර්ථකයි ඉවත් කරන ලදි.',
+            'paypal-payment-cancelled'  => 'Paypal ගෙවීම අවලංගු කර ඇත.',
 
             'index' => [
                 'bagisto'                  => 'බගිස්ටෝ',

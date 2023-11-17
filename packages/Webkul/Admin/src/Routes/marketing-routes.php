@@ -8,8 +8,10 @@ use Webkul\Admin\Http\Controllers\Marketing\Communications\TemplateController;
 use Webkul\Admin\Http\Controllers\Marketing\Promotions\CartRuleController;
 use Webkul\Admin\Http\Controllers\Marketing\Promotions\CartRuleCouponController;
 use Webkul\Admin\Http\Controllers\Marketing\Promotions\CatalogRuleController;
+use Webkul\Admin\Http\Controllers\Marketing\SearchSEO\SearchSynonymController;
 use Webkul\Admin\Http\Controllers\Marketing\SearchSEO\SearchTermController;
 use Webkul\Admin\Http\Controllers\Marketing\SearchSEO\SitemapController;
+use Webkul\Admin\Http\Controllers\Marketing\SearchSEO\URLRewriteController;
 
 /**
  * Marketing routes.
@@ -142,6 +144,21 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
          */
         Route::prefix('search-seo')->group(function () {
             /**
+             * URL Rewrite routes.
+             */
+            Route::controller(URLRewriteController::class)->prefix('url-rewrites')->group(function () {
+                Route::get('', 'index')->name('admin.marketing.search_seo.url_rewrites.index');
+
+                Route::post('create', 'store')->name('admin.marketing.search_seo.url_rewrites.store');
+
+                Route::put('edit', 'update')->name('admin.marketing.search_seo.url_rewrites.update');
+
+                Route::delete('edit/{id}', 'destroy')->name('admin.marketing.search_seo.url_rewrites.delete');
+
+                Route::post('mass-delete', 'massDestroy')->name('admin.marketing.search_seo.url_rewrites.mass_delete');
+            });
+
+            /**
              * Search Terms routes.
              */
             Route::controller(SearchTermController::class)->prefix('search-terms')->group(function () {
@@ -154,6 +171,21 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
                 Route::delete('edit/{id}', 'destroy')->name('admin.marketing.search_seo.search_terms.delete');
 
                 Route::post('mass-delete', 'massDestroy')->name('admin.marketing.search_seo.search_terms.mass_delete');
+            });
+
+            /**
+             * Search Synonyms routes.
+             */
+            Route::controller(SearchSynonymController::class)->prefix('search-synonyms')->group(function () {
+                Route::get('', 'index')->name('admin.marketing.search_seo.search_synonyms.index');
+
+                Route::post('create', 'store')->name('admin.marketing.search_seo.search_synonyms.store');
+
+                Route::put('edit', 'update')->name('admin.marketing.search_seo.search_synonyms.update');
+
+                Route::delete('edit/{id}', 'destroy')->name('admin.marketing.search_seo.search_synonyms.delete');
+
+                Route::post('mass-delete', 'massDestroy')->name('admin.marketing.search_seo.search_synonyms.mass_delete');
             });
 
             /**

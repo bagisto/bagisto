@@ -175,7 +175,7 @@
             </div>
         </div>
 
-        {{-- Date Range --}}
+        <!-- Date Range -->
         <div v-else-if="column.type === 'date_range'">
             <div class="flex items-center justify-between">
                 <p
@@ -259,7 +259,7 @@
             </div>
         </div>
 
-        {{-- Date Time Range --}}
+        <!-- Date Time Range -->
         <div v-else-if="column.type === 'datetime_range'">
             <div class="flex items-center justify-between">
                 <p
@@ -343,7 +343,7 @@
             </div>
         </div>
 
-        {{-- Rest --}}
+        <!-- Rest -->
         <div v-else>
             <div class="flex items-center justify-between">
                 <p

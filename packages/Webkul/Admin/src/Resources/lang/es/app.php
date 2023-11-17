@@ -1965,6 +1965,39 @@ return [
                 ],
             ],
 
+            'search-synonyms' => [
+                'index' => [
+                    'title'      => 'Sinónimos de Búsqueda',
+                    'create-btn' => 'Crear Sinónimo de Búsqueda',
+
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'name'                => 'Nombre',
+                        'terms'               => 'Términos',
+                        'edit'                => 'Editar',
+                        'delete'              => 'Eliminar',
+                        'actions'             => 'Acciones',
+                        'mass-delete-success' => 'Sinónimos de Búsqueda Seleccionados Eliminados con Éxito',
+                    ],
+
+                    'create' => [
+                        'name'           => 'Nombre',
+                        'terms'          => 'Términos',
+                        'terms-info'     => 'Ingrese sinónimos como una lista separada por comas, por ejemplo, "zapatos, calzado." Esto amplía la búsqueda para incluir todos los términos.',
+                        'save-btn'       => 'Guardar Sinónimo de Búsqueda',
+                        'title'          => 'Crear Sinónimo de Búsqueda',
+                        'success'        => 'Sinónimo de Búsqueda creado exitosamente',
+                        'delete-warning' => '¿Estás seguro de que deseas realizar esta acción?',
+                    ],
+
+                    'edit' => [
+                        'title'          => 'Editar Sinónimo de Búsqueda',
+                        'success'        => 'Sinónimo de Búsqueda actualizado exitosamente',
+                        'delete-success' => 'Sinónimo de Búsqueda eliminado exitosamente',
+                    ],
+                ],
+            ],
+
             'sitemaps' => [
                 'index' => [
                     'title'       => 'Mapas del sitio',
@@ -2010,6 +2043,49 @@ return [
                 ],
 
                 'delete-failed'  => ':name Eliminado Fallido',
+            ],
+
+            'url-rewrites' => [
+                'index' => [
+                    'title'      => 'Reescrituras de URL',
+                    'create-btn' => 'Crear reescritura de URL',
+
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'for'                 => 'Para',
+                        'request-path'        => 'Ruta de solicitud',
+                        'target-path'         => 'Ruta de destino',
+                        'redirect-type'       => 'Tipo de redirección',
+                        'locale'              => 'Localización',
+                        'edit'                => 'Editar',
+                        'delete'              => 'Eliminar',
+                        'actions'             => 'Acciones',
+                        'mass-delete-success' => 'Reescrituras de URL seleccionadas eliminadas correctamente',
+                    ],
+
+                    'create' => [
+                        'for'                => 'Para',
+                        'product'            => 'Producto',
+                        'category'           => 'Categoría',
+                        'cms-page'           => 'Página de CMS',
+                        'request-path'       => 'Ruta de solicitud',
+                        'target-path'        => 'Ruta de destino',
+                        'redirect-type'      => 'Tipo de redirección',
+                        'temporary-redirect' => 'Temporal (302)',
+                        'permanent-redirect' => 'Permanente (301)',
+                        'locale'             => 'Localización',
+                        'save-btn'           => 'Guardar reescritura de URL',
+                        'title'              => 'Crear reescritura de URL',
+                        'success'            => 'Reescritura de URL creada correctamente',
+                        'delete-warning'     => '¿Está seguro de que desea realizar esta acción?',
+                    ],
+
+                    'edit' => [
+                        'title'          => 'Editar reescritura de URL',
+                        'success'        => 'Reescritura de URL actualizada correctamente',
+                        'delete-success' => 'Reescritura de URL eliminada correctamente',
+                    ],
+                ],
             ],
         ],
     ],
@@ -3337,6 +3413,7 @@ return [
                 'reviews'                  => 'Reseñas',
                 'roles'                    => 'Roles',
                 'sales'                    => 'Ventas',
+                'search-synonyms'          => 'Sinónimos de Búsqueda',
                 'search-terms'             => 'Términos de búsqueda',
                 'search-seo'               => 'Búsqueda y SEO',
                 'shipments'                => 'Envíos',
@@ -3346,6 +3423,7 @@ return [
                 'tax-categories'           => 'Categorías de Impuestos',
                 'tax-rates'                => 'Tasas de Impuestos',
                 'transactions'             => 'Transacciones',
+                'url-rewrites'             => 'Reescrituras de URL',
                 'users'                    => 'Usuarios',
             ],
         ],
@@ -3494,6 +3572,7 @@ return [
         'reviews'                  => 'Reseñas',
         'roles'                    => 'Roles',
         'sales'                    => 'Ventas',
+        'search-synonyms'          => 'Sinónimos de Búsqueda',
         'search-terms'             => 'Términos de búsqueda',
         'search-seo'               => 'Búsqueda y SEO',
         'shipments'                => 'Envíos',
@@ -3505,6 +3584,7 @@ return [
         'tax-categories'           => 'Categorías de Impuestos',
         'tax-rates'                => 'Tasas de Impuestos',
         'transactions'             => 'Transacciones',
+        'url-rewrites'             => 'Reescrituras de URL',
         'users'                    => 'Usuarios',
         'view'                     => 'Ver',
     ],

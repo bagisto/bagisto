@@ -1966,6 +1966,39 @@ return [
                 ],
             ],
 
+            'search-synonyms' => [
+                'index' => [
+                    'title'      => 'Zoek Synoniemen',
+                    'create-btn' => 'Maak Zoek Synoniem',
+
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'name'                => 'Naam',
+                        'terms'               => 'Termen',
+                        'edit'                => 'Bewerk',
+                        'delete'              => 'Verwijder',
+                        'actions'             => 'Acties',
+                        'mass-delete-success' => 'Geselecteerde Zoek Synoniemen Succesvol Verwijderd',
+                    ],
+
+                    'create' => [
+                        'name'           => 'Naam',
+                        'terms'          => 'Termen',
+                        'terms-info'     => 'Voer synoniemen in als een door komma\'s gescheiden lijst, bijvoorbeeld "schoenen, schoeisel." Hiermee wordt de zoekopdracht uitgebreid om alle termen op te nemen.',
+                        'save-btn'       => 'Bewaar Zoek Synoniem',
+                        'title'          => 'Maak Zoek Synoniem',
+                        'success'        => 'Zoek Synoniem succesvol aangemaakt',
+                        'delete-warning' => 'Weet je zeker dat je deze actie wilt uitvoeren?',
+                    ],
+
+                    'edit' => [
+                        'title'          => 'Bewerk Zoek Synoniem',
+                        'success'        => 'Zoek Synoniem succesvol bijgewerkt',
+                        'delete-success' => 'Zoek Synoniem succesvol verwijderd',
+                    ],
+                ],
+            ],
+
             'sitemaps' => [
                 'index' => [
                     'title'      => 'Sitemaps',
@@ -2010,6 +2043,49 @@ return [
                 ],
 
                 'delete-failed' => ':name Verwijderen Mislukt',
+            ],
+
+            'url-rewrites' => [
+                'index' => [
+                    'title'      => 'URL-herschrijvingen',
+                    'create-btn' => 'URL-herschrijving maken',
+
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'for'                 => 'Voor',
+                        'request-path'        => 'Aanvraagpad',
+                        'target-path'         => 'Doelpad',
+                        'redirect-type'       => 'Doorstuurtype',
+                        'locale'              => 'Taal',
+                        'edit'                => 'Bewerken',
+                        'delete'              => 'Verwijderen',
+                        'actions'             => 'Acties',
+                        'mass-delete-success' => 'De geselecteerde URL-herschrijvingen zijn succesvol verwijderd.',
+                    ],
+
+                    'create' => [
+                        'for'                => 'Voor',
+                        'product'            => 'Product',
+                        'category'           => 'Categorie',
+                        'cms-page'           => 'CMS-pagina',
+                        'request-path'       => 'Aanvraagpad',
+                        'target-path'        => 'Doelpad',
+                        'redirect-type'      => 'Doorstuurtype',
+                        'temporary-redirect' => 'Tijdelijke doorstuur (302)',
+                        'permanent-redirect' => 'Permanente doorstuur (301)',
+                        'locale'             => 'Taal',
+                        'save-btn'           => 'URL-herschrijving opslaan',
+                        'title'              => 'URL-herschrijving maken',
+                        'success'            => 'URL-herschrijving succesvol gemaakt',
+                        'delete-warning'     => 'Weet u zeker dat u deze actie wilt uitvoeren?',
+                    ],
+
+                    'edit' => [
+                        'title'          => 'URL-herschrijving bewerken',
+                        'success'        => 'URL-herschrijving succesvol bijgewerkt',
+                        'delete-success' => 'URL-herschrijving succesvol verwijderd',
+                    ],
+                ],
             ],
         ],
     ],
@@ -3337,6 +3413,7 @@ return [
                 'reviews'                  => 'Beoordelingen',
                 'roles'                    => 'Rollen',
                 'sales'                    => 'Verkopen',
+                'search-synonyms'          => 'Zoek Synoniemen',
                 'search-terms'             => 'Zoektermen',
                 'search-seo'               => 'Zoeken en SEO',
                 'shipments'                => 'Zendingen',
@@ -3346,6 +3423,7 @@ return [
                 'tax-categories'           => 'Belastingcategorieën',
                 'tax-rates'                => 'Belastingtarieven',
                 'transactions'             => 'Transacties',
+                'url-rewrites'             => 'URL-herschrijvingen',
                 'users'                    => 'Gebruikers',
             ],
         ],
@@ -3494,6 +3572,7 @@ return [
         'reviews'                  => 'Beoordelingen',
         'roles'                    => 'Rollen',
         'sales'                    => 'Verkoop',
+        'search-synonyms'          => 'Zoek Synoniemen',
         'search-terms'             => 'Zoektermen',
         'search-seo'               => 'Zoeken en SEO',
         'shipments'                => 'Verzendingen',
@@ -3505,6 +3584,7 @@ return [
         'tax-categories'           => 'Belastingcategorieën',
         'tax-rates'                => 'Belastingtarieven',
         'transactions'             => 'Transacties',
+        'url-rewrites'             => 'URL-herschrijvingen',
         'users'                    => 'Gebruikers',
         'view'                     => 'Bekijken',
     ],

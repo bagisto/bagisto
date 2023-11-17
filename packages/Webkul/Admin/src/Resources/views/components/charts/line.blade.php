@@ -1,7 +1,7 @@
 <v-charts-line {{ $attributes }}></v-charts-line>
 
 @pushOnce('scripts')
-    {{-- SEO Vue Component Template --}}
+    <!-- SEO Vue Component Template -->
     <script type="text/x-template" id="v-charts-line-template">
         <canvas
             :id="$.uid + '_chart'"

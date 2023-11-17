@@ -1965,6 +1965,39 @@ return [
                 ],
             ],
 
+            'search-synonyms' => [
+                'index' => [
+                    'title'      => 'Arama Eşanlamlıları',
+                    'create-btn' => 'Arama Eşanlamlısı Oluştur',
+
+                    'datagrid' => [
+                        'id'                  => 'Kimlik',
+                        'name'                => 'Adı',
+                        'terms'               => 'Terimler',
+                        'edit'                => 'Düzenle',
+                        'delete'              => 'Sil',
+                        'actions'             => 'İşlemler',
+                        'mass-delete-success' => 'Seçilen Arama Eşanlamlıları Başarıyla Silindi',
+                    ],
+
+                    'create' => [
+                        'name'           => 'Adı',
+                        'terms'          => 'Terimler',
+                        'terms-info'     => 'Eşanlamlıları virgülle ayrılmış bir liste olarak girin, örneğin "ayakkabı,ayakkabı." Bu, aramayı tüm terimleri içerecek şekilde genişletir.',
+                        'save-btn'       => 'Arama Eşanlamı Kaydet',
+                        'title'          => 'Arama Eşanlamı Oluştur',
+                        'success'        => 'Arama Eşanlamı başarıyla oluşturuldu',
+                        'delete-warning' => 'Bu işlemi gerçekleştirmek istediğinizden emin misiniz?',
+                    ],
+
+                    'edit' => [
+                        'title'          => 'Arama Eşanlamı Düzenle',
+                        'success'        => 'Arama Eşanlamı başarıyla güncellendi',
+                        'delete-success' => 'Arama Eşanlamı başarıyla silindi',
+                    ],
+                ],
+            ],
+
             'sitemaps' => [
                 'index' => [
                     'title'      => 'Site Haritaları',
@@ -2010,6 +2043,49 @@ return [
                 ],
 
                 'delete-failed'  => ':name Silme Başarısız',
+            ],
+
+            'url-rewrites' => [
+                'index' => [
+                    'title'      => 'URL Yeniden Yönlendirmeleri',
+                    'create-btn' => 'URL Yeniden Yönlendirme Oluştur',
+
+                    'datagrid' => [
+                        'id'                  => 'ID',
+                        'for'                 => 'İçin',
+                        'request-path'        => 'İstek Yolu',
+                        'target-path'         => 'Hedef Yol',
+                        'redirect-type'       => 'Yönlendirme Türü',
+                        'locale'              => 'Yerel',
+                        'edit'                => 'Düzenle',
+                        'delete'              => 'Sil',
+                        'actions'             => 'İşlemler',
+                        'mass-delete-success' => 'Seçili URL Yeniden Yönlendirmeleri Başarıyla Silindi',
+                    ],
+
+                    'create' => [
+                        'for'                => 'İçin',
+                        'product'            => 'Ürün',
+                        'category'           => 'Kategori',
+                        'cms-page'           => 'CMS Sayfası',
+                        'request-path'       => 'İstek Yolu',
+                        'target-path'        => 'Hedef Yol',
+                        'redirect-type'      => 'Yönlendirme Türü',
+                        'temporary-redirect' => 'Geçici (302)',
+                        'permanent-redirect' => 'Kalıcı (301)',
+                        'locale'             => 'Yerel',
+                        'save-btn'           => 'URL Yeniden Yönlendirmeyi Kaydet',
+                        'title'              => 'URL Yeniden Yönlendirme Oluştur',
+                        'success'            => 'URL Yeniden Yönlendirmesi başarıyla oluşturuldu',
+                        'delete-warning'     => 'Bu işlemi gerçekleştirmek istediğinizden emin misiniz?',
+                    ],
+
+                    'edit' => [
+                        'title'          => 'URL Yeniden Yönlendirmeyi Düzenle',
+                        'success'        => 'URL Yeniden Yönlendirmesi başarıyla güncellendi',
+                        'delete-success' => 'URL Yeniden Yönlendirmesi başarıyla silindi',
+                    ],
+                ],
             ],
         ],
     ],
@@ -3337,6 +3413,7 @@ return [
                 'reviews'                  => 'Yorumlar',
                 'roles'                    => 'Roller',
                 'sales'                    => 'Satışlar',
+                'search-synonyms'          => 'Arama Eşanlamlıları',
                 'search-terms'             => 'Arama Terimleri',
                 'search-seo'               => 'Arama ve SEO',
                 'shipments'                => 'Gönderiler',
@@ -3346,6 +3423,7 @@ return [
                 'tax-categories'           => 'Vergi Kategorileri',
                 'tax-rates'                => 'Vergi Oranları',
                 'transactions'             => 'İşlemler',
+                'url-rewrites'             => 'URL Yeniden Yazma',
                 'users'                    => 'Kullanıcılar',
             ],
         ],
@@ -3494,6 +3572,7 @@ return [
         'reviews'                  => 'Yorumlar',
         'roles'                    => 'Roller',
         'sales'                    => 'Satışlar',
+        'search-synonyms'          => 'Arama Eşanlamlıları',
         'search-terms'             => 'Arama Terimleri',
         'search-seo'               => 'Arama ve SEO',
         'shipments'                => 'Gönderiler',
@@ -3505,6 +3584,7 @@ return [
         'tax-categories'           => 'Vergi Kategorileri',
         'tax-rates'                => 'Vergi Oranları',
         'transactions'             => 'İşlemler',
+        'url-rewrites'             => 'URL Yeniden Yazma',
         'users'                    => 'Kullanıcılar',
         'view'                     => 'Görüntüle',
     ],

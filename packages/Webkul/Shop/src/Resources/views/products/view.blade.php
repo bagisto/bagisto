@@ -9,7 +9,7 @@
     $customAttributeValues = $productViewHelper->getAdditionalData($product);
 @endphp
 
-{{-- SEO Meta Content --}}
+<!-- SEO Meta Content -->
 @push('meta')
     <meta name="description" content="{{ trim($product->meta_description) != "" ? $product->meta_description : \Illuminate\Support\Str::limit(strip_tags($product->description), 120, '') }}"/>
 
@@ -44,29 +44,29 @@
     <meta property="og:url" content="{{ route('shop.product_or_category.index', $product->url_key) }}" />
 @endPush
 
-{{-- Page Layout --}}
+<!-- Page Layout -->
 <x-shop::layouts>
-    {{-- Page Title --}}
+    <!-- Page Title -->
     <x-slot:title>
         {{ trim($product->meta_title) != "" ? $product->meta_title : $product->name }}
     </x-slot>
 
     {!! view_render_event('bagisto.shop.products.view.before', ['product' => $product]) !!}
 
-    {{-- Breadcrumbs --}}
+    <!-- Breadcrumbs -->
     <div class="flex justify-center max-lg:hidden">
         <x-shop::breadcrumbs name="product" :entity="$product"></x-shop::breadcrumbs>
     </div>
 
-    {{-- Product Information Vue Component --}}
+    <!-- Product Information Vue Component -->
     <v-product :product-id="{{ $product->id }}">
         <x-shop::shimmer.products.view/>
     </v-product>
 
-    {{-- Information Section --}}
+    <!-- Information Section -->
     <div class="1180:mt-[80px]">
         <x-shop::tabs position="center">
-            {{-- Description Tab --}}
+            <!-- Description Tab -->
             {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
 
             <x-shop::tabs.item
@@ -84,7 +84,7 @@
             {!! view_render_event('bagisto.shop.products.view.description.after', ['product' => $product]) !!}
 
 
-            {{-- Additional Information Tab --}}
+            <!-- Additional Information Tab -->
             <x-shop::tabs.item
                 class="container mt-[60px] !p-0 max-1180:hidden"
                 :title="trans('shop::app.products.view.additional-information')"
@@ -134,7 +134,7 @@
                 </div>
             </x-shop::tabs.item>
 
-            {{-- Reviews Tab --}}
+            <!-- Reviews Tab -->
             <x-shop::tabs.item
                 class="container mt-[60px] !p-0 max-1180:hidden"
                 :title="trans('shop::app.products.view.review')"
@@ -145,9 +145,9 @@
         </x-shop::tabs>
     </div>
 
-    {{-- Information Section --}}
+    <!-- Information Section -->
     <div class="container mt-[40px] max-1180:px-[20px] 1180:hidden">
-        {{-- Description Accordion --}}
+        <!-- Description Accordion -->
         <x-shop::accordion :is-active="true">
             <x-slot:header>
                 <div class="flex justify-between mb-[20px] mt-[20px]">
@@ -164,7 +164,7 @@
             </x-slot:content>
         </x-shop::accordion>
 
-        {{-- Additional Information Accordion --}}
+        <!-- Additional Information Accordion -->
         <x-shop::accordion :is-active="false">
             <x-slot:header>
                 <div class="flex justify-between mb-[20px] mt-[20px]">
@@ -209,7 +209,7 @@
             </x-slot:content>
         </x-shop::accordion>
 
-        {{-- Reviews Accordion --}}
+        <!-- Reviews Accordion -->
         <x-shop::accordion :is-active="false">
             <x-slot:header>
                 <div class="flex justify-between mb-[20px] mt-[20px]">
@@ -225,14 +225,14 @@
         </x-shop::accordion>
     </div>
 
-    {{-- Featured Products --}}
+    <!-- Featured Products -->
     <x-shop::products.carousel
         :title="trans('shop::app.products.view.related-product-title')"
         :src="route('shop.api.products.related.index', ['id' => $product->id])"
     >
     </x-shop::products.carousel>
 
-    {{-- Upsell Products --}}
+    <!-- Upsell Products -->
     <x-shop::products.carousel
         :title="trans('shop::app.products.view.up-sell-title')"
         :src="route('shop.api.products.up-sell.index', ['id' => $product->id])"

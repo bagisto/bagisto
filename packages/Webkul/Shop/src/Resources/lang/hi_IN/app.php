@@ -623,6 +623,7 @@ return [
             'suspended-account-message' => 'आपका खाता निलंबित कर दिया गया है।',
             'select-hourly-duration'    => 'एक घंटे की अवधि का चयन करें।',
             'success-remove'            => 'आइटम को कार्ट से सफलतापूर्वक हटा दिया गया है।',
+            'paypal-payment-cancelled'  => 'पेपैल भुगतान रद्द कर दिया गया है.',
 
             'index' => [
                 'bagisto'                  => 'बागिस्तो',
