@@ -1,4 +1,4 @@
-{{-- SEO Meta Content --}}
+<!-- SEO Meta Content -->
 @push('meta')
     <meta name="description" content="@lang('shop::app.customers.signup-form.page-title')"/>
 
@@ -10,13 +10,13 @@
     :has-feature="false"
     :has-footer="false"
 >
-    {{-- Page Title --}}
+    <!-- Page Title -->
     <x-slot:title>
         @lang('shop::app.customers.signup-form.page-title')
     </x-slot>
 
 	<div class="container mt-20 max-1180:px-[20px]">
-        {{-- Company Logo --}}
+        <!-- Company Logo -->
         <div class="flex gap-x-[54px] items-center max-[1180px]:gap-x-[35px]">
             <a
                 href="{{ route('shop.home.index') }}"
@@ -32,7 +32,7 @@
             </a>
         </div>
 
-        {{-- Form Container --}}
+        <!-- Form Container -->
 		<div
 			class="w-full max-w-[870px] m-auto px-[90px] py-[60px] border border-[#E9E9E9] rounded-[12px] max-md:px-[30px] max-md:py-[30px]"
         >

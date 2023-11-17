@@ -1,4 +1,4 @@
-{{--Flash message --}}
+<!--Flash message -->
 <x-flash-group></x-flash-group>
 
 <x-panel>
@@ -7,9 +7,9 @@
     <x-slot:body>Panel Body</x-slot:body>
 </x-panel>
 
-{{-- Form Control Group --}}
+<!-- Form Control Group -->
 
-{{-- Type Text --}}
+<!-- Type Text -->
 <x-admin::form.control-group>
     <x-admin::form.control-group.label class="required">
         @lang('name')
@@ -31,7 +31,7 @@
     </x-admin::form.control-group.error>
 </x-admin::form.control-group>
 
-{{-- Type Select --}}
+<!-- Type Select -->
 <x-admin::form.control-group>
     <x-admin::form.control-group.label>
         @lang('admin::app.catalog.families.create.column')
@@ -63,7 +63,7 @@
     </x-admin::form.control-group.error>
 </x-admin::form.control-group>
 
-{{--Type Checkbox --}}
+<!--Type Checkbox -->
 <x-admin::form.control-group>
     <x-admin::form.control-group.control
         type="checkbox"
@@ -81,7 +81,7 @@
     </x-admin::form.control-group.label>
 </x-admin::form.control-group>
 
-{{--Type Radio --}}
+<!--Type Radio -->
 <x-admin::form.control-group>
     <x-admin::form.control-group.control
         type="radio"
@@ -99,7 +99,7 @@
     </x-admin::form.control-group.label>
 </x-admin::form.control-group>
 
-{{-- basic/traditional form  --}}
+<!-- basic/traditional form  -->
 <x-admin::form action="">
     <x-admin::form.control-group>
         <x-admin::form.control-group.label>
@@ -123,7 +123,7 @@
     </x-admin::form.control-group>
 </x-admin::form>
 
-{{-- customized/ajax form --}}
+<!-- customized/ajax form -->
 <x-admin::form
     v-slot="{ meta, errors, handleSubmit }"
     as="div"
@@ -154,7 +154,7 @@
     </form>
 </x-admin::form>
 
-{{-- Accordion Component --}}
+<!-- Accordion Component -->
 <x-admin::accordion title="Test Accordion">
     <x-slot:header>
         Accordion Header
@@ -165,7 +165,7 @@
     </x-slot:content>
 </x-admin::accordion>
 
-{{-- Modal Component --}}
+<!-- Modal Component -->
 <x-admin::modal>
     <x-slot:toggle>
         Modal Toggle
@@ -180,7 +180,7 @@
     </x-slot:content>
 </x-admin::modal>
 
-{{-- Drawer Component --}}
+<!-- Drawer Component -->
 <x-admin::drawer>
     <x-slot:toggle>
         Drawer Toggle
@@ -195,7 +195,7 @@
     </x-slot:content>
 </x-admin::drawer>
 
-{{-- Dropdown Component--}}
+<!-- Dropdown Component-->
 <x-admin::dropdown>
     <x-slot:toggle>
         Toogle
@@ -206,7 +206,7 @@
     </x-slot:content>
 </x-admin::dropdown>
 
-{{-- Tinymce Component --}}
+<!-- Tinymce Component -->
 <x-admin::form.control-group>
     <x-admin::form.control-group.label>
         Content
@@ -230,30 +230,30 @@
     </x-admin::form.control-group.error>
 </x-admin::form.control-group>
 
-{{-- SEO Title & Description Blade Componnet --}}
+<!-- SEO Title & Description Blade Componnet -->
 <x-admin::seo/>
 
-{{-- Star Rating Component --}}
+<!-- Star Rating Component -->
 <x-admin::star-rating 
     :is-editable="false"
     :value="$review->rating"
 >
 </x-admin::star-rating>
 
-{{-- Exportdatagrid Component--}}
+<!-- Exportdatagrid Component-->
 <x-admin::datagrid.export 
     src=""
 >
 </x-admin::datagrid.export>
 
-{{-- Datagrid Component --}}
+<!-- Datagrid Component -->
 <x-admin::datagrid 
     :src="route('admin.sales.orders.index')" 
     :isMultiRow="true"
 >
 </x-admin::datagrid>
 
-{{-- Image Blade Component --}}
+<!-- Image Blade Component -->
 <x-admin::media.images
     name="images[files]"
     allow-multiple="true"
@@ -262,7 +262,7 @@
 >
 </x-admin::media.images>
 
-{{-- Video Blade Component --}}
+<!-- Video Blade Component -->
 <x-admin::media.videos
     name="videos[files]"
     :allow-multiple="true"
@@ -270,7 +270,7 @@
 >
 </x-admin::media.videos>
 
-{{-- Tree Component --}}
+<!-- Tree Component -->
 
 <x-admin::tree.view
     input-type="checkbox"

@@ -3,7 +3,7 @@
 namespace Webkul\FPC\Listeners;
 
 use Spatie\ResponseCache\Facades\ResponseCache;
-use Webkul\Shop\Repositories\ThemeCustomizationRepository;
+use Webkul\Theme\Repositories\ThemeCustomizationRepository;
 
 class ThemeCustomization
 {
@@ -24,7 +24,7 @@ class ThemeCustomization
      */
     public function afterCreate($themeCustomization)
     {
-        if ($themeCustomization->type == 'footer_links') {
+        if (in_array($themeCustomization->type, ['footer_links', 'services_content'])) {
             ResponseCache::clear();
         } else {
             ResponseCache::selectCachedItems()
@@ -41,7 +41,7 @@ class ThemeCustomization
      */
     public function afterUpdate($themeCustomization)
     {
-        if ($themeCustomization->type == 'footer_links') {
+        if (in_array($themeCustomization->type, ['footer_links', 'services_content'])) {
             ResponseCache::clear();
         } else {
             ResponseCache::selectCachedItems()
@@ -60,7 +60,7 @@ class ThemeCustomization
     {
         $themeCustomization = $this->themeCustomizationRepository->find($themeCustomizationId);
 
-        if ($themeCustomization->type == 'footer_links') {
+        if (in_array($themeCustomization->type, ['footer_links', 'services_content'])) {
             ResponseCache::clear();
         } else {
             ResponseCache::selectCachedItems()

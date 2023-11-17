@@ -187,10 +187,34 @@ return [
         'sort'       => 3,
         'icon'       => '',
     ], [
-        'key'        => 'marketing.sitemaps',
-        'name'       => 'admin::app.components.layouts.sidebar.sitemaps',
-        'route'      => 'admin.marketing.promotions.sitemaps.index',
+        'key'        => 'marketing.search_seo',
+        'name'       => 'admin::app.components.layouts.sidebar.search-seo',
+        'route'      => 'admin.marketing.search_seo.url_rewrites.index',
         'sort'       => 3,
+        'icon'       => '',
+    ], [
+        'key'        => 'marketing.search_seo.url_rewrites',
+        'name'       => 'admin::app.components.layouts.sidebar.url-rewrites',
+        'route'      => 'admin.marketing.search_seo.url_rewrites.index',
+        'sort'       => 1,
+        'icon'       => '',
+    ], [
+        'key'        => 'marketing.search_seo.search_terms',
+        'name'       => 'admin::app.components.layouts.sidebar.search-terms',
+        'route'      => 'admin.marketing.search_seo.search_terms.index',
+        'sort'       => 2,
+        'icon'       => '',
+    ], [
+        'key'        => 'marketing.search_seo.search_synonyms',
+        'name'       => 'admin::app.components.layouts.sidebar.search-synonyms',
+        'route'      => 'admin.marketing.search_seo.search_synonyms.index',
+        'sort'       => 3,
+        'icon'       => '',
+    ], [
+        'key'        => 'marketing.search_seo.sitemaps',
+        'name'       => 'admin::app.components.layouts.sidebar.sitemaps',
+        'route'      => 'admin.marketing.search_seo.sitemaps.index',
+        'sort'       => 4,
         'icon'       => '',
     ],
 

@@ -5,10 +5,12 @@ namespace Webkul\Admin\Http\Controllers\Customers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Mail;
 use Webkul\Admin\DataGrids\Customers\CustomerDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\MassDestroyRequest;
 use Webkul\Admin\Http\Requests\MassUpdateRequest;
+use Webkul\Admin\Mail\Customer\NewCustomerNotification;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Customer\Repositories\CustomerNoteRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
@@ -72,7 +74,15 @@ class CustomerController extends Controller
             'is_verified' => 1,
         ]);
 
-        $this->customerRepository->create($data);
+        $customer = $this->customerRepository->create($data);
+
+        if (core()->getConfigData('emails.general.notifications.emails.general.notifications.customer')) {
+            try {
+                Mail::queue(new NewCustomerNotification($customer, $password));
+            } catch (\Exception $e) {
+                report($e);
+            }
+        }
 
         return new JsonResponse([
             'message' => trans('admin::app.customers.customers.index.create.create-success'),

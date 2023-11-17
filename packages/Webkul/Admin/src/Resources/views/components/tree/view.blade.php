@@ -10,7 +10,7 @@
 </v-tree-view>
 
 @pushOnce('scripts')
-    {{-- v-tree-view component --}}
+    <!-- v-tree-view component -->
     <script type="module">
         app.component('v-tree-view',{
             name: 'v-tree-view',
@@ -142,13 +142,13 @@
     </script>
 @endPushOnce
 
-{{-- Tree Item Component --}}
+<!-- Tree Item Component -->
 <x-admin::tree.item></x-admin::tree.item>
 
 @if ($inputType == 'checkbox')
-    {{-- Tree Checkbox Component --}}
+    <!-- Tree Checkbox Component -->
     <x-admin::tree.checkbox></x-admin::tree.checkbox>
 @else 
-    {{-- Tree Radio component --}}
+    <!-- Tree Radio component -->
     <x-admin::tree.radio></x-admin::tree.radio>
 @endif

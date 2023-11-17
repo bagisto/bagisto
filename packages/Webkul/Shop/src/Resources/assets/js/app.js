@@ -33,11 +33,23 @@ Object.keys(AllRules).forEach(rule => {
  * someone wants to customize it, they can override this rule.
  */
 defineRule("phone", (value) => {
-    if (!value || !value.length) {
+    if (! value || ! value.length) {
         return true;
     }
 
-    if (!/^\+?\d+$/.test(value)) {
+    if (! /^\+?\d+$/.test(value)) {
+        return false;
+    }
+
+    return true;
+});
+
+defineRule("address", (value) => {
+    if (! value || ! value.length) {
+        return true;
+    }
+    
+    if (!/^[a-zA-Z0-9 ,()-]+$/i.test(value)) {
         return false;
     }
 
@@ -55,6 +67,14 @@ configure({
             messages: {
                 ...en.messages,
                 phone: "This {field} must be a valid phone number",
+            },
+        },
+
+        en: {
+            ...en,
+            messages: {
+                ...en.messages,
+                address: "This {field} must be a valid address",
             },
         },
     }),

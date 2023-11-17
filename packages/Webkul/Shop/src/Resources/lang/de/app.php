@@ -427,7 +427,7 @@ return [
 
         'products' => [
             'card' => [
-                'card.add-to-compare-success' => 'Artikel erfolgreich zur Vergleichsliste hinzugefügt.',
+                'add-to-compare-success'      => 'Artikel erfolgreich zur Vergleichsliste hinzugefügt.',
                 'already-in-compare'          => 'Artikel ist bereits zur Vergleichsliste hinzugefügt.',
                 'add-to-cart'                 => 'In den Warenkorb legen',
                 'add-to-wishlist'             => 'Zur Wunschliste hinzufügen',
@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => 'Suchergebnisse für: :query',
+        'title'   => 'Suchergebnisse für: :query',
+        'results' => 'Suchergebnisse',
 
         'images' => [
             'index' => [
@@ -622,6 +623,7 @@ return [
             'suspended-account-message' => 'Ihr Konto wurde gesperrt.',
             'select-hourly-duration'    => 'Wählen Sie eine Stundendauer von einer Stunde aus.',
             'success-remove'            => 'Artikel wurde erfolgreich aus dem Warenkorb entfernt.',
+            'paypal-payment-cancelled'  => 'Die Paypal-Zahlung wurde abgebrochen.',
 
             'index' => [
                 'bagisto'                  => 'Bagisto',
@@ -768,6 +770,7 @@ return [
                 'grand-total'      => 'Gesamtsumme',
                 'place-order'      => 'Bestellung aufgeben',
                 'processing'       => 'Verarbeitung',
+                'price_&_qty'      => ':price × :qty',
                 'sub-total'        => 'Zwischensumme',
                 'tax'              => 'Steuer',
             ],
@@ -833,10 +836,13 @@ return [
 
         'customers' => [
             'registration' => [
-                'description' => 'Ihr Konto wurde erfolgreich erstellt und Sie können sich jetzt mit Ihren E-Mail-Adresse und Passwort anmelden. Nach der Anmeldung haben Sie Zugriff auf weitere Dienste wie das Überprüfen vergangener Bestellungen, Wunschlisten und das Bearbeiten Ihrer Kontoinformationen.',
-                'greeting'    => 'Willkommen und vielen Dank für Ihre Registrierung bei uns!',
-                'subject'     => 'Neue Kundenregistrierung',
-                'sign-in'     => 'Anmelden',
+                'subject'                 => 'Neue Kundenregistrierung',
+                'description'             => 'Ihr Konto wurde erfolgreich erstellt und Sie können sich jetzt mit Ihren E-Mail-Adresse und Passwort anmelden. Nach der Anmeldung haben Sie Zugriff auf weitere Dienste wie das Überprüfen vergangener Bestellungen, Wunschlisten und das Bearbeiten Ihrer Kontoinformationen.',
+                'credentials-description' => 'Ihr Konto wurde erstellt. Ihre Kontodetails finden Sie unten:',
+                'greeting'                => 'Willkommen und vielen Dank für Ihre Registrierung bei uns!',
+                'sign-in'                 => 'Anmelden',
+                'username-email'          => 'Benutzername/E-Mail',
+                'password'                => 'Passwort',
             ],
 
             'forgot-password' => [

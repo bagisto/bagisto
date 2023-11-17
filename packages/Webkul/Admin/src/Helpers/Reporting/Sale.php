@@ -617,6 +617,6 @@ class Sale extends AbstractReporting
             ];
         }
 
-        return $stats;
+        return $stats ?? [];
     }
 }

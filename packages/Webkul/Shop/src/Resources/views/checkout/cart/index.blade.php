@@ -1,4 +1,4 @@
-{{-- SEO Meta Content --}}
+<!-- SEO Meta Content -->
 @push('meta')
     <meta name="description" content="@lang('shop::app.checkout.cart.index.cart')"/>
 
@@ -10,12 +10,12 @@
     :has-feature="false"
     :has-footer="false"
 >
-    {{-- Page Title --}}
+    <!-- Page Title -->
     <x-slot:title>
         @lang('shop::app.checkout.cart.index.cart')
     </x-slot>
 
-    {{-- Page Header --}}
+    <!-- Page Header -->
     <div class="flex flex-wrap">
         <div class="w-full flex justify-between px-[60px] border border-t-0 border-b-[1px] border-l-0 border-r-0 py-[17px] max-lg:px-[30px] max-sm:px-[15px]">
             <div class="flex items-center gap-x-[54px] max-[1180px]:gap-x-[35px]">
@@ -37,11 +37,11 @@
 
     <div class="flex-auto">
         <div class="container px-[60px] max-lg:px-[30px]">
-            {{-- Breadcrumbs --}}
+            <!-- Breadcrumbs -->
             <x-shop::breadcrumbs name="cart"></x-shop::breadcrumbs>
 
             <v-cart ref="vCart">
-                {{-- Cart Shimmer Effect --}}
+                <!-- Cart Shimmer Effect -->
                 <x-shop::shimmer.checkout.cart :count="3"></x-shop::shimmer.checkout.cart>
             </v-cart>
         </div>
@@ -144,26 +144,29 @@
                                         </div>
 
                                         <!-- Cart Item Image -->
-                                        <x-shop::media.images.lazy
-                                            class="h-[110px] min-w-[110px] max-w[110px] rounded-[12px]"
-                                            ::src="item.base_image.small_image_url"
-                                            ::alt="item.name"
-                                            width="110"
-                                            height="110"
-                                            ::key="item.id"
-                                            ::index="item.id"
-                                        >
-                                        </x-shop::media.images.lazy>
+                                        <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
+                                            <x-shop::media.images.lazy
+                                                class="h-[110px] min-w-[110px] max-w[110px] rounded-[12px]"
+                                                ::src="item.base_image.small_image_url"
+                                                ::alt="item.name"
+                                                width="110"
+                                                height="110"
+                                                ::key="item.id"
+                                                ::index="item.id"
+                                            >
+                                            </x-shop::media.images.lazy>
+                                        </a>
 
                                         <!-- Cart Item Options Container -->
                                         <div class="grid place-content-start gap-y-[10px]">
-
-                                            <p 
-                                                class="text-[16px] font-medium" 
-                                                v-text="item.name"
-                                            >
-                                            </p>
-                                    
+                                            <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
+                                                <p 
+                                                    class="text-[16px] font-medium" 
+                                                    v-text="item.name"
+                                                >
+                                                </p>
+                                            </a>
+                                            
                                             <!-- Cart Item Options Container -->
                                             <div
                                                 class="grid gap-x-[10px] gap-y-[6px] select-none"

@@ -427,7 +427,7 @@ return [
 
         'products' => [
             'card' => [
-                'card.add-to-compare-success' => 'Öğe karşılaştırma listesine başarıyla eklendi.',
+                'add-to-compare-success'      => 'Öğe karşılaştırma listesine başarıyla eklendi.',
                 'already-in-compare'          => 'Öğe zaten karşılaştırma listesine eklenmiş.',
                 'add-to-cart'                 => 'Sepete Ekle',
                 'add-to-wishlist'             => 'Dilek Listesine Ekle',
@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => ': :query için arama sonuçları',
+        'title'   => ': :query için arama sonuçları',
+        'results' => 'Arama sonuçları',
 
         'images' => [
             'index' => [
@@ -622,6 +623,7 @@ return [
             'suspended-account-message' => 'Hesabınız askıya alınmıştır.',
             'select-hourly-duration'    => 'Bir saatlik süre aralığı seçin.',
             'success-remove'            => 'Ürün başarıyla sepetten kaldırıldı.',
+            'paypal-payment-cancelled'  => 'Paypal ödemesi iptal edildi.',
 
             'index' => [
                 'bagisto'                  => 'Bagisto',
@@ -768,6 +770,7 @@ return [
                 'grand-total'      => 'Genel Toplam',
                 'place-order'      => 'Sipariş Ver',
                 'processing'       => 'İşleniyor',
+                'price_&_qty'      => ':price × :qty',
                 'sub-total'        => 'Ara Toplam',
                 'tax'              => 'Vergi',
             ],
@@ -833,10 +836,13 @@ return [
 
         'customers' => [
             'registration' => [
-                'description' => 'Hesabınız başarıyla oluşturuldu ve şimdi e-posta adresiniz ve parola bilgilerinizle giriş yapabilirsiniz. Giriş yaptıktan sonra, geçmiş siparişleri inceleme, favorileri gözden geçirme ve hesap bilgilerinizi düzenleme gibi diğer hizmetlere erişebilirsiniz.',
-                'greeting'    => 'Hoş geldiniz ve bize kaydolduğunuz için teşekkür ederiz!',
-                'subject'     => 'Yeni Müşteri Kaydı',
-                'sign-in'     => 'Giriş yap',
+                'subject'                 => 'Yeni Müşteri Kaydı',
+                'description'             => 'Hesabınız başarıyla oluşturuldu ve şimdi e-posta adresiniz ve parola bilgilerinizle giriş yapabilirsiniz. Giriş yaptıktan sonra, geçmiş siparişleri inceleme, favorileri gözden geçirme ve hesap bilgilerinizi düzenleme gibi diğer hizmetlere erişebilirsiniz.',
+                'credentials-description' => 'Hesabınız oluşturuldu. Hesap detaylarınız aşağıdadır.',
+                'greeting'                => 'Hoş geldiniz ve bize kaydolduğunuz için teşekkür ederiz!',
+                'sign-in'                 => 'Giriş yap',
+                'username-email'          => 'Kullanıcı adı/E-posta',
+                'password'                => 'Şifre',
             ],
 
             'forgot-password' => [

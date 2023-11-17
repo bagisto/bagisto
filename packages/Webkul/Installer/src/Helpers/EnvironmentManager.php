@@ -63,28 +63,25 @@ class EnvironmentManager
             $envDBParams['DB_PREFIX'] = $request['db_prefix'] ?? '';
             $envDBParams['DB_USERNAME'] = $request['db_username'];
             $envDBParams['DB_PASSWORD'] = $request['db_password'];
-            $envDBParams['APP_NAME'] = $request['app_name'];
-            $envDBParams['APP_URL'] = $request['app_url'];
-            $envDBParams['APP_CURRENCY'] = $request['app_currency'];
-            $envDBParams['APP_LOCALE'] = $request['app_locale'];
-            $envDBParams['APP_TIMEZONE'] = $request['app_timezone'];
             $envDBParams['DB_CONNECTION'] = $request['db_connection'];
             $envDBParams['DB_PORT'] = (int) $request['db_port'];
         }
 
-        if (isset($request['mail_host'])) {
-            $envDBParams['MAIL_MAILER'] = 'smtp';
-            $envDBParams['MAIL_HOST'] = $request['mail_host'];
-            $envDBParams['MAIL_PORT'] = $request['mail_port'];
-            $envDBParams['MAIL_USERNAME'] = $request['mail_username'];
-            $envDBParams['MAIL_PASSWORD'] = $request['mail_password'];
-            $envDBParams['MAIL_ENCRYPTION'] = $request['mail_encryption'];
-            $envDBParams['MAIL_FROM_ADDRESS'] = $request['mail_from_address'];
+        if (isset($request['app_name'])) {
+            $envDBParams['APP_NAME'] = $request['app_name'] ?? null;
+            $envDBParams['APP_URL'] = $request['app_url'];
+            $envDBParams['APP_CURRENCY'] = $request['app_currency'];
+            $envDBParams['APP_LOCALE'] = $request['app_locale'];
+            $envDBParams['APP_TIMEZONE'] = $request['app_timezone'];
         }
 
         $data = file_get_contents(base_path('.env'));
 
         foreach ($envDBParams as $key => $value) {
+            if (preg_match('/\s/', $value)) {
+                $value = '"' . $value . '"';
+            }
+
             $data = preg_replace("/$key=(.*)/", "$key=$value", $data);
         }
 

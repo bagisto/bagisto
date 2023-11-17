@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Webkul\Installer\Database\Seeders\DatabaseSeeder as BagistoDatabaseSeeder;
 
 class DatabaseManager
 {
@@ -48,7 +49,7 @@ class DatabaseManager
     /**
      * Drop all the tables and migrate in the database
      *
-     * @return string
+     * @return void|string
      */
     public function migration()
     {
@@ -60,24 +61,19 @@ class DatabaseManager
             ], 500);
         }
 
-        return $this->seeder();
     }
 
     /**
      * Seed the database.
      *
-     * @return string
+     * @return void|string
      */
-    private function seeder()
+    public function seeder($data)
     {
         try {
-            Artisan::call('db:seed');
-
-            $seederLog = Artisan::output();
+            app(BagistoDatabaseSeeder::class)->run($data['parameter']);
 
             $this->storageLink();
-
-            return $seederLog;
         } catch (Exception $e) {
             return $e->getMessage();
         }

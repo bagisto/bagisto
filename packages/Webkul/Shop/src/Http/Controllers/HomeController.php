@@ -2,7 +2,7 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
-use Webkul\Shop\Repositories\ThemeCustomizationRepository;
+use Webkul\Theme\Repositories\ThemeCustomizationRepository;
 
 class HomeController extends Controller
 {

@@ -1,15 +1,15 @@
 {!! view_render_event('bagisto.shop.layout.footer.before') !!}
 
-{{--
+<!--
     The category repository is injected directly here because there is no way
     to retrieve it from the view composer, as this is an anonymous component.
---}}
-@inject('themeCustomizationRepository', 'Webkul\Shop\Repositories\ThemeCustomizationRepository')
+-->
+@inject('themeCustomizationRepository', 'Webkul\Theme\Repositories\ThemeCustomizationRepository')
 
-{{--
+<!--
     This code needs to be refactored to reduce the amount of PHP in the Blade
     template as much as possible.
---}}
+-->
 @php
     $customization = $themeCustomizationRepository->findOneWhere([
         'type'       => 'footer_links',
@@ -43,7 +43,7 @@
                 @endif
             </div>
             
-            {{-- News Letter subscription --}}
+            <!-- News Letter subscription -->
             @if(core()->getConfigData('customer.settings.newsletter.subscription'))
                 <div class="grid gap-[10px]">
                     <p

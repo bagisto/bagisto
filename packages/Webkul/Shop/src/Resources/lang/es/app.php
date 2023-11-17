@@ -415,7 +415,7 @@ return [
 
         'products' => [
             'card' => [
-                'card.add-to-compare-success' => 'Elemento añadido correctamente a la lista de comparación.',
+                'add-to-compare-success'      => 'Elemento añadido correctamente a la lista de comparación.',
                 'already-in-compare'          => 'El elemento ya está agregado a la lista de comparación.',
                 'add-to-cart'                 => 'Agregar al carrito',
                 'add-to-wishlist'             => 'Agregar a la lista de deseos',
@@ -558,7 +558,8 @@ return [
     ],
 
     'search' => [
-        'title' => 'Suchergebnisse für: :query',
+        'title'   => 'Suchergebnisse für: :query',
+        'results' => 'Resultados de búsqueda',
 
         'images' => [
             'index' => [
@@ -610,6 +611,7 @@ return [
             'suspended-account-message' => 'Tu cuenta ha sido suspendida.',
             'select-hourly-duration'    => 'Selecciona una duración de una hora.',
             'success-remove'            => 'El artículo se ha eliminado correctamente del carrito.',
+            'paypal-payment-cancelled'  => 'El pago de Paypal ha sido cancelado.',
 
             'index' => [
                 'bagisto'                  => 'Bagisto',
@@ -756,6 +758,7 @@ return [
                 'grand-total'      => 'Gran Total',
                 'place-order'      => 'Realizar Pedido',
                 'processing'       => 'Procesando',
+                'price_&_qty'      => ':price × :qty',
                 'sub-total'        => 'Subtotal',
                 'tax'              => 'Impuesto',
             ],
@@ -821,10 +824,13 @@ return [
 
         'customers' => [
             'registration' => [
-                'description' => 'Ihr Konto wurde erfolgreich erstellt und Sie können sich mit Ihren E-Mail-Adresse und Passwort anmelden. Nach der Anmeldung können Sie auf weitere Dienste zugreifen, einschließlich der Überprüfung früherer Bestellungen, Wunschlisten und der Bearbeitung Ihrer Kontoinformationen.',
-                'greeting'    => 'Willkommen und vielen Dank für Ihre Registrierung bei uns!',
-                'subject'     => 'Neue Kundenregistrierung',
-                'sign-in'     => 'Anmelden',
+                'subject'                 => 'Neue Kundenregistrierung',
+                'description'             => 'Ihr Konto wurde erfolgreich erstellt und Sie können sich mit Ihren E-Mail-Adresse und Passwort anmelden. Nach der Anmeldung können Sie auf weitere Dienste zugreifen, einschließlich der Überprüfung früherer Bestellungen, Wunschlisten und der Bearbeitung Ihrer Kontoinformationen.',
+                'credentials-description' => 'Su cuenta ha sido creada. Los detalles de su cuenta se encuentran a continuación:',
+                'greeting'                => 'Willkommen und vielen Dank für Ihre Registrierung bei uns!',
+                'sign-in'                 => 'Anmelden',
+                'username-email'          => 'Nombre de usuario/Correo electrónico',
+                'password'                => 'Contraseña',
             ],
 
             'forgot-password' => [

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Webkul\Customer\Repositories\WishlistRepository;
+use Webkul\Marketing\Repositories\SearchTermRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
@@ -24,6 +25,7 @@ class Product extends AbstractReporting
         protected WishlistRepository $wishlistRepository,
         protected ProductReviewRepository $reviewRepository,
         protected OrderItemRepository $orderItemRepository,
+        protected SearchTermRepository $searchTermRepository
     ) {
         parent::__construct();
     }
@@ -75,7 +77,7 @@ class Product extends AbstractReporting
         return $this->orderItemRepository
             ->resetModel()
             ->whereBetween('created_at', [$startDate, $endDate])
-            ->sum('qty_ordered');
+            ->value(DB::raw('SUM(qty_invoiced - qty_refunded)')) ?? 0;
     }
 
     /**
@@ -195,11 +197,11 @@ class Product extends AbstractReporting
             return [
                 'id'                => $item->product_id,
                 'name'              => $item->name,
-                'price'             => $item->product->price,
+                'price'             => $item->product?->price,
                 'formatted_price'   => core()->formatBasePrice($item->price),
                 'revenue'           => $item->revenue,
                 'formatted_revenue' => core()->formatBasePrice($item->revenue),
-                'images'            => $item->product->images,
+                'images'            => $item->product?->images,
             ];
         });
 
@@ -229,10 +231,10 @@ class Product extends AbstractReporting
             return [
                 'id'                => $item->product_id,
                 'name'              => $item->name,
-                'price'             => $item->product->price,
+                'price'             => $item->product?->price,
                 'formatted_price'   => core()->formatBasePrice($item->price),
                 'total_qty_ordered' => $item->total_qty_ordered,
-                'images'            => $item->product->images,
+                'images'            => $item->product?->images,
             ];
         });
 
@@ -266,6 +268,35 @@ class Product extends AbstractReporting
         });
 
         return $products;
+    }
+
+    /**
+     * Gets last search terms
+     *
+     * @param  int  $limit
+     */
+    public function getLastSearchTerms($limit = null): EloquentCollection
+    {
+        return $this->searchTermRepository
+            ->resetModel()
+            ->whereBetween('updated_at', [$this->startDate, $this->endDate])
+            ->orderByDesc('updated_at')
+            ->limit($limit)
+            ->get();
+    }
+
+    /**
+     * Gets top search terms
+     *
+     * @param  int  $limit
+     */
+    public function getTopSearchTerms($limit = null): EloquentCollection
+    {
+        return $this->searchTermRepository
+            ->resetModel()
+            ->orderByDesc('uses')
+            ->limit($limit)
+            ->get();
     }
 
     /**

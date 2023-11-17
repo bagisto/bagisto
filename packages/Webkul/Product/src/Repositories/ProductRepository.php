@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Marketing\Repositories\SearchSynonymRepository;
 
 class ProductRepository extends Repository
 {
@@ -23,6 +24,7 @@ class ProductRepository extends Repository
         protected AttributeRepository $attributeRepository,
         protected ProductAttributeValueRepository $productAttributeValueRepository,
         protected ElasticSearchRepository $elasticSearchRepository,
+        protected SearchSynonymRepository $searchSynonymRepository,
         Container $container
     ) {
         parent::__construct($container);
@@ -199,8 +201,8 @@ class ProductRepository extends Repository
             'url_key'              => null,
         ], request()->input());
 
-        if (! empty($params['search'])) {
-            $params['name'] = $params['search'];
+        if (! empty($params['query'])) {
+            $params['name'] = $params['query'];
         }
 
         $query = $this->with([
@@ -270,7 +272,13 @@ class ProductRepository extends Repository
                     ->where($alias . '.attribute_id', $attribute->id);
 
                 if ($attribute->code == 'name') {
-                    $qb->where($alias . '.text_value', 'like', '%' . urldecode($params['name']) . '%');
+                    $synonyms = $this->searchSynonymRepository->getSynonymsByQuery(urldecode($params['name']));
+
+                    $qb->where(function ($subQuery) use ($alias, $synonyms) {
+                        foreach ($synonyms as $synonym) {
+                            $subQuery->orWhere($alias . '.text_value', 'like', '%' . $synonym . '%');
+                        }
+                    });
                 } elseif ($attribute->code == 'url_key') {
                     if (empty($params['url_key'])) {
                         $qb->whereNotNull($alias . '.text_value');

@@ -427,7 +427,7 @@ return [
 
         'products' => [
             'card' => [
-                'card.add-to-compare-success' => 'Item succesvol toegevoegd aan vergelijkingslijst.',
+                'add-to-compare-success'      => 'Item succesvol toegevoegd aan vergelijkingslijst.',
                 'already-in-compare'          => 'Item is al toegevoegd aan vergelijkingslijst.',
                 'add-to-cart'                 => 'Toevoegen aan winkelwagen',
                 'add-to-wishlist'             => 'Toevoegen aan verlanglijstje',
@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => 'Zoekresultaten voor : :query',
+        'title'   => 'Zoekresultaten voor : :query',
+        'results' => 'Zoekresultaten',
 
         'images' => [
             'index' => [
@@ -621,6 +622,7 @@ return [
             'suspended-account-message' => 'Uw account is opgeschort.',
             'select-hourly-duration'    => 'Selecteer een slotduur van één uur.',
             'success-remove'            => 'Item is succesvol verwijderd uit de winkelwagen.',
+            'paypal-payment-cancelled'  => 'PayPal-betaling is geannuleerd.',
 
             'index' => [
                 'bagisto'                  => 'Bagisto',
@@ -767,6 +769,7 @@ return [
                 'grand-total'      => 'Eindtotaal',
                 'place-order'      => 'Bestelling plaatsen',
                 'processing'       => 'Verwerken',
+                'price_&_qty'      => ':price × :qty',
                 'sub-total'        => 'Subtotaal',
                 'tax'              => 'Belasting',
             ],
@@ -832,10 +835,13 @@ return [
 
         'customers' => [
             'registration' => [
-                'description' => 'Je account is nu succesvol aangemaakt en je kunt inloggen met je e-mailadres en wachtwoord. Na het inloggen kun je andere diensten gebruiken, waaronder het bekijken van eerdere bestellingen, verlanglijstjes en het bewerken van je accountgegevens.',
-                'greeting'    => 'Welkom en bedankt voor je registratie bij ons!',
-                'subject'     => 'Nieuwe Klantregistratie',
-                'sign-in'     => 'Inloggen',
+                'subject'                 => 'Nieuwe Klantregistratie',
+                'description'             => 'Je account is nu succesvol aangemaakt en je kunt inloggen met je e-mailadres en wachtwoord. Na het inloggen kun je andere diensten gebruiken, waaronder het bekijken van eerdere bestellingen, verlanglijstjes en het bewerken van je accountgegevens.',
+                'credentials-description' => 'Uw account is aangemaakt. Uw accountgegevens staan hieronder:',
+                'greeting'                => 'Welkom en bedankt voor je registratie bij ons!',
+                'sign-in'                 => 'Inloggen',
+                'username-email'          => 'Gebruikersnaam/E-mail',
+                'password'                => 'Wachtwoord',
             ],
 
             'forgot-password' => [

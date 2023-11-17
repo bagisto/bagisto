@@ -427,7 +427,7 @@ return [
 
         'products' => [
             'card' => [
-                'card.add-to-compare-success' => 'Article ajouté avec succès à la liste de comparaison.',
+                'add-to-compare-success'      => 'Article ajouté avec succès à la liste de comparaison.',
                 'already-in-compare'          => 'L\'article est déjà ajouté à la liste de comparaison.',
                 'add-to-cart'                 => 'Ajouter au panier',
                 'add-to-wishlist'             => 'Ajouter à la liste de souhaits',
@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => 'Résultats de recherche pour : :query',
+        'title'   => 'Résultats de recherche pour : :query',
+        'results' => 'Résultats de recherche',
 
         'images' => [
             'index' => [
@@ -622,6 +623,7 @@ return [
             'suspended-account-message' => 'Votre compte a été suspendu.',
             'select-hourly-duration'    => 'Sélectionnez une durée d\'une heure.',
             'success-remove'            => 'L\'article a été supprimé avec succès du panier.',
+            'paypal-payment-cancelled'  => 'Le paiement Paypal a été annulé.',
 
             'index' => [
                 'bagisto'                  => 'Bagisto',
@@ -768,6 +770,7 @@ return [
                 'grand-total'      => 'Total général',
                 'place-order'      => 'Passer la commande',
                 'processing'       => 'En cours de traitement',
+                'price_&_qty'      => ':price × :qty',
                 'sub-total'        => 'Sous-total',
                 'tax'              => 'Taxes',
             ],
@@ -833,10 +836,13 @@ return [
 
         'customers' => [
             'registration' => [
-                'description' => 'Votre compte a été créé avec succès et vous pouvez vous connecter en utilisant votre adresse e-mail et vos informations d\'identification par mot de passe. Après vous être connecté, vous pourrez accéder à d\'autres services, y compris la consultation de commandes passées, de listes de souhaits et la modification de vos informations de compte.',
-                'greeting'    => 'Bienvenue et merci de vous être inscrit chez nous !',
-                'subject'     => 'Nouvelle inscription de client',
-                'sign-in'     => 'Se connecter',
+                'subject'                 => 'Nouvelle inscription de client',
+                'description'             => 'Votre compte a été créé avec succès et vous pouvez vous connecter en utilisant votre adresse e-mail et vos informations d\'identification par mot de passe. Après vous être connecté, vous pourrez accéder à d\'autres services, y compris la consultation de commandes passées, de listes de souhaits et la modification de vos informations de compte.',
+                'credentials-description' => 'Votre compte a été créé. Les détails de votre compte sont ci-dessous :',
+                'greeting'                => 'Bienvenue et merci de vous être inscrit chez nous !',
+                'sign-in'                 => 'Se connecter',
+                'username-email'          => 'Nom d\'utilisateur/Email',
+                'password'                => 'Mot de passe',
             ],
 
             'forgot-password' => [

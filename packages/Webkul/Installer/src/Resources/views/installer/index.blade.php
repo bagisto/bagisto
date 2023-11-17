@@ -24,7 +24,7 @@
 
         <link
             type="image/x-icon"
-            href="{{ asset('images/logo.svg') }}"
+            href="{{ asset('images/installer/bagisto-logo.svg') }}"
             rel="shortcut icon"
             sizes="16x16"
         />
@@ -46,7 +46,7 @@
                     <div class="grid items-end max-w-[362px] m-auto h-[100vh]">
                         <div class="grid gap-[16px]">
                             <img
-                                src="{{ bagisto_asset('images/bagisto-logo.svg', 'installer') }}"
+                                src="{{ bagisto_asset('images/installer/bagisto-logo.svg', 'installer') }}"
                                 alt="@lang('installer::app.installer.index.bagisto-logo')"
                             >
 
@@ -60,20 +60,35 @@
                                 </p>
                             </div>
 
-                            <p class="text-gray-600 text-[14px]">
-                                @lang('installer::app.installer.index.installation-description')
-                            </p>
-
                             <div class="grid gap-[12px]">
+                                <div
+                                    class="flex gap-[4px] text-[14px] text-gray-600"
+                                    :class="[stepStates.start == 'active' ? 'font-bold' : '', 'text-gray-600']"
+                                >
+                                    <span v-if="stepStates.start !== 'complete'">
+                                        <span
+                                            class="text-[20px]"
+                                            :class="stepStates.start === 'pending' ? 'icon-checkbox' : 'icon-processing'"
+                                        >
+                                        </span>
+                                    </span>
+
+                                    <span v-else>
+                                        <span class="icon-tick text-green-500"></span>
+                                    </span>
+
+                                    <p>@lang('installer::app.installer.index.start.main')</p>
+                                </div>
+
                                 <!-- Server Environment -->
                                 <div
                                     class="flex gap-[4px] text-[14px] text-gray-600"
-                                    :class="[stepStates.environment == 'active' ? 'font-bold' : '', 'text-gray-600']"
+                                    :class="[stepStates.serverRequirements == 'active' ? 'font-bold' : '', 'text-gray-600']"
                                 >
-                                    <span v-if="stepStates.environment !== 'complete'">
+                                    <span v-if="stepStates.serverRequirements !== 'complete'">
                                         <span
                                             class="text-[20px]"
-                                            :class="stepStates.environment === 'pending' ? 'icon-checkbox' : 'icon-processing'"
+                                            :class="stepStates.serverRequirements === 'pending' ? 'icon-checkbox' : 'icon-processing'"
                                         >
                                         </span>
                                     </span>
@@ -82,18 +97,18 @@
                                         <span class="icon-tick text-green-500"></span>
                                     </span>
 
-                                    <p>@lang('installer::app.installer.index.server-requirements')</p>
+                                    <p>@lang('installer::app.installer.index.server-requirements.title')</p>
                                 </div>
 
-                                <!-- ENV Setup -->
+                                <!-- ENV Database Configuration -->
                                 <div
                                     class="flex gap-[4px] text-[14px] text-gray-600"
-                                    :class="[stepStates.envSetup == 'active' ? 'font-bold' : '', 'text-gray-600']"
+                                    :class="[stepStates.envDatabase == 'active' ? 'font-bold' : '', 'text-gray-600']"
                                 >
-                                    <span v-if="stepStates.envSetup !== 'complete'">
+                                    <span v-if="stepStates.envDatabase !== 'complete'">
                                         <span
                                             class="text-[20px]"
-                                            :class="stepStates.envSetup === 'pending' ? 'icon-checkbox' : 'icon-processing'"
+                                            :class="stepStates.envDatabase === 'pending' ? 'icon-checkbox' : 'icon-processing'"
                                         >
                                         </span>
                                     </span>
@@ -102,7 +117,9 @@
                                         <span class="icon-tick text-green-500"></span>
                                     </span>
 
-                                    <p>@lang('installer::app.installer.index.environment-configuration')</p>
+                                    <p>
+                                        @lang('installer::app.installer.index.environment-configuration.title')
+                                    </p>
                                 </div>
 
                                 <!-- Ready For Installation -->
@@ -122,8 +139,8 @@
                                         <span class="icon-tick text-green-500"></span>
                                     </span>
 
-                                    <p>@lang('installer::app.installer.index.ready-for-installation')</p>
-                                </div>
+                                    <p>@lang('installer::app.installer.index.ready-for-installation.title')</p>
+                                </div> 
 
                                 <!-- Create Admin Configuration -->
                                 <div
@@ -142,27 +159,7 @@
                                         <span class="icon-tick text-green-500"></span>
                                     </span>
 
-                                    <p>@lang('installer::app.installer.index.create-administrator')</p>
-                                </div>
-
-                                <!-- Email Configuration -->
-                                <div
-                                    class="flex gap-[4px] text-[14px] text-gray-600"
-                                    :class="[stepStates.emailConfiguration == 'active' ? 'font-bold' : '', 'text-gray-600']"
-                                >
-                                    <span v-if="stepStates.emailConfiguration !== 'complete'">
-                                        <span
-                                            class="text-[20px]"
-                                            :class="stepStates.emailConfiguration === 'pending' ? 'icon-checkbox' : 'icon-processing'"
-                                        >
-                                        </span>
-                                    </span>
-
-                                    <span v-else>
-                                        <span class="icon-tick text-green-500"></span>
-                                    </span>
-
-                                    <p>@lang('installer::app.installer.index.email-configuration')</p>
+                                    <p>@lang('installer::app.installer.index.create-administrator.title')</p>
                                 </div>
 
                                 <!-- Installation Completed -->
@@ -182,7 +179,7 @@
                                         <span class="icon-tick text-green-500"></span>
                                     </span>
 
-                                    <p>@lang('installer::app.installer.index.installation-completed')</p>
+                                    <p>@lang('installer::app.installer.index.installation-completed.title')</p>
                                 </div>
 
                             </div>
@@ -208,12 +205,122 @@
                     </div>
                 </div>
 
+                @php
+                    $locales = [
+                        'ar'    => 'arabic',
+                        'bn'    => 'bengali',
+                        'pt_BR' => 'portuguese',
+                        'zh_CN' => 'chinese',
+                        'nl'    => 'dutch',
+                        'en'    => 'english',
+                        'fr'    => 'french',
+                        'de'    => 'german',
+                        'he'    => 'hebrew',
+                        'hi_IN' => 'hindi',
+                        'it'    => 'italian',
+                        'ja'    => 'japanese',
+                        'fa'    => 'persian',
+                        'pl'    => 'polish',
+                        'ru'    => 'russian',
+                        'sin'   => 'sinhala',
+                        'es'    => 'spanish',
+                        'tr'    => 'turkish',
+                        'uk'    => 'ukrainian',
+                    ];
+
+                    $currencies = [
+                        'CNY' => 'chinese-yuan',
+                        'AED' => 'dirham',
+                        'EUR' => 'euro',
+                        'INR' => 'rupee',
+                        'IRR' => 'iranian',
+                        'ILS' => 'israeli',
+                        'JPY' => 'japanese-yen',
+                        'GBP' => 'pound',
+                        'RUB' => 'russian-ruble',
+                        'SAR' => 'saudi',
+                        'TRY' => 'turkish-lira',
+                        'USD' => 'usd',
+                        'UAH' => 'ukrainian-hryvnia',
+                    ];
+                @endphp
                 <!-- Right Side Components -->
+
+                <!-- Start -->
+                <div class="w-full max-w-[568px] bg-white rounded-[8px] shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)] border-[1px] border-gray-300" v-if="currentStep == 'start'">
+                    <x-installer::form
+                        v-slot="{ meta, errors, handleSubmit }"
+                        as="div"
+                        ref="start"
+                    >
+                        <form
+                            @submit.prevent="handleSubmit($event, setLocale)"
+                            enctype="multipart/form-data"
+                            ref="multiLocaleForm"
+                        >
+                            <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
+                                <p class="text-[20px] text-gray-800 font-bold">
+                                    @lang('installer::app.installer.index.start.welcome-title')
+                                </p>
+                            </div>
+
+                            <div class="flex flex-col gap-[12px] items-center h-[384px] px-[30px] py-[16px] overflow-y-auto">
+                                <p class="text-gray-600 text-[14px] text-center">
+                                    @lang('installer::app.installer.index.installation-description')
+                                </p>
+
+                                <div class="container overflow-hidden">
+                                    <div class="flex flex-col gap-[12px] justify-center h-[284px]  px-[30px] py-[16px] overflow-y-auto">
+                                        <!-- Application Name -->
+                                        <x-installer::form.control-group class="mb-[10px]">
+                                            <x-installer::form.control-group.label>
+                                                @lang('Installation Wizard language')
+                                            </x-installer::form.control-group.label>
+
+                                            <x-installer::form.control-group.control
+                                                type="select"
+                                                name="locale"
+                                                rules="required"
+                                                :label="trans('installer::app.installer.index.start.locale')"
+                                                value="{{ app()->getLocale() }}"
+                                                @change="$refs.multiLocaleForm.submit();"
+                                            >
+                                                <option value="" disabled>@lang('installer::app.installer.index.start.select-locale')</option>
+
+                                                @foreach ($locales as $value => $label)
+                                                    <option value="{{ $value }}">
+                                                        @lang("installer::app.installer.index.$label")
+                                                    </option>
+                                                @endforeach
+                                            </x-installer::form.control-group.control>
+
+                                            <x-installer::form.control-group.error
+                                                control-name="locale"
+                                            >
+                                            </x-installer::form.control-group.error>
+                                        </x-installer::form.control-group>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="flex px-[16px] py-[10px] justify-end items-center">
+                                <button
+                                    type="submit"
+                                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
+                                    tabindex="0"
+                                >
+                                    @lang('installer::app.installer.index.continue')
+                                </button>
+                            </div>
+                        </form>
+                    </x-installer::form>
+                </div>
+
                 <!-- Server Requirements -->
-                <div class="w-full max-w-[568px] bg-white rounded-[8px] shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)] border-[1px] border-gray-300" v-if="currentStep == 'environment'">
+                <div class="w-full max-w-[568px] bg-white rounded-[8px] shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)] border-[1px] border-gray-300" v-if="currentStep == 'serverRequirements'">
                     <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
                         <p class="text-[20px] text-gray-800 font-bold">
-                            @lang('installer::app.installer.index.server-requirements')
+                            @lang('installer::app.installer.index.server-requirements.title')
                         </p>
                     </div>
 
@@ -222,7 +329,7 @@
                             <span class="{{ $phpVersion['supported'] ? 'icon-tick text-[20px] text-green-500' : '' }}"></span>
 
                             <p class="text-[14px] text-gray-600 font-semibold">
-                                @lang('installer::app.installer.index.php') <span class="font-normal">(@lang('installer::app.installer.index.php-version'))</span>
+                                @lang('installer::app.installer.index.server-requirements.php') <span class="font-normal">(@lang('installer::app.installer.index.server-requirements.php-version'))</span>
                             </p>
                         </div>
 
@@ -232,7 +339,7 @@
                                     <span class="{{ $item ? 'icon-tick text-green-500' : 'icon-cross text-red-500' }} text-[20px]"></span>
 
                                     <p class="text-[14px] text-gray-600 font-semibold">
-                                        @lang('installer::app.installer.index.' . $key)
+                                        @lang('installer::app.installer.index.server-requirements.' . $key)
                                     </p>
                                 </div>
                             @endforeach
@@ -250,214 +357,25 @@
                         }
                     @endphp
 
-                    <div class="flex px-[16px] py-[10px] justify-end items-center">
+                    <div class="flex px-[16px] py-[10px] justify-between items-center">
+                        <div
+                            class="text-[12px] text-blue-600 font-semibold cursor-pointer"
+                            role="button"
+                            aria-label="@lang('installer::app.installer.index.back')"
+                            tabindex="0"
+                            @click="back"
+                        >
+                            @lang('installer::app.installer.index.back')
+                        </div>
+
                         <div
                             class="{{ $hasRequirement ? 'opacity-50 cursor-not-allowed' : ''}} px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer {{ $hasRequirement ?: 'hover:opacity-90' }}"
                             @click="nextForm"
+                            tabindex="0"
                         >
                             @lang('installer::app.installer.index.continue')
                         </div>
                     </div>
-                </div>
-
-                <!-- Environment Configuration .ENV -->
-                <div
-                    class="w-full max-w-[568px] bg-white rounded-[8px] shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)] border-[1px] border-gray-300"
-                    v-if="currentStep == 'envSetup'"
-                >
-                    <x-installer::form
-                        v-slot="{ meta, errors, handleSubmit }"
-                        as="div"
-                        ref="envSetup"
-                    >
-                        <form
-                            @submit.prevent="handleSubmit($event, nextForm)"
-                            enctype="multipart/form-data"
-                        >
-                            <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
-                                <p class="text-[20px] text-gray-800 font-bold">
-                                    @lang('installer::app.installer.index.environment-configuration')
-                                </p>
-                            </div>
-
-                            <div class="flex flex-col gap-[12px] px-[30px] py-[16px] border-b-[1px] border-gray-300 h-[484px] overflow-y-auto">
-                                <!-- Application Name -->
-                                <x-installer::form.control-group class="mb-[10px]">
-                                    <x-installer::form.control-group.label class="required">
-                                        @lang('installer::app.installer.index.application-name')
-                                    </x-installer::form.control-group.label>
-
-                                    <x-installer::form.control-group.control
-                                        type="text"
-                                        name="app_name"
-                                        ::value="envData.app_name ?? 'Bagisto'"
-                                        rules="required"
-                                        :label="trans('installer::app.installer.index.application-name')"
-                                        :placeholder="trans('installer::app.installer.index.bagisto')"
-                                    >
-                                    </x-installer::form.control-group.control>
-
-                                    <x-installer::form.control-group.error
-                                        control-name="app_name"
-                                    >
-                                    </x-installer::form.control-group.error>
-                                </x-installer::form.control-group>
-
-                                <!-- Application Default URL -->
-                                <x-installer::form.control-group class="mb-[10px]">
-                                    <x-installer::form.control-group.label class="required">
-                                        @lang('installer::app.installer.index.default-url')
-                                    </x-installer::form.control-group.label>
-
-                                    <x-installer::form.control-group.control
-                                        type="text"
-                                        name="app_url"
-                                        ::value="envData.app_url ?? 'https://localhost'"
-                                        rules="required"
-                                        :label="trans('installer::app.installer.index.default-url')"
-                                        :placeholder="trans('installer::app.installer.index.default-url-link')"
-                                    >
-                                    </x-installer::form.control-group.control>
-
-                                    <x-installer::form.control-group.error
-                                        control-name="app_url"
-                                    >
-                                    </x-installer::form.control-group.error>
-                                </x-installer::form.control-group>
-
-                                <!-- Application Default Currency -->
-                                <x-installer::form.control-group class="mb-[10px]">
-                                    <x-installer::form.control-group.label class="required">
-                                        @lang('installer::app.installer.index.default-currency')
-                                    </x-installer::form.control-group.label>
-
-                                    <x-installer::form.control-group.control
-                                        type="select"
-                                        name="app_currency"
-                                        ::value="envData.app_currency ?? 'USD'"
-                                        rules="required"
-                                        :label="trans('installer::app.installer.index.default-currency')"
-                                    >
-                                        <option value="CNY">Chinese Yuan (CNY)</option>
-                                        <option value="AED">Dirham (AED)</option>
-                                        <option value="EUR">Euro (EUR)</option>
-                                        <option value="INR">Indian Rupee (INR)</option>
-                                        <option value="IRR">Iranian Rial (IRR)</option>
-                                        <option value="ILS">Israeli Shekel (ILS)</option>
-                                        <option value="JPY">Japanese Yen (JPY)</option>
-                                        <option value="GBP">Pound Sterling (GBP)</option>
-                                        <option value="RUB">Russian Ruble (RUB)</option>
-                                        <option value="SAR">Saudi Riyal (SAR)</option>
-                                        <option value="TRY">Turkish Lira (TRY)</option>
-                                        <option value="USD" selected>US Dollar (USD)</option>
-                                        <option value="UAH">Ukrainian Hryvnia (UAH)</option>
-                                    </x-installer::form.control-group.control>
-
-                                    <x-installer::form.control-group.error
-                                        control-name="app_currency"
-                                    >
-                                    </x-installer::form.control-group.error>
-                                </x-installer::form.control-group>
-
-                                <!-- Application Default Timezone -->
-                                <x-installer::form.control-group class="mb-[10px]">
-                                    <x-installer::form.control-group.label class="required">
-                                        @lang('installer::app.installer.index.default-timezone')
-                                    </x-installer::form.control-group.label>
-
-                                    @php
-                                        date_default_timezone_set('UTC');
-
-                                        $tzlist = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
-
-                                        $current = date_default_timezone_get();
-                                    @endphp
-
-                                    <x-installer::form.control-group.control
-                                        type="select"
-                                        name="app_timezone"
-                                        ::value="envData.app_timezone ?? $current"
-                                        rules="required"
-                                        :label="trans('installer::app.installer.index.default-timezone')"
-                                        >
-                                        @foreach($tzlist as $key => $value)
-                                            <option
-                                                value="{{ $value }}"
-                                                {{ $value === $current ? 'selected' : '' }}
-                                            >
-                                                {{ $value }}
-                                            </option>
-                                        @endforeach
-                                    </x-installer::form.control-group.control>
-
-                                    <x-installer::form.control-group.error
-                                        control-name="app_timezone"
-                                    >
-                                    </x-installer::form.control-group.error>
-                                </x-installer::form.control-group>
-
-                                <!-- Application Default Locale -->
-                                <x-installer::form.control-group class="mb-[10px]">
-                                    <x-installer::form.control-group.label class="required">
-                                        @lang('installer::app.installer.index.default-locale')
-                                    </x-installer::form.control-group.label>
-
-                                    <x-installer::form.control-group.control
-                                        type="select"
-                                        name="app_locale"
-                                        ::value="envData.app_locale ?? 'en'"
-                                        rules="required"
-                                        :label="trans('installer::app.installer.index.default-locale')"
-                                    >
-                                        <option value="ar">Arabic</option>
-                                        <option value="bn">Bengali</option>
-                                        <option value="pt_BR">Brazilian Portuguese</option>
-                                        <option value="zh_CN">Chinese</option>
-                                        <option value="nl">Dutch</option>
-                                        <option value="en" selected>English</option>
-                                        <option value="fr">French</option>
-                                        <option value="de">Dutch</option>
-                                        <option value="he">Hebrew</option>
-                                        <option value="hi_IN">Hindi</option>
-                                        <option value="it">Italian</option>
-                                        <option value="ja">Japanese</option>
-                                        <option value="fa">Persian</option>
-                                        <option value="pl">Polish</option>
-                                        <option value="ru">Russian</option>
-                                        <option value="sin">Sinhala</option>
-                                        <option value="es">Spanish</option>
-                                        <option value="tr">Turkish</option>
-                                        <option value="uk">Ukrainian</option>
-                                    </x-installer::form.control-group.control>
-
-                                    <x-installer::form.control-group.error
-                                        control-name="app_locale"
-                                    >
-                                    </x-installer::form.control-group.error>
-                                </x-installer::form.control-group>
-                            </div>
-
-                            <div class="flex px-[16px] py-[10px] justify-between items-center">
-                                <div
-                                    class="text-[12px] text-blue-600 font-semibold cursor-pointer"
-                                    role="button"
-                                    aria-label="@lang('installer::app.installer.index.back')"
-                                    tabindex="0"
-                                    @click="back"
-                                >
-                                    @lang('installer::app.installer.index.back')
-                                </div>
-
-                                <button
-                                    type="submit"
-                                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
-                                >
-                                    @lang('installer::app.installer.index.continue')
-                                </button>
-                            </div>
-
-                        </form>
-                    </x-installer::form>
                 </div>
 
                 <!-- Environment Configuration Database -->
@@ -476,7 +394,7 @@
                         >
                             <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
                                 <p class="text-[20px] text-gray-800 font-bold">
-                                    @lang('installer::app.installer.index.environment-configuration')
+                                    @lang('installer::app.installer.index.environment-configuration.title')
                                 </p>
                             </div>
 
@@ -484,7 +402,7 @@
                                 <!-- Database Connection-->
                                 <x-installer::form.control-group class="mb-[10px]">
                                     <x-installer::form.control-group.label class="required">
-                                        @lang('installer::app.installer.index.database-connection')
+                                        @lang('installer::app.installer.index.environment-configuration.database-connection')
                                     </x-installer::form.control-group.label>
 
                                     <x-installer::form.control-group.control
@@ -492,19 +410,18 @@
                                         name="db_connection"
                                         ::value="envData.db_connection ?? 'mysql'"
                                         rules="required"
-                                        :label="trans('installer::app.installer.index.database-connection')"
-                                        :placeholder="trans('installer::app.installer.index.database-connection')"
+                                        :label="trans('installer::app.installer.index.environment-configuration.database-connection')"
+                                        :placeholder="trans('installer::app.installer.index.environment-configuration.database-connection')"
                                     >
                                         <option
                                             value="mysql"
                                             selected
                                         >
-                                            Mysql
+                                            @lang('installer::app.installer.index.environment-configuration.mysql')
                                         </option>
 
-                                        <option value="pgsql">pgSQL</option>
-
-                                        <option value="sqlsrv">SQLSRV</option>
+                                        <option value="pgsql">@lang('installer::app.installer.index.environment-configuration.pgsql')</option>
+                                        <option value="sqlsrv">@lang('installer::app.installer.index.environment-configuration.sqlsrv')</option>
                                     </x-installer::form.control-group.control>
 
                                     <x-installer::form.control-group.error
@@ -516,7 +433,7 @@
                                 <!-- Database Hostname-->
                                 <x-installer::form.control-group class="mb-[10px]">
                                     <x-installer::form.control-group.label class="required">
-                                        @lang('installer::app.installer.index.database-hostname')
+                                        @lang('installer::app.installer.index.environment-configuration.database-hostname')
                                     </x-installer::form.control-group.label>
 
                                     <x-installer::form.control-group.control
@@ -524,8 +441,8 @@
                                         name="db_hostname"
                                         ::value="envData.db_hostname ?? '127.0.0.1'"
                                         rules="required"
-                                        :label="trans('installer::app.installer.index.database-hostname')"
-                                        :placeholder="trans('installer::app.installer.index.database-hostname')"
+                                        :label="trans('installer::app.installer.index.environment-configuration.database-hostname')"
+                                        :placeholder="trans('installer::app.installer.index.environment-configuration.database-hostname')"
                                     >
                                     </x-installer::form.control-group.control>
 
@@ -538,7 +455,7 @@
                                 <!-- Database Port-->
                                 <x-installer::form.control-group class="mb-[10px]">
                                     <x-installer::form.control-group.label class="required">
-                                        @lang('installer::app.installer.index.database-port')
+                                        @lang('installer::app.installer.index.environment-configuration.database-port')
                                     </x-installer::form.control-group.label>
 
                                     <x-installer::form.control-group.control
@@ -546,8 +463,8 @@
                                         name="db_port"
                                         ::value="envData.db_port ?? '3306'"
                                         rules="required"
-                                        :label="trans('installer::app.installer.index.database-port')"
-                                        :placeholder="trans('installer::app.installer.index.database-port')"
+                                        :label="trans('installer::app.installer.index.environment-configuration.database-port')"
+                                        :placeholder="trans('installer::app.installer.index.environment-configuration.database-port')"
                                     >
                                     </x-installer::form.control-group.control>
 
@@ -560,7 +477,7 @@
                                 <!-- Database name-->
                                 <x-installer::form.control-group class="mb-[10px]">
                                     <x-installer::form.control-group.label class="required">
-                                        @lang('installer::app.installer.index.database-name')
+                                        @lang('installer::app.installer.index.environment-configuration.database-name')
                                     </x-installer::form.control-group.label>
 
                                     <x-installer::form.control-group.control
@@ -568,8 +485,8 @@
                                         name="db_name"
                                         ::value="envData.db_name"
                                         rules="required"
-                                        :label="trans('installer::app.installer.index.database-name')"
-                                        :placeholder="trans('installer::app.installer.index.database-name')"
+                                        :label="trans('installer::app.installer.index.environment-configuration.database-name')"
+                                        :placeholder="trans('installer::app.installer.index.environment-configuration.database-name')"
                                     >
                                     </x-installer::form.control-group.control>
 
@@ -582,15 +499,15 @@
                                 <!-- Database Prefix-->
                                 <x-installer::form.control-group class="mb-[10px]">
                                     <x-installer::form.control-group.label>
-                                        @lang('installer::app.installer.index.database-prefix')
+                                        @lang('installer::app.installer.index.environment-configuration.database-prefix')
                                     </x-installer::form.control-group.label>
 
                                     <x-installer::form.control-group.control
                                         type="text"
                                         name="db_prefix"
                                         ::value="envData.db_prefix"
-                                        :label="trans('installer::app.installer.index.database-prefix')"
-                                        :placeholder="trans('installer::app.installer.index.database-prefix')"
+                                        :label="trans('installer::app.installer.index.environment-configuration.database-prefix')"
+                                        :placeholder="trans('installer::app.installer.index.environment-configuration.database-prefix')"
                                     >
                                     </x-installer::form.control-group.control>
 
@@ -603,7 +520,7 @@
                                 <!-- Database Username-->
                                 <x-installer::form.control-group class="mb-[10px]">
                                     <x-installer::form.control-group.label class="required">
-                                        @lang('installer::app.installer.index.database-username')
+                                        @lang('installer::app.installer.index.environment-configuration.database-username')
                                     </x-installer::form.control-group.label>
 
                                     <x-installer::form.control-group.control
@@ -611,8 +528,8 @@
                                         name="db_username"
                                         ::value="envData.db_username"
                                         rules="required"
-                                        :label="trans('installer::app.installer.index.database-username')"
-                                        :placeholder="trans('installer::app.installer.index.database-username')"
+                                        :label="trans('installer::app.installer.index.environment-configuration.database-username')"
+                                        :placeholder="trans('installer::app.installer.index.environment-configuration.database-username')"
                                     >
                                     </x-installer::form.control-group.control>
 
@@ -625,7 +542,7 @@
                                 <!-- Database Password-->
                                 <x-installer::form.control-group class="mb-[10px]">
                                     <x-installer::form.control-group.label class="required">
-                                        @lang('installer::app.installer.index.database-password')
+                                        @lang('installer::app.installer.index.environment-configuration.database-password')
                                     </x-installer::form.control-group.label>
 
                                     <x-installer::form.control-group.control
@@ -633,8 +550,8 @@
                                         name="db_password"
                                         ::value="envData.db_password"
                                         rules="required"
-                                        :label="trans('installer::app.installer.index.database-password')"
-                                        :placeholder="trans('installer::app.installer.index.database-password')"
+                                        :label="trans('installer::app.installer.index.environment-configuration.database-password')"
+                                        :placeholder="trans('installer::app.installer.index.environment-configuration.database-password')"
                                     >
                                     </x-installer::form.control-group.control>
 
@@ -659,6 +576,7 @@
                                 <button
                                     type="submit"
                                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
+                                    tabindex="0"
                                 >
                                     @lang('installer::app.installer.index.continue')
                                 </button>
@@ -683,32 +601,32 @@
                         >
                             <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
                                 <p class="text-[20px] text-gray-800 font-bold">
-                                    @lang('installer::app.installer.index.installation')
+                                    @lang('installer::app.installer.index.ready-for-installation.install')
                                 </p>
                             </div>
 
                             <div class="flex flex-col gap-[15px] justify-center px-[30px] py-[16px] border-b-[1px] border-gray-300 h-[484px] overflow-y-auto">
                                 <div class="flex flex-col gap-[16px]">
                                     <p class="text-[18px] text-gray-800 font-semibold">
-                                        @lang('installer::app.installer.index.bagisto-for-installation')
+                                        @lang('installer::app.installer.index.ready-for-installation.install-info')
                                     </p>
 
                                     <div class="grid gap-[10px]">
                                         <label class="text-[14px] text-gray-600">
-                                            @lang('installer::app.installer.index.bagisto-for-installation-info')
+                                            @lang('installer::app.installer.index.ready-for-installation.install-info-button')
                                         </label>
 
                                         <div class="grid gap-[12px]">
                                             <div class="flex gap-[4px] text-[14px] text-gray-600">
                                                 <span class="icon-processing text-[20px]"></span>
 
-                                                <p>@lang('installer::app.installer.index.create-databsae-table')</p>
+                                                <p>@lang('installer::app.installer.index.ready-for-installation.create-databsae-table')</p>
                                             </div>
 
                                             <div class="flex gap-[4px] text-[14px] text-gray-600">
                                                 <span class="icon-processing text-[20px]"></span>
 
-                                                <p>@lang('installer::app.installer.index.populate-database-table')</p>
+                                                <p>@lang('installer::app.installer.index.ready-for-installation.populate-database-table')</p>
                                             </div>
                                         </div>
                                     </div>
@@ -730,7 +648,7 @@
                                     type="submit"
                                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
                                 >
-                                    @lang('installer::app.installer.index.start-installation')
+                                    @lang('installer::app.installer.index.ready-for-installation.start-installation')
                                 </button>
                             </div>
                         </form>
@@ -744,69 +662,291 @@
                 >
                     <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
                         <p class="text-[20px] text-gray-800 font-bold">
-                            @lang('installer::app.installer.index.installation')
+                            @lang('installer::app.installer.index.installation-processing.title')
                         </p>
                     </div>
 
                     <div class="flex flex-col gap-[15px] justify-center px-[30px] py-[16px] h-[484px] overflow-y-auto">
                         <div class="flex flex-col gap-[16px]">
                             <p class="text-[18px] text-gray-800 font-bold">
-                                @lang('installer::app.installer.index.installation-bagisto')
+                                @lang('installer::app.installer.index.installation-processing.bagisto')
                             </p>
 
                             <div class="grid gap-[10px]">
-                                <svg class="animate-spin h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <circle
-                                        class="opacity-25"
-                                        cx="12"
-                                        cy="12"
-                                        r="10"
-                                        stroke="currentColor"
-                                        stroke-width="4"
-                                    >
-                                    </circle>
-
-                                    <path
-                                        class="opacity-75"
-                                        fill="currentColor"
-                                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                    >
-                                    </path>
-                                </svg>
+                                <!-- Spinner -->
+                                <img
+                                    class="animate-spin h-5 w-5 text-navyBlue"
+                                    src="{{ bagisto_asset('images/installer/spinner.svg', 'installer') }}"
+                                    alt="Loading"
+                                />
 
                                 <p class="text-[14px] text-gray-600">
-                                    @lang('installer::app.installer.index.installation-bagisto-info')
+                                    @lang('installer::app.installer.index.installation-processing.bagisto-info')
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- installation Log -->
+                <!-- Environment Configuration .ENV -->
                 <div
                     class="w-full max-w-[568px] bg-white rounded-[8px] shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)] border-[1px] border-gray-300"
-                    v-if="currentStep == 'installationLog'"
+                    v-if="currentStep == 'envConfiguration'"
                 >
-                    <div
-                        class="flex flex-col gap-[15px] px-[30px] py-[16px] border-b-[1px] border-gray-300 h-[486px] overflow-y-auto" v-if="seederLog"
+                    <x-installer::form
+                        v-slot="{ meta, errors, handleSubmit }"
+                        as="div"
+                        ref="envSetup"
                     >
-                        <p
-                            class="h-full"
-                            v-html="seederLog"
+                        <form
+                            @submit.prevent="handleSubmit($event, nextForm)"
+                            enctype="multipart/form-data"
                         >
-                        </p>
-                    </div>
+                            <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
+                                <p class="text-[20px] text-gray-800 font-bold">
+                                    @lang('installer::app.installer.index.environment-configuration.title')
+                                </p>
+                            </div>
 
-                    <div class="flex px-[16px] py-[10px] justify-end items-center">
-                        <button
-                            type="submit"
-                            class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
-                            @click="nextForm"
-                        >
-                            @lang('installer::app.installer.index.continue')
-                        </button>
-                    </div>
+                            <div class="flex flex-col gap-[12px] px-[30px] py-[16px] border-b-[1px] border-gray-300 h-[484px] overflow-y-auto">
+                                <!-- Application Name -->
+                                <x-installer::form.control-group class="mb-[10px]">
+                                    <x-installer::form.control-group.label class="required">
+                                        @lang('installer::app.installer.index.environment-configuration.application-name')
+                                    </x-installer::form.control-group.label>
+
+                                    <x-installer::form.control-group.control
+                                        type="text"
+                                        name="app_name"
+                                        ::value="envData.app_name ?? 'Bagisto'"
+                                        rules="required"
+                                        :label="trans('installer::app.installer.index.environment-configuration.application-name')"
+                                        :placeholder="trans('installer::app.installer.index.environment-configuration.bagisto')"
+                                    >
+                                    </x-installer::form.control-group.control>
+
+                                    <x-installer::form.control-group.error
+                                        control-name="app_name"
+                                    >
+                                    </x-installer::form.control-group.error>
+                                </x-installer::form.control-group>
+
+                                <!-- Application Default URL -->
+                                <x-installer::form.control-group class="mb-[10px]">
+                                    <x-installer::form.control-group.label class="required">
+                                        @lang('installer::app.installer.index.environment-configuration.default-url')
+                                    </x-installer::form.control-group.label>
+
+                                    <x-installer::form.control-group.control
+                                        type="text"
+                                        name="app_url"
+                                        ::value="envData.app_url ?? 'https://localhost'"
+                                        rules="required"
+                                        :label="trans('installer::app.installer.index.environment-configuration.default-url')"
+                                        :placeholder="trans('installer::app.installer.index.environment-configuration.default-url-link')"
+                                    >
+                                    </x-installer::form.control-group.control>
+
+                                    <x-installer::form.control-group.error
+                                        control-name="app_url"
+                                    >
+                                    </x-installer::form.control-group.error>
+                                </x-installer::form.control-group>
+
+                                <!-- Application Default Timezone -->
+                                <x-installer::form.control-group class="mb-[10px]">
+                                    <x-installer::form.control-group.label class="required">
+                                        @lang('installer::app.installer.index.environment-configuration.default-timezone')
+                                    </x-installer::form.control-group.label>
+
+                                    @php
+                                        date_default_timezone_set('UTC');
+
+                                        $tzlist = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
+
+                                        $current = date_default_timezone_get();
+                                    @endphp
+
+                                    <x-installer::form.control-group.control
+                                        type="select"
+                                        name="app_timezone"
+                                        ::value="envData.app_timezone ?? $current"
+                                        rules="required"
+                                        :label="trans('installer::app.installer.index.environment-configuration.default-timezone')"
+                                    >
+                                        <option value="" disabled>Select Timezone</option>
+
+                                        @foreach($tzlist as $key => $value)
+                                            <option
+                                                value="{{ $value }}"
+                                                {{ $value === $current ? 'selected' : '' }}
+                                            >
+                                                {{ $value }}
+                                            </option>
+                                        @endforeach
+                                    </x-installer::form.control-group.control>
+
+                                    <x-installer::form.control-group.error
+                                        control-name="app_timezone"
+                                    >
+                                    </x-installer::form.control-group.error>
+                                </x-installer::form.control-group>
+
+                                <div class="p-[6px] border border-amber-400 bg-amber-100">
+                                    <i class="icon-error text-black"></i>
+
+                                    @lang('installer.app.installer.index.environment-configuration.warning-message')
+                                </div>
+
+                                <div class="flex gap-[10px]">
+                                    <!-- Application Default Locale -->
+                                    <x-installer::form.control-group class="w-full">
+                                        <x-installer::form.control-group.label class="required">
+                                            @lang('installer::app.installer.index.environment-configuration.default-locale')
+                                        </x-installer::form.control-group.label>
+    
+                                        <x-installer::form.control-group.control
+                                            type="select"
+                                            name="app_locale"
+                                            value="{{ app()->getLocale() }}"
+                                            rules="required"
+                                            :label="trans('installer::app.installer.index.environment-configuration.default-locale')"
+                                        >
+                                            @foreach ($locales as $value => $label)
+                                                <option value="{{ $value }}">
+                                                    @lang("installer::app.installer.index.$label")
+                                                </option>
+                                            @endforeach
+                                        </x-installer::form.control-group.control>
+    
+                                        <x-installer::form.control-group.error
+                                            control-name="app_locale"
+                                        >
+                                        </x-installer::form.control-group.error>
+                                    </x-installer::form.control-group>
+
+                                    <!-- Application Default Currency -->
+                                    <x-installer::form.control-group class="w-full">
+                                        <x-installer::form.control-group.label class="required">
+                                            @lang('installer::app.installer.index.environment-configuration.default-currency')
+                                        </x-installer::form.control-group.label>
+
+                                        <x-installer::form.control-group.control
+                                            type="select"
+                                            name="app_currency"
+                                            ::value="envData.app_currency ?? 'USD'"
+                                            rules="required"
+                                            :label="trans('installer::app.installer.index.environment-configuration.default-currency')"
+                                        >
+                                            <option value="" disabled>Select Currencies</option>
+    
+                                            @foreach ($currencies as $value => $label)
+                                                <option value="{{ $value }}" @if($value == 'USD') selected @endif>
+                                                    @lang("installer::app.installer.index.environment-configuration.$label")
+                                                </option>
+                                            @endforeach
+                                        </x-installer::form.control-group.control>
+    
+                                        <x-installer::form.control-group.error
+                                            control-name="app_currency"
+                                        >
+                                        </x-installer::form.control-group.error>
+                                    </x-installer::form.control-group>
+                                </div>
+
+                                <div class="flex gap-[10px]">
+                                    <x-installer::form.control-group class="w-full">
+                                        <x-installer::form.control-group.label class="required">
+                                            @lang('installer::app.installer.index.environment-configuration.allowed-locales')
+                                        </x-installer::form.control-group.label>
+
+                                        <!-- Allowed Locales -->
+                                        @foreach ($locales as $key => $locale)
+                                            <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                                @php
+                                                    $selectedOption = ($key == app()->getLocale()) ? 0 : 1;
+                                                @endphp
+
+                                                <x-admin::form.control-group.control
+                                                    type="checkbox"
+                                                    name="{{ $key }}"
+                                                    id="allowed_locale[{{ $key }}]"
+                                                    for="allowed_locale[{{ $key }}]"
+                                                    :value="(boolean) $selectedOption"
+                                                    :disabled="(boolean) ! $selectedOption"
+                                                    @change="pushAllowedLocales"
+                                                >
+                                                </x-admin::form.control-group.control>
+
+                                                <x-admin::form.control-group.label
+                                                    for="allowed_locale[{{ $key }}]"
+                                                    class="!text-[14px] !font-semibold cursor-pointer"
+                                                >
+                                                    @lang("installer::app.installer.index.$locale")
+                                                </x-admin::form.control-group.label>
+                                            </x-admin::form.control-group>
+                                        @endforeach
+                                    </x-installer::form.control-group>
+
+                                    <x-installer::form.control-group class="w-full">
+                                        <x-installer::form.control-group.label class="required">
+                                            @lang('installer::app.installer.index.environment-configuration.allowed-currencies')
+                                        </x-installer::form.control-group.label>
+    
+                                        <!-- Allowed Currencies -->
+                                        @foreach ($currencies as $key => $currency)
+                                            <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                                @php
+                                                    $selectedOption = ($key == 'USD') ? 0 : 1;
+                                                @endphp
+
+                                                <x-admin::form.control-group.control
+                                                    type="checkbox"
+                                                    name="{{ $key }}"
+                                                    id="currency[{{ $key }}]"
+                                                    for="currency[{{ $key }}]"
+                                                    :value="(boolean) $selectedOption"
+                                                    :disabled="(boolean) ! $selectedOption"
+                                                    @change="pushAllowedCurrency"
+                                                >
+                                                </x-admin::form.control-group.control>
+
+                                                <x-admin::form.control-group.label
+                                                    for="currency[{{ $key }}]"
+                                                    class="!text-[14px] !font-semibold cursor-pointer"
+                                                >
+                                                    @lang("installer::app.installer.index.environment-configuration.$currency")
+                                                </x-admin::form.control-group.label>
+                                            </x-admin::form.control-group>
+                                        @endforeach
+                                    </x-installer::form.control-group>
+                                </div>
+                            </div>
+
+                            <div class="flex px-[16px] py-[10px] justify-between items-center">
+                                <div
+                                    class="text-[12px] text-blue-600 font-semibold cursor-pointer"
+                                    role="button"
+                                    aria-label="@lang('installer::app.installer.index.back')"
+                                    tabindex="0"
+                                    @click="back"
+                                >
+                                    @lang('installer::app.installer.index.back')
+                                </div>
+
+                                <button
+                                    type="submit"
+                                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
+                                    tabindex="0"
+                                >
+                                    @lang('installer::app.installer.index.continue')
+                                </button>
+                            </div>
+
+                        </form>
+                    </x-installer::form>
                 </div>
+
 
                 <!-- Create Administrator -->
                 <div
@@ -824,7 +964,7 @@
                         >
                             <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
                                 <p class="text-[20px] text-gray-800 font-bold">
-                                    @lang('installer::app.installer.index.create-administrator')
+                                    @lang('installer::app.installer.index.create-administrator.title')
                                 </p>
                             </div>
 
@@ -832,7 +972,7 @@
                                 <!-- Admin -->
                                 <x-installer::form.control-group class="mb-[10px]">
                                     <x-installer::form.control-group.label class="required">
-                                        @lang('installer::app.installer.index.admin')
+                                        @lang('installer::app.installer.index.create-administrator.admin')
                                     </x-installer::form.control-group.label>
 
                                     <x-installer::form.control-group.control
@@ -840,8 +980,8 @@
                                         name="admin"
                                         value="Admin"
                                         rules="required"
-                                        :label="trans('installer::app.installer.index.admin')"
-                                        :placeholder="trans('installer::app.installer.index.bagisto')"
+                                        :label="trans('installer::app.installer.index.create-administrator.admin')"
+                                        :placeholder="trans('installer::app.installer.index.create-administrator.bagisto')"
                                     >
                                     </x-installer::form.control-group.control>
 
@@ -854,7 +994,7 @@
                                 <!-- Email -->
                                 <x-installer::form.control-group class="mb-[10px]">
                                     <x-installer::form.control-group.label class="required">
-                                        @lang('installer::app.installer.index.email')
+                                        @lang('installer::app.installer.index.create-administrator.email')
                                     </x-installer::form.control-group.label>
 
                                     <x-installer::form.control-group.control
@@ -862,8 +1002,8 @@
                                         name="email"
                                         value="admin@example.com"
                                         rules="required"
-                                        :label="trans('installer::app.installer.index.email')"
-                                        :placeholder="trans('installer::app.installer.index.email-address')"
+                                        :label="trans('installer::app.installer.index.create-administrator.email')"
+                                        :placeholder="trans('installer::app.installer.index.create-administrator.email-address')"
                                     >
                                     </x-installer::form.control-group.control>
 
@@ -876,7 +1016,7 @@
                                 <!-- Password -->
                                 <x-installer::form.control-group class="mb-[10px]">
                                     <x-installer::form.control-group.label class="required">
-                                        @lang('installer::app.installer.index.password')
+                                        @lang('installer::app.installer.index.create-administrator.password')
                                     </x-installer::form.control-group.label>
 
                                     <x-installer::form.control-group.control
@@ -884,7 +1024,7 @@
                                         name="password"
                                         :value="old('password')"
                                         rules="required"
-                                        :label="trans('installer::app.installer.index.password')"
+                                        :label="trans('installer::app.installer.index.create-administrator.password')"
                                     >
                                     </x-installer::form.control-group.control>
 
@@ -897,7 +1037,7 @@
                                 <!-- Confirm Password -->
                                 <x-installer::form.control-group class="mb-[10px]">
                                     <x-installer::form.control-group.label class="required">
-                                        @lang('installer::app.installer.index.confirm-password')
+                                        @lang('installer::app.installer.index.create-administrator.confirm-password')
                                     </x-installer::form.control-group.label>
 
                                     <x-installer::form.control-group.control
@@ -905,7 +1045,7 @@
                                         name="confirm_password"
                                         :value="old('confirm_password')"
                                         rules="required|confirmed:@password"
-                                        :label="trans('installer::app.installer.index.confirm-password')"
+                                        :label="trans('installer::app.installer.index.create-administrator.confirm-password')"
                                     >
                                     </x-installer::form.control-group.control>
 
@@ -920,189 +1060,9 @@
                                 <button
                                     type="submit"
                                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
+                                    tabindex="0"
                                 >
                                     @lang('installer::app.installer.index.continue')
-                                </button>
-                            </div>
-
-                        </form>
-                    </x-installer::form>
-                </div>
-
-                <!-- Email Configuration Form -->
-                <div
-                    class="w-full max-w-[568px] bg-white rounded-[8px] shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)] border-[1px] border-gray-300"
-                    v-if="currentStep == 'emailConfiguration'"
-                >
-                    <x-installer::form
-                        v-slot="{ meta, errors, handleSubmit }"
-                        as="div"
-                        ref="emailConfiguration"
-                    >
-                        <form
-                            @submit.prevent="handleSubmit($event, FormSubmit)"
-                            enctype="multipart/form-data"
-                        >
-                            <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
-                                <p class="text-[20px] text-gray-800 font-bold">
-                                    @lang('installer::app.installer.index.email-configuration')
-                                </p>
-                            </div>
-
-                            <div class="flex flex-col gap-[12px] px-[30px] py-[16px] border-b-[1px] border-gray-300 h-[484px] overflow-y-auto">
-                                <!-- Admin -->
-                                <div class="flex gap-[6px]">
-                                    <x-installer::form.control-group class="w-full mb-[10px]">
-                                        <x-installer::form.control-group.label class="required">
-                                            @lang('installer::app.installer.index.outgoing-mail-server')
-                                        </x-installer::form.control-group.label>
-
-                                        <x-installer::form.control-group.control
-                                            type="text"
-                                            name="mail_host"
-                                            value="smpt.mailtrap.io"
-                                            rules="required"
-                                            :label="trans('installer::app.installer.index.outgoing-mail-server')"
-                                            :placeholder="trans('installer::app.installer.index.outgoing-email')"
-                                        >
-                                        </x-installer::form.control-group.control>
-
-                                        <x-installer::form.control-group.error
-                                            control-name="mail_host"
-                                        >
-                                        </x-installer::form.control-group.error>
-                                    </x-installer::form.control-group>
-
-                                    <!-- Email -->
-                                    <x-installer::form.control-group class="w-full mb-[10px]">
-                                        <x-installer::form.control-group.label class="required">
-                                            @lang('installer::app.installer.index.server-port')
-                                        </x-installer::form.control-group.label>
-
-                                        <x-installer::form.control-group.control
-                                            type="number"
-                                            name="mail_port"
-                                            value="3306"
-                                            rules="required"
-                                            :label="trans('installer::app.installer.index.server-port')"
-                                            :placeholder="trans('installer::app.installer.index.server-port-code')"
-                                        >
-                                        </x-installer::form.control-group.control>
-
-                                        <x-installer::form.control-group.error
-                                            control-name="mail_port"
-                                        >
-                                        </x-installer::form.control-group.error>
-                                    </x-installer::form.control-group>
-                                </div>
-
-                                <!-- Password -->
-                                <x-installer::form.control-group class="mb-[10px]">
-                                    <x-installer::form.control-group.label class="required">
-                                        @lang('installer::app.installer.index.encription')
-                                    </x-installer::form.control-group.label>
-
-                                    <x-installer::form.control-group.control
-                                        type="select"
-                                        name="mail_encryption"
-                                        value="tls"
-                                        rules="required"
-                                        :label="trans('installer::app.installer.index.encryption')"
-                                    >
-                                        <option value="tls" selected>TLS</option>
-                                        <option value="ssl">SSL</option>
-                                    </x-installer::form.control-group.control>
-
-                                    <x-installer::form.control-group.error
-                                        control-name="mail_encryption"
-                                    >
-                                    </x-installer::form.control-group.error>
-                                </x-installer::form.control-group>
-
-                                <!-- Store Email Address -->
-                                <x-installer::form.control-group class="mb-[10px]">
-                                    <x-installer::form.control-group.label class="required">
-                                        @lang('installer::app.installer.index.store-email')
-                                    </x-installer::form.control-group.label>
-
-                                    <x-installer::form.control-group.control
-                                        type="text"
-                                        name="mail_from_address"
-                                        :value="old('mail_from_address')"
-                                        rules="required"
-                                        :label="trans('installer::app.installer.index.store-email')"
-                                        :placeholder="trans('installer::app.installer.index.stored-email-address')"
-                                    >
-                                    </x-installer::form.control-group.control>
-
-                                    <x-installer::form.control-group.error
-                                        control-name="mail_from_address"
-                                    >
-                                    </x-installer::form.control-group.error>
-                                </x-installer::form.control-group>
-
-                                <!-- Username -->
-                                <x-installer::form.control-group class="mb-[10px]">
-                                    <x-installer::form.control-group.label class="required">
-                                        @lang('installer::app.installer.index.username')
-                                    </x-installer::form.control-group.label>
-
-                                    <x-installer::form.control-group.control
-                                        type="text"
-                                        name="mail_username"
-                                        :value="old('mail_username')"
-                                        rules="required"
-                                        label="Username"
-                                        placeholder="store@example.com"
-                                    >
-                                    </x-installer::form.control-group.control>
-
-                                    <x-installer::form.control-group.error
-                                        control-name="mail_username"
-                                    >
-                                    </x-installer::form.control-group.error>
-                                </x-installer::form.control-group>
-
-                                <!-- Password -->
-                                <x-installer::form.control-group class="mb-[10px]">
-                                    <x-installer::form.control-group.label class="required">
-                                        Password
-                                    </x-installer::form.control-group.label>
-
-                                    <x-installer::form.control-group.control
-                                        type="password"
-                                        name="mail_password"
-                                        :value="old('mail_password')"
-                                        rules="required"
-                                        label="Password"
-                                        placeholder="store@example.com"
-                                    >
-                                    </x-installer::form.control-group.control>
-
-                                    <x-installer::form.control-group.error
-                                        control-name="mail_password"
-                                    >
-                                    </x-installer::form.control-group.error>
-                                </x-installer::form.control-group>
-                            </div>
-
-                            <div class="flex px-[16px] py-[10px] justify-between items-center">
-                                <!-- Skip button -->
-                                <div
-                                    class="text-[12px] text-blue-600 font-semibold cursor-pointer"
-                                    role="button"
-                                    aria-label="Skip"
-                                    tabindex="0"
-                                    @click="skip"
-                                >
-                                    Skip
-                                </div>
-
-                                <button
-                                    type="submit"
-                                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
-                                >
-                                    Save configuration
                                 </button>
                             </div>
 
@@ -1117,7 +1077,7 @@
                 >
                     <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
                         <p class="text-[20px] text-gray-800 font-bold">
-                            Installation
+                            @lang('installer::app.installer.index.installation-completed.title')
                         </p>
                     </div>
 
@@ -1129,11 +1089,11 @@
 
                             <div class="grid gap-[10px]">
                                 <p class="text-[18px] text-gray-800 font-semibold">
-                                    Installing Completed
+                                    @lang('installer::app.installer.index.installation-completed.title')
                                 </p>
 
                                 <p class="text-[14px] text-gray-600">
-                                    Bagisto is successfully installed on your system.
+                                    @lang('installer::app.installer.index.installation-completed.title-info')
                                 </p>
 
                                 <div class="flex justify-between items-center max-w-[288px]">
@@ -1141,14 +1101,14 @@
                                         href="{{ URL('/admin/login')}}"
                                         class="px-[12px] py-[6px] bg-white border border-blue-700 rounded-[6px] text-blue-600 font-semibold cursor-pointer hover:opacity-90"
                                     >
-                                        Admin Panel
+                                        @lang('installer::app.installer.index.installation-completed.admin-panel')
                                     </a>
 
                                     <a
                                         href="{{ URL('/')}}"
                                         class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
                                     >
-                                        Customer Panel
+                                        @lang('installer::app.installer.index.installation-completed.customer-panel')
                                     </a>
                                 </div>
                             </div>
@@ -1160,14 +1120,14 @@
                             href="https://forums.bagisto.com"
                             class="text-[12px] text-blue-600 font-semibold cursor-pointer"
                         >
-                            Bagisto Forums
+                            @lang('installer::app.installer.index.installation-completed.bagisto-forums')
                         </a>
 
                         <a
                             href="https://bagisto.com/en/extensions"
                             class="px-[12px] py-[6px] bg-white border border-blue-700 rounded-[6px] text-blue-600 font-semibold cursor-pointer hover:opacity-90"
                         >
-                            Explore Bagisto Extentions
+                            @lang('installer::app.installer.index.installation-completed.explore-bagisto-extensions')
                         </a>
                     </div>
                 </div>
@@ -1181,32 +1141,46 @@
                         return {
                             step: '',
 
-                            currentStep: 'environment',
+                            currentStep: 'start',
 
                             envData: {},
 
+                            locales: {
+                                allowed: [],
+                            },
+
+                            currencies: {
+                                allowed: [],
+                            },
+
                             stepStates: {
-                                environment: 'active',
-                                envSetup: 'pending',
+                                start: 'active',
+                                serverRequirements: 'pending',
+                                envDatabase: 'pending',
                                 readyForInstallation: 'pending',
+                                envConfiguration: 'pending',
                                 createAdmin: 'pending',
-                                emailConfiguration: 'pending',
                                 installationCompleted: 'pending',
                             },
 
                             steps: [
-                                'environment',
-                                'envSetup',
+                                'start',
+                                'serverRequirements',
                                 'envDatabase',
                                 'readyForInstallation',
                                 'installProgress',
-                                'installationLog',
+                                'envConfiguration',
                                 'createAdmin',
-                                'emailConfiguration',
                                 'installationCompleted',
                             ],
+                        }
+                    },
 
-                            seederLog: {},
+                    mounted() {
+                        const url = new URL(window.location.href);
+
+                        if (url.searchParams.has('locale')) {
+                            this.nextForm();
                         }
                     },
 
@@ -1215,7 +1189,7 @@
                             const stepActions = {
                                 envDatabase: () => {
                                     if (params.db_connection === 'mysql') {
-                                        this.completeStep('envSetup', 'readyForInstallation', 'active', 'complete', setErrors);
+                                        this.completeStep('envDatabase', 'readyForInstallation', 'active', 'complete', setErrors);
 
                                         this.envData = { ...this.envData, ...params };
                                     } else {
@@ -1226,20 +1200,13 @@
                                 readyForInstallation: (setErrors) => {
                                     this.currentStep = 'installProgress';
 
-                                    this.startInstallation(setErrors);
+                                    this.startMigration(setErrors);
                                 },
 
                                 createAdmin: (setErrors) => {
-                                    this.completeStep('createAdmin', 'emailConfiguration', 'active', 'complete', setErrors);
+                                    this.completeStep('createAdmin', 'installationCompleted', 'active', 'complete', setErrors);
 
                                     this.saveAdmin(params, setErrors);
-                                },
-
-                                emailConfiguration: (setErrors) => {
-                                    this.completeStep('emailConfiguration', 'installationCompleted', 'active', 'complete', setErrors);
-
-
-                                    this.saveSmtp(params, setErrors);
                                 },
                             };
 
@@ -1252,25 +1219,65 @@
 
                         nextForm(params) {
                             const stepActions = {
-                                environment: () => {
-                                    this.completeStep('environment', 'envSetup', 'active', 'complete');
+                                start: () => {
+                                    this.completeStep('start', 'serverRequirements', 'active', 'complete');
                                 },
 
-                                envSetup: () => {
-                                    this.envData = { ...params };
-
+                                serverRequirements: () => {
+                                    this.completeStep('serverRequirements', 'envDatabase', 'active', 'complete');
+                                    
                                     this.currentStep = 'envDatabase';
                                 },
 
-                                installationLog: () => {
-                                    this.completeStep('readyForInstallation', 'createAdmin', 'active', 'complete');
+                                envConfiguration: () => {
+                                    this.envData = { ...params };
+
+                                    let data = {
+                                        parameter: {
+                                            default_locales: this.envData.app_locale,
+                                            allowed_locales: this.locales.allowed,
+                                            default_currency: this.envData.app_currency,
+                                            allowed_currency: this.currencies.allowed,
+                                        },
+                                    };
+
+                                    this.startSeeding(data, this.envData);
                                 },
+
                             };
 
                             const index = this.steps.find(step => step === this.currentStep);
 
                             if (stepActions[index]) {
                                 stepActions[index]();
+                            }
+                        },
+
+                        pushAllowedCurrency() {
+                            const currencyName = event.target.name;
+
+                            const index = this.currencies.allowed.indexOf(currencyName);
+
+                            if (index === -1) {
+                                this.currencies.allowed.push(currencyName);
+                            } else {
+                                this.currencies.allowed.splice(index, 1);
+                            }
+                        },
+
+                        pushAllowedLocales() {
+                            const localeName = event.target.name;
+
+                            if (! Array.isArray(this.locales.allowed)) {
+                            this.locales.allowed = [];
+                            }
+
+                            const index = this.locales.allowed.indexOf(localeName);
+
+                            if (index === -1) {
+                                this.locales.allowed.push(localeName);
+                            } else {
+                                this.locales.allowed.splice(index, 1);
                             }
                         },
 
@@ -1282,60 +1289,65 @@
                             this.stepStates[toStep] = toState;
                         },
 
-                        startInstallation(setErrors) {
+                        startMigration(setErrors) {
+                            this.currentStep = 'installProgress';
+
                             this.$axios.post("{{ route('installer.env_file_setup') }}", this.envData)
                                 .then((response) => {
                                     this.runMigartion(setErrors);
-                                })
-                                .catch(error => {
-                                    setErrors(error.response.data.errors);
-                                });
+                            })
+                            .catch(error => {
+                                setErrors(error.response.data.errors);
+                            });
                         },
 
                         runMigartion(setErrors) {
                             this.$axios.post("{{ route('installer.run_migration') }}")
                                 .then((response) => {
-                                    this.seederLog = response.data;
+                                    this.completeStep('readyForInstallation', 'envConfiguration', 'active', 'complete');
 
-                                    this.currentStep = 'installationLog';
+                                    this.currentStep = 'envConfiguration';
                                 })
                                 .catch(error => {
+                                    alert(error.response.data.error);
+
                                     this.currentStep = 'envDatabase';
+                                });
+                        },
 
-                                    this.$axios.post("{{ route('installer.delete_env_file') }}")
-                                        .then((response) => {
-                                            alert(error.response.data.error ?? error.response.data);
-                                        })
-                                        .catch((deleteError) => {
-                                            alert('Error deleting .env file:', deleteError);
-                                        });
+                        startSeeding(selectedParams, allParameters) {
+                            this.$axios.post("{{ route('installer.run_seeder') }}", {
+                                'allParameters': allParameters,
+                                'selectedParameters': selectedParams
+                            })
+                                .then((response) => {
+                                    this.completeStep('envConfiguration', 'createAdmin', 'active', 'complete');
 
+                                    this.currentStep = 'createAdmin';
+                            })
+                                .catch(error => {
+                                    setErrors(error.response.data.errors);
                                 });
                         },
 
                         saveAdmin(params, setErrors) {
                             this.$axios.post("{{ route('installer.admin_config_setup') }}", params)
                                 .then((response) => {
-                                    this.currentStep = 'emailConfiguration';
+                                    this.currentStep = 'installationCompleted';
                                 })
                                 .catch(error => {
                                     setErrors(error.response.data.errors);
                                 });
                         },
 
-                        skip() {
-                            this.completeStep('emailConfiguration', 'installationCompleted', 'active', 'complete');
+                        setLocale(params) {
+                            const newLocale = params.locale;
+                            const url = new URL(window.location.href);
 
-                            this.currentStep = 'installationCompleted';
-                        },
-
-                        saveSmtp(params, setErrors) {
-                            this.$axios.post("{{ route('installer.smtp_config_setup') }}", params)
-                                .then((response) => {
-                                })
-                                .catch(error => {
-                                    setErrors(error.response.data.errors);
-                                });
+                            if (! url.searchParams.has('locale')) {
+                                url.searchParams.set('locale', newLocale);
+                                window.location.href = url.toString();
+                            }
                         },
 
                         back() {
@@ -1345,10 +1357,19 @@
 
                             let index = this.steps.indexOf(this.currentStep);
 
+                            console.log(this.currentStep, index);
                             if (index > 0) {
-                                this.currentStep = this.steps[index -1];
+                                if (this.currentStep === 'serverRequirements') {
+                                    const url = new URL(window.location.href);
+
+                                    url.searchParams.delete('locale');
+
+                                    window.location.href = url.toString();
+                                }
+
+                                this.currentStep = this.steps[index - 1];
                             }
-                        },
+                        }
                     },
                 });
             </script>

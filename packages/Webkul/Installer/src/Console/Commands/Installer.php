@@ -89,20 +89,22 @@ class Installer extends Command
     {
         try {
             // Updating App URL
-            $this->updateEnvVariable('APP_URL', 'Please Enter the APP URL or Press enter to Continue', 'http://localhost:8000');
+            $this->updateEnvVariable('APP_URL', 'Please enter the <bg=green>APP URL</> or press enter to continue', 'http://localhost:8000');
 
             // Updating App Name
-            $this->updateEnvVariable('APP_NAME', 'Please Enter the Application Name or Press enter to Continue', 'admin');
+            $this->updateEnvVariable('APP_NAME', 'Please enter the <bg=green>Application Name</> or press enter to continue', 'Bagisto');
 
             // Updating App Default Locales
-            $this->updateEnvChoice('APP_LOCALE', 'Please select the default locale.', $this->locales());
+            $this->updateEnvChoice('APP_LOCALE', 'Please select the <bg=green>Default Locale</>', $this->locales());
+            config(['app.locale' => $this->getEnvAtRuntime('APP_LOCALE')]);
 
             // Updating App Default Timezone
             $this->envUpdate('APP_TIMEZONE', date_default_timezone_get());
             $this->info('Your Default Timezone is ' . date_default_timezone_get());
 
             // Updating App Default Currencies
-            $this->updateEnvChoice('APP_CURRENCY', 'Please enter the default currency.', $this->currencies());
+            $this->updateEnvChoice('APP_CURRENCY', 'Please enter the <bg=green>Default Currency</>.', $this->currencies());
+            config(['app.currency' => $this->getEnvAtRuntime('APP_CURRENCY')]);
 
             // Updating Database Configuration
             $this->askForDatabaseDetails();
@@ -118,7 +120,7 @@ class Installer extends Command
     {
         $connectionOptions = ['mysql', 'pgsql', 'sqlsrv'];
 
-        $dbConnection = $this->choice('Please select the default Database Connection or Press enter to Continue', $connectionOptions, 0);
+        $dbConnection = $this->choice('Please select the <bg=green>Database Connection</> or press enter to continue', $connectionOptions, 0);
 
         if (! in_array($dbConnection, $connectionOptions)) {
             $this->error('Please select the valid Database Connection.');
@@ -128,22 +130,22 @@ class Installer extends Command
 
         $dbDetails = [
             'DB_CONNECTION' => $dbConnection,
-            'DB_HOST'       => $this->ask('Please Enter the Database Hostname or Press enter to Continue', '127.0.0.1'),
-            'DB_PORT'       => $this->ask('Please Enter the Database Port number or Press enter to Continue', '3306'),
+            'DB_HOST'       => $this->ask('Please enter the <bg=green>Database Host</> or press enter to continue', '127.0.0.1'),
+            'DB_PORT'       => $this->ask('Please enter the <bg=green>Database Port Number</> or press enter to continue', '3306'),
         ];
 
         // Here Asking Database Name, Prefix, Username, Password.
-        $dbDetails['DB_DATABASE'] = $this->ask('Please Enter the database name to be used by Bagisto?');
-        $dbDetails['DB_PREFIX'] = $this->ask('Please Enter the database prefix name?');
-        $dbDetails['DB_USERNAME'] = $this->anticipate('Please Enter your database username?', ['root']);
-        $dbDetails['DB_PASSWORD'] = $this->secret('Please Enter your database password?');
+        $dbDetails['DB_DATABASE'] = $this->ask('Please enter the <bg=green>Database Name</>');
+        $dbDetails['DB_PREFIX'] = $this->ask('Please enter the <bg=green>Database Prefix</> or press enter to continue');
+        $dbDetails['DB_USERNAME'] = $this->anticipate('Please enter your <bg=green>Database Username</>', ['root']);
+        $dbDetails['DB_PASSWORD'] = $this->secret('Please enter your <bg=green>Database Password</>');
 
         if (
             ! $dbDetails['DB_DATABASE']
             || ! $dbDetails['DB_USERNAME']
             || ! $dbDetails['DB_PASSWORD']
         ) {
-            return $this->error('Please Enter the database credentials.');
+            return $this->error('Please enter the database credentials.');
         }
 
         foreach ($dbDetails as $key => $value) {
@@ -203,8 +205,8 @@ class Installer extends Command
     protected function createAdminCredential()
     {
         // Here! Asking for Admin Name, Email and Password
-        $adminName = $this->ask('Please Enter the Name for admin User or press enter to continue', 'Example');
-        $adminEmail = $this->ask('Please Enter the Email for admin login:', 'admin@example.com');
+        $adminName = $this->ask('Please enter the <bg=green>Name of Admin User</> or press enter to continue', 'Example');
+        $adminEmail = $this->ask('Please enter the <bg=green>Email of Admin User</> or press enter to continue', 'admin@example.com');
 
         if (! filter_var($adminEmail, FILTER_VALIDATE_EMAIL)) {
             $this->error('The email address you entered is not valid please try again.');
@@ -212,7 +214,7 @@ class Installer extends Command
             return $this->createAdminCredential();
         }
 
-        $adminPassword = $this->ask('Please Enter the Password for admin login:', 'admin123');
+        $adminPassword = $this->ask('Please enter the <bg=green>Password</> for admin login:', 'admin123');
 
         $password = password_hash($adminPassword, PASSWORD_BCRYPT, ['cost' => 10]);
 
@@ -230,7 +232,7 @@ class Installer extends Command
 
             $filePath = storage_path('installed');
 
-            File::put($filePath, 'Your Bagisto App is Successfully Installed');
+            File::put($filePath, 'Your Bagisto App is successfully installed');
 
             $this->info('-----------------------------');
             $this->info('Congratulations!');
@@ -289,6 +291,11 @@ class Installer extends Command
     protected static function envUpdate($key, $value)
     {
         $data = file_get_contents(base_path('.env'));
+
+        // Check if $value contains spaces, and if so, add double quotes
+        if (preg_match('/\s/', $value)) {
+            $value = '"' . $value . '"';
+        }
 
         $data = preg_replace("/$key=(.*)/", "$key=$value", $data);
 

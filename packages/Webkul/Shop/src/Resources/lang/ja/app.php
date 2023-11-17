@@ -427,7 +427,7 @@ return [
 
         'products' => [
             'card' => [
-                'card.add-to-compare-success' => 'アイテムが比較リストに追加されました。',
+                'add-to-compare-success'      => 'アイテムが比較リストに追加されました。',
                 'already-in-compare'          => 'アイテムはすでに比較リストに追加されています。',
                 'add-to-cart'                 => 'カートに追加',
                 'add-to-wishlist'             => 'ウィッシュリストに追加',
@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => ':queryの検索結果',
+        'title'   => ':queryの検索結果',
+        'results' => '検索結果',
     ],
 
     'compare' => [
@@ -755,6 +756,7 @@ return [
                 'grand-total'      => '合計金額',
                 'place-order'      => '注文する',
                 'processing'       => '処理中',
+                'price_&_qty'      => ':price × :qty',
                 'sub-total'        => '小計',
                 'tax'              => '税金',
             ],
@@ -820,10 +822,13 @@ return [
 
         'customers' => [
             'registration' => [
-                'description' => 'アカウントが正常に作成され、メールアドレスとパスワードの資格情報を使用してログインできるようになりました。ログインすると、過去の注文の確認、ウィッシュリストの表示、アカウント情報の編集など、他のサービスにアクセスできます。',
-                'greeting'    => 'お買い物いただき、ありがとうございます！',
-                'subject'     => '新規顧客登録',
-                'sign-in'     => 'サインイン',
+                'subject'                 => '新規顧客登録',
+                'description'             => 'アカウントが正常に作成され、メールアドレスとパスワードの資格情報を使用してログインできるようになりました。ログインすると、過去の注文の確認、ウィッシュリストの表示、アカウント情報の編集など、他のサービスにアクセスできます。',
+                'credentials-description' => 'ご登録いただき、アカウントが作成されました。アカウントの詳細は以下の通りです：',
+                'greeting'                => 'お買い物いただき、ありがとうございます！',
+                'sign-in'                 => 'サインイン',
+                'username-email'          => 'ユーザー名/メールアドレス',
+                'password'                => 'パスワード',
             ],
 
             'forgot-password' => [

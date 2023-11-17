@@ -427,7 +427,7 @@ return [
 
         'products' => [
             'card' => [
-                'card.add-to-compare-success' => 'Item adicionado com sucesso à lista de comparação.',
+                'add-to-compare-success'      => 'Item adicionado com sucesso à lista de comparação.',
                 'already-in-compare'          => 'O item já está na lista de comparação.',
                 'add-to-cart'                 => 'Adicionar ao Carrinho',
                 'add-to-wishlist'             => 'Adicionar à Lista de Desejos',
@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => 'Resultados da pesquisa para : :query',
+        'title'   => 'Resultados da pesquisa para : :query',
+        'results' => 'Resultados da pesquisa',
 
         'images' => [
             'index' => [
@@ -622,6 +623,7 @@ return [
             'suspended-account-message' => 'Sua conta foi suspensa.',
             'select-hourly-duration'    => 'Selecione uma duração de slot de uma hora.',
             'success-remove'            => 'Item removido com sucesso do carrinho.',
+            'paypal-payment-cancelled'  => 'O pagamento Paypal foi cancelado.',
 
             'index' => [
                 'bagisto'                  => 'Bagisto',
@@ -768,6 +770,7 @@ return [
                 'grand-total'      => 'Total Geral',
                 'place-order'      => 'Realizar Pedido',
                 'processing'       => 'Processando',
+                'price_&_qty'      => ':price × :qty',
                 'sub-total'        => 'Subtotal',
                 'tax'              => 'Imposto',
             ],
@@ -833,10 +836,13 @@ return [
 
         'customers' => [
             'registration' => [
-                'description' => 'Sua conta foi criada com sucesso e você pode fazer login usando seu e-mail e senha. Ao fazer o login, você poderá acessar outros serviços, incluindo a revisão de pedidos anteriores, listas de desejos e a edição das informações da sua conta.',
-                'greeting'    => 'Bem-vindo e obrigado por se registrar conosco!',
-                'subject'     => 'Novo Registro de Cliente',
-                'sign-in'     => 'Entrar',
+                'subject'                 => 'Novo Registro de Cliente',
+                'description'             => 'Sua conta foi criada com sucesso e você pode fazer login usando seu e-mail e senha. Ao fazer o login, você poderá acessar outros serviços, incluindo a revisão de pedidos anteriores, listas de desejos e a edição das informações da sua conta.',
+                'credentials-description' => 'Sua conta foi criada. Os detalhes da sua conta estão abaixo:',
+                'greeting'                => 'Bem-vindo e obrigado por se registrar conosco!',
+                'sign-in'                 => 'Entrar',
+                'username-email'          => 'Nome de usuário/Email',
+                'password'                => 'Senha',
             ],
 
             'forgot-password' => [

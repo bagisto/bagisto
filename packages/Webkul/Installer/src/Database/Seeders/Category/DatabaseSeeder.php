@@ -9,10 +9,11 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      *
+     * @param  array  $parameters
      * @return void
      */
-    public function run()
+    public function run($parameters = [])
     {
-        $this->call(CategoryTableSeeder::class);
+        $this->call(CategoryTableSeeder::class, false, ['parameters' => $parameters]);
     }
 }

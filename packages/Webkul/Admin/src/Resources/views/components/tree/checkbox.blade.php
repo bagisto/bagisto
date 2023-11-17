@@ -1,5 +1,5 @@
 @pushOnce('scripts')
-    {{-- v-tree-checkbox template--}}
+    <!-- v-tree-checkbox template-->
     <script type="text/x-template" id="v-tree-checkbox-template">
         <label
             :for="id"
@@ -26,7 +26,7 @@
         </label>
     </script>
 
-    {{-- v-tree-checkbox component --}}
+    <!-- v-tree-checkbox component -->
     <script type="module">
         app.component('v-tree-checkbox', {
             template: '#v-tree-checkbox-template',

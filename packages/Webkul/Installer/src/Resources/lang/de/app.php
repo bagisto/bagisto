@@ -4,295 +4,303 @@ return [
     'seeders' => [
         'attribute' => [
             'attribute-families' => [
-                'default' => 'Default',
+                'default' => 'Standard',
             ],
 
             'attribute-groups' => [
-                'general'           => 'General',
-                'description'       => 'Description',
-                'meta-description'  => 'Meta Description',
-                'price'             => 'Price',
-                'shipping'          => 'Shipping',
-                'settings'          => 'Settings',
-                'inventories'       => 'Inventories',
+                'description'       => 'Beschreibung',
+                'general'           => 'Allgemein',
+                'inventories'       => 'Bestände',
+                'meta-description'  => 'Meta-Beschreibung',
+                'price'             => 'Preis',
+                'shipping'          => 'Versand',
+                'settings'          => 'Einstellungen',
             ],
 
             'attributes' => [
-                'sku'                  => 'SKU',
+                'brand'                => 'Marke',
+                'color'                => 'Farbe',
+                'cost'                 => 'Kosten',
+                'description'          => 'Beschreibung',
+                'featured'             => 'Hervorgehoben',
+                'guest-checkout'       => 'Gastkasse',
+                'height'               => 'Höhe',
+                'length'               => 'Länge',
+                'meta-title'           => 'Meta-Titel',
+                'meta-keywords'        => 'Meta-Schlüsselwörter',
+                'meta-description'     => 'Meta-Beschreibung',
+                'manage-stock'         => 'Bestand verwalten',
+                'new'                  => 'Neu',
                 'name'                 => 'Name',
-                'url-key'              => 'URL Key',
-                'tax-category'         => 'Tax Category',
-                'new'                  => 'New',
-                'featured'             => 'Featured',
-                'visible-individually' => 'Visible Individually',
+                'product-number'       => 'Produktnummer',
+                'price'                => 'Preis',
+                'sku'                  => 'Artikelnummer (SKU)',
                 'status'               => 'Status',
-                'short-description'    => 'Short Description',
-                'description'          => 'Description',
-                'price'                => 'Price',
-                'cost'                 => 'Cost',
-                'special-price'        => 'Special Price',
-                'special-price-from'   => 'Special Price From',
-                'special-price-to'     => 'Special Price To',
-                'meta-title'           => 'Meta Title',
-                'meta-keywords'        => 'Meta Keywords',
-                'meta-description'     => 'Meta Description',
-                'length'               => 'Length',
-                'width'                => 'Width',
-                'height'               => 'Height',
-                'weight'               => 'Weight',
-                'color'                => 'Color',
-                'size'                 => 'Size',
-                'brand'                => 'Brand',
-                'guest-checkout'       => 'Guest Checkout',
-                'product-number'       => 'Product Number',
-                'manage-stock'         => 'Manage Stock',
+                'short-description'    => 'Kurzbeschreibung',
+                'special-price'        => 'Sonderpreis',
+                'special-price-from'   => 'Sonderpreis Von',
+                'special-price-to'     => 'Sonderpreis Bis',
+                'size'                 => 'Größe',
+                'tax-category'         => 'Steuerkategorie',
+                'url-key'              => 'URL-Schlüssel',
+                'visible-individually' => 'Einzeln sichtbar',
+                'width'                => 'Breite',
+                'weight'               => 'Gewicht',
             ],
 
             'attribute-options' => [
-                'red'    => 'Red',
-                'green'  => 'Green',
-                'yellow' => 'Yellow',
-                'black'  => 'Black',
-                'white'  => 'White',
-                's'      => 'S',
-                'm'      => 'M',
+                'black'  => 'Schwarz',
+                'green'  => 'Grün',
                 'l'      => 'L',
+                'm'      => 'M',
+                'red'    => 'Rot',
+                's'      => 'S',
+                'white'  => 'Weiß',
                 'xl'     => 'XL',
+                'yellow' => 'Gelb',
             ],
         ],
 
         'category' => [
             'categories' => [
-                'name'        => 'Root',
-                'description' => 'Root Category Description',
+                'description' => 'Beschreibung der Wurzelkategorie',
+                'name'        => 'Wurzel',
             ],
         ],
 
         'cms' => [
             'pages' => [
                 'about-us' => [
-                    'title'   => 'About Us',
-                    'content' => 'About Us Page Content',
+                    'content' => 'Über uns Seitensinhalt',
+                    'title'   => 'Über uns',
                 ],
 
                 'refund-policy' => [
-                    'title'   => 'Refund Policy',
-                    'content' => 'Refund Policy Page Content',
+                    'content' => 'Rückgaberecht Seitensinhalt',
+                    'title'   => 'Rückgaberecht',
                 ],
 
                 'return-policy' => [
-                    'title'   => 'Return Policy',
-                    'content' => 'Return Policy Page Content',
+                    'content' => 'Rückgaberecht Seitensinhalt',
+                    'title'   => 'Rückgaberecht',
                 ],
 
                 'terms-conditions' => [
-                    'title'   => 'Terms & Conditions',
-                    'content' => 'Terms & Conditions Page Content',
+                    'content' => 'Nutzungsbedingungen Seitensinhalt',
+                    'title'   => 'Nutzungsbedingungen',
                 ],
 
                 'terms-of-use' => [
-                    'title'   => 'Terms of Use',
-                    'content' => 'Terms of Use Page Content',
+                    'content' => 'Nutzungsbedingungen Seitensinhalt',
+                    'title'   => 'Nutzungsbedingungen',
                 ],
 
                 'contact-us' => [
-                    'title'   => 'Contact Us',
-                    'content' => 'Contact Us Page Content',
+                    'content' => 'Kontaktiere uns Seitensinhalt',
+                    'title'   => 'Kontaktiere uns',
                 ],
 
                 'customer-service' => [
-                    'title'   => 'Customer Service',
-                    'content' => 'Customer Service Page Content',
+                    'content' => 'Kundenservice Seitensinhalt',
+                    'title'   => 'Kundenservice',
                 ],
 
                 'whats-new' => [
-                    'title'   => 'What\'s New',
-                    'content' => 'What\'s New page content',
+                    'content' => 'Inhaltsseite für Neuigkeiten',
+                    'title'   => 'Was gibt es Neues',
                 ],
 
                 'payment-policy' => [
-                    'title'   => 'Payment Policy',
-                    'content' => 'Payment Policy Page Content',
+                    'content' => 'Zahlungsrichtlinie Seitensinhalt',
+                    'title'   => 'Zahlungsrichtlinie',
                 ],
 
                 'shipping-policy' => [
-                    'title'   => 'Shipping Policy',
-                    'content' => 'Shipping Policy Page Content',
+                    'content' => 'Versandrichtlinie Seitensinhalt',
+                    'title'   => 'Versandrichtlinie',
                 ],
 
                 'privacy-policy' => [
-                    'title'   => 'Privacy Policy',
-                    'content' => 'Privacy Policy Page Content',
+                    'content' => 'Datenschutzrichtlinie Seitensinhalt',
+                    'title'   => 'Datenschutzrichtlinie',
                 ],
             ],
         ],
 
         'core' => [
             'channels' => [
-                'name'             => 'Default',
-                'meta-title'       => 'Demo store',
-                'meta-keywords'    => 'Demo store meta keyword',
-                'meta-description' => 'Demo store meta description',
+                'meta-title'       => 'Demo-Shop',
+                'meta-keywords'    => 'Demo-Shop Meta-Stichwörter',
+                'meta-description' => 'Demo-Shop Meta-Beschreibung',
+                'name'             => 'Standard',
             ],
 
             'currencies' => [
-                'CNY' => 'Chinese Yuan',
+                'CNY' => 'Chinesischer Yuan',
                 'AED' => 'Dirham',
                 'EUR' => 'EURO',
-                'INR' => 'Indian Rupee',
-                'IRR' => 'Iranian Rial',
-                'ILS' => 'Israeli Shekel',
-                'JPY' => 'Japanese Yen',
-                'GBP' => 'Pound Sterling',
-                'RUB' => 'Russian Ruble',
-                'SAR' => 'Saudi Riyal',
-                'TRY' => 'Turkish Lira',
-                'USD' => 'US Dollar',
-                'UAH' => 'Ukrainian Hryvnia',
+                'INR' => 'Indische Rupie',
+                'IRR' => 'Iranischer Rial',
+                'ILS' => 'Israelischer Schekel',
+                'JPY' => 'Japanischer Yen',
+                'GBP' => 'Pfund Sterling',
+                'RUB' => 'Russischer Rubel',
+                'SAR' => 'Saudi-Riyal',
+                'TRY' => 'Türkische Lira',
+                'USD' => 'US-Dollar',
+                'UAH' => 'Ukrainische Hrywnja',
             ],
 
             'locales' => [
-                'ar'    => 'Arabic',
+                'ar'    => 'Arabisch',
                 'bn'    => 'Bengali',
-                'pt_BR' => 'Brazilian Portuguese',
-                'zh_CN' => 'Chinese',
-                'nl'    => 'Dutch',
-                'en'    => 'English',
-                'fr'    => 'French',
-                'de'    => 'German',
-                'he'    => 'Hebrew',
+                'de'    => 'Deutsch',
+                'es'    => 'Spanisch',
+                'en'    => 'Englisch',
+                'fr'    => 'Französisch',
+                'fa'    => 'Persisch',
+                'he'    => 'Hebräisch',
                 'hi_IN' => 'Hindi',
-                'it'    => 'Italian',
-                'ja'    => 'Japanese',
-                'fa'    => 'Persian',
-                'pl'    => 'Polish',
-                'ru'    => 'Russian',
+                'it'    => 'Italienisch',
+                'ja'    => 'Japanisch',
+                'nl'    => 'Niederländisch',
+                'pl'    => 'Polnisch',
+                'pt_BR' => 'Brasilianisches Portugiesisch',
+                'ru'    => 'Russisch',
                 'sin'   => 'Sinhala',
-                'es'    => 'Spanish',
-                'tr'    => 'Turkish',
-                'uk'    => 'Ukrainian',
+                'tr'    => 'Türkisch',
+                'uk'    => 'Ukrainisch',
+                'zh_CN' => 'Chinesisch',
             ],
         ],
 
         'customer' => [
             'customer-groups' => [
-                'guest'     => 'Guest',
-                'general'   => 'General',
-                'wholesale' => 'Wholesale',
+                'guest'     => 'Gast',
+                'general'   => 'Allgemein',
+                'wholesale' => 'Großhandel',
             ],
         ],
 
         'inventory' => [
             'inventory-sources' => [
-                'name' => 'Default',
+                'name' => 'Standard',
             ],
         ],
 
         'shop' => [
             'theme-customizations' => [
                 'image-carousel' => [
-                    'name'  => 'Image Carousel',
+                    'name'  => 'Bildkarussell',
 
                     'sliders' => [
-                        'title' => 'Get Ready For New Collection',
+                        'title' => 'Bereit für die neue Kollektion',
                     ],
                 ],
 
                 'offer-information' => [
-                    'name' => 'Offer Information',
+                    'name' => 'Angebotsinformation',
 
                     'content' => [
-                        'title' => 'Get UPTO 40% OFF on your 1st order SHOP NOW',
+                        'title' => 'Bis zu 40% Rabatt auf Ihre erste Bestellung JETZT KAUFEN',
                     ],
                 ],
 
                 'categories-collections' => [
-                    'name' => 'Categories Collections',
+                    'name' => 'Kategorienkollektionen',
                 ],
 
                 'new-products' => [
-                    'name' => 'New Products',
+                    'name' => 'Neue Produkte',
 
                     'options' => [
-                        'title' => 'New Products',
+                        'title' => 'Neue Produkte',
                     ],
                 ],
 
                 'top-collections' => [
-                    'name' => 'Top Collections',
+                    'name' => 'Top-Kollektionen',
 
                     'content' => [
-                        'title'       => 'The game with our new additions!',
-                        'sub-title-1' => 'Our Collections',
-                        'sub-title-2' => 'Our Collections',
-                        'sub-title-3' => 'Our Collections',
-                        'sub-title-4' => 'Our Collections',
-                        'sub-title-5' => 'Our Collections',
-                        'sub-title-6' => 'Our Collections',
+                        'sub-title-1' => 'Unsere Kollektionen',
+                        'sub-title-2' => 'Unsere Kollektionen',
+                        'sub-title-3' => 'Unsere Kollektionen',
+                        'sub-title-4' => 'Unsere Kollektionen',
+                        'sub-title-5' => 'Unsere Kollektionen',
+                        'sub-title-6' => 'Unsere Kollektionen',
+                        'title'       => 'Das Spiel mit unseren neuen Ergänzungen!',
                     ],
                 ],
 
                 'bold-collections' => [
-                    'name' => 'Bold Collections',
+                    'name' => 'Fette Kollektionen',
 
                     'content' => [
-                        'title'       => 'Get Ready for our new Bold Collections!',
-                        'description' => 'Introducing Our New Bold Collections! Elevate your style with daring designs and vibrant statements. Explore striking patterns and bold colors that redefine your wardrobe. Get ready to embrace the extraordinary!',
-                        'btn-title'   => 'View All',
+                        'btn-title'   => 'Alle anzeigen',
+                        'description' => 'Einführung unserer neuen fetten Kollektionen! Heben Sie Ihren Stil mit gewagten Designs und lebhaften Statements hervor. Erkunden Sie auffällige Muster und kräftige Farben, die Ihre Garderobe neu definieren. Machen Sie sich bereit, das Außergewöhnliche zu umarmen!',
+                        'title'       => 'Machen Sie sich bereit für unsere neuen fetten Kollektionen!',
                     ],
                 ],
 
                 'featured-collections' => [
-                    'name' => 'Featured Collections',
+                    'name' => 'Hervorgehobene Kollektionen',
 
                     'options' => [
-                        'title' => 'Featured Products',
+                        'title' => 'Hervorgehobene Produkte',
                     ],
                 ],
 
                 'game-container' => [
-                    'name' => 'Game Container',
+                    'name' => 'Spielercontainer',
 
                     'content' => [
-                        'title'       => 'The game with our new additions!',
-                        'sub-title-1' => 'Our Collections',
-                        'sub-title-2' => 'Our Collections',
+                        'sub-title-1' => 'Unsere Kollektionen',
+                        'sub-title-2' => 'Unsere Kollektionen',
+                        'title'       => 'Das Spiel mit unseren neuen Ergänzungen!',
                     ],
                 ],
 
                 'all-products' => [
-                    'name' => 'All Products',
+                    'name' => 'Alle Produkte',
 
                     'options' => [
-                        'title' => 'All Products',
-                    ],
-                ],
-
-                'bold-collections' => [
-                    'name' => 'Bold Collections',
-
-                    'content' => [
-                        'title'       => 'Get Ready for our new Bold Collections!',
-                        'description' => 'Introducing Our New Bold Collections! Elevate your style with daring designs and vibrant statements. Explore striking patterns and bold colors that redefine your wardrobe. Get ready to embrace the extraordinary!',
-                        'btn-title'   => 'View All',
+                        'title' => 'Alle Produkte',
                     ],
                 ],
 
                 'footer-links' => [
-                    'name' => 'Footer Links',
+                    'name' => 'Fußzeilenlinks',
 
                     'options' => [
-                        'about-us'         => 'About Us',
-                        'contact-us'       => 'Contact Us',
-                        'customer-service' => 'Customer Service',
-                        'whats-new'        => 'What\'s New',
-                        'terms-of-use'     => 'Terms of Use',
-                        'terms-conditions' => 'Terms & Conditions',
-                        'privacy-policy'   => 'Privacy Policy',
-                        'payment-policy'   => 'Payment Policy',
-                        'shipping-policy'  => 'Shipping Policy',
-                        'return-policy'    => 'Return Policy',
-                        'refund-policy'    => 'Refund Policy',
+                        'about-us'         => 'Über uns',
+                        'contact-us'       => 'Kontaktiere uns',
+                        'customer-service' => 'Kundenservice',
+                        'privacy-policy'   => 'Datenschutzrichtlinie',
+                        'payment-policy'   => 'Zahlungsrichtlinie',
+                        'return-policy'    => 'Rückgaberichtlinie',
+                        'refund-policy'    => 'Erstattungsrichtlinie',
+                        'shipping-policy'  => 'Versandrichtlinie',
+                        'terms-of-use'     => 'Nutzungsbedingungen',
+                        'terms-conditions' => 'Allgemeine Geschäftsbedingungen',
+                        'whats-new'        => 'Was gibt es Neues',
+                    ],
+                ],
+
+                'services-content' => [
+                    'name' => 'Services Content',
+
+                    'title' => [
+                        'free-shipping'   => 'Kostenloser Versand',
+                        'product-replace' => 'Produkt austauschen',
+                        'emi-available'   => 'EMI verfügbar',
+                        'time-support'    => '24/7 Unterstützung',
+                    ],
+
+                    'description' => [
+                        'free-shipping-info'   => 'Kostenloser Versand für alle Bestellungen',
+                        'product-replace-info' => 'Einfacher Produktwechsel möglich!',
+                        'emi-available-info'   => 'Keine Kosten EMI verfügbar auf allen gängigen Kreditkarten',
+                        'time-support-info'    => 'Dedizierte 24/7 Unterstützung über Chat und E-Mail',
                     ],
                 ],
             ],
@@ -300,13 +308,152 @@ return [
 
         'user' => [
             'users' => [
-                'name' => 'Example',
+                'name' => 'Beispiel',
             ],
 
             'roles' => [
+                'description' => 'Benutzer mit dieser Rolle haben vollen Zugriff.',
                 'name'        => 'Administrator',
-                'description' => 'This role users will have all the access',
             ],
+        ],
+    ],
+
+    'installer' => [
+        'index' => [
+            'start' => [
+                'locale'        => 'Lokale',
+                'main'          => 'Start',
+                'select-locale' => 'Wähle Lokale',
+                'title'         => 'Deine Bagisto-Installation',
+                'welcome-title' => 'Willkommen bei Bagisto 2.0.',
+            ],
+
+            'server-requirements' => [
+                'calendar'    => 'Kalender',
+                'ctype'       => 'cType',
+                'curl'        => 'cURL',
+                'dom'         => 'dom',
+                'fileinfo'    => 'Dateiinfo',
+                'filter'      => 'Filter',
+                'gd'          => 'GD',
+                'hash'        => 'Hash',
+                'intl'        => 'intl',
+                'json'        => 'JSON',
+                'mbstring'    => 'mbstring',
+                'openssl'     => 'openssl',
+                'php'         => 'PHP',
+                'php-version' => '8.1 oder höher',
+                'pcre'        => 'pcre',
+                'pdo'         => 'pdo',
+                'session'     => 'Sitzung',
+                'title'       => 'Serveranforderungen',
+                'tokenizer'   => 'Tokenizer',
+                'xml'         => 'XML',
+            ],
+
+            'environment-configuration' => [
+                'allowed-locales'     => 'Erlaubte Sprachen',
+                'allowed-currencies'  => 'Erlaubte Währungen',
+                'application-name'    => 'Anwendungsname',
+                'bagisto'             => 'Bagisto',
+                'chinese-yuan'        => 'Chinesischer Yuan (CNY)',
+                'dirham'              => 'Dirham (AED)',
+                'default-url'         => 'Standard-URL',
+                'default-url-link'    => 'https://localhost',
+                'default-currency'    => 'Standardwährung',
+                'default-timezone'    => 'Standard-Zeitzone',
+                'default-locale'      => 'Standard-Sprachumgebung',
+                'database-connection' => 'Datenbankverbindung',
+                'database-hostname'   => 'Datenbank-Hostname',
+                'database-port'       => 'Datenbank-Port',
+                'database-name'       => 'Datenbankname',
+                'database-username'   => 'Datenbank-Benutzername',
+                'database-prefix'     => 'Datenbank-Präfix',
+                'database-password'   => 'Datenbank-Passwort',
+                'euro'                => 'Euro (EUR)',
+                'iranian'             => 'Iranischer Rial (IRR)',
+                'israeli'             => 'Israelischer Schekel (ILS)',
+                'japanese-yen'        => 'Japanischer Yen (JPY)',
+                'mysql'               => 'Mysql',
+                'pgsql'               => 'pgSQL',
+                'pound'               => 'Pfund Sterling (GBP)',
+                'rupee'               => 'Indische Rupie (INR)',
+                'russian-ruble'       => 'Russischer Rubel (RUB)',
+                'sqlsrv'              => 'SQLSRV',
+                'saudi'               => 'Saudi-Riyal (SAR)',
+                'title'               => 'Umgebungskonfiguration',
+                'turkish-lira'        => 'Türkische Lira (TRY)',
+                'usd'                 => 'US-Dollar (USD)',
+                'ukrainian-hryvnia'   => 'Ukrainische Hrywnja (UAH)',
+                'warning-message'     => 'Vorsicht! Die Einstellungen für Ihre Standardsystemsprachen sowie die Standardsystemwährung sind dauerhaft und können niemals wieder geändert werden.',
+            ],
+
+            'ready-for-installation' => [
+                'create-databsae-table'   => 'Datenbanktabelle erstellen',
+                'install'                 => 'Installation',
+                'install-info'            => 'Bagisto zur Installation',
+                'install-info-button'     => 'Klicke auf die Schaltfläche unten, um',
+                'populate-database-table' => 'Datenbanktabellen füllen',
+                'start-installation'      => 'Installation starten',
+                'title'                   => 'Bereit zur Installation',
+            ],
+
+            'installation-processing' => [
+                'bagisto'          => 'Installation Bagisto',
+                'bagisto-info'     => 'Erstellung der Datenbanktabellen, dies kann einige Momente dauern',
+                'title'            => 'Installation',
+            ],
+
+            'create-administrator' => [
+                'admin'            => 'Administrator',
+                'bagisto'          => 'Bagisto',
+                'confirm-password' => 'Passwort bestätigen',
+                'email'            => 'E-Mail',
+                'email-address'    => 'admin@example.com',
+                'password'         => 'Passwort',
+                'title'            => 'Administrator erstellen',
+            ],
+
+            'installation-completed' => [
+                'admin-panel'                => 'Admin-Panel',
+                'bagisto-forums'             => 'Bagisto Forum',
+                'customer-panel'             => 'Kundenpanel',
+                'explore-bagisto-extensions' => 'Erkunden Sie Bagisto-Erweiterungen',
+                'title'                      => 'Installation abgeschlossen',
+                'title-info'                 => 'Bagisto wurde erfolgreich auf Ihrem System installiert.',
+            ],
+
+            'arabic'                   => 'Arabisch',
+            'bengali'                  => 'Bengalisch',
+            'bagisto-logo'             => 'Bagisto Logo',
+            'back'                     => 'Zurück',
+            'bagisto-info'             => 'Ein Gemeinschaftsprojekt von',
+            'bagisto'                  => 'Bagisto',
+            'chinese'                  => 'Chinesisch',
+            'continue'                 => 'Weiter',
+            'dutch'                    => 'Niederländisch',
+            'english'                  => 'Englisch',
+            'french'                   => 'Französisch',
+            'german'                   => 'Deutsch',
+            'hebrew'                   => 'Hebräisch',
+            'hindi'                    => 'Hindi',
+            'installation-title'       => 'Willkommen zur Installation',
+            'installation-info'        => 'Wir freuen uns, Sie hier zu sehen!',
+            'installation-description' => 'Die Installation von Bagisto umfasst in der Regel mehrere Schritte. Hier ist ein grober Überblick über den Installationsprozess für Bagisto:',
+            'italian'                  => 'Italienisch',
+            'japanese'                 => 'Japanisch',
+            'persian'                  => 'Persisch',
+            'polish'                   => 'Polnisch',
+            'portuguese'               => 'Brasilianisches Portugiesisch',
+            'russian'                  => 'Russisch',
+            'spanish'                  => 'Spanisch',
+            'sinhala'                  => 'Singhalesisch',
+            'skip'                     => 'Überspringen',
+            'save-configuration'       => 'Konfiguration speichern',
+            'title'                    => 'Bagisto Installer',
+            'turkish'                  => 'Türkisch',
+            'ukrainian'                => 'Ukrainisch',
+            'webkul'                   => 'Webkul',
         ],
     ],
 ];

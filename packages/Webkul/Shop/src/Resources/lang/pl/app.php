@@ -427,7 +427,7 @@ return [
 
         'products' => [
             'card' => [
-                'card.add-to-compare-success' => 'Przedmiot został pomyślnie dodany do listy porównań.',
+                'add-to-compare-success'      => 'Przedmiot został pomyślnie dodany do listy porównań.',
                 'already-in-compare'          => 'Przedmiot jest już dodany do listy porównań.',
                 'add-to-cart'                 => 'Dodaj do koszyka',
                 'add-to-wishlist'             => 'Dodaj do listy życzeń',
@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => 'Wyniki wyszukiwania dla: :query',
+        'title'   => 'Wyniki wyszukiwania dla: :query',
+        'results' => 'Wyniki wyszukiwania',
 
         'images' => [
             'index' => [
@@ -622,6 +623,7 @@ return [
             'suspended-account-message' => 'Twoje konto zostało zawieszone',
             'select-hourly-duration'    => 'Wybierz czas trwania jednej godziny',
             'success-remove'            => 'Produkt został pomyślnie usunięty z koszyka',
+            'paypal-payment-cancelled'  => 'Płatność PayPal została anulowana.',
 
             'index' => [
                 'bagisto'                  => 'Bagisto',
@@ -768,6 +770,7 @@ return [
                 'grand-total'      => 'Łączna suma',
                 'place-order'      => 'Złóż zamówienie',
                 'processing'       => 'Przetwarzanie',
+                'price_&_qty'      => ':price × :qty',
                 'sub-total'        => 'Suma częściowa',
                 'tax'              => 'Podatek',
             ],
@@ -833,10 +836,13 @@ return [
 
         'customers' => [
             'registration' => [
-                'description' => 'Twoje konto zostało teraz pomyślnie utworzone, możesz się zalogować za pomocą swojego adresu e-mail i hasła. Po zalogowaniu będziesz mógł korzystać z innych usług, w tym przeglądania wcześniejszych zamówień, list życzeń i edytowania informacji o koncie.',
-                'greeting'    => 'Witamy i dziękujemy za zarejestrowanie się u nas!',
-                'subject'     => 'Rejestracja nowego klienta',
-                'sign-in'     => 'Zaloguj się',
+                'subject'                 => 'Rejestracja nowego klienta',
+                'description'             => 'Twoje konto zostało teraz pomyślnie utworzone, możesz się zalogować za pomocą swojego adresu e-mail i hasła. Po zalogowaniu będziesz mógł korzystać z innych usług, w tym przeglądania wcześniejszych zamówień, list życzeń i edytowania informacji o koncie.',
+                'credentials-description' => 'Sua conta foi criada. Os detalhes da sua conta estão abaixo:',
+                'greeting'                => 'Witamy i dziękujemy za zarejestrowanie się u nas!',
+                'sign-in'                 => 'Zaloguj się',
+                'username'                => 'Nome de usuário/Email',
+                'password'                => 'Senha',
             ],
 
             'forgot-password' => [

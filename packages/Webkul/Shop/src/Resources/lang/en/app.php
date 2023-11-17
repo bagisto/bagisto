@@ -427,7 +427,7 @@ return [
 
         'products' => [
             'card' => [
-                'card.add-to-compare-success' => 'Item added successfully to compare list.',
+                'add-to-compare-success'      => 'Item added successfully to compare list.',
                 'already-in-compare'          => 'Item is already added to compare list.',
                 'add-to-cart'                 => 'Add To Cart',
                 'add-to-wishlist'             => 'Add To Wishlist',
@@ -570,7 +570,8 @@ return [
     ],
 
     'search' => [
-        'title' => 'Search results for : :query',
+        'title'   => 'Search results for : :query',
+        'results' => 'Search results',
 
         'images' => [
             'index' => [
@@ -622,6 +623,7 @@ return [
             'suspended-account-message' => 'Your account has been suspended.',
             'select-hourly-duration'    => 'Select a slot duration of one hour.',
             'success-remove'            => 'Item is successfully removed from the cart.',
+            'paypal-payment-cancelled'  => 'Paypal payment has been cancelled.',
 
             'index' => [
                 'bagisto'                  => 'Bagisto',
@@ -768,6 +770,7 @@ return [
                 'grand-total'      => 'Grand Total',
                 'place-order'      => 'Place Order',
                 'processing'       => 'Processing',
+                'price_&_qty'      => ':price × :qty',
                 'sub-total'        => 'Subtotal',
                 'tax'              => 'Tax',
             ],
@@ -833,10 +836,13 @@ return [
 
         'customers' => [
             'registration' => [
-                'description' => 'Your account has now been created successfully and you can login using your email address and password credentials. Upon logging in, you will be able to access other services including reviewing past orders, wishlists and editing your account information.',
-                'greeting'    => 'Welcome and thank you for registering with us!',
-                'subject'     => 'New Customer Registration',
-                'sign-in'     => 'Sign in',
+                'subject'                 => 'New Customer Registration',
+                'description'             => 'Your account has now been created successfully and you can login using your email address and password credentials. Upon logging in, you will be able to access other services including reviewing past orders, wishlists and editing your account information.',
+                'credentials-description' => 'Your account has been created. Your account details are below:',
+                'greeting'                => 'Welcome and thank you for registering with us!',
+                'sign-in'                 => 'Sign in',
+                'username-email'          => 'Username/Email',
+                'password'                => 'Password',
             ],
 
             'forgot-password' => [
