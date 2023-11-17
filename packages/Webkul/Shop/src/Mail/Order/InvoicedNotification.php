@@ -13,11 +13,21 @@ class InvoicedNotification extends Mailable
     /**
      * Create a new message instance.
      *
-     * @param  \Webkul\Customer\Contracts\Invoice  $invoice
+     * @param  \Webkul\Sales\Contracts\Invoice  $invoice
+     * @param  string  $receiverEmail
      * @return void
      */
-    public function __construct(public $invoice)
-    {
+    public function __construct(
+        public $invoice,
+        public $receiverEmail = ''
+    ) {
+        /**
+         * Model extra properties are lost in the build method so using extra optional
+         * properties. If provided second argument then priorty will be given to second argument.
+         */
+        if (! $receiverEmail) {
+            $this->receiverEmail = $invoice->email;
+        }
     }
 
     /**
@@ -28,7 +38,7 @@ class InvoicedNotification extends Mailable
     public function build()
     {
         return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
-            ->to($this->invoice->order->customer_email, $this->invoice->order->customer_full_name)
+            ->to($this->receiverEmail, $this->invoice->order->customer_full_name)
             ->subject(trans('shop::app.emails.orders.invoiced.subject'))
             ->view('shop::emails.orders.invoiced');
     }
