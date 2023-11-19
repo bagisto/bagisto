@@ -87,4 +87,21 @@ class Customer extends Base
             session()->flash('warning', $e->getMessage());
         }
     }
+
+    /**
+     * After verifying the account
+     *
+     * @param  \Webkul\Customer\Contracts\Customer  $customer
+     * @return void
+     */
+    public function afterVerifyAccount($customer)
+    {
+        try {
+            // Send registration notification with specified notify parameter
+            Mail::queue(new RegistrationNotification($customer,'customer'));
+        } catch (\Exception $e) {
+            // Log and report any exceptions
+            report($e);
+        }
+    }
 }
