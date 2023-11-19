@@ -44,9 +44,9 @@
             </div>
         </div>
 
-        <!-- Content -->
         <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
-            <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+            <!-- Left Component -->
+            <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
 
                 {!! view_render_event('bagisto.admin.settings.channels.edit.card.general.before') !!}
 
@@ -388,11 +388,12 @@
 
             </div>
 
-            <!-- Currencies and Locale -->
+            <!-- Right Compoenent -->
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
 
                 {!! view_render_event('bagisto.admin.settings.channels.edit.card.accordion.currencies_and_locales.before') !!}
 
+                <!-- Currencies and Locale -->
                 <x-admin::accordion>
                     <x-slot:header>
                         <div class="flex items-center justify-between">
@@ -538,16 +539,15 @@
                 </x-admin::accordion>
 
                 {!! view_render_event('bagisto.admin.settings.channels.edit.card.accordion.currencies_and_locales.after') !!}
-
                 
                 {!! view_render_event('bagisto.admin.settings.channels.edit.card.accordion.settings.before') !!}
                 
-                <!-- Settings -->
+                <!-- Maintainance Mode -->
                 <x-admin::accordion>
                     <x-slot:header>
                         <div class="flex items-center justify-between">
                             <p class="p-[10px] text-gray-800 dark:text-white text-[16px] font-semibold">
-                                @lang('admin::app.settings.channels.edit.settings')
+                                @lang('admin::app.settings.channels.edit.maintenance-mode')
                             </p>
                         </div>
                     </x-slot:header>

@@ -1,10 +1,10 @@
 <x-shop::layouts.account>
-    {{-- Page Title --}}
+    <!-- Page Title -->
     <x-slot:title>
         @lang('shop::app.customers.account.profile.title')
     </x-slot>
 
-    {{-- Breadcrumbs --}}
+    <!-- Breadcrumbs -->
     @section('breadcrumbs')
         <x-shop::breadcrumbs name="profile"></x-shop::breadcrumbs>
     @endSection
@@ -22,7 +22,7 @@
         </a>
     </div>
 
-    {{-- Profile Information --}}
+    <!-- Profile Information -->
     <div class="grid grid-cols-1 gap-y-[25px] mt-[30px]">
         <div class="grid grid-cols-[2fr_3fr] w-full px-[30px] py-[12px] border-b-[1px] border-[#E9E9E9]">
             <p class="text-[14px] font-medium">
@@ -76,7 +76,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.delete.before') !!}
 
-        {{-- Profile Delete modal --}}
+        <!-- Profile Delete modal -->
         <x-shop::modal>
             <x-slot:toggle>
                 <div

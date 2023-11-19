@@ -39,13 +39,13 @@ class Validator
 
             $totalConditionCount++;
 
-            if ($rule->condition_type) {
+            if ($rule->condition_type == '1') {
                 if (! $this->validateObject($condition, $entity)) {
                     return false;
                 } else {
                     $validConditionCount++;
                 }
-            } else {
+            } elseif ($rule->condition_type == '2') {
                 if ($this->validateObject($condition, $entity)) {
                     return true;
                 }

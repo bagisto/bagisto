@@ -1,7 +1,7 @@
-{{--
+<!--
     This code needs to be refactored to reduce the amount of PHP in the Blade
     template as much as possible.
---}}
+-->
 @php
     $showCompare = (bool) core()->getConfigData('general.content.shop.compare_option');
 
@@ -10,7 +10,7 @@
 
 <div class="gap-[15px] flex-wrap px-[15px] pt-[25px] hidden max-lg:flex max-lg:mb-[15px]">
     <div class="w-full flex justify-between items-center">
-        {{-- Left Navigation --}}
+        <!-- Left Navigation -->
         <div class="flex items-center gap-x-[5px]">
             <x-shop::drawer
                 position="left"
@@ -34,7 +34,7 @@
                 </x-slot:header>
 
                 <x-slot:content>
-                    {{-- Account Profile Hero Section --}}
+                    <!-- Account Profile Hero Section -->
                     <div class="grid grid-cols-[auto_1fr] gap-[15px] items-center mb-[15px] p-[10px] border border-[#E9E9E9] rounded-[12px]">
                         <div class="">
                             <img
@@ -63,10 +63,10 @@
                         @endauth
                     </div>
 
-                    {{-- Mobile category view --}}
+                    <!-- Mobile category view -->
                     <v-mobile-category></v-mobile-category>
 
-                    {{-- Localization & Currency Section --}}
+                    <!-- Localization & Currency Section -->
                     <div class="absolute w-full flex bottom-0 left-0 bg-white shadow-lg p-4 gap-x-[20px] justify-between items-center mb-[15px]">
                         <x-shop::dropdown position="top-left">
                             <!-- Dropdown Toggler -->
@@ -91,7 +91,7 @@
 
                         <x-shop::dropdown position="top-right">
                             <x-slot:toggle>
-                                {{-- Dropdown Toggler --}}
+                                <!-- Dropdown Toggler -->
                                 <div class="w-full flex gap-[10px] justify-between items-center cursor-pointer" role="button">
                                     <img
                                         src="{{ ! empty(core()->getCurrentLocale()->logo_url)
@@ -140,7 +140,7 @@
             </a>
         </div>
 
-        {{-- Right Navigation --}}
+        <!-- Right Navigation -->
         <div>
             <div class="flex  items-center gap-x-[20px]">
                 @if($showCompare)
@@ -159,7 +159,7 @@
                         <span class="icon-users text-[24px] cursor-pointer"></span>
                     </x-slot:toggle>
 
-                    {{-- Guest Dropdown --}}
+                    <!-- Guest Dropdown -->
                     @guest('customer')
                         <x-slot:content>
                             <div class="grid gap-[10px]">
@@ -192,7 +192,7 @@
                         </x-slot:content>
                     @endguest
 
-                    {{-- Customers Dropdown --}}
+                    <!-- Customers Dropdown -->
                     @auth('customer')
                         <x-slot:content class="!p-[0px]">
                             <div class="grid gap-[10px] p-[20px] pb-0">
@@ -232,7 +232,7 @@
                                     </a>
                                 @endif
 
-                                {{--Customers logout--}}
+                                <!--Customers logout-->
                                 @auth('customer')
                                     <x-shop::form
                                         method="DELETE"
@@ -257,13 +257,18 @@
         </div>
     </div>
 
-    {{-- Serach Catalog Form --}}
+    <!-- Serach Catalog Form -->
     <form action="{{ route('shop.search.index') }}" class="flex items-center w-full">
-        <label for="organic-search" class="sr-only">Search</label>
+        <label 
+            for="organic-search" 
+            class="sr-only"
+        >
+            @lang('shop::app.components.layouts.header.search')
+        </label>
 
         <div class="relative w-full">
             <div
-                class="icon-search flex items-center absolute left-[12px] top-[12px] text-[25px] pointer-events-none">
+                class="icon-search flex items-center absolute ltr:left-[12px] rtl:right-[12px] top-[12px] text-[25px] pointer-events-none">
             </div>
 
             <input
@@ -277,7 +282,7 @@
 
             <button
                 type="button"
-                class="icon-camera flex items-center absolute top-[12px] right-[12px] pr-3 text-[22px]"
+                class="icon-camera flex items-center absolute top-[12px] ltr:right-[12px] rtl:left-[12px] ltr:pl-3 rtl:pr-3 text-[22px]"
                 aria-label="@lang('shop::app.components.layouts.header.search')"
             >
             </button>

@@ -120,7 +120,7 @@
 
 
                     <template v-if="meta.valid">
-                        <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && forms.billing.isUsedForShipping">
+                        <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && forms.billing.isUsedForShipping && addresses.length">
                             <div class="flex justify-end mt-4 mb-4">
                                 <button
                                     class="block py-[11px] px-[43px] bg-navyBlue rounded-[18px] text-white text-base w-max font-medium text-center cursor-pointer"
@@ -175,7 +175,7 @@
 
                 {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.before') !!}
 
-                {{-- Billing address form --}}
+                <!-- Billing address form -->
                 <x-shop::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"

@@ -115,7 +115,7 @@ class ExchangeRateController extends Controller
         try {
             app(config('services.exchange_api.' . config('services.exchange_api.default') . '.class'))->updateRates();
 
-            session()->flash('success', trans('admin::app.settings.exchange-rates.update-success'));
+            session()->flash('success', trans('admin::app.settings.exchange-rates.index.update-success'));
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
         }

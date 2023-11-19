@@ -623,6 +623,7 @@ return [
             'suspended-account-message' => '您的帐户已被暂停。',
             'select-hourly-duration'    => '选择一小时的时段。',
             'success-remove'            => '项目已成功从购物车中移除。',
+            'paypal-payment-cancelled'  => 'Paypal付款已被取消。',
 
             'index'  => [
                 'bagisto'                  => '巴基斯托',
@@ -769,6 +770,7 @@ return [
                 'grand-total'      => '总计',
                 'place-order'      => '下订单',
                 'processing'       => '处理中',
+                'price_&_qty'      => ':price × :qty',
                 'sub-total'        => '小计',
                 'tax'              => '税',
             ],
@@ -834,10 +836,13 @@ return [
 
         'customers' => [
             'registration' => [
-                'description' => '您的帐户已成功创建，您可以使用电子邮件地址和密码凭据登录。登录后，您将能够访问其他服务，包括查看过去的订单、愿望清单和编辑您的帐户信息。',
-                'greeting'    => '欢迎并感谢您注册我们的网站！',
-                'subject'     => '新客户注册',
-                'sign-in'     => '登录',
+                'subject'                 => '新客户注册',
+                'description'             => '您的帐户已成功创建，您可以使用电子邮件地址和密码凭据登录。登录后，您将能够访问其他服务，包括查看过去的订单、愿望清单和编辑您的帐户信息。',
+                'credentials-description' => '您的账户已创建。您的账户详细信息如下：',
+                'greeting'                => '欢迎并感谢您注册我们的网站！',
+                'sign-in'                 => '登录',
+                'password'                => '用户名/电子邮件',
+                'username-email'          => '密码',
             ],
 
             'forgot-password' => [

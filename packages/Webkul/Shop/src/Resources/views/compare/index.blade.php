@@ -1,4 +1,4 @@
-{{-- SEO Meta Content --}}
+<!-- SEO Meta Content -->
 @push('meta')
     <meta name="description" content="@lang('shop::app.compare.title')"/>
 
@@ -6,19 +6,19 @@
 @endPush
 
 <x-shop::layouts>
-    {{-- Page Title --}}
+    <!-- Page Title -->
     <x-slot:title>
         @lang('shop::app.compare.title')
     </x-slot:title>
 
-    {{-- Breadcrumb --}}
+    <!-- Breadcrumb -->
     <div class="flex justify-center mt-[20px] max-lg:hidden">
 		<div class="flex gap-x-[10px] items-center">
             <x-shop::breadcrumbs name="compare"></x-shop::breadcrumbs>
 		</div>
 	</div>
 
-    {{-- Compare Component --}}
+    <!-- Compare Component -->
     <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px] mt-[30px]">
         <v-compare>
             <!---- Shimmer Effect -->

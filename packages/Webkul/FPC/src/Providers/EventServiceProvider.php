@@ -48,11 +48,11 @@ class EventServiceProvider extends ServiceProvider
             'Webkul\FPC\Listeners\Refund@afterCreate',
         ],
 
-        'cms.pages.update.after' => [
+        'cms.page.update.after' => [
             'Webkul\FPC\Listeners\Page@afterUpdate',
         ],
 
-        'cms.pages.delete.before' => [
+        'cms.page.delete.before' => [
             'Webkul\FPC\Listeners\Page@beforeDelete',
         ],
 
@@ -70,6 +70,14 @@ class EventServiceProvider extends ServiceProvider
 
         'core.channel.update.after' => [
             'Webkul\FPC\Listeners\Channel@afterUpdate',
+        ],
+
+        'marketing.search_seo.url_rewrites.update.after' => [
+            'Webkul\FPC\Listeners\URLRewrite@afterUpdate',
+        ],
+
+        'marketing.search_seo.url_rewrites.delete.before' => [
+            'Webkul\FPC\Listeners\URLRewrite@beforeDelete',
         ],
     ];
 }

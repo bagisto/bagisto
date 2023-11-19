@@ -95,7 +95,7 @@
                 </component>
             </div>
         </script>
-
+        
         <!-- Image-Carousel Template -->
         @includeWhen($theme->type === 'image_carousel', 'admin::settings.themes.edit.image-carousel')
 
@@ -110,6 +110,10 @@
 
         <!-- Footer Template -->
         @includeWhen($theme->type === 'footer_links', 'admin::settings.themes.edit.footer-links')
+
+        <!-- Services-content Template -->
+        @includeWhen($theme->type === 'services_content', 'admin::settings.themes.edit.services-content')
+
 
         <!-- Parent Theme Customizer Component -->
         <script type="module">
@@ -128,6 +132,7 @@
                             static_content: 'v-static-content',
                             image_carousel: 'v-image-carousel',
                             footer_links: 'v-footer-links',
+                            services_content: 'v-services-content'
                         } 
                     };
                 },

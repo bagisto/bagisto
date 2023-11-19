@@ -5,6 +5,7 @@ namespace Webkul\Product\Repositories;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Facades\ElasticSearch;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Marketing\Repositories\SearchSynonymRepository;
 
 class ElasticSearchRepository
 {
@@ -15,7 +16,8 @@ class ElasticSearchRepository
      */
     public function __construct(
         protected CustomerRepository $customerRepository,
-        protected AttributeRepository $attributeRepository
+        protected AttributeRepository $attributeRepository,
+        protected SearchSynonymRepository $searchSynonymRepository
     ) {
     }
 
@@ -115,6 +117,7 @@ class ElasticSearchRepository
                         $attribute->code => intval($params[$attribute->code]),
                     ],
                 ];
+
             case 'price':
                 $customerGroup = $this->customerRepository->getCurrentGroup();
 
@@ -130,9 +133,16 @@ class ElasticSearchRepository
                 ];
 
             case 'text':
+                $synonyms = $this->searchSynonymRepository->getSynonymsByQuery($params[$attribute->code]);
+
+                $synonyms = array_map(function ($synonym) {
+                    return '"' . $synonym . '"';
+                }, $synonyms);
+
                 return [
-                    'match_phrase' => [
-                        $attribute->code => $params[$attribute->code],
+                    'query_string' => [
+                        'query'         => implode(' OR ', $synonyms),
+                        'default_field' => $attribute->code,
                     ],
                 ];
 

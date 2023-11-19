@@ -35,7 +35,7 @@
     <x-admin::datagrid src="{{ route('admin.catalog.products.index') }}" :isMultiRow="true">
         <!-- Datagrid Header -->
         @php
-            $hasPermission = bouncer()->hasPermission('catalog.products.mass-update') || bouncer()->hasPermission('catalog.products.mass-delete');
+            $hasPermission = bouncer()->hasPermission('catalog.products.edit') || bouncer()->hasPermission('catalog.products.delete');
         @endphp
 
         <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">

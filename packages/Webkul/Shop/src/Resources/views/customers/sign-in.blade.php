@@ -1,4 +1,4 @@
-{{-- SEO Meta Content --}}
+<!-- SEO Meta Content -->
 @push('meta')
     <meta name="description" content="@lang('shop::app.customers.login-form.page-title')"/>
 
@@ -10,13 +10,13 @@
     :has-feature="false"
     :has-footer="false"
 >
-    {{-- Page Title --}}
+    <!-- Page Title -->
     <x-slot:title>
         @lang('shop::app.customers.login-form.page-title')
     </x-slot>
 
     <div class="container mt-20 max-1180:px-[20px]">
-        {{-- Company Logo --}}
+        <!-- Company Logo -->
         <div class="flex gap-x-[54px] items-center max-[1180px]:gap-x-[35px]">
             <a
                 href="{{ route('shop.home.index') }}"
@@ -32,7 +32,7 @@
             </a>
         </div>
 
-        {{-- Form Container --}}
+        <!-- Form Container -->
         <div
             class="w-full max-w-[870px] m-auto px-[90px] py-[60px] border border-[#E9E9E9] rounded-[12px] max-md:px-[30px] max-md:py-[30px]"
         >
@@ -51,7 +51,7 @@
 
                     {!! view_render_event('bagisto.shop.customers.login_form_controls.before') !!}
 
-                    {{-- Email --}}
+                    <!-- Email -->
                     <x-shop::form.control-group class="mb-4">
                         <x-shop::form.control-group.label class="required">
                             @lang('shop::app.customers.login-form.email')
@@ -76,7 +76,7 @@
                         </x-shop::form.control-group.error>
                     </x-shop::form.control-group>
 
-                    {{-- Password --}}
+                    <!-- Password -->
                     <x-shop::form.control-group class="mb-4">
                         <x-shop::form.control-group.label class="required">
                             @lang('shop::app.customers.login-form.password')
@@ -136,14 +136,14 @@
                         </div>
                     </div>
 
-                    {{-- Captcha --}}
+                    <!-- Captcha -->
                     @if (core()->getConfigData('customer.captcha.credentials.status'))
                         <div class="flex mt-[20px]">
                             {!! Captcha::render() !!}
                         </div>
                     @endif
 
-                    {{-- Submit Button --}}
+                    <!-- Submit Button -->
                     <div class="flex gap-[36px] flex-wrap mt-[30px] items-center">
                         <button
                             class="primary-button block w-full max-w-[374px] py-[16px] px-[43px] m-0 ml-[0px] mx-auto rounded-[18px] text-[16px] text-center"

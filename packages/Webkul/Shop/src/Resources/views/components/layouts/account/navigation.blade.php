@@ -1,9 +1,9 @@
-{{--
+<!--
     - This code needs to be refactored to reduce the amount of PHP in the Blade
     template as much as possible.
 
     - Need to check the view composer capability for the component.
---}}
+-->
 @php
     $menu = \Webkul\Core\Tree::create();
 
@@ -17,7 +17,7 @@
 @endphp
 
 <div class="panel-side grid grid-cols-[1fr] gap-[30px] max-w-[380px] max-h-[1320px] overflow-y-auto overflow-x-hidden journal-scroll min-w-[342px] max-xl:min-w-[270px] max-md:max-w-full">
-    {{-- Account Profile Hero Section --}}
+    <!-- Account Profile Hero Section -->
     <div class="grid grid-cols-[auto_1fr] gap-[15px] items-center px-[20px] py-[25px] border border-[#E9E9E9] rounded-[12px]">
         <div class="">
             <img
@@ -34,18 +34,18 @@
         </div>
     </div>
 
-    {{-- Account Navigation Menus --}}
+    <!-- Account Navigation Menus -->
     @foreach ($menu->items as $menuItem)
         <div class="max-md:border max-md:border-t-0 max-md:border-r-[1px] max-md:border-l-[1px] max-md:border-b-[1px] max-md:border-[#E9E9E9]   max-md:rounded-[6px]">
             <v-account-navigation>
-                {{-- Account Navigation Toggler --}}
+                <!-- Account Navigation Toggler -->
                 <div class="max-md:flex max-md:gap-x-[15px] max-md:justify-between max-md:items-center pb-[20px] max-md:bg-gray-200 max-md:px-[25px] max-md:py-[20px] max-md:rounded-tl-[6px] max-md:rounded-tr-[6px] accordian-toggle md:pointer-events-none select-none">
                     <p class="text-[20px] md:font-medium">@lang($menuItem['name'])</p>
 
                     <span class="icon-arrow-right text-[24px] md:hidden"></span>
                 </div>
 
-                {{-- Account Navigation Content --}}
+                <!-- Account Navigation Content -->
                 <div class="grid border border-t-0 border-r-[1px] border-l-[1px] border-b-[1px] border-[#E9E9E9] rounded-[6px] max-md:hidden max-md:border-none accordian-content">
                     @if (! (bool) core()->getConfigData('general.content.shop.wishlist_option'))
                         @php

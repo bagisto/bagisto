@@ -1,4 +1,4 @@
-{{-- Coupon Vue Component --}}
+<!-- Coupon Vue Component -->
 <v-coupon 
     :is-coupon-applied="cart.coupon_code"
     :sub-total="cart.base_grand_total"

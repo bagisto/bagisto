@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('theme_customizations', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('channel_id')->unsigned()->default(1);
             $table->string('type');
             $table->string('name');
             $table->integer('sort_order');
             $table->boolean('status')->default(0);
+
+            $table->integer('channel_id')->unsigned();
+            $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -1,5 +1,5 @@
 @pushOnce('scripts')
-    {{-- v-tree-radio-component template --}}
+    <!-- v-tree-radio-component template -->
     <script
         type="text/x-template"
         id="v-tree-radio-template"
@@ -27,7 +27,7 @@
         </label>
     </script>
 
-    {{-- v-tree-radio component --}}
+    <!-- v-tree-radio component -->
     <script type="module">
         app.component('v-tree-radio', {
             template: '#v-tree-radio-template',

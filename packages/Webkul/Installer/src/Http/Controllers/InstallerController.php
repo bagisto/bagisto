@@ -50,6 +50,10 @@ class InstallerController extends Controller
 
         $requirements = $this->serverRequirements->validate();
 
+        if (request()->has('locale')) {
+            return redirect()->route('installer.index');
+        }
+
         return view('installer::installer.index', compact('requirements', 'phpVersion'));
     }
 
@@ -64,16 +68,6 @@ class InstallerController extends Controller
     }
 
     /**
-     * Undocumented function
-     */
-    public function envFileDelete()
-    {
-        $response = File::delete(base_path('.env'));
-
-        return $response;
-    }
-
-    /**
      * Run Migration
      */
     public function runMigration()
@@ -81,6 +75,22 @@ class InstallerController extends Controller
         $migration = $this->databaseManager->migration();
 
         return $migration;
+    }
+
+    /**
+     * Run Seeder
+     *
+     * @return void|string
+     */
+    public function runSeeder()
+    {
+        $response = $this->environmentManager->setEnvConfiguration(request()->allParameters);
+
+        if ($response) {
+            $seeder = $this->databaseManager->seeder(request()->selectedParameters);
+
+            return $seeder;
+        }
     }
 
     /**

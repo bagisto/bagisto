@@ -62,6 +62,6 @@ class Kernel extends HttpKernel
         'guest'         => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'signed'        => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle'      => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'cacheResponse' => \Spatie\ResponseCache\Middlewares\CacheResponse::class,
+        'cacheResponse' => \Webkul\Shop\Http\Middleware\CacheResponse::class,
     ];
 }

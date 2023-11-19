@@ -26,6 +26,7 @@
                             :meta="available.meta"
                             :sort-page="sortPage"
                             :selectAllRecords="selectAllRecords"
+                            :available="available"
                             :applied="applied"
                             :is-loading="isLoading"
                         >
@@ -42,6 +43,7 @@
                             :meta="available.meta"
                             :setCurrentSelectionMode="setCurrentSelectionMode"
                             :performAction="performAction"
+                            :available="available"
                             :applied="applied"
                             :is-loading="isLoading"
                         >
