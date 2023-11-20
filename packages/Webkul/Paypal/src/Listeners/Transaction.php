@@ -40,6 +40,7 @@ class Transaction
                         'status'         => $transactionDetails['result']['status'],
                         'type'           => $transactionDetails['result']['intent'],
                         'amount'         => $transactionDetails['result']['purchase_units'][0]['amount']['value'],
+                        'currency_code'  => $transactionDetails['result']['currency_code'],
                         'payment_method' => $invoice->order->payment->method,
                         'order_id'       => $invoice->order->id,
                         'invoice_id'     => $invoice->id,

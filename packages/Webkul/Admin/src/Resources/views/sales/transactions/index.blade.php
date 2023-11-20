@@ -246,6 +246,13 @@
                                         v-text="data.transaction.amount"
                                     >
                                     </p>
+
+                                    <p
+                                        v-if="data.transaction.currency_code"
+                                        class="text-gray-600 dark:text-gray-300"
+                                        v-text="data.transaction.currency_code"
+                                    >
+                                    </p>
                                 </div>
                             </div>
                         </div>
