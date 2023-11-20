@@ -28,8 +28,8 @@ class ChannelTableSeeder extends Seeder
                 'base_currency_id'  => 1,
                 'created_at'        => now(),
                 'updated_at'        => now(),
-            ]
-        ]);        
+            ],
+        ]);
 
         $defaultLocale = $parameters['default_locale'] ?? config('app.locale');
 
