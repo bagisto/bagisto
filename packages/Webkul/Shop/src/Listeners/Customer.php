@@ -5,9 +5,9 @@ namespace Webkul\Shop\Listeners;
 use Illuminate\Support\Facades\Mail;
 use Webkul\Shop\Mail\Customer\EmailVerificationNotification;
 use Webkul\Shop\Mail\Customer\NoteNotification;
+use Webkul\Shop\Mail\Customer\RegistrationNotification;
 use Webkul\Shop\Mail\Customer\SubscriptionNotification;
 use Webkul\Shop\Mail\Customer\UpdatePasswordNotification;
-use Webkul\Shop\Mail\Customer\RegistrationNotification;
 
 class Customer extends Base
 {
@@ -18,10 +18,10 @@ class Customer extends Base
      * @return void
      */
     public function afterCreated($customer)
-    {   
+    {
         if (core()->getConfigData('customer.settings.email.verification')) {
             try {
-                Mail::queue(new RegistrationNotification($customer,'admin'));
+                Mail::queue(new RegistrationNotification($customer, 'admin'));
             } catch (\Exception $e) {
                 report($e);
             }
@@ -98,7 +98,7 @@ class Customer extends Base
     {
         try {
             // Send registration notification with specified notify parameter
-            Mail::queue(new RegistrationNotification($customer,'customer'));
+            Mail::queue(new RegistrationNotification($customer, 'customer'));
         } catch (\Exception $e) {
             // Log and report any exceptions
             report($e);

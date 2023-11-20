@@ -12,7 +12,6 @@ use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Shop\Http\Requests\Customer\RegistrationRequest;
 use Webkul\Shop\Mail\Customer\EmailVerificationNotification;
-use Webkul\Shop\Mail\Customer\RegistrationNotification;
 
 class RegistrationController extends Controller
 {

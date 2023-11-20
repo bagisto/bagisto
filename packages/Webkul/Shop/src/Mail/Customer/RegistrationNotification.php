@@ -12,15 +12,18 @@ class RegistrationNotification extends Mailable
     use Queueable, SerializesModels;
 
     protected $senderDetails;
+
     protected $adminDetails;
+
     protected $senderEmail;
+
     protected $senderName;
 
     /**
      * Create a new mailable instance.
      *
      * @param  \Webkul\Customer\Contracts\Customer  $customer
-     * @param  string $notify
+     * @param  string  $notify
      * @return void
      */
     public function __construct(public $customer, public $notify)
