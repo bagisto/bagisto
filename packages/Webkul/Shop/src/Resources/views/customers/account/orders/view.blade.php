@@ -639,7 +639,7 @@
 
             @if ($order->refunds->count())
                 <x-shop::tabs.item
-                    title="@lang('shop::app.customers.account.orders.view.refunds.refunds') }}"
+                    :title="trans('shop::app.customers.account.orders.view.refunds.refunds')"
                 >
                     @foreach ($order->refunds as $refund)
                         <div class="text-[15px] font-medium">
