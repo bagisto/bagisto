@@ -33,7 +33,6 @@
                                     type="image"
                                     name="attachments"
                                     class="!p-0 !mb-0"
-                                    rules="required"
                                     ref="reviewImages"
                                     :label="trans('shop::app.products.view.reviews.attachments')"
                                     :is-multiple="true"
