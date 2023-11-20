@@ -367,6 +367,35 @@
                                             </button>
                                         </div>
                                     </template>
+
+                                    <template v-if="selectedType == 'editWeight'">
+                                        <div class="pb-[10px] border-b-[1px] dark:border-gray-800  ">
+                                            <div class="flex gap-[10px] items-center">
+                                                <x-admin::form.control-group class="flex-1 mb-0">
+                                                    <x-admin::form.control-group.label>
+                                                        @lang('Apply a weight to all SKU.')
+                                                    </x-admin::form.control-group.label>
+                        
+                                                    <div class="relative">
+                                                        <x-admin::form.control-group.control
+                                                            type="text"
+                                                            name="weight"
+                                                            value="0"
+                                                            ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
+                                                            :label="trans('Weight')"
+                                                        >
+                                                        </x-admin::form.control-group.control>
+                                                    </div>
+                                                </x-admin::form.control-group>
+
+                                                <button class="secondary-button mt-[15px]">
+                                                    @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-btn')
+                                                </button>
+                                            </div>
+                    
+                                            <x-admin::form.control-group.error control-name="weight"></x-admin::form.control-group.error>
+                                        </div>
+                                    </template>
                                 </form>
                             </x-admin::form>
 
@@ -399,6 +428,34 @@
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 :rules="{required: true, decimal: true, min_value: 0}"
                                                 label="@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.price')"
+                                            >
+                                            </v-field>
+                                        </div>
+
+                                        <v-error-message
+                                            :name="'variants[' + variant.id + ']'"
+                                            v-slot="{ message }"
+                                        >
+                                            <p
+                                                class="mt-1 text-red-600 text-xs italic"
+                                                v-text="message"
+                                            >
+                                            </p>
+                                        </v-error-message>
+                                    </x-admin::form.control-group>
+                                </template>
+
+                                <template v-if="selectedType == 'editWeight'">
+                                    <x-admin::form.control-group class="flex-1 mb-0 max-w-[115px]">
+                                        <div class="relative">
+                                            <v-field
+                                                type="text"
+                                                :name="'variants[' + variant.id + ']'"
+                                                :value="variant.weight"
+                                                class="flex w-full min-h-[39px] py-[6px] ltr:pl-[10px] rtl:pr-[10px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
+                                                ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
+                                                label="@lang('Weight')"
                                             >
                                             </v-field>
                                         </div>
@@ -906,7 +963,7 @@
 
             props: ['superAttributes', 'variants'],
 
-            data: function () {
+            data() {
                 return {
                     inventorySources: @json($inventorySources),
 
@@ -919,6 +976,11 @@
                         editInventories: {
                             key: 'editInventories',
                             title: "@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.edit-inventories')"
+                        },
+
+                        editWeight: {
+                            key: 'editWeight',
+                            title: "@lang('Edit Weight')"
                         },
 
                         addImages: {
@@ -1012,7 +1074,7 @@
                         agree: () => {
                             this.selectedType = type;
 
-                            if (['editPrices', 'editInventories', 'addImages'].includes(type)) {
+                            if (['editPrices', 'editInventories', 'addImages', 'editWeight'].includes(type)) {
                                 this.$refs.updateVariantsDrawer.open();
                             } else {
                                 this[this.selectedType]();
@@ -1038,6 +1100,14 @@
                 editInventories(params) {
                     this.selectedVariants.forEach(function (variant) {
                         variant.inventories = params?.inventories ?? params.variants[variant.id];
+
+                        variant.selected = false;
+                    });
+                },
+
+                editWeight(params) {
+                    this.selectedVariants.forEach(function (variant) {
+                        variant.weight = params?.weight ?? params.variants[variant.id];
 
                         variant.selected = false;
                     });
