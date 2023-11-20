@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html
+    lang="{{ app()->getLocale() }}"
+    dir="{{ in_array(app()->getLocale(), ['ar', 'fa', 'he']) ? 'rtl' : 'ltr' }}"
+>
     <head>
         <title>@lang('installer::app.installer.index.title')</title>
 
@@ -32,9 +35,50 @@
         @stack('styles')
     </head>
 
+    @php
+        $locales = [
+            'ar'    => 'arabic',
+            'bn'    => 'bengali',
+            'pt_BR' => 'portuguese',
+            'zh_CN' => 'chinese',
+            'nl'    => 'dutch',
+            'en'    => 'english',
+            'fr'    => 'french',
+            'de'    => 'german',
+            'he'    => 'hebrew',
+            'hi_IN' => 'hindi',
+            'it'    => 'italian',
+            'ja'    => 'japanese',
+            'fa'    => 'persian',
+            'pl'    => 'polish',
+            'ru'    => 'russian',
+            'sin'   => 'sinhala',
+            'es'    => 'spanish',
+            'tr'    => 'turkish',
+            'uk'    => 'ukrainian',
+        ];
+
+        $currencies = [
+            'CNY' => 'chinese-yuan',
+            'AED' => 'dirham',
+            'EUR' => 'euro',
+            'INR' => 'rupee',
+            'IRR' => 'iranian',
+            'ILS' => 'israeli',
+            'JPY' => 'japanese-yen',
+            'GBP' => 'pound',
+            'RUB' => 'russian-ruble',
+            'SAR' => 'saudi',
+            'TRY' => 'turkish-lira',
+            'USD' => 'usd',
+            'UAH' => 'ukrainian-hryvnia',
+        ];
+    @endphp
+
     <body>
         <div id="app" class="container">
             <div class="flex [&amp;>*]:w-[50%] gap-[50px] justify-center items-center">
+                <!-- Vue Component -->
                 <v-server-requirements></v-server-requirements>
             </div>
         </div>
@@ -193,7 +237,7 @@
                                 @lang('installer::app.installer.index.bagisto')
                             </a>
 
-                            @lang('installer::app.installer.index.bagisto-info')
+                            <span>@lang('installer::app.installer.index.bagisto-info')</span>
 
                             <a
                                 class="bg-white underline text-blue-500"
@@ -205,47 +249,7 @@
                     </div>
                 </div>
 
-                @php
-                    $locales = [
-                        'ar'    => 'arabic',
-                        'bn'    => 'bengali',
-                        'pt_BR' => 'portuguese',
-                        'zh_CN' => 'chinese',
-                        'nl'    => 'dutch',
-                        'en'    => 'english',
-                        'fr'    => 'french',
-                        'de'    => 'german',
-                        'he'    => 'hebrew',
-                        'hi_IN' => 'hindi',
-                        'it'    => 'italian',
-                        'ja'    => 'japanese',
-                        'fa'    => 'persian',
-                        'pl'    => 'polish',
-                        'ru'    => 'russian',
-                        'sin'   => 'sinhala',
-                        'es'    => 'spanish',
-                        'tr'    => 'turkish',
-                        'uk'    => 'ukrainian',
-                    ];
-
-                    $currencies = [
-                        'CNY' => 'chinese-yuan',
-                        'AED' => 'dirham',
-                        'EUR' => 'euro',
-                        'INR' => 'rupee',
-                        'IRR' => 'iranian',
-                        'ILS' => 'israeli',
-                        'JPY' => 'japanese-yen',
-                        'GBP' => 'pound',
-                        'RUB' => 'russian-ruble',
-                        'SAR' => 'saudi',
-                        'TRY' => 'turkish-lira',
-                        'USD' => 'usd',
-                        'UAH' => 'ukrainian-hryvnia',
-                    ];
-                @endphp
                 <!-- Right Side Components -->
-
                 <!-- Start -->
                 <div class="w-full max-w-[568px] bg-white rounded-[8px] shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)] border-[1px] border-gray-300" v-if="currentStep == 'start'">
                     <x-installer::form
