@@ -117,10 +117,10 @@ class Installer extends Command
             config(['app.currency' => $this->getEnvAtRuntime('APP_CURRENCY')]);
 
             // Updating App Allowed Locales
-            $allowedLocales = $this->allowedChoice('Please choose the <bg=green>Allowed Locales</> for the full name along with the comma-separated & short code.', $this->locales(), 'Locales');
+            $allowedLocales = $this->allowedChoice('Please choose the <bg=green>Allowed Locales</> for the full name along with the comma-separated & short code.', $this->locales(), $defaultLocale, 'Locales');
 
             // Updating App Allowed Currencies
-            $allowedCurrencies = $this->allowedChoice('Please choose the <bg=green>Allowed Currencies</> for the full name along with the comma-separated & short code.', $this->currencies(), 'Currencies');
+            $allowedCurrencies = $this->allowedChoice('Please choose the <bg=green>Allowed Currencies</> for the full name along with the comma-separated & short code.', $this->currencies(), $defaultCurrency, 'Currencies');
 
             // Updating Database Configuration
             $this->askForDatabaseDetails();
@@ -172,7 +172,9 @@ class Installer extends Command
         }
 
         foreach ($dbDetails as $key => $value) {
-            $this->envUpdate($key, $value);
+            if ($value) {
+                $this->envUpdate($key, $value);
+            }
         }
     }
 
@@ -278,8 +280,10 @@ class Installer extends Command
 
     /**
      * Method for asking choice based on the list of options.
+     *
+     * @return string
      */
-    protected function updateEnvChoice(string $key, string $question, array $choices): string
+    protected function updateEnvChoice(string $key, string $question, array $choices)
     {
         $choice = $this->choice($question, $choices);
 
@@ -293,7 +297,7 @@ class Installer extends Command
     /**
      * function for getting allowed choices based on the list of option.
      */
-    protected function allowedChoice(string $question, array $choices, string $type)
+    protected function allowedChoice(string $question, array $choices, $defaultValue, string $type)
     {
         $this->warn('Available ' . $type . ' for Choice.');
         $this->line(implode(', ', $choices));
@@ -304,6 +308,10 @@ class Installer extends Command
             array_map('trim', explode(',', $userInput)),
             $choices
         );
+
+        if (empty($selectedChoices)) {
+            return [$defaultValue];
+        }
 
         $extractedValues = [];
 
@@ -320,7 +328,7 @@ class Installer extends Command
     /**
      * Update the .env values
      */
-    protected static function envUpdate(string $key, string $value = null): void
+    protected static function envUpdate(string $key, string $value): void
     {
         $data = file_get_contents(base_path('.env'));
 
