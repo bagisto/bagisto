@@ -68,8 +68,10 @@ class Installer extends Command
 
     /**
      *  Checking .env file and if not found then create .env file.
+     *
+     *  @return array
      */
-    protected function checkForEnvFile(): array
+    protected function checkForEnvFile()
     {
         if (! file_exists(base_path('.env'))) {
             $this->info('Creating the environment configuration file.');
