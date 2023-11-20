@@ -315,7 +315,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                         ]),
                     ], [
                         'theme_customization_id' => 12,
-                        'locale'                 => config('app.locale'),
+                        'locale'                 => $locale,
                         'options'                => json_encode([
                             'services' => [
                                 [
