@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\File;
+use Webkul\Installer\Database\Seeders\DatabaseSeeder as BagistoDatabaseSeeder;
 use Webkul\Installer\Events\ComposerEvents;
 
 class Installer extends Command
@@ -30,7 +31,7 @@ class Installer extends Command
     public function handle()
     {
         // Checking for .env
-        $this->checkForEnvFile();
+        $getSeederDetails = $this->checkForEnvFile();
 
         // Loading values at runtime
         $this->loadEnvConfigAtRuntime();
@@ -41,7 +42,12 @@ class Installer extends Command
 
         // Running `php artisan db:seed`
         $this->warn('Step: Seeding basic data for Bagisto kickstart...');
-        $this->info($this->call('db:seed'));
+        $this->info(app(BagistoDatabaseSeeder::class)->run([
+            'default_locale'     => $getSeederDetails['defaultLocale'],
+            'allowed_locales'    => $getSeederDetails['allowedLocales'],
+            'default_currency'   => $getSeederDetails['defaultCurrency'],
+            'allowed_currencies' => $getSeederDetails['allowedCurrencies'],
+        ]));
 
         // Running `php artisan storage:link`
         $this->warn('Step: Linking storage directory...');
@@ -63,7 +69,7 @@ class Installer extends Command
     /**
      *  Checking .env file and if not found then create .env file.
      */
-    protected function checkForEnvFile()
+    protected function checkForEnvFile(): array
     {
         if (! file_exists(base_path('.env'))) {
             $this->info('Creating the environment configuration file.');
@@ -73,9 +79,11 @@ class Installer extends Command
             $this->info('Great! your environment configuration file already exists.');
         }
 
-        $this->createEnvFile();
+        $getAllowedDetails = $this->createEnvFile();
 
         $this->call('key:generate');
+
+        return $getAllowedDetails;
     }
 
     /**
@@ -83,7 +91,7 @@ class Installer extends Command
      * Then ask for env configuration details and set the environment
      * On .env file so that we can easily migrate to our db.
      *
-     * @return void
+     * @return void|array
      */
     protected function createEnvFile()
     {
@@ -95,7 +103,7 @@ class Installer extends Command
             $this->updateEnvVariable('APP_NAME', 'Please enter the <bg=green>Application Name</> or press enter to continue', 'Bagisto');
 
             // Updating App Default Locales
-            $this->updateEnvChoice('APP_LOCALE', 'Please select the <bg=green>Default Locale</>', $this->locales());
+            $defaultLocale = $this->updateEnvChoice('APP_LOCALE', 'Please select the <bg=green>Default Locale</>', $this->locales());
             config(['app.locale' => $this->getEnvAtRuntime('APP_LOCALE')]);
 
             // Updating App Default Timezone
@@ -103,11 +111,24 @@ class Installer extends Command
             $this->info('Your Default Timezone is ' . date_default_timezone_get());
 
             // Updating App Default Currencies
-            $this->updateEnvChoice('APP_CURRENCY', 'Please enter the <bg=green>Default Currency</>.', $this->currencies());
+            $defaultCurrency = $this->updateEnvChoice('APP_CURRENCY', 'Please enter the <bg=green>Default Currency</>.', $this->currencies());
             config(['app.currency' => $this->getEnvAtRuntime('APP_CURRENCY')]);
+
+            // Updating App Allowed Locales
+            $allowedLocales = $this->allowedChoice('Please choose the <bg=green>Allowed Locales</> for the full name along with the comma-separated & short code.', $this->locales(), 'Locales');
+
+            // Updating App Allowed Currencies
+            $allowedCurrencies = $this->allowedChoice('Please choose the <bg=green>Allowed Currencies</> for the full name along with the comma-separated & short code.', $this->currencies(), 'Currencies');
 
             // Updating Database Configuration
             $this->askForDatabaseDetails();
+
+            return [
+                'defaultLocale'     => $defaultLocale,
+                'allowedLocales'    => $allowedLocales,
+                'defaultCurrency'   => $defaultCurrency,
+                'allowedCurrencies' => $allowedCurrencies,
+            ];
         } catch (\Exception $e) {
             $this->error('Error in creating .env file, please create it manually and then run `php artisan migrate` again.');
         }
@@ -155,10 +176,8 @@ class Installer extends Command
 
     /**
      * Loaded Env variables for config files.
-     *
-     * @return void
      */
-    protected function loadEnvConfigAtRuntime()
+    protected function loadEnvConfigAtRuntime(): void
     {
         $this->warn('Loading configs...');
 
@@ -176,11 +195,8 @@ class Installer extends Command
 
     /**
      * Check key in `.env` file because it will help to find values at runtime.
-     *
-     * @param  string  $key
-     * @return string|bool
      */
-    protected static function getEnvAtRuntime($key)
+    protected static function getEnvAtRuntime(string $key): string|bool
     {
         if ($data = file(base_path('.env'))) {
             foreach ($data as $line) {
@@ -204,7 +220,7 @@ class Installer extends Command
      */
     protected function createAdminCredential()
     {
-        // Here! Asking for Admin Name, Email and Password
+        // Here! Asking for an admin name, email, and password
         $adminName = $this->ask('Please enter the <bg=green>Name of Admin User</> or press enter to continue', 'Example');
         $adminEmail = $this->ask('Please enter the <bg=green>Email of Admin User</> or press enter to continue', 'admin@example.com');
 
@@ -250,13 +266,8 @@ class Installer extends Command
 
     /**
      * method for asking the details of .env files
-     *
-     * @param  string  $key
-     * @param  string  $question
-     * @param  string  $defaultValue
-     * @return void
      */
-    protected function updateEnvVariable($key, $question, $defaultValue)
+    protected function updateEnvVariable(string $key, string $question, string $defaultValue): void
     {
         $input = $this->ask($question, $defaultValue);
 
@@ -265,30 +276,49 @@ class Installer extends Command
 
     /**
      * Method for asking choice based on the list of options.
-     *
-     * @param  string  $key
-     * @param  string  $question
-     * @param  array  $choices
-     * @param  string  $defaultValue
-     * @return void
      */
-    protected function updateEnvChoice($key, $question, $choices)
+    protected function updateEnvChoice(string $key, string $question, array $choices): string
     {
         $choice = $this->choice($question, $choices);
 
         preg_match('/\((.*?)\)/', $choice, $matches);
 
         $this->envUpdate("$key", $matches[1]);
+
+        return $matches[1];
+    }
+
+    /**
+     * function for getting allowed choices based on the list of option.
+     */
+    protected function allowedChoice(string $question, array $choices, string $type)
+    {
+        $this->warn('Available ' . $type . ' for Choice.');
+        $this->line(implode(', ', $choices));
+
+        $userInput = $this->anticipate($question, $choices);
+
+        $selectedChoices = array_intersect(
+            array_map('trim', explode(',', $userInput)),
+            $choices
+        );
+
+        $extractedValues = [];
+
+        foreach ($selectedChoices as $value) {
+            // Extract the value that is in the parentheses.
+            if (preg_match('/\(([^)]+)\)/', $value, $matches)) {
+                $extractedValues[] = trim($matches[1]);
+            }
+        }
+
+        return $extractedValues;
     }
 
     /**
      * Update the .env values
-     *
-     * @param  string  $key
-     * @param  string  $value
-     * @return void
      */
-    protected static function envUpdate($key, $value)
+    protected static function envUpdate(string $key, string $value = null): void
     {
         $data = file_get_contents(base_path('.env'));
 
@@ -304,10 +334,8 @@ class Installer extends Command
 
     /**
      * Static Locales List
-     *
-     * @return array
      */
-    protected static function locales()
+    protected static function locales(): array
     {
         return [
             'Arabic (ar)',
@@ -334,10 +362,8 @@ class Installer extends Command
 
     /**
      * Static Currencies List
-     *
-     * @return array
      */
-    protected static function currencies()
+    protected static function currencies(): array
     {
         return [
             'Chinese Yuan (CNY)',
