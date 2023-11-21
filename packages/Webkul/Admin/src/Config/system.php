@@ -25,6 +25,7 @@ return [
                 'name'          => 'weight_unit',
                 'title'         => 'admin::app.configuration.index.general.general.unit-options.weight-unit',
                 'type'          => 'select',
+                'default'       => 'kgs',
                 'options'       => [
                     [
                         'title' => 'lbs',
