@@ -3423,6 +3423,7 @@ return [
                 'tax-categories'           => 'Категорії податків',
                 'tax-rates'                => 'Податкові ставки',
                 'transactions'             => 'Транзакції',
+                'themes'                   => 'Теми',
                 'url-rewrites'             => 'Переписування URL-адрес',
                 'users'                    => 'Користувачі',
             ],

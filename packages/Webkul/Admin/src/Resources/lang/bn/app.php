@@ -3422,6 +3422,7 @@ return [
                 'discount'                 => 'ডিসকাউন্ট',
                 'cms'                      => 'সিএমএস',
                 'transactions'             => 'লেনদেন',
+                'themes'                   => 'থিমস',
                 'newsletter-subscriptions' => 'নিউজলেটার সাবস্ক্রিপশন',
                 'mode'                     => 'ডার্ক মোড',
             ],

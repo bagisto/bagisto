@@ -3422,6 +3422,7 @@ return [
                 'tax-categories'           => 'Categorie fiscali',
                 'tax-rates'                => 'Aliquote fiscali',
                 'transactions'             => 'Transazioni',
+                'themes'                   => 'Temi',
                 'url-rewrites'             => 'Rewriting degli URL',
                 'users'                    => 'Utenti',
             ],

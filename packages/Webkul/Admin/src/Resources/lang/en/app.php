@@ -3423,6 +3423,7 @@ return [
                 'tax-categories'           => 'Tax Categories',
                 'tax-rates'                => 'Tax Rates',
                 'transactions'             => 'Transactions',
+                'themes'                   => 'Themes',
                 'url-rewrites'             => 'URL Rewrites',
                 'users'                    => 'Users',
             ],
