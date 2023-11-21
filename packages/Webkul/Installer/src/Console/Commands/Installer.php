@@ -113,14 +113,14 @@ class Installer extends Command
             $this->info('Your Default Timezone is ' . date_default_timezone_get());
 
             // Updating App Default Currencies
-            $defaultCurrency = $this->updateEnvChoice('APP_CURRENCY', 'Please enter the <bg=green>Default Currency</>.', $this->currencies());
+            $defaultCurrency = $this->updateEnvChoice('APP_CURRENCY', 'Please enter the <bg=green>Default Currency</>', $this->currencies());
             config(['app.currency' => $this->getEnvAtRuntime('APP_CURRENCY')]);
 
             // Updating App Allowed Locales
-            $allowedLocales = $this->allowedChoice('Please choose the <bg=green>Allowed Locales</> for the full name along with the comma-separated & short code.', $this->locales(), $defaultLocale, 'Locales');
+            $allowedLocales = $this->allowedChoice('Please choose the <bg=green>Allowed Locales</> along with the comma-separated', $this->locales(), $defaultLocale, 'Locales');
 
             // Updating App Allowed Currencies
-            $allowedCurrencies = $this->allowedChoice('Please choose the <bg=green>Allowed Currencies</> for the full name along with the comma-separated & short code.', $this->currencies(), $defaultCurrency, 'Currencies');
+            $allowedCurrencies = $this->allowedChoice('Please choose the <bg=green>Allowed Currencies</> along with the comma-separated', $this->currencies(), $defaultCurrency, 'Currencies');
 
             // Updating Database Configuration
             $this->askForDatabaseDetails();
@@ -304,14 +304,21 @@ class Installer extends Command
 
         $userInput = $this->anticipate($question, $choices);
 
-        $selectedChoices = array_intersect(
-            array_map('trim', explode(',', $userInput)),
-            $choices
-        );
-
-        if (empty($selectedChoices)) {
+        if (! $userInput) {
             return [$defaultValue];
         }
+
+        $userInputArray = array_map('trim', explode(',', $userInput));
+
+        $selectedChoices = array_filter($choices, function ($choice) use ($userInputArray) {
+            foreach ($userInputArray as $value) {
+                if (str_contains($choice, $value)) {
+                    return true;
+                }
+            }
+
+            return false;
+        });
 
         $extractedValues = [];
 
