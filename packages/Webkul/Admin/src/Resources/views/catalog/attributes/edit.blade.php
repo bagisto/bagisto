@@ -1047,7 +1047,9 @@
 
                         const sliderImage = formData.get("swatch_value[]");
 
-                        params.swatch_value = sliderImage;
+                        if (sliderImage) {
+                            params.swatch_value = sliderImage;
+                        }
 
                         this.$refs.addOptionsRow.toggle();
 
