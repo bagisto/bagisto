@@ -43,10 +43,10 @@ class Installer extends Command
         // Running `php artisan db:seed`
         $this->warn('Step: Seeding basic data for Bagisto kickstart...');
         $this->info(app(BagistoDatabaseSeeder::class)->run([
-            'default_locale'     => $getSeederDetails['defaultLocale'],
-            'allowed_locales'    => $getSeederDetails['allowedLocales'],
-            'default_currency'   => $getSeederDetails['defaultCurrency'],
-            'allowed_currencies' => $getSeederDetails['allowedCurrencies'],
+            'default_locale'     => $getSeederDetails['defaultLocale'] ?? 'en',
+            'allowed_locales'    => $getSeederDetails['allowedLocales'] ?? ['en'],
+            'default_currency'   => $getSeederDetails['defaultCurrency'] ?? 'USD',
+            'allowed_currencies' => $getSeederDetails['allowedCurrencies'] ?? ['USD'],
         ]));
 
         // Running `php artisan storage:link`
