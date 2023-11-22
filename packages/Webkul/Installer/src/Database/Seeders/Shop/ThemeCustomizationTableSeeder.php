@@ -31,7 +31,7 @@ class ThemeCustomizationTableSeeder extends Seeder
 
         $defaultLocale = $parameters['default_locale'] ?? config('app.locale');
 
-        $appUrl = env('APP_URL');
+        $appUrl = config('app.url');
 
         DB::table('theme_customizations')
             ->insert([
