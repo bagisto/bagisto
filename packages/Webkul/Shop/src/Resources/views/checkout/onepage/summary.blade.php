@@ -43,7 +43,7 @@
                             </p>
 
                             <p class="mt-[10px] text-[18px] font-medium max-sm:text-[14px] max-sm:font-normal">
-                                @{{ item.formatted_price }} X @{{ item.quantity }}
+                                @lang('shop::app.checkout.onepage.summary.price_&_qty', ['price' => '@{{ item.formatted_price }}', 'qty' => '@{{ item.quantity }}'])
                             </p>
                         </div>
                     </div>

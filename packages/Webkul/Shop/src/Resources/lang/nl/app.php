@@ -769,6 +769,7 @@ return [
                 'grand-total'      => 'Eindtotaal',
                 'place-order'      => 'Bestelling plaatsen',
                 'processing'       => 'Verwerken',
+                'price_&_qty'      => ':price × :qty',
                 'sub-total'        => 'Subtotaal',
                 'tax'              => 'Belasting',
             ],
@@ -834,10 +835,13 @@ return [
 
         'customers' => [
             'registration' => [
-                'description' => 'Je account is nu succesvol aangemaakt en je kunt inloggen met je e-mailadres en wachtwoord. Na het inloggen kun je andere diensten gebruiken, waaronder het bekijken van eerdere bestellingen, verlanglijstjes en het bewerken van je accountgegevens.',
-                'greeting'    => 'Welkom en bedankt voor je registratie bij ons!',
-                'subject'     => 'Nieuwe Klantregistratie',
-                'sign-in'     => 'Inloggen',
+                'subject'                 => 'Nieuwe Klantregistratie',
+                'description'             => 'Je account is nu succesvol aangemaakt en je kunt inloggen met je e-mailadres en wachtwoord. Na het inloggen kun je andere diensten gebruiken, waaronder het bekijken van eerdere bestellingen, verlanglijstjes en het bewerken van je accountgegevens.',
+                'credentials-description' => 'Uw account is aangemaakt. Uw accountgegevens staan hieronder:',
+                'greeting'                => 'Welkom en bedankt voor je registratie bij ons!',
+                'sign-in'                 => 'Inloggen',
+                'username-email'          => 'Gebruikersnaam/E-mail',
+                'password'                => 'Wachtwoord',
             ],
 
             'forgot-password' => [

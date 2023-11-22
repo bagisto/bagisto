@@ -33,7 +33,10 @@
                     </h1>
 
 					<p class="text-[18px] text-[#6E6E6E] mt-[15px]">
-                        @lang("admin::app.errors.{$errorCode}.description")
+                        {{ 
+                            $errorCode === 503 && core()->getCurrentChannel()->maintenance_mode_text != ""
+                            ? core()->getCurrentChannel()->maintenance_mode_text : trans("admin::app.errors.{$errorCode}.description")
+                        }}
                     </p>
 
 					<a 

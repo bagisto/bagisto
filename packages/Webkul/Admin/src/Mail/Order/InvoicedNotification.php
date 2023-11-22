@@ -29,9 +29,11 @@ class InvoicedNotification extends Mailable
      */
     public function build()
     {
+        $order = $this->invoice->order;
+
         return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
-            ->to(core()->getAdminEmailDetails()['email'], core()->getAdminEmailDetails()['name'])
+            ->to($order->customer_email, $order->customer_full_name)
             ->subject(trans('admin::app.emails.orders.invoiced.subject'))
-            ->view('admin::emails.orders.invoiced');
+            ->view('shop::emails.orders.invoiced');
     }
 }

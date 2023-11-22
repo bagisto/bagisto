@@ -736,14 +736,13 @@
                                 </x-slot:header>
                             
                                 <x-slot:content>
-                                    <div class="flex gap-[16px]">
                                         <x-admin::form.control-group class="mb-[10px]">
                                             <x-admin::form.control-group.label>
                                                 @lang('admin::app.marketing.promotions.cart-rules.edit.from')
                                             </x-admin::form.control-group.label>
         
                                             <x-admin::form.control-group.control
-                                                type="text"
+                                                type="datetime"
                                                 name="starts_from"
                                                 :value="old('starts_from') ?? $cartRule->starts_from"
                                                 id="starts_from"
@@ -764,7 +763,7 @@
                                             </x-admin::form.control-group.label>
         
                                             <x-admin::form.control-group.control
-                                                type="text"
+                                                type="datetime"
                                                 name="ends_till"
                                                 :value="old('ends_till') ?? $cartRule->ends_till"
                                                 id="ends_till"
@@ -778,7 +777,6 @@
                                             >
                                             </x-admin::form.control-group.error>
                                         </x-admin::form.control-group>
-                                    </div>
                                 </x-slot:content>
                             </x-admin::accordion>
 
@@ -920,7 +918,7 @@
                                     type="text"
                                     :name="['conditions[' + index + '][value]']"
                                     :id="['conditions[' + index + '][value]']"
-                                    class="border w-full py-2 px-3 appearance-none rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                                    class="w-full py-2 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 appearance-none rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                                     v-model="condition.value"
                                 />
                             </div>

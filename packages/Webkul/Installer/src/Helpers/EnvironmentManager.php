@@ -78,6 +78,10 @@ class EnvironmentManager
         $data = file_get_contents(base_path('.env'));
 
         foreach ($envDBParams as $key => $value) {
+            if (preg_match('/\s/', $value)) {
+                $value = '"' . $value . '"';
+            }
+
             $data = preg_replace("/$key=(.*)/", "$key=$value", $data);
         }
 

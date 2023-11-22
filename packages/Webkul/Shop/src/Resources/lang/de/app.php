@@ -770,6 +770,7 @@ return [
                 'grand-total'      => 'Gesamtsumme',
                 'place-order'      => 'Bestellung aufgeben',
                 'processing'       => 'Verarbeitung',
+                'price_&_qty'      => ':price × :qty',
                 'sub-total'        => 'Zwischensumme',
                 'tax'              => 'Steuer',
             ],
@@ -835,10 +836,13 @@ return [
 
         'customers' => [
             'registration' => [
-                'description' => 'Ihr Konto wurde erfolgreich erstellt und Sie können sich jetzt mit Ihren E-Mail-Adresse und Passwort anmelden. Nach der Anmeldung haben Sie Zugriff auf weitere Dienste wie das Überprüfen vergangener Bestellungen, Wunschlisten und das Bearbeiten Ihrer Kontoinformationen.',
-                'greeting'    => 'Willkommen und vielen Dank für Ihre Registrierung bei uns!',
-                'subject'     => 'Neue Kundenregistrierung',
-                'sign-in'     => 'Anmelden',
+                'subject'                 => 'Neue Kundenregistrierung',
+                'description'             => 'Ihr Konto wurde erfolgreich erstellt und Sie können sich jetzt mit Ihren E-Mail-Adresse und Passwort anmelden. Nach der Anmeldung haben Sie Zugriff auf weitere Dienste wie das Überprüfen vergangener Bestellungen, Wunschlisten und das Bearbeiten Ihrer Kontoinformationen.',
+                'credentials-description' => 'Ihr Konto wurde erstellt. Ihre Kontodetails finden Sie unten:',
+                'greeting'                => 'Willkommen und vielen Dank für Ihre Registrierung bei uns!',
+                'sign-in'                 => 'Anmelden',
+                'username-email'          => 'Benutzername/E-Mail',
+                'password'                => 'Passwort',
             ],
 
             'forgot-password' => [

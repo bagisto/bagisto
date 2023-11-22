@@ -338,6 +338,7 @@
                             lineWiseCopyCut: true,
                             value: this.options.html,
                             mode: 'htmlmixed',
+                            theme: document.documentElement.classList.contains('dark') ? 'ayu-dark' : 'default',
                         });
 
                         this._html.on('changes', (e) => {
@@ -417,6 +418,7 @@
                             lineWiseCopyCut: true,
                             value: this.options.css,
                             mode: 'css',
+                            theme: document.documentElement.classList.contains('dark') ? 'ayu-dark' : 'default',
                         });
 
                         this._css.on('changes', () => {
@@ -477,4 +479,7 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/codemirror.css"
     >
     </link>
+
+    <!-- Dark theme css -->
+    <link rel="stylesheet" href="https://codemirror.net/5/theme/ayu-dark.css">
 @endPushOnce
