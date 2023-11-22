@@ -449,6 +449,10 @@
                     </div>
                 </div>
 
+                @php
+                    $weeks = ['sunday', 'monaday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+                @endphp
+
                 <!-- Slots Component -->
                 <div
                     class="p-[16px] bg-white dark:bg-gray-900 box-shadow rounded-[4px]"
@@ -699,13 +703,11 @@
                                         :value="'sunday'"
                                         :label="trans('admin::app.catalog.attributes.create.admin')"
                                     >
-                                        <option value="sunday" selected>Sunday</option>
-                                        <option value="monday">Monday</option>
-                                        <option value="tuesday">Tuesday</option>
-                                        <option value="wednesday">Wednesday</option>
-                                        <option value="thursday">Thursday</option>
-                                        <option value="friday">Friday</option>
-                                        <option value="saturday">Saturday</option>
+                                        @foreach ($weeks as $week)
+                                            <option value="{{ $week }}" selected>
+                                                @lang($week)
+                                            </option>
+                                        @endforeach
                                     </x-admin::form.control-group.control>
 
                                     <x-admin::form.control-group.error
@@ -748,13 +750,11 @@
                                         :value="'sunday'"
                                         :label="trans('admin::app.catalog.attributes.create.admin')"
                                     >
-                                        <option value="sunday" selected>Sunday</option>
-                                        <option value="monday">Monday</option>
-                                        <option value="tuesday">Tuesday</option>
-                                        <option value="wednesday">Wednesday</option>
-                                        <option value="thursday">Thursday</option>
-                                        <option value="friday">Friday</option>
-                                        <option value="saturday">Saturday</option>
+                                        @foreach ($weeks as $week)
+                                            <option value="{{ $week }}" selected>
+                                                @lang($week)
+                                            </option>
+                                        @endforeach
                                     </x-admin::form.control-group.control>
 
                                     <x-admin::form.control-group.error
@@ -786,7 +786,7 @@
                             <div class="grid grid-cols-4 gap-[10px] px-[16px] py-[10px]">
                                 @php $count = 0; @endphp
 
-                                @foreach (['sunday', 'monaday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday',] as $item)
+                                @foreach ($weeks as $item)
                                     <!-- Day -->
                                     <x-admin::form.control-group.label>
                                         {{ $item }}
