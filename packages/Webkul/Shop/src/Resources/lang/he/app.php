@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => 'מספר הזמנה',
-                'order'      => 'הזמנה',
-                'order-date' => 'תאריך הזמנה',
-                'title'      => 'הזמנות',
-                'total'      => 'סכום כולל',
+                'order-id'    => 'מספר הזמנה',
+                'order'       => 'הזמנה',
+                'order-date'  => 'תאריך הזמנה',
+                'title'       => 'הזמנות',
+                'total'       => 'סך הכל',
+                'action-view' => 'צפה',
+                'action'      => 'פעולה',
+                'empty-order' => 'עדיין לא הזמנת מוצר כלשהו',
 
                 'status' => [
                     'title' => 'סטטוס',
@@ -151,9 +154,6 @@ return [
                         'pending-payment' => 'ממתין לתשלום',
                     ],
                 ],
-
-                'action'      => 'פעולה',
-                'empty-order' => 'טרם ביצעת הזמנה',
 
                 'view' => [
                     'billing-address'    => 'כתובת לחיוב',

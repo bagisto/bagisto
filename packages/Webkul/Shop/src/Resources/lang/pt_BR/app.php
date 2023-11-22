@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => 'ID do Pedido',
-                'order'      => 'Pedido',
-                'order-date' => 'Data do Pedido',
-                'title'      => 'Pedidos',
-                'total'      => 'Total',
+                'order-id'    => 'ID do pedido',
+                'order'       => 'Pedido',
+                'order-date'  => 'Data do pedido',
+                'title'       => 'Pedidos',
+                'total'       => 'Total',
+                'action-view' => 'Ver',
+                'action'      => 'Ação',
+                'empty-order' => 'Você ainda não pediu nenhum produto',
 
                 'status' => [
                     'title' => 'Status',
@@ -151,9 +154,6 @@ return [
                         'pending-payment' => 'Pagamento Pendente',
                     ],
                 ],
-
-                'action'      => 'Ação',
-                'empty-order' => 'Você ainda não encomendou nenhum produto',
 
                 'view' => [
                     'billing-address'    => 'Endereço de Faturação',

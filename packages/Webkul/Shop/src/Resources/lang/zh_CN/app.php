@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'title'      => '订单',
-                'order-id'   => '订单号',
-                'order'      => '订单',
-                'order-date' => '订单日期',
-                'total'      => '总计',
+                'order-id'    => '订单ID',
+                'order'       => '订单',
+                'order-date'  => '订单日期',
+                'title'       => '订单',
+                'total'       => '总计',
+                'action-view' => '查看',
+                'action'      => '操作',
+                'empty-order' => '您还没有订购任何产品',
 
                 'status'        => [
                     'title' => '状态',
@@ -151,9 +154,6 @@ return [
                         'fraud'           => '欺诈',
                     ],
                 ],
-
-                'action'      => '操作',
-                'empty-order' => '您尚未订购任何产品',
 
                 'view' => [
                     'title'              => '查看',

@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => 'Numéro de commande',
-                'order'      => 'Commande',
-                'order-date' => 'Date de commande',
-                'title'      => 'Commandes',
-                'total'      => 'Total',
+                'order-id'    => 'ID de commande',
+                'order'       => 'Commande',
+                'order-date'  => 'Date de commande',
+                'title'       => 'Commandes',
+                'total'       => 'Total',
+                'action-view' => 'Voir',
+                'action'      => 'Action',
+                'empty-order' => 'Vous n\'avez encore commandé aucun produit',
 
                 'status'        => [
                     'title' => 'Statut',

@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => 'Sipariş ID',
-                'order'      => 'Sipariş',
-                'order-date' => 'Sipariş Tarihi',
-                'title'      => 'Siparişler',
-                'total'      => 'Toplam',
+                'order-id'    => 'Pedido ID',
+                'order'       => 'Pedido',
+                'order-date'  => 'Pedido Tarihi',
+                'title'       => 'Pedidos',
+                'total'       => 'Toplam',
+                'action-view' => 'Görüntüle',
+                'action'      => 'İşlem',
+                'empty-order' => 'Son bir ürümüyü pedido yapmadınız',
 
                 'status' => [
                     'title' => 'Durum',
@@ -151,9 +154,6 @@ return [
                         'pending-payment' => 'Ödeme Bekliyor',
                     ],
                 ],
-
-                'action'      => 'Eylem',
-                'empty-order' => 'Henüz hiçbir ürün sipariş etmediniz',
 
                 'view' => [
                     'billing-address'    => 'Fatura Adresi',

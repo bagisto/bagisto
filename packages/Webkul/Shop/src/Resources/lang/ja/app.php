@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => '注文ID',
-                'order'      => '注文',
-                'order-date' => '注文日',
-                'title'      => '注文',
-                'total'      => '合計',
+                'order-id'    => '注文ID',
+                'order'       => '注文',
+                'order-date'  => '注文日',
+                'title'       => '注文',
+                'total'       => '合計',
+                'action-view' => '表示',
+                'action'      => 'アクション',
+                'empty-order' => 'まだ製品を注文していません',
 
                 'status' => [
                     'title' => 'ステータス',
@@ -151,9 +154,6 @@ return [
                         'pending-payment' => '支払い保留',
                     ],
                 ],
-
-                'action'      => 'アクション',
-                'empty-order' => 'まだ製品を注文していません',
 
                 'view' => [
                     'billing-address'    => '請求先住所',
