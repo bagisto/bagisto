@@ -91,7 +91,7 @@
                 :is-selected="false"
             >
                 <div class="container mt-[60px] max-1180:px-[20px]">
-                    <div class="grid gap-[15px] grid-cols-[auto_1fr] max-w-max mt-[30px]">
+                    <div class="grid gap-[15px] grid-cols-[auto_1fr] max-w-max mt-[30px] items-center">
                         @foreach ($customAttributeValues as $customAttributeValue)
                             <div class="grid">
                                 <p class="text-[16px] text-black">
@@ -118,7 +118,7 @@
                                     download="{{ $customAttributeValue['label'] }}"
                                 >
                                     <img 
-                                        class="h-[20px] w-[20px] min-h-[20px] min-w-[20px]"
+                                        class="h-[40px] w-[40px] min-h-[40px] min-w-[40px]"
                                         src="{{ Storage::url($customAttributeValue['value']) }}"
                                     />
                                 </a>

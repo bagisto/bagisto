@@ -186,11 +186,14 @@
                     href="{{ route('admin.catalog.products.file.download', [$product->id, $attribute->id] )}}"
                     class="flex"
                 >
-                    @if ($attribute->type == 'image')
+                @if ($attribute->type == 'image')
+                    @if(gettype($product[$attribute->code]) == 'string')
                         <img
                             src="{{ Storage::url($product[$attribute->code]) }}"
                             class="w-[45px] h-[45px] border dark:border-gray-800 rounded-[4px] overflow-hidden hover:border-gray-400"
                         />
+                    @endif
+
                     @else
                         <div class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-transparent p-[6px] text-center text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:bg-gray-200 dark:hover:bg-gray-800 active:border-gray-300">
                             <i class="icon-down-stat text-[24px]"></i>
@@ -224,18 +227,23 @@
 
         @if ($product[$attribute->code])
             <div class="flex gap-[10px] items-center mt-[10px]">
-                <x-admin::form.control-group.control
-                    type="checkbox"
-                    :name="$attribute->code . '[delete]'"
-                    value="1"
-                    :id="$attribute->code . '_delete'"
-                    :for="$attribute->code . '_delete'"
-                >
-                </x-admin::form.control-group.control>
+                <x-admin::form.control-group class="flex gap-[5px] w-max cursor-pointer select-none">
+                    <x-admin::form.control-group.control
+                        type="checkbox"
+                        :name="$attribute->code.'[delete]'"
+                        :id="$attribute->code.'[delete]'"
+                        value="1"
+                        class="hidden peer"
+                        :for="$attribute->code.'[delete]'"
+                    >
+                    </x-admin::form.control-group.control>
 
-                <p class="text-[14px] text-gray-600 dark:text-gray-300">
-                    @lang('admin::app.catalog.products.edit.remove')
-                </p>
+                    <x-admin::form.control-group.label
+                        :for="$attribute->code.'[delete]'"
+                    >
+                        @lang('admin::app.catalog.products.edit.remove')
+                    </x-admin::form.control-group.label>
+                </x-admin::form.control-group>
             </div>
         @endif
 
