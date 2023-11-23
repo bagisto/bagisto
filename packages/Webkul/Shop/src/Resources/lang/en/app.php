@@ -649,7 +649,7 @@ return [
                 'view-cart'                => 'View Cart',
 
                 'cross-sell' => [
-                    'title' => 'More choices'
+                    'title' => 'More choices',
                 ],
             ],
 
