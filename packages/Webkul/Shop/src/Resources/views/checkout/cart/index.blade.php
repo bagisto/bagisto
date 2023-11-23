@@ -299,6 +299,13 @@
                     </div>
                 </template>
             </div>
+
+            <!-- Cross-sell Product Carousal -->
+            <x-shop::products.carousel
+                :title="trans('shop::app.products.view.up-sell-title')"
+                :src="route('shop.api.checkout.cart.cross-sell.index')"
+            >
+            </x-shop::products.carousel>
         </script>
 
         <script type="module">
@@ -341,7 +348,7 @@
                                     this.$emitter.emit('add-flash', { type: 'info', message: response.data.message });
                                 }
                             })
-                            .catch(error => {});     
+                            .catch(error => {});
                     },
 
                     selectAll() {

@@ -10,6 +10,7 @@ use Webkul\Checkout\Facades\Cart;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Shop\Http\Resources\CartResource;
+use Webkul\Shop\Http\Resources\ProductResource;
 
 class CartController extends APIController
 {
@@ -175,7 +176,7 @@ class CartController extends APIController
             if (strlen($couponCode)) {
                 $coupon = $this->cartRuleCouponRepository->findOneByField('code', $couponCode);
 
-                if (! $coupon) {
+                if (!$coupon) {
                     return (new JsonResource([
                         'data'     => new CartResource(Cart::getCart()),
                         'message'  => trans('Coupon not found.'),
@@ -219,5 +220,25 @@ class CartController extends APIController
             'data'     => new CartResource(Cart::getCart()),
             'message'  => trans('shop::app.checkout.cart.coupon.remove'),
         ]);
+    }
+
+    /**
+     * Cross-sell product listings.
+     * 
+     * @return \Illuminate\Http\Resources\Json\JsonResource::collection
+     */
+    public function crossSellProducts()
+    {
+        foreach (Cart::getCart()->items as $item) {
+            $product = $this->productRepository->findOrFail($item['product_id']);
+
+            if ($product->cross_sells()->count()) {
+                $crossSellProducts = $product->cross_sells()
+                    ->take(core()->getConfigData('catalog.products.cart_view_page.no_of_cross_sells_products'))
+                    ->get();
+            }
+        }
+
+        return ProductResource::collection($crossSellProducts);
     }
 }

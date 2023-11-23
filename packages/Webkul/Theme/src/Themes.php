@@ -192,7 +192,7 @@ class Themes
      */
     public function current()
     {
-        return $this->activeTheme ? $this->activeTheme : null;
+        return $this->activeTheme ?? null;
     }
 
     /**
