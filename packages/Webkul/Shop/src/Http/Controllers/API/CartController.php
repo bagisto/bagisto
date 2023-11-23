@@ -176,7 +176,7 @@ class CartController extends APIController
             if (strlen($couponCode)) {
                 $coupon = $this->cartRuleCouponRepository->findOneByField('code', $couponCode);
 
-                if (!$coupon) {
+                if (! $coupon) {
                     return (new JsonResource([
                         'data'     => new CartResource(Cart::getCart()),
                         'message'  => trans('Coupon not found.'),
@@ -224,7 +224,7 @@ class CartController extends APIController
 
     /**
      * Cross-sell product listings.
-     * 
+     *
      * @return \Illuminate\Http\Resources\Json\JsonResource::collection
      */
     public function crossSellProducts()
