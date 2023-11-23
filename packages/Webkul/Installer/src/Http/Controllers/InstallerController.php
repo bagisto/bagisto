@@ -84,10 +84,25 @@ class InstallerController extends Controller
      */
     public function runSeeder()
     {
+        $appLocale = request()->allParameters['app_locale'];
+        $allowedLocales = array_merge(request()->selectedParameters['allowed_locales'], [$appLocale]);
+
+        $appCurrency = request()->allParameters['app_currency'];
+        $allowedCurrencies = array_merge(request()->selectedParameters['allowed_currencies'], [$appCurrency]);
+
+        $parameter = [
+            'parameter' => [
+                'default_locales'    => $appLocale,
+                'default_currency'   => $appCurrency,
+                'allowed_locales'    => $allowedLocales,
+                'allowed_currencies' => $allowedCurrencies,
+            ],
+        ];
+
         $response = $this->environmentManager->setEnvConfiguration(request()->allParameters);
 
         if ($response) {
-            $seeder = $this->databaseManager->seeder(request()->selectedParameters);
+            $seeder = $this->databaseManager->seeder($parameter);
 
             return $seeder;
         }
