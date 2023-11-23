@@ -3423,6 +3423,7 @@ return [
                 'tax-categories'           => 'බදු කාණ්ඩ',
                 'tax-rates'                => 'බදු තනි',
                 'transactions'             => 'ක්ෂේත්ර',
+                'themes'                   => 'තේමාවන්',
                 'url-rewrites'             => 'URL පුනරාලේඛනය කිරීම',
                 'users'                    => 'පරිශීලකයන්',
             ],

@@ -3415,6 +3415,7 @@ return [
                 'tax-categories'           => 'קטגוריות מס',
                 'tax-rates'                => 'שערי מס',
                 'transactions'             => 'עסקאות',
+                'themes'                   => 'נושאים',
                 'url-rewrites'             => 'כתיבת URL מחדש',
                 'users'                    => 'משתמשים',
             ],

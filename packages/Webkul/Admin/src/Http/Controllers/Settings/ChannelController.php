@@ -147,6 +147,8 @@ class ChannelController extends Controller
             'allowed_ips'                      => 'nullable',
         ]);
 
+        $data['is_maintenance_on'] = request()->input('is_maintenance_on') == '1';
+
         $data = $this->setSEOContent($data, $locale);
 
         Event::dispatch('core.channel.update.before', $id);
