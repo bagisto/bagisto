@@ -1,28 +1,4 @@
-<x-table>
-    <x-table.thead>
-        <x-table.tr>
-            <x-table.th>Column 1</x-table.th>
-            <x-table.th>Column 2</x-table.th>
-            <x-table.th class="action">Column 3</x-table.th>
-        </x-table.tr>
-    </x-table.thead>
 
-    <x-table.tbody>
-        <x-table.tr>
-            <x-table.td>Row 1 Value 1</x-table.td>
-            <x-table.td>Row 1 Value 3</x-table.td>
-            <x-table.td class="w-[50px]">Row 1 Value 3</x-table.td>
-        </x-table.tr>
-
-        <x-table.tr>
-            <x-table.td>Row 2 Value 1</x-table.td>
-            <x-table.td>Row 2 Value 3</x-table.td>
-            <x-table.td class="action">Row 2 Value 3</x-table.td>
-        </x-table.tr>
-    </x-table.tbody>
-</x-table>
-
-<x-flash-group></x-flash-group>
 
 <x-panel>
     <x-slot:header>Panel Title</x-slot:header>
@@ -117,6 +93,32 @@
     </form>
 </x-shop::form>
 
+<!-- tinymce -->
+<x-shop::form.control-group>
+    <x-shop::form.control-group.label>
+        Description
+    </x-shop::form.control-group.label>
+
+    <x-shop::form.control-group.control
+        type="textarea"
+        name="description"
+        class="description"
+        :value=""
+        rules="required"
+        label="Description"
+        :tinymce="true"
+    >
+    </x-shop::form.control-group.control>
+
+    <x-shop::form.control-group.error
+        control-name="description"
+    >
+    </x-shop::form.control-group.error>
+</x-shop::form.control-group>
+
+<!-- Shimmer -->
+<x-shop::shimmer.checkout.onepage.payment-method/>
+
 <!-- tabs -->
 <x-shop::tabs>
     <x-shop::tabs.item
@@ -183,3 +185,26 @@
         Content
     </x-slot:content>
 </x-shop::dropdown>
+
+<!--Range Slider -->
+<x-shop::range-slider
+    ::key="refreshKey"
+    default-type="price"
+    ::default-allowed-max-range="allowedMaxPrice"
+    ::default-min-range="minRange"
+    ::default-max-range="maxRange"
+    @change-range="setPriceRange($event)"
+>
+</x-shop::range-slider>
+
+<!-- Image/Media -->
+<x-shop::media.images.lazy
+    class="min-w-[250px] relative after:content-[' '] after:block after:pb-[calc(100%+9px)] bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
+    ::src="product.base_image.medium_image_url"
+    ::key="product.id"
+    ::index="product.id"
+    width="291"
+    height="300"
+    ::alt="product.name"
+>
+</x-shop::media.images.lazy>
