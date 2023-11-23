@@ -47,6 +47,13 @@
         </div>
     </div>
 
+    <!-- Cross-sell Product Carousal -->
+    <x-shop::products.carousel
+        :title="trans('shop::app.checkout.cart.index.cross-sell.title')"
+        :src="route('shop.api.checkout.cart.cross-sell.index')"
+    >
+    </x-shop::products.carousel>
+
     @pushOnce('scripts')
         <script type="text/x-template" id="v-cart-template">
             <div>
@@ -299,13 +306,6 @@
                     </div>
                 </template>
             </div>
-
-            <!-- Cross-sell Product Carousal -->
-            <x-shop::products.carousel
-                :title="trans('shop::app.products.view.up-sell-title')"
-                :src="route('shop.api.checkout.cart.cross-sell.index')"
-            >
-            </x-shop::products.carousel>
         </script>
 
         <script type="module">
