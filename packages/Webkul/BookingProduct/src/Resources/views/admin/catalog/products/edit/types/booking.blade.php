@@ -312,60 +312,6 @@
                             </x-booking::form.control-group.error>
                         </x-booking::form.control-group>
 
-                        <!-- Slot Duration -->
-                        <x-admin::form.control-group
-                            v-if="bookingSwatch && (
-                                booking_type == 'appointment'
-                                || booking_type == 'table'
-                            )"
-                            class="w-full mb-[10px]"
-                        >
-                            <x-booking::form.control-group.label class="required">
-                                @lang('Slot Duration')
-                            </x-booking::form.control-group.label>
-
-                            <x-booking::form.control-group.control
-                                type="text"
-                                name="booking[duration]"
-                                rules="required"
-                                :label="trans('Slot Duration')"
-                                :placeholder="trans('Slot Duration')"
-                            >
-                            </x-booking::form.control-group.control>
-
-                            <x-booking::form.control-group.error 
-                                control-name="booking[duration]"
-                            >
-                            </x-booking::form.control-group.error>
-                        </x-booking::form.control-group>
-
-                        <!-- Break Duration -->
-                        <x-admin::form.control-group
-                            v-if="bookingSwatch && (
-                                booking_type == 'appointment'
-                                || booking_type == 'table'
-                            )"
-                            class="w-full mb-[10px]"
-                        >
-                            <x-booking::form.control-group.label class="required">
-                                @lang('Break Duration')
-                            </x-booking::form.control-group.label>
-
-                            <x-booking::form.control-group.control
-                                type="text"
-                                name="booking[break_time]"
-                                rules="required"
-                                :label="trans('Break Duration')"
-                                :placeholder="trans('Break Duration')"
-                            >
-                            </x-booking::form.control-group.control>
-
-                            <x-booking::form.control-group.error 
-                                control-name="booking[break_time]"
-                            >
-                            </x-booking::form.control-group.error>
-                        </x-booking::form.control-group>
-
                         <!-- Prevent Scheduling Before -->
                         <x-admin::form.control-group
                             v-if="bookingSwatch && booking_type == 'table'"
@@ -390,11 +336,35 @@
                             </x-booking::form.control-group.error>
                         </x-booking::form.control-group>
 
+                        <!-- Slot Duration -->
+                        <x-admin::form.control-group
+                            v-if="(bookingSwatchType && bookingSubType == 'many') || 
+                                (bookingSwatch && (booking_type == 'appointment' || booking_type == 'table'))"
+                            class="w-full mb-[10px]"
+                        >
+                            <x-booking::form.control-group.label class="required">
+                                @lang('Slot Duration')
+                            </x-booking::form.control-group.label>
+
+                            <x-booking::form.control-group.control
+                                type="text"
+                                name="booking[duration]"
+                                rules="required"
+                                :label="trans('Slot Duration')"
+                                :placeholder="trans('Slot Duration')"
+                            >
+                            </x-booking::form.control-group.control>
+
+                            <x-booking::form.control-group.error 
+                                control-name="booking[duration]"
+                            >
+                            </x-booking::form.control-group.error>
+                        </x-booking::form.control-group>
+
                         <!-- Break Duration -->
                         <x-admin::form.control-group
-                            v-if="bookingSwatchType && (
-                                bookingSubType == 'many'
-                            )"
+                            v-if="(bookingSwatchType && bookingSubType == 'many') || 
+                                (bookingSwatch && (booking_type == 'appointment' || booking_type == 'table'))"
                             class="w-full mb-[10px]"
                         >
                             <x-booking::form.control-group.label class="required">
@@ -403,7 +373,7 @@
 
                             <x-booking::form.control-group.control
                                 type="text"
-                                name="booking[break_time]"
+                                name="booking[duration]"
                                 rules="required"
                                 :label="trans('Break Duration')"
                                 :placeholder="trans('Break Duration')"
@@ -411,7 +381,7 @@
                             </x-booking::form.control-group.control>
 
                             <x-booking::form.control-group.error 
-                                control-name="booking[break_time]"
+                                control-name="booking[duration]"
                             >
                             </x-booking::form.control-group.error>
                         </x-booking::form.control-group>
