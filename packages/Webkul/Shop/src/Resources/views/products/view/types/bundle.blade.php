@@ -191,32 +191,36 @@
 
                     <div v-if="option.type == 'multiselect'">
                         <v-field
-                            as="select"
-                            multiple
                             :name="'bundle_options[' + option.id + '][]'"
-                            class="block w-full p-[14px] pr-[36px] bg-white border border-[#E9E9E9] rounded-lg text-[16px] text-[#6E6E6E] focus:ring-blue-500 focus:border-blue-500 max-md:border-0 max-md:outline-none max-md:w-[110px] cursor-pointer"
-                            :class="[errors['bundle_options[' + option.id + '][]'] ? 'border border-red-500' : '']"
+                            :label="option.label"
                             :rules="{'required': option.is_required}"
                             v-model="selectedProduct"
-                            :label="option.label"
                         >
-                            <option
-                                value="0"
-                                v-if="! option.is_required"
+                            <select
+                                :name="'bundle_options[' + option.id + '][]'"
+                                class="block w-full p-[14px] pr-[36px] bg-white border border-[#E9E9E9] rounded-lg text-[16px] text-[#6E6E6E] focus:ring-blue-500 focus:border-blue-500 max-md:border-0 max-md:outline-none max-md:w-[110px] cursor-pointer"
+                                :class="[errors['bundle_options[' + option.id + '][]'] ? 'border border-red-500' : '']"
+                                v-model="selectedProduct"
+                                multiple
                             >
-                                @lang('shop::app.products.view.type.bundle.none')
-                            </option>
+                                <option
+                                    value="0"
+                                    v-if="! option.is_required"
+                                >
+                                    @lang('shop::app.products.view.type.bundle.none')
+                                </option>
 
-                            <option
-                                v-for="(product, index2) in option.products"
-                                :value="product.id"
-                            >
-                                @{{ product.name }}
+                                <option
+                                    v-for="(product, index2) in option.products"
+                                    :value="product.id"
+                                >
+                                    @{{ product.name }}
 
-                                <span class="text-black">
-                                    @{{ '+ ' + product.price.final.formatted_price }}
-                                </span>
-                            </option>
+                                    <span class="text-black">
+                                        @{{ '+ ' + product.price.final.formatted_price }}
+                                    </span>
+                                </option>
+                            </select>
                         </v-field>
                     </div>
 
