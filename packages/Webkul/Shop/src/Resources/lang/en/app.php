@@ -853,8 +853,8 @@ return [
                     'subject'      => 'New Customer Registration',
                     'thanks'       => 'Thank you.',
                 ],
-            
-            ],            
+
+            ],
 
             'forgot-password' => [
                 'description'    => 'You are receiving this email because we received a password reset request for your account.',

@@ -16,7 +16,7 @@ class EventServiceProvider extends ServiceProvider
             'Webkul\Shop\Listeners\Customer@afterCreated',
         ],
 
-        'customer.verifyAccount.after' => [
+        'customer.verify_account.after' => [
             'Webkul\Shop\Listeners\Customer@afterVerifyAccount',
         ],
 
