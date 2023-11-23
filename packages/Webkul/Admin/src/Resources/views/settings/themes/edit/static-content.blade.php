@@ -89,7 +89,7 @@
                         v-model="options.css"
                     />
 
-                    <KeepAlive>
+                    <KeepAlive class="dark:bg-white">
                         <component 
                             :is="inittialEditor"
                             ref="editor"
@@ -325,11 +325,13 @@
 
             created() {
                 this.initHtmlEditor();
+
+                this.$emitter.on('change-theme', (theme) => this._html.setOption('theme', (theme === 'dark') ? 'ayu-dark' : 'default'));
             },
 
             methods: {
                 initHtmlEditor() {
-                    setTimeout(() => {
+                    this.$nextTick(() => {
                         this.options.html = SimplyBeautiful().html(this.options.html);
 
                         this._html = new CodeMirror(this.$refs.html, {
@@ -348,7 +350,7 @@
 
                             this.$emit('editorData', this.options);
                         });
-                    }, 0);
+                    });
                 },
 
                 storeImage($event) {
@@ -405,11 +407,13 @@
 
             created() {
                 this.initCssEditor();
+
+                this.$emitter.on('change-theme', (theme) => this._css.setOption('theme', (theme === 'dark') ? 'ayu-dark' : 'default'));
             },
 
             methods: {
                 initCssEditor() {
-                    setTimeout(() => {
+                    this.$nextTick(() => {
                         this.options.css = SimplyBeautiful().css(this.options.css);
 
                         this._css = new CodeMirror(this.$refs.css, {
@@ -426,7 +430,7 @@
 
                             this.$emit('editorData', this.options);
                         });
-                    }, 0);
+                    });
                 },
             },
         });
