@@ -1,11 +1,3 @@
-
-
-<x-panel>
-    <x-slot:header>Panel Title</x-slot:header>
-
-    <x-slot:body>Panel Body</x-slot:body>
-</x-panel>
-
 <!-- default product listing -->
 <x-shop::products.carousel
     title="Men's Collections"
@@ -40,6 +32,8 @@
 
 <!-- basic/traditional form  -->
 <x-shop::form action="">
+     
+    <!-- Type E-mail -->
     <x-shop::form.control-group>
         <x-shop::form.control-group.label>
             Email
@@ -57,6 +51,163 @@
 
         <x-shop::form.control-group.error
             control-name="email"
+        >
+        </x-shop::form.control-group.error>
+    </x-shop::form.control-group>
+
+    <!-- Type Date -->
+    <x-shop::form.control-group>
+        <x-shop::form.control-group.label>
+            Date of Birth
+        </x-shop::form.control-group.label>
+
+        <x-shop::form.control-group.control
+            type="date"
+            name="date_of_birth" 
+            value=""
+            id="dob"
+            label="Date of Birth"
+            placeholder="Date of Birth"
+        >
+        </x-shop::form.control-group.control>
+
+        <x-shop::form.control-group.error
+            control-name="date_of_birth"
+        >
+        </x-shop::form.control-group.error>
+    </x-shop::form.control-group>
+
+    <!-- Type Date Time -->
+    <x-shop::form.control-group>
+        <x-shop::form.control-group.label>
+            Start Timing
+        </x-shop::form.control-group.label>
+
+        <x-shop::form.control-group.control
+            type="datetime"
+            name="starts_from"
+            value=""
+            id="starts_from"
+            label="Start Timing"
+            placeholder="Start Timing"
+        >
+        </x-shop::form.control-group.control>
+
+        <x-shop::form.control-group.error
+            control-name="starts_from"
+        >
+        </x-shop::form.control-group.error>
+    </x-shop::form.control-group>
+
+    <!-- Type Text -->
+    <x-shop::form.control-group>
+        <x-shop::form.control-group.label class="required">
+            @lang('name')
+        </x-shop::form.control-group.label>
+
+        <x-shop::form.control-group.control
+            type="text"
+            name="name"
+            :value=""
+            rules="required"
+            label="name"
+            placeholder="name"
+        >
+        </x-shop::form.control-group.control>
+
+        <x-shop::form.control-group.error
+            control-name="name"
+        >
+        </x-shop::form.control-group.error>
+    </x-shop::form.control-group>
+
+    <!-- Type Select -->
+    <x-shop::form.control-group>
+        <x-shop::form.control-group.label>
+            @lang('shop::app.catalog.families.create.column')
+        </x-shop::form.control-group.label>
+
+        <x-shop::form.control-group.control
+            type="select"
+            name="column"
+            rules="required"
+            :label="trans('shop::app.catalog.families.create.column')"
+        >
+            <!-- Default Option -->
+            <option value="">
+                @lang('shop::app.catalog.families.create.select-group')
+            </option>
+
+            <option value="1">
+                @lang('shop::app.catalog.families.create.main-column')
+            </option>
+
+            <option value="2">
+                @lang('shop::app.catalog.families.create.right-column')
+            </option>
+        </x-shop::form.control-group.control>
+
+        <x-shop::form.control-group.error 
+            control-name="column"
+        >
+        </x-shop::form.control-group.error>
+    </x-shop::form.control-group>
+
+    <!--Type Checkbox -->
+    <x-shop::form.control-group>
+        <x-shop::form.control-group.control
+            type="checkbox"
+            name="is_unique"
+            id="is_unique"
+            for="is_unique"
+            value="1"
+        >
+        </x-shop::form.control-group.control>
+
+        <x-shop::form.control-group.label
+            for="is_unique"
+        >
+            @lang('shop::app.catalog.attributes.edit.is-unique')
+        </x-shop::form.control-group.label>
+    </x-shop::form.control-group>
+
+    <!--Type Radio -->
+    <x-shop::form.control-group>
+        <x-shop::form.control-group.control
+            type="radio"
+            name="is_unique"
+            id="is_unique"
+            for="is_unique"
+            value="1"
+        >
+        </x-shop::form.control-group.control>
+
+        <x-shop::form.control-group.label
+            for="is_unique"
+        >
+            @lang('shop::app.catalog.attributes.edit.is-unique')
+        </x-shop::form.control-group.label>
+    </x-shop::form.control-group>
+
+    <!-- Type Tinymce -->
+    <x-shop::form.control-group>
+        <x-shop::form.control-group.label>
+            Description
+        </x-shop::form.control-group.label>
+
+        <x-shop::form.control-group.control
+            type="textarea"
+            name="description"
+            class="description"
+            :value=""
+            rules="required"
+            label="Description"
+            :tinymce="true"
+        >
+        </x-shop::form.control-group.control>
+
+        <x-shop::form.control-group.error
+            control-name="description"
         >
         </x-shop::form.control-group.error>
     </x-shop::form.control-group>
@@ -92,29 +243,6 @@
         <button>Submit</button>
     </form>
 </x-shop::form>
-
-<!-- tinymce -->
-<x-shop::form.control-group>
-    <x-shop::form.control-group.label>
-        Description
-    </x-shop::form.control-group.label>
-
-    <x-shop::form.control-group.control
-        type="textarea"
-        name="description"
-        class="description"
-        :value=""
-        rules="required"
-        label="Description"
-        :tinymce="true"
-    >
-    </x-shop::form.control-group.control>
-
-    <x-shop::form.control-group.error
-        control-name="description"
-    >
-    </x-shop::form.control-group.error>
-</x-shop::form.control-group>
 
 <!-- Shimmer -->
 <x-shop::shimmer.checkout.onepage.payment-method/>
@@ -208,3 +336,13 @@
     ::alt="product.name"
 >
 </x-shop::media.images.lazy>
+
+<!-- Page Title -->
+<x-slot:title>
+    @lang('Title')
+</x-slot:title>
+
+<!-- Page Layout -->
+<x-shop::layouts>
+   Page Content 
+</x-shop::layouts>
