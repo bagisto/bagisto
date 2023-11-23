@@ -3421,6 +3421,7 @@ return [
                 'tax-categories'           => 'فئات الضرائب',
                 'tax-rates'                => 'معدلات الضرائب',
                 'transactions'             => 'المعاملات',
+                'themes'                   => 'السمات',
                 'url-rewrites'             => 'إعادة كتابة عناوين URL',
                 'users'                    => 'المستخدمين',
             ],

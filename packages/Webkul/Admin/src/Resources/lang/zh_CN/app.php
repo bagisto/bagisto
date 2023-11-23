@@ -3423,6 +3423,7 @@ return [
                 'tax-categories'           => '税收分类',
                 'tax-rates'                => '税率',
                 'transactions'             => '交易',
+                'themes'                   => '主题',
                 'url-rewrites'             => 'URL 重写',
                 'users'                    => '用户',
             ],

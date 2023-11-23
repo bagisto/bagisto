@@ -3423,6 +3423,7 @@ return [
                 'tax-categories'           => 'Belastingcategorieën',
                 'tax-rates'                => 'Belastingtarieven',
                 'transactions'             => 'Transacties',
+                'themes'                   => 'Thema\'s',
                 'url-rewrites'             => 'URL-herschrijvingen',
                 'users'                    => 'Gebruikers',
             ],

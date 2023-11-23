@@ -3424,6 +3424,7 @@ return [
                 'tax-categories'           => 'Категории налогов',
                 'tax-rates'                => 'Налоговые ставки',
                 'transactions'             => 'Транзакции',
+                'themes'                   => 'Темы',
                 'url-rewrites'             => 'Перезапись URL',
                 'users'                    => 'Пользователи',
             ],
