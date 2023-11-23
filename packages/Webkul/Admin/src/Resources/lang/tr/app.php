@@ -3423,6 +3423,7 @@ return [
                 'tax-categories'           => 'Vergi Kategorileri',
                 'tax-rates'                => 'Vergi Oranları',
                 'transactions'             => 'İşlemler',
+                'themes'                   => 'Temalar',
                 'url-rewrites'             => 'URL Yeniden Yazma',
                 'users'                    => 'Kullanıcılar',
             ],

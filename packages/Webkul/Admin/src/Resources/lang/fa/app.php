@@ -3423,6 +3423,7 @@ return [
                 'tax-categories'           => 'دسته‌های مالیات',
                 'tax-rates'                => 'نرخ‌های مالیاتی',
                 'transactions'             => 'تراکنش‌ها',
+                'themes'                   => 'موضوعات',
                 'url-rewrites'             => 'بازنویسی URL',
                 'users'                    => 'کاربران',
             ],
