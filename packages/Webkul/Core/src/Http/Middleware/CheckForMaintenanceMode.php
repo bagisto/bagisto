@@ -9,7 +9,6 @@ use Illuminate\Routing\Route;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Webkul\Installer\Helpers\DatabaseManager;
 
-
 class CheckForMaintenanceMode extends Original
 {
     /**
@@ -66,7 +65,7 @@ class CheckForMaintenanceMode extends Original
             if (
                 in_array($request->ip(), $this->excludedIPs)
                 || $this->shouldPassThrough($request)
-                || !(bool) core()->getCurrentChannel()->is_maintenance_on
+                || ! (bool) core()->getCurrentChannel()->is_maintenance_on
             ) {
                 return $response;
             }
