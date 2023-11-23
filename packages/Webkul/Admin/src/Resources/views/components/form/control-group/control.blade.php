@@ -257,11 +257,6 @@
 
             props: ['field', 'checked'],
 
-            data() {
-                return {
-                }
-            },
-
             mounted() {
                 if (this.checked == '') {
                     return;
