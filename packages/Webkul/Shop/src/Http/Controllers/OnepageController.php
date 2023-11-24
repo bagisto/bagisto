@@ -3,8 +3,8 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Checkout\Facades\Cart;
 use OpenAI\Laravel\Facades\OpenAI;
+use Webkul\Checkout\Facades\Cart;
 
 class OnepageController extends Controller
 {
@@ -141,7 +141,7 @@ class OnepageController extends Controller
         $prompt .= "Current Locale:\n " . core()->getCurrentLocale()->name . "\n\n";
 
         $prompt .= "Store Name:\n" . core()->getCurrentChannel()->name;
-        
+
         return $prompt;
     }
 }
