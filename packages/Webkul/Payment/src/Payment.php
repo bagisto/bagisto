@@ -3,6 +3,7 @@
 namespace Webkul\Payment;
 
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Storage;
 
 class Payment
 {
@@ -36,6 +37,7 @@ class Payment
                     'method_title' => $object->getTitle(),
                     'description'  => $object->getDescription(),
                     'sort'         => $object->getSortOrder(),
+                    'image'        => $object->getImage() ? Storage::url($object->getImage()) : '',
                 ];
             }
         }

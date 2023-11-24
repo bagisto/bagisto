@@ -56,20 +56,20 @@
 
                                         <img
                                             class="max-w-[55px] max-h-[45px]"
-                                            :src="paymentImages[payment.method] || '{{ bagisto_asset('images/paypal.png') }}'"
+                                            :src="payment.image ? payment.image : paymentImages[payment.method]"
                                             width="55"
                                             height="55"
                                             :alt="payment.method_title"
                                             :title="payment.method_title"
-                                        >
-                                        
+                                        />
+
                                         <p class="text-[14px] font-semibold mt-[5px]">
                                             @{{ payment.method_title }}
                                         </p>
                                         
                                         <p class="text-[12px] font-medium mt-[10px]">
                                             @{{ payment.description }}
-                                        </p>
+                                        </p> 
                                     </label>
 
                                     {!! view_render_event('bagisto.shop.checkout.payment-method.after') !!}
@@ -96,6 +96,8 @@
                     paymentImages: {
                         moneytransfer: "{{ bagisto_asset('images/money-transfer.png') }}",
                         cashondelivery: "{{ bagisto_asset('images/cash-on-delivery.png') }}",
+                        paypal_smart_button: "{{ bagisto_asset('images/paypal.png') }}",
+                        paypal_standard: "{{ bagisto_asset('images/paypal.png') }}",
                     },
 
                     isShowPaymentMethod: false,
