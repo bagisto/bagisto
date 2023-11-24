@@ -94,7 +94,11 @@
                                     v-model="selectedProduct"
                                 >
 
-                                <span class="icon-radio-unselect text-[24px] text-navyBlue peer-checked:icon-radio-select"></span>
+                                <label
+                                    class="icon-radio-unselect text-[24px] text-navyBlue peer-checked:icon-radio-select"
+                                    :for="'bundle_options[' + option.id + '][]'"
+                                >
+                                </label>
 
                                 <label
                                     class="text-[#6E6E6E]"
@@ -156,7 +160,7 @@
                                     v-slot="{ field }"
                                     :value="product.id"
                                     v-model="selectedProduct"
-                                    :rules="{'required': option.is_required}"
+                                    :rules="option.is_required ? 'required' : ''"
                                     :label="option.label"
                                 >
                                     <input
