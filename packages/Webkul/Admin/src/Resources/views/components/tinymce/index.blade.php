@@ -1,7 +1,5 @@
 <v-tinymce {{ $attributes }}></v-tinymce>
 
-<button class="flex gap-[4px] px-[8px] py-[6px] rounded-[4px] bg-blue-50 text-[14px] text-blue-600 transition-all hover:bg-blue-100">Magic AI</button>
-
 @pushOnce('scripts')
     <!--
         TODO (@devansh-webkul): Only this portion is pending; it just needs to be integrated using the Vite bundler. Currently,
@@ -13,14 +11,123 @@
         referrerpolicy="no-referrer"
     ></script>
 
+    <script type="text/x-template" id="v-tinymce-template">
+        <x-admin::form
+            v-slot="{ meta, errors, handleSubmit }"
+            as="div"
+        >
+            <form @submit="handleSubmit($event, generate)">
+                <!-- AI Content Generation Modal -->
+                <x-admin::modal ref="magicAIModal">
+                    <x-slot:header>
+                        <!-- Modal Header -->
+                        <p class="text-[18px] text-gray-800 dark:text-white font-bold">
+                            AI Assistant
+                        </p>
+                    </x-slot:header>
+
+                    <x-slot:content>
+                        <!-- Modal Content -->
+                        <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
+                            <!-- Prompt -->
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
+                                    Prompt
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="textarea"
+                                    name="prompt"
+                                    class="h-[180px]"
+                                    rules="required"
+                                    v-model="ai.prompt"
+                                    label="Prompt"
+                                >
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error control-name="prompt"></x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+
+                            <!-- Modal Submission -->
+                            <div class="flex gap-x-[10px] items-center">
+                                <button
+                                    type="submit"
+                                    class="secondary-button"
+                                >
+                                    <!-- Spinner -->
+                                    <template v-if="isLoading">
+                                        <img
+                                            class="animate-spin h-5 w-5 text-blue-600"
+                                            src="{{ bagisto_asset('images/spinner.svg') }}"
+                                        />
+
+                                        Generating...
+                                    </template>
+
+                                    <template v-else>
+                                        Generate
+                                    </template>
+                                </button>
+                            </div>
+
+                            <!-- Generated Content -->
+                            <x-admin::form.control-group class="mt-[20px]">
+                                <x-admin::form.control-group.label>
+                                    Generated Content
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="textarea"
+                                    name="content"
+                                    class="h-[180px]"
+                                    v-model="ai.content"
+                                >
+                                </x-admin::form.control-group.control>
+
+                                <span class="text-[12px] text-gray-500">
+                                    AI content can be misleading. Please review the generated content before applying it.
+                                </span>
+                            </x-admin::form.control-group>
+                        </div>
+                    </x-slot:content>
+
+                    <x-slot:footer>
+                        <!-- Modal Submission -->
+                        <div class="flex gap-x-[10px] items-center">
+                            <button
+                                type="button"
+                                class="primary-button"
+                                :disabled="!ai.content"
+                                @click="apply"
+                            >
+                                Apply
+                            </button>
+                        </div>
+                    </x-slot:footer>
+                </x-admin::modal>
+            </form>
+        </x-admin::form>
+    </script>
+
     <script type="module">
         app.component('v-tinymce', {
-            props: ['selector', 'field'],
+            template: '#v-tinymce-template',
+                
+            props: ['selector', 'field', 'prompt'],
 
             data() {
                 return {
                     currentSkin: document.documentElement.classList.contains('dark') ? 'oxide-dark' : 'oxide',
+
                     currentContentCSS: document.documentElement.classList.contains('dark') ? 'dark' : 'default',
+
+                    isLoading: false,
+
+                    ai: {
+                        prompt: null,
+
+                        content: null,
+                    },
                 };
             },
 
@@ -39,7 +146,7 @@
 
             methods: {
                 init() {
-                    let tinymceSelf = this;
+                    let self = this;
 
                     // TODO (@devansh-webkul): Need to refactor this full method.
                     let tinyMCEHelper = {
@@ -54,8 +161,8 @@
                                 uploadRoute: '{{ route('admin.tinymce.upload') }}',
                                 csrfToken: '{{ csrf_token() }}',
                                 ...extraConfiguration,
-                                skin: tinymceSelf.currentSkin,
-                                content_css: tinymceSelf.currentContentCSS,
+                                skin: self.currentSkin,
+                                content_css: self.currentContentCSS,
                             };
 
                             tinymce.init({
@@ -148,19 +255,26 @@
                     tinyMCEHelper.initTinyMCE({
                         selector: this.selector,
                         plugins: 'image media wordcount save fullscreen code table lists link',
-                        toolbar1: 'customInsertButton | formatselect | bold italic strikethrough forecolor backcolor alignleft aligncenter alignright alignjustify | link hr |numlist bullist outdent indent  | removeformat | code | table',
+                        toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor alignleft aligncenter alignright alignjustify | link hr |numlist bullist outdent indent  | removeformat | code | table | aibutton',
                         image_advtab: true,
                         directionality : "{{ core()->getCurrentLocale()->direction }}",
 
                         setup: editor => {
                             editor.ui.registry.addIcon('magic', '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"> <g clip-path="url(#clip0_3148_2242)"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1484 9.31989L9.31995 12.1483L19.9265 22.7549L22.755 19.9265L12.1484 9.31989ZM12.1484 10.7341L10.7342 12.1483L13.5626 14.9767L14.9768 13.5625L12.1484 10.7341Z" fill="#2563EB"/> <path d="M11.0877 3.30949L13.5625 4.44748L16.0374 3.30949L14.8994 5.78436L16.0374 8.25924L13.5625 7.12124L11.0877 8.25924L12.2257 5.78436L11.0877 3.30949Z" fill="#2563EB"/> <path d="M2.39219 2.39217L5.78438 3.95197L9.17656 2.39217L7.61677 5.78436L9.17656 9.17655L5.78438 7.61676L2.39219 9.17655L3.95198 5.78436L2.39219 2.39217Z" fill="#2563EB"/> <path d="M3.30947 11.0877L5.78434 12.2257L8.25922 11.0877L7.12122 13.5626L8.25922 16.0374L5.78434 14.8994L3.30947 16.0374L4.44746 13.5626L3.30947 11.0877Z" fill="#2563EB"/> </g> <defs> <clipPath id="clip0_3148_2242"> <rect width="24" height="24" fill="white"/> </clipPath> </defs> </svg>');
 
-                            editor.ui.registry.addButton('customInsertButton', {
+                            editor.ui.registry.addButton('aibutton', {
                                 text: 'Magic AI',
                                 icon: 'magic',
-                                style: 'background-color: #4CAF50; color: white;',
-                                onAction: function (_) {
-                                    editor.insertContent('&nbsp;<strong>It\'s my button!</strong>&nbsp;');
+                                enabled: true,
+
+                                onAction: function () {
+                                    self.ai = {
+                                        prompt: self.prompt,
+
+                                        content: null,
+                                    };
+
+                                    self.$refs.magicAIModal.toggle()
                                 }
                             });
 
@@ -169,7 +283,33 @@
                             });
                         },
                     });
-                }
+                },
+
+                generate(params) {
+                    this.isLoading = true;
+
+                    this.$axios.post("{{ route('admin.magic_ai.generate') }}", { prompt: params['prompt'] })
+                        .then(response => {
+                            this.isLoading = false;
+
+                            this.ai.content = response.data.content;
+                        })
+                        .catch(error => {
+                            console.log(error.response.data.message);
+                        });
+                },
+
+                apply() {
+                    if (! this.ai.content) {
+                        return;
+                    }
+
+                    tinymce.get(this.selector.replace('textarea#', '')).setContent(this.ai.content.replace(/\r?\n/g, '<br />'))
+
+                    this.field.onInput(this.ai.content.replace(/\r?\n/g, '<br />'));
+
+                    this.$refs.magicAIModal.close();
+                },
             },
         })
     </script>

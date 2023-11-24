@@ -51,6 +51,7 @@
             :label="$attribute->admin_name"
             value="{{ old($attribute->code) ?: $product[$attribute->code] }}"
             :tinymce="(bool) $attribute->enable_wysiwyg"
+            prompt="As an E-Commerce store content writer, your task is to craft a compelling product description for the following item, highlighting its key features:\n\nProduct Name: Test Product Name \n\nFeatures:\n1: Feature 1\n2: Feature 2"
         >
         </x-admin::form.control-group.control>
 

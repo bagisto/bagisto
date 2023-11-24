@@ -2948,6 +2948,42 @@ return [
                         'title-info'      => 'Admin logo is the distinctive image or emblem representing the administration interface of a system or website, often customizable.',
                     ],
                 ],
+
+                'magic-ai' => [
+                    'info'  => 'Set Magic AI options.',
+                    'title' => 'Magic AI',
+
+                    'settings' => [
+                        'title'        => 'General Settings',
+                        'title-info'   => 'Enhance your experience with the Magic AI feature by entering your exclusive API Key and indicating the pertinent Organization for effortless integration. Seize command over your OpenAI credentials and customize the settings according to your specific needs.',
+                        'enabled'      => 'Enabled',
+                        'api-key'      => 'API Key',
+                        'organization' => 'Organization',
+                    ],
+
+                    'content-generation' => [
+                        'title' => 'Content Generation',
+                        'title-info' => 'This feature will enable the Magic AI for every WYSIWYG editor, where you want to mange content using AI.<br/><br/>When Enable, go to any editor to generate content.',
+                        'enabled'      => 'Enabled',
+                        'product-short-description-prompt' => 'Product Short Description Prompt',
+                        'product-description-prompt' => 'Product Description Prompt',
+                        'category-description-prompt' => 'Category Description Prompt',
+                        'cms-page-content-prompt' => 'CMS Page Content Prompt',
+                    ],
+
+                    'review-translation' => [
+                        'title'      => 'Review Translation',
+                        'title-info' => 'Provide option to customer or visitor to translate customer review into english.<br/><br/>When enable, go to review and you will find the button ‘Translate to English’ if you review other then English.',
+                        'enabled'    => 'Enabled',
+                    ],
+
+                    'checkout-message' => [
+                        'title'      => 'Personalized Checkout Message',
+                        'title-info' => 'Craft a personalized checkout message for customers on the Thank-You page, tailoring the content to resonate with individual preferences and enhancing the overall post-purchase experience.',
+                        'enabled'    => 'Enabled',
+                        'prompt'     => 'Prompt',
+                    ],
+                ],
             ],
 
             'catalog' => [

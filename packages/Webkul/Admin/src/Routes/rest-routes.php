@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Webkul\Admin\Http\Controllers\DashboardController;
 use Webkul\Admin\Http\Controllers\DataGridController;
 use Webkul\Admin\Http\Controllers\TinyMCEController;
+use Webkul\Admin\Http\Controllers\MagicAIController;
 use Webkul\Admin\Http\Controllers\User\AccountController;
 use Webkul\Admin\Http\Controllers\User\SessionController;
 
@@ -29,6 +30,13 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
      * Tinymce file upload handler.
      */
     Route::post('tinymce/upload', [TinyMCEController::class, 'upload'])->name('admin.tinymce.upload');
+
+    /**
+     * AI Routes
+     */
+    Route::controller(MagicAIController::class)->prefix('magic-ai')->group(function () {
+        Route::post('generate', 'generate')->name('admin.magic_ai.generate');
+    });
 
     /**
      * Admin profile routes.
