@@ -56,7 +56,7 @@ class RegistrationNotification extends Mailable
     {
         return $this->from($this->senderEmail, $this->senderName)
             ->to($this->adminDetails['email'])
-            ->subject(trans('shop::app.emails.customers.admin.new_customer_registration_notification.subject'))
+            ->subject(trans('shop::app.emails.customers.admin.registration.subject'))
             ->view('shop::emails.customers.notify-admin-about-registration');
     }
 

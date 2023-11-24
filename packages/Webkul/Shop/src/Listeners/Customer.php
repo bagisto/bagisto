@@ -24,7 +24,9 @@ class Customer extends Base
                 if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.verification')) {
                     return;
                 }
-                Mail::queue(new RegistrationNotification($customer, 'admin'));
+                if (core()->getConfigData('emails.general.notifications.emails.general.notifications.registration')) {
+                    Mail::queue(new RegistrationNotification($customer, 'admin'));
+                }
                 Mail::queue(new EmailVerificationNotification($customer));
             } catch (\Exception $e) {
                 \Log::info('EmailVerificationNotification Error');
@@ -93,7 +95,9 @@ class Customer extends Base
     {
         try {
             // Send registration notification with specified notify parameter
-            Mail::queue(new RegistrationNotification($customer, 'customer'));
+            if (core()->getConfigData('emails.general.notifications.emails.general.notifications.registration')) {
+                Mail::queue(new RegistrationNotification($customer, 'customer'));
+            }
         } catch (\Exception $e) {
             // Log and report any exceptions
             report($e);

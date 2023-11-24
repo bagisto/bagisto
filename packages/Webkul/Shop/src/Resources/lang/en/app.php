@@ -846,7 +846,7 @@ return [
             ],
 
             'admin' => [
-                'new_customer_registration_notification' => [
+                'registration' => [
                     'dear'         => 'Dear Admin',
                     'description'  => 'A new customer has registered in the system.',
                     'name'         => 'Customer Name: :customerName',
