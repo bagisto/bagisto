@@ -649,6 +649,10 @@ return [
                 'view-cart'                => '查看购物车',
             ],
 
+            'cross-sell' => [
+                'title' => '更多选择',
+            ],
+
             'coupon' => [
                 'applied'         => '已应用优惠券',
                 'apply'           => '应用优惠券',

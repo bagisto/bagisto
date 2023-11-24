@@ -649,6 +649,10 @@ return [
                 'view-cart'                => 'Voir le panier',
             ],
 
+            'cross-sell' => [
+                'title' => 'Plus de choix',
+            ],
+
             'coupon'   => [
                 'applied'         => 'Coupon appliqué',
                 'apply'           => 'Appliquer le coupon',

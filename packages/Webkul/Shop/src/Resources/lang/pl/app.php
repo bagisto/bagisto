@@ -649,6 +649,10 @@ return [
                 'view-cart'                => 'Zobacz koszyk',
             ],
 
+            'cross-sell' => [
+                'title' => 'Więcej opcji',
+            ],
+
             'coupon'   => [
                 'applied'         => 'Kod kuponu został zastosowany',
                 'apply'           => 'Zastosuj kod kuponu',

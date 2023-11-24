@@ -588,10 +588,11 @@ return [
     ],
 
     'compare'  => [
-        'product-compare'    => 'Producten Vergelijken',
+        'already-added'      => 'Item is al toegevoegd aan de vergelijkingslijst',
         'delete-all'         => 'Alles Verwijderen',
         'empty-text'         => 'Je hebt geen items in je vergelijkingslijst',
         'item-add-success'   => 'Item succesvol toegevoegd aan de vergelijkingslijst',
+        'product-compare'    => 'Producten Vergelijken',
         'remove-success'     => 'Item succesvol verwijderd.',
         'remove-all-success' => 'Alle items succesvol verwijderd.',
         'remove-error'       => 'Er is iets misgegaan, probeer het later opnieuw.',
@@ -646,6 +647,10 @@ return [
                 'total'                    => 'Totaal',
                 'update-cart'              => 'Winkelwagen bijwerken',
                 'view-cart'                => 'Bekijk winkelwagen',
+            ],
+
+            'cross-sell' => [
+                'title' => 'Meer keuzes',
             ],
 
             'coupon'   => [

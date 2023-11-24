@@ -649,6 +649,10 @@ return [
                 'view-cart'                => 'Sepeti Görüntüle',
             ],
 
+            'cross-sell' => [
+                'title' => 'Daha fazla seçenek',
+            ],
+
             'coupon'   => [
                 'applied'         => 'Kupon uygulandı',
                 'apply'           => 'Kuponu Uygula',

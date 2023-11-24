@@ -413,6 +413,18 @@ return [
             ],
         ],
 
+        'modal' => [
+            'default-content' => 'Contenido predeterminado',
+            'default-header'  => 'Encabezado predeterminado',
+
+            'confirm' => [
+                'agree-btn'    => 'Aceptar',
+                'disagree-btn' => 'No estar de acuerdo',
+                'message'      => '¿Estás seguro de que quieres realizar esta acción?',
+                'title'        => '¿Estás seguro?',
+            ],
+        ],
+
         'products' => [
             'card' => [
                 'add-to-compare-success'      => 'Elemento añadido correctamente a la lista de comparación.',
@@ -651,6 +663,10 @@ return [
                 'remove'          => 'Eliminar Cupón',
                 'success-apply'   => 'Código de cupón aplicado con éxito.',
                 'subtotal'        => 'Subtotal',
+            ],
+
+            'cross-sell' => [
+                'title' => 'Más opciones',
             ],
 
             'mini-cart' => [

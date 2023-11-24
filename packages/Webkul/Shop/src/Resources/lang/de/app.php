@@ -649,6 +649,10 @@ return [
                 'view-cart'                => 'Warenkorb anzeigen',
             ],
 
+            'cross-sell' => [
+                'title' => 'Mehr Auswahlmöglichkeiten',
+            ],
+
             'coupon'   => [
                 'applied'         => 'Gutschein angewendet',
                 'apply'           => 'Gutschein anwenden',
