@@ -4,6 +4,7 @@ namespace Webkul\Shop\Http\Controllers\API;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Event;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 use Webkul\Checkout\Facades\Cart;
@@ -229,16 +230,26 @@ class CartController extends APIController
      */
     public function crossSellProducts()
     {
+        $crossSellProducts = [];
+
         foreach (Cart::getCart()->items as $item) {
-            $product = $this->productRepository->findOrFail($item['product_id']);
+            $product = $item->product;
 
             if ($product->cross_sells()->count()) {
-                $crossSellProducts = $product->cross_sells()
-                    ->take(core()->getConfigData('catalog.products.cart_view_page.no_of_cross_sells_products'))
-                    ->get();
+                $crossSellProducts[] = $product->cross_sells()->get();
             }
         }
 
-        return ProductResource::collection($crossSellProducts);
+        $crossSellProducts = array_unique($crossSellProducts, SORT_REGULAR);
+
+        $crossSellProducts = collect($crossSellProducts)->flatten();
+
+        $paginatedCrossSellProducts = new LengthAwarePaginator(
+            $crossSellProducts,
+            count($crossSellProducts),
+            2
+        );
+
+        return ProductResource::collection($paginatedCrossSellProducts);
     }
 }
