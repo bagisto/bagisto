@@ -230,26 +230,15 @@ class CartController extends APIController
      */
     public function crossSellProducts()
     {
-        $crossSellProducts = [];
+        $productIds = Cart::getCart()->items->pluck('product_id')->toArray();
 
-        foreach (Cart::getCart()->items as $item) {
-            $product = $item->product;
+        $products = $this->productRepository
+            ->select('products.*', 'product_cross_sells.child_id')
+            ->join('product_cross_sells', 'products.id', '=', 'product_cross_sells.child_id')
+            ->whereIn('product_cross_sells.parent_id', $productIds)
+            ->groupBy('product_cross_sells.child_id')
+            ->paginate();
 
-            if ($product->cross_sells()->count()) {
-                $crossSellProducts[] = $product->cross_sells()->get();
-            }
-        }
-
-        $crossSellProducts = array_unique($crossSellProducts, SORT_REGULAR);
-
-        $crossSellProducts = collect($crossSellProducts)->flatten();
-
-        $paginatedCrossSellProducts = new LengthAwarePaginator(
-            $crossSellProducts,
-            count($crossSellProducts),
-            2
-        );
-
-        return ProductResource::collection($paginatedCrossSellProducts);
+        return ProductResource::collection($products);
     }
 }
