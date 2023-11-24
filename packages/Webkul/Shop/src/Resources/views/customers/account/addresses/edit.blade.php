@@ -156,7 +156,7 @@
         {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.street-addres.after', ['address' => $address]) !!}
 
         <x-shop::form.control-group class="mb-4">
-            <x-shop::form.control-group.label class="required">
+            <x-shop::form.control-group.label class="{{ core()->isCountryRequired() ? 'required' : '' }}">
                 @lang('shop::app.customers.account.addresses.country')
             </x-shop::form.control-group.label>
 
@@ -165,7 +165,7 @@
                 name="country"
                 :value="old('gender') ?? $address->country"
                 class="mb-4"
-                rules="required"
+                rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
                 :aria-label="trans('shop::app.customers.account.addresses.country')"
                 :label="trans('shop::app.customers.account.addresses.country')"
             >
@@ -192,7 +192,7 @@
         {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.country.after', ['address' => $address]) !!}
 
         <x-shop::form.control-group class="mb-4">
-            <x-shop::form.control-group.label class="required">
+            <x-shop::form.control-group.label class="{{ core()->isStateRequired() ? 'required' : '' }}">
                 @lang('shop::app.customers.account.addresses.state')
             </x-shop::form.control-group.label>
 
@@ -200,7 +200,7 @@
                 type="text"
                 name="state"
                 :value="old('state') ?? $address->state"
-                rules="required"
+                rules="{{ core()->isStateRequired() ? 'required' : '' }}"
                 :label="trans('shop::app.customers.account.addresses.state')"
                 :placeholder="trans('shop::app.customers.account.addresses.state')"
             >
@@ -238,7 +238,7 @@
         {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.city.after', ['address' => $address]) !!}
 
         <x-shop::form.control-group class="mb-4">
-            <x-shop::form.control-group.label class="required">
+            <x-shop::form.control-group.label class="{{ core()->isPostCodeRequired() ? 'required' : '' }}">
                 @lang('shop::app.customers.account.addresses.post-code')
             </x-shop::form.control-group.label>
 
@@ -246,7 +246,7 @@
                 type="text"
                 name="postcode"
                 :value="old('postal-code') ?? $address->postcode"
-                rules="required|integer"
+                rules="{{ core()->isPostCodeRequired() ? 'required' : '' }}|numeric "
                 :label="trans('shop::app.customers.account.addresses.post-code')"
                 :placeholder="trans('shop::app.customers.account.addresses.post-code')"
             >
