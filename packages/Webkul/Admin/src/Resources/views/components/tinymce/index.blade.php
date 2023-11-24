@@ -124,6 +124,8 @@
                     isLoading: false,
 
                     ai: {
+                        enabled: Boolean("{{ core()->getConfigData('general.magic_ai.settings.enabled') && core()->getConfigData('general.magic_ai.content_generation.enabled') }}"),
+
                         prompt: null,
 
                         content: null,
@@ -265,7 +267,7 @@
                             editor.ui.registry.addButton('aibutton', {
                                 text: 'Magic AI',
                                 icon: 'magic',
-                                enabled: true,
+                                enabled: self.ai.enabled,
 
                                 onAction: function () {
                                     self.ai = {
@@ -285,7 +287,7 @@
                     });
                 },
 
-                generate(params) {
+                generate(params, { resetForm, resetField, setErrors }) {
                     this.isLoading = true;
 
                     this.$axios.post("{{ route('admin.magic_ai.generate') }}", { prompt: params['prompt'] })
@@ -296,8 +298,12 @@
                         })
                         .catch(error => {
                             this.isLoading = false;
-                            
-                            this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
+
+                            if (error.response.status == 422) {
+                                setErrors(error.response.data.errors);
+                            } else {
+                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
+                            }
                         });
                 },
 

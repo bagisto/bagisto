@@ -205,7 +205,7 @@ return [
                 'type'          => 'boolean',
                 'channel_based' => true,
             ], [
-                'name'          => 'product_short_description_prompt',
+                'name'          => 'prompt',
                 'title'         => 'admin::app.configuration.index.general.magic-ai.checkout-message.prompt',
                 'type'          => 'textarea',
                 'channel_based' => true,

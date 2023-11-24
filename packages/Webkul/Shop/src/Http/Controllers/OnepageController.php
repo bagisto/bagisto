@@ -4,6 +4,7 @@ namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
 use Webkul\Checkout\Facades\Cart;
+use OpenAI\Laravel\Facades\OpenAI;
 
 class OnepageController extends Controller
 {
@@ -85,6 +86,62 @@ class OnepageController extends Controller
             return redirect()->route('shop.checkout.cart.index');
         }
 
+        if (
+            core()->getConfigData('general.magic_ai.settings.enabled')
+            && core()->getConfigData('general.magic_ai.checkout_message.enabled')
+            && ! empty(core()->getConfigData('general.magic_ai.checkout_message.prompt'))
+        ) {
+            config([
+                'openai.api_key'      => core()->getConfigData('general.magic_ai.settings.api_key'),
+                'openai.organization' => core()->getConfigData('general.magic_ai.settings.organization'),
+            ]);
+
+            try {
+                $result = OpenAI::chat()->create([
+                    'model'       => 'gpt-3.5-turbo',
+                    'temperature' => 0,
+                    'messages'    => [
+                        [
+                            'role'    => 'user',
+                            'content' => $this->getCheckoutPrompt($order),
+                        ],
+                    ],
+                ]);
+
+                $order->checkout_message = $result->choices[0]->message->content;
+            } catch (\Exception $e) {
+            }
+        }
+
         return view('shop::checkout.success', compact('order'));
+    }
+
+    /**
+     * Order success page.
+     *
+     * @param  \Webkul\Sales\Contracts\Order  $order
+     * @return string
+     */
+    public function getCheckoutPrompt($order)
+    {
+        $prompt = core()->getConfigData('general.magic_ai.checkout_message.prompt');
+
+        $products = '';
+
+        foreach ($order->items as $item) {
+            $products .= "Name: $item->name\n";
+            $products .= "Qty: $item->qty_ordered\n";
+            $products .= 'Price: ' . core()->formatPrice($item->total) . "\n\n";
+        }
+
+        $prompt .= "\n\nProduct Details:\n $products";
+
+        $prompt .= "Customer Details:\n $order->customer_full_name \n\n";
+
+        $prompt .= "Current Locale:\n " . core()->getCurrentLocale()->name . "\n\n";
+
+        $prompt .= "Store Name:\n" . core()->getCurrentChannel()->name;
+        
+        return $prompt;
     }
 }

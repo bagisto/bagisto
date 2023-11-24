@@ -12,6 +12,11 @@ class MagicAIController extends Controller
      */
     public function generate(): JsonResponse
     {
+        config([
+            'openai.api_key'      => core()->getConfigData('general.magic_ai.settings.api_key'),
+            'openai.organization' => core()->getConfigData('general.magic_ai.settings.organization'),
+        ]);
+
         $this->validate(request(), [
             'prompt' => 'required',
         ]);

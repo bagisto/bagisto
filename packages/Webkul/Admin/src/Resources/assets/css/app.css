@@ -526,3 +526,8 @@
 .tox .tox-toolbar__group:last-child button:hover {
     background: #dbeafe;
 }
+
+
+.tox .tox-toolbar__group:last-child button[aria-disabled="true"] {
+    @apply cursor-not-allowed opacity-50;
+}
