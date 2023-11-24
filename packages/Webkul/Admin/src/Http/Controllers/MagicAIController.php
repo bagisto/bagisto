@@ -16,15 +16,21 @@ class MagicAIController extends Controller
             'prompt' => 'required',
         ]);
 
-        $result = OpenAI::chat()->create([
-            'model'    => 'gpt-3.5-turbo',
-            'messages' => [
-                [
-                    'role'    => 'user',
-                    'content' => request()->input('prompt'),
+        try {
+            $result = OpenAI::chat()->create([
+                'model'    => 'gpt-3.5-turbo',
+                'messages' => [
+                    [
+                        'role'    => 'user',
+                        'content' => request()->input('prompt'),
+                    ],
                 ],
-            ],
-        ]);
+            ]);
+        } catch (\Exception $e) {
+            return new JsonResponse([
+                'message' => $e->getMessage(),
+            ], 500);
+        }
 
         return new JsonResponse([
             'content' => $result->choices[0]->message->content,

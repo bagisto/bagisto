@@ -2962,13 +2962,13 @@ return [
                     ],
 
                     'content-generation' => [
-                        'title' => 'Content Generation',
-                        'title-info' => 'This feature will enable the Magic AI for every WYSIWYG editor, where you want to mange content using AI.<br/><br/>When Enable, go to any editor to generate content.',
-                        'enabled'      => 'Enabled',
+                        'title'                            => 'Content Generation',
+                        'title-info'                       => 'This feature will enable the Magic AI for every WYSIWYG editor, where you want to mange content using AI.<br/><br/>When Enable, go to any editor to generate content.',
+                        'enabled'                          => 'Enabled',
                         'product-short-description-prompt' => 'Product Short Description Prompt',
-                        'product-description-prompt' => 'Product Description Prompt',
-                        'category-description-prompt' => 'Category Description Prompt',
-                        'cms-page-content-prompt' => 'CMS Page Content Prompt',
+                        'product-description-prompt'       => 'Product Description Prompt',
+                        'category-description-prompt'      => 'Category Description Prompt',
+                        'cms-page-content-prompt'          => 'CMS Page Content Prompt',
                     ],
 
                     'review-translation' => [
