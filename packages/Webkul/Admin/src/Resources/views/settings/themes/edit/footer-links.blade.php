@@ -103,7 +103,7 @@
                                         <div class="flex gap-x-[20px] items-center">
                                             <p 
                                                 class="text-blue-600 cursor-pointer transition-all hover:underline"
-                                                @click="edit(link)"
+                                                @click="edit(link, key)"
                                             > 
                                                 @lang('admin::app.settings.themes.edit.edit')
                                             </p>
@@ -280,6 +280,12 @@
 
                         <x-slot:content>
                             <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
+                                <x-admin::form.control-group.control
+                                    type="hidden"
+                                    name="key"
+                                >
+                                </x-admin::form.control-group.control>
+                                
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.themes.edit.column')
@@ -335,7 +341,6 @@
                                         rules="required|url"
                                         :label="trans('admin::app.settings.themes.edit.url')"
                                         :placeholder="trans('admin::app.settings.themes.edit.url')"
-                                        ::disabled="isUpdating"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -425,21 +430,11 @@
 
             methods: {
                 updateOrCreate(params) {
-                    let updatedFooterLinks = this.footerLinks[params.column].map((item) => {
-                        if (item.url === params.url) {
-                            return params;
-                        }
-
-                        return item;
-                    });
-
-                    this.footerLinks[params.column] = updatedFooterLinks;
-
-                    if (! updatedFooterLinks.some((item) => item.url === params.url)) {
-                        if (!this.footerLinks.hasOwnProperty(params.column)) {
-                            this.footerLinks[params.column] = []; 
-                        }
-                        
+                    if (params.key != null) {
+                        Object.keys(this.footerLinks).forEach(key => {
+                            this.footerLinks[params.column][params.key] = params;
+                        });
+                    } else {
                         this.footerLinks[params.column].push(params);
                     }
 
@@ -460,10 +455,13 @@
                     }
                 },
 
-                edit(footerLink) {
+                edit(footerLink, key) {
                     this.isUpdating = true;
 
-                    this.$refs.footerLinkUpdateOrCreateModal.setValues(footerLink);
+                    this.$refs.footerLinkUpdateOrCreateModal.setValues({
+                        ...footerLink, 
+                        key,
+                    });
 
                     this.$refs.addLinksModal.toggle();
                 },
