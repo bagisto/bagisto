@@ -131,16 +131,18 @@ window.app = createApp({
 /**
  * Global plugins registration.
  */
+import Admin from "./plugins/admin";
 import Axios from "./plugins/axios";
 import CreateElement from "./plugins/createElement";
 import Emitter from "./plugins/emitter";
-import Admin from "./plugins/admin";
+import Flatpickr from "./plugins/flatpickr";
 
 [
+    Admin,
     Axios,
     CreateElement,
     Emitter,
-    Admin
+    Flatpickr,
 ].forEach((plugin) => app.use(plugin));
 
 /**
@@ -166,10 +168,6 @@ app.directive("slugify", Slugify);
 app.directive("slugify-target", SlugifyTarget);
 app.directive("debounce", Debounce);
 app.directive("code", Code);
-
-import Flatpickr from "flatpickr";
-import 'flatpickr/dist/flatpickr.css';
-window.Flatpickr = Flatpickr;
 
 /**
  * Load event, the purpose of using the event is to mount the application
