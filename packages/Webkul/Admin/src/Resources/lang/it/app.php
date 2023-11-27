@@ -1262,6 +1262,8 @@ return [
                 'orders'                      => 'Ordini (:order_count)',
                 'order-id'                    => 'ID Ordine',
                 'order-id-prefix'             => '# :order_id',
+                'of'                          => 'di',
+                'per-page'                    => 'per pagina',
                 'processing'                  => 'In Elaborazione',
                 'pending'                     => 'In Attesa',
                 'completed'                   => 'Completato',

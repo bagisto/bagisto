@@ -1261,6 +1261,8 @@ return [
                 'orders'                      => 'الطلبات (:order_count)',
                 'order-id'                    => 'رقم الطلب',
                 'order-id-prefix'             => '# :order_id',
+                'of'                          => 'من',
+                'per-page'                    => 'لكل صفحة',
                 'processing'                  => 'قيد التنفيذ',
                 'pending'                     => 'معلق',
                 'completed'                   => 'مكتمل',

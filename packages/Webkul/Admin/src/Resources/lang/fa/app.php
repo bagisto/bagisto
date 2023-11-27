@@ -1262,6 +1262,8 @@ return [
                 'orders'                      => 'سفارش‌ها (:order_count)',
                 'order-id'                    => 'شناسه سفارش',
                 'order-id-prefix'             => '# :order_id',
+                'of'                          => 'از',
+                'per-page'                    => 'در هر صفحه',
                 'processing'                  => 'در حال پردازش',
                 'pending'                     => 'در انتظار',
                 'completed'                   => 'تکمیل شده',

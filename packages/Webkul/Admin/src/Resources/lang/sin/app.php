@@ -1262,6 +1262,8 @@ return [
                 'orders'                      => 'ඇඟවීම් (ඇඟවීම් ගණන - :order_count)',
                 'order-id'                    => 'ඇඟවීම් හැඳුනුම්පත',
                 'order-id-prefix'             => '# :order_id',
+                'of'                          => 'සඳහා',
+                'per-page'                    => 'පිටුවක් සඳහා',
                 'processing'                  => 'ක්‍රස්පති',
                 'pending'                     => 'අක්‍රීය',
                 'completed'                   => 'සම්පුර්ණ වී',

@@ -1262,6 +1262,8 @@ return [
                 'orders'                      => 'Siparişler (:sipariş_sayısı)',
                 'order-id'                    => 'Sipariş ID',
                 'order-id-prefix'             => '# :sipariş_id',
+                'of'                          => '-den',
+                'per-page'                    => 'sayfa başına',
                 'processing'                  => 'İşleniyor',
                 'pending'                     => 'Beklemede',
                 'completed'                   => 'Tamamlandı',
