@@ -3,6 +3,7 @@
 namespace Webkul\Paypal\Payment;
 
 use Webkul\Payment\Payment\Payment;
+use Illuminate\Support\Facades\Storage;
 
 abstract class Paypal extends Payment
 {
@@ -96,5 +97,17 @@ abstract class Paypal extends Payment
     public function formatPhone($phone): string
     {
         return preg_replace('/[^0-9]/', '', (string) $phone);
+    }
+
+    /**
+     * Returns payment method image
+     *
+     * @return array
+     */
+    public function getImage()
+    {
+        $url = $this->getConfigData('image');
+
+        return $url ? Storage::url($url) : bagisto_asset('images/paypal.png');
     }
 }

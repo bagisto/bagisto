@@ -56,7 +56,7 @@
 
                                         <img
                                             class="max-w-[55px] max-h-[45px]"
-                                            :src="payment.image ? payment.image : paymentImages[payment.method]"
+                                            :src="payment.image"
                                             width="55"
                                             height="55"
                                             :alt="payment.method_title"
@@ -92,13 +92,6 @@
             data() {
                 return {
                     paymentMethods: [],
-
-                    paymentImages: {
-                        moneytransfer: "{{ bagisto_asset('images/money-transfer.png') }}",
-                        cashondelivery: "{{ bagisto_asset('images/cash-on-delivery.png') }}",
-                        paypal_smart_button: "{{ bagisto_asset('images/paypal.png') }}",
-                        paypal_standard: "{{ bagisto_asset('images/paypal.png') }}",
-                    },
 
                     isShowPaymentMethod: false,
 

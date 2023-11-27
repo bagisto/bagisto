@@ -2,6 +2,8 @@
 
 namespace Webkul\Payment\Payment;
 
+use Illuminate\Support\Facades\Storage;
+
 class MoneyTransfer extends Payment
 {
     /**
@@ -31,5 +33,17 @@ class MoneyTransfer extends Payment
             'title' => trans('admin::app.configuration.mailing-address'),
             'value' => $this->getConfigData('mailing_address'),
         ];
+    }
+
+    /**
+     * Returns payment method image
+     *
+     * @return array
+     */
+    public function getImage()
+    {
+        $url = $this->getConfigData('image');
+
+        return $url ? Storage::url($url) : bagisto_asset('images/money-transfer.png');
     }
 }

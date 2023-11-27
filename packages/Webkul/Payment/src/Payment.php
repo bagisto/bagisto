@@ -28,16 +28,16 @@ class Payment
     {
         $paymentMethods = [];
 
-        foreach (Config::get('payment_methods') as $paymentMethod) {
-            $object = app($paymentMethod['class']);
+        foreach (Config::get('payment_methods') as $paymentMethodConfig) {
+            $paymentMethod = app($paymentMethodConfig['class']);
 
-            if ($object->isAvailable()) {
+            if ($paymentMethod->isAvailable()) {
                 $paymentMethods[] = [
-                    'method'       => $object->getCode(),
-                    'method_title' => $object->getTitle(),
-                    'description'  => $object->getDescription(),
-                    'sort'         => $object->getSortOrder(),
-                    'image'        => $object->getImage() ? Storage::url($object->getImage()) : '',
+                    'method'       => $paymentMethod->getCode(),
+                    'method_title' => $paymentMethod->getTitle(),
+                    'description'  => $paymentMethod->getDescription(),
+                    'sort'         => $paymentMethod->getSortOrder(),
+                    'image'        => $paymentMethod->getImage(),
                 ];
             }
         }
