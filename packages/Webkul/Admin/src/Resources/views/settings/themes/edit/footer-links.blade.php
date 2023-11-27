@@ -110,7 +110,7 @@
 
                                             <p 
                                                 class="text-red-600 cursor-pointer transition-all hover:underline"
-                                                @click="remove(link)"
+                                                @click="remove(link, key)"
                                             > 
                                                 @lang('admin::app.settings.themes.edit.delete')
                                             </p>
@@ -441,14 +441,8 @@
                     this.$refs.addLinksModal.toggle();
                 },
 
-                remove(footerLink) {
-                    if (
-                        this.footerLinks.hasOwnProperty(footerLink.column) 
-                        && Array.isArray(this.footerLinks[footerLink.column])
-                        && this.footerLinks[footerLink.column].length > 0
-                    ) {
-                        this.footerLinks[footerLink.column].splice(0, 1);
-                    }
+                remove(footerLink, key) {
+                    this.footerLinks[footerLink.column].splice(key, 1);
 
                     if (this.isFooterLinksEmpty) {
                         this.isShowIllustrator = true;
