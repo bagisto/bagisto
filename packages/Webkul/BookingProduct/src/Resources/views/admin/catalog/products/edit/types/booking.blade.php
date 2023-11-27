@@ -192,8 +192,10 @@
                                 name="booking[price_type]"
                                 rules="required"
                                 :value="'guest'"
-                                :label="trans('Same Slot For All days')"
-                                :placeholder="trans('Same Slot For All days')"
+                                :label="trans('Charged Per')"
+                                :placeholder="trans('Charged Per')"
+                                v-model="charged_per"
+                                @change="chargedSwatch=true"
                             >
                                 <option value="guest" selected>{{ __('Guest') }}</option>
                                 <option value="table">{{ __('Table') }}</option>
@@ -201,6 +203,31 @@
 
                             <x-booking::form.control-group.error 
                                 control-name="booking[booking_type]"
+                            >
+                            </x-booking::form.control-group.error>
+                        </x-booking::form.control-group>
+
+                        <!-- Guest Limit Per Table -->
+                        <x-admin::form.control-group
+                            v-if="chargedSwatch && charged_per == 'table'"
+                            class="w-full mb-[10px]"
+                        >
+                            <x-booking::form.control-group.label class="required">
+                                @lang('Guest Limit Per Table')
+                            </x-booking::form.control-group.label>
+
+                            <x-booking::form.control-group.control
+                                type="text"
+                                name="booking[guest_limit]"
+                                rules="required"
+                                :value="2"
+                                :label="trans('Guest Limit Per Table')"
+                                :placeholder="trans('Guest Limit Per Table')"
+                            >
+                            </x-booking::form.control-group.control>
+
+                            <x-booking::form.control-group.error 
+                                control-name="booking[guest_limit]"
                             >
                             </x-booking::form.control-group.error>
                         </x-booking::form.control-group>
@@ -218,8 +245,8 @@
                                 type="text"
                                 name="booking[qty]"
                                 rules="required"
-                                :label="trans('Same Slot For All days')"
-                                :placeholder="trans('Same Slot For All days')"
+                                :label="trans('Guest Capacity')"
+                                :placeholder="trans('Guest Capacity')"
                             >
                             </x-booking::form.control-group.control>
 
@@ -242,7 +269,7 @@
                                 type="select"
                                 name="booking[renting_type]"
                                 rules="required"
-                                :value="'daily'"
+                                :value="'renting_type'"
                                 :label="trans('Renting Type')"
                                 :placeholder="trans('Renting Type')"
                                 v-model="renting_type"
@@ -261,7 +288,9 @@
 
                         <!-- Daily Price -->
                         <x-admin::form.control-group
-                            v-if="bookingSwatch && booking_type == 'rental'"
+                            v-if="bookingSwatch && (
+                                renting_type != 'hourly'
+                            )"
                             class="w-full mb-[10px]"
                         >
                             <x-booking::form.control-group.label class="required">
@@ -279,6 +308,30 @@
 
                             <x-booking::form.control-group.error 
                                 control-name="booking[daily_price]"
+                            >
+                            </x-booking::form.control-group.error>
+                        </x-booking::form.control-group>
+
+                        <!-- Hourly Price -->
+                        <x-admin::form.control-group
+                            v-if="rentingSwatch && renting_type != 'daily'"
+                            class="w-full mb-[10px]"
+                        >
+                            <x-booking::form.control-group.label class="required">
+                                @lang('Hourly Price')
+                            </x-booking::form.control-group.label>
+
+                            <x-booking::form.control-group.control
+                                type="text"
+                                name="booking[hourly_price]"
+                                rules="required"
+                                :label="trans('Hourly Price')"
+                                :placeholder="trans('Hourly Price')"
+                            >
+                            </x-booking::form.control-group.control>
+
+                            <x-booking::form.control-group.error 
+                                control-name="booking[hourly_price]"
                             >
                             </x-booking::form.control-group.error>
                         </x-booking::form.control-group>
@@ -308,30 +361,6 @@
 
                             <x-booking::form.control-group.error 
                                 control-name="booking[booking_type]"
-                            >
-                            </x-booking::form.control-group.error>
-                        </x-booking::form.control-group>
-
-                        <!-- Prevent Scheduling Before -->
-                        <x-admin::form.control-group
-                            v-if="bookingSwatch && booking_type == 'table'"
-                            class="w-full mb-[10px]"
-                        >
-                            <x-booking::form.control-group.label class="required">
-                                @lang('Prevent Scheduling Before')
-                            </x-booking::form.control-group.label>
-
-                            <x-booking::form.control-group.control
-                                type="text"
-                                name="booking[prevent_scheduling_before]"
-                                rules="required"
-                                :label="trans('Prevent Scheduling Before')"
-                                :placeholder="trans('Prevent Scheduling Before')"
-                            >
-                            </x-booking::form.control-group.control>
-
-                            <x-booking::form.control-group.error 
-                                control-name="booking[prevent_scheduling_before]"
                             >
                             </x-booking::form.control-group.error>
                         </x-booking::form.control-group>
@@ -386,12 +415,35 @@
                             </x-booking::form.control-group.error>
                         </x-booking::form.control-group>
 
+                        <!-- Prevent Scheduling Before -->
+                        <x-admin::form.control-group
+                            v-if="bookingSwatch && booking_type == 'table'"
+                            class="w-full mb-[10px]"
+                        >
+                            <x-booking::form.control-group.label class="required">
+                                @lang('Prevent Scheduling Before')
+                            </x-booking::form.control-group.label>
+
+                            <x-booking::form.control-group.control
+                                type="text"
+                                name="booking[prevent_scheduling_before]"
+                                rules="required"
+                                :label="trans('Prevent Scheduling Before')"
+                                :placeholder="trans('Prevent Scheduling Before')"
+                            >
+                            </x-booking::form.control-group.control>
+
+                            <x-booking::form.control-group.error 
+                                control-name="booking[prevent_scheduling_before]"
+                            >
+                            </x-booking::form.control-group.error>
+                        </x-booking::form.control-group>
+
                         <!-- Same Slot For All days -->
                         <x-admin::form.control-group
                             v-if="bookingSwatch && (
                                 booking_type == 'appointment'
                                 || booking_type == 'table'
-                                || renting_type != 'daily'
                             )"
                             class="w-full mb-[10px]"
                         >
@@ -403,9 +455,11 @@
                                 type="select"
                                 name="booking[same_slot_all_days]"
                                 rules="required"
-                                :value="'1'"
+                                :value="'same_slot'"
                                 :label="trans('Same Slot For All days')"
                                 :placeholder="trans('Same Slot For All days')"
+                                v-model="same_slot"
+                                @change="sameSlotSwatch=true"
                             >
                                 <option value="1" selected>{{ __('Yes') }}</option>
                                 <option value="0">{{ __('No') }}</option>
@@ -426,7 +480,10 @@
                 <!-- Slots Component -->
                 <div
                     class="p-[16px] bg-white dark:bg-gray-900 box-shadow rounded-[4px]"
-                    v-if="renting_type != 'daily'"
+                    v-if="(
+                        booking_type != 'rental' 
+                        || renting_type != 'daily'
+                    )"
                 >
                     <div class="flex gap-[20px] justify-between">
                         <div class="flex flex-col gap-[8px]">
@@ -643,10 +700,7 @@
                 enctype="multipart/form-data"
                 ref="createOptionsForm"
             >
-                <x-admin::modal
-                    @toggle="listenModal"
-                    ref="addOptionsRow"
-                >
+                <x-admin::modal ref="addOptionsRow">
                     <x-slot:header>
                         <p
                             class="text-[18px] text-gray-800 dark:text-white font-bold"
@@ -656,99 +710,152 @@
                     </x-slot:header>
 
                     <x-slot:content>
-                        <div v-if="(booking_type != 'event')">
-                            <div class="flex gap-[16px] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
-                                <!-- From -->
-                                <x-admin::form.control-group
-                                    class="w-full mb-[10px]"
-                                    v-if="booking_type == 'default'"
+                        <div v-if="booking_type != 'event'">
+                            <div v-if="same_slot == 1">
+                                <div
+                                    v-for="day in slots_available"
+                                    :key="day.id"
+                                    class="flex gap-[16px] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800"
                                 >
-                                    <x-admin::form.control-group.label>
-                                        @lang('From')
-                                    </x-admin::form.control-group.label>
+                                    <div class="w-full" v-text="day.text"></div>
 
-                                    <x-admin::form.control-group.control
-                                        type="select"
-                                        name="from_day"
-                                        :value="'sunday'"
-                                        :label="trans('admin::app.catalog.attributes.create.admin')"
-                                    >
-                                        @foreach ($weeks as $week)
-                                            <option value="{{ $week }}" selected>
-                                                @lang($week)
-                                            </option>
-                                        @endforeach
-                                    </x-admin::form.control-group.control>
+                                    <!-- From -->
+                                    <x-admin::form.control-group class="w-full mb-[10px]">
+                                        <x-admin::form.control-group.label class="hidden">
+                                            @lang('From')
+                                        </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="from_day"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::from.control-group>
+                                        <x-admin::form.control-group.control
+                                            :type="'date'"
+                                            :name="'from_day[][0]'"
+                                            {{-- :name="'from_day[' + day.id + '][0]'" --}}
+                                            :label="trans('admin::app.catalog.attributes.create.admin')"
+                                            placeholder="From"
+                                        >
+                                        </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group class="w-full mb-[10px]">
-                                    <x-admin::form.control-group.label class="none">
-                                        @lang('Time')
-                                    </x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.error
+                                            control-name="from_day"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
 
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="from_time"
-                                    >
-                                    </x-admin::form.control-group.control>
-
-                                    <x-admin::form.control-group.error
-                                        control-name="from_time"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
+                                    <!-- To -->
+                                    <x-admin::form.control-group class="w-full mb-[10px]">
+                                        <x-admin::form.control-group.label class="hidden">
+                                            @lang('To')
+                                        </x-admin::form.control-group.label>
+    
+                                        <x-admin::form.control-group.control
+                                            type="date"
+                                            name="to_day"
+                                            :label="trans('admin::app.catalog.attributes.create.admin')"
+                                            placeholder="To"
+                                        >
+                                        </x-admin::form.control-group.control>
+    
+                                        <x-admin::form.control-group.error
+                                            control-name="to_day"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+                                </div>
                             </div>
 
-                            <div class="flex gap-[16px] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
-                                <!-- To -->
-                                <x-admin::form.control-group
-                                    class="w-full mb-[10px]"
-                                    v-if="booking_type == 'default'"
-                                >
-                                    <x-admin::form.control-group.label>
-                                        @lang('To')
-                                    </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.control
-                                        type="select"
-                                        name="to_day"
-                                        :value="'sunday'"
-                                        :label="trans('admin::app.catalog.attributes.create.admin')"
+                            <div v-else>
+                                <div class="flex gap-[16px] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
+                                    <!-- From -->
+                                    <x-admin::form.control-group
+                                        class="w-full mb-[10px]"
+                                        v-if="booking_type == 'default'"
                                     >
-                                        @foreach ($weeks as $week)
-                                            <option value="{{ $week }}" selected>
-                                                @lang($week)
-                                            </option>
-                                        @endforeach
-                                    </x-admin::form.control-group.control>
-
-                                    <x-admin::form.control-group.error
-                                        control-name="to_day"
+                                        <x-admin::form.control-group.label>
+                                            @lang('From')
+                                        </x-admin::form.control-group.label>
+    
+                                        <x-admin::form.control-group.control
+                                            type="select"
+                                            name="from_day"
+                                            :value="'sunday'"
+                                            :label="trans('admin::app.catalog.attributes.create.admin')"
+                                        >
+                                            @foreach ($weeks as $week)
+                                                <option value="{{ $week }}" selected>
+                                                    @lang($week)
+                                                </option>
+                                            @endforeach
+                                        </x-admin::form.control-group.control>
+    
+                                        <x-admin::form.control-group.error
+                                            control-name="from_day"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::from.control-group>
+    
+                                    <x-admin::form.control-group class="w-full mb-[10px]">
+                                        <x-admin::form.control-group.label class="none">
+                                            @lang('Time')
+                                        </x-admin::form.control-group.label>
+    
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="from_time"
+                                        >
+                                        </x-admin::form.control-group.control>
+    
+                                        <x-admin::form.control-group.error
+                                            control-name="from_time"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+                                </div>
+    
+                                <div class="flex gap-[16px] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
+                                    <!-- To -->
+                                    <x-admin::form.control-group
+                                        class="w-full mb-[10px]"
+                                        v-if="booking_type == 'default'"
                                     >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-
-                                <x-admin::form.control-group class="w-full mb-[10px]">
-                                    <x-admin::form.control-group.label>
-                                        @lang('To')
-                                    </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="to_time"
-                                    >
-                                    </x-admin::form.control-group.control>
-
-                                    <x-admin::form.control-group.error
-                                        control-name="to_time"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
+                                        <x-admin::form.control-group.label>
+                                            @lang('To')
+                                        </x-admin::form.control-group.label>
+    
+                                        <x-admin::form.control-group.control
+                                            type="select"
+                                            name="to_day"
+                                            :value="'sunday'"
+                                            :label="trans('admin::app.catalog.attributes.create.admin')"
+                                        >
+                                            @foreach ($weeks as $week)
+                                                <option value="{{ $week }}" selected>
+                                                    @lang($week)
+                                                </option>
+                                            @endforeach
+                                        </x-admin::form.control-group.control>
+    
+                                        <x-admin::form.control-group.error
+                                            control-name="to_day"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+    
+                                    <x-admin::form.control-group class="w-full mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            @lang('To')
+                                        </x-admin::form.control-group.label>
+    
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="to_time"
+                                        >
+                                        </x-admin::form.control-group.control>
+    
+                                        <x-admin::form.control-group.error
+                                            control-name="to_time"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+                                </div>
                             </div>
                         </div>
 
@@ -1008,24 +1115,34 @@
                     },
 
                     slots_available: [
-                        'sunday',
-                        'monaday',
-                        'tuesday',
-                        'wednesday',
-                        'thursday',
-                        'friday',
-                        'saturday',
+                        { id:0, text:'sunday'},
+                        { id:1, text:'monaday'},
+                        { id:2, text:'tuesday'},
+                        { id:3, text:'wednesday'},
+                        { id:4, text:'thursday'},
+                        { id:5, text:'friday'},
+                        { id:6, text:'saturday'},
                     ],
 
                     booking_type: 'default',
+
+                    charged_per: 'guest',
                     
-                    renting_type: '',
+                    renting_type: 'daily',
+
+                    same_slot: 0,
 
                     bookingSubType: 'one',
 
                     bookingSwatch: false,
-                    
+
                     bookingSwatchType: false,
+
+                    chargedSwatch: false,
+                    
+                    rentingSwatch: false,
+
+                    sameSlot: false,
 
                     slotRowCount: 1,
 
