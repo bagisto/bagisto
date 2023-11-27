@@ -26,6 +26,8 @@ class ConfigurationForm extends FormRequest
     {
         $this->rules = [];
 
+        $request = request();
+
         if (
             request()->has('catalog.products.storefront.products_per_page')
             && ! empty(request()->input('catalog.products.storefront.products_per_page'))
@@ -35,31 +37,22 @@ class ConfigurationForm extends FormRequest
             ];
         }
 
-        if (
-            request()->has('general.design.admin_logo.logo_image')
-            && ! request()->input('general.design.admin_logo.logo_image.delete')
-        ) {
-            $this->rules = array_merge($this->rules, [
-                'general.design.admin_logo.logo_image' => 'required|mimes:bmp,jpeg,jpg,png,webp|max:5000',
-            ]);
-        }
+        $imageFields = [
+            'general.design.admin_logo.logo_image',
+            'general.design.admin_logo.favicon',
+            'sales.invoice_settings.invoice_slip_design.logo',
+            'sales.payment_methods.cashondelivery.image',
+            'sales.payment_methods.moneytransfer.image',
+            'sales.payment_methods.paypal_standard.image',
+            'sales.payment_methods.paypal_smart_button.image',
+        ];
 
-        if (
-            request()->has('general.design.admin_logo.favicon')
-            && ! request()->input('general.design.admin_logo.favicon.delete')
-        ) {
-            $this->rules = array_merge($this->rules, [
-                'general.design.admin_logo.favicon' => 'required|mimes:bmp,jpeg,jpg,png,webp|max:5000',
-            ]);
-        }
-
-        if (
-            request()->has('sales.invoice_settings.invoice_slip_design.logo')
-            && ! request()->input('sales.invoice_settings.invoice_slip_design.logo.delete')
-        ) {
-            $this->rules = array_merge($this->rules, [
-                'sales.invoice_settings.invoice_slip_design.logo' => 'required|mimes:bmp,jpeg,jpg,png,webp|max:5000',
-            ]);
+        foreach ($imageFields as $field) {
+            if ($request->has($field) && ! $request->input("$field.delete")) {
+                $this->rules = array_merge($this->rules, [
+                    $field => 'required|mimes:bmp,jpeg,jpg,png,webp|max:5000',
+                ]);
+            }
         }
 
         return $this->rules;
