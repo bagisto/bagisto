@@ -48,7 +48,7 @@ defineRule("phone", (value) => {
         return true;
     }
 
-    if (!/^\+?\d+$/.test(value)) {
+    if (! /^\+?\d+$/.test(value)) {
         return false;
     }
 
