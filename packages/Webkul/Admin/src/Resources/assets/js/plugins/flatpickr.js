@@ -13,6 +13,7 @@ export default {
             }
 
             const linkElement = document.createElement("link");
+            
             linkElement.rel = "stylesheet";
             linkElement.type = "text/css";
             linkElement.href = `https://npmcdn.com/flatpickr/dist/themes/${theme}.css`;
@@ -26,7 +27,6 @@ export default {
             : "light";
 
         changeTheme(currentTheme);
-
 
         app.config.globalProperties.$emitter.on("change-theme", (theme) => {
             changeTheme(theme);
