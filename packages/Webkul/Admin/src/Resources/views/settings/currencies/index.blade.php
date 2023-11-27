@@ -46,7 +46,7 @@
                         <button
                             type="button"
                             class="primary-button"
-                            @click="id=0; selectedCurrency={}; $refs.currencyUpdateOrCreateModal.toggle()"
+                            @click="selectedCurrencies=0; selectedCurrency={}; $refs.currencyUpdateOrCreateModal.toggle()"
                         >
                             @lang('admin::app.settings.currencies.index.create-btn')
                         </button>
@@ -58,57 +58,12 @@
                 :src="route('admin.settings.currencies.index')"
                 ref="datagrid"
             >
-                @php
-                    $hasPermission = bouncer()->hasPermission('settings.currencies.edit') || bouncer()->hasPermission('settings.currencies.delete');
-                @endphp
-
-                <!-- DataGrid Header -->
-                <template #header="{ columns, records, sortPage, applied}">
-                    <div class="row grid grid-cols-{{ $hasPermission ? '4' : '3' }} grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold">
-                        <div
-                            class="flex gap-[10px] cursor-pointer"
-                            v-for="(columnGroup, index) in ['id', 'code', 'name']"
-                        >
-                            <p class="text-gray-600 dark:text-gray-300">
-                                <span class="[&>*]:after:content-['_/_']">
-                                    <span
-                                        class="after:content-['/'] last:after:content-['']"
-                                        :class="{
-                                            'text-gray-800 dark:text-white font-medium': applied.sort.column == columnGroup,
-                                            'cursor-pointer hover:text-gray-800 dark:hover:text-white': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
-                                        }"
-                                        @click="
-                                            columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === columnGroup)): {}
-                                        "
-                                    >
-                                        @{{ columns.find(columnTemp => columnTemp.index === columnGroup)?.label }}
-                                    </span>
-                                </span>
-
-                                <!-- Filter Arrow Icon -->
-                                <i
-                                    class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 dark:text-white align-text-bottom"
-                                    :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
-                                    v-if="columnGroup.includes(applied.sort.column)"
-                                ></i>
-                            </p>
-                        </div>
-
-                        <!-- Actions -->
-                        @if ($hasPermission)
-                            <p class="flex gap-[10px] justify-end">
-                                @lang('admin::app.components.datagrid.table.actions')
-                            </p>
-                        @endif
-                    </div>
-                </template>
-
                 <!-- DataGrid Body -->
                 <template #body="{ columns, records, performAction }">
                     <div
                         v-for="record in records"
                         class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
-                        :style="'grid-template-columns: repeat(' + (record.actions.length ? 4 : 3) + ', minmax(0, 1fr));'"
+                        :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                     >
                         <!-- Id -->
                         <p v-text="record.id"></p>
@@ -120,23 +75,32 @@
                         <p v-text="record.name"></p>
 
                         <!-- Actions -->
-                        <div class="flex justify-end">
-                            <a @click="id=1; editModal(record.actions.find(action => action.title === 'Edit')?.url)">
-                                <span
-                                    :class="record.actions.find(action => action.title === 'Edit')?.icon"
-                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                >
-                                </span>
-                            </a>
+                        @if (
+                            bouncer()->hasPermission('settings.currencies.edit') 
+                            || bouncer()->hasPermission('settings.currencies.delete')
+                        )
+                            <div class="flex justify-end">
+                                @if (bouncer()->hasPermission('settings.currencies.edit'))
+                                    <a @click="selectedCurrencies=1; editModal(record.actions.find(action => action.title === 'Edit')?.url)">
+                                        <span
+                                            :class="record.actions.find(action => action.title === 'Edit')?.icon"
+                                            class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                        >
+                                        </span>
+                                    </a>
+                                @endif
 
-                            <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
-                                <span
-                                    :class="record.actions.find(action => action.method === 'DELETE')?.icon"
-                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                >
-                                </span>
-                            </a>
-                        </div>
+                                @if (bouncer()->hasPermission('settings.currencies.delete'))
+                                    <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
+                                        <span
+                                            :class="record.actions.find(action => action.method === 'DELETE')?.icon"
+                                            class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                        >
+                                        </span>
+                                    </a>
+                                @endif
+                            </div>
+                        @endif
                     </div>
                 </template>
             </x-admin::datagrid>
@@ -155,7 +119,7 @@
                         <x-slot:header>
                             <p
                                 class="text-[18px] text-gray-800 dark:text-white font-bold"
-                                v-if="id"
+                                v-if="selectedCurrencies"
                             >
                                 @lang('admin::app.settings.currencies.index.edit.title')
                             </p>
@@ -296,7 +260,25 @@
                 data() {
                     return {
                         selectedCurrency: {},
+
+                        selectedCurrencies: 0,
                     }
+                },
+
+                computed: {
+                    gridsCount() {
+                        let count = this.$refs.datagrid.available.columns.length;
+
+                        if (this.$refs.datagrid.available.actions.length) {
+                            ++count;
+                        }
+
+                        if (this.$refs.datagrid.available.massActions.length) {
+                            ++count;
+                        }
+
+                        return count;
+                    },
                 },
 
                 methods: {
