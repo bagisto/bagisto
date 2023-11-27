@@ -32,16 +32,6 @@ Object.keys(AllRules).forEach(rule => {
  * This validation is sufficient for global-level phone number validation. If
  * someone wants to customize it, they can override this rule.
  */
-defineRule("url", (value) => {
-    if (! value || ! value.length) {
-        return true;
-    }
-
-    const urlRegex = /^(?:(?:https?|ftp):)?\/\/(?:\S+(?::\S*)?@)?(?:\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}|(?:[a-z\d-]+\.)*[a-z\d-]+(?:\.[a-z]{2,})+)?(?::\d{2,5})?(?:[/?#]\S*)?$/i;
-
-    return urlRegex.test(value);
-});
-
 defineRule("phone", (value) => {
     if (! value || ! value.length) {
         return true;
@@ -92,16 +82,6 @@ configure({
             messages: {
                 ...en.messages,
                 phone: "This {field} must be a valid phone number",
-            },
-        },
-    }),
-
-    generateMessage: localize({
-        en: {
-            ...en,
-            messages: {
-                ...en.messages,
-                url: "This {field} must be a valid url",
             },
         },
     }),
