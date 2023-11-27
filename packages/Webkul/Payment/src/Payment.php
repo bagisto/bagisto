@@ -3,7 +3,6 @@
 namespace Webkul\Payment;
 
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Storage;
 
 class Payment
 {

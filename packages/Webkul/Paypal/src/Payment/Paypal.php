@@ -2,8 +2,8 @@
 
 namespace Webkul\Paypal\Payment;
 
-use Webkul\Payment\Payment\Payment;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Payment\Payment\Payment;
 
 abstract class Paypal extends Payment
 {

@@ -1169,7 +1169,7 @@ return [
                 'name'          => 'title',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.title',
                 'type'          => 'depends',
-                 'depend'        => 'active:1',
+                'depend'        => 'active:1',
                 'validation'    => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based'  => true,
