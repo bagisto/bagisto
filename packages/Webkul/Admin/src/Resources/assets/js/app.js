@@ -42,7 +42,6 @@ defineRule("url", (value) => {
     return urlRegex.test(value);
 });
 
-
 defineRule("phone", (value) => {
     if (! value || ! value.length) {
         return true;
