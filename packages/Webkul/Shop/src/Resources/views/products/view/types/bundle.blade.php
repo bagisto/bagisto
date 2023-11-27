@@ -160,7 +160,7 @@
                                     v-slot="{ field }"
                                     :value="product.id"
                                     v-model="selectedProduct"
-                                    :rules="{'required': option.is_required}"
+                                    :rules="option.is_required ? 'required' : ''"
                                     :label="option.label"
                                 >
                                     <input
