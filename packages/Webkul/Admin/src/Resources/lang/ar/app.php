@@ -3516,7 +3516,7 @@ return [
                 'not-allowed-error' => 'تُسمح فقط بملفات الصور (.jpeg، .jpg، .png، ...).',
                 'ai-add-image-btn'  => 'الذكاء الاصطناعي',
                 'ai-btn-info'       => 'إنشاء صورة',
-            
+
                 'ai-generation' => [
                     '1024x1024'        => '1024x1024',
                     '1024x1792'        => '1024x1792',
@@ -3553,10 +3553,10 @@ return [
                 'not-allowed-error' => 'يُسمح فقط بملفات الفيديو (.mp4، .mov، .ogg ..).',
             ],
         ],
-        
+
         'tinymce' => [
             'ai-btn-tile' => 'سحر الذكاء الاصطناعي',
-    
+
             'ai-generation' => [
                 'title'                  => 'مساعدة الذكاء الاصطناعي',
                 'prompt'                 => 'مبادرة',

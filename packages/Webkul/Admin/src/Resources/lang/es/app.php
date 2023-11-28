@@ -3518,7 +3518,7 @@ return [
                 'not-allowed-error' => 'Solo se permiten archivos de imagen (.jpeg, .jpg, .png, ..).',
                 'ai-add-image-btn'  => 'Magia IA',
                 'ai-btn-info'       => 'Generar Imagen',
-            
+
                 'ai-generation' => [
                     '1024x1024'        => '1024x1024',
                     '1024x1792'        => '1024x1792',
@@ -3555,10 +3555,10 @@ return [
                 'not-allowed-error' => 'Solo se permiten archivos de video (.mp4, .mov, .ogg ..).',
             ],
         ],
-        
+
         'tinymce' => [
             'ai-btn-tile' => 'Magia IA',
-    
+
             'ai-generation' => [
                 'title'                  => 'Asistencia de IA',
                 'prompt'                 => 'Indicación',

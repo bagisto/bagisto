@@ -3518,7 +3518,7 @@ return [
                 'not-allowed-error' => 'فقط فایل‌های تصویری (.jpeg، .jpg، .png، ..) مجاز هستند.',
                 'ai-add-image-btn'  => 'هوش مصنوعی',
                 'ai-btn-info'       => 'تولید تصویر',
-            
+
                 'ai-generation' => [
                     '1024x1024'        => '1024x1024',
                     '1024x1792'        => '1024x1792',
@@ -3555,10 +3555,10 @@ return [
                 'not-allowed-error' => 'فقط فایل‌های ویدیویی (.mp4، .mov، .ogg ..) مجاز هستند.',
             ],
         ],
-        
+
         'tinymce' => [
             'ai-btn-tile' => 'هوش مصنوعی',
-    
+
             'ai-generation' => [
                 'title'                  => 'کمک هوش مصنوعی',
                 'prompt'                 => 'پرسش',

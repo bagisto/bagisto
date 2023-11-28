@@ -3518,7 +3518,7 @@ return [
                 'not-allowed-error' => 'Дозволені тільки файли зображень (.jpeg, .jpg, .png, ..).',
                 'ai-add-image-btn'  => 'Магія ШІ',
                 'ai-btn-info'       => 'Створити Зображення',
-            
+
                 'ai-generation' => [
                     '1024x1024'        => '1024x1024',
                     '1024x1792'        => '1024x1792',
@@ -3555,10 +3555,10 @@ return [
                 'not-allowed-error' => 'Дозволені лише файли відео (.mp4, .mov, .ogg ..).',
             ],
         ],
-        
+
         'tinymce' => [
             'ai-btn-tile' => 'Магія ШІ',
-    
+
             'ai-generation' => [
                 'title'                  => 'Підтримка ШІ',
                 'prompt'                 => 'Підказка',

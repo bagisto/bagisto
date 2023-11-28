@@ -3518,7 +3518,7 @@ return [
                 'not-allowed-error' => 'Nur Bilddateien (.jpeg, .jpg, .png, ..) sind erlaubt.',
                 'ai-add-image-btn'  => 'Magie KI',
                 'ai-btn-info'       => 'Bild generieren',
-            
+
                 'ai-generation' => [
                     '1024x1024'        => '1024x1024',
                     '1024x1792'        => '1024x1792',
@@ -3555,10 +3555,10 @@ return [
                 'not-allowed-error' => 'Nur Videodateien (.mp4, .mov, .ogg ..) sind erlaubt.',
             ],
         ],
-        
+
         'tinymce' => [
             'ai-btn-tile' => 'Magie KI',
-    
+
             'ai-generation' => [
                 'title'                  => 'KI-Unterstützung',
                 'prompt'                 => 'Aufforderung',

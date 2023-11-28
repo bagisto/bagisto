@@ -3518,7 +3518,7 @@ return [
                 'not-allowed-error' => 'Alleen afbeeldingsbestanden (.jpeg, .jpg, .png, ..) zijn toegestaan.',
                 'ai-add-image-btn'  => 'Magische AI',
                 'ai-btn-info'       => 'Afbeelding genereren',
-            
+
                 'ai-generation' => [
                     '1024x1024'        => '1024x1024',
                     '1024x1792'        => '1024x1792',
@@ -3555,10 +3555,10 @@ return [
                 'not-allowed-error' => 'Alleen videobestanden (.mp4, .mov, .ogg ..) zijn toegestaan.',
             ],
         ],
-        
+
         'tinymce' => [
             'ai-btn-tile' => 'Magie AI',
-    
+
             'ai-generation' => [
                 'title'                  => 'AI-ondersteuning',
                 'prompt'                 => 'Prompt',

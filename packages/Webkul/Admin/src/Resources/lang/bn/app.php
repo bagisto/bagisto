@@ -3517,7 +3517,7 @@ return [
                 'not-allowed-error' => 'কেবল চিত্র ফাইল (.jpeg, .jpg, .png, ..) অনুমোদিত।',
                 'ai-add-image-btn'  => 'ম্যাজিক এআই',
                 'ai-btn-info'       => 'ছবি তৈরি করুন',
-            
+
                 'ai-generation' => [
                     '1024x1024'        => '1024x1024',
                     '1024x1792'        => '1024x1792',
@@ -3554,10 +3554,10 @@ return [
                 'not-allowed-error' => 'কেবল ভিডিও ফাইল (.mp4, .mov, .ogg ..) অনুমোদিত।',
             ],
         ],
-        
+
         'tinymce' => [
             'ai-btn-tile' => 'জাদুকরি এ.আই.',
-    
+
             'ai-generation' => [
                 'title'                  => 'এ.আই. সহায়',
                 'prompt'                 => 'প্রম্পট',

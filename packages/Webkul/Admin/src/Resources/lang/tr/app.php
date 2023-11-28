@@ -3518,7 +3518,7 @@ return [
                 'not-allowed-error' => 'Yalnızca resim dosyaları (.jpeg, .jpg, .png, ..) izin verilir.',
                 'ai-add-image-btn'  => 'Sihirli AI',
                 'ai-btn-info'       => 'Resim Oluştur',
-            
+
                 'ai-generation' => [
                     '1024x1024'        => '1024x1024',
                     '1024x1792'        => '1024x1792',
@@ -3555,10 +3555,10 @@ return [
                 'not-allowed-error' => 'Yalnızca video dosyaları (.mp4, .mov, .ogg ..) izin verilir.',
             ],
         ],
-        
+
         'tinymce' => [
             'ai-btn-tile' => 'Sihirli AI',
-    
+
             'ai-generation' => [
                 'title'                  => 'AI Yardımı',
                 'prompt'                 => 'İpucu',

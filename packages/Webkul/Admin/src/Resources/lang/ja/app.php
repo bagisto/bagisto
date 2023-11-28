@@ -3518,7 +3518,7 @@ return [
                 'not-allowed-error' => '画像ファイル（.jpeg、.jpg、.png、..）のみ許可されています。',
                 'ai-add-image-btn'  => 'マジックAI',
                 'ai-btn-info'       => '画像生成',
-            
+
                 'ai-generation' => [
                     '1024x1024'        => '1024x1024',
                     '1024x1792'        => '1024x1792',
@@ -3555,10 +3555,10 @@ return [
                 'not-allowed-error' => 'ビデオファイルのみ許可されています（.mp4、.mov、.ogg ..）。',
             ],
         ],
-        
+
         'tinymce' => [
             'ai-btn-tile' => 'マジックAI',
-    
+
             'ai-generation' => [
                 'title'                  => 'AIアシスタンス',
                 'prompt'                 => 'プロンプト',

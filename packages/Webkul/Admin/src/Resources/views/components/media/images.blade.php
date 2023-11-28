@@ -30,6 +30,7 @@
                     <label
                         class="grid justify-items-center items-center w-full h-[120px] max-w-[120px] min-w-[110px] max-h-[120px] min-h-[110px] border border-dashed border-blue-300 rounded-[4px] cursor-pointer transition-all hover:border-blue-600 dark:invert dark:mix-blend-exclusion"
                         :style="{'max-width': this.width, 'max-height': this.height}"
+                        v-if="ai.enabled"
                         @click="resetAIModal(); $refs.magicAIImageModal.open()"
                     >
                         <div class="flex flex-col items-center">

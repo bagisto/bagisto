@@ -3506,7 +3506,7 @@ return [
                 'not-allowed-error' => 'Разрешены только файлы изображений (.jpeg, .jpg, .png и др.)',
                 'ai-add-image-btn'  => 'Магия ИИ',
                 'ai-btn-info'       => 'Создать изображение',
-            
+
                 'ai-generation' => [
                     '1024x1024'        => '1024x1024',
                     '1024x1792'        => '1024x1792',
@@ -3543,10 +3543,10 @@ return [
                 'not-allowed-error' => 'Разрешены только файлы видео (.mp4, .mov, .ogg и др.)',
             ],
         ],
-        
+
         'tinymce' => [
             'ai-btn-tile' => 'Магия ИИ',
-    
+
             'ai-generation' => [
                 'title'                  => 'Помощь ИИ',
                 'prompt'                 => 'Подсказка',

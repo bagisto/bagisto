@@ -3518,7 +3518,7 @@ return [
                 'not-allowed-error' => 'केवल छवि फ़ाइलें (.jpeg, .jpg, .png, ..) अनुमत हैं।',
                 'ai-add-image-btn'  => 'मैजिक ए.आई.',
                 'ai-btn-info'       => 'इमेज उत्पन्न करें',
-            
+
                 'ai-generation' => [
                     '1024x1024'        => '1024x1024',
                     '1024x1792'        => '1024x1792',
@@ -3555,10 +3555,10 @@ return [
                 'not-allowed-error' => 'केवल वीडियो फ़ाइलें (.mp4, .mov, .ogg ..) अनुमत हैं।',
             ],
         ],
-        
+
         'tinymce' => [
             'ai-btn-tile' => 'मैजिक ए.आई.',
-    
+
             'ai-generation' => [
                 'title'                  => 'ए.आई. सहायता',
                 'prompt'                 => 'पूर्वाभास',

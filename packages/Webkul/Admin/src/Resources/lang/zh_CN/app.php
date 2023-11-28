@@ -3518,7 +3518,7 @@ return [
                 'not-allowed-error' => '仅允许图像文件（.jpeg、.jpg、.png 等）。',
                 'ai-add-image-btn'  => '魔法 AI',
                 'ai-btn-info'       => '生成图像',
-            
+
                 'ai-generation' => [
                     '1024x1024'        => '1024x1024',
                     '1024x1792'        => '1024x1792',
@@ -3555,10 +3555,10 @@ return [
                 'not-allowed-error' => '仅允许视频文件（.mp4、.mov、.ogg 等）。',
             ],
         ],
-        
+
         'tinymce' => [
             'ai-btn-tile' => '魔法 AI',
-    
+
             'ai-generation' => [
                 'title'                  => 'AI辅助',
                 'prompt'                 => '提示',

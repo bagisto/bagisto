@@ -3510,7 +3510,7 @@ return [
                 'not-allowed-error' => 'ניתן להעלות רק קבצי תמונה (.jpeg, .jpg, .png, ..)',
                 'ai-add-image-btn'  => 'בינה מלאכותית',
                 'ai-btn-info'       => 'יצירת תמונה',
-            
+
                 'ai-generation' => [
                     '1024x1024'        => '1024x1024',
                     '1024x1792'        => '1024x1792',
@@ -3547,10 +3547,10 @@ return [
                 'not-allowed-error' => 'ניתן להעלות רק קבצי וידאו (.mp4, .mov, .ogg ..)',
             ],
         ],
-        
+
         'tinymce' => [
             'ai-btn-tile' => 'אומץ המגן',
-    
+
             'ai-generation' => [
                 'title'                  => 'עזרת AI',
                 'prompt'                 => 'בקשה',

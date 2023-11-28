@@ -3518,7 +3518,7 @@ return [
                 'not-allowed-error' => 'Seuls les fichiers d\'images (.jpeg, .jpg, .png, ..) sont autorisés.',
                 'ai-add-image-btn'  => 'IA Magique',
                 'ai-btn-info'       => 'Générer une Image',
-            
+
                 'ai-generation' => [
                     '1024x1024'        => '1024x1024',
                     '1024x1792'        => '1024x1792',
@@ -3558,7 +3558,7 @@ return [
 
         'tinymce' => [
             'ai-btn-tile' => 'Magie IA',
-    
+
             'ai-generation' => [
                 'title'                  => 'Assistance IA',
                 'prompt'                 => 'Indication',
