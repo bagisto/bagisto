@@ -165,7 +165,7 @@
 
         <!-- Country -->
         <x-shop::form.control-group class="mb-4">
-            <x-shop::form.control-group.label class="required">
+            <x-shop::form.control-group.label class="{{ core()->isCountryRequired() ? 'required' : '' }}">
                 @lang('shop::app.customers.account.addresses.country')
             </x-shop::form.control-group.label>
 
@@ -174,8 +174,8 @@
                 name="country"
                 :value="old('country')"
                 class="mb-4"
-                rules="required"
-                :aria-label="trans('shop::app.customers.account.addresses.country')"
+                rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
+                aria-label="trans('shop::app.customers.account.addresses.country')"
                 :label="trans('shop::app.customers.account.addresses.country')"
             >
                 <option value="">@lang('Select Country')</option>
@@ -200,7 +200,7 @@
 
         <!-- State -->
         <x-shop::form.control-group class="mb-4">
-            <x-shop::form.control-group.label class="required">
+            <x-shop::form.control-group.label class="{{ core()->isStateRequired() ? 'required' : '' }}">
                 @lang('shop::app.customers.account.addresses.state')
             </x-shop::form.control-group.label>
 
@@ -208,7 +208,7 @@
                 type="text"
                 name="state"
                 :value="old('state')"
-                rules="required"
+                rules="{{ core()->isStateRequired() ? 'required' : '' }}"
                 :label="trans('shop::app.customers.account.addresses.state')"
                 :placeholder="trans('shop::app.customers.account.addresses.state')"
             >
@@ -248,7 +248,7 @@
 
         <!-- Post Code -->
         <x-shop::form.control-group class="mb-4">
-            <x-shop::form.control-group.label class="required">
+            <x-shop::form.control-group.label class="{{ core()->isPostCodeRequired() ? 'required' : '' }}">
                 @lang('shop::app.customers.account.addresses.post-code')
             </x-shop::form.control-group.label>
 
@@ -256,7 +256,7 @@
                 type="text"
                 name="postcode"
                 :value="old('postcode')"
-                rules="required|integer"
+                rules="{{ core()->isPostCodeRequired() ? 'required' : '' }}|numeric"
                 :label="trans('shop::app.customers.account.addresses.post-code')"
                 :placeholder="trans('shop::app.customers.account.addresses.post-code')"
             >
